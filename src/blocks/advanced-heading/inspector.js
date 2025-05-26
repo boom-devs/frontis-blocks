@@ -44,6 +44,7 @@ import {
     BORDER_STYLES,
     ICON_ALIGN,
     OVERFLOW_OP,
+    BACKGROUND_TYPES,
 } from "./constants/constants";
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
@@ -65,6 +66,8 @@ import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
+import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
+import FB_GradientColorControl from '@Components/gradient-color-control';
 
 import './editor.scss';
 
@@ -267,9 +270,29 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingGlobalMarginMobile,
         headingGlobalMarginLink,
 
+        /** Start Background */
         headingGlobalBgColorSwitcher,
-        headingGlobalBgColor,
-        headingGlobalBgHoverColor,
+        headingGlobalBgNormalBackgroundType,
+        headingGlobalBgNormalClassicColor,
+        headingGlobalBgNormalGradientColor,
+        headingGlobalBgNormalCustomGradientSwitcher,
+        headingGlobalBgNormalCustomGradientInputValue,
+        headingGlobalBgNormalBackgroundImageUrl,
+        headingGlobalBgNormalBackgroundImagePosition,
+        headingGlobalBgNormalBackgroundImageAttachment,
+        headingGlobalBgNormalBackgroundImageRepeat,
+        headingGlobalBgNormalBackgroundImageSize,
+
+        headingGlobalBgHoverBackgroundType,
+        headingGlobalBgHoverClassicColor,
+        headingGlobalBgHoverGradientColor,
+        headingGlobalBgHoverCustomGradientSwitcher,
+        headingGlobalBgHoverCustomGradientInputValue,
+        headingGlobalBgHoverBackgroundImageUrl,
+        headingGlobalBgHoverBackgroundImagePosition,
+        headingGlobalBgHoverBackgroundImageAttachment,
+        headingGlobalBgHoverBackgroundImageRepeat,
+        headingGlobalBgHoverBackgroundImageSize,
 
         headingGlobalBorder,
         headingGlobalBorderColorSwitcher,
@@ -1685,6 +1708,103 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
     }, [headingFontFamily, subHeadingFontFamily]);
 
+    /**
+     * Get background normal styles
+     */
+	const getBackgroundNormalStyles = (device) => {
+		const bgType = headingGlobalBgNormalBackgroundType;
+		const bgColor = headingGlobalBgNormalClassicColor;
+		const bgGradient = headingGlobalBgNormalGradientColor;
+		const customGradient = headingGlobalBgNormalCustomGradientInputValue;
+		const customGradientEnabled = headingGlobalBgNormalCustomGradientSwitcher;
+
+		const bgImageUrl = headingGlobalBgNormalBackgroundImageUrl?.[device];
+		const bgImagePosition = headingGlobalBgNormalBackgroundImagePosition?.[device];
+		const bgAttachment = headingGlobalBgNormalBackgroundImageAttachment?.[device];
+		const bgRepeat = headingGlobalBgNormalBackgroundImageRepeat?.[device];
+		const bgSize = headingGlobalBgNormalBackgroundImageSize?.[device];
+
+		if (bgType === 'gradient') {
+			return {
+				background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+			};
+		}
+
+		let styles = { background: bgColor };
+
+		if (bgType !== 'gradient' && bgImageUrl) {
+			styles = {
+				...styles,
+				'background-image': `url(${bgImageUrl})`,
+				'background-position': bgImagePosition 
+					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+					: "50% 50%",
+				'background-attachment': bgAttachment || undefined,
+				'background-repeat': bgRepeat || undefined,
+				'background-size': bgSize || undefined,
+			};
+		}
+
+		return styles;
+	};
+
+	/**
+	 * Get background hover styles
+	 */
+	const getBackgroundHoverStyles = (device) => {
+		const bgType = headingGlobalBgHoverBackgroundType;
+		const bgColor = headingGlobalBgHoverClassicColor;
+		const bgGradient = headingGlobalBgHoverGradientColor;
+		const customGradient = headingGlobalBgHoverCustomGradientInputValue;
+		const customGradientEnabled = headingGlobalBgHoverCustomGradientSwitcher;
+
+		const bgImageUrl = headingGlobalBgHoverBackgroundImageUrl?.[device];
+		const bgImagePosition = headingGlobalBgHoverBackgroundImagePosition?.[device];
+		const bgAttachment = headingGlobalBgHoverBackgroundImageAttachment?.[device];
+		const bgRepeat = headingGlobalBgHoverBackgroundImageRepeat?.[device];
+		const bgSize = headingGlobalBgHoverBackgroundImageSize?.[device];
+
+		if (bgType === 'gradient') {
+			return {
+				background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+			};
+		}
+
+		let styles = { background: bgColor };
+
+		if (bgType !== 'gradient' && bgImageUrl) {
+			styles = {
+				...styles,
+				'background-image': `url(${bgImageUrl})`,
+				'background-position': bgImagePosition 
+					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+					: "50% 50%",
+				'background-attachment': bgAttachment || undefined,
+				'background-repeat': bgRepeat || undefined,
+				'background-size': bgSize || undefined,
+			};
+		}
+
+		return styles;
+	};
+
+
+    /**
+     * Convert object to string
+     */
+    const backgroundStyleObjectToString = (styleObj) =>
+        Object.entries(styleObj)
+          .map(([key, value]) => `${key}: ${value};`)
+          .join(' ');
+      
+      
+      const desktopBackgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles('Desktop'));
+      const desktopBackgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles('Desktop'));
+      const tabletBackgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles('Tablet'));
+      const tabletBackgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles('Tablet'));
+      const mobileBackgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles('Mobile'));
+      const mobileBackgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles('Mobile'));
+
     const allBlockStyle = useMemo(() => `
         .${blockId}.fb-advanced-heading-main-wrapper {
             ${advancedHeadingPositionType === 'default' ? `position: relative !important;` : ''}
@@ -1699,7 +1819,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
 
         .${blockId} .fb-advanced-wrapper {
-            ${headingGlobalBgColor ? `background-color: ${headingGlobalBgColor};` : ''}
+            ${desktopBackgroundNormalStyles}
             ${globalDesktopPadding && headingGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPadding};` : ''}
             ${globalDesktopMargin && headingGlobalMarginDesktop?.top ? `margin: ${globalDesktopMargin};` : ''}
             ${headingGlobalBorder ? `border: ${headingGlobalBorder};` : ''}
@@ -1713,7 +1833,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             position: relative;
         }
         .${blockId} .fb-advanced-wrapper:hover {
-            ${headingGlobalBgHoverColor ? `background-color: ${headingGlobalBgHoverColor};` : ''}
+            ${desktopBackgroundHoverStyles}
             ${headingGlobalBorderHoverColor ? `border-color: ${headingGlobalBorderHoverColor};` : ''}
             ${headingGlobalBoxShadowHoverCssValue ? `box-shadow: ${headingGlobalBoxShadowHoverCssValue};` : ''}
         }
@@ -1912,11 +2032,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             }
 
             .${blockId} .fb-advanced-wrapper {
+                ${tabletBackgroundNormalStyles}
                 ${globalTabletPadding && headingGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ''}
                 ${globalTabletMargin && headingGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
                 ${globalTabletBorderWidth && headingGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
                 ${globalTabletBorderRadiusWidth && headingGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
                 ${headingAlignment.Tablet ? `text-align: ${headingAlignment.Tablet};` : ''}
+            }
+
+            .${blockId} .fb-advanced-wrapper:hover {
+                ${tabletBackgroundHoverStyles}
             }
 
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
@@ -2104,11 +2229,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${headingGlobalZIndex.Mobile ? `z-index: ${headingGlobalZIndex.Mobile};` : ''}
             }
             .${blockId} .fb-advanced-wrapper {
+                ${mobileBackgroundNormalStyles}
                 ${globalMobilePadding && headingGlobalPaddingMobile?.top ? `padding: ${globalMobilePadding};` : ''}
                 ${globalMobileMargin && headingGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
                 ${globalMobileBorderWidth && headingGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
                 ${globalMobileBorderRadiusWidth && headingGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
                 ${headingAlignment.Mobile ? `text-align: ${headingAlignment.Mobile};` : ''}
+            }
+
+            .${blockId} .fb-advanced-wrapper:hover {
+                ${mobileBackgroundHoverStyles}
             }
 
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
@@ -2232,12 +2362,35 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     advancedHeadingOverflow,
     headingGlobalWraperID,
     headingGlobalWraperClass,
-    headingGlobalBgColor,
     globalDesktopPadding,
     globalDesktopMargin,
     headingGlobalBorder,
     globalDesktopBorderWidth,
     globalDesktopBorderRadiusWidth,
+
+
+    headingGlobalBgColorSwitcher,
+    headingGlobalBgNormalBackgroundType,
+    headingGlobalBgNormalClassicColor,
+    headingGlobalBgNormalGradientColor,
+    headingGlobalBgNormalCustomGradientSwitcher,
+    headingGlobalBgNormalCustomGradientInputValue,
+    headingGlobalBgNormalBackgroundImageUrl,
+    headingGlobalBgNormalBackgroundImagePosition,
+    headingGlobalBgNormalBackgroundImageAttachment,
+    headingGlobalBgNormalBackgroundImageRepeat,
+    headingGlobalBgNormalBackgroundImageSize,
+
+    headingGlobalBgHoverBackgroundType,
+    headingGlobalBgHoverClassicColor,
+    headingGlobalBgHoverGradientColor,
+    headingGlobalBgHoverCustomGradientSwitcher,
+    headingGlobalBgHoverCustomGradientInputValue,
+    headingGlobalBgHoverBackgroundImageUrl,
+    headingGlobalBgHoverBackgroundImagePosition,
+    headingGlobalBgHoverBackgroundImageAttachment,
+    headingGlobalBgHoverBackgroundImageRepeat,
+    headingGlobalBgHoverBackgroundImageSize,
 
     headingGlobalBorderColor,
     headingGlobalBoxShadowSwitcher,
@@ -2245,7 +2398,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingGlobalBoxShadowCssValue,
     headingGlobalBoxShadowHoverValues,
     headingGlobalBoxShadowHoverCssValue,
-    headingGlobalBgHoverColor,
     headingGlobalBorderHoverColor,
     activeLineAfterWidth,
     activeLineAfterWidthUnits,
@@ -3627,32 +3779,184 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 													/>
 												</PanelBody>
 
-												<PanelBody
-                                                    title={__("Background Color", "frontis-blocks")}
-                                                    initialOpen={false}
-                                                >
-                                                    <FB_SwitcherControl
-                                                        label={__("Background Color", "frontis-blocks")}
-                                                        globalSwitcher={headingGlobalBgColorSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ headingGlobalBgColorSwitcher: value })}
-                                                    />
+                                                <PanelBody
+													title={__("Background", "frontis-blocks")}
+													initialOpen={false}
+												>
+													<FB_SwitcherControl
+														label={__("Background Type", "frontis-blocks")}
+														globalSwitcher={headingGlobalBgColorSwitcher} 
+														setGlobalSwitcher={(value) => setAttributes({ headingGlobalBgColorSwitcher: value })}
+													/>
 
-                                                    {headingGlobalBgColorSwitcher === 'normal' && (
-                                                        <FB_ColorControl
-                                                            label={__("Normal Color", "frontis-blocks")}
-                                                            globalColor={headingGlobalBgColor}
-                                                            setGlobalColor={(value) => setAttributes({ headingGlobalBgColor: value })}
-                                                        />
-                                                    )}
+													{headingGlobalBgColorSwitcher === 'normal' && (
+														<BaseControl
+															className="fb-setting-background-color-setting-wrapper"
+															label={__("Normal Background Type", "frontis-blocks")}
+														>
+															<Dropdown
+																className="fb-setting-background-color-setting-icon-dropdown"
+																contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
+																popoverProps={{ placement: 'bottom-start' }}
+																renderToggle={({ isOpen, onToggle }) => (
+																	<Button
+																		variant="primary"
+																		onClick={onToggle}
+																		aria-expanded={isOpen}
+																		className="fb-setting-background-color-setting-icon-btn"
+																	>
+																		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+																			<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
+																			<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
+																		</svg>
+																	</Button>
+																)}
+																renderContent={() => (
+																	<div className="fb-setting-background-color-popup-wrapper">
+																		<BaseControl
+																			className="fb-setting-background-color-popup-inner-wrapper"
+																		>
+																			<ButtonGroup className="fb-setting-background-color-panel-btn">
+																				{BACKGROUND_TYPES.map((item) => (
+																					<Button
+																						key={item.value}
+																						onClick={() => setAttributes({ headingGlobalBgNormalBackgroundType: item.value })}
+																						className={`fb-setting-background-color-panel-btn-switcher ${headingGlobalBgNormalBackgroundType === item.value ? 'active' : ''}`}
+																					>
+																						{item.label}
+																					</Button>
+																				))}
+																			</ButtonGroup>
+																		</BaseControl>
 
-                                                    {headingGlobalBgColorSwitcher === 'hover' && (
-                                                        <FB_ColorControl
-                                                            label={__("Hover Color", "frontis-blocks")}
-                                                            globalColor={headingGlobalBgHoverColor}
-                                                            setGlobalColor={(value) => setAttributes({ headingGlobalBgHoverColor: value })}
-                                                        />
-                                                    )}
+																		{headingGlobalBgNormalBackgroundType === 'classic' && (
+
+																			<>
+																				<FB_ColorControl
+																					label={__("Color", "frontis-blocks")}
+																					globalColor={headingGlobalBgNormalClassicColor} 
+																					setGlobalColor={(value) => setAttributes({ headingGlobalBgNormalClassicColor: value })} 
+																				/>
+
+																				<FB_ResponsiveBackgroundImageControl
+																					deviceType={deviceType}
+																					globalBackgroundImageUrl={headingGlobalBgNormalBackgroundImageUrl}
+																					setGlobalBackgroundImageUrl={(value) => setAttributes({ headingGlobalBgNormalBackgroundImageUrl: value })}
+																					globalBackgroundImagePosition={headingGlobalBgNormalBackgroundImagePosition}
+																					setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ headingGlobalBgNormalBackgroundImagePosition: newPosition })}
+																					globalBackgroundImageAttachment={headingGlobalBgNormalBackgroundImageAttachment}
+																					setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ headingGlobalBgNormalBackgroundImageAttachment: newAttachment })}
+																					globalBackgroundImageRepeat={headingGlobalBgNormalBackgroundImageRepeat}
+																					setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ headingGlobalBgNormalBackgroundImageRepeat: newRepeat })}
+																					globalBackgroundImageSize={headingGlobalBgNormalBackgroundImageSize} 
+																					setGlobalBackgroundImageSize={(newSize) => setAttributes({ headingGlobalBgNormalBackgroundImageSize: newSize })}
+																					setAttributes={setAttributes}
+																				/>
+																						
+																			</>
+																		)}
+
+																		{headingGlobalBgNormalBackgroundType === 'gradient' && (
+																			<FB_GradientColorControl
+																				globalCustomGradientSwitcher={headingGlobalBgNormalCustomGradientSwitcher}
+																				setGlobalCustomGradientSwitcher={(value) => setAttributes({ headingGlobalBgNormalCustomGradientSwitcher: value })}
+																				globalCustomGradientInputValue={headingGlobalBgNormalCustomGradientInputValue}
+																				setGlobalCustomGradientInputValue={(value) => setAttributes({ headingGlobalBgNormalCustomGradientInputValue: value })}
+																				globalGradientColor={headingGlobalBgNormalGradientColor}
+																				setGlobalGradientColor={(value) => setAttributes({ headingGlobalBgNormalGradientColor: value })}
+																			/>
+																		)}
+																	</div>
+																)}
+															/>
+														</BaseControl>
+														
+													)}
+
+													{headingGlobalBgColorSwitcher === 'hover' && (
+														<BaseControl
+															className="fb-setting-background-color-setting-wrapper"
+															label={__("Hover Background Type", "frontis-blocks")} 
+														>
+															<Dropdown
+																className="fb-setting-background-color-setting-icon-dropdown"
+																contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
+																popoverProps={{ placement: 'bottom-start' }}
+																renderToggle={({ isOpen, onToggle }) => (
+																	<Button
+																		variant="primary"
+																		onClick={onToggle}
+																		aria-expanded={isOpen}
+																		className="fb-setting-background-color-setting-icon-btn"
+																	>
+																		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+																			<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
+																			<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
+																		</svg>
+																	</Button>
+																)}
+																renderContent={() => (
+																	<div className="fb-setting-background-color-popup-wrapper">
+																		<BaseControl
+																			className="fb-setting-background-color-popup-inner-wrapper"
+																		>
+																			<ButtonGroup className="fb-setting-background-color-panel-btn">
+																				{BACKGROUND_TYPES.map((item) => (
+																					<Button
+																						key={item.value}
+																						onClick={() => setAttributes({ headingGlobalBgHoverBackgroundType: item.value })}
+																						className={`fb-setting-background-color-panel-btn-switcher ${headingGlobalBgHoverBackgroundType === item.value ? 'active' : ''}`}
+																					>
+																						{item.label}
+																					</Button>
+																				))}
+																			</ButtonGroup>
+																		</BaseControl>
+
+																		{headingGlobalBgHoverBackgroundType === 'classic' && (
+
+																			<>
+																				<FB_ColorControl
+																					label={__("Color", "frontis-blocks")}
+																					globalColor={headingGlobalBgHoverClassicColor} 
+																					setGlobalColor={(value) => setAttributes({ headingGlobalBgHoverClassicColor: value })} 
+																				/>
+
+																				<FB_ResponsiveBackgroundImageControl
+																					deviceType={deviceType}
+																					globalBackgroundImageUrl={headingGlobalBgHoverBackgroundImageUrl}
+																					setGlobalBackgroundImageUrl={(value) => setAttributes({ headingGlobalBgHoverBackgroundImageUrl: value })}
+																					globalBackgroundImagePosition={headingGlobalBgHoverBackgroundImagePosition}
+																					setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ headingGlobalBgHoverBackgroundImagePosition: newPosition })}
+																					globalBackgroundImageAttachment={headingGlobalBgHoverBackgroundImageAttachment} 
+																					setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ headingGlobalBgHoverBackgroundImageAttachment: newAttachment })}
+																					globalBackgroundImageRepeat={headingGlobalBgHoverBackgroundImageRepeat}
+																					setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ headingGlobalBgHoverBackgroundImageRepeat: newRepeat })}
+																					globalBackgroundImageSize={headingGlobalBgHoverBackgroundImageSize}
+																					setGlobalBackgroundImageSize={(newSize) => setAttributes({ headingGlobalBgHoverBackgroundImageSize: newSize })}
+																					setAttributes={setAttributes}
+																				/>
+																						
+																			</>
+																		)}
+
+																		{headingGlobalBgHoverBackgroundType === 'gradient' && (
+																			<FB_GradientColorControl
+																				globalCustomGradientSwitcher={headingGlobalBgHoverCustomGradientSwitcher}
+																				setGlobalCustomGradientSwitcher={(value) => setAttributes({ headingGlobalBgHoverCustomGradientSwitcher: value })}
+																				globalCustomGradientInputValue={headingGlobalBgHoverCustomGradientInputValue}
+																				setGlobalCustomGradientInputValue={(value) => setAttributes({ headingGlobalBgHoverCustomGradientInputValue: value })}
+																				globalGradientColor={headingGlobalBgHoverGradientColor}
+																				setGlobalGradientColor={(value) => setAttributes({ headingGlobalBgHoverGradientColor: value })}
+																			/>
+																		)}
+																	</div>
+																)}
+															/>
+														</BaseControl>
+													)}
 												</PanelBody>
+                                                
 												<PanelBody
                                                     title={__("Border and Shadow", "frontis-blocks")}
                                                     initialOpen={false}
