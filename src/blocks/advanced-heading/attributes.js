@@ -1066,6 +1066,143 @@ const attributes = {
 	headingGlobalBgHoverColor: {
 		type: 'string',
 	},
+
+    /** Start Background Normal for fb heading */
+	headingGlobalBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	headingGlobalBgNormalBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	headingGlobalBgNormalClassicColor: {
+		type: "string",
+		default: "",
+	},
+	headingGlobalBgNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	headingGlobalBgNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	headingGlobalBgNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** Bg Normal Image for fb container */
+	headingGlobalBgNormalBackgroundImageUrl: {  
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: ""
+        }
+    },
+    headingGlobalBgNormalBackgroundImagePosition: {
+        type: 'object',
+        default: {
+            Desktop: { x: 0.5, y: 0.5 },
+            Tablet: { x: 0.5, y: 0.5 },
+            Mobile: { x: 0.5, y: 0.5 }
+        }
+    },
+    headingGlobalBgNormalBackgroundImageAttachment: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    headingGlobalBgNormalBackgroundImageRepeat: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    headingGlobalBgNormalBackgroundImageSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+
+
+	/**Bg Hover for fb heading */
+	headingGlobalBgHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	headingGlobalBgHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	headingGlobalBgHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	headingGlobalBgHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	headingGlobalBgHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** Hover Image for fb heading */
+	headingGlobalBgHoverBackgroundImageUrl: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
+	},
+	headingGlobalBgHoverBackgroundImagePosition: {
+		type: "object",
+		default: {
+			Desktop: { x: 0.5, y: 0.5 },
+			Tablet: { x: 0.5, y: 0.5 },
+			Mobile: { x: 0.5, y: 0.5 }
+		}
+	},
+	headingGlobalBgHoverBackgroundImageAttachment: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
+	},
+	headingGlobalBgHoverBackgroundImageRepeat: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
+	},
+	headingGlobalBgHoverBackgroundImageSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
+	},
+	/** End Background for fb heading */
+
+
+
+
+
 	/** End Background */
 
 	/** Start Border */
