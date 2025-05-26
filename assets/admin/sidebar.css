@@ -548,7 +548,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
   border-bottom: 1px solid #E1E3E8;
 }
 .components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-global-color-panel .block-editor-tools-panel-color-gradient-settings__item:first-child {
-  margin-top: 24px;
+  margin-top: 0;
 }
 .components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-global-color-panel .block-editor-tools-panel-color-gradient-settings__item:last-child {
   border-bottom: none;
