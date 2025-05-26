@@ -85,3 +85,8 @@ export const ICON_ALIGN = [
 	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
 	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
 ];
+
+export const BACKGROUND_TYPES = [
+	{ label: __('Classic', 'frontis-blocks'), value: 'classic' },
+	{ label: __('Gradient', 'frontis-blocks'), value: 'gradient' },
+];
