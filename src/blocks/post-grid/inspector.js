@@ -826,7 +826,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         tagLinkSwitcher,
         authorLinkSwitcher,
         titleLinkSwitcher,
-        
+
+        /** Start Post Grid Settings */
+        postGridSkeletonBgColor,
+        postGridSkeletonHighlightBgColor,
+        /** End Post Grid Settings */
 	} = attributes;
 
     const deviceType= useDeviceType();
@@ -4226,13 +4230,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             display: block;
             text-align: left;
         }
-        .loading.post {
+        .${blockId} .loading.post {
             display: grid;
             grid-template-columns: repeat(${gridColumnsPerSection.Desktop}, 1fr);
             row-gap: ${gridRowGap.Desktop}${gridGapUnits.Desktop}; 
             column-gap: ${gridColumnGap.Desktop}${gridGapUnits.Desktop};
             width: 100%;
             height: auto;
+        }
+
+        .${blockId} .post-card.skeleton .loading:before {
+            background: -webkit-gradient(linear, left top, right top, color-stop(8%, ${postGridSkeletonBgColor}), color-stop(30%, ${postGridSkeletonHighlightBgColor}), color-stop(51%, ${postGridSkeletonBgColor}));
+            background: -o-linear-gradient(to right, ${postGridSkeletonBgColor} 8%, ${postGridSkeletonHighlightBgColor} 30%, ${postGridSkeletonBgColor} 51%);
+            background: linear-gradient(to right, ${postGridSkeletonBgColor} 8%, ${postGridSkeletonHighlightBgColor} 30%, ${postGridSkeletonBgColor} 51%);
         }
 
         .${blockId}.fb_post_grid_container .fb_post_grid_wrapper {
@@ -4674,7 +4684,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 margin-right: ${listImageSpacing.Tablet}${listGapUnits.Tablet};  
             }
 
-            .loading.post {
+            .${blockId} .loading.post {
                 display: grid;
                 grid-template-columns: repeat(${gridColumnsPerSection.Tablet}, 1fr);
                 row-gap: ${gridRowGap.Tablet}${gridGapUnits.Tablet};
@@ -4971,7 +4981,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 display: block;
                 text-align: left;
             }
-            .loading.post {
+            .${blockId} .loading.post {
                 display: grid;
                 grid-template-columns: repeat(${gridColumnsPerSection.Mobile}, 1fr);
                 row-gap: ${gridRowGap.Mobile}${gridGapUnits.Mobile}; 
@@ -5870,6 +5880,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         buttonIconImageHeight,
         buttonIconImageHeightUnits,
         /** Read More Button */
+
+        /** Start Skeleton Settings */
+        postGridSkeletonBgColor,
+        postGridSkeletonHighlightBgColor,
+        /** End Skeleton Settings */
     ]);
 
     const customCss = getCustomCss(postGridGlobalCustomCSS, `.${blockId}`);
@@ -7901,7 +7916,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                         <PanelBody
 											title={__("Read More Button Text", "frontis-blocks")}
-											initialOpen={true}
+											initialOpen={false}
 										>
 											<FB_Range
 												min={1}
@@ -8841,6 +8856,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                                             </PanelBody>
                                         )}
+
+                                        <PanelBody title={__("Skeleton Settings", "frontis-blocks")} initialOpen={false}>
+
+                                                <FB_ColorControl
+                                                    label={__("Background Color", "frontis-blocks")}
+                                                    globalColor={postGridSkeletonBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ postGridSkeletonBgColor: value })}
+                                                />
+
+                                                <FB_ColorControl
+                                                    label={__("Highlight Background Color", "frontis-blocks")}
+                                                    globalColor={postGridSkeletonHighlightBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ postGridSkeletonHighlightBgColor: value })}
+                                                />
+
+                                        </PanelBody>
 
                                     </>
                                 )}
