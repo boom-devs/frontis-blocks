@@ -575,956 +575,940 @@ const Inspector = (props) => {
         })
     }
 
-	return (
+	/**
+	 * Inspector General Controls
+	 */
+	const generalControls = (
 		<>
-			<InspectorControls key="controls">
-				<div className="fb-inspector-control">
-					<TabPanel
-						className="fb-parent-tab-panel"
-						activeClass="active-tab"
-						tabs={[
-							{
-								name: "general",
-								title: "General",
-								className: "fb-tab general",
-							},
-							{
-								name: "styles",
-								title: "Style",
-								className: "fb-tab styles",
-							},
-							{
-								name: "advanced",
-								title: "Advanced",
-								className: "fb-tab advanced",
-							},
+			<div className="fb-advanced-button-wrapper">
+				<PanelBody
+					title={__("Container Type", "frontis-blocks")}
+					initialOpen={true}
+				>
+					{isBlockRootParent &&
+						<BaseControl
+							label={__("Container Width", "frontis-blocks")}
+							id="fb-setting-text-alignment"
+							className="fb-setting-text-alignment"
+						>
+							<ButtonGroup
+								className="fb-setting-text-alignment-group-btn"
+							>
+								{CONTAINER_TYPE.map((item, key) => (
+									<Button
+										key={key}
+										onClick={() => setAttributes({ containerType: item.value })}
+										className={`fb-setting-text-alignment-single-btn ${containerType === item.value ? 'active' : ''}`}
+									>
+										{item.label}
+									</Button>
+								))}
+							</ButtonGroup>
+						</BaseControl>
+					}
+
+					{/* Container width is custom */}
+					{(isBlockRootParent && containerType === 'custom') &&
+						<>
+							<FB_Range
+								min={1}
+								max={containerCustomWidthUnits[deviceType] !== 'px' ? 100 : 2000}
+								label={__("Custom Width", "frontis-blocks")}
+								rangeValue={containerCustomWidth}
+								onChangeHandler={containerCustomContentWidthFn}
+								rangeUnitHandler={containerCustomContentWidthFnUnitsFn}
+								deviceType={deviceType}
+								units={containerCustomWidthUnits}
+								rangeStep={1}
+								resetFallbackValue={parseInt(resetFallBackCustomWidth[deviceType])}
+								units_types_arr={[
+									{ label: 'px', value: 'px' },
+									{ label: '%', value: '%' },
+									{ label: 'vw', value: 'vw' },
+								]}
+							/>
+						</>
+					}
+
+					{(containerType === 'full-width' && isBlockRootParent) && (
+						<>
+							<BaseControl
+								label={__("Content Width", "frontis-blocks")}
+								id="fb-setting-text-alignment"
+								className="fb-setting-text-alignment"
+							>
+								<ButtonGroup
+									className="fb-setting-text-alignment-group-btn"
+								>
+									{CONTAINER_TYPE_FULL.map((item, key) => (
+										<Button
+											key={key}
+											onClick={() => setAttributes({ containerTypeFull: item.value })}
+											className={`fb-setting-text-alignment-single-btn ${containerTypeFull === item.value ? 'active' : ''}`}
+										>
+											{item.label}
+										</Button>
+									))}
+								</ButtonGroup>
+								<div style={{ marginTop: '10px' }}></div>
+								{containerTypeFull !== 'full-width' &&
+									<FB_Range
+										min={1}
+										max={fullWidthContentBoxedWidthUnits[deviceType] !== 'px' ? 100 : 2000}
+										label={__("Content Box Width", "frontis-blocks")}
+										rangeValue={fullWidthContentBoxedWidth}
+										onChangeHandler={fullWidthContentBoxedWidthFn}
+										rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
+										deviceType={deviceType}
+										units={fullWidthContentBoxedWidthUnits}
+										rangeStep={1}
+										resetFallbackValue={resetFallBackCustomWidth[deviceType]}
+										units_types_arr={[
+											{ label: 'px', value: 'px' },
+											{ label: '%', value: '%' },
+											{ label: 'vw', value: 'vw' },
+										]}
+									/>
+								}
+							</BaseControl>
+						</>
+					)}
+
+					{!isBlockRootParent &&
+						<>
+							<FB_Range
+								min={1}
+								max={customWidthUnits[deviceType] !== 'px' ? 100 : 2000}
+								label={__("Custom Width", "frontis-blocks")}
+								rangeValue={customWidth}
+								onChangeHandler={customContentWidthFn}
+								rangeUnitHandler={customContentWidthFnUnitsFn}
+								deviceType={deviceType}
+								units={customWidthUnits}
+								rangeStep={1}
+								resetFallbackValue={parseInt(resetFallBackCustomWidth[deviceType])}
+								units_types_arr={[
+									{ label: 'px', value: 'px' },
+									{ label: '%', value: '%' },
+									{ label: 'vw', value: 'vw' },
+								]}
+							/>
+						</>
+					}
+
+					<FB_Range
+						min={1}
+						max={minHeightUnits[deviceType] !== 'px' ? 100 : 1000}
+						label={__("Minimum Height", "frontis-blocks")}
+						rangeValue={minHeight}
+						onChangeHandler={minHeightFn}
+						rangeUnitHandler={minHeightUnitsFn}
+						deviceType={deviceType}
+						units={minHeightUnits}
+						rangeStep={1}
+						resetFallbackValue={''}
+						units_types_arr={[
+							{ label: 'px', value: 'px' },
+							{ label: 'vh', value: 'vh' },
 						]}
+					/>
+				</PanelBody>
+			</div>
+			{/* {isBlockRootParent && */}
+				<div className="fb-flex-properties-wrapper">
+					<PanelBody
+						title={__("Flex Properties", "frontis-blocks")}
+						initialOpen={true}
 					>
-						{(tab) => (
-							<div className={"fb-tab-controls" + tab.name}>
-								{tab.name === 'general' && (
-									<>
-										<div className="fb-advanced-button-wrapper">
-											<PanelBody
-												title={__("Container Type", "frontis-blocks")}
-												initialOpen={true}
+						<BaseControl
+							id="fb-setting-alignment"
+							className="fb-advanced-alignment"
+						>
+							<FB_ResponsiveControl
+								labelText={__('Direction', 'frontis-blocks')}
+								device={deviceType}
+							/>
+							<br />
+							<ButtonGroup className="fb-advanced-alignment-group-btn">
+								{DIRECTION.map((item, key) => (
+									<Button
+										key={key}
+										onClick={() =>
+											setAttributes({
+												containerDirection: {
+													...containerDirection,
+													[deviceType]: item.value,
+												},
+											})
+										}
+										title={item.title}
+										className={`fb-advanced-alignment-single-btn ${containerDirection[deviceType] === item.value ? 'active' : ''}`}
+									>
+										{item.label}
+									</Button>
+								))}
+							</ButtonGroup>
+						</BaseControl>
+						<BaseControl
+							id="fb-setting-alignment"
+							className="fb-advanced-alignment"
+						>
+							<FB_ResponsiveControl
+								labelText={__('Align Items', 'frontis-blocks')}
+								device={deviceType}
+							/>
+							<br />
+							<ButtonGroup className="fb-advanced-alignment-group-btn">
+								{ALIGN_ITEMS.map((item, key) => (
+									<Button
+										key={key}
+										onClick={() =>
+											setAttributes({
+												containerAlignItems: {
+													...containerAlignItems, // Spread the existing values
+													[deviceType]: item.value, // Update the specific device type
+												},
+											})
+										}
+										title={item.title}
+										className={`fb-advanced-alignment-single-btn ${containerAlignItems[deviceType] === item.value ? 'active' : ''}`}
+									>
+										{item.label}
+									</Button>
+								))}
+							</ButtonGroup>
+						</BaseControl>
+						<BaseControl
+							id="fb-setting-alignment"
+							className="fb-advanced-alignment"
+						>
+							<FB_ResponsiveControl
+								labelText={__('Justify Content', 'frontis-blocks')}
+								device={deviceType}
+							/>
+							<br />
+							<ButtonGroup className="fb-advanced-alignment-group-btn justify-content-btn">
+								{JUSTIFY_CONTENT.map((item, key) => (
+									<Button
+										key={key}
+										onClick={() =>
+											setAttributes({
+												containerJustify: {
+													...containerJustify, // Spread the existing values
+													[deviceType]: item.value, // Update the specific device type
+												},
+											})
+										}
+										title={item.title}
+										className={`fb-advanced-alignment-single-btn ${containerJustify[deviceType] === item.value ? 'active' : ''}`}
+									>
+										{item.label}
+									</Button>
+								))}
+							</ButtonGroup>
+						</BaseControl>
+						<BaseControl
+							id="fb-setting-alignment"
+							className="fb-advanced-alignment"
+						>
+							<FB_ResponsiveControl
+								labelText={__('Wrap', 'frontis-blocks')}
+								device={deviceType}
+							/>
+							<br />
+							<ButtonGroup className="fb-advanced-alignment-group-btn">
+								{WRAP.map((item, key) => (
+									<Button
+										key={key}
+										onClick={() =>
+											setAttributes({
+												containerWrap: {
+													...containerWrap,
+													[deviceType]: item.value,
+												},
+											})
+										}
+										title={item.title}
+										className={`fb-advanced-alignment-single-btn ${containerWrap[deviceType] === item.value ? 'active' : ''}`}
+									>
+										{item.label}
+									</Button>
+								))}
+							</ButtonGroup>
+						</BaseControl>
+					</PanelBody>
+				</div>
+			{/* } */}
+		</>
+	);
+
+	/**
+	 * Inspector Style Controls
+	 */
+	const styleControls = (
+		<>
+			<PanelBody
+				title={__("Container Gap", "frontis-blocks")}
+				initialOpen={true}
+			>
+				<FB_Range
+					min={0}
+					max={200}
+					label={__("Column", "frontis-blocks")}
+					rangeValue={columnGap}
+					onChangeHandler={columnGapFn}
+					rangeUnitHandler={columnGapUnitsFn}
+					deviceType={deviceType}
+					units={columnGapUnits}
+					rangeStep={1}
+					resetFallbackValue={''}
+					units_types_arr={[
+						{ label: 'px', value: 'px' },
+						{ label: '%', value: '%' },
+						{ label: 'em', value: 'em' },
+					]}
+				/>
+
+				<FB_Range
+					min={0}
+					max={200}
+					label={__("Row", "frontis-blocks")}
+					rangeValue={rowGap}
+					onChangeHandler={rowGapFn}
+					rangeUnitHandler={rowGapUnitsFn}
+					deviceType={deviceType}
+					units={rowGapUnits}
+					rangeStep={1}
+					resetFallbackValue={''}
+					units_types_arr={[
+						{ label: 'px', value: 'px' },
+						{ label: '%', value: '%' },
+						{ label: 'em', value: 'em' },
+					]}
+				/>
+			</PanelBody>
+		</>
+	);
+
+	/**
+	 * Inspector Advanced Controls
+	 */
+	const advancedControls = (
+		<>
+			<div className="fb-setting-advanced-tab-wrapper">
+				<div className="fb-setting-inner-wrapper">
+					<PanelBody
+						title={__("Advanced", "frontis-blocks")}
+						initialOpen={true}
+					>
+						<FB_Range
+							min={0}
+							max={99999}
+							label={__("Z Index", "frontis-blocks")}
+							rangeValue={containerZIndex}
+							onChangeHandler={containerZindexFn}
+							deviceType={deviceType}
+							rangeStep={1}
+							resetFallbackValue={''}
+							isRangeUnit={false}
+						/>
+
+						<SelectControl
+							label={__("Overflow", "frontis-blocks")}
+							value={containerOverflow}
+							options={OVERFLOW_OP}
+							onChange={(value) => setAttributes({ containerOverflow: value })}
+						/>
+
+						<FB_PositionControl
+							deviceType={deviceType}
+							positionType={containerPositionType}
+							setPositionType={(value) => setAttributes({ containerPositionType: value })}
+																			
+							HZOrientationType={containerHZOrientationType}
+							setHZOrientationType={(value) =>
+								setAttributes({ containerHZOrientationType: value })
+							}
+							VROrientationType={containerVROrientationType}
+							setVROrientationType={(value) =>
+								setAttributes({ containerVROrientationType: value })
+							}
+																				
+							HZLeftOffset={containerHZLeftOffset}
+							setHZLeftOffset={(value) => setAttributes({ containerHZLeftOffset: value })}
+							HZLeftOffsetUnits={containerHZLeftOffsetUnits}
+							setHZLeftOffsetUnits={(value) => setAttributes({ containerHZLeftOffsetUnits: value })}
+							HZRightOffset={containerHZRightOffset}
+							setHZRightOffset={(value) => setAttributes({ containerHZRightOffset: value })}
+							HZRightOffsetUnits={containerHZRightOffsetUnits}
+							setHZRightOffsetUnits={(value) => setAttributes({ containerHZRightOffsetUnits: value })}
+																			
+							VRTopOffset={containerVRTopOffset}
+							setVRTopOffset={(value) => setAttributes({ containerVRTopOffset: value })}
+							VRTopOffsetUnits={containerVRTopOffsetUnits}
+							setVRTopOffsetUnits={(value) => setAttributes({ containerVRTopOffsetUnits: value })}
+							VRBottomOffset={containerVRBottomOffset}
+							setVRBottomOffset={(value) => setAttributes({ containerVRBottomOffset: value })}
+							VRBottomOffsetUnits={containerVRBottomOffsetUnits}
+							setVRBottomOffsetUnits={(value) => setAttributes({ containerVRBottomOffsetUnits: value })}
+
+							setAttributes={setAttributes}
+						/>
+						<FB_InputControl
+							label={__("CSS ID", "frontis-blocks")}
+							value={containerGlobalCustomCSSID}
+							onChangeValue={(value) => setAttributes({ containerGlobalCustomCSSID: value })}
+							helpText={__("Separate with spaces key.", "frontis-blocks")}
+						/>
+						<FB_InputControl
+							label={__("CSS Class", "frontis-blocks")}
+							value={containerGlobalCustomCSSClass}
+							onChangeValue={(value) => setAttributes({ containerGlobalCustomCSSClass: value })}
+							helpText={__("Separate with spaces key.", "frontis-blocks")}
+						/>
+					</PanelBody>
+					<PanelBody
+						title={__("Padding and Margin", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_Spacing
+							label={__("Margin", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={containerMarginUnitsHandler}
+							spacingUnits={containerMarginUnits}
+							spacingDesktop={containerDesktopMargin}
+							spacingTablet={containerTabletMargin}
+							spacingMobile={containerMobileMargin}
+							handleSpacingUnitHandler={containerMarginUnitsChange}
+							spacingCombineBtn={containerMarginLink}
+							spacingCombineBtnHandler={containerMarginLinkBtn}
+							setAttributes={setAttributes}
+						/>
+						<FB_Spacing
+							label={__("Padding", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={containerPaddingUnitsHandler}
+							spacingUnits={containerPaddingUnits}
+							spacingDesktop={containerDesktopPadding}
+							spacingTablet={containerTabletPadding}
+							spacingMobile={containerMobilePadding}
+							handleSpacingUnitHandler={containerPaddingUnitsChange}
+							spacingCombineBtn={containerPaddingLink}
+							spacingCombineBtnHandler={containerPaddingLinkBtn}
+							setAttributes={setAttributes}
+						/>
+					</PanelBody>
+
+					<PanelBody
+						title={__("Border and Shadow", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<SelectControl
+							label={__("Border Style", "frontis-blocks")}
+							value={containerBorder}
+							options={BORDER_STYLES}
+							onChange={(value) => setAttributes({ containerBorder: value })}
+						/>
+
+						<FB_SwitcherControl
+							label={__("Border Color", "frontis-blocks")}
+							globalSwitcher={containerBorderColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ containerBorderColorSwitcher: value })}
+						/>
+						
+						{containerBorderColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={containerBorderColor}
+								setGlobalColor={(value) => setAttributes({ containerBorderColor: value })}
+							/>
+						)}
+						
+						{containerBorderColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={containerBorderHoverColor}
+								setGlobalColor={(value) => setAttributes({ containerBorderHoverColor: value })}
+							/>
+						)}
+
+						<FB_Spacing
+							label={__("Border", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleContainerBorderUnitsHandler}
+							spacingUnits={containerBorderUnits}
+							spacingDesktop={containerDesktopBorderWidth}
+							spacingTablet={containerTabBorderWidth}
+							spacingMobile={containerMobileBorderWidth}
+							handleSpacingUnitHandler={handleContainerBorderUnitChange}
+							spacingCombineBtn={containerBorderLink}
+							spacingCombineBtnHandler={handleContainerBorderCombineBtn}
+							setAttributes={setAttributes}
+						/>
+
+						<FB_Spacing 
+							label={__("Border Radius", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleContainerBorderRadiusUnitsHandler}
+							spacingUnits={containerBorderRadiusUnits}
+							spacingDesktop={containerDesktopBorderRadiusWidth}
+							spacingTablet={containerTabBorderRadiusWidth}
+							spacingMobile={containerMobileBorderRadiusWidth}
+							handleSpacingUnitHandler={handleContainerBorderRadiusUnitChange}
+							spacingCombineBtn={containerBorderRadiusLink}
+							spacingCombineBtnHandler={handleContainerBorderRadiusCombineBtn}
+							setAttributes={setAttributes}
+						/>
+
+						<FB_SwitcherControl
+							label={__("Box Shadow", "frontis-blocks")}
+							globalSwitcher={containerGlobalBoxShadowSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ containerGlobalBoxShadowSwitcher: value })}
+						/>
+						
+						{containerGlobalBoxShadowSwitcher === 'normal' && (
+							<FB_BoxShadowControl
+								label={__("Normal Shadow", "frontis-blocks")}
+								onBoxShadowChange={(value) =>
+									setAttributes({ containerGlobalBoxShadowValues: value })
+								}
+								initialShadowValue={containerGlobalBoxShadowValues}
+								onBoxShadowStyleChange={(value) =>
+									setAttributes({
+										containerGlobalBoxShadowCssValue: value,
+									})
+								}
+							/>
+						)}
+						
+						{containerGlobalBoxShadowSwitcher === 'hover' && (
+							<FB_BoxShadowControl
+								label={__("Hover Shadow", "frontis-blocks")}
+								onBoxShadowChange={(value) =>
+									setAttributes({ containerGlobalHoverBoxShadowValues: value })
+								}
+								initialShadowValue={containerGlobalHoverBoxShadowValues}
+								onBoxShadowStyleChange={(value) =>
+									setAttributes({
+										containerGlobalHoverBoxShadowCssValue: value,
+									})
+								}
+							/>
+						)}
+					</PanelBody>
+
+					<PanelBody
+						title={__("Background", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_SwitcherControl
+							label={__("Background Type", "frontis-blocks")}
+							globalSwitcher={containerBgColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ containerBgColorSwitcher: value })}
+						/>
+
+						{containerBgColorSwitcher === 'normal' && (
+							<BaseControl
+								className="fb-setting-background-color-setting-wrapper"
+								label={__("Normal Background Type", "frontis-blocks")}
+							>
+								<Dropdown
+									className="fb-setting-background-color-setting-icon-dropdown"
+									contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
+									popoverProps={{ placement: 'bottom-start' }}
+									renderToggle={({ isOpen, onToggle }) => (
+										<Button
+											variant="primary"
+											onClick={onToggle}
+											aria-expanded={isOpen}
+											className="fb-setting-background-color-setting-icon-btn"
+										>
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+												<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
+												<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
+											</svg>
+										</Button>
+									)}
+									renderContent={() => (
+										<div className="fb-setting-background-color-popup-wrapper">
+											<BaseControl
+												className="fb-setting-background-color-popup-inner-wrapper"
 											>
-												{isBlockRootParent &&
-													<BaseControl
-														label={__("Container Width", "frontis-blocks")}
-														id="fb-setting-text-alignment"
-														className="fb-setting-text-alignment"
-													>
-														<ButtonGroup
-															className="fb-setting-text-alignment-group-btn"
+												<ButtonGroup className="fb-setting-background-color-panel-btn">
+													{BACKGROUND_TYPES.map((item) => (
+														<Button
+															key={item.value}
+															onClick={() => setAttributes({ containerBgNormalBackgroundType: item.value })}
+															className={`fb-setting-background-color-panel-btn-switcher ${containerBgNormalBackgroundType === item.value ? 'active' : ''}`}
 														>
-															{CONTAINER_TYPE.map((item, key) => (
-																<Button
-																	key={key}
-																	onClick={() => setAttributes({ containerType: item.value })}
-																	className={`fb-setting-text-alignment-single-btn ${containerType === item.value ? 'active' : ''}`}
-																>
-																	{item.label}
-																</Button>
-															))}
-														</ButtonGroup>
-													</BaseControl>
-												}
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
 
-												{/* Container width is custom */}
-												{(isBlockRootParent && containerType === 'custom') &&
-													<>
-														<FB_Range
-															min={1}
-															max={containerCustomWidthUnits[deviceType] !== 'px' ? 100 : 2000}
-															label={__("Custom Width", "frontis-blocks")}
-															rangeValue={containerCustomWidth}
-															onChangeHandler={containerCustomContentWidthFn}
-															rangeUnitHandler={containerCustomContentWidthFnUnitsFn}
-															deviceType={deviceType}
-															units={containerCustomWidthUnits}
-															rangeStep={1}
-															resetFallbackValue={parseInt(resetFallBackCustomWidth[deviceType])}
-															units_types_arr={[
-																{ label: 'px', value: 'px' },
-																{ label: '%', value: '%' },
-																{ label: 'vw', value: 'vw' },
-															]}
-														/>
-													</>
-												}
+											{containerBgNormalBackgroundType === 'classic' && (
 
-												{(containerType === 'full-width' && isBlockRootParent) && (
-													<>
-														<BaseControl
-															label={__("Content Width", "frontis-blocks")}
-															id="fb-setting-text-alignment"
-															className="fb-setting-text-alignment"
-														>
-															<ButtonGroup
-																className="fb-setting-text-alignment-group-btn"
-															>
-																{CONTAINER_TYPE_FULL.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() => setAttributes({ containerTypeFull: item.value })}
-																		className={`fb-setting-text-alignment-single-btn ${containerTypeFull === item.value ? 'active' : ''}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-															<div style={{ marginTop: '10px' }}></div>
-															{containerTypeFull !== 'full-width' &&
-																<FB_Range
-																	min={1}
-																	max={fullWidthContentBoxedWidthUnits[deviceType] !== 'px' ? 100 : 2000}
-																	label={__("Content Box Width", "frontis-blocks")}
-																	rangeValue={fullWidthContentBoxedWidth}
-																	onChangeHandler={fullWidthContentBoxedWidthFn}
-																	rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
-																	deviceType={deviceType}
-																	units={fullWidthContentBoxedWidthUnits}
-																	rangeStep={1}
-																	resetFallbackValue={resetFallBackCustomWidth[deviceType]}
-																	units_types_arr={[
-																		{ label: 'px', value: 'px' },
-																		{ label: '%', value: '%' },
-																		{ label: 'vw', value: 'vw' },
-																	]}
-																/>
-															}
-														</BaseControl>
-													</>
-												)}
+												<>
+													<FB_ColorControl
+														label={__("Color", "frontis-blocks")}
+														globalColor={containerBgNormalClassicColor} 
+														setGlobalColor={(value) => setAttributes({ containerBgNormalClassicColor: value })} 
+													/>
 
-												{!isBlockRootParent &&
-													<>
-														<FB_Range
-															min={1}
-															max={customWidthUnits[deviceType] !== 'px' ? 100 : 2000}
-															label={__("Custom Width", "frontis-blocks")}
-															rangeValue={customWidth}
-															onChangeHandler={customContentWidthFn}
-															rangeUnitHandler={customContentWidthFnUnitsFn}
-															deviceType={deviceType}
-															units={customWidthUnits}
-															rangeStep={1}
-															resetFallbackValue={parseInt(resetFallBackCustomWidth[deviceType])}
-															units_types_arr={[
-																{ label: 'px', value: 'px' },
-																{ label: '%', value: '%' },
-																{ label: 'vw', value: 'vw' },
-															]}
-														/>
-													</>
-												}
+													<FB_ResponsiveBackgroundImageControl
+														deviceType={deviceType}
+														globalBackgroundImageUrl={containerBgNormalBackgroundImageUrl}
+														setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgNormalBackgroundImageUrl: value })}
+														globalBackgroundImagePosition={containerBgNormalBackgroundImagePosition}
+														setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgNormalBackgroundImagePosition: newPosition })}
+														globalBackgroundImageAttachment={containerBgNormalBackgroundImageAttachment}
+														setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgNormalBackgroundImageAttachment: newAttachment })}
+														globalBackgroundImageRepeat={containerBgNormalBackgroundImageRepeat}
+														setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgNormalBackgroundImageRepeat: newRepeat })}
+														globalBackgroundImageSize={containerBgNormalBackgroundImageSize} 
+														setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgNormalBackgroundImageSize: newSize })}
+														setAttributes={setAttributes}
+													/>
+															
+												</>
+											)}
 
-												<FB_Range
-													min={1}
-													max={minHeightUnits[deviceType] !== 'px' ? 100 : 1000}
-													label={__("Minimum Height", "frontis-blocks")}
-													rangeValue={minHeight}
-													onChangeHandler={minHeightFn}
-													rangeUnitHandler={minHeightUnitsFn}
-													deviceType={deviceType}
-													units={minHeightUnits}
-													rangeStep={1}
-													resetFallbackValue={''}
-													units_types_arr={[
-														{ label: 'px', value: 'px' },
-														{ label: 'vh', value: 'vh' },
-													]}
+											{containerBgNormalBackgroundType === 'gradient' && (
+												<FB_GradientColorControl
+													globalCustomGradientSwitcher={containerBgNormalCustomGradientSwitcher}
+													setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgNormalCustomGradientSwitcher: value })}
+													globalCustomGradientInputValue={containerBgNormalCustomGradientInputValue}
+													setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgNormalCustomGradientInputValue: value })}
+													globalGradientColor={containerBgNormalGradientColor}
+													setGlobalGradientColor={(value) => setAttributes({ containerBgNormalGradientColor: value })}
 												/>
-											</PanelBody>
+											)}
 										</div>
-										{/* {isBlockRootParent && */}
-											<div className="fb-flex-properties-wrapper">
-												<PanelBody
-													title={__("Flex Properties", "frontis-blocks")}
-													initialOpen={true}
-												>
-													<BaseControl
-														id="fb-setting-alignment"
-														className="fb-advanced-alignment"
-													>
-														<FB_ResponsiveControl
-															labelText={__('Direction', 'frontis-blocks')}
-															device={deviceType}
-														/>
-														<br />
-														<ButtonGroup className="fb-advanced-alignment-group-btn">
-															{DIRECTION.map((item, key) => (
-																<Button
-																	key={key}
-																	onClick={() =>
-																		setAttributes({
-																			containerDirection: {
-																				...containerDirection, // Spread the existing values
-																				[deviceType]: item.value, // Update the specific device type
-																			},
-																		})
-																	}
-																	title={item.title}
-																	className={`fb-advanced-alignment-single-btn ${containerDirection[deviceType] === item.value ? 'active' : ''}`}
-																>
-																	{item.label}
-																</Button>
-															))}
-														</ButtonGroup>
-													</BaseControl>
-													<BaseControl
-														id="fb-setting-alignment"
-														className="fb-advanced-alignment"
-													>
-														<FB_ResponsiveControl
-															labelText={__('Align Items', 'frontis-blocks')}
-															device={deviceType}
-														/>
-														<br />
-														<ButtonGroup className="fb-advanced-alignment-group-btn">
-															{ALIGN_ITEMS.map((item, key) => (
-																<Button
-																	key={key}
-																	onClick={() =>
-																		setAttributes({
-																			containerAlignItems: {
-																				...containerAlignItems, // Spread the existing values
-																				[deviceType]: item.value, // Update the specific device type
-																			},
-																		})
-																	}
-																	title={item.title}
-																	className={`fb-advanced-alignment-single-btn ${containerAlignItems[deviceType] === item.value ? 'active' : ''}`}
-																>
-																	{item.label}
-																</Button>
-															))}
-														</ButtonGroup>
-													</BaseControl>
-													<BaseControl
-														id="fb-setting-alignment"
-														className="fb-advanced-alignment"
-													>
-														<FB_ResponsiveControl
-															labelText={__('Justify Content', 'frontis-blocks')}
-															device={deviceType}
-														/>
-														<br />
-														<ButtonGroup className="fb-advanced-alignment-group-btn justify-content-btn">
-															{JUSTIFY_CONTENT.map((item, key) => (
-																<Button
-																	key={key}
-																	onClick={() =>
-																		setAttributes({
-																			containerJustify: {
-																				...containerJustify, // Spread the existing values
-																				[deviceType]: item.value, // Update the specific device type
-																			},
-																		})
-																	}
-																	title={item.title}
-																	className={`fb-advanced-alignment-single-btn ${containerJustify[deviceType] === item.value ? 'active' : ''}`}
-																>
-																	{item.label}
-																</Button>
-															))}
-														</ButtonGroup>
-													</BaseControl>
-													<BaseControl
-														id="fb-setting-alignment"
-														className="fb-advanced-alignment"
-													>
-														<FB_ResponsiveControl
-															labelText={__('Wrap', 'frontis-blocks')}
-															device={deviceType}
-														/>
-														<br />
-														<ButtonGroup className="fb-advanced-alignment-group-btn">
-															{WRAP.map((item, key) => (
-																<Button
-																	key={key}
-																	onClick={() =>
-																		setAttributes({
-																			containerWrap: {
-																				...containerWrap, // Spread the existing values
-																				[deviceType]: item.value, // Update the specific device type
-																			},
-																		})
-																	}
-																	title={item.title}
-																	className={`fb-advanced-alignment-single-btn ${containerWrap[deviceType] === item.value ? 'active' : ''}`}
-																>
-																	{item.label}
-																</Button>
-															))}
-														</ButtonGroup>
-													</BaseControl>
-												</PanelBody>
-											</div>
-										{/* } */}
-									</>
-								)}
+									)}
+								/>
+							</BaseControl>
+							
+						)}
 
-								{tab.name === "styles" && (
-									<>
-										{/* {isBlockRootParent && */}
-											<PanelBody
-												title={__("Container Gap", "frontis-blocks")}
-												initialOpen={true}
+						{containerBgColorSwitcher === 'hover' && (
+							<BaseControl
+								className="fb-setting-background-color-setting-wrapper"
+								label={__("Hover Background Type", "frontis-blocks")} 
+							>
+								<Dropdown
+									className="fb-setting-background-color-setting-icon-dropdown"
+									contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
+									popoverProps={{ placement: 'bottom-start' }}
+									renderToggle={({ isOpen, onToggle }) => (
+										<Button
+											variant="primary"
+											onClick={onToggle}
+											aria-expanded={isOpen}
+											className="fb-setting-background-color-setting-icon-btn"
+										>
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+												<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
+												<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
+											</svg>
+										</Button>
+									)}
+									renderContent={() => (
+										<div className="fb-setting-background-color-popup-wrapper">
+											<BaseControl
+												className="fb-setting-background-color-popup-inner-wrapper"
 											>
-												<FB_Range
-													min={0}
-													max={200}
-													label={__("Column", "frontis-blocks")}
-													rangeValue={columnGap}
-													onChangeHandler={columnGapFn}
-													rangeUnitHandler={columnGapUnitsFn}
-													deviceType={deviceType}
-													units={columnGapUnits}
-													rangeStep={1}
-													resetFallbackValue={''}
-													units_types_arr={[
-														{ label: 'px', value: 'px' },
-														{ label: '%', value: '%' },
-														{ label: 'em', value: 'em' },
-													]}
-												/>
+												<ButtonGroup className="fb-setting-background-color-panel-btn">
+													{BACKGROUND_TYPES.map((item) => (
+														<Button
+															key={item.value}
+															onClick={() => setAttributes({ containerBgHoverBackgroundType: item.value })}
+															className={`fb-setting-background-color-panel-btn-switcher ${containerBgHoverBackgroundType === item.value ? 'active' : ''}`}
+														>
+															{item.label}
+														</Button>
+													))}
+												</ButtonGroup>
+											</BaseControl>
 
-												<FB_Range
-													min={0}
-													max={200}
-													label={__("Row", "frontis-blocks")}
-													rangeValue={rowGap}
-													onChangeHandler={rowGapFn}
-													rangeUnitHandler={rowGapUnitsFn}
-													deviceType={deviceType}
-													units={rowGapUnits}
-													rangeStep={1}
-													resetFallbackValue={''}
-													units_types_arr={[
-														{ label: 'px', value: 'px' },
-														{ label: '%', value: '%' },
-														{ label: 'em', value: 'em' },
-													]}
-												/>
-											</PanelBody>
-										{/* } */}
-									</>
-								)}
-								{tab.name === "advanced" && (
-									<>
-										<div className="fb-setting-advanced-tab-wrapper">
-											<div className="fb-setting-inner-wrapper">
-												<PanelBody
-													title={__("Advanced", "frontis-blocks")}
-													initialOpen={true}
-												>
-													<FB_Range
-														min={0}
-														max={99999}
-														label={__("Z Index", "frontis-blocks")}
-														rangeValue={containerZIndex}
-														onChangeHandler={containerZindexFn}
-														deviceType={deviceType}
-														rangeStep={1}
-														resetFallbackValue={''}
-														isRangeUnit={false}
+											{containerBgHoverBackgroundType === 'classic' && (
+
+												<>
+													<FB_ColorControl
+														label={__("Color", "frontis-blocks")}
+														globalColor={containerBgHoverClassicColor} 
+														setGlobalColor={(value) => setAttributes({ containerBgHoverClassicColor: value })} 
 													/>
 
-													<SelectControl
-														label={__("Overflow", "frontis-blocks")}
-														value={containerOverflow}
-														options={OVERFLOW_OP}
-														onChange={(value) => setAttributes({ containerOverflow: value })}
-													/>
-
-                                                    <FB_PositionControl
-                                                        deviceType={deviceType}
-                                                        positionType={containerPositionType}
-                                                        setPositionType={(value) => setAttributes({ containerPositionType: value })}
-                                                                                                        
-                                                        HZOrientationType={containerHZOrientationType}
-                                                        setHZOrientationType={(value) =>
-                                                            setAttributes({ containerHZOrientationType: value })
-                                                        }
-                                                        VROrientationType={containerVROrientationType}
-                                                        setVROrientationType={(value) =>
-                                                            setAttributes({ containerVROrientationType: value })
-                                                        }
-                                                                                                            
-                                                        HZLeftOffset={containerHZLeftOffset}
-                                                        setHZLeftOffset={(value) => setAttributes({ containerHZLeftOffset: value })}
-                                                        HZLeftOffsetUnits={containerHZLeftOffsetUnits}
-                                                        setHZLeftOffsetUnits={(value) => setAttributes({ containerHZLeftOffsetUnits: value })}
-                                                        HZRightOffset={containerHZRightOffset}
-                                                        setHZRightOffset={(value) => setAttributes({ containerHZRightOffset: value })}
-                                                        HZRightOffsetUnits={containerHZRightOffsetUnits}
-                                                        setHZRightOffsetUnits={(value) => setAttributes({ containerHZRightOffsetUnits: value })}
-                                                                                                        
-                                                        VRTopOffset={containerVRTopOffset}
-                                                        setVRTopOffset={(value) => setAttributes({ containerVRTopOffset: value })}
-                                                        VRTopOffsetUnits={containerVRTopOffsetUnits}
-                                                        setVRTopOffsetUnits={(value) => setAttributes({ containerVRTopOffsetUnits: value })}
-                                                        VRBottomOffset={containerVRBottomOffset}
-                                                        setVRBottomOffset={(value) => setAttributes({ containerVRBottomOffset: value })}
-                                                        VRBottomOffsetUnits={containerVRBottomOffsetUnits}
-                                                        setVRBottomOffsetUnits={(value) => setAttributes({ containerVRBottomOffsetUnits: value })}
-
-                                                        setAttributes={setAttributes}
-                                                    />
-													<FB_InputControl
-                                                        label={__("CSS ID", "frontis-blocks")}
-                                                        value={containerGlobalCustomCSSID}
-                                                        onChangeValue={(value) => setAttributes({ containerGlobalCustomCSSID: value })}
-                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
-                                                    />
-													<FB_InputControl
-                                                        label={__("CSS Class", "frontis-blocks")}
-                                                        value={containerGlobalCustomCSSClass}
-                                                        onChangeValue={(value) => setAttributes({ containerGlobalCustomCSSClass: value })}
-                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
-                                                    />
-												</PanelBody>
-												<PanelBody
-													title={__("Padding and Margin", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<FB_Spacing
-														label={__("Margin", "frontis-blocks")}
+													<FB_ResponsiveBackgroundImageControl
 														deviceType={deviceType}
-														spacingUnitsHandler={containerMarginUnitsHandler}
-														spacingUnits={containerMarginUnits}
-														spacingDesktop={containerDesktopMargin}
-														spacingTablet={containerTabletMargin}
-														spacingMobile={containerMobileMargin}
-														handleSpacingUnitHandler={containerMarginUnitsChange}
-														spacingCombineBtn={containerMarginLink}
-														spacingCombineBtnHandler={containerMarginLinkBtn}
+														globalBackgroundImageUrl={containerBgHoverBackgroundImageUrl}
+														setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgHoverBackgroundImageUrl: value })}
+														globalBackgroundImagePosition={containerBgHoverBackgroundImagePosition}
+														setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgHoverBackgroundImagePosition: newPosition })}
+														globalBackgroundImageAttachment={containerBgHoverBackgroundImageAttachment} 
+														setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgHoverBackgroundImageAttachment: newAttachment })}
+														globalBackgroundImageRepeat={containerBgHoverBackgroundImageRepeat}
+														setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgHoverBackgroundImageRepeat: newRepeat })}
+														globalBackgroundImageSize={containerBgHoverBackgroundImageSize}
+														setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgHoverBackgroundImageSize: newSize })}
 														setAttributes={setAttributes}
 													/>
-													<FB_Spacing
-														label={__("Padding", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={containerPaddingUnitsHandler}
-														spacingUnits={containerPaddingUnits}
-														spacingDesktop={containerDesktopPadding}
-														spacingTablet={containerTabletPadding}
-														spacingMobile={containerMobilePadding}
-														handleSpacingUnitHandler={containerPaddingUnitsChange}
-														spacingCombineBtn={containerPaddingLink}
-														spacingCombineBtnHandler={containerPaddingLinkBtn}
-														setAttributes={setAttributes}
-													/>
-												</PanelBody>
+															
+												</>
+											)}
 
-												<PanelBody
-													title={__("Border and Shadow", "frontis-blocks")}
-													initialOpen={false}
+											{containerBgHoverBackgroundType === 'gradient' && (
+												<FB_GradientColorControl
+													globalCustomGradientSwitcher={containerBgHoverCustomGradientSwitcher}
+													setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgHoverCustomGradientSwitcher: value })}
+													globalCustomGradientInputValue={containerBgHoverCustomGradientInputValue}
+													setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgHoverCustomGradientInputValue: value })}
+													globalGradientColor={containerBgHoverGradientColor}
+													setGlobalGradientColor={(value) => setAttributes({ containerBgHoverGradientColor: value })}
+												/>
+											)}
+										</div>
+									)}
+								/>
+							</BaseControl>
+						)}
+
+						<ToggleControl
+							label={__("Enable Overlay", "frontis-blocks")}
+							checked={containerBgOverlaySwitcher}
+							onChange={(value) => setAttributes({ containerBgOverlaySwitcher: value })}
+						/>
+
+						{containerBgOverlaySwitcher && (
+							<>
+								<FB_Range
+									min={0}
+									max={1}
+									label={__("Overlay Opacity", "frontis-blocks")}
+									rangeValue={containerBgOverlayOpacity}
+									onChangeHandler={(value) => setAttributes({ containerBgOverlayOpacity: value === 0 ? undefined : value })}
+									deviceType={deviceType}
+									setAttributes={setAttributes}
+									rangeStep={0.1}
+									resetFallbackValue={""}
+									isRangeUnit={false}
+								/>
+
+								<FB_SwitcherControl
+									label={__("Overlay Type", "frontis-blocks")}
+									globalSwitcher={containerBgOverlayColorSwitcher}
+									setGlobalSwitcher={(value) => setAttributes({ containerBgOverlayColorSwitcher: value })}
+								/>
+
+								{containerBgOverlayColorSwitcher === 'normal' && (
+									<BaseControl
+										className="fb-setting-background-color-setting-wrapper"
+										label={__("Normal Overlay Type", "frontis-blocks")}
+									>
+										<Dropdown
+											className="fb-setting-background-color-setting-icon-dropdown"
+											contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
+											popoverProps={{ placement: 'bottom-start' }}
+											renderToggle={({ isOpen, onToggle }) => (
+												<Button
+													variant="primary"
+													onClick={onToggle}
+													aria-expanded={isOpen}
+													className="fb-setting-background-color-setting-icon-btn"
 												>
-													<SelectControl
-                                                        label={__("Border Style", "frontis-blocks")}
-                                                        value={containerBorder}
-                                                        options={BORDER_STYLES}
-                                                        onChange={(value) => setAttributes({ containerBorder: value })}
-                                                    />
-        
-                                                    <FB_SwitcherControl
-                                                        label={__("Border Color", "frontis-blocks")}
-                                                        globalSwitcher={containerBorderColorSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ containerBorderColorSwitcher: value })}
-                                                    />
-                                                    
-                                                    {containerBorderColorSwitcher === 'normal' && (
-                                                        <FB_ColorControl
-                                                            label={__("Normal Color", "frontis-blocks")}
-                                                            globalColor={containerBorderColor}
-                                                            setGlobalColor={(value) => setAttributes({ containerBorderColor: value })}
-                                                        />
-                                                    )}
-                                                    
-                                                    {containerBorderColorSwitcher === 'hover' && (
-                                                        <FB_ColorControl
-                                                            label={__("Hover Color", "frontis-blocks")}
-                                                            globalColor={containerBorderHoverColor}
-                                                            setGlobalColor={(value) => setAttributes({ containerBorderHoverColor: value })}
-                                                        />
-                                                    )}
-        
-                                                    <FB_Spacing
-                                                        label={__("Border", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleContainerBorderUnitsHandler}
-                                                        spacingUnits={containerBorderUnits}
-                                                        spacingDesktop={containerDesktopBorderWidth}
-                                                        spacingTablet={containerTabBorderWidth}
-                                                        spacingMobile={containerMobileBorderWidth}
-                                                        handleSpacingUnitHandler={handleContainerBorderUnitChange}
-                                                        spacingCombineBtn={containerBorderLink}
-                                                        spacingCombineBtnHandler={handleContainerBorderCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
-        
-                                                    <FB_Spacing 
-                                                        label={__("Border Radius", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleContainerBorderRadiusUnitsHandler}
-                                                        spacingUnits={containerBorderRadiusUnits}
-                                                        spacingDesktop={containerDesktopBorderRadiusWidth}
-                                                        spacingTablet={containerTabBorderRadiusWidth}
-                                                        spacingMobile={containerMobileBorderRadiusWidth}
-                                                        handleSpacingUnitHandler={handleContainerBorderRadiusUnitChange}
-                                                        spacingCombineBtn={containerBorderRadiusLink}
-                                                        spacingCombineBtnHandler={handleContainerBorderRadiusCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+														<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
+														<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
+													</svg>
+												</Button>
+											)}
+											renderContent={() => (
+												<div className="fb-setting-background-color-popup-wrapper">
+													<BaseControl
+														className="fb-setting-background-color-popup-inner-wrapper"
+													>
+														<ButtonGroup className="fb-setting-background-color-panel-btn">
+															{BACKGROUND_TYPES.map((item) => (
+																<Button
+																	key={item.value}
+																	onClick={() => setAttributes({ containerBgOverlayNormalBackgroundType: item.value })}
+																	className={`fb-setting-background-color-panel-btn-switcher ${containerBgOverlayNormalBackgroundType === item.value ? 'active' : ''}`}
+																>
+																	{item.label}
+																</Button>
+															))}
+														</ButtonGroup>
+													</BaseControl>
 
-                                                    <FB_SwitcherControl
-                                                        label={__("Box Shadow", "frontis-blocks")}
-                                                        globalSwitcher={containerGlobalBoxShadowSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ containerGlobalBoxShadowSwitcher: value })}
-                                                    />
-                                                    
-                                                    {containerGlobalBoxShadowSwitcher === 'normal' && (
-                                                        <FB_BoxShadowControl
-                                                            label={__("Normal Shadow", "frontis-blocks")}
-                                                            onBoxShadowChange={(value) =>
-                                                                setAttributes({ containerGlobalBoxShadowValues: value })
-                                                            }
-                                                            initialShadowValue={containerGlobalBoxShadowValues}
-                                                            onBoxShadowStyleChange={(value) =>
-                                                                setAttributes({
-                                                                    containerGlobalBoxShadowCssValue: value,
-                                                                })
-                                                            }
-                                                        />
-                                                    )}
-                                                    
-                                                    {containerGlobalBoxShadowSwitcher === 'hover' && (
-                                                        <FB_BoxShadowControl
-                                                            label={__("Hover Shadow", "frontis-blocks")}
-                                                            onBoxShadowChange={(value) =>
-                                                                setAttributes({ containerGlobalHoverBoxShadowValues: value })
-                                                            }
-                                                            initialShadowValue={containerGlobalHoverBoxShadowValues}
-                                                            onBoxShadowStyleChange={(value) =>
-                                                                setAttributes({
-                                                                    containerGlobalHoverBoxShadowCssValue: value,
-                                                                })
-                                                            }
-                                                        />
-													)}
-												</PanelBody>
+													{containerBgOverlayNormalBackgroundType === 'classic' && (
 
-												<PanelBody
-													title={__("Background", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<FB_SwitcherControl
-														label={__("Background Type", "frontis-blocks")}
-														globalSwitcher={containerBgColorSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ containerBgColorSwitcher: value })}
-													/>
-
-													{containerBgColorSwitcher === 'normal' && (
-														<BaseControl
-															className="fb-setting-background-color-setting-wrapper"
-															label={__("Normal Background Type", "frontis-blocks")}
-														>
-															<Dropdown
-																className="fb-setting-background-color-setting-icon-dropdown"
-																contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
-																popoverProps={{ placement: 'bottom-start' }}
-																renderToggle={({ isOpen, onToggle }) => (
-																	<Button
-																		variant="primary"
-																		onClick={onToggle}
-																		aria-expanded={isOpen}
-																		className="fb-setting-background-color-setting-icon-btn"
-																	>
-																		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-																			<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
-																			<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
-																		</svg>
-																	</Button>
-																)}
-																renderContent={() => (
-																	<div className="fb-setting-background-color-popup-wrapper">
-																		<BaseControl
-																			className="fb-setting-background-color-popup-inner-wrapper"
-																		>
-																			<ButtonGroup className="fb-setting-background-color-panel-btn">
-																				{BACKGROUND_TYPES.map((item) => (
-																					<Button
-																						key={item.value}
-																						onClick={() => setAttributes({ containerBgNormalBackgroundType: item.value })}
-																						className={`fb-setting-background-color-panel-btn-switcher ${containerBgNormalBackgroundType === item.value ? 'active' : ''}`}
-																					>
-																						{item.label}
-																					</Button>
-																				))}
-																			</ButtonGroup>
-																		</BaseControl>
-
-																		{containerBgNormalBackgroundType === 'classic' && (
-
-																			<>
-																				<FB_ColorControl
-																					label={__("Color", "frontis-blocks")}
-																					globalColor={containerBgNormalClassicColor} 
-																					setGlobalColor={(value) => setAttributes({ containerBgNormalClassicColor: value })} 
-																				/>
-
-																				<FB_ResponsiveBackgroundImageControl
-																					deviceType={deviceType}
-																					globalBackgroundImageUrl={containerBgNormalBackgroundImageUrl}
-																					setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgNormalBackgroundImageUrl: value })}
-																					globalBackgroundImagePosition={containerBgNormalBackgroundImagePosition}
-																					setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgNormalBackgroundImagePosition: newPosition })}
-																					globalBackgroundImageAttachment={containerBgNormalBackgroundImageAttachment}
-																					setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgNormalBackgroundImageAttachment: newAttachment })}
-																					globalBackgroundImageRepeat={containerBgNormalBackgroundImageRepeat}
-																					setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgNormalBackgroundImageRepeat: newRepeat })}
-																					globalBackgroundImageSize={containerBgNormalBackgroundImageSize} 
-																					setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgNormalBackgroundImageSize: newSize })}
-																					setAttributes={setAttributes}
-																				/>
-																						
-																			</>
-																		)}
-
-																		{containerBgNormalBackgroundType === 'gradient' && (
-																			<FB_GradientColorControl
-																				globalCustomGradientSwitcher={containerBgNormalCustomGradientSwitcher}
-																				setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgNormalCustomGradientSwitcher: value })}
-																				globalCustomGradientInputValue={containerBgNormalCustomGradientInputValue}
-																				setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgNormalCustomGradientInputValue: value })}
-																				globalGradientColor={containerBgNormalGradientColor}
-																				setGlobalGradientColor={(value) => setAttributes({ containerBgNormalGradientColor: value })}
-																			/>
-																		)}
-																	</div>
-																)}
-															/>
-														</BaseControl>
-														
-													)}
-
-													{containerBgColorSwitcher === 'hover' && (
-														<BaseControl
-															className="fb-setting-background-color-setting-wrapper"
-															label={__("Hover Background Type", "frontis-blocks")} 
-														>
-															<Dropdown
-																className="fb-setting-background-color-setting-icon-dropdown"
-																contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
-																popoverProps={{ placement: 'bottom-start' }}
-																renderToggle={({ isOpen, onToggle }) => (
-																	<Button
-																		variant="primary"
-																		onClick={onToggle}
-																		aria-expanded={isOpen}
-																		className="fb-setting-background-color-setting-icon-btn"
-																	>
-																		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-																			<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
-																			<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
-																		</svg>
-																	</Button>
-																)}
-																renderContent={() => (
-																	<div className="fb-setting-background-color-popup-wrapper">
-																		<BaseControl
-																			className="fb-setting-background-color-popup-inner-wrapper"
-																		>
-																			<ButtonGroup className="fb-setting-background-color-panel-btn">
-																				{BACKGROUND_TYPES.map((item) => (
-																					<Button
-																						key={item.value}
-																						onClick={() => setAttributes({ containerBgHoverBackgroundType: item.value })}
-																						className={`fb-setting-background-color-panel-btn-switcher ${containerBgHoverBackgroundType === item.value ? 'active' : ''}`}
-																					>
-																						{item.label}
-																					</Button>
-																				))}
-																			</ButtonGroup>
-																		</BaseControl>
-
-																		{containerBgHoverBackgroundType === 'classic' && (
-
-																			<>
-																				<FB_ColorControl
-																					label={__("Color", "frontis-blocks")}
-																					globalColor={containerBgHoverClassicColor} 
-																					setGlobalColor={(value) => setAttributes({ containerBgHoverClassicColor: value })} 
-																				/>
-
-																				<FB_ResponsiveBackgroundImageControl
-																					deviceType={deviceType}
-																					globalBackgroundImageUrl={containerBgHoverBackgroundImageUrl}
-																					setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgHoverBackgroundImageUrl: value })}
-																					globalBackgroundImagePosition={containerBgHoverBackgroundImagePosition}
-																					setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgHoverBackgroundImagePosition: newPosition })}
-																					globalBackgroundImageAttachment={containerBgHoverBackgroundImageAttachment} 
-																					setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgHoverBackgroundImageAttachment: newAttachment })}
-																					globalBackgroundImageRepeat={containerBgHoverBackgroundImageRepeat}
-																					setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgHoverBackgroundImageRepeat: newRepeat })}
-																					globalBackgroundImageSize={containerBgHoverBackgroundImageSize}
-																					setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgHoverBackgroundImageSize: newSize })}
-																					setAttributes={setAttributes}
-																				/>
-																						
-																			</>
-																		)}
-
-																		{containerBgHoverBackgroundType === 'gradient' && (
-																			<FB_GradientColorControl
-																				globalCustomGradientSwitcher={containerBgHoverCustomGradientSwitcher}
-																				setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgHoverCustomGradientSwitcher: value })}
-																				globalCustomGradientInputValue={containerBgHoverCustomGradientInputValue}
-																				setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgHoverCustomGradientInputValue: value })}
-																				globalGradientColor={containerBgHoverGradientColor}
-																				setGlobalGradientColor={(value) => setAttributes({ containerBgHoverGradientColor: value })}
-																			/>
-																		)}
-																	</div>
-																)}
-															/>
-														</BaseControl>
-													)}
-
-													<ToggleControl
-														label={__("Enable Overlay", "frontis-blocks")}
-														checked={containerBgOverlaySwitcher}
-														onChange={(value) => setAttributes({ containerBgOverlaySwitcher: value })}
-													/>
-
-													{containerBgOverlaySwitcher && (
 														<>
-															<FB_Range
-																min={0}
-																max={1}
-																label={__("Overlay Opacity", "frontis-blocks")}
-																rangeValue={containerBgOverlayOpacity}
-																onChangeHandler={(value) => setAttributes({ containerBgOverlayOpacity: value === 0 ? undefined : value })}
+															<FB_ColorControl
+																label={__("Color", "frontis-blocks")}
+																globalColor={containerBgOverlayNormalClassicColor} 
+																setGlobalColor={(value) => setAttributes({ containerBgOverlayNormalClassicColor: value })} 
+															/>
+
+															<FB_ResponsiveBackgroundImageControl
 																deviceType={deviceType}
+																globalBackgroundImageUrl={containerBgOverlayNormalBackgroundImageUrl}
+																setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgOverlayNormalBackgroundImageUrl: value })}
+																globalBackgroundImagePosition={containerBgOverlayNormalBackgroundImagePosition}
+																setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgOverlayNormalBackgroundImagePosition: newPosition })}
+																globalBackgroundImageAttachment={containerBgOverlayNormalBackgroundImageAttachment}
+																setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgOverlayNormalBackgroundImageAttachment: newAttachment })}
+																globalBackgroundImageRepeat={containerBgOverlayNormalBackgroundImageRepeat}
+																setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgOverlayNormalBackgroundImageRepeat: newRepeat })}
+																globalBackgroundImageSize={containerBgOverlayNormalBackgroundImageSize} 
+																setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgOverlayNormalBackgroundImageSize: newSize })}
 																setAttributes={setAttributes}
-																rangeStep={0.1}
-																resetFallbackValue={""}
-																isRangeUnit={false}
 															/>
-
-															<FB_SwitcherControl
-																label={__("Overlay Type", "frontis-blocks")}
-																globalSwitcher={containerBgOverlayColorSwitcher}
-																setGlobalSwitcher={(value) => setAttributes({ containerBgOverlayColorSwitcher: value })}
-															/>
-
-															{containerBgOverlayColorSwitcher === 'normal' && (
-																<BaseControl
-																	className="fb-setting-background-color-setting-wrapper"
-																	label={__("Normal Overlay Type", "frontis-blocks")}
-																>
-																	<Dropdown
-																		className="fb-setting-background-color-setting-icon-dropdown"
-																		contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
-																		popoverProps={{ placement: 'bottom-start' }}
-																		renderToggle={({ isOpen, onToggle }) => (
-																			<Button
-																				variant="primary"
-																				onClick={onToggle}
-																				aria-expanded={isOpen}
-																				className="fb-setting-background-color-setting-icon-btn"
-																			>
-																				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-																					<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
-																					<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
-																				</svg>
-																			</Button>
-																		)}
-																		renderContent={() => (
-																			<div className="fb-setting-background-color-popup-wrapper">
-																				<BaseControl
-																					className="fb-setting-background-color-popup-inner-wrapper"
-																				>
-																					<ButtonGroup className="fb-setting-background-color-panel-btn">
-																						{BACKGROUND_TYPES.map((item) => (
-																							<Button
-																								key={item.value}
-																								onClick={() => setAttributes({ containerBgOverlayNormalBackgroundType: item.value })}
-																								className={`fb-setting-background-color-panel-btn-switcher ${containerBgOverlayNormalBackgroundType === item.value ? 'active' : ''}`}
-																							>
-																								{item.label}
-																							</Button>
-																						))}
-																					</ButtonGroup>
-																				</BaseControl>
-
-																				{containerBgOverlayNormalBackgroundType === 'classic' && (
-
-																					<>
-																						<FB_ColorControl
-																							label={__("Color", "frontis-blocks")}
-																							globalColor={containerBgOverlayNormalClassicColor} 
-																							setGlobalColor={(value) => setAttributes({ containerBgOverlayNormalClassicColor: value })} 
-																						/>
-
-																						<FB_ResponsiveBackgroundImageControl
-																							deviceType={deviceType}
-																							globalBackgroundImageUrl={containerBgOverlayNormalBackgroundImageUrl}
-																							setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgOverlayNormalBackgroundImageUrl: value })}
-																							globalBackgroundImagePosition={containerBgOverlayNormalBackgroundImagePosition}
-																							setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgOverlayNormalBackgroundImagePosition: newPosition })}
-																							globalBackgroundImageAttachment={containerBgOverlayNormalBackgroundImageAttachment}
-																							setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgOverlayNormalBackgroundImageAttachment: newAttachment })}
-																							globalBackgroundImageRepeat={containerBgOverlayNormalBackgroundImageRepeat}
-																							setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgOverlayNormalBackgroundImageRepeat: newRepeat })}
-																							globalBackgroundImageSize={containerBgOverlayNormalBackgroundImageSize} 
-																							setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgOverlayNormalBackgroundImageSize: newSize })}
-																							setAttributes={setAttributes}
-																						/>
-																								
-																					</>
-																				)}
-
-																				{containerBgOverlayNormalBackgroundType === 'gradient' && ( 
-																					<FB_GradientColorControl
-																						globalCustomGradientSwitcher={containerBgOverlayNormalCustomGradientSwitcher}
-																						setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgOverlayNormalCustomGradientSwitcher: value })}
-																						globalCustomGradientInputValue={containerBgOverlayNormalCustomGradientInputValue}
-																						setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgOverlayNormalCustomGradientInputValue: value })}
-																						globalGradientColor={containerBgOverlayNormalGradientColor}
-																						setGlobalGradientColor={(value) => setAttributes({ containerBgOverlayNormalGradientColor: value })}
-																					/>
-																				)}
-																			</div>
-																		)}
-																	/>
-																</BaseControl>
-																
-															)}
-
-															{containerBgOverlayColorSwitcher === 'hover' && (
-																<BaseControl
-																	className="fb-setting-background-color-setting-wrapper"
-																	label={__("Hover Overlay Type", "frontis-blocks")} 
-																>
-																	<Dropdown
-																		className="fb-setting-background-color-setting-icon-dropdown"
-																		contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
-																		popoverProps={{ placement: 'bottom-start' }}
-																		renderToggle={({ isOpen, onToggle }) => (
-																			<Button
-																				variant="primary"
-																				onClick={onToggle}
-																				aria-expanded={isOpen}
-																				className="fb-setting-background-color-setting-icon-btn"
-																			>
-																				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-																					<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
-																					<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
-																				</svg>
-																			</Button>
-																		)}
-																		renderContent={() => (
-																			<div className="fb-setting-background-color-popup-wrapper">
-																				<BaseControl
-																					className="fb-setting-background-color-popup-inner-wrapper"
-																				>
-																					<ButtonGroup className="fb-setting-background-color-panel-btn">
-																						{BACKGROUND_TYPES.map((item) => (
-																							<Button
-																								key={item.value}
-																								onClick={() => setAttributes({ containerBgOverlayHoverBackgroundType: item.value })} 
-																								className={`fb-setting-background-color-panel-btn-switcher ${containerBgOverlayHoverBackgroundType === item.value ? 'active' : ''}`}
-																							>
-																								{item.label}
-																							</Button>
-																						))}
-																					</ButtonGroup>
-																				</BaseControl>
-
-																				{containerBgOverlayHoverBackgroundType === 'classic' && (
-
-																					<>
-																						<FB_ColorControl
-																							label={__("Color", "frontis-blocks")}
-																							globalColor={containerBgOverlayHoverClassicColor} 
-																							setGlobalColor={(value) => setAttributes({ containerBgOverlayHoverClassicColor: value })} 
-																						/>
-
-																						<FB_ResponsiveBackgroundImageControl
-																							deviceType={deviceType}
-																							globalBackgroundImageUrl={containerBgOverlayHoverBackgroundImageUrl}
-																							setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgOverlayHoverBackgroundImageUrl: value })}
-																							globalBackgroundImagePosition={containerBgOverlayHoverBackgroundImagePosition}
-																							setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgOverlayHoverBackgroundImagePosition: newPosition })}
-																							globalBackgroundImageAttachment={containerBgOverlayHoverBackgroundImageAttachment} 
-																							setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgOverlayHoverBackgroundImageAttachment: newAttachment })}
-																							globalBackgroundImageRepeat={containerBgOverlayHoverBackgroundImageRepeat}
-																							setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgOverlayHoverBackgroundImageRepeat: newRepeat })}
-																							globalBackgroundImageSize={containerBgOverlayHoverBackgroundImageSize}
-																							setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgOverlayHoverBackgroundImageSize: newSize })}
-																							setAttributes={setAttributes}
-																						/>
-																								
-																					</>
-																				)}
-
-																				{containerBgOverlayHoverBackgroundType === 'gradient' && (
-																					<FB_GradientColorControl
-																						globalCustomGradientSwitcher={containerBgOverlayHoverCustomGradientSwitcher}
-																						setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgOverlayHoverCustomGradientSwitcher: value })}
-																						globalCustomGradientInputValue={containerBgOverlayHoverCustomGradientInputValue}
-																						setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgOverlayHoverCustomGradientInputValue: value })}
-																						globalGradientColor={containerBgOverlayHoverGradientColor}
-																						setGlobalGradientColor={(value) => setAttributes({ containerBgOverlayHoverGradientColor: value })}
-																					/>
-																				)}
-																			</div>
-																		)}
-																	/>
-																</BaseControl>
-															)}
+																	
 														</>
 													)}
-												</PanelBody>
 
-												<PanelBody
-                                                    title={__("Responsive Control", "frontis-blocks")}
-                                                    initialOpen={false}
-                                                    className="fb-setting-responsive-control-wrapper"
-                                                >
-                                                    <FB_VisibilityControl
-                                                        desktopValue={containerDesktopSwitcher}
-                                                        setDesktopValue={(value) => setAttributes({ containerDesktopSwitcher: value })}
-
-                                                        tabletValue={containerTabletSwitcher}
-                                                        setTabletValue={(value) => setAttributes({ containerTabletSwitcher: value })}
-
-                                                        mobileValue={containerMobileSwitcher}
-                                                        setMobileValue={(value) => setAttributes({ containerMobileSwitcher: value })}
-                                                    />
-                                                </PanelBody>
-
-												<PanelBody
-													title={__("Custom CSS", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<FB_CustomCSSEditor
-														value={containerGlobalCustomCSS}
-														onChangeValue={(value) => setAttributes({ containerGlobalCustomCSS: value })}
-													/>
-												</PanelBody>
-											</div>
-										</div>
-									</>
+													{containerBgOverlayNormalBackgroundType === 'gradient' && ( 
+														<FB_GradientColorControl
+															globalCustomGradientSwitcher={containerBgOverlayNormalCustomGradientSwitcher}
+															setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgOverlayNormalCustomGradientSwitcher: value })}
+															globalCustomGradientInputValue={containerBgOverlayNormalCustomGradientInputValue}
+															setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgOverlayNormalCustomGradientInputValue: value })}
+															globalGradientColor={containerBgOverlayNormalGradientColor}
+															setGlobalGradientColor={(value) => setAttributes({ containerBgOverlayNormalGradientColor: value })}
+														/>
+													)}
+												</div>
+											)}
+										/>
+									</BaseControl>
+									
 								)}
-							</div>
+
+								{containerBgOverlayColorSwitcher === 'hover' && (
+									<BaseControl
+										className="fb-setting-background-color-setting-wrapper"
+										label={__("Hover Overlay Type", "frontis-blocks")} 
+									>
+										<Dropdown
+											className="fb-setting-background-color-setting-icon-dropdown"
+											contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
+											popoverProps={{ placement: 'bottom-start' }}
+											renderToggle={({ isOpen, onToggle }) => (
+												<Button
+													variant="primary"
+													onClick={onToggle}
+													aria-expanded={isOpen}
+													className="fb-setting-background-color-setting-icon-btn"
+												>
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+														<path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
+														<path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
+													</svg>
+												</Button>
+											)}
+											renderContent={() => (
+												<div className="fb-setting-background-color-popup-wrapper">
+													<BaseControl
+														className="fb-setting-background-color-popup-inner-wrapper"
+													>
+														<ButtonGroup className="fb-setting-background-color-panel-btn">
+															{BACKGROUND_TYPES.map((item) => (
+																<Button
+																	key={item.value}
+																	onClick={() => setAttributes({ containerBgOverlayHoverBackgroundType: item.value })} 
+																	className={`fb-setting-background-color-panel-btn-switcher ${containerBgOverlayHoverBackgroundType === item.value ? 'active' : ''}`}
+																>
+																	{item.label}
+																</Button>
+															))}
+														</ButtonGroup>
+													</BaseControl>
+
+													{containerBgOverlayHoverBackgroundType === 'classic' && (
+
+														<>
+															<FB_ColorControl
+																label={__("Color", "frontis-blocks")}
+																globalColor={containerBgOverlayHoverClassicColor} 
+																setGlobalColor={(value) => setAttributes({ containerBgOverlayHoverClassicColor: value })} 
+															/>
+
+															<FB_ResponsiveBackgroundImageControl
+																deviceType={deviceType}
+																globalBackgroundImageUrl={containerBgOverlayHoverBackgroundImageUrl}
+																setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgOverlayHoverBackgroundImageUrl: value })}
+																globalBackgroundImagePosition={containerBgOverlayHoverBackgroundImagePosition}
+																setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgOverlayHoverBackgroundImagePosition: newPosition })}
+																globalBackgroundImageAttachment={containerBgOverlayHoverBackgroundImageAttachment} 
+																setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgOverlayHoverBackgroundImageAttachment: newAttachment })}
+																globalBackgroundImageRepeat={containerBgOverlayHoverBackgroundImageRepeat}
+																setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgOverlayHoverBackgroundImageRepeat: newRepeat })}
+																globalBackgroundImageSize={containerBgOverlayHoverBackgroundImageSize}
+																setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgOverlayHoverBackgroundImageSize: newSize })}
+																setAttributes={setAttributes}
+															/>
+																	
+														</>
+													)}
+
+													{containerBgOverlayHoverBackgroundType === 'gradient' && (
+														<FB_GradientColorControl
+															globalCustomGradientSwitcher={containerBgOverlayHoverCustomGradientSwitcher}
+															setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgOverlayHoverCustomGradientSwitcher: value })}
+															globalCustomGradientInputValue={containerBgOverlayHoverCustomGradientInputValue}
+															setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgOverlayHoverCustomGradientInputValue: value })}
+															globalGradientColor={containerBgOverlayHoverGradientColor}
+															setGlobalGradientColor={(value) => setAttributes({ containerBgOverlayHoverGradientColor: value })}
+														/>
+													)}
+												</div>
+											)}
+										/>
+									</BaseControl>
+								)}
+							</>
 						)}
-					</TabPanel>
+					</PanelBody>
+
+					<PanelBody
+						title={__("Responsive Control", "frontis-blocks")}
+						initialOpen={false}
+						className="fb-setting-responsive-control-wrapper"
+					>
+						<FB_VisibilityControl
+							desktopValue={containerDesktopSwitcher}
+							setDesktopValue={(value) => setAttributes({ containerDesktopSwitcher: value })}
+
+							tabletValue={containerTabletSwitcher}
+							setTabletValue={(value) => setAttributes({ containerTabletSwitcher: value })}
+
+							mobileValue={containerMobileSwitcher}
+							setMobileValue={(value) => setAttributes({ containerMobileSwitcher: value })}
+						/>
+					</PanelBody>
+
+					<PanelBody
+						title={__("Custom CSS", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_CustomCSSEditor
+							value={containerGlobalCustomCSS}
+							onChangeValue={(value) => setAttributes({ containerGlobalCustomCSS: value })}
+						/>
+					</PanelBody>
 				</div>
-			</InspectorControls>
+			</div>
+		</>
+	);
+
+	return (
+		<>
+			<FB_InspectorControls
+				generalControls={generalControls}
+				styleControls={styleControls}
+				advancedControls={advancedControls}
+			/>
 		</>
 	);
 };
