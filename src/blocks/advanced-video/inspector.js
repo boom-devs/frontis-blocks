@@ -30,6 +30,7 @@ import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_ScaleControl from '@Components/scale-control';
+import FB_InspectorControls from '@Components/InspectorControls';
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -793,7 +794,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const BorderMobileWidth = `${videoGlobalBorderMobile.top}${videoGlobalBorderUnits.Mobile} ${videoGlobalBorderMobile.right}${videoGlobalBorderUnits.Mobile} ${videoGlobalBorderMobile.bottom}${videoGlobalBorderUnits.Mobile} ${videoGlobalBorderMobile.left}${videoGlobalBorderUnits.Mobile}`;
     /** End Border */
 
-
     /** Start Global border radius*/
     const handleGlobalBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
@@ -869,8 +869,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const BorderRadiusTabletWidth = `${videoGlobalBorderRadiusTablet.top}${videoGlobalBorderRadiusUnits.Tablet} ${videoGlobalBorderRadiusTablet.right}${videoGlobalBorderRadiusUnits.Tablet} ${videoGlobalBorderRadiusTablet.bottom}${videoGlobalBorderRadiusUnits.Tablet} ${videoGlobalBorderRadiusTablet.left}${videoGlobalBorderRadiusUnits.Tablet}`;
     const BorderRadiusMobileWidth = `${videoGlobalBorderRadiusMobile.top}${videoGlobalBorderRadiusUnits.Mobile} ${videoGlobalBorderRadiusMobile.right}${videoGlobalBorderRadiusUnits.Mobile} ${videoGlobalBorderRadiusMobile.bottom}${videoGlobalBorderRadiusUnits.Mobile} ${videoGlobalBorderRadiusMobile.left}${videoGlobalBorderRadiusUnits.Mobile}`;
     /** End Border Radius */
-
-
 
     const allBlockStyle = useMemo(() => `
         .${blockID}.fb-advanced-video-main-wrapper {
@@ -1342,616 +1340,602 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
+
+    /**
+	 * Inspector General Controls
+	 */
+	const generalControls = (
+        <>
+            <PanelBody title={__("General Info", "frontis-blocks")} initialOpen={true}>
+                <TextareaControl
+                    label={__("Video URL", "frontis-blocks")}
+                    value={videoURL}
+                    onChange={(videoURL) => setAttributes({ videoURL })}
+                />
+
+                <BaseControl 
+                    label={__("Video Options", "frontis-blocks")}
+                    className="fb-video-options-setting"
+                >
+                    <ToggleControl
+                        label={__("Autoplay", "frontis-blocks")}
+                        checked={autoPlaySwitcher}
+                        onChange={(value) => {
+                            setAttributes({ autoPlaySwitcher: value });
+                            setAttributes({ muteSwitcher: value ? true : muteSwitcher });
+                        }}
+                    />
+                    <ToggleControl
+                        label={__("Mute", "frontis-blocks")}
+                        checked={muteSwitcher}
+                        onChange={(value) => setAttributes({ muteSwitcher: value })}
+                    />
+                    <ToggleControl
+                        label={__("Loop", "frontis-blocks")}
+                        checked={loopSwitcher}
+                        onChange={(value) => setAttributes({ loopSwitcher: value })}
+                    />
+                    <ToggleControl
+                        label={__("Show Controls", "frontis-blocks")}
+                        checked={showControlsSwitcher}
+                        onChange={(value) => setAttributes({ showControlsSwitcher: value })}
+                    />
+                </BaseControl>
+
+                <ToggleControl
+                    label={__("Image Overlay", "frontis-blocks")}
+                    checked={imageOverlaySwitcher}
+                    onChange={(value) => setAttributes({ imageOverlaySwitcher: value })}
+                />
+
+                {imageOverlaySwitcher && (
+                    <>
+                    <FB_BackgroundImageControl 
+                        globalBackgroundImageUrl={previewImageUrl}
+                        setGlobalBackgroundImageUrl={(value) => setAttributes({ previewImageUrl: value })}
+                        globalBackgroundImageAlt={previewImageAlt}
+                        setGlobalBackgroundImageAlt={(value) => setAttributes({ previewImageAlt: value })}
+                        globalBackgroundImageID={previewImageID}
+                        setGlobalBackgroundImageID={(value) => setAttributes({ previewImageID: value })}
+                        globalBackgroundImagePosition={previewImagePosition}
+                        setGlobalBackgroundImagePosition={(value) => setAttributes({ previewImagePosition: value })}
+                        globalBackgroundImageAttachment={previewImageAttachment} 
+                        setGlobalBackgroundImageAttachment={(value) => setAttributes({ previewImageAttachment: value })}
+                        globalBackgroundImageRepeat={previewImageRepeat}
+                        setGlobalBackgroundImageRepeat={(value) => setAttributes({ previewImageRepeat: value })}
+                        globalBackgroundImageSize={previewImageSize}
+                        setGlobalBackgroundImageSize={(value) => setAttributes({ previewImageSize: value })}
+                    />
+
+                    <ToggleControl
+                        label={__("Play Icon", "frontis-blocks")}
+                        checked={videoPlayIconSwitcher}
+                        onChange={(value) => setAttributes({ videoPlayIconSwitcher: value })}
+                    />
+
+                    {previewImageUrl && videoPlayIconSwitcher && (
+                        <FBIconPicker value={videoPlayIcon} setIconHandler={(value) => setAttributes({ videoPlayIcon: value })} />
+                    )}
+                    </>
+                )}
+
+            </PanelBody>
+
+        </>
+	);
+
+	/**
+	 * Inspector Style Controls
+	 */
+	const styleControls = (
+        <>
+            <PanelBody title={__("Border", "frontis-blocks")} initialOpen={true}>
+
+                <FB_Range
+                    min={0}
+                    max={100}
+                    label={__("Width", "frontis-blocks")}
+                    rangeValue={videoWidth}
+                    onChangeHandler={(value) => setAttributes({ videoWidth: value })}
+                    rangeUnitHandler={(value) => setAttributes({ videoWidthUnits: value })}
+                    deviceType={deviceType}
+                    units={videoWidthUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+
+                <SelectControl
+                        label={__("Border Style", "frontis-blocks")}
+                        value={videoBorder}
+                        options={BORDER_STYLES}
+                        onChange={(value) => setAttributes({ videoBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={videoBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ videoBorderColorSwitcher: value })}
+                />
+
+                {videoBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={videoBorderColor}
+                        setGlobalColor={(value) => setAttributes({ videoBorderColor: value })}
+                    />
+                )}
+
+                {videoBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={videoBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ videoBorderHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing 
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleIframeBorderUnitsHandler}
+                    spacingUnits={videoBorderUnits}
+                    spacingDesktop={videoBorderDesktop}
+                    spacingTablet={videoBorderTablet}
+                    spacingMobile={videoBorderMobile}
+                    handleSpacingUnitHandler={handleIframeBorderUnitChange}
+                    spacingCombineBtn={videoBorderLink}
+                    spacingCombineBtnHandler={handleIframeBorderCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing 
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleIframeBorderRadiusUnitsHandler}
+                    spacingUnits={videoBorderRadiusUnits}
+                    spacingDesktop={videoBorderRadiusDesktop}
+                    spacingTablet={videoBorderRadiusTablet}
+                    spacingMobile={videoBorderRadiusMobile}
+                    handleSpacingUnitHandler={handleIframeBorderRadiusUnitChange}
+                    spacingCombineBtn={videoBorderRadiusLink}
+                    spacingCombineBtnHandler={handleIframeBorderRadiusCombineBtn}
+                    setAttributes={setAttributes}
+                />
+            </PanelBody>
+            <PanelBody title={__("Play Icon", "frontis-blocks")} initialOpen={false}>
+                <FB_Range
+                    min={1}
+                    max={100}
+                    label={__("Icon Size", "frontis-blocks")}
+                    rangeValue={videoPlayIconSize}
+                    onChangeHandler={(value) => setAttributes({ videoPlayIconSize: value })}
+                    rangeUnitHandler={(value) => setAttributes({ videoPlayIconSizeUnits: value })}
+                    deviceType={deviceType}
+                    units={videoPlayIconSizeUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={64}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Icon Color", "frontis-blocks")}
+                    globalSwitcher={videoPlayIconColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ videoPlayIconColorSwitcher: value })}
+                />
+
+                {videoPlayIconColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={videoPlayIconColor}
+                        setGlobalColor={(value) => setAttributes({ videoPlayIconColor: value })}
+                    />
+                )}
+
+                {videoPlayIconColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={videoPlayIconHoverColor}
+                        setGlobalColor={(value) => setAttributes({ videoPlayIconHoverColor: value })}
+                    />
+                )}
+
+                <FB_SwitcherControl
+                    label={__("Background Color", "frontis-blocks")}
+                    globalSwitcher={videoPlayIconBgColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ videoPlayIconBgColorSwitcher: value })}
+                />
+
+                {videoPlayIconBgColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={videoPlayIconBgColor}
+                        setGlobalColor={(value) => setAttributes({ videoPlayIconBgColor: value })}
+                    />
+                )}
+
+                {videoPlayIconBgColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={videoPlayIconBgHoverColor}
+                        setGlobalColor={(value) => setAttributes({ videoPlayIconBgHoverColor: value })}
+                    />
+                )}
+
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={videoPlayIconBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ videoPlayIconBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={videoPlayIconBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ videoPlayIconBorderColorSwitcher: value })}
+                />
+
+                {videoPlayIconBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={videoPlayIconBorderColor}
+                        setGlobalColor={(value) => setAttributes({ videoPlayIconBorderColor: value })}
+                    />
+                )}
+
+                {videoPlayIconBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={videoPlayIconBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ videoPlayIconBorderHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing 
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleVideoPlayIconBorderUnitsHandler}
+                    spacingUnits={videoPlayIconBorderUnits}
+                    spacingDesktop={videoPlayIconBorderDesktop}
+                    spacingTablet={videoPlayIconBorderTablet}
+                    spacingMobile={videoPlayIconBorderMobile}
+                    handleSpacingUnitHandler={handleVideoPlayIconBorderUnitChange}
+                    spacingCombineBtn={videoPlayIconBorderLink}
+                    spacingCombineBtnHandler={handleVideoPlayIconBorderCombineBtn}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing 
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleVideoPlayIconBorderRadiusUnitsHandler}
+                    spacingUnits={videoPlayIconBorderRadiusUnits}
+                    spacingDesktop={videoPlayIconBorderRadiusDesktop}
+                    spacingTablet={videoPlayIconBorderRadiusTablet}
+                    spacingMobile={videoPlayIconBorderRadiusMobile}
+                    handleSpacingUnitHandler={handleVideoPlayIconBorderRadiusUnitChange}
+                    spacingCombineBtn={videoPlayIconBorderRadiusLink}
+                    spacingCombineBtnHandler={handleVideoPlayIconBorderRadiusCombineBtn}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing 
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleVideoPlayIconPaddingUnitsHandler}
+                    spacingUnits={videoPlayIconPaddingUnits}
+                    spacingDesktop={videoPlayIconPaddingDesktop}
+                    spacingTablet={videoPlayIconPaddingTablet}
+                    spacingMobile={videoPlayIconPaddingMobile}
+                    handleSpacingUnitHandler={handleVideoPlayIconPaddingUnitChange}
+                    spacingCombineBtn={videoPlayIconPaddingLink}
+                    spacingCombineBtnHandler={handleVideoPlayIconPaddingCombineBtn}
+                    setAttributes={setAttributes}
+                />
+                
+            </PanelBody>
+        </>
+	);
+		
+	/**
+	 * Inspector Advanced Controls
+	 */
+	const advancedControls = (
+        <>
+            <div className="fb-setting-advanced-tab-wrapper">
+                <div className="fb-setting-inner-wrapper">
+                    <PanelBody
+                        title={__("Layout", "frontis-blocks")}
+                        initialOpen={true}
+                        className='fb-setting-layout-header' 
+                    >
+                        <FB_Range
+                            min={0}
+                            max={10000000}
+                            label={__("Z Index", "frontis-blocks")}
+                            rangeValue={videoGlobalZIndex}
+                            onChangeHandler={(value) => setAttributes({ videoGlobalZIndex: value === 0 ? undefined : value })}
+                            deviceType={deviceType}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={""}
+                            isRangeUnit={false}
+
+                        />
+                        <SelectControl
+                            label={__("Overflow", "frontis-blocks")}
+                            value={advancedVideoOverflow}
+                            options={OVERFLOW_OP}
+                            onChange={(value) => setAttributes({ advancedVideoOverflow: value })}
+                        />
+                        <FB_PositionControl
+                            deviceType={deviceType}
+                            positionType={advancedVideoPositionType}
+                            setPositionType={(value) => setAttributes({ advancedVideoPositionType: value })}
+                                                                            
+                            HZOrientationType={advancedVideoHZOrientationType}
+                            setHZOrientationType={(value) =>
+                                setAttributes({ advancedVideoHZOrientationType: value })
+                            }
+                            VROrientationType={advancedVideoVROrientationType}
+                            setVROrientationType={(value) =>
+                                setAttributes({ advancedVideoVROrientationType: value })
+                            }
+                                                                                
+                            HZLeftOffset={advancedVideoHZLeftOffset}
+                            setHZLeftOffset={(value) => setAttributes({ advancedVideoHZLeftOffset: value })}
+                            HZLeftOffsetUnits={advancedVideoHZLeftOffsetUnits}
+                            setHZLeftOffsetUnits={(value) => setAttributes({ advancedVideoHZLeftOffsetUnits: value })}
+                            HZRightOffset={advancedVideoHZRightOffset}
+                            setHZRightOffset={(value) => setAttributes({ advancedVideoHZRightOffset: value })}
+                            HZRightOffsetUnits={advancedVideoHZRightOffsetUnits}
+                            setHZRightOffsetUnits={(value) => setAttributes({ advancedVideoHZRightOffsetUnits: value })}
+                                                                            
+                            VRTopOffset={advancedVideoVRTopOffset}
+                            setVRTopOffset={(value) => setAttributes({ advancedVideoVRTopOffset: value })}
+                            VRTopOffsetUnits={advancedVideoVRTopOffsetUnits}
+                            setVRTopOffsetUnits={(value) => setAttributes({ advancedVideoVRTopOffsetUnits: value })}
+                            VRBottomOffset={advancedVideoVRBottomOffset}
+                            setVRBottomOffset={(value) => setAttributes({ advancedVideoVRBottomOffset: value })}
+                            VRBottomOffsetUnits={advancedVideoVRBottomOffsetUnits}
+                            setVRBottomOffsetUnits={(value) => setAttributes({ advancedVideoVRBottomOffsetUnits: value })}
+
+                            setAttributes={setAttributes}
+                        />
+                        <FB_InputControl
+                            label={__("CSS ID", "frontis-blocks")}
+                            value={videoGlobalWraperID}
+                            onChangeValue={(value) => setAttributes({ videoGlobalWraperID: value })}
+                            helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                        />
+
+                        <FB_InputControl
+                            label={__("CSS Class", "frontis-blocks")}
+                            value={videoGlobalWraperClass}
+                            onChangeValue={(value) => setAttributes({ videoGlobalWraperClass: value })}
+                            helpText={__("Separate with spaces key.", "frontis-blocks")}
+                        />
+                        
+                    </PanelBody>
+                    <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
+                        <FB_Spacing 
+                            label={__("Padding", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
+                            spacingUnits={videoGlobalPaddingUnits}
+                            spacingDesktop={videoGlobalPaddingDesktop}
+                            spacingTablet={videoGlobalPaddingTablet}
+                            spacingMobile={videoGlobalPaddingMobile}
+                            handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
+                            spacingCombineBtn={videoGlobalPaddingLink}
+                            spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+                        <FB_Spacing 
+                            label={__("Margin", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalMarginUnitsHandler}
+                            spacingUnits={videoGlobalMarginUnits}
+                            spacingDesktop={videoGlobalMarginDesktop}
+                            spacingTablet={videoGlobalMarginTablet}
+                            spacingMobile={videoGlobalMarginMobile}
+                            handleSpacingUnitHandler={handleGlobalMarginUnitChange}
+                            spacingCombineBtn={videoGlobalMarginLink}
+                            spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+                    </PanelBody>
+
+                    <PanelBody 
+                        title={__("Background Color", "frontis-blocks")}  
+                        initialOpen={false} 
+                    > 
+                        <FB_SwitcherControl
+                            label={__("Background Color", "frontis-blocks")}
+                            globalSwitcher={videoGlobalBgColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ videoGlobalBgColorSwitcher: value })}
+                        />
+
+                        {videoGlobalBgColorSwitcher === 'normal' && (
+                            <FB_ColorControl
+                                label={__("Normal Color", "frontis-blocks")}
+                                globalColor={videoGlobalBgColor}
+                                setGlobalColor={(value) => setAttributes({ videoGlobalBgColor: value })}
+                            />
+                        )}
+
+                        {videoGlobalBgColorSwitcher === 'hover' && (
+                            <FB_ColorControl
+                                label={__("Hover Color", "frontis-blocks")}
+                                globalColor={videoGlobalBgHoverColor}
+                                setGlobalColor={(value) => setAttributes({ videoGlobalBgHoverColor: value })}
+                            />
+                        )}
+                    </PanelBody>
+                    <PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
+
+                        <SelectControl
+                                label={__("Border Style", "frontis-blocks")}
+                                value={videoGlobalBorder}
+                                options={BORDER_STYLES}
+                                onChange={(value) => setAttributes({ videoGlobalBorder: value })}
+                        />
+
+                        <FB_SwitcherControl
+                            label={__("Border Color", "frontis-blocks")}
+                            globalSwitcher={videoGlobalBorderColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ videoGlobalBorderColorSwitcher: value })}
+                        />
+
+                        {videoGlobalBorderColorSwitcher === 'normal' && (
+                            <FB_ColorControl
+                                label={__("Normal Color", "frontis-blocks")}
+                                globalColor={videoGlobalBorderColor}
+                                setGlobalColor={(value) => setAttributes({ videoGlobalBorderColor: value })}
+                            />
+                        )}
+
+                        {videoGlobalBorderColorSwitcher === 'hover' && (
+                            <FB_ColorControl
+                                label={__("Hover Color", "frontis-blocks")}
+                                globalColor={videoGlobalBorderHoverColor}
+                                setGlobalColor={(value) => setAttributes({ videoGlobalBorderHoverColor: value })}
+                            />
+                        )}
+
+                        <FB_Spacing 
+                            label={__("Border", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalBorderUnitsHandler}
+                            spacingUnits={videoGlobalBorderUnits}
+                            spacingDesktop={videoGlobalBorderDesktop}
+                            spacingTablet={videoGlobalBorderTablet}
+                            spacingMobile={videoGlobalBorderMobile}
+                            handleSpacingUnitHandler={handleGlobalBorderUnitChange}
+                            spacingCombineBtn={videoGlobalBorderLink}
+                            spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_Spacing 
+                            label={__("Border Radius", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
+                            spacingUnits={videoGlobalBorderRadiusUnits}
+                            spacingDesktop={videoGlobalBorderRadiusDesktop}
+                            spacingTablet={videoGlobalBorderRadiusTablet}
+                            spacingMobile={videoGlobalBorderRadiusMobile}
+                            handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
+                            spacingCombineBtn={videoGlobalBorderRadiusLink}
+                            spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_SwitcherControl
+                            label={__("Box Shadow", "frontis-blocks")}
+                            globalSwitcher={videoGlobalBoxShadowSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ videoGlobalBoxShadowSwitcher: value })}
+                        />
+
+                        {videoGlobalBoxShadowSwitcher === 'normal' && (
+                            <FB_BoxShadowControl
+                                label={__("Normal Shadow", "frontis-blocks")}
+                                onBoxShadowChange={(value) => setAttributes({ videoGlobalBoxShadowValues: value })}
+                                initialShadowValue={videoGlobalBoxShadowValues}
+                                onBoxShadowStyleChange={(value) => setAttributes({ videoGlobalBoxShadowCssValue: value })}
+                            />
+                        )}
+
+                        {videoGlobalBoxShadowSwitcher === 'hover' && (
+                            <FB_BoxShadowControl
+                                label={__("Hover Shadow", "frontis-blocks")}
+                                onBoxShadowChange={(value) => setAttributes({ videoGlobalBoxShadowHoverValues: value })}
+                                initialShadowValue={videoGlobalBoxShadowHoverValues}
+                                onBoxShadowStyleChange={(value) => setAttributes({ videoGlobalBoxShadowHoverCssValue: value })}
+                            />
+                        )}
+                    </PanelBody>
+
+                    <PanelBody
+                        title={__("Responsive Control", "frontis-blocks")}
+                        initialOpen={false}
+                        className="fb-setting-responsive-control-wrapper"
+                    >
+                        <FB_VisibilityControl
+                            desktopValue={advancedVideoDesktopSwitcher}
+                            setDesktopValue={(value) => setAttributes({ advancedVideoDesktopSwitcher: value })}
+
+                            tabletValue={advancedVideoTabletSwitcher}
+                            setTabletValue={(value) => setAttributes({ advancedVideoTabletSwitcher: value })}
+
+                            mobileValue={advancedVideoMobileSwitcher}
+                            setMobileValue={(value) => setAttributes({ advancedVideoMobileSwitcher: value })}
+                        />
+                    </PanelBody>
+
+                    <PanelBody
+                        title={__("Transform", "frontis-blocks")}
+                        initialOpen={false}
+                        className="fb-setting-transform-control-wrapper"
+                    >
+                        <FB_SwitcherControl
+                            label={__("Transform Style", "frontis-blocks")}
+                            globalSwitcher={advancedVideoTransformSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ advancedVideoTransformSwitcher: value })}
+                        />
+
+                        {advancedVideoTransformSwitcher === 'normal' && (
+                            <FB_ScaleControl
+                                proportions={advancedVideoTransformNormalProportions}
+                                setProportions={(value) => setAttributes({ advancedVideoTransformNormalProportions: value })}
+                                scale={advancedVideoTransformNormalScale}
+                                setScale={(value) => setAttributes({ advancedVideoTransformNormalScale: value })}
+                                scaleX={advancedVideoTransformNormalScaleX}
+                                setScaleX={(value) => setAttributes({ advancedVideoTransformNormalScaleX: value })}
+                                scaleY={advancedVideoTransformNormalScaleY}	
+                                setScaleY={(value) => setAttributes({ advancedVideoTransformNormalScaleY: value })}
+                                deviceType={deviceType}
+                                setAttributes={setAttributes}
+                            />
+                        )}
+
+                        {advancedVideoTransformSwitcher === 'hover' && (
+                            <FB_ScaleControl
+                                proportions={advancedVideoTransformHoverProportions}
+                                setProportions={(value) => setAttributes({ advancedVideoTransformHoverProportions: value })}
+                                scale={advancedVideoTransformHoverScale}
+                                setScale={(value) => setAttributes({ advancedVideoTransformHoverScale: value })}
+                                scaleX={advancedVideoTransformHoverScaleX}
+                                setScaleX={(value) => setAttributes({ advancedVideoTransformHoverScaleX: value })}
+                                scaleY={advancedVideoTransformHoverScaleY}	
+                                setScaleY={(value) => setAttributes({ advancedVideoTransformHoverScaleY: value })}
+                                deviceType={deviceType}
+                                setAttributes={setAttributes}
+                            />
+                        )}
+                    </PanelBody>
+                    <PanelBody
+                        title={__("Custom CSS", "frontis-blocks")}
+                        initialOpen={false}
+                    >
+                        <FB_CustomCSSEditor  
+                            value={advancedVideoCustomCSS} 
+                            onChangeValue={(value) => setAttributes({ advancedVideoCustomCSS: value })}
+                        />
+                    </PanelBody>
+                </div>
+            </div>
+        </>
+	);
+
     return (
         <>
-
             <style>
                 {editorStyle}
             </style>
-            <InspectorControls key="controls">
-                <div className="fb-inspector-control">
-                    <TabPanel
-                        className="fb-parent-tab-panel"
-                        activeClass="active-tab"
-                        tabs={[
-                            {
-                                name: "general",
-                                title: "General",
-                                className: "fb-tab general",
-                            },
-                            {
-                                name: "styles",
-                                title: "Style",
-                                className: "fb-tab styles",
-                            },
-                            {
-                                name: "advanced",
-                                title: "Advanced",
-                                className: "fb-tab advanced",
-                            },
-                        ]}
-                    >
-                        {(tab) => (
-                            <div className={"fb-tab-controls" + tab.name}>
-                                {tab.name === 'general' && (
-                                    <>
-                                        <PanelBody title={__("General Info", "frontis-blocks")} initialOpen={true}>
-                                            <TextareaControl
-                                                label={__("Video URL", "frontis-blocks")}
-                                                value={videoURL}
-                                                onChange={(videoURL) => setAttributes({ videoURL })}
-                                            />
 
-                                            <BaseControl 
-                                                label={__("Video Options", "frontis-blocks")}
-                                                className="fb-video-options-setting"
-                                            >
-                                                <ToggleControl
-                                                    label={__("Autoplay", "frontis-blocks")}
-                                                    checked={autoPlaySwitcher}
-                                                    onChange={(value) => {
-                                                        setAttributes({ autoPlaySwitcher: value });
-                                                        setAttributes({ muteSwitcher: value ? true : muteSwitcher });
-                                                    }}
-                                                />
-                                                <ToggleControl
-                                                    label={__("Mute", "frontis-blocks")}
-                                                    checked={muteSwitcher}
-                                                    onChange={(value) => setAttributes({ muteSwitcher: value })}
-                                                />
-                                                <ToggleControl
-                                                    label={__("Loop", "frontis-blocks")}
-                                                    checked={loopSwitcher}
-                                                    onChange={(value) => setAttributes({ loopSwitcher: value })}
-                                                />
-                                                <ToggleControl
-                                                    label={__("Show Controls", "frontis-blocks")}
-                                                    checked={showControlsSwitcher}
-                                                    onChange={(value) => setAttributes({ showControlsSwitcher: value })}
-                                                />
-                                            </BaseControl>
-
-                                            <ToggleControl
-                                                label={__("Image Overlay", "frontis-blocks")}
-                                                checked={imageOverlaySwitcher}
-                                                onChange={(value) => setAttributes({ imageOverlaySwitcher: value })}
-                                            />
-
-                                            {imageOverlaySwitcher && (
-                                                <>
-                                                <FB_BackgroundImageControl 
-                                                    globalBackgroundImageUrl={previewImageUrl}
-                                                    setGlobalBackgroundImageUrl={(value) => setAttributes({ previewImageUrl: value })}
-                                                    globalBackgroundImageAlt={previewImageAlt}
-                                                    setGlobalBackgroundImageAlt={(value) => setAttributes({ previewImageAlt: value })}
-                                                    globalBackgroundImageID={previewImageID}
-                                                    setGlobalBackgroundImageID={(value) => setAttributes({ previewImageID: value })}
-                                                    globalBackgroundImagePosition={previewImagePosition}
-                                                    setGlobalBackgroundImagePosition={(value) => setAttributes({ previewImagePosition: value })}
-                                                    globalBackgroundImageAttachment={previewImageAttachment} 
-                                                    setGlobalBackgroundImageAttachment={(value) => setAttributes({ previewImageAttachment: value })}
-                                                    globalBackgroundImageRepeat={previewImageRepeat}
-                                                    setGlobalBackgroundImageRepeat={(value) => setAttributes({ previewImageRepeat: value })}
-                                                    globalBackgroundImageSize={previewImageSize}
-                                                    setGlobalBackgroundImageSize={(value) => setAttributes({ previewImageSize: value })}
-                                                />
-
-                                                <ToggleControl
-                                                    label={__("Play Icon", "frontis-blocks")}
-                                                    checked={videoPlayIconSwitcher}
-                                                    onChange={(value) => setAttributes({ videoPlayIconSwitcher: value })}
-                                                />
-
-                                                {previewImageUrl && videoPlayIconSwitcher && (
-                                                    <FBIconPicker value={videoPlayIcon} setIconHandler={(value) => setAttributes({ videoPlayIcon: value })} />
-                                                )}
-                                                </>
-                                            )}
-
-                                        </PanelBody>
-
-                                    </>
-                                )}
-
-                                {tab.name === "styles" && (
-                                    <>
-                                        <PanelBody title={__("Border", "frontis-blocks")} initialOpen={true}>
-
-                                            <FB_Range
-                                                min={0}
-                                                max={100}
-                                                label={__("Width", "frontis-blocks")}
-                                                rangeValue={videoWidth}
-                                                onChangeHandler={(value) => setAttributes({ videoWidth: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ videoWidthUnits: value })}
-                                                deviceType={deviceType}
-                                                units={videoWidthUnits}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={""}
-                                            />
-
-                                            <SelectControl
-                                                    label={__("Border Style", "frontis-blocks")}
-                                                    value={videoBorder}
-                                                    options={BORDER_STYLES}
-                                                    onChange={(value) => setAttributes({ videoBorder: value })}
-                                            />
-
-                                            <FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={videoBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ videoBorderColorSwitcher: value })}
-                                            />
-
-                                            {videoBorderColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={videoBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ videoBorderColor: value })}
-                                                />
-                                            )}
-
-                                            {videoBorderColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={videoBorderHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ videoBorderHoverColor: value })}
-                                                />
-                                            )}
-
-                                            <FB_Spacing 
-                                                label={__("Border", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={handleIframeBorderUnitsHandler}
-                                                spacingUnits={videoBorderUnits}
-                                                spacingDesktop={videoBorderDesktop}
-                                                spacingTablet={videoBorderTablet}
-                                                spacingMobile={videoBorderMobile}
-                                                handleSpacingUnitHandler={handleIframeBorderUnitChange}
-                                                spacingCombineBtn={videoBorderLink}
-                                                spacingCombineBtnHandler={handleIframeBorderCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />
-
-                                            <FB_Spacing 
-                                                label={__("Border Radius", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={handleIframeBorderRadiusUnitsHandler}
-                                                spacingUnits={videoBorderRadiusUnits}
-                                                spacingDesktop={videoBorderRadiusDesktop}
-                                                spacingTablet={videoBorderRadiusTablet}
-                                                spacingMobile={videoBorderRadiusMobile}
-                                                handleSpacingUnitHandler={handleIframeBorderRadiusUnitChange}
-                                                spacingCombineBtn={videoBorderRadiusLink}
-                                                spacingCombineBtnHandler={handleIframeBorderRadiusCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                        </PanelBody>
-                                        <PanelBody title={__("Play Icon", "frontis-blocks")} initialOpen={false}>
-                                            <FB_Range
-                                                min={1}
-                                                max={100}
-                                                label={__("Icon Size", "frontis-blocks")}
-                                                rangeValue={videoPlayIconSize}
-                                                onChangeHandler={(value) => setAttributes({ videoPlayIconSize: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ videoPlayIconSizeUnits: value })}
-                                                deviceType={deviceType}
-                                                units={videoPlayIconSizeUnits}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={64}
-                                            />
-
-                                            <FB_SwitcherControl
-                                                label={__("Icon Color", "frontis-blocks")}
-                                                globalSwitcher={videoPlayIconColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ videoPlayIconColorSwitcher: value })}
-                                            />
-
-                                            {videoPlayIconColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={videoPlayIconColor}
-                                                    setGlobalColor={(value) => setAttributes({ videoPlayIconColor: value })}
-                                                />
-                                            )}
-
-                                            {videoPlayIconColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={videoPlayIconHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ videoPlayIconHoverColor: value })}
-                                                />
-                                            )}
-
-                                            <FB_SwitcherControl
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalSwitcher={videoPlayIconBgColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ videoPlayIconBgColorSwitcher: value })}
-                                            />
-
-                                            {videoPlayIconBgColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={videoPlayIconBgColor}
-                                                    setGlobalColor={(value) => setAttributes({ videoPlayIconBgColor: value })}
-                                                />
-                                            )}
-
-                                            {videoPlayIconBgColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={videoPlayIconBgHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ videoPlayIconBgHoverColor: value })}
-                                                />
-                                            )}
-
-                                            <SelectControl
-                                                label={__("Border Style", "frontis-blocks")}
-                                                value={videoPlayIconBorder}
-                                                options={BORDER_STYLES}
-                                                onChange={(value) => setAttributes({ videoPlayIconBorder: value })}
-                                            />
-
-                                            <FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={videoPlayIconBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ videoPlayIconBorderColorSwitcher: value })}
-                                            />
-
-                                            {videoPlayIconBorderColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={videoPlayIconBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ videoPlayIconBorderColor: value })}
-                                                />
-                                            )}
-
-                                            {videoPlayIconBorderColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={videoPlayIconBorderHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ videoPlayIconBorderHoverColor: value })}
-                                                />
-                                            )}
-
-                                            <FB_Spacing 
-                                                label={__("Border", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={handleVideoPlayIconBorderUnitsHandler}
-                                                spacingUnits={videoPlayIconBorderUnits}
-                                                spacingDesktop={videoPlayIconBorderDesktop}
-                                                spacingTablet={videoPlayIconBorderTablet}
-                                                spacingMobile={videoPlayIconBorderMobile}
-                                                handleSpacingUnitHandler={handleVideoPlayIconBorderUnitChange}
-                                                spacingCombineBtn={videoPlayIconBorderLink}
-                                                spacingCombineBtnHandler={handleVideoPlayIconBorderCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                            <FB_Spacing 
-                                                label={__("Border Radius", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={handleVideoPlayIconBorderRadiusUnitsHandler}
-                                                spacingUnits={videoPlayIconBorderRadiusUnits}
-                                                spacingDesktop={videoPlayIconBorderRadiusDesktop}
-                                                spacingTablet={videoPlayIconBorderRadiusTablet}
-                                                spacingMobile={videoPlayIconBorderRadiusMobile}
-                                                handleSpacingUnitHandler={handleVideoPlayIconBorderRadiusUnitChange}
-                                                spacingCombineBtn={videoPlayIconBorderRadiusLink}
-                                                spacingCombineBtnHandler={handleVideoPlayIconBorderRadiusCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                            <FB_Spacing 
-                                                label={__("Padding", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={handleVideoPlayIconPaddingUnitsHandler}
-                                                spacingUnits={videoPlayIconPaddingUnits}
-                                                spacingDesktop={videoPlayIconPaddingDesktop}
-                                                spacingTablet={videoPlayIconPaddingTablet}
-                                                spacingMobile={videoPlayIconPaddingMobile}
-                                                handleSpacingUnitHandler={handleVideoPlayIconPaddingUnitChange}
-                                                spacingCombineBtn={videoPlayIconPaddingLink}
-                                                spacingCombineBtnHandler={handleVideoPlayIconPaddingCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                            
-                                        </PanelBody>
-                                    </>
-                                )}
-
-                                {tab.name === "advanced" && (
-                                    <>
-                                        <div className="fb-setting-advanced-tab-wrapper">
-                                            <div className="fb-setting-inner-wrapper">
-                                                <PanelBody
-                                                    title={__("Layout", "frontis-blocks")}
-                                                    initialOpen={true}
-                                                    className='fb-setting-layout-header' 
-                                                >
-                                                    <FB_Range
-                                                        min={0}
-                                                        max={10000000}
-                                                        label={__("Z Index", "frontis-blocks")}
-                                                        rangeValue={videoGlobalZIndex}
-                                                        onChangeHandler={(value) => setAttributes({ videoGlobalZIndex: value === 0 ? undefined : value })}
-                                                        deviceType={deviceType}
-                                                        setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={""}
-                                                        isRangeUnit={false}
-
-                                                    />
-                                                    <SelectControl
-                                                        label={__("Overflow", "frontis-blocks")}
-                                                        value={advancedVideoOverflow}
-                                                        options={OVERFLOW_OP}
-                                                        onChange={(value) => setAttributes({ advancedVideoOverflow: value })}
-                                                    />
-                                                    <FB_PositionControl
-                                                        deviceType={deviceType}
-                                                        positionType={advancedVideoPositionType}
-                                                        setPositionType={(value) => setAttributes({ advancedVideoPositionType: value })}
-                                                                                                        
-                                                        HZOrientationType={advancedVideoHZOrientationType}
-                                                        setHZOrientationType={(value) =>
-                                                            setAttributes({ advancedVideoHZOrientationType: value })
-                                                        }
-                                                        VROrientationType={advancedVideoVROrientationType}
-                                                        setVROrientationType={(value) =>
-                                                            setAttributes({ advancedVideoVROrientationType: value })
-                                                        }
-                                                                                                            
-                                                        HZLeftOffset={advancedVideoHZLeftOffset}
-                                                        setHZLeftOffset={(value) => setAttributes({ advancedVideoHZLeftOffset: value })}
-                                                        HZLeftOffsetUnits={advancedVideoHZLeftOffsetUnits}
-                                                        setHZLeftOffsetUnits={(value) => setAttributes({ advancedVideoHZLeftOffsetUnits: value })}
-                                                        HZRightOffset={advancedVideoHZRightOffset}
-                                                        setHZRightOffset={(value) => setAttributes({ advancedVideoHZRightOffset: value })}
-                                                        HZRightOffsetUnits={advancedVideoHZRightOffsetUnits}
-                                                        setHZRightOffsetUnits={(value) => setAttributes({ advancedVideoHZRightOffsetUnits: value })}
-                                                                                                        
-                                                        VRTopOffset={advancedVideoVRTopOffset}
-                                                        setVRTopOffset={(value) => setAttributes({ advancedVideoVRTopOffset: value })}
-                                                        VRTopOffsetUnits={advancedVideoVRTopOffsetUnits}
-                                                        setVRTopOffsetUnits={(value) => setAttributes({ advancedVideoVRTopOffsetUnits: value })}
-                                                        VRBottomOffset={advancedVideoVRBottomOffset}
-                                                        setVRBottomOffset={(value) => setAttributes({ advancedVideoVRBottomOffset: value })}
-                                                        VRBottomOffsetUnits={advancedVideoVRBottomOffsetUnits}
-                                                        setVRBottomOffsetUnits={(value) => setAttributes({ advancedVideoVRBottomOffsetUnits: value })}
-
-                                                        setAttributes={setAttributes}
-                                                    />
-                                                    <FB_InputControl
-                                                        label={__("CSS ID", "frontis-blocks")}
-                                                        value={videoGlobalWraperID}
-                                                        onChangeValue={(value) => setAttributes({ videoGlobalWraperID: value })}
-                                                        helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
-                                                    />
-
-                                                    <FB_InputControl
-                                                        label={__("CSS Class", "frontis-blocks")}
-                                                        value={videoGlobalWraperClass}
-                                                        onChangeValue={(value) => setAttributes({ videoGlobalWraperClass: value })}
-                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
-                                                    />
-                                                    
-                                                </PanelBody>
-                                                <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
-                                                    <FB_Spacing 
-                                                        label={__("Padding", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
-                                                        spacingUnits={videoGlobalPaddingUnits}
-                                                        spacingDesktop={videoGlobalPaddingDesktop}
-                                                        spacingTablet={videoGlobalPaddingTablet}
-                                                        spacingMobile={videoGlobalPaddingMobile}
-                                                        handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
-                                                        spacingCombineBtn={videoGlobalPaddingLink}
-                                                        spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
-                                                    <FB_Spacing 
-                                                        label={__("Margin", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleGlobalMarginUnitsHandler}
-                                                        spacingUnits={videoGlobalMarginUnits}
-                                                        spacingDesktop={videoGlobalMarginDesktop}
-                                                        spacingTablet={videoGlobalMarginTablet}
-                                                        spacingMobile={videoGlobalMarginMobile}
-                                                        handleSpacingUnitHandler={handleGlobalMarginUnitChange}
-                                                        spacingCombineBtn={videoGlobalMarginLink}
-                                                        spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
-                                                </PanelBody>
-
-                                                <PanelBody 
-                                                    title={__("Background Color", "frontis-blocks")}  
-                                                    initialOpen={false} 
-                                                > 
-                                                    <FB_SwitcherControl
-                                                        label={__("Background Color", "frontis-blocks")}
-                                                        globalSwitcher={videoGlobalBgColorSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ videoGlobalBgColorSwitcher: value })}
-                                                    />
-
-                                                    {videoGlobalBgColorSwitcher === 'normal' && (
-                                                        <FB_ColorControl
-                                                            label={__("Normal Color", "frontis-blocks")}
-                                                            globalColor={videoGlobalBgColor}
-                                                            setGlobalColor={(value) => setAttributes({ videoGlobalBgColor: value })}
-                                                        />
-                                                    )}
-
-                                                    {videoGlobalBgColorSwitcher === 'hover' && (
-                                                        <FB_ColorControl
-                                                            label={__("Hover Color", "frontis-blocks")}
-                                                            globalColor={videoGlobalBgHoverColor}
-                                                            setGlobalColor={(value) => setAttributes({ videoGlobalBgHoverColor: value })}
-                                                        />
-                                                    )}
-                                                </PanelBody>
-                                                <PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
-
-                                                    <SelectControl
-                                                            label={__("Border Style", "frontis-blocks")}
-                                                            value={videoGlobalBorder}
-                                                            options={BORDER_STYLES}
-                                                            onChange={(value) => setAttributes({ videoGlobalBorder: value })}
-                                                    />
-
-                                                    <FB_SwitcherControl
-                                                        label={__("Border Color", "frontis-blocks")}
-                                                        globalSwitcher={videoGlobalBorderColorSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ videoGlobalBorderColorSwitcher: value })}
-                                                    />
-
-                                                    {videoGlobalBorderColorSwitcher === 'normal' && (
-                                                        <FB_ColorControl
-                                                            label={__("Normal Color", "frontis-blocks")}
-                                                            globalColor={videoGlobalBorderColor}
-                                                            setGlobalColor={(value) => setAttributes({ videoGlobalBorderColor: value })}
-                                                        />
-                                                    )}
-
-                                                    {videoGlobalBorderColorSwitcher === 'hover' && (
-                                                        <FB_ColorControl
-                                                            label={__("Hover Color", "frontis-blocks")}
-                                                            globalColor={videoGlobalBorderHoverColor}
-                                                            setGlobalColor={(value) => setAttributes({ videoGlobalBorderHoverColor: value })}
-                                                        />
-                                                    )}
-
-                                                    <FB_Spacing 
-                                                        label={__("Border", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleGlobalBorderUnitsHandler}
-                                                        spacingUnits={videoGlobalBorderUnits}
-                                                        spacingDesktop={videoGlobalBorderDesktop}
-                                                        spacingTablet={videoGlobalBorderTablet}
-                                                        spacingMobile={videoGlobalBorderMobile}
-                                                        handleSpacingUnitHandler={handleGlobalBorderUnitChange}
-                                                        spacingCombineBtn={videoGlobalBorderLink}
-                                                        spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
-
-                                                    <FB_Spacing 
-                                                        label={__("Border Radius", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
-                                                        spacingUnits={videoGlobalBorderRadiusUnits}
-                                                        spacingDesktop={videoGlobalBorderRadiusDesktop}
-                                                        spacingTablet={videoGlobalBorderRadiusTablet}
-                                                        spacingMobile={videoGlobalBorderRadiusMobile}
-                                                        handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
-                                                        spacingCombineBtn={videoGlobalBorderRadiusLink}
-                                                        spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
-
-                                                    <FB_SwitcherControl
-                                                        label={__("Box Shadow", "frontis-blocks")}
-                                                        globalSwitcher={videoGlobalBoxShadowSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ videoGlobalBoxShadowSwitcher: value })}
-                                                    />
-
-                                                    {videoGlobalBoxShadowSwitcher === 'normal' && (
-                                                        <FB_BoxShadowControl
-                                                            label={__("Normal Shadow", "frontis-blocks")}
-                                                            onBoxShadowChange={(value) => setAttributes({ videoGlobalBoxShadowValues: value })}
-                                                            initialShadowValue={videoGlobalBoxShadowValues}
-                                                            onBoxShadowStyleChange={(value) => setAttributes({ videoGlobalBoxShadowCssValue: value })}
-                                                        />
-                                                    )}
-
-                                                    {videoGlobalBoxShadowSwitcher === 'hover' && (
-                                                        <FB_BoxShadowControl
-                                                            label={__("Hover Shadow", "frontis-blocks")}
-                                                            onBoxShadowChange={(value) => setAttributes({ videoGlobalBoxShadowHoverValues: value })}
-                                                            initialShadowValue={videoGlobalBoxShadowHoverValues}
-                                                            onBoxShadowStyleChange={(value) => setAttributes({ videoGlobalBoxShadowHoverCssValue: value })}
-                                                        />
-                                                    )}
-                                                </PanelBody>
-
-                                                <PanelBody
-													title={__("Responsive Control", "frontis-blocks")}
-													initialOpen={false}
-													className="fb-setting-responsive-control-wrapper"
-												>
-                                                    <FB_VisibilityControl
-                                                        desktopValue={advancedVideoDesktopSwitcher}
-                                                        setDesktopValue={(value) => setAttributes({ advancedVideoDesktopSwitcher: value })}
-
-                                                        tabletValue={advancedVideoTabletSwitcher}
-                                                        setTabletValue={(value) => setAttributes({ advancedVideoTabletSwitcher: value })}
-
-                                                        mobileValue={advancedVideoMobileSwitcher}
-                                                        setMobileValue={(value) => setAttributes({ advancedVideoMobileSwitcher: value })}
-                                                    />
-												</PanelBody>
-
-                                                <PanelBody
-													title={__("Transform", "frontis-blocks")}
-													initialOpen={false}
-													className="fb-setting-transform-control-wrapper"
-												>
-													<FB_SwitcherControl
-                                                        label={__("Transform Style", "frontis-blocks")}
-                                                        globalSwitcher={advancedVideoTransformSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ advancedVideoTransformSwitcher: value })}
-                                                    />
-
-													{advancedVideoTransformSwitcher === 'normal' && (
-														<FB_ScaleControl
-															proportions={advancedVideoTransformNormalProportions}
-															setProportions={(value) => setAttributes({ advancedVideoTransformNormalProportions: value })}
-															scale={advancedVideoTransformNormalScale}
-															setScale={(value) => setAttributes({ advancedVideoTransformNormalScale: value })}
-															scaleX={advancedVideoTransformNormalScaleX}
-															setScaleX={(value) => setAttributes({ advancedVideoTransformNormalScaleX: value })}
-															scaleY={advancedVideoTransformNormalScaleY}	
-															setScaleY={(value) => setAttributes({ advancedVideoTransformNormalScaleY: value })}
-															deviceType={deviceType}
-															setAttributes={setAttributes}
-														/>
-													)}
-
-													{advancedVideoTransformSwitcher === 'hover' && (
-														<FB_ScaleControl
-															proportions={advancedVideoTransformHoverProportions}
-															setProportions={(value) => setAttributes({ advancedVideoTransformHoverProportions: value })}
-															scale={advancedVideoTransformHoverScale}
-															setScale={(value) => setAttributes({ advancedVideoTransformHoverScale: value })}
-															scaleX={advancedVideoTransformHoverScaleX}
-															setScaleX={(value) => setAttributes({ advancedVideoTransformHoverScaleX: value })}
-															scaleY={advancedVideoTransformHoverScaleY}	
-															setScaleY={(value) => setAttributes({ advancedVideoTransformHoverScaleY: value })}
-															deviceType={deviceType}
-															setAttributes={setAttributes}
-														/>
-													)}
-												</PanelBody>
-                                                <PanelBody
-                                                    title={__("Custom CSS", "frontis-blocks")}
-                                                    initialOpen={false}
-                                                >
-                                                    <FB_CustomCSSEditor  
-                                                        value={advancedVideoCustomCSS} 
-                                                        onChangeValue={(value) => setAttributes({ advancedVideoCustomCSS: value })}
-                                                    />
-                                                </PanelBody>
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                        )}
-                    </TabPanel>
-                </div>
-            </InspectorControls>
+            <FB_InspectorControls
+                generalControls={generalControls}
+                styleControls={styleControls}
+                advancedControls={advancedControls}
+            />
         </>
     );
 }
