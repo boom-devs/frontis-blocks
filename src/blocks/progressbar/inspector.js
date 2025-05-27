@@ -200,332 +200,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** End Progress Border Radius */
 
     /**
-     * Inspector General Controls
-     */
-    const generalControls = (
-        <PanelBody title={__("General Info", "frontis-blocks")} initialOpen={true}>
-            <div className='text-position'>
-                <SelectControl
-                    label={__("Text Position", "frontis-blocks")}
-                    value={progressTextPosition}
-                    options={PROGRESS_TEXT_OPTIONS}
-                    onChange={(value) => setAttributes({ progressTextPosition: value })}
-                />
-            </div>
-
-            <div className="progress-general-wrapper">
-                <div className="progress-percentage">
-                    <RangeControl
-                        label={__("Progress Percentage", "frontis-blocks")}
-                        value={progressNumber}
-                        onChange={(value) => setAttributes({ progressNumber: value })}
-                        min={1}
-                        max={100}
-                        resetFallbackValue={50}
-                    />
-                </div>
-
-                <div className="progress-bar-height">
-                    <RangeControl
-                        label={__("progress Bar Height", "frontis-blocks")}
-                        value={progressBarHeight}
-                        onChange={(value) => setAttributes({ progressBarHeight: value })}
-                        min={1}
-                        max={100}
-                        resetFallbackValue={30}
-                    />
-                </div>
-
-                <div className="progress-title">
-                    <TextControl
-                        label={__("Title", "frontis-blocks")}
-                        value={progressTitle}
-                        onChange={(value) => setAttributes({ progressTitle: value })}
-                    />
-                </div>
-
-                <div className='progress-heading-tag-wrapper'>
-                    <BaseControl
-                        label={__("Heading Tag", "frontis-blocks")}
-                            id="fb-setting-text-alignment"
-                            className="fb-setting-text-alignment"
-                    >
-                        <ButtonGroup
-                            className="fb-setting-text-alignment-group-btn"
-                        >
-                            {HEADING.map((item, key) => (
-                                <Button
-                                    key={key}
-                                    onClick={() => setAttributes({ progressHeadingTag: item.value })}
-                                    className={`fb-setting-text-alignment-single-btn ${ progressHeadingTag === item.value ? 'active' : ''}`}
-                                >
-                                    {item.label}
-                                </Button>
-                            ))}
-                        </ButtonGroup>
-                    </BaseControl>
-                </div>
-            </div>
-        </PanelBody>
-    );
-
-    /**
-     * Inspector Style Controls
-     */
-    const styleControls = (
-        <>
-        <PanelBody title={__("Style", "frontis-blocks")} initialOpen={true}>
-            <FB_TypographyControl
-                globalTypoControlActive={true}
-                globalTypoSwitcher={progressGlobalTypoSwitcher}
-                storeGlobalTypographyData={(value) => setAttributes({ progressGlobalTypographyData: value })}
-
-                globalTypoType={progressGlobalTypoType}
-                onChangeGlobalTypoType={(value) => {
-                    setAttributes({ 
-                        progressGlobalTypoType: value, 
-                        progressGlobalTypoSwitcher: value === 'default' ? {...progressGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...progressGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                    })
-                }}
-
-                globalTypoOption={progressGlobalTypoOption}
-                onChangeGlobalTypoOption={(value) => setAttributes({ progressGlobalTypoOption: value })}
-
-                fontFamily={progressFontFamily}
-                onChangeFontFamily={(value) => setAttributes({ progressFontFamily: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontFamily: value && false} })}
-
-                fontSize={progressFontSize}
-                onChangeFontSize={(value) => setAttributes({ progressFontSize: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontSize: value && false} })}
-
-                fontSizeUnits={progressFontSizeUnits}
-                onChangeFontSizeUnit={(value) => setAttributes({ progressFontSizeUnits: value })}
-
-                fontWeight={progressFontWeight}
-                onChangeFontWeight={(value) => setAttributes({ progressFontWeight: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontWeight: value && false} })}
-
-                fontStyle={progressFontStyle}
-                onChangeFontStyle={(value) => setAttributes({ progressFontStyle: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontStyle: value && false} })}
-
-                textTransform={progressTextTransform}
-                onChangeTextTransform={(value) => setAttributes({ progressTextTransform: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, textTransform: value && false} })}
-
-                textDecoration={progressTextDecoration}
-                onChangeTextDecoration={(value) => setAttributes({ progressTextDecoration: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, textDecoration: value && false} })}
-
-                letterSpacing={progressLetterSpacing}
-                onChangeLetterSpacing={(value) => setAttributes({ progressLetterSpacing: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-                letterSpacingUnits={progressLetterSpacingUnits}
-                onChangeLetterSpacingUnit={(value) => setAttributes({ progressLetterSpacingUnits: value })}
-
-                lineHeight={progressLineHeight}
-                onChangeLineHeight={(value) => setAttributes({ progressLineHeight: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, lineHeight: value && false} })}
-
-                lineHeightUnits={progressLineHeightUnits}
-                onChangeLineHeightUnit={(value) => setAttributes({ progressLineHeightUnits: value })}
-
-                deviceType={deviceType}
-                setAttributes={setAttributes}
-            />
-
-            <FB_SwitcherControl
-                    label={__("Color", "frontis-blocks")}
-                    globalSwitcher={progressColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ progressColorSwitcher: value })}
-            />
-
-            {progressColorSwitcher === 'normal' && (
-                <FB_ColorControl
-                    label={__("Normal Color", "frontis-blocks")}
-                    globalColor={progressColor}
-                    setGlobalColor={(value) => setAttributes({ progressColor: value })}
-                />
-            )}
-
-            {progressColorSwitcher === 'hover' && (
-                <FB_ColorControl
-                    label={__("Hover Color", "frontis-blocks")}
-                    globalColor={progressHoverColor}
-                    setGlobalColor={(value) => setAttributes({ progressHoverColor: value })}
-                />
-            )}
-
-            <FB_SwitcherControl
-                    label={__("Label Color", "frontis-blocks")}
-                    globalSwitcher={progressTextColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ progressTextColorSwitcher: value })}
-            />
-
-            {progressTextColorSwitcher === 'normal' && (
-                <FB_ColorControl
-                    label={__("Normal Color", "frontis-blocks")}
-                    globalColor={progressTextColor}
-                    setGlobalColor={(value) => setAttributes({ progressTextColor: value })}
-                />
-            )}
-
-            {progressTextColorSwitcher === 'hover' && (
-                <FB_ColorControl
-                    label={__("Hover Color", "frontis-blocks")}
-                    globalColor={progressTextHoverColor}
-                    setGlobalColor={(value) => setAttributes({ progressTextHoverColor: value })}
-                />
-            )}
-
-            <FB_SwitcherControl
-                    label={__("Base Color", "frontis-blocks")}
-                    globalSwitcher={progressBgColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ progressBgColorSwitcher: value })}
-            />
-
-            {progressBgColorSwitcher === 'normal' && (
-                <FB_ColorControl
-                    label={__("Normal Color", "frontis-blocks")}
-                    globalColor={progressBgColor}
-                    setGlobalColor={(value) => setAttributes({ progressBgColor: value })}
-                />
-            )}
-
-            {progressBgColorSwitcher === 'hover' && (
-                <FB_ColorControl
-                    label={__("Hover Color", "frontis-blocks")}
-                    globalColor={progressBgHoverColor}
-                    setGlobalColor={(value) => setAttributes({ progressBgHoverColor: value })}
-                />
-            )}
-
-            <FB_Spacing 
-                label={__("Radius Border", "frontis-blocks")}
-                deviceType={deviceType}
-                spacingUnitsHandler={progressBorderRadiusUnitsHandler}
-                spacingUnits={progressBorderRadiusUnits}
-                spacingDesktop={progressBorderRadiusDesktop}
-                spacingTablet={progressBorderRadiusTablet}
-                spacingMobile={progressBorderRadiusMobile}
-                handleSpacingUnitHandler={progressBorderRadiusUnitsChange}
-                spacingCombineBtn={progressBorderRadiusLink}
-                spacingCombineBtnHandler={progressBorderRadiusLinkBtn}
-                setAttributes={setAttributes}
-            />
-        </PanelBody>
-        </>
-    );
-        
-    /**
-     * Inspector Advanced Controls
-     */
-    const advancedControls = (
-        <>
-        <div className="fb-setting-advanced-tab-wrapper">
-            <div className="fb-setting-inner-wrapper">
-                <PanelBody
-                    title={__("Layout", "frontis-blocks")}
-                    initialOpen={true}
-                    className='fb-setting-layout-header' 
-                >
-                    <FB_Range
-                        min={0}
-                        max={10000000}
-                        label={__("Z Index", "frontis-blocks")}
-                        rangeValue={progressGlobalZIndex}
-                        onChangeHandler={(value) => setAttributes({ progressGlobalZIndex: value === 0 ? undefined : value })}
-                        deviceType={deviceType}
-                        setAttributes={setAttributes}
-                        rangeStep={1}
-                        resetFallbackValue={""}
-                        isRangeUnit={false}
-
-                    />
-
-                    <SelectControl
-                        label={__("Overflow", "frontis-blocks")}
-                        value={progressbarOverflow}
-                        options={OVERFLOW_OP}
-                        onChange={(value) => setAttributes({ progressbarOverflow: value })}
-                    />
-
-                    <FB_PositionControl
-                        deviceType={deviceType}
-                        positionType={progressbarPositionType}
-                        setPositionType={(value) => setAttributes({ progressbarPositionType: value })}
-                                                                        
-                        HZOrientationType={progressbarHZOrientationType}
-                        setHZOrientationType={(value) =>
-                            setAttributes({ progressbarHZOrientationType: value })
-                        }
-                        VROrientationType={progressbarVROrientationType}
-                        setVROrientationType={(value) =>
-                            setAttributes({ progressbarVROrientationType: value })
-                        }
-                                                                            
-                        HZLeftOffset={progressbarHZLeftOffset}
-                        setHZLeftOffset={(value) => setAttributes({ progressbarHZLeftOffset: value })}
-                        HZLeftOffsetUnits={progressbarHZLeftOffsetUnits}
-                        setHZLeftOffsetUnits={(value) => setAttributes({ progressbarHZLeftOffsetUnits: value })}
-                        HZRightOffset={progressbarHZRightOffset}
-                        setHZRightOffset={(value) => setAttributes({ progressbarHZRightOffset: value })}
-                        HZRightOffsetUnits={progressbarHZRightOffsetUnits}
-                        setHZRightOffsetUnits={(value) => setAttributes({ progressbarHZRightOffsetUnits: value })}
-                                                                        
-                        VRTopOffset={progressbarVRTopOffset}
-                        setVRTopOffset={(value) => setAttributes({ progressbarVRTopOffset: value })}
-                        VRTopOffsetUnits={progressbarVRTopOffsetUnits}
-                        setVRTopOffsetUnits={(value) => setAttributes({ progressbarVRTopOffsetUnits: value })}
-                        VRBottomOffset={progressbarVRBottomOffset}
-                        setVRBottomOffset={(value) => setAttributes({ progressbarVRBottomOffset: value })}
-                        VRBottomOffsetUnits={progressbarVRBottomOffsetUnits}
-                        setVRBottomOffsetUnits={(value) => setAttributes({ progressbarVRBottomOffsetUnits: value })}
-
-                        setAttributes={setAttributes}
-                    />
-
-                    <FB_InputControl
-                        label={__("CSS ID", "frontis-blocks")}
-                        value={progressGlobalWraperID}
-                        onChangeValue={(value) => setAttributes({ progressGlobalWraperID: value })}
-                        helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
-                    />
-                    <FB_InputControl
-                        label={__("CSS Class", "frontis-blocks")}
-                        value={progressGlobalWraperClass}
-                        onChangeValue={(value) => setAttributes({ progressGlobalWraperClass: value })}
-                        helpText={__("Separate with spaces key.", "frontis-blocks")}
-                    />
-                    
-                </PanelBody>
-
-                <PanelBody
-                    title={__("Responsive Control", "frontis-blocks")}
-                    initialOpen={false}
-                    className="fb-setting-responsive-control-wrapper"
-                >
-                    <FB_VisibilityControl
-                        desktopValue={progressbarDesktopSwitcher}
-                        setDesktopValue={(value) => setAttributes({ progressbarDesktopSwitcher: value })}
-
-                        tabletValue={progressbarTabletSwitcher}
-                        setTabletValue={(value) => setAttributes({ progressbarTabletSwitcher: value })}
-
-                        mobileValue={progressbarMobileSwitcher}
-                        setMobileValue={(value) => setAttributes({ progressbarMobileSwitcher: value })}
-                    />
-                </PanelBody>
-
-                <PanelBody
-                    title={__("Custom CSS", "frontis-blocks")}
-                    initialOpen={false}
-                >   
-                    <FB_CustomCSSEditor  
-                        value={progressGlobalCustomCSS} 
-                        onChangeValue={(value) => setAttributes({ progressGlobalCustomCSS: value })}
-                    />
-                </PanelBody>
-            </div>
-        </div>
-        </>
-    );
-
-    /**
      * Get all block style
      */
     const allBlockStyle = useMemo(() => `
@@ -741,6 +415,332 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }, [allBlockStyle, customCss]);
 
     const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+
+    /**
+     * Inspector General Controls
+     */
+    const generalControls = (
+        <PanelBody title={__("General Info", "frontis-blocks")} initialOpen={true}>
+            <div className='text-position'>
+                <SelectControl
+                    label={__("Text Position", "frontis-blocks")}
+                    value={progressTextPosition}
+                    options={PROGRESS_TEXT_OPTIONS}
+                    onChange={(value) => setAttributes({ progressTextPosition: value })}
+                />
+            </div>
+
+            <div className="progress-general-wrapper">
+                <div className="progress-percentage">
+                    <RangeControl
+                        label={__("Progress Percentage", "frontis-blocks")}
+                        value={progressNumber}
+                        onChange={(value) => setAttributes({ progressNumber: value })}
+                        min={1}
+                        max={100}
+                        resetFallbackValue={50}
+                    />
+                </div>
+
+                <div className="progress-bar-height">
+                    <RangeControl
+                        label={__("progress Bar Height", "frontis-blocks")}
+                        value={progressBarHeight}
+                        onChange={(value) => setAttributes({ progressBarHeight: value })}
+                        min={1}
+                        max={100}
+                        resetFallbackValue={30}
+                    />
+                </div>
+
+                <div className="progress-title">
+                    <TextControl
+                        label={__("Title", "frontis-blocks")}
+                        value={progressTitle}
+                        onChange={(value) => setAttributes({ progressTitle: value })}
+                    />
+                </div>
+
+                <div className='progress-heading-tag-wrapper'>
+                    <BaseControl
+                        label={__("Heading Tag", "frontis-blocks")}
+                            id="fb-setting-text-alignment"
+                            className="fb-setting-text-alignment"
+                    >
+                        <ButtonGroup
+                            className="fb-setting-text-alignment-group-btn"
+                        >
+                            {HEADING.map((item, key) => (
+                                <Button
+                                    key={key}
+                                    onClick={() => setAttributes({ progressHeadingTag: item.value })}
+                                    className={`fb-setting-text-alignment-single-btn ${ progressHeadingTag === item.value ? 'active' : ''}`}
+                                >
+                                    {item.label}
+                                </Button>
+                            ))}
+                        </ButtonGroup>
+                    </BaseControl>
+                </div>
+            </div>
+        </PanelBody>
+    );
+    
+    /**
+     * Inspector Style Controls
+     */
+    const styleControls = (
+        <>
+            <PanelBody title={__("Style", "frontis-blocks")} initialOpen={true}>
+                <FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={progressGlobalTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ progressGlobalTypographyData: value })}
+
+                    globalTypoType={progressGlobalTypoType}
+                    onChangeGlobalTypoType={(value) => {
+                        setAttributes({ 
+                            progressGlobalTypoType: value, 
+                            progressGlobalTypoSwitcher: value === 'default' ? {...progressGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...progressGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                        })
+                    }}
+
+                    globalTypoOption={progressGlobalTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ progressGlobalTypoOption: value })}
+
+                    fontFamily={progressFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ progressFontFamily: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontFamily: value && false} })}
+
+                    fontSize={progressFontSize}
+                    onChangeFontSize={(value) => setAttributes({ progressFontSize: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontSize: value && false} })}
+
+                    fontSizeUnits={progressFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ progressFontSizeUnits: value })}
+
+                    fontWeight={progressFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ progressFontWeight: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontWeight: value && false} })}
+
+                    fontStyle={progressFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ progressFontStyle: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontStyle: value && false} })}
+
+                    textTransform={progressTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ progressTextTransform: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, textTransform: value && false} })}
+
+                    textDecoration={progressTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ progressTextDecoration: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, textDecoration: value && false} })}
+
+                    letterSpacing={progressLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ progressLetterSpacing: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+                    letterSpacingUnits={progressLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ progressLetterSpacingUnits: value })}
+
+                    lineHeight={progressLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ progressLineHeight: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                    lineHeightUnits={progressLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ progressLineHeightUnits: value })}
+
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                        label={__("Color", "frontis-blocks")}
+                        globalSwitcher={progressColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ progressColorSwitcher: value })}
+                />
+
+                {progressColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={progressColor}
+                        setGlobalColor={(value) => setAttributes({ progressColor: value })}
+                    />
+                )}
+
+                {progressColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={progressHoverColor}
+                        setGlobalColor={(value) => setAttributes({ progressHoverColor: value })}
+                    />
+                )}
+
+                <FB_SwitcherControl
+                        label={__("Label Color", "frontis-blocks")}
+                        globalSwitcher={progressTextColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ progressTextColorSwitcher: value })}
+                />
+
+                {progressTextColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={progressTextColor}
+                        setGlobalColor={(value) => setAttributes({ progressTextColor: value })}
+                    />
+                )}
+
+                {progressTextColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={progressTextHoverColor}
+                        setGlobalColor={(value) => setAttributes({ progressTextHoverColor: value })}
+                    />
+                )}
+
+                <FB_SwitcherControl
+                        label={__("Base Color", "frontis-blocks")}
+                        globalSwitcher={progressBgColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ progressBgColorSwitcher: value })}
+                />
+
+                {progressBgColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={progressBgColor}
+                        setGlobalColor={(value) => setAttributes({ progressBgColor: value })}
+                    />
+                )}
+
+                {progressBgColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={progressBgHoverColor}
+                        setGlobalColor={(value) => setAttributes({ progressBgHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing 
+                    label={__("Radius Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={progressBorderRadiusUnitsHandler}
+                    spacingUnits={progressBorderRadiusUnits}
+                    spacingDesktop={progressBorderRadiusDesktop}
+                    spacingTablet={progressBorderRadiusTablet}
+                    spacingMobile={progressBorderRadiusMobile}
+                    handleSpacingUnitHandler={progressBorderRadiusUnitsChange}
+                    spacingCombineBtn={progressBorderRadiusLink}
+                    spacingCombineBtnHandler={progressBorderRadiusLinkBtn}
+                    setAttributes={setAttributes}
+                />
+            </PanelBody>
+        </>
+    );
+            
+    /**
+     * Inspector Advanced Controls
+     */
+    const advancedControls = (
+        <>
+            <div className="fb-setting-advanced-tab-wrapper">
+                <div className="fb-setting-inner-wrapper">
+                    <PanelBody
+                        title={__("Layout", "frontis-blocks")}
+                        initialOpen={true}
+                        className='fb-setting-layout-header' 
+                    >
+                        <FB_Range
+                            min={0}
+                            max={10000000}
+                            label={__("Z Index", "frontis-blocks")}
+                            rangeValue={progressGlobalZIndex}
+                            onChangeHandler={(value) => setAttributes({ progressGlobalZIndex: value === 0 ? undefined : value })}
+                            deviceType={deviceType}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={""}
+                            isRangeUnit={false}
+
+                        />
+
+                        <SelectControl
+                            label={__("Overflow", "frontis-blocks")}
+                            value={progressbarOverflow}
+                            options={OVERFLOW_OP}
+                            onChange={(value) => setAttributes({ progressbarOverflow: value })}
+                        />
+
+                        <FB_PositionControl
+                            deviceType={deviceType}
+                            positionType={progressbarPositionType}
+                            setPositionType={(value) => setAttributes({ progressbarPositionType: value })}
+                                                                            
+                            HZOrientationType={progressbarHZOrientationType}
+                            setHZOrientationType={(value) =>
+                                setAttributes({ progressbarHZOrientationType: value })
+                            }
+                            VROrientationType={progressbarVROrientationType}
+                            setVROrientationType={(value) =>
+                                setAttributes({ progressbarVROrientationType: value })
+                            }
+                                                                                
+                            HZLeftOffset={progressbarHZLeftOffset}
+                            setHZLeftOffset={(value) => setAttributes({ progressbarHZLeftOffset: value })}
+                            HZLeftOffsetUnits={progressbarHZLeftOffsetUnits}
+                            setHZLeftOffsetUnits={(value) => setAttributes({ progressbarHZLeftOffsetUnits: value })}
+                            HZRightOffset={progressbarHZRightOffset}
+                            setHZRightOffset={(value) => setAttributes({ progressbarHZRightOffset: value })}
+                            HZRightOffsetUnits={progressbarHZRightOffsetUnits}
+                            setHZRightOffsetUnits={(value) => setAttributes({ progressbarHZRightOffsetUnits: value })}
+                                                                            
+                            VRTopOffset={progressbarVRTopOffset}
+                            setVRTopOffset={(value) => setAttributes({ progressbarVRTopOffset: value })}
+                            VRTopOffsetUnits={progressbarVRTopOffsetUnits}
+                            setVRTopOffsetUnits={(value) => setAttributes({ progressbarVRTopOffsetUnits: value })}
+                            VRBottomOffset={progressbarVRBottomOffset}
+                            setVRBottomOffset={(value) => setAttributes({ progressbarVRBottomOffset: value })}
+                            VRBottomOffsetUnits={progressbarVRBottomOffsetUnits}
+                            setVRBottomOffsetUnits={(value) => setAttributes({ progressbarVRBottomOffsetUnits: value })}
+
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_InputControl
+                            label={__("CSS ID", "frontis-blocks")}
+                            value={progressGlobalWraperID}
+                            onChangeValue={(value) => setAttributes({ progressGlobalWraperID: value })}
+                            helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                        />
+                        <FB_InputControl
+                            label={__("CSS Class", "frontis-blocks")}
+                            value={progressGlobalWraperClass}
+                            onChangeValue={(value) => setAttributes({ progressGlobalWraperClass: value })}
+                            helpText={__("Separate with spaces key.", "frontis-blocks")}
+                        />
+                        
+                    </PanelBody>
+
+                    <PanelBody
+                        title={__("Responsive Control", "frontis-blocks")}
+                        initialOpen={false}
+                        className="fb-setting-responsive-control-wrapper"
+                    >
+                        <FB_VisibilityControl
+                            desktopValue={progressbarDesktopSwitcher}
+                            setDesktopValue={(value) => setAttributes({ progressbarDesktopSwitcher: value })}
+
+                            tabletValue={progressbarTabletSwitcher}
+                            setTabletValue={(value) => setAttributes({ progressbarTabletSwitcher: value })}
+
+                            mobileValue={progressbarMobileSwitcher}
+                            setMobileValue={(value) => setAttributes({ progressbarMobileSwitcher: value })}
+                        />
+                    </PanelBody>
+
+                    <PanelBody
+                        title={__("Custom CSS", "frontis-blocks")}
+                        initialOpen={false}
+                    >   
+                        <FB_CustomCSSEditor  
+                            value={progressGlobalCustomCSS} 
+                            onChangeValue={(value) => setAttributes({ progressGlobalCustomCSS: value })}
+                        />
+                    </PanelBody>
+                </div>
+            </div>
+        </>
+    );
 
     return (
         <>

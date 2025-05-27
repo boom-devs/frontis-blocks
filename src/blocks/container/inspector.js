@@ -29,6 +29,7 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_PositionControl from '@Components/position-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import FB_InputControl from '@Components/input-control';
+import FB_InspectorControls from '@Components/InspectorControls';
 
 const Inspector = (props) => {
 	let deviceType = useDeviceType();

@@ -16,7 +16,7 @@ const FB_InspectorControls = ({
           tabs={[
             { name: "general", title: __("General", "frontis-blocks"), className: "fb-tab general" },
             { name: "styles", title: __("Style", "frontis-blocks"), className: "fb-tab styles" },
-            { name: "advanced", title: __("Advanced", "frontis-blocks"), className: "fb-tab advanced" },
+            { name: "advanced", title: __("Extra", "frontis-blocks"), className: "fb-tab advanced" },
           ]}
         >
           {(tab) => (
