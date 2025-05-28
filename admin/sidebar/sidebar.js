@@ -757,6 +757,8 @@ function FrontisBlocksSidebar() {
 											colorName={colorName}
 											setColorName={setColorName}
 										/>
+
+
 									</div>
 
 									{/* Gradient Section */}
