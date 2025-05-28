@@ -37,7 +37,8 @@ import {
 	FLIP_WRAP_ALIGNMENT,
 	PRESETS,
 	OVERFLOW_OP,
-	SELECTED_SIDE
+	SELECTED_SIDE,
+	FLIP_ANIMATION
 } from "./constants/constants";
 
 import { useEffect, useMemo } from "@wordpress/element";
@@ -122,9 +123,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		flip_Button_Switcher,
 		flip_Button_Text,
 		flip_Button_Link,
-		wrapperAlignment,
+		mediaAlignmentFront,
+		mediaAlignmentBack,
 		descAlignment,
 		buttonAlignment,
+		buttonAlignmentBack,
 		flipBoxBg,
 
 		SubHeadingPaddingUnits,
@@ -384,8 +387,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		flipBoxVRBottomOffset,
 		flipBoxVRBottomOffsetUnits,
 		flipSelectedSide,
+		// Flip box front
+		flipBoxFrontHeight,
+		flipBoxFrontHeightUnits,
+		flipBoxFrontWidth,
+		flipBoxFrontWidthUnits,
+		flipBoxFrontBackColorSwitcher,
+		flipBoxFrontBackgroundType,
+		flipBoxFrontClassicColor,
+		flipBoxFrontGradientColor,
+		flipBoxFrontCustomGradientSwitcher,
+		flipBoxFrontCustomGradientInputValue,
+		flipBoxFrontBackgroundColorStyle,
+		flipBoxFrontBackgroundImageUrl,
+		flipBoxFrontBackgroundImageAlt,
+		flipBoxFrontBackgroundImageID,
+		flipBoxFrontBackgroundImagePosition,
+		flipBoxFrontBackgroundImageAttachment,
+		flipBoxFrontBackgroundImageSize,
+		flipBoxFrontBackgroundImageRepeat,
+		flipBoxFrontHoverBackgroundType,
+		flipBoxFrontHoverClassicColor,
+		flipBoxFrontHoverGradientColor,
+		flipBoxFrontHoverCustomGradientSwitcher,
+		flipBoxFrontHoverCustomGradientInputValue,
+		flipBoxFrontHoverBackgroundColorStyle,
+		flipBoxFrontHoverBackgroundImageUrl,
+		flipBoxFrontHoverBackgroundImageAlt,
+		flipBoxFrontHoverBackgroundImageID,
+		flipBoxFrontHoverBackgroundImagePosition,
+		flipBoxFrontHoverBackgroundImageAttachment,
+		flipBoxFrontHoverBackgroundImageSize,
+		flipBoxFrontHoverBackgroundImageRepeat,
 		//Flip Back
-
 		flipBackBoxPresetStyle,
 		flipBack_Button_Switcher,
 		flipBack_Button_Text,
@@ -470,7 +504,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		descSwitcherBack,
 		descAlignmentBack,
 		mediaSwitcherBack,
-		iconBack
+		iconBack,
+		flipAnimationType
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -2251,18 +2286,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  }
 		  }
 
+		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front{
+				${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
+				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
+				${flipBoxFrontBackgroundType === "gradient" ? `
+				background: ${flipBoxFrontCustomGradientSwitcher && flipBoxFrontCustomGradientInputValue ? flipBoxFrontCustomGradientInputValue : flipBoxFrontGradientColor};
+				`
+				: flipBoxFrontBackgroundImageUrl && flipBoxFrontBackgroundImageUrl !== "null" ? `
+				${flipBoxFrontBackgroundImageUrl ? `background-image: url(${flipBoxFrontBackgroundImageUrl});` : ""}
+				${flipBoxFrontBackgroundImagePosition ? `background-position: ${flipBoxFrontBackgroundImagePosition};` : ""}
+				${flipBoxFrontBackgroundImageAttachment ? `background-attachment: ${flipBoxFrontBackgroundImageAttachment};` : ""}
+				${flipBoxFrontBackgroundImageRepeat ? `background-repeat: ${flipBoxFrontBackgroundImageRepeat};` : ""}
+				${flipBoxFrontBackgroundImageSize ? `background-size: ${flipBoxFrontBackgroundImageSize};` : ""}`
+					: flipBoxFrontClassicColor ? `background: ${flipBoxFrontClassicColor}; ` : ""}
+				background-repeat: none;
+				background-size: cover;
+				${flipBoxFrontClassicColor ? `justify-content: center; ` : ''}
+				transition: all .3s ease-in-out;
+		  }
 		  .fb-flip-box-wrapper.${blockID} .fb-flip-box-wrapper-inner {
-			display: flex;
 			${flipIconPosition === 'top' ? 'flex-direction: column;' : ''}
 			${flipIconPosition === 'bottom' ? 'flex-direction: column-reverse;' : ''}
 			${flipIconPosition === 'left' ? 'flex-direction: row;' : ''}
 			${flipIconPosition === 'right' ? 'flex-direction: row-reverse;' : ''}
 			${flipIconPosition !== 'top' || flipIconPosition !== 'bottom' ? `justify-content: ${flipCardAlignment};` : ''}
 		  }
-		  .fb-flip-box-wrapper.${blockID} .fb-flip-box-wrapper-inner .fb-flip-media-container {
-			display: flex;
-			${wrapperAlignment ? `justify-content: ${wrapperAlignment};` : ''}
-			align-items: ${flipIconVerticalPosition === "v-top" ? "flex-start" : flipIconVerticalPosition === "v-middle" ? "center" : flipIconVerticalPosition === "v-bottom" ? "flex-end" : "flex-start"};
+		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-content-wrapper .fb-flip-media-container {
+			${mediaAlignmentFront ? `justify-content: ${mediaAlignmentFront};` : ''}
+		  }
+		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-content-wrapper .fb-flip-back-media-container {
+			${mediaAlignmentBack ? `justify-content: ${mediaAlignmentBack};` : ''}
 		  }
 	  
 		  .fb-flip-box-wrapper.${blockID} .fb-heading {
@@ -2355,6 +2408,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${SubHeadingHoverColor ? `color: ${SubHeadingHoverColor};` : ""}
 		}
 
+		.fb-flip-box-wrapper.${blockID} .fb-flipbox-back .fb-description{
+			${descAlignmentBack ? `text-align: ${descAlignmentBack};` : ''}
+		}
 		@media only screen and (max-width: 1024px) {
 			.fb-flip-box-wrapper.${blockID} .fb-description {
 				${subHeadingTabPaddingValue && SubHeadingTabPadding.top ? `padding: ${subHeadingTabPaddingValue};` : ""}
@@ -2377,7 +2433,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		.fb-flip-box-wrapper.${blockID} .fb-flip-btn-container {
 			${buttonAlignment ? `text-align: ${buttonAlignment};` : ''}
 		}
+		.fb-flip-box-wrapper.${blockID} .fb-flipbox-back .fb-flip-back-btn-container {
+			${buttonAlignmentBack ? `text-align: ${buttonAlignmentBack};` : ''}
+		}
 		.fb-flip-box-wrapper.${blockID} .fb-flip-btn-wrapper {
+			
 			flex-direction: ${btnIconPosition === "left" ? "row-reverse" : "row"};
 			${buttonTextColor ? `color: ${buttonTextColor};` : ""}
 			${buttonBgColor ? `background-color: ${buttonBgColor};` : ""}
@@ -2603,9 +2663,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			Heading_Mobile_Margin,
 
 			flip_Button_Text,
-			wrapperAlignment,
+			mediaAlignmentFront,
+			mediaAlignmentBack,
 			descAlignment,
+			descAlignmentBack,
 			buttonAlignment,
+			buttonAlignmentBack,
 			flipBoxBg,
 
 			SubHeadingPaddingUnits,
@@ -2822,6 +2885,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			flipBoxVRTopOffsetUnits,
 			flipBoxVRBottomOffset,
 			flipBoxVRBottomOffsetUnits,
+			// Flip box front
+			flipBoxFrontWidth,
+			flipBoxFrontWidthUnits,
+			flipBoxFrontHeight,
+			flipBoxFrontHeightUnits
 		],
 	);
 
@@ -2869,20 +2937,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									<>
 										<div className="fb-flip-selection-wrapper">
 											<PanelBody
-												title={__("Selected Side", "frontis-block")}
+												title={__("Flipbox Settings", "frontis-block")}
 												initialOpen={true}
 											>
-												{/* <SelectControl
-													value={flipSelectedSide}
-													options={SELECTED_SIDE}
-													onChange={(value) =>
-														setAttributes({ flipSelectedSide: value })
-													}
-												/> */}
 												<BaseControl>
-													<ButtonGroup 
-													className="fb-setting-switcher-panel-btn"
-													id="fb-flipbox-sides">
+													<ButtonGroup
+														className="fb-setting-switcher-panel-btn"
+														id="fb-flipbox-sides">
 														{SELECTED_SIDE.map(
 															(item, index) => (
 																<Button
@@ -2909,6 +2970,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														)}
 													</ButtonGroup>
 												</BaseControl>
+												<BaseControl
+													label='Flip Animation'
+												>
+													<SelectControl
+														value={flipAnimationType}
+														options={FLIP_ANIMATION}
+														onChange={(value) =>
+															setAttributes({ flipAnimationType: value })
+														}
+													/>
+												</BaseControl>
 											</PanelBody>
 										</div>
 										{flipSelectedSide === 'front' && (
@@ -2921,8 +2993,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 														<FB_AlignmentControl
 															label={__("Alignment", "frontis-blocks")}
-															globalAlignment={wrapperAlignment}
-															setGlobalAlignment={(value) => setAttributes({ wrapperAlignment: value })}
+															globalAlignment={mediaAlignmentFront}
+															setGlobalAlignment={(value) => setAttributes({ mediaAlignmentFront: value })}
 														/>
 
 														<BaseControl className="fb-sub-heading-position">
@@ -2936,7 +3008,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															/>
 														</BaseControl>
 
-														<BaseControl className="fb-media-position">
+														{/* <BaseControl className="fb-media-position">
 															<SelectControl
 																label={__("Media Position", "frontis-block")}
 																value={flipIconPosition}
@@ -2945,7 +3017,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	setAttributes({ flipIconPosition: value })
 																}
 															/>
-														</BaseControl>
+														</BaseControl> */}
 
 														{(flipIconPosition === 'left' || flipIconPosition === 'right') && (
 															<BaseControl className="fb-media-vertical-position">
@@ -3268,8 +3340,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 														<FB_AlignmentControl
 															label={__("Alignment", "frontis-blocks")}
-															globalAlignment={wrapperAlignment}
-															setGlobalAlignment={(value) => setAttributes({ wrapperAlignment: value })}
+															globalAlignment={mediaAlignmentBack}
+															setGlobalAlignment={(value) => setAttributes({ mediaAlignmentBack: value })}
 														/>
 
 														<BaseControl className="fb-sub-heading-position">
@@ -3283,7 +3355,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															/>
 														</BaseControl>
 
-														<BaseControl className="fb-media-position">
+														{/* <BaseControl className="fb-media-position">
 															<SelectControl
 																label={__("Media Position", "frontis-block")}
 																value={flipBackIconPosition}
@@ -3292,7 +3364,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	setAttributes({ flipBackIconPosition: value })
 																}
 															/>
-														</BaseControl>
+														</BaseControl> */}
 
 														{(flipBackIconPosition === 'left' || flipBackIconPosition === 'right') && (
 															<BaseControl className="fb-media-vertical-position">
@@ -3550,8 +3622,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 																<FB_AlignmentControl
 																	label={__("Alignment", "frontis-blocks")}
-																	globalAlignment={buttonAlignment}
-																	setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
+																	globalAlignment={buttonAlignmentBack}
+																	setGlobalAlignment={(value) => setAttributes({ buttonAlignmentBack: value })}
 																/>
 																<TextareaControl
 																	label={__("Button Text", "frontis-block")}
@@ -3611,6 +3683,185 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 								{tab.name === "styles" && (
 									<>
+										{/* Flip Box Style */}
+										<PanelBody
+											title={__("Flip Box", "frontis-block")}
+											initialOpen={false}
+										>
+											<FB_Range
+												min={0}
+												max={500}
+												label={__("Width", "frontis-blocks")}
+												rangeValue={flipBoxFrontWidth}
+												onChangeHandler={(value) => setAttributes({ flipBoxFrontWidth: value })}
+												rangeUnitHandler={(value) => setAttributes({ flipBoxFrontWidthUnits: value })}
+												deviceType={deviceType}
+												units={flipBoxFrontWidthUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+
+											<FB_Range
+												min={0}
+												max={500}
+												label={__("Height", "frontis-blocks")}
+												rangeValue={flipBoxFrontHeight}
+												onChangeHandler={(value) => setAttributes({ flipBoxFrontHeight: value })}
+												rangeUnitHandler={(value) => setAttributes({ flipBoxFrontHeightUnits: value })}
+												deviceType={deviceType}
+												units={flipBoxFrontHeightUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+
+											{/*Background Color */}
+											<FB_BackgroundColorControl
+												bgColorSwitcher={flipBoxFrontBackColorSwitcher}
+												setBgColorSwitcher={(value) => setAttributes({ flipBoxFrontBackColorSwitcher: value })}
+												normalBackgroundType={flipBoxFrontBackgroundType}
+												setNormalBackgroundType={(value) => setAttributes({ flipBoxFrontBackgroundType: value })}
+												normalClassicColor={flipBoxFrontClassicColor}
+												setNormalClassicColor={(value) => setAttributes({ flipBoxFrontClassicColor: value })}
+												normalGradientColor={flipBoxFrontGradientColor}
+												setNormalGradientColor={(value) => setAttributes({ flipBoxFrontGradientColor: value })}
+												normalCustomGradientSwitcher={flipBoxFrontCustomGradientSwitcher}
+												setNormalCustomGradientSwitcher={(value) => setAttributes({ flipBoxFrontCustomGradientSwitcher: value })}
+												normalCustomGradientInputValue={flipBoxFrontCustomGradientInputValue}
+												setNormalCustomGradientInputValue={(value) => setAttributes({ flipBoxFrontCustomGradientInputValue: value })}
+												normalBackgroundImageUrl={flipBoxFrontBackgroundImageUrl}
+												setNormalBackgroundImageUrl={(value) => setAttributes({ flipBoxFrontBackgroundImageUrl: value })}
+												normalBackgroundImageAlt={flipBoxFrontBackgroundImageAlt}
+												setNormalBackgroundImageAlt={(value) => setAttributes({ flipBoxFrontBackgroundImageAlt: value })}
+												normalBackgroundImageID={flipBoxFrontBackgroundImageID}
+												setNormalBackgroundImageID={(value) => setAttributes({ flipBoxFrontBackgroundImageID: value })}
+												normalBackgroundImagePosition={flipBoxFrontBackgroundImagePosition}
+												setNormalBackgroundImagePosition={(value) => setAttributes({ flipBoxFrontBackgroundImagePosition: value })}
+												normalBackgroundImageAttachment={flipBoxFrontBackgroundImageAttachment}
+												setNormalBackgroundImageAttachment={(value) => setAttributes({ flipBoxFrontBackgroundImageAttachment: value })}
+												normalBackgroundImageRepeat={flipBoxFrontBackgroundImageRepeat}
+												setNormalBackgroundImageRepeat={(value) => setAttributes({ flipBoxFrontBackgroundImageRepeat: value })}
+												normalBackgroundImageSize={flipBoxFrontBackgroundImageSize}
+												setNormalBackgroundImageSize={(value) => setAttributes({ flipBoxFrontBackgroundImageSize: value })}
+												hoverBackgroundType={flipBoxFrontHoverBackgroundType}
+												setHoverBackgroundType={(value) => setAttributes({ flipBoxFrontHoverBackgroundType: value })}
+												hoverClassicColor={flipBoxFrontHoverClassicColor}
+												setHoverClassicColor={(value) => setAttributes({ flipBoxFrontHoverClassicColor: value })}
+												hoverGradientColor={flipBoxFrontHoverGradientColor}
+												setHoverGradientColor={(value) => setAttributes({ flipBoxFrontHoverGradientColor: value })}
+												hoverCustomGradientSwitcher={flipBoxFrontHoverCustomGradientSwitcher}
+												setHoverCustomGradientSwitcher={(value) => setAttributes({ flipBoxFrontHoverCustomGradientSwitcher: value })}
+												hoverCustomGradientInputValue={flipBoxFrontHoverCustomGradientInputValue}
+												setHoverCustomGradientInputValue={(value) => setAttributes({ flipBoxFrontHoverCustomGradientInputValue: value })}
+												hoverBackgroundImageUrl={flipBoxFrontHoverBackgroundImageUrl}
+												setHoverBackgroundImageUrl={(value) => setAttributes({ flipBoxFrontHoverBackgroundImageUrl: value })}
+												hoverBackgroundImageAlt={flipBoxFrontHoverBackgroundImageAlt}
+												setHoverBackgroundImageAlt={(value) => setAttributes({ flipBoxFrontHoverBackgroundImageAlt: value })}
+												hoverBackgroundImageID={flipBoxFrontHoverBackgroundImageID}
+												setHoverBackgroundImageID={(value) => setAttributes({ flipBoxFrontHoverBackgroundImageID: value })}
+												hoverBackgroundImagePosition={flipBoxFrontHoverBackgroundImagePosition}
+												setHoverBackgroundImagePosition={(value) => setAttributes({ flipBoxFrontHoverBackgroundImagePosition: value })}
+												hoverBackgroundImageAttachment={flipBoxFrontHoverBackgroundImageAttachment}
+												setHoverBackgroundImageAttachment={(value) => setAttributes({ flipBoxFrontHoverBackgroundImageAttachment: value })}
+												hoverBackgroundImageRepeat={flipBoxFrontHoverBackgroundImageRepeat}
+												setHoverBackgroundImageRepeat={(value) => setAttributes({ flipBoxFrontHoverBackgroundImageRepeat: value })}
+												hoverBackgroundImageSize={flipBoxFrontHoverBackgroundImageSize}
+												setHoverBackgroundImageSize={(value) => setAttributes({ flipBoxFrontHoverBackgroundImageSize: value })}
+											/>
+
+											<FB_Spacing
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleMediaPaddingUnitsHandler}
+												spacingUnits={mediaPaddingUnits}
+												spacingDesktop={mediaPaddingDesktop}
+												spacingTablet={mediaPaddingTablet}
+												spacingMobile={mediaPaddingMobile}
+												handleSpacingUnitHandler={handleMediaPaddingUnitChange}
+												spacingCombineBtn={mediaPaddingLink}
+												spacingCombineBtnHandler={handleMediaPaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
+											<FB_Spacing
+												label={__("Margin", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleMediaMarginUnitsHandler}
+												spacingUnits={mediaMarginUnits}
+												spacingDesktop={mediaMarginDesktop}
+												spacingTablet={mediaMarginTablet}
+												spacingMobile={mediaMarginMobile}
+												handleSpacingUnitHandler={handleMediaMarginUnitChange}
+												spacingCombineBtn={mediaMarginLink}
+												spacingCombineBtnHandler={handleMediaMarginCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<SelectControl
+												label={__("Border Style", "frontis-block")}
+												value={mediaBorder}
+												options={BORDER_STYLES}
+												onChange={(value) =>
+													setAttributes({ mediaBorder: value })
+												}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Border Color", "frontis-blocks")}
+												globalSwitcher={mediaBorderColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ mediaBorderColorSwitcher: value })}
+											/>
+
+											{mediaBorderColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={mediaBorderColor}
+													setGlobalColor={(value) => setAttributes({ mediaBorderColor: value })}
+												/>
+											)}
+
+											{mediaBorderColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={mediaBorderHoverColor}
+													setGlobalColor={(value) => setAttributes({ mediaBorderHoverColor: value })}
+												/>
+											)}
+
+											<FB_Spacing
+												label={__("Border", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleMediaBorderUnitsHandler}
+												spacingUnits={mediaBorderUnits}
+												spacingDesktop={mediaBorderDesktop}
+												spacingTablet={mediaBorderTablet}
+												spacingMobile={mediaBorderMobile}
+												handleSpacingUnitHandler={handleMediaBorderUnitChange}
+												spacingCombineBtn={mediaBorderLink}
+												spacingCombineBtnHandler={handleMediaBorderCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing
+												label={__("Border Radius", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={
+													handleMediaBorderRadiusUnitsHandler
+												}
+												spacingUnits={mediaBorderRadiusUnits}
+												spacingDesktop={mediaBorderRadiusDesktop}
+												spacingTablet={mediaBorderRadiusTablet}
+												spacingMobile={mediaBorderRadiusMobile}
+												handleSpacingUnitHandler={
+													handleMediaBorderRadiusUnitChange
+												}
+												spacingCombineBtn={mediaBorderRadiusLink}
+												spacingCombineBtnHandler={
+													handleMediaBorderRadiusCombineBtn
+												}
+												setAttributes={setAttributes}
+											/>
+										</PanelBody>
 										{/*Image/Icon Style*/}
 										<PanelBody
 											title={__("Image/Icon", "frontis-block")}
