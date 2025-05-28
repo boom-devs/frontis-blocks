@@ -4,6 +4,7 @@ import { useEffect, useMemo } from '@wordpress/element';
 import { PanelBody, TabPanel, Button } from '@wordpress/components';
 import FB_InputControl from '@Components/input-control';
 import { useDeviceType } from '@Config/displayType';
+import FB_InspectorControls from '@Components/InspectorControls';
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -19,45 +20,48 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             setAttributes({ blockId: `fb-slider-item-${clientId.slice(0, 8)}` });
         }
     }, [clientId]);
+
+    /**
+	 * Inspector General Controls
+	 */
+	const generalControls = (
+		<>
+		    <PanelBody title={__("Slider", "frontis-blocks")} initialOpen>
+            {/* Add general settings here */}
+            </PanelBody>
+		</>
+	);
+
+	/**
+	 * Inspector Style Controls
+	 */
+	const styleControls = (
+		<>
+            <PanelBody title={__("Style", "frontis-blocks")} initialOpen>
+                {/* Add style settings here */}
+            </PanelBody>
+		</>
+	);
+		
+	/**
+	 * Inspector Advanced Controls
+	 */
+	const advancedControls = (
+		<>
+            <PanelBody title={__("Layout", "frontis-blocks")} initialOpen>
+                {/* Add advanced settings here */}
+            </PanelBody>
+		</>
+	);
     
     return (
 
         <>
-            <InspectorControls>
-                <div className="fb-inspector-control">
-                    <TabPanel
-                        className="fb-parent-tab-panel"
-                        activeClass="active-tab"
-                        tabs={[
-                            { name: "general", title: __("General", "frontis-blocks"), className: "fb-tab general" },
-                            { name: "styles", title: __("Style", "frontis-blocks"), className: "fb-tab styles" },
-                            { name: "advanced", title: __("Advanced", "frontis-blocks"), className: "fb-tab advanced" },
-                        ]}
-                    >
-                        {(tab) => (
-                            <div className={`fb-tab-controls ${tab.name}`}>
-                                {tab.name === "general" && (
-                                    <PanelBody title={__("Slider", "frontis-blocks")} initialOpen>
-
-                                    </PanelBody>
-                                )}
-
-                                {tab.name === "styles" && (
-                                    <PanelBody title={__("Style", "frontis-blocks")} initialOpen>
-                                        {/* Add style settings here */}
-                                    </PanelBody>
-                                )}
-
-                                {tab.name === "advanced" && (
-                                    <PanelBody title={__("Layout", "frontis-blocks")} initialOpen>
-                                        {/* Add advanced settings here */}
-                                    </PanelBody>
-                                )}
-                            </div>
-                        )}
-                    </TabPanel>
-                </div>
-            </InspectorControls>
+            <FB_InspectorControls
+                generalControls={generalControls}
+                styleControls={styleControls}
+                advancedControls={advancedControls}
+            />
         </>
     );
 }
