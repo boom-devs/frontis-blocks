@@ -3251,6 +3251,21 @@
   margin-bottom: 24px;
 }
 
+.fb-inspector-control .components-panel__body .components-base-control__field .components-flex {
+  gap: 0;
+}
+.fb-inspector-control .components-panel__body .components-base-control__field .components-base-control__label,
+.fb-inspector-control .components-panel__body .components-base-control__field label {
+  color: #050607;
+  font-family: "Onest", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  margin: 0 0 12px;
+  min-height: auto;
+  text-transform: capitalize;
+}
+
 /** Start Admin Panel scss **/
 .fb-inspector-control {
   padding: 16px;
@@ -3312,17 +3327,6 @@
 }
 .fb-inspector-control .components-panel__body .components-button.components-panel__body-toggle {
   margin-bottom: 10px;
-}
-.fb-inspector-control .components-panel__body .components-base-control__field .components-base-control__label,
-.fb-inspector-control .components-panel__body .components-base-control__field label {
-  color: #050607;
-  font-family: "Onest", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 18px;
-  margin: 0 0 14px;
-  min-height: auto;
-  text-transform: capitalize;
 }
 .fb-inspector-control .components-panel__body .components-base-control__field .components-text-control__input,
 .fb-inspector-control .components-panel__body .components-base-control__field .components-textarea-control__input {

@@ -8,7 +8,7 @@
 @import "popover";
 @import "switcher";
 @import "sortable";
-
+@import "field-label";
 
 /** Start Admin Panel scss **/
 .fb-inspector-control {
@@ -88,19 +88,6 @@
 		}
 
 		.components-base-control__field {
-
-			.components-base-control__label,
-			label {
-				color: $neutral-color-950;
-				font-family: $heading-font-family;
-				font-size: $base-font-size;
-				font-weight: $font-weight-500;
-				line-height: 18px;
-				margin: 0 0 14px;
-				min-height: auto;
-				text-transform: capitalize;
-			}
-
 			.components-text-control__input,
 			.components-textarea-control__input {
 				font-family: $body-font-family;
