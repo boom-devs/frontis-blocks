@@ -47,6 +47,7 @@ import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
+import FB_InspectorControls from '@Components/InspectorControls';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -2439,1381 +2440,1366 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const editorStyle = `${dualButtonStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
+	/**
+	 * Inspector General Controls
+	 */
+	const generalControls = (
+		<>
+			<div className="fb-dual-button-pressets">
+			<PanelBody
+				title={__("Presets", "frontis-blocks")}
+				initialOpen={true}
+			>
+				<SelectControl
+					label={__("Preset Style", "frontis-blocks")}
+					value={dualButtonPresetStyle}
+					options={PRESETS}
+					onChange={(selected) => changeDualButtonPreset(selected)}
+				/>	
+			</PanelBody>
+			</div>
+			<div className="fb-dual-button-container">
+				{/*Button One*/}
+				<div className="fb-dual-button-one-wrapper">
+					<PanelBody
+						title={__("Button One", "frontis-blocks")}
+						initialOpen={true}
+					>
+						<TextControl
+							label={__("Text", "frontis-blocks")}
+							value={ButtonText}
+							onChange={(value) =>
+								setAttributes({ ButtonText: value })
+							}
+							className="fb-advanced-button-text"
+						/>
+						<div className="fb-link-control-wrapper">
+							<BaseControl label={__("URL", "frontis-blocks")}>
+								<div className="fb-link-control-inner-wrapper">
+									<TextControl
+										value={ButtonUrl}
+										onChange={(value) =>
+											setAttributes({ ButtonUrl: value })
+										}
+										className="fb-advanced-button-url"
+										placeholder={__("https://", "frontis-blocks")}
+									/>
+									<Dropdown
+										className="fb-advanced-button-icon-dropdown"
+										contentClassName="fb-advanced-button-icon-dropdown-content"
+										popoverProps={{ placement: "bottom-start" }}
+										renderToggle={({ isOpen, onToggle }) => (
+											<Button
+												variant="primary"
+												onClick={onToggle}
+												aria-expanded={isOpen}
+												aria-label={__(
+													"Toggle Typography Settings",
+													"frontis-blocks",
+												)}
+												className="fb-advanced-button-icon-btn"
+											>
+												<Dashicon
+													icon="color-picker"
+													className="fb-advanced-button-icon"
+												/>
+											</Button>
+										)}
+										renderContent={() => (
+											<div className="fb-advanced-button-icon-popup">
+												<BaseControl className="fb-advanced-button-icon-popup-inner">
+													<ToggleControl
+														label={__(
+															"Open in new tab",
+															"frontis-blocks",
+														)}
+														checked={ButtonTargetUrl}
+														onChange={(value) =>
+															setAttributes({
+																ButtonTargetUrl: value,
+															})
+														}
+													/>
+												</BaseControl>
+											</div>
+										)}
+									/>
+								</div>
+							</BaseControl>
+						</div>
+
+						<div className="fb-advanced-btn-icon-wrapper">
+							<BaseControl
+								label={__("Icon", "frontis-blocks")}
+								id="fb-setting-text-alignment"
+								className="fb-setting-text-alignment"
+							>
+								<ButtonGroup className="fb-setting-text-alignment-group-btn">
+								{ICON_ALIGN.map((item, key) => (
+									<Button
+										key={key}
+										onClick={() =>
+											setAttributes({
+												buttonIconAlign: item.value,
+											})
+										}
+										className={`fb-setting-text-alignment-single-btn ${
+											buttonIconAlign === item.value
+												? "active"
+												: ""
+										}`}
+									>
+										{item.label}
+									</Button>
+								))}
+							</ButtonGroup>
+							
+								{(buttonIconAlign === "icon-text" ||
+									buttonIconAlign === "icon-only") && (
+									<FBIconPicker
+										value={ButtonIcon}
+										setIconHandler={iconHandler}
+									/>
+								)}
+							</BaseControl>
+						</div>
+						{buttonIconAlign === "icon-text"  && (
+						<SelectControl
+							label={__("Icon Position", "frontis-blocks")}
+							options={ICON_POSITION}
+							value={btnIconPosition}
+							onChange={(value) =>
+								setAttributes({ btnIconPosition: value })
+							}
+						/>
+						)}
+					</PanelBody>
+				</div>
+				{/* Connector */}
+				<div className="fb-dual-button-connenctor-wrapper">
+					<PanelBody
+						title={__("Connector", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<ToggleControl
+							label={__("Show Connector", "frontis-block")}
+							checked={connectorSwitcher}
+							onChange={(value) =>
+								setAttributes({ connectorSwitcher: value })
+							}
+						/>
+						{connectorSwitcher && (
+							<TextControl
+								label={__("Connector Text", "frontis-blocks")}
+								value={connectorText}
+								onChange={(value) =>
+									setAttributes({ connectorText: value })
+								}
+								className="fb-advanced-button-text"
+							/>
+						)}
+					</PanelBody>
+				</div>
+				{/* Button Two */}
+				<div className="fb-dual-button-two-wrapper">
+					<PanelBody
+						title={__("Button Two", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<TextControl
+							label={__("Text", "frontis-blocks")}
+							value={ButtonTwoText}
+							onChange={(value) =>
+								setAttributes({ ButtonTwoText: value })
+							}
+							className="fb-advanced-button-text"
+						/>
+						<div className="fb-link-control-wrapper">
+							<BaseControl label={__("URL", "frontis-blocks")}>
+								<div className="fb-link-control-inner-wrapper">
+									<TextControl
+										value={ButtonTwoUrl}
+										onChange={(value) =>
+											setAttributes({ ButtonTwoUrl: value })
+										}
+										className="fb-advanced-button-url"
+										placeholder={__("https://", "frontis-blocks")}
+									/>
+									<Dropdown
+										className="fb-advanced-button-icon-dropdown"
+										contentClassName="fb-advanced-button-icon-dropdown-content"
+										popoverProps={{ placement: "bottom-start" }}
+										renderToggle={({ isOpen, onToggle }) => (
+											<Button
+												variant="primary"
+												onClick={onToggle}
+												aria-expanded={isOpen}
+												aria-label={__(
+													"Toggle Typography Settings",
+													"frontis-blocks",
+												)}
+												className="fb-advanced-button-icon-btn"
+											>
+												<Dashicon
+													icon="color-picker"
+													className="fb-advanced-button-icon"
+												/>
+											</Button>
+										)}
+										renderContent={() => (
+											<div className="fb-advanced-button-icon-popup">
+												<BaseControl className="fb-advanced-button-icon-popup-inner">
+													<ToggleControl
+														label={__(
+															"Open in new tab",
+															"frontis-blocks",
+														)}
+														checked={ButtonTwoTargetUrl}
+														onChange={(value) =>
+															setAttributes({
+																ButtonTwoTargetUrl: value,
+															})
+														}
+													/>
+												</BaseControl>
+											</div>
+										)}
+									/>
+								</div>
+							</BaseControl>
+						</div>
+
+						<div className="fb-advanced-btn-icon-wrapper">
+							<BaseControl
+								label={__("Icon", "frontis-blocks")}
+								id="fb-setting-text-alignment"
+								className="fb-setting-text-alignment"
+							>
+								<ButtonGroup className="fb-setting-text-alignment-group-btn">
+									{ICON_ALIGN.map((item, key) => (
+										<Button
+											key={key}
+											onClick={() =>
+												setAttributes({
+													buttonTwoIconAlign: item.value,
+												})
+											}
+											className={`fb-setting-text-alignment-single-btn ${
+												buttonTwoIconAlign === item.value
+													? "active"
+													: ""
+											}`}
+										>
+											{item.label}
+										</Button>
+									))}
+								</ButtonGroup>
+								{(buttonTwoIconAlign === "icon-text" ||
+									buttonTwoIconAlign === "icon-only") && (
+									<FBIconPicker
+										value={ButtonTwoIcon}
+										setIconHandler={iconHandlerTwo}
+									/>
+								)}
+							</BaseControl>
+						</div>
+						{buttonTwoIconAlign === "icon-text" && (
+						<SelectControl
+							label={__("Icon Position", "frontis-blocks")}
+							options={ICON_POSITION}
+							value={btnTwoIconPosition}
+							onChange={(value) =>
+								setAttributes({ btnTwoIconPosition: value })
+							}
+						/>
+						)}
+					</PanelBody>
+				</div>
+			</div>
+		</>
+	);
+
+	/**
+	 * Inspector Style Controls
+	 */
+	const styleControls = (
+		<>
+			<PanelBody
+				title={__("Buttons", "frontis-blocks")}
+				initialOpen={false}
+			>
+				<FB_Range
+					min={0}
+					max={100}
+					label={__("Width", "frontis-blocks")}
+					rangeValue={ButtonWidth}
+					onChangeHandler={(value) => setAttributes({ ButtonWidth: value })}
+					rangeUnitHandler={(value) => setAttributes({ ButtonWidthWidthUnits: value })}
+					deviceType={deviceType}
+					units={ButtonWidthWidthUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+				<SelectControl
+					label={__("Direction", "frontis-blocks")}
+					options={BUTTONS_DIRECTION}
+					value={buttonsDirection}
+					onChange={(value) =>
+						setAttributes({ buttonsDirection: value })
+					}
+				/>
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={ButtonGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) => setAttributes({ ButtonGlobalTypographyData: value })}
+
+					globalTypoType={ButtonGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({ 
+							ButtonGlobalTypoType: value, 
+							ButtonGlobalTypoSwitcher: value === 'default' ? {...ButtonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...ButtonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+						})
+					}}
+
+					globalTypoOption={ButtonGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) => setAttributes({ ButtonGlobalTypoOption: value })}
+
+					fontFamily={ButtonFontFamily}
+					onChangeFontFamily={(value) => setAttributes({ ButtonFontFamily: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontFamily: value && false} })}
+
+					fontSize={ButtonFontSize}
+					onChangeFontSize={(value) => setAttributes({ ButtonFontSize: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontSize: value && false} })}
+
+					fontSizeUnits={ButtonFontSizeUnits}
+					onChangeFontSizeUnit={(value) => setAttributes({ ButtonFontSizeUnits: value })}
+
+					fontWeight={ButtonFontWeight}
+					onChangeFontWeight={(value) => setAttributes({ ButtonFontWeight: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontWeight: value && false} })}
+
+					fontStyle={ButtonFontStyle}
+					onChangeFontStyle={(value) => setAttributes({ ButtonFontStyle: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontStyle: value && false} })}
+
+					textTransform={ButtonTextTransform}
+					onChangeTextTransform={(value) => setAttributes({ ButtonTextTransform: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, textTransform: value && false} })}
+
+					textDecoration={ButtonTextDecoration}
+					onChangeTextDecoration={(value) => setAttributes({ ButtonTextDecoration: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, textDecoration: value && false} })}
+
+					letterSpacing={ButtonLetterSpacing}
+					onChangeLetterSpacing={(value) => setAttributes({ ButtonLetterSpacing: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+					letterSpacingUnits={ButtonLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) => setAttributes({ ButtonLetterSpacingUnits: value })}
+
+					lineHeight={ButtonLineHeight}
+					onChangeLineHeight={(value) => setAttributes({ ButtonLineHeight: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, lineHeight: value && false} })}
+
+					lineHeightUnits={ButtonLineHeightUnits}
+					onChangeLineHeightUnit={(value) => setAttributes({ ButtonLineHeightUnits: value })}
+
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+				
+
+				{/*	Spacing */}
+				<FB_Spacing
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleButtonPaddingUnitsHandler}
+					spacingUnits={ButtonPaddingUnits}
+					spacingDesktop={ButtonDesktopPadding}
+					spacingTablet={ButtonTabPadding}
+					spacingMobile={ButtonMobilePadding}
+					handleSpacingUnitHandler={handleButtonPaddingUnitChange}
+					spacingCombineBtn={ButtonPaddingLink}
+					spacingCombineBtnHandler={handleButtonPaddingCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing
+					label={__("Margin", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleButtonMarginUnitsHandler}
+					spacingUnits={ButtonMarginUnits}
+					spacingDesktop={ButtonDesktopMargin}
+					spacingTablet={ButtonTabMargin}
+					spacingMobile={ButtonMobileMargin}
+					handleSpacingUnitHandler={handleButtonMarginUnitChange}
+					spacingCombineBtn={ButtonMarginLink}
+					spacingCombineBtnHandler={handleButtonMarginCombineBtn}
+					setAttributes={setAttributes}
+				/>
+				<FB_Range
+					min={0}
+					max={300}
+					label={__("Gap", "frontis-blocks")}
+					rangeValue={buttonsGap}
+					onChangeHandler={(value) =>
+						setAttributes({ buttonsGap: value })
+					}
+					rangeUnitHandler={(value) =>
+						setAttributes({ buttonsGapUnits: value })
+					}
+					deviceType={deviceType}
+					units={buttonsGapUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+			</PanelBody>
+			<PanelBody
+				title={__("Button One", "frontis-blocks")}
+				initialOpen={false}
+				className="fb-setting-border-setting-wrapper"
+			>
+				{/* Text Color */}
+				<FB_SwitcherControl
+					label={__("Text Color", "frontis-blocks")}
+					globalSwitcher={ButtonColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ ButtonColorSwitcher: value })}
+				/>
+
+				{ButtonColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={ButtonColor}
+						setGlobalColor={(value) => setAttributes({ ButtonColor: value })}
+					/>
+				)}
+
+				{ButtonColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={ButtonHoverColor}
+						setGlobalColor={(value) => setAttributes({ ButtonHoverColor: value })}
+					/>
+				)}
+				{/* Background Color */}
+				<FB_SwitcherControl
+					label={__("Background Color", "frontis-blocks")}
+					globalSwitcher={ButtonBgColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ ButtonBgColorSwitcher: value })}
+				/>
+
+				{ButtonBgColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={ButtonBgColor}
+						setGlobalColor={(value) => setAttributes({ ButtonBgColor: value })}
+					/>
+				)}
+
+				{ButtonBgColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={ButtonBgHoverColor}
+						setGlobalColor={(value) => setAttributes({ ButtonBgHoverColor: value })}
+					/>
+				)}
+				
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={ButtonBorder}
+					options={BORDER_STYLES}
+					onChange={(value) =>
+						setAttributes({ ButtonBorder: value })
+					}
+				/>
+				{/* Border Color */}
+				<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={ButtonBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ ButtonBorderColorSwitcher: value })}
+				/>
+
+				{ButtonBorderColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={ButtonBorderColor}
+						setGlobalColor={(value) => setAttributes({ ButtonBorderColor: value })}
+					/>
+				)}
+
+				{ButtonBorderColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={ButtonBorderHoverColor}
+						setGlobalColor={(value) => setAttributes({ ButtonBorderHoverColor: value })}
+					/>
+				)}
+				<FB_Spacing
+					label={__("Border", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleButtonOneBorderUnitsHandler}
+					spacingUnits={ButtonBorderUnits}
+					spacingDesktop={ButtonDesktopBorderWidth}
+					spacingTablet={ButtonTabBorderWidth}
+					spacingMobile={ButtonMobileBorderWidth}
+					handleSpacingUnitHandler={ handleButtonOneBorderUnitChange }
+					spacingCombineBtn={ButtonTwoBorderLink}
+					spacingCombineBtnHandler={ handleButtonOneBorderCombineBtn }
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing
+					label={__("Border radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleButtonOneBorderRadiusUnitsHandler}
+					spacingUnits={ButtonBorderRadiusUnits}
+					spacingDesktop={ButtonDesktopBorderRadiusWidth}
+					spacingTablet={ButtonTabBorderRadiusWidth}
+					spacingMobile={ButtonMobileBorderRadiusWidth}
+					handleSpacingUnitHandler={ handleButtonOneBorderRadiusUnitChange }
+					spacingCombineBtn={ButtonBorderRadiusLink}
+					spacingCombineBtnHandler={ handleButtonOneBorderRadiusCombineBtn }
+					setAttributes={setAttributes}
+				/>
+
+			</PanelBody>
+			<PanelBody title="Button Two" initialOpen={false}>
+				{/* Text Color */}
+				<FB_SwitcherControl
+					label={__("Text Color", "frontis-blocks")}
+					globalSwitcher={ButtonTwoColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ ButtonTwoColorSwitcher: value })}
+				/>
+
+				{ButtonTwoColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={ButtonTwoColor}
+						setGlobalColor={(value) => setAttributes({ ButtonTwoColor: value })}
+					/>
+				)}
+
+				{ButtonTwoColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={ButtonTwoHoverColor}
+						setGlobalColor={(value) => setAttributes({ ButtonTwoHoverColor: value })}
+					/>
+				)}
+				{/* Background Color */}
+				<FB_SwitcherControl
+					label={__("Background Color", "frontis-blocks")}
+					globalSwitcher={ButtonTwoBgColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ ButtonTwoBgColorSwitcher: value })}
+				/>
+
+				{ButtonTwoBgColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={ButtonTwoBgColor}
+						setGlobalColor={(value) => setAttributes({ ButtonTwoBgColor: value })}
+					/>
+				)}
+
+				{ButtonTwoBgColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={ButtonTwoBgHoverColor}
+						setGlobalColor={(value) => setAttributes({ ButtonTwoBgHoverColor: value })}
+					/>
+				)}
+				
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={ButtonTwoBorder}
+					options={BORDER_STYLES}
+					onChange={(value) =>
+						setAttributes({ ButtonTwoBorder: value })
+					}
+				/>
+				{/* Border Color */}
+				<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={ButtonTwoBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ ButtonTwoBorderColorSwitcher: value })}
+				/>
+
+				{ButtonTwoBorderColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={ButtonTwoBorderColor}
+						setGlobalColor={(value) => setAttributes({ ButtonTwoBorderColor: value })}
+					/>
+				)}
+
+				{ButtonTwoBorderColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={ButtonTwoBorderHoverColor}
+						setGlobalColor={(value) => setAttributes({ ButtonTwoBorderHoverColor: value })}
+					/>
+				)}
+
+				<FB_Spacing
+					label={__("Border", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleButtonBorderUnitsHandler}
+					spacingUnits={ButtonTwoBorderUnits}
+					spacingDesktop={ButtonTwoDesktopBorderWidth}
+					spacingTablet={ButtonTwoTabBorderWidth}
+					spacingMobile={ButtonTwoMobileBorderWidth}
+					handleSpacingUnitHandler={handleButtonBorderUnitChange}
+					spacingCombineBtn={ButtonTwoBorderLink}
+					spacingCombineBtnHandler={handleButtonBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={
+						handleButtonBorderRadiusUnitsHandler
+					}
+					spacingUnits={ButtonTwoBorderRadiusUnits}
+					spacingDesktop={ButtonTwoDesktopBorderRadiusWidth}
+					spacingTablet={ButtonTwoTabBorderRadiusWidth}
+					spacingMobile={ButtonTwoMobileBorderRadiusWidth}
+					handleSpacingUnitHandler={
+						handleButtonBorderRadiusUnitChange
+					}
+					spacingCombineBtn={ButtonTwoBorderRadiusLink}
+					spacingCombineBtnHandler={
+						handleButtonBorderRadiusCombineBtn
+					}
+					setAttributes={setAttributes}
+				/>
+			</PanelBody>
+			{/*	Connector Style*/}
+			{connectorSwitcher && (
+				<PanelBody
+				title={__("Connector", "frontis-blocks")}
+				initialOpen={false}
+			>
+				<FB_Range
+					min={1}
+					max={300}
+					label={__("Connector Size", "frontis-blocks")}
+					rangeValue={connectorSize}
+					onChangeHandler={connectorSizeHandler}
+					rangeUnitHandler={connectorSizeUnitsHandler}
+					deviceType={deviceType}
+					units={connectorSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={50}
+				/>
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={connectorGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) => setAttributes({ connectorGlobalTypographyData: value })}
+
+					globalTypoType={connectorGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({ 
+							connectorGlobalTypoType: value, 
+							connectorGlobalTypoSwitcher: value === 'default' ? {...connectorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...connectorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+						})
+					}}
+
+					globalTypoOption={connectorGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) => setAttributes({ connectorGlobalTypoOption: value })}
+
+					fontFamily={connectorFontFamily}
+					onChangeFontFamily={(value) => setAttributes({ connectorFontFamily: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontFamily: value && false} })}
+
+					fontSize={connectorFontSize}
+					onChangeFontSize={(value) => setAttributes({ connectorFontSize: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontSize: value && false} })}
+
+					fontSizeUnits={connectorFontSizeUnits}
+					onChangeFontSizeUnit={(value) => setAttributes({ connectorFontSizeUnits: value })}
+
+					fontWeight={connectorFontWeight}
+					onChangeFontWeight={(value) => setAttributes({ connectorFontWeight: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontWeight: value && false} })}
+
+					fontStyle={connectorFontStyle}
+					onChangeFontStyle={(value) => setAttributes({ connectorFontStyle: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontStyle: value && false} })}
+
+					textTransform={connectorTextTransform}
+					onChangeTextTransform={(value) => setAttributes({ connectorTextTransform: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, textTransform: value && false} })}
+
+					textDecoration={connectorTextDecoration}
+					onChangeTextDecoration={(value) => setAttributes({ connectorTextDecoration: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, textDecoration: value && false} })}
+
+					letterSpacing={connectorLetterSpacing}
+					onChangeLetterSpacing={(value) => setAttributes({ connectorLetterSpacing: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+					letterSpacingUnits={connectorLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) => setAttributes({ connectorLetterSpacingUnits: value })}
+
+					lineHeight={connectorLineHeight}
+					onChangeLineHeight={(value) => setAttributes({ connectorLineHeight: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, lineHeight: value && false} })}
+
+					lineHeightUnits={connectorLineHeightUnits}
+					onChangeLineHeightUnit={(value) => setAttributes({ connectorLineHeightUnits: value })}
+
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+
+				{/* Text Color */}
+				<FB_SwitcherControl
+					label={__("Text Color", "frontis-blocks")}
+					globalSwitcher={connectorColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ connectorColorSwitcher: value })}
+				/>
+
+				{connectorColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={connectorColor}
+						setGlobalColor={(value) => setAttributes({ connectorColor: value })}
+					/>
+				)}
+
+				{connectorColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={connectorHoverColor}
+						setGlobalColor={(value) => setAttributes({ connectorHoverColor: value })}
+					/>
+				)}
+
+				{/* Background Color */}
+				<FB_SwitcherControl
+					label={__("Background Color", "frontis-blocks")}
+					globalSwitcher={connectorBgColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ connectorBgColorSwitcher: value })}
+				/>
+
+				{connectorBgColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={connectorBgColor}
+						setGlobalColor={(value) => setAttributes({ connectorBgColor: value })}
+					/>
+				)}
+
+				{connectorBgColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={connectorBgHoverColor}
+						setGlobalColor={(value) => setAttributes({ connectorBgHoverColor: value })}
+					/>
+				)}
+
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={connectorBorder}
+					options={BORDER_STYLES}
+					onChange={(value) =>
+						setAttributes({ connectorBorder: value })
+					}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={connectorBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ connectorBorderColorSwitcher: value })}
+				/>
+
+				{connectorBorderColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={connectorBorderColor}
+						setGlobalColor={(value) => setAttributes({ connectorBorderColor: value })}
+					/>
+				)}
+
+				{connectorBorderColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={connectorBorderHoverColor}
+						setGlobalColor={(value) => setAttributes({ connectorBorderHoverColor: value })}
+					/>
+				)}
+
+				<FB_Spacing
+					label={__("Border", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={connectorBorderUnitsHandler}
+					spacingUnits={connectorBorderUnits}
+					spacingDesktop={connectorBorderDesktop}
+					spacingTablet={connectorBorderTablet}
+					spacingMobile={connectorBorderMobile}
+					handleSpacingUnitHandler={connectorBorderUnitChange}
+					spacingCombineBtn={connectorBorderLink}
+					spacingCombineBtnHandler={connectorBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={connectorBorderRadiusUnitsHandler}
+					spacingUnits={connectorBorderRadiusUnits}
+					spacingDesktop={connectorBorderRadiusDesktop}
+					spacingTablet={connectorBorderRadiusTablet}
+					spacingMobile={connectorBorderRadiusMobile}
+					handleSpacingUnitHandler={connectorBorderRadiusUnitChange}
+					spacingCombineBtn={connectorBorderRadiusLink}
+					spacingCombineBtnHandler={connectorBorderRadiusCombineBtn}
+					setAttributes={setAttributes}
+				/>
+			</PanelBody>
+			)}
+			
+			{/*	Icon One Style */}
+			{(buttonIconAlign === 'icon-text' || 
+			buttonIconAlign === 'icon-only') && (
+			<PanelBody
+				title={__("Button One Icon", "frontis-blocks")}
+				initialOpen={false}
+			>
+				<FB_Range
+					min={1}
+					max={300}
+					label={__("Icon Size", "frontis-blocks")}
+					rangeValue={btnIconSize}
+					onChangeHandler={btnIconSizeHandler}
+					rangeUnitHandler={btnIconSizeUnitsHandler}
+					deviceType={deviceType}
+					units={btnIconSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={50}
+				/>
+
+				<FB_Range
+					min={1}
+					max={100}
+					label={__("Spacing", "frontis-blocks")}
+					rangeValue={btnIconSpacing}
+					onChangeHandler={(value) => setAttributes({ btnIconSpacing: value }) }
+					rangeUnitHandler={(value) => setAttributes({ btnIconSpacingUnits: value }) }
+					deviceType={deviceType}
+					units={btnIconSpacingUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+
+				{/** Icon Color **/}
+				<FB_SwitcherControl
+					label={__("Icon Color", "frontis-blocks")}
+					globalSwitcher={btnIconColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ btnIconColorSwitcher: value })}
+				/>
+
+				{btnIconColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={btnIconColor}
+						setGlobalColor={(value) => setAttributes({ btnIconColor: value })}
+					/>
+				)}
+
+				{btnIconColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={btnIconHoverColor}
+						setGlobalColor={(value) => setAttributes({ btnIconHoverColor: value })}
+					/>
+				)}
+				{/** Icon Background Color **/}
+				<FB_SwitcherControl
+					label={__("Background Color", "frontis-blocks")}
+					globalSwitcher={btnIconBgColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ btnIconBgColorSwitcher: value })}
+				/>
+
+				{btnIconBgColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={btnIconBgColor}
+						setGlobalColor={(value) => setAttributes({ btnIconBgColor: value })}
+					/>
+				)}
+
+				{btnIconBgColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={btnIconBgHoverColor}
+						setGlobalColor={(value) => setAttributes({ btnIconBgHoverColor: value })}
+					/>
+				)}
+
+				{/** Border **/}
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={iconBorder}
+					options={BORDER_STYLES}
+					onChange={(value) =>
+						setAttributes({ iconBorder: value })
+					}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={iconBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ iconBorderColorSwitcher: value })}
+				/>
+
+				{iconBorderColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={iconBorderColor}
+						setGlobalColor={(value) => setAttributes({ iconBorderColor: value })}
+					/>
+				)}
+
+				{iconBorderColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={iconBorderHoverColor}
+						setGlobalColor={(value) => setAttributes({ iconBorderHoverColor: value })}
+					/>
+				)}
+
+				<FB_Spacing
+					label={__("Border Width", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={iconBorderUnitsHandler}
+					spacingUnits={iconBorderUnits}
+					spacingDesktop={iconBorderDesktop}
+					spacingTablet={iconBorderTablet}
+					spacingMobile={iconBorderMobile}
+					handleSpacingUnitHandler={iconBorderUnitChange}
+					spacingCombineBtn={iconBorderLink}
+					spacingCombineBtnHandler={iconBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={iconBorderRadiusUnitsHandler}
+					spacingUnits={iconBorderRadiusUnits}
+					spacingDesktop={iconBorderRadiusDesktop}
+					spacingTablet={iconBorderRadiusTablet}
+					spacingMobile={iconBorderRadiusMobile}
+					handleSpacingUnitHandler={iconBorderRadiusUnitChange}
+					spacingCombineBtn={iconBorderRadiusLink}
+					spacingCombineBtnHandler={iconBorderRadiusCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+			</PanelBody>
+			)}
+
+			{/*	Icon Style Two */}
+			{(buttonTwoIconAlign === 'icon-text' || 
+			buttonTwoIconAlign === 'icon-only') && (
+			<PanelBody
+				title={__("Button Two Icon", "frontis-blocks")}
+				initialOpen={false}
+			>
+				<FB_Range
+					min={1}
+					max={100}
+					label={__("Icon Size", "frontis-blocks")}
+					rangeValue={btnTwoIconSize}
+					onChangeHandler={(value) => setAttributes({ btnTwoIconSize: value }) }
+					rangeUnitHandler={(value) => setAttributes({ btnTwoIconSizeUnits: value }) }
+					deviceType={deviceType}
+					units={btnTwoIconSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+				<FB_Range
+					min={1}
+					max={100}
+					label={__("Spacing", "frontis-blocks")}
+					rangeValue={btnTwoIconSpacing}
+					onChangeHandler={(value) => setAttributes({ btnTwoIconSpacing: value }) }
+					rangeUnitHandler={(value) => setAttributes({ btnTwoIconSpacingUnits: value }) }
+					deviceType={deviceType}
+					units={btnTwoIconSpacingUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Icon Color", "frontis-blocks")}
+					globalColorSwitcher={btnIconColorSwitcher}
+					globalColor={btnIconColor}
+					globalHoverColor={btnIconHoverColor}
+					handleColorSwitcherChange={(value) => setAttributes({ btnIconColorSwitcher: value }) }
+					handleGlobalColorChange={(value) => setAttributes({ btnIconColor: value }) }
+					handleGlobalHoverColorChange={(value) => setAttributes({ btnIconHoverColor: value }) }
+				/>
+
+				{btnTwoIconColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={btnTwoIconColor}
+						setGlobalColor={(value) => setAttributes({ btnTwoIconColor: value })}
+					/>
+				)}
+
+				{btnTwoIconColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={btnTwoIconHoverColor}
+						setGlobalColor={(value) => setAttributes({ btnTwoIconHoverColor: value })}
+					/>
+				)}
+				{/** Icon Two Background Color **/}
+				<FB_SwitcherControl
+					label={__("Background Color", "frontis-blocks")}
+					globalSwitcher={btnIconTwoBgColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ btnIconTwoBgColorSwitcher: value })}
+				/>
+
+				{btnIconTwoBgColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={btnTwoIconBgColor}
+						setGlobalColor={(value) => setAttributes({ btnTwoIconBgColor: value })}
+					/>
+				)}
+
+				{btnIconTwoBgColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={btnTwoIconBgHoverColor}
+						setGlobalColor={(value) => setAttributes({ btnTwoIconBgHoverColor: value })}
+					/>
+				)}
+
+				{/** Border **/}
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={iconTwoBorder}
+					options={BORDER_STYLES}
+					onChange={(value) =>
+						setAttributes({ iconTwoBorder: value })
+					}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={iconTwoBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ iconTwoBorderColorSwitcher: value })}
+				/>
+
+				{iconTwoBorderColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={iconTwoBorderColor}
+						setGlobalColor={(value) => setAttributes({ iconTwoBorderColor: value })}
+					/>
+				)}
+
+				{iconTwoBorderColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={iconTwoBorderHoverColor}
+						setGlobalColor={(value) => setAttributes({ iconTwoBorderHoverColor: value })}
+					/>
+				)}
+
+				<FB_Spacing
+					label={__("Border Width", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={iconTwoBorderUnitsHandler}
+					spacingUnits={iconTwoBorderUnits}
+					spacingDesktop={iconTwoBorderDesktop}
+					spacingTablet={iconTwoBorderTablet}
+					spacingMobile={iconTwoBorderMobile}
+					handleSpacingUnitHandler={iconTwoBorderUnitChange}
+					spacingCombineBtn={iconTwoBorderLink}
+					spacingCombineBtnHandler={iconTwoBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={iconTwoBorderRadiusUnitsHandler}
+					spacingUnits={iconTwoBorderRadiusUnits}
+					spacingDesktop={iconTwoBorderRadiusDesktop}
+					spacingTablet={iconTwoBorderRadiusTablet}
+					spacingMobile={iconTwoBorderRadiusMobile}
+					handleSpacingUnitHandler={iconTwoBorderRadiusUnitChange}
+					spacingCombineBtn={iconTwoBorderRadiusLink}
+					spacingCombineBtnHandler={iconTwoBorderRadiusCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+			</PanelBody>
+			)}
+		</>
+	);
+		
+	/**
+	 * Inspector Advanced Controls
+	 */
+	const advancedControls = (
+		<>
+			<div className="fb-setting-advanced-tab-wrapper">
+				<div className="fb-setting-z-index-wrapper">
+					<PanelBody
+						title={__("Layout", "frontis-blocks")}
+						initialOpen={true}
+						className="fb-setting-layout-header" 
+					>
+						<FB_Range
+							min={0}
+							max={10000000}
+							label={__("Z Index", "frontis-blocks")}
+							rangeValue={dualButtonGlobalZIndex}
+							onChangeHandler={(value) => setAttributes({ dualButtonGlobalZIndex: value === 0 ? undefined : value })}
+							deviceType={deviceType}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={""}
+							isRangeUnit={false}
+						/>
+
+						<SelectControl
+							label={__("Overflow", "frontis-blocks")}
+							value={dualBtnOverflow}
+							options={OVERFLOW_OP}
+							onChange={(value) => setAttributes({ dualBtnOverflow: value })}
+						/>
+
+						<FB_PositionControl
+							deviceType={deviceType}
+							positionType={dualBtnPositionType}
+							setPositionType={(value) => setAttributes({ dualBtnPositionType: value })}
+																			
+							HZOrientationType={dualBtnHZOrientationType}
+							setHZOrientationType={(value) =>
+								setAttributes({ dualBtnHZOrientationType: value })
+							}
+							VROrientationType={dualBtnVROrientationType}
+							setVROrientationType={(value) =>
+								setAttributes({ dualBtnVROrientationType: value })
+							}
+																				
+							HZLeftOffset={dualBtnHZLeftOffset}
+							setHZLeftOffset={(value) => setAttributes({ dualBtnHZLeftOffset: value })}
+							HZLeftOffsetUnits={dualBtnHZLeftOffsetUnits}
+							setHZLeftOffsetUnits={(value) => setAttributes({ dualBtnHZLeftOffsetUnits: value })}
+							HZRightOffset={dualBtnHZRightOffset}
+							setHZRightOffset={(value) => setAttributes({ dualBtnHZRightOffset: value })}
+							HZRightOffsetUnits={dualBtnHZRightOffsetUnits}
+							setHZRightOffsetUnits={(value) => setAttributes({ dualBtnHZRightOffsetUnits: value })}
+																			
+							VRTopOffset={dualBtnVRTopOffset}
+							setVRTopOffset={(value) => setAttributes({ dualBtnVRTopOffset: value })}
+							VRTopOffsetUnits={dualBtnVRTopOffsetUnits}
+							setVRTopOffsetUnits={(value) => setAttributes({ dualBtnVRTopOffsetUnits: value })}
+							VRBottomOffset={dualBtnVRBottomOffset}
+							setVRBottomOffset={(value) => setAttributes({ dualBtnVRBottomOffset: value })}
+							VRBottomOffsetUnits={dualBtnVRBottomOffsetUnits}
+							setVRBottomOffsetUnits={(value) => setAttributes({ dualBtnVRBottomOffsetUnits: value })}
+
+							setAttributes={setAttributes}
+						/>
+
+						<FB_InputControl
+							label={__("CSS ID", "frontis-blocks")}
+							value={dualButtonGlobalWraperID}
+							onChangeValue={(value) => setAttributes({ dualButtonGlobalWraperID: value })}
+							helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+						/>
+
+						<FB_InputControl
+							label={__("CSS Class", "frontis-blocks")}
+							value={dualButtonGlobalWraperClass}
+							onChangeValue={(value) => setAttributes({ dualButtonGlobalWraperClass: value })}
+							helpText={__("Separate with spaces key.", "frontis-blocks")}
+						/>
+						
+					</PanelBody>
+
+					<PanelBody
+						title={__("Padding and Margin", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_Spacing
+							label={__("Padding", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={ handleGlobalPaddingUnitsHandler }
+							spacingUnits={dualButtonGlobalPaddingUnits}
+							spacingDesktop={dualButtonGlobalPaddingDesktop}
+							spacingTablet={dualButtonGlobalPaddingTablet}
+							spacingMobile={dualButtonGlobalPaddingMobile}
+							handleSpacingUnitHandler={ handleGlobalPaddingUnitChange }
+							spacingCombineBtn={dualButtonGlobalPaddingLink}
+							spacingCombineBtnHandler={ handleGlobalPaddingCombineBtn }
+							setAttributes={setAttributes}
+						/>
+						<FB_Spacing
+							label={__("Margin", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleGlobalMarginUnitsHandler}
+							spacingUnits={dualButtonGlobalMarginUnits}
+							spacingDesktop={dualButtonGlobalMarginDesktop}
+							spacingTablet={dualButtonGlobalMarginTablet}
+							spacingMobile={dualButtonGlobalMarginMobile}
+							handleSpacingUnitHandler={ handleGlobalMarginUnitChange }
+							spacingCombineBtn={dualButtonGlobalMarginLink}
+							spacingCombineBtnHandler={ handleGlobalMarginCombineBtn }
+							setAttributes={setAttributes}
+						/>
+					</PanelBody>
+
+					<PanelBody title="Background Color" initialOpen={false}>
+						
+						<FB_SwitcherControl
+							label={__("Background Color", "frontis-blocks")}
+							globalSwitcher={dualButtonGlobalBgColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ dualButtonGlobalBgColorSwitcher: value })}
+						/>
+
+						{dualButtonGlobalBgColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={dualButtonGlobalBgColor}
+								setGlobalColor={(value) => setAttributes({ dualButtonGlobalBgColor: value })}
+							/>
+						)}
+
+						{dualButtonGlobalBgColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={dualButtonGlobalBgHoverColor}
+								setGlobalColor={(value) => setAttributes({ dualButtonGlobalBgHoverColor: value })}
+							/>
+						)}
+					</PanelBody>
+					<PanelBody
+						title={__("Border and Shadow", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<SelectControl
+							label={__("Border Style", "frontis-blocks")}
+							value={dualButtonGlobalBorder}
+							options={BORDER_STYLES}
+							onChange={(value) => setAttributes({ dualButtonGlobalBorder: value }) }
+						/>
+
+						<FB_SwitcherControl
+							label={__("Border Color", "frontis-blocks")}
+							globalSwitcher={dualButtonGlobalBorderColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ dualButtonGlobalBorderColorSwitcher: value })}
+						/>
+
+						{dualButtonGlobalBgColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={dualButtonGlobalBorderColor}
+								setGlobalColor={(value) => setAttributes({ dualButtonGlobalBorderColor: value })}
+							/>
+						)}
+
+						{dualButtonGlobalBorderColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={dualButtonGlobalBorderHoverColor}
+								setGlobalColor={(value) => setAttributes({ dualButtonGlobalBorderHoverColor: value })}
+							/>
+						)}
+
+						<FB_Spacing
+							label={__("Border", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleGlobalBorderUnitsHandler}
+							spacingUnits={dualButtonGlobalBorderUnits}
+							spacingDesktop={dualButtonGlobalBorderDesktop}
+							spacingTablet={dualButtonGlobalBorderTablet}
+							spacingMobile={dualButtonGlobalBorderMobile}
+							handleSpacingUnitHandler={handleGlobalBorderUnitChange}
+							spacingCombineBtn={dualButtonGlobalBorderLink}
+							spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
+							setAttributes={setAttributes}
+						/>
+
+						<FB_Spacing
+							label={__("Border Radius", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={ handleGlobalBorderRadiusUnitsHandler }
+							spacingUnits={dualButtonGlobalBorderRadiusUnits}
+							spacingDesktop={dualButtonGlobalBorderRadiusDesktop}
+							spacingTablet={dualButtonGlobalBorderRadiusTablet}
+							spacingMobile={dualButtonGlobalBorderRadiusMobile}
+							handleSpacingUnitHandler={ handleGlobalBorderRadiusUnitChange }
+							spacingCombineBtn={dualButtonGlobalBorderRadiusLink}
+							spacingCombineBtnHandler={ handleGlobalBorderRadiusCombineBtn}
+							setAttributes={setAttributes}
+						/>
+						
+						<FB_SwitcherControl
+						label={__("Box Shadow", "frontis-blocks")}
+						globalSwitcher={globalBoxShadowSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ globalBoxShadowSwitcher: value })}
+						/>
+
+						{globalBoxShadowSwitcher === 'normal' && (
+							<FB_BoxShadowControl
+								label={__("Normal Shadow", "frontis-blocks")}
+								onBoxShadowChange={(value) => setAttributes({ globalBoxShadowValues: value })}
+								initialShadowValue={globalBoxShadowValues}
+								onBoxShadowStyleChange={(value) => setAttributes({ globalBoxShadowCssValue: value })}
+							/>
+						)}
+
+						{globalBoxShadowSwitcher === 'hover' && (
+							<FB_BoxShadowControl
+								label={__("Hover Shadow", "frontis-blocks")}
+								onBoxShadowChange={(value) => setAttributes({ globalBoxShadowHoverValues: value })}
+								initialShadowValue={globalBoxShadowHoverValues}
+								onBoxShadowStyleChange={(value) => setAttributes({ globalHoverBoxShadowCssValue: value })}
+							/>
+						)}
+					</PanelBody>
+
+					<PanelBody
+						title={__("Responsive Control", "frontis-blocks")}
+						initialOpen={false}
+						className="fb-setting-responsive-control-wrapper"
+					>
+						<FB_VisibilityControl
+							desktopValue={dualBtnDesktopSwitcher}
+							setDesktopValue={(value) => setAttributes({ dualBtnDesktopSwitcher: value })}
+
+							tabletValue={dualBtnTabletSwitcher}
+							setTabletValue={(value) => setAttributes({ dualBtnTabletSwitcher: value })}
+
+							mobileValue={dualBtnMobileSwitcher}
+							setMobileValue={(value) => setAttributes({ dualBtnMobileSwitcher: value })}
+						/>
+					</PanelBody>
+
+					<PanelBody
+						title={__("Custom CSS", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_CustomCSSEditor  
+							value={dualButtonGlobalWraperCustomCSS}
+							onChangeValue={(value) => setAttributes({ dualButtonGlobalWraperCustomCSS: value })}
+						/>
+					</PanelBody>
+				</div>
+			</div>
+		</>
+	);
+
 	return (
 		<>
 			<style>
 				{editorStyle}
 			</style>
-
-			<InspectorControls key="controls">
-				<div className="fb-inspector-control">
-					<TabPanel
-						className="fb-parent-tab-panel"
-						activeClass="active-tab"
-						tabs={[
-							{
-								name: "general",
-								title: "General",
-								className: "fb-tab general",
-							},
-							{
-								name: "styles",
-								title: "Style",
-								className: "fb-tab styles",
-							},
-							{
-								name: "advanced",
-								title: "Advanced",
-								className: "fb-tab advanced",
-							},
-						]}
-					>
-						{(tab) => (
-							<div className={"fb-tab-controls" + tab.name}>
-								{tab.name === "general" && (
-									<>
-										<div className="fb-dual-button-pressets">
-										<PanelBody
-											title={__("Presets", "frontis-blocks")}
-											initialOpen={true}
-										>
-											<SelectControl
-												label={__("Preset Style", "frontis-blocks")}
-												value={dualButtonPresetStyle}
-												options={PRESETS}
-												onChange={(selected) => changeDualButtonPreset(selected)}
-											/>	
-										</PanelBody>
-										</div>
-										<div className="fb-dual-button-container">
-											{/*Button One*/}
-											<div className="fb-dual-button-one-wrapper">
-												<PanelBody
-													title={__("Button One", "frontis-blocks")}
-													initialOpen={true}
-												>
-													<TextControl
-														label={__("Text", "frontis-blocks")}
-														value={ButtonText}
-														onChange={(value) =>
-															setAttributes({ ButtonText: value })
-														}
-														className="fb-advanced-button-text"
-													/>
-													<div className="fb-link-control-wrapper">
-														<BaseControl label={__("URL", "frontis-blocks")}>
-															<div className="fb-link-control-inner-wrapper">
-																<TextControl
-																	value={ButtonUrl}
-																	onChange={(value) =>
-																		setAttributes({ ButtonUrl: value })
-																	}
-																	className="fb-advanced-button-url"
-																	placeholder={__("https://", "frontis-blocks")}
-																/>
-																<Dropdown
-																	className="fb-advanced-button-icon-dropdown"
-																	contentClassName="fb-advanced-button-icon-dropdown-content"
-																	popoverProps={{ placement: "bottom-start" }}
-																	renderToggle={({ isOpen, onToggle }) => (
-																		<Button
-																			variant="primary"
-																			onClick={onToggle}
-																			aria-expanded={isOpen}
-																			aria-label={__(
-																				"Toggle Typography Settings",
-																				"frontis-blocks",
-																			)}
-																			className="fb-advanced-button-icon-btn"
-																		>
-																			<Dashicon
-																				icon="color-picker"
-																				className="fb-advanced-button-icon"
-																			/>
-																		</Button>
-																	)}
-																	renderContent={() => (
-																		<div className="fb-advanced-button-icon-popup">
-																			<BaseControl className="fb-advanced-button-icon-popup-inner">
-																				<ToggleControl
-																					label={__(
-																						"Open in new tab",
-																						"frontis-blocks",
-																					)}
-																					checked={ButtonTargetUrl}
-																					onChange={(value) =>
-																						setAttributes({
-																							ButtonTargetUrl: value,
-																						})
-																					}
-																				/>
-																			</BaseControl>
-																		</div>
-																	)}
-																/>
-															</div>
-														</BaseControl>
-													</div>
-
-													<div className="fb-advanced-btn-icon-wrapper">
-														<BaseControl
-															label={__("Icon", "frontis-blocks")}
-															id="fb-setting-text-alignment"
-															className="fb-setting-text-alignment"
-														>
-															<ButtonGroup className="fb-setting-text-alignment-group-btn">
-															{ICON_ALIGN.map((item, key) => (
-																<Button
-																	key={key}
-																	onClick={() =>
-																		setAttributes({
-																			buttonIconAlign: item.value,
-																		})
-																	}
-																	className={`fb-setting-text-alignment-single-btn ${
-																		buttonIconAlign === item.value
-																			? "active"
-																			: ""
-																	}`}
-																>
-																	{item.label}
-																</Button>
-															))}
-														</ButtonGroup>
-														
-															{(buttonIconAlign === "icon-text" ||
-																buttonIconAlign === "icon-only") && (
-																<FBIconPicker
-																	value={ButtonIcon}
-																	setIconHandler={iconHandler}
-																/>
-															)}
-														</BaseControl>
-													</div>
-													{buttonIconAlign === "icon-text"  && (
-													<SelectControl
-														label={__("Icon Position", "frontis-blocks")}
-														options={ICON_POSITION}
-														value={btnIconPosition}
-														onChange={(value) =>
-															setAttributes({ btnIconPosition: value })
-														}
-													/>
-													)}
-												</PanelBody>
-											</div>
-											{/* Connector */}
-											<div className="fb-dual-button-connenctor-wrapper">
-												<PanelBody
-													title={__("Connector", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<ToggleControl
-														label={__("Show Connector", "frontis-block")}
-														checked={connectorSwitcher}
-														onChange={(value) =>
-															setAttributes({ connectorSwitcher: value })
-														}
-													/>
-													{connectorSwitcher && (
-														<TextControl
-															label={__("Connector Text", "frontis-blocks")}
-															value={connectorText}
-															onChange={(value) =>
-																setAttributes({ connectorText: value })
-															}
-															className="fb-advanced-button-text"
-														/>
-													)}
-												</PanelBody>
-											</div>
-											{/* Button Two */}
-											<div className="fb-dual-button-two-wrapper">
-												<PanelBody
-													title={__("Button Two", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<TextControl
-														label={__("Text", "frontis-blocks")}
-														value={ButtonTwoText}
-														onChange={(value) =>
-															setAttributes({ ButtonTwoText: value })
-														}
-														className="fb-advanced-button-text"
-													/>
-													<div className="fb-link-control-wrapper">
-														<BaseControl label={__("URL", "frontis-blocks")}>
-															<div className="fb-link-control-inner-wrapper">
-																<TextControl
-																	value={ButtonTwoUrl}
-																	onChange={(value) =>
-																		setAttributes({ ButtonTwoUrl: value })
-																	}
-																	className="fb-advanced-button-url"
-																	placeholder={__("https://", "frontis-blocks")}
-																/>
-																<Dropdown
-																	className="fb-advanced-button-icon-dropdown"
-																	contentClassName="fb-advanced-button-icon-dropdown-content"
-																	popoverProps={{ placement: "bottom-start" }}
-																	renderToggle={({ isOpen, onToggle }) => (
-																		<Button
-																			variant="primary"
-																			onClick={onToggle}
-																			aria-expanded={isOpen}
-																			aria-label={__(
-																				"Toggle Typography Settings",
-																				"frontis-blocks",
-																			)}
-																			className="fb-advanced-button-icon-btn"
-																		>
-																			<Dashicon
-																				icon="color-picker"
-																				className="fb-advanced-button-icon"
-																			/>
-																		</Button>
-																	)}
-																	renderContent={() => (
-																		<div className="fb-advanced-button-icon-popup">
-																			<BaseControl className="fb-advanced-button-icon-popup-inner">
-																				<ToggleControl
-																					label={__(
-																						"Open in new tab",
-																						"frontis-blocks",
-																					)}
-																					checked={ButtonTwoTargetUrl}
-																					onChange={(value) =>
-																						setAttributes({
-																							ButtonTwoTargetUrl: value,
-																						})
-																					}
-																				/>
-																			</BaseControl>
-																		</div>
-																	)}
-																/>
-															</div>
-														</BaseControl>
-													</div>
-
-													<div className="fb-advanced-btn-icon-wrapper">
-														<BaseControl
-															label={__("Icon", "frontis-blocks")}
-															id="fb-setting-text-alignment"
-															className="fb-setting-text-alignment"
-														>
-															<ButtonGroup className="fb-setting-text-alignment-group-btn">
-																{ICON_ALIGN.map((item, key) => (
-																	<Button
-																		key={key}
-																		onClick={() =>
-																			setAttributes({
-																				buttonTwoIconAlign: item.value,
-																			})
-																		}
-																		className={`fb-setting-text-alignment-single-btn ${
-																			buttonTwoIconAlign === item.value
-																				? "active"
-																				: ""
-																		}`}
-																	>
-																		{item.label}
-																	</Button>
-																))}
-															</ButtonGroup>
-															{(buttonTwoIconAlign === "icon-text" ||
-																buttonTwoIconAlign === "icon-only") && (
-																<FBIconPicker
-																	value={ButtonTwoIcon}
-																	setIconHandler={iconHandlerTwo}
-																/>
-															)}
-														</BaseControl>
-													</div>
-													{buttonTwoIconAlign === "icon-text" && (
-													<SelectControl
-														label={__("Icon Position", "frontis-blocks")}
-														options={ICON_POSITION}
-														value={btnTwoIconPosition}
-														onChange={(value) =>
-															setAttributes({ btnTwoIconPosition: value })
-														}
-													/>
-													)}
-												</PanelBody>
-											</div>
-										</div>
-									</>
-								)}
-
-								{tab.name === "styles" && (
-									<>
-										<PanelBody
-											title={__("Buttons", "frontis-blocks")}
-											initialOpen={false}
-										>
-											<FB_Range
-												min={0}
-												max={100}
-												label={__("Width", "frontis-blocks")}
-												rangeValue={ButtonWidth}
-												onChangeHandler={(value) => setAttributes({ ButtonWidth: value })}
-												rangeUnitHandler={(value) => setAttributes({ ButtonWidthWidthUnits: value })}
-												deviceType={deviceType}
-												units={ButtonWidthWidthUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
-											/>
-											<SelectControl
-												label={__("Direction", "frontis-blocks")}
-												options={BUTTONS_DIRECTION}
-												value={buttonsDirection}
-												onChange={(value) =>
-													setAttributes({ buttonsDirection: value })
-												}
-											/>
-											<FB_TypographyControl
-												globalTypoControlActive={true}
-												globalTypoSwitcher={ButtonGlobalTypoSwitcher}
-												storeGlobalTypographyData={(value) => setAttributes({ ButtonGlobalTypographyData: value })}
-
-												globalTypoType={ButtonGlobalTypoType}
-												onChangeGlobalTypoType={(value) => {
-													setAttributes({ 
-														ButtonGlobalTypoType: value, 
-														ButtonGlobalTypoSwitcher: value === 'default' ? {...ButtonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...ButtonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-													})
-												}}
-
-												globalTypoOption={ButtonGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ ButtonGlobalTypoOption: value })}
-
-												fontFamily={ButtonFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ ButtonFontFamily: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontFamily: value && false} })}
-
-												fontSize={ButtonFontSize}
-												onChangeFontSize={(value) => setAttributes({ ButtonFontSize: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontSize: value && false} })}
-
-												fontSizeUnits={ButtonFontSizeUnits}
-												onChangeFontSizeUnit={(value) => setAttributes({ ButtonFontSizeUnits: value })}
-
-												fontWeight={ButtonFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ ButtonFontWeight: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontWeight: value && false} })}
-
-												fontStyle={ButtonFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ ButtonFontStyle: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontStyle: value && false} })}
-
-												textTransform={ButtonTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ ButtonTextTransform: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, textTransform: value && false} })}
-
-												textDecoration={ButtonTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ ButtonTextDecoration: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, textDecoration: value && false} })}
-
-												letterSpacing={ButtonLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ ButtonLetterSpacing: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-												letterSpacingUnits={ButtonLetterSpacingUnits}
-												onChangeLetterSpacingUnit={(value) => setAttributes({ ButtonLetterSpacingUnits: value })}
-
-												lineHeight={ButtonLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ ButtonLineHeight: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, lineHeight: value && false} })}
-
-												lineHeightUnits={ButtonLineHeightUnits}
-												onChangeLineHeightUnit={(value) => setAttributes({ ButtonLineHeightUnits: value })}
-
-												deviceType={deviceType}
-												setAttributes={setAttributes}
-											/>
-											
-
-											{/*	Spacing */}
-											<FB_Spacing
-												label={__("Padding", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleButtonPaddingUnitsHandler}
-												spacingUnits={ButtonPaddingUnits}
-												spacingDesktop={ButtonDesktopPadding}
-												spacingTablet={ButtonTabPadding}
-												spacingMobile={ButtonMobilePadding}
-												handleSpacingUnitHandler={handleButtonPaddingUnitChange}
-												spacingCombineBtn={ButtonPaddingLink}
-												spacingCombineBtnHandler={handleButtonPaddingCombineBtn}
-												setAttributes={setAttributes}
-											/>
-
-											<FB_Spacing
-												label={__("Margin", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleButtonMarginUnitsHandler}
-												spacingUnits={ButtonMarginUnits}
-												spacingDesktop={ButtonDesktopMargin}
-												spacingTablet={ButtonTabMargin}
-												spacingMobile={ButtonMobileMargin}
-												handleSpacingUnitHandler={handleButtonMarginUnitChange}
-												spacingCombineBtn={ButtonMarginLink}
-												spacingCombineBtnHandler={handleButtonMarginCombineBtn}
-												setAttributes={setAttributes}
-											/>
-											<FB_Range
-												min={0}
-												max={300}
-												label={__("Gap", "frontis-blocks")}
-												rangeValue={buttonsGap}
-												onChangeHandler={(value) =>
-													setAttributes({ buttonsGap: value })
-												}
-												rangeUnitHandler={(value) =>
-													setAttributes({ buttonsGapUnits: value })
-												}
-												deviceType={deviceType}
-												units={buttonsGapUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
-											/>
-										</PanelBody>
-										<PanelBody
-											title={__("Button One", "frontis-blocks")}
-											initialOpen={false}
-											className="fb-setting-border-setting-wrapper"
-										>
-											{/* Text Color */}
-											<FB_SwitcherControl
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalSwitcher={ButtonColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ ButtonColorSwitcher: value })}
-                                            />
-
-                                            {ButtonColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={ButtonColor}
-                                                    setGlobalColor={(value) => setAttributes({ ButtonColor: value })}
-                                                />
-                                            )}
-
-                                            {ButtonColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={ButtonHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ ButtonHoverColor: value })}
-                                                />
-                                            )}
-											{/* Background Color */}
-											<FB_SwitcherControl
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalSwitcher={ButtonBgColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ ButtonBgColorSwitcher: value })}
-                                            />
-
-                                            {ButtonBgColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={ButtonBgColor}
-                                                    setGlobalColor={(value) => setAttributes({ ButtonBgColor: value })}
-                                                />
-                                            )}
-
-                                            {ButtonBgColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={ButtonBgHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ ButtonBgHoverColor: value })}
-                                                />
-                                            )}
-											
-											<SelectControl
-												label={__("Border Style", "frontis-blocks")}
-												value={ButtonBorder}
-												options={BORDER_STYLES}
-												onChange={(value) =>
-													setAttributes({ ButtonBorder: value })
-												}
-											/>
-											{/* Border Color */}
-											<FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={ButtonBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ ButtonBorderColorSwitcher: value })}
-                                            />
-
-                                            {ButtonBorderColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={ButtonBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ ButtonBorderColor: value })}
-                                                />
-                                            )}
-
-                                            {ButtonBorderColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={ButtonBorderHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ ButtonBorderHoverColor: value })}
-                                                />
-                                            )}
-											<FB_Spacing
-												label={__("Border", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleButtonOneBorderUnitsHandler}
-												spacingUnits={ButtonBorderUnits}
-												spacingDesktop={ButtonDesktopBorderWidth}
-												spacingTablet={ButtonTabBorderWidth}
-												spacingMobile={ButtonMobileBorderWidth}
-												handleSpacingUnitHandler={ handleButtonOneBorderUnitChange }
-												spacingCombineBtn={ButtonTwoBorderLink}
-												spacingCombineBtnHandler={ handleButtonOneBorderCombineBtn }
-												setAttributes={setAttributes}
-											/>
-
-											<FB_Spacing
-												label={__("Border radius", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleButtonOneBorderRadiusUnitsHandler}
-												spacingUnits={ButtonBorderRadiusUnits}
-												spacingDesktop={ButtonDesktopBorderRadiusWidth}
-												spacingTablet={ButtonTabBorderRadiusWidth}
-												spacingMobile={ButtonMobileBorderRadiusWidth}
-												handleSpacingUnitHandler={ handleButtonOneBorderRadiusUnitChange }
-												spacingCombineBtn={ButtonBorderRadiusLink}
-												spacingCombineBtnHandler={ handleButtonOneBorderRadiusCombineBtn }
-												setAttributes={setAttributes}
-											/>
-
-										</PanelBody>
-										<PanelBody title="Button Two" initialOpen={false}>
-											{/* Text Color */}
-											<FB_SwitcherControl
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalSwitcher={ButtonTwoColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ ButtonTwoColorSwitcher: value })}
-                                            />
-
-                                            {ButtonTwoColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={ButtonTwoColor}
-                                                    setGlobalColor={(value) => setAttributes({ ButtonTwoColor: value })}
-                                                />
-                                            )}
-
-                                            {ButtonTwoColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={ButtonTwoHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ ButtonTwoHoverColor: value })}
-                                                />
-                                            )}
-											{/* Background Color */}
-											<FB_SwitcherControl
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalSwitcher={ButtonTwoBgColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ ButtonTwoBgColorSwitcher: value })}
-                                            />
-
-                                            {ButtonTwoBgColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={ButtonTwoBgColor}
-                                                    setGlobalColor={(value) => setAttributes({ ButtonTwoBgColor: value })}
-                                                />
-                                            )}
-
-                                            {ButtonTwoBgColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={ButtonTwoBgHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ ButtonTwoBgHoverColor: value })}
-                                                />
-                                            )}
-											
-											<SelectControl
-												label={__("Border Style", "frontis-blocks")}
-												value={ButtonTwoBorder}
-												options={BORDER_STYLES}
-												onChange={(value) =>
-													setAttributes({ ButtonTwoBorder: value })
-												}
-											/>
-											{/* Border Color */}
-											<FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={ButtonTwoBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ ButtonTwoBorderColorSwitcher: value })}
-                                            />
-
-                                            {ButtonTwoBorderColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={ButtonTwoBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ ButtonTwoBorderColor: value })}
-                                                />
-                                            )}
-
-                                            {ButtonTwoBorderColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={ButtonTwoBorderHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ ButtonTwoBorderHoverColor: value })}
-                                                />
-                                            )}
-
-											<FB_Spacing
-												label={__("Border", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleButtonBorderUnitsHandler}
-												spacingUnits={ButtonTwoBorderUnits}
-												spacingDesktop={ButtonTwoDesktopBorderWidth}
-												spacingTablet={ButtonTwoTabBorderWidth}
-												spacingMobile={ButtonTwoMobileBorderWidth}
-												handleSpacingUnitHandler={handleButtonBorderUnitChange}
-												spacingCombineBtn={ButtonTwoBorderLink}
-												spacingCombineBtnHandler={handleButtonBorderCombineBtn}
-												setAttributes={setAttributes}
-											/>
-											<FB_Spacing
-												label={__("Border Radius", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={
-													handleButtonBorderRadiusUnitsHandler
-												}
-												spacingUnits={ButtonTwoBorderRadiusUnits}
-												spacingDesktop={ButtonTwoDesktopBorderRadiusWidth}
-												spacingTablet={ButtonTwoTabBorderRadiusWidth}
-												spacingMobile={ButtonTwoMobileBorderRadiusWidth}
-												handleSpacingUnitHandler={
-													handleButtonBorderRadiusUnitChange
-												}
-												spacingCombineBtn={ButtonTwoBorderRadiusLink}
-												spacingCombineBtnHandler={
-													handleButtonBorderRadiusCombineBtn
-												}
-												setAttributes={setAttributes}
-											/>
-										</PanelBody>
-										{/*	Connector Style*/}
-										{connectorSwitcher && (
-											<PanelBody
-											title={__("Connector", "frontis-blocks")}
-											initialOpen={false}
-										>
-											<FB_Range
-												min={1}
-												max={300}
-												label={__("Connector Size", "frontis-blocks")}
-												rangeValue={connectorSize}
-												onChangeHandler={connectorSizeHandler}
-												rangeUnitHandler={connectorSizeUnitsHandler}
-												deviceType={deviceType}
-												units={connectorSizeUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={50}
-											/>
-											<FB_TypographyControl
-												globalTypoControlActive={true}
-												globalTypoSwitcher={connectorGlobalTypoSwitcher}
-												storeGlobalTypographyData={(value) => setAttributes({ connectorGlobalTypographyData: value })}
-
-												globalTypoType={connectorGlobalTypoType}
-												onChangeGlobalTypoType={(value) => {
-													setAttributes({ 
-														connectorGlobalTypoType: value, 
-														connectorGlobalTypoSwitcher: value === 'default' ? {...connectorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...connectorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-													})
-												}}
-
-												globalTypoOption={connectorGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ connectorGlobalTypoOption: value })}
-
-												fontFamily={connectorFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ connectorFontFamily: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontFamily: value && false} })}
-
-												fontSize={connectorFontSize}
-												onChangeFontSize={(value) => setAttributes({ connectorFontSize: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontSize: value && false} })}
-
-												fontSizeUnits={connectorFontSizeUnits}
-												onChangeFontSizeUnit={(value) => setAttributes({ connectorFontSizeUnits: value })}
-
-												fontWeight={connectorFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ connectorFontWeight: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontWeight: value && false} })}
-
-												fontStyle={connectorFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ connectorFontStyle: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontStyle: value && false} })}
-
-												textTransform={connectorTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ connectorTextTransform: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, textTransform: value && false} })}
-
-												textDecoration={connectorTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ connectorTextDecoration: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, textDecoration: value && false} })}
-
-												letterSpacing={connectorLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ connectorLetterSpacing: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-												letterSpacingUnits={connectorLetterSpacingUnits}
-												onChangeLetterSpacingUnit={(value) => setAttributes({ connectorLetterSpacingUnits: value })}
-
-												lineHeight={connectorLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ connectorLineHeight: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, lineHeight: value && false} })}
-
-												lineHeightUnits={connectorLineHeightUnits}
-												onChangeLineHeightUnit={(value) => setAttributes({ connectorLineHeightUnits: value })}
-
-												deviceType={deviceType}
-												setAttributes={setAttributes}
-											/>
-
-											{/* Text Color */}
-											<FB_SwitcherControl
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalSwitcher={connectorColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ connectorColorSwitcher: value })}
-                                            />
-
-                                            {connectorColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={connectorColor}
-                                                    setGlobalColor={(value) => setAttributes({ connectorColor: value })}
-                                                />
-                                            )}
-
-                                            {connectorColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={connectorHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ connectorHoverColor: value })}
-                                                />
-                                            )}
-
-											{/* Background Color */}
-											<FB_SwitcherControl
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalSwitcher={connectorBgColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ connectorBgColorSwitcher: value })}
-                                            />
-
-                                            {connectorBgColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={connectorBgColor}
-                                                    setGlobalColor={(value) => setAttributes({ connectorBgColor: value })}
-                                                />
-                                            )}
-
-                                            {connectorBgColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={connectorBgHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ connectorBgHoverColor: value })}
-                                                />
-                                            )}
-
-											<SelectControl
-												label={__("Border Style", "frontis-blocks")}
-												value={connectorBorder}
-												options={BORDER_STYLES}
-												onChange={(value) =>
-													setAttributes({ connectorBorder: value })
-												}
-											/>
-
-											<FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={connectorBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ connectorBorderColorSwitcher: value })}
-                                            />
-
-                                            {connectorBorderColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={connectorBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ connectorBorderColor: value })}
-                                                />
-                                            )}
-
-                                            {connectorBorderColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={connectorBorderHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ connectorBorderHoverColor: value })}
-                                                />
-                                            )}
-
-											<FB_Spacing
-												label={__("Border", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={connectorBorderUnitsHandler}
-												spacingUnits={connectorBorderUnits}
-												spacingDesktop={connectorBorderDesktop}
-												spacingTablet={connectorBorderTablet}
-												spacingMobile={connectorBorderMobile}
-												handleSpacingUnitHandler={connectorBorderUnitChange}
-												spacingCombineBtn={connectorBorderLink}
-												spacingCombineBtnHandler={connectorBorderCombineBtn}
-												setAttributes={setAttributes}
-											/>
-											<FB_Spacing
-												label={__("Border Radius", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={connectorBorderRadiusUnitsHandler}
-												spacingUnits={connectorBorderRadiusUnits}
-												spacingDesktop={connectorBorderRadiusDesktop}
-												spacingTablet={connectorBorderRadiusTablet}
-												spacingMobile={connectorBorderRadiusMobile}
-												handleSpacingUnitHandler={connectorBorderRadiusUnitChange}
-												spacingCombineBtn={connectorBorderRadiusLink}
-												spacingCombineBtnHandler={connectorBorderRadiusCombineBtn}
-												setAttributes={setAttributes}
-											/>
-										</PanelBody>
-										)}
-										
-										{/*	Icon One Style */}
-										{(buttonIconAlign === 'icon-text' || 
-										buttonIconAlign === 'icon-only') && (
-										<PanelBody
-											title={__("Button One Icon", "frontis-blocks")}
-											initialOpen={false}
-										>
-											<FB_Range
-												min={1}
-												max={300}
-												label={__("Icon Size", "frontis-blocks")}
-												rangeValue={btnIconSize}
-												onChangeHandler={btnIconSizeHandler}
-												rangeUnitHandler={btnIconSizeUnitsHandler}
-												deviceType={deviceType}
-												units={btnIconSizeUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={50}
-											/>
-
-											<FB_Range
-												min={1}
-												max={100}
-												label={__("Spacing", "frontis-blocks")}
-												rangeValue={btnIconSpacing}
-												onChangeHandler={(value) => setAttributes({ btnIconSpacing: value }) }
-												rangeUnitHandler={(value) => setAttributes({ btnIconSpacingUnits: value }) }
-												deviceType={deviceType}
-												units={btnIconSpacingUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
-											/>
-
-											{/** Icon Color **/}
-											<FB_SwitcherControl
-                                                label={__("Icon Color", "frontis-blocks")}
-                                                globalSwitcher={btnIconColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ btnIconColorSwitcher: value })}
-                                            />
-
-                                            {btnIconColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={btnIconColor}
-                                                    setGlobalColor={(value) => setAttributes({ btnIconColor: value })}
-                                                />
-                                            )}
-
-                                            {btnIconColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={btnIconHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ btnIconHoverColor: value })}
-                                                />
-                                            )}
-											{/** Icon Background Color **/}
-											<FB_SwitcherControl
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalSwitcher={btnIconBgColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ btnIconBgColorSwitcher: value })}
-                                            />
-
-                                            {btnIconBgColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={btnIconBgColor}
-                                                    setGlobalColor={(value) => setAttributes({ btnIconBgColor: value })}
-                                                />
-                                            )}
-
-                                            {btnIconBgColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={btnIconBgHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ btnIconBgHoverColor: value })}
-                                                />
-                                            )}
-
-											{/** Border **/}
-											<SelectControl
-												label={__("Border Style", "frontis-blocks")}
-												value={iconBorder}
-												options={BORDER_STYLES}
-												onChange={(value) =>
-													setAttributes({ iconBorder: value })
-												}
-											/>
-
-											<FB_SwitcherControl
-												label={__("Border Color", "frontis-blocks")}
-												globalSwitcher={iconBorderColorSwitcher}
-												setGlobalSwitcher={(value) => setAttributes({ iconBorderColorSwitcher: value })}
-											/>
-
-											{iconBorderColorSwitcher === 'normal' && (
-												<FB_ColorControl
-													label={__("Normal Color", "frontis-blocks")}
-													globalColor={iconBorderColor}
-													setGlobalColor={(value) => setAttributes({ iconBorderColor: value })}
-												/>
-											)}
-
-											{iconBorderColorSwitcher === 'hover' && (
-												<FB_ColorControl
-													label={__("Hover Color", "frontis-blocks")}
-													globalColor={iconBorderHoverColor}
-													setGlobalColor={(value) => setAttributes({ iconBorderHoverColor: value })}
-												/>
-											)}
-
-											<FB_Spacing
-												label={__("Border Width", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={iconBorderUnitsHandler}
-												spacingUnits={iconBorderUnits}
-												spacingDesktop={iconBorderDesktop}
-												spacingTablet={iconBorderTablet}
-												spacingMobile={iconBorderMobile}
-												handleSpacingUnitHandler={iconBorderUnitChange}
-												spacingCombineBtn={iconBorderLink}
-												spacingCombineBtnHandler={iconBorderCombineBtn}
-												setAttributes={setAttributes}
-											/>
-											<FB_Spacing
-												label={__("Border Radius", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={iconBorderRadiusUnitsHandler}
-												spacingUnits={iconBorderRadiusUnits}
-												spacingDesktop={iconBorderRadiusDesktop}
-												spacingTablet={iconBorderRadiusTablet}
-												spacingMobile={iconBorderRadiusMobile}
-												handleSpacingUnitHandler={iconBorderRadiusUnitChange}
-												spacingCombineBtn={iconBorderRadiusLink}
-												spacingCombineBtnHandler={iconBorderRadiusCombineBtn}
-												setAttributes={setAttributes}
-											/>
-
-										</PanelBody>
-										)}
-
-										{/*	Icon Style Two */}
-										{(buttonTwoIconAlign === 'icon-text' || 
-										buttonTwoIconAlign === 'icon-only') && (
-										<PanelBody
-											title={__("Button Two Icon", "frontis-blocks")}
-											initialOpen={false}
-										>
-											<FB_Range
-												min={1}
-												max={100}
-												label={__("Icon Size", "frontis-blocks")}
-												rangeValue={btnTwoIconSize}
-												onChangeHandler={(value) => setAttributes({ btnTwoIconSize: value }) }
-												rangeUnitHandler={(value) => setAttributes({ btnTwoIconSizeUnits: value }) }
-												deviceType={deviceType}
-												units={btnTwoIconSizeUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
-											/>
-											<FB_Range
-												min={1}
-												max={100}
-												label={__("Spacing", "frontis-blocks")}
-												rangeValue={btnTwoIconSpacing}
-												onChangeHandler={(value) => setAttributes({ btnTwoIconSpacing: value }) }
-												rangeUnitHandler={(value) => setAttributes({ btnTwoIconSpacingUnits: value }) }
-												deviceType={deviceType}
-												units={btnTwoIconSpacingUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
-											/>
-
-											<FB_SwitcherControl
-												label={__("Icon Color", "frontis-blocks")}
-												globalColorSwitcher={btnIconColorSwitcher}
-												globalColor={btnIconColor}
-												globalHoverColor={btnIconHoverColor}
-												handleColorSwitcherChange={(value) => setAttributes({ btnIconColorSwitcher: value }) }
-												handleGlobalColorChange={(value) => setAttributes({ btnIconColor: value }) }
-												handleGlobalHoverColorChange={(value) => setAttributes({ btnIconHoverColor: value }) }
-											/>
-
-											{btnTwoIconColorSwitcher === 'normal' && (
-												<FB_ColorControl
-													label={__("Normal Color", "frontis-blocks")}
-													globalColor={btnTwoIconColor}
-													setGlobalColor={(value) => setAttributes({ btnTwoIconColor: value })}
-												/>
-											)}
-
-											{btnTwoIconColorSwitcher === 'hover' && (
-												<FB_ColorControl
-													label={__("Hover Color", "frontis-blocks")}
-													globalColor={btnTwoIconHoverColor}
-													setGlobalColor={(value) => setAttributes({ btnTwoIconHoverColor: value })}
-												/>
-											)}
-											{/** Icon Two Background Color **/}
-											<FB_SwitcherControl
-												label={__("Background Color", "frontis-blocks")}
-												globalSwitcher={btnIconTwoBgColorSwitcher}
-												setGlobalSwitcher={(value) => setAttributes({ btnIconTwoBgColorSwitcher: value })}
-											/>
-
-											{btnIconTwoBgColorSwitcher === 'normal' && (
-												<FB_ColorControl
-													label={__("Normal Color", "frontis-blocks")}
-													globalColor={btnTwoIconBgColor}
-													setGlobalColor={(value) => setAttributes({ btnTwoIconBgColor: value })}
-												/>
-											)}
-
-											{btnIconTwoBgColorSwitcher === 'hover' && (
-												<FB_ColorControl
-													label={__("Hover Color", "frontis-blocks")}
-													globalColor={btnTwoIconBgHoverColor}
-													setGlobalColor={(value) => setAttributes({ btnTwoIconBgHoverColor: value })}
-												/>
-											)}
-
-											{/** Border **/}
-											<SelectControl
-												label={__("Border Style", "frontis-blocks")}
-												value={iconTwoBorder}
-												options={BORDER_STYLES}
-												onChange={(value) =>
-													setAttributes({ iconTwoBorder: value })
-												}
-											/>
-
-											<FB_SwitcherControl
-												label={__("Border Color", "frontis-blocks")}
-												globalSwitcher={iconTwoBorderColorSwitcher}
-												setGlobalSwitcher={(value) => setAttributes({ iconTwoBorderColorSwitcher: value })}
-											/>
-
-											{iconTwoBorderColorSwitcher === 'normal' && (
-												<FB_ColorControl
-													label={__("Normal Color", "frontis-blocks")}
-													globalColor={iconTwoBorderColor}
-													setGlobalColor={(value) => setAttributes({ iconTwoBorderColor: value })}
-												/>
-											)}
-
-											{iconTwoBorderColorSwitcher === 'hover' && (
-												<FB_ColorControl
-													label={__("Hover Color", "frontis-blocks")}
-													globalColor={iconTwoBorderHoverColor}
-													setGlobalColor={(value) => setAttributes({ iconTwoBorderHoverColor: value })}
-												/>
-											)}
-
-											<FB_Spacing
-												label={__("Border Width", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={iconTwoBorderUnitsHandler}
-												spacingUnits={iconTwoBorderUnits}
-												spacingDesktop={iconTwoBorderDesktop}
-												spacingTablet={iconTwoBorderTablet}
-												spacingMobile={iconTwoBorderMobile}
-												handleSpacingUnitHandler={iconTwoBorderUnitChange}
-												spacingCombineBtn={iconTwoBorderLink}
-												spacingCombineBtnHandler={iconTwoBorderCombineBtn}
-												setAttributes={setAttributes}
-											/>
-											<FB_Spacing
-												label={__("Border Radius", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={iconTwoBorderRadiusUnitsHandler}
-												spacingUnits={iconTwoBorderRadiusUnits}
-												spacingDesktop={iconTwoBorderRadiusDesktop}
-												spacingTablet={iconTwoBorderRadiusTablet}
-												spacingMobile={iconTwoBorderRadiusMobile}
-												handleSpacingUnitHandler={iconTwoBorderRadiusUnitChange}
-												spacingCombineBtn={iconTwoBorderRadiusLink}
-												spacingCombineBtnHandler={iconTwoBorderRadiusCombineBtn}
-												setAttributes={setAttributes}
-											/>
-
-										</PanelBody>
-										)}
-									</>
-								)}
-								{tab.name === "advanced" && (
-									<>
-										<div className="fb-setting-advanced-tab-wrapper">
-											<div className="fb-setting-z-index-wrapper">
-												<PanelBody
-													title={__("Layout", "frontis-blocks")}
-													initialOpen={true}
-													className="fb-setting-layout-header" 
-												>
-													<FB_Range
-                                                        min={0}
-                                                        max={10000000}
-                                                        label={__("Z Index", "frontis-blocks")}
-                                                        rangeValue={dualButtonGlobalZIndex}
-                                                        onChangeHandler={(value) => setAttributes({ dualButtonGlobalZIndex: value === 0 ? undefined : value })}
-                                                        deviceType={deviceType}
-                                                        setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={""}
-                                                        isRangeUnit={false}
-                                                    />
-
-													<SelectControl
-                                                        label={__("Overflow", "frontis-blocks")}
-                                                        value={dualBtnOverflow}
-                                                        options={OVERFLOW_OP}
-                                                        onChange={(value) => setAttributes({ dualBtnOverflow: value })}
-                                                    />
-
-													<FB_PositionControl
-														deviceType={deviceType}
-														positionType={dualBtnPositionType}
-														setPositionType={(value) => setAttributes({ dualBtnPositionType: value })}
-																										
-														HZOrientationType={dualBtnHZOrientationType}
-														setHZOrientationType={(value) =>
-															setAttributes({ dualBtnHZOrientationType: value })
-														}
-														VROrientationType={dualBtnVROrientationType}
-														setVROrientationType={(value) =>
-															setAttributes({ dualBtnVROrientationType: value })
-														}
-																											
-														HZLeftOffset={dualBtnHZLeftOffset}
-														setHZLeftOffset={(value) => setAttributes({ dualBtnHZLeftOffset: value })}
-														HZLeftOffsetUnits={dualBtnHZLeftOffsetUnits}
-														setHZLeftOffsetUnits={(value) => setAttributes({ dualBtnHZLeftOffsetUnits: value })}
-														HZRightOffset={dualBtnHZRightOffset}
-														setHZRightOffset={(value) => setAttributes({ dualBtnHZRightOffset: value })}
-														HZRightOffsetUnits={dualBtnHZRightOffsetUnits}
-														setHZRightOffsetUnits={(value) => setAttributes({ dualBtnHZRightOffsetUnits: value })}
-																										
-														VRTopOffset={dualBtnVRTopOffset}
-														setVRTopOffset={(value) => setAttributes({ dualBtnVRTopOffset: value })}
-														VRTopOffsetUnits={dualBtnVRTopOffsetUnits}
-														setVRTopOffsetUnits={(value) => setAttributes({ dualBtnVRTopOffsetUnits: value })}
-														VRBottomOffset={dualBtnVRBottomOffset}
-														setVRBottomOffset={(value) => setAttributes({ dualBtnVRBottomOffset: value })}
-														VRBottomOffsetUnits={dualBtnVRBottomOffsetUnits}
-														setVRBottomOffsetUnits={(value) => setAttributes({ dualBtnVRBottomOffsetUnits: value })}
-
-														setAttributes={setAttributes}
-													/>
-
-													<FB_InputControl
-														label={__("CSS ID", "frontis-blocks")}
-														value={dualButtonGlobalWraperID}
-														onChangeValue={(value) => setAttributes({ dualButtonGlobalWraperID: value })}
-														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
-													/>
-
-													<FB_InputControl
-														label={__("CSS Class", "frontis-blocks")}
-														value={dualButtonGlobalWraperClass}
-														onChangeValue={(value) => setAttributes({ dualButtonGlobalWraperClass: value })}
-														helpText={__("Separate with spaces key.", "frontis-blocks")}
-													/>
-													
-												</PanelBody>
-
-												<PanelBody
-													title={__("Padding and Margin", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<FB_Spacing
-														label={__("Padding", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={ handleGlobalPaddingUnitsHandler }
-														spacingUnits={dualButtonGlobalPaddingUnits}
-														spacingDesktop={dualButtonGlobalPaddingDesktop}
-														spacingTablet={dualButtonGlobalPaddingTablet}
-														spacingMobile={dualButtonGlobalPaddingMobile}
-														handleSpacingUnitHandler={ handleGlobalPaddingUnitChange }
-														spacingCombineBtn={dualButtonGlobalPaddingLink}
-														spacingCombineBtnHandler={ handleGlobalPaddingCombineBtn }
-														setAttributes={setAttributes}
-													/>
-													<FB_Spacing
-														label={__("Margin", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={handleGlobalMarginUnitsHandler}
-														spacingUnits={dualButtonGlobalMarginUnits}
-														spacingDesktop={dualButtonGlobalMarginDesktop}
-														spacingTablet={dualButtonGlobalMarginTablet}
-														spacingMobile={dualButtonGlobalMarginMobile}
-														handleSpacingUnitHandler={ handleGlobalMarginUnitChange }
-														spacingCombineBtn={dualButtonGlobalMarginLink}
-														spacingCombineBtnHandler={ handleGlobalMarginCombineBtn }
-														setAttributes={setAttributes}
-													/>
-												</PanelBody>
-
-												<PanelBody title="Background Color" initialOpen={false}>
-													
-													<FB_SwitcherControl
-														label={__("Background Color", "frontis-blocks")}
-														globalSwitcher={dualButtonGlobalBgColorSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ dualButtonGlobalBgColorSwitcher: value })}
-													/>
-
-													{dualButtonGlobalBgColorSwitcher === 'normal' && (
-														<FB_ColorControl
-															label={__("Normal Color", "frontis-blocks")}
-															globalColor={dualButtonGlobalBgColor}
-															setGlobalColor={(value) => setAttributes({ dualButtonGlobalBgColor: value })}
-														/>
-													)}
-
-													{dualButtonGlobalBgColorSwitcher === 'hover' && (
-														<FB_ColorControl
-															label={__("Hover Color", "frontis-blocks")}
-															globalColor={dualButtonGlobalBgHoverColor}
-															setGlobalColor={(value) => setAttributes({ dualButtonGlobalBgHoverColor: value })}
-														/>
-													)}
-												</PanelBody>
-												<PanelBody
-													title={__("Border and Shadow", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<SelectControl
-														label={__("Border Style", "frontis-blocks")}
-														value={dualButtonGlobalBorder}
-														options={BORDER_STYLES}
-														onChange={(value) => setAttributes({ dualButtonGlobalBorder: value }) }
-													/>
-
-													<FB_SwitcherControl
-														label={__("Border Color", "frontis-blocks")}
-														globalSwitcher={dualButtonGlobalBorderColorSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ dualButtonGlobalBorderColorSwitcher: value })}
-													/>
-
-													{dualButtonGlobalBgColorSwitcher === 'normal' && (
-														<FB_ColorControl
-															label={__("Normal Color", "frontis-blocks")}
-															globalColor={dualButtonGlobalBorderColor}
-															setGlobalColor={(value) => setAttributes({ dualButtonGlobalBorderColor: value })}
-														/>
-													)}
-
-													{dualButtonGlobalBorderColorSwitcher === 'hover' && (
-														<FB_ColorControl
-															label={__("Hover Color", "frontis-blocks")}
-															globalColor={dualButtonGlobalBorderHoverColor}
-															setGlobalColor={(value) => setAttributes({ dualButtonGlobalBorderHoverColor: value })}
-														/>
-													)}
-
-													<FB_Spacing
-														label={__("Border", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={handleGlobalBorderUnitsHandler}
-														spacingUnits={dualButtonGlobalBorderUnits}
-														spacingDesktop={dualButtonGlobalBorderDesktop}
-														spacingTablet={dualButtonGlobalBorderTablet}
-														spacingMobile={dualButtonGlobalBorderMobile}
-														handleSpacingUnitHandler={handleGlobalBorderUnitChange}
-														spacingCombineBtn={dualButtonGlobalBorderLink}
-														spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
-														setAttributes={setAttributes}
-													/>
-
-													<FB_Spacing
-														label={__("Border Radius", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={ handleGlobalBorderRadiusUnitsHandler }
-														spacingUnits={dualButtonGlobalBorderRadiusUnits}
-														spacingDesktop={dualButtonGlobalBorderRadiusDesktop}
-														spacingTablet={dualButtonGlobalBorderRadiusTablet}
-														spacingMobile={dualButtonGlobalBorderRadiusMobile}
-														handleSpacingUnitHandler={ handleGlobalBorderRadiusUnitChange }
-														spacingCombineBtn={dualButtonGlobalBorderRadiusLink}
-														spacingCombineBtnHandler={ handleGlobalBorderRadiusCombineBtn}
-														setAttributes={setAttributes}
-													/>
-													
-													<FB_SwitcherControl
-                                                    label={__("Box Shadow", "frontis-blocks")}
-                                                    globalSwitcher={globalBoxShadowSwitcher}
-                                                    setGlobalSwitcher={(value) => setAttributes({ globalBoxShadowSwitcher: value })}
-													/>
-
-													{globalBoxShadowSwitcher === 'normal' && (
-														<FB_BoxShadowControl
-															label={__("Normal Shadow", "frontis-blocks")}
-															onBoxShadowChange={(value) => setAttributes({ globalBoxShadowValues: value })}
-															initialShadowValue={globalBoxShadowValues}
-															onBoxShadowStyleChange={(value) => setAttributes({ globalBoxShadowCssValue: value })}
-														/>
-													)}
-
-													{globalBoxShadowSwitcher === 'hover' && (
-														<FB_BoxShadowControl
-															label={__("Hover Shadow", "frontis-blocks")}
-															onBoxShadowChange={(value) => setAttributes({ globalBoxShadowHoverValues: value })}
-															initialShadowValue={globalBoxShadowHoverValues}
-															onBoxShadowStyleChange={(value) => setAttributes({ globalHoverBoxShadowCssValue: value })}
-														/>
-													)}
-												</PanelBody>
-
-												<PanelBody
-													title={__("Responsive Control", "frontis-blocks")}
-													initialOpen={false}
-													className="fb-setting-responsive-control-wrapper"
-												>
-													<FB_VisibilityControl
-                                                        desktopValue={dualBtnDesktopSwitcher}
-                                                        setDesktopValue={(value) => setAttributes({ dualBtnDesktopSwitcher: value })}
-
-                                                        tabletValue={dualBtnTabletSwitcher}
-                                                        setTabletValue={(value) => setAttributes({ dualBtnTabletSwitcher: value })}
-
-                                                        mobileValue={dualBtnMobileSwitcher}
-                                                        setMobileValue={(value) => setAttributes({ dualBtnMobileSwitcher: value })}
-                                                    />
-												</PanelBody>
-
-												<PanelBody
-													title={__("Custom CSS", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<FB_CustomCSSEditor  
-														value={dualButtonGlobalWraperCustomCSS}
-														onChangeValue={(value) => setAttributes({ dualButtonGlobalWraperCustomCSS: value })}
-													/>
-												</PanelBody>
-											</div>
-										</div>
-									</>
-								)}
-							</div>
-						)}
-					</TabPanel>
-				</div>
-			</InspectorControls>
+			<FB_InspectorControls
+				generalControls={generalControls}
+				styleControls={styleControls}
+				advancedControls={advancedControls}
+			/>
 		</>
 	);
 }

@@ -58,7 +58,7 @@ import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
-
+import FB_InspectorControls from '@Components/InspectorControls';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -2811,1462 +2811,1448 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const editorStyle = `${fbIconBoxStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
+	/**
+	 * Inspector General Controls
+	 */
+	const generalControls = (
+		<>
+			<div className="fb-presets-wrapper">
+				<PanelBody
+				title={__("Presets", "frontis-block")}
+				initialOpen={true}
+				>
+					<SelectControl
+						label={__("Preset Style", "frontis-blocks")}
+						value={iconBoxPresetStyle}
+						options={PRESETS}
+						onChange={(selected) => changeIconBoxPreset(selected)}
+					/>
+				</PanelBody>
+			</div>
+			<div className="fb-advanced-wrapper">
+				<PanelBody
+					title={__("Icon/Image", "frontis-block")}
+					initialOpen={false}
+				>
+					<FB_AlignmentControl
+						label={__("Alignment", "frontis-blocks")}
+						globalAlignment={wrapperAlignment}
+						setGlobalAlignment={(value) => setAttributes({ wrapperAlignment: value })}
+					/>
+
+					<BaseControl className="fb-sub-heading-position">
+						<SelectControl
+							label={__("Media Type", "frontis-block")}
+							value={mediaSwitcher}
+							options={mediaType}
+							onChange={(value) =>
+								setAttributes({ mediaSwitcher: value })
+							}
+						/>
+					</BaseControl>
+
+					<BaseControl className="fb-media-position">
+						<SelectControl
+							label={__("Media Position", "frontis-block")}
+							value={iconBoxIconPosition}
+							options={ICON_ICON_POSITION}
+							onChange={(value) =>
+								setAttributes({ iconBoxIconPosition: value })
+							}
+						/>
+					</BaseControl>
+
+					{(iconBoxIconPosition === 'left' || iconBoxIconPosition === 'right') && (
+					<BaseControl className="fb-media-vertical-position">
+						<SelectControl
+							label={__("Card Alignment", "frontis-block")}
+							value={iconBoxCardAlignment}
+							options={ICON_WRAP_ALIGNMENT}
+							onChange={(value) =>
+								setAttributes({ iconBoxCardAlignment: value })
+							}
+						/>
+					</BaseControl>
+					)}
+
+					{(iconBoxIconPosition === 'left' || iconBoxIconPosition === 'right') && (
+					<BaseControl className="fb-media-vertical-position">
+						<SelectControl
+							label={__("Vertical Position", "frontis-block")}
+							value={iconBoxIconVerticalPosition}
+							options={ICON_ICON_VERTICAL_POSITION}
+							onChange={(value) =>
+								setAttributes({ iconBoxIconVerticalPosition: value })
+							}
+						/>
+					</BaseControl>
+					)}
+
+					<div className="fb-image-upload-field-wrapper">
+						{mediaSwitcher === "image" && (
+							<>
+								<BaseControl
+									label={__("Background Image", "frontis-blocks")}
+									className="fb-advanced-heading-bg-image"
+								>
+									{iconBoxMediaUrl ? (
+										<div
+											className="fb-image-avatar-control"
+											style={{
+												backgroundImage: `url(${iconBoxMediaUrl})`,
+											}}
+										>
+											<button
+												className="fb-image-avatar-delete"
+												onClick={() => {
+													setAttributes({
+														iconBoxMediaUrl: null,
+														iconBoxMediaAlt: null,
+														iconBoxMediaID: null,
+													});
+												}}
+											>
+												<svg
+													width="24"
+													height="24"
+													viewBox="0 0 24 24"
+													fill="none"
+													xmlns="http://www.w3.org/2000/svg"
+												>
+													<path
+														d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+														stroke="#4D4D4D"
+														strokeWidth="1.5"
+														strokeLinecap="round"
+													></path>
+													<path
+														d="M15 9L9 15"
+														stroke="#4D4D4D"
+														strokeWidth="1.5"
+														strokeLinecap="round"
+													></path>
+													<path
+														d="M9 9L15 15"
+														stroke="#4D4D4D"
+														strokeWidth="1.5"
+														strokeLinecap="round"
+													></path>
+												</svg>
+											</button>
+											<button
+												className="fb-image-replace-btn"
+												onClick={() => {
+													const mediaUploader = wp.media({
+														title: __(
+															"Select or Upload Background Image",
+															"frontis-blocks",
+														),
+														button: {
+															text: __(
+																"Use this image",
+																"frontis-blocks",
+															),
+														},
+														multiple: false,
+													});
+
+													mediaUploader.on("select", function () {
+														const attachment = mediaUploader
+															.state()
+															.get("selection")
+															.first()
+															.toJSON();
+														setAttributes({
+															iconBoxMediaUrl: attachment.url,
+															iconBoxMediaAlt: attachment.alt,
+															iconBoxMediaID: attachment.id,
+														});
+													});
+
+													mediaUploader.open();
+												}}
+											>
+												<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C"></path><path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C"></path></svg>
+												Replace
+											</button>
+										</div>
+									) : (
+										<button
+											className="fb-image-upload-btn"
+											onClick={() => {
+												const mediaUploader = wp.media({
+													title: __(
+														"Select or Upload Background Image",
+														"frontis-blocks",
+													),
+													button: {
+														text: __(
+															"Use this image",
+															"frontis-blocks",
+														),
+													},
+													multiple: false,
+												});
+
+												mediaUploader.on("select", function () {
+													const attachment = mediaUploader
+														.state()
+														.get("selection")
+														.first()
+														.toJSON();
+													setAttributes({
+														iconBoxMediaUrl: attachment.url,
+														iconBoxMediaAlt: attachment.alt,
+														iconBoxMediaID: attachment.id,
+													});
+												});
+
+												mediaUploader.open();
+											}}
+										>
+											<svg
+												width="24"
+												height="24"
+												xmlns="http://www.w3.org/2000/svg"
+												fillRule="evenodd"
+												clipRule="evenodd"
+											>
+												<path d="M11.492 10.172l-2.5 3.064-.737-.677 3.737-4.559 3.753 4.585-.753.665-2.5-3.076v7.826h-1v-7.828zm7.008 9.828h-13c-2.481 0-4.5-2.018-4.5-4.5 0-2.178 1.555-4.038 3.698-4.424l.779-.14.043-.789c.185-3.448 3.031-6.147 6.48-6.147 3.449 0 6.295 2.699 6.478 6.147l.044.789.78.14c2.142.386 3.698 2.246 3.698 4.424 0 2.482-2.019 4.5-4.5 4.5m.978-9.908c-.212-3.951-3.472-7.092-7.478-7.092s-7.267 3.141-7.479 7.092c-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.522-5.408"></path>
+											</svg>
+											Upload
+										</button>
+									)}
+								</BaseControl>
+							</>
+						)}
+
+						{mediaSwitcher === "icon" && (
+							<BaseControl>
+								<FBIconPicker
+									value={icon}
+									setIconHandler={iconHandler}
+								/>
+							</BaseControl>
+						)}
+					</div>
+				</PanelBody>
+			</div>
+			<div className="fb-advanced-wrapper">
+				<PanelBody
+					title={__("Title", "frontis-block")}
+					initialOpen={false}
+				>
+					<FB_AlignmentControl
+						label={__("Heading Alignment", "frontis-blocks")}
+						globalAlignment={Alignment}
+						setGlobalAlignment={(value) => setAttributes({ Alignment: value })}
+					/>
+
+					<FB_HtmlTagControl
+						label={__("Heading Tag", "frontis-blocks")}
+						globalHtmlTag={headingTag}
+						setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
+					/>
+					
+
+					<TextareaControl
+						label={__("Heading Text", "frontis-block")}
+						value={Heading_Text}
+						onChange={(value) =>
+							setAttributes({ Heading_Text: value })
+						}
+						className="fb-setting-text"
+					/>
+				</PanelBody>
+			</div>
+			<div className="fb-advanced-wrapper">
+				<PanelBody
+					title={__("Description", "frontis-block")}
+					initialOpen={false}
+				>
+					<ToggleControl
+						label={__("Show Description", "frontis-block")}
+						checked={Sub_Heading_Switcher}
+						onChange={(value) =>
+							setAttributes({ Sub_Heading_Switcher: value })
+						}
+					/>
+
+					{Sub_Heading_Switcher && (
+						<>
+							
+							<FB_AlignmentControl
+								label={__("Alignment", "frontis-blocks")}
+								globalAlignment={descAlignment}
+								setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
+							/>
+
+							<TextareaControl
+								label={__("Sub Heading Text", "frontis-block")}
+								value={Sub_Heading_Text}
+								onChange={(value) =>
+									setAttributes({ Sub_Heading_Text: value })
+								}
+								className="fb-sub-heading-text"
+							/>
+						</>
+					)}
+				</PanelBody>
+			</div>
+
+			{/*Button Element*/}
+			<div className="fb-icon-button-wrapper">
+				<PanelBody
+					title={__("Button", "frontis-block")}
+					initialOpen={false}
+				>
+					<ToggleControl
+						label={__("Show Button", "frontis-block")}
+						checked={icon_Box_Button_Switcher}
+						onChange={(value) =>
+							setAttributes({ icon_Box_Button_Switcher: value })
+						}
+					/>
+
+					{icon_Box_Button_Switcher && (
+						<>
+							
+							<FB_AlignmentControl
+								label={__("Alignment", "frontis-blocks")}
+								globalAlignment={buttonAlignment}
+								setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
+							/>
+							<TextareaControl
+								label={__("Button Text", "frontis-block")}
+								value={icon_Box_Button_Text}
+								onChange={(value) =>
+									setAttributes({ icon_Box_Button_Text: value })
+								}
+								className="fb-icon-button-text"
+							/>
+							<ToggleControl
+								label={__("Show Icon", "frontis-block")}
+								checked={buttonIconSwitcher}
+								onChange={(value) =>
+									setAttributes({ buttonIconSwitcher: value })
+								}
+							/>
+							{buttonIconSwitcher && (
+								<>
+									<BaseControl>
+										<FBIconPicker
+											value={btnIcon}
+											setIconHandler={buttonIconHandler}
+										/>
+									</BaseControl>
+									<SelectControl
+										label={__("Icon Position", "frontis-block")}
+										value={btnIconPosition}
+										options={ICON_POSITION}
+										onChange={(value) =>
+											setAttributes({ btnIconPosition: value })
+										}
+									/>
+								</>
+							)}
+
+							<BaseControl>
+								<FB_UrlControl
+									url={iconBoxButtonLink}
+									onChangeUrl={(value) =>
+										setAttributes({ iconBoxButtonLink: value })
+									}
+									openInNewTab={iconBoxbtnTargetUrl}
+									onChangeOpenInNewTab={(value) =>
+										setAttributes({ iconBoxbtnTargetUrl: value })
+									}
+								/>
+							</BaseControl>
+						</>
+					)}
+				</PanelBody>
+			</div>
+		</>
+	);
+
+	/**
+	 * Inspector Style Controls
+	 */
+	const styleControls = (
+		<>
+			{/*Image/Icon Style*/}
+			<PanelBody
+				title={__("Icon/Image", "frontis-block")}
+				initialOpen={false}
+			>
+				<FB_Range
+					min={0}
+					max={500}
+					label={__("Icon Size", "frontis-blocks")}
+					rangeValue={mediaSize}
+					onChangeHandler={(value) =>
+						setAttributes({ mediaSize: value })
+					}
+					rangeUnitHandler={(value) =>
+						setAttributes({ mediaSizeUnits: value })
+					}
+					deviceType={deviceType}
+					units={mediaSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+
+				{/*Icon Color */}
+				{mediaSwitcher === "icon" && (
+					<>
+						<FB_SwitcherControl
+							label={__("Icon Color", "frontis-blocks")}
+							globalSwitcher={mediaIconColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ mediaIconColorSwitcher: value })}
+						/>
+								
+						{mediaIconColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={mediaIconColor}
+								setGlobalColor={(value) => setAttributes({ mediaIconColor: value })}
+							/>
+						)}
+								
+						{mediaIconColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={mediaIconHoverColor}
+								setGlobalColor={(value) => setAttributes({ mediaIconHoverColor: value })}
+							/>
+						)}
+					</>
+				)}
+				<FB_BackgroundColorControl
+				bgColorSwitcher={mediaBackColorSwitcher}
+				setBgColorSwitcher={(value) => setAttributes({ mediaBackColorSwitcher: value })}
+				normalBackgroundType={mediaBackgroundType}
+				setNormalBackgroundType={(value) => setAttributes({ mediaBackgroundType: value })}
+				normalClassicColor={mediaClassicColor}
+				setNormalClassicColor={(value) => setAttributes({ mediaClassicColor: value })}
+				normalGradientColor={mediaGradientColor}
+				setNormalGradientColor={(value) => setAttributes({ mediaGradientColor: value })}
+				normalCustomGradientSwitcher={mediaCustomGradientSwitcher}
+				setNormalCustomGradientSwitcher={(value) => setAttributes({ mediaCustomGradientSwitcher: value })}
+				normalCustomGradientInputValue={mediaCustomGradientInputValue}
+				setNormalCustomGradientInputValue={(value) => setAttributes({ mediaCustomGradientInputValue: value }) }
+				normalBackgroundImageUrl={mediaBackgroundImageUrl}
+				setNormalBackgroundImageUrl={(value) => setAttributes({ mediaBackgroundImageUrl: value })}
+				normalBackgroundImageAlt={mediaBackgroundImageAlt}
+				setNormalBackgroundImageAlt={(value) => setAttributes({ mediaBackgroundImageAlt: value })}
+				normalBackgroundImageID={mediaBackgroundImageID}
+				setNormalBackgroundImageID={(value) => setAttributes({ mediaBackgroundImageID: value })}
+				normalBackgroundImagePosition={mediaBackgroundImagePosition}
+				setNormalBackgroundImagePosition={(value) => setAttributes({ mediaBackgroundImagePosition: value }) }
+				normalBackgroundImageAttachment={mediaBackgroundImageAttachment}
+				setNormalBackgroundImageAttachment={(value) => setAttributes({ mediaBackgroundImageAttachment: value }) }
+				normalBackgroundImageRepeat={mediaBackgroundImageRepeat}
+				setNormalBackgroundImageRepeat={(value) => setAttributes({ mediaBackgroundImageRepeat: value }) }
+				normalBackgroundImageSize={mediaBackgroundImageSize}
+				setNormalBackgroundImageSize={(value) => setAttributes({ mediaBackgroundImageSize: value }) }
+				hoverBackgroundType={mediaHoverBackgroundType}
+				setHoverBackgroundType={(value) => setAttributes({ mediaHoverBackgroundType: value })}
+				hoverClassicColor={mediaHoverClassicColor}
+				setHoverClassicColor={(value) => setAttributes({ mediaHoverClassicColor: value })}
+				hoverGradientColor={mediaHoverGradientColor}
+				setHoverGradientColor={(value) => setAttributes({ mediaHoverGradientColor: value })}
+				hoverCustomGradientSwitcher={mediaHoverCustomGradientSwitcher}
+				setHoverCustomGradientSwitcher={(value) => setAttributes({ mediaHoverCustomGradientSwitcher: value }) }
+				hoverCustomGradientInputValue={mediaHoverCustomGradientInputValue}
+				setHoverCustomGradientInputValue={(value) => setAttributes({ mediaHoverCustomGradientInputValue: value }) }
+				hoverBackgroundImageUrl={mediaHoverBackgroundImageUrl}
+				setHoverBackgroundImageUrl={(value) => setAttributes({ mediaHoverBackgroundImageUrl: value })}
+				hoverBackgroundImageAlt={mediaHoverBackgroundImageAlt}
+				setHoverBackgroundImageAlt={(value) => setAttributes({ mediaHoverBackgroundImageAlt: value })}
+				hoverBackgroundImageID={mediaHoverBackgroundImageID}
+				setHoverBackgroundImageID={(value) => setAttributes({ mediaHoverBackgroundImageID: value })}
+				hoverBackgroundImagePosition={mediaHoverBackgroundImagePosition}
+				setHoverBackgroundImagePosition={(value) => setAttributes({ mediaHoverBackgroundImagePosition: value }) }
+				hoverBackgroundImageAttachment={mediaHoverBackgroundImageAttachment}
+				setHoverBackgroundImageAttachment={(value) => setAttributes({ mediaHoverBackgroundImageAttachment: value }) }
+				hoverBackgroundImageRepeat={mediaHoverBackgroundImageRepeat}
+				setHoverBackgroundImageRepeat={(value) => setAttributes({ mediaHoverBackgroundImageRepeat: value }) }
+				hoverBackgroundImageSize={mediaHoverBackgroundImageSize}
+				setHoverBackgroundImageSize={(value) => setAttributes({ mediaHoverBackgroundImageSize: value }) }
+				/>
+
+				<FB_Range
+					min={0}
+					max={500}
+					label={__("Background Width", "frontis-blocks")}
+					rangeValue={mediaBgWidth}
+					onChangeHandler={(value) =>
+						setAttributes({ mediaBgWidth: value })
+					}
+					rangeUnitHandler={(value) =>
+						setAttributes({ mediaBgWidthUnits: value })
+					}
+					deviceType={deviceType}
+					units={mediaBgWidthUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+
+				<FB_Range
+					min={0}
+					max={500}
+					label={__("Background Height", "frontis-blocks")}
+					rangeValue={mediaBgHeight}
+					onChangeHandler={(value) =>
+						setAttributes({ mediaBgHeight: value })
+					}
+					rangeUnitHandler={(value) =>
+						setAttributes({ mediaBgHeightUnits: value })
+					}
+					deviceType={deviceType}
+					units={mediaBgHeightUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+
+				<FB_Spacing
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleMediaPaddingUnitsHandler}
+					spacingUnits={mediaPaddingUnits}
+					spacingDesktop={mediaPaddingDesktop}
+					spacingTablet={mediaPaddingTablet}
+					spacingMobile={mediaPaddingMobile}
+					handleSpacingUnitHandler={handleMediaPaddingUnitChange}
+					spacingCombineBtn={mediaPaddingLink}
+					spacingCombineBtnHandler={handleMediaPaddingCombineBtn}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing
+					label={__("Margin", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleMediaMarginUnitsHandler}
+					spacingUnits={mediaMarginUnits}
+					spacingDesktop={mediaMarginDesktop}
+					spacingTablet={mediaMarginTablet}
+					spacingMobile={mediaMarginMobile}
+					handleSpacingUnitHandler={handleMediaMarginUnitChange}
+					spacingCombineBtn={mediaMarginLink}
+					spacingCombineBtnHandler={handleMediaMarginCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<SelectControl
+					label={__("Border Style", "frontis-block")}
+					value={mediaBorder}
+					options={BORDER_STYLES}
+					onChange={(value) =>
+						setAttributes({ mediaBorder: value })
+					}
+				/>
+				
+				<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={mediaBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ mediaBorderColorSwitcher: value })}
+				/>
+						
+				{mediaBorderColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={mediaBorderColor}
+						setGlobalColor={(value) => setAttributes({ mediaBorderColor: value })}
+					/>
+				)}
+						
+				{mediaBorderColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={mediaBorderHoverColor}
+						setGlobalColor={(value) => setAttributes({ mediaBorderHoverColor: value })}
+					/>
+				)}
+
+				<FB_Spacing
+					label={__("Border", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleMediaBorderUnitsHandler}
+					spacingUnits={mediaBorderUnits}
+					spacingDesktop={mediaBorderDesktop}
+					spacingTablet={mediaBorderTablet}
+					spacingMobile={mediaBorderMobile}
+					handleSpacingUnitHandler={handleMediaBorderUnitChange}
+					spacingCombineBtn={mediaBorderLink}
+					spacingCombineBtnHandler={handleMediaBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={
+						handleMediaBorderRadiusUnitsHandler
+					}
+					spacingUnits={mediaBorderRadiusUnits}
+					spacingDesktop={mediaBorderRadiusDesktop}
+					spacingTablet={mediaBorderRadiusTablet}
+					spacingMobile={mediaBorderRadiusMobile}
+					handleSpacingUnitHandler={
+						handleMediaBorderRadiusUnitChange
+					}
+					spacingCombineBtn={mediaBorderRadiusLink}
+					spacingCombineBtnHandler={
+						handleMediaBorderRadiusCombineBtn
+					}
+					setAttributes={setAttributes}
+				/>
+			</PanelBody>
+			{/*Heading Style*/}
+			<PanelBody
+				title={__("Title", "frontis-block")}
+				initialOpen={false}
+			>
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={headingGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) => setAttributes({ headingGlobalTypographyData: value })}
+
+					globalTypoType={headingGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({ 
+							headingGlobalTypoType: value, 
+							headingGlobalTypoSwitcher: value === 'default' ? {...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+						})
+					}}
+
+					globalTypoOption={headingGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) => setAttributes({ headingGlobalTypoOption: value })}
+
+					fontFamily={headingFontFamily}
+					onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontFamily: value && false} })}
+
+					fontSize={headingFontSize}
+					onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontSize: value && false} })}
+
+					fontSizeUnits={headingFontSizeUnits}
+					onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
+
+					fontWeight={headingFontWeight}
+					onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontWeight: value && false} })}
+
+					fontStyle={headingFontStyle}
+					onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontStyle: value && false} })}
+
+					textTransform={headingTextTransform}
+					onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textTransform: value && false} })}
+
+					textDecoration={headingTextDecoration}
+					onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textDecoration: value && false} })}
+
+					letterSpacing={headingLetterSpacing}
+					onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+					letterSpacingUnits={headingLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) => setAttributes({ headingLetterSpacingUnits: value })}
+
+					lineHeight={headingLineHeight}
+					onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, lineHeight: value && false} })}
+
+					lineHeightUnits={headingLineHeightUnits}
+					onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
+
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+
+				
+				<FB_SwitcherControl
+					label={__("Text Color", "frontis-blocks")}
+					globalSwitcher={Heading_Color_Switcher}
+					setGlobalSwitcher={(value) => setAttributes({ Heading_Color_Switcher: value })}
+				/>
+						
+				{Heading_Color_Switcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={Heading_Color}
+						setGlobalColor={(value) => setAttributes({ Heading_Color: value })}
+					/>
+				)}
+						
+				{Heading_Color_Switcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={Heading_Hover_Color}
+						setGlobalColor={(value) => setAttributes({ Heading_Hover_Color: value })}
+					/>
+				)}
+
+				<FB_Spacing
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleHeadingPaddingUnitsHandler}
+					spacingUnits={Heading_padding_units}
+					spacingDesktop={Heading_Desktop_padding}
+					spacingTablet={Heading_Tab_padding}
+					spacingMobile={Heading_Mobile_padding}
+					handleSpacingUnitHandler={handleHeadingPaddingUnitChange}
+					spacingCombineBtn={paddingLink}
+					spacingCombineBtnHandler={handleHeadingPaddingCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing
+					label={__("Margin", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleHeadingMarginUnitsHandler}
+					spacingUnits={Heading_Margin_Units}
+					spacingDesktop={Heading_Desktop_Margin}
+					spacingTablet={Heading_Tab_Margin}
+					spacingMobile={Heading_Mobile_Margin}
+					handleSpacingUnitHandler={handleHeadingMarginUnitChange}
+					spacingCombineBtn={Heading_Margin_Link}
+					spacingCombineBtnHandler={handleHeadingMarginCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				{/*Border*/}
+				<Heading>Border</Heading>
+				<SelectControl
+					label={__("Border Style", "frontis-block")}
+					value={Heading_Border}
+					options={BORDER_STYLES}
+					onChange={(value) =>
+						setAttributes({ Heading_Border: value })
+					}
+				/>
+				
+				<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={Heading_Border_Color_Switcher}
+					setGlobalSwitcher={(value) => setAttributes({ Heading_Border_Color_Switcher: value })}
+				/>
+						
+				{Heading_Border_Color_Switcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={Heading_Border_Color}
+						setGlobalColor={(value) => setAttributes({ Heading_Border_Color: value })}
+					/>
+				)}
+						
+				{Heading_Border_Color_Switcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={Heading_Border_Hover_Color}
+						setGlobalColor={(value) => setAttributes({ Heading_Border_Hover_Color: value })}
+					/>
+				)}
+
+				<FB_Spacing
+					label={__("Border Width", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleHeadingBorderUnitsHandler}
+					spacingUnits={Heading_Border_units}
+					spacingDesktop={Heading_Desktop_Border_Width}
+					spacingTablet={Heading_Tab_Border_Width}
+					spacingMobile={Heading_Mobile_Border_Width}
+					handleSpacingUnitHandler={handleHeadingBorderUnitChange}
+					spacingCombineBtn={borderLink}
+					spacingCombineBtnHandler={handleHeadingBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={
+						handleHeadingBorderRadiusUnitsHandler
+					}
+					spacingUnits={Heading_Border_radius_units}
+					spacingDesktop={Heading_Desktop_Border_radius_Width}
+					spacingTablet={Heading_Tab_Border_radius_Width}
+					spacingMobile={Heading_Mobile_Border_radius_Width}
+					handleSpacingUnitHandler={
+						handleHeadingBorderRadiusUnitChange
+					}
+					spacingCombineBtn={borderRadiusLink}
+					spacingCombineBtnHandler={
+						handleHeadingBorderRadiusCombineBtn
+					}
+					setAttributes={setAttributes}
+				/>
+			</PanelBody>
+			{/*Description Style*/}
+			{Sub_Heading_Switcher && (
+			<PanelBody
+			title={__("Description", "frontis-block")}
+			initialOpen={false}
+			className="fb-icon-box-desc-setting-wrapper"
+			>
+			{/*Typography*/}
+			<FB_TypographyControl
+				globalTypoControlActive={true}
+				globalTypoSwitcher={subHeadingGlobalTypoSwitcher}
+				storeGlobalTypographyData={(value) => setAttributes({ subHeadingGlobalTypographyData: value })}
+
+				globalTypoType={subHeadingGlobalTypoType}
+				onChangeGlobalTypoType={(value) => {
+					setAttributes({ 
+						subHeadingGlobalTypoType: value, 
+						subHeadingGlobalTypoSwitcher: value === 'default' ? {...subHeadingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...subHeadingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+					})
+				}}
+
+				globalTypoOption={subHeadingGlobalTypoOption}
+				onChangeGlobalTypoOption={(value) => setAttributes({ subHeadingGlobalTypoOption: value })}
+
+				fontFamily={subHeadingFontFamily}
+				onChangeFontFamily={(value) => setAttributes({ subHeadingFontFamily: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontFamily: value && false} })}
+
+				fontSize={subHeadingFontSize}
+				onChangeFontSize={(value) => setAttributes({ subHeadingFontSize: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontSize: value && false} })}
+
+				fontSizeUnits={subHeadingFontSizeUnits}
+				onChangeFontSizeUnit={(value) => setAttributes({ subHeadingFontSizeUnits: value })}
+
+				fontWeight={subHeadingFontWeight}
+				onChangeFontWeight={(value) => setAttributes({ subHeadingFontWeight: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontWeight: value && false} })}
+
+				fontStyle={subHeadingFontStyle}
+				onChangeFontStyle={(value) => setAttributes({ subHeadingFontStyle: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontStyle: value && false} })}
+
+				textTransform={subHeadingTextTransform}
+				onChangeTextTransform={(value) => setAttributes({ subHeadingTextTransform: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, textTransform: value && false} })}
+
+				textDecoration={subHeadingTextDecoration}
+				onChangeTextDecoration={(value) => setAttributes({ subHeadingTextDecoration: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, textDecoration: value && false} })}
+
+				letterSpacing={subHeadingLetterSpacing}
+				onChangeLetterSpacing={(value) => setAttributes({ subHeadingLetterSpacing: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+				letterSpacingUnits={subHeadingLetterSpacingUnits}
+				onChangeLetterSpacingUnit={(value) => setAttributes({ subHeadingLetterSpacingUnits: value })}
+
+				lineHeight={subHeadingLineHeight}
+				onChangeLineHeight={(value) => setAttributes({ subHeadingLineHeight: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, lineHeight: value && false} })}
+
+				lineHeightUnits={subHeadingLineHeightUnits}
+				onChangeLineHeightUnit={(value) => setAttributes({ subHeadingLineHeightUnits: value })}
+
+				deviceType={deviceType}
+				setAttributes={setAttributes}
+			/>
+		
+			{/*Color*/}
+			<FB_SwitcherControl
+					label={__("Text Color", "frontis-blocks")}
+					globalSwitcher={SubHeadingColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ SubHeadingColorSwitcher: value })}
+				/>
+						
+				{SubHeadingColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={SubHeadingColor}
+						setGlobalColor={(value) => setAttributes({ SubHeadingColor: value })}
+					/>
+				)}
+						
+				{SubHeadingColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={SubHeadingHoverColor}
+						setGlobalColor={(value) => setAttributes({ SubHeadingHoverColor: value })}
+					/>
+				)}
+
+			{/*Spacing*/}
+			<Heading>Spacing</Heading>
+			{/* Padding */}
+			<FB_Spacing
+				label={__("Padding", "frontis-blocks")}
+				deviceType={deviceType}
+				spacingUnitsHandler={handleDescPaddingUnitsHandler}
+				spacingUnits={SubHeadingPaddingUnits}
+				spacingDesktop={SubHeadingDesktopPadding}
+				spacingTablet={SubHeadingTabPadding}
+				spacingMobile={SubHeadingMobilePadding}
+				handleSpacingUnitHandler={handleDescPaddingUnitChange}
+				spacingCombineBtn={SubHeadingPaddingLink}
+				spacingCombineBtnHandler={handleDescPaddingCombineBtn}
+				setAttributes={setAttributes}
+			/>
+			{/* Margin */}
+			<FB_Spacing
+				label={__("Margin", "frontis-blocks")}
+				deviceType={deviceType}
+				spacingUnitsHandler={handleDescMarginUnitsHandler}
+				spacingUnits={descMarginUnits}
+				spacingDesktop={descDesktopMargin}
+				spacingTablet={descTabMargin}
+				spacingMobile={descMobileMargin}
+				handleSpacingUnitHandler={handleDescMarginUnitChange}
+				spacingCombineBtn={descMarginLink}
+				spacingCombineBtnHandler={handleDescMarginCombineBtn}
+				setAttributes={setAttributes}
+			/>
+			</PanelBody>
+			)}
+			
+			{/*Button Style*/}
+			{icon_Box_Button_Switcher && (
+			<PanelBody
+				title={__("Button", "frontis-block")}
+				className="fb-icon-box-button-setting-wrapper"
+				initialOpen={false}
+			>
+
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={buttonGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) => setAttributes({ buttonGlobalTypographyData: value })}
+
+					globalTypoType={buttonGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({ 
+							buttonGlobalTypoType: value, 
+							buttonGlobalTypoSwitcher: value === 'default' ? {...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+						})
+					}}
+
+					globalTypoOption={buttonGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) => setAttributes({ buttonGlobalTypoOption: value })}
+
+					fontFamily={buttonFontFamily}
+					onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontFamily: value && false} })}
+
+					fontSize={buttonFontSize}
+					onChangeFontSize={(value) => setAttributes({ buttonFontSize: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontSize: value && false} })}
+
+					fontSizeUnits={buttonFontSizeUnits}
+					onChangeFontSizeUnit={(value) => setAttributes({ buttonFontSizeUnits: value })}
+
+					fontWeight={buttonFontWeight}
+					onChangeFontWeight={(value) => setAttributes({ buttonFontWeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontWeight: value && false} })}
+
+					fontStyle={buttonFontStyle}
+					onChangeFontStyle={(value) => setAttributes({ buttonFontStyle: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontStyle: value && false} })}
+
+					textTransform={buttonTextTransform}
+					onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textTransform: value && false} })}
+
+					textDecoration={buttonTextDecoration}
+					onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textDecoration: value && false} })}
+
+					letterSpacing={buttonLetterSpacing}
+					onChangeLetterSpacing={(value) => setAttributes({ buttonLetterSpacing: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+					letterSpacingUnits={buttonLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) => setAttributes({ buttonLetterSpacingUnits: value })}
+
+					lineHeight={buttonLineHeight}
+					onChangeLineHeight={(value) => setAttributes({ buttonLineHeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, lineHeight: value && false} })}
+
+					lineHeightUnits={buttonLineHeightUnits}
+					onChangeLineHeightUnit={(value) => setAttributes({ buttonLineHeightUnits: value })}
+
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+
+				
+				{/* Start Text Color*/}
+				<FB_SwitcherControl
+					label={__("Text Color", "frontis-blocks")}
+					globalSwitcher={buttonColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
+				/>
+						
+				{buttonColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={buttonTextColor}
+						setGlobalColor={(value) => setAttributes({ buttonTextColor: value })}
+					/>
+				)}
+						
+				{buttonColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={buttonTextHoverColor}
+						setGlobalColor={(value) => setAttributes({ buttonTextHoverColor: value })}
+					/>
+				)}
+
+				{/* Start Button Bg Color*/}
+				<FB_SwitcherControl
+					label={__("Background Color", "frontis-blocks")}
+					globalSwitcher={buttonBgColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ buttonBgColorSwitcher: value })}
+				/>
+						
+				{buttonBgColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={buttonBgColor}
+						setGlobalColor={(value) => setAttributes({ buttonBgColor: value })}
+					/>
+				)}
+						
+				{buttonBgColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={buttonBgHoverColor}
+						setGlobalColor={(value) => setAttributes({ buttonBgHoverColor: value })}
+					/>
+				)}
+				
+				{/* Button Icon color */}
+				{buttonIconSwitcher && <>
+					<FB_SwitcherControl
+						label={__("Icon Color", "frontis-blocks")}
+						globalSwitcher={btnIconColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ btnIconColorSwitcher: value })}
+					/>
+							
+					{btnIconColorSwitcher === 'normal' && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={btnIconColor}
+							setGlobalColor={(value) => setAttributes({ btnIconColor: value })}
+						/>
+					)}
+							
+					{btnIconColorSwitcher === 'hover' && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={btnIconHoverColor}
+							setGlobalColor={(value) => setAttributes({ btnIconHoverColor: value })}
+						/>
+					)}
+				</>}
+
+				<FB_Spacing
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleButtonPaddingUnitsHandler}
+					spacingUnits={iconBoxButtonPaddingUnits}
+					spacingDesktop={iconBoxButtonDesktopPadding}
+					spacingTablet={iconBoxButtonTabPadding}
+					spacingMobile={iconBoxButtonMobilePadding}
+					handleSpacingUnitHandler={handleButtonPaddingUnitChange}
+					spacingCombineBtn={iconBoxButtonPaddingLink}
+					spacingCombineBtnHandler={handleButtonPaddingCombineBtn}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing
+					label={__("Margin", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleButtonMarginUnitsHandler}
+					spacingUnits={iconBoxButtonMarginUnits}
+					spacingDesktop={iconBoxButtonDesktopMargin}
+					spacingTablet={iconBoxButtonTabMargin}
+					spacingMobile={iconBoxButtonMobileMargin}
+					handleSpacingUnitHandler={handleButtonMarginUnitChange}
+					spacingCombineBtn={iconBoxButtonMarginLink}
+					spacingCombineBtnHandler={handleButtonMarginCombineBtn}
+					setAttributes={setAttributes}
+				/>
+				{/* Border Width */}
+				
+				<SelectControl
+					label={__("Border Style", "frontis-block")}
+					value={iconBoxButtonBorder}
+					options={BORDER_STYLES}
+					onChange={(value) =>
+						setAttributes({ iconBoxButtonBorder: value })
+					}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={iconBoxButtonBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ iconBoxButtonBorderColorSwitcher: value })}
+				/>
+						
+				{iconBoxButtonBorderColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={iconBoxButtonBorderColor}
+						setGlobalColor={(value) => setAttributes({ iconBoxButtonBorderColor: value })}
+					/>
+				)}
+						
+				{iconBoxButtonBorderColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={iconBoxButtonHoverBorderColor}
+						setGlobalColor={(value) => setAttributes({ iconBoxButtonHoverBorderColor: value })}
+					/>
+				)}
+				
+				<FB_Spacing
+					label={__("Border Width", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleButtonBorderUnitsHandler}
+					spacingUnits={iconBoxButtonBorderUnits}
+					spacingDesktop={iconBoxButtonDesktopBorderWidth}
+					spacingTablet={iconBoxButtonTabBorderWidth}
+					spacingMobile={iconBoxButtonMobileBorderWidth}
+					handleSpacingUnitHandler={handleButtonBorderUnitChange}
+					spacingCombineBtn={iconBoxButtonBorderLink}
+					spacingCombineBtnHandler={handleButtonBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				{/* Border radius Width */}
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleButtonBorderRadiusUnitsHandler}
+					spacingUnits={iconBoxBtnBorderradiusUnits}
+					spacingDesktop={iconBoxBtnDesktopBorderradiusWidth}
+					spacingTablet={iconBoxBtnTabBorderradiusWidth}
+					spacingMobile={iconBoxBtnMobileBorderradiusWidth}
+					handleSpacingUnitHandler={handleButtonBorderRadiusUnitChange}
+					spacingCombineBtn={btnBorderRadiusLink}
+					spacingCombineBtnHandler={handleButtonBorderRadiusCombineBtn}
+					setAttributes={setAttributes}
+				/>
+			</PanelBody>
+			)}
+			
+		</>
+	);
+		
+	/**
+	 * Inspector Advanced Controls
+	 */
+	const advancedControls = (
+		<>
+			<div className="fb-setting-advanced-tab-wrapper">
+				<div className="fb-setting-inner-wrapper">
+					<PanelBody
+						title={__("Layout", "frontis-blocks")}
+						initialOpen={true}
+						className="fb-setting-layout-header" 
+					>
+						<FB_Range
+							min={0}
+							max={10000000}
+							label={__("Z Index", "frontis-blocks")}
+							rangeValue={globalZIndex}
+							onChangeHandler={(value) => setAttributes({ globalZIndex: value === 0 ? undefined : value })}
+							deviceType={deviceType}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={''}
+							isRangeUnit={false}
+						/>
+
+						<SelectControl
+							label={__("Overflow", "frontis-blocks")}
+							value={iconBoxOverflow}
+							options={OVERFLOW_OP}
+							onChange={(value) => setAttributes({ iconBoxOverflow: value })}
+						/>
+
+						<FB_PositionControl
+							deviceType={deviceType}
+							positionType={iconBoxPositionType}
+							setPositionType={(value) => setAttributes({ iconBoxPositionType: value })}
+																			
+							HZOrientationType={iconBoxHZOrientationType}
+							setHZOrientationType={(value) =>
+								setAttributes({ iconBoxHZOrientationType: value })
+							}
+							VROrientationType={iconBoxVROrientationType}
+							setVROrientationType={(value) =>
+								setAttributes({ iconBoxVROrientationType: value })
+							}
+																				
+							HZLeftOffset={iconBoxHZLeftOffset}
+							setHZLeftOffset={(value) => setAttributes({ iconBoxHZLeftOffset: value })}
+							HZLeftOffsetUnits={iconBoxHZLeftOffsetUnits}
+							setHZLeftOffsetUnits={(value) => setAttributes({ iconBoxHZLeftOffsetUnits: value })}
+							HZRightOffset={iconBoxHZRightOffset}
+							setHZRightOffset={(value) => setAttributes({ iconBoxHZRightOffset: value })}
+							HZRightOffsetUnits={iconBoxHZRightOffsetUnits}
+							setHZRightOffsetUnits={(value) => setAttributes({ iconBoxHZRightOffsetUnits: value })}
+																			
+							VRTopOffset={iconBoxVRTopOffset}
+							setVRTopOffset={(value) => setAttributes({ iconBoxVRTopOffset: value })}
+							VRTopOffsetUnits={iconBoxVRTopOffsetUnits}
+							setVRTopOffsetUnits={(value) => setAttributes({ iconBoxVRTopOffsetUnits: value })}
+							VRBottomOffset={iconBoxVRBottomOffset}
+							setVRBottomOffset={(value) => setAttributes({ iconBoxVRBottomOffset: value })}
+							VRBottomOffsetUnits={iconBoxVRBottomOffsetUnits}
+							setVRBottomOffsetUnits={(value) => setAttributes({ iconBoxVRBottomOffsetUnits: value })}
+
+							setAttributes={setAttributes}
+						/>
+
+						<FB_InputControl
+							label={__("CSS ID", "frontis-blocks")}
+							value={iconBoxGlobalWraperID}
+							onChangeValue={(value) => setAttributes({ iconBoxGlobalWraperID: value })}
+							helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+						/>
+
+						<FB_InputControl
+							label={__("CSS Class", "frontis-blocks")}
+							value={iconBoxGlobalWraperClass}
+							onChangeValue={(value) => setAttributes({ iconBoxGlobalWraperClass: value })}
+							helpText={__("Separate with spaces key.", "frontis-blocks")}
+						/>
+						
+					</PanelBody>
+
+					<PanelBody
+						title={__("Padding and Margin", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_Spacing
+							label={__("Padding", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={
+								handleGlobalPaddingUnitsHandler
+							}
+							spacingUnits={globalPaddingUnits}
+							spacingDesktop={globalPaddingDesktop}
+							spacingTablet={globalPaddingTablet}
+							spacingMobile={globalPaddingMobile}
+							handleSpacingUnitHandler={
+								handleGlobalPaddingUnitChange
+							}
+							spacingCombineBtn={globalPaddingLink}
+							spacingCombineBtnHandler={
+								handleGlobalPaddingCombineBtn
+							}
+							setAttributes={setAttributes}
+						/>
+						<FB_Spacing
+							label={__("Margin", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleGlobalMarginUnitsHandler}
+							spacingUnits={globalMarginUnits}
+							spacingDesktop={globalMarginDesktop}
+							spacingTablet={globalMarginTablet}
+							spacingMobile={globalMarginMobile}
+							handleSpacingUnitHandler={
+								handleGlobalMarginUnitChange
+							}
+							spacingCombineBtn={globalMarginLink}
+							spacingCombineBtnHandler={
+								handleGlobalMarginCombineBtn
+							}
+							setAttributes={setAttributes}
+						/>
+					</PanelBody>
+
+					<PanelBody title="Background Color" initialOpen={false}>
+						<FB_SwitcherControl
+							label={__("Background Color", "frontis-blocks")}
+							globalSwitcher={globalBgColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ globalBgColorSwitcher: value })}
+						/>
+								
+						{globalBgColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={globalBgColor}
+								setGlobalColor={(value) => setAttributes({ globalBgColor: value })}
+							/>
+						)}
+								
+						{globalBgColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={globalBgHoverColor}
+								setGlobalColor={(value) => setAttributes({ globalBgHoverColor: value })}
+							/>
+						)}
+					</PanelBody>
+					<PanelBody
+						title={__("Border and Shadow", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<SelectControl
+							label={__("Border Style", "frontis-blocks")}
+							value={globalBorder}
+							options={BORDER_STYLES}
+							onChange={(value) =>
+								setAttributes({ globalBorder: value })
+							}
+						/>
+
+						<FB_SwitcherControl
+							label={__("Border Color", "frontis-blocks")}
+							globalSwitcher={globalBorderColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ globalBorderColorSwitcher: value })}
+						/>
+								
+						{globalBorderColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={globalBorderColor}
+								setGlobalColor={(value) => setAttributes({ globalBorderColor: value })}
+							/>
+						)}
+								
+						{globalBorderColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={globalBorderHoverColor}
+								setGlobalColor={(value) => setAttributes({ globalBorderHoverColor: value })}
+							/>
+						)}
+
+						<FB_Spacing
+							label={__("Border", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleGlobalBorderUnitsHandler}
+							spacingUnits={globalBorderUnits}
+							spacingDesktop={globalBorderDesktop}
+							spacingTablet={globalBorderTablet}
+							spacingMobile={globalBorderMobile}
+							handleSpacingUnitHandler={
+								handleGlobalBorderUnitChange
+							}
+							spacingCombineBtn={globalBorderLink}
+							spacingCombineBtnHandler={
+								handleGlobalBorderCombineBtn
+							}
+							setAttributes={setAttributes}
+						/>
+
+						<FB_Spacing
+							label={__("Border Radius", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={
+								handleGlobalBorderRadiusUnitsHandler
+							}
+							spacingUnits={globalBorderRadiusUnits}
+							spacingDesktop={globalBorderRadiusDesktop}
+							spacingTablet={globalBorderRadiusTablet}
+							spacingMobile={globalBorderRadiusMobile}
+							handleSpacingUnitHandler={
+								handleGlobalBorderRadiusUnitChange
+							}
+							spacingCombineBtn={globalBorderRadiusLink}
+							spacingCombineBtnHandler={
+								handleGlobalBorderRadiusCombineBtn
+							}
+							setAttributes={setAttributes}
+						/>
+
+						<FB_SwitcherControl
+							label={__("Box Shadow", "frontis-blocks")}
+							globalSwitcher={boxGlobalBoxShadowSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ boxGlobalBoxShadowSwitcher: value })}
+						/>
+						
+						{boxGlobalBoxShadowSwitcher === 'normal' && (
+							<FB_BoxShadowControl
+								label={__("Normal Shadow", "frontis-blocks")}
+								onBoxShadowChange={(value) =>
+									setAttributes({ boxGlobalBoxShadowValues: value })
+								}
+								initialShadowValue={boxGlobalBoxShadowValues}
+								onBoxShadowStyleChange={(value) =>
+									setAttributes({
+										boxGlobalBoxShadowCssValue: value,
+									})
+								}
+							/>
+						)}
+						
+						{boxGlobalBoxShadowSwitcher === 'hover' && (
+							<FB_BoxShadowControl
+								label={__("Hover Shadow", "frontis-blocks")}
+								onBoxShadowChange={(value) =>
+									setAttributes({ boxGlobalHoverBoxShadowValues: value })
+								}
+								initialShadowValue={boxGlobalHoverBoxShadowValues}
+								onBoxShadowStyleChange={(value) =>
+									setAttributes({
+										boxGlobalHoverBoxShadowCssValue: value,
+									})
+								}
+							/>
+						)}
+					</PanelBody>
+
+					<PanelBody
+						title={__("Wrapper Link", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<ToggleControl
+								label={__("Enable Link", "frontis-blocks")}
+								checked={wrapperUrlSwitcher}
+								onChange={(value) => setAttributes({ wrapperUrlSwitcher: value })}
+						/>
+						
+						{wrapperUrlSwitcher && (
+							<FB_UrlControl
+								url={wrapperLink}
+								onChangeUrl={(value) =>
+									setAttributes({ wrapperLink: value })
+								}
+								openInNewTab={wrapperTargetUrl}
+								onChangeOpenInNewTab={(value) =>
+									setAttributes({ wrapperTargetUrl: value })
+							}
+							/>
+						)}
+					</PanelBody>
+
+					<PanelBody
+						title={__("Responsive Control", "frontis-blocks")}
+						initialOpen={false}
+						className="fb-setting-responsive-control-wrapper"
+					>
+						<FB_VisibilityControl
+							desktopValue={iconBoxDesktopSwitcher}
+							setDesktopValue={(value) => setAttributes({ iconBoxDesktopSwitcher: value })}
+
+							tabletValue={iconBoxTabletSwitcher}
+							setTabletValue={(value) => setAttributes({ iconBoxTabletSwitcher: value })}
+
+							mobileValue={iconBoxMobileSwitcher}
+							setMobileValue={(value) => setAttributes({ iconBoxMobileSwitcher: value })}
+						/>
+					</PanelBody>
+
+					<PanelBody
+						title={__("Custom CSS", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_CustomCSSEditor  
+							value={iconBoxCustomCSS} 
+							onChangeValue={(value) => setAttributes({ iconBoxCustomCSS: value })}
+						/>
+					</PanelBody>
+				</div>
+			</div>
+		</>
+	);
+
 	return (
 		<>
 			<style>
 				{editorStyle}
 			</style>
 
-			<InspectorControls key="controls">
-				<div className="fb-inspector-control">
-					<TabPanel
-						className="fb-parent-tab-panel"
-						activeClass="active-tab"
-						tabs={[
-							{
-								name: "general",
-								title: "General",
-								className: "fb-tab general",
-							},
-							{
-								name: "styles",
-								title: "Style",
-								className: "fb-tab styles",
-							},
-							{
-								name: "advance",
-								title: "Advanced",
-								className: "fb-tab advance",
-							},
-						]}
-					>
-						{(tab) => (
-							<div className={"fb-tab-controls" + tab.name}>
-								{tab.name === "general" && (
-									<>
-										<div className="fb-presets-wrapper">
-											<PanelBody
-											title={__("Presets", "frontis-block")}
-											initialOpen={true}
-											>
-												<SelectControl
-													label={__("Preset Style", "frontis-blocks")}
-													value={iconBoxPresetStyle}
-													options={PRESETS}
-													onChange={(selected) => changeIconBoxPreset(selected)}
-												/>
-											</PanelBody>
-										</div>
-										<div className="fb-advanced-wrapper">
-											<PanelBody
-												title={__("Icon/Image", "frontis-block")}
-												initialOpen={false}
-											>
-												<FB_AlignmentControl
-													label={__("Alignment", "frontis-blocks")}
-													globalAlignment={wrapperAlignment}
-													setGlobalAlignment={(value) => setAttributes({ wrapperAlignment: value })}
-												/>
-
-												<BaseControl className="fb-sub-heading-position">
-													<SelectControl
-														label={__("Media Type", "frontis-block")}
-														value={mediaSwitcher}
-														options={mediaType}
-														onChange={(value) =>
-															setAttributes({ mediaSwitcher: value })
-														}
-													/>
-												</BaseControl>
-
-												<BaseControl className="fb-media-position">
-													<SelectControl
-														label={__("Media Position", "frontis-block")}
-														value={iconBoxIconPosition}
-														options={ICON_ICON_POSITION}
-														onChange={(value) =>
-															setAttributes({ iconBoxIconPosition: value })
-														}
-													/>
-												</BaseControl>
-
-												{(iconBoxIconPosition === 'left' || iconBoxIconPosition === 'right') && (
-												<BaseControl className="fb-media-vertical-position">
-													<SelectControl
-														label={__("Card Alignment", "frontis-block")}
-														value={iconBoxCardAlignment}
-														options={ICON_WRAP_ALIGNMENT}
-														onChange={(value) =>
-															setAttributes({ iconBoxCardAlignment: value })
-														}
-													/>
-												</BaseControl>
-												)}
-
-												{(iconBoxIconPosition === 'left' || iconBoxIconPosition === 'right') && (
-												<BaseControl className="fb-media-vertical-position">
-													<SelectControl
-														label={__("Vertical Position", "frontis-block")}
-														value={iconBoxIconVerticalPosition}
-														options={ICON_ICON_VERTICAL_POSITION}
-														onChange={(value) =>
-															setAttributes({ iconBoxIconVerticalPosition: value })
-														}
-													/>
-												</BaseControl>
-												)}
-
-												<div className="fb-image-upload-field-wrapper">
-													{mediaSwitcher === "image" && (
-														<>
-															<BaseControl
-																label={__("Background Image", "frontis-blocks")}
-																className="fb-advanced-heading-bg-image"
-															>
-																{iconBoxMediaUrl ? (
-																	<div
-																		className="fb-image-avatar-control"
-																		style={{
-																			backgroundImage: `url(${iconBoxMediaUrl})`,
-																		}}
-																	>
-																		<button
-																			className="fb-image-avatar-delete"
-																			onClick={() => {
-																				setAttributes({
-																					iconBoxMediaUrl: null,
-																					iconBoxMediaAlt: null,
-																					iconBoxMediaID: null,
-																				});
-																			}}
-																		>
-																			<svg
-																				width="24"
-																				height="24"
-																				viewBox="0 0 24 24"
-																				fill="none"
-																				xmlns="http://www.w3.org/2000/svg"
-																			>
-																				<path
-																					d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-																					stroke="#4D4D4D"
-																					strokeWidth="1.5"
-																					strokeLinecap="round"
-																				></path>
-																				<path
-																					d="M15 9L9 15"
-																					stroke="#4D4D4D"
-																					strokeWidth="1.5"
-																					strokeLinecap="round"
-																				></path>
-																				<path
-																					d="M9 9L15 15"
-																					stroke="#4D4D4D"
-																					strokeWidth="1.5"
-																					strokeLinecap="round"
-																				></path>
-																			</svg>
-																		</button>
-																		<button
-																			className="fb-image-replace-btn"
-																			onClick={() => {
-																				const mediaUploader = wp.media({
-																					title: __(
-																						"Select or Upload Background Image",
-																						"frontis-blocks",
-																					),
-																					button: {
-																						text: __(
-																							"Use this image",
-																							"frontis-blocks",
-																						),
-																					},
-																					multiple: false,
-																				});
-
-																				mediaUploader.on("select", function () {
-																					const attachment = mediaUploader
-																						.state()
-																						.get("selection")
-																						.first()
-																						.toJSON();
-																					setAttributes({
-																						iconBoxMediaUrl: attachment.url,
-																						iconBoxMediaAlt: attachment.alt,
-																						iconBoxMediaID: attachment.id,
-																					});
-																				});
-
-																				mediaUploader.open();
-																			}}
-																		>
-																			<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C"></path><path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C"></path></svg>
-																			Replace
-																		</button>
-																	</div>
-																) : (
-																	<button
-																		className="fb-image-upload-btn"
-																		onClick={() => {
-																			const mediaUploader = wp.media({
-																				title: __(
-																					"Select or Upload Background Image",
-																					"frontis-blocks",
-																				),
-																				button: {
-																					text: __(
-																						"Use this image",
-																						"frontis-blocks",
-																					),
-																				},
-																				multiple: false,
-																			});
-
-																			mediaUploader.on("select", function () {
-																				const attachment = mediaUploader
-																					.state()
-																					.get("selection")
-																					.first()
-																					.toJSON();
-																				setAttributes({
-																					iconBoxMediaUrl: attachment.url,
-																					iconBoxMediaAlt: attachment.alt,
-																					iconBoxMediaID: attachment.id,
-																				});
-																			});
-
-																			mediaUploader.open();
-																		}}
-																	>
-																		<svg
-																			width="24"
-																			height="24"
-																			xmlns="http://www.w3.org/2000/svg"
-																			fillRule="evenodd"
-																			clipRule="evenodd"
-																		>
-																			<path d="M11.492 10.172l-2.5 3.064-.737-.677 3.737-4.559 3.753 4.585-.753.665-2.5-3.076v7.826h-1v-7.828zm7.008 9.828h-13c-2.481 0-4.5-2.018-4.5-4.5 0-2.178 1.555-4.038 3.698-4.424l.779-.14.043-.789c.185-3.448 3.031-6.147 6.48-6.147 3.449 0 6.295 2.699 6.478 6.147l.044.789.78.14c2.142.386 3.698 2.246 3.698 4.424 0 2.482-2.019 4.5-4.5 4.5m.978-9.908c-.212-3.951-3.472-7.092-7.478-7.092s-7.267 3.141-7.479 7.092c-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.522-5.408"></path>
-																		</svg>
-																		Upload
-																	</button>
-																)}
-															</BaseControl>
-														</>
-													)}
-
-													{mediaSwitcher === "icon" && (
-														<BaseControl>
-															<FBIconPicker
-																value={icon}
-																setIconHandler={iconHandler}
-															/>
-														</BaseControl>
-													)}
-												</div>
-											</PanelBody>
-										</div>
-										<div className="fb-advanced-wrapper">
-											<PanelBody
-												title={__("Title", "frontis-block")}
-												initialOpen={false}
-											>
-												<FB_AlignmentControl
-													label={__("Heading Alignment", "frontis-blocks")}
-													globalAlignment={Alignment}
-													setGlobalAlignment={(value) => setAttributes({ Alignment: value })}
-												/>
-
-												<FB_HtmlTagControl
-													label={__("Heading Tag", "frontis-blocks")}
-													globalHtmlTag={headingTag}
-													setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
-												/>
-												
-
-												<TextareaControl
-													label={__("Heading Text", "frontis-block")}
-													value={Heading_Text}
-													onChange={(value) =>
-														setAttributes({ Heading_Text: value })
-													}
-													className="fb-setting-text"
-												/>
-											</PanelBody>
-										</div>
-										<div className="fb-advanced-wrapper">
-											<PanelBody
-												title={__("Description", "frontis-block")}
-												initialOpen={false}
-											>
-												<ToggleControl
-													label={__("Show Description", "frontis-block")}
-													checked={Sub_Heading_Switcher}
-													onChange={(value) =>
-														setAttributes({ Sub_Heading_Switcher: value })
-													}
-												/>
-
-												{Sub_Heading_Switcher && (
-													<>
-														
-														<FB_AlignmentControl
-															label={__("Alignment", "frontis-blocks")}
-															globalAlignment={descAlignment}
-															setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
-														/>
-
-														<TextareaControl
-															label={__("Sub Heading Text", "frontis-block")}
-															value={Sub_Heading_Text}
-															onChange={(value) =>
-																setAttributes({ Sub_Heading_Text: value })
-															}
-															className="fb-sub-heading-text"
-														/>
-													</>
-												)}
-											</PanelBody>
-										</div>
-
-										{/*Button Element*/}
-										<div className="fb-icon-button-wrapper">
-											<PanelBody
-												title={__("Button", "frontis-block")}
-												initialOpen={false}
-											>
-												<ToggleControl
-													label={__("Show Button", "frontis-block")}
-													checked={icon_Box_Button_Switcher}
-													onChange={(value) =>
-														setAttributes({ icon_Box_Button_Switcher: value })
-													}
-												/>
-
-												{icon_Box_Button_Switcher && (
-													<>
-														
-														<FB_AlignmentControl
-															label={__("Alignment", "frontis-blocks")}
-															globalAlignment={buttonAlignment}
-															setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
-														/>
-														<TextareaControl
-															label={__("Button Text", "frontis-block")}
-															value={icon_Box_Button_Text}
-															onChange={(value) =>
-																setAttributes({ icon_Box_Button_Text: value })
-															}
-															className="fb-icon-button-text"
-														/>
-														<ToggleControl
-															label={__("Show Icon", "frontis-block")}
-															checked={buttonIconSwitcher}
-															onChange={(value) =>
-																setAttributes({ buttonIconSwitcher: value })
-															}
-														/>
-														{buttonIconSwitcher && (
-															<>
-																<BaseControl>
-																	<FBIconPicker
-																		value={btnIcon}
-																		setIconHandler={buttonIconHandler}
-																	/>
-																</BaseControl>
-																<SelectControl
-																	label={__("Icon Position", "frontis-block")}
-																	value={btnIconPosition}
-																	options={ICON_POSITION}
-																	onChange={(value) =>
-																		setAttributes({ btnIconPosition: value })
-																	}
-																/>
-															</>
-														)}
-
-														<BaseControl>
-															<FB_UrlControl
-																url={iconBoxButtonLink}
-																onChangeUrl={(value) =>
-																	setAttributes({ iconBoxButtonLink: value })
-																}
-																openInNewTab={iconBoxbtnTargetUrl}
-																onChangeOpenInNewTab={(value) =>
-																	setAttributes({ iconBoxbtnTargetUrl: value })
-																}
-															/>
-														</BaseControl>
-													</>
-												)}
-											</PanelBody>
-										</div>
-									</>
-								)}
-
-								{tab.name === "styles" && (
-									<>
-										{/*Image/Icon Style*/}
-										<PanelBody
-											title={__("Icon/Image", "frontis-block")}
-											initialOpen={false}
-										>
-											<FB_Range
-												min={0}
-												max={500}
-												label={__("Icon Size", "frontis-blocks")}
-												rangeValue={mediaSize}
-												onChangeHandler={(value) =>
-													setAttributes({ mediaSize: value })
-												}
-												rangeUnitHandler={(value) =>
-													setAttributes({ mediaSizeUnits: value })
-												}
-												deviceType={deviceType}
-												units={mediaSizeUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
-											/>
-
-											{/*Icon Color */}
-											{mediaSwitcher === "icon" && (
-												<>
-													<FB_SwitcherControl
-														label={__("Icon Color", "frontis-blocks")}
-														globalSwitcher={mediaIconColorSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ mediaIconColorSwitcher: value })}
-													/>
-															
-													{mediaIconColorSwitcher === 'normal' && (
-														<FB_ColorControl
-															label={__("Normal Color", "frontis-blocks")}
-															globalColor={mediaIconColor}
-															setGlobalColor={(value) => setAttributes({ mediaIconColor: value })}
-														/>
-													)}
-															
-													{mediaIconColorSwitcher === 'hover' && (
-														<FB_ColorControl
-															label={__("Hover Color", "frontis-blocks")}
-															globalColor={mediaIconHoverColor}
-															setGlobalColor={(value) => setAttributes({ mediaIconHoverColor: value })}
-														/>
-													)}
-												</>
-											)}
-											<FB_BackgroundColorControl
-											bgColorSwitcher={mediaBackColorSwitcher}
-											setBgColorSwitcher={(value) => setAttributes({ mediaBackColorSwitcher: value })}
-											normalBackgroundType={mediaBackgroundType}
-											setNormalBackgroundType={(value) => setAttributes({ mediaBackgroundType: value })}
-											normalClassicColor={mediaClassicColor}
-											setNormalClassicColor={(value) => setAttributes({ mediaClassicColor: value })}
-											normalGradientColor={mediaGradientColor}
-											setNormalGradientColor={(value) => setAttributes({ mediaGradientColor: value })}
-											normalCustomGradientSwitcher={mediaCustomGradientSwitcher}
-											setNormalCustomGradientSwitcher={(value) => setAttributes({ mediaCustomGradientSwitcher: value })}
-											normalCustomGradientInputValue={mediaCustomGradientInputValue}
-											setNormalCustomGradientInputValue={(value) => setAttributes({ mediaCustomGradientInputValue: value }) }
-											normalBackgroundImageUrl={mediaBackgroundImageUrl}
-											setNormalBackgroundImageUrl={(value) => setAttributes({ mediaBackgroundImageUrl: value })}
-											normalBackgroundImageAlt={mediaBackgroundImageAlt}
-											setNormalBackgroundImageAlt={(value) => setAttributes({ mediaBackgroundImageAlt: value })}
-											normalBackgroundImageID={mediaBackgroundImageID}
-											setNormalBackgroundImageID={(value) => setAttributes({ mediaBackgroundImageID: value })}
-											normalBackgroundImagePosition={mediaBackgroundImagePosition}
-											setNormalBackgroundImagePosition={(value) => setAttributes({ mediaBackgroundImagePosition: value }) }
-											normalBackgroundImageAttachment={mediaBackgroundImageAttachment}
-											setNormalBackgroundImageAttachment={(value) => setAttributes({ mediaBackgroundImageAttachment: value }) }
-											normalBackgroundImageRepeat={mediaBackgroundImageRepeat}
-											setNormalBackgroundImageRepeat={(value) => setAttributes({ mediaBackgroundImageRepeat: value }) }
-											normalBackgroundImageSize={mediaBackgroundImageSize}
-											setNormalBackgroundImageSize={(value) => setAttributes({ mediaBackgroundImageSize: value }) }
-											hoverBackgroundType={mediaHoverBackgroundType}
-											setHoverBackgroundType={(value) => setAttributes({ mediaHoverBackgroundType: value })}
-											hoverClassicColor={mediaHoverClassicColor}
-											setHoverClassicColor={(value) => setAttributes({ mediaHoverClassicColor: value })}
-											hoverGradientColor={mediaHoverGradientColor}
-											setHoverGradientColor={(value) => setAttributes({ mediaHoverGradientColor: value })}
-											hoverCustomGradientSwitcher={mediaHoverCustomGradientSwitcher}
-											setHoverCustomGradientSwitcher={(value) => setAttributes({ mediaHoverCustomGradientSwitcher: value }) }
-											hoverCustomGradientInputValue={mediaHoverCustomGradientInputValue}
-											setHoverCustomGradientInputValue={(value) => setAttributes({ mediaHoverCustomGradientInputValue: value }) }
-											hoverBackgroundImageUrl={mediaHoverBackgroundImageUrl}
-											setHoverBackgroundImageUrl={(value) => setAttributes({ mediaHoverBackgroundImageUrl: value })}
-											hoverBackgroundImageAlt={mediaHoverBackgroundImageAlt}
-											setHoverBackgroundImageAlt={(value) => setAttributes({ mediaHoverBackgroundImageAlt: value })}
-											hoverBackgroundImageID={mediaHoverBackgroundImageID}
-											setHoverBackgroundImageID={(value) => setAttributes({ mediaHoverBackgroundImageID: value })}
-											hoverBackgroundImagePosition={mediaHoverBackgroundImagePosition}
-											setHoverBackgroundImagePosition={(value) => setAttributes({ mediaHoverBackgroundImagePosition: value }) }
-											hoverBackgroundImageAttachment={mediaHoverBackgroundImageAttachment}
-											setHoverBackgroundImageAttachment={(value) => setAttributes({ mediaHoverBackgroundImageAttachment: value }) }
-											hoverBackgroundImageRepeat={mediaHoverBackgroundImageRepeat}
-											setHoverBackgroundImageRepeat={(value) => setAttributes({ mediaHoverBackgroundImageRepeat: value }) }
-											hoverBackgroundImageSize={mediaHoverBackgroundImageSize}
-											setHoverBackgroundImageSize={(value) => setAttributes({ mediaHoverBackgroundImageSize: value }) }
-											/>
-
-											<FB_Range
-												min={0}
-												max={500}
-												label={__("Background Width", "frontis-blocks")}
-												rangeValue={mediaBgWidth}
-												onChangeHandler={(value) =>
-													setAttributes({ mediaBgWidth: value })
-												}
-												rangeUnitHandler={(value) =>
-													setAttributes({ mediaBgWidthUnits: value })
-												}
-												deviceType={deviceType}
-												units={mediaBgWidthUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
-											/>
-
-											<FB_Range
-												min={0}
-												max={500}
-												label={__("Background Height", "frontis-blocks")}
-												rangeValue={mediaBgHeight}
-												onChangeHandler={(value) =>
-													setAttributes({ mediaBgHeight: value })
-												}
-												rangeUnitHandler={(value) =>
-													setAttributes({ mediaBgHeightUnits: value })
-												}
-												deviceType={deviceType}
-												units={mediaBgHeightUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={""}
-											/>
-
-											<FB_Spacing
-												label={__("Padding", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleMediaPaddingUnitsHandler}
-												spacingUnits={mediaPaddingUnits}
-												spacingDesktop={mediaPaddingDesktop}
-												spacingTablet={mediaPaddingTablet}
-												spacingMobile={mediaPaddingMobile}
-												handleSpacingUnitHandler={handleMediaPaddingUnitChange}
-												spacingCombineBtn={mediaPaddingLink}
-												spacingCombineBtnHandler={handleMediaPaddingCombineBtn}
-												setAttributes={setAttributes}
-											/>
-											<FB_Spacing
-												label={__("Margin", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleMediaMarginUnitsHandler}
-												spacingUnits={mediaMarginUnits}
-												spacingDesktop={mediaMarginDesktop}
-												spacingTablet={mediaMarginTablet}
-												spacingMobile={mediaMarginMobile}
-												handleSpacingUnitHandler={handleMediaMarginUnitChange}
-												spacingCombineBtn={mediaMarginLink}
-												spacingCombineBtnHandler={handleMediaMarginCombineBtn}
-												setAttributes={setAttributes}
-											/>
-
-											<SelectControl
-												label={__("Border Style", "frontis-block")}
-												value={mediaBorder}
-												options={BORDER_STYLES}
-												onChange={(value) =>
-													setAttributes({ mediaBorder: value })
-												}
-											/>
-											
-											<FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={mediaBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ mediaBorderColorSwitcher: value })}
-                                            />
-                                                    
-                                            {mediaBorderColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={mediaBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ mediaBorderColor: value })}
-                                                />
-                                            )}
-                                                    
-                                            {mediaBorderColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={mediaBorderHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ mediaBorderHoverColor: value })}
-                                                />
-                                            )}
-
-											<FB_Spacing
-												label={__("Border", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleMediaBorderUnitsHandler}
-												spacingUnits={mediaBorderUnits}
-												spacingDesktop={mediaBorderDesktop}
-												spacingTablet={mediaBorderTablet}
-												spacingMobile={mediaBorderMobile}
-												handleSpacingUnitHandler={handleMediaBorderUnitChange}
-												spacingCombineBtn={mediaBorderLink}
-												spacingCombineBtnHandler={handleMediaBorderCombineBtn}
-												setAttributes={setAttributes}
-											/>
-
-											<FB_Spacing
-												label={__("Border Radius", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={
-													handleMediaBorderRadiusUnitsHandler
-												}
-												spacingUnits={mediaBorderRadiusUnits}
-												spacingDesktop={mediaBorderRadiusDesktop}
-												spacingTablet={mediaBorderRadiusTablet}
-												spacingMobile={mediaBorderRadiusMobile}
-												handleSpacingUnitHandler={
-													handleMediaBorderRadiusUnitChange
-												}
-												spacingCombineBtn={mediaBorderRadiusLink}
-												spacingCombineBtnHandler={
-													handleMediaBorderRadiusCombineBtn
-												}
-												setAttributes={setAttributes}
-											/>
-										</PanelBody>
-										{/*Heading Style*/}
-										<PanelBody
-											title={__("Title", "frontis-block")}
-											initialOpen={false}
-										>
-											<FB_TypographyControl
-												globalTypoControlActive={true}
-												globalTypoSwitcher={headingGlobalTypoSwitcher}
-												storeGlobalTypographyData={(value) => setAttributes({ headingGlobalTypographyData: value })}
-
-												globalTypoType={headingGlobalTypoType}
-												onChangeGlobalTypoType={(value) => {
-													setAttributes({ 
-														headingGlobalTypoType: value, 
-														headingGlobalTypoSwitcher: value === 'default' ? {...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-													})
-												}}
-
-												globalTypoOption={headingGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ headingGlobalTypoOption: value })}
-
-												fontFamily={headingFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontFamily: value && false} })}
-
-												fontSize={headingFontSize}
-												onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontSize: value && false} })}
-
-												fontSizeUnits={headingFontSizeUnits}
-												onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
-
-												fontWeight={headingFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontWeight: value && false} })}
-
-												fontStyle={headingFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontStyle: value && false} })}
-
-												textTransform={headingTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textTransform: value && false} })}
-
-												textDecoration={headingTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textDecoration: value && false} })}
-
-												letterSpacing={headingLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-												letterSpacingUnits={headingLetterSpacingUnits}
-												onChangeLetterSpacingUnit={(value) => setAttributes({ headingLetterSpacingUnits: value })}
-
-												lineHeight={headingLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, lineHeight: value && false} })}
-
-												lineHeightUnits={headingLineHeightUnits}
-												onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
-
-												deviceType={deviceType}
-												setAttributes={setAttributes}
-											/>
-
-											
-											<FB_SwitcherControl
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalSwitcher={Heading_Color_Switcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ Heading_Color_Switcher: value })}
-                                            />
-                                                    
-                                            {Heading_Color_Switcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={Heading_Color}
-                                                    setGlobalColor={(value) => setAttributes({ Heading_Color: value })}
-                                                />
-                                            )}
-                                                    
-                                            {Heading_Color_Switcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={Heading_Hover_Color}
-                                                    setGlobalColor={(value) => setAttributes({ Heading_Hover_Color: value })}
-                                                />
-                                            )}
-
-											<FB_Spacing
-												label={__("Padding", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleHeadingPaddingUnitsHandler}
-												spacingUnits={Heading_padding_units}
-												spacingDesktop={Heading_Desktop_padding}
-												spacingTablet={Heading_Tab_padding}
-												spacingMobile={Heading_Mobile_padding}
-												handleSpacingUnitHandler={handleHeadingPaddingUnitChange}
-												spacingCombineBtn={paddingLink}
-												spacingCombineBtnHandler={handleHeadingPaddingCombineBtn}
-												setAttributes={setAttributes}
-											/>
-
-											<FB_Spacing
-												label={__("Margin", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleHeadingMarginUnitsHandler}
-												spacingUnits={Heading_Margin_Units}
-												spacingDesktop={Heading_Desktop_Margin}
-												spacingTablet={Heading_Tab_Margin}
-												spacingMobile={Heading_Mobile_Margin}
-												handleSpacingUnitHandler={handleHeadingMarginUnitChange}
-												spacingCombineBtn={Heading_Margin_Link}
-												spacingCombineBtnHandler={handleHeadingMarginCombineBtn}
-												setAttributes={setAttributes}
-											/>
-
-											{/*Border*/}
-											<Heading>Border</Heading>
-											<SelectControl
-												label={__("Border Style", "frontis-block")}
-												value={Heading_Border}
-												options={BORDER_STYLES}
-												onChange={(value) =>
-													setAttributes({ Heading_Border: value })
-												}
-											/>
-											
-											<FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={Heading_Border_Color_Switcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ Heading_Border_Color_Switcher: value })}
-                                            />
-                                                    
-                                            {Heading_Border_Color_Switcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={Heading_Border_Color}
-                                                    setGlobalColor={(value) => setAttributes({ Heading_Border_Color: value })}
-                                                />
-                                            )}
-                                                    
-                                            {Heading_Border_Color_Switcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={Heading_Border_Hover_Color}
-                                                    setGlobalColor={(value) => setAttributes({ Heading_Border_Hover_Color: value })}
-                                                />
-                                            )}
-
-											<FB_Spacing
-												label={__("Border Width", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleHeadingBorderUnitsHandler}
-												spacingUnits={Heading_Border_units}
-												spacingDesktop={Heading_Desktop_Border_Width}
-												spacingTablet={Heading_Tab_Border_Width}
-												spacingMobile={Heading_Mobile_Border_Width}
-												handleSpacingUnitHandler={handleHeadingBorderUnitChange}
-												spacingCombineBtn={borderLink}
-												spacingCombineBtnHandler={handleHeadingBorderCombineBtn}
-												setAttributes={setAttributes}
-											/>
-
-											<FB_Spacing
-												label={__("Border Radius", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={
-													handleHeadingBorderRadiusUnitsHandler
-												}
-												spacingUnits={Heading_Border_radius_units}
-												spacingDesktop={Heading_Desktop_Border_radius_Width}
-												spacingTablet={Heading_Tab_Border_radius_Width}
-												spacingMobile={Heading_Mobile_Border_radius_Width}
-												handleSpacingUnitHandler={
-													handleHeadingBorderRadiusUnitChange
-												}
-												spacingCombineBtn={borderRadiusLink}
-												spacingCombineBtnHandler={
-													handleHeadingBorderRadiusCombineBtn
-												}
-												setAttributes={setAttributes}
-											/>
-										</PanelBody>
-										{/*Description Style*/}
-										{Sub_Heading_Switcher && (
-										<PanelBody
-										title={__("Description", "frontis-block")}
-										initialOpen={false}
-										className="fb-icon-box-desc-setting-wrapper"
-										>
-										{/*Typography*/}
-										<FB_TypographyControl
-											globalTypoControlActive={true}
-											globalTypoSwitcher={subHeadingGlobalTypoSwitcher}
-											storeGlobalTypographyData={(value) => setAttributes({ subHeadingGlobalTypographyData: value })}
-
-											globalTypoType={subHeadingGlobalTypoType}
-											onChangeGlobalTypoType={(value) => {
-												setAttributes({ 
-													subHeadingGlobalTypoType: value, 
-													subHeadingGlobalTypoSwitcher: value === 'default' ? {...subHeadingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...subHeadingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-												})
-											}}
-
-											globalTypoOption={subHeadingGlobalTypoOption}
-											onChangeGlobalTypoOption={(value) => setAttributes({ subHeadingGlobalTypoOption: value })}
-
-											fontFamily={subHeadingFontFamily}
-											onChangeFontFamily={(value) => setAttributes({ subHeadingFontFamily: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontFamily: value && false} })}
-
-											fontSize={subHeadingFontSize}
-											onChangeFontSize={(value) => setAttributes({ subHeadingFontSize: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontSize: value && false} })}
-
-											fontSizeUnits={subHeadingFontSizeUnits}
-											onChangeFontSizeUnit={(value) => setAttributes({ subHeadingFontSizeUnits: value })}
-
-											fontWeight={subHeadingFontWeight}
-											onChangeFontWeight={(value) => setAttributes({ subHeadingFontWeight: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontWeight: value && false} })}
-
-											fontStyle={subHeadingFontStyle}
-											onChangeFontStyle={(value) => setAttributes({ subHeadingFontStyle: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontStyle: value && false} })}
-
-											textTransform={subHeadingTextTransform}
-											onChangeTextTransform={(value) => setAttributes({ subHeadingTextTransform: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, textTransform: value && false} })}
-
-											textDecoration={subHeadingTextDecoration}
-											onChangeTextDecoration={(value) => setAttributes({ subHeadingTextDecoration: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, textDecoration: value && false} })}
-
-											letterSpacing={subHeadingLetterSpacing}
-											onChangeLetterSpacing={(value) => setAttributes({ subHeadingLetterSpacing: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-											letterSpacingUnits={subHeadingLetterSpacingUnits}
-											onChangeLetterSpacingUnit={(value) => setAttributes({ subHeadingLetterSpacingUnits: value })}
-
-											lineHeight={subHeadingLineHeight}
-											onChangeLineHeight={(value) => setAttributes({ subHeadingLineHeight: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, lineHeight: value && false} })}
-
-											lineHeightUnits={subHeadingLineHeightUnits}
-											onChangeLineHeightUnit={(value) => setAttributes({ subHeadingLineHeightUnits: value })}
-
-											deviceType={deviceType}
-											setAttributes={setAttributes}
-										/>
-									
-										{/*Color*/}
-										<FB_SwitcherControl
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalSwitcher={SubHeadingColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ SubHeadingColorSwitcher: value })}
-                                            />
-                                                    
-                                            {SubHeadingColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={SubHeadingColor}
-                                                    setGlobalColor={(value) => setAttributes({ SubHeadingColor: value })}
-                                                />
-                                            )}
-                                                    
-                                            {SubHeadingColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={SubHeadingHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ SubHeadingHoverColor: value })}
-                                                />
-                                            )}
-
-										{/*Spacing*/}
-										<Heading>Spacing</Heading>
-										{/* Padding */}
-										<FB_Spacing
-											label={__("Padding", "frontis-blocks")}
-											deviceType={deviceType}
-											spacingUnitsHandler={handleDescPaddingUnitsHandler}
-											spacingUnits={SubHeadingPaddingUnits}
-											spacingDesktop={SubHeadingDesktopPadding}
-											spacingTablet={SubHeadingTabPadding}
-											spacingMobile={SubHeadingMobilePadding}
-											handleSpacingUnitHandler={handleDescPaddingUnitChange}
-											spacingCombineBtn={SubHeadingPaddingLink}
-											spacingCombineBtnHandler={handleDescPaddingCombineBtn}
-											setAttributes={setAttributes}
-										/>
-										{/* Margin */}
-										<FB_Spacing
-											label={__("Margin", "frontis-blocks")}
-											deviceType={deviceType}
-											spacingUnitsHandler={handleDescMarginUnitsHandler}
-											spacingUnits={descMarginUnits}
-											spacingDesktop={descDesktopMargin}
-											spacingTablet={descTabMargin}
-											spacingMobile={descMobileMargin}
-											handleSpacingUnitHandler={handleDescMarginUnitChange}
-											spacingCombineBtn={descMarginLink}
-											spacingCombineBtnHandler={handleDescMarginCombineBtn}
-											setAttributes={setAttributes}
-										/>
-										</PanelBody>
-										)}
-										
-										{/*Button Style*/}
-										{icon_Box_Button_Switcher && (
-										<PanelBody
-											title={__("Button", "frontis-block")}
-											className="fb-icon-box-button-setting-wrapper"
-											initialOpen={false}
-										>
-
-											<FB_TypographyControl
-												globalTypoControlActive={true}
-												globalTypoSwitcher={buttonGlobalTypoSwitcher}
-												storeGlobalTypographyData={(value) => setAttributes({ buttonGlobalTypographyData: value })}
-
-												globalTypoType={buttonGlobalTypoType}
-												onChangeGlobalTypoType={(value) => {
-													setAttributes({ 
-														buttonGlobalTypoType: value, 
-														buttonGlobalTypoSwitcher: value === 'default' ? {...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-													})
-												}}
-
-												globalTypoOption={buttonGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ buttonGlobalTypoOption: value })}
-
-												fontFamily={buttonFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontFamily: value && false} })}
-
-												fontSize={buttonFontSize}
-												onChangeFontSize={(value) => setAttributes({ buttonFontSize: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontSize: value && false} })}
-
-												fontSizeUnits={buttonFontSizeUnits}
-												onChangeFontSizeUnit={(value) => setAttributes({ buttonFontSizeUnits: value })}
-
-												fontWeight={buttonFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ buttonFontWeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontWeight: value && false} })}
-
-												fontStyle={buttonFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ buttonFontStyle: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontStyle: value && false} })}
-
-												textTransform={buttonTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textTransform: value && false} })}
-
-												textDecoration={buttonTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textDecoration: value && false} })}
-
-												letterSpacing={buttonLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ buttonLetterSpacing: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-												letterSpacingUnits={buttonLetterSpacingUnits}
-												onChangeLetterSpacingUnit={(value) => setAttributes({ buttonLetterSpacingUnits: value })}
-
-												lineHeight={buttonLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ buttonLineHeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, lineHeight: value && false} })}
-
-												lineHeightUnits={buttonLineHeightUnits}
-												onChangeLineHeightUnit={(value) => setAttributes({ buttonLineHeightUnits: value })}
-
-												deviceType={deviceType}
-												setAttributes={setAttributes}
-											/>
-
-											
-											{/* Start Text Color*/}
-											<FB_SwitcherControl
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalSwitcher={buttonColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
-                                            />
-                                                    
-                                            {buttonColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={buttonTextColor}
-                                                    setGlobalColor={(value) => setAttributes({ buttonTextColor: value })}
-                                                />
-                                            )}
-                                                    
-                                            {buttonColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={buttonTextHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ buttonTextHoverColor: value })}
-                                                />
-                                            )}
-
-											{/* Start Button Bg Color*/}
-											<FB_SwitcherControl
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalSwitcher={buttonBgColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ buttonBgColorSwitcher: value })}
-                                            />
-                                                    
-                                            {buttonBgColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={buttonBgColor}
-                                                    setGlobalColor={(value) => setAttributes({ buttonBgColor: value })}
-                                                />
-                                            )}
-                                                    
-                                            {buttonBgColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={buttonBgHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ buttonBgHoverColor: value })}
-                                                />
-                                            )}
-											
-											{/* Button Icon color */}
-											{buttonIconSwitcher && <>
-												<FB_SwitcherControl
-													label={__("Icon Color", "frontis-blocks")}
-													globalSwitcher={btnIconColorSwitcher}
-													setGlobalSwitcher={(value) => setAttributes({ btnIconColorSwitcher: value })}
-												/>
-														
-												{btnIconColorSwitcher === 'normal' && (
-													<FB_ColorControl
-														label={__("Normal Color", "frontis-blocks")}
-														globalColor={btnIconColor}
-														setGlobalColor={(value) => setAttributes({ btnIconColor: value })}
-													/>
-												)}
-														
-												{btnIconColorSwitcher === 'hover' && (
-													<FB_ColorControl
-														label={__("Hover Color", "frontis-blocks")}
-														globalColor={btnIconHoverColor}
-														setGlobalColor={(value) => setAttributes({ btnIconHoverColor: value })}
-													/>
-												)}
-											</>}
-
-											<FB_Spacing
-												label={__("Padding", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleButtonPaddingUnitsHandler}
-												spacingUnits={iconBoxButtonPaddingUnits}
-												spacingDesktop={iconBoxButtonDesktopPadding}
-												spacingTablet={iconBoxButtonTabPadding}
-												spacingMobile={iconBoxButtonMobilePadding}
-												handleSpacingUnitHandler={handleButtonPaddingUnitChange}
-												spacingCombineBtn={iconBoxButtonPaddingLink}
-												spacingCombineBtnHandler={handleButtonPaddingCombineBtn}
-												setAttributes={setAttributes}
-											/>
-											<FB_Spacing
-												label={__("Margin", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleButtonMarginUnitsHandler}
-												spacingUnits={iconBoxButtonMarginUnits}
-												spacingDesktop={iconBoxButtonDesktopMargin}
-												spacingTablet={iconBoxButtonTabMargin}
-												spacingMobile={iconBoxButtonMobileMargin}
-												handleSpacingUnitHandler={handleButtonMarginUnitChange}
-												spacingCombineBtn={iconBoxButtonMarginLink}
-												spacingCombineBtnHandler={handleButtonMarginCombineBtn}
-												setAttributes={setAttributes}
-											/>
-											{/* Border Width */}
-											
-											<SelectControl
-												label={__("Border Style", "frontis-block")}
-												value={iconBoxButtonBorder}
-												options={BORDER_STYLES}
-												onChange={(value) =>
-													setAttributes({ iconBoxButtonBorder: value })
-												}
-											/>
-
-											<FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={iconBoxButtonBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ iconBoxButtonBorderColorSwitcher: value })}
-                                            />
-                                                    
-                                            {iconBoxButtonBorderColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={iconBoxButtonBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ iconBoxButtonBorderColor: value })}
-                                                />
-                                            )}
-                                                    
-                                            {iconBoxButtonBorderColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={iconBoxButtonHoverBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ iconBoxButtonHoverBorderColor: value })}
-                                                />
-                                            )}
-											
-											<FB_Spacing
-												label={__("Border Width", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleButtonBorderUnitsHandler}
-												spacingUnits={iconBoxButtonBorderUnits}
-												spacingDesktop={iconBoxButtonDesktopBorderWidth}
-												spacingTablet={iconBoxButtonTabBorderWidth}
-												spacingMobile={iconBoxButtonMobileBorderWidth}
-												handleSpacingUnitHandler={handleButtonBorderUnitChange}
-												spacingCombineBtn={iconBoxButtonBorderLink}
-												spacingCombineBtnHandler={handleButtonBorderCombineBtn}
-												setAttributes={setAttributes}
-											/>
-
-											{/* Border radius Width */}
-											<FB_Spacing
-												label={__("Border Radius", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleButtonBorderRadiusUnitsHandler}
-												spacingUnits={iconBoxBtnBorderradiusUnits}
-												spacingDesktop={iconBoxBtnDesktopBorderradiusWidth}
-												spacingTablet={iconBoxBtnTabBorderradiusWidth}
-												spacingMobile={iconBoxBtnMobileBorderradiusWidth}
-												handleSpacingUnitHandler={handleButtonBorderRadiusUnitChange}
-												spacingCombineBtn={btnBorderRadiusLink}
-												spacingCombineBtnHandler={handleButtonBorderRadiusCombineBtn}
-												setAttributes={setAttributes}
-											/>
-										</PanelBody>
-										)}
-										
-									</>
-								)}
-								{tab.name === "advance" && (
-									<>
-										<div className="fb-setting-advanced-tab-wrapper">
-											<div className="fb-setting-inner-wrapper">
-												<PanelBody
-													title={__("Layout", "frontis-blocks")}
-													initialOpen={true}
-													className="fb-setting-layout-header" 
-												>
-													<FB_Range
-                                                        min={0}
-                                                        max={10000000}
-                                                        label={__("Z Index", "frontis-blocks")}
-                                                        rangeValue={globalZIndex}
-                                                        onChangeHandler={(value) => setAttributes({ globalZIndex: value === 0 ? undefined : value })}
-                                                        deviceType={deviceType}
-                                                        setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={''}
-                                                        isRangeUnit={false}
-                                                    />
-
-													<SelectControl
-                                                        label={__("Overflow", "frontis-blocks")}
-                                                        value={iconBoxOverflow}
-                                                        options={OVERFLOW_OP}
-                                                        onChange={(value) => setAttributes({ iconBoxOverflow: value })}
-                                                    />
-
-													<FB_PositionControl
-                                                        deviceType={deviceType}
-                                                        positionType={iconBoxPositionType}
-                                                        setPositionType={(value) => setAttributes({ iconBoxPositionType: value })}
-                                                                                                        
-                                                        HZOrientationType={iconBoxHZOrientationType}
-                                                        setHZOrientationType={(value) =>
-                                                            setAttributes({ iconBoxHZOrientationType: value })
-                                                        }
-                                                        VROrientationType={iconBoxVROrientationType}
-                                                        setVROrientationType={(value) =>
-                                                            setAttributes({ iconBoxVROrientationType: value })
-                                                        }
-                                                                                                            
-                                                        HZLeftOffset={iconBoxHZLeftOffset}
-                                                        setHZLeftOffset={(value) => setAttributes({ iconBoxHZLeftOffset: value })}
-                                                        HZLeftOffsetUnits={iconBoxHZLeftOffsetUnits}
-                                                        setHZLeftOffsetUnits={(value) => setAttributes({ iconBoxHZLeftOffsetUnits: value })}
-                                                        HZRightOffset={iconBoxHZRightOffset}
-                                                        setHZRightOffset={(value) => setAttributes({ iconBoxHZRightOffset: value })}
-                                                        HZRightOffsetUnits={iconBoxHZRightOffsetUnits}
-                                                        setHZRightOffsetUnits={(value) => setAttributes({ iconBoxHZRightOffsetUnits: value })}
-                                                                                                        
-                                                        VRTopOffset={iconBoxVRTopOffset}
-                                                        setVRTopOffset={(value) => setAttributes({ iconBoxVRTopOffset: value })}
-                                                        VRTopOffsetUnits={iconBoxVRTopOffsetUnits}
-                                                        setVRTopOffsetUnits={(value) => setAttributes({ iconBoxVRTopOffsetUnits: value })}
-                                                        VRBottomOffset={iconBoxVRBottomOffset}
-                                                        setVRBottomOffset={(value) => setAttributes({ iconBoxVRBottomOffset: value })}
-                                                        VRBottomOffsetUnits={iconBoxVRBottomOffsetUnits}
-                                                        setVRBottomOffsetUnits={(value) => setAttributes({ iconBoxVRBottomOffsetUnits: value })}
-
-                                                        setAttributes={setAttributes}
-                                                    />
-
-													<FB_InputControl
-														label={__("CSS ID", "frontis-blocks")}
-														value={iconBoxGlobalWraperID}
-														onChangeValue={(value) => setAttributes({ iconBoxGlobalWraperID: value })}
-														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
-													/>
-
-													<FB_InputControl
-														label={__("CSS Class", "frontis-blocks")}
-														value={iconBoxGlobalWraperClass}
-														onChangeValue={(value) => setAttributes({ iconBoxGlobalWraperClass: value })}
-														helpText={__("Separate with spaces key.", "frontis-blocks")}
-													/>
-													
-												</PanelBody>
-
-												<PanelBody
-													title={__("Padding and Margin", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<FB_Spacing
-														label={__("Padding", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={
-															handleGlobalPaddingUnitsHandler
-														}
-														spacingUnits={globalPaddingUnits}
-														spacingDesktop={globalPaddingDesktop}
-														spacingTablet={globalPaddingTablet}
-														spacingMobile={globalPaddingMobile}
-														handleSpacingUnitHandler={
-															handleGlobalPaddingUnitChange
-														}
-														spacingCombineBtn={globalPaddingLink}
-														spacingCombineBtnHandler={
-															handleGlobalPaddingCombineBtn
-														}
-														setAttributes={setAttributes}
-													/>
-													<FB_Spacing
-														label={__("Margin", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={handleGlobalMarginUnitsHandler}
-														spacingUnits={globalMarginUnits}
-														spacingDesktop={globalMarginDesktop}
-														spacingTablet={globalMarginTablet}
-														spacingMobile={globalMarginMobile}
-														handleSpacingUnitHandler={
-															handleGlobalMarginUnitChange
-														}
-														spacingCombineBtn={globalMarginLink}
-														spacingCombineBtnHandler={
-															handleGlobalMarginCombineBtn
-														}
-														setAttributes={setAttributes}
-													/>
-												</PanelBody>
-
-												<PanelBody title="Background Color" initialOpen={false}>
-													<FB_SwitcherControl
-														label={__("Background Color", "frontis-blocks")}
-														globalSwitcher={globalBgColorSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ globalBgColorSwitcher: value })}
-													/>
-															
-													{globalBgColorSwitcher === 'normal' && (
-														<FB_ColorControl
-															label={__("Normal Color", "frontis-blocks")}
-															globalColor={globalBgColor}
-															setGlobalColor={(value) => setAttributes({ globalBgColor: value })}
-														/>
-													)}
-															
-													{globalBgColorSwitcher === 'hover' && (
-														<FB_ColorControl
-															label={__("Hover Color", "frontis-blocks")}
-															globalColor={globalBgHoverColor}
-															setGlobalColor={(value) => setAttributes({ globalBgHoverColor: value })}
-														/>
-													)}
-												</PanelBody>
-												<PanelBody
-													title={__("Border and Shadow", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<SelectControl
-														label={__("Border Style", "frontis-blocks")}
-														value={globalBorder}
-														options={BORDER_STYLES}
-														onChange={(value) =>
-															setAttributes({ globalBorder: value })
-														}
-													/>
-
-													<FB_SwitcherControl
-														label={__("Border Color", "frontis-blocks")}
-														globalSwitcher={globalBorderColorSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ globalBorderColorSwitcher: value })}
-													/>
-															
-													{globalBorderColorSwitcher === 'normal' && (
-														<FB_ColorControl
-															label={__("Normal Color", "frontis-blocks")}
-															globalColor={globalBorderColor}
-															setGlobalColor={(value) => setAttributes({ globalBorderColor: value })}
-														/>
-													)}
-															
-													{globalBorderColorSwitcher === 'hover' && (
-														<FB_ColorControl
-															label={__("Hover Color", "frontis-blocks")}
-															globalColor={globalBorderHoverColor}
-															setGlobalColor={(value) => setAttributes({ globalBorderHoverColor: value })}
-														/>
-													)}
-
-													<FB_Spacing
-														label={__("Border", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={handleGlobalBorderUnitsHandler}
-														spacingUnits={globalBorderUnits}
-														spacingDesktop={globalBorderDesktop}
-														spacingTablet={globalBorderTablet}
-														spacingMobile={globalBorderMobile}
-														handleSpacingUnitHandler={
-															handleGlobalBorderUnitChange
-														}
-														spacingCombineBtn={globalBorderLink}
-														spacingCombineBtnHandler={
-															handleGlobalBorderCombineBtn
-														}
-														setAttributes={setAttributes}
-													/>
-
-													<FB_Spacing
-														label={__("Border Radius", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={
-															handleGlobalBorderRadiusUnitsHandler
-														}
-														spacingUnits={globalBorderRadiusUnits}
-														spacingDesktop={globalBorderRadiusDesktop}
-														spacingTablet={globalBorderRadiusTablet}
-														spacingMobile={globalBorderRadiusMobile}
-														handleSpacingUnitHandler={
-															handleGlobalBorderRadiusUnitChange
-														}
-														spacingCombineBtn={globalBorderRadiusLink}
-														spacingCombineBtnHandler={
-															handleGlobalBorderRadiusCombineBtn
-														}
-														setAttributes={setAttributes}
-													/>
-
-													<FB_SwitcherControl
-														label={__("Box Shadow", "frontis-blocks")}
-														globalSwitcher={boxGlobalBoxShadowSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ boxGlobalBoxShadowSwitcher: value })}
-													/>
-													
-													{boxGlobalBoxShadowSwitcher === 'normal' && (
-														<FB_BoxShadowControl
-															label={__("Normal Shadow", "frontis-blocks")}
-															onBoxShadowChange={(value) =>
-																setAttributes({ boxGlobalBoxShadowValues: value })
-															}
-															initialShadowValue={boxGlobalBoxShadowValues}
-															onBoxShadowStyleChange={(value) =>
-																setAttributes({
-																	boxGlobalBoxShadowCssValue: value,
-																})
-															}
-														/>
-													)}
-													
-													{boxGlobalBoxShadowSwitcher === 'hover' && (
-														<FB_BoxShadowControl
-															label={__("Hover Shadow", "frontis-blocks")}
-															onBoxShadowChange={(value) =>
-																setAttributes({ boxGlobalHoverBoxShadowValues: value })
-															}
-															initialShadowValue={boxGlobalHoverBoxShadowValues}
-															onBoxShadowStyleChange={(value) =>
-																setAttributes({
-																	boxGlobalHoverBoxShadowCssValue: value,
-																})
-															}
-														/>
-													)}
-												</PanelBody>
-
-												<PanelBody
-													title={__("Wrapper Link", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<ToggleControl
-															label={__("Enable Link", "frontis-blocks")}
-															checked={wrapperUrlSwitcher}
-															onChange={(value) => setAttributes({ wrapperUrlSwitcher: value })}
-													/>
-													
-													{wrapperUrlSwitcher && (
-														<FB_UrlControl
-															url={wrapperLink}
-															onChangeUrl={(value) =>
-																setAttributes({ wrapperLink: value })
-															}
-															openInNewTab={wrapperTargetUrl}
-															onChangeOpenInNewTab={(value) =>
-																setAttributes({ wrapperTargetUrl: value })
-														}
-														/>
-													)}
-												</PanelBody>
-
-												<PanelBody
-													title={__("Responsive Control", "frontis-blocks")}
-													initialOpen={false}
-													className="fb-setting-responsive-control-wrapper"
-												>
-													<FB_VisibilityControl
-                                                        desktopValue={iconBoxDesktopSwitcher}
-                                                        setDesktopValue={(value) => setAttributes({ iconBoxDesktopSwitcher: value })}
-
-                                                        tabletValue={iconBoxTabletSwitcher}
-                                                        setTabletValue={(value) => setAttributes({ iconBoxTabletSwitcher: value })}
-
-                                                        mobileValue={iconBoxMobileSwitcher}
-                                                        setMobileValue={(value) => setAttributes({ iconBoxMobileSwitcher: value })}
-                                                    />
-												</PanelBody>
-
-												<PanelBody
-													title={__("Custom CSS", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<FB_CustomCSSEditor  
-														value={iconBoxCustomCSS} 
-														onChangeValue={(value) => setAttributes({ iconBoxCustomCSS: value })}
-													/>
-												</PanelBody>
-											</div>
-										</div>
-									</>
-								)}
-							</div>
-						)}
-					</TabPanel>
-				</div>
-			</InspectorControls>
+			<FB_InspectorControls
+				generalControls={generalControls}
+				styleControls={styleControls}
+				advancedControls={advancedControls}
+			/>
 		</>
 	);
 }
