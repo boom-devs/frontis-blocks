@@ -3286,6 +3286,7 @@
   box-shadow: none;
   cursor: pointer;
   padding: 16px 12px;
+  flex: 1 1 0%;
 }
 .fb-inspector-control .components-tab-panel__tabs .fb-tab.general.active-tab, .fb-inspector-control .components-tab-panel__tabs .fb-tab.styles.active-tab, .fb-inspector-control .components-tab-panel__tabs .fb-tab.advance.active-tab, .fb-inspector-control .components-tab-panel__tabs .fb-tab.advanced.active-tab {
   background: #404655;
@@ -4137,6 +4138,58 @@
 
 .interface-navigable-region.interface-interface-skeleton__content {
   overflow-x: hidden;
+}
+
+/**
+  Global Headings typography buttons
+*/
+.fb-global-typography-headings-wrap {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  background: #F8F8F8 !important;
+  border-width: 0 !important;
+  border-style: none !important;
+  -o-border-image: initial !important;
+     border-image: initial !important;
+  min-width: 0px !important;
+  position: relative !important;
+  padding: 0 !important;
+}
+.fb-global-typography-headings-wrap:before {
+  background: transparent !important;
+}
+.fb-global-typography-headings-wrap:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.fb-global-typography-headings-wrap:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.fb-global-typography-headings-wrap button {
+  padding: 8px 10px !important;
+  height: 44px !important;
+  color: #050607 !important;
+  background: #F8F8F8 !important;
+  padding: 12px 16px !important;
+  height: 44px !important;
+  font-family: "Manrope", sans-serif;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 16px !important;
+  border: 1px solid #FFFFFF !important;
+}
+.fb-global-typography-headings-wrap button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.fb-global-typography-headings-wrap button.fb-global-typography-element-heading:hover {
+  background-color: #E1E3E8 !important;
+  cursor: pointer !important;
+}
+.fb-global-typography-headings-wrap button.fb-global-typography-element-heading[aria-checked=true] {
+  background-color: #E1E3E8 !important;
+  color: #050607 !important;
 }
 
 /*# sourceMappingURL=index.css.map*/
