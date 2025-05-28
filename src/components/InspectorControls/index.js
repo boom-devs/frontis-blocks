@@ -14,9 +14,9 @@ const FB_InspectorControls = ({
           className="fb-parent-tab-panel"
           activeClass="active-tab"
           tabs={[
-            { name: "general", title: __("General", "frontis-blocks"), className: "fb-tab general" },
+            { name: "general", title: __("Basic", "frontis-blocks"), className: "fb-tab general" },
             { name: "styles", title: __("Style", "frontis-blocks"), className: "fb-tab styles" },
-            { name: "advanced", title: __("Advanced", "frontis-blocks"), className: "fb-tab advanced" },
+            { name: "advanced", title: __("Extra", "frontis-blocks"), className: "fb-tab advanced" },
           ]}
         >
           {(tab) => (
