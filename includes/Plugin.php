@@ -89,6 +89,7 @@ final class Plugin
 		$this->set_locale();
 		$this->init_classes();
 		$this->init_hooks();
+		$this->appsero_init_tracker_frontis_blocks();
 
 		add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_scripts']);
@@ -456,4 +457,23 @@ final class Plugin
             exit;
         }
     }
+
+	/**
+	 * Initialize the plugin tracker
+	 *
+	 * @return void
+	 */
+	public function appsero_init_tracker_frontis_blocks() {
+
+		$client = new \Appsero\Client(
+			'27f84c83-a5a3-4a41-9cef-48b83ca6c546',
+			'Frontis Blocks – The Ultimate WordPress Block Plugin',
+			FB_PLUGIN_FILE
+		);
+
+		// Active insights
+		$client->insights()->init();
+
+	}
+
 }
