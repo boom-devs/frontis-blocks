@@ -2046,11 +2046,16 @@
   text-decoration: none;
 }
 .fb-create-page-button:hover {
-  background-color: #E1E3E8;
+  background-color: #EBF4FF;
+  color: #3991FF;
 }
 .fb-create-page-button span {
   margin-left: 10px;
   font-size: 20px;
+}
+.fb-create-page-button:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .fb-video-wrapper {
@@ -2087,14 +2092,14 @@
 .fb-system-requirements-list {
   display: flex;
   flex-direction: column;
-  border-radius: 4px;
+  border-radius: 8px;
   overflow: hidden;
 }
 .fb-system-requirements-note {
   margin-top: 24px;
   background-color: #FEF5EA;
   padding: 12px;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 .fb-system-requirements-note p {
   font-size: 14px;
@@ -2196,6 +2201,12 @@
   line-height: 22px;
   transition: 0.3s;
 }
+.fb-dashboard-icon-card .fb-icon-card-button:hover {
+  color: #15171C;
+}
+.fb-dashboard-icon-card .fb-icon-card-button:hover svg path {
+  fill: #15171C;
+}
 .fb-dashboard-icon-card .fb-icon-card-button span {
   display: flex;
   width: 16px;
@@ -2216,11 +2227,11 @@
   padding: 16px 24px;
   background-color: #3991FF;
   color: #FFFFFF;
-  border-radius: 8px;
+  border-radius: 10px;
   font-family: "Manrope", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 25px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
   transition: background-color 0.3s;
 }
 .fb-blocks-dashboard-right-bottom .fb-dashboard-icon-card .fb-icon-card-button span {
@@ -2237,7 +2248,7 @@
 }
 .fb-blocks-dashboard-right-bottom .fb-dashboard-icon-card .fb-icon-card-button:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(57, 145, 255, 0.5);
+  box-shadow: none;
 }
 
 .fb-blocks-dashboard-icon-card-area {
@@ -2306,7 +2317,7 @@
   background-color: #F89B2E;
   color: #FFFFFF;
   text-decoration: none;
-  border-radius: 12px;
+  border-radius: 10px;
   font-family: "Manrope", sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -2321,12 +2332,12 @@
   stroke: #FFFFFF;
 }
 .fb-dashboard-cta-card .fb-cat-button:hover {
-  background-color: rgb(235.125, 130.5, 7.875);
+  background-color: #FFFBF5;
   color: #FFFFFF;
 }
 .fb-dashboard-cta-card .fb-cat-button:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(248, 155, 46, 0.5);
+  box-shadow: none;
 }
 .fb-dashboard-cta-card .fb-cat-button.bg-white {
   background-color: #FFFFFF;
