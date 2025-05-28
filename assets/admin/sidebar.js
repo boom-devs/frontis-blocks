@@ -4203,7 +4203,7 @@ function FrontisBlocksSidebar() {
     disableAlpha: true,
     disableCustomGradients: false,
     colorSettings: colorPanelArray(globalColors, setGlobalColor, themeColors)
-  }), customColors.length > 0 && /*#__PURE__*/React.createElement(_components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_7__["default"], {
     colorPanelArray: colorPanelArray,
     customColors: customColors,
     setCustomColor: setCustomColor,
