@@ -326,51 +326,6 @@
   width: auto;
   margin-left: 0;
 }
-.fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap {
-  margin: 0 auto;
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border: 1px solid #E1E3E8;
-  border-radius: 4px;
-  outline: none;
-  padding: 0;
-}
-.fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap > * {
-  text-align: center;
-  border-right: 1px solid #e0e0e0;
-  border-bottom: 1px solid #e0e0e0;
-}
-.fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap > *:nth-child(4n) {
-  border-right: none;
-}
-.fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap > *:nth-child(n+5):nth-child(-n+8) {
-  border-bottom: none;
-}
-.fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap > *:first-child {
-  border-top-left-radius: 4px;
-}
-.fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap > *:nth-child(4) {
-  border-top-right-radius: 4px;
-}
-.fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap > *:nth-child(5) {
-  border-bottom-left-radius: 4px;
-}
-.fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap > *:nth-child(8) {
-  border-bottom-right-radius: 4px;
-}
-.fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap .fb-global-typography-element-heading {
-  padding: 11px 22px;
-}
-.fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap .fb-global-typography-element-heading div {
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px;
-}
-.fb-global-controls.components-panel .fb-global-typography-element-content .components-base-control .fb-global-typography-headings-wrap.active {
-  background: #15171C;
-}
 .fb-global-controls.components-panel .fb-global-typography-element-content:empty {
   display: none;
 }
