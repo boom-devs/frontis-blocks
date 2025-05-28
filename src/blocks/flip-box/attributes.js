@@ -27,6 +27,10 @@ const attributes = {
         type: "string",
         default: "front"
     },
+    flipAnimationType: {
+        type: "string",
+        default: "flip-left"
+    },
     flipMediaUrl: {
         type: 'string',
         default: ''
@@ -108,9 +112,9 @@ const attributes = {
     btnIconSize: {
         type: 'object',
         default: {
-            Desktop: '16',
-            Tablet: '16',
-            Mobile: '16'
+            Desktop: '0',
+            Tablet: '0',
+            Mobile: '0'
         }
     },
     btnIconSizeUnits: {
@@ -200,7 +204,11 @@ const attributes = {
         type: 'string',
         default: 'Icon Box title',
     },
-    wrapperAlignment: {
+    mediaAlignmentFront: {
+        type: "string",
+        default: "center",
+    },
+    mediaAlignmentBack: {
         type: "string",
         default: "center",
     },
@@ -213,6 +221,10 @@ const attributes = {
         default: "left",
     },
     buttonAlignment: {
+        type: "string",
+        default: "center",
+    },
+    buttonAlignmentBack: {
         type: "string",
         default: "center",
     },
@@ -271,7 +283,7 @@ const attributes = {
         default: {
             Desktop: '24',
             Tablet: '18',
-            Mobile: '16'
+            Mobile: '0'
         }
     },
     headingFontSizeUnits: {
@@ -493,8 +505,8 @@ const attributes = {
         default: {
             top: "0",
             bottom: "0",
-            left: "16",
-            right: "16",
+            left: "0",
+            right: "0",
         },
     },
     Heading_Tab_Margin: {
@@ -502,8 +514,8 @@ const attributes = {
         default: {
             top: "0",
             bottom: "0",
-            left: "16",
-            right: "16",
+            left: "0",
+            right: "0",
         },
     },
     Heading_Mobile_Margin: {
@@ -511,8 +523,8 @@ const attributes = {
         default: {
             top: "0",
             bottom: "0",
-            left: "16",
-            right: "16",
+            left: "0",
+            right: "0",
         },
     },
     Heading_Margin_Link: {
@@ -681,8 +693,8 @@ const attributes = {
     SubHeadingMobilePadding: {
         type: "object",
         default: {
-            top: '10',
-            bottom: '10',
+            top: '0',
+            bottom: '0',
             left: '0',
             right: '0',
         },
@@ -706,8 +718,8 @@ const attributes = {
         default: {
             top: '0',
             bottom: '0',
-            left: '16',
-            right: '16',
+            left: '0',
+            right: '0',
         },
     },
     descTabMargin: {
@@ -715,8 +727,8 @@ const attributes = {
         default: {
             top: '0',
             bottom: '0',
-            left: '16',
-            right: '16',
+            left: '0',
+            right: '0',
         },
     },
     descMobileMargin: {
@@ -724,8 +736,8 @@ const attributes = {
         default: {
             top: '0',
             bottom: '0',
-            left: '16',
-            right: '16',
+            left: '0',
+            right: '0',
         },
     },
     descMarginLink: {
@@ -807,8 +819,8 @@ const attributes = {
         default: {
             top: '0',
             bottom: '0',
-            left: '16',
-            right: '16',
+            left: '0',
+            right: '0',
         },
     },
     flipButtonTabMargin: {
@@ -816,8 +828,8 @@ const attributes = {
         default: {
             top: '0',
             bottom: '0',
-            left: '16',
-            right: '16',
+            left: '0',
+            right: '0',
         },
     },
     flipButtonMobileMargin: {
@@ -825,8 +837,8 @@ const attributes = {
         default: {
             top: '0',
             bottom: '0',
-            left: '16',
-            right: '16',
+            left: '0',
+            right: '0',
         },
     },
     flipButtonMarginLink: {
@@ -1220,28 +1232,28 @@ const attributes = {
     globalPaddingDesktop: {
         type: "object",
         default: {
-            top: '32',
-            bottom: '32',
-            left: '32',
-            right: '32',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     globalPaddingTablet: {
         type: "object",
         default: {
-            top: '32',
-            bottom: '32',
-            left: '16',
-            right: '16',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     globalPaddingMobile: {
         type: "object",
         default: {
-            top: '32',
-            bottom: '32',
-            left: '16',
-            right: '16',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     globalPaddingLink: {
@@ -1442,27 +1454,27 @@ const attributes = {
         type: "object",
         default: {
             top: '0',
-            bottom: '10',
-            left: '16',
-            right: '16',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     mediaMarginTablet: {
         type: "object",
         default: {
             top: '0',
-            bottom: '10',
-            left: '16',
-            right: '16',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     mediaMarginMobile: {
         type: "object",
         default: {
             top: '0',
-            bottom: '10',
-            left: '16',
-            right: '16',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     mediaMarginLink: {
@@ -1606,7 +1618,7 @@ const attributes = {
         type: 'string',
         default: '',
     },
-    mediaBackColorSwitcher: {
+    mediaColorSwitcher: {
         type: "string",
         default: "normal"
     },
@@ -1924,9 +1936,9 @@ const attributes = {
     btnIconSize: {
         type: 'object',
         default: {
-            Desktop: '16',
-            Tablet: '16',
-            Mobile: '16'
+            Desktop: '0',
+            Tablet: '0',
+            Mobile: '0'
         }
     },
     btnIconSizeUnits: {
@@ -1964,6 +1976,146 @@ const attributes = {
     btnIconPosition: {
         type: 'string',
         default: 'right'
+    },
+    // Flip box front
+    flipBoxFrontWidth: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    flipBoxFrontWidthUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    flipBoxFrontHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    flipBoxFrontHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    //Flip Box Front background
+    flipBoxFrontBackColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    flipBoxFrontBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    flipBoxFrontClassicColor: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontGradientColor: {
+        type: "string",
+    },
+    flipBoxFrontCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    flipBoxFrontCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    flipBoxFrontHoverClassicColor: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverGradientColor: {
+        type: "string",
+    },
+    flipBoxFrontHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    flipBoxFrontHoverCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundImageRepeat: {
+        type: "string",
+        default: ""
     },
     flipBackIconPosition: {
         type: 'string',
@@ -2079,7 +2231,7 @@ const attributes = {
         default: {
             Desktop: '24',
             Tablet: '18',
-            Mobile: '16'
+            Mobile: '0'
         }
     },
     headingFontSizeUnits: {
@@ -2301,8 +2453,8 @@ const attributes = {
         default: {
             top: "0",
             bottom: "0",
-            left: "16",
-            right: "16",
+            left: "0",
+            right: "0",
         },
     },
     Heading_Tab_Margin: {
@@ -2310,8 +2462,8 @@ const attributes = {
         default: {
             top: "0",
             bottom: "0",
-            left: "16",
-            right: "16",
+            left: "0",
+            right: "0",
         },
     },
     Heading_Mobile_Margin: {
@@ -2319,8 +2471,8 @@ const attributes = {
         default: {
             top: "0",
             bottom: "0",
-            left: "16",
-            right: "16",
+            left: "0",
+            right: "0",
         },
     },
     Heading_Margin_Link: {
@@ -2480,8 +2632,8 @@ const attributes = {
     SubHeadingMobilePadding: {
         type: "object",
         default: {
-            top: '10',
-            bottom: '10',
+            top: '0',
+            bottom: '0',
             left: '0',
             right: '0',
         },
@@ -2505,8 +2657,8 @@ const attributes = {
         default: {
             top: '0',
             bottom: '0',
-            left: '16',
-            right: '16',
+            left: '0',
+            right: '0',
         },
     },
     descTabMargin: {
@@ -2514,8 +2666,8 @@ const attributes = {
         default: {
             top: '0',
             bottom: '0',
-            left: '16',
-            right: '16',
+            left: '0',
+            right: '0',
         },
     },
     descMobileMargin: {
@@ -2523,8 +2675,8 @@ const attributes = {
         default: {
             top: '0',
             bottom: '0',
-            left: '16',
-            right: '16',
+            left: '0',
+            right: '0',
         },
     },
     descMarginLink: {
@@ -2606,8 +2758,8 @@ const attributes = {
         default: {
             top: '0',
             bottom: '0',
-            left: '16',
-            right: '16',
+            left: '0',
+            right: '0',
         },
     },
     flipBackButtonTabMargin: {
@@ -2615,8 +2767,8 @@ const attributes = {
         default: {
             top: '0',
             bottom: '0',
-            left: '16',
-            right: '16',
+            left: '0',
+            right: '0',
         },
     },
     flipBackButtonMobileMargin: {
@@ -2624,8 +2776,8 @@ const attributes = {
         default: {
             top: '0',
             bottom: '0',
-            left: '16',
-            right: '16',
+            left: '0',
+            right: '0',
         },
     },
     flipBackButtonMarginLink: {
@@ -3019,28 +3171,28 @@ const attributes = {
     globalPaddingDesktop: {
         type: "object",
         default: {
-            top: '32',
-            bottom: '32',
-            left: '32',
-            right: '32',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     globalPaddingTablet: {
         type: "object",
         default: {
-            top: '32',
-            bottom: '32',
-            left: '16',
-            right: '16',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     globalPaddingMobile: {
         type: "object",
         default: {
-            top: '32',
-            bottom: '32',
-            left: '16',
-            right: '16',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     globalPaddingLink: {
@@ -3092,11 +3244,11 @@ const attributes = {
     },
     globalBgColor: {
         type: "string",
-        default: '#FEEBD5'
+        default: ""
     },
     globalBgHoverColor: {
         type: "string",
-        default: "#F89B2E"
+        default: ""
     },
     globalBorder: {
         type: 'string',
@@ -3241,27 +3393,27 @@ const attributes = {
         type: "object",
         default: {
             top: '0',
-            bottom: '10',
-            left: '16',
-            right: '16',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     mediaMarginTablet: {
         type: "object",
         default: {
             top: '0',
-            bottom: '10',
-            left: '16',
-            right: '16',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     mediaMarginMobile: {
         type: "object",
         default: {
             top: '0',
-            bottom: '10',
-            left: '16',
-            right: '16',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     mediaMarginLink: {

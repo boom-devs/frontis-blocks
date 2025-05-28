@@ -6,9 +6,7 @@ import {
 	BlockControls,
 	AlignmentToolbar,
 } from "@wordpress/block-editor";
-/**
- * Internal depencencies
- */
+
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import { useRef } from "@wordpress/element";
@@ -80,21 +78,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		descAlignmentBack,
 		mediaSwitcherBack,
 		iconBack,
-		flipSelectedSide
+		flipSelectedSide,
+		flipAnimationType
 	} = attributes;
 
 	const blockProps = useBlockProps({
 		className: `fb-flip-box-main-wrapper ${blockID} ${flipBoxDesktopSwitcher && 'fb-desktop-responsive'} ${flipBoxTabletSwitcher && 'fb-tablet-responsive'} ${flipBoxMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
-	// Prevent link navigation in the editor and focus on text
+
 	const handleButtonClick = (event) => {
 		event.preventDefault();
 	};
 
-	/**
-	* Manages tab button settings and switches to block settings on click
-	*/
+
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
@@ -120,8 +117,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					className={`fb-parent-wrapper fb-flip-box-wrapper ${blockID} ${flipBoxGlobalWraperClass}`}
 					id={flipBoxGlobalWraperID}
 				>
-					<div className={`fb-flipper-wrapper fb-editor-mode ${flipSelectedSide === 'back' ? 'fb-show-back' : ''}`}>
-						{/* Front Side */}
+					<div className={`fb-flipper-wrapper fb-editor-mode ${flipSelectedSide === 'back' ? 'fb-show-back' : ''} ${flipAnimationType}`} >
 						<div className={`fb-flipbox-front ${flipSelectedSide === 'front' ? 'fb-active-side' : 'fb-inactive-side'}`}>
 							<div className="fb-flipbox-content-wrapper">
 								<div className="fb-flip-media-container">
@@ -186,12 +182,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								</div>
 							</div>
 						</div>
-
-						{/* Back Side */}
 						<div className={`fb-flipbox-back ${flipSelectedSide === 'back' ? 'fb-active-side' : 'fb-inactive-side'}`}>
 							<div className="fb-flipbox-content-wrapper">
-								<div className="fb-flipBack-media-container">
-									<div className="fb-flipBack-media-wrapper">
+								<div className="fb-flip-back-media-container">
+									<div className="fb-flip-back-media-wrapper">
 										{mediaSwitcherBack === "image" && (
 											<img src={flipBackMediaUrl} alt="Back media" />
 										)}
@@ -200,7 +194,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										)}
 									</div>
 								</div>
-								<div className="fb-flipBack-box-content-wrapper">
+								<div className="fb-flip-back-box-content-wrapper">
 									<RichText
 										tagName={headingTagBack}
 										value={headingTextBack}
@@ -223,10 +217,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										/>
 									)}
 									{flipBack_Button_Switcher && (
-										<div className="fb-flipBack-button">
-											<div className="fb-flipBack-btn-container">
+										<div className="fb-flip-back-button">
+											<div className="fb-flip-back-btn-container">
 												<a
-													className="fb-flipBack-btn-wrapper"
+													className="fb-flip-back-btn-wrapper"
 													href={flipBackButtonLink}
 													target={flipBackbtnTargetUrl ? '_blank' : undefined}
 													rel={flipBackbtnTargetUrl ? 'noopener noreferrer' : undefined}
@@ -238,7 +232,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 														onChange={(value) =>
 															setAttributes({ flipBack_Button_Text: value })
 														}
-														placeholder={__("flipBack Button", "frontis-block")}
+														placeholder={__("Flip Back Button", "frontis-block")}
 													/>
 													{buttonIconSwitcher && (
 														<div className="fb-btn-icon-wrapper">
