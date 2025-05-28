@@ -18,7 +18,6 @@ const ColorPalletWrapper = (props) => {
     }
 
     useEffect(() => {
-        if (customColors.length > 0) {
             //Add delete button and delete action for custom colors
             const colorPanel = document.querySelector('.fb-custom-color-panel');
             setTimeout(() => {
@@ -49,12 +48,10 @@ const ColorPalletWrapper = (props) => {
                 }
 
             }, 100)
-        }
     }, [customColors]);
 
     return (
         <>
-            {customColors.length > 0 &&
                 <Panel>
                     <PanelColorSettings
                         title={__(
@@ -113,8 +110,6 @@ const ColorPalletWrapper = (props) => {
                         </div>
                     </PanelColorSettings>
                 </Panel>
-
-            }
         </>
     )
 }
