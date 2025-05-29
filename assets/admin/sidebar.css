@@ -362,7 +362,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-back {
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-back span svg {
   fill: none !important;
 }
-div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-setting-spacing-inner-container {
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-setting-spacing-container {
+  padding: 0 6px 0 0;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-setting-spacing-container .fb-setting-spacing-inner-container {
   padding: 0 10px;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-setting-spacing-label-container {

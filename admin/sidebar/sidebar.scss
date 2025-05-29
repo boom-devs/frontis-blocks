@@ -33,8 +33,12 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 		}
 	}
 
-	.fb-setting-spacing-inner-container {
-		padding: 0 10px;
+	.fb-setting-spacing-container {
+		padding: 0 6px 0 0;
+
+		.fb-setting-spacing-inner-container {
+			padding: 0 10px;
+		}
 	}
 
 	.fb-setting-spacing-label-container {
