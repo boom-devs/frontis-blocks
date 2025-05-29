@@ -746,7 +746,6 @@ function FrontisBlocksSidebar() {
 												themeColors,
 											)}
 										/>
-
 										<ColorPalletWrapper
 											colorPanelArray={colorPanelArray}
 											customColors={customColors}
@@ -758,7 +757,7 @@ function FrontisBlocksSidebar() {
 											colorName={colorName}
 											setColorName={setColorName}
 										/>
-										
+
 
 									</div>
 
