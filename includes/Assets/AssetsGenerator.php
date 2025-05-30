@@ -33,18 +33,18 @@ class AssetsGenerator {
 	// Separate combine css
 	// Now check page use any custom template then marge the template with the page css also marge the global css and generate the page google font url
 
-    public function clean_CSS($css) {
+    public function clean_css($css) {
         $parser = new Parser($css);
         $document = $parser->parse();
 
         // Start processing from the document root
-        $this->processCSSList($document);
+        $this->process_css($document);
 
         // Render cleaned CSS
         return $document->render(OutputFormat::create()->indentWithSpaces(2));
     }
 
-    private function processCSSList(CSSList $list) {
+    private function process_css(CSSList $list) {
         $contents = $list->getContents();
 
         // Step 1: Remove empty or invalid rules and collect declaration blocks
@@ -67,7 +67,7 @@ class AssetsGenerator {
                 }
             } elseif ($item instanceof AtRuleBlockList) {
                 // Recursively process nested at-rules (e.g., media queries)
-                $this->processCSSList($item);
+                $this->process_css($item);
                 // Remove at-rule if it has no contents
                 if (count($item->getContents()) === 0) {
                     $list->remove($item);
@@ -110,7 +110,7 @@ class AssetsGenerator {
         }
     }
 
-	public function mergeFontArrays($arrays) {
+	public function merge_font_arrays($arrays) {
 		$merged = [];
 
 		// Iterate through each array
@@ -683,32 +683,16 @@ class AssetsGenerator {
 		}
 
 		$this->get_font_families();
-
-//		if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'single') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') ||(get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'home') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'page')) {
-//            $this->css_generator_functions(false);
-//        }
-//
-//        if ( get_post_type( $this->post_id ) !== 'wp_template' && get_post_type( $this->post_id ) !== 'wp_template_part' ) {
-//            $this->css_generator_functions(true);
-//        }
     }
 
-    public function check_frontis_blocks_used() {
-        if(count($this->blocks_used_in_page) > 0) {
-            update_post_meta($this->post_id, 'page_frontis_block_used', true);
-        } else {
-            update_post_meta($this->post_id, 'page_frontis_block_used', false);
-        }
-    }
-
-    public function generate_block_assets($block) {
+	public function generate_block_assets($block) {
 		if (str_contains($block['blockName'], 'frontis-blocks')) {
 			$single_block['slug'] = str_replace('frontis-blocks/', '', $block['blockName']);
 			if (!in_array($block['blockName'], $this->used_blocks)) {
 				// Css file
 				$block_static_css_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/style-index.css';
 				if (file_exists($block_static_css_file_path)) {
-					$this->css_content .= $this->clean_CSS(file_get_contents($block_static_css_file_path)) . "\n";
+					$this->css_content .= $this->clean_css(file_get_contents($block_static_css_file_path)) . "\n";
 				}
 
 				// Js file
@@ -736,7 +720,7 @@ class AssetsGenerator {
 				}
 			}
 
-			$this->css_content .= $this->clean_CSS($blockStyle) . "\n";
+			$this->css_content .= $this->clean_css($blockStyle) . "\n";
 		}
     }
 
@@ -799,7 +783,7 @@ class AssetsGenerator {
 		$custom_fonts = Helper::extract_font_families($custom_typography);
 		$typography_fonts = Helper::extract_font_families($typography_data);
 		$fonts_families = [$typography_fonts, $custom_fonts, $this->block_fonts];
-		$fonts_families = $this->mergeFontArrays($fonts_families);
+		$fonts_families = $this->merge_font_arrays($fonts_families);
 
 		if (!empty($fonts_families)) {
 			$font_url = "https://fonts.googleapis.com/css?family=";
