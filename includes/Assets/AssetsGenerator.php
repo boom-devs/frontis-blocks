@@ -26,7 +26,6 @@ class AssetsGenerator {
     private $frontis_block_used = false;
     private $blocks_used_in_page = [];
 
-
 	// Separate page css generation
 	// Separate template css generation
 	// Separate global css
@@ -650,7 +649,6 @@ class AssetsGenerator {
 
         return $template_parts;
     }
-
 
 	public function generate_page_post_css() {
 
