@@ -20,6 +20,10 @@ class ComposerStaticInitd1a84656a6acb700f27e23c26b1775ba
         array (
             'FrontisBlocks\\' => 14,
         ),
+        'A' => 
+        array (
+            'Appsero\\' => 8,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -38,6 +42,10 @@ class ComposerStaticInitd1a84656a6acb700f27e23c26b1775ba
         'FrontisBlocks\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes',
+        ),
+        'Appsero\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/appsero/client/src',
         ),
     );
 

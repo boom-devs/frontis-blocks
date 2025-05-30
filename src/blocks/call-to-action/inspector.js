@@ -47,6 +47,7 @@ import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
+import FB_InspectorControls from '@Components/InspectorControls';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -401,8 +402,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const buttonTwoIconHandler = (iconName) => {
 		setAttributes({ btnTwoIcon: iconName });
 	};
-	
-	
 
 	/** Start Heading padding */
 	const handleHeadingPaddingUnitChange = (event, position) => {
@@ -2435,1402 +2434,1388 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const editorStyle = `${ctaContentStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
+	/**
+	 * Inspector General Controls
+	 */
+	const generalControls = (
+		<>
+			{/* Title Element */}
+			<div className="fb-advanced-wrapper">
+				<PanelBody
+					title={__("Title", "frontis-block")}
+					initialOpen={false}
+				>
+					
+					<FB_AlignmentControl
+						label={__("Title Alignment", "frontis-blocks")}
+						globalAlignment={Alignment}
+						setGlobalAlignment={(value) => setAttributes({ Alignment: value })}
+					/>
+
+					<FB_HtmlTagControl
+						label={__("Title Tag", "frontis-blocks")}
+						globalHtmlTag={headingTag}
+						setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
+					/>
+				
+					<TextareaControl
+						label={__("Title Text", "frontis-block")}
+						className="fb-setting-text"
+						value={Heading_Text}
+						onChange={(value) =>
+							setAttributes({ Heading_Text: value })
+						}
+						
+					/>
+				</PanelBody>
+			</div>
+
+			{/* Image control */}
+			<div className="fb-advanced-wrapper">
+				<PanelBody
+					title={__("Description", "frontis-block")}
+					initialOpen={false}
+				>
+					<ToggleControl
+						label={__("Show Description", "frontis-block")}
+						checked={descriptionSwitcher}
+						onChange={(value) =>
+							setAttributes({ descriptionSwitcher: value })
+						}
+					/>
+
+					{descriptionSwitcher && (
+						<>
+							
+							<FB_AlignmentControl
+								label={__("Alignment", "frontis-blocks")}
+								globalAlignment={descAlignment}
+								setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
+							/>
+
+							<TextareaControl
+								label={__("Sub Heading Text", "frontis-block")}
+								value={Sub_Heading_Text}
+								onChange={(value) =>
+									setAttributes({ Sub_Heading_Text: value })
+								}
+								className="fb-sub-heading-text"
+							/>
+						</>
+					)}
+				</PanelBody>
+			</div>
+
+			{/*Button One*/}
+			<div className="fb-cta-button-wrapper">
+				<PanelBody
+					title={__("Button One", "frontis-block")}
+					initialOpen={false}
+				>
+					<ToggleControl
+						label={__("Show Button", "frontis-block")}
+						checked={ctaBtnOneSwitcher}
+						onChange={(value) =>
+							setAttributes({ ctaBtnOneSwitcher: value })
+						}
+					/>
+
+					{ctaBtnOneSwitcher && (
+						<>
+							
+							<FB_AlignmentControl
+								label={__("Alignment", "frontis-blocks")}
+								globalAlignment={buttonAlignment}
+								setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
+							/>
+							<TextareaControl
+								label={__("Button Text", "frontis-block")}
+								value={info_Button_Text}
+								onChange={(value) =>
+									setAttributes({ info_Button_Text: value })
+								}
+								className="fb-cta-button-text"
+							/>
+							<ToggleControl
+								label={__("Show Icon", "frontis-block")}
+								checked={buttonIconSwitcher}
+								onChange={(value) =>
+									setAttributes({ buttonIconSwitcher: value })
+								}
+							/>
+							{buttonIconSwitcher && (
+								<>
+									<BaseControl>
+										<FBIconPicker
+											value={btnIcon}
+											setIconHandler={buttonIconHandler}
+										/>
+									</BaseControl>
+									<SelectControl
+										label={__("Icon Position", "frontis-block")}
+										value={btnIconPosition}
+										options={ICON_POSITION}
+										onChange={(value) =>
+											setAttributes({ btnIconPosition: value })
+										}
+									/>
+								</>
+							)}
+
+							<BaseControl>
+								<FB_UrlControl
+									url={info_Button_Link}
+									onChangeUrl={(value) =>
+										setAttributes({ info_Button_Link: value })
+									}
+									openInNewTab={btnOneTargetUrl}
+									onChangeOpenInNewTab={(value) =>
+										setAttributes({ btnOneTargetUrl: value })
+									}
+								/>
+							</BaseControl>
+						</>
+					)}
+				</PanelBody>
+			</div>
+			{/*Button Two*/}
+			<div className="fb-cta-button-wrapper">
+				<PanelBody
+					title={__("Button Two", "frontis-block")}
+					initialOpen={false}
+				>
+					<ToggleControl
+						label={__("Show Button", "frontis-block")}
+						checked={btnTwoSwitcher}
+						onChange={(value) =>
+							setAttributes({ btnTwoSwitcher: value })
+						}
+					/>
+					{btnTwoSwitcher && (
+						<>
+							<TextareaControl
+								label={__("Button Text", "frontis-block")}
+								value={btnTwoText}
+								onChange={(value) =>
+									setAttributes({ btnTwoText: value })
+								}
+								className="fb-cta-button-text"
+							/>
+							<ToggleControl
+								label={__("Show Icon", "frontis-block")}
+								checked={buttonTwoIconSwitcher}
+								onChange={(value) =>
+									setAttributes({ buttonTwoIconSwitcher: value })
+								}
+							/>
+							{buttonTwoIconSwitcher && (
+								<>
+									<BaseControl>
+										<FBIconPicker
+											value={btnTwoIcon}
+											setIconHandler={buttonTwoIconHandler}
+										/>
+									</BaseControl>
+									<SelectControl
+										label={__("Icon Position", "frontis-block")}
+										value={btnTwoIconPosition}
+										options={ICON_POSITION}
+										onChange={(value) =>
+											setAttributes({ btnTwoIconPosition: value })
+										}
+									/>
+								</>
+							)}
+
+							<BaseControl>
+								<FB_UrlControl
+									url={btnTwoLink}
+									onChangeUrl={(value) =>
+										setAttributes({ btnTwoLink: value })
+									}
+									openInNewTab={btnTwoTargetUrl}
+									onChangeOpenInNewTab={(value) =>
+										setAttributes({ btnTwoTargetUrl: value })
+									}
+								/>
+							</BaseControl>
+						</>
+					)}
+				</PanelBody>
+			</div>
+		</>
+	);
+
+	/**
+	 * Inspector Style Controls
+	 */
+	const styleControls = (
+		<>
+			{/*Heading Style*/}
+			<PanelBody
+				title={__("Title", "frontis-block")}
+				initialOpen={true}
+			>
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={headingGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) => setAttributes({ headingGlobalTypographyData: value })}
+
+					globalTypoType={headingGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({ 
+							headingGlobalTypoType: value, 
+							headingGlobalTypoSwitcher: value === 'default' ? {...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+						})
+					}}
+
+					globalTypoOption={headingGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) => setAttributes({ headingGlobalTypoOption: value })}
+
+					fontFamily={headingFontFamily}
+					onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontFamily: value && false} })}
+
+					fontSize={headingFontSize}
+					onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontSize: value && false} })}
+
+					fontSizeUnits={headingFontSizeUnits}
+					onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
+
+					fontWeight={headingFontWeight}
+					onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontWeight: value && false} })}
+
+					fontStyle={headingFontStyle}
+					onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontStyle: value && false} })}
+
+					textTransform={headingTextTransform}
+					onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textTransform: value && false} })}
+
+					textDecoration={headingTextDecoration}
+					onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textDecoration: value && false} })}
+
+					letterSpacing={headingLetterSpacing}
+					onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+					letterSpacingUnits={headingLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) => setAttributes({ headingLetterSpacingUnits: value })}
+
+					lineHeight={headingLineHeight}
+					onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, lineHeight: value && false} })}
+
+					lineHeightUnits={headingLineHeightUnits}
+					onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
+
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+				
+				<FB_SwitcherControl
+					label={__("Text Color", "frontis-blocks")}
+					globalSwitcher={headingColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ headingColorSwitcher: value })}
+				/>
+
+				{headingColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={headingColor}
+						setGlobalColor={(value) => setAttributes({ headingColor: value })}
+					/>
+				)}
+
+				{headingColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={headingHoverColor}
+						setGlobalColor={(value) => setAttributes({ headingHoverColor: value })}
+					/>
+				)}
+
+				<FB_Spacing
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleHeadingPaddingUnitsHandler}
+					spacingUnits={headingPaddingUnits}
+					spacingDesktop={headingDesktopPadding}
+					spacingTablet={headingTabPadding}
+					spacingMobile={headingMobilePadding}
+					handleSpacingUnitHandler={handleHeadingPaddingUnitChange}
+					spacingCombineBtn={headingPaddingLink}
+					spacingCombineBtnHandler={handleHeadingPaddingCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing
+					label={__("Margin", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleHeadingMarginUnitsHandler}
+					spacingUnits={headingMarginUnits}
+					spacingDesktop={headingDesktopMargin}
+					spacingTablet={headingTabMargin}
+					spacingMobile={headingMobileMargin}
+					handleSpacingUnitHandler={handleHeadingMarginUnitChange}
+					spacingCombineBtn={headingMarginLink}
+					spacingCombineBtnHandler={handleHeadingMarginCombineBtn}
+					setAttributes={setAttributes}
+				/>
+				
+				<SelectControl
+					label={__("Border Style", "frontis-block")}
+					value={Heading_Border}
+					options={BORDER_STYLES}
+					onChange={(value) =>
+						setAttributes({ Heading_Border: value })
+					}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={headingBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ headingBorderColorSwitcher: value })}
+				/>
+
+				{headingBorderColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={headingBorderColor}
+						setGlobalColor={(value) => setAttributes({ headingBorderColor: value })}
+					/>
+				)}
+
+				{headingBorderColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={headingBorderHoverColor}
+						setGlobalColor={(value) => setAttributes({ headingBorderHoverColor: value })}
+					/>
+				)}
+
+				<FB_Spacing
+					label={__("Border Width", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleHeadingBorderUnitsHandler}
+					spacingUnits={headingBorderUnits}
+					spacingDesktop={headingDesktopBorder}
+					spacingTablet={headingTabBorder}
+					spacingMobile={headingMobileBorder}
+					handleSpacingUnitHandler={handleHeadingBorderUnitChange}
+					spacingCombineBtn={headingBorderLink}
+					spacingCombineBtnHandler={handleHeadingBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+				
+				<FB_Spacing
+				label={__("Border Radius", "frontis-blocks")}
+				deviceType={deviceType}
+				spacingUnitsHandler={handleHeadingBorderRadiusUnitsHandler}
+				spacingUnits={headingBorderRadiusUnits}
+				spacingDesktop={headingDesktopBorderRadius}
+				spacingTablet={headingTabBorderRadius}
+				spacingMobile={headingMobileBorderRadius}
+				handleSpacingUnitHandler={handleHeadingBorderRadiusUnitChange}
+				spacingCombineBtn={headingBorderRadiusLink}
+				spacingCombineBtnHandler={handleHeadingBorderRadiusCombineBtn}
+				setAttributes={setAttributes}
+				/>
+
+			</PanelBody>
+			{/*Description Style*/}
+			{descriptionSwitcher && (
+				<PanelBody
+					title={__("Description", "frontis-block")}
+					initialOpen={false}
+					className="fb-cta-desc-setting-wrapper"
+				>
+					{/* Typography */}
+					<FB_TypographyControl
+						globalTypoControlActive={true}
+						globalTypoSwitcher={SubHeadingGlobalTypoSwitcher}
+						storeGlobalTypographyData={(value) => setAttributes({ SubHeadingGlobalTypographyData: value })}
+
+						globalTypoType={SubHeadingGlobalTypoType}
+						onChangeGlobalTypoType={(value) => {
+							setAttributes({ 
+								SubHeadingGlobalTypoType: value, 
+								SubHeadingGlobalTypoSwitcher: value === 'default' ? {...SubHeadingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...SubHeadingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+							})
+						}}
+
+						globalTypoOption={SubHeadingGlobalTypoOption}
+						onChangeGlobalTypoOption={(value) => setAttributes({ SubHeadingGlobalTypoOption: value })}
+
+						fontFamily={SubHeadingFontFamily}
+						onChangeFontFamily={(value) => setAttributes({ SubHeadingFontFamily: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, fontFamily: value && false} })}
+
+						fontSize={SubHeadingFontSize}
+						onChangeFontSize={(value) => setAttributes({ SubHeadingFontSize: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, fontSize: value && false} })}
+
+						fontSizeUnits={SubHeadingFontSizeUnits}
+						onChangeFontSizeUnit={(value) => setAttributes({ SubHeadingFontSizeUnits: value })}
+
+						fontWeight={SubHeadingFontWeight}
+						onChangeFontWeight={(value) => setAttributes({ SubHeadingFontWeight: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, fontWeight: value && false} })}
+
+						fontStyle={SubHeadingFontStyle}
+						onChangeFontStyle={(value) => setAttributes({ SubHeadingFontStyle: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, fontStyle: value && false} })}
+
+						textTransform={SubHeadingTextTransform}
+						onChangeTextTransform={(value) => setAttributes({ SubHeadingTextTransform: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, textTransform: value && false} })}
+
+						textDecoration={SubHeadingTextDecoration}
+						onChangeTextDecoration={(value) => setAttributes({ SubHeadingTextDecoration: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, textDecoration: value && false} })}
+
+						letterSpacing={SubHeadingLetterSpacing}
+						onChangeLetterSpacing={(value) => setAttributes({ SubHeadingLetterSpacing: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+						letterSpacingUnits={SubHeadingLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) => setAttributes({ SubHeadingLetterSpacingUnits: value })}
+
+						lineHeight={SubHeadingLineHeight}
+						onChangeLineHeight={(value) => setAttributes({ SubHeadingLineHeight: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, lineHeight: value && false} })}
+
+						lineHeightUnits={SubHeadingLineHeightUnits}
+						onChangeLineHeightUnit={(value) => setAttributes({ SubHeadingLineHeightUnits: value })}
+
+						deviceType={deviceType}
+						setAttributes={setAttributes}
+					/>
+					{/*Color*/}
+					
+					<FB_SwitcherControl
+					label={__("Text Color", "frontis-blocks")}
+					globalSwitcher={SubHeadingColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ SubHeadingColorSwitcher: value })}
+					/>
+
+					{SubHeadingColorSwitcher === 'normal' && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={SubHeadingColor}
+							setGlobalColor={(value) => setAttributes({ SubHeadingColor: value })}
+						/>
+					)}
+
+					{SubHeadingColorSwitcher === 'hover' && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={SubHeadingHoverColor}
+							setGlobalColor={(value) => setAttributes({ SubHeadingHoverColor: value })}
+						/>
+					)}
+					<FB_Spacing
+						label={__("Padding", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleDescPaddingUnitsHandler}
+						spacingUnits={descPaddingUnits}
+						spacingDesktop={descDesktopPadding}
+						spacingTablet={descTabPadding}
+						spacingMobile={descMobilePadding}
+						handleSpacingUnitHandler={handleDescPaddingUnitChange}
+						spacingCombineBtn={descPaddingLink}
+						spacingCombineBtnHandler={handleDescPaddingCombineBtn}
+						setAttributes={setAttributes}
+					/>
+					<FB_Spacing
+						label={__("Margin", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleDescMarginUnitsHandler}
+						spacingUnits={descMarginUnits}
+						spacingDesktop={descDesktopMargin}
+						spacingTablet={descTabMargin}
+						spacingMobile={descMobileMargin}
+						handleSpacingUnitHandler={handleDescMarginUnitChange}
+						spacingCombineBtn={descMarginLink}
+						spacingCombineBtnHandler={handleDescMarginCombineBtn}
+						setAttributes={setAttributes}
+					/>
+				</PanelBody>
+			)}
+
+			{/*Button One Style*/}
+			{ctaBtnOneSwitcher && (
+				<PanelBody
+					title={__("Button One", "frontis-block")}
+					className="fb-cta-button-setting-wrapper"
+					initialOpen={false}
+				>
+					<FB_TypographyControl
+						globalTypoControlActive={true}
+						globalTypoSwitcher={buttonGlobalTypoSwitcher}
+						storeGlobalTypographyData={(value) => setAttributes({ buttonGlobalTypographyData: value })}
+
+						globalTypoType={buttonGlobalTypoType}
+						onChangeGlobalTypoType={(value) => {
+							setAttributes({ 
+								buttonGlobalTypoType: value, 
+								buttonGlobalTypoSwitcher: value === 'default' ? {...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+							})
+						}}
+
+						globalTypoOption={buttonGlobalTypoOption}
+						onChangeGlobalTypoOption={(value) => setAttributes({ buttonGlobalTypoOption: value })}
+
+						fontFamily={buttonFontFamily}
+						onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontFamily: value && false} })}
+
+						fontSize={buttonFontSize}
+						onChangeFontSize={(value) => setAttributes({ buttonFontSize: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontSize: value && false} })}
+
+						fontSizeUnits={buttonFontSizeUnits}
+						onChangeFontSizeUnit={(value) => setAttributes({ buttonFontSizeUnits: value })}
+
+						fontWeight={buttonFontWeight}
+						onChangeFontWeight={(value) => setAttributes({ buttonFontWeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontWeight: value && false} })}
+
+						fontStyle={buttonFontStyle}
+						onChangeFontStyle={(value) => setAttributes({ buttonFontStyle: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontStyle: value && false} })}
+
+						textTransform={buttonTextTransform}
+						onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textTransform: value && false} })}
+
+						textDecoration={buttonTextDecoration}
+						onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textDecoration: value && false} })}
+
+						letterSpacing={buttonLetterSpacing}
+						onChangeLetterSpacing={(value) => setAttributes({ buttonLetterSpacing: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+						letterSpacingUnits={buttonLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) => setAttributes({ buttonLetterSpacingUnits: value })}
+
+						lineHeight={buttonLineHeight}
+						onChangeLineHeight={(value) => setAttributes({ buttonLineHeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, lineHeight: value && false} })}
+
+						lineHeightUnits={buttonLineHeightUnits}
+						onChangeLineHeightUnit={(value) => setAttributes({ buttonLineHeightUnits: value })}
+
+						deviceType={deviceType}
+						setAttributes={setAttributes}
+					/>
+
+					{/*Color*/}
+					<FB_SwitcherControl
+					label={__("Text Color", "frontis-blocks")}
+					globalSwitcher={buttonColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
+					/>
+
+					{buttonColorSwitcher === 'normal' && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={buttonTextColor}
+							setGlobalColor={(value) => setAttributes({ buttonTextColor: value })}
+						/>
+					)}
+
+					{buttonColorSwitcher === 'hover' && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={buttonTextHoverColor}
+							setGlobalColor={(value) => setAttributes({ buttonTextHoverColor: value })}
+						/>
+					)}
+
+					{/* Start Button Bg Color*/}
+					<FB_SwitcherControl
+					label={__("Background Color", "frontis-blocks")}
+					globalSwitcher={buttonBgColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ buttonBgColorSwitcher: value })}
+					/>
+
+					{buttonBgColorSwitcher === 'normal' && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={buttonBgColor}
+							setGlobalColor={(value) => setAttributes({ buttonBgColor: value })}
+						/>
+					)}
+
+					{buttonBgColorSwitcher === 'hover' && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={buttonBgHoverColor}
+							setGlobalColor={(value) => setAttributes({ buttonBgHoverColor: value })}
+						/>
+					)}
+
+					{/* Button Icon color */}
+					{buttonIconSwitcher && (
+						<>
+							{/* Start Icon Color*/}
+							<FB_SwitcherControl
+							label={__("Icon Color", "frontis-blocks")}
+							globalSwitcher={btnIconColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ btnIconColorSwitcher: value })}
+							/>
+
+							{btnIconColorSwitcher === 'normal' && (
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={btnIconColor}
+									setGlobalColor={(value) => setAttributes({ btnIconColor: value })}
+								/>
+							)}
+
+							{btnIconColorSwitcher === 'hover' && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={btnIconHoverColor}
+									setGlobalColor={(value) => setAttributes({ btnIconHoverColor: value })}
+								/>
+							)}
+							<FB_Range
+							min={0}
+							max={360}
+							label={__("Rotate Icon", "frontis-blocks")}
+							rangeValue={btnIconRotate}
+							onChangeHandler={(value) => setAttributes({ btnIconRotate: value === 0 ? undefined : value })}
+							deviceType={deviceType}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={""}
+							isRangeUnit={false}
+							/>
+						</>
+					)}
+					
+					<FB_Spacing
+						label={__("Padding", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={ handleButtonOnePaddingUnitsHandler }
+						spacingUnits={btnOnePaddingUnits}
+						spacingDesktop={btnOneDesktopPadding}
+						spacingTablet={btnOneTabPadding}
+						spacingMobile={btnOneMobilePadding}
+						handleSpacingUnitHandler={ handleButtonOnePaddingUnitChange }
+						spacingCombineBtn={btnOnePaddingLink}
+						spacingCombineBtnHandler={ handleButtonOnePaddingCombineBtn }
+						setAttributes={setAttributes}
+					/>
+					<FB_Spacing
+						label={__("Margin", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={btnOneMarginUnitsHandler}
+						spacingUnits={btnOneMarginUnits}
+						spacingDesktop={btnOneDesktopMargin}
+						spacingTablet={btnOneTabMargin}
+						spacingMobile={btnOneMobileMargin}
+						handleSpacingUnitHandler={btnOneMarginUnitsChange}
+						spacingCombineBtn={btnOneMarginLink}
+						spacingCombineBtnHandler={btnOneMarginLinkBtn}
+						setAttributes={setAttributes}
+					/>
+
+					{/* Border Width */}
+					<SelectControl
+						label={__("Border Style", "frontis-block")}
+						value={infoButtonBorder}
+						options={BORDER_STYLES}
+						onChange={(value) =>
+							setAttributes({ infoButtonBorder: value })
+						}
+					/>
+
+					<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={infoButtonBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ infoButtonBorderColorSwitcher: value })}
+					/>
+
+					{infoButtonBorderColorSwitcher === 'normal' && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={infoButtonBorderColor}
+							setGlobalColor={(value) => setAttributes({ infoButtonBorderColor: value })}
+						/>
+					)}
+
+					{infoButtonBorderColorSwitcher === 'hover' && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={infoButtonHoverBorderColor}
+							setGlobalColor={(value) => setAttributes({ infoButtonHoverBorderColor: value })}
+						/>
+					)}
+
+					<FB_Spacing
+						label={__("Border Width", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleButtonOneBorderUnitsHandler}
+						spacingUnits={btnOneBorderUnits}
+						spacingDesktop={btnOneDesktopBorder}
+						spacingTablet={btnOneTabBorder}
+						spacingMobile={btnOneMobileBorder}
+						handleSpacingUnitHandler={handleButtonOneBorderUnitChange}
+						spacingCombineBtn={btnOneBorderLink}
+						spacingCombineBtnHandler={handleButtonOneBorderCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+					<FB_Spacing
+						label={__("Border Radius", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleButtonOneBorderRadiusUnitsHandler}
+						spacingUnits={btnOneBorderRadiusUnits}
+						spacingDesktop={btnOneDesktopBorderRadius}
+						spacingTablet={btnOneTabBorderRadius}
+						spacingMobile={btnOneMobileBorderRadius}
+						handleSpacingUnitHandler={handleButtonOneBorderRadiusUnitChange}
+						spacingCombineBtn={btnOneBorderRadiusLink}
+						spacingCombineBtnHandler={handleButtonOneBorderRadiusCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+				</PanelBody>
+			)}
+
+			{/* Button Two Style */}
+			{btnTwoSwitcher && (
+				<PanelBody
+					title={__("Button Two", "frontis-blocks")}
+					initialOpen={false}
+				>
+					<FB_TypographyControl
+						globalTypoControlActive={true}
+						globalTypoSwitcher={buttonTwoGlobalTypoSwitcher}
+						storeGlobalTypographyData={(value) => setAttributes({ buttonTwoGlobalTypographyData: value })}
+
+						globalTypoType={buttonTwoGlobalTypoType}
+						onChangeGlobalTypoType={(value) => {
+							setAttributes({ 
+								buttonTwoGlobalTypoType: value, 
+								buttonTwoGlobalTypoSwitcher: value === 'default' ? {...buttonTwoGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonTwoGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+							})
+						}}
+
+						globalTypoOption={buttonTwoGlobalTypoOption}
+						onChangeGlobalTypoOption={(value) => setAttributes({ buttonTwoGlobalTypoOption: value })}
+
+						fontFamily={buttonTwoFontFamily}
+						onChangeFontFamily={(value) => setAttributes({ buttonTwoFontFamily: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, fontFamily: value && false} })}
+
+						fontSize={buttonTwoFontSize}
+						onChangeFontSize={(value) => setAttributes({ buttonTwoFontSize: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, fontSize: value && false} })}
+
+						fontSizeUnits={buttonTwoFontSizeUnits}
+						onChangeFontSizeUnit={(value) => setAttributes({ buttonTwoFontSizeUnits: value })}
+
+						fontWeight={buttonTwoFontWeight}
+						onChangeFontWeight={(value) => setAttributes({ buttonTwoFontWeight: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, fontWeight: value && false} })}
+
+						fontStyle={buttonTwoFontStyle}
+						onChangeFontStyle={(value) => setAttributes({ buttonTwoFontStyle: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, fontStyle: value && false} })}
+
+						textTransform={buttonTwoTextTransform}
+						onChangeTextTransform={(value) => setAttributes({ buttonTwoTextTransform: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, textTransform: value && false} })}
+
+						textDecoration={buttonTwoTextDecoration}
+						onChangeTextDecoration={(value) => setAttributes({ buttonTwoTextDecoration: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, textDecoration: value && false} })}
+
+						letterSpacing={buttonTwoLetterSpacing}
+						onChangeLetterSpacing={(value) => setAttributes({ buttonTwoLetterSpacing: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+						letterSpacingUnits={buttonTwoLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) => setAttributes({ buttonTwoLetterSpacingUnits: value })}
+
+						lineHeight={buttonTwoLineHeight}
+						onChangeLineHeight={(value) => setAttributes({ buttonTwoLineHeight: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, lineHeight: value && false} })}
+
+						lineHeightUnits={buttonTwoLineHeightUnits}
+						onChangeLineHeightUnit={(value) => setAttributes({ buttonTwoLineHeightUnits: value })}
+
+						deviceType={deviceType}
+						setAttributes={setAttributes}
+					/>
+					
+					<FB_SwitcherControl
+					label={__("Text Color", "frontis-blocks")}
+					globalSwitcher={buttonTwoColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ buttonTwoColorSwitcher: value })}
+					/>
+
+					{buttonTwoColorSwitcher === 'normal' && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={buttonTwoTextColor}
+							setGlobalColor={(value) => setAttributes({ buttonTwoTextColor: value })}
+						/>
+					)}
+
+					{buttonTwoColorSwitcher === 'hover' && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={buttonTwoTextHoverColor}
+							setGlobalColor={(value) => setAttributes({ buttonTwoTextHoverColor: value })}
+						/>
+					)}
+					
+					<FB_SwitcherControl
+					label={__("Background Color", "frontis-blocks")}
+					globalSwitcher={buttonTwoBgColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ buttonTwoBgColorSwitcher: value })}
+					/>
+
+					{buttonTwoBgColorSwitcher === 'normal' && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={buttonTwoBgColor}
+							setGlobalColor={(value) => setAttributes({ buttonTwoBgColor: value })}
+						/>
+					)}
+
+					{buttonTwoBgColorSwitcher === 'hover' && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={buttonTwoBgHoverColor}
+							setGlobalColor={(value) => setAttributes({ buttonTwoBgHoverColor: value })}
+						/>
+					)}
+
+					{buttonTwoIconSwitcher &&(
+						<>
+							<FB_SwitcherControl
+							label={__("Icon Color", "frontis-blocks")}
+							globalSwitcher={btnTwoIconColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ btnTwoIconColorSwitcher: value })}
+							/>
+
+							{btnTwoIconColorSwitcher === 'normal' && (
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={btnTwoIconColor}
+									setGlobalColor={(value) => setAttributes({ btnTwoIconColor: value })}
+								/>
+							)}
+
+							{btnTwoIconColorSwitcher === 'hover' && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={btnTwoIconHoverColor}
+									setGlobalColor={(value) => setAttributes({ btnTwoIconHoverColor: value })}
+								/>
+							)}
+
+							<FB_Range
+								min={0}
+								max={360}
+								label={__("Rotate Icon", "frontis-blocks")}
+								rangeValue={btnTwoIconRotate}
+								onChangeHandler={(value) => setAttributes({ btnTwoIconRotate: value === 0 ? undefined : value })}
+								deviceType={deviceType}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={""}
+								isRangeUnit={false}
+							/>
+						</>
+					)}
+					
+					<FB_Spacing
+						label={__("Padding", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={ handleButtonTwoPaddingUnitsHandler }
+						spacingUnits={btnTwoPaddingUnits}
+						spacingDesktop={btnTwoDesktopPadding}
+						spacingTablet={btnTwoTabPadding}
+						spacingMobile={btnTwoMobilePadding}
+						handleSpacingUnitHandler={ handleButtonTwoPaddingUnitChange }
+						spacingCombineBtn={btnTwoPaddingLink}
+						spacingCombineBtnHandler={ handleButtonTwoPaddingCombineBtn }
+						setAttributes={setAttributes}
+					/>
+					<FB_Spacing
+						label={__("Margin", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={btnTwoMarginUnitsHandler}
+						spacingUnits={btnTwoMarginUnits}
+						spacingDesktop={btnTwoDesktopMargin}
+						spacingTablet={btnTwoTabMargin}
+						spacingMobile={btnTwoMobileMargin}
+						handleSpacingUnitHandler={btnTwoMarginUnitsChange}
+						spacingCombineBtn={btnTwoMarginLink}
+						spacingCombineBtnHandler={btnTwoMarginLinkBtn}
+						setAttributes={setAttributes}
+					/>
+					<SelectControl
+						label={__("Border Style", "frontis-blocks")}
+						value={btnTwoBorder}
+						options={BORDER_STYLES}
+						onChange={(value) =>
+							setAttributes({ btnTwoBorder: value })
+						}
+					/>
+					
+					<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={btnTwoBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ btnTwoBorderColorSwitcher: value })}
+					/>
+
+					{btnTwoBorderColorSwitcher === 'normal' && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={btnTwoBorderColor}
+							setGlobalColor={(value) => setAttributes({ btnTwoBorderColor: value })}
+						/>
+					)}
+
+					{btnTwoBorderColorSwitcher === 'hover' && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={btnTwoHoverBorderColor}
+							setGlobalColor={(value) => setAttributes({ btnTwoHoverBorderColor: value })}
+						/>
+					)}
+
+					<FB_Spacing
+						label={__("Border", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={btnTwoBorderUnitsHandler}
+						spacingUnits={btnTwoBorderUnits}
+						spacingDesktop={btnTwoDesktopBorder}
+						spacingTablet={btnTwoTabBorder}
+						spacingMobile={btnTwoMobileBorder}
+						handleSpacingUnitHandler={btnTwoBorderUnitsChange}
+						spacingCombineBtn={btnTwoBorderLink}
+						spacingCombineBtnHandler={btnTwoBorderLinkBtn}
+						setAttributes={setAttributes}
+					/>
+					<FB_Spacing
+						label={__("Border Radius", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={btnTwoBorderRadiusUnitsHandler}
+						spacingUnits={btnTwoBorderRadiusUnits}
+						spacingDesktop={btnTwoDesktopBorderRadius}
+						spacingTablet={btnTwoTabBorderRadius}
+						spacingMobile={btnTwoMobileBorderRadius}
+						handleSpacingUnitHandler={
+							btnTwoBorderRadiusUnitsChange
+						}
+						spacingCombineBtn={btnTwoBorderRadiusLink}
+						spacingCombineBtnHandler={btnTwoBorderRadiusLinkBtn}
+						setAttributes={setAttributes}
+					/>
+				</PanelBody>
+			)}
+		</>
+	);
+		
+	/**
+	 * Inspector Advanced Controls
+	 */
+	const advancedControls = (
+		<>
+			<div className="fb-setting-advanced-tab-wrapper">
+				<div className="fb-setting-inner-wrapper">
+					<PanelBody
+						title={__("Layout", "frontis-blocks")}
+						initialOpen={true}
+						className="fb-setting-layout-header" 
+					>
+						<FB_Range
+							min={0}
+							max={10000000}
+							label={__("Z Index", "frontis-blocks")}
+							rangeValue={globalZIndex}
+							onChangeHandler={(value) => setAttributes({ globalZIndex: value === 0 ? undefined : value })}
+							deviceType={deviceType}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={""}
+							isRangeUnit={false}
+						/>
+
+						<SelectControl
+							label={__("Overflow", "frontis-blocks")}
+							value={ctaOverflow}
+							options={OVERFLOW_OP}
+							onChange={(value) => setAttributes({ ctaOverflow: value })}
+						/>
+
+						<FB_PositionControl
+							deviceType={deviceType}
+							positionType={ctaPositionType}
+							setPositionType={(value) => setAttributes({ ctaPositionType: value })}
+																			
+							HZOrientationType={ctaHZOrientationType}
+							setHZOrientationType={(value) =>
+								setAttributes({ ctaHZOrientationType: value })
+							}
+							VROrientationType={ctaVROrientationType}
+							setVROrientationType={(value) =>
+								setAttributes({ ctaVROrientationType: value })
+							}
+																				
+							HZLeftOffset={ctaHZLeftOffset}
+							setHZLeftOffset={(value) => setAttributes({ ctaHZLeftOffset: value })}
+							HZLeftOffsetUnits={ctaHZLeftOffsetUnits}
+							setHZLeftOffsetUnits={(value) => setAttributes({ ctaHZLeftOffsetUnits: value })}
+							HZRightOffset={ctaHZRightOffset}
+							setHZRightOffset={(value) => setAttributes({ ctaHZRightOffset: value })}
+							HZRightOffsetUnits={ctaHZRightOffsetUnits}
+							setHZRightOffsetUnits={(value) => setAttributes({ ctaHZRightOffsetUnits: value })}
+																			
+							VRTopOffset={ctaVRTopOffset}
+							setVRTopOffset={(value) => setAttributes({ ctaVRTopOffset: value })}
+							VRTopOffsetUnits={ctaVRTopOffsetUnits}
+							setVRTopOffsetUnits={(value) => setAttributes({ ctaVRTopOffsetUnits: value })}
+							VRBottomOffset={ctaVRBottomOffset}
+							setVRBottomOffset={(value) => setAttributes({ ctaVRBottomOffset: value })}
+							VRBottomOffsetUnits={ctaVRBottomOffsetUnits}
+							setVRBottomOffsetUnits={(value) => setAttributes({ ctaVRBottomOffsetUnits: value })}
+
+							setAttributes={setAttributes}
+						/>
+
+						<FB_InputControl
+							label={__("CSS ID", "frontis-blocks")}
+							value={ctaGlobalWraperID}
+							onChangeValue={(value) => setAttributes({ ctaGlobalWraperID: value })}
+							helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+						/>
+
+						<FB_InputControl
+							label={__("CSS Class", "frontis-blocks")}
+							value={ctaGlobalWraperClass}
+							onChangeValue={(value) => setAttributes({ ctaGlobalWraperClass: value })}
+							helpText={__("Separate with spaces key.", "frontis-blocks")}
+						/>
+						
+					</PanelBody>
+					<PanelBody
+						title={__("Padding and Margin", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_Spacing
+							label={__("Padding", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={
+								handleGlobalPaddingUnitsHandler
+							}
+							spacingUnits={globalPaddingUnits}
+							spacingDesktop={globalPaddingDesktop}
+							spacingTablet={globalPaddingTablet}
+							spacingMobile={globalPaddingMobile}
+							handleSpacingUnitHandler={
+								handleGlobalPaddingUnitChange
+							}
+							spacingCombineBtn={globalPaddingLink}
+							spacingCombineBtnHandler={
+								handleGlobalPaddingCombineBtn
+							}
+							setAttributes={setAttributes}
+						/>
+						<FB_Spacing
+							label={__("Margin", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleGlobalMarginUnitsHandler}
+							spacingUnits={globalMarginUnits}
+							spacingDesktop={globalMarginDesktop}
+							spacingTablet={globalMarginTablet}
+							spacingMobile={globalMarginMobile}
+							handleSpacingUnitHandler={
+								handleGlobalMarginUnitChange
+							}
+							spacingCombineBtn={globalMarginLink}
+							spacingCombineBtnHandler={
+								handleGlobalMarginCombineBtn
+							}
+							setAttributes={setAttributes}
+						/>
+					</PanelBody>
+
+					<PanelBody title="Background" initialOpen={false}>
+						<FB_BackgroundColorControl
+							bgColorSwitcher={testBgColorSwitcher}
+							setBgColorSwitcher={(value) =>
+								setAttributes({ testBgColorSwitcher: value })
+							}
+							normalBackgroundType={ctaGlobalBackgroundType}
+							setNormalBackgroundType={(value) =>
+								setAttributes({ ctaGlobalBackgroundType: value })
+							}
+							normalClassicColor={ctaGlobalClassicColor}
+							setNormalClassicColor={(value) =>
+								setAttributes({ ctaGlobalClassicColor: value })
+							}
+							normalGradientColor={ctaGlobalGradientColor}
+							setNormalGradientColor={(value) =>
+								setAttributes({ ctaGlobalGradientColor: value })
+							}
+							normalCustomGradientSwitcher={
+								ctaGlobalCustomGradientSwitcher
+							}
+							setNormalCustomGradientSwitcher={(value) =>
+								setAttributes({
+									ctaGlobalCustomGradientSwitcher: value,
+								})
+							}
+							normalCustomGradientInputValue={
+								ctaGlobalCustomGradientInputValue
+							}
+							setNormalCustomGradientInputValue={(value) =>
+								setAttributes({
+									ctaGlobalCustomGradientInputValue: value,
+								})
+							}
+							normalBackgroundImageUrl={ctaGlobalBackgroundImageUrl}
+							setNormalBackgroundImageUrl={(value) =>
+								setAttributes({ ctaGlobalBackgroundImageUrl: value })
+							}
+							normalBackgroundImageAlt={testBackgroundImageAlt}
+							setNormalBackgroundImageAlt={(value) =>
+								setAttributes({ testBackgroundImageAlt: value })
+							}
+							normalBackgroundImageID={testBackgroundImageID}
+							setNormalBackgroundImageID={(value) =>
+								setAttributes({ testBackgroundImageID: value })
+							}
+							normalBackgroundImagePosition={
+								ctaGlobalBackgroundImagePosition
+							}
+							setNormalBackgroundImagePosition={(value) =>
+								setAttributes({
+									ctaGlobalBackgroundImagePosition: value,
+								})
+							}
+							normalBackgroundImageAttachment={
+								ctaGlobalBackgroundImageAttachment
+							}
+							setNormalBackgroundImageAttachment={(value) =>
+								setAttributes({
+									ctaGlobalBackgroundImageAttachment: value,
+								})
+							}
+							normalBackgroundImageRepeat={
+								ctaGlobalBackgroundImageRepeat
+							}
+							setNormalBackgroundImageRepeat={(value) =>
+								setAttributes({
+									ctaGlobalBackgroundImageRepeat: value,
+								})
+							}
+							normalBackgroundImageSize={ctaGlobalBackgroundImageSize}
+							setNormalBackgroundImageSize={(value) =>
+								setAttributes({ ctaGlobalBackgroundImageSize: value })
+							}
+							hoverBackgroundType={hoverBackgroundType}
+							setHoverBackgroundType={(value) =>
+								setAttributes({ hoverBackgroundType: value })
+							}
+							hoverClassicColor={hoverClassicColor}
+							setHoverClassicColor={(value) =>
+								setAttributes({ hoverClassicColor: value })
+							}
+							hoverGradientColor={hoverGradientColor}
+							setHoverGradientColor={(value) =>
+								setAttributes({ hoverGradientColor: value })
+							}
+							hoverCustomGradientSwitcher={
+								hoverCustomGradientSwitcher
+							}
+							setHoverCustomGradientSwitcher={(value) =>
+								setAttributes({
+									hoverCustomGradientSwitcher: value,
+								})
+							}
+							hoverCustomGradientInputValue={
+								hoverCustomGradientInputValue
+							}
+							setHoverCustomGradientInputValue={(value) =>
+								setAttributes({
+									hoverCustomGradientInputValue: value,
+								})
+							}
+							hoverBackgroundImageUrl={hoverBackgroundImageUrl}
+							setHoverBackgroundImageUrl={(value) =>
+								setAttributes({ hoverBackgroundImageUrl: value })
+							}
+							hoverBackgroundImageAlt={hoverBackgroundImageAlt}
+							setHoverBackgroundImageAlt={(value) =>
+								setAttributes({ hoverBackgroundImageAlt: value })
+							}
+							hoverBackgroundImageID={hoverBackgroundImageID}
+							setHoverBackgroundImageID={(value) =>
+								setAttributes({ hoverBackgroundImageID: value })
+							}
+							hoverBackgroundImagePosition={
+								hoverBackgroundImagePosition
+							}
+							setHoverBackgroundImagePosition={(value) =>
+								setAttributes({
+									hoverBackgroundImagePosition: value,
+								})
+							}
+							hoverBackgroundImageAttachment={
+								hoverBackgroundImageAttachment
+							}
+							setHoverBackgroundImageAttachment={(value) =>
+								setAttributes({
+									hoverBackgroundImageAttachment: value,
+								})
+							}
+							hoverBackgroundImageRepeat={
+								hoverBackgroundImageRepeat
+							}
+							setHoverBackgroundImageRepeat={(value) =>
+								setAttributes({
+									hoverBackgroundImageRepeat: value,
+								})
+							}
+							hoverBackgroundImageSize={hoverBackgroundImageSize}
+							setHoverBackgroundImageSize={(value) =>
+								setAttributes({ hoverBackgroundImageSize: value })
+							}
+						/>
+					</PanelBody>
+					<PanelBody
+						title={__("Border and Shadow", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<SelectControl
+							label={__("Border Style", "frontis-blocks")}
+							value={globalBorder}
+							options={BORDER_STYLES}
+							onChange={(value) =>
+								setAttributes({ globalBorder: value })
+							}
+						/>
+
+						<FB_SwitcherControl
+						label={__("Border Color", "frontis-blocks")}
+						globalSwitcher={globalBorderColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ globalBorderColorSwitcher: value })}
+						/>
+
+						{globalBorderColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={globalBorderColor}
+								setGlobalColor={(value) => setAttributes({ globalBorderColor: value })}
+							/>
+						)}
+
+						{globalBorderColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={globalBorderHoverColor}
+								setGlobalColor={(value) => setAttributes({ globalBorderHoverColor: value })}
+							/>
+						)}
+						<FB_Spacing
+							label={__("Border", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleGlobalBorderUnitsHandler}
+							spacingUnits={globalBorderUnits}
+							spacingDesktop={globalBorderDesktop}
+							spacingTablet={globalBorderTablet}
+							spacingMobile={globalBorderMobile}
+							handleSpacingUnitHandler={
+								handleGlobalBorderUnitChange
+							}
+							spacingCombineBtn={globalBorderLink}
+							spacingCombineBtnHandler={
+								handleGlobalBorderCombineBtn
+							}
+							setAttributes={setAttributes}
+						/>
+
+						<FB_Spacing
+							label={__("Border Radius", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={
+								handleGlobalBorderRadiusUnitsHandler
+							}
+							spacingUnits={globalBorderRadiusUnits}
+							spacingDesktop={globalBorderRadiusDesktop}
+							spacingTablet={globalBorderRadiusTablet}
+							spacingMobile={globalBorderRadiusMobile}
+							handleSpacingUnitHandler={
+								handleGlobalBorderRadiusUnitChange
+							}
+							spacingCombineBtn={globalBorderRadiusLink}
+							spacingCombineBtnHandler={
+								handleGlobalBorderRadiusCombineBtn
+							}
+							setAttributes={setAttributes}
+						/>
+						<FB_BoxShadowControl
+							onBoxShadowChange={(value) =>
+								setAttributes({ boxGlobalBoxShadowValues: value })
+							}
+							initialShadowValue={boxGlobalBoxShadowValues}
+							onBoxShadowStyleChange={(value) =>
+								setAttributes({
+									boxGlobalBoxShadowCssValue: value,
+								})
+							}
+						/>
+						<FB_SwitcherControl
+						label={__("Box Shadow", "frontis-blocks")}
+						globalSwitcher={globalBoxShadowSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ globalBoxShadowSwitcher: value })}
+						/>
+
+						{globalBoxShadowSwitcher === 'normal' && (
+							<FB_BoxShadowControl
+								label={__("Normal Shadow", "frontis-blocks")}
+								onBoxShadowChange={(value) => setAttributes({ globalBoxShadowValues: value })}
+								initialShadowValue={globalBoxShadowValues}
+								onBoxShadowStyleChange={(value) => setAttributes({ globalBoxShadowCssValue: value })}
+							/>
+						)}
+
+						{globalBoxShadowSwitcher === 'hover' && (
+							<FB_BoxShadowControl
+								label={__("Hover Shadow", "frontis-blocks")}
+								onBoxShadowChange={(value) => setAttributes({ globalBoxShadowHoverValues: value })}
+								initialShadowValue={globalBoxShadowHoverValues}
+								onBoxShadowStyleChange={(value) => setAttributes({ globalHoverBoxShadowCssValue: value })}
+							/>
+						)}
+					</PanelBody>
+
+					<PanelBody
+						title={__("Responsive Control", "frontis-blocks")}
+						initialOpen={false}
+						className="fb-setting-responsive-control-wrapper"
+					>
+						<FB_VisibilityControl
+							desktopValue={ctaDesktopSwitcher}
+							setDesktopValue={(value) => setAttributes({ ctaDesktopSwitcher: value })}
+
+							tabletValue={ctaTabletSwitcher}
+							setTabletValue={(value) => setAttributes({ ctaTabletSwitcher: value })}
+
+							mobileValue={ctaMobileSwitcher}
+							setMobileValue={(value) => setAttributes({ ctaMobileSwitcher: value })}
+						/>
+					</PanelBody>
+
+					<PanelBody
+						title={__("Custom CSS", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_CustomCSSEditor  
+							value={ctaCustomCSS} 
+							onChangeValue={(value) => setAttributes({ ctaCustomCSS: value })}
+						/>
+					</PanelBody>
+				</div>
+			</div>
+		</>
+	);
+
 	return (
 		<>
 			<style>
 			{editorStyle}
 			</style>
 
-			<InspectorControls key="controls">
-				<div className="fb-inspector-control">
-					<TabPanel
-						className="fb-parent-tab-panel"
-						activeClass="active-tab"
-						tabs={[
-							{
-								name: "general",
-								title: "General",
-								className: "fb-tab general",
-							},
-							{
-								name: "styles",
-								title: "Style",
-								className: "fb-tab styles",
-							},
-							{
-								name: "advance",
-								title: "Advanced",
-								className: "fb-tab advance",
-							},
-						]}
-					>
-						{(tab) => (
-							<div className={"fb-tab-controls" + tab.name}>
-								{tab.name === "general" && (
-									<>
-										{/* Title Element */}
-										<div className="fb-advanced-wrapper">
-											<PanelBody
-												title={__("Title", "frontis-block")}
-												initialOpen={false}
-											>
-												
-												<FB_AlignmentControl
-													label={__("Title Alignment", "frontis-blocks")}
-													globalAlignment={Alignment}
-													setGlobalAlignment={(value) => setAttributes({ Alignment: value })}
-												/>
-
-												<FB_HtmlTagControl
-													label={__("Title Tag", "frontis-blocks")}
-													globalHtmlTag={headingTag}
-													setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
-												/>
-											
-												<TextareaControl
-													label={__("Title Text", "frontis-block")}
-													className="fb-setting-text"
-													value={Heading_Text}
-													onChange={(value) =>
-														setAttributes({ Heading_Text: value })
-													}
-													
-												/>
-											</PanelBody>
-										</div>
-
-										{/* Image control */}
-										<div className="fb-advanced-wrapper">
-											<PanelBody
-												title={__("Description", "frontis-block")}
-												initialOpen={false}
-											>
-												<ToggleControl
-													label={__("Show Description", "frontis-block")}
-													checked={descriptionSwitcher}
-													onChange={(value) =>
-														setAttributes({ descriptionSwitcher: value })
-													}
-												/>
-
-												{descriptionSwitcher && (
-													<>
-														
-														<FB_AlignmentControl
-															label={__("Alignment", "frontis-blocks")}
-															globalAlignment={descAlignment}
-															setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
-														/>
-
-														<TextareaControl
-															label={__("Sub Heading Text", "frontis-block")}
-															value={Sub_Heading_Text}
-															onChange={(value) =>
-																setAttributes({ Sub_Heading_Text: value })
-															}
-															className="fb-sub-heading-text"
-														/>
-													</>
-												)}
-											</PanelBody>
-										</div>
-
-										{/*Button One*/}
-										<div className="fb-cta-button-wrapper">
-											<PanelBody
-												title={__("Button One", "frontis-block")}
-												initialOpen={false}
-											>
-												<ToggleControl
-													label={__("Show Button", "frontis-block")}
-													checked={ctaBtnOneSwitcher}
-													onChange={(value) =>
-														setAttributes({ ctaBtnOneSwitcher: value })
-													}
-												/>
-
-												{ctaBtnOneSwitcher && (
-													<>
-														
-														<FB_AlignmentControl
-															label={__("Alignment", "frontis-blocks")}
-															globalAlignment={buttonAlignment}
-															setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
-														/>
-														<TextareaControl
-															label={__("Button Text", "frontis-block")}
-															value={info_Button_Text}
-															onChange={(value) =>
-																setAttributes({ info_Button_Text: value })
-															}
-															className="fb-cta-button-text"
-														/>
-														<ToggleControl
-															label={__("Show Icon", "frontis-block")}
-															checked={buttonIconSwitcher}
-															onChange={(value) =>
-																setAttributes({ buttonIconSwitcher: value })
-															}
-														/>
-														{buttonIconSwitcher && (
-															<>
-																<BaseControl>
-																	<FBIconPicker
-																		value={btnIcon}
-																		setIconHandler={buttonIconHandler}
-																	/>
-																</BaseControl>
-																<SelectControl
-																	label={__("Icon Position", "frontis-block")}
-																	value={btnIconPosition}
-																	options={ICON_POSITION}
-																	onChange={(value) =>
-																		setAttributes({ btnIconPosition: value })
-																	}
-																/>
-															</>
-														)}
-
-														<BaseControl>
-															<FB_UrlControl
-																url={info_Button_Link}
-																onChangeUrl={(value) =>
-																	setAttributes({ info_Button_Link: value })
-																}
-																openInNewTab={btnOneTargetUrl}
-																onChangeOpenInNewTab={(value) =>
-																	setAttributes({ btnOneTargetUrl: value })
-																}
-															/>
-														</BaseControl>
-													</>
-												)}
-											</PanelBody>
-										</div>
-										{/*Button Two*/}
-										<div className="fb-cta-button-wrapper">
-											<PanelBody
-												title={__("Button Two", "frontis-block")}
-												initialOpen={false}
-											>
-												<ToggleControl
-													label={__("Show Button", "frontis-block")}
-													checked={btnTwoSwitcher}
-													onChange={(value) =>
-														setAttributes({ btnTwoSwitcher: value })
-													}
-												/>
-												{btnTwoSwitcher && (
-													<>
-														<TextareaControl
-															label={__("Button Text", "frontis-block")}
-															value={btnTwoText}
-															onChange={(value) =>
-																setAttributes({ btnTwoText: value })
-															}
-															className="fb-cta-button-text"
-														/>
-														<ToggleControl
-															label={__("Show Icon", "frontis-block")}
-															checked={buttonTwoIconSwitcher}
-															onChange={(value) =>
-																setAttributes({ buttonTwoIconSwitcher: value })
-															}
-														/>
-														{buttonTwoIconSwitcher && (
-															<>
-																<BaseControl>
-																	<FBIconPicker
-																		value={btnTwoIcon}
-																		setIconHandler={buttonTwoIconHandler}
-																	/>
-																</BaseControl>
-																<SelectControl
-																	label={__("Icon Position", "frontis-block")}
-																	value={btnTwoIconPosition}
-																	options={ICON_POSITION}
-																	onChange={(value) =>
-																		setAttributes({ btnTwoIconPosition: value })
-																	}
-																/>
-															</>
-														)}
-
-														<BaseControl>
-															<FB_UrlControl
-																url={btnTwoLink}
-																onChangeUrl={(value) =>
-																	setAttributes({ btnTwoLink: value })
-																}
-																openInNewTab={btnTwoTargetUrl}
-																onChangeOpenInNewTab={(value) =>
-																	setAttributes({ btnTwoTargetUrl: value })
-																}
-															/>
-														</BaseControl>
-													</>
-												)}
-											</PanelBody>
-										</div>
-									</>
-								)}
-
-								{tab.name === "styles" && (
-									<>
-										{/*Heading Style*/}
-										<PanelBody
-											title={__("Title", "frontis-block")}
-											initialOpen={true}
-										>
-											<FB_TypographyControl
-												globalTypoControlActive={true}
-												globalTypoSwitcher={headingGlobalTypoSwitcher}
-												storeGlobalTypographyData={(value) => setAttributes({ headingGlobalTypographyData: value })}
-
-												globalTypoType={headingGlobalTypoType}
-												onChangeGlobalTypoType={(value) => {
-													setAttributes({ 
-														headingGlobalTypoType: value, 
-														headingGlobalTypoSwitcher: value === 'default' ? {...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-													})
-												}}
-
-												globalTypoOption={headingGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ headingGlobalTypoOption: value })}
-
-												fontFamily={headingFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontFamily: value && false} })}
-
-												fontSize={headingFontSize}
-												onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontSize: value && false} })}
-
-												fontSizeUnits={headingFontSizeUnits}
-												onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
-
-												fontWeight={headingFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontWeight: value && false} })}
-
-												fontStyle={headingFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontStyle: value && false} })}
-
-												textTransform={headingTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textTransform: value && false} })}
-
-												textDecoration={headingTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textDecoration: value && false} })}
-
-												letterSpacing={headingLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-												letterSpacingUnits={headingLetterSpacingUnits}
-												onChangeLetterSpacingUnit={(value) => setAttributes({ headingLetterSpacingUnits: value })}
-
-												lineHeight={headingLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, lineHeight: value && false} })}
-
-												lineHeightUnits={headingLineHeightUnits}
-												onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
-
-												deviceType={deviceType}
-												setAttributes={setAttributes}
-											/>
-											
-											<FB_SwitcherControl
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalSwitcher={headingColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ headingColorSwitcher: value })}
-                                            />
-
-                                            {headingColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={headingColor}
-                                                    setGlobalColor={(value) => setAttributes({ headingColor: value })}
-                                                />
-                                            )}
-
-                                            {headingColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={headingHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ headingHoverColor: value })}
-                                                />
-                                            )}
-
-											<FB_Spacing
-												label={__("Padding", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleHeadingPaddingUnitsHandler}
-												spacingUnits={headingPaddingUnits}
-												spacingDesktop={headingDesktopPadding}
-												spacingTablet={headingTabPadding}
-												spacingMobile={headingMobilePadding}
-												handleSpacingUnitHandler={handleHeadingPaddingUnitChange}
-												spacingCombineBtn={headingPaddingLink}
-												spacingCombineBtnHandler={handleHeadingPaddingCombineBtn}
-												setAttributes={setAttributes}
-											/>
-
-											<FB_Spacing
-												label={__("Margin", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleHeadingMarginUnitsHandler}
-												spacingUnits={headingMarginUnits}
-												spacingDesktop={headingDesktopMargin}
-												spacingTablet={headingTabMargin}
-												spacingMobile={headingMobileMargin}
-												handleSpacingUnitHandler={handleHeadingMarginUnitChange}
-												spacingCombineBtn={headingMarginLink}
-												spacingCombineBtnHandler={handleHeadingMarginCombineBtn}
-												setAttributes={setAttributes}
-											/>
-											
-											<SelectControl
-												label={__("Border Style", "frontis-block")}
-												value={Heading_Border}
-												options={BORDER_STYLES}
-												onChange={(value) =>
-													setAttributes({ Heading_Border: value })
-												}
-											/>
-
-											<FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={headingBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ headingBorderColorSwitcher: value })}
-                                            />
-
-                                            {headingBorderColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={headingBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ headingBorderColor: value })}
-                                                />
-                                            )}
-
-                                            {headingBorderColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={headingBorderHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ headingBorderHoverColor: value })}
-                                                />
-                                            )}
-
-											<FB_Spacing
-												label={__("Border Width", "frontis-blocks")}
-												deviceType={deviceType}
-												spacingUnitsHandler={handleHeadingBorderUnitsHandler}
-												spacingUnits={headingBorderUnits}
-												spacingDesktop={headingDesktopBorder}
-												spacingTablet={headingTabBorder}
-												spacingMobile={headingMobileBorder}
-												handleSpacingUnitHandler={handleHeadingBorderUnitChange}
-												spacingCombineBtn={headingBorderLink}
-												spacingCombineBtnHandler={handleHeadingBorderCombineBtn}
-												setAttributes={setAttributes}
-											/>
-											
-											<FB_Spacing
-											label={__("Border Radius", "frontis-blocks")}
-											deviceType={deviceType}
-											spacingUnitsHandler={handleHeadingBorderRadiusUnitsHandler}
-											spacingUnits={headingBorderRadiusUnits}
-											spacingDesktop={headingDesktopBorderRadius}
-											spacingTablet={headingTabBorderRadius}
-											spacingMobile={headingMobileBorderRadius}
-											handleSpacingUnitHandler={handleHeadingBorderRadiusUnitChange}
-											spacingCombineBtn={headingBorderRadiusLink}
-											spacingCombineBtnHandler={handleHeadingBorderRadiusCombineBtn}
-											setAttributes={setAttributes}
-											/>
-
-										</PanelBody>
-										{/*Description Style*/}
-										{descriptionSwitcher && (
-											<PanelBody
-												title={__("Description", "frontis-block")}
-												initialOpen={false}
-												className="fb-cta-desc-setting-wrapper"
-											>
-												{/* Typography */}
-												<FB_TypographyControl
-													globalTypoControlActive={true}
-													globalTypoSwitcher={SubHeadingGlobalTypoSwitcher}
-													storeGlobalTypographyData={(value) => setAttributes({ SubHeadingGlobalTypographyData: value })}
-
-													globalTypoType={SubHeadingGlobalTypoType}
-													onChangeGlobalTypoType={(value) => {
-														setAttributes({ 
-															SubHeadingGlobalTypoType: value, 
-															SubHeadingGlobalTypoSwitcher: value === 'default' ? {...SubHeadingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...SubHeadingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-														})
-													}}
-
-													globalTypoOption={SubHeadingGlobalTypoOption}
-													onChangeGlobalTypoOption={(value) => setAttributes({ SubHeadingGlobalTypoOption: value })}
-
-													fontFamily={SubHeadingFontFamily}
-													onChangeFontFamily={(value) => setAttributes({ SubHeadingFontFamily: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, fontFamily: value && false} })}
-
-													fontSize={SubHeadingFontSize}
-													onChangeFontSize={(value) => setAttributes({ SubHeadingFontSize: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, fontSize: value && false} })}
-
-													fontSizeUnits={SubHeadingFontSizeUnits}
-													onChangeFontSizeUnit={(value) => setAttributes({ SubHeadingFontSizeUnits: value })}
-
-													fontWeight={SubHeadingFontWeight}
-													onChangeFontWeight={(value) => setAttributes({ SubHeadingFontWeight: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, fontWeight: value && false} })}
-
-													fontStyle={SubHeadingFontStyle}
-													onChangeFontStyle={(value) => setAttributes({ SubHeadingFontStyle: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, fontStyle: value && false} })}
-
-													textTransform={SubHeadingTextTransform}
-													onChangeTextTransform={(value) => setAttributes({ SubHeadingTextTransform: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, textTransform: value && false} })}
-
-													textDecoration={SubHeadingTextDecoration}
-													onChangeTextDecoration={(value) => setAttributes({ SubHeadingTextDecoration: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, textDecoration: value && false} })}
-
-													letterSpacing={SubHeadingLetterSpacing}
-													onChangeLetterSpacing={(value) => setAttributes({ SubHeadingLetterSpacing: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-													letterSpacingUnits={SubHeadingLetterSpacingUnits}
-													onChangeLetterSpacingUnit={(value) => setAttributes({ SubHeadingLetterSpacingUnits: value })}
-
-													lineHeight={SubHeadingLineHeight}
-													onChangeLineHeight={(value) => setAttributes({ SubHeadingLineHeight: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, lineHeight: value && false} })}
-
-													lineHeightUnits={SubHeadingLineHeightUnits}
-													onChangeLineHeightUnit={(value) => setAttributes({ SubHeadingLineHeightUnits: value })}
-
-													deviceType={deviceType}
-													setAttributes={setAttributes}
-												/>
-												{/*Color*/}
-												
-												<FB_SwitcherControl
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalSwitcher={SubHeadingColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ SubHeadingColorSwitcher: value })}
-												/>
-
-												{SubHeadingColorSwitcher === 'normal' && (
-													<FB_ColorControl
-														label={__("Normal Color", "frontis-blocks")}
-														globalColor={SubHeadingColor}
-														setGlobalColor={(value) => setAttributes({ SubHeadingColor: value })}
-													/>
-												)}
-
-												{SubHeadingColorSwitcher === 'hover' && (
-													<FB_ColorControl
-														label={__("Hover Color", "frontis-blocks")}
-														globalColor={SubHeadingHoverColor}
-														setGlobalColor={(value) => setAttributes({ SubHeadingHoverColor: value })}
-													/>
-												)}
-												<FB_Spacing
-													label={__("Padding", "frontis-blocks")}
-													deviceType={deviceType}
-													spacingUnitsHandler={handleDescPaddingUnitsHandler}
-													spacingUnits={descPaddingUnits}
-													spacingDesktop={descDesktopPadding}
-													spacingTablet={descTabPadding}
-													spacingMobile={descMobilePadding}
-													handleSpacingUnitHandler={handleDescPaddingUnitChange}
-													spacingCombineBtn={descPaddingLink}
-													spacingCombineBtnHandler={handleDescPaddingCombineBtn}
-													setAttributes={setAttributes}
-												/>
-												<FB_Spacing
-													label={__("Margin", "frontis-blocks")}
-													deviceType={deviceType}
-													spacingUnitsHandler={handleDescMarginUnitsHandler}
-													spacingUnits={descMarginUnits}
-													spacingDesktop={descDesktopMargin}
-													spacingTablet={descTabMargin}
-													spacingMobile={descMobileMargin}
-													handleSpacingUnitHandler={handleDescMarginUnitChange}
-													spacingCombineBtn={descMarginLink}
-													spacingCombineBtnHandler={handleDescMarginCombineBtn}
-													setAttributes={setAttributes}
-												/>
-											</PanelBody>
-										)}
-
-										{/*Button One Style*/}
-										{ctaBtnOneSwitcher && (
-											<PanelBody
-												title={__("Button One", "frontis-block")}
-												className="fb-cta-button-setting-wrapper"
-												initialOpen={false}
-											>
-												<FB_TypographyControl
-													globalTypoControlActive={true}
-													globalTypoSwitcher={buttonGlobalTypoSwitcher}
-													storeGlobalTypographyData={(value) => setAttributes({ buttonGlobalTypographyData: value })}
-
-													globalTypoType={buttonGlobalTypoType}
-													onChangeGlobalTypoType={(value) => {
-														setAttributes({ 
-															buttonGlobalTypoType: value, 
-															buttonGlobalTypoSwitcher: value === 'default' ? {...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-														})
-													}}
-
-													globalTypoOption={buttonGlobalTypoOption}
-													onChangeGlobalTypoOption={(value) => setAttributes({ buttonGlobalTypoOption: value })}
-
-													fontFamily={buttonFontFamily}
-													onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontFamily: value && false} })}
-
-													fontSize={buttonFontSize}
-													onChangeFontSize={(value) => setAttributes({ buttonFontSize: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontSize: value && false} })}
-
-													fontSizeUnits={buttonFontSizeUnits}
-													onChangeFontSizeUnit={(value) => setAttributes({ buttonFontSizeUnits: value })}
-
-													fontWeight={buttonFontWeight}
-													onChangeFontWeight={(value) => setAttributes({ buttonFontWeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontWeight: value && false} })}
-
-													fontStyle={buttonFontStyle}
-													onChangeFontStyle={(value) => setAttributes({ buttonFontStyle: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontStyle: value && false} })}
-
-													textTransform={buttonTextTransform}
-													onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textTransform: value && false} })}
-
-													textDecoration={buttonTextDecoration}
-													onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textDecoration: value && false} })}
-
-													letterSpacing={buttonLetterSpacing}
-													onChangeLetterSpacing={(value) => setAttributes({ buttonLetterSpacing: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-													letterSpacingUnits={buttonLetterSpacingUnits}
-													onChangeLetterSpacingUnit={(value) => setAttributes({ buttonLetterSpacingUnits: value })}
-
-													lineHeight={buttonLineHeight}
-													onChangeLineHeight={(value) => setAttributes({ buttonLineHeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, lineHeight: value && false} })}
-
-													lineHeightUnits={buttonLineHeightUnits}
-													onChangeLineHeightUnit={(value) => setAttributes({ buttonLineHeightUnits: value })}
-
-													deviceType={deviceType}
-													setAttributes={setAttributes}
-												/>
-
-												{/*Color*/}
-												<FB_SwitcherControl
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalSwitcher={buttonColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
-												/>
-
-												{buttonColorSwitcher === 'normal' && (
-													<FB_ColorControl
-														label={__("Normal Color", "frontis-blocks")}
-														globalColor={buttonTextColor}
-														setGlobalColor={(value) => setAttributes({ buttonTextColor: value })}
-													/>
-												)}
-
-												{buttonColorSwitcher === 'hover' && (
-													<FB_ColorControl
-														label={__("Hover Color", "frontis-blocks")}
-														globalColor={buttonTextHoverColor}
-														setGlobalColor={(value) => setAttributes({ buttonTextHoverColor: value })}
-													/>
-												)}
-
-												{/* Start Button Bg Color*/}
-												<FB_SwitcherControl
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalSwitcher={buttonBgColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ buttonBgColorSwitcher: value })}
-												/>
-
-												{buttonBgColorSwitcher === 'normal' && (
-													<FB_ColorControl
-														label={__("Normal Color", "frontis-blocks")}
-														globalColor={buttonBgColor}
-														setGlobalColor={(value) => setAttributes({ buttonBgColor: value })}
-													/>
-												)}
-
-												{buttonBgColorSwitcher === 'hover' && (
-													<FB_ColorControl
-														label={__("Hover Color", "frontis-blocks")}
-														globalColor={buttonBgHoverColor}
-														setGlobalColor={(value) => setAttributes({ buttonBgHoverColor: value })}
-													/>
-												)}
-
-												{/* Button Icon color */}
-												{buttonIconSwitcher && (
-													<>
-														{/* Start Icon Color*/}
-														<FB_SwitcherControl
-														label={__("Icon Color", "frontis-blocks")}
-														globalSwitcher={btnIconColorSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ btnIconColorSwitcher: value })}
-														/>
-
-														{btnIconColorSwitcher === 'normal' && (
-															<FB_ColorControl
-																label={__("Normal Color", "frontis-blocks")}
-																globalColor={btnIconColor}
-																setGlobalColor={(value) => setAttributes({ btnIconColor: value })}
-															/>
-														)}
-
-														{btnIconColorSwitcher === 'hover' && (
-															<FB_ColorControl
-																label={__("Hover Color", "frontis-blocks")}
-																globalColor={btnIconHoverColor}
-																setGlobalColor={(value) => setAttributes({ btnIconHoverColor: value })}
-															/>
-														)}
-														<FB_Range
-														min={0}
-														max={360}
-														label={__("Rotate Icon", "frontis-blocks")}
-														rangeValue={btnIconRotate}
-														onChangeHandler={(value) => setAttributes({ btnIconRotate: value === 0 ? undefined : value })}
-														deviceType={deviceType}
-														setAttributes={setAttributes}
-														rangeStep={1}
-														resetFallbackValue={""}
-														isRangeUnit={false}
-														/>
-													</>
-												)}
-												
-												<FB_Spacing
-													label={__("Padding", "frontis-blocks")}
-													deviceType={deviceType}
-													spacingUnitsHandler={ handleButtonOnePaddingUnitsHandler }
-													spacingUnits={btnOnePaddingUnits}
-													spacingDesktop={btnOneDesktopPadding}
-													spacingTablet={btnOneTabPadding}
-													spacingMobile={btnOneMobilePadding}
-													handleSpacingUnitHandler={ handleButtonOnePaddingUnitChange }
-													spacingCombineBtn={btnOnePaddingLink}
-													spacingCombineBtnHandler={ handleButtonOnePaddingCombineBtn }
-													setAttributes={setAttributes}
-												/>
-												<FB_Spacing
-													label={__("Margin", "frontis-blocks")}
-													deviceType={deviceType}
-													spacingUnitsHandler={btnOneMarginUnitsHandler}
-													spacingUnits={btnOneMarginUnits}
-													spacingDesktop={btnOneDesktopMargin}
-													spacingTablet={btnOneTabMargin}
-													spacingMobile={btnOneMobileMargin}
-													handleSpacingUnitHandler={btnOneMarginUnitsChange}
-													spacingCombineBtn={btnOneMarginLink}
-													spacingCombineBtnHandler={btnOneMarginLinkBtn}
-													setAttributes={setAttributes}
-												/>
-
-												{/* Border Width */}
-												<SelectControl
-													label={__("Border Style", "frontis-block")}
-													value={infoButtonBorder}
-													options={BORDER_STYLES}
-													onChange={(value) =>
-														setAttributes({ infoButtonBorder: value })
-													}
-												/>
-
-												<FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={infoButtonBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ infoButtonBorderColorSwitcher: value })}
-												/>
-
-												{infoButtonBorderColorSwitcher === 'normal' && (
-													<FB_ColorControl
-														label={__("Normal Color", "frontis-blocks")}
-														globalColor={infoButtonBorderColor}
-														setGlobalColor={(value) => setAttributes({ infoButtonBorderColor: value })}
-													/>
-												)}
-
-												{infoButtonBorderColorSwitcher === 'hover' && (
-													<FB_ColorControl
-														label={__("Hover Color", "frontis-blocks")}
-														globalColor={infoButtonHoverBorderColor}
-														setGlobalColor={(value) => setAttributes({ infoButtonHoverBorderColor: value })}
-													/>
-												)}
-
-												<FB_Spacing
-													label={__("Border Width", "frontis-blocks")}
-													deviceType={deviceType}
-													spacingUnitsHandler={handleButtonOneBorderUnitsHandler}
-													spacingUnits={btnOneBorderUnits}
-													spacingDesktop={btnOneDesktopBorder}
-													spacingTablet={btnOneTabBorder}
-													spacingMobile={btnOneMobileBorder}
-													handleSpacingUnitHandler={handleButtonOneBorderUnitChange}
-													spacingCombineBtn={btnOneBorderLink}
-													spacingCombineBtnHandler={handleButtonOneBorderCombineBtn}
-													setAttributes={setAttributes}
-												/>
-
-												<FB_Spacing
-													label={__("Border Radius", "frontis-blocks")}
-													deviceType={deviceType}
-													spacingUnitsHandler={handleButtonOneBorderRadiusUnitsHandler}
-													spacingUnits={btnOneBorderRadiusUnits}
-													spacingDesktop={btnOneDesktopBorderRadius}
-													spacingTablet={btnOneTabBorderRadius}
-													spacingMobile={btnOneMobileBorderRadius}
-													handleSpacingUnitHandler={handleButtonOneBorderRadiusUnitChange}
-													spacingCombineBtn={btnOneBorderRadiusLink}
-													spacingCombineBtnHandler={handleButtonOneBorderRadiusCombineBtn}
-													setAttributes={setAttributes}
-												/>
-
-											</PanelBody>
-										)}
-
-										{/* Button Two Style */}
-										{btnTwoSwitcher && (
-											<PanelBody
-												title={__("Button Two", "frontis-blocks")}
-												initialOpen={false}
-											>
-												<FB_TypographyControl
-													globalTypoControlActive={true}
-													globalTypoSwitcher={buttonTwoGlobalTypoSwitcher}
-													storeGlobalTypographyData={(value) => setAttributes({ buttonTwoGlobalTypographyData: value })}
-
-													globalTypoType={buttonTwoGlobalTypoType}
-													onChangeGlobalTypoType={(value) => {
-														setAttributes({ 
-															buttonTwoGlobalTypoType: value, 
-															buttonTwoGlobalTypoSwitcher: value === 'default' ? {...buttonTwoGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonTwoGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-														})
-													}}
-
-													globalTypoOption={buttonTwoGlobalTypoOption}
-													onChangeGlobalTypoOption={(value) => setAttributes({ buttonTwoGlobalTypoOption: value })}
-
-													fontFamily={buttonTwoFontFamily}
-													onChangeFontFamily={(value) => setAttributes({ buttonTwoFontFamily: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, fontFamily: value && false} })}
-
-													fontSize={buttonTwoFontSize}
-													onChangeFontSize={(value) => setAttributes({ buttonTwoFontSize: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, fontSize: value && false} })}
-
-													fontSizeUnits={buttonTwoFontSizeUnits}
-													onChangeFontSizeUnit={(value) => setAttributes({ buttonTwoFontSizeUnits: value })}
-
-													fontWeight={buttonTwoFontWeight}
-													onChangeFontWeight={(value) => setAttributes({ buttonTwoFontWeight: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, fontWeight: value && false} })}
-
-													fontStyle={buttonTwoFontStyle}
-													onChangeFontStyle={(value) => setAttributes({ buttonTwoFontStyle: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, fontStyle: value && false} })}
-
-													textTransform={buttonTwoTextTransform}
-													onChangeTextTransform={(value) => setAttributes({ buttonTwoTextTransform: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, textTransform: value && false} })}
-
-													textDecoration={buttonTwoTextDecoration}
-													onChangeTextDecoration={(value) => setAttributes({ buttonTwoTextDecoration: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, textDecoration: value && false} })}
-
-													letterSpacing={buttonTwoLetterSpacing}
-													onChangeLetterSpacing={(value) => setAttributes({ buttonTwoLetterSpacing: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-													letterSpacingUnits={buttonTwoLetterSpacingUnits}
-													onChangeLetterSpacingUnit={(value) => setAttributes({ buttonTwoLetterSpacingUnits: value })}
-
-													lineHeight={buttonTwoLineHeight}
-													onChangeLineHeight={(value) => setAttributes({ buttonTwoLineHeight: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, lineHeight: value && false} })}
-
-													lineHeightUnits={buttonTwoLineHeightUnits}
-													onChangeLineHeightUnit={(value) => setAttributes({ buttonTwoLineHeightUnits: value })}
-
-													deviceType={deviceType}
-													setAttributes={setAttributes}
-												/>
-												
-												<FB_SwitcherControl
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalSwitcher={buttonTwoColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ buttonTwoColorSwitcher: value })}
-												/>
-
-												{buttonTwoColorSwitcher === 'normal' && (
-													<FB_ColorControl
-														label={__("Normal Color", "frontis-blocks")}
-														globalColor={buttonTwoTextColor}
-														setGlobalColor={(value) => setAttributes({ buttonTwoTextColor: value })}
-													/>
-												)}
-
-												{buttonTwoColorSwitcher === 'hover' && (
-													<FB_ColorControl
-														label={__("Hover Color", "frontis-blocks")}
-														globalColor={buttonTwoTextHoverColor}
-														setGlobalColor={(value) => setAttributes({ buttonTwoTextHoverColor: value })}
-													/>
-												)}
-												
-												<FB_SwitcherControl
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalSwitcher={buttonTwoBgColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ buttonTwoBgColorSwitcher: value })}
-												/>
-
-												{buttonTwoBgColorSwitcher === 'normal' && (
-													<FB_ColorControl
-														label={__("Normal Color", "frontis-blocks")}
-														globalColor={buttonTwoBgColor}
-														setGlobalColor={(value) => setAttributes({ buttonTwoBgColor: value })}
-													/>
-												)}
-
-												{buttonTwoBgColorSwitcher === 'hover' && (
-													<FB_ColorControl
-														label={__("Hover Color", "frontis-blocks")}
-														globalColor={buttonTwoBgHoverColor}
-														setGlobalColor={(value) => setAttributes({ buttonTwoBgHoverColor: value })}
-													/>
-												)}
-
-												{buttonTwoIconSwitcher &&(
-													<>
-														<FB_SwitcherControl
-														label={__("Icon Color", "frontis-blocks")}
-														globalSwitcher={btnTwoIconColorSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ btnTwoIconColorSwitcher: value })}
-														/>
-
-														{btnTwoIconColorSwitcher === 'normal' && (
-															<FB_ColorControl
-																label={__("Normal Color", "frontis-blocks")}
-																globalColor={btnTwoIconColor}
-																setGlobalColor={(value) => setAttributes({ btnTwoIconColor: value })}
-															/>
-														)}
-
-														{btnTwoIconColorSwitcher === 'hover' && (
-															<FB_ColorControl
-																label={__("Hover Color", "frontis-blocks")}
-																globalColor={btnTwoIconHoverColor}
-																setGlobalColor={(value) => setAttributes({ btnTwoIconHoverColor: value })}
-															/>
-														)}
-
-														<FB_Range
-															min={0}
-															max={360}
-															label={__("Rotate Icon", "frontis-blocks")}
-															rangeValue={btnTwoIconRotate}
-															onChangeHandler={(value) => setAttributes({ btnTwoIconRotate: value === 0 ? undefined : value })}
-															deviceType={deviceType}
-															setAttributes={setAttributes}
-															rangeStep={1}
-															resetFallbackValue={""}
-															isRangeUnit={false}
-														/>
-													</>
-												)}
-												
-												<FB_Spacing
-													label={__("Padding", "frontis-blocks")}
-													deviceType={deviceType}
-													spacingUnitsHandler={ handleButtonTwoPaddingUnitsHandler }
-													spacingUnits={btnTwoPaddingUnits}
-													spacingDesktop={btnTwoDesktopPadding}
-													spacingTablet={btnTwoTabPadding}
-													spacingMobile={btnTwoMobilePadding}
-													handleSpacingUnitHandler={ handleButtonTwoPaddingUnitChange }
-													spacingCombineBtn={btnTwoPaddingLink}
-													spacingCombineBtnHandler={ handleButtonTwoPaddingCombineBtn }
-													setAttributes={setAttributes}
-												/>
-												<FB_Spacing
-													label={__("Margin", "frontis-blocks")}
-													deviceType={deviceType}
-													spacingUnitsHandler={btnTwoMarginUnitsHandler}
-													spacingUnits={btnTwoMarginUnits}
-													spacingDesktop={btnTwoDesktopMargin}
-													spacingTablet={btnTwoTabMargin}
-													spacingMobile={btnTwoMobileMargin}
-													handleSpacingUnitHandler={btnTwoMarginUnitsChange}
-													spacingCombineBtn={btnTwoMarginLink}
-													spacingCombineBtnHandler={btnTwoMarginLinkBtn}
-													setAttributes={setAttributes}
-												/>
-												<SelectControl
-													label={__("Border Style", "frontis-blocks")}
-													value={btnTwoBorder}
-													options={BORDER_STYLES}
-													onChange={(value) =>
-														setAttributes({ btnTwoBorder: value })
-													}
-												/>
-												
-												<FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={btnTwoBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ btnTwoBorderColorSwitcher: value })}
-												/>
-
-												{btnTwoBorderColorSwitcher === 'normal' && (
-													<FB_ColorControl
-														label={__("Normal Color", "frontis-blocks")}
-														globalColor={btnTwoBorderColor}
-														setGlobalColor={(value) => setAttributes({ btnTwoBorderColor: value })}
-													/>
-												)}
-
-												{btnTwoBorderColorSwitcher === 'hover' && (
-													<FB_ColorControl
-														label={__("Hover Color", "frontis-blocks")}
-														globalColor={btnTwoHoverBorderColor}
-														setGlobalColor={(value) => setAttributes({ btnTwoHoverBorderColor: value })}
-													/>
-												)}
-
-												<FB_Spacing
-													label={__("Border", "frontis-blocks")}
-													deviceType={deviceType}
-													spacingUnitsHandler={btnTwoBorderUnitsHandler}
-													spacingUnits={btnTwoBorderUnits}
-													spacingDesktop={btnTwoDesktopBorder}
-													spacingTablet={btnTwoTabBorder}
-													spacingMobile={btnTwoMobileBorder}
-													handleSpacingUnitHandler={btnTwoBorderUnitsChange}
-													spacingCombineBtn={btnTwoBorderLink}
-													spacingCombineBtnHandler={btnTwoBorderLinkBtn}
-													setAttributes={setAttributes}
-												/>
-												<FB_Spacing
-													label={__("Border Radius", "frontis-blocks")}
-													deviceType={deviceType}
-													spacingUnitsHandler={btnTwoBorderRadiusUnitsHandler}
-													spacingUnits={btnTwoBorderRadiusUnits}
-													spacingDesktop={btnTwoDesktopBorderRadius}
-													spacingTablet={btnTwoTabBorderRadius}
-													spacingMobile={btnTwoMobileBorderRadius}
-													handleSpacingUnitHandler={
-														btnTwoBorderRadiusUnitsChange
-													}
-													spacingCombineBtn={btnTwoBorderRadiusLink}
-													spacingCombineBtnHandler={btnTwoBorderRadiusLinkBtn}
-													setAttributes={setAttributes}
-												/>
-											</PanelBody>
-										)}
-									</>
-								)}
-								{tab.name === "advance" && (
-									<>
-										<div className="fb-setting-advanced-tab-wrapper">
-											<div className="fb-setting-inner-wrapper">
-												<PanelBody
-													title={__("Layout", "frontis-blocks")}
-													initialOpen={true}
-													className="fb-setting-layout-header" 
-												>
-													<FB_Range
-														min={0}
-														max={10000000}
-														label={__("Z Index", "frontis-blocks")}
-														rangeValue={globalZIndex}
-														onChangeHandler={(value) => setAttributes({ globalZIndex: value === 0 ? undefined : value })}
-														deviceType={deviceType}
-														setAttributes={setAttributes}
-														rangeStep={1}
-														resetFallbackValue={""}
-														isRangeUnit={false}
-													/>
-
-													<SelectControl
-                                                        label={__("Overflow", "frontis-blocks")}
-                                                        value={ctaOverflow}
-                                                        options={OVERFLOW_OP}
-                                                        onChange={(value) => setAttributes({ ctaOverflow: value })}
-                                                    />
-
-													<FB_PositionControl
-														deviceType={deviceType}
-														positionType={ctaPositionType}
-														setPositionType={(value) => setAttributes({ ctaPositionType: value })}
-																										
-														HZOrientationType={ctaHZOrientationType}
-														setHZOrientationType={(value) =>
-															setAttributes({ ctaHZOrientationType: value })
-														}
-														VROrientationType={ctaVROrientationType}
-														setVROrientationType={(value) =>
-															setAttributes({ ctaVROrientationType: value })
-														}
-																											
-														HZLeftOffset={ctaHZLeftOffset}
-														setHZLeftOffset={(value) => setAttributes({ ctaHZLeftOffset: value })}
-														HZLeftOffsetUnits={ctaHZLeftOffsetUnits}
-														setHZLeftOffsetUnits={(value) => setAttributes({ ctaHZLeftOffsetUnits: value })}
-														HZRightOffset={ctaHZRightOffset}
-														setHZRightOffset={(value) => setAttributes({ ctaHZRightOffset: value })}
-														HZRightOffsetUnits={ctaHZRightOffsetUnits}
-														setHZRightOffsetUnits={(value) => setAttributes({ ctaHZRightOffsetUnits: value })}
-																										
-														VRTopOffset={ctaVRTopOffset}
-														setVRTopOffset={(value) => setAttributes({ ctaVRTopOffset: value })}
-														VRTopOffsetUnits={ctaVRTopOffsetUnits}
-														setVRTopOffsetUnits={(value) => setAttributes({ ctaVRTopOffsetUnits: value })}
-														VRBottomOffset={ctaVRBottomOffset}
-														setVRBottomOffset={(value) => setAttributes({ ctaVRBottomOffset: value })}
-														VRBottomOffsetUnits={ctaVRBottomOffsetUnits}
-														setVRBottomOffsetUnits={(value) => setAttributes({ ctaVRBottomOffsetUnits: value })}
-
-														setAttributes={setAttributes}
-													/>
-
-													<FB_InputControl
-														label={__("CSS ID", "frontis-blocks")}
-														value={ctaGlobalWraperID}
-														onChangeValue={(value) => setAttributes({ ctaGlobalWraperID: value })}
-														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
-													/>
-
-													<FB_InputControl
-														label={__("CSS Class", "frontis-blocks")}
-														value={ctaGlobalWraperClass}
-														onChangeValue={(value) => setAttributes({ ctaGlobalWraperClass: value })}
-														helpText={__("Separate with spaces key.", "frontis-blocks")}
-													/>
-													
-												</PanelBody>
-												<PanelBody
-													title={__("Padding and Margin", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<FB_Spacing
-														label={__("Padding", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={
-															handleGlobalPaddingUnitsHandler
-														}
-														spacingUnits={globalPaddingUnits}
-														spacingDesktop={globalPaddingDesktop}
-														spacingTablet={globalPaddingTablet}
-														spacingMobile={globalPaddingMobile}
-														handleSpacingUnitHandler={
-															handleGlobalPaddingUnitChange
-														}
-														spacingCombineBtn={globalPaddingLink}
-														spacingCombineBtnHandler={
-															handleGlobalPaddingCombineBtn
-														}
-														setAttributes={setAttributes}
-													/>
-													<FB_Spacing
-														label={__("Margin", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={handleGlobalMarginUnitsHandler}
-														spacingUnits={globalMarginUnits}
-														spacingDesktop={globalMarginDesktop}
-														spacingTablet={globalMarginTablet}
-														spacingMobile={globalMarginMobile}
-														handleSpacingUnitHandler={
-															handleGlobalMarginUnitChange
-														}
-														spacingCombineBtn={globalMarginLink}
-														spacingCombineBtnHandler={
-															handleGlobalMarginCombineBtn
-														}
-														setAttributes={setAttributes}
-													/>
-												</PanelBody>
-
-												<PanelBody title="Background" initialOpen={false}>
-													<FB_BackgroundColorControl
-														bgColorSwitcher={testBgColorSwitcher}
-														setBgColorSwitcher={(value) =>
-															setAttributes({ testBgColorSwitcher: value })
-														}
-														normalBackgroundType={ctaGlobalBackgroundType}
-														setNormalBackgroundType={(value) =>
-															setAttributes({ ctaGlobalBackgroundType: value })
-														}
-														normalClassicColor={ctaGlobalClassicColor}
-														setNormalClassicColor={(value) =>
-															setAttributes({ ctaGlobalClassicColor: value })
-														}
-														normalGradientColor={ctaGlobalGradientColor}
-														setNormalGradientColor={(value) =>
-															setAttributes({ ctaGlobalGradientColor: value })
-														}
-														normalCustomGradientSwitcher={
-															ctaGlobalCustomGradientSwitcher
-														}
-														setNormalCustomGradientSwitcher={(value) =>
-															setAttributes({
-																ctaGlobalCustomGradientSwitcher: value,
-															})
-														}
-														normalCustomGradientInputValue={
-															ctaGlobalCustomGradientInputValue
-														}
-														setNormalCustomGradientInputValue={(value) =>
-															setAttributes({
-																ctaGlobalCustomGradientInputValue: value,
-															})
-														}
-														normalBackgroundImageUrl={ctaGlobalBackgroundImageUrl}
-														setNormalBackgroundImageUrl={(value) =>
-															setAttributes({ ctaGlobalBackgroundImageUrl: value })
-														}
-														normalBackgroundImageAlt={testBackgroundImageAlt}
-														setNormalBackgroundImageAlt={(value) =>
-															setAttributes({ testBackgroundImageAlt: value })
-														}
-														normalBackgroundImageID={testBackgroundImageID}
-														setNormalBackgroundImageID={(value) =>
-															setAttributes({ testBackgroundImageID: value })
-														}
-														normalBackgroundImagePosition={
-															ctaGlobalBackgroundImagePosition
-														}
-														setNormalBackgroundImagePosition={(value) =>
-															setAttributes({
-																ctaGlobalBackgroundImagePosition: value,
-															})
-														}
-														normalBackgroundImageAttachment={
-															ctaGlobalBackgroundImageAttachment
-														}
-														setNormalBackgroundImageAttachment={(value) =>
-															setAttributes({
-																ctaGlobalBackgroundImageAttachment: value,
-															})
-														}
-														normalBackgroundImageRepeat={
-															ctaGlobalBackgroundImageRepeat
-														}
-														setNormalBackgroundImageRepeat={(value) =>
-															setAttributes({
-																ctaGlobalBackgroundImageRepeat: value,
-															})
-														}
-														normalBackgroundImageSize={ctaGlobalBackgroundImageSize}
-														setNormalBackgroundImageSize={(value) =>
-															setAttributes({ ctaGlobalBackgroundImageSize: value })
-														}
-														hoverBackgroundType={hoverBackgroundType}
-														setHoverBackgroundType={(value) =>
-															setAttributes({ hoverBackgroundType: value })
-														}
-														hoverClassicColor={hoverClassicColor}
-														setHoverClassicColor={(value) =>
-															setAttributes({ hoverClassicColor: value })
-														}
-														hoverGradientColor={hoverGradientColor}
-														setHoverGradientColor={(value) =>
-															setAttributes({ hoverGradientColor: value })
-														}
-														hoverCustomGradientSwitcher={
-															hoverCustomGradientSwitcher
-														}
-														setHoverCustomGradientSwitcher={(value) =>
-															setAttributes({
-																hoverCustomGradientSwitcher: value,
-															})
-														}
-														hoverCustomGradientInputValue={
-															hoverCustomGradientInputValue
-														}
-														setHoverCustomGradientInputValue={(value) =>
-															setAttributes({
-																hoverCustomGradientInputValue: value,
-															})
-														}
-														hoverBackgroundImageUrl={hoverBackgroundImageUrl}
-														setHoverBackgroundImageUrl={(value) =>
-															setAttributes({ hoverBackgroundImageUrl: value })
-														}
-														hoverBackgroundImageAlt={hoverBackgroundImageAlt}
-														setHoverBackgroundImageAlt={(value) =>
-															setAttributes({ hoverBackgroundImageAlt: value })
-														}
-														hoverBackgroundImageID={hoverBackgroundImageID}
-														setHoverBackgroundImageID={(value) =>
-															setAttributes({ hoverBackgroundImageID: value })
-														}
-														hoverBackgroundImagePosition={
-															hoverBackgroundImagePosition
-														}
-														setHoverBackgroundImagePosition={(value) =>
-															setAttributes({
-																hoverBackgroundImagePosition: value,
-															})
-														}
-														hoverBackgroundImageAttachment={
-															hoverBackgroundImageAttachment
-														}
-														setHoverBackgroundImageAttachment={(value) =>
-															setAttributes({
-																hoverBackgroundImageAttachment: value,
-															})
-														}
-														hoverBackgroundImageRepeat={
-															hoverBackgroundImageRepeat
-														}
-														setHoverBackgroundImageRepeat={(value) =>
-															setAttributes({
-																hoverBackgroundImageRepeat: value,
-															})
-														}
-														hoverBackgroundImageSize={hoverBackgroundImageSize}
-														setHoverBackgroundImageSize={(value) =>
-															setAttributes({ hoverBackgroundImageSize: value })
-														}
-													/>
-												</PanelBody>
-												<PanelBody
-													title={__("Border and Shadow", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<SelectControl
-														label={__("Border Style", "frontis-blocks")}
-														value={globalBorder}
-														options={BORDER_STYLES}
-														onChange={(value) =>
-															setAttributes({ globalBorder: value })
-														}
-													/>
-
-													<FB_SwitcherControl
-													label={__("Border Color", "frontis-blocks")}
-													globalSwitcher={globalBorderColorSwitcher}
-													setGlobalSwitcher={(value) => setAttributes({ globalBorderColorSwitcher: value })}
-													/>
-
-													{globalBorderColorSwitcher === 'normal' && (
-														<FB_ColorControl
-															label={__("Normal Color", "frontis-blocks")}
-															globalColor={globalBorderColor}
-															setGlobalColor={(value) => setAttributes({ globalBorderColor: value })}
-														/>
-													)}
-
-													{globalBorderColorSwitcher === 'hover' && (
-														<FB_ColorControl
-															label={__("Hover Color", "frontis-blocks")}
-															globalColor={globalBorderHoverColor}
-															setGlobalColor={(value) => setAttributes({ globalBorderHoverColor: value })}
-														/>
-													)}
-													<FB_Spacing
-														label={__("Border", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={handleGlobalBorderUnitsHandler}
-														spacingUnits={globalBorderUnits}
-														spacingDesktop={globalBorderDesktop}
-														spacingTablet={globalBorderTablet}
-														spacingMobile={globalBorderMobile}
-														handleSpacingUnitHandler={
-															handleGlobalBorderUnitChange
-														}
-														spacingCombineBtn={globalBorderLink}
-														spacingCombineBtnHandler={
-															handleGlobalBorderCombineBtn
-														}
-														setAttributes={setAttributes}
-													/>
-
-													<FB_Spacing
-														label={__("Border Radius", "frontis-blocks")}
-														deviceType={deviceType}
-														spacingUnitsHandler={
-															handleGlobalBorderRadiusUnitsHandler
-														}
-														spacingUnits={globalBorderRadiusUnits}
-														spacingDesktop={globalBorderRadiusDesktop}
-														spacingTablet={globalBorderRadiusTablet}
-														spacingMobile={globalBorderRadiusMobile}
-														handleSpacingUnitHandler={
-															handleGlobalBorderRadiusUnitChange
-														}
-														spacingCombineBtn={globalBorderRadiusLink}
-														spacingCombineBtnHandler={
-															handleGlobalBorderRadiusCombineBtn
-														}
-														setAttributes={setAttributes}
-													/>
-													<FB_BoxShadowControl
-														onBoxShadowChange={(value) =>
-															setAttributes({ boxGlobalBoxShadowValues: value })
-														}
-														initialShadowValue={boxGlobalBoxShadowValues}
-														onBoxShadowStyleChange={(value) =>
-															setAttributes({
-																boxGlobalBoxShadowCssValue: value,
-															})
-														}
-													/>
-													<FB_SwitcherControl
-                                                    label={__("Box Shadow", "frontis-blocks")}
-                                                    globalSwitcher={globalBoxShadowSwitcher}
-                                                    setGlobalSwitcher={(value) => setAttributes({ globalBoxShadowSwitcher: value })}
-													/>
-
-													{globalBoxShadowSwitcher === 'normal' && (
-														<FB_BoxShadowControl
-															label={__("Normal Shadow", "frontis-blocks")}
-															onBoxShadowChange={(value) => setAttributes({ globalBoxShadowValues: value })}
-															initialShadowValue={globalBoxShadowValues}
-															onBoxShadowStyleChange={(value) => setAttributes({ globalBoxShadowCssValue: value })}
-														/>
-													)}
-
-													{globalBoxShadowSwitcher === 'hover' && (
-														<FB_BoxShadowControl
-															label={__("Hover Shadow", "frontis-blocks")}
-															onBoxShadowChange={(value) => setAttributes({ globalBoxShadowHoverValues: value })}
-															initialShadowValue={globalBoxShadowHoverValues}
-															onBoxShadowStyleChange={(value) => setAttributes({ globalHoverBoxShadowCssValue: value })}
-														/>
-													)}
-												</PanelBody>
-
-												<PanelBody
-													title={__("Responsive Control", "frontis-blocks")}
-													initialOpen={false}
-													className="fb-setting-responsive-control-wrapper"
-												>
-													<FB_VisibilityControl
-                                                        desktopValue={ctaDesktopSwitcher}
-                                                        setDesktopValue={(value) => setAttributes({ ctaDesktopSwitcher: value })}
-
-                                                        tabletValue={ctaTabletSwitcher}
-                                                        setTabletValue={(value) => setAttributes({ ctaTabletSwitcher: value })}
-
-                                                        mobileValue={ctaMobileSwitcher}
-                                                        setMobileValue={(value) => setAttributes({ ctaMobileSwitcher: value })}
-                                                    />
-												</PanelBody>
-
-												<PanelBody
-													title={__("Custom CSS", "frontis-blocks")}
-													initialOpen={false}
-												>
-													<FB_CustomCSSEditor  
-														value={ctaCustomCSS} 
-														onChangeValue={(value) => setAttributes({ ctaCustomCSS: value })}
-													/>
-												</PanelBody>
-											</div>
-										</div>
-									</>
-								)}
-							</div>
-						)}
-					</TabPanel>
-				</div>
-			</InspectorControls>
+			<FB_InspectorControls
+				generalControls={generalControls}
+				styleControls={styleControls}
+				advancedControls={advancedControls}
+			/>
 		</>
 	);
 }

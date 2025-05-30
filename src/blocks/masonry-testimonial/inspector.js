@@ -18,6 +18,7 @@ import {
     ANIMATION
 } from "./constants/constants";
 import { useDeviceType } from "@Config/displayType";
+import FB_InspectorControls from '@Components/InspectorControls';
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -65,110 +66,99 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     }, [clientId, blockID, setAttributes]);
 
+
+
+    /**
+	 * Inspector General Controls
+	 */
+	const generalControls = (
+        <>
+            <PanelBody title={__("Testimonial Content", "frontis-blocks")} initialOpen={true}>
+                <SelectControl
+                    label={__("Post Type", "frontis-blocks")}
+                    value={postType}
+                    options={postTypeOptions}
+                    onChange={(value) => setAttributes({ postType: value })}
+                />
+                
+                <SelectControl
+                    label={__("Post Order", "frontis-blocks")}
+                    value={postOrder}
+                    options={[
+                        { label: __('Latest First', 'frontis-blocks'), value: 'desc' },
+                        { label: __('Oldest First', 'frontis-blocks'), value: 'asc' },
+                        { label: __('Random', 'frontis-blocks'), value: 'rand' },
+                        { label: __('Title (A-Z)', 'frontis-blocks'), value: 'title' },
+                        { label: __('Title (Z-A)', 'frontis-blocks'), value: 'title-desc' },
+                    ]}
+                    onChange={(value) => setAttributes({ postOrder: value })}
+                />
+
+                <RangeControl
+                    label={__("Number of Testimonials", "frontis-blocks")}
+                    value={postsToShow}
+                    onChange={(value) => setAttributes({ postsToShow: value })}
+                    min={1}
+                    max={20}
+                />
+                <RangeControl
+                    label={__("Columns", "frontis-blocks")}
+                    value={columns}
+                    onChange={(value) => setAttributes({ columns: value })}
+                    min={1}
+                    max={6}
+                />
+                <ToggleControl
+                    label={__("Show Author Image", "frontis-blocks")}
+                    checked={showImage}
+                    onChange={(value) => setAttributes({ showImage: value })}
+                />
+                <ToggleControl
+                    label={__("Show Author Name", "frontis-blocks")}
+                    checked={showAuthor}
+                    onChange={(value) => setAttributes({ showAuthor: value })}
+                />
+                <ToggleControl
+                    label={__("Show Role/Designation", "frontis-blocks")}
+                    checked={showRole}
+                    onChange={(value) => setAttributes({ showRole: value })}
+                />
+            </PanelBody>
+        </>
+	);
+
+    /**
+	 * Inspector Style Controls
+	 */
+	const styleControls = (
+		<>
+
+		</>
+	);
+
+    /**
+	 * Inspector Advanced Controls
+	 */
+	const advancedControls = (
+		<>
+            <PanelBody title={__("Animation", "frontis-blocks")} initialOpen={true}>
+                <SelectControl
+                    label={__("Animation Effect", "frontis-blocks")}
+                    value={animation}
+                    options={ANIMATION}
+                    onChange={(value) => setAttributes({ animation: value })}
+                />
+            </PanelBody>
+		</>
+	);
+
     return (
         <>
-            <InspectorControls key="controls">
-                <div className="fb-inspector-control">
-                    <TabPanel
-                        className="fb-parent-tab-panel"
-                        activeClass="active-tab"
-                        tabs={[
-                            {
-                                name: "general",
-                                title: "General",
-                                className: "fb-tab general",
-                            },
-                            {
-                                name: "styles",
-                                title: "Style",
-                                className: "fb-tab styles",
-                            },
-                            {
-                                name: "advanced",
-                                title: "Advanced",
-                                className: "fb-tab advance",
-                            },
-                        ]}
-                    >
-                        {(tab) => (
-                            <div className={"fb-tab-controls " + tab.name}>
-                                {tab.name === 'general' && (
-                                    <>
-                                        <PanelBody title={__("Testimonial Content", "frontis-blocks")} initialOpen={true}>
-                                            <SelectControl
-                                                label={__("Post Type", "frontis-blocks")}
-                                                value={postType}
-                                                options={postTypeOptions}
-                                                onChange={(value) => setAttributes({ postType: value })}
-                                            />
-                                            
-                                            <SelectControl
-                                                label={__("Post Order", "frontis-blocks")}
-                                                value={postOrder}
-                                                options={[
-                                                    { label: __('Latest First', 'frontis-blocks'), value: 'desc' },
-                                                    { label: __('Oldest First', 'frontis-blocks'), value: 'asc' },
-                                                    { label: __('Random', 'frontis-blocks'), value: 'rand' },
-                                                    { label: __('Title (A-Z)', 'frontis-blocks'), value: 'title' },
-                                                    { label: __('Title (Z-A)', 'frontis-blocks'), value: 'title-desc' },
-                                                ]}
-                                                onChange={(value) => setAttributes({ postOrder: value })}
-                                            />
-
-                                            <RangeControl
-                                                label={__("Number of Testimonials", "frontis-blocks")}
-                                                value={postsToShow}
-                                                onChange={(value) => setAttributes({ postsToShow: value })}
-                                                min={1}
-                                                max={20}
-                                            />
-                                            <RangeControl
-                                                label={__("Columns", "frontis-blocks")}
-                                                value={columns}
-                                                onChange={(value) => setAttributes({ columns: value })}
-                                                min={1}
-                                                max={6}
-                                            />
-                                            <ToggleControl
-                                                label={__("Show Author Image", "frontis-blocks")}
-                                                checked={showImage}
-                                                onChange={(value) => setAttributes({ showImage: value })}
-                                            />
-                                            <ToggleControl
-                                                label={__("Show Author Name", "frontis-blocks")}
-                                                checked={showAuthor}
-                                                onChange={(value) => setAttributes({ showAuthor: value })}
-                                            />
-                                            <ToggleControl
-                                                label={__("Show Role/Designation", "frontis-blocks")}
-                                                checked={showRole}
-                                                onChange={(value) => setAttributes({ showRole: value })}
-                                            />
-                                        </PanelBody>
-                                    </>
-                                )}
-                                {tab.name === "styles" && (
-                                    <>
-                                        
-                                    </>
-                                )}
-                                {tab.name === "advanced" && (
-                                    <>
-                                        <PanelBody title={__("Animation", "frontis-blocks")} initialOpen={true}>
-                                            <SelectControl
-                                                label={__("Animation Effect", "frontis-blocks")}
-                                                value={animation}
-                                                options={ANIMATION}
-                                                onChange={(value) => setAttributes({ animation: value })}
-                                            />
-                                        </PanelBody>
-                                    </>
-                                )}
-                            </div>
-                        )}
-                    </TabPanel>
-                </div>
-            </InspectorControls>
+            <FB_InspectorControls
+                generalControls={generalControls}
+                styleControls={styleControls}
+                advancedControls={advancedControls}
+            />
         </>
     );
 }

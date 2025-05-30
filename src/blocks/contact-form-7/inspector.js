@@ -45,7 +45,7 @@ import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
-
+import FB_InspectorControls from '@Components/InspectorControls';
 
 import "./editor.scss";
 
@@ -2833,6 +2833,1090 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
+	/**
+	 * Inspector General Controls
+	 */
+	const generalControls = (
+	<>
+		<PanelBody
+			title={__("Contact Form", "frontis-blocks")}
+			initialOpen={true}
+		>
+			<BaseControl className="fb-fluent-from">
+				<SelectControl
+					label={__("Select Form", "frontis-blocks")}
+					value={formId}
+					options={modifiedFormLists}
+					onChange={(newSelectedForm) =>
+						selectWcf7Form(newSelectedForm)
+					}
+				/>
+
+				<ToggleControl
+					label={__("Show Placeholder", "frontis-blocks")}
+					checked={showPlaceholder}
+					onChange={(showPlaceholder) =>
+						setAttributes({
+							showPlaceholder,
+						})
+					}
+				/>
+				<ToggleControl
+					label={__("Show Error Message", "frontis-blocks")}
+					checked={showErrorMessage}
+					onChange={(showErrorMessage) =>
+						setAttributes({
+							showErrorMessage,
+						})
+					}
+				/>
+			</BaseControl>
+		</PanelBody>
+	</>
+	);
+
+	/**
+	 * Inspector Style Controls
+	 */
+	const styleControls = (
+		<>
+			<PanelBody title={__("Label", "frontis-blocks")} initialOpen={true}>
+
+
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={contactFormLabelColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ contactFormLabelColorSwitcher: value })}
+				/>
+
+				{contactFormLabelColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={contactFormLabelColor}
+						setGlobalColor={(value) => setAttributes({ contactFormLabelColor: value })}
+					/>
+				)}
+
+				{contactFormLabelColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={contactFormLabelHoverColor}
+						setGlobalColor={(value) => setAttributes({ contactFormLabelHoverColor: value })}
+					/>
+				)}
+
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={contactFormLabelGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) => setAttributes({ contactFormLabelGlobalTypographyData: value })}
+
+					globalTypoType={contactFormLabelGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({ 
+							contactFormLabelGlobalTypoType: value, 
+							contactFormLabelGlobalTypoSwitcher: value === 'default' ? {...contactFormLabelGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormLabelGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+						})
+					}}
+
+					globalTypoOption={contactFormLabelGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) => setAttributes({ contactFormLabelGlobalTypoOption: value })}
+
+					fontFamily={contactFormLabelFontFamily}
+					onChangeFontFamily={(value) => setAttributes({ contactFormLabelFontFamily: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontFamily: value && false} })}
+
+					fontSize={contactFormLabelFontSize}
+					onChangeFontSize={(value) => setAttributes({ contactFormLabelFontSize: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontSize: value && false} })}
+
+					fontSizeUnits={contactFormLabelFontSizeUnits}
+					onChangeFontSizeUnit={(value) => setAttributes({ contactFormLabelFontSizeUnits: value })}
+
+					fontWeight={contactFormLabelFontWeight}
+					onChangeFontWeight={(value) => setAttributes({ contactFormLabelFontWeight: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontWeight: value && false} })}
+
+					fontStyle={contactFormLabelFontStyle}
+					onChangeFontStyle={(value) => setAttributes({ contactFormLabelFontStyle: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontStyle: value && false} })}
+
+					textTransform={contactFormLabelTextTransform}
+					onChangeTextTransform={(value) => setAttributes({ contactFormLabelTextTransform: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, textTransform: value && false} })}
+
+					textDecoration={contactFormLabelTextDecoration}
+					onChangeTextDecoration={(value) => setAttributes({ contactFormLabelTextDecoration: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, textDecoration: value && false} })}
+
+					letterSpacing={contactFormLabelLetterSpacing}
+					onChangeLetterSpacing={(value) => setAttributes({ contactFormLabelLetterSpacing: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+					letterSpacingUnits={contactFormLabelLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormLabelLetterSpacingUnits: value })}
+
+					lineHeight={contactFormLabelLineHeight}
+					onChangeLineHeight={(value) => setAttributes({ contactFormLabelLineHeight: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, lineHeight: value && false} })}
+
+					lineHeightUnits={contactFormLabelLineHeightUnits}
+					onChangeLineHeightUnit={(value) => setAttributes({ contactFormLabelLineHeightUnits: value })}
+
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+			</PanelBody>
+			<PanelBody title={__("Input & Textarea", "frontis-blocks")} initialOpen={false}>
+
+				<FB_ColorControl
+					label={__("Background Color", "frontis-blocks")}
+					globalColor={contactFormInputBgColor}
+					setGlobalColor={(value) => setAttributes({ contactFormInputBgColor: value })}
+				/>
+
+				<FB_ColorControl
+					label={__("Color", "frontis-blocks")}
+					globalColor={contactFormInputColor}
+					setGlobalColor={(value) => setAttributes({ contactFormInputColor: value })}
+				/>
+
+
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={contactFormInputGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) => setAttributes({ contactFormInputGlobalTypographyData: value })}
+
+					globalTypoType={contactFormInputGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({ 
+							contactFormInputGlobalTypoType: value, 
+							contactFormInputGlobalTypoSwitcher: value === 'default' ? {...contactFormInputGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormInputGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+						})
+					}}
+
+					globalTypoOption={contactFormInputGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) => setAttributes({ contactFormInputGlobalTypoOption: value })}
+
+					fontFamily={contactFormInputFontFamily}
+					onChangeFontFamily={(value) => setAttributes({ contactFormInputFontFamily: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontFamily: value && false} })}
+
+					fontSize={contactFormInputFontSize}
+					onChangeFontSize={(value) => setAttributes({ contactFormInputFontSize: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontSize: value && false} })}
+
+					fontSizeUnits={contactFormInputFontSizeUnits}
+					onChangeFontSizeUnit={(value) => setAttributes({ contactFormInputFontSizeUnits: value })}
+
+					fontWeight={contactFormInputFontWeight}
+					onChangeFontWeight={(value) => setAttributes({ contactFormInputFontWeight: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontWeight: value && false} })}
+
+					fontStyle={contactFormInputFontStyle}
+					onChangeFontStyle={(value) => setAttributes({ contactFormInputFontStyle: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontStyle: value && false} })}
+
+					textTransform={contactFormInputTextTransform}
+					onChangeTextTransform={(value) => setAttributes({ contactFormInputTextTransform: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, textTransform: value && false} })}
+
+					textDecoration={contactFormInputTextDecoration}
+					onChangeTextDecoration={(value) => setAttributes({ contactFormInputTextDecoration: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, textDecoration: value && false} })}
+
+					letterSpacing={contactFormInputLetterSpacing}
+					onChangeLetterSpacing={(value) => setAttributes({ contactFormInputLetterSpacing: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+					letterSpacingUnits={contactFormInputLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormInputLetterSpacingUnits: value })}
+
+					lineHeight={contactFormInputLineHeight}
+					onChangeLineHeight={(value) => setAttributes({ contactFormInputLineHeight: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, lineHeight: value && false} })}
+
+					lineHeightUnits={contactFormInputLineHeightUnits}
+					onChangeLineHeightUnit={(value) => setAttributes({ contactFormInputLineHeightUnits: value })}
+
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+				<FB_Range
+					min={1}
+					max={100}
+					label={__("Text Indent", "frontis-blocks")}
+					rangeValue={contactFormTextIndentSize}
+					onChangeHandler={(value) => setAttributes({ contactFormTextIndentSize: value })}
+					rangeUnitHandler={(value) => setAttributes({ contactFormTextIndentSizeUnits: value })}
+					deviceType={deviceType}
+					units={contactFormTextIndentSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+				<FB_Range
+					min={1}
+					max={2000}
+					label={__("Input Width", "frontis-blocks")}
+					rangeValue={contactFormInputWidthSize}
+					onChangeHandler={(value) => setAttributes({ contactFormInputWidthSize: value })}
+					rangeUnitHandler={(value) => setAttributes({ contactFormInputWidthSizeUnits: value })}
+					deviceType={deviceType}
+					units={contactFormInputWidthSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+				<FB_Range
+					min={1}
+					max={2000}
+					label={__("Input Height", "frontis-blocks")}
+					rangeValue={contactFormInputHeightSize}
+					onChangeHandler={(value) => setAttributes({ contactFormInputHeightSize: value })}
+					rangeUnitHandler={(value) => setAttributes({ contactFormInputHeightSizeUnits: value })}
+					deviceType={deviceType}
+					units={contactFormInputHeightSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+				<FB_Range
+					min={1}
+					max={2000}
+					label={__("Textarea Width", "frontis-blocks")}
+					rangeValue={contactFormTextareaWidthSize}
+					onChangeHandler={(value) => setAttributes({ contactFormTextareaWidthSize: value })}
+					rangeUnitHandler={(value) => setAttributes({ contactFormTextareaWidthSizeUnits: value })}
+					deviceType={deviceType}
+					units={contactFormTextareaWidthSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+				<FB_Range
+					min={1}
+					max={2000}
+					label={__("Textarea Height", "frontis-blocks")}
+					rangeValue={contactFormTextareaHeightSize}
+					onChangeHandler={(value) => setAttributes({ contactFormTextareaHeightSize: value })}
+					rangeUnitHandler={(value) => setAttributes({ contactFormTextareaHeightSizeUnits: value })}
+					deviceType={deviceType}
+					units={contactFormTextareaHeightSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+				<FB_Range
+					min={1}
+					max={1000}
+					label={__("Spacing", "frontis-blocks")}
+					rangeValue={contactFormSpacingSize}
+					onChangeHandler={(value) => setAttributes({ contactFormSpacingSize: value })}
+					rangeUnitHandler={(value) => setAttributes({ contactFormSpacingUnits: value })}
+					deviceType={deviceType}
+					units={contactFormSpacingUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+
+				<FB_Spacing 
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handlePaddingUnitsHandler}
+					spacingUnits={contactFormPaddingUnits}
+					spacingDesktop={contactFormPaddingDesktop}
+					spacingTablet={contactFormPaddingTablet}
+					spacingMobile={contactFormPaddingMobile}
+					handleSpacingUnitHandler={handlePaddingUnitChange}
+					spacingCombineBtn={contactFormPaddingLink}
+					spacingCombineBtnHandler={handlePaddingCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing 
+					label={__("Margin", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleMarginUnitsHandler}
+					spacingUnits={contactFormMarginUnits}
+					spacingDesktop={contactFormMarginDesktop}
+					spacingTablet={contactFormMarginTablet}
+					spacingMobile={contactFormMarginMobile}
+					handleSpacingUnitHandler={handleMarginUnitChange}
+					spacingCombineBtn={contactFormMarginLink}
+					spacingCombineBtnHandler={handleMarginCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<SelectControl
+						label={__("Border Style", "frontis-blocks")}
+						value={contactFormBorder}
+						options={BORDER_STYLES}
+						onChange={(value) => setAttributes({ contactFormBorder: value })}
+				/>
+
+				<FB_ColorControl
+					label={__("Border Color", "frontis-blocks")}
+					globalColor={contactFormBorderColor}
+					setGlobalColor={(value) => setAttributes({ contactFormBorderColor: value })}
+				/>
+
+				<FB_Spacing 
+					label={__("Border", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleBorderUnitsHandler}
+					spacingUnits={contactFormBorderUnits}
+					spacingDesktop={contactFormBorderDesktop}
+					spacingTablet={contactFormBorderTablet}
+					spacingMobile={contactFormBorderMobile}
+					handleSpacingUnitHandler={handleBorderUnitChange}
+					spacingCombineBtn={contactFormBorderLink}
+					spacingCombineBtnHandler={handleBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing 
+					label={__("Radius Border", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleBorderRadiusUnitsHandler}
+					spacingUnits={contactFormBorderRadiusUnits}
+					spacingDesktop={contactFormBorderRadiusDesktop}
+					spacingTablet={contactFormBorderRadiusTablet}
+					spacingMobile={contactFormBorderRadiusMobile}
+					handleSpacingUnitHandler={handleBorderRadiusUnitChange}
+					spacingCombineBtn={contactFormBorderRadiusLink}
+					spacingCombineBtnHandler={handleBorderRadiusCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<SelectControl
+						label={__("Focus Border Style", "frontis-blocks")}
+						value={contactFormFocusBorder}
+						options={BORDER_STYLES}
+						onChange={(value) => setAttributes({ contactFormFocusBorder: value })}
+				/>
+
+				<FB_ColorControl
+					label={__("Focus Color", "frontis-blocks")}
+					globalColor={contactFormInputFocusColor}
+					setGlobalColor={(value) => setAttributes({ contactFormInputFocusColor: value })}
+				/>
+
+				<FB_Spacing 
+					label={__("Focus Border", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleFocusBorderUnitsHandler}
+					spacingUnits={contactFormFocusBorderUnits}
+					spacingDesktop={contactFormFocusBorderDesktop}
+					spacingTablet={contactFormFocusBorderTablet}
+					spacingMobile={contactFormFocusBorderMobile}
+					handleSpacingUnitHandler={handleFocusBorderUnitChange}
+					spacingCombineBtn={contactFormFocusBorderLink}
+					spacingCombineBtnHandler={handleFocusBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing 
+					label={__("Focus Radius Border", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleFocusBorderRadiusUnitsHandler}
+					spacingUnits={contactFormFocusBorderRadiusUnits}
+					spacingDesktop={contactFormFocusBorderRadiusDesktop}
+					spacingTablet={contactFormFocusBorderRadiusTablet}
+					spacingMobile={contactFormFocusBorderRadiusMobile}
+					handleSpacingUnitHandler={handleFocusBorderRadiusUnitChange}
+					spacingCombineBtn={contactFormFocusBorderRadiusLink}
+					spacingCombineBtnHandler={handleFocusBorderRadiusCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+
+			</PanelBody>
+			<PanelBody title={__("Placeholder", "frontis-blocks")} initialOpen={false}>
+				<FB_ColorControl
+					label={__("Color", "frontis-blocks")}
+					globalColor={contactFormPlaceholderColor}
+					setGlobalColor={(value) => setAttributes({ contactFormPlaceholderColor: value })}
+				/>
+			</PanelBody>
+
+			<PanelBody title={__("Submit", "frontis-blocks")} initialOpen={false}>
+
+				<FB_AlignmentControl
+					label={__("Alignment", "frontis-blocks")}
+					globalAlignment={contactFormSubmitAlignment}
+					setGlobalAlignment={(value) => setAttributes({ contactFormSubmitAlignment: value })}
+				/>
+
+				<FB_Range
+					min={1}
+					max={2000}
+					label={__("Height", "frontis-blocks")}
+					rangeValue={contactFormSubmitHeight}
+					onChangeHandler={(value) => setAttributes({ contactFormSubmitHeight: value })}
+					rangeUnitHandler={(value) => setAttributes({ contactFormSubmitHeightUnits: value })}
+					deviceType={deviceType}
+					units={contactFormSubmitHeightUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={''}
+				/>
+				
+				<SelectControl
+					label={__("Width", "frontis-blocks")}
+					value={contactFormSubmitWidthSelect}
+					options={WIDTH_STYLES}
+					onChange={(value) => setAttributes({ contactFormSubmitWidthSelect: value })}
+				/>
+				{contactFormSubmitWidthSelect === 'custom' && (
+					<FB_Range
+						min={1}
+						max={2000}
+						label={__("Width", "frontis-blocks")}
+						rangeValue={contactFormSubmitWidth}
+						onChangeHandler={(value) => setAttributes({ contactFormSubmitWidth: value })}
+						rangeUnitHandler={(value) => setAttributes({ contactFormSubmitWidthUnits: value })}
+						deviceType={deviceType}
+						units={contactFormSubmitWidthUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={''}
+					/>
+				)}
+
+
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={contactFormSubmitGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) => setAttributes({ contactFormSubmitGlobalTypographyData: value })}
+
+					globalTypoType={contactFormSubmitGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({ 
+							contactFormSubmitGlobalTypoType: value, 
+							contactFormSubmitGlobalTypoSwitcher: value === 'default' ? {...contactFormSubmitGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormSubmitGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+						})
+					}}
+
+					globalTypoOption={contactFormSubmitGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) => setAttributes({ contactFormSubmitGlobalTypoOption: value })}
+
+					fontFamily={contactFormSubmitFontFamily}
+					onChangeFontFamily={(value) => setAttributes({ contactFormSubmitFontFamily: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontFamily: value && false} })}
+
+					fontSize={contactFormSubmitFontSize}
+					onChangeFontSize={(value) => setAttributes({ contactFormSubmitFontSize: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontSize: value && false} })}
+
+					fontSizeUnits={contactFormSubmitFontSizeUnits}
+					onChangeFontSizeUnit={(value) => setAttributes({ contactFormSubmitFontSizeUnits: value })}
+
+					fontWeight={contactFormSubmitFontWeight}
+					onChangeFontWeight={(value) => setAttributes({ contactFormSubmitFontWeight: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontWeight: value && false} })}
+
+					fontStyle={contactFormSubmitFontStyle}
+					onChangeFontStyle={(value) => setAttributes({ contactFormSubmitFontStyle: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontStyle: value && false} })}
+
+					textTransform={contactFormSubmitTextTransform}
+					onChangeTextTransform={(value) => setAttributes({ contactFormSubmitTextTransform: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, textTransform: value && false} })}
+
+					textDecoration={contactFormSubmitTextDecoration}
+					onChangeTextDecoration={(value) => setAttributes({ contactFormSubmitTextDecoration: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, textDecoration: value && false} })}
+
+					letterSpacing={contactFormSubmitLetterSpacing}
+					onChangeLetterSpacing={(value) => setAttributes({ contactFormSubmitLetterSpacing: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+					letterSpacingUnits={contactFormSubmitLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormSubmitLetterSpacingUnits: value })}
+
+					lineHeight={contactFormSubmitLineHeight}
+					onChangeLineHeight={(value) => setAttributes({ contactFormSubmitLineHeight: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, lineHeight: value && false} })}
+
+					lineHeightUnits={contactFormSubmitLineHeightUnits}
+					onChangeLineHeightUnit={(value) => setAttributes({ contactFormSubmitLineHeightUnits: value })}
+
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+				
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={contactFormSubmitColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ contactFormSubmitColorSwitcher: value })}
+				/>
+
+				{contactFormSubmitColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={contactFormSubmitColor}
+						setGlobalColor={(value) => setAttributes({ contactFormSubmitColor: value })}
+					/>
+				)}
+
+				{contactFormSubmitColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={contactFormSubmitHoverColor}
+						setGlobalColor={(value) => setAttributes({ contactFormSubmitHoverColor: value })}
+					/>
+				)}
+
+
+				<FB_SwitcherControl
+					label={__("Background Color", "frontis-blocks")}
+					globalSwitcher={contactFormSubmitBgColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ contactFormSubmitBgColorSwitcher: value })}
+				/>
+
+				{contactFormSubmitBgColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={contactFormSubmitBgColor}
+						setGlobalColor={(value) => setAttributes({ contactFormSubmitBgColor: value })}
+					/>
+				)}
+
+				{contactFormSubmitBgColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={contactFormSubmitBgHoverColor}
+						setGlobalColor={(value) => setAttributes({ contactFormSubmitBgHoverColor: value })}
+					/>
+				)}
+				<FB_Spacing 
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={contactFormSubmitPaddingUnitsHandler}
+					spacingUnits={contactFormSubmitPaddingUnits}
+					spacingDesktop={contactFormSubmitPaddingDesktop}
+					spacingTablet={contactFormSubmitPaddingTablet}
+					spacingMobile={contactFormSubmitPaddingMobile}
+					handleSpacingUnitHandler={contactFormSubmitPaddingUnitsChange}
+					spacingCombineBtn={contactFormSubmitPaddingLink}
+					spacingCombineBtnHandler={contactFormSubmitPaddingLinkBtn}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing 
+					label={__("Margin", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={contactFormSubmitMarginUnitsHandler}
+					spacingUnits={contactFormSubmitMarginUnits}
+					spacingDesktop={contactFormSubmitMarginDesktop}
+					spacingTablet={contactFormSubmitMarginTablet}
+					spacingMobile={contactFormSubmitMarginMobile}
+					handleSpacingUnitHandler={contactFormSubmitMarginUnitsChange}
+					spacingCombineBtn={contactFormSubmitMarginLink}
+					spacingCombineBtnHandler={contactFormSubmitMarginLinkBtn}
+					setAttributes={setAttributes}
+				/>
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={contactFormSubmitBorder}
+					options={BORDER_STYLES}
+					onChange={(value) => setAttributes({ contactFormSubmitBorder: value })}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={contactFormSubmitBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ contactFormSubmitBorderColorSwitcher: value })}
+				/>
+
+				{contactFormSubmitBorderColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={contactFormSubmitBorderColor}
+						setGlobalColor={(value) => setAttributes({ contactFormSubmitBorderColor: value })}
+					/>
+				)}
+
+				{contactFormSubmitBorderColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={contactFormSubmitBorderHoverColor}
+						setGlobalColor={(value) => setAttributes({ contactFormSubmitBorderHoverColor: value })}
+					/>
+				)}
+
+				<FB_Spacing 
+					label={__("Border", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={contactFormSubmitBorderUnitsHandler}
+					spacingUnits={contactFormSubmitBorderUnits}
+					spacingDesktop={contactFormSubmitBorderDesktop}
+					spacingTablet={contactFormSubmitBorderTablet}
+					spacingMobile={contactFormSubmitBorderMobile}
+					handleSpacingUnitHandler={contactFormSubmitBorderUnitsChange}
+					spacingCombineBtn={contactFormSubmitBorderLink}
+					spacingCombineBtnHandler={contactFormSubmitBorderLinkBtn}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing 
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={contactFormSubmitBorderRadiusUnitsHandler}
+					spacingUnits={contactFormSubmitBorderRadiusUnits}
+					spacingDesktop={contactFormSubmitBorderRadiusDesktop}
+					spacingTablet={contactFormSubmitBorderRadiusTablet}
+					spacingMobile={contactFormSubmitBorderRadiusMobile}
+					handleSpacingUnitHandler={contactFormSubmitBorderRadiusUnitsChange}
+					spacingCombineBtn={contactFormSubmitBorderRadiusLink}
+					spacingCombineBtnHandler={contactFormSubmitBorderRadiusLinkBtn}
+					setAttributes={setAttributes}
+				/>
+
+
+			</PanelBody>
+			<PanelBody title={__("Success Message", "frontis-blocks")} initialOpen={false}>
+
+
+			<FB_TypographyControl
+				globalTypoControlActive={true}
+				globalTypoSwitcher={contactFormSuccessGlobalTypoSwitcher}
+				storeGlobalTypographyData={(value) => setAttributes({ contactFormSuccessGlobalTypographyData: value })}
+
+				globalTypoType={contactFormSuccessGlobalTypoType}
+				onChangeGlobalTypoType={(value) => {
+					setAttributes({ 
+						contactFormSuccessGlobalTypoType: value, 
+						contactFormSuccessGlobalTypoSwitcher: value === 'default' ? {...contactFormSuccessGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormSuccessGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+					})
+				}}
+
+				globalTypoOption={contactFormSuccessGlobalTypoOption}
+				onChangeGlobalTypoOption={(value) => setAttributes({ contactFormSuccessGlobalTypoOption: value })}
+
+				fontFamily={contactFormSuccessFontFamily}
+				onChangeFontFamily={(value) => setAttributes({ contactFormSuccessFontFamily: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontFamily: value && false} })}
+
+				fontSize={contactFormSuccessFontSize}
+				onChangeFontSize={(value) => setAttributes({ contactFormSuccessFontSize: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontSize: value && false} })}
+
+				fontSizeUnits={contactFormSuccessFontSizeUnits}
+				onChangeFontSizeUnit={(value) => setAttributes({ contactFormSuccessFontSizeUnits: value })}
+
+				fontWeight={contactFormSuccessFontWeight}
+				onChangeFontWeight={(value) => setAttributes({ contactFormSuccessFontWeight: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontWeight: value && false} })}
+
+				fontStyle={contactFormSuccessFontStyle}
+				onChangeFontStyle={(value) => setAttributes({ contactFormSuccessFontStyle: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontStyle: value && false} })}
+
+				textTransform={contactFormSuccessTextTransform}
+				onChangeTextTransform={(value) => setAttributes({ contactFormSuccessTextTransform: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, textTransform: value && false} })}
+
+				textDecoration={contactFormSuccessTextDecoration}
+				onChangeTextDecoration={(value) => setAttributes({ contactFormSuccessTextDecoration: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, textDecoration: value && false} })}
+
+				letterSpacing={contactFormSuccessLetterSpacing}
+				onChangeLetterSpacing={(value) => setAttributes({ contactFormSuccessLetterSpacing: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+				letterSpacingUnits={contactFormSuccessLetterSpacingUnits}
+				onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormSuccessLetterSpacingUnits: value })}
+
+				lineHeight={contactFormSuccessLineHeight}
+				onChangeLineHeight={(value) => setAttributes({ contactFormSuccessLineHeight: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, lineHeight: value && false} })}
+
+				lineHeightUnits={contactFormSuccessLineHeightUnits}
+				onChangeLineHeightUnit={(value) => setAttributes({ contactFormSuccessLineHeightUnits: value })}
+
+				deviceType={deviceType}
+				setAttributes={setAttributes}
+			/>
+
+				<FB_ColorControl
+					label={__("Color", "frontis-blocks")}
+					globalColor={contactFormSuccessColor}
+					setGlobalColor={(value) => setAttributes({ contactFormSuccessColor: value })}
+				/>
+
+				<FB_ColorControl
+					label={__("Background Color", "frontis-blocks")}
+					globalColor={contactFormSuccessBgColor}
+					setGlobalColor={(value) => setAttributes({ contactFormSuccessBgColor: value })}
+				/>
+
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={contactFormSuccessBorder}
+					options={BORDER_STYLES}
+					onChange={(value) => setAttributes({ contactFormSuccessBorder: value })}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={contactFormSuccessBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ contactFormSuccessBorderColorSwitcher: value })}
+				/>
+
+				{contactFormSuccessBorderColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={contactFormSuccessBorderColor}
+						setGlobalColor={(value) => setAttributes({ contactFormSuccessBorderColor: value })}
+					/>
+				)}
+
+				{contactFormSuccessBorderColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={contactFormSuccessBorderHoverColor}
+						setGlobalColor={(value) => setAttributes({ contactFormSuccessBorderHoverColor: value })}
+					/>
+				)}
+
+				<FB_Spacing 
+					label={__("Border", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={contactFormSuccessBorderUnitsHandler}
+					spacingUnits={contactFormSuccessBorderUnits}
+					spacingDesktop={contactFormSuccessBorderDesktop}
+					spacingTablet={contactFormSuccessBorderTablet}
+					spacingMobile={contactFormSuccessBorderMobile}
+					handleSpacingUnitHandler={contactFormSuccessBorderUnitsChange}
+					spacingCombineBtn={contactFormSuccessBorderLink}
+					spacingCombineBtnHandler={contactFormSuccessBorderLinkBtn}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing 
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={contactFormSuccessBorderRadiusUnitsHandler}
+					spacingUnits={contactFormSuccessBorderRadiusUnits}
+					spacingDesktop={contactFormSuccessBorderRadiusDesktop}
+					spacingTablet={contactFormSuccessBorderRadiusTablet}
+					spacingMobile={contactFormSuccessBorderRadiusMobile}
+					handleSpacingUnitHandler={contactFormSuccessBorderRadiusUnitsChange}
+					spacingCombineBtn={contactFormSuccessBorderRadiusLink}
+					spacingCombineBtnHandler={contactFormSuccessBorderRadiusLinkBtn}
+					setAttributes={setAttributes}
+				/>
+			</PanelBody>
+			<PanelBody title={__("Error Message", "frontis-blocks")} initialOpen={false}>
+
+
+			<FB_TypographyControl
+				globalTypoControlActive={true}
+				globalTypoSwitcher={contactFormErrorGlobalTypoSwitcher}
+				storeGlobalTypographyData={(value) => setAttributes({ contactFormErrorGlobalTypographyData: value })}
+
+				globalTypoType={contactFormErrorGlobalTypoType}
+				onChangeGlobalTypoType={(value) => {
+					setAttributes({ 
+						contactFormErrorGlobalTypoType: value, 
+						contactFormErrorGlobalTypoSwitcher: value === 'default' ? {...contactFormErrorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormErrorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+					})
+				}}
+
+				globalTypoOption={contactFormErrorGlobalTypoOption}
+				onChangeGlobalTypoOption={(value) => setAttributes({ contactFormErrorGlobalTypoOption: value })}
+
+				fontFamily={contactFormErrorFontFamily}
+				onChangeFontFamily={(value) => setAttributes({ contactFormErrorFontFamily: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontFamily: value && false} })}
+
+				fontSize={contactFormErrorFontSize}
+				onChangeFontSize={(value) => setAttributes({ contactFormErrorFontSize: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontSize: value && false} })}
+
+				fontSizeUnits={contactFormErrorFontSizeUnits}
+				onChangeFontSizeUnit={(value) => setAttributes({ contactFormErrorFontSizeUnits: value })}
+
+				fontWeight={contactFormErrorFontWeight}
+				onChangeFontWeight={(value) => setAttributes({ contactFormErrorFontWeight: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontWeight: value && false} })}
+
+				fontStyle={contactFormErrorFontStyle}
+				onChangeFontStyle={(value) => setAttributes({ contactFormErrorFontStyle: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontStyle: value && false} })}
+
+				textTransform={contactFormErrorTextTransform}
+				onChangeTextTransform={(value) => setAttributes({ contactFormErrorTextTransform: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, textTransform: value && false} })}
+
+				textDecoration={contactFormErrorTextDecoration}
+				onChangeTextDecoration={(value) => setAttributes({ contactFormErrorTextDecoration: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, textDecoration: value && false} })}
+
+				letterSpacing={contactFormErrorLetterSpacing}
+				onChangeLetterSpacing={(value) => setAttributes({ contactFormErrorLetterSpacing: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+				letterSpacingUnits={contactFormErrorLetterSpacingUnits}
+				onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormErrorLetterSpacingUnits: value })}
+
+				lineHeight={contactFormErrorLineHeight}
+				onChangeLineHeight={(value) => setAttributes({ contactFormErrorLineHeight: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, lineHeight: value && false} })}
+
+				lineHeightUnits={contactFormErrorLineHeightUnits}
+				onChangeLineHeightUnit={(value) => setAttributes({ contactFormErrorLineHeightUnits: value })}
+
+				deviceType={deviceType}
+				setAttributes={setAttributes}
+			/>
+
+				<FB_ColorControl
+					label={__("Color", "frontis-blocks")}
+					globalColor={contactFormErrorColor}
+					setGlobalColor={(value) => setAttributes({ contactFormErrorColor: value })}
+				/>
+
+				<FB_Spacing 
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={contactFormErrorPaddingUnitsHandler}
+					spacingUnits={contactFormErrorPaddingUnits}
+					spacingDesktop={contactFormErrorPaddingDesktop}
+					spacingTablet={contactFormErrorPaddingTablet}
+					spacingMobile={contactFormErrorPaddingMobile}
+					handleSpacingUnitHandler={contactFormErrorPaddingUnitsChange}
+					spacingCombineBtn={contactFormErrorPaddingLink}
+					spacingCombineBtnHandler={contactFormErrorPaddingLinkBtn}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing 
+					label={__("Margin", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={contactFormErrorMarginUnitsHandler}
+					spacingUnits={contactFormErrorMarginUnits}
+					spacingDesktop={contactFormErrorMarginDesktop}
+					spacingTablet={contactFormErrorMarginTablet}
+					spacingMobile={contactFormErrorMarginMobile}
+					handleSpacingUnitHandler={contactFormErrorMarginUnitsChange}
+					spacingCombineBtn={contactFormErrorMarginLink}
+					spacingCombineBtnHandler={contactFormErrorMarginLinkBtn}
+					setAttributes={setAttributes}
+				/>
+			</PanelBody>
+		</>
+	);
+		
+	/**
+	 * Inspector Advanced Controls
+	 */
+	const advancedControls = (
+		<>
+			<div className="fb-setting-advanced-tab-wrapper">
+				<div className="fb-setting-inner-wrapper">
+					<PanelBody
+						title={__("Layout", "frontis-blocks")}
+						initialOpen={true}
+						className='fb-setting-layout-header' 
+					>
+						<FB_Range
+							min={0}
+							max={10000000}
+							label={__("Z Index", "frontis-blocks")}
+							rangeValue={contactFormGlobalZIndex}
+							onChangeHandler={(value) => setAttributes({ contactFormGlobalZIndex: value === 0 ? undefined : value })}
+							deviceType={deviceType}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={""}
+							isRangeUnit={false}
+
+						/>
+
+						<SelectControl
+							label={__("Overflow", "frontis-blocks")}
+							value={contactFormOverflow}
+							options={OVERFLOW_OP}
+							onChange={(value) => setAttributes({ contactFormOverflow: value })}
+						/>
+
+						<FB_PositionControl
+							deviceType={deviceType}
+							positionType={contactFormPositionType}
+							setPositionType={(value) => setAttributes({ contactFormPositionType: value })}
+																			
+							HZOrientationType={contactFormHZOrientationType}
+							setHZOrientationType={(value) =>
+								setAttributes({ contactFormHZOrientationType: value })
+							}
+							VROrientationType={contactFormVROrientationType}
+							setVROrientationType={(value) =>
+								setAttributes({ contactFormVROrientationType: value })
+							}
+																				
+							HZLeftOffset={contactFormHZLeftOffset}
+							setHZLeftOffset={(value) => setAttributes({ contactFormHZLeftOffset: value })}
+							HZLeftOffsetUnits={contactFormHZLeftOffsetUnits}
+							setHZLeftOffsetUnits={(value) => setAttributes({ contactFormHZLeftOffsetUnits: value })}
+							HZRightOffset={contactFormHZRightOffset}
+							setHZRightOffset={(value) => setAttributes({ contactFormHZRightOffset: value })}
+							HZRightOffsetUnits={contactFormHZRightOffsetUnits}
+							setHZRightOffsetUnits={(value) => setAttributes({ contactFormHZRightOffsetUnits: value })}
+																			
+							VRTopOffset={contactFormVRTopOffset}
+							setVRTopOffset={(value) => setAttributes({ contactFormVRTopOffset: value })}
+							VRTopOffsetUnits={contactFormVRTopOffsetUnits}
+							setVRTopOffsetUnits={(value) => setAttributes({ contactFormVRTopOffsetUnits: value })}
+							VRBottomOffset={contactFormVRBottomOffset}
+							setVRBottomOffset={(value) => setAttributes({ contactFormVRBottomOffset: value })}
+							VRBottomOffsetUnits={contactFormVRBottomOffsetUnits}
+							setVRBottomOffsetUnits={(value) => setAttributes({ contactFormVRBottomOffsetUnits: value })}
+
+							setAttributes={setAttributes}
+						/>
+
+						<FB_InputControl
+							label={__("CSS ID", "frontis-blocks")}
+							value={contactFormGlobalWraperID}
+							onChangeValue={(value) => setAttributes({ contactFormGlobalWraperID: value })}
+							helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+						/>
+
+						<FB_InputControl
+							label={__("CSS Class", "frontis-blocks")}
+							value={contactFormGlobalWraperClass}
+							onChangeValue={(value) => setAttributes({ contactFormGlobalWraperClass: value })}
+							helpText={__("Separate with spaces key.", "frontis-blocks")}
+						/>
+						
+					</PanelBody>
+
+					<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
+						<FB_Spacing 
+							label={__("Padding", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
+							spacingUnits={contactFormGlobalPaddingUnits}
+							spacingDesktop={contactFormGlobalPaddingDesktop}
+							spacingTablet={contactFormGlobalPaddingTablet}
+							spacingMobile={contactFormGlobalPaddingMobile}
+							handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
+							spacingCombineBtn={contactFormGlobalPaddingLink}
+							spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
+							setAttributes={setAttributes}
+						/>
+						<FB_Spacing 
+							label={__("Margin", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleGlobalMarginUnitsHandler}
+							spacingUnits={contactFormGlobalMarginUnits}
+							spacingDesktop={contactFormGlobalMarginDesktop}
+							spacingTablet={contactFormGlobalMarginTablet}
+							spacingMobile={contactFormGlobalMarginMobile}
+							handleSpacingUnitHandler={handleGlobalMarginUnitChange}
+							spacingCombineBtn={contactFormGlobalMarginLink}
+							spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
+							setAttributes={setAttributes}
+						/>
+					</PanelBody>
+
+					<PanelBody title="Background Color" initialOpen={false} >
+						<FB_SwitcherControl
+							label={__("Background Color", "frontis-blocks")}
+							globalSwitcher={contactFormGlobalBgColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ contactFormGlobalBgColorSwitcher: value })}
+						/>
+
+						{contactFormGlobalBgColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={contactFormGlobalBgColor}
+								setGlobalColor={(value) => setAttributes({ contactFormGlobalBgColor: value })}
+							/>
+						)}
+
+						{contactFormGlobalBgColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={contactFormGlobalBgHoverColor}
+								setGlobalColor={(value) => setAttributes({ contactFormGlobalBgHoverColor: value })}
+							/>
+						)}
+					</PanelBody>
+					<PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
+
+						<SelectControl
+								label={__("Border Style", "frontis-blocks")}
+								value={contactFormGlobalBorder}
+								options={BORDER_STYLES}
+								onChange={(value) => setAttributes({ contactFormGlobalBorder: value })}
+						/>
+
+
+						<FB_SwitcherControl
+							label={__("Border Color", "frontis-blocks")}
+							globalSwitcher={contactFormGlobalBorderColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ contactFormGlobalBorderColorSwitcher: value })}
+						/>
+
+						{contactFormGlobalBorderColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={contactFormGlobalBorderColor}
+								setGlobalColor={(value) => setAttributes({ contactFormGlobalBorderColor: value })}
+							/>
+						)}
+
+						{contactFormGlobalBorderColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={contactFormGlobalBorderHoverColor}
+								setGlobalColor={(value) => setAttributes({ contactFormGlobalBorderHoverColor: value })}
+							/>
+						)}
+
+						<FB_Spacing 
+							label={__("Border", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleGlobalBorderUnitsHandler}
+							spacingUnits={contactFormGlobalBorderUnits}
+							spacingDesktop={contactFormGlobalBorderDesktop}
+							spacingTablet={contactFormGlobalBorderTablet}
+							spacingMobile={contactFormGlobalBorderMobile}
+							handleSpacingUnitHandler={handleGlobalBorderUnitChange}
+							spacingCombineBtn={contactFormGlobalBorderLink}
+							spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
+							setAttributes={setAttributes}
+						/>
+
+						<FB_Spacing 
+							label={__("Border Radius", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
+							spacingUnits={contactFormGlobalBorderRadiusUnits}
+							spacingDesktop={contactFormGlobalBorderRadiusDesktop}
+							spacingTablet={contactFormGlobalBorderRadiusTablet}
+							spacingMobile={contactFormGlobalBorderRadiusMobile}
+							handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
+							spacingCombineBtn={contactFormGlobalBorderRadiusLink}
+							spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
+							setAttributes={setAttributes}
+						/>
+
+						<FB_SwitcherControl
+							label={__("Box Shadow", "frontis-blocks")}
+							globalSwitcher={contactFormGlobalBoxShadowSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ contactFormGlobalBoxShadowSwitcher: value })}
+						/>
+
+						{contactFormGlobalBoxShadowSwitcher === 'normal' && (
+							<FB_BoxShadowControl
+								label={__("Normal Shadow", "frontis-blocks")}
+								onBoxShadowChange={(value) => setAttributes({ contactFormGlobalBoxShadowValues: value })}
+								initialShadowValue={contactFormGlobalBoxShadowValues}
+								onBoxShadowStyleChange={(value) => setAttributes({ contactFormGlobalBoxShadowCssValue: value })}
+							/>
+						)}
+
+						{contactFormGlobalBoxShadowSwitcher === 'hover' && (
+							<FB_BoxShadowControl
+								label={__("Hover Shadow", "frontis-blocks")}
+								onBoxShadowChange={(value) => setAttributes({ contactFormGlobalBoxShadowHoverValues: value })}
+								initialShadowValue={contactFormGlobalBoxShadowHoverValues}
+								onBoxShadowStyleChange={(value) => setAttributes({ contactFormGlobalBoxShadowHoverCssValue: value })}
+							/>
+						)}
+					</PanelBody>
+
+					<PanelBody
+						title={__("Responsive Control", "frontis-blocks")}
+						initialOpen={false}
+						className="fb-setting-responsive-control-wrapper"
+					>
+						<FB_VisibilityControl
+							desktopValue={contactFormDesktopSwitcher}
+							setDesktopValue={(value) => setAttributes({ contactFormDesktopSwitcher: value })}
+
+							tabletValue={contactFormTabletSwitcher}
+							setTabletValue={(value) => setAttributes({ contactFormTabletSwitcher: value })}
+
+							mobileValue={contactFormMobileSwitcher}
+							setMobileValue={(value) => setAttributes({ contactFormMobileSwitcher: value })}
+						/>
+					</PanelBody>
+					<PanelBody
+						title={__("Custom CSS", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_CustomCSSEditor  
+							value={contactFormCustomCSS} 
+							onChangeValue={(value) => setAttributes({ contactFormCustomCSS: value })}
+						/>
+					</PanelBody>
+				</div>
+			</div>
+		</>
+	);
+
 	return (
 		<>
 			<style>
@@ -2841,1109 +3925,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 
             `}
 			</style>
-			<InspectorControls key="controls">
-				<div className="fb-inspector-control">
-					<TabPanel
-						className="fb-parent-tab-panel"
-						activeClass="active-tab"
-						tabs={[
-							{
-								name: "general",
-								title: "General",
-								className: "fb-tab general",
-							},
-							{
-								name: "styles",
-								title: "Style",
-								className: "fb-tab styles",
-							},
-							{
-								name: "advanced",
-								title: "Advanced",
-								className: "fb-tab advanced",
-							},
-						]}
-					>
-						{(tab) => (
-							<div className={"fb-tab-controls" + tab.name}>
-								{tab.name === "general" && (
-									<>
-										<PanelBody
-											title={__("Contact Form", "frontis-blocks")}
-											initialOpen={true}
-										>
-											<BaseControl className="fb-fluent-from">
-												<SelectControl
-													label={__("Select Form", "frontis-blocks")}
-													value={formId}
-													options={modifiedFormLists}
-													onChange={(newSelectedForm) =>
-														selectWcf7Form(newSelectedForm)
-													}
-												/>
-
-												<ToggleControl
-													label={__("Show Placeholder", "frontis-blocks")}
-													checked={showPlaceholder}
-													onChange={(showPlaceholder) =>
-														setAttributes({
-															showPlaceholder,
-														})
-													}
-												/>
-												<ToggleControl
-													label={__("Show Error Message", "frontis-blocks")}
-													checked={showErrorMessage}
-													onChange={(showErrorMessage) =>
-														setAttributes({
-															showErrorMessage,
-														})
-													}
-												/>
-											</BaseControl>
-										</PanelBody>
-									</>
-								)}
-                                {tab.name === "styles" && (
-                                    <>
-                                        <PanelBody title={__("Label", "frontis-blocks")} initialOpen={true}>
-
-
-                                            <FB_SwitcherControl
-                                                label={__("Color", "frontis-blocks")}
-                                                globalSwitcher={contactFormLabelColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ contactFormLabelColorSwitcher: value })}
-                                            />
-
-                                            {contactFormLabelColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={contactFormLabelColor}
-                                                    setGlobalColor={(value) => setAttributes({ contactFormLabelColor: value })}
-                                                />
-                                            )}
-
-                                            {contactFormLabelColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={contactFormLabelHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ contactFormLabelHoverColor: value })}
-                                                />
-                                            )}
-
-											<FB_TypographyControl
-												globalTypoControlActive={true}
-												globalTypoSwitcher={contactFormLabelGlobalTypoSwitcher}
-												storeGlobalTypographyData={(value) => setAttributes({ contactFormLabelGlobalTypographyData: value })}
-
-												globalTypoType={contactFormLabelGlobalTypoType}
-												onChangeGlobalTypoType={(value) => {
-													setAttributes({ 
-														contactFormLabelGlobalTypoType: value, 
-														contactFormLabelGlobalTypoSwitcher: value === 'default' ? {...contactFormLabelGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormLabelGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-													})
-												}}
-
-												globalTypoOption={contactFormLabelGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ contactFormLabelGlobalTypoOption: value })}
-
-												fontFamily={contactFormLabelFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ contactFormLabelFontFamily: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontFamily: value && false} })}
-
-												fontSize={contactFormLabelFontSize}
-												onChangeFontSize={(value) => setAttributes({ contactFormLabelFontSize: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontSize: value && false} })}
-
-												fontSizeUnits={contactFormLabelFontSizeUnits}
-												onChangeFontSizeUnit={(value) => setAttributes({ contactFormLabelFontSizeUnits: value })}
-
-												fontWeight={contactFormLabelFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ contactFormLabelFontWeight: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontWeight: value && false} })}
-
-												fontStyle={contactFormLabelFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ contactFormLabelFontStyle: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontStyle: value && false} })}
-
-												textTransform={contactFormLabelTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ contactFormLabelTextTransform: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, textTransform: value && false} })}
-
-												textDecoration={contactFormLabelTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ contactFormLabelTextDecoration: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, textDecoration: value && false} })}
-
-												letterSpacing={contactFormLabelLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ contactFormLabelLetterSpacing: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-												letterSpacingUnits={contactFormLabelLetterSpacingUnits}
-												onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormLabelLetterSpacingUnits: value })}
-
-												lineHeight={contactFormLabelLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ contactFormLabelLineHeight: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, lineHeight: value && false} })}
-
-												lineHeightUnits={contactFormLabelLineHeightUnits}
-												onChangeLineHeightUnit={(value) => setAttributes({ contactFormLabelLineHeightUnits: value })}
-
-												deviceType={deviceType}
-												setAttributes={setAttributes}
-											/>
-                                        </PanelBody>
-                                        <PanelBody title={__("Input & Textarea", "frontis-blocks")} initialOpen={false}>
-
-                                            <FB_ColorControl
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalColor={contactFormInputBgColor}
-                                                setGlobalColor={(value) => setAttributes({ contactFormInputBgColor: value })}
-                                            />
-
-                                            <FB_ColorControl
-                                                label={__("Color", "frontis-blocks")}
-                                                globalColor={contactFormInputColor}
-                                                setGlobalColor={(value) => setAttributes({ contactFormInputColor: value })}
-                                            />
-
-
-											<FB_TypographyControl
-												globalTypoControlActive={true}
-												globalTypoSwitcher={contactFormInputGlobalTypoSwitcher}
-												storeGlobalTypographyData={(value) => setAttributes({ contactFormInputGlobalTypographyData: value })}
-
-												globalTypoType={contactFormInputGlobalTypoType}
-												onChangeGlobalTypoType={(value) => {
-													setAttributes({ 
-														contactFormInputGlobalTypoType: value, 
-														contactFormInputGlobalTypoSwitcher: value === 'default' ? {...contactFormInputGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormInputGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-													})
-												}}
-
-												globalTypoOption={contactFormInputGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ contactFormInputGlobalTypoOption: value })}
-
-												fontFamily={contactFormInputFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ contactFormInputFontFamily: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontFamily: value && false} })}
-
-												fontSize={contactFormInputFontSize}
-												onChangeFontSize={(value) => setAttributes({ contactFormInputFontSize: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontSize: value && false} })}
-
-												fontSizeUnits={contactFormInputFontSizeUnits}
-												onChangeFontSizeUnit={(value) => setAttributes({ contactFormInputFontSizeUnits: value })}
-
-												fontWeight={contactFormInputFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ contactFormInputFontWeight: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontWeight: value && false} })}
-
-												fontStyle={contactFormInputFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ contactFormInputFontStyle: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontStyle: value && false} })}
-
-												textTransform={contactFormInputTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ contactFormInputTextTransform: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, textTransform: value && false} })}
-
-												textDecoration={contactFormInputTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ contactFormInputTextDecoration: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, textDecoration: value && false} })}
-
-												letterSpacing={contactFormInputLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ contactFormInputLetterSpacing: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-												letterSpacingUnits={contactFormInputLetterSpacingUnits}
-												onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormInputLetterSpacingUnits: value })}
-
-												lineHeight={contactFormInputLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ contactFormInputLineHeight: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, lineHeight: value && false} })}
-
-												lineHeightUnits={contactFormInputLineHeightUnits}
-												onChangeLineHeightUnit={(value) => setAttributes({ contactFormInputLineHeightUnits: value })}
-
-												deviceType={deviceType}
-												setAttributes={setAttributes}
-											/>
-                                            <FB_Range
-                                                min={1}
-                                                max={100}
-                                                label={__("Text Indent", "frontis-blocks")}
-                                                rangeValue={contactFormTextIndentSize}
-                                                onChangeHandler={(value) => setAttributes({ contactFormTextIndentSize: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ contactFormTextIndentSizeUnits: value })}
-                                                deviceType={deviceType}
-                                                units={contactFormTextIndentSizeUnits}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={""}
-                                            />
-                                            <FB_Range
-                                                min={1}
-                                                max={2000}
-                                                label={__("Input Width", "frontis-blocks")}
-                                                rangeValue={contactFormInputWidthSize}
-                                                onChangeHandler={(value) => setAttributes({ contactFormInputWidthSize: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ contactFormInputWidthSizeUnits: value })}
-                                                deviceType={deviceType}
-                                                units={contactFormInputWidthSizeUnits}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={""}
-                                            />
-                                            <FB_Range
-                                                min={1}
-                                                max={2000}
-                                                label={__("Input Height", "frontis-blocks")}
-                                                rangeValue={contactFormInputHeightSize}
-                                                onChangeHandler={(value) => setAttributes({ contactFormInputHeightSize: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ contactFormInputHeightSizeUnits: value })}
-                                                deviceType={deviceType}
-                                                units={contactFormInputHeightSizeUnits}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={""}
-                                            />
-                                            <FB_Range
-                                                min={1}
-                                                max={2000}
-                                                label={__("Textarea Width", "frontis-blocks")}
-                                                rangeValue={contactFormTextareaWidthSize}
-                                                onChangeHandler={(value) => setAttributes({ contactFormTextareaWidthSize: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ contactFormTextareaWidthSizeUnits: value })}
-                                                deviceType={deviceType}
-                                                units={contactFormTextareaWidthSizeUnits}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={""}
-                                            />
-                                            <FB_Range
-                                                min={1}
-                                                max={2000}
-                                                label={__("Textarea Height", "frontis-blocks")}
-                                                rangeValue={contactFormTextareaHeightSize}
-                                                onChangeHandler={(value) => setAttributes({ contactFormTextareaHeightSize: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ contactFormTextareaHeightSizeUnits: value })}
-                                                deviceType={deviceType}
-                                                units={contactFormTextareaHeightSizeUnits}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={""}
-                                            />
-                                            <FB_Range
-                                                min={1}
-                                                max={1000}
-                                                label={__("Spacing", "frontis-blocks")}
-                                                rangeValue={contactFormSpacingSize}
-                                                onChangeHandler={(value) => setAttributes({ contactFormSpacingSize: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ contactFormSpacingUnits: value })}
-                                                deviceType={deviceType}
-                                                units={contactFormSpacingUnits}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={""}
-                                            />
-
-                                            <FB_Spacing 
-                                                label={__("Padding", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={handlePaddingUnitsHandler}
-                                                spacingUnits={contactFormPaddingUnits}
-                                                spacingDesktop={contactFormPaddingDesktop}
-                                                spacingTablet={contactFormPaddingTablet}
-                                                spacingMobile={contactFormPaddingMobile}
-                                                handleSpacingUnitHandler={handlePaddingUnitChange}
-                                                spacingCombineBtn={contactFormPaddingLink}
-                                                spacingCombineBtnHandler={handlePaddingCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />
-
-											<FB_Spacing 
-                                                label={__("Margin", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={handleMarginUnitsHandler}
-                                                spacingUnits={contactFormMarginUnits}
-                                                spacingDesktop={contactFormMarginDesktop}
-                                                spacingTablet={contactFormMarginTablet}
-                                                spacingMobile={contactFormMarginMobile}
-                                                handleSpacingUnitHandler={handleMarginUnitChange}
-                                                spacingCombineBtn={contactFormMarginLink}
-                                                spacingCombineBtnHandler={handleMarginCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />
-
-                                            <SelectControl
-                                                    label={__("Border Style", "frontis-blocks")}
-                                                    value={contactFormBorder}
-                                                    options={BORDER_STYLES}
-                                                    onChange={(value) => setAttributes({ contactFormBorder: value })}
-                                            />
-
-                                            <FB_ColorControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalColor={contactFormBorderColor}
-                                                setGlobalColor={(value) => setAttributes({ contactFormBorderColor: value })}
-                                            />
-
-                                            <FB_Spacing 
-                                                label={__("Border", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={handleBorderUnitsHandler}
-                                                spacingUnits={contactFormBorderUnits}
-                                                spacingDesktop={contactFormBorderDesktop}
-                                                spacingTablet={contactFormBorderTablet}
-                                                spacingMobile={contactFormBorderMobile}
-                                                handleSpacingUnitHandler={handleBorderUnitChange}
-                                                spacingCombineBtn={contactFormBorderLink}
-                                                spacingCombineBtnHandler={handleBorderCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />
-
-                                            <FB_Spacing 
-                                                label={__("Radius Border", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={handleBorderRadiusUnitsHandler}
-                                                spacingUnits={contactFormBorderRadiusUnits}
-                                                spacingDesktop={contactFormBorderRadiusDesktop}
-                                                spacingTablet={contactFormBorderRadiusTablet}
-                                                spacingMobile={contactFormBorderRadiusMobile}
-                                                handleSpacingUnitHandler={handleBorderRadiusUnitChange}
-                                                spacingCombineBtn={contactFormBorderRadiusLink}
-                                                spacingCombineBtnHandler={handleBorderRadiusCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />
-
-                                            <SelectControl
-                                                    label={__("Focus Border Style", "frontis-blocks")}
-                                                    value={contactFormFocusBorder}
-                                                    options={BORDER_STYLES}
-                                                    onChange={(value) => setAttributes({ contactFormFocusBorder: value })}
-                                            />
-
-                                            <FB_ColorControl
-                                                label={__("Focus Color", "frontis-blocks")}
-                                                globalColor={contactFormInputFocusColor}
-                                                setGlobalColor={(value) => setAttributes({ contactFormInputFocusColor: value })}
-                                            />
-
-                                            <FB_Spacing 
-                                                label={__("Focus Border", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={handleFocusBorderUnitsHandler}
-                                                spacingUnits={contactFormFocusBorderUnits}
-                                                spacingDesktop={contactFormFocusBorderDesktop}
-                                                spacingTablet={contactFormFocusBorderTablet}
-                                                spacingMobile={contactFormFocusBorderMobile}
-                                                handleSpacingUnitHandler={handleFocusBorderUnitChange}
-                                                spacingCombineBtn={contactFormFocusBorderLink}
-                                                spacingCombineBtnHandler={handleFocusBorderCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />
-
-                                            <FB_Spacing 
-                                                label={__("Focus Radius Border", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={handleFocusBorderRadiusUnitsHandler}
-                                                spacingUnits={contactFormFocusBorderRadiusUnits}
-                                                spacingDesktop={contactFormFocusBorderRadiusDesktop}
-                                                spacingTablet={contactFormFocusBorderRadiusTablet}
-                                                spacingMobile={contactFormFocusBorderRadiusMobile}
-                                                handleSpacingUnitHandler={handleFocusBorderRadiusUnitChange}
-                                                spacingCombineBtn={contactFormFocusBorderRadiusLink}
-                                                spacingCombineBtnHandler={handleFocusBorderRadiusCombineBtn}
-                                                setAttributes={setAttributes}
-                                            />
-
-
-                                        </PanelBody>
-                                        <PanelBody title={__("Placeholder", "frontis-blocks")} initialOpen={false}>
-                                            <FB_ColorControl
-                                                label={__("Color", "frontis-blocks")}
-                                                globalColor={contactFormPlaceholderColor}
-                                                setGlobalColor={(value) => setAttributes({ contactFormPlaceholderColor: value })}
-                                            />
-                                        </PanelBody>
-
-                                        <PanelBody title={__("Submit", "frontis-blocks")} initialOpen={false}>
-
-                                            <FB_AlignmentControl
-                                                label={__("Alignment", "frontis-blocks")}
-                                                globalAlignment={contactFormSubmitAlignment}
-                                                setGlobalAlignment={(value) => setAttributes({ contactFormSubmitAlignment: value })}
-                                            />
-
-                                            <FB_Range
-                                                min={1}
-                                                max={2000}
-                                                label={__("Height", "frontis-blocks")}
-                                                rangeValue={contactFormSubmitHeight}
-                                                onChangeHandler={(value) => setAttributes({ contactFormSubmitHeight: value })}
-                                                rangeUnitHandler={(value) => setAttributes({ contactFormSubmitHeightUnits: value })}
-                                                deviceType={deviceType}
-                                                units={contactFormSubmitHeightUnits}
-                                                setAttributes={setAttributes}
-                                                rangeStep={1}
-                                                resetFallbackValue={''}
-                                            />
-                                            
-                                            <SelectControl
-                                                label={__("Width", "frontis-blocks")}
-                                                value={contactFormSubmitWidthSelect}
-                                                options={WIDTH_STYLES}
-                                                onChange={(value) => setAttributes({ contactFormSubmitWidthSelect: value })}
-                                            />
-                                            {contactFormSubmitWidthSelect === 'custom' && (
-                                                <FB_Range
-                                                    min={1}
-                                                    max={2000}
-                                                    label={__("Width", "frontis-blocks")}
-                                                    rangeValue={contactFormSubmitWidth}
-                                                    onChangeHandler={(value) => setAttributes({ contactFormSubmitWidth: value })}
-                                                    rangeUnitHandler={(value) => setAttributes({ contactFormSubmitWidthUnits: value })}
-                                                    deviceType={deviceType}
-                                                    units={contactFormSubmitWidthUnits}
-                                                    setAttributes={setAttributes}
-                                                    rangeStep={1}
-                                                    resetFallbackValue={''}
-                                                />
-                                            )}
-
-
-											<FB_TypographyControl
-												globalTypoControlActive={true}
-												globalTypoSwitcher={contactFormSubmitGlobalTypoSwitcher}
-												storeGlobalTypographyData={(value) => setAttributes({ contactFormSubmitGlobalTypographyData: value })}
-
-												globalTypoType={contactFormSubmitGlobalTypoType}
-												onChangeGlobalTypoType={(value) => {
-													setAttributes({ 
-														contactFormSubmitGlobalTypoType: value, 
-														contactFormSubmitGlobalTypoSwitcher: value === 'default' ? {...contactFormSubmitGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormSubmitGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-													})
-												}}
-
-												globalTypoOption={contactFormSubmitGlobalTypoOption}
-												onChangeGlobalTypoOption={(value) => setAttributes({ contactFormSubmitGlobalTypoOption: value })}
-
-												fontFamily={contactFormSubmitFontFamily}
-												onChangeFontFamily={(value) => setAttributes({ contactFormSubmitFontFamily: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontFamily: value && false} })}
-
-												fontSize={contactFormSubmitFontSize}
-												onChangeFontSize={(value) => setAttributes({ contactFormSubmitFontSize: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontSize: value && false} })}
-
-												fontSizeUnits={contactFormSubmitFontSizeUnits}
-												onChangeFontSizeUnit={(value) => setAttributes({ contactFormSubmitFontSizeUnits: value })}
-
-												fontWeight={contactFormSubmitFontWeight}
-												onChangeFontWeight={(value) => setAttributes({ contactFormSubmitFontWeight: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontWeight: value && false} })}
-
-												fontStyle={contactFormSubmitFontStyle}
-												onChangeFontStyle={(value) => setAttributes({ contactFormSubmitFontStyle: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontStyle: value && false} })}
-
-												textTransform={contactFormSubmitTextTransform}
-												onChangeTextTransform={(value) => setAttributes({ contactFormSubmitTextTransform: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, textTransform: value && false} })}
-
-												textDecoration={contactFormSubmitTextDecoration}
-												onChangeTextDecoration={(value) => setAttributes({ contactFormSubmitTextDecoration: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, textDecoration: value && false} })}
-
-												letterSpacing={contactFormSubmitLetterSpacing}
-												onChangeLetterSpacing={(value) => setAttributes({ contactFormSubmitLetterSpacing: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-												letterSpacingUnits={contactFormSubmitLetterSpacingUnits}
-												onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormSubmitLetterSpacingUnits: value })}
-
-												lineHeight={contactFormSubmitLineHeight}
-												onChangeLineHeight={(value) => setAttributes({ contactFormSubmitLineHeight: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, lineHeight: value && false} })}
-
-												lineHeightUnits={contactFormSubmitLineHeightUnits}
-												onChangeLineHeightUnit={(value) => setAttributes({ contactFormSubmitLineHeightUnits: value })}
-
-												deviceType={deviceType}
-												setAttributes={setAttributes}
-											/>
-                                            
-                                            <FB_SwitcherControl
-                                                label={__("Color", "frontis-blocks")}
-                                                globalSwitcher={contactFormSubmitColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ contactFormSubmitColorSwitcher: value })}
-                                            />
-
-                                            {contactFormSubmitColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={contactFormSubmitColor}
-                                                    setGlobalColor={(value) => setAttributes({ contactFormSubmitColor: value })}
-                                                />
-                                            )}
-
-                                            {contactFormSubmitColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={contactFormSubmitHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ contactFormSubmitHoverColor: value })}
-                                                />
-                                            )}
-
-
-                                            <FB_SwitcherControl
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalSwitcher={contactFormSubmitBgColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ contactFormSubmitBgColorSwitcher: value })}
-                                            />
-
-                                            {contactFormSubmitBgColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={contactFormSubmitBgColor}
-                                                    setGlobalColor={(value) => setAttributes({ contactFormSubmitBgColor: value })}
-                                                />
-                                            )}
-
-                                            {contactFormSubmitBgColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={contactFormSubmitBgHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ contactFormSubmitBgHoverColor: value })}
-                                                />
-                                            )}
-                                            <FB_Spacing 
-                                                label={__("Padding", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={contactFormSubmitPaddingUnitsHandler}
-                                                spacingUnits={contactFormSubmitPaddingUnits}
-                                                spacingDesktop={contactFormSubmitPaddingDesktop}
-                                                spacingTablet={contactFormSubmitPaddingTablet}
-                                                spacingMobile={contactFormSubmitPaddingMobile}
-                                                handleSpacingUnitHandler={contactFormSubmitPaddingUnitsChange}
-                                                spacingCombineBtn={contactFormSubmitPaddingLink}
-                                                spacingCombineBtnHandler={contactFormSubmitPaddingLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                            <FB_Spacing 
-                                                label={__("Margin", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={contactFormSubmitMarginUnitsHandler}
-                                                spacingUnits={contactFormSubmitMarginUnits}
-                                                spacingDesktop={contactFormSubmitMarginDesktop}
-                                                spacingTablet={contactFormSubmitMarginTablet}
-                                                spacingMobile={contactFormSubmitMarginMobile}
-                                                handleSpacingUnitHandler={contactFormSubmitMarginUnitsChange}
-                                                spacingCombineBtn={contactFormSubmitMarginLink}
-                                                spacingCombineBtnHandler={contactFormSubmitMarginLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                            <SelectControl
-                                                label={__("Border Style", "frontis-blocks")}
-                                                value={contactFormSubmitBorder}
-                                                options={BORDER_STYLES}
-                                                onChange={(value) => setAttributes({ contactFormSubmitBorder: value })}
-                                            />
-
-                                            <FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={contactFormSubmitBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ contactFormSubmitBorderColorSwitcher: value })}
-                                            />
-
-                                            {contactFormSubmitBorderColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={contactFormSubmitBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ contactFormSubmitBorderColor: value })}
-                                                />
-                                            )}
-
-                                            {contactFormSubmitBorderColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={contactFormSubmitBorderHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ contactFormSubmitBorderHoverColor: value })}
-                                                />
-                                            )}
-
-                                            <FB_Spacing 
-                                                label={__("Border", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={contactFormSubmitBorderUnitsHandler}
-                                                spacingUnits={contactFormSubmitBorderUnits}
-                                                spacingDesktop={contactFormSubmitBorderDesktop}
-                                                spacingTablet={contactFormSubmitBorderTablet}
-                                                spacingMobile={contactFormSubmitBorderMobile}
-                                                handleSpacingUnitHandler={contactFormSubmitBorderUnitsChange}
-                                                spacingCombineBtn={contactFormSubmitBorderLink}
-                                                spacingCombineBtnHandler={contactFormSubmitBorderLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                            <FB_Spacing 
-                                                label={__("Border Radius", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={contactFormSubmitBorderRadiusUnitsHandler}
-                                                spacingUnits={contactFormSubmitBorderRadiusUnits}
-                                                spacingDesktop={contactFormSubmitBorderRadiusDesktop}
-                                                spacingTablet={contactFormSubmitBorderRadiusTablet}
-                                                spacingMobile={contactFormSubmitBorderRadiusMobile}
-                                                handleSpacingUnitHandler={contactFormSubmitBorderRadiusUnitsChange}
-                                                spacingCombineBtn={contactFormSubmitBorderRadiusLink}
-                                                spacingCombineBtnHandler={contactFormSubmitBorderRadiusLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-
-
-                                        </PanelBody>
-                                        <PanelBody title={__("Success Message", "frontis-blocks")} initialOpen={false}>
-
-
-										<FB_TypographyControl
-											globalTypoControlActive={true}
-											globalTypoSwitcher={contactFormSuccessGlobalTypoSwitcher}
-											storeGlobalTypographyData={(value) => setAttributes({ contactFormSuccessGlobalTypographyData: value })}
-
-											globalTypoType={contactFormSuccessGlobalTypoType}
-											onChangeGlobalTypoType={(value) => {
-												setAttributes({ 
-													contactFormSuccessGlobalTypoType: value, 
-													contactFormSuccessGlobalTypoSwitcher: value === 'default' ? {...contactFormSuccessGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormSuccessGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-												})
-											}}
-
-											globalTypoOption={contactFormSuccessGlobalTypoOption}
-											onChangeGlobalTypoOption={(value) => setAttributes({ contactFormSuccessGlobalTypoOption: value })}
-
-											fontFamily={contactFormSuccessFontFamily}
-											onChangeFontFamily={(value) => setAttributes({ contactFormSuccessFontFamily: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontFamily: value && false} })}
-
-											fontSize={contactFormSuccessFontSize}
-											onChangeFontSize={(value) => setAttributes({ contactFormSuccessFontSize: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontSize: value && false} })}
-
-											fontSizeUnits={contactFormSuccessFontSizeUnits}
-											onChangeFontSizeUnit={(value) => setAttributes({ contactFormSuccessFontSizeUnits: value })}
-
-											fontWeight={contactFormSuccessFontWeight}
-											onChangeFontWeight={(value) => setAttributes({ contactFormSuccessFontWeight: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontWeight: value && false} })}
-
-											fontStyle={contactFormSuccessFontStyle}
-											onChangeFontStyle={(value) => setAttributes({ contactFormSuccessFontStyle: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontStyle: value && false} })}
-
-											textTransform={contactFormSuccessTextTransform}
-											onChangeTextTransform={(value) => setAttributes({ contactFormSuccessTextTransform: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, textTransform: value && false} })}
-
-											textDecoration={contactFormSuccessTextDecoration}
-											onChangeTextDecoration={(value) => setAttributes({ contactFormSuccessTextDecoration: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, textDecoration: value && false} })}
-
-											letterSpacing={contactFormSuccessLetterSpacing}
-											onChangeLetterSpacing={(value) => setAttributes({ contactFormSuccessLetterSpacing: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-											letterSpacingUnits={contactFormSuccessLetterSpacingUnits}
-											onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormSuccessLetterSpacingUnits: value })}
-
-											lineHeight={contactFormSuccessLineHeight}
-											onChangeLineHeight={(value) => setAttributes({ contactFormSuccessLineHeight: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, lineHeight: value && false} })}
-
-											lineHeightUnits={contactFormSuccessLineHeightUnits}
-											onChangeLineHeightUnit={(value) => setAttributes({ contactFormSuccessLineHeightUnits: value })}
-
-											deviceType={deviceType}
-											setAttributes={setAttributes}
-										/>
-
-                                            <FB_ColorControl
-                                                label={__("Color", "frontis-blocks")}
-                                                globalColor={contactFormSuccessColor}
-                                                setGlobalColor={(value) => setAttributes({ contactFormSuccessColor: value })}
-                                            />
-
-                                            <FB_ColorControl
-                                                label={__("Background Color", "frontis-blocks")}
-                                                globalColor={contactFormSuccessBgColor}
-                                                setGlobalColor={(value) => setAttributes({ contactFormSuccessBgColor: value })}
-                                            />
-
-                                            <SelectControl
-                                                label={__("Border Style", "frontis-blocks")}
-                                                value={contactFormSuccessBorder}
-                                                options={BORDER_STYLES}
-                                                onChange={(value) => setAttributes({ contactFormSuccessBorder: value })}
-                                            />
-
-                                            <FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={contactFormSuccessBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ contactFormSuccessBorderColorSwitcher: value })}
-                                            />
-
-                                            {contactFormSuccessBorderColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={contactFormSuccessBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ contactFormSuccessBorderColor: value })}
-                                                />
-                                            )}
-
-                                            {contactFormSuccessBorderColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={contactFormSuccessBorderHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ contactFormSuccessBorderHoverColor: value })}
-                                                />
-                                            )}
-
-                                            <FB_Spacing 
-                                                label={__("Border", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={contactFormSuccessBorderUnitsHandler}
-                                                spacingUnits={contactFormSuccessBorderUnits}
-                                                spacingDesktop={contactFormSuccessBorderDesktop}
-                                                spacingTablet={contactFormSuccessBorderTablet}
-                                                spacingMobile={contactFormSuccessBorderMobile}
-                                                handleSpacingUnitHandler={contactFormSuccessBorderUnitsChange}
-                                                spacingCombineBtn={contactFormSuccessBorderLink}
-                                                spacingCombineBtnHandler={contactFormSuccessBorderLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                            <FB_Spacing 
-                                                label={__("Border Radius", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={contactFormSuccessBorderRadiusUnitsHandler}
-                                                spacingUnits={contactFormSuccessBorderRadiusUnits}
-                                                spacingDesktop={contactFormSuccessBorderRadiusDesktop}
-                                                spacingTablet={contactFormSuccessBorderRadiusTablet}
-                                                spacingMobile={contactFormSuccessBorderRadiusMobile}
-                                                handleSpacingUnitHandler={contactFormSuccessBorderRadiusUnitsChange}
-                                                spacingCombineBtn={contactFormSuccessBorderRadiusLink}
-                                                spacingCombineBtnHandler={contactFormSuccessBorderRadiusLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                        </PanelBody>
-                                        <PanelBody title={__("Error Message", "frontis-blocks")} initialOpen={false}>
-
-
-										<FB_TypographyControl
-											globalTypoControlActive={true}
-											globalTypoSwitcher={contactFormErrorGlobalTypoSwitcher}
-											storeGlobalTypographyData={(value) => setAttributes({ contactFormErrorGlobalTypographyData: value })}
-
-											globalTypoType={contactFormErrorGlobalTypoType}
-											onChangeGlobalTypoType={(value) => {
-												setAttributes({ 
-													contactFormErrorGlobalTypoType: value, 
-													contactFormErrorGlobalTypoSwitcher: value === 'default' ? {...contactFormErrorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormErrorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-												})
-											}}
-
-											globalTypoOption={contactFormErrorGlobalTypoOption}
-											onChangeGlobalTypoOption={(value) => setAttributes({ contactFormErrorGlobalTypoOption: value })}
-
-											fontFamily={contactFormErrorFontFamily}
-											onChangeFontFamily={(value) => setAttributes({ contactFormErrorFontFamily: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontFamily: value && false} })}
-
-											fontSize={contactFormErrorFontSize}
-											onChangeFontSize={(value) => setAttributes({ contactFormErrorFontSize: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontSize: value && false} })}
-
-											fontSizeUnits={contactFormErrorFontSizeUnits}
-											onChangeFontSizeUnit={(value) => setAttributes({ contactFormErrorFontSizeUnits: value })}
-
-											fontWeight={contactFormErrorFontWeight}
-											onChangeFontWeight={(value) => setAttributes({ contactFormErrorFontWeight: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontWeight: value && false} })}
-
-											fontStyle={contactFormErrorFontStyle}
-											onChangeFontStyle={(value) => setAttributes({ contactFormErrorFontStyle: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontStyle: value && false} })}
-
-											textTransform={contactFormErrorTextTransform}
-											onChangeTextTransform={(value) => setAttributes({ contactFormErrorTextTransform: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, textTransform: value && false} })}
-
-											textDecoration={contactFormErrorTextDecoration}
-											onChangeTextDecoration={(value) => setAttributes({ contactFormErrorTextDecoration: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, textDecoration: value && false} })}
-
-											letterSpacing={contactFormErrorLetterSpacing}
-											onChangeLetterSpacing={(value) => setAttributes({ contactFormErrorLetterSpacing: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-											letterSpacingUnits={contactFormErrorLetterSpacingUnits}
-											onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormErrorLetterSpacingUnits: value })}
-
-											lineHeight={contactFormErrorLineHeight}
-											onChangeLineHeight={(value) => setAttributes({ contactFormErrorLineHeight: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, lineHeight: value && false} })}
-
-											lineHeightUnits={contactFormErrorLineHeightUnits}
-											onChangeLineHeightUnit={(value) => setAttributes({ contactFormErrorLineHeightUnits: value })}
-
-											deviceType={deviceType}
-											setAttributes={setAttributes}
-										/>
-
-                                            <FB_ColorControl
-                                                label={__("Color", "frontis-blocks")}
-                                                globalColor={contactFormErrorColor}
-                                                setGlobalColor={(value) => setAttributes({ contactFormErrorColor: value })}
-                                            />
-
-                                            <FB_Spacing 
-                                                label={__("Padding", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={contactFormErrorPaddingUnitsHandler}
-                                                spacingUnits={contactFormErrorPaddingUnits}
-                                                spacingDesktop={contactFormErrorPaddingDesktop}
-                                                spacingTablet={contactFormErrorPaddingTablet}
-                                                spacingMobile={contactFormErrorPaddingMobile}
-                                                handleSpacingUnitHandler={contactFormErrorPaddingUnitsChange}
-                                                spacingCombineBtn={contactFormErrorPaddingLink}
-                                                spacingCombineBtnHandler={contactFormErrorPaddingLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                            <FB_Spacing 
-                                                label={__("Margin", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={contactFormErrorMarginUnitsHandler}
-                                                spacingUnits={contactFormErrorMarginUnits}
-                                                spacingDesktop={contactFormErrorMarginDesktop}
-                                                spacingTablet={contactFormErrorMarginTablet}
-                                                spacingMobile={contactFormErrorMarginMobile}
-                                                handleSpacingUnitHandler={contactFormErrorMarginUnitsChange}
-                                                spacingCombineBtn={contactFormErrorMarginLink}
-                                                spacingCombineBtnHandler={contactFormErrorMarginLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                        </PanelBody>
-                                    </>
-                                )}
-
-								{tab.name === "advanced" && (
-                                    <>
-                                        <div className="fb-setting-advanced-tab-wrapper">
-                                            <div className="fb-setting-inner-wrapper">
-                                                <PanelBody
-                                                    title={__("Layout", "frontis-blocks")}
-                                                    initialOpen={true}
-                                                    className='fb-setting-layout-header' 
-                                                >
-													<FB_Range
-                                                        min={0}
-                                                        max={10000000}
-                                                        label={__("Z Index", "frontis-blocks")}
-                                                        rangeValue={contactFormGlobalZIndex}
-                                                        onChangeHandler={(value) => setAttributes({ contactFormGlobalZIndex: value === 0 ? undefined : value })}
-                                                        deviceType={deviceType}
-                                                        setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={""}
-                                                        isRangeUnit={false}
-
-                                                    />
-
-													<SelectControl
-                                                        label={__("Overflow", "frontis-blocks")}
-                                                        value={contactFormOverflow}
-                                                        options={OVERFLOW_OP}
-                                                        onChange={(value) => setAttributes({ contactFormOverflow: value })}
-                                                    />
-
-													<FB_PositionControl
-														deviceType={deviceType}
-														positionType={contactFormPositionType}
-														setPositionType={(value) => setAttributes({ contactFormPositionType: value })}
-																										
-														HZOrientationType={contactFormHZOrientationType}
-														setHZOrientationType={(value) =>
-															setAttributes({ contactFormHZOrientationType: value })
-														}
-														VROrientationType={contactFormVROrientationType}
-														setVROrientationType={(value) =>
-															setAttributes({ contactFormVROrientationType: value })
-														}
-																											
-														HZLeftOffset={contactFormHZLeftOffset}
-														setHZLeftOffset={(value) => setAttributes({ contactFormHZLeftOffset: value })}
-														HZLeftOffsetUnits={contactFormHZLeftOffsetUnits}
-														setHZLeftOffsetUnits={(value) => setAttributes({ contactFormHZLeftOffsetUnits: value })}
-														HZRightOffset={contactFormHZRightOffset}
-														setHZRightOffset={(value) => setAttributes({ contactFormHZRightOffset: value })}
-														HZRightOffsetUnits={contactFormHZRightOffsetUnits}
-														setHZRightOffsetUnits={(value) => setAttributes({ contactFormHZRightOffsetUnits: value })}
-																										
-														VRTopOffset={contactFormVRTopOffset}
-														setVRTopOffset={(value) => setAttributes({ contactFormVRTopOffset: value })}
-														VRTopOffsetUnits={contactFormVRTopOffsetUnits}
-														setVRTopOffsetUnits={(value) => setAttributes({ contactFormVRTopOffsetUnits: value })}
-														VRBottomOffset={contactFormVRBottomOffset}
-														setVRBottomOffset={(value) => setAttributes({ contactFormVRBottomOffset: value })}
-														VRBottomOffsetUnits={contactFormVRBottomOffsetUnits}
-														setVRBottomOffsetUnits={(value) => setAttributes({ contactFormVRBottomOffsetUnits: value })}
-
-														setAttributes={setAttributes}
-													/>
-
-													<FB_InputControl
-														label={__("CSS ID", "frontis-blocks")}
-														value={contactFormGlobalWraperID}
-														onChangeValue={(value) => setAttributes({ contactFormGlobalWraperID: value })}
-														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
-													/>
-
-													<FB_InputControl
-														label={__("CSS Class", "frontis-blocks")}
-														value={contactFormGlobalWraperClass}
-														onChangeValue={(value) => setAttributes({ contactFormGlobalWraperClass: value })}
-														helpText={__("Separate with spaces key.", "frontis-blocks")}
-													/>
-													
-                                                </PanelBody>
-
-                                                <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
-                                                    <FB_Spacing 
-                                                        label={__("Padding", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
-                                                        spacingUnits={contactFormGlobalPaddingUnits}
-                                                        spacingDesktop={contactFormGlobalPaddingDesktop}
-                                                        spacingTablet={contactFormGlobalPaddingTablet}
-                                                        spacingMobile={contactFormGlobalPaddingMobile}
-                                                        handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
-                                                        spacingCombineBtn={contactFormGlobalPaddingLink}
-                                                        spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
-                                                    <FB_Spacing 
-                                                        label={__("Margin", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleGlobalMarginUnitsHandler}
-                                                        spacingUnits={contactFormGlobalMarginUnits}
-                                                        spacingDesktop={contactFormGlobalMarginDesktop}
-                                                        spacingTablet={contactFormGlobalMarginTablet}
-                                                        spacingMobile={contactFormGlobalMarginMobile}
-                                                        handleSpacingUnitHandler={handleGlobalMarginUnitChange}
-                                                        spacingCombineBtn={contactFormGlobalMarginLink}
-                                                        spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
-                                                </PanelBody>
-
-                                                <PanelBody title="Background Color" initialOpen={false} >
-                                                    <FB_SwitcherControl
-                                                        label={__("Background Color", "frontis-blocks")}
-                                                        globalSwitcher={contactFormGlobalBgColorSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ contactFormGlobalBgColorSwitcher: value })}
-                                                    />
-
-                                                    {contactFormGlobalBgColorSwitcher === 'normal' && (
-                                                        <FB_ColorControl
-                                                            label={__("Normal Color", "frontis-blocks")}
-                                                            globalColor={contactFormGlobalBgColor}
-                                                            setGlobalColor={(value) => setAttributes({ contactFormGlobalBgColor: value })}
-                                                        />
-                                                    )}
-
-                                                    {contactFormGlobalBgColorSwitcher === 'hover' && (
-                                                        <FB_ColorControl
-                                                            label={__("Hover Color", "frontis-blocks")}
-                                                            globalColor={contactFormGlobalBgHoverColor}
-                                                            setGlobalColor={(value) => setAttributes({ contactFormGlobalBgHoverColor: value })}
-                                                        />
-                                                    )}
-                                                </PanelBody>
-                                                <PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
-
-                                                    <SelectControl
-                                                            label={__("Border Style", "frontis-blocks")}
-                                                            value={contactFormGlobalBorder}
-                                                            options={BORDER_STYLES}
-                                                            onChange={(value) => setAttributes({ contactFormGlobalBorder: value })}
-                                                    />
-
-
-                                                    <FB_SwitcherControl
-                                                        label={__("Border Color", "frontis-blocks")}
-                                                        globalSwitcher={contactFormGlobalBorderColorSwitcher}
-                                                        setGlobalSwitcher={(value) => setAttributes({ contactFormGlobalBorderColorSwitcher: value })}
-                                                    />
-
-                                                    {contactFormGlobalBorderColorSwitcher === 'normal' && (
-                                                        <FB_ColorControl
-                                                            label={__("Normal Color", "frontis-blocks")}
-                                                            globalColor={contactFormGlobalBorderColor}
-                                                            setGlobalColor={(value) => setAttributes({ contactFormGlobalBorderColor: value })}
-                                                        />
-                                                    )}
-
-                                                    {contactFormGlobalBorderColorSwitcher === 'hover' && (
-                                                        <FB_ColorControl
-                                                            label={__("Hover Color", "frontis-blocks")}
-                                                            globalColor={contactFormGlobalBorderHoverColor}
-                                                            setGlobalColor={(value) => setAttributes({ contactFormGlobalBorderHoverColor: value })}
-                                                        />
-                                                    )}
-
-                                                    <FB_Spacing 
-                                                        label={__("Border", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleGlobalBorderUnitsHandler}
-                                                        spacingUnits={contactFormGlobalBorderUnits}
-                                                        spacingDesktop={contactFormGlobalBorderDesktop}
-                                                        spacingTablet={contactFormGlobalBorderTablet}
-                                                        spacingMobile={contactFormGlobalBorderMobile}
-                                                        handleSpacingUnitHandler={handleGlobalBorderUnitChange}
-                                                        spacingCombineBtn={contactFormGlobalBorderLink}
-                                                        spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
-
-                                                    <FB_Spacing 
-                                                        label={__("Border Radius", "frontis-blocks")}
-                                                        deviceType={deviceType}
-                                                        spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
-                                                        spacingUnits={contactFormGlobalBorderRadiusUnits}
-                                                        spacingDesktop={contactFormGlobalBorderRadiusDesktop}
-                                                        spacingTablet={contactFormGlobalBorderRadiusTablet}
-                                                        spacingMobile={contactFormGlobalBorderRadiusMobile}
-                                                        handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
-                                                        spacingCombineBtn={contactFormGlobalBorderRadiusLink}
-                                                        spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
-                                                        setAttributes={setAttributes}
-                                                    />
-
-													<FB_SwitcherControl
-														label={__("Box Shadow", "frontis-blocks")}
-														globalSwitcher={contactFormGlobalBoxShadowSwitcher}
-														setGlobalSwitcher={(value) => setAttributes({ contactFormGlobalBoxShadowSwitcher: value })}
-													/>
-
-													{contactFormGlobalBoxShadowSwitcher === 'normal' && (
-														<FB_BoxShadowControl
-															label={__("Normal Shadow", "frontis-blocks")}
-															onBoxShadowChange={(value) => setAttributes({ contactFormGlobalBoxShadowValues: value })}
-															initialShadowValue={contactFormGlobalBoxShadowValues}
-															onBoxShadowStyleChange={(value) => setAttributes({ contactFormGlobalBoxShadowCssValue: value })}
-														/>
-													)}
-
-													{contactFormGlobalBoxShadowSwitcher === 'hover' && (
-														<FB_BoxShadowControl
-															label={__("Hover Shadow", "frontis-blocks")}
-															onBoxShadowChange={(value) => setAttributes({ contactFormGlobalBoxShadowHoverValues: value })}
-															initialShadowValue={contactFormGlobalBoxShadowHoverValues}
-															onBoxShadowStyleChange={(value) => setAttributes({ contactFormGlobalBoxShadowHoverCssValue: value })}
-														/>
-													)}
-                                                </PanelBody>
-
-												<PanelBody
-													title={__("Responsive Control", "frontis-blocks")}
-													initialOpen={false}
-													className="fb-setting-responsive-control-wrapper"
-												>
-													<FB_VisibilityControl
-                                                        desktopValue={contactFormDesktopSwitcher}
-                                                        setDesktopValue={(value) => setAttributes({ contactFormDesktopSwitcher: value })}
-
-                                                        tabletValue={contactFormTabletSwitcher}
-                                                        setTabletValue={(value) => setAttributes({ contactFormTabletSwitcher: value })}
-
-                                                        mobileValue={contactFormMobileSwitcher}
-                                                        setMobileValue={(value) => setAttributes({ contactFormMobileSwitcher: value })}
-                                                    />
-												</PanelBody>
-												<PanelBody
-                                                    title={__("Custom CSS", "frontis-blocks")}
-                                                    initialOpen={false}
-                                                >
-                                                    <FB_CustomCSSEditor  
-                                                        value={contactFormCustomCSS} 
-                                                        onChangeValue={(value) => setAttributes({ contactFormCustomCSS: value })}
-                                                    />
-                                                </PanelBody>
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-							</div>
-						)}
-					</TabPanel>
-				</div>
-			</InspectorControls>
+			<FB_InspectorControls
+				generalControls={generalControls}
+				styleControls={styleControls}
+				advancedControls={advancedControls}
+			/>
 		</>
 	);
 }

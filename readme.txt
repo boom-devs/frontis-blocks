@@ -2,7 +2,7 @@
 Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
-Tested up to: 6.7.2
+Tested up to: 6.8
 Stable tag: 1.0.8
 Requires PHP: 7.4
 License: GPLv2 or later
@@ -21,29 +21,33 @@ If you’re considering popular solutions like Spectra (a well-known name in the
 == Features at a Glance ==
 Our **WordPress Gutenberg blocks plugin** offers a rich set of blocks to cover almost any design need. With **Frontis Blocks**, you can build dynamic layouts, interactive sections, and polished content elements in a snap:
 
+ - **Container:** Create structured layouts effortlessly using the Container Block. It allows you to group multiple blocks together with custom padding, margins, background styles, and layout controls. Perfect for building advanced page sections while maintaining responsive design.
  - **Accordion:** Features collapsible elements for displaying content in a limited space. It allows users to expand and collapse sections as needed, which is ideal for FAQs or detailed lists that require space efficiency.
- - **Advanced Image Features(Coming Soon):** Enhances images with text overlays, gradient backgrounds for readability, strategic content placement, and dynamic effects like blur and zoom to elevate visual engagement.
  - **Advanced Heading Styles:** Offers diverse heading designs using various fonts, and decorative elements. Includes unique image masking techniques that highlight headings with creative backgrounds and shapes to capture attention.
+ - **Animated Heading:** Grab your visitors’ attention with the Animated Heading Block. Add dynamic, motion-based headings that animate as users scroll or load the page. Choose from multiple animation styles to create visually engaging titles.
+ - **Advanced Button:** A variety of button styles including gradients, icons, and different shapes, providing versatile options for different design needs and interaction cues.
+ - **Advanced Image Features:** Enhances images with text overlays, gradient backgrounds for readability, strategic content placement, and dynamic effects like blur and zoom to elevate visual engagement.
+ - **Advanced Video:** Displays different styles for embedding video content that enhance the visual appeal and engage users. These styles might include overlays, animations, or unique graphical elements that draw attention to the video content.
+ - **Call to Action:** Tired of clunky page builders? Frontis Blocks gives you everything you need to create beautiful, modern websites — right inside the Gutenberg editor. It's fast, flexible, and fun to use!
  - **Image Gallery:** Various layouts and hover effects for displaying images, suitable for portfolios, product galleries, or visual storytelling, enhancing the visual appeal and user engagement on websites.
  - **Info Box:** Information boxes that combine icons, headings, and text in a structured layout, ideal for quick facts or highlights that need to stand out on a page.
  - **Icon Box:** Utilizes icons combined with text to visually represent different services or features succinctly. This design is effective for quick scanning by users, offering an immediate understanding of the core services or features offered.
- - **Advanced Button:** A variety of button styles including gradients, icons, and different shapes, providing versatile options for different design needs and interaction cues.
  - **Dual Button:** Dual button designs for situations requiring two actions, like 'Buy Now' vs. 'Learn More', with stylistic coherence that ensures both options are visually balanced.
- - **Advanced Video:** Displays different styles for embedding video content that enhance the visual appeal and engage users. These styles might include overlays, animations, or unique graphical elements that draw attention to the video content.
  - **Countdown Timer:** Offers various countdown styles that can be used to highlight upcoming events, sales, or deadlines. Styles may range from simple numeric countdowns to more elaborate designs with full background images or animations.
  - **Feature List:** Lists the key attributes or services of a product in an organized manner, using icons, short descriptions, and varying background colors to highlight individual features effectively.
  - **Testimonials:** Features customer reviews in multiple styles, from simple text formats to more graphical interfaces with star ratings and photos, enhancing credibility and trust through user experiences
- - **Counter(Coming Soon):** Displays numerical information such as user counts or project stats in an aesthetically pleasing format. Options include plain numbers, progress bars, and icons that cater to various design preferences.
+ - **Counter:** Displays numerical information such as user counts or project stats in an aesthetically pleasing format. Options include plain numbers, progress bars, and icons that cater to various design preferences.
  - **Flip Box(Coming Soon):** Interactive boxes that flip to reveal additional content on hover or click, offering a dynamic way to present information such as team profiles or service details in a compact space.
  - **Contact Form 7:** Different form designs that are crucial for gathering visitor information or inquiries. These designs vary in layout and styling, ensuring they can be seamlessly integrated into any site design while maintaining functionality and user engagement.
- - **Fluent Form:** Showcases various styles of contact forms, each with aesthetically pleasing layouts that encourage user interaction. These forms are designed to be inviting with clear, user-friendly fields that make submitting information easy and straightforward.
+ - **Fluent Form:** Seamlessly integrate Fluent Form, one of the fastest form builders for WordPress. With this block, you can embed beautifully styled forms with just a few clicks—ideal for contact forms, surveys, or lead generation without any coding.
  - **Call to Action:** Various button styles for engaging users to take action, with contrasting colors and different shapes, including round and rectangle. Placement on boldly colored backgrounds enhances visibility and prompts user interaction.
  - **Pricing Table:** Showcases different pricing plans or product packages in a clear and comparative way. This feature helps potential customers quickly scan different options and features, facilitating easier decision-making based on cost and service level.
  - **Social Icons:** Multiple styles showcasing social media icons, ranging from minimalistic to brightly colored backgrounds, with or without text labels. This offers flexibility for integration into different website themes while maintaining brand consistency.
  - **Post Grid:** Arrange posts or articles in a grid layout, optimizing the use of space and providing a clean, organized way to browse content. Different styles may include varying image sizes, hover effects, and metadata configurations.
  - **Team Member:** Displays team member profiles in various formats, from basic lists to more dynamic presentations with social media links and detailed bios. This helps personalize a brand and showcase the people behind it in a visually engaging manner.
  - **Advanced Navigation(Coming Soon):** Provides various navigation menu styles that can enhance the user interface of websites or applications. This feature includes options like multi-level dropdowns, mega menus, or icon-based navigation that improve the discoverability of site content.
- - **Slider:** Sliders offer an interactive way to view multiple images or content pieces within a confined space. They can be customized with various effects, transitions, and controls, making it easy for users to browse through content seamlessly and intuitively.
+ - **Slider:** Add eye-catching sliders to your site using the Slider Block. Display multiple images or content slides in a rotating carousel with transition effects. Fully customizable to suit hero sections, product showcases, or testimonials.
+ - **Marquee Carousel:** Showcase continuous scrolling content with the Marquee Carousel Block. Ideal for displaying partner logos, product highlights, or announcement tickers in a smooth, horizontal scroll. Customize speed, direction, and content with ease.
 
 This collection of **block plugins** is curated to fit any project—whether you’re building a portfolio, business site, blog, or e-commerce store.
 
@@ -103,6 +107,34 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.0.8 – 23 May 2025 =
+New Features:
+
+- Container Block – Introduced a flexible container block for advanced layout control.
+
+- Animated Heading Block – Added support for dynamic, animated headings to enhance visual engagement.
+
+- Counter Number Block – Implemented an animated number counter block for showcasing statistics.
+
+- Slider Block – Introduced a customizable slider block for showcasing content in a carousel format.
+
+- Marquee Slider Block – Added a continuous scrolling marquee slider for dynamic content display.
+
+- Custom Class and ID Options – Enabled the addition of custom CSS classes and IDs for enhanced styling and targeting.
+
+- Layout Position and Overflow Options – Added new layout controls including positioning and overflow handling.
+
+- Global Sidebar for Settings – Introduced a unified global settings sidebar for consistent control across blocks and plugin-wide configurations.
+
+Enhancements:
+
+- Optimized Asset Generation – All CSS files are now merged and loaded as a single stylesheet; JavaScript files are also bundled to improve performance and reduce HTTP requests.
+
+Fixes:
+
+- Resolved various issues related to existing blocks to improve stability and compatibility.
+
 = 1.0.7 - 02 March 2025 =
 - Fix some Emprty css render issues
 

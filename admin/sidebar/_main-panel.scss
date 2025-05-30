@@ -3,7 +3,7 @@
 
     &.components-panel {
         border-top: 0;
-        margin-top: 12px;
+        margin-top: 0;
         padding: 16px 0;
 
         .fb-panel-control {
@@ -21,14 +21,14 @@
                         font-weight: 500;
                         line-height: 16px;
                         text-transform: capitalize;
-                        margin-bottom: 24px;
+                        margin-bottom: 12px;
                     }
 
                     .fb-panel-heading-wrapper {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
-                        margin-bottom: 24px;
+                        margin-bottom: 12px;
 
                         .add-custom-color {
                             .add-custom-color-btn {
@@ -113,6 +113,7 @@
                         color: $neutral-color-950;
                         text-transform: capitalize;
                         margin-top: 9px;
+                        margin-bottom: 12px;
                     }
 
                     p {
@@ -121,6 +122,7 @@
                         font-weight: 400;
                         line-height: 20px;
                         color: $neutral-color-950;
+                        margin-bottom: 0;
                     }
                 }
 
@@ -180,13 +182,14 @@
                     font-weight: 500;
                     line-height: 16px;
                     text-transform: capitalize;
+                    margin-bottom: 12px;
                 }
 
                 .fb-panel-heading-wrapper {
                     display: flex;
-                    align-items: center;
+                    align-items: center; 
                     justify-content: space-between;
-                    margin-bottom: 24px;
+                    margin-bottom: 12px;
 
                     .fb-section-title {
                         margin-bottom: 0;
@@ -235,8 +238,8 @@
                 .components-panel__body-toggle {
                     &.components-button {
                         padding: 16px 12px;
-                        background: $neutral-color-100;
-                        border-radius: 6px;
+                        background: $neutral-color-50;
+                        border-radius: 4px;
 
                         .components-panel__arrow {
                             right: 5px;
@@ -329,7 +332,7 @@
                     font-weight: 500;
                     line-height: 16px;
                     text-transform: capitalize;
-                    margin-bottom: 4px;
+                    margin-bottom: 12px;
                 }
 
                 .components-text-control__input {
@@ -353,7 +356,7 @@
                     }
 
                     .components-select-control__input {
-                        height: unset;
+                        color: $neutral-color-700;
                         padding: 12px;
                         border: 1px solid $neutral-color-100;
                         border-radius: 4px;
@@ -415,66 +418,71 @@
                     margin-bottom: 4px;
                     margin-top: 10px;
                 }
+                .fb_global_typo_wrap{
+                    .fb-letter-case-control{
+                        margin-top: 18px;
+                    }
+                }
             }
 
             .components-base-control {
                 width: auto;
                 margin-left: 0;
 
-                .fb-global-typography-headings-wrap {
-                    margin: 0 auto;
-                    margin-top: 12px;
-                    display: grid;
-                    grid-template-columns: repeat(4, 1fr);
-                    border: 1px solid #E1E3E8;
-                    border-radius: 4px;
-                    outline: none;
-                    padding: 0;
+                // .fb-global-typography-headings-wrap {
+                //     margin: 0 auto;
+                //     margin-top: 12px;
+                //     display: grid;
+                //     grid-template-columns: repeat(4, 1fr);
+                //     border: 1px solid #E1E3E8;
+                //     border-radius: 4px;
+                //     outline: none;
+                //     padding: 0;
 
-                    >* {
-                        text-align: center;
-                        border-right: 1px solid #e0e0e0;
-                        border-bottom: 1px solid #e0e0e0;
+                //     >* {
+                //         text-align: center;
+                //         border-right: 1px solid #e0e0e0;
+                //         border-bottom: 1px solid #e0e0e0;
 
-                        &:nth-child(4n) {
-                            border-right: none;
-                        }
+                //         &:nth-child(4n) {
+                //             border-right: none;
+                //         }
 
-                        &:nth-child(n+5):nth-child(-n+8) {
-                            border-bottom: none;
-                        }
+                //         &:nth-child(n+5):nth-child(-n+8) {
+                //             border-bottom: none;
+                //         }
 
-                        &:first-child {
-                            border-top-left-radius: 4px;
-                        }
+                //         &:first-child {
+                //             border-top-left-radius: 4px;
+                //         }
 
-                        &:nth-child(4) {
-                            border-top-right-radius: 4px;
-                        }
+                //         &:nth-child(4) {
+                //             border-top-right-radius: 4px;
+                //         }
 
-                        &:nth-child(5) {
-                            border-bottom-left-radius: 4px;
-                        }
+                //         &:nth-child(5) {
+                //             border-bottom-left-radius: 4px;
+                //         }
 
-                        &:nth-child(8) {
-                            border-bottom-right-radius: 4px;
-                        }
-                    }
+                //         &:nth-child(8) {
+                //             border-bottom-right-radius: 4px;
+                //         }
+                //     }
 
-                    .fb-global-typography-element-heading {
-                        padding: 11px 22px;
+                //     .fb-global-typography-element-heading {
+                //         padding: 11px 22px;
 
-                        div {
-                            font-family: $body-font-family;
-                            font-size: $medium-font-size-global;
-                            font-weight: 400;
-                            line-height: 20px;
-                        }
-                    }
-                    &.active{
-                        background: $neutral-color-900;
-                    }
-                }
+                //         div {
+                //             font-family: $body-font-family;
+                //             font-size: $medium-font-size-global;
+                //             font-weight: 400;
+                //             line-height: 20px;
+                //         }
+                //     }
+                //     &.active{
+                //         background: $neutral-color-900;
+                //     }
+                // }
 
 
             }
