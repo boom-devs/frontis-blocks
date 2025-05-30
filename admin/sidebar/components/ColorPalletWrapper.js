@@ -18,18 +18,19 @@ const ColorPalletWrapper = (props) => {
     }
 
     useEffect(() => {
-        //Add delete button and delete action for custom colors
-        const colorPanel = document.querySelector('.fb-custom-color-panel');
-        setTimeout(() => {
-            const items = colorPanel && colorPanel.querySelectorAll('.components-tools-panel-item');
-            if (items) {
-                items.forEach((item, index) => {
-                    const newButton = document.createElement('button');
-                    newButton.className = 'fb-delete-custom-color';
-                    newButton.setAttribute('type', 'button');
-                    newButton.setAttribute('aria-label', 'Delete');
+        if (customColors.length > 0) {
+            //Add delete button and delete action for custom colors
+            const colorPanel = document.querySelector('.fb-custom-color-panel');
+            setTimeout(() => {
+                const items = colorPanel && colorPanel.querySelectorAll('.components-tools-panel-item');
+                if (items) {
+                    items.forEach((item, index) => {
+                        const newButton = document.createElement('button');
+                        newButton.className = 'fb-delete-custom-color';
+                        newButton.setAttribute('type', 'button');
+                        newButton.setAttribute('aria-label', 'Delete');
 
-                    newButton.innerHTML = `
+                        newButton.innerHTML = `
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
                             <path d="M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675" stroke="#E43242" stroke-linecap="round"/>
                             <path d="M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659" stroke="#E43242" stroke-linecap="round"/>
@@ -38,16 +39,17 @@ const ColorPalletWrapper = (props) => {
                             </svg>
                         `;
 
-                    newButton.addEventListener('click', function () {
-                        deleteItem(index);
+                        newButton.addEventListener('click', function () {
+                            deleteItem(index);
+                        });
+
+                        const existingButton = item.querySelector('button');
+                        item.insertBefore(newButton, existingButton.nextSibling);
                     });
+                }
 
-                    const existingButton = item.querySelector('button');
-                    item.insertBefore(newButton, existingButton.nextSibling);
-                });
-            }
-
-        }, 100)
+            }, 100)
+        }
     }, [customColors]);
 
     return (
