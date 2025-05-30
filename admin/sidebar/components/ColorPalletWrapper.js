@@ -50,7 +50,6 @@ const ColorPalletWrapper = (props) => {
         }, 100)
     }, [customColors]);
 
-    console.log("hello custom colors")
     return (
         <>
             <Panel>
@@ -86,12 +85,30 @@ const ColorPalletWrapper = (props) => {
                     )}
                     <div className="add-custom-color">
                         <Button
-                            className="fb-custom-color-btn"
-                            onClick={() => setColorModalOpen(false)}
+                            className="add-custom-color-btn"
+                            onClick={addCustomColor}
                         >
-                            {__("Save", "frontis-blocks")}
+                            {/* {__("Add Custom Color", "frontis-blocks")}{" "} */}
+                            <span>
+                                <svg
+                                    width="15"
+                                    height="14"
+                                    viewBox="0 0 15 14"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M7.5 0.75V13.25M13.75 7L1.25 7"
+                                        stroke="white"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                </svg>
+                            </span>
                         </Button>
                     </div>
+
                 </PanelColorSettings>
             </Panel>
         </>

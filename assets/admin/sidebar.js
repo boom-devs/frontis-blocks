@@ -834,7 +834,6 @@ var ColorPalletWrapper = function ColorPalletWrapper(props) {
       }
     }, 100);
   }, [customColors]);
-  console.log("hello custom colors");
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Panel, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom Colors", "frontis-blocks"),
     className: "fb-color-panel fb-custom-color-panel",
@@ -860,11 +859,21 @@ var ColorPalletWrapper = function ColorPalletWrapper(props) {
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Save", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
     className: "add-custom-color"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-    className: "fb-custom-color-btn",
-    onClick: function onClick() {
-      return setColorModalOpen(false);
-    }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Save", "frontis-blocks"))))));
+    className: "add-custom-color-btn",
+    onClick: addCustomColor
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
+    width: "15",
+    height: "14",
+    viewBox: "0 0 15 14",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M7.5 0.75V13.25M13.75 7L1.25 7",
+    stroke: "white",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }))))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColorPalletWrapper);
 
