@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Define things
 define( 'FB_PLUGIN_FILE', __FILE__ );
+define( 'FRONTIS_BACKEND_URL', 'https://wpmessiah.com/wp-json/notification-api/v1/get');
 
 /**
  * Autoloader
@@ -33,3 +34,7 @@ function frontis_blocks(){
 }
 
 frontis_blocks();
+
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-boomdevs-notification-widget-frontis.php';
+
+new BoomDevs_Notification_Widget_frontis_blocks();
