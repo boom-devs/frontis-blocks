@@ -3,14 +3,15 @@
 }
 .fb-timezone-container .fb-timezone-time {
     width: auto;
-    background: #000000;
+    background: #252B37;
     display: inline-block;
     padding: 4px 12px;
     border-radius: 24px;
-    color: #ffff;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: 'Radio Canada Big';
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 550;
+    font-family: 'Inter';
     width: 260px;
     align-items: center;
     justify-content: center;
@@ -30,13 +31,14 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 550;
     color: #12B76A;
     border-radius: 24px;
     padding-right: 12px;
     overflow: hidden;
-    font-family: 'Radio Canada Big';
+    font-family: 'Inter';
 }
 .fb-timezone-status .fb-timezone-status-badge {
     height: 100%;
