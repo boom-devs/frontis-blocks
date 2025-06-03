@@ -89,6 +89,7 @@ final class Plugin
 		$this->set_locale();
 		$this->init_classes();
 		$this->init_hooks();
+		$this->appsero_init_tracker_frontis_blocks();
 
 		add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_scripts']);
@@ -144,8 +145,8 @@ final class Plugin
 			wp_enqueue_script('frontis-blocks-frontend-header', $js_file_url, [], time(), true);
 		}
 
-		$footer_js_system_path = $frontend_dir .'footer.js';
-		$footer_js_file_url = $frontend_url . 'footer.js';
+		$footer_js_system_path = $footer_frontend_dir .'footer.js';
+		$footer_js_file_url = $footer_frontend_url . 'footer.js';
 		if(file_exists($footer_js_system_path)) {	
 			$version = filemtime($footer_js_system_path);
 			wp_enqueue_script('frontis-blocks-frontend-footer', $footer_js_file_url, [], time(), true);
@@ -456,4 +457,23 @@ final class Plugin
             exit;
         }
     }
+
+	/**
+	 * Initialize the plugin tracker
+	 *
+	 * @return void
+	 */
+	public function appsero_init_tracker_frontis_blocks() {
+
+		$client = new \Appsero\Client(
+			'27f84c83-a5a3-4a41-9cef-48b83ca6c546',
+			'Frontis Blocks – The Ultimate WordPress Block Plugin',
+			FB_PLUGIN_FILE
+		);
+
+		// Active insights
+		$client->insights()->init();
+
+	}
+
 }

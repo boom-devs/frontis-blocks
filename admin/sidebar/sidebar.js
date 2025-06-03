@@ -746,21 +746,18 @@ function FrontisBlocksSidebar() {
 												themeColors,
 											)}
 										/>
+										<ColorPalletWrapper
+											colorPanelArray={colorPanelArray}
+											customColors={customColors}
+											setCustomColor={setCustomColor}
+											setCustomColors={setCustomColors}
+											addCustomColor={addCustomColor}
+											colorModalOpen={colorModalOpen}
+											setColorModalOpen={setColorModalOpen}
+											colorName={colorName}
+											setColorName={setColorName}
+										/>
 
-										{customColors.length > 0 && (
-											<ColorPalletWrapper
-												colorPanelArray={colorPanelArray}
-												customColors={customColors}
-												setCustomColor={setCustomColor}
-												setCustomColors={setCustomColors}
-												addCustomColor={addCustomColor}
-												colorModalOpen={colorModalOpen}
-												setColorModalOpen={setColorModalOpen}
-												colorName={colorName}
-												setColorName={setColorName}
-											/>
-										)}
-										
 
 									</div>
 
