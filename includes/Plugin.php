@@ -145,8 +145,8 @@ final class Plugin
 			wp_enqueue_script('frontis-blocks-frontend-header', $js_file_url, [], time(), true);
 		}
 
-		$footer_js_system_path = $frontend_dir .'footer.js';
-		$footer_js_file_url = $frontend_url . 'footer.js';
+		$footer_js_system_path = $footer_frontend_dir .'footer.js';
+		$footer_js_file_url = $footer_frontend_url . 'footer.js';
 		if(file_exists($footer_js_system_path)) {	
 			$version = filemtime($footer_js_system_path);
 			wp_enqueue_script('frontis-blocks-frontend-footer', $footer_js_file_url, [], time(), true);
