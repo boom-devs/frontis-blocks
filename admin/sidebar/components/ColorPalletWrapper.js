@@ -52,7 +52,6 @@ const ColorPalletWrapper = (props) => {
         }
     }, [customColors]);
 
-    console.log("hello custom colors")
     return (
         <>
             <Panel>
@@ -111,6 +110,7 @@ const ColorPalletWrapper = (props) => {
                             </span>
                         </Button>
                     </div>
+
                 </PanelColorSettings>
             </Panel>
         </>

@@ -13,9 +13,9 @@
         .fb-post-banner-content {
             position: relative;
             z-index: 2;
+            max-width: 1062px;
+            text-align: left;
             .fb-post-category {
-                text-align: center;
-    
                 .fb-post-category-name {
                     color: #FDFDFD;
                     font-family: "Radio Canada Big";
@@ -32,8 +32,7 @@
     
             .fb-post-title {
                 padding: 20px 0 38px 0;
-                text-align: center;
-    
+                
                 .fb-post-title-name {
                     color: #000000;
                     font-family: var(--fb-global-h1--font-family);
