@@ -49,40 +49,42 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		.fb-timezone-container .fb-timezone-time {
 			width: auto;
-			background: #000000;
+			background: #252B37;
 			display: inline-block;
 			padding: 4px 12px;
 			border-radius: 24px;
 			color: #ffff;
-			font-size: 14px;
-			font-weight: 500;
-			font-family: 'Radio Canada Big';
-			width: 260px;
+			font-size: 16px;
+			line-height: 22px;
+			font-weight: 550;
+			font-family: 'Inter';
+			width: max-content;
 			align-items: center;
 			justify-content: center;
 			display: flex;
-			gap: 2px;
+			gap: 4px;
 		}
 		.fb-timezone-container .fb-timezone-time .fb-timezone-timezone {
-			color: #717680;
+			color: #A4A7AE;
 		}
 		.fb-timezone-container .fb-timezone-header {
 			display: flex;
 			width: fit-content;
-			gap: 10px;
+			gap: 8px;
 			flex-wrap: wrap;
 		}
 		.fb-timezone-status {
 			display: flex;
 			align-items: center;
-			gap: 10px;
-			font-size: 14px;
-			font-weight: 500;
+			gap: 8px;
+			font-size: 16px;
+			line-height: 22px;
+			font-weight: 550;
 			color: #12B76A;
 			border-radius: 24px;
 			padding-right: 12px;
 			overflow: hidden;
-			font-family: 'Radio Canada Big';
+			font-family: 'Inter';
 		}
 		.fb-timezone-status .fb-timezone-status-badge {
 			height: 100%;
@@ -96,7 +98,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		.fb-timezone-status .fb-timezone-status-badge > span {
 			display: flex;
 			align-items: center;
-			gap: 4px;
+			gap: 8px;
 		}
 		.fb-timezone-status.open {
 			border: 1px solid #12B76A;

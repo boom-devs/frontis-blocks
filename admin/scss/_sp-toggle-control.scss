@@ -1,21 +1,32 @@
-.components-form-toggle{
-    &.is-checked{
-        .components-form-toggle__track{
-            background: $primary-color-base;
-            border-color: $primary-color-base ;
+.fb-inspector-control {
+    .components-panel__body {
+        .components-toggle-control {
+            margin-bottom: 12px;
+            .components-form-toggle {
+                margin-right: 8px;
+                &.is-checked {
+                    .components-form-toggle__track {
+                        background: $primary-color-base;
+                        border-color: $primary-color-base ;
+                    }
+                }
+
+                .components-form-toggle__track {
+                    background: $neutral-color-400;
+                }
+
+                .components-form-toggle__thumb {
+                    background-color: $white-color;
+                }
+            }
         }
-    } 
-    .components-form-toggle__track{
-        background: $neutral-color-400;
-    }
-    .components-form-toggle__thumb{
-        background-color: $white-color;
+
     }
 }
 
-.components-toggle-control{
-    .components-h-stack{
-        label{
+.components-toggle-control {
+    .components-h-stack {
+        label {
             margin: 0 !important;
         }
     }
