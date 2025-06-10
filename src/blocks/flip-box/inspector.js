@@ -449,6 +449,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		flipBackButtonTabPadding,
 		flipBackButtonMobilePadding,
 		flipBackButtonPaddingLink,
+		buttonIconSwitcherBack,
 		flipBackButtonLink,
 		flipBackbtnTargetUrl,
 		flipBackButtonBorder,
@@ -2234,7 +2235,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ""}
             ${flipBoxOverflow !== 'default' ? `overflow: ${flipBoxOverflow};` : ''}
 		  }
-		  .fb-flip-box-wrapper.${blockID} {
+		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
 		  	  position: relative;
 			  ${globalBgColor ? `background-color: ${globalBgColor};` : ""}
 			  ${DesktopPadding && globalPaddingDesktop.top ? `padding: ${DesktopPadding};` : ""}
@@ -2247,7 +2248,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  transition: all .3s ease-in-out;
 		  }
 	  
-		  .fb-flip-box-wrapper.${blockID}:hover {
+		  .fb-flip-box-wrapper.${blockID}:hover .fb-flipbox-front {
 			  ${globalBgHoverColor ? `background-color: ${globalBgHoverColor};` : ""}
 			  ${globalBorderHoverColor ? `border-color: ${globalBorderHoverColor};` : ""}
 			  ${boxGlobalHoverBoxShadowCssValue ? `box-shadow: ${boxGlobalHoverBoxShadowCssValue};` : ""}
@@ -2302,7 +2303,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				background-repeat: none;
 				background-size: cover;
 				${flipBoxFrontClassicColor ? `justify-content: center; ` : ''}
-				transition: all .3s ease-in-out;
+				transition: all .3s ease-in-out; 
 		  }
 		  .fb-flip-box-wrapper.${blockID} .fb-flip-box-wrapper-inner {
 			${flipIconPosition === 'top' ? 'flex-direction: column;' : ''}
@@ -3244,7 +3245,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																/>
 
 																<TextareaControl
-																	label={__("Sub Heading Text", "frontis-block")}
+																	label={__("Description Text", "frontis-block")}
 																	value={Sub_Heading_Text}
 																	onChange={(value) =>
 																		setAttributes({ Sub_Heading_Text: value })
@@ -3591,7 +3592,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																/>
 
 																<TextareaControl
-																	label={__("Sub Heading Text", "frontis-block")}
+																	label={__("Description Text", "frontis-block")}
 																	value={flipBackContent}
 																	onChange={(value) =>
 																		setAttributes({ flipBackContent: value })
@@ -3640,7 +3641,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		setAttributes({ buttonIconSwitcher: value })
 																	}
 																/>
-																{buttonIconSwitcher && (
+																{buttonIconSwitcherBack && (
 																	<>
 																		<BaseControl>
 																			<FBIconPicker
