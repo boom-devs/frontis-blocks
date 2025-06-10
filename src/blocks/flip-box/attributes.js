@@ -2597,7 +2597,7 @@ const attributes = {
     },
     descSwitcherBack: {
         type: "boolean",
-        default: false,
+        default: true,
     },
     Sub_Heading_Position: {
         type: "string",
@@ -2691,9 +2691,9 @@ const attributes = {
     },
     flipBack_Button_Switcher: {
         type: "boolean",
-        default: false,
+        default: true,
     },
-    buttonIconSwitcher: {
+    buttonIconSwitcherBack: {
         type: "boolean",
         default: true,
     },
