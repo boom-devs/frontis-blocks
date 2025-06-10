@@ -105,12 +105,28 @@ const attributes = {
     },
 
 	carouselPerColumn: {
-        type: 'number',
-        default: 2,
+        type: 'object',
+        default: {
+            Desktop: 3,
+            Tablet: 2,
+            Mobile: 1,
+        },
     },
     carouselPerColumnGap: {
-        type: 'number',
-        default: 20,
+        type: 'object',
+        default: {
+            Desktop: 20,
+            Tablet: 20,
+            Mobile: 0,
+        },
+    },
+    carouselPerColumnGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
     },
 
 	/** Start Arrows Style */
