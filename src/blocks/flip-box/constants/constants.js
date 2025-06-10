@@ -5,8 +5,13 @@ export const PRESETS = [
 	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
 	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
 	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
-    { label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
-    { label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
+	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
+	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
+];
+
+export const SELECTED_MODE = [
+	{ label: __("Front", "frontis-blocks"), value: "front" },
+	{ label: __("Back", "frontis-blocks"), value: "back" },
 ];
 
 export const SELECTED_SIDE = [
@@ -48,11 +53,11 @@ export const HEADING = [
 ];
 
 export const OVERFLOW_OP = [
-    { label: __('Default', 'frontis-blocks'), value: 'default' },
-    { label: __('Auto', 'frontis-blocks'), value: 'auto' },
-    { label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
-    { label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
-    { label: __('Clip', 'frontis-blocks'), value: 'clip' },
+	{ label: __('Default', 'frontis-blocks'), value: 'default' },
+	{ label: __('Auto', 'frontis-blocks'), value: 'auto' },
+	{ label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
+	{ label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
+	{ label: __('Clip', 'frontis-blocks'), value: 'clip' },
 ];
 
 export const BORDER_STYLES = [
@@ -72,28 +77,67 @@ export const ICON_POSITION = [
 ];
 
 export const FLIP_ICON_POSITION = [
-    { label: __("Top", "frontis-block"), value: "top" },
-    { label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
 	{ label: __("Left", "frontis-block"), value: "left" },
 	{ label: __("Bottom", "frontis-block"), value: "bottom" },
 ];
 
 export const FLIP_ICON_VERTICAL_POSITION = [
-    { label: __("Top", "frontis-block"), value: "v-top" },
-    { label: __("Middle", "frontis-block"), value: "v-middle" },
+	{ label: __("Top", "frontis-block"), value: "v-top" },
+	{ label: __("Middle", "frontis-block"), value: "v-middle" },
 	{ label: __("Bottom", "frontis-block"), value: "v-bottom" },
 ];
 
 export const FLIP_WRAP_ALIGNMENT = [
-    { label: __("Left", "frontis-block"), value: "start" },
-    { label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Left", "frontis-block"), value: "start" },
+	{ label: __("Center", "frontis-block"), value: "center" },
 	{ label: __("Right", "frontis-block"), value: "end" },
 	{ label: __("Between", "frontis-block"), value: "space-between" },
 ];
 
 export const BG_TYPE = [
-    { label: __("Image", "frontis-block"), value: "image" },
-    { label: __("Color", "frontis-block"), value: "color" },
-	
+	{ label: __("Image", "frontis-block"), value: "image" },
+	{ label: __("Color", "frontis-block"), value: "color" },
+
 ];
+
+// Flip Type Options
+export const FLIP_TYPES = [
+	{
+		label: __("Horizontal", "frontis-blocks"),
+		value: "horizontal",
+	},
+	{
+		label: __("Vertical", "frontis-blocks"),
+		value: "vertical",
+	},
+	{
+		label: __("Fade", "frontis-blocks"),
+		value: "fade",
+	},
+	{
+		label: __("Zoom In", "frontis-blocks"),
+		value: "zoom-in",
+	},
+	{
+		label: __("Zoom Out", "frontis-blocks"),
+		value: "zoom-out",
+	},
+];
+
+// Flip Trigger Options
+export const FLIP_TRIGGERS = [
+	{
+		label: __("Hover", "frontis-blocks"),
+		value: "hover",
+	},
+	{
+		label: __("Click", "frontis-blocks"),
+		value: "click",
+	},
+];
+
+
+
 

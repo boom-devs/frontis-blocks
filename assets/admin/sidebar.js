@@ -836,7 +836,7 @@ var ColorPalletWrapper = function ColorPalletWrapper(props) {
       }, 100);
     }
   }, [customColors]);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, customColors.length > 0 && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Panel, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Panel, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom Colors", "frontis-blocks"),
     className: "fb-color-panel fb-custom-color-panel",
     initialOpen: true,
@@ -4202,7 +4202,7 @@ function FrontisBlocksSidebar() {
     disableAlpha: true,
     disableCustomGradients: false,
     colorSettings: colorPanelArray(globalColors, setGlobalColor, themeColors)
-  }), customColors.length > 0 && /*#__PURE__*/React.createElement(_components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }), /*#__PURE__*/React.createElement(_components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_7__["default"], {
     colorPanelArray: colorPanelArray,
     customColors: customColors,
     setCustomColor: setCustomColor,

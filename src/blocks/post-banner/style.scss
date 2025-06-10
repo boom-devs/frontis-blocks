@@ -1,5 +1,6 @@
-.fb-post-banner-block{
+.fb-post-banner-block {
     width: 100%;
+
     .fb-post-banner-container {
         position: relative;
         background-size: cover;
@@ -9,72 +10,98 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        padding-bottom: 32px;
+        padding: 280px 0 30px 0;
+
         .fb-post-banner-content {
             position: relative;
             z-index: 2;
+            max-width: 1062px;
+            text-align: left;
+            margin: 0 auto;
+
             .fb-post-category {
-                text-align: center;
-    
                 .fb-post-category-name {
-                    color: #FDFDFD;
-                    font-family: "Radio Canada Big";
-                    font-size: 13px;
-                    font-weight: 500;
-                    line-height: 16px;
-                    letter-spacing: 1.33px;
+                    color: var(--wp--frontis--color--blue-500);
+                    font-family: var(--fb-global-fb_customtypo_3eeo1--font-family);
+                    font-size: var(--fb-global-fb_customtypo_3eeo1--font-size);
+                    font-weight: var(--fb-global-fb_customtypo_3eeo1--font-weight);
+                    letter-spacing: var(--fb-global-fb_customtypo_3eeo1--font-letter-spacing);
+                    line-height: var(--fb-global-fb_customtypo_3eeo1--font-line-height);
                     text-transform: uppercase;
-                    padding: 5px 12px;
-                    background-color: #040DBF;
-                    border-radius: 24px;
                 }
             }
-    
+
             .fb-post-title {
-                padding: 20px 0 38px 0;
-                text-align: center;
-    
+                padding: 16px 0 32px 0;
+
                 .fb-post-title-name {
                     color: #000000;
                     font-family: var(--fb-global-h1--font-family);
-                    font-size: var(--fb-global-h1--font-size);
-                    font-weight: var(--fb-global-h1--font-weight);
+                    font-size: 64px;
+                    font-weight: 600;
                     letter-spacing: var(--fb-global-h1--font-letter-spacing);
-                    line-height: var(--fb-global-h1--font-line-height);
+                    line-height: 83px;
                     margin: 0px 0px 0px 0px;
                     border: none;
                     transition: all .3s ease-in-out;
                 }
             }
-    
-            .fb-post-author {
+
+            .fb-post-banner-meta-wrapper {
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                gap: 12px;
-                color: #717680;
-                text-transform: uppercase;
-                .fb-post-author-avatar {
-                    border-radius: 50%;
-                }
-    
-                .fb-post-author-info,
-                .fb-post-author-meta {
+                justify-content: space-between;
+
+                .fb-post-metrics {
                     display: flex;
                     align-items: center;
-                    gap: 8px;
-                    svg{
-                        background: #fff;
-                        padding: 4px;
-                        border-radius: 8px;
+                    gap: 16px;
+
+                    .fb-post-metric-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 4px;
+                    }
+
+                    .fb-post-metric-count {
+                        color: #000000;
+                        font-family: var(--fb-global-fb_customtypo_ugs6e--font-family);
+                        font-size: var(--fb-global-fb_customtypo_ugs6e--font-size);
+                        font-weight: var(--fb-global-fb_customtypo_ugs6e--font-weight);
+                        letter-spacing: var(--fb-global-fb_customtypo_ugs6e--font-letter-spacing);
+                        line-height: var(--fb-global-fb_customtypo_ugs6e--font-line-height);
                     }
                 }
-                .fb-post-author-name{
-                    font-weight: 500;
-                    color: #000000;
-                }
-                .fb-post-author-seperator {
-                    line-height: 0;
+
+                .fb-post-author {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    gap: 12px;
+                    color: #717680;
+
+                    .fb-post-author-avatar {
+                        border-radius: 50%;
+                    }
+
+                    .fb-post-author-info,
+                    .fb-post-author-meta {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                    }
+
+                    span.author-info {
+                        color: #000000;
+                        font-family: var(--fb-global-captions--font-family);
+                        font-size: var(--fb-global-captions--font-size);
+                        font-weight: var(--fb-global-captions--font-weight);
+                        line-height: var(--fb-global-captions--line-height);
+                    }
+
+                    .fb-post-author-seperator {
+                        line-height: 0;
+                    }
                 }
             }
         }
@@ -89,4 +116,9 @@
     bottom: 0;
     z-index: 1;
     background: linear-gradient(180deg, rgba(245, 245, 245, 0.00) 0%, rgba(245, 245, 245, 0.90) 75%, #F5F5F5 95.17%);
+}
+@media all and (max-width: 767px){
+    .fb-post-banner-container{
+        padding: 148px 0 40px 0;
+    }
 }

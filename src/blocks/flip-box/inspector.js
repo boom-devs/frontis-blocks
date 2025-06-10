@@ -217,6 +217,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnIcon,
 		width,
 		mediaSwitcher,
+		flipModeSwitcher,
 		contentAlignment,
 
 		flipButtonBorder,

@@ -54,67 +54,65 @@ const ColorPalletWrapper = (props) => {
 
     return (
         <>
-            {customColors.length > 0 &&
-                <Panel>
-                    <PanelColorSettings
-                        title={__(
-                            "Custom Colors",
-                            "frontis-blocks"
-                        )}
-                        className={"fb-color-panel fb-custom-color-panel"}
-                        initialOpen={true}
-                        disableAlpha={true}
-                        colorSettings={colorPanelArray(customColors, setCustomColor)}
-                    >
-                        {colorModalOpen && (
-                            <Modal
-                                title={__("Add Color name", "frontis-blocks")}
-                                onRequestClose={() => setColorModalOpen(false)}
-                            >
-                                <TextControl
-                                    __nextHasNoMarginBottom
-                                    __next40pxDefaultSize
-                                    label={__("Color Name", "frontis-blocks")}
-                                    value={colorName}
-                                    onChange={setColorName}
-                                />
-                                <Button
-                                    className="fb-custom-color-btn"
-                                    onClick={() => setColorModalOpen(false)}
-                                >
-                                    {__("Save", "frontis-blocks")}
-                                </Button>
-                            </Modal>
-                        )}
-                        <div className="add-custom-color">
+            <Panel>
+                <PanelColorSettings
+                    title={__(
+                        "Custom Colors",
+                        "frontis-blocks"
+                    )}
+                    className={"fb-color-panel fb-custom-color-panel"}
+                    initialOpen={true}
+                    disableAlpha={true}
+                    colorSettings={colorPanelArray(customColors, setCustomColor)}
+                >
+                    {colorModalOpen && (
+                        <Modal
+                            title={__("Add Color name", "frontis-blocks")}
+                            onRequestClose={() => setColorModalOpen(false)}
+                        >
+                            <TextControl
+                                __nextHasNoMarginBottom
+                                __next40pxDefaultSize
+                                label={__("Color Name", "frontis-blocks")}
+                                value={colorName}
+                                onChange={setColorName}
+                            />
                             <Button
-                                className="add-custom-color-btn"
-                                onClick={addCustomColor}
+                                className="fb-custom-color-btn"
+                                onClick={() => setColorModalOpen(false)}
                             >
-                                {/* {__("Add Custom Color", "frontis-blocks")}{" "} */}
-                                <span>
-                                    <svg
-                                        width="15"
-                                        height="14"
-                                        viewBox="0 0 15 14"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M7.5 0.75V13.25M13.75 7L1.25 7"
-                                            stroke="white"
-                                            strokeWidth="1.5"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                    </svg>
-                                </span>
+                                {__("Save", "frontis-blocks")}
                             </Button>
-                        </div>
-                    </PanelColorSettings>
-                </Panel>
+                        </Modal>
+                    )}
+                    <div className="add-custom-color">
+                        <Button
+                            className="add-custom-color-btn"
+                            onClick={addCustomColor}
+                        >
+                            {/* {__("Add Custom Color", "frontis-blocks")}{" "} */}
+                            <span>
+                                <svg
+                                    width="15"
+                                    height="14"
+                                    viewBox="0 0 15 14"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        d="M7.5 0.75V13.25M13.75 7L1.25 7"
+                                        stroke="white"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                </svg>
+                            </span>
+                        </Button>
+                    </div>
 
-            }
+                </PanelColorSettings>
+            </Panel>
         </>
     )
 }
