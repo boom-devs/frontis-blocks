@@ -93,24 +93,26 @@ final class Plugin
 
 		add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_scripts']);
-        register_activation_hook(FB_PLUGIN_FILE, [$this, 'set_activation_redirect']);
-        add_action('admin_init', [$this, 'handle_activation_redirect'], 999);
+		register_activation_hook(FB_PLUGIN_FILE, [$this, 'set_activation_redirect']);
+		add_action('admin_init', [$this, 'handle_activation_redirect'], 999);
 		add_action('wp_head', [$this, 'add_preconnect_to_head']);
 	}
-	
-	function add_preconnect_to_head() {
+
+	function add_preconnect_to_head()
+	{
 
 		// Enqueue google fonts
 		$google_font_url = get_option('fb_google_fonts_url');
 		if ($google_font_url) {
-    		echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
-    		echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-    		echo '<link rel="preload" as="style" href="'.$google_font_url.'" onload="this.onload=null;this.rel=\'stylesheet\'">';
-    		echo '<noscript><link rel="stylesheet" href="'.$google_font_url.'"></noscript>';
+			echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
+			echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+			echo '<link rel="preload" as="style" href="' . $google_font_url . '" onload="this.onload=null;this.rel=\'stylesheet\'">';
+			echo '<noscript><link rel="stylesheet" href="' . $google_font_url . '"></noscript>';
 		}
 	}
 
-	public function enqueue_header_footer() {
+	public function enqueue_header_footer()
+	{
 		$upload_dir = wp_upload_dir();
 
 		// Header
@@ -118,10 +120,10 @@ final class Plugin
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/header/';
 
 		// Css file
-		$css_file_system_path = $frontend_dir .'header.min.css';
-		$css_file_url = $frontend_url .'header.min.css';
+		$css_file_system_path = $frontend_dir . 'header.min.css';
+		$css_file_url = $frontend_url . 'header.min.css';
 
-		if(file_exists($css_file_system_path)) {	
+		if (file_exists($css_file_system_path)) {
 			$version = filemtime($css_file_system_path);
 			wp_enqueue_style('frontis-blocks-frontend-header', $css_file_url, [], $version);
 		}
@@ -131,23 +133,23 @@ final class Plugin
 		$footer_frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/footer/';
 
 		// Css file
-		$css_file_system_path = $footer_frontend_dir .'footer.min.css';
-		$css_file_url = $footer_frontend_url .'footer.min.css';
-		if(file_exists($css_file_system_path)) {	
+		$css_file_system_path = $footer_frontend_dir . 'footer.min.css';
+		$css_file_url = $footer_frontend_url . 'footer.min.css';
+		if (file_exists($css_file_system_path)) {
 			$version = filemtime($css_file_system_path);
 			wp_enqueue_style('frontis-blocks-frontend-footer', $css_file_url, [], $version);
 		}
 
-		$header_js_system_path = $frontend_dir .'header.js';
+		$header_js_system_path = $frontend_dir . 'header.js';
 		$js_file_url = $frontend_url . 'header.js';
-		if(file_exists($header_js_system_path)) {	
+		if (file_exists($header_js_system_path)) {
 			$version = filemtime($header_js_system_path);
 			wp_enqueue_script('frontis-blocks-frontend-header', $js_file_url, [], time(), true);
 		}
 
-		$footer_js_system_path = $footer_frontend_dir .'footer.js';
+		$footer_js_system_path = $footer_frontend_dir . 'footer.js';
 		$footer_js_file_url = $footer_frontend_url . 'footer.js';
-		if(file_exists($footer_js_system_path)) {	
+		if (file_exists($footer_js_system_path)) {
 			$version = filemtime($footer_js_system_path);
 			wp_enqueue_script('frontis-blocks-frontend-footer', $footer_js_file_url, [], time(), true);
 		}
@@ -160,28 +162,28 @@ final class Plugin
 
 		$frntis_block_used = get_post_meta(get_the_ID(), 'page_frontis_block_used', true);
 
-		if(is_home()) {
+		if (is_home()) {
 			$page_name = 'home';
 		}
 
-		if(is_single()) {
+		if (is_single()) {
 			$page_name = 'single';
 		}
 
-		if(is_archive()) {
-		    $page_name = 'archive';
+		if (is_archive()) {
+			$page_name = 'archive';
 		}
-		
-		if(is_search()) {
-		    $page_name = 'search';
+
+		if (is_search()) {
+			$page_name = 'search';
 		}
 
 		// if(is_page()) {
 		// 	$page_name = 'page';
 		// }
-		
-		if(is_404()) {
-		    $page_name = '404';
+
+		if (is_404()) {
+			$page_name = '404';
 		}
 
 		// Check page or post assigned by template
@@ -191,20 +193,20 @@ final class Plugin
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
 
 		// Css file
-		$css_file_system_path = $frontend_dir . $page_name .'.min.css';
-		$css_file_url = $frontend_url . $page_name .'.min.css';
+		$css_file_system_path = $frontend_dir . $page_name . '.min.css';
+		$css_file_url = $frontend_url . $page_name . '.min.css';
 
 		// Js file
-		$js_file_system_path = $frontend_dir . $page_name .'.js';
-		$js_file_url = $frontend_url . $page_name .'.js';
+		$js_file_system_path = $frontend_dir . $page_name . '.js';
+		$js_file_url = $frontend_url . $page_name . '.js';
 
 		// Enqueue frontend css and js
-		if(file_exists($css_file_system_path)) {
+		if (file_exists($css_file_system_path)) {
 			$version = filemtime($css_file_system_path);
 			wp_enqueue_style('frontis-blocks-frontend', $css_file_url, [], $version);
 		}
-		
-		if(file_exists($js_file_system_path)) {
+
+		if (file_exists($js_file_system_path)) {
 			$version = filemtime($js_file_system_path);
 			wp_enqueue_script('frontis-blocks-frontend', $js_file_url, [], $version, true);
 		}
@@ -234,6 +236,14 @@ final class Plugin
 				'whatsapp' => 'https://wa.me/?text=',
 			]
 		]);
+
+		wp_localize_script('frontis-blocks-frontend', 'PostLikeData', [
+			'ajax_url' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('fb_post_like_nonce'),
+			'user_logged_in' => is_user_logged_in(),
+			'prefix' => FB_PREFIX
+		]);
+
 	}
 
 	public function enqueue_editor_scripts()
@@ -335,57 +345,59 @@ final class Plugin
 	}
 
 	/**
-     * Set flag to trigger redirect on activation
-     */
-    public function set_activation_redirect() {
-        add_option('frontis_blocks_do_activation_redirect', true);
+	 * Set flag to trigger redirect on activation
+	 */
+	public function set_activation_redirect()
+	{
+		add_option('frontis_blocks_do_activation_redirect', true);
 		$this->insert_fb_global_colors();
 		$this->fb_on_activate_or_update();
-    }
+	}
 
 	/**
 	 * Insert fb global colors when plugin is activated
 	 */
-	public function insert_fb_global_colors() {
+	public function insert_fb_global_colors()
+	{
 		$option_name = 'fb_global_colors';
-	
+
 		// Get theme colors from wp_get_global_settings()
 		$theme_colors = [];
 		$theme_json = wp_get_global_settings();
-	
+
 		if ($theme_json && isset($theme_json['color']) && isset($theme_json['color']['palette'])) {
 			$theme_json = $theme_json['color']['palette'];
-	
+
 			if (isset($theme_json['theme'])) {
 				$theme_colors = $theme_json['theme'];
 			}
 		}
-	
+
 		// Slug Mapping
 		$slug_mapping = [
-			"Base"       => ["name" => "Primary Color", "slug" => "primary-color"],
-			"Contrast"   => ["name" => "Secondary Color", "slug" => "secondary-color"],
-			"Accent 1"   => ["name" => "Tertiary Color", "slug" => "tertiary-color"],
-			"Accent 2"   => ["name" => "Accent Color", "slug" => "accent-color"],
-			"Accent 3"   => ["name" => "Text Color", "slug" => "text-color"],
-			"Accent 4"   => ["name" => "Link Color", "slug" => "link-color"],
-			"Accent 5"   => ["name" => "Link Hover Color", "slug" => "link-hover-color"],
-			"Accent 6"   => ["name" => "White Color", "slug" => "white-color"]
+			"Base" => ["name" => "Primary Color", "slug" => "primary-color"],
+			"Contrast" => ["name" => "Secondary Color", "slug" => "secondary-color"],
+			"Accent 1" => ["name" => "Tertiary Color", "slug" => "tertiary-color"],
+			"Accent 2" => ["name" => "Accent Color", "slug" => "accent-color"],
+			"Accent 3" => ["name" => "Text Color", "slug" => "text-color"],
+			"Accent 4" => ["name" => "Link Color", "slug" => "link-color"],
+			"Accent 5" => ["name" => "Link Hover Color", "slug" => "link-hover-color"],
+			"Accent 6" => ["name" => "White Color", "slug" => "white-color"]
 		];
-	
+
 		// Modify theme colors
 		$modified_colors = [];
 		foreach ($theme_colors as $color) {
 			$name = $color["name"];
 			if (isset($slug_mapping[$name])) {
 				$modified_colors[] = [
-					"name"  => $slug_mapping[$name]["name"],
+					"name" => $slug_mapping[$name]["name"],
 					"color" => $color["color"],
-					"slug"  => $slug_mapping[$name]["slug"]
+					"slug" => $slug_mapping[$name]["slug"]
 				];
 			}
 		}
-	
+
 		// Insert or update option in database
 		if (get_option($option_name) === false) {
 			add_option($option_name, $modified_colors);
@@ -399,7 +411,8 @@ final class Plugin
 	/**
 	 * Handle plugin activation and update
 	 */
-	public function fb_on_activate_or_update() {
+	public function fb_on_activate_or_update()
+	{
 		update_option('frontis_blocks_version', self::VERSION);
 		Settings::get_instance()->generate_assets_on_activation_update();
 	}
@@ -407,7 +420,8 @@ final class Plugin
 	/**
 	 * Set the version if it was never saved before
 	 */
-	public function fb_set_initial_version() {
+	public function fb_set_initial_version()
+	{
 		if (get_option('frontis_blocks_version') === false) {
 			update_option('frontis_blocks_version', self::VERSION);
 		}
@@ -416,54 +430,57 @@ final class Plugin
 	/**
 	 * Handle plugin update via WordPress plugin updater
 	 */
-	public function fb_on_update($upgrader_object, $options) {
+	public function fb_on_update($upgrader_object, $options)
+	{
 		if (
 			isset($options['type']) && $options['type'] === 'plugin' &&
 			in_array($options['action'], ['update', 'install'], true)
 		) {
 			// Try both plugin list or single plugin
 			$plugin_slug = defined('FB_PLUGIN_BASENAME') ? FB_PLUGIN_BASENAME : 'frontis-blocks/frontis-blocks.php';
-	
+
 			$is_target_plugin = false;
-	
+
 			// Bulk update path (update action)
 			if (!empty($options['plugins']) && is_array($options['plugins'])) {
 				$is_target_plugin = in_array($plugin_slug, $options['plugins'], true);
 			}
-	
+
 			// Upload path (install action)
 			if (!$is_target_plugin && !empty($options['plugin'])) {
 				$is_target_plugin = $options['plugin'] === $plugin_slug;
 			}
-	
+
 			if ($is_target_plugin) {
 				$this->fb_on_activate_or_update();
 			}
 		}
 	}
 
-    /**
-     * Handle redirect to settings page after activation
-     */
-    public function handle_activation_redirect() { 
-        if (
-            get_option('frontis_blocks_do_activation_redirect', false) 
-            && current_user_can('manage_options')
-            && !isset($_GET['activate-multi'])
-        ) {
-            delete_option('frontis_blocks_do_activation_redirect');
-            
-            wp_safe_redirect(admin_url('admin.php?page=frontis-blocks'));
-            exit;
-        }
-    }
+	/**
+	 * Handle redirect to settings page after activation
+	 */
+	public function handle_activation_redirect()
+	{
+		if (
+			get_option('frontis_blocks_do_activation_redirect', false)
+			&& current_user_can('manage_options')
+			&& !isset($_GET['activate-multi'])
+		) {
+			delete_option('frontis_blocks_do_activation_redirect');
+
+			wp_safe_redirect(admin_url('admin.php?page=frontis-blocks'));
+			exit;
+		}
+	}
 
 	/**
 	 * Initialize the plugin tracker
 	 *
 	 * @return void
 	 */
-	public function appsero_init_tracker_frontis_blocks() {
+	public function appsero_init_tracker_frontis_blocks()
+	{
 
 		$client = new \Appsero\Client(
 			'27f84c83-a5a3-4a41-9cef-48b83ca6c546',
