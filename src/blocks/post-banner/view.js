@@ -31,9 +31,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const likeButtons = document.querySelectorAll('.fb-like-btn');
     likeButtons.forEach(button => {
         button.addEventListener('click', function () {
-            console.log(PostLikeData)
+            console.log(FrontisBlocksData)
             // Check if user is logged in
-            if (!PostLikeData.user_logged_in) {
+            if (!FrontisBlocksData.user_logged_in) {
                 alert('Please log in to like posts.');
                 return;
             }
@@ -46,11 +46,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // AJAX request to handle like/unlike
             const formData = new FormData();
-            formData.append('action', PostLikeData.prefix + 'toggle_post_like');
+            formData.append('action', FrontisBlocksData.prefix + 'toggle_post_like');
             formData.append('post_id', postId);
-            formData.append('nonce', PostLikeData.nonce);
+            formData.append('nonce', FrontisBlocksData.nonce);
 
-            fetch(PostLikeData.ajax_url, {
+            fetch(FrontisBlocksData.ajax_url, {
                 method: 'POST',
                 body: formData
             })

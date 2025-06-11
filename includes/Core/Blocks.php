@@ -32,7 +32,7 @@ class Blocks
 		$active_blocks = get_option('fb_active_blocks');
 
 		if (!empty($blocks_list)) {
-			foreach ($blocks_list as $block) {	
+			foreach ($blocks_list as $block) {
 				$slug = $block['slug'];
 				$complete = $block['complete'];
 				if (is_array($active_blocks) && !empty($active_blocks)) {
@@ -84,10 +84,20 @@ class Blocks
 					$localize_array = array_merge($localize_array, $admin_localize_array);
 				}
 
-				$localize_array['site_url'] = site_url();
-				$localize_array['pluginUrl'] = FB_PLUGIN_URL;
-				$localize_array['fluent_form_install_url'] = admin_url('plugin-install.php?s=Fluent Forms&tab=search&type=term');
-				$localize_array['contact_form7_install_url'] = admin_url('plugin-install.php?s=Contact Form 7&tab=search&type=term');
+				$common_localize_array = [
+					'site_url' => site_url(),
+					'pluginUrl' => FB_PLUGIN_URL,
+					'fluent_form_install_url' => admin_url('plugin-install.php?s=Fluent Forms&tab=search&type=term'),
+					'contact_form7_install_url' => admin_url('plugin-install.php?s=Contact Form 7&tab=search&type=term'),
+					'ajax_url' => admin_url('admin-ajax.php'),
+					'nonce' => wp_create_nonce('fb_post_like_nonce'),
+					'user_logged_in' => is_user_logged_in(),
+					'prefix' => FB_PREFIX
+				];
+
+				$localize_array = array_merge($localize_array, $common_localize_array);
+
+				// Localize scripts
 				wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
 				wp_localize_script($view_script_handle, 'FrontisBlocksData', $localize_array);
 				wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', $localize_array);
@@ -162,8 +172,9 @@ class Blocks
 		return $block_content;
 	}
 
-	public function get_blocks_on_save($post_id, $post, $update) {
-		if($update){
+	public function get_blocks_on_save($post_id, $post, $update)
+	{
+		if ($update) {
 			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post);
 		}
 	}
@@ -202,20 +213,21 @@ class Blocks
 		return $this->registered_blocks;
 	}
 
-	public function enqueue_google_fonts() {
+	public function enqueue_google_fonts()
+	{
 		$google_fonts = get_option('fb_fontfamilies');
 
-        if(!empty($google_fonts)) {
-            foreach ($google_fonts as $key => $value) {
-                // unique fonts family 
-                if(!in_array($value, $this->gfonts)) {
-                    $this->gfonts[$value] = $value;
-                }
-            }
-        }
+		if (!empty($google_fonts)) {
+			foreach ($google_fonts as $key => $value) {
+				// unique fonts family 
+				if (!in_array($value, $this->gfonts)) {
+					$this->gfonts[$value] = $value;
+				}
+			}
+		}
 
-		if(!empty($this->gfonts)) {
-            // Helper::load_google_font( $this->gfonts );
-        }
+		if (!empty($this->gfonts)) {
+			// Helper::load_google_font( $this->gfonts );
+		}
 	}
 }
