@@ -213,9 +213,6 @@ final class Plugin
 
 		$this->enqueue_header_footer();
 
-		wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', [
-			'site_url' => site_url()
-		]);
 		wp_localize_script('frontis-blocks-frontend', 'SocialShareData', [
 			'permalink' => get_permalink(),
 			'title' => get_the_title(),
@@ -237,12 +234,7 @@ final class Plugin
 			]
 		]);
 
-		wp_localize_script('frontis-blocks-frontend', 'PostLikeData', [
-			'ajax_url' => admin_url('admin-ajax.php'),
-			'nonce' => wp_create_nonce('fb_post_like_nonce'),
-			'user_logged_in' => is_user_logged_in(),
-			'prefix' => FB_PREFIX
-		]);
+		
 
 	}
 
