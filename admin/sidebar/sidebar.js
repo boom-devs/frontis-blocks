@@ -1,17 +1,14 @@
 import { __ } from "@wordpress/i18n";
 import { PluginSidebar, PluginSidebarMoreMenuItem } from "@wordpress/editor";
-import { useDispatch } from "@wordpress/data";
 import {
 	Button,
-	Modal,
-	TextControl,
-	TabPanel,
 	__experimentalNavigatorProvider as NavigatorProvider,
 	__experimentalNavigatorScreen as NavigatorScreen,
 	__experimentalNavigatorButton as NavigatorButton,
 } from "@wordpress/components";
 import { PanelColorSettings } from "@wordpress/block-editor";
 import { useEffect, useState, useCallback, useMemo } from "@wordpress/element";
+import { useDispatch } from '@wordpress/data';
 import GradientColorPallet from "./components/GradientColorPallet";
 import ColorPalletWrapper from "./components/ColorPalletWrapper";
 import CustomGradientColorPallet from "./components/CustomGradientPallet";
@@ -305,8 +302,7 @@ const defaultTypography = {
 
 function FrontisBlocksSidebar() {
 	const deviceType = useDeviceType();
-	const { editPost } = useDispatch("core/editor");
-	const isAfterSave = useAfterSave();
+	// const isAfterSave = useAfterSave();
 
 	// State management
 	const [globalColors, setGlobalColors] = useState(defaultColors);
@@ -316,10 +312,12 @@ function FrontisBlocksSidebar() {
 	const [typography, setTypography] = useState(defaultTypography);
 	const [customTypography, setCustomTypography] = useState({});
 	const [fontFamilies, setFontFamilies] = useState({});
-	const [activeTab, setActiveTab] = useState("solid");
 	const [colorModalOpen, setColorModalOpen] = useState(false);
 	const [colorName, setColorName] = useState("");
-	const [isLoading, setIsLoading] = useState(false);
+	const [isAfterSave, setIsAfterSave] = useState(false);
+	const [isMount, setIsMount] = useState(false);
+
+	const dispatch = useDispatch('core/editor');
 
 	// Memoized theme colors
 	const themeColors = useMemo(
@@ -341,105 +339,104 @@ function FrontisBlocksSidebar() {
 		loadGoogleFont(fontsString);
 	}, []);
 
-	const handleUpdateState = useCallback(async () => {
-		console.log("Initial loaded");
-		setIsLoading(true);
-		const localStorageKeys = [
-			{
-				key: "fb_global_colors",
-				setter: setGlobalColors,
-				defaultValue: themeColors,
-				api: "fb_get_global_colors",
-			},
-			{
-				key: "fb_custom_colors",
-				setter: setCustomColors,
-				defaultValue: [],
-				api: "fb_get_custom_colors",
-			},
-			{
-				key: "fb_gradient_colors",
-				setter: setGradientColors,
-				defaultValue: gradientDefaults,
-				api: "fb_get_gradient_colors",
-			},
-			{
-				key: "fb_custom_gradient_colors",
-				setter: setCustomGradientColors,
-				defaultValue: [],
-				api: "fb_get_custom_gradient_colors",
-			},
-			{
-				key: "fb_typography",
-				setter: setTypography,
-				defaultValue: defaultTypography,
-				api: "fb_get_typography",
-			},
-			{
-				key: "fb_custom_typography",
-				setter: setCustomTypography,
-				defaultValue: [],
-				api: "fb_get_custom_typography",
-			},
-			{
-				key: "fb_fontfamilies",
-				setter: setFontFamilies,
-				defaultValue: [],
-				api: "fb_get_fontfamilies",
-				postProcess: getAllFontFamilies,
-			},
-			{
-				key: "fb_globaltypo",
-				setter: null,
-				defaultValue: null,
-				api: "fb_get_globaltypo",
-				postProcess: (data) => generateCSSVariables(data, deviceType),
-			},
-		];
+	// const handleUpdateState = useCallback(async () => {
+	// 	const localStorageKeys = [
+	// 		{
+	// 			key: "fb_global_colors",
+	// 			setter: setGlobalColors,
+	// 			defaultValue: themeColors,
+	// 			api: "fb_get_global_colors",
+	// 		},
+	// 		{
+	// 			key: "fb_custom_colors",
+	// 			setter: setCustomColors,
+	// 			defaultValue: [],
+	// 			api: "fb_get_custom_colors",
+	// 		},
+	// 		{
+	// 			key: "fb_gradient_colors",
+	// 			setter: setGradientColors,
+	// 			defaultValue: gradientDefaults,
+	// 			api: "fb_get_gradient_colors",
+	// 		},
+	// 		{
+	// 			key: "fb_custom_gradient_colors",
+	// 			setter: setCustomGradientColors,
+	// 			defaultValue: [],
+	// 			api: "fb_get_custom_gradient_colors",
+	// 		},
+	// 		{
+	// 			key: "fb_typography",
+	// 			setter: setTypography,
+	// 			defaultValue: defaultTypography,
+	// 			api: "fb_get_typography",
+	// 		},
+	// 		{
+	// 			key: "fb_custom_typography",
+	// 			setter: setCustomTypography,
+	// 			defaultValue: [],
+	// 			api: "fb_get_custom_typography",
+	// 		},
+	// 		{
+	// 			key: "fb_fontfamilies",
+	// 			setter: setFontFamilies,
+	// 			defaultValue: [],
+	// 			api: "fb_get_fontfamilies",
+	// 			postProcess: getAllFontFamilies,
+	// 		},
+	// 		{
+	// 			key: "fb_globaltypo",
+	// 			setter: null,
+	// 			defaultValue: null,
+	// 			api: "fb_get_globaltypo",
+	// 			postProcess: (data) => generateCSSVariables(data, deviceType),
+	// 		},
+	// 	];
 
-		try {
-			for (const {
-				key,
-				setter,
-				defaultValue,
-				api,
-				postProcess,
-			} of localStorageKeys) {
-				if (key === "fb_global_colors") {
-					// Forcefully set fb_global_colors to themeColors
-					setter(themeColors);
-					localStorage.setItem(key, JSON.stringify(themeColors));
-					if (postProcess) setTimeout(() => postProcess(themeColors), 1000);
-				} else {
-					const localData = getFbLocalStorage(key);
-					// if (!localData || localData.length < 1) {
-					// 	const res = await getGlobalStyle(api);
-					// 	const data = res.success ? res.data : defaultValue;
-					// 	if (setter) setter(data);
-					// 	localStorage.setItem(key, JSON.stringify(data));
-					// 	if (postProcess) setTimeout(() => postProcess(data), 1000);
-					// } else {
-					// 	if (setter) setter(localData);
-					// 	if (postProcess) setTimeout(() => postProcess(localData), 1000);
-					// }
-					const res = await getGlobalStyle(api);
-					const data = res.success ? res.data : defaultValue;
-					if (setter) setter(data);
-					localStorage.setItem(key, JSON.stringify(data));
-					if (postProcess) setTimeout(() => postProcess(data), 1000);
-				}
-			}
-		} catch (error) {
-			console.error("Error fetching global settings:", error);
-		} finally {
-			setIsLoading(false);
-		}
-	}, [deviceType, themeColors, getAllFontFamilies]);
+	// 	try {
+	// 		for (const {
+	// 			key,
+	// 			setter,
+	// 			defaultValue,
+	// 			api,
+	// 			postProcess,
+	// 		} of localStorageKeys) {
+	// 			if (key === "fb_global_colors") {
+	// 				// Forcefully set fb_global_colors to themeColors
+	// 				setter(themeColors);
+	// 				localStorage.setItem(key, JSON.stringify(themeColors));
+	// 				if (postProcess) setTimeout(() => postProcess(themeColors), 1000);
+	// 			} else {
+	// 				const localData = getFbLocalStorage(key);
+	// 				// if (!localData || localData.length < 1) {
+	// 				// 	const res = await getGlobalStyle(api);
+	// 				// 	const data = res.success ? res.data : defaultValue;
+	// 				// 	if (setter) setter(data);
+	// 				// 	localStorage.setItem(key, JSON.stringify(data));
+	// 				// 	if (postProcess) setTimeout(() => postProcess(data), 1000);
+	// 				// } else {
+	// 				// 	if (setter) setter(localData);
+	// 				// 	if (postProcess) setTimeout(() => postProcess(localData), 1000);
+	// 				// }
+	// 				const res = await getGlobalStyle(api);
+	// 				const data = res.success ? res.data : defaultValue;
+	// 				if (setter) setter(data);
+	// 				localStorage.setItem(key, JSON.stringify(data));
+	// 				if (postProcess) setTimeout(() => postProcess(data), 1000);
+	// 			}
+	// 		}
+	// 	} catch (error) {
+	// 		console.error("Error fetching global settings:", error);
+	// 	} finally {
+	// 		setIsMount(false);
+	// 		setIsLoading(false);
+	// 	}
+	// }, [deviceType, themeColors, getAllFontFamilies]);
 
 	// Initialize on mount and device type change
-	useEffect(() => {
-		handleUpdateState();
-	}, [handleUpdateState]);
+	// useEffect(() => {
+	// 	handleUpdateState();
+	// }, [handleUpdateState]);
 
 	// Generate color variables
 	useEffect(() => {
@@ -460,7 +457,7 @@ function FrontisBlocksSidebar() {
 
 	// Save settings after post save
 	const handleUpdateSettings = useCallback(async () => {
-		if (!isAfterSave || !isLoading) return;
+		if (!isAfterSave || !isMount) return;
 		const settings = [
 			{
 				key: "fb_update_global_colors",
@@ -501,16 +498,16 @@ function FrontisBlocksSidebar() {
 		}
 	}, [
 		isAfterSave,
-		isLoading,
+		isMount,
 		globalColors,
 		customColors,
 		gradientColors,
 		customGradientColors,
 	]);
 
-	useEffect(() => {
-		handleUpdateSettings();
-	}, [handleUpdateSettings]);
+	// useEffect(() => {
+	// 	handleUpdateSettings();
+	// }, [handleUpdateSettings]);
 
 	// Color panel array generator
 	const colorPanelArray = useCallback((colors, setColor, defaults = []) => {
@@ -530,7 +527,7 @@ function FrontisBlocksSidebar() {
 			colors[index].color = color;
 			return colors;
 		});
-		setIsLoading(true);
+		setIsMount(true);
 	}, []);
 
 	const setGradientColor = useCallback((index, color) => {
@@ -539,7 +536,6 @@ function FrontisBlocksSidebar() {
 			colors[index].color = color;
 			return colors;
 		});
-		setIsLoading(true);
 	}, []);
 
 	const setCustomGradientColor = useCallback((index, color) => {
@@ -548,7 +544,6 @@ function FrontisBlocksSidebar() {
 			colors[index].color = color;
 			return colors;
 		});
-		setIsLoading(true);
 	}, []);
 
 	const setCustomColor = useCallback((index, color) => {
@@ -557,13 +552,11 @@ function FrontisBlocksSidebar() {
 			colors[index].color = color;
 			return colors;
 		});
-		setIsLoading(true);
 	}, []);
 
 	// Custom color and gradient handlers
 	const addCustomColor = useCallback(() => {
 		setColorModalOpen(true);
-		setIsLoading(true);
 	}, []);
 
 	const deleteCustomGradientColor = useCallback((index) => {
@@ -572,7 +565,6 @@ function FrontisBlocksSidebar() {
 			colors.splice(index, 1);
 			return colors;
 		});
-		setIsLoading(true);
 	}, []);
 
 	const addCustomGradientColor = useCallback(() => {
@@ -585,7 +577,6 @@ function FrontisBlocksSidebar() {
 				var: `--fb-custom-gradient-color-${prev.length + 1}`,
 			},
 		]);
-		setIsLoading(true);
 	}, []);
 
 	// Handle modal close and new color addition
@@ -604,6 +595,41 @@ function FrontisBlocksSidebar() {
 			setColorName("");
 		}
 	}, [colorModalOpen, colorName]);
+
+
+	// Enable save button depend on the settings change
+	// useEffect(() => {
+	// 	if (isMount) {
+	// 		wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
+	// 	}
+	// }, [isMount]);
+
+	// Enable save button when states change
+	useEffect(() => {
+		// Mark post as edited to enable Gutenberg save button
+		wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
+	}, [globalColors, customColors, gradientColors, customGradientColors, isMount]);
+
+	// Assuming this is inside a React component
+	useEffect(() => {
+		let previousIsSaving = false;
+
+		const unsubscribe = wp.data.subscribe(() => {
+			const isSavingPost = wp.data.select('core/editor').isSavingPost();
+			const isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
+
+			// Detect manual save (not autosave) when save completes
+			if (isSavingPost && !isAutosavingPost && !previousIsSaving) {
+				previousIsSaving = true; // Mark as saving
+			} else if (!isSavingPost && previousIsSaving && !isAutosavingPost) {
+				// Save has just completed (manual save)
+				handleUpdateSettings(); // Call your function here
+				previousIsSaving = false; // Reset the flag
+			}
+		});
+
+		return () => unsubscribe(); // Cleanup subscription on unmount
+	}, [handleUpdateSettings]);
 
 	return (
 		<>
@@ -693,7 +719,8 @@ function FrontisBlocksSidebar() {
 								<TypographySettings
 									typography={typography}
 									customTypography={customTypography}
-									isAfterSave={isAfterSave}
+									setIsMount={setIsMount}
+									isMount={isMount}
 								/>
 							</NavigatorScreen>
 
@@ -756,9 +783,9 @@ function FrontisBlocksSidebar() {
 											setColorModalOpen={setColorModalOpen}
 											colorName={colorName}
 											setColorName={setColorName}
+											setIsMount={setIsMount}
+											isMount={isMount}
 										/>
-
-
 									</div>
 
 									{/* Gradient Section */}
@@ -792,12 +819,13 @@ function FrontisBlocksSidebar() {
 											</div>
 										</div>
 										<GradientColorPallet
-											// title={__("Gradient Colors", "frontis-blocks")}
 											colors={gradientColors}
 											setColor={setGradientColor}
 											setColors={setGradientColors}
 											wrapperClass="fb-gradient-color-panel"
 											resetAction
+											setIsMount={setIsMount}
+											isMount={isMount}
 										/>
 
 										{customGradientColors.length > 0 && (

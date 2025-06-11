@@ -7,7 +7,7 @@ import {
 } from "@wordpress/block-editor";
 
 const ColorPalletWrapper = (props) => {
-    const { colorPanelArray, customColors, setCustomColor, setCustomColors, setCurrentState, addCustomColor, colorModalOpen, setColorModalOpen, colorName, setColorName } = props;
+    const { colorPanelArray, customColors, setCustomColor, setCustomColors, setCurrentState, addCustomColor, colorModalOpen, setColorModalOpen, colorName, setColorName, setIsMount } = props;
     const [afterDeletedCustomColors, setAfterDeletedColors] = useState(customColors);
 
     const deleteItem = (index) => {
@@ -49,10 +49,11 @@ const ColorPalletWrapper = (props) => {
                 }
 
             }, 100)
+
+            setIsMount(true);
         }
     }, [customColors]);
 
-    console.log("hello custom colors")
     return (
         <>
             <Panel>

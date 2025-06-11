@@ -802,7 +802,8 @@ var ColorPalletWrapper = function ColorPalletWrapper(props) {
     colorModalOpen = props.colorModalOpen,
     setColorModalOpen = props.setColorModalOpen,
     colorName = props.colorName,
-    setColorName = props.setColorName;
+    setColorName = props.setColorName,
+    setIsMount = props.setIsMount;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(customColors),
     _useState2 = _slicedToArray(_useState, 2),
     afterDeletedCustomColors = _useState2[0],
@@ -834,9 +835,9 @@ var ColorPalletWrapper = function ColorPalletWrapper(props) {
           });
         }
       }, 100);
+      setIsMount(true);
     }
   }, [customColors]);
-  console.log("hello custom colors");
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Panel, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom Colors", "frontis-blocks"),
     className: "fb-color-panel fb-custom-color-panel",
@@ -1501,7 +1502,9 @@ var GradientColorPallet = function GradientColorPallet(props) {
     deleteAction = props.deleteAction,
     _props$enableEditName = props.enableEditName,
     enableEditName = _props$enableEditName === void 0 ? false : _props$enableEditName,
-    onDelete = props.onDelete;
+    onDelete = props.onDelete,
+    setIsMount = props.setIsMount,
+    isMount = props.isMount;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
     _useState2 = _slicedToArray(_useState, 2),
     clickedGradient = _useState2[0],
@@ -1516,6 +1519,7 @@ var GradientColorPallet = function GradientColorPallet(props) {
       name: value
     });
     setColors(_toConsumableArray(cloneColors));
+    setIsMount(true);
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, colors && colors.length > 0 && /*#__PURE__*/React.createElement("div", {
     className: "fb-color-panel ".concat(wrapperClass)
@@ -1793,16 +1797,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _Config_displayType__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Config/displayType */ "./src/config/displayType.js");
-/* harmony import */ var _SidebarTypography__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SidebarTypography */ "./admin/sidebar/components/SidebarTypography.js");
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helper */ "./admin/sidebar/helper.js");
-/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../fetch */ "./admin/sidebar/fetch.js");
-/* harmony import */ var _FontPreview__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FontPreview */ "./admin/sidebar/components/FontPreview.js");
-/* harmony import */ var _GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./GenerateRootCss */ "./admin/sidebar/components/GenerateRootCss.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Config_displayType__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Config/displayType */ "./src/config/displayType.js");
+/* harmony import */ var _SidebarTypography__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SidebarTypography */ "./admin/sidebar/components/SidebarTypography.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../helper */ "./admin/sidebar/helper.js");
+/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../fetch */ "./admin/sidebar/fetch.js");
+/* harmony import */ var _FontPreview__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FontPreview */ "./admin/sidebar/components/FontPreview.js");
+/* harmony import */ var _GenerateRootCss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./GenerateRootCss */ "./admin/sidebar/components/GenerateRootCss.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -1827,43 +1829,31 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-
 var TypographySettings = function TypographySettings(props) {
   var _wp$data$select$getCu;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(props.typography),
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(props.typography),
     _useState2 = _slicedToArray(_useState, 2),
     typography = _useState2[0],
     setTypography = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(props.customTypography),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(props.customTypography),
     _useState4 = _slicedToArray(_useState3, 2),
     customTypography = _useState4[0],
     setCustomTypography = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('all'),
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)('all'),
     _useState6 = _slicedToArray(_useState5, 2),
     selectedHeading = _useState6[0],
     setSelectedHeading = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
     _useState8 = _slicedToArray(_useState7, 2),
-    isSaving = _useState8[0],
-    setIsSaving = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(),
+    fontFamilies = _useState8[0],
+    setFontFamilies = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(typography),
     _useState0 = _slicedToArray(_useState9, 2),
-    generateHeadingCss = _useState0[0],
-    setGenerateHeadingCss = _useState0[1];
-  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
-    _useState10 = _slicedToArray(_useState1, 2),
-    isMount = _useState10[0],
-    setIsMount = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
-    _useState12 = _slicedToArray(_useState11, 2),
-    fontFamilies = _useState12[0],
-    setFontFamilies = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(typography),
-    _useState14 = _slicedToArray(_useState13, 2),
-    globalTypography = _useState14[0],
-    setGlobalTypography = _useState14[1];
-  var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_4__.useDeviceType)();
+    globalTypography = _useState0[0],
+    setGlobalTypography = _useState0[1];
+  var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_3__.useDeviceType)();
   var isFSE = ((_wp$data$select$getCu = wp.data.select('core').getCurrentTheme()) === null || _wp$data$select$getCu === void 0 ? void 0 : _wp$data$select$getCu.is_block_theme) || false;
+  var setIsMount = props.setIsMount;
 
   // Typography elements
   var typographyElements = {
@@ -1912,7 +1902,7 @@ var TypographySettings = function TypographySettings(props) {
         fontFamily: value
       })));
     });
-    (0,_helper__WEBPACK_IMPORTED_MODULE_6__.loadGoogleFont)(value);
+    (0,_helper__WEBPACK_IMPORTED_MODULE_5__.loadGoogleFont)(value);
     setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, value)));
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
       'fontFamily': {
@@ -2089,7 +2079,7 @@ var TypographySettings = function TypographySettings(props) {
         fontFamily: value
       })))));
     });
-    (0,_helper__WEBPACK_IMPORTED_MODULE_6__.loadGoogleFont)(value);
+    (0,_helper__WEBPACK_IMPORTED_MODULE_5__.loadGoogleFont)(value);
     setIsMount(true);
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
       'fontFamily': {
@@ -2272,7 +2262,7 @@ var TypographySettings = function TypographySettings(props) {
         value: value
       }
     }))));
-    (0,_helper__WEBPACK_IMPORTED_MODULE_6__.loadGoogleFont)(value);
+    (0,_helper__WEBPACK_IMPORTED_MODULE_5__.loadGoogleFont)(value);
     setIsMount(true);
   };
   var onChangeCustomFontSize = function onChangeCustomFontSize(value, item) {
@@ -2433,15 +2423,14 @@ var TypographySettings = function TypographySettings(props) {
     }))));
     setIsMount(true);
   };
-  var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_6__.useAfterSave)();
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     var handleUpdateSettings = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var response, _response, _response2, _response3;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              if (!(isAfterSave && isMount)) {
+              if (!props.isMount) {
                 _context.next = 22;
                 break;
               }
@@ -2450,7 +2439,7 @@ var TypographySettings = function TypographySettings(props) {
                 break;
               }
               _context.next = 4;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(typography, 'fb_update_typography');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_6__.updateGlobalStyle)(typography, 'fb_update_typography');
             case 4:
               response = _context.sent;
               if (response.success) {
@@ -2463,7 +2452,7 @@ var TypographySettings = function TypographySettings(props) {
                 break;
               }
               _context.next = 9;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(customTypography, 'fb_update_custom_typography');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_6__.updateGlobalStyle)(customTypography, 'fb_update_custom_typography');
             case 9:
               _response = _context.sent;
               if (_response.success) {
@@ -2476,7 +2465,7 @@ var TypographySettings = function TypographySettings(props) {
                 break;
               }
               _context.next = 14;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(globalTypography, 'fb_update_globaltypo');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_6__.updateGlobalStyle)(globalTypography, 'fb_update_globaltypo');
             case 14:
               _response2 = _context.sent;
               if (_response2.success) {
@@ -2489,7 +2478,7 @@ var TypographySettings = function TypographySettings(props) {
                 break;
               }
               _context.next = 19;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(fontFamilies, 'fb_update_fontfamilies');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_6__.updateGlobalStyle)(fontFamilies, 'fb_update_fontfamilies');
             case 19:
               _response3 = _context.sent;
               if (_response3.success) {
@@ -2509,24 +2498,15 @@ var TypographySettings = function TypographySettings(props) {
       };
     }();
     handleUpdateSettings();
-  }, [isAfterSave]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
-    if (isMount) {
-      wp.data.dispatch('core/editor').editPost({
-        meta: {
-          _dummy: new Date().getTime()
-        }
-      });
-    }
-  }, [isMount]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+  }, [props.isMount]);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     if (globalTypography) {
-      (0,_GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__["default"])(globalTypography, deviceType);
+      (0,_GenerateRootCss__WEBPACK_IMPORTED_MODULE_8__["default"])(globalTypography, deviceType);
     }
   }, [globalTypography, deviceType]);
 
   // Load saved data and generate root css
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     setTimeout(function () {
       var globalTypoData = localStorage.getItem("fb_globaltypo");
       if (globalTypoData !== 'null') {
@@ -2590,7 +2570,7 @@ var TypographySettings = function TypographySettings(props) {
       strokeWidth: "1.2",
       strokeLinecap: "round",
       strokeLinejoin: "round"
-    }))), " ", typographyElements[item]), item === 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }))), " ", typographyElements[item]), item === 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_7__["default"], {
       fontProps: typography === null || typography === void 0 || (_typography$item7 = typography[item]) === null || _typography$item7 === void 0 ? void 0 : _typography$item7[selectedHeading],
       deviceType: deviceType,
       fontSize: true
@@ -2620,7 +2600,7 @@ var TypographySettings = function TypographySettings(props) {
         }
       }, /*#__PURE__*/React.createElement("div", {
         className: "fb-typography-settings"
-      }, /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }, /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_4__["default"], {
         fontFamily: typography === null || typography === void 0 || (_typography$item8 = typography[item]) === null || _typography$item8 === void 0 || (_typography$item8 = _typography$item8[selectedHeading]) === null || _typography$item8 === void 0 ? void 0 : _typography$item8.fontFamily,
         onChangeFontFamily: function onChangeFontFamily(value) {
           return onChangeHeadingFontFamily(value, item);
@@ -2670,11 +2650,11 @@ var TypographySettings = function TypographySettings(props) {
       })));
     })), item !== 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
       className: "fb-typography-settings"
-    }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_7__["default"], {
       fontProps: typography[item],
       deviceType: deviceType,
       fontSize: true
-    }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_4__["default"], {
       fontFamily: typography === null || typography === void 0 || (_typography$item17 = typography[item]) === null || _typography$item17 === void 0 ? void 0 : _typography$item17.fontFamily,
       onChangeFontFamily: function onChangeFontFamily(value) {
         return _onChangeFontFamily(value, item);
@@ -2842,7 +2822,7 @@ var TypographySettings = function TypographySettings(props) {
       icon: "arrow-left-alt2"
     }), " ", (_customTypography$ite8 = customTypography[item]) === null || _customTypography$ite8 === void 0 ? void 0 : _customTypography$ite8.name), /*#__PURE__*/React.createElement("div", {
       className: "fb-typography-settings"
-    }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_7__["default"], {
       fontProps: customTypography[item],
       deviceType: deviceType,
       fontSize: true
@@ -2852,7 +2832,7 @@ var TypographySettings = function TypographySettings(props) {
       onChange: function onChange(value) {
         return changeCustomTypoName(item, value);
       }
-    }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_4__["default"], {
       fontFamily: customTypography === null || customTypography === void 0 || (_customTypography$ite0 = customTypography[item]) === null || _customTypography$ite0 === void 0 ? void 0 : _customTypography$ite0.fontFamily,
       onChangeFontFamily: function onChangeFontFamily(value) {
         return onChangeCustomFontFamily(value, item);
@@ -3169,14 +3149,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/GradientColorPallet */ "./admin/sidebar/components/GradientColorPallet.js");
 /* harmony import */ var _components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ColorPalletWrapper */ "./admin/sidebar/components/ColorPalletWrapper.js");
 /* harmony import */ var _components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/CustomGradientPallet */ "./admin/sidebar/components/CustomGradientPallet.js");
@@ -3187,13 +3167,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/GenerateRootCss */ "./admin/sidebar/components/GenerateRootCss.js");
 /* harmony import */ var _components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/GenerateColorRoot */ "./admin/sidebar/components/GenerateColorRoot.js");
 /* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./sidebar.scss */ "./admin/sidebar/sidebar.scss");
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
 function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
-function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
-function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3724,64 +3704,63 @@ var defaultTypography = {
 };
 function FrontisBlocksSidebar() {
   var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_10__.useDeviceType)();
-  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useDispatch)("core/editor"),
-    editPost = _useDispatch.editPost;
-  var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_11__.useAfterSave)();
+  // const isAfterSave = useAfterSave();
 
   // State management
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(defaultColors),
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(defaultColors),
     _useState2 = _slicedToArray(_useState, 2),
     globalColors = _useState2[0],
     setGlobalColors = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)([]),
     _useState4 = _slicedToArray(_useState3, 2),
     customColors = _useState4[0],
     setCustomColors = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(gradientDefaults),
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(gradientDefaults),
     _useState6 = _slicedToArray(_useState5, 2),
     gradientColors = _useState6[0],
     setGradientColors = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]),
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)([]),
     _useState8 = _slicedToArray(_useState7, 2),
     customGradientColors = _useState8[0],
     setCustomGradientColors = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(defaultTypography),
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(defaultTypography),
     _useState0 = _slicedToArray(_useState9, 2),
     typography = _useState0[0],
     setTypography = _useState0[1];
-  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}),
+  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)({}),
     _useState10 = _slicedToArray(_useState1, 2),
     customTypography = _useState10[0],
     setCustomTypography = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}),
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)({}),
     _useState12 = _slicedToArray(_useState11, 2),
     fontFamilies = _useState12[0],
     setFontFamilies = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)("solid"),
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    activeTab = _useState14[0],
-    setActiveTab = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
+    colorModalOpen = _useState14[0],
+    setColorModalOpen = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(""),
     _useState16 = _slicedToArray(_useState15, 2),
-    colorModalOpen = _useState16[0],
-    setColorModalOpen = _useState16[1];
-  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(""),
+    colorName = _useState16[0],
+    setColorName = _useState16[1];
+  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(false),
     _useState18 = _slicedToArray(_useState17, 2),
-    colorName = _useState18[0],
-    setColorName = _useState18[1];
-  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
+    isAfterSave = _useState18[0],
+    setIsAfterSave = _useState18[1];
+  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(false),
     _useState20 = _slicedToArray(_useState19, 2),
-    isLoading = _useState20[0],
-    setIsLoading = _useState20[1];
+    isMount = _useState20[0],
+    setIsMount = _useState20[1];
+  var dispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.useDispatch)('core/editor');
 
   // Memoized theme colors
-  var themeColors = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useMemo)(function () {
+  var themeColors = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useMemo)(function () {
     var _frontisBlocksAdmin;
     return ((_frontisBlocksAdmin = frontisBlocksAdmin) === null || _frontisBlocksAdmin === void 0 ? void 0 : _frontisBlocksAdmin.theme_colors) || defaultColors;
   }, []);
 
   // Utility to extract font families
-  var getAllFontFamilies = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (fontsObject) {
+  var getAllFontFamilies = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useCallback)(function (fontsObject) {
     var fontFamilies = [];
     var _extractFonts = function extractFonts(obj) {
       Object.values(obj).forEach(function (value) {
@@ -3792,140 +3771,108 @@ function FrontisBlocksSidebar() {
     var fontsString = fontFamilies.join(",");
     (0,_helper__WEBPACK_IMPORTED_MODULE_11__.loadGoogleFont)(fontsString);
   }, []);
-  var handleUpdateState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var localStorageKeys, _loop, _i, _localStorageKeys;
-    return _regeneratorRuntime().wrap(function _callee$(_context2) {
-      while (1) switch (_context2.prev = _context2.next) {
-        case 0:
-          console.log("Initial loaded");
-          setIsLoading(true);
-          localStorageKeys = [{
-            key: "fb_global_colors",
-            setter: setGlobalColors,
-            defaultValue: themeColors,
-            api: "fb_get_global_colors"
-          }, {
-            key: "fb_custom_colors",
-            setter: setCustomColors,
-            defaultValue: [],
-            api: "fb_get_custom_colors"
-          }, {
-            key: "fb_gradient_colors",
-            setter: setGradientColors,
-            defaultValue: gradientDefaults,
-            api: "fb_get_gradient_colors"
-          }, {
-            key: "fb_custom_gradient_colors",
-            setter: setCustomGradientColors,
-            defaultValue: [],
-            api: "fb_get_custom_gradient_colors"
-          }, {
-            key: "fb_typography",
-            setter: setTypography,
-            defaultValue: defaultTypography,
-            api: "fb_get_typography"
-          }, {
-            key: "fb_custom_typography",
-            setter: setCustomTypography,
-            defaultValue: [],
-            api: "fb_get_custom_typography"
-          }, {
-            key: "fb_fontfamilies",
-            setter: setFontFamilies,
-            defaultValue: [],
-            api: "fb_get_fontfamilies",
-            postProcess: getAllFontFamilies
-          }, {
-            key: "fb_globaltypo",
-            setter: null,
-            defaultValue: null,
-            api: "fb_get_globaltypo",
-            postProcess: function postProcess(data) {
-              return (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__["default"])(data, deviceType);
-            }
-          }];
-          _context2.prev = 3;
-          _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop() {
-            var _localStorageKeys$_i, key, setter, defaultValue, api, postProcess, localData, res, data;
-            return _regeneratorRuntime().wrap(function _loop$(_context) {
-              while (1) switch (_context.prev = _context.next) {
-                case 0:
-                  _localStorageKeys$_i = _localStorageKeys[_i], key = _localStorageKeys$_i.key, setter = _localStorageKeys$_i.setter, defaultValue = _localStorageKeys$_i.defaultValue, api = _localStorageKeys$_i.api, postProcess = _localStorageKeys$_i.postProcess;
-                  if (!(key === "fb_global_colors")) {
-                    _context.next = 7;
-                    break;
-                  }
-                  // Forcefully set fb_global_colors to themeColors
-                  setter(themeColors);
-                  localStorage.setItem(key, JSON.stringify(themeColors));
-                  if (postProcess) setTimeout(function () {
-                    return postProcess(themeColors);
-                  }, 1000);
-                  _context.next = 15;
-                  break;
-                case 7:
-                  localData = (0,_helper__WEBPACK_IMPORTED_MODULE_11__.getFbLocalStorage)(key); // if (!localData || localData.length < 1) {
-                  // 	const res = await getGlobalStyle(api);
-                  // 	const data = res.success ? res.data : defaultValue;
-                  // 	if (setter) setter(data);
-                  // 	localStorage.setItem(key, JSON.stringify(data));
-                  // 	if (postProcess) setTimeout(() => postProcess(data), 1000);
-                  // } else {
-                  // 	if (setter) setter(localData);
-                  // 	if (postProcess) setTimeout(() => postProcess(localData), 1000);
-                  // }
-                  _context.next = 10;
-                  return (0,_fetch__WEBPACK_IMPORTED_MODULE_12__.getGlobalStyle)(api);
-                case 10:
-                  res = _context.sent;
-                  data = res.success ? res.data : defaultValue;
-                  if (setter) setter(data);
-                  localStorage.setItem(key, JSON.stringify(data));
-                  if (postProcess) setTimeout(function () {
-                    return postProcess(data);
-                  }, 1000);
-                case 15:
-                case "end":
-                  return _context.stop();
-              }
-            }, _loop);
-          });
-          _i = 0, _localStorageKeys = localStorageKeys;
-        case 6:
-          if (!(_i < _localStorageKeys.length)) {
-            _context2.next = 11;
-            break;
-          }
-          return _context2.delegateYield(_loop(), "t0", 8);
-        case 8:
-          _i++;
-          _context2.next = 6;
-          break;
-        case 11:
-          _context2.next = 16;
-          break;
-        case 13:
-          _context2.prev = 13;
-          _context2.t1 = _context2["catch"](3);
-          console.error("Error fetching global settings:", _context2.t1);
-        case 16:
-          _context2.prev = 16;
-          setIsLoading(false);
-          return _context2.finish(16);
-        case 19:
-        case "end":
-          return _context2.stop();
-      }
-    }, _callee, null, [[3, 13, 16, 19]]);
-  })), [deviceType, themeColors, getAllFontFamilies]);
+
+  // const handleUpdateState = useCallback(async () => {
+  // 	const localStorageKeys = [
+  // 		{
+  // 			key: "fb_global_colors",
+  // 			setter: setGlobalColors,
+  // 			defaultValue: themeColors,
+  // 			api: "fb_get_global_colors",
+  // 		},
+  // 		{
+  // 			key: "fb_custom_colors",
+  // 			setter: setCustomColors,
+  // 			defaultValue: [],
+  // 			api: "fb_get_custom_colors",
+  // 		},
+  // 		{
+  // 			key: "fb_gradient_colors",
+  // 			setter: setGradientColors,
+  // 			defaultValue: gradientDefaults,
+  // 			api: "fb_get_gradient_colors",
+  // 		},
+  // 		{
+  // 			key: "fb_custom_gradient_colors",
+  // 			setter: setCustomGradientColors,
+  // 			defaultValue: [],
+  // 			api: "fb_get_custom_gradient_colors",
+  // 		},
+  // 		{
+  // 			key: "fb_typography",
+  // 			setter: setTypography,
+  // 			defaultValue: defaultTypography,
+  // 			api: "fb_get_typography",
+  // 		},
+  // 		{
+  // 			key: "fb_custom_typography",
+  // 			setter: setCustomTypography,
+  // 			defaultValue: [],
+  // 			api: "fb_get_custom_typography",
+  // 		},
+  // 		{
+  // 			key: "fb_fontfamilies",
+  // 			setter: setFontFamilies,
+  // 			defaultValue: [],
+  // 			api: "fb_get_fontfamilies",
+  // 			postProcess: getAllFontFamilies,
+  // 		},
+  // 		{
+  // 			key: "fb_globaltypo",
+  // 			setter: null,
+  // 			defaultValue: null,
+  // 			api: "fb_get_globaltypo",
+  // 			postProcess: (data) => generateCSSVariables(data, deviceType),
+  // 		},
+  // 	];
+
+  // 	try {
+  // 		for (const {
+  // 			key,
+  // 			setter,
+  // 			defaultValue,
+  // 			api,
+  // 			postProcess,
+  // 		} of localStorageKeys) {
+  // 			if (key === "fb_global_colors") {
+  // 				// Forcefully set fb_global_colors to themeColors
+  // 				setter(themeColors);
+  // 				localStorage.setItem(key, JSON.stringify(themeColors));
+  // 				if (postProcess) setTimeout(() => postProcess(themeColors), 1000);
+  // 			} else {
+  // 				const localData = getFbLocalStorage(key);
+  // 				// if (!localData || localData.length < 1) {
+  // 				// 	const res = await getGlobalStyle(api);
+  // 				// 	const data = res.success ? res.data : defaultValue;
+  // 				// 	if (setter) setter(data);
+  // 				// 	localStorage.setItem(key, JSON.stringify(data));
+  // 				// 	if (postProcess) setTimeout(() => postProcess(data), 1000);
+  // 				// } else {
+  // 				// 	if (setter) setter(localData);
+  // 				// 	if (postProcess) setTimeout(() => postProcess(localData), 1000);
+  // 				// }
+  // 				const res = await getGlobalStyle(api);
+  // 				const data = res.success ? res.data : defaultValue;
+  // 				if (setter) setter(data);
+  // 				localStorage.setItem(key, JSON.stringify(data));
+  // 				if (postProcess) setTimeout(() => postProcess(data), 1000);
+  // 			}
+  // 		}
+  // 	} catch (error) {
+  // 		console.error("Error fetching global settings:", error);
+  // 	} finally {
+  // 		setIsMount(false);
+  // 		setIsLoading(false);
+  // 	}
+  // }, [deviceType, themeColors, getAllFontFamilies]);
 
   // Initialize on mount and device type change
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
-    handleUpdateState();
-  }, [handleUpdateState]);
+  // useEffect(() => {
+  // 	handleUpdateState();
+  // }, [handleUpdateState]);
 
   // Generate color variables
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
     var mergedColors = [].concat(_toConsumableArray(customColors), _toConsumableArray(globalColors), _toConsumableArray(customGradientColors), _toConsumableArray(gradientColors));
     setTimeout(function () {
       return (0,_components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_14__["default"])(mergedColors, deviceType);
@@ -3933,16 +3880,16 @@ function FrontisBlocksSidebar() {
   }, [globalColors, customColors, customGradientColors, gradientColors, deviceType]);
 
   // Save settings after post save
-  var handleUpdateSettings = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-    var settings, _i2, _settings, _settings$_i, key, data, setter, storeKey, response;
-    return _regeneratorRuntime().wrap(function _callee2$(_context3) {
-      while (1) switch (_context3.prev = _context3.next) {
+  var handleUpdateSettings = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useCallback)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var settings, _i, _settings, _settings$_i, key, data, setter, storeKey, response;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
         case 0:
-          if (!(!isAfterSave || !isLoading)) {
-            _context3.next = 2;
+          if (!(!isAfterSave || !isMount)) {
+            _context.next = 2;
             break;
           }
-          return _context3.abrupt("return");
+          return _context.abrupt("return");
         case 2:
           settings = [{
             key: "fb_update_global_colors",
@@ -3965,45 +3912,46 @@ function FrontisBlocksSidebar() {
             setter: setCustomGradientColors,
             storeKey: "fb_custom_gradient_colors"
           }];
-          _context3.prev = 3;
-          _i2 = 0, _settings = settings;
+          _context.prev = 3;
+          _i = 0, _settings = settings;
         case 5:
-          if (!(_i2 < _settings.length)) {
-            _context3.next = 14;
+          if (!(_i < _settings.length)) {
+            _context.next = 14;
             break;
           }
-          _settings$_i = _settings[_i2], key = _settings$_i.key, data = _settings$_i.data, setter = _settings$_i.setter, storeKey = _settings$_i.storeKey;
-          _context3.next = 9;
+          _settings$_i = _settings[_i], key = _settings$_i.key, data = _settings$_i.data, setter = _settings$_i.setter, storeKey = _settings$_i.storeKey;
+          _context.next = 9;
           return (0,_fetch__WEBPACK_IMPORTED_MODULE_12__.updateGlobalStyle)(data, key);
         case 9:
-          response = _context3.sent;
+          response = _context.sent;
           if (response.success) {
             setter(response.data.data);
             localStorage.setItem(storeKey, JSON.stringify(response.data.data));
           }
         case 11:
-          _i2++;
-          _context3.next = 5;
+          _i++;
+          _context.next = 5;
           break;
         case 14:
-          _context3.next = 19;
+          _context.next = 19;
           break;
         case 16:
-          _context3.prev = 16;
-          _context3.t0 = _context3["catch"](3);
-          console.error("Error updating settings:", _context3.t0);
+          _context.prev = 16;
+          _context.t0 = _context["catch"](3);
+          console.error("Error updating settings:", _context.t0);
         case 19:
         case "end":
-          return _context3.stop();
+          return _context.stop();
       }
-    }, _callee2, null, [[3, 16]]);
-  })), [isAfterSave, isLoading, globalColors, customColors, gradientColors, customGradientColors]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
-    handleUpdateSettings();
-  }, [handleUpdateSettings]);
+    }, _callee, null, [[3, 16]]);
+  })), [isAfterSave, isMount, globalColors, customColors, gradientColors, customGradientColors]);
+
+  // useEffect(() => {
+  // 	handleUpdateSettings();
+  // }, [handleUpdateSettings]);
 
   // Color panel array generator
-  var colorPanelArray = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (colors, setColor) {
+  var colorPanelArray = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useCallback)(function (colors, setColor) {
     var defaults = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
     if (!Array.isArray(colors)) return [];
     return colors.map(function (colorObj, index) {
@@ -4019,53 +3967,48 @@ function FrontisBlocksSidebar() {
   }, []);
 
   // Color update handlers
-  var setGlobalColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index, color) {
+  var setGlobalColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useCallback)(function (index, color) {
     setGlobalColors(function (prev) {
       var colors = _toConsumableArray(prev);
       colors[index].color = color;
       return colors;
     });
-    setIsLoading(true);
+    setIsMount(true);
   }, []);
-  var setGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index, color) {
+  var setGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useCallback)(function (index, color) {
     setGradientColors(function (prev) {
       var colors = _toConsumableArray(prev);
       colors[index].color = color;
       return colors;
     });
-    setIsLoading(true);
   }, []);
-  var setCustomGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index, color) {
+  var setCustomGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useCallback)(function (index, color) {
     setCustomGradientColors(function (prev) {
       var colors = _toConsumableArray(prev);
       colors[index].color = color;
       return colors;
     });
-    setIsLoading(true);
   }, []);
-  var setCustomColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index, color) {
+  var setCustomColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useCallback)(function (index, color) {
     setCustomColors(function (prev) {
       var colors = _toConsumableArray(prev);
       colors[index].color = color;
       return colors;
     });
-    setIsLoading(true);
   }, []);
 
   // Custom color and gradient handlers
-  var addCustomColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function () {
+  var addCustomColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useCallback)(function () {
     setColorModalOpen(true);
-    setIsLoading(true);
   }, []);
-  var deleteCustomGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index) {
+  var deleteCustomGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useCallback)(function (index) {
     setCustomGradientColors(function (prev) {
       var colors = _toConsumableArray(prev);
       colors.splice(index, 1);
       return colors;
     });
-    setIsLoading(true);
   }, []);
-  var addCustomGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function () {
+  var addCustomGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useCallback)(function () {
     setCustomGradientColors(function (prev) {
       return [].concat(_toConsumableArray(prev), [{
         color: "#000000",
@@ -4074,11 +4017,10 @@ function FrontisBlocksSidebar() {
         "var": "--fb-custom-gradient-color-".concat(prev.length + 1)
       }]);
     });
-    setIsLoading(true);
   }, []);
 
   // Handle modal close and new color addition
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
     if (!colorModalOpen && colorName) {
       setCustomColors(function (prev) {
         return [].concat(_toConsumableArray(prev), [{
@@ -4090,6 +4032,44 @@ function FrontisBlocksSidebar() {
       setColorName("");
     }
   }, [colorModalOpen, colorName]);
+
+  // Enable save button depend on the settings change
+  // useEffect(() => {
+  // 	if (isMount) {
+  // 		wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
+  // 	}
+  // }, [isMount]);
+
+  // Enable save button when states change
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    // Mark post as edited to enable Gutenberg save button
+    wp.data.dispatch('core/editor').editPost({
+      meta: {
+        _dummy: new Date().getTime()
+      }
+    });
+  }, [globalColors, customColors, gradientColors, customGradientColors, isMount]);
+
+  // Assuming this is inside a React component
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    var previousIsSaving = false;
+    var unsubscribe = wp.data.subscribe(function () {
+      var isSavingPost = wp.data.select('core/editor').isSavingPost();
+      var isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
+
+      // Detect manual save (not autosave) when save completes
+      if (isSavingPost && !isAutosavingPost && !previousIsSaving) {
+        previousIsSaving = true; // Mark as saving
+      } else if (!isSavingPost && previousIsSaving && !isAutosavingPost) {
+        // Save has just completed (manual save)
+        handleUpdateSettings(); // Call your function here
+        previousIsSaving = false; // Reset the flag
+      }
+    });
+    return function () {
+      return unsubscribe();
+    }; // Cleanup subscription on unmount
+  }, [handleUpdateSettings]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebarMoreMenuItem, {
     target: "fb_plugin_sidebar"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("FB Global Settings", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
@@ -4100,15 +4080,15 @@ function FrontisBlocksSidebar() {
     className: "fb-global-controls"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-panel-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorProvider, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorProvider, {
     initialPath: "/"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorScreen, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorScreen, {
     path: "/"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-tabs"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-tab-element"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorButton, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorButton, {
     path: "/typography"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-tab-wrapper"
@@ -4127,7 +4107,7 @@ function FrontisBlocksSidebar() {
     className: "fb-tab-title"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-blocks"))))), /*#__PURE__*/React.createElement("div", {
     className: "fb-tab-element"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorButton, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorButton, {
     path: "/colors"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-tab-wrapper"
@@ -4143,11 +4123,11 @@ function FrontisBlocksSidebar() {
     d: "M17.2 10.9c-.5-1-1.2-2.1-2.1-3.2-.6-.9-1.3-1.7-2.1-2.6L12 4l-1 1.1c-.6.9-1.3 1.7-2 2.6-.8 1.2-1.5 2.3-2 3.2-.6 1.2-1 2.2-1 3 0 3.4 2.7 6.1 6.1 6.1s6.1-2.7 6.1-6.1c0-.8-.3-1.8-1-3zm-5.1 7.6c-2.5 0-4.6-2.1-4.6-4.6 0-.3.1-1 .8-2.3.5-.9 1.1-1.9 2-3.1.7-.9 1.3-1.7 1.8-2.3.7.8 1.3 1.6 1.8 2.3.8 1.1 1.5 2.2 2 3.1.7 1.3.8 2 .8 2.3 0 2.5-2.1 4.6-4.6 4.6z"
   }))), /*#__PURE__*/React.createElement("span", {
     className: "fb-tab-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Colors", "frontis-blocks"))))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorScreen, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Colors", "frontis-blocks"))))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorScreen, {
     path: "/typography"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-global-header-inner-wrapper"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorButton, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorButton, {
     path: "/",
     className: "back-button"
   }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
@@ -4167,12 +4147,13 @@ function FrontisBlocksSidebar() {
   }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-blocks")), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Available fonts, typographic styles, application of those styles.", "frontis-blocks")))), /*#__PURE__*/React.createElement(_components_TypographySettings__WEBPACK_IMPORTED_MODULE_9__["default"], {
     typography: typography,
     customTypography: customTypography,
-    isAfterSave: isAfterSave
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorScreen, {
+    setIsMount: setIsMount,
+    isMount: isMount
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorScreen, {
     path: "/colors"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-global-header-inner-wrapper"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorButton, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorButton, {
     path: "/",
     className: "back-button"
   }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
@@ -4195,7 +4176,7 @@ function FrontisBlocksSidebar() {
     className: "fb-color-section"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "fb-section-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Solid", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.PanelColorSettings
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Solid", "frontis-blocks")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings
   // title={__("Global Colors", "frontis-blocks")}
   , {
     className: "fb-color-panel fb-global-color-panel",
@@ -4212,7 +4193,9 @@ function FrontisBlocksSidebar() {
     colorModalOpen: colorModalOpen,
     setColorModalOpen: setColorModalOpen,
     colorName: colorName,
-    setColorName: setColorName
+    setColorName: setColorName,
+    setIsMount: setIsMount,
+    isMount: isMount
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb-color-section"
   }, /*#__PURE__*/React.createElement("div", {
@@ -4221,7 +4204,7 @@ function FrontisBlocksSidebar() {
     className: "fb-section-title"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gradient", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
     className: "add-custom-color"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     className: "add-custom-color-btn",
     onClick: addCustomGradientColor
   }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
@@ -4236,14 +4219,14 @@ function FrontisBlocksSidebar() {
     strokeWidth: "1.5",
     strokeLinecap: "round",
     strokeLinejoin: "round"
-  })))))), /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_6__["default"]
-  // title={__("Gradient Colors", "frontis-blocks")}
-  , {
+  })))))), /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_6__["default"], {
     colors: gradientColors,
     setColor: setGradientColor,
     setColors: setGradientColors,
     wrapperClass: "fb-gradient-color-panel",
-    resetAction: true
+    resetAction: true,
+    setIsMount: setIsMount,
+    isMount: isMount
   }), customGradientColors.length > 0 && /*#__PURE__*/React.createElement(_components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_8__["default"], {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom Gradient Colors", "frontis-blocks"),
     colors: customGradientColors,

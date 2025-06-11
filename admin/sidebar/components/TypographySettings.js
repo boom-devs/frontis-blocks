@@ -1,7 +1,6 @@
 import { __ } from "@wordpress/i18n";
 import {
 	Dashicon,
-	TabPanel,
 	Button,
 	TextControl,
 	__experimentalNavigatorProvider as NavigatorProvider,
@@ -11,7 +10,6 @@ import {
 	__experimentalToggleGroupControl as ToggleGroupControl,
 	__experimentalToggleGroupControlOption as ToggleGroupControlOption,
 } from "@wordpress/components";
-import { useDispatch, subscribe, select } from '@wordpress/data';
 import { useEffect, useState } from "@wordpress/element";
 import { useDeviceType } from "@Config/displayType";
 import FB_SidebarTypography from "./SidebarTypography";
@@ -24,14 +22,12 @@ const TypographySettings = (props) => {
 	const [typography, setTypography] = useState(props.typography);
 	const [customTypography, setCustomTypography] = useState(props.customTypography);
 	const [selectedHeading, setSelectedHeading] = useState('all');
-	const [isSaving, setIsSaving] = useState(false);
-	const [generateHeadingCss, setGenerateHeadingCss] = useState();
-	const [isMount, setIsMount] = useState(false);
 	const [fontFamilies, setFontFamilies] = useState([]);
 	const [globalTypography, setGlobalTypography] = useState(typography);
 	const deviceType = useDeviceType();
 
 	const isFSE = wp.data.select('core').getCurrentTheme()?.is_block_theme || false;
+	const {setIsMount} = props;
 
 	// Typography elements
 	const typographyElements = {
@@ -965,11 +961,9 @@ const TypographySettings = (props) => {
 		setIsMount(true);
 	}
 
-	const isAfterSave = useAfterSave();
-
 	useEffect(() => {
 		const handleUpdateSettings = async () => {
-			if (isAfterSave && isMount) {
+			if (props.isMount) {
 				if (typography) {
 					const response = await updateGlobalStyle(typography, 'fb_update_typography');
 					if (response.success) {
@@ -1006,13 +1000,7 @@ const TypographySettings = (props) => {
 		}
 
 		handleUpdateSettings();
-	}, [isAfterSave])
-
-	useEffect(() => {
-		if (isMount) {
-			wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
-		}
-	}, [isMount]);
+	}, [props.isMount])
 
 	useEffect(() => {
 		if (globalTypography) {

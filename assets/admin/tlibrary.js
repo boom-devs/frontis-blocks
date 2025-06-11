@@ -4104,16 +4104,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _Config_displayType__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Config/displayType */ "./src/config/displayType.js");
-/* harmony import */ var _SidebarTypography__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SidebarTypography */ "./admin/sidebar/components/SidebarTypography.js");
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helper */ "./admin/sidebar/helper.js");
-/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../fetch */ "./admin/sidebar/fetch.js");
-/* harmony import */ var _FontPreview__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FontPreview */ "./admin/sidebar/components/FontPreview.js");
-/* harmony import */ var _GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./GenerateRootCss */ "./admin/sidebar/components/GenerateRootCss.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Config_displayType__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Config/displayType */ "./src/config/displayType.js");
+/* harmony import */ var _SidebarTypography__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SidebarTypography */ "./admin/sidebar/components/SidebarTypography.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../helper */ "./admin/sidebar/helper.js");
+/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../fetch */ "./admin/sidebar/fetch.js");
+/* harmony import */ var _FontPreview__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FontPreview */ "./admin/sidebar/components/FontPreview.js");
+/* harmony import */ var _GenerateRootCss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./GenerateRootCss */ "./admin/sidebar/components/GenerateRootCss.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -4138,43 +4136,31 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-
 var TypographySettings = function TypographySettings(props) {
   var _wp$data$select$getCu;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(props.typography),
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(props.typography),
     _useState2 = _slicedToArray(_useState, 2),
     typography = _useState2[0],
     setTypography = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(props.customTypography),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(props.customTypography),
     _useState4 = _slicedToArray(_useState3, 2),
     customTypography = _useState4[0],
     setCustomTypography = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('all'),
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)('all'),
     _useState6 = _slicedToArray(_useState5, 2),
     selectedHeading = _useState6[0],
     setSelectedHeading = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
     _useState8 = _slicedToArray(_useState7, 2),
-    isSaving = _useState8[0],
-    setIsSaving = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(),
+    fontFamilies = _useState8[0],
+    setFontFamilies = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(typography),
     _useState0 = _slicedToArray(_useState9, 2),
-    generateHeadingCss = _useState0[0],
-    setGenerateHeadingCss = _useState0[1];
-  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
-    _useState10 = _slicedToArray(_useState1, 2),
-    isMount = _useState10[0],
-    setIsMount = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
-    _useState12 = _slicedToArray(_useState11, 2),
-    fontFamilies = _useState12[0],
-    setFontFamilies = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(typography),
-    _useState14 = _slicedToArray(_useState13, 2),
-    globalTypography = _useState14[0],
-    setGlobalTypography = _useState14[1];
-  var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_4__.useDeviceType)();
+    globalTypography = _useState0[0],
+    setGlobalTypography = _useState0[1];
+  var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_3__.useDeviceType)();
   var isFSE = ((_wp$data$select$getCu = wp.data.select('core').getCurrentTheme()) === null || _wp$data$select$getCu === void 0 ? void 0 : _wp$data$select$getCu.is_block_theme) || false;
+  var setIsMount = props.setIsMount;
 
   // Typography elements
   var typographyElements = {
@@ -4223,7 +4209,7 @@ var TypographySettings = function TypographySettings(props) {
         fontFamily: value
       })));
     });
-    (0,_helper__WEBPACK_IMPORTED_MODULE_6__.loadGoogleFont)(value);
+    (0,_helper__WEBPACK_IMPORTED_MODULE_5__.loadGoogleFont)(value);
     setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, value)));
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
       'fontFamily': {
@@ -4400,7 +4386,7 @@ var TypographySettings = function TypographySettings(props) {
         fontFamily: value
       })))));
     });
-    (0,_helper__WEBPACK_IMPORTED_MODULE_6__.loadGoogleFont)(value);
+    (0,_helper__WEBPACK_IMPORTED_MODULE_5__.loadGoogleFont)(value);
     setIsMount(true);
     setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
       'fontFamily': {
@@ -4583,7 +4569,7 @@ var TypographySettings = function TypographySettings(props) {
         value: value
       }
     }))));
-    (0,_helper__WEBPACK_IMPORTED_MODULE_6__.loadGoogleFont)(value);
+    (0,_helper__WEBPACK_IMPORTED_MODULE_5__.loadGoogleFont)(value);
     setIsMount(true);
   };
   var onChangeCustomFontSize = function onChangeCustomFontSize(value, item) {
@@ -4744,15 +4730,14 @@ var TypographySettings = function TypographySettings(props) {
     }))));
     setIsMount(true);
   };
-  var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_6__.useAfterSave)();
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     var handleUpdateSettings = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var response, _response, _response2, _response3;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              if (!(isAfterSave && isMount)) {
+              if (!props.isMount) {
                 _context.next = 22;
                 break;
               }
@@ -4761,7 +4746,7 @@ var TypographySettings = function TypographySettings(props) {
                 break;
               }
               _context.next = 4;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(typography, 'fb_update_typography');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_6__.updateGlobalStyle)(typography, 'fb_update_typography');
             case 4:
               response = _context.sent;
               if (response.success) {
@@ -4774,7 +4759,7 @@ var TypographySettings = function TypographySettings(props) {
                 break;
               }
               _context.next = 9;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(customTypography, 'fb_update_custom_typography');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_6__.updateGlobalStyle)(customTypography, 'fb_update_custom_typography');
             case 9:
               _response = _context.sent;
               if (_response.success) {
@@ -4787,7 +4772,7 @@ var TypographySettings = function TypographySettings(props) {
                 break;
               }
               _context.next = 14;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(globalTypography, 'fb_update_globaltypo');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_6__.updateGlobalStyle)(globalTypography, 'fb_update_globaltypo');
             case 14:
               _response2 = _context.sent;
               if (_response2.success) {
@@ -4800,7 +4785,7 @@ var TypographySettings = function TypographySettings(props) {
                 break;
               }
               _context.next = 19;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(fontFamilies, 'fb_update_fontfamilies');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_6__.updateGlobalStyle)(fontFamilies, 'fb_update_fontfamilies');
             case 19:
               _response3 = _context.sent;
               if (_response3.success) {
@@ -4820,24 +4805,15 @@ var TypographySettings = function TypographySettings(props) {
       };
     }();
     handleUpdateSettings();
-  }, [isAfterSave]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
-    if (isMount) {
-      wp.data.dispatch('core/editor').editPost({
-        meta: {
-          _dummy: new Date().getTime()
-        }
-      });
-    }
-  }, [isMount]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+  }, [props.isMount]);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     if (globalTypography) {
-      (0,_GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__["default"])(globalTypography, deviceType);
+      (0,_GenerateRootCss__WEBPACK_IMPORTED_MODULE_8__["default"])(globalTypography, deviceType);
     }
   }, [globalTypography, deviceType]);
 
   // Load saved data and generate root css
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     setTimeout(function () {
       var globalTypoData = localStorage.getItem("fb_globaltypo");
       if (globalTypoData !== 'null') {
@@ -4901,7 +4877,7 @@ var TypographySettings = function TypographySettings(props) {
       strokeWidth: "1.2",
       strokeLinecap: "round",
       strokeLinejoin: "round"
-    }))), " ", typographyElements[item]), item === 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }))), " ", typographyElements[item]), item === 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_7__["default"], {
       fontProps: typography === null || typography === void 0 || (_typography$item7 = typography[item]) === null || _typography$item7 === void 0 ? void 0 : _typography$item7[selectedHeading],
       deviceType: deviceType,
       fontSize: true
@@ -4931,7 +4907,7 @@ var TypographySettings = function TypographySettings(props) {
         }
       }, /*#__PURE__*/React.createElement("div", {
         className: "fb-typography-settings"
-      }, /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }, /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_4__["default"], {
         fontFamily: typography === null || typography === void 0 || (_typography$item8 = typography[item]) === null || _typography$item8 === void 0 || (_typography$item8 = _typography$item8[selectedHeading]) === null || _typography$item8 === void 0 ? void 0 : _typography$item8.fontFamily,
         onChangeFontFamily: function onChangeFontFamily(value) {
           return onChangeHeadingFontFamily(value, item);
@@ -4981,11 +4957,11 @@ var TypographySettings = function TypographySettings(props) {
       })));
     })), item !== 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
       className: "fb-typography-settings"
-    }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_7__["default"], {
       fontProps: typography[item],
       deviceType: deviceType,
       fontSize: true
-    }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_4__["default"], {
       fontFamily: typography === null || typography === void 0 || (_typography$item17 = typography[item]) === null || _typography$item17 === void 0 ? void 0 : _typography$item17.fontFamily,
       onChangeFontFamily: function onChangeFontFamily(value) {
         return _onChangeFontFamily(value, item);
@@ -5153,7 +5129,7 @@ var TypographySettings = function TypographySettings(props) {
       icon: "arrow-left-alt2"
     }), " ", (_customTypography$ite8 = customTypography[item]) === null || _customTypography$ite8 === void 0 ? void 0 : _customTypography$ite8.name), /*#__PURE__*/React.createElement("div", {
       className: "fb-typography-settings"
-    }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_7__["default"], {
       fontProps: customTypography[item],
       deviceType: deviceType,
       fontSize: true
@@ -5163,7 +5139,7 @@ var TypographySettings = function TypographySettings(props) {
       onChange: function onChange(value) {
         return changeCustomTypoName(item, value);
       }
-    }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_4__["default"], {
       fontFamily: customTypography === null || customTypography === void 0 || (_customTypography$ite0 = customTypography[item]) === null || _customTypography$ite0 === void 0 ? void 0 : _customTypography$ite0.fontFamily,
       onChangeFontFamily: function onChangeFontFamily(value) {
         return onChangeCustomFontFamily(value, item);

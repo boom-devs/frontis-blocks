@@ -19,7 +19,9 @@ const GradientColorPallet = (props) => {
         resetAction,
         deleteAction,
         enableEditName = false,
-        onDelete
+        onDelete,
+		setIsMount,
+		isMount
     } = props
 
     const [clickedGradient, setClickedGradient] = useState('');
@@ -32,6 +34,7 @@ const GradientColorPallet = (props) => {
             name: value
         }
         setColors([...cloneColors])
+		setIsMount(true)
     }
 
     return (
