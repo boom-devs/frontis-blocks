@@ -68,10 +68,6 @@ const FB_TypographyControl = ({
     setAttributes,
 }) => {
 
-    // const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState(
-    //     FONT_FAMILYS.find(option => option.value === fontFamily)
-    // );
-
     const [fontOptions, setFontOptions] = useState([]);
     const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState(null);
     const [availableFontWeights, setAvailableFontWeights] = useState([]);
@@ -203,7 +199,7 @@ const FB_TypographyControl = ({
         GB_TYPO.forEach(item => {
             const matchedTypo = customTypoArray.find(typo => typo.id === item.label);
             if (matchedTypo) {
-                item.label = matchedTypo.name; // Update label to match name from customTypoArray
+                item.label = matchedTypo.name;
             }
         });
 
@@ -300,12 +296,7 @@ const FB_TypographyControl = ({
                                 selectValue={fontWeight}
                                 setSelectValue={handleFontWeightChange}
                             />
-                            {/* <FB_GBSelectControl
-                                label={__("Font Weight", "frontis-blocks")}
-                                controlOptions={FONT_WEIGHT}
-                                selectValue={fontWeight}
-                                setSelectValue={handleFontWeightChange}
-                            /> */}
+                            
                             </BaseControl>
 
                             <BaseControl
