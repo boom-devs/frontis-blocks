@@ -16,6 +16,7 @@ import {
     FONT_STYLE,
     TEXT_TRANSFORM,
     TEXT_DECORATION,
+    GOOGLE_FONTS,
 } from '@Constants/fbConstants';
 
 import FB_Range from '@Components/range';
@@ -67,9 +68,30 @@ const FB_TypographyControl = ({
     setAttributes,
 }) => {
 
-    const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState(
-        FONT_FAMILYS.find(option => option.value === fontFamily)
-    );
+    // const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState(
+    //     FONT_FAMILYS.find(option => option.value === fontFamily)
+    // );
+
+    const [fontOptions, setFontOptions] = useState([]);
+    const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState(null);
+    const [availableFontWeights, setAvailableFontWeights] = useState([]);
+    
+
+    useEffect(() => {
+        GOOGLE_FONTS().then((fetchedFonts) => {
+            setFontOptions(fetchedFonts);
+    
+            const current = fetchedFonts.find(f => f.value === fontFamily);
+    
+            if (current) {
+                setSelectedFontFamilyOption(current);
+                setAvailableFontWeights(current.weights || []);
+            } else {
+                setSelectedFontFamilyOption({ label: 'Default', value: 'Default' });
+                setAvailableFontWeights([]);
+            }
+        });
+    }, []);
 
     useEffect(() => {
 		if (fontFamily !== 'Default') {
@@ -79,9 +101,13 @@ const FB_TypographyControl = ({
 
     const handleFontFamilyChange = (selectedOption) => {
         setSelectedFontFamilyOption(selectedOption);
+    
         const newFontFamily = selectedOption?.value || 'Default';
         onChangeFontFamily(newFontFamily);
-
+    
+        // Update font weight list
+        setAvailableFontWeights(selectedOption?.weights || []);
+    
         if (newFontFamily !== 'Default') {
             loadGoogleFont(newFontFamily);
         }
@@ -230,11 +256,10 @@ const FB_TypographyControl = ({
 
                             <BaseControl
                                 label={__("Font Family", "frontis-blocks")}
-                                // className={globalTypoSwitcher.fontFamily === true && 'fb-global-typo-active'}
                                 className='fb-typo-spacing'
                             >
                                 <Select2 
-                                    options={FONT_FAMILYS}
+                                    options={fontOptions}
                                     value={selectedFontFamilyOption}
                                     onChange={handleFontFamilyChange}
                                     className="fb-select2-control"
@@ -263,12 +288,24 @@ const FB_TypographyControl = ({
                             <BaseControl
                                 className={`fb-typo-spacing ${globalTypoSwitcher.fontWeight === true && 'fb-global-typo-active'}`}
                             >
+
                             <FB_GBSelectControl
+                                label={__("Font Weight", "frontis-blocks")}
+                                controlOptions={[
+                                    { label: __("Default", "frontis-blocks"), value: 'inherit' },
+                                    ...(availableFontWeights.length > 0
+                                        ? availableFontWeights.map(weight => ({ label: weight, value: weight }))
+                                        : FONT_WEIGHT.filter(item => item.value !== 'inherit'))
+                                ]}
+                                selectValue={fontWeight}
+                                setSelectValue={handleFontWeightChange}
+                            />
+                            {/* <FB_GBSelectControl
                                 label={__("Font Weight", "frontis-blocks")}
                                 controlOptions={FONT_WEIGHT}
                                 selectValue={fontWeight}
                                 setSelectValue={handleFontWeightChange}
-                            />
+                            /> */}
                             </BaseControl>
 
                             <BaseControl
