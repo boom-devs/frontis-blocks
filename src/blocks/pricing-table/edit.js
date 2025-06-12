@@ -28,7 +28,6 @@ import {	NORMAL_HOVER,
 	UNIT_TYPES,
 	TEXT_ALIGN,
 	HEADING,
-	FONT_FAMILYS,
 	BORDER_STYLES
 } from "./constants/constants";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";

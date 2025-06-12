@@ -3,19 +3,22 @@ import {
 	BaseControl,
 	Button,
 	SelectControl,
-	Dropdown,
-	Dashicon,
+
 } from '@wordpress/components';
 
+import { useState, useEffect } from '@wordpress/element';
+import Select2 from 'react-select';
+
 import {
-	FONT_FAMILYS,
 	FONT_WEIGHT,
 	FONT_STYLE,
 	TEXT_TRANSFORM,
 	TEXT_DECORATION,
+	GOOGLE_FONTS,
 } from '@Constants/fbConstants';
 
 import FB_Range from '@Components/range';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 
 const FB_SidebarTypography = ({
@@ -45,8 +48,45 @@ const FB_SidebarTypography = ({
 	deviceType,
 	heading
 }) => {
-	const handleFontFamilyChange = (newFontFamily) => {
+
+
+	const [fontOptions, setFontOptions] = useState([]);
+	const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState(null);
+	const [availableFontWeights, setAvailableFontWeights] = useState([]);
+
+	useEffect(() => {
+		GOOGLE_FONTS().then((fetchedFonts) => {
+			setFontOptions(fetchedFonts);
+
+			const current = fetchedFonts.find(f => f.value === fontFamily);
+			if (current) {
+				setSelectedFontFamilyOption(current);
+				setAvailableFontWeights(current.weights || []);
+			} else {
+				setSelectedFontFamilyOption({ label: 'Default', value: 'Default' });
+				setAvailableFontWeights([]);
+			}
+		});
+	}, []);
+
+	useEffect(() => {
+		if (fontFamily !== 'Default') {
+			loadGoogleFont(fontFamily);
+		}
+	}, [fontFamily]);
+
+
+
+	const handleFontFamilyChange = (selectedOption) => {
+		setSelectedFontFamilyOption(selectedOption);
+		const newFontFamily = selectedOption?.value || 'Default';
+
 		onChangeFontFamily(newFontFamily);
+		setAvailableFontWeights(selectedOption?.weights || []);
+
+		if (newFontFamily !== 'Default') {
+			loadGoogleFont(newFontFamily);
+		}
 	};
 
 	const handleFontSizeChange = (newFontSize) => {
@@ -91,12 +131,23 @@ const FB_SidebarTypography = ({
 
 	return (
 		<>
-			<SelectControl
+			<BaseControl 
 				label={__("Font Family", "frontis-blocks")}
-				options={FONT_FAMILYS}
-				value={fontFamily}
-				onChange={handleFontFamilyChange}
-			/>
+				className='fb-typo-spacing'
+			>
+				<Select2
+					options={fontOptions}
+					value={selectedFontFamilyOption}
+					onChange={handleFontFamilyChange}
+					className="fb-select2-control"
+					styles={{
+						menu: (base) => ({
+							...base,
+							zIndex: 999,
+						  }),
+					}}
+				/>
+			</BaseControl>
 			{heading !== 'all' &&
 				<FB_Range
 					min={1}
@@ -114,10 +165,16 @@ const FB_SidebarTypography = ({
 			<div className='fb_global_typo_wrap'>
 				<SelectControl
 					label={__("Font Weight", "frontis-blocks")}
-					options={FONT_WEIGHT}
+					options={[
+						{ label: __("Default", "frontis-blocks"), value: 'inherit' },
+						...(availableFontWeights.length > 0
+							? availableFontWeights.map(weight => ({ label: weight, value: weight }))
+							: FONT_WEIGHT.filter(item => item.value !== 'inherit'))
+					]}
 					value={fontWeight}
 					onChange={handleFontWeightChange}
 				/>
+
 				<SelectControl
 					label={__("Font Style", "frontis-blocks")}
 					options={FONT_STYLE}
@@ -126,12 +183,6 @@ const FB_SidebarTypography = ({
 				/>
 			</div>
 			<div className='fb_global_typo_wrap'>
-				{/* <SelectControl
-					label={__("Text Transform", "frontis-blocks")}
-					options={TEXT_TRANSFORM}
-					value={textTransform}
-					onChange={handleTextTransformChange}
-				/> */}
 				<SelectControl
 					label={__("Text Decoration", "frontis-blocks")}
 					options={TEXT_DECORATION}
