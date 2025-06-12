@@ -24,7 +24,6 @@ import {
 	ICON_ALIGN,
 	TEXT_ALIGN,
 	BORDER_STYLES,
-	FONT_FAMILYS,
 	WIDTH_STYLES,
 	OVERFLOW_OP,
 } from "./constants/constants";
