@@ -42,7 +42,6 @@ import {
     UNIT_TYPES,
     TEXT_ALIGN,
     HEADING,
-    FONT_FAMILYS,
     BORDER_STYLES,
     OVERFLOW_OP,
 } from "./constants/constants";

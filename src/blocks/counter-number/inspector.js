@@ -24,7 +24,7 @@ import {
 } from '@wordpress/components';
 import {useEffect, useRef, useState, useMemo} from '@wordpress/element';
 import './editor.scss';
-import {mediaType, BORDER_STYLES, FONT_FAMILYS, UNIT_TYPES, OVERFLOW_OP, separatorType, CARD_WRAP_HZ_ALIGNMENT, CARD_WRAP_VR_ALIGNMENT, ICON_POSITION, TITLE_POSITION} from "./constants/constants";
+import {mediaType, BORDER_STYLES, UNIT_TYPES, OVERFLOW_OP, separatorType, CARD_WRAP_HZ_ALIGNMENT, CARD_WRAP_VR_ALIGNMENT, ICON_POSITION, TITLE_POSITION} from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
