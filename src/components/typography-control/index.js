@@ -246,6 +246,12 @@ const FB_TypographyControl = ({
                                     value={globalTypoOption}
                                     onChange={handleGlobalTypoTypeChange}
                                     className="fb-select2-control"
+                                    styles={{
+                                        menu: (base) => ({
+                                            ...base,
+                                            zIndex: 999,
+                                        }),
+                                    }}
                                 />
                             </BaseControl>}
 
