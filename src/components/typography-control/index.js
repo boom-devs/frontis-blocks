@@ -11,7 +11,6 @@ import { useState, useEffect } from '@wordpress/element';
 import Select2 from "react-select";
 
 import {
-    FONT_FAMILYS,
 	FONT_WEIGHT,
     FONT_STYLE,
     TEXT_TRANSFORM,
@@ -259,6 +258,12 @@ const FB_TypographyControl = ({
                                     value={selectedFontFamilyOption}
                                     onChange={handleFontFamilyChange}
                                     className="fb-select2-control"
+                                    styles={{
+                                        menu: (base) => ({
+                                            ...base,
+                                            zIndex: 999,
+                                        }),
+                                    }}
                                 />
                             </BaseControl>
 
@@ -296,7 +301,7 @@ const FB_TypographyControl = ({
                                 selectValue={fontWeight}
                                 setSelectValue={handleFontWeightChange}
                             />
-                            
+
                             </BaseControl>
 
                             <BaseControl
