@@ -16,11 +16,13 @@ $post_date = get_the_date('M j, Y');
 // Get category
 $categories = get_the_category();
 $category_name = !empty($categories) ? esc_html($categories[0]->name) : 'Uncategorized';
+$category_link = !empty($categories) ? get_category_link($categories[0]->term_id) : '#';
 
 // Get author info
 $author_id = get_post_field('post_author', $post_id);
 $author_name = get_the_author_meta('display_name', $author_id);
 $author_avatar = get_avatar_url($author_id, array('size' => 28));
+$author_archive_link = get_author_posts_url($author_id);
 
 // Get featured image
 $featured_image = '';
@@ -32,6 +34,14 @@ if (has_post_thumbnail()) {
 $post_views = get_post_meta($post_id, 'post_views_count', true) ?: 0;
 $post_likes = get_post_meta($post_id, 'post_likes_count', true) ?: 0;
 $post_comments = get_comments_number($post_id);
+
+// Check if current user has liked this post
+$user_has_liked = false;
+if (is_user_logged_in()) {
+    $user_id = get_current_user_id();
+    $user_likes = get_user_meta($user_id, 'liked_posts', true) ?: array();
+    $user_has_liked = in_array($post_id, $user_likes);
+}
 
 // Block attributes with defaults
 $category_switcher = isset($attributes['categorySwitcher']) ? $attributes['categorySwitcher'] : true;
@@ -67,7 +77,7 @@ function format_metric_count($count)
 
             <?php if ($category_switcher): ?>
                 <div class='fb-post-category'>
-                    <span class='fb-post-category-name'><?php echo $category_name; ?></span>
+                    <a href="<?php echo esc_url($category_link); ?>" class='fb-post-category-name'><?php echo $category_name; ?></a>
                 </div>
             <?php endif; ?>
 
@@ -81,8 +91,7 @@ function format_metric_count($count)
                 <div class='fb-post-banner-meta-wrapper'>
                     <div class='fb-post-author'>
                         <div class='fb-post-author-info'>
-                            <span class="author-info">by <span
-                                    class='fb-post-author-name'><?php echo esc_html($author_name); ?></span></span>
+                            <span class="author-info">by <a href="<?php echo esc_url($author_archive_link); ?>" class='fb-post-author-name'><?php echo esc_html($author_name); ?></a></span>
                         </div>
                         <div class="fb-post-author-seperator">
                             <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none">
@@ -91,15 +100,13 @@ function format_metric_count($count)
                         </div>
                         <div class='fb-post-author-meta'>
                             <span class='fb-post-date'><?php echo esc_html($post_date); ?></span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path d="M9.66536 7.10001H6.33203" stroke="black" stroke-miterlimit="10"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M8 5.47333V8.80666" stroke="black" stroke-miterlimit="10" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path
-                                    d="M11.2148 1.33334H4.78818C3.36818 1.33334 2.21484 2.49334 2.21484 3.90668V13.3C2.21484 14.5 3.07484 15.0067 4.12818 14.4267L7.38151 12.62C7.72818 12.4267 8.28818 12.4267 8.62818 12.62L11.8815 14.4267C12.9348 15.0133 13.7948 14.5067 13.7948 13.3V3.90668C13.7882 2.49334 12.6348 1.33334 11.2148 1.33334Z"
-                                    stroke="black" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
+                            <button class="fb-bookmark-btn" data-post-id="<?php echo $post_id; ?>" data-post-title="<?php echo esc_attr($post_title); ?>" data-post-url="<?php echo esc_url(get_permalink($post_id)); ?>" title="Bookmark this post">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M9.66634 7.10004H6.33301" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 5.47333V8.80666" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M11.2139 1.33331H4.7872C3.3672 1.33331 2.21387 2.49331 2.21387 3.90665V13.3C2.21387 14.5 3.07387 15.0066 4.1272 14.4266L7.38053 12.62C7.7272 12.4266 8.2872 12.4266 8.6272 12.62L11.8805 14.4266C12.9339 15.0133 13.7939 14.5066 13.7939 13.3V3.90665C13.7872 2.49331 12.6339 1.33331 11.2139 1.33331Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
 
@@ -121,18 +128,18 @@ function format_metric_count($count)
                             </div>
 
                             <!-- Reactions Metric -->
-                            <div class='fb-post-metric-item'>
-                                <svg class='fb-post-metric-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            <div class='fb-post-metric-item fb-like-btn' data-post-id="<?php echo $post_id; ?>" data-liked="<?php echo $user_has_liked ? 'true' : 'false'; ?>">
+                                <svg class='fb-post-metric-icon fb-heart-icon <?php echo $user_has_liked ? 'liked' : ''; ?>' xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     viewBox="0 0 16 16" fill="none">
                                     <path
                                         d="M10.9602 2.06665C9.7535 2.06665 8.6735 2.65332 8.00016 3.55332C7.32683 2.65332 6.24683 2.06665 5.04016 2.06665C2.9935 2.06665 1.3335 3.73332 1.3335 5.79332C1.3335 6.58665 1.46016 7.31998 1.68016 7.99998C2.7335 11.3333 5.98016 13.3266 7.58683 13.8733C7.8135 13.9533 8.18683 13.9533 8.4135 13.8733C10.0202 13.3266 13.2668 11.3333 14.3202 7.99998C14.5402 7.31998 14.6668 6.58665 14.6668 5.79332C14.6668 3.73332 13.0068 2.06665 10.9602 2.06665Z"
-                                        fill="black" />
+                                        fill="<?php echo $user_has_liked ? '#000000' : '#000000'; ?>" />
                                 </svg>
                                 <span class='fb-post-metric-count'><?php echo format_metric_count($post_likes); ?></span>
                             </div>
 
                             <!-- Comments Metric -->
-                            <div class='fb-post-metric-item'>
+                            <div class='fb-post-metric-item fb-comments-btn' data-post-id="<?php echo $post_id; ?>">
                                 <svg class='fb-post-metric-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     viewBox="0 0 16 16" fill="none">
                                     <path
