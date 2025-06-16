@@ -13,11 +13,11 @@ const attributes = {
 	},
 	officeHours: {
 		type: 'number',
-		default: 8
+		default: 9
 	},
 	startTime: {
 		type: 'string',
-		default: '09:00'
+		default: '10:00'
 	},
 	title: {
 		type: 'string',
