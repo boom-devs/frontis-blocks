@@ -119,6 +119,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Helper function to show bookmark modal
     function showBookmarkModal(title, url) {
+        // Check if modal already exists and remove it
+        const existingModal = document.querySelector('.fb-bookmark-modal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+        
         // Create modal
         const modal = document.createElement('div');
         modal.className = 'fb-bookmark-modal';
@@ -139,27 +145,32 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             </div>
         `;
-
+        
         document.body.appendChild(modal);
-
+        
         // Close modal functionality
         const closeModal = () => {
-            document.body.removeChild(modal);
-            document.head.removeChild(style);
+            if (modal.parentNode) {
+                modal.parentNode.removeChild(modal);
+            }
+            // Remove escape key listener
+            document.removeEventListener('keydown', escapeHandler);
         };
-
+        
+        // Close button click
         modal.querySelector('.fb-modal-close').addEventListener('click', closeModal);
+        
+        // Click outside modal to close
         modal.addEventListener('click', function (e) {
             if (e.target === modal) {
                 closeModal();
             }
         });
-
+        
         // Close on escape key
         const escapeHandler = (e) => {
             if (e.key === 'Escape') {
                 closeModal();
-                document.removeEventListener('keydown', escapeHandler);
             }
         };
         document.addEventListener('keydown', escapeHandler);
