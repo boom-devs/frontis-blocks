@@ -44,6 +44,7 @@ import {
     HEADING,
     BORDER_STYLES,
     OVERFLOW_OP,
+    LIST_DIRECTION,
 } from "./constants/constants";
 
 import SortableItem from './sortableItem';
@@ -60,7 +61,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureAlignment,
         FeatureIconAlignment,
         FeatureIconShape,
-
+        FeatureListDirection,
         FeatureListGap,
         FeatureListGapUnits,
 
@@ -1745,11 +1746,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${FeatureSingleItemBorderHoverColor ? `border-color: ${FeatureSingleItemBorderHoverColor};` : ''}
                 ${FeatureSingleItemBoxShadowHoverCssValue ? `box-shadow: ${FeatureSingleItemBoxShadowHoverCssValue};` : ''}
             }
-            .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
-                margin-bottom: calc(${FeatureListGap.Desktop}${FeatureListGapUnits.Desktop} / 2);
-            }
-            .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:first-child) {
-                margin-top: calc(${FeatureListGap.Desktop}${FeatureListGapUnits.Desktop} / 2);  
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-items {
+                display: flex;
+                flex-direction: ${FeatureListDirection};
+                gap: ${FeatureListGap.Desktop}${FeatureListGapUnits.Desktop};
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
                 ${FeatureIconColor ? `fill: ${FeatureIconColor};` : ''}
@@ -1875,13 +1875,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${singleItemTabletBorderWidth && FeatureSingleItemBorderTablet.top? `border-width: ${singleItemTabletBorderWidth};` : ''}
                     ${singleItemTabletBorderRadiusWidth && FeatureSingleItemBorderRadiusTablet.top? `border-radius: ${singleItemTabletBorderRadiusWidth};` : ''}
                 }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-items {
+                    gap: ${FeatureListGap.Tablet}${FeatureListGapUnits.Tablet};
+                }
 
-                .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
-                    margin-bottom: calc(${FeatureListGap.Tablet}${FeatureListGapUnits.Tablet} / 2); 
-                }
-                .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:first-child) {
-                    margin-top: calc(${FeatureListGap.Tablet}${FeatureListGapUnits.Tablet} / 2);
-                }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
                     height: ${FeatureIconSize.Tablet}${FeatureIconSizeUnits.Tablet};
                     width: ${FeatureIconSize.Tablet}${FeatureIconSizeUnits.Tablet};
@@ -1948,11 +1945,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${singleItemMobileBorderWidth && FeatureSingleItemBorderMobile.top? `border-width: ${singleItemMobileBorderWidth};` : ''}
                     ${singleItemMobileBorderRadiusWidth && FeatureSingleItemBorderRadiusMobile.top? `border-radius: ${singleItemMobileBorderRadiusWidth};` : ''}
                 }
-                .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
-                    margin-bottom: calc(${FeatureListGap.Mobile}${FeatureListGapUnits.Mobile} / 2);  
-                }
-                .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:first-child) {
-                    margin-top: calc(${FeatureListGap.Mobile}${FeatureListGapUnits.Mobile} / 2);
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-items {
+                    gap: ${FeatureListGap.Mobile}${FeatureListGapUnits.Mobile};
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
                     height: ${FeatureIconSize.Mobile}${FeatureIconSizeUnits.Mobile}; 
@@ -2014,6 +2008,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureAlignment,
         FeatureIconAlignment,
         FeatureIconShape,
+        FeatureListDirection,
         FeatureListGap,
         FeatureListGapUnits,
         FeatureIconColorSwitcher,
@@ -2425,6 +2420,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 initialOpen={true}
                 className="fb-setting-feature-list-wrapper"
             >
+
+                <SelectControl
+                    label={__("List Direction", "frontis-blocks")}
+                    value={FeatureListDirection}
+                    options={LIST_DIRECTION}
+                    onChange={(value) => setAttributes({ FeatureListDirection: value })}
+                />
+
                 <FB_Range
                     min={1}
                     max={100}
