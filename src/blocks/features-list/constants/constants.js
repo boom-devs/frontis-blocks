@@ -75,3 +75,8 @@ export const BORDER_STYLES = [
 	{ label: __("Outset", "frontis-blocks"), value: "outset" },
 	{ label: __("Ridge", "frontis-blocks"), value: "ridge" },
 ];
+
+export const LIST_DIRECTION = [
+	{ label: __("Column", "frontis-blocks"), value: "column" },
+	{ label: __("Row", "frontis-blocks"), value: "row" },
+];

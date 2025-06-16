@@ -336,11 +336,16 @@ const attributes = {
         default: "left",
     },
 
+    FeatureListDirection: {
+        type: "string",
+        default: "column",
+    },
+
     FeatureListGap: {
 		type: 'object',
 		default: {
-			Desktop: '40',
-			Tablet: '30',
+			Desktop: '20',
+			Tablet: '20',
 			Mobile: '20'
 		}
 	},
