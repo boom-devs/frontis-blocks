@@ -20,6 +20,7 @@ import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
+import FB_ResponsiveControl from '@Components/responsive-control';
 
 
 import { 
@@ -44,7 +45,8 @@ import {
     HEADING,
     BORDER_STYLES,
     OVERFLOW_OP,
-    LIST_DIRECTION,
+    LIST_DIRECTION_ICON,
+    LIST_WRAP_ICON,
 } from "./constants/constants";
 
 import SortableItem from './sortableItem';
@@ -62,6 +64,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureIconAlignment,
         FeatureIconShape,
         FeatureListDirection,
+        FeatureListDirectionWrap,
         FeatureListGap,
         FeatureListGapUnits,
 
@@ -1748,7 +1751,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-items {
                 display: flex;
-                flex-direction: ${FeatureListDirection};
+                flex-direction: ${FeatureListDirection.Desktop};
+                flex-wrap: ${FeatureListDirectionWrap.Desktop};
                 gap: ${FeatureListGap.Desktop}${FeatureListGapUnits.Desktop};
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
@@ -1876,6 +1880,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${singleItemTabletBorderRadiusWidth && FeatureSingleItemBorderRadiusTablet.top? `border-radius: ${singleItemTabletBorderRadiusWidth};` : ''}
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-items {
+                    flex-direction: ${FeatureListDirection.Tablet};
+                    flex-wrap: ${FeatureListDirectionWrap.Tablet};
                     gap: ${FeatureListGap.Tablet}${FeatureListGapUnits.Tablet};
                 }
 
@@ -1946,6 +1952,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${singleItemMobileBorderRadiusWidth && FeatureSingleItemBorderRadiusMobile.top? `border-radius: ${singleItemMobileBorderRadiusWidth};` : ''}
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-items {
+                    flex-direction: ${FeatureListDirection.Mobile};
+                    flex-wrap: ${FeatureListDirectionWrap.Mobile};
                     gap: ${FeatureListGap.Mobile}${FeatureListGapUnits.Mobile};
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
@@ -2009,6 +2017,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureIconAlignment,
         FeatureIconShape,
         FeatureListDirection,
+        FeatureListDirectionWrap,
         FeatureListGap,
         FeatureListGapUnits,
         FeatureIconColorSwitcher,
@@ -2421,12 +2430,65 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 className="fb-setting-feature-list-wrapper"
             >
 
-                <SelectControl
-                    label={__("List Direction", "frontis-blocks")}
-                    value={FeatureListDirection}
-                    options={LIST_DIRECTION}
-                    onChange={(value) => setAttributes({ FeatureListDirection: value })}
-                />
+                <BaseControl
+                    id="fb-setting-alignment"
+                    className="fb-advanced-alignment list"
+                >
+                    <FB_ResponsiveControl
+                        labelText={__('List Direction', 'frontis-blocks')}
+                        device={deviceType}
+                    />
+                    <br />
+                    <ButtonGroup className="fb-advanced-alignment-group-btn">
+                        {LIST_DIRECTION_ICON.map((item, key) => (
+                            <Button
+                                key={key}
+                                onClick={() =>
+                                    setAttributes({
+                                        FeatureListDirection: {
+                                            ...FeatureListDirection,
+                                            [deviceType]: item.value,
+                                        },
+                                    })
+                                }
+                                title={item.title}
+                                className={`fb-advanced-alignment-single-btn ${FeatureListDirection[deviceType] === item.value ? 'active' : ''}`}
+                            >
+                                {item.label}
+                            </Button>
+                        ))}
+                    </ButtonGroup>
+                </BaseControl>
+
+                <BaseControl
+                    id="fb-setting-alignment"
+                    className="fb-advanced-alignment list"
+                >
+                    <FB_ResponsiveControl
+                        labelText={__('List Wrap', 'frontis-blocks')}
+                        device={deviceType}
+                    />
+                    <br />
+                    <ButtonGroup className="fb-advanced-alignment-group-btn">
+                        {LIST_WRAP_ICON.map((item, key) => (
+                            <Button
+                                key={key}
+                                onClick={() =>
+                                    setAttributes({
+                                        FeatureListDirectionWrap: {
+                                            ...FeatureListDirectionWrap,
+                                            [deviceType]: item.value,
+                                        },
+                                    })
+                                }
+                                title={item.title}
+                                className={`fb-advanced-alignment-single-btn ${FeatureListDirectionWrap[deviceType] === item.value ? 'active' : ''}`}
+                            >
+                                {item.label}
+                            </Button>
+                        ))}
+                    </ButtonGroup>
+                </BaseControl>
 
                 <FB_Range
                     min={1}

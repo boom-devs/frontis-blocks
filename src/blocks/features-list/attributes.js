@@ -337,8 +337,20 @@ const attributes = {
     },
 
     FeatureListDirection: {
-        type: "string",
-        default: "column",
+        type: "object",
+        default: {
+            Desktop: "column",
+            Tablet: "column",
+            Mobile: "column",
+        },
+    },
+    FeatureListDirectionWrap: {
+        type: "object",
+        default: {
+            Desktop: "nowrap",
+            Tablet: "nowrap",
+            Mobile: "nowrap",
+        },
     },
 
     FeatureListGap: {
