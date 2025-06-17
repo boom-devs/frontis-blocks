@@ -25,7 +25,6 @@ import {
     TEXT_ALIGN,
     ICON_ALIGN,
     Testimonial,
-    FONT_FAMILYS,
     BORDER_STYLES,
     HEADING,
     PRESETS,

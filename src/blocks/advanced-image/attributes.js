@@ -78,6 +78,7 @@ const attributes = {
 	},
 	imageFit: {
 		type: "string",
+		default: "cover",
 	},
 	imageHover: {
 		type: "string",

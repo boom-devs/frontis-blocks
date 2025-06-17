@@ -57,19 +57,6 @@ export const BORDER_STYLES = [
 	{ label: __("Ridge", "frontis-blocks"), value: "ridge" },
 ];
 
-export const FONT_WEIGHT = [
-	{ label: __("Default", "frontis-blocks"), value: 'inherit' },
-	{ label: '100', value: '100' },
-	{ label: '200', value: '200' },
-	{ label: '300', value: '300' },
-	{ label: '400', value: '400' },
-	{ label: '500', value: '500' },
-	{ label: '600', value: '600' },
-	{ label: '700', value: '700' },
-	{ label: '800', value: '800' },
-	{ label: '900', value: '900' }
-];
-
 export const FONT_STYLE = [
 	{ label: __("Default", "frontis-blocks"), value: "inherit" },
 	{ label: __("Normal", "frontis-blocks"), value: "normal" },
@@ -122,6 +109,30 @@ export const TEXT_DECORATION = [
 	{ label: __("Underline", "frontis-blocks"), value: "underline" },
 	{ label: __("Overline", "frontis-blocks"), value: "overline" },
 	{ label: __("Line Through", "frontis-blocks"), value: "line-through" },
+];
+
+export const GOOGLE_FONTS = async () => {
+    const res = await fetch(FrontisBlocksData.pluginUrl + 'assets/admin/google-fonts/google-fonts.json');
+    const data = await res.json();
+
+    return Object.keys(data).map(family => ({
+        label: family,
+        value: family,
+        weights: data[family]
+    }));
+};
+
+export const FONT_WEIGHT = [
+	{ label: __("Default", "frontis-blocks"), value: 'inherit' },
+	{ label: '100', value: '100' },
+	{ label: '200', value: '200' },
+	{ label: '300', value: '300' },
+	{ label: '400', value: '400' },
+	{ label: '500', value: '500' },
+	{ label: '600', value: '600' },
+	{ label: '700', value: '700' },
+	{ label: '800', value: '800' },
+	{ label: '900', value: '900' }
 ];
 
 export const FONT_FAMILYS = [

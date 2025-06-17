@@ -178,8 +178,29 @@ const Edit = (props) => {
 		effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
         // Carousel-specific settings with default values
-		slidesPerView: sliderType === 'carousel' ? (carouselPerColumn || 2) : 1,
-		spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap || 20) : 0,
+		slidesPerView: sliderType === 'carousel' ? (carouselPerColumn?.Desktop || 3) : 1,
+			spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap?.Desktop || 20) : 0,
+
+			// Responsive breakpoints for Desktop, Tablet, and Mobile
+			...(sliderType === 'carousel' && {
+				breakpoints: {
+				// Mobile (e.g., screens < 768px)
+				0: {
+					slidesPerView: carouselPerColumn?.Mobile || 1,
+					spaceBetween: carouselPerColumnGap?.Mobile || 10,
+				},
+				// Tablet (e.g., screens >= 768px)
+				768: {
+					slidesPerView: carouselPerColumn?.Tablet || 2,
+					spaceBetween: carouselPerColumnGap?.Tablet || 15,
+				},
+				// Desktop (e.g., screens >= 1024px)
+				1200: {
+					slidesPerView: carouselPerColumn?.Desktop || 3,
+					spaceBetween: carouselPerColumnGap?.Desktop || 20,
+				},
+				},
+			}),
 
         // Creative effect settings if needed
         ...(slideEffect === 'creative' && {
@@ -206,6 +227,7 @@ const Edit = (props) => {
             });
         },
     }), [
+        deviceType,
         autoplay,
         autoplaySpeed,
         stopOnLastSlide,
@@ -227,8 +249,8 @@ const Edit = (props) => {
             // Update carousel settings
 
             if (sliderType === 'carousel') {
-                swiperInstance.params.slidesPerView = carouselPerColumn;
-                swiperInstance.params.spaceBetween = carouselPerColumnGap;
+                swiperInstance.params.slidesPerView = deviceType === 'Desktop' ? carouselPerColumn.Desktop : deviceType === 'Tablet' ? carouselPerColumn.Tablet : carouselPerColumn.Mobile;
+                swiperInstance.params.spaceBetween = deviceType === 'Desktop' ? carouselPerColumnGap.Desktop : deviceType === 'Tablet' ? carouselPerColumnGap.Tablet : carouselPerColumnGap.Mobile;
             }
 
             swiperInstance.params.speed = transitionSpeed;
@@ -272,6 +294,7 @@ const Edit = (props) => {
             }
         }
     }, [
+        deviceType,
         swiperInstance,
         autoplay,
         autoplaySpeed,

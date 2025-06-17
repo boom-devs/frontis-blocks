@@ -283,3 +283,14 @@
         }
     }
 }
+
+.fb-advanced-alignment {
+    &.list {
+        .fb-setting-device-label-wrapper {
+            .fb-setting-label-text {
+                flex: unset;
+            }
+        }
+    }
+}
+
