@@ -2597,6 +2597,10 @@
   padding: 0 12px;
 }
 
+.fb-advanced-alignment.list .fb-setting-device-label-wrapper .fb-setting-label-text {
+  flex: unset;
+}
+
 .fb-unit-wrapper {
   display: flex;
   align-items: center;
