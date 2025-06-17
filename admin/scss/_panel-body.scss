@@ -166,6 +166,10 @@
                 &.active {
                     color: $neutral-color-950 !important;
                 }
+                &.is-primary{
+                    background: #C3C8D2 !important;
+                    color: #0B0C0E !important;
+                }
             }
         }
 
