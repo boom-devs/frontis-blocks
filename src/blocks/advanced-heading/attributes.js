@@ -121,9 +121,17 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-    headingTextColorType: {
+    headingTextColorTypeSwitcher: {
         type: "string",
         default: "normal",
+    },
+    headingTextColorType: {
+        type: "string",
+        default: "classic",
+    },
+    headingTextHoverColorType: {
+        type: "string",
+        default: "classic",
     },
     headingTextShadowValues: {
         type: 'array',
