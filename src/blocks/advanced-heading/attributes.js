@@ -121,6 +121,10 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+    headingTextColorType: {
+        type: "string",
+        default: "normal",
+    },
     headingTextShadowValues: {
         type: 'array',
         default: [],
@@ -159,6 +163,34 @@ const attributes = {
     },
     headingHoverColor: {
         type: 'string',
+    },
+    headingTextGradientColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    headingTextGradientColor: {
+        type: "string",
+        default: null
+    },
+    headingTextHoverGradientColor: {
+        type: "string",
+        default: null
+    },
+    headingTextCustomGradientColorSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    headingTextCustomGradientColor: {
+        type: "string",
+        default: ""
+    },
+    headingTextHoverCustomGradientColorSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    headingTextHoverCustomGradientColor: {
+        type: "string",
+        default: ""
     },
     headingBgColorSwitcher: {
         type: "string",
