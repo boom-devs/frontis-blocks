@@ -2806,25 +2806,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     isBoxShadow={false}
                 />
 
-                {/* <div className="fb-setting-switcher-container">
-                    <BaseControl
-                        label={__("Text Color Type", "frontis-blocks")}
-                        className="fb-setting-switcher-panel-wrapper"
-                    >
-                        <ButtonGroup className="fb-setting-switcher-panel-btn">
-                            {NORMAL_GRADIENT.map((item, key) => (
-                                <Button
-                            key={key}
-                                    onClick={() => setAttributes({ headingTextColorType: item.value })} 
-                                    className={`fb-setting-switcher-panel-btn-switcher ${headingTextColorType === item.value ? 'active' : ''}`}
-                                >
-                                    {item.label}
-                                </Button>
-                            ))}
-                        </ButtonGroup>
-                    </BaseControl>
-                </div> */}
-
                 <FB_Range
                     min={0}
                     max={10}
