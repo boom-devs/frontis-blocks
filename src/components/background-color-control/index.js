@@ -16,6 +16,8 @@ import FB_SwitcherControl from '@Components/switcher-control';
 
 const FB_BackgroundColorControl = ({
     label = __("Background Color", "frontis-blocks"),
+    normalLabel = __("Background Type", "frontis-blocks"),
+    hoverLabel = __("Background Type", "frontis-blocks"),
     bgColorSwitcher,
     setBgColorSwitcher,
 
@@ -90,7 +92,7 @@ const FB_BackgroundColorControl = ({
             {bgColorSwitcher === 'normal' && (
                 <BaseControl
                     className="fb-setting-background-color-setting-wrapper"
-                    label={__("Background Type", "frontis-blocks")}
+                    label={normalLabel}
                 >
                     <Dropdown
                         className="fb-setting-background-color-setting-icon-dropdown"
@@ -177,7 +179,7 @@ const FB_BackgroundColorControl = ({
             {bgColorSwitcher === 'hover' && (
                 <BaseControl
                     className="fb-setting-background-color-setting-wrapper"
-                    label={__("Background Type", "frontis-blocks")}
+                    label={hoverLabel}
                 >
                     <Dropdown
                         className="fb-setting-background-color-setting-icon-dropdown"
