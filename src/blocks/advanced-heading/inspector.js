@@ -1936,7 +1936,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
             ${headingTextColorType === 'gradient' ? `
                 background: ${headingTextCustomGradientColorSwitcher && headingTextCustomGradientColor ? headingTextCustomGradientColor : headingTextGradientColor};
-                ${headingTextCustomGradientColor || headingTextGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ${headingTextCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ${headingTextGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
             ` : ''}
 
             ${headingBackgroundImageEnabled && headingBackgroundImageUrl && headingBackgroundImageUrl !== 'null' ? `
@@ -1958,7 +1959,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
             ${headingTextHoverColorType === 'gradient' ? `
                 background: ${headingTextHoverCustomGradientColorSwitcher && headingTextHoverCustomGradientColor ? headingTextHoverCustomGradientColor : headingTextHoverGradientColor};
-                ${headingTextHoverCustomGradientColor || headingTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ${headingTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ${headingTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
             ` : ''}
 
             ${headingBorderHoverColor ? `border-color: ${headingBorderHoverColor};` : ''}
@@ -2012,7 +2014,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${subHeadingColor ? `color: ${subHeadingColor};` : ''}
             ${subHeadingTextColorType === 'gradient' ? `
                 background: ${subHeadingTextCustomGradientColorSwitcher && subHeadingTextCustomGradientColor ? subHeadingTextCustomGradientColor : subHeadingTextGradientColor};
-                ${subHeadingTextCustomGradientColor || subHeadingTextGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ${subHeadingTextCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ${subHeadingTextGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
             ` : ''}
 
             ${subHeadingGlobalTypoSwitcher.fontFamily === true && subHeadingGlobalTypographyData.fontFamily ? `font-family: ${subHeadingGlobalTypographyData.fontFamily};` : ''}
@@ -2052,7 +2055,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${subHeadingHoverColor ? `color: ${subHeadingHoverColor};` : ''}
             ${subHeadingTextHoverColorType === 'gradient' ? `
                 background: ${subHeadingTextHoverCustomGradientColorSwitcher && subHeadingTextHoverCustomGradientColor ? subHeadingTextHoverCustomGradientColor : subHeadingTextHoverGradientColor};
-                ${subHeadingTextHoverCustomGradientColor || subHeadingTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ${subHeadingTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ${subHeadingTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
             ` : ''}
             ${subHeadingBorderHoverColor ? `border-color: ${subHeadingBorderHoverColor};` : ''}
             ${subHeadingTextStroke ? `
@@ -2357,7 +2361,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingText,
     headingTag,
     headingAlignment,
+    
+    headingTextColorTypeSwitcher,
+    headingTextColorType,
+    headingTextHoverColorType,
     headingColor,
+    headingHoverColor,
+    headingTextGradientColor,
+    headingTextHoverGradientColor,
+    headingTextCustomGradientColorSwitcher,
+    headingTextCustomGradientColor,
+    headingTextHoverCustomGradientColorSwitcher,
+    headingTextHoverCustomGradientColor,
 
     headingBgColorTypeSwitcher,
     headingBgColorType,
@@ -2416,18 +2431,27 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingTextCustomGradientColor,
     headingTextHoverCustomGradientColor,
 
+    subHeadingTextColorTypeSwitcher,
+    subHeadingTextColorType,
+    subHeadingTextHoverColorType,
     subHeadingColor,
     subHeadingHoverColor,
     subHeadingTextGradientColor,
     subHeadingTextHoverGradientColor,
+    subHeadingTextCustomGradientColorSwitcher,
     subHeadingTextCustomGradientColor,
+    subHeadingTextHoverCustomGradientColorSwitcher,
     subHeadingTextHoverCustomGradientColor,
 
-    subHeadingBgColor,
+    subHeadingBgColorTypeSwitcher,
+    subHeadingBgColorType,
+    subHeadingBgHoverColorType,
     subHeadingBgHoverColor,
     subHeadingBgGradientColor,
     subHeadingBgHoverGradientColor,
+    subHeadingBgCustomGradientColorSwitcher,
     subHeadingBgCustomGradientColor,
+    subHeadingBgHoverCustomGradientColorSwitcher,
     subHeadingBgHoverCustomGradientColor,
 
     subHeadingGlobalTypoSwitcher,
