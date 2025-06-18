@@ -100,9 +100,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingLetterSpacingUnits,
         headingLineHeightUnits,
 
-        headingTextColorTypeSwitcher,
-        headingTextColorType,
-        headingTextHoverColorType,
+        
         headingTextShadowValues,
         headingTextShadowCssValue,
         headingTextStroke,
@@ -110,11 +108,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingTextStrokeColor,
         headingTextStrokeHoverColor,
 
-
-        headingColorSwitcher,
+        headingTextColorTypeSwitcher,
+        headingTextColorType,
+        headingTextHoverColorType,
         headingColor,
         headingHoverColor,
-
         headingTextGradientColorSwitcher,
         headingTextGradientColor,
         headingTextHoverGradientColor,
@@ -123,9 +121,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingTextHoverCustomGradientColorSwitcher,
         headingTextHoverCustomGradientColor,
 
-        headingBgColorSwitcher,
+        headingBgColorTypeSwitcher,
+        headingBgColorType,
+        headingBgHoverColorType,
         headingBgColor,
-        headingBgColorHover,
+        headingBgHoverColor,
+        headingBgGradientColor,
+        headingBgHoverGradientColor,
+        headingBgCustomGradientColorSwitcher,
+        headingBgCustomGradientColor,
+        headingBgHoverCustomGradientColorSwitcher,
+        headingBgHoverCustomGradientColor,
 
         headingBorder,
         headingBorderColor,
@@ -187,12 +193,29 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         subHeadingTextStrokeColor,
         subHeadingTextStrokeHoverColor,
 
-        subHeadingColorSwitcher,
+        subHeadingTextColorTypeSwitcher,
+        subHeadingTextColorType,
+        subHeadingTextHoverColorType,
         subHeadingColor,
         subHeadingHoverColor,
-        subHeadingBgColorSwitcher,
+        subHeadingTextGradientColor,
+        subHeadingTextHoverGradientColor,
+        subHeadingTextCustomGradientColorSwitcher,
+        subHeadingTextCustomGradientColor,
+        subHeadingTextHoverCustomGradientColorSwitcher,
+        subHeadingTextHoverCustomGradientColor,
+        
+        subHeadingBgColorTypeSwitcher,
+        subHeadingBgColorType,
+        subHeadingBgHoverColorType,
         subHeadingBgColor,
-        subHeadingBgColorHover,
+        subHeadingBgHoverColor,
+        subHeadingBgGradientColor,
+        subHeadingBgHoverGradientColor,
+        subHeadingBgCustomGradientColorSwitcher,
+        subHeadingBgCustomGradientColor,
+        subHeadingBgHoverCustomGradientColorSwitcher,
+        subHeadingBgHoverCustomGradientColor,
 
         subHeadingBorder,
         subHeadingBorderColorSwitcher,
@@ -1854,11 +1877,27 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
 
         .${blockId} .fb-advanced-wrapper .fb-advanced-heading-wrapper {
-            ${headingBgColor ? `background-color: ${headingBgColor};` : ''}
+            ${
+                headingBgColorType === "gradient"
+                  ? `background: ${
+                      headingBgCustomGradientColorSwitcher && headingBgCustomGradientColor
+                        ? headingBgCustomGradientColor
+                        : headingBgGradientColor
+                    };`
+                  : headingBgColor ? `background: ${headingBgColor};` : ''
+            }
             transition: all .3s ease-in-out;
         }
         .${blockId} .fb-advanced-wrapper .fb-advanced-heading-wrapper:hover {
-            ${headingBgColorHover ? `background-color: ${headingBgColorHover};` : ''}
+            ${
+                headingBgHoverColorType === "gradient"
+                  ? `background: ${
+                      headingBgHoverCustomGradientColorSwitcher && headingBgHoverCustomGradientColor
+                        ? headingBgHoverCustomGradientColor
+                        : headingBgHoverGradientColor
+                    };`
+                  : headingBgHoverColor ? `background: ${headingBgHoverColor};` : ''
+            }
             transition: all .3s ease-in-out;
         }
         .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
@@ -1946,9 +1985,36 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
         ` : ''}
 
+        .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading-wrapper {
+            ${
+                subHeadingBgColorType === "gradient"
+                  ? `background: ${
+                      subHeadingBgCustomGradientColorSwitcher && subHeadingBgCustomGradientColor
+                        ? subHeadingBgCustomGradientColor
+                        : subHeadingBgGradientColor
+                    };`
+                  : subHeadingBgColor ? `background: ${subHeadingBgColor};` : ''
+            }
+            transition: all .3s ease-in-out;
+        }
+        .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading-wrapper:hover {
+            ${
+                subHeadingBgHoverColorType === "gradient"
+                  ? `background: ${
+                      subHeadingBgHoverCustomGradientColorSwitcher && subHeadingBgHoverCustomGradientColor
+                        ? subHeadingBgHoverCustomGradientColor
+                        : subHeadingBgHoverGradientColor
+                    };`
+                  : subHeadingBgHoverColor ? `background: ${subHeadingBgHoverColor};` : ''
+            }
+            transition: all .3s ease-in-out;
+        }
         .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading {
             ${subHeadingColor ? `color: ${subHeadingColor};` : ''}
-            ${subHeadingBgColor ? `background-color: ${subHeadingBgColor};` : ''}
+            ${subHeadingTextColorType === 'gradient' ? `
+                background: ${subHeadingTextCustomGradientColorSwitcher && subHeadingTextCustomGradientColor ? subHeadingTextCustomGradientColor : subHeadingTextGradientColor};
+                ${subHeadingTextCustomGradientColor || subHeadingTextGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+            ` : ''}
 
             ${subHeadingGlobalTypoSwitcher.fontFamily === true && subHeadingGlobalTypographyData.fontFamily ? `font-family: ${subHeadingGlobalTypographyData.fontFamily};` : ''}
             ${subHeadingGlobalTypoSwitcher.fontSize === true && subHeadingGlobalTypographyData.fontSize ? `font-size: ${subHeadingGlobalTypographyData.fontSize};` : ''}
@@ -1985,7 +2051,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
         .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
             ${subHeadingHoverColor ? `color: ${subHeadingHoverColor};` : ''}
-            ${subHeadingBgColorHover ? `background-color: ${subHeadingBgColorHover};` : ''}
+            ${subHeadingTextHoverColorType === 'gradient' ? `
+                background: ${subHeadingTextHoverCustomGradientColorSwitcher && subHeadingTextHoverCustomGradientColor ? subHeadingTextHoverCustomGradientColor : subHeadingTextHoverGradientColor};
+                ${subHeadingTextHoverCustomGradientColor || subHeadingTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+            ` : ''}
             ${subHeadingBorderHoverColor ? `border-color: ${subHeadingBorderHoverColor};` : ''}
             ${subHeadingTextStroke ? `
                 ${subHeadingTextStroke.Desktop ? `-webkit-text-stroke: ${subHeadingTextStroke.Desktop}px ${subHeadingTextStrokeHoverColor};` : ''}
@@ -2290,7 +2359,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingTag,
     headingAlignment,
     headingColor,
+
     headingBgColor,
+    headingBgHoverColor,
+    headingBgGradientColor,
+    headingBgHoverGradientColor,
+    headingBgCustomGradientColor,
+    headingBgHoverCustomGradientColor,
+
     headingGlobalTypoSwitcher,
     headingGlobalTypographyData,
     headingGlobalTypoType,
@@ -2330,17 +2406,26 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingBackgroundImageUrl,
     headingHoverColor,
     headingBorderHoverColor,
-    headingBgColorHover,
     headingTextStrokeHoverColor,
-    headingTextGradientColorSwitcher,
     headingTextGradientColor,
     headingTextHoverGradientColor,
-    headingTextCustomGradientColorSwitcher,
     headingTextCustomGradientColor,
-    headingTextHoverCustomGradientColorSwitcher,
     headingTextHoverCustomGradientColor,
+
     subHeadingColor,
+    subHeadingHoverColor,
+    subHeadingTextGradientColor,
+    subHeadingTextHoverGradientColor,
+    subHeadingTextCustomGradientColor,
+    subHeadingTextHoverCustomGradientColor,
+
     subHeadingBgColor,
+    subHeadingBgHoverColor,
+    subHeadingBgGradientColor,
+    subHeadingBgHoverGradientColor,
+    subHeadingBgCustomGradientColor,
+    subHeadingBgHoverCustomGradientColor,
+
     subHeadingGlobalTypoSwitcher,
     subHeadingGlobalTypographyData,
     subHeadingGlobalTypoType,
@@ -2376,7 +2461,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     subHeadingTextStrokeHoverColor,
     subHeadingBoxShadowCssValue,
     subHeadingHoverColor,
-    subHeadingBgColorHover,
     subHeadingBorderHoverColor,
     headingIconBgSize,
     headingIconBgSizeUnits,
@@ -2875,27 +2959,36 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 				/>
 
-                <FB_SwitcherControl
-                    label={__("Background Color", "frontis-blocks")}
-                    globalSwitcher={headingBgColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ headingBgColorSwitcher: value })}
-                />
+                <FB_BackgroundColorControl
+					label={__("Background Color", "frontis-blocks")}
+					bgColorSwitcher={headingBgColorTypeSwitcher}  
+					setBgColorSwitcher={(value) => setAttributes({ headingBgColorTypeSwitcher: value })}
+					
+					normalBackgroundType={headingBgColorType}
+					setNormalBackgroundType={(value) => setAttributes({ headingBgColorType: value })}
+					normalClassicColor={headingBgColor}
+					setNormalClassicColor={(value) => setAttributes({ headingBgColor: value })}
+					normalGradientColor={headingBgGradientColor}
+					setNormalGradientColor={(value) => setAttributes({ headingBgGradientColor: value })}
+					normalCustomGradientSwitcher={headingBgCustomGradientColorSwitcher}
+					setNormalCustomGradientSwitcher={(value) => setAttributes({ headingBgCustomGradientColorSwitcher: value })}
+					normalCustomGradientInputValue={headingBgCustomGradientColor}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ headingBgCustomGradientColor: value })}
+					
+					hoverBackgroundType={headingBgHoverColorType} 
+					setHoverBackgroundType={(value) => setAttributes({ headingBgHoverColorType: value })}
+					hoverClassicColor={headingBgHoverColor}
+					setHoverClassicColor={(value) => setAttributes({ headingBgHoverColor: value })}
+					hoverGradientColor={headingBgHoverGradientColor} 
+					setHoverGradientColor={(value) => setAttributes({ headingBgHoverGradientColor: value })}
+					hoverCustomGradientSwitcher={headingBgHoverCustomGradientColorSwitcher}
+					setHoverCustomGradientSwitcher={(value) => setAttributes({ headingBgHoverCustomGradientColorSwitcher: value })}
+					hoverCustomGradientInputValue={headingBgHoverCustomGradientColor}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ headingBgHoverCustomGradientColor: value })}
 
-                {headingBgColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={headingBgColor}
-                        setGlobalColor={(value) => setAttributes({ headingBgColor: value })}
-                    />
-                )}
+					isBackgroundImage={false}
 
-                {headingBgColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={headingBgColorHover}
-                        setGlobalColor={(value) => setAttributes({ headingBgColorHover: value })}
-                    />
-                )}
+				/>
 
                 <ToggleControl
                     label={__("Enable Background Image", "frontis-blocks")}
@@ -3347,49 +3440,71 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     />
                 )}
 
-                    <FB_SwitcherControl
+                   
+                    <FB_BackgroundColorControl
                         label={__("Text Color", "frontis-blocks")}
-                        globalSwitcher={subHeadingColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ subHeadingColorSwitcher: value })}
+                        bgColorSwitcher={subHeadingTextColorTypeSwitcher}  
+                        setBgColorSwitcher={(value) => setAttributes({ subHeadingTextColorTypeSwitcher: value })}
+                        
+                        normalLabel={__("Text Color Type", "frontis-blocks")}
+                        normalBackgroundType={subHeadingTextColorType}
+                        setNormalBackgroundType={(value) => setAttributes({ subHeadingTextColorType: value })}
+                        normalClassicColor={subHeadingColor}
+                        setNormalClassicColor={(value) => setAttributes({ subHeadingColor: value })}
+                        normalGradientColor={subHeadingTextGradientColor}
+                        setNormalGradientColor={(value) => setAttributes({ subHeadingTextGradientColor: value })}
+                        normalCustomGradientSwitcher={subHeadingTextCustomGradientColorSwitcher}
+                        setNormalCustomGradientSwitcher={(value) => setAttributes({ subHeadingTextCustomGradientColorSwitcher: value })}
+                        normalCustomGradientInputValue={subHeadingTextCustomGradientColor}
+                        setNormalCustomGradientInputValue={(value) => setAttributes({ subHeadingTextCustomGradientColor: value })}
+                        
+                        hoverLabel={__("Text Color Type", "frontis-blocks")}
+                        hoverBackgroundType={subHeadingTextHoverColorType} 
+                        setHoverBackgroundType={(value) => setAttributes({ subHeadingTextHoverColorType: value })}
+                        hoverClassicColor={subHeadingHoverColor}
+                        setHoverClassicColor={(value) => setAttributes({ subHeadingHoverColor: value })}
+                        hoverGradientColor={subHeadingTextHoverGradientColor} 
+                        setHoverGradientColor={(value) => setAttributes({ subHeadingTextHoverGradientColor: value })}
+                        hoverCustomGradientSwitcher={subHeadingTextHoverCustomGradientColorSwitcher}
+                        setHoverCustomGradientSwitcher={(value) => setAttributes({ subHeadingTextHoverCustomGradientColorSwitcher: value })}
+                        hoverCustomGradientInputValue={subHeadingTextHoverCustomGradientColor}
+                        setHoverCustomGradientInputValue={(value) => setAttributes({ subHeadingTextHoverCustomGradientColor: value })}
+
+                        isBackgroundImage={false}
+
                     />
 
-                    {subHeadingColorSwitcher === 'normal' && (
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                            globalColor={subHeadingColor}
-                            setGlobalColor={(value) => setAttributes({ subHeadingColor: value })}
-                        />
-                    )}
-
-                    {subHeadingColorSwitcher === 'hover' && (
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                            globalColor={subHeadingHoverColor}
-                            setGlobalColor={(value) => setAttributes({ subHeadingHoverColor: value })}
-                        />
-                    )}
-
-                    <FB_SwitcherControl
+                    <FB_BackgroundColorControl
                         label={__("Background Color", "frontis-blocks")}
-                        globalSwitcher={subHeadingBgColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ subHeadingBgColorSwitcher: value })}
+                        bgColorSwitcher={subHeadingBgColorTypeSwitcher}  
+                        setBgColorSwitcher={(value) => setAttributes({ subHeadingBgColorTypeSwitcher: value })}
+                        
+                        normalBackgroundType={subHeadingBgColorType}
+                        setNormalBackgroundType={(value) => setAttributes({ subHeadingBgColorType: value })}
+                        normalClassicColor={subHeadingBgColor}
+                        setNormalClassicColor={(value) => setAttributes({ subHeadingBgColor: value })}
+                        normalGradientColor={subHeadingBgGradientColor}
+                        setNormalGradientColor={(value) => setAttributes({ subHeadingBgGradientColor: value })}
+                        normalCustomGradientSwitcher={subHeadingBgCustomGradientColorSwitcher}
+                        setNormalCustomGradientSwitcher={(value) => setAttributes({ subHeadingBgCustomGradientColorSwitcher: value })}
+                        normalCustomGradientInputValue={subHeadingBgCustomGradientColor}
+                        setNormalCustomGradientInputValue={(value) => setAttributes({ subHeadingBgCustomGradientColor: value })}
+                        
+                        hoverBackgroundType={subHeadingBgHoverColorType} 
+                        setHoverBackgroundType={(value) => setAttributes({ subHeadingBgHoverColorType: value })}
+                        hoverClassicColor={subHeadingBgHoverColor}
+                        setHoverClassicColor={(value) => setAttributes({ subHeadingBgHoverColor: value })}
+                        hoverGradientColor={subHeadingBgHoverGradientColor} 
+                        setHoverGradientColor={(value) => setAttributes({ subHeadingBgHoverGradientColor: value })}
+                        hoverCustomGradientSwitcher={subHeadingBgHoverCustomGradientColorSwitcher}
+                        setHoverCustomGradientSwitcher={(value) => setAttributes({ subHeadingBgHoverCustomGradientColorSwitcher: value })}
+                        hoverCustomGradientInputValue={subHeadingBgHoverCustomGradientColor}
+                        setHoverCustomGradientInputValue={(value) => setAttributes({ subHeadingBgHoverCustomGradientColor: value })}
+
+                        isBackgroundImage={false}
+
                     />
 
-                    {subHeadingBgColorSwitcher === 'normal' && (
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                            globalColor={subHeadingBgColor}
-                            setGlobalColor={(value) => setAttributes({ subHeadingBgColor: value })}
-                        />
-                    )}
-
-                    {subHeadingBgColorSwitcher === 'hover' && (
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                            globalColor={subHeadingBgColorHover}
-                            setGlobalColor={(value) => setAttributes({ subHeadingBgColorHover: value })}
-                        />
-                    )}
 
                     <SelectControl
                         label={__("Border Style", "frontis-blocks")}
