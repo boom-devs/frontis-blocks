@@ -14,7 +14,7 @@ import deprecated from './deprecated.js';
 
 registerBlockType( metadata.name, {
 	attributes,
-	icon: FB_Block_Icons.advanced_heading,
+	icon: FB_Block_Icons.advanced_subHeading,
 	edit: Edit,
 	save,
 	deprecated,
