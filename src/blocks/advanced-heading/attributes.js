@@ -172,10 +172,6 @@ const attributes = {
     headingHoverColor: {
         type: 'string',
     },
-    headingTextGradientColorSwitcher: {
-        type: "string",
-        default: "normal"
-    },
     headingTextGradientColor: {
         type: "string",
         default: null
