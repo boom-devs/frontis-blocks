@@ -68,9 +68,14 @@ const TypographySettings = (props) => {
 	}
 
 	const deleteItem = (item) => {
-		const tempTypography = { ...customTypography }
-		delete tempTypography[item]
-		setCustomTypography({ ...tempTypography })
+		const tempTypography = { ...customTypography };
+		const tempGlobalTypography = { ...globalTypography };
+	
+		delete tempTypography[item];
+		delete tempGlobalTypography[item];
+	
+		setCustomTypography(tempTypography);
+		setGlobalTypography(tempGlobalTypography);
 		setIsMount(true);
 	};
 
@@ -1031,6 +1036,7 @@ const TypographySettings = (props) => {
 			}
 		}, 1000);
 	}, [deviceType]);
+
 
 	return (
 		<>
