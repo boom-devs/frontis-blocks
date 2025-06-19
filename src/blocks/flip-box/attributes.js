@@ -238,7 +238,7 @@ const attributes = {
     },
     headingTextBack: {
         type: "string",
-        default: "Back Title"
+        default: "Branding"
     },
     headingTag: {
         type: "string",
@@ -649,8 +649,7 @@ const attributes = {
     },
     flipBackContent: {
         type: "string",
-        default: "Contrary to popular belief, Lorem Ipsum is not simply random text." +
-            " It has roots in a piece of classical Latin"
+        default: "Corrupti non maiores atque. Repellendus ratione omnis numquam minima ut harum eaque."
     },
     flipBackContentTag: {
         type: "string",
@@ -2298,6 +2297,147 @@ const attributes = {
         type: "string",
         default: ""
     },
+    // Flip box back
+    flipBoxBackWidth: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    flipBoxBackWidthUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    flipBoxBackHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    flipBoxBackHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    //Flip Box Front background
+    flipBoxBackColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    flipBoxBackBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    flipBoxBackClassicColor: {
+        type: "string",
+        default: "#F89B2E"
+    },
+    flipBoxBackGradientColor: {
+        type: "string",
+    },
+    flipBoxBackCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    flipBoxBackCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    flipBoxBackHoverClassicColor: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverGradientColor: {
+        type: "string",
+    },
+    flipBoxBackHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    flipBoxBackHoverCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+
     flipBackIconPosition: {
         type: 'string',
         default: 'top'
@@ -2359,7 +2499,7 @@ const attributes = {
     },
     descAlignmentBack: {
         type: "string",
-        default: "left",
+        default: "center",
     },
     buttonAlignment: {
         type: "string",
@@ -2596,7 +2736,7 @@ const attributes = {
     headingBack_Desktop_padding: {
         type: "object",
         default: {
-            top: "0",
+            top: "24",
             bottom: "0",
             left: "32",
             right: "32",
@@ -2605,7 +2745,7 @@ const attributes = {
     headingBack_Tab_padding: {
         type: "object",
         default: {
-            top: "0",
+            top: "24",
             bottom: "0",
             left: "32",
             right: "32",
@@ -2614,7 +2754,7 @@ const attributes = {
     headingBack_Mobile_padding: {
         type: "object",
         default: {
-            top: "0",
+            top: "24",
             bottom: "0",
             left: "32",
             right: "32",
@@ -2765,7 +2905,7 @@ const attributes = {
     },
     subHeadingBackColor: {
         type: "string",
-        default: "#555E72"
+        default: "#FFFBF5"
     },
     subHeadingBackHoverColor: {
         type: "string",
@@ -2869,10 +3009,10 @@ const attributes = {
         default: true
     },
 
-    //flipBack Button
+    //Flip Back Button
     flipBack_Button_Text: {
         type: "string",
-        default: "Learn More"
+        default: "Read More"
     },
     flipBack_Button_Switcher: {
         type: "boolean",
@@ -3316,7 +3456,7 @@ const attributes = {
     },
     buttonBackTextColor: {
         type: "string",
-        default: '#399CFF'
+        default: '#FFFFFF'
     },
     buttonBackTextHoverColor: {
         type: "string",
