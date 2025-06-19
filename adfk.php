@@ -1,0 +1,12 @@
+mediaBackDesktopPadding,
+mediaBackTabletPadding,
+mediaBackMobilePadding,
+mediaBackDesktopMargin,
+mediaBackTabletMargin,
+mediaBackMobileMargin,
+mediaBackBorderDesktopWidth,
+mediaBackBorderTabletWidth,
+mediaBackBorderMobileWidth,
+mediaBackBorderRadiusDesktopWidth,
+mediaBackBorderRadiusTabletWidth,
+mediaBackBorderRadiusMobileWidth

@@ -154,6 +154,13 @@
 				}
 			}
 		}
+		.fb-flip-button, 
+		.fb-flip-back-button{
+			.fb-flip-btn-wrapper,
+			.fb-flip-back-btn-wrapper{
+				display: inline-flex;
+			}
+		}
 	}
 }
 
