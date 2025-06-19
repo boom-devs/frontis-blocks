@@ -177,30 +177,26 @@ const Edit = (props) => {
         // Set effect based on sliderType
 		effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
-        // Carousel-specific settings with default values
-		slidesPerView: sliderType === 'carousel' ? (carouselPerColumn?.Desktop || 3) : 1,
-			spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap?.Desktop || 20) : 0,
-
-			// Responsive breakpoints for Desktop, Tablet, and Mobile
-			...(sliderType === 'carousel' && {
-				breakpoints: {
-				// Mobile (e.g., screens < 768px)
-				0: {
-					slidesPerView: carouselPerColumn?.Mobile || 1,
-					spaceBetween: carouselPerColumnGap?.Mobile || 10,
-				},
-				// Tablet (e.g., screens >= 768px)
-				768: {
-					slidesPerView: carouselPerColumn?.Tablet || 2,
-					spaceBetween: carouselPerColumnGap?.Tablet || 15,
-				},
-				// Desktop (e.g., screens >= 1024px)
-				1200: {
-					slidesPerView: carouselPerColumn?.Desktop || 3,
-					spaceBetween: carouselPerColumnGap?.Desktop || 20,
-				},
-				},
-			}),
+        // Responsive breakpoints for Desktop, Tablet, and Mobile
+        ...(sliderType === 'carousel' && {
+            breakpoints: {
+            // Mobile (e.g., screens < 768px)
+            0: {
+                slidesPerView: carouselPerColumn?.Mobile || 1,
+                spaceBetween: carouselPerColumnGap?.Mobile || 10,
+            },
+            // Tablet (e.g., screens >= 768px)
+            768: {
+                slidesPerView: carouselPerColumn?.Tablet || 2,
+                spaceBetween: carouselPerColumnGap?.Tablet || 15,
+            },
+            // Desktop (e.g., screens >= 1025px)
+            1025: {
+                slidesPerView: carouselPerColumn?.Desktop || 3,
+                spaceBetween: carouselPerColumnGap?.Desktop || 20,
+            },
+            },
+        }),
 
         // Creative effect settings if needed
         ...(slideEffect === 'creative' && {

@@ -1624,6 +1624,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         resetFallbackValue={""}
                         isRangeUnit={false}
                     />
+                </PanelBody>
+                </>
+            )}
+
+            {sliderType === 'carousel' && (
+                <PanelBody title={__("Carousel Effect", "frontis-blocks")} initialOpen={false}>
                     <SelectControl
                         label={__('Select Carousel Effect', 'frontis-blocks')}
                         value={carouselEffect}
@@ -1631,8 +1637,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         onChange={(value) => setAttributes({ carouselEffect: value })}
                     />
                 </PanelBody>
-                </>
             )}
+
             {sliderType === 'slider' && (
                 <PanelBody title={__("Slider Effect", "frontis-blocks")} initialOpen={false}>
                     <SelectControl

@@ -43,10 +43,6 @@ export default function save( props ) {
 			// Set effect based on sliderType
 			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
-			// Carousel-specific settings with default values
-			slidesPerView: sliderType === 'carousel' ? (carouselPerColumn?.Desktop || 3) : 1,
-			spaceBetween: sliderType === 'carousel' ? (carouselPerColumnGap?.Desktop || 20) : 0,
-
 			// Responsive breakpoints for Desktop, Tablet, and Mobile
 			...(sliderType === 'carousel' && {
 				breakpoints: {
@@ -60,8 +56,8 @@ export default function save( props ) {
 					slidesPerView: carouselPerColumn?.Tablet || 2,
 					spaceBetween: carouselPerColumnGap?.Tablet || 15,
 				},
-				// Desktop (e.g., screens >= 1024px)
-				1200: {
+				// Desktop (e.g., screens >= 1025px)
+				1025: {
 					slidesPerView: carouselPerColumn?.Desktop || 3,
 					spaceBetween: carouselPerColumnGap?.Desktop || 20,
 				},
