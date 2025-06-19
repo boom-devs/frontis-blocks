@@ -121,6 +121,18 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+    headingTextColorTypeSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    headingTextColorType: {
+        type: "string",
+        default: "classic",
+    },
+    headingTextHoverColorType: {
+        type: "string",
+        default: "classic",
+    },
     headingTextShadowValues: {
         type: 'array',
         default: [],
@@ -160,16 +172,74 @@ const attributes = {
     headingHoverColor: {
         type: 'string',
     },
-    headingBgColorSwitcher: {
+    headingTextGradientColor: {
+        type: "string",
+        default: null
+    },
+    headingTextHoverGradientColor: {
+        type: "string",
+        default: null
+    },
+    headingTextCustomGradientColorSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    headingTextCustomGradientColor: {
+        type: "string",
+        default: ""
+    },
+    headingTextHoverCustomGradientColorSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    headingTextHoverCustomGradientColor: {
+        type: "string",
+        default: ""
+    },
+
+    headingBgColorTypeSwitcher: {
         type: "string",
         default: "normal"
+    },
+    headingBgColorType: {
+        type: "string",
+        default: "classic",
+    },
+    headingBgHoverColorType: {
+        type: "string",
+        default: "classic",
     },
     headingBgColor: {
         type: 'string',
     },
-    headingBgColorHover: {
+    headingBgHoverColor: {
         type: 'string',
     },
+    headingBgGradientColor: {
+        type: "string",
+        default: null
+    },
+    headingBgHoverGradientColor: {
+        type: "string",
+        default: null
+    },
+    headingBgCustomGradientColorSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    headingBgCustomGradientColor: {
+        type: "string",
+        default: ""
+    },
+    headingBgHoverCustomGradientColorSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    headingBgHoverCustomGradientColor: {
+        type: "string",
+        default: ""
+    },
+
     /** End Heading Style */
 
     /** Start Heading Border */
@@ -497,25 +567,91 @@ const attributes = {
         type: 'string',
         default: '',
     },
-    subHeadingColorSwitcher: {
+    
+    subHeadingTextColorTypeSwitcher: {
         type: "string",
         default: "normal"
     },
+    subHeadingTextColorType: {
+        type: "string",
+        default: "classic",
+    },
+    subHeadingTextHoverColorType: {
+        type: "string",
+        default: "classic",
+    },
     subHeadingColor: {
-        type: "string"
+        type: 'string',
     },
     subHeadingHoverColor: {
         type: 'string',
     },
-    subHeadingBgColorSwitcher: {
+    subHeadingTextGradientColor: {
+        type: "string",
+        default: null
+    },
+    subHeadingTextHoverGradientColor: {
+        type: "string",
+        default: null
+    },
+    subHeadingTextCustomGradientColorSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    subHeadingTextCustomGradientColor: {
+        type: "string",
+        default: ""
+    },
+    subHeadingTextHoverCustomGradientColorSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    subHeadingTextHoverCustomGradientColor: {
+        type: "string",
+        default: ""
+    },
+
+    subHeadingBgColorTypeSwitcher: {
         type: "string",
         default: "normal"
+    },
+    subHeadingBgColorType: {
+        type: "string",
+        default: "classic",
+    },
+    subHeadingBgHoverColorType: {
+        type: "string",
+        default: "classic",
     },
     subHeadingBgColor: {
         type: 'string',
     },
-    subHeadingBgColorHover: {
+    subHeadingBgHoverColor: {
         type: 'string',
+    },
+    subHeadingBgGradientColor: {
+        type: "string",
+        default: null
+    },
+    subHeadingBgHoverGradientColor: {
+        type: "string",
+        default: null
+    },
+    subHeadingBgCustomGradientColorSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    subHeadingBgCustomGradientColor: {
+        type: "string",
+        default: ""
+    },
+    subHeadingBgHoverCustomGradientColorSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    subHeadingBgHoverCustomGradientColor: {
+        type: "string",
+        default: ""
     },
 
 
