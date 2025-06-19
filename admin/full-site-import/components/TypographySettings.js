@@ -28,7 +28,7 @@ const TypographySettings = (props) => {
 	const [generateHeadingCss, setGenerateHeadingCss] = useState();
 	const [isMount, setIsMount] = useState(false);
 	const [fontFamilies, setFontFamilies] = useState([]);
-	const [globalTypography, setGlobalTypography] = useState([])
+	const [globalTypography, setGlobalTypography] = useState({})
 	const { editPost } = useDispatch('core/editor');
 	const deviceType = useDeviceType();
 
@@ -69,9 +69,14 @@ const TypographySettings = (props) => {
 	}
 
 	const deleteItem = (item) => {
-		const tempTypography = { ...customTypography }
-		delete tempTypography[item]
-		setCustomTypography({ ...tempTypography })
+		const tempTypography = { ...customTypography };
+		const tempGlobalTypography = { ...globalTypography };
+	
+		delete tempTypography[item];
+		delete tempGlobalTypography[item];
+	
+		setCustomTypography(tempTypography);
+		setGlobalTypography(tempGlobalTypography);
 	};
 
 	// Body link font typography
@@ -1020,7 +1025,7 @@ const TypographySettings = (props) => {
 				setGlobalTypography(globalTypoData)
 			}
 		}, 1000);
-	}, [deviceType])
+	}, [deviceType]);
 
 	return (
 		<>
