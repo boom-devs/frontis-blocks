@@ -723,7 +723,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		mediaBackBgTypeImage,
 		mediaBackIconColorSwitcher,
 		mediaBackIconColor,
-		mediaBackIconHoverColor
+		mediaBackIconHoverColor,
+
+		flipBoxBackWidth,
+		flipBoxBackWidthUnits,
+		flipBoxBackHeight,
+		flipBoxBackHeightUnits,
+		flipBoxBackColorSwitcher,
+		flipBoxBackBackgroundType,
+		flipBoxBackClassicColor,
+		flipBoxBackGradientColor,
+		flipBoxBackCustomGradientSwitcher,
+		flipBoxBackCustomGradientInputValue,
+		flipBoxBackBackgroundColorStyle,
+		flipBoxBackBackgroundImageUrl,
+		flipBoxBackBackgroundImageAlt,
+		flipBoxBackBackgroundImageID,
+		flipBoxBackBackgroundImagePosition,
+		flipBoxBackBackgroundImageAttachment,
+		flipBoxBackBackgroundImageSize,
+		flipBoxBackBackgroundImageRepeat,
+		flipBoxBackHoverBackgroundType,
+		flipBoxBackHoverClassicColor,
+		flipBoxBackHoverGradientColor,
+		flipBoxBackHoverCustomGradientSwitcher,
+		flipBoxBackHoverCustomGradientInputValue,
+		flipBoxBackHoverBackgroundColorStyle,
+		flipBoxBackHoverBackgroundImageUrl,
+		flipBoxBackHoverBackgroundImageAlt,
+		flipBoxBackHoverBackgroundImageID,
+		flipBoxBackHoverBackgroundImagePosition,
+		flipBoxBackHoverBackgroundImageAttachment,
+		flipBoxBackHoverBackgroundImageSize,
+		flipBoxBackHoverBackgroundImageRepeat
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -3622,28 +3654,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fbflipBoxStyle = useMemo(
 		() => `
+			.fb-flip-box-main-wrapper.${blockID} .fb-flip-box-wrapper{
+				${flipBoxPositionType === 'default' ? `position: relative;` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' ? `width: 100%;` : ''}
+				${flipBoxPositionType !== 'default' ? `position: ${flipBoxPositionType};` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'left' && flipBoxHZLeftOffset.Desktop ? `left: ${flipBoxHZLeftOffset.Desktop}${flipBoxHZLeftOffsetUnits.Desktop};` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'right' && flipBoxHZRightOffset.Desktop ? `right: ${flipBoxHZRightOffset.Desktop}${flipBoxHZRightOffsetUnits.Desktop};` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'top' && flipBoxVRTopOffset.Desktop ? `top: ${flipBoxVRTopOffset.Desktop}${flipBoxVRTopOffsetUnits.Desktop};` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'bottom' && flipBoxVRBottomOffset.Desktop ? `bottom: ${flipBoxVRBottomOffset.Desktop}${flipBoxVRBottomOffsetUnits.Desktop};` : ''}
+				${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ""}
+				${flipBoxOverflow !== 'default' ? `overflow: ${flipBoxOverflow};` : ''}
+				${globalBgColor ? `background-color: ${globalBgColor};` : ""}
+				${DesktopPadding && globalPaddingDesktop.top ? `padding: ${DesktopPadding};` : ""}
+				${DesktopMargin && globalMarginDesktop.top ? `margin: ${DesktopMargin};` : ""}
+				${globalBorder ? `border: ${globalBorder};` : ""}
+				${BorderDesktopWidth && globalBorderDesktop.top ? `border-width: ${BorderDesktopWidth};` : ""}
+				${BorderRadiusDesktopWidth && globalBorderRadiusDesktop.top ? `border-radius: ${BorderRadiusDesktopWidth};` : ""}
+				${globalBorderColor ? `border-color: ${globalBorderColor};` : ""}
+				${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : ""}
+			}
 		  .fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
-			${flipBoxPositionType === 'default' ? `position: relative;` : ''}
-			${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' ? `width: 100%;` : ''}
-            ${flipBoxPositionType !== 'default' ? `position: ${flipBoxPositionType};` : ''}
-            ${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'left' && flipBoxHZLeftOffset.Desktop ? `left: ${flipBoxHZLeftOffset.Desktop}${flipBoxHZLeftOffsetUnits.Desktop};` : ''}
-            ${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'right' && flipBoxHZRightOffset.Desktop ? `right: ${flipBoxHZRightOffset.Desktop}${flipBoxHZRightOffsetUnits.Desktop};` : ''}
-            ${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'top' && flipBoxVRTopOffset.Desktop ? `top: ${flipBoxVRTopOffset.Desktop}${flipBoxVRTopOffsetUnits.Desktop};` : ''}
-            ${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'bottom' && flipBoxVRBottomOffset.Desktop ? `bottom: ${flipBoxVRBottomOffset.Desktop}${flipBoxVRBottomOffsetUnits.Desktop};` : ''}
-			${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ""}
-            ${flipBoxOverflow !== 'default' ? `overflow: ${flipBoxOverflow};` : ''}
-			${globalBgColor ? `background-color: ${globalBgColor};` : ""}
-			${DesktopPadding && globalPaddingDesktop.top ? `padding: ${DesktopPadding};` : ""}
-			${DesktopMargin && globalMarginDesktop.top ? `margin: ${DesktopMargin};` : ""}
-			${globalBorder ? `border: ${globalBorder};` : ""}
-			${BorderDesktopWidth && globalBorderDesktop.top ? `border-width: ${BorderDesktopWidth};` : ""}
-			${BorderRadiusDesktopWidth && globalBorderRadiusDesktop.top ? `border-radius: ${BorderRadiusDesktopWidth};` : ""}
-			${globalBorderColor ? `border-color: ${globalBorderColor};` : ""}
-			${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : ""}
+			${flipBoxFrontWidth.Desktop ? `max-width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
+			${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
+			width: 100%;
 			transition: all .3s ease-in-out;
 		  }
 	  
-		  .fb-flip-box-wrapper.${blockID}:hover {
+		  .fb-flip-box-wrapper.${blockID}:hover .fb-flip-box-wrapper {
 			  ${globalBgHoverColor ? `background-color: ${globalBgHoverColor};` : ""}
 			  ${globalBorderHoverColor ? `border-color: ${globalBorderHoverColor};` : ""}
 			  ${boxGlobalHoverBoxShadowCssValue ? `box-shadow: ${boxGlobalHoverBoxShadowCssValue};` : ""}
@@ -3686,6 +3723,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  		position: relative;
 				${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
+				width: 100%;
 				${flipBoxFrontBackgroundType === "gradient" ? `
 				background: ${flipBoxFrontCustomGradientSwitcher && flipBoxFrontCustomGradientInputValue ? flipBoxFrontCustomGradientInputValue : flipBoxFrontGradientColor};
 				`
@@ -3700,6 +3738,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				background-size: cover;
 				${flipBoxFrontClassicColor ? `justify-content: center; ` : ''}
 				transition: all .3s ease-in-out; 
+		  }
+
+		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-back {
+			${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
+			${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
+			width: 100%;
+			${flipBoxBackBackgroundType === "gradient" ? `
+			background: ${flipBoxBackCustomGradientSwitcher && flipBoxBackCustomGradientInputValue ? flipBoxBackCustomGradientInputValue : flipBoxBackGradientColor};
+			`
+			: flipBoxBackBackgroundImageUrl && flipBoxBackBackgroundImageUrl !== "null" ? `
+			${flipBoxBackBackgroundImageUrl ? `background-image: url(${flipBoxBackBackgroundImageUrl});` : ""}
+			${flipBoxBackBackgroundImagePosition ? `background-position: ${flipBoxBackBackgroundImagePosition};` : ""}
+			${flipBoxBackBackgroundImageAttachment ? `background-attachment: ${flipBoxBackBackgroundImageAttachment};` : ""}
+			${flipBoxBackBackgroundImageRepeat ? `background-repeat: ${flipBoxBackBackgroundImageRepeat};` : ""}
+			${flipBoxBackBackgroundImageSize ? `background-size: ${flipBoxBackBackgroundImageSize};` : ""}`
+				: flipBoxBackClassicColor ? `background: ${flipBoxBackClassicColor}; ` : ""}
+			background-repeat: none;
+			background-size: cover;
+			${flipBoxBackClassicColor ? `justify-content: center; ` : ''}
+			transition: all .3s ease-in-out; 
 		  }
 		  .fb-flip-box-wrapper.${blockID} .fb-flip-box-wrapper-inner {
 			${flipIconPosition === 'top' ? 'flex-direction: column;' : ''}
@@ -4510,7 +4568,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			mediaBackBorderMobileWidth,
 			mediaBackBorderRadiusDesktopWidth,
 			mediaBackBorderRadiusTabletWidth,
-			mediaBackBorderRadiusMobileWidth
+			mediaBackBorderRadiusMobileWidth,
+			flipBoxBackClassicColor
 		],
 	);
 
@@ -6149,11 +6208,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														min={0}
 														max={600}
 														label={__("Width", "frontis-blocks")}
-														rangeValue={flipBoxFrontWidth}
-														onChangeHandler={(value) => setAttributes({ flipBoxFrontWidth: value })}
-														rangeUnitHandler={(value) => setAttributes({ flipBoxFrontWidthUnits: value })}
+														rangeValue={flipBoxBackWidth}
+														onChangeHandler={(value) => setAttributes({ flipBoxBackWidth: value })}
+														rangeUnitHandler={(value) => setAttributes({ flipBoxBackWidthUnits: value })}
 														deviceType={deviceType}
-														units={flipBoxFrontWidthUnits}
+														units={flipBoxBackWidthUnits}
 														setAttributes={setAttributes}
 														rangeStep={1}
 														resetFallbackValue={""}
@@ -6163,11 +6222,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														min={0}
 														max={600}
 														label={__("Height", "frontis-blocks")}
-														rangeValue={flipBoxFrontHeight}
-														onChangeHandler={(value) => setAttributes({ flipBoxFrontHeight: value })}
-														rangeUnitHandler={(value) => setAttributes({ flipBoxFrontHeightUnits: value })}
+														rangeValue={flipBoxBackHeight}
+														onChangeHandler={(value) => setAttributes({ flipBoxBackHeight: value })}
+														rangeUnitHandler={(value) => setAttributes({ flipBoxBackHeightUnits: value })}
 														deviceType={deviceType}
-														units={flipBoxFrontHeightUnits}
+														units={flipBoxBackHeightUnits}
 														setAttributes={setAttributes}
 														rangeStep={1}
 														resetFallbackValue={""}
@@ -6175,56 +6234,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 													{/*Background Color */}
 													<FB_BackgroundColorControl
-														bgColorSwitcher={flipBoxFrontBackColorSwitcher}
-														setBgColorSwitcher={(value) => setAttributes({ flipBoxFrontBackColorSwitcher: value })}
-														normalBackgroundType={flipBoxFrontBackgroundType}
-														setNormalBackgroundType={(value) => setAttributes({ flipBoxFrontBackgroundType: value })}
-														normalClassicColor={flipBoxFrontClassicColor}
-														setNormalClassicColor={(value) => setAttributes({ flipBoxFrontClassicColor: value })}
-														normalGradientColor={flipBoxFrontGradientColor}
-														setNormalGradientColor={(value) => setAttributes({ flipBoxFrontGradientColor: value })}
-														normalCustomGradientSwitcher={flipBoxFrontCustomGradientSwitcher}
-														setNormalCustomGradientSwitcher={(value) => setAttributes({ flipBoxFrontCustomGradientSwitcher: value })}
-														normalCustomGradientInputValue={flipBoxFrontCustomGradientInputValue}
-														setNormalCustomGradientInputValue={(value) => setAttributes({ flipBoxFrontCustomGradientInputValue: value })}
-														normalBackgroundImageUrl={flipBoxFrontBackgroundImageUrl}
-														setNormalBackgroundImageUrl={(value) => setAttributes({ flipBoxFrontBackgroundImageUrl: value })}
-														normalBackgroundImageAlt={flipBoxFrontBackgroundImageAlt}
-														setNormalBackgroundImageAlt={(value) => setAttributes({ flipBoxFrontBackgroundImageAlt: value })}
-														normalBackgroundImageID={flipBoxFrontBackgroundImageID}
-														setNormalBackgroundImageID={(value) => setAttributes({ flipBoxFrontBackgroundImageID: value })}
-														normalBackgroundImagePosition={flipBoxFrontBackgroundImagePosition}
-														setNormalBackgroundImagePosition={(value) => setAttributes({ flipBoxFrontBackgroundImagePosition: value })}
-														normalBackgroundImageAttachment={flipBoxFrontBackgroundImageAttachment}
-														setNormalBackgroundImageAttachment={(value) => setAttributes({ flipBoxFrontBackgroundImageAttachment: value })}
-														normalBackgroundImageRepeat={flipBoxFrontBackgroundImageRepeat}
-														setNormalBackgroundImageRepeat={(value) => setAttributes({ flipBoxFrontBackgroundImageRepeat: value })}
-														normalBackgroundImageSize={flipBoxFrontBackgroundImageSize}
-														setNormalBackgroundImageSize={(value) => setAttributes({ flipBoxFrontBackgroundImageSize: value })}
-														hoverBackgroundType={flipBoxFrontHoverBackgroundType}
-														setHoverBackgroundType={(value) => setAttributes({ flipBoxFrontHoverBackgroundType: value })}
-														hoverClassicColor={flipBoxFrontHoverClassicColor}
-														setHoverClassicColor={(value) => setAttributes({ flipBoxFrontHoverClassicColor: value })}
-														hoverGradientColor={flipBoxFrontHoverGradientColor}
-														setHoverGradientColor={(value) => setAttributes({ flipBoxFrontHoverGradientColor: value })}
-														hoverCustomGradientSwitcher={flipBoxFrontHoverCustomGradientSwitcher}
-														setHoverCustomGradientSwitcher={(value) => setAttributes({ flipBoxFrontHoverCustomGradientSwitcher: value })}
-														hoverCustomGradientInputValue={flipBoxFrontHoverCustomGradientInputValue}
-														setHoverCustomGradientInputValue={(value) => setAttributes({ flipBoxFrontHoverCustomGradientInputValue: value })}
-														hoverBackgroundImageUrl={flipBoxFrontHoverBackgroundImageUrl}
-														setHoverBackgroundImageUrl={(value) => setAttributes({ flipBoxFrontHoverBackgroundImageUrl: value })}
-														hoverBackgroundImageAlt={flipBoxFrontHoverBackgroundImageAlt}
-														setHoverBackgroundImageAlt={(value) => setAttributes({ flipBoxFrontHoverBackgroundImageAlt: value })}
-														hoverBackgroundImageID={flipBoxFrontHoverBackgroundImageID}
-														setHoverBackgroundImageID={(value) => setAttributes({ flipBoxFrontHoverBackgroundImageID: value })}
-														hoverBackgroundImagePosition={flipBoxFrontHoverBackgroundImagePosition}
-														setHoverBackgroundImagePosition={(value) => setAttributes({ flipBoxFrontHoverBackgroundImagePosition: value })}
-														hoverBackgroundImageAttachment={flipBoxFrontHoverBackgroundImageAttachment}
-														setHoverBackgroundImageAttachment={(value) => setAttributes({ flipBoxFrontHoverBackgroundImageAttachment: value })}
-														hoverBackgroundImageRepeat={flipBoxFrontHoverBackgroundImageRepeat}
-														setHoverBackgroundImageRepeat={(value) => setAttributes({ flipBoxFrontHoverBackgroundImageRepeat: value })}
-														hoverBackgroundImageSize={flipBoxFrontHoverBackgroundImageSize}
-														setHoverBackgroundImageSize={(value) => setAttributes({ flipBoxFrontHoverBackgroundImageSize: value })}
+														bgColorSwitcher={flipBoxBackColorSwitcher}
+														setBgColorSwitcher={(value) => setAttributes({ flipBoxBackColorSwitcher: value })}
+														normalBackgroundType={flipBoxBackBackgroundType}
+														setNormalBackgroundType={(value) => setAttributes({ flipBoxBackBackgroundType: value })}
+														normalClassicColor={flipBoxBackClassicColor}
+														setNormalClassicColor={(value) => setAttributes({ flipBoxBackClassicColor: value })}
+														normalGradientColor={flipBoxBackGradientColor}
+														setNormalGradientColor={(value) => setAttributes({ flipBoxBackGradientColor: value })}
+														normalCustomGradientSwitcher={flipBoxBackCustomGradientSwitcher}
+														setNormalCustomGradientSwitcher={(value) => setAttributes({ flipBoxBackCustomGradientSwitcher: value })}
+														normalCustomGradientInputValue={flipBoxBackCustomGradientInputValue}
+														setNormalCustomGradientInputValue={(value) => setAttributes({ flipBoxBackCustomGradientInputValue: value })}
+														normalBackgroundImageUrl={flipBoxBackBackgroundImageUrl}
+														setNormalBackgroundImageUrl={(value) => setAttributes({ flipBoxBackBackgroundImageUrl: value })}
+														normalBackgroundImageAlt={flipBoxBackBackgroundImageAlt}
+														setNormalBackgroundImageAlt={(value) => setAttributes({ flipBoxBackBackgroundImageAlt: value })}
+														normalBackgroundImageID={flipBoxBackBackgroundImageID}
+														setNormalBackgroundImageID={(value) => setAttributes({ flipBoxBackBackgroundImageID: value })}
+														normalBackgroundImagePosition={flipBoxBackBackgroundImagePosition}
+														setNormalBackgroundImagePosition={(value) => setAttributes({ flipBoxBackBackgroundImagePosition: value })}
+														normalBackgroundImageAttachment={flipBoxBackBackgroundImageAttachment}
+														setNormalBackgroundImageAttachment={(value) => setAttributes({ flipBoxBackBackgroundImageAttachment: value })}
+														normalBackgroundImageRepeat={flipBoxBackBackgroundImageRepeat}
+														setNormalBackgroundImageRepeat={(value) => setAttributes({ flipBoxBackBackgroundImageRepeat: value })}
+														normalBackgroundImageSize={flipBoxBackBackgroundImageSize}
+														setNormalBackgroundImageSize={(value) => setAttributes({ flipBoxBackBackgroundImageSize: value })}
+														hoverBackgroundType={flipBoxBackHoverBackgroundType}
+														setHoverBackgroundType={(value) => setAttributes({ flipBoxBackHoverBackgroundType: value })}
+														hoverClassicColor={flipBoxBackHoverClassicColor}
+														setHoverClassicColor={(value) => setAttributes({ flipBoxBackHoverClassicColor: value })}
+														hoverGradientColor={flipBoxBackHoverGradientColor}
+														setHoverGradientColor={(value) => setAttributes({ flipBoxBackHoverGradientColor: value })}
+														hoverCustomGradientSwitcher={flipBoxBackHoverCustomGradientSwitcher}
+														setHoverCustomGradientSwitcher={(value) => setAttributes({ flipBoxBackHoverCustomGradientSwitcher: value })}
+														hoverCustomGradientInputValue={flipBoxBackHoverCustomGradientInputValue}
+														setHoverCustomGradientInputValue={(value) => setAttributes({ flipBoxBackHoverCustomGradientInputValue: value })}
+														hoverBackgroundImageUrl={flipBoxBackHoverBackgroundImageUrl}
+														setHoverBackgroundImageUrl={(value) => setAttributes({ flipBoxBackHoverBackgroundImageUrl: value })}
+														hoverBackgroundImageAlt={flipBoxBackHoverBackgroundImageAlt}
+														setHoverBackgroundImageAlt={(value) => setAttributes({ flipBoxBackHoverBackgroundImageAlt: value })}
+														hoverBackgroundImageID={flipBoxBackHoverBackgroundImageID}
+														setHoverBackgroundImageID={(value) => setAttributes({ flipBoxBackHoverBackgroundImageID: value })}
+														hoverBackgroundImagePosition={flipBoxBackHoverBackgroundImagePosition}
+														setHoverBackgroundImagePosition={(value) => setAttributes({ flipBoxBackHoverBackgroundImagePosition: value })}
+														hoverBackgroundImageAttachment={flipBoxBackHoverBackgroundImageAttachment}
+														setHoverBackgroundImageAttachment={(value) => setAttributes({ flipBoxBackHoverBackgroundImageAttachment: value })}
+														hoverBackgroundImageRepeat={flipBoxBackHoverBackgroundImageRepeat}
+														setHoverBackgroundImageRepeat={(value) => setAttributes({ flipBoxBackHoverBackgroundImageRepeat: value })}
+														hoverBackgroundImageSize={flipBoxBackHoverBackgroundImageSize}
+														setHoverBackgroundImageSize={(value) => setAttributes({ flipBoxBackHoverBackgroundImageSize: value })}
 													/>
 
 												</PanelBody>
