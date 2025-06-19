@@ -997,7 +997,7 @@ var TypographySettings = function TypographySettings(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     fontFamilies = _useState14[0],
     setFontFamilies = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)({}),
     _useState16 = _slicedToArray(_useState15, 2),
     globalTypography = _useState16[0],
     setGlobalTypography = _useState16[1];
@@ -1041,8 +1041,11 @@ var TypographySettings = function TypographySettings(props) {
   };
   var deleteItem = function deleteItem(item) {
     var tempTypography = _objectSpread({}, customTypography);
+    var tempGlobalTypography = _objectSpread({}, globalTypography);
     delete tempTypography[item];
-    setCustomTypography(_objectSpread({}, tempTypography));
+    delete tempGlobalTypography[item];
+    setCustomTypography(tempTypography);
+    setGlobalTypography(tempGlobalTypography);
   };
 
   // Body link font typography
@@ -4295,8 +4298,11 @@ var TypographySettings = function TypographySettings(props) {
   };
   var deleteItem = function deleteItem(item) {
     var tempTypography = _objectSpread({}, customTypography);
+    var tempGlobalTypography = _objectSpread({}, globalTypography);
     delete tempTypography[item];
-    setCustomTypography(_objectSpread({}, tempTypography));
+    delete tempGlobalTypography[item];
+    setCustomTypography(tempTypography);
+    setGlobalTypography(tempGlobalTypography);
     setIsMount(true);
   };
 

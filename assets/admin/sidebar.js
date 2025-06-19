@@ -1983,8 +1983,11 @@ var TypographySettings = function TypographySettings(props) {
   };
   var deleteItem = function deleteItem(item) {
     var tempTypography = _objectSpread({}, customTypography);
+    var tempGlobalTypography = _objectSpread({}, globalTypography);
     delete tempTypography[item];
-    setCustomTypography(_objectSpread({}, tempTypography));
+    delete tempGlobalTypography[item];
+    setCustomTypography(tempTypography);
+    setGlobalTypography(tempGlobalTypography);
     setIsMount(true);
   };
 
