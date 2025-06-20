@@ -3,26 +3,34 @@ const attributes = {
         type: "string",
         default: ""
     },
-	deviceType: {
-		type: "string",
-		default: "Desktop"
-	},
+    deviceType: {
+        type: "string",
+        default: "Desktop"
+    },
     flipBoxPresetStyle: {
         type: "string",
         default: "preset-1",
     },
-	flipBoxBg: {
-		type: 'string',
-		default: '#EBF5FF'
-	},
-	mediaSwitcher : {
-		type: "string",
-		default: "icon"
-	},
-    flipModeSwitcher : {
-		type: "string",
-		default: "front"
-	},
+    flipBoxBg: {
+        type: 'string',
+        default: '#EBF5FF'
+    },
+    mediaSwitcher: {
+        type: "string",
+        default: "icon"
+    },
+    Sub_Heading_Switcher: {
+        type: "boolean",
+        default: false
+    },
+    flipSelectedSide: {
+        type: "string",
+        default: "front"
+    },
+    flipAnimationType: {
+        type: "string",
+        default: "flip-left"
+    },
     flipMediaUrl: {
         type: 'string',
         default: ''
@@ -33,130 +41,130 @@ const attributes = {
     flipMediaID: {
         type: "number",
     },
-	mediaSize: {
-		type: 'object',
-		default: {
-			Desktop: '25',
-			Tablet: '20',
-			Mobile: '15'
-		}
-	},
-	mediaSizeDesktop: {
-		type: "number",
-		default: 20
-	},
-	mediaSizeSizeTablet: {
-		type: "number",
-		default: 20
-	},
-	mediaSizeSizeMobile: {
-		type: "number",
-		default: 20
-	},
-	mediaSizeUnitsSave: {
-		type: "string",
-		default: "px"
-	},
-	mediaSizeUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
+    mediaSize: {
+        type: 'object',
+        default: {
+            Desktop: '25',
+            Tablet: '20',
+            Mobile: '15'
+        }
+    },
+    mediaSizeDesktop: {
+        type: "number",
+        default: 20
+    },
+    mediaSizeSizeTablet: {
+        type: "number",
+        default: 20
+    },
+    mediaSizeSizeMobile: {
+        type: "number",
+        default: 20
+    },
+    mediaSizeUnitsSave: {
+        type: "string",
+        default: "px"
+    },
+    mediaSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
     mediaBgTypeImage: {
-		type: "string",
-		default: ''
-	},
+        type: "string",
+        default: ''
+    },
     mediaBgWidth: {
-		type: 'object',
-		default: {
-			Desktop: '76',
-			Tablet: '50',
-			Mobile: '40'
-		}
-	},
-	mediaBgWidthUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    mediaBgWidthUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
     mediaBgHeight: {
-		type: 'object',
-		default: {
-			Desktop: '76',
-			Tablet: '50',
-			Mobile: '40'
-		}
-	},
-	mediaBgHeightUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
-	btnIconSize: {
-		type: 'object',
-		default: {
-			Desktop: '16',
-			Tablet: '16',
-			Mobile: '16'
-		}
-	},
-	btnIconSizeUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    mediaBgHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    btnIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '0',
+            Tablet: '0',
+            Mobile: '0'
+        }
+    },
+    btnIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
     btnIconColorSwitcher: {
-		type: 'string',
+        type: 'string',
         default: 'normal'
-	},
+    },
     btnIconColor: {
-		type: 'string',
+        type: 'string',
         default: '#399CFF'
-	},
+    },
     btnIconHoverColor: {
-		type: 'string',
+        type: 'string',
         default: '#ffffff'
-	},
+    },
     mediaIconColor: {
-		type: 'string',
+        type: 'string',
         default: '#ffffff'
-	},
+    },
     mediaIconHoverColor: {
-		type: 'string',
+        type: 'string',
         default: "#399CFF"
-	},
-	mediaIconColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
+    },
+    mediaIconColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
     btnIconPosition: {
-		type: 'string',
+        type: 'string',
         default: 'right'
-	},
+    },
     flipIconPosition: {
-		type: 'string',
+        type: 'string',
         default: 'top'
-	},
+    },
     flipIconVerticalPosition: {
-		type: 'string',
+        type: 'string',
         default: 'top'
-	},
+    },
     flipCardAlignment: {
-		type: 'string',
+        type: 'string',
         default: 'start'
-	},
+    },
     height: {
         type: 'number',
         default: 50
@@ -165,25 +173,25 @@ const attributes = {
         type: 'number',
         default: 50
     },
-	icon: {
-		type: 'string',
-		default: 'swatchbook',
-	},
-	btnIcon: {
-		type: 'string',
-		default: 'arrow-up-right-from-square',
-	},
+    iconBack: {
+        type: 'string',
+        default: 'bolt',
+    },
+    btnIcon: {
+        type: 'string',
+        default: 'arrow-up-right-from-square',
+    },
     boxBgColor: {
         type: 'string',
         default: '#fff'
     },
-	boxBgHoverColor: {
-		type: 'string',
-	},
-	boxBgColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
+    boxBgHoverColor: {
+        type: 'string',
+    },
+    boxBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
     titleColor: {
         type: 'string',
         default: '#15171C'
@@ -196,19 +204,27 @@ const attributes = {
         type: 'string',
         default: 'Icon Box title',
     },
-    wrapperAlignment: {
+    mediaAlignmentFront: {
         type: "string",
         default: "center",
     },
-	contentAlignment: {
+    mediaAlignmentBack: {
+        type: "string",
+        default: "center",
+    },
+    contentAlignment: {
         type: "string",
         default: "left",
     },
-	descAlignment: {
+    descAlignment: {
         type: "string",
-        default: "left",
+        default: "center",
     },
-	buttonAlignment: {
+    buttonAlignment: {
+        type: "string",
+        default: "center",
+    },
+    buttonAlignmentBack: {
         type: "string",
         default: "center",
     },
@@ -217,11 +233,19 @@ const attributes = {
         default: "center",
     },
     Heading_Text: {
-        type : "string",
+        type: "string",
         default: "Web Design"
     },
+    headingTextBack: {
+        type: "string",
+        default: "Branding"
+    },
     headingTag: {
-        type : "string",
+        type: "string",
+        default: "h2"
+    },
+    headingTagBack: {
+        type: "string",
         default: "h2"
     },
     /** Start Heading Style **/
@@ -247,83 +271,83 @@ const attributes = {
         default: 'default',
     },
     headingGlobalTypoOption: {
-		type: "object",
-		default: {label: 'Default', value: 'default'},
-	},
+        type: "object",
+        default: { label: 'Default', value: 'default' },
+    },
     headingFontFamily: {
         type: "string",
         default: "Default",
     },
     headingFontSize: {
-		type: 'object',
-		default: {
-			Desktop: '24',
-			Tablet: '18',
-			Mobile: '16'
-		}
-	},
-	headingFontSizeUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
-    headingFontWeight : {
+        type: 'object',
+        default: {
+            Desktop: '24',
+            Tablet: '18',
+            Mobile: '0'
+        }
+    },
+    headingFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    headingFontWeight: {
         type: "string",
         default: "600"
     },
-    headingFontStyle : {
+    headingFontStyle: {
         type: "string",
         default: ""
     },
-    headingTextTransform : {
+    headingTextTransform: {
         type: "string",
         default: ""
     },
-    headingTextDecoration : {
+    headingTextDecoration: {
         type: "string",
         default: ""
     },
     headingLetterSpacing: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	headingLetterSpacingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    headingLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
     headingLineHeight: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	headingLineHeightUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    headingLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
     /** Heading Color **/
-    Heading_Color_Switcher : {
+    Heading_Color_Switcher: {
         type: "string",
         default: "normal"
     },
-    Heading_Color : {
+    Heading_Color: {
         type: "string",
         default: "#15171C"
     },
@@ -344,171 +368,171 @@ const attributes = {
     Heading_Border_Hover_Color: {
         type: 'string',
     },
-    Heading_Border_Color_Switcher : {
+    Heading_Border_Color_Switcher: {
         type: "string",
         default: "normal"
     },
-    Heading_Border_units : {
+    Heading_Border_units: {
         type: "object",
         default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     Heading_Desktop_Border_Width: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
     Heading_Tab_Border_Width: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
     Heading_Mobile_Border_Width: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
     borderLink: {
-        type : "boolean",
+        type: "boolean",
         default: true
     },
 
-    Heading_Border_radius_units : {
+    Heading_Border_radius_units: {
         type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     Heading_Desktop_Border_radius_Width: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
     Heading_Tab_Border_radius_Width: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
     Heading_Mobile_Border_radius_Width: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
-    borderRadiusLink : {
-        type : "boolean",
+    borderRadiusLink: {
+        type: "boolean",
         default: true
     },
 
-    Heading_padding_units : {
+    Heading_padding_units: {
         type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     Heading_Desktop_padding: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
     Heading_Tab_padding: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
     Heading_Mobile_padding: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
-    paddingLink : {
-        type : "boolean",
+    paddingLink: {
+        type: "boolean",
         default: true
     },
-	//Margin
-    Heading_Margin_Units : {
+    //Margin
+    Heading_Margin_Units: {
         type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     Heading_Desktop_Margin: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "16",
-			right: "16",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
     Heading_Tab_Margin: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "16",
-			right: "16",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
     Heading_Mobile_Margin: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "16",
-			right: "16",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
-    Heading_Margin_Link : {
-        type : "boolean",
+    Heading_Margin_Link: {
+        type: "boolean",
         default: true
     },
 
-    /** Start Sub Heading Style */  
+    /** Start Sub Heading Style */
     subHeadingGlobalTypographyData: {
         type: "object",
         default: {}
@@ -531,9 +555,9 @@ const attributes = {
         default: 'default',
     },
     subHeadingGlobalTypoOption: {
-		type: "object",
-		default: {label: 'Default', value: 'default'},
-	},
+        type: "object",
+        default: { label: 'Default', value: 'default' },
+    },
     subHeadingFontFamily: {
         type: "string",
         default: "Default",
@@ -602,25 +626,33 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    SubHeadingColorSwitcher : {
+    SubHeadingColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    SubHeadingColor : {
+    SubHeadingColor: {
         type: "string",
         default: "#555E72"
     },
-    SubHeadingHoverColor : {
+    SubHeadingHoverColor: {
         type: "string",
         default: "#ffffff"
     },
     Sub_Heading_Text: {
         type: "string",
         default: "Contrary to popular belief, Lorem Ipsum is not simply random text." +
-			" It has roots in a piece of classical Latin"
+            " It has roots in a piece of classical Latin"
     },
     Sub_Heading_Tag: {
-        type : "string",
+        type: "string",
+        default: "p"
+    },
+    flipBackContent: {
+        type: "string",
+        default: "Corrupti non maiores atque. Repellendus ratione omnis numquam minima ut harum eaque."
+    },
+    flipBackContentTag: {
+        type: "string",
         default: "p"
     },
     descSwitcher: {
@@ -631,13 +663,13 @@ const attributes = {
         type: "string",
         default: "bottom",
     },
-    SubHeadingPaddingUnits : {
+    SubHeadingPaddingUnits: {
         type: "object",
         default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     SubHeadingDesktopPadding: {
         type: "object",
@@ -660,57 +692,57 @@ const attributes = {
     SubHeadingMobilePadding: {
         type: "object",
         default: {
-            top: '10',
-            bottom: '10',
+            top: '0',
+            bottom: '0',
             left: '0',
             right: '0',
         },
     },
     SubHeadingPaddingLink: {
-        type : "boolean",
+        type: "boolean",
         default: true
     },
 
-	//Margin
-	descMarginUnits : {
-		type: "object",
+    //Margin
+    descMarginUnits: {
+        type: "object",
         default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	descDesktopMargin: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '16',
-			right: '16',
-		},
-	},
-	descTabMargin: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '16',
-			right: '16',
-		},
-	},
-	descMobileMargin: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '16',
-			right: '16',
-		},
-	},
-	descMarginLink : {
-		type : "boolean",
-		default: true
-	},
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    descDesktopMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    descTabMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    descMobileMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    descMarginLink: {
+        type: "boolean",
+        default: true
+    },
 
     //flip Button
     flip_Button_Text: {
@@ -732,333 +764,511 @@ const attributes = {
     flipbtnTargetUrl: {
         type: "boolean",
     },
-	flipButtonPaddingUnits : {
-		type: "object",
+    flipButtonPaddingUnits: {
+        type: "object",
         default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	flipButtonDesktopPadding: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	flipButtonTabPadding: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	flipButtonMobilePadding: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-    flipButtonPaddingLink : {
-		type : "boolean",
-		default: true
-	},
-    
-	//Button Margin
-	flipButtonMarginUnits : {
-		type: "object",
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipButtonDesktopPadding: {
+        type: "object",
         default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	flipButtonDesktopMargin: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '16',
-			right: '16',
-		},
-	},
-	flipButtonTabMargin: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '16',
-			right: '16',
-		},
-	},
-	flipButtonMobileMargin: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '16',
-			right: '16',
-		},
-	},
-	flipButtonMarginLink : {
-		type : "boolean",
-		default: true
-	},
-
-	//flip Button Border
-	flipButtonBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	flipButtonBorder: {
-		type: 'string',
-		default: "none",
-	},
-	flipButtonBorderColor: {
-		type: 'string',
-	},
-	flipButtonHoverBorderColor: {
-		type: 'string',
-	},
-	flipButtonBorderUnits : {
-		type: "object",
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonTabPadding: {
+        type: "object",
         default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	flipButtonDesktopBorderWidth: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	flipButtonTabBorderWidth: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	flipButtonMobileBorderWidth: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-    flipButtonBorderLink : {
-		type : "boolean",
-		default: true
-	},
-
-	//Button Border Radius
-	flipBtnBorderradiusUnits : {
-		type: "object",
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonMobilePadding: {
+        type: "object",
         default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	flipBtnDesktopBorderradiusWidth: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	flipBtnTabBorderradiusWidth: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	flipBtnMobileBorderradiusWidth: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-    btnBorderRadiusLink : {
-        type : "boolean",
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonPaddingLink: {
+        type: "boolean",
         default: true
     },
-	//flip box padding
-	flipBoxPaddingUnits : {
-		type: "string",
-		default: "px"
-	},
-	flipBoxDesktopPadding: {
-		type: "object",
-		default: {
-			top: '40',
-			bottom: '40',
-			left: '40',
-			right: '40',
-		},
-	},
-	flipBoxTabPadding: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	flipBoxMobilePadding: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	// flip box margin
-	flipBoxMarginUnits : {
-		type: "string",
-		default: "px"
-	},
-	flipBoxDesktopMargin: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	flipBoxTabMargin: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	flipBoxMobileMargin: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	flipBoxActiveMarginDevice: {
-		type: "string",
-		default: "desktop"
-	},
-	flipBoxMarginLink : {
-		type : "boolean",
-		default: true
-	},
-	// flip Box Border
-	flipBoxBorder: {
-		type: 'string',
-		default: "none",
-	},
-	flipBoxBorderColor: {
-		type: 'string',
-	},
-	flipBoxBorderHoverColor: {
-		type: 'string',
-	},
-	flipBoxBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	flipBoxBorderUnits : {
-		type: "string",
-		default: "px"
-	},
-	flipBoxDesktopBorderWidth: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	flipBoxTabBorderWidth: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	flipBoxMobileBorderWidth: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	// 	flip Box Border Radius
-	flipBoxBorderRadiusUnits : {
-		type: "string",
-		default: "px"
-	},
-	flipBoxDesktopBorderRadiusWidth: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	flipBoxTabBorderRadiusWidth: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	flipBoxMobileBorderRadiusWidth: {
-		type: "object",
-		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
-		},
-	},
-	// Button
+
+    //Button Margin
+    flipButtonMarginUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipButtonDesktopMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonTabMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonMobileMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonMarginLink: {
+        type: "boolean",
+        default: true
+    },
+
+    //flip Button Border
+    flipButtonBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    flipButtonBorder: {
+        type: 'string',
+        default: "none",
+    },
+    flipButtonBorderColor: {
+        type: 'string',
+    },
+    flipButtonHoverBorderColor: {
+        type: 'string',
+    },
+    flipButtonBorderUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipButtonDesktopBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonTabBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonMobileBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonBorderLink: {
+        type: "boolean",
+        default: true
+    },
+
+    //Button Border Radius
+    flipBtnBorderradiusUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipBtnDesktopBorderradiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBtnTabBorderradiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBtnMobileBorderradiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    btnBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+
+    // Flip back button
+    flipButtonBackPaddingUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipButtonBackDesktopPadding: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonBackTabPadding: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonBackMobilePadding: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonBackPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+
+    //Button Margin
+    flipButtonBackMarginUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipButtonBackDesktopMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonBackTabMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonBackMobileMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonBackMarginLink: {
+        type: "boolean",
+        default: true
+    },
+
+    //flip Button Border
+    flipButtonBackBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    flipButtonBackBorder: {
+        type: 'string',
+        default: "none",
+    },
+    flipButtonBackBorderColor: {
+        type: 'string',
+    },
+    flipButtonBackHoverBorderColor: {
+        type: 'string',
+    },
+    flipButtonBackBorderUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipButtonBackDesktopBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonBackTabBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonBackMobileBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipButtonBackBorderLink: {
+        type: "boolean",
+        default: true
+    },
+
+    //Button Border Radius
+    flipBtnBackBorderradiusUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipBtnBackDesktopBorderradiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBtnBackTabBorderradiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBtnBackMobileBorderradiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    btnBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    // Flip box padding
+    flipBoxPaddingUnits: {
+        type: "string",
+        default: "px"
+    },
+    flipBoxDesktopPadding: {
+        type: "object",
+        default: {
+            top: '40',
+            bottom: '40',
+            left: '40',
+            right: '40',
+        },
+    },
+    flipBoxTabPadding: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBoxMobilePadding: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    // flip box margin
+    flipBoxMarginUnits: {
+        type: "string",
+        default: "px"
+    },
+    flipBoxDesktopMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBoxTabMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBoxMobileMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBoxActiveMarginDevice: {
+        type: "string",
+        default: "desktop"
+    },
+    flipBoxMarginLink: {
+        type: "boolean",
+        default: true
+    },
+    // flip Box Border
+    flipBoxBorder: {
+        type: 'string',
+        default: "none",
+    },
+    flipBoxBorderColor: {
+        type: 'string',
+    },
+    flipBoxBorderHoverColor: {
+        type: 'string',
+    },
+    flipBoxBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    flipBoxBorderUnits: {
+        type: "string",
+        default: "px"
+    },
+    flipBoxDesktopBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBoxTabBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBoxMobileBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    // 	flip Box Border Radius
+    flipBoxBorderRadiusUnits: {
+        type: "string",
+        default: "px"
+    },
+    flipBoxDesktopBorderRadiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBoxTabBorderRadiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBoxMobileBorderRadiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    // Button
     buttonGlobalTypographyData: {
         type: "object",
         default: {}
@@ -1081,196 +1291,196 @@ const attributes = {
         default: 'default',
     },
     buttonGlobalTypoOption: {
-		type: "object",
-		default: {label: 'Default', value: 'default'},
-	},
-	buttonFontFamily: {
-		type: "string",
-		default: "Default",
-	},
-	buttonFontSize: {
-		type: 'object',
+        type: "object",
+        default: { label: 'Default', value: 'default' },
+    },
+    buttonFontFamily: {
+        type: "string",
+        default: "Default",
+    },
+    buttonFontSize: {
+        type: 'object',
         default: {
             Desktop: '',
             Tablet: '',
             Mobile: ''
         }
-	},
-	buttonFontSizeUnits: {
+    },
+    buttonFontSizeUnits: {
         type: 'object',
-		default: {
+        default: {
             Desktop: 'px',
             Tablet: 'px',
             Mobile: 'px',
         }
-	},
-	buttonFontWeight : {
-		type: "string",
-		default: "400"
-	},
-	buttonFontStyle : {
-		type: "string",
-		default: "normal"
-	},
-	buttonTextTransform : {
-		type: "string",
-		default: "none"
-	},
-	buttonTextDecoration : {
-		type: "string",
-		default: "none"
-	},
-	buttonLetterSpacing : {
-		type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-	},
-	buttonLetterSpacingUnits : {
-		type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-        }
-	},
-	buttonLineHeight : {
-		type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-	},
-	buttonLineHeightUnits : {
-		type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-        }
-	},
-	// Button Color
-	buttonColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	buttonTextColor : {
-		type: "string",
-		default: '#399CFF'
-	},
-	buttonTextHoverColor : {
-		type: "string",
-        default: "#ffffff"
-	},
-	buttonBgColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	buttonBgColor : {
-		type: "string",
-		default: ''
-	},
-	buttonBgHoverColor : {
-		type: "string"
-	},
-	globalZIndex : {
+    },
+    buttonFontWeight: {
+        type: "string",
+        default: "400"
+    },
+    buttonFontStyle: {
+        type: "string",
+        default: "normal"
+    },
+    buttonTextTransform: {
+        type: "string",
+        default: "none"
+    },
+    buttonTextDecoration: {
+        type: "string",
+        default: "none"
+    },
+    buttonLetterSpacing: {
         type: 'object',
         default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: '',
-		}
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    buttonLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    buttonLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    buttonLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    // Button Color
+    buttonColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    buttonTextColor: {
+        type: "string",
+        default: '#399CFF'
+    },
+    buttonTextHoverColor: {
+        type: "string",
+        default: "#ffffff"
+    },
+    buttonBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    buttonBgColor: {
+        type: "string",
+        default: ''
+    },
+    buttonBgHoverColor: {
+        type: "string"
+    },
+    globalZIndex: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        }
     },
     flipBoxOverflow: {
         type: 'string',
         default: "default",
     },
-	globalPaddingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+    globalPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     globalPaddingDesktop: {
         type: "object",
         default: {
-            top: '32',
-            bottom: '32',
-            left: '32',
-            right: '32',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     globalPaddingTablet: {
         type: "object",
         default: {
-            top: '32',
-            bottom: '32',
-            left: '16',
-            right: '16',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     globalPaddingMobile: {
         type: "object",
         default: {
-            top: '32',
-            bottom: '32',
-            left: '16',
-            right: '16',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
-    globalPaddingLink : {
-        type : "boolean",
+    globalPaddingLink: {
+        type: "boolean",
         default: true
     },
     globalMarginUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     globalMarginDesktop: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
     globalMarginTablet: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
     globalMarginMobile: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
-    globalMarginLink : {
-        type : "boolean",
+    globalMarginLink: {
+        type: "boolean",
         default: true
     },
-    globalBgColorSwitcher : {
+    globalBgColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    globalBgColor : {
+    globalBgColor: {
         type: "string",
         default: '#FEEBD5'
     },
@@ -1282,7 +1492,7 @@ const attributes = {
         type: 'string',
         default: "none",
     },
-    globalBorderColorSwitcher : {
+    globalBorderColorSwitcher: {
         type: "string",
         default: "normal"
     },
@@ -1293,51 +1503,51 @@ const attributes = {
         type: 'string',
     },
     globalBorderUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     globalBorderDesktop: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
     globalBorderTablet: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
     globalBorderMobile: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
-    globalBorderLink : {
-        type : "boolean",
+    globalBorderLink: {
+        type: "boolean",
         default: true
     },
     globalBorderRadiusUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     globalBorderRadiusDesktop: {
         type: "object",
@@ -1351,26 +1561,27 @@ const attributes = {
     globalBorderRadiusTablet: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
     globalBorderRadiusMobile: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
-    globalBorderRadiusLink : {
-        type : "boolean",
+    globalBorderRadiusLink: {
+        type: "boolean",
         default: true
     },
-    mediaPaddingUnits: {
+    //Back side
+    mediaBackPaddingUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -1378,38 +1589,38 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    mediaPaddingDesktop: {
+    mediaBackPaddingDesktop: {
         type: "object",
         default: {
-            top: '',
-            bottom: '',
+            top: '106',
+            bottom: '32',
             left: '',
             right: '',
         },
     },
-    mediaPaddingTablet: {
+    mediaBackPaddingTablet: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "80",
+            bottom: "26",
+            left: "0",
+            right: "0",
+        },
     },
-    mediaPaddingMobile: {
+    mediaBackPaddingMobile: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "60",
+            bottom: "20",
+            left: "0",
+            right: "0",
+        },
     },
-    mediaPaddingLink: {
+    mediaBackPaddingLink: {
         type: "boolean",
         default: true
     },
-    mediaMarginUnits: {
+    mediaBackMarginUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -1417,42 +1628,42 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    mediaMarginDesktop: {
+    mediaBackMarginDesktop: {
         type: "object",
         default: {
             top: '0',
-            bottom: '10',
-            left: '16',
-            right: '16',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
-    mediaMarginTablet: {
+    mediaBackMarginTablet: {
         type: "object",
         default: {
             top: '0',
-            bottom: '10',
-            left: '16',
-            right: '16',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
-    mediaMarginMobile: {
+    mediaBackMarginMobile: {
         type: "object",
         default: {
             top: '0',
-            bottom: '10',
-            left: '16',
-            right: '16',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
-    mediaMarginLink: {
+    mediaBackMarginLink: {
         type: "boolean",
         default: true
     },
-    mediaBgColorSwitcher: {
+    mediaBackBgColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    mediaBgColor: {
+    mediaBackBgColor: {
         type: "string",
         default: "#399CFF"
     },
@@ -1460,25 +1671,25 @@ const attributes = {
         type: "string",
         default: "color",
     },
-    mediaBgHoverColor: {
+    mediaBackBgHoverColor: {
         type: "string",
         default: "#ffffff"
     },
-    mediaBorder: {
+    mediaBackBorder: {
         type: "string",
         default: "none",
     },
-    mediaBorderColorSwitcher: {
+    mediaBackBorderColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    mediaBorderColor: {
+    mediaBackBorderColor: {
         type: "string",
     },
-    mediaBorderHoverColor: {
+    mediaBackBorderHoverColor: {
         type: "string",
     },
-    mediaBorderUnits: {
+    mediaBackBorderUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -1486,38 +1697,38 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    mediaBorderDesktop: {
+    mediaBackBorderDesktop: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
-    mediaBorderTablet: {
+    mediaBackBorderTablet: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
-    mediaBorderMobile: {
+    mediaBackBorderMobile: {
         type: "object",
         default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
-		},
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
     },
-    mediaBorderLink: {
+    mediaBackBorderLink: {
         type: "boolean",
         default: true
     },
-    mediaBorderRadiusUnits: {
+    mediaBackBorderRadiusUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -1525,7 +1736,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    mediaBorderRadiusDesktop: {
+    mediaBackBorderRadiusDesktop: {
         type: "object",
         default: {
             top: '50',
@@ -1534,7 +1745,7 @@ const attributes = {
             right: '50',
         },
     },
-    mediaBorderRadiusTablet: {
+    mediaBackBorderRadiusTablet: {
         type: "object",
         default: {
             top: '50',
@@ -1543,7 +1754,7 @@ const attributes = {
             right: '50',
         },
     },
-    mediaBorderRadiusMobile: {
+    mediaBackBorderRadiusMobile: {
         type: "object",
         default: {
             top: '50',
@@ -1552,10 +1763,11 @@ const attributes = {
             right: '50',
         },
     },
-    mediaBorderRadiusLink: {
+    mediaBackBorderRadiusLink: {
         type: "boolean",
         default: true
     },
+
     flipMediaBackgroundImageUrl: {
         type: "string",
     },
@@ -1585,7 +1797,7 @@ const attributes = {
         type: 'string',
         default: '',
     },
-    mediaBackColorSwitcher: {
+    mediaColorSwitcher: {
         type: "string",
         default: "normal"
     },
@@ -1690,7 +1902,7 @@ const attributes = {
     mediaHoverBackgroundImageRepeat: {
         type: "string",
         default: ""
-    },    
+    },
     blockStyle: {
         type: "string",
         default: "",
@@ -1710,21 +1922,21 @@ const attributes = {
     },
 
     /** Start Class & ID Setting */
-    flipBoxGlobalCustomCSS : {
+    flipBoxGlobalCustomCSS: {
         type: "string",
         default: "",
     },
-	flipBoxGlobalWraperID : {
-		type: "string",
-		default: ""
-	},
+    flipBoxGlobalWraperID: {
+        type: "string",
+        default: ""
+    },
 
-	flipBoxGlobalWraperClass : {
-		type: "string",
-		default: ""
-	},
-	
-	/** End Class & ID Setting */
+    flipBoxGlobalWraperClass: {
+        type: "string",
+        default: ""
+    },
+
+    /** End Class & ID Setting */
 
     flipBoxPositionType: {
         type: "string",
@@ -1795,6 +2007,2093 @@ const attributes = {
         }
     },
     flipBoxVRBottomOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    flipBackBoxPresetStyle: {
+        type: "string",
+        default: "preset-1",
+    },
+    flipBackBoxBg: {
+        type: 'string',
+        default: '#EBF5FF'
+    },
+    mediaSwitcherBack: {
+        type: "string",
+        default: "icon"
+    },
+    Sub_Heading_Switcher: {
+        type: "boolean",
+        default: false
+    },
+    flipBackSelectedSide: {
+        type: "string",
+        default: "front"
+    },
+    flipBackMediaUrl: {
+        type: 'string',
+        default: ''
+    },
+    flipBackMediaAlt: {
+        type: "string",
+    },
+    flipBackMediaID: {
+        type: "number",
+    },
+
+    mediaBackSize: {
+        type: 'object',
+        default: {
+            Desktop: '25',
+            Tablet: '20',
+            Mobile: '15'
+        }
+    },
+    mediaBackSizeDesktop: {
+        type: "number",
+        default: 20
+    },
+    mediaBackSizeSizeTablet: {
+        type: "number",
+        default: 20
+    },
+    mediaBackSizeSizeMobile: {
+        type: "number",
+        default: 20
+    },
+    mediaBackSizeUnitsSave: {
+        type: "string",
+        default: "px"
+    },
+    mediaBackSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    mediaBackBgTypeImage: {
+        type: "string",
+        default: ''
+    },
+    mediaBackBgWidth: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    mediaBackBgWidthUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    mediaBackBgHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    mediaBackBgHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    btnIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '0',
+            Tablet: '0',
+            Mobile: '0'
+        }
+    },
+    btnIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    btnIconColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    btnIconColor: {
+        type: 'string',
+        default: '#399CFF'
+    },
+    btnIconHoverColor: {
+        type: 'string',
+        default: '#ffffff'
+    },
+    mediaBackIconColor: {
+        type: 'string',
+        default: '#ffffff'
+    },
+    mediaBackIconHoverColor: {
+        type: 'string',
+        default: "#399CFF"
+    },
+    mediaBackIconColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    btnIconPosition: {
+        type: 'string',
+        default: 'right'
+    },
+    // Flip box front
+    flipBoxFrontWidth: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    flipBoxFrontWidthUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    flipBoxFrontHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    flipBoxFrontHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    //Flip Box Front background
+    flipBoxFrontBackColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    flipBoxFrontBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    flipBoxFrontClassicColor: {
+        type: "string",
+        default: "#FEEBD5"
+    },
+    flipBoxFrontGradientColor: {
+        type: "string",
+    },
+    flipBoxFrontCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    flipBoxFrontCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    flipBoxFrontHoverClassicColor: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverGradientColor: {
+        type: "string",
+    },
+    flipBoxFrontHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    flipBoxFrontHoverCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    flipBoxFrontHoverBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    // Flip box back
+    flipBoxBackWidth: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    flipBoxBackWidthUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    flipBoxBackHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    flipBoxBackHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    //Flip Box Front background
+    flipBoxBackColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    flipBoxBackBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    flipBoxBackClassicColor: {
+        type: "string",
+        default: "#F89B2E"
+    },
+    flipBoxBackGradientColor: {
+        type: "string",
+    },
+    flipBoxBackCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    flipBoxBackCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    flipBoxBackHoverClassicColor: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverGradientColor: {
+        type: "string",
+    },
+    flipBoxBackHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    flipBoxBackHoverCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    flipBoxBackHoverBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+
+    flipBackIconPosition: {
+        type: 'string',
+        default: 'top'
+    },
+    flipBackIconVerticalPosition: {
+        type: 'string',
+        default: 'top'
+    },
+    flipBackCardAlignment: {
+        type: 'string',
+        default: 'start'
+    },
+    height: {
+        type: 'number',
+        default: 50
+    },
+    width: {
+        type: 'number',
+        default: 50
+    },
+    icon: {
+        type: 'string',
+        default: 'swatchbook',
+    },
+    btnIcon: {
+        type: 'string',
+        default: 'arrow-up-right-from-square',
+    },
+    boxBgColor: {
+        type: 'string',
+        default: '#fff'
+    },
+    boxBgHoverColor: {
+        type: 'string',
+    },
+    boxBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    titleColor: {
+        type: 'string',
+        default: '#15171C'
+    },
+    borderRadius: {
+        type: 'number',
+        default: 0,
+    },
+    titleText: {
+        type: 'string',
+        default: 'Icon Box title',
+    },
+    wrapperAlignment: {
+        type: "string",
+        default: "center",
+    },
+    contentAlignment: {
+        type: "string",
+        default: "left",
+    },
+    descAlignmentBack: {
+        type: "string",
+        default: "center",
+    },
+    buttonAlignment: {
+        type: "string",
+        default: "center",
+    },
+    Alignment: {
+        type: "string",
+        default: "center",
+    },
+    titleAlignmentBack: {
+        type: "string",
+        default: "center",
+    },
+    Heading_Text: {
+        type: "string",
+        default: "Web Design"
+    },
+    headingTag: {
+        type: "string",
+        default: "h2"
+    },
+    /** Start Heading Style **/
+    headingBackGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    headingBackGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    headingBackGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
+    headingBackGlobalTypoOption: {
+        type: "object",
+        default: { label: 'Default', value: 'default' },
+    },
+    headingBackFontFamily: {
+        type: "string",
+        default: "Default",
+    },
+    headingBackFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '24',
+            Tablet: '18',
+            Mobile: '0'
+        }
+    },
+    headingBackFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    headingBackFontWeight: {
+        type: "string",
+        default: "600"
+    },
+    headingBackFontStyle: {
+        type: "string",
+        default: ""
+    },
+    headingBackTextTransform: {
+        type: "string",
+        default: ""
+    },
+    headingBackTextDecoration: {
+        type: "string",
+        default: ""
+    },
+    headingBackLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    headingBackLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    headingBackLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    headingBackLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** Heading Back Color **/
+    headingBackColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    headingBackColor: {
+        type: "string",
+        default: "#ffffff"
+    },
+    headingBackHoverColor: {
+        type: 'string',
+        default: "#ffffff"
+    },
+    headingBack_Background_Color: {
+        type: 'string',
+    },
+    headingBack_Border: {
+        type: 'string',
+        default: "none",
+    },
+    headingBack_Border_Color: {
+        type: 'string',
+    },
+    headingBack_Border_Hover_Color: {
+        type: 'string',
+    },
+    headingBack_Border_Color_Switcher: {
+        type: "string",
+        default: "normal"
+    },
+    headingBack_Border_units: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    headingBack_Desktop_Border_Width: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    headingBack_Tab_Border_Width: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    headingBack_Mobile_Border_Width: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    borderLink: {
+        type: "boolean",
+        default: true
+    },
+
+    headingBack_Border_radius_units: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    headingBack_Desktop_Border_radius_Width: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    headingBack_Tab_Border_radius_Width: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    headingBack_Mobile_Border_radius_Width: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    borderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+
+    headingBack_padding_units: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    headingBack_Desktop_padding: {
+        type: "object",
+        default: {
+            top: "24",
+            bottom: "0",
+            left: "32",
+            right: "32",
+        },
+    },
+    headingBack_Tab_padding: {
+        type: "object",
+        default: {
+            top: "24",
+            bottom: "0",
+            left: "32",
+            right: "32",
+        },
+    },
+    headingBack_Mobile_padding: {
+        type: "object",
+        default: {
+            top: "24",
+            bottom: "0",
+            left: "32",
+            right: "32",
+        },
+    },
+    paddingLink: {
+        type: "boolean",
+        default: true
+    },
+    //Margin
+    headingBack_Margin_Units: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    headingBack_Desktop_Margin: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    headingBack_Tab_Margin: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    headingBack_Mobile_Margin: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    headingBack_Margin_Link: {
+        type: "boolean",
+        default: true
+    },
+
+    /** Start Sub Heading Style */
+    subHeadingBackGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    subHeadingBackGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    subHeadingBackGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
+    subHeadingBackGlobalTypoOption: {
+        type: "object",
+        default: { label: 'Default', value: 'default' },
+    },
+    subHeadingBackFontFamily: {
+        type: "string",
+        default: "Default",
+    },
+    subHeadingBackFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    subHeadingBackFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    subHeadingBackFontWeight: {
+        type: "string",
+        default: ""
+    },
+    subHeadingBackFontStyle: {
+        type: "string",
+        default: ""
+    },
+    subHeadingBackTextTransform: {
+        type: "string",
+        default: ""
+    },
+    subHeadingBackTextDecoration: {
+        type: "string",
+        default: ""
+    },
+    subHeadingBackLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    subHeadingBackLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    subHeadingBackLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    subHeadingBackLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    subHeadingBackColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    subHeadingBackColor: {
+        type: "string",
+        default: "#FFFBF5"
+    },
+    subHeadingBackHoverColor: {
+        type: "string",
+        default: "#ffffff"
+    },
+    subHeadingBack_Text: {
+        type: "string",
+        default: "Contrary to popular belief, Lorem Ipsum is not simply random text." +
+            " It has roots in a piece of classical Latin"
+    },
+    subHeadingBack_Tag: {
+        type: "string",
+        default: "p"
+    },
+    descSwitcherBack: {
+        type: "boolean",
+        default: true,
+    },
+    subHeadingBack_Position: {
+        type: "string",
+        default: "bottom",
+    },
+    subHeadingBackPaddingUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    subHeadingBackDesktopPadding: {
+        type: "object",
+        default: {
+            top: '32',
+            bottom: '32',
+            left: '32',
+            right: '32',
+        },
+    },
+    subHeadingBackTabPadding: {
+        type: "object",
+        default: {
+            top: '32',
+            bottom: '32',
+            left: '32',
+            right: '32',
+        },
+    },
+    subHeadingBackMobilePadding: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    subHeadingBackPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+
+    //Margin
+    descBackMarginUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    descBackDesktopMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    descBackTabMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    descBackMobileMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    descBackMarginLink: {
+        type: "boolean",
+        default: true
+    },
+
+    //Flip Back Button
+    flipBack_Button_Text: {
+        type: "string",
+        default: "Read More"
+    },
+    flipBack_Button_Switcher: {
+        type: "boolean",
+        default: true,
+    },
+    buttonIconSwitcherBack: {
+        type: "boolean",
+        default: true,
+    },
+    flipBackButtonLink: {
+        type: "string",
+        default: ""
+    },
+    flipBackbtnTargetUrl: {
+        type: "boolean",
+    },
+    flipBackButtonPaddingUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipBackButtonDesktopPadding: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackButtonTabPadding: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackButtonMobilePadding: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackButtonPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+
+    //Button Margin
+    flipBackButtonMarginUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipBackButtonDesktopMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackButtonTabMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackButtonMobileMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackButtonMarginLink: {
+        type: "boolean",
+        default: true
+    },
+
+    //flipBack Button Border
+    flipBackButtonBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    flipBackButtonBorder: {
+        type: 'string',
+        default: "none",
+    },
+    flipBackButtonBorderColor: {
+        type: 'string',
+    },
+    flipBackButtonHoverBorderColor: {
+        type: 'string',
+    },
+    flipBackButtonBorderUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipBackButtonDesktopBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackButtonTabBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackButtonMobileBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackButtonBorderLink: {
+        type: "boolean",
+        default: true
+    },
+
+    //Button Border Radius
+    flipBackBtnBorderradiusUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipBackBtnDesktopBorderradiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackBtnTabBorderradiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackBtnMobileBorderradiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    btnBackBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    //flipBack box padding
+    flipBackBoxPaddingUnits: {
+        type: "string",
+        default: "px"
+    },
+    flipBackBoxDesktopPadding: {
+        type: "object",
+        default: {
+            top: '40',
+            bottom: '40',
+            left: '40',
+            right: '40',
+        },
+    },
+    flipBackBoxTabPadding: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackBoxMobilePadding: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    // flipBack box margin
+    flipBackBoxMarginUnits: {
+        type: "string",
+        default: "px"
+    },
+    flipBackBoxDesktopMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackBoxTabMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackBoxMobileMargin: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackBoxActiveMarginDevice: {
+        type: "string",
+        default: "desktop"
+    },
+    flipBackBoxMarginLink: {
+        type: "boolean",
+        default: true
+    },
+    // flipBack Box Border
+    flipBackBoxBorder: {
+        type: 'string',
+        default: "none",
+    },
+    flipBackBoxBorderColor: {
+        type: 'string',
+    },
+    flipBackBoxBorderHoverColor: {
+        type: 'string',
+    },
+    flipBackBoxBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    flipBackBoxBorderUnits: {
+        type: "string",
+        default: "px"
+    },
+    flipBackBoxDesktopBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackBoxTabBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackBoxMobileBorderWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    // 	flipBack Box Border Radius
+    flipBackBoxBorderRadiusUnits: {
+        type: "string",
+        default: "px"
+    },
+    flipBackBoxDesktopBorderRadiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackBoxTabBorderRadiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBackBoxMobileBorderRadiusWidth: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    // Button
+    buttonBackGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    buttonBackGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    buttonBackGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
+    buttonBackGlobalTypoOption: {
+        type: "object",
+        default: { label: 'Default', value: 'default' },
+    },
+    buttonBackFontFamily: {
+        type: "string",
+        default: "Default",
+    },
+    buttonBackFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    buttonBackFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    buttonBackFontWeight: {
+        type: "string",
+        default: "400"
+    },
+    buttonBackFontStyle: {
+        type: "string",
+        default: "normal"
+    },
+    buttonBackTextTransform: {
+        type: "string",
+        default: "none"
+    },
+    buttonBackTextDecoration: {
+        type: "string",
+        default: "none"
+    },
+    buttonBackLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    buttonBackLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    buttonBackLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    buttonBackLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    // Button Color
+    buttonBackColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    buttonBackTextColor: {
+        type: "string",
+        default: '#FFFFFF'
+    },
+    buttonBackTextHoverColor: {
+        type: "string",
+        default: "#ffffff"
+    },
+    buttonBackBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    buttonBackBgColor: {
+        type: "string",
+        default: ''
+    },
+    buttonBackBgHoverColor: {
+        type: "string"
+    },
+    globalZIndex: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        }
+    },
+    flipBackBoxOverflow: {
+        type: 'string',
+        default: "default",
+    },
+    globalPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    globalPaddingDesktop: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    globalPaddingTablet: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    globalPaddingMobile: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    globalPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    globalMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    globalMarginDesktop: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    globalMarginTablet: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    globalMarginMobile: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    globalMarginLink: {
+        type: "boolean",
+        default: true
+    },
+    globalBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    globalBgColor: {
+        type: "string",
+        default: ""
+    },
+    globalBgHoverColor: {
+        type: "string",
+        default: ""
+    },
+    globalBorder: {
+        type: 'string',
+        default: "none",
+    },
+    globalBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    globalBorderColor: {
+        type: 'string',
+    },
+    globalBorderHoverColor: {
+        type: 'string',
+    },
+    globalBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    globalBorderDesktop: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    globalBorderTablet: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    globalBorderMobile: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    globalBorderLink: {
+        type: "boolean",
+        default: true
+    },
+    globalBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    globalBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: '6',
+            bottom: '6',
+            left: '6',
+            right: '6',
+        },
+    },
+    globalBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    globalBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    globalBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    mediaPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    mediaPaddingDesktop: {
+        type: "object",
+        default: {
+            top: '106',
+            bottom: '32',
+            left: '0',
+            right: '0',
+        },
+    },
+    mediaPaddingTablet: {
+        type: "object",
+        default: {
+            top: "80",
+            bottom: "26",
+            left: "0",
+            right: "0",
+        },
+    },
+    mediaPaddingMobile: {
+        type: "object",
+        default: {
+            top: "60",
+            bottom: "20",
+            left: "0",
+            right: "0",
+        },
+    },
+    mediaPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    mediaMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    mediaMarginDesktop: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    mediaMarginTablet: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    mediaMarginMobile: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    mediaMarginLink: {
+        type: "boolean",
+        default: true
+    },
+    mediaBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    mediaBgColor: {
+        type: "string",
+        default: "#399CFF"
+    },
+    bgType: {
+        type: "string",
+        default: "color",
+    },
+    mediaBgHoverColor: {
+        type: "string",
+        default: "#ffffff"
+    },
+    mediaBorder: {
+        type: "string",
+        default: "none",
+    },
+    mediaBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    mediaBorderColor: {
+        type: "string",
+    },
+    mediaBorderHoverColor: {
+        type: "string",
+    },
+    mediaBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    mediaBorderDesktop: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    mediaBorderTablet: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    mediaBorderMobile: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    mediaBorderLink: {
+        type: "boolean",
+        default: true
+    },
+    mediaBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    mediaBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
+        },
+    },
+    mediaBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
+        },
+    },
+    mediaBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
+        },
+    },
+    mediaBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    flipBackMediaBackgroundImageUrl: {
+        type: "string",
+    },
+    flipBackMediaBackgroundImageAlt: {
+        type: "string",
+    },
+    flipBackMediaBackgroundImageID: {
+        type: "number",
+    },
+    boxGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    boxGlobalBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    boxGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    boxGlobalHoverBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    boxGlobalHoverBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    mediaBackColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    /* Media Back Side */
+    mediaBackBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    mediaBackClassicColor: {
+        type: "string",
+        default: ""
+    },
+    mediaBackGradientColor: {
+        type: "string",
+    },
+    mediaBackCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    mediaBackCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    mediaBackBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    mediaBackBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    mediaBackBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    mediaBackBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    mediaBackBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    mediaBackBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    mediaBackBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    mediaBackBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+    mediaBackHoverBackgroundType: {
+        type: "string",
+        default: "classic"
+    },
+    mediaBackHoverClassicColor: {
+        type: "string",
+        default: ""
+    },
+    mediaBackHoverGradientColor: {
+        type: "string",
+    },
+    mediaBackHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    mediaBackHoverCustomGradientInputValue: {
+        type: "string",
+        default: ""
+    },
+    mediaBackHoverBackgroundColorStyle: {
+        type: "string",
+        default: ""
+    },
+    mediaBackHoverBackgroundImageUrl: {
+        type: "string",
+        default: ""
+    },
+    mediaBackHoverBackgroundImageAlt: {
+        type: "string",
+        default: ""
+    },
+    mediaBackHoverBackgroundImageID: {
+        type: "string",
+        default: ""
+    },
+    mediaBackHoverBackgroundImagePosition: {
+        type: "string",
+        default: ""
+    },
+    mediaBackHoverBackgroundImageAttachment: {
+        type: "string",
+        default: ""
+    },
+    mediaBackHoverBackgroundImageSize: {
+        type: "string",
+        default: ""
+    },
+    mediaBackHoverBackgroundImageRepeat: {
+        type: "string",
+        default: ""
+    },
+
+    blockStyle: {
+        type: "string",
+        default: "",
+    },
+
+    flipBackBoxDesktopSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    flipBackBoxTabletSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    flipBackBoxMobileSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+
+    /** Start Class & ID Setting */
+    flipBackBoxGlobalCustomCSS: {
+        type: "string",
+        default: "",
+    },
+    flipBackBoxGlobalWraperID: {
+        type: "string",
+        default: ""
+    },
+
+    flipBackBoxGlobalWraperClass: {
+        type: "string",
+        default: ""
+    },
+
+    /** End Class & ID Setting */
+
+    flipBackBoxPositionType: {
+        type: "string",
+        default: "default"
+    },
+    flipBackBoxHZOrientationType: {
+        type: "string",
+        default: "left"
+    },
+    flipBackBoxVROrientationType: {
+        type: "string",
+        default: "top"
+    },
+    flipBackBoxHZLeftOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    flipBackBoxHZLeftOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    flipBackBoxHZRightOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    flipBackBoxHZRightOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    flipBackBoxVRTopOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    flipBackBoxVRTopOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    flipBackBoxVRBottomOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    flipBackBoxVRBottomOffsetUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
