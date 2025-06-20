@@ -32,6 +32,16 @@ const generateColorsVariables = (colors, deviceType) => {
         iframeDocument.head.appendChild(styleTag);
     }
 
+    
+	// ⬇️ Add or update <style> in the main document as well
+	let mainStyleTag = document.getElementById("global-colors");
+	if (!mainStyleTag) {
+		mainStyleTag = document.createElement("style");
+		mainStyleTag.id = "global-colors";
+		document.head.appendChild(mainStyleTag);
+	}
+	mainStyleTag.textContent = cssVariables;
+
     // Instead of appending, we replace the content
     styleTag.textContent = cssVariables;
 
