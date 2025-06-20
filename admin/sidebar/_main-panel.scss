@@ -214,6 +214,10 @@
                         &.block-editor-panel-color-gradient-settings__dropdown{
                             padding: 12px;
                             height: unset;
+
+                            .block-editor-panel-color-gradient-settings__color-name {
+                                max-width: 130px;
+                            }
                         }
                     }
                 }
@@ -503,4 +507,10 @@
             overflow: hidden;
         }
     }
+}
+.fb-color-panel.fb-gradient-color-panel {
+    margin-bottom: 24px;
+}
+.fb-gradient-color-popup .components-popover__content {
+    max-height: 100% !important;
 }
