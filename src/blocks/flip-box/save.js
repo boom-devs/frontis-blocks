@@ -35,7 +35,9 @@ export default function save({ attributes }) {
 		flipAnimationType,
 		flipBoxDesktopSwitcher,
 		flipBoxTabletSwitcher,
-		flipBoxMobileSwitcher
+		flipBoxMobileSwitcher,
+		buttonIconSwitcherBack,
+		btnIconBack
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -53,7 +55,9 @@ export default function save({ attributes }) {
 								<div className="fb-flip-media-container">
 									<div className="fb-flip-media-wrapper">
 										{mediaSwitcher === "image" && <img src={flipMediaUrl} alt="Front media" />}
-										{mediaSwitcher === "icon" && <div className="fb-icon-wrapper" dangerouslySetInnerHTML={{ __html: icon }} />}
+										{mediaSwitcher === "icon" && (
+											<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
+										)}
 									</div>
 								</div>
 								<div className="fb-flip-box-content-wrapper">
@@ -73,8 +77,10 @@ export default function save({ attributes }) {
 													rel={flipbtnTargetUrl ? 'noopener noreferrer' : undefined}
 												>
 													<RichText.Content tagName="span" value={flip_Button_Text} />
-													{buttonIconSwitcher && btnIcon && (
-														<div className="fb-btn-icon-wrapper" dangerouslySetInnerHTML={{ __html: btnIcon }} />
+													{buttonIconSwitcher && (
+														<div className="fb-btn-icon-wrapper">
+															{renderSVG(btnIcon)}
+														</div>
 													)}
 												</a>
 											</div>
@@ -90,7 +96,9 @@ export default function save({ attributes }) {
 								<div className="fb-flip-back-media-container">
 									<div className="fb-flip-back-media-wrapper">
 										{mediaSwitcherBack === "image" && <img src={flipBackMediaUrl} alt="Back media" />}
-										{mediaSwitcherBack === "icon" && <div className="fb-icon-wrapper" dangerouslySetInnerHTML={{ __html: iconBack }} />}
+										{mediaSwitcherBack === "icon" && (
+											<div className="fb-icon-wrapper">{renderSVG(iconBack)}</div>
+										)}
 									</div>
 								</div>
 								<div className="fb-flip-back-box-content-wrapper">
@@ -110,8 +118,10 @@ export default function save({ attributes }) {
 													rel={flipBackbtnTargetUrl ? 'noopener noreferrer' : undefined}
 												>
 													<RichText.Content tagName="span" value={flipBack_Button_Text} />
-													{buttonIconSwitcher && btnIcon && (
-														<div className="fb-btn-icon-wrapper" dangerouslySetInnerHTML={{ __html: btnIcon }} />
+													{buttonIconSwitcherBack && (
+														<div className="fb-btn-icon-wrapper">
+															{renderSVG(btnIconBack)}
+														</div>
 													)}
 												</a>
 											</div>

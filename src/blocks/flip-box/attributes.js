@@ -112,12 +112,28 @@ const attributes = {
     btnIconSize: {
         type: 'object',
         default: {
-            Desktop: '0',
-            Tablet: '0',
-            Mobile: '0'
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
         }
     },
     btnIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    btnIconGap: {
+        type: 'object',
+        default: {
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
+        }
+    },
+    btnIconGapUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -131,11 +147,31 @@ const attributes = {
     },
     btnIconColor: {
         type: 'string',
-        default: '#399CFF'
+        default: '#FFFFFF'
     },
     btnIconHoverColor: {
         type: 'string',
         default: '#ffffff'
+    },
+    buttonIconRotateSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    buttonIconRotate: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "", 
+            Mobile: "",
+        }
+    },
+    buttonIconRotateHover: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     mediaIconColor: {
         type: 'string',
@@ -175,7 +211,7 @@ const attributes = {
     },
     iconBack: {
         type: 'string',
-        default: 'bolt',
+        default: 'swatchbook',
     },
     btnIcon: {
         type: 'string',
@@ -754,6 +790,10 @@ const attributes = {
         default: false,
     },
     buttonIconSwitcher: {
+        type: "boolean",
+        default: true,
+    },
+    buttonBackIconSwitcher: {
         type: "boolean",
         default: true,
     },
@@ -1592,28 +1632,28 @@ const attributes = {
     mediaBackPaddingDesktop: {
         type: "object",
         default: {
-            top: '106',
-            bottom: '32',
-            left: '',
-            right: '',
+            top: '15',
+            bottom: '15',
+            left: '15',
+            right: '15',
         },
     },
     mediaBackPaddingTablet: {
         type: "object",
         default: {
-            top: "80",
-            bottom: "26",
-            left: "0",
-            right: "0",
+            top: '15',
+            bottom: '15',
+            left: '15',
+            right: '15',
         },
     },
     mediaBackPaddingMobile: {
         type: "object",
         default: {
-            top: "60",
-            bottom: "20",
-            left: "0",
-            right: "0",
+            top: '15',
+            bottom: '15',
+            left: '15',
+            right: '15',
         },
     },
     mediaBackPaddingLink: {
@@ -1807,7 +1847,7 @@ const attributes = {
     },
     mediaClassicColor: {
         type: "string",
-        default: ""
+        default: "#F89B2E"
     },
     mediaGradientColor: {
         type: "string",
@@ -2113,15 +2153,15 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    btnIconSize: {
+    btnBackIconSize: {
         type: 'object',
         default: {
-            Desktop: '0',
-            Tablet: '0',
-            Mobile: '0'
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
         }
     },
-    btnIconSizeUnits: {
+    btnBackIconSizeUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -2129,21 +2169,57 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    btnIconColorSwitcher: {
+    btnBackIconGap: {
+        type: 'object',
+        default: {
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
+        }
+    },
+    btnBackIconGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    btnBackIconColorSwitcher: {
         type: 'string',
         default: 'normal'
     },
-    btnIconColor: {
+    btnBackIconColor: {
         type: 'string',
-        default: '#399CFF'
+        default: '#FFFFFF'
     },
-    btnIconHoverColor: {
+    btnBackIconHoverColor: {
         type: 'string',
         default: '#ffffff'
+    },
+    buttonBackIconRotateSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    buttonBackIconRotate: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "", 
+            Mobile: "",
+        }
+    },
+    buttonBackIconRotateHover: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
     },
     mediaBackIconColor: {
         type: 'string',
-        default: '#ffffff'
+        default: '#F89B2E'
     },
     mediaBackIconHoverColor: {
         type: 'string',
@@ -2460,11 +2536,11 @@ const attributes = {
     },
     icon: {
         type: 'string',
-        default: 'swatchbook',
+        default: 'bolt',
     },
-    btnIcon: {
+    btnIconBack: {
         type: 'string',
-        default: 'arrow-up-right-from-square',
+        default: 'arrow-up',
     },
     boxBgColor: {
         type: 'string',
@@ -2838,9 +2914,9 @@ const attributes = {
     subHeadingBackFontSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '18',
+            Tablet: '16',
+            Mobile: '16'
         }
     },
     subHeadingBackFontSizeUnits: {
@@ -3388,9 +3464,9 @@ const attributes = {
     buttonBackFontSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '18',
+            Tablet: '16',
+            Mobile: '16'
         }
     },
     buttonBackFontSizeUnits: {
@@ -3678,28 +3754,28 @@ const attributes = {
     mediaPaddingDesktop: {
         type: "object",
         default: {
-            top: '106',
-            bottom: '32',
-            left: '0',
-            right: '0',
+            top: '15',
+            bottom: '15',
+            left: '15',
+            right: '15',
         },
     },
     mediaPaddingTablet: {
         type: "object",
         default: {
-            top: "80",
-            bottom: "26",
-            left: "0",
-            right: "0",
+            top: '15',
+            bottom: '15',
+            left: '15',
+            right: '15',
         },
     },
     mediaPaddingMobile: {
         type: "object",
         default: {
-            top: "60",
-            bottom: "20",
-            left: "0",
-            right: "0",
+            top: '15',
+            bottom: '15',
+            left: '15',
+            right: '15',
         },
     },
     mediaPaddingLink: {
@@ -3717,8 +3793,8 @@ const attributes = {
     mediaMarginDesktop: {
         type: "object",
         default: {
-            top: '0',
-            bottom: '0',
+            top: '80',
+            bottom: '24',
             left: '0',
             right: '0',
         },
@@ -3726,8 +3802,8 @@ const attributes = {
     mediaMarginTablet: {
         type: "object",
         default: {
-            top: '0',
-            bottom: '0',
+            top: '60',
+            bottom: '20',
             left: '0',
             right: '0',
         },
@@ -3735,8 +3811,8 @@ const attributes = {
     mediaMarginMobile: {
         type: "object",
         default: {
-            top: '0',
-            bottom: '0',
+            top: '40',
+            bottom: '16',
             left: '0',
             right: '0',
         },
@@ -3853,6 +3929,349 @@ const attributes = {
         type: "boolean",
         default: true
     },
+    //Flip box Front dimensions
+    flipBoxFrontPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipBoxFrontPaddingDesktop: {
+        type: "object",
+        default: {
+            top: '32',
+            bottom: '32',
+            left: '32',
+            right: '32',
+        },
+    },
+    flipBoxFrontPaddingTablet: {
+        type: "object",
+        default: {
+            top: '32',
+            bottom: '32',
+            left: '32',
+            right: '32',
+        },
+    },
+    flipBoxFrontPaddingMobile: {
+        type: "object",
+        default: {
+            top: '24',
+            bottom: '24',
+            left: '24',
+            right: '24',
+        },
+    },
+    flipBoxFrontPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    flipBoxFrontMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipBoxFrontMarginDesktop: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBoxFrontMarginTablet: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBoxFrontMarginMobile: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBoxFrontMarginLink: {
+        type: "boolean",
+        default: true
+    },
+    flipBoxFrontBorder: {
+        type: "string",
+        default: "none",
+    },
+    flipBoxFrontBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    flipBoxFrontBorderColor: {
+        type: "string",
+    },
+    flipBoxFrontBorderHoverColor: {
+        type: "string",
+    },
+    flipBoxFrontBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipBoxFrontBorderDesktop: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    flipBoxFrontBorderTablet: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    flipBoxFrontBorderMobile: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    flipBoxFrontBorderLink: {
+        type: "boolean",
+        default: true
+    },
+    flipBoxFrontBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipBoxFrontBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: '24',
+            bottom: '24',
+            left: '24',
+            right: '24',
+        },
+    },
+    flipBoxFrontBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: '24',
+            bottom: '24',
+            left: '24',
+            right: '24',
+        },
+    },
+    flipBoxFrontBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: '24',
+            bottom: '24',
+            left: '24',
+            right: '24',
+        },
+    },
+    flipBoxFrontBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    //Flip Box Back Dimensions
+    flipBoxBackPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipBoxBackPaddingDesktop: {
+        type: "object",
+        default: {
+            top: '32',
+            bottom: '32',
+            left: '32',
+            right: '32',
+        },
+    },
+    flipBoxBackPaddingTablet: {
+        type: "object",
+        default: {
+            top: '32',
+            bottom: '32',
+            left: '32',
+            right: '32',
+        },
+    },
+    flipBoxBackPaddingMobile: {
+        type: "object",
+        default: {
+            top: '24',
+            bottom: '24',
+            left: '24',
+            right: '24',
+        },
+    },
+    flipBoxBackPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    flipBoxBackMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipBoxBackMarginDesktop: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBoxBackMarginTablet: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBoxBackMarginMobile: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    flipBoxBackMarginLink: {
+        type: "boolean",
+        default: true
+    },
+    flipBoxBackBorder: {
+        type: "string",
+        default: "none",
+    },
+    flipBoxBackBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    flipBoxBackBorderColor: {
+        type: "string",
+    },
+    flipBoxBackBorderHoverColor: {
+        type: "string",
+    },
+    flipBoxBackBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipBoxBackBorderDesktop: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    flipBoxBackBorderTablet: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    flipBoxBackBorderMobile: {
+        type: "object",
+        default: {
+            top: "0",
+            bottom: "0",
+            left: "0",
+            right: "0",
+        },
+    },
+    flipBoxBackBorderLink: {
+        type: "boolean",
+        default: true
+    },
+    flipBoxBackBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    flipBoxBackBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: '24',
+            bottom: '24',
+            left: '24',
+            right: '24',
+        },
+    },
+    flipBoxBackBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: '24',
+            bottom: '24',
+            left: '24',
+            right: '24',
+        },
+    },
+    flipBoxBackBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: '24',
+            bottom: '24',
+            left: '24',
+            right: '24',
+        },
+    },
+    flipBoxBackBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+
     flipBackMediaBackgroundImageUrl: {
         type: "string",
     },
@@ -3893,7 +4312,7 @@ const attributes = {
     },
     mediaBackClassicColor: {
         type: "string",
-        default: ""
+        default: "#FFFFFF"
     },
     mediaBackGradientColor: {
         type: "string",
