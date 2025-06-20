@@ -9,7 +9,7 @@ import parseSVG from './parseIcon';
 const { ajaxUrl, nonce } = window.FrontisBlocksData;
 
 // Assets er vitore fontawesome icon ache icons.php file a oita fetch korbo using rest api
-const url = 'http://localhost/boomdevs-new/wp-json/wp/v2/frontis-blocks/icons';
+const url = '/wp-json/wp/v2/frontis-blocks/icons';
 const token = 'b9e9d7516943744aed44d0be39217694a92784ce737e07c9e12397eca99fded0';
 
 // Function to check if data exists in localStorage

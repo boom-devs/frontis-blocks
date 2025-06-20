@@ -84,12 +84,6 @@ const GradientColorPallet = (props) => {
                                 </div>
 
                                 {clickedGradient === color?.slug && (
-                                    <Popover
-                                        anchor={gradientPopoverAnchor}
-                                        className="fb-gradient-color-popup"
-                                        placement="right"
-                                        onClose={() => setClickedGradient('')}
-                                    >
                                         <div className="fb-gradient-color-popup-content">
                                             <GradientPicker
                                                 __nextHasNoMargin
@@ -106,7 +100,6 @@ const GradientColorPallet = (props) => {
                                                 ]}
                                             />
                                         </div>
-                                    </Popover>
                                 )}
                             </div>
                         ))}

@@ -34,6 +34,23 @@ const CustomGradientColorPallet = (props) => {
 		setColors([...cloneColors])
 	}
 
+	useEffect(() => {
+		function handleClickOutside(event) {
+			const clickedInsidePopup = popupRef.current?.contains(event.target);
+			const clickedTrigger = event.target.closest('.fb-custom-color-item');
+			
+			if (!clickedInsidePopup && !clickedTrigger) {
+				setClickedGradient('');
+			}
+		}
+	
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, []);
+
+
 	return (
 		<>
 			{colors && colors.length > 0 && (
@@ -91,12 +108,6 @@ const CustomGradientColorPallet = (props) => {
 								</div>
 
 								{clickedGradient === color?.slug && (
-									<Popover
-										anchor={gradientPopoverAnchor}
-										className="fb-gradient-color-popup"
-										placement="right"
-										onClose={() => setClickedGradient('')}
-									>
 										<div className="fb-gradient-color-popup-content">
 											<GradientPicker
 												__nextHasNoMargin
@@ -113,7 +124,6 @@ const CustomGradientColorPallet = (props) => {
 												]}
 											/>
 										</div>
-									</Popover>
 								)}
 							</div>
 						))}
