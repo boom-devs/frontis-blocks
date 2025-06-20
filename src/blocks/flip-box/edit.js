@@ -79,7 +79,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		mediaSwitcherBack,
 		iconBack,
 		flipSelectedSide,
-		flipAnimationType
+		flipAnimationType,
+		buttonIconSwitcherBack,
+		btnIconBack
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -103,14 +105,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				setAttributes={setAttributes}
 				clientId={clientId}
 			/>
-
-			<BlockControls>
-				<AlignmentToolbar
-					value={contentAlignment}
-					onChange={(value) => setAttributes({ contentAlignment: value })}
-					controls={["left", "center", "right", "justify"]}
-				/>
-			</BlockControls>
 
 			<div {...blockProps}>
 				<div
@@ -234,9 +228,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 														}
 														placeholder={__("Flip Back Button", "frontis-block")}
 													/>
-													{buttonIconSwitcher && (
+													{buttonIconSwitcherBack && (
 														<div className="fb-btn-icon-wrapper">
-															{renderSVG(btnIcon)}
+															{renderSVG(btnIconBack)}
 														</div>
 													)}
 												</a>
