@@ -492,6 +492,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 	.fb-gradient-color-list {
 		.fb-custom-color-item {
+			position: relative;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
@@ -525,6 +526,16 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 						}
 					}
 				}
+			}
+			.fb-gradient-color-popup-content {
+				position: absolute;
+				top: 110%;
+				left: 0;
+				background: #fff;
+				z-index: 1;
+				border: 1px solid $neutral-color-100;
+				padding: 10px;
+				border-radius: 4px;
 			}
 		}
 	}

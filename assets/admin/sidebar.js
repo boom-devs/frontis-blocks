@@ -943,6 +943,20 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
     });
     setColors(_toConsumableArray(cloneColors));
   };
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    function handleClickOutside(event) {
+      var _popupRef$current;
+      var clickedInsidePopup = (_popupRef$current = popupRef.current) === null || _popupRef$current === void 0 ? void 0 : _popupRef$current.contains(event.target);
+      var clickedTrigger = event.target.closest('.fb-custom-color-item');
+      if (!clickedInsidePopup && !clickedTrigger) {
+        setClickedGradient('');
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return function () {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, colors && colors.length > 0 && /*#__PURE__*/React.createElement("div", {
     className: "fb-color-panel ".concat(wrapperClass)
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
@@ -1016,14 +1030,7 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
       d: "M9.6665 11.5V7.5",
       stroke: "#E43242",
       "stroke-linecap": "round"
-    })))), clickedGradient === (color === null || color === void 0 ? void 0 : color.slug) && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
-      anchor: gradientPopoverAnchor,
-      className: "fb-gradient-color-popup",
-      placement: "right",
-      onClose: function onClose() {
-        return setClickedGradient('');
-      }
-    }, /*#__PURE__*/React.createElement("div", {
+    })))), clickedGradient === (color === null || color === void 0 ? void 0 : color.slug) && /*#__PURE__*/React.createElement("div", {
       className: "fb-gradient-color-popup-content"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.GradientPicker, {
       __nextHasNoMargin: true,
@@ -1038,7 +1045,7 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
         gradient: color === null || color === void 0 ? void 0 : color.color,
         slug: color === null || color === void 0 ? void 0 : color.slug
       }]
-    }))));
+    })));
   }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CustomGradientColorPallet);
@@ -1141,6 +1148,15 @@ var generateColorsVariables = function generateColorsVariables(colors, deviceTyp
     styleTag.id = "global-colors";
     iframeDocument.head.appendChild(styleTag);
   }
+
+  // ⬇️ Add or update <style> in the main document as well
+  var mainStyleTag = document.getElementById("global-colors");
+  if (!mainStyleTag) {
+    mainStyleTag = document.createElement("style");
+    mainStyleTag.id = "global-colors";
+    document.head.appendChild(mainStyleTag);
+  }
+  mainStyleTag.textContent = cssVariables;
 
   // Instead of appending, we replace the content
   styleTag.textContent = cssVariables;
@@ -1589,14 +1605,7 @@ var GradientColorPallet = function GradientColorPallet(props) {
       d: "M9.6665 11.5V7.5",
       stroke: "#E43242",
       "stroke-linecap": "round"
-    })))), clickedGradient === (color === null || color === void 0 ? void 0 : color.slug) && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Popover, {
-      anchor: gradientPopoverAnchor,
-      className: "fb-gradient-color-popup",
-      placement: "right",
-      onClose: function onClose() {
-        return setClickedGradient('');
-      }
-    }, /*#__PURE__*/React.createElement("div", {
+    })))), clickedGradient === (color === null || color === void 0 ? void 0 : color.slug) && /*#__PURE__*/React.createElement("div", {
       className: "fb-gradient-color-popup-content"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.GradientPicker, {
       __nextHasNoMargin: true,
@@ -1611,7 +1620,7 @@ var GradientColorPallet = function GradientColorPallet(props) {
         gradient: color === null || color === void 0 ? void 0 : color.color,
         slug: color === null || color === void 0 ? void 0 : color.slug
       }]
-    }))));
+    })));
   }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GradientColorPallet);
@@ -4305,7 +4314,19 @@ function FrontisBlocksSidebar() {
     className: "fb-panel-heading-wrapper"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "fb-section-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gradient", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gradient", "frontis-blocks"))), /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_6__["default"]
+  // title={__("Gradient Colors", "frontis-blocks")}
+  , {
+    colors: gradientColors,
+    setColor: setGradientColor,
+    setColors: setGradientColors,
+    wrapperClass: "fb-gradient-color-panel",
+    resetAction: true
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-panel-heading-wrapper"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "fb-section-title"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Custom Gradient", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
     className: "add-custom-color"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
     className: "add-custom-color-btn",
@@ -4322,15 +4343,7 @@ function FrontisBlocksSidebar() {
     strokeWidth: "1.5",
     strokeLinecap: "round",
     strokeLinejoin: "round"
-  })))))), /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_6__["default"]
-  // title={__("Gradient Colors", "frontis-blocks")}
-  , {
-    colors: gradientColors,
-    setColor: setGradientColor,
-    setColors: setGradientColors,
-    wrapperClass: "fb-gradient-color-panel",
-    resetAction: true
-  }), customGradientColors.length > 0 && /*#__PURE__*/React.createElement(_components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  })))))), customGradientColors.length > 0 && /*#__PURE__*/React.createElement(_components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_8__["default"], {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom Gradient Colors", "frontis-blocks"),
     colors: customGradientColors,
     setColor: setCustomGradientColor,
