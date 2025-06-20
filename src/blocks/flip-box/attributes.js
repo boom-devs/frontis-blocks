@@ -128,9 +128,9 @@ const attributes = {
     btnIconGap: {
         type: 'object',
         default: {
-            Desktop: '16',
-            Tablet: '16',
-            Mobile: '16'
+            Desktop: '8',
+            Tablet: '8',
+            Mobile: '8'
         }
     },
     btnIconGapUnits: {
@@ -147,11 +147,11 @@ const attributes = {
     },
     btnIconColor: {
         type: 'string',
-        default: '#FFFFFF'
+        default: '#555E72'
     },
     btnIconHoverColor: {
         type: 'string',
-        default: '#ffffff'
+        default: ''
     },
     buttonIconRotateSwitcher: {
         type: 'string',
@@ -179,7 +179,7 @@ const attributes = {
     },
     mediaIconHoverColor: {
         type: 'string',
-        default: "#399CFF"
+        default: ""
     },
     mediaIconColorSwitcher: {
         type: "string",
@@ -215,7 +215,7 @@ const attributes = {
     },
     btnIcon: {
         type: 'string',
-        default: 'arrow-up-right-from-square',
+        default: 'arrow-right',
     },
     boxBgColor: {
         type: 'string',
@@ -389,7 +389,7 @@ const attributes = {
     },
     Heading_Hover_Color: {
         type: 'string',
-        default: "#ffffff"
+        default: ""
     },
     Heading_Background_Color: {
         type: 'string',
@@ -601,9 +601,9 @@ const attributes = {
     subHeadingFontSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '18',
+            Tablet: '18',
+            Mobile: '18'
         }
     },
     subHeadingFontSizeUnits: {
@@ -672,7 +672,7 @@ const attributes = {
     },
     SubHeadingHoverColor: {
         type: "string",
-        default: "#ffffff"
+        default: ""
     },
     Sub_Heading_Text: {
         type: "string",
@@ -1341,9 +1341,9 @@ const attributes = {
     buttonFontSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '18',
+            Tablet: '18',
+            Mobile: '18'
         }
     },
     buttonFontSizeUnits: {
@@ -1409,11 +1409,11 @@ const attributes = {
     },
     buttonTextColor: {
         type: "string",
-        default: '#399CFF'
+        default: '#555E72'
     },
     buttonTextHoverColor: {
         type: "string",
-        default: "#ffffff"
+        default: ""
     },
     buttonBgColorSwitcher: {
         type: "string",
@@ -2172,9 +2172,9 @@ const attributes = {
     btnBackIconGap: {
         type: 'object',
         default: {
-            Desktop: '16',
-            Tablet: '16',
-            Mobile: '16'
+            Desktop: '8',
+            Tablet: '8',
+            Mobile: '8'
         }
     },
     btnBackIconGapUnits: {
@@ -2195,7 +2195,7 @@ const attributes = {
     },
     btnBackIconHoverColor: {
         type: 'string',
-        default: '#ffffff'
+        default: ''
     },
     buttonBackIconRotateSwitcher: {
         type: 'string',
@@ -2204,9 +2204,9 @@ const attributes = {
     buttonBackIconRotate: {
         type: 'object',
         default: {
-            Desktop: "",
-            Tablet: "", 
-            Mobile: "",
+            Desktop: "45",
+            Tablet: "45", 
+            Mobile: "45",
         }
     },
     buttonBackIconRotateHover: {
@@ -2223,7 +2223,7 @@ const attributes = {
     },
     mediaBackIconHoverColor: {
         type: 'string',
-        default: "#399CFF"
+        default: ""
     },
     mediaBackIconColorSwitcher: {
         type: "string",
@@ -2702,7 +2702,7 @@ const attributes = {
     },
     headingBackHoverColor: {
         type: 'string',
-        default: "#ffffff"
+        default: ""
     },
     headingBack_Background_Color: {
         type: 'string',
@@ -2985,7 +2985,7 @@ const attributes = {
     },
     subHeadingBackHoverColor: {
         type: "string",
-        default: "#ffffff"
+        default: ""
     },
     subHeadingBack_Text: {
         type: "string",
@@ -3536,7 +3536,7 @@ const attributes = {
     },
     buttonBackTextHoverColor: {
         type: "string",
-        default: "#ffffff"
+        default: ""
     },
     buttonBackBgColorSwitcher: {
         type: "string",
