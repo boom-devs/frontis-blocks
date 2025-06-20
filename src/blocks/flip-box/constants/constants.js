@@ -14,6 +14,21 @@ export const SELECTED_MODE = [
 	{ label: __("Back", "frontis-blocks"), value: "back" },
 ];
 
+export const SELECTED_SIDE = [
+	{ label: __("Front", "frontis-blocks"), value: "front" },
+	{ label: __("Back", "frontis-blocks"), value: "back" },
+];
+
+export const FLIP_ANIMATION = [
+	{ label: __("Flip Left", "frontis-blocks"), value: "flip-left" },
+	{ label: __("Flip Right", "frontis-blocks"), value: "flip-right" },
+	{ label: __("Flip Up", "frontis-blocks"), value: "flip-up" },
+	{ label: __("Flip Down", "frontis-blocks"), value: "flip-down" },
+	{ label: __("Zoom in", "frontis-blocks"), value: "zoom-in" },
+	{ label: __("Zoom out", "frontis-blocks"), value: "zoom-out" },
+	{ label: __("Fade", "frontis-blocks"), value: "fade" },
+];
+
 export const mediaType = [
 	{ label: __("Icon", "frontis-block"), value: "icon" },
 	{ label: __("Image", "frontis-block"), value: "image" },
