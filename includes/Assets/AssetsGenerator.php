@@ -106,9 +106,8 @@ class AssetsGenerator {
     public static function generate_root_css($color_data, $typography_data) {
 
         $global_colors = "";
-        $root_css = "";
 
-        // Process base colors
+		// Process base colors
         if (!empty($color_data[0])) {
             $global_colors .= "/* Base Colors */\n";
             foreach ($color_data[0] as $color) {
@@ -167,129 +166,124 @@ class AssetsGenerator {
             $heading6Styles = '';
             $combinedHeadingStyles = '';
 
-            // Process global properties for each element
+			$array_keys = array_keys($typography_data);
+			foreach($array_keys as $key) {
+				 if (!isset($typography_data[$key])) continue;
 
-            $array_keys = array_keys($typography_data);
-            if($typography_data) {
-                foreach($array_keys as $key) {
-                    if (!isset($typography_data[$key])) continue;
+				 // Process global properties
+				 $globalProps = ['fontFamily', 'fontWeight', 'fontStyle', 'textTransform', 'textDecoration'];
+				 foreach($globalProps as $prop) {
+					 if (isset($typography_data[$key][$prop]['value'])) {
+						 $variable = $typography_data[$key][$prop]['variable'];
+						 $cssProperty = strtolower(preg_replace('/([A-Z])/', '-$1', $prop));
+						 $styleValue = "var({$variable})";
+						 $rootStyles .= "{$variable}: {$typography_data[$key][$prop]['value']};\n";
 
-                    // Process global properties
-                    $globalProps = ['fontFamily', 'fontWeight', 'fontStyle', 'textTransform', 'textDecoration'];
-                    foreach($globalProps as $prop) {
-                        if (isset($typography_data[$key][$prop]['value'])) {
-                            $variable = $typography_data[$key][$prop]['variable'];
-                            $cssProperty = strtolower(preg_replace('/([A-Z])/', '-$1', $prop));
-                            $styleValue = "var({$variable})";
-                            $rootStyles .= "{$variable}: {$typography_data[$key][$prop]['value']};\n";
+						 switch($key) {
+							 case 'body':
+								 $paragraphStyles .= "{$cssProperty}: {$styleValue};\n";
+								 break;
+							 case 'link':
+								 $linkStyles .= "{$cssProperty}: {$styleValue};\n";
+								 break;
+							 case 'button':
+								 $buttonStyles .= "{$cssProperty}: {$styleValue};\n";
+								 break;
+							 case 'captions':
+								 $captionStyles .= "{$cssProperty}: {$styleValue};\n";
+								 break;
+							 case 'all':
+								 $combinedHeadingStyles .= "{$cssProperty}: {$styleValue};\n";
+								 break;
+							 case 'h1':
+								 $heading1Styles .= "{$cssProperty}: {$styleValue};\n";
+								 break;
+							 case 'h2':
+								 $heading2Styles .= "{$cssProperty}: {$styleValue};\n";
+								 break;
+							 case 'h3':
+								 $heading3Styles .= "{$cssProperty}: {$styleValue};\n";
+								 break;
+							 case 'h4':
+								 $heading4Styles .= "{$cssProperty}: {$styleValue};\n";
+								 break;
+							 case 'h5':
+								 $heading5Styles .= "{$cssProperty}: {$styleValue};\n";
+								 break;
+							 case 'h6':
+								 $heading6Styles .= "{$cssProperty}: {$styleValue};\n";
+								 break;
+						 }
+					 }
+				 }
 
-                            switch($key) {
-                                case 'body':
-                                    $paragraphStyles .= "{$cssProperty}: {$styleValue};\n";
-                                    break;
-                                case 'link':
-                                    $linkStyles .= "{$cssProperty}: {$styleValue};\n";
-                                    break;
-                                case 'button':
-                                    $buttonStyles .= "{$cssProperty}: {$styleValue};\n";
-                                    break;
-                                case 'captions':
-                                    $captionStyles .= "{$cssProperty}: {$styleValue};\n";
-                                    break;
-                                case 'all':
-                                    $combinedHeadingStyles .= "{$cssProperty}: {$styleValue};\n";
-                                    break;
-                                case 'h1':
-                                    $heading1Styles .= "{$cssProperty}: {$styleValue};\n";
-                                    break;
-                                case 'h2':
-                                    $heading2Styles .= "{$cssProperty}: {$styleValue};\n";
-                                    break;
-                                case 'h3':
-                                    $heading3Styles .= "{$cssProperty}: {$styleValue};\n";
-                                    break;
-                                case 'h4':
-                                    $heading4Styles .= "{$cssProperty}: {$styleValue};\n";
-                                    break;
-                                case 'h5':
-                                    $heading5Styles .= "{$cssProperty}: {$styleValue};\n";
-                                    break;
-                                case 'h6':
-                                    $heading6Styles .= "{$cssProperty}: {$styleValue};\n";
-                                    break;
-                            }
-                        }
-                    }
+				 // Process responsive properties
+				 $responsiveProps = ['fontSize', 'letterSpacing', 'lineHeight'];
+				 foreach($responsiveProps as $prop) {
+					 if (isset($typography_data[$key][$prop]['value'])) {
+						 $cssProperty = strtolower(preg_replace('/([A-Z])/', '-$1', $prop));
+						 $cssVar = $typography_data[$key][$prop]['variable'];
+						 // $rootStyles .= "{$cssVar}: {$data[$key][$prop]['value']};\n";
 
-                    // Process responsive properties
-                    $responsiveProps = ['fontSize', 'letterSpacing', 'lineHeight'];
-                    foreach($responsiveProps as $prop) {
-                        if (isset($typography_data[$key][$prop]['value'])) {
-                            $cssProperty = strtolower(preg_replace('/([A-Z])/', '-$1', $prop));
-                            $cssVar = $typography_data[$key][$prop]['variable'];
-                            // $rootStyles .= "{$cssVar}: {$data[$key][$prop]['value']};\n";
+						 // Desktop
+						 if (!empty($typography_data[$key][$prop]['value']['Desktop'])) {
+							 $value = $typography_data[$key][$prop]['value']['Desktop'];
+							 $unit = $typography_data[$key][$prop]['unit']['Desktop'];
+							 $desktopStyles .= "{$cssVar}: " . Helper::create_value_with_unit($value, $unit) . ";\n";
 
-                            // Desktop
-                            if (!empty($typography_data[$key][$prop]['value']['Desktop'])) {
-                                $value = $typography_data[$key][$prop]['value']['Desktop'];
-                                $unit = $typography_data[$key][$prop]['unit']['Desktop'];
-                                $desktopStyles .= "{$cssVar}: " . Helper::create_value_with_unit($value, $unit) . ";\n";
+							 switch($key) {
+								 case 'body':
+									 $paragraphStyles .= "{$cssProperty}: var({$cssVar});\n";
+									 break;
+								 case 'link':
+									 $linkStyles .= "{$cssProperty}: var({$cssVar});\n";
+									 break;
+								 case 'button':
+									 $buttonStyles .= "{$cssProperty}: var({$cssVar});\n";
+									 break;
+								 case 'captions':
+									 $captionStyles .= "{$cssProperty}: var({$cssVar});\n";
+									 break;
+								 case 'all':
+									 $combinedHeadingStyles .= "{$cssProperty}: var({$cssVar});\n";
+									 break;
+								 case 'h1':
+									 $heading1Styles .= "{$cssProperty}: var({$cssVar});\n";
+									 break;
+								 case 'h2':
+									 $heading2Styles .= "{$cssProperty}: var({$cssVar});\n";
+									 break;
+								 case 'h3':
+									 $heading3Styles .= "{$cssProperty}: var({$cssVar});\n";
+									 break;
+								 case 'h4':
+									 $heading4Styles .= "{$cssProperty}: var({$cssVar});\n";
+									 break;
+								 case 'h5':
+									 $heading5Styles .= "{$cssProperty}: var({$cssVar});\n";
+									 break;
+								 case 'h6':
+									 $heading6Styles .= "{$cssProperty}: var({$cssVar});\n";
+									 break;
+							 }
+						 }
 
-                                switch($key) {
-                                    case 'body':
-                                        $paragraphStyles .= "{$cssProperty}: var({$cssVar});\n";
-                                        break;
-                                    case 'link':
-                                        $linkStyles .= "{$cssProperty}: var({$cssVar});\n";
-                                        break;
-                                    case 'button':
-                                        $buttonStyles .= "{$cssProperty}: var({$cssVar});\n";
-                                        break;
-                                    case 'captions':
-                                        $captionStyles .= "{$cssProperty}: var({$cssVar});\n";
-                                        break;
-                                    case 'all':
-                                        $combinedHeadingStyles .= "{$cssProperty}: var({$cssVar});\n";
-                                        break;
-                                    case 'h1':
-                                        $heading1Styles .= "{$cssProperty}: var({$cssVar});\n";
-                                        break;
-                                    case 'h2':
-                                        $heading2Styles .= "{$cssProperty}: var({$cssVar});\n";
-                                        break;
-                                    case 'h3':
-                                        $heading3Styles .= "{$cssProperty}: var({$cssVar});\n";
-                                        break;
-                                    case 'h4':
-                                        $heading4Styles .= "{$cssProperty}: var({$cssVar});\n";
-                                        break;
-                                    case 'h5':
-                                        $heading5Styles .= "{$cssProperty}: var({$cssVar});\n";
-                                        break;
-                                    case 'h6':
-                                        $heading6Styles .= "{$cssProperty}: var({$cssVar});\n";
-                                        break;
-                                }
-                            }
+						 // Tablet
+						 if (!empty($typography_data[$key][$prop]['value']['Tablet'])) {
+							 $value = $typography_data[$key][$prop]['value']['Tablet'];
+							 $unit = $typography_data[$key][$prop]['unit']['Tablet'];
+							 $tabletStyles .= "{$cssVar}: " . Helper::create_value_with_unit($value, $unit) . ";\n";
+						 }
 
-                            // Tablet
-                            if (!empty($typography_data[$key][$prop]['value']['Tablet'])) {
-                                $value = $typography_data[$key][$prop]['value']['Tablet'];
-                                $unit = $typography_data[$key][$prop]['unit']['Tablet'];
-                                $tabletStyles .= "{$cssVar}: " . Helper::create_value_with_unit($value, $unit) . ";\n";
-                            }
-
-                            // Mobile
-                            if (!empty($typography_data[$key][$prop]['value']['Mobile'])) {
-                                $value = $typography_data[$key][$prop]['value']['Mobile'];
-                                $unit = $typography_data[$key][$prop]['unit']['Mobile'];
-                                $mobileStyles .= "{$cssVar}: " . Helper::create_value_with_unit($value, $unit) . ";\n";
-                            }
-                        }
-                    }
-                }
-            }
-
+						 // Mobile
+						 if (!empty($typography_data[$key][$prop]['value']['Mobile'])) {
+							 $value = $typography_data[$key][$prop]['value']['Mobile'];
+							 $unit = $typography_data[$key][$prop]['unit']['Mobile'];
+							 $mobileStyles .= "{$cssVar}: " . Helper::create_value_with_unit($value, $unit) . ";\n";
+						 }
+					 }
+				 }
+			 }
 
             $heading_grouped = "
                 " . ($heading1Styles !== '' ? "
