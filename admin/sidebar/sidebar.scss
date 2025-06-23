@@ -573,6 +573,17 @@ svg#fb-global-panel-icon {
 	padding-left: 12px;
 }
 
+button.fb-custom-color-btn {
+    background-color: #3991FF;
+    color: #FFF;
+    padding: 10px 16px;
+    margin-top: 16px;
+}
+button.fb-custom-color-btn:hover {
+    background-color: #3991FF;
+    color: #FFF !important;
+}
+
 // .fb-global-color-panel, .fb-custom-color-panel {
 // 	.components-popover__content {
 // 		width: 230px;

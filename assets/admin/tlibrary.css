@@ -1172,4 +1172,16 @@ svg#fb-global-panel-icon {
   line-height: 16px;
 }
 
+button.fb-custom-color-btn {
+  background-color: #3991FF;
+  color: #FFF;
+  padding: 10px 16px;
+  margin-top: 16px;
+}
+
+button.fb-custom-color-btn:hover {
+  background-color: #3991FF;
+  color: #FFF !important;
+}
+
 /*# sourceMappingURL=tlibrary.css.map*/
