@@ -1,0 +1,110 @@
+@import '../../scss/variables';
+
+.fb-template-library-store-header {
+    padding: 24px;
+    border-bottom: 1px solid #E1E3E8;
+
+    .fb-template-library-store-header-container {
+        display: flex;
+        align-items: center;
+
+        .fb-template-library-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            span {
+                font-weight: 700;
+                font-size: 30px;
+            }
+        }
+
+        .fb-template-library-tabs {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 538px;
+            gap: 20px;
+
+            span {
+                color: #555E72;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 22px;
+            }
+
+            .single-tab {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+
+                &.active {
+                    position: relative;
+                    span {
+                        color: $neutral-color-950;
+                    }
+
+                    &:after {
+                        content: "";
+                        background: $primary-color;
+                        bottom: -36px;
+                        height: 2px;
+                        left: 0;
+                        position: absolute;
+                        width: 100%;
+                    }
+                }
+            }
+
+            button {
+                border: none;
+                background: none;
+                cursor: pointer;
+                z-index: 10;
+            }
+        }
+
+        .fb-template-library-header-right {
+            display: flex;
+            align-items: center;
+            margin-left: 272px;
+            gap: 24px;
+            z-index: 10;
+
+            .fb-template-library-search-wrapper {
+                .fb-search-input-wrapper {
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                    height: 46px;
+
+                    svg {
+                        position: absolute;
+                        left: 15px;
+                    }
+
+                    input {
+                        font-weight: 500;
+                        font-size: 16px;
+                        line-height: 22px;
+                        color: $neutral-color;
+                        padding: 12px;
+                        padding-left: 36px;
+                        border-radius: 4px;
+                        border: 1px solid $neutral-color-100;
+                    }
+                }
+            }
+
+            .fb-template-library-user-profile {
+                padding: 10px;
+                border: 1px solid $neutral-color-100;
+                border-radius: 50px;
+                line-height: 0;
+                cursor: pointer;
+            }
+        }
+    }
+}
