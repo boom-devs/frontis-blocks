@@ -8,7 +8,7 @@
   \******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"pattern1","title":"Pattern 1","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Pattern 1 content here"},{"id":"pattern2","title":"Pattern 2","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Pattern 2 content here"},{"id":"pattern3","title":"Pattern 3","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Pattern 3 content here"},{"id":"pattern4","title":"Pattern 4","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Pattern 4 content here"},{"id":"pattern5","title":"Pattern 5","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Pattern 5 content here"},{"id":"pattern6","title":"Pattern 6","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Pattern 6 content here"},{"id":"pattern15","title":"Pattern 15","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Pattern 15 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[{"id":"pattern1","title":"Pattern 1","image":"pattern1.jpg","content":"Pattern 1 content here"}]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"page1","title":"Page 1","image":"Page.jpg","content":"Page 1 content here"},{"id":"page2","title":"Page 2","image":"Page.jpg","content":"Page 2 content here"},{"id":"page3","title":"Pattern 3","image":"Page.jpg","content":"Page 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"item1","title":"Item 1","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Site 1 content here"},{"id":"item2","title":"Item 2","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Site 2 content here"},{"id":"item3","title":"Item 3","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Site 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"template-library":{"name":"Template Library","categories":[{"id":"all","name":"All","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]}]}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"pattern1","title":"Pattern 1","image":"http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-1.png","content":"Pattern 1 content here"},{"id":"pattern2","title":"Pattern 2","image":"http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-3.png","content":"Pattern 2 content here"},{"id":"pattern3","title":"Pattern 3","image":"http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-2.png","content":"Pattern 3 content here"},{"id":"pattern4","title":"Pattern 4","image":"http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-1.png","content":"Pattern 4 content here"},{"id":"pattern5","title":"Pattern 5","image":"http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-3.png","content":"Pattern 5 content here"},{"id":"pattern6","title":"Pattern 6","image":"http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-1.png","content":"Pattern 6 content here"},{"id":"pattern15","title":"Pattern 15","image":"http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-3.png","content":"Pattern 15 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[{"id":"pattern1","title":"Pattern 1","image":"pattern1.jpg","content":"Pattern 1 content here"}]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"page1","title":"Page 1","image":"Page.jpg","content":"Page 1 content here"},{"id":"page2","title":"Page 2","image":"Page.jpg","content":"Page 2 content here"},{"id":"page3","title":"Pattern 3","image":"Page.jpg","content":"Page 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"item1","title":"Item 1","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Site 1 content here"},{"id":"item2","title":"Item 2","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Site 2 content here"},{"id":"item3","title":"Item 3","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Site 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"template-library":{"name":"Template Library","categories":[{"id":"all","name":"All","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]}]}}}');
 
 /***/ }),
 
@@ -110,7 +110,7 @@ var TemplateCard = function TemplateCard(_ref) {
   }, []);
   var handleDemo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     // Handle demo functionality
-    console.log('Demo clicked for:', id);
+    console.log("Demo clicked for:", id);
   }, [id]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card",
@@ -146,13 +146,13 @@ var TemplateCard = function TemplateCard(_ref) {
   })))))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card-content"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-badge ".concat(isPro ? 'pro' : 'free')
-  }, isPro ? 'PRO' : 'FREE'), /*#__PURE__*/React.createElement("h3", {
+    className: "fb-template-badge ".concat(isPro ? "pro" : "free")
+  }, isPro ? "PRO" : "FREE"), /*#__PURE__*/React.createElement("h3", {
     className: "fb-template-title"
   }, title), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-actions"
   }, /*#__PURE__*/React.createElement("button", {
-    className: "fb-import-btn ".concat(isLoading ? 'loading' : ''),
+    className: "fb-import-btn ".concat(isLoading ? "loading" : ""),
     onClick: !isLoading ? handleFullSiteImport : null,
     disabled: isLoading
   }, isLoading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Importing..."), /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -177,13 +177,14 @@ var TemplateCard = function TemplateCard(_ref) {
   })))), /*#__PURE__*/React.createElement("button", {
     className: "fb-favorite-btn"
   }, /*#__PURE__*/React.createElement("svg", {
-    width: "16",
-    height: "16",
-    viewBox: "0 0 16 16",
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "18",
+    height: "18",
+    viewBox: "0 0 18 18",
     fill: "none"
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M8 3.67l-.36.35c.003.003.006.005.009.008L8 3.67zm.91 1.69c.195.195.51.195.705 0s.195-.51 0-.705l-.705.705zm-2.7 6.82c-1.01-.8-2.13-1.59-2.99-2.58-.84-.97-1.45-2.08-1.45-3.51h-1c0 1.78.75 3.15 1.7 4.23.93 1.06 2.14 1.94 3.1 2.69l.64-.83zm-4.44-6.09c0-1.43.81-2.63 1.89-3.14 1.05-.5 2.47-.37 3.74.98l.71-.71c-1.63-1.69-3.52-1.96-4.97-1.27-1.46.69-2.37 2.21-2.37 4.14h1zm3.61 7.74c.34.27.7.54 1.04.74.34.21.73.38 1.08.38v-1c-.21 0-.44-.08-.72-.25-.28-.17-.57-.4-.91-.67l-.49.8zm4.22 0c.95-.84 2.14-1.72 3.07-2.78.92-1.08 1.65-2.45 1.65-4.23h-1c0 1.43-.6 2.54-1.45 3.51-.86.99-1.98 1.78-2.99 2.58l.72.92zm4.72-7.01c0-1.93-.91-3.45-2.37-4.14-1.45-.69-3.34-.42-4.97 1.27l.71.71c1.27-1.35 2.69-1.48 3.74-.98 1.08.51 1.89 1.71 1.89 3.14h1zm-4.72 7.01c-.34.27-.63.5-.91.67-.28.17-.51.25-.72.25v1c.35 0 .74-.17 1.08-.38.34-.2.7-.47 1.04-.74l-.49-.8zm-1.63-7.74l1.33 1.33.705-.705-1.33-1.33-.705.705z",
-    fill: "currentColor"
+    d: "M9 4.12553L8.5947 4.5156C8.59725 4.51821 8.5998 4.52079 8.60235 4.52335L9 4.12553ZM10.1024 6.02281C10.322 6.24244 10.6782 6.24237 10.8978 6.02266C11.1175 5.80296 11.1174 5.4468 10.8976 5.22717L10.1024 6.02281ZM7.06954 13.7415C5.93279 12.8454 4.6898 11.9703 3.70372 10.8599C2.73692 9.77121 2.0625 8.50093 2.0625 6.85288H0.9375C0.9375 8.85201 1.77038 10.3771 2.86254 11.6069C3.93542 12.815 5.30308 13.7815 6.37306 14.625L7.06954 13.7415ZM2.0625 6.85288C2.0625 5.23973 2.97403 3.88695 4.21827 3.3182C5.42705 2.76567 7.05125 2.91199 8.5947 4.5156L9.4053 3.73545C7.57387 1.8327 5.44807 1.5191 3.75057 2.29503C2.08853 3.05475 0.9375 4.81883 0.9375 6.85288H2.0625ZM6.37306 14.625C6.75724 14.9278 7.16966 15.2508 7.5876 15.495C8.00543 15.7391 8.4822 15.9376 9 15.9376V14.8126C8.7678 14.8126 8.49458 14.722 8.1552 14.5237C7.81598 14.3254 7.46406 14.0525 7.06954 13.7415L6.37306 14.625ZM11.6269 14.625C12.6969 13.7815 14.0646 12.815 15.1375 11.6069C16.2296 10.3771 17.0625 8.85201 17.0625 6.85288H15.9375C15.9375 8.50093 15.2631 9.77121 14.2963 10.8599C13.3102 11.9703 12.0672 12.8454 10.9305 13.7415L11.6269 14.625ZM17.0625 6.85288C17.0625 4.81883 15.9115 3.05475 14.2494 2.29503C12.5519 1.5191 10.4261 1.8327 8.5947 3.73545L9.4053 4.5156C10.9487 2.91199 12.5729 2.76567 13.7817 3.3182C15.026 3.88695 15.9375 5.23973 15.9375 6.85288H17.0625ZM10.9305 13.7415C10.5359 14.0525 10.184 14.3254 9.8448 14.5237C9.50543 14.722 9.2322 14.8126 9 14.8126V15.9376C9.5178 15.9376 9.99457 15.7391 10.4124 15.495C10.8304 15.2508 11.2427 14.9278 11.6269 14.625L10.9305 13.7415ZM8.60235 4.52335L10.1024 6.02281L10.8976 5.22717L9.39765 3.72771L8.60235 4.52335Z",
+    fill: "#050607"
   })))))), /*#__PURE__*/React.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_1__.ToastContainer, {
     position: "top-right",
     autoClose: 3000,
@@ -596,13 +597,13 @@ var PatternLibraryButton = function PatternLibraryButton() {
   // State for active tab
   var schema = _data_json__WEBPACK_IMPORTED_MODULE_9__.$schema;
   var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(Object.keys(schema)[0]),
-    _useState10 = _slicedToArray(_useState9, 2),
-    activeTab = _useState10[0],
-    setActiveTab = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    _useState12 = _slicedToArray(_useState11, 2),
-    activeCategory = _useState12[0],
-    setActiveCategory = _useState12[1];
+    _useState0 = _slicedToArray(_useState9, 2),
+    activeTab = _useState0[0],
+    setActiveTab = _useState0[1];
+  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState10 = _slicedToArray(_useState1, 2),
+    activeCategory = _useState10[0],
+    setActiveCategory = _useState10[1];
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
     onClick: function onClick() {
       return handleClick();

@@ -11,44 +11,44 @@
                         {
                             "id": "pattern1",
                             "title": "Pattern 1",
-                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp",
+                            "image": "http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-1.png",
                             "content": "Pattern 1 content here"
                         },
                         {
                             "id": "pattern2",
                             "title": "Pattern 2",
-                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp",
+                            "image": "http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-3.png",
                             "content": "Pattern 2 content here"
                         },
                         {
                             "id": "pattern3",
                             "title": "Pattern 3",
-                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp",
+                            "image": "http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-2.png",
                             "content": "Pattern 3 content here"
                         },
                         {
                             "id": "pattern4",
                             "title": "Pattern 4",
-                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp",
+                            "image": "http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-1.png",
                             "content": "Pattern 4 content here"
                         },
                         {
                             "id": "pattern5",
                             "title": "Pattern 5",
-                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp",
+                            "image": "http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-3.png",
                             "content": "Pattern 5 content here"
                         },
                         {
                             "id": "pattern6",
                             "title": "Pattern 6",
-                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp",
+                            "image": "http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-1.png",
                             "content": "Pattern 6 content here"
                         },
                         
                         {
                             "id": "pattern15",
                             "title": "Pattern 15",
-                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp",
+                            "image": "http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-3.png",
                             "content": "Pattern 15 content here"
                         }
                     ]
