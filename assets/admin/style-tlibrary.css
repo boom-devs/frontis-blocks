@@ -3,6 +3,7 @@
   \***********************************************************************************************************************************************************************************************************************************************************************************************/
 .fb-template-library-store-header {
   padding: 24px;
+  background: #FFFFFF;
   border-bottom: 1px solid #E1E3E8;
 }
 .fb-template-library-store-header .fb-template-library-store-header-container {
@@ -120,6 +121,7 @@
 .fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar {
   flex: 1;
   padding: 32px 0 0 0;
+  background: #FFFFFF;
   border-right: 1px solid #E1E3E8;
   height: 100vh;
   position: sticky;
@@ -210,26 +212,27 @@
   background: none;
   width: 100%;
 }
-.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content {
+
+.fb-template-library-store-content {
   flex: 6;
   padding: 24px 0 0 24px;
 }
-.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards {
+.fb-template-library-store-content .fb-template-library-cards {
   display: flex;
   gap: 30px;
   flex-wrap: wrap;
 }
-.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card {
-  background: #fff;
+.fb-template-library-store-content .fb-template-library-cards .fb-template-library-card {
+  background: #FFFFFF;
   border-radius: 14px;
 }
-.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content {
+.fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content {
   padding: 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-import {
+.fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-import {
   display: flex;
   align-items: center;
   padding: 8px 12px;
@@ -238,30 +241,30 @@
   background: #399CFF;
   cursor: pointer;
 }
-.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-import span {
-  color: #ffffff;
+.fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-import span {
+  color: #FFFFFF;
   font-size: 16px;
   font-weight: 500;
   line-height: 22px;
 }
-.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save {
+.fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save {
   display: flex;
   align-items: center;
   gap: 14px;
 }
-.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save .save-wrapper {
+.fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save .save-wrapper {
   display: flex;
   align-items: center;
   gap: 6px;
   cursor: pointer;
 }
-.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save .save-wrapper span {
+.fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save .save-wrapper span {
   color: #555E72;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
 }
-.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save .favourite-wrapper {
+.fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save .favourite-wrapper {
   display: flex;
   align-items: center;
   padding: 10px;

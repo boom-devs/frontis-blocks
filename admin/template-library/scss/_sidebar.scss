@@ -4,7 +4,8 @@
     .fb-template-library-store-sidebar {
         flex: 1;
         padding: 32px 0 0 0;
-        border-right: 1px solid #E1E3E8;
+        background: $white-color;
+        border-right: 1px solid $neutral-color-100;
         height: 100vh;
         position: sticky;
         top: 0;
@@ -56,11 +57,11 @@
                 align-items: center;
                 padding: 15px 16px;
                 border: none;
-                border-bottom: 1px solid #E1E3E8;
+                border-bottom: 1px solid $neutral-color-100;
                 cursor: pointer;
 
                 span {
-                    color: #555E72;
+                    color: $neutral-color-600;
                     font-size: $large-font-size;
                     font-style: normal;
                     font-weight: 500;
@@ -95,7 +96,7 @@
                     }
 
                     span.fb-template-library-store-sidebar-tab-name {
-                        color: #399CFF;
+                        color: $primary-color-base;
                     }
                 }
 
@@ -111,75 +112,4 @@
             }
         }
     }
-
-    .fb-template-library-store-content {
-        flex: 6;
-        padding: 24px 0 0 24px;
-
-        .fb-template-library-cards {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-
-            .fb-template-library-card {
-                background: #fff;
-                border-radius: 14px;
-
-                .fb-template-library-card-content {
-                    padding: 14px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-
-                    .fb-template-library-import {
-                        display: flex;
-                        align-items: center;
-                        padding: 8px 12px;
-                        gap: 8px;
-                        border-radius: 6px;
-                        background: #399CFF;
-                        cursor: pointer;
-
-                        span {
-                            color: #ffffff;
-                            font-size: 16px;
-                            font-weight: 500;
-                            line-height: 22px;
-                        }
-                    }
-
-                    .fb-template-library-save {
-                        display: flex;
-                        align-items: center;
-                        gap: 14px;
-
-                        .save-wrapper {
-                            display: flex;
-                            align-items: center;
-                            gap: 6px;
-                            cursor: pointer;
-
-                            span {
-                                color: #555E72;
-                                font-size: 14px;
-                                font-weight: 500;
-                                line-height: 20px;
-                            }
-                        }
-
-                        .favourite-wrapper {
-                            display: flex;
-                            align-items: center;
-                            padding: 10px;
-                            border-radius: 50px;
-                            border: 1px solid #E1E3E8;
-                            background: #F7F7F7;
-                            cursor: pointer;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
 }
