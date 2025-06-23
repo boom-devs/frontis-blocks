@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
+import { useState, useEffect, useRef  } from "@wordpress/element";
 import {
 	Popover,
 	Dashicon,
@@ -23,7 +23,7 @@ const CustomGradientColorPallet = (props) => {
 	} = props
 
 	const [clickedGradient, setClickedGradient] = useState('');
-	const [gradientPopoverAnchor, setGradientPopoverAnchor] = useState();
+	const gradientPopoverAnchor = useRef(null);
 
 	const editColorName = (index, value) => {
 		let cloneColors = [...colors]
@@ -36,10 +36,13 @@ const CustomGradientColorPallet = (props) => {
 
 	useEffect(() => {
 		function handleClickOutside(event) {
-			const clickedInsidePopup = popupRef.current?.contains(event.target);
+			const clickedInsidePopup = gradientPopoverAnchor.current?.contains(event.target);
 			const clickedTrigger = event.target.closest('.fb-custom-color-item');
-			
-			if (!clickedInsidePopup && !clickedTrigger) {
+	
+			// Don't close if clicked inside the WP popover
+			const isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
+	
+			if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
 				setClickedGradient('');
 			}
 		}
@@ -59,7 +62,7 @@ const CustomGradientColorPallet = (props) => {
 						{colors.map((color, index) => (
 							<div
 								key={index}
-								ref={setGradientPopoverAnchor}
+								ref={gradientPopoverAnchor}
 								id={`fb-gradient-color-${index}`}
 								className="fb-custom-element fb-custom-color-item"
 							>

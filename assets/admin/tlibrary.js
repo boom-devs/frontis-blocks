@@ -133,10 +133,7 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
     _useState2 = _slicedToArray(_useState, 2),
     clickedGradient = _useState2[0],
     setClickedGradient = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(),
-    _useState4 = _slicedToArray(_useState3, 2),
-    gradientPopoverAnchor = _useState4[0],
-    setGradientPopoverAnchor = _useState4[1];
+  var gradientPopoverAnchor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   var editColorName = function editColorName(index, value) {
     var cloneColors = _toConsumableArray(colors);
     cloneColors[index] = _objectSpread(_objectSpread({}, cloneColors[index]), {}, {
@@ -146,10 +143,13 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
   };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     function handleClickOutside(event) {
-      var _popupRef$current;
-      var clickedInsidePopup = (_popupRef$current = popupRef.current) === null || _popupRef$current === void 0 ? void 0 : _popupRef$current.contains(event.target);
+      var _gradientPopoverAncho;
+      var clickedInsidePopup = (_gradientPopoverAncho = gradientPopoverAnchor.current) === null || _gradientPopoverAncho === void 0 ? void 0 : _gradientPopoverAncho.contains(event.target);
       var clickedTrigger = event.target.closest('.fb-custom-color-item');
-      if (!clickedInsidePopup && !clickedTrigger) {
+
+      // Don't close if clicked inside the WP popover
+      var isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
+      if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
         setClickedGradient('');
       }
     }
@@ -167,7 +167,7 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
   }, colors.map(function (color, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: index,
-      ref: setGradientPopoverAnchor,
+      ref: gradientPopoverAnchor,
       id: "fb-gradient-color-".concat(index),
       className: "fb-custom-element fb-custom-color-item"
     }, /*#__PURE__*/React.createElement("div", {
@@ -698,10 +698,7 @@ var GradientColorPallet = function GradientColorPallet(props) {
     _useState2 = _slicedToArray(_useState, 2),
     clickedGradient = _useState2[0],
     setClickedGradient = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(),
-    _useState4 = _slicedToArray(_useState3, 2),
-    gradientPopoverAnchor = _useState4[0],
-    setGradientPopoverAnchor = _useState4[1];
+  var gradientPopoverAnchor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   var editColorName = function editColorName(index, value) {
     var cloneColors = _toConsumableArray(colors);
     cloneColors[index] = _objectSpread(_objectSpread({}, cloneColors[index]), {}, {
@@ -709,6 +706,23 @@ var GradientColorPallet = function GradientColorPallet(props) {
     });
     setColors(_toConsumableArray(cloneColors));
   };
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    function handleClickOutside(event) {
+      var _gradientPopoverAncho;
+      var clickedInsidePopup = (_gradientPopoverAncho = gradientPopoverAnchor.current) === null || _gradientPopoverAncho === void 0 ? void 0 : _gradientPopoverAncho.contains(event.target);
+      var clickedTrigger = event.target.closest('.fb-custom-color-item');
+
+      // Don't close if clicked inside the WP popover
+      var isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
+      if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
+        setClickedGradient('');
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return function () {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, colors && colors.length > 0 && /*#__PURE__*/React.createElement("div", {
     className: "fb-color-panel ".concat(wrapperClass)
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
@@ -718,7 +732,7 @@ var GradientColorPallet = function GradientColorPallet(props) {
   }, colors.map(function (color, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: index,
-      ref: setGradientPopoverAnchor,
+      ref: gradientPopoverAnchor,
       id: "fb-gradient-color-".concat(index),
       className: "fb-custom-element fb-custom-color-item"
     }, /*#__PURE__*/React.createElement("div", {
@@ -8268,7 +8282,54 @@ var TemplateHeader = function TemplateHeader(_ref) {
         return setActiveTab(tab.id);
       }
     }, /*#__PURE__*/React.createElement("span", null, tab.label), tab.icon);
-  }))));
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-header-right"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-search-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-search-input-wrapper"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("g", {
+    "clip-path": "url(#clip0_12579_13019)"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "7.66659",
+    cy: "7.66665",
+    r: "6.33333",
+    stroke: "#6A758E",
+    "stroke-width": "1.5"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M12.3333 12.3333L14.6666 14.6666",
+    stroke: "#6A758E",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round"
+  })), /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
+    id: "clip0_12579_13019"
+  }, /*#__PURE__*/React.createElement("rect", {
+    width: "16",
+    height: "16",
+    fill: "white"
+  })))), /*#__PURE__*/React.createElement("input", {
+    type: "search",
+    placeholder: "Search Blocks"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-user-profile"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    "fill-rule": "evenodd",
+    "clip-rule": "evenodd",
+    d: "M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10ZM12 20.5C13.784 20.5 15.4397 19.9504 16.8069 19.0112C17.4108 18.5964 17.6688 17.8062 17.3178 17.1632C16.59 15.8303 15.0902 15 11.9999 15C8.90969 15 7.40997 15.8302 6.68214 17.1632C6.33105 17.8062 6.5891 18.5963 7.19296 19.0111C8.56018 19.9503 10.2159 20.5 12 20.5Z",
+    fill: "#3991FF"
+  }))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TemplateHeader);
 
@@ -20414,7 +20475,7 @@ var GOOGLE_FONTS = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return fetch(FrontisBlocksData.pluginUrl + 'assets/admin/google-fonts/google-fonts.json');
+          return fetch(FrontisBlocksData.pluginUrl + 'assets/google-fonts/google-fonts.json');
         case 2:
           res = _context.sent;
           _context.next = 5;
