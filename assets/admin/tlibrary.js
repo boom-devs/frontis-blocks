@@ -85,7 +85,11 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 var TemplateCard = function TemplateCard(_ref) {
-  var imageUrl = _ref.imageUrl;
+  var imageUrl = _ref.imageUrl,
+    title = _ref.title,
+    _ref$isPro = _ref.isPro,
+    isPro = _ref$isPro === void 0 ? false : _ref$isPro,
+    id = _ref.id;
   var _window$frontisBlocks = window.frontisBlocksAdmin,
     nonce = _window$frontisBlocks.nonce,
     ajaxUrl = _window$frontisBlocks.ajaxUrl;
@@ -97,79 +101,89 @@ var TemplateCard = function TemplateCard(_ref) {
     _useState4 = _slicedToArray(_useState3, 2),
     isModalOpen = _useState4[0],
     setIsModalOpen = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isHovered = _useState6[0],
+    setIsHovered = _useState6[1];
   var handleFullSiteImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     setIsModalOpen(true);
   }, []);
+  var handleDemo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    // Handle demo functionality
+    console.log('Demo clicked for:', id);
+  }, [id]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-library-card"
+    className: "fb-template-library-card",
+    onMouseEnter: function onMouseEnter() {
+      return setIsHovered(true);
+    },
+    onMouseLeave: function onMouseLeave() {
+      return setIsHovered(false);
+    }
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card-img"
   }, /*#__PURE__*/React.createElement("img", {
     src: imageUrl,
-    alt: "Template preview"
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-library-card-content"
+    alt: title || "Template preview"
+  }), isHovered && /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-overlay"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-library-import ".concat(isLoading ? 'disabled' : ''),
-    onClick: !isLoading ? handleFullSiteImport : null
-  }, /*#__PURE__*/React.createElement("span", null, isLoading ? 'Importing...' : 'Import'), isLoading ? /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    color: "#fff",
-    size: 18
-  }) : /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "18",
-    height: "18",
-    viewBox: "0 0 18 18",
+    className: "fb-template-overlay-content"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-demo-btn",
+    onClick: handleDemo
+  }, /*#__PURE__*/React.createElement("span", null, "Demo"), /*#__PURE__*/React.createElement("svg", {
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
     fill: "none"
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M3 9C3 12.3137 5.68629 15 9 15C12.3137 15 15 12.3137 15 9",
-    stroke: "white",
+    d: "M8 2L14 8L8 14",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  })))))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-card-content"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-badge ".concat(isPro ? 'pro' : 'free')
+  }, isPro ? 'PRO' : 'FREE'), /*#__PURE__*/React.createElement("h3", {
+    className: "fb-template-title"
+  }, title), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-actions"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-import-btn ".concat(isLoading ? 'loading' : ''),
+    onClick: !isLoading ? handleFullSiteImport : null,
+    disabled: isLoading
+  }, isLoading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Importing..."), /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    color: "#fff",
+    size: 16
+  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Import"), /*#__PURE__*/React.createElement("svg", {
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M2.67 8C2.67 10.95 5.05 13.33 8 13.33C10.95 13.33 13.33 10.95 13.33 8",
+    stroke: "currentColor",
     strokeWidth: "1.5",
     strokeLinecap: "round"
   }), /*#__PURE__*/React.createElement("path", {
-    d: "M9 3V10.5M9 10.5L11.25 8.25M9 10.5L6.75 8.25",
-    stroke: "white",
+    d: "M8 2.67V9.33M8 9.33L10 7.33M8 9.33L6 7.33",
+    stroke: "currentColor",
     strokeWidth: "1.5",
     strokeLinecap: "round",
     strokeLinejoin: "round"
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-library-save"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "save-wrapper"
-  }, /*#__PURE__*/React.createElement("span", null, "Save library"), /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "18",
-    height: "18",
-    viewBox: "0 0 18 18",
-    fill: "none"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M14.671 5.25C14.8426 4.27142 14.0895 3.375 13.096 3.375H4.90317C3.90968 3.375 3.15667 4.27142 3.32814 5.25",
-    stroke: "#555E72",
-    strokeWidth: "1.5"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M13.1249 3.375C13.1462 3.18069 13.1569 3.08351 13.157 3.00326C13.1587 2.23554 12.5804 1.59048 11.8171 1.50857C11.7373 1.5 11.6395 1.5 11.4441 1.5H6.55574C6.36026 1.5 6.26251 1.5 6.18271 1.50857C5.41938 1.59048 4.8411 2.23554 4.84278 3.00326C4.84295 3.08351 4.85359 3.18068 4.87487 3.375",
-    stroke: "#555E72",
-    strokeWidth: "1.5"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M11.25 13.5H6.75",
-    stroke: "#555E72",
-    strokeWidth: "1.5",
-    strokeLinecap: "round"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M1.78763 10.3448C1.45311 7.97205 1.28585 6.78574 1.99674 6.01787C2.70763 5.25 3.97319 5.25 6.50429 5.25H11.4957C14.0268 5.25 15.2923 5.25 16.0033 6.01787C16.7141 6.78574 16.5469 7.97205 16.2124 10.3448L15.8951 12.5947C15.6328 14.4554 15.5017 15.3857 14.8288 15.9429C14.1559 16.5 13.1634 16.5 11.1785 16.5H6.82152C4.83661 16.5 3.84415 16.5 3.17126 15.9429C2.49836 15.3857 2.3672 14.4554 2.10486 12.5947L1.78763 10.3448Z",
-    stroke: "#555E72",
-    strokeWidth: "1.5"
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "favourite-wrapper"
+  })))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-favorite-btn"
   }, /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "18",
-    height: "18",
-    viewBox: "0 0 18 18",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
     fill: "none"
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M9 4.12547L8.5947 4.51554C8.59725 4.51815 8.5998 4.52073 8.60235 4.52329L9 4.12547ZM10.1024 6.02275C10.322 6.24238 10.6782 6.24231 10.8978 6.0226C11.1175 5.80289 11.1174 5.44673 10.8976 5.2271L10.1024 6.02275ZM7.06954 13.7414C5.93279 12.8453 4.6898 11.9702 3.70372 10.8598C2.73692 9.77114 2.0625 8.50087 2.0625 6.85282H0.9375C0.9375 8.85194 1.77038 10.3771 2.86254 11.6068C3.93542 12.8149 5.30308 13.7814 6.37306 14.6249L7.06954 13.7414ZM2.0625 6.85282C2.0625 5.23967 2.97403 3.88688 4.21827 3.31814C5.42705 2.7656 7.05125 2.91193 8.5947 4.51554L9.4053 3.73539C7.57387 1.83263 5.44807 1.51904 3.75057 2.29496C2.08853 3.05468 0.9375 4.81877 0.9375 6.85282H2.0625ZM6.37306 14.6249C6.75724 14.9278 7.16966 15.2507 7.5876 15.4949C8.00543 15.739 8.4822 15.9375 9 15.9375V14.8125C8.7678 14.8125 8.49458 14.722 8.1552 14.5236C7.81598 14.3254 7.46406 14.0524 7.06954 13.7414L6.37306 14.6249ZM11.6269 14.6249C12.6969 13.7814 14.0646 12.8149 15.1375 11.6068C16.2296 10.3771 17.0625 8.85194 17.0625 6.85282H15.9375C15.9375 8.50087 15.2631 9.77114 14.2963 10.8598C13.3102 11.9702 12.0672 12.8453 10.9305 13.7414L11.6269 14.6249ZM17.0625 6.85282C17.0625 4.81877 15.9115 3.05468 14.2494 2.29496C12.5519 1.51904 10.4261 1.83263 8.5947 3.73539L9.4053 4.51554C10.9487 2.91193 12.5729 2.7656 13.7817 3.31814C15.026 3.88688 15.9375 5.23967 15.9375 6.85282H17.0625ZM10.9305 13.7414C10.5359 14.0524 10.184 14.3254 9.8448 14.5236C9.50543 14.722 9.2322 14.8125 9 14.8125V15.9375C9.5178 15.9375 9.99457 15.739 10.4124 15.4949C10.8304 15.2507 11.2427 14.9278 11.6269 14.6249L10.9305 13.7414ZM8.60235 4.52329L10.1024 6.02275L10.8976 5.2271L9.39765 3.72765L8.60235 4.52329Z",
-    fill: "#0B0C0E"
+    d: "M8 3.67l-.36.35c.003.003.006.005.009.008L8 3.67zm.91 1.69c.195.195.51.195.705 0s.195-.51 0-.705l-.705.705zm-2.7 6.82c-1.01-.8-2.13-1.59-2.99-2.58-.84-.97-1.45-2.08-1.45-3.51h-1c0 1.78.75 3.15 1.7 4.23.93 1.06 2.14 1.94 3.1 2.69l.64-.83zm-4.44-6.09c0-1.43.81-2.63 1.89-3.14 1.05-.5 2.47-.37 3.74.98l.71-.71c-1.63-1.69-3.52-1.96-4.97-1.27-1.46.69-2.37 2.21-2.37 4.14h1zm3.61 7.74c.34.27.7.54 1.04.74.34.21.73.38 1.08.38v-1c-.21 0-.44-.08-.72-.25-.28-.17-.57-.4-.91-.67l-.49.8zm4.22 0c.95-.84 2.14-1.72 3.07-2.78.92-1.08 1.65-2.45 1.65-4.23h-1c0 1.43-.6 2.54-1.45 3.51-.86.99-1.98 1.78-2.99 2.58l.72.92zm4.72-7.01c0-1.93-.91-3.45-2.37-4.14-1.45-.69-3.34-.42-4.97 1.27l.71.71c1.27-1.35 2.69-1.48 3.74-.98 1.08.51 1.89 1.71 1.89 3.14h1zm-4.72 7.01c-.34.27-.63.5-.91.67-.28.17-.51.25-.72.25v1c.35 0 .74-.17 1.08-.38.34-.2.7-.47 1.04-.74l-.49-.8zm-1.63-7.74l1.33 1.33.705-.705-1.33-1.33-.705.705z",
+    fill: "currentColor"
   })))))), /*#__PURE__*/React.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_1__.ToastContainer, {
     position: "top-right",
     autoClose: 3000,
@@ -181,10 +195,10 @@ var TemplateLibrary = function TemplateLibrary(_ref2) {
     activeCategory = _ref2.activeCategory,
     data = _ref2.data;
   var schema = (data === null || data === void 0 ? void 0 : data.$schema) || {};
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    _useState6 = _slicedToArray(_useState5, 2),
-    filteredTemplates = _useState6[0],
-    setFilteredTemplates = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState8 = _slicedToArray(_useState7, 2),
+    filteredTemplates = _useState8[0],
+    setFilteredTemplates = _useState8[1];
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (activeTab && activeCategory) {
       var _tabData$categories;
@@ -202,11 +216,18 @@ var TemplateLibrary = function TemplateLibrary(_ref2) {
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-store-content"
   }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-content-header"
+  }, /*#__PURE__*/React.createElement("h2", null, "All Pages"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-tags-wrapper"
+  }, /*#__PURE__*/React.createElement("span", null, "User Experience"), /*#__PURE__*/React.createElement("span", null, "UI Kits"), /*#__PURE__*/React.createElement("span", null, "Templates"), /*#__PURE__*/React.createElement("span", null, "Web Design"), /*#__PURE__*/React.createElement("span", null, "Creative Assets"), /*#__PURE__*/React.createElement("span", null, "Digital Marketing"), /*#__PURE__*/React.createElement("span", null, "Landing Pages"), /*#__PURE__*/React.createElement("span", null, "Prototyping"), /*#__PURE__*/React.createElement("span", null, "E-commerce"))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-cards"
-  }, filteredTemplates.map(function (template) {
+  }, filteredTemplates.map(function (template, index) {
     return /*#__PURE__*/React.createElement(TemplateCard, {
       key: template.id,
-      imageUrl: template.image
+      id: template.id,
+      title: template.title,
+      imageUrl: template.image,
+      isPro: index % 3 === 1
     });
   })));
 };
