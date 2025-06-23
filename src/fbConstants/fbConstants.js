@@ -112,7 +112,7 @@ export const TEXT_DECORATION = [
 ];
 
 export const GOOGLE_FONTS = async () => {
-    const res = await fetch(FrontisBlocksData.pluginUrl + 'assets/admin/google-fonts/google-fonts.json');
+    const res = await fetch(FrontisBlocksData.pluginUrl + 'assets/google-fonts/google-fonts.json');
     const data = await res.json();
 
     return Object.keys(data).map(family => ({

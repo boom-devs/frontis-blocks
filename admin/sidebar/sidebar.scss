@@ -299,6 +299,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 			height: 44px;
 			padding: 0 12px;
 			border-bottom: 1px solid $neutral-color-100;
+			cursor: pointer;
 
 			.item-content {
 				display: flex;
@@ -345,6 +346,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 	.fb-gradient-color-panel {
 		.fb-gradient-color-label {}
 	}
+}
+
+.components-navigator-screen {
+    scrollbar-width: none;
 }
 
 .fb-gradient-color-popup {
