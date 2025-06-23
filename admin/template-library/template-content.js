@@ -11,144 +11,7 @@ const TemplateCard = ({ imageUrl }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  //Demo import for blocks
-  // const handleDemoDataImport = useCallback(() => {
-  //   const selectedBlock = window.wp.data
-  //     .select('core/block-editor')
-  //     .getSelectedBlock();
-
-  //   if (!selectedBlock || !selectedBlock.clientId) {
-  //     toast.warn('Please select a block first!');
-  //     return;
-  //   }
-
-  //   const blockId = selectedBlock.clientId;
-  //   setIsLoading(true);
-
-  //   window.jQuery.ajax({
-  //     url: ajaxUrl,
-  //     type: 'POST',
-  //     data: {
-  //       action: 'fb_import_demo_data',
-  //       security: nonce,
-  //       block_id: blockId
-  //     },
-  //     success: function (response) {
-  //       setIsLoading(false);
-
-  //       if (response.success) {
-  //         const { replaceBlocks } = wp.data.dispatch('core/block-editor');
-  //         const blocks = wp.blocks.parse(response.data.content);
-  //         replaceBlocks(blockId, blocks);
-  //         toast.success(response.data.message || 'Demo data imported successfully!');
-  //       } else {
-  //         toast.error('Failed to import demo data: ' + response.data);
-  //       }
-  //     },
-  //     error: function (xhr, status, error) {
-  //       setIsLoading(false);
-  //       toast.error('Failed to process request. Please try again.');
-  //     }
-  //   });
-  // }, [ajaxUrl, nonce]);
-
-  // demo import for pages
-  // const handleDemoDataImport = useCallback(() => {
-  //   const selectedBlock = window.wp.data
-  //     .select('core/block-editor')
-  //     .getSelectedBlock();
-
-  //   const postId = window.wp.data.select('core/editor').getCurrentPostId(); // Get current post ID
-
-  //   setIsLoading(true);
-
-  //   window.jQuery.ajax({
-  //     url: ajaxUrl,
-  //     type: 'POST',
-  //     data: {
-  //       action: 'fb_import_demo_data',
-  //       security: nonce,
-  //       block_id: selectedBlock ? selectedBlock.clientId : '',
-  //       post_id: postId  // Send post ID explicitly
-  //     },
-  //     success: function (response) {
-  //       setIsLoading(false);
-
-  //       if (response.success) {
-  //         const { replaceBlocks } = wp.data.dispatch('core/block-editor');
-  //         const { editPost } = wp.data.dispatch('core/editor');
-
-  //         if (selectedBlock) {
-  //           // Update selected block
-  //           const blocks = wp.blocks.parse(response.data.content);
-  //           replaceBlocks(selectedBlock.clientId, blocks);
-  //         } else {
-  //           // Update full page content
-  //           editPost({ content: response.data.content });
-  //         }
-
-  //         toast.success(response.data.message || 'Demo data imported successfully!');
-  //       } else {
-  //         toast.error('Failed to import demo data: ' + response.data);
-  //       }
-  //     },
-  //     error: function () {
-  //       setIsLoading(false);
-  //       toast.error('Failed to process request. Please try again.');
-  //     }
-  //   });
-  // }, [ajaxUrl, nonce]);
-
-  //demo import full site
-
-  // const handleDemoDataImport = useCallback(() => {
-    // const selectedBlock = window.wp.data
-    //   .select('core/block-editor')
-    //   .getSelectedBlock();
-
-    // const postId = window.wp.data.select('core/editor').getCurrentPostId(); // Get current post ID
-
-  //   setIsLoading(true);
-
-  //   window.jQuery.ajax({
-  //     url: ajaxUrl,
-  //     type: 'POST',
-  //     data: {
-  //       action: 'fb_import_demo_data',
-  //       security: nonce,
-  //       block_id: selectedBlock ? selectedBlock.clientId : '',
-  //       post_id: postId  // Send post ID explicitly
-  //     },
-  //     success: function (response) {
-  //       setIsLoading(false);
-
-  //       if (response.success) {
-  //         const { replaceBlocks } = wp.data.dispatch('core/block-editor');
-  //         const { editPost } = wp.data.dispatch('core/editor');
-
-  //         if (selectedBlock) {
-  //           // Update selected block
-  //           const blocks = wp.blocks.parse(response.data.content);
-  //           replaceBlocks(selectedBlock.clientId, blocks);
-  //         } else {
-  //           // Update full page content
-  //           editPost({ content: response.data.content });
-  //         }
-
-  //         toast.success(response.data.message || 'Demo data imported successfully!');
-  //       } else {
-  //         toast.error('Failed to import demo data: ' + response.data);
-  //       }
-  //     },
-  //     error: function () {
-  //       setIsLoading(false);
-  //       toast.error('Failed to process request. Please try again.');
-  //     }
-  //   });
-  // }, [ajaxUrl, nonce]); 
-
   
-
   const handleFullSiteImport = useCallback(() => {
     setIsModalOpen(true);
   }, []);
@@ -219,6 +82,7 @@ const TemplateLibrary = ({ activeTab, activeCategory, data }) => {
 
   return (
     <div className="fb-template-library-store-content">
+      
       <div className="fb-template-library-cards">
         {filteredTemplates.map((template) => (
           <TemplateCard
@@ -232,4 +96,3 @@ const TemplateLibrary = ({ activeTab, activeCategory, data }) => {
 };
 
 export default TemplateLibrary;
-
