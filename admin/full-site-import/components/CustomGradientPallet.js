@@ -35,30 +35,40 @@ const CustomGradientColorPallet = (props) => {
 	}
 
 	useEffect(() => {
-		function handleClickOutside(event) {
-			const clickedInsidePopup = gradientPopoverAnchor.current?.contains(event.target);
-			const clickedTrigger = event.target.closest('.fb-custom-color-item');
-	
-			// Don't close if clicked inside the WP popover
-			const isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
-	
-			if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
-				setClickedGradient('');
-			}
-		}
-	
-		document.addEventListener('mousedown', handleClickOutside);
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-		};
-	}, []);
+        function handleClickOutside(event) {
+            const clickedInsidePopup = gradientPopoverAnchor.current?.contains(event.target);
+            const clickedTrigger = event.target.closest('.fb-custom-gradient-list .fb-custom-color-item');
+            const isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
+    
+            if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
+                setClickedGradient('');
+            }
+        }
+    
+        // Add listener to main document
+        document.addEventListener('mousedown', handleClickOutside);
+    
+        // Also try to add listener to iframe document
+        const iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
+        if (iframe && iframe.contentDocument) {
+            iframe.contentDocument.addEventListener('mousedown', handleClickOutside);
+        }
+    
+        // Cleanup
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            if (iframe && iframe.contentDocument) {
+                iframe.contentDocument.removeEventListener('mousedown', handleClickOutside);
+            }
+        };
+    }, []);
 
 	return (
 		<>
 			{colors && colors.length > 0 && (
 				<div className={`fb-color-panel ${wrapperClass}`}>
 					<PanelRow className="fb-gradient-color-label">{title}</PanelRow>
-					<div className="fb-custom-panel fb-gradient-color-list">
+					<div className="fb-custom-panel fb-gradient-color-list fb-custom-gradient-list">
 						{colors.map((color, index) => (
 							<div
 								key={index}
@@ -71,7 +81,7 @@ const CustomGradientColorPallet = (props) => {
 									onClick={() => !enableEditName && setClickedGradient(clickedGradient === color.slug ? '' : color.slug)}
 								>
 									<ColorIndicator
-										onClick={() => setClickedGradient(clickedGradient === color.slug ? '' : color.slug)}
+										// onClick={() => setClickedGradient(clickedGradient === color.slug ? '' : color.slug)}
 										colorValue={color?.color}
 									/>
 									{enableEditName && (
