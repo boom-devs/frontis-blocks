@@ -52,6 +52,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         carouselEffect, 
         carouselPerColumn,
         carouselPerColumnGap,
+        carouselPerColumnGapUnits,
         
         /** Slider Arrows Style */
         sliderArrowsSize,
@@ -1599,24 +1600,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             {sliderType === 'carousel' && (
                 <>
                 <PanelBody title={__("Carousel Settings", "frontis-blocks")} initialOpen={false}>
-                    <RangeControl
-                        label={__('Number of Columns', 'frontis-blocks')}
-                        value={carouselPerColumn}
-                        onChange={(value) => setAttributes({ carouselPerColumn: value })}
+                    <FB_Range
                         min={1}
                         max={10}
-                        step={1}
-                        initialPosition={1}
+                        label={__("Number of Columns", "frontis-blocks")}
+                        rangeValue={carouselPerColumn}
+                        onChangeHandler={(value) => setAttributes({ carouselPerColumn: value === 0 ? undefined : value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                        isRangeUnit={false}
                     />
-                    <RangeControl
-                        label={__('Column Gap (px)', 'frontis-blocks')}
-                        value={carouselPerColumnGap}
-                        onChange={(value) => setAttributes({ carouselPerColumnGap: value })}
+                    <FB_Range
                         min={0}
                         max={200}
-                        step={1}
-                        initialPosition={1}
+                        label={__("Column Gap", "frontis-blocks")}
+                        rangeValue={carouselPerColumnGap}
+                        onChangeHandler={(value) => setAttributes({ carouselPerColumnGap: value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                        isRangeUnit={false}
                     />
+                </PanelBody>
+                </>
+            )}
+
+            {sliderType === 'carousel' && (
+                <PanelBody title={__("Carousel Effect", "frontis-blocks")} initialOpen={false}>
                     <SelectControl
                         label={__('Select Carousel Effect', 'frontis-blocks')}
                         value={carouselEffect}
@@ -1624,8 +1637,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         onChange={(value) => setAttributes({ carouselEffect: value })}
                     />
                 </PanelBody>
-                </>
             )}
+
             {sliderType === 'slider' && (
                 <PanelBody title={__("Slider Effect", "frontis-blocks")} initialOpen={false}>
                     <SelectControl

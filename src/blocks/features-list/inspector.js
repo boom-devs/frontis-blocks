@@ -20,6 +20,7 @@ import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
+import FB_ResponsiveControl from '@Components/responsive-control';
 
 
 import { 
@@ -42,9 +43,10 @@ import {
     UNIT_TYPES,
     TEXT_ALIGN,
     HEADING,
-    FONT_FAMILYS,
     BORDER_STYLES,
     OVERFLOW_OP,
+    LIST_DIRECTION_ICON,
+    LIST_WRAP_ICON,
 } from "./constants/constants";
 
 import SortableItem from './sortableItem';
@@ -61,7 +63,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureAlignment,
         FeatureIconAlignment,
         FeatureIconShape,
-
+        FeatureListDirection,
+        FeatureListDirectionWrap,
         FeatureListGap,
         FeatureListGapUnits,
 
@@ -1746,11 +1749,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${FeatureSingleItemBorderHoverColor ? `border-color: ${FeatureSingleItemBorderHoverColor};` : ''}
                 ${FeatureSingleItemBoxShadowHoverCssValue ? `box-shadow: ${FeatureSingleItemBoxShadowHoverCssValue};` : ''}
             }
-            .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
-                margin-bottom: calc(${FeatureListGap.Desktop}${FeatureListGapUnits.Desktop} / 2);
-            }
-            .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:first-child) {
-                margin-top: calc(${FeatureListGap.Desktop}${FeatureListGapUnits.Desktop} / 2);  
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-items {
+                display: flex;
+                flex-direction: ${FeatureListDirection.Desktop};
+                flex-wrap: ${FeatureListDirectionWrap.Desktop};
+                gap: ${FeatureListGap.Desktop}${FeatureListGapUnits.Desktop};
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
                 ${FeatureIconColor ? `fill: ${FeatureIconColor};` : ''}
@@ -1876,13 +1879,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${singleItemTabletBorderWidth && FeatureSingleItemBorderTablet.top? `border-width: ${singleItemTabletBorderWidth};` : ''}
                     ${singleItemTabletBorderRadiusWidth && FeatureSingleItemBorderRadiusTablet.top? `border-radius: ${singleItemTabletBorderRadiusWidth};` : ''}
                 }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-items {
+                    flex-direction: ${FeatureListDirection.Tablet};
+                    flex-wrap: ${FeatureListDirectionWrap.Tablet};
+                    gap: ${FeatureListGap.Tablet}${FeatureListGapUnits.Tablet};
+                }
 
-                .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
-                    margin-bottom: calc(${FeatureListGap.Tablet}${FeatureListGapUnits.Tablet} / 2); 
-                }
-                .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:first-child) {
-                    margin-top: calc(${FeatureListGap.Tablet}${FeatureListGapUnits.Tablet} / 2);
-                }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
                     height: ${FeatureIconSize.Tablet}${FeatureIconSizeUnits.Tablet};
                     width: ${FeatureIconSize.Tablet}${FeatureIconSizeUnits.Tablet};
@@ -1949,11 +1951,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${singleItemMobileBorderWidth && FeatureSingleItemBorderMobile.top? `border-width: ${singleItemMobileBorderWidth};` : ''}
                     ${singleItemMobileBorderRadiusWidth && FeatureSingleItemBorderRadiusMobile.top? `border-radius: ${singleItemMobileBorderRadiusWidth};` : ''}
                 }
-                .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:last-child) {
-                    margin-bottom: calc(${FeatureListGap.Mobile}${FeatureListGapUnits.Mobile} / 2);  
-                }
-                .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:not(:first-child) {
-                    margin-top: calc(${FeatureListGap.Mobile}${FeatureListGapUnits.Mobile} / 2);
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-items {
+                    flex-direction: ${FeatureListDirection.Mobile};
+                    flex-wrap: ${FeatureListDirectionWrap.Mobile};
+                    gap: ${FeatureListGap.Mobile}${FeatureListGapUnits.Mobile};
                 }
                 .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
                     height: ${FeatureIconSize.Mobile}${FeatureIconSizeUnits.Mobile}; 
@@ -2015,6 +2016,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         FeatureAlignment,
         FeatureIconAlignment,
         FeatureIconShape,
+        FeatureListDirection,
+        FeatureListDirectionWrap,
         FeatureListGap,
         FeatureListGapUnits,
         FeatureIconColorSwitcher,
@@ -2426,6 +2429,67 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 initialOpen={true}
                 className="fb-setting-feature-list-wrapper"
             >
+
+                <BaseControl
+                    id="fb-setting-alignment"
+                    className="fb-advanced-alignment list"
+                >
+                    <FB_ResponsiveControl
+                        labelText={__('List Direction', 'frontis-blocks')}
+                        device={deviceType}
+                    />
+                    <br />
+                    <ButtonGroup className="fb-advanced-alignment-group-btn">
+                        {LIST_DIRECTION_ICON.map((item, key) => (
+                            <Button
+                                key={key}
+                                onClick={() =>
+                                    setAttributes({
+                                        FeatureListDirection: {
+                                            ...FeatureListDirection,
+                                            [deviceType]: item.value,
+                                        },
+                                    })
+                                }
+                                title={item.title}
+                                className={`fb-advanced-alignment-single-btn ${FeatureListDirection[deviceType] === item.value ? 'active' : ''}`}
+                            >
+                                {item.label}
+                            </Button>
+                        ))}
+                    </ButtonGroup>
+                </BaseControl>
+
+                <BaseControl
+                    id="fb-setting-alignment"
+                    className="fb-advanced-alignment list"
+                >
+                    <FB_ResponsiveControl
+                        labelText={__('List Wrap', 'frontis-blocks')}
+                        device={deviceType}
+                    />
+                    <br />
+                    <ButtonGroup className="fb-advanced-alignment-group-btn">
+                        {LIST_WRAP_ICON.map((item, key) => (
+                            <Button
+                                key={key}
+                                onClick={() =>
+                                    setAttributes({
+                                        FeatureListDirectionWrap: {
+                                            ...FeatureListDirectionWrap,
+                                            [deviceType]: item.value,
+                                        },
+                                    })
+                                }
+                                title={item.title}
+                                className={`fb-advanced-alignment-single-btn ${FeatureListDirectionWrap[deviceType] === item.value ? 'active' : ''}`}
+                            >
+                                {item.label}
+                            </Button>
+                        ))}
+                    </ButtonGroup>
+                </BaseControl>
+
                 <FB_Range
                     min={1}
                     max={100}

@@ -13,6 +13,10 @@ export const NORMAL_HOVER = [
 	{ label: "Normal", value: "normal" },
 	{ label: "Hover", value: "hover" },
 ];
+export const NORMAL_GRADIENT = [
+	{ label: "Normal", value: "normal" },
+	{ label: "Gradient", value: "gradient" },
+];
 
 export const OVERFLOW_OP = [
     { label: __('Default', 'frontis-blocks'), value: 'default' },

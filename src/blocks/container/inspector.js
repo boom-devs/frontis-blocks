@@ -722,7 +722,7 @@ const Inspector = (props) => {
 					>
 						<BaseControl
 							id="fb-setting-alignment"
-							className="fb-advanced-alignment"
+							className="fb-advanced-alignment list"
 						>
 							<FB_ResponsiveControl
 								labelText={__('Direction', 'frontis-blocks')}
@@ -751,7 +751,7 @@ const Inspector = (props) => {
 						</BaseControl>
 						<BaseControl
 							id="fb-setting-alignment"
-							className="fb-advanced-alignment"
+							className="fb-advanced-alignment list"
 						>
 							<FB_ResponsiveControl
 								labelText={__('Align Items', 'frontis-blocks')}
@@ -780,7 +780,7 @@ const Inspector = (props) => {
 						</BaseControl>
 						<BaseControl
 							id="fb-setting-alignment"
-							className="fb-advanced-alignment"
+							className="fb-advanced-alignment list"
 						>
 							<FB_ResponsiveControl
 								labelText={__('Justify Content', 'frontis-blocks')}
@@ -809,7 +809,7 @@ const Inspector = (props) => {
 						</BaseControl>
 						<BaseControl
 							id="fb-setting-alignment"
-							className="fb-advanced-alignment"
+							className="fb-advanced-alignment list"
 						>
 							<FB_ResponsiveControl
 								labelText={__('Wrap', 'frontis-blocks')}
