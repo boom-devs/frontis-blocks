@@ -726,7 +726,7 @@ class AssetsGenerator {
 
     public function mergeFontArrays($arrays) {
     $merged = [];
-    
+
     // Iterate through each array
     foreach ($arrays as $array) {
         foreach ($array as $fontFamily => $weights) {
@@ -734,28 +734,27 @@ class AssetsGenerator {
             if (strtolower($fontFamily) === 'default') {
                 continue;
             }
-            
+
             // Initialize font family in merged array if not exists
             if (!isset($merged[$fontFamily])) {
                 $merged[$fontFamily] = [];
             }
-            
+
             // Add weights, filtering out 'Default' or empty values
             foreach ($weights as $weight) {
                 if (strtolower($weight) !== 'default' && $weight !== '') {
                     $merged[$fontFamily][] = $weight;
                 }
             }
-            
+
             // Remove duplicates and sort weights
             $merged[$fontFamily] = array_unique($merged[$fontFamily]);
             sort($merged[$fontFamily]);
         }
     }
-    
+
     return $merged;
 }
-
 
     public function get_font_families() {
 

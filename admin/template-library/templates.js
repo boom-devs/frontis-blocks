@@ -101,14 +101,11 @@ const PatternLibraryButton = () => {
                 <Modal className={"fb-template-library-popover"} onRequestClose={handleClick}>
                     <div className={`fb-template-library-store-wrap`}>
                         <div className={`fb-template-library-store-inner-wrap`}>
-                            <div>
-                                <TemplateHeader activeTab={activeTab} setActiveTab={setActiveTab} data={data} />
-                            </div>
+                            <TemplateHeader activeTab={activeTab} setActiveTab={setActiveTab} data={data} />
                             <div className="fb-template-library-store-sidebar-wrapper">
                                 <TemplateSidebar activeTab={activeTab} data={data} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
                                 <TemplateContent activeTab={activeTab} activeCategory={activeCategory} data={data} />
                             </div>
-
                         </div>
                     </div>
                 </Modal>

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	subscribe(() => {
 		const toplbar = document.querySelector('.edit-post-header-toolbar')
 		if (toplbar) {
-			// toplbar.appendChild(buttonDiv) // at present its hide. when need development please uncomment this line
+			toplbar.appendChild(buttonDiv)
 		}
 	})
 });
