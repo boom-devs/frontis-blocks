@@ -3,6 +3,7 @@
 namespace FrontisBlocks\Admin\Ajax;
 
 use FrontisBlocks\Traits\Singleton;
+use FrontisBlocks\Assets;
 
 /**
  * GlobalSettings
@@ -14,12 +15,6 @@ class GlobalSettings extends AjaxBase
 
     use Singleton;
 
-    public function __construct()
-    {
-        // Other initialization code...
-        add_action('wp_head', array($this, 'output_global_styles'), 999);
-        add_action('rest_api_init', array($this, 'typography_init'), 999);
-    }
     /**
      * register_global_settings_events
      *
@@ -49,6 +44,7 @@ class GlobalSettings extends AjaxBase
             'import_demo_data',
             'import_full_site',
             'toggle_post_like',
+			'generate_global_root_css'
         ];
 
         $this->init_ajax_events($events);
@@ -100,6 +96,14 @@ class GlobalSettings extends AjaxBase
         $this->validate_permissions();
         update_option('fb_global_asset_updated', true);
     }
+
+	public function generate_global_root_css()
+	{
+		$this->validate_nonce();
+		$this->validate_permissions();
+
+		Assets\AssetsGenerator::generate_global_assets();
+	}
 
     public function get_global_colors()
     {
@@ -243,10 +247,10 @@ class GlobalSettings extends AjaxBase
         $updated = update_option($option_name, $_POST['data'], true);
 
         if ($updated) {
-            $global_colors = get_option($option_name);
+            $global_data = get_option($option_name);
             $data = array(
                 'option_name' => $option_name,
-                'data' => $global_colors
+                'data' => $global_data
             );
 
             wp_send_json_success($data);
@@ -268,79 +272,6 @@ class GlobalSettings extends AjaxBase
                 return is_array($value) ? $value : [];
             default:
                 return sanitize_text_field($value);
-        }
-    }
-
-    public function toggle_post_like()
-    {
-        // Verify nonce for security
-        if (!wp_verify_nonce($_POST['nonce'], 'fb_post_like_nonce')) {
-            wp_send_json_error('Security check failed');
-            return;
-        }
-
-        // Check if user is logged in
-        if (!is_user_logged_in()) {
-            wp_send_json_error('User must be logged in to like posts');
-            return;
-        }
-
-        $post_id = intval($_POST['post_id']);
-        $user_id = get_current_user_id();
-
-        // Validate post exists
-        if (!get_post($post_id)) {
-            wp_send_json_error('Invalid post ID');
-            return;
-        }
-
-        // Get current user's liked posts
-        $user_likes = get_user_meta($user_id, 'liked_posts', true);
-        if (!is_array($user_likes)) {
-            $user_likes = array();
-        }
-
-        // Get current post likes count
-        $current_likes = get_post_meta($post_id, 'post_likes_count', true);
-        $current_likes = $current_likes ? intval($current_likes) : 0;
-
-        $is_liked = in_array($post_id, $user_likes);
-        $new_liked_status = !$is_liked;
-
-        if ($new_liked_status) {
-            $user_likes[] = $post_id;
-            $new_likes_count = $current_likes + 1;
-        } else {
-            $user_likes = array_diff($user_likes, array($post_id));
-            $new_likes_count = max(0, $current_likes - 1);
-        }
-
-        update_user_meta($user_id, 'liked_posts', array_values($user_likes));
-
-        update_post_meta($post_id, 'post_likes_count', $new_likes_count);
-
-        wp_send_json_success(array(
-            'liked' => $new_liked_status,
-            'count' => $new_likes_count,
-            'formatted_count' => $this->format_metric_count($new_likes_count)
-        ));
-    }
-
-    /**
-     * Format metric count method for your plugin class
-     */
-    public function format_metric_count($count)
-    {
-        $num = intval($count);
-
-        if ($num >= 1000000) {
-            $formatted = round($num / 1000000, 2);
-            return $formatted . 'M';
-        } elseif ($num >= 1000) {
-            $formatted = round($num / 1000, 2);
-            return $formatted . 'k';
-        } else {
-            return strval($num);
         }
     }
 
@@ -444,7 +375,7 @@ class GlobalSettings extends AjaxBase
     //     } catch (Exception $e) {
     //         wp_send_json_error('Error: ' . $e->getMessage());
     //     }
-    // }     
+    // }
 
     //demo import for full site
     // public function import_demo_data() {
@@ -504,104 +435,103 @@ class GlobalSettings extends AjaxBase
     //     } catch (Exception $e) {
     //         wp_send_json_error('Error: ' . $e->getMessage());
     //     }
-    // }  
+    // }
 
     // PHP: Import Full Site
-    public function import_full_site()
-    {
-        try {
-            error_log('AJAX Data Received: ' . print_r($_POST, true));
-            // Security check
-            $nonce = $_POST['security'] ?? '';
-            if (!wp_verify_nonce($nonce, 'fb_import_demo_data')) {
-                wp_send_json_error('Invalid nonce.');
-                return;
-            }
-
-            // Get data from AJAX request
-            $config = $_POST['config'] ?? [];
-            $block_id = sanitize_text_field($_POST['block_id'] ?? '');
-            $post_id = intval($_POST['post_id'] ?? 0);
-
-            if (empty($post_id)) {
-                wp_send_json_error('Error: Post ID is required.');
-                return;
-            }
-
-            // Handle global colors and typography
-            if (!empty($config)) {
-                $colors = $config['colors'] ?? [];
-                $typography = $config['typography'] ?? [];
-
-                // Update colors
-                update_option('global_site_colors', $colors);
-
-                // Update typography for each element
-                if (!empty($typography)) {
-                    foreach ($typography as $element => $settings) {
-                        update_option("fb_typography_{$element}", $settings);
-                    }
-                }
-
-                // Generate and save combined styles
-                $custom_styles = $this->generate_color_css($colors) . $this->generate_typography_css($typography);
-                update_option('fb_global_styles', $custom_styles);
-            }
-
-            // Validate demo content file existence
-            $json_file_path = WP_PLUGIN_DIR . '/frontis-blocks/full-site.json';
-            if (!file_exists($json_file_path)) {
-                wp_send_json_error('Error: Demo data file not found.');
-                return;
-            }
-
-            // Read and decode demo content
-            $json_data = file_get_contents($json_file_path);
-            $demo_data = json_decode($json_data, true);
-
-            if (json_last_error() !== JSON_ERROR_NONE || empty($demo_data)) {
-                wp_send_json_error('Error: Invalid or empty demo content.');
-                return;
-            }
-
-            // Ensure proper block serialization
-            $serialized_content = serialize_blocks($demo_data['blocks'] ?? $demo_data);
-
-            if (!empty($block_id)) {
-                // Store block-specific content using transient
-                set_transient('fb_block_' . $block_id, [
-                    'blockId' => $block_id,
-                    'content' => $demo_data
-                ], HOUR_IN_SECONDS);
-
-                wp_send_json_success([
-                    'block_id' => $block_id,
-                    'content' => $serialized_content,
-                    'message' => 'Block imported successfully with global settings!',
-                ]);
-            } else {
-                // Update full post content
-                $post_data = [
-                    'ID' => $post_id,
-                    'post_content' => $serialized_content,
-                ];
-
-                $update_result = wp_update_post($post_data, true);
-
-                if (is_wp_error($update_result)) {
-                    wp_send_json_error('Error: Failed to update post - ' . $update_result->get_error_message());
-                } else {
-                    wp_send_json_success([
-                        'content' => $serialized_content,
-                        'message' => 'Full site imported successfully with global settings!',
-                    ]);
-                }
-            }
-        } catch (Exception $e) {
-            wp_send_json_error('Error: ' . $e->getMessage());
-        }
-    }
-
+//    public function import_full_site()
+//    {
+//        try {
+//            error_log('AJAX Data Received: ' . print_r($_POST, true));
+//            // Security check
+//            $nonce = $_POST['security'] ?? '';
+//            if (!wp_verify_nonce($nonce, 'fb_import_demo_data')) {
+//                wp_send_json_error('Invalid nonce.');
+//                return;
+//            }
+//
+//            // Get data from AJAX request
+//            $config = $_POST['config'] ?? [];
+//            $block_id = sanitize_text_field($_POST['block_id'] ?? '');
+//            $post_id = intval($_POST['post_id'] ?? 0);
+//
+//            if (empty($post_id)) {
+//                wp_send_json_error('Error: Post ID is required.');
+//                return;
+//            }
+//
+//            // Handle global colors and typography
+//            if (!empty($config)) {
+//                $colors = $config['colors'] ?? [];
+//                $typography = $config['typography'] ?? [];
+//
+//                // Update colors
+//                update_option('global_site_colors', $colors);
+//
+//                // Update typography for each element
+//                if (!empty($typography)) {
+//                    foreach ($typography as $element => $settings) {
+//                        update_option("fb_typography_{$element}", $settings);
+//                    }
+//                }
+//
+//                // Generate and save combined styles
+//                $custom_styles = $this->generate_color_css($colors) . $this->generate_typography_css($typography);
+//                update_option('fb_global_styles', $custom_styles);
+//            }
+//
+//            // Validate demo content file existence
+//            $json_file_path = WP_PLUGIN_DIR . '/frontis-blocks/full-site.json';
+//            if (!file_exists($json_file_path)) {
+//                wp_send_json_error('Error: Demo data file not found.');
+//                return;
+//            }
+//
+//            // Read and decode demo content
+//            $json_data = file_get_contents($json_file_path);
+//            $demo_data = json_decode($json_data, true);
+//
+//            if (json_last_error() !== JSON_ERROR_NONE || empty($demo_data)) {
+//                wp_send_json_error('Error: Invalid or empty demo content.');
+//                return;
+//            }
+//
+//            // Ensure proper block serialization
+//            $serialized_content = serialize_blocks($demo_data['blocks'] ?? $demo_data);
+//
+//            if (!empty($block_id)) {
+//                // Store block-specific content using transient
+//                set_transient('fb_block_' . $block_id, [
+//                    'blockId' => $block_id,
+//                    'content' => $demo_data
+//                ], HOUR_IN_SECONDS);
+//
+//                wp_send_json_success([
+//                    'block_id' => $block_id,
+//                    'content' => $serialized_content,
+//                    'message' => 'Block imported successfully with global settings!',
+//                ]);
+//            } else {
+//                // Update full post content
+//                $post_data = [
+//                    'ID' => $post_id,
+//                    'post_content' => $serialized_content,
+//                ];
+//
+//                $update_result = wp_update_post($post_data, true);
+//
+//                if (is_wp_error($update_result)) {
+//                    wp_send_json_error('Error: Failed to update post - ' . $update_result->get_error_message());
+//                } else {
+//                    wp_send_json_success([
+//                        'content' => $serialized_content,
+//                        'message' => 'Full site imported successfully with global settings!',
+//                    ]);
+//                }
+//            }
+//        } catch (Exception $e) {
+//            wp_send_json_error('Error: ' . $e->getMessage());
+//        }
+//    }
 
     private function generate_color_css($colors)
     {
@@ -644,189 +574,189 @@ class GlobalSettings extends AjaxBase
         return $css;
     }
 
-
-    private function generate_typography_css($typography)
-    {
-        if (empty($typography) || !is_array($typography)) {
-            return '';
-        }
-
-        $css = ':root {';
-        $elements = ['text', 'link', 'button', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
-
-        // First define all typography variables in root
-        foreach ($elements as $element) {
-            $option_name = "fb_typography_{$element}";
-
-            // Check if typography settings exist in the input array
-            $settings = $typography[$element] ?? get_option($option_name);
-
-            // Ensure settings are in array format
-            if (is_string($settings)) {
-                $settings = json_decode($settings, true);
-            }
-
-            error_log("Processed {$element} typography: " . print_r($settings, true));
-
-            if (empty($settings) || !is_array($settings)) {
-                continue;
-            }
-
-            // Define variables for each property
-            if (!empty($settings['fontSize']['Desktop'])) {
-                $css .= "\n  --fb-{$element}-font-size: {$settings['fontSize']['Desktop']}{$settings['fontSizeUnit']['Desktop']};";
-            }
-            if (!empty($settings['fontFamily'])) {
-                $css .= "\n  --fb-{$element}-font-family: {$settings['fontFamily']};";
-            }
-            if (!empty($settings['fontWeight'])) {
-                $css .= "\n  --fb-{$element}-font-weight: {$settings['fontWeight']};";
-            }
-            if (!empty($settings['fontStyle'])) {
-                $css .= "\n  --fb-{$element}-font-style: {$settings['fontStyle']};";
-            }
-            if (!empty($settings['textTransform'])) {
-                $css .= "\n  --fb-{$element}-text-transform: {$settings['textTransform']};";
-            }
-            if (!empty($settings['textDecoration'])) {
-                $css .= "\n  --fb-{$element}-text-decoration: {$settings['textDecoration']};";
-            }
-            if (!empty($settings['letterSpacing']['Desktop'])) {
-                $css .= "\n  --fb-{$element}-letter-spacing: {$settings['letterSpacing']['Desktop']}{$settings['letterSpacingUnit']['Desktop']};";
-            }
-            if (!empty($settings['lineHeight']['Desktop'])) {
-                $css .= "\n  --fb-{$element}-line-height: {$settings['lineHeight']['Desktop']}{$settings['lineHeightUnit']['Desktop']};";
-            }
-        }
-        $css .= "\n}\n\n";
-
-        // Define CSS selectors and apply typography variables
-        foreach ($elements as $element) {
-            $selector = match ($element) {
-                'text' => 'body p, body span',
-                'link' => 'a',
-                'button' => 'button, .button',
-                default => $element,
-            };
-
-            $css .= "{$selector} {\n";
-            $css .= "  font-size: var(--fb-{$element}-font-size);\n";
-            $css .= "  font-family: var(--fb-{$element}-font-family);\n";
-            $css .= "  font-weight: var(--fb-{$element}-font-weight);\n";
-            $css .= "  font-style: var(--fb-{$element}-font-style);\n";
-            $css .= "  text-transform: var(--fb-{$element}-text-transform);\n";
-            $css .= "  text-decoration: var(--fb-{$element}-text-decoration);\n";
-            $css .= "  letter-spacing: var(--fb-{$element}-letter-spacing);\n";
-            $css .= "  line-height: var(--fb-{$element}-line-height);\n";
-            $css .= "}\n\n";
-        }
-
-        // Handle responsive styles (Tablet and Mobile)
-        foreach (['Tablet' => '768px', 'Mobile' => '480px'] as $device => $breakpoint) {
-            $css .= "@media (max-width: {$breakpoint}) {\n";
-            $css .= "  :root {\n";
-
-            foreach ($elements as $element) {
-                $settings = $typography[$element] ?? get_option("fb_typography_{$element}");
-
-                if (is_string($settings)) {
-                    $settings = json_decode($settings, true);
-                }
-
-                if (empty($settings) || !is_array($settings)) {
-                    continue;
-                }
-
-                if (!empty($settings['fontSize'][$device])) {
-                    $css .= "    --fb-{$element}-font-size: {$settings['fontSize'][$device]}{$settings['fontSizeUnit'][$device]};\n";
-                }
-                if (!empty($settings['letterSpacing'][$device])) {
-                    $css .= "    --fb-{$element}-letter-spacing: {$settings['letterSpacing'][$device]}{$settings['letterSpacingUnit'][$device]};\n";
-                }
-                if (!empty($settings['lineHeight'][$device])) {
-                    $css .= "    --fb-{$element}-line-height: {$settings['lineHeight'][$device]}{$settings['lineHeightUnit'][$device]};\n";
-                }
-            }
-
-            $css .= "  }\n";
-            $css .= "}\n\n";
-        }
-
-        return $css;
-    }
-
-    private function add_responsive_typography($selector, $settings)
-    {
-        $css = '';
-
-        // Tablet styles
-        if (!empty($settings['fontSize']['tablet'])) {
-            $css .= "@media (max-width: 768px) {\n";
-            $css .= "  {$selector} {\n";
-            $css .= "    font-size: {$settings['fontSize']['tablet']}{$settings['fontSizeUnit']};\n";
-
-            if (!empty($settings['letterSpacing']['tablet'])) {
-                $css .= "    letter-spacing: {$settings['letterSpacing']['tablet']}{$settings['letterSpacingUnit']};\n";
-            }
-
-            if (!empty($settings['lineHeight']['tablet'])) {
-                $css .= "    line-height: {$settings['lineHeight']['tablet']}{$settings['lineHeightUnit']};\n";
-            }
-
-            $css .= "  }\n";
-            $css .= "}\n\n";
-        }
-
-        // Mobile styles
-        if (!empty($settings['fontSize']['mobile'])) {
-            $css .= "@media (max-width: 480px) {\n";
-            $css .= "  {$selector} {\n";
-            $css .= "    font-size: {$settings['fontSize']['mobile']}{$settings['fontSizeUnit']};\n";
-
-            if (!empty($settings['letterSpacing']['mobile'])) {
-                $css .= "    letter-spacing: {$settings['letterSpacing']['mobile']}{$settings['letterSpacingUnit']};\n";
-            }
-
-            if (!empty($settings['lineHeight']['mobile'])) {
-                $css .= "    line-height: {$settings['lineHeight']['mobile']}{$settings['lineHeightUnit']};\n";
-            }
-
-            $css .= "  }\n";
-            $css .= "}\n";
-        }
-
-        return $css;
-    }
-
-    public function output_global_styles()
-    {
-        $styles = get_option('fb_global_styles', '');
-        if (!empty($styles)) {
-            // Add debugging comment
-            echo "<!-- Typography styles begin -->\n";
-            echo "<style id='fb-global-styles'>\n" . $styles . "\n</style>";
-            echo "<!-- Typography styles end -->\n";
-        } else {
-            // Debug if no styles were found
-            echo "<!-- No global styles found in database -->";
-        }
-    }
-
-    public function typography_init()
-    {
-        $elements = ['text', 'link', 'button', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
-
-        foreach ($elements as $element) {
-            register_setting(
-                'fb_typography',
-                'fb_typography_' . $element,
-                [
-                    'type' => 'string',
-                    'show_in_rest' => true,
-                    'default' => ''
-                ]
-            );
-        }
-    }
+//
+//    private function generate_typography_css($typography)
+//    {
+//        if (empty($typography) || !is_array($typography)) {
+//            return '';
+//        }
+//
+//        $css = ':root {';
+//        $elements = ['text', 'link', 'button', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+//
+//        // First define all typography variables in root
+//        foreach ($elements as $element) {
+//            $option_name = "fb_typography_{$element}";
+//
+//            // Check if typography settings exist in the input array
+//            $settings = $typography[$element] ?? get_option($option_name);
+//
+//            // Ensure settings are in array format
+//            if (is_string($settings)) {
+//                $settings = json_decode($settings, true);
+//            }
+//
+//            error_log("Processed {$element} typography: " . print_r($settings, true));
+//
+//            if (empty($settings) || !is_array($settings)) {
+//                continue;
+//            }
+//
+//            // Define variables for each property
+//            if (!empty($settings['fontSize']['Desktop'])) {
+//                $css .= "\n  --fb-{$element}-font-size: {$settings['fontSize']['Desktop']}{$settings['fontSizeUnit']['Desktop']};";
+//            }
+//            if (!empty($settings['fontFamily'])) {
+//                $css .= "\n  --fb-{$element}-font-family: {$settings['fontFamily']};";
+//            }
+//            if (!empty($settings['fontWeight'])) {
+//                $css .= "\n  --fb-{$element}-font-weight: {$settings['fontWeight']};";
+//            }
+//            if (!empty($settings['fontStyle'])) {
+//                $css .= "\n  --fb-{$element}-font-style: {$settings['fontStyle']};";
+//            }
+//            if (!empty($settings['textTransform'])) {
+//                $css .= "\n  --fb-{$element}-text-transform: {$settings['textTransform']};";
+//            }
+//            if (!empty($settings['textDecoration'])) {
+//                $css .= "\n  --fb-{$element}-text-decoration: {$settings['textDecoration']};";
+//            }
+//            if (!empty($settings['letterSpacing']['Desktop'])) {
+//                $css .= "\n  --fb-{$element}-letter-spacing: {$settings['letterSpacing']['Desktop']}{$settings['letterSpacingUnit']['Desktop']};";
+//            }
+//            if (!empty($settings['lineHeight']['Desktop'])) {
+//                $css .= "\n  --fb-{$element}-line-height: {$settings['lineHeight']['Desktop']}{$settings['lineHeightUnit']['Desktop']};";
+//            }
+//        }
+//        $css .= "\n}\n\n";
+//
+//        // Define CSS selectors and apply typography variables
+//        foreach ($elements as $element) {
+//            $selector = match ($element) {
+//                'text' => 'body p, body span',
+//                'link' => 'a',
+//                'button' => 'button, .button',
+//                default => $element,
+//            };
+//
+//            $css .= "{$selector} {\n";
+//            $css .= "  font-size: var(--fb-{$element}-font-size);\n";
+//            $css .= "  font-family: var(--fb-{$element}-font-family);\n";
+//            $css .= "  font-weight: var(--fb-{$element}-font-weight);\n";
+//            $css .= "  font-style: var(--fb-{$element}-font-style);\n";
+//            $css .= "  text-transform: var(--fb-{$element}-text-transform);\n";
+//            $css .= "  text-decoration: var(--fb-{$element}-text-decoration);\n";
+//            $css .= "  letter-spacing: var(--fb-{$element}-letter-spacing);\n";
+//            $css .= "  line-height: var(--fb-{$element}-line-height);\n";
+//            $css .= "}\n\n";
+//        }
+//
+//        // Handle responsive styles (Tablet and Mobile)
+//        foreach (['Tablet' => '768px', 'Mobile' => '480px'] as $device => $breakpoint) {
+//            $css .= "@media (max-width: {$breakpoint}) {\n";
+//            $css .= "  :root {\n";
+//
+//            foreach ($elements as $element) {
+//                $settings = $typography[$element] ?? get_option("fb_typography_{$element}");
+//
+//                if (is_string($settings)) {
+//                    $settings = json_decode($settings, true);
+//                }
+//
+//                if (empty($settings) || !is_array($settings)) {
+//                    continue;
+//                }
+//
+//                if (!empty($settings['fontSize'][$device])) {
+//                    $css .= "    --fb-{$element}-font-size: {$settings['fontSize'][$device]}{$settings['fontSizeUnit'][$device]};\n";
+//                }
+//                if (!empty($settings['letterSpacing'][$device])) {
+//                    $css .= "    --fb-{$element}-letter-spacing: {$settings['letterSpacing'][$device]}{$settings['letterSpacingUnit'][$device]};\n";
+//                }
+//                if (!empty($settings['lineHeight'][$device])) {
+//                    $css .= "    --fb-{$element}-line-height: {$settings['lineHeight'][$device]}{$settings['lineHeightUnit'][$device]};\n";
+//                }
+//            }
+//
+//            $css .= "  }\n";
+//            $css .= "}\n\n";
+//        }
+//
+//        return $css;
+//    }
+//
+//    private function add_responsive_typography($selector, $settings)
+//    {
+//        $css = '';
+//
+//        // Tablet styles
+//        if (!empty($settings['fontSize']['tablet'])) {
+//            $css .= "@media (max-width: 768px) {\n";
+//            $css .= "  {$selector} {\n";
+//            $css .= "    font-size: {$settings['fontSize']['tablet']}{$settings['fontSizeUnit']};\n";
+//
+//            if (!empty($settings['letterSpacing']['tablet'])) {
+//                $css .= "    letter-spacing: {$settings['letterSpacing']['tablet']}{$settings['letterSpacingUnit']};\n";
+//            }
+//
+//            if (!empty($settings['lineHeight']['tablet'])) {
+//                $css .= "    line-height: {$settings['lineHeight']['tablet']}{$settings['lineHeightUnit']};\n";
+//            }
+//
+//            $css .= "  }\n";
+//            $css .= "}\n\n";
+//        }
+//
+//        // Mobile styles
+//        if (!empty($settings['fontSize']['mobile'])) {
+//            $css .= "@media (max-width: 480px) {\n";
+//            $css .= "  {$selector} {\n";
+//            $css .= "    font-size: {$settings['fontSize']['mobile']}{$settings['fontSizeUnit']};\n";
+//
+//            if (!empty($settings['letterSpacing']['mobile'])) {
+//                $css .= "    letter-spacing: {$settings['letterSpacing']['mobile']}{$settings['letterSpacingUnit']};\n";
+//            }
+//
+//            if (!empty($settings['lineHeight']['mobile'])) {
+//                $css .= "    line-height: {$settings['lineHeight']['mobile']}{$settings['lineHeightUnit']};\n";
+//            }
+//
+//            $css .= "  }\n";
+//            $css .= "}\n";
+//        }
+//
+//        return $css;
+//    }
+//
+//    public function output_global_styles()
+//    {
+//        $styles = get_option('fb_global_styles', '');
+//        if (!empty($styles)) {
+//            // Add debugging comment
+//            echo "<!-- Typography styles begin -->\n";
+//            echo "<style id='fb-global-styles'>\n" . $styles . "\n</style>";
+//            echo "<!-- Typography styles end -->\n";
+//        } else {
+//            // Debug if no styles were found
+//            echo "<!-- No global styles found in database -->";
+//        }
+//    }
+//
+//    public function typography_init()
+//    {
+//        $elements = ['text', 'link', 'button', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+//
+//        foreach ($elements as $element) {
+//            register_setting(
+//                'fb_typography',
+//                'fb_typography_' . $element,
+//                [
+//                    'type' => 'string',
+//                    'show_in_rest' => true,
+//                    'default' => ''
+//                ]
+//            );
+//        }
+//    }
 
 }

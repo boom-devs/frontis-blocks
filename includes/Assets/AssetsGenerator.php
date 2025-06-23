@@ -432,13 +432,21 @@ class AssetsGenerator {
             $upload_dir = wp_upload_dir();
             $css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/global/';
 
+			if(file_exists($css_dir)) {
+				unlink($css_dir);
+			}
+
             if (!file_exists($css_dir)) {
                 wp_mkdir_p($css_dir);
             }
 
-            $css_file_name = 'global.css';
+            $css_file_name = 'global.min.css';
             $css_file = $css_dir . $css_file_name;
-            file_put_contents($css_file, $root_css);
+			$minifier = new CSS($root_css);
+			$minified_css = $minifier->minify();
+
+			update_option('fb_global_css', $minified_css);
+            file_put_contents($css_file, $minified_css);
         }
     }
 
@@ -551,7 +559,6 @@ class AssetsGenerator {
     }
 
     public function css_generator_functions($generate_template_css = false) {
-        $this->generate_global_assets();
         $this->combine_static_assets();
         $this->generate_all_blocks_assets();
 

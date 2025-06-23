@@ -16,7 +16,7 @@ import { useEffect, useState } from "@wordpress/element";
 import { useDeviceType } from "@Config/displayType";
 import FB_SidebarTypography from "./SidebarTypography";
 import { loadGoogleFont, useAfterSave } from "../helper";
-import { updateGlobalStyle } from "../fetch";
+import {updateGlobalStyle, generateGlobalCss} from "../fetch";
 import FrontPreview from "./FontPreview";
 import generateCSSVariables from "./GenerateRootCss";
 
@@ -70,10 +70,10 @@ const TypographySettings = (props) => {
 	const deleteItem = (item) => {
 		const tempTypography = { ...customTypography };
 		const tempGlobalTypography = { ...globalTypography };
-	
+
 		delete tempTypography[item];
 		delete tempGlobalTypography[item];
-	
+
 		setCustomTypography(tempTypography);
 		setGlobalTypography(tempGlobalTypography);
 		setIsMount(true);
@@ -1006,6 +1006,7 @@ const TypographySettings = (props) => {
 						localStorage.setItem('fb_fontFamilies', JSON.stringify(response.data.data));
 					}
 				}
+
 				setIsMount(false);
 			}
 		}
@@ -1022,6 +1023,14 @@ const TypographySettings = (props) => {
 	useEffect(() => {
 		if (globalTypography) {
 			generateCSSVariables(globalTypography, deviceType);
+
+			console.log('globalTypography: ', globalTypography);
+
+			// Generate root css for frontend
+			const rootCss =  generateGlobalCss();
+			if(rootCss.success) {
+				localStorage.setItem('root_css', JSON.stringify(rootCss.data.data));
+			}
 		}
 
 	}, [globalTypography, deviceType]);

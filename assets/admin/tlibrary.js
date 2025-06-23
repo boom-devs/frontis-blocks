@@ -4932,6 +4932,13 @@ var TypographySettings = function TypographySettings(props) {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     if (globalTypography) {
       (0,_GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__["default"])(globalTypography, deviceType);
+      console.log('globalTypography: ', globalTypography);
+
+      // Generate root css for frontend
+      var rootCss = (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.generateGlobalCss)();
+      if (rootCss.success) {
+        localStorage.setItem('root_css', JSON.stringify(rootCss.data.data));
+      }
     }
   }, [globalTypography, deviceType]);
 
@@ -5323,6 +5330,7 @@ var TypographySettings = function TypographySettings(props) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   generateGlobalCss: () => (/* binding */ generateGlobalCss),
 /* harmony export */   getGlobalStyle: () => (/* binding */ getGlobalStyle),
 /* harmony export */   updateGlobalStyle: () => (/* binding */ updateGlobalStyle)
 /* harmony export */ });
@@ -5338,6 +5346,50 @@ var getGlobalStyleAction = 'fb_get_global_colors';
 var _window$frontisBlocks = window.frontisBlocksAdminSidebar,
   nonce = _window$frontisBlocks.nonce,
   ajaxUrl = _window$frontisBlocks.ajaxUrl;
+var generateGlobalCss = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var response;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          _context.next = 3;
+          return jQuery.ajax({
+            url: ajaxUrl,
+            type: 'POST',
+            data: {
+              action: 'fb_generate_global_root_css',
+              nonce: nonce
+            }
+          });
+        case 3:
+          response = _context.sent;
+          if (response.success) {
+            _context.next = 6;
+            break;
+          }
+          throw new Error(response.data || 'Update failed');
+        case 6:
+          console.log("Data print inside fetch");
+          console.log(response);
+          return _context.abrupt("return", response);
+        case 11:
+          _context.prev = 11;
+          _context.t0 = _context["catch"](0);
+          return _context.abrupt("return", {
+            "success": false,
+            "data": "Update failed."
+          });
+        case 14:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[0, 11]]);
+  }));
+  return function generateGlobalCss() {
+    return _ref.apply(this, arguments);
+  };
+}();
 
 /**
  * Function for Update Global Settings
@@ -5347,60 +5399,14 @@ var _window$frontisBlocks = window.frontisBlocksAdminSidebar,
  */
 
 var updateGlobalStyle = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(value) {
-    var key,
-      response,
-      _args = arguments;
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) switch (_context.prev = _context.next) {
-        case 0:
-          key = _args.length > 1 && _args[1] !== undefined ? _args[1] : 'fb_update_global_colors';
-          _context.prev = 1;
-          _context.next = 4;
-          return jQuery.ajax({
-            url: ajaxUrl,
-            type: 'POST',
-            data: {
-              action: key,
-              nonce: nonce,
-              data: value
-            }
-          });
-        case 4:
-          response = _context.sent;
-          if (response.success) {
-            _context.next = 7;
-            break;
-          }
-          throw new Error(response.data || 'Update failed');
-        case 7:
-          return _context.abrupt("return", response);
-        case 10:
-          _context.prev = 10;
-          _context.t0 = _context["catch"](1);
-          return _context.abrupt("return", {
-            "success": false,
-            "data": "Update failed."
-          });
-        case 13:
-        case "end":
-          return _context.stop();
-      }
-    }, _callee, null, [[1, 10]]);
-  }));
-  return function updateGlobalStyle(_x) {
-    return _ref.apply(this, arguments);
-  };
-}();
-var getGlobalStyle = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(value) {
     var key,
       response,
       _args2 = arguments;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          key = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : getGlobalStyleAction;
+          key = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] : 'fb_update_global_colors';
           _context2.prev = 1;
           _context2.next = 4;
           return jQuery.ajax({
@@ -5408,7 +5414,8 @@ var getGlobalStyle = /*#__PURE__*/function () {
             type: 'POST',
             data: {
               action: key,
-              nonce: nonce
+              nonce: nonce,
+              data: value
             }
           });
         case 4:
@@ -5425,7 +5432,7 @@ var getGlobalStyle = /*#__PURE__*/function () {
           _context2.t0 = _context2["catch"](1);
           return _context2.abrupt("return", {
             "success": false,
-            "data": "Colors not found."
+            "data": "Update failed."
           });
         case 13:
         case "end":
@@ -5433,8 +5440,53 @@ var getGlobalStyle = /*#__PURE__*/function () {
       }
     }, _callee2, null, [[1, 10]]);
   }));
-  return function getGlobalStyle() {
+  return function updateGlobalStyle(_x) {
     return _ref2.apply(this, arguments);
+  };
+}();
+var getGlobalStyle = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+    var key,
+      response,
+      _args3 = arguments;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          key = _args3.length > 0 && _args3[0] !== undefined ? _args3[0] : getGlobalStyleAction;
+          _context3.prev = 1;
+          _context3.next = 4;
+          return jQuery.ajax({
+            url: ajaxUrl,
+            type: 'POST',
+            data: {
+              action: key,
+              nonce: nonce
+            }
+          });
+        case 4:
+          response = _context3.sent;
+          if (response.success) {
+            _context3.next = 7;
+            break;
+          }
+          throw new Error(response.data || 'Update failed');
+        case 7:
+          return _context3.abrupt("return", response);
+        case 10:
+          _context3.prev = 10;
+          _context3.t0 = _context3["catch"](1);
+          return _context3.abrupt("return", {
+            "success": false,
+            "data": "Colors not found."
+          });
+        case 13:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3, null, [[1, 10]]);
+  }));
+  return function getGlobalStyle() {
+    return _ref3.apply(this, arguments);
   };
 }();
 
