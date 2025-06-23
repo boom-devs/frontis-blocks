@@ -14,7 +14,7 @@ class SupportSVG {
 
     /**
      * WP_Filesystem instance
-     * 
+     *
      * @var \WP_Filesystem_Base
      */
     private $wpFilesystem;
@@ -32,6 +32,7 @@ class SupportSVG {
         if (!function_exists('WP_Filesystem')) {
             require_once ABSPATH . 'wp-admin/includes/file.php';
         }
+
         WP_Filesystem();
         global $wp_filesystem;
         $this->wpFilesystem = $wp_filesystem;
@@ -39,7 +40,7 @@ class SupportSVG {
 
     /**
      * Allow SVG MIME type in uploads.
-     * 
+     *
      * @param array $mimes
      * @return array
      */
@@ -51,7 +52,7 @@ class SupportSVG {
 
     /**
      * Validate the uploaded SVG file.
-     * 
+     *
      * @param array $file
      * @return array
      */
@@ -107,7 +108,7 @@ class SupportSVG {
 
     /**
      * Fix SVG thumbnail display in the media library.
-     * 
+     *
      * @param array $response
      * @return array
      */
@@ -141,7 +142,7 @@ class SupportSVG {
 
     /**
      * Validate the SVG content for prohibited elements and attributes.
-     * 
+     *
      * @param \DOMDocument $doc
      * @return bool
      */
@@ -169,7 +170,7 @@ class SupportSVG {
 
     /**
      * Sanitize SVG content to remove unwanted elements and attributes.
-     * 
+     *
      * @param string $content
      * @return string
      */

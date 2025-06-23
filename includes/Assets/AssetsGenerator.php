@@ -424,7 +424,7 @@ class AssetsGenerator {
 
         if($root_css) {
             $upload_dir = wp_upload_dir();
-            $css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/global/';
+            $css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/root/';
 
 			if(file_exists($css_dir)) {
 				unlink($css_dir);
@@ -434,12 +434,12 @@ class AssetsGenerator {
                 wp_mkdir_p($css_dir);
             }
 
-            $css_file_name = 'global.min.css';
+            $css_file_name = 'root.min.css';
             $css_file = $css_dir . $css_file_name;
 			$minifier = new CSS($root_css);
 			$minified_css = $minifier->minify();
 
-			update_option('fb_global_css', $minified_css);
+			update_option('fb_root_css', $minified_css);
             file_put_contents($css_file, $minified_css);
         }
     }
@@ -694,18 +694,9 @@ class AssetsGenerator {
     public function combine_and_save_css_file($page_name) {
 
         $upload_dir = wp_upload_dir();
-        $global_css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
         $css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/' . $page_name . '/';
         if (!file_exists($css_dir)) {
             wp_mkdir_p($css_dir);
-        }
-
-        if(get_post_type( $this->post_id ) !== 'wp_template_part') {
-            // Add global css
-            $global_css_file = $global_css_dir . '/global/global.css';
-            if(file_exists($global_css_file)) {
-                $this->css_content .= file_get_contents($global_css_file) . "\n";
-            }
         }
 
         $minifier = new CSS($this->css_content);
@@ -725,7 +716,7 @@ class AssetsGenerator {
         $this->js_content = '';
     }
 
-    public function mergeFontArrays($arrays) {
+    public function marge_fonts_array($arrays) {
     $merged = [];
 
     // Iterate through each array
@@ -764,7 +755,7 @@ class AssetsGenerator {
         $custom_fonts = Helper::extract_font_families($custom_typography);
         $typography_fonts = Helper::extract_font_families($typography_data);
         $fonts_families = [$typography_fonts, $custom_fonts, $this->block_fonts];
-        $fonts_families = $this->mergeFontArrays($fonts_families);
+        $fonts_families = $this->marge_fonts_array($fonts_families);
 
         if (!empty($fonts_families)) {
             $font_url = "https://fonts.googleapis.com/css?family=";

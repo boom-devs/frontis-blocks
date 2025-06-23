@@ -95,10 +95,10 @@ final class Plugin
 		add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_scripts']);
 		register_activation_hook(FB_PLUGIN_FILE, [$this, 'set_activation_redirect']);
 		add_action('admin_init', [$this, 'handle_activation_redirect'], 999);
-		add_action('wp_head', [$this, 'add_preconnect_to_head']);
+		add_action('wp_head', [$this, 'add_google_fonts']);
 	}
 
-	function add_preconnect_to_head()
+	function add_google_fonts()
 	{
 
 		// Enqueue google fonts
@@ -151,7 +151,7 @@ final class Plugin
 		$footer_js_file_url = $footer_frontend_url . 'footer.js';
 		if (file_exists($footer_js_system_path)) {
 			$version = filemtime($footer_js_system_path);
-			wp_enqueue_script('frontis-blocks-frontend-footer', $footer_js_file_url, [], time(), true);
+			wp_enqueue_script('frontis-blocks-frontend-footer', $footer_js_file_url, [], $version, true);
 		}
 	}
 
@@ -234,7 +234,7 @@ final class Plugin
 			]
 		]);
 
-		
+
 
 	}
 
@@ -331,8 +331,6 @@ final class Plugin
 		GlobalSettings::get_instance()->register_global_settings_events();
 
 		SupportSVG::get_instance();
-
-		// UsedBlocks::get_instance()->get_used_frontis_blocks();
 
 	}
 
@@ -482,7 +480,5 @@ final class Plugin
 
 		// Active insights
 		$client->insights()->init();
-
 	}
-
 }
