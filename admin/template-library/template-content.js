@@ -5,8 +5,6 @@ import { useState, useEffect, useCallback } from "@wordpress/element";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ClipLoader } from 'react-spinners'; 
-import SiteImportModal from "./fullsiteimport";
-import FrontisBlocksSidebarFullSite from "../full-site-import/sidebar";
 
 const TemplateCard = ({ imageUrl }) => {
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
@@ -195,10 +193,6 @@ const TemplateCard = ({ imageUrl }) => {
           </div>
         </div>
       </div>
-      <SiteImportModal 
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
     </>
   );

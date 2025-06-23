@@ -1,6 +1,6 @@
-/*!******************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./admin/template-library/style.scss ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************/
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./admin/template-library/scss/style.scss ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************/
 .fb-template-library-store-header {
   padding: 24px;
   border-bottom: 1px solid #E1E3E8;
@@ -22,8 +22,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 538px;
+  margin-left: 360px;
   gap: 20px;
+}
+@media all and (max-width: 1024px) {
+  .fb-template-library-store-header .fb-template-library-store-header-container .fb-template-library-tabs {
+    margin-left: 50px;
+  }
+}
+@media all and (max-width: 1400px) {
+  .fb-template-library-store-header .fb-template-library-store-header-container .fb-template-library-tabs {
+    margin-left: 50px;
+  }
 }
 .fb-template-library-store-header .fb-template-library-store-header-container .fb-template-library-tabs span {
   color: #555E72;
@@ -66,6 +76,16 @@
   gap: 24px;
   z-index: 10;
 }
+@media all and (max-width: 1024px) {
+  .fb-template-library-store-header .fb-template-library-store-header-container .fb-template-library-header-right {
+    margin-left: 0;
+  }
+}
+@media all and (max-width: 1400px) {
+  .fb-template-library-store-header .fb-template-library-store-header-container .fb-template-library-header-right {
+    margin-left: 50px;
+  }
+}
 .fb-template-library-store-header .fb-template-library-store-header-container .fb-template-library-header-right .fb-template-library-search-wrapper .fb-search-input-wrapper {
   display: flex;
   align-items: center;
@@ -91,6 +111,163 @@
   border: 1px solid #E1E3E8;
   border-radius: 50px;
   line-height: 0;
+  cursor: pointer;
+}
+
+.fb-template-library-store-sidebar-wrapper {
+  display: flex;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar {
+  flex: 1;
+  padding: 32px 0 0 0;
+  border-right: 1px solid #E1E3E8;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-category-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 32px 16px;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-category-wrapper .fb-template-category-label h2 {
+  font-family: "Onest";
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: #050607;
+  margin: 0;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-category-wrapper .fb-template-category {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-category-wrapper .fb-template-category span {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-category-wrapper .fb-template-category .fb-tl-free {
+  background: #EDF5FD;
+  color: #6FB1F2;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-category-wrapper .fb-template-category .fb-tl-pro {
+  background: #FEEBD5;
+  color: #F89B2E;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 16px;
+  border: none;
+  border-bottom: 1px solid #E1E3E8;
+  cursor: pointer;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab span {
+  color: #555E72;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab span.fb-template-library-store-sidebar-tab-count {
+  font-size: 12px;
+  line-height: 16px;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: #EDF5FD;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab:last-child {
+  border-bottom: none;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab.active {
+  background: #EDF5FD;
+  border-bottom: 1px solid transparent;
+  border-left: 4px solid #3991FF;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab.active span.fb-template-library-store-sidebar-tab-count {
+  background: #3991FF;
+  color: #FFFFFF;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab.active span.fb-template-library-store-sidebar-tab-name {
+  color: #399CFF;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab:has(+ .active) {
+  border-bottom: 1px solid transparent;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs button {
+  border: none;
+  background: none;
+  width: 100%;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content {
+  flex: 6;
+  padding: 24px 0 0 24px;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card {
+  background: #fff;
+  border-radius: 14px;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content {
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-import {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px;
+  border-radius: 6px;
+  background: #399CFF;
+  cursor: pointer;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-import span {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save .save-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save .save-wrapper span {
+  color: #555E72;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+}
+.fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save .favourite-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 50px;
+  border: 1px solid #E1E3E8;
+  background: #F7F7F7;
   cursor: pointer;
 }
 
@@ -127,124 +304,6 @@ body .components-modal__frame.fb-template-library-popover .components-modal__con
 }
 body .fb-template-library-store-wrap {
   font-family: "Manrope";
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper {
-  display: flex;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar {
-  flex: 1;
-  padding: 24px 24px 0 0;
-  border-right: 1px solid #E1E3E8;
-  height: 100vh;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px;
-  border: none;
-  border-bottom: 1px solid #E1E3E8;
-  cursor: pointer;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab span {
-  color: #555E72;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 20px;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab span.fb-template-library-store-sidebar-tab-count {
-  font-size: 12px;
-  line-height: 16px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50px;
-  background: #EBF5FF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab:last-child {
-  border-bottom: none;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab.active {
-  border-radius: 8px;
-  background: #EBF5FF;
-  border-bottom: 1px solid transparent;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab.active span.fb-template-library-store-sidebar-tab-count {
-  background: #ffffff;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab.active span.fb-template-library-store-sidebar-tab-name {
-  color: #399CFF;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs .fb-template-library-store-sidebar-tab:has(+ .active) {
-  border-bottom: 1px solid transparent;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-sidebar .fb-template-library-store-sidebar-tabs button {
-  border: none;
-  background: none;
-  width: 100%;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-content {
-  flex: 6;
-  padding: 24px 0 0 24px;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards {
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card {
-  background: #fff;
-  border-radius: 14px;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content {
-  padding: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-import {
-  display: flex;
-  align-items: center;
-  padding: 8px 12px;
-  gap: 8px;
-  border-radius: 6px;
-  background: #399CFF;
-  cursor: pointer;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-import span {
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 22px;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save .save-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save .save-wrapper span {
-  color: #555E72;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-}
-body .fb-template-library-store-wrap .fb-template-library-store-sidebar-wrapper .fb-template-library-store-content .fb-template-library-cards .fb-template-library-card .fb-template-library-card-content .fb-template-library-save .favourite-wrapper {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-radius: 50px;
-  border: 1px solid #E1E3E8;
-  background: #F7F7F7;
-  cursor: pointer;
 }
 
 .fb-fsi-modal-overlay {

@@ -23,8 +23,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 538px;
+            margin-left: 360px;
             gap: 20px;
+
+            @media all and (max-width: 1024px) {
+                margin-left: 50px;
+            }
+            @media all and (max-width: 1400px) {
+                margin-left: 50px;
+            }
 
             span {
                 color: #555E72;
@@ -42,6 +49,7 @@
 
                 &.active {
                     position: relative;
+
                     span {
                         color: $neutral-color-950;
                     }
@@ -72,6 +80,13 @@
             margin-left: 272px;
             gap: 24px;
             z-index: 10;
+
+            @media all and (max-width: 1024px) {
+                margin-left: 0;
+            }
+            @media all and (max-width: 1400px) {
+                margin-left: 50px;
+            }
 
             .fb-template-library-search-wrapper {
                 .fb-search-input-wrapper {
