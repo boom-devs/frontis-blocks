@@ -145,17 +145,28 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
     function handleClickOutside(event) {
       var _gradientPopoverAncho;
       var clickedInsidePopup = (_gradientPopoverAncho = gradientPopoverAnchor.current) === null || _gradientPopoverAncho === void 0 ? void 0 : _gradientPopoverAncho.contains(event.target);
-      var clickedTrigger = event.target.closest('.fb-custom-color-item');
-
-      // Don't close if clicked inside the WP popover
+      var clickedTrigger = event.target.closest('.fb-custom-gradient-list .fb-custom-color-item');
       var isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
       if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
         setClickedGradient('');
       }
     }
+
+    // Add listener to main document
     document.addEventListener('mousedown', handleClickOutside);
+
+    // Also try to add listener to iframe document
+    var iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
+    if (iframe && iframe.contentDocument) {
+      iframe.contentDocument.addEventListener('mousedown', handleClickOutside);
+    }
+
+    // Cleanup
     return function () {
       document.removeEventListener('mousedown', handleClickOutside);
+      if (iframe && iframe.contentDocument) {
+        iframe.contentDocument.removeEventListener('mousedown', handleClickOutside);
+      }
     };
   }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, colors && colors.length > 0 && /*#__PURE__*/React.createElement("div", {
@@ -163,7 +174,7 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
     className: "fb-gradient-color-label"
   }, title), /*#__PURE__*/React.createElement("div", {
-    className: "fb-custom-panel fb-gradient-color-list"
+    className: "fb-custom-panel fb-gradient-color-list fb-custom-gradient-list"
   }, colors.map(function (color, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: index,
@@ -175,10 +186,9 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
       onClick: function onClick() {
         return !enableEditName && setClickedGradient(clickedGradient === color.slug ? '' : color.slug);
       }
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorIndicator, {
-      onClick: function onClick() {
-        return setClickedGradient(clickedGradient === color.slug ? '' : color.slug);
-      },
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorIndicator
+    // onClick={() => setClickedGradient(clickedGradient === color.slug ? '' : color.slug)}
+    , {
       colorValue: color === null || color === void 0 ? void 0 : color.color
     }), enableEditName && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
       className: 'fb-custom-element__edit-input',
@@ -710,17 +720,28 @@ var GradientColorPallet = function GradientColorPallet(props) {
     function handleClickOutside(event) {
       var _gradientPopoverAncho;
       var clickedInsidePopup = (_gradientPopoverAncho = gradientPopoverAnchor.current) === null || _gradientPopoverAncho === void 0 ? void 0 : _gradientPopoverAncho.contains(event.target);
-      var clickedTrigger = event.target.closest('.fb-custom-color-item');
-
-      // Don't close if clicked inside the WP popover
+      var clickedTrigger = event.target.closest('.fb-gradient-list .fb-custom-color-item');
       var isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
       if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
         setClickedGradient('');
       }
     }
+
+    // Add listener to main document
     document.addEventListener('mousedown', handleClickOutside);
+
+    // Also try to add listener to iframe document
+    var iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
+    if (iframe && iframe.contentDocument) {
+      iframe.contentDocument.addEventListener('mousedown', handleClickOutside);
+    }
+
+    // Cleanup
     return function () {
       document.removeEventListener('mousedown', handleClickOutside);
+      if (iframe && iframe.contentDocument) {
+        iframe.contentDocument.removeEventListener('mousedown', handleClickOutside);
+      }
     };
   }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, colors && colors.length > 0 && /*#__PURE__*/React.createElement("div", {
@@ -728,7 +749,7 @@ var GradientColorPallet = function GradientColorPallet(props) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
     className: "fb-gradient-color-label"
   }, title), /*#__PURE__*/React.createElement("div", {
-    className: "fb-custom-panel fb-gradient-color-list"
+    className: "fb-custom-panel fb-gradient-color-list fb-gradient-list"
   }, colors.map(function (color, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: index,
