@@ -609,6 +609,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
   border-radius: 4px;
 }
 
+.components-navigator-screen {
+  scrollbar-width: none;
+}
+
 .fb-gradient-color-popup .fb-gradient-color-popup-content {
   padding: 10px;
 }

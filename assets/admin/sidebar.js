@@ -932,10 +932,7 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
     _useState2 = _slicedToArray(_useState, 2),
     clickedGradient = _useState2[0],
     setClickedGradient = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(),
-    _useState4 = _slicedToArray(_useState3, 2),
-    gradientPopoverAnchor = _useState4[0],
-    setGradientPopoverAnchor = _useState4[1];
+  var gradientPopoverAnchor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   var editColorName = function editColorName(index, value) {
     var cloneColors = _toConsumableArray(colors);
     cloneColors[index] = _objectSpread(_objectSpread({}, cloneColors[index]), {}, {
@@ -945,10 +942,13 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
   };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     function handleClickOutside(event) {
-      var _popupRef$current;
-      var clickedInsidePopup = (_popupRef$current = popupRef.current) === null || _popupRef$current === void 0 ? void 0 : _popupRef$current.contains(event.target);
+      var _gradientPopoverAncho;
+      var clickedInsidePopup = (_gradientPopoverAncho = gradientPopoverAnchor.current) === null || _gradientPopoverAncho === void 0 ? void 0 : _gradientPopoverAncho.contains(event.target);
       var clickedTrigger = event.target.closest('.fb-custom-color-item');
-      if (!clickedInsidePopup && !clickedTrigger) {
+
+      // Don't close if clicked inside the WP popover
+      var isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
+      if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
         setClickedGradient('');
       }
     }
@@ -966,7 +966,7 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
   }, colors.map(function (color, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: index,
-      ref: setGradientPopoverAnchor,
+      ref: gradientPopoverAnchor,
       id: "fb-gradient-color-".concat(index),
       className: "fb-custom-element fb-custom-color-item"
     }, /*#__PURE__*/React.createElement("div", {
@@ -1521,10 +1521,7 @@ var GradientColorPallet = function GradientColorPallet(props) {
     _useState2 = _slicedToArray(_useState, 2),
     clickedGradient = _useState2[0],
     setClickedGradient = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(),
-    _useState4 = _slicedToArray(_useState3, 2),
-    gradientPopoverAnchor = _useState4[0],
-    setGradientPopoverAnchor = _useState4[1];
+  var gradientPopoverAnchor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
   var editColorName = function editColorName(index, value) {
     var cloneColors = _toConsumableArray(colors);
     cloneColors[index] = _objectSpread(_objectSpread({}, cloneColors[index]), {}, {
@@ -1532,6 +1529,23 @@ var GradientColorPallet = function GradientColorPallet(props) {
     });
     setColors(_toConsumableArray(cloneColors));
   };
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    function handleClickOutside(event) {
+      var _gradientPopoverAncho;
+      var clickedInsidePopup = (_gradientPopoverAncho = gradientPopoverAnchor.current) === null || _gradientPopoverAncho === void 0 ? void 0 : _gradientPopoverAncho.contains(event.target);
+      var clickedTrigger = event.target.closest('.fb-custom-color-item');
+
+      // Don't close if clicked inside the WP popover
+      var isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
+      if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
+        setClickedGradient('');
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return function () {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, colors && colors.length > 0 && /*#__PURE__*/React.createElement("div", {
     className: "fb-color-panel ".concat(wrapperClass)
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
@@ -1541,7 +1555,7 @@ var GradientColorPallet = function GradientColorPallet(props) {
   }, colors.map(function (color, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: index,
-      ref: setGradientPopoverAnchor,
+      ref: gradientPopoverAnchor,
       id: "fb-gradient-color-".concat(index),
       className: "fb-custom-element fb-custom-color-item"
     }, /*#__PURE__*/React.createElement("div", {
