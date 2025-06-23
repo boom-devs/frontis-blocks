@@ -1,0 +1,61 @@
+@import '../../scss/variables';
+
+.fb-template-library-store-header {
+    border-bottom: 1px solid #E1E3E8;
+
+    .fb-template-library-store-header-container {
+        display: flex;
+        align-items: center;
+
+        .fb-template-library-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            span {
+                font-weight: 700;
+                font-size: 30px;
+            }
+        }
+
+        .fb-template-library-tabs {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 538px;
+            padding: 14px;
+            border-radius: 14px;
+            gap: 20px;
+
+            span {
+                color: #555E72;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 22px;
+            }
+
+            .single-tab {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+
+                &.active {
+                    padding: 12px;
+                    border-bottom: 2px solid $primary-color;
+                    span {
+                        color: $neutral-color-950;
+                    }
+                }
+            }
+
+            button {
+                border: none;
+                background: none;
+                cursor: pointer;
+                z-index: 10;
+            }
+        }
+    }
+}
