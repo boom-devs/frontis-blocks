@@ -152,7 +152,7 @@
   margin-bottom: 12px;
 }
 .fb-global-controls.components-panel .fb-panel-control .fb-color-section .fb-panel-heading-wrapper .fb-section-title {
-  margin-bottom: 0;
+  margin: 0;
 }
 .fb-global-controls.components-panel .fb-panel-control .fb-color-section .fb-panel-heading-wrapper .add-custom-color {
   padding: 0;
@@ -580,6 +580,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
   height: 44px;
   padding: 0 12px;
   border-bottom: 1px solid #E1E3E8;
+  cursor: pointer;
 }
 .fb-color-panel.fb-gradient-color-panel .fb-gradient-color-list .fb-custom-color-item .item-content {
   display: flex;
