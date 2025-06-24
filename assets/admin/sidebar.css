@@ -152,7 +152,7 @@
   margin-bottom: 12px;
 }
 .fb-global-controls.components-panel .fb-panel-control .fb-color-section .fb-panel-heading-wrapper .fb-section-title {
-  margin-bottom: 0;
+  margin: 0;
 }
 .fb-global-controls.components-panel .fb-panel-control .fb-color-section .fb-panel-heading-wrapper .add-custom-color {
   padding: 0;
@@ -168,6 +168,9 @@
 .fb-global-controls.components-panel .fb-panel-control .fb-color-section .fb-color-panel .components-button.block-editor-panel-color-gradient-settings__dropdown {
   padding: 12px;
   height: unset;
+}
+.fb-global-controls.components-panel .fb-panel-control .fb-color-section .fb-color-panel .components-button.block-editor-panel-color-gradient-settings__dropdown .block-editor-panel-color-gradient-settings__color-name {
+  max-width: 130px;
 }
 .fb-global-controls.components-panel .fb-panel-control .fb-color-section:first-child {
   padding-bottom: 12px;
@@ -338,6 +341,14 @@
   margin-bottom: 16px;
   min-height: 100px;
   overflow: hidden;
+}
+
+.fb-color-panel.fb-gradient-color-panel {
+  margin-bottom: 24px;
+}
+
+.fb-gradient-color-popup .components-popover__content {
+  max-height: 100% !important;
 }
 
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.interface-complementary-area-header {
@@ -562,12 +573,14 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
   display: none;
 }
 .fb-color-panel.fb-gradient-color-panel .fb-gradient-color-list .fb-custom-color-item {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 44px;
   padding: 0 12px;
   border-bottom: 1px solid #E1E3E8;
+  cursor: pointer;
 }
 .fb-color-panel.fb-gradient-color-panel .fb-gradient-color-list .fb-custom-color-item .item-content {
   display: flex;
@@ -585,6 +598,20 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
 .fb-color-panel.fb-gradient-color-panel .fb-gradient-color-list .fb-custom-color-item .actions .fb-reset .dashicons-image-rotate:before {
   color: #404655;
   font-size: 17px;
+}
+.fb-color-panel.fb-gradient-color-panel .fb-gradient-color-list .fb-custom-color-item .fb-gradient-color-popup-content {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: #fff;
+  z-index: 1;
+  border: 1px solid #E1E3E8;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.components-navigator-screen {
+  scrollbar-width: none;
 }
 
 .fb-gradient-color-popup .fb-gradient-color-popup-content {
