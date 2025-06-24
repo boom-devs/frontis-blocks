@@ -29,8 +29,8 @@ require_once __DIR__ . '/vendor/autoload.php';
  * Initialize plugin
  */
 function frontis_blocks(){
-    return FrontisBlocks\Plugin::get_instance();
-    return FrontisBlocks\Activator\Activator::get_instance();
+    FrontisBlocks\Activator\Activator::get_instance();
+    FrontisBlocks\Plugin::get_instance();
 }
 
 frontis_blocks();
