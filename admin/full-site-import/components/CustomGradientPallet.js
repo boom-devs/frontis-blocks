@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
+import { useState, useEffect, useRef  } from "@wordpress/element";
 import {
 	Popover,
 	Dashicon,
@@ -23,7 +23,7 @@ const CustomGradientColorPallet = (props) => {
 	} = props
 
 	const [clickedGradient, setClickedGradient] = useState('');
-	const [gradientPopoverAnchor, setGradientPopoverAnchor] = useState();
+	const gradientPopoverAnchor = useRef(null);
 
 	const editColorName = (index, value) => {
 		let cloneColors = [...colors]
@@ -34,6 +34,25 @@ const CustomGradientColorPallet = (props) => {
 		setColors([...cloneColors])
 	}
 
+	useEffect(() => {
+		function handleClickOutside(event) {
+			const clickedInsidePopup = gradientPopoverAnchor.current?.contains(event.target);
+			const clickedTrigger = event.target.closest('.fb-custom-color-item');
+	
+			// Don't close if clicked inside the WP popover
+			const isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
+	
+			if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
+				setClickedGradient('');
+			}
+		}
+	
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, []);
+
 	return (
 		<>
 			{colors && colors.length > 0 && (
@@ -43,7 +62,7 @@ const CustomGradientColorPallet = (props) => {
 						{colors.map((color, index) => (
 							<div
 								key={index}
-								ref={setGradientPopoverAnchor}
+								ref={gradientPopoverAnchor}
 								id={`fb-gradient-color-${index}`}
 								className="fb-custom-element fb-custom-color-item"
 							>
@@ -91,12 +110,6 @@ const CustomGradientColorPallet = (props) => {
 								</div>
 
 								{clickedGradient === color?.slug && (
-									<Popover
-										anchor={gradientPopoverAnchor}
-										className="fb-gradient-color-popup"
-										placement="right"
-										onClose={() => setClickedGradient('')}
-									>
 										<div className="fb-gradient-color-popup-content">
 											<GradientPicker
 												__nextHasNoMargin
@@ -113,7 +126,6 @@ const CustomGradientColorPallet = (props) => {
 												]}
 											/>
 										</div>
-									</Popover>
 								)}
 							</div>
 						))}

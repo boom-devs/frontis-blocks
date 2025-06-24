@@ -1057,12 +1057,14 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
   border-bottom: 1px solid #E1E3E8;
 }
 .fb-color-panel.fb-gradient-color-panel .fb-gradient-color-list .fb-custom-color-item {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 44px;
   padding: 0 12px;
   border-bottom: 1px solid #E1E3E8;
+  cursor: pointer;
 }
 .fb-color-panel.fb-gradient-color-panel .fb-gradient-color-list .fb-custom-color-item .item-content {
   display: flex;
@@ -1080,6 +1082,20 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-controls.component
 .fb-color-panel.fb-gradient-color-panel .fb-gradient-color-list .fb-custom-color-item .actions .fb-reset .dashicons-image-rotate:before {
   color: #404655;
   font-size: 17px;
+}
+.fb-color-panel.fb-gradient-color-panel .fb-gradient-color-list .fb-custom-color-item .fb-gradient-color-popup-content {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background: #fff;
+  z-index: 1;
+  border: 1px solid #E1E3E8;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.components-navigator-screen {
+  scrollbar-width: none;
 }
 
 .fb-gradient-color-popup .fb-gradient-color-popup-content {
