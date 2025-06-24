@@ -2,7 +2,6 @@
 
 namespace FrontisBlocks;
 
-// use FrontisBlocks\Activator\Activator;
 use FrontisBlocks\Admin\Admin;
 use FrontisBlocks\Core\Blocks;
 use FrontisBlocks\Utils\Enqueue;
@@ -174,10 +173,6 @@ final class Plugin
 			$page_name = 'search';
 		}
 
-		// if(is_page()) {
-		// 	$page_name = 'page';
-		// }
-
 		if (is_404()) {
 			$page_name = '404';
 		}
@@ -311,7 +306,6 @@ final class Plugin
 	 */
 	public function init_plugin()
 	{
-		// Activator::get_instance();
 
 		Blocks::get_instance();
 
