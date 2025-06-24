@@ -6956,7 +6956,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														)}
 
 														{/*Spacing*/}
-														<Heading>Spacing</Heading>
+														<Heading>Spacing</Heading> 
 														{/* Padding */}
 														<FB_Spacing
 															label={__("Padding", "frontis-blocks")}
