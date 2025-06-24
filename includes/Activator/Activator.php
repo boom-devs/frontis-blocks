@@ -12,7 +12,7 @@ use FrontisBlocks\Admin\Ajax\Settings;
 class Activator {
 
 
-    const VERSION = '1.0.9';
+    const VERSION = '1.0.8';
     const SLUG = 'frontis-blocks';
 
     use Singleton;
