@@ -4304,6 +4304,10 @@ var TypographySettings = function TypographySettings(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     globalTypography = _useState14[0],
     setGlobalTypography = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    selectCustomTypo = _useState16[0],
+    setSelectCustomTypo = _useState16[1];
   var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_4__.useDeviceType)();
   var isFSE = ((_wp$data$select$getCu = wp.data.select('core').getCurrentTheme()) === null || _wp$data$select$getCu === void 0 ? void 0 : _wp$data$select$getCu.is_block_theme) || false;
 
@@ -5172,7 +5176,7 @@ var TypographySettings = function TypographySettings(props) {
     className: "fb-panel-heading-wrapper"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "fb-panel-heading"
-  }, "Custom"), /*#__PURE__*/React.createElement("div", {
+  }, "Custom"), !selectCustomTypo && /*#__PURE__*/React.createElement("div", {
     className: "add-custom-color"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     className: "add-custom-color-btn",
@@ -5244,7 +5248,10 @@ var TypographySettings = function TypographySettings(props) {
       key: index,
       className: "fb-custom-element fb-global-typography-element"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorButton, {
-      path: "/".concat(item)
+      path: "/".concat(item),
+      onClick: function onClick() {
+        return setSelectCustomTypo(true);
+      }
     }, (_customTypography$ite7 = customTypography[item]) === null || _customTypography$ite7 === void 0 ? void 0 : _customTypography$ite7.name), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
       className: "fb-delete-custom-typo"
     }, /*#__PURE__*/React.createElement("span", {
@@ -5283,9 +5290,23 @@ var TypographySettings = function TypographySettings(props) {
       className: "fb-global-typography-element-content"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
       path: "/".concat(item)
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorBackButton, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
-      icon: "arrow-left-alt2"
-    }), " ", (_customTypography$ite8 = customTypography[item]) === null || _customTypography$ite8 === void 0 ? void 0 : _customTypography$ite8.name), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorBackButton, {
+      onClick: function onClick() {
+        return setSelectCustomTypo(false);
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "16",
+      height: "17",
+      viewBox: "0 0 16 17",
+      fill: "none"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M10.5 13.5L5.5 8.5L10.5 3.5",
+      stroke: "currentcolor",
+      "stroke-width": "1.2",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    })), (_customTypography$ite8 = customTypography[item]) === null || _customTypography$ite8 === void 0 ? void 0 : _customTypography$ite8.name), /*#__PURE__*/React.createElement("div", {
       className: "fb-typography-settings"
     }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
       fontProps: customTypography[item],
@@ -5293,6 +5314,7 @@ var TypographySettings = function TypographySettings(props) {
       fontSize: true
     }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Typography Name', 'frontis-blocks'),
+      className: "fb-custom-typo-name",
       value: (_customTypography$ite9 = customTypography[item]) === null || _customTypography$ite9 === void 0 ? void 0 : _customTypography$ite9.name,
       onChange: function onChange(value) {
         return changeCustomTypoName(item, value);

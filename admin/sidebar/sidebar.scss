@@ -22,11 +22,12 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 	.fb-global-back {
 		padding-left: 0;
-		gap: 10px;
+		gap: 8px;
 		display: flex;
 		align-items: center;
 
 		span {
+			display: flex;
 			svg {
 				fill: none !important;
 			}

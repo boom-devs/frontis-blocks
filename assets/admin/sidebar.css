@@ -32,11 +32,17 @@
   align-items: center;
   margin-bottom: 12px;
 }
+.fb-global-controls.components-panel .fb-panel-control .fb-typography-panel .fb-panel-section .fb-panel-heading-wrapper .add-custom-color {
+  display: flex;
+}
+.fb-global-controls.components-panel .fb-panel-control .fb-typography-panel .fb-panel-section .fb-panel-heading-wrapper .add-custom-color .add-custom-color-btn span {
+  display: flex;
+}
 .fb-global-controls.components-panel .fb-panel-control .fb-typography-panel .fb-panel-section .fb-panel-heading-wrapper .add-custom-color .add-custom-color-btn svg path {
   stroke: #404655;
 }
 .fb-global-controls.components-panel .fb-panel-control .fb-typography-panel .fb-panel-section .fb-panel-heading-wrapper .fb-panel-heading {
-  margin-bottom: 0;
+  margin: 0;
 }
 .fb-global-controls.components-panel .fb-panel-control .fb-typography-panel .fb-panel-section .fb-panel-heading-wrapper .components-button {
   padding: 0;
@@ -241,6 +247,14 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 16px;
+  padding-left: 0;
+  gap: 8px;
+}
+.fb-global-controls.components-panel .fb-global-typography-element-content .components-navigator-screen .components-navigator-back-button svg {
+  fill: none;
+}
+.fb-global-controls.components-panel .fb-global-typography-element-content .fb-custom-typo-name {
+  margin-bottom: 20px;
 }
 .fb-global-controls.components-panel .fb-global-typography-element-content .fb-setting-label-text {
   font-family: "Onest", sans-serif;
@@ -366,9 +380,12 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .components-panel__header.int
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-back {
   padding-left: 0;
-  gap: 10px;
+  gap: 8px;
   display: flex;
   align-items: center;
+}
+div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-back span {
+  display: flex;
 }
 div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-global-back span svg {
   fill: none !important;
