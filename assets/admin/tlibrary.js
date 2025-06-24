@@ -8,7 +8,7 @@
   \******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"pattern1","title":"Pattern 1","image":"http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-1.png","content":"Pattern 1 content here"},{"id":"pattern2","title":"Pattern 2","image":"http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-3.png","content":"Pattern 2 content here"},{"id":"pattern3","title":"Pattern 3","image":"http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-2.png","content":"Pattern 3 content here"},{"id":"pattern4","title":"Pattern 4","image":"http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-1.png","content":"Pattern 4 content here"},{"id":"pattern5","title":"Pattern 5","image":"http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-3.png","content":"Pattern 5 content here"},{"id":"pattern6","title":"Pattern 6","image":"http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-1.png","content":"Pattern 6 content here"},{"id":"pattern15","title":"Pattern 15","image":"http://localhost/boomdevs-co/wp-content/uploads/2025/06/demo-3.png","content":"Pattern 15 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[{"id":"pattern1","title":"Pattern 1","image":"pattern1.jpg","content":"Pattern 1 content here"}]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"page1","title":"Page 1","image":"Page.jpg","content":"Page 1 content here"},{"id":"page2","title":"Page 2","image":"Page.jpg","content":"Page 2 content here"},{"id":"page3","title":"Pattern 3","image":"Page.jpg","content":"Page 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"item1","title":"Item 1","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Site 1 content here"},{"id":"item2","title":"Item 2","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Site 2 content here"},{"id":"item3","title":"Item 3","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Site 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"template-library":{"name":"Template Library","categories":[{"id":"all","name":"All","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]}]}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"pattern1","title":"Illustrate AI Landing Page for Gutenberg","image":"http://localhost/boomdevs-new/wp-content/uploads/2025/06/demo-1.png","content":"Pattern 1 content here"},{"id":"pattern2","title":"Illustrate AI Landing Page for Gutenberg","image":"http://localhost/boomdevs-new/wp-content/uploads/2025/06/pro-1.png","content":"Pattern 2 content here"},{"id":"pattern3","title":"Illustrate AI Landing Page for Gutenberg","image":"http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-2.png","content":"Pattern 3 content here"},{"id":"pattern4","title":"Illustrate AI Landing Page for Gutenberg","image":"http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-3.png","content":"Pattern 4 content here"},{"id":"pattern5","title":"Illustrate AI Landing Page for Gutenberg","image":"http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-4.png","content":"Pattern 5 content here"},{"id":"pattern6","title":"Illustrate AI Landing Page for Gutenberg","image":"http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-5.png","content":"Pattern 6 content here"},{"id":"pattern15","title":"Illustrate AI Landing Page for Gutenberg","image":"http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-6.png","content":"Pattern 15 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[{"id":"pattern1","title":"Pattern 1","image":"pattern1.jpg","content":"Pattern 1 content here"}]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"page1","title":"Page 1","image":"Page.jpg","content":"Page 1 content here"},{"id":"page2","title":"Page 2","image":"Page.jpg","content":"Page 2 content here"},{"id":"page3","title":"Pattern 3","image":"Page.jpg","content":"Page 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"item1","title":"Item 1","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Site 1 content here"},{"id":"item2","title":"Item 2","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Site 2 content here"},{"id":"item3","title":"Item 3","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Site 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"template-library":{"name":"Template Library","categories":[{"id":"all","name":"All","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]}]}}}');
 
 /***/ }),
 
@@ -109,7 +109,6 @@ var TemplateCard = function TemplateCard(_ref) {
     setIsModalOpen(true);
   }, []);
   var handleDemo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
-    // Handle demo functionality
     console.log("Demo clicked for:", id);
   }, [id]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
@@ -133,23 +132,26 @@ var TemplateCard = function TemplateCard(_ref) {
     className: "fb-demo-btn",
     onClick: handleDemo
   }, /*#__PURE__*/React.createElement("span", null, "Demo"), /*#__PURE__*/React.createElement("svg", {
-    width: "16",
-    height: "16",
-    viewBox: "0 0 16 16",
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "18",
+    height: "18",
+    viewBox: "0 0 18 18",
     fill: "none"
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M8 2L14 8L8 14",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
+    d: "M16.158 8.28375C16.386 8.60348 16.5 8.76338 16.5 9C16.5 9.23662 16.386 9.39652 16.158 9.71625C15.1334 11.1529 12.5169 14.25 9 14.25C5.48309 14.25 2.86657 11.1529 1.84203 9.71625C1.61401 9.39652 1.5 9.23662 1.5 9C1.5 8.76338 1.61401 8.60348 1.84203 8.28375C2.86657 6.84708 5.48309 3.75 9 3.75C12.5169 3.75 15.1334 6.84708 16.158 8.28375Z",
+    stroke: "#0B0C0E",
+    "stroke-width": "1.125"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M11.25 9C11.25 7.75732 10.2427 6.75 9 6.75C7.75732 6.75 6.75 7.75732 6.75 9C6.75 10.2427 7.75732 11.25 9 11.25C10.2427 11.25 11.25 10.2427 11.25 9Z",
+    stroke: "#0B0C0E",
+    "stroke-width": "1.125"
   })))))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card-content"
   }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-card-content-top"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-badge ".concat(isPro ? "pro" : "free")
-  }, isPro ? "PRO" : "FREE"), /*#__PURE__*/React.createElement("h3", {
-    className: "fb-template-title"
-  }, title), /*#__PURE__*/React.createElement("div", {
+  }, isPro ? "PRO" : "FREE"), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-actions"
   }, /*#__PURE__*/React.createElement("button", {
     className: "fb-import-btn ".concat(isLoading ? "loading" : ""),
@@ -158,38 +160,30 @@ var TemplateCard = function TemplateCard(_ref) {
   }, isLoading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Importing..."), /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_3__["default"], {
     color: "#fff",
     size: 16
-  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Import"), /*#__PURE__*/React.createElement("svg", {
-    width: "16",
-    height: "16",
-    viewBox: "0 0 16 16",
-    fill: "none"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M2.67 8C2.67 10.95 5.05 13.33 8 13.33C10.95 13.33 13.33 10.95 13.33 8",
-    stroke: "currentColor",
-    strokeWidth: "1.5",
-    strokeLinecap: "round"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M8 2.67V9.33M8 9.33L10 7.33M8 9.33L6 7.33",
-    stroke: "currentColor",
-    strokeWidth: "1.5",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  })))), /*#__PURE__*/React.createElement("button", {
-    className: "fb-favorite-btn"
-  }, /*#__PURE__*/React.createElement("svg", {
+  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Import"))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-template-save-my-cloud"
+  }, /*#__PURE__*/React.createElement("span", null, "Save My Cloud"), /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
-    width: "18",
-    height: "18",
-    viewBox: "0 0 18 18",
+    width: "17",
+    height: "17",
+    viewBox: "0 0 17 17",
     fill: "none"
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M9 4.12553L8.5947 4.5156C8.59725 4.51821 8.5998 4.52079 8.60235 4.52335L9 4.12553ZM10.1024 6.02281C10.322 6.24244 10.6782 6.24237 10.8978 6.02266C11.1175 5.80296 11.1174 5.4468 10.8976 5.22717L10.1024 6.02281ZM7.06954 13.7415C5.93279 12.8454 4.6898 11.9703 3.70372 10.8599C2.73692 9.77121 2.0625 8.50093 2.0625 6.85288H0.9375C0.9375 8.85201 1.77038 10.3771 2.86254 11.6069C3.93542 12.815 5.30308 13.7815 6.37306 14.625L7.06954 13.7415ZM2.0625 6.85288C2.0625 5.23973 2.97403 3.88695 4.21827 3.3182C5.42705 2.76567 7.05125 2.91199 8.5947 4.5156L9.4053 3.73545C7.57387 1.8327 5.44807 1.5191 3.75057 2.29503C2.08853 3.05475 0.9375 4.81883 0.9375 6.85288H2.0625ZM6.37306 14.625C6.75724 14.9278 7.16966 15.2508 7.5876 15.495C8.00543 15.7391 8.4822 15.9376 9 15.9376V14.8126C8.7678 14.8126 8.49458 14.722 8.1552 14.5237C7.81598 14.3254 7.46406 14.0525 7.06954 13.7415L6.37306 14.625ZM11.6269 14.625C12.6969 13.7815 14.0646 12.815 15.1375 11.6069C16.2296 10.3771 17.0625 8.85201 17.0625 6.85288H15.9375C15.9375 8.50093 15.2631 9.77121 14.2963 10.8599C13.3102 11.9703 12.0672 12.8454 10.9305 13.7415L11.6269 14.625ZM17.0625 6.85288C17.0625 4.81883 15.9115 3.05475 14.2494 2.29503C12.5519 1.5191 10.4261 1.8327 8.5947 3.73545L9.4053 4.5156C10.9487 2.91199 12.5729 2.76567 13.7817 3.3182C15.026 3.88695 15.9375 5.23973 15.9375 6.85288H17.0625ZM10.9305 13.7415C10.5359 14.0525 10.184 14.3254 9.8448 14.5237C9.50543 14.722 9.2322 14.8126 9 14.8126V15.9376C9.5178 15.9376 9.99457 15.7391 10.4124 15.495C10.8304 15.2508 11.2427 14.9278 11.6269 14.625L10.9305 13.7415ZM8.60235 4.52335L10.1024 6.02281L10.8976 5.22717L9.39765 3.72771L8.60235 4.52335Z",
-    fill: "#050607"
-  })))))), /*#__PURE__*/React.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_1__.ToastContainer, {
-    position: "top-right",
-    autoClose: 3000,
-    hideProgressBar: false
-  }));
+    d: "M3.16675 8.5C3.16675 11.4455 5.55456 13.8333 8.50008 13.8333C11.4456 13.8333 13.8334 11.4455 13.8334 8.5",
+    stroke: "#404655",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M8.5 3.16663V9.83329M8.5 9.83329L10.5 7.83329M8.5 9.83329L6.5 7.83329",
+    stroke: "#404655",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }))))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-card-content-bottom"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "fb-template-title"
+  }, title)))));
 };
 var TemplateLibrary = function TemplateLibrary(_ref2) {
   var activeTab = _ref2.activeTab,
@@ -597,13 +591,13 @@ var PatternLibraryButton = function PatternLibraryButton() {
   // State for active tab
   var schema = _data_json__WEBPACK_IMPORTED_MODULE_9__.$schema;
   var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(Object.keys(schema)[0]),
-    _useState0 = _slicedToArray(_useState9, 2),
-    activeTab = _useState0[0],
-    setActiveTab = _useState0[1];
-  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    _useState10 = _slicedToArray(_useState1, 2),
-    activeCategory = _useState10[0],
-    setActiveCategory = _useState10[1];
+    _useState10 = _slicedToArray(_useState9, 2),
+    activeTab = _useState10[0],
+    setActiveTab = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState12 = _slicedToArray(_useState11, 2),
+    activeCategory = _useState12[0],
+    setActiveCategory = _useState12[1];
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
     onClick: function onClick() {
       return handleClick();
