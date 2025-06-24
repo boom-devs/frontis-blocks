@@ -30,6 +30,7 @@ require_once __DIR__ . '/vendor/autoload.php';
  */
 function frontis_blocks(){
     return FrontisBlocks\Plugin::get_instance();
+    return FrontisBlocks\Activator\Activator::get_instance();
 }
 
 frontis_blocks();
