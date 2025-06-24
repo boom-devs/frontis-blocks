@@ -44,6 +44,420 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
+/***/ "./admin/template-library/login-signup.js":
+/*!************************************************!*\
+  !*** ./admin/template-library/login-signup.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * WordPress dependencies
+ */
+
+
+var LoginSignupModal = function LoginSignupModal(_ref) {
+  var onClose = _ref.onClose,
+    onLoginSuccess = _ref.onLoginSuccess;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('signup'),
+    _useState2 = _slicedToArray(_useState, 2),
+    activeTab = _useState2[0],
+    setActiveTab = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isLoading = _useState4[0],
+    setIsLoading = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      email: '',
+      password: '',
+      confirmPassword: '',
+      firstName: '',
+      lastName: ''
+    }),
+    _useState6 = _slicedToArray(_useState5, 2),
+    formData = _useState6[0],
+    setFormData = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    _useState8 = _slicedToArray(_useState7, 2),
+    errors = _useState8[0],
+    setErrors = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState10 = _slicedToArray(_useState9, 2),
+    agreedToTerms = _useState10[0],
+    setAgreedToTerms = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    agreedToPrivacy = _useState12[0],
+    setAgreedToPrivacy = _useState12[1];
+  var handleInputChange = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (e) {
+    var _e$target = e.target,
+      name = _e$target.name,
+      value = _e$target.value;
+    setFormData(function (prev) {
+      return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, name, value));
+    });
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(function (prev) {
+        return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, name, ''));
+      });
+    }
+  }, [errors]);
+  var validateForm = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    var newErrors = {};
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+    if (activeTab === 'signup') {
+      if (!formData.firstName) {
+        newErrors.firstName = 'First name is required';
+      }
+      if (!formData.lastName) {
+        newErrors.lastName = 'Last name is required';
+      }
+      if (!formData.confirmPassword) {
+        newErrors.confirmPassword = 'Please confirm your password';
+      } else if (formData.password !== formData.confirmPassword) {
+        newErrors.confirmPassword = 'Passwords do not match';
+      }
+      if (!agreedToTerms) {
+        newErrors.terms = 'You must agree to the Terms of Service';
+      }
+      if (!agreedToPrivacy) {
+        newErrors.privacy = 'You must agree to the Privacy Policy';
+      }
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }, [formData, activeTab, agreedToTerms, agreedToPrivacy]);
+  var handleSubmit = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(/*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            e.preventDefault();
+            if (validateForm()) {
+              _context.next = 3;
+              break;
+            }
+            return _context.abrupt("return");
+          case 3:
+            setIsLoading(true);
+            _context.prev = 4;
+            _context.next = 7;
+            return new Promise(function (resolve) {
+              return setTimeout(resolve, 2000);
+            });
+          case 7:
+            // Mock successful login/signup
+            console.log("".concat(activeTab, " successful:"), formData);
+
+            // Call success callback
+            onLoginSuccess();
+            _context.next = 15;
+            break;
+          case 11:
+            _context.prev = 11;
+            _context.t0 = _context["catch"](4);
+            console.error("".concat(activeTab, " failed:"), _context.t0);
+            setErrors({
+              submit: "".concat(activeTab, " failed. Please try again.")
+            });
+          case 15:
+            _context.prev = 15;
+            setIsLoading(false);
+            return _context.finish(15);
+          case 18:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[4, 11, 15, 18]]);
+    }));
+    return function (_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }(), [formData, activeTab, validateForm, onLoginSuccess]);
+  var handleOverlayClick = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (e) {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  }, [onClose]);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-auth-modal",
+    onClick: handleOverlayClick
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-auth-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-auth-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-auth-tabs"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-auth-tab ".concat(activeTab === 'login' ? 'active' : ''),
+    onClick: function onClick() {
+      return setActiveTab('login');
+    }
+  }, "Sign In"), /*#__PURE__*/React.createElement("button", {
+    className: "fb-auth-tab ".concat(activeTab === 'signup' ? 'active' : ''),
+    onClick: function onClick() {
+      return setActiveTab('signup');
+    }
+  }, "Free Sign Up"))), /*#__PURE__*/React.createElement("form", {
+    onSubmit: handleSubmit,
+    className: "fb-auth-form"
+  }, activeTab === 'signup' && /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-row"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "firstName"
+  }, "First Name"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-input-wrapper"
+  }, /*#__PURE__*/React.createElement("svg", {
+    className: "fb-input-icon",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M8 8C10.2091 8 12 6.20914 12 4C12 1.79086 10.2091 0 8 0C5.79086 0 4 1.79086 4 4C4 6.20914 5.79086 8 8 8Z",
+    fill: "#9CA3AF"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M8 10C3.58172 10 0 13.5817 0 18H16C16 13.5817 12.4183 10 8 10Z",
+    fill: "#9CA3AF"
+  })), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    id: "firstName",
+    name: "firstName",
+    value: formData.firstName,
+    onChange: handleInputChange,
+    className: errors.firstName ? 'error' : '',
+    placeholder: "Name"
+  })), errors.firstName && /*#__PURE__*/React.createElement("span", {
+    className: "fb-error-message"
+  }, errors.firstName)), /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "lastName"
+  }, "Last Name"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-input-wrapper"
+  }, /*#__PURE__*/React.createElement("svg", {
+    className: "fb-input-icon",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M8 8C10.2091 8 12 6.20914 12 4C12 1.79086 10.2091 0 8 0C5.79086 0 4 1.79086 4 4C4 6.20914 5.79086 8 8 8Z",
+    fill: "#9CA3AF"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M8 10C3.58172 10 0 13.5817 0 18H16C16 13.5817 12.4183 10 8 10Z",
+    fill: "#9CA3AF"
+  })), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    id: "lastName",
+    name: "lastName",
+    value: formData.lastName,
+    onChange: handleInputChange,
+    className: errors.lastName ? 'error' : '',
+    placeholder: "Name"
+  })), errors.lastName && /*#__PURE__*/React.createElement("span", {
+    className: "fb-error-message"
+  }, errors.lastName))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "email"
+  }, "Email Address"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-input-wrapper"
+  }, /*#__PURE__*/React.createElement("svg", {
+    className: "fb-input-icon",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M2.66675 3.33337H13.3334C14.0668 3.33337 14.6668 3.93337 14.6668 4.66671V11.3334C14.6668 12.0667 14.0668 12.6667 13.3334 12.6667H2.66675C1.93341 12.6667 1.33341 12.0667 1.33341 11.3334V4.66671C1.33341 3.93337 1.93341 3.33337 2.66675 3.33337Z",
+    stroke: "#9CA3AF",
+    strokeWidth: "1.33333",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M14.6668 4.66663L8.00008 8.66663L1.33341 4.66663",
+    stroke: "#9CA3AF",
+    strokeWidth: "1.33333",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  })), /*#__PURE__*/React.createElement("input", {
+    type: "email",
+    id: "email",
+    name: "email",
+    value: formData.email,
+    onChange: handleInputChange,
+    className: errors.email ? 'error' : '',
+    placeholder: "Enter Your Email Address"
+  })), errors.email && /*#__PURE__*/React.createElement("span", {
+    className: "fb-error-message"
+  }, errors.email)), /*#__PURE__*/React.createElement("div", {
+    className: activeTab === 'signup' ? 'fb-form-row' : ''
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "password"
+  }, "Password"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-input-wrapper"
+  }, /*#__PURE__*/React.createElement("svg", {
+    className: "fb-input-icon",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M12.6668 7.33337H3.33341C2.59703 7.33337 2.00008 7.93033 2.00008 8.66671V13.3334C2.00008 14.0698 2.59703 14.6667 3.33341 14.6667H12.6668C13.4031 14.6667 14.0001 14.0698 14.0001 13.3334V8.66671C14.0001 7.93033 13.4031 7.33337 12.6668 7.33337Z",
+    stroke: "#9CA3AF",
+    strokeWidth: "1.33333",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M4.66675 7.33337V4.66671C4.66675 3.78265 5.01794 2.93481 5.64306 2.30968C6.26818 1.68456 7.11603 1.33337 8.00008 1.33337C8.88414 1.33337 9.73198 1.68456 10.3571 2.30968C10.9822 2.93481 11.3334 3.78265 11.3334 4.66671V7.33337",
+    stroke: "#9CA3AF",
+    strokeWidth: "1.33333",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  })), /*#__PURE__*/React.createElement("input", {
+    type: "password",
+    id: "password",
+    name: "password",
+    value: formData.password,
+    onChange: handleInputChange,
+    className: errors.password ? 'error' : '',
+    placeholder: "Password"
+  })), errors.password && /*#__PURE__*/React.createElement("span", {
+    className: "fb-error-message"
+  }, errors.password)), activeTab === 'signup' && /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "confirmPassword"
+  }, "Confirm Password"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-input-wrapper"
+  }, /*#__PURE__*/React.createElement("svg", {
+    className: "fb-input-icon",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M12.6668 7.33337H3.33341C2.59703 7.33337 2.00008 7.93033 2.00008 8.66671V13.3334C2.00008 14.0698 2.59703 14.6667 3.33341 14.6667H12.6668C13.4031 14.6667 14.0001 14.0698 14.0001 13.3334V8.66671C14.0001 7.93033 13.4031 7.33337 12.6668 7.33337Z",
+    stroke: "#9CA3AF",
+    strokeWidth: "1.33333",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M4.66675 7.33337V4.66671C4.66675 3.78265 5.01794 2.93481 5.64306 2.30968C6.26818 1.68456 7.11603 1.33337 8.00008 1.33337C8.88414 1.33337 9.73198 1.68456 10.3571 2.30968C10.9822 2.93481 11.3334 3.78265 11.3334 4.66671V7.33337",
+    stroke: "#9CA3AF",
+    strokeWidth: "1.33333",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  })), /*#__PURE__*/React.createElement("input", {
+    type: "password",
+    id: "confirmPassword",
+    name: "confirmPassword",
+    value: formData.confirmPassword,
+    onChange: handleInputChange,
+    className: errors.confirmPassword ? 'error' : '',
+    placeholder: "Confirm Password"
+  })), errors.confirmPassword && /*#__PURE__*/React.createElement("span", {
+    className: "fb-error-message"
+  }, errors.confirmPassword))), activeTab === 'signup' && /*#__PURE__*/React.createElement("div", {
+    className: "fb-checkbox-group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-checkbox-item"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    id: "agreeTerms",
+    checked: agreedToTerms,
+    onChange: function onChange(e) {
+      return setAgreedToTerms(e.target.checked);
+    }
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "agreeTerms"
+  }, "I agree to the Templately ", /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    className: "fb-link"
+  }, "Terms of Service"))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-checkbox-item"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    id: "agreePrivacy",
+    checked: agreedToPrivacy,
+    onChange: function onChange(e) {
+      return setAgreedToPrivacy(e.target.checked);
+    }
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "agreePrivacy"
+  }, "I agree to the Templately ", /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    className: "fb-link"
+  }, "Privacy Policy")))), errors.submit && /*#__PURE__*/React.createElement("div", {
+    className: "fb-error-message fb-submit-error"
+  }, errors.submit), /*#__PURE__*/React.createElement("button", {
+    type: "submit",
+    className: "fb-auth-submit-btn ".concat(isLoading ? 'loading' : ''),
+    disabled: isLoading
+  }, isLoading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    color: "#fff",
+    size: 16
+  }), /*#__PURE__*/React.createElement("span", null, activeTab === 'login' ? 'Signing In...' : 'Signing Up...')) : /*#__PURE__*/React.createElement("span", null, activeTab === 'login' ? 'Sign In' : 'Sign Up')), /*#__PURE__*/React.createElement("div", {
+    className: "fb-auth-divider"
+  }, /*#__PURE__*/React.createElement("span", null, "Or")), /*#__PURE__*/React.createElement("button", {
+    type: "button",
+    className: "fb-connect-api-btn"
+  }, "Connect via API")), /*#__PURE__*/React.createElement("button", {
+    className: "fb-auth-close",
+    onClick: onClose
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M18 6L6 18M6 6l12 12",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  })))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoginSignupModal);
+
+/***/ }),
+
 /***/ "./admin/template-library/scss/style.scss":
 /*!************************************************!*\
   !*** ./admin/template-library/scss/style.scss ***!
@@ -70,7 +484,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
 /* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-toastify/dist/ReactToastify.css */ "./node_modules/react-toastify/dist/ReactToastify.css");
-/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
+/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
+/* harmony import */ var _template_import__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./template-import */ "./admin/template-library/template-import.js");
+/* harmony import */ var _login_signup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./login-signup */ "./admin/template-library/login-signup.js");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -80,6 +496,8 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 /**
  * WordPress dependencies
  */
+
+
 
 
 
@@ -103,14 +521,55 @@ var TemplateCard = function TemplateCard(_ref) {
     setIsModalOpen = _useState4[1];
   var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    isHovered = _useState6[0],
-    setIsHovered = _useState6[1];
+    isLoginModalOpen = _useState6[0],
+    setIsLoginModalOpen = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isHovered = _useState8[0],
+    setIsHovered = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState10 = _slicedToArray(_useState9, 2),
+    isAuthenticated = _useState10[0],
+    setIsAuthenticated = _useState10[1];
+
+  // Check authentication status on component mount
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    // You can check if user is already logged in here
+    // For demo purposes, assuming user is not authenticated initially
+    setIsAuthenticated(false);
+  }, []);
   var handleFullSiteImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    if (!isAuthenticated) {
+      // Show login modal first
+      setIsLoginModalOpen(true);
+    } else {
+      // User is authenticated, show import modal directly
+      setIsModalOpen(true);
+    }
+  }, [isAuthenticated]);
+  var handleLoginSuccess = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsLoginModalOpen(false);
+    setIsAuthenticated(true);
     setIsModalOpen(true);
+  }, []);
+  var handleCloseLoginModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsLoginModalOpen(false);
+  }, []);
+  var handleCloseModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsModalOpen(false);
   }, []);
   var handleDemo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     console.log("Demo clicked for:", id);
   }, [id]);
+  var templateData = {
+    id: id,
+    title: title,
+    image: imageUrl,
+    isPro: isPro,
+    category: ['Blog & Magazine', 'Construction', 'eCommerce'],
+    author: 'Template Author',
+    downloads: 2025
+  };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card",
     onMouseEnter: function onMouseEnter() {
@@ -140,11 +599,11 @@ var TemplateCard = function TemplateCard(_ref) {
   }, /*#__PURE__*/React.createElement("path", {
     d: "M16.158 8.28375C16.386 8.60348 16.5 8.76338 16.5 9C16.5 9.23662 16.386 9.39652 16.158 9.71625C15.1334 11.1529 12.5169 14.25 9 14.25C5.48309 14.25 2.86657 11.1529 1.84203 9.71625C1.61401 9.39652 1.5 9.23662 1.5 9C1.5 8.76338 1.61401 8.60348 1.84203 8.28375C2.86657 6.84708 5.48309 3.75 9 3.75C12.5169 3.75 15.1334 6.84708 16.158 8.28375Z",
     stroke: "#0B0C0E",
-    "stroke-width": "1.125"
+    strokeWidth: "1.125"
   }), /*#__PURE__*/React.createElement("path", {
     d: "M11.25 9C11.25 7.75732 10.2427 6.75 9 6.75C7.75732 6.75 6.75 7.75732 6.75 9C6.75 10.2427 7.75732 11.25 9 11.25C10.2427 11.25 11.25 10.2427 11.25 9Z",
     stroke: "#0B0C0E",
-    "stroke-width": "1.125"
+    strokeWidth: "1.125"
   })))))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card-content"
   }, /*#__PURE__*/React.createElement("div", {
@@ -157,7 +616,7 @@ var TemplateCard = function TemplateCard(_ref) {
     className: "fb-import-btn ".concat(isLoading ? "loading" : ""),
     onClick: !isLoading ? handleFullSiteImport : null,
     disabled: isLoading
-  }, isLoading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Importing..."), /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, isLoading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Importing..."), /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_5__["default"], {
     color: "#fff",
     size: 16
   })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Import"))), /*#__PURE__*/React.createElement("button", {
@@ -171,29 +630,35 @@ var TemplateCard = function TemplateCard(_ref) {
   }, /*#__PURE__*/React.createElement("path", {
     d: "M3.16675 8.5C3.16675 11.4455 5.55456 13.8333 8.50008 13.8333C11.4456 13.8333 13.8334 11.4455 13.8334 8.5",
     stroke: "#404655",
-    "stroke-width": "1.5",
-    "stroke-linecap": "round"
+    strokeWidth: "1.5",
+    strokeLinecap: "round"
   }), /*#__PURE__*/React.createElement("path", {
     d: "M8.5 3.16663V9.83329M8.5 9.83329L10.5 7.83329M8.5 9.83329L6.5 7.83329",
     stroke: "#404655",
-    "stroke-width": "1.5",
-    "stroke-linecap": "round",
-    "stroke-linejoin": "round"
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
   }))))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card-content-bottom"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "fb-template-title"
-  }, title)))));
+  }, title)))), isLoginModalOpen && /*#__PURE__*/React.createElement(_login_signup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    onClose: handleCloseLoginModal,
+    onLoginSuccess: handleLoginSuccess
+  }), isModalOpen && /*#__PURE__*/React.createElement(_template_import__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    template: templateData,
+    onClose: handleCloseModal
+  }));
 };
 var TemplateLibrary = function TemplateLibrary(_ref2) {
   var activeTab = _ref2.activeTab,
     activeCategory = _ref2.activeCategory,
     data = _ref2.data;
   var schema = (data === null || data === void 0 ? void 0 : data.$schema) || {};
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    _useState8 = _slicedToArray(_useState7, 2),
-    filteredTemplates = _useState8[0],
-    setFilteredTemplates = _useState8[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState12 = _slicedToArray(_useState11, 2),
+    filteredTemplates = _useState12[0],
+    setFilteredTemplates = _useState12[1];
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (activeTab && activeCategory) {
       var _tabData$categories;
@@ -408,6 +873,263 @@ var TemplateHeader = function TemplateHeader(_ref) {
   }))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TemplateHeader);
+
+/***/ }),
+
+/***/ "./admin/template-library/template-import.js":
+/*!***************************************************!*\
+  !*** ./admin/template-library/template-import.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * WordPress dependencies
+ */
+
+
+var TemplateImport = function TemplateImport(_ref) {
+  var template = _ref.template,
+    onClose = _ref.onClose;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isImporting = _useState2[0],
+    setIsImporting = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('preview'),
+    _useState4 = _slicedToArray(_useState3, 2),
+    activeTab = _useState4[0],
+    setActiveTab = _useState4[1];
+  var handleFullSiteImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          setIsImporting(true);
+          _context.prev = 1;
+          _context.next = 4;
+          return new Promise(function (resolve) {
+            return setTimeout(resolve, 3000);
+          });
+        case 4:
+          console.log('Full site import completed for:', template === null || template === void 0 ? void 0 : template.id);
+          _context.next = 10;
+          break;
+        case 7:
+          _context.prev = 7;
+          _context.t0 = _context["catch"](1);
+          console.error('Import failed:', _context.t0);
+        case 10:
+          _context.prev = 10;
+          setIsImporting(false);
+          return _context.finish(10);
+        case 13:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[1, 7, 10, 13]]);
+  })), [template === null || template === void 0 ? void 0 : template.id]);
+  var handleLiveDemo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    console.log('Live demo clicked for:', template === null || template === void 0 ? void 0 : template.id);
+    // Open demo in new tab
+    window.open('#', '_blank');
+  }, [template === null || template === void 0 ? void 0 : template.id]);
+  var handleDownload = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    console.log('Download clicked for:', template === null || template === void 0 ? void 0 : template.id);
+  }, [template === null || template === void 0 ? void 0 : template.id]);
+  if (!template) {
+    return null;
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-modal"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-overlay",
+    onClick: onClose
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-nav"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-nav-tab ".concat(activeTab === 'patterns' ? 'active' : ''),
+    onClick: function onClick() {
+      return setActiveTab('patterns');
+    }
+  }, "Patterns"), /*#__PURE__*/React.createElement("button", {
+    className: "fb-nav-tab ".concat(activeTab === 'pages' ? 'active' : ''),
+    onClick: function onClick() {
+      return setActiveTab('pages');
+    }
+  }, "Pages"), /*#__PURE__*/React.createElement("button", {
+    className: "fb-nav-tab ".concat(activeTab === 'kits' ? 'active' : ''),
+    onClick: function onClick() {
+      return setActiveTab('kits');
+    }
+  }, "Kits"), /*#__PURE__*/React.createElement("button", {
+    className: "fb-nav-tab ".concat(activeTab === 'template-library' ? 'active' : ''),
+    onClick: function onClick() {
+      return setActiveTab('template-library');
+    }
+  }, "Template Library", /*#__PURE__*/React.createElement("span", {
+    className: "fb-pro-badge"
+  }, "PRO"))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-search"
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667ZM14 14l-2.9-2.9",
+    stroke: "currentColor",
+    strokeWidth: "1.333",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  })), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    placeholder: "Search Blocks"
+  })), /*#__PURE__*/React.createElement("button", {
+    className: "fb-close-btn",
+    onClick: onClose
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M18 6L6 18M6 6l12 12",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  })))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-content"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-main"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-tags"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-tag"
+  }, "User Experience"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-tag"
+  }, "UI Kits"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-tag"
+  }, "Templates"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-tag"
+  }, "Web Design"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-tag"
+  }, "Creative Assets"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-tag"
+  }, "Digital Marketing"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-tag"
+  }, "Landing Pages"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-tag"
+  }, "Prototyping"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-tag"
+  }, "E-commerce")), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-preview"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: template.image,
+    alt: template.title,
+    className: "fb-template-preview-image"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-sidebar"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-info"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-category"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-category-label"
+  }, "Category"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-category-tags"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-category-tag"
+  }, "Blog & Magazine"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-category-tag"
+  }, "Construction"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-category-tag"
+  }, "eCommerce"))), /*#__PURE__*/React.createElement("h2", {
+    className: "fb-template-title"
+  }, template.title || 'Renovate - Home Decor Website Template For Gutenberg'), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-dependency"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-dependency-label"
+  }, "Dependency"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-dependency-icons"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-dependency-icon"
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "20",
+    height: "20",
+    viewBox: "0 0 20 20",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M10 2L3 7v11h14V7l-7-5z",
+    stroke: "currentColor",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-dependency-icon woo"
+  }, /*#__PURE__*/React.createElement("span", null, "WOO")))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-meta"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-price"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-price-badge"
+  }, "FREE"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-download-count"
+  }, "2025"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-download-label"
+  }, "Full Site Import")))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-actions"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-full-site-import-btn ".concat(isImporting ? 'loading' : ''),
+    onClick: handleFullSiteImport,
+    disabled: isImporting
+  }, isImporting ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    color: "#fff",
+    size: 16
+  }), /*#__PURE__*/React.createElement("span", null, "Importing...")) : /*#__PURE__*/React.createElement("span", null, "Full Site Import")), /*#__PURE__*/React.createElement("button", {
+    className: "fb-live-demo-btn",
+    onClick: handleLiveDemo
+  }, /*#__PURE__*/React.createElement("span", null, "Live Demo")), /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-info"
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "8",
+    cy: "8",
+    r: "6",
+    stroke: "currentColor",
+    strokeWidth: "1.5"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M8 5.5V8l1.5 1.5",
+    stroke: "currentColor",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  })), /*#__PURE__*/React.createElement("span", null, "Learn more about full site import")))))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TemplateImport);
 
 /***/ }),
 
