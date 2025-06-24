@@ -2,7 +2,7 @@
 
 namespace FrontisBlocks;
 
-use FrontisBlocks\Activator\Activator;
+// use FrontisBlocks\Activator\Activator;
 use FrontisBlocks\Admin\Admin;
 use FrontisBlocks\Core\Blocks;
 use FrontisBlocks\Utils\Enqueue;
@@ -311,7 +311,7 @@ final class Plugin
 	 */
 	public function init_plugin()
 	{
-		Activator::get_instance();
+		// Activator::get_instance();
 
 		Blocks::get_instance();
 

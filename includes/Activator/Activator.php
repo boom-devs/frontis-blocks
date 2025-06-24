@@ -11,13 +11,19 @@ use FrontisBlocks\Admin\Ajax\Settings;
  */
 class Activator {
 
-    const VERSION = '1.0.8';
+
+    const VERSION = '1.0.9';
     const SLUG = 'frontis-blocks';
 
     use Singleton;
 
     public function __construct() {
         $this->appsero_init_tracker_frontis_blocks();
+        $this->init_hooks();
+    }
+
+
+    public function init_hooks() {
         add_action('plugins_loaded', [$this, 'fb_set_initial_version']);
         add_action('upgrader_process_complete', [$this, 'fb_on_update'], 10, 2);
         add_action('admin_init', [$this, 'handle_activation_redirect'], 999);
@@ -42,7 +48,7 @@ class Activator {
 		Settings::get_instance()->generate_assets_on_activation_update();
 	}
 
-    	/**
+    /**
 	 * Set the version if it was never saved before
 	 */
 	public function fb_set_initial_version()
