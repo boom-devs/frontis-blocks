@@ -244,7 +244,7 @@ const LoginSignupModal = ({ onClose, onLoginSuccess }) => {
 									onChange={(e) => setAgreedToTerms(e.target.checked)}
 								/>
 								<label htmlFor="agreeTerms">
-									I agree to the Templately <a href="#" className="fb-link">Terms of Service</a>
+									I agree to the Frontis <a href="#" className="fb-link">Terms of Service</a>
 								</label>
 							</div>
 							<div className="fb-checkbox-item">
@@ -255,7 +255,7 @@ const LoginSignupModal = ({ onClose, onLoginSuccess }) => {
 									onChange={(e) => setAgreedToPrivacy(e.target.checked)}
 								/>
 								<label htmlFor="agreePrivacy">
-									I agree to the Templately <a href="#" className="fb-link">Privacy Policy</a>
+									I agree to the Frontis <a href="#" className="fb-link">Privacy Policy</a>
 								</label>
 							</div>
 						</div>

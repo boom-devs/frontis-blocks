@@ -802,12 +802,10 @@
 }
 .fb-auth-modal .fb-auth-container .fb-auth-header {
   padding: 24px 32px 0;
-  border-bottom: 1px solid #E5E7EB;
 }
 .fb-auth-modal .fb-auth-container .fb-auth-header .fb-auth-tabs {
   display: flex;
   gap: 0;
-  margin-bottom: -1px;
 }
 .fb-auth-modal .fb-auth-container .fb-auth-header .fb-auth-tabs .fb-auth-tab {
   flex: 1;
