@@ -1194,9 +1194,9 @@ const TypographySettings = (props) => {
 										name: `Custom Typography`,
 										fontFamily: "default",
 										lineHeight: {
-											Desktop: 0,
-											Tablet: 0,
-											Mobile: 0
+											Desktop: '',
+											Tablet: '',
+											Mobile: ''
 										},
 										lineHeightUnits: {
 											Desktop: 'px',
@@ -1204,23 +1204,23 @@ const TypographySettings = (props) => {
 											Mobile: 'px'
 										},
 										fontSize: {
-											Desktop: 0,
-											Tablet: 0,
-											Mobile: 0
+											Desktop: '',
+											Tablet: '',
+											Mobile: ''
 										},
 										fontSizeUnit: {
 											Desktop: 'px',
 											Tablet: 'px',
 											Mobile: 'px'
 										},
-										fontWeight: 0,
-										fontStyle: 0,
-										textTransform: 0,
-										textDecoration: 0,
+										fontWeight: '',
+										fontStyle: '',
+										textTransform: '',
+										textDecoration: '',
 										letterSpacing: {
-											Desktop: 0,
-											Tablet: 0,
-											Mobile: 0
+											Desktop: '',
+											Tablet: '',
+											Mobile: ''
 										},
 										letterSpacingUnit: {
 											Desktop: 'px',
