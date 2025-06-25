@@ -2,6 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 import { useEffect, useMemo } from '@wordpress/element';
 import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseControl, ButtonGroup, Button } from '@wordpress/components';
+import FBIconPicker from "../../components/icon-picker";
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_NormalActiveSwitcherControl from '@Components/switcher-normal-active-control';
 import FB_ColorControl from '@Components/color-control';
@@ -28,6 +29,8 @@ import {
     OVERFLOW_OP,
     PAGINATION_TYPE,
     SLIDER_TYPE,
+    SLIDER_ARROW_POSITION_TYPE,
+    SLIDER_ARROW_POSITION,
 } from "./constants/constants";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -47,14 +50,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         displayArrows,
         displayDots,
         paginationType,
+        sliderHeight,
+        sliderHeightUnits,
         sliderType,
         slideEffect,
         carouselEffect, 
         carouselPerColumn,
         carouselPerColumnGap,
         carouselPerColumnGapUnits,
+
+        /** Start Position */
+        sliderArrowPositionType,
+        sliderArrowPosition,
+
+        sliderArrowPositionTopOffset,
+        sliderArrowPositionTopOffsetUnits,
+        sliderArrowPositionLeftOffset,
+        sliderArrowPositionLeftOffsetUnits,
+        sliderArrowPositionRightOffset,
+        sliderArrowPositionRightOffsetUnits,
+        sliderArrowPositionBottomOffset,
+        sliderArrowPositionBottomOffsetUnits,
+
+        sliderArrowPositionOutsidePadding,
+        sliderArrowPositionOutsidePaddingUnits,
+        /** End Position */
         
         /** Slider Arrows Style */
+        sliderArrowsIconSwitcher,
+        sliderArrowsIconLeft,
+        sliderArrowsIconRight,
+        
         sliderArrowsSize,
         sliderArrowsSizeUnits,
         sliderArrowsColorSwitcher,
@@ -94,14 +120,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderArrowsBoxShadowCssValue,
         sliderArrowsBoxShadowHoverValues,
         sliderArrowsBoxShadowHoverCssValue,
-
-        /** Positioning */
-        sliderArrowsPosition,
-        sliderArrowsPositionUnits,
-        sliderArrowsRightOffset,
-        sliderArrowsRightOffsetUnits,
-        sliderArrowsLeftOffset,
-        sliderArrowsLeftOffsetUnits,
 
         /** Dots Style */
 
@@ -269,6 +287,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			});
 		}
 	}, [clientId]);
+
+    const sliderArrowsIconLeftHandler = (IconName) => {
+		setAttributes({sliderArrowsIconLeft: IconName})
+
+	}
+    const sliderArrowsIconRightHandler = (IconName) => {
+		setAttributes({sliderArrowsIconRight: IconName})
+
+	}
 
     /** Start Arrows border */
     const handleArrowsBorderUnitChange = ( event, position ) => {
@@ -1111,8 +1138,95 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderGlobalBorderHoverColor ? `border-color: ${sliderGlobalBorderHoverColor};` : ''}
             ${sliderGlobalBoxShadowHoverCssValue ? `box-shadow: ${sliderGlobalBoxShadowHoverCssValue};` : ''}
         }
-        .${blockId} .swiper-wrapper {
+        .${blockId} .swiper-wrapper.fb-swiper-wrapper {
             align-items: center;
+            ${sliderHeight.Desktop ? `min-height: ${sliderHeight.Desktop}${sliderHeightUnits.Desktop};` : ''}
+        }
+
+
+
+
+
+
+        .${blockId}.fb-slider-container.outside {
+            ${sliderArrowPosition === 'top-left' || sliderArrowPosition === 'top-center' || sliderArrowPosition === 'top-right' ? `
+                padding: ${sliderArrowPositionOutsidePadding.Desktop}${sliderArrowPositionOutsidePaddingUnits.Desktop} 0 0;
+            ` : ''}
+    
+            ${sliderArrowPosition === 'bottom-left' || sliderArrowPosition === 'bottom-center' || sliderArrowPosition === 'bottom-right' ? `
+                padding: 0 0 ${sliderArrowPositionOutsidePadding.Desktop}${sliderArrowPositionOutsidePaddingUnits.Desktop};
+            ` : ''}
+
+            ${sliderArrowPosition === 'center' ? `
+                padding: 0 ${sliderArrowPositionOutsidePadding.Desktop}${sliderArrowPositionOutsidePaddingUnits.Desktop};
+
+            ` : ''}
+        }
+
+        ${sliderArrowPosition && sliderArrowPosition !== 'center' ? `
+
+            .${blockId} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition},
+            .${blockId} .fb-slider-custom-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                position: absolute;
+                z-index: 100;
+        
+                ${sliderArrowPosition === 'top-left' ? `
+                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};   
+                    left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '0'};
+                ` : ''}
+        
+                ${sliderArrowPosition === 'top-center' ? `
+                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};  
+                    left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '50%'};
+                    transform: translateX(-50%);
+                ` : ''}
+        
+                ${sliderArrowPosition === 'top-right' ? `
+                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};  
+                    right: ${sliderArrowPositionRightOffset.Desktop ? `${sliderArrowPositionRightOffset.Desktop}${sliderArrowPositionRightOffsetUnits.Desktop}` : '0'};
+                ` : ''}
+        
+                ${sliderArrowPosition === 'bottom-left' ? `
+                    bottom: ${sliderArrowPositionBottomOffset.Desktop ? `${sliderArrowPositionBottomOffset.Desktop}${sliderArrowPositionBottomOffsetUnits.Desktop}` : '0'};  
+                    left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '0'};
+                ` : ''}
+        
+                ${sliderArrowPosition === 'bottom-center' ? `
+                    bottom: ${sliderArrowPositionBottomOffset.Desktop ? `${sliderArrowPositionBottomOffset.Desktop}${sliderArrowPositionBottomOffsetUnits.Desktop}` : '0'};  
+                    left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '50%'};
+                    transform: translateX(-50%);
+                ` : ''}
+        
+                ${sliderArrowPosition === 'bottom-right' ? `
+                    bottom: ${sliderArrowPositionBottomOffset.Desktop ? `${sliderArrowPositionBottomOffset.Desktop}${sliderArrowPositionBottomOffsetUnits.Desktop}` : '0'};
+                    right: ${sliderArrowPositionRightOffset.Desktop ? `${sliderArrowPositionRightOffset.Desktop}${sliderArrowPositionRightOffsetUnits.Desktop}` : '0'};
+                ` : ''}
+            }
+        
+            .${blockId} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} .swiper-button-prev,
+            .${blockId} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} .swiper-button-next,
+            .${blockId} .fb-slider-custom-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} .swiper-button-prev,
+            .${blockId} .fb-slider-custom-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} .swiper-button-next {
+                position: relative;
+                top: auto;
+                right: auto;
+                bottom: auto;
+                left: auto;
+                margin: 0 !important;
+            }
+        ` : ''}
+
+
+
+
+
+        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev:after,
+        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next:after {
+            display: none !important;
         }
         .${blockId} .swiper-button-prev,
         .${blockId} .swiper-button-next {
@@ -1125,7 +1239,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderArrowsColor ? `color: ${sliderArrowsColor};` : ''}
             ${sliderArrowsWidth.Desktop ? `width: ${sliderArrowsWidth.Desktop}${sliderArrowsWidthUnits.Desktop};` : ''}
             ${sliderArrowsHeight.Desktop ? `height: ${sliderArrowsHeight.Desktop}${sliderArrowsHeightUnits.Desktop};` : ''}
-            ${sliderArrowsPosition.Desktop ? `top: ${sliderArrowsPosition.Desktop}${sliderArrowsPositionUnits.Desktop};` : ''}
             transition: all .3s ease-in-out;
         }
         .${blockId} .swiper-button-prev:hover,
@@ -1136,16 +1249,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderArrowsBoxShadowHoverCssValue ? `box-shadow: ${sliderArrowsBoxShadowHoverCssValue};` : ''}
         }
 
+        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev svg,
+        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next svg {
+            ${sliderArrowsColor ? `fill: ${sliderArrowsColor};` : ''}
+            ${sliderArrowsSize.Desktop ? `width: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
+            ${sliderArrowsSize.Desktop ? `height: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
+        }
+        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev:hover svg,
+        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next:hover svg {
+            ${sliderArrowsColorHover ? `fill: ${sliderArrowsColorHover};` : ''}
+        }
+
         .${blockId} .swiper-button-prev:after,
         .${blockId} .swiper-button-next:after {
             ${sliderArrowsSize.Desktop ? `font-size: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
-        }
-
-        .${blockId} .swiper-button-prev {
-            ${sliderArrowsLeftOffset.Desktop ? `left: ${sliderArrowsLeftOffset.Desktop}${sliderArrowsLeftOffsetUnits.Desktop};` : ''}
-        }
-        .${blockId} .swiper-button-next {
-            ${sliderArrowsRightOffset.Desktop ? `right: ${sliderArrowsRightOffset.Desktop}${sliderArrowsRightOffsetUnits.Desktop};` : ''}
         }
 
         .${blockId} .swiper-pagination {
@@ -1218,25 +1335,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderGlobalBorderRadiusTabletWidth ? `border-radius: ${sliderGlobalBorderRadiusTabletWidth};` : ''}
             }
 
+            .${blockId} .swiper-wrapper.fb-swiper-wrapper {
+                ${sliderHeight.Tablet ? `min-height: ${sliderHeight.Tablet}${sliderHeightUnits.Tablet};` : ''}
+            }
+
             .${blockId} .swiper-button-prev,
             .${blockId} .swiper-button-next {
                 ${sliderArrowsBorderTabletWidth && sliderArrowsBorderTablet.top ? `border-width: ${sliderArrowsBorderTabletWidth};` : ''}
                 ${sliderArrowsBorderRadiusTabletWidth && sliderArrowsBorderRadiusTablet.top ? `border-radius: ${sliderArrowsBorderRadiusTabletWidth};` : ''}
                 ${sliderArrowsWidth.Tablet ? `width: ${sliderArrowsWidth.Tablet}${sliderArrowsWidthUnits.Tablet};` : ''}
                 ${sliderArrowsHeight.Tablet ? `height: ${sliderArrowsHeight.Tablet}${sliderArrowsHeightUnits.Tablet};` : ''}
-                ${sliderArrowsPosition.Tablet ? `top: ${sliderArrowsPosition.Tablet}${sliderArrowsPositionUnits.Tablet};` : ''}
             }
 
+            .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev svg,
+            .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next svg {
+                ${sliderArrowsSize.Tablet ? `width: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
+                ${sliderArrowsSize.Tablet ? `height: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
+            }
             .${blockId} .swiper-button-prev:after,
             .${blockId} .swiper-button-next:after {
                 ${sliderArrowsSize.Tablet ? `font-size: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
-            }
-
-            .${blockId} .swiper-button-prev {
-                ${sliderArrowsLeftOffset.Tablet ? `left: ${sliderArrowsLeftOffset.Tablet}${sliderArrowsLeftOffsetUnits.Tablet};` : ''}
-            }
-            .${blockId} .swiper-button-next {
-                ${sliderArrowsRightOffset.Tablet ? `right: ${sliderArrowsRightOffset.Tablet}${sliderArrowsRightOffsetUnits.Tablet};` : ''}
             }
 
             .${blockId} .swiper-pagination {
@@ -1279,25 +1397,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderGlobalBorderMobileWidth ? `border-width: ${sliderGlobalBorderMobileWidth};` : ''}
                 ${sliderGlobalBorderRadiusMobileWidth ? `border-radius: ${sliderGlobalBorderRadiusMobileWidth};` : ''}
             }
+
+            .${blockId} .swiper-wrapper.fb-swiper-wrapper {
+                ${sliderHeight.Mobile ? `min-height: ${sliderHeight.Mobile}${sliderHeightUnits.Mobile};` : ''}
+            }
+
             .${blockId} .swiper-button-prev,
             .${blockId} .swiper-button-next {
                 ${sliderArrowsBorderMobileWidth && sliderArrowsBorderMobile.top ? `border-width: ${sliderArrowsBorderMobileWidth};` : ''}
                 ${sliderArrowsBorderRadiusMobileWidth && sliderArrowsBorderRadiusMobile.top ? `border-radius: ${sliderArrowsBorderRadiusMobileWidth};` : ''}
                 ${sliderArrowsWidth.Mobile ? `width: ${sliderArrowsWidth.Mobile}${sliderArrowsWidthUnits.Mobile};` : ''}
                 ${sliderArrowsHeight.Mobile ? `height: ${sliderArrowsHeight.Mobile}${sliderArrowsHeightUnits.Mobile};` : ''}
-                ${sliderArrowsPosition.Mobile ? `top: ${sliderArrowsPosition.Mobile}${sliderArrowsPositionUnits.Mobile};` : ''}
+            }
+
+            .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev svg,
+            .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next svg {
+                ${sliderArrowsSize.Mobile ? `width: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
+                ${sliderArrowsSize.Mobile ? `height: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
             }
 
             .${blockId} .swiper-button-prev:after,
             .${blockId} .swiper-button-next:after {
                 ${sliderArrowsSize.Mobile ? `font-size: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
-            }
-
-            .${blockId} .swiper-button-prev {
-                ${sliderArrowsLeftOffset.Mobile ? `left: ${sliderArrowsLeftOffset.Mobile}${sliderArrowsLeftOffsetUnits.Mobile};` : ''}
-            }
-            .${blockId} .swiper-button-next {
-                ${sliderArrowsRightOffset.Mobile ? `right: ${sliderArrowsRightOffset.Mobile}${sliderArrowsRightOffsetUnits.Mobile};` : ''}
             }
 
             .${blockId} .swiper-pagination {
@@ -1330,6 +1451,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             
     `, [
         blockId,
+
+        sliderHeight,
+        sliderHeightUnits,
 
         /** Global Settings */
         sliderGlobalZIndex,
@@ -1396,6 +1520,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderGlobalBoxShadowHoverCssValue,
         /** End Global Setting */
 
+        /** Start Position */
+        sliderArrowPositionType,
+        sliderArrowPosition,
+
+        sliderArrowPositionTopOffset,
+        sliderArrowPositionTopOffsetUnits,
+        sliderArrowPositionLeftOffset,
+        sliderArrowPositionLeftOffsetUnits,
+        sliderArrowPositionRightOffset,
+        sliderArrowPositionRightOffsetUnits,
+        sliderArrowPositionBottomOffset,
+        sliderArrowPositionBottomOffsetUnits,
+
+        sliderArrowPositionOutsidePadding,
+        sliderArrowPositionOutsidePaddingUnits,
+        /** End Position */
+
         /** Slider Arrows Style */
         sliderArrowsSize,
         sliderArrowsSizeUnits,
@@ -1442,14 +1583,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderArrowsBoxShadowCssValue,
         sliderArrowsBoxShadowHoverValues,
         sliderArrowsBoxShadowHoverCssValue,
-
-        /** Positioning */
-        sliderArrowsPosition,
-        sliderArrowsPositionUnits,
-        sliderArrowsRightOffset,
-        sliderArrowsRightOffsetUnits,
-        sliderArrowsLeftOffset,
-        sliderArrowsLeftOffsetUnits,
 
         /** Dots Style */
         sliderDotsMarginUnits,
@@ -1576,7 +1709,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	 */
 	const generalControls = (
         <>
-            <PanelBody title={__("Slider Type", "frontis-blocks")} initialOpen={true}>
+
+            <PanelBody title={__("Basic Settings", "frontis-blocks")} initialOpen={true}>
+
+                <ToggleControl
+                    label={ __( 'Show Navigation', 'frontis-blocks' ) }
+                    checked={ displayArrows }
+                    onChange={(value) => setAttributes({ displayArrows: value })}
+                />
+                <ToggleControl
+                    label={ __( 'Show Pagination', 'frontis-blocks' ) }
+                    checked={ displayDots }
+                    onChange={(value) => setAttributes({ displayDots: value })}
+                />
+                <FB_Range
+                    min={100}
+                    max={1000}
+                    label={__("Minimum Height", "frontis-blocks")}
+                    rangeValue={sliderHeight}
+                    onChangeHandler={(value) => setAttributes({ sliderHeight: value })}
+                    rangeUnitHandler={(value) => setAttributes({ sliderHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={sliderHeightUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"350"}
+                />
+            </PanelBody>
+            <PanelBody title={__("Slider Type", "frontis-blocks")} initialOpen={false}>
                 <div className="fb-setting-switcher-container">
                     <BaseControl
                         label={__("Slider Type", "frontis-blocks")}
@@ -1713,25 +1873,267 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
             </PanelBody>
 
-            <PanelBody title={__("Navigation & Pagination", "frontis-blocks")} initialOpen={false}>
-                <ToggleControl
-                    label={ __( 'Navigation', 'frontis-blocks' ) }
-                    checked={ displayArrows }
-                    onChange={(value) => setAttributes({ displayArrows: value })}
-                />
-                <ToggleControl
-                    label={ __( 'Pagination', 'frontis-blocks' ) }
-                    checked={ displayDots }
-                    onChange={(value) => setAttributes({ displayDots: value })}
-                />
+            <PanelBody title={__("Navigation", "frontis-blocks")} initialOpen={false}>
                 {displayDots && (
+
+                    <>
+                        <ToggleControl
+                            label={ __( 'Custom Icon', 'frontis-blocks' ) }
+                            checked={ sliderArrowsIconSwitcher }
+                            onChange={(value) => setAttributes({ sliderArrowsIconSwitcher: value })}
+                        />
+
+                        {sliderArrowsIconSwitcher && (
+                            <>
+                                <BaseControl
+                                    label={__("Left Icon", "frontis-blocks")}
+                                    className="fb-setting-switcher-panel-wrapper"
+                                >
+                                    <FBIconPicker value={sliderArrowsIconLeft} setIconHandler={sliderArrowsIconLeftHandler} />
+                                </BaseControl>
+
+                                <BaseControl
+                                    label={__("Right Icon", "frontis-blocks")}
+                                    className="fb-setting-switcher-panel-wrapper"
+                                >
+                                    <FBIconPicker value={sliderArrowsIconRight} setIconHandler={sliderArrowsIconRightHandler} />
+                                </BaseControl>
+                            </>
+                        )}
+
+                    <BaseControl
+                        label={__("Position Type", "frontis-blocks")}
+                    >
+                        <ButtonGroup className="frontis-setting-switcher-panel-btn">
+                            {SLIDER_ARROW_POSITION_TYPE.map((item, key) => (
+                                <Button
+                                    key={key}
+                                    onClick={() => setAttributes({ sliderArrowPositionType: item.value })}
+                                    className={`frontis-setting-switcher-panel-btn-switcher ${sliderArrowPositionType === item.value ? 'active' : ''}`}
+                                >
+                                    {item.label}
+                                </Button>
+                            ))}
+                        </ButtonGroup>
+                    </BaseControl>
                     <SelectControl
-                        label={__('Pagination Type', 'frontis-blocks')}
-                        value={paginationType}
-                        options={PAGINATION_TYPE}
-                        onChange={(value) => setAttributes({ paginationType: value })}
+                        label={__("Position", "frontis-blocks")}
+                        value={sliderArrowPosition}
+                        options={SLIDER_ARROW_POSITION}
+                        onChange={(value) => setAttributes({ sliderArrowPosition: value })}
                     />
+
+                    {sliderArrowPosition === 'top-left' && (
+                        <>
+                            <FB_Range
+                                min={-100}
+                                max={100}
+                                label={__("Top Offset", "frontis-blocks")}
+                                rangeValue={sliderArrowPositionTopOffset}
+                                onChangeHandler={(value) => setAttributes({ sliderArrowPositionTopOffset: value })}
+                                rangeUnitHandler={(value) => setAttributes({ sliderArrowPositionTopOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={sliderArrowPositionTopOffsetUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={"0"}
+                            />
+                            <FB_Range
+                                min={-100}
+                                max={100}
+                                label={__("Left Offset", "frontis-blocks")}
+                                rangeValue={sliderArrowPositionLeftOffset}
+                                onChangeHandler={(value) => setAttributes({ sliderArrowPositionLeftOffset: value })}
+                                rangeUnitHandler={(value) => setAttributes({ sliderArrowPositionLeftOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={sliderArrowPositionLeftOffsetUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={"0"}
+                            />
+                        </>
+                    )}
+                    {sliderArrowPosition === 'top-center' && (
+                        <>
+                            <FB_Range
+                                min={-100}
+                                max={100}
+                                label={__("Top Offset", "frontis-blocks")}
+                                rangeValue={sliderArrowPositionTopOffset}
+                                onChangeHandler={(value) => setAttributes({ sliderArrowPositionTopOffset: value })}
+                                rangeUnitHandler={(value) => setAttributes({ sliderArrowPositionTopOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={sliderArrowPositionTopOffsetUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={"0"}
+                            />
+                            <FB_Range
+                                min={-100}
+                                max={100}
+                                label={__("Left Offset", "frontis-blocks")}
+                                rangeValue={sliderArrowPositionLeftOffset}
+                                onChangeHandler={(value) => setAttributes({ sliderArrowPositionLeftOffset: value })}
+                                rangeUnitHandler={(value) => setAttributes({ sliderArrowPositionLeftOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={sliderArrowPositionLeftOffsetUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={"0"}
+                            />
+                        </>
+                    )}
+
+                    {sliderArrowPosition === 'top-right' && (
+                        <>
+                            <FB_Range
+                                min={-100}
+                                max={100}
+                                label={__("Top Offset", "frontis-blocks")}
+                                rangeValue={sliderArrowPositionTopOffset}
+                                onChangeHandler={(value) => setAttributes({ sliderArrowPositionTopOffset: value })}
+                                rangeUnitHandler={(value) => setAttributes({ sliderArrowPositionTopOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={sliderArrowPositionTopOffsetUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={"0"}
+                            />
+                            <FB_Range
+                                min={-100}
+                                max={100}
+                                label={__("Right Offset", "frontis-blocks")}
+                                rangeValue={sliderArrowPositionRightOffset}
+                                onChangeHandler={(value) => setAttributes({ sliderArrowPositionRightOffset: value })}
+                                rangeUnitHandler={(value) => setAttributes({ sliderArrowPositionRightOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={sliderArrowPositionRightOffsetUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={"0"}
+                            />
+                        </>
+                    )}
+
+                    {sliderArrowPosition === 'bottom-left' && (
+                        <>
+                            <FB_Range
+                                min={0}
+                                max={100}
+                                label={__("Bottom Offset", "frontis-blocks")}
+                                rangeValue={sliderArrowPositionBottomOffset}
+                                onChangeHandler={(value) => setAttributes({ sliderArrowPositionBottomOffset: value })}
+                                rangeUnitHandler={(value) => setAttributes({ sliderArrowPositionBottomOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={sliderArrowPositionBottomOffsetUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={"0"}
+                            />
+                            <FB_Range
+                                min={0}
+                                max={100}
+                                label={__("Left Offset", "frontis-blocks")}
+                                rangeValue={sliderArrowPositionLeftOffset}
+                                onChangeHandler={(value) => setAttributes({ sliderArrowPositionLeftOffset: value })}
+                                rangeUnitHandler={(value) => setAttributes({ sliderArrowPositionLeftOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={sliderArrowPositionLeftOffsetUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={"0"}
+                            />
+                        </>
+                    )}
+                    {sliderArrowPosition === 'bottom-center' && (
+                        <>
+                            <FB_Range
+                                min={0}
+                                max={100}
+                                label={__("Bottom Offset", "frontis-blocks")}
+                                rangeValue={sliderArrowPositionBottomOffset}
+                                onChangeHandler={(value) => setAttributes({ sliderArrowPositionBottomOffset: value })}
+                                rangeUnitHandler={(value) => setAttributes({ sliderArrowPositionBottomOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={sliderArrowPositionBottomOffsetUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={"0"}
+                            />
+                            <FB_Range
+                                min={0}
+                                max={100}
+                                label={__("Left Offset", "frontis-blocks")}
+                                rangeValue={sliderArrowPositionLeftOffset}
+                                onChangeHandler={(value) => setAttributes({ sliderArrowPositionLeftOffset: value })}
+                                rangeUnitHandler={(value) => setAttributes({ sliderArrowPositionLeftOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={sliderArrowPositionLeftOffsetUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={"0"}
+                            />
+                        </>
+                    )}
+
+                    {sliderArrowPosition === 'bottom-right' && (
+                        <>
+                            <FB_Range
+                                min={0}
+                                max={100}
+                                label={__("Bottom Offset", "frontis-blocks")}
+                                rangeValue={sliderArrowPositionBottomOffset}
+                                onChangeHandler={(value) => setAttributes({ sliderArrowPositionBottomOffset: value })}
+                                rangeUnitHandler={(value) => setAttributes({ sliderArrowPositionBottomOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={sliderArrowPositionBottomOffsetUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={"0"}
+                            />
+                            <FB_Range
+                                min={0}
+                                max={100}
+                                label={__("Right Offset", "frontis-blocks")}
+                                rangeValue={sliderArrowPositionRightOffset}
+                                onChangeHandler={(value) => setAttributes({ sliderArrowPositionRightOffset: value })}
+                                rangeUnitHandler={(value) => setAttributes({ sliderArrowPositionRightOffsetUnits: value })}
+                                deviceType={deviceType}
+                                units={sliderArrowPositionRightOffsetUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={"0"}
+                            />
+                        </>
+                    )}
+
+                    {sliderArrowPositionType === 'outside' && (
+
+                        <FB_Range
+                            min={0}
+                            max={100}
+                            label={__("Padding", "frontis-blocks")}
+                            rangeValue={sliderArrowPositionOutsidePadding}
+                            onChangeHandler={(value) => setAttributes({ sliderArrowPositionOutsidePadding: value })}
+                            rangeUnitHandler={(value) => setAttributes({ sliderArrowPositionOutsidePaddingUnits: value })}
+                            deviceType={deviceType}
+                            units={sliderArrowPositionOutsidePaddingUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={"60"}
+                        />
+                    )}
+                    </>
                 )}
+            </PanelBody>
+
+            <PanelBody title={__("Pagination", "frontis-blocks")} initialOpen={false}>
+                <SelectControl
+                    label={__('Pagination Type', 'frontis-blocks')}
+                    value={paginationType}
+                    options={PAGINATION_TYPE}
+                    onChange={(value) => setAttributes({ paginationType: value })}
+                />
             </PanelBody>
         </>
 	);
@@ -1823,48 +2225,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     setAttributes={setAttributes}
                     rangeStep={1}
                     resetFallbackValue={"46"}
-                />
-
-                <FB_Range
-                    min={0}
-                    max={100}
-                    label={__("Position", "frontis-blocks")}
-                    rangeValue={sliderArrowsPosition}
-                    onChangeHandler={(value) => setAttributes({ sliderArrowsPosition: value })}
-                    rangeUnitHandler={(value) => setAttributes({ sliderArrowsPositionUnits: value })}
-                    deviceType={deviceType}
-                    units={sliderArrowsPositionUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={"50"}
-                />
-
-                <FB_Range
-                    min={-100}
-                    max={100}
-                    label={__("Left", "frontis-blocks")}
-                    rangeValue={sliderArrowsLeftOffset} 
-                    onChangeHandler={(value) => setAttributes({ sliderArrowsLeftOffset: value })}
-                    rangeUnitHandler={(value) => setAttributes({ sliderArrowsLeftOffsetUnits: value })}
-                    deviceType={deviceType}
-                    units={sliderArrowsLeftOffsetUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={"-20"}
-                />
-
-                <FB_Range
-                    min={-100}
-                    max={100}
-                    label={__("Right", "frontis-blocks")}
-                    rangeValue={sliderArrowsRightOffset} 
-                    onChangeHandler={(value) => setAttributes({ sliderArrowsRightOffset: value })}
-                    rangeUnitHandler={(value) => setAttributes({ sliderArrowsRightOffsetUnits: value })}
-                    deviceType={deviceType}
-                    units={sliderArrowsRightOffsetUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={"-20"}
                 />
 
                 <SelectControl

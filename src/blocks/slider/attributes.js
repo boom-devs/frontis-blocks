@@ -89,6 +89,22 @@ const attributes = {
         type: "string",
         default: "bullets"
     },
+	sliderHeight: {
+		type: "object",
+		default: {
+			Desktop: "300",
+			Tablet: "300",
+			Mobile: "300"
+		}
+	},
+	sliderHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
+	},
 
 	sliderType: {
 		type: "string",
@@ -128,6 +144,112 @@ const attributes = {
             Mobile: 'px',
         },
     },
+
+
+	sliderArrowPositionType: {
+        type: "string",
+        default: "inside",
+    },
+
+    sliderArrowPosition: {
+        type: "string",
+        default: "center",
+    },
+    sliderArrowPositionTopOffset: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    sliderArrowPositionTopOffsetUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    sliderArrowPositionLeftOffset: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    sliderArrowPositionLeftOffsetUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    sliderArrowPositionRightOffset: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    sliderArrowPositionRightOffsetUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    sliderArrowPositionBottomOffset: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    sliderArrowPositionBottomOffsetUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    sliderArrowPositionOutsidePadding: {
+        type: "object",
+        default: {
+            Desktop: "50",
+            Tablet: "50",
+            Mobile: "40",
+        },
+    },
+    sliderArrowPositionOutsidePaddingUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+
+
+
+	sliderArrowsIconSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+	sliderArrowsIconLeft: {
+		type: 'string',
+		default: 'arrow-left',
+	},
+	sliderArrowsIconRight: {
+		type: 'string',
+		default: 'arrow-right',
+	},
 
 	/** Start Arrows Style */
 	sliderArrowsSize: {
@@ -327,56 +449,6 @@ const attributes = {
 		default: '',
 	},
 	/** End Box Shadow */
-
-	sliderArrowsPosition: {
-		type: 'object',
-		default: {
-			Desktop: '50',
-			Tablet: '50',
-			Mobile: '50',
-		},
-	},
-	sliderArrowsPositionUnits: {
-		type: 'object',
-		default: {
-			Desktop: '%',
-			Tablet: '%',
-			Mobile: '%',
-		},
-	},
-	sliderArrowsRightOffset: {
-		type: 'object',
-		default: {
-			Desktop: '-20',
-			Tablet: '-20',
-			Mobile: '-20',
-		},
-	},
-	sliderArrowsRightOffsetUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		},
-	},
-	sliderArrowsLeftOffset: {
-		type: 'object',
-		default: {
-			Desktop: '-20',
-			Tablet: '-20',
-			Mobile: '-20',
-		},
-	},
-	sliderArrowsLeftOffsetUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		},
-	},
-	/** End Arrows Style */
 
 	/** Start Dots Style */
 	sliderDotsMarginUnits: {

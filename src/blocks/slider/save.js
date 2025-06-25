@@ -1,4 +1,5 @@
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 import classnames from 'classnames';
 
@@ -28,6 +29,13 @@ export default function save( props ) {
         carouselEffect,
         carouselPerColumn,
         carouselPerColumnGap,
+
+		sliderArrowPositionType,
+		sliderArrowPosition,
+
+		sliderArrowsIconSwitcher,
+		sliderArrowsIconLeft,
+		sliderArrowsIconRight,
 		
 
 		sliderDesktopSwitcher,
@@ -108,23 +116,48 @@ export default function save( props ) {
 	return (
 		<div
 			key={ blockId }
-			className={ classnames( blockProps.className, `${ blockId }`, 'fb-slider-container', sliderGlobalWraperClass, `${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}` ) }
+			className={ classnames( blockProps.className, `${ blockId }`, 'fb-slider-container', sliderArrowPositionType, sliderArrowPosition, sliderGlobalWraperClass, `${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}` ) }
 			data-block-id={ blockId }
 			data-swiper-settings={ swiperSettings }
 		>
 			<div className="fb-slides fb-swiper">
-				<div className="swiper-wrapper">
+				<div className="swiper-wrapper fb-swiper-wrapper">
 					<InnerBlocks.Content />
 				</div>
+				{ displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (
+					<>
+						<div className={`fb-slider-default-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+							<div className="swiper-button-prev"></div>
+							<div className="swiper-button-next"></div>
+						</div>
+					</>
+				) }
+
+				{sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (
+					<div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+						<div className="swiper-button-prev">{renderSVG(sliderArrowsIconLeft)}</div>
+						<div className="swiper-button-next">{renderSVG(sliderArrowsIconRight)}</div>
+					</div>
+				)}
 			</div>
 			{ displayDots && <div className="swiper-pagination"></div> }
 
-			{ displayArrows && (
+			{ displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (
 				<>
-					<div className="swiper-button-prev"></div>
-					<div className="swiper-button-next"></div>
+					<div className={`fb-slider-default-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+						<div className="swiper-button-prev"></div>
+						<div className="swiper-button-next"></div>
+					</div>
 				</>
 			) }
+
+			{sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (
+				<div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+					<div className="swiper-button-prev">{renderSVG(sliderArrowsIconLeft)}</div>
+					<div className="swiper-button-next">{renderSVG(sliderArrowsIconRight)}</div>
+				</div>
+			)}
+
 		</div>
 	);
 	
