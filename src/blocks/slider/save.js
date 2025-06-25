@@ -113,7 +113,7 @@ export default function save( props ) {
 			data-swiper-settings={ swiperSettings }
 		>
 			<div className="fb-slides fb-swiper">
-				<div className="swiper-wrapper">
+				<div className="swiper-wrapper fb-swiper-wrapper">
 					<InnerBlocks.Content />
 				</div>
 			</div>

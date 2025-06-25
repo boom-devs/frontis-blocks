@@ -89,6 +89,22 @@ const attributes = {
         type: "string",
         default: "bullets"
     },
+	sliderHeight: {
+		type: "object",
+		default: {
+			Desktop: "350",
+			Tablet: "350",
+			Mobile: "350"
+		}
+	},
+	sliderHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px"
+		}
+	},
 
 	sliderType: {
 		type: "string",

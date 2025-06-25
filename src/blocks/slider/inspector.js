@@ -47,6 +47,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         displayArrows,
         displayDots,
         paginationType,
+        sliderHeight,
+        sliderHeightUnits,
         sliderType,
         slideEffect,
         carouselEffect, 
@@ -1111,8 +1113,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderGlobalBorderHoverColor ? `border-color: ${sliderGlobalBorderHoverColor};` : ''}
             ${sliderGlobalBoxShadowHoverCssValue ? `box-shadow: ${sliderGlobalBoxShadowHoverCssValue};` : ''}
         }
-        .${blockId} .swiper-wrapper {
+        .${blockId} .swiper-wrapper.fb-swiper-wrapper {
             align-items: center;
+            ${sliderHeight.Desktop ? `min-height: ${sliderHeight.Desktop}${sliderHeightUnits.Desktop};` : ''}
         }
         .${blockId} .swiper-button-prev,
         .${blockId} .swiper-button-next {
@@ -1218,6 +1221,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderGlobalBorderRadiusTabletWidth ? `border-radius: ${sliderGlobalBorderRadiusTabletWidth};` : ''}
             }
 
+            .${blockId} .swiper-wrapper.fb-swiper-wrapper {
+                ${sliderHeight.Tablet ? `min-height: ${sliderHeight.Tablet}${sliderHeightUnits.Tablet};` : ''}
+            }
+
             .${blockId} .swiper-button-prev,
             .${blockId} .swiper-button-next {
                 ${sliderArrowsBorderTabletWidth && sliderArrowsBorderTablet.top ? `border-width: ${sliderArrowsBorderTabletWidth};` : ''}
@@ -1279,6 +1286,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderGlobalBorderMobileWidth ? `border-width: ${sliderGlobalBorderMobileWidth};` : ''}
                 ${sliderGlobalBorderRadiusMobileWidth ? `border-radius: ${sliderGlobalBorderRadiusMobileWidth};` : ''}
             }
+
+            .${blockId} .swiper-wrapper.fb-swiper-wrapper {
+                ${sliderHeight.Mobile ? `min-height: ${sliderHeight.Mobile}${sliderHeightUnits.Mobile};` : ''}
+            }
+
             .${blockId} .swiper-button-prev,
             .${blockId} .swiper-button-next {
                 ${sliderArrowsBorderMobileWidth && sliderArrowsBorderMobile.top ? `border-width: ${sliderArrowsBorderMobileWidth};` : ''}
@@ -1330,6 +1342,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             
     `, [
         blockId,
+
+        sliderHeight,
+        sliderHeightUnits,
 
         /** Global Settings */
         sliderGlobalZIndex,
@@ -1576,7 +1591,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	 */
 	const generalControls = (
         <>
-            <PanelBody title={__("Slider Type", "frontis-blocks")} initialOpen={true}>
+
+            <PanelBody title={__("Basic Settings", "frontis-blocks")} initialOpen={true}>
+                <FB_Range
+                    min={100}
+                    max={1000}
+                    label={__("Minimum Height", "frontis-blocks")}
+                    rangeValue={sliderHeight}
+                    onChangeHandler={(value) => setAttributes({ sliderHeight: value })}
+                    rangeUnitHandler={(value) => setAttributes({ sliderHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={sliderHeightUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"350"}
+                />
+            </PanelBody>
+            <PanelBody title={__("Slider Type", "frontis-blocks")} initialOpen={false}>
                 <div className="fb-setting-switcher-container">
                     <BaseControl
                         label={__("Slider Type", "frontis-blocks")}
