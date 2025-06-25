@@ -31,7 +31,11 @@
                         margin-bottom: 12px;
 
                         .add-custom-color {
+                            display: flex;
                             .add-custom-color-btn {
+                                span {
+                                    display: flex;
+                                }
                                 svg {
                                     path {
                                         stroke: #404655;
@@ -41,7 +45,7 @@
                         }
 
                         .fb-panel-heading {
-                            margin-bottom: 0;
+                            margin: 0;
                         }
 
                         .components-button {
@@ -316,7 +320,19 @@
                     font-size: $medium-font-size-global;
                     font-weight: 500;
                     line-height: 16px;
+                    padding-left: 0;
+                    gap: 8px;
+
                 }
+                .components-navigator-back-button {
+                    svg {
+                        fill: none;
+                    }
+                }
+            }
+
+            .fb-custom-typo-name {
+                margin-bottom: 20px;
             }
 
             .fb-setting-label-text {

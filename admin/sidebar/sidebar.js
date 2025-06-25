@@ -765,31 +765,6 @@ function FrontisBlocksSidebar() {
 									<div className="fb-color-section">
 										<div className="fb-panel-heading-wrapper">
 											<h3 className="fb-section-title">{__("Gradient", "frontis-blocks")}</h3>
-											{/* <div className="add-custom-color">
-												<Button
-													className="add-custom-color-btn"
-													onClick={addCustomGradientColor}
-												>
-													{__("Add Custom Color", "frontis-blocks")}{" "}
-													<span>
-														<svg
-															width="15"
-															height="14"
-															viewBox="0 0 15 14"
-															fill="none"
-															xmlns="http://www.w3.org/2000/svg"
-														>
-															<path
-																d="M7.5 0.75V13.25M13.75 7L1.25 7"
-																stroke="#404655"
-																strokeWidth="1.5"
-																strokeLinecap="round"
-																strokeLinejoin="round"
-															/>
-														</svg>
-													</span>
-												</Button>
-											</div> */}
 										</div>
 										<GradientColorPallet
 											// title={__("Gradient Colors", "frontis-blocks")}

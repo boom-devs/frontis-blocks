@@ -936,114 +936,7 @@ function FrontisBlocksSidebarFullSite(props) {
 					className="fb-global-controls"
 				>
 					<div className="fb-panel-control">
-						{/*
-						<PanelBody title={__("Colors", "frontis-blocks")} initialOpen={ false }>
-							<TabPanel
-								className="fb-blocks-color-tabs"
-								activeClass="active-tab"
-								onSelect={(tabName) => setActiveTab(tabName)}
-								tabs={[
-									{name: "solid", title: "Solid"},
-									{name: "gradient", title: "Gradient"},
-								]}
-							>
-								{(tab) => (
-									<div>
-										{tab.name === "solid" && (
-											<>
-												<PanelColorSettings
-													title={__("Global Colors", "frontis-blocks")}
-													className={"fb-color-panel fb-global-color-panel"}
-													initialOpen={true}
-													disableAlpha={true}
-													disableCustomGradients={false}
-													colorSettings={colorPanelArray(globalColors, setGlobalColor, defaultsColors)}
-												/>
-												{customColors && customColors.length > 0 && (
-													<ColorPalletWrapper
-														colorPanelArray={colorPanelArray}
-														customColors={customColors}
-														setCustomColor={setCustomColor}
-														setCustomColors={setCustomColors}
-													/>
-												)}
-												<div className="add-custom-color">
-													<Button
-														className="add-custom-color-btn"
-														onClick={() => setNewCustomColorFn()}
-													>Add Custom Color <span>
-														<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-														</svg>
-													</span>
-													</Button>
-												</div>
-											</>
-										)}
-										{tab.name === "gradient" && (
-											<>
-												{/* Gradient Color Pallet */}
-						{/* <GradientColorPallet
-													title={"Gradient Colors"}
-													colors={gradientColors}
-													setColor={setGradientColor}
-													setColors={setGradientColors}
-													wrapperClass={"fb-gradient-color-panel"}
-													resetAction={true}
-												/> */}
-
-						{/* {customGradientColors.length > 0 &&
-													<CustomGradientColorPallet
-														title={"Custom Gradient Colors"}
-														colors={customGradientColors}
-														setColor={setCustomGradientColor}
-														setColors={setCustomGradientColors}
-														wrapperClass={"fb-gradient-color-panel"}
-														resetAction={false}
-														deleteAction={true}
-														onDelete={deleteCustomGradientColor}
-													/>
-
-												} */}
-
-						{/* <div className="add-custom-color">
-													<Button
-														className="add-custom-color-btn"
-														onClick={() => setCustomGradientColors([
-															...customGradientColors,
-															{
-																color: '#000000',
-																name: `Gradient Color ${customGradientColors.length + 1}`,
-																slug: `custom-gradient-color-${customGradientColors.length + 1}`,
-																var: `--fb-custom-gradient-color-${customGradientColors.length + 1}`
-															}
-														])}
-													>Add Custom Color <span>
-														<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-															<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-														</svg>
-													</span>
-													</Button>
-												</div> */}
-						{/* </>
-										)}
-									</div>
-								)}
-							</TabPanel>
-						</PanelBody> */}
-
-						{/* <PanelBody title={__("Global Typography", "frontis-blocks")} initialOpen={ false }>
-							{/* Global Typography settings */}
-						{/* <TypographySettings typography={typography} customTypography={customTypography}/>
-						</PanelBody> */}
-
-						{/*<PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={ false }>*/}
-						{/*	<TextareaControl*/}
-						{/*		value={customCSS}*/}
-						{/*		onChange={(value) => setCustomCSS(value)}*/}
-						{/*	/>*/}
-						{/*</PanelBody>*/}
-
+						
 						<NavigatorProvider initialPath="/">
 
 							{/* Main Screen */}
@@ -1069,19 +962,6 @@ function FrontisBlocksSidebarFullSite(props) {
 											</div>
 										</NavigatorButton>
 									</div>
-									{/* <hr/>
-									<div className="fb-tab-element">
-										<p>{__("Customize the appearance of specific blocks for the whole site.", "frontis-blocks")}</p>
-										<NavigatorButton path="/blocks">
-											<div className="fb-tab-wrapper">
-												<span className="fb-tab-icon">
-													<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path  d="M2.08301 5.41732C2.08301 3.84597 2.08301 3.0603 2.57116 2.57214C3.05932 2.08398 3.84499 2.08398 5.41634 2.08398C6.98769 2.08398 7.77336 2.08398 8.26152 2.57214C8.74967 3.0603 8.74967 3.84597 8.74967 5.41732C8.74967 6.98867 8.74967 7.77434 8.26152 8.2625C7.77336 8.75065 6.98769 8.75065 5.41634 8.75065C3.84499 8.75065 3.05932 8.75065 2.57116 8.2625C2.08301 7.77434 2.08301 6.98867 2.08301 5.41732Z" stroke="currentcolor" strokeWidth="1.2" /> <path  d="M11.25 14.5833C11.25 13.012 11.25 12.2263 11.7382 11.7382C12.2263 11.25 13.012 11.25 14.5833 11.25C16.1547 11.25 16.9404 11.25 17.4285 11.7382C17.9167 12.2263 17.9167 13.012 17.9167 14.5833C17.9167 16.1547 17.9167 16.9404 17.4285 17.4285C16.9404 17.9167 16.1547 17.9167 14.5833 17.9167C13.012 17.9167 12.2263 17.9167 11.7382 17.4285C11.25 16.9404 11.25 16.1547 11.25 14.5833Z" stroke="currentcolor" strokeWidth="1.2" /> <path  d="M2.08301 14.5833C2.08301 13.012 2.08301 12.2263 2.57116 11.7382C3.05932 11.25 3.84499 11.25 5.41634 11.25C6.98769 11.25 7.77336 11.25 8.26152 11.7382C8.74967 12.2263 8.74967 13.012 8.74967 14.5833C8.74967 16.1547 8.74967 16.9404 8.26152 17.4285C7.77336 17.9167 6.98769 17.9167 5.41634 17.9167C3.84499 17.9167 3.05932 17.9167 2.57116 17.4285C2.08301 16.9404 2.08301 16.1547 2.08301 14.5833Z" stroke="currentcolor" strokeWidth="1.2" /> <path  d="M11.25 5.41732C11.25 3.84597 11.25 3.0603 11.7382 2.57214C12.2263 2.08398 13.012 2.08398 14.5833 2.08398C16.1547 2.08398 16.9404 2.08398 17.4285 2.57214C17.9167 3.0603 17.9167 3.84597 17.9167 5.41732C17.9167 6.98867 17.9167 7.77434 17.4285 8.2625C16.9404 8.75065 16.1547 8.75065 14.5833 8.75065C13.012 8.75065 12.2263 8.75065 11.7382 8.2625C11.25 7.77434 11.25 6.98867 11.25 5.41732Z" stroke="currentcolor" strokeWidth="1.2" /> </svg>
-												</span>
-												<span className="fb-tab-title">{__("Blocks","frontis-blocks")}</span>
-											</div>
-										</NavigatorButton>
-									</div>
-									<hr/> */}
 								</div>
 							</NavigatorScreen>
 
@@ -1122,14 +1002,6 @@ function FrontisBlocksSidebarFullSite(props) {
 											<p>Available texts, links, Button, Headings global colors</p>
 										</div>
 									</div>
-									{/* <PanelColorSettings
-										title={__("Colors", "frontis-blocks")}
-										className={"fb-color-panel fb-global-color-panel"}
-										initialOpen={true}
-										disableAlpha={true}
-										disableCustomGradients={false}
-										colorSettings={colorPanelArray(globalColors, setGlobalColor, defaultsColors)}
-									/> */}
 
 										<TabPanel
 											className="fb-blocks-color-tabs"
@@ -1225,25 +1097,6 @@ function FrontisBlocksSidebarFullSite(props) {
 									</TabPanel>
 								</>
 							</NavigatorScreen>
-							{/* Blocks Screen */}
-							{/* <NavigatorScreen path="/blocks">
-								<>
-									<div className="fb-global-header-inner-wrapper">
-										<NavigatorButton path="/" className="back-button">
-											<span>
-												<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-													<path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="#404655" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-												</svg>
-											</span>
-										</NavigatorButton>
-										<div className="fb-global-header-inner">
-											<h3>Blocks</h3>
-											<p>{__("Customize the appearance of specific blocks and for the whole site.", "")}</p>
-										</div>
-									</div>
-								</>
-							</NavigatorScreen> */}
-
 						</NavigatorProvider>
 
 
