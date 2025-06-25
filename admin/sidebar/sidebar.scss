@@ -22,11 +22,12 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 	.fb-global-back {
 		padding-left: 0;
-		gap: 10px;
+		gap: 8px;
 		display: flex;
 		align-items: center;
 
 		span {
+			display: flex;
 			svg {
 				fill: none !important;
 			}
@@ -330,13 +331,15 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 			}
 			.fb-gradient-color-popup-content {
 				position: absolute;
-				top: 110%;
+				top: 100%;
 				left: 0;
 				background: #fff;
 				z-index: 1;
 				border: 1px solid $neutral-color-100;
 				padding: 10px;
 				border-radius: 4px;
+				width: 100%;
+				box-shadow: 0px 5px 5px #e1e3e8;
 			}
 		}
 	}
@@ -570,3 +573,23 @@ svg#fb-global-panel-icon {
 	border-left: 1px solid $neutral-color-100;
 	padding-left: 12px;
 }
+
+button.fb-custom-color-btn {
+    background-color: #3991FF;
+    color: #FFF;
+    padding: 10px 16px;
+    margin-top: 16px;
+}
+button.fb-custom-color-btn:hover {
+    background-color: #3991FF;
+    color: #FFF !important;
+}
+
+// .fb-global-color-panel, .fb-custom-color-panel {
+// 	.components-popover__content {
+// 		width: 230px;
+// 	}
+// 	.block-editor-color-gradient-control__panel {
+// 		width: 100%;
+// 	}
+// }

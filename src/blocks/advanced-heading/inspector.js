@@ -2817,9 +2817,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             {headingIconSwitcher && (
                 <PanelBody
                     title={__("Icon", "frontis-blocks")}
-                initialOpen={false}
-                className="fb-advanced-heading-icon"
-            >
+                    initialOpen={false}
+                    className="fb-advanced-heading-icon"
+                >
                 <div className='fb-advanced-heading-icon-wrapper'>
                     <BaseControl
                         label={__("Icon", "frontis-blocks")}

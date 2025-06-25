@@ -24,6 +24,21 @@ export const NORMAL_HOVER = [
 	{ label: "Hover", value: "hover" },
 ];
 
+export const SLIDER_ARROW_POSITION_TYPE = [
+	{ label: __('Inside', 'frontis-blocks'), value: 'inside' },
+	{ label: __('Outside', 'frontis-blocks'), value: 'outside' },
+];
+
+export const SLIDER_ARROW_POSITION = [
+	{ label: __('Center Center', 'frontis-blocks'), value: 'center' },
+	{ label: __('Top Left', 'frontis-blocks'), value: 'top-left' },
+	{ label: __('Top Center', 'frontis-blocks'), value: 'top-center' },
+	{ label: __('Top Right', 'frontis-blocks'), value: 'top-right' },
+	{ label: __('Bottom Left', 'frontis-blocks'), value: 'bottom-left' },
+	{ label: __('Bottom Center', 'frontis-blocks'), value: 'bottom-center' },
+	{ label: __('Bottom Right', 'frontis-blocks'), value: 'bottom-right' },
+];
+
 export const OVERFLOW_OP = [
     { label: __('Default', 'frontis-blocks'), value: 'default' },
     { label: __('Auto', 'frontis-blocks'), value: 'auto' },
