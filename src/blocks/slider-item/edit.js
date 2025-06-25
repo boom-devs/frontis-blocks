@@ -51,7 +51,7 @@ const Edit = (props) => {
 
     return (
         <>
-            <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+            {/* <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} /> */}
             <div {...blockProps}>
                 <div {...innerBlocksProps} />
             </div>
