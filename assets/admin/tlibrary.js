@@ -8,7 +8,295 @@
   \******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"pattern1","title":"Illustrate AI Landing Page for Gutenberg","image":"http://localhost/boomdevs-new/wp-content/uploads/2025/06/demo-1.png","content":"Pattern 1 content here"},{"id":"pattern2","title":"Illustrate AI Landing Page for Gutenberg","image":"http://localhost/boomdevs-new/wp-content/uploads/2025/06/pro-1.png","content":"Pattern 2 content here"},{"id":"pattern3","title":"Illustrate AI Landing Page for Gutenberg","image":"http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-2.png","content":"Pattern 3 content here"},{"id":"pattern4","title":"Illustrate AI Landing Page for Gutenberg","image":"http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-3.png","content":"Pattern 4 content here"},{"id":"pattern5","title":"Illustrate AI Landing Page for Gutenberg","image":"http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-4.png","content":"Pattern 5 content here"},{"id":"pattern6","title":"Illustrate AI Landing Page for Gutenberg","image":"http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-5.png","content":"Pattern 6 content here"},{"id":"pattern15","title":"Illustrate AI Landing Page for Gutenberg","image":"http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-6.png","content":"Pattern 15 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[{"id":"pattern1","title":"Pattern 1","image":"pattern1.jpg","content":"Pattern 1 content here"}]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"page1","title":"Page 1","image":"Page.jpg","content":"Page 1 content here"},{"id":"page2","title":"Page 2","image":"Page.jpg","content":"Page 2 content here"},{"id":"page3","title":"Pattern 3","image":"Page.jpg","content":"Page 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"item1","title":"Item 1","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Site 1 content here"},{"id":"item2","title":"Item 2","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Site 2 content here"},{"id":"item3","title":"Item 3","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Site 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"template-library":{"name":"Template Library","categories":[{"id":"all","name":"All","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]}]}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"pattern1","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png","content":"Pattern 1 content here"},{"id":"pattern2","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-1.png","content":"Pattern 2 content here"},{"id":"pattern3","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Pattern 3 content here"},{"id":"pattern4","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-2.png","content":"Pattern 4 content here"},{"id":"pattern5","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Pattern 5 content here"},{"id":"pattern6","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Pattern 6 content here"},{"id":"pattern15","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Pattern 15 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[{"id":"pattern1","title":"Pattern 1","image":"pattern1.jpg","content":"Pattern 1 content here"}]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"page1","title":"Page 1","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Page 1 content here"},{"id":"page2","title":"Page 2","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Page 2 content here"},{"id":"page3","title":"Pattern 3","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Page 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"item1","title":"Item 1","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Site 1 content here"},{"id":"item2","title":"Item 2","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Site 2 content here"},{"id":"item3","title":"Item 3","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Site 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"template-library":{"name":"Template Library","categories":[{"id":"all","name":"All","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]}]}}}');
+
+/***/ }),
+
+/***/ "./admin/template-library/full-site-import.js":
+/*!****************************************************!*\
+  !*** ./admin/template-library/full-site-import.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
+/* harmony import */ var _data_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data.json */ "./admin/template-library/data.json");
+/* harmony import */ var _template_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./template-header */ "./admin/template-library/template-header.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * WordPress dependencies
+ */
+
+
+
+
+var FullSiteImport = function FullSiteImport(_ref) {
+  var template = _ref.template,
+    onClose = _ref.onClose,
+    onBack = _ref.onBack;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      siteName: '',
+      siteTagline: '',
+      logo: null,
+      importContent: true,
+      importCustomizer: true,
+      importWidgets: true,
+      importOptions: true
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    formData = _useState2[0],
+    setFormData = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isImporting = _useState4[0],
+    setIsImporting = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    _useState6 = _slicedToArray(_useState5, 2),
+    importProgress = _useState6[0],
+    setImportProgress = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    currentStep = _useState8[0],
+    setCurrentStep = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('patterns'),
+    _useState10 = _slicedToArray(_useState9, 2),
+    activeTab = _useState10[0],
+    setActiveTab = _useState10[1];
+  var handleInputChange = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (field, value) {
+    setFormData(function (prev) {
+      return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, field, value));
+    });
+  }, []);
+  var handleLogoUpload = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (event) {
+    var file = event.target.files[0];
+    if (file) {
+      setFormData(function (prev) {
+        return _objectSpread(_objectSpread({}, prev), {}, {
+          logo: file
+        });
+      });
+    }
+  }, []);
+  var handleImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var steps, i;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          setIsImporting(true);
+          setImportProgress(0);
+          steps = ['Preparing import...', 'Importing content...', 'Setting up customizer...', 'Configuring widgets...', 'Finalizing setup...'];
+          _context.prev = 3;
+          i = 0;
+        case 5:
+          if (!(i < steps.length)) {
+            _context.next = 13;
+            break;
+          }
+          setCurrentStep(steps[i]);
+          setImportProgress((i + 1) / steps.length * 100);
+          _context.next = 10;
+          return new Promise(function (resolve) {
+            return setTimeout(resolve, 1500);
+          });
+        case 10:
+          i++;
+          _context.next = 5;
+          break;
+        case 13:
+          console.log('Full site import completed:', {
+            template: template === null || template === void 0 ? void 0 : template.id,
+            formData: formData
+          });
+
+          // Show success message or redirect
+          alert('Site imported successfully!');
+          onClose();
+          _context.next = 22;
+          break;
+        case 18:
+          _context.prev = 18;
+          _context.t0 = _context["catch"](3);
+          console.error('Import failed:', _context.t0);
+          alert('Import failed. Please try again.');
+        case 22:
+          _context.prev = 22;
+          setIsImporting(false);
+          setImportProgress(0);
+          setCurrentStep('');
+          return _context.finish(22);
+        case 27:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[3, 18, 22, 27]]);
+  })), [template === null || template === void 0 ? void 0 : template.id, formData, onClose]);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-full-site-import-modal"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-full-site-import-overlay",
+    onClick: onClose
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-full-site-import-container"
+  }, /*#__PURE__*/React.createElement(_template_header__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    activeTab: activeTab,
+    setActiveTab: setActiveTab,
+    data: _data_json__WEBPACK_IMPORTED_MODULE_1__
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-full-site-import-content"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-form-panel"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-section"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-template-label"
+  }, "Template Name:"), /*#__PURE__*/React.createElement("h6", {
+    className: "fb-template-title"
+  }, (template === null || template === void 0 ? void 0 : template.title) || 'Renovate - Home Decor Website Template'), /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "siteName"
+  }, "Site Name"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    id: "siteName",
+    placeholder: "Enter your site name",
+    value: formData.siteName,
+    onChange: function onChange(e) {
+      return handleInputChange('siteName', e.target.value);
+    },
+    className: "fb-form-input"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "siteTagline"
+  }, "Site Tagline"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    id: "siteTagline",
+    placeholder: "Enter your site tagline",
+    value: formData.siteTagline,
+    onChange: function onChange(e) {
+      return handleInputChange('siteTagline', e.target.value);
+    },
+    className: "fb-form-input"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Upload Logo"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-logo-upload"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "file",
+    id: "logoUpload",
+    accept: "image/*",
+    onChange: handleLogoUpload,
+    className: "fb-file-input"
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "logoUpload",
+    className: "fb-upload-btn"
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "20",
+    height: "20",
+    viewBox: "0 0 20 20",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M17.5 12.5V15.8333C17.5 16.2754 17.3244 16.6993 17.0118 17.0118C16.6993 17.3244 16.2754 17.5 15.8333 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0118C2.67559 16.6993 2.5 16.2754 2.5 15.8333V12.5M14.1667 6.66667L10 2.5M10 2.5L5.83333 6.66667M10 2.5V12.5",
+    stroke: "currentColor",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  })), "Choose Logo"), formData.logo && /*#__PURE__*/React.createElement("span", {
+    className: "fb-file-name"
+  }, formData.logo.name)))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-actions"
+  }, isImporting ? /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-progress"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-progress-info"
+  }, /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    color: "#3B82F6",
+    size: 20
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "fb-progress-text"
+  }, currentStep)), /*#__PURE__*/React.createElement("div", {
+    className: "fb-progress-bar"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-progress-fill",
+    style: {
+      width: "".concat(importProgress, "%")
+    }
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "fb-progress-percentage"
+  }, Math.round(importProgress), "%")) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-step-btn-wrapper"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-import-btn next",
+    onClick: handleImport,
+    disabled: !formData.siteName
+  }, "Next", /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M4 12H20M20 12L14 6M20 12L14 18",
+    stroke: "white",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-import-btn back",
+    onClick: handleImport,
+    disabled: !formData.siteName
+  }, "Back", /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M20 12H4M4 12L10 6M4 12L10 18",
+    stroke: "#6A758E",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }))))))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-preview-panel"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-preview-card"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: template === null || template === void 0 ? void 0 : template.image,
+    alt: template === null || template === void 0 ? void 0 : template.title,
+    className: "fb-preview-image"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-preview-info"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "fb-preview-title"
+  }, (template === null || template === void 0 ? void 0 : template.title) || 'Renovate - Home Decor Website Template'), /*#__PURE__*/React.createElement("div", {
+    className: "fb-preview-meta"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-preview-category"
+  }, "Construction"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-preview-type"
+  }, "FREE"))))))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FullSiteImport);
 
 /***/ }),
 
@@ -555,8 +843,6 @@ var TemplateCard = function TemplateCard(_ref) {
 
   // Check authentication status on component mount
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    // You can check if user is already logged in here
-    // For demo purposes, assuming user is not authenticated initially
     setIsAuthenticated(false);
   }, []);
   var handleFullSiteImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
@@ -642,7 +928,7 @@ var TemplateCard = function TemplateCard(_ref) {
     size: 16
   })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Import"))), /*#__PURE__*/React.createElement("button", {
     className: "fb-template-save-my-cloud"
-  }, /*#__PURE__*/React.createElement("span", null, "Save My Cloud"), /*#__PURE__*/React.createElement("svg", {
+  }, /*#__PURE__*/React.createElement("span", null, "Add to cloud"), /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     width: "17",
     height: "17",
@@ -730,11 +1016,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _data_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./data.json */ "./admin/template-library/data.json");
 /**
  * WordPress dependencies
  */
-
 
 
 var TemplateLogo = function TemplateLogo() {
@@ -816,7 +1100,6 @@ var TemplateHeader = function TemplateHeader(_ref) {
   var activeTab = _ref.activeTab,
     setActiveTab = _ref.setActiveTab,
     data = _ref.data;
-  // Extract tabs from the schema
   var schema = data.$schema;
   var tabs = Object.keys(schema).map(function (key) {
     return {
@@ -825,9 +1108,6 @@ var TemplateHeader = function TemplateHeader(_ref) {
       icon: key === 'template-library' ? /*#__PURE__*/React.createElement(TemplateLibraryIcon, null) : null
     };
   });
-
-  // State for active tab
-
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-store-header"
   }, /*#__PURE__*/React.createElement("div", {
@@ -909,7 +1189,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
+/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
+/* harmony import */ var _template_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./template-header */ "./admin/template-library/template-header.js");
+/* harmony import */ var _full_site_import__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./full-site-import */ "./admin/template-library/full-site-import.js");
+/* harmony import */ var _data_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./data.json */ "./admin/template-library/data.json");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -925,6 +1208,9 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
  */
 
 
+
+
+
 var TemplateImport = function TemplateImport(_ref) {
   var template = _ref.template,
     onClose = _ref.onClose;
@@ -932,48 +1218,52 @@ var TemplateImport = function TemplateImport(_ref) {
     _useState2 = _slicedToArray(_useState, 2),
     isImporting = _useState2[0],
     setIsImporting = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('preview'),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('patterns'),
     _useState4 = _slicedToArray(_useState3, 2),
     activeTab = _useState4[0],
     setActiveTab = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    showFullSiteImport = _useState6[0],
+    setShowFullSiteImport = _useState6[1]; // New state
+
   var handleFullSiteImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          setIsImporting(true);
-          _context.prev = 1;
-          _context.next = 4;
-          return new Promise(function (resolve) {
-            return setTimeout(resolve, 3000);
-          });
-        case 4:
-          console.log('Full site import completed for:', template === null || template === void 0 ? void 0 : template.id);
-          _context.next = 10;
-          break;
-        case 7:
-          _context.prev = 7;
-          _context.t0 = _context["catch"](1);
-          console.error('Import failed:', _context.t0);
-        case 10:
-          _context.prev = 10;
-          setIsImporting(false);
-          return _context.finish(10);
-        case 13:
+          // Show the FullSiteImport component instead of the import process
+          setShowFullSiteImport(true);
+        case 1:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[1, 7, 10, 13]]);
-  })), [template === null || template === void 0 ? void 0 : template.id]);
+    }, _callee);
+  })), []);
   var handleLiveDemo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     console.log('Live demo clicked for:', template === null || template === void 0 ? void 0 : template.id);
-    // Open demo in new tab
     window.open('#', '_blank');
   }, [template === null || template === void 0 ? void 0 : template.id]);
   var handleDownload = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     console.log('Download clicked for:', template === null || template === void 0 ? void 0 : template.id);
   }, [template === null || template === void 0 ? void 0 : template.id]);
+
+  // Handle closing the FullSiteImport component
+  var handleFullSiteImportClose = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setShowFullSiteImport(false);
+  }, []);
   if (!template) {
     return null;
+  }
+
+  // Show FullSiteImport component if showFullSiteImport is true
+  if (showFullSiteImport) {
+    return /*#__PURE__*/React.createElement(_full_site_import__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      template: template,
+      onClose: handleFullSiteImportClose,
+      onBack: function onBack() {
+        return setShowFullSiteImport(false);
+      } // Optional: Add back functionality
+    });
   }
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-template-import-modal"
@@ -982,87 +1272,15 @@ var TemplateImport = function TemplateImport(_ref) {
     onClick: onClose
   }), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-import-container"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-import-header"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-import-nav"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "fb-nav-tab ".concat(activeTab === 'patterns' ? 'active' : ''),
-    onClick: function onClick() {
-      return setActiveTab('patterns');
-    }
-  }, "Patterns"), /*#__PURE__*/React.createElement("button", {
-    className: "fb-nav-tab ".concat(activeTab === 'pages' ? 'active' : ''),
-    onClick: function onClick() {
-      return setActiveTab('pages');
-    }
-  }, "Pages"), /*#__PURE__*/React.createElement("button", {
-    className: "fb-nav-tab ".concat(activeTab === 'kits' ? 'active' : ''),
-    onClick: function onClick() {
-      return setActiveTab('kits');
-    }
-  }, "Kits"), /*#__PURE__*/React.createElement("button", {
-    className: "fb-nav-tab ".concat(activeTab === 'template-library' ? 'active' : ''),
-    onClick: function onClick() {
-      return setActiveTab('template-library');
-    }
-  }, "Template Library", /*#__PURE__*/React.createElement("span", {
-    className: "fb-pro-badge"
-  }, "PRO"))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-import-search"
-  }, /*#__PURE__*/React.createElement("svg", {
-    width: "16",
-    height: "16",
-    viewBox: "0 0 16 16",
-    fill: "none"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667ZM14 14l-2.9-2.9",
-    stroke: "currentColor",
-    strokeWidth: "1.333",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  })), /*#__PURE__*/React.createElement("input", {
-    type: "text",
-    placeholder: "Search Blocks"
-  })), /*#__PURE__*/React.createElement("button", {
-    className: "fb-close-btn",
-    onClick: onClose
-  }, /*#__PURE__*/React.createElement("svg", {
-    width: "24",
-    height: "24",
-    viewBox: "0 0 24 24",
-    fill: "none"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 6L6 18M6 6l12 12",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  })))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(_template_header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    activeTab: activeTab,
+    setActiveTab: setActiveTab,
+    data: _data_json__WEBPACK_IMPORTED_MODULE_3__
+  }), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-import-content"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-import-main"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-import-tags"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "fb-tag"
-  }, "User Experience"), /*#__PURE__*/React.createElement("span", {
-    className: "fb-tag"
-  }, "UI Kits"), /*#__PURE__*/React.createElement("span", {
-    className: "fb-tag"
-  }, "Templates"), /*#__PURE__*/React.createElement("span", {
-    className: "fb-tag"
-  }, "Web Design"), /*#__PURE__*/React.createElement("span", {
-    className: "fb-tag"
-  }, "Creative Assets"), /*#__PURE__*/React.createElement("span", {
-    className: "fb-tag"
-  }, "Digital Marketing"), /*#__PURE__*/React.createElement("span", {
-    className: "fb-tag"
-  }, "Landing Pages"), /*#__PURE__*/React.createElement("span", {
-    className: "fb-tag"
-  }, "Prototyping"), /*#__PURE__*/React.createElement("span", {
-    className: "fb-tag"
-  }, "E-commerce")), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-preview"
   }, /*#__PURE__*/React.createElement("img", {
     src: template.image,
@@ -1076,11 +1294,11 @@ var TemplateImport = function TemplateImport(_ref) {
     className: "fb-template-category"
   }, /*#__PURE__*/React.createElement("span", {
     className: "fb-category-label"
-  }, "Category"), /*#__PURE__*/React.createElement("div", {
+  }, "Category : "), /*#__PURE__*/React.createElement("div", {
     className: "fb-category-tags"
   }, /*#__PURE__*/React.createElement("span", {
     className: "fb-category-tag"
-  }, "Blog & Magazine"), /*#__PURE__*/React.createElement("span", {
+  }, " Blog & Magazine"), /*#__PURE__*/React.createElement("span", {
     className: "fb-category-tag"
   }, "Construction"), /*#__PURE__*/React.createElement("span", {
     className: "fb-category-tag"
@@ -1095,19 +1313,43 @@ var TemplateImport = function TemplateImport(_ref) {
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-dependency-icon"
   }, /*#__PURE__*/React.createElement("svg", {
-    width: "20",
-    height: "20",
-    viewBox: "0 0 20 20",
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "28",
+    height: "32",
+    viewBox: "0 0 28 32",
     fill: "none"
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M10 2L3 7v11h14V7l-7-5z",
-    stroke: "currentColor",
-    strokeWidth: "1.5",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
+    d: "M23.335 15.9939L26.5028 17.8551C26.958 18.1229 27.336 18.508 27.5988 18.9718C27.8616 19.4356 28 19.9618 28 20.4974V22.4684C28 23.0039 27.8616 23.5301 27.5988 23.9939C27.336 24.4577 26.958 24.8429 26.5028 25.1107L23.335 26.9718L18.652 29.7239L15.4781 31.5912C15.0229 31.859 14.5065 32 13.981 32C13.4554 32 12.939 31.859 12.4838 31.5912L9.31592 29.7239V24.2319L13.981 26.9779L18.652 24.2319L23.317 21.492L18.652 18.746L13.981 16L18.652 13.2479L23.317 10.508L18.652 7.76198L13.981 5.02206L9.31592 2.27605L12.4838 0.408765C12.939 0.140974 13.4554 0 13.981 0C14.5065 0 15.0229 0.140974 15.4781 0.408765L18.646 2.27605L23.305 5.02206L26.4729 6.88935C26.9281 7.15713 27.3061 7.54229 27.5689 8.0061C27.8317 8.46992 27.97 8.99606 27.97 9.53163V11.4966C27.97 12.0321 27.8317 12.5582 27.5689 13.0221C27.3061 13.4859 26.9281 13.871 26.4729 14.1388L23.335 15.9939Z",
+    fill: "#3991FF"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M9.32407 7.76409L4.66503 10.4979V26.974L1.5031 25.1128C1.04681 24.8458 0.667639 24.4609 0.403758 23.9971C0.139878 23.5332 0.000619531 23.0067 0 22.4705V9.51545C1.3352e-05 8.97988 0.138364 8.45374 0.401163 7.98992C0.663962 7.52611 1.04195 7.14095 1.49712 6.87317L3.16192 5.8968C3.6171 5.62901 4.13344 5.48804 4.65904 5.48804C5.18464 5.48804 5.70098 5.62901 6.15616 5.8968L9.32407 7.76409Z",
+    fill: "#050607"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M18.6537 13.2504L13.9827 15.9964L10.8147 17.8576C10.3596 18.1254 9.84323 18.2664 9.31763 18.2664C8.79203 18.2664 8.27569 18.1254 7.82051 17.8576L4.64062 15.9964L9.30566 13.2565L12.4795 11.3893C12.9347 11.1215 13.4511 10.9805 13.9767 10.9805C14.5023 10.9805 15.0186 11.1215 15.4738 11.3893L18.6537 13.2504Z",
+    fill: "#050607"
   }))), /*#__PURE__*/React.createElement("div", {
     className: "fb-dependency-icon woo"
-  }, /*#__PURE__*/React.createElement("span", null, "WOO")))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "54",
+    height: "32",
+    viewBox: "0 0 54 32",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("g", {
+    "clip-path": "url(#clip0_12958_4053)"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M5.01359 0H48.9642C51.7458 0 53.9973 2.23268 53.9973 4.99095V21.627C53.9973 24.3853 51.7458 26.6179 48.9642 26.6179H33.2029L35.3663 31.8714L25.852 26.6179H5.03552C2.25415 26.6179 0.00260341 24.3853 0.00260341 21.627V4.99095C-0.0195429 2.25464 2.23179 0 5.01359 0Z",
+    fill: "#9B5C8F"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M3.07746 4.54898C3.38477 4.13528 3.84562 3.91776 4.46024 3.87426C5.57979 3.78704 6.21634 4.30929 6.36989 5.44121C7.05031 9.99023 7.79653 13.8428 8.58663 16.9987L13.3934 7.92257C13.8326 7.09538 14.3814 6.66014 15.0399 6.61664C16.0057 6.55138 16.5981 7.16064 16.8396 8.44482C17.3884 11.3395 18.0908 13.7991 18.9248 15.8885C19.4955 10.3602 20.4613 6.37716 21.8221 3.91776C22.1512 3.3083 22.6342 3.00357 23.2707 2.95985C23.7757 2.91656 24.2365 3.06882 24.6535 3.39531C25.0705 3.72179 25.29 4.13528 25.3339 4.63599C25.3558 5.02772 25.29 5.35421 25.1146 5.68069C24.2584 7.24785 23.5559 9.88147 22.9853 13.5378C22.4367 17.0857 22.2391 19.85 22.3707 21.8307C22.4148 22.3744 22.3269 22.8534 22.1075 23.2671C21.8439 23.7458 21.449 24.0071 20.9441 24.0506C20.3733 24.0941 19.7809 23.8331 19.2101 23.2453C17.1689 21.1775 15.5446 18.0869 14.3594 13.9733C12.9326 16.7592 11.8791 18.8486 11.1986 20.2415C9.9036 22.7011 8.8062 23.9636 7.88427 24.0288C7.2916 24.0723 6.78687 23.5716 6.34795 22.5271C5.22861 19.6758 4.02132 14.1691 2.72649 6.00717C2.63854 5.44121 2.77015 4.94051 3.07746 4.54898ZM50.2462 7.96608C49.4561 6.59489 48.2927 5.76791 46.7345 5.44121C46.3173 5.35421 45.9224 5.3107 45.5491 5.3107C43.442 5.3107 41.73 6.39891 40.3911 8.57554C39.2496 10.4255 38.6791 12.4714 38.6791 14.7133C38.6791 16.3892 39.0303 17.8256 39.7326 19.0228C40.5227 20.394 41.6861 21.221 43.2444 21.5475C43.6614 21.6347 44.0564 21.6782 44.4298 21.6782C46.5588 21.6782 48.2708 20.59 49.5878 18.4133C50.729 16.5414 51.2998 14.4955 51.2998 12.2539C51.3217 10.5562 50.9486 9.14129 50.2462 7.96608ZM47.4807 13.995C47.1734 15.4315 46.6246 16.4979 45.8123 17.2162C45.176 17.7821 44.5833 18.0214 44.0347 17.9126C43.5078 17.8039 43.0687 17.3469 42.7397 16.4979C42.476 15.8232 42.3446 15.1485 42.3446 14.5173C42.3446 13.9733 42.3885 13.4291 42.4982 12.9286C42.6958 12.0361 43.0689 11.1654 43.6614 10.3385C44.3859 9.2718 45.1541 8.83677 45.9442 8.98903C46.471 9.09779 46.9102 9.55499 47.2392 10.4037C47.5026 11.0784 47.6342 11.7532 47.6342 12.3844C47.6342 12.9503 47.5904 13.4945 47.4807 13.995ZM36.506 7.96608C35.7159 6.59489 34.5306 5.76791 32.9942 5.44121C32.5772 5.35421 32.1822 5.3107 31.8089 5.3107C29.7018 5.3107 27.9898 6.39891 26.6509 8.57554C25.5096 10.4255 24.9389 12.4714 24.9389 14.7133C24.9389 16.3892 25.29 17.8256 25.9924 19.0228C26.7825 20.394 27.9459 21.221 29.5042 21.5475C29.9214 21.6347 30.3162 21.6782 30.6895 21.6782C32.8185 21.6782 34.5306 20.59 35.8475 18.4133C36.989 16.5414 37.5595 14.4955 37.5595 12.2539C37.5595 10.5562 37.2084 9.14129 36.506 7.96608ZM33.7185 13.995C33.4112 15.4315 32.8624 16.4979 32.0504 17.2162C31.4138 17.7821 30.8211 18.0214 30.2723 17.9126C29.7457 17.8039 29.3068 17.3469 28.9773 16.4979C28.7141 15.8232 28.5825 15.1485 28.5825 14.5173C28.5825 13.9733 28.6263 13.4291 28.736 12.9286C28.9336 12.0361 29.3068 11.1654 29.8994 10.3385C30.6237 9.2718 31.3919 8.83677 32.182 8.98903C32.7089 9.09779 33.148 9.55499 33.477 10.4037C33.7407 11.0784 33.8721 11.7532 33.8721 12.3844C33.8942 12.9503 33.8282 13.4945 33.7185 13.995Z",
+    fill: "white"
+  })), /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
+    id: "clip0_12958_4053"
+  }, /*#__PURE__*/React.createElement("rect", {
+    width: "54",
+    height: "32",
+    fill: "white"
+  }))))))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-meta"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-price"
@@ -1123,32 +1365,28 @@ var TemplateImport = function TemplateImport(_ref) {
     className: "fb-full-site-import-btn ".concat(isImporting ? 'loading' : ''),
     onClick: handleFullSiteImport,
     disabled: isImporting
-  }, isImporting ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, isImporting ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_4__["default"], {
     color: "#fff",
     size: 16
   }), /*#__PURE__*/React.createElement("span", null, "Importing...")) : /*#__PURE__*/React.createElement("span", null, "Full Site Import")), /*#__PURE__*/React.createElement("button", {
     className: "fb-live-demo-btn",
     onClick: handleLiveDemo
-  }, /*#__PURE__*/React.createElement("span", null, "Live Demo")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", null, "Live Demo"))), /*#__PURE__*/React.createElement("div", {
     className: "fb-import-info"
   }, /*#__PURE__*/React.createElement("svg", {
-    width: "16",
-    height: "16",
-    viewBox: "0 0 16 16",
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "18",
+    height: "18",
+    viewBox: "0 0 18 18",
     fill: "none"
-  }, /*#__PURE__*/React.createElement("circle", {
-    cx: "8",
-    cy: "8",
-    r: "6",
-    stroke: "currentColor",
-    strokeWidth: "1.5"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M8 5.5V8l1.5 1.5",
-    stroke: "currentColor",
-    strokeWidth: "1.5",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  })), /*#__PURE__*/React.createElement("span", null, "Learn more about full site import")))))));
+  }, /*#__PURE__*/React.createElement("path", {
+    "fill-rule": "evenodd",
+    "clip-rule": "evenodd",
+    d: "M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9ZM9 13.3125C9.31065 13.3125 9.5625 13.0606 9.5625 12.75V8.25C9.5625 7.93935 9.31065 7.6875 9 7.6875C8.68935 7.6875 8.4375 7.93935 8.4375 8.25V12.75C8.4375 13.0606 8.68935 13.3125 9 13.3125ZM9 5.25C9.41423 5.25 9.75 5.58579 9.75 6C9.75 6.41421 9.41423 6.75 9 6.75C8.58577 6.75 8.25 6.41421 8.25 6C8.25 5.58579 8.58577 5.25 9 5.25Z",
+    fill: "#8891A5"
+  })), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", {
+    className: "blue-color"
+  }, "Learn more"), " about full site import"))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TemplateImport);
 

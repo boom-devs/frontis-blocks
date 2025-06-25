@@ -18,8 +18,6 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id }) => {
 
 	// Check authentication status on component mount
 	useEffect(() => {
-		// You can check if user is already logged in here
-		// For demo purposes, assuming user is not authenticated initially
 		setIsAuthenticated(false);
 	}, []);
 
@@ -110,7 +108,7 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id }) => {
 							</button>
 
 							<button className="fb-template-save-my-cloud">
-								<span>Save My Cloud</span>
+								<span>Add to cloud</span>
 								<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
 									<path d="M3.16675 8.5C3.16675 11.4455 5.55456 13.8333 8.50008 13.8333C11.4456 13.8333 13.8334 11.4455 13.8334 8.5" stroke="#404655" strokeWidth="1.5" strokeLinecap="round" />
 									<path d="M8.5 3.16663V9.83329M8.5 9.83329L10.5 7.83329M8.5 9.83329L6.5 7.83329" stroke="#404655" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
