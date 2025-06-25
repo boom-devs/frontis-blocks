@@ -11,7 +11,6 @@ use FrontisBlocks\Admin\Ajax\Settings;
  */
 class Activator {
 
-
     const VERSION = '1.0.8';
     const SLUG = 'frontis-blocks';
 
@@ -21,7 +20,6 @@ class Activator {
         $this->appsero_init_tracker_frontis_blocks();
         $this->init_hooks();
     }
-
 
     public function init_hooks() {
         add_action('plugins_loaded', [$this, 'fb_set_initial_version']);
@@ -112,7 +110,6 @@ class Activator {
 	 */
 	public function appsero_init_tracker_frontis_blocks()
 	{
-
 		$client = new \Appsero\Client(
 			'27f84c83-a5a3-4a41-9cef-48b83ca6c546',
 			'Frontis Blocks – The Ultimate WordPress Block Plugin',
@@ -121,6 +118,5 @@ class Activator {
 
 		// Active insights
 		$client->insights()->init();
-
 	}
 }

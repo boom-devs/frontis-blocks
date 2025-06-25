@@ -225,7 +225,7 @@ final class Plugin
 			]
 		]);
 
-		
+
 
 	}
 
@@ -306,19 +306,11 @@ final class Plugin
 	 */
 	public function init_plugin()
 	{
-
 		Blocks::get_instance();
-
 		Admin::get_instance();
-
 		Settings::get_instance()->register_ajax_events();
-
 		InitialActivatedBlocks::blocks();
-
 		GlobalSettings::get_instance()->register_global_settings_events();
-
 		SupportSVG::get_instance();
-
 	}
-
 }
