@@ -11,7 +11,7 @@ import {
 	TabPanel,
 	ToggleControl
 } from "@wordpress/components";
-import { useEffect } from "@wordpress/element";
+import { useEffect, useState } from "@wordpress/element";
 
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
@@ -30,9 +30,12 @@ import FB_PositionControl from '@Components/position-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import FB_InputControl from '@Components/input-control';
 import FB_InspectorControls from '@Components/InspectorControls';
+import { SortableContext } from "@dnd-kit/sortable";
+import ColumnSortableItem from "./columnSortableItem";
 
 const Inspector = (props) => {
 	let deviceType = useDeviceType();
+	console.log(deviceType);
 	const {
 		isSelected,
 		attributes,
@@ -121,12 +124,20 @@ const Inspector = (props) => {
 			containerBgOverlayHoverBackgroundImageRepeat,
 			containerBgOverlayHoverBackgroundImageSize,
 
+			containerHtmlTag,
 			containerDesktopSwitcher,
 			containerTabletSwitcher,
 			containerMobileSwitcher,
+			containerLayout,
 			containerDirection,
 			containerJustify,
 			containerAlignItems,
+			containerEqualHeight,
+			containerChildrenWidth,
+
+			// Grid
+			containerColumnsItemList,
+			containerRowsItemList,
 
 			// Position
 			containerOverflow,
@@ -195,6 +206,24 @@ const Inspector = (props) => {
 		{ label: __("Ridge", "frontis-blocks"), value: "ridge" },
 	];
 
+	const HTML_TAG = [
+		{ title: 'div', label: __('div', 'frontis-blocks'), value: "div" },
+		{ title: 'section', label: __('section', 'frontis-blocks'), value: "section" },
+		{ title: 'article', label: __('article', 'frontis-blocks'), value: "article" },
+		{ title: 'header', label: __('header', 'frontis-blocks'), value: "header" },
+		{ title: 'footer', label: __('footer', 'frontis-blocks'), value: "footer" },
+		{ title: 'main', label: __('main', 'frontis-blocks'), value: "main" },
+		{ title: 'nav', label: __('nav', 'frontis-blocks'), value: "nav" },
+		{ title: 'a', label: __('a', 'frontis-blocks'), value: "a" },
+	];
+	const LAYOUT_TYPE = [
+		{ title: 'Flex', label: __('Flex', 'frontis-blocks'), value: "flex" },
+		{ title: 'Grid', label: __('Grid', 'frontis-blocks'), value: "grid" },
+	];
+	const CHILDREN_WIDTH = [
+		{ title: 'Auto', label: __('Auto', 'frontis-blocks'), value: "auto" },
+		{ title: 'Full', label: __('Full', 'frontis-blocks'), value: "full" },
+	];
 	const DIRECTION = [
 		{ title: 'Row', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.64246 7.53723H17.2781" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 7.53729L15.3485 5.28601" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 7.53723L15.3485 9.78851" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M6.64246 16.4172H17.2781" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 16.4173L15.3485 14.1774" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 16.4172L15.3485 18.6685" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M2.85132 21.1473V2.85278" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21.1487 21.1473V2.85278" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "row" },
 		{ title: 'Column', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.391 6.72949L16.391 17.1923" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.3909 17.1923L18.606 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.391 17.1923L14.176 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65393 6.72949L7.65393 17.1923" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65381 17.1923L9.85767 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65393 17.1923L5.43889 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "column" },
@@ -234,6 +263,94 @@ const Inspector = (props) => {
 		{ label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
 		{ label: __('Clip', 'frontis-blocks'), value: 'clip' },
 	];
+
+	const [containerColumnsItem, setContainerColumnsItem] = useState(containerColumnsItemList);
+	const [containerRowsItem, setContainerRowsItem] = useState(containerRowsItemList);
+
+	const handleColumnAddItem = () => {
+        const newItem = {
+            id: `column-${containerColumnsItem[deviceType].length + 1}`, 
+            title: `Column ${containerColumnsItem[deviceType].length + 1}`,
+			type: 'auto',
+			width: '1',
+			widthUnits: 'fr',
+			min: '10',
+			minUnits: 'px',
+			max: '1',
+			maxUnits: 'fr',
+        };
+        setAttributes({ containerColumnsItemList: {...containerColumnsItemList, [deviceType]: [...containerColumnsItemList[deviceType], newItem]}  });
+        setContainerColumnsItem({ ...containerColumnsItem, [deviceType]: [...containerColumnsItem[deviceType], newItem] });
+    };
+
+    const handleColumnChangeItem = (id, key, value) => {
+		let updatedItems = [];
+
+		if(deviceType === 'Desktop') {
+			updatedItems = containerColumnsItem.Desktop.map(item => {
+				if (item.id === id) {
+					return { ...item, [key]: value };
+				}
+				return item;
+			});
+		} else if(deviceType === 'Tablet') {
+			updatedItems = containerColumnsItem.Tablet.map(item => {
+				if (item.id === id) {
+					return { ...item, [key]: value };
+				}
+				return item;
+			});
+		} else if(deviceType === 'Mobile') {
+			updatedItems = containerColumnsItem.Mobile.map(item => {
+				if (item.id === id) {
+					return { ...item, [key]: value };
+				}
+				return item;
+			});
+		}
+        
+        setContainerColumnsItem({ ...containerColumnsItem, [deviceType]: updatedItems });
+        setAttributes({ containerColumnsItemList: {...containerColumnsItemList, [deviceType]: updatedItems} });
+    };
+
+    const handleColumnDeleteItem = (id) => {
+		let updatedItems = [];
+		if(deviceType === 'Desktop') {
+			updatedItems = containerColumnsItem.Desktop.filter(item => item.id !== id);
+		} else if(deviceType === 'Tablet') {
+			updatedItems = containerColumnsItem.Tablet.filter(item => item.id !== id);
+		} else if(deviceType === 'Mobile') {
+			updatedItems = containerColumnsItem.Mobile.filter(item => item.id !== id);
+		}
+
+        setAttributes({ containerColumnsItemList: {...containerColumnsItemList, [deviceType]: updatedItems} });
+        setContainerColumnsItem({ ...containerColumnsItem, [deviceType]: updatedItems });
+
+    };
+
+
+	const handleColumnDuplicateItem = (id) => {
+
+		const items = containerColumnsItem?.[deviceType] ?? [];
+	  
+		const srcIndex = items.findIndex((item) => item.id === id);
+		if (srcIndex === -1) return;
+	  
+		const itemToDuplicate = items[srcIndex];
+	  
+		const newId = `column-${containerColumnsItem[deviceType].length + 1}`;
+		const newTitle = `Column ${containerColumnsItem[deviceType].length + 1}`;
+	  
+		const newItem = { ...itemToDuplicate, id: newId, title: newTitle };
+	  
+		const updatedItems = [...items, newItem];
+	  
+		setContainerColumnsItem({...containerColumnsItem, [deviceType]: updatedItems});
+		setAttributes({containerColumnsItemList: {...containerColumnsItemList,[deviceType]: updatedItems}});
+	  };
+	  
+
+	console.log(containerColumnsItemList);
 
 	// Handle full width content boxed width
 	const fullWidthContentBoxedWidthFn = (width) => {
@@ -712,14 +829,106 @@ const Inspector = (props) => {
 							{ label: 'vh', value: 'vh' },
 						]}
 					/>
+
+					<ToggleControl
+						label={__("Equal Height", "frontis-blocks")}
+						checked={containerEqualHeight}
+						onChange={(value) => setAttributes({ containerEqualHeight: value })}
+					/>
+
+					<SelectControl
+							label={__("HTML Tag", "frontis-blocks")}
+							value={containerHtmlTag}
+							options={HTML_TAG}
+							onChange={(value) => setAttributes({ containerHtmlTag: value })}
+						/>
 				</PanelBody>
 			</div>
 			{/* {isBlockRootParent && */}
 				<div className="fb-flex-properties-wrapper">
 					<PanelBody
-						title={__("Flex Properties", "frontis-blocks")}
+						title={__("Layout", "frontis-blocks")}
 						initialOpen={true}
 					>
+
+						<BaseControl
+							id="fb-setting-alignment"
+							className="fb-advanced-alignment list"
+						>
+							<ButtonGroup className="fb-advanced-alignment-group-btn">
+								{LAYOUT_TYPE.map((item, key) => (
+									<Button
+										key={key}
+										onClick={() =>
+											setAttributes({
+												containerLayout: item.value
+											})
+										}
+										title={item.title}
+										className={`fb-advanced-alignment-single-btn ${containerLayout === item.value ? 'active' : ''}`}
+									>
+										{item.label}
+									</Button>
+								))}
+							</ButtonGroup>
+						</BaseControl>
+
+						{containerLayout === 'grid' &&
+							<BaseControl
+								id="fb-setting-alignment"
+								className="fb-advanced-alignment list"
+							>
+								<FB_ResponsiveControl
+									labelText={__('Columns', 'frontis-blocks')}
+									device={deviceType}
+								/>
+								<br />
+								<div className="fb-feature-wrapper">
+									<SortableContext items={containerColumnsItem[deviceType].map(item => item.id)}>
+										<ul className='dnd-items-wrapper'>
+											{containerColumnsItem[deviceType].map((item, index) => (
+												<ColumnSortableItem
+													key={item.id}
+													id={item.id}
+													columnItem={item}
+													handleChangeItem={handleColumnChangeItem}
+													handleDeleteItem={handleColumnDeleteItem}
+													handleDuplicateItem={handleColumnDuplicateItem}
+													containerColumnsItem={containerColumnsItem[deviceType]}
+													index={index}
+												/>
+											))}
+										</ul>
+									</SortableContext>
+									<Button isPrimary onClick={handleColumnAddItem}>
+										{__("Add Column", "frontis-blocks")}
+									</Button>
+								</div>
+							</BaseControl>
+						}
+
+						<BaseControl
+							id="fb-setting-alignment"
+							className="fb-advanced-alignment list"
+						>
+							<ButtonGroup className="fb-advanced-alignment-group-btn">
+								{CHILDREN_WIDTH.map((item, key) => (
+									<Button
+										key={key}
+										onClick={() =>
+											setAttributes({
+												containerChildrenWidth: item.value
+											})
+										}
+										title={item.title}
+										className={`fb-advanced-alignment-single-btn ${containerChildrenWidth === item.value ? 'active' : ''}`}
+									>
+										{item.label}
+									</Button>
+								))}
+							</ButtonGroup>
+						</BaseControl>
+
 						<BaseControl
 							id="fb-setting-alignment"
 							className="fb-advanced-alignment list"
