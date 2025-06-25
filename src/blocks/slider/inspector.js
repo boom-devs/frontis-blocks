@@ -1202,7 +1202,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ` : ''}
         
                 ${sliderArrowPosition === 'bottom-right' ? `
-                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};
+                    bottom: ${sliderArrowPositionBottomOffset.Desktop ? `${sliderArrowPositionBottomOffset.Desktop}${sliderArrowPositionBottomOffsetUnits.Desktop}` : '0'};
                     right: ${sliderArrowPositionRightOffset.Desktop ? `${sliderArrowPositionRightOffset.Desktop}${sliderArrowPositionRightOffsetUnits.Desktop}` : '0'};
                 ` : ''}
             }

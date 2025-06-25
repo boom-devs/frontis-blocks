@@ -29,6 +29,7 @@ const TypographySettings = (props) => {
 	const [isMount, setIsMount] = useState(false);
 	const [fontFamilies, setFontFamilies] = useState([]);
 	const [globalTypography, setGlobalTypography] = useState(typography);
+	const [selectCustomTypo, setSelectCustomTypo] = useState(false);
 	const deviceType = useDeviceType();
 
 	const isFSE = wp.data.select('core').getCurrentTheme()?.is_block_theme || false;
@@ -1185,63 +1186,65 @@ const TypographySettings = (props) => {
 				<div className="fb-panel-section">
 					<div className="fb-panel-heading-wrapper">
 						<h3 className="fb-panel-heading">Custom</h3>
-						<div className="add-custom-color">
-							<Button
-								className="add-custom-color-btn"
-								onClick={() => setCustomTypography({
-									...customTypography,
-									[`fb_customtypo_${Math.random().toString(36).substring(2, 7)}`]: {
-										name: `Custom Typography`,
-										fontFamily: "default",
-										lineHeight: {
-											Desktop: 0,
-											Tablet: 0,
-											Mobile: 0
-										},
-										lineHeightUnits: {
-											Desktop: 'px',
-											Tablet: 'px',
-											Mobile: 'px'
-										},
-										fontSize: {
-											Desktop: 0,
-											Tablet: 0,
-											Mobile: 0
-										},
-										fontSizeUnit: {
-											Desktop: 'px',
-											Tablet: 'px',
-											Mobile: 'px'
-										},
-										fontWeight: 0,
-										fontStyle: 0,
-										textTransform: 0,
-										textDecoration: 0,
-										letterSpacing: {
-											Desktop: 0,
-											Tablet: 0,
-											Mobile: 0
-										},
-										letterSpacingUnit: {
-											Desktop: 'px',
-											Tablet: 'px',
-											Mobile: 'px'
+						{!selectCustomTypo && (
+							<div className="add-custom-color">
+								<Button
+									className="add-custom-color-btn"
+									onClick={() => setCustomTypography({
+										...customTypography,
+										[`fb_customtypo_${Math.random().toString(36).substring(2, 7)}`]: {
+											name: `Custom Typography`,
+											fontFamily: "default",
+											lineHeight: {
+												Desktop: '',
+												Tablet: '',
+												Mobile: ''
+											},
+											lineHeightUnits: {
+												Desktop: 'px',
+												Tablet: 'px',
+												Mobile: 'px'
+											},
+											fontSize: {
+												Desktop: '',
+												Tablet: '',
+												Mobile: ''
+											},
+											fontSizeUnit: {
+												Desktop: 'px',
+												Tablet: 'px',
+												Mobile: 'px'
+											},
+											fontWeight: '',
+											fontStyle: '',
+											textTransform: '',
+											textDecoration: '',
+											letterSpacing: {
+												Desktop: '',
+												Tablet: '',
+												Mobile: ''
+											},
+											letterSpacingUnit: {
+												Desktop: 'px',
+												Tablet: 'px',
+												Mobile: 'px'
+											}
 										}
-									}
-								})}
-							>
-								<span>
-									<svg width="15" height="14" viewBox="0 0 15 14"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg">
-										<path d="M7.5 0.75V13.25M13.75 7L1.25 7"
-											stroke="white"
-											strokeWidth="1.5" strokeLinecap="round"
-											strokeLinejoin="round" />
-									</svg>
-								</span>
-							</Button>
-						</div>
+									})}
+								>
+									<span>
+										<svg width="15" height="14" viewBox="0 0 15 14"
+											fill="none"
+											xmlns="http://www.w3.org/2000/svg">
+											<path d="M7.5 0.75V13.25M13.75 7L1.25 7"
+												stroke="white"
+												strokeWidth="1.5" strokeLinecap="round"
+												strokeLinejoin="round" />
+										</svg>
+									</span>
+								</Button>
+							</div>
+						)}
 					</div>
 
 					<div className={'fb-global-typo-elements'}>
@@ -1258,6 +1261,7 @@ const TypographySettings = (props) => {
 													>
 														<NavigatorButton
 															path={`/${item}`}
+															onClick={() => setSelectCustomTypo(true)}
 														>
 															{customTypography[item]?.name}
 														</NavigatorButton>
@@ -1288,15 +1292,18 @@ const TypographySettings = (props) => {
 											className="fb-global-typography-element-content"
 										>
 											<NavigatorScreen path={`/${item}`}>
-												<NavigatorBackButton>
-													<Dashicon
-														icon="arrow-left-alt2" /> {customTypography[item]?.name}
+												<NavigatorBackButton onClick={() => setSelectCustomTypo(false)}>
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+														<path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="currentcolor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+													</svg>
+													{customTypography[item]?.name}
 												</NavigatorBackButton>
 
 												<div className="fb-typography-settings">
 													<FrontPreview fontProps={customTypography[item]} deviceType={deviceType} fontSize={true} />
 													<TextControl
 														label={__('Typography Name', 'frontis-blocks')}
+														className="fb-custom-typo-name"
 														value={customTypography[item]?.name}
 														onChange={(value) => changeCustomTypoName(item, value)}
 													/>
