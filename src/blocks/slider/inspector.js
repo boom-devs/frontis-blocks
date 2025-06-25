@@ -1175,35 +1175,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 z-index: 100;
         
                 ${sliderArrowPosition === 'top-left' ? `
-                    top: 0;
-                    left: 0;
+                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};   
+                    left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '0'};
                 ` : ''}
         
                 ${sliderArrowPosition === 'top-center' ? `
-                    top: 0;
-                    left: 50%;
+                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};  
+                    left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '50%'};
                     transform: translateX(-50%);
                 ` : ''}
         
                 ${sliderArrowPosition === 'top-right' ? `
-                    top: 0;
-                    right: 0;
+                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};  
+                    right: ${sliderArrowPositionRightOffset.Desktop ? `${sliderArrowPositionRightOffset.Desktop}${sliderArrowPositionRightOffsetUnits.Desktop}` : '0'};
                 ` : ''}
         
                 ${sliderArrowPosition === 'bottom-left' ? `
-                    bottom: 0;
-                    left: 0;
+                    bottom: ${sliderArrowPositionBottomOffset.Desktop ? `${sliderArrowPositionBottomOffset.Desktop}${sliderArrowPositionBottomOffsetUnits.Desktop}` : '0'};  
+                    left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '0'};
                 ` : ''}
         
                 ${sliderArrowPosition === 'bottom-center' ? `
-                    bottom: 0;
-                    left: 50%;
+                    bottom: ${sliderArrowPositionBottomOffset.Desktop ? `${sliderArrowPositionBottomOffset.Desktop}${sliderArrowPositionBottomOffsetUnits.Desktop}` : '0'};  
+                    left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '50%'};
                     transform: translateX(-50%);
                 ` : ''}
         
                 ${sliderArrowPosition === 'bottom-right' ? `
-                    bottom: 0;
-                    right: 0;
+                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};
+                    right: ${sliderArrowPositionRightOffset.Desktop ? `${sliderArrowPositionRightOffset.Desktop}${sliderArrowPositionRightOffsetUnits.Desktop}` : '0'};
                 ` : ''}
             }
         
@@ -1926,7 +1926,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     {sliderArrowPosition === 'top-left' && (
                         <>
                             <FB_Range
-                                min={0}
+                                min={-100}
                                 max={100}
                                 label={__("Top Offset", "frontis-blocks")}
                                 rangeValue={sliderArrowPositionTopOffset}
@@ -1939,7 +1939,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 resetFallbackValue={"0"}
                             />
                             <FB_Range
-                                min={0}
+                                min={-100}
                                 max={100}
                                 label={__("Left Offset", "frontis-blocks")}
                                 rangeValue={sliderArrowPositionLeftOffset}
@@ -1956,7 +1956,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     {sliderArrowPosition === 'top-center' && (
                         <>
                             <FB_Range
-                                min={0}
+                                min={-100}
                                 max={100}
                                 label={__("Top Offset", "frontis-blocks")}
                                 rangeValue={sliderArrowPositionTopOffset}
@@ -1969,7 +1969,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 resetFallbackValue={"0"}
                             />
                             <FB_Range
-                                min={0}
+                                min={-100}
                                 max={100}
                                 label={__("Left Offset", "frontis-blocks")}
                                 rangeValue={sliderArrowPositionLeftOffset}
@@ -1987,7 +1987,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     {sliderArrowPosition === 'top-right' && (
                         <>
                             <FB_Range
-                                min={0}
+                                min={-100}
                                 max={100}
                                 label={__("Top Offset", "frontis-blocks")}
                                 rangeValue={sliderArrowPositionTopOffset}
@@ -2000,7 +2000,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 resetFallbackValue={"0"}
                             />
                             <FB_Range
-                                min={0}
+                                min={-100}
                                 max={100}
                                 label={__("Right Offset", "frontis-blocks")}
                                 rangeValue={sliderArrowPositionRightOffset}
