@@ -109,11 +109,12 @@ const Edit = (props) => {
         ['frontis-blocks/slider-item'],
         ['frontis-blocks/slider-item'],
         ['frontis-blocks/slider-item'],
+        ['frontis-blocks/slider-item'],
     ], [slideItem, slideContent]);
 
     const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: `swiper-wrapper`,
+			className: `swiper-wrapper fb-swiper-wrapper`,
 			slot: 'container-start',
 		},
 		{
