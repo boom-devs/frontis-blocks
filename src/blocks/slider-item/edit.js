@@ -16,10 +16,14 @@ const Edit = (props) => {
 	} );
 
     const TEMPLATE = [
-		[
-			'frontis-blocks/testimonial',
-		],
-	];
+        [
+            'frontis-blocks/container',
+            {},
+            [
+                [ 'frontis-blocks/testimonial' ]
+            ]
+        ]
+    ];
 
     // Hide slider block.
 	const ALLOWED_BLOCKS = parentBlocks
@@ -47,7 +51,7 @@ const Edit = (props) => {
 
     return (
         <>
-            <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+            {/* <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} /> */}
             <div {...blockProps}>
                 <div {...innerBlocksProps} />
             </div>
