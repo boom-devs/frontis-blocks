@@ -2,7 +2,7 @@
 $primary-color: #3991FF;
 $primary-color-base: #399CFF;
 $primary-color-50: #EBF4FF;
-$primary-color-100: #DBEBFC;
+$primary-color-100: #D7E9FF;
 $primary-color-200: #B7D8F9;
 $primary-color-300: #93C4F5;
 $primary-color-400: #6FB1F2;
@@ -17,7 +17,7 @@ $background_color: #D7EBFF;
 // Neutral Color
 $white-color: #FFFFFF;
 $neutral-color: #6A758E;
-$neutral-color-50: #F8F8F8;
+$neutral-color-50: #F9F9F9;
 $neutral-color-100: #E1E3E8;
 $neutral-color-200: #C3C8D2;
 $neutral-color-300: #A6ACBB;
@@ -28,7 +28,7 @@ $neutral-color-700-global: #1e1e1e;
 $neutral-color-800: #2A2F39;
 $neutral-color-850: #20232B;
 $neutral-color-900: #15171C;
-$neutral-color-950: #050607;
+$neutral-color-950:  #0B0C0E;
 
 // Success Color
 $success-color: #4CAF50;
@@ -62,16 +62,16 @@ $dark-gray: #50575e;
 $text-muted: #6c6c6c;
 
 // Typography
-$base-font-size: 14px;
-$unit-font-size: 11px;
 $heading-font-family: "Onest", sans-serif;
 $heading-font-family-global: "Roboto", sans-serif;
 $body-font-family: "Manrope", sans-serif;
 
 
 // Font sizes
+$unit-font-size: 11px;
 $small-font-size: 12px;
 $medium-font-size: 13px;
+$base-font-size: 14px;
 $medium-font-size-global: 14px;
 $large-font-size: 16px;
 $x-large-font-size: 18px;
@@ -98,9 +98,11 @@ $font-weight-900: 900;
 $base-line-height: 1.5;
 $line-height-14: 14px;
 $body-line-height: 16px;
+$line-height-18: 18px;
 $heading-line-height: 20px;
 $line-height-22: 22px;
 $line-height-26: 26px;
+$line-height-32: 32px;
 // Spacing
 $spacing-unit: 8px;
 $gutter: $spacing-unit * 3;

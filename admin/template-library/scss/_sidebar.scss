@@ -12,6 +12,7 @@
         .fb-template-category-wrapper {
             display: flex;
             align-items: center;
+            gap: 8px;
             justify-content: space-between;
             padding: 0 16px 32px 16px;
 
@@ -23,6 +24,7 @@
                     line-height: 28px;
                     color: $neutral-color-950;
                     margin: 0;
+                    
                 }
             }
 

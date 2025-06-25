@@ -3,7 +3,6 @@
  */
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
-import data from './data.json';
 
 const TemplateLogo = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="102" height="40" viewBox="0 0 102 40" fill="none">
@@ -35,7 +34,6 @@ const TemplateLibraryIcon = () => (
 );
 
 const TemplateHeader = ({ activeTab, setActiveTab, data }) => {
-  // Extract tabs from the schema
   const schema = data.$schema;
   const tabs = Object.keys(schema).map((key) => ({
     id: key,
@@ -43,12 +41,9 @@ const TemplateHeader = ({ activeTab, setActiveTab, data }) => {
     icon: key === 'template-library' ? <TemplateLibraryIcon /> : null,
   }));
 
-  // State for active tab
-
   return (
     <div className="fb-template-library-store-header">
       <div className="fb-template-library-store-header-container">
-        {/* Logo Section */}
         <div className="fb-template-library-logo">
           <TemplateLogo />
         </div>

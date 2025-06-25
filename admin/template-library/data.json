@@ -11,44 +11,44 @@
                         {
                             "id": "pattern1",
                             "title": "Illustrate AI Landing Page for Gutenberg",
-                            "image": "http://localhost/boomdevs-new/wp-content/uploads/2025/06/demo-1.png",
+                            "image": "https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png",
                             "content": "Pattern 1 content here"
                         },
                         {
                             "id": "pattern2",
                             "title": "Illustrate AI Landing Page for Gutenberg",
-                            "image": "http://localhost/boomdevs-new/wp-content/uploads/2025/06/pro-1.png",
+                            "image": "https://frontiswp.com/wp-content/uploads/2025/04/pro-1.png",
                             "content": "Pattern 2 content here"
                         },
                         {
                             "id": "pattern3",
                             "title": "Illustrate AI Landing Page for Gutenberg",
-                            "image": "http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-2.png",
+                            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-1.png",
                             "content": "Pattern 3 content here"
                         },
                         {
                             "id": "pattern4",
                             "title": "Illustrate AI Landing Page for Gutenberg",
-                            "image": "http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-3.png",
+                            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-2.png",
                             "content": "Pattern 4 content here"
                         },
                         {
                             "id": "pattern5",
                             "title": "Illustrate AI Landing Page for Gutenberg",
-                            "image": "http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-4.png",
+                            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-3.png",
                             "content": "Pattern 5 content here"
                         },
                         {
                             "id": "pattern6",
                             "title": "Illustrate AI Landing Page for Gutenberg",
-                            "image": "http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-5.png",
+                            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-4.png",
                             "content": "Pattern 6 content here"
                         },
                         
                         {
                             "id": "pattern15",
                             "title": "Illustrate AI Landing Page for Gutenberg",
-                            "image": "http://localhost/boomdevs-new/wp-content/uploads/2025/06/free-6.png",
+                            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-5.png",
                             "content": "Pattern 15 content here"
                         }
                     ]
@@ -109,19 +109,19 @@
                         {
                             "id": "page1",
                             "title": "Page 1",
-                            "image": "Page.jpg",
+                            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-5.png",
                             "content": "Page 1 content here"
                         },
                         {
                             "id": "page2",
                             "title": "Page 2",
-                            "image": "Page.jpg",
+                            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-6.png",
                             "content": "Page 2 content here"
                         },
                         {
                             "id": "page3",
                             "title": "Pattern 3",
-                            "image": "Page.jpg",
+                            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-4.png",
                             "content": "Page 3 content here"
                         }
                     ]
@@ -175,19 +175,19 @@
                         {
                             "id": "item1",
                             "title": "Item 1",
-                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg",
+                            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-6.png",
                             "content": "Site 1 content here"
                         },
                         {
                             "id": "item2",
                             "title": "Item 2",
-                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp",
+                            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-1.png",
                             "content": "Site 2 content here"
                         },
                         {
                             "id": "item3",
                             "title": "Item 3",
-                            "image": "http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp",
+                            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-3.png",
                             "content": "Site 3 content here"
                         }
                     ]
