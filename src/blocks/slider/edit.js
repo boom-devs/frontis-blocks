@@ -11,6 +11,7 @@ import { withSelect, withDispatch, useDispatch, useSelect } from '@wordpress/dat
 import { createBlock } from '@wordpress/blocks';
 import { useState, useMemo, useEffect, useRef } from "@wordpress/element";
 import { compose, createHigherOrderComponent } from '@wordpress/compose';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useDeviceType } from "@Config/displayType";
@@ -71,6 +72,10 @@ const Edit = (props) => {
         carouselEffect,
         carouselPerColumn,
         carouselPerColumnGap,
+
+        sliderArrowsIconSwitcher,
+        sliderArrowsIconLeft,
+        sliderArrowsIconRight,
 
         sliderGlobalWraperClass,
 
@@ -358,6 +363,19 @@ const Edit = (props) => {
 		}
 	}, [ displayArrows, displayDots, paginationType ] );
 
+
+    /* Custom Icon */
+    useEffect(() => {
+        if (swiperInstance && displayArrows && sliderArrowsIconSwitcher) {
+            swiperInstance.params.navigation.prevEl = sliderNavPrevRef.current;
+            swiperInstance.params.navigation.nextEl = sliderNavNextRef.current;
+    
+            swiperInstance.navigation.destroy();
+            swiperInstance.navigation.init();
+            swiperInstance.navigation.update();
+        }
+    }, [swiperInstance, sliderArrowsIconSwitcher, displayArrows, sliderArrowsIconLeft, sliderArrowsIconRight]);
+
     useEffect( () => {
 		if ( swiperInstance && swiperInstance.slides ) {
 			const slidesCount = swiperInstance.slides.length;
@@ -467,12 +485,23 @@ const Edit = (props) => {
                     <div {...innerBlocksProps} />
                 </Swiper>
                 { displayDots && <div className="swiper-pagination" ref={ sliderPaginationRef }></div> }
-                { displayArrows && (
+                
+                { displayArrows && !sliderArrowsIconSwitcher && (
                     <>
-                        <div className="swiper-button-prev" ref={ sliderNavPrevRef }></div>
-                        <div className="swiper-button-next" ref={ sliderNavNextRef }></div>
+                        <div className="fb-slider-default-icon-wrapper">
+                            <div className="swiper-button-prev" ref={ sliderNavPrevRef }></div>
+                            <div className="swiper-button-next" ref={ sliderNavNextRef }></div>
+                        </div>
                     </>
                 ) }
+
+                {sliderArrowsIconSwitcher && (
+                    <div className="fb-slider-custom-icon-wrapper">
+                        <div className="swiper-button-prev" ref={ sliderNavPrevRef }>{renderSVG(sliderArrowsIconLeft)}</div>
+                        <div className="swiper-button-next" ref={ sliderNavNextRef }>{renderSVG(sliderArrowsIconRight)}</div>
+                    </div>
+                )}
+
             </div>
         </>
     );

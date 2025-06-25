@@ -145,6 +145,19 @@ const attributes = {
         },
     },
 
+	sliderArrowsIconSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+	sliderArrowsIconLeft: {
+		type: 'string',
+		default: 'arrow-left',
+	},
+	sliderArrowsIconRight: {
+		type: 'string',
+		default: 'arrow-right',
+	},
+
 	/** Start Arrows Style */
 	sliderArrowsSize: {
 		type: 'object',

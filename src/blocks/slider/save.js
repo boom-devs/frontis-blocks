@@ -1,4 +1,5 @@
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 import classnames from 'classnames';
 
@@ -28,6 +29,10 @@ export default function save( props ) {
         carouselEffect,
         carouselPerColumn,
         carouselPerColumnGap,
+
+		sliderArrowsIconSwitcher,
+		sliderArrowsIconLeft,
+		sliderArrowsIconRight,
 		
 
 		sliderDesktopSwitcher,
@@ -119,12 +124,21 @@ export default function save( props ) {
 			</div>
 			{ displayDots && <div className="swiper-pagination"></div> }
 
-			{ displayArrows && (
+			{ displayArrows && !sliderArrowsIconSwitcher && (
 				<>
-					<div className="swiper-button-prev"></div>
-					<div className="swiper-button-next"></div>
+					<div className="fb-slider-default-icon-wrapper">
+						<div className="swiper-button-prev"></div>
+						<div className="swiper-button-next"></div>
+					</div>
 				</>
 			) }
+
+			{sliderArrowsIconSwitcher && (
+				<div className="fb-slider-custom-icon-wrapper">
+					<div className="swiper-button-prev">{renderSVG(sliderArrowsIconLeft)}</div>
+					<div className="swiper-button-next">{renderSVG(sliderArrowsIconRight)}</div>
+				</div>
+			)}
 		</div>
 	);
 	

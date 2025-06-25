@@ -2,6 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 import { useEffect, useMemo } from '@wordpress/element';
 import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseControl, ButtonGroup, Button } from '@wordpress/components';
+import FBIconPicker from "../../components/icon-picker";
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_NormalActiveSwitcherControl from '@Components/switcher-normal-active-control';
 import FB_ColorControl from '@Components/color-control';
@@ -57,6 +58,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         carouselPerColumnGapUnits,
         
         /** Slider Arrows Style */
+        sliderArrowsIconSwitcher,
+        sliderArrowsIconLeft,
+        sliderArrowsIconRight,
+        
         sliderArrowsSize,
         sliderArrowsSizeUnits,
         sliderArrowsColorSwitcher,
@@ -271,6 +276,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			});
 		}
 	}, [clientId]);
+
+    const sliderArrowsIconLeftHandler = (IconName) => {
+		setAttributes({sliderArrowsIconLeft: IconName})
+
+	}
+    const sliderArrowsIconRightHandler = (IconName) => {
+		setAttributes({sliderArrowsIconRight: IconName})
+
+	}
 
     /** Start Arrows border */
     const handleArrowsBorderUnitChange = ( event, position ) => {
@@ -1117,6 +1131,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             align-items: center;
             ${sliderHeight.Desktop ? `min-height: ${sliderHeight.Desktop}${sliderHeightUnits.Desktop};` : ''}
         }
+
+        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev:after,
+        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next:after {
+            display: none !important;
+        }
         .${blockId} .swiper-button-prev,
         .${blockId} .swiper-button-next {
             ${sliderArrowsBorder ? `border: ${sliderArrowsBorder};` : ''}
@@ -1137,6 +1156,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderArrowsColorHover ? `color: ${sliderArrowsColorHover};` : ''}
             ${sliderArrowsBorderHoverColor ? `border-color: ${sliderArrowsBorderHoverColor};` : ''}
             ${sliderArrowsBoxShadowHoverCssValue ? `box-shadow: ${sliderArrowsBoxShadowHoverCssValue};` : ''}
+        }
+
+        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev svg,
+        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next svg {
+            ${sliderArrowsColor ? `fill: ${sliderArrowsColor};` : ''}
+            ${sliderArrowsSize.Desktop ? `width: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
+            ${sliderArrowsSize.Desktop ? `height: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
+        }
+        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev:hover svg,
+        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next:hover svg {
+            ${sliderArrowsColorHover ? `fill: ${sliderArrowsColorHover};` : ''}
         }
 
         .${blockId} .swiper-button-prev:after,
@@ -1234,6 +1264,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderArrowsPosition.Tablet ? `top: ${sliderArrowsPosition.Tablet}${sliderArrowsPositionUnits.Tablet};` : ''}
             }
 
+            .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev svg,
+            .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next svg {
+                ${sliderArrowsSize.Tablet ? `width: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
+                ${sliderArrowsSize.Tablet ? `height: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
+            }
             .${blockId} .swiper-button-prev:after,
             .${blockId} .swiper-button-next:after {
                 ${sliderArrowsSize.Tablet ? `font-size: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
@@ -1298,6 +1333,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderArrowsWidth.Mobile ? `width: ${sliderArrowsWidth.Mobile}${sliderArrowsWidthUnits.Mobile};` : ''}
                 ${sliderArrowsHeight.Mobile ? `height: ${sliderArrowsHeight.Mobile}${sliderArrowsHeightUnits.Mobile};` : ''}
                 ${sliderArrowsPosition.Mobile ? `top: ${sliderArrowsPosition.Mobile}${sliderArrowsPositionUnits.Mobile};` : ''}
+            }
+
+            .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev svg,
+            .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next svg {
+                ${sliderArrowsSize.Mobile ? `width: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
+                ${sliderArrowsSize.Mobile ? `height: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
             }
 
             .${blockId} .swiper-button-prev:after,
@@ -1593,6 +1634,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         <>
 
             <PanelBody title={__("Basic Settings", "frontis-blocks")} initialOpen={true}>
+
+                <ToggleControl
+                    label={ __( 'Show Navigation', 'frontis-blocks' ) }
+                    checked={ displayArrows }
+                    onChange={(value) => setAttributes({ displayArrows: value })}
+                />
+                <ToggleControl
+                    label={ __( 'Show Pagination', 'frontis-blocks' ) }
+                    checked={ displayDots }
+                    onChange={(value) => setAttributes({ displayDots: value })}
+                />
                 <FB_Range
                     min={100}
                     max={1000}
@@ -1745,23 +1797,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             </PanelBody>
 
             <PanelBody title={__("Navigation & Pagination", "frontis-blocks")} initialOpen={false}>
-                <ToggleControl
-                    label={ __( 'Navigation', 'frontis-blocks' ) }
-                    checked={ displayArrows }
-                    onChange={(value) => setAttributes({ displayArrows: value })}
-                />
-                <ToggleControl
-                    label={ __( 'Pagination', 'frontis-blocks' ) }
-                    checked={ displayDots }
-                    onChange={(value) => setAttributes({ displayDots: value })}
-                />
                 {displayDots && (
-                    <SelectControl
-                        label={__('Pagination Type', 'frontis-blocks')}
-                        value={paginationType}
-                        options={PAGINATION_TYPE}
-                        onChange={(value) => setAttributes({ paginationType: value })}
-                    />
+
+                    <>
+                        <ToggleControl
+                            label={ __( 'Custom Icon', 'frontis-blocks' ) }
+                            checked={ sliderArrowsIconSwitcher }
+                            onChange={(value) => setAttributes({ sliderArrowsIconSwitcher: value })}
+                        />
+
+                        {sliderArrowsIconSwitcher && (
+                            <>
+                                <BaseControl
+                                    label={__("Left Icon", "frontis-blocks")}
+                                    className="fb-setting-switcher-panel-wrapper"
+                                >
+                                    <FBIconPicker value={sliderArrowsIconLeft} setIconHandler={sliderArrowsIconLeftHandler} />
+                                </BaseControl>
+
+                                <BaseControl
+                                    label={__("Right Icon", "frontis-blocks")}
+                                    className="fb-setting-switcher-panel-wrapper"
+                                >
+                                    <FBIconPicker value={sliderArrowsIconRight} setIconHandler={sliderArrowsIconRightHandler} />
+                                </BaseControl>
+                            </>
+                        )}
+                        
+                        <SelectControl
+                            label={__('Pagination Type', 'frontis-blocks')}
+                            value={paginationType}
+                            options={PAGINATION_TYPE}
+                            onChange={(value) => setAttributes({ paginationType: value })}
+                        />
+                    </>
                 )}
             </PanelBody>
         </>
