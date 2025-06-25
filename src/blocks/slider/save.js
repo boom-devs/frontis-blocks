@@ -30,6 +30,9 @@ export default function save( props ) {
         carouselPerColumn,
         carouselPerColumnGap,
 
+		sliderArrowPositionType,
+		sliderArrowPosition,
+
 		sliderArrowsIconSwitcher,
 		sliderArrowsIconLeft,
 		sliderArrowsIconRight,
@@ -113,7 +116,7 @@ export default function save( props ) {
 	return (
 		<div
 			key={ blockId }
-			className={ classnames( blockProps.className, `${ blockId }`, 'fb-slider-container', sliderGlobalWraperClass, `${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}` ) }
+			className={ classnames( blockProps.className, `${ blockId }`, 'fb-slider-container', sliderArrowPositionType, sliderArrowPosition, sliderGlobalWraperClass, `${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}` ) }
 			data-block-id={ blockId }
 			data-swiper-settings={ swiperSettings }
 		>
@@ -121,24 +124,40 @@ export default function save( props ) {
 				<div className="swiper-wrapper fb-swiper-wrapper">
 					<InnerBlocks.Content />
 				</div>
+				{ displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (
+					<>
+						<div className={`fb-slider-default-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+							<div className="swiper-button-prev"></div>
+							<div className="swiper-button-next"></div>
+						</div>
+					</>
+				) }
+
+				{sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (
+					<div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+						<div className="swiper-button-prev">{renderSVG(sliderArrowsIconLeft)}</div>
+						<div className="swiper-button-next">{renderSVG(sliderArrowsIconRight)}</div>
+					</div>
+				)}
 			</div>
 			{ displayDots && <div className="swiper-pagination"></div> }
 
-			{ displayArrows && !sliderArrowsIconSwitcher && (
+			{ displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (
 				<>
-					<div className="fb-slider-default-icon-wrapper">
+					<div className={`fb-slider-default-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
 						<div className="swiper-button-prev"></div>
 						<div className="swiper-button-next"></div>
 					</div>
 				</>
 			) }
 
-			{sliderArrowsIconSwitcher && (
-				<div className="fb-slider-custom-icon-wrapper">
+			{sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (
+				<div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
 					<div className="swiper-button-prev">{renderSVG(sliderArrowsIconLeft)}</div>
 					<div className="swiper-button-next">{renderSVG(sliderArrowsIconRight)}</div>
 				</div>
 			)}
+
 		</div>
 	);
 	
