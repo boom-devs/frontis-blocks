@@ -73,6 +73,9 @@ const Edit = (props) => {
         carouselPerColumn,
         carouselPerColumnGap,
 
+        sliderArrowPositionType,
+        sliderArrowPosition,
+
         sliderArrowsIconSwitcher,
         sliderArrowsIconLeft,
         sliderArrowsIconRight,
@@ -95,10 +98,13 @@ const Edit = (props) => {
     const [swiperInstance, setSwiperInstance] = useState(null);
 	const { selectBlock } = useDispatch( blockEditorStore );
 
+	// A key to force re-mounting of <Swiper> when critical settings change
+	const [swiperKey, setSwiperKey] = useState(0);
+
     const hasChildrenClass = hasChildren ? 'fb-slider-has-children' : '';
 	const listViewClass = isListViewOpen ? 'fb-list-view-enabled' : '';
 	const blockProps = useBlockProps( {
-		className: `${ blockId } ${ hasChildrenClass } ${ listViewClass } fb-slider-container fb-slider-editor-wrap fb-editor-preview-mode-${ deviceType.toLowerCase() } ${sliderGlobalWraperClass} ${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}`,
+		className: `${ blockId } ${ hasChildrenClass } ${ listViewClass } fb-slider-container fb-slider-editor-wrap ${sliderArrowPositionType} ${sliderArrowPosition}  fb-editor-preview-mode-${ deviceType.toLowerCase() } ${sliderGlobalWraperClass} ${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}`,
 	} );
 
     const { isListViewOpen, hasChildren } = useSelect( ( select ) => {
@@ -129,6 +135,37 @@ const Edit = (props) => {
 			orientation: 'horizontal',
 		}
 	);
+
+    /* Dynamic Swiper Key */
+    useEffect(() => {
+        setSwiperKey(prevKey => prevKey + 1);
+    }, [
+        sliderType,
+        carouselEffect,
+        slideEffect,
+        carouselPerColumn?.Desktop,
+        carouselPerColumn?.Tablet,
+        carouselPerColumn?.Mobile,
+        carouselPerColumnGap?.Desktop,
+        carouselPerColumnGap?.Tablet,
+        carouselPerColumnGap?.Mobile,
+        transitionSpeed,
+        loop,
+        autoplay,
+        autoplaySpeed,
+        stopOnLastSlide,
+        reverseDirection,
+        allowTouchMove,
+        enableMouseWheel,
+        paginationType,
+        displayDots,
+        displayArrows,
+        sliderArrowsIconSwitcher,
+        sliderArrowPositionType,
+        sliderArrowPosition,
+        sliderArrowsIconLeft,
+        sliderArrowsIconRight,
+    ]);
 
     const setSwiperNavigationPagination = (swiperInst) => {
         if (swiperInst?.params?.navigation) {
@@ -240,6 +277,8 @@ const Edit = (props) => {
         sliderType,
         carouselPerColumn,
         carouselPerColumnGap,
+        sliderArrowPositionType,
+        sliderArrowPosition,
     ]);
 
     // Add useEffect to update Swiper when settings change
@@ -366,15 +405,33 @@ const Edit = (props) => {
 
     /* Custom Icon */
     useEffect(() => {
-        if (swiperInstance && displayArrows && sliderArrowsIconSwitcher) {
-            swiperInstance.params.navigation.prevEl = sliderNavPrevRef.current;
-            swiperInstance.params.navigation.nextEl = sliderNavNextRef.current;
+        if (!swiperInstance || !displayArrows) return;
     
-            swiperInstance.navigation.destroy();
-            swiperInstance.navigation.init();
-            swiperInstance.navigation.update();
+        const prevEl = sliderNavPrevRef.current;
+        const nextEl = sliderNavNextRef.current;
+    
+        if (prevEl && nextEl && swiperInstance.navigation) {
+            swiperInstance.params.navigation.prevEl = prevEl;
+            swiperInstance.params.navigation.nextEl = nextEl;
+    
+            setTimeout(() => {
+                // Check again in case swiperInstance.navigation was reloaded in the meantime
+                if (swiperInstance.navigation) {
+                    swiperInstance.navigation.destroy();
+                    swiperInstance.navigation.init();
+                    swiperInstance.navigation.update();
+                }
+            }, 100);
         }
-    }, [swiperInstance, sliderArrowsIconSwitcher, displayArrows, sliderArrowsIconLeft, sliderArrowsIconRight]);
+    }, [
+        swiperInstance,
+        displayArrows,
+        sliderArrowsIconSwitcher,
+        sliderArrowPositionType,
+        sliderArrowPosition,
+        sliderArrowsIconLeft,
+        sliderArrowsIconRight,
+    ]);
 
     useEffect( () => {
 		if ( swiperInstance && swiperInstance.slides ) {
@@ -431,6 +488,7 @@ const Edit = (props) => {
 
             <div {...blockProps}>
                 <Swiper
+                    key={swiperKey}
                     ref={swiperRef}
                     {...settings}
                     modules={[
@@ -483,20 +541,37 @@ const Edit = (props) => {
                     }}
                 >
                     <div {...innerBlocksProps} />
+
+                    { displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (
+                        <>
+                            <div className={`fb-slider-default-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+                                <div className="swiper-button-prev" ref={ sliderNavPrevRef }></div>
+                                <div className="swiper-button-next" ref={ sliderNavNextRef }></div>
+                            </div>
+                        </>
+                    ) }
+
+                    {sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (
+                        <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+                            <div className="swiper-button-prev" ref={ sliderNavPrevRef }>{renderSVG(sliderArrowsIconLeft)}</div>
+                            <div className="swiper-button-next" ref={ sliderNavNextRef }>{renderSVG(sliderArrowsIconRight)}</div>
+                        </div>
+                    )}
                 </Swiper>
+                
                 { displayDots && <div className="swiper-pagination" ref={ sliderPaginationRef }></div> }
                 
-                { displayArrows && !sliderArrowsIconSwitcher && (
+                { displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (
                     <>
-                        <div className="fb-slider-default-icon-wrapper">
+                        <div className={`fb-slider-default-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
                             <div className="swiper-button-prev" ref={ sliderNavPrevRef }></div>
                             <div className="swiper-button-next" ref={ sliderNavNextRef }></div>
                         </div>
                     </>
                 ) }
 
-                {sliderArrowsIconSwitcher && (
-                    <div className="fb-slider-custom-icon-wrapper">
+                {sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (
+                    <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
                         <div className="swiper-button-prev" ref={ sliderNavPrevRef }>{renderSVG(sliderArrowsIconLeft)}</div>
                         <div className="swiper-button-next" ref={ sliderNavNextRef }>{renderSVG(sliderArrowsIconRight)}</div>
                     </div>
