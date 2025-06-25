@@ -214,6 +214,115 @@ const attributes = {
 			Mobile: 'row',
 		}
 	},
+	containerLayout: {
+		type: 'string',
+		default: 'flex',
+	},
+
+	containerChildrenWidth: {
+		type: 'string',
+		default: 'full',
+	},
+
+	containerEqualHeight: {
+		type: 'boolean',
+		default: false,
+	},
+
+	containerHtmlTag: {
+		type: 'string',
+		default: 'div',
+	},
+
+	containerColumnsItemList: {
+		type: 'object',
+		default: {
+			Desktop: [
+				{
+					id: 'column-1',
+					title: 'Column 1',
+					type: 'auto',
+					width: '1',
+					widthUnits: 'fr',
+					min: '10',
+					minUnits: 'px',
+					max: '1',
+					maxUnits: 'fr',
+				}
+			],
+			Tablet: [
+				{
+					id: 'column-1',
+					title: 'Column 1',
+					type: 'auto',	
+					width: '1',
+					widthUnits: 'fr',
+					min: '10',
+					minUnits: 'px',
+					max: '1',
+					maxUnits: 'fr',
+				}
+			],
+			Mobile: [
+				{
+					id: 'column-1',
+					title: 'Column 1',
+					type: 'auto',
+					width: '1',
+					widthUnits: 'fr',
+					min: '10',
+					minUnits: 'px',
+					max: '1',
+					maxUnits: 'fr',
+				}
+			],
+		},
+	},
+	
+	containerRowsItemList: {
+		type: 'object',
+		default: {
+			Desktop: [
+				{
+					id: 'column-1',
+					title: 'Column 1',
+					type: 'auto',
+					width: '1',
+					widthUnits: 'fr',
+					min: '10',
+					minUnits: 'px',
+					max: '1',
+					maxUnits: 'fr',
+				}
+			],
+			Tablet: [
+				{
+					id: 'column-1',
+					title: 'Column 1',
+					type: 'auto',
+					width: '1',
+					widthUnits: 'fr',
+					min: '10',
+					minUnits: 'px',
+					max: '1',
+					maxUnits: 'fr',
+				}
+			],
+			Mobile: [
+				{
+					id: 'column-1',
+					title: 'Column 1',
+					type: 'auto',
+					width: '1',
+					widthUnits: 'fr',
+					min: '10',
+					minUnits: 'px',
+					max: '1',
+					maxUnits: 'fr',
+				}
+			],
+		},
+	},
 
 	containerJustify: {
 		type: 'object',
@@ -717,19 +826,19 @@ const attributes = {
 	containerTabletPadding: {
 		type: "object", 
 		default: {
-			top: "10",
-			bottom: "10",
-			left: "10",	
-			right: "10",
+			top: "",
+			bottom: "",
+			left: "",	
+			right: "",
 		}
 	},
 	containerMobilePadding: {	
 		type: "object", 
 		default: {
-			top: "10",
-			bottom: "10",
-			left: "10",	
-			right: "10",
+			top: "",
+			bottom: "",
+			left: "",	
+			right: "",
 		}
 	},
 	containerPaddingLink : {
