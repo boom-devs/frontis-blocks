@@ -944,17 +944,28 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
     function handleClickOutside(event) {
       var _gradientPopoverAncho;
       var clickedInsidePopup = (_gradientPopoverAncho = gradientPopoverAnchor.current) === null || _gradientPopoverAncho === void 0 ? void 0 : _gradientPopoverAncho.contains(event.target);
-      var clickedTrigger = event.target.closest('.fb-custom-color-item');
-
-      // Don't close if clicked inside the WP popover
+      var clickedTrigger = event.target.closest('.fb-custom-gradient-list .fb-custom-color-item');
       var isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
       if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
         setClickedGradient('');
       }
     }
+
+    // Add listener to main document
     document.addEventListener('mousedown', handleClickOutside);
+
+    // Also try to add listener to iframe document
+    var iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
+    if (iframe && iframe.contentDocument) {
+      iframe.contentDocument.addEventListener('mousedown', handleClickOutside);
+    }
+
+    // Cleanup
     return function () {
       document.removeEventListener('mousedown', handleClickOutside);
+      if (iframe && iframe.contentDocument) {
+        iframe.contentDocument.removeEventListener('mousedown', handleClickOutside);
+      }
     };
   }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, colors && colors.length > 0 && /*#__PURE__*/React.createElement("div", {
@@ -962,7 +973,7 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
     className: "fb-gradient-color-label"
   }, title), /*#__PURE__*/React.createElement("div", {
-    className: "fb-custom-panel fb-gradient-color-list"
+    className: "fb-custom-panel fb-gradient-color-list fb-custom-gradient-list"
   }, colors.map(function (color, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: index,
@@ -1533,17 +1544,28 @@ var GradientColorPallet = function GradientColorPallet(props) {
     function handleClickOutside(event) {
       var _gradientPopoverAncho;
       var clickedInsidePopup = (_gradientPopoverAncho = gradientPopoverAnchor.current) === null || _gradientPopoverAncho === void 0 ? void 0 : _gradientPopoverAncho.contains(event.target);
-      var clickedTrigger = event.target.closest('.fb-custom-color-item');
-
-      // Don't close if clicked inside the WP popover
+      var clickedTrigger = event.target.closest('.fb-gradient-list .fb-custom-color-item');
       var isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
       if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
         setClickedGradient('');
       }
     }
+
+    // Add listener to main document
     document.addEventListener('mousedown', handleClickOutside);
+
+    // Also try to add listener to iframe document
+    var iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
+    if (iframe && iframe.contentDocument) {
+      iframe.contentDocument.addEventListener('mousedown', handleClickOutside);
+    }
+
+    // Cleanup
     return function () {
       document.removeEventListener('mousedown', handleClickOutside);
+      if (iframe && iframe.contentDocument) {
+        iframe.contentDocument.removeEventListener('mousedown', handleClickOutside);
+      }
     };
   }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, colors && colors.length > 0 && /*#__PURE__*/React.createElement("div", {
@@ -1551,7 +1573,7 @@ var GradientColorPallet = function GradientColorPallet(props) {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
     className: "fb-gradient-color-label"
   }, title), /*#__PURE__*/React.createElement("div", {
-    className: "fb-custom-panel fb-gradient-color-list"
+    className: "fb-custom-panel fb-gradient-color-list fb-gradient-list"
   }, colors.map(function (color, index) {
     return /*#__PURE__*/React.createElement("div", {
       key: index,
@@ -1968,6 +1990,10 @@ var TypographySettings = function TypographySettings(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     globalTypography = _useState14[0],
     setGlobalTypography = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    selectCustomTypo = _useState16[0],
+    setSelectCustomTypo = _useState16[1];
   var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_4__.useDeviceType)();
   var isFSE = ((_wp$data$select$getCu = wp.data.select('core').getCurrentTheme()) === null || _wp$data$select$getCu === void 0 ? void 0 : _wp$data$select$getCu.is_block_theme) || false;
 
@@ -2836,7 +2862,7 @@ var TypographySettings = function TypographySettings(props) {
     className: "fb-panel-heading-wrapper"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "fb-panel-heading"
-  }, "Custom"), /*#__PURE__*/React.createElement("div", {
+  }, "Custom"), !selectCustomTypo && /*#__PURE__*/React.createElement("div", {
     className: "add-custom-color"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
     className: "add-custom-color-btn",
@@ -2845,9 +2871,9 @@ var TypographySettings = function TypographySettings(props) {
         name: "Custom Typography",
         fontFamily: "default",
         lineHeight: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         lineHeightUnits: {
           Desktop: 'px',
@@ -2855,23 +2881,23 @@ var TypographySettings = function TypographySettings(props) {
           Mobile: 'px'
         },
         fontSize: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         fontSizeUnit: {
           Desktop: 'px',
           Tablet: 'px',
           Mobile: 'px'
         },
-        fontWeight: 0,
-        fontStyle: 0,
-        textTransform: 0,
-        textDecoration: 0,
+        fontWeight: '',
+        fontStyle: '',
+        textTransform: '',
+        textDecoration: '',
         letterSpacing: {
-          Desktop: 0,
-          Tablet: 0,
-          Mobile: 0
+          Desktop: '',
+          Tablet: '',
+          Mobile: ''
         },
         letterSpacingUnit: {
           Desktop: 'px',
@@ -2908,7 +2934,10 @@ var TypographySettings = function TypographySettings(props) {
       key: index,
       className: "fb-custom-element fb-global-typography-element"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorButton, {
-      path: "/".concat(item)
+      path: "/".concat(item),
+      onClick: function onClick() {
+        return setSelectCustomTypo(true);
+      }
     }, (_customTypography$ite7 = customTypography[item]) === null || _customTypography$ite7 === void 0 ? void 0 : _customTypography$ite7.name), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
       className: "fb-delete-custom-typo"
     }, /*#__PURE__*/React.createElement("span", {
@@ -2947,9 +2976,23 @@ var TypographySettings = function TypographySettings(props) {
       className: "fb-global-typography-element-content"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
       path: "/".concat(item)
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorBackButton, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
-      icon: "arrow-left-alt2"
-    }), " ", (_customTypography$ite8 = customTypography[item]) === null || _customTypography$ite8 === void 0 ? void 0 : _customTypography$ite8.name), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorBackButton, {
+      onClick: function onClick() {
+        return setSelectCustomTypo(false);
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "16",
+      height: "17",
+      viewBox: "0 0 16 17",
+      fill: "none"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M10.5 13.5L5.5 8.5L10.5 3.5",
+      stroke: "currentcolor",
+      "stroke-width": "1.2",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    })), (_customTypography$ite8 = customTypography[item]) === null || _customTypography$ite8 === void 0 ? void 0 : _customTypography$ite8.name), /*#__PURE__*/React.createElement("div", {
       className: "fb-typography-settings"
     }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
       fontProps: customTypography[item],
@@ -2957,6 +3000,7 @@ var TypographySettings = function TypographySettings(props) {
       fontSize: true
     }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Typography Name', 'frontis-blocks'),
+      className: "fb-custom-typo-name",
       value: (_customTypography$ite9 = customTypography[item]) === null || _customTypography$ite9 === void 0 ? void 0 : _customTypography$ite9.name,
       onChange: function onChange(value) {
         return changeCustomTypoName(item, value);
@@ -7860,21 +7904,16 @@ const flip = function (options) {
         const nextIndex = (((_middlewareData$flip2 = middlewareData.flip) == null ? void 0 : _middlewareData$flip2.index) || 0) + 1;
         const nextPlacement = placements[nextIndex];
         if (nextPlacement) {
-          var _overflowsData$;
-          const ignoreCrossAxisOverflow = checkCrossAxis === 'alignment' ? initialSideAxis !== (0,_floating_ui_utils__WEBPACK_IMPORTED_MODULE_0__.getSideAxis)(nextPlacement) : false;
-          const hasInitialMainAxisOverflow = ((_overflowsData$ = overflowsData[0]) == null ? void 0 : _overflowsData$.overflows[0]) > 0;
-          if (!ignoreCrossAxisOverflow || hasInitialMainAxisOverflow) {
-            // Try next placement and re-run the lifecycle.
-            return {
-              data: {
-                index: nextIndex,
-                overflows: overflowsData
-              },
-              reset: {
-                placement: nextPlacement
-              }
-            };
-          }
+          // Try next placement and re-run the lifecycle.
+          return {
+            data: {
+              index: nextIndex,
+              overflows: overflowsData
+            },
+            reset: {
+              placement: nextPlacement
+            }
+          };
         }
 
         // First, find the candidates that fit on the mainAxis side of overflow,
@@ -8839,12 +8878,6 @@ function getRectRelativeToOffsetParent(element, offsetParent, strategy) {
     scrollTop: 0
   };
   const offsets = (0,_floating_ui_utils__WEBPACK_IMPORTED_MODULE_1__.createCoords)(0);
-
-  // If the <body> scrollbar appears on the left (e.g. RTL systems). Use
-  // Firefox with layout.scrollbar.side = 3 in about:config to test this.
-  function setLeftRTLScrollbarOffset() {
-    offsets.x = getWindowScrollBarX(documentElement);
-  }
   if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
     if ((0,_floating_ui_utils_dom__WEBPACK_IMPORTED_MODULE_0__.getNodeName)(offsetParent) !== 'body' || (0,_floating_ui_utils_dom__WEBPACK_IMPORTED_MODULE_0__.isOverflowElement)(documentElement)) {
       scroll = (0,_floating_ui_utils_dom__WEBPACK_IMPORTED_MODULE_0__.getNodeScroll)(offsetParent);
@@ -8854,11 +8887,10 @@ function getRectRelativeToOffsetParent(element, offsetParent, strategy) {
       offsets.x = offsetRect.x + offsetParent.clientLeft;
       offsets.y = offsetRect.y + offsetParent.clientTop;
     } else if (documentElement) {
-      setLeftRTLScrollbarOffset();
+      // If the <body> scrollbar appears on the left (e.g. RTL systems). Use
+      // Firefox with layout.scrollbar.side = 3 in about:config to test this.
+      offsets.x = getWindowScrollBarX(documentElement);
     }
-  }
-  if (isFixed && !isOffsetParentAnElement && documentElement) {
-    setLeftRTLScrollbarOffset();
   }
   const htmlOffset = documentElement && !isOffsetParentAnElement && !isFixed ? getHTMLOffset(documentElement, scroll) : (0,_floating_ui_utils__WEBPACK_IMPORTED_MODULE_1__.createCoords)(0);
   const x = rect.left + scroll.scrollLeft - offsets.x - htmlOffset.x;
@@ -9036,7 +9068,7 @@ function observeMove(element, onMove) {
         // Handle <iframe>s
         root: root.ownerDocument
       });
-    } catch (_e) {
+    } catch (e) {
       io = new IntersectionObserver(handleObserve, options);
     }
     io.observe(element);
@@ -15597,7 +15629,7 @@ var FB_Range = function FB_Range(_ref) {
         xmlns: "http://www.w3.org/2000/svg"
       }, /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("path", {
         "class": "st0",
-        d: "M12.5,21.8c-4.5,0-8.3-3-9.4-7.3c0,0,0,0,0,0c-0.2-0.8-0.3-1.6-0.3-2.4c0-1.7,0.4-3.3,1.2-4.8c0,0,0,0,0,0 c1.7-3.1,5-5,8.5-5c3.5,0,6.8,1.9,8.5,5c0,0,0,0,0,0c0.8,1.4,1.2,3.1,1.2,4.8c0,0.8-0.1,1.6-0.3,2.4c0,0,0,0,0,0 C20.8,18.7,17,21.8,12.5,21.8z M9.6,17c0.7,2,1.9,3.2,2.9,3.2s2.2-1.2,2.9-3.2C13.5,17.3,11.5,17.3,9.6,17z M17.1,16.7 c-0.3,1.1-0.7,2.1-1.3,2.9c1.7-0.8,3.1-2.1,4-3.8C19,16.1,18.1,16.4,17.1,16.7z M5.1,15.8c0.9,1.7,2.3,3,4,3.8 c-0.5-0.8-0.9-1.8-1.3-2.9C6.9,16.4,6,16.1,5.1,15.8z M9.1,15.4c2.2,0.4,4.6,0.4,6.8,0c0.2-1,0.4-2.2,0.4-3.4c0-0.4,0-0.9,0-1.3 c-2.4,0.7-5,0.7-7.4,0c0,0.4,0,0.9,0,1.3C8.8,13.2,8.9,14.4,9.1,15.4z M17.7,10.2c0.1,0.6,0.1,1.2,0.1,1.8c0,1.1-0.1,2.1-0.2,3 c1.1-0.3,2.1-0.7,3.1-1.3c0.1-0.6,0.2-1.2,0.2-1.8c0-1.1-0.2-2.2-0.7-3.3C19.3,9.3,18.5,9.8,17.7,10.2z M4.4,13.8 c1,0.5,2,0.9,3.1,1.3c-0.2-0.9-0.2-2-0.2-3c0-0.6,0-1.2,0.1-1.8C6.5,9.8,5.7,9.3,4.9,8.8c-0.4,1-0.7,2.1-0.7,3.3 C4.2,12.6,4.3,13.2,4.4,13.8z M9,9.2c2.3,0.7,4.8,0.7,7,0c-0.6-3.3-2.1-5.4-3.5-5.4S9.6,5.9,9,9.2z M5.6,7.4 c0.6,0.5,1.2,0.9,1.9,1.2C7.9,7,8.4,5.6,9.1,4.5C7.7,5.1,6.5,6.1,5.6,7.4z M15.9,4.5c0.7,1.1,1.2,2.5,1.6,4.1 c0.7-0.3,1.3-0.7,1.9-1.2C18.5,6.1,17.3,5.1,15.9,4.5z"
+        d: "M12.5,21.8c-4.5,0-8.3-3-9.4-7.3c0,0,0,0,0,0c-0.2-0.8-0.3-1.6-0.3-2.4c0-1.7,0.4-3.3,1.2-4.8c0,0,0,0,0,0\r c1.7-3.1,5-5,8.5-5c3.5,0,6.8,1.9,8.5,5c0,0,0,0,0,0c0.8,1.4,1.2,3.1,1.2,4.8c0,0.8-0.1,1.6-0.3,2.4c0,0,0,0,0,0\r C20.8,18.7,17,21.8,12.5,21.8z M9.6,17c0.7,2,1.9,3.2,2.9,3.2s2.2-1.2,2.9-3.2C13.5,17.3,11.5,17.3,9.6,17z M17.1,16.7\r c-0.3,1.1-0.7,2.1-1.3,2.9c1.7-0.8,3.1-2.1,4-3.8C19,16.1,18.1,16.4,17.1,16.7z M5.1,15.8c0.9,1.7,2.3,3,4,3.8\r c-0.5-0.8-0.9-1.8-1.3-2.9C6.9,16.4,6,16.1,5.1,15.8z M9.1,15.4c2.2,0.4,4.6,0.4,6.8,0c0.2-1,0.4-2.2,0.4-3.4c0-0.4,0-0.9,0-1.3\r c-2.4,0.7-5,0.7-7.4,0c0,0.4,0,0.9,0,1.3C8.8,13.2,8.9,14.4,9.1,15.4z M17.7,10.2c0.1,0.6,0.1,1.2,0.1,1.8c0,1.1-0.1,2.1-0.2,3\r c1.1-0.3,2.1-0.7,3.1-1.3c0.1-0.6,0.2-1.2,0.2-1.8c0-1.1-0.2-2.2-0.7-3.3C19.3,9.3,18.5,9.8,17.7,10.2z M4.4,13.8\r c1,0.5,2,0.9,3.1,1.3c-0.2-0.9-0.2-2-0.2-3c0-0.6,0-1.2,0.1-1.8C6.5,9.8,5.7,9.3,4.9,8.8c-0.4,1-0.7,2.1-0.7,3.3\r C4.2,12.6,4.3,13.2,4.4,13.8z M9,9.2c2.3,0.7,4.8,0.7,7,0c-0.6-3.3-2.1-5.4-3.5-5.4S9.6,5.9,9,9.2z M5.6,7.4\r c0.6,0.5,1.2,0.9,1.9,1.2C7.9,7,8.4,5.6,9.1,4.5C7.7,5.1,6.5,6.1,5.6,7.4z M15.9,4.5c0.7,1.1,1.2,2.5,1.6,4.1\r c0.7-0.3,1.3-0.7,1.9-1.2C18.5,6.1,17.3,5.1,15.9,4.5z"
       }))));
     },
     renderContent: function renderContent() {
