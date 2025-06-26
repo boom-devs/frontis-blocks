@@ -39,12 +39,24 @@ export const SLIDER_ARROW_POSITION = [
 	{ label: __('Bottom Right', 'frontis-blocks'), value: 'bottom-right' },
 ];
 
+export const SLIDER_ARROW_DIRECTION = [
+	{ label: __('Row', 'frontis-blocks'), value: 'row' },
+	{ label: __('Column', 'frontis-blocks'), value: 'column' },
+	{ label: __('Row Reverse', 'frontis-blocks'), value: 'row-reverse' },
+	{ label: __('Column Reverse', 'frontis-blocks'), value: 'column-reverse' },
+];
+
 export const OVERFLOW_OP = [
     { label: __('Default', 'frontis-blocks'), value: 'default' },
     { label: __('Auto', 'frontis-blocks'), value: 'auto' },
     { label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
     { label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
     { label: __('Clip', 'frontis-blocks'), value: 'clip' },
+];
+
+export const ARROW_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"text"} />), value: "icon" },
+	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
 ];
 
 export const ICON_ALIGN = [

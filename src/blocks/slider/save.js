@@ -33,9 +33,17 @@ export default function save( props ) {
 		sliderArrowPositionType,
 		sliderArrowPosition,
 
-		sliderArrowsIconSwitcher,
-		sliderArrowsIconLeft,
-		sliderArrowsIconRight,
+        sliderArrowsIconSwitcher,
+
+        sliderArrowsIconLeftAlign,
+        sliderArrowsIconLeft,
+        sliderArrowsIconLeftImageUrl,
+        sliderArrowsIconLeftImageAlt,
+
+        sliderArrowsIconRightAlign,
+        sliderArrowsIconRight,
+        sliderArrowsIconRightImageUrl,
+        sliderArrowsIconRightImageAlt,
 		
 
 		sliderDesktopSwitcher,
@@ -111,8 +119,6 @@ export default function save( props ) {
 			
 		});
 
-
-
 	return (
 		<div
 			key={ blockId }
@@ -133,12 +139,23 @@ export default function save( props ) {
 					</>
 				) }
 
-				{sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (
+				{sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (sliderArrowsIconLeftAlign === 'icon' || sliderArrowsIconRightAlign === 'icon') && (
 					<div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
 						<div className="swiper-button-prev">{renderSVG(sliderArrowsIconLeft)}</div>
 						<div className="swiper-button-next">{renderSVG(sliderArrowsIconRight)}</div>
 					</div>
 				)}
+
+				{sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (sliderArrowsIconLeftAlign === 'image' || sliderArrowsIconRightAlign === 'image') && (sliderArrowsIconLeftImageUrl || sliderArrowsIconRightImageUrl) && (
+					<div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+						<div className="swiper-button-prev">
+                                <img src={sliderArrowsIconLeftImageUrl} alt={sliderArrowsIconLeftImageAlt} />
+                            </div>
+						<div className="swiper-button-next">
+							<img src={sliderArrowsIconRightImageUrl} alt={sliderArrowsIconRightImageAlt} />
+						</div>
+                    </div>
+                )}
 			</div>
 			{ displayDots && <div className="swiper-pagination"></div> }
 
@@ -151,10 +168,21 @@ export default function save( props ) {
 				</>
 			) }
 
-			{sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (
+			{sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (sliderArrowsIconLeftAlign === 'icon' || sliderArrowsIconRightAlign === 'icon') && (
 				<div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
 					<div className="swiper-button-prev">{renderSVG(sliderArrowsIconLeft)}</div>
 					<div className="swiper-button-next">{renderSVG(sliderArrowsIconRight)}</div>
+				</div>
+			)}
+
+			{sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (sliderArrowsIconLeftAlign === 'image' || sliderArrowsIconRightAlign === 'image') && (sliderArrowsIconLeftImageUrl || sliderArrowsIconRightImageUrl) && (
+				<div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+					<div className="swiper-button-prev">
+							<img src={sliderArrowsIconLeftImageUrl} alt={sliderArrowsIconLeftImageAlt} />
+						</div>
+					<div className="swiper-button-next">
+						<img src={sliderArrowsIconRightImageUrl} alt={sliderArrowsIconRightImageAlt} />
+					</div>
 				</div>
 			)}
 
