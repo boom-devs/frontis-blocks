@@ -49,7 +49,6 @@ const Edit = (props) => {
         insertBlock,
     } = props;
 
-
     const {
         blockId,
         slideContent,
@@ -93,7 +92,6 @@ const Edit = (props) => {
 		sliderTabletSwitcher,
 		sliderMobileSwitcher,
     } = attributes;
-
 
     const deviceType = useDeviceType();
 
@@ -152,32 +150,24 @@ const Edit = (props) => {
         } : false,
         speed: transitionSpeed,
         loop: loop,
-        
-
-        // Set effect based on sliderType
 		effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
-        // Responsive breakpoints for Desktop, Tablet, and Mobile
         ...(sliderType === 'carousel' && {
             breakpoints: {
-                // Mobile (e.g., screens < 768px)
                 0: {
                     slidesPerView: carouselPerColumn?.Mobile || 1,
                     spaceBetween: carouselPerColumnGap?.Mobile || 10,
                 },
-                // Tablet (e.g., screens >= 768px)
                 768: {
                     slidesPerView: carouselPerColumn?.Tablet || 2,
                     spaceBetween: carouselPerColumnGap?.Tablet || 15,
                 },
-                // Desktop (e.g., screens >= 1025px)
                 1025: {
                     slidesPerView: carouselPerColumn?.Desktop || 3,
                     spaceBetween: carouselPerColumnGap?.Desktop || 20,
                 },
             },
         }),
-
         pagination: displayDots
             ? {
                 type: paginationType,
@@ -185,7 +175,6 @@ const Edit = (props) => {
               }
             : false,
 
-        // Creative effect settings if needed
         ...(slideEffect === 'creative' && {
             creativeEffect: {
                 prev: { shadow: true, translate: [0, 0, -400] },
@@ -220,7 +209,6 @@ const Edit = (props) => {
         paginationType,
         displayDots,
     ]);
-
 
     /* Dynamic Swiper Key */
     useEffect(() => {
@@ -258,7 +246,6 @@ const Edit = (props) => {
         if (swiperInstance) {
 
             // Update carousel settings
-
             if (sliderType === 'carousel') {
                 swiperInstance.params.slidesPerView = deviceType === 'Desktop' ? carouselPerColumn.Desktop : deviceType === 'Tablet' ? carouselPerColumn.Tablet : carouselPerColumn.Mobile;
                 swiperInstance.params.spaceBetween = deviceType === 'Desktop' ? carouselPerColumnGap.Desktop : deviceType === 'Tablet' ? carouselPerColumnGap.Tablet : carouselPerColumnGap.Mobile;
@@ -353,7 +340,6 @@ const Edit = (props) => {
 		}
 	}, [ props ] );
 
-
     /* Custom Icon */
     useEffect(() => {
         if (!swiperInstance || !displayArrows) return;
@@ -434,7 +420,6 @@ const Edit = (props) => {
 			</BlockControls>
 		);
 	};
-
 
     return (
         <>
