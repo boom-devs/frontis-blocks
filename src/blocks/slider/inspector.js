@@ -18,6 +18,8 @@ import { useDeviceType } from '@Config/displayType';
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
+import FB_ImageControl from '@Components/image-control';
+
 
 import './editor.scss';
 
@@ -31,6 +33,8 @@ import {
     SLIDER_TYPE,
     SLIDER_ARROW_POSITION_TYPE,
     SLIDER_ARROW_POSITION,
+    SLIDER_ARROW_DIRECTION,
+    ARROW_ICON_ALIGN,
 } from "./constants/constants";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -62,6 +66,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** Start Position */
         sliderArrowPositionType,
         sliderArrowPosition,
+        sliderArrowDirection,
+        sliderArrowGap,
+        sliderArrowGapUnits,
 
         sliderArrowPositionTopOffset,
         sliderArrowPositionTopOffsetUnits,
@@ -78,9 +85,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         
         /** Slider Arrows Style */
         sliderArrowsIconSwitcher,
+
+        sliderArrowsIconLeftAlign,
         sliderArrowsIconLeft,
+        sliderArrowsIconLeftImageUrl,
+        sliderArrowsIconLeftImageAlt,
+        sliderArrowsIconLeftImageID,
+
+        sliderArrowsIconRightAlign,
         sliderArrowsIconRight,
-        
+        sliderArrowsIconRightImageUrl,
+        sliderArrowsIconRightImageAlt,
+        sliderArrowsIconRightImageID,
+
         sliderArrowsSize,
         sliderArrowsSizeUnits,
         sliderArrowsColorSwitcher,
@@ -1143,11 +1160,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderHeight.Desktop ? `min-height: ${sliderHeight.Desktop}${sliderHeightUnits.Desktop};` : ''}
         }
 
-
-
-
-
-
         .${blockId}.fb-slider-container.outside {
             ${sliderArrowPosition === 'top-left' || sliderArrowPosition === 'top-center' || sliderArrowPosition === 'top-right' ? `
                 padding: ${sliderArrowPositionOutsidePadding.Desktop}${sliderArrowPositionOutsidePaddingUnits.Desktop} 0 0;
@@ -1170,7 +1182,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 10px;
+                flex-direction: ${sliderArrowDirection};
+                gap: ${sliderArrowGap.Desktop}${sliderArrowGapUnits.Desktop};
                 position: absolute;
                 z-index: 100;
         
@@ -1220,10 +1233,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         ` : ''}
 
-
-
-
-
         .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev:after,
         .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next:after {
             display: none !important;
@@ -1255,6 +1264,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderArrowsSize.Desktop ? `width: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
             ${sliderArrowsSize.Desktop ? `height: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
         }
+
+        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev img,
+        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next img {
+            ${sliderArrowsColor ? `fill: ${sliderArrowsColor};` : ''}
+            ${sliderArrowsSize.Desktop ? `width: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
+            ${sliderArrowsSize.Desktop ? `height: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
+            object-fit: ;
+        }
+
         .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev:hover svg,
         .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next:hover svg {
             ${sliderArrowsColorHover ? `fill: ${sliderArrowsColorHover};` : ''}
@@ -1339,6 +1357,63 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderHeight.Tablet ? `min-height: ${sliderHeight.Tablet}${sliderHeightUnits.Tablet};` : ''}
             }
 
+            .${blockId}.fb-slider-container.outside {
+                ${sliderArrowPosition === 'top-left' || sliderArrowPosition === 'top-center' || sliderArrowPosition === 'top-right' ? `
+                    padding: ${sliderArrowPositionOutsidePadding.Tablet}${sliderArrowPositionOutsidePaddingUnits.Tablet} 0 0; 
+                ` : ''}
+        
+                ${sliderArrowPosition === 'bottom-left' || sliderArrowPosition === 'bottom-center' || sliderArrowPosition === 'bottom-right' ? `
+                    padding: 0 0 ${sliderArrowPositionOutsidePadding.Tablet}${sliderArrowPositionOutsidePaddingUnits.Tablet};
+                ` : ''}
+
+                ${sliderArrowPosition === 'center' ? `
+                    padding: 0 ${sliderArrowPositionOutsidePadding.Tablet}${sliderArrowPositionOutsidePaddingUnits.Tablet};
+
+                ` : ''}
+            }
+
+            ${sliderArrowPosition && sliderArrowPosition !== 'center' ? `
+
+                .${blockId} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition},
+                .${blockId} .fb-slider-custom-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} {
+
+                    gap: ${sliderArrowGap.Tablet}${sliderArrowGapUnits.Tablet};
+            
+                    ${sliderArrowPosition === 'top-left' ? `
+                        top: ${sliderArrowPositionTopOffset.Tablet ? `${sliderArrowPositionTopOffset.Tablet}${sliderArrowPositionTopOffsetUnits.Tablet}` : '0'};   
+                        left: ${sliderArrowPositionLeftOffset.Tablet ? `${sliderArrowPositionLeftOffset.Tablet}${sliderArrowPositionLeftOffsetUnits.Tablet}` : '0'};
+                    ` : ''}
+            
+                    ${sliderArrowPosition === 'top-center' ? `
+                        top: ${sliderArrowPositionTopOffset.Tablet ? `${sliderArrowPositionTopOffset.Tablet}${sliderArrowPositionTopOffsetUnits.Tablet}` : '0'};  
+                        left: ${sliderArrowPositionLeftOffset.Tablet ? `${sliderArrowPositionLeftOffset.Tablet}${sliderArrowPositionLeftOffsetUnits.Tablet}` : '50%'};
+                        transform: translateX(-50%);
+                    ` : ''}
+            
+                    ${sliderArrowPosition === 'top-right' ? `
+                        top: ${sliderArrowPositionTopOffset.Tablet ? `${sliderArrowPositionTopOffset.Tablet}${sliderArrowPositionTopOffsetUnits.Tablet}` : '0'};  
+                        right: ${sliderArrowPositionRightOffset.Tablet ? `${sliderArrowPositionRightOffset.Tablet}${sliderArrowPositionRightOffsetUnits.Tablet}` : '0'};
+                    ` : ''}
+            
+                    ${sliderArrowPosition === 'bottom-left' ? `
+                        bottom: ${sliderArrowPositionBottomOffset.Tablet ? `${sliderArrowPositionBottomOffset.Tablet}${sliderArrowPositionBottomOffsetUnits.Tablet}` : '0'};  
+                        left: ${sliderArrowPositionLeftOffset.Tablet ? `${sliderArrowPositionLeftOffset.Tablet}${sliderArrowPositionLeftOffsetUnits.Tablet}` : '0'};
+                    ` : ''}
+            
+                    ${sliderArrowPosition === 'bottom-center' ? `
+                        bottom: ${sliderArrowPositionBottomOffset.Tablet ? `${sliderArrowPositionBottomOffset.Tablet}${sliderArrowPositionBottomOffsetUnits.Tablet}` : '0'};  
+                        left: ${sliderArrowPositionLeftOffset.Tablet ? `${sliderArrowPositionLeftOffset.Tablet}${sliderArrowPositionLeftOffsetUnits.Tablet}` : '50%'};
+                        transform: translateX(-50%);
+                    ` : ''}
+            
+                    ${sliderArrowPosition === 'bottom-right' ? `
+                        bottom: ${sliderArrowPositionBottomOffset.Tablet ? `${sliderArrowPositionBottomOffset.Tablet}${sliderArrowPositionBottomOffsetUnits.Tablet}` : '0'};
+                        right: ${sliderArrowPositionRightOffset.Tablet ? `${sliderArrowPositionRightOffset.Tablet}${sliderArrowPositionRightOffsetUnits.Tablet}` : '0'};
+                    ` : ''}
+                }
+            ` : ''}
+
+
             .${blockId} .swiper-button-prev,
             .${blockId} .swiper-button-next {
                 ${sliderArrowsBorderTabletWidth && sliderArrowsBorderTablet.top ? `border-width: ${sliderArrowsBorderTabletWidth};` : ''}
@@ -1401,6 +1476,62 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockId} .swiper-wrapper.fb-swiper-wrapper {
                 ${sliderHeight.Mobile ? `min-height: ${sliderHeight.Mobile}${sliderHeightUnits.Mobile};` : ''}
             }
+
+            .${blockId}.fb-slider-container.outside {
+                ${sliderArrowPosition === 'top-left' || sliderArrowPosition === 'top-center' || sliderArrowPosition === 'top-right' ? `
+                    padding: ${sliderArrowPositionOutsidePadding.Mobile}${sliderArrowPositionOutsidePaddingUnits.Mobile} 0 0; 
+                ` : ''}
+        
+                ${sliderArrowPosition === 'bottom-left' || sliderArrowPosition === 'bottom-center' || sliderArrowPosition === 'bottom-right' ? `
+                    padding: 0 0 ${sliderArrowPositionOutsidePadding.Mobile}${sliderArrowPositionOutsidePaddingUnits.Mobile};
+                ` : ''}
+
+                ${sliderArrowPosition === 'center' ? `
+                    padding: 0 ${sliderArrowPositionOutsidePadding.Mobile}${sliderArrowPositionOutsidePaddingUnits.Mobile};
+
+                ` : ''}
+            }
+
+            ${sliderArrowPosition && sliderArrowPosition !== 'center' ? `
+
+                .${blockId} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition},
+                .${blockId} .fb-slider-custom-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} {
+
+                    gap: ${sliderArrowGap.Mobile}${sliderArrowGapUnits.Mobile};
+            
+                    ${sliderArrowPosition === 'top-left' ? `
+                        top: ${sliderArrowPositionTopOffset.Mobile ? `${sliderArrowPositionTopOffset.Mobile}${sliderArrowPositionTopOffsetUnits.Mobile}` : '0'};   
+                        left: ${sliderArrowPositionLeftOffset.Mobile ? `${sliderArrowPositionLeftOffset.Mobile}${sliderArrowPositionLeftOffsetUnits.Mobile}` : '0'};
+                    ` : ''}
+            
+                    ${sliderArrowPosition === 'top-center' ? `
+                        top: ${sliderArrowPositionTopOffset.Mobile ? `${sliderArrowPositionTopOffset.Mobile}${sliderArrowPositionTopOffsetUnits.Mobile}` : '0'};  
+                        left: ${sliderArrowPositionLeftOffset.Mobile ? `${sliderArrowPositionLeftOffset.Mobile}${sliderArrowPositionLeftOffsetUnits.Mobile}` : '50%'};
+                        transform: translateX(-50%);
+                    ` : ''}
+            
+                    ${sliderArrowPosition === 'top-right' ? `
+                        top: ${sliderArrowPositionTopOffset.Mobile ? `${sliderArrowPositionTopOffset.Mobile}${sliderArrowPositionTopOffsetUnits.Mobile}` : '0'};  
+                        right: ${sliderArrowPositionRightOffset.Mobile ? `${sliderArrowPositionRightOffset.Mobile}${sliderArrowPositionRightOffsetUnits.Mobile}` : '0'};
+                    ` : ''}
+            
+                    ${sliderArrowPosition === 'bottom-left' ? `
+                        bottom: ${sliderArrowPositionBottomOffset.Mobile ? `${sliderArrowPositionBottomOffset.Mobile}${sliderArrowPositionBottomOffsetUnits.Mobile}` : '0'};  
+                        left: ${sliderArrowPositionLeftOffset.Mobile ? `${sliderArrowPositionLeftOffset.Mobile}${sliderArrowPositionLeftOffsetUnits.Mobile}` : '0'};
+                    ` : ''}
+            
+                    ${sliderArrowPosition === 'bottom-center' ? `
+                        bottom: ${sliderArrowPositionBottomOffset.Mobile ? `${sliderArrowPositionBottomOffset.Mobile}${sliderArrowPositionBottomOffsetUnits.Mobile}` : '0'};  
+                        left: ${sliderArrowPositionLeftOffset.Mobile ? `${sliderArrowPositionLeftOffset.Mobile}${sliderArrowPositionLeftOffsetUnits.Mobile}` : '50%'};
+                        transform: translateX(-50%);
+                    ` : ''}
+            
+                    ${sliderArrowPosition === 'bottom-right' ? `
+                        bottom: ${sliderArrowPositionBottomOffset.Mobile ? `${sliderArrowPositionBottomOffset.Mobile}${sliderArrowPositionBottomOffsetUnits.Mobile}` : '0'};
+                        right: ${sliderArrowPositionRightOffset.Mobile ? `${sliderArrowPositionRightOffset.Mobile}${sliderArrowPositionRightOffsetUnits.Mobile}` : '0'};
+                    ` : ''}
+                }
+            ` : ''}
 
             .${blockId} .swiper-button-prev,
             .${blockId} .swiper-button-next {
@@ -1523,6 +1654,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** Start Position */
         sliderArrowPositionType,
         sliderArrowPosition,
+        sliderArrowDirection,
+        sliderArrowGap,
+        sliderArrowGapUnits,
 
         sliderArrowPositionTopOffset,
         sliderArrowPositionTopOffsetUnits,
@@ -1889,14 +2023,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     label={__("Left Icon", "frontis-blocks")}
                                     className="fb-setting-switcher-panel-wrapper"
                                 >
-                                    <FBIconPicker value={sliderArrowsIconLeft} setIconHandler={sliderArrowsIconLeftHandler} />
+                                    <ButtonGroup
+                                        className="fb-setting-text-alignment-group-btn"
+                                    >
+                                        {ARROW_ICON_ALIGN.map((item, key) => (
+                                            <Button
+                                                key={key}
+                                                onClick={() => setAttributes({ sliderArrowsIconLeftAlign: item.value })}
+                                                className={`fb-setting-text-alignment-single-btn ${sliderArrowsIconLeftAlign === item.value ? 'active' : ''}`}
+                                            >
+                                                {item.label}
+                                            </Button>
+                                        ))}
+                                    </ButtonGroup>
+                                    {sliderArrowsIconLeftAlign === 'icon' && (
+                                        <FBIconPicker value={sliderArrowsIconLeft} setIconHandler={sliderArrowsIconLeftHandler} />
+                                    )}
+
+                                    {sliderArrowsIconLeftAlign === 'image' && (
+                                        <FB_ImageControl 
+                                            globalImageUrl={sliderArrowsIconLeftImageUrl}
+                                            setglobalImageUrl={(value) => setAttributes({ sliderArrowsIconLeftImageUrl: value })}
+                                            globalImageAlt={sliderArrowsIconLeftImageAlt}
+                                            setglobalImageAlt={(value) => setAttributes({ sliderArrowsIconLeftImageAlt: value })}
+                                            globalImageID={sliderArrowsIconLeftImageID}
+                                            setglobalImageID={(value) => setAttributes({ sliderArrowsIconLeftImageID: value })}
+                                            isImageSize={false}
+                                        />
+                                    )}
                                 </BaseControl>
 
                                 <BaseControl
                                     label={__("Right Icon", "frontis-blocks")}
                                     className="fb-setting-switcher-panel-wrapper"
                                 >
-                                    <FBIconPicker value={sliderArrowsIconRight} setIconHandler={sliderArrowsIconRightHandler} />
+                                    <ButtonGroup
+                                        className="fb-setting-text-alignment-group-btn"
+                                    >
+                                        {ARROW_ICON_ALIGN.map((item, key) => (
+                                            <Button
+                                                key={key}
+                                                onClick={() => setAttributes({ sliderArrowsIconRightAlign: item.value })}
+                                                className={`fb-setting-text-alignment-single-btn ${sliderArrowsIconRightAlign === item.value ? 'active' : ''}`}
+                                            >
+                                                {item.label}
+                                            </Button>
+                                        ))}
+                                    </ButtonGroup>
+                                    {sliderArrowsIconRightAlign === 'icon' && (
+                                        <FBIconPicker value={sliderArrowsIconRight} setIconHandler={sliderArrowsIconRightHandler} />
+                                    )}
+
+                                    {sliderArrowsIconRightAlign === 'image' && (
+                                        <FB_ImageControl 
+                                            globalImageUrl={sliderArrowsIconRightImageUrl}
+                                            setglobalImageUrl={(value) => setAttributes({ sliderArrowsIconRightImageUrl: value })}
+                                            globalImageAlt={sliderArrowsIconRightImageAlt}
+                                            setglobalImageAlt={(value) => setAttributes({ sliderArrowsIconRightImageAlt: value })}
+                                            globalImageID={sliderArrowsIconRightImageID}
+                                            setglobalImageID={(value) => setAttributes({ sliderArrowsIconRightImageID: value })}
+                                            isImageSize={false}
+                                        />
+                                    )}
                                 </BaseControl>
                             </>
                         )}
@@ -1922,6 +2110,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         options={SLIDER_ARROW_POSITION}
                         onChange={(value) => setAttributes({ sliderArrowPosition: value })}
                     />
+
+                    {sliderArrowPosition !== 'center' && (
+
+                        <SelectControl
+                            label={__("Arrow Direction", "frontis-blocks")}
+                            value={sliderArrowDirection}
+                            options={SLIDER_ARROW_DIRECTION}
+                            onChange={(value) => setAttributes({ sliderArrowDirection: value })}
+                        />
+
+                    )}
 
                     {sliderArrowPosition === 'top-left' && (
                         <>
@@ -2122,6 +2321,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             rangeStep={1}
                             resetFallbackValue={"60"}
                         />
+                    )}
+                    {sliderArrowPosition !== 'center' && (
+
+                        <FB_Range
+                            min={0}
+                            max={100}
+                            label={__("Gap", "frontis-blocks")}
+                            rangeValue={sliderArrowGap}
+                            onChangeHandler={(value) => setAttributes({ sliderArrowGap: value })}
+                            rangeUnitHandler={(value) => setAttributes({ sliderArrowGapUnits: value })}
+                            deviceType={deviceType}
+                            units={sliderArrowGapUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={"10"}
+                        />
+
                     )}
                     </>
                 )}
@@ -2555,7 +2771,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 setGlobalColor={(value) => setAttributes({ sliderFractionHoverColor: value })}
                             />
                         )}
-
 
                         <FB_TypographyControl
                             globalTypoControlActive={true}
