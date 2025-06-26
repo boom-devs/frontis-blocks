@@ -108,6 +108,22 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 == Changelog ==
 
+= 1.0.9 – 2025 =
+Slider Block Bug Fix:
+
+Real-time update support for Instant Slider type in editor.
+
+Default min-height added to swiper-wrapper with UI control.
+
+Updated child slide structure: new icon, container, and block support.
+
+Navigation improved with arrows, position settings, and support for custom icons and image uploads.
+
+Codebase optimized: removed unused code, fixed instant setting update issues.
+
+
+
+
 = 1.0.8 – 23 May 2025 =
 New Features:
 
