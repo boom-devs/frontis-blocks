@@ -186,9 +186,18 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		containerTabletMargin,
 		containerMobileMargin,
 		customWidthUnits,
-		containerAlignItems,
+
+		// display type
+		containerHtmlTag,
+		containerLayout,
+		containerEqualHeight,
+		containerChildrenWidth,
 		containerDirection,
 		containerJustify,
+		containerAlignItems,
+		containerColumnsItemList,
+		containerRowsItemList,
+
 		// Position
 		containerZIndex,
 		containerOverflow,
@@ -470,8 +479,9 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		'min-height': generateCSSUnit(minHeight['Desktop'], minHeightUnits['Desktop']),
 	}
 
-	if (!isLayoutGrid) {
+	if (containerLayout === 'flex') {
 		selectors[containerFlexSelector] = {
+			'display': 'flex',
 			'flex-direction': containerDirection['Desktop'],
 			'align-items': containerAlignItems['Desktop'],
 			'justify-content': containerJustify['Desktop'],
@@ -481,16 +491,41 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'column-gap': generateCSSUnit(columnGapDesktopFallback, columnGapUnits['Desktop']),
 			...selectors[containerFlexSelector],
 		};
-		selectors['.block-editor-block-list__block'] = {
-			'flex-direction': containerDirection['Desktop'],
-			'align-items': containerAlignItems['Desktop'],
-			'justify-content': containerJustify['Desktop'],
-			'flex-wrap': containerWrap['Desktop'],
-			'align-content': alignContentDesktop,
-			...selectors['.block-editor-block-list__block'],
-		};
+		// tablet_selectors[containerFlexSelector]= {
+		// 	'flex-direction': containerDirection['Tablet'],
+		// 	'align-items': containerAlignItems['Tablet'],
+		// 	'justify-content': containerJustify['Tablet'],
+		// 	'flex-wrap': containerWrap['Tablet'],
+		// 	'align-content': alignContentTablet,
+		// 	'row-gap': generateCSSUnit(rowGapTabletFallback, rowGapUnits['Tablet']),
+		// 	'column-gap': generateCSSUnit(columnGapTabletFallback, columnGapUnits['Tablet']),
+		// };
+		// mobile_selectors[containerFlexSelector]= {
+		// 	'flex-direction': containerDirection['Mobile'],
+		// 	'align-items': containerAlignItems['Mobile'],
+		// 	'justify-content': containerJustify['Mobile'],
+		// 	'flex-wrap': containerWrap['Mobile'],
+		// 	'align-content': alignContentMobile,
+		// 	'row-gap': generateCSSUnit(rowGapMobileFallback, rowGapUnits['Mobile']),
+		// 	'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
+		// };
+		// selectors['.block-editor-block-list__block'] = {
+		// 	'flex-direction': containerDirection['Desktop'],
+		// 	'align-items': containerAlignItems['Desktop'],
+		// 	'justify-content': containerJustify['Desktop'],
+		// 	'flex-wrap': containerWrap['Desktop'],
+		// 	'align-content': alignContentDesktop,
+		// 	...selectors['.block-editor-block-list__block'],
+		// };
 
-		widthSelectorsDesktop[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`] = {
+		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId} > .frontis-blocks-container-inner-blocks-wrap > div`] = {
+			'width': containerChildrenWidth === 'full' ? '100%' : containerChildrenWidth === 'auto' ? 'auto' : '',
+		}
+		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId} > div`] = {
+			'width': containerChildrenWidth === 'full' ? '100%' : containerChildrenWidth === 'auto' ? 'auto' : '',
+		}
+		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
+			'display': 'flex',
 			'flex-direction': containerDirection['Desktop'],
 			'align-items': containerAlignItems['Desktop'],
 			'justify-content': containerJustify['Desktop'],
@@ -498,9 +533,9 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'align-content': alignContentDesktop,
 			'row-gap': generateCSSUnit(rowGapDesktopFallback, rowGapUnits['Desktop']),
 			'column-gap': generateCSSUnit(columnGapDesktopFallback, columnGapUnits['Desktop']),
-			...widthSelectorsDesktop[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`],
+			...widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`],
 		};
-		widthSelectorsTablet[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`] = {
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
 			'flex-direction': containerDirection['Tablet'],
 			'align-items': containerAlignItems['Tablet'],
 			'justify-content': containerJustify['Tablet'],
@@ -508,9 +543,9 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'align-content': alignContentTablet,
 			'row-gap': generateCSSUnit(rowGapTabletFallback, rowGapUnits['Tablet']),
 			'column-gap': generateCSSUnit(columnGapTabletFallback, columnGapUnits['Tablet']),
-			...widthSelectorsTablet[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`],
+			...widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`],
 		};
-		widthSelectorsMobile[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`] = {
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
 			'flex-direction': containerDirection['Mobile'],
 			'align-items': containerAlignItems['Mobile'],
 			'justify-content': containerJustify['Mobile'],
@@ -518,7 +553,70 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'align-content': alignContentMobile,
 			'row-gap': generateCSSUnit(rowGapMobileFallback, rowGapUnits['Mobile']),
 			'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
-			...widthSelectorsMobile[`.frontis-blocks-container-inner-blocks-wrap .wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`],
+			...widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`],
+		};
+	}
+	if (containerLayout === 'grid') {
+		selectors[containerFlexSelector] = {
+			'display': 'grid',
+			'grid-template-columns': containerColumnsItemList['Desktop'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+			'grid-template-rows': containerRowsItemList['Desktop'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+			'align-items': containerAlignItems['Desktop'],
+			'justify-content': containerJustify['Desktop'],
+			'align-content': alignContentDesktop,
+			'row-gap': generateCSSUnit(rowGapDesktopFallback, rowGapUnits['Desktop']),
+			'column-gap': generateCSSUnit(columnGapDesktopFallback, columnGapUnits['Desktop']),
+			...selectors[containerFlexSelector],
+		};
+		// tablet_selectors[containerFlexSelector]= {
+		// 	'grid-template-columns': containerColumnsItemList['Tablet'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+		// 	'grid-template-rows': containerRowsItemList['Tablet'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+		// 	'align-items': containerAlignItems['Tablet'],
+		// 	'justify-content': containerJustify['Tablet'],
+		// 	'align-content': alignContentTablet,
+		// 	'row-gap': generateCSSUnit(rowGapTabletFallback, rowGapUnits['Tablet']),
+		// 	'column-gap': generateCSSUnit(columnGapTabletFallback, columnGapUnits['Tablet']),
+		// };
+		// mobile_selectors[containerFlexSelector]= {
+		// 	'grid-template-columns': containerColumnsItemList['Mobile'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+		// 	'grid-template-rows': containerRowsItemList['Mobile'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+		// 	'align-items': containerAlignItems['Mobile'],
+		// 	'justify-content': containerJustify['Mobile'],
+		// 	'align-content': alignContentMobile,
+		// 	'row-gap': generateCSSUnit(rowGapMobileFallback, rowGapUnits['Mobile']),
+		// 	'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
+		// };
+
+		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
+			'display': 'grid',
+			'grid-template-columns': containerColumnsItemList['Desktop'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+			'grid-template-rows': containerRowsItemList['Desktop'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+			'align-items': containerAlignItems['Desktop'],
+			'justify-content': containerJustify['Desktop'],
+			'align-content': alignContentDesktop,
+			'row-gap': generateCSSUnit(rowGapDesktopFallback, rowGapUnits['Desktop']),
+			'column-gap': generateCSSUnit(columnGapDesktopFallback, columnGapUnits['Desktop']),
+			...widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`],
+		};
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
+			'grid-template-columns': containerColumnsItemList['Tablet'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+			'grid-template-rows': containerRowsItemList['Tablet'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+			'align-items': containerAlignItems['Tablet'],
+			'justify-content': containerJustify['Tablet'],
+			'align-content': alignContentTablet,
+			'row-gap': generateCSSUnit(rowGapTabletFallback, rowGapUnits['Tablet']),
+			'column-gap': generateCSSUnit(columnGapTabletFallback, columnGapUnits['Tablet']),
+			...widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`],
+		};
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
+			'grid-template-columns': containerColumnsItemList['Mobile'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+			'grid-template-rows': containerRowsItemList['Mobile'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+			'align-items': containerAlignItems['Mobile'],
+			'justify-content': containerJustify['Mobile'],
+			'align-content': alignContentMobile,
+			'row-gap': generateCSSUnit(rowGapMobileFallback, rowGapUnits['Mobile']),
+			'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
+			...widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`],
 		};
 	}
 
@@ -1085,23 +1183,23 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 	const tablet_selectors = {
 		[containerFlexSelector]: {
-			'flex-direction': containerDirection['Tablet'],
-			'align-items': containerAlignItems['Tablet'],
-			'justify-content': containerJustify['Tablet'],
-			'flex-wrap': containerWrap['Tablet'],
-			'align-content': alignContentTablet,
-			'row-gap': generateCSSUnit(rowGapTabletFallback, rowGapUnits['Tablet']),
-			'column-gap': generateCSSUnit(columnGapTabletFallback, columnGapUnits['Tablet']),
+			// 'flex-direction': containerDirection['Tablet'],
+			// 'align-items': containerAlignItems['Tablet'],
+			// 'justify-content': containerJustify['Tablet'],
+			// 'flex-wrap': containerWrap['Tablet'],
+			// 'align-content': alignContentTablet,
+			// 'row-gap': generateCSSUnit(rowGapTabletFallback, rowGapUnits['Tablet']),
+			// 'column-gap': generateCSSUnit(columnGapTabletFallback, columnGapUnits['Tablet']),
 			'min-height': generateCSSUnit(minHeight['Tablet'], minHeightUnits['Tablet']),
 		},
-		'.block-editor-block-list__block': {
-			'min-height': generateCSSUnit(minHeight['Tablet'], minHeightUnits['Tablet']),
-			'flex-direction': containerDirection['Tablet'],
-			'align-items': containerAlignItems['Tablet'],
-			'justify-content': containerJustify['Tablet'],
-			'flex-wrap': containerWrap['Tablet'],
-			'align-content': alignContentTablet,
-		},
+		// '.block-editor-block-list__block': {
+		// 	'min-height': generateCSSUnit(minHeight['Tablet'], minHeightUnits['Tablet']),
+		// 	'flex-direction': containerDirection['Tablet'],
+		// 	'align-items': containerAlignItems['Tablet'],
+		// 	'justify-content': containerJustify['Tablet'],
+		// 	'flex-wrap': containerWrap['Tablet'],
+		// 	'align-content': alignContentTablet,
+		// },
 		' > .frontis-blocks-container__shape-top svg': {
 			'height': generateCSSUnit(topHeightTablet, 'px'),
 		},
@@ -1117,23 +1215,23 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'margin-inline-end': '0px',
 		},
 		[containerFlexSelector]: {
-			'flex-direction': containerDirection['Mobile'],
-			'align-items': containerAlignItems['Mobile'],
-			'justify-content': containerJustify['Mobile'],
-			'flex-wrap': containerWrap['Mobile'],
-			'align-content': alignContentMobile,
-			'row-gap': generateCSSUnit(rowGapMobileFallback, rowGapUnits['Mobile']),
-			'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
+			// 'flex-direction': containerDirection['Mobile'],
+			// 'align-items': containerAlignItems['Mobile'],
+			// 'justify-content': containerJustify['Mobile'],
+			// 'flex-wrap': containerWrap['Mobile'],
+			// 'align-content': alignContentMobile,
+			// 'row-gap': generateCSSUnit(rowGapMobileFallback, rowGapUnits['Mobile']),
+			// 'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
 			'min-height': generateCSSUnit(minHeight['Mobile'], minHeightUnits['Mobile']),
 		},
-		'.block-editor-block-list__block': {
-			'min-height': generateCSSUnit(minHeight['Mobile'], minHeightUnits['Mobile']),
-			'flex-direction': containerDirection['Mobile'],
-			'align-items': containerAlignItems['Mobile'],
-			'justify-content': containerJustify['Mobile'],
-			'flex-wrap': containerWrap['Mobile'],
-			'align-content': alignContentMobile,
-		},
+		// '.block-editor-block-list__block': {
+		// 	'min-height': generateCSSUnit(minHeight['Mobile'], minHeightUnits['Mobile']),
+		// 	'flex-direction': containerDirection['Mobile'],
+		// 	'align-items': containerAlignItems['Mobile'],
+		// 	'justify-content': containerJustify['Mobile'],
+		// 	'flex-wrap': containerWrap['Mobile'],
+		// 	'align-content': alignContentMobile,
+		// },
 		' > .frontis-blocks-container__shape-top svg': {
 			'height': generateCSSUnit(topHeightMobile, 'px'),
 		},
@@ -1141,6 +1239,112 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'height': generateCSSUnit(bottomHeightMobile, 'px'),
 		},
 	};
+
+
+	if (containerLayout === 'flex') {
+		tablet_selectors[containerFlexSelector]= {
+			'flex-direction': containerDirection['Tablet'],
+			'align-items': containerAlignItems['Tablet'],
+			'justify-content': containerJustify['Tablet'],
+			'flex-wrap': containerWrap['Tablet'],
+			'align-content': alignContentTablet,
+			'row-gap': generateCSSUnit(rowGapTabletFallback, rowGapUnits['Tablet']),
+			'column-gap': generateCSSUnit(columnGapTabletFallback, columnGapUnits['Tablet']),
+		};
+		mobile_selectors[containerFlexSelector]= {
+			'flex-direction': containerDirection['Mobile'],
+			'align-items': containerAlignItems['Mobile'],
+			'justify-content': containerJustify['Mobile'],
+			'flex-wrap': containerWrap['Mobile'],
+			'align-content': alignContentMobile,
+			'row-gap': generateCSSUnit(rowGapMobileFallback, rowGapUnits['Mobile']),
+			'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
+		};
+		
+		// widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
+		// 	'display': 'flex',
+		// 	'flex-direction': containerDirection['Desktop'],
+		// 	'align-items': containerAlignItems['Desktop'],
+		// 	'justify-content': containerJustify['Desktop'],
+		// 	'flex-wrap': containerWrap['Desktop'],
+		// 	'align-content': alignContentDesktop,
+		// 	'row-gap': generateCSSUnit(rowGapDesktopFallback, rowGapUnits['Desktop']),
+		// 	'column-gap': generateCSSUnit(columnGapDesktopFallback, columnGapUnits['Desktop']),
+		// 	...widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`],
+		// };
+		// widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
+		// 	'flex-direction': containerDirection['Tablet'],
+		// 	'align-items': containerAlignItems['Tablet'],
+		// 	'justify-content': containerJustify['Tablet'],
+		// 	'flex-wrap': containerWrap['Tablet'],
+		// 	'align-content': alignContentTablet,
+		// 	'row-gap': generateCSSUnit(rowGapTabletFallback, rowGapUnits['Tablet']),
+		// 	'column-gap': generateCSSUnit(columnGapTabletFallback, columnGapUnits['Tablet']),
+		// 	...widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`],
+		// };
+		// widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
+		// 	'flex-direction': containerDirection['Mobile'],
+		// 	'align-items': containerAlignItems['Mobile'],
+		// 	'justify-content': containerJustify['Mobile'],
+		// 	'flex-wrap': containerWrap['Mobile'],
+		// 	'align-content': alignContentMobile,
+		// 	'row-gap': generateCSSUnit(rowGapMobileFallback, rowGapUnits['Mobile']),
+		// 	'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
+		// 	...widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`],
+		// };
+	}
+	if (containerLayout === 'grid') {
+		tablet_selectors[containerFlexSelector]= {
+			'grid-template-columns': containerColumnsItemList['Tablet'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+			'grid-template-rows': containerRowsItemList['Tablet'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+			'align-items': containerAlignItems['Tablet'],
+			'justify-content': containerJustify['Tablet'],
+			'align-content': alignContentTablet,
+			'row-gap': generateCSSUnit(rowGapTabletFallback, rowGapUnits['Tablet']),
+			'column-gap': generateCSSUnit(columnGapTabletFallback, columnGapUnits['Tablet']),
+		};
+		mobile_selectors[containerFlexSelector]= {
+			'grid-template-columns': containerColumnsItemList['Mobile'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+			'grid-template-rows': containerRowsItemList['Mobile'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+			'align-items': containerAlignItems['Mobile'],
+			'justify-content': containerJustify['Mobile'],
+			'align-content': alignContentMobile,
+			'row-gap': generateCSSUnit(rowGapMobileFallback, rowGapUnits['Mobile']),
+			'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
+		};
+
+		// widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
+		// 	'display': 'grid',
+		// 	'grid-template-columns': containerColumnsItemList['Desktop'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+		// 	'grid-template-rows': containerRowsItemList['Desktop'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+		// 	'align-items': containerAlignItems['Desktop'],
+		// 	'justify-content': containerJustify['Desktop'],
+		// 	'align-content': alignContentDesktop,
+		// 	'row-gap': generateCSSUnit(rowGapDesktopFallback, rowGapUnits['Desktop']),
+		// 	'column-gap': generateCSSUnit(columnGapDesktopFallback, columnGapUnits['Desktop']),
+		// 	...widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`],
+		// };
+		// widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
+		// 	'grid-template-columns': containerColumnsItemList['Tablet'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+		// 	'grid-template-rows': containerRowsItemList['Tablet'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+		// 	'align-items': containerAlignItems['Tablet'],
+		// 	'justify-content': containerJustify['Tablet'],
+		// 	'align-content': alignContentTablet,
+		// 	'row-gap': generateCSSUnit(rowGapTabletFallback, rowGapUnits['Tablet']),
+		// 	'column-gap': generateCSSUnit(columnGapTabletFallback, columnGapUnits['Tablet']),
+		// 	...widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`],
+		// };
+		// widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
+		// 	'grid-template-columns': containerColumnsItemList['Mobile'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+		// 	'grid-template-rows': containerRowsItemList['Mobile'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
+		// 	'align-items': containerAlignItems['Mobile'],
+		// 	'justify-content': containerJustify['Mobile'],
+		// 	'align-content': alignContentMobile,
+		// 	'row-gap': generateCSSUnit(rowGapMobileFallback, rowGapUnits['Mobile']),
+		// 	'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
+		// 	...widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`],
+		// };
+	}
 
 	// Display grid css.
 	if (isLayoutGrid) {

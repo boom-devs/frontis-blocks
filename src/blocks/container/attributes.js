@@ -242,11 +242,11 @@ const attributes = {
 					id: 'column-1',
 					title: 'Column 1',
 					type: 'auto',
-					width: '1',
+					width: 1,
 					widthUnits: 'fr',
-					min: '10',
+					min: 10,
 					minUnits: 'px',
-					max: '1',
+					max: 1,
 					maxUnits: 'fr',
 				}
 			],
@@ -255,11 +255,11 @@ const attributes = {
 					id: 'column-1',
 					title: 'Column 1',
 					type: 'auto',	
-					width: '1',
+					width: '',
 					widthUnits: 'fr',
-					min: '10',
+					min: '',
 					minUnits: 'px',
-					max: '1',
+					max: '',
 					maxUnits: 'fr',
 				}
 			],
@@ -268,62 +268,62 @@ const attributes = {
 					id: 'column-1',
 					title: 'Column 1',
 					type: 'auto',
-					width: '1',
+					width: '',
 					widthUnits: 'fr',
-					min: '10',
+					min: '',
 					minUnits: 'px',
-					max: '1',
-					maxUnits: 'fr',
-				}
-			],
-		},
-	},
-	
-	containerRowsItemList: {
-		type: 'object',
-		default: {
-			Desktop: [
-				{
-					id: 'column-1',
-					title: 'Column 1',
-					type: 'auto',
-					width: '1',
-					widthUnits: 'fr',
-					min: '10',
-					minUnits: 'px',
-					max: '1',
-					maxUnits: 'fr',
-				}
-			],
-			Tablet: [
-				{
-					id: 'column-1',
-					title: 'Column 1',
-					type: 'auto',
-					width: '1',
-					widthUnits: 'fr',
-					min: '10',
-					minUnits: 'px',
-					max: '1',
-					maxUnits: 'fr',
-				}
-			],
-			Mobile: [
-				{
-					id: 'column-1',
-					title: 'Column 1',
-					type: 'auto',
-					width: '1',
-					widthUnits: 'fr',
-					min: '10',
-					minUnits: 'px',
-					max: '1',
+					max: '',
 					maxUnits: 'fr',
 				}
 			],
 		},
 	},
 
+	containerRowsItemList: {
+		type: 'object',
+		default: {
+			Desktop: [
+				{
+					id: 'row-1',
+					title: 'Row 1',
+					type: 'auto',
+					width: 1,
+					widthUnits: 'fr',
+					min: 10,
+					minUnits: 'px',
+					max: 1,
+					maxUnits: 'fr',
+				}
+			],
+			Tablet: [
+				{
+					id: 'row-1',
+					title: 'Row 1',
+					type: 'auto',	
+					width: '',
+					widthUnits: 'fr',
+					min: '',
+					minUnits: 'px',
+					max: '',
+					maxUnits: 'fr',
+				}
+			],
+			Mobile: [
+				{
+					id: 'row-1',
+					title: 'Row 1',
+					type: 'auto',
+					width: '',
+					widthUnits: 'fr',
+					min: '',
+					minUnits: 'px',
+					max: '',
+					maxUnits: 'fr',
+				}
+			],
+		},
+	},
+	
 	containerJustify: {
 		type: 'object',
 		default: {

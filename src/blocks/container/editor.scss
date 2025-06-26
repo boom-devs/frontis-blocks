@@ -412,3 +412,13 @@
 		rotate: -90deg;
 	}
 }
+.column-direction {
+	&.justify-content-btn {
+		svg {
+			rotate: none;
+		}
+	}
+	svg {
+		rotate: -90deg;
+	}
+}
