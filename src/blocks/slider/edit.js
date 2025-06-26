@@ -3,17 +3,16 @@ import {
     useBlockProps,
     BlockControls,
     useInnerBlocksProps,
-    InnerBlocks,
     store as blockEditorStore
 } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { withSelect, withDispatch, useDispatch, useSelect } from '@wordpress/data';
 import { createBlock } from '@wordpress/blocks';
 import { useState, useMemo, useEffect, useRef } from "@wordpress/element";
-import { compose, createHigherOrderComponent } from '@wordpress/compose';
+import { compose } from '@wordpress/compose';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper } from 'swiper/react';
 import { useDeviceType } from "@Config/displayType";
 import { 
     Navigation, 
@@ -50,7 +49,6 @@ const Edit = (props) => {
         insertBlock,
     } = props;
 
-
     const {
         blockId,
         slideContent,
@@ -77,8 +75,16 @@ const Edit = (props) => {
         sliderArrowPosition,
 
         sliderArrowsIconSwitcher,
+
+        sliderArrowsIconLeftAlign,
         sliderArrowsIconLeft,
+        sliderArrowsIconLeftImageUrl,
+        sliderArrowsIconLeftImageAlt,
+
+        sliderArrowsIconRightAlign,
         sliderArrowsIconRight,
+        sliderArrowsIconRightImageUrl,
+        sliderArrowsIconRightImageAlt,
 
         sliderGlobalWraperClass,
 
@@ -87,11 +93,9 @@ const Edit = (props) => {
 		sliderMobileSwitcher,
     } = attributes;
 
-
     const deviceType = useDeviceType();
 
     const swiperRef = useRef();
-	const sliderPaginationRef = useRef();
 	const sliderNavPrevRef = useRef();
 	const sliderNavNextRef = useRef();
 
@@ -136,6 +140,76 @@ const Edit = (props) => {
 		}
 	);
 
+    // First, move settings into a useMemo to avoid unnecessary recalculations
+    const settings = useMemo(() => ({
+        autoplay: autoplay ? {
+            delay: autoplaySpeed,
+            disableOnInteraction: false,
+            stopOnLastSlide: stopOnLastSlide,
+            reverseDirection: reverseDirection,
+        } : false,
+        speed: transitionSpeed,
+        loop: loop,
+		effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+
+        ...(sliderType === 'carousel' && {
+            breakpoints: {
+                0: {
+                    slidesPerView: carouselPerColumn?.Mobile || 1,
+                    spaceBetween: carouselPerColumnGap?.Mobile || 10,
+                },
+                768: {
+                    slidesPerView: carouselPerColumn?.Tablet || 2,
+                    spaceBetween: carouselPerColumnGap?.Tablet || 15,
+                },
+                1025: {
+                    slidesPerView: carouselPerColumn?.Desktop || 3,
+                    spaceBetween: carouselPerColumnGap?.Desktop || 20,
+                },
+            },
+        }),
+        pagination: displayDots
+            ? {
+                type: paginationType,
+                clickable: true,
+              }
+            : false,
+
+        ...(slideEffect === 'creative' && {
+            creativeEffect: {
+                prev: { shadow: true, translate: [0, 0, -400] },
+                next: { translate: ['100%', 0, 0] },
+            },
+        }),
+        
+        allowTouchMove: allowTouchMove,
+        mousewheel: enableMouseWheel,
+        
+        onBeforeInit(swiperInst) {
+            swiperRef.current = swiperInst;
+            setSwiperInstance(swiperInst);
+        },
+    }), [
+        deviceType,
+        autoplay,
+        autoplaySpeed,
+        stopOnLastSlide,
+        reverseDirection,
+        transitionSpeed,
+        loop,
+        carouselEffect,
+        slideEffect,
+        allowTouchMove,
+        enableMouseWheel,
+        sliderType,
+        carouselPerColumn,
+        carouselPerColumnGap,
+        sliderArrowPositionType,
+        sliderArrowPosition,
+        paginationType,
+        displayDots,
+    ]);
+
     /* Dynamic Swiper Key */
     useEffect(() => {
         setSwiperKey(prevKey => prevKey + 1);
@@ -167,128 +241,11 @@ const Edit = (props) => {
         sliderArrowsIconRight,
     ]);
 
-    const setSwiperNavigationPagination = (swiperInst) => {
-        if (swiperInst?.params?.navigation) {
-            swiperInst.params.navigation.prevEl = sliderNavPrevRef.current;
-            swiperInst.params.navigation.nextEl = sliderNavNextRef.current;
-
-            // Remove default Swiper text when rendering in editor
-            if (sliderNavPrevRef.current) sliderNavPrevRef.current.innerHTML = "";
-            if (sliderNavNextRef.current) sliderNavNextRef.current.innerHTML = "";
-    
-            // Re-init navigation
-            swiperInst.navigation.destroy();
-            swiperInst.navigation.init();
-            swiperInst.navigation.update();
-        }
-    
-        if (swiperInst?.params?.pagination) {
-            // First, completely destroy the pagination
-            swiperInst.pagination.destroy();
-            
-            // Reset pagination container
-            if (sliderPaginationRef.current) {
-                // Clear existing content and classes
-                sliderPaginationRef.current.innerHTML = '';
-                // Reset to base class
-                sliderPaginationRef.current.className = 'swiper-pagination';
-            }
-            
-            // Set new pagination parameters
-            swiperInst.params.pagination.el = sliderPaginationRef.current;
-            swiperInst.params.pagination.clickable = true;
-            swiperInst.params.pagination.type = paginationType;
-            
-            // Create and initialize pagination
-            swiperInst.pagination.init();
-            swiperInst.pagination.render();
-            swiperInst.pagination.update();
-        }
-    };
-
-    // First, move settings into a useMemo to avoid unnecessary recalculations
-    const settings = useMemo(() => ({
-        autoplay: autoplay ? {
-            delay: autoplaySpeed,
-            disableOnInteraction: false,
-            stopOnLastSlide: stopOnLastSlide,
-            reverseDirection: reverseDirection,
-        } : false,
-        speed: transitionSpeed,
-        loop: loop,
-
-        // Set effect based on sliderType
-		effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-
-        // Responsive breakpoints for Desktop, Tablet, and Mobile
-        ...(sliderType === 'carousel' && {
-            breakpoints: {
-            // Mobile (e.g., screens < 768px)
-            0: {
-                slidesPerView: carouselPerColumn?.Mobile || 1,
-                spaceBetween: carouselPerColumnGap?.Mobile || 10,
-            },
-            // Tablet (e.g., screens >= 768px)
-            768: {
-                slidesPerView: carouselPerColumn?.Tablet || 2,
-                spaceBetween: carouselPerColumnGap?.Tablet || 15,
-            },
-            // Desktop (e.g., screens >= 1025px)
-            1025: {
-                slidesPerView: carouselPerColumn?.Desktop || 3,
-                spaceBetween: carouselPerColumnGap?.Desktop || 20,
-            },
-            },
-        }),
-
-        // Creative effect settings if needed
-        ...(slideEffect === 'creative' && {
-            creativeEffect: {
-                prev: { shadow: true, translate: [0, 0, -400] },
-                next: { translate: ['100%', 0, 0] },
-            },
-        }),
-        
-        allowTouchMove: allowTouchMove,
-        // Add mousewheel configuration
-        mousewheel: enableMouseWheel ? {
-            forceToAxis: true,
-            sensitivity: 1,
-            releaseOnEdges: true,
-        } : false,
-        onBeforeInit(swiperInst) {
-            swiperRef.current = swiperInst;
-            setSwiperInstance(swiperInst);
-        },
-        onAfterInit(swiperInst) {
-            setTimeout(() => {
-                setSwiperNavigationPagination(swiperInst);
-            });
-        },
-    }), [
-        deviceType,
-        autoplay,
-        autoplaySpeed,
-        stopOnLastSlide,
-        reverseDirection,
-        transitionSpeed,
-        loop,
-        allowTouchMove,
-        sliderType,
-        carouselPerColumn,
-        carouselPerColumnGap,
-        sliderArrowPositionType,
-        sliderArrowPosition,
-    ]);
-
     // Add useEffect to update Swiper when settings change
     useEffect(() => {
         if (swiperInstance) {
-            // Update general settings
-            // swiperInstance.params.slidesPerView = 1;
 
             // Update carousel settings
-
             if (sliderType === 'carousel') {
                 swiperInstance.params.slidesPerView = deviceType === 'Desktop' ? carouselPerColumn.Desktop : deviceType === 'Tablet' ? carouselPerColumn.Tablet : carouselPerColumn.Mobile;
                 swiperInstance.params.spaceBetween = deviceType === 'Desktop' ? carouselPerColumnGap.Desktop : deviceType === 'Tablet' ? carouselPerColumnGap.Tablet : carouselPerColumnGap.Mobile;
@@ -376,32 +333,12 @@ const Edit = (props) => {
         }
     }, [swiperInstance, autoplay, pauseOnHover, stopOnLastSlide]);
 
-    // Add useEffect to handle mousewheel updates
-    useEffect(() => {
-        if (swiperInstance) {
-            // Update mousewheel settings
-            if (enableMouseWheel) {
-                swiperInstance.mousewheel.enable();
-            } else {
-                swiperInstance.mousewheel.disable();
-            }
-            swiperInstance.update();
-        }
-    }, [swiperInstance, enableMouseWheel]);
-
 
     useEffect( () => {
 		if ( swiperInstance ) {
 			swiperInstance.update();
 		}
 	}, [ props ] );
-
-    useEffect( () => {
-		if ( swiperInstance ) {
-			setSwiperNavigationPagination( swiperInstance );
-		}
-	}, [ displayArrows, displayDots, paginationType ] );
-
 
     /* Custom Icon */
     useEffect(() => {
@@ -431,6 +368,10 @@ const Edit = (props) => {
         sliderArrowPosition,
         sliderArrowsIconLeft,
         sliderArrowsIconRight,
+        sliderArrowsIconLeftAlign,
+        sliderArrowsIconRightAlign,
+        sliderArrowsIconLeftImageUrl,
+        sliderArrowsIconRightImageUrl
     ]);
 
     useEffect( () => {
@@ -480,7 +421,6 @@ const Edit = (props) => {
 		);
 	};
 
-
     return (
         <>
             <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
@@ -509,15 +449,6 @@ const Edit = (props) => {
                             ? {
                                     nextEl: '#block-' + clientId + ' .swiper-button-next',
                                     prevEl: '#block-' + clientId + ' .swiper-button-prev',
-                            }
-                            : false
-                    }
-                    pagination={
-                        displayDots
-                            ? {
-                                    el: '#block-' + clientId + ' .swiper-pagination',
-                                    clickable: true,
-                                    type: paginationType,
                             }
                             : false
                     }
@@ -551,15 +482,24 @@ const Edit = (props) => {
                         </>
                     ) }
 
-                    {sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (
+                    {sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (sliderArrowsIconLeftAlign === 'icon' || sliderArrowsIconRightAlign === 'icon') && (
                         <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
                             <div className="swiper-button-prev" ref={ sliderNavPrevRef }>{renderSVG(sliderArrowsIconLeft)}</div>
                             <div className="swiper-button-next" ref={ sliderNavNextRef }>{renderSVG(sliderArrowsIconRight)}</div>
                         </div>
                     )}
+
+                    {sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (sliderArrowsIconLeftAlign === 'image' || sliderArrowsIconRightAlign === 'image') && (sliderArrowsIconLeftImageUrl || sliderArrowsIconRightImageUrl) && (
+                        <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+                            <div className="swiper-button-prev" ref={ sliderNavPrevRef }>
+                                <img src={sliderArrowsIconLeftImageUrl} alt={sliderArrowsIconLeftImageAlt} />
+                            </div>
+                            <div className="swiper-button-next" ref={ sliderNavNextRef }>
+                                <img src={sliderArrowsIconRightImageUrl} alt={sliderArrowsIconRightImageAlt} />
+                            </div>
+                        </div>
+                    )}
                 </Swiper>
-                
-                { displayDots && <div className="swiper-pagination" ref={ sliderPaginationRef }></div> }
                 
                 { displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (
                     <>
@@ -570,10 +510,21 @@ const Edit = (props) => {
                     </>
                 ) }
 
-                {sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (
+                {sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (sliderArrowsIconLeftAlign === 'icon' || sliderArrowsIconRightAlign === 'icon') && (
                     <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
                         <div className="swiper-button-prev" ref={ sliderNavPrevRef }>{renderSVG(sliderArrowsIconLeft)}</div>
                         <div className="swiper-button-next" ref={ sliderNavNextRef }>{renderSVG(sliderArrowsIconRight)}</div>
+                    </div>
+                )}
+
+                {sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (sliderArrowsIconLeftAlign === 'image' || sliderArrowsIconRightAlign === 'image') && (sliderArrowsIconLeftImageUrl || sliderArrowsIconRightImageUrl) && (
+                    <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+                        <div className="swiper-button-prev" ref={ sliderNavPrevRef }>
+                            <img src={sliderArrowsIconLeftImageUrl} alt={sliderArrowsIconLeftImageAlt} />
+                        </div>
+                        <div className="swiper-button-next" ref={ sliderNavNextRef }>
+                            <img src={sliderArrowsIconRightImageUrl} alt={sliderArrowsIconRightImageAlt} />
+                        </div>
                     </div>
                 )}
 
