@@ -3,6 +3,8 @@ import { __ } from '@wordpress/i18n';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Button, ButtonGroup, BaseControl } from '@wordpress/components';
+import FB_RangeUnitsType from '../../components/unit-control';
+import { RangeControl } from '@wordpress/components';
 
 
 export default function ColumnSortableItem({ id, columnItem, handleChangeItem, handleDeleteItem, handleDuplicateItem, index, containerColumnsItem }) {
@@ -38,10 +40,46 @@ export default function ColumnSortableItem({ id, columnItem, handleChangeItem, h
 		{ title: 'Min/Max', label: __('Min/Max', 'frontis-blocks'), value: "min-max" },
 		{ title: 'Custom', label: __('Custom', 'frontis-blocks'), value: "custom" },
 	];
+    const UNIT_TYPES = [
+		{ title: 'Fr', label: __('Fr', 'frontis-blocks'), value: "fr" },
+		{ title: 'Px', label: __('Px', 'frontis-blocks'), value: "px" },
+		{ title: '%', label: __('%', 'frontis-blocks'), value: "%" }
+	];
 
     const handleColumnTypeChange = (value) => {
         handleChangeItem(columnItem.id, 'type', value);
     };
+
+    const setWidthRangeValue = (value) => {
+		handleChangeItem(columnItem.id, 'width', value);
+	};
+    const setWidthRangeUnit = (unit) => {
+		handleChangeItem(columnItem.id, 'widthUnits', unit);
+	};
+    const resetWidthRangeValue = () => {
+		setWidthRangeValue(columnItem.widthUnits === '%' ? 100 : 1);
+	};
+
+    const setMinRangeValue = (value) => {
+		handleChangeItem(columnItem.id, 'min', value);
+	};
+    const setMinRangeUnit = (unit) => {
+		handleChangeItem(columnItem.id, 'minUnits', unit);
+	};
+    const resetMinRangeValue = () => {
+		setMinRangeValue(columnItem.minUnits === '%' ? 100 : 1);
+	};
+
+    const setMaxRangeValue = (value) => {
+		handleChangeItem(columnItem.id, 'max', value);
+	};
+    const setMaxRangeUnit = (unit) => {
+		handleChangeItem(columnItem.id, 'maxUnits', unit);
+	};
+    const resetMaxRangeValue = () => {
+		setMaxRangeValue(columnItem.maxUnits === '%' ? 100 : 1);
+	};
+
 
     return (
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
@@ -77,7 +115,6 @@ export default function ColumnSortableItem({ id, columnItem, handleChangeItem, h
                     <BaseControl
 							id="fb-setting-alignment"
 							className="fb-advanced-alignment list"
-                            label={__("Grid Property", "frontis-blocks")}
 						>
 							<ButtonGroup className="fb-advanced-alignment-group-btn">
 								{COLUMN_TYPE.map((item, key) => (
@@ -92,6 +129,99 @@ export default function ColumnSortableItem({ id, columnItem, handleChangeItem, h
 								))}
 							</ButtonGroup>
 						</BaseControl>
+                    
+                    
+                    {columnItem.type === 'min-max' && <div className="fb-setting-spacing-container">
+                        <div className="fb-setting-spacing-inner-container">
+                            <div className="fb-setting-spacing-label-container">
+                                    <p className="fb-setting-spacing-label">{__("Min", "frontis-blocks")}</p>
+                                <div className="fb-unit-wrapper">
+                                        <div className="fb-reset-control-container" onClick={resetMinRangeValue}>
+                                            <button className="fb-reset-button fb-reset-has-value">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10.6817 6.23162H14.0101V6.23044M1.98926 13.0956V9.76718M1.98926 9.76718L5.31768 9.76718M1.98926 9.76718L4.10985 11.8892C4.7702 12.5507 5.60824 13.0527 6.57607 13.312C9.51014 14.0982 12.526 12.357 13.3122 9.42292M2.68699 6.57591C3.47317 3.64184 6.48902 1.90064 9.42308 2.68682C10.3909 2.94615 11.229 3.4481 11.8893 4.10969L14.0101 6.23044M14.0101 2.90322V6.23044" stroke="#555E72"></path></svg>
+                                            </button>
+                                        </div>
+
+                                        <FB_RangeUnitsType
+                                            currentUnit={columnItem.minUnits}
+                                            unitTypes={UNIT_TYPES}
+                                            onUnitChange={setMinRangeUnit}
+                                        />
+                                </div>
+
+                            </div>
+                            <RangeControl
+                                value={columnItem.min}
+                                onChange={setMinRangeValue}
+                                min={1}
+                                max={columnItem.minUnits === '%' ? 100 : columnItem.minUnits === 'fr' ? 12 : 1000}
+                                step={1}
+                                resetFallbackValue={columnItem.minUnits === '%' ? 100 : columnItem.minUnits === 'px' ? 10 : 1}
+                            />
+                        </div>
+                    </div>}
+
+                    {columnItem.type === 'auto' && <p style={{fontStyle: 'italic', color: '#555E72', fontSize: '12px', marginBottom: '24px', marginTop: '-10px'}}>The column-width will be automatic.</p>}
+
+                    {columnItem.type === 'min-max' && <div className="fb-setting-spacing-container">
+                        <div className="fb-setting-spacing-inner-container">
+                            <div className="fb-setting-spacing-label-container">
+                                    <p className="fb-setting-spacing-label">{__("Max", "frontis-blocks")}</p>
+                                <div className="fb-unit-wrapper">
+                                        <div className="fb-reset-control-container" onClick={resetMaxRangeValue}>
+                                            <button className="fb-reset-button fb-reset-has-value">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10.6817 6.23162H14.0101V6.23044M1.98926 13.0956V9.76718M1.98926 9.76718L5.31768 9.76718M1.98926 9.76718L4.10985 11.8892C4.7702 12.5507 5.60824 13.0527 6.57607 13.312C9.51014 14.0982 12.526 12.357 13.3122 9.42292M2.68699 6.57591C3.47317 3.64184 6.48902 1.90064 9.42308 2.68682C10.3909 2.94615 11.229 3.4481 11.8893 4.10969L14.0101 6.23044M14.0101 2.90322V6.23044" stroke="#555E72"></path></svg>
+                                            </button>
+                                        </div>
+
+                                        <FB_RangeUnitsType
+                                            currentUnit={columnItem.maxUnits}
+                                            unitTypes={UNIT_TYPES}
+                                            onUnitChange={setMaxRangeUnit}
+                                        />
+                                </div>
+
+                            </div>
+                            <RangeControl
+                                value={columnItem.max}
+                                onChange={setMaxRangeValue}
+                                min={1}
+                                max={columnItem.maxUnits === '%' ? 100 : columnItem.maxUnits === 'fr' ? 12 : 1000}
+                                step={1}
+                                resetFallbackValue={columnItem.maxUnits === '%' ? 100 : 1}
+                            />
+                        </div>
+                    </div>}
+
+                    {columnItem.type === 'custom' && <div className="fb-setting-spacing-container">
+                        <div className="fb-setting-spacing-inner-container">
+                            <div className="fb-setting-spacing-label-container">
+                                    <p className="fb-setting-spacing-label">{__("Width", "frontis-blocks")}</p>
+                                <div className="fb-unit-wrapper">
+                                        <div className="fb-reset-control-container" onClick={resetWidthRangeValue}>
+                                            <button className="fb-reset-button fb-reset-has-value">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10.6817 6.23162H14.0101V6.23044M1.98926 13.0956V9.76718M1.98926 9.76718L5.31768 9.76718M1.98926 9.76718L4.10985 11.8892C4.7702 12.5507 5.60824 13.0527 6.57607 13.312C9.51014 14.0982 12.526 12.357 13.3122 9.42292M2.68699 6.57591C3.47317 3.64184 6.48902 1.90064 9.42308 2.68682C10.3909 2.94615 11.229 3.4481 11.8893 4.10969L14.0101 6.23044M14.0101 2.90322V6.23044" stroke="#555E72"></path></svg>
+                                            </button>
+                                        </div>
+
+                                        <FB_RangeUnitsType
+                                            currentUnit={columnItem.widthUnits}
+                                            unitTypes={UNIT_TYPES}
+                                            onUnitChange={setWidthRangeUnit}
+                                        />
+                                </div>
+
+                            </div>
+                            <RangeControl
+                                value={columnItem.width}
+                                onChange={setWidthRangeValue}
+                                min={1}
+                                max={columnItem.widthUnits === '%' ? 100 : columnItem.widthUnits === 'fr' ? 12 : 1000}
+                                step={1}
+                                resetFallbackValue={columnItem.widthUnits === '%' ? 100 : 1}
+                            />
+                        </div>
+                    </div>}
                 </div>
             )}
         </li>

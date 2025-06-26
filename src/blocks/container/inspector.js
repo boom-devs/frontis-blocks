@@ -32,6 +32,7 @@ import FB_InputControl from '@Components/input-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import { SortableContext } from "@dnd-kit/sortable";
 import ColumnSortableItem from "./columnSortableItem";
+import RowSortableItem from "./rowSortableItem";
 
 const Inspector = (props) => {
 	let deviceType = useDeviceType();
@@ -272,11 +273,11 @@ const Inspector = (props) => {
             id: `column-${containerColumnsItem[deviceType].length + 1}`, 
             title: `Column ${containerColumnsItem[deviceType].length + 1}`,
 			type: 'auto',
-			width: '1',
+			width: 1,
 			widthUnits: 'fr',
-			min: '10',
+			min: 10,
 			minUnits: 'px',
-			max: '1',
+			max: 1,
 			maxUnits: 'fr',
         };
         setAttributes({ containerColumnsItemList: {...containerColumnsItemList, [deviceType]: [...containerColumnsItemList[deviceType], newItem]}  });
@@ -347,10 +348,93 @@ const Inspector = (props) => {
 	  
 		setContainerColumnsItem({...containerColumnsItem, [deviceType]: updatedItems});
 		setAttributes({containerColumnsItemList: {...containerColumnsItemList,[deviceType]: updatedItems}});
+	};
+
+	const handleRowAddItem = () => {
+        const newItem = {
+            id: `row-${containerRowsItem[deviceType].length + 1}`, 
+            title: `Row ${containerRowsItem[deviceType].length + 1}`,
+			type: 'auto',
+			width: 1,
+			widthUnits: 'fr',
+			min: 10,
+			minUnits: 'px',
+			max: 1,
+			maxUnits: 'fr',
+        };
+        setAttributes({ containerRowsItemList: {...containerRowsItemList, [deviceType]: [...containerRowsItemList[deviceType], newItem]}  });
+        setContainerRowsItem({ ...containerRowsItem, [deviceType]: [...containerRowsItem[deviceType], newItem] });
+    };
+
+    const handleRowChangeItem = (id, key, value) => {
+		let updatedItems = [];
+
+		if(deviceType === 'Desktop') {
+			updatedItems = containerRowsItem.Desktop.map(item => {
+				if (item.id === id) {
+					return { ...item, [key]: value };
+				}
+				return item;
+			});
+		} else if(deviceType === 'Tablet') {
+			updatedItems = containerRowsItem.Tablet.map(item => {
+				if (item.id === id) {
+					return { ...item, [key]: value };
+				}
+				return item;
+			});
+		} else if(deviceType === 'Mobile') {
+			updatedItems = containerRowsItem.Mobile.map(item => {
+				if (item.id === id) {
+					return { ...item, [key]: value };
+				}
+				return item;
+			});
+		}
+        
+        setContainerRowsItem({ ...containerRowsItem, [deviceType]: updatedItems });
+        setAttributes({ containerRowsItemList: {...containerRowsItemList, [deviceType]: updatedItems} });
+    };
+
+    const handleRowDeleteItem = (id) => {
+		let updatedItems = [];
+		if(deviceType === 'Desktop') {
+			updatedItems = containerRowsItem.Desktop.filter(item => item.id !== id);
+		} else if(deviceType === 'Tablet') {
+			updatedItems = containerRowsItem.Tablet.filter(item => item.id !== id);
+		} else if(deviceType === 'Mobile') {
+			updatedItems = containerRowsItem.Mobile.filter(item => item.id !== id);
+		}
+
+        setAttributes({ containerRowsItemList: {...containerRowsItemList, [deviceType]: updatedItems} });
+        setContainerRowsItem({ ...containerRowsItem, [deviceType]: updatedItems });
+
+    };
+
+
+	const handleRowDuplicateItem = (id) => {
+
+		const items = containerRowsItem?.[deviceType] ?? [];
+	  
+		const srcIndex = items.findIndex((item) => item.id === id);
+		if (srcIndex === -1) return;
+	  
+		const itemToDuplicate = items[srcIndex];
+	  
+		const newId = `row-${containerRowsItem[deviceType].length + 1}`;
+		const newTitle = `Row ${containerRowsItem[deviceType].length + 1}`;
+	  
+		const newItem = { ...itemToDuplicate, id: newId, title: newTitle };
+	  
+		const updatedItems = [...items, newItem];
+	  
+		setContainerRowsItem({...containerRowsItem, [deviceType]: updatedItems});
+		setAttributes({containerRowsItemList: {...containerRowsItemList,[deviceType]: updatedItems}});
 	  };
 	  
 
 	console.log(containerColumnsItemList);
+	console.log(containerRowsItemList);
 
 	// Handle full width content boxed width
 	const fullWidthContentBoxedWidthFn = (width) => {
@@ -907,28 +991,41 @@ const Inspector = (props) => {
 							</BaseControl>
 						}
 
-						<BaseControl
-							id="fb-setting-alignment"
-							className="fb-advanced-alignment list"
-						>
-							<ButtonGroup className="fb-advanced-alignment-group-btn">
-								{CHILDREN_WIDTH.map((item, key) => (
-									<Button
-										key={key}
-										onClick={() =>
-											setAttributes({
-												containerChildrenWidth: item.value
-											})
-										}
-										title={item.title}
-										className={`fb-advanced-alignment-single-btn ${containerChildrenWidth === item.value ? 'active' : ''}`}
-									>
-										{item.label}
+						{containerLayout === 'grid' &&
+							<BaseControl
+								id="fb-setting-alignment"
+								className="fb-advanced-alignment list"
+							>
+								<FB_ResponsiveControl
+									labelText={__('Rows', 'frontis-blocks')}
+									device={deviceType}
+								/>
+								<br />
+								<div className="fb-feature-wrapper">
+									<SortableContext items={containerRowsItem[deviceType].map(item => item.id)}>
+										<ul className='dnd-items-wrapper'>
+											{containerRowsItem[deviceType].map((item, index) => (
+												<RowSortableItem
+													key={item.id}
+													id={item.id}
+													rowItem={item}
+													handleChangeItem={handleRowChangeItem}
+													handleDeleteItem={handleRowDeleteItem}
+													handleDuplicateItem={handleRowDuplicateItem}
+													containerRowsItem={containerRowsItem[deviceType]}
+													index={index}
+												/>
+											))}
+										</ul>
+									</SortableContext>
+									<Button isPrimary onClick={handleRowAddItem}>
+										{__("Add Row", "frontis-blocks")}
 									</Button>
-								))}
-							</ButtonGroup>
-						</BaseControl>
+								</div>
+							</BaseControl>
+						}
 
+						{containerLayout === 'flex' && <>
 						<BaseControl
 							id="fb-setting-alignment"
 							className="fb-advanced-alignment list"
@@ -958,6 +1055,31 @@ const Inspector = (props) => {
 								))}
 							</ButtonGroup>
 						</BaseControl>
+
+						<BaseControl
+							id="fb-setting-alignment"
+							className="fb-advanced-alignment list"
+							label={__("Children Width", "frontis-blocks")}
+						>
+							<ButtonGroup className="fb-advanced-alignment-group-btn">
+								{CHILDREN_WIDTH.map((item, key) => (
+									<Button
+										key={key}
+										onClick={() =>
+											setAttributes({
+												containerChildrenWidth: item.value
+											})
+										}
+										title={item.title}
+										className={`fb-advanced-alignment-single-btn ${containerChildrenWidth === item.value ? 'active' : ''}`}
+									>
+										{item.label}
+									</Button>
+								))}
+							</ButtonGroup>
+						</BaseControl>
+						</>}
+
 						<BaseControl
 							id="fb-setting-alignment"
 							className="fb-advanced-alignment list"
@@ -967,7 +1089,7 @@ const Inspector = (props) => {
 								device={deviceType}
 							/>
 							<br />
-							<ButtonGroup className="fb-advanced-alignment-group-btn">
+							<ButtonGroup className={`fb-advanced-alignment-group-btn ${containerLayout === 'flex' && containerDirection[deviceType] !== 'row' && containerDirection[deviceType] !== 'row-reverse' ? 'column-direction' : ''}`}>
 								{ALIGN_ITEMS.map((item, key) => (
 									<Button
 										key={key}
@@ -987,6 +1109,7 @@ const Inspector = (props) => {
 								))}
 							</ButtonGroup>
 						</BaseControl>
+
 						<BaseControl
 							id="fb-setting-alignment"
 							className="fb-advanced-alignment list"
@@ -996,7 +1119,7 @@ const Inspector = (props) => {
 								device={deviceType}
 							/>
 							<br />
-							<ButtonGroup className="fb-advanced-alignment-group-btn justify-content-btn">
+							<ButtonGroup className={`fb-advanced-alignment-group-btn justify-content-btn ${containerLayout === 'flex' && containerDirection[deviceType] !== 'row' && containerDirection[deviceType] !== 'row-reverse' ? 'column-direction' : ''}`}>
 								{JUSTIFY_CONTENT.map((item, key) => (
 									<Button
 										key={key}
@@ -1016,6 +1139,8 @@ const Inspector = (props) => {
 								))}
 							</ButtonGroup>
 						</BaseControl>
+
+						{containerLayout === 'flex' && <>
 						<BaseControl
 							id="fb-setting-alignment"
 							className="fb-advanced-alignment list"
@@ -1045,6 +1170,7 @@ const Inspector = (props) => {
 								))}
 							</ButtonGroup>
 						</BaseControl>
+						</>}
 					</PanelBody>
 				</div>
 			{/* } */}
