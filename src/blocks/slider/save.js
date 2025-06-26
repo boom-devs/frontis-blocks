@@ -8,8 +8,6 @@ export default function save( props ) {
 
     const {
         blockId,
-        slideContent,
-        slideItem,
 		transitionSpeed,
         displayArrows,
 		displayDots,
@@ -21,7 +19,6 @@ export default function save( props ) {
         stopOnLastSlide,
         reverseDirection,
         enableMouseWheel,
-        effect,
         paginationType,
 		sliderGlobalWraperClass,
         sliderType,
@@ -29,23 +26,17 @@ export default function save( props ) {
         carouselEffect,
         carouselPerColumn,
         carouselPerColumnGap,
-
 		sliderArrowPositionType,
 		sliderArrowPosition,
-
         sliderArrowsIconSwitcher,
-
         sliderArrowsIconLeftAlign,
         sliderArrowsIconLeft,
         sliderArrowsIconLeftImageUrl,
         sliderArrowsIconLeftImageAlt,
-
         sliderArrowsIconRightAlign,
         sliderArrowsIconRight,
         sliderArrowsIconRightImageUrl,
         sliderArrowsIconRightImageAlt,
-		
-
 		sliderDesktopSwitcher,
 		sliderTabletSwitcher,
 		sliderMobileSwitcher,
@@ -53,26 +44,18 @@ export default function save( props ) {
 
 	const blockProps = useBlockProps.save();
 
-	    // Configure Swiper settings for frontend rendering
 		const swiperSettings = JSON.stringify({
-
-			// Set effect based on sliderType
 			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-
-			// Responsive breakpoints for Desktop, Tablet, and Mobile
 			...(sliderType === 'carousel' && {
 				breakpoints: {
-				// Mobile (e.g., screens < 768px)
 				0: {
 					slidesPerView: carouselPerColumn?.Mobile || 1,
 					spaceBetween: carouselPerColumnGap?.Mobile || 10,
 				},
-				// Tablet (e.g., screens >= 768px)
 				768: {
 					slidesPerView: carouselPerColumn?.Tablet || 2,
 					spaceBetween: carouselPerColumnGap?.Tablet || 15,
 				},
-				// Desktop (e.g., screens >= 1025px)
 				1025: {
 					slidesPerView: carouselPerColumn?.Desktop || 3,
 					spaceBetween: carouselPerColumnGap?.Desktop || 20,

@@ -2772,7 +2772,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             />
                         )}
 
-
                         <FB_TypographyControl
                             globalTypoControlActive={true}
                             globalTypoSwitcher={sliderFractionGlobalTypoSwitcher}
