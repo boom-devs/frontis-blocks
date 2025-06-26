@@ -148,13 +148,17 @@ const attributes = {
 
 	sliderArrowPositionType: {
         type: "string",
-        default: "inside",
+        default: "outside",
     },
 
     sliderArrowPosition: {
         type: "string",
         default: "center",
     },
+	sliderArrowDirection: {
+		type: "string",
+		default: "row",
+	},
     sliderArrowPositionTopOffset: {
         type: "object",
         default: {
@@ -235,20 +239,72 @@ const attributes = {
             Mobile: "px",
         },
     },
-
-
+	sliderArrowGap: {
+		type: "object",
+		default: {
+			Desktop: "10",
+			Tablet: "10",
+			Mobile: "10",
+		},
+	},
+	sliderArrowGapUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
 
 	sliderArrowsIconSwitcher: {
         type: "boolean",
         default: false,
     },
+
+	sliderArrowsIconLeftAlign: {
+		type: "string",
+		default: "icon",
+	},
+
 	sliderArrowsIconLeft: {
 		type: 'string',
 		default: 'arrow-left',
 	},
+
+	sliderArrowsIconLeftImageUrl: {
+		type: 'string',
+		default: '',
+	},
+	sliderArrowsIconLeftImageAlt: {
+		type: 'string',
+		default: '',
+	},
+	sliderArrowsIconLeftImageID: {
+		type: 'string',
+		default: '',
+	},
+
+	sliderArrowsIconRightAlign: {
+		type: "string",
+		default: "icon",
+	},
+
 	sliderArrowsIconRight: {
 		type: 'string',
 		default: 'arrow-right',
+	},
+
+	sliderArrowsIconRightImageUrl: {
+		type: 'string',
+		default: '',
+	},
+	sliderArrowsIconRightImageAlt: {
+		type: 'string',
+		default: '',
+	},
+	sliderArrowsIconRightImageID: {
+		type: 'string',
+		default: '',
 	},
 
 	/** Start Arrows Style */
