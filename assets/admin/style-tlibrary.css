@@ -1002,10 +1002,21 @@
   flex: 1;
   min-height: 0;
 }
+.fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content.sidebar-collapsed .fb-import-preview-panel {
+  width: 100%;
+  margin-left: 0;
+}
 .fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-form-panel {
+  position: relative;
   flex: 1;
   padding: 24px;
+  border-right: 1px solid #E1E3E8;
   overflow-y: auto;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-form-panel.collapsed {
+  pointer-events: none;
+  display: none;
 }
 .fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-form-panel .fb-form-section {
   margin-bottom: 32px;
@@ -1023,6 +1034,9 @@
   font-size: 24px;
   line-height: 32px;
   color: #0B0C0E;
+  border-bottom: 1px solid #E1E3E8;
+  margin: 14px 0 32px 0;
+  padding-bottom: 32px;
 }
 .fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-form-panel .fb-form-section .fb-form-group {
   margin-bottom: 20px;
@@ -1059,6 +1073,7 @@
 .fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-form-panel .fb-form-section .fb-form-group .fb-logo-upload {
   display: flex;
   align-items: center;
+  flex-direction: column;
   gap: 12px;
   margin-top: 10px;
 }
@@ -1068,20 +1083,23 @@
 .fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-form-panel .fb-form-section .fb-form-group .fb-logo-upload .fb-upload-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  border: 1px solid #D1D5DB;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+  border: 1px solid #E1E3E8;
   border-radius: 8px;
-  background: white;
-  color: #374151;
-  font-size: 14px;
-  font-weight: 500;
+  background: #F9F9F9;
+  color: #404655;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  width: 100%;
 }
 .fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-form-panel .fb-form-section .fb-form-group .fb-logo-upload .fb-upload-btn:hover {
-  background: #F9FAFB;
-  border-color: #9CA3AF;
+  border-color: #8891A5;
 }
 .fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-form-panel .fb-form-section .fb-form-group .fb-logo-upload .fb-upload-btn .fb-file-name {
   font-size: 14px;
@@ -1090,7 +1108,6 @@
 .fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-form-panel .fb-import-actions {
   margin-top: 32px;
   padding-top: 24px;
-  border-top: 1px solid #E5E7EB;
 }
 .fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-form-panel .fb-import-actions .fb-import-btn {
   width: 100%;
@@ -1108,11 +1125,7 @@
   align-items: center;
   justify-content: space-between;
 }
-.fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-form-panel .fb-import-actions .fb-import-btn:hover:not(:disabled) {
-  background: #EBF4FF;
-}
 .fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-form-panel .fb-import-actions .fb-import-btn:disabled {
-  background: #F9F9F9;
   cursor: not-allowed;
 }
 .fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-form-panel .fb-import-actions .fb-import-btn.back {
@@ -1135,6 +1148,7 @@
   background: #F9FAFB;
   border-right: 1px solid #E5E7EB;
   overflow-y: auto;
+  transition: width 0.3s ease, margin-left 0.3s ease;
 }
 .fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-preview-panel .fb-template-preview-card {
   background: white;
@@ -1180,27 +1194,41 @@
   padding: 4px 8px;
   border-radius: 6px;
 }
-
-/* Import Progress */
-.fb-import-progress {
+.fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-sidebar-collapse {
+  position: absolute;
+  top: 239px;
+  left: 335px;
+  cursor: pointer;
+  z-index: 10;
+  transition: left 0.1s ease;
+}
+.fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-sidebar-collapse.collapsed {
+  left: 0;
+}
+.fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-sidebar-collapse.collapsed svg {
+  transform: rotate(180deg);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.fb-full-site-import-modal .fb-full-site-import-container .fb-full-site-import-content .fb-import-sidebar-collapse svg {
+  transition: transform 0.3s ease;
+}
+.fb-full-site-import-modal .fb-import-progress {
   text-align: center;
 }
-
-.fb-progress-info {
+.fb-full-site-import-modal .fb-progress-info {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   margin-bottom: 16px;
 }
-
-.fb-progress-text {
+.fb-full-site-import-modal .fb-progress-text {
   font-size: 14px;
   font-weight: 500;
   color: #374151;
 }
-
-.fb-progress-bar {
+.fb-full-site-import-modal .fb-progress-bar {
   width: 100%;
   height: 8px;
   background: #E5E7EB;
@@ -1208,18 +1236,21 @@
   overflow: hidden;
   margin-bottom: 8px;
 }
-
-.fb-progress-fill {
+.fb-full-site-import-modal .fb-progress-fill {
   height: 100%;
   background: #3B82F6;
   border-radius: 4px;
   transition: width 0.3s ease;
 }
-
-.fb-progress-percentage {
+.fb-full-site-import-modal .fb-progress-percentage {
   font-size: 12px;
   font-weight: 600;
   color: #6B7280;
+}
+
+.fb-color-picker-popover {
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .fb-template-library-button-wrapper button {

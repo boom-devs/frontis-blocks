@@ -5,6 +5,7 @@ import { useState, useCallback } from "@wordpress/element";
 import { ClipLoader } from "react-spinners";
 import data from "./data.json";
 import TemplateHeader from "./template-header";
+import FullSiteImportConfig from "./full-site-import-config";
 
 const FullSiteImport = ({ template, onClose, onBack }) => {
     const [formData, setFormData] = useState({
@@ -20,6 +21,8 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
     const [importProgress, setImportProgress] = useState(0);
     const [currentStep, setCurrentStep] = useState('');
     const [activeTab, setActiveTab] = useState('patterns');
+    const [showConfigStep, setShowConfigStep] = useState(false);
+    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
     const handleInputChange = useCallback((field, value) => {
         setFormData(prev => ({
@@ -36,6 +39,26 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                 logo: file
             }));
         }
+    }, []);
+
+    const handleNext = useCallback(() => {
+        if (formData.siteName.trim()) {
+            setShowConfigStep(true);
+        }
+    }, [formData.siteName]);
+
+    const handleBackClick = useCallback(() => {
+        if (showConfigStep) {
+            setShowConfigStep(false);
+        } else {
+            if (onBack) {
+                onBack();
+            }
+        }
+    }, [showConfigStep, onBack]);
+
+    const handleSidebarToggle = useCallback(() => {
+        setIsSidebarCollapsed(prev => !prev);
     }, []);
 
     const handleImport = useCallback(async () => {
@@ -62,7 +85,6 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                 formData
             });
 
-            // Show success message or redirect
             alert('Site imported successfully!');
             onClose();
         } catch (error) {
@@ -74,6 +96,23 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
             setCurrentStep('');
         }
     }, [template?.id, formData, onClose]);
+
+    if (showConfigStep) {
+        return (
+            <FullSiteImportConfig
+                template={template}
+                formData={formData}
+                onClose={onClose}
+                onBack={() => setShowConfigStep(false)}
+                onImport={handleImport}
+                isImporting={isImporting}
+                importProgress={importProgress}
+                currentStep={currentStep}
+                isSidebarCollapsed = {isSidebarCollapsed}
+                setIsSidebarCollapsed = {setIsSidebarCollapsed}
+            />
+        );
+    }
 
     return (
         <div className="fb-full-site-import-modal">
@@ -87,9 +126,9 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                 />
 
                 {/* Content */}
-                <div className="fb-full-site-import-content">
+                <div className={`fb-full-site-import-content ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
                     {/* Left Panel - Sidebar */}
-                    <div className="fb-import-form-panel">
+                    <div className={`fb-import-form-panel ${isSidebarCollapsed ? 'collapsed' : ''}`}>
                         <div className="fb-form-section">
                             <span className="fb-template-label">Template Name:</span>
                             <h6 className="fb-template-title">{template?.title || 'Renovate - Home Decor Website Template'}</h6>
@@ -129,10 +168,11 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                                         className="fb-file-input"
                                     />
                                     <label htmlFor="logoUpload" className="fb-upload-btn">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M17.5 12.5V15.8333C17.5 16.2754 17.3244 16.6993 17.0118 17.0118C16.6993 17.3244 16.2754 17.5 15.8333 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0118C2.67559 16.6993 2.5 16.2754 2.5 15.8333V12.5M14.1667 6.66667L10 2.5M10 2.5L5.83333 6.66667M10 2.5V12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M17.4776 9.01106C17.485 9.01102 17.4925 9.01101 17.5 9.01101C19.9853 9.01101 22 11.0294 22 13.5193C22 15.8398 20.25 17.7508 18 18M17.4776 9.01106C17.4924 8.84606 17.5 8.67896 17.5 8.51009C17.5 5.46695 15.0376 3 12 3C9.12324 3 6.76233 5.21267 6.52042 8.03192M17.4776 9.01106C17.3753 10.1476 16.9286 11.1846 16.2428 12.0165M6.52042 8.03192C3.98398 8.27373 2 10.4139 2 13.0183C2 15.4417 3.71776 17.4632 6 17.9273M6.52042 8.03192C6.67826 8.01687 6.83823 8.00917 7 8.00917C8.12582 8.00917 9.16474 8.38194 10.0005 9.01101" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M12 13V21M12 13C11.2998 13 9.99153 14.9943 9.5 15.5M12 13C12.7002 13 14.0085 14.9943 14.5 15.5" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
-                                        Choose Logo
+                                        Click to upload SVG, PNG, JPG or GIF (max. 800x400 px)SVG, PNG, JPG or GIF (max. 800x400 px)
                                     </label>
                                     {formData.logo && (
                                         <span className="fb-file-name">{formData.logo.name}</span>
@@ -142,49 +182,30 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                         </div>
 
                         <div className="fb-import-actions">
-                            {isImporting ? (
-                                <div className="fb-import-progress">
-                                    <div className="fb-progress-info">
-                                        <ClipLoader color="#3B82F6" size={20} />
-                                        <span className="fb-progress-text">{currentStep}</span>
-                                    </div>
-                                    <div className="fb-progress-bar">
-                                        <div
-                                            className="fb-progress-fill"
-                                            style={{ width: `${importProgress}%` }}
-                                        ></div>
-                                    </div>
-                                    <span className="fb-progress-percentage">{Math.round(importProgress)}%</span>
-                                </div>
-                            ) : (
-                                <>
-                                    <div className="fb-import-step-btn-wrapper">
-
-                                        <button
-                                            className="fb-import-btn next"
-                                            onClick={handleImport}
-                                            disabled={!formData.siteName}
-                                        >
-                                            Next
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                        <button
-                                            className="fb-import-btn back"
-                                            onClick={handleImport}
-                                            disabled={!formData.siteName}
-                                        >
-                                            Back
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="#6A758E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </>
-                            )}
+                            <div className="fb-import-step-btn-wrapper">
+                                <button
+                                    className="fb-import-btn next"
+                                    onClick={handleNext}
+                                    disabled={!formData.siteName.trim()}
+                                >
+                                    Next
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                                <button
+                                    className="fb-import-btn back"
+                                    onClick={handleBackClick}
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="#6A758E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    Back
+                                </button>
+                            </div>
                         </div>
                     </div>
+                    
                     {/* Right Panel - Preview */}
                     <div className="fb-import-preview-panel">
                         <div className="fb-template-preview-card">
@@ -203,6 +224,25 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    
+                    {/* Collapse Button */}
+                    <div 
+                        className={`fb-import-sidebar-collapse ${isSidebarCollapsed ? 'collapsed' : ''}`}
+                        onClick={handleSidebarToggle}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
+                            <path d="M17 0.5C26.1127 0.5 33.5 7.8873 33.5 17C33.5 26.1127 26.1127 33.5 17 33.5C7.8873 33.5 0.5 26.1127 0.5 17C0.5 7.8873 7.8873 0.5 17 0.5Z" fill="white" />
+                            <path d="M17 0.5C26.1127 0.5 33.5 7.8873 33.5 17C33.5 26.1127 26.1127 33.5 17 33.5C7.8873 33.5 0.5 26.1127 0.5 17C0.5 7.8873 7.8873 0.5 17 0.5Z" stroke="#E1E3E8" />
+                            <path 
+                                d="M19.1875 21.375L14.8125 17L19.1875 12.625" 
+                                stroke="#555E72" 
+                                stroke-width="1.5" 
+                                stroke-linecap="round" 
+                                stroke-linejoin="round"
+                                className={isSidebarCollapsed ? 'rotated' : ''}
+                            />
+                        </svg>
                     </div>
                 </div>
             </div>
