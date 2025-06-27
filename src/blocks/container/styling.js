@@ -944,10 +944,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			...selectors[ containerFlexSelector ],
 		};
 		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
-			'width': containerChildrenWidth === 'full' ? '100%' : containerChildrenWidth === 'auto' ? 'auto' : '',
+			'width': containerChildrenWidth === 'full' ? '100%' : containerChildrenWidth === 'auto' ? 'auto !important' : '',
 		}
 		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
-			'width': containerChildrenWidth === 'full' ? '100%' : containerChildrenWidth === 'auto' ? 'auto' : '',
+			'width': containerChildrenWidth === 'full' ? '100%' : containerChildrenWidth === 'auto' ? 'auto !important' : '',
 		}
 	}
 	if( containerLayout === 'grid' ){
