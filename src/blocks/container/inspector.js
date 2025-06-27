@@ -125,7 +125,8 @@ const Inspector = (props) => {
 			containerBgOverlayHoverBackgroundImageRepeat,
 			containerBgOverlayHoverBackgroundImageSize,
 
-			containerHtmlTag,
+			htmlTag,
+			htmlTagLink,
 			containerDesktopSwitcher,
 			containerTabletSwitcher,
 			containerMobileSwitcher,
@@ -914,18 +915,26 @@ const Inspector = (props) => {
 						]}
 					/>
 
-					<ToggleControl
+					{/* <ToggleControl
 						label={__("Equal Height", "frontis-blocks")}
 						checked={containerEqualHeight}
 						onChange={(value) => setAttributes({ containerEqualHeight: value })}
-					/>
+					/> */}
 
 					<SelectControl
-							label={__("HTML Tag", "frontis-blocks")}
-							value={containerHtmlTag}
-							options={HTML_TAG}
-							onChange={(value) => setAttributes({ containerHtmlTag: value })}
+						label={__("HTML Tag", "frontis-blocks")}
+						value={htmlTag}
+						options={HTML_TAG}
+						onChange={(value) => setAttributes({ htmlTag: value })}
+					/>
+					{htmlTag === 'a' &&
+						<FB_InputControl
+							label={__("Tag Link", "frontis-blocks")}
+							value={htmlTagLink.url}
+							onChangeValue={(value) => setAttributes({ htmlTagLink: { ...htmlTagLink, url: value } })}
+							helpText={__("Enter the custom link for the container.", "frontis-blocks")}
 						/>
+					}
 				</PanelBody>
 			</div>
 			{/* {isBlockRootParent && */}
