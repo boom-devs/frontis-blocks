@@ -1,27 +1,21 @@
 import { __ } from "@wordpress/i18n";
-import { InspectorControls, useBlockProps } from "@wordpress/block-editor";
 import {
 	BaseControl,
 	Button,
 	ButtonGroup,
 	PanelBody,
-	RangeControl,
 	SelectControl,
 	Dropdown,
-	TabPanel,
 	ToggleControl
 } from "@wordpress/components";
-import { useEffect, useState } from "@wordpress/element";
+import {useState } from "@wordpress/element";
 
-import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_Spacing from "@Components/spacing";
 import FB_Range from "@Components/range";
-import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import { useDeviceType } from "@Config/displayType";
-
 import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_ColorControl from '@Components/color-control';
@@ -38,10 +32,7 @@ const Inspector = (props) => {
 	let deviceType = useDeviceType();
 	console.log(deviceType);
 	const {
-		isSelected,
-		attributes,
 		attributes: {
-			p_block_id,
 			containerType,
 			containerTypeFull,
 			containerCustomWidth,
@@ -172,17 +163,11 @@ const Inspector = (props) => {
 
 			containerGlobalBoxShadowSwitcher,
 			containerGlobalBoxShadowValues,
-			containerGlobalBoxShadowCssValue,
 			containerGlobalHoverBoxShadowValues,
-			containerGlobalHoverBoxShadowCssValue,
-
 			containerGlobalCustomCSS,
-			containerGlobalCustomCSSValue,
 			containerGlobalCustomCSSID,
 			containerGlobalCustomCSSClass
 		},
-		clientId,
-
 		setAttributes
 	} = props;
 
@@ -271,7 +256,7 @@ const Inspector = (props) => {
 
 	const handleColumnAddItem = () => {
         const newItem = {
-            id: `column-${containerColumnsItem[deviceType].length + 1}`, 
+            id: `column-${containerColumnsItem[deviceType].length + 1}`,
             title: `Column ${containerColumnsItem[deviceType].length + 1}`,
 			type: 'auto',
 			width: 1,
@@ -310,7 +295,7 @@ const Inspector = (props) => {
 				return item;
 			});
 		}
-        
+
         setContainerColumnsItem({ ...containerColumnsItem, [deviceType]: updatedItems });
         setAttributes({ containerColumnsItemList: {...containerColumnsItemList, [deviceType]: updatedItems} });
     };
@@ -334,26 +319,26 @@ const Inspector = (props) => {
 	const handleColumnDuplicateItem = (id) => {
 
 		const items = containerColumnsItem?.[deviceType] ?? [];
-	  
+
 		const srcIndex = items.findIndex((item) => item.id === id);
 		if (srcIndex === -1) return;
-	  
+
 		const itemToDuplicate = items[srcIndex];
-	  
+
 		const newId = `column-${containerColumnsItem[deviceType].length + 1}`;
 		const newTitle = `Column ${containerColumnsItem[deviceType].length + 1}`;
-	  
+
 		const newItem = { ...itemToDuplicate, id: newId, title: newTitle };
-	  
+
 		const updatedItems = [...items, newItem];
-	  
+
 		setContainerColumnsItem({...containerColumnsItem, [deviceType]: updatedItems});
 		setAttributes({containerColumnsItemList: {...containerColumnsItemList,[deviceType]: updatedItems}});
 	};
 
 	const handleRowAddItem = () => {
         const newItem = {
-            id: `row-${containerRowsItem[deviceType].length + 1}`, 
+            id: `row-${containerRowsItem[deviceType].length + 1}`,
             title: `Row ${containerRowsItem[deviceType].length + 1}`,
 			type: 'auto',
 			width: 1,
@@ -392,7 +377,7 @@ const Inspector = (props) => {
 				return item;
 			});
 		}
-        
+
         setContainerRowsItem({ ...containerRowsItem, [deviceType]: updatedItems });
         setAttributes({ containerRowsItemList: {...containerRowsItemList, [deviceType]: updatedItems} });
     };
@@ -412,30 +397,20 @@ const Inspector = (props) => {
 
     };
 
-
 	const handleRowDuplicateItem = (id) => {
 
 		const items = containerRowsItem?.[deviceType] ?? [];
-	  
 		const srcIndex = items.findIndex((item) => item.id === id);
 		if (srcIndex === -1) return;
-	  
+
 		const itemToDuplicate = items[srcIndex];
-	  
 		const newId = `row-${containerRowsItem[deviceType].length + 1}`;
 		const newTitle = `Row ${containerRowsItem[deviceType].length + 1}`;
-	  
 		const newItem = { ...itemToDuplicate, id: newId, title: newTitle };
-	  
 		const updatedItems = [...items, newItem];
-	  
 		setContainerRowsItem({...containerRowsItem, [deviceType]: updatedItems});
 		setAttributes({containerRowsItemList: {...containerRowsItemList,[deviceType]: updatedItems}});
 	  };
-	  
-
-	console.log(containerColumnsItemList);
-	console.log(containerRowsItemList);
 
 	// Handle full width content boxed width
 	const fullWidthContentBoxedWidthFn = (width) => {
@@ -462,11 +437,6 @@ const Inspector = (props) => {
 
 	const customContentWidthFnUnitsFn = (units) => {
 		setAttributes({ customWidthUnits: units });
-	}
-
-	// Handling responsive
-	const handleResponsive = (attr) => {
-		// setDeviceType(attr.deviceType, false);
 	}
 
 	// Container type custom width
@@ -692,7 +662,6 @@ const Inspector = (props) => {
                     break;
             }
         }
-
     }
 
     const handleContainerBorderCombineBtn = () => {
@@ -761,7 +730,6 @@ const Inspector = (props) => {
                     break;
             }
         }
-
     }
 
     const handleContainerBorderRadiusCombineBtn = () => {
@@ -1268,7 +1236,7 @@ const Inspector = (props) => {
 							deviceType={deviceType}
 							positionType={containerPositionType}
 							setPositionType={(value) => setAttributes({ containerPositionType: value })}
-																			
+
 							HZOrientationType={containerHZOrientationType}
 							setHZOrientationType={(value) =>
 								setAttributes({ containerHZOrientationType: value })
@@ -1277,7 +1245,7 @@ const Inspector = (props) => {
 							setVROrientationType={(value) =>
 								setAttributes({ containerVROrientationType: value })
 							}
-																				
+
 							HZLeftOffset={containerHZLeftOffset}
 							setHZLeftOffset={(value) => setAttributes({ containerHZLeftOffset: value })}
 							HZLeftOffsetUnits={containerHZLeftOffsetUnits}
@@ -1286,7 +1254,7 @@ const Inspector = (props) => {
 							setHZRightOffset={(value) => setAttributes({ containerHZRightOffset: value })}
 							HZRightOffsetUnits={containerHZRightOffsetUnits}
 							setHZRightOffsetUnits={(value) => setAttributes({ containerHZRightOffsetUnits: value })}
-																			
+
 							VRTopOffset={containerVRTopOffset}
 							setVRTopOffset={(value) => setAttributes({ containerVRTopOffset: value })}
 							VRTopOffsetUnits={containerVRTopOffsetUnits}
@@ -1359,7 +1327,7 @@ const Inspector = (props) => {
 							globalSwitcher={containerBorderColorSwitcher}
 							setGlobalSwitcher={(value) => setAttributes({ containerBorderColorSwitcher: value })}
 						/>
-						
+
 						{containerBorderColorSwitcher === 'normal' && (
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
@@ -1367,7 +1335,7 @@ const Inspector = (props) => {
 								setGlobalColor={(value) => setAttributes({ containerBorderColor: value })}
 							/>
 						)}
-						
+
 						{containerBorderColorSwitcher === 'hover' && (
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
@@ -1390,7 +1358,7 @@ const Inspector = (props) => {
 							setAttributes={setAttributes}
 						/>
 
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Border Radius", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleContainerBorderRadiusUnitsHandler}
@@ -1409,7 +1377,7 @@ const Inspector = (props) => {
 							globalSwitcher={containerGlobalBoxShadowSwitcher}
 							setGlobalSwitcher={(value) => setAttributes({ containerGlobalBoxShadowSwitcher: value })}
 						/>
-						
+
 						{containerGlobalBoxShadowSwitcher === 'normal' && (
 							<FB_BoxShadowControl
 								label={__("Normal Shadow", "frontis-blocks")}
@@ -1424,7 +1392,7 @@ const Inspector = (props) => {
 								}
 							/>
 						)}
-						
+
 						{containerGlobalBoxShadowSwitcher === 'hover' && (
 							<FB_BoxShadowControl
 								label={__("Hover Shadow", "frontis-blocks")}
@@ -1496,8 +1464,8 @@ const Inspector = (props) => {
 												<>
 													<FB_ColorControl
 														label={__("Color", "frontis-blocks")}
-														globalColor={containerBgNormalClassicColor} 
-														setGlobalColor={(value) => setAttributes({ containerBgNormalClassicColor: value })} 
+														globalColor={containerBgNormalClassicColor}
+														setGlobalColor={(value) => setAttributes({ containerBgNormalClassicColor: value })}
 													/>
 
 													<FB_ResponsiveBackgroundImageControl
@@ -1510,11 +1478,11 @@ const Inspector = (props) => {
 														setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgNormalBackgroundImageAttachment: newAttachment })}
 														globalBackgroundImageRepeat={containerBgNormalBackgroundImageRepeat}
 														setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgNormalBackgroundImageRepeat: newRepeat })}
-														globalBackgroundImageSize={containerBgNormalBackgroundImageSize} 
+														globalBackgroundImageSize={containerBgNormalBackgroundImageSize}
 														setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgNormalBackgroundImageSize: newSize })}
 														setAttributes={setAttributes}
 													/>
-															
+
 												</>
 											)}
 
@@ -1532,13 +1500,13 @@ const Inspector = (props) => {
 									)}
 								/>
 							</BaseControl>
-							
+
 						)}
 
 						{containerBgColorSwitcher === 'hover' && (
 							<BaseControl
 								className="fb-setting-background-color-setting-wrapper"
-								label={__("Hover Background Type", "frontis-blocks")} 
+								label={__("Hover Background Type", "frontis-blocks")}
 							>
 								<Dropdown
 									className="fb-setting-background-color-setting-icon-dropdown"
@@ -1580,8 +1548,8 @@ const Inspector = (props) => {
 												<>
 													<FB_ColorControl
 														label={__("Color", "frontis-blocks")}
-														globalColor={containerBgHoverClassicColor} 
-														setGlobalColor={(value) => setAttributes({ containerBgHoverClassicColor: value })} 
+														globalColor={containerBgHoverClassicColor}
+														setGlobalColor={(value) => setAttributes({ containerBgHoverClassicColor: value })}
 													/>
 
 													<FB_ResponsiveBackgroundImageControl
@@ -1590,7 +1558,7 @@ const Inspector = (props) => {
 														setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgHoverBackgroundImageUrl: value })}
 														globalBackgroundImagePosition={containerBgHoverBackgroundImagePosition}
 														setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgHoverBackgroundImagePosition: newPosition })}
-														globalBackgroundImageAttachment={containerBgHoverBackgroundImageAttachment} 
+														globalBackgroundImageAttachment={containerBgHoverBackgroundImageAttachment}
 														setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgHoverBackgroundImageAttachment: newAttachment })}
 														globalBackgroundImageRepeat={containerBgHoverBackgroundImageRepeat}
 														setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgHoverBackgroundImageRepeat: newRepeat })}
@@ -1598,7 +1566,7 @@ const Inspector = (props) => {
 														setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgHoverBackgroundImageSize: newSize })}
 														setAttributes={setAttributes}
 													/>
-															
+
 												</>
 											)}
 
@@ -1690,8 +1658,8 @@ const Inspector = (props) => {
 														<>
 															<FB_ColorControl
 																label={__("Color", "frontis-blocks")}
-																globalColor={containerBgOverlayNormalClassicColor} 
-																setGlobalColor={(value) => setAttributes({ containerBgOverlayNormalClassicColor: value })} 
+																globalColor={containerBgOverlayNormalClassicColor}
+																setGlobalColor={(value) => setAttributes({ containerBgOverlayNormalClassicColor: value })}
 															/>
 
 															<FB_ResponsiveBackgroundImageControl
@@ -1704,15 +1672,15 @@ const Inspector = (props) => {
 																setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgOverlayNormalBackgroundImageAttachment: newAttachment })}
 																globalBackgroundImageRepeat={containerBgOverlayNormalBackgroundImageRepeat}
 																setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgOverlayNormalBackgroundImageRepeat: newRepeat })}
-																globalBackgroundImageSize={containerBgOverlayNormalBackgroundImageSize} 
+																globalBackgroundImageSize={containerBgOverlayNormalBackgroundImageSize}
 																setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgOverlayNormalBackgroundImageSize: newSize })}
 																setAttributes={setAttributes}
 															/>
-																	
+
 														</>
 													)}
 
-													{containerBgOverlayNormalBackgroundType === 'gradient' && ( 
+													{containerBgOverlayNormalBackgroundType === 'gradient' && (
 														<FB_GradientColorControl
 															globalCustomGradientSwitcher={containerBgOverlayNormalCustomGradientSwitcher}
 															setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgOverlayNormalCustomGradientSwitcher: value })}
@@ -1726,13 +1694,13 @@ const Inspector = (props) => {
 											)}
 										/>
 									</BaseControl>
-									
+
 								)}
 
 								{containerBgOverlayColorSwitcher === 'hover' && (
 									<BaseControl
 										className="fb-setting-background-color-setting-wrapper"
-										label={__("Hover Overlay Type", "frontis-blocks")} 
+										label={__("Hover Overlay Type", "frontis-blocks")}
 									>
 										<Dropdown
 											className="fb-setting-background-color-setting-icon-dropdown"
@@ -1760,7 +1728,7 @@ const Inspector = (props) => {
 															{BACKGROUND_TYPES.map((item) => (
 																<Button
 																	key={item.value}
-																	onClick={() => setAttributes({ containerBgOverlayHoverBackgroundType: item.value })} 
+																	onClick={() => setAttributes({ containerBgOverlayHoverBackgroundType: item.value })}
 																	className={`fb-setting-background-color-panel-btn-switcher ${containerBgOverlayHoverBackgroundType === item.value ? 'active' : ''}`}
 																>
 																	{item.label}
@@ -1774,8 +1742,8 @@ const Inspector = (props) => {
 														<>
 															<FB_ColorControl
 																label={__("Color", "frontis-blocks")}
-																globalColor={containerBgOverlayHoverClassicColor} 
-																setGlobalColor={(value) => setAttributes({ containerBgOverlayHoverClassicColor: value })} 
+																globalColor={containerBgOverlayHoverClassicColor}
+																setGlobalColor={(value) => setAttributes({ containerBgOverlayHoverClassicColor: value })}
 															/>
 
 															<FB_ResponsiveBackgroundImageControl
@@ -1784,7 +1752,7 @@ const Inspector = (props) => {
 																setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgOverlayHoverBackgroundImageUrl: value })}
 																globalBackgroundImagePosition={containerBgOverlayHoverBackgroundImagePosition}
 																setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgOverlayHoverBackgroundImagePosition: newPosition })}
-																globalBackgroundImageAttachment={containerBgOverlayHoverBackgroundImageAttachment} 
+																globalBackgroundImageAttachment={containerBgOverlayHoverBackgroundImageAttachment}
 																setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgOverlayHoverBackgroundImageAttachment: newAttachment })}
 																globalBackgroundImageRepeat={containerBgOverlayHoverBackgroundImageRepeat}
 																setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgOverlayHoverBackgroundImageRepeat: newRepeat })}
@@ -1792,7 +1760,7 @@ const Inspector = (props) => {
 																setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgOverlayHoverBackgroundImageSize: newSize })}
 																setAttributes={setAttributes}
 															/>
-																	
+
 														</>
 													)}
 

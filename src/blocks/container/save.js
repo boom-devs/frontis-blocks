@@ -11,8 +11,6 @@ export default function save( props ) {
 		p_block_id,
 		htmlTag,
 		htmlTagLink,
-		contentWidth,
-		innerContentWidth,
 		isBlockRootParent,
 		topType,
 		topFlip,
@@ -24,7 +22,6 @@ export default function save( props ) {
 		backgroundVideo,
 		topInvert,
 		bottomInvert,
-		linkTarget,
 		containerType,
 		containerDesktopSwitcher,
 		containerTabletSwitcher,
@@ -87,7 +84,7 @@ export default function save( props ) {
 	};
 
 	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : `child ${containerGlobalCustomCSSClass}`;
-	
+
 	let desktopResponsiveClass = '';
 	let tabletResponsiveClass = '';
 	let mobileResponsiveClass = '';
