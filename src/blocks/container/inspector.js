@@ -131,6 +131,8 @@ const Inspector = (props) => {
 			// Grid
 			containerColumnsItemList,
 			containerRowsItemList,
+			containerGridJustifyItems,
+			containerGridAlignItems,
 
 			// Position
 			containerOverflow,
@@ -226,12 +228,19 @@ const Inspector = (props) => {
 		{ title: 'Space Evenly', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.606 8.73425L7.48088 8.73425" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 15.2767L7.48088 15.2767" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "space-evenly" }
 	];
 
+	const JUSTIFY_ITEMS = [
+		{ title: 'Flex Start',  label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.39385 12.142L16.5189 12.142" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.39385 7.15051L16.5189 7.15051" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "flex-start" },
+		{ title: 'Center', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5599 9.46875L7.42934 9.46875" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.5599 14.4974L7.42934 14.4974" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "center" },
+		{ title: 'Flex End', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.606 11.858L7.48088 11.858" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 16.8495L7.48088 16.8495" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "flex-end" },
+		{ title: 'Stretch', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00001 15.27L16.39 15.27" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M8.00001 9.27002L16.39 9.27002" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 4.03003L3.97001 4.03003" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 20.51L3.97001 20.51" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "stretch" }	];
+
 	const ALIGN_ITEMS = [
 		{ title: 'Flex Start', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.39385 12.142L16.5189 12.142" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.39385 7.15051L16.5189 7.15051" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "flex-start" },
 		{ title: 'Center', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5599 9.46875L7.42934 9.46875" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.5599 14.4974L7.42934 14.4974" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "center" },
 		{ title: 'Flex End', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.606 11.858L7.48088 11.858" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 16.8495L7.48088 16.8495" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "flex-end" },
 		{ title: 'Stretch', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00001 15.27L16.39 15.27" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M8.00001 9.27002L16.39 9.27002" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 4.03003L3.97001 4.03003" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 20.51L3.97001 20.51" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "stretch" }
 	];
+
 	const WRAP = [
 		{ title: 'No Wrap', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.51 12.0109H6.18005" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M14.8101 8.5719L18.1101 12.0108L14.8101 15.4607" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "nowrap" },
 		{ title: 'Wrap', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.37 15.2757H15.27C16.35 15.2757 17.23 14.318 17.23 13.1427V7.451C17.23 6.27567 16.35 5.31799 15.27 5.31799H7.53" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M10.07 11.8368L6.77002 15.2757L10.07 18.7255" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "wrap" },
@@ -258,7 +267,7 @@ const Inspector = (props) => {
         const newItem = {
             id: `column-${containerColumnsItem[deviceType].length + 1}`,
             title: `Column ${containerColumnsItem[deviceType].length + 1}`,
-			type: 'auto',
+			type: 'custom',
 			width: 1,
 			widthUnits: 'fr',
 			min: 10,
@@ -340,7 +349,7 @@ const Inspector = (props) => {
         const newItem = {
             id: `row-${containerRowsItem[deviceType].length + 1}`,
             title: `Row ${containerRowsItem[deviceType].length + 1}`,
-			type: 'auto',
+			type: 'custom',
 			width: 1,
 			widthUnits: 'fr',
 			min: 10,
@@ -883,11 +892,11 @@ const Inspector = (props) => {
 						]}
 					/>
 
-					{/* <ToggleControl
+					<ToggleControl
 						label={__("Equal Height", "frontis-blocks")}
 						checked={containerEqualHeight}
 						onChange={(value) => setAttributes({ containerEqualHeight: value })}
-					/> */}
+					/>
 
 					<SelectControl
 						label={__("HTML Tag", "frontis-blocks")}
@@ -934,7 +943,7 @@ const Inspector = (props) => {
 							</ButtonGroup>
 						</BaseControl>
 
-						{containerLayout === 'grid' &&
+						{containerLayout === 'grid' && <>
 							<BaseControl
 								id="fb-setting-alignment"
 								className="fb-advanced-alignment list"
@@ -966,9 +975,7 @@ const Inspector = (props) => {
 									</Button>
 								</div>
 							</BaseControl>
-						}
 
-						{containerLayout === 'grid' &&
 							<BaseControl
 								id="fb-setting-alignment"
 								className="fb-advanced-alignment list"
@@ -1000,7 +1007,67 @@ const Inspector = (props) => {
 									</Button>
 								</div>
 							</BaseControl>
-						}
+
+							<BaseControl
+								id="fb-setting-alignment"
+								className="fb-advanced-alignment list"
+							>
+								<FB_ResponsiveControl
+									labelText={__('Align Items', 'frontis-blocks')}
+									device={deviceType}
+								/>
+								<br />
+								<ButtonGroup className={`fb-advanced-alignment-group-btn`}>
+									{ALIGN_ITEMS.map((item, key) => (
+										<Button
+											key={key}
+											onClick={() =>
+												setAttributes({
+													containerGridAlignItems: {
+														...containerGridAlignItems, // Spread the existing values
+														[deviceType]: item.value, // Update the specific device type
+													},
+												})
+											}
+											title={item.title}
+											className={`fb-advanced-alignment-single-btn ${containerGridAlignItems[deviceType] === item.value ? 'active' : ''}`}
+										>
+											{item.label}
+										</Button>
+									))}
+								</ButtonGroup>
+							</BaseControl>
+
+							<BaseControl
+								id="fb-setting-alignment"
+								className="fb-advanced-alignment list"
+							>
+								<FB_ResponsiveControl
+									labelText={__('Justify Content', 'frontis-blocks')}
+									device={deviceType}
+								/>
+								<br />
+								<ButtonGroup className={`fb-advanced-alignment-group-btn justify-content-btn`}>
+									{JUSTIFY_ITEMS.map((item, key) => (
+										<Button
+											key={key}
+											onClick={() =>
+												setAttributes({
+													containerGridJustifyItems: {
+														...containerGridJustifyItems, // Spread the existing values
+														[deviceType]: item.value, // Update the specific device type
+													},
+												})
+											}
+											title={item.title}
+											className={`fb-advanced-alignment-single-btn ${containerGridJustifyItems[deviceType] === item.value ? 'active' : ''}`}
+										>
+											{item.label}
+										</Button>
+									))}
+								</ButtonGroup>
+							</BaseControl>
+						</>}
 
 						{containerLayout === 'flex' && <>
 						<BaseControl
@@ -1057,6 +1124,7 @@ const Inspector = (props) => {
 						</BaseControl>
 						</>}
 
+						{containerLayout === 'flex' && <>
 						<BaseControl
 							id="fb-setting-alignment"
 							className="fb-advanced-alignment list"
@@ -1117,7 +1185,6 @@ const Inspector = (props) => {
 							</ButtonGroup>
 						</BaseControl>
 
-						{containerLayout === 'flex' && <>
 						<BaseControl
 							id="fb-setting-alignment"
 							className="fb-advanced-alignment list"

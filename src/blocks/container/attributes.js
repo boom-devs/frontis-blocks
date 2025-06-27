@@ -242,7 +242,7 @@ const attributes = {
 				{
 					id: 'column-1',
 					title: 'Column 1',
-					type: 'auto',
+					type: 'custom',
 					width: 1,
 					widthUnits: 'fr',
 					min: 10,
@@ -255,7 +255,7 @@ const attributes = {
 				{
 					id: 'column-1',
 					title: 'Column 1',
-					type: 'auto',
+					type: 'custom',
 					width: '',
 					widthUnits: 'fr',
 					min: '',
@@ -268,7 +268,7 @@ const attributes = {
 				{
 					id: 'column-1',
 					title: 'Column 1',
-					type: 'auto',
+					type: 'custom',
 					width: '',
 					widthUnits: 'fr',
 					min: '',
@@ -287,7 +287,7 @@ const attributes = {
 				{
 					id: 'row-1',
 					title: 'Row 1',
-					type: 'auto',
+					type: 'custom',
 					width: 1,
 					widthUnits: 'fr',
 					min: 10,
@@ -300,7 +300,7 @@ const attributes = {
 				{
 					id: 'row-1',
 					title: 'Row 1',
-					type: 'auto',
+					type: 'custom',
 					width: '',
 					widthUnits: 'fr',
 					min: '',
@@ -313,7 +313,7 @@ const attributes = {
 				{
 					id: 'row-1',
 					title: 'Row 1',
-					type: 'auto',
+					type: 'custom',
 					width: '',
 					widthUnits: 'fr',
 					min: '',
@@ -331,6 +331,22 @@ const attributes = {
 			Desktop: 'center',
 			Tablet: 'center',
 			Mobile: 'center',
+		}
+	},
+	containerGridAlignItems: {
+		type: 'object',
+		default: {
+			Desktop: 'stretch',
+			Tablet: 'stretch',
+			Mobile: 'stretch',
+		}
+	},
+	containerGridJustifyItems: {
+		type: 'object',
+		default: {
+			Desktop: 'stretch',
+			Tablet: 'stretch',
+			Mobile: 'stretch',
 		}
 	},
 
