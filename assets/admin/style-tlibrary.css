@@ -1269,15 +1269,11 @@
   path-fill: #FFFFFF;
 }
 
-body .components-modal__frame {
+body .components-modal__frame.fb-template-library-popover {
   max-height: 100% !important;
   max-width: 100% !important;
   margin: 0 !important;
   border-radius: 0 !important;
-}
-body .components-modal__frame.fb-template-library-popover {
-  min-width: calc(100% - 32px);
-  height: 100% !important;
 }
 body .components-modal__frame.fb-template-library-popover .components-modal__content {
   margin: 0;
