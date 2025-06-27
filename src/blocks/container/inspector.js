@@ -1,27 +1,21 @@
 import { __ } from "@wordpress/i18n";
-import { InspectorControls, useBlockProps } from "@wordpress/block-editor";
 import {
 	BaseControl,
 	Button,
 	ButtonGroup,
 	PanelBody,
-	RangeControl,
 	SelectControl,
 	Dropdown,
-	TabPanel,
 	ToggleControl
 } from "@wordpress/components";
-import { useEffect } from "@wordpress/element";
+import {useState } from "@wordpress/element";
 
-import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_Spacing from "@Components/spacing";
 import FB_Range from "@Components/range";
-import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import { useDeviceType } from "@Config/displayType";
-
 import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_ColorControl from '@Components/color-control';
@@ -30,14 +24,15 @@ import FB_PositionControl from '@Components/position-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import FB_InputControl from '@Components/input-control';
 import FB_InspectorControls from '@Components/InspectorControls';
+import { SortableContext } from "@dnd-kit/sortable";
+import ColumnSortableItem from "./columnSortableItem";
+import RowSortableItem from "./rowSortableItem";
 
 const Inspector = (props) => {
 	let deviceType = useDeviceType();
+	console.log(deviceType);
 	const {
-		isSelected,
-		attributes,
 		attributes: {
-			p_block_id,
 			containerType,
 			containerTypeFull,
 			containerCustomWidth,
@@ -121,12 +116,23 @@ const Inspector = (props) => {
 			containerBgOverlayHoverBackgroundImageRepeat,
 			containerBgOverlayHoverBackgroundImageSize,
 
+			htmlTag,
+			htmlTagLink,
 			containerDesktopSwitcher,
 			containerTabletSwitcher,
 			containerMobileSwitcher,
+			containerLayout,
 			containerDirection,
 			containerJustify,
 			containerAlignItems,
+			containerEqualHeight,
+			containerChildrenWidth,
+
+			// Grid
+			containerColumnsItemList,
+			containerRowsItemList,
+			containerGridJustifyItems,
+			containerGridAlignItems,
 
 			// Position
 			containerOverflow,
@@ -159,17 +165,11 @@ const Inspector = (props) => {
 
 			containerGlobalBoxShadowSwitcher,
 			containerGlobalBoxShadowValues,
-			containerGlobalBoxShadowCssValue,
 			containerGlobalHoverBoxShadowValues,
-			containerGlobalHoverBoxShadowCssValue,
-
 			containerGlobalCustomCSS,
-			containerGlobalCustomCSSValue,
 			containerGlobalCustomCSSID,
 			containerGlobalCustomCSSClass
 		},
-		clientId,
-
 		setAttributes
 	} = props;
 
@@ -195,6 +195,24 @@ const Inspector = (props) => {
 		{ label: __("Ridge", "frontis-blocks"), value: "ridge" },
 	];
 
+	const HTML_TAG = [
+		{ title: 'div', label: __('div', 'frontis-blocks'), value: "div" },
+		{ title: 'section', label: __('section', 'frontis-blocks'), value: "section" },
+		{ title: 'article', label: __('article', 'frontis-blocks'), value: "article" },
+		{ title: 'header', label: __('header', 'frontis-blocks'), value: "header" },
+		{ title: 'footer', label: __('footer', 'frontis-blocks'), value: "footer" },
+		{ title: 'main', label: __('main', 'frontis-blocks'), value: "main" },
+		{ title: 'nav', label: __('nav', 'frontis-blocks'), value: "nav" },
+		{ title: 'a', label: __('a', 'frontis-blocks'), value: "a" },
+	];
+	const LAYOUT_TYPE = [
+		{ title: 'Flex', label: __('Flex', 'frontis-blocks'), value: "flex" },
+		{ title: 'Grid', label: __('Grid', 'frontis-blocks'), value: "grid" },
+	];
+	const CHILDREN_WIDTH = [
+		{ title: 'Auto', label: __('Auto', 'frontis-blocks'), value: "auto" },
+		{ title: 'Full', label: __('Full', 'frontis-blocks'), value: "full" },
+	];
 	const DIRECTION = [
 		{ title: 'Row', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.64246 7.53723H17.2781" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 7.53729L15.3485 5.28601" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 7.53723L15.3485 9.78851" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M6.64246 16.4172H17.2781" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 16.4173L15.3485 14.1774" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 16.4172L15.3485 18.6685" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M2.85132 21.1473V2.85278" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21.1487 21.1473V2.85278" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "row" },
 		{ title: 'Column', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.391 6.72949L16.391 17.1923" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.3909 17.1923L18.606 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.391 17.1923L14.176 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65393 6.72949L7.65393 17.1923" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65381 17.1923L9.85767 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65393 17.1923L5.43889 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "column" },
@@ -210,12 +228,19 @@ const Inspector = (props) => {
 		{ title: 'Space Evenly', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.606 8.73425L7.48088 8.73425" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 15.2767L7.48088 15.2767" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "space-evenly" }
 	];
 
+	const JUSTIFY_ITEMS = [
+		{ title: 'Flex Start',  label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.39385 12.142L16.5189 12.142" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.39385 7.15051L16.5189 7.15051" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "flex-start" },
+		{ title: 'Center', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5599 9.46875L7.42934 9.46875" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.5599 14.4974L7.42934 14.4974" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "center" },
+		{ title: 'Flex End', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.606 11.858L7.48088 11.858" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 16.8495L7.48088 16.8495" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "flex-end" },
+		{ title: 'Stretch', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00001 15.27L16.39 15.27" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M8.00001 9.27002L16.39 9.27002" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 4.03003L3.97001 4.03003" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 20.51L3.97001 20.51" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "stretch" }	];
+
 	const ALIGN_ITEMS = [
 		{ title: 'Flex Start', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.39385 12.142L16.5189 12.142" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.39385 7.15051L16.5189 7.15051" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "flex-start" },
 		{ title: 'Center', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5599 9.46875L7.42934 9.46875" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.5599 14.4974L7.42934 14.4974" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "center" },
 		{ title: 'Flex End', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.606 11.858L7.48088 11.858" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 16.8495L7.48088 16.8495" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "flex-end" },
 		{ title: 'Stretch', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00001 15.27L16.39 15.27" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M8.00001 9.27002L16.39 9.27002" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 4.03003L3.97001 4.03003" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 20.51L3.97001 20.51" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "stretch" }
 	];
+
 	const WRAP = [
 		{ title: 'No Wrap', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.51 12.0109H6.18005" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M14.8101 8.5719L18.1101 12.0108L14.8101 15.4607" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "nowrap" },
 		{ title: 'Wrap', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.37 15.2757H15.27C16.35 15.2757 17.23 14.318 17.23 13.1427V7.451C17.23 6.27567 16.35 5.31799 15.27 5.31799H7.53" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M10.07 11.8368L6.77002 15.2757L10.07 18.7255" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "wrap" },
@@ -234,6 +259,167 @@ const Inspector = (props) => {
 		{ label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
 		{ label: __('Clip', 'frontis-blocks'), value: 'clip' },
 	];
+
+	const [containerColumnsItem, setContainerColumnsItem] = useState(containerColumnsItemList);
+	const [containerRowsItem, setContainerRowsItem] = useState(containerRowsItemList);
+
+	const handleColumnAddItem = () => {
+        const newItem = {
+            id: `column-${containerColumnsItem[deviceType].length + 1}`,
+            title: `Column ${containerColumnsItem[deviceType].length + 1}`,
+			type: 'custom',
+			width: 1,
+			widthUnits: 'fr',
+			min: 10,
+			minUnits: 'px',
+			max: 1,
+			maxUnits: 'fr',
+        };
+        setAttributes({ containerColumnsItemList: {...containerColumnsItemList, [deviceType]: [...containerColumnsItemList[deviceType], newItem]}  });
+        setContainerColumnsItem({ ...containerColumnsItem, [deviceType]: [...containerColumnsItem[deviceType], newItem] });
+    };
+
+    const handleColumnChangeItem = (id, key, value) => {
+		let updatedItems = [];
+
+		if(deviceType === 'Desktop') {
+			updatedItems = containerColumnsItem.Desktop.map(item => {
+				if (item.id === id) {
+					return { ...item, [key]: value };
+				}
+				return item;
+			});
+		} else if(deviceType === 'Tablet') {
+			updatedItems = containerColumnsItem.Tablet.map(item => {
+				if (item.id === id) {
+					return { ...item, [key]: value };
+				}
+				return item;
+			});
+		} else if(deviceType === 'Mobile') {
+			updatedItems = containerColumnsItem.Mobile.map(item => {
+				if (item.id === id) {
+					return { ...item, [key]: value };
+				}
+				return item;
+			});
+		}
+
+        setContainerColumnsItem({ ...containerColumnsItem, [deviceType]: updatedItems });
+        setAttributes({ containerColumnsItemList: {...containerColumnsItemList, [deviceType]: updatedItems} });
+    };
+
+    const handleColumnDeleteItem = (id) => {
+		let updatedItems = [];
+		if(deviceType === 'Desktop') {
+			updatedItems = containerColumnsItem.Desktop.filter(item => item.id !== id);
+		} else if(deviceType === 'Tablet') {
+			updatedItems = containerColumnsItem.Tablet.filter(item => item.id !== id);
+		} else if(deviceType === 'Mobile') {
+			updatedItems = containerColumnsItem.Mobile.filter(item => item.id !== id);
+		}
+
+        setAttributes({ containerColumnsItemList: {...containerColumnsItemList, [deviceType]: updatedItems} });
+        setContainerColumnsItem({ ...containerColumnsItem, [deviceType]: updatedItems });
+
+    };
+
+
+	const handleColumnDuplicateItem = (id) => {
+
+		const items = containerColumnsItem?.[deviceType] ?? [];
+
+		const srcIndex = items.findIndex((item) => item.id === id);
+		if (srcIndex === -1) return;
+
+		const itemToDuplicate = items[srcIndex];
+
+		const newId = `column-${containerColumnsItem[deviceType].length + 1}`;
+		const newTitle = `Column ${containerColumnsItem[deviceType].length + 1}`;
+
+		const newItem = { ...itemToDuplicate, id: newId, title: newTitle };
+
+		const updatedItems = [...items, newItem];
+
+		setContainerColumnsItem({...containerColumnsItem, [deviceType]: updatedItems});
+		setAttributes({containerColumnsItemList: {...containerColumnsItemList,[deviceType]: updatedItems}});
+	};
+
+	const handleRowAddItem = () => {
+        const newItem = {
+            id: `row-${containerRowsItem[deviceType].length + 1}`,
+            title: `Row ${containerRowsItem[deviceType].length + 1}`,
+			type: 'custom',
+			width: 1,
+			widthUnits: 'fr',
+			min: 10,
+			minUnits: 'px',
+			max: 1,
+			maxUnits: 'fr',
+        };
+        setAttributes({ containerRowsItemList: {...containerRowsItemList, [deviceType]: [...containerRowsItemList[deviceType], newItem]}  });
+        setContainerRowsItem({ ...containerRowsItem, [deviceType]: [...containerRowsItem[deviceType], newItem] });
+    };
+
+    const handleRowChangeItem = (id, key, value) => {
+		let updatedItems = [];
+
+		if(deviceType === 'Desktop') {
+			updatedItems = containerRowsItem.Desktop.map(item => {
+				if (item.id === id) {
+					return { ...item, [key]: value };
+				}
+				return item;
+			});
+		} else if(deviceType === 'Tablet') {
+			updatedItems = containerRowsItem.Tablet.map(item => {
+				if (item.id === id) {
+					return { ...item, [key]: value };
+				}
+				return item;
+			});
+		} else if(deviceType === 'Mobile') {
+			updatedItems = containerRowsItem.Mobile.map(item => {
+				if (item.id === id) {
+					return { ...item, [key]: value };
+				}
+				return item;
+			});
+		}
+
+        setContainerRowsItem({ ...containerRowsItem, [deviceType]: updatedItems });
+        setAttributes({ containerRowsItemList: {...containerRowsItemList, [deviceType]: updatedItems} });
+    };
+
+    const handleRowDeleteItem = (id) => {
+		let updatedItems = [];
+		if(deviceType === 'Desktop') {
+			updatedItems = containerRowsItem.Desktop.filter(item => item.id !== id);
+		} else if(deviceType === 'Tablet') {
+			updatedItems = containerRowsItem.Tablet.filter(item => item.id !== id);
+		} else if(deviceType === 'Mobile') {
+			updatedItems = containerRowsItem.Mobile.filter(item => item.id !== id);
+		}
+
+        setAttributes({ containerRowsItemList: {...containerRowsItemList, [deviceType]: updatedItems} });
+        setContainerRowsItem({ ...containerRowsItem, [deviceType]: updatedItems });
+
+    };
+
+	const handleRowDuplicateItem = (id) => {
+
+		const items = containerRowsItem?.[deviceType] ?? [];
+		const srcIndex = items.findIndex((item) => item.id === id);
+		if (srcIndex === -1) return;
+
+		const itemToDuplicate = items[srcIndex];
+		const newId = `row-${containerRowsItem[deviceType].length + 1}`;
+		const newTitle = `Row ${containerRowsItem[deviceType].length + 1}`;
+		const newItem = { ...itemToDuplicate, id: newId, title: newTitle };
+		const updatedItems = [...items, newItem];
+		setContainerRowsItem({...containerRowsItem, [deviceType]: updatedItems});
+		setAttributes({containerRowsItemList: {...containerRowsItemList,[deviceType]: updatedItems}});
+	  };
 
 	// Handle full width content boxed width
 	const fullWidthContentBoxedWidthFn = (width) => {
@@ -260,11 +446,6 @@ const Inspector = (props) => {
 
 	const customContentWidthFnUnitsFn = (units) => {
 		setAttributes({ customWidthUnits: units });
-	}
-
-	// Handling responsive
-	const handleResponsive = (attr) => {
-		// setDeviceType(attr.deviceType, false);
 	}
 
 	// Container type custom width
@@ -490,7 +671,6 @@ const Inspector = (props) => {
                     break;
             }
         }
-
     }
 
     const handleContainerBorderCombineBtn = () => {
@@ -559,7 +739,6 @@ const Inspector = (props) => {
                     break;
             }
         }
-
     }
 
     const handleContainerBorderRadiusCombineBtn = () => {
@@ -712,14 +891,185 @@ const Inspector = (props) => {
 							{ label: 'vh', value: 'vh' },
 						]}
 					/>
+
+					<ToggleControl
+						label={__("Equal Height", "frontis-blocks")}
+						checked={containerEqualHeight}
+						onChange={(value) => setAttributes({ containerEqualHeight: value })}
+					/>
+
+					<SelectControl
+						label={__("HTML Tag", "frontis-blocks")}
+						value={htmlTag}
+						options={HTML_TAG}
+						onChange={(value) => setAttributes({ htmlTag: value })}
+					/>
+					{htmlTag === 'a' &&
+						<FB_InputControl
+							label={__("Tag Link", "frontis-blocks")}
+							value={htmlTagLink.url}
+							onChangeValue={(value) => setAttributes({ htmlTagLink: { ...htmlTagLink, url: value } })}
+							helpText={__("Enter the custom link for the container.", "frontis-blocks")}
+						/>
+					}
 				</PanelBody>
 			</div>
 			{/* {isBlockRootParent && */}
 				<div className="fb-flex-properties-wrapper">
 					<PanelBody
-						title={__("Flex Properties", "frontis-blocks")}
+						title={__("Layout", "frontis-blocks")}
 						initialOpen={true}
 					>
+
+						<BaseControl
+							id="fb-setting-alignment"
+							className="fb-advanced-alignment list"
+						>
+							<ButtonGroup className="fb-advanced-alignment-group-btn">
+								{LAYOUT_TYPE.map((item, key) => (
+									<Button
+										key={key}
+										onClick={() =>
+											setAttributes({
+												containerLayout: item.value
+											})
+										}
+										title={item.title}
+										className={`fb-advanced-alignment-single-btn ${containerLayout === item.value ? 'active' : ''}`}
+									>
+										{item.label}
+									</Button>
+								))}
+							</ButtonGroup>
+						</BaseControl>
+
+						{containerLayout === 'grid' && <>
+							<BaseControl
+								id="fb-setting-alignment"
+								className="fb-advanced-alignment list"
+							>
+								<FB_ResponsiveControl
+									labelText={__('Columns', 'frontis-blocks')}
+									device={deviceType}
+								/>
+								<br />
+								<div className="fb-feature-wrapper">
+									<SortableContext items={containerColumnsItem[deviceType].map(item => item.id)}>
+										<ul className='dnd-items-wrapper'>
+											{containerColumnsItem[deviceType].map((item, index) => (
+												<ColumnSortableItem
+													key={item.id}
+													id={item.id}
+													columnItem={item}
+													handleChangeItem={handleColumnChangeItem}
+													handleDeleteItem={handleColumnDeleteItem}
+													handleDuplicateItem={handleColumnDuplicateItem}
+													containerColumnsItem={containerColumnsItem[deviceType]}
+													index={index}
+												/>
+											))}
+										</ul>
+									</SortableContext>
+									<Button isPrimary onClick={handleColumnAddItem}>
+										{__("Add Column", "frontis-blocks")}
+									</Button>
+								</div>
+							</BaseControl>
+
+							<BaseControl
+								id="fb-setting-alignment"
+								className="fb-advanced-alignment list"
+							>
+								<FB_ResponsiveControl
+									labelText={__('Rows', 'frontis-blocks')}
+									device={deviceType}
+								/>
+								<br />
+								<div className="fb-feature-wrapper">
+									<SortableContext items={containerRowsItem[deviceType].map(item => item.id)}>
+										<ul className='dnd-items-wrapper'>
+											{containerRowsItem[deviceType].map((item, index) => (
+												<RowSortableItem
+													key={item.id}
+													id={item.id}
+													rowItem={item}
+													handleChangeItem={handleRowChangeItem}
+													handleDeleteItem={handleRowDeleteItem}
+													handleDuplicateItem={handleRowDuplicateItem}
+													containerRowsItem={containerRowsItem[deviceType]}
+													index={index}
+												/>
+											))}
+										</ul>
+									</SortableContext>
+									<Button isPrimary onClick={handleRowAddItem}>
+										{__("Add Row", "frontis-blocks")}
+									</Button>
+								</div>
+							</BaseControl>
+
+							<BaseControl
+								id="fb-setting-alignment"
+								className="fb-advanced-alignment list"
+							>
+								<FB_ResponsiveControl
+									labelText={__('Align Items', 'frontis-blocks')}
+									device={deviceType}
+								/>
+								<br />
+								<ButtonGroup className={`fb-advanced-alignment-group-btn`}>
+									{ALIGN_ITEMS.map((item, key) => (
+										<Button
+											key={key}
+											onClick={() =>
+												setAttributes({
+													containerGridAlignItems: {
+														...containerGridAlignItems, // Spread the existing values
+														[deviceType]: item.value, // Update the specific device type
+													},
+												})
+											}
+											title={item.title}
+											className={`fb-advanced-alignment-single-btn ${containerGridAlignItems[deviceType] === item.value ? 'active' : ''}`}
+										>
+											{item.label}
+										</Button>
+									))}
+								</ButtonGroup>
+							</BaseControl>
+
+							<BaseControl
+								id="fb-setting-alignment"
+								className="fb-advanced-alignment list"
+							>
+								<FB_ResponsiveControl
+									labelText={__('Justify Content', 'frontis-blocks')}
+									device={deviceType}
+								/>
+								<br />
+								<ButtonGroup className={`fb-advanced-alignment-group-btn justify-content-btn`}>
+									{JUSTIFY_ITEMS.map((item, key) => (
+										<Button
+											key={key}
+											onClick={() =>
+												setAttributes({
+													containerGridJustifyItems: {
+														...containerGridJustifyItems, // Spread the existing values
+														[deviceType]: item.value, // Update the specific device type
+													},
+												})
+											}
+											title={item.title}
+											className={`fb-advanced-alignment-single-btn ${containerGridJustifyItems[deviceType] === item.value ? 'active' : ''}`}
+										>
+											{item.label}
+										</Button>
+									))}
+								</ButtonGroup>
+							</BaseControl>
+						</>}
+
+						{containerLayout === 'flex' && <>
 						<BaseControl
 							id="fb-setting-alignment"
 							className="fb-advanced-alignment list"
@@ -749,6 +1099,32 @@ const Inspector = (props) => {
 								))}
 							</ButtonGroup>
 						</BaseControl>
+
+						<BaseControl
+							id="fb-setting-alignment"
+							className="fb-advanced-alignment list"
+							label={__("Children Width", "frontis-blocks")}
+						>
+							<ButtonGroup className="fb-advanced-alignment-group-btn">
+								{CHILDREN_WIDTH.map((item, key) => (
+									<Button
+										key={key}
+										onClick={() =>
+											setAttributes({
+												containerChildrenWidth: item.value
+											})
+										}
+										title={item.title}
+										className={`fb-advanced-alignment-single-btn ${containerChildrenWidth === item.value ? 'active' : ''}`}
+									>
+										{item.label}
+									</Button>
+								))}
+							</ButtonGroup>
+						</BaseControl>
+						</>}
+
+						{containerLayout === 'flex' && <>
 						<BaseControl
 							id="fb-setting-alignment"
 							className="fb-advanced-alignment list"
@@ -758,7 +1134,7 @@ const Inspector = (props) => {
 								device={deviceType}
 							/>
 							<br />
-							<ButtonGroup className="fb-advanced-alignment-group-btn">
+							<ButtonGroup className={`fb-advanced-alignment-group-btn ${containerLayout === 'flex' && containerDirection[deviceType] !== 'row' && containerDirection[deviceType] !== 'row-reverse' ? 'column-direction' : ''}`}>
 								{ALIGN_ITEMS.map((item, key) => (
 									<Button
 										key={key}
@@ -778,6 +1154,7 @@ const Inspector = (props) => {
 								))}
 							</ButtonGroup>
 						</BaseControl>
+
 						<BaseControl
 							id="fb-setting-alignment"
 							className="fb-advanced-alignment list"
@@ -787,7 +1164,7 @@ const Inspector = (props) => {
 								device={deviceType}
 							/>
 							<br />
-							<ButtonGroup className="fb-advanced-alignment-group-btn justify-content-btn">
+							<ButtonGroup className={`fb-advanced-alignment-group-btn justify-content-btn ${containerLayout === 'flex' && containerDirection[deviceType] !== 'row' && containerDirection[deviceType] !== 'row-reverse' ? 'column-direction' : ''}`}>
 								{JUSTIFY_CONTENT.map((item, key) => (
 									<Button
 										key={key}
@@ -807,6 +1184,7 @@ const Inspector = (props) => {
 								))}
 							</ButtonGroup>
 						</BaseControl>
+
 						<BaseControl
 							id="fb-setting-alignment"
 							className="fb-advanced-alignment list"
@@ -836,6 +1214,7 @@ const Inspector = (props) => {
 								))}
 							</ButtonGroup>
 						</BaseControl>
+						</>}
 					</PanelBody>
 				</div>
 			{/* } */}
@@ -924,7 +1303,7 @@ const Inspector = (props) => {
 							deviceType={deviceType}
 							positionType={containerPositionType}
 							setPositionType={(value) => setAttributes({ containerPositionType: value })}
-																			
+
 							HZOrientationType={containerHZOrientationType}
 							setHZOrientationType={(value) =>
 								setAttributes({ containerHZOrientationType: value })
@@ -933,7 +1312,7 @@ const Inspector = (props) => {
 							setVROrientationType={(value) =>
 								setAttributes({ containerVROrientationType: value })
 							}
-																				
+
 							HZLeftOffset={containerHZLeftOffset}
 							setHZLeftOffset={(value) => setAttributes({ containerHZLeftOffset: value })}
 							HZLeftOffsetUnits={containerHZLeftOffsetUnits}
@@ -942,7 +1321,7 @@ const Inspector = (props) => {
 							setHZRightOffset={(value) => setAttributes({ containerHZRightOffset: value })}
 							HZRightOffsetUnits={containerHZRightOffsetUnits}
 							setHZRightOffsetUnits={(value) => setAttributes({ containerHZRightOffsetUnits: value })}
-																			
+
 							VRTopOffset={containerVRTopOffset}
 							setVRTopOffset={(value) => setAttributes({ containerVRTopOffset: value })}
 							VRTopOffsetUnits={containerVRTopOffsetUnits}
@@ -1015,7 +1394,7 @@ const Inspector = (props) => {
 							globalSwitcher={containerBorderColorSwitcher}
 							setGlobalSwitcher={(value) => setAttributes({ containerBorderColorSwitcher: value })}
 						/>
-						
+
 						{containerBorderColorSwitcher === 'normal' && (
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
@@ -1023,7 +1402,7 @@ const Inspector = (props) => {
 								setGlobalColor={(value) => setAttributes({ containerBorderColor: value })}
 							/>
 						)}
-						
+
 						{containerBorderColorSwitcher === 'hover' && (
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
@@ -1046,7 +1425,7 @@ const Inspector = (props) => {
 							setAttributes={setAttributes}
 						/>
 
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Border Radius", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleContainerBorderRadiusUnitsHandler}
@@ -1065,7 +1444,7 @@ const Inspector = (props) => {
 							globalSwitcher={containerGlobalBoxShadowSwitcher}
 							setGlobalSwitcher={(value) => setAttributes({ containerGlobalBoxShadowSwitcher: value })}
 						/>
-						
+
 						{containerGlobalBoxShadowSwitcher === 'normal' && (
 							<FB_BoxShadowControl
 								label={__("Normal Shadow", "frontis-blocks")}
@@ -1080,7 +1459,7 @@ const Inspector = (props) => {
 								}
 							/>
 						)}
-						
+
 						{containerGlobalBoxShadowSwitcher === 'hover' && (
 							<FB_BoxShadowControl
 								label={__("Hover Shadow", "frontis-blocks")}
@@ -1152,8 +1531,8 @@ const Inspector = (props) => {
 												<>
 													<FB_ColorControl
 														label={__("Color", "frontis-blocks")}
-														globalColor={containerBgNormalClassicColor} 
-														setGlobalColor={(value) => setAttributes({ containerBgNormalClassicColor: value })} 
+														globalColor={containerBgNormalClassicColor}
+														setGlobalColor={(value) => setAttributes({ containerBgNormalClassicColor: value })}
 													/>
 
 													<FB_ResponsiveBackgroundImageControl
@@ -1166,11 +1545,11 @@ const Inspector = (props) => {
 														setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgNormalBackgroundImageAttachment: newAttachment })}
 														globalBackgroundImageRepeat={containerBgNormalBackgroundImageRepeat}
 														setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgNormalBackgroundImageRepeat: newRepeat })}
-														globalBackgroundImageSize={containerBgNormalBackgroundImageSize} 
+														globalBackgroundImageSize={containerBgNormalBackgroundImageSize}
 														setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgNormalBackgroundImageSize: newSize })}
 														setAttributes={setAttributes}
 													/>
-															
+
 												</>
 											)}
 
@@ -1188,13 +1567,13 @@ const Inspector = (props) => {
 									)}
 								/>
 							</BaseControl>
-							
+
 						)}
 
 						{containerBgColorSwitcher === 'hover' && (
 							<BaseControl
 								className="fb-setting-background-color-setting-wrapper"
-								label={__("Hover Background Type", "frontis-blocks")} 
+								label={__("Hover Background Type", "frontis-blocks")}
 							>
 								<Dropdown
 									className="fb-setting-background-color-setting-icon-dropdown"
@@ -1236,8 +1615,8 @@ const Inspector = (props) => {
 												<>
 													<FB_ColorControl
 														label={__("Color", "frontis-blocks")}
-														globalColor={containerBgHoverClassicColor} 
-														setGlobalColor={(value) => setAttributes({ containerBgHoverClassicColor: value })} 
+														globalColor={containerBgHoverClassicColor}
+														setGlobalColor={(value) => setAttributes({ containerBgHoverClassicColor: value })}
 													/>
 
 													<FB_ResponsiveBackgroundImageControl
@@ -1246,7 +1625,7 @@ const Inspector = (props) => {
 														setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgHoverBackgroundImageUrl: value })}
 														globalBackgroundImagePosition={containerBgHoverBackgroundImagePosition}
 														setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgHoverBackgroundImagePosition: newPosition })}
-														globalBackgroundImageAttachment={containerBgHoverBackgroundImageAttachment} 
+														globalBackgroundImageAttachment={containerBgHoverBackgroundImageAttachment}
 														setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgHoverBackgroundImageAttachment: newAttachment })}
 														globalBackgroundImageRepeat={containerBgHoverBackgroundImageRepeat}
 														setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgHoverBackgroundImageRepeat: newRepeat })}
@@ -1254,7 +1633,7 @@ const Inspector = (props) => {
 														setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgHoverBackgroundImageSize: newSize })}
 														setAttributes={setAttributes}
 													/>
-															
+
 												</>
 											)}
 
@@ -1346,8 +1725,8 @@ const Inspector = (props) => {
 														<>
 															<FB_ColorControl
 																label={__("Color", "frontis-blocks")}
-																globalColor={containerBgOverlayNormalClassicColor} 
-																setGlobalColor={(value) => setAttributes({ containerBgOverlayNormalClassicColor: value })} 
+																globalColor={containerBgOverlayNormalClassicColor}
+																setGlobalColor={(value) => setAttributes({ containerBgOverlayNormalClassicColor: value })}
 															/>
 
 															<FB_ResponsiveBackgroundImageControl
@@ -1360,15 +1739,15 @@ const Inspector = (props) => {
 																setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgOverlayNormalBackgroundImageAttachment: newAttachment })}
 																globalBackgroundImageRepeat={containerBgOverlayNormalBackgroundImageRepeat}
 																setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgOverlayNormalBackgroundImageRepeat: newRepeat })}
-																globalBackgroundImageSize={containerBgOverlayNormalBackgroundImageSize} 
+																globalBackgroundImageSize={containerBgOverlayNormalBackgroundImageSize}
 																setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgOverlayNormalBackgroundImageSize: newSize })}
 																setAttributes={setAttributes}
 															/>
-																	
+
 														</>
 													)}
 
-													{containerBgOverlayNormalBackgroundType === 'gradient' && ( 
+													{containerBgOverlayNormalBackgroundType === 'gradient' && (
 														<FB_GradientColorControl
 															globalCustomGradientSwitcher={containerBgOverlayNormalCustomGradientSwitcher}
 															setGlobalCustomGradientSwitcher={(value) => setAttributes({ containerBgOverlayNormalCustomGradientSwitcher: value })}
@@ -1382,13 +1761,13 @@ const Inspector = (props) => {
 											)}
 										/>
 									</BaseControl>
-									
+
 								)}
 
 								{containerBgOverlayColorSwitcher === 'hover' && (
 									<BaseControl
 										className="fb-setting-background-color-setting-wrapper"
-										label={__("Hover Overlay Type", "frontis-blocks")} 
+										label={__("Hover Overlay Type", "frontis-blocks")}
 									>
 										<Dropdown
 											className="fb-setting-background-color-setting-icon-dropdown"
@@ -1416,7 +1795,7 @@ const Inspector = (props) => {
 															{BACKGROUND_TYPES.map((item) => (
 																<Button
 																	key={item.value}
-																	onClick={() => setAttributes({ containerBgOverlayHoverBackgroundType: item.value })} 
+																	onClick={() => setAttributes({ containerBgOverlayHoverBackgroundType: item.value })}
 																	className={`fb-setting-background-color-panel-btn-switcher ${containerBgOverlayHoverBackgroundType === item.value ? 'active' : ''}`}
 																>
 																	{item.label}
@@ -1430,8 +1809,8 @@ const Inspector = (props) => {
 														<>
 															<FB_ColorControl
 																label={__("Color", "frontis-blocks")}
-																globalColor={containerBgOverlayHoverClassicColor} 
-																setGlobalColor={(value) => setAttributes({ containerBgOverlayHoverClassicColor: value })} 
+																globalColor={containerBgOverlayHoverClassicColor}
+																setGlobalColor={(value) => setAttributes({ containerBgOverlayHoverClassicColor: value })}
 															/>
 
 															<FB_ResponsiveBackgroundImageControl
@@ -1440,7 +1819,7 @@ const Inspector = (props) => {
 																setGlobalBackgroundImageUrl={(value) => setAttributes({ containerBgOverlayHoverBackgroundImageUrl: value })}
 																globalBackgroundImagePosition={containerBgOverlayHoverBackgroundImagePosition}
 																setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ containerBgOverlayHoverBackgroundImagePosition: newPosition })}
-																globalBackgroundImageAttachment={containerBgOverlayHoverBackgroundImageAttachment} 
+																globalBackgroundImageAttachment={containerBgOverlayHoverBackgroundImageAttachment}
 																setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ containerBgOverlayHoverBackgroundImageAttachment: newAttachment })}
 																globalBackgroundImageRepeat={containerBgOverlayHoverBackgroundImageRepeat}
 																setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ containerBgOverlayHoverBackgroundImageRepeat: newRepeat })}
@@ -1448,7 +1827,7 @@ const Inspector = (props) => {
 																setGlobalBackgroundImageSize={(newSize) => setAttributes({ containerBgOverlayHoverBackgroundImageSize: newSize })}
 																setAttributes={setAttributes}
 															/>
-																	
+
 														</>
 													)}
 
