@@ -208,6 +208,7 @@
 	.block-editor-block-list__layout {
 		.block-list-appender.wp-block {
 			width: auto;
+			height: unset !important;
 
 			button {
 				color: #a0a7ac;
