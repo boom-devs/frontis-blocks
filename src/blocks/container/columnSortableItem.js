@@ -6,7 +6,6 @@ import { Button, ButtonGroup, BaseControl } from '@wordpress/components';
 import FB_RangeUnitsType from '../../components/unit-control';
 import { RangeControl } from '@wordpress/components';
 
-
 export default function ColumnSortableItem({ id, columnItem, handleChangeItem, handleDeleteItem, handleDuplicateItem, index, containerColumnsItem }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +16,6 @@ export default function ColumnSortableItem({ id, columnItem, handleChangeItem, h
     };
 
     const toggleOpen = () => setIsOpen(!isOpen);
-
 
     const TrashIcon = (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -129,8 +127,8 @@ export default function ColumnSortableItem({ id, columnItem, handleChangeItem, h
 								))}
 							</ButtonGroup>
 						</BaseControl>
-                    
-                    
+
+
                     {columnItem.type === 'min-max' && <div className="fb-setting-spacing-container">
                         <div className="fb-setting-spacing-inner-container">
                             <div className="fb-setting-spacing-label-container">

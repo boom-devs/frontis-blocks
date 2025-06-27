@@ -9,7 +9,6 @@ import generateCSSUnit from '@Config/generateCSSUnit';
 import { getFallbackNumber } from '@Config/getAttributeFallback';
 import gridCssObject from '@Config/gridCssCreator';
 import backgroundCss from './backgroundCss';
-
 function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = false) {
 	const blockName = name.replace('frotins-blocks/', '');
 	let {
@@ -566,12 +565,12 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 	// Handle Desktop Border Width - only set values if they are not 0
 	if (containerDesktopBorderWidth && (
-		parseInt(containerDesktopBorderWidth.top) !== 0 || 
-		parseInt(containerDesktopBorderWidth.right) !== 0 || 
-		parseInt(containerDesktopBorderWidth.bottom) !== 0 || 
+		parseInt(containerDesktopBorderWidth.top) !== 0 ||
+		parseInt(containerDesktopBorderWidth.right) !== 0 ||
+		parseInt(containerDesktopBorderWidth.bottom) !== 0 ||
 		parseInt(containerDesktopBorderWidth.left) !== 0)) {
-		
-		containerBorderDesktopWidthCSS['border-width'] = 
+
+		containerBorderDesktopWidthCSS['border-width'] =
 			`${generateCSSUnit(containerDesktopBorderWidth.top, containerBorderUnits.Desktop)} ` +
 			`${generateCSSUnit(containerDesktopBorderWidth.right, containerBorderUnits.Desktop)} ` +
 			`${generateCSSUnit(containerDesktopBorderWidth.bottom, containerBorderUnits.Desktop)} ` +
@@ -582,12 +581,12 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 	// Handle Tablet Border Width
 	if (containerTabBorderWidth && (
-		parseInt(containerTabBorderWidth.top) !== 0 || 
-		parseInt(containerTabBorderWidth.right) !== 0 || 
-		parseInt(containerTabBorderWidth.bottom) !== 0 || 
+		parseInt(containerTabBorderWidth.top) !== 0 ||
+		parseInt(containerTabBorderWidth.right) !== 0 ||
+		parseInt(containerTabBorderWidth.bottom) !== 0 ||
 		parseInt(containerTabBorderWidth.left) !== 0)) {
-		
-		containerBorderTabletWidthCSS['border-width'] = 
+
+		containerBorderTabletWidthCSS['border-width'] =
 			`${generateCSSUnit(containerTabBorderWidth.top, containerBorderUnits.Tablet)} ` +
 			`${generateCSSUnit(containerTabBorderWidth.right, containerBorderUnits.Tablet)} ` +
 			`${generateCSSUnit(containerTabBorderWidth.bottom, containerBorderUnits.Tablet)} ` +
@@ -598,12 +597,12 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 	// Handle Mobile Border Width
 	if (containerMobileBorderWidth && (
-		parseInt(containerMobileBorderWidth.top) !== 0 || 
-		parseInt(containerMobileBorderWidth.right) !== 0 || 
-		parseInt(containerMobileBorderWidth.bottom) !== 0 || 
+		parseInt(containerMobileBorderWidth.top) !== 0 ||
+		parseInt(containerMobileBorderWidth.right) !== 0 ||
+		parseInt(containerMobileBorderWidth.bottom) !== 0 ||
 		parseInt(containerMobileBorderWidth.left) !== 0)) {
-		
-		containerBorderMobileWidthCSS['border-width'] = 
+
+		containerBorderMobileWidthCSS['border-width'] =
 			`${generateCSSUnit(containerMobileBorderWidth.top, containerBorderUnits.Mobile)} ` +
 			`${generateCSSUnit(containerMobileBorderWidth.right, containerBorderUnits.Mobile)} ` +
 			`${generateCSSUnit(containerMobileBorderWidth.bottom, containerBorderUnits.Mobile)} ` +
@@ -614,12 +613,12 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 	// Handle Desktop Border Radius - only set values if they are not 0
 	if (containerDesktopBorderRadiusWidth && (
-		parseInt(containerDesktopBorderRadiusWidth.top) !== 0 || 
-		parseInt(containerDesktopBorderRadiusWidth.right) !== 0 || 
-		parseInt(containerDesktopBorderRadiusWidth.bottom) !== 0 || 
+		parseInt(containerDesktopBorderRadiusWidth.top) !== 0 ||
+		parseInt(containerDesktopBorderRadiusWidth.right) !== 0 ||
+		parseInt(containerDesktopBorderRadiusWidth.bottom) !== 0 ||
 		parseInt(containerDesktopBorderRadiusWidth.left) !== 0)) {
-		
-		containerBorderRadiusDesktopWidthCSS['border-radius'] = 
+
+		containerBorderRadiusDesktopWidthCSS['border-radius'] =
 			`${generateCSSUnit(containerDesktopBorderRadiusWidth.top, containerBorderRadiusUnits.Desktop)} ` +
 			`${generateCSSUnit(containerDesktopBorderRadiusWidth.right, containerBorderRadiusUnits.Desktop)} ` +
 			`${generateCSSUnit(containerDesktopBorderRadiusWidth.bottom, containerBorderRadiusUnits.Desktop)} ` +
@@ -628,12 +627,12 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 	// Handle Tablet Border Radius
 	if (containerTabBorderRadiusWidth && (
-		parseInt(containerTabBorderRadiusWidth.top) !== 0 || 
-		parseInt(containerTabBorderRadiusWidth.right) !== 0 || 
-		parseInt(containerTabBorderRadiusWidth.bottom) !== 0 || 
+		parseInt(containerTabBorderRadiusWidth.top) !== 0 ||
+		parseInt(containerTabBorderRadiusWidth.right) !== 0 ||
+		parseInt(containerTabBorderRadiusWidth.bottom) !== 0 ||
 		parseInt(containerTabBorderRadiusWidth.left) !== 0)) {
-		
-		containerBorderRadiusTabletWidthCSS['border-radius'] = 
+
+		containerBorderRadiusTabletWidthCSS['border-radius'] =
 			`${generateCSSUnit(containerTabBorderRadiusWidth.top, containerBorderRadiusUnits.Tablet)} ` +
 			`${generateCSSUnit(containerTabBorderRadiusWidth.right, containerBorderRadiusUnits.Tablet)} ` +
 			`${generateCSSUnit(containerTabBorderRadiusWidth.bottom, containerBorderRadiusUnits.Tablet)} ` +
@@ -642,12 +641,12 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 	// Handle Mobile Border Radius
 	if (containerMobileBorderRadiusWidth && (
-		parseInt(containerMobileBorderRadiusWidth.top) !== 0 || 
-		parseInt(containerMobileBorderRadiusWidth.right) !== 0 || 
-		parseInt(containerMobileBorderRadiusWidth.bottom) !== 0 || 
+		parseInt(containerMobileBorderRadiusWidth.top) !== 0 ||
+		parseInt(containerMobileBorderRadiusWidth.right) !== 0 ||
+		parseInt(containerMobileBorderRadiusWidth.bottom) !== 0 ||
 		parseInt(containerMobileBorderRadiusWidth.left) !== 0)) {
-		
-		containerBorderRadiusMobileWidthCSS['border-radius'] = 
+
+		containerBorderRadiusMobileWidthCSS['border-radius'] =
 			`${generateCSSUnit(containerMobileBorderRadiusWidth.top, containerBorderRadiusUnits.Mobile)} ` +
 			`${generateCSSUnit(containerMobileBorderRadiusWidth.right, containerBorderRadiusUnits.Mobile)} ` +
 			`${generateCSSUnit(containerMobileBorderRadiusWidth.bottom, containerBorderRadiusUnits.Mobile)} ` +
@@ -680,7 +679,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			styles = {
 				...styles,
 				'background-image': `url(${bgImageUrl})`,
-				'background-position': bgImagePosition 
+				'background-position': bgImagePosition
 					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
 					: "50% 50%",
 				'background-attachment': bgAttachment || undefined,
@@ -718,7 +717,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			styles = {
 				...styles,
 				'background-image': `url(${bgImageUrl})`,
-				'background-position': bgImagePosition 
+				'background-position': bgImagePosition
 					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
 					: "50% 50%",
 				'background-attachment': bgAttachment || undefined,
@@ -729,8 +728,6 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 		return styles;
 	};
-
-
 
 	// Function to get background overlay styles based on device type for FB Container
 	const getBackgroundOverlayNormalStyles = (device) => {
@@ -758,7 +755,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			styles = {
 				...styles,
 				'background-image': `url(${bgImageUrl})`,
-				'background-position': bgImagePosition 
+				'background-position': bgImagePosition
 					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
 					: "50% 50%",
 				'background-attachment': bgAttachment || undefined,
@@ -796,7 +793,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			styles = {
 				...styles,
 				'background-image': `url(${bgImageUrl})`,
-				'background-position': bgImagePosition 
+				'background-position': bgImagePosition
 					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
 					: "50% 50%",
 				'background-attachment': bgAttachment || undefined,
@@ -843,7 +840,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	}
 	// End Handle overlay styles.
 
-  
+
 	widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}`] = {
 		'max-width': generateCSSUnit(widthDesktopFallback, customWidthUnits['Desktop']),
 		'width': '100%',
@@ -853,25 +850,25 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 		// Position related properties
 		'position': containerPositionType === 'default' ? 'relative' : containerPositionType,
-				
+
 		// Horizontal positioning
-		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
-				containerHZOrientationType === 'left' && containerHZLeftOffset.Desktop ? 
+		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				containerHZOrientationType === 'left' && containerHZLeftOffset.Desktop ?
 				generateCSSUnit(containerHZLeftOffset.Desktop, containerHZLeftOffsetUnits.Desktop) : undefined,
-				
-		'right': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
-				containerHZOrientationType === 'right' && containerHZRightOffset.Desktop ? 
+
+		'right': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				containerHZOrientationType === 'right' && containerHZRightOffset.Desktop ?
 				generateCSSUnit(containerHZRightOffset.Desktop, containerHZRightOffsetUnits.Desktop) : undefined,
-				
+
 		// Vertical positioning
-		'top': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
-				containerVROrientationType === 'top' && containerVRTopOffset.Desktop ? 
+		'top': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				containerVROrientationType === 'top' && containerVRTopOffset.Desktop ?
 				generateCSSUnit(containerVRTopOffset.Desktop, containerVRTopOffsetUnits.Desktop) : undefined,
-				
-		'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
-					containerVROrientationType === 'bottom' && containerVRBottomOffset.Desktop ? 
+
+		'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+					containerVROrientationType === 'bottom' && containerVRBottomOffset.Desktop ?
 					generateCSSUnit(containerVRBottomOffset.Desktop, containerVRBottomOffsetUnits.Desktop) : undefined,
-				
+
 		'z-index': containerZIndex.Desktop ? containerZIndex.Desktop : undefined,
 		'overflow': containerOverflow !== 'default' ? containerOverflow : undefined,
 
@@ -888,7 +885,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}:hover`] = {
 		...getBackgroundHoverStyles('Desktop'),
 	};
-	
+
 	widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}:after`] = {
 		...containerBgOverlayDesktop,
 	};
@@ -905,25 +902,25 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		...tabletContainerPadding,
 		...containerTabletMarginCSS,
 		...getBackgroundNormalStyles( 'Tablet' ),
-		
+
 		// Horizontal positioning
-		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
-				containerHZOrientationType === 'left' && containerHZLeftOffset.Tablet ? 
+		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				containerHZOrientationType === 'left' && containerHZLeftOffset.Tablet ?
 				generateCSSUnit(containerHZLeftOffset.Tablet, containerHZLeftOffsetUnits.Tablet) : undefined,
-				
-		'right': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
-				containerHZOrientationType === 'right' && containerHZRightOffset.Tablet ? 
+
+		'right': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				containerHZOrientationType === 'right' && containerHZRightOffset.Tablet ?
 				generateCSSUnit(containerHZRightOffset.Tablet, containerHZRightOffsetUnits.Tablet) : undefined,
-				
+
 		// Vertical positioning
-		'top': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
-				containerVROrientationType === 'top' && containerVRTopOffset.Tablet ? 
+		'top': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				containerVROrientationType === 'top' && containerVRTopOffset.Tablet ?
 				generateCSSUnit(containerVRTopOffset.Tablet, containerVRTopOffsetUnits.Tablet) : undefined,
-				
-		'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
-					containerVROrientationType === 'bottom' && containerVRBottomOffset.Tablet ? 
+
+		'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+					containerVROrientationType === 'bottom' && containerVRBottomOffset.Tablet ?
 					generateCSSUnit(containerVRBottomOffset.Tablet, containerVRBottomOffsetUnits.Tablet) : undefined,
-				
+
 		'z-index': containerZIndex.Tablet ? containerZIndex.Tablet : undefined,
 
 		// Border style
@@ -951,29 +948,29 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		...getBackgroundNormalStyles( 'Mobile' ),
 
 		// Horizontal positioning
-		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
-				containerHZOrientationType === 'left' && containerHZLeftOffset.Mobile ? 
+		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				containerHZOrientationType === 'left' && containerHZLeftOffset.Mobile ?
 				generateCSSUnit(containerHZLeftOffset.Mobile, containerHZLeftOffsetUnits.Mobile) : undefined,
-				
-		'right': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
-				containerHZOrientationType === 'right' && containerHZRightOffset.Mobile ? 
+
+		'right': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				containerHZOrientationType === 'right' && containerHZRightOffset.Mobile ?
 				generateCSSUnit(containerHZRightOffset.Mobile, containerHZRightOffsetUnits.Mobile) : undefined,
-				
+
 		// Vertical positioning
-		'top': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
-				containerVROrientationType === 'top' && containerVRTopOffset.Mobile ? 
+		'top': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				containerVROrientationType === 'top' && containerVRTopOffset.Mobile ?
 				generateCSSUnit(containerVRTopOffset.Mobile, containerVRTopOffsetUnits.Mobile) : undefined,
-				
-		'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' && 
-					containerVROrientationType === 'bottom' && containerVRBottomOffset.Mobile ? 
+
+		'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+					containerVROrientationType === 'bottom' && containerVRBottomOffset.Mobile ?
 					generateCSSUnit(containerVRBottomOffset.Mobile, containerVRBottomOffsetUnits.Mobile) : undefined,
-				
+
 		'z-index': containerZIndex.Mobile ? containerZIndex.Mobile : undefined,
 
 		// Border style
 		...containerBorderMobileWidthCSS,
 		...containerBorderRadiusMobileWidthCSS,
-		
+
 	};
 	widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId}:hover`] = {
 		...getBackgroundHoverStyles('Mobile'),
@@ -1100,7 +1097,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		},
 	};
 
-	
+
 	if (containerLayout === 'flex') {
 		selectors[containerFlexSelector] = {
 			'display': 'flex',
@@ -1322,7 +1319,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'box-shadow': '',
 		};
 
-		
+
 	} else {
 		// selectors[`.frontis-blocks-block-${clientId}`] = containerCSS;
 		selectors['.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
@@ -1349,8 +1346,6 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		}
 		selectors['.wp-block-frontis-blocks-container:hover'] = {
 			'border-color': containerBorderHColor,
-			'box-shadow': '',
-
 			'border-color': containerBorderHoverColor ? containerBorderHoverColor : undefined,
   			'box-shadow': containerGlobalHoverBoxShadowCssValue ? containerGlobalHoverBoxShadowCssValue : undefined
 		};
@@ -1585,9 +1580,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	);
 
 	styling_css += generateCSS(widthSelectorsMobile, ' ', true, 'mobile');
-
 	styling_css += containerGlobalCustomCSSValue;
-
 	return styling_css;
 }
 
