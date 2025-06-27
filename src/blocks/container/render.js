@@ -11,66 +11,22 @@ const Render = ( props ) => {
 	const { attributes, setAttributes, clientId, hasSliderParent, hasPopupParent } = props;
 
 	const {
-		p_block_id,
 		htmlTag,
-		topType,
-		topFlip,
-		topContentAboveShape,
-		bottomType,
-		bottomFlip,
-		bottomContentAboveShape,
 		backgroundType,
 		backgroundVideo,
-		topInvert,
-		bottomInvert,
 		isBlockRootParent,
-		contentWidth,
-		innerContentWidth,
-			/** Normal Bg */
-			containerBgColorSwitcher,
-			containerBgNormalBackgroundType,
-			containerBgNormalClassicColor,
-			containerBgNormalGradientColor,
-			containerBgNormalCustomGradientSwitcher,
-			containerBgNormalCustomGradientInputValue,
-			containerBgNormalBackgroundImageUrl,
-			containerBgNormalBackgroundImageAlt,
-			containerBgNormalBackgroundImageID,
-			containerBgNormalBackgroundImagePosition,
-			containerBgNormalBackgroundImageAttachment,
-			containerBgNormalBackgroundImageRepeat,
-			containerBgNormalBackgroundImageSize,
-
-			/** Hover Bg */
-			containerBgHoverBackgroundType,
-			containerBgHoverClassicColor,
-			containerBgHoverGradientColor,
-			containerBgHoverCustomGradientSwitcher,
-			containerBgHoverCustomGradientInputValue,
-			containerBgHoverBackgroundImageUrl,
-			containerBgHoverBackgroundImageAlt,
-			containerBgHoverBackgroundImageID,
-			containerBgHoverBackgroundImagePosition,
-			containerBgHoverBackgroundImageAttachment,
-			containerBgHoverBackgroundImageRepeat,
-			containerBgHoverBackgroundImageSize,
-
-			// From fb
-			containerType,
-			
-			containerDesktopSwitcher,
-			containerTabletSwitcher,
-			containerMobileSwitcher,
-
-			containerGlobalCustomCSS,
-			containerGlobalCustomCSSValue,
-			containerGlobalCustomCSSClass,
-			containerGlobalCustomCSSID,
+		// From fb
+		containerType,
+		containerDesktopSwitcher,
+		containerTabletSwitcher,
+		containerMobileSwitcher,
+		containerGlobalCustomCSS,
+		containerGlobalCustomCSSClass,
+		containerGlobalCustomCSSID,
 	} = attributes;
 
 	const direction = attributes[ 'direction'+deviceType ];
 	const moverDirection = 'row' === direction ? 'horizontal' : 'vertical';
-	// const getContainerBGStyle = backgroundCss( attributes, deviceType, clientId, { hasPseudo: true, forStyleSheet: false } );
 	const getContainerBGStyle = backgroundCss( attributes, deviceType, clientId );
 
 	const { getBlockOrder } = select( 'core/block-editor' );
@@ -80,7 +36,7 @@ const Render = ( props ) => {
 	const Tag = 'a' === htmlTag ? 'div' : `${ htmlTag }`;
 	const hasChildren = 0 !== select( 'core/block-editor' ).getBlocks( clientId ).length;
 	const hasChildrenClass = hasChildren ? 'frontis-blocks-container-has-children' : '';
-	
+
 	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : `child ${containerGlobalCustomCSSClass}`;
 
 	let desktopResponsiveClass = '';

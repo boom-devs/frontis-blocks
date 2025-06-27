@@ -102,7 +102,7 @@ const attributes = {
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
-			Mobile: 'px'	
+			Mobile: 'px'
 		}
 	},
 
@@ -114,13 +114,13 @@ const attributes = {
 			Mobile: ''
 		}
 	},
-	
+
 	columnGapUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
-			Mobile: 'px'	
+			Mobile: 'px'
 		}
 	},
 
@@ -255,7 +255,7 @@ const attributes = {
 				{
 					id: 'column-1',
 					title: 'Column 1',
-					type: 'auto',	
+					type: 'auto',
 					width: '',
 					widthUnits: 'fr',
 					min: '',
@@ -300,7 +300,7 @@ const attributes = {
 				{
 					id: 'row-1',
 					title: 'Row 1',
-					type: 'auto',	
+					type: 'auto',
 					width: '',
 					widthUnits: 'fr',
 					min: '',
@@ -324,7 +324,7 @@ const attributes = {
 			],
 		},
 	},
-	
+
 	containerJustify: {
 		type: 'object',
 		default: {
@@ -352,7 +352,7 @@ const attributes = {
 			Mobile: 'center',
 		}
 	},
-	
+
 	justifyContentDesktop: {
 		type: 'string',
 		default: 'center',
@@ -424,7 +424,7 @@ const attributes = {
 		default: "",
 	},
 	/** Bg Normal Image for fb container */
-	containerBgNormalBackgroundImageUrl: { 
+	containerBgNormalBackgroundImageUrl: {
         type: "object",
         default: {
             Desktop: "",
@@ -548,7 +548,7 @@ const attributes = {
 		type: "string",
 		default: "normal",
 	},
-	containerBgOverlayNormalBackgroundType: { 
+	containerBgOverlayNormalBackgroundType: {
 		type: "string",
 		default: "classic",
 	},
@@ -569,7 +569,7 @@ const attributes = {
 		default: "",
 	},
 	/** Bg Normal Image for fb container */
-	containerBgOverlayNormalBackgroundImageUrl: { 
+	containerBgOverlayNormalBackgroundImageUrl: {
         type: "object",
         default: {
             Desktop: "",
@@ -676,136 +676,6 @@ const attributes = {
 
 	/** End Overlay for fb container */
 
-
-	// backgroundType: {
-	// 	type: 'string',
-	// 	default: 'none',
-	// },
-	// backgroundImageDesktop: {
-	// 	type: 'object',
-	// },
-	// backgroundImageTablet: {
-	// 	type: 'object',
-	// },
-	// backgroundImageMobile: {
-	// 	type: 'object',
-	// },
-	// backgroundPositionDesktop: {
-	// 	type: 'object',
-	// 	default: {
-	// 		x: 0.5,
-	// 		y: 0.5,
-	// 	}
-	// },
-	// backgroundPositionTablet: {
-	// 	type: 'object',
-	// },
-	// backgroundPositionMobile: {
-	// 	type: 'object',
-	// },
-	// backgroundSizeDesktop: {
-	// 	type: 'string',
-	// 	default: 'cover',
-	// },
-	// backgroundSizeTablet: {
-	// 	type: 'string',
-	// },
-	// backgroundSizeMobile: {
-	// 	type: 'string',
-	// },
-	// backgroundRepeatDesktop: {
-	// 	type: 'string',
-	// 	default: 'no-repeat',
-	// },
-	// backgroundRepeatTablet: {
-	// 	type: 'string',
-	// },
-	// backgroundRepeatMobile: {
-	// 	type: 'string',
-	// },
-	// backgroundAttachmentDesktop: {
-	// 	type: 'string',
-	// 	default: 'scroll',
-	// },
-	// backgroundAttachmentTablet: {
-	// 	type: 'string',
-	// },
-	// backgroundAttachmentMobile: {
-	// 	type: 'string',
-	// },
-	// backgroundColor: {
-	// 	type: 'string',
-	// },
-	// backgroundOpacity: {
-	// 	type: 'number',
-	// },
-	// backgroundImageColor: {
-	// 	type: 'string',
-	// 	default: '#FFFFFF75',
-	// },
-	// gradientValue: {
-	// 	type: 'string',
-	// 	default: 'linear-gradient(90deg, rgba(6, 147, 227, 0.5) 0%, rgba(155, 81, 224, 0.5) 100%)',
-	// },
-	// borderStyle: {
-	// 	type: 'string',
-	// },
-	// borderWidth: {
-	// 	type: 'number',
-	// },
-	// borderRadius: {
-	// 	type: 'number',
-	// },
-	// borderColor: {
-	// 	type: 'string',
-	// },
-	// borderHoverColor: {
-	// 	type: 'string',
-	// },
-	// boxShadowColor: {
-	// 	type: 'string',
-	// 	default: '#00000070',
-	// },
-	// boxShadowHOffset: {
-	// 	type: 'number',
-	// 	default: 0,
-	// },
-	// boxShadowVOffset: {
-	// 	type: 'number',
-	// 	default: 0,
-	// },
-	// boxShadowBlur: {
-	// 	type: 'number',
-	// },
-	// boxShadowSpread: {
-	// 	type: 'number',
-	// },
-	// boxShadowPosition: {
-	// 	type: 'string',
-	// 	default: 'outset',
-	// },
-	// boxShadowColorHover: {
-	// 	type: 'string',
-	// },
-	// boxShadowHOffsetHover: {
-	// 	type: 'number',
-	// 	default: 0,
-	// },
-	// boxShadowVOffsetHover: {
-	// 	type: 'number',
-	// 	default: 0,
-	// },
-	// boxShadowBlurHover: {
-	// 	type: 'number',
-	// },
-	// boxShadowSpreadHover: {
-	// 	type: 'number',
-	// },
-	// boxShadowPositionHover: {
-	// 	type: 'string',
-	// 	default: 'outset',
-	// },
-
 	/** Start Padding */
 	containerPaddingUnits: {
 		type: 'object',
@@ -816,29 +686,29 @@ const attributes = {
 		}
 	},
 	containerDesktopPadding: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: "10",
 			bottom: "10",
-			left: "10",	
+			left: "10",
 			right: "10",
 		}
 	},
 	containerTabletPadding: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: "",
 			bottom: "",
-			left: "",	
+			left: "",
 			right: "",
 		}
 	},
-	containerMobilePadding: {	
-		type: "object", 
+	containerMobilePadding: {
+		type: "object",
 		default: {
 			top: "",
 			bottom: "",
-			left: "",	
+			left: "",
 			right: "",
 		}
 	},
@@ -856,7 +726,7 @@ const attributes = {
 		}
     },
     containerDesktopMargin: {
-        type: "object", 
+        type: "object",
         default: {
 			top: "0",
             bottom: "0",
@@ -865,7 +735,7 @@ const attributes = {
         },
     },
     containerTabletMargin: {
-        type: "object", 
+        type: "object",
         default: {
             top: "0",
             bottom: "0",
@@ -874,7 +744,7 @@ const attributes = {
         },
     },
     containerMobileMargin: {
-        type: "object", 
+        type: "object",
         default: {
             top: "0",
             bottom: "0",
@@ -1579,7 +1449,7 @@ const attributes = {
         type: "string",
         default: "normal"
     },
-    
+
     containerBorderUnits : {
         type: 'object',
         default: {
@@ -1589,7 +1459,7 @@ const attributes = {
         }
     },
     containerDesktopBorderWidth: {
-        type: "object", 
+        type: "object",
         default: {
             top: '0',
             bottom: '0',
@@ -1598,7 +1468,7 @@ const attributes = {
         },
     },
     containerTabBorderWidth: {
-        type: "object", 
+        type: "object",
         default: {
             top: '0',
             bottom: '0',
@@ -1607,7 +1477,7 @@ const attributes = {
         },
     },
     containerMobileBorderWidth: {
-        type: "object", 
+        type: "object",
         default: {
             top: '0',
             bottom: '0',
@@ -1619,7 +1489,7 @@ const attributes = {
         type : "boolean",
         default: true
     },
-    
+
     containerBorderRadiusUnits : {
         type: 'object',
         default: {
@@ -1629,7 +1499,7 @@ const attributes = {
         }
     },
     containerDesktopBorderRadiusWidth: {
-        type: "object", 
+        type: "object",
         default: {
             top: '0',
             bottom: '0',
@@ -1638,7 +1508,7 @@ const attributes = {
         },
     },
     containerTabBorderRadiusWidth: {
-        type: "object", 
+        type: "object",
         default: {
             top: '0',
             bottom: '0',
@@ -1647,7 +1517,7 @@ const attributes = {
         },
     },
     containerMobileBorderRadiusWidth: {
-        type: "object", 
+        type: "object",
         default: {
             top: '0',
             bottom: '0',
@@ -1680,19 +1550,19 @@ const attributes = {
         type: 'string',
         default: '',
     },
-	containerGlobalCustomCSS : { 
+	containerGlobalCustomCSS : {
 		type: "string",
 		default: "",
 	},
-	containerGlobalCustomCSSValue : { 
+	containerGlobalCustomCSSValue : {
 		type: "string",
 		default: "",
 	},
-	containerGlobalCustomCSSID : { 
+	containerGlobalCustomCSSID : {
 		type: "string",
 		default: "",
 	},
-	containerGlobalCustomCSSClass : { 
+	containerGlobalCustomCSSClass : {
 		type: "string",
 		default: "",
 	},
