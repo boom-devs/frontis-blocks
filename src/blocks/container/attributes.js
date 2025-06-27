@@ -41,6 +41,11 @@ const attributes = {
 	},
 	htmlTagLink: {
 		type: 'object',
+		default: {
+			url: '',
+			opensInNewTab: false,
+			noFollow: false,
+		}
 	},
 	linkTarget: {
 		type: 'boolean',
@@ -229,10 +234,6 @@ const attributes = {
 		default: false,
 	},
 
-	containerHtmlTag: {
-		type: 'string',
-		default: 'div',
-	},
 
 	containerColumnsItemList: {
 		type: 'object',
