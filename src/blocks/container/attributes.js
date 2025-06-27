@@ -226,7 +226,7 @@ const attributes = {
 
 	containerChildrenWidth: {
 		type: 'string',
-		default: 'full',
+		default: 'default',
 	},
 
 	containerEqualHeight: {
