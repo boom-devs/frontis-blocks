@@ -23581,6 +23581,9 @@ var FONT_FAMILYS = [{
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Noto Serif Display", "frontis-blocks"),
   value: "Noto Serif Display"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Outfit", "frontis-blocks"),
+  value: "Outfit"
 }];
 
 /***/ }),
