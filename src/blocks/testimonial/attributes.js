@@ -78,6 +78,18 @@ const attributes = {
         type: 'string',
         default: 'star',
     },
+    TestimonialRatingImageUrl: {
+        type: 'string',
+        default: '',
+    },
+    TestimonialRatingImageAlt: {
+        type: 'string',
+        default: '',
+    },
+    TestimonialRatingImageID: {
+        type: 'number',
+        default: '',
+    },
     TestimonialRatinIconAlign: {
         type: "string",
         default: "icon",
@@ -89,6 +101,18 @@ const attributes = {
     TestimonialQuoteIcon: {
         type: 'string',
         default: 'quote-left',
+    },
+    TestimonialQuoteImageUrl: {
+        type: 'string',
+        default: '',
+    },
+    TestimonialQuoteImageAlt: {
+        type: 'string',
+        default: '',
+    },
+    TestimonialQuoteImageID: {
+        type: 'number',
+        default: '',
     },
     TestimonialQuoteIconAlign: {
         type: "string",

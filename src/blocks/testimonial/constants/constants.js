@@ -31,6 +31,7 @@ export const NORMAL_HOVER = [
 export const ICON_ALIGN = [
 	{ label: __("None"), value: "none" },
 	{ label: __("Icon"), value: "icon" },
+	{ label: __("Image"), value: "image" },
 ];
 
 export const TEXT_ALIGN = [
