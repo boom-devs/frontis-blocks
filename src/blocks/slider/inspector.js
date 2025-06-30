@@ -2007,9 +2007,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
             </PanelBody>
 
-            <PanelBody title={__("Navigation", "frontis-blocks")} initialOpen={false}>
-                {displayDots && (
-
+            {displayArrows && (
+                <PanelBody title={__("Navigation", "frontis-blocks")} initialOpen={false}>
                     <>
                         <ToggleControl
                             label={ __( 'Custom Icon', 'frontis-blocks' ) }
@@ -2340,17 +2339,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                     )}
                     </>
-                )}
-            </PanelBody>
+                </PanelBody>
+            )}
 
-            <PanelBody title={__("Pagination", "frontis-blocks")} initialOpen={false}>
-                <SelectControl
-                    label={__('Pagination Type', 'frontis-blocks')}
-                    value={paginationType}
-                    options={PAGINATION_TYPE}
-                    onChange={(value) => setAttributes({ paginationType: value })}
-                />
-            </PanelBody>
+            {displayDots && (
+                <PanelBody title={__("Pagination", "frontis-blocks")} initialOpen={false}>
+                    <SelectControl
+                        label={__('Pagination Type', 'frontis-blocks')}
+                        value={paginationType}
+                        options={PAGINATION_TYPE}
+                        onChange={(value) => setAttributes({ paginationType: value })}
+                    />
+                </PanelBody>
+            )}
         </>
 	);
 
