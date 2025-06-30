@@ -210,6 +210,7 @@ const Inspector = (props) => {
 		{ title: 'Grid', label: __('Grid', 'frontis-blocks'), value: "grid" },
 	];
 	const CHILDREN_WIDTH = [
+		{ title: 'Default', label: __('Default', 'frontis-blocks'), value: "default" },
 		{ title: 'Auto', label: __('Auto', 'frontis-blocks'), value: "auto" },
 		{ title: 'Full', label: __('Full', 'frontis-blocks'), value: "full" },
 	];
@@ -309,20 +310,49 @@ const Inspector = (props) => {
         setAttributes({ containerColumnsItemList: {...containerColumnsItemList, [deviceType]: updatedItems} });
     };
 
-    const handleColumnDeleteItem = (id) => {
+	const reindexItems = (items, idType, titleType) => {
+		return items.map((item, index) => ({
+			...item,
+			id: `${idType}-${index + 1}`,
+			title: `${titleType} ${index + 1}`,
+		}));
+	};
+
+	const handleColumnDeleteItem = (id) => {
 		let updatedItems = [];
-		if(deviceType === 'Desktop') {
-			updatedItems = containerColumnsItem.Desktop.filter(item => item.id !== id);
-		} else if(deviceType === 'Tablet') {
-			updatedItems = containerColumnsItem.Tablet.filter(item => item.id !== id);
-		} else if(deviceType === 'Mobile') {
-			updatedItems = containerColumnsItem.Mobile.filter(item => item.id !== id);
+	
+		if (deviceType === 'Desktop') {
+			updatedItems = reindexItems(
+				containerColumnsItem.Desktop.filter(item => item.id !== id), 
+				'column',
+				'Column'
+			);
+		} else if (deviceType === 'Tablet') {
+			updatedItems = reindexItems(
+				containerColumnsItem.Tablet.filter(item => item.id !== id),
+				'column',
+				'Column'
+			);
+		} else if (deviceType === 'Mobile') {
+			updatedItems = reindexItems(
+				containerColumnsItem.Mobile.filter(item => item.id !== id),
+				'column',
+				'Column'
+			);
 		}
-
-        setAttributes({ containerColumnsItemList: {...containerColumnsItemList, [deviceType]: updatedItems} });
-        setContainerColumnsItem({ ...containerColumnsItem, [deviceType]: updatedItems });
-
-    };
+	
+		setAttributes({
+			containerColumnsItemList: {
+				...containerColumnsItemList,
+				[deviceType]: updatedItems,
+			},
+		});
+	
+		setContainerColumnsItem({
+			...containerColumnsItem,
+			[deviceType]: updatedItems,
+		});
+	};
 
 
 	const handleColumnDuplicateItem = (id) => {
@@ -393,12 +423,25 @@ const Inspector = (props) => {
 
     const handleRowDeleteItem = (id) => {
 		let updatedItems = [];
+
 		if(deviceType === 'Desktop') {
-			updatedItems = containerRowsItem.Desktop.filter(item => item.id !== id);
-		} else if(deviceType === 'Tablet') {
-			updatedItems = containerRowsItem.Tablet.filter(item => item.id !== id);
-		} else if(deviceType === 'Mobile') {
-			updatedItems = containerRowsItem.Mobile.filter(item => item.id !== id);
+			updatedItems = reindexItems(
+				containerRowsItem.Desktop.filter(item => item.id !== id),
+				'row',
+				'Row'
+			);
+		} else if (deviceType === 'Tablet') {
+			updatedItems = reindexItems(
+				containerRowsItem.Tablet.filter(item => item.id !== id),
+				'row',
+				'Row'
+			);
+		} else if (deviceType === 'Mobile') {
+			updatedItems = reindexItems(
+				containerRowsItem.Mobile.filter(item => item.id !== id),
+				'row',
+				'Row'
+			);
 		}
 
         setAttributes({ containerRowsItemList: {...containerRowsItemList, [deviceType]: updatedItems} });
