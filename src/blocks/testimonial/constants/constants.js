@@ -40,6 +40,12 @@ export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
 ];
 
+export const FLEX_ALIGN = [
+	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "flex-start" },
+	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
+	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "flex-end" },
+];
+
 export const HEADING = [
 	{ label: __("H1", "frontis-blocks"), value: "h1" },
 	{ label: __("H2", "frontis-blocks"), value: "h2" },

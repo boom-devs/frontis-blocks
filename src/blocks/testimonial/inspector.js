@@ -24,6 +24,7 @@ import {
     UNIT_TYPES,
     TEXT_ALIGN,
     ICON_ALIGN,
+    FLEX_ALIGN,
     Testimonial,
     BORDER_STYLES,
     HEADING,
@@ -49,6 +50,7 @@ import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ImageControl from '@Components/image-control';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 
 import './editor.scss';
 
@@ -220,6 +222,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialDesignationMarginTablet,
         TestimonialDesignationMarginMobile,
         TestimonialDesignationMarginLink,
+
+        TestimonialRatingIconAlign,
+        TestimonialRatingIconGap,
+        TestimonialRatingIconGapUnits,
 
         TestimonialRatingIconSize,
         TestimonialRatingIconSizeUnits,
@@ -1807,8 +1813,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockID} .fb-testimonial-rating {
+            display: flex;
+            align-items: center;
+            justify-content: ${TestimonialRatingIconAlign};
+            gap: ${TestimonialRatingIconGap.Desktop}${TestimonialRatingIconGapUnits.Desktop};
             ${testimonialRatingIconDesktopMargin && TestimonialRatingIconMarginDesktop.top ? `margin: ${testimonialRatingIconDesktopMargin};` : ''}
-            
         }
 
         .${blockID} .fb-testimonial-rating-icon svg {
@@ -1870,6 +1879,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockID} .fb-testimonial-rating {
+                gap: ${TestimonialRatingIconGap.Tablet}${TestimonialRatingIconGapUnits.Tablet};
                 ${testimonialRatingIconTabletMargin && TestimonialRatingIconMarginTablet.top ? `margin: ${testimonialRatingIconTabletMargin};` : ''}
             }
             .${blockID} .fb-testimonial-rating-icon svg {
@@ -1931,6 +1941,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${globalMobileBorderRadiusWidth && TestimonialGlobalBorderRadiusMobile.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
             }
             .${blockID} .fb-testimonial-rating {
+                gap: ${TestimonialRatingIconGap.Mobile}${TestimonialRatingIconGapUnits.Mobile};
                 ${testimonialRatingIconMobileMargin && TestimonialRatingIconMarginMobile.top ? `margin: ${testimonialRatingIconMobileMargin};` : ''}
             }
             .${blockID} .fb-testimonial-rating-icon svg {
@@ -2152,6 +2163,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialDesignationMarginTablet,
         TestimonialDesignationMarginMobile,
         TestimonialDesignationMarginLink,
+
+        TestimonialRatingIconAlign,
+        TestimonialRatingIconGap,
+        TestimonialRatingIconGapUnits,
 
         TestimonialRatingIconSize,
         TestimonialRatingIconSizeUnits,
@@ -2580,6 +2595,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 initialOpen={false}
                 className="fb-setting-feature-icon-wrapper"
             >
+
+                <BaseControl
+                    label={__("Alignment", "frontis-blocks")}
+                    id="fb-setting-text-alignment"
+                    className="fb-setting-text-alignment"
+                    >
+                        <ButtonGroup
+                            className="fb-setting-text-alignment-group-btn"
+                        >
+                            {FLEX_ALIGN.map((item, key) => (
+                                <Button
+                                    key={key}
+                                    onClick={() => setAttributes({ TestimonialRatingIconAlign: item.value })}
+                                    className={`fb-setting-text-alignment-single-btn ${TestimonialRatingIconAlign === item.value ? 'active' : ''}`}
+                                >
+                                    {item.label}
+                                </Button>
+                            ))}
+                        </ButtonGroup>
+                </BaseControl>
+
+                <FB_Range
+                    min={0}
+                    max={100}
+                    label={__("Icon Gap", "frontis-blocks")}
+                    rangeValue={TestimonialRatingIconGap} 
+                    onChangeHandler={(value) => setAttributes({ TestimonialRatingIconGap: value })}
+                    rangeUnitHandler={(value) => setAttributes({ TestimonialRatingIconGapUnits: value })}
+                    deviceType={deviceType}
+                    units={TestimonialRatingIconGapUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+
                 <FB_Range
                     min={0}
                     max={100}
