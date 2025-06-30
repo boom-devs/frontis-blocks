@@ -48,6 +48,7 @@ import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
+import FB_ImageControl from '@Components/image-control';
 
 import './editor.scss';
 
@@ -74,9 +75,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         RatingSwitcher,
         TestimonialRatingNumber,
         TestimonialRatingicon,
+        TestimonialRatingImageUrl,
+        TestimonialRatingImageAlt,
+        TestimonialRatingImageID,
         TestimonialRatinIconAlign,
         QuoteIconSwitcher,
         TestimonialQuoteIcon,
+        TestimonialQuoteImageUrl,
+        TestimonialQuoteImageAlt,
+        TestimonialQuoteImageID,
         TestimonialQuoteIconAlign,
 
         TestimonialImageWidth,
@@ -1690,6 +1697,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `height: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
             fill: ${TestimonialQuoteIconColor};
         }
+        .${blockID} .fb-testimonial-quote-icon img {
+            ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `width: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
+            ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `height: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
+        }
         .${blockID} .fb-testimonial-quote-icon:hover svg {
             fill: ${TestimonialQuoteIconHoverColor};
         }
@@ -1805,6 +1816,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             height: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
             fill: ${TestimonialRatingIconColor};
         }
+        .${blockID} .fb-testimonial-rating-icon img {
+            width: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
+            height: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
+        }
         .${blockID} .fb-testimonial-rating-icon:hover svg {
             fill: ${TestimonialRatingIconHoverColor};
         }
@@ -1816,6 +1831,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 align-items: center;
                 justify-content: space-between !important;
                 ` : ''}
+
         }
         .${blockID} .fb-user-desc {
                 ${TestimonialPresetStyle === "preset-5" ? 
@@ -1844,9 +1860,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Tablet && TestimonialQuoteIconLeftPositionUnits.Tablet ? `${TestimonialQuoteIconLeftPosition.Tablet}${TestimonialQuoteIconLeftPositionUnits.Tablet}` : '0'};` : ''}
                 ${testimonialQuoteIconTabletMargin && TestimonialQuoteIconMarginTablet.top ? `margin: ${testimonialQuoteIconTabletMargin};` : ''}
             }
+            .${blockID} .fb-testimonial-quote-icon svg {
+                ${TestimonialQuoteIconSize.Tablet && TestimonialQuoteIconSizeUnits.Tablet ? `width: ${TestimonialQuoteIconSize.Tablet}${TestimonialQuoteIconSizeUnits.Tablet};` : ''}
+                ${TestimonialQuoteIconSize.Tablet && TestimonialQuoteIconSizeUnits.Tablet ? `height: ${TestimonialQuoteIconSize.Tablet}${TestimonialQuoteIconSizeUnits.Tablet};` : ''}
+            }
+            .${blockID} .fb-testimonial-quote-icon img {
+                ${TestimonialQuoteIconSize.Tablet && TestimonialQuoteIconSizeUnits.Tablet ? `width: ${TestimonialQuoteIconSize.Tablet}${TestimonialQuoteIconSizeUnits.Tablet};` : ''}
+                ${TestimonialQuoteIconSize.Tablet && TestimonialQuoteIconSizeUnits.Tablet ? `height: ${TestimonialQuoteIconSize.Tablet}${TestimonialQuoteIconSizeUnits.Tablet};` : ''}
+            }
 
             .${blockID} .fb-testimonial-rating {
                 ${testimonialRatingIconTabletMargin && TestimonialRatingIconMarginTablet.top ? `margin: ${testimonialRatingIconTabletMargin};` : ''}
+            }
+            .${blockID} .fb-testimonial-rating-icon svg {
+                width: ${TestimonialRatingIconSize.Tablet}${TestimonialRatingIconSizeUnits.Tablet};
+                height: ${TestimonialRatingIconSize.Tablet}${TestimonialRatingIconSizeUnits.Tablet};
+            }
+            .${blockID} .fb-testimonial-rating-icon img {
+                width: ${TestimonialRatingIconSize.Tablet}${TestimonialRatingIconSizeUnits.Tablet};
+                height: ${TestimonialRatingIconSize.Tablet}${TestimonialRatingIconSizeUnits.Tablet};
             }
             .${blockID} .fb-testimonial-image img {
                 ${TestimonialImageWidth.Tablet && TestimonialImageWidthUnits.Tablet ? `width: ${TestimonialImageWidth.Tablet}${TestimonialImageWidthUnits.Tablet};` : ''}
@@ -1901,11 +1933,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockID} .fb-testimonial-rating {
                 ${testimonialRatingIconMobileMargin && TestimonialRatingIconMarginMobile.top ? `margin: ${testimonialRatingIconMobileMargin};` : ''}
             }
+            .${blockID} .fb-testimonial-rating-icon svg {
+                width: ${TestimonialRatingIconSize.Mobile}${TestimonialRatingIconSizeUnits.Mobile};
+                height: ${TestimonialRatingIconSize.Mobile}${TestimonialRatingIconSizeUnits.Mobile};
+            }
+            .${blockID} .fb-testimonial-rating-icon img {
+                width: ${TestimonialRatingIconSize.Mobile}${TestimonialRatingIconSizeUnits.Mobile};
+                height: ${TestimonialRatingIconSize.Mobile}${TestimonialRatingIconSizeUnits.Mobile};
+            }
             .${blockID} .fb-testimonial-quote-icon {
                 ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
                 ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Mobile && TestimonialQuoteIconTopPositionUnits.Mobile ? `${TestimonialQuoteIconTopPosition.Mobile}${TestimonialQuoteIconTopPositionUnits.Mobile}` : '0'};` : ''}
                 ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Mobile && TestimonialQuoteIconLeftPositionUnits.Mobile ? `${TestimonialQuoteIconLeftPosition.Mobile}${TestimonialQuoteIconLeftPositionUnits.Mobile}` : '0'};` : ''}
                 ${testimonialQuoteIconMobileMargin && TestimonialQuoteIconMarginMobile.top ? `margin: ${testimonialQuoteIconMobileMargin};` : ''}
+            }
+            .${blockID} .fb-testimonial-quote-icon svg {
+                ${TestimonialQuoteIconSize.Mobile && TestimonialQuoteIconSizeUnits.Mobile ? `width: ${TestimonialQuoteIconSize.Mobile}${TestimonialQuoteIconSizeUnits.Mobile};` : ''}
+                ${TestimonialQuoteIconSize.Mobile && TestimonialQuoteIconSizeUnits.Mobile ? `height: ${TestimonialQuoteIconSize.Mobile}${TestimonialQuoteIconSizeUnits.Mobile};` : ''}
+            }
+            .${blockID} .fb-testimonial-quote-icon img {
+                ${TestimonialQuoteIconSize.Mobile && TestimonialQuoteIconSizeUnits.Mobile ? `width: ${TestimonialQuoteIconSize.Mobile}${TestimonialQuoteIconSizeUnits.Mobile};` : ''}
+                ${TestimonialQuoteIconSize.Mobile && TestimonialQuoteIconSizeUnits.Mobile ? `height: ${TestimonialQuoteIconSize.Mobile}${TestimonialQuoteIconSizeUnits.Mobile};` : ''}
             }
 
             .${blockID} .fb-testimonial-image img {
@@ -2335,10 +2383,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {TestimonialRatinIconAlign === 'icon' && (
                                     <FBIconPicker value={TestimonialRatingicon} setIconHandler={ratingIconHandler} /> 
                                 )}
+                                {TestimonialRatinIconAlign === 'image' && (
+                                    <FB_ImageControl
+                                        globalImageUrl={TestimonialRatingImageUrl}
+                                        setglobalImageUrl={(value) => setAttributes({ TestimonialRatingImageUrl: value })}
+                                        globalImageAlt={TestimonialRatingImageAlt}
+                                        setglobalImageAlt={(value) => setAttributes({ TestimonialRatingImageAlt: value })}
+                                        globalImageID={TestimonialRatingImageID}
+                                        setglobalImageID={(value) => setAttributes({ TestimonialRatingImageID: value })}
+                                        isImageSize={false}
+                                    />
+                                )}
                             </BaseControl>
                         </div>
                     )}
-                    {RatingSwitcher && TestimonialRatinIconAlign === 'icon' && (
+                    {RatingSwitcher && TestimonialRatinIconAlign !== 'none' && (
                         <div className="fb-setting-rating-rangecontrol">
                             <RangeControl
                                 label={__("Rating Number", "frontis-blocks")}
@@ -2490,6 +2549,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             {TestimonialQuoteIconAlign === 'icon' && (
                                 <FBIconPicker value={TestimonialQuoteIcon} setIconHandler={quoteIconHandler} /> 
                             )}
+                            {TestimonialQuoteIconAlign === 'image' && (
+                                <FB_ImageControl
+                                    globalImageUrl={TestimonialQuoteImageUrl}
+                                    setglobalImageUrl={(value) => setAttributes({ TestimonialQuoteImageUrl: value })}
+                                    globalImageAlt={TestimonialQuoteImageAlt}
+                                    setglobalImageAlt={(value) => setAttributes({ TestimonialQuoteImageAlt: value })}
+                                    globalImageID={TestimonialQuoteImageID}
+                                    setglobalImageID={(value) => setAttributes({ TestimonialQuoteImageID: value })}
+                                    isImageSize={false}
+                                />
+                            )}
                         </BaseControl>
                     </div>
                     )}
@@ -2524,10 +2594,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     resetFallbackValue={""}
                 />
 
+                {TestimonialRatinIconAlign === 'icon' && (<>
                 <FB_SwitcherControl
-                        label={__("Rating Color", "frontis-blocks")}
-                        globalSwitcher={TestimonialRatingIconColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ TestimonialRatingIconColorSwitcher: value })}
+                    label={__("Rating Color", "frontis-blocks")}
+                    globalSwitcher={TestimonialRatingIconColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ TestimonialRatingIconColorSwitcher: value })}
                 />
 
                 {TestimonialRatingIconColorSwitcher === 'normal' && (
@@ -2545,6 +2616,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setGlobalColor={(value) => setAttributes({ TestimonialRatingIconHoverColor: value })}
                     />
                 )}
+                </>)}
 
                 <FB_Spacing
                     label={__("Margin", "frontis-blocks")}
@@ -3066,6 +3138,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     resetFallbackValue={""}
                 />
 
+                {TestimonialQuoteIconAlign === 'icon' && (<>
                 <FB_SwitcherControl
                         label={__("Icon Color", "frontis-blocks")}
                         globalSwitcher={TestimonialQuoteIconColorSwitcher}
@@ -3087,6 +3160,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setGlobalColor={(value) => setAttributes({ TestimonialQuoteIconHoverColor: value })}
                     />
                 )}
+                </>)}
 
                 <FB_Spacing
                     label={__("Margin", "frontis-blocks")}
