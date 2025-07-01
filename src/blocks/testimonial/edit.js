@@ -40,9 +40,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         RatingSwitcher,
         TestimonialRatingNumber,
         TestimonialRatingicon,
+        TestimonialRatingImageUrl,
+        TestimonialRatingImageAlt,
         TestimonialRatinIconAlign,
         QuoteIconSwitcher,
         TestimonialQuoteIcon,
+        TestimonialQuoteImageUrl,
+        TestimonialQuoteImageAlt,
         TestimonialQuoteIconAlign,
 
         testimonialGlobalWraperID,
@@ -63,7 +67,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         for (let i = 0; i < TestimonialRatingNumber; i++) {
             icons.push(
                 <div key={i} className="fb-testimonial-rating-icon">
-                    {TestimonialRatingicon ? renderSVG(TestimonialRatingicon) : ''}
+                    {TestimonialRatinIconAlign === 'icon' && TestimonialRatingicon ? renderSVG(TestimonialRatingicon) : ''}
+                    {TestimonialRatinIconAlign === 'image' && TestimonialRatingImageUrl ? <img src={TestimonialRatingImageUrl} alt={TestimonialRatingImageAlt} /> : ''}
                 </div>
             );
         }
@@ -168,7 +173,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                 </div>
                                             </div>
                                         </div>
-                                        {RatingSwitcher && TestimonialRatinIconAlign === 'icon' && (
+                                        {RatingSwitcher && TestimonialRatinIconAlign !== 'none' && (
                                             <div className="fb-testimonial-rating">
                                                 {renderRatingIcons()}
                                             </div>
@@ -198,7 +203,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         )}
                                         {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'icon' && (
                                             <div className="fb-testimonial-quote-icon">
-                                                {TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
+                                                {TestimonialQuoteIconAlign === 'icon' && TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
+                                            </div>
+                                        )}
+                                        {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'image' && (
+                                            <div className="fb-testimonial-quote-icon">
+                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} /> : ''}
                                             </div>
                                         )}
                                     </>
@@ -271,7 +281,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     )}
                                                 </div>
                                             </div>
-                                            {RatingSwitcher && TestimonialRatinIconAlign === 'icon' && (
+                                            {RatingSwitcher && TestimonialRatinIconAlign !== 'none' && (
                                                 <div className="fb-testimonial-rating">
                                                     {renderRatingIcons()}
                                                 </div>
@@ -282,11 +292,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                 {TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
                                             </div>
                                         )}
+                                        {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'image' && (
+                                            <div className="fb-testimonial-quote-icon">
+                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} /> : ''}
+                                            </div>
+                                        )}
                                     </>
 
                                  ) : (
                                     <>
-                                        {RatingSwitcher && TestimonialRatinIconAlign === 'icon' && (
+                                        {RatingSwitcher && TestimonialRatinIconAlign !== 'none' && (
                                             <div className="fb-testimonial-rating">
                                                 {renderRatingIcons()}
                                             </div>
@@ -361,7 +376,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         </div>
                                         {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'icon' && (
                                             <div className="fb-testimonial-quote-icon">
-                                                {TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
+                                                {TestimonialQuoteIconAlign === 'icon' && TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
+                                            </div>
+                                        )}
+                                        {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'image' && (
+                                            <div className="fb-testimonial-quote-icon">
+                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} /> : ''}
                                             </div>
                                         )}
                                     </>

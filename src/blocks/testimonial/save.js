@@ -21,9 +21,13 @@ export default function Save({ attributes }) {
         RatingSwitcher,
         TestimonialRatingNumber,
         TestimonialRatingicon,
+        TestimonialRatingImageUrl,
+        TestimonialRatingImageAlt,
         TestimonialRatinIconAlign,
         QuoteIconSwitcher,
         TestimonialQuoteIcon,
+        TestimonialQuoteImageUrl,
+        TestimonialQuoteImageAlt,
         TestimonialQuoteIconAlign,
 
         testimonialGlobalWraperID,
@@ -44,7 +48,8 @@ export default function Save({ attributes }) {
         for (let i = 0; i < TestimonialRatingNumber; i++) {
             icons.push(
                 <div key={i} className="fb-testimonial-rating-icon">
-                    {TestimonialRatingicon ? renderSVG(TestimonialRatingicon) : ''}
+                    {TestimonialRatinIconAlign === 'icon' && TestimonialRatingicon ? renderSVG(TestimonialRatingicon) : ''}
+                    {TestimonialRatinIconAlign === 'image' && TestimonialRatingImageUrl ? <img src={TestimonialRatingImageUrl} alt={TestimonialRatingImageAlt} /> : ''}
                 </div>
             );
         }
@@ -86,7 +91,7 @@ export default function Save({ attributes }) {
                                             </div>
                                         </div>
                                     </div>
-                                    {RatingSwitcher && TestimonialRatinIconAlign === 'icon' && (
+                                    {RatingSwitcher && TestimonialRatinIconAlign !== 'none' && (
                                         <div className="fb-testimonial-rating">
                                             {renderRatingIcons()}
                                         </div>
@@ -109,9 +114,10 @@ export default function Save({ attributes }) {
                                             />
                                         </div>
                                     )}
-                                    {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'icon' && (
+                                    {QuoteIconSwitcher && TestimonialQuoteIconAlign !== 'none' && (
                                         <div className="fb-testimonial-quote-icon">
-                                            {TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
+                                            {TestimonialQuoteIconAlign === 'icon' && TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
+                                            {TestimonialQuoteIconAlign === 'image' && TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} /> : ''}
                                         </div>
                                     )}
                                 </>
@@ -161,21 +167,22 @@ export default function Save({ attributes }) {
                                                 )}
                                             </div>
                                         </div>
-                                        {RatingSwitcher && TestimonialRatinIconAlign === 'icon' && (
+                                        {RatingSwitcher && TestimonialRatinIconAlign !== 'none' && (
                                             <div className="fb-testimonial-rating">
                                                 {renderRatingIcons()}
                                             </div>
                                         )}
                                     </div>
-                                    {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'icon' && (
+                                    {QuoteIconSwitcher && TestimonialQuoteIconAlign !== 'none' && (
                                         <div className="fb-testimonial-quote-icon">
-                                            {TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
+                                            {TestimonialQuoteIconAlign === 'icon' && TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
+                                            {TestimonialQuoteIconAlign === 'image' && TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} /> : ''}
                                         </div>
                                     )}
                                 </>
                             ) : (
                                 <>
-                                    {RatingSwitcher && TestimonialRatinIconAlign === 'icon' && (
+                                    {RatingSwitcher && TestimonialRatinIconAlign !== 'none' && (
                                         <div className="fb-testimonial-rating">
                                             {renderRatingIcons()}
                                         </div>
@@ -225,9 +232,10 @@ export default function Save({ attributes }) {
                                             </div>
                                         </div>
                                     </div>
-                                    {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'icon' && (
+                                    {QuoteIconSwitcher && TestimonialQuoteIconAlign !== 'none' && (
                                         <div className="fb-testimonial-quote-icon">
-                                            {TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
+                                            {TestimonialQuoteIconAlign === 'icon' && TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
+                                            {TestimonialQuoteIconAlign === 'image' && TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} /> : ''}
                                         </div>
                                     )}
                                 </>

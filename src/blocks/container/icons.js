@@ -2,13 +2,11 @@
  * Custom icons
  */
 const rowIcons = {
-	//Done
 	'100': (
 		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<rect x="7.62939e-06" width="114" height="60" rx="2" fill="inherit" />
 		</svg>
 	),
-	//Done
 	'50-50+100_100': (
 		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -19,7 +17,6 @@ const rowIcons = {
 			/>
 		</svg>
 	),
-	//Done
 	'50-50': (
 		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -30,7 +27,6 @@ const rowIcons = {
 			/>
 		</svg>
 	),
-	//Done
 	'75-25': (
 		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -41,7 +37,6 @@ const rowIcons = {
 			/>
 		</svg>
 	),
-	//Done
 	'50-25-25': (
 		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -52,7 +47,6 @@ const rowIcons = {
 			/>
 		</svg>
 	),
-	//Done
 	'33-33-33': (
 		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -63,7 +57,6 @@ const rowIcons = {
 			/>
 		</svg>
 	),
-	//Done
 	'25-75': (
 		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -74,7 +67,6 @@ const rowIcons = {
 			/>
 		</svg>
 	),
-	//Done
 	'25-50-25': (
 		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -85,7 +77,6 @@ const rowIcons = {
 			/>
 		</svg>
 	),
-	//Done
 	'25-25-50': (
 		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -96,7 +87,6 @@ const rowIcons = {
 			/>
 		</svg>
 	),
-	//Done
 	'25-25-25-25': (
 		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -107,7 +97,6 @@ const rowIcons = {
 			/>
 		</svg>
 	),
-	//Done
 	'20-20-20-20-20': (
 		<svg width="113" height="60" viewBox="0 0 113 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -228,7 +217,6 @@ const rowIcons = {
 			/>
 		</svg>
 	),
-
 	'25-75_75-25': (
 		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path

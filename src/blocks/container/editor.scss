@@ -208,6 +208,7 @@
 	.block-editor-block-list__layout {
 		.block-list-appender.wp-block {
 			width: auto;
+			height: unset !important;
 
 			button {
 				color: #a0a7ac;
@@ -408,6 +409,16 @@
 }
 
 .justify-content-btn {
+	svg {
+		rotate: -90deg;
+	}
+}
+.column-direction {
+	&.justify-content-btn {
+		svg {
+			rotate: none;
+		}
+	}
 	svg {
 		rotate: -90deg;
 	}

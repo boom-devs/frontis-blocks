@@ -38,7 +38,7 @@ import {
 } from "./constants/constants";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
-    const { 
+    const {
         blockId,
         sliderItems,
         blockStyle,
@@ -58,7 +58,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderHeightUnits,
         sliderType,
         slideEffect,
-        carouselEffect, 
+        carouselEffect,
         carouselPerColumn,
         carouselPerColumnGap,
         carouselPerColumnGapUnits,
@@ -82,7 +82,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderArrowPositionOutsidePadding,
         sliderArrowPositionOutsidePaddingUnits,
         /** End Position */
-        
+
         /** Slider Arrows Style */
         sliderArrowsIconSwitcher,
 
@@ -226,7 +226,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** Global Settings */
         sliderGlobalZIndex,
         sliderOverflow,
-        
+
         sliderGlobalPaddingUnits,
         sliderGlobalPaddingDesktop,
         sliderGlobalPaddingTablet,
@@ -518,7 +518,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {sliderDotsMarginLink: !sliderDotsMarginLink} );
     }
 
-    const handleDotsMarginUnitsHandler = (unit) => { 
+    const handleDotsMarginUnitsHandler = (unit) => {
         setAttributes( {
             sliderDotsMarginUnits: {
                 ...sliderDotsMarginUnits,
@@ -590,7 +590,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {sliderNormalDotsBorderLink: !sliderNormalDotsBorderLink} );
     }
 
-    const handleNormalDotsBorderUnitsHandler = (unit) => { 
+    const handleNormalDotsBorderUnitsHandler = (unit) => {
         setAttributes( {
             sliderNormalDotsBorderUnits: {
                 ...sliderNormalDotsBorderUnits,
@@ -736,7 +736,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes( {sliderActiveDotsBorderLink: !sliderActiveDotsBorderLink} );
     }
 
-    const handleActiveDotsBorderUnitsHandler = (unit) => {  
+    const handleActiveDotsBorderUnitsHandler = (unit) => {
         setAttributes( {
             sliderActiveDotsBorderUnits: {
                 ...sliderActiveDotsBorderUnits,
@@ -1130,10 +1130,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderGlobalBorderRadiusDesktopWidth ? `border-radius: ${sliderGlobalBorderRadiusDesktopWidth};` : ''}
             ${sliderGlobalBorderColor ? `border-color: ${sliderGlobalBorderColor};` : ''}
             ${sliderGlobalBoxShadowCssValue ? `box-shadow: ${sliderGlobalBoxShadowCssValue};` : ''}
-            ${sliderGlobalBgNormalBackgroundType === 'gradient' ? `  
+            ${sliderGlobalBgNormalBackgroundType === 'gradient' ? `
                 background: ${
-                    sliderGlobalBgNormalCustomGradientSwitcher && sliderGlobalBgNormalCustomGradientInputValue 
-                        ? sliderGlobalBgNormalCustomGradientInputValue 
+                    sliderGlobalBgNormalCustomGradientSwitcher && sliderGlobalBgNormalCustomGradientInputValue
+                        ? sliderGlobalBgNormalCustomGradientInputValue
                         : sliderGlobalBgNormalGradientColor || sliderGlobalBgNormalClassicColor
                 };
             ` : `
@@ -1143,10 +1143,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             box-sizing: border-box;
         }
         .${blockId}.fb-slider-container:hover{
-            ${sliderGlobalBgHoverBackgroundType === 'gradient' ? `  
+            ${sliderGlobalBgHoverBackgroundType === 'gradient' ? `
                 background: ${
-                    sliderGlobalBgHoverCustomGradientSwitcher && sliderGlobalBgHoverCustomGradientInputValue 
-                        ? sliderGlobalBgHoverCustomGradientInputValue 
+                    sliderGlobalBgHoverCustomGradientSwitcher && sliderGlobalBgHoverCustomGradientInputValue
+                        ? sliderGlobalBgHoverCustomGradientInputValue
                         : sliderGlobalBgHoverGradientColor || sliderGlobalBgHoverClassicColor
                 };
             ` : `
@@ -1164,7 +1164,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderArrowPosition === 'top-left' || sliderArrowPosition === 'top-center' || sliderArrowPosition === 'top-right' ? `
                 padding: ${sliderArrowPositionOutsidePadding.Desktop}${sliderArrowPositionOutsidePaddingUnits.Desktop} 0 0;
             ` : ''}
-    
+
             ${sliderArrowPosition === 'bottom-left' || sliderArrowPosition === 'bottom-center' || sliderArrowPosition === 'bottom-right' ? `
                 padding: 0 0 ${sliderArrowPositionOutsidePadding.Desktop}${sliderArrowPositionOutsidePaddingUnits.Desktop};
             ` : ''}
@@ -1186,40 +1186,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 gap: ${sliderArrowGap.Desktop}${sliderArrowGapUnits.Desktop};
                 position: absolute;
                 z-index: 100;
-        
+
                 ${sliderArrowPosition === 'top-left' ? `
-                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};   
+                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};
                     left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '0'};
                 ` : ''}
-        
+
                 ${sliderArrowPosition === 'top-center' ? `
-                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};  
+                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};
                     left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '50%'};
                     transform: translateX(-50%);
                 ` : ''}
-        
+
                 ${sliderArrowPosition === 'top-right' ? `
-                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};  
+                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};
                     right: ${sliderArrowPositionRightOffset.Desktop ? `${sliderArrowPositionRightOffset.Desktop}${sliderArrowPositionRightOffsetUnits.Desktop}` : '0'};
                 ` : ''}
-        
+
                 ${sliderArrowPosition === 'bottom-left' ? `
-                    bottom: ${sliderArrowPositionBottomOffset.Desktop ? `${sliderArrowPositionBottomOffset.Desktop}${sliderArrowPositionBottomOffsetUnits.Desktop}` : '0'};  
+                    bottom: ${sliderArrowPositionBottomOffset.Desktop ? `${sliderArrowPositionBottomOffset.Desktop}${sliderArrowPositionBottomOffsetUnits.Desktop}` : '0'};
                     left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '0'};
                 ` : ''}
-        
+
                 ${sliderArrowPosition === 'bottom-center' ? `
-                    bottom: ${sliderArrowPositionBottomOffset.Desktop ? `${sliderArrowPositionBottomOffset.Desktop}${sliderArrowPositionBottomOffsetUnits.Desktop}` : '0'};  
+                    bottom: ${sliderArrowPositionBottomOffset.Desktop ? `${sliderArrowPositionBottomOffset.Desktop}${sliderArrowPositionBottomOffsetUnits.Desktop}` : '0'};
                     left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '50%'};
                     transform: translateX(-50%);
                 ` : ''}
-        
+
                 ${sliderArrowPosition === 'bottom-right' ? `
                     bottom: ${sliderArrowPositionBottomOffset.Desktop ? `${sliderArrowPositionBottomOffset.Desktop}${sliderArrowPositionBottomOffsetUnits.Desktop}` : '0'};
                     right: ${sliderArrowPositionRightOffset.Desktop ? `${sliderArrowPositionRightOffset.Desktop}${sliderArrowPositionRightOffsetUnits.Desktop}` : '0'};
                 ` : ''}
             }
-        
+
             .${blockId} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} .swiper-button-prev,
             .${blockId} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} .swiper-button-next,
             .${blockId} .fb-slider-custom-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} .swiper-button-prev,
@@ -1267,10 +1267,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev img,
         .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next img {
-            ${sliderArrowsColor ? `fill: ${sliderArrowsColor};` : ''}
             ${sliderArrowsSize.Desktop ? `width: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
             ${sliderArrowsSize.Desktop ? `height: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
-            object-fit: ;
         }
 
         .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev:hover svg,
@@ -1317,7 +1315,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderFractionGlobalTypoSwitcher.textDecoration === true && sliderFractionGlobalTypographyData.textDecoration ? `text-decoration: ${sliderFractionGlobalTypographyData.textDecoration};` : ''}
             ${sliderFractionGlobalTypoSwitcher.letterSpacing === true && sliderFractionGlobalTypographyData.letterSpacing ? `letter-spacing: ${sliderFractionGlobalTypographyData.letterSpacing};` : ''}
             ${sliderFractionGlobalTypoSwitcher.lineHeight === true && sliderFractionGlobalTypographyData.lineHeight ? `line-height: ${sliderFractionGlobalTypographyData.lineHeight};` : ''}
-                
+
             ${sliderFractionGlobalTypoSwitcher.fontFamily === false && sliderFractionFontFamily && sliderFractionFontFamily !== 'Default' ? `font-family: ${sliderFractionFontFamily};` : ''}
             ${sliderFractionGlobalTypoSwitcher.fontSize === false && sliderFractionFontSize.Desktop && sliderFractionFontSizeUnits.Desktop ? `font-size: ${sliderFractionFontSize.Desktop}${sliderFractionFontSizeUnits.Desktop};` : ''}
             ${sliderFractionGlobalTypoSwitcher.fontWeight === false && sliderFractionFontWeight ? `font-weight: ${sliderFractionFontWeight};` : ''}
@@ -1359,9 +1357,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId}.fb-slider-container.outside {
                 ${sliderArrowPosition === 'top-left' || sliderArrowPosition === 'top-center' || sliderArrowPosition === 'top-right' ? `
-                    padding: ${sliderArrowPositionOutsidePadding.Tablet}${sliderArrowPositionOutsidePaddingUnits.Tablet} 0 0; 
+                    padding: ${sliderArrowPositionOutsidePadding.Tablet}${sliderArrowPositionOutsidePaddingUnits.Tablet} 0 0;
                 ` : ''}
-        
+
                 ${sliderArrowPosition === 'bottom-left' || sliderArrowPosition === 'bottom-center' || sliderArrowPosition === 'bottom-right' ? `
                     padding: 0 0 ${sliderArrowPositionOutsidePadding.Tablet}${sliderArrowPositionOutsidePaddingUnits.Tablet};
                 ` : ''}
@@ -1378,34 +1376,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 .${blockId} .fb-slider-custom-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} {
 
                     gap: ${sliderArrowGap.Tablet}${sliderArrowGapUnits.Tablet};
-            
+
                     ${sliderArrowPosition === 'top-left' ? `
-                        top: ${sliderArrowPositionTopOffset.Tablet ? `${sliderArrowPositionTopOffset.Tablet}${sliderArrowPositionTopOffsetUnits.Tablet}` : '0'};   
+                        top: ${sliderArrowPositionTopOffset.Tablet ? `${sliderArrowPositionTopOffset.Tablet}${sliderArrowPositionTopOffsetUnits.Tablet}` : '0'};
                         left: ${sliderArrowPositionLeftOffset.Tablet ? `${sliderArrowPositionLeftOffset.Tablet}${sliderArrowPositionLeftOffsetUnits.Tablet}` : '0'};
                     ` : ''}
-            
+
                     ${sliderArrowPosition === 'top-center' ? `
-                        top: ${sliderArrowPositionTopOffset.Tablet ? `${sliderArrowPositionTopOffset.Tablet}${sliderArrowPositionTopOffsetUnits.Tablet}` : '0'};  
+                        top: ${sliderArrowPositionTopOffset.Tablet ? `${sliderArrowPositionTopOffset.Tablet}${sliderArrowPositionTopOffsetUnits.Tablet}` : '0'};
                         left: ${sliderArrowPositionLeftOffset.Tablet ? `${sliderArrowPositionLeftOffset.Tablet}${sliderArrowPositionLeftOffsetUnits.Tablet}` : '50%'};
                         transform: translateX(-50%);
                     ` : ''}
-            
+
                     ${sliderArrowPosition === 'top-right' ? `
-                        top: ${sliderArrowPositionTopOffset.Tablet ? `${sliderArrowPositionTopOffset.Tablet}${sliderArrowPositionTopOffsetUnits.Tablet}` : '0'};  
+                        top: ${sliderArrowPositionTopOffset.Tablet ? `${sliderArrowPositionTopOffset.Tablet}${sliderArrowPositionTopOffsetUnits.Tablet}` : '0'};
                         right: ${sliderArrowPositionRightOffset.Tablet ? `${sliderArrowPositionRightOffset.Tablet}${sliderArrowPositionRightOffsetUnits.Tablet}` : '0'};
                     ` : ''}
-            
+
                     ${sliderArrowPosition === 'bottom-left' ? `
-                        bottom: ${sliderArrowPositionBottomOffset.Tablet ? `${sliderArrowPositionBottomOffset.Tablet}${sliderArrowPositionBottomOffsetUnits.Tablet}` : '0'};  
+                        bottom: ${sliderArrowPositionBottomOffset.Tablet ? `${sliderArrowPositionBottomOffset.Tablet}${sliderArrowPositionBottomOffsetUnits.Tablet}` : '0'};
                         left: ${sliderArrowPositionLeftOffset.Tablet ? `${sliderArrowPositionLeftOffset.Tablet}${sliderArrowPositionLeftOffsetUnits.Tablet}` : '0'};
                     ` : ''}
-            
+
                     ${sliderArrowPosition === 'bottom-center' ? `
-                        bottom: ${sliderArrowPositionBottomOffset.Tablet ? `${sliderArrowPositionBottomOffset.Tablet}${sliderArrowPositionBottomOffsetUnits.Tablet}` : '0'};  
+                        bottom: ${sliderArrowPositionBottomOffset.Tablet ? `${sliderArrowPositionBottomOffset.Tablet}${sliderArrowPositionBottomOffsetUnits.Tablet}` : '0'};
                         left: ${sliderArrowPositionLeftOffset.Tablet ? `${sliderArrowPositionLeftOffset.Tablet}${sliderArrowPositionLeftOffsetUnits.Tablet}` : '50%'};
                         transform: translateX(-50%);
                     ` : ''}
-            
+
                     ${sliderArrowPosition === 'bottom-right' ? `
                         bottom: ${sliderArrowPositionBottomOffset.Tablet ? `${sliderArrowPositionBottomOffset.Tablet}${sliderArrowPositionBottomOffsetUnits.Tablet}` : '0'};
                         right: ${sliderArrowPositionRightOffset.Tablet ? `${sliderArrowPositionRightOffset.Tablet}${sliderArrowPositionRightOffsetUnits.Tablet}` : '0'};
@@ -1427,6 +1425,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderArrowsSize.Tablet ? `width: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
                 ${sliderArrowsSize.Tablet ? `height: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
             }
+
+			.${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev img,
+			.${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next img {
+				${sliderArrowsSize.Tablet ? `width: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
+				${sliderArrowsSize.Tablet ? `height: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
+			}
+
             .${blockId} .swiper-button-prev:after,
             .${blockId} .swiper-button-next:after {
                 ${sliderArrowsSize.Tablet ? `font-size: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
@@ -1459,13 +1464,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderProgressbarHeight.Tablet ? `height: ${sliderProgressbarHeight.Tablet}${sliderProgressbarHeightUnits.Tablet};` : ''}
             }
         }
-            
+
         @media only screen and (max-width: 767px) {
             .${ blockId }.fb-slider-container{
                 ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'left' && sliderHZLeftOffset.Mobile !== undefined ? `left: ${sliderHZLeftOffset.Mobile}${sliderHZLeftOffsetUnits.Mobile};` : ''}
 				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'right' && sliderHZRightOffset.Mobile !== undefined ? `right: ${sliderHZRightOffset.Mobile}${sliderHZRightOffsetUnits.Mobile};` : ''}
 				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'top' && sliderVRTopOffset.Mobile !== undefined ? `top: ${sliderVRTopOffset.Mobile}${sliderVRTopOffsetUnits.Mobile};` : ''}
-				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'bottom' && sliderVRBottomOffset.Mobile !== undefined ? `bottom: ${sliderVRBottomOffset.Mobile}${sliderVRBottomOffsetUnits.Mobile};` : ''} 
+				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'bottom' && sliderVRBottomOffset.Mobile !== undefined ? `bottom: ${sliderVRBottomOffset.Mobile}${sliderVRBottomOffsetUnits.Mobile};` : ''}
                 ${sliderGlobalZIndex.Mobile ? `z-index: ${sliderGlobalZIndex.Mobile};` : ''}
                 ${sliderGlobalPaddingMobileWidth ? `padding: ${sliderGlobalPaddingMobileWidth};` : ''}
                 ${sliderGlobalMarginMobileWidth ? `margin: ${sliderGlobalMarginMobileWidth};` : ''}
@@ -1479,9 +1484,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId}.fb-slider-container.outside {
                 ${sliderArrowPosition === 'top-left' || sliderArrowPosition === 'top-center' || sliderArrowPosition === 'top-right' ? `
-                    padding: ${sliderArrowPositionOutsidePadding.Mobile}${sliderArrowPositionOutsidePaddingUnits.Mobile} 0 0; 
+                    padding: ${sliderArrowPositionOutsidePadding.Mobile}${sliderArrowPositionOutsidePaddingUnits.Mobile} 0 0;
                 ` : ''}
-        
+
                 ${sliderArrowPosition === 'bottom-left' || sliderArrowPosition === 'bottom-center' || sliderArrowPosition === 'bottom-right' ? `
                     padding: 0 0 ${sliderArrowPositionOutsidePadding.Mobile}${sliderArrowPositionOutsidePaddingUnits.Mobile};
                 ` : ''}
@@ -1498,34 +1503,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 .${blockId} .fb-slider-custom-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} {
 
                     gap: ${sliderArrowGap.Mobile}${sliderArrowGapUnits.Mobile};
-            
+
                     ${sliderArrowPosition === 'top-left' ? `
-                        top: ${sliderArrowPositionTopOffset.Mobile ? `${sliderArrowPositionTopOffset.Mobile}${sliderArrowPositionTopOffsetUnits.Mobile}` : '0'};   
+                        top: ${sliderArrowPositionTopOffset.Mobile ? `${sliderArrowPositionTopOffset.Mobile}${sliderArrowPositionTopOffsetUnits.Mobile}` : '0'};
                         left: ${sliderArrowPositionLeftOffset.Mobile ? `${sliderArrowPositionLeftOffset.Mobile}${sliderArrowPositionLeftOffsetUnits.Mobile}` : '0'};
                     ` : ''}
-            
+
                     ${sliderArrowPosition === 'top-center' ? `
-                        top: ${sliderArrowPositionTopOffset.Mobile ? `${sliderArrowPositionTopOffset.Mobile}${sliderArrowPositionTopOffsetUnits.Mobile}` : '0'};  
+                        top: ${sliderArrowPositionTopOffset.Mobile ? `${sliderArrowPositionTopOffset.Mobile}${sliderArrowPositionTopOffsetUnits.Mobile}` : '0'};
                         left: ${sliderArrowPositionLeftOffset.Mobile ? `${sliderArrowPositionLeftOffset.Mobile}${sliderArrowPositionLeftOffsetUnits.Mobile}` : '50%'};
                         transform: translateX(-50%);
                     ` : ''}
-            
+
                     ${sliderArrowPosition === 'top-right' ? `
-                        top: ${sliderArrowPositionTopOffset.Mobile ? `${sliderArrowPositionTopOffset.Mobile}${sliderArrowPositionTopOffsetUnits.Mobile}` : '0'};  
+                        top: ${sliderArrowPositionTopOffset.Mobile ? `${sliderArrowPositionTopOffset.Mobile}${sliderArrowPositionTopOffsetUnits.Mobile}` : '0'};
                         right: ${sliderArrowPositionRightOffset.Mobile ? `${sliderArrowPositionRightOffset.Mobile}${sliderArrowPositionRightOffsetUnits.Mobile}` : '0'};
                     ` : ''}
-            
+
                     ${sliderArrowPosition === 'bottom-left' ? `
-                        bottom: ${sliderArrowPositionBottomOffset.Mobile ? `${sliderArrowPositionBottomOffset.Mobile}${sliderArrowPositionBottomOffsetUnits.Mobile}` : '0'};  
+                        bottom: ${sliderArrowPositionBottomOffset.Mobile ? `${sliderArrowPositionBottomOffset.Mobile}${sliderArrowPositionBottomOffsetUnits.Mobile}` : '0'};
                         left: ${sliderArrowPositionLeftOffset.Mobile ? `${sliderArrowPositionLeftOffset.Mobile}${sliderArrowPositionLeftOffsetUnits.Mobile}` : '0'};
                     ` : ''}
-            
+
                     ${sliderArrowPosition === 'bottom-center' ? `
-                        bottom: ${sliderArrowPositionBottomOffset.Mobile ? `${sliderArrowPositionBottomOffset.Mobile}${sliderArrowPositionBottomOffsetUnits.Mobile}` : '0'};  
+                        bottom: ${sliderArrowPositionBottomOffset.Mobile ? `${sliderArrowPositionBottomOffset.Mobile}${sliderArrowPositionBottomOffsetUnits.Mobile}` : '0'};
                         left: ${sliderArrowPositionLeftOffset.Mobile ? `${sliderArrowPositionLeftOffset.Mobile}${sliderArrowPositionLeftOffsetUnits.Mobile}` : '50%'};
                         transform: translateX(-50%);
                     ` : ''}
-            
+
                     ${sliderArrowPosition === 'bottom-right' ? `
                         bottom: ${sliderArrowPositionBottomOffset.Mobile ? `${sliderArrowPositionBottomOffset.Mobile}${sliderArrowPositionBottomOffsetUnits.Mobile}` : '0'};
                         right: ${sliderArrowPositionRightOffset.Mobile ? `${sliderArrowPositionRightOffset.Mobile}${sliderArrowPositionRightOffsetUnits.Mobile}` : '0'};
@@ -1546,6 +1551,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderArrowsSize.Mobile ? `width: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
                 ${sliderArrowsSize.Mobile ? `height: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
             }
+
+			.${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev img,
+			.${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next img {
+				${sliderArrowsSize.Mobile ? `width: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
+				${sliderArrowsSize.Mobile ? `height: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
+			}
 
             .${blockId} .swiper-button-prev:after,
             .${blockId} .swiper-button-next:after {
@@ -1579,7 +1590,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${sliderProgressbarHeight.Mobile ? `height: ${sliderProgressbarHeight.Mobile}${sliderProgressbarHeightUnits.Mobile};` : ''}
             }
         }
-            
+
     `, [
         blockId,
 
@@ -1589,7 +1600,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** Global Settings */
         sliderGlobalZIndex,
         sliderOverflow,
-        
+
         sliderGlobalPaddingUnits,
         sliderGlobalPaddingDesktop,
         sliderGlobalPaddingTablet,
@@ -1633,7 +1644,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderGlobalBorderDesktopWidth,
         sliderGlobalBorderTabletWidth,
         sliderGlobalBorderMobileWidth,
-        
+
 
         sliderGlobalBorderRadiusUnits,
         sliderGlobalBorderRadiusDesktop,
@@ -1880,7 +1891,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             {SLIDER_TYPE.map((item, key) => (
                                 <Button
                                     key={key}
-                                    onClick={() => setAttributes({ sliderType: item.value })} 
+                                    onClick={() => setAttributes({ sliderType: item.value })}
                                     className={`fb-setting-switcher-panel-btn-switcher ${sliderType === item.value ? 'active' : ''}`}
                                 >
                                     {item.label}
@@ -2007,9 +2018,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
             </PanelBody>
 
-            <PanelBody title={__("Navigation", "frontis-blocks")} initialOpen={false}>
-                {displayDots && (
-
+            {displayArrows && (
+                <PanelBody title={__("Navigation", "frontis-blocks")} initialOpen={false}>
                     <>
                         <ToggleControl
                             label={ __( 'Custom Icon', 'frontis-blocks' ) }
@@ -2041,7 +2051,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     )}
 
                                     {sliderArrowsIconLeftAlign === 'image' && (
-                                        <FB_ImageControl 
+                                        <FB_ImageControl
                                             globalImageUrl={sliderArrowsIconLeftImageUrl}
                                             setglobalImageUrl={(value) => setAttributes({ sliderArrowsIconLeftImageUrl: value })}
                                             globalImageAlt={sliderArrowsIconLeftImageAlt}
@@ -2075,7 +2085,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     )}
 
                                     {sliderArrowsIconRightAlign === 'image' && (
-                                        <FB_ImageControl 
+                                        <FB_ImageControl
                                             globalImageUrl={sliderArrowsIconRightImageUrl}
                                             setglobalImageUrl={(value) => setAttributes({ sliderArrowsIconRightImageUrl: value })}
                                             globalImageAlt={sliderArrowsIconRightImageAlt}
@@ -2340,17 +2350,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                     )}
                     </>
-                )}
-            </PanelBody>
+                </PanelBody>
+            )}
 
-            <PanelBody title={__("Pagination", "frontis-blocks")} initialOpen={false}>
-                <SelectControl
-                    label={__('Pagination Type', 'frontis-blocks')}
-                    value={paginationType}
-                    options={PAGINATION_TYPE}
-                    onChange={(value) => setAttributes({ paginationType: value })}
-                />
-            </PanelBody>
+            {displayDots && (
+                <PanelBody title={__("Pagination", "frontis-blocks")} initialOpen={false}>
+                    <SelectControl
+                        label={__('Pagination Type', 'frontis-blocks')}
+                        value={paginationType}
+                        options={PAGINATION_TYPE}
+                        onChange={(value) => setAttributes({ paginationType: value })}
+                    />
+                </PanelBody>
+            )}
         </>
 	);
 
@@ -2387,7 +2399,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     setGlobalSwitcher={(value) => setAttributes({ sliderArrowsBgColorSwitcher: value })}
                 />
 
-                {sliderArrowsBgColorSwitcher === 'normal' && ( 
+                {sliderArrowsBgColorSwitcher === 'normal' && (
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={sliderArrowsBgColor}
@@ -2445,7 +2457,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                 <SelectControl
                     label={__("Border Style", "frontis-blocks")}
-                    value={sliderArrowsBorder} 
+                    value={sliderArrowsBorder}
                     options={BORDER_STYLES}
                     onChange={(value) => setAttributes({ sliderArrowsBorder: value })}
                 />
@@ -2522,7 +2534,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         initialShadowValue={sliderArrowsBoxShadowHoverValues}
                         onBoxShadowStyleChange={(value) => setAttributes({ sliderArrowsBoxShadowHoverCssValue: value })}
                     />
-                )}                                  
+                )}
             </PanelBody>
             <PanelBody title={__("Pagination Style", "frontis-blocks")} initialOpen={false}>
 
@@ -2591,12 +2603,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 />
                                 <FB_ColorControl
                                     label={__("Color", "frontis-blocks")}
-                                    globalColor={sliderNormalDotsBgColor} 
+                                    globalColor={sliderNormalDotsBgColor}
                                     setGlobalColor={(value) => setAttributes({ sliderNormalDotsBgColor: value })}
                                 />
                                 <SelectControl
                                     label={__("Border Style", "frontis-blocks")}
-                                    value={sliderNormalDotsBorder} 
+                                    value={sliderNormalDotsBorder}
                                     options={BORDER_STYLES}
                                     onChange={(value) => setAttributes({ sliderNormalDotsBorder: value })}
                                 />
@@ -2683,12 +2695,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 />
                                 <FB_ColorControl
                                     label={__("Color", "frontis-blocks")}
-                                    globalColor={sliderActiveDotsBgColor} 
+                                    globalColor={sliderActiveDotsBgColor}
                                     setGlobalColor={(value) => setAttributes({ sliderActiveDotsBgColor: value })}
                                 />
                                 <SelectControl
                                     label={__("Border Style", "frontis-blocks")}
-                                    value={sliderActiveDotsBorder} 
+                                    value={sliderActiveDotsBorder}
                                     options={BORDER_STYLES}
                                     onChange={(value) => setAttributes({ sliderActiveDotsBorder: value })}
                                 />
@@ -2779,8 +2791,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                             globalTypoType={sliderFractionGlobalTypoType}
                             onChangeGlobalTypoType={(value) => {
-                                setAttributes({ 
-                                    sliderFractionGlobalTypoType: value, 
+                                setAttributes({
+                                    sliderFractionGlobalTypoType: value,
                                     sliderFractionGlobalTypoSwitcher: value === 'default' ? {...sliderFractionGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...sliderFractionGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                                 })
                             }}
@@ -2868,7 +2880,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             </PanelBody>
         </>
 	);
-		
+
 	/**
 	 * Inspector Advanced Controls
 	 */
@@ -2879,7 +2891,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <PanelBody
                         title={__("Layout", "frontis-blocks")}
                         initialOpen={true}
-                        className='fb-setting-layout-header' 
+                        className='fb-setting-layout-header'
                     >
                         <FB_Range
                             min={0}
@@ -2905,7 +2917,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             deviceType={deviceType}
                             positionType={sliderPositionType}
                             setPositionType={(value) => setAttributes({ sliderPositionType: value })}
-                                                                            
+
                             HZOrientationType={sliderHZOrientationType}
                             setHZOrientationType={(value) =>
                                 setAttributes({ sliderHZOrientationType: value })
@@ -2914,7 +2926,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             setVROrientationType={(value) =>
                                 setAttributes({ sliderVROrientationType: value })
                             }
-                                                                                
+
                             HZLeftOffset={sliderHZLeftOffset}
                             setHZLeftOffset={(value) => setAttributes({ sliderHZLeftOffset: value })}
                             HZLeftOffsetUnits={sliderHZLeftOffsetUnits}
@@ -2923,7 +2935,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             setHZRightOffset={(value) => setAttributes({ sliderHZRightOffset: value })}
                             HZRightOffsetUnits={sliderHZRightOffsetUnits}
                             setHZRightOffsetUnits={(value) => setAttributes({ sliderHZRightOffsetUnits: value })}
-                                                                            
+
                             VRTopOffset={sliderVRTopOffset}
                             setVRTopOffset={(value) => setAttributes({ sliderVRTopOffset: value })}
                             VRTopOffsetUnits={sliderVRTopOffsetUnits}
@@ -2941,7 +2953,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             onChangeValue={(value) => setAttributes({ sliderGlobalWraperClass: value })}
                             helpText={__("Separate with spaces key.", "frontis-blocks")}
                         />
-                        
+
                     </PanelBody>
                     <PanelBody
                         title={__("Background Color", "frontis-blocks")}
@@ -2951,7 +2963,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             label={__("Background Color", "frontis-blocks")}
                             bgColorSwitcher={sliderGlobalBgColorSwitcher}
                             setBgColorSwitcher={(value) => setAttributes({ sliderGlobalBgColorSwitcher: value })}
-                            
+
                             normalBackgroundType={sliderGlobalBgNormalBackgroundType}
                             setNormalBackgroundType={(value) => setAttributes({ sliderGlobalBgNormalBackgroundType: value })}
                             normalClassicColor={sliderGlobalBgNormalClassicColor}
@@ -2962,7 +2974,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             setNormalCustomGradientSwitcher={(value) => setAttributes({ sliderGlobalBgNormalCustomGradientSwitcher: value })}
                             normalCustomGradientInputValue={sliderGlobalBgNormalCustomGradientInputValue}
                             setNormalCustomGradientInputValue={(value) => setAttributes({ sliderGlobalBgNormalCustomGradientInputValue: value })}
-                            
+
                             hoverBackgroundType={sliderGlobalBgHoverBackgroundType}
                             setHoverBackgroundType={(value) => setAttributes({ sliderGlobalBgHoverBackgroundType: value })}
                             hoverClassicColor={sliderGlobalBgHoverClassicColor}
@@ -3115,8 +3127,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             title={__("Custom CSS", "frontis-blocks")}
                             initialOpen={false}
                         >
-                            <FB_CustomCSSEditor  
-                                value={sliderGlobalCustomCSS} 
+                            <FB_CustomCSSEditor
+                                value={sliderGlobalCustomCSS}
                                 onChangeValue={(value) => setAttributes({ sliderGlobalCustomCSS: value })}
                             />
                     </PanelBody>
@@ -3124,7 +3136,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             </div>
 		</>
 	);
-    
+
     return (
 
         <>

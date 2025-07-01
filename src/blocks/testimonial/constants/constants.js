@@ -31,12 +31,19 @@ export const NORMAL_HOVER = [
 export const ICON_ALIGN = [
 	{ label: __("None"), value: "none" },
 	{ label: __("Icon"), value: "icon" },
+	{ label: __("Image"), value: "image" },
 ];
 
 export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
 	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
+];
+
+export const FLEX_ALIGN = [
+	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "flex-start" },
+	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
+	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "flex-end" },
 ];
 
 export const HEADING = [
