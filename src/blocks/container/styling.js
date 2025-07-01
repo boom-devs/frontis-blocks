@@ -964,12 +964,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		};
 		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
 			'max-width': 'unset !important',
-			'width': 'unset !important',
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
 		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
 			'max-width': 'unset !important',
-			'width': 'unset !important',
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
 	}
