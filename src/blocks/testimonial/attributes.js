@@ -78,6 +78,18 @@ const attributes = {
         type: 'string',
         default: 'star',
     },
+    TestimonialRatingImageUrl: {
+        type: 'string',
+        default: '',
+    },
+    TestimonialRatingImageAlt: {
+        type: 'string',
+        default: '',
+    },
+    TestimonialRatingImageID: {
+        type: 'number',
+        default: '',
+    },
     TestimonialRatinIconAlign: {
         type: "string",
         default: "icon",
@@ -89,6 +101,18 @@ const attributes = {
     TestimonialQuoteIcon: {
         type: 'string',
         default: 'quote-left',
+    },
+    TestimonialQuoteImageUrl: {
+        type: 'string',
+        default: '',
+    },
+    TestimonialQuoteImageAlt: {
+        type: 'string',
+        default: '',
+    },
+    TestimonialQuoteImageID: {
+        type: 'number',
+        default: '',
     },
     TestimonialQuoteIconAlign: {
         type: "string",
@@ -944,6 +968,26 @@ const attributes = {
     },
     /** End Margin */
 
+    TestimonialRatingIconAlign: {
+        type: "string",
+        default: "flex-start",
+    },
+    TestimonialRatingIconGap: {
+        type: "object",
+        default: {
+            Desktop: '5',
+            Tablet: '5',
+            Mobile: '5',
+        },
+    },
+    TestimonialRatingIconGapUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
+    },
 
     TestimonialRatingIconSize: {
         type: 'object',

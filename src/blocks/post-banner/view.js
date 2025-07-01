@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const likeButtons = document.querySelectorAll('.fb-like-btn');
     likeButtons.forEach(button => {
         button.addEventListener('click', function () {
-            console.log(FrontisBlocksData)
             // Check if user is logged in
             if (!FrontisBlocksData.user_logged_in) {
                 alert('Please log in to like posts.');
