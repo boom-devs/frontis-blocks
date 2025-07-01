@@ -1276,6 +1276,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${titleIconColor ? `fill: ${titleIconColor};` : ''}
                 ${titleIconSize?.Desktop ? `
                     width: ${titleIconSize.Desktop}${titleIconSizeUnits.Desktop}; 
+                    min-width: ${titleIconSize.Desktop}${titleIconSizeUnits.Desktop}; 
                     height: ${titleIconSize.Desktop}${titleIconSizeUnits.Desktop};` 
                     : ''}
             }
@@ -1308,7 +1309,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 display: inline-flex;
                 align-items: center;
                 ${prefixSuffixSpacing?.Desktop ? `gap: ${prefixSuffixSpacing.Desktop}${prefixSuffixSpacingUnits.Desktop};` : ''}
-                width: 100%;
             }
 
             .fb-accordion-main-wrapper.${blockID} .fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
@@ -1432,6 +1432,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-icon {
                 ${titleIconSize?.Tablet ? `
                     width: ${titleIconSize.Tablet}${titleIconSizeUnits.Tablet}; 
+                    min-width: ${titleIconSize.Tablet}${titleIconSizeUnits.Tablet}; 
                     height: ${titleIconSize.Tablet}${titleIconSizeUnits.Tablet};` 
                     : ''}
             }
@@ -1489,7 +1490,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-tab-icon,
             .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-expanded-icon,
             .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-icon {
-                ${titleIconSize?.Mobile ? `width: ${titleIconSize.Mobile}${titleIconSizeUnits.Mobile}; height: ${titleIconSize.Mobile}${titleIconSizeUnits.Mobile};` : ''}
+                ${titleIconSize?.Mobile ? `
+                    width: ${titleIconSize.Mobile}${titleIconSizeUnits.Mobile}; 
+                    min-width: ${titleIconSize.Mobile}${titleIconSizeUnits.Mobile}; 
+                    height: ${titleIconSize.Mobile}${titleIconSizeUnits.Mobile};` 
+                : ''}
             }
 
             .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title {
