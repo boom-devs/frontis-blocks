@@ -1270,7 +1270,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderArrowsColor ? `fill: ${sliderArrowsColor};` : ''}
             ${sliderArrowsSize.Desktop ? `width: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
             ${sliderArrowsSize.Desktop ? `height: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
-            object-fit: ;
         }
 
         .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev:hover svg,
