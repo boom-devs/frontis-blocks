@@ -7,7 +7,9 @@
     "description": "Create advanced navigation menus with customizable layouts and styles.",
     "textdomain": "frontis-blocks",
     "supports": {
-        "html": false
+        "anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false
     },
     "example": {
         "attributes": {
