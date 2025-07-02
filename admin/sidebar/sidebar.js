@@ -441,6 +441,7 @@ function FrontisBlocksSidebar() {
 		handleUpdateState();
 	}, [handleUpdateState]);
 
+
 	// Generate color variables
 	useEffect(() => {
 		const mergedColors = [

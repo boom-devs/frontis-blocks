@@ -791,12 +791,22 @@ const SiteImportModal = ({ isOpen, onClose, onImport }) => {
 
 	};
 
+  // Generate color variables
 	useEffect(() => {
-		setTimeout(() => {
-			const mergedColors = [...customColors, ...globalColors, ...customGradientColors, ...gradientColors];
-			generateColorsVariables(mergedColors);
-		}, 1000)
-	}, [globalColors, customColors, customGradientColors, gradientColors])
+		const mergedColors = [
+			...customColors,
+			...globalColors,
+			...customGradientColors,
+			...gradientColors,
+		];
+		setTimeout(() => generateColorsVariables(mergedColors, deviceType), 1000);
+	}, [
+		globalColors,
+		customColors,
+		customGradientColors,
+		gradientColors,
+		deviceType,
+	]);
 
 	//Update Gradient Colors
 	const setGradientColor = (index, color) => {
