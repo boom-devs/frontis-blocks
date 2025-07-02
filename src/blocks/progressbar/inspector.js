@@ -17,6 +17,7 @@ import {
     PROGRESS_TEXT_OPTIONS,
 	HEADING,
     OVERFLOW_OP,
+    PROGRESSBAR_TYPE,
 } from "./constants/constants";
 
 import FB_Spacing from '@Components/spacing';
@@ -35,6 +36,8 @@ import FB_InspectorControls from '@Components/InspectorControls';
 
 
 import './editor.scss';
+import FB_HtmlTagControl from '../../components/html-tag-control';
+import FB_BackgroundColorControl from '../../components/background-color-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -42,24 +45,57 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		// deviceType,
         progressGlobalZIndex,
         progressbarOverflow,
+        progressbarType,
 		progressTextPosition,
 		progressNumber,
 
+
+        progressNumberColorSwitcher,
+		progressNumberColor,
+        progressNumberHoverColor,
+        
+
+        // progress color
+        progressZebraTrackSwitcher,
+        progressZebraTrackWidth,
         progressColorSwitcher,
-		progressColor,
-        progressHoverColor,
+        progressColor,
+        progressGradientColor,
+        progressCustomGradientSwitcher,
+        progressCustomGradientInputValue,
+        progressImageUrl,
+        progressImageAlt,
+        progressImageID,
+        progressImagePosition,
+        progressImageAttachment,
+        progressImageRepeat,
+        progressImageSize,
 
-        progressTextColorSwitcher,
-		progressTextColor,
-        progressTextHoverColor,
-
+        // progress Background
+        progressBgZebraTrackSwitcher,
+        progressBgZebraTrackWidth,
         progressBgColorSwitcher,
-		progressBgColor,
-        progressBgHoverColor,
+        progressBgType,
+        progressBgColor,
+        progressBgGradientColor,
+        progressBgCustomGradientSwitcher,
+        progressBgCustomGradientInputValue,
+        progressBgImageUrl,
+        progressBgImageAlt,
+        progressBgImageID,
+        progressBgImagePosition,
+        progressBgImageAttachment,
+        progressBgImageRepeat,
+        progressBgImageSize,
 
 		progressTitle,
 		progressHeadingTag,
 		progressBarHeight,
+        progressBarHeightUnits,
+
+        progressTitleColorSwitcher,
+        progressTitleColor,
+        progressTitleHoverColor,
 
 		progressBorderRadiusUnits,
 		progressBorderRadiusDesktop,
@@ -67,21 +103,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		progressBorderRadiusMobile,
 		progressBorderRadiusLink,
 
-        progressGlobalTypoSwitcher,
-        progressGlobalTypographyData,
-        progressGlobalTypoType,
-        progressGlobalTypoOption,
-        progressFontFamily,
-        progressFontSize,
-        progressFontSizeUnits,
-        progressFontWeight,
-        progressFontStyle,
-        progressTextTransform,
-        progressTextDecoration,
-        progressLetterSpacing,
-        progressLetterSpacingUnits,
-        progressLineHeight,
-        progressLineHeightUnits,
+        progressTitleGlobalTypoSwitcher,
+        progressTitleGlobalTypographyData,
+        progressTitleGlobalTypoType,
+        progressTitleGlobalTypoOption,
+        progressTitleFontFamily,
+        progressTitleFontSize,
+        progressTitleFontSizeUnits,
+        progressTitleFontWeight,
+        progressTitleFontStyle,
+        progressTitleTextTransform,
+        progressTitleTextDecoration,
+        progressTitleLetterSpacing,
+        progressTitleLetterSpacingUnits,
+        progressTitleLineHeight,
+        progressTitleLineHeightUnits,
+
+        progressNumberGlobalTypoSwitcher,
+        progressNumberGlobalTypographyData,
+        progressNumberGlobalTypoType,
+        progressNumberGlobalTypoOption,
+        progressNumberFontFamily,
+        progressNumberFontSize,
+        progressNumberFontSizeUnits,
+        progressNumberFontWeight,
+        progressNumberFontStyle,
+        progressNumberTextTransform,
+        progressNumberTextDecoration,
+        progressNumberLetterSpacing,
+        progressNumberLetterSpacingUnits,
+        progressNumberLineHeight,
+        progressNumberLineHeightUnits,
 
         blockStyle,
 
@@ -105,6 +157,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressbarVRTopOffsetUnits,
         progressbarVRBottomOffset,
         progressbarVRBottomOffsetUnits,
+
+        progressTitleMarginUnits,
+        progressTitleMarginDesktop,
+        progressTitleMarginTablet,
+        progressTitleMarginMobile,
+        progressTitleMarginLink,
+
+        // Background
+        progressbarBgColorSwitcher,
+        progressbarBgType,
+        progressbarBgClassicColor,
+        progressbarBgGradientColor,
+        progressbarBgCustomGradientSwitcher,
+        progressbarBgCustomGradientInputValue,
+        progressbarBgImageUrl,
+        progressbarBgImageAlt,
+        progressbarBgImageID,
+        progressbarBgImagePosition,
+        progressbarBgImageAttachment,
+        progressbarBgImageRepeat,
+        progressbarBgImageSize,
+        progressbarBgHoverType,
+        progressbarBgHoverClassicColor,
+        progressbarBgHoverGradientColor,
+        progressbarBgHoverCustomGradientSwitcher,
+        progressbarBgHoverCustomGradientInputValue,
+        progressbarBgHoverImageUrl,
+        progressbarBgHoverImageAlt,
+        progressbarBgHoverImageID,
+        progressbarBgHoverImagePosition,
+        progressbarBgHoverImageAttachment,
+        progressbarBgHoverImageRepeat,
+        progressbarBgHoverImageSize,
 	} = attributes;
     
     const deviceType= useDeviceType();
@@ -119,8 +204,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     /** Start load font */
     useEffect(() => {
-        loadGoogleFont(progressFontFamily); 
-    }, [progressFontFamily]);
+        loadGoogleFont(progressTitleFontFamily); 
+        loadGoogleFont(progressNumberFontFamily); 
+    }, [progressTitleFontFamily, progressNumberFontFamily]);
     /** End load font */
 
     /** Start Progress Border Radius */
@@ -193,11 +279,90 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
+    
+    /** Start Progress Title Margin */
+    const progressTitleMarginUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (progressTitleMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        progressTitleMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        progressTitleMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        progressTitleMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ progressTitleMarginDesktop: { ...progressTitleMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ progressTitleMarginTablet: { ...progressTitleMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ progressTitleMarginMobile: { ...progressTitleMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const progressTitleMarginLinkBtn = () => {
+        setAttributes({
+            progressTitleMarginLink: !progressTitleMarginLink
+        });
+    };
+
+    const progressTitleMarginUnitsHandler = (unit) => {
+        setAttributes({
+            progressTitleMarginUnits: {
+                ...progressTitleMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+
     /** Default border radius for Progress */
     const progressDesktopBorderRadiusWidth = `${progressBorderRadiusDesktop.top}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.right}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.bottom}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.left}${progressBorderRadiusUnits.Desktop}`;
     const progressTabletBorderRadiusWidth = `${progressBorderRadiusTablet.top}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.right}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.bottom}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.left}${progressBorderRadiusUnits.Tablet}`;
     const progressMobileBorderRadiusWidth = `${progressBorderRadiusMobile.top}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.right}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.bottom}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.left}${progressBorderRadiusUnits.Mobile}`;
     /** End Progress Border Radius */
+
+
+    /** Progress Title Margin */
+    const progressDesktopTitleMargin = `${progressTitleMarginDesktop.top}${progressTitleMarginUnits.Desktop} ${progressTitleMarginDesktop.right}${progressTitleMarginUnits.Desktop} ${progressTitleMarginDesktop.bottom}${progressTitleMarginUnits.Desktop} ${progressTitleMarginDesktop.left}${progressTitleMarginUnits.Desktop}`;
+    const progressTabletTitleMargin = `${progressTitleMarginTablet.top}${progressTitleMarginUnits.Tablet} ${progressTitleMarginTablet.right}${progressTitleMarginUnits.Tablet} ${progressTitleMarginTablet.bottom}${progressTitleMarginUnits.Tablet} ${progressTitleMarginTablet.left}${progressTitleMarginUnits.Tablet}`;
+    const progressMobileTitleMargin = `${progressTitleMarginMobile.top}${progressTitleMarginUnits.Mobile} ${progressTitleMarginMobile.right}${progressTitleMarginUnits.Mobile} ${progressTitleMarginMobile.bottom}${progressTitleMarginUnits.Mobile} ${progressTitleMarginMobile.left}${progressTitleMarginUnits.Mobile}`;
+    /** Progress Title Margin */
 
     /**
      * Get all block style
@@ -217,67 +382,58 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
-            ${progressTextColor ? `color: ${progressTextColor} !important;` : ''}
+            ${progressTitleColor ? `color: ${progressTitleColor} !important;` : ''}
 
-            ${progressGlobalTypoSwitcher.fontFamily === true && progressGlobalTypographyData.fontFamily ? `font-family: ${progressGlobalTypographyData.fontFamily};` : ''}
-            ${progressGlobalTypoSwitcher.fontSize === true && progressGlobalTypographyData.fontSize ? `font-size: ${progressGlobalTypographyData.fontSize};` : ''}
-            ${progressGlobalTypoSwitcher.fontWeight === true && progressGlobalTypographyData.fontWeight ? `font-weight: ${progressGlobalTypographyData.fontWeight};` : ''}
-            ${progressGlobalTypoSwitcher.fontStyle === true && progressGlobalTypographyData.fontStyle ? `font-style: ${progressGlobalTypographyData.fontStyle};` : ''}
-            ${progressGlobalTypoSwitcher.textTransform === true && progressGlobalTypographyData.textTransform ? `text-transform: ${progressGlobalTypographyData.textTransform};` : ''}
-            ${progressGlobalTypoSwitcher.textDecoration === true && progressGlobalTypographyData.textDecoration ? `text-decoration: ${progressGlobalTypographyData.textDecoration};` : ''}
-            ${progressGlobalTypoSwitcher.letterSpacing === true && progressGlobalTypographyData.letterSpacing ? `letter-spacing: ${progressGlobalTypographyData.letterSpacing};` : ''}
-            ${progressGlobalTypoSwitcher.lineHeight === true && progressGlobalTypographyData.lineHeight ? `line-height: ${progressGlobalTypographyData.lineHeight};` : ''}
+            ${progressTitleGlobalTypoSwitcher.fontFamily === true && progressTitleGlobalTypographyData.fontFamily ? `font-family: ${progressTitleGlobalTypographyData.fontFamily};` : ''}
+            ${progressTitleGlobalTypoSwitcher.fontSize === true && progressTitleGlobalTypographyData.fontSize ? `font-size: ${progressTitleGlobalTypographyData.fontSize};` : ''}
+            ${progressTitleGlobalTypoSwitcher.fontWeight === true && progressTitleGlobalTypographyData.fontWeight ? `font-weight: ${progressTitleGlobalTypographyData.fontWeight};` : ''}
+            ${progressTitleGlobalTypoSwitcher.fontStyle === true && progressTitleGlobalTypographyData.fontStyle ? `font-style: ${progressTitleGlobalTypographyData.fontStyle};` : ''}
+            ${progressTitleGlobalTypoSwitcher.textTransform === true && progressTitleGlobalTypographyData.textTransform ? `text-transform: ${progressTitleGlobalTypographyData.textTransform};` : ''}
+            ${progressTitleGlobalTypoSwitcher.textDecoration === true && progressTitleGlobalTypographyData.textDecoration ? `text-decoration: ${progressTitleGlobalTypographyData.textDecoration};` : ''}
+            ${progressTitleGlobalTypoSwitcher.letterSpacing === true && progressTitleGlobalTypographyData.letterSpacing ? `letter-spacing: ${progressTitleGlobalTypographyData.letterSpacing};` : ''}
+            ${progressTitleGlobalTypoSwitcher.lineHeight === true && progressTitleGlobalTypographyData.lineHeight ? `line-height: ${progressTitleGlobalTypographyData.lineHeight};` : ''}
 
-            ${progressGlobalTypoSwitcher.fontFamily === false && progressFontFamily && progressFontFamily !== 'Default' ? `font-family: ${progressFontFamily};` : ''}
-            ${progressGlobalTypoSwitcher.fontSize === false && progressFontSize.Desktop && progressFontSizeUnits.Desktop ? `font-size: ${progressFontSize.Desktop}${progressFontSizeUnits.Desktop};` : ''}
-            ${progressGlobalTypoSwitcher.fontWeight === false && progressFontWeight ? `font-weight: ${progressFontWeight};` : ''}
-            ${progressGlobalTypoSwitcher.fontStyle === false && progressFontStyle ? `font-style: ${progressFontStyle};` : ''}
-            ${progressGlobalTypoSwitcher.textTransform === false && progressTextTransform ? `text-transform: ${progressTextTransform};` : ''}
-            ${progressGlobalTypoSwitcher.textDecoration === false && progressTextDecoration ? `text-decoration: ${progressTextDecoration};` : ''}
-            ${progressGlobalTypoSwitcher.letterSpacing === false && progressLetterSpacing.Desktop && progressLetterSpacingUnits.Desktop ? `letter-spacing: ${progressLetterSpacing.Desktop}${progressLetterSpacingUnits.Desktop};` : ''}
-            ${progressGlobalTypoSwitcher.lineHeight === false && progressLineHeight.Desktop && progressLineHeightUnits.Desktop ? `line-height: ${progressLineHeight.Desktop}${progressLineHeightUnits.Desktop};` : ''}
+            ${progressTitleGlobalTypoSwitcher.fontFamily === false && progressTitleFontFamily && progressTitleFontFamily !== 'Default' ? `font-family: ${progressTitleFontFamily};` : ''}
+            ${progressTitleGlobalTypoSwitcher.fontSize === false && progressTitleFontSize.Desktop && progressTitleFontSizeUnits.Desktop ? `font-size: ${progressTitleFontSize.Desktop}${progressTitleFontSizeUnits.Desktop};` : ''}
+            ${progressTitleGlobalTypoSwitcher.fontWeight === false && progressTitleFontWeight ? `font-weight: ${progressTitleFontWeight};` : ''}
+            ${progressTitleGlobalTypoSwitcher.fontStyle === false && progressTitleFontStyle ? `font-style: ${progressTitleFontStyle};` : ''}
+            ${progressTitleGlobalTypoSwitcher.textTransform === false && progressTitleTextTransform ? `text-transform: ${progressTitleTextTransform};` : ''}
+            ${progressTitleGlobalTypoSwitcher.textDecoration === false && progressTitleTextDecoration ? `text-decoration: ${progressTitleTextDecoration};` : ''}
+            ${progressTitleGlobalTypoSwitcher.letterSpacing === false && progressTitleLetterSpacing.Desktop && progressTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${progressTitleLetterSpacing.Desktop}${progressTitleLetterSpacingUnits.Desktop};` : ''}
+            ${progressTitleGlobalTypoSwitcher.lineHeight === false && progressTitleLineHeight.Desktop && progressTitleLineHeightUnits.Desktop ? `line-height: ${progressTitleLineHeight.Desktop}${progressTitleLineHeightUnits.Desktop};` : ''}
         }
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label:hover {
-            color: ${progressTextHoverColor} !important;
+            color: ${progressTitleHoverColor} !important;
         }
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line {
-            background-color: ${progressBgColor};
+            ${progressBgZebraTrackSwitcher === false ? `background-color: ${progressBgColor}` : ''};
+            ${progressBgZebraTrackSwitcher === true ? `background: repeating-linear-gradient(-45deg, ${progressBgColor}, ${progressBgColor} ${progressBgZebraTrackWidth.Desktop}px, transparent ${progressBgZebraTrackWidth.Desktop}px, transparent calc(${progressBgZebraTrackWidth.Desktop * 2}px));` : ''};
             ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadiusWidth};` : ''}
             position: relative;
         }
-        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line:hover {
-            background-color: ${progressBgHoverColor};
-        }
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar {
-            height: ${progressBarHeight ? `${progressBarHeight}px` : '2px'};
+            ${progressBarHeight.Desktop ? `height: ${progressBarHeight.Desktop}${progressBarHeightUnits.Desktop};` : ''}
             background-color: ${progressColor};
             ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadiusWidth};` : ''}
             transition: width 0.5s ease-in-out;
             width: ${progressNumber}%;
-        }
-        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar:hover {
-            background-color: ${progressHoverColor};
-            transition: ease-in-out .5s;
         }
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-number {
             position: absolute;
             top: -30px;
             transform: translateX(-100%);
             transition: left 0.5s ease-in-out;
-            color: ${progressTextColor};
+            color: ${progressNumberColor};
         }
         .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-number:hover {
-            color: ${progressTextHoverColor};
+            color: ${progressNumberHoverColor};
         }
 
         .${blockID} .progress-bar-text-inSide-wrapper {
             background-color: ${progressBgColor};
             ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadiusWidth};` : ''}
-            height: ${progressBarHeight ? `${progressBarHeight}px` : '30px'};
+            ${progressBarHeight.Desktop ? `height: ${progressBarHeight.Desktop}${progressBarHeightUnits.Desktop};` : ''}
             overflow: hidden;
-        }
-        .${blockID} .progress-bar-text-inSide-wrapper:hover {
-            background-color: ${progressBgHoverColor};
         }
         .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
             background-color: ${progressColor};
@@ -285,17 +441,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: width 0.5s ease-in-out;
             width: ${progressNumber}%;
         }
-        .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label:hover {
-            background-color: ${progressHoverColor};
-            transition: ease-in-out .5s;
-        }
         .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info {
             ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadiusWidth};` : ''}
-            color: ${progressTextColor};
+            color: ${progressNumberColor};
             font-size: 14px;
         }
         .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info:hover {
-            color: ${progressTextHoverColor};
+            color: ${progressNumberHoverColor};
         }
 
         @media only screen and (max-width: 1024px) {
@@ -316,9 +468,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
-                ${progressGlobalTypoSwitcher.fontSize === false && progressFontSize.Tablet && progressFontSizeUnits.Tablet ? `font-size: ${progressFontSize.Tablet}${progressFontSizeUnits.Tablet};` : ''}
-                ${progressGlobalTypoSwitcher.letterSpacing === false && progressLetterSpacing.Tablet && progressLetterSpacingUnits.Tablet ? `letter-spacing: ${progressLetterSpacing.Tablet}${progressLetterSpacingUnits.Tablet};` : ''}
-                ${progressGlobalTypoSwitcher.lineHeight === false && progressLineHeight.Tablet && progressLineHeightUnits.Tablet ? `line-height: ${progressLineHeight.Tablet}${progressLineHeightUnits.Tablet};` : ''}   
+                ${progressTitleGlobalTypoSwitcher.fontSize === false && progressTitleFontSize.Tablet && progressTitleFontSizeUnits.Tablet ? `font-size: ${progressTitleFontSize.Tablet}${progressTitleFontSizeUnits.Tablet};` : ''}
+                ${progressTitleGlobalTypoSwitcher.letterSpacing === false && progressTitleLetterSpacing.Tablet && progressTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${progressTitleLetterSpacing.Tablet}${progressTitleLetterSpacingUnits.Tablet};` : ''}
+                ${progressTitleGlobalTypoSwitcher.lineHeight === false && progressTitleLineHeight.Tablet && progressTitleLineHeightUnits.Tablet ? `line-height: ${progressTitleLineHeight.Tablet}${progressTitleLineHeightUnits.Tablet};` : ''}   
+            }
+
+            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar {
+                ${progressBarHeight.Tablet ? `height: ${progressBarHeight.Tablet}${progressBarHeightUnits.Tablet};` : ''}
+                ${progressBorderRadiusTablet.top ? `border-radius: ${progressTabletBorderRadiusWidth};` : ''}
+            }
+            .${blockID} .progress-bar-text-inSide-wrapper {
+                ${progressBorderRadiusTablet.top ? `border-radius: ${progressTabletBorderRadiusWidth};` : ''}
+                ${progressBarHeight.Tablet ? `height: ${progressBarHeight.Tablet}${progressBarHeightUnits.Tablet};` : ''}
+                overflow: hidden;
             }
         }
 
@@ -339,9 +501,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${progressBorderRadiusMobile.top ? `border-radius: ${progressMobileBorderRadiusWidth};` : ''}
             }
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label { 
-                ${progressGlobalTypoSwitcher.fontSize === false && progressFontSize.Mobile && progressFontSizeUnits.Mobile ? `font-size: ${progressFontSize.Mobile}${progressFontSizeUnits.Mobile};` : ''}
-                ${progressGlobalTypoSwitcher.letterSpacing === false && progressLetterSpacing.Mobile && progressLetterSpacingUnits.Mobile ? `letter-spacing: ${progressLetterSpacing.Mobile}${progressLetterSpacingUnits.Mobile};` : ''}
-                ${progressGlobalTypoSwitcher.lineHeight === false && progressLineHeight.Mobile && progressLineHeightUnits.Mobile ? `line-height: ${progressLineHeight.Mobile}${progressLineHeightUnits.Mobile};` : ''}  
+                ${progressTitleGlobalTypoSwitcher.fontSize === false && progressTitleFontSize.Mobile && progressTitleFontSizeUnits.Mobile ? `font-size: ${progressTitleFontSize.Mobile}${progressTitleFontSizeUnits.Mobile};` : ''}
+                ${progressTitleGlobalTypoSwitcher.letterSpacing === false && progressTitleLetterSpacing.Mobile && progressTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${progressTitleLetterSpacing.Mobile}${progressTitleLetterSpacingUnits.Mobile};` : ''}
+                ${progressTitleGlobalTypoSwitcher.lineHeight === false && progressTitleLineHeight.Mobile && progressTitleLineHeightUnits.Mobile ? `line-height: ${progressTitleLineHeight.Mobile}${progressTitleLineHeightUnits.Mobile};` : ''}  
+            }
+            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar {
+                ${progressBarHeight.Mobile ? `height: ${progressBarHeight.Mobile}${progressBarHeightUnits.Mobile};` : ''}
+                ${progressBorderRadiusMobile.top ? `border-radius: ${progressMobileBorderRadiusWidth};` : ''}
+            }
+            .${blockID} .progress-bar-text-inSide-wrapper {
+                ${progressBorderRadiusMobile.top ? `border-radius: ${progressMobileBorderRadiusWidth};` : ''}
+                ${progressBarHeight.Mobile ? `height: ${progressBarHeight.Mobile}${progressBarHeightUnits.Mobile};` : ''}
+                overflow: hidden;
             }
         }
 
@@ -353,21 +524,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		progressTextPosition,
 		progressNumber,
 
-        progressColorSwitcher,
-		progressColor,
-        progressHoverColor,
-
-        progressTextColorSwitcher,
-		progressTextColor,
-        progressTextHoverColor,
-
-        progressBgColorSwitcher,
-		progressBgColor,
-        progressBgHoverColor,
+        progressNumberColorSwitcher,
+		progressNumberColor,
+        progressNumberHoverColor,
 
 		progressTitle,
 		progressHeadingTag,
 		progressBarHeight,
+        progressBarHeightUnits,
+
+        progressTitleColorSwitcher,
+        progressTitleColor,
+        progressTitleHoverColor,
 
 		progressBorderRadiusUnits,
 		progressBorderRadiusDesktop,
@@ -375,20 +543,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		progressBorderRadiusMobile,
 		progressBorderRadiusLink,
 
-        progressGlobalTypoSwitcher,
-        progressGlobalTypographyData,
-        progressGlobalTypoType,
-        progressFontFamily,
-        progressFontSize,
-        progressFontSizeUnits,
-        progressFontWeight,
-        progressFontStyle,
-        progressTextTransform,
-        progressTextDecoration,
-        progressLetterSpacing,
-        progressLetterSpacingUnits,
-        progressLineHeight,
-        progressLineHeightUnits,
+        progressTitleGlobalTypoSwitcher,
+        progressTitleGlobalTypographyData,
+        progressTitleGlobalTypoType,
+        progressTitleGlobalTypoOption,
+        progressTitleFontFamily,
+        progressTitleFontSize,
+        progressTitleFontSizeUnits,
+        progressTitleFontWeight,
+        progressTitleFontStyle,
+        progressTitleTextTransform,
+        progressTitleTextDecoration,
+        progressTitleLetterSpacing,
+        progressTitleLetterSpacingUnits,
+        progressTitleLineHeight,
+        progressTitleLineHeightUnits,
+
+        progressNumberGlobalTypoSwitcher,
+        progressNumberGlobalTypographyData,
+        progressNumberGlobalTypoType,
+        progressNumberGlobalTypoOption,
+        progressNumberFontFamily,
+        progressNumberFontSize,
+        progressNumberFontSizeUnits,
+        progressNumberFontWeight,
+        progressNumberFontStyle,
+        progressNumberTextTransform,
+        progressNumberTextDecoration,
+        progressNumberLetterSpacing,
+        progressNumberLetterSpacingUnits,
+        progressNumberLineHeight,
+        progressNumberLineHeightUnits,
 
         progressDesktopBorderRadiusWidth,
         progressTabletBorderRadiusWidth,
@@ -406,6 +591,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressbarVRTopOffsetUnits,
         progressbarVRBottomOffset,
         progressbarVRBottomOffsetUnits,
+
+        progressTitleMarginUnits,
+        progressTitleMarginDesktop,
+        progressTitleMarginTablet,
+        progressTitleMarginMobile,
     ]);
 
     const customCss = getCustomCss(progressGlobalCustomCSS, `.${blockID}`);
@@ -420,7 +610,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
      * Inspector General Controls
      */
     const generalControls = (
-        <PanelBody title={__("General Info", "frontis-blocks")} initialOpen={true}>
+        <>
+        <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
+            <SelectControl
+                label={__("Layout Type", "frontis-blocks")}
+                value={progressbarType}
+                options={PROGRESSBAR_TYPE}
+                onChange={(value) => setAttributes({ progressbarType: value })}
+            />
+
             <div className='text-position'>
                 <SelectControl
                     label={__("Text Position", "frontis-blocks")}
@@ -442,48 +640,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 </div>
 
-                <div className="progress-bar-height">
-                    <RangeControl
-                        label={__("progress Bar Height", "frontis-blocks")}
-                        value={progressBarHeight}
-                        onChange={(value) => setAttributes({ progressBarHeight: value })}
-                        min={1}
-                        max={100}
-                        resetFallbackValue={30}
-                    />
-                </div>
-
-                <div className="progress-title">
-                    <TextControl
-                        label={__("Title", "frontis-blocks")}
-                        value={progressTitle}
-                        onChange={(value) => setAttributes({ progressTitle: value })}
-                    />
-                </div>
-
-                <div className='progress-heading-tag-wrapper'>
-                    <BaseControl
-                        label={__("Heading Tag", "frontis-blocks")}
-                            id="fb-setting-text-alignment"
-                            className="fb-setting-text-alignment"
-                    >
-                        <ButtonGroup
-                            className="fb-setting-text-alignment-group-btn"
-                        >
-                            {HEADING.map((item, key) => (
-                                <Button
-                                    key={key}
-                                    onClick={() => setAttributes({ progressHeadingTag: item.value })}
-                                    className={`fb-setting-text-alignment-single-btn ${ progressHeadingTag === item.value ? 'active' : ''}`}
-                                >
-                                    {item.label}
-                                </Button>
-                            ))}
-                        </ButtonGroup>
-                    </BaseControl>
-                </div>
+                <FB_Range
+                    min={0}
+                    max={100}
+                    label={__("progress Bar Height", "frontis-blocks")}
+                    rangeValue={progressBarHeight}
+                    onChangeHandler={(value) => setAttributes({ progressBarHeight: value })}
+                    rangeUnitHandler={(value) => setAttributes({ progressBarHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={progressBarHeightUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
             </div>
         </PanelBody>
+        <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
+                <TextControl
+                    label={__("Title", "frontis-blocks")}
+                    value={progressTitle}
+                    onChange={(value) => setAttributes({ progressTitle: value })}
+                />
+
+                <FB_HtmlTagControl
+                    label={__("Title Tag", "frontis-blocks")}
+                    globalHtmlTag={progressHeadingTag}
+                    setGlobalHtmlTag={(value) => setAttributes({ progressHeadingTag: value })}
+                />
+        </PanelBody>
+        </>
     );
     
     /**
@@ -491,125 +676,224 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
      */
     const styleControls = (
         <>
-            <PanelBody title={__("Style", "frontis-blocks")} initialOpen={true}>
-                <FB_TypographyControl
-                    globalTypoControlActive={true}
-                    globalTypoSwitcher={progressGlobalTypoSwitcher}
-                    storeGlobalTypographyData={(value) => setAttributes({ progressGlobalTypographyData: value })}
-
-                    globalTypoType={progressGlobalTypoType}
-                    onChangeGlobalTypoType={(value) => {
-                        setAttributes({ 
-                            progressGlobalTypoType: value, 
-                            progressGlobalTypoSwitcher: value === 'default' ? {...progressGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...progressGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                        })
-                    }}
-
-                    globalTypoOption={progressGlobalTypoOption}
-                    onChangeGlobalTypoOption={(value) => setAttributes({ progressGlobalTypoOption: value })}
-
-                    fontFamily={progressFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ progressFontFamily: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontFamily: value && false} })}
-
-                    fontSize={progressFontSize}
-                    onChangeFontSize={(value) => setAttributes({ progressFontSize: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontSize: value && false} })}
-
-                    fontSizeUnits={progressFontSizeUnits}
-                    onChangeFontSizeUnit={(value) => setAttributes({ progressFontSizeUnits: value })}
-
-                    fontWeight={progressFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ progressFontWeight: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontWeight: value && false} })}
-
-                    fontStyle={progressFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ progressFontStyle: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, fontStyle: value && false} })}
-
-                    textTransform={progressTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ progressTextTransform: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, textTransform: value && false} })}
-
-                    textDecoration={progressTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ progressTextDecoration: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, textDecoration: value && false} })}
-
-                    letterSpacing={progressLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ progressLetterSpacing: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-                    letterSpacingUnits={progressLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ progressLetterSpacingUnits: value })}
-
-                    lineHeight={progressLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ progressLineHeight: value, progressGlobalTypoSwitcher: {...progressGlobalTypoSwitcher, lineHeight: value && false} })}
-
-                    lineHeightUnits={progressLineHeightUnits}
-                    onChangeLineHeightUnit={(value) => setAttributes({ progressLineHeightUnits: value })}
-
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
+            <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
+                <ToggleControl
+                    label={__("Zebra Track Color", "frontis-blocks")}
+                    checked={progressZebraTrackSwitcher}
+                    onChange={(value) => setAttributes({ progressZebraTrackSwitcher: value })}
                 />
 
-                <FB_SwitcherControl
-                        label={__("Color", "frontis-blocks")}
-                        globalSwitcher={progressColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ progressColorSwitcher: value })}
-                />
+                <br/>
 
-                {progressColorSwitcher === 'normal' && (
+                {progressZebraTrackSwitcher && (<>
+                    <FB_Range
+                        min={0}
+                        max={100}
+                        label={__("Color Zebra Track Width", "frontis-blocks")}
+                        rangeValue={progressZebraTrackWidth}
+                        onChangeHandler={(value) => setAttributes({ progressZebraTrackWidth: value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                        isRangeUnit={false}
+                    />
                     <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
+                        label={__("Progress Color", "frontis-blocks")}
                         globalColor={progressColor}
                         setGlobalColor={(value) => setAttributes({ progressColor: value })}
                     />
+                </>)}
+
+                {!progressZebraTrackSwitcher &&(
+                        <FB_BackgroundColorControl
+                            label={__("Progress Color", "frontis-blocks")}
+                            normalLabel = {__("Progress Color", "frontis-blocks")}
+                            bgColorSwitcher={progressColorSwitcher}
+                            setBgColorSwitcher={(value) =>
+                                setAttributes({ progressColorSwitcher: value })
+                            }
+                            normalBackgroundType={progressbarType}
+                            setNormalBackgroundType={(value) =>
+                                setAttributes({ progressType: value })
+                            }
+                            normalClassicColor={progressColor}
+                            setNormalClassicColor={(value) =>
+                                setAttributes({ progressColor: value })
+                            }
+                            normalGradientColor={progressGradientColor}
+                            setNormalGradientColor={(value) =>
+                                setAttributes({ progressGradientColor: value })
+                            }
+                            normalCustomGradientSwitcher={
+                                progressCustomGradientSwitcher
+                            }
+                            setNormalCustomGradientSwitcher={(value) =>
+                                setAttributes({
+                                    progressCustomGradientSwitcher: value,
+                                })
+                            }
+                            normalCustomGradientInputValue={
+                                progressCustomGradientInputValue
+                            }
+                            setNormalCustomGradientInputValue={(value) =>
+                                setAttributes({
+                                    progressCustomGradientInputValue: value,
+                                })
+                            }
+                            normalBackgroundImageUrl={progressImageUrl}
+                            setNormalBackgroundImageUrl={(value) =>
+                                setAttributes({ progressImageUrl: value })
+                            }
+                            normalBackgroundImageAlt={progressImageAlt}
+                            setNormalBackgroundImageAlt={(value) =>
+                                setAttributes({ progressImageAlt: value })
+                            }
+                            normalBackgroundImageID={progressImageID}
+                            setNormalBackgroundImageID={(value) =>
+                                setAttributes({ progressImageID: value })
+                            }
+                            normalBackgroundImagePosition={
+                                progressImagePosition
+                            }
+                            setNormalBackgroundImagePosition={(value) =>
+                                setAttributes({
+                                    progressImagePosition: value,
+                                })
+                            }
+                            normalBackgroundImageAttachment={
+                                progressImageAttachment
+                            }
+                            setNormalBackgroundImageAttachment={(value) =>
+                                setAttributes({
+                                    progressImageAttachment: value,
+                                })
+                            }
+                            normalBackgroundImageRepeat={
+                                progressImageRepeat
+                            }
+                            setNormalBackgroundImageRepeat={(value) =>
+                                setAttributes({
+                                    progressImageRepeat: value,
+                                })
+                            }
+                            normalBackgroundImageSize={progressImageSize}
+                            setNormalBackgroundImageSize={(value) =>
+                                setAttributes({ progressImageSize: value })
+                            }
+                            isBackgroundHover={false}
+                        />
                 )}
 
-                {progressColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={progressHoverColor}
-                        setGlobalColor={(value) => setAttributes({ progressHoverColor: value })}
-                    />
-                )}
-
-                <FB_SwitcherControl
-                        label={__("Label Color", "frontis-blocks")}
-                        globalSwitcher={progressTextColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ progressTextColorSwitcher: value })}
+                <ToggleControl
+                    label={__("Zebra Track Background", "frontis-blocks")}
+                    checked={progressBgZebraTrackSwitcher}
+                    onChange={(value) => setAttributes({ progressBgZebraTrackSwitcher: value })}
                 />
 
-                {progressTextColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={progressTextColor}
-                        setGlobalColor={(value) => setAttributes({ progressTextColor: value })}
+                <br/>
+
+                {progressBgZebraTrackSwitcher && (<>
+                    <FB_Range
+                        min={0}
+                        max={100}
+                        label={__("Background Zebra Track Width", "frontis-blocks")}
+                        rangeValue={progressBgZebraTrackWidth}
+                        onChangeHandler={(value) => setAttributes({ progressBgZebraTrackWidth: value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                        isRangeUnit={false}
                     />
-                )}
 
-                {progressTextColorSwitcher === 'hover' && (
                     <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={progressTextHoverColor}
-                        setGlobalColor={(value) => setAttributes({ progressTextHoverColor: value })}
-                    />
-                )}
-
-                <FB_SwitcherControl
-                        label={__("Base Color", "frontis-blocks")}
-                        globalSwitcher={progressBgColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ progressBgColorSwitcher: value })}
-                />
-
-                {progressBgColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
+                        label={__("Background Color", "frontis-blocks")}
                         globalColor={progressBgColor}
                         setGlobalColor={(value) => setAttributes({ progressBgColor: value })}
                     />
+                </>)}
+
+                {!progressBgZebraTrackSwitcher && (
+                    <FB_BackgroundColorControl
+                            label={__("Background Color", "frontis-blocks")}
+                            normalLabel = {__("Background Color", "frontis-blocks")}
+                            bgColorSwitcher={progressBgColorSwitcher}
+                            setBgColorSwitcher={(value) =>
+                                setAttributes({ progressBgColorSwitcher: value })
+                            }
+                            normalBackgroundType={progressBgType}
+                            setNormalBackgroundType={(value) =>
+                                setAttributes({ progressBgType: value })
+                            }
+                            normalClassicColor={progressBgColor}
+                            setNormalClassicColor={(value) =>
+                                setAttributes({ progressBgColor: value })
+                            }
+                            normalGradientColor={progressBgGradientColor}
+                            setNormalGradientColor={(value) =>
+                                setAttributes({ progressBgGradientColor: value })
+                            }
+                            normalCustomGradientSwitcher={
+                                progressBgCustomGradientSwitcher
+                            }
+                            setNormalCustomGradientSwitcher={(value) =>
+                                setAttributes({
+                                    progressBgCustomGradientSwitcher: value,
+                                })
+                            }
+                            normalCustomGradientInputValue={
+                                progressBgCustomGradientInputValue
+                            }
+                            setNormalCustomGradientInputValue={(value) =>
+                                setAttributes({
+                                    progressBgCustomGradientInputValue: value,
+                                })
+                            }
+                            normalBackgroundImageUrl={progressBgImageUrl}
+                            setNormalBackgroundImageUrl={(value) =>
+                                setAttributes({ progressBgImageUrl: value })
+                            }
+                            normalBackgroundImageAlt={progressBgImageAlt}
+                            setNormalBackgroundImageAlt={(value) =>
+                                setAttributes({ progressBgImageAlt: value })
+                            }
+                            normalBackgroundImageID={progressBgImageID}
+                            setNormalBackgroundImageID={(value) =>
+                                setAttributes({ progressBgImageID: value })
+                            }
+                            normalBackgroundImagePosition={
+                                progressBgImagePosition
+                            }
+                            setNormalBackgroundImagePosition={(value) =>
+                                setAttributes({
+                                    progressBgImagePosition: value,
+                                })
+                            }
+                            normalBackgroundImageAttachment={
+                                progressBgImageAttachment
+                            }
+                            setNormalBackgroundImageAttachment={(value) =>
+                                setAttributes({
+                                    progressBgImageAttachment: value,
+                                })
+                            }
+                            normalBackgroundImageRepeat={
+                                progressBgImageRepeat
+                            }
+                            setNormalBackgroundImageRepeat={(value) =>
+                                setAttributes({
+                                    progressBgImageRepeat: value,
+                                })
+                            }
+                            normalBackgroundImageSize={progressBgImageSize}
+                            setNormalBackgroundImageSize={(value) =>
+                                setAttributes({ progressBgImageSize: value })
+                            }
+                            isBackgroundHover={false}
+                        />
                 )}
 
-                {progressBgColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={progressBgHoverColor}
-                        setGlobalColor={(value) => setAttributes({ progressBgHoverColor: value })}
-                    />
-                )}
 
                 <FB_Spacing 
                     label={__("Radius Border", "frontis-blocks")}
@@ -622,6 +906,174 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     handleSpacingUnitHandler={progressBorderRadiusUnitsChange}
                     spacingCombineBtn={progressBorderRadiusLink}
                     spacingCombineBtnHandler={progressBorderRadiusLinkBtn}
+                    setAttributes={setAttributes}
+                />
+            </PanelBody>
+
+            <PanelBody title={__("Number", "frontis-blocks")} initialOpen={false}>
+                <FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={progressNumberGlobalTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ progressNumberGlobalTypographyData: value })}
+
+                    globalTypoType={progressNumberGlobalTypoType}
+                    onChangeGlobalTypoType={(value) => {
+                        setAttributes({ 
+                            progressNumberGlobalTypoType: value, 
+                            progressNumberGlobalTypoSwitcher: value === 'default' ? {...progressNumberGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...progressNumberGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                        })
+                    }}
+
+                    globalTypoOption={progressNumberGlobalTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ progressNumberGlobalTypoOption: value })}
+
+                    fontFamily={progressNumberFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ progressNumberFontFamily: value, progressNumberGlobalTypoSwitcher: {...progressNumberGlobalTypoSwitcher, fontFamily: value && false} })}
+
+                    fontSize={progressNumberFontSize}
+                    onChangeFontSize={(value) => setAttributes({ progressNumberFontSize: value, progressNumberGlobalTypoSwitcher: {...progressNumberGlobalTypoSwitcher, fontSize: value && false} })}
+
+                    fontSizeUnits={progressNumberFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ progressNumberFontSizeUnits: value })}
+
+                    fontWeight={progressNumberFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ progressNumberFontWeight: value, progressNumberGlobalTypoSwitcher: {...progressNumberGlobalTypoSwitcher, fontWeight: value && false} })}
+
+                    fontStyle={progressNumberFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ progressNumberFontStyle: value, progressNumberGlobalTypoSwitcher: {...progressNumberGlobalTypoSwitcher, fontStyle: value && false} })}
+
+                    textTransform={progressNumberTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ progressNumberTextTransform: value, progressNumberGlobalTypoSwitcher: {...progressNumberGlobalTypoSwitcher, textTransform: value && false} })}
+
+                    textDecoration={progressNumberTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ progressNumberTextDecoration: value, progressNumberGlobalTypoSwitcher: {...progressNumberGlobalTypoSwitcher, textDecoration: value && false} })}
+
+                    letterSpacing={progressNumberLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ progressNumberLetterSpacing: value, progressNumberGlobalTypoSwitcher: {...progressNumberGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+                    letterSpacingUnits={progressNumberLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ progressNumberLetterSpacingUnits: value })}
+
+                    lineHeight={progressNumberLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ progressNumberLineHeight: value, progressNumberGlobalTypoSwitcher: {...progressNumberGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                    lineHeightUnits={progressNumberLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ progressNumberLineHeightUnits: value })}
+
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Number Color", "frontis-blocks")}
+                    globalSwitcher={progressNumberColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ progressNumberColorSwitcher: value })}
+                />
+
+                {progressNumberColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={progressNumberColor}
+                        setGlobalColor={(value) => setAttributes({ progressNumberColor: value })}
+                    />
+                )}
+
+                {progressNumberColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={progressNumberHoverColor}
+                        setGlobalColor={(value) => setAttributes({ progressNumberHoverColor: value })}
+                    />
+                )}
+            </PanelBody>
+
+            <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
+                <FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={progressTitleGlobalTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ progressTitleGlobalTypoSwitcher: value })}
+
+                    globalTypoType={progressTitleGlobalTypoType}
+                    onChangeGlobalTypoType={(value) => {
+                        setAttributes({ 
+                            progressTitleGlobalTypoType: value, 
+                            progressTitleGlobalTypoSwitcher: value === 'default' ? {...progressTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...progressTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                        })
+                    }}
+
+                    globalTypoOption={progressTitleGlobalTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ progressTitleGlobalTypoOption: value })}
+
+                    fontFamily={progressTitleFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ progressTitleFontFamily: value, progressTitleGlobalTypoSwitcher: {...progressTitleGlobalTypoSwitcher, fontFamily: value && false} })}
+
+                    fontSize={progressTitleFontSize}
+                    onChangeFontSize={(value) => setAttributes({ progressTitleFontSize: value, progressTitleGlobalTypoSwitcher: {...progressTitleGlobalTypoSwitcher, fontSize: value && false} })}
+
+                    fontSizeUnits={progressTitleFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ progressTitleFontSizeUnits: value })}
+
+                    fontWeight={progressTitleFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ progressTitleFontWeight: value, progressTitleGlobalTypoSwitcher: {...progressTitleGlobalTypoSwitcher, fontWeight: value && false} })}
+
+                    fontStyle={progressTitleFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ progressTitleFontStyle: value, progressTitleGlobalTypoSwitcher: {...progressTitleGlobalTypoSwitcher, fontStyle: value && false} })}
+
+                    textTransform={progressTitleTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ progressTitleTextTransform: value, progressTitleGlobalTypoSwitcher: {...progressTitleGlobalTypoSwitcher, textTransform: value && false} })}
+
+                    textDecoration={progressTitleTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ progressTitleTextDecoration: value, progressTitleGlobalTypoSwitcher: {...progressTitleGlobalTypoSwitcher, textDecoration: value && false} })}
+
+                    letterSpacing={progressTitleLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ progressTitleLetterSpacing: value, progressTitleGlobalTypoSwitcher: {...progressTitleGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+                    letterSpacingUnits={progressTitleLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ progressTitleLetterSpacingUnits: value })}
+
+                    lineHeight={progressTitleLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ progressTitleLineHeight: value, progressTitleGlobalTypoSwitcher: {...progressTitleGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                    lineHeightUnits={progressTitleLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ progressTitleLineHeightUnits: value })}
+
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Color", "frontis-blocks")}
+                    globalSwitcher={progressTitleColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ progressTitleColorSwitcher: value })}
+                />
+
+                {progressColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={progressTitleColor}
+                        setGlobalColor={(value) => setAttributes({ progressTitleColor: value })}
+                    />
+                )}
+
+                {progressColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={progressTitleHoverColor}
+                        setGlobalColor={(value) => setAttributes({ progressTitleHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing 
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={progressTitleMarginUnitsHandler}
+                    spacingUnits={progressTitleMarginUnits}
+                    spacingDesktop={progressTitleMarginDesktop}
+                    spacingTablet={progressTitleMarginTablet}
+                    spacingMobile={progressTitleMarginMobile}
+                    handleSpacingUnitHandler={progressTitleMarginUnitsChange}
+                    spacingCombineBtn={progressTitleMarginLink}
+                    spacingCombineBtnHandler={progressTitleMarginLinkBtn}
                     setAttributes={setAttributes}
                 />
             </PanelBody>
@@ -711,6 +1163,155 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         
                     </PanelBody>
 
+                    <PanelBody
+                        title={__("Background Color", "frontis-blocks")}
+                        initialOpen={false}
+                        className="fb-setting-responsive-control-wrapper"
+                    >
+                        <FB_BackgroundColorControl
+                            label={__("Background Color", "frontis-blocks")}
+                            bgColorSwitcher={progressbarBgColorSwitcher}
+                            setBgColorSwitcher={(value) =>
+                                setAttributes({ progressbarBgColorSwitcher: value })
+                            }
+                            normalBackgroundType={progressbarBgType}
+                            setNormalBackgroundType={(value) =>
+                                setAttributes({ progressbarBgType: value })
+                            }
+                            normalClassicColor={progressbarBgClassicColor}
+                            setNormalClassicColor={(value) =>
+                                setAttributes({ progressbarBgClassicColor: value })
+                            }
+                            normalGradientColor={progressbarBgGradientColor}
+                            setNormalGradientColor={(value) =>
+                                setAttributes({ progressbarBgGradientColor: value })
+                            }
+                            normalCustomGradientSwitcher={
+                                progressbarBgCustomGradientSwitcher
+                            }
+                            setNormalCustomGradientSwitcher={(value) =>
+                                setAttributes({
+                                    progressbarBgCustomGradientSwitcher: value,
+                                })
+                            }
+                            normalCustomGradientInputValue={
+                                progressbarBgCustomGradientInputValue
+                            }
+                            setNormalCustomGradientInputValue={(value) =>
+                                setAttributes({
+                                    progressbarBgCustomGradientInputValue: value,
+                                })
+                            }
+                            normalBackgroundImageUrl={progressbarBgImageUrl}
+                            setNormalBackgroundImageUrl={(value) =>
+                                setAttributes({ progressbarBgImageUrl: value })
+                            }
+                            normalBackgroundImageAlt={progressbarBgImageAlt}
+                            setNormalBackgroundImageAlt={(value) =>
+                                setAttributes({ progressbarBgImageAlt: value })
+                            }
+                            normalBackgroundImageID={progressbarBgImageID}
+                            setNormalBackgroundImageID={(value) =>
+                                setAttributes({ progressbarBgImageID: value })
+                            }
+                            normalBackgroundImagePosition={
+                                progressbarBgImagePosition
+                            }
+                            setNormalBackgroundImagePosition={(value) =>
+                                setAttributes({
+                                    progressbarBgImagePosition: value,
+                                })
+                            }
+                            normalBackgroundImageAttachment={
+                                progressbarBgImageAttachment
+                            }
+                            setNormalBackgroundImageAttachment={(value) =>
+                                setAttributes({
+                                    progressbarBgImageAttachment: value,
+                                })
+                            }
+                            normalBackgroundImageRepeat={
+                                progressbarBgImageRepeat
+                            }
+                            setNormalBackgroundImageRepeat={(value) =>
+                                setAttributes({
+                                    progressbarBgImageRepeat: value,
+                                })
+                            }
+                            normalBackgroundImageSize={progressbarBgImageSize}
+                            setNormalBackgroundImageSize={(value) =>
+                                setAttributes({ progressbarBgImageSize: value })
+                            }
+                            hoverBackgroundType={progressbarBgHoverType}
+                            setHoverBackgroundType ={(value) =>
+                                setAttributes({ progressbarBgHoverType: value })
+                            }
+                            hoverClassicColor={progressbarBgHoverClassicColor}
+                            setHoverClassicColor={(value) =>
+                                setAttributes({ progressbarBgHoverClassicColor: value })
+                            }
+                            hoverGradientColor={progressbarBgHoverGradientColor}
+                            setHoverGradientColor={(value) =>
+                                setAttributes({ progressbarBgHoverGradientColor: value })
+                            }
+                            hoverCustomGradientSwitcher={
+                                progressbarBgHoverCustomGradientSwitcher
+                            }
+                            setHoverCustomGradientSwitcher={(value) =>
+                                setAttributes({
+                                    progressbarBgHoverCustomGradientSwitcher: value,
+                                })
+                            }
+                            hoverCustomGradientInputValue={
+                                progressbarBgHoverCustomGradientInputValue
+                            }
+                            setHoverCustomGradientInputValue={(value) =>
+                                setAttributes({
+                                    progressbarBgHoverCustomGradientInputValue: value,
+                                })
+                            }
+                            hoverBackgroundImageUrl={progressbarBgHoverImageUrl}
+                            setBgHoverImageUrl={(value) =>
+                                setAttributes({ progressbarBgHoverImageUrl: value })
+                            }
+                            hoverBackgroundImageAlt={progressbarBgHoverImageAlt}
+                            setBgHoverImageAlt={(value) =>
+                                setAttributes({ progressbarBgHoverImageAlt: value })
+                            }
+                            hoverBackgroundImageID={progressbarBgHoverImageID}
+                            setBgHoverImageID={(value) =>
+                                setAttributes({ progressbarBgHoverImageID: value })
+                            }
+                            hoverBackgroundImagePosition={
+                                progressbarBgHoverImagePosition
+                            }
+                            setBgHoverImagePosition={(value) =>
+                                setAttributes({
+                                    progressbarBgHoverImagePosition: value,
+                                })
+                            }
+                            hoverBackgroundImageAttachment={
+                                progressbarBgHoverImageAttachment
+                            }
+                            setBgHoverImageAttachment={(value) =>
+                                setAttributes({
+                                    progressbarBgHoverImageAttachment: value,
+                                })
+                            }
+                            hoverBackgroundImageRepeat={
+                                progressbarBgHoverImageRepeat
+                            }
+                            setBgHoverImageRepeat={(value) =>
+                                setAttributes({
+                                    progressbarBgHoverImageRepeat: value,
+                                })
+                            }
+                            hoverBackgroundImageSize={progressbarBgHoverImageSize}
+                            setBgHoverImageSize={(value) =>
+                                setAttributes({ progressbarBgHoverImageSize: value })
+                            }
+                        />
+                    </PanelBody>
                     <PanelBody
                         title={__("Responsive Control", "frontis-blocks")}
                         initialOpen={false}

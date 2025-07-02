@@ -72,6 +72,7 @@ const FB_BackgroundColorControl = ({
     setHoverBackgroundImageSize,
 
     isBackgroundImage = true,
+    isBackgroundHover = true,
 
 }) => {
 
@@ -83,11 +84,11 @@ const FB_BackgroundColorControl = ({
     return (
 
         <>
-            <FB_SwitcherControl
+            {isBackgroundHover && <FB_SwitcherControl
                 label={label}
                 globalSwitcher={bgColorSwitcher}
                 setGlobalSwitcher={(value) => setBgColorSwitcher(value)}
-            />
+            />}
 
             {bgColorSwitcher === 'normal' && (
                 <BaseControl
@@ -176,7 +177,7 @@ const FB_BackgroundColorControl = ({
                     />
                 </BaseControl>
             )}
-            {bgColorSwitcher === 'hover' && (
+            {isBackgroundHover && bgColorSwitcher === 'hover' && (
                 <BaseControl
                     className="fb-setting-background-color-setting-wrapper"
                     label={hoverLabel}

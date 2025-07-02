@@ -6,6 +6,11 @@ export const PROGRESS_TEXT_OPTIONS = [
 	{ label: __("Text Inside", "frontis-blocks"), value: "text-inSide" },
 ];
 
+export const PROGRESSBAR_TYPE = [
+	{ label: __("Horizontal", "frontis-blocks"), value: "horizontal" },
+	{ label: __("Vertical", "frontis-blocks"), value: "vertical" },
+];
+
 export const Unit_Types = [
 	{ label: "px", value: "px" },
 	{ label: "%", value: "%" },
