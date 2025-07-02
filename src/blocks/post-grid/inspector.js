@@ -6602,7 +6602,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                 <FB_Range
                     min={1}
-                    max={100}
+                    max={postImageWidthUnits[deviceType] === "%" ? 100 : 1000}
                     label={__("Width", "frontis-blocks")}
                     rangeValue={postImageWidth}
                     onChangeHandler={(value) => setAttributes({ postImageWidth: value })}
@@ -6615,7 +6615,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
                 <FB_Range
                     min={1}
-                    max={1000}
+                    max={postImageHeightUnits[deviceType] === "%" ? 100 : 1000}
                     label={__("Height", "frontis-blocks")}
                     rangeValue={postImageHeight}
                     onChangeHandler={(value) => setAttributes({ postImageHeight: value })}
