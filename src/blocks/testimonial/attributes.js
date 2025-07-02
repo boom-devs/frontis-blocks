@@ -968,6 +968,26 @@ const attributes = {
     },
     /** End Margin */
 
+    TestimonialRatingIconAlign: {
+        type: "string",
+        default: "flex-start",
+    },
+    TestimonialRatingIconGap: {
+        type: "object",
+        default: {
+            Desktop: '5',
+            Tablet: '5',
+            Mobile: '5',
+        },
+    },
+    TestimonialRatingIconGapUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
+    },
 
     TestimonialRatingIconSize: {
         type: 'object',

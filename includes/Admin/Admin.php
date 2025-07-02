@@ -514,7 +514,7 @@ class Admin {
 
 
         $read_more_switcher = isset($_POST['readMoreSwitcher']) ? $_POST['readMoreSwitcher'] : false;
-        $read_more_text = isset($_POST['readMoreText']) ? $_POST['readMoreText'] : 'Read More';
+        $read_more_text = isset($_POST['readMoreText']) ? $_POST['readMoreText'] : '';
         $read_more_icon_align = isset($_POST['readMoreIconAlign']) ? $_POST['readMoreIconAlign'] : 'icon';
         $read_more_icon = isset($_POST['readMoreIcon']) ? $_POST['readMoreIcon'] : 'angle-right';
         $read_more_icon_image_url = isset($_POST['readMoreIconImageUrl']) ? $_POST['readMoreIconImageUrl'] : '';

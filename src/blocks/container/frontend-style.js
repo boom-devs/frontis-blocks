@@ -1191,12 +1191,10 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		};
 		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-${clientId} > .frontis-blocks-container-inner-blocks-wrap > div`] = {
 			'max-width': 'unset !important',
-			'width': 'unset !important',
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
 		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId} > div`] = {
 			'max-width': 'unset !important',
-			'width': 'unset !important',
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
 		tablet_selectors[containerFlexSelector]= {
