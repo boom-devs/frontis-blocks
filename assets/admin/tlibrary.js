@@ -3254,11 +3254,11 @@ function FrontisBlocksSidebarFullSite(props) {
     // }
   };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
+    var mergedColors = [].concat(_toConsumableArray(customColors), _toConsumableArray(globalColors), _toConsumableArray(customGradientColors), _toConsumableArray(gradientColors));
     setTimeout(function () {
-      var mergedColors = [].concat(_toConsumableArray(customColors), _toConsumableArray(globalColors), _toConsumableArray(customGradientColors), _toConsumableArray(gradientColors));
-      (0,_components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_14__["default"])(mergedColors);
+      return (0,_components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_14__["default"])(mergedColors, deviceType);
     }, 1000);
-  }, [globalColors, customColors, customGradientColors, gradientColors]);
+  }, [globalColors, customColors, customGradientColors, gradientColors, deviceType]);
 
   //Update Gradient Colors
   var setGradientColor = function setGradientColor(index, color) {
@@ -7264,12 +7264,14 @@ var SiteImportModal = function SiteImportModal(_ref) {
     // 	});
     // }
   };
+
+  // Generate color variables
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var mergedColors = [].concat(_toConsumableArray(customColors), _toConsumableArray(globalColors), _toConsumableArray(customGradientColors), _toConsumableArray(gradientColors));
     setTimeout(function () {
-      var mergedColors = [].concat(_toConsumableArray(customColors), _toConsumableArray(globalColors), _toConsumableArray(customGradientColors), _toConsumableArray(gradientColors));
-      (0,_full_site_import_components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_11__["default"])(mergedColors);
+      return (0,_full_site_import_components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_11__["default"])(mergedColors, deviceType);
     }, 1000);
-  }, [globalColors, customColors, customGradientColors, gradientColors]);
+  }, [globalColors, customColors, customGradientColors, gradientColors, deviceType]);
 
   //Update Gradient Colors
   var setGradientColor = function setGradientColor(index, color) {
