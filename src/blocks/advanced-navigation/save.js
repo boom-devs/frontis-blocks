@@ -1,5 +1,4 @@
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
-import classnames from 'classnames';
 
 export default function save({ attributes }) {
     const {
@@ -18,7 +17,7 @@ export default function save({ attributes }) {
     const layoutPreset = layout === "is-horizontal" ? preset : verticalPreset;
 
     const blockProps = useBlockProps.save({
-        className: classnames(`frontis-advanced-navigation-wrapper`),
+        className: `frontis-block fb-advanced-navigation-main-wrapper ${blockId}`,
     });
 
     return (

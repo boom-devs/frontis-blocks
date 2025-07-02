@@ -5,11 +5,10 @@ import {
 } from "@wordpress/block-editor";
 import { useEffect } from "@wordpress/element";
 import { useSelect, useDispatch } from "@wordpress/data";
-import classnames from "classnames";
 
 import Inspector from "./inspector";
 
-export default function Edit({ attributes, setAttributes, className, clientId, isSelected }) {
+export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         layout,
@@ -54,19 +53,18 @@ export default function Edit({ attributes, setAttributes, className, clientId, i
     }, [layout, navAlign, flexWrap, navVerticalAlign, dropdownOpenOnClick, showDropdownIcon, navBtnType, hamburgerMenu]);
 
     const blockProps = useBlockProps({
-        className: classnames(className, `frontis-guten-block-main-parent-wrapper`),
+        className: `frontis-block fb-advanced-navigation-main-wrapper ${blockId}`,
     });
 
     const layoutPreset = layout === "is-horizontal" ? preset : verticalPreset;
 
     return (
         <>
-            {isSelected && (
-                <Inspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                />
-            )}
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper frontis-parent-wrapper frontis-parent-${blockId} ${classHook}`}>
                     <div
