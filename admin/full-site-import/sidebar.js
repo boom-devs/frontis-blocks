@@ -606,6 +606,7 @@ function FrontisBlocksSidebarFullSite(props) {
 		loadGoogleFont(regenerateFonts);
 	};
 
+
 	useEffect(() => {
 		const localStorageKeys = [
 			'fb_global_colors',
@@ -761,6 +762,7 @@ function FrontisBlocksSidebarFullSite(props) {
 
 	}, []);
 
+
 	const colorPanelArray = (colors, setColor, defaults = []) => {
 		if (typeof colors !== "object") {
 			return [];
@@ -804,11 +806,20 @@ function FrontisBlocksSidebarFullSite(props) {
 	};
 
 	useEffect(() => {
-		setTimeout(() => {
-			const mergedColors = [...customColors, ...globalColors, ...customGradientColors, ...gradientColors];
-			generateColorsVariables(mergedColors);
-		}, 1000)
-	}, [globalColors, customColors, customGradientColors, gradientColors])
+		const mergedColors = [
+			...customColors,
+			...globalColors,
+			...customGradientColors,
+			...gradientColors,
+		];
+		setTimeout(() => generateColorsVariables(mergedColors, deviceType), 1000);
+	}, [
+		globalColors,
+		customColors,
+		customGradientColors,
+		gradientColors,
+		deviceType,
+	]);
 
 	//Update Gradient Colors
 	const setGradientColor = (index, color) => {
