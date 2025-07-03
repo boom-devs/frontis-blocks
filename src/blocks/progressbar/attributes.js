@@ -27,35 +27,27 @@ const attributes = {
         type: "string",
         default: "text-outSide",
     },
+    progressNumberPosition: {
+        type: "string",
+        default: "default",
+    },
     progressNumber: {
         type: "number",
         default: 95
     },
 
-    progressColorSwitcher: {
-        type: "string",
-        default: "normal"
-    },
-    progressColor: {
-        type: "string",
-        default: "#399CFF"
-    },
-    progressHoverColor: {
-        type: 'string',
-        default: "#399CFF"
-    },
 
     progressColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    progressType: {
+    progressColorType: {
         type: "string",
         default: "classic"
     },
-    progressClassicColor: {
+    progressColor: {
         type: "string",
-        default: "#EBF5FF"
+        default: "#399CFF"
     },
     progressGradientColor: {
         type: "string",
@@ -140,28 +132,16 @@ const attributes = {
         default: "#000000"
     },
 
-    progressBgColorSwitcher: {
-        type: "string",
-        default: "normal"
-    },
-    progressBgColor: {
-        type: "string",
-        default: "#e8e8e8"
-    },
-    progressBgHoverColor: {
-        type: 'string',
-        default: "#e8e8e8"
-    },
 
     progressBgColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    progressBgType: {
+    progressBgColorType: {
         type: "string",
         default: "classic"
     },
-    progressBgClassicColor: {
+    progressBgColor: {
         type: "string",
         default: "#EBF5FF"
     },
@@ -232,12 +212,29 @@ const attributes = {
     progressBarHeight: {
         type: "object",
         default: {
-            Desktop: '10',
-            Tablet: '10',
-            Mobile: '10'
+            Desktop: '14',
+            Tablet: '14',
+            Mobile: '14'
         }
     },
     progressBarHeightUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+
+    progressBarWidth: {
+        type: "object",
+        default: {
+            Desktop: '100',
+            Tablet: '100',
+            Mobile: '100'
+        }
+    },
+    progressBarWidthUnits: {
         type: "object",
         default: {
             Desktop: 'px',
@@ -282,6 +279,46 @@ const attributes = {
         },
     },
     progressBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+
+    progressBgBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    progressBgBorderRadiusDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressBgBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressBgBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressBgBorderRadiusLink : {
         type : "boolean",
         default: true
     },
@@ -416,6 +453,46 @@ const attributes = {
         },
     },
     progressTitleMarginLink : {
+        type : "boolean",
+        default: true
+    },
+
+    progressNumberMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    progressNumberMarginDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressNumberMarginTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressNumberMarginMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressNumberMarginLink : {
         type : "boolean",
         default: true
     },
@@ -728,6 +805,203 @@ const attributes = {
     progressbarBgHoverImageRepeat: {
         type: "string",
         default: ""
+    },
+
+    progressbarGlobalPaddingUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    progressbarGlobalPaddingDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressbarGlobalPaddingTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressbarGlobalPaddingMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressbarGlobalPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    
+    progressbarGlobalMarginUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    progressbarGlobalMarginDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressbarGlobalMarginTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressbarGlobalMarginMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressbarGlobalMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    
+    
+    progressbarGlobalBorder: {
+        type: 'string',
+        default: "none",
+    },
+    progressbarGlobalBorderColor: {
+        type: 'string',
+    },
+    progressbarGlobalBorderHoverColor: {
+        type: 'string',
+    },
+    progressbarGlobalBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    
+    progressbarGlobalBorderUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    progressbarGlobalDesktopBorder: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressbarGlobalTabletBorder: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressbarGlobalMobileBorder: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressbarGlobalBorderLink : {
+        type : "boolean",
+        default: true
+    },
+    
+    progressbarGlobalBorderRadiusUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    progressbarGlobalDesktopBorderRadius: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressbarGlobalTabletBorderRadius: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressbarGlobalMobileBorderRadius: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    progressbarGlobalBorderRadiusLink : {
+        type : "boolean",
+        default: true
+    },
+
+    progressbarGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    progressbarGlobalBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    progressbarGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    progressbarGlobalHoverBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    progressbarGlobalHoverBoxShadowCssValue: {
+        type: 'string',
+        default: '',
     },
 };
 export default attributes;
