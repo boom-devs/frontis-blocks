@@ -197,7 +197,7 @@
 			paginationNextIcon: paginationNextIcon || 'angle-right',
 
 			readMoreSwitcher: readMoreSwitcher || false,
-			readMoreText: readMoreText || 'Read More',
+			readMoreText: readMoreText || '',
 			readMoreIconAlign: readMoreIconAlign || 'none',
 			readMoreIcon: readMoreIcon || 'angle-right',
 			readMoreIconImageUrl: readMoreIconImageUrl || '',
@@ -564,7 +564,7 @@
 			paginationNextIcon: grid.getAttribute('data-pagination-next-icon') || 'angle-right',
 
 			readMoreSwitcher: grid.getAttribute('data-read-more-switcher') || false,
-			readMoreText: grid.getAttribute('data-read-more-text') || 'Read More',
+			readMoreText: grid.getAttribute('data-read-more-text') || '',
 			readMoreIconAlign: grid.getAttribute('data-read-more-icon-align') || 'none',
 			readMoreIcon: grid.getAttribute('data-read-more-icon') || 'angle-right',
 			readMoreIconImageUrl: grid.getAttribute('data-read-more-icon-image-url') || '',

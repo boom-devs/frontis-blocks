@@ -25,7 +25,7 @@ const attributes = {
     },
     videoURL: {
         type: "string",
-        default: "https://www.youtube.com/watch?v=WZdCL4Y5EBY",
+        default: "https://www.youtube.com/watch?v=8U0K_wMcUPg",
     },
     autoPlaySwitcher: {
         type: "boolean",
