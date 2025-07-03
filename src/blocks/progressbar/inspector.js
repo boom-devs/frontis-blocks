@@ -18,6 +18,8 @@ import {
 	HEADING,
     OVERFLOW_OP,
     PROGRESSBAR_TYPE,
+    PROGRESS_NUMBER_POSITION,
+    BORDER_STYLES,
 } from "./constants/constants";
 
 import FB_Spacing from '@Components/spacing';
@@ -38,6 +40,7 @@ import FB_InspectorControls from '@Components/InspectorControls';
 import './editor.scss';
 import FB_HtmlTagControl from '../../components/html-tag-control';
 import FB_BackgroundColorControl from '../../components/background-color-control';
+import FB_BoxShadowControl from '../../components/box-shadow';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -47,6 +50,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressbarOverflow,
         progressbarType,
 		progressTextPosition,
+        progressNumberPosition,
 		progressNumber,
 
 
@@ -59,6 +63,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressZebraTrackSwitcher,
         progressZebraTrackWidth,
         progressColorSwitcher,
+        progressColorType,
         progressColor,
         progressGradientColor,
         progressCustomGradientSwitcher,
@@ -75,7 +80,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressBgZebraTrackSwitcher,
         progressBgZebraTrackWidth,
         progressBgColorSwitcher,
-        progressBgType,
+        progressBgColorType,
         progressBgColor,
         progressBgGradientColor,
         progressBgCustomGradientSwitcher,
@@ -92,6 +97,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		progressHeadingTag,
 		progressBarHeight,
         progressBarHeightUnits,
+        progressBarWidth,
+        progressBarWidthUnits,
 
         progressTitleColorSwitcher,
         progressTitleColor,
@@ -102,6 +109,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		progressBorderRadiusTablet,
 		progressBorderRadiusMobile,
 		progressBorderRadiusLink,
+
+		progressBgBorderRadiusUnits,
+		progressBgBorderRadiusDesktop,
+		progressBgBorderRadiusTablet,
+		progressBgBorderRadiusMobile,
+		progressBgBorderRadiusLink,
 
         progressTitleGlobalTypoSwitcher,
         progressTitleGlobalTypographyData,
@@ -164,6 +177,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressTitleMarginMobile,
         progressTitleMarginLink,
 
+        progressNumberMarginUnits,
+        progressNumberMarginDesktop,
+        progressNumberMarginTablet,
+        progressNumberMarginMobile,
+        progressNumberMarginLink,
+
         // Background
         progressbarBgColorSwitcher,
         progressbarBgType,
@@ -190,6 +209,46 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressbarBgHoverImageAttachment,
         progressbarBgHoverImageRepeat,
         progressbarBgHoverImageSize,
+
+        // padding
+        progressbarGlobalPaddingUnits,
+        progressbarGlobalPaddingDesktop,
+        progressbarGlobalPaddingTablet,
+        progressbarGlobalPaddingMobile,
+        progressbarGlobalPaddingLink,
+
+        // margin
+        progressbarGlobalMarginUnits,
+        progressbarGlobalMarginDesktop,
+        progressbarGlobalMarginTablet,
+        progressbarGlobalMarginMobile,
+        progressbarGlobalMarginLink,
+
+        // border
+        progressbarGlobalBorder,
+        progressbarGlobalBorderColor,
+        progressbarGlobalBorderHoverColor,
+        progressbarGlobalBorderColorSwitcher,
+        progressbarGlobalBorderUnits,
+        progressbarGlobalDesktopBorder,
+        progressbarGlobalTabletBorder,
+        progressbarGlobalMobileBorder,
+        progressbarGlobalBorderLink,
+
+        // border radius
+        progressbarGlobalBorderRadiusUnits,
+        progressbarGlobalDesktopBorderRadius,
+        progressbarGlobalTabletBorderRadius,
+        progressbarGlobalMobileBorderRadius,
+        progressbarGlobalBorderRadiusLink,
+
+        // box shadow
+        progressbarGlobalBoxShadowSwitcher,
+        progressbarGlobalBoxShadowValues,
+        progressbarGlobalBoxShadowCssValue,
+        progressbarGlobalHoverBoxShadowValues,
+        progressbarGlobalHoverBoxShadowCssValue,
+
 	} = attributes;
     
     const deviceType= useDeviceType();
@@ -208,6 +267,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         loadGoogleFont(progressNumberFontFamily); 
     }, [progressTitleFontFamily, progressNumberFontFamily]);
     /** End load font */
+
 
     /** Start Progress Border Radius */
     const progressBorderRadiusUnitsChange = (event, position) => {
@@ -279,7 +339,147 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
+    /** Start Progress Background Border Radius */
+    const progressBgBorderRadiusUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (progressBgBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        progressBgBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        progressBgBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        progressBgBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ progressBgBorderRadiusDesktop: { ...progressBgBorderRadiusDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ progressBgBorderRadiusTablet: { ...progressBgBorderRadiusTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ progressBgBorderRadiusMobile: { ...progressBgBorderRadiusMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const progressBgBorderRadiusLinkBtn = () => {
+        setAttributes({
+            progressBgBorderRadiusLink: !progressBgBorderRadiusLink
+        });
+    };
+
+    const progressBgBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            progressBgBorderRadiusUnits: {
+                ...progressBgBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
     
+    /** Start Progress Number Margin */
+    const progressNumberMarginUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (progressNumberMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        progressNumberMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        progressNumberMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        progressNumberMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ progressNumberMarginDesktop: { ...progressNumberMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ progressNumberMarginTablet: { ...progressNumberMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ progressNumberMarginMobile: { ...progressNumberMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const progressNumberMarginLinkBtn = () => {
+        setAttributes({
+            progressNumberMarginLink: !progressNumberMarginLink
+        });
+    };
+
+    const progressNumberMarginUnitsHandler = (unit) => {
+        setAttributes({
+            progressNumberMarginUnits: {
+                ...progressNumberMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
     /** Start Progress Title Margin */
     const progressTitleMarginUnitsChange = (event, position) => {
         const value = event.target.value;
@@ -350,26 +550,338 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
+    // progressbarGlobal margin
+    const handleProgressbarGlobalMarginUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( progressbarGlobalMarginLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        progressbarGlobalMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        progressbarGlobalMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        progressbarGlobalMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {progressbarGlobalMarginDesktop: {...progressbarGlobalMarginDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {progressbarGlobalMarginTablet: {...progressbarGlobalMarginTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {progressbarGlobalMarginMobile: {...progressbarGlobalMarginMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleProgressbarGlobalMarginCombineBtn = () => {
+        setAttributes( {progressbarGlobalMarginLink: !progressbarGlobalMarginLink} );
+    }
+
+    const handleProgressbarGlobalMarginUnitsHandler = (unit) => {
+        setAttributes( {
+            progressbarGlobalMarginUnits: {
+                ...progressbarGlobalMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    
+    // progressbarGlobal Padding Functionb
+    const handleProgressbarGlobalPaddingUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( progressbarGlobalPaddingLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        progressbarGlobalPaddingDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        progressbarGlobalPaddingTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        progressbarGlobalPaddingMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {progressbarGlobalPaddingDesktop: {...progressbarGlobalPaddingDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {progressbarGlobalPaddingTablet: {...progressbarGlobalPaddingTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {progressbarGlobalPaddingMobile: {...progressbarGlobalPaddingMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleProgressbarGlobalPaddingCombineBtn = () => {
+        setAttributes( {progressbarGlobalPaddingLink: !progressbarGlobalPaddingLink} );
+    }
+
+    const handleProgressbarGlobalPaddingUnitsHandler = (unit) => {
+        setAttributes( {
+            progressbarGlobalPaddingUnits: {
+                ...progressbarGlobalPaddingUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    // progressbarGlobal Border Function
+    const handleProgressbarGlobalBorderUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( progressbarGlobalBorderLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        progressbarGlobalDesktopBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        progressbarGlobalTabletBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        progressbarGlobalMobileBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {progressbarGlobalDesktopBorder: {...progressbarGlobalDesktopBorder, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {progressbarGlobalTabletBorder: {...progressbarGlobalTabletBorder, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {progressbarGlobalMobileBorder: {...progressbarGlobalMobileBorder, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleProgressbarGlobalBorderCombineBtn = () => {
+        setAttributes( {progressbarGlobalBorderLink: !progressbarGlobalBorderLink} );
+    }
+
+    const handleProgressbarGlobalBorderUnitsHandler = (unit) => {
+        setAttributes( {
+            progressbarGlobalBorderUnits: {
+                ...progressbarGlobalBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    // progressbarGlobal BorderRadius Function
+    const handleProgressbarGlobalBorderRadiusUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( progressbarGlobalBorderRadiusLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        progressbarGlobalDesktopBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        progressbarGlobalTabletBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        progressbarGlobalMobileBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {progressbarGlobalDesktopBorderRadius: {...progressbarGlobalDesktopBorderRadius, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {progressbarGlobalTabletBorderRadius: {...progressbarGlobalTabletBorderRadius, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {progressbarGlobalMobileBorderRadius: {...progressbarGlobalMobileBorderRadius, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleProgressbarGlobalBorderRadiusCombineBtn = () => {
+        setAttributes( {progressbarGlobalBorderRadiusLink: !progressbarGlobalBorderRadiusLink} );
+    }
+
+    const handleProgressbarGlobalBorderRadiusUnitsHandler = (unit) => {
+        setAttributes( {
+            progressbarGlobalBorderRadiusUnits: {
+                ...progressbarGlobalBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
 
     /** Default border radius for Progress */
-    const progressDesktopBorderRadiusWidth = `${progressBorderRadiusDesktop.top}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.right}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.bottom}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.left}${progressBorderRadiusUnits.Desktop}`;
-    const progressTabletBorderRadiusWidth = `${progressBorderRadiusTablet.top}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.right}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.bottom}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.left}${progressBorderRadiusUnits.Tablet}`;
-    const progressMobileBorderRadiusWidth = `${progressBorderRadiusMobile.top}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.right}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.bottom}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.left}${progressBorderRadiusUnits.Mobile}`;
+    const progressDesktopBorderRadius = `${progressBorderRadiusDesktop.top}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.right}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.bottom}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.left}${progressBorderRadiusUnits.Desktop}`;
+    const progressTabletBorderRadius = `${progressBorderRadiusTablet.top}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.right}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.bottom}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.left}${progressBorderRadiusUnits.Tablet}`;
+    const progressMobileBorderRadius = `${progressBorderRadiusMobile.top}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.right}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.bottom}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.left}${progressBorderRadiusUnits.Mobile}`;
     /** End Progress Border Radius */
 
+    /** Default border radius for Progress Background */
+    const progressBgDesktopBorderRadius = `${progressBgBorderRadiusDesktop.top}${progressBgBorderRadiusUnits.Desktop} ${progressBgBorderRadiusDesktop.right}${progressBgBorderRadiusUnits.Desktop} ${progressBgBorderRadiusDesktop.bottom}${progressBgBorderRadiusUnits.Desktop} ${progressBgBorderRadiusDesktop.left}${progressBgBorderRadiusUnits.Desktop}`;
+    const progressBgTabletBorderRadius = `${progressBgBorderRadiusTablet.top}${progressBgBorderRadiusUnits.Tablet} ${progressBgBorderRadiusTablet.right}${progressBgBorderRadiusUnits.Tablet} ${progressBgBorderRadiusTablet.bottom}${progressBgBorderRadiusUnits.Tablet} ${progressBgBorderRadiusTablet.left}${progressBgBorderRadiusUnits.Tablet}`;
+    const progressBgMobileBorderRadius = `${progressBgBorderRadiusMobile.top}${progressBgBorderRadiusUnits.Mobile} ${progressBgBorderRadiusMobile.right}${progressBgBorderRadiusUnits.Mobile} ${progressBgBorderRadiusMobile.bottom}${progressBgBorderRadiusUnits.Mobile} ${progressBgBorderRadiusMobile.left}${progressBgBorderRadiusUnits.Mobile}`;
+    /** End Progress Background Border Radius */
+
+
+    /** Progress Number Margin */
+    const progressNumberMarginDesktopGet = `${progressNumberMarginDesktop.top}${progressNumberMarginUnits.Desktop} ${progressNumberMarginDesktop.right}${progressNumberMarginUnits.Desktop} ${progressNumberMarginDesktop.bottom}${progressNumberMarginUnits.Desktop} ${progressNumberMarginDesktop.left}${progressNumberMarginUnits.Desktop}`;
+    const progressNumberMarginTabletGet = `${progressNumberMarginTablet.top}${progressNumberMarginUnits.Tablet} ${progressNumberMarginTablet.right}${progressNumberMarginUnits.Tablet} ${progressNumberMarginTablet.bottom}${progressNumberMarginUnits.Tablet} ${progressNumberMarginTablet.left}${progressNumberMarginUnits.Tablet}`;
+    const progressNumberMarginMobileGet = `${progressNumberMarginMobile.top}${progressNumberMarginUnits.Mobile} ${progressNumberMarginMobile.right}${progressNumberMarginUnits.Mobile} ${progressNumberMarginMobile.bottom}${progressNumberMarginUnits.Mobile} ${progressNumberMarginMobile.left}${progressNumberMarginUnits.Mobile}`;
+    /** Progress Number Margin */
 
     /** Progress Title Margin */
-    const progressDesktopTitleMargin = `${progressTitleMarginDesktop.top}${progressTitleMarginUnits.Desktop} ${progressTitleMarginDesktop.right}${progressTitleMarginUnits.Desktop} ${progressTitleMarginDesktop.bottom}${progressTitleMarginUnits.Desktop} ${progressTitleMarginDesktop.left}${progressTitleMarginUnits.Desktop}`;
-    const progressTabletTitleMargin = `${progressTitleMarginTablet.top}${progressTitleMarginUnits.Tablet} ${progressTitleMarginTablet.right}${progressTitleMarginUnits.Tablet} ${progressTitleMarginTablet.bottom}${progressTitleMarginUnits.Tablet} ${progressTitleMarginTablet.left}${progressTitleMarginUnits.Tablet}`;
-    const progressMobileTitleMargin = `${progressTitleMarginMobile.top}${progressTitleMarginUnits.Mobile} ${progressTitleMarginMobile.right}${progressTitleMarginUnits.Mobile} ${progressTitleMarginMobile.bottom}${progressTitleMarginUnits.Mobile} ${progressTitleMarginMobile.left}${progressTitleMarginUnits.Mobile}`;
+    const progressTitleMarginDesktopGet = `${progressTitleMarginDesktop.top}${progressTitleMarginUnits.Desktop} ${progressTitleMarginDesktop.right}${progressTitleMarginUnits.Desktop} ${progressTitleMarginDesktop.bottom}${progressTitleMarginUnits.Desktop} ${progressTitleMarginDesktop.left}${progressTitleMarginUnits.Desktop}`;
+    const progressTitleMarginTabletGet = `${progressTitleMarginTablet.top}${progressTitleMarginUnits.Tablet} ${progressTitleMarginTablet.right}${progressTitleMarginUnits.Tablet} ${progressTitleMarginTablet.bottom}${progressTitleMarginUnits.Tablet} ${progressTitleMarginTablet.left}${progressTitleMarginUnits.Tablet}`;
+    const progressTitleMarginMobileGet = `${progressTitleMarginMobile.top}${progressTitleMarginUnits.Mobile} ${progressTitleMarginMobile.right}${progressTitleMarginUnits.Mobile} ${progressTitleMarginMobile.bottom}${progressTitleMarginUnits.Mobile} ${progressTitleMarginMobile.left}${progressTitleMarginUnits.Mobile}`;
     /** Progress Title Margin */
+
+    /** Progressbar Global Padding */
+    const progressbarGlobalPaddingDesktopGet = `${progressbarGlobalPaddingDesktop.top}${progressbarGlobalPaddingUnits.Desktop} ${progressbarGlobalPaddingDesktop.right}${progressbarGlobalPaddingUnits.Desktop} ${progressbarGlobalPaddingDesktop.bottom}${progressbarGlobalPaddingUnits.Desktop} ${progressbarGlobalPaddingDesktop.left}${progressbarGlobalPaddingUnits.Desktop}`;
+    const progressbarGlobalPaddingTabletGet = `${progressbarGlobalPaddingTablet.top}${progressbarGlobalPaddingUnits.Tablet} ${progressbarGlobalPaddingTablet.right}${progressbarGlobalPaddingUnits.Tablet} ${progressbarGlobalPaddingTablet.bottom}${progressbarGlobalPaddingUnits.Tablet} ${progressbarGlobalPaddingTablet.left}${progressbarGlobalPaddingUnits.Tablet}`;
+    const progressbarGlobalPaddingMobileGet = `${progressbarGlobalPaddingMobile.top}${progressbarGlobalPaddingUnits.Mobile} ${progressbarGlobalPaddingMobile.right}${progressbarGlobalPaddingUnits.Mobile} ${progressbarGlobalPaddingMobile.bottom}${progressbarGlobalPaddingUnits.Mobile} ${progressbarGlobalPaddingMobile.left}${progressbarGlobalPaddingUnits.Mobile}`;
+    /** End Progressbar Global Padding */
+
+    /** Progressbar Global Margin */
+    const progressbarGlobalMarginDesktopGet = `${progressbarGlobalMarginDesktop.top}${progressbarGlobalMarginUnits.Desktop} ${progressbarGlobalMarginDesktop.right}${progressbarGlobalMarginUnits.Desktop} ${progressbarGlobalMarginDesktop.bottom}${progressbarGlobalMarginUnits.Desktop} ${progressbarGlobalMarginDesktop.left}${progressbarGlobalMarginUnits.Desktop}`;
+    const progressbarGlobalMarginTabletGet = `${progressbarGlobalMarginTablet.top}${progressbarGlobalMarginUnits.Tablet} ${progressbarGlobalMarginTablet.right}${progressbarGlobalMarginUnits.Tablet} ${progressbarGlobalMarginTablet.bottom}${progressbarGlobalMarginUnits.Tablet} ${progressbarGlobalMarginTablet.left}${progressbarGlobalMarginUnits.Tablet}`;
+    const progressbarGlobalMarginMobileGet = `${progressbarGlobalMarginMobile.top}${progressbarGlobalMarginUnits.Mobile} ${progressbarGlobalMarginMobile.right}${progressbarGlobalMarginUnits.Mobile} ${progressbarGlobalMarginMobile.bottom}${progressbarGlobalMarginUnits.Mobile} ${progressbarGlobalMarginMobile.left}${progressbarGlobalMarginUnits.Mobile}`;
+    /** End Progressbar Global Margin */
+
+    /** Progressbar Global Border */
+    const progressbarGlobalDesktopBorderGet = `${progressbarGlobalDesktopBorder.top}${progressbarGlobalBorderUnits.Desktop} ${progressbarGlobalDesktopBorder.right}${progressbarGlobalBorderUnits.Desktop} ${progressbarGlobalDesktopBorder.bottom}${progressbarGlobalBorderUnits.Desktop} ${progressbarGlobalDesktopBorder.left}${progressbarGlobalBorderUnits.Desktop}`;
+    const progressbarGlobalTabletBorderGet = `${progressbarGlobalTabletBorder.top}${progressbarGlobalBorderUnits.Tablet} ${progressbarGlobalTabletBorder.right}${progressbarGlobalBorderUnits.Tablet} ${progressbarGlobalTabletBorder.bottom}${progressbarGlobalBorderUnits.Tablet} ${progressbarGlobalTabletBorder.left}${progressbarGlobalBorderUnits.Tablet}`;
+    const progressbarGlobalMobileBorderGet = `${progressbarGlobalMobileBorder.top}${progressbarGlobalBorderUnits.Mobile} ${progressbarGlobalMobileBorder.right}${progressbarGlobalBorderUnits.Mobile} ${progressbarGlobalMobileBorder.bottom}${progressbarGlobalBorderUnits.Mobile} ${progressbarGlobalMobileBorder.left}${progressbarGlobalBorderUnits.Mobile}`;
+    /** End Progressbar Global Border */
+
+    /** Progressbar Global Border Radius */
+    const progressbarGlobalDesktopBorderRadiusGet = `${progressbarGlobalDesktopBorderRadius.top}${progressbarGlobalBorderRadiusUnits.Desktop} ${progressbarGlobalDesktopBorderRadius.right}${progressbarGlobalBorderRadiusUnits.Desktop} ${progressbarGlobalDesktopBorderRadius.bottom}${progressbarGlobalBorderRadiusUnits.Desktop} ${progressbarGlobalDesktopBorderRadius.left}${progressbarGlobalBorderRadiusUnits.Desktop}`;
+    const progressbarGlobalTabletBorderRadiusGet = `${progressbarGlobalTabletBorderRadius.top}${progressbarGlobalBorderRadiusUnits.Tablet} ${progressbarGlobalTabletBorderRadius.right}${progressbarGlobalBorderRadiusUnits.Tablet} ${progressbarGlobalTabletBorderRadius.bottom}${progressbarGlobalBorderRadiusUnits.Tablet} ${progressbarGlobalTabletBorderRadius.left}${progressbarGlobalBorderRadiusUnits.Tablet}`;
+    const progressbarGlobalMobileBorderRadiusGet = `${progressbarGlobalMobileBorderRadius.top}${progressbarGlobalBorderRadiusUnits.Mobile} ${progressbarGlobalMobileBorderRadius.right}${progressbarGlobalBorderRadiusUnits.Mobile} ${progressbarGlobalMobileBorderRadius.bottom}${progressbarGlobalBorderRadiusUnits.Mobile} ${progressbarGlobalMobileBorderRadius.left}${progressbarGlobalBorderRadiusUnits.Mobile}`;
+    /** End Progressbar Global Border Radius */
 
     /**
      * Get all block style
      */
     const allBlockStyle = useMemo(() => `
 
-        .${blockID}.fb-progress-bar-main-wrapper {
+        .${blockID}.fb-progressbar-main-wrapper {
             ${progressbarPositionType === 'default' ? `position: relative;` : ''}
             ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' ? `width: 100%;` : ''}
             ${progressbarPositionType !== 'default' ? `position: ${progressbarPositionType};` : ''}
@@ -381,7 +893,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${progressbarOverflow !== 'default' ? `overflow: ${progressbarOverflow};` : ''}
         }
         
-        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
+        .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-content .fb-progressbar-label {
             ${progressTitleColor ? `color: ${progressTitleColor} !important;` : ''}
 
             ${progressTitleGlobalTypoSwitcher.fontFamily === true && progressTitleGlobalTypographyData.fontFamily ? `font-family: ${progressTitleGlobalTypographyData.fontFamily};` : ''}
@@ -401,58 +918,48 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${progressTitleGlobalTypoSwitcher.textDecoration === false && progressTitleTextDecoration ? `text-decoration: ${progressTitleTextDecoration};` : ''}
             ${progressTitleGlobalTypoSwitcher.letterSpacing === false && progressTitleLetterSpacing.Desktop && progressTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${progressTitleLetterSpacing.Desktop}${progressTitleLetterSpacingUnits.Desktop};` : ''}
             ${progressTitleGlobalTypoSwitcher.lineHeight === false && progressTitleLineHeight.Desktop && progressTitleLineHeightUnits.Desktop ? `line-height: ${progressTitleLineHeight.Desktop}${progressTitleLineHeightUnits.Desktop};` : ''}
+        
+            ${progressTitleMarginDesktop.top ? `margin: ${progressTitleMarginDesktopGet};` : ''}
         }
-        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label:hover {
+        .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-content .fb-progressbar-label:hover {
             color: ${progressTitleHoverColor} !important;
         }
-        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line {
+        .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-line-wrapper {
             ${progressBgZebraTrackSwitcher === false ? `background-color: ${progressBgColor}` : ''};
             ${progressBgZebraTrackSwitcher === true ? `background: repeating-linear-gradient(-45deg, ${progressBgColor}, ${progressBgColor} ${progressBgZebraTrackWidth.Desktop}px, transparent ${progressBgZebraTrackWidth.Desktop}px, transparent calc(${progressBgZebraTrackWidth.Desktop * 2}px));` : ''};
-            ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadiusWidth};` : ''}
+            ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadius};` : ''}
+            ${progressBarHeight.Desktop ? `height: ${progressBarHeight.Desktop}${progressBarHeightUnits.Desktop};` : ''}
+            ${progressbarType === 'vertical' && progressBarWidth.Desktop ? `width: ${progressBarWidth.Desktop}${progressBarWidthUnits.Desktop};` : ''}
+            overflow: hidden;
             position: relative;
         }
-        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar {
+        .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-line-wrapper .fb-progressbar-line {
+            position: relative;
             ${progressBarHeight.Desktop ? `height: ${progressBarHeight.Desktop}${progressBarHeightUnits.Desktop};` : ''}
             background-color: ${progressColor};
-            ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadiusWidth};` : ''}
+            ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadius};` : ''}
             transition: width 0.5s ease-in-out;
             width: ${progressNumber}%;
         }
-        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-number {
+        .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-line-wrapper .fb-progressbar-line .fb-progressbar-number {
             position: absolute;
-            top: -30px;
-            transform: translateX(-100%);
+            top: 0;
+            left: 100%;
             transition: left 0.5s ease-in-out;
+        }
+        .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-number {
+            ${progressNumberMarginDesktop.top ? `margin: ${progressNumberMarginDesktopGet};` : ''}
             color: ${progressNumberColor};
+            transition: all 0.5s ease-in-out;
         }
-        .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-number:hover {
+        .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-number:hover {
             color: ${progressNumberHoverColor};
-        }
-
-        .${blockID} .progress-bar-text-inSide-wrapper {
-            background-color: ${progressBgColor};
-            ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadiusWidth};` : ''}
-            ${progressBarHeight.Desktop ? `height: ${progressBarHeight.Desktop}${progressBarHeightUnits.Desktop};` : ''}
-            overflow: hidden;
-        }
-        .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
-            background-color: ${progressColor};
-            ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadiusWidth};` : ''}
-            transition: width 0.5s ease-in-out;
-            width: ${progressNumber}%;
-        }
-        .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info {
-            ${progressBorderRadiusDesktop.top ? `border-radius: ${progressDesktopBorderRadiusWidth};` : ''}
-            color: ${progressNumberColor};
-            font-size: 14px;
-        }
-        .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info:hover {
-            color: ${progressNumberHoverColor};
+            transition: all 0.5s ease-in-out;
         }
 
         @media only screen and (max-width: 1024px) {
 
-            .${blockID}.fb-progress-bar-main-wrapper {
+            .${blockID}.fb-progressbar-main-wrapper {
                 ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarHZOrientationType === 'left' && progressbarHZLeftOffset.Tablet !== undefined ? `left: ${progressbarHZLeftOffset.Tablet}${progressbarHZLeftOffsetUnits.Tablet};` : ''}
 				${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarHZOrientationType === 'right' && progressbarHZRightOffset.Tablet !== undefined ? `right: ${progressbarHZRightOffset.Tablet}${progressbarHZRightOffsetUnits.Tablet};` : ''}
 				${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarVROrientationType === 'top' && progressbarVRTopOffset.Tablet !== undefined ? `top: ${progressbarVRTopOffset.Tablet}${progressbarVRTopOffsetUnits.Tablet};` : ''}
@@ -464,7 +971,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
             .${blockID} .progress-bar-text-inSide-wrapper,
             .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
-                ${progressBorderRadiusTablet.top ? `border-radius: ${progressTabletBorderRadiusWidth};` : ''}
+                ${progressBorderRadiusTablet.top ? `border-radius: ${progressTabletBorderRadius};` : ''}
             }
 
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
@@ -475,10 +982,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar {
                 ${progressBarHeight.Tablet ? `height: ${progressBarHeight.Tablet}${progressBarHeightUnits.Tablet};` : ''}
-                ${progressBorderRadiusTablet.top ? `border-radius: ${progressTabletBorderRadiusWidth};` : ''}
+                ${progressBorderRadiusTablet.top ? `border-radius: ${progressTabletBorderRadius};` : ''}
             }
             .${blockID} .progress-bar-text-inSide-wrapper {
-                ${progressBorderRadiusTablet.top ? `border-radius: ${progressTabletBorderRadiusWidth};` : ''}
+                ${progressBorderRadiusTablet.top ? `border-radius: ${progressTabletBorderRadius};` : ''}
                 ${progressBarHeight.Tablet ? `height: ${progressBarHeight.Tablet}${progressBarHeightUnits.Tablet};` : ''}
                 overflow: hidden;
             }
@@ -486,7 +993,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         @media only screen and (max-width: 767px) {
 
-            .${blockID}.fb-progress-bar-main-wrapper {
+            .${blockID}.fb-progressbar-main-wrapper {
                 ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarHZOrientationType === 'left' && progressbarHZLeftOffset.Mobile !== undefined ? `left: ${progressbarHZLeftOffset.Mobile}${progressbarHZLeftOffsetUnits.Mobile};` : ''}
 				${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarHZOrientationType === 'right' && progressbarHZRightOffset.Mobile !== undefined ? `right: ${progressbarHZRightOffset.Mobile}${progressbarHZRightOffsetUnits.Mobile};` : ''}
 				${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' && progressbarVROrientationType === 'top' && progressbarVRTopOffset.Mobile !== undefined ? `top: ${progressbarVRTopOffset.Mobile}${progressbarVRTopOffsetUnits.Mobile};` : ''}
@@ -498,7 +1005,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
             .${blockID} .progress-bar-text-inSide-wrapper,
             .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
-                ${progressBorderRadiusMobile.top ? `border-radius: ${progressMobileBorderRadiusWidth};` : ''}
+                ${progressBorderRadiusMobile.top ? `border-radius: ${progressMobileBorderRadius};` : ''}
             }
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label { 
                 ${progressTitleGlobalTypoSwitcher.fontSize === false && progressTitleFontSize.Mobile && progressTitleFontSizeUnits.Mobile ? `font-size: ${progressTitleFontSize.Mobile}${progressTitleFontSizeUnits.Mobile};` : ''}
@@ -507,10 +1014,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar {
                 ${progressBarHeight.Mobile ? `height: ${progressBarHeight.Mobile}${progressBarHeightUnits.Mobile};` : ''}
-                ${progressBorderRadiusMobile.top ? `border-radius: ${progressMobileBorderRadiusWidth};` : ''}
+                ${progressBorderRadiusMobile.top ? `border-radius: ${progressMobileBorderRadius};` : ''}
             }
             .${blockID} .progress-bar-text-inSide-wrapper {
-                ${progressBorderRadiusMobile.top ? `border-radius: ${progressMobileBorderRadiusWidth};` : ''}
+                ${progressBorderRadiusMobile.top ? `border-radius: ${progressMobileBorderRadius};` : ''}
                 ${progressBarHeight.Mobile ? `height: ${progressBarHeight.Mobile}${progressBarHeightUnits.Mobile};` : ''}
                 overflow: hidden;
             }
@@ -522,6 +1029,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressGlobalZIndex,
         progressbarOverflow,
 		progressTextPosition,
+        progressNumberPosition,
 		progressNumber,
 
         progressNumberColorSwitcher,
@@ -542,6 +1050,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		progressBorderRadiusTablet,
 		progressBorderRadiusMobile,
 		progressBorderRadiusLink,
+
+        progressBgBorderRadiusUnits,
+		progressBgBorderRadiusDesktop,
+		progressBgBorderRadiusTablet,
+		progressBgBorderRadiusMobile,
+		progressBgBorderRadiusLink,
 
         progressTitleGlobalTypoSwitcher,
         progressTitleGlobalTypographyData,
@@ -575,9 +1089,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressNumberLineHeight,
         progressNumberLineHeightUnits,
 
-        progressDesktopBorderRadiusWidth,
-        progressTabletBorderRadiusWidth,
-        progressMobileBorderRadiusWidth,
+        progressDesktopBorderRadius,
+        progressTabletBorderRadius,
+        progressMobileBorderRadius,
 
         // Position
         progressbarPositionType,
@@ -616,17 +1130,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 label={__("Layout Type", "frontis-blocks")}
                 value={progressbarType}
                 options={PROGRESSBAR_TYPE}
-                onChange={(value) => setAttributes({ progressbarType: value })}
+                onChange={(value) => setAttributes({ progressbarType: value})}
             />
 
-            <div className='text-position'>
+            {progressbarType === 'horizontal' && (
                 <SelectControl
                     label={__("Text Position", "frontis-blocks")}
                     value={progressTextPosition}
                     options={PROGRESS_TEXT_OPTIONS}
                     onChange={(value) => setAttributes({ progressTextPosition: value })}
                 />
-            </div>
+            )}
+
+            <SelectControl
+                label={__("Progress Number Position", "frontis-blocks")}
+                value={progressNumberPosition}
+                options={PROGRESS_NUMBER_POSITION}
+                onChange={(value) => setAttributes({ progressNumberPosition: value })}
+            />
+
 
             <div className="progress-general-wrapper">
                 <div className="progress-percentage">
@@ -640,10 +1162,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 </div>
 
+                {progressbarType === 'vertical' && (
                 <FB_Range
                     min={0}
-                    max={100}
-                    label={__("progress Bar Height", "frontis-blocks")}
+                    max={progressBarWidthUnits === '%' ? 100 : 1000}
+                    label={__("Progress Bar Width", "frontis-blocks")}
+                    rangeValue={progressBarWidth}
+                    onChangeHandler={(value) => setAttributes({ progressBarWidth: value })}
+                    rangeUnitHandler={(value) => setAttributes({ progressBarWidthUnits: value })}
+                    deviceType={deviceType}
+                    units={progressBarWidthUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+                )}
+
+                <FB_Range
+                    min={0}
+                    max={progressBarHeightUnits === '%' ? 100 : 1000}
+                    label={__("Progress Bar Height", "frontis-blocks")}
                     rangeValue={progressBarHeight}
                     onChangeHandler={(value) => setAttributes({ progressBarHeight: value })}
                     rangeUnitHandler={(value) => setAttributes({ progressBarHeightUnits: value })}
@@ -655,7 +1193,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
             </div>
         </PanelBody>
-        <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
+        <PanelBody title={__("Title", "frontis-blocks")} initialOpen={true}>
                 <TextControl
                     label={__("Title", "frontis-blocks")}
                     value={progressTitle}
@@ -677,6 +1215,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const styleControls = (
         <>
             <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
+            </PanelBody>
+
+            <PanelBody title={__("Progress Color", "frontis-blocks")} initialOpen={false}>
                 <ToggleControl
                     label={__("Zebra Track Color", "frontis-blocks")}
                     checked={progressZebraTrackSwitcher}
@@ -689,7 +1230,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_Range
                         min={0}
                         max={100}
-                        label={__("Color Zebra Track Width", "frontis-blocks")}
+                        label={__("Zebra Track Width", "frontis-blocks")}
                         rangeValue={progressZebraTrackWidth}
                         onChangeHandler={(value) => setAttributes({ progressZebraTrackWidth: value })}
                         deviceType={deviceType}
@@ -699,7 +1240,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         isRangeUnit={false}
                     />
                     <FB_ColorControl
-                        label={__("Progress Color", "frontis-blocks")}
+                        label={__("Color", "frontis-blocks")}
                         globalColor={progressColor}
                         setGlobalColor={(value) => setAttributes({ progressColor: value })}
                     />
@@ -707,15 +1248,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                 {!progressZebraTrackSwitcher &&(
                         <FB_BackgroundColorControl
-                            label={__("Progress Color", "frontis-blocks")}
-                            normalLabel = {__("Progress Color", "frontis-blocks")}
+                            label={__("Color", "frontis-blocks")}
+                            normalLabel = {__("Color", "frontis-blocks")}
                             bgColorSwitcher={progressColorSwitcher}
                             setBgColorSwitcher={(value) =>
                                 setAttributes({ progressColorSwitcher: value })
                             }
-                            normalBackgroundType={progressbarType}
+                            normalBackgroundType={progressColorType}
                             setNormalBackgroundType={(value) =>
-                                setAttributes({ progressType: value })
+                                setAttributes({ progressColorType: value })
                             }
                             normalClassicColor={progressColor}
                             setNormalClassicColor={(value) =>
@@ -785,8 +1326,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                 )}
 
+                <FB_Spacing 
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={progressBorderRadiusUnitsHandler}
+                    spacingUnits={progressBorderRadiusUnits}
+                    spacingDesktop={progressBorderRadiusDesktop}
+                    spacingTablet={progressBorderRadiusTablet}
+                    spacingMobile={progressBorderRadiusMobile}
+                    handleSpacingUnitHandler={progressBorderRadiusUnitsChange}
+                    spacingCombineBtn={progressBorderRadiusLink}
+                    spacingCombineBtnHandler={progressBorderRadiusLinkBtn}
+                    setAttributes={setAttributes}
+                />
+            </PanelBody>
+
+            <PanelBody title={__("Progress Background Color", "frontis-blocks")} initialOpen={false}>
                 <ToggleControl
-                    label={__("Zebra Track Background", "frontis-blocks")}
+                    label={__("Zebra Track Color", "frontis-blocks")}
                     checked={progressBgZebraTrackSwitcher}
                     onChange={(value) => setAttributes({ progressBgZebraTrackSwitcher: value })}
                 />
@@ -797,7 +1354,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_Range
                         min={0}
                         max={100}
-                        label={__("Background Zebra Track Width", "frontis-blocks")}
+                        label={__("Zebra Track Width", "frontis-blocks")}
                         rangeValue={progressBgZebraTrackWidth}
                         onChangeHandler={(value) => setAttributes({ progressBgZebraTrackWidth: value })}
                         deviceType={deviceType}
@@ -808,7 +1365,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
 
                     <FB_ColorControl
-                        label={__("Background Color", "frontis-blocks")}
+                        label={__("Color", "frontis-blocks")}
                         globalColor={progressBgColor}
                         setGlobalColor={(value) => setAttributes({ progressBgColor: value })}
                     />
@@ -816,15 +1373,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                 {!progressBgZebraTrackSwitcher && (
                     <FB_BackgroundColorControl
-                            label={__("Background Color", "frontis-blocks")}
-                            normalLabel = {__("Background Color", "frontis-blocks")}
+                            label={__("Color", "frontis-blocks")}
+                            normalLabel = {__("Color", "frontis-blocks")}
                             bgColorSwitcher={progressBgColorSwitcher}
                             setBgColorSwitcher={(value) =>
                                 setAttributes({ progressBgColorSwitcher: value })
                             }
-                            normalBackgroundType={progressBgType}
+                            normalBackgroundType={progressBgColorType}
                             setNormalBackgroundType={(value) =>
-                                setAttributes({ progressBgType: value })
+                                setAttributes({ progressBgColorType: value })
                             }
                             normalClassicColor={progressBgColor}
                             setNormalClassicColor={(value) =>
@@ -894,18 +1451,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                 )}
 
-
                 <FB_Spacing 
-                    label={__("Radius Border", "frontis-blocks")}
+                    label={__("Border Radius", "frontis-blocks")}
                     deviceType={deviceType}
-                    spacingUnitsHandler={progressBorderRadiusUnitsHandler}
-                    spacingUnits={progressBorderRadiusUnits}
-                    spacingDesktop={progressBorderRadiusDesktop}
-                    spacingTablet={progressBorderRadiusTablet}
-                    spacingMobile={progressBorderRadiusMobile}
-                    handleSpacingUnitHandler={progressBorderRadiusUnitsChange}
-                    spacingCombineBtn={progressBorderRadiusLink}
-                    spacingCombineBtnHandler={progressBorderRadiusLinkBtn}
+                    spacingUnitsHandler={progressBgBorderRadiusUnitsHandler}
+                    spacingUnits={progressBgBorderRadiusUnits}
+                    spacingDesktop={progressBgBorderRadiusDesktop}
+                    spacingTablet={progressBgBorderRadiusTablet}
+                    spacingMobile={progressBgBorderRadiusMobile}
+                    handleSpacingUnitHandler={progressBgBorderRadiusUnitsChange}
+                    spacingCombineBtn={progressBgBorderRadiusLink}
+                    spacingCombineBtnHandler={progressBgBorderRadiusLinkBtn}
                     setAttributes={setAttributes}
                 />
             </PanelBody>
@@ -985,6 +1541,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setGlobalColor={(value) => setAttributes({ progressNumberHoverColor: value })}
                     />
                 )}
+
+                <FB_Spacing 
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={progressNumberMarginUnitsHandler}
+                    spacingUnits={progressNumberMarginUnits}
+                    spacingDesktop={progressNumberMarginDesktop}
+                    spacingTablet={progressNumberMarginTablet}
+                    spacingMobile={progressNumberMarginMobile}
+                    handleSpacingUnitHandler={progressNumberMarginUnitsChange}
+                    spacingCombineBtn={progressNumberMarginLink}
+                    spacingCombineBtnHandler={progressNumberMarginLinkBtn}
+                    setAttributes={setAttributes}
+                />
             </PanelBody>
 
             <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
@@ -1161,6 +1731,138 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             helpText={__("Separate with spaces key.", "frontis-blocks")}
                         />
                         
+                    </PanelBody>
+
+                    <PanelBody
+                    title={__("Padding & Margin", "frontis-blocks")}
+                    initialOpen={false}
+                    >
+                        <FB_Spacing
+                            label={__("Margin", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleProgressbarGlobalMarginUnitsHandler}
+                            spacingUnits={progressbarGlobalMarginUnits}
+                            spacingDesktop={progressbarGlobalMarginDesktop}
+                            spacingTablet={progressbarGlobalMarginTablet}
+                            spacingMobile={progressbarGlobalMarginMobile}
+                            handleSpacingUnitHandler={handleProgressbarGlobalMarginUnitChange}
+                            spacingCombineBtn={progressbarGlobalMarginLink}
+                            spacingCombineBtnHandler={handleProgressbarGlobalMarginCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_Spacing 
+                            label={__("Padding", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleProgressbarGlobalPaddingUnitsHandler}
+                            spacingUnits={progressbarGlobalPaddingUnits}
+                            spacingDesktop={progressbarGlobalPaddingDesktop}
+                            spacingTablet={progressbarGlobalPaddingTablet}
+                            spacingMobile={progressbarGlobalPaddingMobile}
+                            handleSpacingUnitHandler={handleProgressbarGlobalPaddingUnitChange}
+                            spacingCombineBtn={progressbarGlobalPaddingLink}
+                            spacingCombineBtnHandler={handleProgressbarGlobalPaddingCombineBtn}
+                            setAttributes={setAttributes}
+                        />                                     
+                    </PanelBody>
+
+                    <PanelBody
+                    title={__("Border & Border Radius", "frontis-blocks")}
+                    initialOpen={false}
+                    className="fb-setting-border-setting-wrapper"
+                    >
+                        <SelectControl
+                            label={__("Border Style", "frontis-blocks")}
+                            value={progressbarGlobalBorder}
+                            options={BORDER_STYLES}
+                            onChange={(value) => setAttributes({ progressbarGlobalBorder: value })}
+                        />
+
+                        <FB_SwitcherControl
+                            label={__("Border Color", "frontis-blocks")}
+                            globalSwitcher={progressbarGlobalBorderColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ progressbarGlobalBorderColorSwitcher: value })}
+                        />
+                        
+                        {progressbarGlobalBorderColorSwitcher === 'normal' && (
+                            <FB_ColorControl
+                                label={__("Normal Color", "frontis-blocks")}
+                                globalColor={progressbarGlobalBorderColor}
+                                setGlobalColor={(value) => setAttributes({ progressbarGlobalBorderColor: value })}
+                            />
+                        )}
+                        
+                        {progressbarGlobalBorderColorSwitcher === 'hover' && (
+                            <FB_ColorControl
+                                label={__("Hover Color", "frontis-blocks")}
+                                globalColor={progressbarGlobalBorderHoverColor}
+                                setGlobalColor={(value) => setAttributes({ progressbarGlobalBorderHoverColor: value })}
+                            />
+                        )}
+
+                        <FB_Spacing 
+                            label={__("Border", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleProgressbarGlobalBorderUnitsHandler}
+                            spacingUnits={progressbarGlobalBorderUnits}
+                            spacingDesktop={progressbarGlobalDesktopBorder}
+                            spacingTablet={progressbarGlobalTabletBorder}
+                            spacingMobile={progressbarGlobalMobileBorder}
+                            handleSpacingUnitHandler={handleProgressbarGlobalBorderUnitChange}
+                            spacingCombineBtn={progressbarGlobalBorderLink}
+                            spacingCombineBtnHandler={handleProgressbarGlobalBorderCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_Spacing
+                            label={__("Border Radius", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleProgressbarGlobalBorderRadiusUnitsHandler}
+                            spacingUnits={progressbarGlobalBorderRadiusUnits}
+                            spacingDesktop={progressbarGlobalDesktopBorderRadius}
+                            spacingTablet={progressbarGlobalTabletBorderRadius}
+                            spacingMobile={progressbarGlobalMobileBorderRadius}
+                            handleSpacingUnitHandler={handleProgressbarGlobalBorderRadiusUnitChange}
+                            spacingCombineBtn={progressbarGlobalBorderRadiusLink}
+                            spacingCombineBtnHandler={handleProgressbarGlobalBorderRadiusCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_SwitcherControl
+                            label={__("Box Shadow", "frontis-blocks")}
+                            globalSwitcher={progressbarGlobalBoxShadowSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ progressbarGlobalBoxShadowSwitcher: value })}
+                        />
+                        
+                        {progressbarGlobalBoxShadowSwitcher === 'normal' && (
+                            <FB_BoxShadowControl
+                                label={__("Normal Shadow", "frontis-blocks")}
+                                onBoxShadowChange={(value) =>
+                                    setAttributes({ progressbarGlobalBoxShadowValues: value })
+                                }
+                                initialShadowValue={progressbarGlobalBoxShadowValues}
+                                onBoxShadowStyleChange={(value) =>
+                                    setAttributes({
+                                        progressbarGlobalBoxShadowCssValue: value,
+                                    })
+                                }
+                            />
+                        )}
+                        
+                        {progressbarGlobalBoxShadowSwitcher === 'hover' && (
+                            <FB_BoxShadowControl
+                                label={__("Hover Shadow", "frontis-blocks")}
+                                onBoxShadowChange={(value) =>
+                                    setAttributes({ progressbarGlobalHoverBoxShadowValues: value })
+                                }
+                                initialShadowValue={progressbarGlobalHoverBoxShadowValues}
+                                onBoxShadowStyleChange={(value) =>
+                                    setAttributes({
+                                        progressbarGlobalHoverBoxShadowCssValue: value,
+                                    })
+                                }
+                            />
+                        )}
                     </PanelBody>
 
                     <PanelBody
