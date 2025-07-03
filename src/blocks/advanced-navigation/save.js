@@ -6,25 +6,30 @@ export default function save({ attributes }) {
         navigationLayout,
         navigationHorizontalAlign,
         showDropdownIcon,
-        navBtnType,
         navigationVerticalAlign,
-        hamburgerCloseIconAlign,
-        classHook,
+        hamburgerMenuIconType,
+
+        navigationGlobalWraperClass,
+        navigationGlobalWraperID,
+
+        navigationDesktopSwitcher,
+        navigationTabletSwitcher,
+        navigationMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `frontis-block fb-advanced-navigation-main-wrapper ${blockId}`,
+        className: `frontis-block fb-advanced-navigation-main-wrapper ${blockId} ${navigationDesktopSwitcher && 'fb-desktop-responsive'} ${navigationTabletSwitcher && 'fb-tablet-responsive'} ${navigationMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     return (
         <div {...blockProps}>
-            <div className={`advanced-navigation-wrapper ${classHook}`}>
+            <div className={`advanced-navigation-wrapper ${navigationGlobalWraperClass}`} id={navigationGlobalWraperID}>
                 <div
                     className={`${blockId} advanced-navigation-inner-wrapper ${navigationLayout} ${
                         navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign
                     } ${showDropdownIcon ? "" : "remove-dropdown-icon"} ${
-                        navBtnType ? "responsive-icon" : "responsive-text"
-                    } ${hamburgerCloseIconAlign}`}
+                        hamburgerMenuIconType === "icon" ? "responsive-icon" : "responsive-text"
+                    }`}
                 >
                     <div className="advanced-navigation-contents">
                         <InnerBlocks.Content />
