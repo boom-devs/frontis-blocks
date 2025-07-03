@@ -7,19 +7,27 @@ import {
     TabPanel
 } from '@wordpress/components';
 
+import { 
+    NAVIGATION_LAYOUT,
+    HORIZONTAL_NAVIGATION_ALIGN,
+    VERTICAL_NAVIGATION_ALIGN,
+} from '@Constants/fbConstants';
+
 import {useDeviceType} from "@Config/displayType";
 import FB_InspectorControls from '@Components/InspectorControls';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_AlignmentControl from '@Components/alignment-control';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const {
         blockId,
-        layout,
-        navAlign,
+        navigationLayout,
+        navigationHorizontalAlign, 
         dropdownOpenOnClick,
         showDropdownIcon,
         navBtnType,
         flexWrap,
-        navVerticalAlign,
+        navigationVerticalAlign,
         hamburgerMenu,
         hamburgerCloseIconAlign,
     } = attributes;
@@ -39,25 +47,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	 */
 	const generalControls = (
         <>
-            <PanelBody>
-                <SelectControl
-                    label={__('Layout', 'frontis-blocks')}
-                    value={layout}
-                    options={[
-                        { label: __('Horizontal', 'frontis-blocks'), value: 'is-horizontal' },
-                        { label: __('Vertical', 'frontis-blocks'), value: 'is-vertical' },
-                    ]}
-                    onChange={(value) => setAttributes({ layout: value })}
+            <PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
+                <FB_SwitcherControl
+                        label={__("Layout", "frontis-blocks")}
+                        options={NAVIGATION_LAYOUT}
+                        globalSwitcher={navigationLayout}
+                        setGlobalSwitcher={(value) => setAttributes({ navigationLayout: value })}
                 />
-                <SelectControl
-                    label={__('Alignment', 'frontis-blocks')}
-                    value={layout === 'is-horizontal' ? navAlign : navVerticalAlign}
-                    options={[
-                        { label: __('Left', 'frontis-blocks'), value: 'items-justified-left' },
-                        { label: __('Center', 'frontis-blocks'), value: 'items-justified-center' },
-                        { label: __('Right', 'frontis-blocks'), value: 'items-justified-right' },
-                    ]}
-                    onChange={(value) => setAttributes({ [layout === 'is-horizontal' ? 'navAlign' : 'navVerticalAlign']: value })}
+                <FB_AlignmentControl
+                    label={__("Alignment", "frontis-blocks")}
+                    options={navigationLayout === 'is-horizontal' ? HORIZONTAL_NAVIGATION_ALIGN : VERTICAL_NAVIGATION_ALIGN}
+                    globalAlignment={navigationLayout === 'is-horizontal' ? navigationHorizontalAlign : navigationVerticalAlign} 
+                    setGlobalAlignment={(value) => setAttributes({ [navigationLayout === 'is-horizontal' ? 'navigationHorizontalAlign' : 'navigationVerticalAlign']: value })}
                 />
             </PanelBody>
         </>

@@ -11,15 +11,13 @@ import Inspector from "./inspector";
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
-        layout,
-        navAlign,
-        preset,
-        verticalPreset,
+        navigationLayout,
+        navigationHorizontalAlign,
         dropdownOpenOnClick,
         navBtnType,
         showDropdownIcon,
         flexWrap,
-        navVerticalAlign,
+        navigationVerticalAlign,
         hamburgerMenu,
         hamburgerCloseIconAlign,
         classHook,
@@ -42,7 +40,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         if (innerBlocks.length > 0) {
             innerBlocks.forEach((block) => {
                 updateBlockAttributes(block.clientId, {
-                    className: `${layout} ${layout === "is-horizontal" ? navAlign : navVerticalAlign} ${flexWrap ? "no-wrap" : ""}`,
+                    className: `${navigationLayout} ${navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign} ${flexWrap ? "no-wrap" : ""}`, 
                     openSubmenusOnClick: dropdownOpenOnClick,
                     showSubmenuIcon: showDropdownIcon,
                     hasIcon: navBtnType,
@@ -50,13 +48,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 });
             });
         }
-    }, [layout, navAlign, flexWrap, navVerticalAlign, dropdownOpenOnClick, showDropdownIcon, navBtnType, hamburgerMenu]);
+    }, [navigationLayout, navigationHorizontalAlign, flexWrap, navigationVerticalAlign, dropdownOpenOnClick, showDropdownIcon, navBtnType, hamburgerMenu]);
 
     const blockProps = useBlockProps({
         className: `frontis-block fb-advanced-navigation-main-wrapper ${blockId}`,
     });
-
-    const layoutPreset = layout === "is-horizontal" ? preset : verticalPreset;
 
     return (
         <>
@@ -66,21 +62,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 clientId={clientId}
             />
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper frontis-parent-wrapper frontis-parent-${blockId} ${classHook}`}>
+                <div className={`advanced-navigation-wrapper ${classHook}`}>
                     <div
-                        className={`${blockId} frontis-advanced-navigation-wrapper ${layout} ${layoutPreset} ${
-                            layout === "is-horizontal" ? navAlign : navVerticalAlign
+                        className={`${blockId} advanced-navigation-inner-wrapper ${navigationLayout} ${
+                            navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign
                         } ${showDropdownIcon ? "" : "remove-dropdown-icon"} ${
                             navBtnType ? "responsive-icon" : "responsive-text"
                         } ${hamburgerCloseIconAlign}`}
                     >
-                        <div className="frontis-nav-contents">
+                        <div className="advanced-navigation-contents">
                             <InnerBlocks
                                 templateLock={false}
                                 template={[
                                     [
                                         "core/navigation",
-                                        { className: `${layout} ${navAlign}` },
+                                        { className: `${navigationLayout} ${navigationHorizontalAlign}` }, 
                                     ],
                                 ]}
                                 allowedBlocks={["core/navigation"]}

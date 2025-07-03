@@ -14,9 +14,27 @@ export const NORMAL_HOVER = [
 	{ label: "Hover", value: "hover" },
 ];
 
+export const NAVIGATION_LAYOUT = [
+	{ label: __('Horizontal', 'frontis-blocks'), value: 'is-horizontal' },
+	{ label: __('Vertical', 'frontis-blocks'), value: 'is-vertical' },
+];
+
 export const ICON_ALIGN = [
 	{ label: __("None"), value: "none" },
 	{ label: __("Icon"), value: "icon" },
+];
+
+export const HORIZONTAL_NAVIGATION_ALIGN = [
+	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "items-justified-left" },
+	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "items-justified-center" },
+	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "items-justified-right" },
+	{ label: __(<Dashicon icon={"editor-justify"} />), value: "items-justified-space-between" },
+];
+
+export const VERTICAL_NAVIGATION_ALIGN = [
+	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "items-justified-left" },
+	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "items-justified-center" },
+	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "items-justified-right" },
 ];
 
 export const TEXT_ALIGN = [

@@ -3,18 +3,14 @@ import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 export default function save({ attributes }) {
     const {
         blockId,
-        layout,
-        navAlign,
-        preset,
-        verticalPreset,
+        navigationLayout,
+        navigationHorizontalAlign,
         showDropdownIcon,
         navBtnType,
-        navVerticalAlign,
+        navigationVerticalAlign,
         hamburgerCloseIconAlign,
         classHook,
     } = attributes;
-
-    const layoutPreset = layout === "is-horizontal" ? preset : verticalPreset;
 
     const blockProps = useBlockProps.save({
         className: `frontis-block fb-advanced-navigation-main-wrapper ${blockId}`,
@@ -22,15 +18,15 @@ export default function save({ attributes }) {
 
     return (
         <div {...blockProps}>
-            <div className={`fb-parent-wrapper frontis-parent-${blockId} ${classHook}`}>
+            <div className={`advanced-navigation-wrapper ${classHook}`}>
                 <div
-                    className={`${blockId} frontis-advanced-navigation-inner ${layout} ${layoutPreset} ${
-                        layout === "is-horizontal" ? navAlign : navVerticalAlign
+                    className={`${blockId} advanced-navigation-inner-wrapper ${navigationLayout} ${
+                        navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign
                     } ${showDropdownIcon ? "" : "remove-dropdown-icon"} ${
                         navBtnType ? "responsive-icon" : "responsive-text"
                     } ${hamburgerCloseIconAlign}`}
                 >
-                    <div className="frontis-nav-contents">
+                    <div className="advanced-navigation-contents">
                         <InnerBlocks.Content />
                     </div>
                 </div>
