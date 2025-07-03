@@ -2,22 +2,19 @@ const attributes = {
     blockId: {
         type: "string"
     },
-    layout: {
+    navigationLayout: {
         type: "string",
         default: "is-horizontal"
     },
-    preset: {
-        type: "string",
-        default: "preset-1"
-    },
-    verticalPreset: {
-        type: "string",
-        default: "vertical-preset-1"
-    },
-    navAlign: {
+    navigationHorizontalAlign: {
         type: "string",
         default: "items-justified-left"
     },
+    navigationVerticalAlign: {
+        type: "string",
+        default: "items-justified-left"
+    },
+    
     dropdownOpenOnClick: {
         type: "boolean",
         default: false
@@ -37,10 +34,6 @@ const attributes = {
     hamburgerMenu: {
         type: "string",
         default: "mobile"
-    },
-    navVerticalAlign: {
-        type: "string",
-        default: "items-justified-left"
     },
     hamburgerCloseIconAlign: {
         type: "string",
