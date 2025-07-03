@@ -14,13 +14,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationLayout,
         navigationHorizontalAlign,
         dropdownOpenOnClick,
-        navBtnType,
         showDropdownIcon,
-        flexWrap,
+        navigationFlexWrapSwitcher,
         navigationVerticalAlign,
-        hamburgerMenu,
-        hamburgerCloseIconAlign,
-        classHook,
+        hamburgerMenuIconType,
+
+        navigationGlobalWraperClass,
+        navigationGlobalWraperID,
+
+        navigationDesktopSwitcher,
+        navigationTabletSwitcher,
+        navigationMobileSwitcher,
     } = attributes;
 
     const { updateBlockAttributes } = useDispatch("core/block-editor");
@@ -31,27 +35,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     );
 
     useEffect(() => {
-        if (!blockId) {
-            setAttributes({ blockId: clientId });
-        }
-    }, []);
-
-    useEffect(() => {
         if (innerBlocks.length > 0) {
             innerBlocks.forEach((block) => {
                 updateBlockAttributes(block.clientId, {
-                    className: `${navigationLayout} ${navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign} ${flexWrap ? "no-wrap" : ""}`, 
+                    className: `${navigationLayout} ${navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign} ${navigationFlexWrapSwitcher ? "no-wrap" : ""}`, 
                     openSubmenusOnClick: dropdownOpenOnClick,
                     showSubmenuIcon: showDropdownIcon,
-                    hasIcon: navBtnType,
-                    overlayMenu: hamburgerMenu,
+                    hasIcon: hamburgerMenuIconType === "icon" ? true : false,
                 });
             });
         }
-    }, [navigationLayout, navigationHorizontalAlign, flexWrap, navigationVerticalAlign, dropdownOpenOnClick, showDropdownIcon, navBtnType, hamburgerMenu]);
+    }, [navigationLayout, navigationHorizontalAlign, navigationFlexWrapSwitcher, navigationVerticalAlign, dropdownOpenOnClick, showDropdownIcon, hamburgerMenuIconType]);
 
     const blockProps = useBlockProps({
-        className: `frontis-block fb-advanced-navigation-main-wrapper ${blockId}`,
+        className: `frontis-block fb-advanced-navigation-main-wrapper ${blockId} ${navigationDesktopSwitcher && 'fb-desktop-responsive'} ${navigationTabletSwitcher && 'fb-tablet-responsive'} ${navigationMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     return (
@@ -62,13 +59,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 clientId={clientId}
             />
             <div {...blockProps}>
-                <div className={`advanced-navigation-wrapper ${classHook}`}>
+                <div className={`advanced-navigation-wrapper ${navigationGlobalWraperClass}`} id={navigationGlobalWraperID}>
                     <div
                         className={`${blockId} advanced-navigation-inner-wrapper ${navigationLayout} ${
                             navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign
                         } ${showDropdownIcon ? "" : "remove-dropdown-icon"} ${
-                            navBtnType ? "responsive-icon" : "responsive-text"
-                        } ${hamburgerCloseIconAlign}`}
+                            hamburgerMenuIconType === "icon" ? "responsive-icon" : "responsive-text"
+                        }`}
                     >
                         <div className="advanced-navigation-contents">
                             <InnerBlocks
