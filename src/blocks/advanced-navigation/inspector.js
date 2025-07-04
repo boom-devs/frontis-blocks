@@ -123,6 +123,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         navigationBorderRadiusLink,
         /** End Navigation Border and Border Radius */
 
+        /** Start Navigation Box Shadow */
+        navigationBoxShadowSwitcher,
+        navigationBoxShadowValues,
+        navigationBoxShadowCssValue,
+        navigationBoxShadowHoverValues,
+        navigationBoxShadowHoverCssValue,
+        /** End Navigation Box Shadow */
+
 
         /** Start Global Setting */
         navigationGlobalZIndex,
@@ -856,6 +864,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${navigationBorderColor ? `border-color: ${navigationBorderColor};` : ''}
             ${navigationDesktopBorderWidth && navigationDesktopBorder.top? `border-width: ${navigationDesktopBorderWidth};` : ''}
             ${navigationDesktopBorderRadiusWidth && navigationDesktopBorderRadius.top? `border-radius: ${navigationDesktopBorderRadiusWidth};` : ''}
+            ${navigationBoxShadowCssValue ? `box-shadow: ${navigationBoxShadowCssValue};` : ''}
 
             ${navigationNormalBackgroundType === 'gradient' ? `  
                 ${navigationNormalCustomGradientSwitcher && navigationNormalCustomGradientInputValue ? `background: ${navigationNormalCustomGradientInputValue};` : `background: ${navigationNormalGradientColor};`}
@@ -865,6 +874,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
 
         .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item:hover {
+            ${navigationBoxShadowHoverCssValue ? `box-shadow: ${navigationBoxShadowHoverCssValue};` : ''}
             ${navigationHoverBackgroundType === 'gradient' ? `  
                 ${navigationHoverCustomGradientSwitcher && navigationHoverCustomGradientInputValue ? `background: ${navigationHoverCustomGradientInputValue};` : `background: ${navigationHoverGradientColor};`}
             `: `
@@ -950,7 +960,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${navigationGlobalMobileBorderWidth && navigationGlobalBorderMobile.top? `border-width: ${navigationGlobalMobileBorderWidth};` : ''}
                 ${navigationGlobalMobileBorderRadiusWidth && navigationGlobalBorderRadiusMobile.top? `border-radius: ${navigationGlobalMobileBorderRadiusWidth};` : ''}
             }
-                
+
             .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item {
                 ${navigationMobilePaddingWidth && navigationMobilePadding.top? `padding: ${navigationMobilePaddingWidth};` : ''}
                 ${navigationMobileMarginWidth && navigationMobileMargin.top? `margin: ${navigationMobileMarginWidth};` : ''} 
@@ -1064,6 +1074,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         navigationTabletBorderRadiusWidth,
         navigationMobileBorderRadiusWidth,
         /** End Navigation Border and Border Radius */
+
+        /** Start Navigation Box Shadow */
+        navigationBoxShadowSwitcher,
+        navigationBoxShadowValues,
+        navigationBoxShadowCssValue,
+        navigationBoxShadowHoverValues,
+        navigationBoxShadowHoverCssValue,
+        /** End Navigation Box Shadow */
 
 
         /** Start Global Setting */
@@ -1454,6 +1472,30 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     spacingCombineBtnHandler={handleNavigationBorderRadiusCombineBtn}
                     setAttributes={setAttributes}
                 />
+
+                <FB_SwitcherControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    globalSwitcher={navigationBoxShadowSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ navigationBoxShadowSwitcher: value })}
+                />
+
+                {navigationBoxShadowSwitcher === 'normal' && (
+                    <FB_BoxShadowControl
+                        label={__("Normal Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ navigationBoxShadowValues: value })}
+                        initialShadowValue={navigationBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ navigationBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {navigationBoxShadowSwitcher === 'hover' && (
+                    <FB_BoxShadowControl
+                        label={__("Hover Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ navigationBoxShadowHoverValues: value })}
+                        initialShadowValue={navigationBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ navigationBoxShadowHoverCssValue: value })}
+                    />
+                )}
             </PanelBody>
         </>
 	);

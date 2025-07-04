@@ -386,6 +386,29 @@ const attributes = {
 	},
 	/** End Navigation Border */
 
+	/** Start Navigation Box Shadow */
+	navigationBoxShadowSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	navigationBoxShadowValues: {
+		type: 'array',
+		default: [],
+	},
+	navigationBoxShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	navigationBoxShadowHoverValues: {
+		type: 'array',
+		default: [],
+	},
+	navigationBoxShadowHoverCssValue: {
+		type: 'string',
+		default: '',
+	},
+	/** End Box Shadow */
+
 
 
     /** Start Global Setting */
