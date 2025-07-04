@@ -192,6 +192,69 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dropDownBoxShadowHoverCssValue,
         /** End Dropdown Menu Box Shadow */
 
+        /** Start Dropdown Menu Typography */
+        dropDownItemTypographyData,
+        dropDownItemTypoSwitcher,
+        dropDownItemTypoType,
+        dropDownItemTypoOption,
+        dropDownItemFontFamily,
+        dropDownItemFontSize,
+        dropDownItemFontSizeUnits,
+        dropDownItemFontWeight,
+        dropDownItemFontStyle,
+        dropDownItemTextTransform,
+        dropDownItemTextDecoration,
+        dropDownItemLetterSpacing,
+        dropDownItemLetterSpacingUnits,
+        dropDownItemLineHeight,
+        dropDownItemLineHeightUnits,
+        /** End Dropdown Menu Item Typography */ 
+
+        /** Start Dropdown Menu Color and active color */
+        dropDownItemColorSwitcher,
+        dropDownItemColor,
+        dropDownItemHoverColor,
+
+        dropDownItemActiveColorSwitcher,
+        dropDownItemActiveColor,
+        dropDownItemActiveHoverColor,
+        /** End Dropdown Menu Color and active color */
+
+        /** Start Dropdown Menu Item Padding */
+        dropDownItemPaddingUnits,
+        dropDownItemDesktopPadding,
+        dropDownItemTabletPadding,
+        dropDownItemMobilePadding,
+        dropDownItemPaddingLink,
+        /** End Dropdown Menu Item Padding */
+
+        /** Start Dropdown Menu Item Margin */
+        dropDownItemMarginUnits,
+        dropDownItemDesktopMargin,
+        dropDownItemTabletMargin,
+        dropDownItemMobileMargin,
+        dropDownItemMarginLink,
+        /** End Dropdown Menu Item Margin */
+
+        /** Start Dropdown Menu Item Border */
+        dropDownItemBorder,
+        dropDownItemBorderColorSwitcher,
+        dropDownItemBorderColor,
+        dropDownItemBorderHoverColor,
+
+        dropDownItemBorderUnits,
+        dropDownItemDesktopBorder,
+        dropDownItemTabletBorder,
+        dropDownItemMobileBorder,
+        dropDownItemBorderLink,
+
+        dropDownItemBorderRadiusUnits,
+        dropDownItemDesktopBorderRadius,
+        dropDownItemTabletBorderRadius,
+        dropDownItemMobileBorderRadius,
+        dropDownItemBorderRadiusLink,
+        /** End Dropdown Menu Item Border */
+
 
         /** Start Global Setting */
         navigationGlobalZIndex,
@@ -876,6 +939,305 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const dropDownMobileBorderRadiusWidth = `${dropDownMobileBorderRadius.top}${dropDownBorderRadiusUnits.Mobile} ${dropDownMobileBorderRadius.right}${dropDownBorderRadiusUnits.Mobile} ${dropDownMobileBorderRadius.bottom}${dropDownBorderRadiusUnits.Mobile} ${dropDownMobileBorderRadius.left}${dropDownBorderRadiusUnits.Mobile}`;
 	/** End Dropdown Menu Border Radius */  
 
+
+    /** Start Dropdown Menu Item Padding */
+	const handleDropDownItemPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( dropDownItemPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						dropDownItemDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						dropDownItemTabletPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						dropDownItemMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {dropDownItemDesktopPadding: {...dropDownItemDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {dropDownItemTabletPadding: {...dropDownItemTabletPadding, [position]: value}} );
+					break;
+                    case 'Mobile':
+                        setAttributes( {dropDownItemMobilePadding: {...dropDownItemMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleDropDownItemPaddingCombineBtn = () => {
+		setAttributes( {dropDownItemPaddingLink: !dropDownItemPaddingLink} );
+	}
+
+	const handleDropDownItemPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			dropDownItemPaddingUnits: {
+				...dropDownItemPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const dropDownItemDesktopPaddingWidth    = `${dropDownItemDesktopPadding.top}${dropDownItemPaddingUnits.Desktop} ${dropDownItemDesktopPadding.right}${dropDownItemPaddingUnits.Desktop} ${dropDownItemDesktopPadding.bottom}${dropDownItemPaddingUnits.Desktop} ${dropDownItemDesktopPadding.left}${dropDownItemPaddingUnits.Desktop}`;
+	const dropDownItemTabletPaddingWidth     = `${dropDownItemTabletPadding.top}${dropDownItemPaddingUnits.Tablet} ${dropDownItemTabletPadding.right}${dropDownItemPaddingUnits.Tablet} ${dropDownItemTabletPadding.bottom}${dropDownItemPaddingUnits.Tablet} ${dropDownItemTabletPadding.left}${dropDownItemPaddingUnits.Tablet}`;
+	const dropDownItemMobilePaddingWidth     = `${dropDownItemMobilePadding.top}${dropDownItemPaddingUnits.Mobile} ${dropDownItemMobilePadding.right}${dropDownItemPaddingUnits.Mobile} ${dropDownItemMobilePadding.bottom}${dropDownItemPaddingUnits.Mobile} ${dropDownItemMobilePadding.left}${dropDownItemPaddingUnits.Mobile}`;
+	/** End Dropdown Menu Item Padding */
+
+    /** Start Dropdown Menu Item Margin */
+	const handleDropDownItemMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( dropDownItemMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						dropDownItemDesktopMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						dropDownItemTabletMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						dropDownItemMobileMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {dropDownItemDesktopMargin: {...dropDownItemDesktopMargin, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {dropDownItemTabletMargin: {...dropDownItemTabletMargin, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {dropDownItemMobileMargin: {...dropDownItemMobileMargin, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleDropDownItemMarginCombineBtn = () => {
+		setAttributes( {dropDownItemMarginLink: !dropDownItemMarginLink} );
+	}
+
+	const handleDropDownItemMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			dropDownItemMarginUnits: {
+				...dropDownItemMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	const dropDownItemDesktopMarginWidth = `${dropDownItemDesktopMargin.top}${dropDownItemMarginUnits.Desktop} ${dropDownItemDesktopMargin.right}${dropDownItemMarginUnits.Desktop} ${dropDownItemDesktopMargin.bottom}${dropDownItemMarginUnits.Desktop} ${dropDownItemDesktopMargin.left}${dropDownItemMarginUnits.Desktop}`;
+	const dropDownItemTabletMarginWidth = `${dropDownItemTabletMargin.top}${dropDownItemMarginUnits.Tablet} ${dropDownItemTabletMargin.right}${dropDownItemMarginUnits.Tablet} ${dropDownItemTabletMargin.bottom}${dropDownItemMarginUnits.Tablet} ${dropDownItemTabletMargin.left}${dropDownItemMarginUnits.Tablet}`;
+	const dropDownItemMobileMarginWidth = `${dropDownItemMobileMargin.top}${dropDownItemMarginUnits.Mobile} ${dropDownItemMobileMargin.right}${dropDownItemMarginUnits.Mobile} ${dropDownItemMobileMargin.bottom}${dropDownItemMarginUnits.Mobile} ${dropDownItemMobileMargin.left}${dropDownItemMarginUnits.Mobile}`;
+	/** End Dropdown Menu Item Margin */
+
+	/** Start Dropdown Menu Item Border */
+	const handleDropDownItemBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( dropDownItemBorderLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+
+						dropDownItemDesktopBorder: { 
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						dropDownItemTabletBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						dropDownItemMobileBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {dropDownItemDesktopBorder: {...dropDownItemDesktopBorder, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {dropDownItemTabletBorder: {...dropDownItemTabletBorder, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {dropDownItemMobileBorder: {...dropDownItemMobileBorder, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleDropDownItemBorderCombineBtn = () => {
+		setAttributes( {dropDownItemBorderLink: !dropDownItemBorderLink} );
+	}
+
+	const handleDropDownItemBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			dropDownItemBorderUnits: {
+				...dropDownItemBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const dropDownItemDesktopBorderWidth = `${dropDownItemDesktopBorder.top}${dropDownItemBorderUnits.Desktop} ${dropDownItemDesktopBorder.right}${dropDownItemBorderUnits.Desktop} ${dropDownItemDesktopBorder.bottom}${dropDownItemBorderUnits.Desktop} ${dropDownItemDesktopBorder.left}${dropDownItemBorderUnits.Desktop}`;
+	const dropDownItemTabletBorderWidth = `${dropDownItemTabletBorder.top}${dropDownItemBorderUnits.Tablet} ${dropDownItemTabletBorder.right}${dropDownItemBorderUnits.Tablet} ${dropDownItemTabletBorder.bottom}${dropDownItemBorderUnits.Tablet} ${dropDownItemTabletBorder.left}${dropDownItemBorderUnits.Tablet}`;
+	const dropDownItemMobileBorderWidth = `${dropDownItemMobileBorder.top}${dropDownItemBorderUnits.Mobile} ${dropDownItemMobileBorder.right}${dropDownItemBorderUnits.Mobile} ${dropDownItemMobileBorder.bottom}${dropDownItemBorderUnits.Mobile} ${dropDownItemMobileBorder.left}${dropDownItemBorderUnits.Mobile}`;
+	/** End Dropdown Menu Item Border */
+
+
+	/** Start Dropdown Menu Item Border Radius*/
+	const handleDropDownItemBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( dropDownItemBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( { 
+						dropDownItemDesktopBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						dropDownItemTabletBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						dropDownItemMobileBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {dropDownItemDesktopBorderRadius: {...dropDownItemDesktopBorderRadius, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {dropDownItemTabletBorderRadius: {...dropDownItemTabletBorderRadius, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {dropDownItemMobileBorderRadius: {...dropDownItemMobileBorderRadius, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleDropDownItemBorderRadiusCombineBtn = () => {
+		setAttributes( {dropDownItemBorderRadiusLink: !dropDownItemBorderRadiusLink} );
+	}
+
+	const handleDropDownItemBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			dropDownItemBorderRadiusUnits: {
+				...dropDownItemBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** end Navigation border */ 
+
+	/** End Navigation Border Radius */
+	const dropDownItemDesktopBorderRadiusWidth = `${dropDownItemDesktopBorderRadius.top}${dropDownItemBorderRadiusUnits.Desktop} ${dropDownItemDesktopBorderRadius.right}${dropDownItemBorderRadiusUnits.Desktop} ${dropDownItemDesktopBorderRadius.bottom}${dropDownItemBorderRadiusUnits.Desktop} ${dropDownItemDesktopBorderRadius.left}${dropDownItemBorderRadiusUnits.Desktop}`;
+	const dropDownItemTabletBorderRadiusWidth = `${dropDownItemTabletBorderRadius.top}${dropDownItemBorderRadiusUnits.Tablet} ${dropDownItemTabletBorderRadius.right}${dropDownItemBorderRadiusUnits.Tablet} ${dropDownItemTabletBorderRadius.bottom}${dropDownItemBorderRadiusUnits.Tablet} ${dropDownItemTabletBorderRadius.left}${dropDownItemBorderRadiusUnits.Tablet}`;
+	const dropDownItemMobileBorderRadiusWidth = `${dropDownItemMobileBorderRadius.top}${dropDownItemBorderRadiusUnits.Mobile} ${dropDownItemMobileBorderRadius.right}${dropDownItemBorderRadiusUnits.Mobile} ${dropDownItemMobileBorderRadius.bottom}${dropDownItemBorderRadiusUnits.Mobile} ${dropDownItemMobileBorderRadius.left}${dropDownItemBorderRadiusUnits.Mobile}`;
+	/** End Dropdown Menu Border Radius */
+
     /** Start Global padding */
 	const handleGlobalPaddingUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -1240,14 +1602,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${navigationHoverClassicColor ? `background: ${navigationHoverClassicColor};` : ''}
             `}
         }
+
         .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content {
-            outline: none !important;
-            box-shadow: none !important;
-        }
-        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content:hover {
-            text-decoration: none !important;
-        }
-        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content .wp-block-navigation-item__label {
             ${navigationGlobalTypoSwitcher.fontFamily === true && navigationGlobalTypographyData.fontFamily ? `font-family: ${navigationGlobalTypographyData.fontFamily};` : ''}
             ${navigationGlobalTypoSwitcher.fontSize === true && navigationGlobalTypographyData.fontSize ? `font-size: ${navigationGlobalTypographyData.fontSize};` : ''}
             ${navigationGlobalTypoSwitcher.fontWeight === true && navigationGlobalTypographyData.fontWeight ? `font-weight: ${navigationGlobalTypographyData.fontWeight};` : ''}
@@ -1271,15 +1627,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             box-shadow: none !important;
             transition: all .3s ease-in-out;
         }
-        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content .wp-block-navigation-item__label:hover {
+        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content:hover {
             ${navigationHoverColor ? `color: ${navigationHoverColor};` : ''}
+            text-decoration: none !important;
         }
 
-        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item.current-menu-item .wp-block-navigation-item__content .wp-block-navigation-item__label {
+        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item.current-menu-item .wp-block-navigation-item__content {
             ${navigationActiveColor ? `color: ${navigationActiveColor};` : ''}
         }
 
-        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item.current-menu-item .wp-block-navigation-item__content .wp-block-navigation-item__label:hover {
+        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item.current-menu-item .wp-block-navigation-item__content:hover {
             ${navigationActiveHoverColor ? `color: ${navigationActiveHoverColor};` : ''}
         }
 
@@ -1310,6 +1667,45 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             `}
         }
 
+        .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+            ${dropDownItemTypoSwitcher.fontFamily === true && dropDownItemTypographyData.fontFamily ? `font-family: ${dropDownItemTypographyData.fontFamily};` : ''}
+            ${dropDownItemTypoSwitcher.fontSize === true && dropDownItemTypographyData.fontSize ? `font-size: ${dropDownItemTypographyData.fontSize};` : ''}
+            ${dropDownItemTypoSwitcher.fontWeight === true && dropDownItemTypographyData.fontWeight ? `font-weight: ${dropDownItemTypographyData.fontWeight};` : ''}
+            ${dropDownItemTypoSwitcher.fontStyle === true && dropDownItemTypographyData.fontStyle ? `font-style: ${dropDownItemTypographyData.fontStyle};` : ''}
+            ${dropDownItemTypoSwitcher.textTransform === true && dropDownItemTypographyData.textTransform ? `text-transform: ${dropDownItemTypographyData.textTransform};` : ''}
+            ${dropDownItemTypoSwitcher.textDecoration === true && dropDownItemTypographyData.textDecoration ? `text-decoration: ${dropDownItemTypographyData.textDecoration};` : ''}
+            ${dropDownItemTypoSwitcher.letterSpacing === true && dropDownItemTypographyData.letterSpacing ? `letter-spacing: ${dropDownItemTypographyData.letterSpacing};` : ''}
+            ${dropDownItemTypoSwitcher.lineHeight === true && dropDownItemTypographyData.lineHeight ? `line-height: ${dropDownItemTypographyData.lineHeight};` : ''}
+                
+            ${dropDownItemTypoSwitcher.fontFamily === false && dropDownItemFontFamily && dropDownItemFontFamily !== 'Default' ? `font-family: ${dropDownItemFontFamily};` : ''}
+            ${dropDownItemTypoSwitcher.fontSize === false && dropDownItemFontSize.Desktop && dropDownItemFontSizeUnits.Desktop ? `font-size: ${dropDownItemFontSize.Desktop}${dropDownItemFontSizeUnits.Desktop};` : ''}
+            ${dropDownItemTypoSwitcher.fontWeight === false && dropDownItemFontWeight ? `font-weight: ${dropDownItemFontWeight};` : ''}
+            ${dropDownItemTypoSwitcher.fontStyle === false && dropDownItemFontStyle ? `font-style: ${dropDownItemFontStyle};` : ''}
+            ${dropDownItemTypoSwitcher.textTransform === false && dropDownItemTextTransform ? `text-transform: ${dropDownItemTextTransform};` : ''}
+            ${dropDownItemTypoSwitcher.textDecoration === false && dropDownItemTextDecoration ? `text-decoration: ${dropDownItemTextDecoration};` : ''}
+            ${dropDownItemTypoSwitcher.letterSpacing === false && dropDownItemLetterSpacing.Desktop && dropDownItemLetterSpacingUnits.Desktop ? `letter-spacing: ${dropDownItemLetterSpacing.Desktop}${dropDownItemLetterSpacingUnits.Desktop};` : ''}
+            ${dropDownItemTypoSwitcher.lineHeight === false && dropDownItemLineHeight.Desktop && dropDownItemLineHeightUnits.Desktop ? `line-height: ${dropDownItemLineHeight.Desktop}${dropDownItemLineHeightUnits.Desktop};` : ''}
+            
+            ${dropDownItemColor ? `color: ${dropDownItemColor};` : ''}
+            ${dropDownItemDesktopPaddingWidth && dropDownItemDesktopPadding.top? `padding: ${dropDownItemDesktopPaddingWidth};` : ''}
+            ${dropDownItemDesktopMarginWidth && dropDownItemDesktopMargin.top? `margin: ${dropDownItemDesktopMarginWidth};` : ''} 
+            ${dropDownItemBorder ? `border: ${dropDownItemBorder};` : ''} 
+            ${dropDownItemBorderColor ? `border-color: ${dropDownItemBorderColor};` : ''}
+            ${dropDownItemDesktopBorderWidth && dropDownItemDesktopBorder.top? `border-width: ${dropDownItemDesktopBorderWidth};` : ''}
+            ${dropDownItemDesktopBorderRadiusWidth && dropDownItemDesktopBorderRadius.top? `border-radius: ${dropDownItemDesktopBorderRadiusWidth};` : ''}
+            outline: none !important;
+            box-shadow: none !important;
+            transition: all .3s ease-in-out;
+        }
+
+        .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container .wp-block-navigation-item.current-menu-item .wp-block-navigation-item__content {
+            ${dropDownItemActiveColor ? `color: ${dropDownItemActiveColor};` : ''}
+        }
+
+        .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container .wp-block-navigation-item.current-menu-item .wp-block-navigation-item__content:hover {
+            ${dropDownItemActiveHoverColor ? `color: ${dropDownItemActiveHoverColor};` : ''}
+        }
+
 
         @media only screen and (max-width: 1024px) {
 
@@ -1333,7 +1729,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${navigationTabletBorderRadiusWidth && navigationTabletBorderRadius.top? `border-radius: ${navigationTabletBorderRadiusWidth};` : ''}
             }
 
-            .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content .wp-block-navigation-item__label {
+            .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content {
                 ${navigationGlobalTypoSwitcher.fontSize === false && navigationFontSize.Tablet && navigationFontSizeUnits.Tablet ? `font-size: ${navigationFontSize.Tablet}${navigationFontSizeUnits.Tablet};` : ''}
                 ${navigationGlobalTypoSwitcher.letterSpacing === false && navigationLetterSpacing.Tablet && navigationLetterSpacingUnits.Tablet ? `letter-spacing: ${navigationLetterSpacing.Tablet}${navigationLetterSpacingUnits.Tablet};` : ''}
                 ${navigationGlobalTypoSwitcher.lineHeight === false && navigationLineHeight.Tablet && navigationLineHeightUnits.Tablet ? `line-height: ${navigationLineHeight.Tablet}${navigationLineHeightUnits.Tablet};` : ''}
@@ -1362,7 +1758,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${navigationMobileBorderRadiusWidth && navigationMobileBorderRadius.top? `border-radius: ${navigationMobileBorderRadiusWidth};` : ''}
             }
 
-            .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content .wp-block-navigation-item__label {
+            .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content {
                 ${navigationGlobalTypoSwitcher.fontSize === false && navigationFontSize.Mobile && navigationFontSizeUnits.Mobile ? `font-size: ${navigationFontSize.Mobile}${navigationFontSizeUnits.Mobile};` : ''}
                 ${navigationGlobalTypoSwitcher.letterSpacing === false && navigationLetterSpacing.Mobile && navigationLetterSpacingUnits.Mobile ? `letter-spacing: ${navigationLetterSpacing.Mobile}${navigationLetterSpacingUnits.Mobile};` : ''}
                 ${navigationGlobalTypoSwitcher.lineHeight === false && navigationLineHeight.Mobile && navigationLineHeightUnits.Mobile ? `line-height: ${navigationLineHeight.Mobile}${navigationLineHeightUnits.Mobile};` : ''}
@@ -1548,6 +1944,81 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dropDownBoxShadowHoverValues,
         dropDownBoxShadowHoverCssValue,
         /** End Dropdown Menu Box Shadow */
+
+        /** Start Dropdown Menu Typography */
+        dropDownItemTypographyData,
+        dropDownItemTypoSwitcher,
+        dropDownItemTypoType,
+        dropDownItemTypoOption,
+        dropDownItemFontFamily,
+        dropDownItemFontSize,
+        dropDownItemFontSizeUnits,
+        dropDownItemFontWeight,
+        dropDownItemFontStyle,
+        dropDownItemTextTransform,
+        dropDownItemTextDecoration,
+        dropDownItemLetterSpacing,
+        dropDownItemLetterSpacingUnits,
+        dropDownItemLineHeight,
+        dropDownItemLineHeightUnits,
+        /** End Dropdown Menu Item Typography */ 
+
+        /** Start Dropdown Menu Color and active color */
+        dropDownItemColorSwitcher,
+        dropDownItemColor,
+        dropDownItemHoverColor,
+
+        dropDownItemActiveColorSwitcher,
+        dropDownItemActiveColor,
+        dropDownItemActiveHoverColor,
+        /** End Dropdown Menu Color and active color */
+
+        /** Start Dropdown Menu Item Padding */
+        dropDownItemPaddingUnits,
+        dropDownItemDesktopPadding,
+        dropDownItemTabletPadding,
+        dropDownItemMobilePadding,
+        dropDownItemPaddingLink,
+        dropDownItemDesktopPaddingWidth,
+        dropDownItemTabletPaddingWidth,
+        dropDownItemMobilePaddingWidth,
+        /** End Dropdown Menu Item Padding */
+
+        /** Start Dropdown Menu Item Margin */
+        dropDownItemMarginUnits,
+        dropDownItemDesktopMargin,
+        dropDownItemTabletMargin,
+        dropDownItemMobileMargin,
+        dropDownItemMarginLink,
+        dropDownItemDesktopMarginWidth,
+        dropDownItemTabletMarginWidth,
+        dropDownItemMobileMarginWidth,
+        /** End Dropdown Menu Item Margin */
+
+        /** Start Dropdown Menu Item Border */
+        dropDownItemBorder,
+        dropDownItemBorderColorSwitcher,
+        dropDownItemBorderColor,
+        dropDownItemBorderHoverColor,
+
+        dropDownItemBorderUnits,
+        dropDownItemDesktopBorder,
+        dropDownItemTabletBorder,
+        dropDownItemMobileBorder,
+        dropDownItemBorderLink,
+        dropDownItemDesktopBorderWidth,
+        dropDownItemTabletBorderWidth,
+        dropDownItemMobileBorderWidth,
+
+        dropDownItemBorderRadiusUnits,
+        dropDownItemDesktopBorderRadius,
+        dropDownItemTabletBorderRadius,
+        dropDownItemMobileBorderRadius,
+        dropDownItemBorderRadiusLink,
+        dropDownItemDesktopBorderRadiusWidth,
+        dropDownItemTabletBorderRadiusWidth,
+        dropDownItemMobileBorderRadiusWidth,
+        /** End Dropdown Menu Item Border */
 
 
         /** Start Global Setting */
@@ -1963,7 +2434,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     />
                 )}
             </PanelBody>
-            <PanelBody title={__("Dropdown Menu", "frontis-blocks")} initialOpen={false}>
+            <PanelBody 
+                title={__("Dropdown Menu Wrapper", "frontis-blocks")} 
+                initialOpen={false}
+            >
                 <FB_Range
                     min={1}
                     max={dropDownWrapperMinWidthUnits[deviceType] === "%" ? 100 : 1000}
@@ -2116,6 +2590,191 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         onBoxShadowStyleChange={(value) => setAttributes({ dropDownBoxShadowHoverCssValue: value })}
                     />
                 )}
+            </PanelBody>
+            <PanelBody 
+                title={__("Dropdown Menu Item", "frontis-blocks")} 
+                initialOpen={false}
+            >
+                <FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={dropDownItemTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ dropDownItemTypographyData: value })}
+
+                    globalTypoType={dropDownItemTypoType}
+                    onChangeGlobalTypoType={(value) => {
+                        setAttributes({ 
+                            dropDownItemTypoType: value, 
+                            dropDownItemTypoSwitcher: value === 'default' ? {...dropDownItemTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...dropDownItemTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                        })
+                    }}
+
+                    globalTypoOption={dropDownItemTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ dropDownItemTypoOption: value })}
+
+                    fontFamily={dropDownItemFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ dropDownItemFontFamily: value, dropDownItemTypoSwitcher: {...dropDownItemTypoSwitcher, fontFamily: value && false} })}
+
+                    fontSize={dropDownItemFontSize}
+                    onChangeFontSize={(value) => setAttributes({ dropDownItemFontSize: value, dropDownItemTypoSwitcher: {...dropDownItemTypoSwitcher, fontSize: value && false} })}
+
+                    fontSizeUnits={dropDownItemFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ dropDownItemFontSizeUnits: value })}
+
+                    fontWeight={dropDownItemFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ dropDownItemFontWeight: value, dropDownItemTypoSwitcher: {...dropDownItemTypoSwitcher, fontWeight: value && false} })}
+
+                    fontStyle={dropDownItemFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ dropDownItemFontStyle: value, dropDownItemTypoSwitcher: {...dropDownItemTypoSwitcher, fontStyle: value && false} })}
+
+                    textTransform={dropDownItemTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ dropDownItemTextTransform: value, dropDownItemTypoSwitcher: {...dropDownItemTypoSwitcher, textTransform: value && false} })}
+
+                    textDecoration={dropDownItemTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ dropDownItemTextDecoration: value, dropDownItemTypoSwitcher: {...dropDownItemTypoSwitcher, textDecoration: value && false} })}
+
+                    letterSpacing={dropDownItemLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ dropDownItemLetterSpacing: value, dropDownItemTypoSwitcher: {...dropDownItemTypoSwitcher, letterSpacing: value && false} })}
+
+                    letterSpacingUnits={dropDownItemLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ dropDownItemLetterSpacingUnits: value })}
+
+                    lineHeight={dropDownItemLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ dropDownItemLineHeight: value, dropDownItemTypoSwitcher: {...dropDownItemTypoSwitcher, lineHeight: value && false} })}
+
+                    lineHeightUnits={dropDownItemLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ dropDownItemLineHeightUnits: value })}
+
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+                <FB_SwitcherControl
+                        label={__("Color", "frontis-blocks")}
+                        options={NORMAL_HOVER}
+                        globalSwitcher={dropDownItemColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ dropDownItemColorSwitcher: value })}
+                />
+                {dropDownItemColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={dropDownItemColor}
+                        setGlobalColor={(value) => setAttributes({ dropDownItemColor: value })}
+                    />
+                )}
+
+                {dropDownItemColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={dropDownItemHoverColor}
+                        setGlobalColor={(value) => setAttributes({ dropDownItemHoverColor: value })}
+                    />
+                )}
+                <FB_SwitcherControl
+                        label={__("Active Color", "frontis-blocks")}
+                        options={NORMAL_HOVER}
+                        globalSwitcher={dropDownItemActiveColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ dropDownItemActiveColorSwitcher: value })}
+                />
+
+                {dropDownItemActiveColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Color", "frontis-blocks")}
+                        globalColor={dropDownItemActiveColor}
+                        setGlobalColor={(value) => setAttributes({ dropDownItemActiveColor: value })}
+                    />
+                )}
+
+                {dropDownItemActiveColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={dropDownItemActiveHoverColor}
+                        setGlobalColor={(value) => setAttributes({ dropDownItemActiveHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing 
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleDropDownItemPaddingUnitsHandler}  
+                    spacingUnits={dropDownItemPaddingUnits}
+                    spacingDesktop={dropDownItemDesktopPadding}
+                    spacingTablet={dropDownItemTabletPadding}
+                    spacingMobile={dropDownItemMobilePadding}
+                    handleSpacingUnitHandler={handleDropDownItemPaddingUnitChange}
+                    spacingCombineBtn={dropDownItemPaddingLink}
+                    spacingCombineBtnHandler={handleDropDownItemPaddingCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing 
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleDropDownItemMarginUnitsHandler}
+                    spacingUnits={dropDownItemMarginUnits} 
+                    spacingDesktop={dropDownItemDesktopMargin}
+                    spacingTablet={dropDownItemTabletMargin}
+                    spacingMobile={dropDownItemMobileMargin}
+                    handleSpacingUnitHandler={handleDropDownItemMarginUnitChange}
+                    spacingCombineBtn={dropDownItemMarginLink}
+                    spacingCombineBtnHandler={handleDropDownItemMarginCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <SelectControl
+                        label={__("Border Style", "frontis-blocks")}
+                        value={dropDownItemBorder}
+                        options={BORDER_STYLES}
+                        onChange={(value) => setAttributes({ dropDownItemBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")} 
+                    globalSwitcher={dropDownItemBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ dropDownItemBorderColorSwitcher: value })}
+                />
+
+                {dropDownItemBorderColorSwitcher === 'normal' && ( 
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={dropDownItemBorderColor}
+                        setGlobalColor={(value) => setAttributes({ dropDownItemBorderColor: value })}
+                    />
+                )}
+
+                {dropDownItemBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={dropDownItemBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ dropDownItemBorderHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing 
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleDropDownItemBorderUnitsHandler}
+                    spacingUnits={dropDownItemBorderUnits}
+                    spacingDesktop={dropDownItemDesktopBorder}
+                    spacingTablet={dropDownItemTabletBorder}
+                    spacingMobile={dropDownItemMobileBorder}
+                    handleSpacingUnitHandler={handleDropDownItemBorderUnitChange}
+                    spacingCombineBtn={dropDownItemBorderLink}
+                    spacingCombineBtnHandler={handleDropDownItemBorderCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing 
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleDropDownItemBorderRadiusUnitsHandler} 
+                    spacingUnits={dropDownItemBorderRadiusUnits}
+                    spacingDesktop={dropDownItemDesktopBorderRadius}
+                    spacingTablet={dropDownItemTabletBorderRadius} 
+                    spacingMobile={dropDownItemMobileBorderRadius}
+                    handleSpacingUnitHandler={handleDropDownItemBorderRadiusUnitChange}
+                    spacingCombineBtn={dropDownItemBorderRadiusLink}
+                    spacingCombineBtnHandler={handleDropDownItemBorderRadiusCombineBtn}
+                    setAttributes={setAttributes}
+                />
             </PanelBody>
         </>
 	);
