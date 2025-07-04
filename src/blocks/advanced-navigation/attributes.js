@@ -971,6 +971,76 @@ const attributes = {
 	},
 	/** End Dropdown Menu Item Border */
 
+	/** Start Dropdown Menu Icon */
+	dropDownIconSize: {
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16',
+		}
+	},
+	dropDownIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	dropDownIconColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	dropDownIconColor: {
+		type: 'string',
+	},
+	dropDownIconHoverColor: {
+		type: 'string',
+	},
+
+	dropDownIconMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	dropDownIconDesktopMargin: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownIconTabletMargin: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownIconMobileMargin: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownIconMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Dropdown Menu Icon */
+
+
     /** Start Global Setting */
 	navigationGlobalZIndex : {
 		type: "object",

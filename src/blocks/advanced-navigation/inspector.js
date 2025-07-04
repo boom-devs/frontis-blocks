@@ -255,6 +255,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dropDownItemBorderRadiusLink,
         /** End Dropdown Menu Item Border */
 
+        /** Start Dropdown Menu Icon */
+        dropDownIconSize,
+        dropDownIconSizeUnits,
+        dropDownIconColorSwitcher,
+        dropDownIconColor,
+        dropDownIconHoverColor,
+
+        dropDownIconMarginUnits,
+        dropDownIconDesktopMargin,
+        dropDownIconTabletMargin,
+        dropDownIconMobileMargin,
+        dropDownIconMarginLink,
+        /** End Dropdown Menu Icon */
 
         /** Start Global Setting */
         navigationGlobalZIndex,
@@ -1238,6 +1251,80 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const dropDownItemMobileBorderRadiusWidth = `${dropDownItemMobileBorderRadius.top}${dropDownItemBorderRadiusUnits.Mobile} ${dropDownItemMobileBorderRadius.right}${dropDownItemBorderRadiusUnits.Mobile} ${dropDownItemMobileBorderRadius.bottom}${dropDownItemBorderRadiusUnits.Mobile} ${dropDownItemMobileBorderRadius.left}${dropDownItemBorderRadiusUnits.Mobile}`;
 	/** End Dropdown Menu Border Radius */
 
+    /** Start Dropdown Menu Icon */
+	const handleDropDownIconMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( dropDownIconMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						dropDownIconDesktopMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						dropDownIconTabletMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						dropDownIconMobileMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {dropDownIconDesktopMargin: {...dropDownIconDesktopMargin, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {dropDownIconTabletMargin: {...dropDownIconTabletMargin, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {dropDownIconMobileMargin: {...dropDownIconMobileMargin, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleDropDownIconMarginCombineBtn = () => {
+		setAttributes( {dropDownIconMarginLink: !dropDownIconMarginLink} );
+	}
+
+	const handleDropDownIconMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			dropDownIconMarginUnits: {
+				...dropDownIconMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	const dropDownIconDesktopMarginWidth = `${dropDownIconDesktopMargin.top}${dropDownIconMarginUnits.Desktop} ${dropDownIconDesktopMargin.right}${dropDownIconMarginUnits.Desktop} ${dropDownIconDesktopMargin.bottom}${dropDownIconMarginUnits.Desktop} ${dropDownIconDesktopMargin.left}${dropDownIconMarginUnits.Desktop}`;
+	const dropDownIconTabletMarginWidth = `${dropDownIconTabletMargin.top}${dropDownIconMarginUnits.Tablet} ${dropDownIconTabletMargin.right}${dropDownIconMarginUnits.Tablet} ${dropDownIconTabletMargin.bottom}${dropDownIconMarginUnits.Tablet} ${dropDownIconTabletMargin.left}${dropDownIconMarginUnits.Tablet}`;
+	const dropDownIconMobileMarginWidth = `${dropDownIconMobileMargin.top}${dropDownIconMarginUnits.Mobile} ${dropDownIconMobileMargin.right}${dropDownIconMarginUnits.Mobile} ${dropDownIconMobileMargin.bottom}${dropDownIconMarginUnits.Mobile} ${dropDownIconMobileMargin.left}${dropDownIconMarginUnits.Mobile}`;
+	/** End Dropdown Menu Icon */
+
     /** Start Global padding */
 	const handleGlobalPaddingUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -1707,6 +1794,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
 
 
+        .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-icon {
+            ${dropDownIconSize.Desktop ? `width: ${dropDownIconSize.Desktop}${dropDownIconSizeUnits.Desktop};` : ''}
+            ${dropDownIconSize.Desktop ? `height: ${dropDownIconSize.Desktop}${dropDownIconSizeUnits.Desktop};` : ''}
+            ${dropDownIconColor ? `color: ${dropDownIconColor};` : ''}
+            ${dropDownIconDesktopMarginWidth && dropDownIconDesktopMargin.top? `margin: ${dropDownIconDesktopMarginWidth};` : ''}
+        }
+
+        .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-icon:hover {
+            ${dropDownIconHoverColor ? `color: ${dropDownIconHoverColor};` : ''}
+        }
+
+
         @media only screen and (max-width: 1024px) {
 
             .${blockId}.fb-advanced-navigation-main-wrapper {
@@ -1753,6 +1852,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${dropDownItemTabletMarginWidth && dropDownItemTabletMargin.top? `margin: ${dropDownItemTabletMarginWidth};` : ''} 
                 ${dropDownItemTabletBorderWidth && dropDownItemTabletBorder.top? `border-width: ${dropDownItemTabletBorderWidth};` : ''}
                 ${dropDownItemTabletBorderRadiusWidth && dropDownItemTabletBorderRadius.top? `border-radius: ${dropDownItemTabletBorderRadiusWidth};` : ''}
+            }
+
+            .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-icon {
+                ${dropDownIconSize.Tablet ? `width: ${dropDownIconSize.Tablet}${dropDownIconSizeUnits.Tablet};` : ''}
+                ${dropDownIconSize.Tablet ? `height: ${dropDownIconSize.Tablet}${dropDownIconSizeUnits.Tablet};` : ''}
+                ${dropDownIconTabletMarginWidth && dropDownIconTabletMargin.top? `margin: ${dropDownIconTabletMarginWidth};` : ''}
             }
         }
 
@@ -1802,6 +1907,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${dropDownItemMobileMarginWidth && dropDownItemMobileMargin.top? `margin: ${dropDownItemMobileMarginWidth};` : ''} 
                 ${dropDownItemMobileBorderWidth && dropDownItemMobileBorder.top? `border-width: ${dropDownItemMobileBorderWidth};` : ''}
                 ${dropDownItemMobileBorderRadiusWidth && dropDownItemMobileBorderRadius.top? `border-radius: ${dropDownItemMobileBorderRadiusWidth};` : ''}
+            }
+            .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-icon {
+                ${dropDownIconSize.Mobile ? `width: ${dropDownIconSize.Mobile}${dropDownIconSizeUnits.Mobile};` : ''}
+                ${dropDownIconSize.Mobile ? `height: ${dropDownIconSize.Mobile}${dropDownIconSizeUnits.Mobile};` : ''}
+                ${dropDownIconMobileMarginWidth && dropDownIconMobileMargin.top? `margin: ${dropDownIconMobileMarginWidth};` : ''}
             }
 
         }
@@ -2059,6 +2169,23 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dropDownItemTabletBorderRadiusWidth,
         dropDownItemMobileBorderRadiusWidth,
         /** End Dropdown Menu Item Border */
+
+        /** Start Dropdown Menu Icon */
+        dropDownIconSize,
+        dropDownIconSizeUnits,
+        dropDownIconColorSwitcher,
+        dropDownIconColor,
+        dropDownIconHoverColor,
+
+        dropDownIconMarginUnits,
+        dropDownIconDesktopMargin,
+        dropDownIconTabletMargin,
+        dropDownIconMobileMargin,
+        dropDownIconMarginLink,
+        dropDownIconDesktopMarginWidth,
+        dropDownIconTabletMarginWidth,
+        dropDownIconMobileMarginWidth,
+        /** End Dropdown Menu Icon */
 
 
         /** Start Global Setting */
@@ -2813,6 +2940,61 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     handleSpacingUnitHandler={handleDropDownItemBorderRadiusUnitChange}
                     spacingCombineBtn={dropDownItemBorderRadiusLink}
                     spacingCombineBtnHandler={handleDropDownItemBorderRadiusCombineBtn}
+                    setAttributes={setAttributes}
+                />
+            </PanelBody>
+
+            <PanelBody
+                title={__("Dropdown Icon", "frontis-blocks")}
+                initialOpen={false}
+            >
+                <FB_Range
+                    min={1}
+                    max={dropDownIconSizeUnits[deviceType] === "%" ? 100 : 100}
+                    label={__("Size", "frontis-blocks")}
+                    rangeValue={dropDownIconSize}
+                    onChangeHandler={(value) => setAttributes({ dropDownIconSize: value })}
+                    rangeUnitHandler={(value) => setAttributes({ dropDownIconSizeUnits: value })}
+                    deviceType={deviceType}
+                    units={dropDownIconSizeUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+
+                <FB_SwitcherControl
+                        label={__("Color", "frontis-blocks")}
+                        options={NORMAL_HOVER}
+                        globalSwitcher={dropDownIconColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ dropDownIconColorSwitcher: value })}
+                />
+                {dropDownIconColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={dropDownIconColor}
+                        setGlobalColor={(value) => setAttributes({ dropDownIconColor: value })}
+                    />
+                )}
+
+                {dropDownIconColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={dropDownIconHoverColor}
+                        setGlobalColor={(value) => setAttributes({ dropDownIconHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing 
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleDropDownIconMarginUnitsHandler}
+                    spacingUnits={dropDownIconMarginUnits} 
+                    spacingDesktop={dropDownIconDesktopMargin}
+                    spacingTablet={dropDownIconTabletMargin}
+                    spacingMobile={dropDownIconMobileMargin}
+                    handleSpacingUnitHandler={handleDropDownIconMarginUnitChange}
+                    spacingCombineBtn={dropDownIconMarginLink}
+                    spacingCombineBtnHandler={handleDropDownIconMarginCombineBtn}
                     setAttributes={setAttributes}
                 />
             </PanelBody>
