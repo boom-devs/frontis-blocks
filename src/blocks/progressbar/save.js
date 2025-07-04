@@ -26,9 +26,9 @@ export default function save({ attributes }) {
     
     return (
         <>
-            <div {...blockProps}>
-            <div className={`fb-parent-wrapper fb-progressbar-wrapper ${progressGlobalWraperClass}`} id={progressGlobalWraperID} data-progressbar-type={progressbarType}  data-progress={progressNumber}>
-						<div className="fb-progressbar-item">
+        	<div {...blockProps}>
+            	<div className={`fb-parent-wrapper fb-progressbar-wrapper ${progressGlobalWraperClass}`} id={progressGlobalWraperID}>
+						<div className="fb-progressbar-item" data-progressbar-type={progressbarType}  data-progress={progressNumber} data-progress-number-position={progressNumberPosition}>
 							{progressbarType === 'horizontal' && progressTextPosition === 'text-outSide' && (
 								<div className="fb-progressbar-content">
 									<RichText.Content
