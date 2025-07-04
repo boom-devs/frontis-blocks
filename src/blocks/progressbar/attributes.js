@@ -33,7 +33,16 @@ const attributes = {
     },
     progressNumber: {
         type: "number",
-        default: 95
+        default: 50
+    },
+
+    progressbarVrAlignment: {
+        type: "object",
+        default: {
+            Desktop: "left",
+            Tablet: "left",
+            Mobile: "left",
+        }
     },
 
 
@@ -207,7 +216,7 @@ const attributes = {
     },
     progressHeadingTag: {
         type: "string",
-        default: "div"
+        default: "span"
     },
     progressBarHeight: {
         type: "object",
@@ -700,109 +709,109 @@ const attributes = {
         }
     },
 
-    progressbarBgColorSwitcher: {
+    progressbarGlobalBgColorSwitcher: {
         type: "string",
         default: "normal"
     },
-    progressbarBgType: {
+    progressbarGlobalBgType: {
         type: "string",
         default: "classic"
     },
-    progressbarBgClassicColor: {
+    progressbarGlobalBgClassicColor: {
         type: "string",
-        default: "#EBF5FF"
+        default: ""
     },
-    progressbarBgGradientColor: {
+    progressbarGlobalBgGradientColor: {
         type: "string",
     },
-    progressbarBgCustomGradientSwitcher: {
+    progressbarGlobalBgCustomGradientSwitcher: {
         type: "boolean",
         default: false
     },
-    progressbarBgCustomGradientInputValue: {
+    progressbarGlobalBgCustomGradientInputValue: {
         type: "string",
         default: ""
     },
-    progressbarBgColorStyle: {
+    progressbarGlobalBgColorStyle: {
         type: "string",
         default: ""
     },
-    progressbarBgImageUrl: {
+    progressbarGlobalBgImageUrl: {
         type: "string",
         default: ""
     },
-    progressbarBgImageAlt: {
+    progressbarGlobalBgImageAlt: {
         type: "string",
         default: ""
     },
-    progressbarBgImageID: {
+    progressbarGlobalBgImageID: {
         type: "string",
         default: ""
     },
-    progressbarBgImagePosition: {
+    progressbarGlobalBgImagePosition: {
         type: "string",
         default: ""
     },
-    progressbarBgImageAttachment: {
+    progressbarGlobalBgImageAttachment: {
         type: "string",
         default: ""
     },
-    progressbarBgImageSize: {
+    progressbarGlobalBgImageSize: {
         type: "string",
         default: ""
     },
-    progressbarBgImageRepeat: {
+    progressbarGlobalBgImageRepeat: {
         type: "string",
         default: ""
     },
-    progressbarBgHoverType: {
+    progressbarGlobalBgHoverType: {
         type: "string",
         default: "classic"
     },
-    progressbarBgHoverClassicColor: {
+    progressbarGlobalBgHoverClassicColor: {
         type: "string",
-        default: "#399CFF"
+        default: ""
     },
-    progressbarBgHoverGradientColor: {
+    progressbarGlobalBgHoverGradientColor: {
         type: "string",
     },
-    progressbarBgHoverCustomGradientSwitcher: {
+    progressbarGlobalBgHoverCustomGradientSwitcher: {
         type: "boolean",
         default: false
     },
-    progressbarBgHoverCustomGradientInputValue: {
+    progressbarGlobalBgHoverCustomGradientInputValue: {
         type: "string",
         default: ""
     },
-    progressbarBgHoverColorStyle: {
+    progressbarGlobalBgHoverColorStyle: {
         type: "string",
         default: ""
     },
-    progressbarBgHoverImageUrl: {
+    progressbarGlobalBgHoverImageUrl: {
         type: "string",
         default: ""
     },
-    progressbarBgHoverImageAlt: {
+    progressbarGlobalBgHoverImageAlt: {
         type: "string",
         default: ""
     },
-    progressbarBgHoverImageID: {
+    progressbarGlobalBgHoverImageID: {
         type: "string",
         default: ""
     },
-    progressbarBgHoverImagePosition: {
+    progressbarGlobalBgHoverImagePosition: {
         type: "string",
         default: ""
     },
-    progressbarBgHoverImageAttachment: {
+    progressbarGlobalBgHoverImageAttachment: {
         type: "string",
         default: ""
     },
-    progressbarBgHoverImageSize: {
+    progressbarGlobalBgHoverImageSize: {
         type: "string",
         default: ""
     },
-    progressbarBgHoverImageRepeat: {
+    progressbarGlobalBgHoverImageRepeat: {
         type: "string",
         default: ""
     },
