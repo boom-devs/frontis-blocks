@@ -39,8 +39,6 @@ const attributes = {
         default: false
     },
 
-
-
 	/** Start Navigation Typography */
     navigationGlobalTypographyData: {
         type: "object",
@@ -674,8 +672,304 @@ const attributes = {
 		default: '',
 	},
 	/** End Dropdown Menu Box Shadow */
-	
 
+	/** Start Dropdown Menu Typography */
+	dropDownItemTypographyData: {
+		type: "object",
+		default: {}
+	},
+	dropDownItemTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	dropDownItemTypoType: {
+		type: "string",
+		default: 'default',
+	},
+	dropDownItemTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
+	dropDownItemFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	dropDownItemFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	dropDownItemFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	dropDownItemFontWeight : {
+		type: "string",
+		default: ""
+	},
+	dropDownItemFontStyle : {
+		type: "string",
+		default: ""
+	},
+	dropDownItemTextTransform : {
+		type: "string",
+		default: ""
+	},
+	dropDownItemTextDecoration : {
+		type: "string",
+		default: ""
+	},
+	dropDownItemLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	dropDownItemLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	dropDownItemLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	dropDownItemLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	
+	/** End Dropdown Menu Item Typography */ 
+
+	/** Start Dropdown Menu Color and active color */
+	dropDownItemColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	dropDownItemColor : {
+		type: "string"
+	},
+	dropDownItemHoverColor: {
+		type: 'string',
+	},
+
+	dropDownItemActiveColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	dropDownItemActiveColor : {
+		type: "string"
+	},
+	dropDownItemActiveHoverColor: {
+		type: 'string',
+	},
+	/** End Dropdown Menu Color and active color */
+
+	/** Start Dropdown Menu Item Padding and Margin */
+	dropDownItemPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	dropDownItemDesktopPadding: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownItemTabletPadding: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownItemMobilePadding: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownItemPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+
+	dropDownItemMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	dropDownItemDesktopMargin: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownItemTabletMargin: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownItemMobileMargin: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownItemMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Dropdown Menu Item Padding and Margin */
+
+	/** Start Dropdown Menu Item Border */
+	dropDownItemBorder: {
+		type: 'string',
+		default: "none",
+	},
+	dropDownItemBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	dropDownItemBorderColor: {
+		type: 'string',
+	},
+	dropDownItemBorderHoverColor: {
+		type: 'string',
+	},
+	dropDownItemBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	dropDownItemDesktopBorder: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownItemTabletBorder: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownItemMobileBorder: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownItemBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	dropDownItemBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	dropDownItemDesktopBorderRadius: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownItemTabletBorderRadius: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownItemMobileBorderRadius: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownItemBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Dropdown Menu Item Border */
 
     /** Start Global Setting */
 	navigationGlobalZIndex : {
