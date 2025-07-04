@@ -2225,9 +2225,7 @@ var EditorOptions = function EditorOptions() {
     max: 2000,
     device: device,
     onDeviceChange: handleDevice
-  }), /*#__PURE__*/React.createElement("p", {
-    className: "fb-button-upcoming"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
