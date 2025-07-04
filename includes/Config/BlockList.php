@@ -114,7 +114,7 @@ class BlockList
                 'slug' => 'advanced-navigation',
                 'title' => 'Advanced Navigation',
                 'package' => 'free',
-                'category' => 'content',
+                'category' => 'navigation',
                 'badge' => 'free',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/advanced-navigation.svg',
