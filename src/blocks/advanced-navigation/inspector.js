@@ -881,7 +881,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${navigationHoverClassicColor ? `background: ${navigationHoverClassicColor};` : ''}
             `}
         }
-
+        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content:hover {
+            text-decoration: none !important;
+        }
         .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content .wp-block-navigation-item__label {
             ${navigationGlobalTypoSwitcher.fontFamily === true && navigationGlobalTypographyData.fontFamily ? `font-family: ${navigationGlobalTypographyData.fontFamily};` : ''}
             ${navigationGlobalTypoSwitcher.fontSize === true && navigationGlobalTypographyData.fontSize ? `font-size: ${navigationGlobalTypographyData.fontSize};` : ''}
@@ -902,6 +908,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${navigationGlobalTypoSwitcher.lineHeight === false && navigationLineHeight.Desktop && navigationLineHeightUnits.Desktop ? `line-height: ${navigationLineHeight.Desktop}${navigationLineHeightUnits.Desktop};` : ''}
             
             ${navigationColor ? `color: ${navigationColor};` : ''}
+            outline: none !important;
+            box-shadow: none !important;
             transition: all .3s ease-in-out;
         }
         .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content .wp-block-navigation-item__label:hover {
