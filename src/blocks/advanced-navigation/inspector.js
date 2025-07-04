@@ -269,6 +269,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dropDownIconMarginLink,
         /** End Dropdown Menu Icon */
 
+        /** Start Hamburger Menu */
+        hamburgerMenuIconSize,
+        hamburgerMenuIconSizeUnits,
+        hamburgerMenuIconColorSwitcher,
+        hamburgerMenuIconColor,
+        hamburgerMenuIconHoverColor,
+        /** End Hamburger Menu */
+
         /** Start Global Setting */
         navigationGlobalZIndex,
 
@@ -2187,6 +2195,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dropDownIconMobileMarginWidth,
         /** End Dropdown Menu Icon */
 
+        /** Start Hamburger Menu */
+        hamburgerMenuIconSize,
+        hamburgerMenuIconSizeUnits,
+        hamburgerMenuIconColorSwitcher,
+        hamburgerMenuIconColor,
+        hamburgerMenuIconHoverColor,
+        /** End Hamburger Menu */
+
 
         /** Start Global Setting */
         navigationGlobalZIndex,
@@ -2997,6 +3013,48 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     spacingCombineBtnHandler={handleDropDownIconMarginCombineBtn}
                     setAttributes={setAttributes}
                 />
+            </PanelBody>
+
+            <PanelBody
+                title={__("Hamburger Menu", "frontis-blocks")}
+                initialOpen={false}
+            >
+                <FB_Range
+                    min={1}
+                    max={hamburgerMenuIconSizeUnits[deviceType] === "%" ? 100 : 100}
+                    label={__("Size", "frontis-blocks")}
+                    rangeValue={hamburgerMenuIconSize}
+                    onChangeHandler={(value) => setAttributes({ hamburgerMenuIconSize: value })}
+                    rangeUnitHandler={(value) => setAttributes({ hamburgerMenuIconSizeUnits: value })}
+                    deviceType={deviceType}
+                    units={hamburgerMenuIconSizeUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Color", "frontis-blocks")}
+                    globalSwitcher={hamburgerMenuIconColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ hamburgerMenuIconColorSwitcher: value })}
+                />
+
+                {hamburgerMenuIconColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={hamburgerMenuIconColor}
+                        setGlobalColor={(value) => setAttributes({ hamburgerMenuIconColor: value })}
+                    />
+                )}
+
+                {hamburgerMenuIconColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={hamburgerMenuIconHoverColor}
+                        setGlobalColor={(value) => setAttributes({ hamburgerMenuIconHoverColor: value })}
+                    />
+                )}
+
             </PanelBody>
         </>
 	);
