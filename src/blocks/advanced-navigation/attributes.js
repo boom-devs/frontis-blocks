@@ -3,8 +3,8 @@ const attributes = {
         type: "string"
     },
     blockStyle: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: '',
     },
     deviceType: {
         type: "string",
