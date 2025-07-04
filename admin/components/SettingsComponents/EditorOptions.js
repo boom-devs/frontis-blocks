@@ -235,9 +235,9 @@ const EditorOptions = () => {
           device={device}
           onDeviceChange={handleDevice}
         />
-        <p className="fb-button-upcoming">
+        {/* <p className="fb-button-upcoming">
           {__('Coming Soon', 'frontis-blocks')}
-        </p>
+        </p> */}
       </div>
 
       <div className="fb-option">
