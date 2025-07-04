@@ -1734,6 +1734,26 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${navigationGlobalTypoSwitcher.letterSpacing === false && navigationLetterSpacing.Tablet && navigationLetterSpacingUnits.Tablet ? `letter-spacing: ${navigationLetterSpacing.Tablet}${navigationLetterSpacingUnits.Tablet};` : ''}
                 ${navigationGlobalTypoSwitcher.lineHeight === false && navigationLineHeight.Tablet && navigationLineHeightUnits.Tablet ? `line-height: ${navigationLineHeight.Tablet}${navigationLineHeightUnits.Tablet};` : ''}
             }
+
+            .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container {
+                ${dropDownWrapperMinWidth.Tablet ? `min-width: ${dropDownWrapperMinWidth.Tablet}${dropDownWrapperMinWidthUnits.Tablet} !important;` : ''}
+
+                ${dropDownTabletPaddingWidth && dropDownTabletPadding.top? `padding: ${dropDownTabletPaddingWidth};` : ''}
+                ${dropDownTabletMarginWidth && dropDownTabletMargin.top? `margin: ${dropDownTabletMarginWidth};` : ''} 
+                ${dropDownTabletBorderWidth && dropDownTabletBorder.top? `border-width: ${dropDownTabletBorderWidth};` : ''}
+                ${dropDownTabletBorderRadiusWidth && dropDownTabletBorderRadius.top? `border-radius: ${dropDownTabletBorderRadiusWidth};` : ''}
+            }
+
+            .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+                ${dropDownItemTypoSwitcher.fontSize === false && dropDownItemFontSize.Tablet && dropDownItemFontSizeUnits.Tablet ? `font-size: ${dropDownItemFontSize.Tablet}${dropDownItemFontSizeUnits.Tablet};` : ''}
+                ${dropDownItemTypoSwitcher.letterSpacing === false && dropDownItemLetterSpacing.Tablet && dropDownItemLetterSpacingUnits.Tablet ? `letter-spacing: ${dropDownItemLetterSpacing.Tablet}${dropDownItemLetterSpacingUnits.Tablet};` : ''}
+                ${dropDownItemTypoSwitcher.lineHeight === false && dropDownItemLineHeight.Tablet && dropDownItemLineHeightUnits.Tablet ? `line-height: ${dropDownItemLineHeight.Tablet}${dropDownItemLineHeightUnits.Tablet};` : ''}
+                
+                ${dropDownItemTabletPaddingWidth && dropDownItemTabletPadding.top? `padding: ${dropDownItemTabletPaddingWidth};` : ''}
+                ${dropDownItemTabletMarginWidth && dropDownItemTabletMargin.top? `margin: ${dropDownItemTabletMarginWidth};` : ''} 
+                ${dropDownItemTabletBorderWidth && dropDownItemTabletBorder.top? `border-width: ${dropDownItemTabletBorderWidth};` : ''}
+                ${dropDownItemTabletBorderRadiusWidth && dropDownItemTabletBorderRadius.top? `border-radius: ${dropDownItemTabletBorderRadiusWidth};` : ''}
+            }
         }
 
         @media only screen and (max-width: 767px) {
@@ -1762,6 +1782,26 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${navigationGlobalTypoSwitcher.fontSize === false && navigationFontSize.Mobile && navigationFontSizeUnits.Mobile ? `font-size: ${navigationFontSize.Mobile}${navigationFontSizeUnits.Mobile};` : ''}
                 ${navigationGlobalTypoSwitcher.letterSpacing === false && navigationLetterSpacing.Mobile && navigationLetterSpacingUnits.Mobile ? `letter-spacing: ${navigationLetterSpacing.Mobile}${navigationLetterSpacingUnits.Mobile};` : ''}
                 ${navigationGlobalTypoSwitcher.lineHeight === false && navigationLineHeight.Mobile && navigationLineHeightUnits.Mobile ? `line-height: ${navigationLineHeight.Mobile}${navigationLineHeightUnits.Mobile};` : ''}
+            }
+
+            .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container {
+                ${dropDownWrapperMinWidth.Mobile ? `min-width: ${dropDownWrapperMinWidth.Mobile}${dropDownWrapperMinWidthUnits.Mobile} !important;` : ''}
+
+                ${dropDownMobilePaddingWidth && dropDownMobilePadding.top? `padding: ${dropDownMobilePaddingWidth};` : ''}
+                ${dropDownMobileMarginWidth && dropDownMobileMargin.top? `margin: ${dropDownMobileMarginWidth};` : ''} 
+                ${dropDownMobileBorderWidth && dropDownMobileBorder.top? `border-width: ${dropDownMobileBorderWidth};` : ''}
+                ${dropDownMobileBorderRadiusWidth && dropDownMobileBorderRadius.top? `border-radius: ${dropDownMobileBorderRadiusWidth};` : ''}
+            }
+
+            .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+                ${dropDownItemTypoSwitcher.fontSize === false && dropDownItemFontSize.Mobile && dropDownItemFontSizeUnits.Mobile ? `font-size: ${dropDownItemFontSize.Mobile}${dropDownItemFontSizeUnits.Mobile};` : ''}
+                ${dropDownItemTypoSwitcher.letterSpacing === false && dropDownItemLetterSpacing.Mobile && dropDownItemLetterSpacingUnits.Mobile ? `letter-spacing: ${dropDownItemLetterSpacing.Mobile}${dropDownItemLetterSpacingUnits.Mobile};` : ''}
+                ${dropDownItemTypoSwitcher.lineHeight === false && dropDownItemLineHeight.Mobile && dropDownItemLineHeightUnits.Mobile ? `line-height: ${dropDownItemLineHeight.Mobile}${dropDownItemLineHeightUnits.Mobile};` : ''}
+                
+                ${dropDownItemMobilePaddingWidth && dropDownItemMobilePadding.top? `padding: ${dropDownItemMobilePaddingWidth};` : ''}
+                ${dropDownItemMobileMarginWidth && dropDownItemMobileMargin.top? `margin: ${dropDownItemMobileMarginWidth};` : ''} 
+                ${dropDownItemMobileBorderWidth && dropDownItemMobileBorder.top? `border-width: ${dropDownItemMobileBorderWidth};` : ''}
+                ${dropDownItemMobileBorderRadiusWidth && dropDownItemMobileBorderRadius.top? `border-radius: ${dropDownItemMobileBorderRadiusWidth};` : ''}
             }
 
         }
