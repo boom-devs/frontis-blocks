@@ -1,17 +1,18 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
-import Edit from './edit';
-import save from './save';
-import attributes from './attributes';
-import metadata from './block.json';
-import FB_Block_Icons from "@Config/fb-blocks-icons";
 import './style.scss';
 
+/**
+ * Internal dependencies
+ */
+import Edit from './edit';
+import save from './save';
+import metadata from './block.json';
+import attributes from './attributes.js';
+import FB_Block_Icons from "@Config/fb-blocks-icons";
 
-registerBlockType(metadata.name, {
-    ...metadata,
-    icon: FB_Block_Icons.advanced_navigation,
-    attributes,
-    edit: Edit,
-    save,
-});
+registerBlockType( metadata.name, {
+	attributes,
+	icon: FB_Block_Icons.advanced_navigation,
+	edit: Edit,
+	save,
+} );
