@@ -55,6 +55,7 @@ const TemplateImport = ({ template, onClose }) => {
 					activeTab={activeTab}
 					setActiveTab={setActiveTab}
 					data={data}
+					onClose={onClose}
 				/>
 
 				{/* Content */}

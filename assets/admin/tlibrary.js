@@ -8,7 +8,7 @@
   \******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"pattern1","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png","content":"Pattern 1 content here"},{"id":"pattern2","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-1.png","content":"Pattern 2 content here"},{"id":"pattern3","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Pattern 3 content here"},{"id":"pattern4","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-2.png","content":"Pattern 4 content here"},{"id":"pattern5","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Pattern 5 content here"},{"id":"pattern6","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Pattern 6 content here"},{"id":"pattern15","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Pattern 15 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[{"id":"pattern1","title":"Pattern 1","image":"pattern1.jpg","content":"Pattern 1 content here"}]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"page1","title":"Page 1","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Page 1 content here"},{"id":"page2","title":"Page 2","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Page 2 content here"},{"id":"page3","title":"Pattern 3","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Page 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"item1","title":"Item 1","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Site 1 content here"},{"id":"item2","title":"Item 2","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Site 2 content here"},{"id":"item3","title":"Item 3","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Site 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"template-library":{"name":"Template Library","categories":[{"id":"all","name":"All","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]}]}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"pattern1","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png","content":"Pattern 1 content here","tags":["Blog","Magazine","Construction"]},{"id":"pattern2","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-1.png","content":"Pattern 2 content here","tags":["Landing","AI","Gutenberg"]},{"id":"pattern3","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Pattern 3 content here","tags":["Landing","Creative"]},{"id":"pattern4","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-2.png","content":"Pattern 4 content here","tags":["Landing","Business"]},{"id":"pattern5","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Pattern 5 content here","tags":["Landing","Portfolio"]},{"id":"pattern6","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Pattern 6 content here","tags":["Landing","Agency"]},{"id":"pattern15","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Pattern 15 content here","tags":["Landing","Startup"]}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[{"id":"pattern1","title":"Pattern 1","image":"pattern1.jpg","content":"Pattern 1 content here","tags":["Content","Block"]}]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"page1","title":"Page 1","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Page 1 content here","tags":["Landing","Business"]},{"id":"page2","title":"Page 2","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Page 2 content here","tags":["Portfolio","Creative"]},{"id":"page3","title":"Pattern 3","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Page 3 content here","tags":["Blog","Magazine"]}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"item1","title":"Item 1","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Site 1 content here","tags":["Business","Corporate"]},{"id":"item2","title":"Item 2","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Site 2 content here","tags":["Portfolio","Personal"]},{"id":"item3","title":"Item 3","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Site 3 content here","tags":["Creative","Agency"]}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"template-library":{"name":"Template Library","categories":[{"id":"all","name":"All","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]}]}}}');
 
 /***/ }),
 
@@ -72,7 +72,8 @@ var FullSiteImportConfig = function FullSiteImportConfig(_ref) {
   }, /*#__PURE__*/React.createElement(_template_header__WEBPACK_IMPORTED_MODULE_1__["default"], {
     activeTab: activeTab,
     setActiveTab: setActiveTab,
-    data: _data_json__WEBPACK_IMPORTED_MODULE_2__
+    data: _data_json__WEBPACK_IMPORTED_MODULE_2__,
+    onClose: onClose
   }), /*#__PURE__*/React.createElement("div", {
     className: "fb-full-site-import-content ".concat(isSidebarCollapsed ? 'sidebar-collapsed' : '')
   }, /*#__PURE__*/React.createElement("div", {
@@ -223,7 +224,7 @@ var FullSiteImport = function FullSiteImport(_ref) {
     onClose = _ref.onClose,
     onBack = _ref.onBack;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
-      siteName: '',
+      siteName: window.frontisBlocksAdmin && window.frontisBlocksAdmin.siteName || '',
       siteTagline: '',
       logo: null,
       importContent: true,
@@ -258,6 +259,10 @@ var FullSiteImport = function FullSiteImport(_ref) {
     _useState14 = _slicedToArray(_useState13, 2),
     isSidebarCollapsed = _useState14[0],
     setIsSidebarCollapsed = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState16 = _slicedToArray(_useState15, 2),
+    logoPreview = _useState16[0],
+    setLogoPreview = _useState16[1];
   var handleInputChange = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (field, value) {
     setFormData(function (prev) {
       return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, field, value));
@@ -343,6 +348,17 @@ var FullSiteImport = function FullSiteImport(_ref) {
       }
     }, _callee, null, [[3, 18, 22, 27]]);
   })), [template === null || template === void 0 ? void 0 : template.id, formData, onClose]);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (formData.logo) {
+      var objectUrl = URL.createObjectURL(formData.logo);
+      setLogoPreview(objectUrl);
+      return function () {
+        return URL.revokeObjectURL(objectUrl);
+      };
+    } else {
+      setLogoPreview(null);
+    }
+  }, [formData.logo]);
   if (showConfigStep) {
     return /*#__PURE__*/React.createElement(_full_site_import_config__WEBPACK_IMPORTED_MODULE_3__["default"], {
       template: template,
@@ -369,7 +385,8 @@ var FullSiteImport = function FullSiteImport(_ref) {
   }, /*#__PURE__*/React.createElement(_template_header__WEBPACK_IMPORTED_MODULE_2__["default"], {
     activeTab: activeTab,
     setActiveTab: setActiveTab,
-    data: _data_json__WEBPACK_IMPORTED_MODULE_1__
+    data: _data_json__WEBPACK_IMPORTED_MODULE_1__,
+    onClose: onClose
   }), /*#__PURE__*/React.createElement("div", {
     className: "fb-full-site-import-content ".concat(isSidebarCollapsed ? 'sidebar-collapsed' : '')
   }, /*#__PURE__*/React.createElement("div", {
@@ -437,9 +454,19 @@ var FullSiteImport = function FullSiteImport(_ref) {
     "stroke-width": "1.5",
     "stroke-linecap": "round",
     "stroke-linejoin": "round"
-  })), "Click to upload SVG, PNG, JPG or GIF (max. 800x400 px)SVG, PNG, JPG or GIF (max. 800x400 px)"), formData.logo && /*#__PURE__*/React.createElement("span", {
+  })), "Click to upload SVG, PNG, JPG or GIF (max. 800x400 px)SVG, PNG, JPG or GIF (max. 800x400 px)"), formData.logo && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
     className: "fb-file-name"
-  }, formData.logo.name)))), /*#__PURE__*/React.createElement("div", {
+  }, formData.logo.name), logoPreview && /*#__PURE__*/React.createElement("img", {
+    src: logoPreview,
+    alt: "Logo Preview",
+    className: "fb-logo-preview",
+    style: {
+      maxWidth: '120px',
+      maxHeight: '60px',
+      display: 'block',
+      marginTop: '8px'
+    }
+  }))))), /*#__PURE__*/React.createElement("div", {
     className: "fb-import-actions"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-import-step-btn-wrapper"
@@ -4481,7 +4508,9 @@ var TemplateCard = function TemplateCard(_ref) {
     title = _ref.title,
     _ref$isPro = _ref.isPro,
     isPro = _ref$isPro === void 0 ? false : _ref$isPro,
-    id = _ref.id;
+    id = _ref.id,
+    _ref$tags = _ref.tags,
+    tags = _ref$tags === void 0 ? [] : _ref$tags;
   var _window$frontisBlocks = window.frontisBlocksAdmin,
     nonce = _window$frontisBlocks.nonce,
     ajaxUrl = _window$frontisBlocks.ajaxUrl;
@@ -4512,10 +4541,8 @@ var TemplateCard = function TemplateCard(_ref) {
   }, []);
   var handleFullSiteImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     if (!isAuthenticated) {
-      // Show login modal first
       setIsLoginModalOpen(true);
     } else {
-      // User is authenticated, show import modal directly
       setIsModalOpen(true);
     }
   }, [isAuthenticated]);
@@ -4555,7 +4582,9 @@ var TemplateCard = function TemplateCard(_ref) {
   }, /*#__PURE__*/React.createElement("img", {
     src: imageUrl,
     alt: title || "Template preview"
-  }), isHovered && /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-badge ".concat(isPro ? "pro" : "free")
+  }, isPro ? "PRO" : "FREE"), isHovered && /*#__PURE__*/React.createElement("div", {
     className: "fb-template-overlay"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-overlay-content"
@@ -4569,20 +4598,32 @@ var TemplateCard = function TemplateCard(_ref) {
     viewBox: "0 0 18 18",
     fill: "none"
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M16.158 8.28375C16.386 8.60348 16.5 8.76338 16.5 9C16.5 9.23662 16.386 9.39652 16.158 9.71625C15.1334 11.1529 12.5169 14.25 9 14.25C5.48309 14.25 2.86657 11.1529 1.84203 9.71625C1.61401 9.39652 1.5 9.23662 1.5 9C1.5 8.76338 1.61401 8.60348 1.84203 8.28375C2.86657 6.84708 5.48309 3.75 9 3.75C12.5169 3.75 15.1334 6.84708 16.158 8.28375Z",
-    stroke: "#0B0C0E",
-    strokeWidth: "1.125"
+    d: "M8.32425 2.25C5.58753 2.25493 4.15442 2.32213 3.23856 3.23814C2.25018 4.22667 2.25018 5.81769 2.25018 8.99968C2.25018 12.1817 2.25018 13.7728 3.23856 14.7613C4.22692 15.7498 5.81769 15.7498 8.99925 15.7498C12.1807 15.7498 13.7715 15.7498 14.7599 14.7613C15.6757 13.8453 15.7429 12.4119 15.7478 9.67476",
+    stroke: "white",
+    "stroke-width": "1.125",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   }), /*#__PURE__*/React.createElement("path", {
-    d: "M11.25 9C11.25 7.75732 10.2427 6.75 9 6.75C7.75732 6.75 6.75 7.75732 6.75 9C6.75 10.2427 7.75732 11.25 9 11.25C10.2427 11.25 11.25 10.2427 11.25 9Z",
-    stroke: "#0B0C0E",
-    strokeWidth: "1.125"
+    d: "M15.4169 2.62224L8.28644 9.7941M15.4169 2.62224C15.0464 2.25128 12.5506 2.28586 12.023 2.29337M15.4169 2.62224C15.7874 2.99321 15.7528 5.4922 15.7453 6.02051",
+    stroke: "white",
+    "stroke-width": "1.125",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
   })))))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card-content"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card-content-top"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-badge ".concat(isPro ? "pro" : "free")
-  }, isPro ? "PRO" : "FREE"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-tags"
+  }, tags && tags.length > 0 && tags.map(function (tag, index) {
+    return /*#__PURE__*/React.createElement("span", {
+      key: index
+    }, tag, index < tags.length - 1 && ', ');
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-card-content-bottom"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "fb-template-title"
+  }, title))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-actions"
   }, /*#__PURE__*/React.createElement("button", {
     className: "fb-import-btn ".concat(isLoading ? "loading" : ""),
@@ -4593,28 +4634,7 @@ var TemplateCard = function TemplateCard(_ref) {
     size: 16
   })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Import"))), /*#__PURE__*/React.createElement("button", {
     className: "fb-template-save-my-cloud"
-  }, /*#__PURE__*/React.createElement("span", null, "Add to cloud"), /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "17",
-    height: "17",
-    viewBox: "0 0 17 17",
-    fill: "none"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M3.16675 8.5C3.16675 11.4455 5.55456 13.8333 8.50008 13.8333C11.4456 13.8333 13.8334 11.4455 13.8334 8.5",
-    stroke: "#404655",
-    strokeWidth: "1.5",
-    strokeLinecap: "round"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M8.5 3.16663V9.83329M8.5 9.83329L10.5 7.83329M8.5 9.83329L6.5 7.83329",
-    stroke: "#404655",
-    strokeWidth: "1.5",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }))))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-library-card-content-bottom"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "fb-template-title"
-  }, title)))), isLoginModalOpen && /*#__PURE__*/React.createElement(_login_signup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, /*#__PURE__*/React.createElement("span", null, "Save Library")))), isLoginModalOpen && /*#__PURE__*/React.createElement(_login_signup__WEBPACK_IMPORTED_MODULE_4__["default"], {
     onClose: handleCloseLoginModal,
     onLoginSuccess: handleLoginSuccess
   }), isModalOpen && /*#__PURE__*/React.createElement(_template_import__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -4649,9 +4669,47 @@ var TemplateLibrary = function TemplateLibrary(_ref2) {
     className: "fb-template-library-store-content"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-content-header"
-  }, /*#__PURE__*/React.createElement("h2", null, "All Pages"), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-content-header-left"
+  }, /*#__PURE__*/React.createElement("h2", null, "All Pages")), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-content-header-right"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-search-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-search-input-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-search-input-icon"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "18",
+    height: "18",
+    viewBox: "0 0 18 18",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("g", {
+    "clip-path": "url(#clip0_13116_5586)"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "8.625",
+    cy: "8.625",
+    r: "7.125",
+    stroke: "white",
+    "stroke-width": "1.5"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M13.875 13.875L16.5 16.5",
+    stroke: "white",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round"
+  })), /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
+    id: "clip0_13116_5586"
+  }, /*#__PURE__*/React.createElement("rect", {
+    width: "18",
+    height: "18",
+    fill: "white"
+  }))))), /*#__PURE__*/React.createElement("input", {
+    type: "search",
+    placeholder: "Search Blocks"
+  }))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-tags-wrapper"
-  }, /*#__PURE__*/React.createElement("span", null, "User Experience"), /*#__PURE__*/React.createElement("span", null, "UI Kits"), /*#__PURE__*/React.createElement("span", null, "Templates"), /*#__PURE__*/React.createElement("span", null, "Web Design"), /*#__PURE__*/React.createElement("span", null, "Creative Assets"), /*#__PURE__*/React.createElement("span", null, "Digital Marketing"), /*#__PURE__*/React.createElement("span", null, "Landing Pages"), /*#__PURE__*/React.createElement("span", null, "Prototyping"), /*#__PURE__*/React.createElement("span", null, "E-commerce"))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", null, "User Experience"), /*#__PURE__*/React.createElement("span", null, "UI Kits"), /*#__PURE__*/React.createElement("span", null, "Templates"), /*#__PURE__*/React.createElement("span", null, "Web Design"), /*#__PURE__*/React.createElement("span", null, "Creative Assets")))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-cards"
   }, filteredTemplates.map(function (template, index) {
     return /*#__PURE__*/React.createElement(TemplateCard, {
@@ -4659,7 +4717,8 @@ var TemplateLibrary = function TemplateLibrary(_ref2) {
       id: template.id,
       title: template.title,
       imageUrl: template.image,
-      isPro: index % 3 === 1
+      isPro: index % 3 === 1,
+      tags: template.tags || []
     });
   })));
 };
@@ -4764,7 +4823,8 @@ var TemplateLibraryIcon = function TemplateLibraryIcon() {
 var TemplateHeader = function TemplateHeader(_ref) {
   var activeTab = _ref.activeTab,
     setActiveTab = _ref.setActiveTab,
-    data = _ref.data;
+    data = _ref.data,
+    onClose = _ref.onClose;
   var schema = data.$schema;
   var tabs = Object.keys(schema).map(function (key) {
     return {
@@ -4792,38 +4852,36 @@ var TemplateHeader = function TemplateHeader(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-header-right"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-library-search-wrapper"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-search-input-wrapper"
+    className: "fb-template-library-support-btn-wrapper"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-template-library-support-btn"
   }, /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
-    width: "16",
-    height: "16",
-    viewBox: "0 0 16 16",
+    width: "20",
+    height: "20",
+    viewBox: "0 0 20 20",
     fill: "none"
-  }, /*#__PURE__*/React.createElement("g", {
-    "clip-path": "url(#clip0_12579_13019)"
-  }, /*#__PURE__*/React.createElement("circle", {
-    cx: "7.66659",
-    cy: "7.66665",
-    r: "6.33333",
-    stroke: "#6A758E",
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M14.1666 9.83773C14.1666 9.54965 14.1666 9.40565 14.21 9.27732C14.336 8.90432 14.6681 8.75965 15.0009 8.60807C15.375 8.43765 15.562 8.35248 15.7473 8.33748C15.9577 8.32047 16.1685 8.36582 16.3483 8.46673C16.5867 8.60048 16.753 8.85473 16.9232 9.06148C17.7094 10.0163 18.1024 10.4938 18.2462 11.0203C18.3623 11.4452 18.3623 11.8895 18.2462 12.3143C18.0365 13.0822 17.3737 13.726 16.8831 14.3218C16.6322 14.6266 16.5067 14.779 16.3483 14.8679C16.1685 14.9688 15.9577 15.0142 15.7473 14.9972C15.562 14.9822 15.375 14.897 15.0009 14.7266C14.6681 14.575 14.336 14.4303 14.21 14.0573C14.1666 13.929 14.1666 13.785 14.1666 13.4969V9.83773Z",
+    stroke: "white",
     "stroke-width": "1.5"
   }), /*#__PURE__*/React.createElement("path", {
-    d: "M12.3333 12.3333L14.6666 14.6666",
-    stroke: "#6A758E",
+    d: "M5.83329 9.83779C5.83329 9.47513 5.82311 9.14913 5.52988 8.89413C5.42323 8.80138 5.28183 8.73696 4.99905 8.60813C4.62497 8.43779 4.43793 8.35263 4.25259 8.33763C3.69655 8.29263 3.39739 8.67213 3.07673 9.06163C2.29058 10.0165 1.89751 10.4939 1.75368 11.0204C1.63761 11.4453 1.63761 11.8896 1.75368 12.3145C1.96346 13.0824 2.62623 13.726 3.1168 14.322C3.42603 14.6975 3.72143 15.0402 4.25259 14.9973C4.43793 14.9823 4.62497 14.897 4.99905 14.7267C5.28183 14.5979 5.42323 14.5335 5.52988 14.4407C5.82311 14.1857 5.83329 13.8598 5.83329 13.497V9.83779Z",
+    stroke: "white",
+    "stroke-width": "1.5"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M16.6667 8.74935V7.49935C16.6667 4.27769 13.682 1.66602 10 1.66602C6.31814 1.66602 3.33337 4.27769 3.33337 7.49935V8.74935",
+    stroke: "white",
     "stroke-width": "1.5",
-    "stroke-linecap": "round"
-  })), /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
-    id: "clip0_12579_13019"
-  }, /*#__PURE__*/React.createElement("rect", {
-    width: "16",
-    height: "16",
-    fill: "white"
-  })))), /*#__PURE__*/React.createElement("input", {
-    type: "search",
-    placeholder: "Search Blocks"
-  }))), /*#__PURE__*/React.createElement("div", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M16.6667 14.584C16.6667 18.334 13.3333 18.334 10 18.334",
+    stroke: "white",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })), /*#__PURE__*/React.createElement("span", null, "Talk to Support"))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-user-profile"
   }, /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
@@ -4836,7 +4894,30 @@ var TemplateHeader = function TemplateHeader(_ref) {
     "clip-rule": "evenodd",
     d: "M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10ZM12 20.5C13.784 20.5 15.4397 19.9504 16.8069 19.0112C17.4108 18.5964 17.6688 17.8062 17.3178 17.1632C16.59 15.8303 15.0902 15 11.9999 15C8.90969 15 7.40997 15.8302 6.68214 17.1632C6.33105 17.8062 6.5891 18.5963 7.19296 19.0111C8.56018 19.9503 10.2159 20.5 12 20.5Z",
     fill: "#3991FF"
-  }))))));
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-close-btn"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-template-library-close-btn",
+    onClick: function onClick() {
+      if (typeof onClose === 'function') {
+        onClose();
+        console.log("close");
+      }
+    },
+    "aria-label": "Close"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M6 18L18 6M6 6L18 18",
+    stroke: "#404655",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TemplateHeader);
 
@@ -4940,7 +5021,8 @@ var TemplateImport = function TemplateImport(_ref) {
   }, /*#__PURE__*/React.createElement(_template_header__WEBPACK_IMPORTED_MODULE_1__["default"], {
     activeTab: activeTab,
     setActiveTab: setActiveTab,
-    data: _data_json__WEBPACK_IMPORTED_MODULE_3__
+    data: _data_json__WEBPACK_IMPORTED_MODULE_3__,
+    onClose: onClose
   }), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-import-content"
   }, /*#__PURE__*/React.createElement("div", {
@@ -5272,7 +5354,10 @@ var PatternLibraryButton = function PatternLibraryButton() {
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_template_header__WEBPACK_IMPORTED_MODULE_6__["default"], {
     activeTab: activeTab,
     setActiveTab: setActiveTab,
-    data: _data_json__WEBPACK_IMPORTED_MODULE_9__
+    data: _data_json__WEBPACK_IMPORTED_MODULE_9__,
+    onClose: function onClose() {
+      return setIsVisible(false);
+    }
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-store-sidebar-wrapper"
   }, /*#__PURE__*/React.createElement(_template_sidebar__WEBPACK_IMPORTED_MODULE_7__["default"], {

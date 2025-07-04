@@ -8,7 +8,7 @@ import { ClipLoader } from "react-spinners";
 import TemplateImport from "./template-import";
 import LoginSignupModal from "./login-signup";
 
-const TemplateCard = ({ imageUrl, title, isPro = false, id }) => {
+const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [] }) => {
 	const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 	const [isLoading, setIsLoading] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,10 +23,8 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id }) => {
 
 	const handleFullSiteImport = useCallback(() => {
 		if (!isAuthenticated) {
-			// Show login modal first
 			setIsLoginModalOpen(true);
 		} else {
-			// User is authenticated, show import modal directly
 			setIsModalOpen(true);
 		}
 	}, [isAuthenticated]);
@@ -68,6 +66,9 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id }) => {
 			>
 				<div className="fb-template-library-card-img">
 					<img src={imageUrl} alt={title || "Template preview"} />
+					<div className={`fb-template-badge ${isPro ? "pro" : "free"}`}>
+						{isPro ? "PRO" : "FREE"}
+					</div>
 					{/* Hover Overlay */}
 					{isHovered && (
 						<div className="fb-template-overlay">
@@ -75,8 +76,8 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id }) => {
 								<button className="fb-demo-btn" onClick={handleDemo}>
 									<span>Demo</span>
 									<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-										<path d="M16.158 8.28375C16.386 8.60348 16.5 8.76338 16.5 9C16.5 9.23662 16.386 9.39652 16.158 9.71625C15.1334 11.1529 12.5169 14.25 9 14.25C5.48309 14.25 2.86657 11.1529 1.84203 9.71625C1.61401 9.39652 1.5 9.23662 1.5 9C1.5 8.76338 1.61401 8.60348 1.84203 8.28375C2.86657 6.84708 5.48309 3.75 9 3.75C12.5169 3.75 15.1334 6.84708 16.158 8.28375Z" stroke="#0B0C0E" strokeWidth="1.125" />
-										<path d="M11.25 9C11.25 7.75732 10.2427 6.75 9 6.75C7.75732 6.75 6.75 7.75732 6.75 9C6.75 10.2427 7.75732 11.25 9 11.25C10.2427 11.25 11.25 10.2427 11.25 9Z" stroke="#0B0C0E" strokeWidth="1.125" />
+										<path d="M8.32425 2.25C5.58753 2.25493 4.15442 2.32213 3.23856 3.23814C2.25018 4.22667 2.25018 5.81769 2.25018 8.99968C2.25018 12.1817 2.25018 13.7728 3.23856 14.7613C4.22692 15.7498 5.81769 15.7498 8.99925 15.7498C12.1807 15.7498 13.7715 15.7498 14.7599 14.7613C15.6757 13.8453 15.7429 12.4119 15.7478 9.67476" stroke="white" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round" />
+										<path d="M15.4169 2.62224L8.28644 9.7941M15.4169 2.62224C15.0464 2.25128 12.5506 2.28586 12.023 2.29337M15.4169 2.62224C15.7874 2.99321 15.7528 5.4922 15.7453 6.02051" stroke="white" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round" />
 									</svg>
 								</button>
 							</div>
@@ -86,45 +87,46 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id }) => {
 
 				<div className="fb-template-library-card-content">
 					<div className="fb-template-library-card-content-top">
-						<div className={`fb-template-badge ${isPro ? "pro" : "free"}`}>
-							{isPro ? "PRO" : "FREE"}
-						</div>
-						<div className="fb-template-actions">
-							<button
-								className={`fb-import-btn ${isLoading ? "loading" : ""}`}
-								onClick={!isLoading ? handleFullSiteImport : null}
-								disabled={isLoading}
-							>
-								{isLoading ? (
-									<>
-										<span>Importing...</span>
-										<ClipLoader color="#fff" size={16} />
-									</>
-								) : (
-									<>
-										<span>Import</span>
-									</>
-								)}
-							</button>
-
-							<button className="fb-template-save-my-cloud">
-								<span>Add to cloud</span>
-								<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-									<path d="M3.16675 8.5C3.16675 11.4455 5.55456 13.8333 8.50008 13.8333C11.4456 13.8333 13.8334 11.4455 13.8334 8.5" stroke="#404655" strokeWidth="1.5" strokeLinecap="round" />
-									<path d="M8.5 3.16663V9.83329M8.5 9.83329L10.5 7.83329M8.5 9.83329L6.5 7.83329" stroke="#404655" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-								</svg>
-							</button>
+						<div className="fb-template-tags">
+							{tags && tags.length > 0 && tags.map((tag, index) => (
+								<span key={index}>
+									{tag}
+									{index < tags.length - 1 && ', '}
+								</span>
+							))}
 						</div>
 					</div>
 					<div className="fb-template-library-card-content-bottom">
 						<h3 className="fb-template-title">{title}</h3>
 					</div>
 				</div>
+				<div className="fb-template-actions">
+					<button
+						className={`fb-import-btn ${isLoading ? "loading" : ""}`}
+						onClick={!isLoading ? handleFullSiteImport : null}
+						disabled={isLoading}
+					>
+						{isLoading ? (
+							<>
+								<span>Importing...</span>
+								<ClipLoader color="#fff" size={16} />
+							</>
+						) : (
+							<>
+								<span>Import</span>
+							</>
+						)}
+					</button>
+
+					<button className="fb-template-save-my-cloud">
+						<span>Save Library</span>
+					</button>
+				</div>
 			</div>
 
 			{/* Login/Signup Modal */}
 			{isLoginModalOpen && (
-				<LoginSignupModal 
+				<LoginSignupModal
 					onClose={handleCloseLoginModal}
 					onLoginSuccess={handleLoginSuccess}
 				/>
@@ -132,7 +134,7 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id }) => {
 
 			{/* Template Import Modal */}
 			{isModalOpen && (
-				<TemplateImport 
+				<TemplateImport
 					template={templateData}
 					onClose={handleCloseModal}
 				/>
@@ -163,17 +165,35 @@ const TemplateLibrary = ({ activeTab, activeCategory, data }) => {
 	return (
 		<div className="fb-template-library-store-content">
 			<div className="fb-template-library-content-header">
-				<h2>All Pages</h2>
-				<div className="fb-template-library-tags-wrapper">
-					<span>User Experience</span>
-					<span>UI Kits</span>
-					<span>Templates</span>
-					<span>Web Design</span>
-					<span>Creative Assets</span>
-					<span>Digital Marketing</span>
-					<span>Landing Pages</span>
-					<span>Prototyping</span>
-					<span>E-commerce</span>
+				<div className="fb-template-library-content-header-left">
+					<h2>All Pages</h2>
+				</div>
+				<div className="fb-template-library-content-header-right">
+					<div className="fb-template-library-search-wrapper">
+						<div className="fb-search-input-wrapper">
+							<div className="fb-search-input-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+									<g clip-path="url(#clip0_13116_5586)">
+										<circle cx="8.625" cy="8.625" r="7.125" stroke="white" stroke-width="1.5" />
+										<path d="M13.875 13.875L16.5 16.5" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+									</g>
+									<defs>
+										<clipPath id="clip0_13116_5586">
+											<rect width="18" height="18" fill="white" />
+										</clipPath>
+									</defs>
+								</svg>
+							</div>
+							<input type="search" placeholder="Search Blocks" />
+						</div>
+					</div>
+					<div className="fb-template-library-tags-wrapper">
+						<span>User Experience</span>
+						<span>UI Kits</span>
+						<span>Templates</span>
+						<span>Web Design</span>
+						<span>Creative Assets</span>
+					</div>
 				</div>
 			</div>
 			<div className="fb-template-library-cards">
@@ -184,6 +204,7 @@ const TemplateLibrary = ({ activeTab, activeCategory, data }) => {
 						title={template.title}
 						imageUrl={template.image}
 						isPro={index % 3 === 1}
+						tags={template.tags || []}
 					/>
 				))}
 			</div>
