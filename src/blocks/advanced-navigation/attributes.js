@@ -410,6 +410,272 @@ const attributes = {
 	/** End Box Shadow */
 
 
+	/** Start Dropdown Menu */
+	dropDownWrapperMinWidth: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	dropDownWrapperMinWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+
+	/** Start Dropdown Menu Background */
+	dropDownBgColorSwitcher : { 
+		type: "string",
+		default: "normal"
+	},
+	dropDownNormalBackgroundType: { 
+		type: "string",
+		default: "classic",
+	},
+	dropDownNormalClassicColor: {
+		type: "string",
+		default: "",
+	},
+	dropDownNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	dropDownNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	dropDownNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	dropDownHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	dropDownHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	dropDownHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	dropDownHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	dropDownHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Dropdown Menu Background */
+
+	/** Start Dropdown Menu Padding and Margin */
+	dropDownPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	dropDownDesktopPadding: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownTabletPadding: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownMobilePadding: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	dropDownMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	dropDownDesktopMargin: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownTabletMargin: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownMobileMargin: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Dropdown Menu Padding and Margin */
+
+	/** Start Dropdown Menu Border */
+	dropDownBorder: {
+		type: 'string',
+		default: "none",
+	},
+	dropDownBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	dropDownBorderColor: {
+		type: 'string',
+	},
+	dropDownBorderHoverColor: {
+		type: 'string',
+	},
+	dropDownBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	dropDownDesktopBorder: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownTabletBorder: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownMobileBorder: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	dropDownBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	dropDownDesktopBorderRadius: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownTabletBorderRadius: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownMobileBorderRadius: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	dropDownBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Dropdown Menu Border */
+
+	/** Start Dropdown Menu Box Shadow */
+	dropDownBoxShadowSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	dropDownBoxShadowValues: {
+		type: 'array',
+		default: [],
+	},
+	dropDownBoxShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	dropDownBoxShadowHoverValues: {
+		type: 'array',
+		default: [],
+	},
+	dropDownBoxShadowHoverCssValue: {
+		type: 'string',
+		default: '',
+	},
+	/** End Dropdown Menu Box Shadow */
+	
+
 
     /** Start Global Setting */
 	navigationGlobalZIndex : {
