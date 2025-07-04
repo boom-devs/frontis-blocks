@@ -20296,10 +20296,10 @@ var UNIT_TYPES = [{
   value: "em"
 }];
 var NORMAL_HOVER = [{
-  label: "Normal",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Normal", "frontis-blocks"),
   value: "normal"
 }, {
-  label: "Hover",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover", "frontis-blocks"),
   value: "hover"
 }];
 var OVERFLOW_OP = [{

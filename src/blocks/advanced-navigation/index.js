@@ -1,3 +1,4 @@
+
 import { registerBlockType } from '@wordpress/blocks';
 import './style.scss';
 
@@ -16,3 +17,4 @@ registerBlockType( metadata.name, {
 	edit: Edit,
 	save,
 } );
+	
