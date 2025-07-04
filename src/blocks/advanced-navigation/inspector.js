@@ -131,6 +131,67 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         navigationBoxShadowHoverCssValue,
         /** End Navigation Box Shadow */
 
+        /** Start Dropdown Menu */
+        dropDownWrapperMinWidth,
+        dropDownWrapperMinWidthUnits,
+        /** End Dropdown Menu */
+
+        /** Start Dropdown Menu Background */
+        dropDownBgColorSwitcher,
+        dropDownNormalBackgroundType,
+        dropDownNormalClassicColor,
+        dropDownNormalGradientColor,
+        dropDownNormalCustomGradientSwitcher,
+        dropDownNormalCustomGradientInputValue,
+
+        dropDownHoverBackgroundType,
+        dropDownHoverClassicColor,
+        dropDownHoverGradientColor,
+        dropDownHoverCustomGradientSwitcher,
+        dropDownHoverCustomGradientInputValue,
+        /** End Dropdown Menu Background */
+
+        /** Start Dropdown Menu Padding and Margin */
+        dropDownPaddingUnits, 
+        dropDownDesktopPadding,
+        dropDownTabletPadding,
+        dropDownMobilePadding,
+        dropDownPaddingLink,
+
+        dropDownMarginUnits,
+        dropDownDesktopMargin,
+        dropDownTabletMargin,
+        dropDownMobileMargin,
+        dropDownMarginLink,
+        /** End Dropdown Menu Padding and Margin */
+
+        /** Start Dropdown Menu Border and Border Radius */
+        dropDownBorder,
+        dropDownBorderColorSwitcher,
+        dropDownBorderColor,
+        dropDownBorderHoverColor,
+
+        dropDownBorderUnits,
+        dropDownDesktopBorder,
+        dropDownTabletBorder,
+        dropDownMobileBorder,
+        dropDownBorderLink,
+
+        dropDownBorderRadiusUnits,  
+        dropDownDesktopBorderRadius,
+        dropDownTabletBorderRadius,
+        dropDownMobileBorderRadius,
+        dropDownBorderRadiusLink,
+        /** End Dropdown Menu Border and Border Radius */
+
+        /** Start Dropdown Menu Box Shadow */
+        dropDownBoxShadowSwitcher,
+        dropDownBoxShadowValues,
+        dropDownBoxShadowCssValue,
+        dropDownBoxShadowHoverValues,
+        dropDownBoxShadowHoverCssValue,
+        /** End Dropdown Menu Box Shadow */
+
 
         /** Start Global Setting */
         navigationGlobalZIndex,
@@ -516,6 +577,304 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const navigationTabletBorderRadiusWidth = `${navigationTabletBorderRadius.top}${navigationBorderRadiusUnits.Tablet} ${navigationTabletBorderRadius.right}${navigationBorderRadiusUnits.Tablet} ${navigationTabletBorderRadius.bottom}${navigationBorderRadiusUnits.Tablet} ${navigationTabletBorderRadius.left}${navigationBorderRadiusUnits.Tablet}`;
 	const navigationMobileBorderRadiusWidth = `${navigationMobileBorderRadius.top}${navigationBorderRadiusUnits.Mobile} ${navigationMobileBorderRadius.right}${navigationBorderRadiusUnits.Mobile} ${navigationMobileBorderRadius.bottom}${navigationBorderRadiusUnits.Mobile} ${navigationMobileBorderRadius.left}${navigationBorderRadiusUnits.Mobile}`;
 	/** End Navigation Border Radius */  
+
+    /** Start Dropdown Menu padding */
+	const handleDropDownPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( dropDownPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						dropDownDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						dropDownTabletPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						dropDownMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {dropDownDesktopPadding: {...dropDownDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {dropDownTabletPadding: {...dropDownTabletPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {dropDownMobilePadding: {...dropDownMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleDropDownPaddingCombineBtn = () => {
+		setAttributes( {dropDownPaddingLink: !dropDownPaddingLink} );
+	}
+
+	const handleDropDownPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			dropDownPaddingUnits: {
+				...dropDownPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const dropDownDesktopPaddingWidth    = `${dropDownDesktopPadding.top}${dropDownPaddingUnits.Desktop} ${dropDownDesktopPadding.right}${dropDownPaddingUnits.Desktop} ${dropDownDesktopPadding.bottom}${dropDownPaddingUnits.Desktop} ${dropDownDesktopPadding.left}${dropDownPaddingUnits.Desktop}`;
+	const dropDownTabletPaddingWidth     = `${dropDownTabletPadding.top}${dropDownPaddingUnits.Tablet} ${dropDownTabletPadding.right}${dropDownPaddingUnits.Tablet} ${dropDownTabletPadding.bottom}${dropDownPaddingUnits.Tablet} ${dropDownTabletPadding.left}${dropDownPaddingUnits.Tablet}`;
+	const dropDownMobilePaddingWidth     = `${dropDownMobilePadding.top}${dropDownPaddingUnits.Mobile} ${dropDownMobilePadding.right}${dropDownPaddingUnits.Mobile} ${dropDownMobilePadding.bottom}${dropDownPaddingUnits.Mobile} ${dropDownMobilePadding.left}${dropDownPaddingUnits.Mobile}`;
+	/** End Dropdown Menu Padding */
+	
+	/** Start Dropdown Menu Margin */
+	const handleDropDownMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( dropDownMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						dropDownDesktopMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						dropDownTabletMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						dropDownMobileMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {dropDownDesktopMargin: {...dropDownDesktopMargin, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {dropDownTabletMargin: {...dropDownTabletMargin, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {dropDownMobileMargin: {...dropDownMobileMargin, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleDropDownMarginCombineBtn = () => {
+		setAttributes( {dropDownMarginLink: !dropDownMarginLink} );
+	}
+
+	const handleDropDownMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			dropDownMarginUnits: {
+				...dropDownMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	const dropDownDesktopMarginWidth = `${dropDownDesktopMargin.top}${dropDownMarginUnits.Desktop} ${dropDownDesktopMargin.right}${dropDownMarginUnits.Desktop} ${dropDownDesktopMargin.bottom}${dropDownMarginUnits.Desktop} ${dropDownDesktopMargin.left}${dropDownMarginUnits.Desktop}`;
+	const dropDownTabletMarginWidth = `${dropDownTabletMargin.top}${dropDownMarginUnits.Tablet} ${dropDownTabletMargin.right}${dropDownMarginUnits.Tablet} ${dropDownTabletMargin.bottom}${dropDownMarginUnits.Tablet} ${dropDownTabletMargin.left}${dropDownMarginUnits.Tablet}`;
+	const dropDownMobileMarginWidth = `${dropDownMobileMargin.top}${dropDownMarginUnits.Mobile} ${dropDownMobileMargin.right}${dropDownMarginUnits.Mobile} ${dropDownMobileMargin.bottom}${dropDownMarginUnits.Mobile} ${dropDownMobileMargin.left}${dropDownMarginUnits.Mobile}`;
+	/** End Dropdown Menu Margin */
+
+	/** Start Dropdown Menu border */
+	const handleDropDownBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( dropDownBorderLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+
+						dropDownDesktopBorder: { 
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						dropDownTabletBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						dropDownMobileBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {dropDownDesktopBorder: {...dropDownDesktopBorder, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {dropDownTabletBorder: {...dropDownTabletBorder, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {dropDownMobileBorder: {...dropDownMobileBorder, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleDropDownBorderCombineBtn = () => {
+		setAttributes( {dropDownBorderLink: !dropDownBorderLink} );
+	}
+
+	const handleDropDownBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			dropDownBorderUnits: {
+				...dropDownBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const dropDownDesktopBorderWidth = `${dropDownDesktopBorder.top}${dropDownBorderUnits.Desktop} ${dropDownDesktopBorder.right}${dropDownBorderUnits.Desktop} ${dropDownDesktopBorder.bottom}${dropDownBorderUnits.Desktop} ${dropDownDesktopBorder.left}${dropDownBorderUnits.Desktop}`;
+	const dropDownTabletBorderWidth = `${dropDownTabletBorder.top}${dropDownBorderUnits.Tablet} ${dropDownTabletBorder.right}${dropDownBorderUnits.Tablet} ${dropDownTabletBorder.bottom}${dropDownBorderUnits.Tablet} ${dropDownTabletBorder.left}${dropDownBorderUnits.Tablet}`;
+	const dropDownMobileBorderWidth = `${dropDownMobileBorder.top}${dropDownBorderUnits.Mobile} ${dropDownMobileBorder.right}${dropDownBorderUnits.Mobile} ${dropDownMobileBorder.bottom}${dropDownBorderUnits.Mobile} ${dropDownMobileBorder.left}${dropDownBorderUnits.Mobile}`;
+	/** End Dropdown Menu Border */
+
+
+	/** Start Dropdown Menu border radius*/
+	const handleDropDownBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( dropDownBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( { 
+						dropDownDesktopBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						dropDownTabletBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						dropDownMobileBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {dropDownDesktopBorderRadius: {...dropDownDesktopBorderRadius, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {dropDownTabletBorderRadius: {...dropDownTabletBorderRadius, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {dropDownMobileBorderRadius: {...dropDownMobileBorderRadius, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleDropDownBorderRadiusCombineBtn = () => {
+		setAttributes( {dropDownBorderRadiusLink: !dropDownBorderRadiusLink} );
+	}
+
+	const handleDropDownBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			dropDownBorderRadiusUnits: {
+				...dropDownBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** end Navigation border */ 
+
+	/** End Navigation Border Radius */
+	const dropDownDesktopBorderRadiusWidth = `${dropDownDesktopBorderRadius.top}${dropDownBorderRadiusUnits.Desktop} ${dropDownDesktopBorderRadius.right}${dropDownBorderRadiusUnits.Desktop} ${dropDownDesktopBorderRadius.bottom}${dropDownBorderRadiusUnits.Desktop} ${dropDownDesktopBorderRadius.left}${dropDownBorderRadiusUnits.Desktop}`;
+	const dropDownTabletBorderRadiusWidth = `${dropDownTabletBorderRadius.top}${dropDownBorderRadiusUnits.Tablet} ${dropDownTabletBorderRadius.right}${dropDownBorderRadiusUnits.Tablet} ${dropDownTabletBorderRadius.bottom}${dropDownBorderRadiusUnits.Tablet} ${dropDownTabletBorderRadius.left}${dropDownBorderRadiusUnits.Tablet}`;
+	const dropDownMobileBorderRadiusWidth = `${dropDownMobileBorderRadius.top}${dropDownBorderRadiusUnits.Mobile} ${dropDownMobileBorderRadius.right}${dropDownBorderRadiusUnits.Mobile} ${dropDownMobileBorderRadius.bottom}${dropDownBorderRadiusUnits.Mobile} ${dropDownMobileBorderRadius.left}${dropDownBorderRadiusUnits.Mobile}`;
+	/** End Dropdown Menu Border Radius */  
 
     /** Start Global padding */
 	const handleGlobalPaddingUnitChange = ( event, position ) => {
@@ -924,6 +1283,33 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${navigationActiveHoverColor ? `color: ${navigationActiveHoverColor};` : ''}
         }
 
+        .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container {
+            ${dropDownWrapperMinWidth.Desktop ? `min-width: ${dropDownWrapperMinWidth.Desktop}${dropDownWrapperMinWidthUnits.Desktop} !important;` : ''}
+
+            ${dropDownDesktopPaddingWidth && dropDownDesktopPadding.top? `padding: ${dropDownDesktopPaddingWidth};` : ''}
+            ${dropDownDesktopMarginWidth && dropDownDesktopMargin.top? `margin: ${dropDownDesktopMarginWidth};` : ''} 
+            ${dropDownBorder ? `border: ${dropDownBorder};` : ''} 
+            ${dropDownBorderColor ? `border-color: ${dropDownBorderColor};` : ''}
+            ${dropDownDesktopBorderWidth && dropDownDesktopBorder.top? `border-width: ${dropDownDesktopBorderWidth};` : ''}
+            ${dropDownDesktopBorderRadiusWidth && dropDownDesktopBorderRadius.top? `border-radius: ${dropDownDesktopBorderRadiusWidth};` : ''}
+            ${dropDownBoxShadowCssValue ? `box-shadow: ${dropDownBoxShadowCssValue};` : ''}
+
+            ${dropDownNormalBackgroundType === 'gradient' ? `  
+                ${dropDownNormalCustomGradientSwitcher && dropDownNormalCustomGradientInputValue ? `background: ${dropDownNormalCustomGradientInputValue};` : `background: ${dropDownNormalGradientColor};`}
+            `: `
+                ${dropDownNormalClassicColor ? `background: ${dropDownNormalClassicColor};` : ''}
+            `}
+        }
+
+        .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container:hover {
+            ${dropDownBoxShadowHoverCssValue ? `box-shadow: ${dropDownBoxShadowHoverCssValue};` : ''}
+            ${dropDownHoverBackgroundType === 'gradient' ? `  
+                ${dropDownHoverCustomGradientSwitcher && dropDownHoverCustomGradientInputValue ? `background: ${dropDownHoverCustomGradientInputValue};` : `background: ${dropDownHoverGradientColor};`}
+            `: `
+                ${dropDownHoverClassicColor ? `background: ${dropDownHoverClassicColor};` : ''}
+            `}
+        }
+
 
         @media only screen and (max-width: 1024px) {
 
@@ -1090,6 +1476,78 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         navigationBoxShadowHoverValues,
         navigationBoxShadowHoverCssValue,
         /** End Navigation Box Shadow */
+
+        /** Start Dropdown Menu */
+        dropDownWrapperMinWidth,
+        dropDownWrapperMinWidthUnits,
+        /** End Dropdown Menu */
+
+        /** Start Dropdown Menu Background */
+        dropDownBgColorSwitcher,
+        dropDownNormalBackgroundType,
+        dropDownNormalClassicColor,
+        dropDownNormalGradientColor,
+        dropDownNormalCustomGradientSwitcher,
+        dropDownNormalCustomGradientInputValue,
+
+        dropDownHoverBackgroundType,
+        dropDownHoverClassicColor,
+        dropDownHoverGradientColor,
+        dropDownHoverCustomGradientSwitcher,
+        dropDownHoverCustomGradientInputValue,
+        /** End Dropdown Menu Background */
+
+        /** Start Dropdown Menu Padding and Margin */
+        dropDownPaddingUnits, 
+        dropDownDesktopPadding,
+        dropDownTabletPadding,
+        dropDownMobilePadding,
+        dropDownPaddingLink,
+        dropDownDesktopPaddingWidth,
+        dropDownTabletPaddingWidth,
+        dropDownMobilePaddingWidth, 
+        dropDownMarginUnits,
+        dropDownDesktopMargin,
+        dropDownTabletMargin,
+        dropDownMobileMargin,
+        dropDownMarginLink,
+        dropDownDesktopMarginWidth,
+        dropDownTabletMarginWidth,
+        dropDownMobileMarginWidth,
+        /** End Dropdown Menu Padding and Margin */
+
+        /** Start Dropdown Menu Border and Border Radius */
+        dropDownBorder,
+        dropDownBorderColorSwitcher,
+        dropDownBorderColor,
+        dropDownBorderHoverColor,
+
+        dropDownBorderUnits,
+        dropDownDesktopBorder,
+        dropDownTabletBorder,
+        dropDownMobileBorder,
+        dropDownBorderLink,
+        dropDownDesktopBorderWidth,
+        dropDownTabletBorderWidth,
+        dropDownMobileBorderWidth,
+
+        dropDownBorderRadiusUnits,  
+        dropDownDesktopBorderRadius,
+        dropDownTabletBorderRadius,
+        dropDownMobileBorderRadius,
+        dropDownBorderRadiusLink,
+        dropDownDesktopBorderRadiusWidth,
+        dropDownTabletBorderRadiusWidth,
+        dropDownMobileBorderRadiusWidth,
+        /** End Dropdown Menu Border and Border Radius */
+
+        /** Start Dropdown Menu Box Shadow */
+        dropDownBoxShadowSwitcher,
+        dropDownBoxShadowValues,
+        dropDownBoxShadowCssValue,
+        dropDownBoxShadowHoverValues,
+        dropDownBoxShadowHoverCssValue,
+        /** End Dropdown Menu Box Shadow */
 
 
         /** Start Global Setting */
@@ -1502,6 +1960,160 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         onBoxShadowChange={(value) => setAttributes({ navigationBoxShadowHoverValues: value })}
                         initialShadowValue={navigationBoxShadowHoverValues}
                         onBoxShadowStyleChange={(value) => setAttributes({ navigationBoxShadowHoverCssValue: value })}
+                    />
+                )}
+            </PanelBody>
+            <PanelBody title={__("Dropdown Menu", "frontis-blocks")} initialOpen={false}>
+                <FB_Range
+                    min={1}
+                    max={dropDownWrapperMinWidthUnits[deviceType] === "%" ? 100 : 1000}
+                    label={__("Width", "frontis-blocks")}
+                    rangeValue={dropDownWrapperMinWidth}
+                    onChangeHandler={(value) => setAttributes({ dropDownWrapperMinWidth: value })}
+                    rangeUnitHandler={(value) => setAttributes({ dropDownWrapperMinWidthUnits: value })}
+                    deviceType={deviceType}
+                    units={dropDownWrapperMinWidthUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+
+                <FB_BackgroundColorControl
+                    label={__("Background Color", "frontis-blocks")}
+                    bgColorSwitcher={dropDownBgColorSwitcher}  
+                    setBgColorSwitcher={(value) => setAttributes({ dropDownBgColorSwitcher: value })}
+                    
+                    normalBackgroundType={dropDownNormalBackgroundType} 
+                    setNormalBackgroundType={(value) => setAttributes({ dropDownNormalBackgroundType: value })}
+                    normalClassicColor={dropDownNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ dropDownNormalClassicColor: value })}
+                    normalGradientColor={dropDownNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ dropDownNormalGradientColor: value })}
+                    normalCustomGradientSwitcher={dropDownNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ dropDownNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={dropDownNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ dropDownNormalCustomGradientInputValue: value })}
+                    
+                    hoverBackgroundType={dropDownHoverBackgroundType} 
+                    setHoverBackgroundType={(value) => setAttributes({ dropDownHoverBackgroundType: value })}
+                    hoverClassicColor={dropDownHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ dropDownHoverClassicColor: value })}
+                    hoverGradientColor={dropDownHoverGradientColor} 
+                    setHoverGradientColor={(value) => setAttributes({ dropDownHoverGradientColor: value })}
+                    hoverCustomGradientSwitcher={dropDownHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ dropDownHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={dropDownHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ dropDownHoverCustomGradientInputValue: value })}
+
+                    isBackgroundImage={false}
+
+                />
+
+                <FB_Spacing 
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleDropDownPaddingUnitsHandler}  
+                    spacingUnits={dropDownPaddingUnits}
+                    spacingDesktop={dropDownDesktopPadding}
+                    spacingTablet={dropDownTabletPadding}
+                    spacingMobile={dropDownMobilePadding}
+                    handleSpacingUnitHandler={handleDropDownPaddingUnitChange}
+                    spacingCombineBtn={dropDownPaddingLink}
+                    spacingCombineBtnHandler={handleDropDownPaddingCombineBtn}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing 
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleDropDownMarginUnitsHandler}
+                    spacingUnits={dropDownMarginUnits} 
+                    spacingDesktop={dropDownDesktopMargin}
+                    spacingTablet={dropDownTabletMargin}
+                    spacingMobile={dropDownMobileMargin}
+                    handleSpacingUnitHandler={handleDropDownMarginUnitChange}
+                    spacingCombineBtn={dropDownMarginLink}
+                    spacingCombineBtnHandler={handleDropDownMarginCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <SelectControl
+                        label={__("Border Style", "frontis-blocks")}
+                        value={dropDownBorder}
+                        options={BORDER_STYLES}
+                        onChange={(value) => setAttributes({ dropDownBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")} 
+                    globalSwitcher={dropDownBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ dropDownBorderColorSwitcher: value })}
+                />
+
+                {dropDownBorderColorSwitcher === 'normal' && ( 
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={dropDownBorderColor}
+                        setGlobalColor={(value) => setAttributes({ dropDownBorderColor: value })}
+                    />
+                )}
+
+                {dropDownBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={dropDownBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ dropDownBorderHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing 
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleDropDownBorderUnitsHandler}
+                    spacingUnits={dropDownBorderUnits}
+                    spacingDesktop={dropDownDesktopBorder}
+                    spacingTablet={dropDownTabletBorder}
+                    spacingMobile={dropDownMobileBorder}
+                    handleSpacingUnitHandler={handleDropDownBorderUnitChange}
+                    spacingCombineBtn={dropDownBorderLink}
+                    spacingCombineBtnHandler={handleDropDownBorderCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing 
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleDropDownBorderRadiusUnitsHandler} 
+                    spacingUnits={dropDownBorderRadiusUnits}
+                    spacingDesktop={dropDownDesktopBorderRadius}
+                    spacingTablet={dropDownTabletBorderRadius} 
+                    spacingMobile={dropDownMobileBorderRadius}
+                    handleSpacingUnitHandler={handleDropDownBorderRadiusUnitChange}
+                    spacingCombineBtn={dropDownBorderRadiusLink}
+                    spacingCombineBtnHandler={handleDropDownBorderRadiusCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    globalSwitcher={dropDownBoxShadowSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ dropDownBoxShadowSwitcher: value })}
+                />
+
+                {dropDownBoxShadowSwitcher === 'normal' && (
+                    <FB_BoxShadowControl
+                        label={__("Normal Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ dropDownBoxShadowValues: value })}
+                        initialShadowValue={dropDownBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ dropDownBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {dropDownBoxShadowSwitcher === 'hover' && (
+                    <FB_BoxShadowControl
+                        label={__("Hover Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ dropDownBoxShadowHoverValues: value })}
+                        initialShadowValue={dropDownBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ dropDownBoxShadowHoverCssValue: value })}
                     />
                 )}
             </PanelBody>
