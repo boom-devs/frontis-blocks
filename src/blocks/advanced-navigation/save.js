@@ -25,7 +25,7 @@ export default function save({ attributes }) {
         <div {...blockProps}>
             <div className={`advanced-navigation-wrapper ${navigationGlobalWraperClass}`} id={navigationGlobalWraperID}>
                 <div
-                    className={`${blockId} advanced-navigation-inner-wrapper ${navigationLayout} ${
+                    className={`advanced-navigation-inner-wrapper ${navigationLayout} ${
                         navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign
                     } ${showDropdownIcon ? "" : "remove-dropdown-icon"} ${
                         hamburgerMenuIconType === "icon" ? "responsive-icon" : "responsive-text"

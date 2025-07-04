@@ -10,8 +10,8 @@ export const UNIT_TYPES = [
 ];
 
 export const NORMAL_HOVER = [
-	{ label: "Normal", value: "normal" },
-	{ label: "Hover", value: "hover" },
+	{ label: __("Normal", "frontis-blocks"), value: "normal" },
+	{ label: __("Hover", "frontis-blocks"), value: "hover" },
 ];
 
 export const OVERFLOW_OP = [

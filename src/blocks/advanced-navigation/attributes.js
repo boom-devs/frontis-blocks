@@ -41,6 +41,353 @@ const attributes = {
 
 
 
+	/** Start Navigation Typography */
+    navigationGlobalTypographyData: {
+        type: "object",
+        default: {}
+    },
+    navigationGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    navigationGlobalTypoType: {
+        type: "string",
+        default: 'default',
+    },
+    navigationGlobalTypoOption: {
+        type: "object",
+        default: {label: 'Default', value: 'default'},
+    },
+    navigationFontFamily: {
+        type: "string",
+        default: "Default",
+    },
+    navigationFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	navigationFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    navigationFontWeight : {
+        type: "string",
+        default: ""
+    },
+    navigationFontStyle : {
+        type: "string",
+        default: ""
+    },
+    navigationTextTransform : {
+        type: "string",
+        default: ""
+    },
+    navigationTextDecoration : {
+        type: "string",
+        default: ""
+    },
+    navigationLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	navigationLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    navigationLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	navigationLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	
+	/** End Navigation Typography */ 
+
+	/** Start Navigation Color and active color */
+	navigationColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    navigationColor : {
+        type: "string"
+    },
+    navigationHoverColor: {
+        type: 'string',
+    },
+
+	navigationActiveColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    navigationActiveColor : {
+        type: "string"
+    },
+    navigationActiveHoverColor: {
+        type: 'string',
+    },
+	/** End Navigation Color and active color */
+
+	/** Start Navigation Background */
+	navigationBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	navigationNormalBackgroundType: { 
+		type: "string",
+		default: "classic",
+	},
+	navigationNormalClassicColor: {
+		type: "string",
+		default: "",
+	},
+	navigationNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	navigationNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	navigationNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	navigationHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	navigationHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	navigationHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	navigationHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	navigationHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Navigation Background */
+
+	/** Start Navigation Padding and Margin */
+	navigationPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    navigationDesktopPadding: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    navigationTabletPadding: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    navigationMobilePadding: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    navigationPaddingLink : {
+        type : "boolean",
+        default: true
+    },
+    navigationMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    navigationDesktopMargin: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    navigationTabletMargin: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    navigationMobileMargin: {
+        type: "object", 
+        default: {
+            top: "",
+            bottom: "",
+            left: "",
+            right: "",
+        },
+    },
+    navigationMarginLink : {
+        type : "boolean",
+        default: true
+    },
+    /** End Navigation Padding and Margin */
+
+	/** Start Navigation Border */
+	navigationBorder: {
+		type: 'string',
+		default: "none",
+	},
+	navigationBorderColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	navigationBorderColor: {
+		type: 'string',
+	},
+	navigationBorderHoverColor: {
+		type: 'string',
+	},
+	navigationBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	navigationDesktopBorder: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	navigationTabletBorder: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	navigationMobileBorder: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	navigationBorderLink : {
+		type : "boolean",
+		default: true
+	},
+	navigationBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	navigationDesktopBorderRadius: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	navigationTabletBorderRadius: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	navigationMobileBorderRadius: {
+		type: "object", 
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	navigationBorderRadiusLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Navigation Border */
+
+
+
     /** Start Global Setting */
 	navigationGlobalZIndex : {
 		type: "object",

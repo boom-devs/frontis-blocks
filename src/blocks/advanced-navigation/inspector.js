@@ -9,6 +9,7 @@ import {
 } from '@wordpress/components';
 
 import { 
+    NORMAL_HOVER,
     OVERFLOW_OP,
     BORDER_STYLES,
     NAVIGATION_LAYOUT,
@@ -47,6 +48,80 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         navigationVerticalAlign, 
         hamburgerMenuIconType,
 
+        /** Start Navigation Typography */
+        navigationGlobalTypographyData,
+        navigationGlobalTypoSwitcher,
+        navigationGlobalTypoType,
+        navigationGlobalTypoOption,
+        navigationFontFamily,
+        navigationFontSize,
+        navigationFontSizeUnits,
+        navigationFontWeight,
+        navigationFontStyle,
+        navigationTextTransform,
+        navigationTextDecoration,
+        navigationLetterSpacing,
+        navigationLetterSpacingUnits,
+        navigationLineHeight,
+        navigationLineHeightUnits,
+        /** End Navigation Typography */
+
+        /** Start Navigation Color and active color */
+        navigationColorSwitcher,
+        navigationColor,
+        navigationHoverColor,
+        navigationActiveColorSwitcher,
+        navigationActiveColor,
+        navigationActiveHoverColor,
+        /** End Navigation Color and active color */
+
+        /** Start Navigation Background */
+        navigationBgColorSwitcher,
+        navigationNormalBackgroundType,
+        navigationNormalClassicColor,
+        navigationNormalGradientColor,
+        navigationNormalCustomGradientSwitcher,
+        navigationNormalCustomGradientInputValue,
+
+        navigationHoverBackgroundType,
+        navigationHoverClassicColor,
+        navigationHoverGradientColor,
+        navigationHoverCustomGradientSwitcher,
+        navigationHoverCustomGradientInputValue,
+        /** End Navigation Background */
+
+        /** Start Navigation Padding and Margin */
+        navigationPaddingUnits,
+        navigationDesktopPadding,
+        navigationTabletPadding,
+        navigationMobilePadding,
+        navigationPaddingLink,
+
+        navigationMarginUnits,
+        navigationDesktopMargin,
+        navigationTabletMargin,
+        navigationMobileMargin,
+        navigationMarginLink,
+        /** End Navigation Padding and Margin */
+
+        /** Start Navigation Border and Border Radius */
+        navigationBorder,
+        navigationBorderColorSwitcher,
+        navigationBorderColor,
+        navigationBorderHoverColor,
+
+        navigationBorderUnits,
+        navigationDesktopBorder,
+        navigationTabletBorder,
+        navigationMobileBorder,
+        navigationBorderLink,
+
+        navigationBorderRadiusUnits,
+        navigationDesktopBorderRadius,
+        navigationTabletBorderRadius,
+        navigationMobileBorderRadius,
+        navigationBorderRadiusLink,
+        /** End Navigation Border and Border Radius */
 
 
         /** Start Global Setting */
@@ -136,9 +211,303 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
     }, [clientId]);
 
+    /** Start Navigation padding */
+	const handleNavigationPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( navigationPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						navigationDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						navigationTabletPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						navigationMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {navigationDesktopPadding: {...navigationDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {navigationTabletPadding: {...navigationTabletPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {navigationMobilePadding: {...navigationMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleNavigationPaddingCombineBtn = () => {
+		setAttributes( {navigationPaddingLink: !navigationPaddingLink} );
+	}
+
+	const handleNavigationPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			navigationPaddingUnits: {
+				...navigationPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const navigationDesktopPaddingWidth    = `${navigationDesktopPadding.top}${navigationPaddingUnits.Desktop} ${navigationDesktopPadding.right}${navigationPaddingUnits.Desktop} ${navigationDesktopPadding.bottom}${navigationPaddingUnits.Desktop} ${navigationDesktopPadding.left}${navigationPaddingUnits.Desktop}`;
+	const navigationTabletPaddingWidth     = `${navigationTabletPadding.top}${navigationPaddingUnits.Tablet} ${navigationTabletPadding.right}${navigationPaddingUnits.Tablet} ${navigationTabletPadding.bottom}${navigationPaddingUnits.Tablet} ${navigationTabletPadding.left}${navigationPaddingUnits.Tablet}`;
+	const navigationMobilePaddingWidth     = `${navigationMobilePadding.top}${navigationPaddingUnits.Mobile} ${navigationMobilePadding.right}${navigationPaddingUnits.Mobile} ${navigationMobilePadding.bottom}${navigationPaddingUnits.Mobile} ${navigationMobilePadding.left}${navigationPaddingUnits.Mobile}`;
+	/** End Navigation Padding */
+	
+	/** Start Navigation Margin */
+	const handleNavigationMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( navigationMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						navigationDesktopMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						navigationTabletMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						navigationMobileMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {navigationDesktopMargin: {...navigationDesktopMargin, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {navigationTabletMargin: {...navigationTabletMargin, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {navigationMobileMargin: {...navigationMobileMargin, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleNavigationMarginCombineBtn = () => {
+		setAttributes( {navigationMarginLink: !navigationMarginLink} );
+	}
+
+	const handleNavigationMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			navigationMarginUnits: {
+				...navigationMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+
+	const navigationDesktopMarginWidth = `${navigationDesktopMargin.top}${navigationMarginUnits.Desktop} ${navigationDesktopMargin.right}${navigationMarginUnits.Desktop} ${navigationDesktopMargin.bottom}${navigationMarginUnits.Desktop} ${navigationDesktopMargin.left}${navigationMarginUnits.Desktop}`;
+	const navigationTabletMarginWidth = `${navigationTabletMargin.top}${navigationMarginUnits.Tablet} ${navigationTabletMargin.right}${navigationMarginUnits.Tablet} ${navigationTabletMargin.bottom}${navigationMarginUnits.Tablet} ${navigationTabletMargin.left}${navigationMarginUnits.Tablet}`;
+	const navigationMobileMarginWidth = `${navigationMobileMargin.top}${navigationMarginUnits.Mobile} ${navigationMobileMargin.right}${navigationMarginUnits.Mobile} ${navigationMobileMargin.bottom}${navigationMarginUnits.Mobile} ${navigationMobileMargin.left}${navigationMarginUnits.Mobile}`;
+	/** End Navigation Margin */
+
+	/** Start Navigation border */
+	const handleNavigationBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( navigationBorderLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+
+						navigationDesktopBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						navigationTabletBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						navigationMobileBorder: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {navigationDesktopBorder: {...navigationDesktopBorder, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {navigationTabletBorder: {...navigationTabletBorder, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {navigationMobileBorder: {...navigationMobileBorder, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleNavigationBorderCombineBtn = () => {
+		setAttributes( {navigationBorderLink: !navigationBorderLink} );
+	}
+
+	const handleNavigationBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			navigationBorderUnits: {
+				...navigationBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const navigationDesktopBorderWidth = `${navigationDesktopBorder.top}${navigationBorderUnits.Desktop} ${navigationDesktopBorder.right}${navigationBorderUnits.Desktop} ${navigationDesktopBorder.bottom}${navigationBorderUnits.Desktop} ${navigationDesktopBorder.left}${navigationBorderUnits.Desktop}`;
+	const navigationTabletBorderWidth = `${navigationTabletBorder.top}${navigationBorderUnits.Tablet} ${navigationTabletBorder.right}${navigationBorderUnits.Tablet} ${navigationTabletBorder.bottom}${navigationBorderUnits.Tablet} ${navigationTabletBorder.left}${navigationBorderUnits.Tablet}`;
+	const navigationMobileBorderWidth = `${navigationMobileBorder.top}${navigationBorderUnits.Mobile} ${navigationMobileBorder.right}${navigationBorderUnits.Mobile} ${navigationMobileBorder.bottom}${navigationBorderUnits.Mobile} ${navigationMobileBorder.left}${navigationBorderUnits.Mobile}`;
+	/** End Navigation Border */
 
 
+	/** Start Navigation border radius*/
+	const handleNavigationBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( navigationBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( { 
+						navigationDesktopBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						navigationTabletBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						navigationMobileBorderRadius: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {navigationDesktopBorderRadius: {...navigationDesktopBorderRadius, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {navigationTabletBorderRadius: {...navigationTabletBorderRadius, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {navigationMobileBorderRadius: {...navigationMobileBorderRadius, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
 
+	}
+
+	const handleNavigationBorderRadiusCombineBtn = () => {
+		setAttributes( {navigationBorderRadiusLink: !navigationBorderRadiusLink} );
+	}
+
+	const handleNavigationBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			navigationBorderRadiusUnits: {
+				...navigationBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** end Navigation border */ 
+
+	/** End Navigation Border Radius */
+	const navigationDesktopBorderRadiusWidth = `${navigationDesktopBorderRadius.top}${navigationBorderRadiusUnits.Desktop} ${navigationDesktopBorderRadius.right}${navigationBorderRadiusUnits.Desktop} ${navigationDesktopBorderRadius.bottom}${navigationBorderRadiusUnits.Desktop} ${navigationDesktopBorderRadius.left}${navigationBorderRadiusUnits.Desktop}`;
+	const navigationTabletBorderRadiusWidth = `${navigationTabletBorderRadius.top}${navigationBorderRadiusUnits.Tablet} ${navigationTabletBorderRadius.right}${navigationBorderRadiusUnits.Tablet} ${navigationTabletBorderRadius.bottom}${navigationBorderRadiusUnits.Tablet} ${navigationTabletBorderRadius.left}${navigationBorderRadiusUnits.Tablet}`;
+	const navigationMobileBorderRadiusWidth = `${navigationMobileBorderRadius.top}${navigationBorderRadiusUnits.Mobile} ${navigationMobileBorderRadius.right}${navigationBorderRadiusUnits.Mobile} ${navigationMobileBorderRadius.bottom}${navigationBorderRadiusUnits.Mobile} ${navigationMobileBorderRadius.left}${navigationBorderRadiusUnits.Mobile}`;
+	/** End Navigation Border Radius */  
 
     /** Start Global padding */
 	const handleGlobalPaddingUnitChange = ( event, position ) => {
@@ -480,6 +849,63 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${navigationGlobalBoxShadowHoverCssValue ? `box-shadow: ${navigationGlobalBoxShadowHoverCssValue};` : ''}
         }
 
+        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item {
+            ${navigationDesktopPaddingWidth && navigationDesktopPadding.top? `padding: ${navigationDesktopPaddingWidth};` : ''}
+            ${navigationDesktopMarginWidth && navigationDesktopMargin.top? `margin: ${navigationDesktopMarginWidth};` : ''} 
+            ${navigationBorder ? `border: ${navigationBorder};` : ''} 
+            ${navigationBorderColor ? `border-color: ${navigationBorderColor};` : ''}
+            ${navigationDesktopBorderWidth && navigationDesktopBorder.top? `border-width: ${navigationDesktopBorderWidth};` : ''}
+            ${navigationDesktopBorderRadiusWidth && navigationDesktopBorderRadius.top? `border-radius: ${navigationDesktopBorderRadiusWidth};` : ''}
+
+            ${navigationNormalBackgroundType === 'gradient' ? `  
+                ${navigationNormalCustomGradientSwitcher && navigationNormalCustomGradientInputValue ? `background: ${navigationNormalCustomGradientInputValue};` : `background: ${navigationNormalGradientColor};`}
+            `: `
+                ${navigationNormalClassicColor ? `background: ${navigationNormalClassicColor};` : ''}
+            `}
+        }
+
+        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item:hover {
+            ${navigationHoverBackgroundType === 'gradient' ? `  
+                ${navigationHoverCustomGradientSwitcher && navigationHoverCustomGradientInputValue ? `background: ${navigationHoverCustomGradientInputValue};` : `background: ${navigationHoverGradientColor};`}
+            `: `
+                ${navigationHoverClassicColor ? `background: ${navigationHoverClassicColor};` : ''}
+            `}
+        }
+
+        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content .wp-block-navigation-item__label {
+            ${navigationGlobalTypoSwitcher.fontFamily === true && navigationGlobalTypographyData.fontFamily ? `font-family: ${navigationGlobalTypographyData.fontFamily};` : ''}
+            ${navigationGlobalTypoSwitcher.fontSize === true && navigationGlobalTypographyData.fontSize ? `font-size: ${navigationGlobalTypographyData.fontSize};` : ''}
+            ${navigationGlobalTypoSwitcher.fontWeight === true && navigationGlobalTypographyData.fontWeight ? `font-weight: ${navigationGlobalTypographyData.fontWeight};` : ''}
+            ${navigationGlobalTypoSwitcher.fontStyle === true && navigationGlobalTypographyData.fontStyle ? `font-style: ${navigationGlobalTypographyData.fontStyle};` : ''}
+            ${navigationGlobalTypoSwitcher.textTransform === true && navigationGlobalTypographyData.textTransform ? `text-transform: ${navigationGlobalTypographyData.textTransform};` : ''}
+            ${navigationGlobalTypoSwitcher.textDecoration === true && navigationGlobalTypographyData.textDecoration ? `text-decoration: ${navigationGlobalTypographyData.textDecoration};` : ''}
+            ${navigationGlobalTypoSwitcher.letterSpacing === true && navigationGlobalTypographyData.letterSpacing ? `letter-spacing: ${navigationGlobalTypographyData.letterSpacing};` : ''}
+            ${navigationGlobalTypoSwitcher.lineHeight === true && navigationGlobalTypographyData.lineHeight ? `line-height: ${navigationGlobalTypographyData.lineHeight};` : ''}
+                
+            ${navigationGlobalTypoSwitcher.fontFamily === false && navigationFontFamily && navigationFontFamily !== 'Default' ? `font-family: ${navigationFontFamily};` : ''}
+            ${navigationGlobalTypoSwitcher.fontSize === false && navigationFontSize.Desktop && navigationFontSizeUnits.Desktop ? `font-size: ${navigationFontSize.Desktop}${navigationFontSizeUnits.Desktop};` : ''}
+            ${navigationGlobalTypoSwitcher.fontWeight === false && navigationFontWeight ? `font-weight: ${navigationFontWeight};` : ''}
+            ${navigationGlobalTypoSwitcher.fontStyle === false && navigationFontStyle ? `font-style: ${navigationFontStyle};` : ''}
+            ${navigationGlobalTypoSwitcher.textTransform === false && navigationTextTransform ? `text-transform: ${navigationTextTransform};` : ''}
+            ${navigationGlobalTypoSwitcher.textDecoration === false && navigationTextDecoration ? `text-decoration: ${navigationTextDecoration};` : ''}
+            ${navigationGlobalTypoSwitcher.letterSpacing === false && navigationLetterSpacing.Desktop && navigationLetterSpacingUnits.Desktop ? `letter-spacing: ${navigationLetterSpacing.Desktop}${navigationLetterSpacingUnits.Desktop};` : ''}
+            ${navigationGlobalTypoSwitcher.lineHeight === false && navigationLineHeight.Desktop && navigationLineHeightUnits.Desktop ? `line-height: ${navigationLineHeight.Desktop}${navigationLineHeightUnits.Desktop};` : ''}
+            
+            ${navigationColor ? `color: ${navigationColor};` : ''}
+            transition: all .3s ease-in-out;
+        }
+        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content .wp-block-navigation-item__label:hover {
+            ${navigationHoverColor ? `color: ${navigationHoverColor};` : ''}
+        }
+
+        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item.current-menu-item .wp-block-navigation-item__content .wp-block-navigation-item__label {
+            ${navigationActiveColor ? `color: ${navigationActiveColor};` : ''}
+        }
+
+        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item.current-menu-item .wp-block-navigation-item__content .wp-block-navigation-item__label:hover {
+            ${navigationActiveHoverColor ? `color: ${navigationActiveHoverColor};` : ''}
+        }
+
 
         @media only screen and (max-width: 1024px) {
 
@@ -496,7 +922,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${navigationGlobalTabletBorderRadiusWidth && navigationGlobalBorderRadiusTablet.top? `border-radius: ${navigationGlobalTabletBorderRadiusWidth};` : ''}
             }
 
+            .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item {
+                ${navigationTabletPaddingWidth && navigationTabletPadding.top? `padding: ${navigationTabletPaddingWidth};` : ''}
+                ${navigationTabletMarginWidth && navigationTabletMargin.top? `margin: ${navigationTabletMarginWidth};` : ''} 
+                ${navigationTabletBorderWidth && navigationTabletBorder.top? `border-width: ${navigationTabletBorderWidth};` : ''}
+                ${navigationTabletBorderRadiusWidth && navigationTabletBorderRadius.top? `border-radius: ${navigationTabletBorderRadiusWidth};` : ''}
+            }
 
+            .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content .wp-block-navigation-item__label {
+                ${navigationGlobalTypoSwitcher.fontSize === false && navigationFontSize.Tablet && navigationFontSizeUnits.Tablet ? `font-size: ${navigationFontSize.Tablet}${navigationFontSizeUnits.Tablet};` : ''}
+                ${navigationGlobalTypoSwitcher.letterSpacing === false && navigationLetterSpacing.Tablet && navigationLetterSpacingUnits.Tablet ? `letter-spacing: ${navigationLetterSpacing.Tablet}${navigationLetterSpacingUnits.Tablet};` : ''}
+                ${navigationGlobalTypoSwitcher.lineHeight === false && navigationLineHeight.Tablet && navigationLineHeightUnits.Tablet ? `line-height: ${navigationLineHeight.Tablet}${navigationLineHeightUnits.Tablet};` : ''}
+            }
         }
 
         @media only screen and (max-width: 767px) {
@@ -506,11 +943,25 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${navigationPositionType !== 'default' && navigationPositionType !== 'relative' && navigationVROrientationType === 'bottom' && navigationVRBottomOffset.Mobile !== undefined ? `bottom: ${navigationVRBottomOffset.Mobile}${navigationVRBottomOffsetUnits.Mobile};` : ''}
                 ${navigationGlobalZIndex.Mobile ? `z-index: ${navigationGlobalZIndex.Mobile};` : ''}
             }
+
             .${blockId} .advanced-navigation-wrapper {
                 ${navigationGlobalMobilePaddingWidth && navigationGlobalPaddingMobile.top? `padding: ${navigationGlobalMobilePaddingWidth};` : ''} 
                 ${navigationGlobalMobileMarginWidth && navigationGlobalMarginMobile.top? `margin: ${navigationGlobalMobileMarginWidth};` : ''} 
                 ${navigationGlobalMobileBorderWidth && navigationGlobalBorderMobile.top? `border-width: ${navigationGlobalMobileBorderWidth};` : ''}
                 ${navigationGlobalMobileBorderRadiusWidth && navigationGlobalBorderRadiusMobile.top? `border-radius: ${navigationGlobalMobileBorderRadiusWidth};` : ''}
+            }
+                
+            .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item {
+                ${navigationMobilePaddingWidth && navigationMobilePadding.top? `padding: ${navigationMobilePaddingWidth};` : ''}
+                ${navigationMobileMarginWidth && navigationMobileMargin.top? `margin: ${navigationMobileMarginWidth};` : ''} 
+                ${navigationMobileBorderWidth && navigationMobileBorder.top? `border-width: ${navigationMobileBorderWidth};` : ''}
+                ${navigationMobileBorderRadiusWidth && navigationMobileBorderRadius.top? `border-radius: ${navigationMobileBorderRadiusWidth};` : ''}
+            }
+
+            .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content .wp-block-navigation-item__label {
+                ${navigationGlobalTypoSwitcher.fontSize === false && navigationFontSize.Mobile && navigationFontSizeUnits.Mobile ? `font-size: ${navigationFontSize.Mobile}${navigationFontSizeUnits.Mobile};` : ''}
+                ${navigationGlobalTypoSwitcher.letterSpacing === false && navigationLetterSpacing.Mobile && navigationLetterSpacingUnits.Mobile ? `letter-spacing: ${navigationLetterSpacing.Mobile}${navigationLetterSpacingUnits.Mobile};` : ''}
+                ${navigationGlobalTypoSwitcher.lineHeight === false && navigationLineHeight.Mobile && navigationLineHeightUnits.Mobile ? `line-height: ${navigationLineHeight.Mobile}${navigationLineHeightUnits.Mobile};` : ''}
             }
 
         }
@@ -527,6 +978,92 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         navigationVerticalAlign, 
         hamburgerMenuIconType,
 
+
+        /** Start Navigation Typography */
+        navigationGlobalTypographyData,
+        navigationGlobalTypoSwitcher,
+        navigationGlobalTypoType,
+        navigationGlobalTypoOption,
+        navigationFontFamily,
+        navigationFontSize,
+        navigationFontSizeUnits,
+        navigationFontWeight,
+        navigationFontStyle,
+        navigationTextTransform,
+        navigationTextDecoration,
+        navigationLetterSpacing,
+        navigationLetterSpacingUnits,
+        navigationLineHeight,
+        navigationLineHeightUnits,
+        /** End Navigation Typography */
+
+        /** Start Navigation Color and active color */
+        navigationColorSwitcher,
+        navigationColor,
+        navigationHoverColor,
+        navigationActiveColorSwitcher,
+        navigationActiveColor,
+        navigationActiveHoverColor,
+        /** End Navigation Color and active color */
+
+        /** Start Navigation Background */
+        navigationBgColorSwitcher,
+        navigationNormalBackgroundType,
+        navigationNormalClassicColor,
+        navigationNormalGradientColor,
+        navigationNormalCustomGradientSwitcher,
+        navigationNormalCustomGradientInputValue,
+
+        navigationHoverBackgroundType,
+        navigationHoverClassicColor,
+        navigationHoverGradientColor,
+        navigationHoverCustomGradientSwitcher,
+        navigationHoverCustomGradientInputValue,
+        /** End Navigation Background */
+
+        /** Start Navigation Padding and Margin */
+        navigationPaddingUnits,
+        navigationDesktopPadding,
+        navigationTabletPadding,
+        navigationMobilePadding,
+        navigationPaddingLink,
+        navigationDesktopPaddingWidth,
+        navigationTabletPaddingWidth,
+        navigationMobilePaddingWidth,
+        navigationMarginUnits,
+        navigationDesktopMargin,
+        navigationTabletMargin,
+        navigationMobileMargin,
+        navigationMarginLink,
+        navigationDesktopMarginWidth,
+        navigationTabletMarginWidth,
+        navigationMobileMarginWidth,
+        /** End Navigation Padding and Margin */
+
+        /** Start Navigation Border and Border Radius */
+        navigationBorder,
+        navigationBorderColorSwitcher,
+        navigationBorderColor,
+        navigationBorderHoverColor,
+
+        navigationBorderUnits,
+        navigationDesktopBorder,
+        navigationTabletBorder,
+        navigationMobileBorder,
+        navigationBorderLink,
+        navigationDesktopBorderWidth,
+        navigationTabletBorderWidth,
+        navigationMobileBorderWidth,
+
+        navigationBorderRadiusUnits,
+        navigationDesktopBorderRadius,
+        navigationTabletBorderRadius,
+        navigationMobileBorderRadius,
+        navigationBorderRadiusLink,
+        navigationDesktopBorderRadiusWidth,
+        navigationTabletBorderRadiusWidth,
+        navigationMobileBorderRadiusWidth,
+        /** End Navigation Border and Border Radius */
 
 
         /** Start Global Setting */
@@ -703,8 +1240,220 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	 */
 	const styleControls = (
         <>
-            <PanelBody>
-                style controls
+            <PanelBody
+                title={__("Navigation", "frontis-blocks")}
+                initialOpen={true}
+            >
+                <FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={navigationGlobalTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ navigationGlobalTypographyData: value })}
+
+                    globalTypoType={navigationGlobalTypoType}
+                    onChangeGlobalTypoType={(value) => {
+                        setAttributes({ 
+                            navigationGlobalTypoType: value, 
+                            navigationGlobalTypoSwitcher: value === 'default' ? {...navigationGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...navigationGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                        })
+                    }}
+
+                    globalTypoOption={navigationGlobalTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ navigationGlobalTypoOption: value })}
+
+                    fontFamily={navigationFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ navigationFontFamily: value, navigationGlobalTypoSwitcher: {...navigationGlobalTypoSwitcher, fontFamily: value && false} })}
+
+                    fontSize={navigationFontSize}
+                    onChangeFontSize={(value) => setAttributes({ navigationFontSize: value, navigationGlobalTypoSwitcher: {...navigationGlobalTypoSwitcher, fontSize: value && false} })}
+
+                    fontSizeUnits={navigationFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ navigationFontSizeUnits: value })}
+
+                    fontWeight={navigationFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ navigationFontWeight: value, navigationGlobalTypoSwitcher: {...navigationGlobalTypoSwitcher, fontWeight: value && false} })}
+
+                    fontStyle={navigationFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ navigationFontStyle: value, navigationGlobalTypoSwitcher: {...navigationGlobalTypoSwitcher, fontStyle: value && false} })}
+
+                    textTransform={navigationTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ navigationTextTransform: value, navigationGlobalTypoSwitcher: {...navigationGlobalTypoSwitcher, textTransform: value && false} })}
+
+                    textDecoration={navigationTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ navigationTextDecoration: value, navigationGlobalTypoSwitcher: {...navigationGlobalTypoSwitcher, textDecoration: value && false} })}
+
+                    letterSpacing={navigationLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ navigationLetterSpacing: value, navigationGlobalTypoSwitcher: {...navigationGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+                    letterSpacingUnits={navigationLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ navigationLetterSpacingUnits: value })}
+
+                    lineHeight={navigationLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ navigationLineHeight: value, navigationGlobalTypoSwitcher: {...navigationGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                    lineHeightUnits={navigationLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ navigationLineHeightUnits: value })}
+
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+                <FB_SwitcherControl
+                        label={__("Color", "frontis-blocks")}
+                        options={NORMAL_HOVER}
+                        globalSwitcher={navigationColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ navigationColorSwitcher: value })}
+                />
+                {navigationColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={navigationColor}
+                        setGlobalColor={(value) => setAttributes({ navigationColor: value })}
+                    />
+                )}
+
+                {navigationColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={navigationHoverColor}
+                        setGlobalColor={(value) => setAttributes({ navigationHoverColor: value })}
+                    />
+                )}
+                <FB_SwitcherControl
+                        label={__("Active Color", "frontis-blocks")}
+                        options={NORMAL_HOVER}
+                        globalSwitcher={navigationActiveColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ navigationActiveColorSwitcher: value })}
+                />
+
+                {navigationActiveColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Color", "frontis-blocks")}
+                        globalColor={navigationActiveColor}
+                        setGlobalColor={(value) => setAttributes({ navigationActiveColor: value })}
+                    />
+                )}
+
+                {navigationActiveColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={navigationActiveHoverColor}
+                        setGlobalColor={(value) => setAttributes({ navigationActiveHoverColor: value })}
+                    />
+                )}
+
+                <FB_BackgroundColorControl
+                    label={__("Background Color", "frontis-blocks")}
+                    bgColorSwitcher={navigationBgColorSwitcher}  
+                    setBgColorSwitcher={(value) => setAttributes({ navigationBgColorSwitcher: value })}
+                    
+                    normalBackgroundType={navigationNormalBackgroundType} 
+                    setNormalBackgroundType={(value) => setAttributes({ navigationNormalBackgroundType: value })}
+                    normalClassicColor={navigationNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ navigationNormalClassicColor: value })}
+                    normalGradientColor={navigationNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ navigationNormalGradientColor: value })}
+                    normalCustomGradientSwitcher={navigationNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ navigationNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={navigationNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ navigationNormalCustomGradientInputValue: value })}
+                    
+                    hoverBackgroundType={navigationHoverBackgroundType} 
+                    setHoverBackgroundType={(value) => setAttributes({ navigationHoverBackgroundType: value })}
+                    hoverClassicColor={navigationHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ navigationHoverClassicColor: value })}
+                    hoverGradientColor={navigationHoverGradientColor} 
+                    setHoverGradientColor={(value) => setAttributes({ navigationHoverGradientColor: value })}
+                    hoverCustomGradientSwitcher={navigationHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ navigationHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={navigationHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ navigationHoverCustomGradientInputValue: value })}
+
+                    isBackgroundImage={false}
+
+                />
+
+                <FB_Spacing 
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleNavigationPaddingUnitsHandler}  
+                    spacingUnits={navigationPaddingUnits}
+                    spacingDesktop={navigationDesktopPadding}
+                    spacingTablet={navigationTabletPadding}
+                    spacingMobile={navigationMobilePadding}
+                    handleSpacingUnitHandler={handleNavigationPaddingUnitChange}
+                    spacingCombineBtn={navigationPaddingLink}
+                    spacingCombineBtnHandler={handleNavigationPaddingCombineBtn}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing 
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleNavigationMarginUnitsHandler}
+                    spacingUnits={navigationMarginUnits} 
+                    spacingDesktop={navigationDesktopMargin}
+                    spacingTablet={navigationTabletMargin}
+                    spacingMobile={navigationMobileMargin}
+                    handleSpacingUnitHandler={handleNavigationMarginUnitChange}
+                    spacingCombineBtn={navigationMarginLink}
+                    spacingCombineBtnHandler={handleNavigationMarginCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <SelectControl
+                        label={__("Border Style", "frontis-blocks")}
+                        value={navigationBorder}
+                        options={BORDER_STYLES}
+                        onChange={(value) => setAttributes({ navigationBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")} 
+                    globalSwitcher={navigationBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ navigationBorderColorSwitcher: value })}
+                />
+
+                {navigationBorderColorSwitcher === 'normal' && ( 
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={navigationBorderColor}
+                        setGlobalColor={(value) => setAttributes({ navigationBorderColor: value })}
+                    />
+                )}
+
+                {navigationBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={navigationBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ navigationBorderHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing 
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleNavigationBorderUnitsHandler}
+                    spacingUnits={navigationBorderUnits}
+                    spacingDesktop={navigationDesktopBorder}
+                    spacingTablet={navigationTabletBorder}
+                    spacingMobile={navigationMobileBorder}
+                    handleSpacingUnitHandler={handleNavigationBorderUnitChange}
+                    spacingCombineBtn={navigationBorderLink}
+                    spacingCombineBtnHandler={handleNavigationBorderCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing 
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleNavigationBorderRadiusUnitsHandler}
+                    spacingUnits={navigationBorderRadiusUnits}
+                    spacingDesktop={navigationDesktopBorderRadius}
+                    spacingTablet={navigationTabletBorderRadius} 
+                    spacingMobile={navigationMobileBorderRadius}
+                    handleSpacingUnitHandler={handleNavigationBorderRadiusUnitChange}
+                    spacingCombineBtn={navigationBorderRadiusLink}
+                    spacingCombineBtnHandler={handleNavigationBorderRadiusCombineBtn}
+                    setAttributes={setAttributes}
+                />
             </PanelBody>
         </>
 	);
