@@ -1040,6 +1040,36 @@ const attributes = {
 	},
 	/** End Dropdown Menu Icon */
 
+	/** Start Hamburger Menu */
+	hamburgerMenuIconSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
+	},
+	hamburgerMenuIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	hamburgerMenuIconColorSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	hamburgerMenuIconColor: {
+		type: 'string',
+	},
+	hamburgerMenuIconHoverColor: {
+		type: 'string',
+	},
+	
+	/** End Hamburger Menu */
+
 
     /** Start Global Setting */
 	navigationGlobalZIndex : {
