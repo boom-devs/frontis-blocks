@@ -30,8 +30,47 @@
                 font-size: $large-font-size;
                 line-height: $line-height-22;
                 color: $neutral-color-700;
-                text-decoration: underline;
+                background: $white-color;
+                padding: 10px 14px;
+                border-radius: 4px;
+                border: 1px solid $neutral-color-100;
                 cursor: pointer;
+            }
+        }
+
+        .fb-template-library-content-header-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+
+            .fb-template-library-search-wrapper {
+                .fb-search-input-wrapper {
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                    height: 46px;
+
+                    .fb-search-input-icon {
+                        position: absolute;
+                        right: 0;
+                        background: $primary-color;
+                        padding: 10px 14px;
+                        border: 1px solid transparent;
+                        border-radius: 0 4px 4px 0;
+                        cursor: pointer;
+                    }
+
+                    input {
+                        font-weight: $font-weight-100;
+                        font-size: $large-font-size;
+                        line-height: $line-height-22;
+                        color: $neutral-color;
+                        padding: 10px 14px;
+                        padding-left: 36px;
+                        border-radius: 4px;
+                        border: 1px solid $neutral-color-100;
+                    }
+                }
             }
         }
     }
@@ -58,6 +97,35 @@
                     width: 100%;
                     height: auto;
                     transition: transform 0.3s ease;
+                }
+
+                .fb-template-badge {
+                    position: absolute;
+                    top: 16px;
+                    left: 16px;
+                    font-family: $body-font-family;
+                    font-weight: $font-weight-500;
+                    font-size: $base-font-size;
+                    line-height: $body-line-height;
+                    color: $white-color;
+                    padding: 8px 14px;
+                    border-radius: 50px;
+                    z-index: 10;
+                    opacity: 0;
+
+                    &.free {
+                        background: $success-color;
+                    }
+
+                    &.pro {
+                        background: $warning-color;
+                    }
+                }
+
+                &:hover {
+                    .fb-template-badge {
+                        opacity: 1;
+                    }
                 }
             }
 
@@ -92,11 +160,9 @@
                         display: flex;
                         align-items: center;
                         gap: 4px;
-                        padding: 8px 12px;
-                        background: $white-color;
+                        background: none;
                         border: none;
-                        border-radius: 4px;
-                        color: $neutral-color-950;
+                        color: $white-color;
                         font-family: $body-font-family;
                         font-weight: $font-weight-500;
                         font-size: $base-font-size;
@@ -128,79 +194,26 @@
                 .fb-template-library-card-content-top {
                     display: flex;
                     align-items: center;
-                    justify-content: center;
                     gap: 8px;
                     margin-bottom: 16px;
 
-                    .fb-template-badge {
-                        font-family: $body-font-family;
-                        font-weight: $font-weight-500;
-                        font-size: $base-font-size;
-                        line-height: $body-line-height;
-                        padding: 8px 14px;
-                        border-radius: 4px;
-
-                        &.free {
-                            background: $success-color-50;
-                            color: $neutral-color-700;
-                            border: 1px solid $success-color;
-                        }
-
-                        &.pro {
-                            background: $warning-color-50;
-                            color: $warning-color;
-                            border: 1px solid $warning-color;
-                        }
-                    }
-
-                    .fb-template-actions {
+                    .fb-template-tags {
                         display: flex;
                         align-items: center;
-                        gap: 8px;
+                        gap: 2px;
+                        flex-wrap: wrap;
 
-                        .fb-import-btn {
-                            display: flex;
-                            align-items: center;
-                            padding: 8px 14px;
-                            background: $primary-color-base;
-                            border: 1px solid transparent;
-                            border-radius: 4px;
-                            color: $white-color;
-                            font-family: $body-font-family;
-                            font-weight: $font-weight-500;
-                            font-size: $base-font-size;
+                        span {
+                            color: $neutral-color;
+                            font-weight: $font-weight-600;
+                            font-size: $small-font-size;
                             line-height: $body-line-height;
                             cursor: pointer;
-                            transition: all 0.3s ease;
 
-                            &:hover:not(.loading) {
-                                background: $primary-color-400;
+                            &:hover {
+                                color: $primary-color;
+                                text-decoration: underline;
                             }
-
-                            &.loading {
-                                opacity: 0.8;
-                                cursor: not-allowed;
-                            }
-
-                            &:disabled {
-                                opacity: 0.6;
-                                cursor: not-allowed;
-                            }
-                        }
-
-                        .fb-template-save-my-cloud {
-                            display: flex;
-                            align-items: center;
-                            gap: 8px;
-                            color: $neutral-color-700;
-                            font-family: $body-font-family;
-                            font-weight: $font-weight-500;
-                            font-size: $base-font-size;
-                            line-height: $body-line-height;
-                            padding: 8px 14px;
-                            border: 1px solid $neutral-color-100;
-                            border-radius: 4px;
-                            cursor: pointer;
                         }
                     }
                 }
@@ -212,7 +225,6 @@
                         font-weight: $font-weight-600;
                         font-size: $x-large-font-size;
                         line-height: $line-height-26;
-                        text-align: center;
                         margin: 0;
                     }
                 }
@@ -254,9 +266,62 @@
                     }
                 }
             }
+
+            .fb-template-actions {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 8px;
+                width: 100%;
+                border-top: 1px solid $neutral-color-100;
+                .fb-import-btn {
+                    width: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 14px 14px 16px 14px;
+                    background: none;
+                    border: none;
+                    border-right: 1px solid $neutral-color-100;
+                    color: $primary-color;
+                    font-family: $body-font-family;
+                    font-weight: $font-weight-500;
+                    font-size: $base-font-size;
+                    line-height: $body-line-height;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+
+                    &.loading {
+                        opacity: 0.8;
+                        cursor: not-allowed;
+                    }
+
+                    &:disabled {
+                        opacity: 0.6;
+                        cursor: not-allowed;
+                    }
+                }
+
+                .fb-template-save-my-cloud {
+                    width: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: $neutral-color-700;
+                    font-family: $body-font-family;
+                    font-weight: $font-weight-500;
+                    font-size: $base-font-size;
+                    line-height: $body-line-height;
+                    padding: 14px 14px 16px 14px;
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                }
+            }
         }
     }
 }
+
 @keyframes fadeIn {
     from {
         opacity: 0;

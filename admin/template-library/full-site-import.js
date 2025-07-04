@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { useState, useCallback } from "@wordpress/element";
+import { useState, useCallback, useEffect } from "@wordpress/element";
 import { ClipLoader } from "react-spinners";
 import data from "./data.json";
 import TemplateHeader from "./template-header";
@@ -9,7 +9,7 @@ import FullSiteImportConfig from "./full-site-import-config";
 
 const FullSiteImport = ({ template, onClose, onBack }) => {
     const [formData, setFormData] = useState({
-        siteName: '',
+        siteName: (window.frontisBlocksAdmin && window.frontisBlocksAdmin.siteName) || '',
         siteTagline: '',
         logo: null,
         importContent: true,
@@ -23,6 +23,7 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
     const [activeTab, setActiveTab] = useState('patterns');
     const [showConfigStep, setShowConfigStep] = useState(false);
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+    const [logoPreview, setLogoPreview] = useState(null);
 
     const handleInputChange = useCallback((field, value) => {
         setFormData(prev => ({
@@ -97,6 +98,16 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
         }
     }, [template?.id, formData, onClose]);
 
+    useEffect(() => {
+        if (formData.logo) {
+            const objectUrl = URL.createObjectURL(formData.logo);
+            setLogoPreview(objectUrl);
+            return () => URL.revokeObjectURL(objectUrl);
+        } else {
+            setLogoPreview(null);
+        }
+    }, [formData.logo]);
+
     if (showConfigStep) {
         return (
             <FullSiteImportConfig
@@ -123,6 +134,7 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                     activeTab={activeTab}
                     setActiveTab={setActiveTab}
                     data={data}
+                    onClose={onClose}
                 />
 
                 {/* Content */}
@@ -175,7 +187,12 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                                         Click to upload SVG, PNG, JPG or GIF (max. 800x400 px)SVG, PNG, JPG or GIF (max. 800x400 px)
                                     </label>
                                     {formData.logo && (
-                                        <span className="fb-file-name">{formData.logo.name}</span>
+                                        <>
+                                            <span className="fb-file-name">{formData.logo.name}</span>
+                                            {logoPreview && (
+                                                <img src={logoPreview} alt="Logo Preview" className="fb-logo-preview" style={{maxWidth: '120px', maxHeight: '60px', display: 'block', marginTop: '8px'}} />
+                                            )}
+                                        </>
                                     )}
                                 </div>
                             </div>

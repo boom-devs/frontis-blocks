@@ -12,44 +12,51 @@
                             "id": "pattern1",
                             "title": "Illustrate AI Landing Page for Gutenberg",
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png",
-                            "content": "Pattern 1 content here"
+                            "content": "Pattern 1 content here",
+                            "tags": ["Blog", "Magazine", "Construction"]
                         },
                         {
                             "id": "pattern2",
                             "title": "Illustrate AI Landing Page for Gutenberg",
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/pro-1.png",
-                            "content": "Pattern 2 content here"
+                            "content": "Pattern 2 content here",
+                            "tags": ["Landing", "AI", "Gutenberg"]
                         },
                         {
                             "id": "pattern3",
                             "title": "Illustrate AI Landing Page for Gutenberg",
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-1.png",
-                            "content": "Pattern 3 content here"
+                            "content": "Pattern 3 content here",
+                            "tags": ["Landing", "Creative"]
                         },
                         {
                             "id": "pattern4",
                             "title": "Illustrate AI Landing Page for Gutenberg",
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-2.png",
-                            "content": "Pattern 4 content here"
+                            "content": "Pattern 4 content here",
+                            "tags": ["Landing", "Business"]
                         },
                         {
                             "id": "pattern5",
                             "title": "Illustrate AI Landing Page for Gutenberg",
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-3.png",
-                            "content": "Pattern 5 content here"
+                            "content": "Pattern 5 content here",
+                            "tags": ["Landing", "Portfolio"]
                         },
                         {
                             "id": "pattern6",
                             "title": "Illustrate AI Landing Page for Gutenberg",
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-4.png",
-                            "content": "Pattern 6 content here"
+                            "content": "Pattern 6 content here",
+                            "tags": ["Landing", "Agency"]
                         },
                         
                         {
                             "id": "pattern15",
                             "title": "Illustrate AI Landing Page for Gutenberg",
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-5.png",
-                            "content": "Pattern 15 content here"
+                            "content": "Pattern 15 content here",
+                            "tags": ["Landing", "Startup"]
                         }
                     ]
                 },
@@ -62,7 +69,8 @@
                             "id": "pattern1",
                             "title": "Pattern 1",
                             "image": "pattern1.jpg",
-                            "content": "Pattern 1 content here"
+                            "content": "Pattern 1 content here",
+                            "tags": ["Content", "Block"]
                         }
                     ]
                 },
@@ -110,19 +118,22 @@
                             "id": "page1",
                             "title": "Page 1",
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-5.png",
-                            "content": "Page 1 content here"
+                            "content": "Page 1 content here",
+                            "tags": ["Landing", "Business"]
                         },
                         {
                             "id": "page2",
                             "title": "Page 2",
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-6.png",
-                            "content": "Page 2 content here"
+                            "content": "Page 2 content here",
+                            "tags": ["Portfolio", "Creative"]
                         },
                         {
                             "id": "page3",
                             "title": "Pattern 3",
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-4.png",
-                            "content": "Page 3 content here"
+                            "content": "Page 3 content here",
+                            "tags": ["Blog", "Magazine"]
                         }
                     ]
                 },
@@ -176,19 +187,22 @@
                             "id": "item1",
                             "title": "Item 1",
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-6.png",
-                            "content": "Site 1 content here"
+                            "content": "Site 1 content here",
+                            "tags": ["Business", "Corporate"]
                         },
                         {
                             "id": "item2",
                             "title": "Item 2",
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-1.png",
-                            "content": "Site 2 content here"
+                            "content": "Site 2 content here",
+                            "tags": ["Portfolio", "Personal"]
                         },
                         {
                             "id": "item3",
                             "title": "Item 3",
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-3.png",
-                            "content": "Site 3 content here"
+                            "content": "Site 3 content here",
+                            "tags": ["Creative", "Agency"]
                         }
                     ]
                 },
