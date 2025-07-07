@@ -65,7 +65,7 @@ class Admin {
 				if (isset($theme_json['color']['palette']['theme'])) {
 					$theme_colors = $theme_json['color']['palette']['theme'];
 
-					if($global_colors === '') {
+					if(!Helper::option_exists('fb_global_colors')) {
 						update_option('fb_global_colors', $theme_colors);
 					}
 				}
