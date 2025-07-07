@@ -1,78 +1,154 @@
-(function() {
-  function initAccordion() {
-      const accordionItems = document.querySelectorAll(".fb-accordion-item-wrapper");
-      
-      accordionItems.forEach(itemWrapper => {
-          const titleWrapper = itemWrapper.querySelector(".fb-accordion-item-title-wrapper");
-          const contentWrapper = itemWrapper.querySelector(".fb-accordion-content-wrapper");
 
-          // Prevent multiple initializations
-          if (titleWrapper.hasAttribute('data-accordion-initialized')) return;
-          titleWrapper.setAttribute('data-accordion-initialized', 'true');
 
-          titleWrapper.addEventListener("click", function(event) {
-              event.stopPropagation();
+// document.addEventListener('DOMContentLoaded', () => {
+//   const items = document.querySelectorAll('.fb-progressbar-item');
 
-              // Check current state
-              const isActive = titleWrapper.classList.contains("active");
+//   items.forEach(item => {
+//     const target = parseInt(item.dataset.progress);
+//     const type   = (item.dataset.progressbarType).toLowerCase();
+//     const speed  = 15;
 
-              // Reset all accordions at the same level
-              const parentAccordion = itemWrapper.closest(".fb-accordion-content-wrapper") || document.body;
-              const siblingItems = parentAccordion.querySelectorAll(".fb-accordion-item-wrapper");
-              
-              siblingItems.forEach(sibling => {
-                  if (sibling !== itemWrapper) {
-                      const siblingTitle = sibling.querySelector(".fb-accordion-item-title-wrapper");
-                      const siblingContent = sibling.querySelector(".fb-accordion-content-wrapper");
-                      
-                      if (siblingTitle) siblingTitle.classList.remove("active");
-                      if (siblingContent) {
-                          siblingContent.classList.remove("active");
-                          siblingContent.style.maxHeight = "0px";
-                      }
-                  }
-              });
+//     const lineEl   = item.querySelector('.fb-progressbar-line');
+//     const numberEls = item.querySelectorAll('.fb-progressbar-number');
 
-              // Toggle current accordion
-              titleWrapper.classList.toggle("active", !isActive);
-              contentWrapper.classList.toggle("active", !isActive);
+//     // initial reset so bar starts empty
+//     if (type === 'vertical') {
+//       lineEl.style.height = '0%';
+//       lineEl.style.bottom = '0';
+//       lineEl.style.top = 'auto';
+//     } else {
+//       lineEl.style.width  = '0%';
+//     }
 
-              // Set max height
-              if (!isActive) {
-                  contentWrapper.style.maxHeight = `${contentWrapper.scrollHeight}px`;
-              } else {
-                  contentWrapper.style.maxHeight = "0px";
-              }
-          });
-      });
-  }
+//     let animated = false;
 
-  // Initialize on different loading states
-  function setupAccordion() {
-      if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', initAccordion);
+//     function animate () {
+//       if (animated) return;
+//       animated = true;
+
+//       let value = 0;
+//       const timer = setInterval(() => {
+//         if (value >= target) {
+//           clearInterval(timer);
+//           return;
+//         }
+//         value++;
+
+//         // update bar
+//         if (type === 'vertical') {
+//           lineEl.style.height = value + '%';
+//           lineEl.style.width  = '100%';
+//         } else {
+//           lineEl.style.width  = value + '%';
+//           lineEl.style.height = '100%';
+//         }
+
+//         numberEls.forEach(n => n.textContent = value + '%');
+//       }, speed);
+//     }
+
+//     const io = new IntersectionObserver(entries => {
+//       entries.forEach(entry => {
+//         if (entry.isIntersecting) {
+//           animate();
+//           io.unobserve(item);
+//         }
+//       });
+//     }, { threshold: 0.5 });
+
+//     io.observe(item);
+//   });
+// });
+
+
+
+(function () {
+  function initProgressBars() {
+    const items = document.querySelectorAll('.fb-progressbar-item');
+
+    items.forEach(item => {
+      if (item.hasAttribute('data-progressbar-init')) return;
+      item.setAttribute('data-progressbar-init', 'true');
+
+      const target = parseInt(item.dataset.progress);
+      const type   = (item.dataset.progressbarType).toLowerCase();
+      const speed  = 15;
+
+      const lineEl    = item.querySelector('.fb-progressbar-line');
+      const numberEls = item.querySelectorAll('.fb-progressbar-number');
+
+      // start empty
+      if (type === 'vertical') {
+        lineEl.style.height = '0%';
+        lineEl.style.bottom = '0';
+        lineEl.style.top    = 'auto';
       } else {
-          initAccordion();
+        lineEl.style.width  = '0%';
       }
 
-      // Handle dynamic content changes
-      const observer = new MutationObserver((mutations) => {
-          mutations.forEach((mutation) => {
-              if (mutation.addedNodes.length || mutation.removedNodes.length) {
-                  initAccordion();
-              }
-          });
-      });
+      let animated = false;
 
-      observer.observe(document.body, {
-          childList: true,
-          subtree: true
-      });
+      function animate() {
+        if (animated) return;
+        animated = true;
+
+        let value = 0;
+        const timer = setInterval(() => {
+          if (value >= target) {
+            clearInterval(timer);
+            return;
+          }
+          value++;
+
+          if (type === 'vertical') {
+            lineEl.style.height = value + '%';
+            lineEl.style.width  = '100%';
+          } else {
+            lineEl.style.width  = value + '%';
+            lineEl.style.height = '100%';
+          }
+
+          numberEls.forEach(n => (n.textContent = value + '%'));
+        }, speed);
+      }
+
+      /* scroll trigger */
+      const io = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              animate();
+              io.unobserve(item);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      io.observe(item);
+    });
   }
 
-  // Expose initialization method globally
-  window.reinitAccordion = initAccordion;
+  function setupProgressBars() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initProgressBars);
+    } else {
+      initProgressBars();
+    }
 
-  // Start setup
-  setupAccordion();
+    const observer = new MutationObserver(muts => {
+      for (const m of muts) {
+        if (m.addedNodes.length || m.removedNodes.length) {
+          initProgressBars();
+          break;
+        }
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  window.reinitProgressBars = initProgressBars;
+
+  setupProgressBars();
 })();
+
