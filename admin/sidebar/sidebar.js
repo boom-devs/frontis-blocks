@@ -347,7 +347,6 @@ function FrontisBlocksSidebar() {
 		handleUpdateState();
 	}, [handleUpdateState]);
 
-
 	// Generate color variables
 	useEffect(() => {
 		const mergedColors = [
@@ -423,11 +422,16 @@ function FrontisBlocksSidebar() {
 	}, [handleUpdateSettings]);
 
 	useEffect(() => {
-		console.log(isLoading)
 		if (!isLoading) {
 			setIsLoading(true);
 			wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
 		}
+
+
+		if (globalColors === undefined) {
+			setGlobalColors(themeColors);
+		}
+
 	}, [customColors, globalColors, gradientColors, customGradientColors]);
 
 	return (

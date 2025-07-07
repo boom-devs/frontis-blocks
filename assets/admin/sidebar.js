@@ -830,9 +830,9 @@ var generateColorsVariables = function generateColorsVariables(colors, deviceTyp
   if (!colors.length) {
     return false;
   }
-  var cssVariables = ":root {\n        ".concat(colors.map(function (color) {
-    return "--wp--frontis--color--".concat(color.slug, ": ").concat(color.color, ";");
-  }).join('\n    '), "\n    }");
+  var cssVariables = ":root {\n   \t\t".concat(colors.map(function (color) {
+    return "--wp--frontis--color--".concat(color.slug, ": ").concat(color.gradient || color.color, ";");
+  }).join('\n    '), "\n\t}");
   var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
   var iframeDocument = ((_iframe = iframe) === null || _iframe === void 0 ? void 0 : _iframe.contentDocument) || ((_iframe2 = iframe) === null || _iframe2 === void 0 || (_iframe2 = _iframe2.contentWindow) === null || _iframe2 === void 0 ? void 0 : _iframe2.document) || document;
   var styleTag = iframeDocument.getElementById("global-colors");
@@ -3591,7 +3591,6 @@ function FrontisBlocksSidebar() {
     handleUpdateSettings();
   }, [handleUpdateSettings]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
-    console.log(isLoading);
     if (!isLoading) {
       setIsLoading(true);
       wp.data.dispatch('core/editor').editPost({
@@ -3599,6 +3598,9 @@ function FrontisBlocksSidebar() {
           _dummy: new Date().getTime()
         }
       });
+    }
+    if (globalColors === undefined) {
+      setGlobalColors(themeColors);
     }
   }, [customColors, globalColors, gradientColors, customGradientColors]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebarMoreMenuItem, {
