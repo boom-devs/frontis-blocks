@@ -404,6 +404,8 @@ function FrontisBlocksSidebar() {
 					localStorage.setItem(storeKey, JSON.stringify(response.data.data));
 				}
 			}
+
+			setIsLoading(false);
 		} catch (error) {
 			console.error("Error updating settings:", error);
 		}
