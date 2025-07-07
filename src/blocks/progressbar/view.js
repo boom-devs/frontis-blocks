@@ -1,135 +1,154 @@
 
-// (function() {
-//   function setupObserver(item) {
-//     const io = new IntersectionObserver(
-//       ([entry]) => {
-//         if (entry.isIntersecting) {
-//           animateItem(item);
-//           io.unobserve(item);               // fire once – remove if you want repeat
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   const items = document.querySelectorAll('.fb-progressbar-item');
+
+//   items.forEach(item => {
+//     const target = parseInt(item.dataset.progress);
+//     const type   = (item.dataset.progressbarType).toLowerCase();
+//     const speed  = 15;
+
+//     const lineEl   = item.querySelector('.fb-progressbar-line');
+//     const numberEls = item.querySelectorAll('.fb-progressbar-number');
+
+//     // initial reset so bar starts empty
+//     if (type === 'vertical') {
+//       lineEl.style.height = '0%';
+//       lineEl.style.bottom = '0';
+//       lineEl.style.top = 'auto';
+//     } else {
+//       lineEl.style.width  = '0%';
+//     }
+
+//     let animated = false;
+
+//     function animate () {
+//       if (animated) return;
+//       animated = true;
+
+//       let value = 0;
+//       const timer = setInterval(() => {
+//         if (value >= target) {
+//           clearInterval(timer);
+//           return;
 //         }
-//       },
-//       { threshold: 0.35 }                   // 35 % visible
-//     );
-//     io.observe(item);
-//   }
-  
-//   /* ----- animate both bar & number ----- */
-//   function animateItem(item) {
-//     const progress = parseFloat(item.dataset.progress) || 0;
-//     const progressNumberPosition = item.dataset.progressNumberPosition || 'default';
-//     const type     = (item.dataset.progressbarType || 'horizontal').toLowerCase();
-//     const line     = item.querySelector('.fb-progressbar-line');
-//     const numbers  = item.querySelectorAll('.fb-progressbar-number');
-  
-//     /* ---- reset line ---- */
-//     if (line) {
-//       if (type === 'vertical') {
-//         line.style.height = '0%';
-//         line.style.bottom = '0';
-//         line.style.top    = 'auto';
-//       } else {
-//         line.style.width  = '0%';
-//       }
-  
-//       /* next paint → let CSS transition handle it */
-//       requestAnimationFrame(() => {
+//         value++;
+
+//         // update bar
 //         if (type === 'vertical') {
-//           line.style.height = progress + '%';
-//           line.style.width  = '100%';
+//           lineEl.style.height = value + '%';
+//           lineEl.style.width  = '100%';
 //         } else {
-//           line.style.width  = progress + '%';
-//           line.style.height = '100%';
+//           lineEl.style.width  = value + '%';
+//           lineEl.style.height = '100%';
+//         }
+
+//         numberEls.forEach(n => n.textContent = value + '%');
+//       }, speed);
+//     }
+
+//     const io = new IntersectionObserver(entries => {
+//       entries.forEach(entry => {
+//         if (entry.isIntersecting) {
+//           animate();
+//           io.unobserve(item);
 //         }
 //       });
-//     }
-  
-//     /* ---- counter(s) ---- */
-//     numbers.forEach(el => progressNumberPosition === 'default' && countUp(el, progress));
-//   }
-  
-//   /* ----- lightweight counter helper ----- */
-//   function countUp(el, target) {
-//     const DURATION = 1500;                   // ms
-//     const start    = performance.now();
-  
-//     (function step(now) {
-//       const p = Math.min((now - start) / DURATION, 1);
-//       el.textContent = Math.round(p * target) + '%';
-//       if (p < 1) requestAnimationFrame(step);
-//     })(start);
-//   }
+//     }, { threshold: 0.5 });
 
-//   setupObserver();
-// })();
+//     io.observe(item);
+//   });
+// });
 
 
 
 (function () {
-  /* ────────────────────────────────────────────────────────────
-     0.  Reusable helpers
-  ──────────────────────────────────────────────────────────── */
+  function initProgressBars() {
+    const items = document.querySelectorAll('.fb-progressbar-item');
 
-  function isVisible(el) {
-    const r = el.getBoundingClientRect();
-    return r.bottom > 0 && r.top < window.innerHeight;
-  }
+    items.forEach(item => {
+      if (item.hasAttribute('data-progressbar-init')) return;
+      item.setAttribute('data-progressbar-init', 'true');
 
-  function animateItem(/* ... আগের কোড অপরিবর্তিত ... */) { /* same as before */ }
+      const target = parseInt(item.dataset.progress);
+      const type   = (item.dataset.progressbarType).toLowerCase();
+      const speed  = 15;
 
-  function countUp(/* ... আগের কোড ... */) { /* same as before */ }
+      const lineEl    = item.querySelector('.fb-progressbar-line');
+      const numberEls = item.querySelectorAll('.fb-progressbar-number');
 
-  /* ───────── init / re‑init ───────── */
-
-  function initProgressbars() {
-    document.querySelectorAll('.fb-progressbar-item').forEach(item => {
-      if (item.hasAttribute('data-progressbar-initialized')) return;
-      item.setAttribute('data-progressbar-initialized', 'true');
-
-      /* ① পেজ লোডেই ভিজিবল? → direct animate (100 ms delay) */
-      if (isVisible(item)) {
-        setTimeout(() => animateItem(item), 100);
-        return;                              // observer দরকার নেই
-      }
-
-      /* ② নয়, তাহলে observer সেট করুন */
-      if ('IntersectionObserver' in window) {
-        const io = new IntersectionObserver(
-          entries => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                animateItem(item);
-                io.unobserve(item);          // একবারই দরকার
-              }
-            });
-          },
-          { threshold: 0 }                   // ⬅️ 0 রাখায় যেকোন অংশ দেখালেই ফায়ার
-        );
-        io.observe(item);
+      // start empty
+      if (type === 'vertical') {
+        lineEl.style.height = '0%';
+        lineEl.style.bottom = '0';
+        lineEl.style.top    = 'auto';
       } else {
-        /* IE‑fallback — সঙ্গে‑সঙ্গে animate */
-        setTimeout(() => animateItem(item), 100);
+        lineEl.style.width  = '0%';
       }
+
+      let animated = false;
+
+      function animate() {
+        if (animated) return;
+        animated = true;
+
+        let value = 0;
+        const timer = setInterval(() => {
+          if (value >= target) {
+            clearInterval(timer);
+            return;
+          }
+          value++;
+
+          if (type === 'vertical') {
+            lineEl.style.height = value + '%';
+            lineEl.style.width  = '100%';
+          } else {
+            lineEl.style.width  = value + '%';
+            lineEl.style.height = '100%';
+          }
+
+          numberEls.forEach(n => (n.textContent = value + '%'));
+        }, speed);
+      }
+
+      /* scroll trigger */
+      const io = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              animate();
+              io.unobserve(item);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      io.observe(item);
     });
   }
 
-  /* ───────── boot + DOM watch ───────── */
-
-  function setup() {
+  function setupProgressBars() {
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initProgressbars);
+      document.addEventListener('DOMContentLoaded', initProgressBars);
     } else {
-      initProgressbars();
+      initProgressBars();
     }
 
-    /* ajax/dynamic block detect */
-    new MutationObserver(muts => {
-      if (muts.some(m => m.addedNodes.length || m.removedNodes.length)) {
-        initProgressbars();
+    const observer = new MutationObserver(muts => {
+      for (const m of muts) {
+        if (m.addedNodes.length || m.removedNodes.length) {
+          initProgressBars();
+          break;
+        }
       }
-    }).observe(document.body, { childList: true, subtree: true });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
   }
 
-  window.reinitProgressbars = initProgressbars;
-  setup();
+  window.reinitProgressBars = initProgressBars;
+
+  setupProgressBars();
 })();
 
