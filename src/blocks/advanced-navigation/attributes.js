@@ -1067,6 +1067,277 @@ const attributes = {
 	hamburgerMenuIconHoverColor: {
 		type: 'string',
 	},
+	/** Start Padding */
+	hamburgerMenuIconPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	hamburgerMenuIconDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	hamburgerMenuIconTabletPadding: {
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	hamburgerMenuIconMobilePadding: { 
+		type: "object", 
+		default: {
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
+		},
+	},
+	hamburgerMenuIconPaddingLink : { 
+		type : "boolean",
+		default: true
+	},
+	/** End Padding */
+
+	/** Start Hamburger Menu Background */
+	hamburgerMenuPopupBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	hamburgerMenuPopupNormalBackgroundType: { 
+		type: "string",
+		default: "classic",
+	},
+	hamburgerMenuPopupNormalClassicColor: {
+		type: "string",
+		default: "",
+	},
+	hamburgerMenuPopupNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	hamburgerMenuPopupNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	hamburgerMenuPopupNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	hamburgerMenuPopupHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	hamburgerMenuPopupHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	hamburgerMenuPopupHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	hamburgerMenuPopupHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	hamburgerMenuPopupHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Hamburger Menu Background */
+
+	/** Start Hamburger Menu Padding */
+	hamburgerMenuPopupPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	hamburgerMenuPopupDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	hamburgerMenuPopupTabletPadding: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	hamburgerMenuPopupMobilePadding: { 
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	hamburgerMenuPopupPaddingLink : { 
+		type : "boolean",
+		default: true
+	},
+	/** End Hamburger Menu Padding */
+
+	/** Start Hamburger Menu Popup Typography */ 
+	hamburgerMenuPopupGlobalTypographyData: { // Hamburger Menu Typography
+		type: "object",
+		default: {}
+	},
+	hamburgerMenuPopupGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	hamburgerMenuPopupGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
+	hamburgerMenuPopupGlobalTypoOption: {
+		type: "object",
+		default: {label: 'Default', value: 'default'},
+	},
+	hamburgerMenuPopupFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	hamburgerMenuPopupFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	hamburgerMenuPopupFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	hamburgerMenuPopupFontWeight : {
+		type: "string",
+		default: ""
+	},
+	hamburgerMenuPopupFontStyle : {
+		type: "string",
+		default: ""
+	},
+	hamburgerMenuPopupTextTransform : {
+		type: "string",
+		default: ""
+	},
+	hamburgerMenuPopupTextDecoration : {
+		type: "string",
+		default: ""
+	},
+	hamburgerMenuPopupLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	hamburgerMenuPopupLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	hamburgerMenuPopupLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	hamburgerMenuPopupLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	
+	/** End Hamburger Menu Popup Typography */ 
+
+	/** Start Hamburger Menu Popup Color */
+	hamburgerMenuPopupColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	hamburgerMenuPopupColor : {
+		type: "string"
+	},
+	hamburgerMenuPopupHoverColor: {
+		type: 'string',
+	},
+	/** End Hamburger Menu Popup Color */
+
+	/** Start Hamburger Menu close icon color */
+	hamburgerMenuCloseIconSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
+	},
+	hamburgerMenuCloseIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	hamburgerMenuCloseIconColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	hamburgerMenuCloseIconColor : {
+		type: "string"
+	},
+	hamburgerMenuCloseIconHoverColor: {
+		type: 'string',
+	},
+	/** End Hamburger Menu close icon color */
+
 	
 	/** End Hamburger Menu */
 

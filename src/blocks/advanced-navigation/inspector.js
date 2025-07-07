@@ -275,7 +275,69 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         hamburgerMenuIconColorSwitcher,
         hamburgerMenuIconColor,
         hamburgerMenuIconHoverColor,
+
+        hamburgerMenuIconPaddingUnits,
+        hamburgerMenuIconDesktopPadding,
+        hamburgerMenuIconTabletPadding,
+        hamburgerMenuIconMobilePadding,
+        hamburgerMenuIconPaddingLink,
         /** End Hamburger Menu */
+
+        /** Start Hamburger Menu Background */
+        hamburgerMenuPopupBgColorSwitcher,
+        hamburgerMenuPopupNormalBackgroundType,
+        hamburgerMenuPopupNormalClassicColor,
+        hamburgerMenuPopupNormalGradientColor,
+        hamburgerMenuPopupNormalCustomGradientSwitcher,
+        hamburgerMenuPopupNormalCustomGradientInputValue,
+
+        hamburgerMenuPopupHoverBackgroundType,
+        hamburgerMenuPopupHoverClassicColor,
+        hamburgerMenuPopupHoverGradientColor,
+        hamburgerMenuPopupHoverCustomGradientSwitcher,
+        hamburgerMenuPopupHoverCustomGradientInputValue,
+
+        /** End Hamburger Menu Background */
+
+        /** Start Hamburger Menu Padding */
+        hamburgerMenuPopupPaddingUnits,
+        hamburgerMenuPopupDesktopPadding,
+        hamburgerMenuPopupTabletPadding,
+        hamburgerMenuPopupMobilePadding,
+        hamburgerMenuPopupPaddingLink,
+        /** End Hamburger Menu Padding */
+
+        /** Start Hamburger Menu Typography */
+        hamburgerMenuPopupGlobalTypographyData,
+        hamburgerMenuPopupGlobalTypoSwitcher,
+        hamburgerMenuPopupGlobalTypoType,
+        hamburgerMenuPopupGlobalTypoOption,
+        hamburgerMenuPopupFontFamily,
+        hamburgerMenuPopupFontSize,
+        hamburgerMenuPopupFontSizeUnits,
+        hamburgerMenuPopupFontWeight,
+        hamburgerMenuPopupFontStyle,
+        hamburgerMenuPopupTextTransform,
+        hamburgerMenuPopupTextDecoration,
+        hamburgerMenuPopupLetterSpacing,
+        hamburgerMenuPopupLetterSpacingUnits,
+        hamburgerMenuPopupLineHeight,
+        hamburgerMenuPopupLineHeightUnits,
+        /** End Hamburger Menu Typography */
+        
+        /** Start Hamburger Menu Color */
+        hamburgerMenuPopupColorSwitcher,
+        hamburgerMenuPopupColor,
+        hamburgerMenuPopupHoverColor,
+        /** End Hamburger Menu Color */
+
+        /** Start Hamburger Menu close icon color */
+        hamburgerMenuCloseIconSize,
+        hamburgerMenuCloseIconSizeUnits,
+        hamburgerMenuCloseIconColorSwitcher,
+        hamburgerMenuCloseIconColor,
+        hamburgerMenuCloseIconHoverColor,
+        /** End Hamburger Menu close icon color */
 
         /** Start Global Setting */
         navigationGlobalZIndex,
@@ -1333,6 +1395,156 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const dropDownIconMobileMarginWidth = `${dropDownIconMobileMargin.top}${dropDownIconMarginUnits.Mobile} ${dropDownIconMobileMargin.right}${dropDownIconMarginUnits.Mobile} ${dropDownIconMobileMargin.bottom}${dropDownIconMarginUnits.Mobile} ${dropDownIconMobileMargin.left}${dropDownIconMarginUnits.Mobile}`;
 	/** End Dropdown Menu Icon */
 
+        /** Start Hamburger Menu Icon Padding */
+	const handleHamburgerMenuIconPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( hamburgerMenuIconPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						hamburgerMenuIconDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						hamburgerMenuIconTabletPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						hamburgerMenuIconMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {hamburgerMenuIconDesktopPadding: {...hamburgerMenuIconDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {hamburgerMenuIconTabletPadding: {...hamburgerMenuIconTabletPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {hamburgerMenuIconMobilePadding: {...hamburgerMenuIconMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleHamburgerMenuIconPaddingCombineBtn = () => {
+		setAttributes( {hamburgerMenuIconPaddingLink: !hamburgerMenuIconPaddingLink} );
+	}
+
+	const handleHamburgerMenuIconPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			hamburgerMenuIconPaddingUnits: {
+				...hamburgerMenuIconPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const hamburgerMenuIconDesktopPaddingWidth    = `${hamburgerMenuIconDesktopPadding.top}${hamburgerMenuIconPaddingUnits.Desktop} ${hamburgerMenuIconDesktopPadding.right}${hamburgerMenuIconPaddingUnits.Desktop} ${hamburgerMenuIconDesktopPadding.bottom}${hamburgerMenuIconPaddingUnits.Desktop} ${hamburgerMenuIconDesktopPadding.left}${hamburgerMenuIconPaddingUnits.Desktop}`;
+	const hamburgerMenuIconTabletPaddingWidth     = `${hamburgerMenuIconTabletPadding.top}${hamburgerMenuIconPaddingUnits.Tablet} ${hamburgerMenuIconTabletPadding.right}${hamburgerMenuIconPaddingUnits.Tablet} ${hamburgerMenuIconTabletPadding.bottom}${hamburgerMenuIconPaddingUnits.Tablet} ${hamburgerMenuIconTabletPadding.left}${hamburgerMenuIconPaddingUnits.Tablet}`;
+	const hamburgerMenuIconMobilePaddingWidth     = `${hamburgerMenuIconMobilePadding.top}${hamburgerMenuIconPaddingUnits.Mobile} ${hamburgerMenuIconMobilePadding.right}${hamburgerMenuIconPaddingUnits.Mobile} ${hamburgerMenuIconMobilePadding.bottom}${hamburgerMenuIconPaddingUnits.Mobile} ${hamburgerMenuIconMobilePadding.left}${hamburgerMenuIconPaddingUnits.Mobile}`;
+	/** End Hamburger Menu Icon Padding */
+
+
+
+
+
+    /** Start Hamburger Menu Popup Padding */
+	const handleHamburgerMenuPopupPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( hamburgerMenuPopupPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						hamburgerMenuPopupDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						hamburgerMenuPopupTabletPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						hamburgerMenuPopupMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {hamburgerMenuPopupDesktopPadding: {...hamburgerMenuPopupDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {hamburgerMenuPopupTabletPadding: {...hamburgerMenuPopupTabletPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {hamburgerMenuPopupMobilePadding: {...hamburgerMenuPopupMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleHamburgerMenuPopupPaddingCombineBtn = () => {
+		setAttributes( {hamburgerMenuPopupPaddingLink: !hamburgerMenuPopupPaddingLink} );
+	}
+
+	const handleHamburgerMenuPopupPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			hamburgerMenuPopupPaddingUnits: {
+				...hamburgerMenuPopupPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const hamburgerMenuPopupDesktopPaddingWidth    = `${hamburgerMenuPopupDesktopPadding.top}${hamburgerMenuPopupPaddingUnits.Desktop} ${hamburgerMenuPopupDesktopPadding.right}${hamburgerMenuPopupPaddingUnits.Desktop} ${hamburgerMenuPopupDesktopPadding.bottom}${hamburgerMenuPopupPaddingUnits.Desktop} ${hamburgerMenuPopupDesktopPadding.left}${hamburgerMenuPopupPaddingUnits.Desktop}`;
+	const hamburgerMenuPopupTabletPaddingWidth     = `${hamburgerMenuPopupTabletPadding.top}${hamburgerMenuPopupPaddingUnits.Tablet} ${hamburgerMenuPopupTabletPadding.right}${hamburgerMenuPopupPaddingUnits.Tablet} ${hamburgerMenuPopupTabletPadding.bottom}${hamburgerMenuPopupPaddingUnits.Tablet} ${hamburgerMenuPopupTabletPadding.left}${hamburgerMenuPopupPaddingUnits.Tablet}`;
+	const hamburgerMenuPopupMobilePaddingWidth     = `${hamburgerMenuPopupMobilePadding.top}${hamburgerMenuPopupPaddingUnits.Mobile} ${hamburgerMenuPopupMobilePadding.right}${hamburgerMenuPopupPaddingUnits.Mobile} ${hamburgerMenuPopupMobilePadding.bottom}${hamburgerMenuPopupPaddingUnits.Mobile} ${hamburgerMenuPopupMobilePadding.left}${hamburgerMenuPopupPaddingUnits.Mobile}`;
+	/** End Hamburger Menu Popup Padding */
+
     /** Start Global padding */
 	const handleGlobalPaddingUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -1632,9 +1844,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	/** End Border Radius */  
 
 
-
-
-
     const allBlockStyle = useMemo(() => `
 
         .${blockId}.fb-advanced-navigation-main-wrapper {
@@ -1813,6 +2022,74 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${dropDownIconHoverColor ? `color: ${dropDownIconHoverColor};` : ''}
         }
 
+        .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container-open {
+            ${hamburgerMenuIconColor ? `color: ${hamburgerMenuIconColor};` : ''}
+            ${hamburgerMenuIconDesktopPaddingWidth && hamburgerMenuIconDesktopPadding.top? `padding: ${hamburgerMenuIconDesktopPaddingWidth};` : ''}
+        }
+        .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container-open svg {
+            ${hamburgerMenuIconSize.Desktop ? `width: ${hamburgerMenuIconSize.Desktop}${hamburgerMenuIconSizeUnits.Desktop};` : ''}
+            ${hamburgerMenuIconSize.Desktop ? `height: ${hamburgerMenuIconSize.Desktop}${hamburgerMenuIconSizeUnits.Desktop};` : ''}
+        }
+
+        .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container-open:hover {
+            ${hamburgerMenuIconHoverColor ? `color: ${hamburgerMenuIconHoverColor};` : ''}
+        }
+
+        .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container.is-menu-open {
+            ${hamburgerMenuPopupNormalBackgroundType === 'gradient' ? `  
+                ${hamburgerMenuPopupNormalCustomGradientSwitcher && hamburgerMenuPopupNormalCustomGradientInputValue ? `background: ${hamburgerMenuPopupNormalCustomGradientInputValue};` : `background: ${hamburgerMenuPopupNormalGradientColor};`}
+            `: `
+                ${hamburgerMenuPopupNormalClassicColor ? `background: ${hamburgerMenuPopupNormalClassicColor};` : ''}
+            `}
+            ${hamburgerMenuPopupDesktopPaddingWidth && hamburgerMenuPopupDesktopPadding.top? `padding: ${hamburgerMenuPopupDesktopPaddingWidth};` : ''}
+        }
+
+        .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container.is-menu-open:hover {
+            ${hamburgerMenuPopupHoverBackgroundType === 'gradient' ? `  
+                ${hamburgerMenuPopupHoverCustomGradientSwitcher && hamburgerMenuPopupHoverCustomGradientInputValue ? `background: ${hamburgerMenuPopupHoverCustomGradientInputValue};` : `background: ${hamburgerMenuPopupHoverGradientColor};`}
+            `: `
+                ${hamburgerMenuPopupHoverClassicColor ? `background: ${hamburgerMenuPopupHoverClassicColor};` : ''}
+            `}
+        }
+
+         .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content {
+            ${hamburgerMenuPopupGlobalTypoSwitcher.fontFamily === true && hamburgerMenuPopupGlobalTypographyData.fontFamily ? `font-family: ${hamburgerMenuPopupGlobalTypographyData.fontFamily};` : ''} 
+            ${hamburgerMenuPopupGlobalTypoSwitcher.fontSize === true && hamburgerMenuPopupGlobalTypographyData.fontSize ? `font-size: ${hamburgerMenuPopupGlobalTypographyData.fontSize};` : ''}
+            ${hamburgerMenuPopupGlobalTypoSwitcher.fontWeight === true && hamburgerMenuPopupGlobalTypographyData.fontWeight ? `font-weight: ${hamburgerMenuPopupGlobalTypographyData.fontWeight};` : ''} 
+            ${hamburgerMenuPopupGlobalTypoSwitcher.fontStyle === true && hamburgerMenuPopupGlobalTypographyData.fontStyle ? `font-style: ${hamburgerMenuPopupGlobalTypographyData.fontStyle};` : ''}
+            ${hamburgerMenuPopupGlobalTypoSwitcher.textTransform === true && hamburgerMenuPopupGlobalTypographyData.textTransform ? `text-transform: ${hamburgerMenuPopupGlobalTypographyData.textTransform};` : ''}
+            ${hamburgerMenuPopupGlobalTypoSwitcher.textDecoration === true && hamburgerMenuPopupGlobalTypographyData.textDecoration ? `text-decoration: ${hamburgerMenuPopupGlobalTypographyData.textDecoration};` : ''}
+            ${hamburgerMenuPopupGlobalTypoSwitcher.letterSpacing === true && hamburgerMenuPopupGlobalTypographyData.letterSpacing ? `letter-spacing: ${hamburgerMenuPopupGlobalTypographyData.letterSpacing};` : ''}
+            ${hamburgerMenuPopupGlobalTypoSwitcher.lineHeight === true && hamburgerMenuPopupGlobalTypographyData.lineHeight ? `line-height: ${hamburgerMenuPopupGlobalTypographyData.lineHeight};` : ''}
+                
+            ${hamburgerMenuPopupGlobalTypoSwitcher.fontFamily === false && hamburgerMenuPopupFontFamily && hamburgerMenuPopupFontFamily !== 'Default' ? `font-family: ${hamburgerMenuPopupFontFamily};` : ''}
+            ${hamburgerMenuPopupGlobalTypoSwitcher.fontSize === false && hamburgerMenuPopupFontSize.Desktop && hamburgerMenuPopupFontSizeUnits.Desktop ? `font-size: ${hamburgerMenuPopupFontSize.Desktop}${hamburgerMenuPopupFontSizeUnits.Desktop};` : ''}
+            ${hamburgerMenuPopupGlobalTypoSwitcher.fontWeight === false && hamburgerMenuPopupFontWeight ? `font-weight: ${hamburgerMenuPopupFontWeight};` : ''}
+            ${hamburgerMenuPopupGlobalTypoSwitcher.fontStyle === false && hamburgerMenuPopupFontStyle ? `font-style: ${hamburgerMenuPopupFontStyle};` : ''}
+            ${hamburgerMenuPopupGlobalTypoSwitcher.textTransform === false && hamburgerMenuPopupTextTransform ? `text-transform: ${hamburgerMenuPopupTextTransform};` : ''}
+            ${hamburgerMenuPopupGlobalTypoSwitcher.textDecoration === false && hamburgerMenuPopupTextDecoration ? `text-decoration: ${hamburgerMenuPopupTextDecoration};` : ''}
+            ${hamburgerMenuPopupGlobalTypoSwitcher.letterSpacing === false && hamburgerMenuPopupLetterSpacing.Desktop && hamburgerMenuPopupLetterSpacingUnits.Desktop ? `letter-spacing: ${hamburgerMenuPopupLetterSpacing.Desktop}${hamburgerMenuPopupLetterSpacingUnits.Desktop};` : ''}
+            ${hamburgerMenuPopupGlobalTypoSwitcher.lineHeight === false && hamburgerMenuPopupLineHeight.Desktop && hamburgerMenuPopupLineHeightUnits.Desktop ? `line-height: ${hamburgerMenuPopupLineHeight.Desktop}${hamburgerMenuPopupLineHeightUnits.Desktop};` : ''}
+            
+            ${hamburgerMenuPopupColor ? `color: ${hamburgerMenuPopupColor};` : ''}
+         
+         }
+
+        .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content:hover {
+            ${hamburgerMenuPopupHoverColor ? `color: ${hamburgerMenuPopupHoverColor};` : ''}
+        }
+
+        .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close svg {
+            ${hamburgerMenuCloseIconColor ? `fill: ${hamburgerMenuCloseIconColor};` : ''}
+            ${hamburgerMenuCloseIconSize.Desktop ? `width: ${hamburgerMenuCloseIconSize.Desktop}${hamburgerMenuCloseIconSizeUnits.Desktop};` : ''}
+            ${hamburgerMenuCloseIconSize.Desktop ? `height: ${hamburgerMenuCloseIconSize.Desktop}${hamburgerMenuCloseIconSizeUnits.Desktop};` : ''}
+        }
+
+        .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close svg:hover {
+            ${hamburgerMenuCloseIconHoverColor ? `fill: ${hamburgerMenuCloseIconHoverColor};` : ''}
+        }
+
+
 
         @media only screen and (max-width: 1024px) {
 
@@ -1867,6 +2144,28 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${dropDownIconSize.Tablet ? `height: ${dropDownIconSize.Tablet}${dropDownIconSizeUnits.Tablet};` : ''}
                 ${dropDownIconTabletMarginWidth && dropDownIconTabletMargin.top? `margin: ${dropDownIconTabletMarginWidth};` : ''}
             }
+
+            .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container-open {
+                ${hamburgerMenuIconTabletPaddingWidth && hamburgerMenuIconTabletPadding.top? `padding: ${hamburgerMenuIconTabletPaddingWidth};` : ''}
+            }
+            .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container-open svg {
+                ${hamburgerMenuIconSize.Tablet ? `width: ${hamburgerMenuIconSize.Tablet}${hamburgerMenuIconSizeUnits.Tablet};` : ''}
+                ${hamburgerMenuIconSize.Tablet ? `height: ${hamburgerMenuIconSize.Tablet}${hamburgerMenuIconSizeUnits.Tablet};` : ''}
+            }
+
+            .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container.is-menu-open {
+                ${hamburgerMenuPopupTabletPaddingWidth && hamburgerMenuPopupTabletPadding.top? `padding: ${hamburgerMenuPopupTabletPaddingWidth};` : ''}
+            }
+
+            .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content {
+                ${hamburgerMenuPopupGlobalTypoSwitcher.fontSize === false && hamburgerMenuPopupFontSize.Tablet && hamburgerMenuPopupFontSizeUnits.Tablet ? `font-size: ${hamburgerMenuPopupFontSize.Tablet}${hamburgerMenuPopupFontSizeUnits.Tablet};` : ''}
+                ${hamburgerMenuPopupGlobalTypoSwitcher.letterSpacing === false && hamburgerMenuPopupLetterSpacing.Tablet && hamburgerMenuPopupLetterSpacingUnits.Tablet ? `letter-spacing: ${hamburgerMenuPopupLetterSpacing.Tablet}${hamburgerMenuPopupLetterSpacingUnits.Tablet};` : ''}
+                ${hamburgerMenuPopupGlobalTypoSwitcher.lineHeight === false && hamburgerMenuPopupLineHeight.Tablet && hamburgerMenuPopupLineHeightUnits.Tablet ? `line-height: ${hamburgerMenuPopupLineHeight.Tablet}${hamburgerMenuPopupLineHeightUnits.Tablet};` : ''}
+            }
+            .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close svg {
+                ${hamburgerMenuCloseIconSize.Tablet ? `width: ${hamburgerMenuCloseIconSize.Tablet}${hamburgerMenuCloseIconSizeUnits.Tablet};` : ''}
+                ${hamburgerMenuCloseIconSize.Tablet ? `height: ${hamburgerMenuCloseIconSize.Tablet}${hamburgerMenuCloseIconSizeUnits.Tablet};` : ''}
+            }
         }
 
         @media only screen and (max-width: 767px) {
@@ -1920,6 +2219,27 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${dropDownIconSize.Mobile ? `width: ${dropDownIconSize.Mobile}${dropDownIconSizeUnits.Mobile};` : ''}
                 ${dropDownIconSize.Mobile ? `height: ${dropDownIconSize.Mobile}${dropDownIconSizeUnits.Mobile};` : ''}
                 ${dropDownIconMobileMarginWidth && dropDownIconMobileMargin.top? `margin: ${dropDownIconMobileMarginWidth};` : ''}
+            }
+
+            .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container-open {
+                ${hamburgerMenuIconMobilePaddingWidth && hamburgerMenuIconMobilePadding.top? `padding: ${hamburgerMenuIconMobilePaddingWidth};` : ''}
+            }
+            .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container-open svg {
+                ${hamburgerMenuIconSize.Mobile ? `width: ${hamburgerMenuIconSize.Mobile}${hamburgerMenuIconSizeUnits.Mobile};` : ''}
+                ${hamburgerMenuIconSize.Mobile ? `height: ${hamburgerMenuIconSize.Mobile}${hamburgerMenuIconSizeUnits.Mobile};` : ''}
+            }
+
+            .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container.is-menu-open {
+                ${hamburgerMenuPopupMobilePaddingWidth && hamburgerMenuPopupMobilePadding.top? `padding: ${hamburgerMenuPopupMobilePaddingWidth};` : ''}
+            }
+            .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content {
+                ${hamburgerMenuPopupGlobalTypoSwitcher.fontSize === false && hamburgerMenuPopupFontSize.Mobile && hamburgerMenuPopupFontSizeUnits.Mobile ? `font-size: ${hamburgerMenuPopupFontSize.Mobile}${hamburgerMenuPopupFontSizeUnits.Mobile};` : ''}
+                ${hamburgerMenuPopupGlobalTypoSwitcher.letterSpacing === false && hamburgerMenuPopupLetterSpacing.Mobile && hamburgerMenuPopupLetterSpacingUnits.Mobile ? `letter-spacing: ${hamburgerMenuPopupLetterSpacing.Mobile}${hamburgerMenuPopupLetterSpacingUnits.Mobile};` : ''}
+                ${hamburgerMenuPopupGlobalTypoSwitcher.lineHeight === false && hamburgerMenuPopupLineHeight.Mobile && hamburgerMenuPopupLineHeightUnits.Mobile ? `line-height: ${hamburgerMenuPopupLineHeight.Mobile}${hamburgerMenuPopupLineHeightUnits.Mobile};` : ''}
+            }
+            .${blockId} .advanced-navigation-wrapper .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close svg {
+                ${hamburgerMenuCloseIconSize.Mobile ? `width: ${hamburgerMenuCloseIconSize.Mobile}${hamburgerMenuCloseIconSizeUnits.Mobile};` : ''}
+                ${hamburgerMenuCloseIconSize.Mobile ? `height: ${hamburgerMenuCloseIconSize.Mobile}${hamburgerMenuCloseIconSizeUnits.Mobile};` : ''}
             }
 
         }
@@ -2201,7 +2521,75 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         hamburgerMenuIconColorSwitcher,
         hamburgerMenuIconColor,
         hamburgerMenuIconHoverColor,
+
+        hamburgerMenuIconPaddingUnits,
+        hamburgerMenuIconDesktopPadding,
+        hamburgerMenuIconTabletPadding,
+        hamburgerMenuIconMobilePadding,
+        hamburgerMenuIconPaddingLink,
+        hamburgerMenuIconDesktopPaddingWidth,
+        hamburgerMenuIconTabletPaddingWidth,
+        hamburgerMenuIconMobilePaddingWidth,
         /** End Hamburger Menu */
+
+        /** Start Hamburger Menu Background */
+        hamburgerMenuPopupBgColorSwitcher,
+        hamburgerMenuPopupNormalBackgroundType,
+        hamburgerMenuPopupNormalClassicColor,
+        hamburgerMenuPopupNormalGradientColor,
+        hamburgerMenuPopupNormalCustomGradientSwitcher,
+        hamburgerMenuPopupNormalCustomGradientInputValue,
+
+        hamburgerMenuPopupHoverBackgroundType,
+        hamburgerMenuPopupHoverClassicColor,
+        hamburgerMenuPopupHoverGradientColor,
+        hamburgerMenuPopupHoverCustomGradientSwitcher,
+        hamburgerMenuPopupHoverCustomGradientInputValue,
+
+        /** End Hamburger Menu Background */
+
+        /** Start Hamburger Menu Padding */
+        hamburgerMenuPopupPaddingUnits,
+        hamburgerMenuPopupDesktopPadding,
+        hamburgerMenuPopupTabletPadding,
+        hamburgerMenuPopupMobilePadding,
+        hamburgerMenuPopupPaddingLink,
+        hamburgerMenuPopupDesktopPaddingWidth,
+        hamburgerMenuPopupTabletPaddingWidth,
+        hamburgerMenuPopupMobilePaddingWidth,
+        /** End Hamburger Menu Padding */
+
+        /** Start Hamburger Menu Typography */
+        hamburgerMenuPopupGlobalTypographyData,
+        hamburgerMenuPopupGlobalTypoSwitcher,
+        hamburgerMenuPopupGlobalTypoType,
+        hamburgerMenuPopupGlobalTypoOption,
+        hamburgerMenuPopupFontFamily,
+        hamburgerMenuPopupFontSize,
+        hamburgerMenuPopupFontSizeUnits,
+        hamburgerMenuPopupFontWeight,
+        hamburgerMenuPopupFontStyle,
+        hamburgerMenuPopupTextTransform,
+        hamburgerMenuPopupTextDecoration,
+        hamburgerMenuPopupLetterSpacing,
+        hamburgerMenuPopupLetterSpacingUnits,
+        hamburgerMenuPopupLineHeight,
+        hamburgerMenuPopupLineHeightUnits,
+        /** End Hamburger Menu Typography */
+        
+        /** Start Hamburger Menu Color */
+        hamburgerMenuPopupColorSwitcher,
+        hamburgerMenuPopupColor,
+        hamburgerMenuPopupHoverColor,
+        /** End Hamburger Menu Color */
+
+        /** Start Hamburger Menu close icon color */
+        hamburgerMenuCloseIconSize,
+        hamburgerMenuCloseIconSizeUnits,
+        hamburgerMenuCloseIconColorSwitcher,
+        hamburgerMenuCloseIconColor,
+        hamburgerMenuCloseIconHoverColor,
+        /** End Hamburger Menu close icon color */
 
 
         /** Start Global Setting */
@@ -3022,7 +3410,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 <FB_Range
                     min={1}
                     max={hamburgerMenuIconSizeUnits[deviceType] === "%" ? 100 : 100}
-                    label={__("Size", "frontis-blocks")}
+                    label={__("Icon Size", "frontis-blocks")}
                     rangeValue={hamburgerMenuIconSize}
                     onChangeHandler={(value) => setAttributes({ hamburgerMenuIconSize: value })}
                     rangeUnitHandler={(value) => setAttributes({ hamburgerMenuIconSizeUnits: value })}
@@ -3034,7 +3422,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 />
 
                 <FB_SwitcherControl
-                    label={__("Color", "frontis-blocks")}
+                    label={__("Icon Color", "frontis-blocks")}
                     globalSwitcher={hamburgerMenuIconColorSwitcher}
                     setGlobalSwitcher={(value) => setAttributes({ hamburgerMenuIconColorSwitcher: value })}
                 />
@@ -3055,6 +3443,179 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     />
                 )}
 
+                <FB_Spacing 
+                    label={__("Icon Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleHamburgerMenuIconPaddingUnitsHandler}  
+                    spacingUnits={hamburgerMenuIconPaddingUnits}
+                    spacingDesktop={hamburgerMenuIconDesktopPadding}
+                    spacingTablet={hamburgerMenuIconTabletPadding}
+                    spacingMobile={hamburgerMenuIconMobilePadding}
+                    handleSpacingUnitHandler={handleHamburgerMenuIconPaddingUnitChange}
+                    spacingCombineBtn={hamburgerMenuIconPaddingLink}
+                    spacingCombineBtnHandler={handleHamburgerMenuIconPaddingCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+            </PanelBody>
+            <PanelBody
+                title={__("Hamburger Menu Popup", "frontis-blocks")}
+                initialOpen={false}
+            >
+                <FB_BackgroundColorControl
+                    label={__("Background Color", "frontis-blocks")}
+                    bgColorSwitcher={hamburgerMenuPopupBgColorSwitcher}  
+                    setBgColorSwitcher={(value) => setAttributes({ hamburgerMenuPopupBgColorSwitcher: value })}
+                    
+                    normalBackgroundType={hamburgerMenuPopupNormalBackgroundType} 
+                    setNormalBackgroundType={(value) => setAttributes({ hamburgerMenuPopupNormalBackgroundType: value })}
+                    normalClassicColor={hamburgerMenuPopupNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ hamburgerMenuPopupNormalClassicColor: value })}
+                    normalGradientColor={hamburgerMenuPopupNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ hamburgerMenuPopupNormalGradientColor: value })}
+                    normalCustomGradientSwitcher={hamburgerMenuPopupNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ hamburgerMenuPopupNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={hamburgerMenuPopupNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ hamburgerMenuPopupNormalCustomGradientInputValue: value })}
+                    
+                    hoverBackgroundType={hamburgerMenuPopupHoverBackgroundType} 
+                    setHoverBackgroundType={(value) => setAttributes({ hamburgerMenuPopupHoverBackgroundType: value })}
+                    hoverClassicColor={hamburgerMenuPopupHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ hamburgerMenuPopupHoverClassicColor: value })}
+                    hoverGradientColor={hamburgerMenuPopupHoverGradientColor} 
+                    setHoverGradientColor={(value) => setAttributes({ hamburgerMenuPopupHoverGradientColor: value })}
+                    hoverCustomGradientSwitcher={hamburgerMenuPopupHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ hamburgerMenuPopupHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={hamburgerMenuPopupHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ hamburgerMenuPopupHoverCustomGradientInputValue: value })}
+
+                    isBackgroundImage={false}
+
+                />
+
+                <FB_Spacing 
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleHamburgerMenuPopupPaddingUnitsHandler}  
+                    spacingUnits={hamburgerMenuPopupPaddingUnits}
+                    spacingDesktop={hamburgerMenuPopupDesktopPadding}
+                    spacingTablet={hamburgerMenuPopupTabletPadding}
+                    spacingMobile={hamburgerMenuPopupMobilePadding}
+                    handleSpacingUnitHandler={handleHamburgerMenuPopupPaddingUnitChange}
+                    spacingCombineBtn={hamburgerMenuPopupPaddingLink}
+                    spacingCombineBtnHandler={handleHamburgerMenuPopupPaddingCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+
+                <FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={hamburgerMenuPopupGlobalTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ hamburgerMenuPopupGlobalTypographyData: value })}
+
+                    globalTypoType={hamburgerMenuPopupGlobalTypoType}
+                    onChangeGlobalTypoType={(value) => {
+                        setAttributes({ 
+                            hamburgerMenuPopupGlobalTypoType: value, 
+                            hamburgerMenuPopupGlobalTypoSwitcher: value === 'default' ? {...hamburgerMenuPopupGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...hamburgerMenuPopupGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                        })
+                    }}
+
+                    globalTypoOption={hamburgerMenuPopupGlobalTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ hamburgerMenuPopupGlobalTypoOption: value })}
+
+                    fontFamily={hamburgerMenuPopupFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ hamburgerMenuPopupFontFamily: value, hamburgerMenuPopupGlobalTypoSwitcher: {...hamburgerMenuPopupGlobalTypoSwitcher, fontFamily: value && false} })}
+
+                    fontSize={hamburgerMenuPopupFontSize}
+                    onChangeFontSize={(value) => setAttributes({ hamburgerMenuPopupFontSize: value, hamburgerMenuPopupGlobalTypoSwitcher: {...hamburgerMenuPopupGlobalTypoSwitcher, fontSize: value && false} })}
+
+                    fontSizeUnits={hamburgerMenuPopupFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ hamburgerMenuPopupFontSizeUnits: value })}
+
+                    fontWeight={hamburgerMenuPopupFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ hamburgerMenuPopupFontWeight: value, hamburgerMenuPopupGlobalTypoSwitcher: {...hamburgerMenuPopupGlobalTypoSwitcher, fontWeight: value && false} })}
+
+                    fontStyle={hamburgerMenuPopupFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ hamburgerMenuPopupFontStyle: value, hamburgerMenuPopupGlobalTypoSwitcher: {...hamburgerMenuPopupGlobalTypoSwitcher, fontStyle: value && false} })}
+
+                    textTransform={hamburgerMenuPopupTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ hamburgerMenuPopupTextTransform: value, hamburgerMenuPopupGlobalTypoSwitcher: {...hamburgerMenuPopupGlobalTypoSwitcher, textTransform: value && false} })}
+
+                    textDecoration={hamburgerMenuPopupTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ hamburgerMenuPopupTextDecoration: value, hamburgerMenuPopupGlobalTypoSwitcher: {...hamburgerMenuPopupGlobalTypoSwitcher, textDecoration: value && false} })}
+
+                    letterSpacing={hamburgerMenuPopupLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ hamburgerMenuPopupLetterSpacing: value, hamburgerMenuPopupGlobalTypoSwitcher: {...hamburgerMenuPopupGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+                    letterSpacingUnits={hamburgerMenuPopupLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ hamburgerMenuPopupLetterSpacingUnits: value })}
+
+                    lineHeight={hamburgerMenuPopupLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ hamburgerMenuPopupLineHeight: value, hamburgerMenuPopupGlobalTypoSwitcher: {...hamburgerMenuPopupGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                    lineHeightUnits={hamburgerMenuPopupLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ hamburgerMenuPopupLineHeightUnits: value })}
+
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+                <FB_SwitcherControl
+                        label={__("Color", "frontis-blocks")}
+                        options={NORMAL_HOVER}
+                        globalSwitcher={hamburgerMenuPopupColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ hamburgerMenuPopupColorSwitcher: value })}
+                />
+                {hamburgerMenuPopupColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={hamburgerMenuPopupColor}
+                        setGlobalColor={(value) => setAttributes({ hamburgerMenuPopupColor: value })}
+                    />
+                )}
+
+                {hamburgerMenuPopupColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={hamburgerMenuPopupHoverColor}
+                        setGlobalColor={(value) => setAttributes({ hamburgerMenuPopupHoverColor: value })}
+                    />
+                )}
+
+                <FB_Range
+                    min={1}
+                    max={hamburgerMenuCloseIconSizeUnits[deviceType] === "%" ? 100 : 100}
+                    label={__("Close Icon Size", "frontis-blocks")}
+                    rangeValue={hamburgerMenuCloseIconSize}
+                    onChangeHandler={(value) => setAttributes({ hamburgerMenuCloseIconSize: value })}
+                    rangeUnitHandler={(value) => setAttributes({ hamburgerMenuCloseIconSizeUnits: value })}
+                    deviceType={deviceType}
+                    units={hamburgerMenuCloseIconSizeUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+
+                <FB_SwitcherControl
+                        label={__("Close Icon Color", "frontis-blocks")}
+                        options={NORMAL_HOVER}
+                        globalSwitcher={hamburgerMenuCloseIconColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ hamburgerMenuCloseIconColorSwitcher: value })}
+                />
+                {hamburgerMenuCloseIconColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={hamburgerMenuCloseIconColor}
+                        setGlobalColor={(value) => setAttributes({ hamburgerMenuCloseIconColor: value })}
+                    />
+                )}
+                {hamburgerMenuCloseIconColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={hamburgerMenuCloseIconHoverColor}
+                        setGlobalColor={(value) => setAttributes({ hamburgerMenuCloseIconHoverColor: value })}
+                    />
+                )}
             </PanelBody>
         </>
 	);
