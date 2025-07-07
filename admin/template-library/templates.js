@@ -102,7 +102,12 @@ const PatternLibraryButton = () => {
                     <div className={`fb-template-library-store-wrap`}>
                         <div className={`fb-template-library-store-inner-wrap`}>
                             <div>
-                                <TemplateHeader activeTab={activeTab} setActiveTab={setActiveTab} data={data} />
+                                <TemplateHeader 
+                                    activeTab={activeTab} 
+                                    setActiveTab={setActiveTab} 
+                                    data={data} 
+                                    onClose={() => setIsVisible(false)}
+                                />
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">
                                 <TemplateSidebar activeTab={activeTab} data={data} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
