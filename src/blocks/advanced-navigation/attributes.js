@@ -26,6 +26,10 @@ const attributes = {
         type: "string",
         default: "icon"
     },
+	hamburgerMenuSwitcher: {
+        type: "string",
+        default: "mobile",
+    },
     dropdownOpenOnClick: {
         type: "boolean",
         default: false

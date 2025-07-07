@@ -36,6 +36,11 @@ export const HAMBURGER_MENU_ICON_TYPE = [
 	{ label: __("Icon", 'frontis-blocks'), value: 'icon' },
 	{ label: __("Text", 'frontis-blocks'), value: 'text' },
 ];
+export const HAMBURGER_MENU_SCREEN = [
+	{ label: __("Off", 'frontis-blocks'), value: "never" },
+	{ label: __("Mobile", 'frontis-blocks'), value: "mobile" },
+	{ label: __("Always", 'frontis-blocks'), value: "always" },
+];
 
 export const DISPLAY_HAMBURGER_MENU = [
 	{ label: __("Hide", 'frontis-blocks'), value: 'hide' },

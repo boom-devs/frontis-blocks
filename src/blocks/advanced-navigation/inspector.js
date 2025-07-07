@@ -16,6 +16,7 @@ import {
     HORIZONTAL_NAVIGATION_ALIGN,
     VERTICAL_NAVIGATION_ALIGN,
     HAMBURGER_MENU_ICON_TYPE,
+    HAMBURGER_MENU_SCREEN,
 } from '@Constants/fbConstants';
 
 import FB_InspectorControls from '@Components/InspectorControls';
@@ -47,6 +48,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         navigationFlexWrapSwitcher,
         navigationVerticalAlign, 
         hamburgerMenuIconType,
+        hamburgerMenuSwitcher,
 
         /** Start Navigation Typography */
         navigationGlobalTypographyData,
@@ -2089,8 +2091,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${hamburgerMenuCloseIconHoverColor ? `fill: ${hamburgerMenuCloseIconHoverColor};` : ''}
         }
 
-
-
         @media only screen and (max-width: 1024px) {
 
             .${blockId}.fb-advanced-navigation-main-wrapper {
@@ -2255,7 +2255,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         navigationFlexWrapSwitcher,
         navigationVerticalAlign, 
         hamburgerMenuIconType,
-
+        hamburgerMenuSwitcher,
 
         /** Start Navigation Typography */
         navigationGlobalTypographyData,
@@ -2756,6 +2756,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     options={HAMBURGER_MENU_ICON_TYPE}
                     globalSwitcher={hamburgerMenuIconType}
                     setGlobalSwitcher={(value) => setAttributes({ hamburgerMenuIconType: value })}
+                />
+                <FB_SwitcherControl
+                    label={__("Display Hamburger Menu", "frontis-blocks")}
+                    options={HAMBURGER_MENU_SCREEN}
+                    globalSwitcher={hamburgerMenuSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ hamburgerMenuSwitcher: value })}
                 />
             </PanelBody>
         </>
