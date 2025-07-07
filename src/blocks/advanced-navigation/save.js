@@ -1,37 +1,37 @@
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
-import classnames from 'classnames';
 
 export default function save({ attributes }) {
     const {
         blockId,
-        layout,
-        navAlign,
-        preset,
-        verticalPreset,
+        navigationLayout,
+        navigationHorizontalAlign,
         showDropdownIcon,
-        navBtnType,
-        navVerticalAlign,
-        hamburgerCloseIconAlign,
-        classHook,
+        navigationVerticalAlign,
+        hamburgerMenuIconType,
+
+        navigationGlobalWraperClass,
+        navigationGlobalWraperID,
+
+        navigationDesktopSwitcher,
+        navigationTabletSwitcher,
+        navigationMobileSwitcher,
     } = attributes;
 
-    const layoutPreset = layout === "is-horizontal" ? preset : verticalPreset;
-
     const blockProps = useBlockProps.save({
-        className: classnames(`frontis-advanced-navigation-wrapper`),
+        className: `frontis-block fb-advanced-navigation-main-wrapper ${blockId} ${navigationDesktopSwitcher && 'fb-desktop-responsive'} ${navigationTabletSwitcher && 'fb-tablet-responsive'} ${navigationMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     return (
         <div {...blockProps}>
-            <div className={`fb-parent-wrapper frontis-parent-${blockId} ${classHook}`}>
+            <div className={`advanced-navigation-wrapper ${navigationGlobalWraperClass}`} id={navigationGlobalWraperID}>
                 <div
-                    className={`${blockId} frontis-advanced-navigation-inner ${layout} ${layoutPreset} ${
-                        layout === "is-horizontal" ? navAlign : navVerticalAlign
+                    className={`advanced-navigation-inner-wrapper ${navigationLayout} ${
+                        navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign
                     } ${showDropdownIcon ? "" : "remove-dropdown-icon"} ${
-                        navBtnType ? "responsive-icon" : "responsive-text"
-                    } ${hamburgerCloseIconAlign}`}
+                        hamburgerMenuIconType === "icon" ? "responsive-icon" : "responsive-text"
+                    }`}
                 >
-                    <div className="frontis-nav-contents">
+                    <div className="advanced-navigation-contents">
                         <InnerBlocks.Content />
                     </div>
                 </div>
