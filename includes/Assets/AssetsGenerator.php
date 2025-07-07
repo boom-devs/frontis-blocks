@@ -133,7 +133,7 @@ class AssetsGenerator {
             foreach ($color_data[2] as $color) {
                 $original_var = $color['slug'];
                 $prefixed_var = "--wp--frontis--color--" . $original_var;
-                $global_colors .= "{$prefixed_var}: {$color['color']};\n";
+                $global_colors .= "{$prefixed_var}: {$color['gradient']};\n";
             }
         }
 
@@ -143,7 +143,7 @@ class AssetsGenerator {
             foreach ($color_data[3] as $color) {
                 $original_var = $color['slug'];
                 $prefixed_var = "--wp--frontis--color--" . $original_var;
-                $global_colors .= "{$prefixed_var}: {$color['color']};\n";
+                $global_colors .= "{$prefixed_var}: {$color['gradient']};\n";
             }
         }
 

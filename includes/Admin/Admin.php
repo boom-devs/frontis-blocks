@@ -58,11 +58,16 @@ class Admin {
 		$gutenberg_default_gutenberg_colors = [];
 		$gradient_colors = [];
 		$theme_json = wp_get_global_settings();
+		$global_colors = get_option('fb_global_colors');
 
 		if ($theme_json && isset($theme_json['color'])) {
 			if(isset($theme_json['color']['palette'])) {
 				if (isset($theme_json['color']['palette']['theme'])) {
 					$theme_colors = $theme_json['color']['palette']['theme'];
+
+					if($global_colors === '') {
+						update_option('fb_global_colors', $theme_colors);
+					}
 				}
 			}
 
@@ -76,9 +81,12 @@ class Admin {
 			}
 
 			$gradient_colors = array_merge($gutenberg_default_gutenberg_colors, $theme_default_gradients_colors);
-		}
 
-		$global_colors = get_option('fb_global_colors');
+			$db_gradient_colors = get_option('fb_gradient_colors');
+			if($gutenberg_default_gutenberg_colors) {
+				update_option('fb_gradient_colors', $gradient_colors);
+			}
+		}
 
 		$blocks = BlockList::get_instance()->get_blocks();
 		$localizeArray = array(
