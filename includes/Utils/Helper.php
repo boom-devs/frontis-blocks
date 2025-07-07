@@ -372,38 +372,38 @@ class Helper
             echo $font_url;
             // $gfonts = '';
             // $gfonts_attr = ':100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
-            
+
             // foreach ($fonts as $font) {
             //     $gfonts .= str_replace(' ', '+', trim($font)) . $gfonts_attr . '|';
             // }
-            
+
             // $gfonts = rtrim($gfonts, '|');
-            
+
             // if (!empty($gfonts)) {
             //     $query_args = [
             //         'family' => $gfonts,
             //         'display' => 'swap'
             //     ];
-                
+
             //     wp_enqueue_style(
             //         'frontis-blocks-preconnect',
             //         'https://fonts.googleapis.com',
             //         [],
             //         null
             //     );
-                
+
             //     wp_style_add_data('frontis-blocks-preconnect', 'crossorigin', 'anonymous');
-                
+
             //     wp_register_style(
             //         'frontis-blocks-fonts',
             //         add_query_arg($query_args, 'https://fonts.googleapis.com/css2'),
             //         [],
             //         FB_VERSION
             //     );
-                
+
             //     wp_enqueue_style('frontis-blocks-fonts');
             // }
-            
+
             // Reset.
             $gfonts = '';
         }
@@ -438,19 +438,26 @@ class Helper
         return $font_data;
 	}
 
+	public static function option_exists($option_name, $site_wide = false) {
+		global $wpdb;
+		$table = $site_wide ? $wpdb->base_prefix . 'options' : $wpdb->prefix . 'options';
+		$row = $wpdb->get_row($wpdb->prepare("SELECT option_value FROM $table WHERE option_name = %s LIMIT 1", $option_name));
+		return is_object($row);
+	}
+
     // Get font families from global settings
     public static function extract_font_families($data) {
         $fontFamilies = array();
-    
+
         // Convert the array to a string representation
         $dataString = var_export($data, true);
-        
+
         // Pattern to match fontFamily and fontWeight pairs
         $pattern = '/\'fontFamily\'\s*=>\s*\'([^\']*)\',(?:.*?)\'fontWeight\'\s*=>\s*\'([^\']*)\'/s';
-        
+
         // Perform the regex matching
         preg_match_all($pattern, $dataString, $matches, PREG_SET_ORDER);
-        
+
         // Process matches
         foreach ($matches as $match) {
             $fontFamily = $match[1];
@@ -462,7 +469,7 @@ class Helper
                 $fontFamilies[$fontFamily][] = $fontWeight;
             }
         }
-        
+
         return $fontFamilies;
     }
 
@@ -471,7 +478,7 @@ class Helper
 		$files = scandir($dir);
 		foreach ($files as $file) {
 			if ($file == '.' || $file == '..') continue;
-			
+
 			$path = $dir . '/' . $file;
 			if (is_dir($path)) {
 				// Recursively scan subdirectories
@@ -480,7 +487,7 @@ class Helper
 				$cssFiles[] = $path;
 			}
 		}
-		
+
 		return $cssFiles;
 	}
 
@@ -488,15 +495,15 @@ class Helper
 		$jsFiles = [];
 		$files = scandir($dir);
 		foreach ($files as $file) {
-			if ($file == '.' || $file == '..') continue;    
-			
+			if ($file == '.' || $file == '..') continue;
+
 			$path = $dir . '/' . $file;
 			if (is_dir($path)) {
 				$jsFiles = array_merge($jsFiles, self::get_js_files($path));
 			} else if (pathinfo($path, PATHINFO_EXTENSION) == 'js') {
 				$jsFiles[] = $path;
 			}
-		}   
+		}
 
 		return $jsFiles;
 	}
@@ -520,7 +527,7 @@ class Helper
     public static function create_value_with_unit($value, $unit) {
         return $value . $unit;
     }
-    
+
 }
 
 
