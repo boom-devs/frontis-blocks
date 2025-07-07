@@ -35,16 +35,25 @@ const generateCSSVariables = (data, deviceType) => {
     let heading6Styles = '';
 
     let combinedHeadingStyles = ''; // Combined styles for "all" headings
+    if(!data) {
+        return false;
+    }
+    const arrayKeys = Object.keys(data);
 
     // Loop through the data to generate CSS for each tag
-    ['body', 'link', 'button', 'captions', 'all', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'separator'].forEach((key) => {
+    arrayKeys.forEach((key) => {
         if (!data[key]) return;
 
         // Apply global properties (fontFamily, fontWeight, etc.)
         ['fontFamily', 'fontWeight', 'fontStyle', 'textTransform', 'textDecoration'].forEach((prop) => {
             const value = getValue(data[key], prop);
+            let typoValue = data[key][prop];
+
             if (value !== null) {
-                rootStyles += `--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: ${value};\n`;
+
+                if(typoValue) {
+                    rootStyles += `${typoValue.variable}: ${value};\n`;
+                }
 
                 if (key === 'body') {
                     paragraphStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
@@ -93,11 +102,12 @@ const generateCSSVariables = (data, deviceType) => {
             const mobileUnit = getUnit(data[key], prop, 'Mobile');
 
             if (desktopValue !== null) {
-                const cssVar = `--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}`;
+                let typoValue = data[key][prop];
+                const cssVar = `${typoValue.variable}`;
                 desktopStyles += `${cssVar}: ${createValueWithUnit(desktopValue, desktopUnit)};\n`;
 
                 if (key === 'body') {
-                    paragraphStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar}) !important;\n`;
+                    paragraphStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
                 }
                 if (key === 'link') {
                     linkStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
@@ -130,12 +140,16 @@ const generateCSSVariables = (data, deviceType) => {
                     heading6Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
                 }
             }
+
             if (tabletValue !== null) {
-                const cssVar = `--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}`;
+                let typoValue = data[key][prop];
+                const cssVar = `${typoValue.variable}`;
                 tabletStyles += `${cssVar}: ${createValueWithUnit(tabletValue, tabletUnit)};\n`;
             }
+
             if (mobileValue !== null) {
-                const cssVar = `--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}`;
+                let typoValue = data[key][prop];
+                const cssVar = `${typoValue.variable}`;
                 mobileStyles += `${cssVar}: ${createValueWithUnit(mobileValue, mobileUnit)};\n`;
             }
         });
@@ -146,11 +160,11 @@ const generateCSSVariables = (data, deviceType) => {
             if (fontFamily !== null && !fontFamilies.has(fontFamily)) {
                 fontFamilies.add(fontFamily);
 
-                let iframe = document.querySelector("iframe.fb-preview-frame");
+                let iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
 
                 // If not found, try the editor-canvas iframe
                 if (!iframe) {
-                    iframe = document.querySelector('iframe[name="fb-preview-frame"]');
+                    iframe = document.querySelector('iframe[name="editor-canvas"]');
                 }
 
                 const iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
@@ -412,21 +426,21 @@ const generateCSSVariables = (data, deviceType) => {
         `;
     }
 
-    let iframe = document.querySelector("iframe.fb-preview-frame");
+    let iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
     let iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
     let styleTag = iframeDocument.getElementById("global-typo");
 
     if(fileName === 'post.php') {
 
         if(deviceType !== 'Desktop') {
-            iframe = document.querySelector('iframe[name="fb-preview-frame"]');
+            iframe = document.querySelector('iframe[name="editor-canvas"]');
             iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
             styleTag = iframeDocument.getElementById("global-typo");
 
             console.log("iframeDocument")
             console.log(iframeDocument)
         } else {
-            iframe = document.querySelector('iframe[name="fb-preview-frame"]');
+            iframe = document.querySelector('iframe[name="editor-canvas"]');
             iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
             styleTag = iframeDocument.getElementById("global-typo");
         }

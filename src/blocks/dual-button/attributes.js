@@ -341,6 +341,26 @@ const attributes = {
 		type: "string",
 		default: "angle-right",
 	},
+	buttonIconRotateSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    buttonIconRotate: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "", 
+            Mobile: "",
+        }
+    },
+    buttonIconRotateHover: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
 	ButtonZIndex: {
 		type: "number",
 	},
@@ -866,6 +886,26 @@ const attributes = {
 		type: "string",
 		default: "angle-right",
 	},
+	buttonTwoIconRotateSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    buttonTwoIconRotate: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "", 
+            Mobile: "",
+        }
+    },
+    buttonTwoIconRotateHover: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
 	ButtonTwoZIndex: {
 		type: "number",
 	},
