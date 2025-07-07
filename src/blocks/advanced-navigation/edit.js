@@ -5,25 +5,26 @@ import {
 } from "@wordpress/block-editor";
 import { useEffect } from "@wordpress/element";
 import { useSelect, useDispatch } from "@wordpress/data";
-import classnames from "classnames";
 
 import Inspector from "./inspector";
 
-export default function Edit({ attributes, setAttributes, className, clientId, isSelected }) {
+export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
-        layout,
-        navAlign,
-        preset,
-        verticalPreset,
+        navigationLayout,
+        navigationHorizontalAlign,
         dropdownOpenOnClick,
-        navBtnType,
         showDropdownIcon,
-        flexWrap,
-        navVerticalAlign,
-        hamburgerMenu,
-        hamburgerCloseIconAlign,
-        classHook,
+        navigationFlexWrapSwitcher,
+        navigationVerticalAlign,
+        hamburgerMenuIconType,
+
+        navigationGlobalWraperClass,
+        navigationGlobalWraperID,
+
+        navigationDesktopSwitcher,
+        navigationTabletSwitcher,
+        navigationMobileSwitcher,
     } = attributes;
 
     const { updateBlockAttributes } = useDispatch("core/block-editor");
@@ -34,55 +35,45 @@ export default function Edit({ attributes, setAttributes, className, clientId, i
     );
 
     useEffect(() => {
-        if (!blockId) {
-            setAttributes({ blockId: clientId });
-        }
-    }, []);
-
-    useEffect(() => {
         if (innerBlocks.length > 0) {
             innerBlocks.forEach((block) => {
                 updateBlockAttributes(block.clientId, {
-                    className: `${layout} ${layout === "is-horizontal" ? navAlign : navVerticalAlign} ${flexWrap ? "no-wrap" : ""}`,
+                    className: `${navigationLayout} ${navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign} ${navigationFlexWrapSwitcher ? "no-wrap" : ""}`, 
                     openSubmenusOnClick: dropdownOpenOnClick,
                     showSubmenuIcon: showDropdownIcon,
-                    hasIcon: navBtnType,
-                    overlayMenu: hamburgerMenu,
+                    hasIcon: hamburgerMenuIconType === "icon" ? true : false,
                 });
             });
         }
-    }, [layout, navAlign, flexWrap, navVerticalAlign, dropdownOpenOnClick, showDropdownIcon, navBtnType, hamburgerMenu]);
+    }, [navigationLayout, navigationHorizontalAlign, navigationFlexWrapSwitcher, navigationVerticalAlign, dropdownOpenOnClick, showDropdownIcon, hamburgerMenuIconType]);
 
     const blockProps = useBlockProps({
-        className: classnames(className, `frontis-guten-block-main-parent-wrapper`),
+        className: `frontis-block fb-advanced-navigation-main-wrapper ${blockId} ${navigationDesktopSwitcher && 'fb-desktop-responsive'} ${navigationTabletSwitcher && 'fb-tablet-responsive'} ${navigationMobileSwitcher && 'fb-mobile-responsive'}`,
     });
-
-    const layoutPreset = layout === "is-horizontal" ? preset : verticalPreset;
 
     return (
         <>
-            {isSelected && (
-                <Inspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                />
-            )}
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper frontis-parent-wrapper frontis-parent-${blockId} ${classHook}`}>
+                <div className={`advanced-navigation-wrapper ${navigationGlobalWraperClass}`} id={navigationGlobalWraperID}>
                     <div
-                        className={`${blockId} frontis-advanced-navigation-wrapper ${layout} ${layoutPreset} ${
-                            layout === "is-horizontal" ? navAlign : navVerticalAlign
+                        className={`advanced-navigation-inner-wrapper ${navigationLayout} ${
+                            navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign
                         } ${showDropdownIcon ? "" : "remove-dropdown-icon"} ${
-                            navBtnType ? "responsive-icon" : "responsive-text"
-                        } ${hamburgerCloseIconAlign}`}
+                            hamburgerMenuIconType === "icon" ? "responsive-icon" : "responsive-text"
+                        }`}
                     >
-                        <div className="frontis-nav-contents">
+                        <div className="advanced-navigation-contents">
                             <InnerBlocks
                                 templateLock={false}
                                 template={[
                                     [
                                         "core/navigation",
-                                        { className: `${layout} ${navAlign}` },
+                                        { className: `${navigationLayout} ${navigationHorizontalAlign}` }, 
                                     ],
                                 ]}
                                 allowedBlocks={["core/navigation"]}

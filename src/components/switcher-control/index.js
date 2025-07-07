@@ -2,12 +2,15 @@ import { __ } from '@wordpress/i18n';
 import { Button, BaseControl, ButtonGroup } from '@wordpress/components';
 
 
-const FB_SwitcherControl = ({ label, globalSwitcher, setGlobalSwitcher }) => {
-
-    const NORMAL_HOVER = [
+const FB_SwitcherControl = ({ 
+    label, 
+    options = [
         { label: __('Normal', 'frontis-blocks'), value: 'normal' },
         { label: __('Hover', 'frontis-blocks'), value: 'hover' },
-    ];
+    ], 
+    globalSwitcher, 
+    setGlobalSwitcher 
+}) => {
 
     return (
         <div className="fb-setting-switcher-container">
@@ -16,7 +19,7 @@ const FB_SwitcherControl = ({ label, globalSwitcher, setGlobalSwitcher }) => {
                 className="fb-setting-switcher-panel-wrapper"
             >
                 <ButtonGroup className="fb-setting-switcher-panel-btn">
-                    {NORMAL_HOVER.map((item, key) => (
+                    {options.map((item, key) => (
                         <Button
                     key={key}
                             onClick={() => setGlobalSwitcher(item.value)} 

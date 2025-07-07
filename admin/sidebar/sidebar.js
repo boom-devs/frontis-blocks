@@ -421,6 +421,7 @@ function FrontisBlocksSidebar() {
 	}, [handleUpdateSettings]);
 
 	useEffect(() => {
+		console.log(isLoading)
 		if (!isLoading) {
 			setIsLoading(true);
 			wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
