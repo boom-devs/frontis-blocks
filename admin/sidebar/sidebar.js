@@ -1,23 +1,16 @@
 import { __ } from "@wordpress/i18n";
 import { PluginSidebar, PluginSidebarMoreMenuItem } from "@wordpress/editor";
-import { useDispatch } from "@wordpress/data";
+import { useViewportMatch } from '@wordpress/compose';
 import {
-	Button,
-	Modal,
-	TextControl,
-	TabPanel,
 	__experimentalNavigatorProvider as NavigatorProvider,
 	__experimentalNavigatorScreen as NavigatorScreen,
 	__experimentalNavigatorButton as NavigatorButton,
+	__experimentalPaletteEdit as PaletteEdit,
 } from "@wordpress/components";
-import { PanelColorSettings } from "@wordpress/block-editor";
 import { useEffect, useState, useCallback, useMemo } from "@wordpress/element";
-import GradientColorPallet from "./components/GradientColorPallet";
-import ColorPalletWrapper from "./components/ColorPalletWrapper";
-import CustomGradientColorPallet from "./components/CustomGradientPallet";
 import TypographySettings from "./components/TypographySettings";
 import { useDeviceType } from "@Config/displayType";
-import { getFbLocalStorage, loadGoogleFont, useAfterSave } from "./helper";
+import { loadGoogleFont, useAfterSave } from "./helper";
 import { getGlobalStyle, updateGlobalStyle } from "./fetch";
 import generateCSSVariables from "./components/GenerateRootCss";
 import generateColorsVariables from "./components/GenerateColorRoot";
@@ -74,79 +67,6 @@ const defaultColors = [
 		name: __("Gray Color", "frontis-blocks"),
 		color: "#808080",
 		slug: "gray-color",
-	},
-];
-
-const gradientDefaults = [
-	{
-		color:
-			"linear-gradient(135deg, rgba(33,150,243,1) 0%, rgba(156,39,176,1) 100%)",
-		name: "Primary Color",
-		slug: "gradientPrimary",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(0,200,83,1) 0%, rgba(255,193,7,1) 100%)",
-		name: "Secondary Color",
-		slug: "gradientSecondary",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(244,67,54,1) 0%, rgba(233,30,99,1) 100%)",
-		name: "Tertiary Color",
-		slug: "gradientTertiary",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(3,169,244,1) 0%, rgba(0,150,136,1) 100%)",
-		name: "Accent Color",
-		slug: "gradientAccent",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(96,125,139,1) 0%, rgba(224,224,224,1) 100%)",
-		name: "Neutral Background",
-		slug: "gradientBackground",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(255,87,34,1) 0%, rgba(255,235,59,1) 100%)",
-		name: "Vibrant Glow",
-		slug: "gradientGradient",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(255,0,150,1) 0%, rgba(255,255,0,1) 100%)",
-		name: "Sunset Bliss",
-		slug: "gradientSunsetBliss",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(0,255,222,1) 0%, rgba(0,102,255,1) 100%)",
-		name: "Ocean Breeze",
-		slug: "gradientOceanBreeze",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(255,153,0,1) 0%, rgba(255,94,0,1) 100%)",
-		name: "Tangerine Dream",
-		slug: "gradientTangerineDream",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(102,51,153,1) 0%, rgba(255,102,204,1) 100%)",
-		name: "Lavender Kiss",
-		slug: "gradientLavenderKiss",
-	},
-	{
-		color: "linear-gradient(220.55deg, #FFE70B 0%, #27B643 100%)",
-		name: "Minty Fresh",
-		slug: "gradientMintyFresh",
-	},
-	{
-		color: "linear-gradient(180deg, #12C0DB, #EF04F6)",
-		name: "Halloween",
-		slug: "gradientHalloween",
 	},
 ];
 
@@ -305,20 +225,16 @@ const defaultTypography = {
 
 function FrontisBlocksSidebar() {
 	const deviceType = useDeviceType();
-	const { editPost } = useDispatch("core/editor");
 	const isAfterSave = useAfterSave();
 
 	// State management
-	const [globalColors, setGlobalColors] = useState(defaultColors);
+	const [globalColors, setGlobalColors] = useState(frontisBlocksAdmin?.global_colors);
 	const [customColors, setCustomColors] = useState([]);
-	const [gradientColors, setGradientColors] = useState(gradientDefaults);
+	const [gradientColors, setGradientColors] = useState(frontisBlocksAdmin?.gradients_colors);
 	const [customGradientColors, setCustomGradientColors] = useState([]);
 	const [typography, setTypography] = useState(defaultTypography);
 	const [customTypography, setCustomTypography] = useState({});
 	const [fontFamilies, setFontFamilies] = useState({});
-	const [activeTab, setActiveTab] = useState("solid");
-	const [colorModalOpen, setColorModalOpen] = useState(false);
-	const [colorName, setColorName] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 
 	// Memoized theme colors
@@ -326,6 +242,9 @@ function FrontisBlocksSidebar() {
 		() => frontisBlocksAdmin?.theme_colors || defaultColors,
 		[],
 	);
+
+	const isMobileViewport = useViewportMatch( 'small', '<' );
+	const popoverProps = isMobileViewport ? mobilePopoverProps : undefined;
 
 	// Utility to extract font families
 	const getAllFontFamilies = useCallback((fontsObject) => {
@@ -342,7 +261,6 @@ function FrontisBlocksSidebar() {
 	}, []);
 
 	const handleUpdateState = useCallback(async () => {
-		console.log("Initial loaded");
 		setIsLoading(true);
 		const localStorageKeys = [
 			{
@@ -360,7 +278,7 @@ function FrontisBlocksSidebar() {
 			{
 				key: "fb_gradient_colors",
 				setter: setGradientColors,
-				defaultValue: gradientDefaults,
+				defaultValue: frontisBlocksAdmin?.gradients_colors,
 				api: "fb_get_gradient_colors",
 			},
 			{
@@ -406,22 +324,10 @@ function FrontisBlocksSidebar() {
 				postProcess,
 			} of localStorageKeys) {
 				if (key === "fb_global_colors") {
-					// Forcefully set fb_global_colors to themeColors
-					setter(themeColors);
-					localStorage.setItem(key, JSON.stringify(themeColors));
-					if (postProcess) setTimeout(() => postProcess(themeColors), 1000);
+					setter(globalColors ?? themeColors);
+					localStorage.setItem(key, JSON.stringify(globalColors ?? themeColors));
+					if (postProcess) setTimeout(() => postProcess(globalColors ?? themeColors), 1000);
 				} else {
-					const localData = getFbLocalStorage(key);
-					// if (!localData || localData.length < 1) {
-					// 	const res = await getGlobalStyle(api);
-					// 	const data = res.success ? res.data : defaultValue;
-					// 	if (setter) setter(data);
-					// 	localStorage.setItem(key, JSON.stringify(data));
-					// 	if (postProcess) setTimeout(() => postProcess(data), 1000);
-					// } else {
-					// 	if (setter) setter(localData);
-					// 	if (postProcess) setTimeout(() => postProcess(localData), 1000);
-					// }
 					const res = await getGlobalStyle(api);
 					const data = res.success ? res.data : defaultValue;
 					if (setter) setter(data);
@@ -445,11 +351,12 @@ function FrontisBlocksSidebar() {
 	// Generate color variables
 	useEffect(() => {
 		const mergedColors = [
-			...customColors,
-			...globalColors,
-			...customGradientColors,
-			...gradientColors,
+			...(customColors ?? []),
+			...(customGradientColors ?? []),
+			...(gradientColors ?? []),
+			...(globalColors ?? (Array.isArray(themeColors) ? themeColors : [])),
 		];
+
 		setTimeout(() => generateColorsVariables(mergedColors, deviceType), 1000);
 	}, [
 		globalColors,
@@ -513,98 +420,12 @@ function FrontisBlocksSidebar() {
 		handleUpdateSettings();
 	}, [handleUpdateSettings]);
 
-	// Color panel array generator
-	const colorPanelArray = useCallback((colors, setColor, defaults = []) => {
-		if (!Array.isArray(colors)) return [];
-		return colors.map((colorObj, index) => ({
-			label: colorObj.name || "Color",
-			value: colorObj.color,
-			onChange: (newColor) =>
-				setColor(index, newColor || defaults[index]?.color || "#000"),
-		}));
-	}, []);
-
-	// Color update handlers
-	const setGlobalColor = useCallback((index, color) => {
-		setGlobalColors((prev) => {
-			const colors = [...prev];
-			colors[index].color = color;
-			return colors;
-		});
-		setIsLoading(true);
-	}, []);
-
-	const setGradientColor = useCallback((index, color) => {
-		setGradientColors((prev) => {
-			const colors = [...prev];
-			colors[index].color = color;
-			return colors;
-		});
-		setIsLoading(true);
-	}, []);
-
-	const setCustomGradientColor = useCallback((index, color) => {
-		setCustomGradientColors((prev) => {
-			const colors = [...prev];
-			colors[index].color = color;
-			return colors;
-		});
-		setIsLoading(true);
-	}, []);
-
-	const setCustomColor = useCallback((index, color) => {
-		setCustomColors((prev) => {
-			const colors = [...prev];
-			colors[index].color = color;
-			return colors;
-		});
-		setIsLoading(true);
-	}, []);
-
-	// Custom color and gradient handlers
-	const addCustomColor = useCallback(() => {
-		setColorModalOpen(true);
-		setIsLoading(true);
-	}, []);
-
-	const deleteCustomGradientColor = useCallback((index) => {
-		setCustomGradientColors((prev) => {
-			const colors = [...prev];
-			colors.splice(index, 1);
-			return colors;
-		});
-		setIsLoading(true);
-	}, []);
-
-	const addCustomGradientColor = useCallback(() => {
-		setCustomGradientColors((prev) => [
-			...prev,
-			{
-				color: "#000000",
-				name: `Gradient Color ${prev.length + 1}`,
-				slug: `custom-gradient-color-${prev.length + 1}`,
-				var: `--fb-custom-gradient-color-${prev.length + 1}`,
-			},
-		]);
-		setIsLoading(true);
-	}, []);
-
-	// Handle modal close and new color addition
 	useEffect(() => {
-		if (!colorModalOpen && colorName) {
-			setCustomColors((prev) => [
-				...prev,
-				{
-					color: "#000000",
-					name: colorName || `Custom Color ${prev.length + 1}`,
-					slug: colorName
-						? colorName.replace(/\s+/g, "-").toLowerCase()
-						: `custom-color-${prev.length + 1}`,
-				},
-			]);
-			setColorName("");
+		if (!isLoading) {
+			setIsLoading(true);
+			wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
 		}
-	}, [colorModalOpen, colorName]);
+	}, [customColors, globalColors, gradientColors, customGradientColors]);
 
 	return (
 		<>
@@ -733,95 +554,45 @@ function FrontisBlocksSidebar() {
 								<div className="fb-color-options-vertical">
 									{/* Solid Colors Section */}
 									<div className="fb-color-section">
-										<h3 className="fb-section-title">{__("Solid", "frontis-blocks")}</h3>
-
-										<PanelColorSettings
-											// title={__("Global Colors", "frontis-blocks")}
-											className="fb-color-panel fb-global-color-panel"
-											initialOpen
-											disableAlpha
-											disableCustomGradients={false}
-											colorSettings={colorPanelArray(
-												globalColors,
-												setGlobalColor,
-												themeColors,
-											)}
+										<PaletteEdit
+											canReset={ globalColors || themeColors }
+											canOnlyChangeValues
+											colors={ globalColors || themeColors }
+											onChange={ setGlobalColors }
+											paletteLabel={ __( 'Solid' ) }
+											paletteLabelHeadingLevel={ 3 }
+											popoverProps={ popoverProps }
 										/>
-										<ColorPalletWrapper
-											colorPanelArray={colorPanelArray}
-											customColors={customColors}
-											setCustomColor={setCustomColor}
-											setCustomColors={setCustomColors}
-											addCustomColor={addCustomColor}
-											colorModalOpen={colorModalOpen}
-											setColorModalOpen={setColorModalOpen}
-											colorName={colorName}
-											setColorName={setColorName}
+										<PaletteEdit
+											colors={ customColors }
+											onChange={ setCustomColors }
+											paletteLabel={ __( 'Custom' ) }
+											paletteLabelHeadingLevel={ 3 }
+											slugPrefix="custom-"
+											popoverProps={ popoverProps }
 										/>
-
 
 									</div>
 
 									{/* Gradient Section */}
 									<div className="fb-color-section">
-										<div className="fb-panel-heading-wrapper">
-											<h3 className="fb-section-title">{__("Gradient", "frontis-blocks")}</h3>
-										</div>
-										<GradientColorPallet
-											// title={__("Gradient Colors", "frontis-blocks")}
-											colors={gradientColors}
-											setColor={setGradientColor}
-											setColors={setGradientColors}
-											wrapperClass="fb-gradient-color-panel"
-											resetAction
+										<PaletteEdit
+											canReset={true}
+											canOnlyChangeValues
+											gradients={ gradientColors || frontisBlocksAdmin?.gradients_colors }
+											onChange={ setGradientColors }
+											paletteLabel={ __( 'Gradient' ) }
+											paletteLabelHeadingLevel={ 3 }
+											popoverProps={ popoverProps }
 										/>
-
-										<div className="fb-panel-heading-wrapper">
-											<h3 className="fb-section-title">{__("Add Custom Gradient", "frontis-blocks")}</h3>
-											<div className="add-custom-color">
-												<Button
-													className="add-custom-color-btn"
-													onClick={addCustomGradientColor}
-												>
-													{/* {__("Add Custom Color", "frontis-blocks")}{" "} */}
-													<span>
-														<svg
-															width="15"
-															height="14"
-															viewBox="0 0 15 14"
-															fill="none"
-															xmlns="http://www.w3.org/2000/svg"
-														>
-															<path
-																d="M7.5 0.75V13.25M13.75 7L1.25 7"
-																stroke="#404655"
-																strokeWidth="1.5"
-																strokeLinecap="round"
-																strokeLinejoin="round"
-															/>
-														</svg>
-													</span>
-												</Button>
-											</div>
-										</div>
-
-										{customGradientColors.length > 0 && (
-											<CustomGradientColorPallet
-												title={__(
-													"Custom Gradient Colors",
-													"frontis-blocks",
-												)}
-												colors={customGradientColors}
-												setColor={setCustomGradientColor}
-												setColors={setCustomGradientColors}
-												wrapperClass="fb-gradient-color-panel"
-												resetAction={false}
-												deleteAction
-												onDelete={deleteCustomGradientColor}
-											/>
-										)}
-
-
+										<PaletteEdit
+											gradients={ customGradientColors }
+											onChange={ setCustomGradientColors }
+											paletteLabel={ __( 'Custom Gradient Colors' ) }
+											paletteLabelHeadingLevel={ 3 }
+											slugPrefix="custom-"
+											popoverProps={ popoverProps }
+										/>
 									</div>
 								</div>
 							</NavigatorScreen>

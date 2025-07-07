@@ -610,8 +610,6 @@ class AssetsGenerator {
         $this->post_id = $post_id;
         $this->post = $post;
 
-//		var_dump($post->post_name);
-//		die();
         if((get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'archive') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'single') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'search') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === '404') ||(get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'home') || (get_post_type( $this->post_id ) === 'wp_template' && $post->post_name === 'page')) {
             $this->css_generator_functions(false);
         }
@@ -726,7 +724,7 @@ class AssetsGenerator {
 
     public function mergeFontArrays($arrays) {
     $merged = [];
-    
+
     // Iterate through each array
     foreach ($arrays as $array) {
         foreach ($array as $fontFamily => $weights) {
@@ -734,25 +732,25 @@ class AssetsGenerator {
             if (strtolower($fontFamily) === 'default') {
                 continue;
             }
-            
+
             // Initialize font family in merged array if not exists
             if (!isset($merged[$fontFamily])) {
                 $merged[$fontFamily] = [];
             }
-            
+
             // Add weights, filtering out 'Default' or empty values
             foreach ($weights as $weight) {
                 if (strtolower($weight) !== 'default' && $weight !== '') {
                     $merged[$fontFamily][] = $weight;
                 }
             }
-            
+
             // Remove duplicates and sort weights
             $merged[$fontFamily] = array_unique($merged[$fontFamily]);
             sort($merged[$fontFamily]);
         }
     }
-    
+
     return $merged;
 }
 
