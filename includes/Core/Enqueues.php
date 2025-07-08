@@ -107,9 +107,6 @@ class Enqueues {
 				'whatsapp' => 'https://wa.me/?text=',
 			]
 		]);
-
-
-
 	}
 
     public function enqueue_header_footer() {
@@ -171,5 +168,4 @@ class Enqueues {
 			echo '<noscript><link rel="stylesheet" href="' . $google_font_url . '"></noscript>';
 		}
 	}
-
 }

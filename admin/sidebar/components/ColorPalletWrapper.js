@@ -7,14 +7,13 @@ import {
 } from "@wordpress/block-editor";
 
 const ColorPalletWrapper = (props) => {
-    const { colorPanelArray, customColors, setCustomColor, setCustomColors, setCurrentState, addCustomColor, colorModalOpen, setColorModalOpen, colorName, setColorName } = props;
+    const { colorPanelArray, customColors, setCustomColor, setCustomColors, setCurrentState, addCustomColor, colorModalOpen, setColorModalOpen, colorName, setColorName, enAbleSave } = props;
     const [afterDeletedCustomColors, setAfterDeletedColors] = useState(customColors);
+	const [newlyAddedCustomColors, setNewlyAddedCustomColors] = useState();
 
     const deleteItem = (index) => {
-        const colors = [...afterDeletedCustomColors]
-        afterDeletedCustomColors.splice(index, 1);
-        setAfterDeletedColors([...afterDeletedCustomColors]);
-        setCustomColors(afterDeletedCustomColors);
+		wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
+		enAbleSave();
     }
 
     useEffect(() => {
@@ -46,6 +45,9 @@ const ColorPalletWrapper = (props) => {
                         const existingButton = item.querySelector('button');
                         item.insertBefore(newButton, existingButton.nextSibling);
                     });
+
+					wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
+					enAbleSave();
                 }
 
             }, 100)
