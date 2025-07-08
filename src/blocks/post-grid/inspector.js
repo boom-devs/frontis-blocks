@@ -573,19 +573,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** End Filter By Taxonomy */
 
 
-        /** Start Load More */
+        /** Start Pagination */
         loadMoreType,
         paginationPrevNextType,
         paginationPrevTxt,
         paginationPrevIcon, 
         paginationNextTxt,
         paginationNextIcon,
-        /** End Load More */
+        /** End Pagination */
 
         /** Pagination Arrow */
         paginationArrowSize,
         paginationArrowSizeUnits,
-        paginationArrowAspectRatio,
 
         paginationArrowBgColorSwitcher,
         paginationArrowNormalBackgroundType,
@@ -598,12 +597,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         paginationArrowHoverGradientColor,
         paginationArrowHoverCustomGradientSwitcher,
         paginationArrowHoverCustomGradientInputValue,
-
-        paginationArrowPaddingUnits,
-        paginationArrowDesktopPadding,
-        paginationArrowTabletPadding,
-        paginationArrowMobilePadding,
-        paginationArrowPaddingLink,
 
         paginationArrowBorder,
         paginationArrowBorderColorSwitcher,
@@ -642,10 +635,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         paginationArrowTextColor,
         paginationArrowTextHoverColor,
 
-        paginationArrowIconSize,
-        paginationArrowIconSizeUnits,
-        paginationArrowIconSpacing,
-        paginationArrowIconSpacingUnits,
+        paginationPrevNextWidth,
+        paginationPrevNextWidthUnits,
         paginationArrowIconColorSwitcher,
         paginationArrowIconColor,
         paginationArrowIconHoverColor,
@@ -653,7 +644,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** Pagination Button */
         paginationBtnSize,
         paginationBtnSizeUnits,
-        paginationBtnAspectRatio,
 
         paginationBtnBgColorSwitcher,
         paginationBtnNormalBackgroundType,
@@ -3622,78 +3612,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     // Pagination Arrow Settings
-    /** Start Pagination Arrow Padding */
-	const handlePaginationArrowPaddingUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( paginationArrowPaddingLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						paginationArrowDesktopPadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						paginationArrowTabletPadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						paginationArrowMobilePadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {paginationArrowDesktopPadding: {...paginationArrowDesktopPadding, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {paginationArrowTabletPadding: {...paginationArrowTabletPadding, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {paginationArrowMobilePadding: {...paginationArrowMobilePadding, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-
-	const handlePaginationArrowPaddingCombineBtn = () => {
-		setAttributes( {paginationArrowPaddingLink: !paginationArrowPaddingLink} );
-	}
-
-	const handlePaginationArrowPaddingUnitsHandler = (unit) => {
-		setAttributes( {
-			paginationArrowPaddingUnits: {
-				...paginationArrowPaddingUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-	const paginationArrowDesktopPaddingWidth = `${paginationArrowDesktopPadding.top}${paginationArrowPaddingUnits.Desktop} ${paginationArrowDesktopPadding.right}${paginationArrowPaddingUnits.Desktop} ${paginationArrowDesktopPadding.bottom}${paginationArrowPaddingUnits.Desktop} ${paginationArrowDesktopPadding.left}${paginationArrowPaddingUnits.Desktop}`;
-	const paginationArrowTabletPaddingWidth = `${paginationArrowTabletPadding.top}${paginationArrowPaddingUnits.Tablet} ${paginationArrowTabletPadding.right}${paginationArrowPaddingUnits.Tablet} ${paginationArrowTabletPadding.bottom}${paginationArrowPaddingUnits.Tablet} ${paginationArrowTabletPadding.left}${paginationArrowPaddingUnits.Tablet}`;
-	const paginationArrowMobilePaddingWidth = `${paginationArrowMobilePadding.top}${paginationArrowPaddingUnits.Mobile} ${paginationArrowMobilePadding.right}${paginationArrowPaddingUnits.Mobile} ${paginationArrowMobilePadding.bottom}${paginationArrowPaddingUnits.Mobile} ${paginationArrowMobilePadding.left}${paginationArrowPaddingUnits.Mobile}`;
-	/** End Pagination Arrow Padding */
 
     /** Start Pagination Arrow Border */
 	const handlePaginationArrowBorderUnitChange = ( event, position ) => {
@@ -4110,7 +4028,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             grid-column: span ${gridColumnsPerSection.Desktop};
         }
 
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more {
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more {
             ${loadMoreTextGlobalTypoSwitcher.fontFamily === true && loadMoreTextGlobalTypographyData.fontFamily ? `font-family: ${loadMoreTextGlobalTypographyData.fontFamily};` : ''}
             ${loadMoreTextGlobalTypoSwitcher.fontSize === true && loadMoreTextGlobalTypographyData.fontSize ? `font-size: ${loadMoreTextGlobalTypographyData.fontSize};` : ''}
             ${loadMoreTextGlobalTypoSwitcher.fontWeight === true && loadMoreTextGlobalTypographyData.fontWeight ? `font-weight: ${loadMoreTextGlobalTypographyData.fontWeight};` : ''}
@@ -4142,7 +4060,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         }
 
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more:hover {
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more:hover {
             ${loadMoreButtonHoverBackgroundType === 'gradient' ? `   
                 ${loadMoreButtonHoverCustomGradientSwitcher && loadMoreButtonHoverCustomGradientInputValue ? `background: ${loadMoreButtonHoverCustomGradientInputValue};` : `background: ${loadMoreButtonHoverGradientColor};`}
             `: `
@@ -4151,18 +4069,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${loadMoreTextHoverColor ? `color: ${loadMoreTextHoverColor};` : ''} 
             ${loadMoreButtonBorderHoverColor ? `border-color: ${loadMoreButtonBorderHoverColor};` : ''}
         }
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more .load_more_button_icon svg {
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more .load_more_button_icon svg {
             ${loadMoreIconSize.Desktop ? `width: ${loadMoreIconSize.Desktop}${loadMoreIconSizeUnits.Desktop};` : ''}
             ${loadMoreIconSize.Desktop ? `height: ${loadMoreIconSize.Desktop}${loadMoreIconSizeUnits.Desktop};` : ''}
             ${loadMoreIconColor ? `fill: ${loadMoreIconColor};` : ''}
             ${loadMoreIconDesktopMarginWidth && loadMoreIconDesktopMargin.top ? `margin: ${loadMoreIconDesktopMarginWidth};` : ''}
         }
 
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more:hover .load_more_button_icon svg{
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more:hover .load_more_button_icon svg{
             ${loadMoreIconHoverColor ? `fill: ${loadMoreIconHoverColor};` : ''}
         }
 
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more_loader {
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more_loader {
             border-top: 2px solid ${loadMoreloaderColor ? loadMoreloaderColor : '#FFFFFF'};
 			border-right: 2px solid ${loadMoreloaderColor ? loadMoreloaderColor : '#FFFFFF'};
 			border-bottom: 2px solid ${loadMoreloaderColor ? loadMoreloaderColor : '#FFFFFF'};
@@ -4173,28 +4091,72 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: all .3s ease-in-out;
 			animation: loader 1s linear infinite;
         }
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper:hover .fb_load_more_loader {
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper:hover .fb_load_more_loader {
             border-top: 2px solid ${loadMoreloaderHoverColor ? loadMoreloaderHoverColor : '#FFFFFF'};
 			border-right: 2px solid ${loadMoreloaderHoverColor ? loadMoreloaderHoverColor : '#FFFFFF'};
 			border-bottom: 2px solid ${loadMoreloaderHoverColor ? loadMoreloaderHoverColor : '#FFFFFF'};
             transition: all .3s ease-in-out;
         }
 
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination_wrapper {
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next{
+            ${paginationPrevNextWidth.Desktop ? `width: ${paginationPrevNextWidth.Desktop}${paginationPrevNextWidthUnits.Desktop};` : ''}
+            ${paginationPrevNextWidth.Desktop ? `height: ${paginationPrevNextWidth.Desktop}${paginationPrevNextWidthUnits.Desktop};` : ''}
+
+            ${paginationArrowBorder ? `border: ${paginationArrowBorder};` : ''} 
+            ${paginationArrowBorderColor ? `border-color: ${paginationArrowBorderColor};` : ''}
+            ${paginationArrowDesktopBorderWidth && paginationArrowDesktopBorder.top ? `border-width: ${paginationArrowDesktopBorderWidth};` : ''}
+            ${paginationArrowDesktopBorderRadiusWidth && paginationArrowDesktopBorderRadius.top? `border-radius: ${paginationArrowDesktopBorderRadiusWidth};` : ''}
+
+            ${paginationArrowNormalBackgroundType === 'gradient' ? `   
+                ${paginationArrowNormalCustomGradientSwitcher && paginationArrowNormalCustomGradientInputValue ? `background: ${paginationArrowNormalCustomGradientInputValue};` : `background: ${paginationArrowNormalGradientColor};`}
+            `: `
+                ${paginationArrowNormalClassicColor ? `background: ${paginationArrowNormalClassicColor};` : ''}
+            `}
         }
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination {
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous:hover,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next:hover{
+            ${paginationArrowBorderHoverColor ? `border-color: ${paginationArrowBorderHoverColor};` : ''}
+
+            ${paginationArrowHoverBackgroundType === 'gradient' ? `    
+                ${paginationArrowHoverCustomGradientSwitcher && paginationArrowHoverCustomGradientInputValue ? `background: ${paginationArrowHoverCustomGradientInputValue};` : `background: ${paginationArrowHoverGradientColor};`}
+            `: `
+                ${paginationArrowHoverClassicColor ? `background: ${paginationArrowHoverClassicColor};` : ''}
+            `}
         }
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination_item {
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon{
+            ${paginationArrowSize.Desktop ? `width: ${paginationArrowSize.Desktop}${paginationArrowSizeUnits.Desktop};` : ''}
+            ${paginationArrowSize.Desktop ? `height: ${paginationArrowSize.Desktop}${paginationArrowSizeUnits.Desktop};` : ''}
         }
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination_item.active {
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon svg,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon svg{
+            ${paginationArrowIconColor ? `fill: ${paginationArrowIconColor};` : ''}
+        }
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous:hover .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon svg,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next:hover .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon svg{
+            ${paginationArrowIconHoverColor ? `fill: ${paginationArrowIconHoverColor};` : ''}
+        }
+
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination {
+        }
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_item {
+        }
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_item.active {
         
         }
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination_previous,
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination_next {
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_previous,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_next {
 
         }
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination_previous_icon,
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination_next_icon {
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_previous_icon,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_next_icon {
 
         }
 
@@ -5885,6 +5847,139 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGridSkeletonBgColor,
         postGridSkeletonHighlightBgColor,
         /** End Skeleton Settings */
+
+        /** Start Pagination */
+        loadMoreType,
+        paginationPrevNextType,
+        paginationPrevTxt,
+        paginationPrevIcon, 
+        paginationNextTxt,
+        paginationNextIcon,
+        /** End Pagination */
+
+        /** Pagination Arrow */
+        paginationArrowSize,
+        paginationArrowSizeUnits,
+
+        paginationArrowBgColorSwitcher,
+        paginationArrowNormalBackgroundType,
+        paginationArrowNormalClassicColor,
+        paginationArrowNormalGradientColor,
+        paginationArrowNormalCustomGradientSwitcher,
+        paginationArrowNormalCustomGradientInputValue,
+        paginationArrowHoverBackgroundType,
+        paginationArrowHoverClassicColor,
+        paginationArrowHoverGradientColor,
+        paginationArrowHoverCustomGradientSwitcher,
+        paginationArrowHoverCustomGradientInputValue,
+
+        paginationArrowBorder,
+        paginationArrowBorderColorSwitcher,
+        paginationArrowBorderColor,
+        paginationArrowBorderHoverColor,
+
+        paginationArrowBorderUnits,
+        paginationArrowDesktopBorder,
+        paginationArrowTabletBorder,
+        paginationArrowMobileBorder,
+        paginationArrowBorderLink,
+        paginationArrowDesktopBorderWidth,
+        paginationArrowTabletBorderWidth,
+        paginationArrowMobileBorderWidth,
+
+        paginationArrowBorderRadiusUnits,
+        paginationArrowDesktopBorderRadius,
+        paginationArrowTabletBorderRadius,
+        paginationArrowMobileBorderRadius,
+        paginationArrowBorderRadiusLink,
+        paginationArrowDesktopBorderRadiusWidth,
+        paginationArrowTabletBorderRadiusWidth,
+        paginationArrowMobileBorderRadiusWidth,
+
+        paginationArrowTextGlobalTypoSwitcher,
+        paginationArrowTextGlobalTypographyData,
+        paginationArrowTextGlobalTypoType,
+        paginationArrowTextGlobalTypoOption,
+        paginationArrowTextFontFamily,
+        paginationArrowTextFontSize,
+        paginationArrowTextFontSizeUnits,
+        paginationArrowTextFontWeight,
+        paginationArrowTextFontStyle,
+        paginationArrowTextTransform,
+        paginationArrowTextDecoration,
+        paginationArrowTextLetterSpacing,
+        paginationArrowTextLetterSpacingUnits,
+        paginationArrowTextLineHeight,
+        paginationArrowTextLineHeightUnits,
+
+        paginationArrowTextColorSwitcher,
+        paginationArrowTextColor,
+        paginationArrowTextHoverColor,
+
+        paginationPrevNextWidth,
+        paginationPrevNextWidthUnits,
+        paginationArrowIconColorSwitcher,
+        paginationArrowIconColor,
+        paginationArrowIconHoverColor,
+
+        /** Pagination Button */
+        paginationBtnSize,
+        paginationBtnSizeUnits,
+
+        paginationBtnBgColorSwitcher,
+        paginationBtnNormalBackgroundType,
+        paginationBtnNormalClassicColor,
+        paginationBtnNormalGradientColor,
+        paginationBtnNormalCustomGradientSwitcher,
+        paginationBtnNormalCustomGradientInputValue,
+        paginationBtnHoverBackgroundType,
+        paginationBtnHoverClassicColor,
+        paginationBtnHoverGradientColor,
+        paginationBtnHoverCustomGradientSwitcher,
+        paginationBtnHoverCustomGradientInputValue,
+
+        paginationBtnPaddingUnits,
+        paginationBtnDesktopPadding,
+        paginationBtnTabletPadding,
+        paginationBtnMobilePadding,
+        paginationBtnPaddingLink,
+
+        paginationBtnBorder,
+        paginationBtnBorderColorSwitcher,
+        paginationBtnBorderColor,
+        paginationBtnBorderHoverColor,
+
+        paginationBtnBorderUnits,
+        paginationBtnDesktopBorder,
+        paginationBtnTabletBorder,
+        paginationBtnMobileBorder,
+        paginationBtnBorderLink,
+
+        paginationBtnBorderRadiusUnits,
+        paginationBtnDesktopBorderRadius,
+        paginationBtnTabletBorderRadius,
+        paginationBtnMobileBorderRadius,
+        paginationBtnBorderRadiusLink,
+
+        paginationBtnTextGlobalTypoSwitcher,
+        paginationBtnTextGlobalTypographyData,
+        paginationBtnTextGlobalTypoType,
+        paginationBtnTextGlobalTypoOption,
+        paginationBtnTextFontFamily,
+        paginationBtnTextFontSize,
+        paginationBtnTextFontSizeUnits,
+        paginationBtnTextFontWeight,
+        paginationBtnTextFontStyle,
+        paginationBtnTextTransform,
+        paginationBtnTextDecoration,
+        paginationBtnTextLetterSpacing,
+        paginationBtnTextLetterSpacingUnits,
+        paginationBtnTextLineHeight,
+        paginationBtnTextLineHeightUnits,
+
+        paginationBtnTextColorSwitcher,
+        paginationBtnTextColor,
+        paginationBtnTextHoverColor,
     ]);
 
     const customCss = getCustomCss(postGridGlobalCustomCSS, `.${blockId}`);
@@ -8382,78 +8477,126 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             {loadMoreType === 'pagination' && (
                 <PanelBody title={__("Pagination Arrows Settings", "frontis-blocks")} initialOpen={false}>
 
-                    <FB_Range
-                        min={1}
-                        max={200}
-                        label={__("Arrow Size", "frontis-blocks")}
-                        rangeValue={paginationArrowSize}
-                        onChangeHandler={(value) => setAttributes({ paginationArrowSize: value })}
-                        rangeUnitHandler={(value) => setAttributes({ paginationArrowSizeUnits: value })} 
-                        deviceType={deviceType}
-                        units={paginationArrowSizeUnits}
-                        setAttributes={setAttributes}
-                        rangeStep={1}
-                        resetFallbackValue={""}
-                    />
-                    
-                    <ToggleControl
-                        label={__("Aspect Ratio", "frontis-blocks")}
-                        checked={paginationArrowAspectRatio}
-                        onChange={(value) => setAttributes({ paginationArrowAspectRatio: value })}
-                    />
 
-                    <FB_TypographyControl
-                        globalTypoControlActive={true}
-                        globalTypoSwitcher={paginationArrowTextGlobalTypoSwitcher}
-                        storeGlobalTypographyData={(value) => setAttributes({ paginationArrowTextGlobalTypographyData: value })}
 
-                        globalTypoType={paginationArrowTextGlobalTypoType}
-                        onChangeGlobalTypoType={(value) => {
-                            setAttributes({ 
-                                paginationArrowTextGlobalTypoType: value, 
-                                paginationArrowTextGlobalTypoSwitcher: value === 'default' ? {...paginationArrowTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...paginationArrowTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                            })
-                        }}
+                    {paginationPrevNextType === 'icon' && (
+                        <>
+                            <FB_Range
+                                min={1}
+                                max={100}
+                                label={__("Arrow Size", "frontis-blocks")}
+                                rangeValue={paginationArrowSize}
+                                onChangeHandler={(value) => setAttributes({ paginationArrowSize: value })}
+                                rangeUnitHandler={(value) => setAttributes({ paginationArrowSizeUnits: value })} 
+                                deviceType={deviceType}
+                                units={paginationArrowSizeUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                            />
 
-                        globalTypoOption={paginationArrowTextGlobalTypoOption}
-                        onChangeGlobalTypoOption={(value) => setAttributes({ paginationArrowTextGlobalTypoOption: value })}
+                            <FB_SwitcherControl
+                                label={__("Arrow Color", "frontis-blocks")}
+                                globalSwitcher={paginationArrowIconColorSwitcher}
+                                setGlobalSwitcher={(value) => setAttributes({ paginationArrowIconColorSwitcher: value })}
+                            />
 
-                        fontFamily={paginationArrowTextFontFamily}
-                        onChangeFontFamily={(value) => setAttributes({ paginationArrowTextFontFamily: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontFamily: value && false} })}
+                            {paginationArrowIconColorSwitcher === 'normal' && (
+                                <FB_ColorControl
+                                    label={__("Normal Color", "frontis-blocks")}
+                                    globalColor={paginationArrowIconColor} 
+                                    setGlobalColor={(value) => setAttributes({ paginationArrowIconColor: value })}
+                                />
+                            )}
 
-                        fontSize={paginationArrowTextFontSize}
-                        onChangeFontSize={(value) => setAttributes({ paginationArrowTextFontSize: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontSize: value && false} })}
+                            {paginationArrowIconColorSwitcher === 'hover' && (
+                                <FB_ColorControl
+                                    label={__("Hover Color", "frontis-blocks")}
+                                    globalColor={paginationArrowIconHoverColor}
+                                    setGlobalColor={(value) => setAttributes({ paginationArrowIconHoverColor: value })}
+                                />
+                            )}
+                        </>
+                    )}
 
-                        fontSizeUnits={paginationArrowTextFontSizeUnits}
-                        onChangeFontSizeUnit={(value) => setAttributes({ paginationArrowTextFontSizeUnits: value })}
+                    {paginationPrevNextType === 'text' && (
+                        <>
+                            <FB_TypographyControl
+                                globalTypoControlActive={true}
+                                globalTypoSwitcher={paginationArrowTextGlobalTypoSwitcher}
+                                storeGlobalTypographyData={(value) => setAttributes({ paginationArrowTextGlobalTypographyData: value })}
 
-                        fontWeight={paginationArrowTextFontWeight}
-                        onChangeFontWeight={(value) => setAttributes({ paginationArrowTextFontWeight: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontWeight: value && false} })}
+                                globalTypoType={paginationArrowTextGlobalTypoType}
+                                onChangeGlobalTypoType={(value) => {
+                                    setAttributes({ 
+                                        paginationArrowTextGlobalTypoType: value, 
+                                        paginationArrowTextGlobalTypoSwitcher: value === 'default' ? {...paginationArrowTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...paginationArrowTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                    })
+                                }}
 
-                        fontStyle={paginationArrowTextFontStyle}
-                        onChangeFontStyle={(value) => setAttributes({ paginationArrowTextFontStyle: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontStyle: value && false} })}
+                                globalTypoOption={paginationArrowTextGlobalTypoOption}
+                                onChangeGlobalTypoOption={(value) => setAttributes({ paginationArrowTextGlobalTypoOption: value })}
 
-                        textTransform={paginationArrowTextTransform}
-                        onChangeTextTransform={(value) => setAttributes({ paginationArrowTextTransform: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, textTransform: value && false} })}
+                                fontFamily={paginationArrowTextFontFamily}
+                                onChangeFontFamily={(value) => setAttributes({ paginationArrowTextFontFamily: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                        textDecoration={paginationArrowTextDecoration}
-                        onChangeTextDecoration={(value) => setAttributes({ paginationArrowTextDecoration: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, textDecoration: value && false} })}
+                                fontSize={paginationArrowTextFontSize}
+                                onChangeFontSize={(value) => setAttributes({ paginationArrowTextFontSize: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontSize: value && false} })}
 
-                        letterSpacing={paginationArrowTextLetterSpacing}
-                        onChangeLetterSpacing={(value) => setAttributes({ paginationArrowTextLetterSpacing: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, letterSpacing: value && false} })}
+                                fontSizeUnits={paginationArrowTextFontSizeUnits}
+                                onChangeFontSizeUnit={(value) => setAttributes({ paginationArrowTextFontSizeUnits: value })}
 
-                        letterSpacingUnits={paginationArrowTextLetterSpacingUnits}
-                        onChangeLetterSpacingUnit={(value) => setAttributes({ paginationArrowTextLetterSpacingUnits: value })}
+                                fontWeight={paginationArrowTextFontWeight}
+                                onChangeFontWeight={(value) => setAttributes({ paginationArrowTextFontWeight: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                        lineHeight={paginationArrowTextLineHeight}
-                        onChangeLineHeight={(value) => setAttributes({ paginationArrowTextLineHeight: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, lineHeight: value && false} })}
+                                fontStyle={paginationArrowTextFontStyle}
+                                onChangeFontStyle={(value) => setAttributes({ paginationArrowTextFontStyle: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                        lineHeightUnits={paginationArrowTextLineHeightUnits}
-                        onChangeLineHeightUnit={(value) => setAttributes({ paginationArrowTextLineHeightUnits: value })}
+                                textTransform={paginationArrowTextTransform}
+                                onChangeTextTransform={(value) => setAttributes({ paginationArrowTextTransform: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, textTransform: value && false} })}
 
-                        deviceType={deviceType}
-                        setAttributes={setAttributes}
-                    />
+                                textDecoration={paginationArrowTextDecoration}
+                                onChangeTextDecoration={(value) => setAttributes({ paginationArrowTextDecoration: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, textDecoration: value && false} })}
+
+                                letterSpacing={paginationArrowTextLetterSpacing}
+                                onChangeLetterSpacing={(value) => setAttributes({ paginationArrowTextLetterSpacing: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+                                letterSpacingUnits={paginationArrowTextLetterSpacingUnits}
+                                onChangeLetterSpacingUnit={(value) => setAttributes({ paginationArrowTextLetterSpacingUnits: value })}
+
+                                lineHeight={paginationArrowTextLineHeight}
+                                onChangeLineHeight={(value) => setAttributes({ paginationArrowTextLineHeight: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                                lineHeightUnits={paginationArrowTextLineHeightUnits}
+                                onChangeLineHeightUnit={(value) => setAttributes({ paginationArrowTextLineHeightUnits: value })}
+
+                                deviceType={deviceType}
+                                setAttributes={setAttributes}
+                            />
+
+                            <FB_SwitcherControl
+                                label={__("Text Color", "frontis-blocks")}
+                                globalSwitcher={paginationArrowTextColorSwitcher}
+                                setGlobalSwitcher={(value) => setAttributes({ paginationArrowTextColorSwitcher: value })}
+                            />
+
+                            {paginationArrowTextColorSwitcher === 'normal' && (
+                                <FB_ColorControl
+                                    label={__("Normal Color", "frontis-blocks")}
+                                    globalColor={paginationArrowTextColor} 
+                                    setGlobalColor={(value) => setAttributes({ paginationArrowTextColor: value })}
+                                />
+                            )}
+
+                            {paginationArrowTextColorSwitcher === 'hover' && (
+                                <FB_ColorControl
+                                    label={__("Hover Color", "frontis-blocks")}
+                                    globalColor={paginationArrowTextHoverColor}
+                                    setGlobalColor={(value) => setAttributes({ paginationArrowTextHoverColor: value })}
+                                />
+                            )}
+                        </>
+                    )}
 
                     <FB_BackgroundColorControl
                         label={__("Background Color", "frontis-blocks")}
@@ -8486,91 +8629,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                     />
 
-                    <FB_SwitcherControl
-                        label={__("Text Color", "frontis-blocks")}
-                        globalSwitcher={paginationArrowTextColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ paginationArrowTextColorSwitcher: value })}
-                    />
-
-                    {paginationArrowTextColorSwitcher === 'normal' && (
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                            globalColor={paginationArrowTextColor} 
-                            setGlobalColor={(value) => setAttributes({ paginationArrowTextColor: value })}
-                        />
-                    )}
-
-                    {paginationArrowTextColorSwitcher === 'hover' && (
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                            globalColor={paginationArrowTextHoverColor}
-                            setGlobalColor={(value) => setAttributes({ paginationArrowTextHoverColor: value })}
-                        />
-                    )}
-
                     <FB_Range
                         min={1}
                         max={200}
-                        label={__("Icon Size", "frontis-blocks")}
-                        rangeValue={paginationArrowIconSize}
-                        onChangeHandler={(value) => setAttributes({ paginationArrowIconSize: value })}
-                        rangeUnitHandler={(value) => setAttributes({ paginationArrowIconSizeUnits: value })} 
+                        label={__("Width", "frontis-blocks")}
+                        rangeValue={paginationPrevNextWidth}
+                        onChangeHandler={(value) => setAttributes({ paginationPrevNextWidth: value })}
+                        rangeUnitHandler={(value) => setAttributes({ paginationPrevNextWidthUnits: value })} 
                         deviceType={deviceType}
-                        units={paginationArrowIconSizeUnits}
+                        units={paginationPrevNextWidthUnits}
                         setAttributes={setAttributes}
                         rangeStep={1}
-                        resetFallbackValue={"20"}
+                        resetFallbackValue={"36"}
                     />
 
-                    <FB_Range
-                        min={1}
-                        max={200}
-                        label={__("Icon Spacing", "frontis-blocks")}
-                        rangeValue={paginationArrowIconSpacing}
-                        onChangeHandler={(value) => setAttributes({ paginationArrowIconSpacing: value })}
-                        rangeUnitHandler={(value) => setAttributes({ paginationArrowIconSpacingUnits: value })} 
-                        deviceType={deviceType}
-                        units={paginationArrowIconSpacingUnits}
-                        setAttributes={setAttributes}
-                        rangeStep={1}
-                        resetFallbackValue={"20"}
-                    />
-
-                    <FB_SwitcherControl
-                        label={__("Icon Color", "frontis-blocks")}
-                        globalSwitcher={paginationArrowIconColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ paginationArrowIconColorSwitcher: value })}
-                    />
-
-                    {paginationArrowIconColorSwitcher === 'normal' && (
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                            globalColor={paginationArrowIconColor} 
-                            setGlobalColor={(value) => setAttributes({ paginationArrowIconColor: value })}
-                        />
-                    )}
-
-                    {paginationArrowIconColorSwitcher === 'hover' && (
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                            globalColor={paginationArrowIconHoverColor}
-                            setGlobalColor={(value) => setAttributes({ paginationArrowIconHoverColor: value })}
-                        />
-                    )}
-
-                    <FB_Spacing
-                        label={__("Padding", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handlePaginationArrowPaddingUnitsHandler}
-                        spacingUnits={paginationArrowPaddingUnits}
-                        spacingDesktop={paginationArrowDesktopPadding}
-                        spacingTablet={paginationArrowTabletPadding}
-                        spacingMobile={paginationArrowMobilePadding}
-                        handleSpacingUnitHandler={handlePaginationArrowPaddingUnitChange}
-                        spacingCombineBtn={paginationArrowPaddingLink}
-                        spacingCombineBtnHandler={handlePaginationArrowPaddingCombineBtn}
-                        setAttributes={setAttributes}
-                    />
                     <SelectControl
                             label={__("Border Style", "frontis-blocks")}
                             value={paginationArrowBorder}
@@ -8646,12 +8718,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setAttributes={setAttributes}
                         rangeStep={1}
                         resetFallbackValue={""}
-                    />
-                    
-                    <ToggleControl
-                        label={__("Button Aspect Ratio", "frontis-blocks")}
-                        checked={paginationBtnAspectRatio}
-                        onChange={(value) => setAttributes({ paginationBtnAspectRatio: value })}
                     />
 
                     <FB_TypographyControl

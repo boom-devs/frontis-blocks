@@ -221,9 +221,11 @@ export default function save({ attributes }) {
 						{renderSVG(paginationNextIcon)}
 					</div>
 
-					<div className="fb_post_grid_read_more_icon">
-						{renderSVG(readMoreIcon)}
-					</div>
+					{readMoreIconAlign  !== 'image' && (
+						<div className="fb_post_grid_read_more_icon">
+							{renderSVG(readMoreIcon)}
+						</div>
+					)}
 				</div>
 				<div className="loading post">
 					{placeholders.map((item) => (

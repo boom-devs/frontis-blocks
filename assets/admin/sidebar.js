@@ -15285,6 +15285,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   FONT_WEIGHT: () => (/* binding */ FONT_WEIGHT),
 /* harmony export */   GOOGLE_FONTS: () => (/* binding */ GOOGLE_FONTS),
 /* harmony export */   HAMBURGER_MENU_ICON_TYPE: () => (/* binding */ HAMBURGER_MENU_ICON_TYPE),
+/* harmony export */   HAMBURGER_MENU_SCREEN: () => (/* binding */ HAMBURGER_MENU_SCREEN),
 /* harmony export */   HEADING: () => (/* binding */ HEADING),
 /* harmony export */   HORIZONTAL_NAVIGATION_ALIGN: () => (/* binding */ HORIZONTAL_NAVIGATION_ALIGN),
 /* harmony export */   ICON_ALIGN: () => (/* binding */ ICON_ALIGN),
@@ -15363,6 +15364,16 @@ var HAMBURGER_MENU_ICON_TYPE = [{
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text", 'frontis-blocks'),
   value: 'text'
+}];
+var HAMBURGER_MENU_SCREEN = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Off", 'frontis-blocks'),
+  value: "never"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mobile", 'frontis-blocks'),
+  value: "mobile"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Always", 'frontis-blocks'),
+  value: "always"
 }];
 var DISPLAY_HAMBURGER_MENU = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hide", 'frontis-blocks'),

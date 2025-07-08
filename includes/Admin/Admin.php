@@ -370,18 +370,7 @@ class Admin {
 					'schema'          => null,
 				)
 			);
-//
-// 			// Add comment info.
-// 			register_rest_field(
-// 				$value['value'],
-// 				'fb_comment_info',
-// 				array(
-// 					'get_callback'    => array( $this, 'get_post_comment_info' ),
-// 					'update_callback' => null,
-// 					'schema'          => null,
-// 				)
-// 			);
-//
+
 			// Add excerpt info.
 			register_rest_field(
 				$value['value'],
@@ -1180,10 +1169,7 @@ class Admin {
 
                             echo '</div>';
                             ?>
-
-
-
-
+                          
                             <!-- Next Button -->
                             <button class="fb_pagination_next <?php echo $current_page==$total_pages ? 'disabled' : ''; ?>">
                                 <?php if ($pagination_prev_next_type === 'icon'): ?>
