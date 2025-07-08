@@ -1000,7 +1000,7 @@ export const FONT_FAMILYS = [
     { label: __("Ruslan Display", "frontis-blocks"), value: "Ruslan Display" },
     { label: __("Russo One", "frontis-blocks"), value: "Russo One" },
     { label: __("Ruthie", "frontis-blocks"), value: "Ruthie" },
-    { label: __("Rye", "frontis-blocks"), value: "Rye" },    
+    { label: __("Rye", "frontis-blocks"), value: "Rye" },
     { label: __("Sacramento", "frontis-blocks"), value: "Sacramento" },
     { label: __("Sahitya", "frontis-blocks"), value: "Sahitya" },
     { label: __("Sail", "frontis-blocks"), value: "Sail" },

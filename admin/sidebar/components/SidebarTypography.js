@@ -10,16 +10,13 @@ import { useState, useEffect } from '@wordpress/element';
 import Select2 from 'react-select';
 
 import {
-	FONT_WEIGHT,
 	FONT_STYLE,
 	TEXT_TRANSFORM,
-	TEXT_DECORATION,
-	GOOGLE_FONTS,
+	TEXT_DECORATION
 } from '@Constants/fbConstants';
 
 import FB_Range from '@Components/range';
 import loadGoogleFont from '@Utils/loadGoogleFont';
-
 
 const FB_SidebarTypography = ({
 	label = __("Typography", "frontis-blocks"),
@@ -49,25 +46,9 @@ const FB_SidebarTypography = ({
 	heading
 }) => {
 
-
-	const [fontOptions, setFontOptions] = useState([]);
-	const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState(null);
+	const [fontOptions, setFontOptions] = useState(frontisBlocksAdmin?.google_fonts);
+	const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState();
 	const [availableFontWeights, setAvailableFontWeights] = useState([]);
-
-	useEffect(() => {
-		GOOGLE_FONTS().then((fetchedFonts) => {
-			setFontOptions(fetchedFonts);
-
-			const current = fetchedFonts.find(f => f.value === fontFamily);
-			if (current) {
-				setSelectedFontFamilyOption(current);
-				setAvailableFontWeights(current.weights || []);
-			} else {
-				setSelectedFontFamilyOption({ label: 'Default', value: 'Default' });
-				setAvailableFontWeights([]);
-			}
-		});
-	}, []);
 
 	useEffect(() => {
 		if (fontFamily !== 'Default') {
@@ -75,14 +56,25 @@ const FB_SidebarTypography = ({
 		}
 	}, [fontFamily]);
 
-
-
 	const handleFontFamilyChange = (selectedOption) => {
 		setSelectedFontFamilyOption(selectedOption);
 		const newFontFamily = selectedOption?.value || 'Default';
 
 		onChangeFontFamily(newFontFamily);
-		setAvailableFontWeights(selectedOption?.weights || []);
+
+		if(selectedOption?.weights.length > 0) {
+			let weights = [
+				{'label': 'Default', 'value': 'default'}
+			];
+			selectedOption?.weights.map((item, index) => {
+				weights.push({
+					'label': item,
+					'value': item
+				})
+			})
+
+			setAvailableFontWeights(weights);
+		}
 
 		if (newFontFamily !== 'Default') {
 			loadGoogleFont(newFontFamily);
@@ -129,9 +121,14 @@ const FB_SidebarTypography = ({
 		onChangeLineHeightUnit(newLineHeightUnit);
 	};
 
+	useEffect(() => {
+		const  selectedFont= fontOptions.find(font => font.label === fontFamily);
+		handleFontFamilyChange(selectedFont)
+	}, []);
+
 	return (
 		<>
-			<BaseControl 
+			<BaseControl
 				label={__("Font Family", "frontis-blocks")}
 				className='fb-typo-spacing'
 			>
@@ -165,12 +162,7 @@ const FB_SidebarTypography = ({
 			<div className='fb_global_typo_wrap'>
 				<SelectControl
 					label={__("Font Weight", "frontis-blocks")}
-					options={[
-						{ label: __("Default", "frontis-blocks"), value: 'inherit' },
-						...(availableFontWeights.length > 0
-							? availableFontWeights.map(weight => ({ label: weight, value: weight }))
-							: FONT_WEIGHT.filter(item => item.value !== 'inherit'))
-					]}
+					options={availableFontWeights}
 					value={fontWeight}
 					onChange={handleFontWeightChange}
 				/>
