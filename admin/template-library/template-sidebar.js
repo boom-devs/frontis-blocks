@@ -6,6 +6,8 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory,data }) 
   const schema = data.$schema;
   const categories = activeTab ? Object.values(schema[activeTab]?.categories || {}) : [];
 
+  console.log(categories);
+
   // const [activeCategory, setActiveCategory] = useState(null);
   // Set first category as active by default
   useEffect(() => {
@@ -15,7 +17,15 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory,data }) 
   }, [categories]);
   return (
     <div className="fb-template-library-store-sidebar">
-
+      <div className="fb-template-category-wrapper">
+        <div className="fb-template-category-label">
+          <h2>Categories</h2>
+        </div>
+        <div className="fb-template-category">
+          <span className="fb-tl-free">Free</span>
+          <span className="fb-tl-pro">Pro</span>
+        </div>
+      </div>
       {/* Categories Section */}
       <div className="fb-template-library-store-sidebar-tabs">
 
@@ -27,6 +37,7 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory,data }) 
             onClick={() => setActiveCategory(category.id)}
           >
             <span className="fb-template-library-store-sidebar-tab-name">
+              <span dangerouslySetInnerHTML={{ __html: category.icon }} />
               {category.name}
             </span>
             <span className="fb-template-library-store-sidebar-tab-count">
