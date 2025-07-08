@@ -1105,9 +1105,6 @@ class Admin {
 
                             echo '</div>';
                             ?>
-
-
-
             
                             <!-- Next Button -->
                             <button class="fb_pagination_next <?php echo $current_page==$total_pages ? 'disabled' : ''; ?>">
