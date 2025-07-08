@@ -16,7 +16,6 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
-
 export default function Edit({ attributes, setAttributes, clientId, context }) {
     const {
         blockId,
@@ -67,24 +66,19 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
     const dynamicValue = useSelect((select) => {
         if (!dynamicContent) return '';
-    
+
         // Check if we're inside a Query Loop block
         const { getBlockParentsByBlockName } = select('core/block-editor');
         const queryBlockIds = getBlockParentsByBlockName(clientId, 'core/query');
         const isInsideQueryLoop = queryBlockIds && queryBlockIds.length > 0;
-    
+
         if (isInsideQueryLoop) {
-            // In the first snippet, they use context from props directly
-            // You could add context to your function parameters: Edit({ attributes, setAttributes, clientId, context })
-            // Where context would include: { postType, postId, queryId }
-            
-            // Then use this postId instead of trying to get it from selectedBlock
             const contextPostId = context?.postId;
-            
+
             if (contextPostId) {
                 const contextPostType = context?.postType || 'post';
                 const post = select('core').getEntityRecord('postType', contextPostType, contextPostId);
-                
+
                 if (post) {
                     switch (dynamicContent) {
                         case 'post_title':
@@ -102,7 +96,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
             const postType = select('core/editor').getCurrentPostType();
             const postId = select('core/editor').getCurrentPostId();
             const post = select('core').getEditedEntityRecord('postType', postType, postId);
-    
+
             switch (dynamicContent) {
                 case 'post_title':
                     return post.title;
