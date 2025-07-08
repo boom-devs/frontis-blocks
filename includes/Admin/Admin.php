@@ -80,7 +80,8 @@ class Admin {
             'global_styles' => wp_get_global_styles(),
             'global_typography' => get_option('fb_globaltypo'),
             'theme_colors' => $theme_colors,
-            'home_url' => home_url()
+            'home_url' => home_url(),
+            'siteName' => get_bloginfo('name'),
 		);
 
 		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){

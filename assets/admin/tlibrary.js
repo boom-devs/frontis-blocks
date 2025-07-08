@@ -2,10 +2,555 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./admin/full-site-import/components/ColorPalletWrapper.js":
-/*!*****************************************************************!*\
-  !*** ./admin/full-site-import/components/ColorPalletWrapper.js ***!
-  \*****************************************************************/
+/***/ "./admin/template-library/data.json":
+/*!******************************************!*\
+  !*** ./admin/template-library/data.json ***!
+  \******************************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"pattern1","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png","content":"Pattern 1 content here","tags":["Blog","Magazine","Construction"]},{"id":"pattern2","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-1.png","content":"Pattern 2 content here","tags":["Landing","AI","Gutenberg"]},{"id":"pattern3","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Pattern 3 content here","tags":["Landing","Creative"]},{"id":"pattern4","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-2.png","content":"Pattern 4 content here","tags":["Landing","Business"]},{"id":"pattern5","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Pattern 5 content here","tags":["Landing","Portfolio"]},{"id":"pattern6","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Pattern 6 content here","tags":["Landing","Agency"]},{"id":"pattern15","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Pattern 15 content here","tags":["Landing","Startup"]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[{"id":"pattern1","title":"Pattern 1","image":"pattern1.jpg","content":"Pattern 1 content here","tags":["Content","Block"]}]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"page1","title":"Page 1","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Page 1 content here","tags":["Landing","Business"]},{"id":"page2","title":"Page 2","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Page 2 content here","tags":["Portfolio","Creative"]},{"id":"page3","title":"Pattern 3","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Page 3 content here","tags":["Blog","Magazine"]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"item1","title":"Item 1","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Site 1 content here","tags":["Business","Corporate"]},{"id":"item2","title":"Item 2","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Site 2 content here","tags":["Portfolio","Personal"]},{"id":"item3","title":"Item 3","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Site 3 content here","tags":["Creative","Agency"]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"template-library":{"name":"Template Library","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]}]}}}');
+
+/***/ }),
+
+/***/ "./admin/template-library/full-site-import-config.js":
+/*!***********************************************************!*\
+  !*** ./admin/template-library/full-site-import-config.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
+/* harmony import */ var _template_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./template-header */ "./admin/template-library/template-header.js");
+/* harmony import */ var _data_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./data.json */ "./admin/template-library/data.json");
+/* harmony import */ var _global_typo_global_typo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./global-typo/global-typo */ "./admin/template-library/global-typo/global-typo.js");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * WordPress dependencies
+ */
+
+
+
+
+
+var FullSiteImportConfig = function FullSiteImportConfig(_ref) {
+  var template = _ref.template,
+    formData = _ref.formData,
+    onClose = _ref.onClose,
+    onBack = _ref.onBack,
+    onImport = _ref.onImport,
+    isImporting = _ref.isImporting,
+    importProgress = _ref.importProgress,
+    currentStep = _ref.currentStep,
+    isSidebarCollapsed = _ref.isSidebarCollapsed,
+    setIsSidebarCollapsed = _ref.setIsSidebarCollapsed;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('patterns'),
+    _useState2 = _slicedToArray(_useState, 2),
+    activeTab = _useState2[0],
+    setActiveTab = _useState2[1];
+  var handleSidebarToggle = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsSidebarCollapsed(function (prev) {
+      return !prev;
+    });
+  }, []);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-full-site-import-modal"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-full-site-import-overlay",
+    onClick: onClose
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-full-site-import-container"
+  }, /*#__PURE__*/React.createElement(_template_header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    activeTab: activeTab,
+    setActiveTab: setActiveTab,
+    data: _data_json__WEBPACK_IMPORTED_MODULE_2__,
+    onClose: onClose
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-full-site-import-content ".concat(isSidebarCollapsed ? 'sidebar-collapsed' : '')
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-form-panel ".concat(isSidebarCollapsed ? 'collapsed' : '')
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-section"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-template-label"
+  }, "Template Name:"), /*#__PURE__*/React.createElement("h6", {
+    className: "fb-template-title"
+  }, (template === null || template === void 0 ? void 0 : template.title) || 'Renovate - Home Decor Website Template'), /*#__PURE__*/React.createElement(_global_typo_global_typo__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-actions"
+  }, isImporting ? /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-progress"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-progress-info"
+  }, /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    color: "#3B82F6",
+    size: 20
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "fb-progress-text"
+  }, currentStep)), /*#__PURE__*/React.createElement("div", {
+    className: "fb-progress-bar"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-progress-fill",
+    style: {
+      width: "".concat(importProgress, "%")
+    }
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "fb-progress-percentage"
+  }, Math.round(importProgress), "%")) : /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-step-btn-wrapper"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-import-btn next",
+    onClick: onImport
+  }, "Import Now", /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M4 12H20M20 12L14 6M20 12L14 18",
+    stroke: "white",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-import-btn back",
+    onClick: onBack
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M20 12H4M4 12L10 6M4 12L10 18",
+    stroke: "#6A758E",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })), "Back")))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-preview-panel"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-preview-card"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: template === null || template === void 0 ? void 0 : template.image,
+    alt: template === null || template === void 0 ? void 0 : template.title,
+    className: "fb-preview-image"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-preview-info"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "fb-preview-title"
+  }, (template === null || template === void 0 ? void 0 : template.title) || 'Renovate - Home Decor Website Template'), /*#__PURE__*/React.createElement("div", {
+    className: "fb-preview-meta"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-preview-category"
+  }, "Construction"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-preview-type"
+  }, "FREE"))))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-sidebar-collapse ".concat(isSidebarCollapsed ? 'collapsed' : ''),
+    onClick: handleSidebarToggle
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "34",
+    height: "34",
+    viewBox: "0 0 34 34",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M17 0.5C26.1127 0.5 33.5 7.8873 33.5 17C33.5 26.1127 26.1127 33.5 17 33.5C7.8873 33.5 0.5 26.1127 0.5 17C0.5 7.8873 7.8873 0.5 17 0.5Z",
+    fill: "white"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M17 0.5C26.1127 0.5 33.5 7.8873 33.5 17C33.5 26.1127 26.1127 33.5 17 33.5C7.8873 33.5 0.5 26.1127 0.5 17C0.5 7.8873 7.8873 0.5 17 0.5Z",
+    stroke: "#E1E3E8"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M19.1875 21.375L14.8125 17L19.1875 12.625",
+    stroke: "#555E72",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }))))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FullSiteImportConfig);
+
+/***/ }),
+
+/***/ "./admin/template-library/full-site-import.js":
+/*!****************************************************!*\
+  !*** ./admin/template-library/full-site-import.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _data_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./data.json */ "./admin/template-library/data.json");
+/* harmony import */ var _template_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./template-header */ "./admin/template-library/template-header.js");
+/* harmony import */ var _full_site_import_config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./full-site-import-config */ "./admin/template-library/full-site-import-config.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * WordPress dependencies
+ */
+
+
+
+
+
+var FullSiteImport = function FullSiteImport(_ref) {
+  var template = _ref.template,
+    onClose = _ref.onClose,
+    onBack = _ref.onBack;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      siteName: window.frontisBlocksAdmin && window.frontisBlocksAdmin.siteName || '',
+      siteTagline: '',
+      logo: null,
+      importContent: true,
+      importCustomizer: true,
+      importWidgets: true,
+      importOptions: true
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    formData = _useState2[0],
+    setFormData = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isImporting = _useState4[0],
+    setIsImporting = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    _useState6 = _slicedToArray(_useState5, 2),
+    importProgress = _useState6[0],
+    setImportProgress = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    currentStep = _useState8[0],
+    setCurrentStep = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('patterns'),
+    _useState0 = _slicedToArray(_useState9, 2),
+    activeTab = _useState0[0],
+    setActiveTab = _useState0[1];
+  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState10 = _slicedToArray(_useState1, 2),
+    showConfigStep = _useState10[0],
+    setShowConfigStep = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isSidebarCollapsed = _useState12[0],
+    setIsSidebarCollapsed = _useState12[1];
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState14 = _slicedToArray(_useState13, 2),
+    logoPreview = _useState14[0],
+    setLogoPreview = _useState14[1];
+  var handleInputChange = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (field, value) {
+    setFormData(function (prev) {
+      return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, field, value));
+    });
+  }, []);
+  var handleLogoUpload = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (event) {
+    var file = event.target.files[0];
+    if (file) {
+      setFormData(function (prev) {
+        return _objectSpread(_objectSpread({}, prev), {}, {
+          logo: file
+        });
+      });
+    }
+  }, []);
+  var handleNext = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    if (formData.siteName.trim()) {
+      setShowConfigStep(true);
+    }
+  }, [formData.siteName]);
+  var handleBackClick = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    if (showConfigStep) {
+      setShowConfigStep(false);
+    } else {
+      if (onBack) {
+        onBack();
+      }
+    }
+  }, [showConfigStep, onBack]);
+  var handleSidebarToggle = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsSidebarCollapsed(function (prev) {
+      return !prev;
+    });
+  }, []);
+  var handleImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var steps, i;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          setIsImporting(true);
+          setImportProgress(0);
+          steps = ['Preparing import...', 'Importing content...', 'Setting up customizer...', 'Configuring widgets...', 'Finalizing setup...'];
+          _context.prev = 3;
+          i = 0;
+        case 5:
+          if (!(i < steps.length)) {
+            _context.next = 13;
+            break;
+          }
+          setCurrentStep(steps[i]);
+          setImportProgress((i + 1) / steps.length * 100);
+          _context.next = 10;
+          return new Promise(function (resolve) {
+            return setTimeout(resolve, 1500);
+          });
+        case 10:
+          i++;
+          _context.next = 5;
+          break;
+        case 13:
+          console.log('Full site import completed:', {
+            template: template === null || template === void 0 ? void 0 : template.id,
+            formData: formData
+          });
+          alert('Site imported successfully!');
+          onClose();
+          _context.next = 22;
+          break;
+        case 18:
+          _context.prev = 18;
+          _context.t0 = _context["catch"](3);
+          console.error('Import failed:', _context.t0);
+          alert('Import failed. Please try again.');
+        case 22:
+          _context.prev = 22;
+          setIsImporting(false);
+          setImportProgress(0);
+          setCurrentStep('');
+          return _context.finish(22);
+        case 27:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[3, 18, 22, 27]]);
+  })), [template === null || template === void 0 ? void 0 : template.id, formData, onClose]);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (formData.logo) {
+      var objectUrl = URL.createObjectURL(formData.logo);
+      setLogoPreview(objectUrl);
+      return function () {
+        return URL.revokeObjectURL(objectUrl);
+      };
+    } else {
+      setLogoPreview(null);
+    }
+  }, [formData.logo]);
+  if (showConfigStep) {
+    return /*#__PURE__*/React.createElement(_full_site_import_config__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      template: template,
+      formData: formData,
+      onClose: onClose,
+      onBack: function onBack() {
+        return setShowConfigStep(false);
+      },
+      onImport: handleImport,
+      isImporting: isImporting,
+      importProgress: importProgress,
+      currentStep: currentStep,
+      isSidebarCollapsed: isSidebarCollapsed,
+      setIsSidebarCollapsed: setIsSidebarCollapsed
+    });
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-full-site-import-modal"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-full-site-import-overlay",
+    onClick: onClose
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-full-site-import-container"
+  }, /*#__PURE__*/React.createElement(_template_header__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    activeTab: activeTab,
+    setActiveTab: setActiveTab,
+    data: _data_json__WEBPACK_IMPORTED_MODULE_1__,
+    onClose: onClose
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-full-site-import-content ".concat(isSidebarCollapsed ? 'sidebar-collapsed' : '')
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-form-panel ".concat(isSidebarCollapsed ? 'collapsed' : '')
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-section"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-template-label"
+  }, "Template Name:"), /*#__PURE__*/React.createElement("h6", {
+    className: "fb-template-title"
+  }, (template === null || template === void 0 ? void 0 : template.title) || 'Renovate - Home Decor Website Template'), /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "siteName"
+  }, "Site Name"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    id: "siteName",
+    placeholder: "Enter your site name",
+    value: formData.siteName,
+    onChange: function onChange(e) {
+      return handleInputChange('siteName', e.target.value);
+    },
+    className: "fb-form-input"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "siteTagline"
+  }, "Site Tagline"), /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    id: "siteTagline",
+    placeholder: "Enter your site tagline",
+    value: formData.siteTagline,
+    onChange: function onChange(e) {
+      return handleInputChange('siteTagline', e.target.value);
+    },
+    className: "fb-form-input"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-group"
+  }, /*#__PURE__*/React.createElement("label", null, "Upload Logo"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-logo-upload"
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "file",
+    id: "logoUpload",
+    accept: "image/*",
+    onChange: handleLogoUpload,
+    className: "fb-file-input"
+  }), /*#__PURE__*/React.createElement("label", {
+    htmlFor: "logoUpload",
+    className: "fb-upload-btn"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M17.4776 9.01106C17.485 9.01102 17.4925 9.01101 17.5 9.01101C19.9853 9.01101 22 11.0294 22 13.5193C22 15.8398 20.25 17.7508 18 18M17.4776 9.01106C17.4924 8.84606 17.5 8.67896 17.5 8.51009C17.5 5.46695 15.0376 3 12 3C9.12324 3 6.76233 5.21267 6.52042 8.03192M17.4776 9.01106C17.3753 10.1476 16.9286 11.1846 16.2428 12.0165M6.52042 8.03192C3.98398 8.27373 2 10.4139 2 13.0183C2 15.4417 3.71776 17.4632 6 17.9273M6.52042 8.03192C6.67826 8.01687 6.83823 8.00917 7 8.00917C8.12582 8.00917 9.16474 8.38194 10.0005 9.01101",
+    stroke: "#141B34",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M12 13V21M12 13C11.2998 13 9.99153 14.9943 9.5 15.5M12 13C12.7002 13 14.0085 14.9943 14.5 15.5",
+    stroke: "#141B34",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })), "Click to upload SVG, PNG, JPG or GIF (max. 800x400 px)SVG, PNG, JPG or GIF (max. 800x400 px)"), formData.logo && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+    className: "fb-file-name"
+  }, formData.logo.name), logoPreview && /*#__PURE__*/React.createElement("img", {
+    src: logoPreview,
+    alt: "Logo Preview",
+    className: "fb-logo-preview",
+    style: {
+      maxWidth: '120px',
+      maxHeight: '60px',
+      display: 'block',
+      marginTop: '8px'
+    }
+  }))))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-actions"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-step-btn-wrapper"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-import-btn next",
+    onClick: handleNext,
+    disabled: !formData.siteName.trim()
+  }, "Next", /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M4 12H20M20 12L14 6M20 12L14 18",
+    stroke: "white",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-import-btn back",
+    onClick: handleBackClick
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M20 12H4M4 12L10 6M4 12L10 18",
+    stroke: "#6A758E",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })), "Back")))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-preview-panel"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-preview-card"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: template === null || template === void 0 ? void 0 : template.image,
+    alt: template === null || template === void 0 ? void 0 : template.title,
+    className: "fb-preview-image"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-preview-info"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "fb-preview-title"
+  }, (template === null || template === void 0 ? void 0 : template.title) || 'Renovate - Home Decor Website Template'), /*#__PURE__*/React.createElement("div", {
+    className: "fb-preview-meta"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-preview-category"
+  }, "Construction"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-preview-type"
+  }, "FREE"))))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-sidebar-collapse ".concat(isSidebarCollapsed ? 'collapsed' : ''),
+    onClick: handleSidebarToggle
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "34",
+    height: "34",
+    viewBox: "0 0 34 34",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M17 0.5C26.1127 0.5 33.5 7.8873 33.5 17C33.5 26.1127 26.1127 33.5 17 33.5C7.8873 33.5 0.5 26.1127 0.5 17C0.5 7.8873 7.8873 0.5 17 0.5Z",
+    fill: "white"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M17 0.5C26.1127 0.5 33.5 7.8873 33.5 17C33.5 26.1127 26.1127 33.5 17 33.5C7.8873 33.5 0.5 26.1127 0.5 17C0.5 7.8873 7.8873 0.5 17 0.5Z",
+    stroke: "#E1E3E8"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M19.1875 21.375L14.8125 17L19.1875 12.625",
+    stroke: "#555E72",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+    className: isSidebarCollapsed ? 'rotated' : ''
+  }))))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FullSiteImport);
+
+/***/ }),
+
+/***/ "./admin/template-library/global-typo/components/ColorPalletWrapper.js":
+/*!*****************************************************************************!*\
+  !*** ./admin/template-library/global-typo/components/ColorPalletWrapper.js ***!
+  \*****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -16,8 +561,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -31,12 +578,18 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
 var ColorPalletWrapper = function ColorPalletWrapper(props) {
   var colorPanelArray = props.colorPanelArray,
     customColors = props.customColors,
     setCustomColor = props.setCustomColor,
     setCustomColors = props.setCustomColors,
-    setCurrentState = props.setCurrentState;
+    setCurrentState = props.setCurrentState,
+    addCustomColor = props.addCustomColor,
+    colorModalOpen = props.colorModalOpen,
+    setColorModalOpen = props.setColorModalOpen,
+    colorName = props.colorName,
+    setColorName = props.setColorName;
   var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(customColors),
     _useState2 = _slicedToArray(_useState, 2),
     afterDeletedCustomColors = _useState2[0],
@@ -57,10 +610,10 @@ var ColorPalletWrapper = function ColorPalletWrapper(props) {
           items.forEach(function (item, index) {
             var newButton = document.createElement('button');
             newButton.className = 'fb-delete-custom-color';
-            var deleteIcon = document.createElement('span');
-            deleteIcon.className = 'dashicons dashicons-trash';
-            newButton.appendChild(deleteIcon);
-            deleteIcon.addEventListener('click', function () {
+            newButton.setAttribute('type', 'button');
+            newButton.setAttribute('aria-label', 'Delete');
+            newButton.innerHTML = "\n                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"17\" viewBox=\"0 0 16 17\" fill=\"none\">\n                            <path d=\"M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675\" stroke=\"#E43242\" stroke-linecap=\"round\"/>\n                            <path d=\"M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659\" stroke=\"#E43242\" stroke-linecap=\"round\"/>\n                            <path d=\"M6.3335 11.5V7.5\" stroke=\"#E43242\" stroke-linecap=\"round\"/>\n                            <path d=\"M9.6665 11.5V7.5\" stroke=\"#E43242\" stroke-linecap=\"round\"/>\n                            </svg>\n                        ";
+            newButton.addEventListener('click', function () {
               deleteItem(index);
             });
             var existingButton = item.querySelector('button');
@@ -70,22 +623,55 @@ var ColorPalletWrapper = function ColorPalletWrapper(props) {
       }, 100);
     }
   }, [customColors]);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, customColors.length > 0 && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.PanelColorSettings, {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Panel, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom Colors", "frontis-blocks"),
     className: "fb-color-panel fb-custom-color-panel",
     initialOpen: true,
     disableAlpha: true,
     colorSettings: colorPanelArray(customColors, setCustomColor)
-  }));
+  }, colorModalOpen && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Modal, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Color name", "frontis-blocks"),
+    onRequestClose: function onRequestClose() {
+      return setColorModalOpen(false);
+    }
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+    __nextHasNoMarginBottom: true,
+    __next40pxDefaultSize: true,
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color Name", "frontis-blocks"),
+    value: colorName,
+    onChange: setColorName
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    className: "fb-custom-color-btn",
+    onClick: function onClick() {
+      return setColorModalOpen(false);
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Save", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
+    className: "add-custom-color"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+    className: "add-custom-color-btn",
+    onClick: addCustomColor
+  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
+    width: "15",
+    height: "14",
+    viewBox: "0 0 15 14",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M7.5 0.75V13.25M13.75 7L1.25 7",
+    stroke: "white",
+    strokeWidth: "1.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  }))))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColorPalletWrapper);
 
 /***/ }),
 
-/***/ "./admin/full-site-import/components/CustomGradientPallet.js":
-/*!*******************************************************************!*\
-  !*** ./admin/full-site-import/components/CustomGradientPallet.js ***!
-  \*******************************************************************/
+/***/ "./admin/template-library/global-typo/components/CustomGradientPallet.js":
+/*!*******************************************************************************!*\
+  !*** ./admin/template-library/global-typo/components/CustomGradientPallet.js ***!
+  \*******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -186,9 +772,10 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
       onClick: function onClick() {
         return !enableEditName && setClickedGradient(clickedGradient === color.slug ? '' : color.slug);
       }
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorIndicator
-    // onClick={() => setClickedGradient(clickedGradient === color.slug ? '' : color.slug)}
-    , {
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorIndicator, {
+      onClick: function onClick() {
+        return setClickedGradient(clickedGradient === color.slug ? '' : color.slug);
+      },
       colorValue: color === null || color === void 0 ? void 0 : color.color
     }), enableEditName && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
       className: 'fb-custom-element__edit-input',
@@ -204,9 +791,16 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
       onClick: function onClick() {
         return setColor(index, 'linear-gradient(135deg, rgb(6, 147, 227) 0%, rgb(155, 81, 224) 100%)');
       }
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
-      icon: 'image-rotate'
-    })), deleteAction && /*#__PURE__*/React.createElement("span", {
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "16",
+      height: "16",
+      viewBox: "0 0 16 16",
+      fill: "none"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M10.6817 6.23162H14.0101V6.23044M1.98926 13.0956V9.76718M1.98926 9.76718L5.31768 9.76718M1.98926 9.76718L4.10985 11.8892C4.7702 12.5507 5.60824 13.0527 6.57607 13.312C9.51014 14.0982 12.526 12.357 13.3122 9.42292M2.68699 6.57591C3.47317 3.64184 6.48902 1.90064 9.42308 2.68682C10.3909 2.94615 11.229 3.4481 11.8893 4.10969L14.0101 6.23044M14.0101 2.90322V6.23044",
+      stroke: "#555E72"
+    }))), deleteAction && /*#__PURE__*/React.createElement("span", {
       className: 'fb-delete',
       title: "Delete",
       onClick: function onClick() {
@@ -256,10 +850,10 @@ var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
 
 /***/ }),
 
-/***/ "./admin/full-site-import/components/FontPreview.js":
-/*!**********************************************************!*\
-  !*** ./admin/full-site-import/components/FontPreview.js ***!
-  \**********************************************************/
+/***/ "./admin/template-library/global-typo/components/FontPreview.js":
+/*!**********************************************************************!*\
+  !*** ./admin/template-library/global-typo/components/FontPreview.js ***!
+  \**********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -311,10 +905,10 @@ function FrontPreview(_ref) {
 
 /***/ }),
 
-/***/ "./admin/full-site-import/components/GenerateColorRoot.js":
-/*!****************************************************************!*\
-  !*** ./admin/full-site-import/components/GenerateColorRoot.js ***!
-  \****************************************************************/
+/***/ "./admin/template-library/global-typo/components/GenerateColorRoot.js":
+/*!****************************************************************************!*\
+  !*** ./admin/template-library/global-typo/components/GenerateColorRoot.js ***!
+  \****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -329,16 +923,23 @@ var generateColorsVariables = function generateColorsVariables(colors, deviceTyp
   var cssVariables = ":root {\n        ".concat(colors.map(function (color) {
     return "--wp--frontis--color--".concat(color.slug, ": ").concat(color.color, ";");
   }).join('\n    '), "\n    }");
-  var iframe = document.querySelector("iframe.fb-preview-frame");
+  var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
   var iframeDocument = ((_iframe = iframe) === null || _iframe === void 0 ? void 0 : _iframe.contentDocument) || ((_iframe2 = iframe) === null || _iframe2 === void 0 || (_iframe2 = _iframe2.contentWindow) === null || _iframe2 === void 0 ? void 0 : _iframe2.document) || document;
   var styleTag = iframeDocument.getElementById("global-colors");
   var path = window.location.pathname;
   var fileName = path.substring(path.lastIndexOf('/') + 1);
   if (fileName === 'post.php') {
-    var _iframe3, _iframe4;
-    iframe = document.querySelector('iframe[name="fb-preview-frame"]');
-    iframeDocument = ((_iframe3 = iframe) === null || _iframe3 === void 0 ? void 0 : _iframe3.contentDocument) || ((_iframe4 = iframe) === null || _iframe4 === void 0 || (_iframe4 = _iframe4.contentWindow) === null || _iframe4 === void 0 ? void 0 : _iframe4.document) || document;
-    styleTag = iframeDocument.getElementById("global-colors");
+    if (deviceType !== 'Desktop') {
+      var _iframe3, _iframe4;
+      iframe = document.querySelector('iframe[name="editor-canvas"]');
+      iframeDocument = ((_iframe3 = iframe) === null || _iframe3 === void 0 ? void 0 : _iframe3.contentDocument) || ((_iframe4 = iframe) === null || _iframe4 === void 0 || (_iframe4 = _iframe4.contentWindow) === null || _iframe4 === void 0 ? void 0 : _iframe4.document) || document;
+      styleTag = iframeDocument.getElementById("global-colors");
+    } else {
+      var _iframe5, _iframe6;
+      iframe = document.querySelector('iframe[name="editor-canvas"]');
+      iframeDocument = ((_iframe5 = iframe) === null || _iframe5 === void 0 ? void 0 : _iframe5.contentDocument) || ((_iframe6 = iframe) === null || _iframe6 === void 0 || (_iframe6 = _iframe6.contentWindow) === null || _iframe6 === void 0 ? void 0 : _iframe6.document) || document;
+      styleTag = iframeDocument.getElementById("global-colors");
+    }
   }
   if (!styleTag) {
     styleTag = iframeDocument.createElement("style");
@@ -363,3320 +964,10 @@ var generateColorsVariables = function generateColorsVariables(colors, deviceTyp
 
 /***/ }),
 
-/***/ "./admin/full-site-import/components/GenerateRootCss.js":
-/*!**************************************************************!*\
-  !*** ./admin/full-site-import/components/GenerateRootCss.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var generateCSSVariables = function generateCSSVariables(data, deviceType) {
-  var _iframe4, _iframe5;
-  var createValueWithUnit = function createValueWithUnit(value, unit) {
-    if (!value || value === 'Default') return '0px';
-    return "".concat(value).concat(unit || '');
-  };
-  var getValue = function getValue(obj, prop) {
-    var _obj$prop2;
-    var breakpoint = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-    if (breakpoint) {
-      var _obj$prop;
-      return (obj === null || obj === void 0 || (_obj$prop = obj[prop]) === null || _obj$prop === void 0 || (_obj$prop = _obj$prop.value) === null || _obj$prop === void 0 ? void 0 : _obj$prop[breakpoint]) || null;
-    }
-    return (obj === null || obj === void 0 || (_obj$prop2 = obj[prop]) === null || _obj$prop2 === void 0 ? void 0 : _obj$prop2.value) || null;
-  };
-  var getUnit = function getUnit(obj, prop, breakpoint) {
-    var _obj$prop3, _obj$prop4;
-    return (obj === null || obj === void 0 || (_obj$prop3 = obj[prop]) === null || _obj$prop3 === void 0 || (_obj$prop3 = _obj$prop3.unit) === null || _obj$prop3 === void 0 ? void 0 : _obj$prop3[breakpoint]) || (obj === null || obj === void 0 || (_obj$prop4 = obj[prop]) === null || _obj$prop4 === void 0 ? void 0 : _obj$prop4.unit) || '';
-  };
-  var fontFamilies = new Set(); // to track added font families
-
-  var rootStyles = '';
-  var desktopStyles = '';
-  var tabletStyles = '';
-  var mobileStyles = '';
-  var paragraphStyles = '';
-  var linkStyles = '';
-  var buttonStyles = '';
-  var captionStyles = '';
-  var heading1Styles = '';
-  var heading2Styles = '';
-  var heading3Styles = '';
-  var heading4Styles = '';
-  var heading5Styles = '';
-  var heading6Styles = '';
-  var combinedHeadingStyles = ''; // Combined styles for "all" headings
-
-  // Loop through the data to generate CSS for each tag
-  ['body', 'link', 'button', 'captions', 'all', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'separator'].forEach(function (key) {
-    if (!data[key]) return;
-
-    // Apply global properties (fontFamily, fontWeight, etc.)
-    ['fontFamily', 'fontWeight', 'fontStyle', 'textTransform', 'textDecoration'].forEach(function (prop) {
-      var value = getValue(data[key], prop);
-      if (value !== null) {
-        rootStyles += "--fb-global-".concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": ").concat(value, ";\n");
-        if (key === 'body') {
-          paragraphStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
-        }
-        if (key === 'link') {
-          linkStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
-        }
-        if (key === 'button') {
-          buttonStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
-        }
-        if (key === 'captions') {
-          captionStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
-        }
-        if (key === 'all') {
-          combinedHeadingStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
-        }
-        if (key === 'h1') {
-          heading1Styles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
-        }
-        if (key === 'h2') {
-          heading2Styles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
-        }
-        if (key === 'h3') {
-          heading3Styles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
-        }
-        if (key === 'h4') {
-          heading4Styles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
-        }
-        if (key === 'h5') {
-          heading5Styles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
-        }
-        if (key === 'h6') {
-          heading6Styles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(--fb-global-").concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ");\n");
-        }
-      }
-    });
-
-    // Apply font size, letter spacing, line height
-    ['fontSize', 'letterSpacing', 'lineHeight'].forEach(function (prop) {
-      var desktopValue = getValue(data[key], prop, 'Desktop');
-      var tabletValue = getValue(data[key], prop, 'Tablet');
-      var mobileValue = getValue(data[key], prop, 'Mobile');
-      var desktopUnit = getUnit(data[key], prop, 'Desktop');
-      var tabletUnit = getUnit(data[key], prop, 'Tablet');
-      var mobileUnit = getUnit(data[key], prop, 'Mobile');
-      if (desktopValue !== null) {
-        var cssVar = "--fb-global-".concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase());
-        desktopStyles += "".concat(cssVar, ": ").concat(createValueWithUnit(desktopValue, desktopUnit), ";\n");
-        if (key === 'body') {
-          paragraphStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ") !important;\n");
-        }
-        if (key === 'link') {
-          linkStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
-        }
-        if (key === 'button') {
-          buttonStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
-        }
-        if (key === 'captions') {
-          captionStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
-        }
-        if (key === 'all') {
-          combinedHeadingStyles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
-        }
-        if (key === 'h1') {
-          heading1Styles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
-        }
-        if (key === 'h2') {
-          heading2Styles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
-        }
-        if (key === 'h3') {
-          heading3Styles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
-        }
-        if (key === 'h4') {
-          heading4Styles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
-        }
-        if (key === 'h5') {
-          heading5Styles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
-        }
-        if (key === 'h6') {
-          heading6Styles += "".concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase(), ": var(").concat(cssVar, ");\n");
-        }
-      }
-      if (tabletValue !== null) {
-        var _cssVar = "--fb-global-".concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase());
-        tabletStyles += "".concat(_cssVar, ": ").concat(createValueWithUnit(tabletValue, tabletUnit), ";\n");
-      }
-      if (mobileValue !== null) {
-        var _cssVar2 = "--fb-global-".concat(key, "--").concat(prop.replace(/[A-Z]/g, '-$&').toLowerCase());
-        mobileStyles += "".concat(_cssVar2, ": ").concat(createValueWithUnit(mobileValue, mobileUnit), ";\n");
-      }
-    });
-
-    // Add fontFamily to iframe context if not already added
-    ['fontFamily'].forEach(function (prop) {
-      var fontFamily = getValue(data[key], prop);
-      if (fontFamily !== null && !fontFamilies.has(fontFamily)) {
-        var _iframe2, _iframe3;
-        fontFamilies.add(fontFamily);
-        var _iframe = document.querySelector("iframe.fb-preview-frame");
-
-        // If not found, try the editor-canvas iframe
-        if (!_iframe) {
-          _iframe = document.querySelector('iframe[name="fb-preview-frame"]');
-        }
-        var _iframeDocument = ((_iframe2 = _iframe) === null || _iframe2 === void 0 ? void 0 : _iframe2.contentDocument) || ((_iframe3 = _iframe) === null || _iframe3 === void 0 || (_iframe3 = _iframe3.contentWindow) === null || _iframe3 === void 0 ? void 0 : _iframe3.document) || document;
-
-        // Generate font URL and add to the iframe's document
-        var fontUrl = "https://fonts.googleapis.com/css?family=".concat(fontFamily.replace(' ', '+'), ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic");
-        var linkElement = _iframeDocument.createElement('link');
-        linkElement.rel = 'stylesheet';
-        linkElement.href = fontUrl;
-        _iframeDocument.head.appendChild(linkElement);
-      }
-    });
-  });
-  if (paragraphStyles === '') {
-    return false;
-  }
-  var path = window.location.pathname;
-  var fileName = path.substring(path.lastIndexOf('/') + 1);
-  var headingGrouped = '';
-  var allCombinedStyles = '';
-  var styles = '';
-  if (fileName === 'post.php') {
-    headingGrouped = "\n            body .is-root-container h1 {\n                ".concat(heading1Styles, "\n            }\n            body .is-root-container h2 {\n                ").concat(heading2Styles, "\n            }\n            body .is-root-container h3 {\n                ").concat(heading3Styles, "\n            }\n            body .is-root-container h4 {\n                ").concat(heading4Styles, "\n            }\n            body .is-root-container h5 {\n                ").concat(heading5Styles, "\n            }\n            body .is-root-container h6 {\n                ").concat(heading6Styles, "\n            }\n        ");
-
-    // Styles for the "all" combined typography
-    allCombinedStyles = "\n            body .is-root-container h1{\n                ".concat(combinedHeadingStyles, "\n            }\n            body .is-root-container h2{\n                ").concat(combinedHeadingStyles, "\n            }\n            body .is-root-container h3{\n                ").concat(combinedHeadingStyles, "\n            }\n            body .is-root-container h4{\n                ").concat(combinedHeadingStyles, "\n            }\n            body .is-root-container h5{\n                ").concat(combinedHeadingStyles, "\n            }\n            body .is-root-container h6 {\n                ").concat(combinedHeadingStyles, "\n            }\n        ");
-    styles = "\n            :root {\n                ".concat(rootStyles, "\n                ").concat(desktopStyles, "\n            }\n            @media (max-width: 1024px) {\n                :root {\n                    ").concat(tabletStyles, "\n                }\n            }\n            @media (max-width: 767px) {\n                :root {\n                    ").concat(mobileStyles, "\n                }\n            }\n\n            body .is-root-container p {\n                ").concat(paragraphStyles, "\n            }\n\n            body .is-root-container a{\n                ").concat(linkStyles, "\n            }\n            body .is-root-container p a {\n                ").concat(linkStyles, "\n            }\n            body .is-root-container .wp-block-button__link {\n                ").concat(buttonStyles, "\n            }\n            :root :where(.wp-element-button, .wp-block-button__link) {\n\t\t\t\t").concat(buttonStyles, "\n            }\n            body .is-root-container button {\n                ").concat(buttonStyles, "\n            }\n\n            body .is-root-container figcaption {\n                ").concat(captionStyles, "\n            }\n            :root :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption) {\n                ").concat(captionStyles, "\n            }\n            ").concat(allCombinedStyles, "\n            ").concat(headingGrouped, "\n        ");
-    // // Apply individual styles for each heading (h1, h2, h3, etc.)
-    // if(deviceType !== 'Desktop') {
-
-    // } else {
-    //     headingGrouped = `
-    //         body .editor-visual-editor h1 {
-    //             ${heading1Styles}
-    //         }
-    //         body .editor-visual-editor h2 {
-    //             ${heading2Styles}
-    //         }
-    //         body .editor-visual-editor h3 {
-    //             ${heading3Styles}
-    //         }
-    //         body .editor-visual-editor h4 {
-    //             ${heading4Styles}
-    //         }
-    //         body .editor-visual-editor h5 {
-    //             ${heading5Styles}
-    //         }
-    //         body .editor-visual-editor h6 {
-    //             ${heading6Styles}
-    //         }
-    //     `;
-
-    //     // Styles for the "all" combined typography
-    //     allCombinedStyles = `
-    //         body .editor-visual-editor h1,
-    //         body .editor-visual-editor h2,
-    //         body .editor-visual-editor h3,
-    //         body .editor-visual-editor h4,
-    //         body .editor-visual-editor h5,
-    //         body .editor-visual-editor h6 {
-    //             ${combinedHeadingStyles}
-    //         }
-    //     `;
-
-    //     styles = `
-    //         :root {
-    //             ${rootStyles}
-    //             ${desktopStyles}
-    //         }
-    //         @media (max-width: 1024px) {
-    //             :root {
-    //                 ${tabletStyles}
-    //             }
-    //         }
-    //         @media (max-width: 767px) {
-    //             :root {
-    //                 ${mobileStyles}
-    //             }
-    //         }
-
-    //         body .editor-visual-editor p {
-    //             ${paragraphStyles}
-    //         }
-
-    //         body .editor-visual-editor a, body .editor-visual-editor p a {
-    //             ${linkStyles}
-    //         }
-
-    //         body .editor-visual-editor .wp-block-button__link, body .editor-visual-editor button {
-    //             ${buttonStyles}
-    //         }
-
-    //         body .editor-visual-editor figcaption {
-    //             ${captionStyles}
-    //         }
-    //         ${allCombinedStyles}
-    //         ${headingGrouped}
-    //     `;
-    // }
-  } else {
-    // Apply individual styles for each heading (h1, h2, h3, etc.)
-    headingGrouped = "\n            body .wp-site-blocks h1 {\n                ".concat(heading1Styles, "\n            }\n            body .wp-site-blocks h2 {\n                ").concat(heading2Styles, "\n            }\n            body .wp-site-blocks h3 {\n                ").concat(heading3Styles, "\n            }\n            body .wp-site-blocks h4 {\n                ").concat(heading4Styles, "\n            }\n            body .wp-site-blocks h5 {\n                ").concat(heading5Styles, "\n            }\n            body .wp-site-blocks h6 {\n                ").concat(heading6Styles, "\n            }\n        ");
-
-    // Styles for the "all" combined typography
-    allCombinedStyles = "\n            body .wp-site-blocks h1,\n            body .wp-site-blocks h2,\n            body .wp-site-blocks h3,\n            body .wp-site-blocks h4,\n            body .wp-site-blocks h5,\n            body .wp-site-blocks h6 {\n                ".concat(combinedHeadingStyles, "\n            }\n        ");
-    styles = "\n            :root {\n                ".concat(rootStyles, "\n                ").concat(desktopStyles, "\n            }\n            @media (max-width: 1024px) {\n                :root {\n                    ").concat(tabletStyles, "\n                }\n            }\n            @media (max-width: 767px) {\n                :root {\n                    ").concat(mobileStyles, "\n                }\n            }\n\n            body .wp-site-blocks p {\n                ").concat(paragraphStyles, "\n            }\n\n            body .wp-site-blocks a, body .wp-site-blocks p a {\n                ").concat(linkStyles, "\n            }\n\n            body .wp-site-blocks .wp-block-button__link, body .wp-site-blocks button {\n                ").concat(buttonStyles, "\n            }\n\n            body .wp-site-blocks figcaption {\n                ").concat(captionStyles, "\n            }\n            :root :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption) {\n                ").concat(captionStyles, "\n            }\n            ").concat(allCombinedStyles, "\n            ").concat(headingGrouped, "\n        ");
-  }
-  var iframe = document.querySelector("iframe.fb-preview-frame");
-  var iframeDocument = ((_iframe4 = iframe) === null || _iframe4 === void 0 ? void 0 : _iframe4.contentDocument) || ((_iframe5 = iframe) === null || _iframe5 === void 0 || (_iframe5 = _iframe5.contentWindow) === null || _iframe5 === void 0 ? void 0 : _iframe5.document) || document;
-  var styleTag = iframeDocument.getElementById("global-typo");
-  if (fileName === 'post.php') {
-    if (deviceType !== 'Desktop') {
-      var _iframe6, _iframe7;
-      iframe = document.querySelector('iframe[name="fb-preview-frame"]');
-      iframeDocument = ((_iframe6 = iframe) === null || _iframe6 === void 0 ? void 0 : _iframe6.contentDocument) || ((_iframe7 = iframe) === null || _iframe7 === void 0 || (_iframe7 = _iframe7.contentWindow) === null || _iframe7 === void 0 ? void 0 : _iframe7.document) || document;
-      styleTag = iframeDocument.getElementById("global-typo");
-      console.log("iframeDocument");
-      console.log(iframeDocument);
-    } else {
-      var _iframe8, _iframe9;
-      iframe = document.querySelector('iframe[name="fb-preview-frame"]');
-      iframeDocument = ((_iframe8 = iframe) === null || _iframe8 === void 0 ? void 0 : _iframe8.contentDocument) || ((_iframe9 = iframe) === null || _iframe9 === void 0 || (_iframe9 = _iframe9.contentWindow) === null || _iframe9 === void 0 ? void 0 : _iframe9.document) || document;
-      styleTag = iframeDocument.getElementById("global-typo");
-    }
-  }
-  if (!styleTag) {
-    styleTag = iframeDocument.createElement("style");
-    styleTag.id = "global-typo";
-    iframeDocument.head.appendChild(styleTag);
-  }
-  styleTag.innerHTML = styles;
-  return styles;
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (generateCSSVariables);
-
-/***/ }),
-
-/***/ "./admin/full-site-import/components/GradientColorPallet.js":
-/*!******************************************************************!*\
-  !*** ./admin/full-site-import/components/GradientColorPallet.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-
-
-
-var GradientColorPallet = function GradientColorPallet(props) {
-  var _props$title = props.title,
-    title = _props$title === void 0 ? "" : _props$title,
-    colors = props.colors,
-    setColor = props.setColor,
-    setColors = props.setColors,
-    wrapperClass = props.wrapperClass,
-    resetAction = props.resetAction,
-    deleteAction = props.deleteAction,
-    _props$enableEditName = props.enableEditName,
-    enableEditName = _props$enableEditName === void 0 ? false : _props$enableEditName,
-    onDelete = props.onDelete;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
-    _useState2 = _slicedToArray(_useState, 2),
-    clickedGradient = _useState2[0],
-    setClickedGradient = _useState2[1];
-  var gradientPopoverAnchor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
-  var editColorName = function editColorName(index, value) {
-    var cloneColors = _toConsumableArray(colors);
-    cloneColors[index] = _objectSpread(_objectSpread({}, cloneColors[index]), {}, {
-      name: value
-    });
-    setColors(_toConsumableArray(cloneColors));
-  };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    function handleClickOutside(event) {
-      var _gradientPopoverAncho;
-      var clickedInsidePopup = (_gradientPopoverAncho = gradientPopoverAnchor.current) === null || _gradientPopoverAncho === void 0 ? void 0 : _gradientPopoverAncho.contains(event.target);
-      var clickedTrigger = event.target.closest('.fb-gradient-list .fb-custom-color-item');
-      var isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
-      if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
-        setClickedGradient('');
-      }
-    }
-
-    // Add listener to main document
-    document.addEventListener('mousedown', handleClickOutside);
-
-    // Also try to add listener to iframe document
-    var iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
-    if (iframe && iframe.contentDocument) {
-      iframe.contentDocument.addEventListener('mousedown', handleClickOutside);
-    }
-
-    // Cleanup
-    return function () {
-      document.removeEventListener('mousedown', handleClickOutside);
-      if (iframe && iframe.contentDocument) {
-        iframe.contentDocument.removeEventListener('mousedown', handleClickOutside);
-      }
-    };
-  }, []);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, colors && colors.length > 0 && /*#__PURE__*/React.createElement("div", {
-    className: "fb-color-panel ".concat(wrapperClass)
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-    className: "fb-gradient-color-label"
-  }, title), /*#__PURE__*/React.createElement("div", {
-    className: "fb-custom-panel fb-gradient-color-list fb-gradient-list"
-  }, colors.map(function (color, index) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: index,
-      ref: gradientPopoverAnchor,
-      id: "fb-gradient-color-".concat(index),
-      className: "fb-custom-element fb-custom-color-item"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "item-content",
-      onClick: function onClick() {
-        return !enableEditName && setClickedGradient(clickedGradient === color.slug ? '' : color.slug);
-      }
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorIndicator, {
-      onClick: function onClick() {
-        return setClickedGradient(clickedGradient === color.slug ? '' : color.slug);
-      },
-      colorValue: color === null || color === void 0 ? void 0 : color.color
-    }), enableEditName && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-      className: 'fb-custom-element__edit-input',
-      value: color.name || '',
-      onChange: function onChange(text) {
-        return editColorName(index, text);
-      }
-    }), !enableEditName && (color === null || color === void 0 ? void 0 : color.name)), /*#__PURE__*/React.createElement("div", {
-      className: "actions"
-    }, resetAction && /*#__PURE__*/React.createElement("span", {
-      className: 'fb-reset',
-      title: "Reset",
-      onClick: function onClick() {
-        return setColor(index, 'linear-gradient(135deg, rgb(6, 147, 227) 0%, rgb(155, 81, 224) 100%)');
-      }
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
-      icon: 'image-rotate'
-    })), deleteAction && /*#__PURE__*/React.createElement("span", {
-      className: 'fb-delete',
-      title: "Delete",
-      onClick: function onClick() {
-        return onDelete(index);
-      }
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Dashicon, {
-      icon: 'trash'
-    }))), clickedGradient === (color === null || color === void 0 ? void 0 : color.slug) && /*#__PURE__*/React.createElement("div", {
-      className: "fb-gradient-color-popup-content"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.GradientPicker, {
-      __nextHasNoMargin: true,
-      value: color === null || color === void 0 ? void 0 : color.color,
-      onChange: function onChange(color) {
-        return setColor(index, color);
-      },
-      asButtons: true,
-      clearable: true,
-      gradients: [{
-        name: color === null || color === void 0 ? void 0 : color.name,
-        gradient: color === null || color === void 0 ? void 0 : color.color,
-        slug: color === null || color === void 0 ? void 0 : color.slug
-      }]
-    })));
-  }))));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GradientColorPallet);
-
-/***/ }),
-
-/***/ "./admin/full-site-import/components/SidebarTypography.js":
-/*!****************************************************************!*\
-  !*** ./admin/full-site-import/components/SidebarTypography.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../src/fbConstants/fbConstants */ "./src/fbConstants/fbConstants.js");
-/* harmony import */ var _Components_range__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @Components/range */ "./src/components/range/index.js");
-
-
-
-
-var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
-  var _ref$label = _ref.label,
-    label = _ref$label === void 0 ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-blocks") : _ref$label,
-    fontFamily = _ref.fontFamily,
-    onChangeFontFamily = _ref.onChangeFontFamily,
-    fontSize = _ref.fontSize,
-    onChangeFontSize = _ref.onChangeFontSize,
-    fontSizeUnits = _ref.fontSizeUnits,
-    onChangeFontSizeUnit = _ref.onChangeFontSizeUnit,
-    fontWeight = _ref.fontWeight,
-    onChangeFontWeight = _ref.onChangeFontWeight,
-    fontStyle = _ref.fontStyle,
-    onChangeFontStyle = _ref.onChangeFontStyle,
-    textTransform = _ref.textTransform,
-    onChangeTextTransform = _ref.onChangeTextTransform,
-    textDecoration = _ref.textDecoration,
-    onChangeTextDecoration = _ref.onChangeTextDecoration,
-    letterSpacing = _ref.letterSpacing,
-    onChangeLetterSpacing = _ref.onChangeLetterSpacing,
-    letterSpacingUnits = _ref.letterSpacingUnits,
-    onChangeLetterSpacingUnit = _ref.onChangeLetterSpacingUnit,
-    lineHeight = _ref.lineHeight,
-    onChangeLineHeight = _ref.onChangeLineHeight,
-    lineHeightUnits = _ref.lineHeightUnits,
-    onChangeLineHeightUnit = _ref.onChangeLineHeightUnit,
-    deviceType = _ref.deviceType,
-    heading = _ref.heading;
-  var handleFontFamilyChange = function handleFontFamilyChange(newFontFamily) {
-    onChangeFontFamily(newFontFamily);
-  };
-  var handleFontSizeChange = function handleFontSizeChange(newFontSize) {
-    onChangeFontSize(newFontSize);
-  };
-  var handleFontSizeUnitChange = function handleFontSizeUnitChange(newFontSizeUnit) {
-    onChangeFontSizeUnit(newFontSizeUnit);
-  };
-  var handleFontWeightChange = function handleFontWeightChange(newFontWeight) {
-    onChangeFontWeight(newFontWeight);
-  };
-  var handleFontStyleChange = function handleFontStyleChange(newFontStyle) {
-    onChangeFontStyle(newFontStyle);
-  };
-  var handleTextTransformChange = function handleTextTransformChange(newTextTransform) {
-    onChangeTextTransform(newTextTransform);
-  };
-  var handleTextDecorationChange = function handleTextDecorationChange(newTextDecoration) {
-    onChangeTextDecoration(newTextDecoration);
-  };
-  var handleLetterSpacingChange = function handleLetterSpacingChange(newLetterSpacing) {
-    onChangeLetterSpacing(newLetterSpacing);
-  };
-  var handleLetterSpacingUnitChange = function handleLetterSpacingUnitChange(newLetterSpacingUnit) {
-    onChangeLetterSpacingUnit(newLetterSpacingUnit);
-  };
-  var handleLineHeightChange = function handleLineHeightChange(newLineHeight) {
-    onChangeLineHeight(newLineHeight);
-  };
-  var handleLineHeightUnitChange = function handleLineHeightUnitChange(newLineHeightUnit) {
-    onChangeLineHeightUnit(newLineHeightUnit);
-  };
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-blocks"),
-    options: _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.FONT_FAMILYS,
-    value: fontFamily,
-    onChange: handleFontFamilyChange
-  }), heading !== 'all' && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    min: 1,
-    max: 200,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Size", "frontis-blocks"),
-    rangeValue: fontSize,
-    onChangeHandler: handleFontSizeChange,
-    rangeUnitHandler: handleFontSizeUnitChange,
-    deviceType: deviceType,
-    units: fontSizeUnits,
-    rangeStep: 1,
-    resetFallbackValue: ''
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "fb_global_typo_wrap"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Appearance", "frontis-blocks"),
-    options: _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.FONT_WEIGHT,
-    value: fontWeight,
-    onChange: handleFontWeightChange
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Style", "frontis-blocks"),
-    options: _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.FONT_STYLE,
-    value: fontStyle,
-    onChange: handleFontStyleChange
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "fb_global_typo_wrap"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Transform", "frontis-blocks"),
-    options: _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.TEXT_TRANSFORM,
-    value: textTransform,
-    onChange: handleTextTransformChange
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Decoration", "frontis-blocks"),
-    options: _src_fbConstants_fbConstants__WEBPACK_IMPORTED_MODULE_2__.TEXT_DECORATION,
-    value: textDecoration,
-    onChange: handleTextDecorationChange
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "fb_global_typo_wrap"
-  }, letterSpacingUnits && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    min: 1,
-    max: 100,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Letter Spacing", "frontis-blocks"),
-    rangeValue: letterSpacing,
-    onChangeHandler: handleLetterSpacingChange,
-    rangeUnitHandler: handleLetterSpacingUnitChange,
-    deviceType: deviceType,
-    units: letterSpacingUnits,
-    rangeStep: 1,
-    resetFallbackValue: ''
-  }), lineHeightUnits && /*#__PURE__*/React.createElement(_Components_range__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    min: 1,
-    max: 200,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Line Height", "frontis-blocks"),
-    rangeValue: lineHeight,
-    onChangeHandler: handleLineHeightChange,
-    rangeUnitHandler: handleLineHeightUnitChange,
-    deviceType: deviceType,
-    units: lineHeightUnits,
-    rangeStep: 1,
-    resetFallbackValue: ''
-  })));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FB_SidebarTypography);
-
-/***/ }),
-
-/***/ "./admin/full-site-import/components/TypographySettings.js":
-/*!*****************************************************************!*\
-  !*** ./admin/full-site-import/components/TypographySettings.js ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _Config_displayType__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Config/displayType */ "./src/config/displayType.js");
-/* harmony import */ var _SidebarTypography__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SidebarTypography */ "./admin/full-site-import/components/SidebarTypography.js");
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helper */ "./admin/full-site-import/helper.js");
-/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../fetch */ "./admin/full-site-import/fetch.js");
-/* harmony import */ var _FontPreview__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FontPreview */ "./admin/full-site-import/components/FontPreview.js");
-/* harmony import */ var _GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./GenerateRootCss */ "./admin/full-site-import/components/GenerateRootCss.js");
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
-function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
-function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-
-
-
-
-
-
-
-
-
-
-var TypographySettings = function TypographySettings(props) {
-  var _wp$data$select$getCu;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(props.typography),
-    _useState2 = _slicedToArray(_useState, 2),
-    typography = _useState2[0],
-    setTypography = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(props.customTypography),
-    _useState4 = _slicedToArray(_useState3, 2),
-    customTypography = _useState4[0],
-    setCustomTypography = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('all'),
-    _useState6 = _slicedToArray(_useState5, 2),
-    selectedHeading = _useState6[0],
-    setSelectedHeading = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
-    _useState8 = _slicedToArray(_useState7, 2),
-    isSaving = _useState8[0],
-    setIsSaving = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(),
-    _useState0 = _slicedToArray(_useState9, 2),
-    generateHeadingCss = _useState0[0],
-    setGenerateHeadingCss = _useState0[1];
-  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
-    _useState10 = _slicedToArray(_useState1, 2),
-    isMount = _useState10[0],
-    setIsMount = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
-    _useState12 = _slicedToArray(_useState11, 2),
-    fontFamilies = _useState12[0],
-    setFontFamilies = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)({}),
-    _useState14 = _slicedToArray(_useState13, 2),
-    globalTypography = _useState14[0],
-    setGlobalTypography = _useState14[1];
-  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useDispatch)('core/editor'),
-    editPost = _useDispatch.editPost;
-  var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_4__.useDeviceType)();
-  var isFSE = ((_wp$data$select$getCu = wp.data.select('core').getCurrentTheme()) === null || _wp$data$select$getCu === void 0 ? void 0 : _wp$data$select$getCu.is_block_theme) || false;
-
-  // Typography elements
-  var typographyElements = {
-    body: 'Text',
-    link: 'Link',
-    heading: 'Headings',
-    captions: 'Captions',
-    button: 'Button'
-  };
-  var TypographyHeadingElements = {
-    all: 'ALL',
-    h1: 'H1',
-    h2: 'H2',
-    h3: 'H3',
-    h4: 'H4',
-    h5: 'H5',
-    h6: 'H6'
-  };
-
-  // Is heading saved
-  var isHeadingSaved = function isHeadingSaved() {
-    var typoKeys = typography ? Object.keys(typography) : [];
-    if (typoKeys.length > 0) {
-      return typoKeys.some(function (str) {
-        return str.startsWith('h');
-      });
-    }
-    return false;
-  };
-  var changeCustomTypoName = function changeCustomTypoName(key, value) {
-    var typoObj = _objectSpread({}, customTypography);
-    typoObj[key].name = value;
-    setCustomTypography(_objectSpread({}, typoObj));
-  };
-  var deleteItem = function deleteItem(item) {
-    var tempTypography = _objectSpread({}, customTypography);
-    var tempGlobalTypography = _objectSpread({}, globalTypography);
-    delete tempTypography[item];
-    delete tempGlobalTypography[item];
-    setCustomTypography(tempTypography);
-    setGlobalTypography(tempGlobalTypography);
-  };
-
-  // Body link font typography
-  var _onChangeFontFamily = function onChangeFontFamily(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontFamily: value
-      })));
-    });
-    (0,_helper__WEBPACK_IMPORTED_MODULE_6__.loadGoogleFont)(value);
-    setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, value)));
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontFamily': {
-        variable: "--fb-global-".concat(item, "--font-family"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var _onChangeFontSize = function onChangeFontSize(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontSize: _objectSpread(_objectSpread({}, (_typography$item = typography[item]) === null || _typography$item === void 0 ? void 0 : _typography$item.fontSize), {}, _defineProperty({}, deviceType, parseInt(value[deviceType])))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontSize': {
-        variable: "--fb-global-".concat(item, "--font-size"),
-        value: value,
-        unit: {
-          "Desktop": "px",
-          "Tablet": "px",
-          "Mobile": "px"
-        }
-      }
-    }))));
-    setIsMount(true);
-  };
-  var _onChangeFontSizeUnit = function onChangeFontSizeUnit(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item2;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontSizeUnit: _objectSpread(_objectSpread({}, (_typography$item2 = typography[item]) === null || _typography$item2 === void 0 ? void 0 : _typography$item2.fontSizeUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontSize': _objectSpread(_objectSpread({}, globalTypography[item]['fontSize']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
-  var _onChangeFontWeight = function onChangeFontWeight(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontWeight: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontWeight': {
-        variable: "--fb-global-".concat(item, "--font-weight"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var _onChangeFontStyle = function onChangeFontStyle(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontStyle: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontStyle': {
-        variable: "--fb-global-".concat(item, "--font-style"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var _onChangeTextDecoration = function onChangeTextDecoration(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        textDecoration: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'textDecoration': {
-        variable: "--fb-global-".concat(item, "--text-decoration"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var _onChangeTextTransform = function onChangeTextTransform(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        textTransform: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'textTransform': {
-        variable: "--fb-global-".concat(item, "--text-transform"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var _onChangeLetterSpacing = function onChangeLetterSpacing(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item3;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        letterSpacing: _objectSpread(_objectSpread({}, (_typography$item3 = typography[item]) === null || _typography$item3 === void 0 ? void 0 : _typography$item3.letterSpacing), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'letterSpacing': {
-        variable: "--fb-global-".concat(item, "--letter-spacing"),
-        value: value,
-        unit: {
-          'Desktop': 'px',
-          'Tablet': 'px',
-          'Mobile': 'px'
-        }
-      }
-    }))));
-    setIsMount(true);
-  };
-  var _onChangeLetterSpacingUnit = function onChangeLetterSpacingUnit(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item4;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        letterSpacingUnit: _objectSpread(_objectSpread({}, (_typography$item4 = typography[item]) === null || _typography$item4 === void 0 ? void 0 : _typography$item4.letterSpacingUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'letterSpacing': _objectSpread(_objectSpread({}, globalTypography[item]['letterSpacing']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
-  var _onChangeLineHeight = function onChangeLineHeight(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item5;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        lineHeight: _objectSpread(_objectSpread({}, (_typography$item5 = typography[item]) === null || _typography$item5 === void 0 ? void 0 : _typography$item5.lineHeight), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'lineHeight': {
-        variable: "--fb-global-".concat(item, "--line-height"),
-        value: value,
-        unit: {
-          'Desktop': 'px',
-          'Tablet': 'px',
-          'Mobile': 'px'
-        }
-      }
-    }))));
-    setIsMount(true);
-  };
-  var _onChangeLineHeightUnit = function onChangeLineHeightUnit(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item6;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        lineHeightUnits: _objectSpread(_objectSpread({}, (_typography$item6 = typography[item]) === null || _typography$item6 === void 0 ? void 0 : _typography$item6.lineHeightUnits), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'lineHeight': _objectSpread(_objectSpread({}, globalTypography[item]['lineHeight']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
-
-  // Heading typography handler
-  var onChangeHeadingFontFamily = function onChangeHeadingFontFamily(value, item) {
-    // Assuming typography is an object that looks like { item1: { h1: { fontFamily: ... }, h2: ... }, item2: ... }
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        fontFamily: value
-      })))));
-    });
-    (0,_helper__WEBPACK_IMPORTED_MODULE_6__.loadGoogleFont)(value);
-    setIsMount(true);
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'fontFamily': {
-        variable: "--fb-global-".concat(selectedHeading, "--font-family"),
-        value: value
-      }
-    }))));
-    setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, fontFamilies.heading), {}, _defineProperty({}, selectedHeading, value)))));
-  };
-  var onChangeHeadingFontSize = function onChangeHeadingFontSize(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item$sele;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        fontSize: _objectSpread(_objectSpread({}, (_typography$item$sele = typography[item][selectedHeading]) === null || _typography$item$sele === void 0 ? void 0 : _typography$item$sele.fontSize), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })))));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'fontSize': {
-        variable: "--fb-global-".concat(selectedHeading, "--font-size"),
-        value: value,
-        unit: {
-          'Desktop': 'px',
-          'Tablet': 'px',
-          'Mobile': 'px'
-        }
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeHeadingFontSizeUnit = function onChangeHeadingFontSizeUnit(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item$sele2;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        fontSizeUnit: _objectSpread(_objectSpread({}, (_typography$item$sele2 = typography[item][selectedHeading]) === null || _typography$item$sele2 === void 0 ? void 0 : _typography$item$sele2.fontSizeUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })))));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'fontSize': _objectSpread(_objectSpread({}, globalTypography[selectedHeading]['fontSize']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
-  var onChangeHeadingFontWeight = function onChangeHeadingFontWeight(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        fontWeight: value
-      })))));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'fontWeight': {
-        variable: "--fb-global-".concat(selectedHeading, "--font-weight"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeHeadingFontStyle = function onChangeHeadingFontStyle(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        fontStyle: value
-      })))));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'fontStyle': {
-        variable: "--fb-global-".concat(selectedHeading, "--font-style"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeHeadingTextDecoration = function onChangeHeadingTextDecoration(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        textDecoration: value
-      })))));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'textDecoration': {
-        variable: "--fb-global-".concat(selectedHeading, "--font-decoration"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeHeadingTextTransform = function onChangeHeadingTextTransform(value, item) {
-    setTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        textTransform: value
-      })))));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'textTransform': {
-        variable: "--fb-global-".concat(selectedHeading, "--font-transform"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeHeadingLetterSpacing = function onChangeHeadingLetterSpacing(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item$sele3;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        letterSpacing: _objectSpread(_objectSpread({}, (_typography$item$sele3 = typography[item][selectedHeading]) === null || _typography$item$sele3 === void 0 ? void 0 : _typography$item$sele3.letterSpacing), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })))));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'letterSpacing': {
-        variable: "--fb-global-".concat(selectedHeading, "--font-letter-spacing"),
-        value: value,
-        unit: {
-          'Desktop': 'px',
-          'Tablet': 'px',
-          'Mobile': 'px'
-        }
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeHeadingLetterSpacingUnit = function onChangeHeadingLetterSpacingUnit(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item$sele4;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        letterSpacingUnit: _objectSpread(_objectSpread({}, (_typography$item$sele4 = typography[item][selectedHeading]) === null || _typography$item$sele4 === void 0 ? void 0 : _typography$item$sele4.letterSpacingUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })))));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'letterSpacing': _objectSpread(_objectSpread({}, globalTypography[selectedHeading]['letterSpacing']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
-  var onChangeHeadingLineHeight = function onChangeHeadingLineHeight(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item$sele5;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        lineHeight: _objectSpread(_objectSpread({}, (_typography$item$sele5 = typography[item][selectedHeading]) === null || _typography$item$sele5 === void 0 ? void 0 : _typography$item$sele5.lineHeight), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })))));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'lineHeight': {
-        variable: "--fb-global-".concat(selectedHeading, "--font-line-height"),
-        value: value,
-        unit: {
-          'Desktop': 'px',
-          'Tablet': 'px',
-          'Mobile': 'px'
-        }
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeHeadingLineHeightUnit = function onChangeHeadingLineHeightUnit(value, item) {
-    setTypography(function (prevTypography) {
-      var _typography$item$sele6;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, prevTypography[item][selectedHeading]), {}, {
-        lineHeightUnits: _objectSpread(_objectSpread({}, (_typography$item$sele6 = typography[item][selectedHeading]) === null || _typography$item$sele6 === void 0 ? void 0 : _typography$item$sele6.lineHeightUnits), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })))));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, selectedHeading, _objectSpread(_objectSpread({}, globalTypography[selectedHeading]), {}, {
-      'lineHeight': _objectSpread(_objectSpread({}, globalTypography[selectedHeading]['lineHeight']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
-
-  // Custom typography handler
-  var onChangeCustomFontFamily = function onChangeCustomFontFamily(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontFamily: value
-      })));
-    });
-    setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, value)));
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontFamily': {
-        variable: "--fb-global-".concat(item, "--font-family"),
-        value: value
-      }
-    }))));
-    (0,_helper__WEBPACK_IMPORTED_MODULE_6__.loadGoogleFont)(value);
-    setIsMount(true);
-  };
-  var onChangeCustomFontSize = function onChangeCustomFontSize(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontSize: _objectSpread(_objectSpread({}, (_customTypography$ite = customTypography[item]) === null || _customTypography$ite === void 0 ? void 0 : _customTypography$ite.fontSize), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontSize': {
-        variable: "--fb-global-".concat(item, "--font-size"),
-        value: value,
-        unit: {
-          'Desktop': 'px',
-          'Tablet': 'px',
-          'Mobile': 'px'
-        }
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomFontSizeUnit = function onChangeCustomFontSizeUnit(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite2;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontSizeUnit: _objectSpread(_objectSpread({}, (_customTypography$ite2 = customTypography[item]) === null || _customTypography$ite2 === void 0 ? void 0 : _customTypography$ite2.fontSizeUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontSize': _objectSpread(_objectSpread({}, globalTypography[item]['fontSize']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomFontWeight = function onChangeCustomFontWeight(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontWeight: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontWeight': {
-        variable: "--fb-global-".concat(item, "--font-weight"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomFontStyle = function onChangeCustomFontStyle(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontStyle: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontStyle': {
-        variable: "--fb-global-".concat(item, "--font-style"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomTextDecoration = function onChangeCustomTextDecoration(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        textDecoration: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'textDecoration': {
-        variable: "--fb-global-".concat(item, "--font-decoration"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomTextTransform = function onChangeCustomTextTransform(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        textTransform: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'textTransform': {
-        variable: "--fb-global-".concat(item, "--font-transform"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomLetterSpacing = function onChangeCustomLetterSpacing(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite3;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        letterSpacing: _objectSpread(_objectSpread({}, (_customTypography$ite3 = customTypography[item]) === null || _customTypography$ite3 === void 0 ? void 0 : _customTypography$ite3.letterSpacing), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'letterSpacing': {
-        variable: "--fb-global-".concat(item, "--font-letter-spacing"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomLetterSpacingUnit = function onChangeCustomLetterSpacingUnit(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite4;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        letterSpacingUnit: _objectSpread(_objectSpread({}, (_customTypography$ite4 = customTypography[item]) === null || _customTypography$ite4 === void 0 ? void 0 : _customTypography$ite4.letterSpacingUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'letterSpacing': _objectSpread(_objectSpread({}, globalTypography[item]['letterSpacing']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomLineHeight = function onChangeCustomLineHeight(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite5;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        lineHeight: _objectSpread(_objectSpread({}, (_customTypography$ite5 = customTypography[item]) === null || _customTypography$ite5 === void 0 ? void 0 : _customTypography$ite5.lineHeight), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'lineHeight': {
-        variable: "--fb-global-".concat(item, "--font-line-height"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomLineHeightUnit = function onChangeCustomLineHeightUnit(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite6;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        lineHeightUnits: _objectSpread(_objectSpread({}, (_customTypography$ite6 = customTypography[item]) === null || _customTypography$ite6 === void 0 ? void 0 : _customTypography$ite6.lineHeightUnits), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'Lineheight': _objectSpread(_objectSpread({}, globalTypography[item]['lineHeight']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
-  var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_6__.useAfterSave)();
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
-    var handleUpdateSettings = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response, _response, _response2, _response3;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) switch (_context.prev = _context.next) {
-            case 0:
-              if (!(isAfterSave && isMount)) {
-                _context.next = 22;
-                break;
-              }
-              if (!typography) {
-                _context.next = 6;
-                break;
-              }
-              _context.next = 4;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(typography, 'fb_update_typography');
-            case 4:
-              response = _context.sent;
-              if (response.success) {
-                setTypography(response.data.data);
-                localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
-              }
-            case 6:
-              if (!customTypography) {
-                _context.next = 11;
-                break;
-              }
-              _context.next = 9;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(customTypography, 'fb_update_custom_typography');
-            case 9:
-              _response = _context.sent;
-              if (_response.success) {
-                setCustomTypography(_response.data.data);
-                localStorage.setItem('fb_custom_typography', JSON.stringify(_response.data.data));
-              }
-            case 11:
-              if (!globalTypography) {
-                _context.next = 16;
-                break;
-              }
-              _context.next = 14;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(globalTypography, 'fb_update_globaltypo');
-            case 14:
-              _response2 = _context.sent;
-              if (_response2.success) {
-                setGlobalTypography(_response2.data.data);
-                localStorage.setItem('fb_globaltypo', JSON.stringify(_response2.data.data));
-              }
-            case 16:
-              if (!fontFamilies) {
-                _context.next = 21;
-                break;
-              }
-              _context.next = 19;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(fontFamilies, 'fb_update_fontfamilies');
-            case 19:
-              _response3 = _context.sent;
-              if (_response3.success) {
-                setFontFamilies(_response3.data.data);
-                localStorage.setItem('fb_fontFamilies', JSON.stringify(_response3.data.data));
-              }
-            case 21:
-              setIsMount(false);
-            case 22:
-            case "end":
-              return _context.stop();
-          }
-        }, _callee);
-      }));
-      return function handleUpdateSettings() {
-        return _ref.apply(this, arguments);
-      };
-    }();
-    handleUpdateSettings();
-  }, [isAfterSave]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
-    if (isMount) {
-      editPost({
-        isDirty: true
-      });
-    }
-  }, [isMount]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
-    if (globalTypography) {
-      (0,_GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__["default"])(globalTypography, deviceType);
-    }
-  }, [globalTypography, deviceType]);
-
-  // Load saved data and generate root css
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
-    setTimeout(function () {
-      var globalTypoData = localStorage.getItem("fb_globaltypo");
-      if (globalTypoData) {
-        globalTypoData = JSON.parse(globalTypoData);
-        setGlobalTypography(globalTypoData);
-      }
-    }, 1000);
-  }, [deviceType]);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TabPanel, {
-    className: "fb-blocks-color-tabs",
-    activeClass: "active-tab",
-    tabs: [{
-      name: "elements",
-      title: "Elements"
-    }, {
-      name: "custom",
-      title: "Custom"
-    }]
-  }, function (tab) {
-    return /*#__PURE__*/React.createElement("div", null, tab.name === "elements" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-      className: 'fb-global-typo-elements'
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-global-typo-elements-wrap"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorProvider, {
-      initialPath: "/"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
-      path: "/"
-    }, typographyElements && Object.keys(typographyElements).map(function (item, index) {
-      return /*#__PURE__*/React.createElement("div", {
-        key: index,
-        className: "fb-custom-element fb-global-typography-element"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorButton, {
-        path: "/".concat(item)
-      }, /*#__PURE__*/React.createElement("span", {
-        className: "font_preview"
-      }, /*#__PURE__*/React.createElement("svg", {
-        width: "24",
-        height: "24",
-        viewBox: "0 0 24 24",
-        fill: "none",
-        xmlns: "http://www.w3.org/2000/svg"
-      }, /*#__PURE__*/React.createElement("path", {
-        d: "M6.9 7L3 17.8H4.7L5.7 15H9.8L10.8 17.8H12.5L8.6 7H6.9ZM6.2 13.6L7.7 9.3L9.2 13.6H6.2ZM21.6 17C21.5 17.1 21.4 17.2 21.3 17.2C21.2 17.3 21.1 17.3 20.9 17.3C20.7 17.3 20.6 17.2 20.5 17.1C20.4 17 20.4 16.8 20.4 16.5V12C20.4 11.5 20.4 11 20.3 10.6C20.2 10.2 20 9.9 19.8 9.6C19.6 9.4 19.3 9.2 18.9 9.1C18.5 9.1 18.1 9 17.6 9C17.1 9 16.6 9.1 16.2 9.2C15.8 9.3 15.5 9.5 15.2 9.6C15 9.8 14.8 9.9 14.6 10.1C14.5 10.3 14.4 10.5 14.4 10.8C14.4 11.1 14.5 11.3 14.6 11.6C14.8 11.8 15 11.9 15.4 11.9C15.7 11.9 16 11.8 16.2 11.6C16.4 11.4 16.5 11.2 16.5 10.9C16.5 10.6 16.4 10.4 16.3 10.2C16.1 10 15.9 9.9 15.7 9.8C15.9 9.6 16.1 9.5 16.4 9.4C16.7 9.3 17 9.3 17.2 9.3C17.5 9.3 17.8 9.3 18 9.4C18.2 9.5 18.4 9.7 18.5 9.9C18.6 10.1 18.7 10.4 18.7 10.8V11.9C18.7 12.2 18.6 12.4 18.4 12.5C18.2 12.7 17.9 12.8 17.5 12.9C17.2 13 16.8 13.2 16.4 13.3C16 13.4 15.6 13.6 15.3 13.8C15 14 14.7 14.2 14.5 14.5C14.3 14.8 14.2 15.2 14.2 15.7C14.2 16.3 14.4 16.8 14.7 17.1C15 17.5 15.6 17.6 16.3 17.6C16.8 17.6 17.3 17.5 17.7 17.3C18.1 17.1 18.5 16.7 18.8 16.2C18.8 16.6 18.9 16.9 19.1 17.2C19.3 17.5 19.7 17.6 20.3 17.6C20.7 17.6 21 17.5 21.2 17.4C21.4 17.3 21.7 17.1 21.9 17H21.6ZM18.6 16.1C18.4 16.5 18.1 16.8 17.8 16.9C17.5 17.1 17.2 17.1 17 17.1C16.6 17.1 16.4 17 16.1 16.8C15.9 16.6 15.8 16.2 15.8 15.7C15.8 15.2 15.9 14.8 16.1 14.5C16.3 14.2 16.6 14 16.9 13.8C17.2 13.6 17.6 13.5 17.9 13.3C18.2 13.2 18.5 13 18.6 12.7V16.1Z",
-        fill: "currentcolor"
-      }))), typographyElements[item], (typography[item] || item === 'heading' && isHeadingSaved()) && /*#__PURE__*/React.createElement("span", {
-        className: "edit_indecator"
-      })));
-    })), typographyElements && Object.keys(typographyElements).map(function (item, index) {
-      var _typography$item7, _typography$item17, _typography$item18, _typography$item19, _typography$item20, _typography$item21, _typography$item22, _typography$item23, _typography$item24, _typography$item25, _typography$item26, _typography$item27;
-      return /*#__PURE__*/React.createElement("div", {
-        key: index,
-        className: "fb-global-typography-element-content"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
-        path: "/".concat(item)
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorBackButton, {
-        className: "fb-global-back"
-      }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-        width: "16",
-        height: "17",
-        viewBox: "0 0 16 17",
-        fill: "none",
-        xmlns: "http://www.w3.org/2000/svg"
-      }, /*#__PURE__*/React.createElement("path", {
-        d: "M10.5 13.5L5.5 8.5L10.5 3.5",
-        stroke: "currentcolor",
-        strokeWidth: "1.2",
-        strokeLinecap: "round",
-        strokeLinejoin: "round"
-      }))), " ", typographyElements[item]), item === 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        fontProps: typography === null || typography === void 0 || (_typography$item7 = typography[item]) === null || _typography$item7 === void 0 ? void 0 : _typography$item7[selectedHeading],
-        deviceType: deviceType,
-        fontSize: true
-      }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControl, {
-        __nextHasNoMarginBottom: true,
-        isBlock: true,
-        className: "fb-global-typography-headings-wrap",
-        label: "Select Heading",
-        value: selectedHeading,
-        hideLabelFromVision: true,
-        onChange: function onChange(value) {
-          return setSelectedHeading(value);
-        }
-      }, TypographyHeadingElements && Object.keys(TypographyHeadingElements).map(function (heading, headingIndex) {
-        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalToggleGroupControlOption, {
-          key: headingIndex,
-          className: "fb-global-typography-element-heading ".concat(typography[heading] ? 'edited' : ''),
-          label: TypographyHeadingElements[heading],
-          value: heading
-        });
-      })), TypographyHeadingElements && Object.keys(TypographyHeadingElements).map(function (heading, headingIndex) {
-        var _typography$item8, _typography$item9, _typography$item0, _typography$item1, _typography$item10, _typography$item11, _typography$item12, _typography$item13, _typography$item14, _typography$item15, _typography$item16;
-        return /*#__PURE__*/React.createElement("div", {
-          key: headingIndex,
-          style: {
-            display: heading === selectedHeading ? 'block' : 'none'
-          }
-        }, /*#__PURE__*/React.createElement("div", {
-          className: "fb-typography-settings"
-        }, /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          fontFamily: typography === null || typography === void 0 || (_typography$item8 = typography[item]) === null || _typography$item8 === void 0 || (_typography$item8 = _typography$item8[selectedHeading]) === null || _typography$item8 === void 0 ? void 0 : _typography$item8.fontFamily,
-          onChangeFontFamily: function onChangeFontFamily(value) {
-            return onChangeHeadingFontFamily(value, item);
-          },
-          fontSize: typography === null || typography === void 0 || (_typography$item9 = typography[item]) === null || _typography$item9 === void 0 || (_typography$item9 = _typography$item9[selectedHeading]) === null || _typography$item9 === void 0 ? void 0 : _typography$item9.fontSize,
-          onChangeFontSize: function onChangeFontSize(value) {
-            return onChangeHeadingFontSize(value, item);
-          },
-          fontSizeUnits: typography === null || typography === void 0 || (_typography$item0 = typography[item]) === null || _typography$item0 === void 0 || (_typography$item0 = _typography$item0[selectedHeading]) === null || _typography$item0 === void 0 ? void 0 : _typography$item0.fontSizeUnit,
-          onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
-            return onChangeHeadingFontSizeUnit(value, item);
-          },
-          fontWeight: typography === null || typography === void 0 || (_typography$item1 = typography[item]) === null || _typography$item1 === void 0 || (_typography$item1 = _typography$item1[selectedHeading]) === null || _typography$item1 === void 0 ? void 0 : _typography$item1.fontWeight,
-          onChangeFontWeight: function onChangeFontWeight(value) {
-            return onChangeHeadingFontWeight(value, item);
-          },
-          fontStyle: typography === null || typography === void 0 || (_typography$item10 = typography[item]) === null || _typography$item10 === void 0 || (_typography$item10 = _typography$item10[selectedHeading]) === null || _typography$item10 === void 0 ? void 0 : _typography$item10.fontStyle,
-          onChangeFontStyle: function onChangeFontStyle(value) {
-            return onChangeHeadingFontStyle(value, item);
-          },
-          textTransform: typography === null || typography === void 0 || (_typography$item11 = typography[item]) === null || _typography$item11 === void 0 || (_typography$item11 = _typography$item11[selectedHeading]) === null || _typography$item11 === void 0 ? void 0 : _typography$item11.textTransform,
-          onChangeTextTransform: function onChangeTextTransform(value) {
-            return onChangeHeadingTextTransform(value, item);
-          },
-          textDecoration: typography === null || typography === void 0 || (_typography$item12 = typography[item]) === null || _typography$item12 === void 0 || (_typography$item12 = _typography$item12[selectedHeading]) === null || _typography$item12 === void 0 ? void 0 : _typography$item12.textDecoration,
-          onChangeTextDecoration: function onChangeTextDecoration(value) {
-            return onChangeHeadingTextDecoration(value, item);
-          },
-          letterSpacing: typography === null || typography === void 0 || (_typography$item13 = typography[item]) === null || _typography$item13 === void 0 || (_typography$item13 = _typography$item13[selectedHeading]) === null || _typography$item13 === void 0 ? void 0 : _typography$item13.letterSpacing,
-          onChangeLetterSpacing: function onChangeLetterSpacing(value) {
-            return onChangeHeadingLetterSpacing(value, item);
-          },
-          letterSpacingUnits: typography === null || typography === void 0 || (_typography$item14 = typography[item]) === null || _typography$item14 === void 0 || (_typography$item14 = _typography$item14[selectedHeading]) === null || _typography$item14 === void 0 ? void 0 : _typography$item14.letterSpacingUnit,
-          onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
-            return onChangeHeadingLetterSpacingUnit(value, item);
-          },
-          lineHeight: typography === null || typography === void 0 || (_typography$item15 = typography[item]) === null || _typography$item15 === void 0 || (_typography$item15 = _typography$item15[selectedHeading]) === null || _typography$item15 === void 0 ? void 0 : _typography$item15.lineHeight,
-          onChangeLineHeight: function onChangeLineHeight(value) {
-            return onChangeHeadingLineHeight(value, item);
-          },
-          lineHeightUnits: typography === null || typography === void 0 || (_typography$item16 = typography[item]) === null || _typography$item16 === void 0 || (_typography$item16 = _typography$item16[selectedHeading]) === null || _typography$item16 === void 0 ? void 0 : _typography$item16.lineHeightUnits,
-          onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
-            return onChangeHeadingLineHeightUnit(value, item);
-          },
-          deviceType: deviceType,
-          heading: selectedHeading
-        })));
-      })), item !== 'heading' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-        className: "fb-typography-settings"
-      }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        fontProps: typography[item],
-        deviceType: deviceType,
-        fontSize: true
-      }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        fontFamily: typography === null || typography === void 0 || (_typography$item17 = typography[item]) === null || _typography$item17 === void 0 ? void 0 : _typography$item17.fontFamily,
-        onChangeFontFamily: function onChangeFontFamily(value) {
-          return _onChangeFontFamily(value, item);
-        },
-        fontSize: typography === null || typography === void 0 || (_typography$item18 = typography[item]) === null || _typography$item18 === void 0 ? void 0 : _typography$item18.fontSize,
-        onChangeFontSize: function onChangeFontSize(value) {
-          return _onChangeFontSize(value, item);
-        },
-        fontSizeUnits: typography === null || typography === void 0 || (_typography$item19 = typography[item]) === null || _typography$item19 === void 0 ? void 0 : _typography$item19.fontSizeUnit,
-        onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
-          return _onChangeFontSizeUnit(value, item);
-        },
-        fontWeight: typography === null || typography === void 0 || (_typography$item20 = typography[item]) === null || _typography$item20 === void 0 ? void 0 : _typography$item20.fontWeight,
-        onChangeFontWeight: function onChangeFontWeight(value) {
-          return _onChangeFontWeight(value, item);
-        },
-        fontStyle: typography === null || typography === void 0 || (_typography$item21 = typography[item]) === null || _typography$item21 === void 0 ? void 0 : _typography$item21.fontStyle,
-        onChangeFontStyle: function onChangeFontStyle(value) {
-          return _onChangeFontStyle(value, item);
-        },
-        textTransform: typography === null || typography === void 0 || (_typography$item22 = typography[item]) === null || _typography$item22 === void 0 ? void 0 : _typography$item22.textTransform,
-        onChangeTextTransform: function onChangeTextTransform(value) {
-          return _onChangeTextTransform(value, item);
-        },
-        textDecoration: typography === null || typography === void 0 || (_typography$item23 = typography[item]) === null || _typography$item23 === void 0 ? void 0 : _typography$item23.textDecoration,
-        onChangeTextDecoration: function onChangeTextDecoration(value) {
-          return _onChangeTextDecoration(value, item);
-        },
-        letterSpacing: typography === null || typography === void 0 || (_typography$item24 = typography[item]) === null || _typography$item24 === void 0 ? void 0 : _typography$item24.letterSpacing,
-        onChangeLetterSpacing: function onChangeLetterSpacing(value) {
-          return _onChangeLetterSpacing(value, item);
-        },
-        letterSpacingUnits: typography === null || typography === void 0 || (_typography$item25 = typography[item]) === null || _typography$item25 === void 0 ? void 0 : _typography$item25.letterSpacingUnit,
-        onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
-          return _onChangeLetterSpacingUnit(value, item);
-        },
-        lineHeight: typography === null || typography === void 0 || (_typography$item26 = typography[item]) === null || _typography$item26 === void 0 ? void 0 : _typography$item26.lineHeight,
-        onChangeLineHeight: function onChangeLineHeight(value) {
-          return _onChangeLineHeight(value, item);
-        },
-        lineHeightUnits: typography === null || typography === void 0 || (_typography$item27 = typography[item]) === null || _typography$item27 === void 0 ? void 0 : _typography$item27.lineHeightUnits,
-        onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
-          return _onChangeLineHeightUnit(value, item);
-        },
-        deviceType: deviceType
-      })))));
-    }))))), tab.name === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-      className: 'fb-global-typo-elements'
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-global-typo-elements-wrap"
-    }, customTypography && _typeof(customTypography) === 'object' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorProvider, {
-      initialPath: "/"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
-      path: "/"
-    }, Object.keys(customTypography).length > 0 && Object.keys(customTypography).map(function (item, index) {
-      var _customTypography$ite7;
-      return /*#__PURE__*/React.createElement("div", {
-        key: index,
-        className: "fb-custom-element fb-global-typography-element"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorButton, {
-        path: "/".concat(item)
-      }, /*#__PURE__*/React.createElement("span", {
-        className: "font_preview"
-      }, "Aa"), (_customTypography$ite7 = customTypography[item]) === null || _customTypography$ite7 === void 0 ? void 0 : _customTypography$ite7.name), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-        className: "fb-delete-custom-typo"
-      }, /*#__PURE__*/React.createElement("span", {
-        className: 'fb-delete',
-        title: "Delete",
-        onClick: function onClick() {
-          return deleteItem(item);
-        }
-      }, /*#__PURE__*/React.createElement("svg", {
-        xmlns: "http://www.w3.org/2000/svg",
-        width: "16",
-        height: "17",
-        viewBox: "0 0 16 17",
-        fill: "none"
-      }, /*#__PURE__*/React.createElement("path", {
-        d: "M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675",
-        stroke: "#E43242",
-        "stroke-linecap": "round"
-      }), /*#__PURE__*/React.createElement("path", {
-        d: "M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659",
-        stroke: "#E43242",
-        "stroke-linecap": "round"
-      }), /*#__PURE__*/React.createElement("path", {
-        d: "M6.3335 11.5V7.5",
-        stroke: "#E43242",
-        "stroke-linecap": "round"
-      }), /*#__PURE__*/React.createElement("path", {
-        d: "M9.6665 11.5V7.5",
-        stroke: "#E43242",
-        "stroke-linecap": "round"
-      })))));
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "add-custom-color"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-      className: "add-custom-color-btn",
-      onClick: function onClick() {
-        return setCustomTypography(_objectSpread(_objectSpread({}, customTypography), {}, _defineProperty({}, "fb_customtypo_".concat(Math.random().toString(36).substring(2, 7)), {
-          name: "Custom Typography",
-          fontFamily: "default",
-          lineHeight: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: '',
-          fontStyle: '',
-          textTransform: '',
-          textDecoration: '',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        })));
-      }
-    }, "Add Custom Typography", /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-      width: "15",
-      height: "14",
-      viewBox: "0 0 15 14",
-      fill: "none",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.5 0.75V13.25M13.75 7L1.25 7",
-      stroke: "white",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    })))))), Object.keys(customTypography).length > 0 && Object.keys(customTypography).map(function (item, index) {
-      var _customTypography$ite8, _customTypography$ite9, _customTypography$ite0, _customTypography$ite1, _customTypography$ite10, _customTypography$ite11, _customTypography$ite12, _customTypography$ite13, _customTypography$ite14, _customTypography$ite15, _customTypography$ite16, _customTypography$ite17, _customTypography$ite18;
-      return /*#__PURE__*/React.createElement("div", {
-        key: index,
-        className: "fb-global-typography-element-content"
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
-        path: "/".concat(item)
-      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorBackButton, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
-        icon: "arrow-left-alt2"
-      }), " ", (_customTypography$ite8 = customTypography[item]) === null || _customTypography$ite8 === void 0 ? void 0 : _customTypography$ite8.name), /*#__PURE__*/React.createElement("div", {
-        className: "fb-typography-settings"
-      }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        fontProps: customTypography[item],
-        deviceType: deviceType,
-        fontSize: true
-      }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Typography Name', 'frontis-blocks'),
-        value: (_customTypography$ite9 = customTypography[item]) === null || _customTypography$ite9 === void 0 ? void 0 : _customTypography$ite9.name,
-        onChange: function onChange(value) {
-          return changeCustomTypoName(item, value);
-        }
-      }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        fontFamily: customTypography === null || customTypography === void 0 || (_customTypography$ite0 = customTypography[item]) === null || _customTypography$ite0 === void 0 ? void 0 : _customTypography$ite0.fontFamily,
-        onChangeFontFamily: function onChangeFontFamily(value) {
-          return onChangeCustomFontFamily(value, item);
-        },
-        fontSize: customTypography === null || customTypography === void 0 || (_customTypography$ite1 = customTypography[item]) === null || _customTypography$ite1 === void 0 ? void 0 : _customTypography$ite1.fontSize,
-        onChangeFontSize: function onChangeFontSize(value) {
-          return onChangeCustomFontSize(value, item);
-        },
-        fontSizeUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite10 = customTypography[item]) === null || _customTypography$ite10 === void 0 ? void 0 : _customTypography$ite10.fontSizeUnit,
-        onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
-          return onChangeCustomFontSizeUnit(value, item);
-        },
-        fontWeight: customTypography === null || customTypography === void 0 || (_customTypography$ite11 = customTypography[item]) === null || _customTypography$ite11 === void 0 ? void 0 : _customTypography$ite11.fontWeight,
-        onChangeFontWeight: function onChangeFontWeight(value) {
-          return onChangeCustomFontWeight(value, item);
-        },
-        fontStyle: customTypography === null || customTypography === void 0 || (_customTypography$ite12 = customTypography[item]) === null || _customTypography$ite12 === void 0 ? void 0 : _customTypography$ite12.fontStyle,
-        onChangeFontStyle: function onChangeFontStyle(value) {
-          return onChangeCustomFontStyle(value, item);
-        },
-        textTransform: customTypography === null || customTypography === void 0 || (_customTypography$ite13 = customTypography[item]) === null || _customTypography$ite13 === void 0 ? void 0 : _customTypography$ite13.textTransform,
-        onChangeTextTransform: function onChangeTextTransform(value) {
-          return onChangeCustomTextTransform(value, item);
-        },
-        textDecoration: customTypography === null || customTypography === void 0 || (_customTypography$ite14 = customTypography[item]) === null || _customTypography$ite14 === void 0 ? void 0 : _customTypography$ite14.textDecoration,
-        onChangeTextDecoration: function onChangeTextDecoration(value) {
-          return onChangeCustomTextDecoration(value, item);
-        },
-        letterSpacing: customTypography === null || customTypography === void 0 || (_customTypography$ite15 = customTypography[item]) === null || _customTypography$ite15 === void 0 ? void 0 : _customTypography$ite15.letterSpacing,
-        onChangeLetterSpacing: function onChangeLetterSpacing(value) {
-          return onChangeCustomLetterSpacing(value, item);
-        },
-        letterSpacingUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite16 = customTypography[item]) === null || _customTypography$ite16 === void 0 ? void 0 : _customTypography$ite16.letterSpacingUnit,
-        onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
-          return onChangeCustomLetterSpacingUnit(value, item);
-        },
-        lineHeight: customTypography === null || customTypography === void 0 || (_customTypography$ite17 = customTypography[item]) === null || _customTypography$ite17 === void 0 ? void 0 : _customTypography$ite17.lineHeight,
-        onChangeLineHeight: function onChangeLineHeight(value) {
-          return onChangeCustomLineHeight(value, item);
-        },
-        lineHeightUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite18 = customTypography[item]) === null || _customTypography$ite18 === void 0 ? void 0 : _customTypography$ite18.lineHeightUnits,
-        onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
-          return onChangeCustomLineHeightUnit(value, item);
-        },
-        deviceType: deviceType
-      }))));
-    }))))));
-  }));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TypographySettings);
-
-/***/ }),
-
-/***/ "./admin/full-site-import/fetch.js":
-/*!*****************************************!*\
-  !*** ./admin/full-site-import/fetch.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getGlobalStyle: () => (/* binding */ getGlobalStyle),
-/* harmony export */   updateGlobalStyle: () => (/* binding */ updateGlobalStyle)
-/* harmony export */ });
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
-function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
-function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-/**
- * Define AJAX Action names
- */
-var updateGlobalStyleAction = 'fb_update_global_colors';
-var getGlobalStyleAction = 'fb_get_global_colors';
-var _window$frontisBlocks = window.frontisBlocksAdminSidebar,
-  nonce = _window$frontisBlocks.nonce,
-  ajaxUrl = _window$frontisBlocks.ajaxUrl;
-
-/**
- * Function for Update Global Settings
- * @param {*} value
- * @param key
- * @returns {object}
- */
-
-var updateGlobalStyle = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(value) {
-    var key,
-      response,
-      _args = arguments;
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) switch (_context.prev = _context.next) {
-        case 0:
-          key = _args.length > 1 && _args[1] !== undefined ? _args[1] : 'fb_update_global_colors';
-          _context.prev = 1;
-          _context.next = 4;
-          return jQuery.ajax({
-            url: ajaxUrl,
-            type: 'POST',
-            data: {
-              action: key,
-              nonce: nonce,
-              data: value
-            }
-          });
-        case 4:
-          response = _context.sent;
-          if (response.success) {
-            _context.next = 7;
-            break;
-          }
-          throw new Error(response.data || 'Update failed');
-        case 7:
-          return _context.abrupt("return", response);
-        case 10:
-          _context.prev = 10;
-          _context.t0 = _context["catch"](1);
-          return _context.abrupt("return", {
-            "success": false,
-            "data": "Update failed."
-          });
-        case 13:
-        case "end":
-          return _context.stop();
-      }
-    }, _callee, null, [[1, 10]]);
-  }));
-  return function updateGlobalStyle(_x) {
-    return _ref.apply(this, arguments);
-  };
-}();
-var getGlobalStyle = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-    var key,
-      response,
-      _args2 = arguments;
-    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) switch (_context2.prev = _context2.next) {
-        case 0:
-          key = _args2.length > 0 && _args2[0] !== undefined ? _args2[0] : getGlobalStyleAction;
-          _context2.prev = 1;
-          _context2.next = 4;
-          return jQuery.ajax({
-            url: ajaxUrl,
-            type: 'POST',
-            data: {
-              action: key,
-              nonce: nonce
-            }
-          });
-        case 4:
-          response = _context2.sent;
-          if (response.success) {
-            _context2.next = 7;
-            break;
-          }
-          throw new Error(response.data || 'Update failed');
-        case 7:
-          return _context2.abrupt("return", response);
-        case 10:
-          _context2.prev = 10;
-          _context2.t0 = _context2["catch"](1);
-          return _context2.abrupt("return", {
-            "success": false,
-            "data": "Colors not found."
-          });
-        case 13:
-        case "end":
-          return _context2.stop();
-      }
-    }, _callee2, null, [[1, 10]]);
-  }));
-  return function getGlobalStyle() {
-    return _ref2.apply(this, arguments);
-  };
-}();
-
-/***/ }),
-
-/***/ "./admin/full-site-import/helper.js":
-/*!******************************************!*\
-  !*** ./admin/full-site-import/helper.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   getFbLocalStorage: () => (/* binding */ getFbLocalStorage),
-/* harmony export */   getGlobalSettings: () => (/* binding */ getGlobalSettings),
-/* harmony export */   loadGoogleFont: () => (/* binding */ loadGoogleFont),
-/* harmony export */   setFbLocalStorage: () => (/* binding */ setFbLocalStorage),
-/* harmony export */   toastError: () => (/* binding */ toastError),
-/* harmony export */   toastSuccess: () => (/* binding */ toastSuccess),
-/* harmony export */   useAfterSave: () => (/* binding */ useAfterSave)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-
-
-
-
-var getGlobalSettings = function getGlobalSettings(select) {
-  return {
-    getGlobalColors: select('frontis-blocks').getGlobalColors()
-    // getCustomColors: select('frontis-blocks').getCustomColors(),
-    // getGradientColors: select('frontis-blocks').getGradientColors(),
-    // getCustomGradientColors: select('frontis-blocks').getCustomGradientColors(),
-    // getGlobalTypography: select('frontis-blocks').getGlobalTypography()
-  };
-};
-
-/**
- * Save localstorage
- */
-var setFbLocalStorage = function setFbLocalStorage(key, value) {
-  var data = JSON.stringify(value);
-  localStorage.setItem(key, data);
-};
-
-/**
- * Get localstorage data
- */
-var getFbLocalStorage = function getFbLocalStorage(key) {
-  var getJson = localStorage.getItem(key);
-  return JSON.parse(getJson) ? JSON.parse(getJson) : [];
-};
-
-/**
- * Returns `true` if the post is done saving, `false` otherwise.
- *
- * @returns {Boolean}
- */
-var useAfterSave = function useAfterSave() {
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-    _useState2 = _slicedToArray(_useState, 2),
-    isPostSaved = _useState2[0],
-    setIsPostSaved = _useState2[1];
-  var isPostSavingInProgress = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(false);
-  var _useSelect = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(function (__select) {
-      return {
-        isSavingPost: __select('core/editor').isSavingPost(),
-        isAutosavingPost: __select('core/editor').isAutosavingPost()
-      };
-    }),
-    isSavingPost = _useSelect.isSavingPost,
-    isAutosavingPost = _useSelect.isAutosavingPost;
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    if ((isSavingPost || isAutosavingPost) && !isPostSavingInProgress.current) {
-      setIsPostSaved(false);
-      isPostSavingInProgress.current = true;
-    }
-    if (!(isSavingPost || isAutosavingPost) && isPostSavingInProgress.current) {
-      // Code to run after post is done saving.
-      setIsPostSaved(true);
-      isPostSavingInProgress.current = false;
-    }
-  }, [isSavingPost, isAutosavingPost]);
-  return isPostSaved;
-};
-
-// Load google font
-var loadGoogleFont = function loadGoogleFont(font) {
-  var fontUrl = "https://fonts.googleapis.com/css?family=".concat(font.replace(' ', '+'), ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic");
-  var linkElement = document.createElement('link');
-  linkElement.rel = 'stylesheet';
-  linkElement.href = fontUrl;
-  document.head.appendChild(linkElement);
-};
-
-// Toast message
-var toastError = function toastError(msg) {
-  react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(msg, 'frontis-blocks'), {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true
-  });
-};
-var toastSuccess = function toastSuccess(msg) {
-  react_toastify__WEBPACK_IMPORTED_MODULE_3__.toast.success((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(msg, 'frontis-blocks'), {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true
-  });
-};
-
-/***/ }),
-
-/***/ "./admin/full-site-import/sidebar.js":
-/*!*******************************************!*\
-  !*** ./admin/full-site-import/sidebar.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
-/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/GradientColorPallet */ "./admin/full-site-import/components/GradientColorPallet.js");
-/* harmony import */ var _components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/ColorPalletWrapper */ "./admin/full-site-import/components/ColorPalletWrapper.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _Config_displayType__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @Config/displayType */ "./src/config/displayType.js");
-/* harmony import */ var _components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/CustomGradientPallet */ "./admin/full-site-import/components/CustomGradientPallet.js");
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./helper */ "./admin/full-site-import/helper.js");
-/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fetch */ "./admin/full-site-import/fetch.js");
-/* harmony import */ var _components_TypographySettings__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/TypographySettings */ "./admin/full-site-import/components/TypographySettings.js");
-/* harmony import */ var _components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/GenerateRootCss */ "./admin/full-site-import/components/GenerateRootCss.js");
-/* harmony import */ var _components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/GenerateColorRoot */ "./admin/full-site-import/components/GenerateColorRoot.js");
-/* harmony import */ var _sidebar_scss__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./sidebar.scss */ "./admin/full-site-import/sidebar.scss");
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
-function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
-function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var defaultsColors = [{
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Primary Color", "frontis-blocks"),
-  "color": '#399CFF',
-  "slug": 'primary-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secondary Color", "frontis-blocks"),
-  "color": '#f00000',
-  "slug": 'secondary-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tertiary Color", "frontis-blocks"),
-  "color": '#F72585',
-  "slug": 'tertiary-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Accent Color", "frontis-blocks"),
-  "color": "#7209B7",
-  "slug": 'accent-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Color", "frontis-blocks"),
-  "color": '#3A0CA3',
-  "slug": 'text-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Color", "frontis-blocks"),
-  "color": '#4361EE',
-  "slug": 'link-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Hover Color", "frontis-blocks"),
-  "color": '#4CC9F0',
-  "slug": 'link-hover-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("White Color", "frontis-blocks"),
-  "color": '#FFFFFF',
-  "slug": 'white-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Black Color", "frontis-blocks"),
-  "color": '#000000',
-  "slug": 'black-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gray Color", "frontis-blocks"),
-  "color": '#808080',
-  "slug": 'gray-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gray Color2", "frontis-blocks"),
-  "color": '#808080',
-  "slug": 'gray-color2'
-}];
-var gradientDefaults = [{
-  "color": "linear-gradient(135deg, rgba(33,150,243,1) 0%, rgba(156,39,176,1) 100%)",
-  "name": "Primary Color",
-  "slug": "gradientPrimary"
-}, {
-  "color": "linear-gradient(135deg, rgba(0,200,83,1) 0%, rgba(255,193,7,1) 100%)",
-  "name": "Secondary Color",
-  "slug": "gradientSecondary"
-}, {
-  "color": "linear-gradient(135deg, rgba(244,67,54,1) 0%, rgba(233,30,99,1) 100%)",
-  "name": "Tertiary Color",
-  "slug": "gradientTertiary"
-}, {
-  "color": "linear-gradient(135deg, rgba(3,169,244,1) 0%, rgba(0,150,136,1) 100%)",
-  "name": "Accent Color",
-  "slug": "gradientAccent"
-}, {
-  "color": "linear-gradient(135deg, rgba(96,125,139,1) 0%, rgba(224,224,224,1) 100%)",
-  "name": "Neutral Background",
-  "slug": "gradientBackground"
-}, {
-  "color": "linear-gradient(135deg, rgba(255,87,34,1) 0%, rgba(255,235,59,1) 100%)",
-  "name": "Vibrant Glow",
-  "slug": "gradientGradient"
-}, {
-  "color": "linear-gradient(135deg, rgba(255,0,150,1) 0%, rgba(255,255,0,1) 100%)",
-  "name": "Sunset Bliss",
-  "slug": "gradientSunsetBliss"
-}, {
-  "color": "linear-gradient(135deg, rgba(0,255,222,1) 0%, rgba(0,102,255,1) 100%)",
-  "name": "Ocean Breeze",
-  "slug": "gradientOceanBreeze"
-}, {
-  "color": "linear-gradient(135deg, rgba(255,153,0,1) 0%, rgba(255,94,0,1) 100%)",
-  "name": "Tangerine Dream",
-  "slug": "gradientTangerineDream"
-}, {
-  "color": "linear-gradient(135deg, rgba(102,51,153,1) 0%, rgba(255,102,204,1) 100%)",
-  "name": "Lavender Kiss",
-  "slug": "gradientLavenderKiss"
-}, {
-  "color": "linear-gradient(220.55deg, #FFE70B 0%, #27B643 100%)",
-  "name": "Minty Fresh",
-  "slug": "gradientMintyFresh"
-}, {
-  "color": "linear-gradient(180deg,#12C0DB, #EF04F6)",
-  "name": "Halloween",
-  "slug": "gradientHalloween"
-}];
-function FrontisBlocksSidebarFullSite(props) {
-  var _frontisBlocksAdmin;
-  var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_8__.useDeviceType)();
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
-    _useState2 = _slicedToArray(_useState, 2),
-    customColors = _useState2[0],
-    setCustomColors = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)("solid"),
-    _useState4 = _slicedToArray(_useState3, 2),
-    activeTab = _useState4[0],
-    setActiveTab = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
-    _useState6 = _slicedToArray(_useState5, 2),
-    gradientColors = _useState6[0],
-    setGradientColors = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
-    _useState8 = _slicedToArray(_useState7, 2),
-    customGradientColors = _useState8[0],
-    setCustomGradientColors = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
-    _useState0 = _slicedToArray(_useState9, 2),
-    globalColors = _useState0[0],
-    setGlobalColors = _useState0[1];
-  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(false),
-    _useState10 = _slicedToArray(_useState1, 2),
-    fbGlobalSettingsLoading = _useState10[0],
-    setFbGlobalSettingsLoading = _useState10[1];
-  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useDispatch)('core/editor'),
-    editPost = _useDispatch.editPost;
-  var themeColors = (_frontisBlocksAdmin = frontisBlocksAdmin) === null || _frontisBlocksAdmin === void 0 ? void 0 : _frontisBlocksAdmin.theme_colors;
-  if (themeColors) {
-    defaultsColors = themeColors;
-  }
-
-  // const globalTypographyElements = frontisBlocksAdmin?.global_styles;
-  // const globalTypography = globalTypographyElements?.elements;
-
-  // console.log("globalTypography.heading")
-  // console.log(frontisBlocksAdmin?.global_styles);
-
-  // console.log("frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.unit")
-  // console.log(frontisExtractTypoValue(globalTypography?.h2?.typography?.fontSize)?.value)
-  // console.log(getFontFamily(globalTypographyElements?.typography?.fontFamily));
-
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({
-      body: {
-        fontFamily: 'Default',
-        lineHeight: {
-          Desktop: 'Default',
-          Tablet: 'Default',
-          Mobile: 'Default'
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: 'Default',
-        fontStyle: 'Default',
-        textTransform: 'Default',
-        textDecoration: 'Default',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      },
-      link: {
-        fontFamily: 'Default',
-        lineHeight: {
-          Desktop: 'Default',
-          Tablet: 'Default',
-          Mobile: 'Default'
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: 'Default',
-        fontStyle: 'Default',
-        textTransform: 'Default',
-        textDecoration: 'Default',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      },
-      button: {
-        fontFamily: 'Default',
-        lineHeight: {
-          Desktop: 'Default',
-          Tablet: 'Default',
-          Mobile: 'Default'
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: 'Default',
-        fontStyle: 'Default',
-        textTransform: 'Default',
-        textDecoration: 'Default',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      },
-      captions: {
-        fontFamily: 'Default',
-        lineHeight: {
-          Desktop: 'Default',
-          Tablet: 'Default',
-          Mobile: 'Default'
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: 'Default',
-        fontStyle: 'Default',
-        textTransform: 'Default',
-        textDecoration: 'Default',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      },
-      heading: {
-        all: {
-          fontFamily: 'Default',
-          lineHeight: {
-            Desktop: 'Default',
-            Tablet: 'Default',
-            Mobile: 'Default'
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 'Default',
-          fontStyle: 'Default',
-          textTransform: 'Default',
-          textDecoration: 'Default',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        },
-        h1: {
-          fontFamily: 'Default',
-          lineHeight: {
-            Desktop: 'Default',
-            Tablet: 'Default',
-            Mobile: 'Default'
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 'Default',
-          fontStyle: 'Default',
-          textTransform: 'Default',
-          textDecoration: 'Default',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        },
-        h2: {
-          fontFamily: 'Default',
-          lineHeight: {
-            Desktop: 'Default',
-            Tablet: 'Default',
-            Mobile: 'Default'
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 'Default',
-          fontStyle: 'Default',
-          textTransform: 'Default',
-          textDecoration: 'Default',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        },
-        h3: {
-          fontFamily: 'Default',
-          lineHeight: {
-            Desktop: 'Default',
-            Tablet: 'Default',
-            Mobile: 'Default'
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 'Default',
-          fontStyle: 'Default',
-          textTransform: 'Default',
-          textDecoration: 'Default',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        },
-        h4: {
-          fontFamily: 'Default',
-          lineHeight: {
-            Desktop: 'Default',
-            Tablet: 'Default',
-            Mobile: 'Default'
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 'Default',
-          fontStyle: 'Default',
-          textTransform: 'Default',
-          textDecoration: 'Default',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        },
-        h5: {
-          fontFamily: 'Default',
-          lineHeight: {
-            Desktop: 'Default',
-            Tablet: 'Default',
-            Mobile: 'Default'
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 'Default',
-          fontStyle: 'Default',
-          textTransform: 'Default',
-          textDecoration: 'Default',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        },
-        h6: {
-          fontFamily: 'Default',
-          lineHeight: {
-            Desktop: 'Default',
-            Tablet: 'Default',
-            Mobile: 'Default'
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 'Default',
-          fontStyle: 'Default',
-          textTransform: 'Default',
-          textDecoration: 'Default',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        }
-      }
-    }),
-    _useState12 = _slicedToArray(_useState11, 2),
-    typography = _useState12[0],
-    setTypography = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({}),
-    _useState14 = _slicedToArray(_useState13, 2),
-    customTypography = _useState14[0],
-    setCustomTypography = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)({}),
-    _useState16 = _slicedToArray(_useState15, 2),
-    fontfamilies = _useState16[0],
-    setFontfamilies = _useState16[1];
-
-  // Extract all font families into a single string
-  var getAllFontFamilies = function getAllFontFamilies(fontsObject) {
-    var fontFamilies = [];
-    var _extractFonts = function extractFonts(obj) {
-      Object.values(obj).forEach(function (value) {
-        if (typeof value === "string") {
-          fontFamilies.push(value);
-        } else if (_typeof(value) === "object") {
-          _extractFonts(value); // Recursively extract nested objects
-        }
-      });
-    };
-    _extractFonts(fontsObject);
-    var regenerateFonts = fontFamilies.join(",");
-    (0,_helper__WEBPACK_IMPORTED_MODULE_10__.loadGoogleFont)(regenerateFonts);
-  };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
-    var localStorageKeys = ['fb_global_colors', 'fb_custom_colors', 'fb_gradient_colors', 'fb_custom_gradient_colors', 'fb_typography', 'fb_custom_typography', 'fb_fontfamilies', 'fb_globaltypo'];
-    var handleUpdateState = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _loop, _i, _localStorageKeys;
-        return _regeneratorRuntime().wrap(function _callee$(_context2) {
-          while (1) switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop() {
-                var key, localStorageData, res, _res, _res2, _res3, _res4, _res5, _res6, _res7;
-                return _regeneratorRuntime().wrap(function _loop$(_context) {
-                  while (1) switch (_context.prev = _context.next) {
-                    case 0:
-                      key = _localStorageKeys[_i];
-                      localStorageData = (0,_helper__WEBPACK_IMPORTED_MODULE_10__.getFbLocalStorage)(key);
-                      if (!(key === 'fb_global_colors')) {
-                        _context.next = 11;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 10;
-                        break;
-                      }
-                      _context.next = 6;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_global_colors');
-                    case 6:
-                      res = _context.sent;
-                      if (!res.success) {
-                        setGlobalColors(defaultsColors);
-                        localStorage.setItem('fb_global_colors', JSON.stringify(defaultsColors));
-                      } else {
-                        setGlobalColors(res.data);
-                        localStorage.setItem('fb_global_colors', JSON.stringify(res.data));
-                      }
-                      _context.next = 11;
-                      break;
-                    case 10:
-                      setGlobalColors(localStorageData);
-                    case 11:
-                      if (!(key === 'fb_custom_colors')) {
-                        _context.next = 20;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 19;
-                        break;
-                      }
-                      _context.next = 15;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_colors');
-                    case 15:
-                      _res = _context.sent;
-                      if (!_res.success) {
-                        setCustomColors([]);
-                      } else {
-                        setCustomColors(_res.data);
-                        localStorage.setItem('fb_custom_colors', JSON.stringify(_res.data));
-                      }
-                      _context.next = 20;
-                      break;
-                    case 19:
-                      setCustomColors(localStorageData);
-                    case 20:
-                      if (!(key === 'fb_gradient_colors')) {
-                        _context.next = 29;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 28;
-                        break;
-                      }
-                      _context.next = 24;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_gradient_colors');
-                    case 24:
-                      _res2 = _context.sent;
-                      if (!_res2.success) {
-                        setGradientColors(gradientDefaults);
-                        localStorage.setItem('fb_gradient_colors', JSON.stringify(gradientDefaults));
-                      } else {
-                        setGradientColors(_res2.data);
-                        localStorage.setItem('fb_gradient_colors', JSON.stringify(_res2.data));
-                      }
-                      _context.next = 29;
-                      break;
-                    case 28:
-                      setGradientColors(localStorageData);
-                    case 29:
-                      if (!(key === 'fb_custom_gradient_colors')) {
-                        _context.next = 38;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 37;
-                        break;
-                      }
-                      _context.next = 33;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_gradient_colors');
-                    case 33:
-                      _res3 = _context.sent;
-                      if (!_res3.success) {
-                        setCustomGradientColors([]);
-                      } else {
-                        setCustomGradientColors(_res3.data);
-                        localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(_res3.data));
-                      }
-                      _context.next = 38;
-                      break;
-                    case 37:
-                      setCustomGradientColors(localStorageData);
-                    case 38:
-                      if (!(key === 'fb_typography')) {
-                        _context.next = 47;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 46;
-                        break;
-                      }
-                      _context.next = 42;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_typography');
-                    case 42:
-                      _res4 = _context.sent;
-                      if (!_res4.success) {
-                        localStorage.setItem('fb_typography', JSON.stringify(typography));
-                      } else {
-                        setTypography(_res4.data);
-                        localStorage.setItem('fb_typography', JSON.stringify(_res4.data));
-                      }
-                      _context.next = 47;
-                      break;
-                    case 46:
-                      setTypography(localStorageData);
-                    case 47:
-                      if (!(key === 'fb_custom_typography')) {
-                        _context.next = 56;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 55;
-                        break;
-                      }
-                      _context.next = 51;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_custom_typography');
-                    case 51:
-                      _res5 = _context.sent;
-                      if (!_res5.success) {
-                        setCustomTypography([]);
-                      } else {
-                        setCustomTypography(_res5.data);
-                        localStorage.setItem('fb_custom_typography', JSON.stringify(_res5.data));
-                      }
-                      _context.next = 56;
-                      break;
-                    case 55:
-                      setCustomTypography(localStorageData);
-                    case 56:
-                      if (!(key === 'fb_fontfamilies')) {
-                        _context.next = 66;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 64;
-                        break;
-                      }
-                      _context.next = 60;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_fontfamilies');
-                    case 60:
-                      _res6 = _context.sent;
-                      if (!_res6.success) {
-                        setFontfamilies([]);
-                      } else {
-                        setFontfamilies(_res6.data);
-                        getAllFontFamilies(_res6.data);
-                        localStorage.setItem('fb_fontFamilies', JSON.stringify(_res6.data));
-                      }
-                      _context.next = 66;
-                      break;
-                    case 64:
-                      getAllFontFamilies(localStorageData);
-                      setFontfamilies(localStorageData);
-                    case 66:
-                      if (!(key === 'fb_globaltypo')) {
-                        _context.next = 77;
-                        break;
-                      }
-                      console.log("fb_globaltypo");
-                      console.log(localStorageData);
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 76;
-                        break;
-                      }
-                      _context.next = 72;
-                      return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.getGlobalStyle)('fb_get_globaltypo');
-                    case 72:
-                      _res7 = _context.sent;
-                      if (_res7.success) {
-                        setTimeout(function () {
-                          (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__["default"])(_res7.data, deviceType);
-                        }, 1000);
-                        localStorage.setItem('fb_globaltypo', JSON.stringify(_res7.data));
-                      }
-                      _context.next = 77;
-                      break;
-                    case 76:
-                      setTimeout(function () {
-                        (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__["default"])(localStorageData, deviceType);
-                      }, 1000);
-                    case 77:
-                    case "end":
-                      return _context.stop();
-                  }
-                }, _loop);
-              });
-              _i = 0, _localStorageKeys = localStorageKeys;
-            case 3:
-              if (!(_i < _localStorageKeys.length)) {
-                _context2.next = 8;
-                break;
-              }
-              return _context2.delegateYield(_loop(), "t0", 5);
-            case 5:
-              _i++;
-              _context2.next = 3;
-              break;
-            case 8:
-              _context2.next = 13;
-              break;
-            case 10:
-              _context2.prev = 10;
-              _context2.t1 = _context2["catch"](0);
-              console.error("Error fetching global colors:", _context2.t1);
-            case 13:
-            case "end":
-              return _context2.stop();
-          }
-        }, _callee, null, [[0, 10]]);
-      }));
-      return function handleUpdateState() {
-        return _ref.apply(this, arguments);
-      };
-    }();
-    handleUpdateState();
-  }, []);
-  var colorPanelArray = function colorPanelArray(colors, setColor) {
-    var defaults = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-    if (_typeof(colors) !== "object") {
-      return [];
-    }
-    var colorArr = [];
-    colors.map(function (colorObj, index) {
-      return colorArr.push({
-        label: colorObj.name || "Color",
-        value: colorObj.color,
-        onChange: function onChange(newColor) {
-          var _defaults$index;
-          setColor(index, newColor || ((_defaults$index = defaults[index]) === null || _defaults$index === void 0 ? void 0 : _defaults$index.color) || "#000");
-        }
-      });
-    });
-    return colorArr;
-  };
-
-  //Update Global Colors
-  var setGlobalColor = function setGlobalColor(index, color) {
-    var colors = _toConsumableArray(globalColors);
-    colors[index].color = color;
-    setGlobalColors(_toConsumableArray(colors));
-    setFbGlobalSettingsLoading(true);
-
-    // // Select the Save button and update its aria-disabled attribute
-    // const saveButton = document.querySelector(
-    // 	'button.components-button.editor-post-publish-button.editor-post-publish-button__button.is-primary.is-compact'
-    // );
-
-    // if (saveButton) {
-    // 	// Set aria-disabled to false when color is updated
-    // 	saveButton.setAttribute('aria-disabled', 'false');
-
-    // 	// Add a click event listener to set aria-disabled back to true
-    // 	saveButton.addEventListener('click', () => {
-    // 		saveButton.setAttribute('aria-disabled', 'true');
-    // 	});
-    // }
-  };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
-    var mergedColors = [].concat(_toConsumableArray(customColors), _toConsumableArray(globalColors), _toConsumableArray(customGradientColors), _toConsumableArray(gradientColors));
-    setTimeout(function () {
-      return (0,_components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_14__["default"])(mergedColors, deviceType);
-    }, 1000);
-  }, [globalColors, customColors, customGradientColors, gradientColors, deviceType]);
-
-  //Update Gradient Colors
-  var setGradientColor = function setGradientColor(index, color) {
-    var colors = _toConsumableArray(gradientColors);
-    colors[index].color = color;
-    setGradientColors(_toConsumableArray(colors));
-    setFbGlobalSettingsLoading(true);
-  };
-
-  //Update Gradient Colors
-  var setCustomGradientColor = function setCustomGradientColor(index, color) {
-    var colors = _toConsumableArray(customGradientColors);
-    colors[index].color = color;
-    setCustomGradientColors(_toConsumableArray(colors));
-    setFbGlobalSettingsLoading(true);
-  };
-  var setCustomColor = function setCustomColor(index, color) {
-    var colors = _toConsumableArray(customColors);
-    colors[index].color = color;
-    setCustomColors(_toConsumableArray(colors));
-    setFbGlobalSettingsLoading(true);
-  };
-
-  // New custom color function
-  var setNewCustomColorFn = function setNewCustomColorFn() {
-    setCustomColors(function () {
-      // Determine a unique index
-      var index = customColors.length + 1;
-
-      // Add the new color
-      return [].concat(_toConsumableArray(customColors), [{
-        color: '#000000',
-        name: "Custom Color ".concat(index),
-        slug: "custom-color-".concat(index)
-      }]);
-    });
-    setFbGlobalSettingsLoading(true);
-  };
-
-  // Delete custom gradient color
-  var deleteCustomGradientColor = function deleteCustomGradientColor(index, color) {
-    var colors = _toConsumableArray(customGradientColors);
-    colors.splice(index, 1);
-    setCustomGradientColors(_toConsumableArray(colors));
-    setFbGlobalSettingsLoading(true);
-  };
-
-  // Save colors after post save
-  var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_10__.useAfterSave)();
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
-    var handleUpdateSettings = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var settingsState, _i2, _settingsState, key, response, _response, _response2, _response3;
-        return _regeneratorRuntime().wrap(function _callee2$(_context3) {
-          while (1) switch (_context3.prev = _context3.next) {
-            case 0:
-              if (!(isAfterSave && fbGlobalSettingsLoading)) {
-                _context3.next = 34;
-                break;
-              }
-              _context3.prev = 1;
-              settingsState = ['fb_update_global_colors', 'fb_update_custom_colors', 'fb_update_gradient_colors', 'fb_update_custom_gradient_colors'];
-              _i2 = 0, _settingsState = settingsState;
-            case 4:
-              if (!(_i2 < _settingsState.length)) {
-                _context3.next = 29;
-                break;
-              }
-              key = _settingsState[_i2];
-              if (!(key === 'fb_update_global_colors')) {
-                _context3.next = 11;
-                break;
-              }
-              _context3.next = 9;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(globalColors, key);
-            case 9:
-              response = _context3.sent;
-              if (response.success) {
-                setGlobalColors(response.data.data);
-                localStorage.setItem('fb_global_colors', JSON.stringify(response.data.data));
-              }
-            case 11:
-              if (!(key === 'fb_update_custom_colors')) {
-                _context3.next = 16;
-                break;
-              }
-              _context3.next = 14;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(customColors, key);
-            case 14:
-              _response = _context3.sent;
-              if (_response.success) {
-                setCustomColors(_response.data.data);
-                localStorage.setItem('fb_custom_colors', JSON.stringify(_response.data.data));
-              }
-            case 16:
-              if (!(key === 'fb_update_gradient_colors')) {
-                _context3.next = 21;
-                break;
-              }
-              _context3.next = 19;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(gradientColors, key);
-            case 19:
-              _response2 = _context3.sent;
-              if (_response2.success) {
-                setGradientColors(_response2.data.data);
-                localStorage.setItem('fb_gradient_colors', JSON.stringify(_response2.data.data));
-              }
-            case 21:
-              if (!(key === 'fb_update_custom_gradient_colors')) {
-                _context3.next = 26;
-                break;
-              }
-              _context3.next = 24;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_11__.updateGlobalStyle)(customGradientColors, key);
-            case 24:
-              _response3 = _context3.sent;
-              if (_response3.success) {
-                setCustomGradientColors(_response3.data.data);
-                localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(_response3.data.data));
-              }
-            case 26:
-              _i2++;
-              _context3.next = 4;
-              break;
-            case 29:
-              _context3.next = 34;
-              break;
-            case 31:
-              _context3.prev = 31;
-              _context3.t0 = _context3["catch"](1);
-              console.error('Error updating settings:', _context3.t0);
-            case 34:
-            case "end":
-              return _context3.stop();
-          }
-        }, _callee2, null, [[1, 31]]);
-      }));
-      return function handleUpdateSettings() {
-        return _ref2.apply(this, arguments);
-      };
-    }();
-    handleUpdateSettings();
-  }, [isAfterSave]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
-    if (fbGlobalSettingsLoading) {
-      editPost({
-        isDirty: true
-      });
-    }
-  }, [fbGlobalSettingsLoading]);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebarMoreMenuItem, {
-    target: "fb_plugin_sidebar"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("FB Global Settings", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
-    className: 'fb_plugin_sidebar'
-  }, /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebar, {
-    name: "frontis-blocks-sidebar",
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("FB Global Settings", "frontis-blocks"),
-    className: "fb-global-controls"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-panel-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorProvider, {
-    initialPath: "/"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorScreen, {
-    path: "/"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-blocks-tabs"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-tab-element"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorButton, {
-    path: "/typography"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-tab-wrapper"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "fb-tab-icon"
-  }, /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 24 24",
-    width: "24",
-    height: "24",
-    "class": "edit-site-global-styles-icon-with-current-color",
-    "aria-hidden": "true",
-    focusable: "false"
-  }, /*#__PURE__*/React.createElement("path", {
-    fill: "currentcolor",
-    d: "M6.9 7L3 17.8h1.7l1-2.8h4.1l1 2.8h1.7L8.6 7H6.9zm-.7 6.6l1.5-4.3 1.5 4.3h-3zM21.6 17c-.1.1-.2.2-.3.2-.1.1-.2.1-.4.1s-.3-.1-.4-.2c-.1-.1-.1-.3-.1-.6V12c0-.5 0-1-.1-1.4-.1-.4-.3-.7-.5-1-.2-.2-.5-.4-.9-.5-.4 0-.8-.1-1.3-.1s-1 .1-1.4.2c-.4.1-.7.3-1 .4-.2.2-.4.3-.6.5-.1.2-.2.4-.2.7 0 .3.1.5.2.8.2.2.4.3.8.3.3 0 .6-.1.8-.3.2-.2.3-.4.3-.7 0-.3-.1-.5-.2-.7-.2-.2-.4-.3-.6-.4.2-.2.4-.3.7-.4.3-.1.6-.1.8-.1.3 0 .6 0 .8.1.2.1.4.3.5.5.1.2.2.5.2.9v1.1c0 .3-.1.5-.3.6-.2.2-.5.3-.9.4-.3.1-.7.3-1.1.4-.4.1-.8.3-1.1.5-.3.2-.6.4-.8.7-.2.3-.3.7-.3 1.2 0 .6.2 1.1.5 1.4.3.4.9.5 1.6.5.5 0 1-.1 1.4-.3.4-.2.8-.6 1.1-1.1 0 .4.1.7.3 1 .2.3.6.4 1.2.4.4 0 .7-.1.9-.2.2-.1.5-.3.7-.4h-.3zm-3-.9c-.2.4-.5.7-.8.8-.3.2-.6.2-.8.2-.4 0-.6-.1-.9-.3-.2-.2-.3-.6-.3-1.1 0-.5.1-.9.3-1.2s.5-.5.8-.7c.3-.2.7-.3 1-.5.3-.1.6-.3.7-.6v3.4z"
-  }))), /*#__PURE__*/React.createElement("span", {
-    className: "fb-tab-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-blocks"))))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-tab-element"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorButton, {
-    path: "/colors"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-tab-wrapper"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "fb-tab-icon"
-  }, /*#__PURE__*/React.createElement("svg", {
-    viewBox: "0 0 24 24",
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "24",
-    height: "24",
-    "class": "edit-site-global-styles-icon-with-current-color",
-    "aria-hidden": "true",
-    focusable: "false"
-  }, /*#__PURE__*/React.createElement("path", {
-    fill: "currentcolor",
-    d: "M17.2 10.9c-.5-1-1.2-2.1-2.1-3.2-.6-.9-1.3-1.7-2.1-2.6L12 4l-1 1.1c-.6.9-1.3 1.7-2 2.6-.8 1.2-1.5 2.3-2 3.2-.6 1.2-1 2.2-1 3 0 3.4 2.7 6.1 6.1 6.1s6.1-2.7 6.1-6.1c0-.8-.3-1.8-1-3zm-5.1 7.6c-2.5 0-4.6-2.1-4.6-4.6 0-.3.1-1 .8-2.3.5-.9 1.1-1.9 2-3.1.7-.9 1.3-1.7 1.8-2.3.7.8 1.3 1.6 1.8 2.3.8 1.1 1.5 2.2 2 3.1.7 1.3.8 2 .8 2.3 0 2.5-2.1 4.6-4.6 4.6z"
-  }))), /*#__PURE__*/React.createElement("span", {
-    className: "fb-tab-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Colors", "frontis-blocks"))))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorScreen, {
-    path: "/typography"
-  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "fb-global-header-inner-wrapper"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorButton, {
-    path: "/",
-    className: "back-button"
-  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-    width: "16",
-    height: "17",
-    viewBox: "0 0 16 17",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M10.5 13.5L5.5 8.5L10.5 3.5",
-    stroke: "#404655",
-    strokeWidth: "1.2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  })))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-global-header-inner"
-  }, /*#__PURE__*/React.createElement("h3", null, "Typography"), /*#__PURE__*/React.createElement("p", null, "Available fonts, typographic styles, application of those styles."))), /*#__PURE__*/React.createElement(_components_TypographySettings__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    typography: typography,
-    customTypography: customTypography,
-    isAfterSave: isAfterSave
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorScreen, {
-    path: "/colors"
-  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "fb-global-header-inner-wrapper"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorButton, {
-    path: "/",
-    className: "back-button"
-  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-    width: "16",
-    height: "17",
-    viewBox: "0 0 16 17",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M10.5 13.5L5.5 8.5L10.5 3.5",
-    stroke: "#404655",
-    strokeWidth: "1.2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  })))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-global-header-inner"
-  }, /*#__PURE__*/React.createElement("h3", null, "Color"), /*#__PURE__*/React.createElement("p", null, "Available texts, links, Button, Headings global colors"))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TabPanel, {
-    className: "fb-blocks-color-tabs",
-    activeClass: "active-tab",
-    onSelect: function onSelect(tabName) {
-      return setActiveTab(tabName);
-    },
-    tabs: [{
-      name: "solid",
-      title: "Solid"
-    }, {
-      name: "gradient",
-      title: "Gradient"
-    }]
-  }, function (tab) {
-    return /*#__PURE__*/React.createElement("div", null, tab.name === "solid" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.PanelColorSettings, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Global Colors", "frontis-blocks"),
-      className: "fb-color-panel fb-global-color-panel",
-      initialOpen: true,
-      disableAlpha: true,
-      disableCustomGradients: false,
-      colorSettings: colorPanelArray(globalColors, setGlobalColor, defaultsColors)
-    }), customColors && customColors.length > 0 && /*#__PURE__*/React.createElement(_components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      colorPanelArray: colorPanelArray,
-      customColors: customColors,
-      setCustomColor: setCustomColor,
-      setCustomColors: setCustomColors
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "add-custom-color"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-      className: "add-custom-color-btn",
-      onClick: function onClick() {
-        return setNewCustomColorFn();
-      }
-    }, "Add Custom Color ", /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-      width: "15",
-      height: "14",
-      viewBox: "0 0 15 14",
-      fill: "none",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.5 0.75V13.25M13.75 7L1.25 7",
-      stroke: "white",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    })))))), tab.name === "gradient" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      title: "Gradient Colors",
-      colors: gradientColors,
-      setColor: setGradientColor,
-      setColors: setGradientColors,
-      wrapperClass: "fb-gradient-color-panel",
-      resetAction: true
-    }), customGradientColors.length > 0 && /*#__PURE__*/React.createElement(_components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_9__["default"], {
-      title: "Custom Gradient Colors",
-      colors: customGradientColors,
-      setColor: setCustomGradientColor,
-      setColors: setCustomGradientColors,
-      wrapperClass: "fb-gradient-color-panel",
-      resetAction: false,
-      deleteAction: true,
-      onDelete: deleteCustomGradientColor
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "add-custom-color"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-      className: "add-custom-color-btn",
-      onClick: function onClick() {
-        return setCustomGradientColors([].concat(_toConsumableArray(customGradientColors), [{
-          color: '#000000',
-          name: "Gradient Color ".concat(customGradientColors.length + 1),
-          slug: "custom-gradient-color-".concat(customGradientColors.length + 1),
-          "var": "--fb-custom-gradient-color-".concat(customGradientColors.length + 1)
-        }]));
-      }
-    }, "Add Custom Color ", /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-      width: "15",
-      height: "14",
-      viewBox: "0 0 15 14",
-      fill: "none",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.5 0.75V13.25M13.75 7L1.25 7",
-      stroke: "white",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    })))))));
-  }))))))));
-}
-;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FrontisBlocksSidebarFullSite);
-
-/***/ }),
-
-/***/ "./admin/full-site-import/sidebar.scss":
-/*!*********************************************!*\
-  !*** ./admin/full-site-import/sidebar.scss ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./admin/sidebar/components/FontPreview.js":
-/*!*************************************************!*\
-  !*** ./admin/sidebar/components/FontPreview.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ FrontPreview)
-/* harmony export */ });
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function FrontPreview(_ref) {
-  var fontProps = _ref.fontProps,
-    deviceType = _ref.deviceType,
-    _ref$fontSize = _ref.fontSize,
-    fontSize = _ref$fontSize === void 0 ? false : _ref$fontSize;
-  // Generate font object
-  var generateFontObj = function generateFontObj(font) {
-    var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-    var result = {};
-    if (_typeof(font) === 'object' && Object.keys(font).length > 0) {
-      var _font$letterSpacing, _font$letterSpacing2, _font$letterSpacingUn, _font$fontSize, _font$fontSize2, _font$fontSizeUnit, _font$lineHeight, _font$lineHeight2, _font$lineHeightUnits;
-      result = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, font.fontFamily && font.fontFamily !== '' && {
-        fontFamily: font.fontFamily
-      }), font.fontWeight && font.fontWeight !== '' && {
-        fontWeight: font.fontWeight
-      }), font.textTransform && font.textTransform !== '' && {
-        textTransform: font.textTransform
-      }), font.fontStyle && font.fontStyle !== '' && {
-        fontStyle: font.fontStyle
-      }), font.textDecoration && font.textDecoration !== '' && {
-        textDecoration: font.textDecoration
-      }), font.letterSpacing && ((_font$letterSpacing = font.letterSpacing) === null || _font$letterSpacing === void 0 ? void 0 : _font$letterSpacing[deviceType]) !== '' && {
-        letterSpacing: "".concat((_font$letterSpacing2 = font.letterSpacing) === null || _font$letterSpacing2 === void 0 ? void 0 : _font$letterSpacing2[deviceType]).concat(((_font$letterSpacingUn = font.letterSpacingUnit) === null || _font$letterSpacingUn === void 0 ? void 0 : _font$letterSpacingUn[deviceType]) || 'px')
-      }), size && ((_font$fontSize = font.fontSize) === null || _font$fontSize === void 0 ? void 0 : _font$fontSize[deviceType]) !== '' && {
-        fontSize: "".concat((_font$fontSize2 = font.fontSize) === null || _font$fontSize2 === void 0 ? void 0 : _font$fontSize2[deviceType]).concat(((_font$fontSizeUnit = font.fontSizeUnit) === null || _font$fontSizeUnit === void 0 ? void 0 : _font$fontSizeUnit[deviceType]) || 'px')
-      }), font.lineHeight && ((_font$lineHeight = font.lineHeight) === null || _font$lineHeight === void 0 ? void 0 : _font$lineHeight[deviceType]) !== '' && {
-        lineHeight: "".concat((_font$lineHeight2 = font.lineHeight) === null || _font$lineHeight2 === void 0 ? void 0 : _font$lineHeight2[deviceType]).concat(((_font$lineHeightUnits = font.lineHeightUnits) === null || _font$lineHeightUnits === void 0 ? void 0 : _font$lineHeightUnits[deviceType]) || 'px')
-      });
-    }
-    return result;
-  };
-  return /*#__PURE__*/React.createElement("div", {
-    style: generateFontObj(fontProps, fontSize),
-    className: "font_preview_box"
-  }, "Aa");
-}
-
-/***/ }),
-
-/***/ "./admin/sidebar/components/GenerateRootCss.js":
-/*!*****************************************************!*\
-  !*** ./admin/sidebar/components/GenerateRootCss.js ***!
-  \*****************************************************/
+/***/ "./admin/template-library/global-typo/components/GenerateRootCss.js":
+/*!**************************************************************************!*\
+  !*** ./admin/template-library/global-typo/components/GenerateRootCss.js ***!
+  \**************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -3977,10 +1268,192 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
 
 /***/ }),
 
-/***/ "./admin/sidebar/components/SidebarTypography.js":
-/*!*******************************************************!*\
-  !*** ./admin/sidebar/components/SidebarTypography.js ***!
-  \*******************************************************/
+/***/ "./admin/template-library/global-typo/components/GradientColorPallet.js":
+/*!******************************************************************************!*\
+  !*** ./admin/template-library/global-typo/components/GradientColorPallet.js ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+var GradientColorPallet = function GradientColorPallet(props) {
+  var _props$title = props.title,
+    title = _props$title === void 0 ? "" : _props$title,
+    colors = props.colors,
+    setColor = props.setColor,
+    setColors = props.setColors,
+    wrapperClass = props.wrapperClass,
+    resetAction = props.resetAction,
+    deleteAction = props.deleteAction,
+    _props$enableEditName = props.enableEditName,
+    enableEditName = _props$enableEditName === void 0 ? false : _props$enableEditName,
+    onDelete = props.onDelete;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+    _useState2 = _slicedToArray(_useState, 2),
+    clickedGradient = _useState2[0],
+    setClickedGradient = _useState2[1];
+  var gradientPopoverAnchor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
+  var editColorName = function editColorName(index, value) {
+    var cloneColors = _toConsumableArray(colors);
+    cloneColors[index] = _objectSpread(_objectSpread({}, cloneColors[index]), {}, {
+      name: value
+    });
+    setColors(_toConsumableArray(cloneColors));
+  };
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    function handleClickOutside(event) {
+      var _gradientPopoverAncho;
+      var clickedInsidePopup = (_gradientPopoverAncho = gradientPopoverAnchor.current) === null || _gradientPopoverAncho === void 0 ? void 0 : _gradientPopoverAncho.contains(event.target);
+      var clickedTrigger = event.target.closest('.fb-gradient-list .fb-custom-color-item');
+      var isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
+      if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
+        setClickedGradient('');
+      }
+    }
+
+    // Add listener to main document
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Also try to add listener to iframe document
+    var iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
+    if (iframe && iframe.contentDocument) {
+      iframe.contentDocument.addEventListener('mousedown', handleClickOutside);
+    }
+
+    // Cleanup
+    return function () {
+      document.removeEventListener('mousedown', handleClickOutside);
+      if (iframe && iframe.contentDocument) {
+        iframe.contentDocument.removeEventListener('mousedown', handleClickOutside);
+      }
+    };
+  }, []);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, colors && colors.length > 0 && /*#__PURE__*/React.createElement("div", {
+    className: "fb-color-panel ".concat(wrapperClass)
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
+    className: "fb-gradient-color-label"
+  }, title), /*#__PURE__*/React.createElement("div", {
+    className: "fb-custom-panel fb-gradient-color-list fb-gradient-list"
+  }, colors.map(function (color, index) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: index,
+      ref: gradientPopoverAnchor,
+      id: "fb-gradient-color-".concat(index),
+      className: "fb-custom-element fb-custom-color-item"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "item-content",
+      onClick: function onClick() {
+        return !enableEditName && setClickedGradient(clickedGradient === color.slug ? '' : color.slug);
+      }
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorIndicator, {
+      onClick: function onClick() {
+        return setClickedGradient(clickedGradient === color.slug ? '' : color.slug);
+      },
+      colorValue: color === null || color === void 0 ? void 0 : color.color
+    }), enableEditName && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      className: 'fb-custom-element__edit-input',
+      value: color.name || '',
+      onChange: function onChange(text) {
+        return editColorName(index, text);
+      }
+    }), !enableEditName && (color === null || color === void 0 ? void 0 : color.name)), /*#__PURE__*/React.createElement("div", {
+      className: "actions"
+    }, resetAction && /*#__PURE__*/React.createElement("span", {
+      className: 'fb-reset',
+      title: "Reset",
+      onClick: function onClick() {
+        return setColor(index, 'linear-gradient(135deg, rgb(6, 147, 227) 0%, rgb(155, 81, 224) 100%)');
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "16",
+      height: "16",
+      viewBox: "0 0 16 16",
+      fill: "none"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M10.6817 6.23162H14.0101V6.23044M1.98926 13.0956V9.76718M1.98926 9.76718L5.31768 9.76718M1.98926 9.76718L4.10985 11.8892C4.7702 12.5507 5.60824 13.0527 6.57607 13.312C9.51014 14.0982 12.526 12.357 13.3122 9.42292M2.68699 6.57591C3.47317 3.64184 6.48902 1.90064 9.42308 2.68682C10.3909 2.94615 11.229 3.4481 11.8893 4.10969L14.0101 6.23044M14.0101 2.90322V6.23044",
+      stroke: "#555E72"
+    }))), deleteAction && /*#__PURE__*/React.createElement("span", {
+      className: 'fb-delete',
+      title: "Delete",
+      onClick: function onClick() {
+        return onDelete(index);
+      }
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "16",
+      height: "17",
+      viewBox: "0 0 16 17",
+      fill: "none"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M6.3335 11.5V7.5",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M9.6665 11.5V7.5",
+      stroke: "#E43242",
+      "stroke-linecap": "round"
+    })))), clickedGradient === (color === null || color === void 0 ? void 0 : color.slug) && /*#__PURE__*/React.createElement("div", {
+      className: "fb-gradient-color-popup-content"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.GradientPicker, {
+      __nextHasNoMargin: true,
+      value: color === null || color === void 0 ? void 0 : color.color,
+      onChange: function onChange(color) {
+        return setColor(index, color);
+      },
+      asButtons: true,
+      clearable: true,
+      gradients: [{
+        name: color === null || color === void 0 ? void 0 : color.name,
+        gradient: color === null || color === void 0 ? void 0 : color.color,
+        slug: color === null || color === void 0 ? void 0 : color.slug
+      }]
+    })));
+  }))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GradientColorPallet);
+
+/***/ }),
+
+/***/ "./admin/template-library/global-typo/components/SidebarTypography.js":
+/*!****************************************************************************!*\
+  !*** ./admin/template-library/global-typo/components/SidebarTypography.js ***!
+  \****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -4221,10 +1694,10 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
 
 /***/ }),
 
-/***/ "./admin/sidebar/components/TypographySettings.js":
-/*!********************************************************!*\
-  !*** ./admin/sidebar/components/TypographySettings.js ***!
-  \********************************************************/
+/***/ "./admin/template-library/global-typo/components/TypographySettings.js":
+/*!*****************************************************************************!*\
+  !*** ./admin/template-library/global-typo/components/TypographySettings.js ***!
+  \*****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -4240,11 +1713,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _Config_displayType__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Config/displayType */ "./src/config/displayType.js");
-/* harmony import */ var _SidebarTypography__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SidebarTypography */ "./admin/sidebar/components/SidebarTypography.js");
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helper */ "./admin/sidebar/helper.js");
-/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../fetch */ "./admin/sidebar/fetch.js");
-/* harmony import */ var _FontPreview__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FontPreview */ "./admin/sidebar/components/FontPreview.js");
-/* harmony import */ var _GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./GenerateRootCss */ "./admin/sidebar/components/GenerateRootCss.js");
+/* harmony import */ var _SidebarTypography__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SidebarTypography */ "./admin/template-library/global-typo/components/SidebarTypography.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helper */ "./admin/template-library/global-typo/helper.js");
+/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../fetch */ "./admin/template-library/global-typo/fetch.js");
+/* harmony import */ var _FontPreview__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./FontPreview */ "./admin/template-library/global-typo/components/FontPreview.js");
+/* harmony import */ var _GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./GenerateRootCss */ "./admin/template-library/global-typo/components/GenerateRootCss.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -4990,7 +2463,7 @@ var TypographySettings = function TypographySettings(props) {
     className: "fb-panel-section"
   }, /*#__PURE__*/React.createElement("h3", {
     className: "fb-panel-heading"
-  }, "Element"), /*#__PURE__*/React.createElement("div", {
+  }, "Typography"), /*#__PURE__*/React.createElement("div", {
     className: 'fb-global-typo-elements'
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-global-typo-elements-wrap"
@@ -5017,7 +2490,20 @@ var TypographySettings = function TypographySettings(props) {
       fill: "currentcolor"
     }))), typographyElements[item], (typography[item] || item === 'heading' && isHeadingSaved()) && /*#__PURE__*/React.createElement("span", {
       className: "edit_indecator"
-    })));
+    }, /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "16",
+      height: "16",
+      viewBox: "0 0 16 16",
+      fill: "none"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M2.66602 14.6665H13.3327",
+      stroke: "#0B0C0E",
+      "stroke-linecap": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M9.25808 2.44212L9.75242 1.94778C10.5714 1.12874 11.8993 1.12874 12.7184 1.94778C13.5374 2.76682 13.5374 4.09475 12.7184 4.91379L12.2241 5.40813M9.25808 2.44212C9.25808 2.44212 9.31982 3.49258 10.2468 4.41946C11.1736 5.34634 12.2241 5.40813 12.2241 5.40813M9.25808 2.44212L4.71339 6.98676C4.40557 7.29456 4.25166 7.4485 4.1193 7.61823C3.96316 7.81836 3.82929 8.03496 3.72006 8.26416C3.62748 8.45843 3.55864 8.66496 3.42098 9.07796L2.83765 10.828M12.2241 5.40813L7.67942 9.95276C7.37162 10.2606 7.21768 10.4145 7.04795 10.5469C6.84782 10.703 6.63118 10.8369 6.402 10.9461C6.20772 11.0387 6.00123 11.1076 5.58824 11.2452L3.83824 11.8286M2.83765 10.828L2.69506 11.2557C2.62731 11.459 2.6802 11.683 2.83168 11.8345C2.98317 11.986 3.20723 12.0389 3.41046 11.9711L3.83824 11.8286M2.83765 10.828L3.83824 11.8286",
+      stroke: "#0B0C0E"
+    })))));
   })), typographyElements && Object.keys(typographyElements).map(function (item, index) {
     var _typography$item7, _typography$item17, _typography$item18, _typography$item19, _typography$item20, _typography$item21, _typography$item22, _typography$item23, _typography$item24, _typography$item25, _typography$item26, _typography$item27;
     return /*#__PURE__*/React.createElement("div", {
@@ -5170,212 +2656,16 @@ var TypographySettings = function TypographySettings(props) {
       },
       deviceType: deviceType
     })))));
-  }))))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-panel-section"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-panel-heading-wrapper"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "fb-panel-heading"
-  }, "Custom"), !selectCustomTypo && /*#__PURE__*/React.createElement("div", {
-    className: "add-custom-color"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    className: "add-custom-color-btn",
-    onClick: function onClick() {
-      return setCustomTypography(_objectSpread(_objectSpread({}, customTypography), {}, _defineProperty({}, "fb_customtypo_".concat(Math.random().toString(36).substring(2, 7)), {
-        name: "Custom Typography",
-        fontFamily: "default",
-        lineHeight: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      })));
-    }
-  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-    width: "15",
-    height: "14",
-    viewBox: "0 0 15 14",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M7.5 0.75V13.25M13.75 7L1.25 7",
-    stroke: "white",
-    strokeWidth: "1.5",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  })))))), /*#__PURE__*/React.createElement("div", {
-    className: 'fb-global-typo-elements'
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-global-typo-elements-wrap"
-  }, customTypography && _typeof(customTypography) === 'object' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorProvider, {
-    initialPath: "/"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
-    path: "/"
-  }, Object.keys(customTypography || {}).length > 0 && /*#__PURE__*/React.createElement("div", {
-    className: "fb-custom-element-wrapper"
-  }, Object.keys(customTypography || {}).length > 0 && Object.keys(customTypography).map(function (item, index) {
-    var _customTypography$ite7;
-    return /*#__PURE__*/React.createElement("div", {
-      key: index,
-      className: "fb-custom-element fb-global-typography-element"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorButton, {
-      path: "/".concat(item),
-      onClick: function onClick() {
-        return setSelectCustomTypo(true);
-      }
-    }, (_customTypography$ite7 = customTypography[item]) === null || _customTypography$ite7 === void 0 ? void 0 : _customTypography$ite7.name), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-      className: "fb-delete-custom-typo"
-    }, /*#__PURE__*/React.createElement("span", {
-      className: 'fb-delete',
-      title: "Delete",
-      onClick: function onClick() {
-        return deleteItem(item);
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "16",
-      height: "17",
-      viewBox: "0 0 16 17",
-      fill: "none"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: "M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: "M6.3335 11.5V7.5",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: "M9.6665 11.5V7.5",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    })))));
-  }))), Object.keys(customTypography).length > 0 && Object.keys(customTypography).map(function (item, index) {
-    var _customTypography$ite8, _customTypography$ite9, _customTypography$ite0, _customTypography$ite1, _customTypography$ite10, _customTypography$ite11, _customTypography$ite12, _customTypography$ite13, _customTypography$ite14, _customTypography$ite15, _customTypography$ite16, _customTypography$ite17, _customTypography$ite18;
-    return /*#__PURE__*/React.createElement("div", {
-      key: index,
-      className: "fb-global-typography-element-content"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
-      path: "/".concat(item)
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorBackButton, {
-      onClick: function onClick() {
-        return setSelectCustomTypo(false);
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "16",
-      height: "17",
-      viewBox: "0 0 16 17",
-      fill: "none"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M10.5 13.5L5.5 8.5L10.5 3.5",
-      stroke: "currentcolor",
-      "stroke-width": "1.2",
-      "stroke-linecap": "round",
-      "stroke-linejoin": "round"
-    })), (_customTypography$ite8 = customTypography[item]) === null || _customTypography$ite8 === void 0 ? void 0 : _customTypography$ite8.name), /*#__PURE__*/React.createElement("div", {
-      className: "fb-typography-settings"
-    }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      fontProps: customTypography[item],
-      deviceType: deviceType,
-      fontSize: true
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Typography Name', 'frontis-blocks'),
-      className: "fb-custom-typo-name",
-      value: (_customTypography$ite9 = customTypography[item]) === null || _customTypography$ite9 === void 0 ? void 0 : _customTypography$ite9.name,
-      onChange: function onChange(value) {
-        return changeCustomTypoName(item, value);
-      }
-    }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      fontFamily: customTypography === null || customTypography === void 0 || (_customTypography$ite0 = customTypography[item]) === null || _customTypography$ite0 === void 0 ? void 0 : _customTypography$ite0.fontFamily,
-      onChangeFontFamily: function onChangeFontFamily(value) {
-        return onChangeCustomFontFamily(value, item);
-      },
-      fontSize: customTypography === null || customTypography === void 0 || (_customTypography$ite1 = customTypography[item]) === null || _customTypography$ite1 === void 0 ? void 0 : _customTypography$ite1.fontSize,
-      onChangeFontSize: function onChangeFontSize(value) {
-        return onChangeCustomFontSize(value, item);
-      },
-      fontSizeUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite10 = customTypography[item]) === null || _customTypography$ite10 === void 0 ? void 0 : _customTypography$ite10.fontSizeUnit,
-      onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
-        return onChangeCustomFontSizeUnit(value, item);
-      },
-      fontWeight: customTypography === null || customTypography === void 0 || (_customTypography$ite11 = customTypography[item]) === null || _customTypography$ite11 === void 0 ? void 0 : _customTypography$ite11.fontWeight,
-      onChangeFontWeight: function onChangeFontWeight(value) {
-        return onChangeCustomFontWeight(value, item);
-      },
-      fontStyle: customTypography === null || customTypography === void 0 || (_customTypography$ite12 = customTypography[item]) === null || _customTypography$ite12 === void 0 ? void 0 : _customTypography$ite12.fontStyle,
-      onChangeFontStyle: function onChangeFontStyle(value) {
-        return onChangeCustomFontStyle(value, item);
-      },
-      textTransform: customTypography === null || customTypography === void 0 || (_customTypography$ite13 = customTypography[item]) === null || _customTypography$ite13 === void 0 ? void 0 : _customTypography$ite13.textTransform,
-      onChangeTextTransform: function onChangeTextTransform(value) {
-        return onChangeCustomTextTransform(value, item);
-      },
-      textDecoration: customTypography === null || customTypography === void 0 || (_customTypography$ite14 = customTypography[item]) === null || _customTypography$ite14 === void 0 ? void 0 : _customTypography$ite14.textDecoration,
-      onChangeTextDecoration: function onChangeTextDecoration(value) {
-        return onChangeCustomTextDecoration(value, item);
-      },
-      letterSpacing: customTypography === null || customTypography === void 0 || (_customTypography$ite15 = customTypography[item]) === null || _customTypography$ite15 === void 0 ? void 0 : _customTypography$ite15.letterSpacing,
-      onChangeLetterSpacing: function onChangeLetterSpacing(value) {
-        return onChangeCustomLetterSpacing(value, item);
-      },
-      letterSpacingUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite16 = customTypography[item]) === null || _customTypography$ite16 === void 0 ? void 0 : _customTypography$ite16.letterSpacingUnit,
-      onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
-        return onChangeCustomLetterSpacingUnit(value, item);
-      },
-      lineHeight: customTypography === null || customTypography === void 0 || (_customTypography$ite17 = customTypography[item]) === null || _customTypography$ite17 === void 0 ? void 0 : _customTypography$ite17.lineHeight,
-      onChangeLineHeight: function onChangeLineHeight(value) {
-        return onChangeCustomLineHeight(value, item);
-      },
-      lineHeightUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite18 = customTypography[item]) === null || _customTypography$ite18 === void 0 ? void 0 : _customTypography$ite18.lineHeightUnits,
-      onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
-        return onChangeCustomLineHeightUnit(value, item);
-      },
-      deviceType: deviceType
-    }))));
   })))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TypographySettings);
 
 /***/ }),
 
-/***/ "./admin/sidebar/fetch.js":
-/*!********************************!*\
-  !*** ./admin/sidebar/fetch.js ***!
-  \********************************/
+/***/ "./admin/template-library/global-typo/fetch.js":
+/*!*****************************************************!*\
+  !*** ./admin/template-library/global-typo/fetch.js ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -5497,10 +2787,1078 @@ var getGlobalStyle = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./admin/sidebar/helper.js":
-/*!*********************************!*\
-  !*** ./admin/sidebar/helper.js ***!
-  \*********************************/
+/***/ "./admin/template-library/global-typo/global-typo.js":
+/*!***********************************************************!*\
+  !*** ./admin/template-library/global-typo/global-typo.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/GradientColorPallet */ "./admin/template-library/global-typo/components/GradientColorPallet.js");
+/* harmony import */ var _components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ColorPalletWrapper */ "./admin/template-library/global-typo/components/ColorPalletWrapper.js");
+/* harmony import */ var _components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/CustomGradientPallet */ "./admin/template-library/global-typo/components/CustomGradientPallet.js");
+/* harmony import */ var _components_TypographySettings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/TypographySettings */ "./admin/template-library/global-typo/components/TypographySettings.js");
+/* harmony import */ var _Config_displayType__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @Config/displayType */ "./src/config/displayType.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./helper */ "./admin/template-library/global-typo/helper.js");
+/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./fetch */ "./admin/template-library/global-typo/fetch.js");
+/* harmony import */ var _components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/GenerateRootCss */ "./admin/template-library/global-typo/components/GenerateRootCss.js");
+/* harmony import */ var _components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/GenerateColorRoot */ "./admin/template-library/global-typo/components/GenerateColorRoot.js");
+/* harmony import */ var _scss_global_typo_scss__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./scss/global-typo.scss */ "./admin/template-library/global-typo/scss/global-typo.scss");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Default color and gradient configurations
+var defaultColors = [{
+  name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Primary Color", "frontis-blocks"),
+  color: "#399CFF",
+  slug: "primary-color"
+}, {
+  name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Secondary Color", "frontis-blocks"),
+  color: "#f00000",
+  slug: "secondary-color"
+}, {
+  name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tertiary Color", "frontis-blocks"),
+  color: "#F72585",
+  slug: "tertiary-color"
+}, {
+  name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Accent Color", "frontis-blocks"),
+  color: "#7209B7",
+  slug: "accent-color"
+}, {
+  name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Color", "frontis-blocks"),
+  color: "#3A0CA3",
+  slug: "text-color"
+}, {
+  name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Color", "frontis-blocks"),
+  color: "#4361EE",
+  slug: "link-color"
+}, {
+  name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Link Hover Color", "frontis-blocks"),
+  color: "#4CC9F0",
+  slug: "link-hover-color"
+}, {
+  name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("White Color", "frontis-blocks"),
+  color: "#FFFFFF",
+  slug: "white-color"
+}, {
+  name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Black Color", "frontis-blocks"),
+  color: "#000000",
+  slug: "black-color"
+}, {
+  name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gray Color", "frontis-blocks"),
+  color: "#808080",
+  slug: "gray-color"
+}];
+var gradientDefaults = [{
+  color: "linear-gradient(135deg, rgba(33,150,243,1) 0%, rgba(156,39,176,1) 100%)",
+  name: "Primary Color",
+  slug: "gradientPrimary"
+}, {
+  color: "linear-gradient(135deg, rgba(0,200,83,1) 0%, rgba(255,193,7,1) 100%)",
+  name: "Secondary Color",
+  slug: "gradientSecondary"
+}, {
+  color: "linear-gradient(135deg, rgba(244,67,54,1) 0%, rgba(233,30,99,1) 100%)",
+  name: "Tertiary Color",
+  slug: "gradientTertiary"
+}, {
+  color: "linear-gradient(135deg, rgba(3,169,244,1) 0%, rgba(0,150,136,1) 100%)",
+  name: "Accent Color",
+  slug: "gradientAccent"
+}, {
+  color: "linear-gradient(135deg, rgba(96,125,139,1) 0%, rgba(224,224,224,1) 100%)",
+  name: "Neutral Background",
+  slug: "gradientBackground"
+}, {
+  color: "linear-gradient(135deg, rgba(255,87,34,1) 0%, rgba(255,235,59,1) 100%)",
+  name: "Vibrant Glow",
+  slug: "gradientGradient"
+}, {
+  color: "linear-gradient(135deg, rgba(255,0,150,1) 0%, rgba(255,255,0,1) 100%)",
+  name: "Sunset Bliss",
+  slug: "gradientSunsetBliss"
+}, {
+  color: "linear-gradient(135deg, rgba(0,255,222,1) 0%, rgba(0,102,255,1) 100%)",
+  name: "Ocean Breeze",
+  slug: "gradientOceanBreeze"
+}, {
+  color: "linear-gradient(135deg, rgba(255,153,0,1) 0%, rgba(255,94,0,1) 100%)",
+  name: "Tangerine Dream",
+  slug: "gradientTangerineDream"
+}, {
+  color: "linear-gradient(135deg, rgba(102,51,153,1) 0%, rgba(255,102,204,1) 100%)",
+  name: "Lavender Kiss",
+  slug: "gradientLavenderKiss"
+}, {
+  color: "linear-gradient(220.55deg, #FFE70B 0%, #27B643 100%)",
+  name: "Minty Fresh",
+  slug: "gradientMintyFresh"
+}, {
+  color: "linear-gradient(180deg, #12C0DB, #EF04F6)",
+  name: "Halloween",
+  slug: "gradientHalloween"
+}];
+
+// Default typography configuration
+var defaultTypography = {
+  body: {
+    fontFamily: "Default",
+    lineHeight: {
+      Desktop: "",
+      Tablet: "",
+      Mobile: ""
+    },
+    lineHeightUnits: {
+      Desktop: "px",
+      Tablet: "px",
+      Mobile: "px"
+    },
+    fontSize: {
+      Desktop: "",
+      Tablet: "",
+      Mobile: ""
+    },
+    fontSizeUnit: {
+      Desktop: "px",
+      Tablet: "px",
+      Mobile: "px"
+    },
+    fontWeight: "Default",
+    fontStyle: "Default",
+    textTransform: "Default",
+    textDecoration: "Default",
+    letterSpacing: {
+      Desktop: "",
+      Tablet: "",
+      Mobile: ""
+    },
+    letterSpacingUnit: {
+      Desktop: "px",
+      Tablet: "px",
+      Mobile: "px"
+    }
+  },
+  link: {
+    fontFamily: "Default",
+    lineHeight: {
+      Desktop: "",
+      Tablet: "",
+      Mobile: ""
+    },
+    lineHeightUnits: {
+      Desktop: "px",
+      Tablet: "px",
+      Mobile: "px"
+    },
+    fontSize: {
+      Desktop: "",
+      Tablet: "",
+      Mobile: ""
+    },
+    fontSizeUnit: {
+      Desktop: "px",
+      Tablet: "px",
+      Mobile: "px"
+    },
+    fontWeight: "Default",
+    fontStyle: "Default",
+    textTransform: "Default",
+    textDecoration: "Default",
+    letterSpacing: {
+      Desktop: "",
+      Tablet: "",
+      Mobile: ""
+    },
+    letterSpacingUnit: {
+      Desktop: "px",
+      Tablet: "px",
+      Mobile: "px"
+    }
+  },
+  button: {
+    fontFamily: "Default",
+    lineHeight: {
+      Desktop: "",
+      Tablet: "",
+      Mobile: ""
+    },
+    lineHeightUnits: {
+      Desktop: "px",
+      Tablet: "px",
+      Mobile: "px"
+    },
+    fontSize: {
+      Desktop: "",
+      Tablet: "",
+      Mobile: ""
+    },
+    fontSizeUnit: {
+      Desktop: "px",
+      Tablet: "px",
+      Mobile: "px"
+    },
+    fontWeight: "Default",
+    fontStyle: "Default",
+    textTransform: "Default",
+    textDecoration: "Default",
+    letterSpacing: {
+      Desktop: "Default",
+      Tablet: "Default",
+      Mobile: "Default"
+    },
+    letterSpacingUnit: {
+      Desktop: "px",
+      Tablet: "px",
+      Mobile: "px"
+    }
+  },
+  captions: {
+    fontFamily: "Default",
+    lineHeight: {
+      Desktop: "",
+      Tablet: "",
+      Mobile: ""
+    },
+    lineHeightUnits: {
+      Desktop: "px",
+      Tablet: "px",
+      Mobile: "px"
+    },
+    fontSize: {
+      Desktop: "",
+      Tablet: "",
+      Mobile: ""
+    },
+    fontSizeUnit: {
+      Desktop: "px",
+      Tablet: "px",
+      Mobile: "px"
+    },
+    fontWeight: "Default",
+    fontStyle: "Default",
+    textTransform: "Default",
+    textDecoration: "Default",
+    letterSpacing: {
+      Desktop: "",
+      Tablet: "",
+      Mobile: ""
+    },
+    letterSpacingUnit: {
+      Desktop: "px",
+      Tablet: "px",
+      Mobile: "px"
+    }
+  },
+  heading: {
+    all: {
+      fontFamily: "Default",
+      lineHeight: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      lineHeightUnits: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      },
+      fontSize: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      fontSizeUnit: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      },
+      fontWeight: "Default",
+      fontStyle: "Default",
+      textTransform: "Default",
+      textDecoration: "Default",
+      letterSpacing: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      letterSpacingUnit: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      }
+    },
+    h1: {
+      fontFamily: "Default",
+      lineHeight: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      lineHeightUnits: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      },
+      fontSize: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      fontSizeUnit: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      },
+      fontWeight: "Default",
+      fontStyle: "Default",
+      textTransform: "Default",
+      textDecoration: "Default",
+      letterSpacing: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      letterSpacingUnit: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      }
+    },
+    h2: {
+      fontFamily: "Default",
+      lineHeight: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      lineHeightUnits: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      },
+      fontSize: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      fontSizeUnit: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      },
+      fontWeight: "Default",
+      fontStyle: "Default",
+      textTransform: "Default",
+      textDecoration: "Default",
+      letterSpacing: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      letterSpacingUnit: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      }
+    },
+    h3: {
+      fontFamily: "Default",
+      lineHeight: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      lineHeightUnits: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      },
+      fontSize: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      fontSizeUnit: {
+        Desktop: "px",
+        Tablet: "FsiGbTypography.jsx",
+        Mobile: "px"
+      },
+      fontWeight: "Default",
+      fontStyle: "Default",
+      textTransform: "Default",
+      textDecoration: "Default",
+      letterSpacing: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      letterSpacingUnit: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      }
+    },
+    h4: {
+      fontFamily: "Default",
+      lineHeight: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      lineHeightUnits: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      },
+      fontSize: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      fontSizeUnit: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      },
+      fontWeight: "Default",
+      fontStyle: "Default",
+      textTransform: "Default",
+      textDecoration: "Default",
+      letterSpacing: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      letterSpacingUnit: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      }
+    },
+    h5: {
+      fontFamily: "Default",
+      lineHeight: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      lineHeightUnits: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      },
+      fontSize: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      fontSizeUnit: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      },
+      fontWeight: "Default",
+      fontStyle: "Default",
+      textTransform: "Default",
+      textDecoration: "Default",
+      letterSpacing: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      letterSpacingUnit: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      }
+    },
+    h6: {
+      fontFamily: "Default",
+      lineHeight: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      lineHeightUnits: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      },
+      fontSize: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      fontSizeUnit: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      },
+      fontWeight: "Default",
+      fontStyle: "Default",
+      textTransform: "Default",
+      textDecoration: "Default",
+      letterSpacing: {
+        Desktop: "",
+        Tablet: "",
+        Mobile: ""
+      },
+      letterSpacingUnit: {
+        Desktop: "px",
+        Tablet: "px",
+        Mobile: "px"
+      }
+    }
+  }
+};
+function FsiGbTypography() {
+  var _globalColors$selecte2, _customColors$selecte2;
+  var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_10__.useDeviceType)();
+  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useDispatch)("core/editor"),
+    editPost = _useDispatch.editPost;
+  var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_11__.useAfterSave)();
+
+  // State management
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(defaultColors),
+    _useState2 = _slicedToArray(_useState, 2),
+    globalColors = _useState2[0],
+    setGlobalColors = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]),
+    _useState4 = _slicedToArray(_useState3, 2),
+    customColors = _useState4[0],
+    setCustomColors = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(gradientDefaults),
+    _useState6 = _slicedToArray(_useState5, 2),
+    gradientColors = _useState6[0],
+    setGradientColors = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]),
+    _useState8 = _slicedToArray(_useState7, 2),
+    customGradientColors = _useState8[0],
+    setCustomGradientColors = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(defaultTypography),
+    _useState0 = _slicedToArray(_useState9, 2),
+    typography = _useState0[0],
+    setTypography = _useState0[1];
+  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}),
+    _useState10 = _slicedToArray(_useState1, 2),
+    customTypography = _useState10[0],
+    setCustomTypography = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}),
+    _useState12 = _slicedToArray(_useState11, 2),
+    fontFamilies = _useState12[0],
+    setFontFamilies = _useState12[1];
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)("solid"),
+    _useState14 = _slicedToArray(_useState13, 2),
+    activeTab = _useState14[0],
+    setActiveTab = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    colorModalOpen = _useState16[0],
+    setColorModalOpen = _useState16[1];
+  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(""),
+    _useState18 = _slicedToArray(_useState17, 2),
+    colorName = _useState18[0],
+    setColorName = _useState18[1];
+  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
+    _useState20 = _slicedToArray(_useState19, 2),
+    isLoading = _useState20[0],
+    setIsLoading = _useState20[1];
+
+  // New state for color picker modal
+  var _useState21 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
+    _useState22 = _slicedToArray(_useState21, 2),
+    colorPickerModal = _useState22[0],
+    setColorPickerModal = _useState22[1];
+  var _useState23 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(null),
+    _useState24 = _slicedToArray(_useState23, 2),
+    selectedColorIndex = _useState24[0],
+    setSelectedColorIndex = _useState24[1];
+  var _useState25 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(null),
+    _useState26 = _slicedToArray(_useState25, 2),
+    selectedColorType = _useState26[0],
+    setSelectedColorType = _useState26[1];
+  var _useState27 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(null),
+    _useState28 = _slicedToArray(_useState27, 2),
+    anchorEl = _useState28[0],
+    setAnchorEl = _useState28[1];
+
+  // Memoized theme colors
+  var themeColors = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useMemo)(function () {
+    var _frontisBlocksAdmin;
+    return ((_frontisBlocksAdmin = frontisBlocksAdmin) === null || _frontisBlocksAdmin === void 0 ? void 0 : _frontisBlocksAdmin.theme_colors) || defaultColors;
+  }, []);
+
+  // Utility to extract font families
+  var getAllFontFamilies = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (fontsObject) {
+    var fontFamilies = [];
+    var _extractFonts = function extractFonts(obj) {
+      Object.values(obj).forEach(function (value) {
+        if (typeof value === "string") fontFamilies.push(value);else if (_typeof(value) === "object") _extractFonts(value);
+      });
+    };
+    _extractFonts(fontsObject);
+    var fontsString = fontFamilies.join(",");
+    (0,_helper__WEBPACK_IMPORTED_MODULE_11__.loadGoogleFont)(fontsString);
+  }, []);
+  var handleUpdateState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var localStorageKeys, _loop, _i, _localStorageKeys;
+    return _regeneratorRuntime().wrap(function _callee$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          console.log("Initial loaded");
+          setIsLoading(true);
+          localStorageKeys = [{
+            key: "fb_global_colors",
+            setter: setGlobalColors,
+            defaultValue: themeColors,
+            api: "fb_get_global_colors"
+          }, {
+            key: "fb_custom_colors",
+            setter: setCustomColors,
+            defaultValue: [],
+            api: "fb_get_custom_colors"
+          }, {
+            key: "fb_gradient_colors",
+            setter: setGradientColors,
+            defaultValue: gradientDefaults,
+            api: "fb_get_gradient_colors"
+          }, {
+            key: "fb_custom_gradient_colors",
+            setter: setCustomGradientColors,
+            defaultValue: [],
+            api: "fb_get_custom_gradient_colors"
+          }, {
+            key: "fb_typography",
+            setter: setTypography,
+            defaultValue: defaultTypography,
+            api: "fb_get_typography"
+          }, {
+            key: "fb_custom_typography",
+            setter: setCustomTypography,
+            defaultValue: [],
+            api: "fb_get_custom_typography"
+          }, {
+            key: "fb_fontfamilies",
+            setter: setFontFamilies,
+            defaultValue: [],
+            api: "fb_get_fontfamilies",
+            postProcess: getAllFontFamilies
+          }, {
+            key: "fb_globaltypo",
+            setter: null,
+            defaultValue: null,
+            api: "fb_get_globaltypo",
+            postProcess: function postProcess(data) {
+              return (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__["default"])(data, deviceType);
+            }
+          }];
+          _context2.prev = 3;
+          _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop() {
+            var _localStorageKeys$_i, key, setter, defaultValue, api, postProcess, localData, res, data;
+            return _regeneratorRuntime().wrap(function _loop$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  _localStorageKeys$_i = _localStorageKeys[_i], key = _localStorageKeys$_i.key, setter = _localStorageKeys$_i.setter, defaultValue = _localStorageKeys$_i.defaultValue, api = _localStorageKeys$_i.api, postProcess = _localStorageKeys$_i.postProcess;
+                  if (!(key === "fb_global_colors")) {
+                    _context.next = 7;
+                    break;
+                  }
+                  // Forcefully set fb_global_colors to themeColors
+                  setter(themeColors);
+                  localStorage.setItem(key, JSON.stringify(themeColors));
+                  if (postProcess) setTimeout(function () {
+                    return postProcess(themeColors);
+                  }, 1000);
+                  _context.next = 15;
+                  break;
+                case 7:
+                  localData = (0,_helper__WEBPACK_IMPORTED_MODULE_11__.getFbLocalStorage)(key);
+                  _context.next = 10;
+                  return (0,_fetch__WEBPACK_IMPORTED_MODULE_12__.getGlobalStyle)(api);
+                case 10:
+                  res = _context.sent;
+                  data = res.success ? res.data : defaultValue;
+                  if (setter) setter(data);
+                  localStorage.setItem(key, JSON.stringify(data));
+                  if (postProcess) setTimeout(function () {
+                    return postProcess(data);
+                  }, 1000);
+                case 15:
+                case "end":
+                  return _context.stop();
+              }
+            }, _loop);
+          });
+          _i = 0, _localStorageKeys = localStorageKeys;
+        case 6:
+          if (!(_i < _localStorageKeys.length)) {
+            _context2.next = 11;
+            break;
+          }
+          return _context2.delegateYield(_loop(), "t0", 8);
+        case 8:
+          _i++;
+          _context2.next = 6;
+          break;
+        case 11:
+          _context2.next = 16;
+          break;
+        case 13:
+          _context2.prev = 13;
+          _context2.t1 = _context2["catch"](3);
+          console.error("Error fetching global settings:", _context2.t1);
+        case 16:
+          _context2.prev = 16;
+          setIsLoading(false);
+          return _context2.finish(16);
+        case 19:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee, null, [[3, 13, 16, 19]]);
+  })), [deviceType, themeColors, getAllFontFamilies]);
+
+  // Initialize on mount and device type change
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
+    handleUpdateState();
+  }, [handleUpdateState]);
+
+  // Generate color variables
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
+    var mergedColors = [].concat(_toConsumableArray(customColors), _toConsumableArray(globalColors), _toConsumableArray(customGradientColors), _toConsumableArray(gradientColors));
+    setTimeout(function () {
+      return (0,_components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_14__["default"])(mergedColors, deviceType);
+    }, 1000);
+  }, [globalColors, customColors, customGradientColors, gradientColors, deviceType]);
+
+  // Save settings after post save
+  var handleUpdateSettings = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var settings, _i2, _settings, _settings$_i, key, data, setter, storeKey, response;
+    return _regeneratorRuntime().wrap(function _callee2$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          if (!(!isAfterSave || !isLoading)) {
+            _context3.next = 2;
+            break;
+          }
+          return _context3.abrupt("return");
+        case 2:
+          settings = [{
+            key: "fb_update_global_colors",
+            data: globalColors,
+            setter: setGlobalColors,
+            storeKey: "fb_global_colors"
+          }, {
+            key: "fb_update_custom_colors",
+            data: customColors,
+            setter: setCustomColors,
+            storeKey: "fb_custom_colors"
+          }, {
+            key: "fb_update_gradient_colors",
+            data: gradientColors,
+            setter: setGradientColors,
+            storeKey: "fb_gradient_colors"
+          }, {
+            key: "fb_update_custom_gradient_colors",
+            data: customGradientColors,
+            setter: setCustomGradientColors,
+            storeKey: "fb_custom_gradient_colors"
+          }];
+          _context3.prev = 3;
+          _i2 = 0, _settings = settings;
+        case 5:
+          if (!(_i2 < _settings.length)) {
+            _context3.next = 14;
+            break;
+          }
+          _settings$_i = _settings[_i2], key = _settings$_i.key, data = _settings$_i.data, setter = _settings$_i.setter, storeKey = _settings$_i.storeKey;
+          _context3.next = 9;
+          return (0,_fetch__WEBPACK_IMPORTED_MODULE_12__.updateGlobalStyle)(data, key);
+        case 9:
+          response = _context3.sent;
+          if (response.success) {
+            setter(response.data.data);
+            localStorage.setItem(storeKey, JSON.stringify(response.data.data));
+          }
+        case 11:
+          _i2++;
+          _context3.next = 5;
+          break;
+        case 14:
+          _context3.next = 19;
+          break;
+        case 16:
+          _context3.prev = 16;
+          _context3.t0 = _context3["catch"](3);
+          console.error("Error updating settings:", _context3.t0);
+        case 19:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee2, null, [[3, 16]]);
+  })), [isAfterSave, isLoading, globalColors, customColors, gradientColors, customGradientColors]);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
+    handleUpdateSettings();
+  }, [handleUpdateSettings]);
+
+  // Color panel array generator
+  var colorPanelArray = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (colors, setColor) {
+    var defaults = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+    if (!Array.isArray(colors)) return [];
+    return colors.map(function (colorObj, index) {
+      return {
+        label: colorObj.name || "Color",
+        value: colorObj.color,
+        onChange: function onChange(newColor) {
+          var _defaults$index;
+          return setColor(index, newColor || ((_defaults$index = defaults[index]) === null || _defaults$index === void 0 ? void 0 : _defaults$index.color) || "#000");
+        }
+      };
+    });
+  }, []);
+
+  // Color update handlers
+  var setGlobalColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index, color) {
+    setGlobalColors(function (prev) {
+      var colors = _toConsumableArray(prev);
+      colors[index].color = color;
+      return colors;
+    });
+    setIsLoading(true);
+  }, []);
+  var setGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index, color) {
+    setGradientColors(function (prev) {
+      var colors = _toConsumableArray(prev);
+      colors[index].color = color;
+      return colors;
+    });
+    setIsLoading(true);
+  }, []);
+  var setCustomGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index, color) {
+    setCustomGradientColors(function (prev) {
+      var colors = _toConsumableArray(prev);
+      colors[index].color = color;
+      return colors;
+    });
+    setIsLoading(true);
+  }, []);
+  var setCustomColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index, color) {
+    setCustomColors(function (prev) {
+      var colors = _toConsumableArray(prev);
+      colors[index].color = color;
+      return colors;
+    });
+    setIsLoading(true);
+  }, []);
+
+  // Custom color and gradient handlers
+  var addCustomColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function () {
+    setColorModalOpen(true);
+    setIsLoading(true);
+  }, []);
+  var deleteCustomGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index) {
+    setCustomGradientColors(function (prev) {
+      var colors = _toConsumableArray(prev);
+      colors.splice(index, 1);
+      return colors;
+    });
+    setIsLoading(true);
+  }, []);
+  var addCustomGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function () {
+    setCustomGradientColors(function (prev) {
+      return [].concat(_toConsumableArray(prev), [{
+        color: "#000000",
+        name: "Gradient Color ".concat(prev.length + 1),
+        slug: "custom-gradient-color-".concat(prev.length + 1),
+        "var": "--fb-custom-gradient-color-".concat(prev.length + 1)
+      }]);
+    });
+    setIsLoading(true);
+  }, []);
+
+  // Handle modal close and new color addition
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
+    if (!colorModalOpen && colorName) {
+      setCustomColors(function (prev) {
+        return [].concat(_toConsumableArray(prev), [{
+          color: "#000000",
+          name: colorName || "Custom Color ".concat(prev.length + 1),
+          slug: colorName ? colorName.replace(/\s+/g, "-").toLowerCase() : "custom-color-".concat(prev.length + 1)
+        }]);
+      });
+      setColorName("");
+    }
+  }, [colorModalOpen, colorName]);
+
+  // Handle color click to open picker modal
+  var handleColorClick = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index, type) {
+    setSelectedColorIndex(index);
+    setSelectedColorType(type);
+    setAnchorEl(event.currentTarget);
+    setColorPickerModal(true);
+  }, []);
+
+  // Handle color change from picker modal
+  var handleColorChange = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (newColor) {
+    if (selectedColorType === 'global') {
+      setGlobalColor(selectedColorIndex, newColor);
+    } else if (selectedColorType === 'custom') {
+      setCustomColor(selectedColorIndex, newColor);
+    }
+  }, [selectedColorIndex, selectedColorType, setGlobalColor, setCustomColor]);
+
+  // Get current selected color
+  var getCurrentColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function () {
+    if (selectedColorType === 'global' && selectedColorIndex !== null) {
+      var _globalColors$selecte;
+      return ((_globalColors$selecte = globalColors[selectedColorIndex]) === null || _globalColors$selecte === void 0 ? void 0 : _globalColors$selecte.color) || '#000000';
+    } else if (selectedColorType === 'custom' && selectedColorIndex !== null) {
+      var _customColors$selecte;
+      return ((_customColors$selecte = customColors[selectedColorIndex]) === null || _customColors$selecte === void 0 ? void 0 : _customColors$selecte.color) || '#000000';
+    }
+    return '#000000';
+  }, [selectedColorIndex, selectedColorType, globalColors, customColors]);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "fb-panel-control"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-color-options-vertical"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-color-section"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "fb-section-title"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Select Color", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
+    className: "fb-color-grid",
+    style: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '12px',
+      marginBottom: '24px',
+      padding: '12px',
+      border: '1px solid #E1E3E8',
+      borderRadius: '4px'
+    }
+  }, globalColors.map(function (colorObj, index) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: "global-".concat(index),
+      className: "fb-color-item",
+      style: {
+        width: '32px',
+        height: '32px',
+        borderRadius: '50%',
+        backgroundColor: colorObj.color,
+        border: '1px solid #ddd',
+        cursor: 'pointer'
+      },
+      onClick: function onClick(e) {
+        return handleColorClick(index, 'global', e);
+      },
+      title: colorObj.name
+    });
+  }), customColors.map(function (colorObj, index) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: "custom-".concat(index),
+      className: "fb-color-item",
+      style: {
+        width: '32px',
+        height: '32px',
+        borderRadius: '50%',
+        backgroundColor: colorObj.color,
+        border: '1px solid #ddd',
+        cursor: 'pointer',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+      },
+      onClick: function onClick() {
+        return handleColorClick(index, 'custom');
+      },
+      title: colorObj.name
+    });
+  })))), /*#__PURE__*/React.createElement(_components_TypographySettings__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    typography: typography,
+    isAfterSave: isAfterSave
+  })), colorPickerModal && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Popover, {
+    className: "fb-color-picker-modal",
+    onRequestClose: function onRequestClose() {
+      return setColorPickerModal(false);
+    },
+    placement: "right-start",
+    focusOnMount: false
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-color-setting-icon-popup",
+    style: {
+      width: '300px',
+      padding: '12px'
+    }
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
+    label: selectedColorType === 'global' ? (_globalColors$selecte2 = globalColors[selectedColorIndex]) === null || _globalColors$selecte2 === void 0 ? void 0 : _globalColors$selecte2.name : (_customColors$selecte2 = customColors[selectedColorIndex]) === null || _customColors$selecte2 === void 0 ? void 0 : _customColors$selecte2.name
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPalette, {
+    colors: selectedColorType === 'global' ? globalColors : customColors,
+    value: getCurrentColor(),
+    onChange: handleColorChange,
+    disableCustomColors: false
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "fb-modal-actions",
+    style: {
+      marginTop: '20px',
+      textAlign: 'right'
+    }
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+    variant: "primary",
+    onClick: function onClick() {
+      return setColorPickerModal(false);
+    }
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Done", "frontis-blocks"))))));
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FsiGbTypography);
+
+/***/ }),
+
+/***/ "./admin/template-library/global-typo/helper.js":
+/*!******************************************************!*\
+  !*** ./admin/template-library/global-typo/helper.js ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -5622,2119 +3980,15 @@ var toastSuccess = function toastSuccess(msg) {
 
 /***/ }),
 
-/***/ "./admin/template-library/data.json":
-/*!******************************************!*\
-  !*** ./admin/template-library/data.json ***!
-  \******************************************/
-/***/ ((module) => {
-
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"pattern1","title":"Pattern 1","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Pattern 1 content here"},{"id":"pattern2","title":"Pattern 2","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Pattern 2 content here"},{"id":"pattern3","title":"Pattern 3","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Pattern 3 content here"},{"id":"pattern4","title":"Pattern 4","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Pattern 4 content here"},{"id":"pattern5","title":"Pattern 5","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Pattern 5 content here"},{"id":"pattern6","title":"Pattern 6","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Pattern 6 content here"},{"id":"pattern15","title":"Pattern 15","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Pattern 15 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[{"id":"pattern1","title":"Pattern 1","image":"pattern1.jpg","content":"Pattern 1 content here"}]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"page1","title":"Page 1","image":"Page.jpg","content":"Page 1 content here"},{"id":"page2","title":"Page 2","image":"Page.jpg","content":"Page 2 content here"},{"id":"page3","title":"Pattern 3","image":"Page.jpg","content":"Page 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","count":30,"items":[{"id":"item1","title":"Item 1","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/temp-1.svg","content":"Site 1 content here"},{"id":"item2","title":"Item 2","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-2.webp","content":"Site 2 content here"},{"id":"item3","title":"Item 3","image":"http://localhost/test-wp/wp-content/plugins/frontis-blocks/assets/images/blog-3.webp","content":"Site 3 content here"}]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","count":30,"items":[]},{"id":"layout","name":"Layout","count":30,"items":[]},{"id":"form","name":"Form","count":30,"items":[]},{"id":"social","name":"Social","count":30,"items":[]}]},"template-library":{"name":"Template Library","categories":[{"id":"all","name":"All","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","count":14,"items":[]},{"id":"creative","name":"Creative","count":5,"items":[]}]}}}');
-
-/***/ }),
-
-/***/ "./admin/template-library/fullSiteTypography.js":
-/*!******************************************************!*\
-  !*** ./admin/template-library/fullSiteTypography.js ***!
-  \******************************************************/
+/***/ "./admin/template-library/global-typo/scss/global-typo.scss":
+/*!******************************************************************!*\
+  !*** ./admin/template-library/global-typo/scss/global-typo.scss ***!
+  \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _sidebar_components_SidebarTypography__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../sidebar/components/SidebarTypography */ "./admin/sidebar/components/SidebarTypography.js");
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
-function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
-function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+// extracted by mini-css-extract-plugin
 
-
-var TypographyPanel = function TypographyPanel() {
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('system'),
-    _useState2 = _slicedToArray(_useState, 2),
-    expandedSection = _useState2[0],
-    setExpandedSection = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    _useState4 = _slicedToArray(_useState3, 2),
-    isTypographyOpen = _useState4[0],
-    setIsTypographyOpen = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    _useState6 = _slicedToArray(_useState5, 2),
-    selectedItem = _useState6[0],
-    setSelectedItem = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    _useState8 = _slicedToArray(_useState7, 2),
-    activeTypographyItem = _useState8[0],
-    setActiveTypographyItem = _useState8[1];
-
-  // Default typography state values
-  // Create separate typography states for each element
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
-      Text: {
-        fontFamily: '',
-        fontSize: '',
-        fontSizeUnit: 'px',
-        fontSizeUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }, {
-          label: 'rem',
-          value: 'rem'
-        }],
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: '',
-        letterSpacingUnit: 'px',
-        letterSpacingUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        lineHeight: '',
-        lineHeightUnit: 'px',
-        lineHeightUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        deviceType: 'desktop'
-      },
-      Link: {
-        fontFamily: '',
-        fontSize: '',
-        fontSizeUnit: 'px',
-        fontSizeUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }, {
-          label: 'rem',
-          value: 'rem'
-        }],
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: '',
-        letterSpacingUnit: 'px',
-        letterSpacingUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        lineHeight: '',
-        lineHeightUnit: 'px',
-        lineHeightUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        deviceType: 'desktop'
-      },
-      Button: {
-        fontFamily: '',
-        fontSize: '',
-        fontSizeUnit: 'px',
-        fontSizeUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }, {
-          label: 'rem',
-          value: 'rem'
-        }],
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: '',
-        letterSpacingUnit: 'px',
-        letterSpacingUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        lineHeight: '',
-        lineHeightUnit: 'px',
-        lineHeightUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        deviceType: 'desktop'
-      },
-      H1: {
-        fontFamily: '',
-        fontSize: '',
-        fontSizeUnit: 'px',
-        fontSizeUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }, {
-          label: 'rem',
-          value: 'rem'
-        }],
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: '',
-        letterSpacingUnit: 'px',
-        letterSpacingUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        lineHeight: '',
-        lineHeightUnit: 'px',
-        lineHeightUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        deviceType: 'desktop'
-      },
-      H2: {
-        fontFamily: '',
-        fontSize: '',
-        fontSizeUnit: 'px',
-        fontSizeUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }, {
-          label: 'rem',
-          value: 'rem'
-        }],
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: '',
-        letterSpacingUnit: 'px',
-        letterSpacingUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        lineHeight: '',
-        lineHeightUnit: 'px',
-        lineHeightUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        deviceType: 'desktop'
-      },
-      H3: {
-        fontFamily: '',
-        fontSize: '',
-        fontSizeUnit: 'px',
-        fontSizeUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }, {
-          label: 'rem',
-          value: 'rem'
-        }],
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: '',
-        letterSpacingUnit: 'px',
-        letterSpacingUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        lineHeight: '',
-        lineHeightUnit: 'px',
-        lineHeightUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        deviceType: 'desktop'
-      },
-      H4: {
-        fontFamily: '',
-        fontSize: '',
-        fontSizeUnit: 'px',
-        fontSizeUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }, {
-          label: 'rem',
-          value: 'rem'
-        }],
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: '',
-        letterSpacingUnit: 'px',
-        letterSpacingUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        lineHeight: '',
-        lineHeightUnit: 'px',
-        lineHeightUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        deviceType: 'desktop'
-      },
-      H5: {
-        fontFamily: '',
-        fontSize: '',
-        fontSizeUnit: 'px',
-        fontSizeUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }, {
-          label: 'rem',
-          value: 'rem'
-        }],
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: '',
-        letterSpacingUnit: 'px',
-        letterSpacingUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        lineHeight: '',
-        lineHeightUnit: 'px',
-        lineHeightUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        deviceType: 'desktop'
-      },
-      H6: {
-        fontFamily: '',
-        fontSize: '',
-        fontSizeUnit: 'px',
-        fontSizeUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }, {
-          label: 'rem',
-          value: 'rem'
-        }],
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: '',
-        letterSpacingUnit: 'px',
-        letterSpacingUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        lineHeight: '',
-        lineHeightUnit: 'px',
-        lineHeightUnits: [{
-          label: 'px',
-          value: 'px'
-        }, {
-          label: 'em',
-          value: 'em'
-        }],
-        deviceType: 'desktop'
-      }
-    }),
-    _useState0 = _slicedToArray(_useState9, 2),
-    typographyStates = _useState0[0],
-    setTypographyStates = _useState0[1];
-  var handleSectionClick = function handleSectionClick(section) {
-    setExpandedSection(expandedSection === section ? null : section);
-  };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var loadSavedSettings = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response, iframe;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return wp.apiFetch({
-                path: '/wp/v2/settings'
-              });
-            case 3:
-              response = _context.sent;
-              iframe = document.querySelector('iframe.fb-preview-frame');
-              ['Text', 'Link', 'Button', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'].forEach(function (elementType) {
-                var savedSettings = response["fb_typography_".concat(elementType.toLowerCase())];
-                if (savedSettings) {
-                  var parsedSettings = JSON.parse(savedSettings);
-                  applyTypographyStyles(elementType, parsedSettings);
-                  injectTypographyStylesIntoIframe(iframe, elementType, parsedSettings);
-                }
-              });
-              _context.next = 11;
-              break;
-            case 8:
-              _context.prev = 8;
-              _context.t0 = _context["catch"](0);
-              console.error('Error loading typography settings:', _context.t0);
-            case 11:
-            case "end":
-              return _context.stop();
-          }
-        }, _callee, null, [[0, 8]]);
-      }));
-      return function loadSavedSettings() {
-        return _ref.apply(this, arguments);
-      };
-    }();
-    loadSavedSettings();
-  }, []);
-  var generateTypographyCSS = function generateTypographyCSS(element, styles) {
-    return "\n      ".concat(element, " {\n        ").concat(styles.fontFamily ? "font-family: ".concat(styles.fontFamily, ";") : '', "\n        ").concat(styles.fontSize ? "font-size: ".concat(styles.fontSize).concat(styles.fontSizeUnit, ";") : '', "\n        ").concat(styles.fontWeight ? "font-weight: ".concat(styles.fontWeight, ";") : '', "\n        ").concat(styles.fontStyle ? "font-style: ".concat(styles.fontStyle, ";") : '', "\n        ").concat(styles.textTransform ? "text-transform: ".concat(styles.textTransform, ";") : '', "\n        ").concat(styles.textDecoration ? "text-decoration: ".concat(styles.textDecoration, ";") : '', "\n        ").concat(styles.letterSpacing ? "letter-spacing: ".concat(styles.letterSpacing).concat(styles.letterSpacingUnit, ";") : '', "\n        ").concat(styles.lineHeight ? "line-height: ".concat(styles.lineHeight).concat(styles.lineHeightUnit, ";") : '', "\n      }\n    ");
-  };
-  var applyTypographyStyles = function applyTypographyStyles(elementType, styles) {
-    var selector;
-
-    // Define selectors for different element types
-    switch (elementType) {
-      case 'Text':
-        selector = 'body';
-        break;
-      case 'Link':
-        selector = 'a';
-        break;
-      case 'Button':
-        selector = 'button, .button';
-        break;
-      case 'H1':
-        selector = 'h1';
-        break;
-      case 'H2':
-        selector = 'h2';
-        break;
-      case 'H3':
-        selector = 'h3';
-        break;
-      case 'H4':
-        selector = 'h4';
-        break;
-      case 'H5':
-        selector = 'h5';
-        break;
-      case 'H6':
-        selector = 'h6';
-        break;
-      default:
-        selector = elementType;
-    }
-    var css = generateTypographyCSS(selector, styles);
-
-    // Create or update style element
-    var styleElement = document.getElementById("fb-typography-".concat(elementType));
-    if (!styleElement) {
-      styleElement = document.createElement('style');
-      styleElement.id = "fb-typography-".concat(elementType);
-      document.head.appendChild(styleElement);
-    }
-    styleElement.textContent = css;
-  };
-  var handleEditClick = function handleEditClick(item) {
-    // If the same item is clicked again, close the panel
-    if (activeTypographyItem === item && isTypographyOpen) {
-      setIsTypographyOpen(false);
-      setActiveTypographyItem(null);
-    } else {
-      // Open panel for the new item
-      setIsTypographyOpen(true);
-      setActiveTypographyItem(item);
-    }
-  };
-  var handleTypographyChange = function handleTypographyChange(property, value) {
-    if (!activeTypographyItem) return;
-    var updatedStyles = _objectSpread(_objectSpread({}, typographyStates[activeTypographyItem]), {}, _defineProperty({}, property, value));
-    setTypographyStates(function (prev) {
-      return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, activeTypographyItem, updatedStyles));
-    });
-    var iframe = document.querySelector('iframe.fb-preview-frame');
-    injectTypographyStylesIntoIframe(iframe, activeTypographyItem, updatedStyles);
-    saveTypographySettings(activeTypographyItem, updatedStyles);
-  };
-  var saveTypographySettings = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(elementType, settings) {
-      var response;
-      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-        while (1) switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.prev = 0;
-            _context2.next = 3;
-            return wp.apiFetch({
-              path: '/wp/v2/settings',
-              method: 'POST',
-              data: _defineProperty({}, "fb_typography_".concat(elementType.toLowerCase()), JSON.stringify(settings))
-            });
-          case 3:
-            response = _context2.sent;
-            _context2.next = 6;
-            return wp.apiFetch({
-              path: '/wp/v2/settings',
-              method: 'POST',
-              data: {
-                fb_global_styles: true // This will trigger regeneration of styles
-              }
-            });
-          case 6:
-            console.log('Typography settings saved:', response);
-            _context2.next = 12;
-            break;
-          case 9:
-            _context2.prev = 9;
-            _context2.t0 = _context2["catch"](0);
-            console.error('Error saving typography settings:', _context2.t0);
-          case 12:
-          case "end":
-            return _context2.stop();
-        }
-      }, _callee2, null, [[0, 9]]);
-    }));
-    return function saveTypographySettings(_x, _x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-  var injectTypographyStylesIntoIframe = function injectTypographyStylesIntoIframe(iframe, elementType, styles) {
-    if (!iframe || !iframe.contentDocument) return;
-    var iframeDocument = iframe.contentDocument;
-
-    // Map element type to CSS selectors
-    var selectorMap = {
-      Text: 'body',
-      Link: 'a',
-      Button: 'button, .button',
-      H1: 'h1',
-      H2: 'h2',
-      H3: 'h3',
-      H4: 'h4',
-      H5: 'h5',
-      H6: 'h6'
-    };
-    var selector = selectorMap[elementType] || elementType;
-
-    // Helper function to extract value based on device type
-    var getDeviceValue = function getDeviceValue(obj) {
-      var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-      return obj && obj[styles.deviceType] ? "".concat(obj[styles.deviceType]).concat(unit) : '';
-    };
-
-    // Generate CSS
-    var css = "\n      ".concat(selector, " {\n        ").concat(styles.fontFamily ? "font-family: ".concat(styles.fontFamily, ";") : '', "\n        ").concat(styles.fontSize ? "font-size: ".concat(getDeviceValue(styles.fontSize, styles.fontSizeUnit), ";") : '', "\n        ").concat(styles.fontWeight ? "font-weight: ".concat(styles.fontWeight, ";") : '', "\n        ").concat(styles.fontStyle ? "font-style: ".concat(styles.fontStyle, ";") : '', "\n        ").concat(styles.textTransform ? "text-transform: ".concat(styles.textTransform, ";") : '', "\n        ").concat(styles.textDecoration ? "text-decoration: ".concat(styles.textDecoration, ";") : '', "\n        ").concat(styles.letterSpacing ? "letter-spacing: ".concat(getDeviceValue(styles.letterSpacing, styles.letterSpacingUnit), ";") : '', "\n        ").concat(styles.lineHeight ? "line-height: ".concat(getDeviceValue(styles.lineHeight, styles.lineHeightUnit), ";") : '', "\n      }\n    ");
-
-    // Inject or update the style element inside the iframe
-    var styleElement = iframeDocument.getElementById("fb-typography-".concat(elementType));
-    if (!styleElement) {
-      styleElement = iframeDocument.createElement('style');
-      styleElement.id = "fb-typography-".concat(elementType);
-      iframeDocument.head.appendChild(styleElement);
-    }
-    styleElement.textContent = css;
-  };
-  var headings = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'];
-  return /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-typography-panel"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-typography-header"
-  }, /*#__PURE__*/React.createElement("h3", null, "Typography")), /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-panel-section"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "fb-fsi-panel-header",
-    onClick: function onClick() {
-      return handleSectionClick('system');
-    }
-  }, /*#__PURE__*/React.createElement("span", null, "System Font"), /*#__PURE__*/React.createElement("span", {
-    className: "dashicons ".concat(expandedSection === 'system' ? 'dashicons-arrow-up-alt2' : 'dashicons-arrow-down-alt2')
-  })), expandedSection === 'system' && /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-panel-content"
-  }, ['Text', 'Link', 'Button'].map(function (item) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: item,
-      className: "fb-font-item"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-font-preview"
-    }, "Ag"), /*#__PURE__*/React.createElement("div", {
-      className: "fb-font-details"
-    }, /*#__PURE__*/React.createElement("span", null, item), /*#__PURE__*/React.createElement("button", {
-      className: "fb-edit-button dashicons dashicons-edit",
-      onClick: function onClick() {
-        return handleEditClick(item);
-      }
-    })));
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-panel-section"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "fb-fsi-panel-header",
-    onClick: function onClick() {
-      return handleSectionClick('headings');
-    }
-  }, /*#__PURE__*/React.createElement("span", null, "Headings"), /*#__PURE__*/React.createElement("span", {
-    className: "dashicons ".concat(expandedSection === 'headings' ? 'dashicons-arrow-up-alt2' : 'dashicons-arrow-down-alt2')
-  })), expandedSection === 'headings' && /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-panel-content"
-  }, headings.map(function (heading) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: heading,
-      className: "fb-font-item"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-font-preview"
-    }, "Ag"), /*#__PURE__*/React.createElement("div", {
-      className: "fb-font-details"
-    }, /*#__PURE__*/React.createElement("span", null, heading), /*#__PURE__*/React.createElement("button", {
-      className: "fb-edit-button dashicons dashicons-edit",
-      onClick: function onClick() {
-        return handleEditClick(heading);
-      }
-    })));
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-panel-section"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "fb-fsi-panel-header",
-    onClick: function onClick() {
-      return handleSectionClick('custom');
-    }
-  }, /*#__PURE__*/React.createElement("span", null, "Custom"), /*#__PURE__*/React.createElement("span", {
-    className: "dashicons ".concat(expandedSection === 'custom' ? 'dashicons-arrow-up-alt2' : 'dashicons-arrow-down-alt2')
-  })), expandedSection === 'custom' && /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-panel-content"
-  })), isTypographyOpen && activeTypographyItem && /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-typography-popup"
-  }, /*#__PURE__*/React.createElement(_sidebar_components_SidebarTypography__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, typographyStates[activeTypographyItem], {
-    heading: activeTypographyItem,
-    onClose: function onClose() {
-      setIsTypographyOpen(false);
-      setActiveTypographyItem(null);
-    },
-    fontFamily: typographyStates[activeTypographyItem].fontFamily,
-    onChangeFontFamily: function onChangeFontFamily(value) {
-      return handleTypographyChange('fontFamily', value);
-    },
-    fontSize: typographyStates[activeTypographyItem].fontSize,
-    onChangeFontSize: function onChangeFontSize(value) {
-      return handleTypographyChange('fontSize', value);
-    },
-    fontSizeUnits: typographyStates[activeTypographyItem].fontSizeUnits,
-    onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
-      return handleTypographyChange('fontSizeUnit', value);
-    },
-    fontWeight: typographyStates[activeTypographyItem].fontWeight,
-    onChangeFontWeight: function onChangeFontWeight(value) {
-      return handleTypographyChange('fontWeight', value);
-    },
-    fontStyle: typographyStates[activeTypographyItem].fontStyle,
-    onChangeFontStyle: function onChangeFontStyle(value) {
-      return handleTypographyChange('fontStyle', value);
-    },
-    textTransform: typographyStates[activeTypographyItem].textTransform,
-    onChangeTextTransform: function onChangeTextTransform(value) {
-      return handleTypographyChange('textTransform', value);
-    },
-    textDecoration: typographyStates[activeTypographyItem].textDecoration,
-    onChangeTextDecoration: function onChangeTextDecoration(value) {
-      return handleTypographyChange('textDecoration', value);
-    },
-    letterSpacing: typographyStates[activeTypographyItem].letterSpacing,
-    onChangeLetterSpacing: function onChangeLetterSpacing(value) {
-      return handleTypographyChange('letterSpacing', value);
-    },
-    letterSpacingUnits: typographyStates[activeTypographyItem].letterSpacingUnits,
-    onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
-      return handleTypographyChange('letterSpacingUnit', value);
-    },
-    lineHeight: typographyStates[activeTypographyItem].lineHeight,
-    onChangeLineHeight: function onChangeLineHeight(value) {
-      return handleTypographyChange('lineHeight', value);
-    },
-    lineHeightUnits: typographyStates[activeTypographyItem].lineHeightUnits,
-    onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
-      return handleTypographyChange('lineHeightUnit', value);
-    },
-    deviceType: typographyStates[activeTypographyItem].deviceType
-  }))));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TypographyPanel);
-
-/***/ }),
-
-/***/ "./admin/template-library/fullsiteimport.js":
-/*!**************************************************!*\
-  !*** ./admin/template-library/fullsiteimport.js ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _fullSiteTypography__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fullSiteTypography */ "./admin/template-library/fullSiteTypography.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _sitePreview__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./sitePreview */ "./admin/template-library/sitePreview.js");
-/* harmony import */ var _sidebar_components_TypographySettings__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../sidebar/components/TypographySettings */ "./admin/sidebar/components/TypographySettings.js");
-/* harmony import */ var _full_site_import_sidebar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../full-site-import/sidebar */ "./admin/full-site-import/sidebar.js");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _full_site_import_components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../full-site-import/components/ColorPalletWrapper */ "./admin/full-site-import/components/ColorPalletWrapper.js");
-/* harmony import */ var _full_site_import_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../full-site-import/components/GradientColorPallet */ "./admin/full-site-import/components/GradientColorPallet.js");
-/* harmony import */ var _full_site_import_components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../full-site-import/components/CustomGradientPallet */ "./admin/full-site-import/components/CustomGradientPallet.js");
-/* harmony import */ var _full_site_import_components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../full-site-import/components/GenerateColorRoot */ "./admin/full-site-import/components/GenerateColorRoot.js");
-/* harmony import */ var _Config_displayType__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @Config/displayType */ "./src/config/displayType.js");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _full_site_import_helper__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../full-site-import/helper */ "./admin/full-site-import/helper.js");
-/* harmony import */ var _full_site_import_fetch__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../full-site-import/fetch */ "./admin/full-site-import/fetch.js");
-/* harmony import */ var _full_site_import_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../full-site-import/components/GenerateRootCss */ "./admin/full-site-import/components/GenerateRootCss.js");
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
-function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
-function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var defaultsColors = [{
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Primary Color", "frontis-blocks"),
-  "color": '#399CFF',
-  "slug": 'primary-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Secondary Color", "frontis-blocks"),
-  "color": '#f00000',
-  "slug": 'secondary-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Tertiary Color", "frontis-blocks"),
-  "color": '#F72585',
-  "slug": 'tertiary-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Accent Color", "frontis-blocks"),
-  "color": "#7209B7",
-  "slug": 'accent-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Text Color", "frontis-blocks"),
-  "color": '#3A0CA3',
-  "slug": 'text-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Link Color", "frontis-blocks"),
-  "color": '#4361EE',
-  "slug": 'link-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Link Hover Color", "frontis-blocks"),
-  "color": '#4CC9F0',
-  "slug": 'link-hover-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("White Color", "frontis-blocks"),
-  "color": '#FFFFFF',
-  "slug": 'white-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Black Color", "frontis-blocks"),
-  "color": '#000000',
-  "slug": 'black-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Gray Color", "frontis-blocks"),
-  "color": '#808080',
-  "slug": 'gray-color'
-}, {
-  "name": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Gray Color2", "frontis-blocks"),
-  "color": '#808080',
-  "slug": 'gray-color2'
-}];
-var gradientDefaults = [{
-  "color": "linear-gradient(135deg, rgba(33,150,243,1) 0%, rgba(156,39,176,1) 100%)",
-  "name": "Primary Color",
-  "slug": "gradientPrimary"
-}, {
-  "color": "linear-gradient(135deg, rgba(0,200,83,1) 0%, rgba(255,193,7,1) 100%)",
-  "name": "Secondary Color",
-  "slug": "gradientSecondary"
-}, {
-  "color": "linear-gradient(135deg, rgba(244,67,54,1) 0%, rgba(233,30,99,1) 100%)",
-  "name": "Tertiary Color",
-  "slug": "gradientTertiary"
-}, {
-  "color": "linear-gradient(135deg, rgba(3,169,244,1) 0%, rgba(0,150,136,1) 100%)",
-  "name": "Accent Color",
-  "slug": "gradientAccent"
-}, {
-  "color": "linear-gradient(135deg, rgba(96,125,139,1) 0%, rgba(224,224,224,1) 100%)",
-  "name": "Neutral Background",
-  "slug": "gradientBackground"
-}, {
-  "color": "linear-gradient(135deg, rgba(255,87,34,1) 0%, rgba(255,235,59,1) 100%)",
-  "name": "Vibrant Glow",
-  "slug": "gradientGradient"
-}, {
-  "color": "linear-gradient(135deg, rgba(255,0,150,1) 0%, rgba(255,255,0,1) 100%)",
-  "name": "Sunset Bliss",
-  "slug": "gradientSunsetBliss"
-}, {
-  "color": "linear-gradient(135deg, rgba(0,255,222,1) 0%, rgba(0,102,255,1) 100%)",
-  "name": "Ocean Breeze",
-  "slug": "gradientOceanBreeze"
-}, {
-  "color": "linear-gradient(135deg, rgba(255,153,0,1) 0%, rgba(255,94,0,1) 100%)",
-  "name": "Tangerine Dream",
-  "slug": "gradientTangerineDream"
-}, {
-  "color": "linear-gradient(135deg, rgba(102,51,153,1) 0%, rgba(255,102,204,1) 100%)",
-  "name": "Lavender Kiss",
-  "slug": "gradientLavenderKiss"
-}, {
-  "color": "linear-gradient(220.55deg, #FFE70B 0%, #27B643 100%)",
-  "name": "Minty Fresh",
-  "slug": "gradientMintyFresh"
-}, {
-  "color": "linear-gradient(180deg,#12C0DB, #EF04F6)",
-  "name": "Halloween",
-  "slug": "gradientHalloween"
-}];
-var SiteImportModal = function SiteImportModal(_ref) {
-  var _frontisBlocksAdmin;
-  var isOpen = _ref.isOpen,
-    onClose = _ref.onClose,
-    onImport = _ref.onImport;
-  var _window$frontisBlocks = window.frontisBlocksAdmin,
-    nonce = _window$frontisBlocks.nonce,
-    ajaxUrl = _window$frontisBlocks.ajaxUrl;
-  // const [colors, setColors] = useState(initialColors);
-  var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_12__.useDeviceType)();
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    _useState2 = _slicedToArray(_useState, 2),
-    customColors = _useState2[0],
-    setCustomColors = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)("solid"),
-    _useState4 = _slicedToArray(_useState3, 2),
-    activeTab = _useState4[0],
-    setActiveTab = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    _useState6 = _slicedToArray(_useState5, 2),
-    gradientColors = _useState6[0],
-    setGradientColors = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    _useState8 = _slicedToArray(_useState7, 2),
-    customGradientColors = _useState8[0],
-    setCustomGradientColors = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    _useState0 = _slicedToArray(_useState9, 2),
-    globalColors = _useState0[0],
-    setGlobalColors = _useState0[1];
-  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    _useState10 = _slicedToArray(_useState1, 2),
-    fbGlobalSettingsLoading = _useState10[0],
-    setFbGlobalSettingsLoading = _useState10[1];
-  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_13__.useDispatch)('core/editor'),
-    editPost = _useDispatch.editPost;
-  var themeColors = (_frontisBlocksAdmin = frontisBlocksAdmin) === null || _frontisBlocksAdmin === void 0 ? void 0 : _frontisBlocksAdmin.theme_colors;
-  if (themeColors) {
-    defaultsColors = themeColors;
-  }
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
-      body: {
-        fontFamily: 'Default',
-        lineHeight: {
-          Desktop: 'Default',
-          Tablet: 'Default',
-          Mobile: 'Default'
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: 'Default',
-        fontStyle: 'Default',
-        textTransform: 'Default',
-        textDecoration: 'Default',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      },
-      link: {
-        fontFamily: 'Default',
-        lineHeight: {
-          Desktop: 'Default',
-          Tablet: 'Default',
-          Mobile: 'Default'
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: 'Default',
-        fontStyle: 'Default',
-        textTransform: 'Default',
-        textDecoration: 'Default',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      },
-      button: {
-        fontFamily: 'Default',
-        lineHeight: {
-          Desktop: 'Default',
-          Tablet: 'Default',
-          Mobile: 'Default'
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: 'Default',
-        fontStyle: 'Default',
-        textTransform: 'Default',
-        textDecoration: 'Default',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      },
-      captions: {
-        fontFamily: 'Default',
-        lineHeight: {
-          Desktop: 'Default',
-          Tablet: 'Default',
-          Mobile: 'Default'
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: 'Default',
-        fontStyle: 'Default',
-        textTransform: 'Default',
-        textDecoration: 'Default',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      },
-      heading: {
-        all: {
-          fontFamily: 'Default',
-          lineHeight: {
-            Desktop: 'Default',
-            Tablet: 'Default',
-            Mobile: 'Default'
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 'Default',
-          fontStyle: 'Default',
-          textTransform: 'Default',
-          textDecoration: 'Default',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        },
-        h1: {
-          fontFamily: 'Default',
-          lineHeight: {
-            Desktop: 'Default',
-            Tablet: 'Default',
-            Mobile: 'Default'
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 'Default',
-          fontStyle: 'Default',
-          textTransform: 'Default',
-          textDecoration: 'Default',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        },
-        h2: {
-          fontFamily: 'Default',
-          lineHeight: {
-            Desktop: 'Default',
-            Tablet: 'Default',
-            Mobile: 'Default'
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 'Default',
-          fontStyle: 'Default',
-          textTransform: 'Default',
-          textDecoration: 'Default',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        },
-        h3: {
-          fontFamily: 'Default',
-          lineHeight: {
-            Desktop: 'Default',
-            Tablet: 'Default',
-            Mobile: 'Default'
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 'Default',
-          fontStyle: 'Default',
-          textTransform: 'Default',
-          textDecoration: 'Default',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        },
-        h4: {
-          fontFamily: 'Default',
-          lineHeight: {
-            Desktop: 'Default',
-            Tablet: 'Default',
-            Mobile: 'Default'
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 'Default',
-          fontStyle: 'Default',
-          textTransform: 'Default',
-          textDecoration: 'Default',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        },
-        h5: {
-          fontFamily: 'Default',
-          lineHeight: {
-            Desktop: 'Default',
-            Tablet: 'Default',
-            Mobile: 'Default'
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 'Default',
-          fontStyle: 'Default',
-          textTransform: 'Default',
-          textDecoration: 'Default',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        },
-        h6: {
-          fontFamily: 'Default',
-          lineHeight: {
-            Desktop: 'Default',
-            Tablet: 'Default',
-            Mobile: 'Default'
-          },
-          lineHeightUnits: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontSize: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          fontSizeUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          },
-          fontWeight: 'Default',
-          fontStyle: 'Default',
-          textTransform: 'Default',
-          textDecoration: 'Default',
-          letterSpacing: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-          },
-          letterSpacingUnit: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-          }
-        }
-      }
-    }),
-    _useState12 = _slicedToArray(_useState11, 2),
-    typography = _useState12[0],
-    setTypography = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
-    _useState14 = _slicedToArray(_useState13, 2),
-    customTypography = _useState14[0],
-    setCustomTypography = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
-    _useState16 = _slicedToArray(_useState15, 2),
-    fontfamilies = _useState16[0],
-    setFontfamilies = _useState16[1];
-
-  // Extract all font families into a single string
-  var getAllFontFamilies = function getAllFontFamilies(fontsObject) {
-    var fontFamilies = [];
-    var _extractFonts = function extractFonts(obj) {
-      Object.values(obj).forEach(function (value) {
-        if (typeof value === "string") {
-          fontFamilies.push(value);
-        } else if (_typeof(value) === "object") {
-          _extractFonts(value); // Recursively extract nested objects
-        }
-      });
-    };
-    _extractFonts(fontsObject);
-    var regenerateFonts = fontFamilies.join(",");
-    (0,_full_site_import_helper__WEBPACK_IMPORTED_MODULE_14__.loadGoogleFont)(regenerateFonts);
-  };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var localStorageKeys = ['fb_global_colors', 'fb_custom_colors', 'fb_gradient_colors', 'fb_custom_gradient_colors', 'fb_typography', 'fb_custom_typography', 'fb_fontfamilies', 'fb_globaltypo'];
-    var handleUpdateState = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _loop, _i, _localStorageKeys;
-        return _regeneratorRuntime().wrap(function _callee$(_context2) {
-          while (1) switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop() {
-                var key, localStorageData, res, _res, _res2, _res3, _res4, _res5, _res6, _res7;
-                return _regeneratorRuntime().wrap(function _loop$(_context) {
-                  while (1) switch (_context.prev = _context.next) {
-                    case 0:
-                      key = _localStorageKeys[_i];
-                      localStorageData = (0,_full_site_import_helper__WEBPACK_IMPORTED_MODULE_14__.getFbLocalStorage)(key);
-                      if (!(key === 'fb_global_colors')) {
-                        _context.next = 11;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 10;
-                        break;
-                      }
-                      _context.next = 6;
-                      return (0,_full_site_import_fetch__WEBPACK_IMPORTED_MODULE_15__.getGlobalStyle)('fb_get_global_colors');
-                    case 6:
-                      res = _context.sent;
-                      if (!res.success) {
-                        setGlobalColors(defaultsColors);
-                        localStorage.setItem('fb_global_colors', JSON.stringify(defaultsColors));
-                      } else {
-                        setGlobalColors(res.data);
-                        localStorage.setItem('fb_global_colors', JSON.stringify(res.data));
-                      }
-                      _context.next = 11;
-                      break;
-                    case 10:
-                      setGlobalColors(localStorageData);
-                    case 11:
-                      if (!(key === 'fb_custom_colors')) {
-                        _context.next = 20;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 19;
-                        break;
-                      }
-                      _context.next = 15;
-                      return (0,_full_site_import_fetch__WEBPACK_IMPORTED_MODULE_15__.getGlobalStyle)('fb_get_custom_colors');
-                    case 15:
-                      _res = _context.sent;
-                      if (!_res.success) {
-                        setCustomColors([]);
-                      } else {
-                        setCustomColors(_res.data);
-                        localStorage.setItem('fb_custom_colors', JSON.stringify(_res.data));
-                      }
-                      _context.next = 20;
-                      break;
-                    case 19:
-                      setCustomColors(localStorageData);
-                    case 20:
-                      if (!(key === 'fb_gradient_colors')) {
-                        _context.next = 29;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 28;
-                        break;
-                      }
-                      _context.next = 24;
-                      return (0,_full_site_import_fetch__WEBPACK_IMPORTED_MODULE_15__.getGlobalStyle)('fb_get_gradient_colors');
-                    case 24:
-                      _res2 = _context.sent;
-                      if (!_res2.success) {
-                        setGradientColors(gradientDefaults);
-                        localStorage.setItem('fb_gradient_colors', JSON.stringify(gradientDefaults));
-                      } else {
-                        setGradientColors(_res2.data);
-                        localStorage.setItem('fb_gradient_colors', JSON.stringify(_res2.data));
-                      }
-                      _context.next = 29;
-                      break;
-                    case 28:
-                      setGradientColors(localStorageData);
-                    case 29:
-                      if (!(key === 'fb_custom_gradient_colors')) {
-                        _context.next = 38;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 37;
-                        break;
-                      }
-                      _context.next = 33;
-                      return (0,_full_site_import_fetch__WEBPACK_IMPORTED_MODULE_15__.getGlobalStyle)('fb_get_custom_gradient_colors');
-                    case 33:
-                      _res3 = _context.sent;
-                      if (!_res3.success) {
-                        setCustomGradientColors([]);
-                      } else {
-                        setCustomGradientColors(_res3.data);
-                        localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(_res3.data));
-                      }
-                      _context.next = 38;
-                      break;
-                    case 37:
-                      setCustomGradientColors(localStorageData);
-                    case 38:
-                      if (!(key === 'fb_typography')) {
-                        _context.next = 47;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 46;
-                        break;
-                      }
-                      _context.next = 42;
-                      return (0,_full_site_import_fetch__WEBPACK_IMPORTED_MODULE_15__.getGlobalStyle)('fb_get_typography');
-                    case 42:
-                      _res4 = _context.sent;
-                      if (!_res4.success) {
-                        localStorage.setItem('fb_typography', JSON.stringify(typography));
-                      } else {
-                        setTypography(_res4.data);
-                        localStorage.setItem('fb_typography', JSON.stringify(_res4.data));
-                      }
-                      _context.next = 47;
-                      break;
-                    case 46:
-                      setTypography(localStorageData);
-                    case 47:
-                      if (!(key === 'fb_custom_typography')) {
-                        _context.next = 56;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 55;
-                        break;
-                      }
-                      _context.next = 51;
-                      return (0,_full_site_import_fetch__WEBPACK_IMPORTED_MODULE_15__.getGlobalStyle)('fb_get_custom_typography');
-                    case 51:
-                      _res5 = _context.sent;
-                      if (!_res5.success) {
-                        setCustomTypography([]);
-                      } else {
-                        setCustomTypography(_res5.data);
-                        localStorage.setItem('fb_custom_typography', JSON.stringify(_res5.data));
-                      }
-                      _context.next = 56;
-                      break;
-                    case 55:
-                      setCustomTypography(localStorageData);
-                    case 56:
-                      if (!(key === 'fb_fontfamilies')) {
-                        _context.next = 66;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 64;
-                        break;
-                      }
-                      _context.next = 60;
-                      return (0,_full_site_import_fetch__WEBPACK_IMPORTED_MODULE_15__.getGlobalStyle)('fb_get_fontfamilies');
-                    case 60:
-                      _res6 = _context.sent;
-                      if (!_res6.success) {
-                        setFontfamilies([]);
-                      } else {
-                        setFontfamilies(_res6.data);
-                        getAllFontFamilies(_res6.data);
-                        localStorage.setItem('fb_fontFamilies', JSON.stringify(_res6.data));
-                      }
-                      _context.next = 66;
-                      break;
-                    case 64:
-                      getAllFontFamilies(localStorageData);
-                      setFontfamilies(localStorageData);
-                    case 66:
-                      if (!(key === 'fb_globaltypo')) {
-                        _context.next = 75;
-                        break;
-                      }
-                      if (!(localStorageData.length < 1)) {
-                        _context.next = 74;
-                        break;
-                      }
-                      _context.next = 70;
-                      return (0,_full_site_import_fetch__WEBPACK_IMPORTED_MODULE_15__.getGlobalStyle)('fb_get_globaltypo');
-                    case 70:
-                      _res7 = _context.sent;
-                      if (_res7.success) {
-                        setTimeout(function () {
-                          (0,_full_site_import_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_16__["default"])(_res7.data, deviceType);
-                        }, 1000);
-                        localStorage.setItem('fb_globaltypo', JSON.stringify(_res7.data));
-                      }
-                      _context.next = 75;
-                      break;
-                    case 74:
-                      setTimeout(function () {
-                        (0,_full_site_import_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_16__["default"])(localStorageData, deviceType);
-                      }, 1000);
-                    case 75:
-                    case "end":
-                      return _context.stop();
-                  }
-                }, _loop);
-              });
-              _i = 0, _localStorageKeys = localStorageKeys;
-            case 3:
-              if (!(_i < _localStorageKeys.length)) {
-                _context2.next = 8;
-                break;
-              }
-              return _context2.delegateYield(_loop(), "t0", 5);
-            case 5:
-              _i++;
-              _context2.next = 3;
-              break;
-            case 8:
-              _context2.next = 13;
-              break;
-            case 10:
-              _context2.prev = 10;
-              _context2.t1 = _context2["catch"](0);
-              console.error("Error fetching global colors:", _context2.t1);
-            case 13:
-            case "end":
-              return _context2.stop();
-          }
-        }, _callee, null, [[0, 10]]);
-      }));
-      return function handleUpdateState() {
-        return _ref2.apply(this, arguments);
-      };
-    }();
-    handleUpdateState();
-  }, []);
-  var colorPanelArray = function colorPanelArray(colors, setColor) {
-    var defaults = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-    if (_typeof(colors) !== "object") {
-      return [];
-    }
-    var colorArr = [];
-    colors.map(function (colorObj, index) {
-      return colorArr.push({
-        label: colorObj.name || "Color",
-        value: colorObj.color,
-        onChange: function onChange(newColor) {
-          var _defaults$index;
-          setColor(index, newColor || ((_defaults$index = defaults[index]) === null || _defaults$index === void 0 ? void 0 : _defaults$index.color) || "#000");
-        }
-      });
-    });
-    return colorArr;
-  };
-
-  //Update Global Colors
-  var setGlobalColor = function setGlobalColor(index, color) {
-    var colors = _toConsumableArray(globalColors);
-    colors[index].color = color;
-    setGlobalColors(_toConsumableArray(colors));
-    setFbGlobalSettingsLoading(true);
-
-    // // Select the Save button and update its aria-disabled attribute
-    // const saveButton = document.querySelector(
-    // 	'button.components-button.editor-post-publish-button.editor-post-publish-button__button.is-primary.is-compact'
-    // );
-
-    // if (saveButton) {
-    // 	// Set aria-disabled to false when color is updated
-    // 	saveButton.setAttribute('aria-disabled', 'false');
-
-    // 	// Add a click event listener to set aria-disabled back to true
-    // 	saveButton.addEventListener('click', () => {
-    // 		saveButton.setAttribute('aria-disabled', 'true');
-    // 	});
-    // }
-  };
-
-  // Generate color variables
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var mergedColors = [].concat(_toConsumableArray(customColors), _toConsumableArray(globalColors), _toConsumableArray(customGradientColors), _toConsumableArray(gradientColors));
-    setTimeout(function () {
-      return (0,_full_site_import_components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_11__["default"])(mergedColors, deviceType);
-    }, 1000);
-  }, [globalColors, customColors, customGradientColors, gradientColors, deviceType]);
-
-  //Update Gradient Colors
-  var setGradientColor = function setGradientColor(index, color) {
-    var colors = _toConsumableArray(gradientColors);
-    colors[index].color = color;
-    setGradientColors(_toConsumableArray(colors));
-    setFbGlobalSettingsLoading(true);
-  };
-
-  //Update Gradient Colors
-  var setCustomGradientColor = function setCustomGradientColor(index, color) {
-    var colors = _toConsumableArray(customGradientColors);
-    colors[index].color = color;
-    setCustomGradientColors(_toConsumableArray(colors));
-    setFbGlobalSettingsLoading(true);
-  };
-  var setCustomColor = function setCustomColor(index, color) {
-    var colors = _toConsumableArray(customColors);
-    colors[index].color = color;
-    setCustomColors(_toConsumableArray(colors));
-    setFbGlobalSettingsLoading(true);
-  };
-
-  // New custom color function
-  var setNewCustomColorFn = function setNewCustomColorFn() {
-    setCustomColors(function () {
-      // Determine a unique index
-      var index = customColors.length + 1;
-
-      // Add the new color
-      return [].concat(_toConsumableArray(customColors), [{
-        color: '#000000',
-        name: "Custom Color ".concat(index),
-        slug: "custom-color-".concat(index)
-      }]);
-    });
-    setFbGlobalSettingsLoading(true);
-  };
-
-  // Delete custom gradient color
-  var deleteCustomGradientColor = function deleteCustomGradientColor(index, color) {
-    var colors = _toConsumableArray(customGradientColors);
-    colors.splice(index, 1);
-    setCustomGradientColors(_toConsumableArray(colors));
-    setFbGlobalSettingsLoading(true);
-  };
-
-  // Save colors after post save
-  var isAfterSave = (0,_full_site_import_helper__WEBPACK_IMPORTED_MODULE_14__.useAfterSave)();
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var handleUpdateSettings = /*#__PURE__*/function () {
-      var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var settingsState, _i2, _settingsState, key, response, _response, _response2, _response3;
-        return _regeneratorRuntime().wrap(function _callee2$(_context3) {
-          while (1) switch (_context3.prev = _context3.next) {
-            case 0:
-              if (!(isAfterSave && fbGlobalSettingsLoading)) {
-                _context3.next = 34;
-                break;
-              }
-              _context3.prev = 1;
-              settingsState = ['fb_update_global_colors', 'fb_update_custom_colors', 'fb_update_gradient_colors', 'fb_update_custom_gradient_colors'];
-              _i2 = 0, _settingsState = settingsState;
-            case 4:
-              if (!(_i2 < _settingsState.length)) {
-                _context3.next = 29;
-                break;
-              }
-              key = _settingsState[_i2];
-              if (!(key === 'fb_update_global_colors')) {
-                _context3.next = 11;
-                break;
-              }
-              _context3.next = 9;
-              return (0,_full_site_import_fetch__WEBPACK_IMPORTED_MODULE_15__.updateGlobalStyle)(globalColors, key);
-            case 9:
-              response = _context3.sent;
-              if (response.success) {
-                setGlobalColors(response.data.data);
-                localStorage.setItem('fb_global_colors', JSON.stringify(response.data.data));
-              }
-            case 11:
-              if (!(key === 'fb_update_custom_colors')) {
-                _context3.next = 16;
-                break;
-              }
-              _context3.next = 14;
-              return (0,_full_site_import_fetch__WEBPACK_IMPORTED_MODULE_15__.updateGlobalStyle)(customColors, key);
-            case 14:
-              _response = _context3.sent;
-              if (_response.success) {
-                setCustomColors(_response.data.data);
-                localStorage.setItem('fb_custom_colors', JSON.stringify(_response.data.data));
-              }
-            case 16:
-              if (!(key === 'fb_update_gradient_colors')) {
-                _context3.next = 21;
-                break;
-              }
-              _context3.next = 19;
-              return (0,_full_site_import_fetch__WEBPACK_IMPORTED_MODULE_15__.updateGlobalStyle)(gradientColors, key);
-            case 19:
-              _response2 = _context3.sent;
-              if (_response2.success) {
-                setGradientColors(_response2.data.data);
-                localStorage.setItem('fb_gradient_colors', JSON.stringify(_response2.data.data));
-              }
-            case 21:
-              if (!(key === 'fb_update_custom_gradient_colors')) {
-                _context3.next = 26;
-                break;
-              }
-              _context3.next = 24;
-              return (0,_full_site_import_fetch__WEBPACK_IMPORTED_MODULE_15__.updateGlobalStyle)(customGradientColors, key);
-            case 24:
-              _response3 = _context3.sent;
-              if (_response3.success) {
-                setCustomGradientColors(_response3.data.data);
-                localStorage.setItem('fb_custom_gradient_colors', JSON.stringify(_response3.data.data));
-              }
-            case 26:
-              _i2++;
-              _context3.next = 4;
-              break;
-            case 29:
-              _context3.next = 34;
-              break;
-            case 31:
-              _context3.prev = 31;
-              _context3.t0 = _context3["catch"](1);
-              console.error('Error updating settings:', _context3.t0);
-            case 34:
-            case "end":
-              return _context3.stop();
-          }
-        }, _callee2, null, [[1, 31]]);
-      }));
-      return function handleUpdateSettings() {
-        return _ref3.apply(this, arguments);
-      };
-    }();
-    handleUpdateSettings();
-  }, [isAfterSave]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (fbGlobalSettingsLoading) {
-      editPost({
-        isDirty: true
-      });
-    }
-  }, [fbGlobalSettingsLoading]);
-
-  // useEffect(() => {
-  //   const iframe = document.querySelector('iframe.fb-preview-frame');
-  //   if (iframe && iframe.contentDocument) {
-  //     const iframeRoot = iframe.contentDocument.documentElement;
-
-  //     // Body typography
-  //     if (typography.body && typography.body.fontSize && typography.body.fontSize.Desktop) {
-  //       iframeRoot.style.setProperty('--fb-global-body--font-size',
-  //         `${typography.body.fontSize.Desktop}${typography.body.fontSizeUnit.Desktop}`);
-  //     }
-
-  //     // Button typography
-  //     if (typography.button && typography.button.fontSize && typography.button.fontSize.Desktop) {
-  //       iframeRoot.style.setProperty('--fb-global-button--font-size',
-  //         `${typography.button.fontSize.Desktop}${typography.button.fontSizeUnit.Desktop}`);
-  //     }
-
-  //     // Link typography
-  //     if (typography.link && typography.link.fontSize && typography.link.fontSize.Desktop) {
-  //       iframeRoot.style.setProperty('--fb-global-link--font-size',
-  //         `${typography.link.fontSize.Desktop}${typography.link.fontSizeUnit.Desktop}`);
-  //     }
-
-  //     // H1 typography
-  //     if (typography.h1) {
-  //       if (typography.h1.fontSize && typography.h1.fontSize.Desktop) {
-  //         iframeRoot.style.setProperty('--fb-global-h1--font-size',
-  //           `${typography.h1.fontSize.Desktop}${typography.h1.fontSizeUnit.Desktop}`);
-  //       }
-  //       if (typography.h1.fontFamily) {
-  //         iframeRoot.style.setProperty('--fb-global-h1--font-family', typography.h1.fontFamily);
-  //       }
-  //     }
-
-  //     // H2 typography
-  //     if (typography.h2 && typography.h2.fontSize && typography.h2.fontSize.Desktop) {
-  //       iframeRoot.style.setProperty('--fb-global-h2--font-size',
-  //         `${typography.h2.fontSize.Desktop}${typography.h2.fontSizeUnit.Desktop}`);
-  //     }
-
-  //     // H3 typography
-  //     if (typography.h3 && typography.h3.fontSize && typography.h3.fontSize.Desktop) {
-  //       iframeRoot.style.setProperty('--fb-global-h3--font-size',
-  //         `${typography.h3.fontSize.Desktop}${typography.h3.fontSizeUnit.Desktop}`);
-  //     }
-
-  //     // Custom typography
-  //     if (typography.fb_customtypo_05fe3 && typography.fb_customtypo_05fe3.fontSize &&
-  //       typography.fb_customtypo_05fe3.fontSize.Desktop) {
-  //       iframeRoot.style.setProperty('--fb-global-fb_customtypo_05fe3--font-size',
-  //         `${typography.fb_customtypo_05fe3.fontSize.Desktop}${typography.fb_customtypo_05fe3.fontSize.unit.Desktop}`);
-  //     }
-  //   }
-  // }, [typography]);
-
-  var handleImport = function handleImport() {
-    var selectedBlock = window.wp.data.select('core/block-editor').getSelectedBlock();
-    var postId = window.wp.data.select('core/editor').getCurrentPostId();
-    if (!postId) {
-      window.wp.data.dispatch('core/notices').createErrorNotice('Error: Unable to fetch current post ID.', {
-        type: 'snackbar'
-      });
-      return;
-    }
-
-    // Combine color and typography data
-    var configData = {
-      colors: defaultsColors,
-      typography: typography
-    };
-
-    // Send everything in one request
-    window.jQuery.ajax({
-      url: ajaxUrl,
-      type: 'POST',
-      data: {
-        action: 'fb_import_full_site',
-        security: nonce,
-        config: configData,
-        post_id: postId,
-        block_id: selectedBlock ? selectedBlock.clientId : ''
-      },
-      success: function success(response) {
-        if (response.success) {
-          window.wp.data.dispatch('core/notices').createSuccessNotice(response.data.message || 'Site imported with demo content and global settings!', {
-            type: 'snackbar'
-          });
-
-          // Redirect after import
-          var siteUrl = "".concat(window.location.origin).concat(window.location.pathname.replace(/wp-admin.*/, ''), "home/");
-          window.location.href = siteUrl;
-        } else {
-          window.wp.data.dispatch('core/notices').createErrorNotice("Failed to import site: ".concat(response.data || 'Unknown error occurred.'), {
-            type: 'snackbar'
-          });
-        }
-      },
-      error: function error() {
-        window.wp.data.dispatch('core/notices').createErrorNotice('Error: AJAX request failed. Please try again.', {
-          type: 'snackbar'
-        });
-      }
-    });
-    onClose();
-  };
-  if (!isOpen) return null;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-modal-overlay"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-modal"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-modal-header"
-  }, /*#__PURE__*/React.createElement("h2", null, "Site Import Configuration"), /*#__PURE__*/React.createElement("button", {
-    className: "fb-fsi-modal-close",
-    onClick: onClose
-  }, "\xD7")), /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-modal-content-wrapper"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-modal-sidebar-content"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorProvider, {
-    initialPath: "/"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorScreen, {
-    path: "/"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-blocks-tabs"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-tab-element"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorButton, {
-    path: "/typography"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-tab-wrapper"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "fb-tab-icon"
-  }, /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 24 24",
-    width: "24",
-    height: "24",
-    "class": "edit-site-global-styles-icon-with-current-color",
-    "aria-hidden": "true",
-    focusable: "false"
-  }, /*#__PURE__*/React.createElement("path", {
-    fill: "currentcolor",
-    d: "M6.9 7L3 17.8h1.7l1-2.8h4.1l1 2.8h1.7L8.6 7H6.9zm-.7 6.6l1.5-4.3 1.5 4.3h-3zM21.6 17c-.1.1-.2.2-.3.2-.1.1-.2.1-.4.1s-.3-.1-.4-.2c-.1-.1-.1-.3-.1-.6V12c0-.5 0-1-.1-1.4-.1-.4-.3-.7-.5-1-.2-.2-.5-.4-.9-.5-.4 0-.8-.1-1.3-.1s-1 .1-1.4.2c-.4.1-.7.3-1 .4-.2.2-.4.3-.6.5-.1.2-.2.4-.2.7 0 .3.1.5.2.8.2.2.4.3.8.3.3 0 .6-.1.8-.3.2-.2.3-.4.3-.7 0-.3-.1-.5-.2-.7-.2-.2-.4-.3-.6-.4.2-.2.4-.3.7-.4.3-.1.6-.1.8-.1.3 0 .6 0 .8.1.2.1.4.3.5.5.1.2.2.5.2.9v1.1c0 .3-.1.5-.3.6-.2.2-.5.3-.9.4-.3.1-.7.3-1.1.4-.4.1-.8.3-1.1.5-.3.2-.6.4-.8.7-.2.3-.3.7-.3 1.2 0 .6.2 1.1.5 1.4.3.4.9.5 1.6.5.5 0 1-.1 1.4-.3.4-.2.8-.6 1.1-1.1 0 .4.1.7.3 1 .2.3.6.4 1.2.4.4 0 .7-.1.9-.2.2-.1.5-.3.7-.4h-.3zm-3-.9c-.2.4-.5.7-.8.8-.3.2-.6.2-.8.2-.4 0-.6-.1-.9-.3-.2-.2-.3-.6-.3-1.1 0-.5.1-.9.3-1.2s.5-.5.8-.7c.3-.2.7-.3 1-.5.3-.1.6-.3.7-.6v3.4z"
-  }))), /*#__PURE__*/React.createElement("span", {
-    className: "fb-tab-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Typography", "frontis-blocks"))))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-tab-element"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorButton, {
-    path: "/colors"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-tab-wrapper"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "fb-tab-icon"
-  }, /*#__PURE__*/React.createElement("svg", {
-    viewBox: "0 0 24 24",
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "24",
-    height: "24",
-    "class": "edit-site-global-styles-icon-with-current-color",
-    "aria-hidden": "true",
-    focusable: "false"
-  }, /*#__PURE__*/React.createElement("path", {
-    fill: "currentcolor",
-    d: "M17.2 10.9c-.5-1-1.2-2.1-2.1-3.2-.6-.9-1.3-1.7-2.1-2.6L12 4l-1 1.1c-.6.9-1.3 1.7-2 2.6-.8 1.2-1.5 2.3-2 3.2-.6 1.2-1 2.2-1 3 0 3.4 2.7 6.1 6.1 6.1s6.1-2.7 6.1-6.1c0-.8-.3-1.8-1-3zm-5.1 7.6c-2.5 0-4.6-2.1-4.6-4.6 0-.3.1-1 .8-2.3.5-.9 1.1-1.9 2-3.1.7-.9 1.3-1.7 1.8-2.3.7.8 1.3 1.6 1.8 2.3.8 1.1 1.5 2.2 2 3.1.7 1.3.8 2 .8 2.3 0 2.5-2.1 4.6-4.6 4.6z"
-  }))), /*#__PURE__*/React.createElement("span", {
-    className: "fb-tab-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Colors", "frontis-blocks"))))))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorScreen, {
-    path: "/typography"
-  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "fb-global-header-inner-wrapper"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorButton, {
-    path: "/",
-    className: "back-button"
-  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-    width: "16",
-    height: "17",
-    viewBox: "0 0 16 17",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M10.5 13.5L5.5 8.5L10.5 3.5",
-    stroke: "#404655",
-    strokeWidth: "1.2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  })))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-global-header-inner"
-  }, /*#__PURE__*/React.createElement("h3", null, "Typography"), /*#__PURE__*/React.createElement("p", null, "Available fonts, typographic styles, application of those styles."))), /*#__PURE__*/React.createElement(_sidebar_components_TypographySettings__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    typography: typography,
-    customTypography: customTypography,
-    isAfterSave: isAfterSave
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorScreen, {
-    path: "/colors"
-  }, /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "fb-global-header-inner-wrapper"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalNavigatorButton, {
-    path: "/",
-    className: "back-button"
-  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-    width: "16",
-    height: "17",
-    viewBox: "0 0 16 17",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M10.5 13.5L5.5 8.5L10.5 3.5",
-    stroke: "#404655",
-    strokeWidth: "1.2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  })))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-global-header-inner"
-  }, /*#__PURE__*/React.createElement("h3", null, "Color"), /*#__PURE__*/React.createElement("p", null, "Available texts, links, Button, Headings global colors"))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TabPanel, {
-    className: "fb-blocks-color-tabs",
-    activeClass: "active-tab",
-    onSelect: function onSelect(tabName) {
-      return setActiveTab(tabName);
-    },
-    tabs: [{
-      name: "solid",
-      title: "Solid"
-    }, {
-      name: "gradient",
-      title: "Gradient"
-    }]
-  }, function (tab) {
-    return /*#__PURE__*/React.createElement("div", null, tab.name === "solid" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.PanelColorSettings, {
-      title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_7__.__)("Global Colors", "frontis-blocks"),
-      className: "fb-color-panel fb-global-color-panel",
-      initialOpen: true,
-      disableAlpha: true,
-      disableCustomGradients: false,
-      colorSettings: colorPanelArray(globalColors, setGlobalColor, defaultsColors)
-    }), customColors && customColors.length > 0 && /*#__PURE__*/React.createElement(_full_site_import_components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      colorPanelArray: colorPanelArray,
-      customColors: customColors,
-      setCustomColor: setCustomColor,
-      setCustomColors: setCustomColors
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "add-custom-color"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      className: "add-custom-color-btn",
-      onClick: function onClick() {
-        return setNewCustomColorFn();
-      }
-    }, "Add Custom Color ", /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-      width: "15",
-      height: "14",
-      viewBox: "0 0 15 14",
-      fill: "none",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.5 0.75V13.25M13.75 7L1.25 7",
-      stroke: "white",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    })))))), tab.name === "gradient" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_full_site_import_components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_9__["default"], {
-      title: "Gradient Colors",
-      colors: gradientColors,
-      setColor: setGradientColor,
-      setColors: setGradientColors,
-      wrapperClass: "fb-gradient-color-panel",
-      resetAction: true
-    }), customGradientColors.length > 0 && /*#__PURE__*/React.createElement(_full_site_import_components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      title: "Custom Gradient Colors",
-      colors: customGradientColors,
-      setColor: setCustomGradientColor,
-      setColors: setCustomGradientColors,
-      wrapperClass: "fb-gradient-color-panel",
-      resetAction: false,
-      deleteAction: true,
-      onDelete: deleteCustomGradientColor
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "add-custom-color"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-      className: "add-custom-color-btn",
-      onClick: function onClick() {
-        return setCustomGradientColors([].concat(_toConsumableArray(customGradientColors), [{
-          color: '#000000',
-          name: "Gradient Color ".concat(customGradientColors.length + 1),
-          slug: "custom-gradient-color-".concat(customGradientColors.length + 1),
-          "var": "--fb-custom-gradient-color-".concat(customGradientColors.length + 1)
-        }]));
-      }
-    }, "Add Custom Color ", /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-      width: "15",
-      height: "14",
-      viewBox: "0 0 15 14",
-      fill: "none",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M7.5 0.75V13.25M13.75 7L1.25 7",
-      stroke: "white",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round"
-    })))))));
-  }))))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-modal-main-content"
-  }, /*#__PURE__*/React.createElement(_sitePreview__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-fsi-modal-footer"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "button button-secondary",
-    onClick: onClose
-  }, "Cancel"), /*#__PURE__*/React.createElement("button", {
-    className: "button button-primary",
-    onClick: handleImport
-  }, "Import Site"))));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SiteImportModal);
 
 /***/ }),
 
@@ -7750,7 +4004,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _templates__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./templates */ "./admin/template-library/templates.js");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss */ "./admin/template-library/style.scss");
+/* harmony import */ var _scss_style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./scss/style.scss */ "./admin/template-library/scss/style.scss");
 
 
 
@@ -7770,10 +4024,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
-/***/ "./admin/template-library/sitePreview.js":
-/*!***********************************************!*\
-  !*** ./admin/template-library/sitePreview.js ***!
-  \***********************************************/
+/***/ "./admin/template-library/login-signup.js":
+/*!************************************************!*\
+  !*** ./admin/template-library/login-signup.js ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -7782,50 +4036,334 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * WordPress dependencies
+ */
 
-var SitePreview = function SitePreview() {
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+
+var LoginSignupModal = function LoginSignupModal(_ref) {
+  var onClose = _ref.onClose,
+    onLoginSuccess = _ref.onLoginSuccess;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('login'),
     _useState2 = _slicedToArray(_useState, 2),
-    previewUrl = _useState2[0],
-    setPreviewUrl = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    activeTab = _useState2[0],
+    setActiveTab = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
     isLoading = _useState4[0],
     setIsLoading = _useState4[1];
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var siteUrl = window.location.origin + window.location.pathname.replace(/wp-admin.*/, '') + 'home/?hide_admin_bar=true&preview=true';
-    setPreviewUrl(siteUrl);
-  }, []);
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      email: '',
+      password: '',
+      confirmPassword: '',
+      firstName: '',
+      lastName: ''
+    }),
+    _useState6 = _slicedToArray(_useState5, 2),
+    formData = _useState6[0],
+    setFormData = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+    _useState8 = _slicedToArray(_useState7, 2),
+    errors = _useState8[0],
+    setErrors = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState0 = _slicedToArray(_useState9, 2),
+    agreedToTerms = _useState0[0],
+    setAgreedToTerms = _useState0[1];
+  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState10 = _slicedToArray(_useState1, 2),
+    agreedToPrivacy = _useState10[0],
+    setAgreedToPrivacy = _useState10[1];
+  var handleInputChange = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (e) {
+    var _e$target = e.target,
+      name = _e$target.name,
+      value = _e$target.value;
+    setFormData(function (prev) {
+      return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, name, value));
+    });
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(function (prev) {
+        return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, name, ''));
+      });
+    }
+  }, [errors]);
+  var validateForm = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    var newErrors = {};
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+    if (activeTab === 'signup') {
+      if (!formData.firstName) {
+        newErrors.firstName = 'First name is required';
+      }
+      if (!formData.lastName) {
+        newErrors.lastName = 'Last name is required';
+      }
+      if (!formData.confirmPassword) {
+        newErrors.confirmPassword = 'Please confirm your password';
+      } else if (formData.password !== formData.confirmPassword) {
+        newErrors.confirmPassword = 'Passwords do not match';
+      }
+      if (!agreedToTerms) {
+        newErrors.terms = 'You must agree to the Terms of Service';
+      }
+      if (!agreedToPrivacy) {
+        newErrors.privacy = 'You must agree to the Privacy Policy';
+      }
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }, [formData, activeTab, agreedToTerms, agreedToPrivacy]);
+  var handleSubmit = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(/*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            e.preventDefault();
+            if (validateForm()) {
+              _context.next = 3;
+              break;
+            }
+            return _context.abrupt("return");
+          case 3:
+            setIsLoading(true);
+            _context.prev = 4;
+            _context.next = 7;
+            return new Promise(function (resolve) {
+              return setTimeout(resolve, 2000);
+            });
+          case 7:
+            // Mock successful login/signup
+            console.log("".concat(activeTab, " successful:"), formData);
+
+            // Call success callback
+            onLoginSuccess();
+            _context.next = 15;
+            break;
+          case 11:
+            _context.prev = 11;
+            _context.t0 = _context["catch"](4);
+            console.error("".concat(activeTab, " failed:"), _context.t0);
+            setErrors({
+              submit: "".concat(activeTab, " failed. Please try again.")
+            });
+          case 15:
+            _context.prev = 15;
+            setIsLoading(false);
+            return _context.finish(15);
+          case 18:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[4, 11, 15, 18]]);
+    }));
+    return function (_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }(), [formData, activeTab, validateForm, onLoginSuccess]);
+  var handleOverlayClick = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (e) {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  }, [onClose]);
   return /*#__PURE__*/React.createElement("div", {
-    className: "fb-site-preview-container"
-  }, isLoading && /*#__PURE__*/React.createElement("div", {
-    className: "fb-preview-loader"
+    className: "fb-auth-modal",
+    onClick: handleOverlayClick
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-loader-spinner"
-  }), /*#__PURE__*/React.createElement("span", null, "Loading preview...")), /*#__PURE__*/React.createElement("iframe", {
-    src: previewUrl,
-    className: "fb-preview-frame",
-    title: "Site Preview",
-    onLoad: function onLoad() {
-      return setIsLoading(false);
-    },
-    scrolling: "yes"
-  }));
+    className: "fb-auth-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-auth-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-auth-tabs"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "fb-auth-tab"
+  }, "Login"))), /*#__PURE__*/React.createElement("form", {
+    onSubmit: handleSubmit,
+    className: "fb-auth-form"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "email"
+  }, "User Name or Email"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-input-wrapper"
+  }, /*#__PURE__*/React.createElement("svg", {
+    className: "fb-input-icon",
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "20",
+    height: "20",
+    viewBox: "0 0 20 20",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M1.66699 5L7.42784 8.26414C9.55166 9.4675 10.449 9.4675 12.5728 8.26414L18.3337 5",
+    stroke: "#6A758E",
+    "stroke-width": "1.25",
+    "stroke-linejoin": "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M1.68013 11.2296C1.73461 13.7843 1.76185 15.0615 2.70446 16.0078C3.64706 16.954 4.95893 16.9869 7.58268 17.0528C9.19974 17.0935 10.8009 17.0935 12.418 17.0528C15.0417 16.9869 16.3536 16.954 17.2962 16.0078C18.2388 15.0615 18.2661 13.7843 18.3205 11.2296C18.3381 10.4082 18.3381 9.59171 18.3205 8.77029C18.2661 6.21568 18.2388 4.93837 17.2962 3.99218C16.3536 3.04599 15.0417 3.01303 12.418 2.9471C10.8009 2.90647 9.19974 2.90647 7.58268 2.94709C4.95893 3.01301 3.64706 3.04597 2.70445 3.99217C1.76184 4.93836 1.73461 6.21567 1.68013 8.77029C1.66261 9.59171 1.66262 10.4082 1.68013 11.2296Z",
+    stroke: "#6A758E",
+    "stroke-width": "1.25",
+    "stroke-linejoin": "round"
+  })), /*#__PURE__*/React.createElement("input", {
+    type: "email",
+    id: "email",
+    name: "email",
+    value: formData.email,
+    onChange: handleInputChange,
+    className: errors.email ? 'error' : '',
+    placeholder: "Enter Your Email Address"
+  })), errors.email && /*#__PURE__*/React.createElement("span", {
+    className: "fb-error-message"
+  }, errors.email)), /*#__PURE__*/React.createElement("div", {
+    className: activeTab === 'signup' ? 'fb-form-row' : ''
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-form-group"
+  }, /*#__PURE__*/React.createElement("label", {
+    htmlFor: "password"
+  }, "Password"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-input-wrapper"
+  }, /*#__PURE__*/React.createElement("svg", {
+    className: "fb-input-icon",
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "20",
+    height: "20",
+    viewBox: "0 0 20 20",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M4.16699 12.5C4.16699 9.27829 6.77867 6.66663 10.0003 6.66663C13.222 6.66663 15.8337 9.27829 15.8337 12.5C15.8337 15.7216 13.222 18.3333 10.0003 18.3333C6.77867 18.3333 4.16699 15.7216 4.16699 12.5Z",
+    stroke: "#6A758E",
+    "stroke-width": "1.25"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M6.25 7.91663V5.41663C6.25 3.34556 7.92893 1.66663 10 1.66663C11.3002 1.66663 12.4458 2.3283 13.1185 3.33329",
+    stroke: "#6A758E",
+    "stroke-width": "1.25",
+    "stroke-linecap": "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M10 13.3333V11.6666",
+    stroke: "#6A758E",
+    "stroke-width": "1.25",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })), /*#__PURE__*/React.createElement("input", {
+    type: "password",
+    id: "password",
+    name: "password",
+    value: formData.password,
+    onChange: handleInputChange,
+    className: errors.password ? 'error' : '',
+    placeholder: "Password"
+  })), errors.password && /*#__PURE__*/React.createElement("span", {
+    className: "fb-error-message"
+  }, errors.password))), errors.submit && /*#__PURE__*/React.createElement("div", {
+    className: "fb-error-message fb-submit-error"
+  }, errors.submit), /*#__PURE__*/React.createElement("button", {
+    type: "submit",
+    className: "fb-auth-submit-btn ".concat(isLoading ? 'loading' : ''),
+    disabled: isLoading
+  }, isLoading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    color: "#fff",
+    size: 16
+  }), /*#__PURE__*/React.createElement("span", null, activeTab === 'login' ? 'Signing In...' : 'Signing Up...')) : /*#__PURE__*/React.createElement("span", null, activeTab === 'login' ? 'Login' : 'Sign Up'))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-auth-close",
+    onClick: onClose
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M18 6L6 18M6 6l12 12",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  })))));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SitePreview);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoginSignupModal);
 
 /***/ }),
 
-/***/ "./admin/template-library/style.scss":
-/*!*******************************************!*\
-  !*** ./admin/template-library/style.scss ***!
-  \*******************************************/
+/***/ "./admin/template-library/plugin-upgrade.js":
+/*!**************************************************!*\
+  !*** ./admin/template-library/plugin-upgrade.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**
+ * WordPress dependencies
+ */
+
+var PluginUpgradeModal = function PluginUpgradeModal() {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-auth-modal"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-auth-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-sidebar"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-info"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-icon"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "62",
+    height: "63",
+    viewBox: "0 0 62 63",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M50.8585 34.9862L51.3322 29.9533C51.7042 26.0006 51.8902 24.0242 51.214 23.2072C50.8482 22.7653 50.3508 22.4945 49.819 22.4478C48.8359 22.3614 47.6013 23.767 45.1321 26.578C43.8551 28.0317 43.2166 28.7586 42.5043 28.8711C42.1096 28.9335 41.7075 28.8694 41.3431 28.686C40.6853 28.355 40.2468 27.4564 39.3698 25.6592L34.7469 16.1863C33.0896 12.7903 32.261 11.0923 30.9999 11.0923C29.7389 11.0923 28.9102 12.7903 27.2529 16.1863L22.6301 25.6592C21.753 27.4564 21.3145 28.355 20.6568 28.686C20.2924 28.8694 19.8902 28.9335 19.4956 28.8711C18.7833 28.7586 18.1448 28.0317 16.8678 26.578C14.3986 23.767 13.1639 22.3614 12.1808 22.4478C11.649 22.4945 11.1516 22.7653 10.7858 23.2072C10.1096 24.0242 10.2956 26.0006 10.6677 29.9533L11.1413 34.9862C11.9218 43.2789 12.312 47.4253 14.7561 49.9254C17.2002 52.4256 20.8633 52.4256 28.1894 52.4256H33.8104C41.1366 52.4256 44.7997 52.4256 47.2437 49.9254C49.6878 47.4253 50.078 43.2789 50.8585 34.9862Z",
+    stroke: "#3991FF",
+    "stroke-width": "3"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M24.804 44.1509H37.204",
+    stroke: "#3991FF",
+    "stroke-width": "3",
+    "stroke-linecap": "round"
+  }))), /*#__PURE__*/React.createElement("h2", {
+    className: "fb-template-title"
+  }, "Upgrade to Pro"), /*#__PURE__*/React.createElement("p", {
+    className: "fb-template-description"
+  }, "Get premium resources at Frontis Blocks and save more time with stunning patterns and templates")), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-actions"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-full-site-import-btn"
+  }, "Upgrade Now")))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginUpgradeModal);
+
+/***/ }),
+
+/***/ "./admin/template-library/scss/style.scss":
+/*!************************************************!*\
+  !*** ./admin/template-library/scss/style.scss ***!
+  \************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -7848,9 +4386,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
 /* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-toastify/dist/ReactToastify.css */ "./node_modules/react-toastify/dist/ReactToastify.css");
-/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
-/* harmony import */ var _fullsiteimport__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./fullsiteimport */ "./admin/template-library/fullsiteimport.js");
-/* harmony import */ var _full_site_import_sidebar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../full-site-import/sidebar */ "./admin/full-site-import/sidebar.js");
+/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
+/* harmony import */ var _template_import__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./template-import */ "./admin/template-library/template-import.js");
+/* harmony import */ var _login_signup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./login-signup */ "./admin/template-library/login-signup.js");
+/* harmony import */ var _plugin_upgrade__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./plugin-upgrade */ "./admin/template-library/plugin-upgrade.js");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -7866,8 +4405,15 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
 var TemplateCard = function TemplateCard(_ref) {
-  var imageUrl = _ref.imageUrl;
+  var imageUrl = _ref.imageUrl,
+    title = _ref.title,
+    _ref$isPro = _ref.isPro,
+    isPro = _ref$isPro === void 0 ? false : _ref$isPro,
+    id = _ref.id,
+    _ref$tags = _ref.tags,
+    tags = _ref$tags === void 0 ? [] : _ref$tags;
   var _window$frontisBlocks = window.frontisBlocksAdmin,
     nonce = _window$frontisBlocks.nonce,
     ajaxUrl = _window$frontisBlocks.ajaxUrl;
@@ -7879,225 +4425,127 @@ var TemplateCard = function TemplateCard(_ref) {
     _useState4 = _slicedToArray(_useState3, 2),
     isModalOpen = _useState4[0],
     setIsModalOpen = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isLoginModalOpen = _useState6[0],
+    setIsLoginModalOpen = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isHovered = _useState8[0],
+    setIsHovered = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState0 = _slicedToArray(_useState9, 2),
+    isAuthenticated = _useState0[0],
+    setIsAuthenticated = _useState0[1];
 
-  //Demo import for blocks
-  // const handleDemoDataImport = useCallback(() => {
-  //   const selectedBlock = window.wp.data
-  //     .select('core/block-editor')
-  //     .getSelectedBlock();
-
-  //   if (!selectedBlock || !selectedBlock.clientId) {
-  //     toast.warn('Please select a block first!');
-  //     return;
-  //   }
-
-  //   const blockId = selectedBlock.clientId;
-  //   setIsLoading(true);
-
-  //   window.jQuery.ajax({
-  //     url: ajaxUrl,
-  //     type: 'POST',
-  //     data: {
-  //       action: 'fb_import_demo_data',
-  //       security: nonce,
-  //       block_id: blockId
-  //     },
-  //     success: function (response) {
-  //       setIsLoading(false);
-
-  //       if (response.success) {
-  //         const { replaceBlocks } = wp.data.dispatch('core/block-editor');
-  //         const blocks = wp.blocks.parse(response.data.content);
-  //         replaceBlocks(blockId, blocks);
-  //         toast.success(response.data.message || 'Demo data imported successfully!');
-  //       } else {
-  //         toast.error('Failed to import demo data: ' + response.data);
-  //       }
-  //     },
-  //     error: function (xhr, status, error) {
-  //       setIsLoading(false);
-  //       toast.error('Failed to process request. Please try again.');
-  //     }
-  //   });
-  // }, [ajaxUrl, nonce]);
-
-  // demo import for pages
-  // const handleDemoDataImport = useCallback(() => {
-  //   const selectedBlock = window.wp.data
-  //     .select('core/block-editor')
-  //     .getSelectedBlock();
-
-  //   const postId = window.wp.data.select('core/editor').getCurrentPostId(); // Get current post ID
-
-  //   setIsLoading(true);
-
-  //   window.jQuery.ajax({
-  //     url: ajaxUrl,
-  //     type: 'POST',
-  //     data: {
-  //       action: 'fb_import_demo_data',
-  //       security: nonce,
-  //       block_id: selectedBlock ? selectedBlock.clientId : '',
-  //       post_id: postId  // Send post ID explicitly
-  //     },
-  //     success: function (response) {
-  //       setIsLoading(false);
-
-  //       if (response.success) {
-  //         const { replaceBlocks } = wp.data.dispatch('core/block-editor');
-  //         const { editPost } = wp.data.dispatch('core/editor');
-
-  //         if (selectedBlock) {
-  //           // Update selected block
-  //           const blocks = wp.blocks.parse(response.data.content);
-  //           replaceBlocks(selectedBlock.clientId, blocks);
-  //         } else {
-  //           // Update full page content
-  //           editPost({ content: response.data.content });
-  //         }
-
-  //         toast.success(response.data.message || 'Demo data imported successfully!');
-  //       } else {
-  //         toast.error('Failed to import demo data: ' + response.data);
-  //       }
-  //     },
-  //     error: function () {
-  //       setIsLoading(false);
-  //       toast.error('Failed to process request. Please try again.');
-  //     }
-  //   });
-  // }, [ajaxUrl, nonce]);
-
-  //demo import full site
-
-  // const handleDemoDataImport = useCallback(() => {
-  // const selectedBlock = window.wp.data
-  //   .select('core/block-editor')
-  //   .getSelectedBlock();
-
-  // const postId = window.wp.data.select('core/editor').getCurrentPostId(); // Get current post ID
-
-  //   setIsLoading(true);
-
-  //   window.jQuery.ajax({
-  //     url: ajaxUrl,
-  //     type: 'POST',
-  //     data: {
-  //       action: 'fb_import_demo_data',
-  //       security: nonce,
-  //       block_id: selectedBlock ? selectedBlock.clientId : '',
-  //       post_id: postId  // Send post ID explicitly
-  //     },
-  //     success: function (response) {
-  //       setIsLoading(false);
-
-  //       if (response.success) {
-  //         const { replaceBlocks } = wp.data.dispatch('core/block-editor');
-  //         const { editPost } = wp.data.dispatch('core/editor');
-
-  //         if (selectedBlock) {
-  //           // Update selected block
-  //           const blocks = wp.blocks.parse(response.data.content);
-  //           replaceBlocks(selectedBlock.clientId, blocks);
-  //         } else {
-  //           // Update full page content
-  //           editPost({ content: response.data.content });
-  //         }
-
-  //         toast.success(response.data.message || 'Demo data imported successfully!');
-  //       } else {
-  //         toast.error('Failed to import demo data: ' + response.data);
-  //       }
-  //     },
-  //     error: function () {
-  //       setIsLoading(false);
-  //       toast.error('Failed to process request. Please try again.');
-  //     }
-  //   });
-  // }, [ajaxUrl, nonce]); 
-
+  // Check authentication status on component mount
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setIsAuthenticated(false);
+  }, []);
   var handleFullSiteImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    if (!isPro) {
+      setIsModalOpen(true);
+    }
+    if (!isAuthenticated) {
+      setIsLoginModalOpen(true);
+    } else {
+      setIsModalOpen(true);
+    }
+  }, [isAuthenticated]);
+  var handleLoginSuccess = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsLoginModalOpen(false);
+    setIsAuthenticated(true);
     setIsModalOpen(true);
   }, []);
+  var handleCloseLoginModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsLoginModalOpen(false);
+  }, []);
+  var handleCloseModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsModalOpen(false);
+  }, []);
+  var handleDemo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    console.log("Demo clicked for:", id);
+  }, [id]);
+  var templateData = {
+    id: id,
+    title: title,
+    image: imageUrl,
+    isPro: isPro,
+    category: ['Blog & Magazine', 'Construction', 'eCommerce'],
+    author: 'Template Author',
+    downloads: 2025
+  };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-library-card"
+    className: "fb-template-library-card",
+    onMouseEnter: function onMouseEnter() {
+      return setIsHovered(true);
+    },
+    onMouseLeave: function onMouseLeave() {
+      return setIsHovered(false);
+    }
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card-img"
   }, /*#__PURE__*/React.createElement("img", {
     src: imageUrl,
-    alt: "Template preview"
-  })), /*#__PURE__*/React.createElement("div", {
+    alt: title || "Template preview"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-badge ".concat(isPro ? "pro" : "free")
+  }, isPro ? "PRO" : "FREE"), isHovered && /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-overlay"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-overlay-content"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-demo-btn",
+    onClick: handleDemo
+  }, /*#__PURE__*/React.createElement("span", null, "Demo"), /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "18",
+    height: "18",
+    viewBox: "0 0 18 18",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M8.32425 2.25C5.58753 2.25493 4.15442 2.32213 3.23856 3.23814C2.25018 4.22667 2.25018 5.81769 2.25018 8.99968C2.25018 12.1817 2.25018 13.7728 3.23856 14.7613C4.22692 15.7498 5.81769 15.7498 8.99925 15.7498C12.1807 15.7498 13.7715 15.7498 14.7599 14.7613C15.6757 13.8453 15.7429 12.4119 15.7478 9.67476",
+    stroke: "white",
+    "stroke-width": "1.125",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M15.4169 2.62224L8.28644 9.7941M15.4169 2.62224C15.0464 2.25128 12.5506 2.28586 12.023 2.29337M15.4169 2.62224C15.7874 2.99321 15.7528 5.4922 15.7453 6.02051",
+    stroke: "white",
+    "stroke-width": "1.125",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })))))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card-content"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-library-import ".concat(isLoading ? 'disabled' : ''),
-    onClick: !isLoading ? handleFullSiteImport : null
-  }, /*#__PURE__*/React.createElement("span", null, isLoading ? 'Importing...' : 'Import'), isLoading ? /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    color: "#fff",
-    size: 18
-  }) : /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "18",
-    height: "18",
-    viewBox: "0 0 18 18",
-    fill: "none"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M3 9C3 12.3137 5.68629 15 9 15C12.3137 15 15 12.3137 15 9",
-    stroke: "white",
-    strokeWidth: "1.5",
-    strokeLinecap: "round"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M9 3V10.5M9 10.5L11.25 8.25M9 10.5L6.75 8.25",
-    stroke: "white",
-    strokeWidth: "1.5",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-library-save"
+    className: "fb-template-library-card-content-top"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "save-wrapper"
-  }, /*#__PURE__*/React.createElement("span", null, "Save library"), /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "18",
-    height: "18",
-    viewBox: "0 0 18 18",
-    fill: "none"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M14.671 5.25C14.8426 4.27142 14.0895 3.375 13.096 3.375H4.90317C3.90968 3.375 3.15667 4.27142 3.32814 5.25",
-    stroke: "#555E72",
-    strokeWidth: "1.5"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M13.1249 3.375C13.1462 3.18069 13.1569 3.08351 13.157 3.00326C13.1587 2.23554 12.5804 1.59048 11.8171 1.50857C11.7373 1.5 11.6395 1.5 11.4441 1.5H6.55574C6.36026 1.5 6.26251 1.5 6.18271 1.50857C5.41938 1.59048 4.8411 2.23554 4.84278 3.00326C4.84295 3.08351 4.85359 3.18068 4.87487 3.375",
-    stroke: "#555E72",
-    strokeWidth: "1.5"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M11.25 13.5H6.75",
-    stroke: "#555E72",
-    strokeWidth: "1.5",
-    strokeLinecap: "round"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M1.78763 10.3448C1.45311 7.97205 1.28585 6.78574 1.99674 6.01787C2.70763 5.25 3.97319 5.25 6.50429 5.25H11.4957C14.0268 5.25 15.2923 5.25 16.0033 6.01787C16.7141 6.78574 16.5469 7.97205 16.2124 10.3448L15.8951 12.5947C15.6328 14.4554 15.5017 15.3857 14.8288 15.9429C14.1559 16.5 13.1634 16.5 11.1785 16.5H6.82152C4.83661 16.5 3.84415 16.5 3.17126 15.9429C2.49836 15.3857 2.3672 14.4554 2.10486 12.5947L1.78763 10.3448Z",
-    stroke: "#555E72",
-    strokeWidth: "1.5"
+    className: "fb-template-tags"
+  }, tags && tags.length > 0 && tags.map(function (tag, index) {
+    return /*#__PURE__*/React.createElement("span", {
+      key: index
+    }, tag, index < tags.length - 1 && ', ');
   }))), /*#__PURE__*/React.createElement("div", {
-    className: "favourite-wrapper"
-  }, /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "18",
-    height: "18",
-    viewBox: "0 0 18 18",
-    fill: "none"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M9 4.12547L8.5947 4.51554C8.59725 4.51815 8.5998 4.52073 8.60235 4.52329L9 4.12547ZM10.1024 6.02275C10.322 6.24238 10.6782 6.24231 10.8978 6.0226C11.1175 5.80289 11.1174 5.44673 10.8976 5.2271L10.1024 6.02275ZM7.06954 13.7414C5.93279 12.8453 4.6898 11.9702 3.70372 10.8598C2.73692 9.77114 2.0625 8.50087 2.0625 6.85282H0.9375C0.9375 8.85194 1.77038 10.3771 2.86254 11.6068C3.93542 12.8149 5.30308 13.7814 6.37306 14.6249L7.06954 13.7414ZM2.0625 6.85282C2.0625 5.23967 2.97403 3.88688 4.21827 3.31814C5.42705 2.7656 7.05125 2.91193 8.5947 4.51554L9.4053 3.73539C7.57387 1.83263 5.44807 1.51904 3.75057 2.29496C2.08853 3.05468 0.9375 4.81877 0.9375 6.85282H2.0625ZM6.37306 14.6249C6.75724 14.9278 7.16966 15.2507 7.5876 15.4949C8.00543 15.739 8.4822 15.9375 9 15.9375V14.8125C8.7678 14.8125 8.49458 14.722 8.1552 14.5236C7.81598 14.3254 7.46406 14.0524 7.06954 13.7414L6.37306 14.6249ZM11.6269 14.6249C12.6969 13.7814 14.0646 12.8149 15.1375 11.6068C16.2296 10.3771 17.0625 8.85194 17.0625 6.85282H15.9375C15.9375 8.50087 15.2631 9.77114 14.2963 10.8598C13.3102 11.9702 12.0672 12.8453 10.9305 13.7414L11.6269 14.6249ZM17.0625 6.85282C17.0625 4.81877 15.9115 3.05468 14.2494 2.29496C12.5519 1.51904 10.4261 1.83263 8.5947 3.73539L9.4053 4.51554C10.9487 2.91193 12.5729 2.7656 13.7817 3.31814C15.026 3.88688 15.9375 5.23967 15.9375 6.85282H17.0625ZM10.9305 13.7414C10.5359 14.0524 10.184 14.3254 9.8448 14.5236C9.50543 14.722 9.2322 14.8125 9 14.8125V15.9375C9.5178 15.9375 9.99457 15.739 10.4124 15.4949C10.8304 15.2507 11.2427 14.9278 11.6269 14.6249L10.9305 13.7414ZM8.60235 4.52329L10.1024 6.02275L10.8976 5.2271L9.39765 3.72765L8.60235 4.52329Z",
-    fill: "#0B0C0E"
-  })))))), /*#__PURE__*/React.createElement(_fullsiteimport__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    isOpen: isModalOpen,
-    onClose: function onClose() {
-      return setIsModalOpen(false);
-    }
-  }), /*#__PURE__*/React.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_1__.ToastContainer, {
-    position: "top-right",
-    autoClose: 3000,
-    hideProgressBar: false
+    className: "fb-template-library-card-content-bottom"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "fb-template-title"
+  }, title))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-actions"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-import-btn ".concat(isLoading ? "loading" : ""),
+    onClick: !isLoading ? handleFullSiteImport : null,
+    disabled: isLoading
+  }, isLoading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Importing..."), /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    color: "#fff",
+    size: 16
+  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Import"))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-template-save-my-cloud"
+  }, /*#__PURE__*/React.createElement("span", null, "Save Library")))), !isPro && /*#__PURE__*/React.createElement(_plugin_upgrade__WEBPACK_IMPORTED_MODULE_5__["default"], null), isPro && isLoginModalOpen && /*#__PURE__*/React.createElement(_login_signup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    onClose: handleCloseLoginModal,
+    onLoginSuccess: handleLoginSuccess
+  }), isModalOpen && /*#__PURE__*/React.createElement(_template_import__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    template: templateData,
+    onClose: handleCloseModal
   }));
 };
 var TemplateLibrary = function TemplateLibrary(_ref2) {
@@ -8105,10 +4553,10 @@ var TemplateLibrary = function TemplateLibrary(_ref2) {
     activeCategory = _ref2.activeCategory,
     data = _ref2.data;
   var schema = (data === null || data === void 0 ? void 0 : data.$schema) || {};
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    _useState6 = _slicedToArray(_useState5, 2),
-    filteredTemplates = _useState6[0],
-    setFilteredTemplates = _useState6[1];
+  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState10 = _slicedToArray(_useState1, 2),
+    filteredTemplates = _useState10[0],
+    setFilteredTemplates = _useState10[1];
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (activeTab && activeCategory) {
       var _tabData$categories;
@@ -8116,6 +4564,7 @@ var TemplateLibrary = function TemplateLibrary(_ref2) {
       var selectedCategory = tabData === null || tabData === void 0 || (_tabData$categories = tabData.categories) === null || _tabData$categories === void 0 ? void 0 : _tabData$categories.find(function (category) {
         return category.id === activeCategory;
       });
+      console.log(selectedCategory);
       if (selectedCategory && selectedCategory.items) {
         setFilteredTemplates(selectedCategory.items);
       } else {
@@ -8126,11 +4575,57 @@ var TemplateLibrary = function TemplateLibrary(_ref2) {
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-store-content"
   }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-content-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-content-header-left"
+  }, /*#__PURE__*/React.createElement("h2", null, "All Pages")), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-content-header-right"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-search-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-search-input-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-search-input-icon"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "18",
+    height: "18",
+    viewBox: "0 0 18 18",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("g", {
+    "clip-path": "url(#clip0_13116_5586)"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "8.625",
+    cy: "8.625",
+    r: "7.125",
+    stroke: "white",
+    "stroke-width": "1.5"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M13.875 13.875L16.5 16.5",
+    stroke: "white",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round"
+  })), /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
+    id: "clip0_13116_5586"
+  }, /*#__PURE__*/React.createElement("rect", {
+    width: "18",
+    height: "18",
+    fill: "white"
+  }))))), /*#__PURE__*/React.createElement("input", {
+    type: "search",
+    placeholder: "Search Blocks"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-tags-wrapper"
+  }, /*#__PURE__*/React.createElement("span", null, "User Experience"), /*#__PURE__*/React.createElement("span", null, "UI Kits"), /*#__PURE__*/React.createElement("span", null, "Templates"), /*#__PURE__*/React.createElement("span", null, "Web Design"), /*#__PURE__*/React.createElement("span", null, "Creative Assets")))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-cards"
-  }, filteredTemplates.map(function (template) {
+  }, filteredTemplates.map(function (template, index) {
     return /*#__PURE__*/React.createElement(TemplateCard, {
       key: template.id,
-      imageUrl: template.image
+      id: template.id,
+      title: template.title,
+      imageUrl: template.image,
+      isPro: index % 3 === 1,
+      tags: template.tags || []
     });
   })));
 };
@@ -8152,11 +4647,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _data_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./data.json */ "./admin/template-library/data.json");
 /**
  * WordPress dependencies
  */
-
 
 
 var TemplateLogo = function TemplateLogo() {
@@ -8219,35 +4712,26 @@ var TemplateLogo = function TemplateLogo() {
 var TemplateLibraryIcon = function TemplateLibraryIcon() {
   return /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
-    width: "64",
-    height: "20",
-    viewBox: "0 0 64 20",
+    width: "65",
+    height: "24",
+    viewBox: "0 0 65 24",
     fill: "none"
-  }, /*#__PURE__*/React.createElement("g", {
-    "clip-path": "url(#clip0_9014_403)"
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M19.2133 7.4297C19.2167 7.48684 19.2122 7.54398 19.1989 7.60113L17.9656 12.6766C17.9033 12.9326 17.6811 13.112 17.4244 13.1131L10.0222 13.152H2.61667C2.35889 13.152 2.13444 12.9714 2.07222 12.7143L0.838889 7.62056C0.824444 7.56227 0.821111 7.50284 0.824444 7.44455C0.585393 7.36723 0.376551 7.21349 0.228281 7.0057C0.0800105 6.7979 4.15036e-05 6.54688 0 6.28913C0 5.96784 0.124087 5.6597 0.344963 5.43252C0.565839 5.20533 0.865412 5.0777 1.17778 5.0777C1.49014 5.0777 1.78972 5.20533 2.01059 5.43252C2.23147 5.6597 2.35556 5.96784 2.35556 6.28913C2.3554 6.46794 2.31676 6.64449 2.24242 6.80612C2.16807 6.96776 2.05986 7.11046 1.92556 7.22398L3.47 8.82513C3.86 9.2297 4.40222 9.4617 4.95667 9.4617C5.61222 9.4617 6.23667 9.1417 6.63 8.6057L9.16778 5.14627C8.95444 4.92684 8.82222 4.62398 8.82222 4.29027C8.82208 4.13109 8.85243 3.97343 8.91156 3.82632C8.97068 3.67922 9.05741 3.54553 9.16679 3.43292C9.27617 3.32031 9.40606 3.23097 9.54903 3.17002C9.69199 3.10907 9.84524 3.0777 10 3.0777C10.1547 3.0777 10.3078 3.10903 10.4507 3.16991C10.5936 3.23079 10.7234 3.32003 10.8328 3.43252C10.9422 3.54501 11.0289 3.67856 11.0881 3.82553C11.1473 3.97251 11.1778 4.13004 11.1778 4.28913C11.1778 4.61256 11.0533 4.90741 10.8511 5.12456L13.3733 8.59656C13.7667 9.13827 14.3933 9.4617 15.0511 9.4617C15.3263 9.46267 15.5989 9.4074 15.8532 9.29911C16.1075 9.19081 16.3383 9.03164 16.5322 8.83084L18.0867 7.23198C17.8972 7.07473 17.7597 6.86092 17.6932 6.61999C17.6267 6.37907 17.6344 6.12286 17.7153 5.88664C17.7962 5.65041 17.9463 5.44578 18.1449 5.30092C18.3436 5.15605 18.581 5.07807 18.8244 5.0777C19.1014 5.07909 19.369 5.18082 19.5803 5.36501C19.7915 5.54921 19.9329 5.80409 19.9796 6.08488C20.0263 6.36566 19.9753 6.65439 19.8356 6.90034C19.6958 7.14628 19.4763 7.33371 19.2156 7.4297H19.2133ZM17.8444 14.96C17.8444 14.6411 17.5933 14.3828 17.2833 14.3828H2.77889C2.46889 14.3828 2.21778 14.6411 2.21778 14.96V16.344C2.21778 16.6628 2.46889 16.9211 2.77889 16.9211H17.2833C17.5933 16.9211 17.8444 16.6628 17.8444 16.344V14.96Z",
-    fill: "#F89B2E"
-  })), /*#__PURE__*/React.createElement("path", {
-    d: "M26 10C26 4.47715 30.4772 0 36 0H54C59.5228 0 64 4.47715 64 10C64 15.5228 59.5228 20 54 20H36C30.4772 20 26 15.5228 26 10Z",
+    d: "M21.1347 9.1084C21.1383 9.17269 21.1334 9.23697 21.1188 9.30126L19.7621 15.0111C19.6937 15.2991 19.4492 15.501 19.1669 15.5023L11.0244 15.546H2.87833C2.59478 15.546 2.34789 15.3428 2.27944 15.0535L0.922778 9.32312C0.906889 9.25755 0.903222 9.19069 0.906889 9.12512C0.643932 9.03812 0.414206 8.86517 0.251109 8.6314C0.0880115 8.39763 4.5654e-05 8.11523 0 7.82526C0 7.46381 0.136496 7.11716 0.379459 6.86157C0.622423 6.60599 0.951953 6.4624 1.29556 6.4624C1.63916 6.4624 1.96869 6.60599 2.21165 6.86157C2.45462 7.11716 2.59111 7.46381 2.59111 7.82526C2.59094 8.02642 2.54844 8.22504 2.46666 8.40688C2.38488 8.58872 2.26585 8.74926 2.11811 8.87697L3.817 10.6783C4.246 11.1334 4.84244 11.3944 5.45233 11.3944C6.17344 11.3944 6.86033 11.0344 7.293 10.4314L10.0846 6.53955C9.84989 6.29269 9.70444 5.95197 9.70444 5.57655C9.70428 5.39746 9.73768 5.22011 9.80271 5.05461C9.86775 4.88911 9.96315 4.73872 10.0835 4.61203C10.2038 4.48534 10.3467 4.38484 10.5039 4.31627C10.6612 4.2477 10.8298 4.2124 11 4.2124C11.1701 4.2124 11.3386 4.24765 11.4958 4.31614C11.653 4.38463 11.7958 4.48502 11.9161 4.61157C12.0364 4.73813 12.1318 4.88837 12.1969 5.05372C12.262 5.21907 12.2956 5.39629 12.2956 5.57526C12.2956 5.93912 12.1587 6.27083 11.9362 6.51512L14.7107 10.4211C15.1433 11.0305 15.8327 11.3944 16.5562 11.3944C16.8589 11.3955 17.1588 11.3333 17.4385 11.2115C17.7182 11.0897 17.9721 10.9106 18.1854 10.6847L19.8953 8.88597C19.6869 8.70906 19.5357 8.46853 19.4625 8.19749C19.3893 7.92644 19.3978 7.63821 19.4868 7.37246C19.5758 7.1067 19.7409 6.8765 19.9594 6.71353C20.1779 6.55055 20.439 6.46282 20.7069 6.4624C21.0115 6.46397 21.3059 6.57841 21.5383 6.78563C21.7707 6.99285 21.9262 7.27959 21.9776 7.59548C22.0289 7.91136 21.9728 8.23618 21.8191 8.51287C21.6654 8.78956 21.4239 9.00042 21.1371 9.1084H21.1347ZM19.6289 17.58C19.6289 17.2213 19.3527 16.9307 19.0117 16.9307H3.05678C2.71578 16.9307 2.43956 17.2213 2.43956 17.58V19.137C2.43956 19.4957 2.71578 19.7863 3.05678 19.7863H19.0117C19.3527 19.7863 19.6289 19.4957 19.6289 19.137V17.58Z",
     fill: "#F89B2E"
   }), /*#__PURE__*/React.createElement("path", {
-    d: "M34.72 14V6.55H37.5C38.0067 6.55 38.4533 6.64333 38.84 6.83C39.2333 7.01 39.54 7.27667 39.76 7.63C39.98 7.97667 40.09 8.4 40.09 8.9C40.09 9.39333 39.9767 9.81667 39.75 10.17C39.53 10.5167 39.2267 10.7833 38.84 10.97C38.4533 11.1567 38.0067 11.25 37.5 11.25H36.08V14H34.72ZM36.08 10.05H37.52C37.7667 10.05 37.98 10.0033 38.16 9.91C38.34 9.81 38.48 9.67333 38.58 9.5C38.68 9.32667 38.73 9.12667 38.73 8.9C38.73 8.66667 38.68 8.46667 38.58 8.3C38.48 8.12667 38.34 7.99333 38.16 7.9C37.98 7.8 37.7667 7.75 37.52 7.75H36.08V10.05ZM41.2044 14V6.55H43.9744C44.481 6.55 44.9277 6.64333 45.3144 6.83C45.7077 7.01 46.0144 7.27667 46.2344 7.63C46.4544 7.97667 46.5644 8.4 46.5644 8.9C46.5644 9.41333 46.441 9.85 46.1944 10.21C45.9544 10.57 45.6277 10.8367 45.2144 11.01L46.9244 14H45.3844L43.5544 10.73L44.4344 11.25H42.5644V14H41.2044ZM42.5644 10.05H43.9944C44.241 10.05 44.4544 10.0033 44.6344 9.91C44.8144 9.81 44.9544 9.67333 45.0544 9.5C45.1544 9.32667 45.2044 9.12667 45.2044 8.9C45.2044 8.66667 45.1544 8.46667 45.0544 8.3C44.9544 8.12667 44.8144 7.99333 44.6344 7.9C44.4544 7.8 44.241 7.75 43.9944 7.75H42.5644V10.05ZM51.4857 14.12C50.939 14.12 50.429 14.0233 49.9557 13.83C49.4824 13.6367 49.069 13.3667 48.7157 13.02C48.3624 12.6733 48.0857 12.2667 47.8857 11.8C47.6924 11.3267 47.5957 10.8167 47.5957 10.27C47.5957 9.71667 47.6924 9.20667 47.8857 8.74C48.079 8.27333 48.3524 7.86667 48.7057 7.52C49.059 7.17333 49.4724 6.90667 49.9457 6.72C50.419 6.52667 50.9324 6.43 51.4857 6.43C52.039 6.43 52.5524 6.52667 53.0257 6.72C53.499 6.91333 53.9124 7.18333 54.2657 7.53C54.619 7.87 54.8924 8.27333 55.0857 8.74C55.2857 9.20667 55.3857 9.71667 55.3857 10.27C55.3857 10.8167 55.2857 11.3267 55.0857 11.8C54.8857 12.2667 54.609 12.6733 54.2557 13.02C53.9024 13.3667 53.489 13.6367 53.0157 13.83C52.549 14.0233 52.039 14.12 51.4857 14.12ZM51.4857 12.88C51.8524 12.88 52.189 12.8167 52.4957 12.69C52.8024 12.5567 53.069 12.3733 53.2957 12.14C53.529 11.9067 53.7057 11.63 53.8257 11.31C53.9524 10.99 54.0157 10.6433 54.0157 10.27C54.0157 9.89667 53.9524 9.55333 53.8257 9.24C53.7057 8.92 53.529 8.64333 53.2957 8.41C53.069 8.17 52.8024 7.98667 52.4957 7.86C52.189 7.73333 51.8524 7.67 51.4857 7.67C51.1257 7.67 50.7924 7.73333 50.4857 7.86C50.179 7.98667 49.909 8.17 49.6757 8.41C49.449 8.64333 49.2724 8.92 49.1457 9.24C49.019 9.55333 48.9557 9.89667 48.9557 10.27C48.9557 10.6433 49.019 10.99 49.1457 11.31C49.2724 11.63 49.449 11.9067 49.6757 12.14C49.909 12.3733 50.179 12.5567 50.4857 12.69C50.7924 12.8167 51.1257 12.88 51.4857 12.88Z",
+    d: "M28 4.5C28 2.29086 29.7909 0.5 32 0.5H61C63.2091 0.5 65 2.29086 65 4.5V19.5C65 21.7091 63.2091 23.5 61 23.5H32C29.7909 23.5 28 21.7091 28 19.5V4.5Z",
+    fill: "#F89B2E"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M36.7 15.5V8.3H39.675C39.745 8.3 39.835 8.30333 39.945 8.31C40.055 8.31333 40.1567 8.32333 40.25 8.34C40.6667 8.40333 41.01 8.54167 41.28 8.755C41.5533 8.96833 41.755 9.23833 41.885 9.565C42.0183 9.88833 42.085 10.2483 42.085 10.645C42.085 11.0383 42.0183 11.3983 41.885 11.725C41.7517 12.0483 41.5483 12.3167 41.275 12.53C41.005 12.7433 40.6633 12.8817 40.25 12.945C40.1567 12.9583 40.0533 12.9683 39.94 12.975C39.83 12.9817 39.7417 12.985 39.675 12.985H37.905V15.5H36.7ZM37.905 11.86H39.625C39.6917 11.86 39.7667 11.8567 39.85 11.85C39.9333 11.8433 40.01 11.83 40.08 11.81C40.28 11.76 40.4367 11.6717 40.55 11.545C40.6667 11.4183 40.7483 11.275 40.795 11.115C40.845 10.955 40.87 10.7983 40.87 10.645C40.87 10.4917 40.845 10.335 40.795 10.175C40.7483 10.0117 40.6667 9.86667 40.55 9.74C40.4367 9.61333 40.28 9.525 40.08 9.475C40.01 9.455 39.9333 9.44333 39.85 9.44C39.7667 9.43333 39.6917 9.43 39.625 9.43H37.905V11.86ZM43.0867 15.5V8.3H46.0617C46.1317 8.3 46.2217 8.30333 46.3317 8.31C46.4417 8.31333 46.5434 8.32333 46.6367 8.34C47.0534 8.40333 47.3967 8.54167 47.6667 8.755C47.9401 8.96833 48.1417 9.23833 48.2717 9.565C48.4051 9.88833 48.4717 10.2483 48.4717 10.645C48.4717 11.2317 48.3234 11.7367 48.0267 12.16C47.7301 12.58 47.2751 12.84 46.6617 12.94L46.1467 12.985H44.2917V15.5H43.0867ZM47.2217 15.5L45.8017 12.57L47.0267 12.3L48.5867 15.5H47.2217ZM44.2917 11.86H46.0117C46.0784 11.86 46.1534 11.8567 46.2367 11.85C46.3201 11.8433 46.3967 11.83 46.4667 11.81C46.6667 11.76 46.8234 11.6717 46.9367 11.545C47.0534 11.4183 47.1351 11.275 47.1817 11.115C47.2317 10.955 47.2567 10.7983 47.2567 10.645C47.2567 10.4917 47.2317 10.335 47.1817 10.175C47.1351 10.0117 47.0534 9.86667 46.9367 9.74C46.8234 9.61333 46.6667 9.525 46.4667 9.475C46.3967 9.455 46.3201 9.44333 46.2367 9.44C46.1534 9.43333 46.0784 9.43 46.0117 9.43H44.2917V11.86ZM52.7333 15.65C52.0133 15.65 51.3966 15.4933 50.8833 15.18C50.3699 14.8633 49.9749 14.4233 49.6983 13.86C49.4249 13.2967 49.2883 12.6433 49.2883 11.9C49.2883 11.1567 49.4249 10.5033 49.6983 9.94C49.9749 9.37667 50.3699 8.93833 50.8833 8.625C51.3966 8.30833 52.0133 8.15 52.7333 8.15C53.4533 8.15 54.0699 8.30833 54.5833 8.625C55.0999 8.93833 55.4949 9.37667 55.7683 9.94C56.0449 10.5033 56.1833 11.1567 56.1833 11.9C56.1833 12.6433 56.0449 13.2967 55.7683 13.86C55.4949 14.4233 55.0999 14.8633 54.5833 15.18C54.0699 15.4933 53.4533 15.65 52.7333 15.65ZM52.7333 14.515C53.2166 14.5183 53.6183 14.4117 53.9383 14.195C54.2616 13.9783 54.5033 13.6733 54.6633 13.28C54.8266 12.8867 54.9083 12.4267 54.9083 11.9C54.9083 11.3733 54.8266 10.9167 54.6633 10.53C54.5033 10.14 54.2616 9.83667 53.9383 9.62C53.6183 9.40333 53.2166 9.29167 52.7333 9.285C52.2499 9.28167 51.8483 9.38833 51.5283 9.605C51.2083 9.82167 50.9666 10.1267 50.8033 10.52C50.6433 10.9133 50.5633 11.3733 50.5633 11.9C50.5633 12.4267 50.6433 12.885 50.8033 13.275C50.9633 13.6617 51.2033 13.9633 51.5233 14.18C51.8466 14.3967 52.2499 14.5083 52.7333 14.515Z",
     fill: "white"
-  }), /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
-    id: "clip0_9014_403"
-  }, /*#__PURE__*/React.createElement("rect", {
-    width: "20",
-    height: "16",
-    fill: "white",
-    transform: "translate(0 2)"
-  }))));
+  }));
 };
 var TemplateHeader = function TemplateHeader(_ref) {
   var activeTab = _ref.activeTab,
     setActiveTab = _ref.setActiveTab,
-    data = _ref.data;
-  // Extract tabs from the schema
+    data = _ref.data,
+    onClose = _ref.onClose;
   var schema = data.$schema;
   var tabs = Object.keys(schema).map(function (key) {
     return {
@@ -8256,9 +4740,6 @@ var TemplateHeader = function TemplateHeader(_ref) {
       icon: key === 'template-library' ? /*#__PURE__*/React.createElement(TemplateLibraryIcon, null) : null
     };
   });
-
-  // State for active tab
-
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-store-header"
   }, /*#__PURE__*/React.createElement("div", {
@@ -8278,38 +4759,36 @@ var TemplateHeader = function TemplateHeader(_ref) {
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-header-right"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-library-search-wrapper"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-search-input-wrapper"
+    className: "fb-template-library-support-btn-wrapper"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-template-library-support-btn"
   }, /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
-    width: "16",
-    height: "16",
-    viewBox: "0 0 16 16",
+    width: "20",
+    height: "20",
+    viewBox: "0 0 20 20",
     fill: "none"
-  }, /*#__PURE__*/React.createElement("g", {
-    "clip-path": "url(#clip0_12579_13019)"
-  }, /*#__PURE__*/React.createElement("circle", {
-    cx: "7.66659",
-    cy: "7.66665",
-    r: "6.33333",
-    stroke: "#6A758E",
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M14.1666 9.83773C14.1666 9.54965 14.1666 9.40565 14.21 9.27732C14.336 8.90432 14.6681 8.75965 15.0009 8.60807C15.375 8.43765 15.562 8.35248 15.7473 8.33748C15.9577 8.32047 16.1685 8.36582 16.3483 8.46673C16.5867 8.60048 16.753 8.85473 16.9232 9.06148C17.7094 10.0163 18.1024 10.4938 18.2462 11.0203C18.3623 11.4452 18.3623 11.8895 18.2462 12.3143C18.0365 13.0822 17.3737 13.726 16.8831 14.3218C16.6322 14.6266 16.5067 14.779 16.3483 14.8679C16.1685 14.9688 15.9577 15.0142 15.7473 14.9972C15.562 14.9822 15.375 14.897 15.0009 14.7266C14.6681 14.575 14.336 14.4303 14.21 14.0573C14.1666 13.929 14.1666 13.785 14.1666 13.4969V9.83773Z",
+    stroke: "white",
     "stroke-width": "1.5"
   }), /*#__PURE__*/React.createElement("path", {
-    d: "M12.3333 12.3333L14.6666 14.6666",
-    stroke: "#6A758E",
+    d: "M5.83329 9.83779C5.83329 9.47513 5.82311 9.14913 5.52988 8.89413C5.42323 8.80138 5.28183 8.73696 4.99905 8.60813C4.62497 8.43779 4.43793 8.35263 4.25259 8.33763C3.69655 8.29263 3.39739 8.67213 3.07673 9.06163C2.29058 10.0165 1.89751 10.4939 1.75368 11.0204C1.63761 11.4453 1.63761 11.8896 1.75368 12.3145C1.96346 13.0824 2.62623 13.726 3.1168 14.322C3.42603 14.6975 3.72143 15.0402 4.25259 14.9973C4.43793 14.9823 4.62497 14.897 4.99905 14.7267C5.28183 14.5979 5.42323 14.5335 5.52988 14.4407C5.82311 14.1857 5.83329 13.8598 5.83329 13.497V9.83779Z",
+    stroke: "white",
+    "stroke-width": "1.5"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M16.6667 8.74935V7.49935C16.6667 4.27769 13.682 1.66602 10 1.66602C6.31814 1.66602 3.33337 4.27769 3.33337 7.49935V8.74935",
+    stroke: "white",
     "stroke-width": "1.5",
-    "stroke-linecap": "round"
-  })), /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
-    id: "clip0_12579_13019"
-  }, /*#__PURE__*/React.createElement("rect", {
-    width: "16",
-    height: "16",
-    fill: "white"
-  })))), /*#__PURE__*/React.createElement("input", {
-    type: "search",
-    placeholder: "Search Blocks"
-  }))), /*#__PURE__*/React.createElement("div", {
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M16.6667 14.584C16.6667 18.334 13.3333 18.334 10 18.334",
+    stroke: "white",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })), /*#__PURE__*/React.createElement("span", null, "Talk to Support"))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-user-profile"
   }, /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
@@ -8322,9 +4801,248 @@ var TemplateHeader = function TemplateHeader(_ref) {
     "clip-rule": "evenodd",
     d: "M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10ZM12 20.5C13.784 20.5 15.4397 19.9504 16.8069 19.0112C17.4108 18.5964 17.6688 17.8062 17.3178 17.1632C16.59 15.8303 15.0902 15 11.9999 15C8.90969 15 7.40997 15.8302 6.68214 17.1632C6.33105 17.8062 6.5891 18.5963 7.19296 19.0111C8.56018 19.9503 10.2159 20.5 12 20.5Z",
     fill: "#3991FF"
-  }))))));
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-close-btn"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-template-library-close-btn",
+    onClick: function onClick() {
+      if (typeof onClose === 'function') {
+        onClose();
+        console.log("close");
+      }
+    },
+    "aria-label": "Close"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M6 18L18 6M6 6L18 18",
+    stroke: "#404655",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TemplateHeader);
+
+/***/ }),
+
+/***/ "./admin/template-library/template-import.js":
+/*!***************************************************!*\
+  !*** ./admin/template-library/template-import.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
+/* harmony import */ var _template_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./template-header */ "./admin/template-library/template-header.js");
+/* harmony import */ var _full_site_import__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./full-site-import */ "./admin/template-library/full-site-import.js");
+/* harmony import */ var _data_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./data.json */ "./admin/template-library/data.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return r; }; var t, r = {}, e = Object.prototype, n = e.hasOwnProperty, o = "function" == typeof Symbol ? Symbol : {}, i = o.iterator || "@@iterator", a = o.asyncIterator || "@@asyncIterator", u = o.toStringTag || "@@toStringTag"; function c(t, r, e, n) { return Object.defineProperty(t, r, { value: e, enumerable: !n, configurable: !n, writable: !n }); } try { c({}, ""); } catch (t) { c = function c(t, r, e) { return t[r] = e; }; } function h(r, e, n, o) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype); return c(a, "_invoke", function (r, e, n) { var o = 1; return function (i, a) { if (3 === o) throw Error("Generator is already running"); if (4 === o) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var u = n.delegate; if (u) { var c = d(u, n); if (c) { if (c === f) continue; return c; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (1 === o) throw o = 4, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = 3; var h = s(r, e, n); if ("normal" === h.type) { if (o = n.done ? 4 : 2, h.arg === f) continue; return { value: h.arg, done: n.done }; } "throw" === h.type && (o = 4, n.method = "throw", n.arg = h.arg); } }; }(r, n, new Context(o || [])), !0), a; } function s(t, r, e) { try { return { type: "normal", arg: t.call(r, e) }; } catch (t) { return { type: "throw", arg: t }; } } r.wrap = h; var f = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var l = {}; c(l, i, function () { return this; }); var p = Object.getPrototypeOf, y = p && p(p(x([]))); y && y !== e && n.call(y, i) && (l = y); var v = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(l); function g(t) { ["next", "throw", "return"].forEach(function (r) { c(t, r, function (t) { return this._invoke(r, t); }); }); } function AsyncIterator(t, r) { function e(o, i, a, u) { var c = s(t[o], t, i); if ("throw" !== c.type) { var h = c.arg, f = h.value; return f && "object" == _typeof(f) && n.call(f, "__await") ? r.resolve(f.__await).then(function (t) { e("next", t, a, u); }, function (t) { e("throw", t, a, u); }) : r.resolve(f).then(function (t) { h.value = t, a(h); }, function (t) { return e("throw", t, a, u); }); } u(c.arg); } var o; c(this, "_invoke", function (t, n) { function i() { return new r(function (r, o) { e(t, n, r, o); }); } return o = o ? o.then(i, i) : i(); }, !0); } function d(r, e) { var n = e.method, o = r.i[n]; if (o === t) return e.delegate = null, "throw" === n && r.i["return"] && (e.method = "return", e.arg = t, d(r, e), "throw" === e.method) || "return" !== n && (e.method = "throw", e.arg = new TypeError("The iterator does not provide a '" + n + "' method")), f; var i = s(o, r.i, e.arg); if ("throw" === i.type) return e.method = "throw", e.arg = i.arg, e.delegate = null, f; var a = i.arg; return a ? a.done ? (e[r.r] = a.value, e.next = r.n, "return" !== e.method && (e.method = "next", e.arg = t), e.delegate = null, f) : a : (e.method = "throw", e.arg = new TypeError("iterator result is not an object"), e.delegate = null, f); } function w(t) { this.tryEntries.push(t); } function m(r) { var e = r[4] || {}; e.type = "normal", e.arg = t, r[4] = e; } function Context(t) { this.tryEntries = [[-1]], t.forEach(w, this), this.reset(!0); } function x(r) { if (null != r) { var e = r[i]; if (e) return e.call(r); if ("function" == typeof r.next) return r; if (!isNaN(r.length)) { var o = -1, a = function e() { for (; ++o < r.length;) if (n.call(r, o)) return e.value = r[o], e.done = !1, e; return e.value = t, e.done = !0, e; }; return a.next = a; } } throw new TypeError(_typeof(r) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, c(v, "constructor", GeneratorFunctionPrototype), c(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = c(GeneratorFunctionPrototype, u, "GeneratorFunction"), r.isGeneratorFunction = function (t) { var r = "function" == typeof t && t.constructor; return !!r && (r === GeneratorFunction || "GeneratorFunction" === (r.displayName || r.name)); }, r.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, c(t, u, "GeneratorFunction")), t.prototype = Object.create(v), t; }, r.awrap = function (t) { return { __await: t }; }, g(AsyncIterator.prototype), c(AsyncIterator.prototype, a, function () { return this; }), r.AsyncIterator = AsyncIterator, r.async = function (t, e, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(h(t, e, n, o), i); return r.isGeneratorFunction(e) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, g(v), c(v, u, "Generator"), c(v, i, function () { return this; }), c(v, "toString", function () { return "[object Generator]"; }), r.keys = function (t) { var r = Object(t), e = []; for (var n in r) e.unshift(n); return function t() { for (; e.length;) if ((n = e.pop()) in r) return t.value = n, t.done = !1, t; return t.done = !0, t; }; }, r.values = x, Context.prototype = { constructor: Context, reset: function reset(r) { if (this.prev = this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(m), !r) for (var e in this) "t" === e.charAt(0) && n.call(this, e) && !isNaN(+e.slice(1)) && (this[e] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0][4]; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(r) { if (this.done) throw r; var e = this; function n(t) { a.type = "throw", a.arg = r, e.next = t; } for (var o = e.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i[4], u = this.prev, c = i[1], h = i[2]; if (-1 === i[0]) return n("end"), !1; if (!c && !h) throw Error("try statement without catch or finally"); if (null != i[0] && i[0] <= u) { if (u < c) return this.method = "next", this.arg = t, n(c), !0; if (u < h) return n(h), !1; } } }, abrupt: function abrupt(t, r) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var n = this.tryEntries[e]; if (n[0] > -1 && n[0] <= this.prev && this.prev < n[2]) { var o = n; break; } } o && ("break" === t || "continue" === t) && o[0] <= r && r <= o[2] && (o = null); var i = o ? o[4] : {}; return i.type = t, i.arg = r, o ? (this.method = "next", this.next = o[2], f) : this.complete(i); }, complete: function complete(t, r) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && r && (this.next = r), f; }, finish: function finish(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[2] === t) return this.complete(e[4], e[3]), m(e), f; } }, "catch": function _catch(t) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var e = this.tryEntries[r]; if (e[0] === t) { var n = e[4]; if ("throw" === n.type) { var o = n.arg; m(e); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(r, e, n) { return this.delegate = { i: x(r), r: e, n: n }, "next" === this.method && (this.arg = t), f; } }, r; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * WordPress dependencies
+ */
+
+
+
+
+
+var TemplateImport = function TemplateImport(_ref) {
+  var template = _ref.template,
+    onClose = _ref.onClose;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isImporting = _useState2[0],
+    setIsImporting = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('patterns'),
+    _useState4 = _slicedToArray(_useState3, 2),
+    activeTab = _useState4[0],
+    setActiveTab = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    showFullSiteImport = _useState6[0],
+    setShowFullSiteImport = _useState6[1]; // New state
+
+  var handleFullSiteImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          // Show the FullSiteImport component instead of the import process
+          setShowFullSiteImport(true);
+        case 1:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  })), []);
+  var handleLiveDemo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    console.log('Live demo clicked for:', template === null || template === void 0 ? void 0 : template.id);
+    window.open('#', '_blank');
+  }, [template === null || template === void 0 ? void 0 : template.id]);
+  var handleDownload = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    console.log('Download clicked for:', template === null || template === void 0 ? void 0 : template.id);
+  }, [template === null || template === void 0 ? void 0 : template.id]);
+
+  // Handle closing the FullSiteImport component
+  var handleFullSiteImportClose = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setShowFullSiteImport(false);
+  }, []);
+  if (!template) {
+    return null;
+  }
+
+  // Show FullSiteImport component if showFullSiteImport is true
+  if (showFullSiteImport) {
+    return /*#__PURE__*/React.createElement(_full_site_import__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      template: template,
+      onClose: handleFullSiteImportClose,
+      onBack: function onBack() {
+        return setShowFullSiteImport(false);
+      } // Optional: Add back functionality
+    });
+  }
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-modal"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-overlay",
+    onClick: onClose
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-container"
+  }, /*#__PURE__*/React.createElement(_template_header__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    activeTab: activeTab,
+    setActiveTab: setActiveTab,
+    data: _data_json__WEBPACK_IMPORTED_MODULE_3__,
+    onClose: onClose
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-content"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-main"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-preview"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: template.image,
+    alt: template.title,
+    className: "fb-template-preview-image"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-import-sidebar"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-info"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-category"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-category-label"
+  }, "Category : "), /*#__PURE__*/React.createElement("div", {
+    className: "fb-category-tags"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-category-tag"
+  }, " Blog & Magazine"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-category-tag"
+  }, "Construction"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-category-tag"
+  }, "eCommerce"))), /*#__PURE__*/React.createElement("h2", {
+    className: "fb-template-title"
+  }, template.title || 'Renovate - Home Decor Website Template For Gutenberg'), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-dependency"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-dependency-label"
+  }, "Dependency"), /*#__PURE__*/React.createElement("div", {
+    className: "fb-dependency-icons"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-dependency-icon"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "28",
+    height: "32",
+    viewBox: "0 0 28 32",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M23.335 15.9939L26.5028 17.8551C26.958 18.1229 27.336 18.508 27.5988 18.9718C27.8616 19.4356 28 19.9618 28 20.4974V22.4684C28 23.0039 27.8616 23.5301 27.5988 23.9939C27.336 24.4577 26.958 24.8429 26.5028 25.1107L23.335 26.9718L18.652 29.7239L15.4781 31.5912C15.0229 31.859 14.5065 32 13.981 32C13.4554 32 12.939 31.859 12.4838 31.5912L9.31592 29.7239V24.2319L13.981 26.9779L18.652 24.2319L23.317 21.492L18.652 18.746L13.981 16L18.652 13.2479L23.317 10.508L18.652 7.76198L13.981 5.02206L9.31592 2.27605L12.4838 0.408765C12.939 0.140974 13.4554 0 13.981 0C14.5065 0 15.0229 0.140974 15.4781 0.408765L18.646 2.27605L23.305 5.02206L26.4729 6.88935C26.9281 7.15713 27.3061 7.54229 27.5689 8.0061C27.8317 8.46992 27.97 8.99606 27.97 9.53163V11.4966C27.97 12.0321 27.8317 12.5582 27.5689 13.0221C27.3061 13.4859 26.9281 13.871 26.4729 14.1388L23.335 15.9939Z",
+    fill: "#3991FF"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M9.32407 7.76409L4.66503 10.4979V26.974L1.5031 25.1128C1.04681 24.8458 0.667639 24.4609 0.403758 23.9971C0.139878 23.5332 0.000619531 23.0067 0 22.4705V9.51545C1.3352e-05 8.97988 0.138364 8.45374 0.401163 7.98992C0.663962 7.52611 1.04195 7.14095 1.49712 6.87317L3.16192 5.8968C3.6171 5.62901 4.13344 5.48804 4.65904 5.48804C5.18464 5.48804 5.70098 5.62901 6.15616 5.8968L9.32407 7.76409Z",
+    fill: "#050607"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M18.6537 13.2504L13.9827 15.9964L10.8147 17.8576C10.3596 18.1254 9.84323 18.2664 9.31763 18.2664C8.79203 18.2664 8.27569 18.1254 7.82051 17.8576L4.64062 15.9964L9.30566 13.2565L12.4795 11.3893C12.9347 11.1215 13.4511 10.9805 13.9767 10.9805C14.5023 10.9805 15.0186 11.1215 15.4738 11.3893L18.6537 13.2504Z",
+    fill: "#050607"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-dependency-icon woo"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "54",
+    height: "32",
+    viewBox: "0 0 54 32",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("g", {
+    "clip-path": "url(#clip0_12958_4053)"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M5.01359 0H48.9642C51.7458 0 53.9973 2.23268 53.9973 4.99095V21.627C53.9973 24.3853 51.7458 26.6179 48.9642 26.6179H33.2029L35.3663 31.8714L25.852 26.6179H5.03552C2.25415 26.6179 0.00260341 24.3853 0.00260341 21.627V4.99095C-0.0195429 2.25464 2.23179 0 5.01359 0Z",
+    fill: "#9B5C8F"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M3.07746 4.54898C3.38477 4.13528 3.84562 3.91776 4.46024 3.87426C5.57979 3.78704 6.21634 4.30929 6.36989 5.44121C7.05031 9.99023 7.79653 13.8428 8.58663 16.9987L13.3934 7.92257C13.8326 7.09538 14.3814 6.66014 15.0399 6.61664C16.0057 6.55138 16.5981 7.16064 16.8396 8.44482C17.3884 11.3395 18.0908 13.7991 18.9248 15.8885C19.4955 10.3602 20.4613 6.37716 21.8221 3.91776C22.1512 3.3083 22.6342 3.00357 23.2707 2.95985C23.7757 2.91656 24.2365 3.06882 24.6535 3.39531C25.0705 3.72179 25.29 4.13528 25.3339 4.63599C25.3558 5.02772 25.29 5.35421 25.1146 5.68069C24.2584 7.24785 23.5559 9.88147 22.9853 13.5378C22.4367 17.0857 22.2391 19.85 22.3707 21.8307C22.4148 22.3744 22.3269 22.8534 22.1075 23.2671C21.8439 23.7458 21.449 24.0071 20.9441 24.0506C20.3733 24.0941 19.7809 23.8331 19.2101 23.2453C17.1689 21.1775 15.5446 18.0869 14.3594 13.9733C12.9326 16.7592 11.8791 18.8486 11.1986 20.2415C9.9036 22.7011 8.8062 23.9636 7.88427 24.0288C7.2916 24.0723 6.78687 23.5716 6.34795 22.5271C5.22861 19.6758 4.02132 14.1691 2.72649 6.00717C2.63854 5.44121 2.77015 4.94051 3.07746 4.54898ZM50.2462 7.96608C49.4561 6.59489 48.2927 5.76791 46.7345 5.44121C46.3173 5.35421 45.9224 5.3107 45.5491 5.3107C43.442 5.3107 41.73 6.39891 40.3911 8.57554C39.2496 10.4255 38.6791 12.4714 38.6791 14.7133C38.6791 16.3892 39.0303 17.8256 39.7326 19.0228C40.5227 20.394 41.6861 21.221 43.2444 21.5475C43.6614 21.6347 44.0564 21.6782 44.4298 21.6782C46.5588 21.6782 48.2708 20.59 49.5878 18.4133C50.729 16.5414 51.2998 14.4955 51.2998 12.2539C51.3217 10.5562 50.9486 9.14129 50.2462 7.96608ZM47.4807 13.995C47.1734 15.4315 46.6246 16.4979 45.8123 17.2162C45.176 17.7821 44.5833 18.0214 44.0347 17.9126C43.5078 17.8039 43.0687 17.3469 42.7397 16.4979C42.476 15.8232 42.3446 15.1485 42.3446 14.5173C42.3446 13.9733 42.3885 13.4291 42.4982 12.9286C42.6958 12.0361 43.0689 11.1654 43.6614 10.3385C44.3859 9.2718 45.1541 8.83677 45.9442 8.98903C46.471 9.09779 46.9102 9.55499 47.2392 10.4037C47.5026 11.0784 47.6342 11.7532 47.6342 12.3844C47.6342 12.9503 47.5904 13.4945 47.4807 13.995ZM36.506 7.96608C35.7159 6.59489 34.5306 5.76791 32.9942 5.44121C32.5772 5.35421 32.1822 5.3107 31.8089 5.3107C29.7018 5.3107 27.9898 6.39891 26.6509 8.57554C25.5096 10.4255 24.9389 12.4714 24.9389 14.7133C24.9389 16.3892 25.29 17.8256 25.9924 19.0228C26.7825 20.394 27.9459 21.221 29.5042 21.5475C29.9214 21.6347 30.3162 21.6782 30.6895 21.6782C32.8185 21.6782 34.5306 20.59 35.8475 18.4133C36.989 16.5414 37.5595 14.4955 37.5595 12.2539C37.5595 10.5562 37.2084 9.14129 36.506 7.96608ZM33.7185 13.995C33.4112 15.4315 32.8624 16.4979 32.0504 17.2162C31.4138 17.7821 30.8211 18.0214 30.2723 17.9126C29.7457 17.8039 29.3068 17.3469 28.9773 16.4979C28.7141 15.8232 28.5825 15.1485 28.5825 14.5173C28.5825 13.9733 28.6263 13.4291 28.736 12.9286C28.9336 12.0361 29.3068 11.1654 29.8994 10.3385C30.6237 9.2718 31.3919 8.83677 32.182 8.98903C32.7089 9.09779 33.148 9.55499 33.477 10.4037C33.7407 11.0784 33.8721 11.7532 33.8721 12.3844C33.8942 12.9503 33.8282 13.4945 33.7185 13.995Z",
+    fill: "white"
+  })), /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
+    id: "clip0_12958_4053"
+  }, /*#__PURE__*/React.createElement("rect", {
+    width: "54",
+    height: "32",
+    fill: "white"
+  }))))))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-meta"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-price"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-price-badge"
+  }, "FREE"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-download-count"
+  }, "2025"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-download-label"
+  }, "Full Site Import")))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-actions"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-full-site-import-btn ".concat(isImporting ? 'loading' : ''),
+    onClick: handleFullSiteImport,
+    disabled: isImporting
+  }, isImporting ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    color: "#fff",
+    size: 16
+  }), /*#__PURE__*/React.createElement("span", null, "Importing...")) : /*#__PURE__*/React.createElement("span", null, "Full Site Import")), /*#__PURE__*/React.createElement("button", {
+    className: "fb-live-demo-btn",
+    onClick: handleLiveDemo
+  }, /*#__PURE__*/React.createElement("span", null, "Live Demo"))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-import-info"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "18",
+    height: "18",
+    viewBox: "0 0 18 18",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    "fill-rule": "evenodd",
+    "clip-rule": "evenodd",
+    d: "M16.5 9C16.5 13.1421 13.1421 16.5 9 16.5C4.85786 16.5 1.5 13.1421 1.5 9C1.5 4.85786 4.85786 1.5 9 1.5C13.1421 1.5 16.5 4.85786 16.5 9ZM9 13.3125C9.31065 13.3125 9.5625 13.0606 9.5625 12.75V8.25C9.5625 7.93935 9.31065 7.6875 9 7.6875C8.68935 7.6875 8.4375 7.93935 8.4375 8.25V12.75C8.4375 13.0606 8.68935 13.3125 9 13.3125ZM9 5.25C9.41423 5.25 9.75 5.58579 9.75 6C9.75 6.41421 9.41423 6.75 9 6.75C8.58577 6.75 8.25 6.41421 8.25 6C8.25 5.58579 8.58577 5.25 9 5.25Z",
+    fill: "#8891A5"
+  })), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", {
+    className: "blue-color"
+  }, "Learn more"), " about full site import"))))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TemplateImport);
 
 /***/ }),
 
@@ -8350,6 +5068,7 @@ var TemplateSidebar = function TemplateSidebar(_ref) {
   // Extract sections from the schema
   var schema = data.$schema;
   var categories = activeTab ? Object.values(((_schema$activeTab = schema[activeTab]) === null || _schema$activeTab === void 0 ? void 0 : _schema$activeTab.categories) || {}) : [];
+  console.log(categories);
 
   // const [activeCategory, setActiveCategory] = useState(null);
   // Set first category as active by default
@@ -8361,6 +5080,16 @@ var TemplateSidebar = function TemplateSidebar(_ref) {
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-store-sidebar"
   }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-category-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-category-label"
+  }, /*#__PURE__*/React.createElement("h2", null, "Categories")), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-category"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "fb-tl-free"
+  }, "Free"), /*#__PURE__*/React.createElement("span", {
+    className: "fb-tl-pro"
+  }, "Pro"))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-store-sidebar-tabs"
   }, categories.map(function (category) {
     return /*#__PURE__*/React.createElement("button", {
@@ -8371,7 +5100,11 @@ var TemplateSidebar = function TemplateSidebar(_ref) {
       }
     }, /*#__PURE__*/React.createElement("span", {
       className: "fb-template-library-store-sidebar-tab-name"
-    }, category.name), /*#__PURE__*/React.createElement("span", {
+    }, /*#__PURE__*/React.createElement("span", {
+      dangerouslySetInnerHTML: {
+        __html: category.icon
+      }
+    }), category.name), /*#__PURE__*/React.createElement("span", {
       className: "fb-template-library-store-sidebar-tab-count"
     }, String(category.count).padStart(2, "0")));
   })));
@@ -8533,7 +5266,10 @@ var PatternLibraryButton = function PatternLibraryButton() {
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_template_header__WEBPACK_IMPORTED_MODULE_6__["default"], {
     activeTab: activeTab,
     setActiveTab: setActiveTab,
-    data: _data_json__WEBPACK_IMPORTED_MODULE_9__
+    data: _data_json__WEBPACK_IMPORTED_MODULE_9__,
+    onClose: function onClose() {
+      return setIsVisible(false);
+    }
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-store-sidebar-wrapper"
   }, /*#__PURE__*/React.createElement(_template_sidebar__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -12027,21 +8763,16 @@ const flip = function (options) {
         const nextIndex = (((_middlewareData$flip2 = middlewareData.flip) == null ? void 0 : _middlewareData$flip2.index) || 0) + 1;
         const nextPlacement = placements[nextIndex];
         if (nextPlacement) {
-          var _overflowsData$;
-          const ignoreCrossAxisOverflow = checkCrossAxis === 'alignment' ? initialSideAxis !== (0,_floating_ui_utils__WEBPACK_IMPORTED_MODULE_0__.getSideAxis)(nextPlacement) : false;
-          const hasInitialMainAxisOverflow = ((_overflowsData$ = overflowsData[0]) == null ? void 0 : _overflowsData$.overflows[0]) > 0;
-          if (!ignoreCrossAxisOverflow || hasInitialMainAxisOverflow) {
-            // Try next placement and re-run the lifecycle.
-            return {
-              data: {
-                index: nextIndex,
-                overflows: overflowsData
-              },
-              reset: {
-                placement: nextPlacement
-              }
-            };
-          }
+          // Try next placement and re-run the lifecycle.
+          return {
+            data: {
+              index: nextIndex,
+              overflows: overflowsData
+            },
+            reset: {
+              placement: nextPlacement
+            }
+          };
         }
 
         // First, find the candidates that fit on the mainAxis side of overflow,
@@ -13006,12 +9737,6 @@ function getRectRelativeToOffsetParent(element, offsetParent, strategy) {
     scrollTop: 0
   };
   const offsets = (0,_floating_ui_utils__WEBPACK_IMPORTED_MODULE_1__.createCoords)(0);
-
-  // If the <body> scrollbar appears on the left (e.g. RTL systems). Use
-  // Firefox with layout.scrollbar.side = 3 in about:config to test this.
-  function setLeftRTLScrollbarOffset() {
-    offsets.x = getWindowScrollBarX(documentElement);
-  }
   if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
     if ((0,_floating_ui_utils_dom__WEBPACK_IMPORTED_MODULE_0__.getNodeName)(offsetParent) !== 'body' || (0,_floating_ui_utils_dom__WEBPACK_IMPORTED_MODULE_0__.isOverflowElement)(documentElement)) {
       scroll = (0,_floating_ui_utils_dom__WEBPACK_IMPORTED_MODULE_0__.getNodeScroll)(offsetParent);
@@ -13021,11 +9746,10 @@ function getRectRelativeToOffsetParent(element, offsetParent, strategy) {
       offsets.x = offsetRect.x + offsetParent.clientLeft;
       offsets.y = offsetRect.y + offsetParent.clientTop;
     } else if (documentElement) {
-      setLeftRTLScrollbarOffset();
+      // If the <body> scrollbar appears on the left (e.g. RTL systems). Use
+      // Firefox with layout.scrollbar.side = 3 in about:config to test this.
+      offsets.x = getWindowScrollBarX(documentElement);
     }
-  }
-  if (isFixed && !isOffsetParentAnElement && documentElement) {
-    setLeftRTLScrollbarOffset();
   }
   const htmlOffset = documentElement && !isOffsetParentAnElement && !isFixed ? getHTMLOffset(documentElement, scroll) : (0,_floating_ui_utils__WEBPACK_IMPORTED_MODULE_1__.createCoords)(0);
   const x = rect.left + scroll.scrollLeft - offsets.x - htmlOffset.x;
@@ -13203,7 +9927,7 @@ function observeMove(element, onMove) {
         // Handle <iframe>s
         root: root.ownerDocument
       });
-    } catch (_e) {
+    } catch (e) {
       io = new IntersectionObserver(handleObserve, options);
     }
     io.observe(element);
@@ -19936,7 +16660,7 @@ var FB_Range = function FB_Range(_ref) {
         xmlns: "http://www.w3.org/2000/svg"
       }, /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("path", {
         "class": "st0",
-        d: "M12.5,21.8c-4.5,0-8.3-3-9.4-7.3c0,0,0,0,0,0c-0.2-0.8-0.3-1.6-0.3-2.4c0-1.7,0.4-3.3,1.2-4.8c0,0,0,0,0,0 c1.7-3.1,5-5,8.5-5c3.5,0,6.8,1.9,8.5,5c0,0,0,0,0,0c0.8,1.4,1.2,3.1,1.2,4.8c0,0.8-0.1,1.6-0.3,2.4c0,0,0,0,0,0 C20.8,18.7,17,21.8,12.5,21.8z M9.6,17c0.7,2,1.9,3.2,2.9,3.2s2.2-1.2,2.9-3.2C13.5,17.3,11.5,17.3,9.6,17z M17.1,16.7 c-0.3,1.1-0.7,2.1-1.3,2.9c1.7-0.8,3.1-2.1,4-3.8C19,16.1,18.1,16.4,17.1,16.7z M5.1,15.8c0.9,1.7,2.3,3,4,3.8 c-0.5-0.8-0.9-1.8-1.3-2.9C6.9,16.4,6,16.1,5.1,15.8z M9.1,15.4c2.2,0.4,4.6,0.4,6.8,0c0.2-1,0.4-2.2,0.4-3.4c0-0.4,0-0.9,0-1.3 c-2.4,0.7-5,0.7-7.4,0c0,0.4,0,0.9,0,1.3C8.8,13.2,8.9,14.4,9.1,15.4z M17.7,10.2c0.1,0.6,0.1,1.2,0.1,1.8c0,1.1-0.1,2.1-0.2,3 c1.1-0.3,2.1-0.7,3.1-1.3c0.1-0.6,0.2-1.2,0.2-1.8c0-1.1-0.2-2.2-0.7-3.3C19.3,9.3,18.5,9.8,17.7,10.2z M4.4,13.8 c1,0.5,2,0.9,3.1,1.3c-0.2-0.9-0.2-2-0.2-3c0-0.6,0-1.2,0.1-1.8C6.5,9.8,5.7,9.3,4.9,8.8c-0.4,1-0.7,2.1-0.7,3.3 C4.2,12.6,4.3,13.2,4.4,13.8z M9,9.2c2.3,0.7,4.8,0.7,7,0c-0.6-3.3-2.1-5.4-3.5-5.4S9.6,5.9,9,9.2z M5.6,7.4 c0.6,0.5,1.2,0.9,1.9,1.2C7.9,7,8.4,5.6,9.1,4.5C7.7,5.1,6.5,6.1,5.6,7.4z M15.9,4.5c0.7,1.1,1.2,2.5,1.6,4.1 c0.7-0.3,1.3-0.7,1.9-1.2C18.5,6.1,17.3,5.1,15.9,4.5z"
+        d: "M12.5,21.8c-4.5,0-8.3-3-9.4-7.3c0,0,0,0,0,0c-0.2-0.8-0.3-1.6-0.3-2.4c0-1.7,0.4-3.3,1.2-4.8c0,0,0,0,0,0\r c1.7-3.1,5-5,8.5-5c3.5,0,6.8,1.9,8.5,5c0,0,0,0,0,0c0.8,1.4,1.2,3.1,1.2,4.8c0,0.8-0.1,1.6-0.3,2.4c0,0,0,0,0,0\r C20.8,18.7,17,21.8,12.5,21.8z M9.6,17c0.7,2,1.9,3.2,2.9,3.2s2.2-1.2,2.9-3.2C13.5,17.3,11.5,17.3,9.6,17z M17.1,16.7\r c-0.3,1.1-0.7,2.1-1.3,2.9c1.7-0.8,3.1-2.1,4-3.8C19,16.1,18.1,16.4,17.1,16.7z M5.1,15.8c0.9,1.7,2.3,3,4,3.8\r c-0.5-0.8-0.9-1.8-1.3-2.9C6.9,16.4,6,16.1,5.1,15.8z M9.1,15.4c2.2,0.4,4.6,0.4,6.8,0c0.2-1,0.4-2.2,0.4-3.4c0-0.4,0-0.9,0-1.3\r c-2.4,0.7-5,0.7-7.4,0c0,0.4,0,0.9,0,1.3C8.8,13.2,8.9,14.4,9.1,15.4z M17.7,10.2c0.1,0.6,0.1,1.2,0.1,1.8c0,1.1-0.1,2.1-0.2,3\r c1.1-0.3,2.1-0.7,3.1-1.3c0.1-0.6,0.2-1.2,0.2-1.8c0-1.1-0.2-2.2-0.7-3.3C19.3,9.3,18.5,9.8,17.7,10.2z M4.4,13.8\r c1,0.5,2,0.9,3.1,1.3c-0.2-0.9-0.2-2-0.2-3c0-0.6,0-1.2,0.1-1.8C6.5,9.8,5.7,9.3,4.9,8.8c-0.4,1-0.7,2.1-0.7,3.3\r C4.2,12.6,4.3,13.2,4.4,13.8z M9,9.2c2.3,0.7,4.8,0.7,7,0c-0.6-3.3-2.1-5.4-3.5-5.4S9.6,5.9,9,9.2z M5.6,7.4\r c0.6,0.5,1.2,0.9,1.9,1.2C7.9,7,8.4,5.6,9.1,4.5C7.7,5.1,6.5,6.1,5.6,7.4z M15.9,4.5c0.7,1.1,1.2,2.5,1.6,4.1\r c0.7-0.3,1.3-0.7,1.9-1.2C18.5,6.1,17.3,5.1,15.9,4.5z"
       }))));
     },
     renderContent: function renderContent() {
@@ -20260,6 +16984,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   FONT_WEIGHT: () => (/* binding */ FONT_WEIGHT),
 /* harmony export */   GOOGLE_FONTS: () => (/* binding */ GOOGLE_FONTS),
 /* harmony export */   HAMBURGER_MENU_ICON_TYPE: () => (/* binding */ HAMBURGER_MENU_ICON_TYPE),
+/* harmony export */   HAMBURGER_MENU_SCREEN: () => (/* binding */ HAMBURGER_MENU_SCREEN),
 /* harmony export */   HEADING: () => (/* binding */ HEADING),
 /* harmony export */   HORIZONTAL_NAVIGATION_ALIGN: () => (/* binding */ HORIZONTAL_NAVIGATION_ALIGN),
 /* harmony export */   ICON_ALIGN: () => (/* binding */ ICON_ALIGN),
@@ -20338,6 +17063,16 @@ var HAMBURGER_MENU_ICON_TYPE = [{
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text", 'frontis-blocks'),
   value: 'text'
+}];
+var HAMBURGER_MENU_SCREEN = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Off", 'frontis-blocks'),
+  value: "never"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mobile", 'frontis-blocks'),
+  value: "mobile"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Always", 'frontis-blocks'),
+  value: "always"
 }];
 var DISPLAY_HAMBURGER_MENU = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hide", 'frontis-blocks'),

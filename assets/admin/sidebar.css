@@ -675,6 +675,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar .fb-blocks-color-tabs .add-cu
   align-items: center;
   justify-content: center;
 }
+.fb-global-typo-elements-wrap .fb-custom-element button .edit_indecator {
+  margin-left: auto;
+  margin-top: 5px;
+}
 .fb-global-typo-elements-wrap .fb-custom-element:last-child .font_preview {
   background: #399CFF;
 }
