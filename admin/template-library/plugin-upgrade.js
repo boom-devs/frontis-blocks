@@ -1,15 +1,21 @@
 /**
  * WordPress dependencies
  */
+import { useCallback } from "@wordpress/element";
 
 
-const PluginUpgradeModal = () => {
+const PluginUpgradeModal = ({ onClose }) => {
+
+	const handleOverlayClick = useCallback((e) => {
+		if (e.target === e.currentTarget) {
+			onClose();
+		}
+	}, [onClose]);
 	
 
 	return (
-		<div className="fb-auth-modal">
-			<div className="fb-auth-container">
-				<div className="fb-template-import-sidebar">
+		<div className="fb-auth-modal" onClick={handleOverlayClick}>
+				<div className="fb-plugin-upgrade-wrapper">
 					<div className="fb-template-info">
 						<div className="fb-template-icon">
 							<svg xmlns="http://www.w3.org/2000/svg" width="62" height="63" viewBox="0 0 62 63" fill="none">
@@ -29,13 +35,12 @@ const PluginUpgradeModal = () => {
 
 					<div className="fb-template-actions">
 						<button
-							className={`fb-full-site-import-btn`}
+							className={`fb-plugin-upgrade-btn`}
 						>
 							Upgrade Now
 						</button>
 					</div>
 				</div>
-			</div>
 		</div>
 	);
 };
