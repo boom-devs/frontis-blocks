@@ -242,6 +242,15 @@
 
 				currentPages[blockId] = currentPage + 1;
 
+
+				// Save the Read More icon HTML for when click on load more button
+				if (readMoreSwitcher) {
+					const readMoreIcon = postGridElement.querySelector('.fb_post_grid_read_more_icon');
+					if (readMoreIcon) {
+						options.readMoreIconHTML = readMoreIcon.outerHTML;
+					}
+				}
+
 				/**
 				 * Load more button
 				 */
