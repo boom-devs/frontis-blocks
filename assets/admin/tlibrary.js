@@ -20256,19 +20256,25 @@ var setDeviceOnCustomizerAction = function setDeviceOnCustomizerAction() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   BORDER_STYLES: () => (/* binding */ BORDER_STYLES),
+/* harmony export */   DISPLAY_HAMBURGER_MENU: () => (/* binding */ DISPLAY_HAMBURGER_MENU),
 /* harmony export */   FONT_FAMILYS: () => (/* binding */ FONT_FAMILYS),
 /* harmony export */   FONT_STYLE: () => (/* binding */ FONT_STYLE),
 /* harmony export */   FONT_WEIGHT: () => (/* binding */ FONT_WEIGHT),
 /* harmony export */   GOOGLE_FONTS: () => (/* binding */ GOOGLE_FONTS),
+/* harmony export */   HAMBURGER_MENU_ICON_TYPE: () => (/* binding */ HAMBURGER_MENU_ICON_TYPE),
 /* harmony export */   HEADING: () => (/* binding */ HEADING),
+/* harmony export */   HORIZONTAL_NAVIGATION_ALIGN: () => (/* binding */ HORIZONTAL_NAVIGATION_ALIGN),
 /* harmony export */   ICON_ALIGN: () => (/* binding */ ICON_ALIGN),
+/* harmony export */   NAVIGATION_LAYOUT: () => (/* binding */ NAVIGATION_LAYOUT),
 /* harmony export */   NORMAL_HOVER: () => (/* binding */ NORMAL_HOVER),
+/* harmony export */   OVERFLOW_OP: () => (/* binding */ OVERFLOW_OP),
 /* harmony export */   SEPERATOR_STYLES: () => (/* binding */ SEPERATOR_STYLES),
 /* harmony export */   STORE_NAME: () => (/* binding */ STORE_NAME),
 /* harmony export */   TEXT_ALIGN: () => (/* binding */ TEXT_ALIGN),
 /* harmony export */   TEXT_DECORATION: () => (/* binding */ TEXT_DECORATION),
 /* harmony export */   TEXT_TRANSFORM: () => (/* binding */ TEXT_TRANSFORM),
-/* harmony export */   UNIT_TYPES: () => (/* binding */ UNIT_TYPES)
+/* harmony export */   UNIT_TYPES: () => (/* binding */ UNIT_TYPES),
+/* harmony export */   VERTICAL_NAVIGATION_ALIGN: () => (/* binding */ VERTICAL_NAVIGATION_ALIGN)
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
@@ -20292,11 +20298,34 @@ var UNIT_TYPES = [{
   value: "em"
 }];
 var NORMAL_HOVER = [{
-  label: "Normal",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Normal", "frontis-blocks"),
   value: "normal"
 }, {
-  label: "Hover",
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hover", "frontis-blocks"),
   value: "hover"
+}];
+var OVERFLOW_OP = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default', 'frontis-blocks'),
+  value: 'default'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Auto', 'frontis-blocks'),
+  value: 'auto'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Hidden', 'frontis-blocks'),
+  value: 'hidden'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Scroll', 'frontis-blocks'),
+  value: 'scroll'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Clip', 'frontis-blocks'),
+  value: 'clip'
+}];
+var NAVIGATION_LAYOUT = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Horizontal', 'frontis-blocks'),
+  value: 'is-horizontal'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Vertical', 'frontis-blocks'),
+  value: 'is-vertical'
 }];
 var ICON_ALIGN = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("None"),
@@ -20304,6 +20333,60 @@ var ICON_ALIGN = [{
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon"),
   value: "icon"
+}];
+var HAMBURGER_MENU_ICON_TYPE = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Icon", 'frontis-blocks'),
+  value: 'icon'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text", 'frontis-blocks'),
+  value: 'text'
+}];
+var DISPLAY_HAMBURGER_MENU = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hide", 'frontis-blocks'),
+  value: 'hide'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mobile", 'frontis-blocks'),
+  value: 'mobile'
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Always", 'frontis-blocks'),
+  value: 'always'
+}];
+var HORIZONTAL_NAVIGATION_ALIGN = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(/*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+    icon: "editor-alignleft"
+  })),
+  value: "items-justified-left"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(/*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+    icon: "editor-aligncenter"
+  })),
+  value: "items-justified-center"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(/*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+    icon: "editor-alignright"
+  })),
+  value: "items-justified-right"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(/*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+    icon: "editor-justify"
+  })),
+  value: "items-justified-space-between"
+}];
+var VERTICAL_NAVIGATION_ALIGN = [{
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(/*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+    icon: "editor-alignleft"
+  })),
+  value: "items-justified-left"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(/*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+    icon: "editor-aligncenter"
+  })),
+  value: "items-justified-center"
+}, {
+  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(/*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {
+    icon: "editor-alignright"
+  })),
+  value: "items-justified-right"
 }];
 var TEXT_ALIGN = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(/*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Dashicon, {

@@ -10,13 +10,55 @@ export const UNIT_TYPES = [
 ];
 
 export const NORMAL_HOVER = [
-	{ label: "Normal", value: "normal" },
-	{ label: "Hover", value: "hover" },
+	{ label: __("Normal", "frontis-blocks"), value: "normal" },
+	{ label: __("Hover", "frontis-blocks"), value: "hover" },
+];
+
+export const OVERFLOW_OP = [
+    { label: __('Default', 'frontis-blocks'), value: 'default' },
+    { label: __('Auto', 'frontis-blocks'), value: 'auto' },
+    { label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
+    { label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
+    { label: __('Clip', 'frontis-blocks'), value: 'clip' },
+];
+
+export const NAVIGATION_LAYOUT = [
+	{ label: __('Horizontal', 'frontis-blocks'), value: 'is-horizontal' },
+	{ label: __('Vertical', 'frontis-blocks'), value: 'is-vertical' },
 ];
 
 export const ICON_ALIGN = [
 	{ label: __("None"), value: "none" },
 	{ label: __("Icon"), value: "icon" },
+];
+
+export const HAMBURGER_MENU_ICON_TYPE = [
+	{ label: __("Icon", 'frontis-blocks'), value: 'icon' },
+	{ label: __("Text", 'frontis-blocks'), value: 'text' },
+];
+export const HAMBURGER_MENU_SCREEN = [
+	{ label: __("Off", 'frontis-blocks'), value: "never" },
+	{ label: __("Mobile", 'frontis-blocks'), value: "mobile" },
+	{ label: __("Always", 'frontis-blocks'), value: "always" },
+];
+
+export const DISPLAY_HAMBURGER_MENU = [
+	{ label: __("Hide", 'frontis-blocks'), value: 'hide' },
+	{ label: __("Mobile", 'frontis-blocks'), value: 'mobile' },
+    { label: __("Always", 'frontis-blocks'), value: 'always' },
+];
+
+export const HORIZONTAL_NAVIGATION_ALIGN = [
+	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "items-justified-left" },
+	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "items-justified-center" },
+	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "items-justified-right" },
+	{ label: __(<Dashicon icon={"editor-justify"} />), value: "items-justified-space-between" },
+];
+
+export const VERTICAL_NAVIGATION_ALIGN = [
+	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "items-justified-left" },
+	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "items-justified-center" },
+	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "items-justified-right" },
 ];
 
 export const TEXT_ALIGN = [
