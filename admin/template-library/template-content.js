@@ -9,13 +9,15 @@ import TemplateImport from "./template-import";
 import LoginSignupModal from "./login-signup";
 import PluginUpgradeModal from "./plugin-upgrade";
 
-const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [] }) => {
+const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [], dependency = [] }) => {
 	const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 	const [isLoading, setIsLoading] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+	const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [isPluginUpgrade, setIsPluginUpgrade] = useState(false);
 
 	// Check authentication status on component mount
 	useEffect(() => {
@@ -24,12 +26,13 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [] }) => {
 
 	const handleFullSiteImport = useCallback(() => {
 
-		if (!isPro) {
-			setIsModalOpen(true);
+		if(!isPluginUpgrade) {
+			setIsPluginUpgradeModalOpen(true);
 		}
 		if (!isAuthenticated) {
 			setIsLoginModalOpen(true);
-		} else {
+		}
+		if (!isPro) {
 			setIsModalOpen(true);
 		}
 	}, [isAuthenticated]);
@@ -42,6 +45,12 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [] }) => {
 
 	const handleCloseLoginModal = useCallback(() => {
 		setIsLoginModalOpen(false);
+		setIsPluginUpgrade(false);
+	}, []);
+
+	const handleClosePluginUpgradeModal = useCallback(() => {
+		setIsPluginUpgradeModalOpen(false);
+		setIsPluginUpgrade(true);
 	}, []);
 
 	const handleCloseModal = useCallback(() => {
@@ -59,7 +68,8 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [] }) => {
 		isPro,
 		category: ['Blog & Magazine', 'Construction', 'eCommerce'],
 		author: 'Template Author',
-		downloads: 2025
+		downloads: 2025,
+		dependency: dependency,
 	};
 
 	return (
@@ -130,12 +140,14 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [] }) => {
 			</div>
 
 
-			{!isPro && (
-				<PluginUpgradeModal />
+			{isPro && isPluginUpgradeModalOpen && (
+				<PluginUpgradeModal
+					onClose={handleClosePluginUpgradeModal}
+				/>
 			)}
 
 			{/* Login/Signup Modal */}
-			{isPro && isLoginModalOpen && (
+			{isPro && isPluginUpgrade && isLoginModalOpen && (
 				<LoginSignupModal
 					onClose={handleCloseLoginModal}
 					onLoginSuccess={handleLoginSuccess}
@@ -164,7 +176,6 @@ const TemplateLibrary = ({ activeTab, activeCategory, data }) => {
 				(category) => category.id === activeCategory,
 			);
 
-			console.log(selectedCategory);
 
 			if (selectedCategory && selectedCategory.items) {
 				setFilteredTemplates(selectedCategory.items);
@@ -217,6 +228,7 @@ const TemplateLibrary = ({ activeTab, activeCategory, data }) => {
 						imageUrl={template.image}
 						isPro={index % 3 === 1}
 						tags={template.tags || []}
+						dependency={template.dependency || []}
 					/>
 				))}
 			</div>
