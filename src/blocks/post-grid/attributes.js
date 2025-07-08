@@ -2908,7 +2908,7 @@ const attributes = {
     },
     paginationArrowIconColor: {
         type: "string",
-        default: "#FFFFFF"
+        default: ""
     },
     paginationArrowIconHoverColor: {
         type: 'string',
