@@ -54,15 +54,41 @@ class Admin {
 
 		// Get the blocks list
 		$theme_colors = [];
+		$theme_default_gradients_colors = [];
+		$gutenberg_default_gutenberg_colors = [];
+		$gradient_colors = [];
 		$theme_json = wp_get_global_settings();
+		$global_colors = get_option('fb_global_colors');
 
-		if ($theme_json && isset($theme_json['color']) && isset($theme_json['color']['palette'])) {
-    		$theme_json = $theme_json['color']['palette'];
+		if ($theme_json && isset($theme_json['color'])) {
+			if(isset($theme_json['color']['palette'])) {
+				if (isset($theme_json['color']['palette']['theme'])) {
+					$theme_colors = $theme_json['color']['palette']['theme'];
 
-    		if (isset($theme_json['theme'])) {
-        		$theme_colors = $theme_json['theme'];
-    		}
+					if(!Helper::option_exists('fb_global_colors')) {
+						update_option('fb_global_colors', $theme_colors);
+					}
+				}
+			}
+
+			// Gradients colors
+			if($theme_json['color']['defaultGradients']) {
+				$gutenberg_default_gutenberg_colors = $theme_json['color']['gradients']['default'];
+			}
+
+			if(isset($theme_json['color']['gradients']['theme']) && $theme_json['color']['gradients']['theme']) {
+				$theme_default_gradients_colors = $theme_json['color']['gradients']['theme'];
+			}
+
+			$gradient_colors = array_merge($gutenberg_default_gutenberg_colors, $theme_default_gradients_colors);
+
+			$db_gradient_colors = get_option('fb_gradient_colors');
+			if($gutenberg_default_gutenberg_colors) {
+				update_option('fb_gradient_colors', $gradient_colors);
+			}
 		}
+
+		$google_fonts = get_transient( 'google_fonts_data' );
 
 		$blocks = BlockList::get_instance()->get_blocks();
 		$localizeArray = array(
@@ -80,7 +106,11 @@ class Admin {
             'global_styles' => wp_get_global_styles(),
             'global_typography' => get_option('fb_globaltypo'),
             'theme_colors' => $theme_colors,
-            'home_url' => home_url()
+			'global_colors' => $global_colors,
+			'gradients_colors' => $gradient_colors,
+            'home_url' => home_url(),
+			'google_fonts' => $google_fonts,
+            'siteName' => get_bloginfo('name'),
 		);
 
 		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){
@@ -109,8 +139,6 @@ class Admin {
 
         wp_enqueue_script('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index' . $suffix . '.js', $script_asset['dependencies'], '1.0.0', true);
 
-
-        // responsiveCss.js
         // Localize the script with new data
 		wp_localize_script('frontis-blocks-admin', 'frontisBlocksAdmin', $localizeArray);
     }
@@ -140,6 +168,53 @@ class Admin {
 
         return $links;
     }
+
+	public function store_google_fonts() {
+		$transient_key = 'google_fonts_data';
+
+		// Check if transient exists
+		$cached_data = get_transient($transient_key);
+
+		if ($cached_data !== false) {
+			// Return cached data if available
+			return $cached_data;
+		}
+
+		// Replace with the actual URL to your google-fonts.json file
+		$plugin_url = FB_PLUGIN_URL.'assets/google-fonts/google-fonts.json';
+
+		// Fetch the JSON file
+		$response = wp_remote_get($plugin_url);
+
+		// Check for errors
+		if (is_wp_error($response)) {
+			return [];
+		}
+
+		// Get the response body
+		$body = wp_remote_retrieve_body($response);
+
+		// Decode JSON data
+		$data = json_decode($body, true);
+
+		if (json_last_error() !== JSON_ERROR_NONE || !is_array($data)) {
+			return [];
+		}
+
+		// Transform data to match the JavaScript output
+		$formatted_data = array_map(function($family) use ($data) {
+			return [
+				'label' => $family,
+				'value' => $family,
+				'weights' => $data[$family]
+			];
+		}, array_keys($data));
+
+		// Cache the data for 1 month (30 days)
+		set_transient($transient_key, $formatted_data, MONTH_IN_SECONDS);
+
+		return $formatted_data;
+	}
 
     /**
      * Save settings via AJAX
@@ -295,18 +370,7 @@ class Admin {
 					'schema'          => null,
 				)
 			);
-//
-// 			// Add comment info.
-// 			register_rest_field(
-// 				$value['value'],
-// 				'fb_comment_info',
-// 				array(
-// 					'get_callback'    => array( $this, 'get_post_comment_info' ),
-// 					'update_callback' => null,
-// 					'schema'          => null,
-// 				)
-// 			);
-//
+
 			// Add excerpt info.
 			register_rest_field(
 				$value['value'],
@@ -659,14 +723,14 @@ class Admin {
         $get_custom_permalink = '';
 
         if ($results) {
-            foreach($results as $key => $single_post): 
-            
+            foreach($results as $key => $single_post):
+
                 $permalink = get_permalink($single_post->ID);
 
                 if ($custom_permalink_switcher === 'true') {
                     // Remove home_url from the permalink to get the relative part
                     $relative_path = str_replace(home_url('/'), '', $permalink);
-                
+
                     // Now add your custom prefix before it
                     $get_custom_permalink = trailingslashit($custom_permalink) . $relative_path;
                 } else {
@@ -684,7 +748,7 @@ class Admin {
                                         // If the post has a thumbnail, get the thumbnail image
                                         $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), $post_image_size);
                                         $image_srcset = wp_get_attachment_image_srcset(get_post_thumbnail_id($single_post->ID), $post_image_size);
-                                        $image_url = ($image && isset($image[0])) ? $image[0] : $default_image_url; 
+                                        $image_url = ($image && isset($image[0])) ? $image[0] : $default_image_url;
                                     else :
                                         // If the post doesn't have a thumbnail, use the default image
                                         $image_url = $default_image_url;
@@ -696,13 +760,13 @@ class Admin {
                                     <a href="<?php echo esc_url($get_custom_permalink); ?>" aria-label="<?php esc_attr_e('Read more about', 'frontis-blocks'); ?> <?php echo esc_attr($single_post->post_title); ?>">
                                         <img src="<?php echo esc_url($image_url); ?>"
                                             srcset="<?php echo esc_attr($image_srcset); ?>"
-                                            alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" 
+                                            alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>"
                                         />
                                     </a>
                                 <?php else: ?>
                                     <img src="<?php echo esc_url($image_url); ?>"
                                         srcset="<?php echo esc_attr($image_srcset); ?>"
-                                        alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" 
+                                        alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>"
                                     />
                                 <?php endif; ?>
                             </div>
@@ -716,7 +780,7 @@ class Admin {
                                             <?php if ($author_link_switcher == 'true'): ?>
                                                 <a class="fb_post_grid_author_avatar_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
                                                     aria-label="<?php esc_attr_e('View all posts by', 'frontis-blocks'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
-                                                    <?php 
+                                                    <?php
                                                 echo wp_kses_post(
                                                     get_avatar(
                                                         $single_post->post_author,
@@ -835,8 +899,8 @@ class Admin {
                                     <?php endif; ?>
 
                                     <?php if ($read_more_icon_align === 'icon-text'): ?>
-                                        <div class='fb_post_grid_read_more_icon_wrapper'> 
-                                            
+                                        <div class='fb_post_grid_read_more_icon_wrapper'>
+
                                         </div>
                                     <?php endif; ?>
 
@@ -849,8 +913,8 @@ class Admin {
                                     <?php endif; ?>
 
                                     <?php if ($read_more_icon_align === 'icon-only'): ?>
-                                        <div class='fb_post_grid_read_more_icon_wrapper'> 
-                                            
+                                        <div class='fb_post_grid_read_more_icon_wrapper'>
+
                                         </div>
                                     <?php endif; ?>
                                 </a>
@@ -881,13 +945,13 @@ class Admin {
                                     <a href="<?php echo esc_url($get_custom_permalink); ?>" aria-label="<?php esc_attr_e('Read more about', 'frontis-blocks'); ?> <?php echo esc_attr($single_post->post_title); ?>">
                                         <img src="<?php echo esc_url($image_url); ?>"
                                             srcset="<?php echo esc_attr($image_srcset); ?>"
-                                            alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" 
+                                            alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>"
                                         />
                                     </a>
                                 <?php else: ?>
                                     <img src="<?php echo esc_url($image_url); ?>"
                                         srcset="<?php echo esc_attr($image_srcset); ?>"
-                                        alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" 
+                                        alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>"
                                     />
                                 <?php endif; ?>
 
@@ -948,7 +1012,7 @@ class Admin {
                                             <?php if ($author_link_switcher == 'true'): ?>
                                                 <a class="fb_post_grid_author_avatar_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
                                                 aria-label="<?php esc_attr_e('View all posts by', 'frontis-blocks'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
-                                                <?php 
+                                                <?php
                                                 echo wp_kses_post(
                                                     get_avatar(
                                                         $single_post->post_author,
@@ -1022,8 +1086,8 @@ class Admin {
                                     <?php endif; ?>
 
                                     <?php if ($read_more_icon_align === 'icon-text'): ?>
-                                        <div class='fb_post_grid_read_more_icon_wrapper'> 
-                                            
+                                        <div class='fb_post_grid_read_more_icon_wrapper'>
+
                                         </div>
                                     <?php endif; ?>
 
@@ -1036,8 +1100,8 @@ class Admin {
                                     <?php endif; ?>
 
                                     <?php if ($read_more_icon_align === 'icon-only'): ?>
-                                        <div class='fb_post_grid_read_more_icon_wrapper'> 
-                                            
+                                        <div class='fb_post_grid_read_more_icon_wrapper'>
+
                                         </div>
                                     <?php endif; ?>
                                 </a>
@@ -1051,12 +1115,12 @@ class Admin {
             if ($total_pages > 1 && $show_load_more_switcher == 'true') { ?>
                 <div class="fb_load_more_wrapper">
                     <?php if ($load_more_type === 'button'): ?>
-                        
+
                         <div class="fb_load_more" data-current_page="<?php echo esc_attr($current_page); ?>"></div>
 
                     <?php elseif ( $load_more_type === 'pagination' ) : ?>
                         <div class="fb_pagination_wrapper" data-current_page="<?php echo esc_attr( $current_page ); ?>" data-total_pages="<?php echo esc_attr( $total_pages ); ?>">
-            
+
                             <!-- Previous Button -->
                             <button class="fb_pagination_previous <?php echo $current_page==1 ? 'disabled' : ''; ?>">
                                 <?php if ($pagination_prev_next_type === 'icon'): ?>
@@ -1065,7 +1129,7 @@ class Admin {
                                     <span class="fb_pagination_previous_text"><?php echo esc_html( $pagination_prev_text ); ?></span>
                                 <?php endif; ?>
                             </button>
-            
+
                             <!-- Page Numbers -->
                             <!-- <?php for ( $page = 1; $page <= $total_pages; $page++ ) :
                                 $active = $page == $current_page ? "active" : ""; ?>
@@ -1076,7 +1140,7 @@ class Admin {
 
 
                             <?php
-                            $range = 2; // current page before and after how many pages 
+                            $range = 2; // current page before and after how many pages
 
                             echo '<div class="fb_pagination">';
 
@@ -1105,7 +1169,7 @@ class Admin {
 
                             echo '</div>';
                             ?>
-            
+                          
                             <!-- Next Button -->
                             <button class="fb_pagination_next <?php echo $current_page==$total_pages ? 'disabled' : ''; ?>">
                                 <?php if ($pagination_prev_next_type === 'icon'): ?>
@@ -1114,7 +1178,7 @@ class Admin {
                                     <span class="fb_pagination_next_text"><?php echo esc_html( $pagination_next_text ); ?></span>
                                 <?php endif; ?>
                             </button>
-            
+
                         </div>
 
                     <?php endif; ?>
@@ -1267,10 +1331,12 @@ class Admin {
     public function register_block_assets_in_site_editor() {
         global $pagenow;
 
+		// Initiate google font
+		$this->store_google_fonts();
+
         if ('site-editor.php' === $pagenow) {
             // Styles from function
             $this->render_generated_css();
         }
     }
-    
 }

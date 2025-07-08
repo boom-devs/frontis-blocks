@@ -11,9 +11,7 @@ use FrontisBlocks\Admin\Ajax\GlobalSettings;
 use FrontisBlocks\Core\FontLoader;
 use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Core\SupportSVG;
-use FrontisBlocks\Utils\Helper;
 use FrontisBlocks\Core\Enqueues;
-
 
 final class Plugin {
 	/**

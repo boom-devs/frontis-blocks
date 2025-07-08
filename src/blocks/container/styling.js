@@ -1090,6 +1090,12 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapTabletFallback, columnGapUnits['Tablet'] ),
 			...tablet_selectors[ containerFlexSelector ],
 		};
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
 	}
 	if( containerLayout === 'grid' ){
 		tablet_selectors[ containerFlexSelector ] = {
@@ -1101,6 +1107,12 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapTabletFallback, columnGapUnits['Tablet'] ),
 			...tablet_selectors[ containerFlexSelector ],
 		};
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
 	}
 
 	if( containerLayout === 'flex' ){
@@ -1114,6 +1126,12 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapMobileFallback, columnGapUnits['Mobile'] ),
 			...mobile_selectors[ containerFlexSelector ],
 		};
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
 	}
 	if( containerLayout === 'grid' ){
 		mobile_selectors[ containerFlexSelector ] = {
@@ -1125,6 +1143,12 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapMobileFallback, columnGapUnits['Mobile'] ),
 			...mobile_selectors[ containerFlexSelector ],
 		};
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
 	}
 
 	// Display grid css.
