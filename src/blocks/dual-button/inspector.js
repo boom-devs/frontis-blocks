@@ -44,7 +44,7 @@ import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
-import {useDeviceType} from "@Config/displayType";
+import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
@@ -144,6 +144,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnIconBgColorSwitcher,
 		btnIconBgColor,
 		btnIconBgHoverColor,
+		buttonIconRotateSwitcher,
+		buttonIconRotate,
+		buttonIconRotateHover,
+
 
 		btnTwoIconColorSwitcher,
 		btnTwoIconColor,
@@ -153,6 +157,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnIconTwoBgColorSwitcher,
 		btnTwoIconBgColor,
 		btnTwoIconBgHoverColor,
+		buttonTwoIconRotateSwitcher,
+		buttonTwoIconRotate,
+		buttonTwoIconRotateHover,
 
 		iconBorder,
 		iconBorderColorSwitcher,
@@ -293,7 +300,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		dualBtnVRBottomOffsetUnits,
 	} = attributes;
 
-	const deviceType= useDeviceType();
+	const deviceType = useDeviceType();
 
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
@@ -320,55 +327,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	/** Start Preset Style */
-    const changeDualButtonPreset = (selectedPreset) => {
-        const presetConfigurations = {
-            "preset-1": {
-                buttonIconAlign: 'none',
-                buttonTwoIconAlign: 'none',
+	const changeDualButtonPreset = (selectedPreset) => {
+		const presetConfigurations = {
+			"preset-1": {
+				buttonIconAlign: 'none',
+				buttonTwoIconAlign: 'none',
 				connectorSwitcher: true,
 				buttonsDirection: 'vertical',
-                ButtonDesktopPadding: {
-                    top: "12",
+				ButtonDesktopPadding: {
+					top: "12",
 					bottom: "12",
 					left: "30",
 					right: "30",
-                },
+				},
 				ButtonDesktopBorderRadiusWidth: {
-                    top: "0",
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonTabBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonMobileBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
+				},
 				ButtonTwoDesktopBorderRadiusWidth: {
-                    top: "0",
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonTwoTabBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonTwoMobileBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
+				},
 				buttonsGap: {
 					Desktop: '0',
 					Tablet: '0',
@@ -379,54 +386,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Tablet: '100',
 					Mobile: '100'
 				},
-            },
-            "preset-2": {
-                buttonIconAlign: 'icon-text',
-                buttonTwoIconAlign: 'icon-text',
+			},
+			"preset-2": {
+				buttonIconAlign: 'icon-text',
+				buttonTwoIconAlign: 'icon-text',
 				buttonsDirection: 'vertical',
 				connectorSwitcher: true,
-                ButtonDesktopPadding: {
-                    top: "12",
+				ButtonDesktopPadding: {
+					top: "12",
 					bottom: "12",
 					left: "30",
 					right: "30",
-                },
+				},
 				ButtonDesktopBorderRadiusWidth: {
-                    top: "0",
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonTabBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonMobileBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
+				},
 				ButtonTwoDesktopBorderRadiusWidth: {
-                    top: "0",
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonTwoTabBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonTwoMobileBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
+				},
 				buttonsGap: {
 					Desktop: '0',
 					Tablet: '0',
@@ -437,54 +444,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Tablet: '100',
 					Mobile: '100'
 				},
-            },
-            "preset-3": {
-                buttonIconAlign: 'none',
-                buttonTwoIconAlign: 'none',
+			},
+			"preset-3": {
+				buttonIconAlign: 'none',
+				buttonTwoIconAlign: 'none',
 				connectorSwitcher: false,
 				buttonsDirection: 'vertical',
-                ButtonDesktopPadding: {
-                    top: "12",
+				ButtonDesktopPadding: {
+					top: "12",
 					bottom: "12",
 					left: "30",
 					right: "30",
-                },
+				},
 				ButtonDesktopBorderRadiusWidth: {
-                    top: "0",
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonTabBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonMobileBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
+				},
 				ButtonTwoDesktopBorderRadiusWidth: {
-                    top: "0",
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonTwoTabBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonTwoMobileBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
+				},
 				buttonsGap: {
 					Desktop: '10',
 					Tablet: '10',
@@ -495,54 +502,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Tablet: '100',
 					Mobile: '100'
 				},
-            },
-            "preset-4": {
-                buttonIconAlign: 'none',
-                buttonTwoIconAlign: 'none',
-                buttonsDirection: 'horizontal',
+			},
+			"preset-4": {
+				buttonIconAlign: 'none',
+				buttonTwoIconAlign: 'none',
+				buttonsDirection: 'horizontal',
 				connectorSwitcher: false,
-                ButtonDesktopPadding: {
-                    top: "12",
+				ButtonDesktopPadding: {
+					top: "12",
 					bottom: "12",
 					left: "30",
 					right: "30",
-                },
+				},
 				ButtonDesktopBorderRadiusWidth: {
-                    top: "0",
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonTabBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonMobileBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
+				},
 				ButtonTwoDesktopBorderRadiusWidth: {
-                    top: "0",
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonTwoTabBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
-                ButtonTwoMobileBorderRadiusWidth: {
-                    top: "0",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "0",
 					bottom: "0",
 					left: "0",
 					right: "0",
-                },
+				},
 				buttonsGap: {
 					Desktop: '10',
 					Tablet: '10',
@@ -553,54 +560,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Tablet: '',
 					Mobile: ''
 				},
-            },
+			},
 			"preset-5": {
-                buttonIconAlign: 'none',
-                buttonTwoIconAlign: 'none',
-                buttonsDirection: 'vertical',
+				buttonIconAlign: 'none',
+				buttonTwoIconAlign: 'none',
+				buttonsDirection: 'vertical',
 				connectorSwitcher: true,
-                ButtonDesktopPadding: {
-                    top: "12",
+				ButtonDesktopPadding: {
+					top: "12",
 					bottom: "12",
 					left: "30",
 					right: "30",
-                },
-                ButtonDesktopBorderRadiusWidth: {
-                    top: "50",
+				},
+				ButtonDesktopBorderRadiusWidth: {
+					top: "50",
 					bottom: "50",
 					left: "50",
 					right: "50",
-                },
-                ButtonTabBorderRadiusWidth: {
-                    top: "50",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "50",
 					bottom: "50",
 					left: "50",
 					right: "50",
-                },
-                ButtonMobileBorderRadiusWidth: {
-                    top: "50",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "50",
 					bottom: "50",
 					left: "50",
 					right: "50",
-                },
-                ButtonTwoDesktopBorderRadiusWidth: {
-                    top: "50",
+				},
+				ButtonTwoDesktopBorderRadiusWidth: {
+					top: "50",
 					bottom: "50",
 					left: "50",
 					right: "50",
-                },
-                ButtonTwoTabBorderRadiusWidth: {
-                    top: "50",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "50",
 					bottom: "50",
 					left: "50",
 					right: "50",
-                },
-                ButtonTwoMobileBorderRadiusWidth: {
-                    top: "50",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "50",
 					bottom: "50",
 					left: "50",
 					right: "50",
-                },
+				},
 				buttonsGap: {
 					Desktop: '0',
 					Tablet: '0',
@@ -611,23 +618,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Tablet: '100',
 					Mobile: '100'
 				},
-            },
-            
-        };
+			},
 
-        const selectedPresetConfig = presetConfigurations[selectedPreset];
+		};
 
-        if (selectedPresetConfig) {
-            setAttributes({
-                dualButtonPresetStyle: selectedPreset,
-                ...selectedPresetConfig,
-            });
-        } else {
-            console.warn(`Dual Button: Preset "${selectedPreset}" not found.`);
-        }
-    };
-    /** End Preset Style */
-	
+		const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+		if (selectedPresetConfig) {
+			setAttributes({
+				dualButtonPresetStyle: selectedPreset,
+				...selectedPresetConfig,
+			});
+		} else {
+			console.warn(`Dual Button: Preset "${selectedPreset}" not found.`);
+		}
+	};
+	/** End Preset Style */
+
 	/** Button One **/
 	/** Border **/
 	const handleButtonOneBorderUnitChange = (event, position) => {
@@ -1131,7 +1138,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const buttonDesktopMargin = `${ButtonDesktopMargin.top}${ButtonTwoMarginUnits.Desktop} ${ButtonDesktopMargin.right}${ButtonTwoMarginUnits.Desktop} ${ButtonDesktopMargin.bottom}${ButtonTwoMarginUnits.Desktop} ${ButtonDesktopMargin.left}${ButtonTwoMarginUnits.Desktop}`;
 	const buttonTabMargin = `${ButtonTabMargin.top}${ButtonTwoMarginUnits.Tablet} ${ButtonTabMargin.right}${ButtonTwoMarginUnits.Tablet} ${ButtonTabMargin.bottom}${ButtonTwoMarginUnits.Tablet} ${ButtonTabMargin.left}${ButtonTwoMarginUnits.Tablet}`;
 	const buttonMobileMargin = `${ButtonMobileMargin.top}${ButtonTwoMarginUnits.Mobile} ${ButtonMobileMargin.right}${ButtonTwoMarginUnits.Mobile} ${ButtonMobileMargin.bottom}${ButtonTwoMarginUnits.Mobile} ${ButtonMobileMargin.left}${ButtonTwoMarginUnits.Mobile}`;
-	
+
 
 	/** Start Connector border */
 	const connectorBorderUnitChange = (event, position) => {
@@ -1288,11 +1295,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		}
 	};
-	
+
 	const connectorBorderRadiusCombineBtn = () => {
 		setAttributes({ connectorBorderRadiusLink: !connectorBorderRadiusLink });
 	};
-	
+
 	const connectorBorderRadiusUnitsHandler = (unit) => {
 		setAttributes({
 			connectorBorderRadiusUnits: {
@@ -1301,11 +1308,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 		});
 	};
-	
+
 	const connectorDesktopBorderRadius = `${connectorBorderRadiusDesktop.top}${connectorBorderRadiusUnits.Desktop} ${connectorBorderRadiusDesktop.right}${connectorBorderRadiusUnits.Desktop} ${connectorBorderRadiusDesktop.bottom}${connectorBorderRadiusUnits.Desktop} ${connectorBorderRadiusDesktop.left}${connectorBorderRadiusUnits.Desktop}`;
 	const connectorTabletBorderRadius = `${connectorBorderRadiusTablet.top}${connectorBorderRadiusUnits.Tablet} ${connectorBorderRadiusTablet.right}${connectorBorderRadiusUnits.Tablet} ${connectorBorderRadiusTablet.bottom}${connectorBorderRadiusUnits.Tablet} ${connectorBorderRadiusTablet.left}${connectorBorderRadiusUnits.Tablet}`;
-	const connectorMobileBorderRadius = `${connectorBorderRadiusMobile.top}${connectorBorderRadiusUnits.Mobile} ${connectorBorderRadiusMobile.right}${connectorBorderRadiusUnits.Mobile} ${connectorBorderRadiusMobile.bottom}${connectorBorderRadiusUnits.Mobile} ${connectorBorderRadiusMobile.left}${connectorBorderRadiusUnits.Mobile}`;	
-	
+	const connectorMobileBorderRadius = `${connectorBorderRadiusMobile.top}${connectorBorderRadiusUnits.Mobile} ${connectorBorderRadiusMobile.right}${connectorBorderRadiusUnits.Mobile} ${connectorBorderRadiusMobile.bottom}${connectorBorderRadiusUnits.Mobile} ${connectorBorderRadiusMobile.left}${connectorBorderRadiusUnits.Mobile}`;
+
 	/** Start Icon border */
 	const iconBorderUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -2011,7 +2018,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	useEffect(() => {
 		loadGoogleFont(ButtonFontFamily);
 		loadGoogleFont(connectorFontFamily);
-	}, [ButtonFontFamily, connectorFontFamily]); 
+	}, [ButtonFontFamily, connectorFontFamily]);
 	/* End Load Google Fonts */
 
 	const iconHandler = (IconName) => {
@@ -2031,25 +2038,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'right' && dualBtnHZRightOffset.Desktop ? `right: ${dualBtnHZRightOffset.Desktop}${dualBtnHZRightOffsetUnits.Desktop};` : ''}
 			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'top' && dualBtnVRTopOffset.Desktop ? `top: ${dualBtnVRTopOffset.Desktop}${dualBtnVRTopOffsetUnits.Desktop};` : ''}
 			${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'bottom' && dualBtnVRBottomOffset.Desktop ? `bottom: ${dualBtnVRBottomOffset.Desktop}${dualBtnVRBottomOffsetUnits.Desktop};` : ''}
-			${dualButtonGlobalZIndex.Desktop ? `z-index: ${dualButtonGlobalZIndex.Desktop};` : "" }
+			${dualButtonGlobalZIndex.Desktop ? `z-index: ${dualButtonGlobalZIndex.Desktop};` : ""}
 			${dualBtnOverflow !== 'default' ? `overflow: ${dualBtnOverflow};` : ''}
 		}
 		.fb-dual-button-container.${blockID} {
-            ${dualButtonGlobalBgColor ? `background-color: ${dualButtonGlobalBgColor};` : "" } 
+            ${dualButtonGlobalBgColor ? `background-color: ${dualButtonGlobalBgColor};` : ""} 
             ${globalDesktopPadding && dualButtonGlobalPaddingDesktop.top ? `padding: ${globalDesktopPadding};` : ""}
             ${globalDesktopMargin && dualButtonGlobalMarginDesktop.top ? `margin: ${globalDesktopMargin};` : ""} 
-            ${dualButtonGlobalBorder ? `border: ${dualButtonGlobalBorder};` : "" } 
-            ${globalDesktopBorderWidth && dualButtonGlobalBorderDesktop.top ? `border-width: ${globalDesktopBorderWidth};` : "" }
-            ${globalDesktopBorderRadiusWidth && dualButtonGlobalBorderRadiusDesktop.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : "" }
-            ${dualButtonGlobalBorderColor ? `border-color: ${dualButtonGlobalBorderColor};` : "" }
-            ${globalBoxShadowCssValue ? `box-shadow: ${globalBoxShadowCssValue};` : "" }
+            ${dualButtonGlobalBorder ? `border: ${dualButtonGlobalBorder};` : ""} 
+            ${globalDesktopBorderWidth && dualButtonGlobalBorderDesktop.top ? `border-width: ${globalDesktopBorderWidth};` : ""}
+            ${globalDesktopBorderRadiusWidth && dualButtonGlobalBorderRadiusDesktop.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
+            ${dualButtonGlobalBorderColor ? `border-color: ${dualButtonGlobalBorderColor};` : ""}
+            ${globalBoxShadowCssValue ? `box-shadow: ${globalBoxShadowCssValue};` : ""}
             transition: all .3s ease-in-out;
             position: relative;
         }
         .fb-dual-button-container.${blockID}:hover {
-            ${dualButtonGlobalBgHoverColor ? `background-color: ${dualButtonGlobalBgHoverColor};` : "" }
-            ${dualButtonGlobalBorderHoverColor ? `border-color: ${dualButtonGlobalBorderHoverColor};` : "" }
-			${globalHoverBoxShadowCssValue ? `box-shadow: ${globalHoverBoxShadowCssValue};` : "" }
+            ${dualButtonGlobalBgHoverColor ? `background-color: ${dualButtonGlobalBgHoverColor};` : ""}
+            ${dualButtonGlobalBorderHoverColor ? `border-color: ${dualButtonGlobalBorderHoverColor};` : ""}
+			${globalHoverBoxShadowCssValue ? `box-shadow: ${globalHoverBoxShadowCssValue};` : ""}
         }
 		.fb-dual-button-container.${blockID} .fb-advanced-button {
 			${ButtonGlobalTypoSwitcher.fontFamily === true && ButtonGlobalTypographyData.fontFamily ? `font-family: ${ButtonGlobalTypographyData.fontFamily};` : ''}
@@ -2061,12 +2068,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${ButtonGlobalTypoSwitcher.letterSpacing === true && ButtonGlobalTypographyData.letterSpacing ? `letter-spacing: ${ButtonGlobalTypographyData.letterSpacing};` : ''}
 			${ButtonGlobalTypoSwitcher.lineHeight === true && ButtonGlobalTypographyData.lineHeight ? `line-height: ${ButtonGlobalTypographyData.lineHeight};` : ''}
 			
-			${ButtonGlobalTypoSwitcher.fontFamily === false && ButtonFontFamily && ButtonFontFamily !== "Default" ? `font-family: ${ButtonFontFamily};` : "" }
+			${ButtonGlobalTypoSwitcher.fontFamily === false && ButtonFontFamily && ButtonFontFamily !== "Default" ? `font-family: ${ButtonFontFamily};` : ""}
 			${ButtonGlobalTypoSwitcher.fontSize === false && ButtonFontSize.Desktop && ButtonFontSizeUnits.Desktop ? `font-size: ${ButtonFontSize.Desktop}${ButtonFontSizeUnits.Desktop};` : ''}
-			${ButtonGlobalTypoSwitcher.fontWeight === false && ButtonFontWeight ? `font-weight: ${ButtonFontWeight};` : "" }
-			${ButtonGlobalTypoSwitcher.fontStyle === false && ButtonFontStyle ? `font-style: ${ButtonFontStyle};` : "" }
-			${ButtonGlobalTypoSwitcher.textTransform === false && ButtonTextTransform ? `text-transform: ${ButtonTextTransform};` : "" }
-			${ButtonGlobalTypoSwitcher.textDecoration === false && ButtonTextDecoration ? `text-decoration: ${ButtonTextDecoration};` : "" }
+			${ButtonGlobalTypoSwitcher.fontWeight === false && ButtonFontWeight ? `font-weight: ${ButtonFontWeight};` : ""}
+			${ButtonGlobalTypoSwitcher.fontStyle === false && ButtonFontStyle ? `font-style: ${ButtonFontStyle};` : ""}
+			${ButtonGlobalTypoSwitcher.textTransform === false && ButtonTextTransform ? `text-transform: ${ButtonTextTransform};` : ""}
+			${ButtonGlobalTypoSwitcher.textDecoration === false && ButtonTextDecoration ? `text-decoration: ${ButtonTextDecoration};` : ""}
 			${ButtonGlobalTypoSwitcher.letterSpacing === false && ButtonLetterSpacing.Desktop && ButtonLetterSpacingUnits.Desktop ? `letter-spacing: ${ButtonLetterSpacing.Desktop}${ButtonLetterSpacingUnits.Desktop};` : ''}
 			${ButtonGlobalTypoSwitcher.lineHeight === false && ButtonLineHeight.Desktop && ButtonLineHeightUnits.Desktop ? `line-height: ${ButtonLineHeight.Desktop}${ButtonLineHeightUnits.Desktop};` : ''}
 			
@@ -2088,19 +2095,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button:hover {
-			${ButtonBgHoverColor ? `background-color: ${ButtonBgHoverColor};` : "" }
-			${ButtonBorderHoverColor ? `border-color: ${ButtonBorderHoverColor};` : "" }
+			${ButtonBgHoverColor ? `background-color: ${ButtonBgHoverColor};` : ""}
+			${ButtonBorderHoverColor ? `border-color: ${ButtonBorderHoverColor};` : ""}
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button {
-			${ButtonTwoBgColor ? `background-color: ${ButtonTwoBgColor} !important;` : "" }
+			${ButtonTwoBgColor ? `background-color: ${ButtonTwoBgColor} !important;` : ""}
 			${ButtonTwoBorder ? `border: ${ButtonTwoBorder};` : ""}
 			${buttonBorderDesktopWidth && ButtonTwoDesktopBorderWidth.top ? `border-width: ${buttonBorderDesktopWidth};` : ''}
 			${buttonBorderRadiusDesktopWidth && ButtonTwoDesktopBorderRadiusWidth.top ? `border-radius: ${buttonBorderRadiusDesktopWidth};` : ''}
-			${ButtonTwoBorderColor ? `border-color: ${ButtonTwoBorderColor};` : "" }
+			${ButtonTwoBorderColor ? `border-color: ${ButtonTwoBorderColor};` : ""}
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button:hover {
 			${ButtonTwoBgHoverColor ? `background-color: ${ButtonTwoBgHoverColor} !important;` : ""}
-			${ButtonTwoBorderHoverColor ? `border-color: ${ButtonTwoBorderHoverColor};` : "" }
+			${ButtonTwoBorderHoverColor ? `border-color: ${ButtonTwoBorderHoverColor};` : ""}
 		}
 		
 		.fb-dual-button-container.${blockID} .fb-advanced-button.fb-dual-button-one .fb-advanced-button-text {
@@ -2118,7 +2125,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		
     	.fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
 			${connectorColor ? `color: ${connectorColor};` : ""}
-			${connectorBgColor ? `background-color: ${connectorBgColor};` : "" }
+			${connectorBgColor ? `background-color: ${connectorBgColor};` : ""}
 
 			${connectorGlobalTypoSwitcher.fontFamily === true && connectorGlobalTypographyData.fontFamily ? `font-family: ${connectorGlobalTypographyData.fontFamily};` : ''}
 			${connectorGlobalTypoSwitcher.fontSize === true && connectorGlobalTypographyData.fontSize ? `font-size: ${connectorGlobalTypographyData.fontSize};` : ''}
@@ -2129,50 +2136,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${connectorGlobalTypoSwitcher.letterSpacing === true && connectorGlobalTypographyData.letterSpacing ? `letter-spacing: ${connectorGlobalTypographyData.letterSpacing};` : ''}
 			${connectorGlobalTypoSwitcher.lineHeight === true && connectorGlobalTypographyData.lineHeight ? `line-height: ${connectorGlobalTypographyData.lineHeight};` : ''}
 
-			${connectorGlobalTypoSwitcher.fontFamily === false && connectorFontFamily && connectorFontFamily !== "Default" ? `font-family: ${connectorFontFamily};` : "" }
+			${connectorGlobalTypoSwitcher.fontFamily === false && connectorFontFamily && connectorFontFamily !== "Default" ? `font-family: ${connectorFontFamily};` : ""}
 			${connectorGlobalTypoSwitcher.fontSize === false && connectorFontSize.Desktop && connectorFontSizeUnits.Desktop ? `font-size: ${connectorFontSize.Desktop}${connectorFontSizeUnits.Desktop};` : ''}
-			${connectorGlobalTypoSwitcher.fontWeight === false && connectorFontWeight ? `font-weight: ${connectorFontWeight};` : "" }
-			${connectorGlobalTypoSwitcher.fontStyle === false && connectorFontStyle ? `font-style: ${connectorFontStyle};` : "" }
-			${connectorGlobalTypoSwitcher.textTransform === false && connectorTextTransform ? `text-transform: ${connectorTextTransform};` : "" }
-			${connectorGlobalTypoSwitcher.textDecoration === false && connectorTextDecoration ? `text-decoration: ${connectorTextDecoration};` : "" }
+			${connectorGlobalTypoSwitcher.fontWeight === false && connectorFontWeight ? `font-weight: ${connectorFontWeight};` : ""}
+			${connectorGlobalTypoSwitcher.fontStyle === false && connectorFontStyle ? `font-style: ${connectorFontStyle};` : ""}
+			${connectorGlobalTypoSwitcher.textTransform === false && connectorTextTransform ? `text-transform: ${connectorTextTransform};` : ""}
+			${connectorGlobalTypoSwitcher.textDecoration === false && connectorTextDecoration ? `text-decoration: ${connectorTextDecoration};` : ""}
 			${connectorGlobalTypoSwitcher.letterSpacing === false && connectorLetterSpacing.Desktop && connectorLetterSpacingUnits.Desktop ? `letter-spacing: ${connectorLetterSpacing.Desktop}${connectorLetterSpacingUnits.Desktop};` : ''}
 			${connectorSize.Desktop && connectorSizeUnits.Desktop ? `line-height: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};` : ''}
 			
-			${connectorBorder ? `border: ${connectorBorder};` : "" }
-			${connectorBorderColor ? `border-color: ${connectorBorderColor};` : "" }
-			${connectorDesktopBorderWidth && connectorBorderDesktop.top ? `border-width: ${connectorDesktopBorderWidth};` : "" }
-			${connectorDesktopBorderRadius && connectorBorderRadiusDesktop.top ? `border-radius: ${connectorDesktopBorderRadius};` : "" }
+			${connectorBorder ? `border: ${connectorBorder};` : ""}
+			${connectorBorderColor ? `border-color: ${connectorBorderColor};` : ""}
+			${connectorDesktopBorderWidth && connectorBorderDesktop.top ? `border-width: ${connectorDesktopBorderWidth};` : ""}
+			${connectorDesktopBorderRadius && connectorBorderRadiusDesktop.top ? `border-radius: ${connectorDesktopBorderRadius};` : ""}
 			${connectorSize.Desktop && connectorSizeUnits.Desktop ? `width: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};` : ''}
 			${connectorSize.Desktop && connectorSizeUnits.Desktop ? `height: ${connectorSize.Desktop}${connectorSizeUnits.Desktop};` : ''}
 			transition: all .3s ease-in-out;
     	}
 		.fb-dual-button-container.${blockID} .fb-dual-button-connector:hover .fb-dual-button-connector-text {
-			${connectorHoverColor ? `color: ${connectorHoverColor};` : "" }
-			${connectorBgHoverColor ? `background-color: ${connectorBgHoverColor};` : "" }
-			${connectorBorderHoverColor ? `border-color: ${connectorBorderHoverColor};` : "" }
+			${connectorHoverColor ? `color: ${connectorHoverColor};` : ""}
+			${connectorBgHoverColor ? `background-color: ${connectorBgHoverColor};` : ""}
+			${connectorBorderHoverColor ? `border-color: ${connectorBorderHoverColor};` : ""}
 		}
 
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper{
 			${btnIconBgColor ? `background: ${btnIconBgColor};` : ""}
-			${iconBorder ? `border: ${iconBorder};` : "" } 
-			${iconBorderColor ? `border-color: ${iconBorderColor};` : "" }
-            ${iconDesktopBorderWidth && iconBorderDesktop.top ? `border-width: ${iconDesktopBorderWidth};` : "" }
-            ${iconDesktopBorderRadius && iconBorderRadiusDesktop.top ? `border-radius: ${iconDesktopBorderRadius};` : "" }
+			${iconBorder ? `border: ${iconBorder};` : ""} 
+			${iconBorderColor ? `border-color: ${iconBorderColor};` : ""}
+            ${iconDesktopBorderWidth && iconBorderDesktop.top ? `border-width: ${iconDesktopBorderWidth};` : ""}
+            ${iconDesktopBorderRadius && iconBorderRadiusDesktop.top ? `border-radius: ${iconDesktopBorderRadius};` : ""}
+			transform: rotate(${buttonIconRotate.Desktop}deg);
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper:hover .fb-advanced-button-icon-wrapper{
 			${btnIconBgHoverColor ? `background: ${btnIconBgHoverColor};` : ""}
-			${iconBorderHoverColor ? `border-color: ${iconBorderHoverColor};` : "" }
+			${iconBorderHoverColor ? `border-color: ${iconBorderHoverColor};` : ""}
+			transform: rotate(${buttonIconRotateHover.Desktop}deg);
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button-icon-wrapper{
 			${btnTwoIconBgColor ? `background: ${btnTwoIconBgColor};` : ""}
-			${iconTwoBorder ? `border: ${iconTwoBorder};` : "" } 
-			${iconTwoBorderColor ? `border-color: ${iconTwoBorderColor};` : "" }
-            ${iconTwoDesktopBorderWidth && iconTwoBorderDesktop.top ? `border-width: ${iconTwoDesktopBorderWidth};` : "" }
-            ${iconTwoDesktopBorderRadius && iconTwoBorderRadiusDesktop.top ? `border-radius: ${iconTwoDesktopBorderRadius};` : "" }
+			${iconTwoBorder ? `border: ${iconTwoBorder};` : ""} 
+			${iconTwoBorderColor ? `border-color: ${iconTwoBorderColor};` : ""}
+            ${iconTwoDesktopBorderWidth && iconTwoBorderDesktop.top ? `border-width: ${iconTwoDesktopBorderWidth};` : ""}
+            ${iconTwoDesktopBorderRadius && iconTwoBorderRadiusDesktop.top ? `border-radius: ${iconTwoDesktopBorderRadius};` : ""}
+			transform: rotate(${buttonTwoIconRotate.Desktop}deg);
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper:hover .fb-advanced-button-icon-wrapper{
 			${btnTwoIconBgHoverColor ? `background: ${btnTwoIconBgHoverColor};` : ""}
-			${iconTwoBorderHoverColor ? `border-color: ${iconTwoBorderHoverColor};` : "" }
+			${iconTwoBorderHoverColor ? `border-color: ${iconTwoBorderHoverColor};` : ""}
+			transform: rotate(${buttonTwoIconRotateHover.Desktop}deg);
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper svg {
 			${btnIconColor ? `fill: ${btnIconColor};` : ""}
@@ -2196,13 +2207,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'right' && dualBtnHZRightOffset.Tablet ? `right: ${dualBtnHZRightOffset.Tablet}${dualBtnHZRightOffsetUnits.Tablet};` : ''}
 				${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'top' && dualBtnVRTopOffset.Tablet ? `top: ${dualBtnVRTopOffset.Tablet}${dualBtnVRTopOffsetUnits.Tablet};` : ''}
 				${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'bottom' && dualBtnVRBottomOffset.Tablet ? `bottom: ${dualBtnVRBottomOffset.Tablet}${dualBtnVRBottomOffsetUnits.Tablet};` : ''}
-				${dualButtonGlobalZIndex.Tablet ? `z-index: ${dualButtonGlobalZIndex.Tablet};` : "" }
+				${dualButtonGlobalZIndex.Tablet ? `z-index: ${dualButtonGlobalZIndex.Tablet};` : ""}
 			}
 			.fb-dual-button-container.${blockID} {
 				${globalTabletPadding && dualButtonGlobalPaddingTablet.top ? `padding: ${globalTabletPadding};` : ""}
 				${globalTabletMargin && dualButtonGlobalMarginTablet.top ? `margin: ${globalTabletMargin};` : ""} 
-				${globalTabletBorderWidth && dualButtonGlobalBorderTablet.top ? `border-width: ${globalTabletBorderWidth};` : "" }
-				${globalTabletBorderRadiusWidth && dualButtonGlobalBorderRadiusTablet.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : "" }
+				${globalTabletBorderWidth && dualButtonGlobalBorderTablet.top ? `border-width: ${globalTabletBorderWidth};` : ""}
+				${globalTabletBorderRadiusWidth && dualButtonGlobalBorderRadiusTablet.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ""}
 			}
 			.fb-dual-button-container.${blockID} .fb-advanced-button {
 				${ButtonWidth.Tablet && ButtonWidthWidthUnits.Tablet ? `width: ${ButtonWidth.Tablet}${ButtonWidthWidthUnits.Tablet};` : ''}
@@ -2231,12 +2242,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			
 			.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper{
-				${iconTabletBorderWidth && iconBorderTablet.top ? `border-width: ${iconTabletBorderWidth};` : "" }
-				${iconTabletBorderRadius && iconBorderRadiusTablet.top ? `border-radius: ${iconTabletBorderRadius};` : "" }
+				${iconTabletBorderWidth && iconBorderTablet.top ? `border-width: ${iconTabletBorderWidth};` : ""}
+				${iconTabletBorderRadius && iconBorderRadiusTablet.top ? `border-radius: ${iconTabletBorderRadius};` : ""}
+				transform: rotate(${buttonIconRotate.Tablet}deg);
 			}
 			.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button-icon-wrapper{
-				${iconTwoTabletBorderWidth && iconTwoBorderTablet.top ? `border-width: ${iconTwoTabletBorderWidth};` : "" }
-				${iconTwoTabletBorderRadius && iconTwoBorderRadiusTablet.top ? `border-radius: ${iconTwoTabletBorderRadius};` : "" }
+				${iconTwoTabletBorderWidth && iconTwoBorderTablet.top ? `border-width: ${iconTwoTabletBorderWidth};` : ""}
+				${iconTwoTabletBorderRadius && iconTwoBorderRadiusTablet.top ? `border-radius: ${iconTwoTabletBorderRadius};` : ""}
+				transform: rotate(${buttonTwoIconRotate.Tablet}deg);
 			}
 		}
 		@media only screen and (max-width: 767px) {
@@ -2246,13 +2259,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnHZOrientationType === 'right' && dualBtnHZRightOffset.Mobile ? `right: ${dualBtnHZRightOffset.Mobile}${dualBtnHZRightOffsetUnits.Mobile};` : ''}
 				${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'top' && dualBtnVRTopOffset.Mobile ? `top: ${dualBtnVRTopOffset.Mobile}${dualBtnVRTopOffsetUnits.Mobile};` : ''}
 				${dualBtnPositionType !== 'default' && dualBtnPositionType !== 'relative' && dualBtnVROrientationType === 'bottom' && dualBtnVRBottomOffset.Mobile ? `bottom: ${dualBtnVRBottomOffset.Mobile}${dualBtnVRBottomOffsetUnits.Mobile};` : ''}
-				${dualButtonGlobalZIndex.Mobile ? `z-index: ${dualButtonGlobalZIndex.Mobile};` : "" }
+				${dualButtonGlobalZIndex.Mobile ? `z-index: ${dualButtonGlobalZIndex.Mobile};` : ""}
 			}	
 			.fb-dual-button-container.${blockID} {
 				${globalMobilePadding && dualButtonGlobalPaddingMobile.top ? `padding: ${globalMobilePadding};` : ""}
 				${globalMobileMargin && dualButtonGlobalMarginMobile.top ? `margin: ${globalMobileMargin};` : ""} 
-				${globalMobileBorderWidth && dualButtonGlobalBorderMobile.top ? `border-width: ${globalMobileBorderWidth};` : "" }
-				${globalMobileBorderRadiusWidth && dualButtonGlobalBorderRadiusMobile.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : "" }
+				${globalMobileBorderWidth && dualButtonGlobalBorderMobile.top ? `border-width: ${globalMobileBorderWidth};` : ""}
+				${globalMobileBorderRadiusWidth && dualButtonGlobalBorderRadiusMobile.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ""}
 			}
 			.fb-dual-button-container.${blockID} .fb-advanced-button {
 				${ButtonWidth.Mobile && ButtonWidthWidthUnits.Mobile ? `width: ${ButtonWidth.Mobile}${ButtonWidthWidthUnits.Mobile};` : ''}
@@ -2280,12 +2293,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${connectorMobileBorderRadius && connectorBorderRadiusMobile.top ? `border-radius: ${connectorMobileBorderRadius};` : ''}
 			}
 			.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button-icon-wrapper{
-				${iconMobileBorderWidth && iconBorderMobile.top ? `border-width: ${iconMobileBorderWidth};` : "" }
-				${iconMobileBorderRadius && iconBorderRadiusMobile.top ? `border-radius: ${iconMobileBorderRadius};` : "" }
+				${iconMobileBorderWidth && iconBorderMobile.top ? `border-width: ${iconMobileBorderWidth};` : ""}
+				${iconMobileBorderRadius && iconBorderRadiusMobile.top ? `border-radius: ${iconMobileBorderRadius};` : ""}
+				transform: rotate(${buttonIconRotate.Mobile}deg);
 			}
 			.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button-icon-wrapper{
-				${iconTwoMobileBorderWidth && iconTwoBorderMobile.top ? `border-width: ${iconTwoMobileBorderWidth};` : "" }
-				${iconTwoMobileBorderRadius && iconTwoBorderRadiusMobile.top ? `border-radius: ${iconTwoMobileBorderRadius};` : "" }
+				${iconTwoMobileBorderWidth && iconTwoBorderMobile.top ? `border-width: ${iconTwoMobileBorderWidth};` : ""}
+				${iconTwoMobileBorderRadius && iconTwoBorderRadiusMobile.top ? `border-radius: ${iconTwoMobileBorderRadius};` : ""}
+				transform: rotate(${buttonTwoIconRotate.Mobile}deg);
 			}
 		
 		}
@@ -2427,6 +2442,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			dualBtnVRTopOffsetUnits,
 			dualBtnVRBottomOffset,
 			dualBtnVRBottomOffsetUnits,
+			buttonIconRotateSwitcher,
+			buttonIconRotate,
+			buttonIconRotateHover,
+			buttonTwoIconRotateSwitcher,
+			buttonTwoIconRotate,
+			buttonTwoIconRotateHover,
 		],
 	);
 
@@ -2446,17 +2467,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const generalControls = (
 		<>
 			<div className="fb-dual-button-pressets">
-			<PanelBody
-				title={__("Presets", "frontis-blocks")}
-				initialOpen={true}
-			>
-				<SelectControl
-					label={__("Preset Style", "frontis-blocks")}
-					value={dualButtonPresetStyle}
-					options={PRESETS}
-					onChange={(selected) => changeDualButtonPreset(selected)}
-				/>	
-			</PanelBody>
+				<PanelBody
+					title={__("Presets", "frontis-blocks")}
+					initialOpen={true}
+				>
+					<SelectControl
+						label={__("Preset Style", "frontis-blocks")}
+						value={dualButtonPresetStyle}
+						options={PRESETS}
+						onChange={(selected) => changeDualButtonPreset(selected)}
+					/>
+				</PanelBody>
 			</div>
 			<div className="fb-dual-button-container">
 				{/*Button One*/}
@@ -2535,43 +2556,42 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								className="fb-setting-text-alignment"
 							>
 								<ButtonGroup className="fb-setting-text-alignment-group-btn">
-								{ICON_ALIGN.map((item, key) => (
-									<Button
-										key={key}
-										onClick={() =>
-											setAttributes({
-												buttonIconAlign: item.value,
-											})
-										}
-										className={`fb-setting-text-alignment-single-btn ${
-											buttonIconAlign === item.value
+									{ICON_ALIGN.map((item, key) => (
+										<Button
+											key={key}
+											onClick={() =>
+												setAttributes({
+													buttonIconAlign: item.value,
+												})
+											}
+											className={`fb-setting-text-alignment-single-btn ${buttonIconAlign === item.value
 												? "active"
 												: ""
-										}`}
-									>
-										{item.label}
-									</Button>
-								))}
-							</ButtonGroup>
-							
+												}`}
+										>
+											{item.label}
+										</Button>
+									))}
+								</ButtonGroup>
+
 								{(buttonIconAlign === "icon-text" ||
 									buttonIconAlign === "icon-only") && (
-									<FBIconPicker
-										value={ButtonIcon}
-										setIconHandler={iconHandler}
-									/>
-								)}
+										<FBIconPicker
+											value={ButtonIcon}
+											setIconHandler={iconHandler}
+										/>
+									)}
 							</BaseControl>
 						</div>
-						{buttonIconAlign === "icon-text"  && (
-						<SelectControl
-							label={__("Icon Position", "frontis-blocks")}
-							options={ICON_POSITION}
-							value={btnIconPosition}
-							onChange={(value) =>
-								setAttributes({ btnIconPosition: value })
-							}
-						/>
+						{buttonIconAlign === "icon-text" && (
+							<SelectControl
+								label={__("Icon Position", "frontis-blocks")}
+								options={ICON_POSITION}
+								value={btnIconPosition}
+								onChange={(value) =>
+									setAttributes({ btnIconPosition: value })
+								}
+							/>
 						)}
 					</PanelBody>
 				</div>
@@ -2684,11 +2704,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													buttonTwoIconAlign: item.value,
 												})
 											}
-											className={`fb-setting-text-alignment-single-btn ${
-												buttonTwoIconAlign === item.value
-													? "active"
-													: ""
-											}`}
+											className={`fb-setting-text-alignment-single-btn ${buttonTwoIconAlign === item.value
+												? "active"
+												: ""
+												}`}
 										>
 											{item.label}
 										</Button>
@@ -2696,22 +2715,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								</ButtonGroup>
 								{(buttonTwoIconAlign === "icon-text" ||
 									buttonTwoIconAlign === "icon-only") && (
-									<FBIconPicker
-										value={ButtonTwoIcon}
-										setIconHandler={iconHandlerTwo}
-									/>
-								)}
+										<FBIconPicker
+											value={ButtonTwoIcon}
+											setIconHandler={iconHandlerTwo}
+										/>
+									)}
 							</BaseControl>
 						</div>
 						{buttonTwoIconAlign === "icon-text" && (
-						<SelectControl
-							label={__("Icon Position", "frontis-blocks")}
-							options={ICON_POSITION}
-							value={btnTwoIconPosition}
-							onChange={(value) =>
-								setAttributes({ btnTwoIconPosition: value })
-							}
-						/>
+							<SelectControl
+								label={__("Icon Position", "frontis-blocks")}
+								options={ICON_POSITION}
+								value={btnTwoIconPosition}
+								onChange={(value) =>
+									setAttributes({ btnTwoIconPosition: value })
+								}
+							/>
 						)}
 					</PanelBody>
 				</div>
@@ -2756,9 +2775,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					globalTypoType={ButtonGlobalTypoType}
 					onChangeGlobalTypoType={(value) => {
-						setAttributes({ 
-							ButtonGlobalTypoType: value, 
-							ButtonGlobalTypoSwitcher: value === 'default' ? {...ButtonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...ButtonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+						setAttributes({
+							ButtonGlobalTypoType: value,
+							ButtonGlobalTypoSwitcher: value === 'default' ? { ...ButtonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...ButtonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 						})
 					}}
 
@@ -2766,34 +2785,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					onChangeGlobalTypoOption={(value) => setAttributes({ ButtonGlobalTypoOption: value })}
 
 					fontFamily={ButtonFontFamily}
-					onChangeFontFamily={(value) => setAttributes({ ButtonFontFamily: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontFamily: value && false} })}
+					onChangeFontFamily={(value) => setAttributes({ ButtonFontFamily: value, ButtonGlobalTypoSwitcher: { ...ButtonGlobalTypoSwitcher, fontFamily: value && false } })}
 
 					fontSize={ButtonFontSize}
-					onChangeFontSize={(value) => setAttributes({ ButtonFontSize: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontSize: value && false} })}
+					onChangeFontSize={(value) => setAttributes({ ButtonFontSize: value, ButtonGlobalTypoSwitcher: { ...ButtonGlobalTypoSwitcher, fontSize: value && false } })}
 
 					fontSizeUnits={ButtonFontSizeUnits}
 					onChangeFontSizeUnit={(value) => setAttributes({ ButtonFontSizeUnits: value })}
 
 					fontWeight={ButtonFontWeight}
-					onChangeFontWeight={(value) => setAttributes({ ButtonFontWeight: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontWeight: value && false} })}
+					onChangeFontWeight={(value) => setAttributes({ ButtonFontWeight: value, ButtonGlobalTypoSwitcher: { ...ButtonGlobalTypoSwitcher, fontWeight: value && false } })}
 
 					fontStyle={ButtonFontStyle}
-					onChangeFontStyle={(value) => setAttributes({ ButtonFontStyle: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, fontStyle: value && false} })}
+					onChangeFontStyle={(value) => setAttributes({ ButtonFontStyle: value, ButtonGlobalTypoSwitcher: { ...ButtonGlobalTypoSwitcher, fontStyle: value && false } })}
 
 					textTransform={ButtonTextTransform}
-					onChangeTextTransform={(value) => setAttributes({ ButtonTextTransform: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, textTransform: value && false} })}
+					onChangeTextTransform={(value) => setAttributes({ ButtonTextTransform: value, ButtonGlobalTypoSwitcher: { ...ButtonGlobalTypoSwitcher, textTransform: value && false } })}
 
 					textDecoration={ButtonTextDecoration}
-					onChangeTextDecoration={(value) => setAttributes({ ButtonTextDecoration: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, textDecoration: value && false} })}
+					onChangeTextDecoration={(value) => setAttributes({ ButtonTextDecoration: value, ButtonGlobalTypoSwitcher: { ...ButtonGlobalTypoSwitcher, textDecoration: value && false } })}
 
 					letterSpacing={ButtonLetterSpacing}
-					onChangeLetterSpacing={(value) => setAttributes({ ButtonLetterSpacing: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, letterSpacing: value && false} })}
+					onChangeLetterSpacing={(value) => setAttributes({ ButtonLetterSpacing: value, ButtonGlobalTypoSwitcher: { ...ButtonGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 					letterSpacingUnits={ButtonLetterSpacingUnits}
 					onChangeLetterSpacingUnit={(value) => setAttributes({ ButtonLetterSpacingUnits: value })}
 
 					lineHeight={ButtonLineHeight}
-					onChangeLineHeight={(value) => setAttributes({ ButtonLineHeight: value, ButtonGlobalTypoSwitcher: {...ButtonGlobalTypoSwitcher, lineHeight: value && false} })}
+					onChangeLineHeight={(value) => setAttributes({ ButtonLineHeight: value, ButtonGlobalTypoSwitcher: { ...ButtonGlobalTypoSwitcher, lineHeight: value && false } })}
 
 					lineHeightUnits={ButtonLineHeightUnits}
 					onChangeLineHeightUnit={(value) => setAttributes({ ButtonLineHeightUnits: value })}
@@ -2801,7 +2820,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					deviceType={deviceType}
 					setAttributes={setAttributes}
 				/>
-				
+
 
 				{/*	Spacing */}
 				<FB_Spacing
@@ -2898,7 +2917,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						setGlobalColor={(value) => setAttributes({ ButtonBgHoverColor: value })}
 					/>
 				)}
-				
+
 				<SelectControl
 					label={__("Border Style", "frontis-blocks")}
 					value={ButtonBorder}
@@ -2937,9 +2956,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					spacingDesktop={ButtonDesktopBorderWidth}
 					spacingTablet={ButtonTabBorderWidth}
 					spacingMobile={ButtonMobileBorderWidth}
-					handleSpacingUnitHandler={ handleButtonOneBorderUnitChange }
+					handleSpacingUnitHandler={handleButtonOneBorderUnitChange}
 					spacingCombineBtn={ButtonTwoBorderLink}
-					spacingCombineBtnHandler={ handleButtonOneBorderCombineBtn }
+					spacingCombineBtnHandler={handleButtonOneBorderCombineBtn}
 					setAttributes={setAttributes}
 				/>
 
@@ -2951,9 +2970,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					spacingDesktop={ButtonDesktopBorderRadiusWidth}
 					spacingTablet={ButtonTabBorderRadiusWidth}
 					spacingMobile={ButtonMobileBorderRadiusWidth}
-					handleSpacingUnitHandler={ handleButtonOneBorderRadiusUnitChange }
+					handleSpacingUnitHandler={handleButtonOneBorderRadiusUnitChange}
 					spacingCombineBtn={ButtonBorderRadiusLink}
-					spacingCombineBtnHandler={ handleButtonOneBorderRadiusCombineBtn }
+					spacingCombineBtnHandler={handleButtonOneBorderRadiusCombineBtn}
 					setAttributes={setAttributes}
 				/>
 
@@ -3003,7 +3022,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						setGlobalColor={(value) => setAttributes({ ButtonTwoBgHoverColor: value })}
 					/>
 				)}
-				
+
 				<SelectControl
 					label={__("Border Style", "frontis-blocks")}
 					value={ButtonTwoBorder}
@@ -3071,469 +3090,541 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			{/*	Connector Style*/}
 			{connectorSwitcher && (
 				<PanelBody
-				title={__("Connector", "frontis-blocks")}
-				initialOpen={false}
-			>
-				<FB_Range
-					min={1}
-					max={300}
-					label={__("Connector Size", "frontis-blocks")}
-					rangeValue={connectorSize}
-					onChangeHandler={connectorSizeHandler}
-					rangeUnitHandler={connectorSizeUnitsHandler}
-					deviceType={deviceType}
-					units={connectorSizeUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={50}
-				/>
-				<FB_TypographyControl
-					globalTypoControlActive={true}
-					globalTypoSwitcher={connectorGlobalTypoSwitcher}
-					storeGlobalTypographyData={(value) => setAttributes({ connectorGlobalTypographyData: value })}
-
-					globalTypoType={connectorGlobalTypoType}
-					onChangeGlobalTypoType={(value) => {
-						setAttributes({ 
-							connectorGlobalTypoType: value, 
-							connectorGlobalTypoSwitcher: value === 'default' ? {...connectorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...connectorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-						})
-					}}
-
-					globalTypoOption={connectorGlobalTypoOption}
-					onChangeGlobalTypoOption={(value) => setAttributes({ connectorGlobalTypoOption: value })}
-
-					fontFamily={connectorFontFamily}
-					onChangeFontFamily={(value) => setAttributes({ connectorFontFamily: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontFamily: value && false} })}
-
-					fontSize={connectorFontSize}
-					onChangeFontSize={(value) => setAttributes({ connectorFontSize: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontSize: value && false} })}
-
-					fontSizeUnits={connectorFontSizeUnits}
-					onChangeFontSizeUnit={(value) => setAttributes({ connectorFontSizeUnits: value })}
-
-					fontWeight={connectorFontWeight}
-					onChangeFontWeight={(value) => setAttributes({ connectorFontWeight: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontWeight: value && false} })}
-
-					fontStyle={connectorFontStyle}
-					onChangeFontStyle={(value) => setAttributes({ connectorFontStyle: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, fontStyle: value && false} })}
-
-					textTransform={connectorTextTransform}
-					onChangeTextTransform={(value) => setAttributes({ connectorTextTransform: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, textTransform: value && false} })}
-
-					textDecoration={connectorTextDecoration}
-					onChangeTextDecoration={(value) => setAttributes({ connectorTextDecoration: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, textDecoration: value && false} })}
-
-					letterSpacing={connectorLetterSpacing}
-					onChangeLetterSpacing={(value) => setAttributes({ connectorLetterSpacing: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-					letterSpacingUnits={connectorLetterSpacingUnits}
-					onChangeLetterSpacingUnit={(value) => setAttributes({ connectorLetterSpacingUnits: value })}
-
-					lineHeight={connectorLineHeight}
-					onChangeLineHeight={(value) => setAttributes({ connectorLineHeight: value, connectorGlobalTypoSwitcher: {...connectorGlobalTypoSwitcher, lineHeight: value && false} })}
-
-					lineHeightUnits={connectorLineHeightUnits}
-					onChangeLineHeightUnit={(value) => setAttributes({ connectorLineHeightUnits: value })}
-
-					deviceType={deviceType}
-					setAttributes={setAttributes}
-				/>
-
-				{/* Text Color */}
-				<FB_SwitcherControl
-					label={__("Text Color", "frontis-blocks")}
-					globalSwitcher={connectorColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ connectorColorSwitcher: value })}
-				/>
-
-				{connectorColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={connectorColor}
-						setGlobalColor={(value) => setAttributes({ connectorColor: value })}
+					title={__("Connector", "frontis-blocks")}
+					initialOpen={false}
+				>
+					<FB_Range
+						min={1}
+						max={300}
+						label={__("Connector Size", "frontis-blocks")}
+						rangeValue={connectorSize}
+						onChangeHandler={connectorSizeHandler}
+						rangeUnitHandler={connectorSizeUnitsHandler}
+						deviceType={deviceType}
+						units={connectorSizeUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={50}
 					/>
-				)}
+					<FB_TypographyControl
+						globalTypoControlActive={true}
+						globalTypoSwitcher={connectorGlobalTypoSwitcher}
+						storeGlobalTypographyData={(value) => setAttributes({ connectorGlobalTypographyData: value })}
 
-				{connectorColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={connectorHoverColor}
-						setGlobalColor={(value) => setAttributes({ connectorHoverColor: value })}
+						globalTypoType={connectorGlobalTypoType}
+						onChangeGlobalTypoType={(value) => {
+							setAttributes({
+								connectorGlobalTypoType: value,
+								connectorGlobalTypoSwitcher: value === 'default' ? { ...connectorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...connectorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+							})
+						}}
+
+						globalTypoOption={connectorGlobalTypoOption}
+						onChangeGlobalTypoOption={(value) => setAttributes({ connectorGlobalTypoOption: value })}
+
+						fontFamily={connectorFontFamily}
+						onChangeFontFamily={(value) => setAttributes({ connectorFontFamily: value, connectorGlobalTypoSwitcher: { ...connectorGlobalTypoSwitcher, fontFamily: value && false } })}
+
+						fontSize={connectorFontSize}
+						onChangeFontSize={(value) => setAttributes({ connectorFontSize: value, connectorGlobalTypoSwitcher: { ...connectorGlobalTypoSwitcher, fontSize: value && false } })}
+
+						fontSizeUnits={connectorFontSizeUnits}
+						onChangeFontSizeUnit={(value) => setAttributes({ connectorFontSizeUnits: value })}
+
+						fontWeight={connectorFontWeight}
+						onChangeFontWeight={(value) => setAttributes({ connectorFontWeight: value, connectorGlobalTypoSwitcher: { ...connectorGlobalTypoSwitcher, fontWeight: value && false } })}
+
+						fontStyle={connectorFontStyle}
+						onChangeFontStyle={(value) => setAttributes({ connectorFontStyle: value, connectorGlobalTypoSwitcher: { ...connectorGlobalTypoSwitcher, fontStyle: value && false } })}
+
+						textTransform={connectorTextTransform}
+						onChangeTextTransform={(value) => setAttributes({ connectorTextTransform: value, connectorGlobalTypoSwitcher: { ...connectorGlobalTypoSwitcher, textTransform: value && false } })}
+
+						textDecoration={connectorTextDecoration}
+						onChangeTextDecoration={(value) => setAttributes({ connectorTextDecoration: value, connectorGlobalTypoSwitcher: { ...connectorGlobalTypoSwitcher, textDecoration: value && false } })}
+
+						letterSpacing={connectorLetterSpacing}
+						onChangeLetterSpacing={(value) => setAttributes({ connectorLetterSpacing: value, connectorGlobalTypoSwitcher: { ...connectorGlobalTypoSwitcher, letterSpacing: value && false } })}
+
+						letterSpacingUnits={connectorLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) => setAttributes({ connectorLetterSpacingUnits: value })}
+
+						lineHeight={connectorLineHeight}
+						onChangeLineHeight={(value) => setAttributes({ connectorLineHeight: value, connectorGlobalTypoSwitcher: { ...connectorGlobalTypoSwitcher, lineHeight: value && false } })}
+
+						lineHeightUnits={connectorLineHeightUnits}
+						onChangeLineHeightUnit={(value) => setAttributes({ connectorLineHeightUnits: value })}
+
+						deviceType={deviceType}
+						setAttributes={setAttributes}
 					/>
-				)}
 
-				{/* Background Color */}
-				<FB_SwitcherControl
-					label={__("Background Color", "frontis-blocks")}
-					globalSwitcher={connectorBgColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ connectorBgColorSwitcher: value })}
-				/>
-
-				{connectorBgColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={connectorBgColor}
-						setGlobalColor={(value) => setAttributes({ connectorBgColor: value })}
+					{/* Text Color */}
+					<FB_SwitcherControl
+						label={__("Text Color", "frontis-blocks")}
+						globalSwitcher={connectorColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ connectorColorSwitcher: value })}
 					/>
-				)}
 
-				{connectorBgColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={connectorBgHoverColor}
-						setGlobalColor={(value) => setAttributes({ connectorBgHoverColor: value })}
+					{connectorColorSwitcher === 'normal' && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={connectorColor}
+							setGlobalColor={(value) => setAttributes({ connectorColor: value })}
+						/>
+					)}
+
+					{connectorColorSwitcher === 'hover' && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={connectorHoverColor}
+							setGlobalColor={(value) => setAttributes({ connectorHoverColor: value })}
+						/>
+					)}
+
+					{/* Background Color */}
+					<FB_SwitcherControl
+						label={__("Background Color", "frontis-blocks")}
+						globalSwitcher={connectorBgColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ connectorBgColorSwitcher: value })}
 					/>
-				)}
 
-				<SelectControl
-					label={__("Border Style", "frontis-blocks")}
-					value={connectorBorder}
-					options={BORDER_STYLES}
-					onChange={(value) =>
-						setAttributes({ connectorBorder: value })
-					}
-				/>
+					{connectorBgColorSwitcher === 'normal' && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={connectorBgColor}
+							setGlobalColor={(value) => setAttributes({ connectorBgColor: value })}
+						/>
+					)}
 
-				<FB_SwitcherControl
-					label={__("Border Color", "frontis-blocks")}
-					globalSwitcher={connectorBorderColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ connectorBorderColorSwitcher: value })}
-				/>
+					{connectorBgColorSwitcher === 'hover' && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={connectorBgHoverColor}
+							setGlobalColor={(value) => setAttributes({ connectorBgHoverColor: value })}
+						/>
+					)}
 
-				{connectorBorderColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={connectorBorderColor}
-						setGlobalColor={(value) => setAttributes({ connectorBorderColor: value })}
+					<SelectControl
+						label={__("Border Style", "frontis-blocks")}
+						value={connectorBorder}
+						options={BORDER_STYLES}
+						onChange={(value) =>
+							setAttributes({ connectorBorder: value })
+						}
 					/>
-				)}
 
-				{connectorBorderColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={connectorBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ connectorBorderHoverColor: value })}
+					<FB_SwitcherControl
+						label={__("Border Color", "frontis-blocks")}
+						globalSwitcher={connectorBorderColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ connectorBorderColorSwitcher: value })}
 					/>
-				)}
 
-				<FB_Spacing
-					label={__("Border", "frontis-blocks")}
-					deviceType={deviceType}
-					spacingUnitsHandler={connectorBorderUnitsHandler}
-					spacingUnits={connectorBorderUnits}
-					spacingDesktop={connectorBorderDesktop}
-					spacingTablet={connectorBorderTablet}
-					spacingMobile={connectorBorderMobile}
-					handleSpacingUnitHandler={connectorBorderUnitChange}
-					spacingCombineBtn={connectorBorderLink}
-					spacingCombineBtnHandler={connectorBorderCombineBtn}
-					setAttributes={setAttributes}
-				/>
-				<FB_Spacing
-					label={__("Border Radius", "frontis-blocks")}
-					deviceType={deviceType}
-					spacingUnitsHandler={connectorBorderRadiusUnitsHandler}
-					spacingUnits={connectorBorderRadiusUnits}
-					spacingDesktop={connectorBorderRadiusDesktop}
-					spacingTablet={connectorBorderRadiusTablet}
-					spacingMobile={connectorBorderRadiusMobile}
-					handleSpacingUnitHandler={connectorBorderRadiusUnitChange}
-					spacingCombineBtn={connectorBorderRadiusLink}
-					spacingCombineBtnHandler={connectorBorderRadiusCombineBtn}
-					setAttributes={setAttributes}
-				/>
-			</PanelBody>
+					{connectorBorderColorSwitcher === 'normal' && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={connectorBorderColor}
+							setGlobalColor={(value) => setAttributes({ connectorBorderColor: value })}
+						/>
+					)}
+
+					{connectorBorderColorSwitcher === 'hover' && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={connectorBorderHoverColor}
+							setGlobalColor={(value) => setAttributes({ connectorBorderHoverColor: value })}
+						/>
+					)}
+
+					<FB_Spacing
+						label={__("Border", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={connectorBorderUnitsHandler}
+						spacingUnits={connectorBorderUnits}
+						spacingDesktop={connectorBorderDesktop}
+						spacingTablet={connectorBorderTablet}
+						spacingMobile={connectorBorderMobile}
+						handleSpacingUnitHandler={connectorBorderUnitChange}
+						spacingCombineBtn={connectorBorderLink}
+						spacingCombineBtnHandler={connectorBorderCombineBtn}
+						setAttributes={setAttributes}
+					/>
+					<FB_Spacing
+						label={__("Border Radius", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={connectorBorderRadiusUnitsHandler}
+						spacingUnits={connectorBorderRadiusUnits}
+						spacingDesktop={connectorBorderRadiusDesktop}
+						spacingTablet={connectorBorderRadiusTablet}
+						spacingMobile={connectorBorderRadiusMobile}
+						handleSpacingUnitHandler={connectorBorderRadiusUnitChange}
+						spacingCombineBtn={connectorBorderRadiusLink}
+						spacingCombineBtnHandler={connectorBorderRadiusCombineBtn}
+						setAttributes={setAttributes}
+					/>
+				</PanelBody>
 			)}
-			
+
 			{/*	Icon One Style */}
-			{(buttonIconAlign === 'icon-text' || 
-			buttonIconAlign === 'icon-only') && (
-			<PanelBody
-				title={__("Button One Icon", "frontis-blocks")}
-				initialOpen={false}
-			>
-				<FB_Range
-					min={1}
-					max={300}
-					label={__("Icon Size", "frontis-blocks")}
-					rangeValue={btnIconSize}
-					onChangeHandler={btnIconSizeHandler}
-					rangeUnitHandler={btnIconSizeUnitsHandler}
-					deviceType={deviceType}
-					units={btnIconSizeUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={50}
-				/>
+			{(buttonIconAlign === 'icon-text' ||
+				buttonIconAlign === 'icon-only') && (
+					<PanelBody
+						title={__("Button One Icon", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_Range
+							min={1}
+							max={300}
+							label={__("Icon Size", "frontis-blocks")}
+							rangeValue={btnIconSize}
+							onChangeHandler={btnIconSizeHandler}
+							rangeUnitHandler={btnIconSizeUnitsHandler}
+							deviceType={deviceType}
+							units={btnIconSizeUnits}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={50}
+						/>
 
-				<FB_Range
-					min={1}
-					max={100}
-					label={__("Spacing", "frontis-blocks")}
-					rangeValue={btnIconSpacing}
-					onChangeHandler={(value) => setAttributes({ btnIconSpacing: value }) }
-					rangeUnitHandler={(value) => setAttributes({ btnIconSpacingUnits: value }) }
-					deviceType={deviceType}
-					units={btnIconSpacingUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
+						<FB_Range
+							min={1}
+							max={100}
+							label={__("Spacing", "frontis-blocks")}
+							rangeValue={btnIconSpacing}
+							onChangeHandler={(value) => setAttributes({ btnIconSpacing: value })}
+							rangeUnitHandler={(value) => setAttributes({ btnIconSpacingUnits: value })}
+							deviceType={deviceType}
+							units={btnIconSpacingUnits}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={""}
+						/>
 
-				{/** Icon Color **/}
-				<FB_SwitcherControl
-					label={__("Icon Color", "frontis-blocks")}
-					globalSwitcher={btnIconColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ btnIconColorSwitcher: value })}
-				/>
+						<FB_SwitcherControl
+							label={__("Icon Rotation", "frontis-blocks")}
+							globalSwitcher={buttonIconRotateSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ buttonIconRotateSwitcher: value })}
+						/>
 
-				{btnIconColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={btnIconColor}
-						setGlobalColor={(value) => setAttributes({ btnIconColor: value })}
-					/>
+						{buttonIconRotateSwitcher === 'normal' && (
+							<FB_Range
+								min={-360}
+								max={360}
+								label={__("Icon Rotation", "frontis-blocks")}
+								rangeValue={buttonIconRotate}
+								onChangeHandler={(value) => setAttributes({ buttonIconRotate: value === 0 ? undefined : value })}
+								deviceType={deviceType}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={""}
+								isRangeUnit={false}
+
+							/>
+						)}
+
+						{buttonIconRotateSwitcher === 'hover' && (
+							<FB_Range
+								min={-360}
+								max={360}
+								label={__("Icon Rotation", "frontis-blocks")}
+								rangeValue={buttonIconRotateHover}
+								onChangeHandler={(value) => setAttributes({ buttonIconRotateHover: value === 0 ? undefined : value })}
+								deviceType={deviceType}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={""}
+								isRangeUnit={false}
+							/>
+						)}
+						{/** Icon Color **/}
+						<FB_SwitcherControl
+							label={__("Icon Color", "frontis-blocks")}
+							globalSwitcher={btnIconColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ btnIconColorSwitcher: value })}
+						/>
+
+						{btnIconColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={btnIconColor}
+								setGlobalColor={(value) => setAttributes({ btnIconColor: value })}
+							/>
+						)}
+
+						{btnIconColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={btnIconHoverColor}
+								setGlobalColor={(value) => setAttributes({ btnIconHoverColor: value })}
+							/>
+						)}
+						{/** Icon Background Color **/}
+						<FB_SwitcherControl
+							label={__("Background Color", "frontis-blocks")}
+							globalSwitcher={btnIconBgColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ btnIconBgColorSwitcher: value })}
+						/>
+
+						{btnIconBgColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={btnIconBgColor}
+								setGlobalColor={(value) => setAttributes({ btnIconBgColor: value })}
+							/>
+						)}
+
+						{btnIconBgColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={btnIconBgHoverColor}
+								setGlobalColor={(value) => setAttributes({ btnIconBgHoverColor: value })}
+							/>
+						)}
+
+						{/** Border **/}
+						<SelectControl
+							label={__("Border Style", "frontis-blocks")}
+							value={iconBorder}
+							options={BORDER_STYLES}
+							onChange={(value) =>
+								setAttributes({ iconBorder: value })
+							}
+						/>
+
+						<FB_SwitcherControl
+							label={__("Border Color", "frontis-blocks")}
+							globalSwitcher={iconBorderColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ iconBorderColorSwitcher: value })}
+						/>
+
+						{iconBorderColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={iconBorderColor}
+								setGlobalColor={(value) => setAttributes({ iconBorderColor: value })}
+							/>
+						)}
+
+						{iconBorderColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={iconBorderHoverColor}
+								setGlobalColor={(value) => setAttributes({ iconBorderHoverColor: value })}
+							/>
+						)}
+
+						<FB_Spacing
+							label={__("Border Width", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={iconBorderUnitsHandler}
+							spacingUnits={iconBorderUnits}
+							spacingDesktop={iconBorderDesktop}
+							spacingTablet={iconBorderTablet}
+							spacingMobile={iconBorderMobile}
+							handleSpacingUnitHandler={iconBorderUnitChange}
+							spacingCombineBtn={iconBorderLink}
+							spacingCombineBtnHandler={iconBorderCombineBtn}
+							setAttributes={setAttributes}
+						/>
+						<FB_Spacing
+							label={__("Border Radius", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={iconBorderRadiusUnitsHandler}
+							spacingUnits={iconBorderRadiusUnits}
+							spacingDesktop={iconBorderRadiusDesktop}
+							spacingTablet={iconBorderRadiusTablet}
+							spacingMobile={iconBorderRadiusMobile}
+							handleSpacingUnitHandler={iconBorderRadiusUnitChange}
+							spacingCombineBtn={iconBorderRadiusLink}
+							spacingCombineBtnHandler={iconBorderRadiusCombineBtn}
+							setAttributes={setAttributes}
+						/>
+
+					</PanelBody>
 				)}
-
-				{btnIconColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={btnIconHoverColor}
-						setGlobalColor={(value) => setAttributes({ btnIconHoverColor: value })}
-					/>
-				)}
-				{/** Icon Background Color **/}
-				<FB_SwitcherControl
-					label={__("Background Color", "frontis-blocks")}
-					globalSwitcher={btnIconBgColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ btnIconBgColorSwitcher: value })}
-				/>
-
-				{btnIconBgColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={btnIconBgColor}
-						setGlobalColor={(value) => setAttributes({ btnIconBgColor: value })}
-					/>
-				)}
-
-				{btnIconBgColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={btnIconBgHoverColor}
-						setGlobalColor={(value) => setAttributes({ btnIconBgHoverColor: value })}
-					/>
-				)}
-
-				{/** Border **/}
-				<SelectControl
-					label={__("Border Style", "frontis-blocks")}
-					value={iconBorder}
-					options={BORDER_STYLES}
-					onChange={(value) =>
-						setAttributes({ iconBorder: value })
-					}
-				/>
-
-				<FB_SwitcherControl
-					label={__("Border Color", "frontis-blocks")}
-					globalSwitcher={iconBorderColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ iconBorderColorSwitcher: value })}
-				/>
-
-				{iconBorderColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={iconBorderColor}
-						setGlobalColor={(value) => setAttributes({ iconBorderColor: value })}
-					/>
-				)}
-
-				{iconBorderColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={iconBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ iconBorderHoverColor: value })}
-					/>
-				)}
-
-				<FB_Spacing
-					label={__("Border Width", "frontis-blocks")}
-					deviceType={deviceType}
-					spacingUnitsHandler={iconBorderUnitsHandler}
-					spacingUnits={iconBorderUnits}
-					spacingDesktop={iconBorderDesktop}
-					spacingTablet={iconBorderTablet}
-					spacingMobile={iconBorderMobile}
-					handleSpacingUnitHandler={iconBorderUnitChange}
-					spacingCombineBtn={iconBorderLink}
-					spacingCombineBtnHandler={iconBorderCombineBtn}
-					setAttributes={setAttributes}
-				/>
-				<FB_Spacing
-					label={__("Border Radius", "frontis-blocks")}
-					deviceType={deviceType}
-					spacingUnitsHandler={iconBorderRadiusUnitsHandler}
-					spacingUnits={iconBorderRadiusUnits}
-					spacingDesktop={iconBorderRadiusDesktop}
-					spacingTablet={iconBorderRadiusTablet}
-					spacingMobile={iconBorderRadiusMobile}
-					handleSpacingUnitHandler={iconBorderRadiusUnitChange}
-					spacingCombineBtn={iconBorderRadiusLink}
-					spacingCombineBtnHandler={iconBorderRadiusCombineBtn}
-					setAttributes={setAttributes}
-				/>
-
-			</PanelBody>
-			)}
 
 			{/*	Icon Style Two */}
-			{(buttonTwoIconAlign === 'icon-text' || 
-			buttonTwoIconAlign === 'icon-only') && (
-			<PanelBody
-				title={__("Button Two Icon", "frontis-blocks")}
-				initialOpen={false}
-			>
-				<FB_Range
-					min={1}
-					max={100}
-					label={__("Icon Size", "frontis-blocks")}
-					rangeValue={btnTwoIconSize}
-					onChangeHandler={(value) => setAttributes({ btnTwoIconSize: value }) }
-					rangeUnitHandler={(value) => setAttributes({ btnTwoIconSizeUnits: value }) }
-					deviceType={deviceType}
-					units={btnTwoIconSizeUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
-				<FB_Range
-					min={1}
-					max={100}
-					label={__("Spacing", "frontis-blocks")}
-					rangeValue={btnTwoIconSpacing}
-					onChangeHandler={(value) => setAttributes({ btnTwoIconSpacing: value }) }
-					rangeUnitHandler={(value) => setAttributes({ btnTwoIconSpacingUnits: value }) }
-					deviceType={deviceType}
-					units={btnTwoIconSpacingUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
+			{(buttonTwoIconAlign === 'icon-text' ||
+				buttonTwoIconAlign === 'icon-only') && (
+					<PanelBody
+						title={__("Button Two Icon", "frontis-blocks")}
+						initialOpen={false}
+					>
+						<FB_Range
+							min={1}
+							max={100}
+							label={__("Icon Size", "frontis-blocks")}
+							rangeValue={btnTwoIconSize}
+							onChangeHandler={(value) => setAttributes({ btnTwoIconSize: value })}
+							rangeUnitHandler={(value) => setAttributes({ btnTwoIconSizeUnits: value })}
+							deviceType={deviceType}
+							units={btnTwoIconSizeUnits}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={""}
+						/>
+						<FB_Range
+							min={1}
+							max={100}
+							label={__("Spacing", "frontis-blocks")}
+							rangeValue={btnTwoIconSpacing}
+							onChangeHandler={(value) => setAttributes({ btnTwoIconSpacing: value })}
+							rangeUnitHandler={(value) => setAttributes({ btnTwoIconSpacingUnits: value })}
+							deviceType={deviceType}
+							units={btnTwoIconSpacingUnits}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={""}
+						/>
 
-				<FB_SwitcherControl
-					label={__("Icon Color", "frontis-blocks")}
-					globalColorSwitcher={btnIconColorSwitcher}
-					globalColor={btnIconColor}
-					globalHoverColor={btnIconHoverColor}
-					handleColorSwitcherChange={(value) => setAttributes({ btnIconColorSwitcher: value }) }
-					handleGlobalColorChange={(value) => setAttributes({ btnIconColor: value }) }
-					handleGlobalHoverColorChange={(value) => setAttributes({ btnIconHoverColor: value }) }
-				/>
+						<FB_SwitcherControl
+							label={__("Icon Rotation", "frontis-blocks")}
+							globalSwitcher={buttonTwoIconRotateSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ buttonTwoIconRotateSwitcher: value })}
+						/>
 
-				{btnTwoIconColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={btnTwoIconColor}
-						setGlobalColor={(value) => setAttributes({ btnTwoIconColor: value })}
-					/>
+						{buttonTwoIconRotateSwitcher === 'normal' && (
+							<FB_Range
+								min={-360}
+								max={360}
+								label={__("Icon Rotation", "frontis-blocks")}
+								rangeValue={buttonTwoIconRotate}
+								onChangeHandler={(value) => setAttributes({ buttonTwoIconRotate: value === 0 ? undefined : value })}
+								deviceType={deviceType}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={""}
+								isRangeUnit={false}
+
+							/>
+						)}
+
+						{buttonTwoIconRotateSwitcher === 'hover' && (
+							<FB_Range
+								min={-360}
+								max={360}
+								label={__("Icon Rotation", "frontis-blocks")}
+								rangeValue={buttonTwoIconRotateHover}
+								onChangeHandler={(value) => setAttributes({ buttonTwoIconRotateHover: value === 0 ? undefined : value })}
+								deviceType={deviceType}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={""}
+								isRangeUnit={false}
+							/>
+						)}
+						<FB_SwitcherControl
+							label={__("Icon Color", "frontis-blocks")}
+							globalColorSwitcher={btnIconColorSwitcher}
+							globalColor={btnIconColor}
+							globalHoverColor={btnIconHoverColor}
+							handleColorSwitcherChange={(value) => setAttributes({ btnIconColorSwitcher: value })}
+							handleGlobalColorChange={(value) => setAttributes({ btnIconColor: value })}
+							handleGlobalHoverColorChange={(value) => setAttributes({ btnIconHoverColor: value })}
+						/>
+
+						{btnTwoIconColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={btnTwoIconColor}
+								setGlobalColor={(value) => setAttributes({ btnTwoIconColor: value })}
+							/>
+						)}
+
+						{btnTwoIconColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={btnTwoIconHoverColor}
+								setGlobalColor={(value) => setAttributes({ btnTwoIconHoverColor: value })}
+							/>
+						)}
+						{/** Icon Two Background Color **/}
+						<FB_SwitcherControl
+							label={__("Background Color", "frontis-blocks")}
+							globalSwitcher={btnIconTwoBgColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ btnIconTwoBgColorSwitcher: value })}
+						/>
+
+						{btnIconTwoBgColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={btnTwoIconBgColor}
+								setGlobalColor={(value) => setAttributes({ btnTwoIconBgColor: value })}
+							/>
+						)}
+
+						{btnIconTwoBgColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={btnTwoIconBgHoverColor}
+								setGlobalColor={(value) => setAttributes({ btnTwoIconBgHoverColor: value })}
+							/>
+						)}
+
+						{/** Border **/}
+						<SelectControl
+							label={__("Border Style", "frontis-blocks")}
+							value={iconTwoBorder}
+							options={BORDER_STYLES}
+							onChange={(value) =>
+								setAttributes({ iconTwoBorder: value })
+							}
+						/>
+
+						<FB_SwitcherControl
+							label={__("Border Color", "frontis-blocks")}
+							globalSwitcher={iconTwoBorderColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ iconTwoBorderColorSwitcher: value })}
+						/>
+
+						{iconTwoBorderColorSwitcher === 'normal' && (
+							<FB_ColorControl
+								label={__("Normal Color", "frontis-blocks")}
+								globalColor={iconTwoBorderColor}
+								setGlobalColor={(value) => setAttributes({ iconTwoBorderColor: value })}
+							/>
+						)}
+
+						{iconTwoBorderColorSwitcher === 'hover' && (
+							<FB_ColorControl
+								label={__("Hover Color", "frontis-blocks")}
+								globalColor={iconTwoBorderHoverColor}
+								setGlobalColor={(value) => setAttributes({ iconTwoBorderHoverColor: value })}
+							/>
+						)}
+
+						<FB_Spacing
+							label={__("Border Width", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={iconTwoBorderUnitsHandler}
+							spacingUnits={iconTwoBorderUnits}
+							spacingDesktop={iconTwoBorderDesktop}
+							spacingTablet={iconTwoBorderTablet}
+							spacingMobile={iconTwoBorderMobile}
+							handleSpacingUnitHandler={iconTwoBorderUnitChange}
+							spacingCombineBtn={iconTwoBorderLink}
+							spacingCombineBtnHandler={iconTwoBorderCombineBtn}
+							setAttributes={setAttributes}
+						/>
+						<FB_Spacing
+							label={__("Border Radius", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={iconTwoBorderRadiusUnitsHandler}
+							spacingUnits={iconTwoBorderRadiusUnits}
+							spacingDesktop={iconTwoBorderRadiusDesktop}
+							spacingTablet={iconTwoBorderRadiusTablet}
+							spacingMobile={iconTwoBorderRadiusMobile}
+							handleSpacingUnitHandler={iconTwoBorderRadiusUnitChange}
+							spacingCombineBtn={iconTwoBorderRadiusLink}
+							spacingCombineBtnHandler={iconTwoBorderRadiusCombineBtn}
+							setAttributes={setAttributes}
+						/>
+
+					</PanelBody>
 				)}
-
-				{btnTwoIconColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={btnTwoIconHoverColor}
-						setGlobalColor={(value) => setAttributes({ btnTwoIconHoverColor: value })}
-					/>
-				)}
-				{/** Icon Two Background Color **/}
-				<FB_SwitcherControl
-					label={__("Background Color", "frontis-blocks")}
-					globalSwitcher={btnIconTwoBgColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ btnIconTwoBgColorSwitcher: value })}
-				/>
-
-				{btnIconTwoBgColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={btnTwoIconBgColor}
-						setGlobalColor={(value) => setAttributes({ btnTwoIconBgColor: value })}
-					/>
-				)}
-
-				{btnIconTwoBgColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={btnTwoIconBgHoverColor}
-						setGlobalColor={(value) => setAttributes({ btnTwoIconBgHoverColor: value })}
-					/>
-				)}
-
-				{/** Border **/}
-				<SelectControl
-					label={__("Border Style", "frontis-blocks")}
-					value={iconTwoBorder}
-					options={BORDER_STYLES}
-					onChange={(value) =>
-						setAttributes({ iconTwoBorder: value })
-					}
-				/>
-
-				<FB_SwitcherControl
-					label={__("Border Color", "frontis-blocks")}
-					globalSwitcher={iconTwoBorderColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ iconTwoBorderColorSwitcher: value })}
-				/>
-
-				{iconTwoBorderColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={iconTwoBorderColor}
-						setGlobalColor={(value) => setAttributes({ iconTwoBorderColor: value })}
-					/>
-				)}
-
-				{iconTwoBorderColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={iconTwoBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ iconTwoBorderHoverColor: value })}
-					/>
-				)}
-
-				<FB_Spacing
-					label={__("Border Width", "frontis-blocks")}
-					deviceType={deviceType}
-					spacingUnitsHandler={iconTwoBorderUnitsHandler}
-					spacingUnits={iconTwoBorderUnits}
-					spacingDesktop={iconTwoBorderDesktop}
-					spacingTablet={iconTwoBorderTablet}
-					spacingMobile={iconTwoBorderMobile}
-					handleSpacingUnitHandler={iconTwoBorderUnitChange}
-					spacingCombineBtn={iconTwoBorderLink}
-					spacingCombineBtnHandler={iconTwoBorderCombineBtn}
-					setAttributes={setAttributes}
-				/>
-				<FB_Spacing
-					label={__("Border Radius", "frontis-blocks")}
-					deviceType={deviceType}
-					spacingUnitsHandler={iconTwoBorderRadiusUnitsHandler}
-					spacingUnits={iconTwoBorderRadiusUnits}
-					spacingDesktop={iconTwoBorderRadiusDesktop}
-					spacingTablet={iconTwoBorderRadiusTablet}
-					spacingMobile={iconTwoBorderRadiusMobile}
-					handleSpacingUnitHandler={iconTwoBorderRadiusUnitChange}
-					spacingCombineBtn={iconTwoBorderRadiusLink}
-					spacingCombineBtnHandler={iconTwoBorderRadiusCombineBtn}
-					setAttributes={setAttributes}
-				/>
-
-			</PanelBody>
-			)}
 		</>
 	);
-		
+
 	/**
 	 * Inspector Advanced Controls
 	 */
@@ -3544,7 +3635,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<PanelBody
 						title={__("Layout", "frontis-blocks")}
 						initialOpen={true}
-						className="fb-setting-layout-header" 
+						className="fb-setting-layout-header"
 					>
 						<FB_Range
 							min={0}
@@ -3570,7 +3661,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							deviceType={deviceType}
 							positionType={dualBtnPositionType}
 							setPositionType={(value) => setAttributes({ dualBtnPositionType: value })}
-																			
+
 							HZOrientationType={dualBtnHZOrientationType}
 							setHZOrientationType={(value) =>
 								setAttributes({ dualBtnHZOrientationType: value })
@@ -3579,7 +3670,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setVROrientationType={(value) =>
 								setAttributes({ dualBtnVROrientationType: value })
 							}
-																				
+
 							HZLeftOffset={dualBtnHZLeftOffset}
 							setHZLeftOffset={(value) => setAttributes({ dualBtnHZLeftOffset: value })}
 							HZLeftOffsetUnits={dualBtnHZLeftOffsetUnits}
@@ -3588,7 +3679,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setHZRightOffset={(value) => setAttributes({ dualBtnHZRightOffset: value })}
 							HZRightOffsetUnits={dualBtnHZRightOffsetUnits}
 							setHZRightOffsetUnits={(value) => setAttributes({ dualBtnHZRightOffsetUnits: value })}
-																			
+
 							VRTopOffset={dualBtnVRTopOffset}
 							setVRTopOffset={(value) => setAttributes({ dualBtnVRTopOffset: value })}
 							VRTopOffsetUnits={dualBtnVRTopOffsetUnits}
@@ -3614,7 +3705,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							onChangeValue={(value) => setAttributes({ dualButtonGlobalWraperClass: value })}
 							helpText={__("Separate with spaces key.", "frontis-blocks")}
 						/>
-						
+
 					</PanelBody>
 
 					<PanelBody
@@ -3624,14 +3715,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_Spacing
 							label={__("Padding", "frontis-blocks")}
 							deviceType={deviceType}
-							spacingUnitsHandler={ handleGlobalPaddingUnitsHandler }
+							spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
 							spacingUnits={dualButtonGlobalPaddingUnits}
 							spacingDesktop={dualButtonGlobalPaddingDesktop}
 							spacingTablet={dualButtonGlobalPaddingTablet}
 							spacingMobile={dualButtonGlobalPaddingMobile}
-							handleSpacingUnitHandler={ handleGlobalPaddingUnitChange }
+							handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
 							spacingCombineBtn={dualButtonGlobalPaddingLink}
-							spacingCombineBtnHandler={ handleGlobalPaddingCombineBtn }
+							spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
 							setAttributes={setAttributes}
 						/>
 						<FB_Spacing
@@ -3642,15 +3733,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							spacingDesktop={dualButtonGlobalMarginDesktop}
 							spacingTablet={dualButtonGlobalMarginTablet}
 							spacingMobile={dualButtonGlobalMarginMobile}
-							handleSpacingUnitHandler={ handleGlobalMarginUnitChange }
+							handleSpacingUnitHandler={handleGlobalMarginUnitChange}
 							spacingCombineBtn={dualButtonGlobalMarginLink}
-							spacingCombineBtnHandler={ handleGlobalMarginCombineBtn }
+							spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
 							setAttributes={setAttributes}
 						/>
 					</PanelBody>
 
 					<PanelBody title="Background Color" initialOpen={false}>
-						
+
 						<FB_SwitcherControl
 							label={__("Background Color", "frontis-blocks")}
 							globalSwitcher={dualButtonGlobalBgColorSwitcher}
@@ -3681,7 +3772,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							label={__("Border Style", "frontis-blocks")}
 							value={dualButtonGlobalBorder}
 							options={BORDER_STYLES}
-							onChange={(value) => setAttributes({ dualButtonGlobalBorder: value }) }
+							onChange={(value) => setAttributes({ dualButtonGlobalBorder: value })}
 						/>
 
 						<FB_SwitcherControl
@@ -3723,21 +3814,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_Spacing
 							label={__("Border Radius", "frontis-blocks")}
 							deviceType={deviceType}
-							spacingUnitsHandler={ handleGlobalBorderRadiusUnitsHandler }
+							spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
 							spacingUnits={dualButtonGlobalBorderRadiusUnits}
 							spacingDesktop={dualButtonGlobalBorderRadiusDesktop}
 							spacingTablet={dualButtonGlobalBorderRadiusTablet}
 							spacingMobile={dualButtonGlobalBorderRadiusMobile}
-							handleSpacingUnitHandler={ handleGlobalBorderRadiusUnitChange }
+							handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
 							spacingCombineBtn={dualButtonGlobalBorderRadiusLink}
-							spacingCombineBtnHandler={ handleGlobalBorderRadiusCombineBtn}
+							spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
 							setAttributes={setAttributes}
 						/>
-						
+
 						<FB_SwitcherControl
-						label={__("Box Shadow", "frontis-blocks")}
-						globalSwitcher={globalBoxShadowSwitcher}
-						setGlobalSwitcher={(value) => setAttributes({ globalBoxShadowSwitcher: value })}
+							label={__("Box Shadow", "frontis-blocks")}
+							globalSwitcher={globalBoxShadowSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ globalBoxShadowSwitcher: value })}
 						/>
 
 						{globalBoxShadowSwitcher === 'normal' && (
@@ -3780,7 +3871,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						title={__("Custom CSS", "frontis-blocks")}
 						initialOpen={false}
 					>
-						<FB_CustomCSSEditor  
+						<FB_CustomCSSEditor
 							value={dualButtonGlobalWraperCustomCSS}
 							onChangeValue={(value) => setAttributes({ dualButtonGlobalWraperCustomCSS: value })}
 						/>
