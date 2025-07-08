@@ -1,60 +1,60 @@
 const attributes = {
 	blockID: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	deviceType: {
-		type: "string",
-		default: "Desktop"
+		type: 'string',
+		default: 'Desktop'
 	},
 	advancedImagePresetStyle: {
-        type: "string",
-        default: "preset-1",
+        type: 'string',
+        default: 'preset-1',
     },
 	imageStyle: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	/** Image URL and ID and alt */
 	advancedImageUrl : {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	advancedImageId: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	advancedImageAlt: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	advancedImageDefaultWidth: {
-		type: "number",
+		type: 'number',
 		default: 0,
 	},
 	advancedImageDefaultHeight: {
-		type: "number",
+		type: 'number',
 		default: 0,
 	},
 	advancedImageSrcSet: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	/** Image Size */
 	mediaSize: {
 		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: ""
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	mediaHeight: {
 		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: ""
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	mediaSizeUnits: {
@@ -74,26 +74,26 @@ const attributes = {
 		}
 	},
 	imageSize: {
-		type: "string",
+		type: 'string',
 	},
 	imageFit: {
-		type: "string",
-		default: "cover",
+		type: 'string',
+		default: 'cover',
 	},
 	imageHover: {
-		type: "string",
+		type: 'string',
 	},
 	imageCaption: {
-		type: "string",
+		type: 'string',
 	},
 	/** Image Border **/
 	imageBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	imageBorderColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	imageBorderColor: {
 		type: 'string',
@@ -110,34 +110,34 @@ const attributes = {
 		}
 	},
 	imageBorderDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	imageBorderTablet: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	imageBorderMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	imageBorderLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 	imageBorderRadiusUnits: {
@@ -149,34 +149,34 @@ const attributes = {
 		}
 	},
 	imageBorderRadiusDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	imageBorderRadiusTablet: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	imageBorderRadiusMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	imageBorderRadiusLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 	/** Image Box Shadow **/
@@ -189,50 +189,50 @@ const attributes = {
         default: '',
     },
 	captionPosition: {
-		type: "string",
+		type: 'string',
 	},
 	captionAlignment: {
-		type: "string",
-		default: "left",
+		type: 'string',
+		default: 'left',
 	},
 	selectedImgIndex: {
-		type: "number",
+		type: 'number',
 	},
 	showOverlay: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	displayCaption: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	displayTitle: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	titleText: {
-		type: "string",
-		default: "Fly in the sky"
+		type: 'string',
+		default: 'Fly in the sky'
 	},
 	titleTag: {
-		type : "string",
-		default: "h2"
+		type : 'string',
+		default: 'h2'
 	},
 	titlePosition: {
-		type: "string",
-		default: "center"
+		type: 'string',
+		default: 'center'
 	},
 	titleHoverEffects: {
-		type: "string",
-		default: "tilt"
+		type: 'string',
+		default: 'tilt'
 	},
 	/** Start Heading Style */
 	headingGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	headingGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -245,16 +245,16 @@ const attributes = {
 		},
 	},
 	headingGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	headingGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
     headingFontFamily: {
-        type: "string",
-        default: "inherit",
+        type: 'string',
+        default: 'inherit',
     },
     headingFontSize: {
 		type: 'object',
@@ -273,20 +273,20 @@ const attributes = {
 		}
 	},
     headingFontWeight : {
-        type: "string",
-        default: "600"
+        type: 'string',
+        default: '600'
     },
     headingFontStyle : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     headingTextTransform : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     headingTextDecoration : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     headingLetterSpacing: {
 		type: 'object',
@@ -322,12 +322,12 @@ const attributes = {
 	},
 
 	HeadingColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	HeadingColor : {
-		type: "string",
-		default: "#ffffff"
+		type: 'string',
+		default: '#ffffff'
 	},
 	HeadingHoverColor: {
 		type: 'string',
@@ -337,7 +337,7 @@ const attributes = {
 	},
 	HeadingBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	HeadingBorderColor: {
 		type: 'string',
@@ -346,77 +346,77 @@ const attributes = {
 		type: 'string',
 	},
 	HeadingBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	HeadingBorderUnits : {
-		type: "string",
-		default: "px"
+		type: 'string',
+		default: 'px'
 	},
 	HeadingDesktopBorderWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	HeadingTabBorderWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	HeadingMobileBorderWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	HeadingBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	HeadingBorderRadiusUnits : {
-		type: "string",
-		default: "px"
+		type: 'string',
+		default: 'px'
 	},
 	HeadingDesktopBorderRadiusWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	HeadingTabBorderRadiusWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: 0,
-			left: 0,
-			right: 0,
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	HeadingMobileBorderRadiusWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	HeadingBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	HeadingPaddingUnits : {
@@ -428,34 +428,34 @@ const attributes = {
         }
 	},
 	HeadingDesktopPadding: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: 20,
-			bottom: 20,
-			left: 20,
-			right: 20,
+			top: '20',
+			bottom: '20',
+			left: '20',
+			right: '20',
 		},
 	},
 	HeadingTabPadding: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	HeadingMobilePadding: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	HeadingPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	HeadingMarginUnits : {
@@ -467,153 +467,153 @@ const attributes = {
         }
 	},
 	HeadingDesktopMargin: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	HeadingTabMargin: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	HeadingMobileMargin: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	HeadingMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	autoHeightSwitch: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	autoFitSwitch: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	linkSwitch: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	linkUrl: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	linkTargetUrl: {
-		type: "boolean",
+		type: 'boolean',
 	},
 	captionColor: {
-		type: "string",
-		default: "var(--eb-global-primary-color)",
+		type: 'string',
+		default: 'var(--eb-global-primary-color)',
 	},
 	captionBGColor: {
-		type: "string",
-		default: "var(--eb-global-background-color)",
+		type: 'string',
+		default: 'var(--eb-global-background-color)',
 	},
 	horizontalAlign: {
-		type: "string",
-		default: "center",
+		type: 'string',
+		default: 'center',
 	},
 	verticalAlign: {
-		type: "string",
-		default: "bottom",
+		type: 'string',
+		default: 'bottom',
 	},
 	verticalAlignCap2: {
-		type: "string",
-		default: "bottom",
+		type: 'string',
+		default: 'bottom',
 	},
 	hoverEffect: {
-		type: "string",
-		default: "no-effect",
+		type: 'string',
+		default: 'no-effect',
 	},
 	stylePreset: {
-		type: "string",
-		default: "rounded",
+		type: 'string',
+		default: 'rounded',
 	},
 	complexStyle: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	captionStyle: {
-		type: "string",
-		default: "caption-style-1",
+		type: 'string',
+		default: 'caption-style-1',
 	},
 	autoFit: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	fitStyles: {
-		type: "string",
-		default: "cover",
+		type: 'string',
+		default: 'cover',
 	},
 	enableLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	imageLink: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	openInNewTab: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	imgSquare: {
-		type: "string",
+		type: 'string',
 		default: '',
 	},
 	imgCircle: {
-		type: "string",
+		type: 'string',
 		default: '',
 	},
 	imgRounded: {
-		type: "string",
+		type: 'string',
 		default: '',
 	},
 	autoHeight: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	borderType: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	borderStyle: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	normalBorderColor: {
-		type: "string"
+		type: 'string'
 	},
 	normalBorderRadUnit: {
-		type: "string",
-		default: "px"
+		type: 'string',
+		default: 'px'
 	},
 	normalBorderRad: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "0",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	normalBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	boxGlobalBoxShadowValues: {
@@ -627,203 +627,203 @@ const attributes = {
 
 	/** Global Background Control **/
 	testBgColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     testBackgroundType: {
-        type: "string",
-        default: "classic"
+        type: 'string',
+        default: 'classic'
     },
     testClassicColor: {
-        type: "string",
+        type: 'string',
     },
     testGradientColor: {
-        type: "string",
+        type: 'string',
     },
     testCustomGradientSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false
     },
     testCustomGradientInputValue: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     testBackgroundColorStyle: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     testBackgroundImageUrl: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     testBackgroundImageAlt: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     testBackgroundImageID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     testBackgroundImagePosition: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     testBackgroundImageAttachment: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     testBackgroundImageSize: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     testBackgroundImageRepeat: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     hoverBackgroundType: {
-        type: "string",
-        default: "classic"
+        type: 'string',
+        default: 'classic'
     },
     hoverClassicColor: {
-        type: "string",
+        type: 'string',
     },
     hoverGradientColor: {
-        type: "string",
+        type: 'string',
     },
     hoverCustomGradientSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false
     },
     hoverCustomGradientInputValue: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     hoverBackgroundColorStyle: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     hoverBackgroundImageUrl: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     hoverBackgroundImageAlt: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     hoverBackgroundImageID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     hoverBackgroundImagePosition: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     hoverBackgroundImageAttachment: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     hoverBackgroundImageSize: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     hoverBackgroundImageRepeat: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
 	/** Image Overlay **/
 	overlayBgColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	overlayBackgroundType: {
-		type: "string",
-		default: "classic"
+		type: 'string',
+		default: 'classic'
 	},
 	overlayClassicColor: {
-		type: "string",
+		type: 'string',
 	},
 	overlayGradientColor: {
-		type: "string",
+		type: 'string',
 	},
 	overlayCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false
 	},
 	overlayCustomGradientInputValue: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	overlayBackgroundImageUrl: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	overlayBackgroundImagePosition: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	overlayBackgroundImageAttachment: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	overlayBackgroundImageSize: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	overlayBackgroundImageRepeat: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	/** Hover **/
 	overlayHoverBackgroundType: {
-		type: "string",
-		default: "classic"
+		type: 'string',
+		default: 'classic'
 	},
 	overlayHoverClassicColor: {
-		type: "string",
+		type: 'string',
 	},
 	overlayHoverGradientColor: {
-		type: "string",
+		type: 'string',
 	},
 	overlayHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false
 	},
 	overlayHoverCustomGradientInputValue: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	overlayHoverBackgroundColorStyle: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	overlayHoverBackgroundImageUrl: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	overlayHoverBackgroundImageAlt: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	overlayHoverBackgroundImageID: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	overlayHoverBackgroundImagePosition: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	overlayHoverBackgroundImageAttachment: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	overlayHoverBackgroundImageSize: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	overlayHoverBackgroundImageRepeat: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 
 	/** Overlay opacity **/
@@ -839,56 +839,56 @@ const attributes = {
         }
     },
     globalBackgroundImageUrl: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     globalBackgroundImageAlt: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     globalBackgroundImageID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     globalBackgroundImagePosition: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     globalBackgroundImageAttachment: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     globalBackgroundImageRepeat: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     globalBackgroundImageSize: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     // Attributes added as per file context
     globalCustomGradientSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false
     },
     globalCustomGradientInputValue: {
-        type: "string",
+        type: 'string',
     },
     globalGradientColor: {
-        type: "string",
+        type: 'string',
     },
     globalColor: {
-        type: "string",
+        type: 'string',
     },
     globalSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
 	globalPaddingUnits: {
 		type: 'object',
@@ -899,34 +899,34 @@ const attributes = {
 		}
     },
     globalPaddingDesktop: {
-        type: "object",
+        type: 'object',
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     globalPaddingTablet: {
-        type: "object",
+        type: 'object',
         default: {
-            top: 80,
-            bottom: 80,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     globalPaddingMobile: {
-        type: "object",
+        type: 'object',
         default: {
-            top: 60,
-            bottom: 60,
-            left: 0,
-            right: 0,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     globalPaddingLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     globalMarginUnits: {
@@ -938,43 +938,43 @@ const attributes = {
 		}
     },
     globalMarginDesktop: {
-        type: "object",
+        type: 'object',
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     globalMarginTablet: {
-        type: "object",
+        type: 'object',
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     globalMarginMobile: {
-        type: "object",
+        type: 'object',
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     globalMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 	globalBorder: {
         type: 'string',
-        default: "none",
+        default: 'none',
     },
     globalBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     globalBorderColor: {
         type: 'string',
@@ -991,34 +991,34 @@ const attributes = {
 		}
     },
     globalBorderDesktop: {
-        type: "object",
+        type: 'object',
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     globalBorderTablet: {
-        type: "object",
+        type: 'object',
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     globalBorderMobile: {
-        type: "object",
+        type: 'object',
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     globalBorderLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     globalBorderRadiusUnits: {
@@ -1030,38 +1030,38 @@ const attributes = {
 		}
     },
     globalBorderRadiusDesktop: {
-        type: "object",
+        type: 'object',
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     globalBorderRadiusTablet: {
-        type: "object",
+        type: 'object',
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     globalBorderRadiusMobile: {
-        type: "object",
+        type: 'object',
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     globalBorderRadiusLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 	globalZIndex : {
-        type: "object",
+        type: 'object',
         default: {
             Desktop: '',
             Tablet: '',
@@ -1070,48 +1070,48 @@ const attributes = {
     },
 	advancedImageOverflow: {
         type: 'string',
-        default: "default",
+        default: 'default',
     },
 	blockStyle: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 
 	advancedImageDesktopSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     advancedImageTabletSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     advancedImageMobileSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
 
 	/** Start Class & ID Setting */
 	advancedImageGlobalWraperID : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	advancedImageGlobalWraperClass : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	/** End Class & ID Setting */
 
 	advancedImagePositionType: {
-		type: "string",
-		default: "default"
+		type: 'string',
+		default: 'default'
 	},
 	advancedImageHZOrientationType: {
-		type: "string",
-		default: "left"
+		type: 'string',
+		default: 'left'
 	},
 	advancedImageVROrientationType: {
-		type: "string",
-		default: "top"
+		type: 'string',
+		default: 'top'
 	},
 	advancedImageHZLeftOffset: {
 		type: 'object',
@@ -1178,29 +1178,29 @@ const attributes = {
 		}
 	},
 	advancedImageCustomCSS : {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 
 	advancedImageLazyLoadSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	smartLazyLoadSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	smartLazyLoadImageUrl : {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	smartLazyLoadImageId: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	smartLazyLoadImageAlt: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 }
 export default attributes;

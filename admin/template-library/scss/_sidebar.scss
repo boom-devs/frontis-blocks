@@ -1,0 +1,145 @@
+.fb-template-library-store-sidebar-wrapper {
+    display: flex;
+
+    .fb-template-library-store-sidebar {
+        flex: 1;
+        padding: 32px 0 0 0;
+        background: $white-color;
+        border-right: 1px solid $neutral-color-100;
+        height: 100vh;
+       
+        .fb-template-category-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: space-between;
+            padding: 0 16px 32px 16px;
+
+            .fb-template-category-label {
+                h2 {
+                    font-family: 'Onest';
+                    font-weight: 500;
+                    font-size: $h5-font-size;
+                    line-height: 28px;
+                    color: $neutral-color-950;
+                    margin: 0;
+                    
+                }
+            }
+
+            .fb-template-category {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+
+                span {
+                    font-weight: 600;
+                    font-size: $base-font-size;
+                    line-height: 16px;
+                    padding: 6px 12px;
+                    border-radius: 50px;
+                    cursor: pointer;
+                }
+                .fb-tl-free{
+                    background: $primary-color-50;
+                    color: $primary-color-400;
+                }
+                .fb-tl-pro{
+                    background: $warning-color-100;
+                    color: $warning-color;
+                }
+            }
+        }
+
+        .fb-template-library-store-sidebar-tabs {
+            .fb-template-library-store-sidebar-tab {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 16px;
+                border: none;
+                border-bottom: 1px solid $neutral-color-100;
+                cursor: pointer;
+
+                span {
+                    color: $neutral-color-600;
+                    font-size: $large-font-size;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 22px;
+                }
+
+                span.fb-template-library-store-sidebar-tab-name {
+                    color: $neutral-color-600;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+
+                    span {
+                        display: flex;
+                        width: 20px;
+                        height: 20px;
+                        svg{
+                            width: 100%;
+                            height: 100%;
+                            
+                            path{
+                                stroke: $neutral-color-600;
+                            }
+                        }
+                    }
+                }
+
+                span.fb-template-library-store-sidebar-tab-count {
+                    font-size: 12px;
+                    line-height: 16px;
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 4px;
+                    background: $primary-color-50;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                }
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                &.active {
+                    background: $primary-color-50;
+                    border-bottom: 1px solid transparent;
+                    border-left: 4px solid $primary-color;
+
+                    span.fb-template-library-store-sidebar-tab-count {
+                        background: $primary-color;
+                        color: $white-color;
+                    }
+
+                    span.fb-template-library-store-sidebar-tab-name {
+                        color: $primary-color-base;
+
+                        span {
+                            svg{
+                                path{
+                                    stroke: $primary-color-base;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &:has(+ .active) {
+                    border-bottom: 1px solid transparent;
+                }
+            }
+
+            button {
+                border: none;
+                background: none;
+                width: 100%;
+            }
+        }
+    }
+}
