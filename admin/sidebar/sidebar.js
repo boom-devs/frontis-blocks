@@ -14,6 +14,9 @@ import { loadGoogleFont, useAfterSave } from "./helper";
 import { getGlobalStyle, updateGlobalStyle } from "./fetch";
 import generateCSSVariables from "./components/GenerateRootCss";
 import generateColorsVariables from "./components/GenerateColorRoot";
+import {
+	GOOGLE_FONTS,
+} from '@Constants/fbConstants';
 import "./sidebar.scss";
 
 // Default color and gradient configurations
@@ -427,12 +430,13 @@ function FrontisBlocksSidebar() {
 			wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
 		}
 
-
 		if (globalColors === undefined) {
 			setGlobalColors(themeColors);
 		}
 
 	}, [customColors, globalColors, gradientColors, customGradientColors]);
+
+	console.log(typography)
 
 	return (
 		<>

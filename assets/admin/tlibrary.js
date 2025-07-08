@@ -3998,10 +3998,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_range__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Components/range */ "./src/components/range/index.js");
 /* harmony import */ var _Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @Utils/loadGoogleFont */ "./src/utils/loadGoogleFont.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -4021,6 +4017,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
+  var _frontisBlocksAdmin;
   var _ref$label = _ref.label,
     label = _ref$label === void 0 ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-blocks") : _ref$label,
     fontFamily = _ref.fontFamily,
@@ -4047,11 +4044,11 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     onChangeLineHeightUnit = _ref.onChangeLineHeightUnit,
     deviceType = _ref.deviceType,
     heading = _ref.heading;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)((_frontisBlocksAdmin = frontisBlocksAdmin) === null || _frontisBlocksAdmin === void 0 ? void 0 : _frontisBlocksAdmin.google_fonts),
     _useState2 = _slicedToArray(_useState, 2),
     fontOptions = _useState2[0],
     setFontOptions = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(),
     _useState4 = _slicedToArray(_useState3, 2),
     selectedFontFamilyOption = _useState4[0],
     setSelectedFontFamilyOption = _useState4[1];
@@ -4059,24 +4056,6 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     _useState6 = _slicedToArray(_useState5, 2),
     availableFontWeights = _useState6[0],
     setAvailableFontWeights = _useState6[1];
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
-    (0,_Constants_fbConstants__WEBPACK_IMPORTED_MODULE_3__.GOOGLE_FONTS)().then(function (fetchedFonts) {
-      setFontOptions(fetchedFonts);
-      var current = fetchedFonts.find(function (f) {
-        return f.value === fontFamily;
-      });
-      if (current) {
-        setSelectedFontFamilyOption(current);
-        setAvailableFontWeights(current.weights || []);
-      } else {
-        setSelectedFontFamilyOption({
-          label: 'Default',
-          value: 'Default'
-        });
-        setAvailableFontWeights([]);
-      }
-    });
-  }, []);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     if (fontFamily !== 'Default') {
       (0,_Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__["default"])(fontFamily);
@@ -4086,7 +4065,19 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     setSelectedFontFamilyOption(selectedOption);
     var newFontFamily = (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value) || 'Default';
     onChangeFontFamily(newFontFamily);
-    setAvailableFontWeights((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.weights) || []);
+    if ((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.weights.length) > 0) {
+      var weights = [{
+        'label': 'Default',
+        'value': 'default'
+      }];
+      selectedOption === null || selectedOption === void 0 || selectedOption.weights.map(function (item, index) {
+        weights.push({
+          'label': item,
+          'value': item
+        });
+      });
+      setAvailableFontWeights(weights);
+    }
     if (newFontFamily !== 'Default') {
       (0,_Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__["default"])(newFontFamily);
     }
@@ -4121,6 +4112,12 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
   var handleLineHeightUnitChange = function handleLineHeightUnitChange(newLineHeightUnit) {
     onChangeLineHeightUnit(newLineHeightUnit);
   };
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    var selectedFont = fontOptions.find(function (font) {
+      return font.label === fontFamily;
+    });
+    handleFontFamilyChange(selectedFont);
+  }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-blocks"),
     className: "fb-typo-spacing"
@@ -4151,17 +4148,7 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     className: "fb_global_typo_wrap"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-blocks"),
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-blocks"),
-      value: 'inherit'
-    }].concat(_toConsumableArray(availableFontWeights.length > 0 ? availableFontWeights.map(function (weight) {
-      return {
-        label: weight,
-        value: weight
-      };
-    }) : _Constants_fbConstants__WEBPACK_IMPORTED_MODULE_3__.FONT_WEIGHT.filter(function (item) {
-      return item.value !== 'inherit';
-    }))),
+    options: availableFontWeights,
     value: fontWeight,
     onChange: handleFontWeightChange
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {

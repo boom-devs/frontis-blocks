@@ -88,6 +88,8 @@ class Admin {
 			}
 		}
 
+		$google_fonts = get_transient( 'google_fonts_data' );
+
 		$blocks = BlockList::get_instance()->get_blocks();
 		$localizeArray = array(
 			'blocks' => $blocks,
@@ -106,7 +108,8 @@ class Admin {
             'theme_colors' => $theme_colors,
 			'global_colors' => $global_colors,
 			'gradients_colors' => $gradient_colors,
-            'home_url' => home_url()
+            'home_url' => home_url(),
+			'google_fonts' => $google_fonts,
 		);
 
 		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){
@@ -135,8 +138,6 @@ class Admin {
 
         wp_enqueue_script('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/index' . $suffix . '.js', $script_asset['dependencies'], '1.0.0', true);
 
-
-        // responsiveCss.js
         // Localize the script with new data
 		wp_localize_script('frontis-blocks-admin', 'frontisBlocksAdmin', $localizeArray);
     }
@@ -166,6 +167,53 @@ class Admin {
 
         return $links;
     }
+
+	public function store_google_fonts() {
+		$transient_key = 'google_fonts_data';
+
+		// Check if transient exists
+		$cached_data = get_transient($transient_key);
+
+		if ($cached_data !== false) {
+			// Return cached data if available
+			return $cached_data;
+		}
+
+		// Replace with the actual URL to your google-fonts.json file
+		$plugin_url = FB_PLUGIN_URL.'assets/google-fonts/google-fonts.json';
+
+		// Fetch the JSON file
+		$response = wp_remote_get($plugin_url);
+
+		// Check for errors
+		if (is_wp_error($response)) {
+			return [];
+		}
+
+		// Get the response body
+		$body = wp_remote_retrieve_body($response);
+
+		// Decode JSON data
+		$data = json_decode($body, true);
+
+		if (json_last_error() !== JSON_ERROR_NONE || !is_array($data)) {
+			return [];
+		}
+
+		// Transform data to match the JavaScript output
+		$formatted_data = array_map(function($family) use ($data) {
+			return [
+				'label' => $family,
+				'value' => $family,
+				'weights' => $data[$family]
+			];
+		}, array_keys($data));
+
+		// Cache the data for 1 month (30 days)
+		set_transient($transient_key, $formatted_data, MONTH_IN_SECONDS);
+
+		return $formatted_data;
+	}
 
     /**
      * Save settings via AJAX
@@ -1295,6 +1343,9 @@ class Admin {
 
     public function register_block_assets_in_site_editor() {
         global $pagenow;
+
+		// Initiate google font
+		$this->store_google_fonts();
 
         if ('site-editor.php' === $pagenow) {
             // Styles from function
