@@ -110,6 +110,7 @@ class Admin {
 			'gradients_colors' => $gradient_colors,
             'home_url' => home_url(),
 			'google_fonts' => $google_fonts,
+            'siteName' => get_bloginfo('name'),
 		);
 
 		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){
@@ -1352,5 +1353,4 @@ class Admin {
             $this->render_generated_css();
         }
     }
-
 }
