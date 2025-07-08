@@ -240,6 +240,7 @@ function FrontisBlocksSidebar() {
 	const [fontFamilies, setFontFamilies] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 
+	const mobilePopoverProps = { placement: 'bottom-start', offset: 8 };
 	// Memoized theme colors
 	const themeColors = useMemo(
 		() => frontisBlocksAdmin?.theme_colors || defaultColors,
@@ -435,8 +436,6 @@ function FrontisBlocksSidebar() {
 		}
 
 	}, [customColors, globalColors, gradientColors, customGradientColors]);
-
-	console.log(typography)
 
 	return (
 		<>

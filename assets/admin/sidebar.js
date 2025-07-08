@@ -3359,7 +3359,10 @@ function FrontisBlocksSidebar() {
     _useState14 = _slicedToArray(_useState13, 2),
     isLoading = _useState14[0],
     setIsLoading = _useState14[1];
-
+  var mobilePopoverProps = {
+    placement: 'bottom-start',
+    offset: 8
+  };
   // Memoized theme colors
   var themeColors = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useMemo)(function () {
     var _frontisBlocksAdmin3;
@@ -3592,7 +3595,6 @@ function FrontisBlocksSidebar() {
       setGlobalColors(themeColors);
     }
   }, [customColors, globalColors, gradientColors, customGradientColors]);
-  console.log(typography);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebarMoreMenuItem, {
     target: "fb_plugin_sidebar"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("FB Global Settings", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
@@ -15283,7 +15285,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   FONT_WEIGHT: () => (/* binding */ FONT_WEIGHT),
 /* harmony export */   GOOGLE_FONTS: () => (/* binding */ GOOGLE_FONTS),
 /* harmony export */   HAMBURGER_MENU_ICON_TYPE: () => (/* binding */ HAMBURGER_MENU_ICON_TYPE),
-/* harmony export */   HAMBURGER_MENU_SCREEN: () => (/* binding */ HAMBURGER_MENU_SCREEN),
 /* harmony export */   HEADING: () => (/* binding */ HEADING),
 /* harmony export */   HORIZONTAL_NAVIGATION_ALIGN: () => (/* binding */ HORIZONTAL_NAVIGATION_ALIGN),
 /* harmony export */   ICON_ALIGN: () => (/* binding */ ICON_ALIGN),
@@ -15362,16 +15363,6 @@ var HAMBURGER_MENU_ICON_TYPE = [{
 }, {
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text", 'frontis-blocks'),
   value: 'text'
-}];
-var HAMBURGER_MENU_SCREEN = [{
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Off", 'frontis-blocks'),
-  value: "never"
-}, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mobile", 'frontis-blocks'),
-  value: "mobile"
-}, {
-  label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Always", 'frontis-blocks'),
-  value: "always"
 }];
 var DISPLAY_HAMBURGER_MENU = [{
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Hide", 'frontis-blocks'),
