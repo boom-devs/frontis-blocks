@@ -684,16 +684,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         }
 
         ${sliderOverlaySwitcher ? `
-        .${blockId}.fb-marquee-carousel-container::before {
+        .${blockId}.fb-marquee-carousel-container .swiper-container::before {
             left: 0;
-            background: linear-gradient(to right, ${sliderOverlayStartColor} 0%, ${sliderOverlayEndColor} 100%);
-            width: ${sliderOverlayWidth.Desktop}${sliderOverlayWidthUnits.Desktop};
+            background: linear-gradient(to right, ${sliderOverlayStartColor} 0%, ${sliderOverlayEndColor} 100%) !important;
+            width: ${sliderOverlayWidth.Desktop}${sliderOverlayWidthUnits.Desktop} !important;
         }
 
-        .${blockId}.fb-marquee-carousel-container::after {
+        .${blockId}.fb-marquee-carousel-container .swiper-container::after {
             right: 0;
-            background: linear-gradient(to left, ${sliderOverlayStartColor} 0%, ${sliderOverlayEndColor} 100%);
-            width: ${sliderOverlayWidth.Desktop}${sliderOverlayWidthUnits.Desktop};
+            background: linear-gradient(to left, ${sliderOverlayStartColor} 0%, ${sliderOverlayEndColor} 100%) !important;
+            width: ${sliderOverlayWidth.Desktop}${sliderOverlayWidthUnits.Desktop} !important;
         }
         ` : ''}
 

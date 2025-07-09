@@ -100,9 +100,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }, [sliderItemList, setAttributes]);
 
     /**
-     * Update the width of the slides
+     * Dynamically update the width of the slides
      */
     const updateSlideWidths = () => {
+        if (!blockId) return;
+    
         const slides = document.querySelectorAll(`.${blockId} .swiper-slide`);
         slides.forEach(slide => {
             slide.style.width = slideWidth.Desktop && slideWidthUnits.Desktop
@@ -177,9 +179,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         slideWidthUnits,
     ]);
 
-    /**
-     * Update the width of the slides on mount
-     */
     useEffect(() => {
         updateSlideWidths();
     }, [slideWidth, slideWidthUnits, blockId]);
