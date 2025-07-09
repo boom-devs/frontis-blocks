@@ -3,14 +3,20 @@
     align-items: center;
     transition: ease-in-out .5s;
 
-    &.fb-feature-list-left {
-        justify-content: flex-start;
+    &.fb-feature-list-top {
+        .fb-feature-list-item {
+            align-items: flex-start !important;
+        }
     }
     &.fb-feature-list-center {
-        justify-content: center;
+        .fb-feature-list-item {
+            align-items: center !important;
+        }
     }
-    &.fb-feature-list-right {
-        justify-content: flex-end;
+    &.fb-feature-list-bottom {
+        .fb-feature-list-item {
+            align-items: flex-end !important;
+        }
     }
     &.fb-icon-position-left {
         .fb-feature-list-item {
