@@ -41,6 +41,7 @@ import {
 import {
     NORMAL_HOVER,
     UNIT_TYPES,
+    ICON_VERTICAL_ALIGN,
     TEXT_ALIGN,
     HEADING,
     BORDER_STYLES,
@@ -2377,14 +2378,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 </BaseControl>
                 <BaseControl
-                    label={__("Feature Item Alignment", "frontis-blocks")}
+                    label={__("Icon Alignment", "frontis-blocks")}
                     id="fb-setting-text-alignment"
                     className="fb-setting-text-alignment"
                 >
                     <ButtonGroup
                         className="fb-setting-text-alignment-group-btn"
                     >
-                        {TEXT_ALIGN.map((item, key) => (
+                        {ICON_VERTICAL_ALIGN.map((item, key) => (
                             <Button
                                 key={key}
                                 onClick={() => setAttributes({ FeatureAlignment: item.value })}
