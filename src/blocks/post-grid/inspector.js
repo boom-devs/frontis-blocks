@@ -644,6 +644,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** Pagination Button */
         paginationBtnSize,
         paginationBtnSizeUnits,
+        paginationBtnGap,
+        paginationBtnGapUnits,
 
         paginationBtnBgColorSwitcher,
         paginationBtnNormalBackgroundType,
@@ -657,11 +659,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         paginationBtnHoverCustomGradientSwitcher,
         paginationBtnHoverCustomGradientInputValue,
 
-        paginationBtnPaddingUnits,
-        paginationBtnDesktopPadding,
-        paginationBtnTabletPadding,
-        paginationBtnMobilePadding,
-        paginationBtnPaddingLink,
+        paginationActiveBtnTextColorSwitcher,
+        paginationActiveBtnTextColor,
+        paginationActiveBtnTextHoverColor,
+
+        paginationActiveBtnBgColorSwitcher,
+        paginationActiveBtnNormalBackgroundType,
+        paginationActiveBtnNormalClassicColor,
+        paginationActiveBtnNormalGradientColor,
+        paginationActiveBtnNormalCustomGradientSwitcher,
+        paginationActiveBtnNormalCustomGradientInputValue,
+        paginationActiveBtnHoverBackgroundType,
+        paginationActiveBtnHoverClassicColor,
+        paginationActiveBtnHoverGradientColor,
+        paginationActiveBtnHoverCustomGradientSwitcher,
+        paginationActiveBtnHoverCustomGradientInputValue,
 
         paginationBtnBorder,
         paginationBtnBorderColorSwitcher,
@@ -3759,79 +3771,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const paginationArrowMobileBorderRadiusWidth = `${paginationArrowMobileBorderRadius.top}${paginationArrowBorderRadiusUnits.Mobile} ${paginationArrowMobileBorderRadius.right}${paginationArrowBorderRadiusUnits.Mobile} ${paginationArrowMobileBorderRadius.bottom}${paginationArrowBorderRadiusUnits.Mobile} ${paginationArrowMobileBorderRadius.left}${paginationArrowBorderRadiusUnits.Mobile}`;
 	/** End Pagination Arrow Border */
 
-    /** Start Pagination Button Padding */
-	const handlePaginationBtnPaddingUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( paginationBtnPaddingLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						paginationBtnDesktopPadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						paginationBtnTabletPadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						paginationBtnMobilePadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {paginationBtnDesktopPadding: {...paginationBtnDesktopPadding, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {paginationBtnTabletPadding: {...paginationBtnTabletPadding, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {paginationBtnMobilePadding: {...paginationBtnMobilePadding, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-
-	const handlePaginationBtnPaddingCombineBtn = () => {
-		setAttributes( {paginationBtnPaddingLink: !paginationBtnPaddingLink} );
-	}
-
-	const handlePaginationBtnPaddingUnitsHandler = (unit) => {
-		setAttributes( {
-			paginationBtnPaddingUnits: {
-				...paginationBtnPaddingUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-	const paginationBtnDesktopPaddingWidth = `${paginationBtnDesktopPadding.top}${paginationBtnPaddingUnits.Desktop} ${paginationBtnDesktopPadding.right}${paginationBtnPaddingUnits.Desktop} ${paginationBtnDesktopPadding.bottom}${paginationBtnPaddingUnits.Desktop} ${paginationBtnDesktopPadding.left}${paginationBtnPaddingUnits.Desktop}`;
-	const paginationBtnTabletPaddingWidth = `${paginationBtnTabletPadding.top}${paginationBtnPaddingUnits.Tablet} ${paginationBtnTabletPadding.right}${paginationBtnPaddingUnits.Tablet} ${paginationBtnTabletPadding.bottom}${paginationBtnPaddingUnits.Tablet} ${paginationBtnTabletPadding.left}${paginationBtnPaddingUnits.Tablet}`;
-	const paginationBtnMobilePaddingWidth = `${paginationBtnMobilePadding.top}${paginationBtnPaddingUnits.Mobile} ${paginationBtnMobilePadding.right}${paginationBtnPaddingUnits.Mobile} ${paginationBtnMobilePadding.bottom}${paginationBtnPaddingUnits.Mobile} ${paginationBtnMobilePadding.left}${paginationBtnPaddingUnits.Mobile}`;
-	/** End Pagination Button Padding */
-
     /** Start Pagination Button Border */
 	const handlePaginationBtnBorderUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -4145,7 +4084,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_text,
         .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_text{
-
             ${paginationArrowTextGlobalTypoSwitcher.fontFamily === true && paginationArrowTextGlobalTypographyData.fontFamily ? `font-family: ${paginationArrowTextGlobalTypographyData.fontFamily};` : ''}  
             ${paginationArrowTextGlobalTypoSwitcher.fontSize === true && paginationArrowTextGlobalTypographyData.fontSize ? `font-size: ${paginationArrowTextGlobalTypographyData.fontSize};` : ''}
             ${paginationArrowTextGlobalTypoSwitcher.fontWeight === true && paginationArrowTextGlobalTypographyData.fontWeight ? `font-weight: ${paginationArrowTextGlobalTypographyData.fontWeight};` : ''}
@@ -4169,6 +4107,72 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous:hover .fb_pagination_previous_text,
         .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next:hover .fb_pagination_next_text{ 
             ${paginationArrowTextHoverColor ? `color: ${paginationArrowTextHoverColor};` : ''}
+        }
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination {
+            ${paginationBtnGap.Desktop ? `gap: ${paginationBtnGap.Desktop}${paginationBtnGapUnits.Desktop};` : ''}
+        }
+                
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item {
+            ${paginationBtnSize.Desktop ? `width: ${paginationBtnSize.Desktop}${paginationBtnSizeUnits.Desktop};` : ''}  
+            ${paginationBtnSize.Desktop ? `height: ${paginationBtnSize.Desktop}${paginationBtnSizeUnits.Desktop};` : ''}
+
+            ${paginationBtnTextGlobalTypoSwitcher.fontFamily === true && paginationBtnTextGlobalTypographyData.fontFamily ? `font-family: ${paginationBtnTextGlobalTypographyData.fontFamily};` : ''}  
+            ${paginationBtnTextGlobalTypoSwitcher.fontSize === true && paginationBtnTextGlobalTypographyData.fontSize ? `font-size: ${paginationBtnTextGlobalTypographyData.fontSize};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.fontWeight === true && paginationBtnTextGlobalTypographyData.fontWeight ? `font-weight: ${paginationBtnTextGlobalTypographyData.fontWeight};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.fontStyle === true && paginationBtnTextGlobalTypographyData.fontStyle ? `font-style: ${paginationBtnTextGlobalTypographyData.fontStyle};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.textTransform === true && paginationBtnTextGlobalTypographyData.textTransform ? `text-transform: ${paginationBtnTextGlobalTypographyData.textTransform};` : ''} 
+            ${paginationBtnTextGlobalTypoSwitcher.textDecoration === true && paginationBtnTextGlobalTypographyData.textDecoration ? `text-decoration: ${paginationBtnTextGlobalTypographyData.textDecoration};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.letterSpacing === true && paginationBtnTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${paginationBtnTextGlobalTypographyData.letterSpacing};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.lineHeight === true && paginationBtnTextGlobalTypographyData.lineHeight ? `line-height: ${paginationBtnTextGlobalTypographyData.lineHeight};` : ''}
+            
+        	${paginationBtnTextGlobalTypoSwitcher.fontFamily === false && paginationBtnTextFontFamily && paginationBtnTextFontFamily !== 'Default' ? `font-family: ${paginationBtnTextFontFamily};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.fontSize === false && paginationBtnTextFontSize.Desktop ? `font-size: ${paginationBtnTextFontSize.Desktop}${paginationBtnTextFontSizeUnits.Desktop};` : ''} 
+			${paginationBtnTextGlobalTypoSwitcher.fontWeight === false && paginationBtnTextFontWeight ? `font-weight: ${paginationBtnTextFontWeight};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.fontStyle === false && paginationBtnTextFontStyle ? `font-style: ${paginationBtnTextFontStyle};` : ''}  
+			${paginationBtnTextGlobalTypoSwitcher.textTransform === false && paginationBtnTextTransform ? `text-transform: ${paginationBtnTextTransform};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.textDecoration === false && paginationBtnTextDecoration ? `text-decoration: ${paginationBtnTextDecoration};` : ''} 
+			${paginationBtnTextGlobalTypoSwitcher.letterSpacing === false && paginationBtnTextLetterSpacing.Desktop ? `letter-spacing: ${paginationBtnTextLetterSpacing.Desktop}${paginationBtnTextLetterSpacingUnits.Desktop};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.lineHeight === false && paginationBtnTextLineHeight.Desktop ? `line-height: ${paginationBtnTextLineHeight.Desktop}${paginationBtnTextLineHeightUnits.Desktop};` : ''}
+
+            ${paginationBtnTextColor ? `color: ${paginationBtnTextColor};` : ''}
+
+            ${paginationBtnBorder ? `border: ${paginationBtnBorder};` : ''} 
+            ${paginationBtnBorderColor ? `border-color: ${paginationBtnBorderColor};` : ''}
+            ${paginationBtnDesktopBorderWidth && paginationBtnDesktopBorder.top ? `border-width: ${paginationBtnDesktopBorderWidth};` : ''}
+            ${paginationBtnDesktopBorderRadiusWidth && paginationBtnDesktopBorderRadius.top? `border-radius: ${paginationBtnDesktopBorderRadiusWidth};` : ''}
+
+            ${paginationBtnNormalBackgroundType === 'gradient' ? `   
+                ${paginationBtnNormalCustomGradientSwitcher && paginationBtnNormalCustomGradientInputValue ? `background: ${paginationBtnNormalCustomGradientInputValue};` : `background: ${paginationBtnNormalGradientColor};`}
+            `: `
+                ${paginationBtnNormalClassicColor ? `background: ${paginationBtnNormalClassicColor};` : ''}
+            `}
+        }
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item:hover {
+            ${paginationBtnTextHoverColor ? `color: ${paginationBtnTextHoverColor};` : ''}
+            ${paginationBtnHoverBackgroundType === 'gradient' ? `    
+                ${paginationBtnHoverCustomGradientSwitcher && paginationBtnHoverCustomGradientInputValue ? `background: ${paginationBtnHoverCustomGradientInputValue};` : `background: ${paginationBtnHoverGradientColor};`}
+            `: `
+                ${paginationBtnHoverClassicColor ? `background: ${paginationBtnHoverClassicColor};` : ''}
+            `}
+        }
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item.active { 
+            ${paginationActiveBtnTextColor ? `color: ${paginationActiveBtnTextColor};` : ''} 
+            ${paginationActiveBtnNormalBackgroundType === 'gradient' ? `      
+                ${paginationActiveBtnNormalCustomGradientSwitcher && paginationActiveBtnNormalCustomGradientInputValue ? `background: ${paginationActiveBtnNormalCustomGradientInputValue};` : `background: ${paginationActiveBtnNormalGradientColor};`}
+            `: `
+                ${paginationActiveBtnNormalClassicColor ? `background: ${paginationActiveBtnNormalClassicColor};` : ''} 
+            `}
+        }
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item.active:hover { 
+            ${paginationActiveBtnTextHoverColor ? `color: ${paginationActiveBtnTextHoverColor};` : ''} 
+            ${paginationActiveBtnHoverBackgroundType === 'gradient' ? `    
+                ${paginationActiveBtnHoverCustomGradientSwitcher && paginationActiveBtnHoverCustomGradientInputValue ? `background: ${paginationActiveBtnHoverCustomGradientInputValue};` : `background: ${paginationActiveBtnHoverGradientColor};`}
+            `: `
+                ${paginationActiveBtnHoverClassicColor ? `background: ${paginationActiveBtnHoverClassicColor};` : ''} 
+            `}
         }
 
 
@@ -4879,6 +4883,45 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 transform: rotate(${buttonImageRotateHover.Tablet}deg);
             }
 
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous,
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next{
+                ${paginationPrevNextWidth.Tablet ? `width: ${paginationPrevNextWidth.Tablet}${paginationPrevNextWidthUnits.Tablet};` : ''} 
+                ${paginationPrevNextWidth.Tablet ? `height: ${paginationPrevNextWidth.Tablet}${paginationPrevNextWidthUnits.Tablet};` : ''}
+
+                ${paginationArrowTabletBorderWidth && paginationArrowTabletBorder.top ? `border-width: ${paginationArrowTabletBorderWidth};` : ''}
+                ${paginationArrowTabletBorderRadiusWidth && paginationArrowTabletBorderRadius.top? `border-radius: ${paginationArrowTabletBorderRadiusWidth};` : ''}
+
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon,
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon{
+                ${paginationArrowSize.Tablet ? `width: ${paginationArrowSize.Tablet}${paginationArrowSizeUnits.Tablet};` : ''}
+                ${paginationArrowSize.Tablet ? `height: ${paginationArrowSize.Tablet}${paginationArrowSizeUnits.Tablet};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_text,
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_text{
+                ${paginationArrowTextGlobalTypoSwitcher.fontSize === false && paginationArrowTextFontSize.Tablet ? `font-size: ${paginationArrowTextFontSize.Tablet}${paginationArrowTextFontSizeUnits.Tablet};` : ''} 
+                ${paginationArrowTextGlobalTypoSwitcher.letterSpacing === false && paginationArrowTextLetterSpacing.Tablet ? `letter-spacing: ${paginationArrowTextLetterSpacing.Tablet}${paginationArrowTextLetterSpacingUnits.Tablet};` : ''}
+                ${paginationArrowTextGlobalTypoSwitcher.lineHeight === false && paginationArrowTextLineHeight.Tablet ? `line-height: ${paginationArrowTextLineHeight.Tablet}${paginationArrowTextLineHeightUnits.Tablet};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination {
+                ${paginationBtnGap.Tablet ? `gap: ${paginationBtnGap.Tablet}${paginationBtnGapUnits.Tablet};` : ''}
+            }
+                    
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item {
+                ${paginationBtnSize.Tablet ? `width: ${paginationBtnSize.Tablet}${paginationBtnSizeUnits.Tablet};` : ''}  
+                ${paginationBtnSize.Tablet ? `height: ${paginationBtnSize.Tablet}${paginationBtnSizeUnits.Tablet};` : ''}
+
+                ${paginationBtnTextGlobalTypoSwitcher.fontSize === false && paginationBtnTextFontSize.Tablet ? `font-size: ${paginationBtnTextFontSize.Tablet}${paginationBtnTextFontSizeUnits.Tablet};` : ''} 
+                ${paginationBtnTextGlobalTypoSwitcher.letterSpacing === false && paginationBtnTextLetterSpacing.Tablet ? `letter-spacing: ${paginationBtnTextLetterSpacing.Tablet}${paginationBtnTextLetterSpacingUnits.Tablet};` : ''}
+                ${paginationBtnTextGlobalTypoSwitcher.lineHeight === false && paginationBtnTextLineHeight.Tablet ? `line-height: ${paginationBtnTextLineHeight.Tablet}${paginationBtnTextLineHeightUnits.Tablet};` : ''}
+
+                ${paginationBtnTabletBorderWidth && paginationBtnTabletBorder.top ? `border-width: ${paginationBtnTabletBorderWidth};` : ''}
+                ${paginationBtnTabletBorderRadiusWidth && paginationBtnTabletBorderRadius.top? `border-radius: ${paginationBtnTabletBorderRadiusWidth};` : ''}
+            }
+
         }
 
         @media only screen and (max-width: 767px) {
@@ -5172,6 +5215,45 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             .${blockId} .fb_post_grid_read_more_button:hover .fb_post_grid_read_more_icon_wrapper .fb_post_grid_read_more_icon_image {
                 transform: rotate(${buttonImageRotateHover.Mobile}deg);
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous,
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next{
+                ${paginationPrevNextWidth.Mobile ? `width: ${paginationPrevNextWidth.Mobile}${paginationPrevNextWidthUnits.Mobile};` : ''} 
+                ${paginationPrevNextWidth.Mobile ? `height: ${paginationPrevNextWidth.Mobile}${paginationPrevNextWidthUnits.Mobile};` : ''}
+
+                ${paginationArrowMobileBorderWidth && paginationArrowMobileBorder.top ? `border-width: ${paginationArrowMobileBorderWidth};` : ''}
+                ${paginationArrowMobileBorderRadiusWidth && paginationArrowMobileBorderRadius.top? `border-radius: ${paginationArrowMobileBorderRadiusWidth};` : ''}
+
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon,
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon{
+                ${paginationArrowSize.Mobile ? `width: ${paginationArrowSize.Mobile}${paginationArrowSizeUnits.Mobile};` : ''}
+                ${paginationArrowSize.Mobile ? `height: ${paginationArrowSize.Mobile}${paginationArrowSizeUnits.Mobile};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_text,
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_text{ 
+                ${paginationArrowTextGlobalTypoSwitcher.fontSize === false && paginationArrowTextFontSize.Mobile ? `font-size: ${paginationArrowTextFontSize.Mobile}${paginationArrowTextFontSizeUnits.Mobile};` : ''} 
+                ${paginationArrowTextGlobalTypoSwitcher.letterSpacing === false && paginationArrowTextLetterSpacing.Mobile ? `letter-spacing: ${paginationArrowTextLetterSpacing.Mobile}${paginationArrowTextLetterSpacingUnits.Mobile};` : ''}
+                ${paginationArrowTextGlobalTypoSwitcher.lineHeight === false && paginationArrowTextLineHeight.Mobile ? `line-height: ${paginationArrowTextLineHeight.Mobile}${paginationArrowTextLineHeightUnits.Mobile};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination {
+                ${paginationBtnGap.Mobile ? `gap: ${paginationBtnGap.Mobile}${paginationBtnGapUnits.Mobile};` : ''}
+            }
+                    
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item {
+                ${paginationBtnSize.Mobile ? `width: ${paginationBtnSize.Mobile}${paginationBtnSizeUnits.Mobile};` : ''}  
+                ${paginationBtnSize.Mobile ? `height: ${paginationBtnSize.Mobile}${paginationBtnSizeUnits.Mobile};` : ''}
+
+                ${paginationBtnTextGlobalTypoSwitcher.fontSize === false && paginationBtnTextFontSize.Mobile ? `font-size: ${paginationBtnTextFontSize.Mobile}${paginationBtnTextFontSizeUnits.Mobile};` : ''} 
+                ${paginationBtnTextGlobalTypoSwitcher.letterSpacing === false && paginationBtnTextLetterSpacing.Mobile ? `letter-spacing: ${paginationBtnTextLetterSpacing.Mobile}${paginationBtnTextLetterSpacingUnits.Mobile};` : ''}
+                ${paginationBtnTextGlobalTypoSwitcher.lineHeight === false && paginationBtnTextLineHeight.Mobile ? `line-height: ${paginationBtnTextLineHeight.Mobile}${paginationBtnTextLineHeightUnits.Mobile};` : ''}
+
+                ${paginationBtnMobileBorderWidth && paginationBtnMobileBorder.top ? `border-width: ${paginationBtnMobileBorderWidth};` : ''}
+                ${paginationBtnMobileBorderRadiusWidth && paginationBtnMobileBorderRadius.top? `border-radius: ${paginationBtnMobileBorderRadiusWidth};` : ''}
             }
         }
 
@@ -5937,6 +6019,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** Pagination Button */
         paginationBtnSize,
         paginationBtnSizeUnits,
+        paginationBtnGap,
+        paginationBtnGapUnits,
 
         paginationBtnBgColorSwitcher,
         paginationBtnNormalBackgroundType,
@@ -5950,11 +6034,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         paginationBtnHoverCustomGradientSwitcher,
         paginationBtnHoverCustomGradientInputValue,
 
-        paginationBtnPaddingUnits,
-        paginationBtnDesktopPadding,
-        paginationBtnTabletPadding,
-        paginationBtnMobilePadding,
-        paginationBtnPaddingLink,
+        paginationActiveBtnTextColorSwitcher,
+        paginationActiveBtnTextColor,
+        paginationActiveBtnTextHoverColor,
+
+        paginationActiveBtnBgColorSwitcher,
+        paginationActiveBtnNormalBackgroundType,
+        paginationActiveBtnNormalClassicColor,
+        paginationActiveBtnNormalGradientColor,
+        paginationActiveBtnNormalCustomGradientSwitcher,
+        paginationActiveBtnNormalCustomGradientInputValue,
+        paginationActiveBtnHoverBackgroundType,
+        paginationActiveBtnHoverClassicColor,
+        paginationActiveBtnHoverGradientColor,
+        paginationActiveBtnHoverCustomGradientSwitcher,
+        paginationActiveBtnHoverCustomGradientInputValue,
 
         paginationBtnBorder,
         paginationBtnBorderColorSwitcher,
@@ -5966,12 +6060,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         paginationBtnTabletBorder,
         paginationBtnMobileBorder,
         paginationBtnBorderLink,
+        paginationBtnDesktopBorderWidth,
+        paginationBtnTabletBorderWidth,
+        paginationBtnMobileBorderWidth,
 
         paginationBtnBorderRadiusUnits,
         paginationBtnDesktopBorderRadius,
         paginationBtnTabletBorderRadius,
         paginationBtnMobileBorderRadius,
         paginationBtnBorderRadiusLink,
+        paginationBtnDesktopBorderRadiusWidth,
+        paginationBtnTabletBorderRadiusWidth,
+        paginationBtnMobileBorderRadiusWidth,
 
         paginationBtnTextGlobalTypoSwitcher,
         paginationBtnTextGlobalTypographyData,
@@ -8715,12 +8815,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_Range
                         min={1}
                         max={200}
-                        label={__("Button Size", "frontis-blocks")}
+                        label={__("Width", "frontis-blocks")}
                         rangeValue={paginationBtnSize}
                         onChangeHandler={(value) => setAttributes({ paginationBtnSize: value })}
                         rangeUnitHandler={(value) => setAttributes({ paginationBtnSizeUnits: value })} 
                         deviceType={deviceType}
                         units={paginationBtnSizeUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                    />
+
+                    <FB_Range
+                        min={1}
+                        max={200}
+                        label={__("Gap", "frontis-blocks")}
+                        rangeValue={paginationBtnGap}
+                        onChangeHandler={(value) => setAttributes({ paginationBtnGap: value })}
+                        rangeUnitHandler={(value) => setAttributes({ paginationBtnGapUnits: value })} 
+                        deviceType={deviceType}
+                        units={paginationBtnGapUnits}
                         setAttributes={setAttributes}
                         rangeStep={1}
                         resetFallbackValue={""}
@@ -8793,7 +8907,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                     )}
 
-                    {paginationArrowTextColorSwitcher === 'hover' && (
+                    {paginationBtnTextColorSwitcher === 'hover' && (
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
                             globalColor={paginationBtnTextHoverColor}
@@ -8832,19 +8946,59 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                     />
 
-                    <FB_Spacing
-                        label={__("Padding", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handlePaginationBtnPaddingUnitsHandler}
-                        spacingUnits={paginationBtnPaddingUnits}
-                        spacingDesktop={paginationBtnDesktopPadding}
-                        spacingTablet={paginationBtnTabletPadding}
-                        spacingMobile={paginationBtnMobilePadding}
-                        handleSpacingUnitHandler={handlePaginationBtnPaddingUnitChange}
-                        spacingCombineBtn={paginationBtnPaddingLink}
-                        spacingCombineBtnHandler={handlePaginationBtnPaddingCombineBtn}
-                        setAttributes={setAttributes}
+                    <FB_SwitcherControl
+                        label={__("Active Text Color", "frontis-blocks")}
+                        globalSwitcher={paginationActiveBtnTextColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ paginationActiveBtnTextColorSwitcher: value })}
                     />
+
+                    {paginationActiveBtnTextColorSwitcher === 'normal' && (
+                        <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={paginationActiveBtnTextColor} 
+                            setGlobalColor={(value) => setAttributes({ paginationActiveBtnTextColor: value })}
+                        />
+                    )}
+
+                    {paginationActiveBtnTextColorSwitcher === 'hover' && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={paginationActiveBtnTextHoverColor}
+                            setGlobalColor={(value) => setAttributes({ paginationActiveBtnTextHoverColor: value })}
+                        />
+                    )}
+
+                    <FB_BackgroundColorControl
+                        label={__("Active Background Color", "frontis-blocks")}
+                        bgColorSwitcher={paginationActiveBtnBgColorSwitcher}  
+                        setBgColorSwitcher={(value) => setAttributes({ paginationActiveBtnBgColorSwitcher: value })}
+                        
+                        normalBackgroundType={paginationActiveBtnNormalBackgroundType}
+                        setNormalBackgroundType={(value) => setAttributes({ paginationActiveBtnNormalBackgroundType: value })}
+                        normalClassicColor={paginationActiveBtnNormalClassicColor}
+                        setNormalClassicColor={(value) => setAttributes({ paginationActiveBtnNormalClassicColor: value })}
+                        normalGradientColor={paginationActiveBtnNormalGradientColor}
+                        setNormalGradientColor={(value) => setAttributes({ paginationActiveBtnNormalGradientColor: value })}
+                        normalCustomGradientSwitcher={paginationActiveBtnNormalCustomGradientSwitcher}
+                        setNormalCustomGradientSwitcher={(value) => setAttributes({ paginationActiveBtnNormalCustomGradientSwitcher: value })}
+                        normalCustomGradientInputValue={paginationActiveBtnNormalCustomGradientInputValue}
+                        setNormalCustomGradientInputValue={(value) => setAttributes({ paginationActiveBtnNormalCustomGradientInputValue: value })}
+
+                        hoverBackgroundType={paginationActiveBtnHoverBackgroundType} 
+                        setHoverBackgroundType={(value) => setAttributes({ paginationActiveBtnHoverBackgroundType: value })}
+                        hoverClassicColor={paginationActiveBtnHoverClassicColor}
+                        setHoverClassicColor={(value) => setAttributes({ paginationActiveBtnHoverClassicColor: value })}
+                        hoverGradientColor={paginationActiveBtnHoverGradientColor} 
+                        setHoverGradientColor={(value) => setAttributes({ paginationActiveBtnHoverGradientColor: value })}
+                        hoverCustomGradientSwitcher={paginationActiveBtnHoverCustomGradientSwitcher}
+                        setHoverCustomGradientSwitcher={(value) => setAttributes({ paginationActiveBtnHoverCustomGradientSwitcher: value })}
+                        hoverCustomGradientInputValue={paginationActiveBtnHoverCustomGradientInputValue}
+                        setHoverCustomGradientInputValue={(value) => setAttributes({ paginationActiveBtnHoverCustomGradientInputValue: value })}
+
+                        isBackgroundImage={false}
+
+                    />
+
                     <SelectControl
                             label={__("Border Style", "frontis-blocks")}
                             value={paginationBtnBorder}
@@ -8866,7 +9020,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                     )}
 
-                    {paginationArrowBorderColorSwitcher === 'hover' && (
+                    {paginationBtnBorderColorSwitcher === 'hover' && (
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
                             globalColor={paginationBtnBorderHoverColor}

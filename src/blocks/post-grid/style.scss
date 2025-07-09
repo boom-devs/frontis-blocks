@@ -401,11 +401,10 @@
 			box-shadow: none;
 		}
 		&:hover {
-			background-color: #F8A948;
 			transition: all .3s ease-in-out;
 		}
 		&.active {
-			background-color: #F8A948;
+			background-color: #E6E6E6;
 			transition: all .3s ease-in-out;
 		}
 	}
