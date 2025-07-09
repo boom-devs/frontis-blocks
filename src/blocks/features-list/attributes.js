@@ -329,7 +329,7 @@ const attributes = {
     },
     FeatureAlignment: {
         type: "string",
-        default: "left",
+        default: "center",
     },
     FeatureIconAlignment: {
         type: "string",
