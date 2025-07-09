@@ -100,6 +100,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }, [sliderItemList, setAttributes]);
 
     /**
+     * Update the width of the slides
+     */
+    const updateSlideWidths = () => {
+        const slides = document.querySelectorAll(`.${blockId} .swiper-slide`);
+        slides.forEach(slide => {
+            slide.style.width = slideWidth.Desktop && slideWidthUnits.Desktop
+                ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}`
+                : 'fit-content';
+        });
+    };
+
+    /**
      * Manages tab button settings and switches to block settings on click
      */
 
@@ -124,14 +136,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
            slidesPerView:'auto',
            allowTouchMove: false,
            // Make sure slides have proper CSS width applied
-           on: {
-                init: function() {
-                // Apply proper width to slides to ensure multiple are visible
-                    const slides = document.querySelectorAll(`.${blockId} .swiper-slide`);
-                    slides.forEach(slide => {
-                        slide.style.width = slideWidth.Desktop && slideWidthUnits.Desktop ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}` : 'fit-content'; 
-                    });
-                },
+            on: {
+                init: updateSlideWidths,
             },
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
@@ -170,6 +176,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         slideWidth,
         slideWidthUnits,
     ]);
+
+    /**
+     * Update the width of the slides on mount
+     */
+    useEffect(() => {
+        updateSlideWidths();
+    }, [slideWidth, slideWidthUnits, blockId]);
 
 
     const renderSliderToolbarControls = () => {
