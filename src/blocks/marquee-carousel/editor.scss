@@ -62,8 +62,8 @@
     overflow: hidden;
 }
 
-.fb-marquee-carousel-container::before,
-.fb-marquee-carousel-container::after {
+.fb-marquee-carousel-container .swiper-container::before,
+.fb-marquee-carousel-container .swiper-container::after {
     content: "";
     position: absolute;
     top: 0;
