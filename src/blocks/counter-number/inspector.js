@@ -1206,6 +1206,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterItemRatio,
         counterItemBorder,
         counterItemBorderColor,
+        counterItemBorderHoverColor,
         counterItemDesktopBorder,
         counterItemTabletBorder,
         counterItemMobileBorder,
