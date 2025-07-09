@@ -59,7 +59,6 @@ export const subheading_POSITION = [
 
 export const separatorType = [
 	{ label: __("Comma", "frontis-block"), value: "comma" },
-	{ label: __("Dot", "frontis-block"), value: "dot" },
 	{ label: __("Space", "frontis-block"), value: "space" },
 ];
 
