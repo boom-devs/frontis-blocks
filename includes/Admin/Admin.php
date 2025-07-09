@@ -1130,15 +1130,6 @@ class Admin {
                                 <?php endif; ?>
                             </button>
 
-                            <!-- Page Numbers -->
-                            <!-- <?php for ( $page = 1; $page <= $total_pages; $page++ ) :
-                                $active = $page == $current_page ? "active" : ""; ?>
-                                <button class="fb_pagination_item <?php echo esc_attr( $active ); ?>" data-pagenumber="<?php echo esc_attr( $page ); ?>">
-                                    <?php echo esc_html( $page ); ?>
-                                </button>
-                            <?php endfor; ?> -->
-
-
                             <?php
                             $range = 2; // current page before and after how many pages
 

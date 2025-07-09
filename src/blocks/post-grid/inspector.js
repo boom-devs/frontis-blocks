@@ -4143,22 +4143,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${paginationArrowIconHoverColor ? `fill: ${paginationArrowIconHoverColor};` : ''}
         }
 
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_text,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_text{
 
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination {
-        }
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_item {
-        }
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_item.active {
-        
-        }
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_previous,
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_next {
+            ${paginationArrowTextGlobalTypoSwitcher.fontFamily === true && paginationArrowTextGlobalTypographyData.fontFamily ? `font-family: ${paginationArrowTextGlobalTypographyData.fontFamily};` : ''}  
+            ${paginationArrowTextGlobalTypoSwitcher.fontSize === true && paginationArrowTextGlobalTypographyData.fontSize ? `font-size: ${paginationArrowTextGlobalTypographyData.fontSize};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.fontWeight === true && paginationArrowTextGlobalTypographyData.fontWeight ? `font-weight: ${paginationArrowTextGlobalTypographyData.fontWeight};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.fontStyle === true && paginationArrowTextGlobalTypographyData.fontStyle ? `font-style: ${paginationArrowTextGlobalTypographyData.fontStyle};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.textTransform === true && paginationArrowTextGlobalTypographyData.textTransform ? `text-transform: ${paginationArrowTextGlobalTypographyData.textTransform};` : ''} 
+            ${paginationArrowTextGlobalTypoSwitcher.textDecoration === true && paginationArrowTextGlobalTypographyData.textDecoration ? `text-decoration: ${paginationArrowTextGlobalTypographyData.textDecoration};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.letterSpacing === true && paginationArrowTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${paginationArrowTextGlobalTypographyData.letterSpacing};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.lineHeight === true && paginationArrowTextGlobalTypographyData.lineHeight ? `line-height: ${paginationArrowTextGlobalTypographyData.lineHeight};` : ''}
+            
+        	${paginationArrowTextGlobalTypoSwitcher.fontFamily === false && paginationArrowTextFontFamily && paginationArrowTextFontFamily !== 'Default' ? `font-family: ${paginationArrowTextFontFamily};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.fontSize === false && paginationArrowTextFontSize.Desktop ? `font-size: ${paginationArrowTextFontSize.Desktop}${paginationArrowTextFontSizeUnits.Desktop};` : ''} 
+			${paginationArrowTextGlobalTypoSwitcher.fontWeight === false && paginationArrowTextFontWeight ? `font-weight: ${paginationArrowTextFontWeight};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.fontStyle === false && paginationArrowTextFontStyle ? `font-style: ${paginationArrowTextFontStyle};` : ''}  
+			${paginationArrowTextGlobalTypoSwitcher.textTransform === false && paginationArrowTextTransform ? `text-transform: ${paginationArrowTextTransform};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.textDecoration === false && paginationArrowTextDecoration ? `text-decoration: ${paginationArrowTextDecoration};` : ''} 
+			${paginationArrowTextGlobalTypoSwitcher.letterSpacing === false && paginationArrowTextLetterSpacing.Desktop ? `letter-spacing: ${paginationArrowTextLetterSpacing.Desktop}${paginationArrowTextLetterSpacingUnits.Desktop};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.lineHeight === false && paginationArrowTextLineHeight.Desktop ? `line-height: ${paginationArrowTextLineHeight.Desktop}${paginationArrowTextLineHeightUnits.Desktop};` : ''}
 
+            ${paginationArrowTextColor ? `color: ${paginationArrowTextColor};` : ''}
         }
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_previous_icon,
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_next_icon {
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous:hover .fb_pagination_previous_text,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next:hover .fb_pagination_next_text{ 
+            ${paginationArrowTextHoverColor ? `color: ${paginationArrowTextHoverColor};` : ''}
+        }
 
-        }
 
         .${blockId}.fb_post_grid_container.list-layout {
             display: grid;
@@ -7986,7 +7998,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             )}
 
             <PanelBody
-                title={__("Read More Button Text", "frontis-blocks")}
+                title={__("Read More", "frontis-blocks")}
                 initialOpen={false}
             >
                 <FB_Range
@@ -8100,8 +8112,87 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 )}
 
-            </PanelBody>
-            <PanelBody title=" Read More Btn Padding and Margin" initialOpen={false}>
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={buttonBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ buttonBorder: value })}
+                />
+
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={buttonBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ buttonBorderColorSwitcher: value })}
+                />
+
+                {buttonBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={buttonBorderColor}
+                        setGlobalColor={(value) => setAttributes({ buttonBorderColor: value })}
+                    />
+                )}
+
+                {buttonBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={buttonBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ buttonBorderHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleBorderUnitsChange}
+                    spacingUnits={buttonBorderUnits}
+                    spacingDesktop={buttonDesktopBorderWidth}
+                    spacingTablet={buttonTabBorderWidth}
+                    spacingMobile={buttonMobileBorderWidth}
+                    handleSpacingUnitHandler={handleBorderWidthChange}
+                    spacingCombineBtn={buttonBorderLink}
+                    spacingCombineBtnHandler={handleBorderLinkToggle}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleBorderRadiusUnitsChange}
+                    spacingUnits={buttonBorderRadiusUnits}
+                    spacingDesktop={buttonDesktopBorderRadiusWidth}
+                    spacingTablet={buttonTabBorderRadiusWidth}
+                    spacingMobile={buttonMobileBorderRadiusWidth}
+                    handleSpacingUnitHandler={handleBorderRadiusChange}
+                    spacingCombineBtn={buttonBorderRadiusLink}
+                    spacingCombineBtnHandler={handleBorderRadiusLinkToggle}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    globalSwitcher={buttonBoxShadowSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ buttonBoxShadowSwitcher: value })}
+                />
+
+                {buttonBoxShadowSwitcher === 'normal' && (
+                    <FB_BoxShadowControl
+                        label={__("Normal Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowValues: value })}
+                        initialShadowValue={buttonBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {buttonBoxShadowSwitcher === 'hover' && (
+                    <FB_BoxShadowControl
+                        label={__("Hover Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowHoverValues: value })}
+                        initialShadowValue={buttonBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowHoverCssValue: value })}
+                    />
+                )}
+
                 <FB_Spacing
                     label={__("Padding", "frontis-blocks")}
                     deviceType={deviceType}
@@ -8128,92 +8219,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     spacingCombineBtnHandler={handleMarginCombineBtn}
                     setAttributes={setAttributes}
                 />
-            </PanelBody>
-            <PanelBody
-                title={__("Read More Btn Border and Shadow", "frontis-blocks")}
-                initialOpen={false}
-                className="fb-setting-border-setting-wrapper"
-                >
-                    <SelectControl
-                        label={__("Border Style", "frontis-blocks")}
-                        value={buttonBorder}
-                        options={BORDER_STYLES}
-                        onChange={(value) => setAttributes({ buttonBorder: value })}
-                    />
 
-
-                    <FB_SwitcherControl
-                        label={__("Border Color", "frontis-blocks")}
-                        globalSwitcher={buttonBorderColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ buttonBorderColorSwitcher: value })}
-                    />
-
-                    {buttonBorderColorSwitcher === 'normal' && (
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                            globalColor={buttonBorderColor}
-                            setGlobalColor={(value) => setAttributes({ buttonBorderColor: value })}
-                        />
-                    )}
-
-                    {buttonBorderColorSwitcher === 'hover' && (
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                            globalColor={buttonBorderHoverColor}
-                            setGlobalColor={(value) => setAttributes({ buttonBorderHoverColor: value })}
-                        />
-                    )}
-
-                    <FB_Spacing
-                        label={__("Border", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handleBorderUnitsChange}
-                        spacingUnits={buttonBorderUnits}
-                        spacingDesktop={buttonDesktopBorderWidth}
-                        spacingTablet={buttonTabBorderWidth}
-                        spacingMobile={buttonMobileBorderWidth}
-                        handleSpacingUnitHandler={handleBorderWidthChange}
-                        spacingCombineBtn={buttonBorderLink}
-                        spacingCombineBtnHandler={handleBorderLinkToggle}
-                        setAttributes={setAttributes}
-                    />
-                    <FB_Spacing
-                        label={__("Border Radius", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handleBorderRadiusUnitsChange}
-                        spacingUnits={buttonBorderRadiusUnits}
-                        spacingDesktop={buttonDesktopBorderRadiusWidth}
-                        spacingTablet={buttonTabBorderRadiusWidth}
-                        spacingMobile={buttonMobileBorderRadiusWidth}
-                        handleSpacingUnitHandler={handleBorderRadiusChange}
-                        spacingCombineBtn={buttonBorderRadiusLink}
-                        spacingCombineBtnHandler={handleBorderRadiusLinkToggle}
-                        setAttributes={setAttributes}
-                    />
-
-                    <FB_SwitcherControl
-                        label={__("Box Shadow", "frontis-blocks")}
-                        globalSwitcher={buttonBoxShadowSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ buttonBoxShadowSwitcher: value })}
-                    />
-
-                    {buttonBoxShadowSwitcher === 'normal' && (
-                        <FB_BoxShadowControl
-                            label={__("Normal Shadow", "frontis-blocks")}
-                            onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowValues: value })}
-                            initialShadowValue={buttonBoxShadowValues}
-                            onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowCssValue: value })}
-                        />
-                    )}
-
-                    {buttonBoxShadowSwitcher === 'hover' && (
-                        <FB_BoxShadowControl
-                            label={__("Hover Shadow", "frontis-blocks")}
-                            onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowHoverValues: value })}
-                            initialShadowValue={buttonBoxShadowHoverValues}
-                            onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowHoverCssValue: value })}
-                        />
-                    )}
             </PanelBody>
 
             {(readMoreIconAlign === 'icon-text' || readMoreIconAlign === 'icon-only') && (
@@ -8475,7 +8481,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             )}
             
             {loadMoreType === 'pagination' && (
-                <PanelBody title={__("Pagination Arrows Settings", "frontis-blocks")} initialOpen={false}>
+                <PanelBody title={__("Pagination Arrows", "frontis-blocks")} initialOpen={false}>
 
 
 
@@ -8704,7 +8710,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             )}
 
             {loadMoreType === 'pagination' && (
-                <PanelBody title={__("Pagination Button Settings", "frontis-blocks")} initialOpen={false}>
+                <PanelBody title={__("Pagination Numbers", "frontis-blocks")} initialOpen={false}>
 
                     <FB_Range
                         min={1}

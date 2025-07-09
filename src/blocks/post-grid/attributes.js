@@ -2651,7 +2651,7 @@ const attributes = {
 	},
 	paginationArrowNormalClassicColor: {
 		type: "string",
-		default: "",
+		default: "#E6E6E6",
 	},
 	paginationArrowNormalGradientColor: {
 		type: "string",
@@ -2812,9 +2812,9 @@ const attributes = {
 	paginationArrowTextFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '24',
-			Tablet: '20',
-			Mobile: '16'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	paginationArrowTextFontSizeUnits: { 
@@ -2827,7 +2827,7 @@ const attributes = {
 	},
 	paginationArrowTextFontWeight: {
 		type: "string",
-		default: "600"
+		default: "400"
 	},
 	paginationArrowTextFontStyle: {
 		type: "string",
@@ -2860,9 +2860,9 @@ const attributes = {
 	paginationArrowTextLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '30',
-			Tablet: '30',
-			Mobile: '30'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	paginationArrowTextLineHeightUnits: {
