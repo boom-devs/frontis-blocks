@@ -996,7 +996,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             <PanelBody title="Slide" initialOpen={true}>
                 <FB_Range
                     min={1}
-                    max={500}
+                    max={slideWidthUnits[deviceType] === "%" ? 100 : 1000}
                     label={__("Width", "frontis-blocks")}
                     rangeValue={slideWidth}
                     onChangeHandler={(value) => setAttributes({ slideWidth: value })}
@@ -1147,7 +1147,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                         />
                         <FB_Range
                             min={1}
-                            max={500}
+                            max={sliderOverlayWidthUnits[deviceType] === "%" ? 100 : 1000}
                             label={__("Width", "frontis-blocks")}
                             rangeValue={sliderOverlayWidth}
                             onChangeHandler={(value) => setAttributes({ sliderOverlayWidth: value })}
