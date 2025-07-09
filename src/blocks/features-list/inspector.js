@@ -41,6 +41,7 @@ import {
 import {
     NORMAL_HOVER,
     UNIT_TYPES,
+    ICON_VERTICAL_ALIGN,
     TEXT_ALIGN,
     HEADING,
     BORDER_STYLES,
@@ -2377,25 +2378,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 </BaseControl>
                 <BaseControl
-                    label={__("Feature Item Alignment", "frontis-blocks")}
-                    id="fb-setting-text-alignment"
-                    className="fb-setting-text-alignment"
-                >
-                    <ButtonGroup
-                        className="fb-setting-text-alignment-group-btn"
-                    >
-                        {TEXT_ALIGN.map((item, key) => (
-                            <Button
-                                key={key}
-                                onClick={() => setAttributes({ FeatureAlignment: item.value })}
-                                className={`fb-setting-text-alignment-single-btn ${FeatureAlignment === item.value ? 'active' : ''}`}
-                            >
-                                {item.label}
-                            </Button>
-                        ))}
-                    </ButtonGroup>
-                </BaseControl>
-                <BaseControl
                     label={__("Icon Position", "frontis-blocks")}
                     id="fb-setting-text-alignment"
                     className="fb-setting-text-alignment"
@@ -2414,6 +2396,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         ))}
                     </ButtonGroup>
                 </BaseControl>
+                {FeatureIconAlignment !=='center' && (
+                    <BaseControl
+                        label={__("Icon Alignment", "frontis-blocks")}
+                        id="fb-setting-text-alignment"
+                        className="fb-setting-text-alignment"
+                    >
+                        <ButtonGroup
+                            className="fb-setting-text-alignment-group-btn"
+                        >
+                            {ICON_VERTICAL_ALIGN.map((item, key) => (
+                                <Button
+                                    key={key}
+                                    onClick={() => setAttributes({ FeatureAlignment: item.value })}
+                                    className={`fb-setting-text-alignment-single-btn ${FeatureAlignment === item.value ? 'active' : ''}`}
+                                >
+                                    {item.label}
+                                </Button>
+                            ))}
+                        </ButtonGroup>
+                    </BaseControl>
+                )}
             </PanelBody>
 
         </>
