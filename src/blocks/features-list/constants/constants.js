@@ -38,6 +38,12 @@ export const ICON_ALIGN = [
 	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
 ];
 
+export const ICON_VERTICAL_ALIGN = [
+	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "top" },
+	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
+	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "bottom" },
+];
+
 export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
