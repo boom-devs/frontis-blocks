@@ -932,6 +932,7 @@ const Inspector = (props) => {
 						units_types_arr={[
 							{ label: 'px', value: 'px' },
 							{ label: 'vh', value: 'vh' },
+							{ label: '%', value: '%' },
 						]}
 					/>
 
