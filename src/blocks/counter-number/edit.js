@@ -59,40 +59,56 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		const duration = counterDuration;
 		let startTime = null;
 	
+		const hasDecimal = !Number.isInteger(start) || !Number.isInteger(end);
+	
+		const formatNumberWithSpace = (num) => {
+			const [intPart, decPartRaw] = num.toFixed(1).split('.');
+			const intWithSpaces = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+			const decimalPart = hasDecimal && parseInt(decPartRaw) !== 0 ? `.${decPartRaw}` : '';
+			return `${intWithSpaces}${decimalPart}`;
+		};
+	
 		const step = (timestamp) => {
-		  if (!startTime) startTime = timestamp;
-		  const progress = Math.min((timestamp - startTime) / duration, 1);
-		  const current = progress * (end - start) + start; // Removed Math.floor to allow decimal values
+			if (!startTime) startTime = timestamp;
+			const progress = Math.min((timestamp - startTime) / duration, 1);
+			const current = progress * (end - start) + start;
 	
-		  let formattedNumber = current.toString();
+			let formattedNumber = current.toString();
 	
-		  if (showThousandsSeparator) {
-			switch (showThousandsSeparatorType) {
-			  case "comma":
-				formattedNumber = current.toLocaleString("en-US");
-				break;
-			  case "dot":
-				formattedNumber = current.toLocaleString("de-DE");
-				break;
-			  case "space":
-				formattedNumber = current.toLocaleString("fr-FR");
-				break;
-			  default:
-				formattedNumber = current.toLocaleString();
+			if (showThousandsSeparator) {
+				switch (showThousandsSeparatorType) {
+					case "comma":
+						formattedNumber = current.toLocaleString("en-US", {
+							minimumFractionDigits: 0,
+							maximumFractionDigits: hasDecimal ? 1 : 0,
+						});
+						break;
+					case "space":
+						formattedNumber = formatNumberWithSpace(current);
+						break;
+					default:
+						formattedNumber = current.toLocaleString(undefined, {
+							minimumFractionDigits: 0,
+							maximumFractionDigits: hasDecimal ? 1 : 0,
+						});
+				}
+			} else {
+				formattedNumber = hasDecimal ? current.toFixed(1) : Math.round(current).toString();
 			}
-		  }
 	
-		  if (counterRef.current) {
-			counterRef.current.textContent = formattedNumber;
-		  }
+			if (counterRef.current) {
+				counterRef.current.textContent = formattedNumber;
+			}
 	
-		  if (progress < 1) {
-			window.requestAnimationFrame(step);
-		  }
+			if (progress < 1) {
+				window.requestAnimationFrame(step);
+			}
 		};
 	
 		window.requestAnimationFrame(step);
-	  };
+	};
+	
+	
 	
 	  useEffect(() => {
 		hasCounted.current = false;
