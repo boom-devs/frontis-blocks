@@ -2042,7 +2042,7 @@ var EditorOptions = function EditorOptions() {
       default_content_width: {
         Desktop: '1200',
         Tablet: '1024',
-        Mobile: '768'
+        Mobile: '767'
       },
       button_inherit_from_theme: false,
       container_padding: '',
