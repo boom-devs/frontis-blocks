@@ -256,11 +256,13 @@ class Settings extends AjaxBase {
             return;
         }
 
-        $value = isset($_POST['value']) ? $this->sanitize_option_value($_POST['value'], $type) : '';
-        $old_value = get_option("fb_$option_name");
+        $post_value = isset($_POST['value']) ? ($_POST['value']) : [];
 
+        $value =  json_encode($post_value);
+        
+        $old_value = get_option("fb_$option_name");
         // Convert old_value to the correct type for comparison
-        $old_value = $this->sanitize_option_value($old_value, $type);
+        // $old_value = $this->sanitize_option_value($old_value, $type);
 
         if ($old_value === $value) {
             wp_send_json_success(['message' => 'No changes were made']);
