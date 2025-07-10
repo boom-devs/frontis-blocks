@@ -401,11 +401,10 @@
 			box-shadow: none;
 		}
 		&:hover {
-			background-color: #F8A948;
 			transition: all .3s ease-in-out;
 		}
 		&.active {
-			background-color: #F8A948;
+			background-color: #E6E6E6;
 			transition: all .3s ease-in-out;
 		}
 	}
@@ -430,7 +429,7 @@
 .fb_pagination_next {
 	width: 36px;
     aspect-ratio: 1 / 1;
-	border: 1px solid #D9D9D9;
+	border: 1px solid #E6E6E6;
 	color: #000000;
 	background-color: transparent;
 	cursor: pointer;
@@ -442,7 +441,7 @@
 	transition: all .3s ease-in-out;
 
 	&:hover {
-		background-color: #F8A948;
+		background-color: #E6E6E6;
 		transition: all .3s ease-in-out;
 	}
 
