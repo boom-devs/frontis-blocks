@@ -71,10 +71,10 @@ const TypographySettings = (props) => {
 	const deleteItem = (item) => {
 		const tempTypography = { ...customTypography };
 		const tempGlobalTypography = { ...globalTypography };
-
+	
 		delete tempTypography[item];
 		delete tempGlobalTypography[item];
-
+	
 		setCustomTypography(tempTypography);
 		setGlobalTypography(tempGlobalTypography);
 		setIsMount(true);
@@ -1044,7 +1044,7 @@ const TypographySettings = (props) => {
 			<div className="fb-typography-panel">
 				{/* Typography Elements Section */}
 				<div className="fb-panel-section">
-					<h3 className="fb-panel-heading">Typography</h3>
+					<h3 className="fb-panel-heading">Element</h3>
 					<div className={'fb-global-typo-elements'}>
 						<div className="fb-global-typo-elements-wrap">
 							<NavigatorProvider initialPath="/">
@@ -1064,12 +1064,7 @@ const TypographySettings = (props) => {
 												</span>
 												{typographyElements[item]}
 												{(typography[item] || (item === 'heading' && isHeadingSaved())) && (
-													<span className="edit_indecator">
-														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-															<path d="M2.66602 14.6665H13.3327" stroke="#0B0C0E" stroke-linecap="round" />
-															<path d="M9.25808 2.44212L9.75242 1.94778C10.5714 1.12874 11.8993 1.12874 12.7184 1.94778C13.5374 2.76682 13.5374 4.09475 12.7184 4.91379L12.2241 5.40813M9.25808 2.44212C9.25808 2.44212 9.31982 3.49258 10.2468 4.41946C11.1736 5.34634 12.2241 5.40813 12.2241 5.40813M9.25808 2.44212L4.71339 6.98676C4.40557 7.29456 4.25166 7.4485 4.1193 7.61823C3.96316 7.81836 3.82929 8.03496 3.72006 8.26416C3.62748 8.45843 3.55864 8.66496 3.42098 9.07796L2.83765 10.828M12.2241 5.40813L7.67942 9.95276C7.37162 10.2606 7.21768 10.4145 7.04795 10.5469C6.84782 10.703 6.63118 10.8369 6.402 10.9461C6.20772 11.0387 6.00123 11.1076 5.58824 11.2452L3.83824 11.8286M2.83765 10.828L2.69506 11.2557C2.62731 11.459 2.6802 11.683 2.83168 11.8345C2.98317 11.986 3.20723 12.0389 3.41046 11.9711L3.83824 11.8286M2.83765 10.828L3.83824 11.8286" stroke="#0B0C0E" />
-														</svg>
-													</span>
+													<span className="edit_indecator"></span>
 												)}
 											</NavigatorButton>
 										</div>
@@ -1183,6 +1178,166 @@ const TypographySettings = (props) => {
 									</div>
 								))}
 							</NavigatorProvider>
+						</div>
+					</div>
+				</div>
+
+				{/* Custom Typography Section */}
+				<div className="fb-panel-section">
+					<div className="fb-panel-heading-wrapper">
+						<h3 className="fb-panel-heading">Custom</h3>
+						{!selectCustomTypo && (
+							<div className="add-custom-color">
+								<Button
+									className="add-custom-color-btn"
+									onClick={() => setCustomTypography({
+										...customTypography,
+										[`fb_customtypo_${Math.random().toString(36).substring(2, 7)}`]: {
+											name: `Custom Typography`,
+											fontFamily: "default",
+											lineHeight: {
+												Desktop: '',
+												Tablet: '',
+												Mobile: ''
+											},
+											lineHeightUnits: {
+												Desktop: 'px',
+												Tablet: 'px',
+												Mobile: 'px'
+											},
+											fontSize: {
+												Desktop: '',
+												Tablet: '',
+												Mobile: ''
+											},
+											fontSizeUnit: {
+												Desktop: 'px',
+												Tablet: 'px',
+												Mobile: 'px'
+											},
+											fontWeight: '',
+											fontStyle: '',
+											textTransform: '',
+											textDecoration: '',
+											letterSpacing: {
+												Desktop: '',
+												Tablet: '',
+												Mobile: ''
+											},
+											letterSpacingUnit: {
+												Desktop: 'px',
+												Tablet: 'px',
+												Mobile: 'px'
+											}
+										}
+									})}
+								>
+									<span>
+										<svg width="15" height="14" viewBox="0 0 15 14"
+											fill="none"
+											xmlns="http://www.w3.org/2000/svg">
+											<path d="M7.5 0.75V13.25M13.75 7L1.25 7"
+												stroke="white"
+												strokeWidth="1.5" strokeLinecap="round"
+												strokeLinejoin="round" />
+										</svg>
+									</span>
+								</Button>
+							</div>
+						)}
+					</div>
+
+					<div className={'fb-global-typo-elements'}>
+						<div className="fb-global-typo-elements-wrap">
+							{customTypography && typeof customTypography === 'object' && (
+								<NavigatorProvider initialPath="/">
+									<NavigatorScreen path="/">
+										{Object.keys(customTypography || {}).length > 0 &&
+											<div className="fb-custom-element-wrapper">
+												{Object.keys(customTypography || {}).length > 0 && Object.keys(customTypography).map((item, index) => (
+													<div
+														key={index}
+														className="fb-custom-element fb-global-typography-element"
+													>
+														<NavigatorButton
+															path={`/${item}`}
+															onClick={() => setSelectCustomTypo(true)}
+														>
+															{customTypography[item]?.name}
+														</NavigatorButton>
+														<Button className="fb-delete-custom-typo">
+															<span
+																className={'fb-delete'}
+																title="Delete"
+																onClick={() => deleteItem(item)}
+															>
+																<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+																	<path d="M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675" stroke="#E43242" stroke-linecap="round" />
+																	<path d="M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659" stroke="#E43242" stroke-linecap="round" />
+																	<path d="M6.3335 11.5V7.5" stroke="#E43242" stroke-linecap="round" />
+																	<path d="M9.6665 11.5V7.5" stroke="#E43242" stroke-linecap="round" />
+																</svg>
+															</span>
+														</Button>
+													</div>
+												))}
+											</div>
+										}
+
+									</NavigatorScreen>
+
+									{Object.keys(customTypography).length > 0 && Object.keys(customTypography).map((item, index) => (
+										<div
+											key={index}
+											className="fb-global-typography-element-content"
+										>
+											<NavigatorScreen path={`/${item}`}>
+												<NavigatorBackButton onClick={() => setSelectCustomTypo(false)}>
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+														<path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="currentcolor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+													</svg>
+													{customTypography[item]?.name}
+												</NavigatorBackButton>
+
+												<div className="fb-typography-settings">
+													<FrontPreview fontProps={customTypography[item]} deviceType={deviceType} fontSize={true} />
+													<TextControl
+														label={__('Typography Name', 'frontis-blocks')}
+														className="fb-custom-typo-name"
+														value={customTypography[item]?.name}
+														onChange={(value) => changeCustomTypoName(item, value)}
+													/>
+													<FB_SidebarTypography
+														fontFamily={customTypography?.[item]?.fontFamily}
+														onChangeFontFamily={(value) => onChangeCustomFontFamily(value, item)}
+														fontSize={customTypography?.[item]?.fontSize}
+														onChangeFontSize={(value) => onChangeCustomFontSize(value, item)}
+														fontSizeUnits={customTypography?.[item]?.fontSizeUnit}
+														onChangeFontSizeUnit={(value) => onChangeCustomFontSizeUnit(value, item)}
+														fontWeight={customTypography?.[item]?.fontWeight}
+														onChangeFontWeight={(value) => onChangeCustomFontWeight(value, item)}
+														fontStyle={customTypography?.[item]?.fontStyle}
+														onChangeFontStyle={(value) => onChangeCustomFontStyle(value, item)}
+														textTransform={customTypography?.[item]?.textTransform}
+														onChangeTextTransform={(value) => onChangeCustomTextTransform(value, item)}
+														textDecoration={customTypography?.[item]?.textDecoration}
+														onChangeTextDecoration={(value) => onChangeCustomTextDecoration(value, item)}
+														letterSpacing={customTypography?.[item]?.letterSpacing}
+														onChangeLetterSpacing={(value) => onChangeCustomLetterSpacing(value, item)}
+														letterSpacingUnits={customTypography?.[item]?.letterSpacingUnit}
+														onChangeLetterSpacingUnit={(value) => onChangeCustomLetterSpacingUnit(value, item)}
+														lineHeight={customTypography?.[item]?.lineHeight}
+														onChangeLineHeight={(value) => onChangeCustomLineHeight(value, item)}
+														lineHeightUnits={customTypography?.[item]?.lineHeightUnits}
+														onChangeLineHeightUnit={(value) => onChangeCustomLineHeightUnit(value, item)}
+														deviceType={deviceType}
+													/>
+												</div>
+											</NavigatorScreen>
+										</div>
+									))}
+								</NavigatorProvider>
+							)}
 						</div>
 					</div>
 				</div>

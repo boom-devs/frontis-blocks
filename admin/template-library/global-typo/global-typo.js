@@ -1,31 +1,23 @@
 import { __ } from "@wordpress/i18n";
 import { PluginSidebar, PluginSidebarMoreMenuItem } from "@wordpress/editor";
-import { useDispatch } from "@wordpress/data";
+import { useViewportMatch } from '@wordpress/compose';
 import {
-	Button,
-	Modal,
-	TextControl,
-	TabPanel,
 	__experimentalNavigatorProvider as NavigatorProvider,
 	__experimentalNavigatorScreen as NavigatorScreen,
 	__experimentalNavigatorButton as NavigatorButton,
-	Popover,
-	Dropdown,
-	BaseControl,
-	ColorPalette
+	__experimentalPaletteEdit as PaletteEdit,
 } from "@wordpress/components";
-import { PanelColorSettings } from "@wordpress/block-editor";
 import { useEffect, useState, useCallback, useMemo } from "@wordpress/element";
-import GradientColorPallet from "./components/GradientColorPallet";
-import ColorPalletWrapper from "./components/ColorPalletWrapper";
-import CustomGradientColorPallet from "./components/CustomGradientPallet";
 import TypographySettings from "./components/TypographySettings";
 import { useDeviceType } from "@Config/displayType";
-import { getFbLocalStorage, loadGoogleFont, useAfterSave } from "./helper";
+import { loadGoogleFont, useAfterSave } from "./helper";
 import { getGlobalStyle, updateGlobalStyle } from "./fetch";
 import generateCSSVariables from "./components/GenerateRootCss";
 import generateColorsVariables from "./components/GenerateColorRoot";
-import "./scss/global-typo.scss";
+import {
+	GOOGLE_FONTS,
+} from '@Constants/fbConstants';
+import './scss/global-typo.scss';
 
 // Default color and gradient configurations
 const defaultColors = [
@@ -78,79 +70,6 @@ const defaultColors = [
 		name: __("Gray Color", "frontis-blocks"),
 		color: "#808080",
 		slug: "gray-color",
-	},
-];
-
-const gradientDefaults = [
-	{
-		color:
-			"linear-gradient(135deg, rgba(33,150,243,1) 0%, rgba(156,39,176,1) 100%)",
-		name: "Primary Color",
-		slug: "gradientPrimary",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(0,200,83,1) 0%, rgba(255,193,7,1) 100%)",
-		name: "Secondary Color",
-		slug: "gradientSecondary",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(244,67,54,1) 0%, rgba(233,30,99,1) 100%)",
-		name: "Tertiary Color",
-		slug: "gradientTertiary",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(3,169,244,1) 0%, rgba(0,150,136,1) 100%)",
-		name: "Accent Color",
-		slug: "gradientAccent",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(96,125,139,1) 0%, rgba(224,224,224,1) 100%)",
-		name: "Neutral Background",
-		slug: "gradientBackground",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(255,87,34,1) 0%, rgba(255,235,59,1) 100%)",
-		name: "Vibrant Glow",
-		slug: "gradientGradient",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(255,0,150,1) 0%, rgba(255,255,0,1) 100%)",
-		name: "Sunset Bliss",
-		slug: "gradientSunsetBliss",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(0,255,222,1) 0%, rgba(0,102,255,1) 100%)",
-		name: "Ocean Breeze",
-		slug: "gradientOceanBreeze",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(255,153,0,1) 0%, rgba(255,94,0,1) 100%)",
-		name: "Tangerine Dream",
-		slug: "gradientTangerineDream",
-	},
-	{
-		color:
-			"linear-gradient(135deg, rgba(102,51,153,1) 0%, rgba(255,102,204,1) 100%)",
-		name: "Lavender Kiss",
-		slug: "gradientLavenderKiss",
-	},
-	{
-		color: "linear-gradient(220.55deg, #FFE70B 0%, #27B643 100%)",
-		name: "Minty Fresh",
-		slug: "gradientMintyFresh",
-	},
-	{
-		color: "linear-gradient(180deg, #12C0DB, #EF04F6)",
-		name: "Halloween",
-		slug: "gradientHalloween",
 	},
 ];
 
@@ -309,33 +228,27 @@ const defaultTypography = {
 
 function FsiGbTypography() {
 	const deviceType = useDeviceType();
-	const { editPost } = useDispatch("core/editor");
 	const isAfterSave = useAfterSave();
 
 	// State management
-	const [globalColors, setGlobalColors] = useState(defaultColors);
+	const [globalColors, setGlobalColors] = useState(frontisBlocksAdmin?.global_colors);
 	const [customColors, setCustomColors] = useState([]);
-	const [gradientColors, setGradientColors] = useState(gradientDefaults);
+	const [gradientColors, setGradientColors] = useState(frontisBlocksAdmin?.gradients_colors);
 	const [customGradientColors, setCustomGradientColors] = useState([]);
 	const [typography, setTypography] = useState(defaultTypography);
 	const [customTypography, setCustomTypography] = useState({});
 	const [fontFamilies, setFontFamilies] = useState({});
-	const [activeTab, setActiveTab] = useState("solid");
-	const [colorModalOpen, setColorModalOpen] = useState(false);
-	const [colorName, setColorName] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 
-	// New state for color picker modal
-	const [colorPickerModal, setColorPickerModal] = useState(false);
-	const [selectedColorIndex, setSelectedColorIndex] = useState(null);
-	const [selectedColorType, setSelectedColorType] = useState(null); 
-	const [anchorEl, setAnchorEl] = useState(null);
-
+	const mobilePopoverProps = { placement: 'bottom-start', offset: 8 };
 	// Memoized theme colors
 	const themeColors = useMemo(
 		() => frontisBlocksAdmin?.theme_colors || defaultColors,
 		[],
 	);
+
+	const isMobileViewport = useViewportMatch( 'small', '<' );
+	const popoverProps = isMobileViewport ? mobilePopoverProps : undefined;
 
 	// Utility to extract font families
 	const getAllFontFamilies = useCallback((fontsObject) => {
@@ -352,7 +265,6 @@ function FsiGbTypography() {
 	}, []);
 
 	const handleUpdateState = useCallback(async () => {
-		console.log("Initial loaded");
 		setIsLoading(true);
 		const localStorageKeys = [
 			{
@@ -370,7 +282,7 @@ function FsiGbTypography() {
 			{
 				key: "fb_gradient_colors",
 				setter: setGradientColors,
-				defaultValue: gradientDefaults,
+				defaultValue: frontisBlocksAdmin?.gradients_colors,
 				api: "fb_get_gradient_colors",
 			},
 			{
@@ -416,13 +328,10 @@ function FsiGbTypography() {
 				postProcess,
 			} of localStorageKeys) {
 				if (key === "fb_global_colors") {
-					// Forcefully set fb_global_colors to themeColors
-					setter(themeColors);
-					localStorage.setItem(key, JSON.stringify(themeColors));
-					if (postProcess) setTimeout(() => postProcess(themeColors), 1000);
+					setter(globalColors ?? themeColors);
+					localStorage.setItem(key, JSON.stringify(globalColors ?? themeColors));
+					if (postProcess) setTimeout(() => postProcess(globalColors ?? themeColors), 1000);
 				} else {
-					const localData = getFbLocalStorage(key);
-
 					const res = await getGlobalStyle(api);
 					const data = res.success ? res.data : defaultValue;
 					if (setter) setter(data);
@@ -445,11 +354,12 @@ function FsiGbTypography() {
 	// Generate color variables
 	useEffect(() => {
 		const mergedColors = [
-			...customColors,
-			...globalColors,
-			...customGradientColors,
-			...gradientColors,
+			...(customColors ?? []),
+			...(customGradientColors ?? []),
+			...(gradientColors ?? []),
+			...(globalColors ?? (Array.isArray(themeColors) ? themeColors : [])),
 		];
+
 		setTimeout(() => generateColorsVariables(mergedColors, deviceType), 1000);
 	}, [
 		globalColors,
@@ -497,6 +407,8 @@ function FsiGbTypography() {
 					localStorage.setItem(storeKey, JSON.stringify(response.data.data));
 				}
 			}
+
+			setIsLoading(false);
 		} catch (error) {
 			console.error("Error updating settings:", error);
 		}
@@ -513,225 +425,61 @@ function FsiGbTypography() {
 		handleUpdateSettings();
 	}, [handleUpdateSettings]);
 
-	// Color panel array generator
-	const colorPanelArray = useCallback((colors, setColor, defaults = []) => {
-		if (!Array.isArray(colors)) return [];
-		return colors.map((colorObj, index) => ({
-			label: colorObj.name || "Color",
-			value: colorObj.color,
-			onChange: (newColor) =>
-				setColor(index, newColor || defaults[index]?.color || "#000"),
-		}));
-	}, []);
-
-	// Color update handlers
-	const setGlobalColor = useCallback((index, color) => {
-		setGlobalColors((prev) => {
-			const colors = [...prev];
-			colors[index].color = color;
-			return colors;
-		});
-		setIsLoading(true);
-	}, []);
-
-	const setGradientColor = useCallback((index, color) => {
-		setGradientColors((prev) => {
-			const colors = [...prev];
-			colors[index].color = color;
-			return colors;
-		});
-		setIsLoading(true);
-	}, []);
-
-	const setCustomGradientColor = useCallback((index, color) => {
-		setCustomGradientColors((prev) => {
-			const colors = [...prev];
-			colors[index].color = color;
-			return colors;
-		});
-		setIsLoading(true);
-	}, []);
-
-	const setCustomColor = useCallback((index, color) => {
-		setCustomColors((prev) => {
-			const colors = [...prev];
-			colors[index].color = color;
-			return colors;
-		});
-		setIsLoading(true);
-	}, []);
-
-	// Custom color and gradient handlers
-	const addCustomColor = useCallback(() => {
-		setColorModalOpen(true);
-		setIsLoading(true);
-	}, []);
-
-	const deleteCustomGradientColor = useCallback((index) => {
-		setCustomGradientColors((prev) => {
-			const colors = [...prev];
-			colors.splice(index, 1);
-			return colors;
-		});
-		setIsLoading(true);
-	}, []);
-
-	const addCustomGradientColor = useCallback(() => {
-		setCustomGradientColors((prev) => [
-			...prev,
-			{
-				color: "#000000",
-				name: `Gradient Color ${prev.length + 1}`,
-				slug: `custom-gradient-color-${prev.length + 1}`,
-				var: `--fb-custom-gradient-color-${prev.length + 1}`,
-			},
-		]);
-		setIsLoading(true);
-	}, []);
-
-	// Handle modal close and new color addition
 	useEffect(() => {
-		if (!colorModalOpen && colorName) {
-			setCustomColors((prev) => [
-				...prev,
-				{
-					color: "#000000",
-					name: colorName || `Custom Color ${prev.length + 1}`,
-					slug: colorName
-						? colorName.replace(/\s+/g, "-").toLowerCase()
-						: `custom-color-${prev.length + 1}`,
-				},
-			]);
-			setColorName("");
+		if (!isLoading) {
+			setIsLoading(true);
+			wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
 		}
-	}, [colorModalOpen, colorName]);
 
-	// Handle color click to open picker modal
-	const handleColorClick = useCallback((index, type) => {
-		setSelectedColorIndex(index);
-		setSelectedColorType(type);
-		setAnchorEl(event.currentTarget);
-		setColorPickerModal(true);
-	}, []);
-
-	// Handle color change from picker modal
-	const handleColorChange = useCallback((newColor) => {
-		if (selectedColorType === 'global') {
-			setGlobalColor(selectedColorIndex, newColor);
-		} else if (selectedColorType === 'custom') {
-			setCustomColor(selectedColorIndex, newColor);
+		if (globalColors === undefined) {
+			setGlobalColors(themeColors);
 		}
-	}, [selectedColorIndex, selectedColorType, setGlobalColor, setCustomColor]);
 
-	// Get current selected color
-	const getCurrentColor = useCallback(() => {
-		if (selectedColorType === 'global' && selectedColorIndex !== null) {
-			return globalColors[selectedColorIndex]?.color || '#000000';
-		} else if (selectedColorType === 'custom' && selectedColorIndex !== null) {
-			return customColors[selectedColorIndex]?.color || '#000000';
-		}
-		return '#000000';
-	}, [selectedColorIndex, selectedColorType, globalColors, customColors]);
+	}, [customColors, globalColors, gradientColors, customGradientColors]);
 
 	return (
 		<>
-			<div className="fb-panel-control">
-				<div className="fb-color-options-vertical">
-					{/* Solid Colors Section */}
-					<div className="fb-color-section">
-						<h2 className="fb-section-title">{__("Select Color", "frontis-blocks")}</h2>
+			{/* <PluginSidebarMoreMenuItem target="fb_plugin_sidebar">
+				{__("FB Global Settings", "frontis-blocks")}
+			</PluginSidebarMoreMenuItem> */}
+			<div className="fb_plugin_sidebar">
+					<div className="fb-panel-control">
+						<NavigatorProvider initialPath="/">
 
-						{/* Custom Color Display */}
-						<div className="fb-color-grid" style={{
-							display: 'flex',
-							flexWrap: 'wrap',
-							gap: '12px',
-							marginBottom: '24px',
-							padding: '12px',
-							border: '1px solid #E1E3E8',
-							borderRadius: '4px'
-						}}>
-							{globalColors.map((colorObj, index) => (
-								<div
-									key={`global-${index}`}
-									className="fb-color-item"
-									style={{
-										width: '32px',
-										height: '32px',
-										borderRadius: '50%',
-										backgroundColor: colorObj.color,
-										border: '1px solid #ddd',
-										cursor: 'pointer',
-									}}
-									onClick={(e) => handleColorClick(index, 'global', e)}
-									title={colorObj.name}
+								<div className="fb-global-header-inner-wrapper">
+									<div className="fb-global-header-inner">
+										<h3>{__("Typography", "frontis-blocks")}</h3>
+									</div>
+								</div>
+								<TypographySettings
+									typography={typography}
+									customTypography={customTypography}
+									isAfterSave={isAfterSave}
 								/>
-							))}
-							{customColors.map((colorObj, index) => (
-								<div
-									key={`custom-${index}`}
-									className="fb-color-item"
-									style={{
-										width: '32px',
-										height: '32px',
-										borderRadius: '50%',
-										backgroundColor: colorObj.color,
-										border: '1px solid #ddd',
-										cursor: 'pointer',
-										boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-									}}
-									onClick={() => handleColorClick(index, 'custom')}
-									title={colorObj.name}
-								/>
-							))}
-						</div>
+
+								{/* <div className="fb-global-header-inner-wrapper">
+									<div className="fb-global-header-inner">
+										<h3>{__("Color", "frontis-blocks")}</h3>
+									</div>
+								</div> */}
+
+								<div className="fb-color-options-vertical">
+									{/* Solid Colors Section */}
+									<div className="fb-color-section">
+										<PaletteEdit
+											canReset={ globalColors || themeColors }
+											canOnlyChangeValues
+											colors={ globalColors || themeColors }
+											onChange={ setGlobalColors }
+											paletteLabel={ __( 'Color' ) }
+											paletteLabelHeadingLevel={ 3 }
+											popoverProps={ popoverProps }
+										/>
+									</div>
+								</div>
+						</NavigatorProvider>
 					</div>
-				</div>
-				<TypographySettings
-					typography={typography}
-					isAfterSave={isAfterSave}
-				/>
 			</div>
-
-			{colorPickerModal && (
-				<Popover
-					className="fb-color-picker-modal"
-					onRequestClose={() => setColorPickerModal(false)}
-					placement="right-start"
-					focusOnMount={false}
-				>
-					<div className="fb-setting-color-setting-icon-popup"
-						style = {{
-							width: '300px',
-							padding: '12px'
-						}}
-					>
-						<BaseControl
-							label={
-								selectedColorType === 'global'
-									? globalColors[selectedColorIndex]?.name
-									: customColors[selectedColorIndex]?.name
-							}
-						>
-							<ColorPalette
-								colors={selectedColorType === 'global' ? globalColors : customColors}
-								value={getCurrentColor()}
-								onChange={handleColorChange}
-								disableCustomColors={false}
-							/>
-						</BaseControl>
-						<div
-							className="fb-modal-actions"
-							style={{ marginTop: '20px', textAlign: 'right' }}
-						>
-							<Button variant="primary" onClick={() => setColorPickerModal(false)}>
-								{__("Done", "frontis-blocks")}
-							</Button>
-						</div>
-					</div>
-				</Popover>
-			)}
-
 		</>
 	);
 }
