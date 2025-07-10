@@ -44,7 +44,6 @@ const NumberInputWithPx = ({ value, onChange, onBlur, min, max, device, onDevice
       </div>
 
       <div className="fb-setting-device-label-wrapper">
-        {/* <p className="fb-setting-label-text">{ __( labelText, 'frontis-blocks' ) }</p> */}
         <div className="fb-responsive-device-wrapper" onClick={toggleDeviceVisibility}>
           <div className="fb-responsive-device-inner-wrapper">
             <button className={`fb-device-switcher fb-responsive-desktop-device ${device === 'Desktop' ? 'active' : ''}`} onClick={() => onDeviceChange('Desktop')}>
@@ -219,8 +218,6 @@ const EditorOptions = () => {
 
   return (
     <div className="fb-blocks-settings-options">
-      {/* Notice component removed */}
-
       <div className="fb-option">
         <div className="fb-option-label">
           <h3>{__('Default Content Width', 'frontis-blocks')}</h3>
@@ -235,9 +232,6 @@ const EditorOptions = () => {
           device={device}
           onDeviceChange={handleDevice}
         />
-        {/* <p className="fb-button-upcoming">
-          {__('Coming Soon', 'frontis-blocks')}
-        </p> */}
       </div>
 
       <div className="fb-option">
@@ -245,12 +239,6 @@ const EditorOptions = () => {
           <h3>{__('Button - Inherit From Theme', 'frontis-blocks')}</h3>
           <p>{__('Use button styles from the current theme', 'frontis-blocks')}</p>
         </div>
-        {/* <div className="fb-option-input">
-          <Switch
-            checked={options.button_inherit_from_theme}
-            onChange={() => handleSwitchChange('button_inherit_from_theme')}
-          />
-        </div> */}
         <p className="fb-button-upcoming">
           {__('Coming Soon', 'frontis-blocks')}
         </p>
@@ -261,13 +249,6 @@ const EditorOptions = () => {
           <h3>{__('Container Padding', 'frontis-blocks')}</h3>
           <p>{__('Set the default padding for containers in pixels', 'frontis-blocks')}</p>
         </div>
-        {/* <NumberInputWithPx
-          value={options.container_padding}
-          onChange={(value) => handleNumberChange('container_padding', value)}
-          onBlur={() => handleNumberBlur('container_padding', options.container_padding)}
-          min={0}
-          max={2000}
-        /> */}
         <p className="fb-button-upcoming">
           {__('Coming Soon', 'frontis-blocks')}
         </p>
@@ -278,13 +259,6 @@ const EditorOptions = () => {
           <h3>{__('Container Elements Gap', 'frontis-blocks')}</h3>
           <p>{__('Set the default gap between container elements in pixels', 'frontis-blocks')}</p>
         </div>
-        {/* <NumberInputWithPx
-          value={options.container_elements_gap}
-          onChange={(value) => handleNumberChange('container_elements_gap', value)}
-          onBlur={() => handleNumberBlur('container_elements_gap', options.container_elements_gap)}
-          min={0}
-          max={2000}
-        /> */}
         <p className="fb-button-upcoming">
           {__('Coming Soon', 'frontis-blocks')}
         </p>
@@ -295,12 +269,6 @@ const EditorOptions = () => {
           <h3>{__('Custom CSS', 'frontis-blocks')}</h3>
           <p>{__('Enable custom CSS for blocks', 'frontis-blocks')}</p>
         </div>
-        {/* <div className="fb-option-input">
-          <Switch
-            checked={options.custom_css}
-            onChange={() => handleSwitchChange('custom_css')}
-          />
-        </div> */}
         <p className="fb-button-upcoming">
           {__('Coming Soon', 'frontis-blocks')}
         </p>
@@ -311,12 +279,6 @@ const EditorOptions = () => {
           <h3>{__('Copy Paste Style', 'frontis-blocks')}</h3>
           <p>{__('Enable copy and paste style functionality', 'frontis-blocks')}</p>
         </div>
-        {/* <div className="fb-option-input">
-          <Switch
-            checked={options.copy_paste_style}
-            onChange={() => handleSwitchChange('copy_paste_style')}
-          />
-        </div> */}
         <p className="fb-button-upcoming">
           {__('Coming Soon', 'frontis-blocks')}
         </p>
