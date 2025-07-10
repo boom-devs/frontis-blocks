@@ -72,6 +72,10 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [], dependenc
 		dependency: dependency,
 	};
 
+	const handleSaveLibrary = useCallback(() => {
+		console.log("Save Library clicked for:", id);
+	}, [id]);
+
 	return (
 		<>
 			<div
@@ -133,8 +137,21 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [], dependenc
 						)}
 					</button>
 
-					<button className="fb-template-save-my-cloud">
-						<span>Save Library</span>
+					<button 
+						className={`fb-template-save-my-cloud ${isLoading ? "loading" : ""}`} 
+						onClick={!isLoading ? handleSaveLibrary : null}
+						disabled={isLoading}
+					>
+						{isLoading ? (
+							<>
+								<span>Saving...</span>
+								<ClipLoader color="#fff" size={16} />
+							</>
+						) : (
+							<>
+								<span>Save Library</span>
+							</>
+						)}
 					</button>
 				</div>
 			</div>
@@ -170,10 +187,10 @@ const TemplateLibrary = ({ activeTab, activeCategory, data }) => {
 	const [filteredTemplates, setFilteredTemplates] = useState([]);
 
 	useEffect(() => {
-		if (activeTab && activeCategory) {
+		if (activeTab && activeCategory[activeTab]) {
 			const tabData = schema[activeTab];
 			const selectedCategory = tabData?.categories?.find(
-				(category) => category.id === activeCategory,
+				(category) => category.id === activeCategory[activeTab],
 			);
 
 
@@ -183,7 +200,7 @@ const TemplateLibrary = ({ activeTab, activeCategory, data }) => {
 				setFilteredTemplates([]);
 			}
 		}
-	}, [activeTab, activeCategory]);
+	}, [activeTab, activeCategory[activeTab]]);
 
 	return (
 		<div className="fb-template-library-store-content">

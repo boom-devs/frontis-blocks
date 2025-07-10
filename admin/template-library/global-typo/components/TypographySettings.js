@@ -733,6 +733,11 @@ const TypographySettings = (props) => {
 		<>
 			<div className="fb-typography-panel">
 				{/* Typography Elements Section */}
+				<div className="fb-global-header-inner-wrapper">
+					<div className="fb-global-header-inner">
+						<h3>{__("Typography", "frontis-blocks")}</h3>
+					</div>
+				</div>
 				<div className="fb-panel-section">
 					<div className={'fb-global-typo-elements'}>
 						<div className="fb-global-typo-elements-wrap">

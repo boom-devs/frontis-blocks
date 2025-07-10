@@ -1,8 +1,7 @@
 @import "../../scss/variables";
 @import "main-panel";
 
-
-div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
+.fb_template_library_sidebar {
 	.components-panel__header {
 		&.interface-complementary-area-header {
 			min-height: 58px;
@@ -28,7 +27,6 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 		span {
 			display: flex;
-
 			svg {
 				fill: none !important;
 			}
@@ -209,7 +207,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 		}
 	}
 
-}
+
 
 .block-editor-tools-panel-color-gradient-settings__dropdown>button.is-open {
 	background: transparent;
@@ -330,7 +328,6 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 					}
 				}
 			}
-
 			.fb-gradient-color-popup-content {
 				position: absolute;
 				top: 100%;
@@ -354,7 +351,7 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 }
 
 .components-navigator-screen {
-	scrollbar-width: none;
+    scrollbar-width: none;
 }
 
 .fb-gradient-color-popup {
@@ -415,6 +412,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 				display: flex;
 				align-items: center;
 				justify-content: center;
+			}
+			.edit_indecator{
+				margin-left: auto;
+				margin-top: 5px;
 			}
 		}
 
@@ -577,26 +578,13 @@ svg#fb-global-panel-icon {
 }
 
 button.fb-custom-color-btn {
-	background-color: #3991FF;
-	color: #FFF;
-	padding: 10px 16px;
-	margin-top: 16px;
+    background-color: #3991FF;
+    color: #FFF;
+    padding: 10px 16px;
+    margin-top: 16px;
 }
-
 button.fb-custom-color-btn:hover {
-	background-color: #3991FF;
-	color: #FFF !important;
+    background-color: #3991FF;
+    color: #FFF !important;
 }
-
-.fb-setting-color-setting-icon-popup {
-	padding: 24px;
 }
-
-// .fb-global-color-panel, .fb-custom-color-panel {
-// 	.components-popover__content {
-// 		width: 230px;
-// 	}
-// 	.block-editor-color-gradient-control__panel {
-// 		width: 100%;
-// 	}
-// }

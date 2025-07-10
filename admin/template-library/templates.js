@@ -78,7 +78,7 @@ const PatternLibraryButton = () => {
     // State for active tab
     const schema = data.$schema;
     const [activeTab, setActiveTab] = useState(Object.keys(schema)[0]);
-    const [activeCategory, setActiveCategory] = useState(null);
+    const [activeCategory, setActiveCategory] = useState({patterns: 'all', pages: 'all', sites: 'all', templateLibrary: 'my-cloud'});
 
     return (
         <>
