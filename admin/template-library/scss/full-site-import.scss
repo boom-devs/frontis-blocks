@@ -50,6 +50,7 @@
                 padding: 32px 24px;
                 border-right: 1px solid $neutral-color-100;
                 overflow-y: auto;
+                scrollbar-width: thin;
                 transition: transform 0.3s ease, opacity 0.3s ease;
 
                 &.collapsed {

@@ -426,14 +426,16 @@ function FrontisBlocksSidebar() {
 	}, [handleUpdateSettings]);
 
 	useEffect(() => {
-		if (!isLoading) {
-			setIsLoading(true);
-			wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
-		}
+		setTimeout(() => {
+			if (!isLoading) {
+				setIsLoading(true);
+				wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
+			}
 
-		if (globalColors === undefined) {
-			setGlobalColors(themeColors);
-		}
+			if (globalColors === undefined) {
+				setGlobalColors(themeColors);
+			}
+		}, 5000);
 
 	}, [customColors, globalColors, gradientColors, customGradientColors]);
 
