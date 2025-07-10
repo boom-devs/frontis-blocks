@@ -2250,6 +2250,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						`
 						: hoverClassicColor ? `background: ${hoverClassicColor};` : '')
 				}
+				${countDownItemWrapperBorderHoverColor ? `border-color: ${countDownItemWrapperBorderHoverColor};` : ''}
 				transition: all .3s ease-in-out;
 			}
 			.fb-count-down-wrapper.${blockID} .fb-count-down-item {
@@ -2550,6 +2551,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			countDownItemWrapperBorderTypeGetDesktop,
 			countDownItemWrapperBorderRadiusGetDesktop,
 			countDownItemWrapperBorderColor,
+			countDownItemWrapperBorderHoverColor,
 			countDownItemWrapperBackgroundImageEnabled,
 			countDownItemWrapperBackgroundImageUrl,
 			countDownItemWrapperBgImagePositionType,

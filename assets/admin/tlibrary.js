@@ -1265,38 +1265,30 @@ var TypographySettings = function TypographySettings(props) {
     _useState2 = _slicedToArray(_useState, 2),
     typography = _useState2[0],
     setTypography = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(props.customTypography),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('all'),
     _useState4 = _slicedToArray(_useState3, 2),
-    customTypography = _useState4[0],
-    setCustomTypography = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('all'),
+    selectedHeading = _useState4[0],
+    setSelectedHeading = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    selectedHeading = _useState6[0],
-    setSelectedHeading = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
+    isSaving = _useState6[0],
+    setIsSaving = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(),
     _useState8 = _slicedToArray(_useState7, 2),
-    isSaving = _useState8[0],
-    setIsSaving = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(),
+    generateHeadingCss = _useState8[0],
+    setGenerateHeadingCss = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
     _useState0 = _slicedToArray(_useState9, 2),
-    generateHeadingCss = _useState0[0],
-    setGenerateHeadingCss = _useState0[1];
-  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
+    isMount = _useState0[0],
+    setIsMount = _useState0[1];
+  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
     _useState10 = _slicedToArray(_useState1, 2),
-    isMount = _useState10[0],
-    setIsMount = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+    fontFamilies = _useState10[0],
+    setFontFamilies = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(typography),
     _useState12 = _slicedToArray(_useState11, 2),
-    fontFamilies = _useState12[0],
-    setFontFamilies = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(typography),
-    _useState14 = _slicedToArray(_useState13, 2),
-    globalTypography = _useState14[0],
-    setGlobalTypography = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
-    _useState16 = _slicedToArray(_useState15, 2),
-    selectCustomTypo = _useState16[0],
-    setSelectCustomTypo = _useState16[1];
+    globalTypography = _useState12[0],
+    setGlobalTypography = _useState12[1];
   var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_4__.useDeviceType)();
   var isFSE = ((_wp$data$select$getCu = wp.data.select('core').getCurrentTheme()) === null || _wp$data$select$getCu === void 0 ? void 0 : _wp$data$select$getCu.is_block_theme) || false;
 
@@ -1327,20 +1319,6 @@ var TypographySettings = function TypographySettings(props) {
       });
     }
     return false;
-  };
-  var changeCustomTypoName = function changeCustomTypoName(key, value) {
-    var typoObj = _objectSpread({}, customTypography);
-    typoObj[key].name = value;
-    setCustomTypography(_objectSpread({}, typoObj));
-  };
-  var deleteItem = function deleteItem(item) {
-    var tempTypography = _objectSpread({}, customTypography);
-    var tempGlobalTypography = _objectSpread({}, globalTypography);
-    delete tempTypography[item];
-    delete tempGlobalTypography[item];
-    setCustomTypography(tempTypography);
-    setGlobalTypography(tempGlobalTypography);
-    setIsMount(true);
   };
 
   // Body link font typography
@@ -1695,192 +1673,16 @@ var TypographySettings = function TypographySettings(props) {
     }))));
     setIsMount(true);
   };
-
-  // Custom typography handler
-  var onChangeCustomFontFamily = function onChangeCustomFontFamily(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontFamily: value
-      })));
-    });
-    setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, value)));
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontFamily': {
-        variable: "--fb-global-".concat(item, "--font-family"),
-        value: value
-      }
-    }))));
-    (0,_helper__WEBPACK_IMPORTED_MODULE_6__.loadGoogleFont)(value);
-    setIsMount(true);
-  };
-  var onChangeCustomFontSize = function onChangeCustomFontSize(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontSize: _objectSpread(_objectSpread({}, (_customTypography$ite = customTypography[item]) === null || _customTypography$ite === void 0 ? void 0 : _customTypography$ite.fontSize), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontSize': {
-        variable: "--fb-global-".concat(item, "--font-size"),
-        value: value,
-        unit: {
-          'Desktop': 'px',
-          'Tablet': 'px',
-          'Mobile': 'px'
-        }
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomFontSizeUnit = function onChangeCustomFontSizeUnit(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite2;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontSizeUnit: _objectSpread(_objectSpread({}, (_customTypography$ite2 = customTypography[item]) === null || _customTypography$ite2 === void 0 ? void 0 : _customTypography$ite2.fontSizeUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontSize': _objectSpread(_objectSpread({}, globalTypography[item]['fontSize']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomFontWeight = function onChangeCustomFontWeight(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontWeight: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontWeight': {
-        variable: "--fb-global-".concat(item, "--font-weight"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomFontStyle = function onChangeCustomFontStyle(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontStyle: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontStyle': {
-        variable: "--fb-global-".concat(item, "--font-style"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomTextDecoration = function onChangeCustomTextDecoration(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        textDecoration: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'textDecoration': {
-        variable: "--fb-global-".concat(item, "--font-decoration"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomTextTransform = function onChangeCustomTextTransform(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        textTransform: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'textTransform': {
-        variable: "--fb-global-".concat(item, "--font-transform"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomLetterSpacing = function onChangeCustomLetterSpacing(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite3;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        letterSpacing: _objectSpread(_objectSpread({}, (_customTypography$ite3 = customTypography[item]) === null || _customTypography$ite3 === void 0 ? void 0 : _customTypography$ite3.letterSpacing), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'letterSpacing': {
-        variable: "--fb-global-".concat(item, "--font-letter-spacing"),
-        value: value,
-        unit: {
-          'Desktop': 'px',
-          'Tablet': 'px',
-          'Mobile': 'px'
-        }
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomLetterSpacingUnit = function onChangeCustomLetterSpacingUnit(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite4;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        letterSpacingUnit: _objectSpread(_objectSpread({}, (_customTypography$ite4 = customTypography[item]) === null || _customTypography$ite4 === void 0 ? void 0 : _customTypography$ite4.letterSpacingUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'letterSpacing': _objectSpread(_objectSpread({}, globalTypography[item]['letterSpacing']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomLineHeight = function onChangeCustomLineHeight(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite5;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        lineHeight: _objectSpread(_objectSpread({}, (_customTypography$ite5 = customTypography[item]) === null || _customTypography$ite5 === void 0 ? void 0 : _customTypography$ite5.lineHeight), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'lineHeight': {
-        variable: "--fb-global-".concat(item, "--font-line-height"),
-        value: value,
-        unit: {
-          'Desktop': 'px',
-          'Tablet': 'px',
-          'Mobile': 'px'
-        }
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomLineHeightUnit = function onChangeCustomLineHeightUnit(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite6;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        lineHeightUnits: _objectSpread(_objectSpread({}, (_customTypography$ite6 = customTypography[item]) === null || _customTypography$ite6 === void 0 ? void 0 : _customTypography$ite6.lineHeightUnits), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'lineHeight': _objectSpread(_objectSpread({}, globalTypography[item]['lineHeight']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
   var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_6__.useAfterSave)();
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     var handleUpdateSettings = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response, _response, _response2, _response3;
+        var response, _response, _response2;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               if (!(isAfterSave && isMount)) {
-                _context.next = 22;
+                _context.next = 17;
                 break;
               }
               if (!typography) {
@@ -1896,47 +1698,34 @@ var TypographySettings = function TypographySettings(props) {
                 localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
               }
             case 6:
-              if (!customTypography) {
+              if (!globalTypography) {
                 _context.next = 11;
                 break;
               }
               _context.next = 9;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(customTypography, 'fb_update_custom_typography');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(globalTypography, 'fb_update_globaltypo');
             case 9:
               _response = _context.sent;
               if (_response.success) {
-                setCustomTypography(_response.data.data || {});
-                localStorage.setItem('fb_custom_typography', JSON.stringify(_response.data.data));
+                setGlobalTypography(_response.data.data);
+                localStorage.setItem('fb_globaltypo', JSON.stringify(_response.data.data));
               }
             case 11:
-              if (!globalTypography) {
+              if (!fontFamilies) {
                 _context.next = 16;
                 break;
               }
               _context.next = 14;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(globalTypography, 'fb_update_globaltypo');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(fontFamilies, 'fb_update_fontfamilies');
             case 14:
               _response2 = _context.sent;
               if (_response2.success) {
-                setGlobalTypography(_response2.data.data);
-                localStorage.setItem('fb_globaltypo', JSON.stringify(_response2.data.data));
+                setFontFamilies(_response2.data.data);
+                localStorage.setItem('fb_fontFamilies', JSON.stringify(_response2.data.data));
               }
             case 16:
-              if (!fontFamilies) {
-                _context.next = 21;
-                break;
-              }
-              _context.next = 19;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(fontFamilies, 'fb_update_fontfamilies');
-            case 19:
-              _response3 = _context.sent;
-              if (_response3.success) {
-                setFontFamilies(_response3.data.data);
-                localStorage.setItem('fb_fontFamilies', JSON.stringify(_response3.data.data));
-              }
-            case 21:
               setIsMount(false);
-            case 22:
+            case 17:
             case "end":
               return _context.stop();
           }
@@ -1977,9 +1766,7 @@ var TypographySettings = function TypographySettings(props) {
     className: "fb-typography-panel"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-panel-section"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "fb-panel-heading"
-  }, "Element"), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: 'fb-global-typo-elements'
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-global-typo-elements-wrap"
@@ -2159,202 +1946,6 @@ var TypographySettings = function TypographySettings(props) {
       },
       deviceType: deviceType
     })))));
-  }))))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-panel-section"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-panel-heading-wrapper"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "fb-panel-heading"
-  }, "Custom"), !selectCustomTypo && /*#__PURE__*/React.createElement("div", {
-    className: "add-custom-color"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-    className: "add-custom-color-btn",
-    onClick: function onClick() {
-      return setCustomTypography(_objectSpread(_objectSpread({}, customTypography), {}, _defineProperty({}, "fb_customtypo_".concat(Math.random().toString(36).substring(2, 7)), {
-        name: "Custom Typography",
-        fontFamily: "default",
-        lineHeight: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        lineHeightUnits: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontSize: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        fontSizeUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        },
-        fontWeight: '',
-        fontStyle: '',
-        textTransform: '',
-        textDecoration: '',
-        letterSpacing: {
-          Desktop: '',
-          Tablet: '',
-          Mobile: ''
-        },
-        letterSpacingUnit: {
-          Desktop: 'px',
-          Tablet: 'px',
-          Mobile: 'px'
-        }
-      })));
-    }
-  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-    width: "15",
-    height: "14",
-    viewBox: "0 0 15 14",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M7.5 0.75V13.25M13.75 7L1.25 7",
-    stroke: "white",
-    strokeWidth: "1.5",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  })))))), /*#__PURE__*/React.createElement("div", {
-    className: 'fb-global-typo-elements'
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-global-typo-elements-wrap"
-  }, customTypography && _typeof(customTypography) === 'object' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorProvider, {
-    initialPath: "/"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
-    path: "/"
-  }, Object.keys(customTypography || {}).length > 0 && /*#__PURE__*/React.createElement("div", {
-    className: "fb-custom-element-wrapper"
-  }, Object.keys(customTypography || {}).length > 0 && Object.keys(customTypography).map(function (item, index) {
-    var _customTypography$ite7;
-    return /*#__PURE__*/React.createElement("div", {
-      key: index,
-      className: "fb-custom-element fb-global-typography-element"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorButton, {
-      path: "/".concat(item),
-      onClick: function onClick() {
-        return setSelectCustomTypo(true);
-      }
-    }, (_customTypography$ite7 = customTypography[item]) === null || _customTypography$ite7 === void 0 ? void 0 : _customTypography$ite7.name), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-      className: "fb-delete-custom-typo"
-    }, /*#__PURE__*/React.createElement("span", {
-      className: 'fb-delete',
-      title: "Delete",
-      onClick: function onClick() {
-        return deleteItem(item);
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "16",
-      height: "17",
-      viewBox: "0 0 16 17",
-      fill: "none"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: "M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: "M6.3335 11.5V7.5",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: "M9.6665 11.5V7.5",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    })))));
-  }))), Object.keys(customTypography).length > 0 && Object.keys(customTypography).map(function (item, index) {
-    var _customTypography$ite8, _customTypography$ite9, _customTypography$ite0, _customTypography$ite1, _customTypography$ite10, _customTypography$ite11, _customTypography$ite12, _customTypography$ite13, _customTypography$ite14, _customTypography$ite15, _customTypography$ite16, _customTypography$ite17, _customTypography$ite18;
-    return /*#__PURE__*/React.createElement("div", {
-      key: index,
-      className: "fb-global-typography-element-content"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorScreen, {
-      path: "/".concat(item)
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalNavigatorBackButton, {
-      onClick: function onClick() {
-        return setSelectCustomTypo(false);
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "16",
-      height: "17",
-      viewBox: "0 0 16 17",
-      fill: "none"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M10.5 13.5L5.5 8.5L10.5 3.5",
-      stroke: "currentcolor",
-      "stroke-width": "1.2",
-      "stroke-linecap": "round",
-      "stroke-linejoin": "round"
-    })), (_customTypography$ite8 = customTypography[item]) === null || _customTypography$ite8 === void 0 ? void 0 : _customTypography$ite8.name), /*#__PURE__*/React.createElement("div", {
-      className: "fb-typography-settings"
-    }, /*#__PURE__*/React.createElement(_FontPreview__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      fontProps: customTypography[item],
-      deviceType: deviceType,
-      fontSize: true
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Typography Name', 'frontis-blocks'),
-      className: "fb-custom-typo-name",
-      value: (_customTypography$ite9 = customTypography[item]) === null || _customTypography$ite9 === void 0 ? void 0 : _customTypography$ite9.name,
-      onChange: function onChange(value) {
-        return changeCustomTypoName(item, value);
-      }
-    }), /*#__PURE__*/React.createElement(_SidebarTypography__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      fontFamily: customTypography === null || customTypography === void 0 || (_customTypography$ite0 = customTypography[item]) === null || _customTypography$ite0 === void 0 ? void 0 : _customTypography$ite0.fontFamily,
-      onChangeFontFamily: function onChangeFontFamily(value) {
-        return onChangeCustomFontFamily(value, item);
-      },
-      fontSize: customTypography === null || customTypography === void 0 || (_customTypography$ite1 = customTypography[item]) === null || _customTypography$ite1 === void 0 ? void 0 : _customTypography$ite1.fontSize,
-      onChangeFontSize: function onChangeFontSize(value) {
-        return onChangeCustomFontSize(value, item);
-      },
-      fontSizeUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite10 = customTypography[item]) === null || _customTypography$ite10 === void 0 ? void 0 : _customTypography$ite10.fontSizeUnit,
-      onChangeFontSizeUnit: function onChangeFontSizeUnit(value) {
-        return onChangeCustomFontSizeUnit(value, item);
-      },
-      fontWeight: customTypography === null || customTypography === void 0 || (_customTypography$ite11 = customTypography[item]) === null || _customTypography$ite11 === void 0 ? void 0 : _customTypography$ite11.fontWeight,
-      onChangeFontWeight: function onChangeFontWeight(value) {
-        return onChangeCustomFontWeight(value, item);
-      },
-      fontStyle: customTypography === null || customTypography === void 0 || (_customTypography$ite12 = customTypography[item]) === null || _customTypography$ite12 === void 0 ? void 0 : _customTypography$ite12.fontStyle,
-      onChangeFontStyle: function onChangeFontStyle(value) {
-        return onChangeCustomFontStyle(value, item);
-      },
-      textTransform: customTypography === null || customTypography === void 0 || (_customTypography$ite13 = customTypography[item]) === null || _customTypography$ite13 === void 0 ? void 0 : _customTypography$ite13.textTransform,
-      onChangeTextTransform: function onChangeTextTransform(value) {
-        return onChangeCustomTextTransform(value, item);
-      },
-      textDecoration: customTypography === null || customTypography === void 0 || (_customTypography$ite14 = customTypography[item]) === null || _customTypography$ite14 === void 0 ? void 0 : _customTypography$ite14.textDecoration,
-      onChangeTextDecoration: function onChangeTextDecoration(value) {
-        return onChangeCustomTextDecoration(value, item);
-      },
-      letterSpacing: customTypography === null || customTypography === void 0 || (_customTypography$ite15 = customTypography[item]) === null || _customTypography$ite15 === void 0 ? void 0 : _customTypography$ite15.letterSpacing,
-      onChangeLetterSpacing: function onChangeLetterSpacing(value) {
-        return onChangeCustomLetterSpacing(value, item);
-      },
-      letterSpacingUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite16 = customTypography[item]) === null || _customTypography$ite16 === void 0 ? void 0 : _customTypography$ite16.letterSpacingUnit,
-      onChangeLetterSpacingUnit: function onChangeLetterSpacingUnit(value) {
-        return onChangeCustomLetterSpacingUnit(value, item);
-      },
-      lineHeight: customTypography === null || customTypography === void 0 || (_customTypography$ite17 = customTypography[item]) === null || _customTypography$ite17 === void 0 ? void 0 : _customTypography$ite17.lineHeight,
-      onChangeLineHeight: function onChangeLineHeight(value) {
-        return onChangeCustomLineHeight(value, item);
-      },
-      lineHeightUnits: customTypography === null || customTypography === void 0 || (_customTypography$ite18 = customTypography[item]) === null || _customTypography$ite18 === void 0 ? void 0 : _customTypography$ite18.lineHeightUnits,
-      onChangeLineHeightUnit: function onChangeLineHeightUnit(value) {
-        return onChangeCustomLineHeightUnit(value, item);
-      },
-      deviceType: deviceType
-    }))));
   })))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TypographySettings);
@@ -3278,14 +2869,6 @@ function FsiGbTypography() {
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorProvider, {
     initialPath: "/"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-global-header-inner-wrapper"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-global-header-inner"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-blocks")))), /*#__PURE__*/React.createElement(_components_TypographySettings__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    typography: typography,
-    customTypography: customTypography,
-    isAfterSave: isAfterSave
-  }), /*#__PURE__*/React.createElement("div", {
     className: "fb-color-options-vertical"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-color-section"
@@ -3297,7 +2880,14 @@ function FsiGbTypography() {
     paletteLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Color'),
     paletteLabelHeadingLevel: 3,
     popoverProps: popoverProps
-  })))))));
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-global-header-inner-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-global-header-inner"
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-blocks")))), /*#__PURE__*/React.createElement(_components_TypographySettings__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    typography: typography,
+    isAfterSave: isAfterSave
+  })))));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FsiGbTypography);
 

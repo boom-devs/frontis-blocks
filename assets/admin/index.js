@@ -1946,18 +1946,117 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
+
+// Move NumberInputWithPx component outside of EditorOptions
+var NumberInputWithPx = function NumberInputWithPx(_ref) {
+  var value = _ref.value,
+    onChange = _ref.onChange,
+    onBlur = _ref.onBlur,
+    min = _ref.min,
+    max = _ref.max,
+    device = _ref.device,
+    onDeviceChange = _ref.onDeviceChange;
+  // Add local state to maintain focus during typing
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(value[device]),
+    _useState2 = _slicedToArray(_useState, 2),
+    localValue = _useState2[0],
+    setLocalValue = _useState2[1];
+
+  // Update local value when device changes or when options update from outside
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
+    setLocalValue(value[device]);
+  }, [device, value]);
+  var handleChange = function handleChange(newValue) {
+    // Update local state immediately to maintain input value
+    setLocalValue(newValue);
+    // Also update the parent state
+    onChange(newValue);
+  };
+  var toggleDeviceVisibility = function toggleDeviceVisibility(e) {
+    var wrapper = e.currentTarget;
+    wrapper.classList.toggle('fb-device-switchers-open');
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-option-input-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-option-input-with-px"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
+    type: "number",
+    min: min,
+    max: max,
+    value: localValue,
+    onChange: handleChange,
+    onBlur: onBlur
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "fb-option-input-px"
+  }, "px")), /*#__PURE__*/React.createElement("div", {
+    className: "fb-setting-device-label-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-responsive-device-wrapper",
+    onClick: toggleDeviceVisibility
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-responsive-device-inner-wrapper"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-device-switcher fb-responsive-desktop-device ".concat(device === 'Desktop' ? 'active' : ''),
+    onClick: function onClick() {
+      return onDeviceChange('Desktop');
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 16 16",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    fillRule: "evenodd",
+    clipRule: "evenodd",
+    d: "M1.5 3.5C1.5 2.39543 2.39543 1.5 3.5 1.5H12.5C13.6046 1.5 14.5 2.39543 14.5 3.5V10C14.5 11.1046 13.6046 12 12.5 12H10.5V12.1716C10.5 12.5694 10.658 12.9509 10.9393 13.2322L11.3536 13.6464C11.4966 13.7894 11.5393 14.0045 11.4619 14.1913C11.3845 14.3782 11.2022 14.5 11 14.5H5C4.79777 14.5 4.61545 14.3782 4.53806 14.1913C4.46067 14.0045 4.50345 13.7894 4.64645 13.6464L5.06066 13.2322C5.34196 12.9509 5.5 12.5694 5.5 12.1716V12H3.5C2.39543 12 1.5 11.1046 1.5 10V3.5ZM2.5 3.5V8.5C2.5 9.05228 2.94772 9.5 3.5 9.5H12.5C13.0523 9.5 13.5 9.05228 13.5 8.5V3.5C13.5 2.94772 13.0523 2.5 12.5 2.5H3.5C2.94772 2.5 2.5 2.94772 2.5 3.5Z",
+    fill: "#555E72"
+  }))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-device-switcher fb-responsive-tablet-device ".concat(device === 'Tablet' ? 'active' : ''),
+    onClick: function onClick() {
+      return onDeviceChange('Tablet');
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "6",
+    height: "7",
+    viewBox: "0 0 6 7"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
+  }))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-device-switcher fb-responsive-mobile-device ".concat(device === 'Mobile' ? 'active' : ''),
+    onClick: function onClick() {
+      return onDeviceChange('Mobile');
+    }
+  }, /*#__PURE__*/React.createElement("svg", {
+    width: "4",
+    height: "7",
+    viewBox: "0 0 4 7"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
+  })))))));
+};
 var EditorOptions = function EditorOptions() {
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)({
-      default_content_width: '',
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)({
+      default_content_width: {
+        Desktop: '1200',
+        Tablet: '1024',
+        Mobile: '768'
+      },
       button_inherit_from_theme: false,
       container_padding: '',
       container_elements_gap: '',
       custom_css: false,
       copy_paste_style: false
     }),
-    _useState2 = _slicedToArray(_useState, 2),
-    options = _useState2[0],
-    setOptions = _useState2[1];
+    _useState4 = _slicedToArray(_useState3, 2),
+    options = _useState4[0],
+    setOptions = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('Desktop'),
+    _useState6 = _slicedToArray(_useState5, 2),
+    device = _useState6[0],
+    setDevice = _useState6[1];
   var _window$frontisBlocks = window.frontisBlocksAdmin,
     nonce = _window$frontisBlocks.nonce,
     ajaxUrl = _window$frontisBlocks.ajaxUrl;
@@ -1977,7 +2076,9 @@ var EditorOptions = function EditorOptions() {
       success: function success(response) {
         if (response.success) {
           setOptions(function (prevOptions) {
-            return _objectSpread(_objectSpread({}, prevOptions), response.data);
+            return _objectSpread(_objectSpread(_objectSpread({}, prevOptions), response.data), {}, {
+              default_content_width: JSON.parse(response.data.default_content_width)
+            });
           });
         } else {
           var _response$data;
@@ -2066,7 +2167,7 @@ var EditorOptions = function EditorOptions() {
     saveOption(option, value);
   };
   var handleSwitchChange = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(option) {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(option) {
       var newValue;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -2095,85 +2196,19 @@ var EditorOptions = function EditorOptions() {
       }, _callee, null, [[1, 7]]);
     }));
     return function handleSwitchChange(_x) {
-      return _ref.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('Desktop'),
-    _useState4 = _slicedToArray(_useState3, 2),
-    device = _useState4[0],
-    setDevice = _useState4[1];
   var handleDevice = function handleDevice(deviceName) {
     setDevice(deviceName);
   };
-  var toggleDeviceVisibility = function toggleDeviceVisibility(e) {
-    var wrapper = e.currentTarget;
-    wrapper.classList.toggle('fb-device-switchers-open');
-  };
-  var NumberInputWithPx = function NumberInputWithPx(_ref2) {
-    var value = _ref2.value,
-      onChange = _ref2.onChange,
-      onBlur = _ref2.onBlur,
-      min = _ref2.min,
-      max = _ref2.max;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "fb-option-input-wrapper"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-option-input-with-px"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.TextControl, {
-      type: "number",
-      min: min,
-      max: max,
-      value: value,
-      onChange: onChange,
-      onBlur: onBlur
-    }), /*#__PURE__*/React.createElement("span", {
-      className: "fb-option-input-px"
-    }, "px")), /*#__PURE__*/React.createElement("div", {
-      className: "fb-setting-device-label-wrapper"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-responsive-device-wrapper",
-      onClick: toggleDeviceVisibility
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "fb-responsive-device-inner-wrapper"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: "fb-device-switcher fb-responsive-desktop-device ".concat(device === 'Desktop' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleDevice('Desktop');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "16",
-      height: "16",
-      viewBox: "0 0 16 16",
-      fill: "none"
-    }, /*#__PURE__*/React.createElement("path", {
-      fillRule: "evenodd",
-      clipRule: "evenodd",
-      d: "M1.5 3.5C1.5 2.39543 2.39543 1.5 3.5 1.5H12.5C13.6046 1.5 14.5 2.39543 14.5 3.5V10C14.5 11.1046 13.6046 12 12.5 12H10.5V12.1716C10.5 12.5694 10.658 12.9509 10.9393 13.2322L11.3536 13.6464C11.4966 13.7894 11.5393 14.0045 11.4619 14.1913C11.3845 14.3782 11.2022 14.5 11 14.5H5C4.79777 14.5 4.61545 14.3782 4.53806 14.1913C4.46067 14.0045 4.50345 13.7894 4.64645 13.6464L5.06066 13.2322C5.34196 12.9509 5.5 12.5694 5.5 12.1716V12H3.5C2.39543 12 1.5 11.1046 1.5 10V3.5ZM2.5 3.5V8.5C2.5 9.05228 2.94772 9.5 3.5 9.5H12.5C13.0523 9.5 13.5 9.05228 13.5 8.5V3.5C13.5 2.94772 13.0523 2.5 12.5 2.5H3.5C2.94772 2.5 2.5 2.94772 2.5 3.5Z",
-      fill: "#555E72"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-device-switcher fb-responsive-tablet-device ".concat(device === 'Tablet' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleDevice('Tablet');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "6",
-      height: "7",
-      viewBox: "0 0 6 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M5 0H1C0.446667 0 0 0.390833 0 0.875V6.125C0 6.60917 0.446667 7 1 7H5C5.55333 7 6 6.60917 6 6.125V0.875C6 0.390833 5.55333 0 5 0ZM3.66667 6.41667H2.33333V6.125H3.66667V6.41667ZM5.41667 5.54167H0.583333V0.875H5.41667V5.54167Z"
-    }))), /*#__PURE__*/React.createElement("button", {
-      className: "fb-device-switcher fb-responsive-mobile-device ".concat(device === 'Mobile' ? 'active' : ''),
-      onClick: function onClick() {
-        return handleDevice('Mobile');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      width: "4",
-      height: "7",
-      viewBox: "0 0 4 7"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M3.33333 0H0.666667C0.297778 0 0 0.390833 0 0.875V6.125C0 6.60917 0.297778 7 0.666667 7H3.33333C3.70222 7 4 6.60917 4 6.125V0.875C4 0.390833 3.70222 0 3.33333 0ZM2.44444 6.41667H1.55556V6.125H2.44444V6.41667ZM3.61111 5.54167H0.388889V0.875H3.61111V5.54167Z"
-    })))))));
+  var handleContentWidth = function handleContentWidth(value) {
+    setOptions(function (prevOptions) {
+      var updatedWidth = _objectSpread(_objectSpread({}, prevOptions.default_content_width), {}, _defineProperty({}, device, value));
+      return _objectSpread(_objectSpread({}, prevOptions), {}, {
+        default_content_width: updatedWidth
+      });
+    });
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-settings-options"
@@ -2181,9 +2216,17 @@ var EditorOptions = function EditorOptions() {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default Content Width', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default width for content in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
-    className: "fb-button-upcoming"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Default Content Width', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default width for content in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement(NumberInputWithPx, {
+    value: options.default_content_width,
+    onChange: handleContentWidth,
+    onBlur: function onBlur() {
+      return handleNumberBlur('default_content_width', options.default_content_width);
+    },
+    min: 0,
+    max: 2000,
+    device: device,
+    onDeviceChange: handleDevice
+  })), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"

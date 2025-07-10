@@ -445,24 +445,6 @@ function FsiGbTypography() {
 			<div className="fb_plugin_sidebar">
 					<div className="fb-panel-control">
 						<NavigatorProvider initialPath="/">
-
-								<div className="fb-global-header-inner-wrapper">
-									<div className="fb-global-header-inner">
-										<h3>{__("Typography", "frontis-blocks")}</h3>
-									</div>
-								</div>
-								<TypographySettings
-									typography={typography}
-									customTypography={customTypography}
-									isAfterSave={isAfterSave}
-								/>
-
-								{/* <div className="fb-global-header-inner-wrapper">
-									<div className="fb-global-header-inner">
-										<h3>{__("Color", "frontis-blocks")}</h3>
-									</div>
-								</div> */}
-
 								<div className="fb-color-options-vertical">
 									{/* Solid Colors Section */}
 									<div className="fb-color-section">
@@ -477,6 +459,16 @@ function FsiGbTypography() {
 										/>
 									</div>
 								</div>
+
+								<div className="fb-global-header-inner-wrapper">
+									<div className="fb-global-header-inner">
+										<h3>{__("Typography", "frontis-blocks")}</h3>
+									</div>
+								</div>
+								<TypographySettings
+									typography={typography}
+									isAfterSave={isAfterSave}
+								/>
 						</NavigatorProvider>
 					</div>
 			</div>
