@@ -3,7 +3,7 @@ import { TextControl } from '@wordpress/components';
 import Switch from 'rc-switch';
 import { useState, useEffect } from '@wordpress/element';
 import { toast } from 'react-toastify';
-import { useDispatch } from '@wordpress/data';
+import { useDispatch, subscribe, select } from '@wordpress/data';
 import { store as editorStore } from '@wordpress/editor';
 import { desktop } from '@wordpress/icons';
 
