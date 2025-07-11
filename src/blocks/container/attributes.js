@@ -105,6 +105,10 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
+	containerRowGapHasEdited: {
+		type: 'boolean',
+		default: false,
+	},
 
 	columnGap: {
 		type: 'object',
@@ -122,6 +126,10 @@ const attributes = {
 			Tablet: 'px',
 			Mobile: 'px'
 		}
+	},
+	containerColumnGapHasEdited: {
+		type: 'boolean',
+		default: false,
 	},
 
 	containerZIndex: {
