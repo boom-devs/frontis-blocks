@@ -26,9 +26,9 @@ class Settings extends AjaxBase {
         $ajax_events = [
             'get_options',
             'default_content_width',
-            'button_inherit_from_theme',
+            'container_column_gap',
+            'container_row_gap',
             'container_padding',
-            'container_elements_gap',
             'custom_css',
             'copy_paste_style',
             'file_generation',
@@ -82,16 +82,16 @@ class Settings extends AjaxBase {
         $this->handle_option_update('default_content_width', 'number');
     }
 
-    public function button_inherit_from_theme() {
-        $this->handle_option_update('button_inherit_from_theme', 'boolean');
+    public function container_column_gap() {
+        $this->handle_option_update('container_column_gap', 'number');
+    }
+
+    public function container_row_gap() {
+        $this->handle_option_update('container_row_gap', 'number');
     }
 
     public function container_padding() {
         $this->handle_option_update('container_padding', 'number');
-    }
-
-    public function container_elements_gap() {
-        $this->handle_option_update('container_elements_gap', 'number');
     }
 
     public function custom_css() {
