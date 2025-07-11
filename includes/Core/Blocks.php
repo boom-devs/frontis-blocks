@@ -31,6 +31,8 @@ class Blocks
 		$blocks_list = BlockList::get_instance()->get_blocks();
 		$active_blocks = get_option('fb_active_blocks');
 
+		$default_container_width = get_option('fb_default_content_width');
+
 		if (!empty($blocks_list)) {
 			foreach ($blocks_list as $block) {
 				$slug = $block['slug'];
@@ -92,7 +94,8 @@ class Blocks
 					'ajax_url' => admin_url('admin-ajax.php'),
 					'nonce' => wp_create_nonce('fb_post_like_nonce'),
 					'user_logged_in' => is_user_logged_in(),
-					'prefix' => FB_PREFIX
+					'prefix' => FB_PREFIX,
+					'default_container_width' => $default_container_width,
 				];
 
 				$localize_array = array_merge($localize_array, $common_localize_array);

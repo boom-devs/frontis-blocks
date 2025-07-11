@@ -162,9 +162,9 @@ const attributes = {
 	fullWidthContentBoxedWidth: {
 		type: 'object',
 		default: {
-			Desktop: 1200,
-			Tablet: 1024,
-			Mobile: 767
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	fullWidthContentBoxedWidthUnits: {
@@ -174,6 +174,10 @@ const attributes = {
 			Tablet: 'px',
 			Mobile: 'px',
 		}
+	},
+	fullWidthContentBoxedWidthHasEdited: {
+		type: 'boolean',
+		default: false,
 	},
 	// End content boxed width
 	innerContentCustomWidthDesktop: {

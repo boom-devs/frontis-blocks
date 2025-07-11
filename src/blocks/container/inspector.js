@@ -8,7 +8,7 @@ import {
 	Dropdown,
 	ToggleControl
 } from "@wordpress/components";
-import {useState } from "@wordpress/element";
+import {useEffect, useState, useRef, useMemo } from "@wordpress/element";
 
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_Spacing from "@Components/spacing";
@@ -27,10 +27,10 @@ import FB_InspectorControls from '@Components/InspectorControls';
 import { SortableContext } from "@dnd-kit/sortable";
 import ColumnSortableItem from "./columnSortableItem";
 import RowSortableItem from "./rowSortableItem";
+import { use } from "@wordpress/data";
 
 const Inspector = (props) => {
 	let deviceType = useDeviceType();
-	console.log(deviceType);
 	const {
 		attributes: {
 			containerType,
@@ -39,6 +39,7 @@ const Inspector = (props) => {
 			containerCustomWidthUnits,
 			fullWidthContentBoxedWidth,
 			fullWidthContentBoxedWidthUnits,
+			fullWidthContentBoxedWidthHasEdited,
 			isBlockRootParent,
 			customWidth,
 			resetFallBackCustomWidth,
@@ -172,6 +173,45 @@ const Inspector = (props) => {
 		},
 		setAttributes
 	} = props;
+
+
+	const default_container_width = FrontisBlocksData.default_container_width;
+
+	const formatted_default_container_width = useMemo(() => {
+		if (typeof default_container_width === "string") {
+		  try {
+			return JSON.parse(default_container_width);
+		  } catch (e) {
+			console.error("Parsing error:", e);
+			return {
+			  Desktop: default_container_width,
+			  Tablet: default_container_width,
+			  Mobile: default_container_width,
+			};
+		  }
+		} else if (typeof default_container_width === "object") {
+		  return default_container_width;
+		} else {
+		  return {
+			Desktop: default_container_width,
+			Tablet: default_container_width,
+			Mobile: default_container_width,
+		  };
+		}
+	  }, [default_container_width]);
+
+	  useEffect(() => {
+		if(!fullWidthContentBoxedWidthHasEdited) {
+			setAttributes({
+			fullWidthContentBoxedWidth: {
+				Desktop: formatted_default_container_width.Desktop,
+				Tablet: formatted_default_container_width.Tablet,
+				Mobile: formatted_default_container_width.Mobile,
+			},
+			});
+		}
+	  }, [formatted_default_container_width]);
+  
 
 	const CONTAINER_TYPE = [
 		{ label: __('Full Width', 'frontis-blocks'), value: "full-width" },
@@ -466,7 +506,10 @@ const Inspector = (props) => {
 
 	// Handle full width content boxed width
 	const fullWidthContentBoxedWidthFn = (width) => {
-		setAttributes({ fullWidthContentBoxedWidth: width });
+		setAttributes({ 
+			fullWidthContentBoxedWidth: width,
+			fullWidthContentBoxedWidthHasEdited: true
+		});
 	}
 
 	const fullWidthContentBoxedWidthUnitsFn = (units) => {
