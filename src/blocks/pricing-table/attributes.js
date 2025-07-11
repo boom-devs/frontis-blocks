@@ -1432,6 +1432,86 @@ const attributes = {
 		}
 	},
 
+	pricingTitlePaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricingTitleDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingTitleTabletPadding: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingTitleMobilePadding: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingTitlePaddingLink: {
+		type: "boolean",
+		default: true
+	},
+
+	pricingTitleMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricingTitleDesktopMargin: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingTitleTabletMargin: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingTitleMobileMargin: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingTitleMarginLink: {
+		type: "boolean",
+		default: true
+	},
+
 	pricingSubtitleColorSwitcher: {
 		type: "string",
 		default: "normal"
@@ -1536,6 +1616,85 @@ const attributes = {
 			Tablet: 'px',
 			Mobile: 'px',
 		}
+	},
+	pricingSubtitlePaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricingSubtitleDesktopPadding: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingSubtitleTabletPadding: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingSubtitleMobilePadding: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingSubtitlePaddingLink: {
+		type: "boolean",
+		default: true
+	},
+
+	pricingSubtitleMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricingSubtitleDesktopMargin: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingSubtitleTabletMargin: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingSubtitleMobileMargin: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingSubtitleMarginLink: {
+		type: "boolean",
+		default: true
 	},
 	/**end Title and Subtitle Style */
 
