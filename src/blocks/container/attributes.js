@@ -63,13 +63,17 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '100',
-			Tablet: '',
-			Mobile: ''
+			Tablet: '100',
+			Mobile: '100'
 		}
 	},
 	containerCustomWidth: {
-		type: 'string',
-		default: '100',
+		type: 'object',
+		default: {
+			Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
+		}
 	},
 
 	containerCustomWidthUnits: {
