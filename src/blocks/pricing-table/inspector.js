@@ -2997,6 +2997,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricingTopSectionTextGlobalTypoSwitcher.lineHeight === false && pricingTopSectionTextLineHeight.Desktop ? `line-height: ${pricingTopSectionTextLineHeight.Desktop}${pricingTopSectionTextLineHeightUnits.Desktop};` : ""}
 			${pricingTopSectionTextDesktopPaddingWidth && pricingTopSectionTextDesktopPadding.top? `padding: ${pricingTopSectionTextDesktopPaddingWidth};` : ''}
 			text-align: center;
+			transition: all 0.3s ease;
 		}
 		.${blockId}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper:hover {
 			${pricingTopSectionTextHoverColor ? `color: ${pricingTopSectionTextHoverColor};` : ''}
@@ -3092,6 +3093,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${normalPricingGlobalTypoSwitcher.textDecoration === false && normalPricingTextDecoration ? `text-decoration: ${normalPricingTextDecoration};` : ""}
 			${normalPricingGlobalTypoSwitcher.letterSpacing === false && normalPricingLetterSpacing.Desktop ? `letter-spacing: ${normalPricingLetterSpacing.Desktop}${normalPricingLetterSpacingUnits.Desktop};` : ""}
 			${normalPricingGlobalTypoSwitcher.lineHeight === false && normalPricingLineHeight.Desktop ? `line-height: ${normalPricingLineHeight.Desktop}${normalPricingLineHeightUnits.Desktop};` : ""}
+			transition: all 0.3s ease;
 		}
 		.${blockId} .fb-pricing-price-wrapper .fb-pricing-normal-price:hover {
 			${normalPricingHoverColor ? `color: ${normalPricingHoverColor};` : ''}
@@ -3117,6 +3119,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${salePricingGlobalTypoSwitcher.textDecoration === false && salePricingTextDecoration ? `text-decoration: ${salePricingTextDecoration};` : ""}
 			${salePricingGlobalTypoSwitcher.letterSpacing === false && salePricingLetterSpacing.Desktop ? `letter-spacing: ${salePricingLetterSpacing.Desktop}${salePricingLetterSpacingUnits.Desktop};` : ""}
 			${salePricingGlobalTypoSwitcher.lineHeight === false && salePricingLineHeight.Desktop ? `line-height: ${salePricingLineHeight.Desktop}${salePricingLineHeightUnits.Desktop};` : ""}
+			transition: all 0.3s ease;
 		}
 		.${blockId} .fb-pricing-price-wrapper .fb-pricing-sale-price:hover {
 			${salePricingHoverColor ? `color: ${salePricingHoverColor};` : ''}
@@ -3142,6 +3145,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceCurrencyGlobalTypoSwitcher.textDecoration === false && priceCurrencyTextDecoration ? `text-decoration: ${priceCurrencyTextDecoration};` : ""}
 			${priceCurrencyGlobalTypoSwitcher.letterSpacing === false && priceCurrencyLetterSpacing.Desktop ? `letter-spacing: ${priceCurrencyLetterSpacing.Desktop}${priceCurrencyLetterSpacingUnits.Desktop};` : ""}
 			${priceCurrencyGlobalTypoSwitcher.lineHeight === false && priceCurrencyLineHeight.Desktop ? `line-height: ${priceCurrencyLineHeight.Desktop}${priceCurrencyLineHeightUnits.Desktop};` : ""}
+			transition: all 0.3s ease;
 		}
 		.${blockId} .fb-pricing-price-wrapper .price-currency:hover {
 			${priceCurrencyHoverColor ? `color: ${priceCurrencyHoverColor};` : ''}
@@ -3167,6 +3171,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricePeriodGlobalTypoSwitcher.textDecoration === false && pricePeriodTextDecoration ? `text-decoration: ${pricePeriodTextDecoration};` : ""}
 			${pricePeriodGlobalTypoSwitcher.letterSpacing === false && pricePeriodLetterSpacing.Desktop ? `letter-spacing: ${pricePeriodLetterSpacing.Desktop}${pricePeriodLetterSpacingUnits.Desktop};` : ""}
 			${pricePeriodGlobalTypoSwitcher.lineHeight === false && pricePeriodLineHeight.Desktop ? `line-height: ${pricePeriodLineHeight.Desktop}${pricePeriodLineHeightUnits.Desktop};` : ""}
+			transition: all 0.3s ease;
 		}
 		.${blockId} .fb-pricing-price-wrapper .price-period:hover {
 			${pricePeriodHoverColor ? `color: ${pricePeriodHoverColor};` : ''}
@@ -3195,6 +3200,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			${titleDesktopPadding && pricingTitleDesktopPadding.top? `padding: ${titleDesktopPadding};` : ''}
 			${titleDesktopMargin && pricingTitleDesktopMargin.top? `margin: ${titleDesktopMargin};` : ''}
+			transition: all 0.3s ease;
 
 		}
 		.${blockId} .fb-pricing-title:hover {
@@ -3223,6 +3229,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			${subtitleDesktopPadding && pricingSubtitleDesktopPadding.top? `padding: ${subtitleDesktopPadding};` : ''}
 			${subtitleDesktopMargin && pricingSubtitleDesktopMargin.top? `margin: ${subtitleDesktopMargin};` : ''}
+			transition: all 0.3s ease;
 		}
 		.${blockId} .fb-pricing-subtitle:hover {
 			${pricingSubtitleHoverColor ? `color: ${pricingSubtitleHoverColor};` : ''}
@@ -3260,6 +3267,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceAfterTextBorderDesktopWidth && priceAfterTextBorderDesktop.top? `border-width: ${priceAfterTextBorderDesktopWidth};` : ''}
 			${priceAfterTextBorderRadiusDesktopWidth && priceAfterTextBorderRadiusDesktop.top? `border-radius: ${priceAfterTextBorderRadiusDesktopWidth};` : ''}
 			${priceAfterTextDesktopPaddingWidth && priceAfterTextPaddingDesktop.top ? `padding: ${priceAfterTextDesktopPaddingWidth};` : ''}
+			transition: all 0.3s ease;
 		}
 
 		.${blockId} .fb-pricing-after-text:hover {
@@ -3284,7 +3292,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceFeatureItemBorder ? `border: ${priceFeatureItemBorder};` : ''}
 			${priceFeatureItemBorderColor ? `border-color: ${priceFeatureItemBorderColor};` : ''}
 			${priceFeatureItemDesktopBorderWidth && priceFeatureItemDesktopBorder.top? `border-width: ${priceFeatureItemDesktopBorderWidth};` : ''}
-			${priceFeatureItemDesktopBorderRadiusWidth && priceFeatureItemDesktopBorderRadius.top? `border-radius: ${priceFeatureItemDesktopBorderRadiusWidth};` : ''} 
+			${priceFeatureItemDesktopBorderRadiusWidth && priceFeatureItemDesktopBorderRadius.top? `border-radius: ${priceFeatureItemDesktopBorderRadiusWidth};` : ''}
+			transition: all 0.3s ease;
 		}
 		
 		.${blockId} .fb-pricing-feature-item:hover {
@@ -3319,6 +3328,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceFeatureAfterTextGlobalTypoSwitcher.textDecoration === false && priceFeatureAfterTextTextDecoration ? `text-decoration: ${priceFeatureAfterTextTextDecoration};` : ''}
 			${priceFeatureAfterTextGlobalTypoSwitcher.letterSpacing === false && priceFeatureAfterTextLetterSpacing.Desktop ? `letter-spacing: ${priceFeatureAfterTextLetterSpacing.Desktop}${priceFeatureAfterTextLetterSpacingUnits.Desktop};` : ''}
 			${priceFeatureAfterTextGlobalTypoSwitcher.lineHeight === false && priceFeatureAfterTextLineHeight.Desktop ? `line-height: ${priceFeatureAfterTextLineHeight.Desktop}${priceFeatureAfterTextLineHeightUnits.Desktop};` : ''}	
+			transition: all 0.3s ease;
 		}
 
 		.${blockId} .fb-pricing-feature-after-text:hover {
@@ -3355,6 +3365,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricingfeatureTitleGlobalTypoSwitcher.textDecoration === false && pricingfeatureTitleTextDecoration ? `text-decoration: ${pricingfeatureTitleTextDecoration};` : ''}
 			${pricingfeatureTitleGlobalTypoSwitcher.letterSpacing === false && pricingfeatureTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingfeatureTitleLetterSpacing.Desktop}${pricingfeatureTitleLetterSpacingUnits.Desktop};` : ''}
 			${pricingfeatureTitleGlobalTypoSwitcher.lineHeight === false && pricingfeatureTitleLineHeight.Desktop ? `line-height: ${pricingfeatureTitleLineHeight.Desktop}${pricingfeatureTitleLineHeightUnits.Desktop};` : ''}
+			transition: all 0.3s ease;
 		}
 		.${blockId} .fb-pricing-feature-text:hover {
 			${pricingfeatureTitleHoverColor ? `color: ${pricingfeatureTitleHoverColor};` : ''}
@@ -5593,8 +5604,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				{salePricingColorSwitcher === 'normal' && (
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
-						globalColor={normalPricingColor}
-						setGlobalColor={(value) => setAttributes({ normalPricingColor: value })}
+						globalColor={salePricingColor} 
+						setGlobalColor={(value) => setAttributes({ salePricingColor: value })}
 					/>
 				)}
 
