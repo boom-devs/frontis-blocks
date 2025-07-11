@@ -204,14 +204,14 @@ const Inspector = (props) => {
 		if(!fullWidthContentBoxedWidthHasEdited) {
 			setAttributes({
 			fullWidthContentBoxedWidth: {
-				Desktop: formatted_default_container_width.Desktop,
-				Tablet: formatted_default_container_width.Tablet,
-				Mobile: formatted_default_container_width.Mobile,
+				Desktop: formatted_default_container_width.Desktop || "1200",
+				Tablet: formatted_default_container_width.Tablet || "1024",
+				Mobile: formatted_default_container_width.Mobile || "767",
 			},
 			});
 		}
 	  }, [formatted_default_container_width]);
-  
+
 
 	const CONTAINER_TYPE = [
 		{ label: __('Full Width', 'frontis-blocks'), value: "full-width" },
@@ -360,10 +360,10 @@ const Inspector = (props) => {
 
 	const handleColumnDeleteItem = (id) => {
 		let updatedItems = [];
-	
+
 		if (deviceType === 'Desktop') {
 			updatedItems = reindexItems(
-				containerColumnsItem.Desktop.filter(item => item.id !== id), 
+				containerColumnsItem.Desktop.filter(item => item.id !== id),
 				'column',
 				'Column'
 			);
@@ -380,14 +380,14 @@ const Inspector = (props) => {
 				'Column'
 			);
 		}
-	
+
 		setAttributes({
 			containerColumnsItemList: {
 				...containerColumnsItemList,
 				[deviceType]: updatedItems,
 			},
 		});
-	
+
 		setContainerColumnsItem({
 			...containerColumnsItem,
 			[deviceType]: updatedItems,
@@ -506,7 +506,7 @@ const Inspector = (props) => {
 
 	// Handle full width content boxed width
 	const fullWidthContentBoxedWidthFn = (width) => {
-		setAttributes({ 
+		setAttributes({
 			fullWidthContentBoxedWidth: width,
 			fullWidthContentBoxedWidthHasEdited: true
 		});

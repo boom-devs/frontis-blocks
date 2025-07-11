@@ -98,11 +98,18 @@ const EditorOptions = () => {
       },
       success: function (response) {
         if (response.success) {
-          setOptions(prevOptions => ({
-            ...prevOptions,
-            ...response.data,
-            default_content_width: JSON.parse(response.data.default_content_width)
-          }));
+					const fetchedOptions = response.data;
+
+					// If default_content_width is undefined or empty in DB, save your default
+					if (!fetchedOptions.default_content_width) {
+						saveOption('default_content_width', options.default_content_width);
+					} else {
+						setOptions(prevOptions => ({
+							...prevOptions,
+							...fetchedOptions,
+							default_content_width: JSON.parse(fetchedOptions.default_content_width)
+						}));
+					}
         } else {
           toast.error(__(`Failed to fetch options: ${response.data?.message || 'Unknown error'}`, 'frontis-blocks'), {
             position: "top-right",
