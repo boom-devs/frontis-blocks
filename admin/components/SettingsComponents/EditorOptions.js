@@ -203,24 +203,9 @@ const EditorOptions = () => {
     });
   };
 
-  // const handleNumberChange = (option, value) => {
-  //   setOptions(prevOptions => ({ ...prevOptions, [option]: value }));
-  // };
-
   const handleNumberBlur = (option, value) => {
     saveOption(option, value);
   };
-
-  // const handleSwitchChange = async (option) => {
-  //   const newValue = !options[option];
-  //   try {
-  //     await saveOption(option, newValue ? '1' : '0');
-  //     setOptions(prevOptions => ({ ...prevOptions, [option]: newValue }));
-  //   } catch (error) {
-  //     // Revert the switch if saving failed
-  //     setOptions(prevOptions => ({ ...prevOptions, [option]: !newValue }));
-  //   }
-  // };
 
   const handleDevice = (deviceName) => {
     setDevice(deviceName);

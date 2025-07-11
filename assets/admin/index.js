@@ -2177,26 +2177,9 @@ var EditorOptions = function EditorOptions() {
       });
     });
   };
-
-  // const handleNumberChange = (option, value) => {
-  //   setOptions(prevOptions => ({ ...prevOptions, [option]: value }));
-  // };
-
   var handleNumberBlur = function handleNumberBlur(option, value) {
     saveOption(option, value);
   };
-
-  // const handleSwitchChange = async (option) => {
-  //   const newValue = !options[option];
-  //   try {
-  //     await saveOption(option, newValue ? '1' : '0');
-  //     setOptions(prevOptions => ({ ...prevOptions, [option]: newValue }));
-  //   } catch (error) {
-  //     // Revert the switch if saving failed
-  //     setOptions(prevOptions => ({ ...prevOptions, [option]: !newValue }));
-  //   }
-  // };
-
   var handleDevice = function handleDevice(deviceName) {
     setDevice(deviceName);
   };

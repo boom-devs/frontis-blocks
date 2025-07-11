@@ -36,6 +36,7 @@ class Blocks
 		$container_row_gap = get_option('fb_container_row_gap');
 		$container_padding = get_option('fb_container_padding');
 
+
 		if (!empty($blocks_list)) {
 			foreach ($blocks_list as $block) {
 				$slug = $block['slug'];
