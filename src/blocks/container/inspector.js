@@ -51,6 +51,8 @@ const Inspector = (props) => {
 			rowGap,
 			columnGapUnits,
 			rowGapUnits,
+			containerColumnGapHasEdited,
+			containerRowGapHasEdited,
 			containerZIndex,
 			containerPaddingUnits,
 			containerDesktopPadding,
@@ -174,44 +176,79 @@ const Inspector = (props) => {
 		setAttributes
 	} = props;
 
-
-	const default_container_width = FrontisBlocksData.default_container_width;
-
-	const formatted_default_container_width = useMemo(() => {
-		if (typeof default_container_width === "string") {
-		  try {
-			return JSON.parse(default_container_width);
-		  } catch (e) {
-			console.error("Parsing error:", e);
-			return {
-			  Desktop: default_container_width,
-			  Tablet: default_container_width,
-			  Mobile: default_container_width,
-			};
-		  }
-		} else if (typeof default_container_width === "object") {
-		  return default_container_width;
+	// 1️⃣ Create a reusable function for parsing
+	const parseResponsiveValue = (value) => {
+		if (typeof value === "string") {
+			try {
+				return JSON.parse(value);
+			} catch (e) {
+				console.error("Parsing error:", e);
+				return {
+					Desktop: value,
+					Tablet: value,
+					Mobile: value,
+				};
+			}
+		} else if (typeof value === "object") {
+			return value;
 		} else {
-		  return {
-			Desktop: default_container_width,
-			Tablet: default_container_width,
-			Mobile: default_container_width,
-		  };
+			return {
+				Desktop: value,
+				Tablet: value,
+				Mobile: value,
+			};
 		}
-	  }, [default_container_width]);
+	};
 
-	  useEffect(() => {
-		if(!fullWidthContentBoxedWidthHasEdited) {
+	// 2️⃣ Memoize parsed values
+	const formatted_default_container_width = useMemo(() => {
+		return parseResponsiveValue(FrontisBlocksData.default_container_width);
+	}, [FrontisBlocksData.default_container_width]);
+
+	const formatted_container_column_gap = useMemo(() => {
+		return parseResponsiveValue(FrontisBlocksData.container_column_gap);
+	}, [FrontisBlocksData.container_column_gap]);
+
+	const formatted_container_row_gap = useMemo(() => {
+		return parseResponsiveValue(FrontisBlocksData.container_row_gap);
+	}, [FrontisBlocksData.container_row_gap]);
+
+	// 3️⃣ Apply the effects as before
+	useEffect(() => {
+		if (!fullWidthContentBoxedWidthHasEdited) {
 			setAttributes({
-			fullWidthContentBoxedWidth: {
-				Desktop: formatted_default_container_width.Desktop || "1200",
-				Tablet: formatted_default_container_width.Tablet || "1024",
-				Mobile: formatted_default_container_width.Mobile || "767",
-			},
+				fullWidthContentBoxedWidth: {
+					Desktop: formatted_default_container_width.Desktop || "1200",
+					Tablet: formatted_default_container_width.Tablet || "1024",
+					Mobile: formatted_default_container_width.Mobile || "767",
+				},
 			});
 		}
-	  }, [formatted_default_container_width]);
+	}, [formatted_default_container_width]);
 
+	useEffect(() => {
+		if (!containerColumnGapHasEdited) {
+			setAttributes({
+				columnGap: {
+					Desktop: formatted_container_column_gap.Desktop || "0",
+					Tablet: formatted_container_column_gap.Tablet || "0",
+					Mobile: formatted_container_column_gap.Mobile || "0",
+				},
+			});
+		}
+	}, [formatted_container_column_gap]);
+
+	useEffect(() => {
+		if (!containerRowGapHasEdited) {
+			setAttributes({
+				rowGap: {
+					Desktop: formatted_container_row_gap.Desktop || "0",
+					Tablet: formatted_container_row_gap.Tablet || "0",
+					Mobile: formatted_container_row_gap.Mobile || "0",
+				},
+			});
+		}
+	}, [formatted_container_row_gap]);
 
 	const CONTAINER_TYPE = [
 		{ label: __('Full Width', 'frontis-blocks'), value: "full-width" },
@@ -516,6 +553,24 @@ const Inspector = (props) => {
 		setAttributes({ fullWidthContentBoxedWidthUnits: units });
 	}
 
+	const columnGapFn = (width) => {
+		setAttributes({ columnGap: width });
+		setAttributes({ containerColumnGapHasEdited: true });
+	}
+
+	const columnGapUnitsFn = (units) => {
+		setAttributes({ columnGapUnits: units });
+	}
+
+	const rowGapFn = (width) => {
+		setAttributes({ rowGap: width });
+		setAttributes({ containerRowGapHasEdited: true });
+	}
+
+	const rowGapUnitsFn = (units) => {
+		setAttributes({ rowGapUnits: units });
+	}
+
 	// Handle min height
 	const minHeightFn = (height) => {
 		setAttributes({ minHeight: height });
@@ -541,22 +596,6 @@ const Inspector = (props) => {
 
 	const containerCustomContentWidthFnUnitsFn = (units) => {
 		setAttributes({ containerCustomWidthUnits: units });
-	}
-
-	const columnGapFn = (width) => {
-		setAttributes({ columnGap: width });
-	}
-
-	const columnGapUnitsFn = (units) => {
-		setAttributes({ columnGapUnits: units });
-	}
-
-	const rowGapFn = (width) => {
-		setAttributes({ rowGap: width });
-	}
-
-	const rowGapUnitsFn = (units) => {
-		setAttributes({ rowGapUnits: units });
 	}
 
 	const containerZindexFn = (value) => {
