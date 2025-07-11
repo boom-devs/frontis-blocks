@@ -164,7 +164,7 @@
               border: none;
               border-radius: 0;
               background-color: transparent;
-              padding: $input-padding ($input-padding + 6);
+              // padding: $input-padding ($input-padding + 6);
               font-family: $body-font-family;
               font-size: 14px;
               font-weight: 500;
@@ -175,6 +175,18 @@
                 outline: none;
                 box-shadow: none;
               }
+            }
+
+            /* Hide spinner for input type number in Chrome, Safari, Edge */
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            /* Hide spinner for input type number in Firefox */
+            input[type=number] {
+                -moz-appearance: textfield;
             }
           }
 
