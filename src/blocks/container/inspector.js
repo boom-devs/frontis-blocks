@@ -58,6 +58,7 @@ const Inspector = (props) => {
 			containerDesktopPadding,
 			containerTabletPadding,
 			containerMobilePadding,
+			containerPaddingHasEdited,
 			containerPaddingLink,
 			containerMarginUnits,
 			containerDesktopMargin,
@@ -213,6 +214,10 @@ const Inspector = (props) => {
 		return parseResponsiveValue(FrontisBlocksData.container_row_gap);
 	}, [FrontisBlocksData.container_row_gap]);
 
+	const formatted_container_padding = useMemo(() => {
+		return parseResponsiveValue(FrontisBlocksData.container_padding);
+	}, [FrontisBlocksData.container_padding]);
+
 	// 3️⃣ Apply the effects as before
 	useEffect(() => {
 		if (!fullWidthContentBoxedWidthHasEdited) {
@@ -249,6 +254,32 @@ const Inspector = (props) => {
 			});
 		}
 	}, [formatted_container_row_gap]);
+
+
+	useEffect(() => {
+		if (!containerPaddingHasEdited) {
+			setAttributes({
+				containerDesktopPadding: {
+					top: formatted_container_padding.Desktop || "10",
+					bottom: formatted_container_padding.Desktop || "10",
+					left: formatted_container_padding.Desktop || "10",
+					right: formatted_container_padding.Desktop || "10",
+				},
+				containerTabletPadding: {
+					top: formatted_container_padding.Tablet || "10",
+					bottom: formatted_container_padding.Tablet || "10",
+					left: formatted_container_padding.Tablet || "10",
+					right: formatted_container_padding.Tablet || "10",
+				},
+				containerMobilePadding: {		
+					top: formatted_container_padding.Mobile || "10",
+					bottom: formatted_container_padding.Mobile || "10",
+					left: formatted_container_padding.Mobile || "10",
+					right: formatted_container_padding.Mobile || "10",
+				},
+			});
+		}
+	}, [formatted_container_padding]);
 
 	const CONTAINER_TYPE = [
 		{ label: __('Full Width', 'frontis-blocks'), value: "full-width" },
@@ -605,6 +636,10 @@ const Inspector = (props) => {
 	/** Start Heading Padding */
 	const containerPaddingUnitsChange = (event, position) => {
 		const value = event.target.value;
+
+		// Set the containerPaddingHasEdited to true to trigger the useEffect
+		setAttributes({ containerPaddingHasEdited: true });
+
 		if (containerPaddingLink) {
 			switch (deviceType) {
 				case 'Desktop':

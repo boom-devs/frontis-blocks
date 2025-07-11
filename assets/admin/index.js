@@ -2048,8 +2048,11 @@ var EditorOptions = function EditorOptions() {
         Tablet: '0',
         Mobile: '0'
       },
-      button_inherit_from_theme: false,
-      container_padding: '',
+      container_padding: {
+        Desktop: '10',
+        Tablet: '10',
+        Mobile: '10'
+      },
       custom_css: false,
       copy_paste_style: false
     }),
@@ -2080,17 +2083,19 @@ var EditorOptions = function EditorOptions() {
         if (response.success) {
           var fetchedOptions = response.data;
 
-          // If default_content_width, container_column_gap or container_row_gap is undefined or empty in DB, save your default
-          if (!fetchedOptions.default_content_width || !fetchedOptions.container_column_gap || !fetchedOptions.container_row_gap) {
+          // If default_content_width, container_column_gap, container_row_gap or container_padding is undefined or empty in DB, save your default
+          if (!fetchedOptions.default_content_width || !fetchedOptions.container_column_gap || !fetchedOptions.container_row_gap || !fetchedOptions.container_padding) {
             saveOption('default_content_width', options.default_content_width);
             saveOption('container_column_gap', options.container_column_gap);
             saveOption('container_row_gap', options.container_row_gap);
+            saveOption('container_padding', options.container_padding);
           } else {
             setOptions(function (prevOptions) {
               return _objectSpread(_objectSpread(_objectSpread({}, prevOptions), fetchedOptions), {}, {
                 default_content_width: JSON.parse(fetchedOptions.default_content_width),
                 container_column_gap: JSON.parse(fetchedOptions.container_column_gap),
-                container_row_gap: JSON.parse(fetchedOptions.container_row_gap)
+                container_row_gap: JSON.parse(fetchedOptions.container_row_gap),
+                container_padding: JSON.parse(fetchedOptions.container_padding)
               });
             });
           }
@@ -2219,6 +2224,14 @@ var EditorOptions = function EditorOptions() {
       });
     });
   };
+  var handlePadding = function handlePadding(value) {
+    setOptions(function (prevOptions) {
+      var updatedWidth = _objectSpread(_objectSpread({}, prevOptions.container_padding), {}, _defineProperty({}, device, value));
+      return _objectSpread(_objectSpread({}, prevOptions), {}, {
+        container_padding: updatedWidth
+      });
+    });
+  };
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-blocks-settings-options"
   }, /*#__PURE__*/React.createElement("div", {
@@ -2267,9 +2280,17 @@ var EditorOptions = function EditorOptions() {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"
-  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Container Padding', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default padding for containers in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement("p", {
-    className: "fb-button-upcoming"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Coming Soon', 'frontis-blocks'))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Container Padding', 'frontis-blocks')), /*#__PURE__*/React.createElement("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Set the default padding for containers in pixels', 'frontis-blocks'))), /*#__PURE__*/React.createElement(NumberInputWithPx, {
+    value: options.container_padding,
+    onChange: handlePadding,
+    onBlur: function onBlur() {
+      return handleNumberBlur('container_padding', options.container_padding);
+    },
+    min: 0,
+    max: 2000,
+    device: device,
+    onDeviceChange: handleDevice
+  })), /*#__PURE__*/React.createElement("div", {
     className: "fb-option"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-option-label"

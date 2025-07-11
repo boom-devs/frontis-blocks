@@ -34,6 +34,7 @@ class Blocks
 		$default_container_width = get_option('fb_default_content_width');
 		$container_column_gap = get_option('fb_container_column_gap');
 		$container_row_gap = get_option('fb_container_row_gap');
+		$container_padding = get_option('fb_container_padding');
 
 		if (!empty($blocks_list)) {
 			foreach ($blocks_list as $block) {
@@ -100,6 +101,7 @@ class Blocks
 					'default_container_width' => $default_container_width,
 					'container_column_gap' => $container_column_gap,
 					'container_row_gap' => $container_row_gap,
+					'container_padding' => $container_padding,
 				];
 
 				$localize_array = array_merge($localize_array, $common_localize_array);
