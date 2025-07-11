@@ -716,10 +716,10 @@ const attributes = {
 	containerDesktopPadding: {
 		type: "object",
 		default: {
-			top: "10",
-			bottom: "10",
-			left: "10",
-			right: "10",
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		}
 	},
 	containerTabletPadding: {
@@ -744,6 +744,10 @@ const attributes = {
         type : "boolean",
         default: true
     },
+	containerPaddingHasEdited: {
+		type: 'boolean',
+		default: false,
+	},
 	/** Start Margin */
 	containerMarginUnits: {
 		type: 'object',

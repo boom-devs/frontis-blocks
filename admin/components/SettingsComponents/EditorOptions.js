@@ -79,8 +79,11 @@ const EditorOptions = () => {
       Tablet: '0',
       Mobile: '0',
     },
-    button_inherit_from_theme: false,
-    container_padding: '',
+    container_padding: {
+      Desktop: '10',
+      Tablet: '10',
+      Mobile: '10',
+    },
     custom_css: false,
     copy_paste_style: false,
   });
@@ -107,11 +110,12 @@ const EditorOptions = () => {
         if (response.success) {
 					const fetchedOptions = response.data;
 
-					// If default_content_width, container_column_gap or container_row_gap is undefined or empty in DB, save your default
-					if (!fetchedOptions.default_content_width || !fetchedOptions.container_column_gap || !fetchedOptions.container_row_gap) {
+					// If default_content_width, container_column_gap, container_row_gap or container_padding is undefined or empty in DB, save your default
+					if (!fetchedOptions.default_content_width || !fetchedOptions.container_column_gap || !fetchedOptions.container_row_gap || !fetchedOptions.container_padding) {
 						saveOption('default_content_width', options.default_content_width);
             saveOption('container_column_gap', options.container_column_gap);
             saveOption('container_row_gap', options.container_row_gap);
+            saveOption('container_padding', options.container_padding);
 					} else {
 						setOptions(prevOptions => ({
 							...prevOptions,
@@ -119,6 +123,7 @@ const EditorOptions = () => {
 							default_content_width: JSON.parse(fetchedOptions.default_content_width),
               container_column_gap: JSON.parse(fetchedOptions.container_column_gap),
               container_row_gap: JSON.parse(fetchedOptions.container_row_gap),
+              container_padding: JSON.parse(fetchedOptions.container_padding),
 						}));
 					}
         } else {
@@ -260,6 +265,19 @@ const EditorOptions = () => {
     });
   };
 
+  const handlePadding = (value) => {
+    setOptions(prevOptions => {
+      const updatedWidth = {
+        ...prevOptions.container_padding, 
+        [device]: value
+      };
+      return {
+        ...prevOptions,
+        container_padding: updatedWidth
+      };
+    });
+  };
+
   return (
     <div className="fb-blocks-settings-options">
       <div className="fb-option">
@@ -315,9 +333,15 @@ const EditorOptions = () => {
           <h3>{__('Container Padding', 'frontis-blocks')}</h3>
           <p>{__('Set the default padding for containers in pixels', 'frontis-blocks')}</p>
         </div>
-        <p className="fb-button-upcoming">
-          {__('Coming Soon', 'frontis-blocks')}
-        </p>
+        <NumberInputWithPx
+          value={options.container_padding}
+          onChange={handlePadding}
+          onBlur={() => handleNumberBlur('container_padding', options.container_padding)}
+          min={0}
+          max={2000}
+          device={device}
+          onDeviceChange={handleDevice}
+        />
       </div>
 
       <div className="fb-option">
