@@ -190,7 +190,7 @@ class Settings extends AjaxBase {
      */
     public function generate_assets_on_activation_update() {
         $response = $this->get_all_pages_post_ids_with_content();
-    
+
         if ($response) {
             return true;
         } else {
@@ -259,7 +259,7 @@ class Settings extends AjaxBase {
         $post_value = isset($_POST['value']) ? ($_POST['value']) : [];
 
         $value =  json_encode($post_value);
-        
+
         $old_value = get_option("fb_$option_name");
         // Convert old_value to the correct type for comparison
         // $old_value = $this->sanitize_option_value($old_value, $type);

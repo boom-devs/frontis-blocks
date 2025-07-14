@@ -12,6 +12,7 @@ import TemplateHeader from "./template-header";
 import TemplateSidebar from "./template-sidebar";
 import TemplateContent from "./template-content";
 import data from "./data.json";
+import LibraryContent from "./library-content";
 
 const PatternLibraryButton = () => {
     const [showPatternButton, setShowPatternButton] = useState(true);
@@ -79,6 +80,8 @@ const PatternLibraryButton = () => {
     const schema = data.$schema;
     const [activeTab, setActiveTab] = useState(Object.keys(schema)[0]);
     const [activeCategory, setActiveCategory] = useState({patterns: 'all', pages: 'all', sites: 'all', templateLibrary: 'my-cloud'});
+    const [libraryData, setLibraryData] = useState([]);
+
 
     return (
         <>
@@ -111,7 +114,8 @@ const PatternLibraryButton = () => {
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">
                                 <TemplateSidebar activeTab={activeTab} data={data} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
-                                <TemplateContent activeTab={activeTab} activeCategory={activeCategory} data={data} />
+                                {activeTab !== 'templateLibrary' && <TemplateContent activeTab={activeTab} activeCategory={activeCategory} setLibraryData={setLibraryData} data={data} />}
+                                {activeTab === 'templateLibrary' && <LibraryContent activeTab={activeTab} activeCategory={activeCategory} libraryData={libraryData} setLibraryData={setLibraryData} data={data} />}
                             </div>
 
                         </div>

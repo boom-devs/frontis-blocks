@@ -8,7 +8,7 @@
   \******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"pattern1","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png","content":"Pattern 1 content here","tags":["Blog","Magazine","Construction"],"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern2","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-1.png","content":"Pattern 2 content here","tags":["Landing","AI","Gutenberg"],"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern3","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Pattern 3 content here","tags":["Landing","Creative"],"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern4","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-2.png","content":"Pattern 4 content here","tags":["Landing","Business"],"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern5","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Pattern 5 content here","tags":["Landing","Portfolio"],"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern6","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Pattern 6 content here","tags":["Landing","Agency"],"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern15","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Pattern 15 content here","tags":["Landing","Startup"],"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[{"id":"pattern1","title":"Pattern 1","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png","content":"Pattern 1 content here","tags":["Content","Block"],"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]}]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M15.5 3H4.5C3.67157 3 3 3.67157 3 4.5C3 5.32843 3.67157 6 4.5 6H15.5C16.3284 6 17 5.32843 17 4.5C17 3.67157 16.3284 3 15.5 3Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M15.5 8.5H4.5C3.67157 8.5 3 9.17157 3 10C3 10.8284 3.67157 11.5 4.5 11.5H15.5C16.3284 11.5 17 10.8284 17 10C17 9.17157 16.3284 8.5 15.5 8.5Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M9.5 14H4.5C3.67157 14 3 14.6716 3 15.5C3 16.3284 3.67157 17 4.5 17H9.5C10.3284 17 11 16.3284 11 15.5C11 14.6716 10.3284 14 9.5 14Z\' stroke=\'#404655\' stroke-width=\'1.5\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"page1","title":"Page 1","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Page 1 content here","tags":["Landing","Business"],"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"page2","title":"Page 2","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Page 2 content here","tags":["Portfolio","Creative"],"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"page3","title":"Pattern 3","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Page 3 content here","tags":["Blog","Magazine"],"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M15.5 3H4.5C3.67157 3 3 3.67157 3 4.5C3 5.32843 3.67157 6 4.5 6H15.5C16.3284 6 17 5.32843 17 4.5C17 3.67157 16.3284 3 15.5 3Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M15.5 8.5H4.5C3.67157 8.5 3 9.17157 3 10C3 10.8284 3.67157 11.5 4.5 11.5H15.5C16.3284 11.5 17 10.8284 17 10C17 9.17157 16.3284 8.5 15.5 8.5Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M9.5 14H4.5C3.67157 14 3 14.6716 3 15.5C3 16.3284 3.67157 17 4.5 17H9.5C10.3284 17 11 16.3284 11 15.5C11 14.6716 10.3284 14 9.5 14Z\' stroke=\'#404655\' stroke-width=\'1.5\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"item1","title":"Item 1","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Site 1 content here","tags":["Business","Corporate"],"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"item2","title":"Item 2","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Site 2 content here","tags":["Portfolio","Personal"],"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"item3","title":"Item 3","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Site 3 content here","tags":["Creative","Agency"],"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M15.5 3H4.5C3.67157 3 3 3.67157 3 4.5C3 5.32843 3.67157 6 4.5 6H15.5C16.3284 6 17 5.32843 17 4.5C17 3.67157 16.3284 3 15.5 3Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M15.5 8.5H4.5C3.67157 8.5 3 9.17157 3 10C3 10.8284 3.67157 11.5 4.5 11.5H15.5C16.3284 11.5 17 10.8284 17 10C17 9.17157 16.3284 8.5 15.5 8.5Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M9.5 14H4.5C3.67157 14 3 14.6716 3 15.5C3 16.3284 3.67157 17 4.5 17H9.5C10.3284 17 11 16.3284 11 15.5C11 14.6716 10.3284 14 9.5 14Z\' stroke=\'#404655\' stroke-width=\'1.5\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"templateLibrary":{"name":"Template Library","categories":[{"id":"my-cloud","name":"My Cloud","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","items":[]},{"id":"my-favourites","name":"My Favourites","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\'><path d=\'M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/><path d=\'M12 17C12 17 7 13.8235 7 10.75C7 9.23122 8.05263 8 9.5 8C10.25 8 11 8.26471 12 9.32353C13 8.26471 13.75 8 14.5 8C15.9474 8 17 9.23122 17 10.75C17 13.8235 12 17 12 17Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","items":[]},{"id":"my-downloads","name":"My Downloads","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\'><path d=\'M3.09477 10C3.03217 10.457 2.99976 10.9245 2.99976 11.4C2.99976 16.7019 7.02919 21 11.9998 21C16.9703 21 20.9998 16.7019 20.9998 11.4C20.9998 10.9245 20.9673 10.457 20.9047 10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M11.9998 13V3M11.9998 13C11.2995 13 9.99129 11.0057 9.49976 10.5M11.9998 13C12.7 13 14.0082 11.0057 14.4998 10.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","items":[]},{"id":"purchased-items","name":"Purchased Items","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\'><path d=\'M8 16H15.2632C19.7508 16 20.4333 13.1808 21.261 9.06908C21.4998 7.88311 21.6192 7.29013 21.3321 6.89507C21.045 6.5 20.4947 6.5 19.3941 6.5H6\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M8 16L5.37873 3.51493C5.15615 2.62459 4.35618 2 3.43845 2H2.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M8.88 16H8.46857C7.10522 16 6 17.1513 6 18.5714C6 18.8081 6.1842 19 6.41143 19H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M10.5 22C11.3284 22 12 21.3284 12 20.5C12 19.6716 11.3284 19 10.5 19C9.67157 19 9 19.6716 9 20.5C9 21.3284 9.67157 22 10.5 22Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 22C18.3284 22 19 21.3284 19 20.5C19 19.6716 18.3284 19 17.5 19C16.6716 19 16 19.6716 16 20.5C16 21.3284 16.6716 22 17.5 22Z\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","items":[]},{"id":"shared-with-me","name":"Shared with me","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\'><path d=\'M20.5 5.5C20.5 7.15685 19.1569 8.5 17.5 8.5C15.8431 8.5 14.5 7.15685 14.5 5.5C14.5 3.84315 15.8431 2.5 17.5 2.5C19.1569 2.5 20.5 3.84315 20.5 5.5Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M8.5 11.5C8.5 13.1569 7.15685 14.5 5.5 14.5C3.84315 14.5 2.5 13.1569 2.5 11.5C2.5 9.84315 3.84315 8.5 5.5 8.5C7.15685 8.5 8.5 9.84315 8.5 11.5Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M21.5 18.5C21.5 20.1569 20.1569 21.5 18.5 21.5C16.8431 21.5 15.5 20.1569 15.5 18.5C15.5 16.8431 16.8431 15.5 18.5 15.5C20.1569 15.5 21.5 16.8431 21.5 18.5Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M14.5348 4.58109C14.1554 4.52765 13.7677 4.5 13.3733 4.5C10.2974 4.5 7.62058 6.18227 6.24054 8.66317M19.7131 7.49453C20.8311 8.86497 21.5 10.6056 21.5 12.5C21.5 13.8758 21.1472 15.1705 20.5258 16.3012M15.8816 20.1117C15.0917 20.3638 14.2486 20.5 13.3733 20.5C9.58287 20.5 6.39853 17.9454 5.5 14.4898\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","items":[]}]}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"pattern1","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png","content":"Pattern 1 content here","tags":["Blog","Magazine","Construction"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern2","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-1.png","content":"Pattern 2 content here","tags":["Landing","AI","Gutenberg"],"isPro":true,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern3","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Pattern 3 content here","tags":["Landing","Creative"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern4","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-2.png","content":"Pattern 4 content here","tags":["Landing","Business"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern5","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Pattern 5 content here","tags":["Landing","Portfolio"],"isPro":true,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern6","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Pattern 6 content here","tags":["Landing","Agency"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern15","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Pattern 15 content here","tags":["Landing","Startup"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[{"id":"pattern1","title":"Pattern 1","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png","content":"Pattern 1 content here","tags":["Content","Block"],"isPro":true,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]}]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M15.5 3H4.5C3.67157 3 3 3.67157 3 4.5C3 5.32843 3.67157 6 4.5 6H15.5C16.3284 6 17 5.32843 17 4.5C17 3.67157 16.3284 3 15.5 3Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M15.5 8.5H4.5C3.67157 8.5 3 9.17157 3 10C3 10.8284 3.67157 11.5 4.5 11.5H15.5C16.3284 11.5 17 10.8284 17 10C17 9.17157 16.3284 8.5 15.5 8.5Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M9.5 14H4.5C3.67157 14 3 14.6716 3 15.5C3 16.3284 3.67157 17 4.5 17H9.5C10.3284 17 11 16.3284 11 15.5C11 14.6716 10.3284 14 9.5 14Z\' stroke=\'#404655\' stroke-width=\'1.5\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"page1","title":"Page 1","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Page 1 content here","tags":["Landing","Business"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"page2","title":"Page 2","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Page 2 content here","tags":["Portfolio","Creative"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"page3","title":"Pattern 3","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Page 3 content here","tags":["Blog","Magazine"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M15.5 3H4.5C3.67157 3 3 3.67157 3 4.5C3 5.32843 3.67157 6 4.5 6H15.5C16.3284 6 17 5.32843 17 4.5C17 3.67157 16.3284 3 15.5 3Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M15.5 8.5H4.5C3.67157 8.5 3 9.17157 3 10C3 10.8284 3.67157 11.5 4.5 11.5H15.5C16.3284 11.5 17 10.8284 17 10C17 9.17157 16.3284 8.5 15.5 8.5Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M9.5 14H4.5C3.67157 14 3 14.6716 3 15.5C3 16.3284 3.67157 17 4.5 17H9.5C10.3284 17 11 16.3284 11 15.5C11 14.6716 10.3284 14 9.5 14Z\' stroke=\'#404655\' stroke-width=\'1.5\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"item1","title":"Item 1","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Site 1 content here","tags":["Business","Corporate"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"item2","title":"Item 2","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Site 2 content here","tags":["Portfolio","Personal"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"item3","title":"Item 3","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Site 3 content here","tags":["Creative","Agency"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M15.5 3H4.5C3.67157 3 3 3.67157 3 4.5C3 5.32843 3.67157 6 4.5 6H15.5C16.3284 6 17 5.32843 17 4.5C17 3.67157 16.3284 3 15.5 3Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M15.5 8.5H4.5C3.67157 8.5 3 9.17157 3 10C3 10.8284 3.67157 11.5 4.5 11.5H15.5C16.3284 11.5 17 10.8284 17 10C17 9.17157 16.3284 8.5 15.5 8.5Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M9.5 14H4.5C3.67157 14 3 14.6716 3 15.5C3 16.3284 3.67157 17 4.5 17H9.5C10.3284 17 11 16.3284 11 15.5C11 14.6716 10.3284 14 9.5 14Z\' stroke=\'#404655\' stroke-width=\'1.5\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"templateLibrary":{"name":"Template Library","categories":[{"id":"my-cloud","name":"My Cloud","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","items":[]},{"id":"my-favourites","name":"My Favourites","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\'><path d=\'M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/><path d=\'M12 17C12 17 7 13.8235 7 10.75C7 9.23122 8.05263 8 9.5 8C10.25 8 11 8.26471 12 9.32353C13 8.26471 13.75 8 14.5 8C15.9474 8 17 9.23122 17 10.75C17 13.8235 12 17 12 17Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","items":[]},{"id":"my-downloads","name":"My Downloads","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\'><path d=\'M3.09477 10C3.03217 10.457 2.99976 10.9245 2.99976 11.4C2.99976 16.7019 7.02919 21 11.9998 21C16.9703 21 20.9998 16.7019 20.9998 11.4C20.9998 10.9245 20.9673 10.457 20.9047 10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M11.9998 13V3M11.9998 13C11.2995 13 9.99129 11.0057 9.49976 10.5M11.9998 13C12.7 13 14.0082 11.0057 14.4998 10.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","items":[]},{"id":"purchased-items","name":"Purchased Items","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\'><path d=\'M8 16H15.2632C19.7508 16 20.4333 13.1808 21.261 9.06908C21.4998 7.88311 21.6192 7.29013 21.3321 6.89507C21.045 6.5 20.4947 6.5 19.3941 6.5H6\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M8 16L5.37873 3.51493C5.15615 2.62459 4.35618 2 3.43845 2H2.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M8.88 16H8.46857C7.10522 16 6 17.1513 6 18.5714C6 18.8081 6.1842 19 6.41143 19H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M10.5 22C11.3284 22 12 21.3284 12 20.5C12 19.6716 11.3284 19 10.5 19C9.67157 19 9 19.6716 9 20.5C9 21.3284 9.67157 22 10.5 22Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 22C18.3284 22 19 21.3284 19 20.5C19 19.6716 18.3284 19 17.5 19C16.6716 19 16 19.6716 16 20.5C16 21.3284 16.6716 22 17.5 22Z\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","items":[]},{"id":"shared-with-me","name":"Shared with me","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\'><path d=\'M20.5 5.5C20.5 7.15685 19.1569 8.5 17.5 8.5C15.8431 8.5 14.5 7.15685 14.5 5.5C14.5 3.84315 15.8431 2.5 17.5 2.5C19.1569 2.5 20.5 3.84315 20.5 5.5Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M8.5 11.5C8.5 13.1569 7.15685 14.5 5.5 14.5C3.84315 14.5 2.5 13.1569 2.5 11.5C2.5 9.84315 3.84315 8.5 5.5 8.5C7.15685 8.5 8.5 9.84315 8.5 11.5Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M21.5 18.5C21.5 20.1569 20.1569 21.5 18.5 21.5C16.8431 21.5 15.5 20.1569 15.5 18.5C15.5 16.8431 16.8431 15.5 18.5 15.5C20.1569 15.5 21.5 16.8431 21.5 18.5Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M14.5348 4.58109C14.1554 4.52765 13.7677 4.5 13.3733 4.5C10.2974 4.5 7.62058 6.18227 6.24054 8.66317M19.7131 7.49453C20.8311 8.86497 21.5 10.6056 21.5 12.5C21.5 13.8758 21.1472 15.1705 20.5258 16.3012M15.8816 20.1117C15.0917 20.3638 14.2486 20.5 13.3733 20.5C9.58287 20.5 6.39853 17.9454 5.5 14.4898\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","items":[]}]}}}');
 
 /***/ }),
 
@@ -3063,6 +3063,395 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
+/***/ "./admin/template-library/library-content.js":
+/*!***************************************************!*\
+  !*** ./admin/template-library/library-content.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
+/* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-toastify/dist/ReactToastify.css */ "./node_modules/react-toastify/dist/ReactToastify.css");
+/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
+/* harmony import */ var _template_import__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./template-import */ "./admin/template-library/template-import.js");
+/* harmony import */ var _login_signup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./login-signup */ "./admin/template-library/login-signup.js");
+/* harmony import */ var _plugin_upgrade__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./plugin-upgrade */ "./admin/template-library/plugin-upgrade.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * WordPress dependencies
+ */
+
+
+
+
+
+
+
+var TemplateCard = function TemplateCard(_ref) {
+  var item = _ref.item,
+    libraryData = _ref.libraryData,
+    setLibraryData = _ref.setLibraryData;
+  var _window$frontisBlocks = window.frontisBlocksAdmin,
+    nonce = _window$frontisBlocks.nonce,
+    ajaxUrl = _window$frontisBlocks.ajaxUrl;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isLoading = _useState2[0],
+    setIsLoading = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isModalOpen = _useState4[0],
+    setIsModalOpen = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isLoginModalOpen = _useState6[0],
+    setIsLoginModalOpen = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isPluginUpgradeModalOpen = _useState8[0],
+    setIsPluginUpgradeModalOpen = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState0 = _slicedToArray(_useState9, 2),
+    isHovered = _useState0[0],
+    setIsHovered = _useState0[1];
+  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState10 = _slicedToArray(_useState1, 2),
+    isAuthenticated = _useState10[0],
+    setIsAuthenticated = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isPluginUpgrade = _useState12[0],
+    setIsPluginUpgrade = _useState12[1];
+
+  // Check authentication status on component mount
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setIsAuthenticated(false);
+  }, []);
+  var handleFullSiteImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    if (!isPluginUpgrade) {
+      setIsPluginUpgradeModalOpen(true);
+    }
+    if (!isAuthenticated) {
+      setIsLoginModalOpen(true);
+    }
+    if (!item.isPro) {
+      setIsModalOpen(true);
+    }
+  }, [isAuthenticated]);
+  var handleLoginSuccess = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsLoginModalOpen(false);
+    setIsAuthenticated(true);
+    setIsModalOpen(true);
+  }, []);
+  var handleCloseLoginModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsLoginModalOpen(false);
+    setIsPluginUpgrade(false);
+  }, []);
+  var handleClosePluginUpgradeModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsPluginUpgradeModalOpen(false);
+    setIsPluginUpgrade(true);
+  }, []);
+  var handleCloseModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsModalOpen(false);
+  }, []);
+  var handleDemo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    console.log("Demo clicked for:", item.id);
+  }, [item.id]);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("tr", {
+    className: "fb-template-library-card style-two",
+    onMouseEnter: function onMouseEnter() {
+      return setIsHovered(true);
+    },
+    onMouseLeave: function onMouseLeave() {
+      return setIsHovered(false);
+    }
+  }, /*#__PURE__*/React.createElement("td", {
+    className: "fb-template-library-card-content"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: item.image,
+    alt: item.title || "Template preview"
+  }), /*#__PURE__*/React.createElement("h4", {
+    className: "fb-template-title"
+  }, item.title)), /*#__PURE__*/React.createElement("td", {
+    className: "fb-template-library-card-date"
+  }, /*#__PURE__*/React.createElement("span", null, item.dateAndTime.month), /*#__PURE__*/React.createElement("span", null, " ", item.dateAndTime.day, ","), /*#__PURE__*/React.createElement("span", null, " ", item.dateAndTime.year)), /*#__PURE__*/React.createElement("td", {
+    className: "fb-template-library-card-actions"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-template-action-btn import-btn ".concat(isLoading ? "loading" : ""),
+    onClick: !isLoading ? handleFullSiteImport : null,
+    disabled: isLoading
+  }, isLoading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Importing..."), /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    color: "#fff",
+    size: 16
+  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Import"))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-template-action-btn option-btn ".concat(isLoading ? "loading" : "")
+    // onClick={!isLoading ? handleSaveLibrary : null}
+    ,
+    disabled: isLoading
+  }, isLoading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Saving..."), /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    color: "#fff",
+    size: 16
+  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "20",
+    height: "20",
+    viewBox: "0 0 20 20",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M9.99316 10H10.0007",
+    stroke: "#0B0C0E",
+    "stroke-width": "2.08333",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M9.98682 15H9.99432",
+    stroke: "#0B0C0E",
+    "stroke-width": "2.08333",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M9.99976 5H10.0073",
+    stroke: "#0B0C0E",
+    "stroke-width": "2.08333",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })))))), item.isPro && isPluginUpgradeModalOpen && /*#__PURE__*/React.createElement(_plugin_upgrade__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    onClose: handleClosePluginUpgradeModal
+  }), item.isPro && isPluginUpgrade && isLoginModalOpen && /*#__PURE__*/React.createElement(_login_signup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    onClose: handleCloseLoginModal,
+    onLoginSuccess: handleLoginSuccess
+  }), isModalOpen && /*#__PURE__*/React.createElement(_template_import__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    template: item,
+    onClose: handleCloseModal
+  }));
+};
+var LibraryContent = function LibraryContent(_ref2) {
+  var activeTab = _ref2.activeTab,
+    activeCategory = _ref2.activeCategory,
+    data = _ref2.data,
+    libraryData = _ref2.libraryData,
+    setLibraryData = _ref2.setLibraryData;
+  var FavoriteTabsOptions = [{
+    name: 'All',
+    value: 'all'
+  }, {
+    name: 'Patterns',
+    value: 'patterns'
+  }, {
+    name: 'Pages',
+    value: 'pages'
+  }, {
+    name: 'Sites',
+    value: 'sites'
+  }];
+  var CardListOptions = [{
+    svg: /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "24",
+      height: "24",
+      viewBox: "0 0 24 24",
+      fill: "none"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M3.88886 9.66294C4.39331 10 5.09554 10 6.5 10C7.90447 10 8.6067 10 9.11115 9.66294C9.32953 9.51702 9.51703 9.32952 9.66294 9.11114C10 8.60669 10 7.90446 10 6.5C10 5.09554 10 4.39331 9.66294 3.88886C9.51703 3.67048 9.32953 3.48298 9.11115 3.33706C8.6067 3 7.90447 3 6.5 3C5.09554 3 4.39331 3 3.88886 3.33706C3.67048 3.48298 3.48298 3.67048 3.33707 3.88886C3 4.39331 3 5.09554 3 6.5C3 7.90446 3 8.60669 3.33707 9.11114C3.48298 9.32952 3.67048 9.51702 3.88886 9.66294Z",
+      stroke: "#404655",
+      "stroke-width": "1.5",
+      "stroke-linejoin": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M14.8888 9.66294C15.3933 10 16.0955 10 17.5 10C18.9044 10 19.6067 10 20.1111 9.66294C20.3295 9.51702 20.517 9.32952 20.6629 9.11114C21 8.60669 21 7.90446 21 6.5C21 5.09554 21 4.39331 20.6629 3.88886C20.517 3.67048 20.3295 3.48298 20.1111 3.33706C19.6067 3 18.9044 3 17.5 3C16.0955 3 15.3933 3 14.8888 3.33706C14.6705 3.48298 14.483 3.67048 14.337 3.88886C14 4.39331 14 5.09554 14 6.5C14 7.90446 14 8.60669 14.337 9.11114C14.483 9.32952 14.6705 9.51702 14.8888 9.66294Z",
+      stroke: "#404655",
+      "stroke-width": "1.5",
+      "stroke-linejoin": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M3.88886 20.6629C4.39331 21 5.09554 21 6.5 21C7.90447 21 8.6067 21 9.11115 20.6629C9.32953 20.517 9.51703 20.3295 9.66294 20.1111C10 19.6067 10 18.9045 10 17.5C10 16.0955 10 15.3933 9.66294 14.8889C9.51703 14.6705 9.32953 14.483 9.11115 14.3371C8.6067 14 7.90447 14 6.5 14C5.09554 14 4.39331 14 3.88886 14.3371C3.67048 14.483 3.48298 14.6705 3.33707 14.8889C3 15.3933 3 16.0955 3 17.5C3 18.9045 3 19.6067 3.33707 20.1111C3.48298 20.3295 3.67048 20.517 3.88886 20.6629Z",
+      stroke: "#404655",
+      "stroke-width": "1.5",
+      "stroke-linejoin": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M14.8888 20.6629C15.3933 21 16.0955 21 17.5 21C18.9044 21 19.6067 21 20.1111 20.6629C20.3295 20.517 20.517 20.3295 20.6629 20.1111C21 19.6067 21 18.9045 21 17.5C21 16.0955 21 15.3933 20.6629 14.8889C20.517 14.6705 20.3295 14.483 20.1111 14.3371C19.6067 14 18.9044 14 17.5 14C16.0955 14 15.3933 14 14.8888 14.3371C14.6705 14.483 14.483 14.6705 14.337 14.8889C14 15.3933 14 16.0955 14 17.5C14 18.9045 14 19.6067 14.337 20.1111C14.483 20.3295 14.6705 20.517 14.8888 20.6629Z",
+      stroke: "#404655",
+      "stroke-width": "1.5",
+      "stroke-linejoin": "round"
+    })),
+    value: 'grid'
+  }, {
+    svg: /*#__PURE__*/React.createElement("svg", {
+      width: "24",
+      height: "24",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M4 5H20",
+      stroke: "#404655",
+      "stroke-width": "1.5",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M4 12H20",
+      stroke: "#404655",
+      "stroke-width": "1.5",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M4 19H20",
+      stroke: "#404655",
+      "stroke-width": "1.5",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    })),
+    value: 'list'
+  }];
+  var schema = (data === null || data === void 0 ? void 0 : data.$schema) || {};
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState14 = _slicedToArray(_useState13, 2),
+    filteredTemplates = _useState14[0],
+    setFilteredTemplates = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('all'),
+    _useState16 = _slicedToArray(_useState15, 2),
+    activeFavoriteTab = _useState16[0],
+    setActiveFavoriteTab = _useState16[1];
+  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('list'),
+    _useState18 = _slicedToArray(_useState17, 2),
+    cardListType = _useState18[0],
+    setCardListType = _useState18[1];
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (activeTab && activeCategory[activeTab]) {
+      var _tabData$categories;
+      var tabData = schema[activeTab];
+      var selectedCategory = tabData === null || tabData === void 0 || (_tabData$categories = tabData.categories) === null || _tabData$categories === void 0 ? void 0 : _tabData$categories.find(function (category) {
+        return category.id === activeCategory[activeTab];
+      });
+      if (selectedCategory && selectedCategory.items) {
+        setFilteredTemplates(selectedCategory.items);
+      } else {
+        setFilteredTemplates([]);
+      }
+    }
+  }, [activeTab, activeCategory[activeTab]]);
+  var handleFavoriteTabClick = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (tab) {
+    setActiveCategory(_objectSpread(_objectSpread({}, activeCategory), {}, {
+      templateLibrary: tab.value
+    }));
+  }, [activeCategory]);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-store-content"
+  }, activeCategory.templateLibrary === 'my-favourites' || activeCategory.templateLibrary === 'my-cloud' ? /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-content-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-content-header-left"
+  }, activeCategory.templateLibrary === 'my-cloud' && /*#__PURE__*/React.createElement("h2", null, "My Clouds"), activeCategory.templateLibrary === 'my-favourites' ? /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-tags-wrapper"
+  }, FavoriteTabsOptions.map(function (tab) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: tab.value,
+      className: "fb-template-library-tag-btn ".concat(activeFavoriteTab === tab.value ? 'active' : ''),
+      onClick: function onClick() {
+        return setActiveFavoriteTab(tab.value);
+      }
+    }, tab.name);
+  })) : ''), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-content-header-right"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-search-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-search-input-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-search-input-icon"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "18",
+    height: "18",
+    viewBox: "0 0 18 18",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("g", {
+    "clip-path": "url(#clip0_13116_5586)"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "8.625",
+    cy: "8.625",
+    r: "7.125",
+    stroke: "white",
+    "stroke-width": "1.5"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M13.875 13.875L16.5 16.5",
+    stroke: "white",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round"
+  })), /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
+    id: "clip0_13116_5586"
+  }, /*#__PURE__*/React.createElement("rect", {
+    width: "18",
+    height: "18",
+    fill: "white"
+  }))))), /*#__PURE__*/React.createElement("input", {
+    type: "search",
+    placeholder: "Search Blocks"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-card-list-wrapper"
+  }, CardListOptions.map(function (tab) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: tab.value,
+      className: "fb-template-library-card-list-btn ".concat(cardListType === tab.value ? 'active' : ''),
+      onClick: function onClick() {
+        return setCardListType(tab.value);
+      }
+    }, tab.svg);
+  })))) : '', /*#__PURE__*/React.createElement("table", {
+    className: "fb-template-library-cards style-two"
+  }, /*#__PURE__*/React.createElement("thead", {
+    className: "fb-template-library-card-header"
+  }, /*#__PURE__*/React.createElement("tr", {
+    className: "fb-template-library-card-header-name"
+  }, "Name"), activeCategory.templateLibrary === 'my-favourites' || activeCategory.templateLibrary === 'my-cloud' ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("tr", {
+    className: "fb-template-library-card-header-date"
+  }, "Last Modified"), /*#__PURE__*/React.createElement("tr", {
+    className: "fb-template-library-card-header-actions"
+  }, "Action")) : ''), /*#__PURE__*/React.createElement("tbody", {
+    className: "fb-template-library-card-body"
+  }, activeCategory.templateLibrary === 'my-favourites' ? activeFavoriteTab === 'all' ? libraryData.map(function (item) {
+    return /*#__PURE__*/React.createElement(TemplateCard, {
+      key: item.id,
+      item: item,
+      libraryData: libraryData,
+      setLibraryData: setLibraryData
+    });
+  }) : libraryData.filter(function (item) {
+    return item.activeTab === activeFavoriteTab;
+  }).map(function (item) {
+    return /*#__PURE__*/React.createElement(TemplateCard, {
+      key: item.id,
+      item: item,
+      libraryData: libraryData,
+      setLibraryData: setLibraryData
+    });
+  }) : libraryData.map(function (item) {
+    return /*#__PURE__*/React.createElement(TemplateCard, {
+      key: item.id,
+      item: item,
+      libraryData: libraryData,
+      setLibraryData: setLibraryData
+    });
+  }))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LibraryContent);
+
+/***/ }),
+
 /***/ "./admin/template-library/login-signup.js":
 /*!************************************************!*\
   !*** ./admin/template-library/login-signup.js ***!
@@ -3422,6 +3811,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _template_import__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./template-import */ "./admin/template-library/template-import.js");
 /* harmony import */ var _login_signup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./login-signup */ "./admin/template-library/login-signup.js");
 /* harmony import */ var _plugin_upgrade__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./plugin-upgrade */ "./admin/template-library/plugin-upgrade.js");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -3447,7 +3840,9 @@ var TemplateCard = function TemplateCard(_ref) {
     _ref$tags = _ref.tags,
     tags = _ref$tags === void 0 ? [] : _ref$tags,
     _ref$dependency = _ref.dependency,
-    dependency = _ref$dependency === void 0 ? [] : _ref$dependency;
+    dependency = _ref$dependency === void 0 ? [] : _ref$dependency,
+    activeTab = _ref.activeTab,
+    setLibraryData = _ref.setLibraryData;
   var _window$frontisBlocks = window.frontisBlocksAdmin,
     nonce = _window$frontisBlocks.nonce,
     ajaxUrl = _window$frontisBlocks.ajaxUrl;
@@ -3514,6 +3909,25 @@ var TemplateCard = function TemplateCard(_ref) {
   var handleDemo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     console.log("Demo clicked for:", id);
   }, [id]);
+  var currentDay = new Date().toLocaleDateString('en-US', {
+    day: 'numeric'
+  });
+  var currentMonth = new Date().toLocaleDateString('en-US', {
+    month: 'long'
+  });
+  var currentYear = new Date().toLocaleDateString('en-US', {
+    year: 'numeric'
+  });
+  var currentTime = new Date().toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+  var currentDateAndTime = {
+    day: currentDay,
+    month: currentMonth,
+    year: currentYear,
+    time: currentTime
+  };
   var templateData = {
     id: id,
     title: title,
@@ -3521,12 +3935,19 @@ var TemplateCard = function TemplateCard(_ref) {
     isPro: isPro,
     category: ['Blog & Magazine', 'Construction', 'eCommerce'],
     author: 'Template Author',
-    downloads: 2025,
-    dependency: dependency
+    activeTab: activeTab,
+    dependency: dependency,
+    dateAndTime: currentDateAndTime
   };
   var handleSaveLibrary = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
-    console.log("Save Library clicked for:", id);
-  }, [id]);
+    setLibraryData(function (prevData) {
+      var alreadyExists = prevData.some(function (item) {
+        return item.id === templateData.id;
+      });
+      if (alreadyExists) return prevData;
+      return [].concat(_toConsumableArray(prevData), [templateData]);
+    });
+  }, [templateData]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card",
     onMouseEnter: function onMouseEnter() {
@@ -3610,12 +4031,34 @@ var TemplateCard = function TemplateCard(_ref) {
 var TemplateLibrary = function TemplateLibrary(_ref2) {
   var activeTab = _ref2.activeTab,
     activeCategory = _ref2.activeCategory,
-    data = _ref2.data;
+    data = _ref2.data,
+    libraryData = _ref2.libraryData,
+    setLibraryData = _ref2.setLibraryData;
+  var TagTabsOptions = [{
+    name: 'User Experience',
+    value: 'user-experience'
+  }, {
+    name: 'Templates',
+    value: 'templates'
+  }, {
+    name: 'Web Design',
+    value: 'web-design'
+  }, {
+    name: 'E-commerce',
+    value: 'e-commerce'
+  }, {
+    name: 'Landing Pages',
+    value: 'landing-pages'
+  }];
   var schema = (data === null || data === void 0 ? void 0 : data.$schema) || {};
   var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState14 = _slicedToArray(_useState13, 2),
     filteredTemplates = _useState14[0],
     setFilteredTemplates = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState16 = _slicedToArray(_useState15, 2),
+    activeTagTab = _useState16[0],
+    setActiveTagTab = _useState16[1];
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (activeTab && activeCategory[activeTab]) {
       var _tabData$categories;
@@ -3674,17 +4117,27 @@ var TemplateLibrary = function TemplateLibrary(_ref2) {
     placeholder: "Search Blocks"
   }))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-tags-wrapper"
-  }, /*#__PURE__*/React.createElement("span", null, "User Experience"), /*#__PURE__*/React.createElement("span", null, "UI Kits"), /*#__PURE__*/React.createElement("span", null, "Templates"), /*#__PURE__*/React.createElement("span", null, "Web Design"), /*#__PURE__*/React.createElement("span", null, "Creative Assets")))), /*#__PURE__*/React.createElement("div", {
+  }, TagTabsOptions.map(function (tab) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: tab.value,
+      className: "fb-template-library-tag-btn ".concat(activeTagTab === tab.value ? 'active' : ''),
+      onClick: function onClick() {
+        return setActiveTagTab(tab.value);
+      }
+    }, tab.name);
+  })))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-cards"
-  }, filteredTemplates.map(function (template, index) {
+  }, filteredTemplates.map(function (template) {
     return /*#__PURE__*/React.createElement(TemplateCard, {
       key: template.id,
       id: template.id,
       title: template.title,
       imageUrl: template.image,
-      isPro: index % 3 === 1,
+      isPro: template.isPro || false,
       tags: template.tags || [],
-      dependency: template.dependency || []
+      dependency: template.dependency || [],
+      activeTab: activeTab,
+      setLibraryData: setLibraryData
     });
   })));
 };
@@ -4108,7 +4561,7 @@ var TemplateSidebar = function TemplateSidebar(_ref) {
   }, [categories]);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-store-sidebar"
-  }, /*#__PURE__*/React.createElement("div", {
+  }, activeTab !== 'templateLibrary' && /*#__PURE__*/React.createElement("div", {
     className: "fb-template-category-wrapper"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-category-label"
@@ -4167,6 +4620,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _template_sidebar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./template-sidebar */ "./admin/template-library/template-sidebar.js");
 /* harmony import */ var _template_content__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./template-content */ "./admin/template-library/template-content.js");
 /* harmony import */ var _data_json__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./data.json */ "./admin/template-library/data.json");
+/* harmony import */ var _library_content__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./library-content */ "./admin/template-library/library-content.js");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -4176,6 +4630,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 /**
  * WordPress dependencies
  */
+
 
 
 
@@ -4272,6 +4727,10 @@ var PatternLibraryButton = function PatternLibraryButton() {
     _useState10 = _slicedToArray(_useState1, 2),
     activeCategory = _useState10[0],
     setActiveCategory = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState12 = _slicedToArray(_useState11, 2),
+    libraryData = _useState12[0],
+    setLibraryData = _useState12[1];
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
     onClick: function onClick() {
       return handleClick();
@@ -4311,9 +4770,16 @@ var PatternLibraryButton = function PatternLibraryButton() {
     data: _data_json__WEBPACK_IMPORTED_MODULE_9__,
     activeCategory: activeCategory,
     setActiveCategory: setActiveCategory
-  }), /*#__PURE__*/React.createElement(_template_content__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }), activeTab !== 'templateLibrary' && /*#__PURE__*/React.createElement(_template_content__WEBPACK_IMPORTED_MODULE_8__["default"], {
     activeTab: activeTab,
     activeCategory: activeCategory,
+    setLibraryData: setLibraryData,
+    data: _data_json__WEBPACK_IMPORTED_MODULE_9__
+  }), activeTab === 'templateLibrary' && /*#__PURE__*/React.createElement(_library_content__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    activeTab: activeTab,
+    activeCategory: activeCategory,
+    libraryData: libraryData,
+    setLibraryData: setLibraryData,
     data: _data_json__WEBPACK_IMPORTED_MODULE_9__
   }))))));
 };
