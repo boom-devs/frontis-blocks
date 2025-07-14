@@ -1,18 +1,6 @@
 import { __ } from "@wordpress/i18n";
 import { Dashicon } from "@wordpress/components";
 
-// the consts defined here should be unique from one another
-export const WRAPPER_BG = "wrprBg";
-export const WRAPPER_MARGIN = "wrpMargin";
-export const WRAPPER_PADDING = "wrpPadding";
-export const WRAPPER_BORDER_SHADOW = "wrpBorderShadow";
-export const TITLE_MARGIN = "titleMargin";
-export const SUBTITLE_MARGIN = "subtitleMargin";
-export const separator_MARGIN = "separatorMargin";
-export const separator_LINE_SIZE = "separatorLineSize";
-export const separator_ICON_SIZE = "separatorIconSize";
-export const separator_WIDTH = "separatorWidth";
-
 export const UNIT_TYPES = [
 	{ label: "px", value: "px" },
 	{ label: "%", value: "%" },
