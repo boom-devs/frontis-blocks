@@ -16,6 +16,7 @@
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png",
                             "content": "Pattern 1 content here",
                             "tags": ["Blog", "Magazine", "Construction"],
+                            "isPro": false,
                             "dependency": [
                                 {
                                     "name": "Frontis Blocks",
@@ -34,6 +35,7 @@
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/pro-1.png",
                             "content": "Pattern 2 content here",
                             "tags": ["Landing", "AI", "Gutenberg"],
+                            "isPro": true,
                             "dependency": [
                                 {
                                     "name": "Frontis Blocks",
@@ -52,6 +54,7 @@
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-1.png",
                             "content": "Pattern 3 content here",
                             "tags": ["Landing", "Creative"],
+                            "isPro": false,
                             "dependency": [
                                 {
                                     "name": "Frontis Blocks",
@@ -70,6 +73,7 @@
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-2.png",
                             "content": "Pattern 4 content here",
                             "tags": ["Landing", "Business"],
+                            "isPro": false,
                             "dependency": [
                                 {
                                     "name": "Frontis Blocks",
@@ -88,6 +92,7 @@
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-3.png",
                             "content": "Pattern 5 content here",
                             "tags": ["Landing", "Portfolio"],
+                            "isPro": true,
                             "dependency": [
                                 {
                                     "name": "Frontis Blocks",
@@ -106,6 +111,7 @@
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-4.png",
                             "content": "Pattern 6 content here",
                             "tags": ["Landing", "Agency"],
+                            "isPro": false,
                             "dependency": [
                                 {
                                     "name": "Frontis Blocks",
@@ -125,6 +131,7 @@
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-5.png",
                             "content": "Pattern 15 content here",
                             "tags": ["Landing", "Startup"],
+                            "isPro": false,
                             "dependency": [
                                 {
                                     "name": "Frontis Blocks",
@@ -151,6 +158,7 @@
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png",
                             "content": "Pattern 1 content here",
                             "tags": ["Content", "Block"],
+                            "isPro": true,
                             "dependency": [
                                 {
                                     "name": "Frontis Blocks",
@@ -217,6 +225,7 @@
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-5.png",
                             "content": "Page 1 content here",
                             "tags": ["Landing", "Business"],
+                            "isPro": false,
                             "dependency": [
                                 {
                                     "name": "Frontis Blocks",
@@ -235,6 +244,7 @@
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-6.png",
                             "content": "Page 2 content here",
                             "tags": ["Portfolio", "Creative"],
+                            "isPro": false,
                             "dependency": [
                                 {
                                     "name": "Frontis Blocks",
@@ -253,6 +263,7 @@
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-4.png",
                             "content": "Page 3 content here",
                             "tags": ["Blog", "Magazine"],
+                            "isPro": false,
                             "dependency": [
                                 {
                                     "name": "Frontis Blocks",
@@ -326,6 +337,7 @@
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-6.png",
                             "content": "Site 1 content here",
                             "tags": ["Business", "Corporate"],
+                            "isPro": false,
                             "dependency": [
                                 {
                                     "name": "Frontis Blocks",
@@ -344,6 +356,7 @@
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-1.png",
                             "content": "Site 2 content here",
                             "tags": ["Portfolio", "Personal"],
+                            "isPro": false,
                             "dependency": [
                                 {
                                     "name": "Frontis Blocks",
@@ -362,6 +375,7 @@
                             "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-3.png",
                             "content": "Site 3 content here",
                             "tags": ["Creative", "Agency"],
+                            "isPro": false,
                             "dependency": [
                                 {
                                     "name": "Frontis Blocks",

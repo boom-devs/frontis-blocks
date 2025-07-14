@@ -222,7 +222,7 @@ class Blocks
 
 		if (!empty($google_fonts)) {
 			foreach ($google_fonts as $key => $value) {
-				// unique fonts family 
+				// unique fonts family
 				if (!in_array($value, $this->gfonts)) {
 					$this->gfonts[$value] = $value;
 				}

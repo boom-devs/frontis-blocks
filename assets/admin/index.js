@@ -2075,11 +2075,18 @@ var EditorOptions = function EditorOptions() {
       },
       success: function success(response) {
         if (response.success) {
-          setOptions(function (prevOptions) {
-            return _objectSpread(_objectSpread(_objectSpread({}, prevOptions), response.data), {}, {
-              default_content_width: JSON.parse(response.data.default_content_width)
+          var fetchedOptions = response.data;
+
+          // If default_content_width is undefined or empty in DB, save your default
+          if (!fetchedOptions.default_content_width) {
+            saveOption('default_content_width', options.default_content_width);
+          } else {
+            setOptions(function (prevOptions) {
+              return _objectSpread(_objectSpread(_objectSpread({}, prevOptions), fetchedOptions), {}, {
+                default_content_width: JSON.parse(fetchedOptions.default_content_width)
+              });
             });
-          });
+          }
         } else {
           var _response$data;
           react_toastify__WEBPACK_IMPORTED_MODULE_4__.toast.error((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Failed to fetch options: ".concat(((_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.message) || 'Unknown error'), 'frontis-blocks'), {
