@@ -63,13 +63,17 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '100',
-			Tablet: '',
-			Mobile: ''
+			Tablet: '100',
+			Mobile: '100'
 		}
 	},
 	containerCustomWidth: {
-		type: 'string',
-		default: '100',
+		type: 'object',
+		default: {
+			Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
+		}
 	},
 
 	containerCustomWidthUnits: {
@@ -105,6 +109,10 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
+	containerRowGapHasEdited: {
+		type: 'boolean',
+		default: false,
+	},
 
 	columnGap: {
 		type: 'object',
@@ -122,6 +130,10 @@ const attributes = {
 			Tablet: 'px',
 			Mobile: 'px'
 		}
+	},
+	containerColumnGapHasEdited: {
+		type: 'boolean',
+		default: false,
 	},
 
 	containerZIndex: {
@@ -708,10 +720,10 @@ const attributes = {
 	containerDesktopPadding: {
 		type: "object",
 		default: {
-			top: "10",
-			bottom: "10",
-			left: "10",
-			right: "10",
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		}
 	},
 	containerTabletPadding: {
@@ -736,6 +748,10 @@ const attributes = {
         type : "boolean",
         default: true
     },
+	containerPaddingHasEdited: {
+		type: 'boolean',
+		default: false,
+	},
 	/** Start Margin */
 	containerMarginUnits: {
 		type: 'object',

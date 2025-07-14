@@ -1670,8 +1670,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
      */
     const styleControls = (
         <>
-            <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
-            </PanelBody>
+            {/* <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
+            </PanelBody> */}
 
             <PanelBody title={__("Progress Color", "frontis-blocks")} initialOpen={false}>
                 <ToggleControl
