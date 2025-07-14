@@ -7,20 +7,18 @@ import { useDispatch, subscribe, select } from '@wordpress/data';
 import { store as editorStore } from '@wordpress/editor';
 import { desktop } from '@wordpress/icons';
 
-// Move NumberInputWithPx component outside of EditorOptions
+/**
+ * NumberInputWithPx component
+ */
 const NumberInputWithPx = ({ value, onChange, onBlur, min, max, device, onDeviceChange }) => {
-  // Add local state to maintain focus during typing
   const [localValue, setLocalValue] = useState(value[device]);
 
-  // Update local value when device changes or when options update from outside
   useEffect(() => {
     setLocalValue(value[device]);
   }, [device, value]);
 
   const handleChange = (newValue) => {
-    // Update local state immediately to maintain input value
     setLocalValue(newValue);
-    // Also update the parent state
     onChange(newValue);
   };
 
@@ -71,9 +69,21 @@ const EditorOptions = () => {
       Tablet: '1024',
       Mobile: '767',
     },
-    button_inherit_from_theme: false,
-    container_padding: '',
-    container_elements_gap: '',
+    container_column_gap: {
+      Desktop: '0',
+      Tablet: '0',
+      Mobile: '0',
+    },
+    container_row_gap: {
+      Desktop: '0',
+      Tablet: '0',
+      Mobile: '0',
+    },
+    container_padding: {
+      Desktop: '10',
+      Tablet: '10',
+      Mobile: '10',
+    },
     custom_css: false,
     copy_paste_style: false,
   });
@@ -100,14 +110,20 @@ const EditorOptions = () => {
         if (response.success) {
 					const fetchedOptions = response.data;
 
-					// If default_content_width is undefined or empty in DB, save your default
-					if (!fetchedOptions.default_content_width) {
+					// If default_content_width, container_column_gap, container_row_gap or container_padding is undefined or empty in DB, save your default
+					if (!fetchedOptions.default_content_width || !fetchedOptions.container_column_gap || !fetchedOptions.container_row_gap || !fetchedOptions.container_padding) {
 						saveOption('default_content_width', options.default_content_width);
+            saveOption('container_column_gap', options.container_column_gap);
+            saveOption('container_row_gap', options.container_row_gap);
+            saveOption('container_padding', options.container_padding);
 					} else {
 						setOptions(prevOptions => ({
 							...prevOptions,
 							...fetchedOptions,
-							default_content_width: JSON.parse(fetchedOptions.default_content_width)
+							default_content_width: JSON.parse(fetchedOptions.default_content_width),
+              container_column_gap: JSON.parse(fetchedOptions.container_column_gap),
+              container_row_gap: JSON.parse(fetchedOptions.container_row_gap),
+              container_padding: JSON.parse(fetchedOptions.container_padding),
 						}));
 					}
         } else {
@@ -187,23 +203,8 @@ const EditorOptions = () => {
     });
   };
 
-  const handleNumberChange = (option, value) => {
-    setOptions(prevOptions => ({ ...prevOptions, [option]: value }));
-  };
-
   const handleNumberBlur = (option, value) => {
     saveOption(option, value);
-  };
-
-  const handleSwitchChange = async (option) => {
-    const newValue = !options[option];
-    try {
-      await saveOption(option, newValue ? '1' : '0');
-      setOptions(prevOptions => ({ ...prevOptions, [option]: newValue }));
-    } catch (error) {
-      // Revert the switch if saving failed
-      setOptions(prevOptions => ({ ...prevOptions, [option]: !newValue }));
-    }
   };
 
   const handleDevice = (deviceName) => {
@@ -223,11 +224,50 @@ const EditorOptions = () => {
     });
   };
 
+  const handleColumnGap = (value) => {
+    setOptions(prevOptions => {
+      const updatedWidth = {
+        ...prevOptions.container_column_gap,
+        [device]: value
+      };
+      return {
+        ...prevOptions,
+        container_column_gap: updatedWidth
+      };
+    });
+  };
+
+  const handleRowGap = (value) => {
+    setOptions(prevOptions => {
+      const updatedWidth = {
+        ...prevOptions.container_row_gap, 
+        [device]: value
+      };
+      return {
+        ...prevOptions,
+        container_row_gap: updatedWidth
+      };
+    });
+  };
+
+  const handlePadding = (value) => {
+    setOptions(prevOptions => {
+      const updatedWidth = {
+        ...prevOptions.container_padding, 
+        [device]: value
+      };
+      return {
+        ...prevOptions,
+        container_padding: updatedWidth
+      };
+    });
+  };
+
   return (
     <div className="fb-blocks-settings-options">
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Default Content Width', 'frontis-blocks')}</h3>
+          <h3>{__('Default Container Width', 'frontis-blocks')}</h3>
           <p>{__('Set the default width for content in pixels', 'frontis-blocks')}</p>
         </div>
         <NumberInputWithPx
@@ -243,12 +283,34 @@ const EditorOptions = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Button - Inherit From Theme', 'frontis-blocks')}</h3>
-          <p>{__('Use button styles from the current theme', 'frontis-blocks')}</p>
+          <h3>{__('Container Column Gap', 'frontis-blocks')}</h3>
+          <p>{__('Set the default gap between container columns in pixels', 'frontis-blocks')}</p>
         </div>
-        <p className="fb-button-upcoming">
-          {__('Coming Soon', 'frontis-blocks')}
-        </p>
+        <NumberInputWithPx
+          value={options.container_column_gap} 
+          onChange={handleColumnGap}
+          onBlur={() => handleNumberBlur('container_column_gap', options.container_column_gap)}
+          min={0}
+          max={2000}
+          device={device}
+          onDeviceChange={handleDevice}
+        />
+      </div>
+
+      <div className="fb-option">
+        <div className="fb-option-label">
+          <h3>{__('Container Row Gap', 'frontis-blocks')}</h3>
+          <p>{__('Set the default gap between container rows in pixels', 'frontis-blocks')}</p>
+        </div>
+        <NumberInputWithPx
+          value={options.container_row_gap} 
+          onChange={handleRowGap}
+          onBlur={() => handleNumberBlur('container_row_gap', options.container_row_gap)}
+          min={0}
+          max={2000}
+          device={device}
+          onDeviceChange={handleDevice}
+        />
       </div>
 
       <div className="fb-option">
@@ -256,19 +318,15 @@ const EditorOptions = () => {
           <h3>{__('Container Padding', 'frontis-blocks')}</h3>
           <p>{__('Set the default padding for containers in pixels', 'frontis-blocks')}</p>
         </div>
-        <p className="fb-button-upcoming">
-          {__('Coming Soon', 'frontis-blocks')}
-        </p>
-      </div>
-
-      <div className="fb-option">
-        <div className="fb-option-label">
-          <h3>{__('Container Elements Gap', 'frontis-blocks')}</h3>
-          <p>{__('Set the default gap between container elements in pixels', 'frontis-blocks')}</p>
-        </div>
-        <p className="fb-button-upcoming">
-          {__('Coming Soon', 'frontis-blocks')}
-        </p>
+        <NumberInputWithPx
+          value={options.container_padding}
+          onChange={handlePadding}
+          onBlur={() => handleNumberBlur('container_padding', options.container_padding)}
+          min={0}
+          max={2000}
+          device={device}
+          onDeviceChange={handleDevice}
+        />
       </div>
 
       <div className="fb-option">

@@ -1347,6 +1347,8 @@
   background-color: #F8F8F8;
   border-radius: 6px;
   overflow: hidden;
+  /* Hide spinner for input type number in Chrome, Safari, Edge */
+  /* Hide spinner for input type number in Firefox */
 }
 .fb-blocks-settings .fb-blocks-settings-options .fb-option .fb-option-input-wrapper .fb-option-input-with-px .components-base-control__field {
   margin-bottom: 0;
@@ -1356,7 +1358,6 @@
   border: none;
   border-radius: 0;
   background-color: transparent;
-  padding: 8px 14px;
   font-family: "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -1366,6 +1367,14 @@
 .fb-blocks-settings .fb-blocks-settings-options .fb-option .fb-option-input-wrapper .fb-option-input-with-px .components-text-control__input:focus {
   outline: none;
   box-shadow: none;
+}
+.fb-blocks-settings .fb-blocks-settings-options .fb-option .fb-option-input-wrapper .fb-option-input-with-px input[type=number]::-webkit-inner-spin-button,
+.fb-blocks-settings .fb-blocks-settings-options .fb-option .fb-option-input-wrapper .fb-option-input-with-px input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.fb-blocks-settings .fb-blocks-settings-options .fb-option .fb-option-input-wrapper .fb-option-input-with-px input[type=number] {
+  -moz-appearance: textfield;
 }
 .fb-blocks-settings .fb-blocks-settings-options .fb-option .fb-option-input-wrapper .fb-option-input-px {
   display: flex;

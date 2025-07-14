@@ -1361,17 +1361,26 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	}
 
 	if ('custom' === containerType) {
-		selectors['.block-editor-block-list__block']['max-width'] = generateCSSUnit(
+		if (!selectors['.wp-block-frontis-blocks-container']) {
+			selectors['.wp-block-frontis-blocks-container'] = {};
+		}
+		selectors['.wp-block-frontis-blocks-container']['max-width'] = generateCSSUnit(
 			containerCustomWidth['Desktop'],
 			containerCustomWidthUnits['Desktop']
 		);
-
-		tablet_selectors['.block-editor-block-list__block']['max-width'] = generateCSSUnit(
+	
+		if (!tablet_selectors['.wp-block-frontis-blocks-container']) {
+			tablet_selectors['.wp-block-frontis-blocks-container'] = {};
+		}
+		tablet_selectors['.wp-block-frontis-blocks-container']['max-width'] = generateCSSUnit(
 			containerCustomWidth['Tablet'],
 			containerCustomWidthUnits['Tablet']
 		);
-
-		mobile_selectors['.block-editor-block-list__block']['max-width'] = generateCSSUnit(
+	
+		if (!mobile_selectors['.wp-block-frontis-blocks-container']) {
+			mobile_selectors['.wp-block-frontis-blocks-container'] = {};
+		}
+		mobile_selectors['.wp-block-frontis-blocks-container']['max-width'] = generateCSSUnit(
 			containerCustomWidth['Mobile'],
 			containerCustomWidthUnits['Mobile']
 		);
