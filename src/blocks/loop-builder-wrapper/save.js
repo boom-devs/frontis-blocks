@@ -19,20 +19,12 @@
 // 	);
 // }
 
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
-export default function save({ attributes }) {
-	const { blockId } = attributes;
-
-	const blockProps = useBlockProps.save({
-		className: `frontis-loop-wrapper uagb-loop-container fb-wrapper-block ${blockId || ''}`,
-	});
-
+export default function save() {
 	return (
-		<div {...blockProps}>
-			<div className="uagb-loop-post">
-				<InnerBlocks.Content />
-			</div>
+		<div {...useBlockProps.save({ className: 'frontis-loop-wrapper uagb-loop-container fb-wrapper-block' })}>
+			<InnerBlocks.Content />
 		</div>
 	);
 }

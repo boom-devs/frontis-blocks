@@ -75,12 +75,9 @@
 // export default compose(applyWithSelect)(Edit);
 
 import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
-import { useEffect } from '@wordpress/element';
 import './editor.scss';
 
 const ALLOWED_BLOCKS = ['frontis-blocks/container'];
-
-const TEMPLATE = [['frontis-blocks/container', {}, [['frontis-blocks/advanced-heading']]]];
 
 export default function Edit({ attributes }) {
 	const { blockId } = attributes;
@@ -90,12 +87,9 @@ export default function Edit({ attributes }) {
 	});
 
 	const innerBlocksProps = useInnerBlocksProps(
-		{
-			className: 'uagb-loop-post',
-		},
+		{},
 		{
 			allowedBlocks: ALLOWED_BLOCKS,
-			template: TEMPLATE,
 			templateLock: false,
 		}
 	);

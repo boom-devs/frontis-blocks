@@ -174,20 +174,13 @@
 // }
 
 
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
-export default function save({ attributes }) {
-	const { blockId } = attributes;
-
-	const blockProps = useBlockProps.save({
-		className: `frontis-loop-builder fb-post-grid-area ${blockId || ''}`,
-	});
-
+export default function save() {
 	return (
-		<div {...blockProps}>
-			<div className="swiper-wrapper fb-swiper-wrapper">
-				<InnerBlocks.Content />
-			</div>
+		<div {...useBlockProps.save()}>
+			<InnerBlocks.Content />
 		</div>
 	);
 }
+
