@@ -228,7 +228,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 clientId={clientId}
             />
 
-            {postLists ? (
+            {/* {postLists ? (
                 <div {...blockProps}>
                     {postLists.length > 0 ? (
                         <>
@@ -272,7 +272,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 </div>
             ) : (
                 <div>Loading...</div>
-            )}
+            )} */}
+
+            <div {...innerBlocksProps} />
         </>
     );
 }
