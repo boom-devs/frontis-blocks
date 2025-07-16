@@ -20,7 +20,7 @@ const Edit = (props) => {
             'frontis-blocks/container',
             {},
             [
-                [ 'frontis-blocks/testimonial' ]
+                [ 'frontis-blocks/advanced-heading',  ]
             ]
         ]
     ];
