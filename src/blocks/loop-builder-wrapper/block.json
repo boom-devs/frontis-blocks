@@ -4,10 +4,20 @@
     "name": "frontis-blocks/loop-builder-wrapper",
     "version": "1.0.0",
     "title": "Wrapper",
+    "ancestor": [ "frontis-blocks/loop-builder" ], 
     "category": "frontis-blocks",
     "textdomain": "frontis-blocks",
 	"description": "A customizable loop builder wrapper block with various styling options.",
     "example": {},
+    "usesContext": [
+		"queryId",
+		"query",
+		"displayLayout",
+		"templateSlug",
+		"previewPostType",
+		"enhancedPagination",
+		"postType"
+	],
     "supports": {
         "anchor": false,
         "align": ["wide", "full"],

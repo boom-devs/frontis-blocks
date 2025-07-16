@@ -74,30 +74,199 @@
 
 // export default compose(applyWithSelect)(Edit);
 
-import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
-import './editor.scss';
+// import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+// import './editor.scss';
 
-const ALLOWED_BLOCKS = ['frontis-blocks/container'];
+// const ALLOWED_BLOCKS = ['frontis-blocks/container'];
 
-export default function Edit({ attributes }) {
-	const { blockId } = attributes;
+// export default function Edit({ attributes }) {
+// 	const { blockId } = attributes;
 
-	const blockProps = useBlockProps({
-		className: `frontis-loop-wrapper uagb-loop-container fb-wrapper-block ${blockId || ''}`,
-	});
+// 	const blockProps = useBlockProps({
+// 		className: `frontis-loop-wrapper uagb-loop-container fb-wrapper-block ${blockId || ''}`,
+// 	});
 
-	const innerBlocksProps = useInnerBlocksProps(
+// 	const innerBlocksProps = useInnerBlocksProps(
+// 		{},
+// 		{
+// 			allowedBlocks: ALLOWED_BLOCKS,
+// 			templateLock: false,
+// 		}
+// 	);
+
+// 	return (
+// 		<div {...blockProps}>
+// 			<div {...innerBlocksProps} />
+// 		</div>
+// 	);
+// }
+
+/**
+ * External dependencies
+ */
+import clsx from 'clsx';
+
+/**
+ * WordPress dependencies
+ */
+import { memo, useMemo, useState } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
+import { __, _x } from '@wordpress/i18n';
+import {
+	BlockControls,
+	BlockContextProvider,
+	__experimentalUseBlockPreview as useBlockPreview,
+	useBlockProps,
+	useInnerBlocksProps,
+	store as blockEditorStore,
+} from '@wordpress/block-editor';
+import { Spinner, ToolbarGroup } from '@wordpress/components';
+import { store as coreStore } from '@wordpress/core-data';
+import { list, grid } from '@wordpress/icons';
+
+const TEMPLATE = [
+	[
+		'frontis-blocks/container',
 		{},
-		{
-			allowedBlocks: ALLOWED_BLOCKS,
-			templateLock: false,
-		}
+		[
+			// [ 'frontis-blocks/advanced-heading' ],
+			[ 'core/post-title' ],
+		]
+	]
+];
+
+function PostTemplateInnerBlocks({ classList }) {
+	const innerBlocksProps = useInnerBlocksProps(
+		{ className: clsx('wp-block-post', classList) },
+		{ template: TEMPLATE, __unstableDisableLayoutClassNames: true }
 	);
 
+	return <li {...innerBlocksProps} />;
+}
+
+function PostTemplateBlockPreview( {
+	blocks,
+	blockContextId,
+	classList,
+	isHidden,
+	setActiveBlockContextId,
+} ) {
+	const blockPreviewProps = useBlockPreview( {
+		blocks,
+		props: {
+			className: clsx( 'wp-block-post', classList ),
+		},
+	} );
+
+	const handleOnClick = () => {
+		setActiveBlockContextId( blockContextId );
+	};
+
+	const style = {
+		display: isHidden ? 'none' : undefined,
+	};
+
 	return (
-		<div {...blockProps}>
-			<div {...innerBlocksProps} />
-		</div>
+		<li
+			{ ...blockPreviewProps }
+			tabIndex={ 0 }
+			role="button"
+			onClick={ handleOnClick }
+			onKeyPress={ handleOnClick }
+			style={ style }
+		/>
+	);
+}
+
+const MemoizedPostTemplateBlockPreview = memo( PostTemplateBlockPreview );
+
+export default function Edit( {
+	setAttributes,
+	clientId,
+	attributes: { layout },
+	__unstableLayoutClassNames,
+} ) {
+	const { type: layoutType, columnCount = 3 } = layout || {};
+	const [ activeBlockContextId, setActiveBlockContextId ] = useState();
+
+	const { posts, blocks } = useSelect(
+		(select) => {
+			const { getEntityRecords } = select('core');
+			return {
+				posts: getEntityRecords('postType', 'post', {
+					per_page: 5,
+					order: 'desc',
+					orderby: 'date',
+				}),
+			};
+		},
+		[]
+	);
+
+	const blockContexts = useMemo(
+		() =>
+			posts?.map( ( post ) => ( {
+				postType: post.type,
+				postId: post.id,
+				classList: post.class_list ?? '',
+			} ) ),
+		[ posts ]
+	);
+
+	const blockProps = useBlockProps( {
+		className: clsx( __unstableLayoutClassNames, {
+			[ `columns-${ columnCount }` ]:
+				layoutType === 'grid' && columnCount,
+		} ),
+	} );
+
+	if ( ! posts ) {
+		return (
+			<p { ...blockProps }>
+				<Spinner />
+			</p>
+		);
+	}
+
+	if ( ! posts.length ) {
+		return <p { ...blockProps }> { __( 'No results found.' ) }</p>;
+	}
+
+	console.log(blockContexts);
+
+	return (
+		<>
+			<ul { ...blockProps }>
+				{ blockContexts &&
+					blockContexts.map( ( blockContext ) => (
+						<BlockContextProvider
+							key={ blockContext.postId }
+							value={ blockContext }
+						>
+							{ blockContext.postId ===
+							( activeBlockContextId ||
+								blockContexts[ 0 ]?.postId ) ? (
+								<PostTemplateInnerBlocks
+									classList={ blockContext.classList }
+								/>
+							) : null }
+							<MemoizedPostTemplateBlockPreview
+								blocks={ blocks }
+								blockContextId={ blockContext.postId }
+								classList={ blockContext.classList }
+								setActiveBlockContextId={
+									setActiveBlockContextId
+								}
+								isHidden={
+									blockContext.postId ===
+									( activeBlockContextId ||
+										blockContexts[ 0 ]?.postId )
+								}
+							/>
+						</BlockContextProvider>
+					) ) }
+			</ul>
+		</>
 	);
 }
 

@@ -4032,6 +4032,50 @@ const attributes = {
 		default: "#e0e0e0",
 	},
 	/** End Post Grid Settings */
+
+
+
+	queryId: {
+		type: "number"
+	},
+	query: {
+	type: "object",
+	default: {
+		perPage: null,
+		pages: 0,
+		offset: 0,
+		postType: "post",
+		order: "desc",
+		orderBy: "date",
+		author: "",
+		search: "",
+		exclude: [],
+		sticky: "",
+		inherit: true,
+		taxQuery: null,
+		parents: [],
+		format: []
+	}
+	},
+	tagName: {
+	type: "string",
+	default: "div"
+	},
+	namespace: {
+	type: "string"
+	},
+	enhancedPagination: {
+	type: "boolean",
+	default: false
+	},
+	blockId: {
+	type: "string",
+	default: ""
+	},
+	blockStyle: {
+	type: "string",
+	default: ""
+	}
 };
 
 export default attributes;
