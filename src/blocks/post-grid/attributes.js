@@ -2640,10 +2640,7 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-	paginationArrowAspectRatio: {
-		type: 'boolean',
-		default: true,
-	},
+
 	paginationArrowBgColorSwitcher : {  
 		type: "string",
 		default: "normal"
@@ -2654,7 +2651,7 @@ const attributes = {
 	},
 	paginationArrowNormalClassicColor: {
 		type: "string",
-		default: "#15171C",
+		default: "#E6E6E6",
 	},
 	paginationArrowNormalGradientColor: {
 		type: "string",
@@ -2688,45 +2685,6 @@ const attributes = {
 	paginationArrowHoverCustomGradientInputValue: {
 		type: "string",
 		default: "",
-	},
-	paginationArrowPaddingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	paginationArrowDesktopPadding: {
-		type: "object", 
-		default: {
-			top: '7',
-			bottom: '7',
-			left: '15',
-			right: '15',
-		},
-	},
-	paginationArrowTabletPadding: {
-		type: "object", 
-		default: {
-			top: '7',
-			bottom: '7',
-			left: '15',
-			right: '15',
-		},
-	},
-	paginationArrowMobilePadding: {
-		type: "object", 
-		default: {
-			top: '7',
-			bottom: '7',
-			left: '15',
-			right: '15',
-		},
-	},
-	paginationArrowPaddingLink: {
-		type: "boolean",
-		default: true
 	},
 
 	paginationArrowBorder: {
@@ -2793,28 +2751,28 @@ const attributes = {
 	paginationArrowDesktopBorderRadius: {
 		type: "object", 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	paginationArrowTabletBorderRadius: {
 		type: "object", 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	paginationArrowMobileBorderRadius: {
 		type: "object", 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	paginationArrowBorderRadiusLink: {
@@ -2854,9 +2812,9 @@ const attributes = {
 	paginationArrowTextFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '24',
-			Tablet: '20',
-			Mobile: '16'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	paginationArrowTextFontSizeUnits: { 
@@ -2869,7 +2827,7 @@ const attributes = {
 	},
 	paginationArrowTextFontWeight: {
 		type: "string",
-		default: "600"
+		default: "400"
 	},
 	paginationArrowTextFontStyle: {
 		type: "string",
@@ -2902,9 +2860,9 @@ const attributes = {
 	paginationArrowTextLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '30',
-			Tablet: '30',
-			Mobile: '30'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	paginationArrowTextLineHeightUnits: {
@@ -2922,37 +2880,21 @@ const attributes = {
 	},
 	paginationArrowTextColor : {
 		type: "string",
-		default: "#FFFFFF"
+		default: ""
 	},
 	paginationArrowTextHoverColor: {
 		type: 'string',
 		default: ""
 	},
-	paginationArrowIconSize: {
+	paginationPrevNextWidth: {
         type: 'object',
         default: {
-            Desktop: '14',
-            Tablet: '14',
-            Mobile: '14'
+            Desktop: '36',
+            Tablet: '36',
+            Mobile: '36'
         }
     },
-    paginationArrowIconSizeUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-	paginationArrowIconSpacing: {
-        type: 'object',
-        default: {
-            Desktop: '10',
-            Tablet: '10',
-            Mobile: '10'
-        }
-    },
-    paginationArrowIconSpacingUnits: {
+    paginationPrevNextWidthUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -2966,7 +2908,7 @@ const attributes = {
     },
     paginationArrowIconColor: {
         type: "string",
-        default: "#FFFFFF"
+        default: ""
     },
     paginationArrowIconHoverColor: {
         type: 'string',
@@ -2978,9 +2920,9 @@ const attributes = {
 	paginationBtnSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '36',
+			Tablet: '36',
+			Mobile: '36'
 		}
 	},
 	paginationBtnSizeUnits: { 
@@ -2991,10 +2933,24 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-	paginationBtnAspectRatio: {
-		type: 'boolean',
-		default: true,
+
+	paginationBtnGap: {
+		type: 'object',
+		default: {
+			Desktop: '4',
+			Tablet: '4',
+			Mobile: '4'
+		}
 	},
+	paginationBtnGapUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
 	paginationBtnBgColorSwitcher : {  
 		type: "string",
 		default: "normal"
@@ -3005,7 +2961,7 @@ const attributes = {
 	},
 	paginationBtnNormalClassicColor: {
 		type: "string",
-		default: "#15171C",
+		default: "",
 	},
 	paginationBtnNormalGradientColor: {
 		type: "string",
@@ -3040,44 +2996,64 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-	paginationBtnPaddingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+
+
+	paginationActiveBtnTextColorSwitcher : {
+		type: "string",
+		default: "normal"
 	},
-	paginationBtnDesktopPadding: {
-		type: "object", 
-		default: {
-			top: '7',
-			bottom: '7',
-			left: '15',
-			right: '15',
-		},
+	paginationActiveBtnTextColor : {
+		type: "string",
+		default: ""
 	},
-	paginationBtnTabletPadding: {
-		type: "object", 
-		default: {
-			top: '7',
-			bottom: '7',
-			left: '15',
-			right: '15',
-		},
+	paginationActiveBtnTextHoverColor: {
+		type: 'string',
+		default: ""
 	},
-	paginationBtnMobilePadding: {
-		type: "object", 
-		default: {
-			top: '5',
-			bottom: '5',
-			left: '12',
-			right: '12',
-		},
+	paginationActiveBtnBgColorSwitcher : {  
+		type: "string",
+		default: "normal"
 	},
-	paginationBtnPaddingLink: {
+	paginationActiveBtnNormalBackgroundType: {   	
+		type: "string",
+		default: "classic",
+	},
+	paginationActiveBtnNormalClassicColor: {
+		type: "string",
+		default: "#E6E6E6",
+	},
+	paginationActiveBtnNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	paginationActiveBtnNormalCustomGradientSwitcher: {
 		type: "boolean",
-		default: true
+		default: false,
+	},
+	paginationActiveBtnNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	paginationActiveBtnHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	paginationActiveBtnHoverClassicColor: {
+		type: "string",
+		default: "#E6E6E6",
+	},
+	paginationActiveBtnHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	paginationActiveBtnHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	paginationActiveBtnHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
 	},
 
 	paginationBtnBorder: {
@@ -3144,28 +3120,28 @@ const attributes = {
 	paginationBtnDesktopBorderRadius: {
 		type: "object", 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	paginationBtnTabletBorderRadius: {
 		type: "object", 
-		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+		default: {	
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	paginationBtnMobileBorderRadius: {
 		type: "object", 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
 		},
 	},
 	paginationBtnBorderRadiusLink: {
@@ -3205,17 +3181,9 @@ const attributes = {
 	paginationBtnTextFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '24',
-			Tablet: '20',
-			Mobile: '16'
-		}
-	},
-	paginationBtnTextFontSize: {
-		type: 'object',
-		default: {
-			Desktop: '24',
-			Tablet: '20',
-			Mobile: '16'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	paginationBtnTextFontSizeUnits: { 
@@ -3228,7 +3196,7 @@ const attributes = {
 	},
 	paginationBtnTextFontWeight: {
 		type: "string",
-		default: "600"
+		default: "400"
 	},
 	paginationBtnTextFontStyle: {
 		type: "string",
@@ -3261,9 +3229,9 @@ const attributes = {
 	paginationBtnTextLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '22',
-			Tablet: '22',
-			Mobile: '22'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	paginationBtnTextLineHeightUnits: {
@@ -3281,7 +3249,7 @@ const attributes = {
 	},
 	paginationBtnTextColor : {
 		type: "string",
-		default: "#FFFFFF"
+		default: ""
 	},
 	paginationBtnTextHoverColor: {
 		type: 'string',

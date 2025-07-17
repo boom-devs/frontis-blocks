@@ -573,19 +573,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** End Filter By Taxonomy */
 
 
-        /** Start Load More */
+        /** Start Pagination */
         loadMoreType,
         paginationPrevNextType,
         paginationPrevTxt,
         paginationPrevIcon, 
         paginationNextTxt,
         paginationNextIcon,
-        /** End Load More */
+        /** End Pagination */
 
         /** Pagination Arrow */
         paginationArrowSize,
         paginationArrowSizeUnits,
-        paginationArrowAspectRatio,
 
         paginationArrowBgColorSwitcher,
         paginationArrowNormalBackgroundType,
@@ -598,12 +597,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         paginationArrowHoverGradientColor,
         paginationArrowHoverCustomGradientSwitcher,
         paginationArrowHoverCustomGradientInputValue,
-
-        paginationArrowPaddingUnits,
-        paginationArrowDesktopPadding,
-        paginationArrowTabletPadding,
-        paginationArrowMobilePadding,
-        paginationArrowPaddingLink,
 
         paginationArrowBorder,
         paginationArrowBorderColorSwitcher,
@@ -642,10 +635,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         paginationArrowTextColor,
         paginationArrowTextHoverColor,
 
-        paginationArrowIconSize,
-        paginationArrowIconSizeUnits,
-        paginationArrowIconSpacing,
-        paginationArrowIconSpacingUnits,
+        paginationPrevNextWidth,
+        paginationPrevNextWidthUnits,
         paginationArrowIconColorSwitcher,
         paginationArrowIconColor,
         paginationArrowIconHoverColor,
@@ -653,7 +644,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** Pagination Button */
         paginationBtnSize,
         paginationBtnSizeUnits,
-        paginationBtnAspectRatio,
+        paginationBtnGap,
+        paginationBtnGapUnits,
 
         paginationBtnBgColorSwitcher,
         paginationBtnNormalBackgroundType,
@@ -667,11 +659,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         paginationBtnHoverCustomGradientSwitcher,
         paginationBtnHoverCustomGradientInputValue,
 
-        paginationBtnPaddingUnits,
-        paginationBtnDesktopPadding,
-        paginationBtnTabletPadding,
-        paginationBtnMobilePadding,
-        paginationBtnPaddingLink,
+        paginationActiveBtnTextColorSwitcher,
+        paginationActiveBtnTextColor,
+        paginationActiveBtnTextHoverColor,
+
+        paginationActiveBtnBgColorSwitcher,
+        paginationActiveBtnNormalBackgroundType,
+        paginationActiveBtnNormalClassicColor,
+        paginationActiveBtnNormalGradientColor,
+        paginationActiveBtnNormalCustomGradientSwitcher,
+        paginationActiveBtnNormalCustomGradientInputValue,
+        paginationActiveBtnHoverBackgroundType,
+        paginationActiveBtnHoverClassicColor,
+        paginationActiveBtnHoverGradientColor,
+        paginationActiveBtnHoverCustomGradientSwitcher,
+        paginationActiveBtnHoverCustomGradientInputValue,
 
         paginationBtnBorder,
         paginationBtnBorderColorSwitcher,
@@ -3622,78 +3624,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     // Pagination Arrow Settings
-    /** Start Pagination Arrow Padding */
-	const handlePaginationArrowPaddingUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( paginationArrowPaddingLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						paginationArrowDesktopPadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						paginationArrowTabletPadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						paginationArrowMobilePadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {paginationArrowDesktopPadding: {...paginationArrowDesktopPadding, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {paginationArrowTabletPadding: {...paginationArrowTabletPadding, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {paginationArrowMobilePadding: {...paginationArrowMobilePadding, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-
-	const handlePaginationArrowPaddingCombineBtn = () => {
-		setAttributes( {paginationArrowPaddingLink: !paginationArrowPaddingLink} );
-	}
-
-	const handlePaginationArrowPaddingUnitsHandler = (unit) => {
-		setAttributes( {
-			paginationArrowPaddingUnits: {
-				...paginationArrowPaddingUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-	const paginationArrowDesktopPaddingWidth = `${paginationArrowDesktopPadding.top}${paginationArrowPaddingUnits.Desktop} ${paginationArrowDesktopPadding.right}${paginationArrowPaddingUnits.Desktop} ${paginationArrowDesktopPadding.bottom}${paginationArrowPaddingUnits.Desktop} ${paginationArrowDesktopPadding.left}${paginationArrowPaddingUnits.Desktop}`;
-	const paginationArrowTabletPaddingWidth = `${paginationArrowTabletPadding.top}${paginationArrowPaddingUnits.Tablet} ${paginationArrowTabletPadding.right}${paginationArrowPaddingUnits.Tablet} ${paginationArrowTabletPadding.bottom}${paginationArrowPaddingUnits.Tablet} ${paginationArrowTabletPadding.left}${paginationArrowPaddingUnits.Tablet}`;
-	const paginationArrowMobilePaddingWidth = `${paginationArrowMobilePadding.top}${paginationArrowPaddingUnits.Mobile} ${paginationArrowMobilePadding.right}${paginationArrowPaddingUnits.Mobile} ${paginationArrowMobilePadding.bottom}${paginationArrowPaddingUnits.Mobile} ${paginationArrowMobilePadding.left}${paginationArrowPaddingUnits.Mobile}`;
-	/** End Pagination Arrow Padding */
 
     /** Start Pagination Arrow Border */
 	const handlePaginationArrowBorderUnitChange = ( event, position ) => {
@@ -3840,79 +3770,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const paginationArrowTabletBorderRadiusWidth = `${paginationArrowTabletBorderRadius.top}${paginationArrowBorderRadiusUnits.Tablet} ${paginationArrowTabletBorderRadius.right}${paginationArrowBorderRadiusUnits.Tablet} ${paginationArrowTabletBorderRadius.bottom}${paginationArrowBorderRadiusUnits.Tablet} ${paginationArrowTabletBorderRadius.left}${paginationArrowBorderRadiusUnits.Tablet}`;
 	const paginationArrowMobileBorderRadiusWidth = `${paginationArrowMobileBorderRadius.top}${paginationArrowBorderRadiusUnits.Mobile} ${paginationArrowMobileBorderRadius.right}${paginationArrowBorderRadiusUnits.Mobile} ${paginationArrowMobileBorderRadius.bottom}${paginationArrowBorderRadiusUnits.Mobile} ${paginationArrowMobileBorderRadius.left}${paginationArrowBorderRadiusUnits.Mobile}`;
 	/** End Pagination Arrow Border */
-
-    /** Start Pagination Button Padding */
-	const handlePaginationBtnPaddingUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( paginationBtnPaddingLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						paginationBtnDesktopPadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						paginationBtnTabletPadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						paginationBtnMobilePadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {paginationBtnDesktopPadding: {...paginationBtnDesktopPadding, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {paginationBtnTabletPadding: {...paginationBtnTabletPadding, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {paginationBtnMobilePadding: {...paginationBtnMobilePadding, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
-
-	}
-
-	const handlePaginationBtnPaddingCombineBtn = () => {
-		setAttributes( {paginationBtnPaddingLink: !paginationBtnPaddingLink} );
-	}
-
-	const handlePaginationBtnPaddingUnitsHandler = (unit) => {
-		setAttributes( {
-			paginationBtnPaddingUnits: {
-				...paginationBtnPaddingUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-	const paginationBtnDesktopPaddingWidth = `${paginationBtnDesktopPadding.top}${paginationBtnPaddingUnits.Desktop} ${paginationBtnDesktopPadding.right}${paginationBtnPaddingUnits.Desktop} ${paginationBtnDesktopPadding.bottom}${paginationBtnPaddingUnits.Desktop} ${paginationBtnDesktopPadding.left}${paginationBtnPaddingUnits.Desktop}`;
-	const paginationBtnTabletPaddingWidth = `${paginationBtnTabletPadding.top}${paginationBtnPaddingUnits.Tablet} ${paginationBtnTabletPadding.right}${paginationBtnPaddingUnits.Tablet} ${paginationBtnTabletPadding.bottom}${paginationBtnPaddingUnits.Tablet} ${paginationBtnTabletPadding.left}${paginationBtnPaddingUnits.Tablet}`;
-	const paginationBtnMobilePaddingWidth = `${paginationBtnMobilePadding.top}${paginationBtnPaddingUnits.Mobile} ${paginationBtnMobilePadding.right}${paginationBtnPaddingUnits.Mobile} ${paginationBtnMobilePadding.bottom}${paginationBtnPaddingUnits.Mobile} ${paginationBtnMobilePadding.left}${paginationBtnPaddingUnits.Mobile}`;
-	/** End Pagination Button Padding */
 
     /** Start Pagination Button Border */
 	const handlePaginationBtnBorderUnitChange = ( event, position ) => {
@@ -4110,7 +3967,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             grid-column: span ${gridColumnsPerSection.Desktop};
         }
 
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more {
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more {
             ${loadMoreTextGlobalTypoSwitcher.fontFamily === true && loadMoreTextGlobalTypographyData.fontFamily ? `font-family: ${loadMoreTextGlobalTypographyData.fontFamily};` : ''}
             ${loadMoreTextGlobalTypoSwitcher.fontSize === true && loadMoreTextGlobalTypographyData.fontSize ? `font-size: ${loadMoreTextGlobalTypographyData.fontSize};` : ''}
             ${loadMoreTextGlobalTypoSwitcher.fontWeight === true && loadMoreTextGlobalTypographyData.fontWeight ? `font-weight: ${loadMoreTextGlobalTypographyData.fontWeight};` : ''}
@@ -4142,7 +3999,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         }
 
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more:hover {
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more:hover {
             ${loadMoreButtonHoverBackgroundType === 'gradient' ? `   
                 ${loadMoreButtonHoverCustomGradientSwitcher && loadMoreButtonHoverCustomGradientInputValue ? `background: ${loadMoreButtonHoverCustomGradientInputValue};` : `background: ${loadMoreButtonHoverGradientColor};`}
             `: `
@@ -4151,18 +4008,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${loadMoreTextHoverColor ? `color: ${loadMoreTextHoverColor};` : ''} 
             ${loadMoreButtonBorderHoverColor ? `border-color: ${loadMoreButtonBorderHoverColor};` : ''}
         }
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more .load_more_button_icon svg {
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more .load_more_button_icon svg {
             ${loadMoreIconSize.Desktop ? `width: ${loadMoreIconSize.Desktop}${loadMoreIconSizeUnits.Desktop};` : ''}
             ${loadMoreIconSize.Desktop ? `height: ${loadMoreIconSize.Desktop}${loadMoreIconSizeUnits.Desktop};` : ''}
             ${loadMoreIconColor ? `fill: ${loadMoreIconColor};` : ''}
             ${loadMoreIconDesktopMarginWidth && loadMoreIconDesktopMargin.top ? `margin: ${loadMoreIconDesktopMarginWidth};` : ''}
         }
 
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more:hover .load_more_button_icon svg{
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more:hover .load_more_button_icon svg{
             ${loadMoreIconHoverColor ? `fill: ${loadMoreIconHoverColor};` : ''}
         }
 
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more_loader {
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more_loader {
             border-top: 2px solid ${loadMoreloaderColor ? loadMoreloaderColor : '#FFFFFF'};
 			border-right: 2px solid ${loadMoreloaderColor ? loadMoreloaderColor : '#FFFFFF'};
 			border-bottom: 2px solid ${loadMoreloaderColor ? loadMoreloaderColor : '#FFFFFF'};
@@ -4173,30 +4030,151 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: all .3s ease-in-out;
 			animation: loader 1s linear infinite;
         }
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper:hover .fb_load_more_loader {
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper:hover .fb_load_more_loader {
             border-top: 2px solid ${loadMoreloaderHoverColor ? loadMoreloaderHoverColor : '#FFFFFF'};
 			border-right: 2px solid ${loadMoreloaderHoverColor ? loadMoreloaderHoverColor : '#FFFFFF'};
 			border-bottom: 2px solid ${loadMoreloaderHoverColor ? loadMoreloaderHoverColor : '#FFFFFF'};
             transition: all .3s ease-in-out;
         }
 
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination_wrapper {
-        }
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination {
-        }
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination_item {
-        }
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination_item.active {
-        
-        }
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination_previous,
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination_next {
 
-        }
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination_previous_icon,
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_pagination_next_icon {
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next{
+            ${paginationPrevNextWidth.Desktop ? `width: ${paginationPrevNextWidth.Desktop}${paginationPrevNextWidthUnits.Desktop};` : ''}
+            ${paginationPrevNextWidth.Desktop ? `height: ${paginationPrevNextWidth.Desktop}${paginationPrevNextWidthUnits.Desktop};` : ''}
 
+            ${paginationArrowBorder ? `border: ${paginationArrowBorder};` : ''} 
+            ${paginationArrowBorderColor ? `border-color: ${paginationArrowBorderColor};` : ''}
+            ${paginationArrowDesktopBorderWidth && paginationArrowDesktopBorder.top ? `border-width: ${paginationArrowDesktopBorderWidth};` : ''}
+            ${paginationArrowDesktopBorderRadiusWidth && paginationArrowDesktopBorderRadius.top? `border-radius: ${paginationArrowDesktopBorderRadiusWidth};` : ''}
+
+            ${paginationArrowNormalBackgroundType === 'gradient' ? `   
+                ${paginationArrowNormalCustomGradientSwitcher && paginationArrowNormalCustomGradientInputValue ? `background: ${paginationArrowNormalCustomGradientInputValue};` : `background: ${paginationArrowNormalGradientColor};`}
+            `: `
+                ${paginationArrowNormalClassicColor ? `background: ${paginationArrowNormalClassicColor};` : ''}
+            `}
         }
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous:hover,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next:hover{
+            ${paginationArrowBorderHoverColor ? `border-color: ${paginationArrowBorderHoverColor};` : ''}
+
+            ${paginationArrowHoverBackgroundType === 'gradient' ? `    
+                ${paginationArrowHoverCustomGradientSwitcher && paginationArrowHoverCustomGradientInputValue ? `background: ${paginationArrowHoverCustomGradientInputValue};` : `background: ${paginationArrowHoverGradientColor};`}
+            `: `
+                ${paginationArrowHoverClassicColor ? `background: ${paginationArrowHoverClassicColor};` : ''}
+            `}
+        }
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon{
+            ${paginationArrowSize.Desktop ? `width: ${paginationArrowSize.Desktop}${paginationArrowSizeUnits.Desktop};` : ''}
+            ${paginationArrowSize.Desktop ? `height: ${paginationArrowSize.Desktop}${paginationArrowSizeUnits.Desktop};` : ''}
+        }
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon svg,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon svg{
+            ${paginationArrowIconColor ? `fill: ${paginationArrowIconColor};` : ''}
+        }
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous:hover .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon svg,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next:hover .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon svg{
+            ${paginationArrowIconHoverColor ? `fill: ${paginationArrowIconHoverColor};` : ''}
+        }
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_text,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_text{
+            ${paginationArrowTextGlobalTypoSwitcher.fontFamily === true && paginationArrowTextGlobalTypographyData.fontFamily ? `font-family: ${paginationArrowTextGlobalTypographyData.fontFamily};` : ''}  
+            ${paginationArrowTextGlobalTypoSwitcher.fontSize === true && paginationArrowTextGlobalTypographyData.fontSize ? `font-size: ${paginationArrowTextGlobalTypographyData.fontSize};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.fontWeight === true && paginationArrowTextGlobalTypographyData.fontWeight ? `font-weight: ${paginationArrowTextGlobalTypographyData.fontWeight};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.fontStyle === true && paginationArrowTextGlobalTypographyData.fontStyle ? `font-style: ${paginationArrowTextGlobalTypographyData.fontStyle};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.textTransform === true && paginationArrowTextGlobalTypographyData.textTransform ? `text-transform: ${paginationArrowTextGlobalTypographyData.textTransform};` : ''} 
+            ${paginationArrowTextGlobalTypoSwitcher.textDecoration === true && paginationArrowTextGlobalTypographyData.textDecoration ? `text-decoration: ${paginationArrowTextGlobalTypographyData.textDecoration};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.letterSpacing === true && paginationArrowTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${paginationArrowTextGlobalTypographyData.letterSpacing};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.lineHeight === true && paginationArrowTextGlobalTypographyData.lineHeight ? `line-height: ${paginationArrowTextGlobalTypographyData.lineHeight};` : ''}
+            
+        	${paginationArrowTextGlobalTypoSwitcher.fontFamily === false && paginationArrowTextFontFamily && paginationArrowTextFontFamily !== 'Default' ? `font-family: ${paginationArrowTextFontFamily};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.fontSize === false && paginationArrowTextFontSize.Desktop ? `font-size: ${paginationArrowTextFontSize.Desktop}${paginationArrowTextFontSizeUnits.Desktop};` : ''} 
+			${paginationArrowTextGlobalTypoSwitcher.fontWeight === false && paginationArrowTextFontWeight ? `font-weight: ${paginationArrowTextFontWeight};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.fontStyle === false && paginationArrowTextFontStyle ? `font-style: ${paginationArrowTextFontStyle};` : ''}  
+			${paginationArrowTextGlobalTypoSwitcher.textTransform === false && paginationArrowTextTransform ? `text-transform: ${paginationArrowTextTransform};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.textDecoration === false && paginationArrowTextDecoration ? `text-decoration: ${paginationArrowTextDecoration};` : ''} 
+			${paginationArrowTextGlobalTypoSwitcher.letterSpacing === false && paginationArrowTextLetterSpacing.Desktop ? `letter-spacing: ${paginationArrowTextLetterSpacing.Desktop}${paginationArrowTextLetterSpacingUnits.Desktop};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.lineHeight === false && paginationArrowTextLineHeight.Desktop ? `line-height: ${paginationArrowTextLineHeight.Desktop}${paginationArrowTextLineHeightUnits.Desktop};` : ''}
+
+            ${paginationArrowTextColor ? `color: ${paginationArrowTextColor};` : ''}
+        }
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous:hover .fb_pagination_previous_text,
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next:hover .fb_pagination_next_text{ 
+            ${paginationArrowTextHoverColor ? `color: ${paginationArrowTextHoverColor};` : ''}
+        }
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination {
+            ${paginationBtnGap.Desktop ? `gap: ${paginationBtnGap.Desktop}${paginationBtnGapUnits.Desktop};` : ''}
+        }
+                
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item {
+            ${paginationBtnSize.Desktop ? `width: ${paginationBtnSize.Desktop}${paginationBtnSizeUnits.Desktop};` : ''}  
+            ${paginationBtnSize.Desktop ? `height: ${paginationBtnSize.Desktop}${paginationBtnSizeUnits.Desktop};` : ''}
+
+            ${paginationBtnTextGlobalTypoSwitcher.fontFamily === true && paginationBtnTextGlobalTypographyData.fontFamily ? `font-family: ${paginationBtnTextGlobalTypographyData.fontFamily};` : ''}  
+            ${paginationBtnTextGlobalTypoSwitcher.fontSize === true && paginationBtnTextGlobalTypographyData.fontSize ? `font-size: ${paginationBtnTextGlobalTypographyData.fontSize};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.fontWeight === true && paginationBtnTextGlobalTypographyData.fontWeight ? `font-weight: ${paginationBtnTextGlobalTypographyData.fontWeight};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.fontStyle === true && paginationBtnTextGlobalTypographyData.fontStyle ? `font-style: ${paginationBtnTextGlobalTypographyData.fontStyle};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.textTransform === true && paginationBtnTextGlobalTypographyData.textTransform ? `text-transform: ${paginationBtnTextGlobalTypographyData.textTransform};` : ''} 
+            ${paginationBtnTextGlobalTypoSwitcher.textDecoration === true && paginationBtnTextGlobalTypographyData.textDecoration ? `text-decoration: ${paginationBtnTextGlobalTypographyData.textDecoration};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.letterSpacing === true && paginationBtnTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${paginationBtnTextGlobalTypographyData.letterSpacing};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.lineHeight === true && paginationBtnTextGlobalTypographyData.lineHeight ? `line-height: ${paginationBtnTextGlobalTypographyData.lineHeight};` : ''}
+            
+        	${paginationBtnTextGlobalTypoSwitcher.fontFamily === false && paginationBtnTextFontFamily && paginationBtnTextFontFamily !== 'Default' ? `font-family: ${paginationBtnTextFontFamily};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.fontSize === false && paginationBtnTextFontSize.Desktop ? `font-size: ${paginationBtnTextFontSize.Desktop}${paginationBtnTextFontSizeUnits.Desktop};` : ''} 
+			${paginationBtnTextGlobalTypoSwitcher.fontWeight === false && paginationBtnTextFontWeight ? `font-weight: ${paginationBtnTextFontWeight};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.fontStyle === false && paginationBtnTextFontStyle ? `font-style: ${paginationBtnTextFontStyle};` : ''}  
+			${paginationBtnTextGlobalTypoSwitcher.textTransform === false && paginationBtnTextTransform ? `text-transform: ${paginationBtnTextTransform};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.textDecoration === false && paginationBtnTextDecoration ? `text-decoration: ${paginationBtnTextDecoration};` : ''} 
+			${paginationBtnTextGlobalTypoSwitcher.letterSpacing === false && paginationBtnTextLetterSpacing.Desktop ? `letter-spacing: ${paginationBtnTextLetterSpacing.Desktop}${paginationBtnTextLetterSpacingUnits.Desktop};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.lineHeight === false && paginationBtnTextLineHeight.Desktop ? `line-height: ${paginationBtnTextLineHeight.Desktop}${paginationBtnTextLineHeightUnits.Desktop};` : ''}
+
+            ${paginationBtnTextColor ? `color: ${paginationBtnTextColor};` : ''}
+
+            ${paginationBtnBorder ? `border: ${paginationBtnBorder};` : ''} 
+            ${paginationBtnBorderColor ? `border-color: ${paginationBtnBorderColor};` : ''}
+            ${paginationBtnDesktopBorderWidth && paginationBtnDesktopBorder.top ? `border-width: ${paginationBtnDesktopBorderWidth};` : ''}
+            ${paginationBtnDesktopBorderRadiusWidth && paginationBtnDesktopBorderRadius.top? `border-radius: ${paginationBtnDesktopBorderRadiusWidth};` : ''}
+
+            ${paginationBtnNormalBackgroundType === 'gradient' ? `   
+                ${paginationBtnNormalCustomGradientSwitcher && paginationBtnNormalCustomGradientInputValue ? `background: ${paginationBtnNormalCustomGradientInputValue};` : `background: ${paginationBtnNormalGradientColor};`}
+            `: `
+                ${paginationBtnNormalClassicColor ? `background: ${paginationBtnNormalClassicColor};` : ''}
+            `}
+        }
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item:hover {
+            ${paginationBtnTextHoverColor ? `color: ${paginationBtnTextHoverColor};` : ''}
+            ${paginationBtnHoverBackgroundType === 'gradient' ? `    
+                ${paginationBtnHoverCustomGradientSwitcher && paginationBtnHoverCustomGradientInputValue ? `background: ${paginationBtnHoverCustomGradientInputValue};` : `background: ${paginationBtnHoverGradientColor};`}
+            `: `
+                ${paginationBtnHoverClassicColor ? `background: ${paginationBtnHoverClassicColor};` : ''}
+            `}
+        }
+
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item.active { 
+            ${paginationActiveBtnTextColor ? `color: ${paginationActiveBtnTextColor};` : ''} 
+            ${paginationActiveBtnNormalBackgroundType === 'gradient' ? `      
+                ${paginationActiveBtnNormalCustomGradientSwitcher && paginationActiveBtnNormalCustomGradientInputValue ? `background: ${paginationActiveBtnNormalCustomGradientInputValue};` : `background: ${paginationActiveBtnNormalGradientColor};`}
+            `: `
+                ${paginationActiveBtnNormalClassicColor ? `background: ${paginationActiveBtnNormalClassicColor};` : ''} 
+            `}
+        }
+        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item.active:hover { 
+            ${paginationActiveBtnTextHoverColor ? `color: ${paginationActiveBtnTextHoverColor};` : ''} 
+            ${paginationActiveBtnHoverBackgroundType === 'gradient' ? `    
+                ${paginationActiveBtnHoverCustomGradientSwitcher && paginationActiveBtnHoverCustomGradientInputValue ? `background: ${paginationActiveBtnHoverCustomGradientInputValue};` : `background: ${paginationActiveBtnHoverGradientColor};`}
+            `: `
+                ${paginationActiveBtnHoverClassicColor ? `background: ${paginationActiveBtnHoverClassicColor};` : ''} 
+            `}
+        }
+
 
         .${blockId}.fb_post_grid_container.list-layout {
             display: grid;
@@ -4905,6 +4883,45 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 transform: rotate(${buttonImageRotateHover.Tablet}deg);
             }
 
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous,
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next{
+                ${paginationPrevNextWidth.Tablet ? `width: ${paginationPrevNextWidth.Tablet}${paginationPrevNextWidthUnits.Tablet};` : ''} 
+                ${paginationPrevNextWidth.Tablet ? `height: ${paginationPrevNextWidth.Tablet}${paginationPrevNextWidthUnits.Tablet};` : ''}
+
+                ${paginationArrowTabletBorderWidth && paginationArrowTabletBorder.top ? `border-width: ${paginationArrowTabletBorderWidth};` : ''}
+                ${paginationArrowTabletBorderRadiusWidth && paginationArrowTabletBorderRadius.top? `border-radius: ${paginationArrowTabletBorderRadiusWidth};` : ''}
+
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon,
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon{
+                ${paginationArrowSize.Tablet ? `width: ${paginationArrowSize.Tablet}${paginationArrowSizeUnits.Tablet};` : ''}
+                ${paginationArrowSize.Tablet ? `height: ${paginationArrowSize.Tablet}${paginationArrowSizeUnits.Tablet};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_text,
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_text{
+                ${paginationArrowTextGlobalTypoSwitcher.fontSize === false && paginationArrowTextFontSize.Tablet ? `font-size: ${paginationArrowTextFontSize.Tablet}${paginationArrowTextFontSizeUnits.Tablet};` : ''} 
+                ${paginationArrowTextGlobalTypoSwitcher.letterSpacing === false && paginationArrowTextLetterSpacing.Tablet ? `letter-spacing: ${paginationArrowTextLetterSpacing.Tablet}${paginationArrowTextLetterSpacingUnits.Tablet};` : ''}
+                ${paginationArrowTextGlobalTypoSwitcher.lineHeight === false && paginationArrowTextLineHeight.Tablet ? `line-height: ${paginationArrowTextLineHeight.Tablet}${paginationArrowTextLineHeightUnits.Tablet};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination {
+                ${paginationBtnGap.Tablet ? `gap: ${paginationBtnGap.Tablet}${paginationBtnGapUnits.Tablet};` : ''}
+            }
+                    
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item {
+                ${paginationBtnSize.Tablet ? `width: ${paginationBtnSize.Tablet}${paginationBtnSizeUnits.Tablet};` : ''}  
+                ${paginationBtnSize.Tablet ? `height: ${paginationBtnSize.Tablet}${paginationBtnSizeUnits.Tablet};` : ''}
+
+                ${paginationBtnTextGlobalTypoSwitcher.fontSize === false && paginationBtnTextFontSize.Tablet ? `font-size: ${paginationBtnTextFontSize.Tablet}${paginationBtnTextFontSizeUnits.Tablet};` : ''} 
+                ${paginationBtnTextGlobalTypoSwitcher.letterSpacing === false && paginationBtnTextLetterSpacing.Tablet ? `letter-spacing: ${paginationBtnTextLetterSpacing.Tablet}${paginationBtnTextLetterSpacingUnits.Tablet};` : ''}
+                ${paginationBtnTextGlobalTypoSwitcher.lineHeight === false && paginationBtnTextLineHeight.Tablet ? `line-height: ${paginationBtnTextLineHeight.Tablet}${paginationBtnTextLineHeightUnits.Tablet};` : ''}
+
+                ${paginationBtnTabletBorderWidth && paginationBtnTabletBorder.top ? `border-width: ${paginationBtnTabletBorderWidth};` : ''}
+                ${paginationBtnTabletBorderRadiusWidth && paginationBtnTabletBorderRadius.top? `border-radius: ${paginationBtnTabletBorderRadiusWidth};` : ''}
+            }
+
         }
 
         @media only screen and (max-width: 767px) {
@@ -5198,6 +5215,45 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             .${blockId} .fb_post_grid_read_more_button:hover .fb_post_grid_read_more_icon_wrapper .fb_post_grid_read_more_icon_image {
                 transform: rotate(${buttonImageRotateHover.Mobile}deg);
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous,
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next{
+                ${paginationPrevNextWidth.Mobile ? `width: ${paginationPrevNextWidth.Mobile}${paginationPrevNextWidthUnits.Mobile};` : ''} 
+                ${paginationPrevNextWidth.Mobile ? `height: ${paginationPrevNextWidth.Mobile}${paginationPrevNextWidthUnits.Mobile};` : ''}
+
+                ${paginationArrowMobileBorderWidth && paginationArrowMobileBorder.top ? `border-width: ${paginationArrowMobileBorderWidth};` : ''}
+                ${paginationArrowMobileBorderRadiusWidth && paginationArrowMobileBorderRadius.top? `border-radius: ${paginationArrowMobileBorderRadiusWidth};` : ''}
+
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon,
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon{
+                ${paginationArrowSize.Mobile ? `width: ${paginationArrowSize.Mobile}${paginationArrowSizeUnits.Mobile};` : ''}
+                ${paginationArrowSize.Mobile ? `height: ${paginationArrowSize.Mobile}${paginationArrowSizeUnits.Mobile};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_text,
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_text{ 
+                ${paginationArrowTextGlobalTypoSwitcher.fontSize === false && paginationArrowTextFontSize.Mobile ? `font-size: ${paginationArrowTextFontSize.Mobile}${paginationArrowTextFontSizeUnits.Mobile};` : ''} 
+                ${paginationArrowTextGlobalTypoSwitcher.letterSpacing === false && paginationArrowTextLetterSpacing.Mobile ? `letter-spacing: ${paginationArrowTextLetterSpacing.Mobile}${paginationArrowTextLetterSpacingUnits.Mobile};` : ''}
+                ${paginationArrowTextGlobalTypoSwitcher.lineHeight === false && paginationArrowTextLineHeight.Mobile ? `line-height: ${paginationArrowTextLineHeight.Mobile}${paginationArrowTextLineHeightUnits.Mobile};` : ''}
+            }
+
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination {
+                ${paginationBtnGap.Mobile ? `gap: ${paginationBtnGap.Mobile}${paginationBtnGapUnits.Mobile};` : ''}
+            }
+                    
+            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item {
+                ${paginationBtnSize.Mobile ? `width: ${paginationBtnSize.Mobile}${paginationBtnSizeUnits.Mobile};` : ''}  
+                ${paginationBtnSize.Mobile ? `height: ${paginationBtnSize.Mobile}${paginationBtnSizeUnits.Mobile};` : ''}
+
+                ${paginationBtnTextGlobalTypoSwitcher.fontSize === false && paginationBtnTextFontSize.Mobile ? `font-size: ${paginationBtnTextFontSize.Mobile}${paginationBtnTextFontSizeUnits.Mobile};` : ''} 
+                ${paginationBtnTextGlobalTypoSwitcher.letterSpacing === false && paginationBtnTextLetterSpacing.Mobile ? `letter-spacing: ${paginationBtnTextLetterSpacing.Mobile}${paginationBtnTextLetterSpacingUnits.Mobile};` : ''}
+                ${paginationBtnTextGlobalTypoSwitcher.lineHeight === false && paginationBtnTextLineHeight.Mobile ? `line-height: ${paginationBtnTextLineHeight.Mobile}${paginationBtnTextLineHeightUnits.Mobile};` : ''}
+
+                ${paginationBtnMobileBorderWidth && paginationBtnMobileBorder.top ? `border-width: ${paginationBtnMobileBorderWidth};` : ''}
+                ${paginationBtnMobileBorderRadiusWidth && paginationBtnMobileBorderRadius.top? `border-radius: ${paginationBtnMobileBorderRadiusWidth};` : ''}
             }
         }
 
@@ -5885,6 +5941,157 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGridSkeletonBgColor,
         postGridSkeletonHighlightBgColor,
         /** End Skeleton Settings */
+
+        /** Start Pagination */
+        loadMoreType,
+        paginationPrevNextType,
+        paginationPrevTxt,
+        paginationPrevIcon, 
+        paginationNextTxt,
+        paginationNextIcon,
+        /** End Pagination */
+
+        /** Pagination Arrow */
+        paginationArrowSize,
+        paginationArrowSizeUnits,
+
+        paginationArrowBgColorSwitcher,
+        paginationArrowNormalBackgroundType,
+        paginationArrowNormalClassicColor,
+        paginationArrowNormalGradientColor,
+        paginationArrowNormalCustomGradientSwitcher,
+        paginationArrowNormalCustomGradientInputValue,
+        paginationArrowHoverBackgroundType,
+        paginationArrowHoverClassicColor,
+        paginationArrowHoverGradientColor,
+        paginationArrowHoverCustomGradientSwitcher,
+        paginationArrowHoverCustomGradientInputValue,
+
+        paginationArrowBorder,
+        paginationArrowBorderColorSwitcher,
+        paginationArrowBorderColor,
+        paginationArrowBorderHoverColor,
+
+        paginationArrowBorderUnits,
+        paginationArrowDesktopBorder,
+        paginationArrowTabletBorder,
+        paginationArrowMobileBorder,
+        paginationArrowBorderLink,
+        paginationArrowDesktopBorderWidth,
+        paginationArrowTabletBorderWidth,
+        paginationArrowMobileBorderWidth,
+
+        paginationArrowBorderRadiusUnits,
+        paginationArrowDesktopBorderRadius,
+        paginationArrowTabletBorderRadius,
+        paginationArrowMobileBorderRadius,
+        paginationArrowBorderRadiusLink,
+        paginationArrowDesktopBorderRadiusWidth,
+        paginationArrowTabletBorderRadiusWidth,
+        paginationArrowMobileBorderRadiusWidth,
+
+        paginationArrowTextGlobalTypoSwitcher,
+        paginationArrowTextGlobalTypographyData,
+        paginationArrowTextGlobalTypoType,
+        paginationArrowTextGlobalTypoOption,
+        paginationArrowTextFontFamily,
+        paginationArrowTextFontSize,
+        paginationArrowTextFontSizeUnits,
+        paginationArrowTextFontWeight,
+        paginationArrowTextFontStyle,
+        paginationArrowTextTransform,
+        paginationArrowTextDecoration,
+        paginationArrowTextLetterSpacing,
+        paginationArrowTextLetterSpacingUnits,
+        paginationArrowTextLineHeight,
+        paginationArrowTextLineHeightUnits,
+
+        paginationArrowTextColorSwitcher,
+        paginationArrowTextColor,
+        paginationArrowTextHoverColor,
+
+        paginationPrevNextWidth,
+        paginationPrevNextWidthUnits,
+        paginationArrowIconColorSwitcher,
+        paginationArrowIconColor,
+        paginationArrowIconHoverColor,
+
+        /** Pagination Button */
+        paginationBtnSize,
+        paginationBtnSizeUnits,
+        paginationBtnGap,
+        paginationBtnGapUnits,
+
+        paginationBtnBgColorSwitcher,
+        paginationBtnNormalBackgroundType,
+        paginationBtnNormalClassicColor,
+        paginationBtnNormalGradientColor,
+        paginationBtnNormalCustomGradientSwitcher,
+        paginationBtnNormalCustomGradientInputValue,
+        paginationBtnHoverBackgroundType,
+        paginationBtnHoverClassicColor,
+        paginationBtnHoverGradientColor,
+        paginationBtnHoverCustomGradientSwitcher,
+        paginationBtnHoverCustomGradientInputValue,
+
+        paginationActiveBtnTextColorSwitcher,
+        paginationActiveBtnTextColor,
+        paginationActiveBtnTextHoverColor,
+
+        paginationActiveBtnBgColorSwitcher,
+        paginationActiveBtnNormalBackgroundType,
+        paginationActiveBtnNormalClassicColor,
+        paginationActiveBtnNormalGradientColor,
+        paginationActiveBtnNormalCustomGradientSwitcher,
+        paginationActiveBtnNormalCustomGradientInputValue,
+        paginationActiveBtnHoverBackgroundType,
+        paginationActiveBtnHoverClassicColor,
+        paginationActiveBtnHoverGradientColor,
+        paginationActiveBtnHoverCustomGradientSwitcher,
+        paginationActiveBtnHoverCustomGradientInputValue,
+
+        paginationBtnBorder,
+        paginationBtnBorderColorSwitcher,
+        paginationBtnBorderColor,
+        paginationBtnBorderHoverColor,
+
+        paginationBtnBorderUnits,
+        paginationBtnDesktopBorder,
+        paginationBtnTabletBorder,
+        paginationBtnMobileBorder,
+        paginationBtnBorderLink,
+        paginationBtnDesktopBorderWidth,
+        paginationBtnTabletBorderWidth,
+        paginationBtnMobileBorderWidth,
+
+        paginationBtnBorderRadiusUnits,
+        paginationBtnDesktopBorderRadius,
+        paginationBtnTabletBorderRadius,
+        paginationBtnMobileBorderRadius,
+        paginationBtnBorderRadiusLink,
+        paginationBtnDesktopBorderRadiusWidth,
+        paginationBtnTabletBorderRadiusWidth,
+        paginationBtnMobileBorderRadiusWidth,
+
+        paginationBtnTextGlobalTypoSwitcher,
+        paginationBtnTextGlobalTypographyData,
+        paginationBtnTextGlobalTypoType,
+        paginationBtnTextGlobalTypoOption,
+        paginationBtnTextFontFamily,
+        paginationBtnTextFontSize,
+        paginationBtnTextFontSizeUnits,
+        paginationBtnTextFontWeight,
+        paginationBtnTextFontStyle,
+        paginationBtnTextTransform,
+        paginationBtnTextDecoration,
+        paginationBtnTextLetterSpacing,
+        paginationBtnTextLetterSpacingUnits,
+        paginationBtnTextLineHeight,
+        paginationBtnTextLineHeightUnits,
+
+        paginationBtnTextColorSwitcher,
+        paginationBtnTextColor,
+        paginationBtnTextHoverColor,
     ]);
 
     const customCss = getCustomCss(postGridGlobalCustomCSS, `.${blockId}`);
@@ -7891,7 +8098,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             )}
 
             <PanelBody
-                title={__("Read More Button Text", "frontis-blocks")}
+                title={__("Read More", "frontis-blocks")}
                 initialOpen={false}
             >
                 <FB_Range
@@ -8005,8 +8212,87 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 )}
 
-            </PanelBody>
-            <PanelBody title=" Read More Btn Padding and Margin" initialOpen={false}>
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={buttonBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ buttonBorder: value })}
+                />
+
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={buttonBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ buttonBorderColorSwitcher: value })}
+                />
+
+                {buttonBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={buttonBorderColor}
+                        setGlobalColor={(value) => setAttributes({ buttonBorderColor: value })}
+                    />
+                )}
+
+                {buttonBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={buttonBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ buttonBorderHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleBorderUnitsChange}
+                    spacingUnits={buttonBorderUnits}
+                    spacingDesktop={buttonDesktopBorderWidth}
+                    spacingTablet={buttonTabBorderWidth}
+                    spacingMobile={buttonMobileBorderWidth}
+                    handleSpacingUnitHandler={handleBorderWidthChange}
+                    spacingCombineBtn={buttonBorderLink}
+                    spacingCombineBtnHandler={handleBorderLinkToggle}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleBorderRadiusUnitsChange}
+                    spacingUnits={buttonBorderRadiusUnits}
+                    spacingDesktop={buttonDesktopBorderRadiusWidth}
+                    spacingTablet={buttonTabBorderRadiusWidth}
+                    spacingMobile={buttonMobileBorderRadiusWidth}
+                    handleSpacingUnitHandler={handleBorderRadiusChange}
+                    spacingCombineBtn={buttonBorderRadiusLink}
+                    spacingCombineBtnHandler={handleBorderRadiusLinkToggle}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    globalSwitcher={buttonBoxShadowSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ buttonBoxShadowSwitcher: value })}
+                />
+
+                {buttonBoxShadowSwitcher === 'normal' && (
+                    <FB_BoxShadowControl
+                        label={__("Normal Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowValues: value })}
+                        initialShadowValue={buttonBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {buttonBoxShadowSwitcher === 'hover' && (
+                    <FB_BoxShadowControl
+                        label={__("Hover Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowHoverValues: value })}
+                        initialShadowValue={buttonBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowHoverCssValue: value })}
+                    />
+                )}
+
                 <FB_Spacing
                     label={__("Padding", "frontis-blocks")}
                     deviceType={deviceType}
@@ -8033,92 +8319,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     spacingCombineBtnHandler={handleMarginCombineBtn}
                     setAttributes={setAttributes}
                 />
-            </PanelBody>
-            <PanelBody
-                title={__("Read More Btn Border and Shadow", "frontis-blocks")}
-                initialOpen={false}
-                className="fb-setting-border-setting-wrapper"
-                >
-                    <SelectControl
-                        label={__("Border Style", "frontis-blocks")}
-                        value={buttonBorder}
-                        options={BORDER_STYLES}
-                        onChange={(value) => setAttributes({ buttonBorder: value })}
-                    />
 
-
-                    <FB_SwitcherControl
-                        label={__("Border Color", "frontis-blocks")}
-                        globalSwitcher={buttonBorderColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ buttonBorderColorSwitcher: value })}
-                    />
-
-                    {buttonBorderColorSwitcher === 'normal' && (
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                            globalColor={buttonBorderColor}
-                            setGlobalColor={(value) => setAttributes({ buttonBorderColor: value })}
-                        />
-                    )}
-
-                    {buttonBorderColorSwitcher === 'hover' && (
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                            globalColor={buttonBorderHoverColor}
-                            setGlobalColor={(value) => setAttributes({ buttonBorderHoverColor: value })}
-                        />
-                    )}
-
-                    <FB_Spacing
-                        label={__("Border", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handleBorderUnitsChange}
-                        spacingUnits={buttonBorderUnits}
-                        spacingDesktop={buttonDesktopBorderWidth}
-                        spacingTablet={buttonTabBorderWidth}
-                        spacingMobile={buttonMobileBorderWidth}
-                        handleSpacingUnitHandler={handleBorderWidthChange}
-                        spacingCombineBtn={buttonBorderLink}
-                        spacingCombineBtnHandler={handleBorderLinkToggle}
-                        setAttributes={setAttributes}
-                    />
-                    <FB_Spacing
-                        label={__("Border Radius", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handleBorderRadiusUnitsChange}
-                        spacingUnits={buttonBorderRadiusUnits}
-                        spacingDesktop={buttonDesktopBorderRadiusWidth}
-                        spacingTablet={buttonTabBorderRadiusWidth}
-                        spacingMobile={buttonMobileBorderRadiusWidth}
-                        handleSpacingUnitHandler={handleBorderRadiusChange}
-                        spacingCombineBtn={buttonBorderRadiusLink}
-                        spacingCombineBtnHandler={handleBorderRadiusLinkToggle}
-                        setAttributes={setAttributes}
-                    />
-
-                    <FB_SwitcherControl
-                        label={__("Box Shadow", "frontis-blocks")}
-                        globalSwitcher={buttonBoxShadowSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ buttonBoxShadowSwitcher: value })}
-                    />
-
-                    {buttonBoxShadowSwitcher === 'normal' && (
-                        <FB_BoxShadowControl
-                            label={__("Normal Shadow", "frontis-blocks")}
-                            onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowValues: value })}
-                            initialShadowValue={buttonBoxShadowValues}
-                            onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowCssValue: value })}
-                        />
-                    )}
-
-                    {buttonBoxShadowSwitcher === 'hover' && (
-                        <FB_BoxShadowControl
-                            label={__("Hover Shadow", "frontis-blocks")}
-                            onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowHoverValues: value })}
-                            initialShadowValue={buttonBoxShadowHoverValues}
-                            onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowHoverCssValue: value })}
-                        />
-                    )}
             </PanelBody>
 
             {(readMoreIconAlign === 'icon-text' || readMoreIconAlign === 'icon-only') && (
@@ -8380,80 +8581,128 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             )}
             
             {loadMoreType === 'pagination' && (
-                <PanelBody title={__("Pagination Arrows Settings", "frontis-blocks")} initialOpen={false}>
+                <PanelBody title={__("Pagination Arrows", "frontis-blocks")} initialOpen={false}>
 
-                    <FB_Range
-                        min={1}
-                        max={200}
-                        label={__("Arrow Size", "frontis-blocks")}
-                        rangeValue={paginationArrowSize}
-                        onChangeHandler={(value) => setAttributes({ paginationArrowSize: value })}
-                        rangeUnitHandler={(value) => setAttributes({ paginationArrowSizeUnits: value })} 
-                        deviceType={deviceType}
-                        units={paginationArrowSizeUnits}
-                        setAttributes={setAttributes}
-                        rangeStep={1}
-                        resetFallbackValue={""}
-                    />
-                    
-                    <ToggleControl
-                        label={__("Aspect Ratio", "frontis-blocks")}
-                        checked={paginationArrowAspectRatio}
-                        onChange={(value) => setAttributes({ paginationArrowAspectRatio: value })}
-                    />
 
-                    <FB_TypographyControl
-                        globalTypoControlActive={true}
-                        globalTypoSwitcher={paginationArrowTextGlobalTypoSwitcher}
-                        storeGlobalTypographyData={(value) => setAttributes({ paginationArrowTextGlobalTypographyData: value })}
 
-                        globalTypoType={paginationArrowTextGlobalTypoType}
-                        onChangeGlobalTypoType={(value) => {
-                            setAttributes({ 
-                                paginationArrowTextGlobalTypoType: value, 
-                                paginationArrowTextGlobalTypoSwitcher: value === 'default' ? {...paginationArrowTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...paginationArrowTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                            })
-                        }}
+                    {paginationPrevNextType === 'icon' && (
+                        <>
+                            <FB_Range
+                                min={1}
+                                max={100}
+                                label={__("Arrow Size", "frontis-blocks")}
+                                rangeValue={paginationArrowSize}
+                                onChangeHandler={(value) => setAttributes({ paginationArrowSize: value })}
+                                rangeUnitHandler={(value) => setAttributes({ paginationArrowSizeUnits: value })} 
+                                deviceType={deviceType}
+                                units={paginationArrowSizeUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                            />
 
-                        globalTypoOption={paginationArrowTextGlobalTypoOption}
-                        onChangeGlobalTypoOption={(value) => setAttributes({ paginationArrowTextGlobalTypoOption: value })}
+                            <FB_SwitcherControl
+                                label={__("Arrow Color", "frontis-blocks")}
+                                globalSwitcher={paginationArrowIconColorSwitcher}
+                                setGlobalSwitcher={(value) => setAttributes({ paginationArrowIconColorSwitcher: value })}
+                            />
 
-                        fontFamily={paginationArrowTextFontFamily}
-                        onChangeFontFamily={(value) => setAttributes({ paginationArrowTextFontFamily: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontFamily: value && false} })}
+                            {paginationArrowIconColorSwitcher === 'normal' && (
+                                <FB_ColorControl
+                                    label={__("Normal Color", "frontis-blocks")}
+                                    globalColor={paginationArrowIconColor} 
+                                    setGlobalColor={(value) => setAttributes({ paginationArrowIconColor: value })}
+                                />
+                            )}
 
-                        fontSize={paginationArrowTextFontSize}
-                        onChangeFontSize={(value) => setAttributes({ paginationArrowTextFontSize: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontSize: value && false} })}
+                            {paginationArrowIconColorSwitcher === 'hover' && (
+                                <FB_ColorControl
+                                    label={__("Hover Color", "frontis-blocks")}
+                                    globalColor={paginationArrowIconHoverColor}
+                                    setGlobalColor={(value) => setAttributes({ paginationArrowIconHoverColor: value })}
+                                />
+                            )}
+                        </>
+                    )}
 
-                        fontSizeUnits={paginationArrowTextFontSizeUnits}
-                        onChangeFontSizeUnit={(value) => setAttributes({ paginationArrowTextFontSizeUnits: value })}
+                    {paginationPrevNextType === 'text' && (
+                        <>
+                            <FB_TypographyControl
+                                globalTypoControlActive={true}
+                                globalTypoSwitcher={paginationArrowTextGlobalTypoSwitcher}
+                                storeGlobalTypographyData={(value) => setAttributes({ paginationArrowTextGlobalTypographyData: value })}
 
-                        fontWeight={paginationArrowTextFontWeight}
-                        onChangeFontWeight={(value) => setAttributes({ paginationArrowTextFontWeight: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontWeight: value && false} })}
+                                globalTypoType={paginationArrowTextGlobalTypoType}
+                                onChangeGlobalTypoType={(value) => {
+                                    setAttributes({ 
+                                        paginationArrowTextGlobalTypoType: value, 
+                                        paginationArrowTextGlobalTypoSwitcher: value === 'default' ? {...paginationArrowTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...paginationArrowTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                                    })
+                                }}
 
-                        fontStyle={paginationArrowTextFontStyle}
-                        onChangeFontStyle={(value) => setAttributes({ paginationArrowTextFontStyle: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontStyle: value && false} })}
+                                globalTypoOption={paginationArrowTextGlobalTypoOption}
+                                onChangeGlobalTypoOption={(value) => setAttributes({ paginationArrowTextGlobalTypoOption: value })}
 
-                        textTransform={paginationArrowTextTransform}
-                        onChangeTextTransform={(value) => setAttributes({ paginationArrowTextTransform: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, textTransform: value && false} })}
+                                fontFamily={paginationArrowTextFontFamily}
+                                onChangeFontFamily={(value) => setAttributes({ paginationArrowTextFontFamily: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                        textDecoration={paginationArrowTextDecoration}
-                        onChangeTextDecoration={(value) => setAttributes({ paginationArrowTextDecoration: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, textDecoration: value && false} })}
+                                fontSize={paginationArrowTextFontSize}
+                                onChangeFontSize={(value) => setAttributes({ paginationArrowTextFontSize: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontSize: value && false} })}
 
-                        letterSpacing={paginationArrowTextLetterSpacing}
-                        onChangeLetterSpacing={(value) => setAttributes({ paginationArrowTextLetterSpacing: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, letterSpacing: value && false} })}
+                                fontSizeUnits={paginationArrowTextFontSizeUnits}
+                                onChangeFontSizeUnit={(value) => setAttributes({ paginationArrowTextFontSizeUnits: value })}
 
-                        letterSpacingUnits={paginationArrowTextLetterSpacingUnits}
-                        onChangeLetterSpacingUnit={(value) => setAttributes({ paginationArrowTextLetterSpacingUnits: value })}
+                                fontWeight={paginationArrowTextFontWeight}
+                                onChangeFontWeight={(value) => setAttributes({ paginationArrowTextFontWeight: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                        lineHeight={paginationArrowTextLineHeight}
-                        onChangeLineHeight={(value) => setAttributes({ paginationArrowTextLineHeight: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, lineHeight: value && false} })}
+                                fontStyle={paginationArrowTextFontStyle}
+                                onChangeFontStyle={(value) => setAttributes({ paginationArrowTextFontStyle: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                        lineHeightUnits={paginationArrowTextLineHeightUnits}
-                        onChangeLineHeightUnit={(value) => setAttributes({ paginationArrowTextLineHeightUnits: value })}
+                                textTransform={paginationArrowTextTransform}
+                                onChangeTextTransform={(value) => setAttributes({ paginationArrowTextTransform: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, textTransform: value && false} })}
 
-                        deviceType={deviceType}
-                        setAttributes={setAttributes}
-                    />
+                                textDecoration={paginationArrowTextDecoration}
+                                onChangeTextDecoration={(value) => setAttributes({ paginationArrowTextDecoration: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, textDecoration: value && false} })}
+
+                                letterSpacing={paginationArrowTextLetterSpacing}
+                                onChangeLetterSpacing={(value) => setAttributes({ paginationArrowTextLetterSpacing: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+                                letterSpacingUnits={paginationArrowTextLetterSpacingUnits}
+                                onChangeLetterSpacingUnit={(value) => setAttributes({ paginationArrowTextLetterSpacingUnits: value })}
+
+                                lineHeight={paginationArrowTextLineHeight}
+                                onChangeLineHeight={(value) => setAttributes({ paginationArrowTextLineHeight: value, paginationArrowTextGlobalTypoSwitcher: {...paginationArrowTextGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                                lineHeightUnits={paginationArrowTextLineHeightUnits}
+                                onChangeLineHeightUnit={(value) => setAttributes({ paginationArrowTextLineHeightUnits: value })}
+
+                                deviceType={deviceType}
+                                setAttributes={setAttributes}
+                            />
+
+                            <FB_SwitcherControl
+                                label={__("Text Color", "frontis-blocks")}
+                                globalSwitcher={paginationArrowTextColorSwitcher}
+                                setGlobalSwitcher={(value) => setAttributes({ paginationArrowTextColorSwitcher: value })}
+                            />
+
+                            {paginationArrowTextColorSwitcher === 'normal' && (
+                                <FB_ColorControl
+                                    label={__("Normal Color", "frontis-blocks")}
+                                    globalColor={paginationArrowTextColor} 
+                                    setGlobalColor={(value) => setAttributes({ paginationArrowTextColor: value })}
+                                />
+                            )}
+
+                            {paginationArrowTextColorSwitcher === 'hover' && (
+                                <FB_ColorControl
+                                    label={__("Hover Color", "frontis-blocks")}
+                                    globalColor={paginationArrowTextHoverColor}
+                                    setGlobalColor={(value) => setAttributes({ paginationArrowTextHoverColor: value })}
+                                />
+                            )}
+                        </>
+                    )}
 
                     <FB_BackgroundColorControl
                         label={__("Background Color", "frontis-blocks")}
@@ -8486,91 +8735,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                     />
 
-                    <FB_SwitcherControl
-                        label={__("Text Color", "frontis-blocks")}
-                        globalSwitcher={paginationArrowTextColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ paginationArrowTextColorSwitcher: value })}
-                    />
-
-                    {paginationArrowTextColorSwitcher === 'normal' && (
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                            globalColor={paginationArrowTextColor} 
-                            setGlobalColor={(value) => setAttributes({ paginationArrowTextColor: value })}
-                        />
-                    )}
-
-                    {paginationArrowTextColorSwitcher === 'hover' && (
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                            globalColor={paginationArrowTextHoverColor}
-                            setGlobalColor={(value) => setAttributes({ paginationArrowTextHoverColor: value })}
-                        />
-                    )}
-
                     <FB_Range
                         min={1}
                         max={200}
-                        label={__("Icon Size", "frontis-blocks")}
-                        rangeValue={paginationArrowIconSize}
-                        onChangeHandler={(value) => setAttributes({ paginationArrowIconSize: value })}
-                        rangeUnitHandler={(value) => setAttributes({ paginationArrowIconSizeUnits: value })} 
+                        label={__("Width", "frontis-blocks")}
+                        rangeValue={paginationPrevNextWidth}
+                        onChangeHandler={(value) => setAttributes({ paginationPrevNextWidth: value })}
+                        rangeUnitHandler={(value) => setAttributes({ paginationPrevNextWidthUnits: value })} 
                         deviceType={deviceType}
-                        units={paginationArrowIconSizeUnits}
+                        units={paginationPrevNextWidthUnits}
                         setAttributes={setAttributes}
                         rangeStep={1}
-                        resetFallbackValue={"20"}
+                        resetFallbackValue={"36"}
                     />
 
-                    <FB_Range
-                        min={1}
-                        max={200}
-                        label={__("Icon Spacing", "frontis-blocks")}
-                        rangeValue={paginationArrowIconSpacing}
-                        onChangeHandler={(value) => setAttributes({ paginationArrowIconSpacing: value })}
-                        rangeUnitHandler={(value) => setAttributes({ paginationArrowIconSpacingUnits: value })} 
-                        deviceType={deviceType}
-                        units={paginationArrowIconSpacingUnits}
-                        setAttributes={setAttributes}
-                        rangeStep={1}
-                        resetFallbackValue={"20"}
-                    />
-
-                    <FB_SwitcherControl
-                        label={__("Icon Color", "frontis-blocks")}
-                        globalSwitcher={paginationArrowIconColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ paginationArrowIconColorSwitcher: value })}
-                    />
-
-                    {paginationArrowIconColorSwitcher === 'normal' && (
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                            globalColor={paginationArrowIconColor} 
-                            setGlobalColor={(value) => setAttributes({ paginationArrowIconColor: value })}
-                        />
-                    )}
-
-                    {paginationArrowIconColorSwitcher === 'hover' && (
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                            globalColor={paginationArrowIconHoverColor}
-                            setGlobalColor={(value) => setAttributes({ paginationArrowIconHoverColor: value })}
-                        />
-                    )}
-
-                    <FB_Spacing
-                        label={__("Padding", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handlePaginationArrowPaddingUnitsHandler}
-                        spacingUnits={paginationArrowPaddingUnits}
-                        spacingDesktop={paginationArrowDesktopPadding}
-                        spacingTablet={paginationArrowTabletPadding}
-                        spacingMobile={paginationArrowMobilePadding}
-                        handleSpacingUnitHandler={handlePaginationArrowPaddingUnitChange}
-                        spacingCombineBtn={paginationArrowPaddingLink}
-                        spacingCombineBtnHandler={handlePaginationArrowPaddingCombineBtn}
-                        setAttributes={setAttributes}
-                    />
                     <SelectControl
                             label={__("Border Style", "frontis-blocks")}
                             value={paginationArrowBorder}
@@ -8632,12 +8810,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             )}
 
             {loadMoreType === 'pagination' && (
-                <PanelBody title={__("Pagination Button Settings", "frontis-blocks")} initialOpen={false}>
+                <PanelBody title={__("Pagination Numbers", "frontis-blocks")} initialOpen={false}>
 
                     <FB_Range
                         min={1}
                         max={200}
-                        label={__("Button Size", "frontis-blocks")}
+                        label={__("Width", "frontis-blocks")}
                         rangeValue={paginationBtnSize}
                         onChangeHandler={(value) => setAttributes({ paginationBtnSize: value })}
                         rangeUnitHandler={(value) => setAttributes({ paginationBtnSizeUnits: value })} 
@@ -8647,11 +8825,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         rangeStep={1}
                         resetFallbackValue={""}
                     />
-                    
-                    <ToggleControl
-                        label={__("Button Aspect Ratio", "frontis-blocks")}
-                        checked={paginationBtnAspectRatio}
-                        onChange={(value) => setAttributes({ paginationBtnAspectRatio: value })}
+
+                    <FB_Range
+                        min={1}
+                        max={200}
+                        label={__("Gap", "frontis-blocks")}
+                        rangeValue={paginationBtnGap}
+                        onChangeHandler={(value) => setAttributes({ paginationBtnGap: value })}
+                        rangeUnitHandler={(value) => setAttributes({ paginationBtnGapUnits: value })} 
+                        deviceType={deviceType}
+                        units={paginationBtnGapUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
                     />
 
                     <FB_TypographyControl
@@ -8721,7 +8907,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                     )}
 
-                    {paginationArrowTextColorSwitcher === 'hover' && (
+                    {paginationBtnTextColorSwitcher === 'hover' && (
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
                             globalColor={paginationBtnTextHoverColor}
@@ -8760,19 +8946,59 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                     />
 
-                    <FB_Spacing
-                        label={__("Padding", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handlePaginationBtnPaddingUnitsHandler}
-                        spacingUnits={paginationBtnPaddingUnits}
-                        spacingDesktop={paginationBtnDesktopPadding}
-                        spacingTablet={paginationBtnTabletPadding}
-                        spacingMobile={paginationBtnMobilePadding}
-                        handleSpacingUnitHandler={handlePaginationBtnPaddingUnitChange}
-                        spacingCombineBtn={paginationBtnPaddingLink}
-                        spacingCombineBtnHandler={handlePaginationBtnPaddingCombineBtn}
-                        setAttributes={setAttributes}
+                    <FB_SwitcherControl
+                        label={__("Active Text Color", "frontis-blocks")}
+                        globalSwitcher={paginationActiveBtnTextColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ paginationActiveBtnTextColorSwitcher: value })}
                     />
+
+                    {paginationActiveBtnTextColorSwitcher === 'normal' && (
+                        <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={paginationActiveBtnTextColor} 
+                            setGlobalColor={(value) => setAttributes({ paginationActiveBtnTextColor: value })}
+                        />
+                    )}
+
+                    {paginationActiveBtnTextColorSwitcher === 'hover' && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={paginationActiveBtnTextHoverColor}
+                            setGlobalColor={(value) => setAttributes({ paginationActiveBtnTextHoverColor: value })}
+                        />
+                    )}
+
+                    <FB_BackgroundColorControl
+                        label={__("Active Background Color", "frontis-blocks")}
+                        bgColorSwitcher={paginationActiveBtnBgColorSwitcher}  
+                        setBgColorSwitcher={(value) => setAttributes({ paginationActiveBtnBgColorSwitcher: value })}
+                        
+                        normalBackgroundType={paginationActiveBtnNormalBackgroundType}
+                        setNormalBackgroundType={(value) => setAttributes({ paginationActiveBtnNormalBackgroundType: value })}
+                        normalClassicColor={paginationActiveBtnNormalClassicColor}
+                        setNormalClassicColor={(value) => setAttributes({ paginationActiveBtnNormalClassicColor: value })}
+                        normalGradientColor={paginationActiveBtnNormalGradientColor}
+                        setNormalGradientColor={(value) => setAttributes({ paginationActiveBtnNormalGradientColor: value })}
+                        normalCustomGradientSwitcher={paginationActiveBtnNormalCustomGradientSwitcher}
+                        setNormalCustomGradientSwitcher={(value) => setAttributes({ paginationActiveBtnNormalCustomGradientSwitcher: value })}
+                        normalCustomGradientInputValue={paginationActiveBtnNormalCustomGradientInputValue}
+                        setNormalCustomGradientInputValue={(value) => setAttributes({ paginationActiveBtnNormalCustomGradientInputValue: value })}
+
+                        hoverBackgroundType={paginationActiveBtnHoverBackgroundType} 
+                        setHoverBackgroundType={(value) => setAttributes({ paginationActiveBtnHoverBackgroundType: value })}
+                        hoverClassicColor={paginationActiveBtnHoverClassicColor}
+                        setHoverClassicColor={(value) => setAttributes({ paginationActiveBtnHoverClassicColor: value })}
+                        hoverGradientColor={paginationActiveBtnHoverGradientColor} 
+                        setHoverGradientColor={(value) => setAttributes({ paginationActiveBtnHoverGradientColor: value })}
+                        hoverCustomGradientSwitcher={paginationActiveBtnHoverCustomGradientSwitcher}
+                        setHoverCustomGradientSwitcher={(value) => setAttributes({ paginationActiveBtnHoverCustomGradientSwitcher: value })}
+                        hoverCustomGradientInputValue={paginationActiveBtnHoverCustomGradientInputValue}
+                        setHoverCustomGradientInputValue={(value) => setAttributes({ paginationActiveBtnHoverCustomGradientInputValue: value })}
+
+                        isBackgroundImage={false}
+
+                    />
+
                     <SelectControl
                             label={__("Border Style", "frontis-blocks")}
                             value={paginationBtnBorder}
@@ -8794,7 +9020,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                     )}
 
-                    {paginationArrowBorderColorSwitcher === 'hover' && (
+                    {paginationBtnBorderColorSwitcher === 'hover' && (
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
                             globalColor={paginationBtnBorderHoverColor}

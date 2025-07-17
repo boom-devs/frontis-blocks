@@ -63,13 +63,17 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '100',
-			Tablet: '',
-			Mobile: ''
+			Tablet: '100',
+			Mobile: '100'
 		}
 	},
 	containerCustomWidth: {
-		type: 'string',
-		default: '100',
+		type: 'object',
+		default: {
+			Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
+		}
 	},
 
 	containerCustomWidthUnits: {
@@ -86,6 +90,15 @@ const attributes = {
 			Desktop: '%',
 			Tablet: '%',
 			Mobile: '%',
+		}
+	},
+	
+	globalRowGap: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	rowGap: {
@@ -105,7 +118,19 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
+	containerRowGapHasEdited: {
+		type: 'boolean',
+		default: false,
+	},
 
+	globalColumnGap: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
 	columnGap: {
 		type: 'object',
 		default: {
@@ -122,6 +147,10 @@ const attributes = {
 			Tablet: 'px',
 			Mobile: 'px'
 		}
+	},
+	containerColumnGapHasEdited: {
+		type: 'boolean',
+		default: false,
 	},
 
 	containerZIndex: {
@@ -162,9 +191,9 @@ const attributes = {
 	fullWidthContentBoxedWidth: {
 		type: 'object',
 		default: {
-			Desktop: 1200,
-			Tablet: 1024,
-			Mobile: 767
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	fullWidthContentBoxedWidthUnits: {
@@ -174,6 +203,18 @@ const attributes = {
 			Tablet: 'px',
 			Mobile: 'px',
 		}
+	},
+	globalFullWidthContentBoxedWidth: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	fullWidthContentBoxedWidthHasEdited: {
+		type: 'boolean',
+		default: false,
 	},
 	// End content boxed width
 	innerContentCustomWidthDesktop: {
@@ -693,6 +734,14 @@ const attributes = {
 	/** End Overlay for fb container */
 
 	/** Start Padding */
+	containerGlobalPadding: {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
 	containerPaddingUnits: {
 		type: 'object',
 		default: {
@@ -732,6 +781,10 @@ const attributes = {
         type : "boolean",
         default: true
     },
+	containerPaddingHasEdited: {
+		type: 'boolean',
+		default: false,
+	},
 	/** Start Margin */
 	containerMarginUnits: {
 		type: 'object',

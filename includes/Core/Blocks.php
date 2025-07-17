@@ -31,6 +31,12 @@ class Blocks
 		$blocks_list = BlockList::get_instance()->get_blocks();
 		$active_blocks = get_option('fb_active_blocks');
 
+		$default_container_width = get_option('fb_default_content_width');
+		$container_column_gap = get_option('fb_container_column_gap');
+		$container_row_gap = get_option('fb_container_row_gap');
+		$container_padding = get_option('fb_container_padding');
+
+
 		if (!empty($blocks_list)) {
 			foreach ($blocks_list as $block) {
 				$slug = $block['slug'];
@@ -92,7 +98,11 @@ class Blocks
 					'ajax_url' => admin_url('admin-ajax.php'),
 					'nonce' => wp_create_nonce('fb_post_like_nonce'),
 					'user_logged_in' => is_user_logged_in(),
-					'prefix' => FB_PREFIX
+					'prefix' => FB_PREFIX,
+					'default_container_width' => $default_container_width,
+					'container_column_gap' => $container_column_gap,
+					'container_row_gap' => $container_row_gap,
+					'container_padding' => $container_padding,
 				];
 
 				$localize_array = array_merge($localize_array, $common_localize_array);
@@ -219,7 +229,7 @@ class Blocks
 
 		if (!empty($google_fonts)) {
 			foreach ($google_fonts as $key => $value) {
-				// unique fonts family 
+				// unique fonts family
 				if (!in_array($value, $this->gfonts)) {
 					$this->gfonts[$value] = $value;
 				}

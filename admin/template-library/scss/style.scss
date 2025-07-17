@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Onest:wght@100..900&display=swap');
+@import "./variables";
+@import "./header";
+@import "./sidebar";
+@import "./main-content";
+@import "./template-import";
+@import "./plugin-upgrade";
+@import "./login-signup";
+@import "./full-site-import.scss";
+@import "./../global-typo/scss/global-typo.scss";
+
+.fb-template-library-button-wrapper {
+	button {
+		background: $primary-color-base;
+		color: $white-color;
+
+		svg {
+			width: 30px;
+			height: 20px;
+
+			path: {
+				fill: $white-color;
+			}
+		}
+
+		&:hover {
+			color: $white-color !important;
+
+			svg {
+				path: {
+					fill: $white-color;
+				}
+			}
+		}
+	}
+}
+
+body {
+	.components-modal__frame {
+		&.fb-template-library-popover {
+			width: 100% !important;
+			max-height: 100% !important;
+			max-width: 100% !important;
+			margin: 0 !important;
+			border-radius: 0 !important;
+
+			.components-modal__content {
+				margin: 0;
+				padding: 0;
+				background: #F7F7F7;
+				overflow: hidden;
+
+				.components-modal__header {
+					border: none;
+					.components-button{
+						&.is-compact{
+							&.has-icon{
+								display: none;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.fb-template-library-store-wrap {
+		font-family: $body-font-family;
+	}
+
+}

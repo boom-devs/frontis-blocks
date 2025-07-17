@@ -343,6 +343,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingTitleLineHeight,
 		pricingTitleLineHeightUnits,
 
+		pricingTitlePaddingUnits,
+		pricingTitleDesktopPadding,
+		pricingTitleTabletPadding,
+		pricingTitleMobilePadding,
+		pricingTitlePaddingLink,
+
+		pricingTitleMarginUnits,
+		pricingTitleDesktopMargin,
+		pricingTitleTabletMargin,
+		pricingTitleMobileMargin,
+		pricingTitleMarginLink,
+
 		pricingSubtitleColorSwitcher,
 		pricingSubtitleColor,
 		pricingSubtitleHoverColor,
@@ -361,6 +373,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingSubtitleLetterSpacingUnits,
 		pricingSubtitleLineHeight,
 		pricingSubtitleLineHeightUnits,
+
+		pricingSubtitlePaddingUnits,
+		pricingSubtitleDesktopPadding,
+		pricingSubtitleTabletPadding,
+		pricingSubtitleMobilePadding,
+		pricingSubtitlePaddingLink,
+
+		pricingSubtitleMarginUnits,
+		pricingSubtitleDesktopMargin,
+		pricingSubtitleTabletMargin,
+		pricingSubtitleMobileMargin,
+		pricingSubtitleMarginLink,
 		/**end Title and Subtitle Style */
 
 		/** Start Feature Icon */
@@ -1865,6 +1889,294 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const headerMobileBorderRadiusWidth = `${pricingHeaderBorderRadiusMobile.top}${pricingHeaderBorderRadiusUnits.Mobile} ${pricingHeaderBorderRadiusMobile.right}${pricingHeaderBorderRadiusUnits.Mobile} ${pricingHeaderBorderRadiusMobile.bottom}${pricingHeaderBorderRadiusUnits.Mobile} ${pricingHeaderBorderRadiusMobile.left}${pricingHeaderBorderRadiusUnits.Mobile}`;
 	/** End Header Border Radius */
 
+	/** Start Title padding */
+	const handleTitlePaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( pricingTitlePaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						pricingTitleDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						pricingTitleTabletPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						pricingTitleMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {pricingTitleDesktopPadding: {...pricingTitleDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {pricingTitleTabletPadding: {...pricingTitleTabletPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {pricingTitleMobilePadding: {...pricingTitleMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleTitlePaddingCombineBtn = () => {
+		setAttributes( {pricingTitlePaddingLink: !pricingTitlePaddingLink} );
+	}
+
+	const handleTitlePaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			pricingTitlePaddingUnits: {
+				...pricingTitlePaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const titleDesktopPadding = `${pricingTitleDesktopPadding.top}${pricingTitlePaddingUnits.Desktop} ${pricingTitleDesktopPadding.right}${pricingTitlePaddingUnits.Desktop} ${pricingTitleDesktopPadding.bottom}${pricingTitlePaddingUnits.Desktop} ${pricingTitleDesktopPadding.left}${pricingTitlePaddingUnits.Desktop}`;
+	const titleTabletPadding = `${pricingTitleTabletPadding.top}${pricingTitlePaddingUnits.Tablet} ${pricingTitleTabletPadding.right}${pricingTitlePaddingUnits.Tablet} ${pricingTitleTabletPadding.bottom}${pricingTitlePaddingUnits.Tablet} ${pricingTitleTabletPadding.left}${pricingTitlePaddingUnits.Tablet}`;
+	const titleMobilePadding = `${pricingTitleMobilePadding.top}${pricingTitlePaddingUnits.Mobile} ${pricingTitleMobilePadding.right}${pricingTitlePaddingUnits.Mobile} ${pricingTitleMobilePadding.bottom}${pricingTitlePaddingUnits.Mobile} ${pricingTitleMobilePadding.left}${pricingTitlePaddingUnits.Mobile}`;
+	/** End Title Padding */
+
+	/** Start Title Margin */
+	const handleTitleMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( pricingTitleMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						pricingTitleDesktopMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						pricingTitleTabletMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						pricingTitleMobileMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {pricingTitleDesktopMargin: {...pricingTitleDesktopMargin, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {pricingTitleTabletMargin: {...pricingTitleTabletMargin, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {pricingTitleMobileMargin: {...pricingTitleMobileMargin, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleTitleMarginCombineBtn = () => {
+		setAttributes( {pricingTitleMarginLink: !pricingTitleMarginLink} );
+	}
+
+	const handleTitleMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			pricingTitleMarginUnits: {
+				...pricingTitleMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const titleDesktopMargin = `${pricingTitleDesktopMargin.top}${pricingTitleMarginUnits.Desktop} ${pricingTitleDesktopMargin.right}${pricingTitleMarginUnits.Desktop} ${pricingTitleDesktopMargin.bottom}${pricingTitleMarginUnits.Desktop} ${pricingTitleDesktopMargin.left}${pricingTitleMarginUnits.Desktop}`;
+	const titleTabletMargin = `${pricingTitleTabletMargin.top}${pricingTitleMarginUnits.Tablet} ${pricingTitleTabletMargin.right}${pricingTitleMarginUnits.Tablet} ${pricingTitleTabletMargin.bottom}${pricingTitleMarginUnits.Tablet} ${pricingTitleTabletMargin.left}${pricingTitleMarginUnits.Tablet}`;
+	const titleMobileMargin = `${pricingTitleMobileMargin.top}${pricingTitleMarginUnits.Mobile} ${pricingTitleMobileMargin.right}${pricingTitleMarginUnits.Mobile} ${pricingTitleMobileMargin.bottom}${pricingTitleMarginUnits.Mobile} ${pricingTitleMobileMargin.left}${pricingTitleMarginUnits.Mobile}`;
+	/** End Title Margin */
+
+	/** Start Sub Title padding */
+	const handleSubtitlePaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( pricingSubtitlePaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						pricingSubtitleDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						pricingSubtitleTabletPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						pricingSubtitleMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {pricingSubtitleDesktopPadding: {...pricingSubtitleDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {pricingSubtitleTabletPadding: {...pricingSubtitleTabletPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {pricingSubtitleMobilePadding: {...pricingSubtitleMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleSubtitlePaddingCombineBtn = () => {
+		setAttributes( {pricingSubtitlePaddingLink: !pricingSubtitlePaddingLink} );
+	}
+
+	const handleSubtitlePaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			pricingSubtitlePaddingUnits: {
+				...pricingSubtitlePaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const subtitleDesktopPadding = `${pricingSubtitleDesktopPadding.top}${pricingSubtitlePaddingUnits.Desktop} ${pricingSubtitleDesktopPadding.right}${pricingSubtitlePaddingUnits.Desktop} ${pricingSubtitleDesktopPadding.bottom}${pricingSubtitlePaddingUnits.Desktop} ${pricingSubtitleDesktopPadding.left}${pricingSubtitlePaddingUnits.Desktop}`;
+	const subtitleTabletPadding = `${pricingSubtitleTabletPadding.top}${pricingSubtitlePaddingUnits.Tablet} ${pricingSubtitleTabletPadding.right}${pricingSubtitlePaddingUnits.Tablet} ${pricingSubtitleTabletPadding.bottom}${pricingSubtitlePaddingUnits.Tablet} ${pricingSubtitleTabletPadding.left}${pricingSubtitlePaddingUnits.Tablet}`;
+	const subtitleMobilePadding = `${pricingSubtitleMobilePadding.top}${pricingSubtitlePaddingUnits.Mobile} ${pricingSubtitleMobilePadding.right}${pricingSubtitlePaddingUnits.Mobile} ${pricingSubtitleMobilePadding.bottom}${pricingSubtitlePaddingUnits.Mobile} ${pricingSubtitleMobilePadding.left}${pricingSubtitlePaddingUnits.Mobile}`;
+	/** End Sub Title Padding */
+
+	/** Start Sub Title Margin */
+	const handleSubtitleMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( pricingSubtitleMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						pricingSubtitleDesktopMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						pricingSubtitleTabletMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						pricingSubtitleMobileMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {pricingSubtitleDesktopMargin: {...pricingSubtitleDesktopMargin, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {pricingSubtitleTabletMargin: {...pricingSubtitleTabletMargin, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {pricingSubtitleMobileMargin: {...pricingSubtitleMobileMargin, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+	}
+
+	const handleSubtitleMarginCombineBtn = () => {
+		setAttributes( {pricingSubtitleMarginLink: !pricingSubtitleMarginLink} );
+	}
+
+	const handleSubtitleMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			pricingSubtitleMarginUnits: {
+				...pricingSubtitleMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const subtitleDesktopMargin = `${pricingSubtitleDesktopMargin.top}${pricingSubtitleMarginUnits.Desktop} ${pricingSubtitleDesktopMargin.right}${pricingSubtitleMarginUnits.Desktop} ${pricingSubtitleDesktopMargin.bottom}${pricingSubtitleMarginUnits.Desktop} ${pricingSubtitleDesktopMargin.left}${pricingSubtitleMarginUnits.Desktop}`;
+	const subtitleTabletMargin = `${pricingSubtitleTabletMargin.top}${pricingSubtitleMarginUnits.Tablet} ${pricingSubtitleTabletMargin.right}${pricingSubtitleMarginUnits.Tablet} ${pricingSubtitleTabletMargin.bottom}${pricingSubtitleMarginUnits.Tablet} ${pricingSubtitleTabletMargin.left}${pricingSubtitleMarginUnits.Tablet}`;
+	const subtitleMobileMargin = `${pricingSubtitleMobileMargin.top}${pricingSubtitleMarginUnits.Mobile} ${pricingSubtitleMobileMargin.right}${pricingSubtitleMarginUnits.Mobile} ${pricingSubtitleMobileMargin.bottom}${pricingSubtitleMarginUnits.Mobile} ${pricingSubtitleMobileMargin.left}${pricingSubtitleMarginUnits.Mobile}`;
+	/** End Sub Title Margin */
+
 	/** Start Icon Border */
 	const handlePriceIconBorderUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -2685,6 +2997,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricingTopSectionTextGlobalTypoSwitcher.lineHeight === false && pricingTopSectionTextLineHeight.Desktop ? `line-height: ${pricingTopSectionTextLineHeight.Desktop}${pricingTopSectionTextLineHeightUnits.Desktop};` : ""}
 			${pricingTopSectionTextDesktopPaddingWidth && pricingTopSectionTextDesktopPadding.top? `padding: ${pricingTopSectionTextDesktopPaddingWidth};` : ''}
 			text-align: center;
+			transition: all 0.3s ease;
 		}
 		.${blockId}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper:hover {
 			${pricingTopSectionTextHoverColor ? `color: ${pricingTopSectionTextHoverColor};` : ''}
@@ -2780,6 +3093,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${normalPricingGlobalTypoSwitcher.textDecoration === false && normalPricingTextDecoration ? `text-decoration: ${normalPricingTextDecoration};` : ""}
 			${normalPricingGlobalTypoSwitcher.letterSpacing === false && normalPricingLetterSpacing.Desktop ? `letter-spacing: ${normalPricingLetterSpacing.Desktop}${normalPricingLetterSpacingUnits.Desktop};` : ""}
 			${normalPricingGlobalTypoSwitcher.lineHeight === false && normalPricingLineHeight.Desktop ? `line-height: ${normalPricingLineHeight.Desktop}${normalPricingLineHeightUnits.Desktop};` : ""}
+			transition: all 0.3s ease;
 		}
 		.${blockId} .fb-pricing-price-wrapper .fb-pricing-normal-price:hover {
 			${normalPricingHoverColor ? `color: ${normalPricingHoverColor};` : ''}
@@ -2805,6 +3119,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${salePricingGlobalTypoSwitcher.textDecoration === false && salePricingTextDecoration ? `text-decoration: ${salePricingTextDecoration};` : ""}
 			${salePricingGlobalTypoSwitcher.letterSpacing === false && salePricingLetterSpacing.Desktop ? `letter-spacing: ${salePricingLetterSpacing.Desktop}${salePricingLetterSpacingUnits.Desktop};` : ""}
 			${salePricingGlobalTypoSwitcher.lineHeight === false && salePricingLineHeight.Desktop ? `line-height: ${salePricingLineHeight.Desktop}${salePricingLineHeightUnits.Desktop};` : ""}
+			transition: all 0.3s ease;
 		}
 		.${blockId} .fb-pricing-price-wrapper .fb-pricing-sale-price:hover {
 			${salePricingHoverColor ? `color: ${salePricingHoverColor};` : ''}
@@ -2830,6 +3145,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceCurrencyGlobalTypoSwitcher.textDecoration === false && priceCurrencyTextDecoration ? `text-decoration: ${priceCurrencyTextDecoration};` : ""}
 			${priceCurrencyGlobalTypoSwitcher.letterSpacing === false && priceCurrencyLetterSpacing.Desktop ? `letter-spacing: ${priceCurrencyLetterSpacing.Desktop}${priceCurrencyLetterSpacingUnits.Desktop};` : ""}
 			${priceCurrencyGlobalTypoSwitcher.lineHeight === false && priceCurrencyLineHeight.Desktop ? `line-height: ${priceCurrencyLineHeight.Desktop}${priceCurrencyLineHeightUnits.Desktop};` : ""}
+			transition: all 0.3s ease;
 		}
 		.${blockId} .fb-pricing-price-wrapper .price-currency:hover {
 			${priceCurrencyHoverColor ? `color: ${priceCurrencyHoverColor};` : ''}
@@ -2855,6 +3171,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricePeriodGlobalTypoSwitcher.textDecoration === false && pricePeriodTextDecoration ? `text-decoration: ${pricePeriodTextDecoration};` : ""}
 			${pricePeriodGlobalTypoSwitcher.letterSpacing === false && pricePeriodLetterSpacing.Desktop ? `letter-spacing: ${pricePeriodLetterSpacing.Desktop}${pricePeriodLetterSpacingUnits.Desktop};` : ""}
 			${pricePeriodGlobalTypoSwitcher.lineHeight === false && pricePeriodLineHeight.Desktop ? `line-height: ${pricePeriodLineHeight.Desktop}${pricePeriodLineHeightUnits.Desktop};` : ""}
+			transition: all 0.3s ease;
 		}
 		.${blockId} .fb-pricing-price-wrapper .price-period:hover {
 			${pricePeriodHoverColor ? `color: ${pricePeriodHoverColor};` : ''}
@@ -2880,6 +3197,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricingTitleGlobalTypoSwitcher.textDecoration === false && pricingTitleTextDecoration ? `text-decoration: ${pricingTitleTextDecoration};` : ''}
 			${pricingTitleGlobalTypoSwitcher.letterSpacing === false && pricingTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingTitleLetterSpacing.Desktop}${pricingTitleLetterSpacingUnits.Desktop};` : ''}
 			${pricingTitleGlobalTypoSwitcher.lineHeight === false && pricingTitleLineHeight.Desktop ? `line-height: ${pricingTitleLineHeight.Desktop}${pricingTitleLineHeightUnits.Desktop};` : ''}
+
+			${titleDesktopPadding && pricingTitleDesktopPadding.top? `padding: ${titleDesktopPadding};` : ''}
+			${titleDesktopMargin && pricingTitleDesktopMargin.top? `margin: ${titleDesktopMargin};` : ''}
+			transition: all 0.3s ease;
+
 		}
 		.${blockId} .fb-pricing-title:hover {
 			${pricingTitleHoverColor ? `color: ${pricingTitleHoverColor};` : ''}
@@ -2904,6 +3226,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricingSubtitleGlobalTypoSwitcher.textDecoration === false && pricingSubtitleTextDecoration ? `text-decoration: ${pricingSubtitleTextDecoration};` : ''}
 			${pricingSubtitleGlobalTypoSwitcher.letterSpacing === false && pricingSubtitleLetterSpacing.Desktop ? `letter-spacing: ${pricingSubtitleLetterSpacing.Desktop}${pricingSubtitleLetterSpacingUnits.Desktop};` : ''}
 			${pricingSubtitleGlobalTypoSwitcher.lineHeight === false && pricingSubtitleLineHeight.Desktop ? `line-height: ${pricingSubtitleLineHeight.Desktop}${pricingSubtitleLineHeightUnits.Desktop};` : ''}
+
+			${subtitleDesktopPadding && pricingSubtitleDesktopPadding.top? `padding: ${subtitleDesktopPadding};` : ''}
+			${subtitleDesktopMargin && pricingSubtitleDesktopMargin.top? `margin: ${subtitleDesktopMargin};` : ''}
+			transition: all 0.3s ease;
 		}
 		.${blockId} .fb-pricing-subtitle:hover {
 			${pricingSubtitleHoverColor ? `color: ${pricingSubtitleHoverColor};` : ''}
@@ -2941,6 +3267,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceAfterTextBorderDesktopWidth && priceAfterTextBorderDesktop.top? `border-width: ${priceAfterTextBorderDesktopWidth};` : ''}
 			${priceAfterTextBorderRadiusDesktopWidth && priceAfterTextBorderRadiusDesktop.top? `border-radius: ${priceAfterTextBorderRadiusDesktopWidth};` : ''}
 			${priceAfterTextDesktopPaddingWidth && priceAfterTextPaddingDesktop.top ? `padding: ${priceAfterTextDesktopPaddingWidth};` : ''}
+			transition: all 0.3s ease;
 		}
 
 		.${blockId} .fb-pricing-after-text:hover {
@@ -2965,7 +3292,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceFeatureItemBorder ? `border: ${priceFeatureItemBorder};` : ''}
 			${priceFeatureItemBorderColor ? `border-color: ${priceFeatureItemBorderColor};` : ''}
 			${priceFeatureItemDesktopBorderWidth && priceFeatureItemDesktopBorder.top? `border-width: ${priceFeatureItemDesktopBorderWidth};` : ''}
-			${priceFeatureItemDesktopBorderRadiusWidth && priceFeatureItemDesktopBorderRadius.top? `border-radius: ${priceFeatureItemDesktopBorderRadiusWidth};` : ''} 
+			${priceFeatureItemDesktopBorderRadiusWidth && priceFeatureItemDesktopBorderRadius.top? `border-radius: ${priceFeatureItemDesktopBorderRadiusWidth};` : ''}
+			transition: all 0.3s ease;
 		}
 		
 		.${blockId} .fb-pricing-feature-item:hover {
@@ -3000,6 +3328,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceFeatureAfterTextGlobalTypoSwitcher.textDecoration === false && priceFeatureAfterTextTextDecoration ? `text-decoration: ${priceFeatureAfterTextTextDecoration};` : ''}
 			${priceFeatureAfterTextGlobalTypoSwitcher.letterSpacing === false && priceFeatureAfterTextLetterSpacing.Desktop ? `letter-spacing: ${priceFeatureAfterTextLetterSpacing.Desktop}${priceFeatureAfterTextLetterSpacingUnits.Desktop};` : ''}
 			${priceFeatureAfterTextGlobalTypoSwitcher.lineHeight === false && priceFeatureAfterTextLineHeight.Desktop ? `line-height: ${priceFeatureAfterTextLineHeight.Desktop}${priceFeatureAfterTextLineHeightUnits.Desktop};` : ''}	
+			transition: all 0.3s ease;
 		}
 
 		.${blockId} .fb-pricing-feature-after-text:hover {
@@ -3036,6 +3365,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${pricingfeatureTitleGlobalTypoSwitcher.textDecoration === false && pricingfeatureTitleTextDecoration ? `text-decoration: ${pricingfeatureTitleTextDecoration};` : ''}
 			${pricingfeatureTitleGlobalTypoSwitcher.letterSpacing === false && pricingfeatureTitleLetterSpacing.Desktop ? `letter-spacing: ${pricingfeatureTitleLetterSpacing.Desktop}${pricingfeatureTitleLetterSpacingUnits.Desktop};` : ''}
 			${pricingfeatureTitleGlobalTypoSwitcher.lineHeight === false && pricingfeatureTitleLineHeight.Desktop ? `line-height: ${pricingfeatureTitleLineHeight.Desktop}${pricingfeatureTitleLineHeightUnits.Desktop};` : ''}
+			transition: all 0.3s ease;
 		}
 		.${blockId} .fb-pricing-feature-text:hover {
 			${pricingfeatureTitleHoverColor ? `color: ${pricingfeatureTitleHoverColor};` : ''}
@@ -3176,6 +3506,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.${blockId}	.fb-pricing-price-wrapper {
 				${priceTabletPaddingWidth && priceTabletPadding.top? `padding: ${priceTabletPaddingWidth};` : ''}
 				text-align: ${pricingAlignment === 'left' ? 'left' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'right' : 'center'};
+			}
+
+			.${blockId} .fb-pricing-title {
+				${pricingTitleGlobalTypoSwitcher.fontSize === false && pricingTitleFontSize.Tablet ? `font-size: ${pricingTitleFontSize.Tablet}${pricingTitleFontSizeUnits.Tablet};` : ''}
+				${pricingTitleGlobalTypoSwitcher.letterSpacing === false && pricingTitleLetterSpacing.Tablet ? `letter-spacing: ${pricingTitleLetterSpacing.Tablet}${pricingTitleLetterSpacingUnits.Tablet};` : ''}
+				${pricingTitleGlobalTypoSwitcher.lineHeight === false && pricingTitleLineHeight.Tablet ? `line-height: ${pricingTitleLineHeight.Tablet}${pricingTitleLineHeightUnits.Tablet};` : ''}
+
+				${titleTabletPadding && pricingTitleTabletPadding.top? `padding: ${titleTabletPadding};` : ''}
+				${titleTabletMargin && pricingTitleTabletMargin.top? `margin: ${titleTabletMargin};` : ''}
+
+			}
+
+			.${blockId} .fb-pricing-subtitle {
+				${pricingSubtitleGlobalTypoSwitcher.fontSize === false && pricingSubtitleFontSize.Tablet ? `font-size: ${pricingSubtitleFontSize.Tablet}${pricingSubtitleFontSizeUnits.Tablet};` : ''}
+				${pricingSubtitleGlobalTypoSwitcher.letterSpacing === false && pricingSubtitleLetterSpacing.Tablet ? `letter-spacing: ${pricingSubtitleLetterSpacing.Tablet}${pricingSubtitleLetterSpacingUnits.Tablet};` : ''}
+				${pricingSubtitleGlobalTypoSwitcher.lineHeight === false && pricingSubtitleLineHeight.Tablet ? `line-height: ${pricingSubtitleLineHeight.Tablet}${pricingSubtitleLineHeightUnits.Tablet};` : ''}
+
+				${subtitleTabletPadding && pricingSubtitleTabletPadding.top? `padding: ${subtitleTabletPadding};` : ''}
+				${subtitleTabletMargin && pricingSubtitleTabletMargin.top? `margin: ${subtitleTabletMargin};` : ''}
 			}
 
 			.${blockId} .fb-pricing-after-text {
@@ -3372,6 +3721,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			.${blockId} .fb-pricing-feature-after-text:hover {
 				${priceFeatureAfterTextHoverColor ? `color: ${priceFeatureAfterTextHoverColor};` : ''}
+			}
+
+			.${blockId} .fb-pricing-title {
+				${pricingTitleGlobalTypoSwitcher.fontSize === false && pricingTitleFontSize.Mobile ? `font-size: ${pricingTitleFontSize.Mobile}${pricingTitleFontSizeUnits.Mobile};` : ''}
+				${pricingTitleGlobalTypoSwitcher.letterSpacing === false && pricingTitleLetterSpacing.Mobile ? `letter-spacing: ${pricingTitleLetterSpacing.Mobile}${pricingTitleLetterSpacingUnits.Mobile};` : ''}
+				${pricingTitleGlobalTypoSwitcher.lineHeight === false && pricingTitleLineHeight.Mobile ? `line-height: ${pricingTitleLineHeight.Mobile}${pricingTitleLineHeightUnits.Mobile};` : ''}
+
+				${titleMobilePadding && pricingTitleMobilePadding.top? `padding: ${titleMobilePadding};` : ''}
+				${titleMobileMargin && pricingTitleMobileMargin.top? `margin: ${titleMobileMargin};` : ''}
+
+			}
+
+			.${blockId} .fb-pricing-subtitle {
+				${pricingSubtitleGlobalTypoSwitcher.fontSize === false && pricingSubtitleFontSize.Mobile ? `font-size: ${pricingSubtitleFontSize.Mobile}${pricingSubtitleFontSizeUnits.Mobile};` : ''}
+				${pricingSubtitleGlobalTypoSwitcher.letterSpacing === false && pricingSubtitleLetterSpacing.Mobile ? `letter-spacing: ${pricingSubtitleLetterSpacing.Mobile}${pricingSubtitleLetterSpacingUnits.Mobile};` : ''}
+				${pricingSubtitleGlobalTypoSwitcher.lineHeight === false && pricingSubtitleLineHeight.Mobile ? `line-height: ${pricingSubtitleLineHeight.Mobile}${pricingSubtitleLineHeightUnits.Mobile};` : ''}
+
+				${subtitleMobilePadding && pricingSubtitleMobilePadding.top? `padding: ${subtitleMobilePadding};` : ''}
+				${subtitleMobileMargin && pricingSubtitleMobileMargin.top? `margin: ${subtitleMobileMargin};` : ''}
 			}
 
 			.${blockId} .fb-pricing-after-text {
@@ -3613,6 +3981,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingTitleLineHeight,
 		pricingTitleLineHeightUnits,
 
+		pricingTitlePaddingUnits,
+		pricingTitleDesktopPadding,
+		pricingTitleTabletPadding,
+		pricingTitleMobilePadding,
+		pricingTitlePaddingLink,
+		titleDesktopPadding,
+		titleTabletPadding,
+		titleMobilePadding,
+
+		pricingTitleMarginUnits,
+		pricingTitleDesktopMargin,
+		pricingTitleTabletMargin,
+		pricingTitleMobileMargin,
+		pricingTitleMarginLink,
+		titleDesktopMargin,
+		titleTabletMargin,
+		titleMobileMargin,
+
 		pricingSubtitleColorSwitcher,
 		pricingSubtitleColor,
 		pricingSubtitleHoverColor,
@@ -3630,6 +4016,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingSubtitleLetterSpacingUnits,
 		pricingSubtitleLineHeight,
 		pricingSubtitleLineHeightUnits,
+
+		pricingSubtitlePaddingUnits,
+		pricingSubtitleDesktopPadding,
+		pricingSubtitleTabletPadding,
+		pricingSubtitleMobilePadding,
+		pricingSubtitlePaddingLink,
+		subtitleDesktopPadding,
+		subtitleTabletPadding,
+		subtitleMobilePadding,
+
+		pricingSubtitleMarginUnits,
+		pricingSubtitleDesktopMargin,
+		pricingSubtitleTabletMargin,
+		pricingSubtitleMobileMargin,
+		pricingSubtitleMarginLink,
+		subtitleDesktopMargin,
+		subtitleTabletMargin,
+		subtitleMobileMargin,
 
 		priceFeatureAlignment,
 		priceFeatureIconColorSwitcher,
@@ -4506,7 +4910,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						setAttributes={setAttributes}
 					/>
 
-
 				</PanelBody>
 			)}
 			<PanelBody
@@ -4906,6 +5309,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						setGlobalColor={(value) => setAttributes({ pricingTitleHoverColor: value })}
 					/>
 				)}
+
+					<FB_Spacing 
+						label={__("Padding", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleTitlePaddingUnitsHandler}
+						spacingUnits={pricingTitlePaddingUnits}
+						spacingDesktop={pricingTitleDesktopPadding}
+						spacingTablet={pricingTitleTabletPadding}
+						spacingMobile={pricingTitleMobilePadding}
+						handleSpacingUnitHandler={handleTitlePaddingUnitChange}
+						spacingCombineBtn={pricingTitlePaddingLink}
+						spacingCombineBtnHandler={handleTitlePaddingCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+					<FB_Spacing 
+						label={__("Margin", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleTitleMarginUnitsHandler}
+						spacingUnits={pricingTitleMarginUnits}
+						spacingDesktop={pricingTitleDesktopMargin}
+						spacingTablet={pricingTitleTabletMargin}
+						spacingMobile={pricingTitleMobileMargin}
+						handleSpacingUnitHandler={handleTitleMarginUnitChange}
+						spacingCombineBtn={pricingTitleMarginLink}
+						spacingCombineBtnHandler={handleTitleMarginCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
 			</PanelBody>
 
 			{pricingSubTitleSwitcher && (
@@ -4993,6 +5425,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setGlobalColor={(value) => setAttributes({ pricingSubtitleHoverColor: value })}
 						/>
 					)}
+					<FB_Spacing 
+						label={__("Padding", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleSubtitlePaddingUnitsHandler}
+						spacingUnits={pricingSubtitlePaddingUnits}
+						spacingDesktop={pricingSubtitleDesktopPadding}
+						spacingTablet={pricingSubtitleTabletPadding}
+						spacingMobile={pricingSubtitleMobilePadding}
+						handleSpacingUnitHandler={handleSubtitlePaddingUnitChange}
+						spacingCombineBtn={pricingSubtitlePaddingLink}
+						spacingCombineBtnHandler={handleSubtitlePaddingCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+					<FB_Spacing 
+						label={__("Margin", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleSubtitleMarginUnitsHandler}
+						spacingUnits={pricingSubtitleMarginUnits}
+						spacingDesktop={pricingSubtitleDesktopMargin}
+						spacingTablet={pricingSubtitleTabletMargin}
+						spacingMobile={pricingSubtitleMobileMargin}
+						handleSpacingUnitHandler={handleSubtitleMarginUnitChange}
+						spacingCombineBtn={pricingSubtitleMarginLink}
+						spacingCombineBtnHandler={handleSubtitleMarginCombineBtn}
+						setAttributes={setAttributes}
+					/>
 				</PanelBody>
 			)}	
 
@@ -5145,8 +5604,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				{salePricingColorSwitcher === 'normal' && (
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
-						globalColor={normalPricingColor}
-						setGlobalColor={(value) => setAttributes({ normalPricingColor: value })}
+						globalColor={salePricingColor} 
+						setGlobalColor={(value) => setAttributes({ salePricingColor: value })}
 					/>
 				)}
 

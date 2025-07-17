@@ -684,16 +684,16 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         }
 
         ${sliderOverlaySwitcher ? `
-        .${blockId}.fb-marquee-carousel-container::before {
+        .${blockId}.fb-marquee-carousel-container .swiper-container::before {
             left: 0;
-            background: linear-gradient(to right, ${sliderOverlayStartColor} 0%, ${sliderOverlayEndColor} 100%);
-            width: ${sliderOverlayWidth.Desktop}${sliderOverlayWidthUnits.Desktop};
+            background: linear-gradient(to right, ${sliderOverlayStartColor} 0%, ${sliderOverlayEndColor} 100%) !important;
+            width: ${sliderOverlayWidth.Desktop}${sliderOverlayWidthUnits.Desktop} !important;
         }
 
-        .${blockId}.fb-marquee-carousel-container::after {
+        .${blockId}.fb-marquee-carousel-container .swiper-container::after {
             right: 0;
-            background: linear-gradient(to left, ${sliderOverlayStartColor} 0%, ${sliderOverlayEndColor} 100%);
-            width: ${sliderOverlayWidth.Desktop}${sliderOverlayWidthUnits.Desktop};
+            background: linear-gradient(to left, ${sliderOverlayStartColor} 0%, ${sliderOverlayEndColor} 100%) !important;
+            width: ${sliderOverlayWidth.Desktop}${sliderOverlayWidthUnits.Desktop} !important;
         }
         ` : ''}
 
@@ -996,7 +996,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             <PanelBody title="Slide" initialOpen={true}>
                 <FB_Range
                     min={1}
-                    max={500}
+                    max={slideWidthUnits[deviceType] === "%" ? 100 : 1000}
                     label={__("Width", "frontis-blocks")}
                     rangeValue={slideWidth}
                     onChangeHandler={(value) => setAttributes({ slideWidth: value })}
@@ -1147,7 +1147,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                         />
                         <FB_Range
                             min={1}
-                            max={500}
+                            max={sliderOverlayWidthUnits[deviceType] === "%" ? 100 : 1000}
                             label={__("Width", "frontis-blocks")}
                             rangeValue={sliderOverlayWidth}
                             onChangeHandler={(value) => setAttributes({ sliderOverlayWidth: value })}

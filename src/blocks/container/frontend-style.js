@@ -162,6 +162,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		customOrderMobile,
 
 		// Custom attributes from fb
+		globalFullWidthContentBoxedWidth,
 		fullWidthContentBoxedWidth,
 		fullWidthContentBoxedWidthUnits,
 		customWidth,
@@ -172,6 +173,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		containerCustomWidthUnits,
 		containerWrap,
 		containerTypeFull,
+		globalColumnGap,
+		globalRowGap,
 		columnGap,
 		rowGap,
 		columnGapUnits,
@@ -297,19 +300,19 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	const isLayoutGrid = 'grid' === layout;
 
 	const innerContentCustomWidthDesktopFallback = getFallbackNumber(
-		fullWidthContentBoxedWidth['Desktop'],
+		fullWidthContentBoxedWidth['Desktop'] === '' ? globalFullWidthContentBoxedWidth['Desktop'] : fullWidthContentBoxedWidth['Desktop'],
 		'innerContentCustomWidthDesktop',
 		blockName
 	);
 
 	const innerContentCustomWidthTabletFallback = getFallbackNumber(
-		fullWidthContentBoxedWidth['Tablet'],
+		fullWidthContentBoxedWidth['Tablet'] === '' ? globalFullWidthContentBoxedWidth['Tablet'] : fullWidthContentBoxedWidth['Tablet'],
 		'innerContentCustomWidthTablet',
 		blockName
 	);
 
 	const innerContentCustomWidthMobileFallback = getFallbackNumber(
-		fullWidthContentBoxedWidth['Mobile'],
+		fullWidthContentBoxedWidth['Mobile'] === '' ? globalFullWidthContentBoxedWidth['Mobile'] : fullWidthContentBoxedWidth['Mobile'],
 		'innerContentCustomWidthMobile',
 		blockName
 	);
@@ -318,12 +321,12 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	const widthTabletFallback = getFallbackNumber(customWidth['Tablet'], 'customWidth', blockName);
 	const widthMobileFallback = getFallbackNumber(customWidth['Mobile'], 'customWidth', blockName);
 
-	const rowGapDesktopFallback = getFallbackNumber(rowGap['Desktop'], 'rowGapDesktop', blockName);
-	const columnGapDesktopFallback = getFallbackNumber(columnGap['Desktop'], 'columnGapDesktop', blockName);
-	const rowGapTabletFallback = getFallbackNumber(rowGap['Tablet'], 'rowGapTablet', blockName);
-	const columnGapTabletFallback = getFallbackNumber(columnGap['Tablet'], 'columnGapTablet', blockName);
-	const rowGapMobileFallback = getFallbackNumber(rowGap['Mobile'], 'rowGapMobile', blockName);
-	const columnGapMobileFallback = getFallbackNumber(columnGap['Mobile'], 'columnGapMobile', blockName);
+	const rowGapDesktopFallback = getFallbackNumber(rowGap['Desktop'] === '' ? globalRowGap['Desktop'] : rowGap['Desktop'], 'rowGapDesktop', blockName);
+	const columnGapDesktopFallback = getFallbackNumber(columnGap['Desktop'] === '' ? globalColumnGap['Desktop'] : columnGap['Desktop'], 'columnGapDesktop', blockName);
+	const rowGapTabletFallback = getFallbackNumber(rowGap['Tablet'] === '' ? globalRowGap['Tablet'] : rowGap['Tablet'], 'rowGapTablet', blockName);
+	const columnGapTabletFallback = getFallbackNumber(columnGap['Tablet'] === '' ? globalColumnGap['Tablet'] : columnGap['Tablet'], 'columnGapTablet', blockName);
+	const rowGapMobileFallback = getFallbackNumber(rowGap['Mobile'] === '' ? globalRowGap['Mobile'] : rowGap['Mobile'], 'rowGapMobile', blockName);
+	const columnGapMobileFallback = getFallbackNumber(columnGap['Mobile'] === '' ? globalColumnGap['Mobile'] : columnGap['Mobile'], 'columnGapMobile', blockName);
 
 	const borderCSS = generateBorderCSS(attributes, 'container');
 	const borderCSSTablet = generateBorderCSS(attributes, 'container', 'tablet');
@@ -1361,17 +1364,26 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	}
 
 	if ('custom' === containerType) {
-		selectors['.block-editor-block-list__block']['max-width'] = generateCSSUnit(
+		if (!selectors['.wp-block-frontis-blocks-container']) {
+			selectors['.wp-block-frontis-blocks-container'] = {};
+		}
+		selectors['.wp-block-frontis-blocks-container']['max-width'] = generateCSSUnit(
 			containerCustomWidth['Desktop'],
 			containerCustomWidthUnits['Desktop']
 		);
-
-		tablet_selectors['.block-editor-block-list__block']['max-width'] = generateCSSUnit(
+	
+		if (!tablet_selectors['.wp-block-frontis-blocks-container']) {
+			tablet_selectors['.wp-block-frontis-blocks-container'] = {};
+		}
+		tablet_selectors['.wp-block-frontis-blocks-container']['max-width'] = generateCSSUnit(
 			containerCustomWidth['Tablet'],
 			containerCustomWidthUnits['Tablet']
 		);
-
-		mobile_selectors['.block-editor-block-list__block']['max-width'] = generateCSSUnit(
+	
+		if (!mobile_selectors['.wp-block-frontis-blocks-container']) {
+			mobile_selectors['.wp-block-frontis-blocks-container'] = {};
+		}
+		mobile_selectors['.wp-block-frontis-blocks-container']['max-width'] = generateCSSUnit(
 			containerCustomWidth['Mobile'],
 			containerCustomWidthUnits['Mobile']
 		);
