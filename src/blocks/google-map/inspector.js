@@ -122,6 +122,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         googleMapBoxShadowHoverCssValue,
         googleMapGlobalZIndex,
 
+        googleMapCustomCSS,
+        googleMapWraperID,
+        googleMapWraperClass,
+
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -567,13 +571,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         googleMapBoxShadowHoverCssValue,
         googleMapGlobalZIndex,
 
+        googleMapCustomCSS,
+        googleMapWraperID,
+        googleMapWraperClass,
+
     ]);
 
-    useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle] );
+    const customCss = getCustomCss(googleMapCustomCSS, `.${blockId}`);
 
-    const editorStyle = `${allBlockStyle}`.replace(/\s+/g, ' ').trim();
+    useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss]);
+
+    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 
     /**
@@ -821,6 +831,30 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     rangeStep={1}
                     resetFallbackValue={""}
                     isRangeUnit={false}
+                />
+
+                <FB_InputControl
+                    label={__("CSS ID", "frontis-blocks")}
+                    value={googleMapWraperID}
+                    onChangeValue={(value) => setAttributes({ googleMapWraperID: value })}
+                    helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                />
+
+                <FB_InputControl
+                    label={__("CSS Class", "frontis-blocks")}
+                    value={googleMapWraperClass}
+                    onChangeValue={(value) => setAttributes({ googleMapWraperClass: value })}
+                    helpText={__("Separate with spaces key.", "frontis-blocks")}
+                />
+            </PanelBody>
+
+            <PanelBody
+                title={__("Custom CSS", "frontis-blocks")}
+                initialOpen={false}
+            >
+                <FB_CustomCSSEditor  
+                    value={googleMapCustomCSS} 
+                    onChangeValue={(value) => setAttributes({ googleMapCustomCSS: value })}
                 />
             </PanelBody>
 

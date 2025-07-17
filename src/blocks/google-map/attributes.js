@@ -323,5 +323,21 @@ const attributes = {
             Mobile: ''
         }
     },
+
+    /** Start Class & ID Setting */
+	googleMapCustomCSS : {
+        type: "string",
+        default: "",
+    },
+	googleMapWraperID : {
+		type: "string",
+		default: ""
+	},
+
+	googleMapWraperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */
 }
 export default attributes;
