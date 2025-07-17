@@ -46,9 +46,11 @@
             .fb-import-form-panel {
                 position: relative;
                 flex: 1;
-                padding: 24px;
+                max-width: 316px;
+                padding: 32px 24px;
                 border-right: 1px solid $neutral-color-100;
                 overflow-y: auto;
+                scrollbar-width: thin;
                 transition: transform 0.3s ease, opacity 0.3s ease;
 
                 &.collapsed {
@@ -148,6 +150,13 @@
                                     font-size: 14px;
                                     color: #6B7280;
                                 }
+
+                                svg {
+                                    width: 24px;
+                                    height: 24px;
+                                    box-sizing: content-box;
+                                    padding: 16px;
+                                }
                             }
                         }
                     }
@@ -181,6 +190,7 @@
                             color: $neutral-color;
                             background: $neutral-color-50;
                             border: 1px solid $neutral-color-200;
+                            margin-bottom: 0;
                         }
                     }
                 }

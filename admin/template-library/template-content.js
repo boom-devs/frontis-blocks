@@ -9,13 +9,15 @@ import TemplateImport from "./template-import";
 import LoginSignupModal from "./login-signup";
 import PluginUpgradeModal from "./plugin-upgrade";
 
-const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [] }) => {
+const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [], dependency = [], activeTab, setLibraryData }) => {
 	const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 	const [isLoading, setIsLoading] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+	const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [isPluginUpgrade, setIsPluginUpgrade] = useState(false);
 
 	// Check authentication status on component mount
 	useEffect(() => {
@@ -24,12 +26,13 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [] }) => {
 
 	const handleFullSiteImport = useCallback(() => {
 
-		if (!isPro) {
-			setIsModalOpen(true);
+		if(!isPluginUpgrade) {
+			setIsPluginUpgradeModalOpen(true);
 		}
 		if (!isAuthenticated) {
 			setIsLoginModalOpen(true);
-		} else {
+		}
+		if (!isPro) {
 			setIsModalOpen(true);
 		}
 	}, [isAuthenticated]);
@@ -42,6 +45,12 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [] }) => {
 
 	const handleCloseLoginModal = useCallback(() => {
 		setIsLoginModalOpen(false);
+		setIsPluginUpgrade(false);
+	}, []);
+
+	const handleClosePluginUpgradeModal = useCallback(() => {
+		setIsPluginUpgradeModalOpen(false);
+		setIsPluginUpgrade(true);
 	}, []);
 
 	const handleCloseModal = useCallback(() => {
@@ -52,6 +61,12 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [] }) => {
 		console.log("Demo clicked for:", id);
 	}, [id]);
 
+	const currentDay = new Date().toLocaleDateString('en-US', {day: 'numeric' });
+	const currentMonth = new Date().toLocaleDateString('en-US', {month: 'long' });
+	const currentYear = new Date().toLocaleDateString('en-US', {year: 'numeric' });
+	const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+	const currentDateAndTime = {day: currentDay, month: currentMonth, year: currentYear, time: currentTime};
+
 	const templateData = {
 		id,
 		title,
@@ -59,8 +74,18 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [] }) => {
 		isPro,
 		category: ['Blog & Magazine', 'Construction', 'eCommerce'],
 		author: 'Template Author',
-		downloads: 2025
+		activeTab: activeTab,
+		dependency: dependency,
+		dateAndTime: currentDateAndTime,
 	};
+
+	const handleSaveLibrary = useCallback(() => {
+		setLibraryData(prevData => {
+			const alreadyExists = prevData.some(item => item.id === templateData.id);
+			if (alreadyExists) return prevData;
+			return [...prevData, templateData];
+		});
+	}, [templateData]);
 
 	return (
 		<>
@@ -123,19 +148,34 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [] }) => {
 						)}
 					</button>
 
-					<button className="fb-template-save-my-cloud">
-						<span>Save Library</span>
+					<button 
+						className={`fb-template-save-my-cloud ${isLoading ? "loading" : ""}`} 
+						onClick={!isLoading ? handleSaveLibrary : null}
+						disabled={isLoading}
+					>
+						{isLoading ? (
+							<>
+								<span>Saving...</span>
+								<ClipLoader color="#fff" size={16} />
+							</>
+						) : (
+							<>
+								<span>Save Library</span>
+							</>
+						)}
 					</button>
 				</div>
 			</div>
 
 
-			{!isPro && (
-				<PluginUpgradeModal />
+			{isPro && isPluginUpgradeModalOpen && (
+				<PluginUpgradeModal
+					onClose={handleClosePluginUpgradeModal}
+				/>
 			)}
 
 			{/* Login/Signup Modal */}
-			{isPro && isLoginModalOpen && (
+			{isPro && isPluginUpgrade && isLoginModalOpen && (
 				<LoginSignupModal
 					onClose={handleCloseLoginModal}
 					onLoginSuccess={handleLoginSuccess}
@@ -153,18 +193,27 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [] }) => {
 	);
 };
 
-const TemplateLibrary = ({ activeTab, activeCategory, data }) => {
+const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibraryData }) => {
+
+	const TagTabsOptions = [
+		{name: 'User Experience', value: 'user-experience'},
+		{name: 'Templates', value: 'templates'},
+		{name: 'Web Design', value: 'web-design'},
+		{name: 'E-commerce', value: 'e-commerce'},
+		{name: 'Landing Pages', value: 'landing-pages'},
+	];
+
 	const schema = data?.$schema || {};
 	const [filteredTemplates, setFilteredTemplates] = useState([]);
+	const [activeTagTab, setActiveTagTab] = useState('');
 
 	useEffect(() => {
-		if (activeTab && activeCategory) {
+		if (activeTab && activeCategory[activeTab]) {
 			const tabData = schema[activeTab];
 			const selectedCategory = tabData?.categories?.find(
-				(category) => category.id === activeCategory,
+				(category) => category.id === activeCategory[activeTab],
 			);
 
-			console.log(selectedCategory);
 
 			if (selectedCategory && selectedCategory.items) {
 				setFilteredTemplates(selectedCategory.items);
@@ -172,7 +221,7 @@ const TemplateLibrary = ({ activeTab, activeCategory, data }) => {
 				setFilteredTemplates([]);
 			}
 		}
-	}, [activeTab, activeCategory]);
+	}, [activeTab, activeCategory[activeTab]]);
 
 	return (
 		<div className="fb-template-library-store-content">
@@ -200,23 +249,30 @@ const TemplateLibrary = ({ activeTab, activeCategory, data }) => {
 						</div>
 					</div>
 					<div className="fb-template-library-tags-wrapper">
-						<span>User Experience</span>
-						<span>UI Kits</span>
-						<span>Templates</span>
-						<span>Web Design</span>
-						<span>Creative Assets</span>
+						{TagTabsOptions.map(tab => (
+							<button
+								key={tab.value}
+								className={`fb-template-library-tag-btn ${activeTagTab === tab.value ? 'active' : ''}`}
+								onClick={() => setActiveTagTab(tab.value)}
+							>
+								{tab.name}
+							</button>
+						))}
 					</div>
 				</div>
 			</div>
 			<div className="fb-template-library-cards">
-				{filteredTemplates.map((template, index) => (
+				{filteredTemplates.map(template => (
 					<TemplateCard
 						key={template.id}
 						id={template.id}
 						title={template.title}
 						imageUrl={template.image}
-						isPro={index % 3 === 1}
+						isPro={template.isPro || false}
 						tags={template.tags || []}
+						dependency={template.dependency || []}
+						activeTab={activeTab}
+						setLibraryData={setLibraryData}
 					/>
 				))}
 			</div>
