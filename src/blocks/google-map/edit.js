@@ -15,6 +15,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         googleMapLocation,
         googleMapZoomLevel,
         googleMapMapType,
+
+        googleMapWraperID,
+        googleMapWraperClass,
     } = attributes;
     
 
@@ -31,7 +34,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 clientId = {clientId}
             />
             <div {...blockProps}>
-                <div className="fb-google-map-wrapper">
+                <div className={`fb-google-map-wrapper ${googleMapWraperClass}`} id={googleMapWraperID}>
                     <iframe
                         src={`https://maps.google.com/maps?q=${encodeURIComponent(googleMapLocation)}&t=${googleMapMapType}&z=${googleMapZoomLevel}&output=embed&iwloc=near`}
                         allowFullScreen=""

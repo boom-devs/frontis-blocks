@@ -6,6 +6,8 @@ export default function save({ attributes }) {
         googleMapLocation,
         googleMapZoomLevel,
         googleMapMapType,
+        googleMapWraperID,
+        googleMapWraperClass,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -16,7 +18,7 @@ export default function save({ attributes }) {
 
         <>
             <div {...blockProps}>
-                <div className="fb-google-map-wrapper">
+                <div className={`fb-google-map-wrapper ${googleMapWraperClass}`} id={googleMapWraperID}>
                     <iframe
                         src={`https://maps.google.com/maps?q=${encodeURIComponent(googleMapLocation)}&t=${googleMapMapType}&z=${googleMapZoomLevel}&output=embed&iwloc=near`}
                         allowFullScreen=""
