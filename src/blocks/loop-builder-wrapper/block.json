@@ -1,18 +1,69 @@
 {
-    "$schema": "https://schemas.wp.org/trunk/block.json",
-    "apiVersion": 3,
-    "name": "frontis-blocks/loop-builder-wrapper",
-    "version": "1.0.0",
-    "title": "Wrapper",
-    "category": "frontis-blocks",
-    "textdomain": "frontis-blocks",
-	"description": "A customizable loop builder wrapper block with various styling options.",
-    "example": {},
-    "supports": {
-        "anchor": false,
-        "align": ["wide", "full"],
-        "customClassName": false
-    },
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontis-blocks/loop-builder-wrapper",
+	"title": "Wrapper",
+	"category": "frontis-blocks",
+	"ancestor": [ "frontis-blocks/loop-builder" ],
+	"description": "Contains the block elements used to render a post, like the title, date, featured image, content or excerpt, and more.",
+	"textdomain": "frontis-blocks",
+	"usesContext": [
+		"queryId",
+		"query",
+		"displayLayout",
+		"templateSlug",
+		"previewPostType",
+		"enhancedPagination",
+		"postType"
+	],
+	"supports": {
+		"reusable": false,
+		"html": false,
+		"align": [ "wide", "full" ],
+		"layout": true,
+		"color": {
+			"gradients": true,
+			"link": true,
+			"__experimentalDefaultControls": {
+				"background": true,
+				"text": true
+			}
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"__experimentalFontFamily": true,
+			"__experimentalFontWeight": true,
+			"__experimentalFontStyle": true,
+			"__experimentalTextTransform": true,
+			"__experimentalTextDecoration": true,
+			"__experimentalLetterSpacing": true,
+			"__experimentalDefaultControls": {
+				"fontSize": true
+			}
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true,
+			"blockGap": {
+				"__experimentalDefault": "1.25em"
+			},
+			"__experimentalDefaultControls": {
+				"blockGap": true,
+				"padding": false,
+				"margin": false
+			}
+		},
+		"interactivity": {
+			"clientNavigation": true
+		},
+		"__experimentalBorder": {
+			"radius": true,
+			"color": true,
+			"width": true,
+			"style": true
+		}
+	},
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css"
 }

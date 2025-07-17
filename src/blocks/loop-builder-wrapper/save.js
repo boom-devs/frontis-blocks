@@ -1,20 +1,8 @@
-import classnames from 'classnames';
-import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+/**
+ * WordPress dependencies
+ */
+import { InnerBlocks } from '@wordpress/block-editor';
 
-export default function save( props ) {
-	const { blockId } = props.attributes;
-
-	const blockProps = useBlockProps.save( {
-		className: classnames( 'fb-slider-child-wrap', 'swiper-slide', `fb-block-${ blockId }` ),
-	} );
-
-	return (
-		<>
-			<div { ...blockProps } key={ blockId }>
-				<div className="swiper-content">
-					<InnerBlocks.Content />
-				</div>
-			</div>
-		</>
-	);
+export default function PostTemplateSave() {
+	return <InnerBlocks.Content />;
 }
