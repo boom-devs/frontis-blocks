@@ -26,7 +26,7 @@
             gap: 14px;
             flex-wrap: wrap;
 
-            span {
+            .fb-template-library-tag-btn {
                 font-family: $body-font-family;
                 font-weight: $font-weight-500;
                 font-size: $large-font-size;
@@ -37,6 +37,53 @@
                 border-radius: 4px;
                 border: 1px solid $neutral-color-100;
                 cursor: pointer;
+                transition: all 0.3s ease;
+
+                &.active {
+                    background: $primary-color-base;
+                    color: $white-color;
+                    border: 1px solid $primary-color-base;
+                    transition: all 0.3s ease;
+                }
+            }
+        }
+        .fb-template-library-card-list-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+
+            .fb-template-library-card-list-btn {
+                display: flex;
+                background: $white-color;
+                padding: 10px;
+                border-radius: 4px;
+                border: 1px solid $neutral-color-100;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                svg {
+                    width: 24px;
+                    height: 24px;
+
+                    path {
+                        stroke: $neutral-color-700;
+                        transition: all 0.3s ease;
+                    }
+                }
+
+                &.active {
+                    background: $primary-color-base;
+                    border: 1px solid $primary-color-base;
+                    transition: all 0.3s ease;
+
+                    svg {
+                        path {
+                            stroke: $white-color;
+                            transition: all 0.3s ease;
+                        }
+                    }
+                }
             }
         }
 
@@ -71,15 +118,16 @@
                         padding-left: 36px;
                         border-radius: 4px;
                         border: 1px solid $neutral-color-100;
+                        min-width: 360px;
                     }
                 }
             }
         }
     }
 
-    .fb-template-library-cards {
+    div.fb-template-library-cards {
         display: flex;
-        gap: 30px;
+        gap: 24px;
         flex-wrap: wrap;
 
         .fb-template-library-card {
@@ -124,18 +172,16 @@
                         background: $warning-color;
                     }
                 }
-
-                &:hover {
-                    .fb-template-badge {
-                        opacity: 1;
-                    }
-                }
             }
 
             &:hover {
                 .fb-template-library-card-img {
                     img {
                         transform: scale(1.05);
+                    }
+
+                    .fb-template-badge {
+                        opacity: 1;
                     }
                 }
             }
@@ -319,6 +365,124 @@
                     background: none;
                     border: none;
                     cursor: pointer;
+                }
+            }
+        }
+    }
+    table.fb-template-library-cards {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid $neutral-color-100;
+        border-radius: 8px;
+        overflow: hidden;
+
+        .fb-template-library-card-header {
+            display: flex;
+            padding: 20px 32px;
+            background-color: $white-color;
+            font-size: 18px;
+            font-family: $heading-font-family;
+            line-height: 23px;
+            color: $neutral-color;
+
+            .fb-template-library-card-header-name {
+                width: 100%;
+            }
+            .fb-template-library-card-header-date {
+                width: 392px;
+                flex-shrink: 0;
+            }
+            .fb-template-library-card-header-actions {
+                width: 140px;
+                flex-shrink: 0;
+            }
+        }
+        .fb-template-library-card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            .fb-template-library-card.style-two {
+                display: flex;
+                align-items: center;
+                background-color: $white-color;
+                padding: 32px;
+
+                &:first-child {
+                    margin-top: 8px;
+                }
+
+                .fb-template-library-card-content {
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
+                    width: 100%;
+
+                    img {
+                        width: 84px;
+                        height: 62px;
+                        object-fit: cover;
+                        border-radius: 4px;
+                    }
+                    .fb-template-title {
+                        font-family: $body-font-family;
+                        font-size: 18px;
+                        font-weight: 500;
+                        line-height: 28px;
+                        color: $neutral-color-700;
+                        margin: 0;
+                    }
+                }
+                .fb-template-library-card-date {
+                    font-family: $body-font-family;
+                    font-size: 18px;
+                    font-weight: 500;
+                    line-height: 28px;
+                    color: $neutral-color-700;
+                    width: 392px;
+                    flex-shrink: 0;
+                }
+                .fb-template-library-card-actions {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    width: 140px;
+
+                    .fb-template-action-btn {
+                        &.import-btn {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-family: $heading-font-family;
+                            font-size: 18px;
+                            line-height: 23px;
+                            background-color: $primary-color;
+                            color: $white-color;
+                            border: none;
+                            border-radius: 4px;
+                            padding: 8px 16px;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        }
+                        &.option-btn {
+                            display: flex;
+                            border-color: transparent;
+                            border-radius: 4px;
+                            padding: 8px;
+                            cursor: pointer;
+                            background-color: $optional-color-200;
+                            transition: all 0.3s ease;
+
+                            svg {
+                                width: 20px;
+                                height: 20px;
+
+                                path {
+                                    stroke: #323B49;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

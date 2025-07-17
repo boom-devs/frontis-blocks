@@ -8,7 +8,7 @@
   \******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"pattern1","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png","content":"Pattern 1 content here","tags":["Blog","Magazine","Construction"]},{"id":"pattern2","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-1.png","content":"Pattern 2 content here","tags":["Landing","AI","Gutenberg"]},{"id":"pattern3","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Pattern 3 content here","tags":["Landing","Creative"]},{"id":"pattern4","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-2.png","content":"Pattern 4 content here","tags":["Landing","Business"]},{"id":"pattern5","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Pattern 5 content here","tags":["Landing","Portfolio"]},{"id":"pattern6","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Pattern 6 content here","tags":["Landing","Agency"]},{"id":"pattern15","title":"Illustrate AI Landing Page for Gutenberg","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Pattern 15 content here","tags":["Landing","Startup"]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[{"id":"pattern1","title":"Pattern 1","image":"pattern1.jpg","content":"Pattern 1 content here","tags":["Content","Block"]}]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"page1","title":"Page 1","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Page 1 content here","tags":["Landing","Business"]},{"id":"page2","title":"Page 2","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Page 2 content here","tags":["Portfolio","Creative"]},{"id":"page3","title":"Pattern 3","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Page 3 content here","tags":["Blog","Magazine"]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"item1","title":"Item 1","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Site 1 content here","tags":["Business","Corporate"]},{"id":"item2","title":"Item 2","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Site 2 content here","tags":["Portfolio","Personal"]},{"id":"item3","title":"Item 3","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Site 3 content here","tags":["Creative","Agency"]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"template-library":{"name":"Template Library","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]}]}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":{"patterns":{"name":"Patterns","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"pattern1","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png","content":"Pattern 1 content here","tags":["Blog","Magazine","Construction"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern2","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-1.png","content":"Pattern 2 content here","tags":["Landing","AI","Gutenberg"],"isPro":true,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern3","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Pattern 3 content here","tags":["Landing","Creative"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern4","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-2.png","content":"Pattern 4 content here","tags":["Landing","Business"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern5","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Pattern 5 content here","tags":["Landing","Portfolio"],"isPro":true,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern6","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Pattern 6 content here","tags":["Landing","Agency"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"pattern15","title":"Illustrate AI Landing Page for Gutenberg","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Pattern 15 content here","tags":["Landing","Startup"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[{"id":"pattern1","title":"Pattern 1","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png","content":"Pattern 1 content here","tags":["Content","Block"],"isPro":true,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]}]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M15.5 3H4.5C3.67157 3 3 3.67157 3 4.5C3 5.32843 3.67157 6 4.5 6H15.5C16.3284 6 17 5.32843 17 4.5C17 3.67157 16.3284 3 15.5 3Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M15.5 8.5H4.5C3.67157 8.5 3 9.17157 3 10C3 10.8284 3.67157 11.5 4.5 11.5H15.5C16.3284 11.5 17 10.8284 17 10C17 9.17157 16.3284 8.5 15.5 8.5Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M9.5 14H4.5C3.67157 14 3 14.6716 3 15.5C3 16.3284 3.67157 17 4.5 17H9.5C10.3284 17 11 16.3284 11 15.5C11 14.6716 10.3284 14 9.5 14Z\' stroke=\'#404655\' stroke-width=\'1.5\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"pages":{"name":"Pages","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"page1","title":"Page 1","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-5.png","content":"Page 1 content here","tags":["Landing","Business"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"page2","title":"Page 2","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Page 2 content here","tags":["Portfolio","Creative"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"page3","title":"Pattern 3","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-4.png","content":"Page 3 content here","tags":["Blog","Magazine"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M15.5 3H4.5C3.67157 3 3 3.67157 3 4.5C3 5.32843 3.67157 6 4.5 6H15.5C16.3284 6 17 5.32843 17 4.5C17 3.67157 16.3284 3 15.5 3Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M15.5 8.5H4.5C3.67157 8.5 3 9.17157 3 10C3 10.8284 3.67157 11.5 4.5 11.5H15.5C16.3284 11.5 17 10.8284 17 10C17 9.17157 16.3284 8.5 15.5 8.5Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M9.5 14H4.5C3.67157 14 3 14.6716 3 15.5C3 16.3284 3.67157 17 4.5 17H9.5C10.3284 17 11 16.3284 11 15.5C11 14.6716 10.3284 14 9.5 14Z\' stroke=\'#404655\' stroke-width=\'1.5\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"sites":{"name":"Sites","categories":[{"id":"all","name":"All","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[{"id":"item1","title":"Item 1","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-6.png","content":"Site 1 content here","tags":["Business","Corporate"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"item2","title":"Item 2","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-1.png","content":"Site 2 content here","tags":["Portfolio","Personal"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]},{"id":"item3","title":"Item 3","description":"Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.","image":"https://frontiswp.com/wp-content/uploads/2025/04/free-3.png","content":"Site 3 content here","tags":["Creative","Agency"],"isPro":false,"dependency":[{"name":"Frontis Blocks","version":"1.0.0"},{"name":"Frontis Theme","version":"1.0.0"}]}]},{"id":"content-blocks","name":"Content Blocks","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M10 17.5C10.2327 17.5 10.449 17.394 10.8816 17.182L14.3587 15.4781C15.8973 14.724 16.6667 14.347 16.6667 13.75V6.25M10 17.5C9.76734 17.5 9.55101 17.394 9.11843 17.182L5.64131 15.4781C4.10267 14.724 3.33334 14.347 3.33334 13.75V6.25M10 17.5V10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M9.11843 2.81799C9.55101 2.606 9.76734 2.5 10 2.5C10.2327 2.5 10.449 2.606 10.8816 2.81799L14.3587 4.52196C15.8973 5.27597 16.6667 5.65297 16.6667 6.25C16.6667 6.84702 15.8973 7.22403 14.3587 7.97804L10.8816 9.682C10.449 9.894 10.2327 10 10 10C9.76734 10 9.55101 9.894 9.11843 9.682L5.64131 7.97804C4.10267 7.22403 3.33334 6.84702 3.33334 6.25C3.33334 5.65297 4.10267 5.27597 5.64131 4.52196L9.11843 2.81799Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","count":14,"items":[]},{"id":"creative","name":"Creative","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M5.07449 12.4994C4.75915 11.7906 4.58334 11.002 4.58334 10.171C4.58334 7.08471 7.00847 4.58276 10 4.58276C12.9916 4.58276 15.4167 7.08471 15.4167 10.171C15.4167 11.002 15.2408 11.7906 14.9255 12.4994\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M10 1.66602V2.49935\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M18.3333 9.99927H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.49999 9.99927H1.66666\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M15.892 4.10669L15.3028 4.69595\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M4.69732 4.69668L4.10806 4.10742\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M12.0975 16.088C12.9395 15.8157 13.2772 15.045 13.3722 14.2699C13.4005 14.0383 13.21 13.8462 12.9767 13.8462L7.06406 13.8464C6.82272 13.8464 6.62891 14.0512 6.65772 14.2908C6.75077 15.0644 6.9856 15.6296 7.87789 16.088M12.0975 16.088C12.0975 16.088 8.02477 16.088 7.87789 16.088M12.0975 16.088C11.9963 17.7089 11.5282 18.3508 10.0057 18.3328C8.37718 18.3629 8.00254 17.5694 7.87789 16.088\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":5,"items":[]},{"id":"dynamic","name":"Dynamic","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M14.375 2.5V8.75M17.5 5.625H11.25\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.4086 16.2139C11.25 15.8311 11.25 15.3457 11.25 14.375C11.25 13.4042 11.25 12.9189 11.4086 12.5361C11.62 12.0256 12.0256 11.62 12.5361 11.4086C12.9189 11.25 13.4042 11.25 14.375 11.25C15.3457 11.25 15.8311 11.25 16.2139 11.4086C16.7244 11.62 17.13 12.0256 17.3414 12.5361C17.5 12.9189 17.5 13.4042 17.5 14.375C17.5 15.3457 17.5 15.8311 17.3414 16.2139C17.13 16.7244 16.7244 17.13 16.2139 17.3414C15.8311 17.5 15.3457 17.5 14.375 17.5C13.4042 17.5 12.9189 17.5 12.5361 17.3414C12.0256 17.13 11.62 16.7244 11.4086 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 16.2139C2.5 15.8311 2.5 15.3457 2.5 14.375C2.5 13.4042 2.5 12.9189 2.65858 12.5361C2.87003 12.0256 3.2756 11.62 3.78608 11.4086C4.16893 11.25 4.65429 11.25 5.625 11.25C6.59571 11.25 7.08107 11.25 7.46392 11.4086C7.9744 11.62 8.38 12.0256 8.59142 12.5361C8.75 12.9189 8.75 13.4042 8.75 14.375C8.75 15.3457 8.75 15.8311 8.59142 16.2139C8.38 16.7244 7.9744 17.13 7.46392 17.3414C7.08107 17.5 6.59571 17.5 5.625 17.5C4.65429 17.5 4.16893 17.5 3.78608 17.3414C3.2756 17.13 2.87003 16.7244 2.65858 16.2139Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M2.65858 7.46392C2.5 7.08107 2.5 6.59571 2.5 5.625C2.5 4.65429 2.5 4.16893 2.65858 3.78608C2.87003 3.2756 3.2756 2.87003 3.78608 2.65858C4.16893 2.5 4.65429 2.5 5.625 2.5C6.59571 2.5 7.08107 2.5 7.46392 2.65858C7.9744 2.87003 8.38 3.2756 8.59142 3.78608C8.75 4.16893 8.75 4.65429 8.75 5.625C8.75 6.59571 8.75 7.08107 8.59142 7.46392C8.38 7.9744 7.9744 8.38 7.46392 8.59142C7.08107 8.75 6.59571 8.75 5.625 8.75C4.65429 8.75 4.16893 8.75 3.78608 8.59142C3.2756 8.38 2.87003 7.9744 2.65858 7.46392Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","count":30,"items":[]},{"id":"layout","name":"Layout","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M16.7573 16.7574C15.5979 17.9167 13.7319 17.9167 10 17.9167C6.26806 17.9167 4.40209 17.9167 3.24271 16.7574C2.08334 15.598 2.08334 13.732 2.08334 10C2.08334 6.26809 2.08334 4.40212 3.24271 3.24274C4.40208 2.08337 6.26806 2.08337 10 2.08337C13.7319 2.08337 15.5979 2.08337 16.7573 3.24274C17.9167 4.40212 17.9167 6.26809 17.9167 10C17.9167 13.732 17.9167 15.598 16.7573 16.7574Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M7.5 17.9167V2.08337\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.9167 10H7.5\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]},{"id":"form","name":"Form","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M15.5 3H4.5C3.67157 3 3 3.67157 3 4.5C3 5.32843 3.67157 6 4.5 6H15.5C16.3284 6 17 5.32843 17 4.5C17 3.67157 16.3284 3 15.5 3Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M15.5 8.5H4.5C3.67157 8.5 3 9.17157 3 10C3 10.8284 3.67157 11.5 4.5 11.5H15.5C16.3284 11.5 17 10.8284 17 10C17 9.17157 16.3284 8.5 15.5 8.5Z\' stroke=\'#404655\' stroke-width=\'1.5\'/><path d=\'M9.5 14H4.5C3.67157 14 3 14.6716 3 15.5C3 16.3284 3.67157 17 4.5 17H9.5C10.3284 17 11 16.3284 11 15.5C11 14.6716 10.3284 14 9.5 14Z\' stroke=\'#404655\' stroke-width=\'1.5\'/></svg>","count":30,"items":[]},{"id":"social","name":"Social","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M17.5 5.41663C17.5 6.79733 16.3807 7.91663 15 7.91663C13.6192 7.91663 12.5 6.79733 12.5 5.41663C12.5 4.03592 13.6192 2.91663 15 2.91663C16.3807 2.91663 17.5 4.03592 17.5 5.41663Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.5 10C7.5 11.3807 6.38071 12.5 5 12.5C3.61929 12.5 2.5 11.3807 2.5 10C2.5 8.61925 3.61929 7.5 5 7.5C6.38071 7.5 7.5 8.61925 7.5 10Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 14.5834C17.5 15.9641 16.3807 17.0834 15 17.0834C13.6192 17.0834 12.5 15.9641 12.5 14.5834C12.5 13.2026 13.6192 12.0834 15 12.0834C16.3807 12.0834 17.5 13.2026 17.5 14.5834Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M7.27377 8.95796L12.6904 6.45837M7.27377 11.0417L12.6904 13.5413\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","count":30,"items":[]}]},"templateLibrary":{"name":"Template Library","categories":[{"id":"my-cloud","name":"My Cloud","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'none\'><path d=\'M3.125 5C3.125 3.96447 3.96447 3.125 5 3.125H6.875C7.91053 3.125 8.75 3.96447 8.75 5V6.875C8.75 7.91053 7.91053 8.75 6.875 8.75H5C3.96447 8.75 3.125 7.91053 3.125 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M3.125 13.125C3.125 12.0895 3.96447 11.25 5 11.25H6.875C7.91053 11.25 8.75 12.0895 8.75 13.125V15C8.75 16.0355 7.91053 16.875 6.875 16.875H5C3.96447 16.875 3.125 16.0355 3.125 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 5C11.25 3.96447 12.0895 3.125 13.125 3.125H15C16.0355 3.125 16.875 3.96447 16.875 5V6.875C16.875 7.91053 16.0355 8.75 15 8.75H13.125C12.0895 8.75 11.25 7.91053 11.25 6.875V5Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M11.25 13.125C11.25 12.0895 12.0895 11.25 13.125 11.25H15C16.0355 11.25 16.875 12.0895 16.875 13.125V15C16.875 16.0355 16.0355 16.875 15 16.875H13.125C12.0895 16.875 11.25 16.0355 11.25 15V13.125Z\' stroke=\'#404655\' stroke-width=\'1.5\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","items":[]},{"id":"my-favourites","name":"My Favourites","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\'><path d=\'M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/><path d=\'M12 17C12 17 7 13.8235 7 10.75C7 9.23122 8.05263 8 9.5 8C10.25 8 11 8.26471 12 9.32353C13 8.26471 13.75 8 14.5 8C15.9474 8 17 9.23122 17 10.75C17 13.8235 12 17 12 17Z\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linejoin=\'round\'/></svg>","items":[]},{"id":"my-downloads","name":"My Downloads","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\'><path d=\'M3.09477 10C3.03217 10.457 2.99976 10.9245 2.99976 11.4C2.99976 16.7019 7.02919 21 11.9998 21C16.9703 21 20.9998 16.7019 20.9998 11.4C20.9998 10.9245 20.9673 10.457 20.9047 10\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M11.9998 13V3M11.9998 13C11.2995 13 9.99129 11.0057 9.49976 10.5M11.9998 13C12.7 13 14.0082 11.0057 14.4998 10.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/></svg>","items":[]},{"id":"purchased-items","name":"Purchased Items","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\'><path d=\'M8 16H15.2632C19.7508 16 20.4333 13.1808 21.261 9.06908C21.4998 7.88311 21.6192 7.29013 21.3321 6.89507C21.045 6.5 20.4947 6.5 19.3941 6.5H6\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M8 16L5.37873 3.51493C5.15615 2.62459 4.35618 2 3.43845 2H2.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\'/><path d=\'M8.88 16H8.46857C7.10522 16 6 17.1513 6 18.5714C6 18.8081 6.1842 19 6.41143 19H17.5\' stroke=\'#404655\' stroke-width=\'1.25\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/><path d=\'M10.5 22C11.3284 22 12 21.3284 12 20.5C12 19.6716 11.3284 19 10.5 19C9.67157 19 9 19.6716 9 20.5C9 21.3284 9.67157 22 10.5 22Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M17.5 22C18.3284 22 19 21.3284 19 20.5C19 19.6716 18.3284 19 17.5 19C16.6716 19 16 19.6716 16 20.5C16 21.3284 16.6716 22 17.5 22Z\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","items":[]},{"id":"shared-with-me","name":"Shared with me","icon":"<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\'><path d=\'M20.5 5.5C20.5 7.15685 19.1569 8.5 17.5 8.5C15.8431 8.5 14.5 7.15685 14.5 5.5C14.5 3.84315 15.8431 2.5 17.5 2.5C19.1569 2.5 20.5 3.84315 20.5 5.5Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M8.5 11.5C8.5 13.1569 7.15685 14.5 5.5 14.5C3.84315 14.5 2.5 13.1569 2.5 11.5C2.5 9.84315 3.84315 8.5 5.5 8.5C7.15685 8.5 8.5 9.84315 8.5 11.5Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M21.5 18.5C21.5 20.1569 20.1569 21.5 18.5 21.5C16.8431 21.5 15.5 20.1569 15.5 18.5C15.5 16.8431 16.8431 15.5 18.5 15.5C20.1569 15.5 21.5 16.8431 21.5 18.5Z\' stroke=\'#404655\' stroke-width=\'1.25\'/><path d=\'M14.5348 4.58109C14.1554 4.52765 13.7677 4.5 13.3733 4.5C10.2974 4.5 7.62058 6.18227 6.24054 8.66317M19.7131 7.49453C20.8311 8.86497 21.5 10.6056 21.5 12.5C21.5 13.8758 21.1472 15.1705 20.5258 16.3012M15.8816 20.1117C15.0917 20.3638 14.2486 20.5 13.3733 20.5C9.58287 20.5 6.39853 17.9454 5.5 14.4898\' stroke=\'#404655\' stroke-width=\'1.25\'/></svg>","items":[]}]}}}');
 
 /***/ }),
 
@@ -271,11 +271,16 @@ var FullSiteImport = function FullSiteImport(_ref) {
   var handleLogoUpload = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (event) {
     var file = event.target.files[0];
     if (file) {
-      setFormData(function (prev) {
-        return _objectSpread(_objectSpread({}, prev), {}, {
-          logo: file
+      var validTypes = ['image/png', 'image/jpeg', 'image/gif', 'image/svg+xml'];
+      if (validTypes.includes(file.type)) {
+        setFormData(function (prev) {
+          return _objectSpread(_objectSpread({}, prev), {}, {
+            logo: file
+          });
         });
-      });
+      } else {
+        alert('Please upload a valid file type: PNG, JPG, SVG, or GIF.');
+      }
     }
   }, []);
   var handleNext = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
@@ -430,9 +435,18 @@ var FullSiteImport = function FullSiteImport(_ref) {
   }, /*#__PURE__*/React.createElement("input", {
     type: "file",
     id: "logoUpload",
-    accept: "image/*",
+    accept: ".png,.jpg,.jpeg,.svg,.gif",
     onChange: handleLogoUpload,
     className: "fb-file-input"
+  }), /*#__PURE__*/React.createElement("input", {
+    type: "file",
+    id: "logoUpload",
+    accept: ".png,.jpg,.jpeg,.svg,.gif",
+    onChange: handleLogoUpload,
+    className: "fb-file-input",
+    style: {
+      display: 'none'
+    }
   }), /*#__PURE__*/React.createElement("label", {
     htmlFor: "logoUpload",
     className: "fb-upload-btn"
@@ -454,7 +468,7 @@ var FullSiteImport = function FullSiteImport(_ref) {
     "stroke-width": "1.5",
     "stroke-linecap": "round",
     "stroke-linejoin": "round"
-  })), "Click to upload SVG, PNG, JPG or GIF (max. 800x400 px)SVG, PNG, JPG or GIF (max. 800x400 px)"), formData.logo && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+  })), formData.logo ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
     className: "fb-file-name"
   }, formData.logo.name), logoPreview && /*#__PURE__*/React.createElement("img", {
     src: logoPreview,
@@ -466,7 +480,7 @@ var FullSiteImport = function FullSiteImport(_ref) {
       display: 'block',
       marginTop: '8px'
     }
-  }))))), /*#__PURE__*/React.createElement("div", {
+  })) : 'Click to upload SVG, PNG, JPG or GIF (max. 800x400 px)SVG, PNG, JPG or GIF (max. 800x400 px)')))), /*#__PURE__*/React.createElement("div", {
     className: "fb-import-actions"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-import-step-btn-wrapper"
@@ -547,309 +561,6 @@ var FullSiteImport = function FullSiteImport(_ref) {
 
 /***/ }),
 
-/***/ "./admin/template-library/global-typo/components/ColorPalletWrapper.js":
-/*!*****************************************************************************!*\
-  !*** ./admin/template-library/global-typo/components/ColorPalletWrapper.js ***!
-  \*****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-
-
-
-
-var ColorPalletWrapper = function ColorPalletWrapper(props) {
-  var colorPanelArray = props.colorPanelArray,
-    customColors = props.customColors,
-    setCustomColor = props.setCustomColor,
-    setCustomColors = props.setCustomColors,
-    setCurrentState = props.setCurrentState,
-    addCustomColor = props.addCustomColor,
-    colorModalOpen = props.colorModalOpen,
-    setColorModalOpen = props.setColorModalOpen,
-    colorName = props.colorName,
-    setColorName = props.setColorName;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(customColors),
-    _useState2 = _slicedToArray(_useState, 2),
-    afterDeletedCustomColors = _useState2[0],
-    setAfterDeletedColors = _useState2[1];
-  var deleteItem = function deleteItem(index) {
-    var colors = _toConsumableArray(afterDeletedCustomColors);
-    afterDeletedCustomColors.splice(index, 1);
-    setAfterDeletedColors(_toConsumableArray(afterDeletedCustomColors));
-    setCustomColors(afterDeletedCustomColors);
-  };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    if (customColors.length > 0) {
-      //Add delete button and delete action for custom colors
-      var colorPanel = document.querySelector('.fb-custom-color-panel');
-      setTimeout(function () {
-        var items = colorPanel && colorPanel.querySelectorAll('.components-tools-panel-item');
-        if (items) {
-          items.forEach(function (item, index) {
-            var newButton = document.createElement('button');
-            newButton.className = 'fb-delete-custom-color';
-            newButton.setAttribute('type', 'button');
-            newButton.setAttribute('aria-label', 'Delete');
-            newButton.innerHTML = "\n                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"17\" viewBox=\"0 0 16 17\" fill=\"none\">\n                            <path d=\"M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675\" stroke=\"#E43242\" stroke-linecap=\"round\"/>\n                            <path d=\"M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659\" stroke=\"#E43242\" stroke-linecap=\"round\"/>\n                            <path d=\"M6.3335 11.5V7.5\" stroke=\"#E43242\" stroke-linecap=\"round\"/>\n                            <path d=\"M9.6665 11.5V7.5\" stroke=\"#E43242\" stroke-linecap=\"round\"/>\n                            </svg>\n                        ";
-            newButton.addEventListener('click', function () {
-              deleteItem(index);
-            });
-            var existingButton = item.querySelector('button');
-            item.insertBefore(newButton, existingButton.nextSibling);
-          });
-        }
-      }, 100);
-    }
-  }, [customColors]);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Panel, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Custom Colors", "frontis-blocks"),
-    className: "fb-color-panel fb-custom-color-panel",
-    initialOpen: true,
-    disableAlpha: true,
-    colorSettings: colorPanelArray(customColors, setCustomColor)
-  }, colorModalOpen && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Modal, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Color name", "frontis-blocks"),
-    onRequestClose: function onRequestClose() {
-      return setColorModalOpen(false);
-    }
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-    __nextHasNoMarginBottom: true,
-    __next40pxDefaultSize: true,
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color Name", "frontis-blocks"),
-    value: colorName,
-    onChange: setColorName
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-    className: "fb-custom-color-btn",
-    onClick: function onClick() {
-      return setColorModalOpen(false);
-    }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Save", "frontis-blocks"))), /*#__PURE__*/React.createElement("div", {
-    className: "add-custom-color"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
-    className: "add-custom-color-btn",
-    onClick: addCustomColor
-  }, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("svg", {
-    width: "15",
-    height: "14",
-    viewBox: "0 0 15 14",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M7.5 0.75V13.25M13.75 7L1.25 7",
-    stroke: "white",
-    strokeWidth: "1.5",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  }))))))));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ColorPalletWrapper);
-
-/***/ }),
-
-/***/ "./admin/template-library/global-typo/components/CustomGradientPallet.js":
-/*!*******************************************************************************!*\
-  !*** ./admin/template-library/global-typo/components/CustomGradientPallet.js ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-
-
-
-var CustomGradientColorPallet = function CustomGradientColorPallet(props) {
-  var _props$title = props.title,
-    title = _props$title === void 0 ? "" : _props$title,
-    colors = props.colors,
-    setColor = props.setColor,
-    setColors = props.setColors,
-    wrapperClass = props.wrapperClass,
-    resetAction = props.resetAction,
-    deleteAction = props.deleteAction,
-    _props$enableEditName = props.enableEditName,
-    enableEditName = _props$enableEditName === void 0 ? false : _props$enableEditName,
-    onDelete = props.onDelete;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
-    _useState2 = _slicedToArray(_useState, 2),
-    clickedGradient = _useState2[0],
-    setClickedGradient = _useState2[1];
-  var gradientPopoverAnchor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
-  var editColorName = function editColorName(index, value) {
-    var cloneColors = _toConsumableArray(colors);
-    cloneColors[index] = _objectSpread(_objectSpread({}, cloneColors[index]), {}, {
-      name: value
-    });
-    setColors(_toConsumableArray(cloneColors));
-  };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    function handleClickOutside(event) {
-      var _gradientPopoverAncho;
-      var clickedInsidePopup = (_gradientPopoverAncho = gradientPopoverAnchor.current) === null || _gradientPopoverAncho === void 0 ? void 0 : _gradientPopoverAncho.contains(event.target);
-      var clickedTrigger = event.target.closest('.fb-custom-gradient-list .fb-custom-color-item');
-      var isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
-      if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
-        setClickedGradient('');
-      }
-    }
-
-    // Add listener to main document
-    document.addEventListener('mousedown', handleClickOutside);
-
-    // Also try to add listener to iframe document
-    var iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
-    if (iframe && iframe.contentDocument) {
-      iframe.contentDocument.addEventListener('mousedown', handleClickOutside);
-    }
-
-    // Cleanup
-    return function () {
-      document.removeEventListener('mousedown', handleClickOutside);
-      if (iframe && iframe.contentDocument) {
-        iframe.contentDocument.removeEventListener('mousedown', handleClickOutside);
-      }
-    };
-  }, []);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, colors && colors.length > 0 && /*#__PURE__*/React.createElement("div", {
-    className: "fb-color-panel ".concat(wrapperClass)
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-    className: "fb-gradient-color-label"
-  }, title), /*#__PURE__*/React.createElement("div", {
-    className: "fb-custom-panel fb-gradient-color-list fb-custom-gradient-list"
-  }, colors.map(function (color, index) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: index,
-      ref: gradientPopoverAnchor,
-      id: "fb-gradient-color-".concat(index),
-      className: "fb-custom-element fb-custom-color-item"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "item-content",
-      onClick: function onClick() {
-        return !enableEditName && setClickedGradient(clickedGradient === color.slug ? '' : color.slug);
-      }
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorIndicator, {
-      onClick: function onClick() {
-        return setClickedGradient(clickedGradient === color.slug ? '' : color.slug);
-      },
-      colorValue: color === null || color === void 0 ? void 0 : color.color
-    }), enableEditName && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-      className: 'fb-custom-element__edit-input',
-      value: color.name || '',
-      onChange: function onChange(text) {
-        return editColorName(index, text);
-      }
-    }), !enableEditName && (color === null || color === void 0 ? void 0 : color.name)), /*#__PURE__*/React.createElement("div", {
-      className: "actions"
-    }, resetAction && /*#__PURE__*/React.createElement("span", {
-      className: 'fb-reset',
-      title: "Reset",
-      onClick: function onClick() {
-        return setColor(index, 'linear-gradient(135deg, rgb(6, 147, 227) 0%, rgb(155, 81, 224) 100%)');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "16",
-      height: "16",
-      viewBox: "0 0 16 16",
-      fill: "none"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M10.6817 6.23162H14.0101V6.23044M1.98926 13.0956V9.76718M1.98926 9.76718L5.31768 9.76718M1.98926 9.76718L4.10985 11.8892C4.7702 12.5507 5.60824 13.0527 6.57607 13.312C9.51014 14.0982 12.526 12.357 13.3122 9.42292M2.68699 6.57591C3.47317 3.64184 6.48902 1.90064 9.42308 2.68682C10.3909 2.94615 11.229 3.4481 11.8893 4.10969L14.0101 6.23044M14.0101 2.90322V6.23044",
-      stroke: "#555E72"
-    }))), deleteAction && /*#__PURE__*/React.createElement("span", {
-      className: 'fb-delete',
-      title: "Delete",
-      onClick: function onClick() {
-        return onDelete(index);
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "16",
-      height: "17",
-      viewBox: "0 0 16 17",
-      fill: "none"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: "M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: "M6.3335 11.5V7.5",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: "M9.6665 11.5V7.5",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    })))), clickedGradient === (color === null || color === void 0 ? void 0 : color.slug) && /*#__PURE__*/React.createElement("div", {
-      className: "fb-gradient-color-popup-content"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.GradientPicker, {
-      __nextHasNoMargin: true,
-      value: color === null || color === void 0 ? void 0 : color.color,
-      onChange: function onChange(color) {
-        return setColor(index, color);
-      },
-      asButtons: true,
-      clearable: true,
-      gradients: [{
-        name: color === null || color === void 0 ? void 0 : color.name,
-        gradient: color === null || color === void 0 ? void 0 : color.color,
-        slug: color === null || color === void 0 ? void 0 : color.slug
-      }]
-    })));
-  }))));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CustomGradientColorPallet);
-
-/***/ }),
-
 /***/ "./admin/template-library/global-typo/components/FontPreview.js":
 /*!**********************************************************************!*\
   !*** ./admin/template-library/global-typo/components/FontPreview.js ***!
@@ -920,9 +631,9 @@ var generateColorsVariables = function generateColorsVariables(colors, deviceTyp
   if (!colors.length) {
     return false;
   }
-  var cssVariables = ":root {\n        ".concat(colors.map(function (color) {
-    return "--wp--frontis--color--".concat(color.slug, ": ").concat(color.color, ";");
-  }).join('\n    '), "\n    }");
+  var cssVariables = ":root {\n   \t\t".concat(colors.map(function (color) {
+    return "--wp--frontis--color--".concat(color.slug, ": ").concat(color.gradient || color.color, ";");
+  }).join('\n    '), "\n\t}");
   var iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
   var iframeDocument = ((_iframe = iframe) === null || _iframe === void 0 ? void 0 : _iframe.contentDocument) || ((_iframe2 = iframe) === null || _iframe2 === void 0 || (_iframe2 = _iframe2.contentWindow) === null || _iframe2 === void 0 ? void 0 : _iframe2.document) || document;
   var styleTag = iframeDocument.getElementById("global-colors");
@@ -1268,188 +979,6 @@ var generateCSSVariables = function generateCSSVariables(data, deviceType) {
 
 /***/ }),
 
-/***/ "./admin/template-library/global-typo/components/GradientColorPallet.js":
-/*!******************************************************************************!*\
-  !*** ./admin/template-library/global-typo/components/GradientColorPallet.js ***!
-  \******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-
-
-
-var GradientColorPallet = function GradientColorPallet(props) {
-  var _props$title = props.title,
-    title = _props$title === void 0 ? "" : _props$title,
-    colors = props.colors,
-    setColor = props.setColor,
-    setColors = props.setColors,
-    wrapperClass = props.wrapperClass,
-    resetAction = props.resetAction,
-    deleteAction = props.deleteAction,
-    _props$enableEditName = props.enableEditName,
-    enableEditName = _props$enableEditName === void 0 ? false : _props$enableEditName,
-    onDelete = props.onDelete;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
-    _useState2 = _slicedToArray(_useState, 2),
-    clickedGradient = _useState2[0],
-    setClickedGradient = _useState2[1];
-  var gradientPopoverAnchor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
-  var editColorName = function editColorName(index, value) {
-    var cloneColors = _toConsumableArray(colors);
-    cloneColors[index] = _objectSpread(_objectSpread({}, cloneColors[index]), {}, {
-      name: value
-    });
-    setColors(_toConsumableArray(cloneColors));
-  };
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    function handleClickOutside(event) {
-      var _gradientPopoverAncho;
-      var clickedInsidePopup = (_gradientPopoverAncho = gradientPopoverAnchor.current) === null || _gradientPopoverAncho === void 0 ? void 0 : _gradientPopoverAncho.contains(event.target);
-      var clickedTrigger = event.target.closest('.fb-gradient-list .fb-custom-color-item');
-      var isInWpPopover = event.target.closest('.components-popover.components-dropdown__content');
-      if (!clickedInsidePopup && !clickedTrigger && !isInWpPopover) {
-        setClickedGradient('');
-      }
-    }
-
-    // Add listener to main document
-    document.addEventListener('mousedown', handleClickOutside);
-
-    // Also try to add listener to iframe document
-    var iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
-    if (iframe && iframe.contentDocument) {
-      iframe.contentDocument.addEventListener('mousedown', handleClickOutside);
-    }
-
-    // Cleanup
-    return function () {
-      document.removeEventListener('mousedown', handleClickOutside);
-      if (iframe && iframe.contentDocument) {
-        iframe.contentDocument.removeEventListener('mousedown', handleClickOutside);
-      }
-    };
-  }, []);
-  return /*#__PURE__*/React.createElement(React.Fragment, null, colors && colors.length > 0 && /*#__PURE__*/React.createElement("div", {
-    className: "fb-color-panel ".concat(wrapperClass)
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelRow, {
-    className: "fb-gradient-color-label"
-  }, title), /*#__PURE__*/React.createElement("div", {
-    className: "fb-custom-panel fb-gradient-color-list fb-gradient-list"
-  }, colors.map(function (color, index) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: index,
-      ref: gradientPopoverAnchor,
-      id: "fb-gradient-color-".concat(index),
-      className: "fb-custom-element fb-custom-color-item"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "item-content",
-      onClick: function onClick() {
-        return !enableEditName && setClickedGradient(clickedGradient === color.slug ? '' : color.slug);
-      }
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorIndicator, {
-      onClick: function onClick() {
-        return setClickedGradient(clickedGradient === color.slug ? '' : color.slug);
-      },
-      colorValue: color === null || color === void 0 ? void 0 : color.color
-    }), enableEditName && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
-      className: 'fb-custom-element__edit-input',
-      value: color.name || '',
-      onChange: function onChange(text) {
-        return editColorName(index, text);
-      }
-    }), !enableEditName && (color === null || color === void 0 ? void 0 : color.name)), /*#__PURE__*/React.createElement("div", {
-      className: "actions"
-    }, resetAction && /*#__PURE__*/React.createElement("span", {
-      className: 'fb-reset',
-      title: "Reset",
-      onClick: function onClick() {
-        return setColor(index, 'linear-gradient(135deg, rgb(6, 147, 227) 0%, rgb(155, 81, 224) 100%)');
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "16",
-      height: "16",
-      viewBox: "0 0 16 16",
-      fill: "none"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M10.6817 6.23162H14.0101V6.23044M1.98926 13.0956V9.76718M1.98926 9.76718L5.31768 9.76718M1.98926 9.76718L4.10985 11.8892C4.7702 12.5507 5.60824 13.0527 6.57607 13.312C9.51014 14.0982 12.526 12.357 13.3122 9.42292M2.68699 6.57591C3.47317 3.64184 6.48902 1.90064 9.42308 2.68682C10.3909 2.94615 11.229 3.4481 11.8893 4.10969L14.0101 6.23044M14.0101 2.90322V6.23044",
-      stroke: "#555E72"
-    }))), deleteAction && /*#__PURE__*/React.createElement("span", {
-      className: 'fb-delete',
-      title: "Delete",
-      onClick: function onClick() {
-        return onDelete(index);
-      }
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "16",
-      height: "17",
-      viewBox: "0 0 16 17",
-      fill: "none"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: "M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: "M6.3335 11.5V7.5",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: "M9.6665 11.5V7.5",
-      stroke: "#E43242",
-      "stroke-linecap": "round"
-    })))), clickedGradient === (color === null || color === void 0 ? void 0 : color.slug) && /*#__PURE__*/React.createElement("div", {
-      className: "fb-gradient-color-popup-content"
-    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.GradientPicker, {
-      __nextHasNoMargin: true,
-      value: color === null || color === void 0 ? void 0 : color.color,
-      onChange: function onChange(color) {
-        return setColor(index, color);
-      },
-      asButtons: true,
-      clearable: true,
-      gradients: [{
-        name: color === null || color === void 0 ? void 0 : color.name,
-        gradient: color === null || color === void 0 ? void 0 : color.color,
-        slug: color === null || color === void 0 ? void 0 : color.slug
-      }]
-    })));
-  }))));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GradientColorPallet);
-
-/***/ }),
-
 /***/ "./admin/template-library/global-typo/components/SidebarTypography.js":
 /*!****************************************************************************!*\
   !*** ./admin/template-library/global-typo/components/SidebarTypography.js ***!
@@ -1471,10 +1000,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_range__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @Components/range */ "./src/components/range/index.js");
 /* harmony import */ var _Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @Utils/loadGoogleFont */ "./src/utils/loadGoogleFont.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -1494,6 +1019,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
+  var _frontisBlocksAdmin;
   var _ref$label = _ref.label,
     label = _ref$label === void 0 ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-blocks") : _ref$label,
     fontFamily = _ref.fontFamily,
@@ -1520,11 +1046,11 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     onChangeLineHeightUnit = _ref.onChangeLineHeightUnit,
     deviceType = _ref.deviceType,
     heading = _ref.heading;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)((_frontisBlocksAdmin = frontisBlocksAdmin) === null || _frontisBlocksAdmin === void 0 ? void 0 : _frontisBlocksAdmin.google_fonts),
     _useState2 = _slicedToArray(_useState, 2),
     fontOptions = _useState2[0],
     setFontOptions = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(),
     _useState4 = _slicedToArray(_useState3, 2),
     selectedFontFamilyOption = _useState4[0],
     setSelectedFontFamilyOption = _useState4[1];
@@ -1532,24 +1058,6 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     _useState6 = _slicedToArray(_useState5, 2),
     availableFontWeights = _useState6[0],
     setAvailableFontWeights = _useState6[1];
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
-    (0,_Constants_fbConstants__WEBPACK_IMPORTED_MODULE_3__.GOOGLE_FONTS)().then(function (fetchedFonts) {
-      setFontOptions(fetchedFonts);
-      var current = fetchedFonts.find(function (f) {
-        return f.value === fontFamily;
-      });
-      if (current) {
-        setSelectedFontFamilyOption(current);
-        setAvailableFontWeights(current.weights || []);
-      } else {
-        setSelectedFontFamilyOption({
-          label: 'Default',
-          value: 'Default'
-        });
-        setAvailableFontWeights([]);
-      }
-    });
-  }, []);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     if (fontFamily !== 'Default') {
       (0,_Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__["default"])(fontFamily);
@@ -1559,7 +1067,19 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     setSelectedFontFamilyOption(selectedOption);
     var newFontFamily = (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value) || 'Default';
     onChangeFontFamily(newFontFamily);
-    setAvailableFontWeights((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.weights) || []);
+    if ((selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.weights.length) > 0) {
+      var weights = [{
+        'label': 'Default',
+        'value': 'default'
+      }];
+      selectedOption === null || selectedOption === void 0 || selectedOption.weights.map(function (item, index) {
+        weights.push({
+          'label': item,
+          'value': item
+        });
+      });
+      setAvailableFontWeights(weights);
+    }
     if (newFontFamily !== 'Default') {
       (0,_Utils_loadGoogleFont__WEBPACK_IMPORTED_MODULE_5__["default"])(newFontFamily);
     }
@@ -1594,6 +1114,12 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
   var handleLineHeightUnitChange = function handleLineHeightUnitChange(newLineHeightUnit) {
     onChangeLineHeightUnit(newLineHeightUnit);
   };
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    var selectedFont = fontOptions.find(function (font) {
+      return font.label === fontFamily;
+    });
+    handleFontFamilyChange(selectedFont);
+  }, []);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.BaseControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Family", "frontis-blocks"),
     className: "fb-typo-spacing"
@@ -1624,17 +1150,7 @@ var FB_SidebarTypography = function FB_SidebarTypography(_ref) {
     className: "fb_global_typo_wrap"
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Font Weight", "frontis-blocks"),
-    options: [{
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Default", "frontis-blocks"),
-      value: 'inherit'
-    }].concat(_toConsumableArray(availableFontWeights.length > 0 ? availableFontWeights.map(function (weight) {
-      return {
-        label: weight,
-        value: weight
-      };
-    }) : _Constants_fbConstants__WEBPACK_IMPORTED_MODULE_3__.FONT_WEIGHT.filter(function (item) {
-      return item.value !== 'inherit';
-    }))),
+    options: availableFontWeights,
     value: fontWeight,
     onChange: handleFontWeightChange
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.SelectControl, {
@@ -1749,38 +1265,30 @@ var TypographySettings = function TypographySettings(props) {
     _useState2 = _slicedToArray(_useState, 2),
     typography = _useState2[0],
     setTypography = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(props.customTypography),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('all'),
     _useState4 = _slicedToArray(_useState3, 2),
-    customTypography = _useState4[0],
-    setCustomTypography = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)('all'),
+    selectedHeading = _useState4[0],
+    setSelectedHeading = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    selectedHeading = _useState6[0],
-    setSelectedHeading = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
+    isSaving = _useState6[0],
+    setIsSaving = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(),
     _useState8 = _slicedToArray(_useState7, 2),
-    isSaving = _useState8[0],
-    setIsSaving = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(),
+    generateHeadingCss = _useState8[0],
+    setGenerateHeadingCss = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
     _useState0 = _slicedToArray(_useState9, 2),
-    generateHeadingCss = _useState0[0],
-    setGenerateHeadingCss = _useState0[1];
-  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
+    isMount = _useState0[0],
+    setIsMount = _useState0[1];
+  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
     _useState10 = _slicedToArray(_useState1, 2),
-    isMount = _useState10[0],
-    setIsMount = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
+    fontFamilies = _useState10[0],
+    setFontFamilies = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(typography),
     _useState12 = _slicedToArray(_useState11, 2),
-    fontFamilies = _useState12[0],
-    setFontFamilies = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(typography),
-    _useState14 = _slicedToArray(_useState13, 2),
-    globalTypography = _useState14[0],
-    setGlobalTypography = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
-    _useState16 = _slicedToArray(_useState15, 2),
-    selectCustomTypo = _useState16[0],
-    setSelectCustomTypo = _useState16[1];
+    globalTypography = _useState12[0],
+    setGlobalTypography = _useState12[1];
   var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_4__.useDeviceType)();
   var isFSE = ((_wp$data$select$getCu = wp.data.select('core').getCurrentTheme()) === null || _wp$data$select$getCu === void 0 ? void 0 : _wp$data$select$getCu.is_block_theme) || false;
 
@@ -1811,20 +1319,6 @@ var TypographySettings = function TypographySettings(props) {
       });
     }
     return false;
-  };
-  var changeCustomTypoName = function changeCustomTypoName(key, value) {
-    var typoObj = _objectSpread({}, customTypography);
-    typoObj[key].name = value;
-    setCustomTypography(_objectSpread({}, typoObj));
-  };
-  var deleteItem = function deleteItem(item) {
-    var tempTypography = _objectSpread({}, customTypography);
-    var tempGlobalTypography = _objectSpread({}, globalTypography);
-    delete tempTypography[item];
-    delete tempGlobalTypography[item];
-    setCustomTypography(tempTypography);
-    setGlobalTypography(tempGlobalTypography);
-    setIsMount(true);
   };
 
   // Body link font typography
@@ -2179,192 +1673,16 @@ var TypographySettings = function TypographySettings(props) {
     }))));
     setIsMount(true);
   };
-
-  // Custom typography handler
-  var onChangeCustomFontFamily = function onChangeCustomFontFamily(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontFamily: value
-      })));
-    });
-    setFontFamilies(_objectSpread(_objectSpread({}, fontFamilies), {}, _defineProperty({}, item, value)));
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontFamily': {
-        variable: "--fb-global-".concat(item, "--font-family"),
-        value: value
-      }
-    }))));
-    (0,_helper__WEBPACK_IMPORTED_MODULE_6__.loadGoogleFont)(value);
-    setIsMount(true);
-  };
-  var onChangeCustomFontSize = function onChangeCustomFontSize(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontSize: _objectSpread(_objectSpread({}, (_customTypography$ite = customTypography[item]) === null || _customTypography$ite === void 0 ? void 0 : _customTypography$ite.fontSize), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontSize': {
-        variable: "--fb-global-".concat(item, "--font-size"),
-        value: value,
-        unit: {
-          'Desktop': 'px',
-          'Tablet': 'px',
-          'Mobile': 'px'
-        }
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomFontSizeUnit = function onChangeCustomFontSizeUnit(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite2;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontSizeUnit: _objectSpread(_objectSpread({}, (_customTypography$ite2 = customTypography[item]) === null || _customTypography$ite2 === void 0 ? void 0 : _customTypography$ite2.fontSizeUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontSize': _objectSpread(_objectSpread({}, globalTypography[item]['fontSize']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomFontWeight = function onChangeCustomFontWeight(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontWeight: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontWeight': {
-        variable: "--fb-global-".concat(item, "--font-weight"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomFontStyle = function onChangeCustomFontStyle(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        fontStyle: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'fontStyle': {
-        variable: "--fb-global-".concat(item, "--font-style"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomTextDecoration = function onChangeCustomTextDecoration(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        textDecoration: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'textDecoration': {
-        variable: "--fb-global-".concat(item, "--font-decoration"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomTextTransform = function onChangeCustomTextTransform(value, item) {
-    setCustomTypography(function (prevTypography) {
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        textTransform: value
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'textTransform': {
-        variable: "--fb-global-".concat(item, "--font-transform"),
-        value: value
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomLetterSpacing = function onChangeCustomLetterSpacing(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite3;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        letterSpacing: _objectSpread(_objectSpread({}, (_customTypography$ite3 = customTypography[item]) === null || _customTypography$ite3 === void 0 ? void 0 : _customTypography$ite3.letterSpacing), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'letterSpacing': {
-        variable: "--fb-global-".concat(item, "--font-letter-spacing"),
-        value: value,
-        unit: {
-          'Desktop': 'px',
-          'Tablet': 'px',
-          'Mobile': 'px'
-        }
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomLetterSpacingUnit = function onChangeCustomLetterSpacingUnit(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite4;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        letterSpacingUnit: _objectSpread(_objectSpread({}, (_customTypography$ite4 = customTypography[item]) === null || _customTypography$ite4 === void 0 ? void 0 : _customTypography$ite4.letterSpacingUnit), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'letterSpacing': _objectSpread(_objectSpread({}, globalTypography[item]['letterSpacing']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomLineHeight = function onChangeCustomLineHeight(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite5;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        lineHeight: _objectSpread(_objectSpread({}, (_customTypography$ite5 = customTypography[item]) === null || _customTypography$ite5 === void 0 ? void 0 : _customTypography$ite5.lineHeight), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'lineHeight': {
-        variable: "--fb-global-".concat(item, "--font-line-height"),
-        value: value,
-        unit: {
-          'Desktop': 'px',
-          'Tablet': 'px',
-          'Mobile': 'px'
-        }
-      }
-    }))));
-    setIsMount(true);
-  };
-  var onChangeCustomLineHeightUnit = function onChangeCustomLineHeightUnit(value, item) {
-    setCustomTypography(function (prevTypography) {
-      var _customTypography$ite6;
-      return _objectSpread(_objectSpread({}, prevTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, prevTypography[item]), {}, {
-        lineHeightUnits: _objectSpread(_objectSpread({}, (_customTypography$ite6 = customTypography[item]) === null || _customTypography$ite6 === void 0 ? void 0 : _customTypography$ite6.lineHeightUnits), {}, _defineProperty({}, deviceType, value[deviceType]))
-      })));
-    });
-    setGlobalTypography(_objectSpread(_objectSpread({}, globalTypography), {}, _defineProperty({}, item, _objectSpread(_objectSpread({}, globalTypography[item]), {}, {
-      'lineHeight': _objectSpread(_objectSpread({}, globalTypography[item]['lineHeight']), {}, {
-        unit: value
-      })
-    }))));
-    setIsMount(true);
-  };
   var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_6__.useAfterSave)();
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     var handleUpdateSettings = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response, _response, _response2, _response3;
+        var response, _response, _response2;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               if (!(isAfterSave && isMount)) {
-                _context.next = 22;
+                _context.next = 17;
                 break;
               }
               if (!typography) {
@@ -2380,47 +1698,34 @@ var TypographySettings = function TypographySettings(props) {
                 localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
               }
             case 6:
-              if (!customTypography) {
+              if (!globalTypography) {
                 _context.next = 11;
                 break;
               }
               _context.next = 9;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(customTypography, 'fb_update_custom_typography');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(globalTypography, 'fb_update_globaltypo');
             case 9:
               _response = _context.sent;
               if (_response.success) {
-                setCustomTypography(_response.data.data || {});
-                localStorage.setItem('fb_custom_typography', JSON.stringify(_response.data.data));
+                setGlobalTypography(_response.data.data);
+                localStorage.setItem('fb_globaltypo', JSON.stringify(_response.data.data));
               }
             case 11:
-              if (!globalTypography) {
+              if (!fontFamilies) {
                 _context.next = 16;
                 break;
               }
               _context.next = 14;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(globalTypography, 'fb_update_globaltypo');
+              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(fontFamilies, 'fb_update_fontfamilies');
             case 14:
               _response2 = _context.sent;
               if (_response2.success) {
-                setGlobalTypography(_response2.data.data);
-                localStorage.setItem('fb_globaltypo', JSON.stringify(_response2.data.data));
+                setFontFamilies(_response2.data.data);
+                localStorage.setItem('fb_fontFamilies', JSON.stringify(_response2.data.data));
               }
             case 16:
-              if (!fontFamilies) {
-                _context.next = 21;
-                break;
-              }
-              _context.next = 19;
-              return (0,_fetch__WEBPACK_IMPORTED_MODULE_7__.updateGlobalStyle)(fontFamilies, 'fb_update_fontfamilies');
-            case 19:
-              _response3 = _context.sent;
-              if (_response3.success) {
-                setFontFamilies(_response3.data.data);
-                localStorage.setItem('fb_fontFamilies', JSON.stringify(_response3.data.data));
-              }
-            case 21:
               setIsMount(false);
-            case 22:
+            case 17:
             case "end":
               return _context.stop();
           }
@@ -2460,10 +1765,12 @@ var TypographySettings = function TypographySettings(props) {
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-typography-panel"
   }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-global-header-inner-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-global-header-inner"
+  }, /*#__PURE__*/React.createElement("h3", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Typography", "frontis-blocks")))), /*#__PURE__*/React.createElement("div", {
     className: "fb-panel-section"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "fb-panel-heading"
-  }, "Typography"), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: 'fb-global-typo-elements'
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-global-typo-elements-wrap"
@@ -2490,20 +1797,7 @@ var TypographySettings = function TypographySettings(props) {
       fill: "currentcolor"
     }))), typographyElements[item], (typography[item] || item === 'heading' && isHeadingSaved()) && /*#__PURE__*/React.createElement("span", {
       className: "edit_indecator"
-    }, /*#__PURE__*/React.createElement("svg", {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: "16",
-      height: "16",
-      viewBox: "0 0 16 16",
-      fill: "none"
-    }, /*#__PURE__*/React.createElement("path", {
-      d: "M2.66602 14.6665H13.3327",
-      stroke: "#0B0C0E",
-      "stroke-linecap": "round"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: "M9.25808 2.44212L9.75242 1.94778C10.5714 1.12874 11.8993 1.12874 12.7184 1.94778C13.5374 2.76682 13.5374 4.09475 12.7184 4.91379L12.2241 5.40813M9.25808 2.44212C9.25808 2.44212 9.31982 3.49258 10.2468 4.41946C11.1736 5.34634 12.2241 5.40813 12.2241 5.40813M9.25808 2.44212L4.71339 6.98676C4.40557 7.29456 4.25166 7.4485 4.1193 7.61823C3.96316 7.81836 3.82929 8.03496 3.72006 8.26416C3.62748 8.45843 3.55864 8.66496 3.42098 9.07796L2.83765 10.828M12.2241 5.40813L7.67942 9.95276C7.37162 10.2606 7.21768 10.4145 7.04795 10.5469C6.84782 10.703 6.63118 10.8369 6.402 10.9461C6.20772 11.0387 6.00123 11.1076 5.58824 11.2452L3.83824 11.8286M2.83765 10.828L2.69506 11.2557C2.62731 11.459 2.6802 11.683 2.83168 11.8345C2.98317 11.986 3.20723 12.0389 3.41046 11.9711L3.83824 11.8286M2.83765 10.828L3.83824 11.8286",
-      stroke: "#0B0C0E"
-    })))));
+    })));
   })), typographyElements && Object.keys(typographyElements).map(function (item, index) {
     var _typography$item7, _typography$item17, _typography$item18, _typography$item19, _typography$item20, _typography$item21, _typography$item22, _typography$item23, _typography$item24, _typography$item25, _typography$item26, _typography$item27;
     return /*#__PURE__*/React.createElement("div", {
@@ -2801,24 +2095,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
 /* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _components_GradientColorPallet__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/GradientColorPallet */ "./admin/template-library/global-typo/components/GradientColorPallet.js");
-/* harmony import */ var _components_ColorPalletWrapper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ColorPalletWrapper */ "./admin/template-library/global-typo/components/ColorPalletWrapper.js");
-/* harmony import */ var _components_CustomGradientPallet__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/CustomGradientPallet */ "./admin/template-library/global-typo/components/CustomGradientPallet.js");
-/* harmony import */ var _components_TypographySettings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/TypographySettings */ "./admin/template-library/global-typo/components/TypographySettings.js");
-/* harmony import */ var _Config_displayType__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @Config/displayType */ "./src/config/displayType.js");
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./helper */ "./admin/template-library/global-typo/helper.js");
-/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./fetch */ "./admin/template-library/global-typo/fetch.js");
-/* harmony import */ var _components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/GenerateRootCss */ "./admin/template-library/global-typo/components/GenerateRootCss.js");
-/* harmony import */ var _components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/GenerateColorRoot */ "./admin/template-library/global-typo/components/GenerateColorRoot.js");
-/* harmony import */ var _scss_global_typo_scss__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./scss/global-typo.scss */ "./admin/template-library/global-typo/scss/global-typo.scss");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_TypographySettings__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/TypographySettings */ "./admin/template-library/global-typo/components/TypographySettings.js");
+/* harmony import */ var _Config_displayType__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @Config/displayType */ "./src/config/displayType.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./helper */ "./admin/template-library/global-typo/helper.js");
+/* harmony import */ var _fetch__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./fetch */ "./admin/template-library/global-typo/fetch.js");
+/* harmony import */ var _components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/GenerateRootCss */ "./admin/template-library/global-typo/components/GenerateRootCss.js");
+/* harmony import */ var _components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/GenerateColorRoot */ "./admin/template-library/global-typo/components/GenerateColorRoot.js");
+/* harmony import */ var _Constants_fbConstants__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @Constants/fbConstants */ "./src/fbConstants/fbConstants.js");
+/* harmony import */ var _scss_global_typo_scss__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./scss/global-typo.scss */ "./admin/template-library/global-typo/scss/global-typo.scss");
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -2833,9 +2123,6 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-
-
-
 
 
 
@@ -2891,55 +2178,6 @@ var defaultColors = [{
   name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gray Color", "frontis-blocks"),
   color: "#808080",
   slug: "gray-color"
-}];
-var gradientDefaults = [{
-  color: "linear-gradient(135deg, rgba(33,150,243,1) 0%, rgba(156,39,176,1) 100%)",
-  name: "Primary Color",
-  slug: "gradientPrimary"
-}, {
-  color: "linear-gradient(135deg, rgba(0,200,83,1) 0%, rgba(255,193,7,1) 100%)",
-  name: "Secondary Color",
-  slug: "gradientSecondary"
-}, {
-  color: "linear-gradient(135deg, rgba(244,67,54,1) 0%, rgba(233,30,99,1) 100%)",
-  name: "Tertiary Color",
-  slug: "gradientTertiary"
-}, {
-  color: "linear-gradient(135deg, rgba(3,169,244,1) 0%, rgba(0,150,136,1) 100%)",
-  name: "Accent Color",
-  slug: "gradientAccent"
-}, {
-  color: "linear-gradient(135deg, rgba(96,125,139,1) 0%, rgba(224,224,224,1) 100%)",
-  name: "Neutral Background",
-  slug: "gradientBackground"
-}, {
-  color: "linear-gradient(135deg, rgba(255,87,34,1) 0%, rgba(255,235,59,1) 100%)",
-  name: "Vibrant Glow",
-  slug: "gradientGradient"
-}, {
-  color: "linear-gradient(135deg, rgba(255,0,150,1) 0%, rgba(255,255,0,1) 100%)",
-  name: "Sunset Bliss",
-  slug: "gradientSunsetBliss"
-}, {
-  color: "linear-gradient(135deg, rgba(0,255,222,1) 0%, rgba(0,102,255,1) 100%)",
-  name: "Ocean Breeze",
-  slug: "gradientOceanBreeze"
-}, {
-  color: "linear-gradient(135deg, rgba(255,153,0,1) 0%, rgba(255,94,0,1) 100%)",
-  name: "Tangerine Dream",
-  slug: "gradientTangerineDream"
-}, {
-  color: "linear-gradient(135deg, rgba(102,51,153,1) 0%, rgba(255,102,204,1) 100%)",
-  name: "Lavender Kiss",
-  slug: "gradientLavenderKiss"
-}, {
-  color: "linear-gradient(220.55deg, #FFE70B 0%, #27B643 100%)",
-  name: "Minty Fresh",
-  slug: "gradientMintyFresh"
-}, {
-  color: "linear-gradient(180deg, #12C0DB, #EF04F6)",
-  name: "Halloween",
-  slug: "gradientHalloween"
 }];
 
 // Default typography configuration
@@ -3355,84 +2593,57 @@ var defaultTypography = {
   }
 };
 function FsiGbTypography() {
-  var _globalColors$selecte2, _customColors$selecte2;
-  var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_10__.useDeviceType)();
-  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useDispatch)("core/editor"),
-    editPost = _useDispatch.editPost;
-  var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_11__.useAfterSave)();
+  var _frontisBlocksAdmin, _frontisBlocksAdmin2;
+  var deviceType = (0,_Config_displayType__WEBPACK_IMPORTED_MODULE_6__.useDeviceType)();
+  var isAfterSave = (0,_helper__WEBPACK_IMPORTED_MODULE_7__.useAfterSave)();
 
   // State management
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(defaultColors),
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)((_frontisBlocksAdmin = frontisBlocksAdmin) === null || _frontisBlocksAdmin === void 0 ? void 0 : _frontisBlocksAdmin.global_colors),
     _useState2 = _slicedToArray(_useState, 2),
     globalColors = _useState2[0],
     setGlobalColors = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)([]),
     _useState4 = _slicedToArray(_useState3, 2),
     customColors = _useState4[0],
     setCustomColors = _useState4[1];
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(gradientDefaults),
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)((_frontisBlocksAdmin2 = frontisBlocksAdmin) === null || _frontisBlocksAdmin2 === void 0 ? void 0 : _frontisBlocksAdmin2.gradients_colors),
     _useState6 = _slicedToArray(_useState5, 2),
     gradientColors = _useState6[0],
     setGradientColors = _useState6[1];
-  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]),
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)([]),
     _useState8 = _slicedToArray(_useState7, 2),
     customGradientColors = _useState8[0],
     setCustomGradientColors = _useState8[1];
-  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(defaultTypography),
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(defaultTypography),
     _useState0 = _slicedToArray(_useState9, 2),
     typography = _useState0[0],
     setTypography = _useState0[1];
-  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}),
+  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)({}),
     _useState10 = _slicedToArray(_useState1, 2),
     customTypography = _useState10[0],
     setCustomTypography = _useState10[1];
-  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}),
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)({}),
     _useState12 = _slicedToArray(_useState11, 2),
     fontFamilies = _useState12[0],
     setFontFamilies = _useState12[1];
-  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)("solid"),
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    activeTab = _useState14[0],
-    setActiveTab = _useState14[1];
-  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
-    _useState16 = _slicedToArray(_useState15, 2),
-    colorModalOpen = _useState16[0],
-    setColorModalOpen = _useState16[1];
-  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(""),
-    _useState18 = _slicedToArray(_useState17, 2),
-    colorName = _useState18[0],
-    setColorName = _useState18[1];
-  var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
-    _useState20 = _slicedToArray(_useState19, 2),
-    isLoading = _useState20[0],
-    setIsLoading = _useState20[1];
-
-  // New state for color picker modal
-  var _useState21 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false),
-    _useState22 = _slicedToArray(_useState21, 2),
-    colorPickerModal = _useState22[0],
-    setColorPickerModal = _useState22[1];
-  var _useState23 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(null),
-    _useState24 = _slicedToArray(_useState23, 2),
-    selectedColorIndex = _useState24[0],
-    setSelectedColorIndex = _useState24[1];
-  var _useState25 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(null),
-    _useState26 = _slicedToArray(_useState25, 2),
-    selectedColorType = _useState26[0],
-    setSelectedColorType = _useState26[1];
-  var _useState27 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(null),
-    _useState28 = _slicedToArray(_useState27, 2),
-    anchorEl = _useState28[0],
-    setAnchorEl = _useState28[1];
-
+    isLoading = _useState14[0],
+    setIsLoading = _useState14[1];
+  var mobilePopoverProps = {
+    placement: 'bottom-start',
+    offset: 8
+  };
   // Memoized theme colors
-  var themeColors = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useMemo)(function () {
-    var _frontisBlocksAdmin;
-    return ((_frontisBlocksAdmin = frontisBlocksAdmin) === null || _frontisBlocksAdmin === void 0 ? void 0 : _frontisBlocksAdmin.theme_colors) || defaultColors;
+  var themeColors = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useMemo)(function () {
+    var _frontisBlocksAdmin3;
+    return ((_frontisBlocksAdmin3 = frontisBlocksAdmin) === null || _frontisBlocksAdmin3 === void 0 ? void 0 : _frontisBlocksAdmin3.theme_colors) || defaultColors;
   }, []);
+  var isMobileViewport = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__.useViewportMatch)('small', '<');
+  var popoverProps = isMobileViewport ? mobilePopoverProps : undefined;
 
   // Utility to extract font families
-  var getAllFontFamilies = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (fontsObject) {
+  var getAllFontFamilies = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useCallback)(function (fontsObject) {
     var fontFamilies = [];
     var _extractFonts = function extractFonts(obj) {
       Object.values(obj).forEach(function (value) {
@@ -3441,14 +2652,14 @@ function FsiGbTypography() {
     };
     _extractFonts(fontsObject);
     var fontsString = fontFamilies.join(",");
-    (0,_helper__WEBPACK_IMPORTED_MODULE_11__.loadGoogleFont)(fontsString);
+    (0,_helper__WEBPACK_IMPORTED_MODULE_7__.loadGoogleFont)(fontsString);
   }, []);
-  var handleUpdateState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var handleUpdateState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useCallback)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _frontisBlocksAdmin4;
     var localStorageKeys, _loop, _i, _localStorageKeys;
     return _regeneratorRuntime().wrap(function _callee$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          console.log("Initial loaded");
           setIsLoading(true);
           localStorageKeys = [{
             key: "fb_global_colors",
@@ -3463,7 +2674,7 @@ function FsiGbTypography() {
           }, {
             key: "fb_gradient_colors",
             setter: setGradientColors,
-            defaultValue: gradientDefaults,
+            defaultValue: (_frontisBlocksAdmin4 = frontisBlocksAdmin) === null || _frontisBlocksAdmin4 === void 0 ? void 0 : _frontisBlocksAdmin4.gradients_colors,
             api: "fb_get_gradient_colors"
           }, {
             key: "fb_custom_gradient_colors",
@@ -3492,12 +2703,12 @@ function FsiGbTypography() {
             defaultValue: null,
             api: "fb_get_globaltypo",
             postProcess: function postProcess(data) {
-              return (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_13__["default"])(data, deviceType);
+              return (0,_components_GenerateRootCss__WEBPACK_IMPORTED_MODULE_9__["default"])(data, deviceType);
             }
           }];
-          _context2.prev = 3;
+          _context2.prev = 2;
           _loop = /*#__PURE__*/_regeneratorRuntime().mark(function _loop() {
-            var _localStorageKeys$_i, key, setter, defaultValue, api, postProcess, localData, res, data;
+            var _localStorageKeys$_i, key, setter, defaultValue, api, postProcess, res, data;
             return _regeneratorRuntime().wrap(function _loop$(_context) {
               while (1) switch (_context.prev = _context.next) {
                 case 0:
@@ -3506,19 +2717,17 @@ function FsiGbTypography() {
                     _context.next = 7;
                     break;
                   }
-                  // Forcefully set fb_global_colors to themeColors
-                  setter(themeColors);
-                  localStorage.setItem(key, JSON.stringify(themeColors));
+                  setter(globalColors !== null && globalColors !== void 0 ? globalColors : themeColors);
+                  localStorage.setItem(key, JSON.stringify(globalColors !== null && globalColors !== void 0 ? globalColors : themeColors));
                   if (postProcess) setTimeout(function () {
-                    return postProcess(themeColors);
+                    return postProcess(globalColors !== null && globalColors !== void 0 ? globalColors : themeColors);
                   }, 1000);
-                  _context.next = 15;
+                  _context.next = 14;
                   break;
                 case 7:
-                  localData = (0,_helper__WEBPACK_IMPORTED_MODULE_11__.getFbLocalStorage)(key);
-                  _context.next = 10;
-                  return (0,_fetch__WEBPACK_IMPORTED_MODULE_12__.getGlobalStyle)(api);
-                case 10:
+                  _context.next = 9;
+                  return (0,_fetch__WEBPACK_IMPORTED_MODULE_8__.getGlobalStyle)(api);
+                case 9:
                   res = _context.sent;
                   data = res.success ? res.data : defaultValue;
                   if (setter) setter(data);
@@ -3526,56 +2735,56 @@ function FsiGbTypography() {
                   if (postProcess) setTimeout(function () {
                     return postProcess(data);
                   }, 1000);
-                case 15:
+                case 14:
                 case "end":
                   return _context.stop();
               }
             }, _loop);
           });
           _i = 0, _localStorageKeys = localStorageKeys;
-        case 6:
+        case 5:
           if (!(_i < _localStorageKeys.length)) {
-            _context2.next = 11;
+            _context2.next = 10;
             break;
           }
-          return _context2.delegateYield(_loop(), "t0", 8);
-        case 8:
+          return _context2.delegateYield(_loop(), "t0", 7);
+        case 7:
           _i++;
-          _context2.next = 6;
+          _context2.next = 5;
           break;
-        case 11:
-          _context2.next = 16;
+        case 10:
+          _context2.next = 15;
           break;
-        case 13:
-          _context2.prev = 13;
-          _context2.t1 = _context2["catch"](3);
+        case 12:
+          _context2.prev = 12;
+          _context2.t1 = _context2["catch"](2);
           console.error("Error fetching global settings:", _context2.t1);
-        case 16:
-          _context2.prev = 16;
+        case 15:
+          _context2.prev = 15;
           setIsLoading(false);
-          return _context2.finish(16);
-        case 19:
+          return _context2.finish(15);
+        case 18:
         case "end":
           return _context2.stop();
       }
-    }, _callee, null, [[3, 13, 16, 19]]);
+    }, _callee, null, [[2, 12, 15, 18]]);
   })), [deviceType, themeColors, getAllFontFamilies]);
 
   // Initialize on mount and device type change
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
     handleUpdateState();
   }, [handleUpdateState]);
 
   // Generate color variables
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
-    var mergedColors = [].concat(_toConsumableArray(customColors), _toConsumableArray(globalColors), _toConsumableArray(customGradientColors), _toConsumableArray(gradientColors));
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    var mergedColors = [].concat(_toConsumableArray(customColors !== null && customColors !== void 0 ? customColors : []), _toConsumableArray(customGradientColors !== null && customGradientColors !== void 0 ? customGradientColors : []), _toConsumableArray(gradientColors !== null && gradientColors !== void 0 ? gradientColors : []), _toConsumableArray(globalColors !== null && globalColors !== void 0 ? globalColors : Array.isArray(themeColors) ? themeColors : []));
     setTimeout(function () {
-      return (0,_components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_14__["default"])(mergedColors, deviceType);
+      return (0,_components_GenerateColorRoot__WEBPACK_IMPORTED_MODULE_10__["default"])(mergedColors, deviceType);
     }, 1000);
   }, [globalColors, customColors, customGradientColors, gradientColors, deviceType]);
 
   // Save settings after post save
-  var handleUpdateSettings = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+  var handleUpdateSettings = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useCallback)(/*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
     var settings, _i2, _settings, _settings$_i, key, data, setter, storeKey, response;
     return _regeneratorRuntime().wrap(function _callee2$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
@@ -3616,7 +2825,7 @@ function FsiGbTypography() {
           }
           _settings$_i = _settings[_i2], key = _settings$_i.key, data = _settings$_i.data, setter = _settings$_i.setter, storeKey = _settings$_i.storeKey;
           _context3.next = 9;
-          return (0,_fetch__WEBPACK_IMPORTED_MODULE_12__.updateGlobalStyle)(data, key);
+          return (0,_fetch__WEBPACK_IMPORTED_MODULE_8__.updateGlobalStyle)(data, key);
         case 9:
           response = _context3.sent;
           if (response.success) {
@@ -3628,228 +2837,58 @@ function FsiGbTypography() {
           _context3.next = 5;
           break;
         case 14:
-          _context3.next = 19;
+          setIsLoading(false);
+          _context3.next = 20;
           break;
-        case 16:
-          _context3.prev = 16;
+        case 17:
+          _context3.prev = 17;
           _context3.t0 = _context3["catch"](3);
           console.error("Error updating settings:", _context3.t0);
-        case 19:
+        case 20:
         case "end":
           return _context3.stop();
       }
-    }, _callee2, null, [[3, 16]]);
+    }, _callee2, null, [[3, 17]]);
   })), [isAfterSave, isLoading, globalColors, customColors, gradientColors, customGradientColors]);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
     handleUpdateSettings();
   }, [handleUpdateSettings]);
-
-  // Color panel array generator
-  var colorPanelArray = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (colors, setColor) {
-    var defaults = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-    if (!Array.isArray(colors)) return [];
-    return colors.map(function (colorObj, index) {
-      return {
-        label: colorObj.name || "Color",
-        value: colorObj.color,
-        onChange: function onChange(newColor) {
-          var _defaults$index;
-          return setColor(index, newColor || ((_defaults$index = defaults[index]) === null || _defaults$index === void 0 ? void 0 : _defaults$index.color) || "#000");
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    if (!isLoading) {
+      setIsLoading(true);
+      wp.data.dispatch('core/editor').editPost({
+        meta: {
+          _dummy: new Date().getTime()
         }
-      };
-    });
-  }, []);
-
-  // Color update handlers
-  var setGlobalColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index, color) {
-    setGlobalColors(function (prev) {
-      var colors = _toConsumableArray(prev);
-      colors[index].color = color;
-      return colors;
-    });
-    setIsLoading(true);
-  }, []);
-  var setGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index, color) {
-    setGradientColors(function (prev) {
-      var colors = _toConsumableArray(prev);
-      colors[index].color = color;
-      return colors;
-    });
-    setIsLoading(true);
-  }, []);
-  var setCustomGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index, color) {
-    setCustomGradientColors(function (prev) {
-      var colors = _toConsumableArray(prev);
-      colors[index].color = color;
-      return colors;
-    });
-    setIsLoading(true);
-  }, []);
-  var setCustomColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index, color) {
-    setCustomColors(function (prev) {
-      var colors = _toConsumableArray(prev);
-      colors[index].color = color;
-      return colors;
-    });
-    setIsLoading(true);
-  }, []);
-
-  // Custom color and gradient handlers
-  var addCustomColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function () {
-    setColorModalOpen(true);
-    setIsLoading(true);
-  }, []);
-  var deleteCustomGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index) {
-    setCustomGradientColors(function (prev) {
-      var colors = _toConsumableArray(prev);
-      colors.splice(index, 1);
-      return colors;
-    });
-    setIsLoading(true);
-  }, []);
-  var addCustomGradientColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function () {
-    setCustomGradientColors(function (prev) {
-      return [].concat(_toConsumableArray(prev), [{
-        color: "#000000",
-        name: "Gradient Color ".concat(prev.length + 1),
-        slug: "custom-gradient-color-".concat(prev.length + 1),
-        "var": "--fb-custom-gradient-color-".concat(prev.length + 1)
-      }]);
-    });
-    setIsLoading(true);
-  }, []);
-
-  // Handle modal close and new color addition
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(function () {
-    if (!colorModalOpen && colorName) {
-      setCustomColors(function (prev) {
-        return [].concat(_toConsumableArray(prev), [{
-          color: "#000000",
-          name: colorName || "Custom Color ".concat(prev.length + 1),
-          slug: colorName ? colorName.replace(/\s+/g, "-").toLowerCase() : "custom-color-".concat(prev.length + 1)
-        }]);
       });
-      setColorName("");
     }
-  }, [colorModalOpen, colorName]);
-
-  // Handle color click to open picker modal
-  var handleColorClick = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (index, type) {
-    setSelectedColorIndex(index);
-    setSelectedColorType(type);
-    setAnchorEl(event.currentTarget);
-    setColorPickerModal(true);
-  }, []);
-
-  // Handle color change from picker modal
-  var handleColorChange = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function (newColor) {
-    if (selectedColorType === 'global') {
-      setGlobalColor(selectedColorIndex, newColor);
-    } else if (selectedColorType === 'custom') {
-      setCustomColor(selectedColorIndex, newColor);
+    if (globalColors === undefined) {
+      setGlobalColors(themeColors);
     }
-  }, [selectedColorIndex, selectedColorType, setGlobalColor, setCustomColor]);
-
-  // Get current selected color
-  var getCurrentColor = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useCallback)(function () {
-    if (selectedColorType === 'global' && selectedColorIndex !== null) {
-      var _globalColors$selecte;
-      return ((_globalColors$selecte = globalColors[selectedColorIndex]) === null || _globalColors$selecte === void 0 ? void 0 : _globalColors$selecte.color) || '#000000';
-    } else if (selectedColorType === 'custom' && selectedColorIndex !== null) {
-      var _customColors$selecte;
-      return ((_customColors$selecte = customColors[selectedColorIndex]) === null || _customColors$selecte === void 0 ? void 0 : _customColors$selecte.color) || '#000000';
-    }
-    return '#000000';
-  }, [selectedColorIndex, selectedColorType, globalColors, customColors]);
+  }, [customColors, globalColors, gradientColors, customGradientColors]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "fb_template_library_sidebar"
+  }, /*#__PURE__*/React.createElement("div", {
     className: "fb-panel-control"
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalNavigatorProvider, {
+    initialPath: "/"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-color-options-vertical"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-color-section"
-  }, /*#__PURE__*/React.createElement("h2", {
-    className: "fb-section-title"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Select Color", "frontis-blocks")), /*#__PURE__*/React.createElement("div", {
-    className: "fb-color-grid",
-    style: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '12px',
-      marginBottom: '24px',
-      padding: '12px',
-      border: '1px solid #E1E3E8',
-      borderRadius: '4px'
-    }
-  }, globalColors.map(function (colorObj, index) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: "global-".concat(index),
-      className: "fb-color-item",
-      style: {
-        width: '32px',
-        height: '32px',
-        borderRadius: '50%',
-        backgroundColor: colorObj.color,
-        border: '1px solid #ddd',
-        cursor: 'pointer'
-      },
-      onClick: function onClick(e) {
-        return handleColorClick(index, 'global', e);
-      },
-      title: colorObj.name
-    });
-  }), customColors.map(function (colorObj, index) {
-    return /*#__PURE__*/React.createElement("div", {
-      key: "custom-".concat(index),
-      className: "fb-color-item",
-      style: {
-        width: '32px',
-        height: '32px',
-        borderRadius: '50%',
-        backgroundColor: colorObj.color,
-        border: '1px solid #ddd',
-        cursor: 'pointer',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-      },
-      onClick: function onClick() {
-        return handleColorClick(index, 'custom');
-      },
-      title: colorObj.name
-    });
-  })))), /*#__PURE__*/React.createElement(_components_TypographySettings__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalPaletteEdit, {
+    className: "fb-color-pallet",
+    canReset: globalColors || themeColors,
+    canOnlyChangeValues: true,
+    colors: globalColors || themeColors,
+    onChange: setGlobalColors,
+    paletteLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Color'),
+    paletteLabelHeadingLevel: 3,
+    popoverProps: popoverProps
+  }))), /*#__PURE__*/React.createElement(_components_TypographySettings__WEBPACK_IMPORTED_MODULE_5__["default"], {
     typography: typography,
     isAfterSave: isAfterSave
-  })), colorPickerModal && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Popover, {
-    className: "fb-color-picker-modal",
-    onRequestClose: function onRequestClose() {
-      return setColorPickerModal(false);
-    },
-    placement: "right-start",
-    focusOnMount: false
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-setting-color-setting-icon-popup",
-    style: {
-      width: '300px',
-      padding: '12px'
-    }
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
-    label: selectedColorType === 'global' ? (_globalColors$selecte2 = globalColors[selectedColorIndex]) === null || _globalColors$selecte2 === void 0 ? void 0 : _globalColors$selecte2.name : (_customColors$selecte2 = customColors[selectedColorIndex]) === null || _customColors$selecte2 === void 0 ? void 0 : _customColors$selecte2.name
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPalette, {
-    colors: selectedColorType === 'global' ? globalColors : customColors,
-    value: getCurrentColor(),
-    onChange: handleColorChange,
-    disableCustomColors: false
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "fb-modal-actions",
-    style: {
-      marginTop: '20px',
-      textAlign: 'right'
-    }
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-    variant: "primary",
-    onClick: function onClick() {
-      return setColorPickerModal(false);
-    }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Done", "frontis-blocks"))))));
+  })))));
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FsiGbTypography);
 
@@ -4021,6 +3060,395 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+/***/ }),
+
+/***/ "./admin/template-library/library-content.js":
+/*!***************************************************!*\
+  !*** ./admin/template-library/library-content.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
+/* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-toastify/dist/ReactToastify.css */ "./node_modules/react-toastify/dist/ReactToastify.css");
+/* harmony import */ var react_spinners__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-spinners */ "./node_modules/react-spinners/esm/ClipLoader.js");
+/* harmony import */ var _template_import__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./template-import */ "./admin/template-library/template-import.js");
+/* harmony import */ var _login_signup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./login-signup */ "./admin/template-library/login-signup.js");
+/* harmony import */ var _plugin_upgrade__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./plugin-upgrade */ "./admin/template-library/plugin-upgrade.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * WordPress dependencies
+ */
+
+
+
+
+
+
+
+var TemplateCard = function TemplateCard(_ref) {
+  var item = _ref.item,
+    libraryData = _ref.libraryData,
+    setLibraryData = _ref.setLibraryData;
+  var _window$frontisBlocks = window.frontisBlocksAdmin,
+    nonce = _window$frontisBlocks.nonce,
+    ajaxUrl = _window$frontisBlocks.ajaxUrl;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isLoading = _useState2[0],
+    setIsLoading = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isModalOpen = _useState4[0],
+    setIsModalOpen = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isLoginModalOpen = _useState6[0],
+    setIsLoginModalOpen = _useState6[1];
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    isPluginUpgradeModalOpen = _useState8[0],
+    setIsPluginUpgradeModalOpen = _useState8[1];
+  var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState0 = _slicedToArray(_useState9, 2),
+    isHovered = _useState0[0],
+    setIsHovered = _useState0[1];
+  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState10 = _slicedToArray(_useState1, 2),
+    isAuthenticated = _useState10[0],
+    setIsAuthenticated = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isPluginUpgrade = _useState12[0],
+    setIsPluginUpgrade = _useState12[1];
+
+  // Check authentication status on component mount
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setIsAuthenticated(false);
+  }, []);
+  var handleFullSiteImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    if (!isPluginUpgrade) {
+      setIsPluginUpgradeModalOpen(true);
+    }
+    if (!isAuthenticated) {
+      setIsLoginModalOpen(true);
+    }
+    if (!item.isPro) {
+      setIsModalOpen(true);
+    }
+  }, [isAuthenticated]);
+  var handleLoginSuccess = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsLoginModalOpen(false);
+    setIsAuthenticated(true);
+    setIsModalOpen(true);
+  }, []);
+  var handleCloseLoginModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsLoginModalOpen(false);
+    setIsPluginUpgrade(false);
+  }, []);
+  var handleClosePluginUpgradeModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsPluginUpgradeModalOpen(false);
+    setIsPluginUpgrade(true);
+  }, []);
+  var handleCloseModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsModalOpen(false);
+  }, []);
+  var handleDemo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    console.log("Demo clicked for:", item.id);
+  }, [item.id]);
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("tr", {
+    className: "fb-template-library-card style-two",
+    onMouseEnter: function onMouseEnter() {
+      return setIsHovered(true);
+    },
+    onMouseLeave: function onMouseLeave() {
+      return setIsHovered(false);
+    }
+  }, /*#__PURE__*/React.createElement("td", {
+    className: "fb-template-library-card-content"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: item.image,
+    alt: item.title || "Template preview"
+  }), /*#__PURE__*/React.createElement("h4", {
+    className: "fb-template-title"
+  }, item.title)), /*#__PURE__*/React.createElement("td", {
+    className: "fb-template-library-card-date"
+  }, /*#__PURE__*/React.createElement("span", null, item.dateAndTime.month), /*#__PURE__*/React.createElement("span", null, " ", item.dateAndTime.day, ","), /*#__PURE__*/React.createElement("span", null, " ", item.dateAndTime.year)), /*#__PURE__*/React.createElement("td", {
+    className: "fb-template-library-card-actions"
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "fb-template-action-btn import-btn ".concat(isLoading ? "loading" : ""),
+    onClick: !isLoading ? handleFullSiteImport : null,
+    disabled: isLoading
+  }, isLoading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Importing..."), /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    color: "#fff",
+    size: 16
+  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Import"))), /*#__PURE__*/React.createElement("button", {
+    className: "fb-template-action-btn option-btn ".concat(isLoading ? "loading" : "")
+    // onClick={!isLoading ? handleSaveLibrary : null}
+    ,
+    disabled: isLoading
+  }, isLoading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Saving..."), /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    color: "#fff",
+    size: 16
+  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "20",
+    height: "20",
+    viewBox: "0 0 20 20",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M9.99316 10H10.0007",
+    stroke: "#0B0C0E",
+    "stroke-width": "2.08333",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M9.98682 15H9.99432",
+    stroke: "#0B0C0E",
+    "stroke-width": "2.08333",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M9.99976 5H10.0073",
+    stroke: "#0B0C0E",
+    "stroke-width": "2.08333",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round"
+  })))))), item.isPro && isPluginUpgradeModalOpen && /*#__PURE__*/React.createElement(_plugin_upgrade__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    onClose: handleClosePluginUpgradeModal
+  }), item.isPro && isPluginUpgrade && isLoginModalOpen && /*#__PURE__*/React.createElement(_login_signup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    onClose: handleCloseLoginModal,
+    onLoginSuccess: handleLoginSuccess
+  }), isModalOpen && /*#__PURE__*/React.createElement(_template_import__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    template: item,
+    onClose: handleCloseModal
+  }));
+};
+var LibraryContent = function LibraryContent(_ref2) {
+  var activeTab = _ref2.activeTab,
+    activeCategory = _ref2.activeCategory,
+    data = _ref2.data,
+    libraryData = _ref2.libraryData,
+    setLibraryData = _ref2.setLibraryData;
+  var FavoriteTabsOptions = [{
+    name: 'All',
+    value: 'all'
+  }, {
+    name: 'Patterns',
+    value: 'patterns'
+  }, {
+    name: 'Pages',
+    value: 'pages'
+  }, {
+    name: 'Sites',
+    value: 'sites'
+  }];
+  var CardListOptions = [{
+    svg: /*#__PURE__*/React.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "24",
+      height: "24",
+      viewBox: "0 0 24 24",
+      fill: "none"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M3.88886 9.66294C4.39331 10 5.09554 10 6.5 10C7.90447 10 8.6067 10 9.11115 9.66294C9.32953 9.51702 9.51703 9.32952 9.66294 9.11114C10 8.60669 10 7.90446 10 6.5C10 5.09554 10 4.39331 9.66294 3.88886C9.51703 3.67048 9.32953 3.48298 9.11115 3.33706C8.6067 3 7.90447 3 6.5 3C5.09554 3 4.39331 3 3.88886 3.33706C3.67048 3.48298 3.48298 3.67048 3.33707 3.88886C3 4.39331 3 5.09554 3 6.5C3 7.90446 3 8.60669 3.33707 9.11114C3.48298 9.32952 3.67048 9.51702 3.88886 9.66294Z",
+      stroke: "#404655",
+      "stroke-width": "1.5",
+      "stroke-linejoin": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M14.8888 9.66294C15.3933 10 16.0955 10 17.5 10C18.9044 10 19.6067 10 20.1111 9.66294C20.3295 9.51702 20.517 9.32952 20.6629 9.11114C21 8.60669 21 7.90446 21 6.5C21 5.09554 21 4.39331 20.6629 3.88886C20.517 3.67048 20.3295 3.48298 20.1111 3.33706C19.6067 3 18.9044 3 17.5 3C16.0955 3 15.3933 3 14.8888 3.33706C14.6705 3.48298 14.483 3.67048 14.337 3.88886C14 4.39331 14 5.09554 14 6.5C14 7.90446 14 8.60669 14.337 9.11114C14.483 9.32952 14.6705 9.51702 14.8888 9.66294Z",
+      stroke: "#404655",
+      "stroke-width": "1.5",
+      "stroke-linejoin": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M3.88886 20.6629C4.39331 21 5.09554 21 6.5 21C7.90447 21 8.6067 21 9.11115 20.6629C9.32953 20.517 9.51703 20.3295 9.66294 20.1111C10 19.6067 10 18.9045 10 17.5C10 16.0955 10 15.3933 9.66294 14.8889C9.51703 14.6705 9.32953 14.483 9.11115 14.3371C8.6067 14 7.90447 14 6.5 14C5.09554 14 4.39331 14 3.88886 14.3371C3.67048 14.483 3.48298 14.6705 3.33707 14.8889C3 15.3933 3 16.0955 3 17.5C3 18.9045 3 19.6067 3.33707 20.1111C3.48298 20.3295 3.67048 20.517 3.88886 20.6629Z",
+      stroke: "#404655",
+      "stroke-width": "1.5",
+      "stroke-linejoin": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M14.8888 20.6629C15.3933 21 16.0955 21 17.5 21C18.9044 21 19.6067 21 20.1111 20.6629C20.3295 20.517 20.517 20.3295 20.6629 20.1111C21 19.6067 21 18.9045 21 17.5C21 16.0955 21 15.3933 20.6629 14.8889C20.517 14.6705 20.3295 14.483 20.1111 14.3371C19.6067 14 18.9044 14 17.5 14C16.0955 14 15.3933 14 14.8888 14.3371C14.6705 14.483 14.483 14.6705 14.337 14.8889C14 15.3933 14 16.0955 14 17.5C14 18.9045 14 19.6067 14.337 20.1111C14.483 20.3295 14.6705 20.517 14.8888 20.6629Z",
+      stroke: "#404655",
+      "stroke-width": "1.5",
+      "stroke-linejoin": "round"
+    })),
+    value: 'grid'
+  }, {
+    svg: /*#__PURE__*/React.createElement("svg", {
+      width: "24",
+      height: "24",
+      viewBox: "0 0 24 24",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M4 5H20",
+      stroke: "#404655",
+      "stroke-width": "1.5",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M4 12H20",
+      stroke: "#404655",
+      "stroke-width": "1.5",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M4 19H20",
+      stroke: "#404655",
+      "stroke-width": "1.5",
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    })),
+    value: 'list'
+  }];
+  var schema = (data === null || data === void 0 ? void 0 : data.$schema) || {};
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState14 = _slicedToArray(_useState13, 2),
+    filteredTemplates = _useState14[0],
+    setFilteredTemplates = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('all'),
+    _useState16 = _slicedToArray(_useState15, 2),
+    activeFavoriteTab = _useState16[0],
+    setActiveFavoriteTab = _useState16[1];
+  var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)('list'),
+    _useState18 = _slicedToArray(_useState17, 2),
+    cardListType = _useState18[0],
+    setCardListType = _useState18[1];
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (activeTab && activeCategory[activeTab]) {
+      var _tabData$categories;
+      var tabData = schema[activeTab];
+      var selectedCategory = tabData === null || tabData === void 0 || (_tabData$categories = tabData.categories) === null || _tabData$categories === void 0 ? void 0 : _tabData$categories.find(function (category) {
+        return category.id === activeCategory[activeTab];
+      });
+      if (selectedCategory && selectedCategory.items) {
+        setFilteredTemplates(selectedCategory.items);
+      } else {
+        setFilteredTemplates([]);
+      }
+    }
+  }, [activeTab, activeCategory[activeTab]]);
+  var handleFavoriteTabClick = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (tab) {
+    setActiveCategory(_objectSpread(_objectSpread({}, activeCategory), {}, {
+      templateLibrary: tab.value
+    }));
+  }, [activeCategory]);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-store-content"
+  }, activeCategory.templateLibrary === 'my-favourites' || activeCategory.templateLibrary === 'my-cloud' ? /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-content-header"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-content-header-left"
+  }, activeCategory.templateLibrary === 'my-cloud' && /*#__PURE__*/React.createElement("h2", null, "My Clouds"), activeCategory.templateLibrary === 'my-favourites' ? /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-tags-wrapper"
+  }, FavoriteTabsOptions.map(function (tab) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: tab.value,
+      className: "fb-template-library-tag-btn ".concat(activeFavoriteTab === tab.value ? 'active' : ''),
+      onClick: function onClick() {
+        return setActiveFavoriteTab(tab.value);
+      }
+    }, tab.name);
+  })) : ''), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-content-header-right"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-search-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-search-input-wrapper"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fb-search-input-icon"
+  }, /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "18",
+    height: "18",
+    viewBox: "0 0 18 18",
+    fill: "none"
+  }, /*#__PURE__*/React.createElement("g", {
+    "clip-path": "url(#clip0_13116_5586)"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "8.625",
+    cy: "8.625",
+    r: "7.125",
+    stroke: "white",
+    "stroke-width": "1.5"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M13.875 13.875L16.5 16.5",
+    stroke: "white",
+    "stroke-width": "1.5",
+    "stroke-linecap": "round"
+  })), /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
+    id: "clip0_13116_5586"
+  }, /*#__PURE__*/React.createElement("rect", {
+    width: "18",
+    height: "18",
+    fill: "white"
+  }))))), /*#__PURE__*/React.createElement("input", {
+    type: "search",
+    placeholder: "Search Blocks"
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-library-card-list-wrapper"
+  }, CardListOptions.map(function (tab) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: tab.value,
+      className: "fb-template-library-card-list-btn ".concat(cardListType === tab.value ? 'active' : ''),
+      onClick: function onClick() {
+        return setCardListType(tab.value);
+      }
+    }, tab.svg);
+  })))) : '', /*#__PURE__*/React.createElement("table", {
+    className: "fb-template-library-cards style-two"
+  }, /*#__PURE__*/React.createElement("thead", {
+    className: "fb-template-library-card-header"
+  }, /*#__PURE__*/React.createElement("tr", {
+    className: "fb-template-library-card-header-name"
+  }, "Name"), activeCategory.templateLibrary === 'my-favourites' || activeCategory.templateLibrary === 'my-cloud' ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("tr", {
+    className: "fb-template-library-card-header-date"
+  }, "Last Modified"), /*#__PURE__*/React.createElement("tr", {
+    className: "fb-template-library-card-header-actions"
+  }, "Action")) : ''), /*#__PURE__*/React.createElement("tbody", {
+    className: "fb-template-library-card-body"
+  }, activeCategory.templateLibrary === 'my-favourites' ? activeFavoriteTab === 'all' ? libraryData.map(function (item) {
+    return /*#__PURE__*/React.createElement(TemplateCard, {
+      key: item.id,
+      item: item,
+      libraryData: libraryData,
+      setLibraryData: setLibraryData
+    });
+  }) : libraryData.filter(function (item) {
+    return item.activeTab === activeFavoriteTab;
+  }).map(function (item) {
+    return /*#__PURE__*/React.createElement(TemplateCard, {
+      key: item.id,
+      item: item,
+      libraryData: libraryData,
+      setLibraryData: setLibraryData
+    });
+  }) : libraryData.map(function (item) {
+    return /*#__PURE__*/React.createElement(TemplateCard, {
+      key: item.id,
+      item: item,
+      libraryData: libraryData,
+      setLibraryData: setLibraryData
+    });
+  }))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LibraryContent);
 
 /***/ }),
 
@@ -4286,21 +3714,7 @@ var LoginSignupModal = function LoginSignupModal(_ref) {
   }, isLoading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_1__["default"], {
     color: "#fff",
     size: 16
-  }), /*#__PURE__*/React.createElement("span", null, activeTab === 'login' ? 'Signing In...' : 'Signing Up...')) : /*#__PURE__*/React.createElement("span", null, activeTab === 'login' ? 'Login' : 'Sign Up'))), /*#__PURE__*/React.createElement("button", {
-    className: "fb-auth-close",
-    onClick: onClose
-  }, /*#__PURE__*/React.createElement("svg", {
-    width: "24",
-    height: "24",
-    viewBox: "0 0 24 24",
-    fill: "none"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 6L6 18M6 6l12 12",
-    stroke: "currentColor",
-    strokeWidth: "2",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
-  })))));
+  }), /*#__PURE__*/React.createElement("span", null, activeTab === 'login' ? 'Signing In...' : 'Signing Up...')) : /*#__PURE__*/React.createElement("span", null, activeTab === 'login' ? 'Login' : 'Sign Up')))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoginSignupModal);
 
@@ -4316,17 +3730,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * WordPress dependencies
  */
 
-var PluginUpgradeModal = function PluginUpgradeModal() {
+var PluginUpgradeModal = function PluginUpgradeModal(_ref) {
+  var onClose = _ref.onClose;
+  var handleOverlayClick = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function (e) {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  }, [onClose]);
   return /*#__PURE__*/React.createElement("div", {
-    className: "fb-auth-modal"
+    className: "fb-auth-modal",
+    onClick: handleOverlayClick
   }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-auth-container"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-import-sidebar"
+    className: "fb-plugin-upgrade-wrapper"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-info"
   }, /*#__PURE__*/React.createElement("div", {
@@ -4353,8 +3774,8 @@ var PluginUpgradeModal = function PluginUpgradeModal() {
   }, "Get premium resources at Frontis Blocks and save more time with stunning patterns and templates")), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-actions"
   }, /*#__PURE__*/React.createElement("button", {
-    className: "fb-full-site-import-btn"
-  }, "Upgrade Now")))));
+    className: "fb-plugin-upgrade-btn"
+  }, "Upgrade Now"))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PluginUpgradeModal);
 
@@ -4390,6 +3811,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _template_import__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./template-import */ "./admin/template-library/template-import.js");
 /* harmony import */ var _login_signup__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./login-signup */ "./admin/template-library/login-signup.js");
 /* harmony import */ var _plugin_upgrade__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./plugin-upgrade */ "./admin/template-library/plugin-upgrade.js");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -4413,7 +3838,11 @@ var TemplateCard = function TemplateCard(_ref) {
     isPro = _ref$isPro === void 0 ? false : _ref$isPro,
     id = _ref.id,
     _ref$tags = _ref.tags,
-    tags = _ref$tags === void 0 ? [] : _ref$tags;
+    tags = _ref$tags === void 0 ? [] : _ref$tags,
+    _ref$dependency = _ref.dependency,
+    dependency = _ref$dependency === void 0 ? [] : _ref$dependency,
+    activeTab = _ref.activeTab,
+    setLibraryData = _ref.setLibraryData;
   var _window$frontisBlocks = window.frontisBlocksAdmin,
     nonce = _window$frontisBlocks.nonce,
     ajaxUrl = _window$frontisBlocks.ajaxUrl;
@@ -4431,24 +3860,33 @@ var TemplateCard = function TemplateCard(_ref) {
     setIsLoginModalOpen = _useState6[1];
   var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    isHovered = _useState8[0],
-    setIsHovered = _useState8[1];
+    isPluginUpgradeModalOpen = _useState8[0],
+    setIsPluginUpgradeModalOpen = _useState8[1];
   var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState0 = _slicedToArray(_useState9, 2),
-    isAuthenticated = _useState0[0],
-    setIsAuthenticated = _useState0[1];
+    isHovered = _useState0[0],
+    setIsHovered = _useState0[1];
+  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState10 = _slicedToArray(_useState1, 2),
+    isAuthenticated = _useState10[0],
+    setIsAuthenticated = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState12 = _slicedToArray(_useState11, 2),
+    isPluginUpgrade = _useState12[0],
+    setIsPluginUpgrade = _useState12[1];
 
   // Check authentication status on component mount
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsAuthenticated(false);
   }, []);
   var handleFullSiteImport = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
-    if (!isPro) {
-      setIsModalOpen(true);
+    if (!isPluginUpgrade) {
+      setIsPluginUpgradeModalOpen(true);
     }
     if (!isAuthenticated) {
       setIsLoginModalOpen(true);
-    } else {
+    }
+    if (!isPro) {
       setIsModalOpen(true);
     }
   }, [isAuthenticated]);
@@ -4459,6 +3897,11 @@ var TemplateCard = function TemplateCard(_ref) {
   }, []);
   var handleCloseLoginModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     setIsLoginModalOpen(false);
+    setIsPluginUpgrade(false);
+  }, []);
+  var handleClosePluginUpgradeModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setIsPluginUpgradeModalOpen(false);
+    setIsPluginUpgrade(true);
   }, []);
   var handleCloseModal = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     setIsModalOpen(false);
@@ -4466,6 +3909,25 @@ var TemplateCard = function TemplateCard(_ref) {
   var handleDemo = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
     console.log("Demo clicked for:", id);
   }, [id]);
+  var currentDay = new Date().toLocaleDateString('en-US', {
+    day: 'numeric'
+  });
+  var currentMonth = new Date().toLocaleDateString('en-US', {
+    month: 'long'
+  });
+  var currentYear = new Date().toLocaleDateString('en-US', {
+    year: 'numeric'
+  });
+  var currentTime = new Date().toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+  var currentDateAndTime = {
+    day: currentDay,
+    month: currentMonth,
+    year: currentYear,
+    time: currentTime
+  };
   var templateData = {
     id: id,
     title: title,
@@ -4473,8 +3935,19 @@ var TemplateCard = function TemplateCard(_ref) {
     isPro: isPro,
     category: ['Blog & Magazine', 'Construction', 'eCommerce'],
     author: 'Template Author',
-    downloads: 2025
+    activeTab: activeTab,
+    dependency: dependency,
+    dateAndTime: currentDateAndTime
   };
+  var handleSaveLibrary = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setLibraryData(function (prevData) {
+      var alreadyExists = prevData.some(function (item) {
+        return item.id === templateData.id;
+      });
+      if (alreadyExists) return prevData;
+      return [].concat(_toConsumableArray(prevData), [templateData]);
+    });
+  }, [templateData]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-card",
     onMouseEnter: function onMouseEnter() {
@@ -4539,8 +4012,15 @@ var TemplateCard = function TemplateCard(_ref) {
     color: "#fff",
     size: 16
   })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Import"))), /*#__PURE__*/React.createElement("button", {
-    className: "fb-template-save-my-cloud"
-  }, /*#__PURE__*/React.createElement("span", null, "Save Library")))), !isPro && /*#__PURE__*/React.createElement(_plugin_upgrade__WEBPACK_IMPORTED_MODULE_5__["default"], null), isPro && isLoginModalOpen && /*#__PURE__*/React.createElement(_login_signup__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    className: "fb-template-save-my-cloud ".concat(isLoading ? "loading" : ""),
+    onClick: !isLoading ? handleSaveLibrary : null,
+    disabled: isLoading
+  }, isLoading ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Saving..."), /*#__PURE__*/React.createElement(react_spinners__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    color: "#fff",
+    size: 16
+  })) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Save Library"))))), isPro && isPluginUpgradeModalOpen && /*#__PURE__*/React.createElement(_plugin_upgrade__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    onClose: handleClosePluginUpgradeModal
+  }), isPro && isPluginUpgrade && isLoginModalOpen && /*#__PURE__*/React.createElement(_login_signup__WEBPACK_IMPORTED_MODULE_4__["default"], {
     onClose: handleCloseLoginModal,
     onLoginSuccess: handleLoginSuccess
   }), isModalOpen && /*#__PURE__*/React.createElement(_template_import__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -4551,27 +4031,48 @@ var TemplateCard = function TemplateCard(_ref) {
 var TemplateLibrary = function TemplateLibrary(_ref2) {
   var activeTab = _ref2.activeTab,
     activeCategory = _ref2.activeCategory,
-    data = _ref2.data;
+    data = _ref2.data,
+    libraryData = _ref2.libraryData,
+    setLibraryData = _ref2.setLibraryData;
+  var TagTabsOptions = [{
+    name: 'User Experience',
+    value: 'user-experience'
+  }, {
+    name: 'Templates',
+    value: 'templates'
+  }, {
+    name: 'Web Design',
+    value: 'web-design'
+  }, {
+    name: 'E-commerce',
+    value: 'e-commerce'
+  }, {
+    name: 'Landing Pages',
+    value: 'landing-pages'
+  }];
   var schema = (data === null || data === void 0 ? void 0 : data.$schema) || {};
-  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    _useState10 = _slicedToArray(_useState1, 2),
-    filteredTemplates = _useState10[0],
-    setFilteredTemplates = _useState10[1];
+  var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState14 = _slicedToArray(_useState13, 2),
+    filteredTemplates = _useState14[0],
+    setFilteredTemplates = _useState14[1];
+  var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState16 = _slicedToArray(_useState15, 2),
+    activeTagTab = _useState16[0],
+    setActiveTagTab = _useState16[1];
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (activeTab && activeCategory) {
+    if (activeTab && activeCategory[activeTab]) {
       var _tabData$categories;
       var tabData = schema[activeTab];
       var selectedCategory = tabData === null || tabData === void 0 || (_tabData$categories = tabData.categories) === null || _tabData$categories === void 0 ? void 0 : _tabData$categories.find(function (category) {
-        return category.id === activeCategory;
+        return category.id === activeCategory[activeTab];
       });
-      console.log(selectedCategory);
       if (selectedCategory && selectedCategory.items) {
         setFilteredTemplates(selectedCategory.items);
       } else {
         setFilteredTemplates([]);
       }
     }
-  }, [activeTab, activeCategory]);
+  }, [activeTab, activeCategory[activeTab]]);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-store-content"
   }, /*#__PURE__*/React.createElement("div", {
@@ -4616,16 +4117,27 @@ var TemplateLibrary = function TemplateLibrary(_ref2) {
     placeholder: "Search Blocks"
   }))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-tags-wrapper"
-  }, /*#__PURE__*/React.createElement("span", null, "User Experience"), /*#__PURE__*/React.createElement("span", null, "UI Kits"), /*#__PURE__*/React.createElement("span", null, "Templates"), /*#__PURE__*/React.createElement("span", null, "Web Design"), /*#__PURE__*/React.createElement("span", null, "Creative Assets")))), /*#__PURE__*/React.createElement("div", {
+  }, TagTabsOptions.map(function (tab) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: tab.value,
+      className: "fb-template-library-tag-btn ".concat(activeTagTab === tab.value ? 'active' : ''),
+      onClick: function onClick() {
+        return setActiveTagTab(tab.value);
+      }
+    }, tab.name);
+  })))), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-cards"
-  }, filteredTemplates.map(function (template, index) {
+  }, filteredTemplates.map(function (template) {
     return /*#__PURE__*/React.createElement(TemplateCard, {
       key: template.id,
       id: template.id,
       title: template.title,
       imageUrl: template.image,
-      isPro: index % 3 === 1,
-      tags: template.tags || []
+      isPro: template.isPro || false,
+      tags: template.tags || [],
+      dependency: template.dependency || [],
+      activeTab: activeTab,
+      setLibraryData: setLibraryData
     });
   })));
 };
@@ -4736,8 +4248,8 @@ var TemplateHeader = function TemplateHeader(_ref) {
   var tabs = Object.keys(schema).map(function (key) {
     return {
       id: key,
-      label: schema[key].name,
-      icon: key === 'template-library' ? /*#__PURE__*/React.createElement(TemplateLibraryIcon, null) : null
+      label: schema[key].name
+      // icon: key === 'templateLibrary' ? <TemplateLibraryIcon /> : null,
     };
   });
   return /*#__PURE__*/React.createElement("div", {
@@ -4755,7 +4267,7 @@ var TemplateHeader = function TemplateHeader(_ref) {
       onClick: function onClick() {
         return setActiveTab(tab.id);
       }
-    }, /*#__PURE__*/React.createElement("span", null, tab.label), tab.icon);
+    }, /*#__PURE__*/React.createElement("span", null, tab.label));
   })), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-header-right"
   }, /*#__PURE__*/React.createElement("div", {
@@ -4918,6 +4430,7 @@ var TemplateImport = function TemplateImport(_ref) {
       } // Optional: Add back functionality
     });
   }
+  console.log(template);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-template-import-modal"
   }, /*#__PURE__*/React.createElement("div", {
@@ -4948,72 +4461,19 @@ var TemplateImport = function TemplateImport(_ref) {
     className: "fb-template-category"
   }, /*#__PURE__*/React.createElement("span", {
     className: "fb-category-label"
-  }, "Category : "), /*#__PURE__*/React.createElement("div", {
+  }, "Category: "), /*#__PURE__*/React.createElement("div", {
     className: "fb-category-tags"
   }, /*#__PURE__*/React.createElement("span", {
     className: "fb-category-tag"
-  }, " Blog & Magazine"), /*#__PURE__*/React.createElement("span", {
+  }, "Blog & Magazine,"), /*#__PURE__*/React.createElement("span", {
     className: "fb-category-tag"
-  }, "Construction"), /*#__PURE__*/React.createElement("span", {
+  }, "Construction,"), /*#__PURE__*/React.createElement("span", {
     className: "fb-category-tag"
   }, "eCommerce"))), /*#__PURE__*/React.createElement("h2", {
     className: "fb-template-title"
-  }, template.title || 'Renovate - Home Decor Website Template For Gutenberg'), /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-dependency"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "fb-dependency-label"
-  }, "Dependency"), /*#__PURE__*/React.createElement("div", {
-    className: "fb-dependency-icons"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-dependency-icon"
-  }, /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "28",
-    height: "32",
-    viewBox: "0 0 28 32",
-    fill: "none"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M23.335 15.9939L26.5028 17.8551C26.958 18.1229 27.336 18.508 27.5988 18.9718C27.8616 19.4356 28 19.9618 28 20.4974V22.4684C28 23.0039 27.8616 23.5301 27.5988 23.9939C27.336 24.4577 26.958 24.8429 26.5028 25.1107L23.335 26.9718L18.652 29.7239L15.4781 31.5912C15.0229 31.859 14.5065 32 13.981 32C13.4554 32 12.939 31.859 12.4838 31.5912L9.31592 29.7239V24.2319L13.981 26.9779L18.652 24.2319L23.317 21.492L18.652 18.746L13.981 16L18.652 13.2479L23.317 10.508L18.652 7.76198L13.981 5.02206L9.31592 2.27605L12.4838 0.408765C12.939 0.140974 13.4554 0 13.981 0C14.5065 0 15.0229 0.140974 15.4781 0.408765L18.646 2.27605L23.305 5.02206L26.4729 6.88935C26.9281 7.15713 27.3061 7.54229 27.5689 8.0061C27.8317 8.46992 27.97 8.99606 27.97 9.53163V11.4966C27.97 12.0321 27.8317 12.5582 27.5689 13.0221C27.3061 13.4859 26.9281 13.871 26.4729 14.1388L23.335 15.9939Z",
-    fill: "#3991FF"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M9.32407 7.76409L4.66503 10.4979V26.974L1.5031 25.1128C1.04681 24.8458 0.667639 24.4609 0.403758 23.9971C0.139878 23.5332 0.000619531 23.0067 0 22.4705V9.51545C1.3352e-05 8.97988 0.138364 8.45374 0.401163 7.98992C0.663962 7.52611 1.04195 7.14095 1.49712 6.87317L3.16192 5.8968C3.6171 5.62901 4.13344 5.48804 4.65904 5.48804C5.18464 5.48804 5.70098 5.62901 6.15616 5.8968L9.32407 7.76409Z",
-    fill: "#050607"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M18.6537 13.2504L13.9827 15.9964L10.8147 17.8576C10.3596 18.1254 9.84323 18.2664 9.31763 18.2664C8.79203 18.2664 8.27569 18.1254 7.82051 17.8576L4.64062 15.9964L9.30566 13.2565L12.4795 11.3893C12.9347 11.1215 13.4511 10.9805 13.9767 10.9805C14.5023 10.9805 15.0186 11.1215 15.4738 11.3893L18.6537 13.2504Z",
-    fill: "#050607"
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-dependency-icon woo"
-  }, /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    width: "54",
-    height: "32",
-    viewBox: "0 0 54 32",
-    fill: "none"
-  }, /*#__PURE__*/React.createElement("g", {
-    "clip-path": "url(#clip0_12958_4053)"
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M5.01359 0H48.9642C51.7458 0 53.9973 2.23268 53.9973 4.99095V21.627C53.9973 24.3853 51.7458 26.6179 48.9642 26.6179H33.2029L35.3663 31.8714L25.852 26.6179H5.03552C2.25415 26.6179 0.00260341 24.3853 0.00260341 21.627V4.99095C-0.0195429 2.25464 2.23179 0 5.01359 0Z",
-    fill: "#9B5C8F"
-  }), /*#__PURE__*/React.createElement("path", {
-    d: "M3.07746 4.54898C3.38477 4.13528 3.84562 3.91776 4.46024 3.87426C5.57979 3.78704 6.21634 4.30929 6.36989 5.44121C7.05031 9.99023 7.79653 13.8428 8.58663 16.9987L13.3934 7.92257C13.8326 7.09538 14.3814 6.66014 15.0399 6.61664C16.0057 6.55138 16.5981 7.16064 16.8396 8.44482C17.3884 11.3395 18.0908 13.7991 18.9248 15.8885C19.4955 10.3602 20.4613 6.37716 21.8221 3.91776C22.1512 3.3083 22.6342 3.00357 23.2707 2.95985C23.7757 2.91656 24.2365 3.06882 24.6535 3.39531C25.0705 3.72179 25.29 4.13528 25.3339 4.63599C25.3558 5.02772 25.29 5.35421 25.1146 5.68069C24.2584 7.24785 23.5559 9.88147 22.9853 13.5378C22.4367 17.0857 22.2391 19.85 22.3707 21.8307C22.4148 22.3744 22.3269 22.8534 22.1075 23.2671C21.8439 23.7458 21.449 24.0071 20.9441 24.0506C20.3733 24.0941 19.7809 23.8331 19.2101 23.2453C17.1689 21.1775 15.5446 18.0869 14.3594 13.9733C12.9326 16.7592 11.8791 18.8486 11.1986 20.2415C9.9036 22.7011 8.8062 23.9636 7.88427 24.0288C7.2916 24.0723 6.78687 23.5716 6.34795 22.5271C5.22861 19.6758 4.02132 14.1691 2.72649 6.00717C2.63854 5.44121 2.77015 4.94051 3.07746 4.54898ZM50.2462 7.96608C49.4561 6.59489 48.2927 5.76791 46.7345 5.44121C46.3173 5.35421 45.9224 5.3107 45.5491 5.3107C43.442 5.3107 41.73 6.39891 40.3911 8.57554C39.2496 10.4255 38.6791 12.4714 38.6791 14.7133C38.6791 16.3892 39.0303 17.8256 39.7326 19.0228C40.5227 20.394 41.6861 21.221 43.2444 21.5475C43.6614 21.6347 44.0564 21.6782 44.4298 21.6782C46.5588 21.6782 48.2708 20.59 49.5878 18.4133C50.729 16.5414 51.2998 14.4955 51.2998 12.2539C51.3217 10.5562 50.9486 9.14129 50.2462 7.96608ZM47.4807 13.995C47.1734 15.4315 46.6246 16.4979 45.8123 17.2162C45.176 17.7821 44.5833 18.0214 44.0347 17.9126C43.5078 17.8039 43.0687 17.3469 42.7397 16.4979C42.476 15.8232 42.3446 15.1485 42.3446 14.5173C42.3446 13.9733 42.3885 13.4291 42.4982 12.9286C42.6958 12.0361 43.0689 11.1654 43.6614 10.3385C44.3859 9.2718 45.1541 8.83677 45.9442 8.98903C46.471 9.09779 46.9102 9.55499 47.2392 10.4037C47.5026 11.0784 47.6342 11.7532 47.6342 12.3844C47.6342 12.9503 47.5904 13.4945 47.4807 13.995ZM36.506 7.96608C35.7159 6.59489 34.5306 5.76791 32.9942 5.44121C32.5772 5.35421 32.1822 5.3107 31.8089 5.3107C29.7018 5.3107 27.9898 6.39891 26.6509 8.57554C25.5096 10.4255 24.9389 12.4714 24.9389 14.7133C24.9389 16.3892 25.29 17.8256 25.9924 19.0228C26.7825 20.394 27.9459 21.221 29.5042 21.5475C29.9214 21.6347 30.3162 21.6782 30.6895 21.6782C32.8185 21.6782 34.5306 20.59 35.8475 18.4133C36.989 16.5414 37.5595 14.4955 37.5595 12.2539C37.5595 10.5562 37.2084 9.14129 36.506 7.96608ZM33.7185 13.995C33.4112 15.4315 32.8624 16.4979 32.0504 17.2162C31.4138 17.7821 30.8211 18.0214 30.2723 17.9126C29.7457 17.8039 29.3068 17.3469 28.9773 16.4979C28.7141 15.8232 28.5825 15.1485 28.5825 14.5173C28.5825 13.9733 28.6263 13.4291 28.736 12.9286C28.9336 12.0361 29.3068 11.1654 29.8994 10.3385C30.6237 9.2718 31.3919 8.83677 32.182 8.98903C32.7089 9.09779 33.148 9.55499 33.477 10.4037C33.7407 11.0784 33.8721 11.7532 33.8721 12.3844C33.8942 12.9503 33.8282 13.4945 33.7185 13.995Z",
-    fill: "white"
-  })), /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
-    id: "clip0_12958_4053"
-  }, /*#__PURE__*/React.createElement("rect", {
-    width: "54",
-    height: "32",
-    fill: "white"
-  }))))))), /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-meta"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "fb-template-price"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "fb-price-badge"
-  }, "FREE"), /*#__PURE__*/React.createElement("span", {
-    className: "fb-download-count"
-  }, "2025"), /*#__PURE__*/React.createElement("span", {
-    className: "fb-download-label"
-  }, "Full Site Import")))), /*#__PURE__*/React.createElement("div", {
+  }, template.title || 'Renovate - Home Decor Website Template For Gutenberg'), /*#__PURE__*/React.createElement("p", {
+    className: "fb-template-description"
+  }, template.description || 'Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.')), /*#__PURE__*/React.createElement("div", {
     className: "fb-template-actions"
   }, /*#__PURE__*/React.createElement("button", {
     className: "fb-full-site-import-btn ".concat(isImporting ? 'loading' : ''),
@@ -5040,7 +4500,24 @@ var TemplateImport = function TemplateImport(_ref) {
     fill: "#8891A5"
   })), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", {
     className: "blue-color"
-  }, "Learn more"), " about full site import"))))));
+  }, "Learn more"), " about full site import")), /*#__PURE__*/React.createElement("div", {
+    className: "fb-template-dependency"
+  }, /*#__PURE__*/React.createElement("h5", {
+    className: "fb-dependency-label"
+  }, "Dependency"), /*#__PURE__*/React.createElement("ul", {
+    className: "fb-dependency-list"
+  }, template.dependency.map(function (item) {
+    return /*#__PURE__*/React.createElement("li", {
+      className: "fb-dependency-item",
+      key: item.name
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "fb-dependency-name"
+    }, item.name), /*#__PURE__*/React.createElement("span", {
+      className: "fb-dependency-version"
+    }, /*#__PURE__*/React.createElement("span", {
+      className: "fb-dependency-version-label"
+    }, "Version:"), " ", item.version));
+  })))))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TemplateImport);
 
@@ -5058,6 +4535,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 
 var TemplateSidebar = function TemplateSidebar(_ref) {
   var _schema$activeTab;
@@ -5068,7 +4551,6 @@ var TemplateSidebar = function TemplateSidebar(_ref) {
   // Extract sections from the schema
   var schema = data.$schema;
   var categories = activeTab ? Object.values(((_schema$activeTab = schema[activeTab]) === null || _schema$activeTab === void 0 ? void 0 : _schema$activeTab.categories) || {}) : [];
-  console.log(categories);
 
   // const [activeCategory, setActiveCategory] = useState(null);
   // Set first category as active by default
@@ -5079,7 +4561,7 @@ var TemplateSidebar = function TemplateSidebar(_ref) {
   }, [categories]);
   return /*#__PURE__*/React.createElement("div", {
     className: "fb-template-library-store-sidebar"
-  }, /*#__PURE__*/React.createElement("div", {
+  }, activeTab !== 'templateLibrary' && /*#__PURE__*/React.createElement("div", {
     className: "fb-template-category-wrapper"
   }, /*#__PURE__*/React.createElement("div", {
     className: "fb-template-category-label"
@@ -5094,9 +4576,9 @@ var TemplateSidebar = function TemplateSidebar(_ref) {
   }, categories.map(function (category) {
     return /*#__PURE__*/React.createElement("button", {
       key: category.id,
-      className: "fb-template-library-store-sidebar-tab ".concat(activeCategory === category.id ? 'active' : ''),
+      className: "fb-template-library-store-sidebar-tab ".concat(activeCategory[activeTab] === category.id ? 'active' : ''),
       onClick: function onClick() {
-        return setActiveCategory(category.id);
+        return setActiveCategory(_objectSpread(_objectSpread({}, activeCategory), {}, _defineProperty({}, activeTab, category.id)));
       }
     }, /*#__PURE__*/React.createElement("span", {
       className: "fb-template-library-store-sidebar-tab-name"
@@ -5104,9 +4586,9 @@ var TemplateSidebar = function TemplateSidebar(_ref) {
       dangerouslySetInnerHTML: {
         __html: category.icon
       }
-    }), category.name), /*#__PURE__*/React.createElement("span", {
+    }), category.name), activeTab !== 'templateLibrary' && /*#__PURE__*/React.createElement("span", {
       className: "fb-template-library-store-sidebar-tab-count"
-    }, String(category.count).padStart(2, "0")));
+    }, String(category.items.length).padStart(2, "0")));
   })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TemplateSidebar);
@@ -5138,6 +4620,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _template_sidebar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./template-sidebar */ "./admin/template-library/template-sidebar.js");
 /* harmony import */ var _template_content__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./template-content */ "./admin/template-library/template-content.js");
 /* harmony import */ var _data_json__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./data.json */ "./admin/template-library/data.json");
+/* harmony import */ var _library_content__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./library-content */ "./admin/template-library/library-content.js");
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -5147,6 +4630,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 /**
  * WordPress dependencies
  */
+
 
 
 
@@ -5234,10 +4718,19 @@ var PatternLibraryButton = function PatternLibraryButton() {
     _useState0 = _slicedToArray(_useState9, 2),
     activeTab = _useState0[0],
     setActiveTab = _useState0[1];
-  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+  var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      patterns: 'all',
+      pages: 'all',
+      sites: 'all',
+      templateLibrary: 'my-cloud'
+    }),
     _useState10 = _slicedToArray(_useState1, 2),
     activeCategory = _useState10[0],
     setActiveCategory = _useState10[1];
+  var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState12 = _slicedToArray(_useState11, 2),
+    libraryData = _useState12[0],
+    setLibraryData = _useState12[1];
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
     onClick: function onClick() {
       return handleClick();
@@ -5277,9 +4770,16 @@ var PatternLibraryButton = function PatternLibraryButton() {
     data: _data_json__WEBPACK_IMPORTED_MODULE_9__,
     activeCategory: activeCategory,
     setActiveCategory: setActiveCategory
-  }), /*#__PURE__*/React.createElement(_template_content__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }), activeTab !== 'templateLibrary' && /*#__PURE__*/React.createElement(_template_content__WEBPACK_IMPORTED_MODULE_8__["default"], {
     activeTab: activeTab,
     activeCategory: activeCategory,
+    setLibraryData: setLibraryData,
+    data: _data_json__WEBPACK_IMPORTED_MODULE_9__
+  }), activeTab === 'templateLibrary' && /*#__PURE__*/React.createElement(_library_content__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    activeTab: activeTab,
+    activeCategory: activeCategory,
+    libraryData: libraryData,
+    setLibraryData: setLibraryData,
     data: _data_json__WEBPACK_IMPORTED_MODULE_9__
   }))))));
 };
@@ -8763,21 +8263,16 @@ const flip = function (options) {
         const nextIndex = (((_middlewareData$flip2 = middlewareData.flip) == null ? void 0 : _middlewareData$flip2.index) || 0) + 1;
         const nextPlacement = placements[nextIndex];
         if (nextPlacement) {
-          var _overflowsData$;
-          const ignoreCrossAxisOverflow = checkCrossAxis === 'alignment' ? initialSideAxis !== (0,_floating_ui_utils__WEBPACK_IMPORTED_MODULE_0__.getSideAxis)(nextPlacement) : false;
-          const hasInitialMainAxisOverflow = ((_overflowsData$ = overflowsData[0]) == null ? void 0 : _overflowsData$.overflows[0]) > 0;
-          if (!ignoreCrossAxisOverflow || hasInitialMainAxisOverflow) {
-            // Try next placement and re-run the lifecycle.
-            return {
-              data: {
-                index: nextIndex,
-                overflows: overflowsData
-              },
-              reset: {
-                placement: nextPlacement
-              }
-            };
-          }
+          // Try next placement and re-run the lifecycle.
+          return {
+            data: {
+              index: nextIndex,
+              overflows: overflowsData
+            },
+            reset: {
+              placement: nextPlacement
+            }
+          };
         }
 
         // First, find the candidates that fit on the mainAxis side of overflow,
@@ -9742,12 +9237,6 @@ function getRectRelativeToOffsetParent(element, offsetParent, strategy) {
     scrollTop: 0
   };
   const offsets = (0,_floating_ui_utils__WEBPACK_IMPORTED_MODULE_1__.createCoords)(0);
-
-  // If the <body> scrollbar appears on the left (e.g. RTL systems). Use
-  // Firefox with layout.scrollbar.side = 3 in about:config to test this.
-  function setLeftRTLScrollbarOffset() {
-    offsets.x = getWindowScrollBarX(documentElement);
-  }
   if (isOffsetParentAnElement || !isOffsetParentAnElement && !isFixed) {
     if ((0,_floating_ui_utils_dom__WEBPACK_IMPORTED_MODULE_0__.getNodeName)(offsetParent) !== 'body' || (0,_floating_ui_utils_dom__WEBPACK_IMPORTED_MODULE_0__.isOverflowElement)(documentElement)) {
       scroll = (0,_floating_ui_utils_dom__WEBPACK_IMPORTED_MODULE_0__.getNodeScroll)(offsetParent);
@@ -9757,11 +9246,10 @@ function getRectRelativeToOffsetParent(element, offsetParent, strategy) {
       offsets.x = offsetRect.x + offsetParent.clientLeft;
       offsets.y = offsetRect.y + offsetParent.clientTop;
     } else if (documentElement) {
-      setLeftRTLScrollbarOffset();
+      // If the <body> scrollbar appears on the left (e.g. RTL systems). Use
+      // Firefox with layout.scrollbar.side = 3 in about:config to test this.
+      offsets.x = getWindowScrollBarX(documentElement);
     }
-  }
-  if (isFixed && !isOffsetParentAnElement && documentElement) {
-    setLeftRTLScrollbarOffset();
   }
   const htmlOffset = documentElement && !isOffsetParentAnElement && !isFixed ? getHTMLOffset(documentElement, scroll) : (0,_floating_ui_utils__WEBPACK_IMPORTED_MODULE_1__.createCoords)(0);
   const x = rect.left + scroll.scrollLeft - offsets.x - htmlOffset.x;
@@ -9939,7 +9427,7 @@ function observeMove(element, onMove) {
         // Handle <iframe>s
         root: root.ownerDocument
       });
-    } catch (_e) {
+    } catch (e) {
       io = new IntersectionObserver(handleObserve, options);
     }
     io.observe(element);
@@ -16672,7 +16160,7 @@ var FB_Range = function FB_Range(_ref) {
         xmlns: "http://www.w3.org/2000/svg"
       }, /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("path", {
         "class": "st0",
-        d: "M12.5,21.8c-4.5,0-8.3-3-9.4-7.3c0,0,0,0,0,0c-0.2-0.8-0.3-1.6-0.3-2.4c0-1.7,0.4-3.3,1.2-4.8c0,0,0,0,0,0 c1.7-3.1,5-5,8.5-5c3.5,0,6.8,1.9,8.5,5c0,0,0,0,0,0c0.8,1.4,1.2,3.1,1.2,4.8c0,0.8-0.1,1.6-0.3,2.4c0,0,0,0,0,0 C20.8,18.7,17,21.8,12.5,21.8z M9.6,17c0.7,2,1.9,3.2,2.9,3.2s2.2-1.2,2.9-3.2C13.5,17.3,11.5,17.3,9.6,17z M17.1,16.7 c-0.3,1.1-0.7,2.1-1.3,2.9c1.7-0.8,3.1-2.1,4-3.8C19,16.1,18.1,16.4,17.1,16.7z M5.1,15.8c0.9,1.7,2.3,3,4,3.8 c-0.5-0.8-0.9-1.8-1.3-2.9C6.9,16.4,6,16.1,5.1,15.8z M9.1,15.4c2.2,0.4,4.6,0.4,6.8,0c0.2-1,0.4-2.2,0.4-3.4c0-0.4,0-0.9,0-1.3 c-2.4,0.7-5,0.7-7.4,0c0,0.4,0,0.9,0,1.3C8.8,13.2,8.9,14.4,9.1,15.4z M17.7,10.2c0.1,0.6,0.1,1.2,0.1,1.8c0,1.1-0.1,2.1-0.2,3 c1.1-0.3,2.1-0.7,3.1-1.3c0.1-0.6,0.2-1.2,0.2-1.8c0-1.1-0.2-2.2-0.7-3.3C19.3,9.3,18.5,9.8,17.7,10.2z M4.4,13.8 c1,0.5,2,0.9,3.1,1.3c-0.2-0.9-0.2-2-0.2-3c0-0.6,0-1.2,0.1-1.8C6.5,9.8,5.7,9.3,4.9,8.8c-0.4,1-0.7,2.1-0.7,3.3 C4.2,12.6,4.3,13.2,4.4,13.8z M9,9.2c2.3,0.7,4.8,0.7,7,0c-0.6-3.3-2.1-5.4-3.5-5.4S9.6,5.9,9,9.2z M5.6,7.4 c0.6,0.5,1.2,0.9,1.9,1.2C7.9,7,8.4,5.6,9.1,4.5C7.7,5.1,6.5,6.1,5.6,7.4z M15.9,4.5c0.7,1.1,1.2,2.5,1.6,4.1 c0.7-0.3,1.3-0.7,1.9-1.2C18.5,6.1,17.3,5.1,15.9,4.5z"
+        d: "M12.5,21.8c-4.5,0-8.3-3-9.4-7.3c0,0,0,0,0,0c-0.2-0.8-0.3-1.6-0.3-2.4c0-1.7,0.4-3.3,1.2-4.8c0,0,0,0,0,0\r c1.7-3.1,5-5,8.5-5c3.5,0,6.8,1.9,8.5,5c0,0,0,0,0,0c0.8,1.4,1.2,3.1,1.2,4.8c0,0.8-0.1,1.6-0.3,2.4c0,0,0,0,0,0\r C20.8,18.7,17,21.8,12.5,21.8z M9.6,17c0.7,2,1.9,3.2,2.9,3.2s2.2-1.2,2.9-3.2C13.5,17.3,11.5,17.3,9.6,17z M17.1,16.7\r c-0.3,1.1-0.7,2.1-1.3,2.9c1.7-0.8,3.1-2.1,4-3.8C19,16.1,18.1,16.4,17.1,16.7z M5.1,15.8c0.9,1.7,2.3,3,4,3.8\r c-0.5-0.8-0.9-1.8-1.3-2.9C6.9,16.4,6,16.1,5.1,15.8z M9.1,15.4c2.2,0.4,4.6,0.4,6.8,0c0.2-1,0.4-2.2,0.4-3.4c0-0.4,0-0.9,0-1.3\r c-2.4,0.7-5,0.7-7.4,0c0,0.4,0,0.9,0,1.3C8.8,13.2,8.9,14.4,9.1,15.4z M17.7,10.2c0.1,0.6,0.1,1.2,0.1,1.8c0,1.1-0.1,2.1-0.2,3\r c1.1-0.3,2.1-0.7,3.1-1.3c0.1-0.6,0.2-1.2,0.2-1.8c0-1.1-0.2-2.2-0.7-3.3C19.3,9.3,18.5,9.8,17.7,10.2z M4.4,13.8\r c1,0.5,2,0.9,3.1,1.3c-0.2-0.9-0.2-2-0.2-3c0-0.6,0-1.2,0.1-1.8C6.5,9.8,5.7,9.3,4.9,8.8c-0.4,1-0.7,2.1-0.7,3.3\r C4.2,12.6,4.3,13.2,4.4,13.8z M9,9.2c2.3,0.7,4.8,0.7,7,0c-0.6-3.3-2.1-5.4-3.5-5.4S9.6,5.9,9,9.2z M5.6,7.4\r c0.6,0.5,1.2,0.9,1.9,1.2C7.9,7,8.4,5.6,9.1,4.5C7.7,5.1,6.5,6.1,5.6,7.4z M15.9,4.5c0.7,1.1,1.2,2.5,1.6,4.1\r c0.7-0.3,1.3-0.7,1.9-1.2C18.5,6.1,17.3,5.1,15.9,4.5z"
       }))));
     },
     renderContent: function renderContent() {
@@ -20497,16 +19985,6 @@ var loadGoogleFont = function loadGoogleFont(font) {
 
 /***/ }),
 
-/***/ "@wordpress/block-editor":
-/*!*************************************!*\
-  !*** external ["wp","blockEditor"] ***!
-  \*************************************/
-/***/ ((module) => {
-
-module.exports = window["wp"]["blockEditor"];
-
-/***/ }),
-
 /***/ "@wordpress/blocks":
 /*!********************************!*\
   !*** external ["wp","blocks"] ***!
@@ -20524,6 +20002,16 @@ module.exports = window["wp"]["blocks"];
 /***/ ((module) => {
 
 module.exports = window["wp"]["components"];
+
+/***/ }),
+
+/***/ "@wordpress/compose":
+/*!*********************************!*\
+  !*** external ["wp","compose"] ***!
+  \*********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["compose"];
 
 /***/ }),
 
