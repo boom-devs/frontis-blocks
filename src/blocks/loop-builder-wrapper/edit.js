@@ -22,7 +22,9 @@ import { store as coreStore } from '@wordpress/core-data';
 import { list, grid } from '@wordpress/icons';
 
 const TEMPLATE = [
-	[ 'frontis-blocks/advanced-heading' ]
+	[ 'core/post-title' ],
+	[ 'core/post-date' ],
+	[ 'core/post-excerpt' ],
 ];
 
 function PostTemplateInnerBlocks( { classList } ) {
@@ -34,12 +36,12 @@ function PostTemplateInnerBlocks( { classList } ) {
 }
 
 function PostTemplateBlockPreview( {
-	blocks,
-	blockContextId,
-	classList,
-	isHidden,
-	setActiveBlockContextId,
-} ) {
+									   blocks,
+									   blockContextId,
+									   classList,
+									   isHidden,
+									   setActiveBlockContextId,
+								   } ) {
 	const blockPreviewProps = useBlockPreview( {
 		blocks,
 		props: {
@@ -71,37 +73,37 @@ function PostTemplateBlockPreview( {
 const MemoizedPostTemplateBlockPreview = memo( PostTemplateBlockPreview );
 
 export default function PostTemplateEdit( {
-	setAttributes,
-	clientId,
-	context: {
-		query: {
-			perPage,
-			offset = 0,
-			postType,
-			order,
-			orderBy,
-			author,
-			search,
-			exclude,
-			sticky,
-			inherit,
-			taxQuery,
-			parents,
-			pages,
-			format,
-			// We gather extra query args to pass to the REST API call.
-			// This way extenders of Query Loop can add their own query args,
-			// and have accurate previews in the editor.
-			// Noting though that these args should either be supported by the
-			// REST API or be handled by custom REST filters like `rest_{$this->post_type}_query`.
-			...restQueryArgs
-		} = {},
-		templateSlug,
-		previewPostType,
-	},
-	attributes: { layout },
-	__unstableLayoutClassNames,
-} ) {
+											  setAttributes,
+											  clientId,
+											  context: {
+												  query: {
+													  perPage,
+													  offset = 0,
+													  postType,
+													  order,
+													  orderBy,
+													  author,
+													  search,
+													  exclude,
+													  sticky,
+													  inherit,
+													  taxQuery,
+													  parents,
+													  pages,
+													  format,
+													  // We gather extra query args to pass to the REST API call.
+													  // This way extenders of Query Loop can add their own query args,
+													  // and have accurate previews in the editor.
+													  // Noting though that these args should either be supported by the
+													  // REST API or be handled by custom REST filters like `rest_{$this->post_type}_query`.
+													  ...restQueryArgs
+												  } = {},
+												  templateSlug,
+												  previewPostType,
+											  },
+											  attributes: { layout },
+											  __unstableLayoutClassNames,
+										  } ) {
 	const { type: layoutType, columnCount = 3 } = layout || {};
 	const [ activeBlockContextId, setActiveBlockContextId ] = useState();
 	const { posts, blocks } = useSelect(

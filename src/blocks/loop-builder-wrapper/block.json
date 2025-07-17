@@ -1,13 +1,14 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "frontis-blocks/loop-builder-wrapper",
-	"title": "Wrapper",
-	"category": "frontis-blocks",
-	"ancestor": [ "frontis-blocks/loop-builder" ],
-	"description": "Contains the block elements used to render a post, like the title, date, featured image, content or excerpt, and more.",
-	"textdomain": "frontis-blocks",
-	"usesContext": [
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "frontis-blocks/loop-builder-wrapper",
+    "version": "1.0.0",
+    "title": "Wrapper",
+    "category": "frontis-blocks",
+    "textdomain": "frontis-blocks",
+	"description": "A customizable loop builder wrapper block with various styling options.",
+    "example": {},
+    "usesContext": [
 		"queryId",
 		"query",
 		"displayLayout",
