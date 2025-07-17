@@ -2,7 +2,7 @@
 import { createRoot } from "@wordpress/element"
 import { subscribe } from '@wordpress/data'
 import TemplatesLibrary from "./templates"
-import './style.scss';
+import './scss/style.scss';
 
 document.addEventListener('DOMContentLoaded', function () {
 	const buttonDiv = document.createElement('div')

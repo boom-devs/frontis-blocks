@@ -106,11 +106,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressTitleColor,
         progressTitleHoverColor,
 
+        // progress Border
+        progressBorderStyle,
+        progressBorderColor,
+        progressBorderHoverColor,
+        progressBorderColorSwitcher,
+
+		progressBorderWidthUnits,
+		progressBorderWidthDesktop,
+		progressBorderWidthTablet,
+		progressBorderWidthMobile,
+		progressBorderWidthLink,
+
 		progressBorderRadiusUnits,
 		progressBorderRadiusDesktop,
 		progressBorderRadiusTablet,
 		progressBorderRadiusMobile,
 		progressBorderRadiusLink,
+
+        // progress Background Border
+        progressBgBorderStyle,
+        progressBgBorderColor,
+        progressBgBorderHoverColor,
+        progressBgBorderColorSwitcher,
+
+        progressBgBorderWidthUnits,
+		progressBgBorderWidthDesktop,
+		progressBgBorderWidthTablet,
+		progressBgBorderWidthMobile,
+		progressBgBorderWidthLink,
 
 		progressBgBorderRadiusUnits,
 		progressBgBorderRadiusDesktop,
@@ -272,6 +296,76 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
     /** Start Progress Border Radius */
+    const progressBorderWidthUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (progressBorderWidthLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        progressBorderWidthDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        progressBorderWidthTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        progressBorderWidthMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ progressBorderWidthDesktop: { ...progressBorderWidthDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ progressBorderWidthTablet: { ...progressBorderWidthTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ progressBorderWidthMobile: { ...progressBorderWidthMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const progressBorderWidthLinkBtn = () => {
+        setAttributes({
+            progressBorderWidthLink: !progressBorderWidthLink
+        });
+    };
+
+    const progressBorderWidthUnitsHandler = (unit) => {
+        setAttributes({
+            progressBorderWidthUnits: {
+                ...progressBorderWidthUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    /** Start Progress Border Radius */
     const progressBorderRadiusUnitsChange = (event, position) => {
         const value = event.target.value;
         if (progressBorderRadiusLink) {
@@ -336,6 +430,76 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({
             progressBorderRadiusUnits: {
                 ...progressBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    /** Start Progress Background Border Width */
+    const progressBgBorderWidthUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (progressBgBorderWidthLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        progressBgBorderWidthDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        progressBgBorderWidthTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        progressBgBorderWidthMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ progressBgBorderWidthDesktop: { ...progressBgBorderWidthDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ progressBgBorderWidthTablet: { ...progressBgBorderWidthTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ progressBgBorderWidthMobile: { ...progressBgBorderWidthMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const progressBgBorderWidthLinkBtn = () => {
+        setAttributes({
+            progressBgBorderWidthLink: !progressBgBorderWidthLink
+        });
+    };
+
+    const progressBgBorderWidthUnitsHandler = (unit) => {
+        setAttributes({
+            progressBgBorderWidthUnits: {
+                ...progressBgBorderWidthUnits,
                 [deviceType]: unit
             }
         });
@@ -829,11 +993,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
 
 
+    /** Default border for Progress */
+    const progressBorderWidthDesktopGet = `${progressBorderWidthDesktop.top}${progressBorderWidthUnits.Desktop} ${progressBorderWidthDesktop.right}${progressBorderWidthUnits.Desktop} ${progressBorderWidthDesktop.bottom}${progressBorderWidthUnits.Desktop} ${progressBorderWidthDesktop.left}${progressBorderWidthUnits.Desktop}`;
+    const progressBorderWidthTabletGet = `${progressBorderWidthTablet.top}${progressBorderWidthUnits.Tablet} ${progressBorderWidthTablet.right}${progressBorderWidthUnits.Tablet} ${progressBorderWidthTablet.bottom}${progressBorderWidthUnits.Tablet} ${progressBorderWidthTablet.left}${progressBorderWidthUnits.Tablet}`;
+    const progressBorderWidthMobileGet = `${progressBorderWidthMobile.top}${progressBorderWidthUnits.Mobile} ${progressBorderWidthMobile.right}${progressBorderWidthUnits.Mobile} ${progressBorderWidthMobile.bottom}${progressBorderWidthUnits.Mobile} ${progressBorderWidthMobile.left}${progressBorderWidthUnits.Mobile}`;
+    /** End Progress Border Radius */
+
     /** Default border radius for Progress */
     const progressBorderRadiusDesktopGet = `${progressBorderRadiusDesktop.top}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.right}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.bottom}${progressBorderRadiusUnits.Desktop} ${progressBorderRadiusDesktop.left}${progressBorderRadiusUnits.Desktop}`;
     const progressBorderRadiusTabletGet = `${progressBorderRadiusTablet.top}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.right}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.bottom}${progressBorderRadiusUnits.Tablet} ${progressBorderRadiusTablet.left}${progressBorderRadiusUnits.Tablet}`;
     const progressBorderRadiusMobileGet = `${progressBorderRadiusMobile.top}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.right}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.bottom}${progressBorderRadiusUnits.Mobile} ${progressBorderRadiusMobile.left}${progressBorderRadiusUnits.Mobile}`;
     /** End Progress Border Radius */
+
+    /** Default border for Progress Background */
+    const progressBgBorderWidthDesktopGet = `${progressBgBorderWidthDesktop.top}${progressBgBorderWidthUnits.Desktop} ${progressBgBorderWidthDesktop.right}${progressBgBorderWidthUnits.Desktop} ${progressBgBorderWidthDesktop.bottom}${progressBgBorderWidthUnits.Desktop} ${progressBgBorderWidthDesktop.left}${progressBgBorderWidthUnits.Desktop}`;
+    const progressBgBorderWidthTabletGet = `${progressBgBorderWidthTablet.top}${progressBgBorderWidthUnits.Tablet} ${progressBgBorderWidthTablet.right}${progressBgBorderWidthUnits.Tablet} ${progressBgBorderWidthTablet.bottom}${progressBgBorderWidthUnits.Tablet} ${progressBgBorderWidthTablet.left}${progressBgBorderWidthUnits.Tablet}`;
+    const progressBgBorderWidthMobileGet = `${progressBgBorderWidthMobile.top}${progressBgBorderWidthUnits.Mobile} ${progressBgBorderWidthMobile.right}${progressBgBorderWidthUnits.Mobile} ${progressBgBorderWidthMobile.bottom}${progressBgBorderWidthUnits.Mobile} ${progressBgBorderWidthMobile.left}${progressBgBorderWidthUnits.Mobile}`;
+    /** End Progress Background Border Radius */
 
     /** Default border radius for Progress Background */
     const progressBgBorderRadiusDesktopGet = `${progressBgBorderRadiusDesktop.top}${progressBgBorderRadiusUnits.Desktop} ${progressBgBorderRadiusDesktop.right}${progressBgBorderRadiusUnits.Desktop} ${progressBgBorderRadiusDesktop.bottom}${progressBgBorderRadiusUnits.Desktop} ${progressBgBorderRadiusDesktop.left}${progressBgBorderRadiusUnits.Desktop}`;
@@ -936,7 +1112,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             justify-content: space-between;
         }
         .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-content .fb-progressbar-label {
-            ${progressTitleColor ? `color: ${progressTitleColor} !important;` : ''}
+            ${progressTitleColor ? `color: ${progressTitleColor};` : ''}
 
             ${progressTitleGlobalTypoSwitcher.fontFamily === true && progressTitleGlobalTypographyData.fontFamily ? `font-family: ${progressTitleGlobalTypographyData.fontFamily};` : ''}
             ${progressTitleGlobalTypoSwitcher.fontSize === true && progressTitleGlobalTypographyData.fontSize ? `font-size: ${progressTitleGlobalTypographyData.fontSize};` : ''}
@@ -957,9 +1133,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${progressTitleGlobalTypoSwitcher.lineHeight === false && progressTitleLineHeight.Desktop && progressTitleLineHeightUnits.Desktop ? `line-height: ${progressTitleLineHeight.Desktop}${progressTitleLineHeightUnits.Desktop};` : ''}
         
             ${progressTitleMarginDesktop.top ? `margin: ${progressTitleMarginDesktopGet};` : ''}
+            transition: all 0.5s ease-in-out;
         }
-        .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-content .fb-progressbar-label:hover {
-            color: ${progressTitleHoverColor} !important;
+        .${blockID} .fb-progressbar-wrapper .fb-progressbar-item:hover .fb-progressbar-content .fb-progressbar-label {
+            ${progressTitleHoverColor ? `color: ${progressTitleHoverColor};` : ''}
+            transition: all 0.5s ease-in-out;
         }
 
         .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-line-wrapper {
@@ -984,11 +1162,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                   : progressBgColor ? `background: ${progressBgColor};` : ''
             }
             ${progressBgZebraTrackSwitcher === true ? `background: repeating-linear-gradient(-45deg, ${progressBgColor}, ${progressBgColor} ${progressBgZebraTrackWidth.Desktop}px, transparent ${progressBgZebraTrackWidth.Desktop}px, transparent calc(${progressBgZebraTrackWidth.Desktop * 2}px));` : ''};
+            ${progressBgBorderStyle ? `border-style: ${progressBgBorderStyle};` : ''}
+            ${progressBgBorderColor ? `border-color: ${progressBgBorderColor};` : ''}
+            ${progressBgBorderWidthDesktop.top ? `border-width: ${progressBgBorderWidthDesktopGet};` : ''}
             ${progressBgBorderRadiusDesktop.top ? `border-radius: ${progressBgBorderRadiusDesktopGet};` : ''}
             ${progressBarHeight.Desktop ? `height: ${progressBarHeight.Desktop}${progressBarHeightUnits.Desktop};` : ''}
             ${progressbarType === 'vertical' && progressBarWidth.Desktop ? `width: ${progressBarWidth.Desktop}${progressBarWidthUnits.Desktop};` : ''}
             overflow: hidden;
             position: relative;
+        }
+        .${blockID} .fb-progressbar-wrapper .fb-progressbar-item:hover .fb-progressbar-line-wrapper {
+            ${progressBgBorderHoverColor ? `border-color: ${progressBgBorderHoverColor};` : ''}
         }
         .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-line-wrapper .fb-progressbar-content {
             position: relative;
@@ -1016,8 +1200,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                   : progressColor ? `background: ${progressColor};` : ''
             }
             ${progressZebraTrackSwitcher === true ? `background: repeating-linear-gradient(-45deg, ${progressColor}, ${progressColor} ${progressZebraTrackWidth.Desktop}px, transparent ${progressZebraTrackWidth.Desktop}px, transparent calc(${progressZebraTrackWidth.Desktop * 2}px));` : ''};
+            ${progressBorderStyle ? `border-style: ${progressBorderStyle};` : ''}
+            ${progressBorderColor ? `border-color: ${progressBorderColor};` : ''}
+            ${progressBorderWidthDesktop.top ? `border-width: ${progressBorderWidthDesktopGet};` : ''}
             ${progressBorderRadiusDesktop.top ? `border-radius: ${progressBorderRadiusDesktopGet};` : ''}
             transition: ${progressbarType === 'vertical' ? 'height' : 'width'} 1.5s ease-in-out;
+        }
+        .${blockID} .fb-progressbar-wrapper .fb-progressbar-item:hover .fb-progressbar-line-wrapper .fb-progressbar-line {
+            ${progressBorderHoverColor ? `border-color: ${progressBorderHoverColor};` : ''}
         }
         .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-line-wrapper .fb-progressbar-line .fb-progressbar-number {
             position: absolute;
@@ -1050,7 +1240,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${progressNumberColor ? `color: ${progressNumberColor};` : ''}
             transition: all 0.5s ease-in-out;
         }
-        .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-number:hover {
+        .${blockID} .fb-progressbar-wrapper .fb-progressbar-item:hover .fb-progressbar-number {
             ${progressNumberHoverColor ? `color: ${progressNumberHoverColor};` : ''}
             transition: all 0.5s ease-in-out;
         }
@@ -1065,27 +1255,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${progressGlobalZIndex.Tablet ? `z-index: ${progressGlobalZIndex.Tablet};` : ''}
             }
 
-            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line,
-            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
-            .${blockID} .progress-bar-text-inSide-wrapper,
-            .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
-                ${progressBorderRadiusTablet.top ? `border-radius: ${progressTabletBorderRadius};` : ''}
+            .${blockID} .fb-progressbar-wrapper {
+                ${progressbarGlobalPaddingTablet.top ? `padding: ${progressbarGlobalPaddingTabletGet};` : ''}
+                ${progressbarGlobalMarginTablet.top ? `margin: ${progressbarGlobalMarginTabletGet};` : ''}
+                ${progressbarGlobalTabletBorder.top ? `border-width: ${progressbarGlobalTabletBorderGet};` : ''}
+                ${progressbarGlobalTabletBorderRadius.top ? `border-radius: ${progressbarGlobalTabletBorderRadiusGet};` : ''}
             }
-
-            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label {
+            .${blockID} .fb-progressbar-wrapper .fb-progressbar-item {
+                ${progressbarType === 'vertical' && progressbarVrAlignment.Tablet === 'left' ? `align-items: flex-start;` : ''}
+                ${progressbarType === 'vertical' && progressbarVrAlignment.Tablet === 'center' ? `align-items: center;` : ''}
+                ${progressbarType === 'vertical' && progressbarVrAlignment.Tablet === 'right' ? `align-items: flex-end;` : ''}
+            }
+            .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-content .fb-progressbar-label {
                 ${progressTitleGlobalTypoSwitcher.fontSize === false && progressTitleFontSize.Tablet && progressTitleFontSizeUnits.Tablet ? `font-size: ${progressTitleFontSize.Tablet}${progressTitleFontSizeUnits.Tablet};` : ''}
                 ${progressTitleGlobalTypoSwitcher.letterSpacing === false && progressTitleLetterSpacing.Tablet && progressTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${progressTitleLetterSpacing.Tablet}${progressTitleLetterSpacingUnits.Tablet};` : ''}
-                ${progressTitleGlobalTypoSwitcher.lineHeight === false && progressTitleLineHeight.Tablet && progressTitleLineHeightUnits.Tablet ? `line-height: ${progressTitleLineHeight.Tablet}${progressTitleLineHeightUnits.Tablet};` : ''}   
+                ${progressTitleGlobalTypoSwitcher.lineHeight === false && progressTitleLineHeight.Tablet && progressTitleLineHeightUnits.Tablet ? `line-height: ${progressTitleLineHeight.Tablet}${progressTitleLineHeightUnits.Tablet};` : ''}
+            
+                ${progressTitleMarginTablet.top ? `margin: ${progressTitleMarginTabletGet};` : ''}
             }
 
-            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar {
+            .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-line-wrapper {
+                ${progressBgZebraTrackSwitcher === true ? `background: repeating-linear-gradient(-45deg, ${progressBgColor}, ${progressBgColor} ${progressBgZebraTrackWidth.Tablet}px, transparent ${progressBgZebraTrackWidth.Tablet}px, transparent calc(${progressBgZebraTrackWidth.Tablet * 2}px));` : ''};
+                ${progressBgBorderWidthTablet.top ? `border-width: ${progressBgBorderWidthTabletGet};` : ''}
+                ${progressBgBorderRadiusTablet.top ? `border-radius: ${progressBgBorderRadiusTabletGet};` : ''}
                 ${progressBarHeight.Tablet ? `height: ${progressBarHeight.Tablet}${progressBarHeightUnits.Tablet};` : ''}
-                ${progressBorderRadiusTablet.top ? `border-radius: ${progressTabletBorderRadius};` : ''}
+                ${progressbarType === 'vertical' && progressBarWidth.Tablet ? `width: ${progressBarWidth.Tablet}${progressBarWidthUnits.Tablet};` : ''}
             }
-            .${blockID} .progress-bar-text-inSide-wrapper {
-                ${progressBorderRadiusTablet.top ? `border-radius: ${progressTabletBorderRadius};` : ''}
-                ${progressBarHeight.Tablet ? `height: ${progressBarHeight.Tablet}${progressBarHeightUnits.Tablet};` : ''}
-                overflow: hidden;
+            .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-line-wrapper .fb-progressbar-line {
+                ${progressZebraTrackSwitcher === true ? `background: repeating-linear-gradient(-45deg, ${progressColor}, ${progressColor} ${progressZebraTrackWidth.Tablet}px, transparent ${progressZebraTrackWidth.Tablet}px, transparent calc(${progressZebraTrackWidth.Tablet * 2}px));` : ''};
+                ${progressBorderWidthTablet.top ? `border-width: ${progressBorderWidthTabletGet};` : ''}
+                ${progressBorderRadiusTablet.top ? `border-radius: ${progressBorderRadiusTabletGet};` : ''}
+            }
+            .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-number {
+                ${progressNumberGlobalTypoSwitcher.fontSize === false && progressNumberFontSize.Tablet && progressNumberFontSizeUnits.Tablet ? `font-size: ${progressNumberFontSize.Tablet}${progressNumberFontSizeUnits.Tablet};` : ''}
+                ${progressNumberGlobalTypoSwitcher.letterSpacing === false && progressNumberLetterSpacing.Tablet && progressNumberLetterSpacingUnits.Tablet ? `letter-spacing: ${progressNumberLetterSpacing.Tablet}${progressNumberLetterSpacingUnits.Tablet};` : ''}
+                ${progressNumberGlobalTypoSwitcher.lineHeight === false && progressNumberLineHeight.Tablet && progressNumberLineHeightUnits.Tablet ? `line-height: ${progressNumberLineHeight.Tablet}${progressNumberLineHeightUnits.Tablet};` : ''}
+            
+                ${progressNumberMarginTablet.top ? `margin: ${progressNumberMarginTabletGet};` : ''}
             }
         }
 
@@ -1099,25 +1305,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${progressGlobalZIndex.Mobile ? `z-index: ${progressGlobalZIndex.Mobile};` : ''}
             }
 
-            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-line,
-            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar,
-            .${blockID} .progress-bar-text-inSide-wrapper,
-            .${blockID} .progress-bar-text-inSide-wrapper .progress-bar-label {
-                ${progressBorderRadiusMobile.top ? `border-radius: ${progressMobileBorderRadius};` : ''}
+            .${blockID} .fb-progressbar-wrapper {
+                ${progressbarGlobalPaddingMobile.top ? `padding: ${progressbarGlobalPaddingMobileGet};` : ''}
+                ${progressbarGlobalMarginMobile.top ? `margin: ${progressbarGlobalMarginMobileGet};` : ''}
+                ${progressbarGlobalMobileBorder.top ? `border-width: ${progressbarGlobalMobileBorderGet};` : ''}
+                ${progressbarGlobalMobileBorderRadius.top ? `border-radius: ${progressbarGlobalMobileBorderRadiusGet};` : ''}
             }
-            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar-label { 
+            .${blockID} .fb-progressbar-wrapper .fb-progressbar-item {
+                ${progressbarType === 'vertical' && progressbarVrAlignment.Mobile === 'left' ? `align-items: flex-start;` : ''}
+                ${progressbarType === 'vertical' && progressbarVrAlignment.Mobile === 'center' ? `align-items: center;` : ''}
+                ${progressbarType === 'vertical' && progressbarVrAlignment.Mobile === 'right' ? `align-items: flex-end;` : ''}
+            }
+            .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-content .fb-progressbar-label {
                 ${progressTitleGlobalTypoSwitcher.fontSize === false && progressTitleFontSize.Mobile && progressTitleFontSizeUnits.Mobile ? `font-size: ${progressTitleFontSize.Mobile}${progressTitleFontSizeUnits.Mobile};` : ''}
                 ${progressTitleGlobalTypoSwitcher.letterSpacing === false && progressTitleLetterSpacing.Mobile && progressTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${progressTitleLetterSpacing.Mobile}${progressTitleLetterSpacingUnits.Mobile};` : ''}
-                ${progressTitleGlobalTypoSwitcher.lineHeight === false && progressTitleLineHeight.Mobile && progressTitleLineHeightUnits.Mobile ? `line-height: ${progressTitleLineHeight.Mobile}${progressTitleLineHeightUnits.Mobile};` : ''}  
+                ${progressTitleGlobalTypoSwitcher.lineHeight === false && progressTitleLineHeight.Mobile && progressTitleLineHeightUnits.Mobile ? `line-height: ${progressTitleLineHeight.Mobile}${progressTitleLineHeightUnits.Mobile};` : ''}
+            
+                ${progressTitleMarginTablet.top ? `margin: ${progressTitleMarginTabletGet};` : ''}
             }
-            .${blockID} .progress-bar-wrapper .progress-bar-text-outSide-wrapper .progress-bar {
+
+            .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-line-wrapper {
+                ${progressBgZebraTrackSwitcher === true ? `background: repeating-linear-gradient(-45deg, ${progressBgColor}, ${progressBgColor} ${progressBgZebraTrackWidth.Mobile}px, transparent ${progressBgZebraTrackWidth.Mobile}px, transparent calc(${progressBgZebraTrackWidth.Mobile * 2}px));` : ''};
+                ${progressBgBorderWidthMobile.top ? `border-width: ${progressBgBorderWidthMobileGet};` : ''}
+                ${progressBgBorderRadiusMobile.top ? `border-radius: ${progressBgBorderRadiusMobileGet};` : ''}
                 ${progressBarHeight.Mobile ? `height: ${progressBarHeight.Mobile}${progressBarHeightUnits.Mobile};` : ''}
-                ${progressBorderRadiusMobile.top ? `border-radius: ${progressMobileBorderRadius};` : ''}
+                ${progressbarType === 'vertical' && progressBarWidth.Mobile ? `width: ${progressBarWidth.Mobile}${progressBarWidthUnits.Mobile};` : ''}
             }
-            .${blockID} .progress-bar-text-inSide-wrapper {
-                ${progressBorderRadiusMobile.top ? `border-radius: ${progressMobileBorderRadius};` : ''}
-                ${progressBarHeight.Mobile ? `height: ${progressBarHeight.Mobile}${progressBarHeightUnits.Mobile};` : ''}
-                overflow: hidden;
+            .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-line-wrapper .fb-progressbar-line {
+                ${progressZebraTrackSwitcher === true ? `background: repeating-linear-gradient(-45deg, ${progressColor}, ${progressColor} ${progressZebraTrackWidth.Mobile}px, transparent ${progressZebraTrackWidth.Mobile}px, transparent calc(${progressZebraTrackWidth.Mobile * 2}px));` : ''};
+                ${progressBorderWidthMobile.top ? `border-width: ${progressBorderWidthMobileGet};` : ''}
+                ${progressBorderRadiusMobile.top ? `border-radius: ${progressBorderRadiusMobileGet};` : ''}
+            }
+            .${blockID} .fb-progressbar-wrapper .fb-progressbar-item .fb-progressbar-number {
+                ${progressNumberGlobalTypoSwitcher.fontSize === false && progressNumberFontSize.Mobile && progressNumberFontSizeUnits.Mobile ? `font-size: ${progressNumberFontSize.Mobile}${progressNumberFontSizeUnits.Mobile};` : ''}
+                ${progressNumberGlobalTypoSwitcher.letterSpacing === false && progressNumberLetterSpacing.Mobile && progressNumberLetterSpacingUnits.Mobile ? `letter-spacing: ${progressNumberLetterSpacing.Mobile}${progressNumberLetterSpacingUnits.Mobile};` : ''}
+                ${progressNumberGlobalTypoSwitcher.lineHeight === false && progressNumberLineHeight.Mobile && progressNumberLineHeightUnits.Mobile ? `line-height: ${progressNumberLineHeight.Mobile}${progressNumberLineHeightUnits.Mobile};` : ''}
+            
+                ${progressNumberMarginMobile.top ? `margin: ${progressNumberMarginMobileGet};` : ''}
             }
         }
 
@@ -1181,17 +1405,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressTitleColor,
         progressTitleHoverColor,
 
-		progressBorderRadiusUnits,
+        progressBorderStyle,
+        progressBorderColor,
+        progressBorderHoverColor,
+
+        progressBorderWidthUnits,
+        progressBorderWidthDesktop,
+        progressBorderWidthTablet,
+        progressBorderWidthMobile,
+
+        progressBorderRadiusUnits,
 		progressBorderRadiusDesktop,
 		progressBorderRadiusTablet,
 		progressBorderRadiusMobile,
-		progressBorderRadiusLink,
+
+        progressBgBorderStyle,
+        progressBgBorderColor,
+        progressBgBorderHoverColor,
+
+        progressBgBorderWidthUnits,
+        progressBgBorderWidthDesktop,
+        progressBgBorderWidthTablet,
+        progressBgBorderWidthMobile,
 
 		progressBgBorderRadiusUnits,
 		progressBgBorderRadiusDesktop,
 		progressBgBorderRadiusTablet,
 		progressBgBorderRadiusMobile,
-		progressBgBorderRadiusLink,
 
         progressTitleGlobalTypoSwitcher,
         progressTitleGlobalTypographyData,
@@ -1430,8 +1670,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
      */
     const styleControls = (
         <>
-            <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
-            </PanelBody>
+            {/* <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
+            </PanelBody> */}
 
             <PanelBody title={__("Progress Color", "frontis-blocks")} initialOpen={false}>
                 <ToggleControl
@@ -1541,6 +1781,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             isBackgroundHover={false}
                         />
                 )}
+
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={progressBorderStyle}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ progressBorderStyle: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={progressBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ progressBorderColorSwitcher: value })}
+                />
+
+                {progressBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={progressBorderColor}
+                        setGlobalColor={(value) => setAttributes({ progressBorderColor: value })}
+                    />
+                )}
+
+                {progressBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={progressBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ progressBorderHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing 
+                    label={__("Border Width", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={progressBorderWidthUnitsHandler}
+                    spacingUnits={progressBorderWidthUnits}
+                    spacingDesktop={progressBorderWidthDesktop}
+                    spacingTablet={progressBorderWidthTablet}
+                    spacingMobile={progressBorderWidthMobile}
+                    handleSpacingUnitHandler={progressBorderWidthUnitsChange}
+                    spacingCombineBtn={progressBorderWidthLink}
+                    spacingCombineBtnHandler={progressBorderWidthLinkBtn}
+                    setAttributes={setAttributes}
+                />
 
                 <FB_Spacing 
                     label={__("Border Radius", "frontis-blocks")}
@@ -1666,6 +1949,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             isBackgroundHover={false}
                         />
                 )}
+
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={progressBgBorderStyle}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ progressBgBorderStyle: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={progressBgBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ progressBgBorderColorSwitcher: value })}
+                />
+
+                {progressBgBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={progressBgBorderColor}
+                        setGlobalColor={(value) => setAttributes({ progressBgBorderColor: value })}
+                    />
+                )}
+
+                {progressBgBorderColorSwitcher === 'hover' && ( 
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={progressBgBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ progressBgBorderHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing 
+                    label={__("Border Width", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={progressBgBorderWidthUnitsHandler}
+                    spacingUnits={progressBgBorderWidthUnits}
+                    spacingDesktop={progressBgBorderWidthDesktop}
+                    spacingTablet={progressBgBorderWidthTablet}
+                    spacingMobile={progressBgBorderWidthMobile}
+                    handleSpacingUnitHandler={progressBgBorderWidthUnitsChange}
+                    spacingCombineBtn={progressBgBorderWidthLink}
+                    spacingCombineBtnHandler={progressBgBorderWidthLinkBtn}
+                    setAttributes={setAttributes}
+                />
 
                 <FB_Spacing 
                     label={__("Border Radius", "frontis-blocks")}
@@ -1833,7 +2159,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     setGlobalSwitcher={(value) => setAttributes({ progressTitleColorSwitcher: value })}
                 />
 
-                {progressColorSwitcher === 'normal' && (
+                {progressTitleColorSwitcher === 'normal' && (
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={progressTitleColor}
@@ -1841,7 +2167,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 )}
 
-                {progressColorSwitcher === 'hover' && (
+                {progressTitleColorSwitcher === 'hover' && (
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={progressTitleHoverColor}

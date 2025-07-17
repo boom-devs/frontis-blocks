@@ -36,6 +36,11 @@ export const HAMBURGER_MENU_ICON_TYPE = [
 	{ label: __("Icon", 'frontis-blocks'), value: 'icon' },
 	{ label: __("Text", 'frontis-blocks'), value: 'text' },
 ];
+export const HAMBURGER_MENU_SCREEN = [
+	{ label: __("Off", 'frontis-blocks'), value: "never" },
+	{ label: __("Mobile", 'frontis-blocks'), value: "mobile" },
+	{ label: __("Always", 'frontis-blocks'), value: "always" },
+];
 
 export const DISPLAY_HAMBURGER_MENU = [
 	{ label: __("Hide", 'frontis-blocks'), value: 'hide' },
@@ -1000,7 +1005,7 @@ export const FONT_FAMILYS = [
     { label: __("Ruslan Display", "frontis-blocks"), value: "Ruslan Display" },
     { label: __("Russo One", "frontis-blocks"), value: "Russo One" },
     { label: __("Ruthie", "frontis-blocks"), value: "Ruthie" },
-    { label: __("Rye", "frontis-blocks"), value: "Rye" },    
+    { label: __("Rye", "frontis-blocks"), value: "Rye" },
     { label: __("Sacramento", "frontis-blocks"), value: "Sacramento" },
     { label: __("Sahitya", "frontis-blocks"), value: "Sahitya" },
     { label: __("Sail", "frontis-blocks"), value: "Sail" },

@@ -151,6 +151,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		customOrderMobile,
 
 		// Custom attributes from fb
+		globalFullWidthContentBoxedWidth,
 		fullWidthContentBoxedWidth,
 		fullWidthContentBoxedWidthUnits,
 		customWidth,
@@ -161,6 +162,8 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		containerCustomWidthUnits,
 		containerWrap,
 		containerTypeFull,
+		globalColumnGap,
+		globalRowGap,
 		columnGap,
 		rowGap,
 		columnGapUnits,
@@ -281,7 +284,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	const isLayoutGrid = 'grid' === layout;
 
 	const innerContentCustomWidthDesktopFallback = getFallbackNumber(
-		fullWidthContentBoxedWidth[deviceType],
+		fullWidthContentBoxedWidth[deviceType] === '' ? globalFullWidthContentBoxedWidth[deviceType] : fullWidthContentBoxedWidth[deviceType],
 		'innerContentCustomWidthDesktop',
 		blockName
 	);
@@ -289,12 +292,12 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	const widthTabletFallback = getFallbackNumber( customWidth['Tablet'], 'customWidth', blockName );
 	const widthMobileFallback = getFallbackNumber( customWidth['Mobile'], 'customWidth', blockName );
 
-	const rowGapDesktopFallback = getFallbackNumber( rowGap['Desktop'], 'rowGapDesktop', blockName );
-	const columnGapDesktopFallback = getFallbackNumber( columnGap['Desktop'], 'columnGapDesktop', blockName );
-	const rowGapTabletFallback = getFallbackNumber( rowGap['Tablet'], 'rowGapTablet', blockName );
-	const columnGapTabletFallback = getFallbackNumber( columnGap['Tablet'], 'columnGapTablet', blockName );
-	const rowGapMobileFallback = getFallbackNumber( rowGap['Mobile'], 'rowGapMobile', blockName );
-	const columnGapMobileFallback = getFallbackNumber( columnGap['Mobile'], 'columnGapMobile', blockName );
+	const rowGapDesktopFallback = getFallbackNumber( rowGap['Desktop'] === '' ? globalRowGap['Desktop'] : rowGap['Desktop'], 'rowGapDesktop', blockName );
+	const columnGapDesktopFallback = getFallbackNumber( columnGap['Desktop'] === '' ? globalColumnGap['Desktop'] : columnGap['Desktop'], 'columnGapDesktop', blockName );
+	const rowGapTabletFallback = getFallbackNumber( rowGap['Tablet'] === '' ? globalRowGap['Tablet'] : rowGap['Tablet'], 'rowGapTablet', blockName );
+	const columnGapTabletFallback = getFallbackNumber( columnGap['Tablet'] === '' ? globalColumnGap['Tablet'] : columnGap['Tablet'], 'columnGapTablet', blockName );
+	const rowGapMobileFallback = getFallbackNumber( rowGap['Mobile'] === '' ? globalRowGap['Mobile'] : rowGap['Mobile'], 'rowGapMobile', blockName );
+	const columnGapMobileFallback = getFallbackNumber( columnGap['Mobile'] === '' ? globalColumnGap['Mobile'] : columnGap['Mobile'], 'columnGapMobile', blockName );
 
 
 	const borderCSS = generateBorderCSS( attributes, 'container' );
@@ -1090,6 +1093,12 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapTabletFallback, columnGapUnits['Tablet'] ),
 			...tablet_selectors[ containerFlexSelector ],
 		};
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
 	}
 	if( containerLayout === 'grid' ){
 		tablet_selectors[ containerFlexSelector ] = {
@@ -1101,6 +1110,12 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapTabletFallback, columnGapUnits['Tablet'] ),
 			...tablet_selectors[ containerFlexSelector ],
 		};
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
 	}
 
 	if( containerLayout === 'flex' ){
@@ -1114,6 +1129,12 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapMobileFallback, columnGapUnits['Mobile'] ),
 			...mobile_selectors[ containerFlexSelector ],
 		};
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
 	}
 	if( containerLayout === 'grid' ){
 		mobile_selectors[ containerFlexSelector ] = {
@@ -1125,6 +1146,12 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapMobileFallback, columnGapUnits['Mobile'] ),
 			...mobile_selectors[ containerFlexSelector ],
 		};
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
+			'height': containerEqualHeight === true ? '100%' : '',
+		}
 	}
 
 	// Display grid css.

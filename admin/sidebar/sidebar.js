@@ -14,6 +14,9 @@ import { loadGoogleFont, useAfterSave } from "./helper";
 import { getGlobalStyle, updateGlobalStyle } from "./fetch";
 import generateCSSVariables from "./components/GenerateRootCss";
 import generateColorsVariables from "./components/GenerateColorRoot";
+import {
+	GOOGLE_FONTS,
+} from '@Constants/fbConstants';
 import "./sidebar.scss";
 
 // Default color and gradient configurations
@@ -237,6 +240,7 @@ function FrontisBlocksSidebar() {
 	const [fontFamilies, setFontFamilies] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 
+	const mobilePopoverProps = { placement: 'bottom-start', offset: 8 };
 	// Memoized theme colors
 	const themeColors = useMemo(
 		() => frontisBlocksAdmin?.theme_colors || defaultColors,
@@ -347,7 +351,6 @@ function FrontisBlocksSidebar() {
 		handleUpdateState();
 	}, [handleUpdateState]);
 
-
 	// Generate color variables
 	useEffect(() => {
 		const mergedColors = [
@@ -404,6 +407,8 @@ function FrontisBlocksSidebar() {
 					localStorage.setItem(storeKey, JSON.stringify(response.data.data));
 				}
 			}
+
+			setIsLoading(false);
 		} catch (error) {
 			console.error("Error updating settings:", error);
 		}
@@ -421,11 +426,17 @@ function FrontisBlocksSidebar() {
 	}, [handleUpdateSettings]);
 
 	useEffect(() => {
-		console.log(isLoading)
-		if (!isLoading) {
-			setIsLoading(true);
-			wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
-		}
+		setTimeout(() => {
+			if (!isLoading) {
+				setIsLoading(true);
+				wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
+			}
+
+			if (globalColors === undefined) {
+				setGlobalColors(themeColors);
+			}
+		}, 5000);
+
 	}, [customColors, globalColors, gradientColors, customGradientColors]);
 
 	return (

@@ -26,9 +26,9 @@ class Settings extends AjaxBase {
         $ajax_events = [
             'get_options',
             'default_content_width',
-            'button_inherit_from_theme',
+            'container_column_gap',
+            'container_row_gap',
             'container_padding',
-            'container_elements_gap',
             'custom_css',
             'copy_paste_style',
             'file_generation',
@@ -82,16 +82,16 @@ class Settings extends AjaxBase {
         $this->handle_option_update('default_content_width', 'number');
     }
 
-    public function button_inherit_from_theme() {
-        $this->handle_option_update('button_inherit_from_theme', 'boolean');
+    public function container_column_gap() {
+        $this->handle_option_update('container_column_gap', 'number');
+    }
+
+    public function container_row_gap() {
+        $this->handle_option_update('container_row_gap', 'number');
     }
 
     public function container_padding() {
         $this->handle_option_update('container_padding', 'number');
-    }
-
-    public function container_elements_gap() {
-        $this->handle_option_update('container_elements_gap', 'number');
     }
 
     public function custom_css() {
@@ -190,7 +190,7 @@ class Settings extends AjaxBase {
      */
     public function generate_assets_on_activation_update() {
         $response = $this->get_all_pages_post_ids_with_content();
-    
+
         if ($response) {
             return true;
         } else {
@@ -256,11 +256,13 @@ class Settings extends AjaxBase {
             return;
         }
 
-        $value = isset($_POST['value']) ? $this->sanitize_option_value($_POST['value'], $type) : '';
-        $old_value = get_option("fb_$option_name");
+        $post_value = isset($_POST['value']) ? ($_POST['value']) : [];
 
+        $value =  json_encode($post_value);
+
+        $old_value = get_option("fb_$option_name");
         // Convert old_value to the correct type for comparison
-        $old_value = $this->sanitize_option_value($old_value, $type);
+        // $old_value = $this->sanitize_option_value($old_value, $type);
 
         if ($old_value === $value) {
             wp_send_json_success(['message' => 'No changes were made']);

@@ -8,7 +8,7 @@ import {
 	Dropdown,
 	ToggleControl
 } from "@wordpress/components";
-import {useState } from "@wordpress/element";
+import {useEffect, useState, useRef, useMemo } from "@wordpress/element";
 
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_Spacing from "@Components/spacing";
@@ -27,18 +27,20 @@ import FB_InspectorControls from '@Components/InspectorControls';
 import { SortableContext } from "@dnd-kit/sortable";
 import ColumnSortableItem from "./columnSortableItem";
 import RowSortableItem from "./rowSortableItem";
+import { use } from "@wordpress/data";
 
 const Inspector = (props) => {
 	let deviceType = useDeviceType();
-	console.log(deviceType);
 	const {
 		attributes: {
 			containerType,
 			containerTypeFull,
 			containerCustomWidth,
 			containerCustomWidthUnits,
+			globalFullWidthContentBoxedWidth,
 			fullWidthContentBoxedWidth,
 			fullWidthContentBoxedWidthUnits,
+			fullWidthContentBoxedWidthHasEdited,
 			isBlockRootParent,
 			customWidth,
 			resetFallBackCustomWidth,
@@ -46,15 +48,20 @@ const Inspector = (props) => {
 			minHeight,
 			minHeightUnits,
 			containerWrap,
+			globalColumnGap,
+			globalRowGap,
 			columnGap,
 			rowGap,
 			columnGapUnits,
 			rowGapUnits,
+			containerColumnGapHasEdited,
+			containerRowGapHasEdited,
 			containerZIndex,
 			containerPaddingUnits,
 			containerDesktopPadding,
 			containerTabletPadding,
 			containerMobilePadding,
+			containerPaddingHasEdited,
 			containerPaddingLink,
 			containerMarginUnits,
 			containerDesktopMargin,
@@ -172,6 +179,122 @@ const Inspector = (props) => {
 		},
 		setAttributes
 	} = props;
+
+	// 1️⃣ Create a reusable function for parsing
+	const parseResponsiveValue = (value) => {
+		if (typeof value === "string") {
+			try {
+				return JSON.parse(value);
+			} catch (e) {
+				console.error("Parsing error:", e);
+				return {
+					Desktop: value,
+					Tablet: value,
+					Mobile: value,
+				};
+			}
+		} else if (typeof value === "object") {
+			return value;
+		} else {
+			return {
+				Desktop: value,
+				Tablet: value,
+				Mobile: value,
+			};
+		}
+	};
+
+	// 2️⃣ Memoize parsed values
+	const formatted_default_container_width = useMemo(() => {
+		return parseResponsiveValue(FrontisBlocksData.default_container_width);
+	}, [FrontisBlocksData.default_container_width]);
+
+	const formatted_container_column_gap = useMemo(() => {
+		return parseResponsiveValue(FrontisBlocksData.container_column_gap);
+	}, [FrontisBlocksData.container_column_gap]);
+
+	const formatted_container_row_gap = useMemo(() => {
+		return parseResponsiveValue(FrontisBlocksData.container_row_gap);
+	}, [FrontisBlocksData.container_row_gap]);
+
+	const formatted_container_padding = useMemo(() => {
+		return parseResponsiveValue(FrontisBlocksData.container_padding);
+	}, [FrontisBlocksData.container_padding]);
+
+	// 3️⃣ Apply the effects as before
+	useEffect(() => {
+		if (fullWidthContentBoxedWidth.Desktop !== '') {
+			setAttributes({
+				fullWidthContentBoxedWidthHasEdited: true
+			});
+		}
+	}, [fullWidthContentBoxedWidth]);
+
+	useEffect(() => {
+		setAttributes({
+			globalFullWidthContentBoxedWidth: {
+				Desktop: formatted_default_container_width.Desktop || "1200",
+				Tablet: formatted_default_container_width.Tablet || "1024",
+				Mobile: formatted_default_container_width.Mobile || "767",
+			},
+		});
+	}, [formatted_default_container_width]);
+
+
+	useEffect(() => {
+		setAttributes({
+			globalColumnGap: {
+				Desktop: formatted_container_column_gap.Desktop || "0",
+				Tablet: formatted_container_column_gap.Tablet || "0",
+				Mobile: formatted_container_column_gap.Mobile || "0",
+			},
+		});
+	}, [formatted_container_column_gap]);
+
+
+	useEffect(() => {
+		setAttributes({
+			globalRowGap: {
+				Desktop: formatted_container_row_gap.Desktop || "0",
+				Tablet: formatted_container_row_gap.Tablet || "0",
+				Mobile: formatted_container_row_gap.Mobile || "0",
+			},
+		});
+	}, [formatted_container_row_gap]);
+
+
+	// useEffect(() => {
+	// 	if (containerDesktopPadding.top !== '' || containerTabletPadding.top !== '' || containerMobilePadding.top !== '') {
+	// 		setAttributes({
+	// 			containerPaddingHasEdited: true
+	// 		});
+	// 	}
+	// }, []);
+
+	// useEffect(() => {
+	// 	if (!containerPaddingHasEdited) {
+	// 		setAttributes({
+	// 			containerDesktopPadding: {
+	// 				top: formatted_container_padding.Desktop || "10",
+	// 				bottom: formatted_container_padding.Desktop || "10",
+	// 				left: formatted_container_padding.Desktop || "10",
+	// 				right: formatted_container_padding.Desktop || "10",
+	// 			},
+	// 			containerTabletPadding: {
+	// 				top: formatted_container_padding.Tablet || "10",
+	// 				bottom: formatted_container_padding.Tablet || "10",
+	// 				left: formatted_container_padding.Tablet || "10",
+	// 				right: formatted_container_padding.Tablet || "10",
+	// 			},
+	// 			containerMobilePadding: {		
+	// 				top: formatted_container_padding.Mobile || "10",
+	// 				bottom: formatted_container_padding.Mobile || "10",
+	// 				left: formatted_container_padding.Mobile || "10",
+	// 				right: formatted_container_padding.Mobile || "10",
+	// 			},
+	// 		});
+	// 	}
+	// }, [formatted_container_padding]);
 
 	const CONTAINER_TYPE = [
 		{ label: __('Full Width', 'frontis-blocks'), value: "full-width" },
@@ -320,10 +443,10 @@ const Inspector = (props) => {
 
 	const handleColumnDeleteItem = (id) => {
 		let updatedItems = [];
-	
+
 		if (deviceType === 'Desktop') {
 			updatedItems = reindexItems(
-				containerColumnsItem.Desktop.filter(item => item.id !== id), 
+				containerColumnsItem.Desktop.filter(item => item.id !== id),
 				'column',
 				'Column'
 			);
@@ -340,14 +463,14 @@ const Inspector = (props) => {
 				'Column'
 			);
 		}
-	
+
 		setAttributes({
 			containerColumnsItemList: {
 				...containerColumnsItemList,
 				[deviceType]: updatedItems,
 			},
 		});
-	
+
 		setContainerColumnsItem({
 			...containerColumnsItem,
 			[deviceType]: updatedItems,
@@ -466,11 +589,32 @@ const Inspector = (props) => {
 
 	// Handle full width content boxed width
 	const fullWidthContentBoxedWidthFn = (width) => {
-		setAttributes({ fullWidthContentBoxedWidth: width });
+		setAttributes({
+			fullWidthContentBoxedWidth: width,
+			fullWidthContentBoxedWidthHasEdited: true
+		});
 	}
 
 	const fullWidthContentBoxedWidthUnitsFn = (units) => {
 		setAttributes({ fullWidthContentBoxedWidthUnits: units });
+	}
+
+	const columnGapFn = (width) => {
+		setAttributes({ columnGap: width });
+		setAttributes({ containerColumnGapHasEdited: true });
+	}
+
+	const columnGapUnitsFn = (units) => {
+		setAttributes({ columnGapUnits: units });
+	}
+
+	const rowGapFn = (width) => {
+		setAttributes({ rowGap: width });
+		setAttributes({ containerRowGapHasEdited: true });
+	}
+
+	const rowGapUnitsFn = (units) => {
+		setAttributes({ rowGapUnits: units });
 	}
 
 	// Handle min height
@@ -500,22 +644,6 @@ const Inspector = (props) => {
 		setAttributes({ containerCustomWidthUnits: units });
 	}
 
-	const columnGapFn = (width) => {
-		setAttributes({ columnGap: width });
-	}
-
-	const columnGapUnitsFn = (units) => {
-		setAttributes({ columnGapUnits: units });
-	}
-
-	const rowGapFn = (width) => {
-		setAttributes({ rowGap: width });
-	}
-
-	const rowGapUnitsFn = (units) => {
-		setAttributes({ rowGapUnits: units });
-	}
-
 	const containerZindexFn = (value) => {
 		setAttributes({ containerZIndex: value });
 	}
@@ -523,6 +651,10 @@ const Inspector = (props) => {
 	/** Start Heading Padding */
 	const containerPaddingUnitsChange = (event, position) => {
 		const value = event.target.value;
+
+		// Set the containerPaddingHasEdited to true to trigger the useEffect
+		setAttributes({ containerPaddingHasEdited: true });
+
 		if (containerPaddingLink) {
 			switch (deviceType) {
 				case 'Desktop':
@@ -878,7 +1010,7 @@ const Inspector = (props) => {
 										min={1}
 										max={fullWidthContentBoxedWidthUnits[deviceType] !== 'px' ? 100 : 2000}
 										label={__("Content Box Width", "frontis-blocks")}
-										rangeValue={fullWidthContentBoxedWidth}
+										rangeValue={fullWidthContentBoxedWidth.Desktop === '' ? globalFullWidthContentBoxedWidth : fullWidthContentBoxedWidth}
 										onChangeHandler={fullWidthContentBoxedWidthFn}
 										rangeUnitHandler={fullWidthContentBoxedWidthUnitsFn}
 										deviceType={deviceType}
@@ -932,6 +1064,7 @@ const Inspector = (props) => {
 						units_types_arr={[
 							{ label: 'px', value: 'px' },
 							{ label: 'vh', value: 'vh' },
+							{ label: '%', value: '%' },
 						]}
 					/>
 
@@ -1277,7 +1410,7 @@ const Inspector = (props) => {
 					min={0}
 					max={200}
 					label={__("Column", "frontis-blocks")}
-					rangeValue={columnGap}
+					rangeValue={columnGap.Desktop === '' ? globalColumnGap : columnGap}
 					onChangeHandler={columnGapFn}
 					rangeUnitHandler={columnGapUnitsFn}
 					deviceType={deviceType}
@@ -1295,7 +1428,7 @@ const Inspector = (props) => {
 					min={0}
 					max={200}
 					label={__("Row", "frontis-blocks")}
-					rangeValue={rowGap}
+					rangeValue={rowGap.Desktop === '' ? globalRowGap : rowGap}
 					onChangeHandler={rowGapFn}
 					rangeUnitHandler={rowGapUnitsFn}
 					deviceType={deviceType}
