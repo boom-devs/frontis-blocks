@@ -23,7 +23,7 @@ const variations = [
 			[
 				'frontis-blocks/loop-builder-wrapper',
 				{},
-				[ [ 'frontis-blocks/advanced-heading' ] ],
+				[ [ 'core/post-title' ] ],
 			]
 		],
 		scope: [ 'block' ],

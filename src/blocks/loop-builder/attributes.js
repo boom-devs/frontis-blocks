@@ -8,10 +8,6 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
-	premadeStyle: {
-		type: "string",
-		default: "style-1",
-	},
     deviceType: {
         type: "string",
         default: "Desktop"
@@ -264,54 +260,6 @@ const attributes = {
 		default: true
 	},
 	/** End Margin */
-
-	/** Start Background */
-	postGridBgColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
-	postGridNormalBackgroundType: {  
-		type: "string",
-		default: "classic",
-	},
-	postGridNormalClassicColor: {
-		type: "string",
-		default: "",
-	},
-	postGridNormalGradientColor: {
-		type: "string",
-		default: null,
-	},
-	postGridNormalCustomGradientSwitcher: {
-		type: "boolean",
-		default: false,
-	},
-	postGridNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
-	},
-
-	postGridHoverBackgroundType: {
-		type: "string",
-		default: "classic",
-	},
-	postGridHoverClassicColor: {
-		type: "string",
-		default: "",
-	},
-	postGridHoverGradientColor: {
-		type: "string",
-		default: null,
-	},
-	postGridHoverCustomGradientSwitcher: {
-		type: "boolean",
-		default: false,
-	},
-	postGridHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
-	},
-	/** End Background */
 
 	/** Start Border */
 	postGridBorder: {
@@ -921,10 +869,6 @@ const attributes = {
 
 
 	/** Start Category */
-	showCategorySwitcher: {
-		type: "boolean",
-		default: false
-	},
 	postCategoryGlobalTypographyData: {
 		type: "object",
 		default: {}
@@ -1237,10 +1181,6 @@ const attributes = {
 	/** End Category */
 
 	/** Start Tag */
-	showTagSwitcher: {
-		type: "boolean",
-		default: false
-	},
 	postTagGlobalTypographyData: {
 		type: "object",
 		default: {}
@@ -1552,16 +1492,6 @@ const attributes = {
 	},
 	/** End Tag */
 
-	/** Start Author */
-	showAuthorSwitcher: {
-		type: "boolean",
-		default: true
-	},
-	showExcerptSwitcher: {
-		type: "boolean",
-		default: true
-	},
-
 	postAuthorGap: {
 		type: "object",
 		default: {
@@ -1866,11 +1796,6 @@ const attributes = {
 	/** End Author */
 
 	/** Start Date */
-	showDateSwitcher: {
-		type: "boolean",
-		default: true
-	},
-
 	postDateGlobalTypographyData: {
 		type: "object",
 		default: {}
@@ -2249,10 +2174,6 @@ const attributes = {
 
 
 	/** Start Load More */
-	loadMoreSwitcher: {
-		type: "boolean",
-		default: true
-	},
 	loadMoreType: {
 		type: "string",
 		default: "button"
@@ -3444,10 +3365,6 @@ const attributes = {
 	/** End Filter By Taxonomy */
 
 	/** Start Read More */
-	readMoreSwitcher: {
-		type: "boolean",
-		default: false
-	},
 	readMoreText: {
 		type: "string",
 		default: "Read More"
