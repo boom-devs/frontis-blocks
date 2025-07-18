@@ -22,17 +22,25 @@ import { store as coreStore } from '@wordpress/core-data';
 import { list, grid } from '@wordpress/icons';
 
 const TEMPLATE = [
-	[ 'core/post-title' ],
-	[ 'core/post-date' ],
-	[ 'core/post-excerpt' ],
+	[ 'frontis-blocks/advanced-heading' ],
 ];
+
+// const TEMPLATE = [
+// 	[
+// 	  'frontis-blocks/container',
+// 	  {},
+// 	  [
+// 		[ 'frontis-blocks/advanced-heading' ]
+// 	  ]
+// 	]
+//   ];
 
 function PostTemplateInnerBlocks( { classList } ) {
 	const innerBlocksProps = useInnerBlocksProps(
 		{ className: clsx( 'wp-block-post', classList ) },
 		{ template: TEMPLATE, __unstableDisableLayoutClassNames: true }
 	);
-	return <li { ...innerBlocksProps } />;
+	return <div { ...innerBlocksProps } />;
 }
 
 function PostTemplateBlockPreview( {
@@ -58,7 +66,7 @@ function PostTemplateBlockPreview( {
 	};
 
 	return (
-		<li
+		<div
 			{ ...blockPreviewProps }
 			tabIndex={ 0 }
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
@@ -307,7 +315,7 @@ export default function PostTemplateEdit( {
 				<ToolbarGroup controls={ displayLayoutControls } />
 			</BlockControls>
 
-			<ul { ...blockProps }>
+			<div { ...blockProps }>
 				{ blockContexts &&
 					blockContexts.map( ( blockContext ) => (
 						<BlockContextProvider
@@ -336,7 +344,7 @@ export default function PostTemplateEdit( {
 							/>
 						</BlockContextProvider>
 					) ) }
-			</ul>
+			</div>
 		</>
 	);
 }

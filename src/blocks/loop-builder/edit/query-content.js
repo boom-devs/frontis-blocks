@@ -48,7 +48,12 @@ export default function QueryContent( {
 		enhancedPagination,
 		tagName: TagName = 'div',
 		query: { inherit } = {},
+		postType,
+		postPerPage,
+		orderBy,
+        sortOrder,
 	} = attributes;
+
 	const { templateSlug } = context;
 	const { isSingular } = getQueryContextFromTemplate( templateSlug );
 	const { __unstableMarkNextChangeAsNotPersistent } =
@@ -133,6 +138,13 @@ export default function QueryContent( {
 		setAttributes,
 	] );
 
+	useEffect(() => {
+        query.postType = postType;
+		query.perPage = postPerPage;
+		query.orderBy = orderBy;
+		query.order = sortOrder;
+    }, [postType, postPerPage, orderBy, sortOrder]);
+
 	return (
 		<>
 		    <Inspector
@@ -140,7 +152,6 @@ export default function QueryContent( {
                 setAttributes={setAttributes}
                 clientId={clientId}
             />
-			
 			<EnhancedPaginationModal
 				attributes={ attributes }
 				setAttributes={ setAttributes }
