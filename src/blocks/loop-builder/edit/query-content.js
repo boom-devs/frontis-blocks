@@ -25,6 +25,11 @@ import EnhancedPaginationModal from './enhanced-pagination-modal';
 import { getQueryContextFromTemplate } from '../utils';
 import QueryToolbar from './query-toolbar';
 
+/**
+ * Internal dependencies
+ */
+import Inspector from "../inspector";
+
 // const { HTMLElementControl } = unlock( blockEditorPrivateApis );
 
 const DEFAULTS_POSTS_PER_PAGE = 3;
@@ -130,12 +135,18 @@ export default function QueryContent( {
 
 	return (
 		<>
+		    <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
+			
 			<EnhancedPaginationModal
 				attributes={ attributes }
 				setAttributes={ setAttributes }
 				clientId={ clientId }
 			/>
-			<InspectorControls>
+			{/* <InspectorControls>
 				<QueryInspectorControls
 					name={ name }
 					attributes={ attributes }
@@ -144,11 +155,11 @@ export default function QueryContent( {
 					clientId={ clientId }
 					isSingular={ isSingular }
 				/>
-			</InspectorControls>
-			<BlockControls>
+			</InspectorControls> */}
+			{/* <BlockControls>
 				<QueryToolbar attributes={ attributes } clientId={ clientId } />
-			</BlockControls>
-			<InspectorControls group="advanced">
+			</BlockControls> */}
+			{/* <InspectorControls group="advanced"> */}
 				{/*<HTMLElementControl*/}
 				{/*	tagName={ TagName }*/}
 				{/*	onChange={ ( value ) =>*/}
@@ -162,12 +173,12 @@ export default function QueryContent( {
 				{/*		{ label: '<aside>', value: 'aside' },*/}
 				{/*	] }*/}
 				{/*/>*/}
-				<EnhancedPaginationControl
+				{/* <EnhancedPaginationControl
 					enhancedPagination={ enhancedPagination }
 					setAttributes={ setAttributes }
 					clientId={ clientId }
-				/>
-			</InspectorControls>
+				/> */}
+			{/* </InspectorControls> */}
 			<TagName { ...innerBlocksProps } />
 		</>
 	);
