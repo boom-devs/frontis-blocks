@@ -129,14 +129,7 @@ var TabMenus = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.applyFilters)('f
   icon: /*#__PURE__*/React.createElement(_icons__WEBPACK_IMPORTED_MODULE_3__.IntegrationsIcon, null),
   label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Integrations", "frontis-blocks"),
   comp: /*#__PURE__*/React.createElement(_components__WEBPACK_IMPORTED_MODULE_2__.Integration, null)
-}
-// {
-// 	id: 'custom_icons',
-// 	icon: <IntegrationsIcon />,
-// 	label: __("Custom icons", "frontis-blocks"),
-// 	comp: <CustomIcons />
-// }
-]);
+}]);
 // Add pricing tab if not pro
 // if (window.frontisBlocksAdmin.isProActive === 'false') {
 //     TabMenus.push({
