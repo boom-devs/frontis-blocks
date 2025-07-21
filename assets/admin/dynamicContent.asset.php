@@ -1,1 +1,0 @@
-<?php return array('dependencies' => array('wp-api-fetch', 'wp-block-editor', 'wp-components', 'wp-compose', 'wp-data', 'wp-editor/build-types/store/reducer', 'wp-element', 'wp-hooks', 'wp-i18n'), 'version' => 'f3af560cfdffdccf10ea');
