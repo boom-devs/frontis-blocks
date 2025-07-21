@@ -177,6 +177,12 @@ class Blocks
 		if (Helper::is_frontis_block($block_content, $parsed_block)) {
 			$block_content = $this->add_wrapper_class($block_content, $parsed_block);
 			$block_content = $this->add_block_id($block_content, $parsed_block);
+
+			// Check dynamic content enable for this block
+			if(isset($block_obj->attributes['dynamicAttrs']) && $block_obj->attributes['dynamicAttrs']) {
+				$content = Helper::render_dynamic_content($block_obj->attributes['dynamicAttrs']);
+			}
+
 			$block_content = apply_filters('frontis_blocks_render_block', $block_content, $parsed_block, $block_obj);
 		}
 		return $block_content;

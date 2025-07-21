@@ -1,27 +1,29 @@
 import { __ } from '@wordpress/i18n';
+import apiFetch from '@wordpress/api-fetch';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { useEffect, useState } from '@wordpress/element';
 import { SelectControl, TextControl, ToggleControl, PanelBody, Button } from '@wordpress/components';
 
-const DynamicContentPopover = ({ dataSource, setDataSource, sourceField, setSourceField, postType, setPostType, selectPost, setSelectPost, enableLink, setEnableLink, linkSource, setLinkSource, replaceContent, setReplaceContent, beforeText, setBeforeText, afterText, setAfterText, fallbackText, setFallbackText, charLength, setCharLength }) => {
+const DynamicContentPopover = ({ dataSource, setDataSource, sourceField, setSourceField, selectPost, setSelectPost, enableLink, setEnableLink, linkSource, setLinkSource, replaceContent, setReplaceContent, beforeText, setBeforeText, afterText, setAfterText, fallbackText, setFallbackText, charLength, setCharLength }) => {
 	const selectedBlockId = useSelect((select) => {
 		return select('core/block-editor').getSelectedBlockClientId();
 	}, []);
 
 	const [posts, setPosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [allPosts, setAllPosts] = useState(frontisBlocksAdmin.all_posts)
 
 	// Get the dispatch function to update block attributes
 	const { updateBlockAttributes } = useDispatch('core/block-editor');
 
-	useEffect(() => {
-		if (selectedBlockId) {
-			// Example: Update an attribute called 'customText' for the selected block
-			updateBlockAttributes(selectedBlockId, {
-				customText: 'Updated via script',
-			});
-		}
-	}, [selectedBlockId, updateBlockAttributes]);
+	// useEffect(() => {
+	// 	if (selectedBlockId) {
+	// 		// Example: Update an attribute called 'customText' for the selected block
+	// 		updateBlockAttributes(selectedBlockId, {
+	// 			headingText: 'Updated via script',
+	// 		});
+	// 	}
+	// }, [selectedBlockId, updateBlockAttributes]);
 
 
 	// Get the selected block's client ID and attributes
@@ -77,23 +79,149 @@ const DynamicContentPopover = ({ dataSource, setDataSource, sourceField, setSour
 	}, []);
 
 	// Fetch posts using useSelect
-	const fetchedPosts = useSelect(
-		(select) => {
-			return select('core').getEntityRecords('postType', postType, {
-				per_page: -1, // Fetch all posts (up to REST API limit of 100)
-				status: 'publish',
-			});
-		},
-		[postType] // Re-run when postType changes
-	);
+	// const fetchedPosts = useSelect(
+	// 	(select) => {
+	// 		return select('core').getEntityRecords('postType', postType, {
+	// 			per_page: -1, // Fetch all posts (up to REST API limit of 100)
+	// 			status: 'publish',
+	// 		});
+	// 	},
+	// 	[postType] // Re-run when postType changes
+	// );
+	//
+	// // Update posts when fetchedPosts changes
+	// useEffect(() => {
+	// 	if (fetchedPosts !== null) {
+	// 		setPosts(fetchedPosts);
+	// 		setIsLoading(false);
+	// 	}
+	// }, [fetchedPosts]);
 
-	// Update posts when fetchedPosts changes
-	useEffect(() => {
-		if (fetchedPosts !== null) {
-			setPosts(fetchedPosts);
-			setIsLoading(false);
+	// Attribute update functions
+	// const updateDynamicContentAttrs = () => {
+	// 	return {
+	// 	};
+	// };
+
+	const updateBlockContent = (text) => {
+		// Update both headingText and dynamicContent in a single call
+		updateBlockAttributes(selectedBlockId, {
+			headingText: text,
+			dynamicAttrs: {
+				dataSource: dataSource,
+				selectPost: selectPost,
+				sourceField: sourceField,
+			}
+		});
+		// console.log('Updated attrs', attributes);
+	};
+
+	const updateBlockDynamicContent = () => {
+		if (dataSource === 'post_type' && selectPost) {
+
+
+
+
+			// // Determine the REST API endpoint based on post type
+			// const postTypeEndpoint = postType === 'page' ? 'pages' : postType === 'post' ? 'posts' : 'posts';
+			// console.log(postTypeEndpoint);
+			// // First fetch the post/page/custom post type data
+			// apiFetch({
+			// 	path: `/wp/v2/${postTypeEndpoint}/${selectPost}`
+			// }).then(post => {
+			// 	console.log('Fetched post data:', post);
+			//
+			// 	// Handle different field types
+			// 	switch(sourceField) {
+			// 		// Post fields
+			// 		case 'post_title':
+			// 			console.log(post.title?.rendered)
+			// 			updateBlockContent(post.title?.rendered || '');
+			// 			break;
+			// 		case 'post_excerpt':
+			// 			updateBlockContent(post.excerpt?.rendered || '');
+			// 			break;
+			// 		case 'post_date':
+			// 			updateBlockContent(formatDate(post.date));
+			// 			break;
+			// 		case 'post_time':
+			// 			updateBlockContent(formatTime(post.date));
+			// 			break;
+			// 		case 'post_id':
+			// 			updateBlockContent(post.id.toString());
+			// 			break;
+			// 		case 'comments_number':
+			// 			updateBlockContent(post.comment_count?.toString() || '0');
+			// 			break;
+			// 		case 'post_custom_field':
+			// 		case 'post_terms':
+			// 			// Handle these special cases separately
+			// 			break;
+			//
+			// 		// Author fields - need additional API call
+			// 		default:
+			// 			if (sourceField.startsWith('author_')) {
+			// 				return fetchAuthorData(post.author, sourceField);
+			// 			}
+			// 			break;
+			// 	}
+			// }).catch(error => {
+			// 	console.error('Error fetching post data:', error);
+			// });
 		}
-	}, [fetchedPosts]);
+	};
+
+	// Helper function to fetch author data
+	const fetchAuthorData = (authorId, field) => {
+		return apiFetch({
+			path: `/wp/v2/users/${authorId}`
+		}).then(user => {
+			let content = '';
+			switch(field) {
+				case 'author_name':
+					content = user.name;
+					break;
+				case 'author_first_name':
+					content = user.first_name;
+					break;
+				case 'author_last_name':
+					content = user.last_name;
+					break;
+				case 'author_nickname':
+					content = user.nickname;
+					break;
+				case 'author_bio':
+					content = user.description;
+					break;
+				case 'author_email':
+					content = user.email;
+					break;
+				case 'author_website':
+					content = user.url;
+					break;
+				case 'author_custom_field':
+					// Handle custom fields
+					break;
+			}
+			updateBlockContent(content);
+			return content;
+		}).catch(error => {
+			console.error('Error fetching author data:', error);
+		});
+	};
+
+	console.log(allPosts)
+
+	// Helper functions for date/time formatting
+	const formatDate = (dateString) => {
+		const date = new Date(dateString);
+		return date.toLocaleDateString();
+	};
+
+	const formatTime = (dateString) => {
+		const date = new Date(dateString);
+		return date.toLocaleTimeString();
+	};
 
 	return (
 		<div className="frontis-dynamic-content-wrap" style={{ padding: '10px' }}>
@@ -133,56 +261,27 @@ const DynamicContentPopover = ({ dataSource, setDataSource, sourceField, setSour
 				{dataSource === 'post_type' &&
 					<>
 						<div className="frontis-dynamic-content-text-control">
-							<label className="frontis-dynamic-content-text-control__label" htmlFor="post-type">
-								{__('Post type')}
+							<label className="frontis-dynamic-content-text-control__label" htmlFor="select-post">
+								{__('Select post')}
 							</label>
 							<SelectControl
-								id="post-type"
-								value={postType}
-								onChange={(selection) => setPostType(selection)}
+								id="select-post"
+								value={selectPost}
+								onChange={(selection) => setSelectPost(selection)}
 								className="frontis-dynamic-content-popover-posttype"
 							>
-								<option disabled value="">{__('Select post type')}</option>
-								{postTypes.length > 0 ? (
-									postTypes.map((postType) => (
-										<option key={postType.slug} value={postType.slug}>
-											{__(postType.name)}
-										</option>
-									))
-									) : (
-										<option disabled value="not_found">{__('Post type not found')}</option>
-									)
-								}
-
+								<option value="">{__('Select post')}</option>
+								{Object.entries(allPosts).map(([postType, posts]) => (
+									<optgroup key={postType} label={postType}>
+										{posts.map((post) => (
+											<option key={post.ID} value={post.ID}>
+												{post.title || __('No Title')}
+											</option>
+										))}
+									</optgroup>
+								))}
 							</SelectControl>
 						</div>
-						{ (postType !== '') &&
-							<div className="frontis-dynamic-content-text-control">
-								<label className="frontis-dynamic-content-text-control__label" htmlFor="select-post">
-									{__('Select post')}
-								</label>
-								<SelectControl
-									id="select-post"
-									value={selectPost}
-									onChange={(selection) => setSelectPost(selection)}
-									className="frontis-dynamic-content-popover-posttype"
-								>
-									<optgroup label={postType}>
-										{isLoading ? (
-											<option>Loading...</option>
-										) : posts && posts.length > 0 ? (
-											posts.map((post) => (
-												<option key={post.id} value={post.id}>
-													{post.title?.raw || 'No Title'}
-												</option>
-											))
-										) : (
-											<option>No posts found</option>
-										)}
-									</optgroup>
-								</SelectControl>
-							</div>
-						}
 					</>
 				}
 
@@ -197,6 +296,7 @@ const DynamicContentPopover = ({ dataSource, setDataSource, sourceField, setSour
 						onChange={(selection) => setSourceField(selection)}
 						className="frontis-dynamic-content-popover-posttype"
 					>
+						<option value="">{__('Select source field')}</option>
 						<optgroup label="Post">
 							<option value="post_title">{__('Post Title')}</option>
 							<option value="post_excerpt">{__('Post Excerpt')}</option>
@@ -315,7 +415,7 @@ const DynamicContentPopover = ({ dataSource, setDataSource, sourceField, setSour
 					<div className={'frontis-dynamic-content-apply-btn'} style={{textAlign: 'center', marginTop: '20px'}}>
 						<Button
 							variant="primary"
-							onClick={() => alert('Applied!')}
+							onClick={() => updateBlockDynamicContent()}
 						>
 							{__('Apply')}
 						</Button>

@@ -23,7 +23,6 @@ const withGlobalToolbar = createHigherOrderComponent((BlockEdit) => {
 		const [dataSource, setDataSource] = useState('Current Post');
 		const [sourceField, setSourceField] = useState('');
 		const [selectPost, setSelectPost] = useState('');
-		const [postType, setPostType] = useState('');
 		const [enableLink, setEnableLink] = useState(false);
 		const [linkSource, setLinkSource] = useState('');
 		const [replaceContent, setReplaceContent] = useState(false);
@@ -73,8 +72,6 @@ const withGlobalToolbar = createHigherOrderComponent((BlockEdit) => {
 										setSourceField={setSourceField}
 										selectPost={selectPost}
 										setSelectPost={setSelectPost}
-										postType={postType}
-										setPostType={setPostType}
 										enableLink={enableLink}
 										setEnableLink={setEnableLink}
 										linkSource={linkSource}

@@ -3,6 +3,7 @@
 namespace FrontisBlocks;
 
 use FrontisBlocks\Admin\Admin;
+use FrontisBlocks\Admin\Ajax\BlocksAjax;
 use FrontisBlocks\Core\Blocks;
 use FrontisBlocks\Utils\Enqueue;
 use FrontisBlocks\Config\BlockList;
@@ -158,6 +159,7 @@ final class Plugin {
 		Settings::get_instance()->register_ajax_events();
 		InitialActivatedBlocks::blocks();
 		GlobalSettings::get_instance()->register_global_settings_events();
+		BlocksAjax::get_instance()->register_blocks_ajax_events();
 		SupportSVG::get_instance();
 	}
 }
