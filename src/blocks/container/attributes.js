@@ -92,6 +92,15 @@ const attributes = {
 			Mobile: '%',
 		}
 	},
+	
+	globalRowGap: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
 	rowGap: {
 		type: 'object',
 		default: {
@@ -114,6 +123,14 @@ const attributes = {
 		default: false,
 	},
 
+	globalColumnGap: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
 	columnGap: {
 		type: 'object',
 		default: {
@@ -185,6 +202,14 @@ const attributes = {
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px',
+		}
+	},
+	globalFullWidthContentBoxedWidth: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	fullWidthContentBoxedWidthHasEdited: {
@@ -709,6 +734,14 @@ const attributes = {
 	/** End Overlay for fb container */
 
 	/** Start Padding */
+	containerGlobalPadding: {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
 	containerPaddingUnits: {
 		type: 'object',
 		default: {
@@ -720,10 +753,10 @@ const attributes = {
 	containerDesktopPadding: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "10",
+			bottom: "10",
+			left: "10",
+			right: "10",
 		}
 	},
 	containerTabletPadding: {

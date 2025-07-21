@@ -59,7 +59,9 @@
                 padding: 15px 16px;
                 border: none;
                 border-bottom: 1px solid $neutral-color-100;
+                border-left: 4px solid transparent;
                 cursor: pointer;
+                transition: all 0.3s ease;
 
                 span {
                     color: $neutral-color-600;
@@ -104,13 +106,14 @@
                 }
 
                 &:last-child {
-                    border-bottom: none;
+                    border-bottom-color: transparent;
                 }
 
                 &.active {
                     background: $primary-color-50;
                     border-bottom: 1px solid transparent;
                     border-left: 4px solid $primary-color;
+                    transition: all 0.3s ease;
 
                     span.fb-template-library-store-sidebar-tab-count {
                         background: $primary-color;

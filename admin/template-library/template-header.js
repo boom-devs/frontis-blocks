@@ -38,7 +38,7 @@ const TemplateHeader = ({ activeTab, setActiveTab, data, onClose }) => {
   const tabs = Object.keys(schema).map((key) => ({
     id: key,
     label: schema[key].name,
-    icon: key === 'template-library' ? <TemplateLibraryIcon /> : null,
+    // icon: key === 'templateLibrary' ? <TemplateLibraryIcon /> : null,
   }));
 
   return (
@@ -57,7 +57,7 @@ const TemplateHeader = ({ activeTab, setActiveTab, data, onClose }) => {
               onClick={() => setActiveTab(tab.id)}
             >
               <span>{tab.label}</span>
-              {tab.icon}
+              {/* {tab.icon} */}
             </button>
           ))}
         </div>

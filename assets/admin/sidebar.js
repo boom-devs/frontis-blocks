@@ -3578,17 +3578,19 @@ function FrontisBlocksSidebar() {
     handleUpdateSettings();
   }, [handleUpdateSettings]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
-    if (!isLoading) {
-      setIsLoading(true);
-      wp.data.dispatch('core/editor').editPost({
-        meta: {
-          _dummy: new Date().getTime()
-        }
-      });
-    }
-    if (globalColors === undefined) {
-      setGlobalColors(themeColors);
-    }
+    setTimeout(function () {
+      if (!isLoading) {
+        setIsLoading(true);
+        wp.data.dispatch('core/editor').editPost({
+          meta: {
+            _dummy: new Date().getTime()
+          }
+        });
+      }
+      if (globalColors === undefined) {
+        setGlobalColors(themeColors);
+      }
+    }, 5000);
   }, [customColors, globalColors, gradientColors, customGradientColors]);
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_editor__WEBPACK_IMPORTED_MODULE_1__.PluginSidebarMoreMenuItem, {
     target: "fb_plugin_sidebar"
