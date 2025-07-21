@@ -68,38 +68,34 @@ var withGlobalToolbar = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_3__.creat
       _useState8 = _slicedToArray(_useState7, 2),
       selectPost = _useState8[0],
       setSelectPost = _useState8[1];
-    var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(''),
+    var _useState9 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false),
       _useState0 = _slicedToArray(_useState9, 2),
-      postType = _useState0[0],
-      setPostType = _useState0[1];
-    var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false),
+      enableLink = _useState0[0],
+      setEnableLink = _useState0[1];
+    var _useState1 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(''),
       _useState10 = _slicedToArray(_useState1, 2),
-      enableLink = _useState10[0],
-      setEnableLink = _useState10[1];
-    var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(''),
+      linkSource = _useState10[0],
+      setLinkSource = _useState10[1];
+    var _useState11 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      linkSource = _useState12[0],
-      setLinkSource = _useState12[1];
-    var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false),
+      replaceContent = _useState12[0],
+      setReplaceContent = _useState12[1];
+    var _useState13 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(''),
       _useState14 = _slicedToArray(_useState13, 2),
-      replaceContent = _useState14[0],
-      setReplaceContent = _useState14[1];
+      beforeText = _useState14[0],
+      setBeforeText = _useState14[1];
     var _useState15 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(''),
       _useState16 = _slicedToArray(_useState15, 2),
-      beforeText = _useState16[0],
-      setBeforeText = _useState16[1];
+      afterText = _useState16[0],
+      setAfterText = _useState16[1];
     var _useState17 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(''),
       _useState18 = _slicedToArray(_useState17, 2),
-      afterText = _useState18[0],
-      setAfterText = _useState18[1];
+      fallbackText = _useState18[0],
+      setFallbackText = _useState18[1];
     var _useState19 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(''),
       _useState20 = _slicedToArray(_useState19, 2),
-      fallbackText = _useState20[0],
-      setFallbackText = _useState20[1];
-    var _useState21 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(''),
-      _useState22 = _slicedToArray(_useState21, 2),
-      charLength = _useState22[0],
-      setCharLength = _useState22[1];
+      charLength = _useState20[0],
+      setCharLength = _useState20[1];
     var toggleVisible = function toggleVisible() {
       setIsVisible(function (state) {
         return !state;
@@ -175,8 +171,6 @@ var withGlobalToolbar = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_3__.creat
       setSourceField: setSourceField,
       selectPost: selectPost,
       setSelectPost: setSelectPost,
-      postType: postType,
-      setPostType: setPostType,
       enableLink: enableLink,
       setEnableLink: setEnableLink,
       linkSource: linkSource,
@@ -224,12 +218,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
+/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -240,13 +236,12 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
 var DynamicContentPopover = function DynamicContentPopover(_ref) {
   var dataSource = _ref.dataSource,
     setDataSource = _ref.setDataSource,
     sourceField = _ref.sourceField,
     setSourceField = _ref.setSourceField,
-    postType = _ref.postType,
-    setPostType = _ref.setPostType,
     selectPost = _ref.selectPost,
     setSelectPost = _ref.setSelectPost,
     enableLink = _ref.enableLink,
@@ -263,32 +258,37 @@ var DynamicContentPopover = function DynamicContentPopover(_ref) {
     setFallbackText = _ref.setFallbackText,
     charLength = _ref.charLength,
     setCharLength = _ref.setCharLength;
-  var selectedBlockId = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(function (select) {
+  var selectedBlockId = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(function (select) {
     return select('core/block-editor').getSelectedBlockClientId();
   }, []);
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     posts = _useState2[0],
     setPosts = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)(true),
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(true),
     _useState4 = _slicedToArray(_useState3, 2),
     isLoading = _useState4[0],
     setIsLoading = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(frontisBlocksAdmin.all_posts),
+    _useState6 = _slicedToArray(_useState5, 2),
+    allPosts = _useState6[0],
+    setAllPosts = _useState6[1];
 
   // Get the dispatch function to update block attributes
-  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useDispatch)('core/block-editor'),
+  var _useDispatch = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useDispatch)('core/block-editor'),
     updateBlockAttributes = _useDispatch.updateBlockAttributes;
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
-    if (selectedBlockId) {
-      // Example: Update an attribute called 'customText' for the selected block
-      updateBlockAttributes(selectedBlockId, {
-        customText: 'Updated via script'
-      });
-    }
-  }, [selectedBlockId, updateBlockAttributes]);
+
+  // useEffect(() => {
+  // 	if (selectedBlockId) {
+  // 		// Example: Update an attribute called 'customText' for the selected block
+  // 		updateBlockAttributes(selectedBlockId, {
+  // 			headingText: 'Updated via script',
+  // 		});
+  // 	}
+  // }, [selectedBlockId, updateBlockAttributes]);
 
   // Get the selected block's client ID and attributes
-  var _useSelect = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(function (select) {
+  var _useSelect = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(function (select) {
       var clientId = select('core/block-editor').getSelectedBlockClientId();
       return {
         selectedBlockId: clientId,
@@ -298,11 +298,11 @@ var DynamicContentPopover = function DynamicContentPopover(_ref) {
     testSelectedBlockId = _useSelect.testSelectedBlockId,
     selectedBlockAttributes = _useSelect.selectedBlockAttributes;
   console.log(selectedBlockAttributes);
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
-    _useState6 = _slicedToArray(_useState5, 2),
-    initialValues = _useState6[0],
-    setInitialValues = _useState6[1];
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+  var _useState7 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)({}),
+    _useState8 = _slicedToArray(_useState7, 2),
+    initialValues = _useState8[0],
+    setInitialValues = _useState8[1];
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     setInitialValues({
       dataSource: dataSource,
       sourceField: sourceField,
@@ -319,7 +319,7 @@ var DynamicContentPopover = function DynamicContentPopover(_ref) {
   var hasChanges = dataSource !== initialValues.item || sourceField !== initialValues.sourceField || selectPost !== initialValues.selectPost || enableLink !== initialValues.enableLink || linkSource !== initialValues.linkSource || replaceContent !== initialValues.replaceContent || beforeText !== initialValues.beforeText || afterText !== initialValues.afterText || fallbackText !== initialValues.fallbackText || charLength !== initialValues.charLength;
 
   // Get all post types
-  var postTypes = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(function (select) {
+  var postTypes = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_2__.useSelect)(function (select) {
     var types = select('core').getPostTypes({
       per_page: -1
     }) || [];
@@ -333,22 +333,143 @@ var DynamicContentPopover = function DynamicContentPopover(_ref) {
   }, []);
 
   // Fetch posts using useSelect
-  var fetchedPosts = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(function (select) {
-    return select('core').getEntityRecords('postType', postType, {
-      per_page: -1,
-      // Fetch all posts (up to REST API limit of 100)
-      status: 'publish'
-    });
-  }, [postType] // Re-run when postType changes
-  );
+  // const fetchedPosts = useSelect(
+  // 	(select) => {
+  // 		return select('core').getEntityRecords('postType', postType, {
+  // 			per_page: -1, // Fetch all posts (up to REST API limit of 100)
+  // 			status: 'publish',
+  // 		});
+  // 	},
+  // 	[postType] // Re-run when postType changes
+  // );
+  //
+  // // Update posts when fetchedPosts changes
+  // useEffect(() => {
+  // 	if (fetchedPosts !== null) {
+  // 		setPosts(fetchedPosts);
+  // 		setIsLoading(false);
+  // 	}
+  // }, [fetchedPosts]);
 
-  // Update posts when fetchedPosts changes
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
-    if (fetchedPosts !== null) {
-      setPosts(fetchedPosts);
-      setIsLoading(false);
+  // Attribute update functions
+  // const updateDynamicContentAttrs = () => {
+  // 	return {
+  // 	};
+  // };
+
+  var updateBlockContent = function updateBlockContent(text) {
+    // Update both headingText and dynamicContent in a single call
+    updateBlockAttributes(selectedBlockId, {
+      headingText: text,
+      dynamicAttrs: {
+        dataSource: dataSource,
+        selectPost: selectPost,
+        sourceField: sourceField
+      }
+    });
+    // console.log('Updated attrs', attributes);
+  };
+  var updateBlockDynamicContent = function updateBlockDynamicContent() {
+    if (dataSource === 'post_type' && selectPost) {
+
+      // // Determine the REST API endpoint based on post type
+      // const postTypeEndpoint = postType === 'page' ? 'pages' : postType === 'post' ? 'posts' : 'posts';
+      // console.log(postTypeEndpoint);
+      // // First fetch the post/page/custom post type data
+      // apiFetch({
+      // 	path: `/wp/v2/${postTypeEndpoint}/${selectPost}`
+      // }).then(post => {
+      // 	console.log('Fetched post data:', post);
+      //
+      // 	// Handle different field types
+      // 	switch(sourceField) {
+      // 		// Post fields
+      // 		case 'post_title':
+      // 			console.log(post.title?.rendered)
+      // 			updateBlockContent(post.title?.rendered || '');
+      // 			break;
+      // 		case 'post_excerpt':
+      // 			updateBlockContent(post.excerpt?.rendered || '');
+      // 			break;
+      // 		case 'post_date':
+      // 			updateBlockContent(formatDate(post.date));
+      // 			break;
+      // 		case 'post_time':
+      // 			updateBlockContent(formatTime(post.date));
+      // 			break;
+      // 		case 'post_id':
+      // 			updateBlockContent(post.id.toString());
+      // 			break;
+      // 		case 'comments_number':
+      // 			updateBlockContent(post.comment_count?.toString() || '0');
+      // 			break;
+      // 		case 'post_custom_field':
+      // 		case 'post_terms':
+      // 			// Handle these special cases separately
+      // 			break;
+      //
+      // 		// Author fields - need additional API call
+      // 		default:
+      // 			if (sourceField.startsWith('author_')) {
+      // 				return fetchAuthorData(post.author, sourceField);
+      // 			}
+      // 			break;
+      // 	}
+      // }).catch(error => {
+      // 	console.error('Error fetching post data:', error);
+      // });
     }
-  }, [fetchedPosts]);
+  };
+
+  // Helper function to fetch author data
+  var fetchAuthorData = function fetchAuthorData(authorId, field) {
+    return _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
+      path: "/wp/v2/users/".concat(authorId)
+    }).then(function (user) {
+      var content = '';
+      switch (field) {
+        case 'author_name':
+          content = user.name;
+          break;
+        case 'author_first_name':
+          content = user.first_name;
+          break;
+        case 'author_last_name':
+          content = user.last_name;
+          break;
+        case 'author_nickname':
+          content = user.nickname;
+          break;
+        case 'author_bio':
+          content = user.description;
+          break;
+        case 'author_email':
+          content = user.email;
+          break;
+        case 'author_website':
+          content = user.url;
+          break;
+        case 'author_custom_field':
+          // Handle custom fields
+          break;
+      }
+      updateBlockContent(content);
+      return content;
+    })["catch"](function (error) {
+      console.error('Error fetching author data:', error);
+    });
+  };
+  console.log(allPosts);
+
+  // Helper functions for date/time formatting
+  var formatDate = function formatDate(dateString) {
+    var date = new Date(dateString);
+    return date.toLocaleDateString();
+  };
+  var formatTime = function formatTime(dateString) {
+    var date = new Date(dateString);
+    return date.toLocaleTimeString();
+  };
   return /*#__PURE__*/React.createElement("div", {
     className: "frontis-dynamic-content-wrap",
     style: {
@@ -361,7 +482,7 @@ var DynamicContentPopover = function DynamicContentPopover(_ref) {
   }, /*#__PURE__*/React.createElement("label", {
     className: "frontis-dynamic-content-text-control__label",
     htmlFor: "data-source"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Data Source')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Data Source')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     id: "data-source",
     value: dataSource,
     onChange: function onChange(selection) {
@@ -398,58 +519,44 @@ var DynamicContentPopover = function DynamicContentPopover(_ref) {
     className: "frontis-dynamic-content-text-control"
   }, /*#__PURE__*/React.createElement("label", {
     className: "frontis-dynamic-content-text-control__label",
-    htmlFor: "post-type"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Post type')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
-    id: "post-type",
-    value: postType,
-    onChange: function onChange(selection) {
-      return setPostType(selection);
-    },
-    className: "frontis-dynamic-content-popover-posttype"
-  }, /*#__PURE__*/React.createElement("option", {
-    disabled: true,
-    value: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select post type')), postTypes.length > 0 ? postTypes.map(function (postType) {
-    return /*#__PURE__*/React.createElement("option", {
-      key: postType.slug,
-      value: postType.slug
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)(postType.name));
-  }) : /*#__PURE__*/React.createElement("option", {
-    disabled: true,
-    value: "not_found"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Post type not found')))), postType !== '' && /*#__PURE__*/React.createElement("div", {
-    className: "frontis-dynamic-content-text-control"
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "frontis-dynamic-content-text-control__label",
     htmlFor: "select-post"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select post')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select post')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     id: "select-post",
     value: selectPost,
     onChange: function onChange(selection) {
       return setSelectPost(selection);
     },
     className: "frontis-dynamic-content-popover-posttype"
-  }, /*#__PURE__*/React.createElement("optgroup", {
-    label: postType
-  }, isLoading ? /*#__PURE__*/React.createElement("option", null, "Loading...") : posts && posts.length > 0 ? posts.map(function (post) {
-    var _post$title;
-    return /*#__PURE__*/React.createElement("option", {
-      key: post.id,
-      value: post.id
-    }, ((_post$title = post.title) === null || _post$title === void 0 ? void 0 : _post$title.raw) || 'No Title');
-  }) : /*#__PURE__*/React.createElement("option", null, "No posts found"))))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select post')), Object.entries(allPosts).map(function (_ref2) {
+    var _ref3 = _slicedToArray(_ref2, 2),
+      postType = _ref3[0],
+      posts = _ref3[1];
+    return /*#__PURE__*/React.createElement("optgroup", {
+      key: postType,
+      label: postType
+    }, posts.map(function (post) {
+      return /*#__PURE__*/React.createElement("option", {
+        key: post.ID,
+        value: post.ID
+      }, post.title || (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('No Title'));
+    }));
+  })))), /*#__PURE__*/React.createElement("div", {
     className: "frontis-dynamic-content-text-control"
   }, /*#__PURE__*/React.createElement("label", {
     className: "frontis-dynamic-content-text-control__label",
     htmlFor: "source-field"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Source field')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Source field')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     id: "source-field",
     value: sourceField,
     onChange: function onChange(selection) {
       return setSourceField(selection);
     },
     className: "frontis-dynamic-content-popover-posttype"
-  }, /*#__PURE__*/React.createElement("optgroup", {
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select source field')), /*#__PURE__*/React.createElement("optgroup", {
     label: "Post"
   }, /*#__PURE__*/React.createElement("option", {
     value: "post_title"
@@ -494,7 +601,7 @@ var DynamicContentPopover = function DynamicContentPopover(_ref) {
   }, /*#__PURE__*/React.createElement("label", {
     className: "frontis-dynamic-content-text-control__label",
     htmlFor: "data-source"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable link')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Enable link')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     checked: enableLink,
     onChange: function onChange(value) {
       return setEnableLink(value);
@@ -505,7 +612,7 @@ var DynamicContentPopover = function DynamicContentPopover(_ref) {
   }, /*#__PURE__*/React.createElement("label", {
     className: "frontis-dynamic-content-text-control__label",
     htmlFor: "link-source"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Link Source')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Link Source')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     id: "link-source",
     value: linkSource,
     onChange: function onChange(selection) {
@@ -539,13 +646,13 @@ var DynamicContentPopover = function DynamicContentPopover(_ref) {
   }, /*#__PURE__*/React.createElement("label", {
     className: "frontis-dynamic-content-text-control__label",
     htmlFor: "replace-full"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Replace Full Content')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Replace Full Content')), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
     checked: replaceContent,
     onChange: function onChange(value) {
       return setReplaceContent(value);
     },
     className: "frontis-dynamic-content-toggle"
-  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     className: "frontis-dynamic-content-advance",
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Advanced'),
     initialOpen: false
@@ -554,7 +661,7 @@ var DynamicContentPopover = function DynamicContentPopover(_ref) {
     style: {
       marginTop: '30px'
     }
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Before'),
     value: beforeText,
     onChange: function onChange(value) {
@@ -563,7 +670,7 @@ var DynamicContentPopover = function DynamicContentPopover(_ref) {
     className: ""
   })), /*#__PURE__*/React.createElement("div", {
     className: "components-base-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('After'),
     value: afterText,
     onChange: function onChange(value) {
@@ -572,7 +679,7 @@ var DynamicContentPopover = function DynamicContentPopover(_ref) {
     className: ""
   })), /*#__PURE__*/React.createElement("div", {
     className: "components-base-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Fallback'),
     value: fallbackText,
     onChange: function onChange(value) {
@@ -582,7 +689,7 @@ var DynamicContentPopover = function DynamicContentPopover(_ref) {
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show this text if no dynamic data is found.')
   })), /*#__PURE__*/React.createElement("div", {
     className: "components-base-control"
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Character Length'),
     type: "number",
     value: charLength,
@@ -596,14 +703,24 @@ var DynamicContentPopover = function DynamicContentPopover(_ref) {
       textAlign: 'center',
       marginTop: '20px'
     }
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
     variant: "primary",
     onClick: function onClick() {
-      return alert('Applied!');
+      return updateBlockDynamicContent();
     }
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Apply')))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DynamicContentPopover);
+
+/***/ }),
+
+/***/ "@wordpress/api-fetch":
+/*!**********************************!*\
+  !*** external ["wp","apiFetch"] ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["apiFetch"];
 
 /***/ }),
 

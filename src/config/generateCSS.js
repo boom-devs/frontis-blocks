@@ -2,7 +2,9 @@ function generateCSS(
 	selectorsObj,
 	id,
 	isResponsive = false, // eslint-disable-line no-unused-vars
-	responsiveType = '' // eslint-disable-line no-unused-vars
+	responsiveType = '',
+	isOverride = false,
+	containerWidthAttrs = [],
 ) {
 	let gen_styling_css = '';
 
@@ -32,15 +34,23 @@ function generateCSS(
 			}
 		}
 
+		let containerWidthTablet = FrontisBlocksData.tablet_breakpoint;
+		let containerWidthMobile = FrontisBlocksData.mobile_breakpoint;
+
+		if(isOverride) {
+			containerWidthTablet = containerWidthAttrs['tablet'];
+			containerWidthMobile = containerWidthAttrs['mobile'];
+		}
+
 		if ( css.length !== 0 ) {
 			if ( responsiveType === 'tablet' ) {
-				gen_styling_css += '@media only screen and (max-width: ' + FrontisBlocksData.tablet_breakpoint + 'px) {';
+				gen_styling_css += '@media only screen and (max-width: ' + containerWidthTablet + 'px) {';
 				gen_styling_css += id;
 				gen_styling_css += selector + '{';
 				gen_styling_css += css;
 				gen_styling_css += '}}';
 			} else if ( responsiveType === 'mobile' ) {
-				gen_styling_css += '@media only screen and (max-width: ' + FrontisBlocksData.mobile_breakpoint + 'px) {';
+				gen_styling_css += '@media only screen and (max-width: ' + containerWidthMobile + 'px) {';
 				gen_styling_css += id;
 				gen_styling_css += selector + '{';
 				gen_styling_css += css;
