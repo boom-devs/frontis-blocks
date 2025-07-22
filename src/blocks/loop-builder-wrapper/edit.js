@@ -99,6 +99,15 @@ export default function PostTemplateEdit( {
 													  parents,
 													  pages,
 													  format,
+													  selectedAuthorSwitcher,
+													  selectedAuthor,
+													  deSelectedAuthor,
+													  selectedCatSwitcher,
+													  selectedCat,
+													  deSelectedCat,
+													  selectedTagSwitcher,
+													  selectedTag,
+													  deSelectedTag,
 													  // We gather extra query args to pass to the REST API call.
 													  // This way extenders of Query Loop can add their own query args,
 													  // and have accurate previews in the editor.
@@ -169,9 +178,34 @@ export default function PostTemplateEdit( {
 			if ( perPage ) {
 				query.per_page = perPage;
 			}
-			if ( author ) {
-				query.author = author;
+			// if ( author ) {
+			// 	query.author = author;
+			// }
+
+			// NEW: Handle author inclusion/exclusion
+			if ( selectedAuthorSwitcher === 'include' && selectedAuthor?.length ) {
+				query.author = selectedAuthor.join(',');
 			}
+			if ( selectedAuthorSwitcher === 'exclude' && deSelectedAuthor?.length ) {
+				query.author_exclude = deSelectedAuthor.join(',');
+			}
+
+			// Category filter
+			if ( selectedCatSwitcher === 'include' && selectedCat?.length ) {
+				query.categories = selectedCat.join(',');
+			}
+			if ( selectedCatSwitcher === 'exclude' && deSelectedCat?.length ) {
+				query.categories_exclude = deSelectedCat.join(',');
+			}
+
+			// Tag filter
+			if ( selectedTagSwitcher === 'include' && selectedTag?.length ) {
+				query.tags = selectedTag.join(',');
+			}
+			if ( selectedTagSwitcher === 'exclude' && deSelectedTag?.length ) {
+				query.tags_exclude = deSelectedTag.join(',');
+			}
+
 			if ( search ) {
 				query.search = search;
 			}
@@ -248,6 +282,15 @@ export default function PostTemplateEdit( {
 			taxQuery,
 			parents,
 			format,
+			selectedAuthorSwitcher,
+			selectedAuthor,
+			deSelectedAuthor,
+			selectedCatSwitcher,
+			selectedCat,
+			deSelectedCat,
+			selectedTagSwitcher,
+			selectedTag,
+			deSelectedTag,
 			restQueryArgs,
 			previewPostType,
 		]
