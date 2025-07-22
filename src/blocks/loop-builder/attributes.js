@@ -20,6 +20,10 @@ const attributes = {
 		type: "number",
 		default: 6
 	},
+	postOffset : {
+		type: "number",
+		default: 0
+	},
 	postSwitcher: {
 		type: "string",
 		default: "grid"
