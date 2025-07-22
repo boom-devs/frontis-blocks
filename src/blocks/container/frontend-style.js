@@ -165,6 +165,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		globalFullWidthContentBoxedWidth,
 		fullWidthContentBoxedWidth,
 		fullWidthContentBoxedWidthUnits,
+		fullWidthContentBoxedWidthHasEdited,
 		customWidth,
 		minHeight,
 		minHeightUnits,
@@ -1589,18 +1590,22 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		tablet_selectors,
 		`${base_selector}`,
 		true,
-		'tablet'
+		'tablet',
+		fullWidthContentBoxedWidthHasEdited,
+		fullWidthContentBoxedWidth.Tablet
 	);
 
-	styling_css += generateCSS(widthSelectorsTablet, ' ', true, 'tablet');
+	styling_css += generateCSS(widthSelectorsTablet, ' ', true, 'tablet', fullWidthContentBoxedWidthHasEdited, fullWidthContentBoxedWidth.Tablet);
 	styling_css += generateCSS(
 		mobile_selectors,
 		`${base_selector}`,
 		true,
-		'mobile'
+		'mobile',
+		fullWidthContentBoxedWidthHasEdited,
+		fullWidthContentBoxedWidth.Mobile
 	);
 
-	styling_css += generateCSS(widthSelectorsMobile, ' ', true, 'mobile');
+	styling_css += generateCSS(widthSelectorsMobile, ' ', true, 'mobile', fullWidthContentBoxedWidthHasEdited, fullWidthContentBoxedWidth.Mobile);
 	styling_css += containerGlobalCustomCSSValue;
 	return styling_css;
 }
