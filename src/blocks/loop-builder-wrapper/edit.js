@@ -22,18 +22,10 @@ import { store as coreStore } from '@wordpress/core-data';
 import { list, grid } from '@wordpress/icons';
 
 const TEMPLATE = [
-	[ 'frontis-blocks/advanced-heading' ],
-];
-
-// const TEMPLATE = [
-// 	[
-// 	  'frontis-blocks/container',
-// 	  {},
-// 	  [
-// 		[ 'frontis-blocks/advanced-heading' ]
-// 	  ]
-// 	]
-//   ];
+		[ 'core/post-title' ],
+		[ 'core/post-date' ],
+		[ 'core/post-excerpt' ],
+  ];
 
 function PostTemplateInnerBlocks( { classList } ) {
 	const innerBlocksProps = useInnerBlocksProps(
@@ -56,6 +48,9 @@ function PostTemplateBlockPreview( {
 			className: clsx( 'wp-block-post', classList ),
 		},
 	} );
+
+	console.log("blockPreviewProps blockPreviewProps")
+	console.log(blockPreviewProps)
 
 	const handleOnClick = () => {
 		setActiveBlockContextId( blockContextId );
