@@ -3,7 +3,7 @@
  */
 import { useSelect, useDispatch } from '@wordpress/data';
 import { useInstanceId } from '@wordpress/compose';
-import { useEffect, useCallback } from '@wordpress/element';
+import { useEffect, useCallback , useState} from '@wordpress/element';
 import {
 	BlockControls,
 	InspectorControls,
@@ -139,10 +139,16 @@ export default function QueryContent( {
 	] );
 
 	useEffect(() => {
-        query.postType = postType;
-		query.perPage = postPerPage;
-		query.orderBy = orderBy;
-		query.order = sortOrder;
+		setAttributes({
+			query: {
+				...query,
+				perPage: postPerPage,
+				order: sortOrder,
+				orderBy: orderBy,
+				postType: postType,
+			}
+		})
+		
     }, [postType, postPerPage, orderBy, sortOrder]);
 
 	return (
