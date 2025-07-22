@@ -60,6 +60,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		blockStyle,
 		postType,
 		postPerPage,
+		postOffset,
 		selectedCatSwitcher,
 		selectedCat,
 		deSelectedCat,
@@ -828,7 +829,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     useEffect(() => {
         setAttributes({ postPerPage: postPerPage === 0 ? undefined : postPerPage });
-    }, [postPerPage]);
+        setAttributes({ postOffset: postOffset === 0 ? undefined : postOffset });
+    }, [postPerPage, postOffset]);
 
 
     /** Start post type */
@@ -1063,6 +1065,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         max={100}
                         step={1}
                         resetFallbackValue={6}
+                    />
+                    <RangeControl
+                        label={__("Posts offset ", "frontis-blocks")}
+                        value={postOffset} 
+                        onChange={(value) => setAttributes({ postOffset: value })}
+                        min={0}
+                        max={100}
+                        step={1}
+                        resetFallbackValue={0}
                     />
                     <BaseControl
                         label={__("Sort Order", "frontis-blocks")}

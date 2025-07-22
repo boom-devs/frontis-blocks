@@ -50,6 +50,7 @@ export default function QueryContent( {
 		query: { inherit } = {},
 		postType,
 		postPerPage,
+		postOffset,
 		orderBy,
         sortOrder,
 	} = attributes;
@@ -146,10 +147,11 @@ export default function QueryContent( {
 				order: sortOrder,
 				orderBy: orderBy,
 				postType: postType,
+				offset: postOffset,
 			}
 		})
 		
-    }, [postType, postPerPage, orderBy, sortOrder]);
+    }, [postType, postPerPage, postOffset, orderBy, sortOrder]);
 
 	return (
 		<>
