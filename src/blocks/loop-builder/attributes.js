@@ -36,7 +36,7 @@ const attributes = {
 	query: {
 		type: "object",
 		default: {
-			perPage: null,
+			perPage: 6,
 			pages: 0,
 			offset: 0,
 			postType: "post",
@@ -49,7 +49,52 @@ const attributes = {
 			inherit: true,
 			taxQuery: null,
 			parents: [],
-			format: []
+			format: [],
+
+			/** Start author */
+			selectedAuthorSwitcher: {
+				type: "string",
+				default: "include"
+			},
+			selectedAuthor: {
+				type: "array",
+				default: []
+			},
+			deSelectedAuthor: {
+				type: "array",
+				default: []
+			},
+			/** End author */
+
+			/** Start category */
+			selectedCatSwitcher: {
+				type: "string",
+				default: "include"
+			},
+			selectedCat: {
+				type: "array",
+				default: []
+			},
+			deSelectedCat: {
+				type: "array",
+				default: []
+			},
+			/** End category */
+
+			/** Start tag */
+			selectedTagSwitcher: {
+				type: "string",
+				default: "include"
+			},
+			selectedTag: {
+				type: "array",
+				default: []
+			},
+			deSelectedTag: {
+				type: "array",
+				default: []
+			},
+			/** End tag */
 		}
 	},
 	tagName: {
@@ -64,6 +109,21 @@ const attributes = {
 		default: false
 	},
 	/** End Core Query */
+
+	/** Start author */
+	selectedAuthorSwitcher: {
+		type: "string",
+		default: "include"
+	},
+	selectedAuthor: {
+		type: "array",
+		default: []
+	},
+	deSelectedAuthor: {
+		type: "array",
+		default: []
+	},
+	/** End author */
 
 	/** Start category */
 	selectedCatSwitcher: {
@@ -94,21 +154,6 @@ const attributes = {
 		default: []
 	},
 	/** End tag */
-
-	/** Start author */
-	selectedAuthorSwitcher: {
-		type: "string",
-		default: "include"
-	},
-	selectedAuthor: {
-		type: "array",
-		default: []
-	},
-	deSelectedAuthor: {
-		type: "array",
-		default: []
-	},
-	/** End author */
 
 	placeholders: {
 		type: "array",

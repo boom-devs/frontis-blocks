@@ -53,6 +53,19 @@ export default function QueryContent( {
 		postOffset,
 		orderBy,
         sortOrder,
+
+		selectedCatSwitcher,
+		selectedCat,
+		deSelectedCat,
+
+		selectedTagSwitcher,
+		selectedTag,
+		deSelectedTag,
+
+		selectedAuthorSwitcher,
+		selectedAuthor,
+		deSelectedAuthor,
+
 	} = attributes;
 
 	const { templateSlug } = context;
@@ -148,10 +161,38 @@ export default function QueryContent( {
 				orderBy: orderBy,
 				postType: postType,
 				offset: postOffset,
+
+				selectedCatSwitcher: selectedCatSwitcher,
+				selectedCat: selectedCat,
+				deSelectedCat: deSelectedCat,
+
+				selectedTagSwitcher: selectedTagSwitcher,
+				selectedTag: selectedTag,
+				deSelectedTag: deSelectedTag,
+
+				selectedAuthorSwitcher: selectedAuthorSwitcher,
+				selectedAuthor: selectedAuthor,
+				deSelectedAuthor: deSelectedAuthor,
+
 			}
 		})
 		
-    }, [postType, postPerPage, postOffset, orderBy, sortOrder]);
+    }, [
+		postType,
+		postPerPage,
+		postOffset,
+		orderBy,
+		sortOrder,
+		selectedCatSwitcher,
+		selectedCat,
+		deSelectedCat,
+		selectedTagSwitcher,
+		selectedTag,
+		deSelectedTag,
+		selectedAuthorSwitcher,
+		selectedAuthor,
+		deSelectedAuthor,
+	]);
 
 	return (
 		<>
