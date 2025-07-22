@@ -3370,77 +3370,6 @@ const attributes = {
         }
     },
 
-	/** Start Filter By Taxonomy */
-	showFilterByTaxonomy: {
-		type: "boolean",
-		default: false,
-	},
-	filterSelectedTaxonomy: {
-		type: "string",
-		default: "category",
-	},
-	filterSelectedCat: {
-		type: "array",
-		default: []
-	},
-	filterSelectedCatLabel: {
-		type: "array",
-		default: []
-	},
-	filterSelectedTaxonomyCount: {
-		type: "array",
-		default: []
-	},
-	filterSelectedTag: {
-		type: "array",
-		default: []
-	},
-	filterSelectedTagLabel: {
-		type: "array",
-		default: []
-	},
-	filterSelectedTagCount: {
-		type: "array",
-		default: []
-	},
-	filterAllPostsCount: {
-		type: "array",
-		default: []
-	},
-	filerselectedCountSwitcher: {
-		type: "boolean",
-		default: false
-	},
-	/** End Filter By Taxonomy */
-
-	/** Start Read More */
-	readMoreText: {
-		type: "string",
-		default: "Read More"
-	},
-	readMoreIconAlign: {
-		type: "string",
-		default: "none"
-	},
-	readMoreIcon: {
-		type: "string",
-		default: "arrow-right"
-	},
-	readMoreIconImageUrl: {
-		type: "string",
-		default: ""
-	},
-	readMoreIconImageAlt: {
-		type: "string",
-		default: ""
-	},	
-	readMoreIconImageID: {
-		type: "string",
-		default: ""
-	},
-	
-	/** End Read More */
-
 	/** Start Button Text Style */
 	buttonWidth: {
 		type: 'object',
@@ -3994,14 +3923,6 @@ const attributes = {
 	/** End Icon Styles */
 
 	/** Start Post URL Settings */
-	customPermalinkSwitcher: {
-		type: "boolean",
-		default: false,
-	},
-	customPermalink: {
-		type: "string",
-		default: "",
-	},
 	thumbnailLinkSwitcher: {
 		type: "boolean",
 		default: true,
