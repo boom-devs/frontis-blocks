@@ -36,7 +36,7 @@ const attributes = {
 	query: {
 		type: "object",
 		default: {
-			perPage: null,
+			perPage: 6,
 			pages: 0,
 			offset: 0,
 			postType: "post",
@@ -49,7 +49,52 @@ const attributes = {
 			inherit: true,
 			taxQuery: null,
 			parents: [],
-			format: []
+			format: [],
+
+			/** Start author */
+			selectedAuthorSwitcher: {
+				type: "string",
+				default: "include"
+			},
+			selectedAuthor: {
+				type: "array",
+				default: []
+			},
+			deSelectedAuthor: {
+				type: "array",
+				default: []
+			},
+			/** End author */
+
+			/** Start category */
+			selectedCatSwitcher: {
+				type: "string",
+				default: "include"
+			},
+			selectedCat: {
+				type: "array",
+				default: []
+			},
+			deSelectedCat: {
+				type: "array",
+				default: []
+			},
+			/** End category */
+
+			/** Start tag */
+			selectedTagSwitcher: {
+				type: "string",
+				default: "include"
+			},
+			selectedTag: {
+				type: "array",
+				default: []
+			},
+			deSelectedTag: {
+				type: "array",
+				default: []
+			},
+			/** End tag */
 		}
 	},
 	tagName: {
@@ -64,6 +109,21 @@ const attributes = {
 		default: false
 	},
 	/** End Core Query */
+
+	/** Start author */
+	selectedAuthorSwitcher: {
+		type: "string",
+		default: "include"
+	},
+	selectedAuthor: {
+		type: "array",
+		default: []
+	},
+	deSelectedAuthor: {
+		type: "array",
+		default: []
+	},
+	/** End author */
 
 	/** Start category */
 	selectedCatSwitcher: {
@@ -94,21 +154,6 @@ const attributes = {
 		default: []
 	},
 	/** End tag */
-
-	/** Start author */
-	selectedAuthorSwitcher: {
-		type: "string",
-		default: "include"
-	},
-	selectedAuthor: {
-		type: "array",
-		default: []
-	},
-	deSelectedAuthor: {
-		type: "array",
-		default: []
-	},
-	/** End author */
 
 	placeholders: {
 		type: "array",
@@ -3325,77 +3370,6 @@ const attributes = {
         }
     },
 
-	/** Start Filter By Taxonomy */
-	showFilterByTaxonomy: {
-		type: "boolean",
-		default: false,
-	},
-	filterSelectedTaxonomy: {
-		type: "string",
-		default: "category",
-	},
-	filterSelectedCat: {
-		type: "array",
-		default: []
-	},
-	filterSelectedCatLabel: {
-		type: "array",
-		default: []
-	},
-	filterSelectedTaxonomyCount: {
-		type: "array",
-		default: []
-	},
-	filterSelectedTag: {
-		type: "array",
-		default: []
-	},
-	filterSelectedTagLabel: {
-		type: "array",
-		default: []
-	},
-	filterSelectedTagCount: {
-		type: "array",
-		default: []
-	},
-	filterAllPostsCount: {
-		type: "array",
-		default: []
-	},
-	filerselectedCountSwitcher: {
-		type: "boolean",
-		default: false
-	},
-	/** End Filter By Taxonomy */
-
-	/** Start Read More */
-	readMoreText: {
-		type: "string",
-		default: "Read More"
-	},
-	readMoreIconAlign: {
-		type: "string",
-		default: "none"
-	},
-	readMoreIcon: {
-		type: "string",
-		default: "arrow-right"
-	},
-	readMoreIconImageUrl: {
-		type: "string",
-		default: ""
-	},
-	readMoreIconImageAlt: {
-		type: "string",
-		default: ""
-	},	
-	readMoreIconImageID: {
-		type: "string",
-		default: ""
-	},
-	
-	/** End Read More */
-
 	/** Start Button Text Style */
 	buttonWidth: {
 		type: 'object',
@@ -3949,14 +3923,6 @@ const attributes = {
 	/** End Icon Styles */
 
 	/** Start Post URL Settings */
-	customPermalinkSwitcher: {
-		type: "boolean",
-		default: false,
-	},
-	customPermalink: {
-		type: "string",
-		default: "",
-	},
 	thumbnailLinkSwitcher: {
 		type: "boolean",
 		default: true,
