@@ -154,6 +154,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		globalFullWidthContentBoxedWidth,
 		fullWidthContentBoxedWidth,
 		fullWidthContentBoxedWidthUnits,
+		fullWidthContentBoxedWidthHasEdited,
 		customWidth,
 		minHeight,
 		minHeightUnits,
@@ -1503,20 +1504,24 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			tablet_selectors,
 			`${ base_selector }`,
 			true,
-			'tablet'
+			'tablet',
+			fullWidthContentBoxedWidthHasEdited,
+			fullWidthContentBoxedWidth.Tablet
 		);
 
-		styling_css += generateCSS( widthSelectorsTablet, '.editor-styles-wrapper ', true, 'tablet' );
+		styling_css += generateCSS( widthSelectorsTablet, '.editor-styles-wrapper ', true, 'tablet', fullWidthContentBoxedWidthHasEdited, fullWidthContentBoxedWidth.Tablet );
 
 		if( 'mobile' === previewType || gbsSelector ){
 			styling_css += generateCSS(
 				mobile_selectors,
 				`${ base_selector }`,
 				true,
-				'mobile'
+				'mobile',
+				fullWidthContentBoxedWidthHasEdited,
+				fullWidthContentBoxedWidth.Mobile
 			);
 
-			styling_css += generateCSS( widthSelectorsMobile, '.editor-styles-wrapper ', true, 'mobile' );
+			styling_css += generateCSS( widthSelectorsMobile, '.editor-styles-wrapper ', true, 'mobile', fullWidthContentBoxedWidthHasEdited, fullWidthContentBoxedWidth.Mobile );
 
 		}
 	}

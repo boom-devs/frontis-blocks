@@ -423,13 +423,3 @@
 		rotate: -90deg;
 	}
 }
-
-.width_handler {
-	position: absolute;
-	left: 0;
-	z-index: 9999;
-	width: 20px;
-	background: red;
-	font-size: 12px;
-	cursor: pointer;
-}
