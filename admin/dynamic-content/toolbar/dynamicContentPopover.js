@@ -3,6 +3,7 @@ import apiFetch from '@wordpress/api-fetch';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { useEffect, useState } from '@wordpress/element';
 import { SelectControl, TextControl, ToggleControl, PanelBody, Button } from '@wordpress/components';
+import {toast} from "react-toastify";
 
 const DynamicContentPopover = ({ dataSource, setDataSource, sourceField, setSourceField, selectPost, setSelectPost, enableLink, setEnableLink, linkSource, setLinkSource, replaceContent, setReplaceContent, beforeText, setBeforeText, afterText, setAfterText, fallbackText, setFallbackText, charLength, setCharLength }) => {
 	const selectedBlockId = useSelect((select) => {
@@ -118,8 +119,88 @@ const DynamicContentPopover = ({ dataSource, setDataSource, sourceField, setSour
 
 	const updateBlockDynamicContent = () => {
 		if (dataSource === 'post_type' && selectPost) {
+		const { ajaxUrl } = window.frontisBlocksAdmin;
 
+		jQuery.ajax({
+			url: ajaxUrl,
+			type: 'POST',
+			data: {
+				action: 'fb_get_post',
+				security: frontisBlocksAdmin.bolck_nonce,
+				post_id: selectPost,
+				data_source: dataSource,
+				source_field: sourceField
+			},
+			success: function(response) {
+				if (response.success) {
+					if(response.data) {
+						if (response.data && response.data.post_title) {
+							updateBlockContent(response.data.post_title);
+						}
 
+						if (response.data && response.data.post_excerpt) {
+							updateBlockContent(response.data.post_excerpt);
+						}
+
+						if (response.data && response.data.post_date) {
+							updateBlockContent(response.data.post_date);
+						}
+
+						if (response.data && response.data.post_time) {
+							updateBlockContent(response.data.post_time);
+						}
+
+						if (response.data && response.data.author_name) {
+							updateBlockContent(response.data.author_name);
+						}
+
+						if (response.data && response.data.author_first_name) {
+							updateBlockContent(response.data.author_first_name);
+						}
+
+						if (response.data && response.data.author_last_name) {
+							updateBlockContent(response.data.author_last_name);
+						}
+
+						if (response.data && response.data.author_nickname) {
+							updateBlockContent(response.data.author_nickname);
+						}
+
+						if (response.data && response.data.author_bio) {
+							updateBlockContent(response.data.author_bio);
+						}
+
+						if (response.data && response.data.author_email) {
+							updateBlockContent(response.data.author_email);
+						}
+
+						if (response.data && response.data.author_website) {
+							updateBlockContent(response.data.author_website);
+						}
+					}
+					// setOptions(prevOptions => ({ ...prevOptions, ...response.data }));
+				} else {
+					// toast.error(__(`Failed to fetch options: ${response.data?.message || 'Unknown error'}`, 'frontis-blocks'), {
+					// 	position: "top-right",
+					// 	autoClose: 5000,
+					// 	hideProgressBar: false,
+					// 	closeOnClick: true,
+					// 	pauseOnHover: true,
+					// 	draggable: true,
+					// });
+				}
+			},
+			error: function(xhr, status, error) {
+				// toast.error(__(`Failed to fetch options: ${status} - ${error}`, 'frontis-blocks'), {
+				// 	position: "top-right",
+				// 	autoClose: 5000,
+				// 	hideProgressBar: false,
+				// 	closeOnClick: true,
+				// 	pauseOnHover: true,
+				// 	draggable: true,
+				// });
+			}
+		});
 
 
 			// // Determine the REST API endpoint based on post type

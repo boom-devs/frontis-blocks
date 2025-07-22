@@ -574,4 +574,18 @@ class Helper
 //		var_dump($block_data);
 
 	}
+
+	public static function get_single_field($post_id, $field) {
+		global $wpdb;
+		$query = $wpdb->prepare(
+			"SELECT $field FROM $wpdb->posts WHERE ID = %d",
+			$post_id
+		);
+
+		return $wpdb->get_var($query) ?: '';
+	}
+
+	public static function json_success($data) {
+		wp_send_json_success($data, 200 );
+	}
 }

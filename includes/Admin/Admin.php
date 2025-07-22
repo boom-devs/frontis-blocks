@@ -112,6 +112,7 @@ class Admin {
 			'google_fonts' => $google_fonts,
             'siteName' => get_bloginfo('name'),
 			'all_posts' => Helper::get_all_posts(),
+			'bolck_nonce' => wp_create_nonce('fb_block_nonce'),
 		);
 
 		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){
@@ -1312,7 +1313,7 @@ class Admin {
         wp_enqueue_script('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.js', $script_asset['dependencies'], '1.0.0', true);
         wp_localize_script('frontis-blocks-admin-sidebar', 'frontisBlocksAdminSidebar', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('fb_sidebar_nonce'),
+			'nonce' => wp_create_nonce('fb_sidebar_nonce'),
         ));
 
         wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.css', array(), '1.0.0');
