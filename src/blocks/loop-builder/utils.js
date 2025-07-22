@@ -255,7 +255,7 @@ export function useAllowedControls( attributes ) {
 	return useSelect(
 		( select ) =>
 			select( blocksStore ).getActiveBlockVariation(
-				'core/query',
+				'frontis-blocks/loop-builder',
 				attributes
 			)?.allowedControls,
 
@@ -297,7 +297,7 @@ export const getTransformedBlocksFromPattern = (
 	const blocksQueue = [ ...clonedBlocks ];
 	while ( blocksQueue.length > 0 ) {
 		const block = blocksQueue.shift();
-		if ( block.name === 'core/query' ) {
+		if ( block.name === 'frontis-blocks/loop-builder' ) {
 			block.attributes.query = {
 				...block.attributes.query,
 				postType,
@@ -334,10 +334,10 @@ export function useBlockNameForPatterns( clientId, attributes ) {
 		( select ) => {
 			const activeVariationName = select(
 				blocksStore
-			).getActiveBlockVariation( 'core/query', attributes )?.name;
+			).getActiveBlockVariation( 'frontis-blocks/loop-builder', attributes )?.name;
 
 			if ( ! activeVariationName ) {
-				return 'core/query';
+				return 'frontis-blocks/loop-builder';
 			}
 
 			const { getBlockRootClientId, getPatternsByBlockTypes } =
@@ -345,13 +345,13 @@ export function useBlockNameForPatterns( clientId, attributes ) {
 
 			const rootClientId = getBlockRootClientId( clientId );
 			const activePatterns = getPatternsByBlockTypes(
-				`core/query/${ activeVariationName }`,
+				`frontis-blocks/loop-builder/${ activeVariationName }`,
 				rootClientId
 			);
 
 			return activePatterns.length > 0
-				? `core/query/${ activeVariationName }`
-				: 'core/query';
+				? `frontis-blocks/loop-builder/${ activeVariationName }`
+				: 'frontis-blocks/loop-builder';
 		},
 		[ clientId, attributes ]
 	);
@@ -387,17 +387,15 @@ export function useScopedBlockVariations( attributes ) {
 				select( blocksStore );
 			return {
 				activeVariationName: getActiveBlockVariation(
-					'core/query',
+					'frontis-blocks/loop-builder',
 					attributes
 				)?.name,
-				blockVariations: getBlockVariations( 'core/query', 'block' ),
+				blockVariations: getBlockVariations( 'frontis-blocks/loop-builder', 'block' ),
 			};
 		},
 		[ attributes ]
 	);
 
-	console.log("Inside utils")
-	console.log(blockVariations)
 	const variations = useMemo( () => {
 		// Filter out the variations that have defined a `namespace` attribute,
 		// which means they are 'connected' to specific variations of the block.

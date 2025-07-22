@@ -34,7 +34,11 @@ import Inspector from "../inspector";
 
 const DEFAULTS_POSTS_PER_PAGE = 3;
 
-const TEMPLATE = [ [ 'frontis-blocks/loop-builder-wrapper' ] ];
+const TEMPLATE =	[
+	'frontis-blocks/loop-builder-wrapper',
+	{},
+	['frontis-blocks/container'],
+];
 export default function QueryContent( {
 	attributes,
 	setAttributes,
@@ -55,15 +59,17 @@ export default function QueryContent( {
         sortOrder,
 	} = attributes;
 
-	const { templateSlug } = context;
-	const { isSingular } = getQueryContextFromTemplate( templateSlug );
-	const { __unstableMarkNextChangeAsNotPersistent } =
-		useDispatch( blockEditorStore );
+	const { __unstableMarkNextChangeAsNotPersistent } = useDispatch( blockEditorStore );
 	const instanceId = useInstanceId( QueryContent );
+
 	const blockProps = useBlockProps();
+
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		template: TEMPLATE,
 	} );
+
+	console.log("innerBlocksProps innerBlocksProps")
+	console.log(innerBlocksProps)
 	const { postsPerPage } = useSelect( ( select ) => {
 		const { getSettings } = select( blockEditorStore );
 		const { getEntityRecord, getEntityRecordEdits, canUser } =
@@ -88,15 +94,7 @@ export default function QueryContent( {
 				DEFAULTS_POSTS_PER_PAGE,
 		};
 	}, [] );
-	// There are some effects running where some initialization logic is
-	// happening and setting some values to some attributes (ex. queryId).
-	// These updates can cause an `undo trap` where undoing will result in
-	// resetting again, so we need to mark these changes as not persistent
-	// with `__unstableMarkNextChangeAsNotPersistent`.
 
-	// Changes in query property (which is an object) need to be in the same callback,
-	// because updates are batched after the render and changes in different query properties
-	// would cause to override previous wanted changes.
 	const updateQuery = useCallback(
 		( newQuery ) =>
 			setAttributes( ( prevAttributes ) => ( {
@@ -150,7 +148,7 @@ export default function QueryContent( {
 				offset: postOffset,
 			}
 		})
-		
+
     }, [postType, postPerPage, postOffset, orderBy, sortOrder]);
 
 	return (
@@ -165,39 +163,6 @@ export default function QueryContent( {
 				setAttributes={ setAttributes }
 				clientId={ clientId }
 			/>
-			{/* <InspectorControls>
-				<QueryInspectorControls
-					name={ name }
-					attributes={ attributes }
-					setQuery={ updateQuery }
-					setAttributes={ setAttributes }
-					clientId={ clientId }
-					isSingular={ isSingular }
-				/>
-			</InspectorControls> */}
-			{/* <BlockControls>
-				<QueryToolbar attributes={ attributes } clientId={ clientId } />
-			</BlockControls> */}
-			{/* <InspectorControls group="advanced"> */}
-				{/*<HTMLElementControl*/}
-				{/*	tagName={ TagName }*/}
-				{/*	onChange={ ( value ) =>*/}
-				{/*		setAttributes( { tagName: value } )*/}
-				{/*	}*/}
-				{/*	clientId={ clientId }*/}
-				{/*	options={ [*/}
-				{/*		{ label: __( 'Default (<div>)' ), value: 'div' },*/}
-				{/*		{ label: '<main>', value: 'main' },*/}
-				{/*		{ label: '<section>', value: 'section' },*/}
-				{/*		{ label: '<aside>', value: 'aside' },*/}
-				{/*	] }*/}
-				{/*/>*/}
-				{/* <EnhancedPaginationControl
-					enhancedPagination={ enhancedPagination }
-					setAttributes={ setAttributes }
-					clientId={ clientId }
-				/> */}
-			{/* </InspectorControls> */}
 			<TagName { ...innerBlocksProps } />
 		</>
 	);

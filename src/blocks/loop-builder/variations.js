@@ -23,7 +23,15 @@ const variations = [
 			[
 				'frontis-blocks/loop-builder-wrapper',
 				{},
-				[ [ 'core/post-title' ] ],
+				[
+					[
+						'frontis-blocks/container',
+						{
+							variationSelected: true, // এইটা add করুন
+						},
+						[ [ 'frontis-blocks/advanced-heading' ] ],
+					],
+				],
 			]
 		],
 		scope: [ 'block' ],
@@ -37,7 +45,15 @@ const variations = [
 			[
 				'frontis-blocks/loop-builder-wrapper',
 				{},
-				[ [ 'core/post-title' ], [ 'core/post-excerpt' ] ],
+				[
+					[
+						'frontis-blocks/container',
+						{
+							variationSelected: true, // এইটা add করুন
+						},
+						[ [ 'core/post-title' ], [ 'core/post-excerpt' ] ],
+					],
+				],
 			]
 		],
 		scope: [ 'block' ],
@@ -52,9 +68,17 @@ const variations = [
 				'frontis-blocks/loop-builder-wrapper',
 				{},
 				[
-					[ 'core/post-title' ],
-					[ 'core/post-date' ],
-					[ 'core/post-excerpt' ],
+					[
+						'frontis-blocks/container',
+						{
+							variationSelected: true, // এইটা add করুন
+						},
+						[
+							[ 'core/post-title' ],
+							[ 'core/post-date' ],
+							[ 'core/post-excerpt' ],
+						],
+					],
 				],
 			]
 		],
@@ -70,9 +94,17 @@ const variations = [
 				'frontis-blocks/loop-builder-wrapper',
 				{},
 				[
-					[ 'core/post-featured-image' ],
-					[ 'core/post-date' ],
-					[ 'core/post-title' ],
+					[
+						'frontis-blocks/container',
+						{
+							variationSelected: true, // এইটা add করুন
+						},
+						[
+							[ 'core/post-featured-image' ],
+							[ 'core/post-date' ],
+							[ 'core/post-title' ],
+						],
+					],
 				],
 			]
 		],
