@@ -5,7 +5,7 @@ import {
     BlockControls,
     AlignmentToolbar,
 } from '@wordpress/block-editor';
-import { useRef } from '@wordpress/element';
+import {useEffect, useRef, useState} from '@wordpress/element';
 import { useSelect } from "@wordpress/data";
 
 /**
@@ -49,6 +49,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         advancedHeadingTabletSwitcher,
         advancedHeadingMobileSwitcher,
         dynamicContent,
+		lastNavigate
     } = attributes;
 
 
@@ -65,48 +66,89 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     SwitchToBlockSettings(panelRef);
 
     const dynamicValue = useSelect((select) => {
-        if (!dynamicContent) return '';
+        // if (!dynamicContent) return '';
 
         // Check if we're inside a Query Loop block
         const { getBlockParentsByBlockName } = select('core/block-editor');
-        const queryBlockIds = getBlockParentsByBlockName(clientId, 'core/query');
+        const queryBlockIds = getBlockParentsByBlockName(clientId, 'frontis-blocks/loop-builder');
         const isInsideQueryLoop = queryBlockIds && queryBlockIds.length > 0;
 
         if (isInsideQueryLoop) {
-            const contextPostId = context?.postId;
+			// const contextPostId = context?.postId;
+			// console.log(contextPostId)
+		}
+		//
+        //     if (contextPostId) {
+        //         const contextPostType = context?.postType || 'post';
+        //         const post = select('core').getEntityRecord('postType', contextPostType, contextPostId);
+		//
+		// 		console.log("post post post")
+		// 		console.log(post)
+		//
+        //         if (post) {
+        //             // switch (dynamicContent) {
+        //             //     case 'post_title':
+        //             //         return post.title.rendered;
+        //             //     case 'post_date':
+        //             //         return new Date(post.date).toLocaleDateString();
+        //             //     default:
+        //             //         return '';
+        //             // }
+		// 			return post.title.rendered;
+        //         }
+        //     }
+        //     return '';
+        // } else {
+        //     // This part is good as is
+        //     const postType = select('core/editor').getCurrentPostType();
+        //     const postId = select('core/editor').getCurrentPostId();
+        //     const post = select('core').getEditedEntityRecord('postType', postType, postId);
+		//
+        //     switch (dynamicContent) {
+        //         case 'post_title':
+        //             return post.title;
+        //         case 'post_date':
+        //             return new Date(post.date).toLocaleDateString();
+        //         default:
+        //             return '';
+        //     }
+        // }
 
-            if (contextPostId) {
-                const contextPostType = context?.postType || 'post';
-                const post = select('core').getEntityRecord('postType', contextPostType, contextPostId);
+		// This part is good as is
+		// const postType = select('core/editor').getCurrentPostType();
+		// const postId = select('core/editor').getCurrentPostId();
+		// const post = select('core').getEditedEntityRecord('postType', postType, postId);
+		//
+		// console.log("Post by dynamic content")
+		// console.log(post)
+		//
+		// switch (dynamicContent) {
+		// 	case 'post_title':
+		// 		return post.title;
+		// 	case 'post_date':
+		// 		return new Date(post.date).toLocaleDateString();
+		// 	default:
+		// 		return '';
+		// }
+    }, []);
 
-                if (post) {
-                    switch (dynamicContent) {
-                        case 'post_title':
-                            return post.title.rendered;
-                        case 'post_date':
-                            return new Date(post.date).toLocaleDateString();
-                        default:
-                            return '';
-                    }
-                }
-            }
-            return '';
-        } else {
-            // This part is good as is
-            const postType = select('core/editor').getCurrentPostType();
-            const postId = select('core/editor').getCurrentPostId();
-            const post = select('core').getEditedEntityRecord('postType', postType, postId);
+	// console.log("dynamicValue dynamicValue dynamicValue")
+	// console.log(dynamicValue)
+	// console.log("Hello there")
+	// console.log("context context")
+	// console.log(context)
 
-            switch (dynamicContent) {
-                case 'post_title':
-                    return post.title;
-                case 'post_date':
-                    return new Date(post.date).toLocaleDateString();
-                default:
-                    return '';
-            }
-        }
-    }, [dynamicContent, clientId, context?.postId, context?.postType]);
+	useEffect(() => {
+		// const { getBlockParentsByBlockName } = select('core/block-editor');
+		// const queryBlockIds = getBlockParentsByBlockName(clientId, 'frontis-blocks/loop-builder');
+		// const isInsideQueryLoop = queryBlockIds && queryBlockIds.length > 0;
+		//
+		// if (isInsideQueryLoop) {
+			const contextPostId = context?.postId;
+			console.log(contextPostId)
+		// }
+	}, []);
+
 
     return (
         <>
