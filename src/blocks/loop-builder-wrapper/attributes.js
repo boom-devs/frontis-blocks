@@ -3,22 +3,36 @@ const attributes = {
         type: "string",
         default: ""
     },
-    postType: {
+    blockStyle: {
         type: "string",
-        default: "post"
+        default: ""
     },
-    postPerPage: {
-        type: "number",
-        default: 5
+
+     /** Start Global Setting */
+	loopBuilderWrapperGlobalZIndex : {
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
-    orderBy: {
+
+    /** Start Class & ID Setting */
+	loopBuilderWrapperID : {
+		type: "string",
+		default: ""
+	},
+
+	loopBuilderWrapperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */
+    loopBuilderWrapperCustomCSS: {
         type: "string",
-        default: "date"
-    },
-    sortOrder: {
-        type: "string",
-        default: "desc"
-    },
+        default: ""
+    }
 };
 
 export default attributes;

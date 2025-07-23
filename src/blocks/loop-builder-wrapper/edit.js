@@ -6,7 +6,7 @@ import clsx from 'clsx';
 /**
  * WordPress dependencies
  */
-import { memo, useMemo, useState } from '@wordpress/element';
+import { memo, useEffect, useMemo, useState } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { __, _x } from '@wordpress/i18n';
 import {
@@ -19,7 +19,11 @@ import {
 } from '@wordpress/block-editor';
 import { Spinner, ToolbarGroup } from '@wordpress/components';
 import { store as coreStore } from '@wordpress/core-data';
-import { list, grid } from '@wordpress/icons';
+
+/**
+ * Internal dependencies
+ */
+import Inspector from "./inspector";
 
 const TEMPLATE = [
 		[ 'core/post-title' ],
@@ -29,28 +33,26 @@ const TEMPLATE = [
 
 function PostTemplateInnerBlocks( { classList } ) {
 	const innerBlocksProps = useInnerBlocksProps(
-		{ className: clsx( 'wp-block-post', classList ) },
+		{ className: clsx( 'wp-block-post', classList, 'fb-loop-builder-wrapper-inner-container' ) },
 		{ template: TEMPLATE, __unstableDisableLayoutClassNames: true }
 	);
 	return <div { ...innerBlocksProps } />;
 }
 
 function PostTemplateBlockPreview( {
-									   blocks,
-									   blockContextId,
-									   classList,
-									   isHidden,
-									   setActiveBlockContextId,
-								   } ) {
+	blocks,
+	blockContextId,
+	classList,
+	isHidden,
+	setActiveBlockContextId,
+} ) {
+
 	const blockPreviewProps = useBlockPreview( {
 		blocks,
 		props: {
-			className: clsx( 'wp-block-post', classList ),
+			className: clsx( 'wp-block-post', classList, 'fb-loop-builder-wrapper-preview-container' ),
 		},
 	} );
-
-	console.log("blockPreviewProps blockPreviewProps")
-	console.log(blockPreviewProps)
 
 	const handleOnClick = () => {
 		setActiveBlockContextId( blockContextId );
@@ -75,48 +77,43 @@ function PostTemplateBlockPreview( {
 
 const MemoizedPostTemplateBlockPreview = memo( PostTemplateBlockPreview );
 
-export default function PostTemplateEdit( {
-											  setAttributes,
-											  clientId,
-											  context: {
-												  query: {
-													  perPage,
-													  offset = 0,
-													  postType,
-													  order,
-													  orderBy,
-													  author,
-													  search,
-													  exclude,
-													  sticky,
-													  inherit,
-													  taxQuery,
-													  parents,
-													  pages,
-													  format,
-													  selectedAuthorSwitcher,
-													  selectedAuthor,
-													  deSelectedAuthor,
-													  selectedCatSwitcher,
-													  selectedCat,
-													  deSelectedCat,
-													  selectedTagSwitcher,
-													  selectedTag,
-													  deSelectedTag,
-													  // We gather extra query args to pass to the REST API call.
-													  // This way extenders of Query Loop can add their own query args,
-													  // and have accurate previews in the editor.
-													  // Noting though that these args should either be supported by the
-													  // REST API or be handled by custom REST filters like `rest_{$this->post_type}_query`.
-													  ...restQueryArgs
-												  } = {},
-												  templateSlug,
-												  previewPostType,
-											  },
-											  attributes: { layout },
-											  __unstableLayoutClassNames,
-										  } ) {
-	const { type: layoutType, columnCount = 3 } = layout || {};
+export default function Edit({ attributes, setAttributes, clientId, context }) {
+
+	const {
+		blockId,
+	} = attributes;
+
+	const {
+		query: {
+			perPage,
+			offset = 0,
+			postType,
+			order,
+			orderBy,
+			author,
+			search,
+			exclude,
+			sticky,
+			inherit,
+			taxQuery,
+			parents,
+			pages,
+			format,
+			selectedAuthorSwitcher,
+			selectedAuthor,
+			deSelectedAuthor,
+			selectedCatSwitcher,
+			selectedCat,
+			deSelectedCat,
+			selectedTagSwitcher,
+			selectedTag,
+			deSelectedTag,
+			...restQueryArgs
+		} = {},
+		templateSlug,
+		previewPostType,
+	} = context;
+
 	const [ activeBlockContextId, setActiveBlockContextId ] = useState();
 	const { posts, blocks } = useSelect(
 		( select ) => {
@@ -295,16 +292,13 @@ export default function PostTemplateEdit( {
 			posts?.map( ( post ) => ( {
 				postType: post.type,
 				postId: post.id,
-				classList: post.class_list ?? '',
+				classList: clsx(post.class_list ?? '', 'fb-loop-builder-wrapper-block-context-container'),
 			} ) ),
 		[ posts ]
 	);
 
 	const blockProps = useBlockProps( {
-		className: clsx( __unstableLayoutClassNames, {
-			[ `columns-${ columnCount }` ]:
-				layoutType === 'grid' && columnCount, // Ensure column count is flagged via classname for backwards compatibility.
-		} ),
+		className: `${blockId} fb-loop-builder-wrapper-main-container`,
 	} );
 
 	if ( ! posts ) {
@@ -319,39 +313,14 @@ export default function PostTemplateEdit( {
 		return <p { ...blockProps }> { __( 'No results found.' ) }</p>;
 	}
 
-	const setDisplayLayout = ( newDisplayLayout ) =>
-		setAttributes( {
-			layout: { ...layout, ...newDisplayLayout },
-		} );
 
-	const displayLayoutControls = [
-		{
-			icon: list,
-			title: _x( 'List view', 'Post template block display setting' ),
-			onClick: () => setDisplayLayout( { type: 'default' } ),
-			isActive: layoutType === 'default' || layoutType === 'constrained',
-		},
-		{
-			icon: grid,
-			title: _x( 'Grid view', 'Post template block display setting' ),
-			onClick: () =>
-				setDisplayLayout( {
-					type: 'grid',
-					columnCount,
-				} ),
-			isActive: layoutType === 'grid',
-		},
-	];
-
-	// To avoid flicker when switching active block contexts, a preview is rendered
-	// for each block context, but the preview for the active block context is hidden.
-	// This ensures that when it is displayed again, the cached rendering of the
-	// block preview is used, instead of having to re-render the preview from scratch.
 	return (
 		<>
-			<BlockControls>
-				<ToolbarGroup controls={ displayLayoutControls } />
-			</BlockControls>
+			<Inspector
+				attributes={ attributes }
+				setAttributes={ setAttributes }
+				clientId={ clientId }
+			/>
 
 			<div { ...blockProps }>
 				{ blockContexts &&
