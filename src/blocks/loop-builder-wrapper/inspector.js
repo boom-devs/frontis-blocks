@@ -30,8 +30,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const deviceType = useDeviceType();
 
-    console.log(deviceType);
-
     useEffect(() => {
         if (clientId && typeof clientId === "string") {
             setAttributes({ blockId: `fb-loop-builder-wrapper-${clientId.slice(0, 8)}` });
@@ -42,26 +40,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId}.fb-loop-builder-wrapper-main-container {
             display: grid !important;
-            grid-template-columns: repeat(3, 1fr) !important;
-            gap: 10px !important;
+            grid-template-columns: repeat(${gridColumnsPerSection.Desktop}, 1fr) !important; 
+            row-gap: ${gridRowGap.Desktop}${gridGapUnits.Desktop};  
+            column-gap: ${gridColumnGap.Desktop}${gridGapUnits.Desktop}; 
 
         }
 
         @media only screen and (max-width: 1024px) {
+            grid-template-columns: repeat(${gridColumnsPerSection.Tablet}, 1fr) !important; 
+            row-gap: ${gridRowGap.Tablet}${gridGapUnits.Tablet};  
+            column-gap: ${gridColumnGap.Tablet}${gridGapUnits.Tablet}; 
 
         }
 
         @media only screen and (max-width: 767px) {
+            grid-template-columns: repeat(${gridColumnsPerSection.Mobile}, 1fr) !important; 
+            row-gap: ${gridRowGap.Mobile}${gridGapUnits.Mobile};  
+            column-gap: ${gridColumnGap.Mobile}${gridGapUnits.Mobile}; 
 
         }
     `, [
-    blockId,
-    loopBuilderWrapperGlobalZIndex,
-    loopBuilderWrapperID,
-    loopBuilderWrapperClass,
-    loopBuilderWrapperCustomCSS,
-    deviceType,
-
+        blockId,
+        blockStyle,
+        gridColumnsPerSection,
+        gridRowGap,
+        gridColumnGap,
+        gridGapUnits,
+        
+        listGapUnits,
+        listRowGap,
+        listImageSpacing,
+        loopBuilderWrapperGlobalZIndex,
+        loopBuilderWrapperClass,
+        loopBuilderWrapperCustomCSS,
     ]);
 
     const customCss = getCustomCss(loopBuilderWrapperCustomCSS, `.${blockId}`);
@@ -81,7 +92,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             <>
                 <FB_Range
                     min={1}
-                    max={6}
+                    max={12}
                     label={__("Columns", "frontis-blocks")}
                     rangeValue={gridColumnsPerSection}
                     onChangeHandler={(value) => setAttributes({ gridColumnsPerSection: value })}
@@ -92,7 +103,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     isRangeUnit={false}
                 />
 
-                {/* <FB_Range
+                <FB_Range
                     min={1}
                     max={200}
                     label={__("Row Gap", "frontis-blocks")}
@@ -118,7 +129,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     setAttributes={setAttributes}
                     rangeStep={1}
                     resetFallbackValue={"30"}
-                /> */}
+                />
             </>
             </PanelBody>
 		</>
@@ -144,7 +155,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 title={__("Layout", "frontis-blocks")}
                 initialOpen={true}
             >
-                {/* <FB_Range
+                <FB_Range
                     min={0}
                     max={10000000}
                     label={__("Z Index", "frontis-blocks")}
@@ -158,28 +169,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
 
                 <FB_InputControl
-                    label={__("CSS ID", "frontis-blocks")}
-                    value={loopBuilderWrapperID}
-                    onChangeValue={(value) => setAttributes({ loopBuilderWrapperID: value })}
-                    helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
-                />
-
-                <FB_InputControl
                     label={__("CSS Class", "frontis-blocks")}
                     value={loopBuilderWrapperClass}
                     onChangeValue={(value) => setAttributes({ loopBuilderWrapperClass: value })}
                     helpText={__("Separate with spaces key.", "frontis-blocks")}
-                /> */}
+                />
             </PanelBody>
 
             <PanelBody
                 title={__("Custom CSS", "frontis-blocks")}
                 initialOpen={false}
             >
-                {/* <FB_CustomCSSEditor  
+                <FB_CustomCSSEditor  
                     value={loopBuilderWrapperCustomCSS} 
                     onChangeValue={(value) => setAttributes({ loopBuilderWrapperCustomCSS: value })}
-                /> */}
+                />
             </PanelBody>
 		</>
 	);

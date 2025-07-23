@@ -76,17 +76,10 @@ const attributes = {
         }
     },
 
-    /** Start Class & ID Setting */
-	loopBuilderWrapperID : {
-		type: "string",
-		default: ""
-	},
-
 	loopBuilderWrapperClass : {
 		type: "string",
 		default: ""
 	},
-	/** End Class & ID Setting */
     loopBuilderWrapperCustomCSS: {
         type: "string",
         default: ""
