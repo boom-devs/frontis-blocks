@@ -14,7 +14,7 @@ class Helper
      */
     public static function is_frontis_block($block_content, $parsed_block, $class_attr = 'blockClass')
     {
-        return isset($parsed_block['attrs'][$class_attr]) && strpos($parsed_block['attrs'][$class_attr], 'frontis-block') !== false;
+        return isset($parsed_block['blockName']) && str_contains($parsed_block['blockName'], 'frontis-block');
     }
 
     /**
@@ -508,7 +508,6 @@ class Helper
 		return $jsFiles;
 	}
 
-
     public static function get_blocks_inside_template($block_name)
     {
         global $wpdb;
@@ -528,7 +527,65 @@ class Helper
         return $value . $unit;
     }
 
+	public static function get_all_posts() {
+		// Get all public post types except the excluded ones
+		$excluded_post_types = array('attachment', 'nav_menu_item', 'wp_block', 'wp_navigation', 'wp_global_styles');
+		$args = array(
+			'public' => true,
+		);
+		$post_types = get_post_types($args, 'objects');
+
+		// Initialize the array to hold posts grouped by post type
+		$posts_by_type = array();
+
+		foreach ($post_types as $post_type) {
+			// Skip excluded post types
+			if (in_array($post_type->name, $excluded_post_types)) {
+				continue;
+			}
+
+			// Get all published posts for this post type
+			$posts = get_posts(array(
+				'post_type' => $post_type->name,
+				'post_status' => 'publish',
+				'numberposts' => -1, // Get all posts
+				'fields' => 'ids', // First get just IDs for better performance
+			));
+
+			// If no posts found, skip
+			if (empty($posts)) {
+				continue;
+			}
+
+			// Now get ID and title for each post
+			$posts_by_type[$post_type->name] = array_map(function($post_id) {
+				return array(
+					'ID' => $post_id,
+					'title' => get_the_title($post_id) === '' ? 'No title' : get_the_title($post_id),
+				);
+			}, $posts);
+		}
+
+		return $posts_by_type;
+	}
+
+	// Render dynamic content for block
+	public static function render_dynamic_content($block_data) {
+//		var_dump($block_data);
+
+	}
+
+	public static function get_single_field($post_id, $field) {
+		global $wpdb;
+		$query = $wpdb->prepare(
+			"SELECT $field FROM $wpdb->posts WHERE ID = %d",
+			$post_id
+		);
+
+		return $wpdb->get_var($query) ?: '';
+	}
+
+	public static function json_success($data) {
+		wp_send_json_success($data, 200 );
+	}
 }
-
-
-https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Radio+Canada+Big:ital,wght@0,400..700;1,400..700&display=swap
