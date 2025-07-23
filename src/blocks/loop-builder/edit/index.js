@@ -21,8 +21,6 @@ const QueryEdit = ( props ) => {
 		[ clientId ]
 	);
 
-	console.log("hasInnerBlocks hasInnerBlocks")
-	console.log(hasInnerBlocks)
 	const Component = hasInnerBlocks ? QueryContent : QueryPlaceholder;
 	return (
 		<>
