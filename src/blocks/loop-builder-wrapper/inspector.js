@@ -14,6 +14,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockId,
         blockStyle,
+        gridColumnsPerSection,
+        gridRowGap,
+        gridColumnGap,
+        gridGapUnits,
+        
+        listGapUnits,
+        listRowGap,
+        listImageSpacing,
         loopBuilderWrapperGlobalZIndex,
         loopBuilderWrapperID,
         loopBuilderWrapperClass,
@@ -21,6 +29,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     } = attributes;
 
     const deviceType = useDeviceType();
+
+    console.log(deviceType);
 
     useEffect(() => {
         if (clientId && typeof clientId === "string") {
@@ -67,8 +77,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	 */
 	const generalControls = (
 		<>
-		    <PanelBody title={__("Slider", "frontis-blocks")} initialOpen>
-            {/* Add general settings here */}
+		    <PanelBody title={__("Layout", "frontis-blocks")} initialOpen>
+            <>
+                <FB_Range
+                    min={1}
+                    max={6}
+                    label={__("Columns", "frontis-blocks")}
+                    rangeValue={gridColumnsPerSection}
+                    onChangeHandler={(value) => setAttributes({ gridColumnsPerSection: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"3"}
+                    isRangeUnit={false}
+                />
+
+                {/* <FB_Range
+                    min={1}
+                    max={200}
+                    label={__("Row Gap", "frontis-blocks")}
+                    rangeValue={gridRowGap}
+                    onChangeHandler={(value) => setAttributes({ gridRowGap: value })}
+                    rangeUnitHandler={(value) => setAttributes({ gridGapUnits: value })}
+                    deviceType={deviceType}
+                    units={gridGapUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"30"}
+                />
+
+                <FB_Range
+                    min={1}
+                    max={200}
+                    label={__("Column Gap", "frontis-blocks")}
+                    rangeValue={gridColumnGap}
+                    onChangeHandler={(value) => setAttributes({ gridColumnGap: value })}
+                    rangeUnitHandler={(value) => setAttributes({ gridGapUnits: value })} 
+                    deviceType={deviceType}
+                    units={gridGapUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"30"}
+                /> */}
+            </>
             </PanelBody>
 		</>
 	);
