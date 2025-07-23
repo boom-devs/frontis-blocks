@@ -49,8 +49,8 @@ function PostTemplateBlockPreview( {
 		},
 	} );
 
-	console.log("blockPreviewProps blockPreviewProps")
-	console.log(blockPreviewProps)
+	// console.log("blockPreviewProps blockPreviewProps")
+	// console.log(blockPreviewProps)
 
 	const handleOnClick = () => {
 		setActiveBlockContextId( blockContextId );
