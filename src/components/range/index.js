@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { BaseControl, Button, ButtonGroup, Dropdown, RangeControl, SelectControl } from '@wordpress/components';
 import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_RangeUnitsType from '@Components/unit-control';
+import {useDeviceType} from "@Config/displayType";
 
 const FB_Range = ({
 	min,
@@ -35,6 +36,11 @@ const FB_Range = ({
 	// 	const newRangeValue = { ...rangeValue, [deviceType]: value || resetFallbackValue };
 	// 	onChangeHandler(newRangeValue);
 	// };
+
+	const testDeviceType = useDeviceType();
+
+	console.log("testDeviceType")
+	console.log(rangeValue)
 
 	const setRangeValue = (value) => {
 		const newRangeValue = {...rangeValue, [deviceType]: value !== null ? String(value) : String(resetFallbackValue)};
@@ -73,7 +79,7 @@ const FB_Range = ({
 
 	Object.entries(globalTypo).forEach(([label, properties]) => {
 		let updatedValue = null;
-	
+
 		if (globalTypographyType === 'fontSize' && properties?.fontSize?.variable !== undefined) {
 			updatedValue = `var(${properties?.fontSize?.variable})`;
 		}
@@ -83,7 +89,7 @@ const FB_Range = ({
 		if (globalTypographyType === 'letterSpacing' && properties?.letterSpacing?.variable !== undefined) {
 			updatedValue = `var(${properties?.letterSpacing?.variable})`;
 		}
-	
+
 		if (updatedValue !== null) {
 			let newLabel =
 				label === 'body' ? 'Body' :
@@ -97,18 +103,18 @@ const FB_Range = ({
 				label === 'h5' ? 'Heading Five' :
 				label === 'h6' ? 'Heading Six' :
 				label;
-		
+
 			GB_TYPO.push({ label: newLabel, value: updatedValue });
 		}
 	});
-	
+
 	GB_TYPO.forEach(item => {
 		const matchedTypo = customTypoArray.find(typo => typo.id === item.label);
 		if (matchedTypo) {
 			item.label = matchedTypo.name;
 		}
 	});
-	
+
 	return (
 		<div className="fb-setting-spacing-container">
 			<div className="fb-setting-spacing-inner-container">
@@ -117,7 +123,7 @@ const FB_Range = ({
 						labelText={__(label, 'frontis-blocks')}
 						device={deviceType}
 					/>
-					
+
 					<div className="fb-unit-wrapper">
 						{rangeValue[deviceType] && (
 							<div className="fb-reset-control-container" onClick={resetRangeValue}>

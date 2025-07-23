@@ -2,7 +2,9 @@ function generateCSS(
 	selectorsObj,
 	id,
 	isResponsive = false, // eslint-disable-line no-unused-vars
-	responsiveType = '' // eslint-disable-line no-unused-vars
+	responsiveType = '', // eslint-disable-line no-unused-vars
+	isOverride = false,
+	updatedContainerWidth = '',
 ) {
 	let gen_styling_css = '';
 
@@ -32,15 +34,23 @@ function generateCSS(
 			}
 		}
 
+		let tabletBreakpoint = FrontisBlocksData.tablet_breakpoint;
+		let mobileBreakpoint = FrontisBlocksData.mobile_breakpoint;
+
+		if ( isOverride ) {
+			tabletBreakpoint = updatedContainerWidth;
+			mobileBreakpoint = updatedContainerWidth;
+		}
+
 		if ( css.length !== 0 ) {
 			if ( responsiveType === 'tablet' ) {
-				gen_styling_css += '@media only screen and (max-width: ' + FrontisBlocksData.tablet_breakpoint + 'px) {';
+				gen_styling_css += '@media only screen and (max-width: ' + tabletBreakpoint + 'px) {';
 				gen_styling_css += id;
 				gen_styling_css += selector + '{';
 				gen_styling_css += css;
 				gen_styling_css += '}}';
 			} else if ( responsiveType === 'mobile' ) {
-				gen_styling_css += '@media only screen and (max-width: ' + FrontisBlocksData.mobile_breakpoint + 'px) {';
+				gen_styling_css += '@media only screen and (max-width: ' + mobileBreakpoint + 'px) {';
 				gen_styling_css += id;
 				gen_styling_css += selector + '{';
 				gen_styling_css += css;
