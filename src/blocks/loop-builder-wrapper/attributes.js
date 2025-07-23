@@ -3,22 +3,94 @@ const attributes = {
         type: "string",
         default: ""
     },
-    postType: {
+    blockStyle: {
         type: "string",
-        default: "post"
+        default: ""
     },
-    postPerPage: {
-        type: "number",
-        default: 5
+
+    gridColumnsPerSection: {
+		type: "object",
+		default: {
+			Desktop: "3",
+			Tablet: "2",
+			Mobile: "1"
+		}
+	},
+	gridGapUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	listGapUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	gridRowGap: {
+		type: "object",
+		default: {
+			Desktop: "30",
+			Tablet: "30",
+			Mobile: "30"
+		}
+	},
+	gridColumnGap: {
+		type: "object",
+		default: {
+			Desktop: "30",
+			Tablet: "30",
+			Mobile: "30"
+		}
+	},
+
+	listRowGap: {
+		type: "object",
+		default: {
+			Desktop: "30",
+			Tablet: "30",
+			Mobile: "30"
+		}
+	},
+	listImageSpacing: {
+		type: "object",
+		default: {
+			Desktop: "40",
+			Tablet: "30",
+			Mobile: "0"
+		}
+	},
+
+     /** Start Global Setting */
+	loopBuilderWrapperGlobalZIndex : {
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
-    orderBy: {
+
+    /** Start Class & ID Setting */
+	loopBuilderWrapperID : {
+		type: "string",
+		default: ""
+	},
+
+	loopBuilderWrapperClass : {
+		type: "string",
+		default: ""
+	},
+	/** End Class & ID Setting */
+    loopBuilderWrapperCustomCSS: {
         type: "string",
-        default: "date"
-    },
-    sortOrder: {
-        type: "string",
-        default: "desc"
-    },
+        default: ""
+    }
 };
 
 export default attributes;

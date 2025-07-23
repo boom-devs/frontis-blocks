@@ -18,52 +18,9 @@
 		"postType"
 	],
 	"supports": {
-		"reusable": false,
-		"html": false,
-		"align": [ "wide", "full" ],
-		"layout": true,
-		"color": {
-			"gradients": true,
-			"link": true,
-			"__experimentalDefaultControls": {
-				"background": true,
-				"text": true
-			}
-		},
-		"typography": {
-			"fontSize": true,
-			"lineHeight": true,
-			"__experimentalFontFamily": true,
-			"__experimentalFontWeight": true,
-			"__experimentalFontStyle": true,
-			"__experimentalTextTransform": true,
-			"__experimentalTextDecoration": true,
-			"__experimentalLetterSpacing": true,
-			"__experimentalDefaultControls": {
-				"fontSize": true
-			}
-		},
-		"spacing": {
-			"margin": true,
-			"padding": true,
-			"blockGap": {
-				"__experimentalDefault": "1.25em"
-			},
-			"__experimentalDefaultControls": {
-				"blockGap": true,
-				"padding": false,
-				"margin": false
-			}
-		},
-		"interactivity": {
-			"clientNavigation": true
-		},
-		"__experimentalBorder": {
-			"radius": true,
-			"color": true,
-			"width": true,
-			"style": true
-		}
+        "anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false
 	},
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css"
