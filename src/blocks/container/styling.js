@@ -169,6 +169,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		rowGap,
 		columnGapUnits,
 		rowGapUnits,
+		containerGlobalPadding,
 		containerPaddingUnits,
 		containerDesktopPadding,
 		containerTabletPadding,
@@ -681,7 +682,20 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	}
 
 	// Handle Desktop Padding
-	let desktopContainerPadding = {
+	let desktopContainerPadding = {};
+	if (containerDesktopPadding.top === '') {
+		desktopContainerPadding = {
+			'padding': generateCSSUnit(containerGlobalPadding.Desktop, 'px'),
+		}
+	} else {
+		desktopContainerPadding = {
+			'padding-top': generateCSSUnit(containerDesktopPadding.top, containerPaddingUnits['Desktop']),
+			'padding-bottom': generateCSSUnit(containerDesktopPadding.bottom, containerPaddingUnits['Desktop']),
+			'padding-left': generateCSSUnit(containerDesktopPadding.left, containerPaddingUnits['Desktop']),
+			'padding-right': generateCSSUnit(containerDesktopPadding.right, containerPaddingUnits['Desktop']),
+		}
+	}
+	let desktopChildContainerPadding = {
 		'padding-top': generateCSSUnit(containerDesktopPadding.top, containerPaddingUnits['Desktop']),
 		'padding-bottom': generateCSSUnit(containerDesktopPadding.bottom, containerPaddingUnits['Desktop']),
 		'padding-left': generateCSSUnit(containerDesktopPadding.left, containerPaddingUnits['Desktop']),
@@ -689,7 +703,20 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	}
 
 	// Handle Tablet Padding
-	let tabletContainerPadding = {
+	let tabletContainerPadding = {};
+	if (containerTabletPadding.top === '') {
+		tabletContainerPadding = {
+			'padding': generateCSSUnit(containerGlobalPadding.Tablet, 'px'),
+		}
+	} else {
+		tabletContainerPadding = {
+			'padding-top': generateCSSUnit(containerTabletPadding.top, containerPaddingUnits['Tablet']),
+			'padding-bottom': generateCSSUnit(containerTabletPadding.bottom, containerPaddingUnits['Tablet']),
+			'padding-left': generateCSSUnit(containerTabletPadding.left, containerPaddingUnits['Tablet']),
+			'padding-right': generateCSSUnit(containerTabletPadding.right, containerPaddingUnits['Tablet']),
+		}
+	}
+	let tabletChildContainerPadding = {
 		'padding-top': generateCSSUnit(containerTabletPadding.top, containerPaddingUnits['Tablet']),
 		'padding-bottom': generateCSSUnit(containerTabletPadding.bottom, containerPaddingUnits['Tablet']),
 		'padding-left': generateCSSUnit(containerTabletPadding.left, containerPaddingUnits['Tablet']),
@@ -697,7 +724,20 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	}
 
 	// Handle Mobile Padding
-	let mobileContainerPadding = {
+	let mobileContainerPadding = {};
+	if (containerMobilePadding.top === '') {
+		mobileContainerPadding = {
+			'padding': generateCSSUnit(containerGlobalPadding.Mobile, 'px'),
+		}
+	} else {
+		mobileContainerPadding = {
+			'padding-top': generateCSSUnit(containerMobilePadding.top, containerPaddingUnits['Mobile']),
+			'padding-bottom': generateCSSUnit(containerMobilePadding.bottom, containerPaddingUnits['Mobile']),
+			'padding-left': generateCSSUnit(containerMobilePadding.left, containerPaddingUnits['Mobile']),
+			'padding-right': generateCSSUnit(containerMobilePadding.right, containerPaddingUnits['Mobile']),
+		}
+	}
+	let mobileChildContainerPadding = {
 		'padding-top': generateCSSUnit(containerMobilePadding.top, containerPaddingUnits['Mobile']),
 		'padding-bottom': generateCSSUnit(containerMobilePadding.bottom, containerPaddingUnits['Mobile']),
 		'padding-left': generateCSSUnit(containerMobilePadding.left, containerPaddingUnits['Mobile']),
@@ -763,21 +803,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	const getContainerStylesDesktop  = {
 		...desktopContainerPadding,
 		...containerMarginCSS,
-		'box-shadow':
-			generateCSSUnit( boxShadowHOffset, 'px' ) +
-			' ' +
-			generateCSSUnit( boxShadowVOffset, 'px' ) +
-			' ' +
-			generateCSSUnit( boxShadowBlur, 'px' ) +
-			' ' +
-			generateCSSUnit( boxShadowSpread, 'px' ) +
-			' ' +
-			boxShadowColor +
-			' ' +
-			boxShadowPositionCSS,
 		'min-height': generateCSSUnit( minHeight['Desktop'], minHeightUnits['Desktop'] ),
-		...borderCSS,
-		'order': 'custom' === orderDesktop ? customOrderDesktop : orderDesktop,
 
 		// Position related properties
 		'position': containerPositionType === 'default' ? 'relative' : containerPositionType,
@@ -817,25 +843,84 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		...getBackgroundNormalStyles( 'Desktop' ),
 
 	};
+	const getChildContainerStylesDesktop  = {
+		...desktopChildContainerPadding,
+		...containerMarginCSS,
+		'min-height': generateCSSUnit( minHeight['Desktop'], minHeightUnits['Desktop'] ),
+
+		// Position related properties
+		'position': containerPositionType === 'default' ? 'relative' : containerPositionType,
+		'width': containerPositionType !== 'default' && containerPositionType !== 'relative' ? '100%' : undefined,
+
+		// Horizontal positioning
+		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+			   containerHZOrientationType === 'left' && containerHZLeftOffset.Desktop ?
+			   generateCSSUnit(containerHZLeftOffset.Desktop, containerHZLeftOffsetUnits.Desktop) : undefined,
+
+		'right': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				containerHZOrientationType === 'right' && containerHZRightOffset.Desktop ?
+				generateCSSUnit(containerHZRightOffset.Desktop, containerHZRightOffsetUnits.Desktop) : undefined,
+
+		// Vertical positioning
+		'top': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+			  containerVROrientationType === 'top' && containerVRTopOffset.Desktop ?
+			  generateCSSUnit(containerVRTopOffset.Desktop, containerVRTopOffsetUnits.Desktop) : undefined,
+
+		'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				 containerVROrientationType === 'bottom' && containerVRBottomOffset.Desktop ?
+				 generateCSSUnit(containerVRBottomOffset.Desktop, containerVRBottomOffsetUnits.Desktop) : undefined,
+
+		'z-index': containerZIndex.Desktop ? containerZIndex.Desktop : undefined,
+		'overflow': containerOverflow !== 'default' ? containerOverflow : undefined,
+
+		// Border style
+		'border-style': containerBorder !== 'none' ? containerBorder : undefined,
+		'border-color': containerBorderColor ? containerBorderColor : undefined,
+		...containerBorderDesktopWidthCSS,
+		...containerBorderRadiusDesktopWidthCSS,
+
+		// Box shadow
+		'box-shadow': containerGlobalBoxShadowCssValue ? containerGlobalBoxShadowCssValue : undefined,
+		'order': 'custom' === orderDesktop ? customOrderDesktop : orderDesktop,
+
+		...getBackgroundNormalStyles( 'Desktop' ),
+	};
 
 	// Get container styles for tablet for FB Container
 	const getContainerStylesTablet = {
 		...tabletContainerPadding,
 		...containerTabletMarginCSS,
-		'box-shadow':
-			generateCSSUnit( boxShadowHOffset, 'px' ) +
-			' ' +
-			generateCSSUnit( boxShadowVOffset, 'px' ) +
-			' ' +
-			generateCSSUnit( boxShadowBlur, 'px' ) +
-			' ' +
-			generateCSSUnit( boxShadowSpread, 'px' ) +
-			' ' +
-			boxShadowColor +
-			' ' +
-			boxShadowPositionCSS,
 		'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'] ),
-		...borderCSS,
+		'order': 'custom' === orderTablet ? customOrderTablet : orderTablet,
+
+		...getBackgroundNormalStyles( 'Tablet' ),
+
+		// Horizontal positioning
+		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+		containerHZOrientationType === 'left' && containerHZLeftOffset.Tablet ?
+		generateCSSUnit(containerHZLeftOffset.Tablet, containerHZLeftOffsetUnits.Tablet) : undefined,
+
+		'right': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				containerHZOrientationType === 'right' && containerHZRightOffset.Tablet ?
+				generateCSSUnit(containerHZRightOffset.Tablet, containerHZRightOffsetUnits.Tablet) : undefined,
+
+		// Vertical positioning
+		'top': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+			containerVROrientationType === 'top' && containerVRTopOffset.Tablet ?
+			generateCSSUnit(containerVRTopOffset.Tablet, containerVRTopOffsetUnits.Tablet) : undefined,
+		'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				containerVROrientationType === 'bottom' && containerVRBottomOffset.Tablet ?
+				generateCSSUnit(containerVRBottomOffset.Tablet, containerVRBottomOffsetUnits.Tablet) : undefined,
+		'z-index': containerZIndex.Tablet ? containerZIndex.Tablet : undefined,
+
+		// Border
+		...containerBorderTabletWidthCSS,
+		...containerBorderRadiusTabletWidthCSS,
+	};
+	const getChildContainerStylesTablet = {
+		...tabletChildContainerPadding,
+		...containerTabletMarginCSS,
+		'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'] ),
 		'order': 'custom' === orderTablet ? customOrderTablet : orderTablet,
 
 		...getBackgroundNormalStyles( 'Tablet' ),
@@ -867,18 +952,41 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	const getContainerStylesMobile = {
 		...mobileContainerPadding,
 		...containerMobileMarginCSS,
-		'box-shadow':
-			generateCSSUnit( boxShadowHOffset, 'px' ) +
-			' ' +
-			generateCSSUnit( boxShadowVOffset, 'px' ) +
-			' ' +
-			generateCSSUnit( boxShadowBlur, 'px' ) +
-			' ' +
-			generateCSSUnit( boxShadowSpread, 'px' ) +
-			' ' +
-			boxShadowColor +
-			' ' +
-			boxShadowPositionCSS,
+		'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
+		...borderCSS,
+		'order': 'custom' === orderMobile ? customOrderMobile : orderMobile,
+
+		...getBackgroundNormalStyles( 'Mobile' ),
+
+
+
+		// Horizontal positioning
+		'left': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+		containerHZOrientationType === 'left' && containerHZLeftOffset.Mobile ?
+		generateCSSUnit(containerHZLeftOffset.Mobile, containerHZLeftOffsetUnits.Mobile) : undefined,
+
+		'right': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				containerHZOrientationType === 'right' && containerHZRightOffset.Mobile ?
+				generateCSSUnit(containerHZRightOffset.Mobile, containerHZRightOffsetUnits.Mobile) : undefined,
+
+		// Vertical positioning
+		'top': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+			containerVROrientationType === 'top' && containerVRTopOffset.Mobile ?
+			generateCSSUnit(containerVRTopOffset.Mobile, containerVRTopOffsetUnits.Mobile) : undefined,
+
+		'bottom': containerPositionType !== 'default' && containerPositionType !== 'relative' &&
+				containerVROrientationType === 'bottom' && containerVRBottomOffset.Mobile ?
+				generateCSSUnit(containerVRBottomOffset.Mobile, containerVRBottomOffsetUnits.Mobile) : undefined,
+
+		'z-index': containerZIndex.Mobile ? containerZIndex.Mobile : undefined,
+
+		// Border
+		...containerBorderMobileWidthCSS,
+		...containerBorderRadiusMobileWidthCSS,
+	};
+	const getChildContainerStylesMobile = {
+		...mobileChildContainerPadding,
+		...containerMobileMarginCSS,
 		'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
 		...borderCSS,
 		'order': 'custom' === orderMobile ? customOrderMobile : orderMobile,
@@ -1233,10 +1341,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			...borderCSSMobile,
 		};
 		selectors[ '.wp-block-frontis-blocks-container' ] = {
-			'padding-top': generateCSSUnit( containerDesktopPadding.top, containerPaddingUnits['Desktop'] ),
-			'padding-bottom': generateCSSUnit( containerDesktopPadding.bottom, containerPaddingUnits['Desktop'] ),
-			'padding-left': generateCSSUnit( containerDesktopPadding.left, containerPaddingUnits['Desktop'] ),
-			'padding-right': generateCSSUnit( containerDesktopPadding.right, containerPaddingUnits['Desktop'] ),
+			...desktopContainerPadding,
 			'margin-top': generateCSSUnit( containerDesktopMargin.top, containerMarginUnits['Desktop'], true ),
 			'margin-bottom': generateCSSUnit( containerDesktopMargin.bottom, containerMarginUnits['Desktop'], true ),
 			'margin-left': generateCSSUnit( containerDesktopMargin.left, containerMarginUnits['Desktop'], true ),
@@ -1257,19 +1362,13 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'overflow': overflow,
 		};
 		tablet_selectors[ '.wp-block-frontis-blocks-container' ] = {
-			'padding-top': generateCSSUnit( containerTabletPadding.top, containerPaddingUnits['Tablet'] ),
-			'padding-bottom': generateCSSUnit( containerTabletPadding.bottom, containerPaddingUnits['Tablet'] ),
-			'padding-left': generateCSSUnit( containerTabletPadding.left, containerPaddingUnits['Tablet'] ),
-			'padding-right': generateCSSUnit( containerTabletPadding.right, containerPaddingUnits['Tablet'] ),
+			...tabletContainerPadding,
 			'margin-top': generateCSSUnit( containerTabletMargin.top, containerMarginUnits['Tablet'], true ),
 			'margin-bottom': generateCSSUnit( containerTabletMargin.bottom, containerMarginUnits['Tablet'], true ),
 			'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'] ),
 		};
 		mobile_selectors[ '.wp-block-frontis-blocks-container' ] = {
-			'padding-top': generateCSSUnit( containerMobilePadding.top, containerPaddingUnits['Mobile'] ),
-			'padding-bottom': generateCSSUnit( containerMobilePadding.bottom, containerPaddingUnits['Mobile'] ),
-			'padding-left': generateCSSUnit( containerMobilePadding.left, containerPaddingUnits['Mobile'] ),
-			'padding-right': generateCSSUnit( containerMobilePadding.right, containerPaddingUnits['Mobile'] ),
+			...mobileContainerPadding,
 			'margin-top': generateCSSUnit( containerMobileMargin.top, containerMarginUnits['Mobile'], true ),
 			'margin-bottom': generateCSSUnit( containerMobileMargin.bottom, containerMarginUnits['Mobile'], true ),
 			'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
@@ -1279,7 +1378,16 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'box-shadow': '',
 		};
 	} else {
-		selectors[ '.wp-block-frontis-blocks-container' ] = getContainerStylesDesktop;
+		if(isBlockRootParent) {
+			selectors[ '.wp-block-frontis-blocks-container' ] = getContainerStylesDesktop;
+			tablet_selectors[ '.wp-block-frontis-blocks-container' ] = getContainerStylesTablet;
+			mobile_selectors[ '.wp-block-frontis-blocks-container' ] = getContainerStylesMobile;
+		} else {
+			selectors[ '.wp-block-frontis-blocks-container' ] = getChildContainerStylesDesktop;
+			tablet_selectors[ '.wp-block-frontis-blocks-container' ] = getChildContainerStylesTablet;
+			mobile_selectors[ '.wp-block-frontis-blocks-container' ] = getChildContainerStylesMobile;
+		}
+		
 		selectors[ '.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container)'] = {
 			'margin-left': generateCSSUnit( containerDesktopMargin.left, containerMarginUnits['Desktop'] ) + ' !important',
 			'margin-right': generateCSSUnit( containerDesktopMargin.right, containerMarginUnits['Desktop'] ) + ' !important',
