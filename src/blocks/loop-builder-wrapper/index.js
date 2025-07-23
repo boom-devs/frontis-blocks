@@ -5,12 +5,14 @@ import { registerBlockType } from '@wordpress/blocks';
 /**
  * Internal dependencies
  */
+import attributes from './attributes';
 import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import FB_Block_Icons from "@Config/fb-blocks-icons";
 
 registerBlockType( metadata.name, {
+	attributes,
 	icon: FB_Block_Icons.slider,
 	edit: Edit,
 	parent: ['frontis-blocks/loop-builder'],

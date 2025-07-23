@@ -81,6 +81,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	const {
 		blockId,
+        loopBuilderWrapperClass,
 	} = attributes;
 
 	const {
@@ -292,9 +293,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			posts?.map( ( post ) => ( {
 				postType: post.type,
 				postId: post.id,
-				classList: clsx(post.class_list ?? '', 'fb-loop-builder-wrapper-block-context-container'),
+				classList: clsx(
+					post.class_list ?? '',
+					'fb-loop-builder-wrapper-block-context-container',
+					loopBuilderWrapperClass
+				),
 			} ) ),
-		[ posts ]
+		[ posts, loopBuilderWrapperClass ]
 	);
 
 	const blockProps = useBlockProps( {

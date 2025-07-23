@@ -27,7 +27,7 @@ const variations = [
 					[
 						'frontis-blocks/container',
 						{
-							variationSelected: true, // এইটা add করুন
+							variationSelected: true,
 						},
 						[ [ 'frontis-blocks/advanced-heading' ] ],
 					],
@@ -49,7 +49,7 @@ const variations = [
 					[
 						'frontis-blocks/container',
 						{
-							variationSelected: true, // এইটা add করুন
+							variationSelected: true,
 						},
 						[ [ 'core/post-title' ], [ 'core/post-excerpt' ] ],
 					],
@@ -71,7 +71,7 @@ const variations = [
 					[
 						'frontis-blocks/container',
 						{
-							variationSelected: true, // এইটা add করুন
+							variationSelected: true,
 						},
 						[
 							[ 'core/post-title' ],
@@ -97,7 +97,7 @@ const variations = [
 					[
 						'frontis-blocks/container',
 						{
-							variationSelected: true, // এইটা add করুন
+							variationSelected: true,
 						},
 						[
 							[ 'core/post-featured-image' ],
