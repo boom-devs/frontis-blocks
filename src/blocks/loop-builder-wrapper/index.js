@@ -5,6 +5,7 @@ import { registerBlockType } from '@wordpress/blocks';
 /**
  * Internal dependencies
  */
+import attributes from './attributes';
 import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
