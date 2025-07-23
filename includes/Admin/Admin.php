@@ -111,11 +111,13 @@ class Admin {
             'home_url' => home_url(),
 			'google_fonts' => $google_fonts,
             'siteName' => get_bloginfo('name'),
+			'all_posts' => Helper::get_all_posts(),
+			'bolck_nonce' => wp_create_nonce('fb_block_nonce'),
 		);
 
 		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){
 			$tl_script_asset_path = FB_PLUGIN_PATH . 'assets/admin/index.asset.php';
-			$tl_script_asset      = file_exists( $tl_script_asset_path ) ? require( $tl_script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( FB_VERSION ) );
+			$tl_script_asset = file_exists( $tl_script_asset_path ) ? require( $tl_script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( FB_VERSION ) );
 			$tl_script_asset['dependencies'][] = 'jquery';
 			wp_enqueue_style('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/style-tlibrary.css', array(), '1.0.0');
 			wp_enqueue_script('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/tlibrary.js', $tl_script_asset['dependencies'], '1.0.0', true);
@@ -478,8 +480,6 @@ class Admin {
 
         return $tag_info;
     }
-
-
 
 	/**
 	 * Get excerpt for the rest field
@@ -1160,7 +1160,7 @@ class Admin {
 
                             echo '</div>';
                             ?>
-                          
+
                             <!-- Next Button -->
                             <button class="fb_pagination_next <?php echo $current_page==$total_pages ? 'disabled' : ''; ?>">
                                 <?php if ($pagination_prev_next_type === 'icon'): ?>
@@ -1313,11 +1313,15 @@ class Admin {
         wp_enqueue_script('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.js', $script_asset['dependencies'], '1.0.0', true);
         wp_localize_script('frontis-blocks-admin-sidebar', 'frontisBlocksAdminSidebar', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('fb_sidebar_nonce'),
+			'nonce' => wp_create_nonce('fb_sidebar_nonce'),
         ));
 
         wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.css', array(), '1.0.0');
-    }
+
+		// Dynamic content js
+		wp_enqueue_script('frontis-blocks-dynamic-content', FB_PLUGIN_URL . 'assets/admin/dynamicContent.js', $script_asset['dependencies'], '1.0.0', true);
+		wp_enqueue_style('frontis-blocks-dynamic-content', FB_PLUGIN_URL . 'assets/admin/style-dynamicContent.css', array(), '1.0.0');
+	}
 
     public function register_block_assets_in_site_editor() {
         global $pagenow;
