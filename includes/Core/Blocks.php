@@ -36,6 +36,13 @@ class Blocks
 		$container_row_gap = get_option('fb_container_row_gap');
 		$container_padding = get_option('fb_container_padding');
 
+		$container_widths_json = get_option('fb_default_content_width');
+		$container_widths = json_decode($container_widths_json, true);
+
+		$desktop_breakpoint = isset($container_widths['Desktop']) ? intval($container_widths['Desktop']) : 1200;
+		$tablet_breakpoint = isset($container_widths['Tablet']) ? intval($container_widths['Tablet']) : 1024;
+		$mobile_breakpoint = isset($container_widths['Mobile']) ? intval($container_widths['Mobile']) : 767;
+
 
 		if (!empty($blocks_list)) {
 			foreach ($blocks_list as $block) {
@@ -81,9 +88,9 @@ class Blocks
 						'all_cats' => Helper::get_related_taxonomy(),
 						'all_authors' => Helper::get_all_authors_with_posts(),
 						'image_sizes' => Helper::get_image_sizes(),
-						'desktop_breakpoint' => 1200,
-						'tablet_breakpoint' => 1024,
-						'mobile_breakpoint' => 768,
+						'desktop_breakpoint' => $desktop_breakpoint,
+						'tablet_breakpoint' => $tablet_breakpoint,
+						'mobile_breakpoint' => $mobile_breakpoint,
 						'global_typography' => get_option('fb_globaltypo')
 					];
 
@@ -177,6 +184,12 @@ class Blocks
 		if (Helper::is_frontis_block($block_content, $parsed_block)) {
 			$block_content = $this->add_wrapper_class($block_content, $parsed_block);
 			$block_content = $this->add_block_id($block_content, $parsed_block);
+
+			// Check dynamic content enable for this block
+			if(isset($block_obj->attributes['dynamicAttrs']) && $block_obj->attributes['dynamicAttrs']) {
+				$content = Helper::render_dynamic_content($block_obj->attributes['dynamicAttrs']);
+			}
+
 			$block_content = apply_filters('frontis_blocks_render_block', $block_content, $parsed_block, $block_obj);
 		}
 		return $block_content;

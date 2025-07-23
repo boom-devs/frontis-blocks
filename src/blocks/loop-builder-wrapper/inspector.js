@@ -11,14 +11,14 @@ import FB_Range from '@Components/range';
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
-    const { 
+    const {
         blockId,
         blockStyle,
         gridColumnsPerSection,
         gridRowGap,
         gridColumnGap,
         gridGapUnits,
-        
+
         listGapUnits,
         listRowGap,
         listImageSpacing,
@@ -28,7 +28,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         loopBuilderWrapperCustomCSS,
     } = attributes;
 
+	console.log("attributes")
+	console.log(attributes)
+
     const deviceType = useDeviceType();
+
 
     useEffect(() => {
         if (clientId && typeof clientId === "string") {
@@ -96,7 +100,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     label={__("Columns", "frontis-blocks")}
                     rangeValue={gridColumnsPerSection}
                     onChangeHandler={(value) => setAttributes({ gridColumnsPerSection: value })}
-                    deviceType={deviceType}
+                    deviceType={'Desktop'}
                     setAttributes={setAttributes}
                     rangeStep={1}
                     resetFallbackValue={"3"}
@@ -123,7 +127,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     label={__("Column Gap", "frontis-blocks")}
                     rangeValue={gridColumnGap}
                     onChangeHandler={(value) => setAttributes({ gridColumnGap: value })}
-                    rangeUnitHandler={(value) => setAttributes({ gridGapUnits: value })} 
+                    rangeUnitHandler={(value) => setAttributes({ gridGapUnits: value })}
                     deviceType={deviceType}
                     units={gridGapUnits}
                     setAttributes={setAttributes}
@@ -145,7 +149,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             </PanelBody>
 		</>
 	);
-		
+
 	/**
 	 * Inspector Advanced Controls
 	 */
@@ -184,10 +188,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     value={loopBuilderWrapperCustomCSS} 
                     onChangeValue={(value) => setAttributes({ loopBuilderWrapperCustomCSS: value })}
                 />
+
             </PanelBody>
 		</>
 	);
-    
+
     return (
 
         <>

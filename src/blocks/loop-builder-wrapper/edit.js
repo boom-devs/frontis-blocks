@@ -115,6 +115,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		previewPostType,
 	} = context;
 
+	// console
+
 	const [ activeBlockContextId, setActiveBlockContextId ] = useState();
 	const { posts, blocks } = useSelect(
 		( select ) => {
