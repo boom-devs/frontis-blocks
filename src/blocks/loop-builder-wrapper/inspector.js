@@ -28,9 +28,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         loopBuilderWrapperCustomCSS,
     } = attributes;
 
-	console.log("attributes")
-	console.log(attributes)
-
     const deviceType = useDeviceType();
 
 
