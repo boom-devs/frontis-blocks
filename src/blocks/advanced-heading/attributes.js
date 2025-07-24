@@ -15,6 +15,11 @@ const attributes = {
         },
     },
 
+	isHeadingTextChanged: {
+		type: "boolean",
+		default: false
+	},
+
     headingText: {
         type : "string",
         default: "Advanced Heading"
@@ -1199,11 +1204,6 @@ const attributes = {
 	},
 	/** End Margin */
 
-	/** Start Background */
-	headingGlobalBgColorSwitcher : {
-		type: "string",
-		default: "normal"
-	},
 	headingGlobalBgColor : {
 		type: "string",
 	},
