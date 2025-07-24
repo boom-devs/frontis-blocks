@@ -1052,7 +1052,7 @@ const Inspector = (props) => {
 
 					<FB_Range
 						min={1}
-						max={minHeightUnits[deviceType] !== 'px' ? 100 : 1000}
+						max={minHeightUnits[deviceType] !== 'px' ? 100 : 2000}
 						label={__("Minimum Height", "frontis-blocks")}
 						rangeValue={minHeight}
 						onChangeHandler={minHeightFn}

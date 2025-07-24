@@ -200,6 +200,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		containerAlignItems,
 		containerColumnsItemList,
 		containerRowsItemList,
+		containerGridAlignItems,
+		containerGridJustifyItems,
 
 		// Position
 		containerZIndex,
@@ -1114,14 +1116,6 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'column-gap': generateCSSUnit(columnGapDesktopFallback, columnGapUnits['Desktop']),
 			...selectors[containerFlexSelector],
 		};
-		// selectors['.block-editor-block-list__block'] = {
-		// 	'flex-direction': containerDirection['Desktop'],
-		// 	'align-items': containerAlignItems['Desktop'],
-		// 	'justify-content': containerJustify['Desktop'],
-		// 	'flex-wrap': containerWrap['Desktop'],
-		// 	'align-content': alignContentDesktop,
-		// 	...selectors['.block-editor-block-list__block'],
-		// };
 		tablet_selectors[containerFlexSelector]= {
 			'flex-direction': containerDirection['Tablet'],
 			'align-items': containerAlignItems['Tablet'],
@@ -1186,8 +1180,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'display': 'grid',
 			'grid-template-columns': containerColumnsItemList['Desktop'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
 			'grid-template-rows': containerRowsItemList['Desktop'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
-			'align-items': containerAlignItems['Desktop'],
-			'justify-items': containerJustify['Desktop'],
+			'align-items': containerGridAlignItems['Desktop'],
+			'justify-items': containerGridJustifyItems['Desktop'],
 			'align-content': alignContentDesktop,
 			'row-gap': generateCSSUnit(rowGapDesktopFallback, rowGapUnits['Desktop']),
 			'column-gap': generateCSSUnit(columnGapDesktopFallback, columnGapUnits['Desktop']),
@@ -1204,8 +1198,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		tablet_selectors[containerFlexSelector]= {
 			'grid-template-columns': containerColumnsItemList['Tablet'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
 			'grid-template-rows': containerRowsItemList['Tablet'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
-			'align-items': containerAlignItems['Tablet'],
-			'justify-items': containerJustify['Tablet'],
+			'align-items': containerGridAlignItems['Tablet'],
+			'justify-items': containerGridJustifyItems['Tablet'],
 			'align-content': alignContentTablet,
 			'row-gap': generateCSSUnit(rowGapTabletFallback, rowGapUnits['Tablet']),
 			'column-gap': generateCSSUnit(columnGapTabletFallback, columnGapUnits['Tablet']),
@@ -1213,8 +1207,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		mobile_selectors[containerFlexSelector]= {
 			'grid-template-columns': containerColumnsItemList['Mobile'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
 			'grid-template-rows': containerRowsItemList['Mobile'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
-			'align-items': containerAlignItems['Mobile'],
-			'justify-items': containerJustify['Mobile'],
+			'align-items': containerGridAlignItems['Mobile'],
+			'justify-items': containerGridJustifyItems['Mobile'],
 			'align-content': alignContentMobile,
 			'row-gap': generateCSSUnit(rowGapMobileFallback, rowGapUnits['Mobile']),
 			'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
@@ -1224,8 +1218,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 			'display': 'grid',
 			'grid-template-columns': containerColumnsItemList['Desktop'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
 			'grid-template-rows': containerRowsItemList['Desktop'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
-			'align-items': containerAlignItems['Desktop'],
-			'justify-items': containerJustify['Desktop'],
+			'align-items': containerGridAlignItems['Desktop'],
+			'justify-items': containerGridJustifyItems['Desktop'],
 			'align-content': alignContentDesktop,
 			'row-gap': generateCSSUnit(rowGapDesktopFallback, rowGapUnits['Desktop']),
 			'column-gap': generateCSSUnit(columnGapDesktopFallback, columnGapUnits['Desktop']),
@@ -1234,8 +1228,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
 			'grid-template-columns': containerColumnsItemList['Tablet'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
 			'grid-template-rows': containerRowsItemList['Tablet'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
-			'align-items': containerAlignItems['Tablet'],
-			'justify-items': containerJustify['Tablet'],
+			'align-items': containerGridAlignItems['Tablet'],
+			'justify-items': containerGridJustifyItems['Tablet'],
 			'align-content': alignContentTablet,
 			'row-gap': generateCSSUnit(rowGapTabletFallback, rowGapUnits['Tablet']),
 			'column-gap': generateCSSUnit(columnGapTabletFallback, columnGapUnits['Tablet']),
@@ -1244,8 +1238,8 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-${clientId}`] = {
 			'grid-template-columns': containerColumnsItemList['Mobile'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
 			'grid-template-rows': containerRowsItemList['Mobile'].map(item => `${item.type === 'auto' ? 'auto' : item.type === 'min-max' ? `minmax(${item.min}${item.minUnits}, ${item.max}${item.maxUnits})` : item.type === 'custom' ? `minmax(1px, ${item.width}${item.widthUnits})` : ''}`).join(' '),
-			'align-items': containerAlignItems['Mobile'],
-			'justify-items': containerJustify['Mobile'],
+			'align-items': containerGridAlignItems['Mobile'],
+			'justify-items': containerGridJustifyItems['Mobile'],
 			'align-content': alignContentMobile,
 			'row-gap': generateCSSUnit(rowGapMobileFallback, rowGapUnits['Mobile']),
 			'column-gap': generateCSSUnit(columnGapMobileFallback, columnGapUnits['Mobile']),
