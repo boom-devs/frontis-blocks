@@ -3184,7 +3184,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${socialIconBtnIconSize?.Desktop ? `height: ${socialIconBtnIconSize.Desktop}${socialIconBtnIconSizeUnits.Desktop};` : ''}
 					transition: all 0.3s ease-in-out;
 				}
-				.fb-team-member-wrapper.${blockID}:hover .fb-team-member-item .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn {
+				.fb-team-member-wrapper.${blockID}:hover .fb-team-member-item .fb-team-member-social-profile-wrapper .fb-team-member-social-icon-wrapper-btn svg {
 					${socialIconBtnHoverColor ? `fill: ${socialIconBtnHoverColor};` : ''}
 					transition: all 0.3s ease-in-out;
 				}
@@ -3874,21 +3874,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 				{teamMemberSocialProfileSwitcher === true && 
 				<>
-					<ToggleControl
-						label={__("Separator Switcher", "frontis-blocks")}
-						className="fb-setting-responsive-control"
-						checked={teamMemberSocialProfileSeparator}
-						onChange={(value) => setAttributes({ teamMemberSocialProfileSeparator: value })}
-					/>
-
-					{teamMemberSocialProfileSeparator === true &&
-						<SelectControl
-							label={__("Separator Position", "frontis-blocks")}
-							value={teamMemberSocialProfileSeparatorPosition}
-							options={SEPARATOR_POSITION}
-							onChange={(value) => setAttributes({ teamMemberSocialProfileSeparatorPosition: value })}
-						/>
-					}
 
 					<SelectControl
 						label={__("Icon Display", "frontis-blocks")}
@@ -3942,6 +3927,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							</Button>
 						</DndContext>
 					</div>
+
+					{teamMemberSocialType === 'content' && (teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') ? (<>
+						<ToggleControl
+							label={__("Separator Switcher", "frontis-blocks")}
+							className="fb-setting-responsive-control"
+							checked={teamMemberSocialProfileSeparator}
+							onChange={(value) => setAttributes({ teamMemberSocialProfileSeparator: value })}
+						/>
+						
+
+						{teamMemberSocialProfileSeparator === true &&
+							<SelectControl
+								label={__("Separator Position", "frontis-blocks")}
+								value={teamMemberSocialProfileSeparatorPosition}
+								options={SEPARATOR_POSITION}
+								onChange={(value) => setAttributes({ teamMemberSocialProfileSeparatorPosition: value })}
+							/>
+						}
+
+					</>) : ''}
 				</>
 				}
 			</PanelBody>
@@ -4820,12 +4825,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					initialOpen={false}
 					className="fb-setting-border-setting-wrapper"
 				>
-					<SelectControl
-						label={__("Icon Animation Type", "frontis-blocks")}
-						value={teamMemberSocialIconAnimationType}
-						options={SOCIAL_ICON_ANIMATION}
-						onChange={(value) => setAttributes({ teamMemberSocialIconAnimationType: value })}
-					/>
 
 					<FB_Range
 						min={1}
@@ -5054,6 +5053,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					title={__("Social Icons", "frontis-blocks")}
 					initialOpen={false}
 				>
+					<SelectControl
+						label={__("Icon Animation Type", "frontis-blocks")}
+						value={teamMemberSocialIconAnimationType}
+						options={SOCIAL_ICON_ANIMATION}
+						onChange={(value) => setAttributes({ teamMemberSocialIconAnimationType: value })}
+					/>
+					
 					<FB_Range
 						min={1}
 						max={100}
