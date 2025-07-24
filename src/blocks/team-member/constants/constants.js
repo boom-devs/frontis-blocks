@@ -123,7 +123,6 @@ export const SOCIAL_ICON_BUTTON = [
 
 export const SOCIAL_ICON_ANIMATION = [
 	{ label: __("Default", "frontis-block"), value: "default" },
-	{ label: __("Circle", "frontis-block"), value: "circle" },
 	{ label: __("Top", "frontis-block"), value: "top" },
 	{ label: __("Right", "frontis-block"), value: "right" },
 	{ label: __("Bottom", "frontis-block"), value: "bottom" },
