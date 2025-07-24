@@ -49,6 +49,7 @@ export default function Edit({ attributes, setAttributes, clientId, context, ins
 		advancedHeadingTabletSwitcher,
 		advancedHeadingMobileSwitcher,
 		dynamicContent,
+		isHeadingTextChanged
 	} = attributes;
 	const {postType, postId, queryId} = context;
 
@@ -92,19 +93,34 @@ export default function Edit({ attributes, setAttributes, clientId, context, ins
 		insertBlocksAfter( createBlock( getDefaultBlockName() ) );
 	};
 
+	// Synchronize headingText with rawTitle
+	useEffect(() => {
+		if (!isHeadingTextChanged) {
+			setAttributes(
+				{
+					headingText: rawTitle,
+				}
+			);
+		}
+	}, [rawTitle, headingText, setAttributes]);
+
 	let titleElement = <h2 { ...blockProps }>{ __( 'Title' ) }</h2>;
 	if ( postType && postId ) {
 		titleElement = <RichText
 			tagName={headingTag}
-			value={rawTitle}
-			onChange={(value) => {
-				// Always allow manual editing, but it will be overridden by dynamic content
-				setAttributes({ headingText: value });
-			}}
+			value={headingText}
+			onChange={(value) => onChangeHeadingText(value)}
 			placeholder={__('Advanced Heading', 'frontis-blocks')}
 			className={`fb-advanced-heading ${activeLineSwitcher ? 'active-line' : ''}`}
 			key={`heading-${clientId}-${context?.postId || 'default'}`}
 		/>
+	}
+
+	const onChangeHeadingText = (value) => {
+		setAttributes({
+			headingText: value,
+			isHeadingTextChanged: true
+		})
 	}
 	return (
 		<>
