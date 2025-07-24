@@ -2,6 +2,7 @@
 
 namespace FrontisBlocks\Core;
 
+use FrontisBlocks\Frontend\Blocks\LoopBuilder;
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Utils\Helper;
@@ -184,11 +185,20 @@ class Blocks
 		if (Helper::is_frontis_block($block_content, $parsed_block)) {
 			$block_content = $this->add_wrapper_class($block_content, $parsed_block);
 			$block_content = $this->add_block_id($block_content, $parsed_block);
+//			echo $parsed_block['blockName'];
+			// Check if loopn builder
+			if(isset($parsed_block['blockName']) && str_contains($parsed_block['blockName'], 'frontis-blocks/loop-builder')) {
+//				echo $parsed_block['blockName'];
+//				LoopBuilder::render_block($block_content, $parsed_block, $block_obj);
+			}
+//			echo "<pre>";
+//			var_dump($parsed_block);
+//			echo "</pre>";
 
 			// Check dynamic content enable for this block
-			if(isset($block_obj->attributes['dynamicAttrs']) && $block_obj->attributes['dynamicAttrs']) {
-				$content = Helper::render_dynamic_content($block_obj->attributes['dynamicAttrs']);
-			}
+//			if(isset($block_obj->attributes['dynamicAttrs']) && $block_obj->attributes['dynamicAttrs']) {
+//				$content = Helper::render_dynamic_content($block_obj->attributes['dynamicAttrs']);
+//			}
 
 			$block_content = apply_filters('frontis_blocks_render_block', $block_content, $parsed_block, $block_obj);
 		}
