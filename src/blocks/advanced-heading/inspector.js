@@ -24,8 +24,8 @@ import {
     MediaUploadCheck,
     Placeholder,
     PanelRow,
-    Popover, 
-    MenuGroup, 
+    Popover,
+    MenuGroup,
     MenuItem
 } from '@wordpress/components';
 
@@ -100,7 +100,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingLetterSpacingUnits,
         headingLineHeightUnits,
 
-        
+
         headingTextShadowValues,
         headingTextShadowCssValue,
         headingTextStroke,
@@ -203,7 +203,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         subHeadingTextCustomGradientColor,
         subHeadingTextHoverCustomGradientColorSwitcher,
         subHeadingTextHoverCustomGradientColor,
-        
+
         subHeadingBgColorTypeSwitcher,
         subHeadingBgColorType,
         subHeadingBgHoverColorType,
@@ -455,11 +455,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     // Get dynamic content preview for editing
     const dynamicValue = useSelect((select) => {
         if (!dynamicContent) return '';
-        
+
         const postType = select('core/editor').getCurrentPostType();
         const postId = select('core/editor').getCurrentPostId();
         const post = select('core').getEditedEntityRecord('postType', postType, postId);
-        
+
         switch (dynamicContent) {
         case 'post_title':
             return post.title;
@@ -1773,7 +1773,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			styles = {
 				...styles,
 				'background-image': `url(${bgImageUrl})`,
-				'background-position': bgImagePosition 
+				'background-position': bgImagePosition
 					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
 					: "50% 50%",
 				'background-attachment': bgAttachment || undefined,
@@ -1813,7 +1813,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			styles = {
 				...styles,
 				'background-image': `url(${bgImageUrl})`,
-				'background-position': bgImagePosition 
+				'background-position': bgImagePosition
 					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
 					: "50% 50%",
 				'background-attachment': bgAttachment || undefined,
@@ -1833,8 +1833,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         Object.entries(styleObj)
           .map(([key, value]) => `${key}: ${value};`)
           .join(' ');
-      
-      
+
+
       const desktopBackgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles('Desktop'));
       const desktopBackgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles('Desktop'));
       const tabletBackgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles('Tablet'));
@@ -1908,7 +1908,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${headingGlobalTypoSwitcher.textDecoration === true && headingGlobalTypographyData.textDecoration ? `text-decoration: ${headingGlobalTypographyData.textDecoration};` : ''}
             ${headingGlobalTypoSwitcher.letterSpacing === true && headingGlobalTypographyData.letterSpacing ? `letter-spacing: ${headingGlobalTypographyData.letterSpacing};` : ''}
             ${headingGlobalTypoSwitcher.lineHeight === true && headingGlobalTypographyData.lineHeight ? `line-height: ${headingGlobalTypographyData.lineHeight};` : ''}
-                
+
             ${headingGlobalTypoSwitcher.fontFamily === false && headingFontFamily && headingFontFamily !== 'Default' ? `font-family: ${headingFontFamily};` : ''}
             ${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Desktop && headingFontSizeUnits.Desktop ? `font-size: ${headingFontSize.Desktop}${headingFontSizeUnits.Desktop};` : ''}
             ${headingGlobalTypoSwitcher.fontWeight === false && headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
@@ -1917,7 +1917,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${headingGlobalTypoSwitcher.textDecoration === false && headingTextDecoration ? `text-decoration: ${headingTextDecoration};` : ''}
             ${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Desktop && headingLetterSpacingUnits.Desktop ? `letter-spacing: ${headingLetterSpacing.Desktop}${headingLetterSpacingUnits.Desktop};` : ''}
             ${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Desktop && headingLineHeightUnits.Desktop ? `line-height: ${headingLineHeight.Desktop}${headingLineHeightUnits.Desktop};` : ''}
-            
+
             ${headingDesktopPaddingWidth && headingDesktopPadding?.top ? `padding: ${headingDesktopPaddingWidth};` : ''}
             ${headingDesktopMarginWidth && headingDesktopMargin?.top ? `margin: ${headingDesktopMarginWidth};` : ''}
             ${headingBorder ? `border: ${headingBorder};` : ''}
@@ -2026,7 +2026,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${subHeadingGlobalTypoSwitcher.textDecoration === true && subHeadingGlobalTypographyData.textDecoration ? `text-decoration: ${subHeadingGlobalTypographyData.textDecoration};` : ''}
             ${subHeadingGlobalTypoSwitcher.letterSpacing === true && subHeadingGlobalTypographyData.letterSpacing ? `letter-spacing: ${subHeadingGlobalTypographyData.letterSpacing};` : ''}
             ${subHeadingGlobalTypoSwitcher.lineHeight === true && subHeadingGlobalTypographyData.lineHeight ? `line-height: ${subHeadingGlobalTypographyData.lineHeight};` : ''}
-                
+
             ${subHeadingGlobalTypoSwitcher.fontFamily === false && subHeadingFontFamily && subHeadingFontFamily !== 'Default' ? `font-family: ${subHeadingFontFamily};` : ''}
             ${subHeadingGlobalTypoSwitcher.fontSize === false && subHeadingFontSize.Desktop && subHeadingFontSizeUnits.Desktop ? `font-size: ${subHeadingFontSize.Desktop}${subHeadingFontSizeUnits.Desktop};` : ''}
             ${subHeadingGlobalTypoSwitcher.fontWeight === false && subHeadingFontWeight ? `font-weight: ${subHeadingFontWeight};` : ''}
@@ -2035,7 +2035,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${subHeadingGlobalTypoSwitcher.textDecoration === false && subHeadingTextDecoration ? `text-decoration: ${subHeadingTextDecoration};` : ''}
             ${subHeadingGlobalTypoSwitcher.letterSpacing === false && subHeadingLetterSpacing.Desktop && subHeadingLetterSpacingUnits.Desktop ? `letter-spacing: ${subHeadingLetterSpacing.Desktop}${subHeadingLetterSpacingUnits.Desktop};` : ''}
             ${subHeadingGlobalTypoSwitcher.lineHeight === false && subHeadingLineHeight.Desktop && subHeadingLineHeightUnits.Desktop ? `line-height: ${subHeadingLineHeight.Desktop}${subHeadingLineHeightUnits.Desktop};` : ''}
-            
+
             ${subHeadingDesktopPaddingWidth && subHeadingDesktopPadding.top ? `padding: ${subHeadingDesktopPaddingWidth};` : ''}
             ${subHeadingDesktopMarginWidth && subHeadingDesktopMargin.top ? `margin: ${subHeadingDesktopMarginWidth};` : ''}
             ${subHeadingBorder ? `border: ${subHeadingBorder};` : ''}
@@ -2066,7 +2066,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
 
         .${blockId} .fb-advanced-icon-wrapper {
-            ${headingAlignment.Desktop ? `justify-content: ${headingAlignment.Desktop};` : ''}   
+            ${headingAlignment.Desktop ? `justify-content: ${headingAlignment.Desktop};` : ''}
         }
 
         .${blockId} .fb-advanced-icon {
@@ -2206,7 +2206,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             }
 
             .${blockId} .fb-advanced-icon-wrapper {
-                ${headingAlignment.Tablet ? `justify-content: ${headingAlignment.Tablet};` : ''}   
+                ${headingAlignment.Tablet ? `justify-content: ${headingAlignment.Tablet};` : ''}
             }
 
             .${blockId} .fb-advanced-icon {
@@ -2298,7 +2298,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ` : ''}
 
             .${blockId} .fb-advanced-icon-wrapper {
-                ${headingAlignment.Mobile ? `justify-content: ${headingAlignment.Mobile};` : ''}   
+                ${headingAlignment.Mobile ? `justify-content: ${headingAlignment.Mobile};` : ''}
             }
 
             .${blockId} .fb-advanced-icon {
@@ -2361,7 +2361,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingText,
     headingTag,
     headingAlignment,
-    
+
     headingTextColorTypeSwitcher,
     headingTextColorType,
     headingTextHoverColorType,
@@ -2701,13 +2701,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             disabled={!!dynamicContent}
                             className="fb-advanced-text"
                             />
-                            
+
                             {/* <Button
                             icon="database"
                             onClick={() => setIsPopoverVisible(true)}
                             label="Insert dynamic content"
                             /> */}
-                            
+
                             {/* {isPopoverVisible && (
                                 <Popover
                                     onClose={() => setIsPopoverVisible(false)}
@@ -2865,8 +2865,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                     globalTypoType={headingGlobalTypoType}
                     onChangeGlobalTypoType={(value) => {
-                        setAttributes({ 
-                            headingGlobalTypoType: value, 
+                        setAttributes({
+                            headingGlobalTypoType: value,
                             headingGlobalTypoSwitcher: value === 'default' ? {...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                         })
                     }}
@@ -2956,9 +2956,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                 <FB_BackgroundColorControl
 					label={__("Text Color", "frontis-blocks")}
-					bgColorSwitcher={headingTextColorTypeSwitcher}  
+					bgColorSwitcher={headingTextColorTypeSwitcher}
 					setBgColorSwitcher={(value) => setAttributes({ headingTextColorTypeSwitcher: value })}
-					
+
                     normalLabel={__("Text Color Type", "frontis-blocks")}
 					normalBackgroundType={headingTextColorType}
 					setNormalBackgroundType={(value) => setAttributes({ headingTextColorType: value })}
@@ -2970,13 +2970,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					setNormalCustomGradientSwitcher={(value) => setAttributes({ headingTextCustomGradientColorSwitcher: value })}
 					normalCustomGradientInputValue={headingTextCustomGradientColor}
 					setNormalCustomGradientInputValue={(value) => setAttributes({ headingTextCustomGradientColor: value })}
-					
+
                     hoverLabel={__("Text Color Type", "frontis-blocks")}
-					hoverBackgroundType={headingTextHoverColorType} 
+					hoverBackgroundType={headingTextHoverColorType}
 					setHoverBackgroundType={(value) => setAttributes({ headingTextHoverColorType: value })}
 					hoverClassicColor={headingHoverColor}
 					setHoverClassicColor={(value) => setAttributes({ headingHoverColor: value })}
-					hoverGradientColor={headingTextHoverGradientColor} 
+					hoverGradientColor={headingTextHoverGradientColor}
 					setHoverGradientColor={(value) => setAttributes({ headingTextHoverGradientColor: value })}
 					hoverCustomGradientSwitcher={headingTextHoverCustomGradientColorSwitcher}
 					setHoverCustomGradientSwitcher={(value) => setAttributes({ headingTextHoverCustomGradientColorSwitcher: value })}
@@ -2989,9 +2989,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                 <FB_BackgroundColorControl
 					label={__("Background Color", "frontis-blocks")}
-					bgColorSwitcher={headingBgColorTypeSwitcher}  
+					bgColorSwitcher={headingBgColorTypeSwitcher}
 					setBgColorSwitcher={(value) => setAttributes({ headingBgColorTypeSwitcher: value })}
-					
+
 					normalBackgroundType={headingBgColorType}
 					setNormalBackgroundType={(value) => setAttributes({ headingBgColorType: value })}
 					normalClassicColor={headingBgColor}
@@ -3002,12 +3002,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					setNormalCustomGradientSwitcher={(value) => setAttributes({ headingBgCustomGradientColorSwitcher: value })}
 					normalCustomGradientInputValue={headingBgCustomGradientColor}
 					setNormalCustomGradientInputValue={(value) => setAttributes({ headingBgCustomGradientColor: value })}
-					
-					hoverBackgroundType={headingBgHoverColorType} 
+
+					hoverBackgroundType={headingBgHoverColorType}
 					setHoverBackgroundType={(value) => setAttributes({ headingBgHoverColorType: value })}
 					hoverClassicColor={headingBgHoverColor}
 					setHoverClassicColor={(value) => setAttributes({ headingBgHoverColor: value })}
-					hoverGradientColor={headingBgHoverGradientColor} 
+					hoverGradientColor={headingBgHoverGradientColor}
 					setHoverGradientColor={(value) => setAttributes({ headingBgHoverGradientColor: value })}
 					hoverCustomGradientSwitcher={headingBgHoverCustomGradientColorSwitcher}
 					setHoverCustomGradientSwitcher={(value) => setAttributes({ headingBgHoverCustomGradientColorSwitcher: value })}
@@ -3276,7 +3276,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                 <ToggleControl
                     label={__("Before After Switcher", "frontis-blocks")}
-                    checked={headingBeforeAfterSwitcher} 
+                    checked={headingBeforeAfterSwitcher}
                     onChange={(value) => setAttributes({ headingBeforeAfterSwitcher: value })}
                 />
 
@@ -3323,7 +3323,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             rangeStep={1}
                             resetFallbackValue={""}
                         />
-                        
+
                         <SelectControl
                             label={__("Border Style", "frontis-blocks")}
                             value={headingBeforeAfterBorder}
@@ -3379,8 +3379,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                         globalTypoType={subHeadingGlobalTypoType}
                         onChangeGlobalTypoType={(value) => {
-                            setAttributes({ 
-                                subHeadingGlobalTypoType: value, 
+                            setAttributes({
+                                subHeadingGlobalTypoType: value,
                                 subHeadingGlobalTypoSwitcher: value === 'default' ? {...subHeadingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...subHeadingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
                             })
                         }}
@@ -3468,12 +3468,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     />
                 )}
 
-                   
+
                     <FB_BackgroundColorControl
                         label={__("Text Color", "frontis-blocks")}
-                        bgColorSwitcher={subHeadingTextColorTypeSwitcher}  
+                        bgColorSwitcher={subHeadingTextColorTypeSwitcher}
                         setBgColorSwitcher={(value) => setAttributes({ subHeadingTextColorTypeSwitcher: value })}
-                        
+
                         normalLabel={__("Text Color Type", "frontis-blocks")}
                         normalBackgroundType={subHeadingTextColorType}
                         setNormalBackgroundType={(value) => setAttributes({ subHeadingTextColorType: value })}
@@ -3485,13 +3485,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         setNormalCustomGradientSwitcher={(value) => setAttributes({ subHeadingTextCustomGradientColorSwitcher: value })}
                         normalCustomGradientInputValue={subHeadingTextCustomGradientColor}
                         setNormalCustomGradientInputValue={(value) => setAttributes({ subHeadingTextCustomGradientColor: value })}
-                        
+
                         hoverLabel={__("Text Color Type", "frontis-blocks")}
-                        hoverBackgroundType={subHeadingTextHoverColorType} 
+                        hoverBackgroundType={subHeadingTextHoverColorType}
                         setHoverBackgroundType={(value) => setAttributes({ subHeadingTextHoverColorType: value })}
                         hoverClassicColor={subHeadingHoverColor}
                         setHoverClassicColor={(value) => setAttributes({ subHeadingHoverColor: value })}
-                        hoverGradientColor={subHeadingTextHoverGradientColor} 
+                        hoverGradientColor={subHeadingTextHoverGradientColor}
                         setHoverGradientColor={(value) => setAttributes({ subHeadingTextHoverGradientColor: value })}
                         hoverCustomGradientSwitcher={subHeadingTextHoverCustomGradientColorSwitcher}
                         setHoverCustomGradientSwitcher={(value) => setAttributes({ subHeadingTextHoverCustomGradientColorSwitcher: value })}
@@ -3504,9 +3504,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                     <FB_BackgroundColorControl
                         label={__("Background Color", "frontis-blocks")}
-                        bgColorSwitcher={subHeadingBgColorTypeSwitcher}  
+                        bgColorSwitcher={subHeadingBgColorTypeSwitcher}
                         setBgColorSwitcher={(value) => setAttributes({ subHeadingBgColorTypeSwitcher: value })}
-                        
+
                         normalBackgroundType={subHeadingBgColorType}
                         setNormalBackgroundType={(value) => setAttributes({ subHeadingBgColorType: value })}
                         normalClassicColor={subHeadingBgColor}
@@ -3517,12 +3517,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         setNormalCustomGradientSwitcher={(value) => setAttributes({ subHeadingBgCustomGradientColorSwitcher: value })}
                         normalCustomGradientInputValue={subHeadingBgCustomGradientColor}
                         setNormalCustomGradientInputValue={(value) => setAttributes({ subHeadingBgCustomGradientColor: value })}
-                        
-                        hoverBackgroundType={subHeadingBgHoverColorType} 
+
+                        hoverBackgroundType={subHeadingBgHoverColorType}
                         setHoverBackgroundType={(value) => setAttributes({ subHeadingBgHoverColorType: value })}
                         hoverClassicColor={subHeadingBgHoverColor}
                         setHoverClassicColor={(value) => setAttributes({ subHeadingBgHoverColor: value })}
-                        hoverGradientColor={subHeadingBgHoverGradientColor} 
+                        hoverGradientColor={subHeadingBgHoverGradientColor}
                         setHoverGradientColor={(value) => setAttributes({ subHeadingBgHoverGradientColor: value })}
                         hoverCustomGradientSwitcher={subHeadingBgHoverCustomGradientColorSwitcher}
                         setHoverCustomGradientSwitcher={(value) => setAttributes({ subHeadingBgHoverCustomGradientColorSwitcher: value })}
@@ -3840,7 +3840,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
         </>
 	);
-		
+
 	/**
 	 * Inspector Advanced Controls
 	 */
@@ -3851,7 +3851,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     <PanelBody
                         title={__("Layout", "frontis-blocks")}
                         initialOpen={true}
-                        className='fb-setting-layout-header' 
+                        className='fb-setting-layout-header'
                     >
                         <FB_Range
                             min={0}
@@ -3878,7 +3878,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             deviceType={deviceType}
                             positionType={advancedHeadingPositionType}
                             setPositionType={(value) => setAttributes({ advancedHeadingPositionType: value })}
-                                                                            
+
                             HZOrientationType={advancedHeadingHZOrientationType}
                             setHZOrientationType={(value) =>
                                 setAttributes({ advancedHeadingHZOrientationType: value })
@@ -3887,7 +3887,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             setVROrientationType={(value) =>
                                 setAttributes({ advancedHeadingVROrientationType: value })
                             }
-                                                                                
+
                             HZLeftOffset={advancedHeadingHZLeftOffset}
                             setHZLeftOffset={(value) => setAttributes({ advancedHeadingHZLeftOffset: value })}
                             HZLeftOffsetUnits={advancedHeadingHZLeftOffsetUnits}
@@ -3896,7 +3896,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             setHZRightOffset={(value) => setAttributes({ advancedHeadingHZRightOffset: value })}
                             HZRightOffsetUnits={advancedHeadingHZRightOffsetUnits}
                             setHZRightOffsetUnits={(value) => setAttributes({ advancedHeadingHZRightOffsetUnits: value })}
-                                                                            
+
                             VRTopOffset={advancedHeadingVRTopOffset}
                             setVRTopOffset={(value) => setAttributes({ advancedHeadingVRTopOffset: value })}
                             VRTopOffsetUnits={advancedHeadingVRTopOffsetUnits}
@@ -3922,7 +3922,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             onChangeValue={(value) => setAttributes({ headingGlobalWraperClass: value })}
                             helpText={__("Separate with spaces key.", "frontis-blocks")}
                         />
-                        
+
                     </PanelBody>
 
                     <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
@@ -3960,7 +3960,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     >
                         <FB_SwitcherControl
                             label={__("Background Type", "frontis-blocks")}
-                            globalSwitcher={headingGlobalBgColorSwitcher} 
+                            globalSwitcher={headingGlobalBgColorSwitcher}
                             setGlobalSwitcher={(value) => setAttributes({ headingGlobalBgColorSwitcher: value })}
                         />
 
@@ -4009,8 +4009,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 <>
                                                     <FB_ColorControl
                                                         label={__("Color", "frontis-blocks")}
-                                                        globalColor={headingGlobalBgNormalClassicColor} 
-                                                        setGlobalColor={(value) => setAttributes({ headingGlobalBgNormalClassicColor: value })} 
+                                                        globalColor={headingGlobalBgNormalClassicColor}
+                                                        setGlobalColor={(value) => setAttributes({ headingGlobalBgNormalClassicColor: value })}
                                                     />
 
                                                     <FB_ResponsiveBackgroundImageControl
@@ -4023,11 +4023,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ headingGlobalBgNormalBackgroundImageAttachment: newAttachment })}
                                                         globalBackgroundImageRepeat={headingGlobalBgNormalBackgroundImageRepeat}
                                                         setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ headingGlobalBgNormalBackgroundImageRepeat: newRepeat })}
-                                                        globalBackgroundImageSize={headingGlobalBgNormalBackgroundImageSize} 
+                                                        globalBackgroundImageSize={headingGlobalBgNormalBackgroundImageSize}
                                                         setGlobalBackgroundImageSize={(newSize) => setAttributes({ headingGlobalBgNormalBackgroundImageSize: newSize })}
                                                         setAttributes={setAttributes}
                                                     />
-                                                            
+
                                                 </>
                                             )}
 
@@ -4045,13 +4045,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                     )}
                                 />
                             </BaseControl>
-                            
+
                         )}
 
                         {headingGlobalBgColorSwitcher === 'hover' && (
                             <BaseControl
                                 className="fb-setting-background-color-setting-wrapper"
-                                label={__("Hover Background Type", "frontis-blocks")} 
+                                label={__("Hover Background Type", "frontis-blocks")}
                             >
                                 <Dropdown
                                     className="fb-setting-background-color-setting-icon-dropdown"
@@ -4093,8 +4093,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                 <>
                                                     <FB_ColorControl
                                                         label={__("Color", "frontis-blocks")}
-                                                        globalColor={headingGlobalBgHoverClassicColor} 
-                                                        setGlobalColor={(value) => setAttributes({ headingGlobalBgHoverClassicColor: value })} 
+                                                        globalColor={headingGlobalBgHoverClassicColor}
+                                                        setGlobalColor={(value) => setAttributes({ headingGlobalBgHoverClassicColor: value })}
                                                     />
 
                                                     <FB_ResponsiveBackgroundImageControl
@@ -4103,7 +4103,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         setGlobalBackgroundImageUrl={(value) => setAttributes({ headingGlobalBgHoverBackgroundImageUrl: value })}
                                                         globalBackgroundImagePosition={headingGlobalBgHoverBackgroundImagePosition}
                                                         setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ headingGlobalBgHoverBackgroundImagePosition: newPosition })}
-                                                        globalBackgroundImageAttachment={headingGlobalBgHoverBackgroundImageAttachment} 
+                                                        globalBackgroundImageAttachment={headingGlobalBgHoverBackgroundImageAttachment}
                                                         setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ headingGlobalBgHoverBackgroundImageAttachment: newAttachment })}
                                                         globalBackgroundImageRepeat={headingGlobalBgHoverBackgroundImageRepeat}
                                                         setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ headingGlobalBgHoverBackgroundImageRepeat: newRepeat })}
@@ -4111,7 +4111,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                                         setGlobalBackgroundImageSize={(newSize) => setAttributes({ headingGlobalBgHoverBackgroundImageSize: newSize })}
                                                         setAttributes={setAttributes}
                                                     />
-                                                            
+
                                                 </>
                                             )}
 
@@ -4131,7 +4131,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             </BaseControl>
                         )}
                     </PanelBody>
-                    
+
                     <PanelBody
                         title={__("Border and Shadow", "frontis-blocks")}
                         initialOpen={false}
@@ -4240,7 +4240,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         title={__("Custom CSS", "frontis-blocks")}
                         initialOpen={false}
                     >
-                        <FB_CustomCSSEditor  
+                        <FB_CustomCSSEditor
                             value={advancedHeadingCustomCSS}
                             onChangeValue={(value) => setAttributes({ advancedHeadingCustomCSS: value })}
                         />
@@ -4252,7 +4252,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     return (
         <>
-
             <style>
                 {editorStyle}
             </style>

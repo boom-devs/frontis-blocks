@@ -1,25 +1,20 @@
-import { __ } from '@wordpress/i18n';
+/**
+ * WordPress dependencies
+ */
 import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
-export default function save({ attributes }) {
-    const {
-        blockID,
-        displayLayout = { type: 'flex', columns: 3 },
-    } = attributes;
+export default function save({
+								 attributes: {
+									 tagName: TagName = 'div',
+									 blockId,
+									 query
+								 }
+							 }) {
+	const blockProps = useBlockProps.save({
+		className: `${blockId || ''} fb-query-content-container`,
+	});
 
-    const blockProps = useBlockProps.save({
-        className: `fb-loop-builder-block ${blockID || ''}`,
-    });
+	const innerBlocksProps = useInnerBlocksProps.save(blockProps);
 
-    const innerBlocksProps = useInnerBlocksProps.save({
-        className: 'fb-loop-builder-inner',
-    });
-
-    return (
-        <div {...blockProps}>
-            <div className={`fb-loop-content layout-${displayLayout.type}`}>
-                <div {...innerBlocksProps} />
-            </div>
-        </div>
-    );
+	return <TagName {...innerBlocksProps} />;
 }

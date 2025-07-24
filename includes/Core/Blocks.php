@@ -2,6 +2,7 @@
 
 namespace FrontisBlocks\Core;
 
+use FrontisBlocks\Frontend\Blocks\LoopBuilder;
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Utils\Helper;
@@ -182,11 +183,51 @@ class Blocks
 		);
 	}
 
+	public function check_patterns_used($post_content)
+	{
+		$pattern_contents = []; // Store pattern contents
+		$pattern_ids = [];
+
+		// Extract synced pattern IDs
+		preg_match_all('/<!--\s*wp:block\s*{"ref":\s*(\d+)\}\s*\/-->/', $post_content, $matches);
+
+		if (!empty($matches[1])) {
+			$pattern_ids = $matches[1]; // Array of synced pattern IDs
+		}
+
+		// Fetch pattern content for each ID
+		if (!empty($pattern_ids)) {
+			foreach ($pattern_ids as $pattern_id) {
+				$pattern_post = get_post($pattern_id);
+				if ($pattern_post && $pattern_post->post_type === 'wp_block') {
+					$pattern_contents[] = $pattern_post->post_content; // Collect pattern content
+				}
+			}
+		}
+
+		return $pattern_contents; // Return array of pattern contents
+	}
+
 	public function render_block($block_content, $parsed_block, $block_obj)
 	{
 		if (Helper::is_frontis_block($block_content, $parsed_block)) {
 			$block_content = $this->add_wrapper_class($block_content, $parsed_block);
 			$block_content = $this->add_block_id($block_content, $parsed_block);
+//			echo $parsed_block['blockName'];
+			// Check if loopn builder
+			if(isset($parsed_block['blockName']) && str_contains($parsed_block['blockName'], 'frontis-blocks/loop-builder')) {
+//				echo $parsed_block['blockName'];
+//				LoopBuilder::render_block($block_content, $parsed_block, $block_obj);
+			}
+//			echo "<pre>";
+//			var_dump($parsed_block);
+//			echo "</pre>";
+
+			// Check dynamic content enable for this block
+//			if(isset($block_obj->attributes['dynamicAttrs']) && $block_obj->attributes['dynamicAttrs']) {
+//				$content = Helper::render_dynamic_content($block_obj->attributes['dynamicAttrs']);
+//			}
+
 			$block_content = apply_filters('frontis_blocks_render_block', $block_content, $parsed_block, $block_obj);
 		}
 		return $block_content;
@@ -194,7 +235,21 @@ class Blocks
 
 	public function get_blocks_on_save($post_id, $post, $update)
 	{
+		$post_content = $post->post_content;
+
+		// Get synced pattern contents
+		$pattern_contents = $this->check_patterns_used($post_content);
+
+		// Append pattern contents to post_content
+		if (!empty($pattern_contents)) {
+			foreach ($pattern_contents as $pattern_content) {
+				$post_content .= "\n" . $pattern_content; // Append each pattern content
+			}
+		}
+
 		if ($update) {
+			// Pass modified post object to generate_page_assets
+			$post->post_content = $post_content; // Update post object
 			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post);
 		}
 	}

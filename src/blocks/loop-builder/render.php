@@ -1,152 +1,113 @@
 <?php
 /**
- * Server-side rendering for the Loop Builder block
+ * Custom rendering for the frontis-blocks/loop-builder block using the render_block filter.
  *
- * @package Frontis Blocks
+ * @param string $block_content The default block content.
+ * @param array  $block The block data, including attributes and inner blocks.
+ * @return string The rendered block content.
  */
 
-// Exit if accessed directly.
-if (!defined('ABSPATH')) {
-    exit;
+if (!function_exists('render_loop_builder')) {
+function render_loop_builder($block_content, $block) {
+	// Check if the block is frontis-blocks/loop-builder
+	if (isset($block['blockName']) && $block['blockName'] === 'frontis-blocks/loop-builder') {
+		// Skip custom rendering in the admin (block editor)
+		if (is_admin()) {
+			return $block_content; // Return default content for the editor
+		}
+
+		// Get block attributes
+		$attributes = isset($block['attrs']) ? $block['attrs'] : [];
+		$blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+		$align_class = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
+
+		// Initialize the output for the frontend
+		$output = '<div class="' . esc_attr($blockId) . ' wp-block-frontis-blocks-loop-builder fb-loop-builder ' . esc_attr($align_class) . '">';
+
+		$query_args = isset($attributes['query']) ? $attributes['query'] : [];
+		// Default query arguments
+		$default_query_args = [
+			'post_type'      => 'post',
+			'posts_per_page' => isset($query_args['perPage']) ? $query_args['perPage'] : 6,
+			'order'          => isset($query_args['order']) ? $query_args['order'] : 'desc',
+			'orderby'        => isset($query_args['orderBy']) ? $query_args['orderBy'] : 'date',
+			'post_status'    => 'publish',
+		];
+
+		// Merge custom query parameters
+		if (!empty($query_args['postType'])) {
+			$default_query_args['post_type'] = $query_args['postType'];
+		}
+
+//		var_dump($default_query_args);
+		if (!empty($query_args['author'])) {
+			$default_query_args['author'] = $query_args['author'];
+		}
+		if (!empty($query_args['search'])) {
+			$default_query_args['s'] = $query_args['search'];
+		}
+		if (!empty($query_args['exclude'])) {
+			$default_query_args['post__not_in'] = $query_args['exclude'];
+		}
+		if (!empty($query_args['selectedCat'])) {
+			$default_query_args['cat'] = $query_args['selectedCat'];
+		}
+		if (!empty($query_args['selectedTag'])) {
+			$default_query_args['tag__in'] = $query_args['selectedTag'];
+		}
+
+
+		// Get the inner blocks of the loop-builder
+		$inner_blocks = isset($block['innerBlocks']) ? $block['innerBlocks'] : [];
+
+		$inner_block_attributes = isset($inner_blocks[0]['attrs']) ? $inner_blocks[0]['attrs'] : [];
+
+		$inner_block_id = isset($inner_block_attributes['blockId']) ? $inner_block_attributes['blockId'] : '';
+
+		$output .= '<div class="'. esc_attr($inner_block_id) .' fb-loop-builder-wrapper-main-container">';
+
+		// Run the query
+		$query = new WP_Query($default_query_args);
+
+		// Check if there are posts
+		if ($query->have_posts()) {
+			while ($query->have_posts()) {
+				$query->the_post();
+
+				// Loop through inner blocks to find loop-builder-wrapper
+				foreach ($inner_blocks as $inner_block) {
+					if (isset($inner_block['blockName']) && $inner_block['blockName'] === 'frontis-blocks/loop-builder-wrapper') {
+						// Get the inner blocks of loop-builder-wrapper
+						$wrapper_inner_blocks = isset($inner_block['innerBlocks']) ? $inner_block['innerBlocks'] : [];
+
+						// Render each inner block (e.g., container and its children)
+						foreach ($wrapper_inner_blocks as $wrapper_inner_block) {
+							// Set the post ID in the block context for dynamic blocks
+							$wrapper_inner_block['context'] = ['postId' => get_the_ID()];
+							$output .= render_block($wrapper_inner_block);
+						}
+					}
+				}
+			}
+
+			// Reset post data
+			wp_reset_postdata();
+		} else {
+			// Fallback content if no posts are found
+			$output .= '<p>No posts found.</p>';
+		}
+
+		// Close the wrapper
+		$output .= '</div>';
+		$output .= '</div>';
+
+		// Return the custom output for the frontend
+		return $output;
+	}
+
+	// Return the default block content for other blocks
+	return $block_content;
 }
 
-/**
- * Renders the Loop Builder block on the server.
- *
- * @param array    $attributes Block attributes.
- * @param string   $content    Block content.
- * @param WP_Block $block      Block instance.
- * @return string Returns the filtered post grid.
- */
-
-if (!function_exists('render_frontis_loop_builder')) {
-    function render_frontis_loop_builder($attributes, $content, $block) {
-        $block_id = isset($attributes['blockID']) ? $attributes['blockID'] : 'fb-loop-builder-' . uniqid();
-        $query = isset($attributes['query']) ? $attributes['query'] : [];
-        $display_layout = isset($attributes['displayLayout']) ? $attributes['displayLayout'] : ['type' => 'flex', 'columns' => 3];
-        
-        // Query parameters
-        $args = array(
-            'post_type' => isset($query['postType']) ? $query['postType'] : 'post',
-            'posts_per_page' => isset($query['perPage']) ? $query['perPage'] : 6,
-            'order' => isset($query['order']) ? $query['order'] : 'desc',
-            'orderby' => isset($query['orderBy']) ? $query['orderBy'] : 'date',
-            'offset' => isset($query['offset']) ? $query['offset'] : 0,
-        );
-        
-        // Handle pagination if needed
-        if (isset($query['pages']) && $query['pages'] > 0) {
-            $paged = get_query_var('paged') ? get_query_var('paged') : 1;
-            $args['paged'] = $paged;
-        }
-        
-        // Handle taxonomy query if set
-        if (isset($query['taxQuery']) && !empty($query['taxQuery'])) {
-            $tax_query = [];
-            
-            foreach ($query['taxQuery'] as $taxonomy => $terms) {
-                if (!empty($terms)) {
-                    $tax_query[] = [
-                        'taxonomy' => $taxonomy,
-                        'field' => 'id',
-                        'terms' => $terms,
-                    ];
-                }
-            }
-            
-            if (!empty($tax_query)) {
-                $args['tax_query'] = $tax_query;
-            }
-        }
-        
-        // Run the query
-        $loop = new WP_Query($args);
-        
-        // Store the global post object
-        global $post;
-        $original_post = $post;
-        
-        ob_start();
-        
-        if ($loop->have_posts()) {
-            $wrapper_classes = "fb-loop-builder-block {$block_id}";
-            $layout_classes = "fb-loop-content layout-{$display_layout['type']}";
-            
-            if ($display_layout['type'] === 'flex') {
-                $layout_classes .= " columns-{$display_layout['columns']}";
-            }
-            
-            echo '<div class="' . esc_attr($wrapper_classes) . '">';
-            echo '<div class="' . esc_attr($layout_classes) . '">';
-            
-            // Filter for custom layout classes
-            $layout_classes = apply_filters('frontis_loop_builder_layout_classes', '', $attributes);
-            
-            echo '<div class="fb-loop-builder-inner ' . esc_attr($layout_classes) . '">';
-            
-            // Loop through the posts
-            while ($loop->have_posts()) {
-                $loop->the_post();
-                $post_id = get_the_ID();
-                
-                // Parse the inner blocks and replace the post template parts
-                $inner_content = do_blocks($content);
-                
-                // Output the content
-                echo $inner_content;
-            }
-            
-            echo '</div>'; // close .fb-loop-builder-inner
-            echo '</div>'; // close .fb-loop-content
-            echo '</div>'; // close .fb-loop-builder-block
-            
-        } else {
-            // No posts found
-            $no_results = '<div class="fb-loop-no-results">';
-            $no_results .= '<p>' . __('No posts found.', 'frontis-blocks') . '</p>';
-            $no_results .= '</div>';
-            
-            echo $no_results;
-        }
-        
-        // Reset the global post object
-        $post = $original_post;
-        wp_reset_postdata();
-        
-        return ob_get_clean();
-    }
+add_filter('render_block', 'render_loop_builder', 10, 2);
 }
-
-
-/**
- * Register the dynamic block.
- */
-if (!function_exists('register_frontis_loop_builder')) {
-    function register_frontis_loop_builder() {
-        register_block_type_from_metadata(
-            __DIR__,
-            array(
-                'render_callback' => 'render_frontis_loop_builder',
-            )
-        );
-    }
-}
-
-add_action('init', 'register_frontis_loop_builder');
-
-/**
- * Add custom query parameters support
- */
-if (!function_exists('render_frontis_loop_builder')) {
-    function frontis_loop_builder_query_vars($query_vars, $block) {
-        if (!isset($block['attrs']['namespace']) || $block['attrs']['namespace'] !== 'frontis-blocks/custom-loop') {
-            return $query_vars;
-        }
-        
-        // Add your custom query modifications here
-        
-        return $query_vars;
-    }
-}
-
-add_filter('query_loop_block_query_vars', 'frontis_loop_builder_query_vars', 10, 2);
