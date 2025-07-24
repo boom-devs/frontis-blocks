@@ -2076,7 +2076,7 @@ const attributes = {
 	},
 	teamMemberSocialIconAnimationType: {
 		type : 'string',
-		default: 'default'
+		default: 'top'
 	},
 
 	socialIconBtnIcon: {
