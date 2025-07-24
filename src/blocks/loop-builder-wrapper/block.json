@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "frontis-blocks/loop-builder-wrapper",
+    "version": "1.0.0",
+    "title": "Wrapper",
+    "category": "frontis-blocks",
+    "textdomain": "frontis-blocks",
+	"description": "A customizable loop builder wrapper block with various styling options.",
+    "example": {},
+    "usesContext": [
+		"queryId",
+		"query",
+		"displayLayout",
+		"templateSlug",
+		"previewPostType",
+		"enhancedPagination",
+		"postType"
+	],
+	"supports": {
+        "anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false
+	},
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css"
+}
+

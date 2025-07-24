@@ -5,7 +5,7 @@ import { TabPanel } from '@wordpress/components';
 const FB_InspectorControls = ({
   generalControls = null,
   styleControls = null,
-  advancedControls = null,
+  advancedControls = null
 }) => {
   return (
     <InspectorControls key="controls">

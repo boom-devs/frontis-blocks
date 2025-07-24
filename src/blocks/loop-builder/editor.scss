@@ -1,102 +1,62 @@
-.fb-loop-builder-block {
-  margin-bottom: 2em;
-  
-  .fb-loop-content {
-      &.layout-flex {
-          display: flex;
-          flex-wrap: wrap;
-          margin: 0 -15px;
-          
-          .block-editor-inner-blocks {
-              width: 100%;
-          }
-          
-          .wp-block-post-template {
-              display: flex;
-              flex-wrap: wrap;
-              margin: 0;
-              padding: 0;
-              list-style: none;
-              
-              > li {
-                  padding: 0 15px;
-                  margin-bottom: 30px;
-                  
-                  // Default column settings
-                  width: calc(33.333% - 30px);
-                  
-                  // Adjust for different column counts
-                  .columns-1 & {
-                      width: calc(100% - 30px);
-                  }
-                  
-                  .columns-2 & {
-                      width: calc(50% - 30px);
-                  }
-                  
-                  .columns-3 & {
-                      width: calc(33.333% - 30px);
-                  }
-                  
-                  .columns-4 & {
-                      width: calc(25% - 30px);
-                  }
-                  
-                  .columns-5 & {
-                      width: calc(20% - 30px);
-                  }
-                  
-                  .columns-6 & {
-                      width: calc(16.666% - 30px);
-                  }
-              }
-          }
-      }
-      
-      &.layout-list {
-          .wp-block-post-template {
-              display: block;
-              margin: 0;
-              padding: 0;
-              list-style: none;
-              
-              > li {
-                  margin-bottom: 30px;
-                  padding-bottom: 30px;
-                  border-bottom: 1px solid #eee;
-                  
-                  &:last-child {
-                      border-bottom: none;
-                  }
-              }
-          }
-      }
-  }
-  
-  .fb-loop-builder-placeholder {
-      padding: 40px;
-      text-align: center;
-      background-color: #f8f9fa;
-      border: 1px dashed #ccc;
-  }
-  
-  .fb-inspector-control {
-      .fb-parent-tab-panel {
-          .components-tab-panel__tabs {
-              display: flex;
-              border-bottom: 1px solid #e0e0e0;
-              
-              .components-tab-panel__tabs-item {
-                  flex: 1;
-                  justify-content: center;
-                  font-weight: 500;
-                  padding: 8px 12px;
-                  
-                  &.active-tab {
-                      border-bottom: 2px solid #007cba;
-                  }
-              }
-          }
-      }
-  }
-}
+//.block-library-query-pattern__selection-modal {
+//
+//	.block-editor-block-patterns-list {
+//		column-count: 2;
+//		column-gap: $grid-unit-30;
+//
+//		@include break-wide() {
+//			column-count: 3;
+//		}
+//
+//		.block-editor-block-patterns-list__list-item {
+//			break-inside: avoid-column;
+//		}
+//	}
+//
+//	.block-library-query-pattern__selection-search {
+//		background: $white;
+//		position: sticky;
+//		top: 0;
+//		padding: $grid-unit-20 0;
+//		transform: translateY(- $grid-unit-05); // Offsets the top padding on the modal content container
+//		margin-bottom: - $grid-unit-05;
+//		z-index: z-index(".block-library-query-pattern__selection-search");
+//	}
+//}
+//
+//.wp-block-query__enhanced-pagination-modal {
+//	@include break-small() {
+//		max-width: $break-mobile;
+//	}
+//}
+//
+//.block-editor-block-settings-menu__popover {
+//	&.is-expanded {
+//		overflow-y: scroll;
+//	}
+//	.block-library-query-pattern__selection-content {
+//		height: 100%;
+//	}
+//	.block-editor-block-patterns-list {
+//		display: grid;
+//		grid-template-columns: 1fr;
+//		@include break-small() {
+//			grid-template-columns: 1fr 1fr;
+//		}
+//		grid-gap: $grid-unit-15;
+//		min-width: $break-zoomed-in;
+//		@include break-small() {
+//			min-width: $break-mobile;
+//		}
+//	}
+//	.block-editor-block-patterns-list__list-item {
+//		margin-bottom: 0;
+//	}
+//}
+
+// .wp-block-frontis-blocks-loop-builder-wrapper {
+// 	display: flex;
+//     flex-wrap: wrap;
+//     flex-direction: row;
+//     gap: 24px;
+// }
