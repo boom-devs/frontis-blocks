@@ -57,6 +57,7 @@ const Inspector = (props) => {
 			containerColumnGapHasEdited,
 			containerRowGapHasEdited,
 			containerZIndex,
+			containerGlobalPadding,
 			containerPaddingUnits,
 			containerDesktopPadding,
 			containerTabletPadding,
@@ -205,9 +206,9 @@ const Inspector = (props) => {
 	};
 
 	// 2️⃣ Memoize parsed values
-	const formatted_default_container_width = useMemo(() => {
-		return parseResponsiveValue(FrontisBlocksData.default_container_width);
-	}, [FrontisBlocksData.default_container_width]);
+	const formatted_desktop_breakpoint = FrontisBlocksData.desktop_breakpoint;
+	const formatted_tablet_breakpoint = FrontisBlocksData.tablet_breakpoint;
+	const formatted_mobile_breakpoint = FrontisBlocksData.mobile_breakpoint;
 
 	const formatted_container_column_gap = useMemo(() => {
 		return parseResponsiveValue(FrontisBlocksData.container_column_gap);
@@ -221,32 +222,24 @@ const Inspector = (props) => {
 		return parseResponsiveValue(FrontisBlocksData.container_padding);
 	}, [FrontisBlocksData.container_padding]);
 
-	// 3️⃣ Apply the effects as before
-	useEffect(() => {
-		if (fullWidthContentBoxedWidth.Desktop !== '') {
-			setAttributes({
-				fullWidthContentBoxedWidthHasEdited: true
-			});
-		}
-	}, [fullWidthContentBoxedWidth]);
 
 	useEffect(() => {
 		setAttributes({
 			globalFullWidthContentBoxedWidth: {
-				Desktop: formatted_default_container_width.Desktop || "1200",
-				Tablet: formatted_default_container_width.Tablet || "1024",
-				Mobile: formatted_default_container_width.Mobile || "767",
+				Desktop: formatted_desktop_breakpoint || "1200",
+				Tablet: formatted_tablet_breakpoint || "1024",
+				Mobile: formatted_mobile_breakpoint || "767",
 			},
 		});
-	}, [formatted_default_container_width]);
+	}, [formatted_desktop_breakpoint, formatted_tablet_breakpoint, formatted_mobile_breakpoint]);
 
 
 	useEffect(() => {
 		setAttributes({
 			globalColumnGap: {
-				Desktop: formatted_container_column_gap.Desktop || "0",
-				Tablet: formatted_container_column_gap.Tablet || "0",
-				Mobile: formatted_container_column_gap.Mobile || "0",
+				Desktop: formatted_container_column_gap.Desktop || "",
+				Tablet: formatted_container_column_gap.Tablet || "",
+				Mobile: formatted_container_column_gap.Mobile || "",
 			},
 		});
 	}, [formatted_container_column_gap]);
@@ -255,46 +248,25 @@ const Inspector = (props) => {
 	useEffect(() => {
 		setAttributes({
 			globalRowGap: {
-				Desktop: formatted_container_row_gap.Desktop || "0",
-				Tablet: formatted_container_row_gap.Tablet || "0",
-				Mobile: formatted_container_row_gap.Mobile || "0",
+				Desktop: formatted_container_row_gap.Desktop || "",
+				Tablet: formatted_container_row_gap.Tablet || "",
+				Mobile: formatted_container_row_gap.Mobile || "",
 			},
 		});
 	}, [formatted_container_row_gap]);
 
+	useEffect(() => {
+		setAttributes({
+			containerGlobalPadding: {
+				Desktop: formatted_container_padding.Desktop || "",
+				Tablet: formatted_container_padding.Tablet || "",
+				Mobile: formatted_container_padding.Mobile || "",
+			},
+		});
+	}, [formatted_container_padding]);
 
-	// useEffect(() => {
-	// 	if (containerDesktopPadding.top !== '' || containerTabletPadding.top !== '' || containerMobilePadding.top !== '') {
-	// 		setAttributes({
-	// 			containerPaddingHasEdited: true
-	// 		});
-	// 	}
-	// }, []);
+	console.log(containerGlobalPadding);
 
-	// useEffect(() => {
-	// 	if (!containerPaddingHasEdited) {
-	// 		setAttributes({
-	// 			containerDesktopPadding: {
-	// 				top: formatted_container_padding.Desktop || "10",
-	// 				bottom: formatted_container_padding.Desktop || "10",
-	// 				left: formatted_container_padding.Desktop || "10",
-	// 				right: formatted_container_padding.Desktop || "10",
-	// 			},
-	// 			containerTabletPadding: {
-	// 				top: formatted_container_padding.Tablet || "10",
-	// 				bottom: formatted_container_padding.Tablet || "10",
-	// 				left: formatted_container_padding.Tablet || "10",
-	// 				right: formatted_container_padding.Tablet || "10",
-	// 			},
-	// 			containerMobilePadding: {		
-	// 				top: formatted_container_padding.Mobile || "10",
-	// 				bottom: formatted_container_padding.Mobile || "10",
-	// 				left: formatted_container_padding.Mobile || "10",
-	// 				right: formatted_container_padding.Mobile || "10",
-	// 			},
-	// 		});
-	// 	}
-	// }, [formatted_container_padding]);
 
 	const CONTAINER_TYPE = [
 		{ label: __('Full Width', 'frontis-blocks'), value: "full-width" },
