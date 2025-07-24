@@ -16,13 +16,15 @@ function render_loop_builder($block_content, $block) {
 			return $block_content; // Return default content for the editor
 		}
 
-		// Initialize the output for the frontend
-		$output = '<div class="fb-loop-builder">';
-
 		// Get block attributes
 		$attributes = isset($block['attrs']) ? $block['attrs'] : [];
-		$query_args = isset($attributes['query']) ? $attributes['query'] : [];
+		$blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+		$align_class = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
+		// Initialize the output for the frontend
+		$output = '<div class="' . esc_attr($blockId) . ' wp-block-frontis-blocks-loop-builder fb-loop-builder ' . esc_attr($align_class) . '">';
+
+		$query_args = isset($attributes['query']) ? $attributes['query'] : [];
 		// Default query arguments
 		$default_query_args = [
 			'post_type'      => 'post',
@@ -54,6 +56,16 @@ function render_loop_builder($block_content, $block) {
 			$default_query_args['tag__in'] = $query_args['selectedTag'];
 		}
 
+
+		// Get the inner blocks of the loop-builder
+		$inner_blocks = isset($block['innerBlocks']) ? $block['innerBlocks'] : [];
+
+		$inner_block_attributes = isset($inner_blocks[0]['attrs']) ? $inner_blocks[0]['attrs'] : [];
+
+		$inner_block_id = isset($inner_block_attributes['blockId']) ? $inner_block_attributes['blockId'] : '';
+
+		$output .= '<div class="'. esc_attr($inner_block_id) .' fb-loop-builder-wrapper-main-container">';
+
 		// Run the query
 		$query = new WP_Query($default_query_args);
 
@@ -61,9 +73,6 @@ function render_loop_builder($block_content, $block) {
 		if ($query->have_posts()) {
 			while ($query->have_posts()) {
 				$query->the_post();
-
-				// Get the inner blocks of the loop-builder
-				$inner_blocks = isset($block['innerBlocks']) ? $block['innerBlocks'] : [];
 
 				// Loop through inner blocks to find loop-builder-wrapper
 				foreach ($inner_blocks as $inner_block) {
@@ -89,6 +98,7 @@ function render_loop_builder($block_content, $block) {
 		}
 
 		// Close the wrapper
+		$output .= '</div>';
 		$output .= '</div>';
 
 		// Return the custom output for the frontend
