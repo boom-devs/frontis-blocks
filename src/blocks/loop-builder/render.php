@@ -21,39 +21,58 @@ function render_loop_builder($block_content, $block) {
 		$blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
 		$align_class = isset($attributes['align']) ? 'align' . $attributes['align'] : '';
 
+		$query_args = isset($attributes['query']) && is_array($attributes['query']) ? $attributes['query'] : [];
+
+		$selectedAuthorSwitcher = isset($query_args['selectedAuthorSwitcher']) ? $query_args['selectedAuthorSwitcher'] : '';
+		$selectedAuthor         = isset($query_args['selectedAuthor']) ? $query_args['selectedAuthor'] : [];
+		$deSelectedAuthor       = isset($query_args['deSelectedAuthor']) ? $query_args['deSelectedAuthor'] : [];
+		
+		$selectedCatSwitcher    = isset($query_args['selectedCatSwitcher']) ? $query_args['selectedCatSwitcher'] : '';
+		$selectedCat            = isset($query_args['selectedCat']) ? $query_args['selectedCat'] : [];
+		$deSelectedCat          = isset($query_args['deSelectedCat']) ? $query_args['deSelectedCat'] : [];
+		
+		$selectedTagSwitcher    = isset($query_args['selectedTagSwitcher']) ? $query_args['selectedTagSwitcher'] : '';
+		$selectedTag            = isset($query_args['selectedTag']) ? $query_args['selectedTag'] : [];
+		$deSelectedTag          = isset($query_args['deSelectedTag']) ? $query_args['deSelectedTag'] : [];
+
+		// Offset support from block attributes
+		$postOffset = isset($attributes['postOffset']) ? intval($attributes['postOffset']) : 0;
+
 		// Initialize the output for the frontend
 		$output = '<div class="' . esc_attr($blockId) . ' wp-block-frontis-blocks-loop-builder fb-loop-builder ' . esc_attr($align_class) . '">';
 
-		$query_args = isset($attributes['query']) ? $attributes['query'] : [];
 		// Default query arguments
 		$default_query_args = [
-			'post_type'      => 'post',
-			'posts_per_page' => isset($query_args['perPage']) ? $query_args['perPage'] : 6,
+			'post_type'      => isset($query_args['postType']) ? $query_args['postType'] : 'post',
+			'posts_per_page' => isset($query_args['perPage']) ? intval($query_args['perPage']) : 6,
 			'order'          => isset($query_args['order']) ? $query_args['order'] : 'desc',
 			'orderby'        => isset($query_args['orderBy']) ? $query_args['orderBy'] : 'date',
+			'offset'         => $postOffset,
 			'post_status'    => 'publish',
 		];
 
-		// Merge custom query parameters
-		if (!empty($query_args['postType'])) {
-			$default_query_args['post_type'] = $query_args['postType'];
+		// Author filter
+		if ($selectedAuthorSwitcher === 'include' && is_array($selectedAuthor) && count($selectedAuthor)) {
+			$default_query_args['author__in'] = array_map('intval', $selectedAuthor);
+		}
+		if ($selectedAuthorSwitcher === 'exclude' && is_array($deSelectedAuthor) && count($deSelectedAuthor)) {
+			$default_query_args['author__not_in'] = array_map('intval', $deSelectedAuthor);
 		}
 
-//		var_dump($default_query_args);
-		if (!empty($query_args['author'])) {
-			$default_query_args['author'] = $query_args['author'];
+		// Category filter
+		if ($selectedCatSwitcher === 'include' && is_array($selectedCat) && count($selectedCat)) {
+			$default_query_args['category__in'] = array_map('intval', $selectedCat);
 		}
-		if (!empty($query_args['search'])) {
-			$default_query_args['s'] = $query_args['search'];
+		if ($selectedCatSwitcher === 'exclude' && is_array($deSelectedCat) && count($deSelectedCat)) {
+			$default_query_args['category__not_in'] = array_map('intval', $deSelectedCat);
 		}
-		if (!empty($query_args['exclude'])) {
-			$default_query_args['post__not_in'] = $query_args['exclude'];
+
+		// Tag filter
+		if ($selectedTagSwitcher === 'include' && is_array($selectedTag) && count($selectedTag)) {
+			$default_query_args['tag__in'] = array_map('intval', $selectedTag);
 		}
-		if (!empty($query_args['selectedCat'])) {
-			$default_query_args['cat'] = $query_args['selectedCat'];
-		}
-		if (!empty($query_args['selectedTag'])) {
-			$default_query_args['tag__in'] = $query_args['selectedTag'];
+		if ($selectedTagSwitcher === 'exclude' && is_array($deSelectedTag) && count($deSelectedTag)) {
+			$default_query_args['tag__not_in'] = array_map('intval', $deSelectedTag);
 		}
 
 
@@ -63,8 +82,9 @@ function render_loop_builder($block_content, $block) {
 		$inner_block_attributes = isset($inner_blocks[0]['attrs']) ? $inner_blocks[0]['attrs'] : [];
 
 		$inner_block_id = isset($inner_block_attributes['blockId']) ? $inner_block_attributes['blockId'] : '';
+		$postSwitcher = isset($inner_block_attributes['postSwitcher']) ? $inner_block_attributes['postSwitcher'] : 'grid';
 
-		$output .= '<div class="'. esc_attr($inner_block_id) .' fb-loop-builder-wrapper-main-container">';
+		$output .= '<div class="'. esc_attr($inner_block_id) .' fb-loop-builder-wrapper-main-container '. esc_attr($postSwitcher) .'-layout">';
 
 		// Run the query
 		$query = new WP_Query($default_query_args);
