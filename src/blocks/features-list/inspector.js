@@ -1490,7 +1490,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }`;
             style += singleItemTitleColorStyle;
 
-            const singleItemTitleHoverColorStyle = `.${blockID} .fb-feature-list-item.single-item-${item.id} .fb-feature-list-title:hover, .${blockID} .fb-feature-list-item.single-item-${item.id} .fb-feature-list-text:hover {
+            const singleItemTitleHoverColorStyle = `.${blockID} .fb-feature-list-item.single-item-${item.id}:hover .fb-feature-list-title, .${blockID} .fb-feature-list-item.single-item-${item.id}:hover .fb-feature-list-text {
                 ${item.FeatureSingleItemTextHoverColor ? `color: ${item.FeatureSingleItemTextHoverColor};` : ''}
             }`;
             style += singleItemTitleHoverColorStyle;
@@ -1749,6 +1749,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 `}
                 ${FeatureSingleItemBorderHoverColor ? `border-color: ${FeatureSingleItemBorderHoverColor};` : ''}
                 ${FeatureSingleItemBoxShadowHoverCssValue ? `box-shadow: ${FeatureSingleItemBoxShadowHoverCssValue};` : ''}
+                transition: all .3s ease-in-out;
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-items {
                 display: flex;
@@ -1760,9 +1761,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${FeatureIconColor ? `fill: ${FeatureIconColor};` : ''}
                 height: ${FeatureIconSize.Desktop}${FeatureIconSizeUnits.Desktop};
                 width: ${FeatureIconSize.Desktop}${FeatureIconSizeUnits.Desktop};
+                transition: all .3s ease-in-out;
             }
-            .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon:hover svg {
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:hover .fb-feature-list-icon svg {
                 ${FeatureIconHoverColor ? `fill: ${FeatureIconHoverColor};` : ''}
+                transition: all .3s ease-in-out;
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box {
                 ${featureIconDesktopMargin && FeatureIconMarginDesktop.top ? `margin: ${featureIconDesktopMargin};` : ''}
@@ -1779,6 +1782,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${FeatureIconBorderColor ? `border-color: ${FeatureIconBorderColor};` : ''}
                 ${FeatureIconBoxShadowCssValue ? `box-shadow: ${FeatureIconBoxShadowCssValue};` : ''}
                 ${featureIconDesktopBorderRadiusWidth && FeatureIconBorderRadiusDesktop.top? `border-radius: ${featureIconDesktopBorderRadiusWidth};` : ''}
+                transition: all .3s ease-in-out;
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner.circle {
                 ${featureIconDesktopBorderRadiusWidth && FeatureIconBorderRadiusDesktop.top ? `border-radius: ${featureIconDesktopBorderRadiusWidth};` : 'border-radius: 50%;'} 
@@ -1789,7 +1793,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner.rhombus {
                 ${featureIconDesktopBorderRadiusWidth && FeatureIconBorderRadiusDesktop.top ? `border-radius: ${featureIconDesktopBorderRadiusWidth};` : 'border-radius: 0;'} 
             }
-            .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner:hover {
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:hover .fb-feature-list-icon-inner {
                 ${FeatureIconHoverBackgroundType === 'gradient' ? ` 
                     background: ${FeatureIconHoverCustomGradientSwitcher && FeatureIconHoverCustomGradientInputValue ? FeatureIconHoverCustomGradientInputValue : FeatureIconHoverGradientColor};
                 `: `
@@ -1797,6 +1801,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 `}
                 ${FeatureIconBorderHoverColor ? `border-color: ${FeatureIconBorderHoverColor};` : ''}
                 ${FeatureIconBoxShadowHoverCssValue ? `box-shadow: ${FeatureIconBoxShadowHoverCssValue};` : ''}
+                transition: all .3s ease-in-out;
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-content ${FeatureTag} {
                 ${FeatureTitleGlobalTypoSwitcher.fontFamily === true && FeatureTitleGlobalTypographyData.fontFamily ? `font-family: ${FeatureTitleGlobalTypographyData.fontFamily};` : ''}
@@ -1818,9 +1823,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${FeatureTitleGlobalTypoSwitcher.lineHeight === false && FeatureTitleLineHeight.Desktop && FeatureTitleLineHeightUnits.Desktop ? `line-height: ${FeatureTitleLineHeight.Desktop}${FeatureTitleLineHeightUnits.Desktop};` : ''}
                 ${FeatureTitleColor ? `color: ${FeatureTitleColor};` : ''}
                 ${featureTitleDesktopMargin ? `margin: ${featureTitleDesktopMargin};` : ''}
+                transition: all .3s ease-in-out;
             }
-            .fb-feature-main-wrapper.${blockID} .fb-feature-list-content ${FeatureTag}:hover {
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:hover .fb-feature-list-content ${FeatureTag} {
                 ${FeatureTitleHoverColor ? `color: ${FeatureTitleHoverColor};` : ''}
+                transition: all .3s ease-in-out;
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text {
                 ${FeatureDescGlobalTypoSwitcher.fontFamily === true && FeatureDescGlobalTypographyData.fontFamily ? `font-family: ${FeatureDescGlobalTypographyData.fontFamily};` : ''}
@@ -1842,11 +1849,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${FeatureDescGlobalTypoSwitcher.lineHeight === false && FeatureDescLineHeight.Desktop && FeatureDescLineHeightUnits.Desktop ? `line-height: ${FeatureDescLineHeight.Desktop}${FeatureDescLineHeightUnits.Desktop};` : ''}
                 ${FeatureDescColor ? `color: ${FeatureDescColor};` : ''}
                 ${featureDescDesktopMargin ? `margin: ${featureDescDesktopMargin};` : ''}
+                transition: all .3s ease-in-out;
             }
-            .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text:hover {
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:hover .fb-feature-list-content .fb-feature-list-text {
                 ${FeatureDescHoverColor ? `color: ${FeatureDescHoverColor};` : ''}
+                transition: all .3s ease-in-out;
             }
-
+ 
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box .fb-feature-icon-image-wrapper {
                 height: ${FeatureIconImageHeight.Desktop}${FeatureIconImageUnits.Desktop};
                 width: ${FeatureIconImageWidth.Desktop}${FeatureIconImageUnits.Desktop};  
@@ -1856,9 +1865,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${FeatureIconImageBorderColor ? `border-color: ${FeatureIconImageBorderColor};` : ''}
                 ${featureIconImageDesktopBorderWidth && FeatureIconImageBorderDesktop.top? `border-width: ${featureIconImageDesktopBorderWidth};` : ''}
                 ${featureIconImageDesktopBorderRadiusWidth && FeatureIconImageBorderRadiusDesktop.top? `border-radius: ${featureIconImageDesktopBorderRadiusWidth};` : ''}
+                transition: all .3s ease-in-out;
             }
             .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box .fb-feature-icon-image-wrapper img:hover {
                 ${FeatureIconImageBorderHoverColor ? `border-color: ${FeatureIconImageBorderHoverColor};` : ''}
+                transition: all .3s ease-in-out;
             }
 
             @media only screen and (max-width: 1024px) {
@@ -2509,47 +2520,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             </PanelBody>
 
             <PanelBody
-                title={__("Icon", "frontis-blocks")}
+                title={__("Icon Style", "frontis-blocks")}
                 initialOpen={false}
                 className="fb-setting-feature-icon-wrapper"
             >
-
-                <FB_SwitcherControl
-                    label={__("Icon Color", "frontis-blocks")}
-                    globalSwitcher={FeatureIconColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ FeatureIconColorSwitcher: value })}
-                />
-
-                {FeatureIconColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Color", "frontis-blocks")}
-                        globalColor={FeatureIconColor}
-                        setGlobalColor={(value) => setAttributes({ FeatureIconColor: value })}
-                    />
-                )}
-
-                {FeatureIconColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={FeatureIconHoverColor}
-                        setGlobalColor={(value) => setAttributes({ FeatureIconHoverColor: value })}
-                    />
-                )}
-
-                <FB_Range
-                    min={1}
-                    max={150}
-                    label={__("Icon Size", "frontis-blocks")}
-                    rangeValue={FeatureIconSize}
-                    onChangeHandler={(value) => setAttributes({ FeatureIconSize: value })}
-                    rangeUnitHandler={(value) => setAttributes({ FeatureIconSizeUnits: value })}
-                    deviceType={deviceType}
-                    units={FeatureIconSizeUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={"25"}
-                />
-
                 <FB_BackgroundColorControl
                     label={__("Background Color", "frontis-blocks")}
                     bgColorSwitcher={FeatureIconBgColorSwitcher}
@@ -2688,11 +2662,53 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         onBoxShadowStyleChange={(value) => setAttributes({ FeatureIconBoxShadowHoverCssValue: value })}
                     />
                 )}
+            </PanelBody>
+            <PanelBody
+                title={__("Icon Size & Color", "frontis-blocks")}
+                initialOpen={false}
+                className="fb-setting-feature-icon-wrapper"
+            >
+
+                <FB_SwitcherControl
+                    label={__("Icon Color", "frontis-blocks")}
+                    globalSwitcher={FeatureIconColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ FeatureIconColorSwitcher: value })}
+                />
+
+                {FeatureIconColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Color", "frontis-blocks")}
+                        globalColor={FeatureIconColor}
+                        setGlobalColor={(value) => setAttributes({ FeatureIconColor: value })}
+                    />
+                )}
+
+                {FeatureIconColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={FeatureIconHoverColor}
+                        setGlobalColor={(value) => setAttributes({ FeatureIconHoverColor: value })}
+                    />
+                )}
+
+                <FB_Range
+                    min={1}
+                    max={150}
+                    label={__("Icon Size", "frontis-blocks")}
+                    rangeValue={FeatureIconSize}
+                    onChangeHandler={(value) => setAttributes({ FeatureIconSize: value })}
+                    rangeUnitHandler={(value) => setAttributes({ FeatureIconSizeUnits: value })}
+                    deviceType={deviceType}
+                    units={FeatureIconSizeUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"25"}
+                />
 
             </PanelBody>
 
             <PanelBody
-                title={__("Image", "frontis-blocks")}
+                title={__("Image Size", "frontis-blocks")}
                 initialOpen={false}
                 className="fb-setting-feature-icon-image-wrapper"
             >
@@ -2726,7 +2742,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
 
 
-                <SelectControl
+                {/* <SelectControl
                     label={__("Border Style", "frontis-blocks")}
                     value={FeatureIconImageBorder}
                     options={BORDER_STYLES}
@@ -2781,9 +2797,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     spacingCombineBtn={FeatureIconImageBorderRadiusLink}
                     spacingCombineBtnHandler={handleFeatureIconImageBorderRadiusCombineBtn}
                     setAttributes={setAttributes}
-                />
-
-
+                /> */}
             </PanelBody>
             <PanelBody
                 title={__("Title", "frontis-blocks")}
