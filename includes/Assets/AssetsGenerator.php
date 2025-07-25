@@ -34,12 +34,18 @@ class AssetsGenerator
 		// Generate header and footer css
 		$this->generate_active_header_footer();
 
+		$frontis_block_used = get_post_meta($post_id, 'frontis_blocks_used', true);
+
+		if(!$frontis_block_used) {
+			return false;
+		}
+
 		// Generate template and page css
 		$this->post_id = $post_id;
 		$this->post = $post;
 
-		if ((get_post_type($this->post_id) === 'wp_template' && $post->post_name === 'archive') || (get_post_type($this->post_id) === 'wp_template' && $post->post_name === 'single') || (get_post_type($this->post_id) === 'wp_template' && $post->post_name === 'search') || (get_post_type($this->post_id) === 'wp_template' && $post->post_name === '404') || (get_post_type($this->post_id) === 'wp_template' && $post->post_name === 'home') || (get_post_type($this->post_id) === 'wp_template' && $post->post_name === 'page')) {
-			$this->css_generator_functions(false);
+		if(get_post_type($this->post_id) === 'wp_template' && in_array($post->post_name, ['archive', 'single', 'search', '404', 'home', 'page'])) {
+			$this->css_generator_functions();
 		}
 
 		if (get_post_type($this->post_id) !== 'wp_template' && get_post_type($this->post_id) !== 'wp_template_part') {
@@ -49,12 +55,6 @@ class AssetsGenerator
 
 	function generate_active_header_footer()
 	{
-		// Initialize output array
-		$output = [
-			'header' => '',
-			'footer' => ''
-		];
-
 		// Get the current theme's template parts
 		$template_parts = $this->get_block_theme_template_parts();
 
@@ -309,17 +309,29 @@ class AssetsGenerator
 
 	public function css_generator_functions($generate_template_css = false)
 	{
-		$this->generate_global_assets();
 		$this->combine_static_assets();
 		$this->generate_all_blocks_assets();
 
 		if ($generate_template_css) {
-			$this->check_frontis_blocks_used();
 			$this->get_template_css();
 		}
 
 		// Combine and save CSS files
 		$page_name = $this->post->post_name;
+
+		// Check if post or custom post then its should be post type instead of page name
+		if(Helper::is_custom_post_type($this->post->ID) || get_post_type($this->post->ID) === 'post') {
+
+			$frontis_used = get_post_meta( $this->post->ID, 'frontis_blocks_used', true );
+
+			if($frontis_used) {
+				$page_name = $this->post->post_name;
+				$this->get_template_css();
+			} else {
+				$page_name = get_post_type($this->post->ID);
+			}
+		}
+
 		$this->combine_and_save_css_file($page_name);
 
 		$this->get_font_families();
@@ -700,14 +712,16 @@ class AssetsGenerator
 
 	public function get_template_css()
 	{
-		$post_name = get_post_type($this->post_id) === 'post' ? 'single' : 'page';
-		$assigned_template = get_post_meta($this->post_id, '_wp_page_template', true);
+		global $wpdb;
+
+		$post_name = Helper::is_custom_post_type($this->post->ID) || get_post_type($this->post->ID) === 'post' ? 'single' : 'page';
+
+		$assigned_template = get_post_meta($this->post->ID, '_wp_page_template', true);
 
 		if ($assigned_template !== '') {
 			$post_name = $assigned_template;
 		}
 
-		global $wpdb;
 		$query = $wpdb->prepare(
 			"SELECT
                 ID,
