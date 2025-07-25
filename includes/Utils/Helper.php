@@ -582,8 +582,6 @@ class Helper
 
 	// Render dynamic content for block
 	public static function render_dynamic_content($block_data) {
-//		var_dump($block_data);
-
 	}
 
 	public static function get_single_field($post_id, $field) {
