@@ -1,18 +1,18 @@
 const attributes = {
     blockID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     deviceType: {
-        type: "string",
-        default: "Desktop"
+        type: 'string',
+        default: 'Desktop'
     },
     blockStyle: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     FeatureItems: {
-        type: "array",
+        type: 'array',
         default: [
             // You can define some default items if needed
             { id: 'item-1',
@@ -20,44 +20,44 @@ const attributes = {
                 Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.',
                 FeatureIcon: 'check',
 
-                FeatureIconImageUrl: "",
-                FeatureIconImageAlt: "",
-                FeatureIconImageID: "",
+                FeatureIconImageUrl: '',
+                FeatureIconImageAlt: '',
+                FeatureIconImageID: '',
 
-                FeatureSingleItemIconColorSwitcher: "normal",
-                FeatureSingleItemIconColor: "",
-                FeatureSingleItemIconHoverColor: "",
+                FeatureSingleItemIconColorSwitcher: 'normal',
+                FeatureSingleItemIconColor: '',
+                FeatureSingleItemIconHoverColor: '',
 
-                FeatureSingleItemIconBgColorSwitcher: "normal", 
-                FeatureSingleItemIconNormalBackgroundType: "classic",
-                FeatureSingleItemIconNormalClassicColor: "",
+                FeatureSingleItemIconBgColorSwitcher: 'normal', 
+                FeatureSingleItemIconNormalBackgroundType: 'classic',
+                FeatureSingleItemIconNormalClassicColor: '',
                 FeatureSingleItemIconNormalGradientColor: null,
                 FeatureSingleItemIconNormalCustomGradientSwitcher: false,
-                FeatureSingleItemIconNormalCustomGradientInputValue: "",
+                FeatureSingleItemIconNormalCustomGradientInputValue: '',
 
-                FeatureSingleItemIconHoverBackgroundType: "classic",
-                FeatureSingleItemIconHoverClassicColor: "",
+                FeatureSingleItemIconHoverBackgroundType: 'classic',
+                FeatureSingleItemIconHoverClassicColor: '',
                 FeatureSingleItemIconHoverGradientColor: null,
                 FeatureSingleItemIconHoverCustomGradientSwitcher: false,
-                FeatureSingleItemIconHoverCustomGradientInputValue: "",
+                FeatureSingleItemIconHoverCustomGradientInputValue: '',
 
-                FeatureSingleItemTextColorSwitcher: "normal",
-                FeatureSingleItemTextColor: "",
-                FeatureSingleItemTextHoverColor: "",
+                FeatureSingleItemTextColorSwitcher: 'normal',
+                FeatureSingleItemTextColor: '',
+                FeatureSingleItemTextHoverColor: '',
 
                 /** Start Single Item Background Color */
-                FeatureItemBgColorSwitcher: "normal",
-                FeatureItemNormalBackgroundType: "classic",
-                FeatureItemNormalClassicColor: "",
+                FeatureItemBgColorSwitcher: 'normal',
+                FeatureItemNormalBackgroundType: 'classic',
+                FeatureItemNormalClassicColor: '',
                 FeatureItemNormalGradientColor: null,
                 FeatureItemNormalCustomGradientSwitcher: false,
-                FeatureItemNormalCustomGradientInputValue: "",
+                FeatureItemNormalCustomGradientInputValue: '',
 
-                FeatureItemHoverBackgroundType: "classic",
-                FeatureItemHoverClassicColor: "",
+                FeatureItemHoverBackgroundType: 'classic',
+                FeatureItemHoverClassicColor: '',
                 FeatureItemHoverGradientColor: null,
                 FeatureItemHoverCustomGradientSwitcher: false,
-                FeatureItemHoverCustomGradientInputValue: "",
+                FeatureItemHoverCustomGradientInputValue: '',
                 /** End Single Item Background Color */
             },
             { id: 'item-2',
@@ -65,44 +65,44 @@ const attributes = {
                 Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.',
                 FeatureIcon: 'check',
 
-                FeatureIconImageUrl: "",
-                FeatureIconImageAlt: "",
-                FeatureIconImageID: "",
+                FeatureIconImageUrl: '',
+                FeatureIconImageAlt: '',
+                FeatureIconImageID: '',
 
-                FeatureSingleItemIconColorSwitcher: "normal",
-                FeatureSingleItemIconColor: "",
-                FeatureSingleItemIconHoverColor: "",
+                FeatureSingleItemIconColorSwitcher: 'normal',
+                FeatureSingleItemIconColor: '',
+                FeatureSingleItemIconHoverColor: '',
 
-                FeatureSingleItemIconBgColorSwitcher: "normal", 
-                FeatureSingleItemIconNormalBackgroundType: "classic",
-                FeatureSingleItemIconNormalClassicColor: "",
+                FeatureSingleItemIconBgColorSwitcher: 'normal', 
+                FeatureSingleItemIconNormalBackgroundType: 'classic',
+                FeatureSingleItemIconNormalClassicColor: '',
                 FeatureSingleItemIconNormalGradientColor: null,
                 FeatureSingleItemIconNormalCustomGradientSwitcher: false,
-                FeatureSingleItemIconNormalCustomGradientInputValue: "",
+                FeatureSingleItemIconNormalCustomGradientInputValue: '',
 
-                FeatureSingleItemIconHoverBackgroundType: "classic",
-                FeatureSingleItemIconHoverClassicColor: "",
+                FeatureSingleItemIconHoverBackgroundType: 'classic',
+                FeatureSingleItemIconHoverClassicColor: '',
                 FeatureSingleItemIconHoverGradientColor: null,
                 FeatureSingleItemIconHoverCustomGradientSwitcher: false,
-                FeatureSingleItemIconHoverCustomGradientInputValue: "",
+                FeatureSingleItemIconHoverCustomGradientInputValue: '',
 
-                FeatureSingleItemTextColorSwitcher: "normal",
-                FeatureSingleItemTextColor: "",
-                FeatureSingleItemTextHoverColor: "",
+                FeatureSingleItemTextColorSwitcher: 'normal',
+                FeatureSingleItemTextColor: '',
+                FeatureSingleItemTextHoverColor: '',
 
                 /** Start Single Item Background Color */
-                FeatureItemBgColorSwitcher: "normal",
-                FeatureItemNormalBackgroundType: "classic",
-                FeatureItemNormalClassicColor: "",
+                FeatureItemBgColorSwitcher: 'normal',
+                FeatureItemNormalBackgroundType: 'classic',
+                FeatureItemNormalClassicColor: '',
                 FeatureItemNormalGradientColor: null,
                 FeatureItemNormalCustomGradientSwitcher: false,
-                FeatureItemNormalCustomGradientInputValue: "",
+                FeatureItemNormalCustomGradientInputValue: '',
 
-                FeatureItemHoverBackgroundType: "classic",
-                FeatureItemHoverClassicColor: "",
+                FeatureItemHoverBackgroundType: 'classic',
+                FeatureItemHoverClassicColor: '',
                 FeatureItemHoverGradientColor: null,
                 FeatureItemHoverCustomGradientSwitcher: false,
-                FeatureItemHoverCustomGradientInputValue: "",
+                FeatureItemHoverCustomGradientInputValue: '',
                 /** End Single Item Background Color */
             },
             { id: 'item-3',
@@ -110,159 +110,159 @@ const attributes = {
                 Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.',
                 FeatureIcon: 'check',
 
-                FeatureIconImageUrl: "",
-                FeatureIconImageAlt: "",
-                FeatureIconImageID: "",
+                FeatureIconImageUrl: '',
+                FeatureIconImageAlt: '',
+                FeatureIconImageID: '',
 
-                FeatureSingleItemIconColorSwitcher: "normal",
-                FeatureSingleItemIconColor: "",
-                FeatureSingleItemIconHoverColor: "",
+                FeatureSingleItemIconColorSwitcher: 'normal',
+                FeatureSingleItemIconColor: '',
+                FeatureSingleItemIconHoverColor: '',
 
-                FeatureSingleItemIconBgColorSwitcher: "normal", 
-                FeatureSingleItemIconNormalBackgroundType: "classic",
-                FeatureSingleItemIconNormalClassicColor: "",
+                FeatureSingleItemIconBgColorSwitcher: 'normal', 
+                FeatureSingleItemIconNormalBackgroundType: 'classic',
+                FeatureSingleItemIconNormalClassicColor: '',
                 FeatureSingleItemIconNormalGradientColor: null,
                 FeatureSingleItemIconNormalCustomGradientSwitcher: false,
-                FeatureSingleItemIconNormalCustomGradientInputValue: "",
+                FeatureSingleItemIconNormalCustomGradientInputValue: '',
 
-                FeatureSingleItemIconHoverBackgroundType: "classic",
-                FeatureSingleItemIconHoverClassicColor: "",
+                FeatureSingleItemIconHoverBackgroundType: 'classic',
+                FeatureSingleItemIconHoverClassicColor: '',
                 FeatureSingleItemIconHoverGradientColor: null,
                 FeatureSingleItemIconHoverCustomGradientSwitcher: false,
-                FeatureSingleItemIconHoverCustomGradientInputValue: "",
+                FeatureSingleItemIconHoverCustomGradientInputValue: '',
 
-                FeatureSingleItemTextColorSwitcher: "normal",
-                FeatureSingleItemTextColor: "",
-                FeatureSingleItemTextHoverColor: "",
+                FeatureSingleItemTextColorSwitcher: 'normal',
+                FeatureSingleItemTextColor: '',
+                FeatureSingleItemTextHoverColor: '',
 
                 /** Start Single Item Background Color */
-                FeatureItemBgColorSwitcher: "normal",
-                FeatureItemNormalBackgroundType: "classic",
-                FeatureItemNormalClassicColor: "",
+                FeatureItemBgColorSwitcher: 'normal',
+                FeatureItemNormalBackgroundType: 'classic',
+                FeatureItemNormalClassicColor: '',
                 FeatureItemNormalGradientColor: null,
                 FeatureItemNormalCustomGradientSwitcher: false,
-                FeatureItemNormalCustomGradientInputValue: "",
+                FeatureItemNormalCustomGradientInputValue: '',
 
-                FeatureItemHoverBackgroundType: "classic",
-                FeatureItemHoverClassicColor: "",
+                FeatureItemHoverBackgroundType: 'classic',
+                FeatureItemHoverClassicColor: '',
                 FeatureItemHoverGradientColor: null,
                 FeatureItemHoverCustomGradientSwitcher: false,
-                FeatureItemHoverCustomGradientInputValue: "",
+                FeatureItemHoverCustomGradientInputValue: '',
                 /** End Single Item Background Color */ 
             },
         ],
         items: {
-            type: "object",
+            type: 'object',
             properties: {
                 id: {
-                    type: "string",
-                    default: ""
+                    type: 'string',
+                    default: ''
                 },
                 Title: {
-                    type: "string",
-                    default: ""
+                    type: 'string',
+                    default: ''
                 },
                 Description: {
-                    type: "string",
-                    default: ""
+                    type: 'string',
+                    default: ''
                 },
                 FeatureIcon: {
                     type: 'string',
                     default: 'check',
                 },
                 FeatureIconAlign: {
-                    type: "string",
-                    default: "icon",
+                    type: 'string',
+                    default: 'icon',
                 },
                 FeatureIconImageUrl: {
-                    type: "string",
-                    default: ""
+                    type: 'string',
+                    default: ''
                 },
                 FeatureIconImageAlt: {
-                    type: "string",
-                    default: ""
+                    type: 'string',
+                    default: ''
                 },
                 FeatureIconImageID: {
-                    type: "number",
-                    default: ""
+                    type: 'number',
+                    default: ''
                 },
 
 
 
                 FeatureSingleItemIconColorSwitcher: {
-                    type: "string",
-                    default: "normal",
+                    type: 'string',
+                    default: 'normal',
                 },
                 FeatureSingleItemIconColor: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 FeatureSingleItemIconHoverColor: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
 
                 /** Start Single Item Background Color */
                 FeatureSingleItemIconBgColorSwitcher: {
-                    type: "string",
-                    default: "normal",
+                    type: 'string',
+                    default: 'normal',
                 },
 
                 FeatureSingleItemIconNormalBackgroundType: {
-                    type: "string",
-                    default: "classic",
+                    type: 'string',
+                    default: 'classic',
                 },
                 FeatureSingleItemIconNormalClassicColor: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 FeatureSingleItemIconNormalGradientColor: {
-                    type: "string",
+                    type: 'string',
                     default: null,
                 },
                 FeatureSingleItemIconNormalCustomGradientSwitcher: {
-                    type: "boolean",
+                    type: 'boolean',
                     default: false,
                 },
                 FeatureSingleItemIconNormalCustomGradientInputValue: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
 
                 FeatureSingleItemIconHoverBackgroundType: {
-                    type: "string",
-                    default: "classic",
+                    type: 'string',
+                    default: 'classic',
                 },
                 FeatureSingleItemIconHoverClassicColor: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 FeatureSingleItemIconHoverGradientColor: {
-                    type: "string",
+                    type: 'string',
                     default: null,
                 },
                 FeatureSingleItemIconHoverCustomGradientSwitcher: {
-                    type: "boolean",
+                    type: 'boolean',
                     default: false,
                 },
                 FeatureSingleItemIconHoverCustomGradientInputValue: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 /** End Single Item Background Color */
 
                 /** Start Single Item Text Color */
                 FeatureSingleItemTextColorSwitcher: {
-                    type: "string",
-                    default: "normal",
+                    type: 'string',
+                    default: 'normal',
                 },
                 FeatureSingleItemTextColor: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 FeatureSingleItemTextHoverColor: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 /** End Single Item Text Color */   
 
@@ -270,86 +270,86 @@ const attributes = {
 
                 /** Start Single Item Background Color */
                 FeatureItemBgColorSwitcher: {
-                    type: "string",
-                    default: "normal",
+                    type: 'string',
+                    default: 'normal',
                 },
 
                 FeatureItemNormalBackgroundType: {
-                    type: "string",
-                    default: "classic",
+                    type: 'string',
+                    default: 'classic',
                 },
                 FeatureItemNormalClassicColor: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 FeatureItemNormalGradientColor: {
-                    type: "string",
+                    type: 'string',
                     default: null,
                 },
                 FeatureItemNormalCustomGradientSwitcher: {
-                    type: "boolean",
+                    type: 'boolean',
                     default: false,
                 },
                 FeatureItemNormalCustomGradientInputValue: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
 
                 FeatureItemHoverBackgroundType: {
-                    type: "string",
-                    default: "classic",
+                    type: 'string',
+                    default: 'classic',
                 },
                 FeatureItemHoverClassicColor: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 FeatureItemHoverGradientColor: {
-                    type: "string",
+                    type: 'string',
                     default: null,
                 },
                 FeatureItemHoverCustomGradientSwitcher: {
-                    type: "boolean",
+                    type: 'boolean',
                     default: false,
                 },
                 FeatureItemHoverCustomGradientInputValue: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 /** End Single Item Background Color */
             }
         }
     },
     FeatureTag: {
-        type : "string",
-        default: "h3"
+        type : 'string',
+        default: 'h3'
     },
     FeatureIconShape: {
-        type: "string",
-        default: "circle"
+        type: 'string',
+        default: 'circle'
     },
     FeatureAlignment: {
-        type: "string",
-        default: "center",
+        type: 'string',
+        default: 'center',
     },
     FeatureIconAlignment: {
-        type: "string",
-        default: "left",
+        type: 'string',
+        default: 'left',
     },
 
     FeatureListDirection: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "column",
-            Tablet: "column",
-            Mobile: "column",
+            Desktop: 'column',
+            Tablet: 'column',
+            Mobile: 'column',
         },
     },
     FeatureListDirectionWrap: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "nowrap",
-            Tablet: "nowrap",
-            Mobile: "nowrap",
+            Desktop: 'nowrap',
+            Tablet: 'nowrap',
+            Mobile: 'nowrap',
         },
     },
 
@@ -357,8 +357,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '20',
-			Tablet: '20',
-			Mobile: '20'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	FeatureListGapUnits: {
@@ -372,64 +372,64 @@ const attributes = {
 
     /** Start Icon Color */
     FeatureIconColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     FeatureIconColor : {
-        type: "string",
-        default: "#fff"
+        type: 'string',
+        default: '#fff'
     },
     FeatureIconHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
     /** End Icon Color */
 
     /** Start Icon Background Color */
     FeatureIconBgColorSwitcher: {
-        type: "string",
-        default: "normal",
+        type: 'string',
+        default: 'normal',
     },
     FeatureIconNormalBackgroundType: {
-        type: "string",
-        default: "classic",
+        type: 'string',
+        default: 'classic',
     },
     FeatureIconNormalClassicColor: {
-        type: "string",
-        default: "#399CFF",
+        type: 'string',
+        default: '#399CFF',
     },
     FeatureIconNormalGradientColor: {
-        type: "string",
+        type: 'string',
         default: null,
     },
     FeatureIconNormalCustomGradientSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     FeatureIconNormalCustomGradientInputValue: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     
     FeatureIconHoverBackgroundType: {
-        type: "string",
-        default: "classic",
+        type: 'string',
+        default: 'classic',
     },
     FeatureIconHoverClassicColor: {
-        type: "string",
-        default: "#399CFF",
+        type: 'string',
+        default: '',
     },
     FeatureIconHoverGradientColor: {
-        type: "string",
+        type: 'string',
         default: null,
     },
     FeatureIconHoverCustomGradientSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     FeatureIconHoverCustomGradientInputValue: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     /** End Icon Background Color */
 
@@ -437,9 +437,9 @@ const attributes = {
     FeatureIconSize: {
 		type: 'object',
 		default: {
-			Desktop: '25',
-			Tablet: '25',
-			Mobile: '25'
+			Desktop: '24',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	FeatureIconSizeUnits: {
@@ -463,7 +463,7 @@ const attributes = {
 		}
 	},
 	FeatureIconPaddingDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '15',
 			bottom: '15',
@@ -472,25 +472,25 @@ const attributes = {
 		},
 	},
 	FeatureIconPaddingTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '15',
-			bottom: '15',
-			left: '15',
-			right: '15',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	FeatureIconPaddingMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '15',
-			bottom: '15',
-			left: '15',
-			right: '15',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	FeatureIconPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Padding */
@@ -505,7 +505,7 @@ const attributes = {
 		}
 	},
 	FeatureIconMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '0',
 			bottom: '0',
@@ -514,25 +514,25 @@ const attributes = {
 		},
 	},
 	FeatureIconMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '20',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	FeatureIconMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '20',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	FeatureIconMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Margin */
@@ -541,15 +541,15 @@ const attributes = {
     /** Start Icon Border */
 	FeatureIconBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	FeatureIconBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	FeatureIconBorderColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	FeatureIconBorderHoverColor: {
 		type: 'string',
@@ -563,7 +563,7 @@ const attributes = {
 		}
 	},
 	FeatureIconBorderDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -572,7 +572,7 @@ const attributes = {
 		},
 	},
 	FeatureIconBorderTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -581,7 +581,7 @@ const attributes = {
 		},
 	},
 	FeatureIconBorderMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -590,7 +590,7 @@ const attributes = {
 		},
 	},
 	FeatureIconBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border */
@@ -605,7 +605,7 @@ const attributes = {
 		}
 	},
 	FeatureIconBorderRadiusDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -614,7 +614,7 @@ const attributes = {
 		},
 	},
 	FeatureIconBorderRadiusTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -623,7 +623,7 @@ const attributes = {
 		},
 	},
 	FeatureIconBorderRadiusMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -632,7 +632,7 @@ const attributes = {
 		},
 	},
 	FeatureIconBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border Radius */
@@ -662,11 +662,11 @@ const attributes = {
 
     /** Start Title */
     FeatureTitleGlobalTypographyData: {
-        type: "object",
+        type: 'object',
         default: {}
     },
     FeatureTitleGlobalTypoSwitcher: {
-        type: "object",
+        type: 'object',
         default: {
             fontFamily: false,
             fontSize: false,
@@ -679,23 +679,23 @@ const attributes = {
         },
     },
     FeatureTitleGlobalTypoType: {
-        type: "string",
+        type: 'string',
         default: 'default',
     },
     FeatureTitleGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
     FeatureTitleFontFamily: {
-        type: "string",
-        default: "Default",
+        type: 'string',
+        default: 'Default',
     },
     FeatureTitleFontSize: {
 		type: 'object',
 		default: {
 			Desktop: '18',
-			Tablet: '18',
-			Mobile: '18'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	FeatureTitleFontSizeUnits: { 
@@ -707,20 +707,20 @@ const attributes = {
 		}
 	},
     FeatureTitleFontWeight: {
-        type: "string",
-        default: "600"
+        type: 'string',
+        default: '600'
     },
     FeatureTitleFontStyle: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     FeatureTitleTextTransform: {
-        type: "string",
-        default: "none"
+        type: 'string',
+        default: 'none'
     },
     FeatureTitleTextDecoration: {
-        type: "string",
-        default: "none"
+        type: 'string',
+        default: 'none'
     },
     FeatureTitleLetterSpacing: {
 		type: 'object',
@@ -756,16 +756,16 @@ const attributes = {
 	},
 
     FeatureTitleColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     FeatureTitleColor : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     FeatureTitleHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
 
     /** Start Margin */
@@ -778,7 +778,7 @@ const attributes = {
 		}
 	},
 	FeatureTitleMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '0',
 			bottom: '5',
@@ -787,25 +787,25 @@ const attributes = {
 		},
 	},
 	FeatureTitleMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '5',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	FeatureTitleMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '5',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	FeatureTitleMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Margin */
@@ -814,11 +814,11 @@ const attributes = {
 
     /** Start Description */
     FeatureDescGlobalTypographyData: {
-        type: "object",
+        type: 'object',
         default: {}
     },
     FeatureDescGlobalTypoSwitcher: {
-        type: "object",
+        type: 'object',
         default: {
             fontFamily: false,
             fontSize: false,
@@ -831,23 +831,23 @@ const attributes = {
         },
     },
     FeatureDescGlobalTypoType: {
-        type: "string",
+        type: 'string',
         default: 'default',
     },
     FeatureDescGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
     FeatureDescFontFamily: {
-        type: "string",
-        default: "Default",
+        type: 'string',
+        default: 'Default',
     },
     FeatureDescFontSize: {
         type: 'object',
         default: {
-            Desktop: 14,
-            Tablet: 14,
-            Mobile: 14
+            Desktop: '14',
+            Tablet: '',
+            Mobile: ''
         }
     },
     FeatureDescFontSizeUnits: {
@@ -859,20 +859,20 @@ const attributes = {
         }
     },
     FeatureDescFontWeight: {
-        type: "string",
-        default: "400"
+        type: 'string',
+        default: '400'
     },
     FeatureDescFontStyle: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     FeatureDescTextTransform: {
-        type: "string",
-        default: "none"
+        type: 'string',
+        default: 'none'
     },
     FeatureDescTextDecoration: {
-        type: "string",
-        default: "none"
+        type: 'string',
+        default: 'none'
     },
     FeatureDescLetterSpacing: {
         type: 'object',
@@ -908,16 +908,16 @@ const attributes = {
     },
 
     FeatureDescColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     FeatureDescColor : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     FeatureDescHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
 
     /** Start Margin */
@@ -930,7 +930,7 @@ const attributes = {
         }
     },
     FeatureDescMarginDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '0',
             bottom: '0',
@@ -939,25 +939,25 @@ const attributes = {
         },
     },
     FeatureDescMarginTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     FeatureDescMarginMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     FeatureDescMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     /** End Margin */
@@ -967,49 +967,49 @@ const attributes = {
 
     /** Start Single Item Background Color */
     FeatureSingleItemBgColorSwitcher: {
-        type: "string",
-        default: "normal",
+        type: 'string',
+        default: 'normal',
     },
     FeatureSingleItemNormalBackgroundType: {
-        type: "string",
-        default: "classic",
+        type: 'string',
+        default: 'classic',
     },
     FeatureSingleItemNormalClassicColor: {
-        type: "string",
-        default: "#EBF5FF",
+        type: 'string',
+        default: '#EBF5FF',
     },
     FeatureSingleItemNormalGradientColor: {
-        type: "string",
+        type: 'string',
         default: null,
     },
     FeatureSingleItemNormalCustomGradientSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     FeatureSingleItemNormalCustomGradientInputValue: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     
     FeatureSingleItemHoverBackgroundType: {
-        type: "string",
-        default: "classic",
+        type: 'string',
+        default: 'classic',
     },
     FeatureSingleItemHoverClassicColor: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     FeatureSingleItemHoverGradientColor: {
-        type: "string",
+        type: 'string',
         default: null,
     },
     FeatureSingleItemHoverCustomGradientSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     FeatureSingleItemHoverCustomGradientInputValue: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     /** End Single Item Background Color */
 
@@ -1023,7 +1023,7 @@ const attributes = {
 		}
 	},
 	FeatureSingleItemPaddingDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '20',
 			bottom: '20',
@@ -1032,25 +1032,25 @@ const attributes = {
 		},
 	},
 	FeatureSingleItemPaddingTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '20',
-			bottom: '20',
-			left: '20',
-			right: '20',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	FeatureSingleItemPaddingMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '15',
-			bottom: '15',
-			left: '15',
-			right: '15',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	FeatureSingleItemPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Single Item Padding */
@@ -1059,15 +1059,15 @@ const attributes = {
     /** Start Single Item Border */
 	FeatureSingleItemBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	FeatureSingleItemBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	FeatureSingleItemBorderColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	FeatureSingleItemBorderHoverColor: {
 		type: 'string',
@@ -1081,7 +1081,7 @@ const attributes = {
 		}
 	},
 	FeatureSingleItemBorderDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1090,7 +1090,7 @@ const attributes = {
 		},
 	},
 	FeatureSingleItemBorderTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1099,7 +1099,7 @@ const attributes = {
 		},
 	},
 	FeatureSingleItemBorderMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1108,7 +1108,7 @@ const attributes = {
 		},
 	},
 	FeatureSingleItemBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border */
@@ -1123,7 +1123,7 @@ const attributes = {
 		}
 	},
 	FeatureSingleItemBorderRadiusDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '5',
 			bottom: '5',
@@ -1132,25 +1132,25 @@ const attributes = {
 		},
 	},
 	FeatureSingleItemBorderRadiusTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '5',
-			bottom: '5',
-			left: '5',
-			right: '5',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	FeatureSingleItemBorderRadiusMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '5',
-			bottom: '5',
-			left: '5',
-			right: '5',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	FeatureSingleItemBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border Radius */
@@ -1183,7 +1183,7 @@ const attributes = {
 
     /** Start Global Setting */
 	FeatureGlobalZIndex : {
-        type: "object",
+        type: 'object',
 		default: {
 			Desktop: '',
 			Tablet: '',
@@ -1192,7 +1192,7 @@ const attributes = {
     },
     featuresListOverflow: {
         type: 'string',
-        default: "default",
+        default: 'default',
     },
 	/** Start Padding */
 	FeatureGlobalPaddingUnits: {
@@ -1204,7 +1204,7 @@ const attributes = {
 		}
 	},
 	FeatureGlobalPaddingDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1213,7 +1213,7 @@ const attributes = {
 		},
 	},
 	FeatureGlobalPaddingTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1222,7 +1222,7 @@ const attributes = {
 		},
 	},
 	FeatureGlobalPaddingMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1231,7 +1231,7 @@ const attributes = {
 		},
 	},
 	FeatureGlobalPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Padding */
@@ -1246,7 +1246,7 @@ const attributes = {
 		}
 	},
 	FeatureGlobalMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1255,7 +1255,7 @@ const attributes = {
 		},
 	},
 	FeatureGlobalMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1264,7 +1264,7 @@ const attributes = {
 		},
 	},
 	FeatureGlobalMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1273,7 +1273,7 @@ const attributes = {
 		},
 	},
 	FeatureGlobalMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Margin */
@@ -1282,136 +1282,136 @@ const attributes = {
 
     /** Start Background Color */
     FeatureGlobalBgColorSwitcher: {
-        type: "string",
-        default: "normal",
+        type: 'string',
+        default: 'normal',
     },
     FeatureGlobalNormalBackgroundType: {
-        type: "string",
-        default: "classic",
+        type: 'string',
+        default: 'classic',
     },
     FeatureGlobalNormalClassicColor: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     FeatureGlobalNormalGradientColor: {
-        type: "string",
+        type: 'string',
         default: null,
     },
     FeatureGlobalNormalCustomGradientSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     FeatureGlobalNormalCustomGradientInputValue: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 
 
     FeatureGlobalNormalBackgroundImageUrl: { 
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     FeatureGlobalNormalBackgroundImageAlt: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     FeatureGlobalNormalBackgroundImageID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     FeatureGlobalNormalBackgroundImagePosition: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     FeatureGlobalNormalBackgroundImageAttachment: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     FeatureGlobalNormalBackgroundImageRepeat: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     FeatureGlobalNormalBackgroundImageSize: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
 
     FeatureGlobalHoverBackgroundType: {
-        type: "string",
-        default: "classic",
+        type: 'string',
+        default: 'classic',
     },
     FeatureGlobalHoverClassicColor: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     FeatureGlobalHoverGradientColor: {
-        type: "string",
+        type: 'string',
         default: null,
     },
     FeatureGlobalHoverCustomGradientSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     FeatureGlobalHoverCustomGradientInputValue: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 
     FeatureGlobalHoverBackgroundImageUrl: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     FeatureGlobalHoverBackgroundImageAlt: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     FeatureGlobalHoverBackgroundImageID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     FeatureGlobalHoverBackgroundImagePosition: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     FeatureGlobalHoverBackgroundImageAttachment: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     FeatureGlobalHoverBackgroundImageRepeat: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     FeatureGlobalHoverBackgroundImageSize: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     /** End Background Color */
 
 	/** Start Border */
 	FeatureGlobalBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	FeatureGlobalBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	FeatureGlobalBorderColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	FeatureGlobalBorderHoverColor: {
 		type: 'string',
@@ -1425,7 +1425,7 @@ const attributes = {
 		}
 	},
 	FeatureGlobalBorderDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1434,7 +1434,7 @@ const attributes = {
 		},
 	},
 	FeatureGlobalBorderTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1443,7 +1443,7 @@ const attributes = {
 		},
 	},
 	FeatureGlobalBorderMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1452,7 +1452,7 @@ const attributes = {
 		},
 	},
 	FeatureGlobalBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border */
@@ -1467,7 +1467,7 @@ const attributes = {
 		}
 	},
 	FeatureGlobalBorderRadiusDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1476,7 +1476,7 @@ const attributes = {
 		},
 	},
 	FeatureGlobalBorderRadiusTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1485,7 +1485,7 @@ const attributes = {
 		},
 	},
 	FeatureGlobalBorderRadiusMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1494,7 +1494,7 @@ const attributes = {
 		},
 	},
 	FeatureGlobalBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border Radius */
@@ -1532,34 +1532,34 @@ const attributes = {
 		}
 	},
     FeatureIconImageWidth: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "60",
-            Tablet: "60",
-            Mobile : "60"
+            Desktop: '24',
+            Tablet: '',
+            Mobile : ''
         }
     },
     FeatureIconImageHeight: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "60",
-            Tablet: "60",
-            Mobile : "60"
+            Desktop: '24',
+            Tablet: '',
+            Mobile : ''
         }
     },
 
     /** Start Border */
 	FeatureIconImageBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	FeatureIconImageBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	FeatureIconImageBorderColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	FeatureIconImageBorderHoverColor: {
 		type: 'string',
@@ -1573,7 +1573,7 @@ const attributes = {
 		}
 	},
 	FeatureIconImageBorderDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1582,7 +1582,7 @@ const attributes = {
 		},
 	},
 	FeatureIconImageBorderTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1591,7 +1591,7 @@ const attributes = {
 		},
 	},
 	FeatureIconImageBorderMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1600,7 +1600,7 @@ const attributes = {
 		},
 	},
 	FeatureIconImageBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border */
@@ -1615,7 +1615,7 @@ const attributes = {
 		}
 	},
 	FeatureIconImageBorderRadiusDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1624,7 +1624,7 @@ const attributes = {
 		},
 	},
 	FeatureIconImageBorderRadiusTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1633,7 +1633,7 @@ const attributes = {
 		},
 	},
 	FeatureIconImageBorderRadiusMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1642,21 +1642,21 @@ const attributes = {
 		},
 	},
 	FeatureIconImageBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border Radius */
 
     featuresListDesktopSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     featuresListTabletSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     featuresListMobileSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
 
@@ -1664,30 +1664,30 @@ const attributes = {
 
     /** Start Global Setting */
     featuresListGlobalWraperCustomCSS : {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 	featuresListGlobalWraperID : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	featuresListGlobalWraperClass : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	/** End Global Setting */   
 
     featuresListPositionType: {
-        type: "string",
-        default: "default"
+        type: 'string',
+        default: 'default'
     },
     featuresListHZOrientationType: {
-        type: "string",
-        default: "left"
+        type: 'string',
+        default: 'left'
     },
     featuresListVROrientationType: {
-        type: "string",
-        default: "top"
+        type: 'string',
+        default: 'top'
     },
     featuresListHZLeftOffset: {
         type: 'object',
