@@ -40,8 +40,8 @@ const attributes = {
         type: 'object',
         default: {
             Desktop: 'left',
-            Tablet: 'left',
-            Mobile: 'left',
+            Tablet: '',
+            Mobile: '',
         }
     },
 
@@ -110,8 +110,8 @@ const attributes = {
         type: 'object',
         default: {
             Desktop: '3',
-            Tablet: '3',
-            Mobile: '3'
+            Tablet: '',
+            Mobile: ''
         }
     },
 
@@ -125,7 +125,7 @@ const attributes = {
     },
     progressTitleHoverColor: {
         type: 'string',
-        default: '#000000'
+        default: ''
     },
 
     progressNumberColorSwitcher: {
@@ -138,7 +138,7 @@ const attributes = {
     },
     progressNumberHoverColor: {
         type: 'string',
-        default: '#000000'
+        default: ''
     },
 
 
@@ -205,8 +205,8 @@ const attributes = {
         type: 'object',
         default: {
             Desktop: '3',
-            Tablet: '3',
-            Mobile: '3'
+            Tablet: '',
+            Mobile: ''
         }
     },
     
@@ -222,8 +222,8 @@ const attributes = {
         type: 'object',
         default: {
             Desktop: '14',
-            Tablet: '14',
-            Mobile: '14'
+            Tablet: '',
+            Mobile: ''
         }
     },
     progressBarHeightUnits: {
@@ -239,8 +239,8 @@ const attributes = {
         type: 'object',
         default: {
             Desktop: '100',
-            Tablet: '100',
-            Mobile: '100'
+            Tablet: '',
+            Mobile: ''
         }
     },
     progressBarWidthUnits: {
