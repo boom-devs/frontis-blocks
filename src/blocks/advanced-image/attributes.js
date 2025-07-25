@@ -260,8 +260,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '48',
-			Tablet: '36',
-			Mobile: '24'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	headingFontSizeUnits: {
@@ -274,7 +274,7 @@ const attributes = {
 	},
     headingFontWeight : {
         type: 'string',
-        default: '600'
+        default: ''
     },
     headingFontStyle : {
         type: 'string',
