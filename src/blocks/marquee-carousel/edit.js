@@ -124,22 +124,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         if (!swiperRef.current) return;
     
         const swiperOptions = {
-
-           // Marquee style settings
+           loop: true,
+           slidesPerView:'auto',
            spaceBetween: 0,
-           centeredSlides: true,
+           centeredSlides: false,
            speed: speed,
            autoplay: {
              delay: 0,
              reverseDirection: reverseDirection,
              disableOnInteraction: true,
            },
-           loop: true,
-           slidesPerView:'auto',
            allowTouchMove: false,
-           // Make sure slides have proper CSS width applied
+
             on: {
-                init: updateSlideWidths,
+                init: updateSlideWidths(),
             },
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
