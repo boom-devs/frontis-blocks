@@ -139,7 +139,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
            allowTouchMove: false,
            // Make sure slides have proper CSS width applied
             on: {
-                init: updateSlideWidths,
+                init: updateSlideWidths(),
             },
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
