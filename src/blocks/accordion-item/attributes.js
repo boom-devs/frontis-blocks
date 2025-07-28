@@ -2,215 +2,215 @@ const attributes = {
     // the following 4 attributes is must required for responsive options and asset generation for frontend
     // responsive control attributes ⬇
     deviceType: {
-        type: "string",
-        default: "Desktop",
+        type: 'string',
+        default: 'Desktop',
     },
     // blockID attribute for making unique className and other uniqueness ⬇
     blockID: {
-        type: "string",
+        type: 'string',
     },
     blockStyle: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     blockStyleTwo: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     blockRoot: {
-        type: "string",
-        default: "frontis_block",
+        type: 'string',
+        default: 'frontis_block',
     },
     // blockMeta is for keeping all the styles ⬇
     blockMeta: {
-        type: "object",
+        type: 'object',
     },
 
     itemId: {
-        type: "string",
+        type: 'string',
     },
     title: {
-        type: "string",
+        type: 'string',
     },
 
     clickable: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     toggleClick: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
 
     accordionItemColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     accordionItemColor: {
-        type: "string",
-        default: "antiquewhite"
+        type: 'string',
+        default: 'antiquewhite'
     },
     accordionItemHoverColor: {
         type: 'string',
-        default: "antiquewhite"
+        default: 'antiquewhite'
     },
 
     iconColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     iconColor: {
-        type: "string",
-        default: "#000000"
+        type: 'string',
+        default: '#000000'
     },
     iconHoverColor: {
         type: 'string',
-        default: "#000000"
+        default: ''
     },
 
     inheritedAccordionType: {
-        type: "string",
-        default: "accordion",
+        type: 'string',
+        default: 'accordion',
     },
     inheritedTagName: {
-        type: "string",
-        default: "h3",
+        type: 'string',
+        default: 'h3',
     },
     inheritedDisplayIcon: {
-        type: "boolean",
+        type: 'boolean',
         default: true,
     },
     inheritedTabIconSwitcher: {
-        type: "string",
+        type: 'string',
     },
     inheritedTabIcon: {
-        type: "string",
+        type: 'string',
     },
     inheritedTabImageUrl: {
-        type: "string",
+        type: 'string',
     },
     inheritedExpandedIconSwitcher: {
-        type: "string",
+        type: 'string',
     },
     inheritedExpandedIcon: {
-        type: "string",
+        type: 'string',
     },
     inheritedExpandedImageUrl: {
-        type: "string",
+        type: 'string',
     },
     faqSchema: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     parentBlockID: {
-        type: "string",
+        type: 'string',
     },
     titlePrefixType: {
-        type: "string",
-        default: "none",
+        type: 'string',
+        default: 'none',
     },
 
     titlePrefixColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     titlePrefixColor: {
-        type: "string",
-        default: "#000"
+        type: 'string',
+        default: '#000'
     },
     titlePrefixHoverColor: {
         type: 'string',
-        default: "#000"
+        default: ''
     },
 
     titlePrefixImgUrl: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     titlePrefixImgAlt: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     titlePrefixImgID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     titlePrefixImgPosition: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     titlePrefixImgAttachment: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     titlePrefixImgRepeat: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     titlePrefixImgSize: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     titleSuffixType: {
-        type: "string",
-        default: "none",
+        type: 'string',
+        default: 'none',
     },
 
     titleSuffixColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     titleSuffixColor: {
-        type: "string",
-        default: "#000"
+        type: 'string',
+        default: '#000'
     },
     titleSuffixHoverColor: {
         type: 'string',
-        default: "#000"
+        default: ''
     },
 
     titleSuffixImgUrl: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     titleSuffixImgAlt: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     titleSuffixImgID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     titleSuffixImgPosition: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     titleSuffixImgAttachment: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     titleSuffixImgRepeat: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     titleSuffixImgSize: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     
     
     titlePrefixIcon: {
-        type: "string",
-        default: "quote-left",
+        type: 'string',
+        default: 'quote-left',
     },
     titleSuffixIcon: {
-        type: "string",
-        default: "quote-left",
+        type: 'string',
+        default: 'quote-left',
     },
 
     accordionItemZIndex: {
-        type: "object",
+        type: 'object',
         default: {
             Desktop: '',
             Tablet: '',
@@ -227,7 +227,7 @@ const attributes = {
 		}
     },
     accordionItemDesktopPadding: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '20',
             bottom: '20',
@@ -236,25 +236,25 @@ const attributes = {
         },
     },
     accordionItemTabPadding: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     accordionItemMobilePadding: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     accordionItemPaddingLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 
@@ -267,41 +267,41 @@ const attributes = {
 		}
     },
     accordionItemDesktopMargin: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     accordionItemTabMargin: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     accordionItemMobileMargin: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     accordionItemMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 
 
     accordionItemBorder: {
         type: 'string',
-        default: "none",
+        default: 'none',
     },
     accordionItemBorderColor: {
         type: 'string',
@@ -310,8 +310,8 @@ const attributes = {
         type: 'string',
     },
     accordionItemBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
 
     accordionItemBorderUnits : {
@@ -323,34 +323,34 @@ const attributes = {
 		}
     },
     accordionItemDesktopBorderWidth: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     accordionItemTabBorderWidth: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     accordionItemMobileBorderWidth: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     accordionItemBorderLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 
@@ -363,46 +363,46 @@ const attributes = {
 		}
     },
     accordionItemDesktopBorderRadiusWidth: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     accordionItemTabBorderRadiusWidth: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     accordionItemMobileBorderRadiusWidth: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     accordionItemBorderRadiusLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     accordionItemDesktopSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     accordionItemTabletSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     accordionItemMobileSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
 
@@ -415,123 +415,123 @@ const attributes = {
         default: '',
     },
     accordionItemBgColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     accordionItemBgType: {
-        type: "string",
-        default: "classic"
+        type: 'string',
+        default: 'classic'
     },
     accordionItemBgClassicColor: {
-        type: "string",
+        type: 'string',
     },
     accordionItemBgGradientColor: {
-        type: "string",
+        type: 'string',
     },
     accordionItemBgCustomGradientSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false
     },
     accordionItemBgCustomGradientInputValue: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgColorStyle: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgImageUrl: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgImageAlt: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgImageID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgImagePosition: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgImageAttachment: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgImageSize: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgImageRepeat: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgHoverType: {
-        type: "string",
-        default: "classic"
+        type: 'string',
+        default: 'classic'
     },
     accordionItemBgHoverClassicColor: {
-        type: "string",
+        type: 'string',
     },
     accordionItemBgHoverGradientColor: {
-        type: "string",
+        type: 'string',
     },
     accordionItemBgHoverCustomGradientSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false
     },
     accordionItemBgHoverCustomGradientInputValue: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgHoverColorStyle: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgHoverImageUrl: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgHoverImageAlt: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgHoverImageID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgHoverImagePosition: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgHoverImageAttachment: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgHoverImageSize: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     accordionItemBgHoverImageRepeat: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     /** Start Class & ID Setting */
     accordionItemCustomCSS : {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     accordionItemGlobalWraperID : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 
     accordionItemGlobalWraperClass : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
     /** End Class & ID Setting */   
 };

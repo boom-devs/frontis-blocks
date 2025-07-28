@@ -23,6 +23,7 @@ module.exports = {
 	},
 	entry: {
 		index: path.resolve(process.cwd(), 'admin', 'index.js'),
+		dynamicContent: path.resolve(process.cwd(), 'admin', 'dynamic-content', 'index.js'),
 		sidebar: path.resolve(process.cwd(), 'admin', 'sidebar', 'index.js'),
 		tlibrary:path.resolve(process.cwd(), 'admin', 'template-library', 'index.js')
 	},

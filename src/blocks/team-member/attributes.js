@@ -1,19 +1,19 @@
 const attributes = {
 	blockID: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	blockStyle: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 	deviceType: {
-		type: "string",
-		default: "Desktop"
+		type: 'string',
+		default: 'Desktop'
 	},
 
 	teamMemberZIndex : {
-        type: "object",
+        type: 'object',
 		default: {
 			Desktop: '',
 			Tablet: '',
@@ -22,7 +22,7 @@ const attributes = {
     },
 	teamMemberOverflow: {
         type: 'string',
-        default: "default",
+        default: 'default',
     },
 
     teamMemberPaddingUnits : {
@@ -34,7 +34,7 @@ const attributes = {
 		}
     },
     teamMemberDesktopPadding: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '42',
             bottom: '42',
@@ -43,25 +43,25 @@ const attributes = {
         },
     },
     teamMemberTabPadding: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '42',
-            bottom: '42',
-            left: '32',
-            right: '32',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     teamMemberMobilePadding: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '42',
-            bottom: '42',
-            left: '32',
-            right: '32',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     teamMemberPaddingLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 
@@ -74,7 +74,7 @@ const attributes = {
 		}
     },
     teamMemberDesktopMargin: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '0',
             bottom: '0',
@@ -83,140 +83,140 @@ const attributes = {
         },
     },
     teamMemberTabMargin: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     teamMemberMobileMargin: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     teamMemberMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 
 
 	teamMemberBgColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     teamMemberBgType: {
-        type: "string",
-        default: "classic"
+        type: 'string',
+        default: 'classic'
     },
     teamMemberBgClassicColor: {
-        type: "string",
-        default: "#FFF"
+        type: 'string',
+        default: '#FFF'
     },
     teamMemberBgGradientColor: {
-        type: "string",
+        type: 'string',
     },
     teamMemberBgCustomGradientSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false
     },
     teamMemberBgCustomGradientInputValue: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgColorStyle: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgImageUrl: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgImageAlt: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgImageID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgImagePosition: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgImageAttachment: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgImageSize: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgImageRepeat: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgHoverType: {
-        type: "string",
-        default: "classic"
+        type: 'string',
+        default: 'classic'
     },
     teamMemberBgHoverClassicColor: {
-        type: "string",
-        default: "#EBF5FF"
+        type: 'string',
+        default: '#EBF5FF'
     },
     teamMemberBgHoverGradientColor: {
-        type: "string",
+        type: 'string',
     },
     teamMemberBgHoverCustomGradientSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false
     },
     teamMemberBgHoverCustomGradientInputValue: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgHoverColorStyle: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgHoverImageUrl: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgHoverImageAlt: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgHoverImageID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgHoverImagePosition: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgHoverImageAttachment: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgHoverImageSize: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberBgHoverImageRepeat: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
 
     teamMemberBorder: {
         type: 'string',
-        default: "solid",
+        default: 'solid',
     },
     teamMemberBorderColor: {
         type: 'string',
@@ -227,8 +227,8 @@ const attributes = {
 		default: '#EBF5FF'
     },
     teamMemberBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
 
     teamMemberBorderUnits : {
@@ -240,7 +240,7 @@ const attributes = {
 		}
     },
     teamMemberDesktopBorderWidth: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '1',
             bottom: '1',
@@ -249,25 +249,25 @@ const attributes = {
         },
     },
     teamMemberTabBorderWidth: {
-        type: "object", 
+        type: 'object', 
 		default: {
-            top: '1',
-            bottom: '1',
-            left: '1',
-            right: '1',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     teamMemberMobileBorderWidth: {
-        type: "object", 
+        type: 'object', 
 		default: {
-            top: '1',
-            bottom: '1',
-            left: '1',
-            right: '1',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     teamMemberBorderLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 
@@ -280,7 +280,7 @@ const attributes = {
 		}
     },
     teamMemberDesktopBorderRadiusWidth: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '16',
             bottom: '16',
@@ -289,43 +289,43 @@ const attributes = {
         },
     },
     teamMemberTabBorderRadiusWidth: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '16',
-            bottom: '16',
-            left: '16',
-            right: '16',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     teamMemberMobileBorderRadiusWidth: {
-        type: "object", 
+        type: 'object', 
 		default: {
-            top: '16',
-            bottom: '16',
-            left: '16',
-            right: '16',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     teamMemberBorderRadiusLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     teamMemberDesktopSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     teamMemberTabletSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     teamMemberMobileSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
 
     BoxBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	BoxBorderColor: {
 		type: 'string',
@@ -334,208 +334,208 @@ const attributes = {
 		type: 'string',
 	},
 	BoxBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	BoxBorderUnits : {
-		type: "string",
-		default: "px"
+		type: 'string',
+		default: 'px'
 	},
 	BoxDesktopBorderWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	BoxTabBorderWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	BoxMobileBorderWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	HeadingActiveBorderDevice: {
-		type: "string",
-		default: "Desktop"
+		type: 'string',
+		default: 'Desktop'
 	},
 	BoxBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	BoxBorderRadiusUnits : {
-		type: "string",
-		default: "px"
+		type: 'string',
+		default: 'px'
 	},
 	BoxDesktopBorderRadiusWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	BoxTabBorderRadiusWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	BoxMobileBorderRadiusWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	HeadingActiveBorderRadiusDevice: {
-		type: "string",
-		default: "Desktop"
+		type: 'string',
+		default: 'Desktop'
 	},
 	BoxBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
     teamMemberContentPosition: {
-		type: "string",
-		default: "bottom"
+		type: 'string',
+		default: 'bottom'
 	},
 
     teamMemberCardAlignment: {
-		type: "string",
-		default: "start"
+		type: 'string',
+		default: 'start'
 	},
 
     teamMemberContentAlignment: {
-		type: "string",
-		default: "center"
+		type: 'string',
+		default: 'center'
 	},
 
 	teamMemberContentBgColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	teamMemberContentBgType: {
-		type: "string",
-		default: "classic"
+		type: 'string',
+		default: 'classic'
 	},
 	teamMemberContentBgClassicColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgGradientColor: {
-		type: "string",
+		type: 'string',
 	},
 	teamMemberContentBgCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false
 	},
 	teamMemberContentBgCustomGradientInputValue: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgColorStyle: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgImageUrl: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgImageAlt: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgImageID: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgImagePosition: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgImageAttachment: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgImageSize: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgImageRepeat: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgHoverType: {
-		type: "string",
-		default: "classic"
+		type: 'string',
+		default: 'classic'
 	},
 	teamMemberContentBgHoverClassicColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgHoverGradientColor: {
-		type: "string",
+		type: 'string',
 	},
 	teamMemberContentBgHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false
 	},
 	teamMemberContentBgHoverCustomGradientInputValue: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgHoverColorStyle: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgHoverImageUrl: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgHoverImageAlt: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgHoverImageID: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgHoverImagePosition: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgHoverImageAttachment: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgHoverImageSize: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberContentBgHoverImageRepeat: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 
 	// Padding
@@ -548,34 +548,34 @@ const attributes = {
 		}
 	},
 	teamMemberContentPaddingDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberContentPaddingTab: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberContentPaddingMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberContentPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
@@ -589,7 +589,7 @@ const attributes = {
 		}
 	},
 	teamMemberContentMarginDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '32',
 			bottom: '0',
@@ -598,32 +598,32 @@ const attributes = {
 		},
 	},
 	teamMemberContentMarginTab: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '32',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberContentMarginMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '32',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberContentMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
 	// Border
 	teamMemberContentBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	teamMemberContentBorderColorSwitcher: {
 		type: 'string',
@@ -631,11 +631,11 @@ const attributes = {
 	},
 	teamMemberContentBorderColor: {
 		type: 'string',
-        default: '#000'
+        default: ''
 	},
 	teamMemberContentBorderHoverColor: {
 		type: 'string',
-        default: '#000'
+        default: ''
 	},
 
 	// Border Type
@@ -648,34 +648,34 @@ const attributes = {
 		}
 	},
 	teamMemberContentBorderDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberContentBorderTab: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberContentBorderMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberContentBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
@@ -684,12 +684,12 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: 'px',
-			Tablet: 'em',
+			Tablet: 'px',
 			Mobile: 'px'
 		}
 	},
 	teamMemberContentBorderRadiusDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '8',
 			bottom: '8',
@@ -698,51 +698,51 @@ const attributes = {
 		},
 	},
 	teamMemberContentBorderRadiusTab: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '8',
-			bottom: '8',
-			left: '8',
-			right: '8',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberContentBorderRadiusMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '8',
-			bottom: '8',
-			left: '8',
-			right: '8',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberContentBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
     teamMemberDesignation: {
-		type: "string",
-		default: "Junior Developer"
+		type: 'string',
+		default: 'Junior Developer'
 	},
 	teamMemberDesignationColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	teamMemberDesignationColor: {
-		type: "string",
-		default: "#555E72"
+		type: 'string',
+		default: ''
 	},
 	teamMemberDesignationHoverColor: {
-		type: "string",
-		default: "#555E72"
+		type: 'string',
+		default: ''
 	},
 	// Typography
 	teamMemberDesignationGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	teamMemberDesignationGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -755,23 +755,23 @@ const attributes = {
 		},
 	},
 	teamMemberDesignationGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	teamMemberDesignationGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	teamMemberDesignationFontFamily: {
-        type: "string",
-        default: "Default",
+        type: 'string',
+        default: 'Default',
     },
     teamMemberDesignationFontSize: {
         type: 'object',
         default: {
-            Desktop: '18',
-            Tablet: '18',
-            Mobile: '18'
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
         }
     },
     teamMemberDesignationFontSizeUnits: {
@@ -783,20 +783,20 @@ const attributes = {
         }
     },
     teamMemberDesignationFontWeight: {
-        type: "string",
-        default: "400",
+        type: 'string',
+        default: '',
     },
     teamMemberDesignationFontStyle: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     teamMemberDesignationTextTransform: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     teamMemberDesignationTextDecoration: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     teamMemberDesignationLetterSpacing: {
         type: 'object',
@@ -817,9 +817,9 @@ const attributes = {
     teamMemberDesignationLineHeight: {
         type: 'object',
         default: {
-            Desktop: '25',
-            Tablet: '25',
-            Mobile: '25'
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
         }
     },
     teamMemberDesignationLineHeightUnits: {
@@ -846,99 +846,99 @@ const attributes = {
 		}
 	},
 	teamMemberDesignationMarginDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberDesignationMarginTab: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberDesignationMarginMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberDesignationMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
 	/** team Image */
 	teamMemberImageAlignment: {
-		type : "string",
-		default: "center"
+		type : 'string',
+		default: 'center'
 	},
     teamMemberImageUrl: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberImageAlt: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberImageID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberImagePosition: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberImageAttachment: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberImageRepeat: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     teamMemberImageSize: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
 
 	teamMemberImageOverlaySwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false
 	},
 	teamMemberImageBGColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	teamMemberImageBGColor: {
-		type: "string",
-		default: "#0000005e"
+		type: 'string',
+		default: '#0000005e'
 	},
 	teamMemberImageBGHoverColor: {
-		type: "string",
-		default: "#0000005e"
+		type: 'string',
+		default: ''
 	},
 	// teamMemberImageOverlayOpacity: {
-	// 	type: "string",
-	// 	default: ""
+	// 	type: 'string',
+	// 	default: ''
 	// },
 
 	teamMemberImageOverlayOpacity : {
 		type: 'object',
 		default: {
 			Desktop: '0.5',
-			Tablet: '0.5',
-			Mobile: '0.5'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 
@@ -955,8 +955,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '260',
-			Tablet: '260',
-			Mobile: '260'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 
@@ -972,8 +972,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '260',
-			Tablet: '260',
-			Mobile: '260'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 
@@ -988,7 +988,7 @@ const attributes = {
 		}
 	},
 	teamMemberImageMarginDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '0',
 			bottom: '0',
@@ -997,31 +997,31 @@ const attributes = {
 		},
 	},
 	teamMemberImageMarginTab: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberImageMarginMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberImageMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	// Border
 	teamMemberImageBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	teamMemberImageBorderColorSwitcher: {
 		type: 'string',
@@ -1044,34 +1044,34 @@ const attributes = {
 		}
 	},
 	teamMemberImageBorderDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberImageBorderTab: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberImageBorderMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberImageBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
@@ -1085,7 +1085,7 @@ const attributes = {
 		}
 	},
 	teamMemberImageBorderRadiusDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '50',
 			bottom: '50',
@@ -1094,96 +1094,96 @@ const attributes = {
 		},
 	},
 	teamMemberImageBorderRadiusTab: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberImageBorderRadiusMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberImageBorderRadiusLink: {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
 	// Badge
 	teamMemberBadgeSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false
 	},
 	teamMemberBadge: {
-		type: "string",
-		default: "New"
+		type: 'string',
+		default: 'New'
 	},
 	teamMemberBadgePosition: {
-		type: "string",
-		default: "image"
+		type: 'string',
+		default: 'image'
 	},
 	teamMemberBadgeAlignment: {
-		type: "string",
-		default: "center center"
+		type: 'string',
+		default: 'center center'
 	},
 
 	teamMemberBadgeColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	teamMemberBadgeColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberBadgeHoverColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 
 	teamMemberBadgeBgColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	teamMemberBadgeBgColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberBadgeBgHoverColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 
 	teamMemberBadgeBorder: {
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	teamMemberBadgeBorderColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	teamMemberBadgeBorderColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberBadgeBorderHoverColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 
 
 	teamMemberBadgeTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	teamMemberBadgeTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {	
 			fontFamily: false,
 			fontSize: false,
@@ -1196,16 +1196,16 @@ const attributes = {
 		},
 	},
 	teamMemberBadgeTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},	
 	teamMemberBadgeTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	teamMemberBadgeFontFamily: {
-		type: "string",
-		default: "Default",
+		type: 'string',
+		default: 'Default',
 	},
 	teamMemberBadgeFontSize: {
 		type: 'object',
@@ -1224,20 +1224,20 @@ const attributes = {
 		}
 	},
 	teamMemberBadgeFontWeight: {
-		type: "string",
-		default: "",	
+		type: 'string',
+		default: '',	
 	},
 	teamMemberBadgeFontStyle: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	teamMemberBadgeTextTransform: {	
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	teamMemberBadgeTextDecoration: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},	
 	teamMemberBadgeLetterSpacing: {
 		type: 'object',
@@ -1286,34 +1286,34 @@ const attributes = {
 		}
 	},
 	teamMemberBadgeMarginDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberBadgeMarginTablet: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberBadgeMarginMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberBadgeMarginLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 	teamMemberBadgePaddingUnits: {
@@ -1325,34 +1325,34 @@ const attributes = {
 		}
 	},	
 	teamMemberBadgePaddingDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberBadgePaddingTablet: {
-		type: "object",
+		type: 'object',
 		default: {	
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},	
 	teamMemberBadgePaddingMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',	
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',	
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberBadgePaddingLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},	
 	teamMemberBadgeBorderUnits: {
@@ -1364,34 +1364,34 @@ const attributes = {
 		}
 	},
 	teamMemberBadgeBorderDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberBadgeBorderTablet: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberBadgeBorderMobile: {	
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},	
 	teamMemberBadgeBorderLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},	
 	teamMemberBadgeBorderRadiusUnits: {
@@ -1403,68 +1403,68 @@ const attributes = {
 		}
 	},
 	teamMemberBadgeBorderRadiusDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',	
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',	
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberBadgeBorderRadiusTablet: {
-		type: "object",	
+		type: 'object',	
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},	
 	teamMemberBadgeBorderRadiusMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',	
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',	
+			left: '',
+			right: '',
 		},
 	},	
 	teamMemberBadgeBorderRadiusLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true	
 	},
 
 	// Name
 	teamMemberName: {
-		type: "string",
-		default: "David John"
+		type: 'string',
+		default: 'David John'
 	},
 	teamMemberNameHeadingTag: {
-		type : "string",
-		default: "h3"
+		type : 'string',
+		default: 'h3'
 	},
 
 
 	teamMemberNameColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	teamMemberNameColor : {
-		type: "string",
-		default: "#000"
+		type: 'string',
+		default: ''
 	},
 	teamMemberNameHoverColor: {
-		type: "string",
-		default: "#000"
+		type: 'string',
+		default: ''
 	},
 
 	// Typography
 	teamMemberNameGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	teamMemberNameGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -1477,16 +1477,16 @@ const attributes = {
 		},
 	},
 	teamMemberNameGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	teamMemberNameGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	teamMemberNameFontFamily: {
-        type: "string",
-        default: "Default",
+        type: 'string',
+        default: 'Default',
     },
     teamMemberNameFontSize: {
         type: 'object',
@@ -1505,20 +1505,20 @@ const attributes = {
         }
     },
     teamMemberNameFontWeight: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     teamMemberNameFontStyle: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     teamMemberNameTextTransform: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     teamMemberNameTextDecoration: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     teamMemberNameLetterSpacing: {
         type: 'object',
@@ -1567,7 +1567,7 @@ const attributes = {
 		}
 	},
 	teamMemberNameMarginDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '0',
 			bottom: '8',
@@ -1576,50 +1576,50 @@ const attributes = {
 		},
 	},
 	teamMemberNameMarginTab: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '8',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberNameMarginMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '8',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberNameMarginLink: {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
 	teamMemberSocialProfileSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	teamMemberSocialProfileSeparator: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	teamMemberSocialProfileSeparatorPosition: {
-		type : "string",
-		default: "top"
+		type : 'string',
+		default: 'top'
 	},
 	socialProfileSeparatorAlignment: {
-		type : "string",
-		default: "center"
+		type : 'string',
+		default: 'center'
 	},
 	socialProfileSeparatorWidth: {
 		type: 'object',
 		default: {
 			Desktop: '100',
-			Tablet: '100',
-			Mobile: '100'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 
@@ -1635,8 +1635,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '1',
-			Tablet: '1',
-			Mobile: '1'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	socialProfileSeparatorHeightUnits: {
@@ -1648,16 +1648,16 @@ const attributes = {
 		}
 	},
 	socialProfileSeparatorColorSwitcher: {
-		type : "string",
-		default: "normal"
+		type : 'string',
+		default: 'normal'
 	},
 	socialProfileSeparatorColor: {
-		type : "string",
-		default: "#E1E3E8"
+		type : 'string',
+		default: '#E1E3E8'
 	},
 	socialProfileSeparatorHoverColor: {
-		type : "string",
-		default: "#E1E3E8"
+		type : 'string',
+		default: ''
 	},
 	socialProfileSeparatorMarginUnits: {
 		type: 'object',
@@ -1668,7 +1668,7 @@ const attributes = {
 		}
 	},
 	socialProfileSeparatorMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '24',
 			bottom: '24',
@@ -1677,30 +1677,30 @@ const attributes = {
 		},
 	},
 	socialProfileSeparatorMarginTab: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '24',
-			bottom: '24',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	socialProfileSeparatorMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '24',
-			bottom: '24',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	socialProfileSeparatorMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
 	teamMemberSocialItems: {
-		type: "array",
+		type: 'array',
 		default: [
 			{
 				id: 'item-1',
@@ -1728,136 +1728,136 @@ const attributes = {
 			},
 		],
 		items: {
-			type: "object",
+			type: 'object',
 			properties: {
 				id: {
-					type: "string",
-					default: ""
+					type: 'string',
+					default: ''
 				},
 				Title: {
-					type: "string",
-					default: ""
+					type: 'string',
+					default: ''
 				},
 				Description: {
-					type: "string",
-					default: ""
+					type: 'string',
+					default: ''
 				},
 				teamMemberSocialIcon: {
 					type: 'string',
 					default: 'check',
 				},
 				teamMemberSocialIconAlign: {
-					type: "string",
-					default: "icon",
+					type: 'string',
+					default: 'icon',
 				},
 			}
 		}
 	},
 
 	teamMemberIconsAlignment: {
-		type : "string",
-		default: "center"
+		type : 'string',
+		default: 'center'
 	},
 
 	teamMemberIconsSize: {
-		type : "object",
+		type : 'object',
 		default: {
 			Desktop: '18',
-			Tablet: '18',
-			Mobile: '18'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	teamMemberIconsSizeUnits: {
-		type : "object",
+		type : 'object',
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px"
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
 		}
 	},
 	teamMemberIconsSpacing: {
-		type : "object",
+		type : 'object',
 		default: {
 			Desktop: '29',
-			Tablet: '29',
-			Mobile: '29'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	teamMemberIconsSpacingUnits: {
-		type : "object",
+		type : 'object',
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px"
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
 		}
 	},
 
 
 
 	teamMemberIconsColorSwitcher: {
-		type : "string",
-		default: "normal"
+		type : 'string',
+		default: 'normal'
 	},
 	teamMemberIconsColor: {
-		type : "string",
-		default: "#000000"
+		type : 'string',
+		default: ''
 	},
 	teamMemberIconsHoverColor: {
-		type : "string",
-		default: "#000000"
+		type : 'string',
+		default: ''
 	},
 
 
 	teamMemberIconStyleSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false
 	},
 
 	teamMemberIconsBGColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	teamMemberIconsBGColor: {
-		type: "string",
-		default: "#fff"
+		type: 'string',
+		default: ''
 	},
 	teamMemberIconsBGHoverColor: {
 		type: 'string',
-		default: "#fff"
+		default: ''
 	},
 	
 	teamMemberIconsBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	teamMemberIconsBorderColor: {
 		type: 'string',
-		default: "#000"
+		default: ''
 	},
 	teamMemberIconsBorderHoverColor: {
 		type: 'string',
-		default: "#000"
+		default: ''
 	},
 	teamMemberIconsBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 
 	teamMemberSocialProfileBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	teamMemberSocialProfileBorderColor: {
 		type: 'string',
-		default: "#000"
+		default: ''
 	},
 	teamMemberSocialProfileBorderHoverColor: {
 		type: 'string',
-		default: "#000"
+		default: ''
 	},
 	teamMemberSocialProfileBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	
 	
@@ -1870,7 +1870,7 @@ const attributes = {
 		}
 	},
 	teamMemberIconsDesktopPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '16',
 			bottom: '16',
@@ -1879,25 +1879,25 @@ const attributes = {
 		},
 	},
 	teamMemberIconsTabPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '16',
-			bottom: '16',
-			left: '16',
-			right: '16',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberIconsMobilePadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '16',
-			bottom: '16',
-			left: '16',
-			right: '16',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberIconsPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
@@ -1910,34 +1910,34 @@ const attributes = {
 		}
 	},
 	teamMemberIconsDesktopMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberIconsTabMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberIconsMobileMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberIconsMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	
@@ -1950,34 +1950,34 @@ const attributes = {
 		}
 	},
 	teamMemberIconsDesktopBorderWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberIconsTabBorderWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberIconsMobileBorderWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberIconsBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
@@ -1990,34 +1990,34 @@ const attributes = {
 		}
 	},
 	teamMemberSocialProfileDesktopBorderWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialProfileTabBorderWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialProfileMobileBorderWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialProfileBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	
@@ -2030,7 +2030,7 @@ const attributes = {
 		}
 	},
 	teamMemberIconsDesktopBorderRadiusWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '150',
 			bottom: '150',
@@ -2039,60 +2039,60 @@ const attributes = {
 		},
 	},
 	teamMemberIconsTabBorderRadiusWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '150',
-			bottom: '150',
-			left: '150',
-			right: '150',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberIconsMobileBorderRadiusWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '150',
-			bottom: '150',
-			left: '150',
-			right: '150',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberIconsBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
 
 	teamMemberSocialType: {
-		type : "string",
-		default: "content"
+		type : 'string',
+		default: 'content'
 	},
 	teamMemberSocialPosition: {
-		type : "string",
-		default: "bottom"
+		type : 'string',
+		default: 'bottom'
 	},
 	socialIconBtnSwitcher: {
-		type : "boolean",
+		type : 'boolean',
 		default: false
 	},
 	teamMemberSocialIconAnimationType: {
-		type : "string",
-		default: "default"
+		type : 'string',
+		default: 'top'
 	},
 
 	socialIconBtnIcon: {
-		type: "string",
-		default: "plus",
+		type: 'string',
+		default: 'plus',
 	},
 	socialIconBtnIconSize: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '20',
-			Tablet: '20',
-			Mobile: '20'
+			Tablet: '',
+			Mobile: ''
 		},
 	},
 	socialIconBtnIconSizeUnits: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
@@ -2101,46 +2101,46 @@ const attributes = {
 	},
 	
 	socialIconBtnColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	socialIconBtnColor : {
-		type: "string",
-		default: "#000"
+		type: 'string',
+		default: ''
 	},
 	socialIconBtnHoverColor: {
 		type: 'string',
-		default: "#000"
+		default: ''
 	},
 	
 	socialIconBtnBGColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	socialIconBtnBGColor: {
-		type: "string",
-		default: "#fff"
+		type: 'string',
+		default: ''
 	},
 	socialIconBtnBGHoverColor: {
 		type: 'string',
-		default: "#fff"
+		default: ''
 	},
 	
 	socialIconBtnBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	socialIconBtnBorderColor: {
 		type: 'string',
-		default: "#000"
+		default: ''
 	},
 	socialIconBtnBorderHoverColor: {
 		type: 'string',
-		default: "#000"
+		default: ''
 	},
 	socialIconBtnBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	
 	
@@ -2153,7 +2153,7 @@ const attributes = {
 		}
 	},
 	socialIconBtnDesktopPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '20',
 			bottom: '20',
@@ -2162,25 +2162,25 @@ const attributes = {
 		},
 	},
 	socialIconBtnTabPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '20',
-			bottom: '20',
-			left: '20',
-			right: 20,
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	socialIconBtnMobilePadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '20',
-			bottom: '20',
-			left: '20',
-			right: '20',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	socialIconBtnPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
@@ -2193,34 +2193,34 @@ const attributes = {
 		}
 	},
 	socialIconBtnDesktopMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	socialIconBtnTabMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	socialIconBtnMobileMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	socialIconBtnMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	
@@ -2233,34 +2233,34 @@ const attributes = {
 		}
 	},
 	socialIconBtnDesktopBorderWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	socialIconBtnTabBorderWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	socialIconBtnMobileBorderWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	socialIconBtnBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	
@@ -2273,7 +2273,7 @@ const attributes = {
 		}
 	},
 	socialIconBtnDesktopBorderRadiusWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '50',
 			bottom: '50',
@@ -2282,196 +2282,190 @@ const attributes = {
 		},
 	},
 	socialIconBtnTabBorderRadiusWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	socialIconBtnMobileBorderRadiusWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	socialIconBtnBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	
 
 	teamMemberSocialTag: {
-		type : "string",
-		default: "h3"
+		type : 'string',
+		default: 'h3'
 	},
 	teamMemberteamMemberIconshape: {
-		type: "string",
-		default: "circle"
+		type: 'string',
+		default: 'circle'
 	},
 
 	teamMemberSocialListGapDesktop: {
-		type: "number",
+		type: 'number',
 		default: 20
 	},
 	teamMemberSocialListGapTablet: {
-		type: "number",
-		default: 15
+		type: 'number',
 	},
 	teamMemberSocialListGapMobile: {
-		type: "number",
-		default: 10
+		type: 'number',
 	},
 	teamMemberSocialListGapUnits: {
-		type: "string",
-		default: "px"
+		type: 'string',
+		default: 'px'
 	},
 
 	teamMemberSocialIconColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	teamMemberSocialIconColor : {
-		type: "string",
-		default: "#fff"
+		type: 'string',
+		default: ''
 	},
 	teamMemberSocialIconHoverColor: {
 		type: 'string',
-		default: "#fff"
+		default: ''
 	},
 
 	teamMemberSocialIconBgColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	teamMemberSocialIconBgColor : {
-		type: "string",
-		default: "#000"
+		type: 'string',
+		default: ''
 	},
 	teamMemberSocialIconBgHoverColor: {
 		type: 'string',
-		default: "#000"
+		default: ''
 	},
 
 	teamMemberSocialIconBgSizeDesktop: {
-		type: "number",
+		type: 'number',
 		default: 60
 	},
 	teamMemberSocialIconBgSizeTablet: {
-		type: "number",
-		default: 60
+		type: 'number',
 	},
 	teamMemberSocialIconBgSizeMobile: {
-		type: "number",
-		default: 60
+		type: 'number',
 	},
 	teamMemberSocialIconBgSizeUnits: {
-		type: "string",
-		default: "px"
+		type: 'string',
+		default: 'px'
 	},
 
 	teamMemberteamMemberIconspacingDesktop: {
-		type: "number",
+		type: 'number',
 		default: 20
 	},
 	teamMemberteamMemberIconspacingTablet: {
-		type: "number",
-		default: 20
+		type: 'number',
 	},
 	teamMemberteamMemberIconspacingMobile: {
-		type: "number",
-		default: 20
+		type: 'number',
 	},
 	teamMemberteamMemberIconspacingUnits: {
-		type: "string",
-		default: "px"
+		type: 'string',
+		default: 'px'
 	},
 
 
 
 	teamMemberEmailSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	teamMemberEmail: {
-		type: "string",
-		default: "test@test.com",
+		type: 'string',
+		default: 'test@test.com',
 	},
 	teamMemberEmailLink: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	teamMemberEmailMediaSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	teamMemberEmailIconPosition : {
-		type: "string",
-		default: "left",
+		type: 'string',
+		default: 'left',
 	},
 	teamMemberEmailIconSwitcher: {
-		type: "string",
-		default: "icon",
+		type: 'string',
+		default: 'icon',
 	},
 	teamMemberEmailIcon: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	teamMemberEmailImageUrl: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	teamMemberEmailImageAlt: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	teamMemberEmailImageID: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	teamMemberEmailIconColorSwitcher: {
-		type: "string",
-		default: "normal",
+		type: 'string',
+		default: 'normal',
 	},
 	teamMemberEmailIconColor: {
-		type: "string",
-		default: "#000",
+		type: 'string',
+		default: '',
 	},	
 	teamMemberEmailIconHoverColor: {
-		type: "string",
-		default: "#000",
+		type: 'string',
+		default: '',
 	},
 	teamMemberEmailIconSpacingUnits: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
 		},
 	},
 	teamMemberEmailIconSpacing: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '8',
-			Tablet: '8',
-			Mobile: '8',
+			Tablet: '',
+			Mobile: '',
 		},
 	},
 	teamMemberEmailIconSize: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '16',
-			Tablet: '16',
-			Mobile: '16',
+			Tablet: '',
+			Mobile: '',
 		},
 	},
 	teamMemberEmailIconSizeUnits: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
@@ -2480,24 +2474,24 @@ const attributes = {
 	},
 
 	teamMemberEmailColorSwitcher: {
-		type: "string",
-		default: "normal",
+		type: 'string',
+		default: 'normal',
 	},
 	teamMemberEmailColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	teamMemberEmailHoverColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	
 	teamMemberEmailTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {},
 	},
 	teamMemberEmailTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -2510,19 +2504,19 @@ const attributes = {
 		},
 	},		
 	teamMemberEmailTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	teamMemberEmailTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},	
 	teamMemberEmailFontFamily: {
-		type: "string",
-		default: "Default",
+		type: 'string',
+		default: 'Default',
 	},
 	teamMemberEmailFontSize: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '',	
 			Tablet: '',
@@ -2530,7 +2524,7 @@ const attributes = {
 		},
 	},
 	teamMemberEmailFontSizeUnits: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
@@ -2538,23 +2532,23 @@ const attributes = {
 		},
 	},
 	teamMemberEmailFontWeight: {
-		type: "string",
-		default: "",	
+		type: 'string',
+		default: '',	
 	},
 	teamMemberEmailFontStyle: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},	
 	teamMemberEmailTextTransform: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	teamMemberEmailTextDecoration: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	teamMemberEmailLetterSpacing: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '',
 			Tablet: '',
@@ -2562,7 +2556,7 @@ const attributes = {
 		},
 	},	
 	teamMemberEmailLetterSpacingUnits: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
@@ -2570,7 +2564,7 @@ const attributes = {
 		},
 	},
 	teamMemberEmailLineHeight: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '',
 			Tablet: '',
@@ -2578,7 +2572,7 @@ const attributes = {
 		},
 	},
 	teamMemberEmailLineHeightUnits: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
@@ -2586,12 +2580,12 @@ const attributes = {
 		},
 	},
 	teamMemberEmailLoadGoogleFonts: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 
 	teamMemberEmailMarginUnits: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
@@ -2599,38 +2593,38 @@ const attributes = {
 		},
 	},	
 	teamMemberEmailMarginDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberEmailMarginTablet: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberEmailMarginMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},	
 	teamMemberEmailMarginLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	teamMemberEmailPaddingUnits: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
@@ -2638,66 +2632,66 @@ const attributes = {
 		},
 	},	
 	teamMemberEmailPaddingDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',	
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberEmailPaddingTablet: {
-		type: "object",
+		type: 'object',
 		default: {	
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},	
 	teamMemberEmailPaddingMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',	
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},	
 	teamMemberEmailPaddingLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	
 
 	// Description
 	teamMemberDescSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	teamMemberDesc: {
-		type: "string",
-		default: "Lorem ipsum dolor sit amet consectetur Aliquam mauris bibendum.",
+		type: 'string',
+		default: 'Lorem ipsum dolor sit amet consectetur Aliquam mauris bibendum.',
 	},
 	teamMemberDescColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	teamMemberDescColor : {
-		type: "string",
-		default: "#000"
+		type: 'string',
+		default: ''
 	},
 	teamMemberDescHoverColor: {
-		type: "string",
-		default: "#000"
+		type: 'string',
+		default: ''
 	},
 	// Typography
 	teamMemberDescGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	teamMemberDescGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -2710,16 +2704,16 @@ const attributes = {
 		},
 	},
 	teamMemberDescGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	teamMemberDescGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	teamMemberDescFontFamily: {
-		type: "string",
-		default: "Default",
+		type: 'string',
+		default: 'Default',
 	},
 	teamMemberDescFontSize: {
 		type: 'object',
@@ -2738,20 +2732,20 @@ const attributes = {
 		}
 	},
 	teamMemberDescFontWeight: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	teamMemberDescFontStyle: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	teamMemberDescTextTransform: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	teamMemberDescTextDecoration: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	teamMemberDescLetterSpacing: {
 		type: 'object',
@@ -2801,114 +2795,114 @@ const attributes = {
 		}
 	},
 	teamMemberDescMarginDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberDescMarginTab: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberDescMarginMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberDescMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
 
 	teamMemberSocialPaddingUnits : {
-		type: "string",
-		default: "px"
+		type: 'string',
+		default: 'px'
 	},
 	teamMemberSocialDesktopPadding: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialTabPadding: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialMobilePadding: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	teamMemberSocialMarginUnits : {
-		type: "string",
-		default: "px"
+		type: 'string',
+		default: 'px'
 	},
 	teamMemberSocialDesktopMargin: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialTabMargin: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialMobileMargin: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	teamMemberSocialBgColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	teamMemberSocialBgColor : {
-		type: "string"
+		type: 'string'
 	},
 	teamMemberSocialBgHoverColor: {
 		type: 'string',
@@ -2917,7 +2911,7 @@ const attributes = {
 
 	teamMemberSocialBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	teamMemberSocialBorderColor: {
 		type: 'string',
@@ -2926,103 +2920,103 @@ const attributes = {
 		type: 'string',
 	},
 	teamMemberSocialBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	teamMemberSocialBorderUnits : {
-		type: "string",
-		default: "px"
+		type: 'string',
+		default: 'px'
 	},
 	teamMemberSocialDesktopBorderWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialTabBorderWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialMobileBorderWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	teamMemberSocialBorderRadiusUnits : {
-		type: "string",
-		default: "px"
+		type: 'string',
+		default: 'px'
 	},
 	teamMemberSocialDesktopBorderRadiusWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialTabBorderRadiusWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialMobileBorderRadiusWidth: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	teamMemberSocialBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	teamMemberSocialDesktopSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	teamMemberSocialTabletSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	teamMemberSocialMobileSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 
 	teamMemberPositionType: {
-		type: "string",
-		default: "default"
+		type: 'string',
+		default: 'default'
 	},
 	teamMemberHZOrientationType: {
-		type: "string",
-		default: "left"
+		type: 'string',
+		default: 'left'
 	},
 	teamMemberVROrientationType: {
-		type: "string",
-		default: "top"
+		type: 'string',
+		default: 'top'
 	},
 	teamMemberHZLeftOffset: {
 		type: 'object',
@@ -3091,18 +3085,18 @@ const attributes = {
 
 	/** Start Class & ID Setting */
 	teamMemberGlobalWraperID : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	teamMemberGlobalWraperClass : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	/** End Class & ID Setting */
 
 	teamMemberCustomCSS : {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 };
 
