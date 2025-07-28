@@ -1,77 +1,77 @@
 const attributes = {
     blockID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     deviceType: {
-        type: "string",
-        default: "Desktop"
+        type: 'string',
+        default: 'Desktop'
     },
     TestimonialPresetStyle: {
-        type: "string",
-        default: "preset-1",
+        type: 'string',
+        default: 'preset-1',
     },
     TestimonialAlignment: {
-        type: "string",
-        default: "left",
+        type: 'string',
+        default: 'left',
     },
 
     TestimonialImageSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: true,
     },
     TestimonialImageUrl : {
-        type: "string",
+        type: 'string',
     },
     TestimonialImageAlt : {
-        type: "string",
+        type: 'string',
     },
     TestimonialImageID : {
-        type: "number",
+        type: 'number',
     },
 
     TitleSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: true,
     },
     TestimonialTitle: {
-        type: "string",
-        default: "A game changer for us"
+        type: 'string',
+        default: 'A game changer for us'
     },
 
     DescSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: true,
     },
     TestimonialDesc: {
-        type : "string",
-        default: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        type : 'string',
+        default: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
     },
 
     AuthorSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: true,
     },
     TestimonialAuthor: {
-        type : "string",
-        default: "John Doe"
+        type : 'string',
+        default: 'John Doe'
     },
 
     DesignationSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: true,
     },
     TestimonialDesignation: {
-        type : "string",
-        default: "CEO, Company Name"
+        type : 'string',
+        default: 'CEO, Company Name'
     },
 
     RatingSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: true,
     },
     TestimonialRatingNumber: {
-        type : "number",
+        type : 'number',
         default: 5,
     },
     TestimonialRatingicon: {
@@ -91,11 +91,11 @@ const attributes = {
         default: '',
     },
     TestimonialRatinIconAlign: {
-        type: "string",
-        default: "icon",
+        type: 'string',
+        default: 'icon',
     },
     QuoteIconSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     TestimonialQuoteIcon: {
@@ -115,25 +115,25 @@ const attributes = {
         default: '',
     },
     TestimonialQuoteIconAlign: {
-        type: "string",
-        default: "icon",
+        type: 'string',
+        default: 'icon',
     },
 
 
     TestimonialImageWidth: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: 60,
-            Tablet: 60,
-            Mobile: 60
+            Desktop: '60',
+            Tablet: '',
+            Mobile: ''
         }
     },
     TestimonialImageWidthUnits: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "px",
-            Tablet: "px",
-            Mobile: "px"
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
         }
     },
 
@@ -146,34 +146,34 @@ const attributes = {
 		}
     },
     TestimonialImageDesktopRadiusWidth: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "50",
-            bottom: "50",
-            left: "50",
-            right: "50",
+            top: '50',
+            bottom: '50',
+            left: '50',
+            right: '50',
         },
     },
     TestimonialImageTabRadiusWidth: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "50",
-            bottom: "50",
-            left: "50",
-            right: "50",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     TestimonialImageMobileRadiusWidth: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "50",
-            bottom: "50",
-            left: "50",
-            right: "50",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     TestimonialImageRadiusLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 
@@ -187,7 +187,7 @@ const attributes = {
         }
     },
     TestimonialImageMarginDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '0',
             bottom: '0',
@@ -196,40 +196,40 @@ const attributes = {
         },
     },
     TestimonialImageMarginTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '14',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     TestimonialImageMarginMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '14',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     TestimonialImageMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     /** End Margin */
 
     /** Start Image Icon Position */
     TestimonialImagePositionSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     TestimonialImageTopPosition: {
         type: 'object',
         default: {
             Desktop: '0',
-            Tablet: '0',
-            Mobile: '0'
+            Tablet: '',
+            Mobile: ''
         }
     },
     TestimonialImageTopPositionUnits: {
@@ -245,8 +245,8 @@ const attributes = {
         type: 'object',
         default: {
             Desktop: '0',
-            Tablet: '0',
-            Mobile: '0'
+            Tablet: '',
+            Mobile: ''
         }
     },  
     TestimonialImageLeftPositionUnits: {
@@ -263,9 +263,9 @@ const attributes = {
     TestimonialQuoteIconSize: {
         type: 'object',
         default: {
-            Desktop: 60,
-            Tablet: 60,
-            Mobile: 60
+            Desktop: '60',
+            Tablet: '',
+            Mobile: ''
         }
     },
     TestimonialQuoteIconSizeUnits: {
@@ -277,27 +277,27 @@ const attributes = {
         }
     },
     TestimonialQuoteIconColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     TestimonialQuoteIconColor: {
-        type: "string",
-        default: "#399CFF"
+        type: 'string',
+        default: '#399CFF'
     },
     TestimonialQuoteIconHoverColor: {
         type: 'string',
-        default: "#399CFF"
+        default: ''
     },
     TestimonialQuoteIconPositionSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     TestimonialQuoteIconTopPosition: {
         type: 'object',
         default: {
             Desktop: '0',
-            Tablet: '0',
-            Mobile: '0'
+            Tablet: '',
+            Mobile: ''
         }
     },
     TestimonialQuoteIconTopPositionUnits: {
@@ -313,8 +313,8 @@ const attributes = {
         type: 'object',
         default: {
             Desktop: '0',
-            Tablet: '0',
-            Mobile: '0'
+            Tablet: '',
+            Mobile: ''
         }
     },  
     TestimonialQuoteIconLeftPositionUnits: {
@@ -336,7 +336,7 @@ const attributes = {
         }
     },
     TestimonialQuoteIconMarginDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -345,7 +345,7 @@ const attributes = {
         },
     },
     TestimonialQuoteIconMarginTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -354,7 +354,7 @@ const attributes = {
         },
     },
     TestimonialQuoteIconMarginMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -363,7 +363,7 @@ const attributes = {
         },
     },
     TestimonialQuoteIconMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     /** End Quote Icon Margin */
@@ -372,15 +372,15 @@ const attributes = {
 
     /** Start Title */
     TestimonialTitleTag: {
-        type: "string",
-        default: "h3"
+        type: 'string',
+        default: 'h3'
     },
     TestimonialTitleGlobalTypographyData: {
-        type: "object",
+        type: 'object',
         default: {}
     },
     TestimonialTitleGlobalTypoSwitcher: {
-        type: "object",
+        type: 'object',
         default: {
             fontFamily: false,
             fontSize: false,
@@ -393,23 +393,23 @@ const attributes = {
         },
     },
     TestimonialTitleGlobalTypoType: {
-        type: "string",
+        type: 'string',
         default: 'default',
     },
     TestimonialTitleGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
     TestimonialTitleFontFamily: {
-        type: "string",
-        default: "Default",
+        type: 'string',
+        default: 'Default',
     },
     TestimonialTitleFontSize: {
         type: 'object',
         default: {
             Desktop: '24',
-            Tablet: '24',
-            Mobile: '18'
+            Tablet: '',
+            Mobile: ''
         }
     },
     TestimonialTitleFontSizeUnits: {
@@ -421,20 +421,20 @@ const attributes = {
         }
     },
     TestimonialTitleFontWeight: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     TestimonialTitleFontStyle: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     TestimonialTitleTextTransform: {
-        type: "string",
-        default: "none"
+        type: 'string',
+        default: 'none'
     },
     TestimonialTitleTextDecoration: {
-        type: "string",
-        default: "none"
+        type: 'string',
+        default: 'none'
     },
     TestimonialTitleLetterSpacing: {
         type: 'object',
@@ -469,16 +469,16 @@ const attributes = {
         }
     },
     TestimonialTitleColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     TestimonialTitleColor: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     TestimonialTitleHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
 
     /** Start Margin */
@@ -491,7 +491,7 @@ const attributes = {
 		}
 	},
 	TestimonialTitleMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '14',
 			bottom: '14',
@@ -500,35 +500,35 @@ const attributes = {
 		},
 	},
 	TestimonialTitleMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '14',
-			bottom: '14',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	TestimonialTitleMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '14',
-			bottom: '14',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	TestimonialTitleMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Margin */
 
     TestimonialDescGlobalTypographyData: {
-        type: "object",
+        type: 'object',
         default: {}
     },
     TestimonialDescGlobalTypoSwitcher: {
-        type: "object",
+        type: 'object',
         default: {
             fontFamily: false,
             fontSize: false,
@@ -541,23 +541,23 @@ const attributes = {
         },
     },
     TestimonialDescGlobalTypoType: {
-        type: "string",
+        type: 'string',
         default: 'default',
     },
     TestimonialDescGlobalTypoOption: {
-        type: "object",
+        type: 'object',
         default: {label: 'Default', value: 'default'},
     },
     TestimonialDescFontFamily: {
-        type: "string",
-        default: "Default",
+        type: 'string',
+        default: 'Default',
     },
     TestimonialDescFontSize: {
         type: 'object',
         default: {
             Desktop: '18',
-            Tablet: '18',
-            Mobile: '16'
+            Tablet: '',
+            Mobile: ''
         }
     },
     TestimonialDescFontSizeUnits: {
@@ -569,20 +569,20 @@ const attributes = {
         }
     },
     TestimonialDescFontWeight: {
-        type: "string",
-        default: "400"
+        type: 'string',
+        default: ''
     },
     TestimonialDescFontStyle: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     TestimonialDescTextTransform: {
-        type: "string",
-        default: "none"
+        type: 'string',
+        default: 'none'
     },
     TestimonialDescTextDecoration: {
-        type: "string",
-        default: "none"
+        type: 'string',
+        default: 'none'
     },
     TestimonialDescLetterSpacing: {
         type: 'object',
@@ -617,16 +617,16 @@ const attributes = {
         }
     },
     TestimonialDescColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     TestimonialDescColor: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     TestimonialDescHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
     /** Start Margin */
     TestimonialDescMarginUnits: {
@@ -638,7 +638,7 @@ const attributes = {
         }
     },
     TestimonialDescMarginDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '0',
             bottom: '24',
@@ -647,36 +647,36 @@ const attributes = {
         },
     },
     TestimonialDescMarginTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '24',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     TestimonialDescMarginMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '0',
-            bottom: '24',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     TestimonialDescMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     /** End Margin */
 
 
     TestimonialAuthorGlobalTypographyData: {
-        type: "object",
+        type: 'object',
         default: {}
     },
     TestimonialAuthorGlobalTypoSwitcher: {
-        type: "object",
+        type: 'object',
         default: {
             fontFamily: false,
             fontSize: false,
@@ -689,23 +689,23 @@ const attributes = {
         },
     },
     TestimonialAuthorGlobalTypoType: {
-        type: "string",
+        type: 'string',
         default: 'default',
     },
     TestimonialAuthorGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
     TestimonialAuthorFontFamily: {
-        type: "string",
-        default: "Default",
+        type: 'string',
+        default: 'Default',
     },
     TestimonialAuthorFontSize: {
         type: 'object',
         default: {
             Desktop: '18',
-            Tablet: '18',
-            Mobile: '16'
+            Tablet: '',
+            Mobile: ''
         }
     },
     TestimonialAuthorFontSizeUnits: {
@@ -717,20 +717,20 @@ const attributes = {
         }
     },
     TestimonialAuthorFontWeight: {
-        type: "string",
-        default: "700"
+        type: 'string',
+        default: '700'
     },
     TestimonialAuthorFontStyle: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     TestimonialAuthorTextTransform: {
-        type: "string",
-        default: "none"
+        type: 'string',
+        default: 'none'
     },
     TestimonialAuthorTextDecoration: {
-        type: "string",
-        default: "none"
+        type: 'string',
+        default: 'none'
     },
     TestimonialAuthorLetterSpacing: {
         type: 'object',
@@ -765,16 +765,16 @@ const attributes = {
         }
     },
     TestimonialAuthorColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     TestimonialAuthorColor: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     TestimonialAuthorHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
 
     /** Start Margin */
@@ -787,7 +787,7 @@ const attributes = {
         }
     },
     TestimonialAuthorMarginDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -796,7 +796,7 @@ const attributes = {
         },
     },
     TestimonialAuthorMarginTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -805,7 +805,7 @@ const attributes = {
         },
     },
     TestimonialAuthorMarginMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -814,18 +814,18 @@ const attributes = {
         },
     },
     TestimonialAuthorMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     /** End Margin */
 
 
     TestimonialDesignationGlobalTypographyData: {
-        type: "object",
+        type: 'object',
         default: {}
     },
     TestimonialDesignationGlobalTypoSwitcher: {
-        type: "object",
+        type: 'object',
         default: {
             fontFamily: false,
             fontSize: false,
@@ -838,23 +838,23 @@ const attributes = {
         },
     },
     TestimonialDesignationGlobalTypoType: {
-        type: "string",
+        type: 'string',
         default: 'default',
     },
     TestimonialDesignationGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
     TestimonialDesignationFontFamily: {
-        type: "string",
-        default: "Default",
+        type: 'string',
+        default: 'Default',
     },
     TestimonialDesignationFontSize: {
         type: 'object',
         default: {
             Desktop: '16',
-            Tablet: '16',
-            Mobile: '14'
+            Tablet: '',
+            Mobile: ''
         }
     },
     TestimonialDesignationFontSizeUnits: {
@@ -866,20 +866,20 @@ const attributes = {
         }
     },
     TestimonialDesignationFontWeight: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     TestimonialDesignationFontStyle: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     TestimonialDesignationTextTransform: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     TestimonialDesignationTextDecoration: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     TestimonialDesignationLetterSpacing: {
         type: 'object',
@@ -914,16 +914,16 @@ const attributes = {
         }
     },
     TestimonialDesignationColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     TestimonialDesignationColor: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     TestimonialDesignationHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
 
         /** Start Margin */
@@ -936,7 +936,7 @@ const attributes = {
         }
     },
     TestimonialDesignationMarginDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -945,7 +945,7 @@ const attributes = {
         },
     },
     TestimonialDesignationMarginTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -954,7 +954,7 @@ const attributes = {
         },
     },
     TestimonialDesignationMarginMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -963,25 +963,25 @@ const attributes = {
         },
     },
     TestimonialDesignationMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     /** End Margin */
 
     TestimonialRatingIconAlign: {
-        type: "string",
-        default: "flex-start",
+        type: 'string',
+        default: 'flex-start',
     },
     TestimonialRatingIconGap: {
-        type: "object",
+        type: 'object',
         default: {
             Desktop: '5',
-            Tablet: '5',
-            Mobile: '5',
+            Tablet: '',
+            Mobile: '',
         },
     },
     TestimonialRatingIconGapUnits: {
-        type: "object",
+        type: 'object',
         default: {
             Desktop: 'px',
             Tablet: 'px',
@@ -992,9 +992,9 @@ const attributes = {
     TestimonialRatingIconSize: {
         type: 'object',
         default: {
-            Desktop: 20,
-            Tablet: 20,
-            Mobile: 20
+            Desktop: '20',
+            Tablet: '',
+            Mobile: ''
         }
     },
     TestimonialRatingIconSizeUnits: {
@@ -1006,16 +1006,16 @@ const attributes = {
         }
     },
     TestimonialRatingIconColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     TestimonialRatingIconColor: {
-        type: "string",
-        default: "#FFB400"
+        type: 'string',
+        default: '#FFB400'
     },
     TestimonialRatingIconHoverColor: {
         type: 'string',
-        default: "#FFB400"
+        default: ''
     },
 
     /** Start Margin */
@@ -1028,7 +1028,7 @@ const attributes = {
 		}
 	},
 	TestimonialRatingIconMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1037,7 +1037,7 @@ const attributes = {
 		},
 	},
 	TestimonialRatingIconMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1046,7 +1046,7 @@ const attributes = {
 		},
 	},
 	TestimonialRatingIconMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1055,7 +1055,7 @@ const attributes = {
 		},
 	},
 	TestimonialRatingIconMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Margin */
@@ -1063,7 +1063,7 @@ const attributes = {
 
 	/** Start Global Setting */
 	TestimonialGlobalZIndex : {
-        type: "object",
+        type: 'object',
 		default: {
 			Desktop: '',
 			Tablet: '',
@@ -1072,7 +1072,7 @@ const attributes = {
     },
     TestimonialOverflow: {
         type: 'string',
-        default: "default",
+        default: 'default',
     },
 	/** Start Padding */
 	TestimonialGlobalPaddingUnits: {
@@ -1084,7 +1084,7 @@ const attributes = {
 		}
 	},
 	TestimonialGlobalPaddingDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '30',
 			bottom: '30',
@@ -1093,25 +1093,25 @@ const attributes = {
 		},
 	},
 	TestimonialGlobalPaddingTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '20',
-			bottom: '20',
-			left: '20',
-			right: '20',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	TestimonialGlobalPaddingMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '20',
-			bottom: '20',
-			left: '20',
-			right: '20',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	TestimonialGlobalPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Padding */
@@ -1126,7 +1126,7 @@ const attributes = {
 		}
 	},
 	TestimonialGlobalMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1135,7 +1135,7 @@ const attributes = {
 		},
 	},
 	TestimonialGlobalMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1144,7 +1144,7 @@ const attributes = {
 		},
 	},
 	TestimonialGlobalMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1153,7 +1153,7 @@ const attributes = {
 		},
 	},
 	TestimonialGlobalMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Margin */
@@ -1161,64 +1161,64 @@ const attributes = {
 
         /** Start Background */
 	TestimonialGlobalBgColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	TestimonialGlobalBgNormalBackgroundType: {  
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	TestimonialGlobalBgNormalClassicColor: {
-		type: "string",
-		default: "#fefaf3",
+		type: 'string',
+		default: '#fefaf3',
 	},
 	TestimonialGlobalBgNormalGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	TestimonialGlobalBgNormalCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	TestimonialGlobalBgNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	TestimonialGlobalBgHoverBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	TestimonialGlobalBgHoverClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	TestimonialGlobalBgHoverGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	TestimonialGlobalBgHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	TestimonialGlobalBgHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	/** End Background */
 
 	/** Start Border */
 	TestimonialGlobalBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	TestimonialGlobalBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	TestimonialGlobalBorderColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	TestimonialGlobalBorderHoverColor: {
 		type: 'string',
@@ -1232,7 +1232,7 @@ const attributes = {
 		}
 	},
 	TestimonialGlobalBorderDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1241,7 +1241,7 @@ const attributes = {
 		},
 	},
 	TestimonialGlobalBorderTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1250,7 +1250,7 @@ const attributes = {
 		},
 	},
 	TestimonialGlobalBorderMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1259,7 +1259,7 @@ const attributes = {
 		},
 	},
 	TestimonialGlobalBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border */
@@ -1274,7 +1274,7 @@ const attributes = {
 		}
 	},
 	TestimonialGlobalBorderRadiusDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '10',
 			bottom: '10',
@@ -1283,25 +1283,25 @@ const attributes = {
 		},
 	},
 	TestimonialGlobalBorderRadiusTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	TestimonialGlobalBorderRadiusMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	TestimonialGlobalBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border Radius */
@@ -1334,43 +1334,43 @@ const attributes = {
     },
     
     testimonialDesktopSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     testimonialTabletSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     testimonialMobileSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
 
     /** Start Global Setting */
     testimonialCustomCSS : {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 	testimonialGlobalWraperID : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	testimonialGlobalWraperClass : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 
     testimonialPositionType: {
-        type: "string",
-        default: "default"
+        type: 'string',
+        default: 'default'
     },
     testimonialHZOrientationType: {
-        type: "string",
-        default: "left"
+        type: 'string',
+        default: 'left'
     },
     testimonialVROrientationType: {
-        type: "string",
-        default: "top"
+        type: 'string',
+        default: 'top'
     },
     testimonialHZLeftOffset: {
         type: 'object',
