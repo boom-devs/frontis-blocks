@@ -22,28 +22,27 @@ export default function Save({ attributes }) {
 
     // Prepare Swiper settings based on slider type
     const swiperSettings = JSON.stringify({
-           // Marquee style settings
-           spaceBetween: 0,
-           centeredSlides: true,
-           speed: speed,
-           autoplay: {
-             delay: 0,
-             reverseDirection: reverseDirection,
-             disableOnInteraction: true,
-           },
-           loop: true,
-           slidesPerView:'auto',
-           allowTouchMove: false,
-
-            navigation: showNavigation ? {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            } : false,
-
-            pagination: showPagination ? {
-                el: '.swiper-pagination',
-                clickable: true,
-            } : false,
+        loop: true,
+        slidesPerView: 'auto',
+        spaceBetween: 0,
+        centeredSlides: false,
+        speed: speed,
+        autoplay: {
+            delay: 0,
+            reverseDirection: reverseDirection,
+            disableOnInteraction: false,
+        },
+        allowTouchMove: false,
+    
+        navigation: showNavigation ? {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        } : false,
+    
+        pagination: showPagination ? {
+            el: '.swiper-pagination',
+            clickable: true,
+        } : false,
     });
 
     const frontendSlideWidth = slideWidth.Desktop && slideWidthUnits.Desktop ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}` : 'fit-content';
