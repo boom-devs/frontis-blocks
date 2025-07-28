@@ -17,7 +17,6 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 class AssetsGenerator
 {
 	use Singleton;
-
 	private $post_id;
 	private $post;
 	private $used_blocks = [];

@@ -32,6 +32,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberDesc,
 
 		// Social Profile
+		teamMemberSocialPosition,
 		teamMemberSocialProfileSwitcher,
 		teamMemberSocialProfileSeparator,
 		teamMemberSocialItems,
@@ -152,7 +153,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							{teamMemberSocialProfileSwitcher === true && 
 								<>
 									{teamMemberSocialType === 'content' && <>
-										{teamMemberSocialProfileSeparatorPosition === 'top' && teamMemberSocialProfileSeparator === true && <div className="fb-team-member-social-profile-separator"><hr/></div>}
+										{(teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') && (teamMemberSocialProfileSeparatorPosition === 'top' && teamMemberSocialProfileSeparator === true) && <div className="fb-team-member-social-profile-separator"><hr/></div>}
 
 										<div className="fb-team-member-social-profile-wrapper">
 											{socialIconBtnSwitcher === true && 
@@ -169,7 +170,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											</div> 
 										</div>
 
-										{teamMemberSocialProfileSeparatorPosition === 'bottom' && teamMemberSocialProfileSeparator === true && <div className="fb-team-member-social-profile-separator"><hr/></div>}
+										{(teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') &&(teamMemberSocialProfileSeparatorPosition === 'bottom' && teamMemberSocialProfileSeparator === true) && <div className="fb-team-member-social-profile-separator"><hr/></div>}
 									</>}
 								</>
 							}
