@@ -27,8 +27,6 @@ class Enqueues {
 		$page_name = Helper::get_page_name();
 		$upload_dir = wp_upload_dir();
 
-		$frntis_block_used = get_post_meta(get_the_ID(), 'page_frontis_block_used', true);
-
 		if (is_home()) {
 			$page_name = 'home';
 		}
@@ -50,7 +48,16 @@ class Enqueues {
 		}
 
 		// Check page or post assigned by template
-		$assigned_template = get_post_meta(get_the_ID(), '_wp_page_template', true);
+		$frontis_used = get_post_meta( get_the_ID(), 'frontis_blocks_used', true );
+
+		if(Helper::is_custom_post_type(get_the_ID()) || get_post_type(get_the_ID()) === 'post') {
+			if($frontis_used) {
+				$post = get_post( get_the_ID() );
+				$page_name = $post->post_name;
+			} else {
+				$page_name = get_post_type(get_the_ID());
+			}
+		}
 
 		$frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
 		$frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
