@@ -527,6 +527,17 @@ class Helper
         return $value . $unit;
     }
 
+	public static function is_custom_post_type( $post_id = null ) {
+		// Get the post type of the given post or current post in the loop
+		$post_type = get_post_type( $post_id ?: get_the_ID() );
+
+		// List of WordPress default post types
+		$default_post_types = array( 'post', 'page', 'attachment', 'revision', 'nav_menu_item', 'wp_template', 'wp_template_part' );
+
+		// Check if the post type is not in the default list
+		return ! in_array( $post_type, $default_post_types );
+	}
+
 	public static function get_all_posts() {
 		// Get all public post types except the excluded ones
 		$excluded_post_types = array('attachment', 'nav_menu_item', 'wp_block', 'wp_navigation', 'wp_global_styles');
@@ -571,8 +582,6 @@ class Helper
 
 	// Render dynamic content for block
 	public static function render_dynamic_content($block_data) {
-//		var_dump($block_data);
-
 	}
 
 	public static function get_single_field($post_id, $field) {
