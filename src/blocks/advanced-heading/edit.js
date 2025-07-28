@@ -94,15 +94,15 @@ export default function Edit({ attributes, setAttributes, clientId, context, ins
 	};
 
 	// Synchronize headingText with rawTitle
-	useEffect(() => {
-		if (!isHeadingTextChanged) {
-			setAttributes(
-				{
-					headingText: rawTitle,
-				}
-			);
-		}
-	}, [rawTitle, headingText, setAttributes]);
+	// useEffect(() => {
+	// 	if (!isHeadingTextChanged) {
+	// 		setAttributes(
+	// 			{
+	// 				headingText: rawTitle,
+	// 			}
+	// 		);
+	// 	}
+	// }, [rawTitle, headingText, setAttributes]);
 
 	let titleElement = <h2 { ...blockProps }>{ __( 'Title' ) }</h2>;
 	if ( postType && postId ) {
