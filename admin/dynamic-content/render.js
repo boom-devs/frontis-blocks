@@ -1,15 +1,15 @@
-const { createHigherOrderComponent } = wp.compose;
+// const { createHigherOrderComponent } = wp.compose;
 
-// Add component
-import ToolBar from './toolbar/tolbar';
+// // Add component
+// import ToolBar from './toolbar/tolbar';
 
-export default  createHigherOrderComponent( ( BlockEdit ) => {
-	return ( props ) => {
-		return (
-			<>
-				<BlockEdit { ...props } />
-				<ToolBar />
-			</>
-		);
-	};
-}, 'renderFrontisDynamicContent' );
+// export default  createHigherOrderComponent( ( BlockEdit ) => {
+// 	return ( props ) => {
+// 		return (
+// 			<>
+// 				<BlockEdit { ...props } />
+// 				<ToolBar />
+// 			</>
+// 		);
+// 	};
+// }, 'renderFrontisDynamicContent' );
