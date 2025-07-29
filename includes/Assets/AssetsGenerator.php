@@ -693,7 +693,9 @@ class AssetsGenerator
 
 		if (!empty($css_files)) {
 			foreach ($css_files as $key => $css_file) {
-				if(!in_array('frontis-blocks/slider', $this->used_blocks) && basename($css_file) === 'swiper-bundle.min.css') {
+				if (basename($css_file) === 'swiper-bundle.min.css' &&
+					!in_array('frontis-blocks/slider', $this->used_blocks) &&
+					!in_array('frontis-blocks/marquee-carousel', $this->used_blocks)) {
 					continue;
 				}
 
@@ -707,7 +709,9 @@ class AssetsGenerator
 
 		if (!empty($js_files)) {
 			foreach ($js_files as $key => $js_file) {
-				if(!in_array('frontis-blocks/slider', $this->used_blocks) && basename($js_file) === 'swiper-bundle.min.js') {
+				if (basename($css_file) === 'swiper-bundle.min.css' &&
+					!in_array('frontis-blocks/slider', $this->used_blocks) &&
+					!in_array('frontis-blocks/marquee-carousel', $this->used_blocks)) {
 					continue;
 				}
 
