@@ -4,6 +4,7 @@
 	"name": "frontis-blocks/query-pagination",
 	"title": "Pagination",
 	"category": "frontis-blocks",
+	"ancestor": [ "frontis-blocks/loop-builder" ], 
 	"allowedBlocks": [
 		"frontis-blocks/query-pagination-previous",
 		"frontis-blocks/query-pagination-numbers",
