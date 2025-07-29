@@ -23,16 +23,20 @@ import { QueryPaginationLabelControl } from './query-pagination-label-control';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 const TEMPLATE = [
-	[ 'core/query-pagination-previous' ],
-	[ 'core/query-pagination-numbers' ],
-	[ 'core/query-pagination-next' ],
+	[ 'frontis-blocks/query-pagination-previous' ],
+	[ 'frontis-blocks/query-pagination-numbers' ],
+	[ 'frontis-blocks/query-pagination-next' ],
 ];
 
-export default function QueryPaginationEdit( {
-	attributes: { paginationArrow, showLabel },
-	setAttributes,
-	clientId,
-} ) {
+export default function Edit({ attributes, setAttributes, clientId }) {
+	
+	const {
+		blockId,
+		blockStyle,
+		paginationArrow,
+        showLabel,
+	} = attributes;
+
 	const hasNextPreviousBlocks = useSelect(
 		( select ) => {
 			const { getBlocks } = select( blockEditorStore );
@@ -43,8 +47,8 @@ export default function QueryPaginationEdit( {
 			 */
 			return innerBlocks?.find( ( innerBlock ) => {
 				return [
-					'core/query-pagination-next',
-					'core/query-pagination-previous',
+					'frontis-blocks/query-pagination-next',
+					'frontis-blocks/query-pagination-previous',
 				].includes( innerBlock.name );
 			} );
 		},

@@ -1,12 +1,12 @@
 <?php
 /**
- * Server-side rendering of the `frontis-blocks/query-pagination` block.
+ * Server-side rendering of the `core/query-pagination` block.
  *
  * @package WordPress
  */
 
 /**
- * Renders the `frontis-blocks/query-pagination` block on the server.
+ * Renders the `core/query-pagination` block on the server.
  *
  * @since 5.9.0
  *
@@ -36,7 +36,7 @@ function render_block_core_query_pagination( $attributes, $content ) {
 }
 
 /**
- * Registers the `frontis-blocks/query-pagination` block on the server.
+ * Registers the `core/query-pagination` block on the server.
  *
  * @since 5.8.0
  */

@@ -10,11 +10,19 @@ const arrowMap = {
 	chevron: '»',
 };
 
-export default function QueryPaginationNextEdit( {
-	attributes: { label },
-	setAttributes,
-	context: { paginationArrow, showLabel },
-} ) {
+export default function Edit({ attributes, setAttributes, clientId, context }) {
+	
+	const {
+		blockId,
+		blockStyle,
+		label,
+	} = attributes;
+
+	const { 
+		paginationArrow,
+		showLabel 
+	} = context;
+	
 	const displayArrow = arrowMap[ paginationArrow ];
 	return (
 		<a

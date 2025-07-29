@@ -1,21 +1,15 @@
-/**
- * WordPress dependencies
- */
-import { queryPaginationNext as icon } from '@wordpress/icons';
+import { registerBlockType } from '@wordpress/blocks';
 
 /**
  * Internal dependencies
  */
-import initBlock from '../utils/init-block';
+import attributes from './attributes.js';
+import Edit from './edit';
 import metadata from './block.json';
-import edit from './edit';
+import FB_Block_Icons from "@Config/fb-blocks-icons";
 
-const { name } = metadata;
-export { metadata, name };
-
-export const settings = {
-	icon,
-	edit,
-};
-
-export const init = () => initBlock( { name, metadata, settings } );
+registerBlockType( metadata.name, {
+	attributes,
+	edit: Edit,
+	icon: FB_Block_Icons.post_grid
+} );
