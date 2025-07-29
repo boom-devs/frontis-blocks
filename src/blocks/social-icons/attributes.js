@@ -1,14 +1,14 @@
 const attributes = {
     blockID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     deviceType: {
-        type: "string",
-        default: "Desktop"
+        type: 'string',
+        default: 'Desktop'
     },
     socialItems: {
-        type: "array",
+        type: 'array',
         default: [
             {
                 id: 'item-1',
@@ -116,94 +116,94 @@ const attributes = {
             },
         ],
         items: {
-            type: "object",
+            type: 'object',
             properties: {
                 id: {
-                    type: "string",
-                    default: ""
+                    type: 'string',
+                    default: ''
                 },
                 socialIconTitle: {
-                    type: "string",
-                    default: "Title"
+                    type: 'string',
+                    default: 'Title'
                 },
                 socialIcon: {
                     type: 'string',
                     default: 'behance',
                 },
                 socialIconUrl: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 socialIconTargetUrl: {
-                    type: "boolean",
+                    type: 'boolean',
                 },
 
                 socialIconColorSwitcher: {
-                    type: "string",
-                    default: "normal",
+                    type: 'string',
+                    default: 'normal',
                 },
                 socialIconColor: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 socialIconHoverColor: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 socialIconBgColor: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 socialIconHoverBgColor: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
 
                 socialItemBgColorSwitcher: {
-                    type: "string",
-                    default: "normal",
+                    type: 'string',
+                    default: 'normal',
                 },
 
                 normalItemBackgroundType: {
-                    type: "string",
-                    default: "classic",
+                    type: 'string',
+                    default: 'classic',
                 },
                 normalItemClassicColor: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 normalItemGradientColor: {
-                    type: "string",
+                    type: 'string',
                     default: null,
                 },
                 normalItemCustomGradientSwitcher: {
-                    type: "boolean",
+                    type: 'boolean',
                     default: false,
                 },
                 normalItemCustomGradientInputValue: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
 
                 hoverItemBackgroundType: {
-                    type: "string",
-                    default: "classic",
+                    type: 'string',
+                    default: 'classic',
                 },
                 hoverItemClassicColor: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
                 hoverItemGradientColor: {
-                    type: "string",
+                    type: 'string',
                     default: null,
                 },
                 hoverItemCustomGradientSwitcher: {
-                    type: "boolean",
+                    type: 'boolean',
                     default: false,
                 },
                 hoverItemCustomGradientInputValue: {
-                    type: "string",
-                    default: "",
+                    type: 'string',
+                    default: '',
                 },
             }
         }
@@ -211,32 +211,32 @@ const attributes = {
 
     /** Start repetar item style pass to this attribute */
     singleItemColorStyle: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     blockStyle: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
     /** End repetar item style pass to this attribute */
 
 
     socialIconsPresetStyle: {
-        type: "string",
-        default: "preset-1",
+        type: 'string',
+        default: 'preset-1',
     },
     
     socialAlignment: {
-        type: "string",
-        default: "left",
+        type: 'string',
+        default: 'left',
     },
     /** Icon Styles */
     socialIconSize: {
 		type: 'object',
 		default: {
-			Desktop: 20,
-			Tablet: 20,
-			Mobile: 15
+			Desktop: '20',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	socialIconSizeUnits: {
@@ -248,40 +248,40 @@ const attributes = {
 		}
 	},
     socialIconGlobalColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     socialIconGlobalColor: {
-        type: "string",
-        default: "#399CFF"
+        type: 'string',
+        default: '#399CFF'
     },
     socialIconGlobalHoverColor: {
         type: 'string',
-        default: "#399CFF"
+        default: ''
     },
     socialIconBgGlobalColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     socialIconBgGlobalColor : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     socialIconBgGlobalHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
     socialIconBorder: {
         type: 'string',
-        default: "solid",
+        default: 'solid',
     },
     socialIconBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     socialIconBorderColor: {
         type: 'string',
-        default: "#E1E3E8"
+        default: '#E1E3E8'
     },
     socialIconBorderHoverColor: {
         type: 'string',
@@ -295,7 +295,7 @@ const attributes = {
 		}
     },
     socialIconBorderDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '1',
             bottom: '1',
@@ -304,25 +304,25 @@ const attributes = {
         },
     },
     socialIconBorderTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '1',
-            bottom: '1',
-            left: '1',
-            right: '1',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '1',
-            bottom: '1',
-            left: '1',
-            right: '1',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     socialIconBorderRadiusUnits: {
@@ -334,7 +334,7 @@ const attributes = {
 		}
     },
     socialIconBorderRadiusDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '50',
             bottom: '50',
@@ -343,25 +343,25 @@ const attributes = {
         },
     },
     socialIconBorderRadiusTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '50', 
-            bottom: '50',
-            left: '50',
-            right: '50',
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderRadiusMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '50',
-            bottom: '50',
-            left: '50',
-            right: '50',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconBorderRadiusLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 
@@ -374,7 +374,7 @@ const attributes = {
 		}
     },
     socialIconPaddingDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '20',
             bottom: '20',
@@ -383,41 +383,41 @@ const attributes = {
         },
     },
     socialIconPaddingTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '15',
-            bottom: '15',
-            left: '15',
-            right: '15',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconPaddingMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '10',
-            bottom: '10',
-            left: '10',
-            right: '10',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     socialIconPaddingLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     /*End Icon Styles */
 
     /** Title Styles */
     socialTitleSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
 
     socialTitleGlobalTypographyData: {
-        type: "object",
+        type: 'object',
         default: {}
     },
     socialTitleGlobalTypoSwitcher: {
-        type: "object",
+        type: 'object',
         default: {
             fontFamily: false,
             fontSize: false,
@@ -430,16 +430,16 @@ const attributes = {
         },
     },
     socialTitleGlobalTypoType: {
-        type: "string",
+        type: 'string',
         default: 'default',
     },
     socialTitleGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
     socialTitleFontFamily: {
-        type: "string",
-        default: "Default",
+        type: 'string',
+        default: 'Default',
     },
     socialTitleFontSize: {
 		type: 'object',
@@ -458,20 +458,20 @@ const attributes = {
 		}
 	},
     socialTitleFontWeight : {
-        type: "string",
-        default: "400"
+        type: 'string',
+        default: '400'
     },
     socialTitleFontStyle : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     socialTitleTextTransform : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     socialTitleTextDecoration : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     socialTitleLetterSpacing: {
 		type: 'object',
@@ -506,16 +506,16 @@ const attributes = {
 		}
 	},
     socialTitleColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     socialTitleColor : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     socialTitleHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
 
     socialTitlePaddingUnits: {
@@ -527,7 +527,7 @@ const attributes = {
         }
     },
     socialTitlePaddingDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -536,7 +536,7 @@ const attributes = {
         },
     },
     socialTitlePaddingTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -545,7 +545,7 @@ const attributes = {
         },
     },
     socialTitlePaddingMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -554,7 +554,7 @@ const attributes = {
         },
     },
     socialTitlePaddingLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 
@@ -562,11 +562,11 @@ const attributes = {
 
     /** Background Styles */
     socialBgColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     socialBgColor : {
-        type: "string",
+        type: 'string',
     },
     socialBgHoverColor: {
         type: 'string',
@@ -577,11 +577,11 @@ const attributes = {
     /** Border Styles */
     socialBorder: {
         type: 'string',
-        default: "none",
+        default: 'none',
     },
     socialBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     socialBorderColor: {
         type: 'string',
@@ -598,7 +598,7 @@ const attributes = {
         }
     },
     socialBorderDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -607,7 +607,7 @@ const attributes = {
         },
     },
     socialBorderTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -616,7 +616,7 @@ const attributes = {
         },
     },
     socialBorderMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -625,7 +625,7 @@ const attributes = {
         },
     },
     socialBorderLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     socialBorderRadiusUnits: {
@@ -637,7 +637,7 @@ const attributes = {
         }
     },
     socialBorderRadiusDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -646,7 +646,7 @@ const attributes = {
         },
     },
     socialBorderRadiusTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '', 
             bottom: '',
@@ -655,7 +655,7 @@ const attributes = {
         },
     },
     socialBorderRadiusMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -664,7 +664,7 @@ const attributes = {
         },
     },
     socialBorderRadiusLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 
@@ -673,9 +673,9 @@ const attributes = {
     socialGapSize: {
         type: 'object',
         default: {
-            Desktop: 10,
-            Tablet: 10,
-            Mobile: 10
+            Desktop: '10',
+            Tablet: '',
+            Mobile: ''
         }
     },
     socialGapUnits: {
@@ -698,7 +698,7 @@ const attributes = {
         }
     },
     socialPaddingDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -707,7 +707,7 @@ const attributes = {
         },
     },
     socialPaddingTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -716,7 +716,7 @@ const attributes = {
         },
     },
     socialPaddingMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -725,7 +725,7 @@ const attributes = {
         },
     },
     socialPaddingLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     /** End Padding Styles */
@@ -740,7 +740,7 @@ const attributes = {
         }
     },
     socialMarginDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -749,7 +749,7 @@ const attributes = {
         },
     },
     socialMarginTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -758,7 +758,7 @@ const attributes = {
         },
     },
     socialMarginMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -767,7 +767,7 @@ const attributes = {
         },
     },
     socialMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     /** End Margin Styles */
@@ -775,7 +775,7 @@ const attributes = {
 
     /*Global Styles */
     socialGlobalZIndex : {
-        type: "object",
+        type: 'object',
 		default: {
 			Desktop: '',
 			Tablet: '',
@@ -784,7 +784,7 @@ const attributes = {
     },
     socialIconsOverflow: {
         type: 'string',
-        default: "default",
+        default: 'default',
     },
     socialGlobalPaddingUnits: {
 		type: 'object',
@@ -795,7 +795,7 @@ const attributes = {
 		}
     },
     socialGlobalPaddingDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -804,7 +804,7 @@ const attributes = {
         },
     },
     socialGlobalPaddingTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '', 
             bottom: '',
@@ -813,7 +813,7 @@ const attributes = {
         },
     },
     socialGlobalPaddingMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -822,7 +822,7 @@ const attributes = {
         },
     },
     socialGlobalPaddingLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     socialGlobalMarginUnits: {
@@ -834,7 +834,7 @@ const attributes = {
 		}
     },
     socialGlobalMarginDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -843,7 +843,7 @@ const attributes = {
         },
     },
     socialGlobalMarginTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '', 
             bottom: '',
@@ -852,7 +852,7 @@ const attributes = {
         },
     },
     socialGlobalMarginMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -861,26 +861,26 @@ const attributes = {
         },
     },
     socialGlobalMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     socialGlobalBgColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     socialGlobalBgColor : {
-        type: "string",
+        type: 'string',
     },
     socialGlobalBgHoverColor: {
         type: 'string',
     },
     socialGlobalBorder: { 
         type: 'string',
-        default: "none",
+        default: 'none',
     },
     socialGlobalBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     socialGlobalBorderColor: {
         type: 'string',
@@ -897,7 +897,7 @@ const attributes = {
 		}
     },
     socialGlobalBorderDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -906,7 +906,7 @@ const attributes = {
         },
     },
     socialGlobalBorderTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -915,7 +915,7 @@ const attributes = {
         },
     },
     socialGlobalBorderMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -924,7 +924,7 @@ const attributes = {
         },
     },
     socialGlobalBorderLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     socialGlobalBorderRadiusUnits: {
@@ -936,7 +936,7 @@ const attributes = {
 		}
     },
     socialGlobalBorderRadiusDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -945,7 +945,7 @@ const attributes = {
         },
     },
     socialGlobalBorderRadiusTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '', 
             bottom: '',
@@ -954,7 +954,7 @@ const attributes = {
         },
     },
     socialGlobalBorderRadiusMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -963,7 +963,7 @@ const attributes = {
         },
     },
     socialGlobalBorderRadiusLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 
@@ -991,43 +991,43 @@ const attributes = {
     /*End Global Styles */
 
     socialIconsDesktopSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     socialIconsTabletSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     socialIconsMobileSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
 
     /** Start Global Setting */
     socialGlobalCustomCSS : {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 	socialGlobalWraperID : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	socialGlobalWraperClass : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 
     socialIconsPositionType: {
-        type: "string",
-        default: "default"
+        type: 'string',
+        default: 'default'
     },
     socialIconsHZOrientationType: {
-        type: "string",
-        default: "left"
+        type: 'string',
+        default: 'left'
     },
     socialIconsVROrientationType: {
-        type: "string",
-        default: "top"
+        type: 'string',
+        default: 'top'
     },
     socialIconsHZLeftOffset: {
         type: 'object',

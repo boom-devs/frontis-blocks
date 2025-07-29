@@ -1318,9 +1318,9 @@ class Admin {
 
         wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.css', array(), '1.0.0');
 
-		// Dynamic content js
-		wp_enqueue_script('frontis-blocks-dynamic-content', FB_PLUGIN_URL . 'assets/admin/dynamicContent.js', $script_asset['dependencies'], '1.0.0', true);
-		wp_enqueue_style('frontis-blocks-dynamic-content', FB_PLUGIN_URL . 'assets/admin/style-dynamicContent.css', array(), '1.0.0');
+		// // Dynamic content js
+		// wp_enqueue_script('frontis-blocks-dynamic-content', FB_PLUGIN_URL . 'assets/admin/dynamicContent.js', $script_asset['dependencies'], '1.0.0', true);
+		// wp_enqueue_style('frontis-blocks-dynamic-content', FB_PLUGIN_URL . 'assets/admin/style-dynamicContent.css', array(), '1.0.0');
 	}
 
     public function register_block_assets_in_site_editor() {
