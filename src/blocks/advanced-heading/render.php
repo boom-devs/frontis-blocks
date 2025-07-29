@@ -91,7 +91,7 @@ $render_icon_svg = function($icon) {
 };
 
 
-var_dump($heading_icon);
+// var_dump($heading_icon);
 
 // Start building the HTML output
 $output = '<div ' . $wrapper_attributes . '>';
