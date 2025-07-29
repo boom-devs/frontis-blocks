@@ -4,66 +4,31 @@
 	"name": "frontis-blocks/query-pagination",
 	"title": "Pagination",
 	"category": "frontis-blocks",
-	"ancestor": [ "core/query" ], 
 	"allowedBlocks": [
-		"core/query-pagination-previous",
-		"core/query-pagination-numbers",
-		"core/query-pagination-next"
+		"frontis-blocks/query-pagination-previous",
+		"frontis-blocks/query-pagination-numbers",
+		"frontis-blocks/query-pagination-next"
 	],
 	"description": "Displays a paginated navigation to next/previous set of posts, when applicable.",
-	"textdomain": "default",
-	"attributes": {
-		"paginationArrow": {
-			"type": "string",
-			"default": "none"
-		},
-		"showLabel": {
-			"type": "boolean",
-			"default": true
-		}
-	},
+	"textdomain": "frontis-blocks",
 	"usesContext": [ "queryId", "query" ],
 	"providesContext": {
 		"paginationArrow": "paginationArrow",
 		"showLabel": "showLabel"
 	},
 	"supports": {
-		"align": true,
-		"reusable": false,
+		"anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false,
 		"html": false,
-		"color": {
-			"gradients": true,
-			"link": true,
-			"__experimentalDefaultControls": {
-				"background": true,
-				"text": true,
-				"link": true
-			}
-		},
 		"layout": {
 			"allowSwitching": false,
 			"allowInheriting": false,
 			"default": {
 				"type": "flex"
 			}
-		},
-		"typography": {
-			"fontSize": true,
-			"lineHeight": true,
-			"__experimentalFontFamily": true,
-			"__experimentalFontWeight": true,
-			"__experimentalFontStyle": true,
-			"__experimentalTextTransform": true,
-			"__experimentalTextDecoration": true,
-			"__experimentalLetterSpacing": true,
-			"__experimentalDefaultControls": {
-				"fontSize": true
-			}
-		},
-		"interactivity": {
-			"clientNavigation": true
 		}
 	},
-	"editorStyle": "wp-block-query-pagination-editor",
-	"style": "wp-block-query-pagination"
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
 }

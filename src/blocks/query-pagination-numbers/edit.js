@@ -47,11 +47,15 @@ const previewPaginationNumbers = ( midSize ) => {
 	return <>{ paginationItems }</>;
 };
 
-export default function QueryPaginationNumbersEdit( {
-	attributes,
-	setAttributes,
-} ) {
-	const { midSize } = attributes;
+export default function Edit({ attributes, setAttributes, clientId, }) {
+	
+	const {
+		blockId,
+		blockStyle,
+		midSize,
+	} = attributes;
+
+
 	const paginationNumbers = previewPaginationNumbers(
 		parseInt( midSize, 10 )
 	);

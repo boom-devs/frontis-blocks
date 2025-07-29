@@ -1,17 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "core/query-pagination-next",
+	"name": "frontis-blocks/query-pagination-next",
 	"title": "Next Page",
 	"category": "frontis-blocks",
 	"parent": [ "frontis-blocks/query-pagination" ],
 	"description": "Displays the next posts page link.",
-	"textdomain": "default",
-	"attributes": {
-		"label": {
-			"type": "string"
-		}
-	},
+	"textdomain": "frontis-blocks",
 	"usesContext": [
 		"queryId",
 		"query",
@@ -20,30 +15,10 @@
 		"enhancedPagination"
 	],
 	"supports": {
-		"reusable": false,
-		"html": false,
-		"color": {
-			"gradients": true,
-			"text": false,
-			"__experimentalDefaultControls": {
-				"background": true
-			}
-		},
-		"typography": {
-			"fontSize": true,
-			"lineHeight": true,
-			"__experimentalFontFamily": true,
-			"__experimentalFontWeight": true,
-			"__experimentalFontStyle": true,
-			"__experimentalTextTransform": true,
-			"__experimentalTextDecoration": true,
-			"__experimentalLetterSpacing": true,
-			"__experimentalDefaultControls": {
-				"fontSize": true
-			}
-		},
-		"interactivity": {
-			"clientNavigation": true
-		}
-	}
+        "anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
 }
