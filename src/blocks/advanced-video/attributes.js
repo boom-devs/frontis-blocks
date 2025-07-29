@@ -1,18 +1,18 @@
 const attributes = {
     blockID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     deviceType: {
-        type: "string",
-        default: "Desktop"
+        type: 'string',
+        default: 'Desktop'
     },
     blockStyle: {
         type: 'string',
         default: '',
     },
     videoGlobalZIndex : {
-        type: "object",
+        type: 'object',
         default: {
             Desktop: '',
             Tablet: '',
@@ -21,65 +21,65 @@ const attributes = {
     },
     advancedVideoOverflow: {
         type: 'string',
-        default: "default",
+        default: 'default',
     },
     videoURL: {
-        type: "string",
-        default: "https://www.youtube.com/watch?v=8U0K_wMcUPg",
+        type: 'string',
+        default: 'https://www.youtube.com/watch?v=8U0K_wMcUPg',
     },
     autoPlaySwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     muteSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     loopSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     showControlsSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
 
     /** Start Image Settings */
     imageOverlaySwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     previewImageUrl: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     previewImageAlt: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     previewImageID: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     previewImagePosition: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     previewImageAttachment: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     previewImageRepeat: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     previewImageSize: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     /** End Image Settings */
     videoPlayIconSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     videoPlayIcon: {
@@ -91,9 +91,9 @@ const attributes = {
     videoPlayIconSize: {
         type: 'object',
         default: {
-            Desktop: 20,
-            Tablet: 20,
-            Mobile: 20
+            Desktop: '20',
+            Tablet: '',
+            Mobile: ''
         }
     },
     videoPlayIconSizeUnits: {
@@ -105,41 +105,41 @@ const attributes = {
         }
     },
     videoPlayIconColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     videoPlayIconColor: {
-        type: "string",
-        default: "#fff"
+        type: 'string',
+        default: '#fff'
     },
     videoPlayIconHoverColor: {
         type: 'string',
-        default: "#fff"
+        default: ''
     },
 
     videoPlayIconBgColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     videoPlayIconBgColor : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     videoPlayIconBgHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
     videoPlayIconBorder: {
         type: 'string',
-        default: "solid",
+        default: 'solid',
     },
     videoPlayIconBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     videoPlayIconBorderColor: {
         type: 'string',
-        default: "#fff"
+        default: '#fff'
     },
     videoPlayIconBorderHoverColor: {
         type: 'string',
@@ -153,7 +153,7 @@ const attributes = {
         }
     },
     videoPlayIconBorderDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '1',
             bottom: '1',
@@ -162,25 +162,25 @@ const attributes = {
         },
     },
     videoPlayIconBorderTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '1',
-            bottom: '1',
-            left: '1',
-            right: '1',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     videoPlayIconBorderMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '1',
-            bottom: '1',
-            left: '1',
-            right: '1',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     videoPlayIconBorderLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     videoPlayIconBorderRadiusUnits: {
@@ -192,7 +192,7 @@ const attributes = {
         }
     },
     videoPlayIconBorderRadiusDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '50',
             bottom: '50',
@@ -201,25 +201,25 @@ const attributes = {
         },
     },
     videoPlayIconBorderRadiusTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '50', 
-            bottom: '50',
-            left: '50',
-            right: '50',
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     videoPlayIconBorderRadiusMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '50',
-            bottom: '50',
-            left: '50',
-            right: '50',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     videoPlayIconBorderRadiusLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     videoPlayIconPaddingUnits: {
@@ -231,7 +231,7 @@ const attributes = {
         }
     },
     videoPlayIconPaddingDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '20',
             bottom: '20',
@@ -240,25 +240,25 @@ const attributes = {
         },
     },
     videoPlayIconPaddingTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '20', 
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     videoPlayIconPaddingMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     videoPlayIconPaddingLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     /** End Video Play Icon */
@@ -269,8 +269,8 @@ const attributes = {
         type: 'object',
         default: {
             Desktop: '100',
-            Tablet: '100',
-            Mobile: '100'
+            Tablet: '',
+            Mobile: ''
         }
     },
     videoWidthUnits: {
@@ -286,11 +286,11 @@ const attributes = {
     /** Start Border */
     videoBorder: {
         type: 'string',
-        default: "none",
+        default: 'none',
     },
     videoBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     videoBorderColor: {
         type: 'string',
@@ -307,7 +307,7 @@ const attributes = {
 		}
     },
     videoBorderDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -316,7 +316,7 @@ const attributes = {
         },
     },
     videoBorderTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -325,7 +325,7 @@ const attributes = {
         },
     },
     videoBorderMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -334,7 +334,7 @@ const attributes = {
         },
     },
     videoBorderLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     videoBorderRadiusUnits: {
@@ -346,7 +346,7 @@ const attributes = {
 		}
     },
     videoBorderRadiusDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -355,7 +355,7 @@ const attributes = {
         },
     },
     videoBorderRadiusTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -364,7 +364,7 @@ const attributes = {
         },
     },
     videoBorderRadiusMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -373,7 +373,7 @@ const attributes = {
         },
     },
     videoBorderRadiusLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     /** End Border */
@@ -389,7 +389,7 @@ const attributes = {
 		}
     },
     videoGlobalPaddingDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -398,7 +398,7 @@ const attributes = {
         },
     },
     videoGlobalPaddingTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -407,7 +407,7 @@ const attributes = {
         },
     },
     videoGlobalPaddingMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -416,7 +416,7 @@ const attributes = {
         },
     },
     videoGlobalPaddingLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     videoGlobalMarginUnits: {
@@ -428,7 +428,7 @@ const attributes = {
 		}
     },
     videoGlobalMarginDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -437,7 +437,7 @@ const attributes = {
         },
     },
     videoGlobalMarginTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -446,7 +446,7 @@ const attributes = {
         },
     },
     videoGlobalMarginMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -455,15 +455,15 @@ const attributes = {
         },
     },
     videoGlobalMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     videoGlobalBgColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     videoGlobalBgColor : {
-        type: "string",
+        type: 'string',
     },
     videoGlobalBgHoverColor: {
         type: 'string',
@@ -472,11 +472,11 @@ const attributes = {
 
     videoGlobalBorder: {
         type: 'string',
-        default: "none",
+        default: 'none',
     },
     videoGlobalBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     videoGlobalBorderColor: {
         type: 'string',
@@ -493,7 +493,7 @@ const attributes = {
 		}
     },
     videoGlobalBorderDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -502,7 +502,7 @@ const attributes = {
         },
     },
     videoGlobalBorderTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -511,7 +511,7 @@ const attributes = {
         },
     },
     videoGlobalBorderMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
             top: '',
             bottom: '',
@@ -520,7 +520,7 @@ const attributes = {
         },
     },
     videoGlobalBorderLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     videoGlobalBorderRadiusUnits: {
@@ -532,34 +532,34 @@ const attributes = {
 		}
     },
     videoGlobalBorderRadiusDesktop: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: 10,
-            bottom: 10,
-            left: 10,
-            right: 10,
+            top: '10',
+            bottom: '10',
+            left: '10',
+            right: '10',
         },
     },
     videoGlobalBorderRadiusTablet: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: 10,
-            bottom: 10,
-            left: 10,
-            right: 10,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     videoGlobalBorderRadiusMobile: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: 10,
-            bottom: 10,
-            left: 10,
-            right: 10,
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     videoGlobalBorderRadiusLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 
@@ -588,40 +588,40 @@ const attributes = {
 
     /** Start Global Setting */
     videoGlobalWraperID : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     videoGlobalWraperClass : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     /** End Global Setting */
 
     /** Start Responsive Control */
     advancedVideoDesktopSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     advancedVideoTabletSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     advancedVideoMobileSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
 
     advancedVideoPositionType: {
-        type: "string",
-        default: "default"
+        type: 'string',
+        default: 'default'
     },
     advancedVideoHZOrientationType: {
-        type: "string",
-        default: "left"
+        type: 'string',
+        default: 'left'
     },
     advancedVideoVROrientationType: {
-        type: "string",
-        default: "top"
+        type: 'string',
+        default: 'top'
     },
     advancedVideoHZLeftOffset: {
         type: 'object',
@@ -688,69 +688,69 @@ const attributes = {
         }
     },
     advancedVideoCustomCSS : { 
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 
 
     advancedVideoTransformSwitcher: {
-        type: "string",
-        default: "normal",
+        type: 'string',
+        default: 'normal',
     },
     advancedVideoTransformNormalProportions: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     advancedVideoTransformNormalScale: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
         }
     },
     advancedVideoTransformNormalScaleX: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
         }
     },
     advancedVideoTransformNormalScaleY: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
         }
     },
     advancedVideoTransformHoverProportions: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     advancedVideoTransformHoverScale: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
         }
     },
     advancedVideoTransformHoverScaleX: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
         }
     },
     advancedVideoTransformHoverScaleY: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
         }
     },
 };

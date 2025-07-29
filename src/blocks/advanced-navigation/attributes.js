@@ -1,55 +1,55 @@
 const attributes = {
     blockId: {
-        type: "string"
+        type: 'string'
     },
     blockStyle: {
         type: 'string',
         default: '',
     },
     deviceType: {
-        type: "string",
-        default: "Desktop"
+        type: 'string',
+        default: 'Desktop'
     },
     navigationLayout: {
-        type: "string",
-        default: "is-horizontal"
+        type: 'string',
+        default: 'is-horizontal'
     },
     navigationHorizontalAlign: {
-        type: "string",
-        default: "items-justified-left"
+        type: 'string',
+        default: 'items-justified-left'
     },
     navigationVerticalAlign: {
-        type: "string",
-        default: "items-justified-left"
+        type: 'string',
+        default: 'items-justified-left'
     },
     hamburgerMenuIconType: {
-        type: "string",
-        default: "icon"
+        type: 'string',
+        default: 'icon'
     },
 	hamburgerMenuSwitcher: {
-        type: "string",
-        default: "mobile",
+        type: 'string',
+        default: 'mobile',
     },
     dropdownOpenOnClick: {
-        type: "boolean",
+        type: 'boolean',
         default: false
     },
     showDropdownIcon: {
-        type: "boolean",
+        type: 'boolean',
         default: true
     },
     navigationFlexWrapSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false
     },
 
 	/** Start Navigation Typography */
     navigationGlobalTypographyData: {
-        type: "object",
+        type: 'object',
         default: {}
     },
     navigationGlobalTypoSwitcher: {
-        type: "object",
+        type: 'object',
         default: {
             fontFamily: false,
             fontSize: false,
@@ -62,16 +62,16 @@ const attributes = {
         },
     },
     navigationGlobalTypoType: {
-        type: "string",
+        type: 'string',
         default: 'default',
     },
     navigationGlobalTypoOption: {
-        type: "object",
+        type: 'object',
         default: {label: 'Default', value: 'default'},
     },
     navigationFontFamily: {
-        type: "string",
-        default: "Default",
+        type: 'string',
+        default: 'Default',
     },
     navigationFontSize: {
 		type: 'object',
@@ -90,20 +90,20 @@ const attributes = {
 		}
 	},
     navigationFontWeight : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     navigationFontStyle : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     navigationTextTransform : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     navigationTextDecoration : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     navigationLetterSpacing: {
 		type: 'object',
@@ -142,22 +142,22 @@ const attributes = {
 
 	/** Start Navigation Color and active color */
 	navigationColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     navigationColor : {
-        type: "string"
+        type: 'string'
     },
     navigationHoverColor: {
         type: 'string',
     },
 
 	navigationActiveColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     navigationActiveColor : {
-        type: "string"
+        type: 'string'
     },
     navigationActiveHoverColor: {
         type: 'string',
@@ -166,49 +166,49 @@ const attributes = {
 
 	/** Start Navigation Background */
 	navigationBgColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	navigationNormalBackgroundType: { 
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	navigationNormalClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	navigationNormalGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	navigationNormalCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	navigationNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	navigationHoverBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	navigationHoverClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	navigationHoverGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	navigationHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	navigationHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	/** End Navigation Background */
 
@@ -222,34 +222,34 @@ const attributes = {
 		}
     },
     navigationDesktopPadding: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     navigationTabletPadding: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     navigationMobilePadding: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     navigationPaddingLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     navigationMarginUnits: {
@@ -261,34 +261,34 @@ const attributes = {
 		}
     },
     navigationDesktopMargin: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     navigationTabletMargin: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     navigationMobileMargin: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     navigationMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     /** End Navigation Padding and Margin */
@@ -296,11 +296,11 @@ const attributes = {
 	/** Start Navigation Border */
 	navigationBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	navigationBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	navigationBorderColor: {
 		type: 'string',
@@ -317,34 +317,34 @@ const attributes = {
 		}
 	},
 	navigationDesktopBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	navigationTabletBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	navigationMobileBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	navigationBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	navigationBorderRadiusUnits: {
@@ -356,34 +356,34 @@ const attributes = {
 		}
 	},
 	navigationDesktopBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	navigationTabletBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	navigationMobileBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	navigationBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Navigation Border */
@@ -432,49 +432,49 @@ const attributes = {
 
 	/** Start Dropdown Menu Background */
 	dropDownBgColorSwitcher : { 
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	dropDownNormalBackgroundType: { 
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	dropDownNormalClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	dropDownNormalGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	dropDownNormalCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	dropDownNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	dropDownHoverBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	dropDownHoverClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	dropDownHoverGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	dropDownHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	dropDownHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	/** End Dropdown Menu Background */
 
@@ -488,34 +488,34 @@ const attributes = {
 		}
 	},
 	dropDownDesktopPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownTabletPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownMobilePadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	dropDownMarginUnits: {
@@ -527,34 +527,34 @@ const attributes = {
 		}
 	},
 	dropDownDesktopMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownTabletMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownMobileMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Dropdown Menu Padding and Margin */
@@ -562,11 +562,11 @@ const attributes = {
 	/** Start Dropdown Menu Border */
 	dropDownBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	dropDownBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	dropDownBorderColor: {
 		type: 'string',
@@ -583,34 +583,34 @@ const attributes = {
 		}
 	},
 	dropDownDesktopBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownTabletBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownMobileBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	dropDownBorderRadiusUnits: {
@@ -622,34 +622,34 @@ const attributes = {
 		}
 	},
 	dropDownDesktopBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownTabletBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownMobileBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Dropdown Menu Border */
@@ -679,11 +679,11 @@ const attributes = {
 
 	/** Start Dropdown Menu Typography */
 	dropDownItemTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	dropDownItemTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -696,16 +696,16 @@ const attributes = {
 		},
 	},
 	dropDownItemTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	dropDownItemTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	dropDownItemFontFamily: {
-		type: "string",
-		default: "Default",
+		type: 'string',
+		default: 'Default',
 	},
 	dropDownItemFontSize: {
 		type: 'object',
@@ -724,20 +724,20 @@ const attributes = {
 		}
 	},
 	dropDownItemFontWeight : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	dropDownItemFontStyle : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	dropDownItemTextTransform : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	dropDownItemTextDecoration : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	dropDownItemLetterSpacing: {
 		type: 'object',
@@ -776,22 +776,22 @@ const attributes = {
 
 	/** Start Dropdown Menu Color and active color */
 	dropDownItemColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	dropDownItemColor : {
-		type: "string"
+		type: 'string'
 	},
 	dropDownItemHoverColor: {
 		type: 'string',
 	},
 
 	dropDownItemActiveColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	dropDownItemActiveColor : {
-		type: "string"
+		type: 'string'
 	},
 	dropDownItemActiveHoverColor: {
 		type: 'string',
@@ -808,34 +808,34 @@ const attributes = {
 		}
 	},
 	dropDownItemDesktopPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownItemTabletPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownItemMobilePadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownItemPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
@@ -848,34 +848,34 @@ const attributes = {
 		}
 	},
 	dropDownItemDesktopMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownItemTabletMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownItemMobileMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownItemMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Dropdown Menu Item Padding and Margin */
@@ -883,11 +883,11 @@ const attributes = {
 	/** Start Dropdown Menu Item Border */
 	dropDownItemBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	dropDownItemBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	dropDownItemBorderColor: {
 		type: 'string',
@@ -904,34 +904,34 @@ const attributes = {
 		}
 	},
 	dropDownItemDesktopBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownItemTabletBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownItemMobileBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownItemBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	dropDownItemBorderRadiusUnits: {
@@ -943,34 +943,34 @@ const attributes = {
 		}
 	},
 	dropDownItemDesktopBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownItemTabletBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownItemMobileBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownItemBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Dropdown Menu Item Border */
@@ -980,8 +980,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '16',
-			Tablet: '16',
-			Mobile: '16',
+			Tablet: '',
+			Mobile: '',
 		}
 	},
 	dropDownIconSizeUnits: {
@@ -993,8 +993,8 @@ const attributes = {
 		}
 	},
 	dropDownIconColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	dropDownIconColor: {
 		type: 'string',
@@ -1012,34 +1012,34 @@ const attributes = {
 		}
 	},
 	dropDownIconDesktopMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownIconTabletMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownIconMobileMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	dropDownIconMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Dropdown Menu Icon */
@@ -1081,7 +1081,7 @@ const attributes = {
 		}
 	},
 	hamburgerMenuIconDesktopPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '10',
 			bottom: '10',
@@ -1090,74 +1090,74 @@ const attributes = {
 		},
 	},
 	hamburgerMenuIconTabletPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	hamburgerMenuIconMobilePadding: { 
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	hamburgerMenuIconPaddingLink : { 
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Padding */
 
 	/** Start Hamburger Menu Background */
 	hamburgerMenuPopupBgColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	hamburgerMenuPopupNormalBackgroundType: { 
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	hamburgerMenuPopupNormalClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	hamburgerMenuPopupNormalGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	hamburgerMenuPopupNormalCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	hamburgerMenuPopupNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	hamburgerMenuPopupHoverBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	hamburgerMenuPopupHoverClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	hamburgerMenuPopupHoverGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	hamburgerMenuPopupHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	hamburgerMenuPopupHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	/** End Hamburger Menu Background */
 
@@ -1171,7 +1171,7 @@ const attributes = {
 		}
 	},
 	hamburgerMenuPopupDesktopPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1180,7 +1180,7 @@ const attributes = {
 		},
 	},
 	hamburgerMenuPopupTabletPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1189,7 +1189,7 @@ const attributes = {
 		},
 	},
 	hamburgerMenuPopupMobilePadding: { 
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1198,18 +1198,18 @@ const attributes = {
 		},
 	},
 	hamburgerMenuPopupPaddingLink : { 
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Hamburger Menu Padding */
 
 	/** Start Hamburger Menu Popup Typography */ 
 	hamburgerMenuPopupGlobalTypographyData: { // Hamburger Menu Typography
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	hamburgerMenuPopupGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -1222,16 +1222,16 @@ const attributes = {
 		},
 	},
 	hamburgerMenuPopupGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	hamburgerMenuPopupGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	hamburgerMenuPopupFontFamily: {
-		type: "string",
-		default: "Default",
+		type: 'string',
+		default: 'Default',
 	},
 	hamburgerMenuPopupFontSize: {
 		type: 'object',
@@ -1250,20 +1250,20 @@ const attributes = {
 		}
 	},
 	hamburgerMenuPopupFontWeight : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	hamburgerMenuPopupFontStyle : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	hamburgerMenuPopupTextTransform : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	hamburgerMenuPopupTextDecoration : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	hamburgerMenuPopupLetterSpacing: {
 		type: 'object',
@@ -1302,11 +1302,11 @@ const attributes = {
 
 	/** Start Hamburger Menu Popup Color */
 	hamburgerMenuPopupColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	hamburgerMenuPopupColor : {
-		type: "string"
+		type: 'string'
 	},
 	hamburgerMenuPopupHoverColor: {
 		type: 'string',
@@ -1331,11 +1331,11 @@ const attributes = {
 		}
 	},
 	hamburgerMenuCloseIconColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	hamburgerMenuCloseIconColor : {
-		type: "string"
+		type: 'string'
 	},
 	hamburgerMenuCloseIconHoverColor: {
 		type: 'string',
@@ -1348,7 +1348,7 @@ const attributes = {
 
     /** Start Global Setting */
 	navigationGlobalZIndex : {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '',
 			Tablet: '',
@@ -1357,20 +1357,20 @@ const attributes = {
 	},
 	navigationOverflow: {
         type: 'string',
-        default: "default",
+        default: 'default',
     },
     /** Start Position */
     navigationPositionType: {
-        type: "string",
-        default: "default"
+        type: 'string',
+        default: 'default'
     },
     navigationHZOrientationType: {
-        type: "string",
-        default: "left"
+        type: 'string',
+        default: 'left'
     },
     navigationVROrientationType: {
-        type: "string",
-        default: "top"
+        type: 'string',
+        default: 'top'
     },
     navigationHZLeftOffset: {
         type: 'object',
@@ -1447,7 +1447,7 @@ const attributes = {
 		}
 	},
 	navigationGlobalPaddingDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1456,7 +1456,7 @@ const attributes = {
 		},
 	},
 	navigationGlobalPaddingTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1465,7 +1465,7 @@ const attributes = {
 		},
 	},
 	navigationGlobalPaddingMobile: { 
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1474,7 +1474,7 @@ const attributes = {
 		},
 	},
 	navigationGlobalPaddingLink : { 
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Padding */
@@ -1489,7 +1489,7 @@ const attributes = {
 		}
 	},
 	navigationGlobalMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1498,7 +1498,7 @@ const attributes = {
 		},
 	},
 	navigationGlobalMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1507,7 +1507,7 @@ const attributes = {
 		},
 	},
 	navigationGlobalMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1516,71 +1516,71 @@ const attributes = {
 		},
 	},
 	navigationGlobalMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Margin */
 
 	/** Start Background */
 	navigationGlobalBgColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	navigationGlobalNormalBackgroundType: { 
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	navigationGlobalNormalClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	navigationGlobalNormalGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	navigationGlobalNormalCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	navigationGlobalNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	navigationGlobalHoverBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	navigationGlobalHoverClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	navigationGlobalHoverGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	navigationGlobalHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	navigationGlobalHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	/** End Background */
 
 	/** Start Border */
 	navigationGlobalBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	navigationGlobalBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	navigationGlobalBorderColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	navigationGlobalBorderHoverColor: {
 		type: 'string',
@@ -1594,7 +1594,7 @@ const attributes = {
 		}
 	},
 	navigationGlobalBorderDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1603,7 +1603,7 @@ const attributes = {
 		},
 	},
 	navigationGlobalBorderTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1612,7 +1612,7 @@ const attributes = {
 		},
 	},
 	navigationGlobalBorderMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1621,7 +1621,7 @@ const attributes = {
 		},
 	},
 	navigationGlobalBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border */
@@ -1636,7 +1636,7 @@ const attributes = {
 		}
 	},
 	navigationGlobalBorderRadiusDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1645,7 +1645,7 @@ const attributes = {
 		},
 	},
 	navigationGlobalBorderRadiusTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1654,7 +1654,7 @@ const attributes = {
 		},
 	},
 	navigationGlobalBorderRadiusMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1663,7 +1663,7 @@ const attributes = {
 		},
 	},
 	navigationGlobalBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border Radius */
@@ -1693,32 +1693,32 @@ const attributes = {
     /** Start Responsive Control */
 
     navigationDesktopSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     navigationTabletSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     navigationMobileSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     /** End Responsive Control */
 
 	/** Start Class & ID Setting */
 	navigationGlobalCustomCSS : {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 	navigationGlobalWraperID : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 
 	navigationGlobalWraperClass : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	/** End Class & ID Setting */
     

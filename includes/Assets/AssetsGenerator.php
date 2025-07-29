@@ -34,12 +34,20 @@ class AssetsGenerator
 		// Generate header and footer css
 		$this->generate_active_header_footer();
 
+		$frontis_block_used = get_post_meta($post_id, 'frontis_blocks_used', true);
+
+		if(!$frontis_block_used) {
+			return false;
+		}
+
 		// Generate template and page css
 		$this->post_id = $post_id;
 		$this->post = $post;
 
-		if ((get_post_type($this->post_id) === 'wp_template' && $post->post_name === 'archive') || (get_post_type($this->post_id) === 'wp_template' && $post->post_name === 'single') || (get_post_type($this->post_id) === 'wp_template' && $post->post_name === 'search') || (get_post_type($this->post_id) === 'wp_template' && $post->post_name === '404') || (get_post_type($this->post_id) === 'wp_template' && $post->post_name === 'home') || (get_post_type($this->post_id) === 'wp_template' && $post->post_name === 'page')) {
-			$this->css_generator_functions(false);
+		// var_dump(get_post_type($this->post_id) === 'wp_template' && in_array($post->post_name, ['archive', 'single', 'search', '404', 'home', 'page']));
+
+		if(get_post_type($this->post_id) === 'wp_template') {
+			$this->css_generator_functions();
 		}
 
 		if (get_post_type($this->post_id) !== 'wp_template' && get_post_type($this->post_id) !== 'wp_template_part') {
@@ -49,12 +57,6 @@ class AssetsGenerator
 
 	function generate_active_header_footer()
 	{
-		// Initialize output array
-		$output = [
-			'header' => '',
-			'footer' => ''
-		];
-
 		// Get the current theme's template parts
 		$template_parts = $this->get_block_theme_template_parts();
 
@@ -157,6 +159,7 @@ class AssetsGenerator
 
 				// Css file
 				$block_static_css_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/style-index.css';
+
 				if (file_exists($block_static_css_file_path)) {
 					$this->css_content .= $this->clean_CSS(file_get_contents($block_static_css_file_path)) . "\n";
 				}
@@ -309,17 +312,31 @@ class AssetsGenerator
 
 	public function css_generator_functions($generate_template_css = false)
 	{
-		$this->generate_global_assets();
-		$this->combine_static_assets();
 		$this->generate_all_blocks_assets();
+		$this->combine_static_assets();
 
 		if ($generate_template_css) {
-			$this->check_frontis_blocks_used();
 			$this->get_template_css();
 		}
 
 		// Combine and save CSS files
 		$page_name = $this->post->post_name;
+
+		// Check if post or custom post then its should be post type instead of page name
+		if(Helper::is_custom_post_type($this->post->ID) || get_post_type($this->post->ID) === 'post') {
+
+			$frontis_used = get_post_meta( $this->post->ID, 'frontis_blocks_used', true );
+
+			if($frontis_used) {
+				$page_name = $this->post->post_name;
+				$this->get_template_css();
+			} else {
+				$page_name = get_post_type($this->post->ID);
+			}
+		}
+
+		// var_dump($page_name);
+
 		$this->combine_and_save_css_file($page_name);
 
 		$this->get_font_families();
@@ -668,12 +685,18 @@ class AssetsGenerator
 
 	public function combine_static_assets()
 	{
+
+//		var_dump($this->used_blocks);
 		// Css files
 		$assets_dir = FB_PLUGIN_PATH . 'assets/css/frontend/';
 		$css_files = Helper::get_css_files($assets_dir);
 
 		if (!empty($css_files)) {
 			foreach ($css_files as $key => $css_file) {
+				if(!in_array('frontis-blocks/slider', $this->used_blocks) && basename($css_file) === 'swiper-bundle.min.css') {
+					continue;
+				}
+
 				$this->css_content .= file_get_contents($css_file) . "\n";
 			}
 		}
@@ -684,30 +707,39 @@ class AssetsGenerator
 
 		if (!empty($js_files)) {
 			foreach ($js_files as $key => $js_file) {
+				if(!in_array('frontis-blocks/slider', $this->used_blocks) && basename($js_file) === 'swiper-bundle.min.js') {
+					continue;
+				}
+
+				if(!in_array('frontis-blocks/advanced-video', $this->used_blocks) && basename($js_file) === 'react-player.standalone.min.js') {
+					continue;
+				}
+
+				if(!in_array('frontis-blocks/animated-heading', $this->used_blocks) && basename($js_file) === 'gsap.min.js') {
+					continue;
+				}
+
+				if(!in_array('frontis-blocks/animated-heading', $this->used_blocks) && basename($js_file) === 'gsap-textplugin.min.js') {
+					continue;
+				}
+
 				$this->js_content .= file_get_contents($js_file) . "\n";
 			}
 		}
 	}
 
-	public function check_frontis_blocks_used()
-	{
-		if (count($this->blocks_used_in_page) > 0) {
-			update_post_meta($this->post_id, 'page_frontis_block_used', true);
-		} else {
-			update_post_meta($this->post_id, 'page_frontis_block_used', false);
-		}
-	}
-
 	public function get_template_css()
 	{
-		$post_name = get_post_type($this->post_id) === 'post' ? 'single' : 'page';
-		$assigned_template = get_post_meta($this->post_id, '_wp_page_template', true);
+		global $wpdb;
+
+		$post_name = Helper::is_custom_post_type($this->post->ID) || get_post_type($this->post->ID) === 'post' ? 'single' : 'page';
+
+		$assigned_template = get_post_meta($this->post->ID, '_wp_page_template', true);
 
 		if ($assigned_template !== '') {
 			$post_name = $assigned_template;
 		}
 
-		global $wpdb;
 		$query = $wpdb->prepare(
 			"SELECT
                 ID,

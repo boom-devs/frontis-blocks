@@ -427,8 +427,12 @@ const attributes = {
 	},
 
     teamMemberContentAlignment: {
-		type: 'string',
-		default: 'center'
+		type: 'object',
+		default: {
+			Desktop: 'center',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
 
 	teamMemberContentBgColorSwitcher: {
@@ -879,8 +883,12 @@ const attributes = {
 
 	/** team Image */
 	teamMemberImageAlignment: {
-		type : 'string',
-		default: 'center'
+		type : 'object',
+		default: {
+			Desktop: 'center',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
     teamMemberImageUrl: {
         type: 'string',
@@ -1611,8 +1619,12 @@ const attributes = {
 		default: 'top'
 	},
 	socialProfileSeparatorAlignment: {
-		type : 'string',
-		default: 'center'
+		type : 'object',
+		default: {
+			Desktop: 'center',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
 	socialProfileSeparatorWidth: {
 		type: 'object',
@@ -1755,8 +1767,12 @@ const attributes = {
 	},
 
 	teamMemberIconsAlignment: {
-		type : 'string',
-		default: 'center'
+		type : 'object',
+		default: {
+			Desktop: 'center',
+			Tablet: '',
+			Mobile: ''
+		}
 	},
 
 	teamMemberIconsSize: {
@@ -2076,7 +2092,7 @@ const attributes = {
 	},
 	teamMemberSocialIconAnimationType: {
 		type : 'string',
-		default: 'top'
+		default: 'default'
 	},
 
 	socialIconBtnIcon: {
