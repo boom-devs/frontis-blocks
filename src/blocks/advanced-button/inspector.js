@@ -51,6 +51,7 @@ import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_ScaleControl from '@Components/scale-control';
 import FB_InspectorControls from '@Components/InspectorControls';
+import FB_BackgroundColorControl from '@Components/background-color-control';
 
 
 import './editor.scss';
@@ -175,9 +176,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         buttonGlobalMarginMobile,
         buttonGlobalMarginLink,
 
-        buttonGlobalBgColorSwitcher,
-        buttonGlobalBgColor,
-        buttonGlobalBgHoverColor,
+		/** Start Background */
+		buttonGlobalBgColorSwitcher,
+		buttonGlobalNormalBackgroundType,
+		buttonGlobalNormalClassicColor,
+		buttonGlobalNormalGradientColor,
+		buttonGlobalNormalCustomGradientSwitcher,
+		buttonGlobalNormalCustomGradientInputValue,
+
+		buttonGlobalHoverBackgroundType,
+		buttonGlobalHoverClassicColor,
+		buttonGlobalHoverGradientColor,
+		buttonGlobalHoverCustomGradientSwitcher,
+		buttonGlobalHoverCustomGradientInputValue,
+		/** End Background */
+
         buttonGlobalBorder,
         buttonGlobalBorderColorSwitcher,
         buttonGlobalBorderColor,
@@ -1063,7 +1076,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${advancedBtnOverflow !== 'default' ? `overflow: ${advancedBtnOverflow};` : ''}
 		}
 		.${blockId} .fb-advanced-button-wrapper {
-			${buttonGlobalBgColor ? `background-color: ${buttonGlobalBgColor};` : ''} 
+            ${buttonGlobalNormalBackgroundType === 'gradient' ? `  
+                ${buttonGlobalNormalCustomGradientSwitcher && buttonGlobalNormalCustomGradientInputValue ? `background: ${buttonGlobalNormalCustomGradientInputValue};` : `background: ${buttonGlobalNormalGradientColor};`}
+            `: `
+                ${buttonGlobalNormalClassicColor ? `background: ${buttonGlobalNormalClassicColor};` : ''}
+            `}
 			${globalDesktopPadding && buttonGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPadding};` : ''}
 			${globalDesktopMargin && buttonGlobalMarginDesktop?.top ? `margin: ${globalDesktopMargin};` : ''} 
 			${buttonGlobalBorder ? `border: ${buttonGlobalBorder};` : ''} 
@@ -1087,7 +1104,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			position: relative;
 		}
 		.${blockId} .fb-advanced-button-wrapper:hover {
-			${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
+            ${buttonGlobalHoverBackgroundType	 === 'gradient' ? `   	
+                ${buttonGlobalHoverCustomGradientSwitcher && buttonGlobalHoverCustomGradientInputValue ? `background: ${buttonGlobalHoverCustomGradientInputValue};` : `background: ${buttonGlobalHoverGradientColor};`}
+            `: `
+                ${buttonGlobalHoverClassicColor ? `background: ${buttonGlobalHoverClassicColor};` : ''}
+            `}
 			${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
 			${buttonGlobalBoxShadowHoverCssValue ? `box-shadow: ${buttonGlobalBoxShadowHoverCssValue};` : ''}
 
@@ -1235,8 +1256,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${buttonIconBorderHoverColor ? `border-color: ${buttonIconBorderHoverColor};` : ''}
 			}
 			.${blockId} .fb-advanced-button-wrapper:hover {
-				${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
-				${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
 
 				${buttonTransformHoverProportions 
 					? (buttonTransformHoverScale?.Tablet 
@@ -1321,9 +1340,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${buttonIconBorderHoverColor ? `border-color: ${buttonIconBorderHoverColor};` : ''}
 			}
 			.${blockId} .fb-advanced-button-wrapper:hover {
-				${buttonGlobalBgHoverColor ? `background-color: ${buttonGlobalBgHoverColor};` : ''}
-				${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
-
 				${buttonTransformHoverProportions 
 					? (buttonTransformHoverScale?.Mobile 
 						? `transform: scale(${buttonTransformHoverScale.Mobile});` 
@@ -1382,7 +1398,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		blockStyle,
 		buttonGlobalZIndex,
 		advancedBtnOverflow,
-		buttonGlobalBgColor,
 		globalDesktopPadding,
 		globalDesktopMargin,
 		buttonGlobalBorder,
@@ -1394,7 +1409,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         buttonGlobalBoxShadowCssValue,
 		buttonGlobalBoxShadowHoverValues,
 		buttonGlobalBoxShadowHoverCssValue,
-		buttonGlobalBgHoverColor,
 		buttonGlobalBorderHoverColor,
 		buttonBgColor,
 		buttonGlobalTypoSwitcher,
@@ -1411,6 +1425,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonLetterSpacingUnits,
 		buttonLineHeight,
 		buttonLineHeightUnits,
+
+		/** Start Background */
+		buttonGlobalBgColorSwitcher,
+		buttonGlobalNormalBackgroundType,
+		buttonGlobalNormalClassicColor,
+		buttonGlobalNormalGradientColor,
+		buttonGlobalNormalCustomGradientSwitcher,
+		buttonGlobalNormalCustomGradientInputValue,
+
+		buttonGlobalHoverBackgroundType,
+		buttonGlobalHoverClassicColor,
+		buttonGlobalHoverGradientColor,
+		buttonGlobalHoverCustomGradientSwitcher,
+		buttonGlobalHoverCustomGradientInputValue,
+		/** End Background */
 
 		buttonDesktopMarginStr,
 		buttonBorder,
@@ -2254,33 +2283,39 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						/>
 					</PanelBody>
 
-					<PanelBody 
-						title={__("Background Color", "frontis-blocks")}
-						initialOpen={false} 
-					>
+                    <PanelBody title="Background Color" initialOpen={false} >
 
-						<FB_SwitcherControl
-							label={__("Background Color", "frontis-blocks")}
-							globalSwitcher={buttonGlobalBgColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ buttonGlobalBgColorSwitcher: value })}
-						/>
+                        <FB_BackgroundColorControl
+                            label={__("Background Color", "frontis-blocks")}
+                            bgColorSwitcher={buttonGlobalBgColorSwitcher}  
+                            setBgColorSwitcher={(value) => setAttributes({ buttonGlobalBgColorSwitcher: value })}
+                            
+                            normalBackgroundType={buttonGlobalNormalBackgroundType} 
+                            setNormalBackgroundType={(value) => setAttributes({ buttonGlobalNormalBackgroundType: value })}
+                            normalClassicColor={buttonGlobalNormalClassicColor}
+                            setNormalClassicColor={(value) => setAttributes({ buttonGlobalNormalClassicColor: value })}
+                            normalGradientColor={buttonGlobalNormalGradientColor}
+                            setNormalGradientColor={(value) => setAttributes({ buttonGlobalNormalGradientColor: value })}
+                            normalCustomGradientSwitcher={buttonGlobalNormalCustomGradientSwitcher}
+                            setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonGlobalNormalCustomGradientSwitcher: value })}
+                            normalCustomGradientInputValue={buttonGlobalNormalCustomGradientInputValue}
+                            setNormalCustomGradientInputValue={(value) => setAttributes({ buttonGlobalNormalCustomGradientInputValue: value })}
+                            
+                            hoverBackgroundType={buttonGlobalHoverBackgroundType} 
+                            setHoverBackgroundType={(value) => setAttributes({ buttonGlobalHoverBackgroundType: value })}
+                            hoverClassicColor={buttonGlobalHoverClassicColor}
+                            setHoverClassicColor={(value) => setAttributes({ buttonGlobalHoverClassicColor: value })}
+                            hoverGradientColor={buttonGlobalHoverGradientColor} 
+                            setHoverGradientColor={(value) => setAttributes({ buttonGlobalHoverGradientColor: value })}
+                            hoverCustomGradientSwitcher={buttonGlobalHoverCustomGradientSwitcher}
+                            setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonGlobalHoverCustomGradientSwitcher: value })}
+                            hoverCustomGradientInputValue={buttonGlobalHoverCustomGradientInputValue}
+                            setHoverCustomGradientInputValue={(value) => setAttributes({ buttonGlobalHoverCustomGradientInputValue: value })}
 
-						{buttonGlobalBgColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={buttonGlobalBgColor}
-								setGlobalColor={(value) => setAttributes({ buttonGlobalBgColor: value })}
-							/>
-						)}
+                            isBackgroundImage={false}
 
-						{buttonGlobalBgColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={buttonGlobalBgHoverColor}
-								setGlobalColor={(value) => setAttributes({ buttonGlobalBgHoverColor: value })}
-							/>
-						)}
-					</PanelBody>
+                        />
+                    </PanelBody>
 					<PanelBody
 						title={__("Border and Shadow", "frontis-blocks")}
 						initialOpen={false}
