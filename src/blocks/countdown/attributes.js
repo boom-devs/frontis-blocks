@@ -1,16 +1,16 @@
 const attributes = {
 	blockID: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	blockStyle: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 
 	countDownPresetStyle: {
-        type: "string",
-        default: "default",
+        type: 'string',
+        default: 'default',
     },
 
 	// Show Hide Label Attributes
@@ -33,20 +33,20 @@ const attributes = {
 
 	// Label Name Attributes
 	countDownLabelDay: {
-		type: "string",
-		default: "Days"
+		type: 'string',
+		default: 'Days'
 	},
 	countDownLabelHour: {
-		type: "string",
-		default: "Hours"
+		type: 'string',
+		default: 'Hours'
 	},
 	countDownLabelMinute: {
-		type: "string",
-		default: "Minutes"
+		type: 'string',
+		default: 'Minutes'
 	},
 	countDownLabelSecond: {
-		type: "string",
-		default: "Seconds"
+		type: 'string',
+		default: 'Seconds'
 	},
 
 	// Label Background Attributes
@@ -56,7 +56,7 @@ const attributes = {
 	},
 	countDownLabelBgColorHour: {
 		type: 'string',
-		default: '#6B4EFF',
+		default: '',
 	},
 	countDownLabelBgColorMinute: {
 		type: 'string',
@@ -64,60 +64,60 @@ const attributes = {
 	},
 	countDownLabelBgColorSecond: {
 		type: 'string',
-		default: '#6B4EFF',
+		default: '',
 	},
 	targetDate: {
-		type: "string",
+		type: 'string',
 	},
 	// Device Type
 	deviceType: {
-		type: "string",
-		default: "Desktop"
+		type: 'string',
+		default: 'Desktop'
 	},
 
 	//Item Bg Color
 	countDownItemBgColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	countDownItemBgColor: {
-		type: "string",
-		default: "#399CFF"
+		type: 'string',
+		default: '#399CFF'
 	},
 	countDownItemBgHoverColor: {
 		type: 'string',
-		default: "#399CFF"
+		default: ''
 	},
 
 	/** Start Background Image */
 	countDownItemBgImageEnabled: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	countDownItemBgImageUrl: {
-		type: "string",
+		type: 'string',
 	},
 	countDownItemBgImageAlt: {
-		type: "string",
+		type: 'string',
 	},
 	countDownItemBgImageID: {
-		type: "number",
+		type: 'number',
 	},
 	countDownItemBgImagePositionType: {
 		type: 'string',
-		default: "center center",
+		default: 'center center',
 	},
 	countDownItemBgImageAttachmentType: {
 		type: 'string',
-		default: "scroll",
+		default: 'scroll',
 	},
 	countDownItemBgImageRepeatType: {
 		type: 'string',
-		default: "no-repeat",
+		default: 'no-repeat',
 	},
 	countDownItemBgImageSizeType: {
 		type: 'string',
-		default: "auto",
+		default: 'auto',
 	},
 	// Border Radius
 	countDownItemBorderRadiusUnits : {
@@ -129,34 +129,34 @@ const attributes = {
 		}
 	},
 	countDownItemBorderRadiusDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemBorderRadiusTablet: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemBorderRadiusMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
@@ -167,7 +167,7 @@ const attributes = {
 	},
 	countDownItemBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	countDownItemBorderColor: {
 		type: 'string',
@@ -181,55 +181,55 @@ const attributes = {
 		}
 	},
 	countDownItemBorderTypeDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemBorderTypeTablet: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemBorderTypeMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemBorderTypeLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
 	countDownFlexWrap : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	countDownLayoutType: {
-		type: "string",
-		default: "flex"
+		type: 'string',
+		default: 'flex'
 	},
 	countDownLayoutAlignment: {
-		type: "string",
-		default: "center"
+		type: 'string',
+		default: 'center'
 	},
 	countDownGrid: {
 		type: 'object',
 		default: {
 			Desktop: '4',
-			Tablet: '4',
-			Mobile: '2'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 
@@ -237,8 +237,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '104',
-			Tablet: '104',
-			Mobile: '104'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	countDownItemGapUnits: {
@@ -250,20 +250,20 @@ const attributes = {
 		}
 	},
 	countDownItemBgColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	countDownItemBgColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	countDownItemBgHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 
 	countDownItemSizeHeight: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	countDownItemSize: {
@@ -284,48 +284,48 @@ const attributes = {
 	},
 	/** Start BG Color */
 	countDownItemWrapperBgFontColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	countDownItemWrapperBgFontColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	countDownItemWrapperBgFontHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	/** End BG Color */
 
 	/** Start Background Image */
 	countDownItemWrapperBackgroundImageEnabled: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	countDownItemWrapperBackgroundImageUrl: {
-		type: "string",
+		type: 'string',
 	},
 	countDownItemWrapperBackgroundImageAlt: {
-		type: "string",
+		type: 'string',
 	},
 	countDownItemWrapperBackgroundImageID: {
-		type: "number",
+		type: 'number',
 	},
 	countDownItemWrapperBgImagePositionType: {
 		type: 'string',
-		default: "center center",
+		default: 'center center',
 	},
 	countDownItemWrapperBgImageAttachmentType: {
 		type: 'string',
-		default: "scroll",
+		default: 'scroll',
 	},
 	countDownItemWrapperBgImageRepeatType: {
 		type: 'string',
-		default: "no-repeat",
+		default: 'no-repeat',
 	},
 	countDownItemWrapperBgImageSizeType: {
 		type: 'string',
-		default: "auto",
+		default: 'auto',
 	},
 
 	
@@ -333,19 +333,19 @@ const attributes = {
 
 	/** Start Border Type */
 	countDownItemWrapperBorderColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	countDownItemWrapperBorderColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	countDownItemWrapperBorderHoverColor: {
 		type: 'string',
 	},
 	countDownItemWrapperBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	countDownItemWrapperBorderTypeUnits : {
 		type: 'object',
@@ -356,34 +356,34 @@ const attributes = {
 		}
 	},
 	countDownItemWrapperBorderTypeDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemWrapperBorderTypeTablet: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemWrapperBorderTypeMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemWrapperBorderTypeLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border Type */
@@ -398,7 +398,7 @@ const attributes = {
 		}
 	},
 	countDownItemWrapperBorderRadiusDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '14',
 			bottom: '14',
@@ -407,25 +407,25 @@ const attributes = {
 		},
 	},
 	countDownItemWrapperBorderRadiusTablet: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '14',
-			bottom: '14',
-			left: '14',
-			right: '14',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemWrapperBorderRadiusMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '14',
-			bottom: '14',
-			left: '14',
-			right: '14',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemWrapperBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border Radius */
@@ -451,7 +451,7 @@ const attributes = {
 		}
 	},
 	countDownItemWrapperPaddingDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '24',
 			bottom: '24',
@@ -460,25 +460,25 @@ const attributes = {
 		},
 	},
 	countDownItemWrapperPaddingTablet: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '24',
-			bottom: '24',
-			left: '42',
-			right: '42',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemWrapperPaddingMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '24',
-			bottom: '24',
-			left: '42',
-			right: '42',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownItemWrapperPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Padding */
@@ -493,7 +493,7 @@ const attributes = {
 		}
 	},
 	countDownItemWrapperMarginDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -502,7 +502,7 @@ const attributes = {
 		},
 	},
 	countDownItemWrapperMarginTablet: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -511,7 +511,7 @@ const attributes = {
 		},
 	},
 	countDownItemWrapperMarginMobile: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -520,87 +520,87 @@ const attributes = {
 		},
 	},
 	countDownItemWrapperMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Margin */
 
 	singleDigitFontColorSwitcher: {
-		type : "boolean",
+		type : 'boolean',
 		default: false
 	},
 
 	daysDigitFontColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	daysDigitFontColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	daysDigitFontHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 
 	hoursDigitFontColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	hoursDigitFontColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	hoursDigitFontHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 
 	minutesDigitFontColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	minutesDigitFontColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	minutesDigitFontHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 
 	secondsDigitFontColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	secondsDigitFontColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	secondsDigitFontHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 
 	digitFontColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	digitFontColor: {
-		type: "string",
-		default: "#FFFFFF"
+		type: 'string',
+		default: '#FFFFFF'
 	},
 	digitFontHoverColor: {
 		type: 'string',
-		default: "#FFFFFF"
+		default: ''
 	},
 
 	digitGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	digitGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -613,11 +613,11 @@ const attributes = {
 		},
 	},
 	digitGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	digitGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	digitFontFamily: {
@@ -628,8 +628,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '62',
-			Tablet: '48',
-			Mobile: '32'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	digitFontSizeUnits: {
@@ -675,9 +675,9 @@ const attributes = {
 	digitLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '80',
-			Tablet: '60',
-			Mobile: '42'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	digitLineHeightUnits: {
@@ -689,35 +689,35 @@ const attributes = {
 		}
 	},
 	labelFontColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	labelFontColor: {
-		type: "string",
-		default: "#FFFFFF"
+		type: 'string',
+		default: '#FFFFFF'
 	},
 	labelFontHoverColor: {
 		type: 'string',
-		default: "#FFFFFF"
+		default: ''
 	},
 	labelBgColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	labelBgColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	labelBgHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	labelGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	labelGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -730,11 +730,11 @@ const attributes = {
 		},
 	},
 	labelGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	labelGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	labelFontFamily: {
@@ -806,35 +806,35 @@ const attributes = {
 		}
 	},
 	countDownSeparatorEnabled: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	countDownSeparatorType: {
 		type: 'string',
-		default: "colon",
+		default: 'colon',
 	},
 	countDownSeparatorCustom: {
 		type: 'string',
-		default: "",
+		default: '',
 	},
 	countDownSeparatorFontColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	countDownSeparatorFontColor: {
-		type: "string",
-		default: "#ffffff"
+		type: 'string',
+		default: '#ffffff'
 	},
 	countDownSeparatorFontHoverColor: {
 		type: 'string',
-		default: "#ffffff"
+		default: ''
 	},
 	countDownSeparatorGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	countDownSeparatorGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -847,11 +847,11 @@ const attributes = {
 		},
 	},
 	countDownSeparatorGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	countDownSeparatorGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	countDownSeparatorFontFamily: {
@@ -862,8 +862,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '48',
-			Tablet: '42',
-			Mobile: '38'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	countDownSeparatorFontSizeUnits: {
@@ -928,8 +928,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '60',
-			Tablet: '60',
-			Mobile: '60'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	countDownSeparatorHorizontalGapUnits: {
@@ -947,8 +947,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '40',
-			Tablet: '40',
-			Mobile: '40'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	countDownSeparatorVerticalGapUnits: {
@@ -961,7 +961,7 @@ const attributes = {
 	},
 	/** End Vertical Spacing */
 	countDownZIndex : {
-        type: "object",
+        type: 'object',
         default: {
             Desktop: '',
             Tablet: '',
@@ -970,125 +970,125 @@ const attributes = {
     },
 	countDownOverflow: {
         type: 'string',
-        default: "default",
+        default: 'default',
     },
 	globalBgColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	globalBackgroundType: {
-		type: "string",
-		default: "classic"
+		type: 'string',
+		default: 'classic'
 	},
 	globalClassicColor: {
-		type: "string",
-		default: "#399CFF"
+		type: 'string',
+		default: '#399CFF'
 	},
 	globalGradientColor: {
-		type: "string",
+		type: 'string',
 	},
 	globalCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false
 	},
 	globalCustomGradientInputValue: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	globalBackgroundColorStyle: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	globalBackgroundImageUrl: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	globalBackgroundImageAlt: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	globalBackgroundImageID: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	globalBackgroundImagePosition: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	globalBackgroundImageAttachment: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	globalBackgroundImageSize: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	globalBackgroundImageRepeat: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	hoverBackgroundType: {
-		type: "string",
-		default: "classic"
+		type: 'string',
+		default: 'classic'
 	},
 	hoverClassicColor: {
-		type: "string",
+		type: 'string',
 	},
 	hoverGradientColor: {
-		type: "string",
+		type: 'string',
 	},
 	hoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false
 	},
 	hoverCustomGradientInputValue: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	hoverBackgroundImageUrl: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	hoverBackgroundImageAlt: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	hoverBackgroundImageID: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	hoverBackgroundImagePosition: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	hoverBackgroundImageAttachment: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	hoverBackgroundImageSize: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	hoverBackgroundImageRepeat: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 
 	/** Label Start Border Type */
 	countDownLabelBorderColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	countDownLabelBorderColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	countDownLabelBorderHoverColor: {
 		type: 'string',
 	},
 	countDownLabelBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	countDownLabelBorderTypeUnits : {
 		type: 'object',
@@ -1099,34 +1099,34 @@ const attributes = {
 		}
 	},
 	countDownLabelBorderTypeDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownLabelBorderTypeTablet: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownLabelBorderTypeMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownLabelBorderTypeLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** Label End Border Type */
@@ -1141,7 +1141,7 @@ const attributes = {
 		}
 	},
 	countDownLabelBorderRadiusDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1150,7 +1150,7 @@ const attributes = {
 		},
 	},
 	countDownLabelBorderRadiusTablet: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1159,7 +1159,7 @@ const attributes = {
 		},
 	},
 	countDownLabelBorderRadiusMobile: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1168,7 +1168,7 @@ const attributes = {
 		},
 	},
 	countDownLabelBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** Label End Border Radius */
@@ -1182,7 +1182,7 @@ const attributes = {
 		}
 	},
 	countDownLabelMarginDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '10',
 			bottom: '0',
@@ -1191,25 +1191,25 @@ const attributes = {
 		},
 	},
 	countDownLabelMarginTablet: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '10',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownLabelMarginMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '10',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownLabelMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
@@ -1217,8 +1217,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '100',
-			Tablet: '100',
-			Mobile: '100'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	countDownLabelWidthUnits: {
@@ -1246,43 +1246,43 @@ const attributes = {
 		}
 	},
 	countDownLabelAlignmentHz: {
-        type: "string",
-        default: "center",
+        type: 'string',
+        default: 'center',
     },
 	countDownLabelAlignmentVr: {
-        type: "string",
-        default: "center",
+        type: 'string',
+        default: 'center',
     },
 	/** Label End */
 
 
 	/** Digit Start Border Type */
 	countDownDigitBgColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	countDownDigitBgColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	countDownDigitBgHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	countDownDigitBorderColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	countDownDigitBorderColor: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	countDownDigitBorderHoverColor: {
 		type: 'string',
 	},
 	countDownDigitBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	countDownDigitBorderTypeUnits : {
 		type: 'object',
@@ -1293,34 +1293,34 @@ const attributes = {
 		}
 	},
 	countDownDigitBorderTypeDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownDigitBorderTypeTablet: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownDigitBorderTypeMobile: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	countDownDigitBorderTypeLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** Digit End Border Type */
@@ -1335,7 +1335,7 @@ const attributes = {
 		}
 	},
 	countDownDigitBorderRadiusDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1344,7 +1344,7 @@ const attributes = {
 		},
 	},
 	countDownDigitBorderRadiusTablet: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1353,7 +1353,7 @@ const attributes = {
 		},
 	},
 	countDownDigitBorderRadiusMobile: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1362,7 +1362,7 @@ const attributes = {
 		},
 	},
 	countDownDigitBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** Digit End Border Radius */
@@ -1376,7 +1376,7 @@ const attributes = {
 		}
 	},
 	countDownDigitMarginDesktop: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1385,7 +1385,7 @@ const attributes = {
 		},
 	},
 	countDownDigitMarginTablet: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1394,7 +1394,7 @@ const attributes = {
 		},
 	},
 	countDownDigitMarginMobile: {
-		type: "object",
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1403,7 +1403,7 @@ const attributes = {
 		},
 	},
 	countDownDigitMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	
@@ -1411,8 +1411,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '100',
-			Tablet: '100',
-			Mobile: '100'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	countDownDigitWidthUnits: {
@@ -1440,54 +1440,54 @@ const attributes = {
 		}
 	},
 	countDownDigitAlignmentHz: {
-        type: "string",
-        default: "center",
+        type: 'string',
+        default: 'center',
     },
 	countDownDigitAlignmentVr: {
-        type: "string",
-        default: "center",
+        type: 'string',
+        default: 'center',
     },
 	/** Digit End */
 	
 	countDownDesktopSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     countDownTabletSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     countDownMobileSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
 
 	/** Start Class & ID Setting */
 	countDownGlobalWraperCustomCSS : {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	countDownGlobalWraperID : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	countDownGlobalWraperClass : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	/** End Class & ID Setting */
 
 	countDownPositionType: {
-		type: "string",
-		default: "default"
+		type: 'string',
+		default: 'default'
 	},
 	countDownHZOrientationType: {
-		type: "string",
-		default: "left"
+		type: 'string',
+		default: 'left'
 	},
 	countDownVROrientationType: {
-		type: "string",
-		default: "top"
+		type: 'string',
+		default: 'top'
 	},
 	countDownHZLeftOffset: {
 		type: 'object',

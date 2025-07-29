@@ -1,101 +1,101 @@
 // attributes.js
 const attributes = {
     blockId: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 	blockStyle: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	premadeStyle: {
-		type: "string",
-		default: "style-1",
+		type: 'string',
+		default: 'style-1',
 	},
     deviceType: {
-        type: "string",
-        default: "Desktop"
+        type: 'string',
+        default: 'Desktop'
     },
     postType: {
-		type: "string",
-		default: "post"
+		type: 'string',
+		default: 'post'
 	},
 	postPerPage: {
-		type: "number",
+		type: 'number',
 		default: 6
 	},
 
 	postSwitcher: {
-		type: "string",
-		default: "grid"
+		type: 'string',
+		default: 'grid'
 	},
 	/** Start category */
 	selectedCatSwitcher: {
-		type: "string",
-		default: "include"
+		type: 'string',
+		default: 'include'
 	},
 	selectedCat: {
-		type: "array",
+		type: 'array',
 		default: []
 	},
 	deSelectedCat: {
-		type: "array",
+		type: 'array',
 		default: []
 	},
 	/** End category */
 
 	/** Start tag */
 	selectedTagSwitcher: {
-		type: "string",
-		default: "include"
+		type: 'string',
+		default: 'include'
 	},
 	selectedTag: {
-		type: "array",
+		type: 'array',
 		default: []
 	},
 	deSelectedTag: {
-		type: "array",
+		type: 'array',
 		default: []
 	},
 	/** End tag */
 
 	/** Start author */
 	selectedAuthorSwitcher: {
-		type: "string",
-		default: "include"
+		type: 'string',
+		default: 'include'
 	},
 	selectedAuthor: {
-		type: "array",
+		type: 'array',
 		default: []
 	},
 	deSelectedAuthor: {
-		type: "array",
+		type: 'array',
 		default: []
 	},
 	/** End author */
 
 	placeholders: {
-		type: "array",
+		type: 'array',
 		default: [1, 2, 3, 4, 5, 6, 7, 8, 9],
 	},
 	orderBy: {
-		type: "string",
-		default: "date"
+		type: 'string',
+		default: 'date'
 	},
 	sortOrder: {
-		type: "string",
-		default: "desc"
+		type: 'string',
+		default: 'desc'
 	},
 	gridColumnsPerSection: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "3",
-			Tablet: "2",
-			Mobile: "1"
+			Desktop: '3',
+			Tablet: '2',
+			Mobile: '1'
 		}
 	},
 	gridGapUnits: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
@@ -103,7 +103,7 @@ const attributes = {
 		}
 	},
 	listGapUnits: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
@@ -111,36 +111,36 @@ const attributes = {
 		}
 	},
 	gridRowGap: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "30",
-			Tablet: "30",
-			Mobile: "30"
+			Desktop: '30',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	gridColumnGap: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "30",
-			Tablet: "30",
-			Mobile: "30"
+			Desktop: '30',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 
 	listRowGap: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "30",
-			Tablet: "30",
-			Mobile: "30"
+			Desktop: '30',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	listImageSpacing: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "40",
-			Tablet: "30",
-			Mobile: "0"
+			Desktop: '40',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 
@@ -155,7 +155,7 @@ const attributes = {
 		}
 	},
 	postGridPaddingDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -164,7 +164,7 @@ const attributes = {
 		},
 	},
 	postGridPaddingTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -173,7 +173,7 @@ const attributes = {
 		},
 	},
 	postGridPaddingMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -182,7 +182,7 @@ const attributes = {
 		},
 	},
 	postGridPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Padding */
@@ -197,7 +197,7 @@ const attributes = {
 		}
 	},
 	postGridMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -206,7 +206,7 @@ const attributes = {
 		},
 	},
 	postGridMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -215,7 +215,7 @@ const attributes = {
 		},
 	},
 	postGridMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -224,71 +224,71 @@ const attributes = {
 		},
 	},
 	postGridMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Margin */
 
 	/** Start Background */
 	postGridBgColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postGridNormalBackgroundType: {  
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	postGridNormalClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	postGridNormalGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	postGridNormalCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	postGridNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	postGridHoverBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	postGridHoverClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	postGridHoverGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	postGridHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	postGridHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	/** End Background */
 
 	/** Start Border */
 	postGridBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	postGridBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postGridBorderColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	postGridBorderHoverColor: {
 		type: 'string',
@@ -302,7 +302,7 @@ const attributes = {
 		}
 	},
 	postGridBorderDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -311,7 +311,7 @@ const attributes = {
 		},
 	},
 	postGridBorderTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -320,7 +320,7 @@ const attributes = {
 		},
 	},
 	postGridBorderMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -329,7 +329,7 @@ const attributes = {
 		},
 	},
 	postGridBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border */
@@ -344,7 +344,7 @@ const attributes = {
 		}
 	},
 	postGridBorderRadiusDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -353,7 +353,7 @@ const attributes = {
 		},
 	},
 	postGridBorderRadiusTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -362,7 +362,7 @@ const attributes = {
 		},
 	},
 	postGridBorderRadiusMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -371,7 +371,7 @@ const attributes = {
 		},
 	},
 	postGridBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border Radius */
@@ -402,19 +402,19 @@ const attributes = {
 
 	/** Start Image */
 	postImageSize: {
-		type: "string",
-		default: "medium",
+		type: 'string',
+		default: 'medium',
 	},
 	postImageWidth: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '100',
-			Tablet: '100',
-			Mobile: '100'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postImageWidthUnits: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '%',
 			Tablet: '%',
@@ -422,15 +422,15 @@ const attributes = {
 		}
 	},
 	postImageHeight: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '400',
-			Tablet: '300',
-			Mobile: '200'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postImageHeightUnits: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
@@ -439,11 +439,11 @@ const attributes = {
 	},
 	postImageBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	postImageBorderColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postImageBorderColor: {
 		type: 'string',
@@ -487,7 +487,7 @@ const attributes = {
 		}
 	},
 	postImageBorderLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
@@ -511,23 +511,23 @@ const attributes = {
 	postImageTabletBorderRadius: {
 		type: 'object',
 		default: {
-			top: '16',
-			right: '16',
-			bottom: '16',
-			left: '16',
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
 		}
 	},
 	postImageMobileBorderRadius: {
 		type: 'object',
 		default: {
-			top: '16',
-			right: '16',
-			bottom: '16',
-			left: '16',
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
 		}
 	},
 	postImageBorderRadiusLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
@@ -540,7 +540,7 @@ const attributes = {
 		}
 	},
 	postImageMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -549,7 +549,7 @@ const attributes = {
 		},
 	},
 	postImageMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -558,7 +558,7 @@ const attributes = {
 		},
 	},
 	postImageMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -567,22 +567,22 @@ const attributes = {
 		},
 	},
 	postImageMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Image */
 
 	/** Start Title */
 	postTitleTag: {
-		type: "string",
-		default: "h3"
+		type: 'string',
+		default: 'h3'
 	},
 	postTitleGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	postTitleGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -595,23 +595,23 @@ const attributes = {
 		},
 	},
 	postTitleGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	postTitleGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	postTitleFontFamily: {
-		type: "string",
-		default: "inherit",
+		type: 'string',
+		default: 'inherit',
 	},
 	postTitleFontSize: {
 		type: 'object',
 		default: {
 			Desktop: '24',
-			Tablet: '20',
-			Mobile: '16'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postTitleFontSizeUnits: { 
@@ -623,20 +623,20 @@ const attributes = {
 		}
 	},
 	postTitleFontWeight: {
-		type: "string",
-		default: "600"
+		type: 'string',
+		default: '600'
 	},
 	postTitleFontStyle: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postTitleTextTransform: { 
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	postTitleTextDecoration: {
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	postTitleLetterSpacing: {
 		type: 'object',
@@ -658,8 +658,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '30',
-			Tablet: '30',
-			Mobile: '30'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postTitleLineHeightUnits: {
@@ -672,16 +672,16 @@ const attributes = {
 	},
 
 	postTitleColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postTitleColor : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	postTitleHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 
 	postTitleMarginUnits: {
@@ -693,7 +693,7 @@ const attributes = {
 		}
 	},
 	postTitleMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '24',
 			bottom: '16',
@@ -702,25 +702,25 @@ const attributes = {
 		},
 	},
 	postTitleMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '24',
-			bottom: '16',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	postTitleMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '24',
-			bottom: '16',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	postTitleMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Title */
@@ -728,15 +728,15 @@ const attributes = {
 
 	/** Start Description */
 	postDescriptionTag: {
-		type: "string",
-		default: "p"
+		type: 'string',
+		default: 'p'
 	},
 	postDescriptionGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	postDescriptionGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -749,23 +749,23 @@ const attributes = {
 		},
 	},
 	postDescriptionGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	postDescriptionGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	postDescriptionFontFamily: {
-		type: "string",
-		default: "inherit",
+		type: 'string',
+		default: 'inherit',
 	},
 	postDescriptionFontSize: {
 		type: 'object',
 		default: {
 			Desktop: '18',
-			Tablet: '16',
-			Mobile: '14'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postDescriptionFontSizeUnits: { 
@@ -777,20 +777,20 @@ const attributes = {
 		}
 	},
 	postDescriptionFontWeight: {
-		type: "string",
-		default: "400"
+		type: 'string',
+		default: '400'
 	},
 	postDescriptionFontStyle: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postDescriptionTextTransform: { 
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	postDescriptionTextDecoration: {
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	postDescriptionLetterSpacing: {
 		type: 'object',
@@ -812,8 +812,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '25',
-			Tablet: '25',
-			Mobile: '25'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postDescriptionLineHeightUnits: {
@@ -826,16 +826,16 @@ const attributes = {
 	},
 
 	postDescriptionColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postDescriptionColor : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	postDescriptionHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 
 	postDescriptionMarginUnits: {
@@ -847,7 +847,7 @@ const attributes = {
 		}
 	},
 	postDescriptionMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '0',
 			bottom: '0',
@@ -856,29 +856,29 @@ const attributes = {
 		},
 	},
 	postDescriptionMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	postDescriptionMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	postDescriptionMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	postDescriptionExcerptLength: {
-		type: "number",
+		type: 'number',
 		default: 10
 	},
 	/** End Description */
@@ -886,15 +886,15 @@ const attributes = {
 
 	/** Start Category */
 	showCategorySwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false
 	},
 	postCategoryGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	postCategoryGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -907,23 +907,23 @@ const attributes = {
 		},
 	},
 	postCategoryGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	postCategoryGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	postCategoryFontFamily: {
-		type: "string",
-		default: "inherit",
+		type: 'string',
+		default: 'inherit',
 	},
 	postCategoryFontSize: {
 		type: 'object',
 		default: {
 			Desktop: '16',
-			Tablet: '16',
-			Mobile: '16'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postCategoryFontSizeUnits: { 
@@ -935,20 +935,20 @@ const attributes = {
 		}
 	},
 	postCategoryFontWeight: {
-		type: "string",
-		default: "400"
+		type: 'string',
+		default: '400'
 	},
 	postCategoryFontStyle: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postCategoryTextTransform: { 
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	postCategoryTextDecoration: {
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	postCategoryLetterSpacing: {
 		type: 'object',
@@ -970,8 +970,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '22',
-			Tablet: '22',
-			Mobile: '22'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postCategoryLineHeightUnits: {
@@ -984,38 +984,38 @@ const attributes = {
 	},
 
 	postCategoryColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postCategoryColor : {
-		type: "string",
-		default: "#15171C"
+		type: 'string',
+		default: '#15171C'
 	},
 	postCategoryHoverColor: {
 		type: 'string',
-		default: "#15171C"
+		default: ''
 	},
 
 	postCategoryBgColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postCategoryBgColor : {
-		type: "string",
-		default: "#dddddd9e"
+		type: 'string',
+		default: '#dddddd9e'
 	},
 	postCategoryBgHoverColor: {
 		type: 'string',
-		default: "#dddddd9e"
+		default: ''
 	},
 
 	postCategoryBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	postCategoryBorderColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postCategoryBorderColor: {
 		type: 'string',
@@ -1059,7 +1059,7 @@ const attributes = {
 		}
 	},
 	postCategoryBorderLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
@@ -1083,23 +1083,23 @@ const attributes = {
 	postCategoryTabletBorderRadius: {
 		type: 'object',
 		default: {
-			top: '6',
-			right: '6',
-			bottom: '6',
-			left: '6',
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
 		}
 	},
 	postCategoryMobileBorderRadius: {
 		type: 'object',
 		default: {
-			top: '6',
-			right: '6',
-			bottom: '6',
-			left: '6',
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
 		}
 	},
 	postCategoryBorderRadiusLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
@@ -1112,7 +1112,7 @@ const attributes = {
 		}
 	},
 	postCategoryPaddingDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '6',
 			bottom: '6',
@@ -1121,25 +1121,25 @@ const attributes = {
 		},
 	},
 	postCategoryPaddingTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '6',
-			bottom: '6',
-			left: '14',
-			right: '14',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	postCategoryPaddingMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '6',
-			bottom: '6',
-			left: '14',
-			right: '14',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	postCategoryPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
@@ -1152,7 +1152,7 @@ const attributes = {
 		}
 	},
 	postCategoryMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '24',
 			bottom: '0',
@@ -1161,33 +1161,33 @@ const attributes = {
 		},
 	},
 	postCategoryMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '24',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	postCategoryMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '24',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	postCategoryMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	postCategoryGap: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '10',
-			Tablet: '10',
-			Mobile: '10'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postCategoryGapUnits: {
@@ -1202,15 +1202,15 @@ const attributes = {
 
 	/** Start Tag */
 	showTagSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false
 	},
 	postTagGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	postTagGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -1223,23 +1223,23 @@ const attributes = {
 		},
 	},
 	postTagGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	postTagGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	postTagFontFamily: {
-		type: "string",
-		default: "inherit",
+		type: 'string',
+		default: 'inherit',
 	},
 	postTagFontSize: {
 		type: 'object',
 		default: {
 			Desktop: '16',
-			Tablet: '16',
-			Mobile: '16'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postTagFontSizeUnits: { 
@@ -1251,20 +1251,20 @@ const attributes = {
 		}
 	},
 	postTagFontWeight: {
-		type: "string",
-		default: "400"
+		type: 'string',
+		default: '400'
 	},
 	postTagFontStyle: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postTagTextTransform: { 
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	postTagTextDecoration: {
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	postTagLetterSpacing: {
 		type: 'object',
@@ -1286,8 +1286,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '22',
-			Tablet: '22',
-			Mobile: '22'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postTagLineHeightUnits: {
@@ -1300,38 +1300,38 @@ const attributes = {
 	},
 
 	postTagColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postTagColor : {
-		type: "string",
-		default: "#15171C"
+		type: 'string',
+		default: '#15171C'
 	},
 	postTagHoverColor: {
 		type: 'string',
-		default: "#15171C"
+		default: ''
 	},
 
 	postTagBgColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postTagBgColor : {
-		type: "string",
-		default: "#dddddd9e" 
+		type: 'string',
+		default: '#dddddd9e' 
 	},
 	postTagBgHoverColor: {
 		type: 'string',
-		default: "#dddddd9e"
+		default: ''
 	},
 
 	postTagBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	postTagBorderColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postTagBorderColor: {
 		type: 'string',
@@ -1375,7 +1375,7 @@ const attributes = {
 		}
 	},
 	postTagBorderLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
@@ -1399,23 +1399,23 @@ const attributes = {
 	postTagTabletBorderRadius: {
 		type: 'object',
 		default: {
-			top: '6',
-			right: '6',
-			bottom: '6',
-			left: '6',
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
 		}
 	},
 	postTagMobileBorderRadius: {
 		type: 'object',
 		default: {
-			top: '6',
-			right: '6',
-			bottom: '6',
-			left: '6',
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
 		}
 	},
 	postTagBorderRadiusLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
@@ -1428,7 +1428,7 @@ const attributes = {
 		}
 	},
 	postTagPaddingDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '6',
 			bottom: '6',
@@ -1437,25 +1437,25 @@ const attributes = {
 		},
 	},
 	postTagPaddingTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '6',
-			bottom: '6',
-			left: '14',
-			right: '14',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	postTagPaddingMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '6',
-			bottom: '6',
-			left: '14',
-			right: '14',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	postTagPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
@@ -1468,7 +1468,7 @@ const attributes = {
 		}
 	},
 	postTagMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '24',
 			bottom: '0',
@@ -1477,33 +1477,33 @@ const attributes = {
 		},
 	},
 	postTagMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '24',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	postTagMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '24',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	postTagMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	postTagGap: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '10',
-			Tablet: '10',
-			Mobile: '10'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postTagGapUnits: {
@@ -1518,20 +1518,20 @@ const attributes = {
 
 	/** Start Author */
 	showAuthorSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 	showExcerptSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
 	postAuthorGap: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '10',
-			Tablet: '10',
-			Mobile: '10'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postAuthorGapUnits: {
@@ -1544,16 +1544,16 @@ const attributes = {
 	},
 
 	postAuthorAvatarSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
 	postAuthorAvatarWidth: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '40',
-			Tablet: '40',
-			Mobile: '40'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postAuthorAvatarWidthUnits: {
@@ -1567,11 +1567,11 @@ const attributes = {
 
 	postAuthorAvatarBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	postAuthorAvatarBorderColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postAuthorAvatarBorderColor: {
 		type: 'string',
@@ -1615,7 +1615,7 @@ const attributes = {
 		}
 	},
 	postAuthorAvatarBorderLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
@@ -1639,23 +1639,23 @@ const attributes = {
 	postAuthorAvatarTabletBorderRadius: {
 		type: 'object',
 		default: {
-			top: '50',
-			right: '50',
-			bottom: '50',
-			left: '50',
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
 		}
 	},
 	postAuthorAvatarMobileBorderRadius: {
 		type: 'object',
 		default: {
-			top: '50',
-			right: '50',
-			bottom: '50',
-			left: '50',
+			top: '',
+			right: '',
+			bottom: '',
+			left: '',
 		}
 	},
 	postAuthorAvatarBorderRadiusLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
@@ -1669,7 +1669,7 @@ const attributes = {
 		}
 	},
 	postAuthorMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '32',
 			bottom: '0',
@@ -1678,34 +1678,34 @@ const attributes = {
 		},
 	},
 	postAuthorMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '32',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	postAuthorMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '32',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	postAuthorMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 
 	postAuthorGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	postAuthorGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -1718,23 +1718,23 @@ const attributes = {
 		},
 	},
 	postAuthorGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	postAuthorGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	postAuthorFontFamily: {
-		type: "string",
-		default: "inherit",
+		type: 'string',
+		default: 'inherit',
 	},
 	postAuthorFontSize: {
 		type: 'object',
 		default: {
 			Desktop: '16',
-			Tablet: '16',
-			Mobile: '16'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postAuthorFontSizeUnits: { 
@@ -1746,20 +1746,20 @@ const attributes = {
 		}
 	},
 	postAuthorFontWeight: {
-		type: "string",
-		default: "400"
+		type: 'string',
+		default: '400'
 	},
 	postAuthorFontStyle: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postAuthorTextTransform: { 
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	postAuthorTextDecoration: {
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	postAuthorLetterSpacing: {
 		type: 'object',
@@ -1781,8 +1781,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '22',
-			Tablet: '22',
-			Mobile: '22'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postAuthorLineHeightUnits: {
@@ -1795,52 +1795,52 @@ const attributes = {
 	},
 
 	postAuthorColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postAuthorColor : {
-		type: "string",
-		default: "#15171C"
+		type: 'string',
+		default: '#15171C'
 	},
 	postAuthorHoverColor: {
 		type: 'string',
-		default: "#15171C"
+		default: ''
 	},
 	postAuthorPrefixSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 	postAuthorPrefix: {
-		type: "string",
-		default: "Posted by"
+		type: 'string',
+		default: 'Posted by'
 	},
 	
 	postAuthorPrefixColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postAuthorPrefixColor : {
-		type: "string",
-		default: "#15171C"
+		type: 'string',
+		default: '#15171C'
 	},
 	postAuthorPrefixHoverColor: {
 		type: 'string',
-		default: "#15171C"
+		default: ''
 	},
 	/** End Author */
 
 	/** Start Date */
 	showDateSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
 	postDateGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	postDateGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -1853,23 +1853,23 @@ const attributes = {
 		},
 	},
 	postDateGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	postDateGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	postDateFontFamily: {
-		type: "string",
-		default: "inherit",
+		type: 'string',
+		default: 'inherit',
 	},
 	postDateFontSize: {
 		type: 'object',
 		default: {
 			Desktop: '16',
-			Tablet: '16',
-			Mobile: '16'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postDateFontSizeUnits: { 
@@ -1881,20 +1881,20 @@ const attributes = {
 		}
 	},
 	postDateFontWeight: {
-		type: "string",
-		default: "400"
+		type: 'string',
+		default: '400'
 	},
 	postDateFontStyle: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postDateTextTransform: { 
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	postDateTextDecoration: {
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	postDateLetterSpacing: {
 		type: 'object',
@@ -1916,8 +1916,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '22',
-			Tablet: '22',
-			Mobile: '22'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	postDateLineHeightUnits: {
@@ -1930,23 +1930,23 @@ const attributes = {
 	},
 
 	postDateColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postDateColor : {
-		type: "string",
-		default: "#15171C"
+		type: 'string',
+		default: '#15171C'
 	},
 	postDateHoverColor: {
 		type: 'string',
-		default: "#15171C"
+		default: ''
 	},
 	/** End Date */
 
 
 	/** Start Global Setting */
 	postGlobalZIndex : {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '',
 			Tablet: '',
@@ -1955,7 +1955,7 @@ const attributes = {
 	},
 	postGridOverflow: {
         type: 'string',
-        default: "default",
+        default: 'default',
     },
 	/** Start Padding */
 	postGlobalPaddingUnits: {
@@ -1967,7 +1967,7 @@ const attributes = {
 		}
 	},
 	postGlobalPaddingDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1976,7 +1976,7 @@ const attributes = {
 		},
 	},
 	postGlobalPaddingTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1985,7 +1985,7 @@ const attributes = {
 		},
 	},
 	postGlobalPaddingMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -1994,7 +1994,7 @@ const attributes = {
 		},
 	},
 	postGlobalPaddingLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Padding */
@@ -2009,7 +2009,7 @@ const attributes = {
 		}
 	},
 	postGlobalMarginDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2018,7 +2018,7 @@ const attributes = {
 		},
 	},
 	postGlobalMarginTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2027,7 +2027,7 @@ const attributes = {
 		},
 	},
 	postGlobalMarginMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2036,71 +2036,71 @@ const attributes = {
 		},
 	},
 	postGlobalMarginLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Margin */
 
 	/** Start Background */
 	postGlobalBgColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postGlobalNormalBackgroundType: { 
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	postGlobalNormalClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	postGlobalNormalGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	postGlobalNormalCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	postGlobalNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	postGlobalHoverBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	postGlobalHoverClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	postGlobalHoverGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	postGlobalHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	postGlobalHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	/** End Background */
 
 	/** Start Border */
 	postGlobalBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	postGlobalBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	postGlobalBorderColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	postGlobalBorderHoverColor: {
 		type: 'string',
@@ -2114,7 +2114,7 @@ const attributes = {
 		}
 	},
 	postGlobalBorderDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2123,7 +2123,7 @@ const attributes = {
 		},
 	},
 	postGlobalBorderTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2132,7 +2132,7 @@ const attributes = {
 		},
 	},
 	postGlobalBorderMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2141,7 +2141,7 @@ const attributes = {
 		},
 	},
 	postGlobalBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border */
@@ -2156,7 +2156,7 @@ const attributes = {
 		}
 	},
 	postGlobalBorderRadiusDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2165,7 +2165,7 @@ const attributes = {
 		},
 	},
 	postGlobalBorderRadiusTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2174,7 +2174,7 @@ const attributes = {
 		},
 	},
 	postGlobalBorderRadiusMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2183,7 +2183,7 @@ const attributes = {
 		},
 	},
 	postGlobalBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	/** End Border Radius */
@@ -2214,43 +2214,43 @@ const attributes = {
 
 	/** Start Load More */
 	loadMoreSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 	loadMoreType: {
-		type: "string",
-		default: "button"
+		type: 'string',
+		default: 'button'
 	},
 	loadMoreText: {
-		type: "string",
-		default: "Load More"
+		type: 'string',
+		default: 'Load More'
 	},
 
 	paginationPrevNextType: {
-		type: "string",
-		default: "icon"
+		type: 'string',
+		default: 'icon'
 	},
 
 	paginationPrevTxt: {
-		type: "string",
-		default: "Prev"
+		type: 'string',
+		default: 'Prev'
 	},
 	paginationPrevIcon: {
-		type: "string",
-		default: "angle-left"
+		type: 'string',
+		default: 'angle-left'
 	},
 	paginationNextTxt: {
-		type: "string",
-		default: "Next"
+		type: 'string',
+		default: 'Next'
 	},
 	paginationNextIcon: {
-		type: "string",
-		default: "angle-right"
+		type: 'string',
+		default: 'angle-right'
 	},
 
 	loadMoreIconAlign: {
-        type: "string",
-        default: "none",
+        type: 'string',
+        default: 'none',
     },
 	loadMoreIcon: {
 		type: 'string',
@@ -2258,49 +2258,49 @@ const attributes = {
 	},
 
 	loadMoreButtonBgColorSwitcher : {  
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	loadMoreButtonNormalBackgroundType: {   
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	loadMoreButtonNormalClassicColor: {
-		type: "string",
-		default: "#15171C",
+		type: 'string',
+		default: '#15171C',
 	},
 	loadMoreButtonNormalGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	loadMoreButtonNormalCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	loadMoreButtonNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	loadMoreButtonHoverBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	loadMoreButtonHoverClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	loadMoreButtonHoverGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	loadMoreButtonHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	loadMoreButtonHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	loadMoreButtonPaddingUnits: {
 		type: 'object',
@@ -2311,7 +2311,7 @@ const attributes = {
 		}
 	},
 	loadMoreButtonDesktopPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '16',
 			bottom: '16',
@@ -2320,35 +2320,35 @@ const attributes = {
 		},
 	},
 	loadMoreButtonTabletPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '16',
-			bottom: '16',
-			left: '24',
-			right: '24',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	loadMoreButtonMobilePadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '16',
-			right: '16',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	loadMoreButtonPaddingLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
 	loadMoreButtonBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	loadMoreButtonBorderColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	loadMoreButtonBorderColor: {
 		type: 'string',
@@ -2365,7 +2365,7 @@ const attributes = {
 		}
 	},
 	loadMoreButtonDesktopBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2374,7 +2374,7 @@ const attributes = {
 		},
 	},
 	loadMoreButtonTabletBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2383,7 +2383,7 @@ const attributes = {
 		},
 	},
 	loadMoreButtonMobileBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2392,7 +2392,7 @@ const attributes = {
 		},
 	},
 	loadMoreButtonBorderLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 	loadMoreButtonBorderRadiusUnits: {
@@ -2404,7 +2404,7 @@ const attributes = {
 		}
 	},
 	loadMoreButtonDesktopBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '10',
 			bottom: '10',
@@ -2413,34 +2413,34 @@ const attributes = {
 		},
 	},
 	loadMoreButtonTabletBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	loadMoreButtonMobileBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	loadMoreButtonBorderRadiusLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
 	loadMoreTextGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	loadMoreTextGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -2453,23 +2453,23 @@ const attributes = {
 		},
 	},
 	loadMoreTextGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	loadMoreTextGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	loadMoreTextFontFamily: { 
-		type: "string",
-		default: "Default",
+		type: 'string',
+		default: 'Default',
 	},
 	loadMoreTextFontSize: {
 		type: 'object',
 		default: {
 			Desktop: '24',
-			Tablet: '20',
-			Mobile: '16'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	loadMoreTextFontSizeUnits: { 
@@ -2481,20 +2481,20 @@ const attributes = {
 		}
 	},
 	loadMoreTextFontWeight: {
-		type: "string",
-		default: "600"
+		type: 'string',
+		default: '600'
 	},
 	loadMoreTextFontStyle: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	loadMoreTextTransform: { 
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	loadMoreTextDecoration: {
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	loadMoreTextLetterSpacing: {
 		type: 'object',
@@ -2516,8 +2516,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '30',
-			Tablet: '30',
-			Mobile: '30'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	loadMoreTextLineHeightUnits: {
@@ -2530,23 +2530,23 @@ const attributes = {
 	},
 
 	loadMoreTextColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	loadMoreTextColor : {
-		type: "string",
-		default: "#FFFFFF"
+		type: 'string',
+		default: '#FFFFFF'
 	},
 	loadMoreTextHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	loadMoreIconSize: {
         type: 'object',
         default: {
             Desktop: '20',
-            Tablet: '20',
-            Mobile: '20'
+            Tablet: '',
+            Mobile: ''
         }
     },
     loadMoreIconSizeUnits: {
@@ -2558,16 +2558,16 @@ const attributes = {
         }
     },
     loadMoreIconColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     loadMoreIconColor: {
-        type: "string",
-        default: "#FFFFFF"
+        type: 'string',
+        default: '#FFFFFF'
     },
     loadMoreIconHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
 	loadMoreIconMarginUnits: {
 		type: 'object',
@@ -2578,7 +2578,7 @@ const attributes = {
 		}
 	},
 	loadMoreIconDesktopMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '0',
 			bottom: '0',
@@ -2587,39 +2587,39 @@ const attributes = {
 		},
 	},
 	loadMoreIconTabletMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '5',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	loadMoreIconMobileMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '5',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	loadMoreIconMarginLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
 	loadMoreloaderColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	loadMoreloaderColor: {
-		type: "string",
-		default: "#FFFFFF"
+		type: 'string',
+		default: '#FFFFFF'
 	},
 	loadMoreloaderHoverColor: {
-		type: "string",
-		default: "#FFFFFF"
+		type: 'string',
+		default: ''
 	},
 	/** End Load More */
 
@@ -2642,58 +2642,58 @@ const attributes = {
 	},
 
 	paginationArrowBgColorSwitcher : {  
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	paginationArrowNormalBackgroundType: {   
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	paginationArrowNormalClassicColor: {
-		type: "string",
-		default: "#E6E6E6",
+		type: 'string',
+		default: '#E6E6E6',
 	},
 	paginationArrowNormalGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	paginationArrowNormalCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	paginationArrowNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	paginationArrowHoverBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	paginationArrowHoverClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	paginationArrowHoverGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	paginationArrowHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	paginationArrowHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	paginationArrowBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	paginationArrowBorderColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	paginationArrowBorderColor: {
 		type: 'string',
@@ -2710,7 +2710,7 @@ const attributes = {
 		}
 	},
 	paginationArrowDesktopBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2719,7 +2719,7 @@ const attributes = {
 		},
 	},
 	paginationArrowTabletBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2728,7 +2728,7 @@ const attributes = {
 		},
 	},
 	paginationArrowMobileBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -2737,7 +2737,7 @@ const attributes = {
 		},
 	},
 	paginationArrowBorderLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 	paginationArrowBorderRadiusUnits: {
@@ -2749,7 +2749,7 @@ const attributes = {
 		}
 	},
 	paginationArrowDesktopBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '50',
 			bottom: '50',
@@ -2758,34 +2758,34 @@ const attributes = {
 		},
 	},
 	paginationArrowTabletBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	paginationArrowMobileBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	paginationArrowBorderRadiusLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
 	paginationArrowTextGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	paginationArrowTextGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -2798,16 +2798,16 @@ const attributes = {
 		},
 	},
 	paginationArrowTextGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	paginationArrowTextGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	paginationArrowTextFontFamily: { 
-		type: "string",
-		default: "Default",
+		type: 'string',
+		default: 'Default',
 	},
 	paginationArrowTextFontSize: {
 		type: 'object',
@@ -2826,20 +2826,20 @@ const attributes = {
 		}
 	},
 	paginationArrowTextFontWeight: {
-		type: "string",
-		default: "400"
+		type: 'string',
+		default: '400'
 	},
 	paginationArrowTextFontStyle: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	paginationArrowTextTransform: { 
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	paginationArrowTextDecoration: {
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	paginationArrowTextLetterSpacing: {
 		type: 'object',
@@ -2875,23 +2875,23 @@ const attributes = {
 	},
 
 	paginationArrowTextColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	paginationArrowTextColor : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	paginationArrowTextHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	paginationPrevNextWidth: {
         type: 'object',
         default: {
             Desktop: '36',
-            Tablet: '36',
-            Mobile: '36'
+            Tablet: '',
+            Mobile: ''
         }
     },
     paginationPrevNextWidthUnits: {
@@ -2903,16 +2903,16 @@ const attributes = {
         }
     },
     paginationArrowIconColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     paginationArrowIconColor: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     paginationArrowIconHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
 	// pagination arrow end
 
@@ -2921,8 +2921,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '36',
-			Tablet: '36',
-			Mobile: '36'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	paginationBtnSizeUnits: { 
@@ -2938,8 +2938,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '4',
-			Tablet: '4',
-			Mobile: '4'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	paginationBtnGapUnits: { 
@@ -2952,117 +2952,117 @@ const attributes = {
 	},
 
 	paginationBtnBgColorSwitcher : {  
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	paginationBtnNormalBackgroundType: {   
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	paginationBtnNormalClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	paginationBtnNormalGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	paginationBtnNormalCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	paginationBtnNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	paginationBtnHoverBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	paginationBtnHoverClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	paginationBtnHoverGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	paginationBtnHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	paginationBtnHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 
 	paginationActiveBtnTextColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	paginationActiveBtnTextColor : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	paginationActiveBtnTextHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	paginationActiveBtnBgColorSwitcher : {  
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	paginationActiveBtnNormalBackgroundType: {   	
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	paginationActiveBtnNormalClassicColor: {
-		type: "string",
-		default: "#E6E6E6",
+		type: 'string',
+		default: '#E6E6E6',
 	},
 	paginationActiveBtnNormalGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	paginationActiveBtnNormalCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	paginationActiveBtnNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	paginationActiveBtnHoverBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	paginationActiveBtnHoverClassicColor: {
-		type: "string",
-		default: "#E6E6E6",
+		type: 'string',
+		default: '#E6E6E6',
 	},
 	paginationActiveBtnHoverGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	paginationActiveBtnHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	paginationActiveBtnHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	paginationBtnBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	paginationBtnBorderColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	paginationBtnBorderColor: {
 		type: 'string',
@@ -3079,7 +3079,7 @@ const attributes = {
 		}
 	},
 	paginationBtnDesktopBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -3088,7 +3088,7 @@ const attributes = {
 		},
 	},
 	paginationBtnTabletBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -3097,7 +3097,7 @@ const attributes = {
 		},
 	},
 	paginationBtnMobileBorder: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -3106,7 +3106,7 @@ const attributes = {
 		},
 	},
 	paginationBtnBorderLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 	paginationBtnBorderRadiusUnits: {
@@ -3118,7 +3118,7 @@ const attributes = {
 		}
 	},
 	paginationBtnDesktopBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '50',
 			bottom: '50',
@@ -3127,34 +3127,34 @@ const attributes = {
 		},
 	},
 	paginationBtnTabletBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {	
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	paginationBtnMobileBorderRadius: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	paginationBtnBorderRadiusLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 
 	paginationBtnTextGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	paginationBtnTextGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -3167,16 +3167,16 @@ const attributes = {
 		},
 	},
 	paginationBtnTextGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	paginationBtnTextGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	paginationBtnTextFontFamily: { 
-		type: "string",
-		default: "Default",
+		type: 'string',
+		default: 'Default',
 	},
 	paginationBtnTextFontSize: {
 		type: 'object',
@@ -3195,20 +3195,20 @@ const attributes = {
 		}
 	},
 	paginationBtnTextFontWeight: {
-		type: "string",
-		default: "400"
+		type: 'string',
+		default: '400'
 	},
 	paginationBtnTextFontStyle: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	paginationBtnTextTransform: { 
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	paginationBtnTextDecoration: {
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	paginationBtnTextLetterSpacing: {
 		type: 'object',
@@ -3244,60 +3244,60 @@ const attributes = {
 	},
 
 	paginationBtnTextColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	paginationBtnTextColor : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	paginationBtnTextHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	// pagination btn end
 
 
 	postGridDesktopSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     postGridTabletSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     postGridMobileSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
 
 	/** Start Class & ID Setting */
 	postGridGlobalCustomCSS : {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 	postGridGlobalWraperID : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 
 	postGridGlobalWraperClass : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	/** End Class & ID Setting */
 
 	postGridPositionType: {
-        type: "string",
-        default: "default"
+        type: 'string',
+        default: 'default'
     },
     postGridHZOrientationType: {
-        type: "string",
-        default: "left"
+        type: 'string',
+        default: 'left'
     },
     postGridVROrientationType: {
-        type: "string",
-        default: "top"
+        type: 'string',
+        default: 'top'
     },
     postGridHZLeftOffset: {
         type: 'object',
@@ -3366,75 +3366,75 @@ const attributes = {
 
 	/** Start Filter By Taxonomy */
 	showFilterByTaxonomy: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	filterSelectedTaxonomy: {
-		type: "string",
-		default: "category",
+		type: 'string',
+		default: 'category',
 	},
 	filterSelectedCat: {
-		type: "array",
+		type: 'array',
 		default: []
 	},
 	filterSelectedCatLabel: {
-		type: "array",
+		type: 'array',
 		default: []
 	},
 	filterSelectedTaxonomyCount: {
-		type: "array",
+		type: 'array',
 		default: []
 	},
 	filterSelectedTag: {
-		type: "array",
+		type: 'array',
 		default: []
 	},
 	filterSelectedTagLabel: {
-		type: "array",
+		type: 'array',
 		default: []
 	},
 	filterSelectedTagCount: {
-		type: "array",
+		type: 'array',
 		default: []
 	},
 	filterAllPostsCount: {
-		type: "array",
+		type: 'array',
 		default: []
 	},
 	filerselectedCountSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false
 	},
 	/** End Filter By Taxonomy */
 
 	/** Start Read More */
 	readMoreSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false
 	},
 	readMoreText: {
-		type: "string",
-		default: "Read More"
+		type: 'string',
+		default: 'Read More'
 	},
 	readMoreIconAlign: {
-		type: "string",
-		default: "none"
+		type: 'string',
+		default: 'none'
 	},
 	readMoreIcon: {
-		type: "string",
-		default: "arrow-right"
+		type: 'string',
+		default: 'arrow-right'
 	},
 	readMoreIconImageUrl: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	readMoreIconImageAlt: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},	
 	readMoreIconImageID: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	
 	/** End Read More */
@@ -3458,11 +3458,11 @@ const attributes = {
 	},
 
 	buttonGlobalTypographyData: {
-		type: "object",
+		type: 'object',
 		default: {}
 	},
 	buttonGlobalTypoSwitcher: {
-		type: "object",
+		type: 'object',
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -3475,23 +3475,23 @@ const attributes = {
 		},
 	},
 	buttonGlobalTypoType: {
-		type: "string",
+		type: 'string',
 		default: 'default',
 	},
 	buttonGlobalTypoOption: {
-		type: "object",
+		type: 'object',
 		default: {label: 'Default', value: 'default'},
 	},
 	buttonFontFamily: {
-		type: "string",
-		default: "Default",
+		type: 'string',
+		default: 'Default',
 	},
 	buttonFontSize: {
 		type: 'object',
 		default: {
 			Desktop: '16',
-			Tablet: '16',
-			Mobile: '16'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	buttonFontSizeUnits: {
@@ -3503,20 +3503,20 @@ const attributes = {
 		}
 	},
 	buttonFontWeight: {
-		type: "string",
-		default: "500"
+		type: 'string',
+		default: '500'
 	},
 	buttonFontStyle: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	buttonTextTransform: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	buttonTextDecoration: {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	buttonLetterSpacing: {
 		type: 'object',
@@ -3551,34 +3551,34 @@ const attributes = {
 		}
 	},
 	buttonColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	buttonColor: {
-		type: "string",
-		default: "#15171C"
+		type: 'string',
+		default: '#15171C'
 	},
 	buttonHoverColor: {
 		type: 'string',
 	},
 	buttonBgColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	buttonBgColor: {
-		type: "string",
-		default: "#dddddd9e"
+		type: 'string',
+		default: '#dddddd9e'
 	},
 	buttonBgHoverColor: {
 		type: 'string',
 	},
 	buttonBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	buttonBorderColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	buttonBorderColor: {
 		type: 'string',
@@ -3595,34 +3595,34 @@ const attributes = {
 		}
 	},
 	buttonDesktopBorderWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonTabBorderWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonMobileBorderWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonBorderLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 	buttonBorderRadiusUnits: {
@@ -3634,34 +3634,34 @@ const attributes = {
 		}
 	},
 	buttonDesktopBorderRadiusWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "6",
-			bottom: "6",
-			left: "6",
-			right: "6",
+			top: '6',
+			bottom: '6',
+			left: '6',
+			right: '6',
 		},
 	},
 	buttonTabBorderRadiusWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "6",
-			bottom: "6",
-			left: "6",
-			right: "6",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonMobileBorderRadiusWidth: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "6",
-			bottom: "6",
-			left: "6",
-			right: "6",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonBorderRadiusLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 	buttonBoxShadowSwitcher: {
@@ -3693,7 +3693,7 @@ const attributes = {
 		}
 	},
 	buttonDesktopPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '12',
 			bottom: '12',
@@ -3702,25 +3702,25 @@ const attributes = {
 		},
 	},
 	buttonTabPadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '12',
-			bottom: '12',
-			left: '24',
-			right: '24',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonMobilePadding: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: '12',
-			bottom: '12',
-			left: '24',
-			right: '24',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonPaddingLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 	buttonMarginUnits: {
@@ -3732,34 +3732,34 @@ const attributes = {
 		}
 	},
 	buttonDesktopMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "15",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '15',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	buttonTabMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "15",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonMobileMargin: {
-		type: "object", 
+		type: 'object', 
 		default: {
-			top: "15",
-			bottom: "0",
-			left: "0",
-			right: "0",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonMarginLink: {
-		type: "boolean",
+		type: 'boolean',
 		default: true
 	},
 	/** End Style */    
@@ -3769,8 +3769,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: '16',
-			Tablet: '16',
-			Mobile: '16'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	buttonIconSizeUnits: {
@@ -3782,37 +3782,37 @@ const attributes = {
 		}
 	},
 	buttonIconColorSwitcher: {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	buttonIconColor: {
-		type: "string",
-		default: "#15171C"
+		type: 'string',
+		default: '#15171C'
 	},
 	buttonIconHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 
 	buttonIconBgColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	buttonIconBgColor : {
-		type: "string",
-		default: ""
+		type: 'string',
+		default: ''
 	},
 	buttonIconBgHoverColor: {
 		type: 'string',
-		default: ""
+		default: ''
 	},
 	buttonIconBorder: {
 		type: 'string',
-		default: "none",
+		default: 'none',
 	},
 	buttonIconBorderColorSwitcher : {
-		type: "string",
-		default: "normal"
+		type: 'string',
+		default: 'normal'
 	},
 	buttonIconBorderColor: {
 		type: 'string',
@@ -3829,7 +3829,7 @@ const attributes = {
 		}
 	},
 	buttonIconBorderDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -3838,7 +3838,7 @@ const attributes = {
 		},
 	},
 	buttonIconBorderTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -3847,7 +3847,7 @@ const attributes = {
 		},
 	},
 	buttonIconBorderMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -3856,7 +3856,7 @@ const attributes = {
 		},
 	},
 	buttonIconBorderLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	buttonIconBorderRadiusUnits: {
@@ -3868,7 +3868,7 @@ const attributes = {
 		}
 	},
 	buttonIconBorderRadiusDesktop: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -3877,7 +3877,7 @@ const attributes = {
 		},
 	},
 	buttonIconBorderRadiusTablet: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '', 
 			bottom: '',
@@ -3886,7 +3886,7 @@ const attributes = {
 		},
 	},
 	buttonIconBorderRadiusMobile: {
-		type: "object", 
+		type: 'object', 
 		default: {
 			top: '',
 			bottom: '',
@@ -3895,15 +3895,15 @@ const attributes = {
 		},
 	},
 	buttonIconBorderRadiusLink : {
-		type : "boolean",
+		type : 'boolean',
 		default: true
 	},
 	buttonIconGapSize: {
 		type: 'object',
 		default: {
 			Desktop: '10',
-			Tablet: '10',
-			Mobile: '10'
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	buttonIconGapUnits: {
@@ -3921,17 +3921,17 @@ const attributes = {
 	buttonIconRotate: {
 		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "", 
-			Mobile: "",
+			Desktop: '',
+			Tablet: '', 
+			Mobile: '',
 		}
 	},
 	buttonIconRotateHover: {
 		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
 		}
 	},
 
@@ -3942,17 +3942,17 @@ const attributes = {
 	buttonImageRotate: {
 		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "", 
-			Mobile: "",
+			Desktop: '',
+			Tablet: '', 
+			Mobile: '',
 		}
 	},
 	buttonImageRotateHover: {
 		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
 		}
 	},
 
@@ -3960,8 +3960,8 @@ const attributes = {
         type: 'object',
         default: {
             Desktop: '20',
-            Tablet: '20',
-            Mobile: '20',
+            Tablet: '',
+            Mobile: ''
         }
     },
     buttonIconImageWidthUnits : {
@@ -3976,8 +3976,8 @@ const attributes = {
         type: 'object',
         default: {
             Desktop: '20',
-            Tablet: '20',
-            Mobile: '20',
+            Tablet: '',
+            Mobile: '',
         }
     },
     buttonIconImageHeightUnits : {
@@ -3993,43 +3993,43 @@ const attributes = {
 
 	/** Start Post URL Settings */
 	customPermalinkSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	customPermalink: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	thumbnailLinkSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	categoryLinkSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	tagLinkSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	authorLinkSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	titleLinkSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 	},
 	/** End Post URL Settings */
 
 	/** Start Post Grid Settings */
 	postGridSkeletonBgColor: {
-		type: "string",
-		default: "#f0f0f0",
+		type: 'string',
+		default: '#f0f0f0',
 	},
 	postGridSkeletonHighlightBgColor: {
-		type: "string",
-		default: "#e0e0e0",
+		type: 'string',
+		default: '#e0e0e0',
 	},
 	/** End Post Grid Settings */
 };

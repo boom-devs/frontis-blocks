@@ -1,54 +1,54 @@
 const attributes = {
     blockId: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     blockStyle: {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 
     animationType: {
-        type: "string",
-        default: "typing"
+        type: 'string',
+        default: 'typing'
     },
     
    animatedHeadingAlignment: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "left",
-            Tablet: "left",
-            Mobile: "left",
+            Desktop: 'left',
+            Tablet: '',
+            Mobile: '',
         },
     },
 
    animatedHeadingMainTag: {
-        type: "string",
-        default: "span"
+        type: 'string',
+        default: 'span'
     },
    animatedHeadingGap: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "8",
-            Tablet: "8",
-            Mobile: "8"
+            Desktop: '8',
+            Tablet: '',
+            Mobile: ''
         }
     },
    animatedHeadingGapUnits: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "px",
-            Tablet: "px",
-            Mobile: "px"
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
         }
     },
 
    animatedHeadingPrefix: {
-        type: "string",
-        default: "We create"
+        type: 'string',
+        default: 'We create'
     },
    animatedHeadingItems: {
-        type: "array",
+        type: 'array',
         default: [
             {
                 id: 'item-1',
@@ -68,42 +68,42 @@ const attributes = {
             },
         ],
         items: {
-            type: "object",
+            type: 'object',
             properties: {
                 id: {
-                    type: "string",
-                    default: ""
+                    type: 'string',
+                    default: ''
                 },
                animatedHeadingTitle: {
-                    type: "string",
-                    default: "WordPress Plugins"
+                    type: 'string',
+                    default: 'WordPress Plugins'
                 },
             }
         }
     },
 
    animatedHeadingCursorSwitch: {
-        type: "boolean",
+        type: 'boolean',
         default: true
     },
 
    animatedHeadingCursor: {
-        type: "string",
-        default: "|"
+        type: 'string',
+        default: '|'
     },
 
    animatedHeadingSuffix: {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
 
     /** Start Normal Text Style */
     animatedHeadingNormalTextGlobalTypographyData: {
-        type: "object",
+        type: 'object',
         default: {}
     },
     animatedHeadingNormalTextGlobalTypoSwitcher: {
-        type: "object",
+        type: 'object',
         default: {
             fontFamily: false,
             fontSize: false,
@@ -116,16 +116,16 @@ const attributes = {
         },
     },
     animatedHeadingNormalTextGlobalTypoType: {
-        type: "string",
+        type: 'string',
         default: 'default',
     },
     animatedHeadingNormalTextGlobalTypoOption: {
-        type: "object",
+        type: 'object',
         default: {label: 'Default', value: 'default'},
     },
     animatedHeadingNormalTextFontFamily: {
-        type: "string",
-        default: "Default",
+        type: 'string',
+        default: 'Default',
     },
     animatedHeadingNormalTextFontSize: {
         type: 'object',
@@ -144,20 +144,20 @@ const attributes = {
         }
     },
     animatedHeadingNormalTextFontWeight : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     animatedHeadingNormalTextFontStyle : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     animatedHeadingNormalTextTransform : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     animatedHeadingNormalTextDecoration : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     animatedHeadingNormalTextLetterSpacing: {
         type: 'object',
@@ -193,39 +193,39 @@ const attributes = {
     },
 
     animatedHeadingNormalTextColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     animatedHeadingNormalTextColor : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     animatedHeadingNormalTextHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
     animatedHeadingNormalTextBgColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     animatedHeadingNormalTextBgColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
     animatedHeadingNormalTextBgColorHover: {
         type: 'string',
-        default: ""
+        default: ''
     },
     /** End Normal Typing Text Style */
 
 
     /** Start animated heading Text Style */
    animatedHeadingAnimationTextGlobalTypographyData: {
-        type: "object",
+        type: 'object',
         default: {}
     },
    animatedHeadingAnimationTextGlobalTypoSwitcher: {
-        type: "object",
+        type: 'object',
         default: {
             fontFamily: false,
             fontSize: false,
@@ -238,16 +238,16 @@ const attributes = {
         },
     },
    animatedHeadingAnimationTextGlobalTypoType: {
-        type: "string",
+        type: 'string',
         default: 'default',
     },
    animatedHeadingAnimationTextGlobalTypoOption: {
-        type: "object",
+        type: 'object',
         default: {label: 'Default', value: 'default'},
     },
    animatedHeadingAnimationTextFontFamily: {
-        type: "string",
-        default: "Default",
+        type: 'string',
+        default: 'Default',
     },
    animatedHeadingAnimationTextFontSize: {
         type: 'object',
@@ -266,20 +266,20 @@ const attributes = {
         }
     },
    animatedHeadingAnimationTextFontWeight : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
    animatedHeadingAnimationTextFontStyle : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
    animatedHeadingAnimationTextTransform : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
    animatedHeadingAnimationTextDecoration : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
    animatedHeadingAnimationTextLetterSpacing: {
         type: 'object',
@@ -314,35 +314,35 @@ const attributes = {
         }
     },
     animatedHeadingAnimationTextColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     animatedHeadingAnimationTextColor : {
-        type: "string",
-        default: "#399CFF"
+        type: 'string',
+        default: '#399CFF'
     },
    animatedHeadingAnimationTextHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
    animatedHeadingAnimationTextBgColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
    animatedHeadingAnimationTextBgColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
    animatedHeadingAnimationTextBgColorHover: {
         type: 'string',
-        default: ""
+        default: ''
     },
     /** End Typing Text Style */
 
 
     /** Start Global Z-Index */
     animatedHeadingGlobalZIndex : {
-        type: "object",
+        type: 'object',
         default: {
             Desktop: '',
             Tablet: '',
@@ -353,32 +353,32 @@ const attributes = {
 
     /** Start Class & ID Setting */
     animatedHeadingGlobalWraperID : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     animatedHeadingGlobalWraperClass : {
-        type: "string",
-        default: ""
+        type: 'string',
+        default: ''
     },
     /** End Class & ID Setting */
     animatedHeadingCustomCSS : {
-        type: "string",
-        default: "",
+        type: 'string',
+        default: '',
     },
 
     /** Start Global Background Color */
 
     animatedHeadingGlobalBgColorSwitcher: {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     animatedHeadingGlobalBgColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
     animatedHeadingGlobalBgColorHover: {
         type: 'string',
-        default: ""
+        default: ''
     },
     /** End Global Background Color */
 
@@ -393,34 +393,34 @@ const attributes = {
         }
     },
     animatedHeadingGlobalDesktopPadding: { 
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     animatedHeadingGlobalTabletPadding: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     animatedHeadingGlobalMobilePadding: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     animatedHeadingGlobalPaddingLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     animatedHeadingGlobalMarginUnits: {
@@ -432,34 +432,34 @@ const attributes = {
         }
     },
     animatedHeadingGlobalDesktopMargin: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     animatedHeadingGlobalTabletMargin: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     animatedHeadingGlobalMobileMargin: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     animatedHeadingGlobalMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     /** End Global Margin & Padding */
@@ -467,19 +467,19 @@ const attributes = {
     /** Start Global Border */
     animatedHeadingGlobalBorder: {
         type: 'string',
-        default: "none",
+        default: 'none',
     },
     animatedHeadingGlobalBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
     animatedHeadingGlobalBorderColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
     animatedHeadingGlobalBorderHoverColor: {
         type: 'string',
-        default: ""
+        default: ''
     },
     animatedHeadingGlobalBorderUnits: {
         type: 'object',
@@ -490,34 +490,34 @@ const attributes = {
         }
     },
     animatedHeadingGlobalDesktopBorder: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     animatedHeadingGlobalTabletBorder: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     animatedHeadingGlobalMobileBorder: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     animatedHeadingGlobalBorderLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     animatedHeadingGlobalBorderRadiusUnits: {
@@ -529,34 +529,34 @@ const attributes = {
         }
     },
     animatedHeadingGlobalDesktopBorderRadius: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     animatedHeadingGlobalTabletBorderRadius: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     animatedHeadingGlobalMobileBorderRadius: {
-        type: "object", 
+        type: 'object', 
         default: {
-            top: "",
-            bottom: "",
-            left: "",
-            right: "",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     animatedHeadingGlobalBorderRadiusLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
     /** End Global Border */

@@ -25,7 +25,6 @@ import {BADGE_ALIGNMENT, BADGE_POSITION, BORDER_STYLES, CARD_WRAP_ALIGNMENT, CON
 
 import SortableItem from './sortableItem.js';
 import FB_Spacing from '@Components/spacing';
-import FB_AlignmentControl from '@Components/alignment-control';
 import FB_Range from '@Components/range';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_ColorControl from '@Components/color-control';
@@ -43,6 +42,7 @@ import FB_VisibilityControl from '@Components/visibility-control';
 import FBIconPicker from '../../components/icon-picker/index.js';
 import FB_ImageControl from '@Components/image-control';
 import FB_InspectorControls from '@Components/InspectorControls';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -2725,9 +2725,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				display: flex;
 				${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentPosition !== 'image' ? 'width: 100%;' : ''}
 				${teamMemberImageWidthUnits.Desktop === '%' ? 'width: 100%;' : ''}
-				${teamMemberImageAlignment === 'left' ? 'justify-content: start' : ''}
-				${teamMemberImageAlignment === 'center' ? 'justify-content: center' : ''}
-				${teamMemberImageAlignment === 'right' ? 'justify-content: end' : ''}
+				${teamMemberImageAlignment.Desktop === 'left' ? 'justify-content: start' : ''}
+				${teamMemberImageAlignment.Desktop === 'center' ? 'justify-content: center' : ''}
+				${teamMemberImageAlignment.Desktop === 'right' ? 'justify-content: end' : ''}
 			}
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image img {
 				${teamMemberImagePosition ? `object-position: ${teamMemberImagePosition};` : ''}
@@ -2848,9 +2848,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-content-wrapper .fb-team-member-content {
-				${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment === 'left' ? 'text-align: left;' : ''}
-				${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment === 'center' ? 'text-align: center;' : ''}
-				${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment === 'right' ? 'text-align: right;' : ''}
+				${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment.Desktop === 'left' ? 'text-align: left;' : ''}
+				${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment.Desktop === 'center' ? 'text-align: center;' : ''}
+				${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment.Desktop === 'right' ? 'text-align: right;' : ''}
 			}
 			
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay {
@@ -2946,9 +2946,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-separator {
 				display: flex;
 				width: 100%;
-				${socialProfileSeparatorAlignment === 'left' ? 'justify-content: start;' : ''}
-				${socialProfileSeparatorAlignment === 'center' ? 'justify-content: center;' : ''}
-				${socialProfileSeparatorAlignment === 'right' ? 'justify-content: end;' : ''}
+				${socialProfileSeparatorAlignment.Desktop === 'left' ? 'justify-content: start;' : ''}
+				${socialProfileSeparatorAlignment.Desktop === 'center' ? 'justify-content: center;' : ''}
+				${socialProfileSeparatorAlignment.Desktop === 'right' ? 'justify-content: end;' : ''}
 			}
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-separator hr {
 				border: none;
@@ -2970,9 +2970,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberSocialIconAnimationType === 'left' ? 'flex-direction: row-reverse;' : ''}
 				${teamMemberSocialIconAnimationType === 'top' ? 'flex-direction: column-reverse;' : ''}
 				${teamMemberSocialIconAnimationType === 'bottom' ? 'flex-direction: column;' : ''}
-				${teamMemberIconsAlignment === 'left' ? 'justify-content: start;' : ''}
-				${teamMemberIconsAlignment === 'center' ? 'justify-content: center;' : ''}
-				${teamMemberIconsAlignment === 'right' ? 'justify-content: end;' : ''}
+				${teamMemberIconsAlignment.Desktop === 'left' ? 'justify-content: start;' : ''}
+				${teamMemberIconsAlignment.Desktop === 'center' ? 'justify-content: center;' : ''}
+				${teamMemberIconsAlignment.Desktop === 'right' ? 'justify-content: end;' : ''}
 				${teamMemberIconsDesktopMarginWidth && teamMemberIconsDesktopMargin.top ? `margin: ${teamMemberIconsDesktopMarginWidth};` : ''}
 				${teamMemberSocialProfileBorder ? `border-style: ${teamMemberSocialProfileBorder};` : ''}
 				${teamMemberSocialProfileDesktopBorder && teamMemberSocialProfileDesktopBorderWidth.top ? `border-width: ${teamMemberSocialProfileDesktopBorder};` : ''}
@@ -3231,8 +3231,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${teamMemberBorderRadiusTabletWidth && teamMemberTabBorderRadiusWidth.top ? `border-radius: ${teamMemberBorderRadiusTabletWidth};` : ''}
 				}
 
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-content-wrapper .fb-team-member-content {
+					${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment.Tablet === 'left' ? 'text-align: left;' : ''}
+					${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment.Tablet === 'center' ? 'text-align: center;' : ''}
+					${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment.Tablet === 'right' ? 'text-align: right;' : ''}
+				}
+
 				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper {
 					${teamMemberImageWidthUnits.Tablet === '%' ? 'width: 100%;' : ''}
+					${teamMemberImageAlignment.Tablet === 'left' ? 'justify-content: start' : ''}
+					${teamMemberImageAlignment.Tablet === 'center' ? 'justify-content: center' : ''}
+					${teamMemberImageAlignment.Tablet === 'right' ? 'justify-content: end' : ''}
 				}
 				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image {
 					${teamMemberImageWidth.Tablet ? `width: ${teamMemberImageWidth.Tablet}${teamMemberImageWidthUnits.Tablet};` : ''}
@@ -3267,6 +3276,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${teamMemberDescMarginGetTab && teamMemberDescMarginTab.top ? `margin: ${teamMemberDescMarginGetTab};` : ''}
 				}
 
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-separator {
+					${socialProfileSeparatorAlignment.Tablet === 'left' ? 'justify-content: start;' : ''}
+					${socialProfileSeparatorAlignment.Tablet === 'center' ? 'justify-content: center;' : ''}
+					${socialProfileSeparatorAlignment.Tablet === 'right' ? 'justify-content: end;' : ''}
+				}
+
 				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-separator hr {
 					${socialProfileSeparatorHeight.Tablet ? `border-top-width: ${socialProfileSeparatorHeight.Tablet}${socialProfileSeparatorHeightUnits.Tablet};` : ''}
 					${socialProfileSeparatorWidth.Tablet ? `width: ${socialProfileSeparatorWidth.Tablet}${socialProfileSeparatorWidthUnits.Tablet};` : ''}
@@ -3276,6 +3291,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-wrapper {
 					${teamMemberIconsTabMarginWidth && teamMemberIconsTabMargin.top ? `margin: ${teamMemberIconsTabMarginWidth};` : ''}
 					${teamMemberSocialProfileTabBorder && teamMemberSocialProfileTabBorderWidth.top ? `border-width: ${teamMemberSocialProfileTabBorder};` : ''}
+					${teamMemberIconsAlignment.Tablet === 'left' ? 'justify-content: start;' : ''}
+					${teamMemberIconsAlignment.Tablet === 'center' ? 'justify-content: center;' : ''}
+					${teamMemberIconsAlignment.Tablet === 'right' ? 'justify-content: end;' : ''}
 				}
 
 				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile {
@@ -3309,8 +3327,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						${teamMemberBorderRadiusMobileWidth && teamMemberMobileBorderRadiusWidth.top ? `border-radius: ${teamMemberBorderRadiusMobileWidth};` : ''}
 					}
 
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-content-wrapper .fb-team-member-content {
+						${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment.Mobile === 'left' ? 'text-align: left;' : ''}
+						${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment.Mobile === 'center' ? 'text-align: center;' : ''}
+						${teamMemberContentPosition !== 'left' && teamMemberContentPosition !== 'right' && teamMemberContentAlignment.Mobile === 'right' ? 'text-align: right;' : ''}
+					}
+
 					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper {
 						${teamMemberImageWidthUnits.Mobile === '%' ? 'width: 100%;' : ''}
+						${teamMemberImageAlignment.Mobile === 'left' ? 'justify-content: start' : ''}
+						${teamMemberImageAlignment.Mobile === 'center' ? 'justify-content: center' : ''}
+						${teamMemberImageAlignment.Mobile === 'right' ? 'justify-content: end' : ''}
 					}
 					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image {
 						${teamMemberImageWidth.Mobile ? `width: ${teamMemberImageWidth.Mobile}${teamMemberImageWidthUnits.Mobile};` : ''}
@@ -3344,6 +3371,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						${teamMemberDescGlobalTypoSwitcher.lineHeight === false && teamMemberDescLineHeight?.Mobile ? `line-height: ${teamMemberDescLineHeight.Mobile}${teamMemberDescLineHeightUnits.Mobile};` : ''}
 						${teamMemberDescMarginGetMobile && teamMemberDescMarginMobile.top ? `margin: ${teamMemberDescMarginGetMobile};` : ''}
 					}
+					
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-separator {
+						${socialProfileSeparatorAlignment.Mobile === 'left' ? 'justify-content: start;' : ''}
+						${socialProfileSeparatorAlignment.Mobile === 'center' ? 'justify-content: center;' : ''}
+						${socialProfileSeparatorAlignment.Mobile === 'right' ? 'justify-content: end;' : ''}
+					}
 
 					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-separator hr {
 						${socialProfileSeparatorHeight.Mobile ? `border-top-width: ${socialProfileSeparatorHeight.Mobile}${socialProfileSeparatorHeightUnits.Mobile};` : ''}
@@ -3354,6 +3387,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-wrapper {
 						${teamMemberIconsMobileMarginWidth && teamMemberIconsMobileMargin.top ? `margin: ${teamMemberIconsMobileMarginWidth};` : ''}
 						${teamMemberSocialProfileMobileBorder && teamMemberSocialProfileMobileBorderWidth.top ? `border-width: ${teamMemberSocialProfileMobileBorder};` : ''}
+						${teamMemberIconsAlignment.Mobile === 'left' ? 'justify-content: start;' : ''}
+						${teamMemberIconsAlignment.Mobile === 'center' ? 'justify-content: center;' : ''}
+						${teamMemberIconsAlignment.Mobile === 'right' ? 'justify-content: end;' : ''}
 					}
 
 					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile {
@@ -3883,10 +3919,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					/>
 
 					{ teamMemberSocialType === 'content' &&
-						<FB_AlignmentControl
+						<FB_ResponsiveAlignmentControl
 							label={__("Alignment", "frontis-blocks")}
 							globalAlignment={teamMemberIconsAlignment}
 							setGlobalAlignment={(value) => setAttributes({ teamMemberIconsAlignment: value })}
+							deviceType={deviceType}
+							setAttributes={setAttributes}
 						/>
 					}
 
@@ -3963,10 +4001,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				initialOpen={true}
 				className="fb-setting-border-setting-wrapper"
 			>
-				<FB_AlignmentControl
+				<FB_ResponsiveAlignmentControl
 					label={__("Alignment", "frontis-blocks")}
 					globalAlignment={teamMemberImageAlignment}
 					setGlobalAlignment={(value) => setAttributes({ teamMemberImageAlignment: value })}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
 				/>
 
 				<FB_Range
@@ -4112,10 +4152,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				title={__("Content", "frontis-blocks")}
 				initialOpen={false}
 			>
-				<FB_AlignmentControl
+				<FB_ResponsiveAlignmentControl
 					label={__("Alignment", "frontis-blocks")}
 					globalAlignment={teamMemberContentAlignment}
 					setGlobalAlignment={(value) => setAttributes({ teamMemberContentAlignment: value })}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
 				/>
 
 				<FB_BackgroundColorControl
@@ -4976,10 +5018,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					title={__("Social Profile Separator", "frontis-blocks")}
 					initialOpen={false}
 				>
-					<FB_AlignmentControl
+					<FB_ResponsiveAlignmentControl
 						label={__("Alignment", "frontis-blocks")}
 						globalAlignment={socialProfileSeparatorAlignment}
 						setGlobalAlignment={(value) => setAttributes({ socialProfileSeparatorAlignment: value })}
+						deviceType={deviceType}
+						setAttributes={setAttributes}
 					/>
 
 					<FB_Range
