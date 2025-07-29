@@ -144,6 +144,7 @@ const attributes = {
     buttonHoverColor: {
         type: 'string',
     },
+
     buttonBgColorSwitcher: {
         type: "string",
         default: "normal"
@@ -155,6 +156,7 @@ const attributes = {
     buttonBgHoverColor: {
         type: 'string',
     },
+
     buttonBorder: {
         type: 'string',
         default: "none",
@@ -660,11 +662,46 @@ const attributes = {
 		type: "string",
 		default: "normal"
 	},
-	buttonGlobalBgColor : {
+	buttonGlobalNormalBackgroundType: { 
 		type: "string",
+		default: "classic",
 	},
-	buttonGlobalBgHoverColor: {
-		type: 'string',
+	buttonGlobalNormalClassicColor: {
+		type: "string",
+		default: "",
+	},
+	buttonGlobalNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	buttonGlobalNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	buttonGlobalNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	buttonGlobalHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	buttonGlobalHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	buttonGlobalHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	buttonGlobalHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	buttonGlobalHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
 	},
 	/** End Background */
 
