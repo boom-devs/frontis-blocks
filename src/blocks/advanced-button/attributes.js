@@ -145,17 +145,53 @@ const attributes = {
         type: 'string',
     },
 
-    buttonBgColorSwitcher: {
-        type: "string",
-        default: "normal"
-    },
-    buttonBgColor: {
-        type: "string",
-        default: "#399CFF"
-    },
-    buttonBgHoverColor: {
-        type: 'string',
-    },
+    /** Start Background */
+    buttonBgColorSwitcher : {
+		type: "string",
+		default: "normal"
+	},
+	buttonNormalBackgroundType: {     
+		type: "string",
+		default: "classic",
+	},
+	buttonNormalClassicColor: {
+		type: "string",
+		default: "#399CFF",
+	},
+	buttonNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	buttonNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	buttonNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	buttonHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	buttonHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	buttonHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	buttonHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	buttonHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Background */
 
     buttonBorder: {
         type: 'string',
@@ -395,18 +431,54 @@ const attributes = {
         default: ""
     },
 
+    /** Start Background */
     buttonIconBgColorSwitcher : {
         type: "string",
         default: "normal"
     },
-    buttonIconBgColor : {
+    buttonIconNormalBackgroundType: {     
         type: "string",
-        default: ""
+        default: "classic",
     },
-    buttonIconBgHoverColor: {
-        type: 'string',
-        default: ""
+    buttonIconNormalClassicColor: {
+        type: "string",
+        default: "",
     },
+    buttonIconNormalGradientColor: {
+        type: "string",
+        default: null,
+    },
+    buttonIconNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    buttonIconNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+
+    buttonIconHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    buttonIconHoverClassicColor: {
+        type: "string",
+        default: "",
+    },
+    buttonIconHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    buttonIconHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    buttonIconHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Background */
+
     buttonIconBorder: {
         type: 'string',
         default: "none",
@@ -499,6 +571,51 @@ const attributes = {
         type : "boolean",
         default: true
     },
+
+    /** Start Icon Padding */
+	buttonIconPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	buttonIconPaddingDesktop: { 
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconPaddingTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconPaddingMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconPaddingLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Icon Padding */
+
+
+
     buttonIconGapSize: {
         type: 'object',
         default: {
