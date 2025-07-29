@@ -10,7 +10,6 @@ use Sabberworm\CSS\CSSList\CSSList;
 use Sabberworm\CSS\OutputFormat;
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\RuleSet\DeclarationBlock;
-use WP_Query;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
