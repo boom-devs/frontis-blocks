@@ -82,3 +82,8 @@ export const BORDER_STYLES = [
 	{ label: __("Outset", "frontis-blocks"), value: "outset" },
 	{ label: __("Ridge", "frontis-blocks"), value: "ridge" },
 ];
+
+export const BACKGROUND_TYPES = [
+	{ label: __('Classic', 'frontis-blocks'), value: 'classic' },
+	{ label: __('Gradient', 'frontis-blocks'), value: 'gradient' },
+];

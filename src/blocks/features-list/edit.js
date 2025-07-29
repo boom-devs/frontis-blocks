@@ -51,23 +51,24 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
                                 {item.FeatureIconAlign !== 'none' && (
                                         <div className="fb-feature-list-icon-box">
-                                            {item.FeatureIconAlign === 'icon' || item.FeatureIconAlign === undefined ? (
-                                                <div className={`fb-feature-list-icon-inner ${FeatureIconShape}`}>
+                                            <div className={`fb-feature-list-icon-inner ${FeatureIconShape}`}>
+                                                {item.FeatureIconAlign === 'icon' || item.FeatureIconAlign === undefined ? (
                                                     <span className="fb-feature-list-icon">
                                                         {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
                                                     </span>
-                                                </div>
-                                            ) : item.FeatureIconAlign === 'image' && item.FeatureIconImageUrl ? (
-                                                <div className={`fb-feature-icon-image-wrapper ${FeatureIconShape}`}>
+                                                    
+                                                ) : item.FeatureIconAlign === 'image' && item.FeatureIconImageUrl ? (
+                                                    <div className={`fb-feature-icon-image-wrapper ${FeatureIconShape}`}>
 
-                                                    <img
-                                                        src={item.FeatureIconImageUrl}
-                                                        alt={item.FeatureIconImageAlt || 'Feature Image'}
-                                                        className="fb-feature-icon-image"
-                                                    />
+                                                        <img
+                                                            src={item.FeatureIconImageUrl}
+                                                            alt={item.FeatureIconImageAlt || 'Feature Image'}
+                                                            className="fb-feature-icon-image"
+                                                        />
 
-                                                </div>
-                                            ) : null}
+                                                    </div>
+                                                ) : null}
+                                            </div>
                                         </div>
                                     )}
                                     
