@@ -26,6 +26,8 @@ class Enqueues {
     public function enqueue_scripts() {
 		$page_name = Helper::get_page_name();
 		$upload_dir = wp_upload_dir();
+		$post = get_post( get_the_ID() );
+		$frontis_used = get_post_meta( get_the_ID(), 'frontis_blocks_used', true );
 
 		if (is_home()) {
 			$page_name = 'home';
@@ -47,15 +49,18 @@ class Enqueues {
 			$page_name = '404';
 		}
 
-		// Check page or post assigned by template
-		$frontis_used = get_post_meta( get_the_ID(), 'frontis_blocks_used', true );
-
-		if(Helper::is_custom_post_type(get_the_ID()) || get_post_type(get_the_ID()) === 'post') {
-			if($frontis_used) {
-				$post = get_post( get_the_ID() );
+		if($frontis_used) {
+			if(Helper::is_custom_post_type(get_the_ID()) || (get_post_type(get_the_ID()) === 'post' && !in_array($page_name, ['home', 'archive']))) {
 				$page_name = $post->post_name;
-			} else {
-				$page_name = get_post_type(get_the_ID());
+			}
+		} else {
+			if(Helper::is_custom_post_type(get_the_ID()) || (get_post_type(get_the_ID()) === 'post' && !in_array($page_name, ['home', 'archive']))) {
+				$assigned_template = get_post_meta(get_the_ID(), '_wp_page_template', true);
+
+				// var_dump($assigned_template);
+				if($assigned_template !== '' && $assigned_template !== 'default') {
+					$page_name = $assigned_template;
+				}
 			}
 		}
 
