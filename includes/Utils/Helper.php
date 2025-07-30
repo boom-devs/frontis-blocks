@@ -123,8 +123,7 @@ class Helper
      * @since 1.11.0
      * @access public
      */
-    public static function get_related_taxonomy()
-    {
+    public static function get_related_taxonomy(){
 
 
         $post_types = self::get_post_types();
