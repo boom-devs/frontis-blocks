@@ -38,8 +38,7 @@ export default function LayoutGrid({
     const title = data.title.rendered;
     const categories = data.fb_category_info;
     const tags = data.fb_post_tag_info;
-    const excerpt = showExcerptSwitcher ? trimWords(data.fb_post_excerpt, postDescriptionExcerptLength || 10) : '';  
-
+    const excerpt = showExcerptSwitcher ? trimWords(data.fb_post_excerpt, postDescriptionExcerptLength || 10) : '';
 
     return (
         <>
