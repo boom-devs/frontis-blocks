@@ -178,10 +178,13 @@ class Helper
 
     public static function get_page_name()
     {
-        global $wp_query;
-        if ($wp_query->queried_object) {
-            return $wp_query->queried_object->post_name;
-        }
+		global $wp_query;
+
+		if ($wp_query->queried_object && isset($wp_query->queried_object->post_name)) {
+			return $wp_query->queried_object->post_name;
+		} else {
+			return $wp_query->queried_object->name;
+		}
     }
 
     public static function remove_css_files()
