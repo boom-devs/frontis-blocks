@@ -94,6 +94,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
 	}
 
+
+    // === Generic taxonomy bases (একবার ডিফাইন করলেই হবে) ===
+    const tax    = FrontisBlocksData?.all_cats?.[postType] || {};
+    const terms  = tax?.terms || {};
+    const tkeys  = Object.keys(terms);
+    const meta   = tax?.taxonomy || {};
+
+    // সম্ভাব্য category / tag কী খুঁজে নিন (খুব সিম্পল নিয়ম)
+    const categoryKey =
+    tkeys.find(k => /(^|[-_])category($|[-_])/i.test(k)) ||
+    tkeys.find(k => meta?.[k]?.hierarchical === true) ||
+    tkeys[0];
+
+    const tagKey =
+    tkeys.find(k => /(^|[-_])(post[-_]?tag|tags?)($|[-_])/i.test(k)) ||
+    tkeys.find(k => meta?.[k]?.hierarchical === false) ||
+    null;
+
+    // REST base নির্ধারণ (ডিফল্ট post-এর জন্য 'categories' / 'tags')
+    const catBase = meta?.[categoryKey]?.rest_base || (categoryKey === 'category' ? 'categories' : categoryKey);
+    const tagBase = tagKey ? (meta?.[tagKey]?.rest_base || (tagKey === 'post_tag' ? 'tags' : tagKey)) : null;
+
     const { useSelect } = wp.data;
 
 	const postLists = useSelect((select) => {
@@ -103,13 +125,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			per_page: -1, // Get all posts
 		};
 
-		if (showFilterByTaxonomy) {
-			if (filterSelectedTaxonomy === 'category') {
-				query.categories = filterCatId !== 0 ? filterCatId : filterSelectedCat;
-			} else if (filterSelectedTaxonomy === 'tag') {
-				query.tags = filterTagId !== 0 ? filterTagId : filterSelectedTag;
-			}
-		}
+        if (showFilterByTaxonomy) {
+            if (filterSelectedTaxonomy === 'category' && catBase) {
+              query[catBase] = filterCatId !== 0 ? filterCatId : filterSelectedCat;
+            } else if (filterSelectedTaxonomy === 'tag' && tagBase) {
+              query[tagBase] = filterTagId !== 0 ? filterTagId : filterSelectedTag;
+            }
+        }
         
         applyOldCategoryTagFilters(query);
         applyAuthorFilters(query);
@@ -139,18 +161,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     * Old Category & Tag Filtering
     */
     function applyOldCategoryTagFilters(query) {
-        // Category Filtering
+        // Category Filtering (generic)
         if (selectedCatSwitcher === 'include' && Array.isArray(selectedCat) && selectedCat.length > 0) {
-            query.categories = selectedCat;
+            if (catBase) query[catBase] = selectedCat;
         } else if (selectedCatSwitcher === 'exclude' && Array.isArray(deSelectedCat) && deSelectedCat.length > 0) {
-            query.categories_exclude = deSelectedCat;
+            if (catBase) query[`${catBase}_exclude`] = deSelectedCat;
         }
-
-        // Tag Filtering
+        
+        // Tag Filtering (generic)
         if (selectedTagSwitcher === 'include' && Array.isArray(selectedTag) && selectedTag.length > 0) {
-            query.tags = selectedTag;
+            if (tagBase) query[tagBase] = selectedTag;
         } else if (selectedTagSwitcher === 'exclude' && Array.isArray(deSelectedTag) && deSelectedTag.length > 0) {
-            query.tags_exclude = deSelectedTag;
+            if (tagBase) query[`${tagBase}_exclude`] = deSelectedTag;
         }
     }
 
