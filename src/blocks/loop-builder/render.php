@@ -39,7 +39,6 @@ function render_loop_builder($block_content, $block) {
 		$postOffset = isset($attributes['postOffset']) ? intval($attributes['postOffset']) : 0;
 
 		// Initialize the output for the frontend
-		$output = '<div class="' . esc_attr($blockId) . ' wp-block-frontis-blocks-loop-builder fb-loop-builder ' . esc_attr($align_class) . '">';
 
 		// Default query arguments
 		$default_query_args = [
@@ -79,12 +78,49 @@ function render_loop_builder($block_content, $block) {
 		// Get the inner blocks of the loop-builder
 		$inner_blocks = isset($block['innerBlocks']) ? $block['innerBlocks'] : [];
 
+
 		$inner_block_attributes = isset($inner_blocks[0]['attrs']) ? $inner_blocks[0]['attrs'] : [];
 
 		$inner_block_id = isset($inner_block_attributes['blockId']) ? $inner_block_attributes['blockId'] : '';
 		$postSwitcher = isset($inner_block_attributes['postSwitcher']) ? $inner_block_attributes['postSwitcher'] : 'grid';
 
+        // Pagination block সংগ্রহ
+        $pagination_block = null;
+        foreach ( $inner_blocks as $ib ) {
+            if ( isset($ib['blockName']) && $ib['blockName'] === 'frontis-blocks/query-pagination' ) {
+                $pagination_block = $ib;
+                break;
+            }
+        }
+
+		// Pagination attributes
+		$pagination_attrs  = $pagination_block['attrs'] ?? [];
+		$layout            = $pagination_attrs['layout'] ?? [];
+		$justify_content   = $layout['justifyContent'] ?? 'flex-start';
+
+		$has_prev = $has_nums = $has_next = false;
+		$pagination_children = $pagination_block['innerBlocks'] ?? [];
+		foreach ( $pagination_children as $child ) {
+			$bn = $child['blockName'] ?? '';
+			if ( $bn === 'frontis-blocks/query-pagination-previous' ) $has_prev = true;
+			if ( $bn === 'frontis-blocks/query-pagination-numbers' )  $has_nums = true;
+			if ( $bn === 'frontis-blocks/query-pagination-next' )     $has_next = true;
+		}
+
+
+		// Wrapper শুরু
+		$output = '<div class="' . esc_attr($blockId) . ' wp-block-frontis-blocks-loop-builder fb-loop-builder ' . esc_attr($align_class) . '">';
 		$output .= '<div class="'. esc_attr($inner_block_id) .' fb-loop-builder-wrapper-main-container '. esc_attr($postSwitcher) .'-layout">';
+
+
+		// Pagination হিসাব
+		$paged     = max( 1, get_query_var('paged') ? (int) get_query_var('paged') : ( (int) get_query_var('page') ) );
+		$per_page  = (int) ( $default_query_args['posts_per_page'] ?? 6 );
+		$calc_offset = max(0, (int) $postOffset ) + ( ($paged - 1) * $per_page );
+
+		$default_query_args['offset']         = $calc_offset;
+		$default_query_args['posts_per_page'] = $per_page;
+		
 
 		// Run the query
 		$query = new WP_Query($default_query_args);
@@ -115,6 +151,73 @@ function render_loop_builder($block_content, $block) {
 		} else {
 			// Fallback content if no posts are found
 			$output .= '<p>No posts found.</p>';
+		}
+
+		// ===== Pagination render =====
+		if ( $pagination_block ) {
+			$total_posts_all = (int) $query->found_posts; // offset ছাড়া মোট
+			$effective_total = max( 0, $total_posts_all - (int) $postOffset );
+			$total_pages     = $per_page > 0 ? (int) ceil( $effective_total / $per_page ) : 1;
+
+			// numbers
+			$number_links = [];
+			if ( $has_nums && $total_pages > 1 ) {
+				$number_links = paginate_links( [
+					'base'      => get_pagenum_link(1) . '%_%',
+					'format'    => ( get_option('permalink_structure') ? 'page/%#%/' : '&paged=%#%' ),
+					'current'   => $paged,
+					'total'     => max(1, $total_pages),
+					'mid_size'  => 2,
+					'end_size'  => 1,
+					'prev_next' => false,
+					'type'      => 'array',
+				] ) ?: [];
+			}
+
+			$prev_url = ( $has_prev && $paged > 1 ) ? get_pagenum_link( $paged - 1 ) : '';
+			$next_url = ( $has_next && $paged < $total_pages ) ? get_pagenum_link( $paged + 1 ) : '';
+
+			// justify-content ক্লাস/স্টাইল (আপনার CSS অনুযায়ী এডজাস্ট করুন)
+			$jc_map = [
+				'center'       => 'justify-center',
+				'flex-end'     => 'justify-end',
+				'space-between'=> 'justify-between',
+				'space-around' => 'justify-around',
+				'space-evenly' => 'justify-evenly',
+				'flex-start'   => 'justify-start',
+			];
+			$jc_class = $jc_map[ $justify_content ] ?? 'justify-start';
+
+			$output .= '<nav class="fb-query-pagination ' . esc_attr( $jc_class ) . '" aria-label="Pagination">';
+
+			if ( $has_prev ) {
+				$output .= '<span class="fb-page-prev'. ( $prev_url ? '' : ' is-disabled' ) .'">';
+				if ( $prev_url ) {
+					$output .= '<a href="' . esc_url( $prev_url ) . '" rel="prev" aria-label="Previous page">&laquo; Previous</a>';
+				} else {
+					$output .= '<span aria-disabled="true">&laquo; Previous</span>';
+				}
+				$output .= '</span>';
+			}
+
+			if ( $has_nums && !empty($number_links) ) {
+				$output .= '<span class="fb-page-numbers">';
+				// paginate_links() ইতোমধ্যে <a> / <span class="current"> বানিয়ে দেয়
+				$output .= implode( '', $number_links );
+				$output .= '</span>';
+			}
+
+			if ( $has_next ) {
+				$output .= '<span class="fb-page-next'. ( $next_url ? '' : ' is-disabled' ) .'">';
+				if ( $next_url ) {
+					$output .= '<a href="' . esc_url( $next_url ) . '" rel="next" aria-label="Next page">Next &raquo;</a>';
+				} else {
+					$output .= '<span aria-disabled="true">Next &raquo;</span>';
+				}
+				$output .= '</span>';
+			}
+
+			$output .= '</nav>';
 		}
 
 		// Close the wrapper
