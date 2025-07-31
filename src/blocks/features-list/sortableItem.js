@@ -97,12 +97,14 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                         label={__("Title", "frontis-blocks")}
                         value={item.Title}
                         onChange={(value) => handleChangeItem(item.id, 'Title', value)}
+                        help={__("Leave blank to hide Title", "frontis-blocks")}
                     />
 
                     <TextareaControl
                         label={__("Description", "frontis-blocks")}
                         value={item.Description}
                         onChange={(value) => handleChangeItem(item.id, 'Description', value)}
+                        help={__("Leave blank to hide Description", "frontis-blocks")}
                     />
 
                     <div className='fb-feature-icon-wrapper'>

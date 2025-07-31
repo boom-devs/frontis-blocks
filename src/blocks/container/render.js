@@ -110,9 +110,7 @@ const Render = ( props ) => {
 						<InnerBlocks { ...innerBlocksParams } />
 					</div>
 				) : (
-					<div className={`frontis-blocks-container-inner-child-blocks-wrap ${containerGlobalCustomCSSClass}`} id={containerGlobalCustomCSSID}>
-						<InnerBlocks { ...innerBlocksParams } />
-					</div>
+					<InnerBlocks { ...innerBlocksParams } />
 				) }
 			</Tag>
 		</>
