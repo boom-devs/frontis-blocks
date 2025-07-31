@@ -91,12 +91,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		/** Start Background */
 		buttonBgColorSwitcher,
 		buttonNormalBackgroundType,
-		buttonNormalClassicColor,
+		buttonBgColor,
 		buttonNormalGradientColor,
 		buttonNormalCustomGradientSwitcher,
 		buttonNormalCustomGradientInputValue,
 		buttonHoverBackgroundType,
-		buttonHoverClassicColor,
+		buttonBgHoverColor,
 		buttonHoverGradientColor,
 		buttonHoverCustomGradientSwitcher,
 		buttonHoverCustomGradientInputValue,
@@ -1256,7 +1256,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${buttonNormalBackgroundType === 'gradient' ? `   	
                 ${buttonNormalCustomGradientSwitcher && buttonNormalCustomGradientInputValue ? `background: ${buttonNormalCustomGradientInputValue};` : `background: ${buttonNormalGradientColor};`}
             `: `
-                ${buttonNormalClassicColor ? `background: ${buttonNormalClassicColor};` : ''}
+                ${buttonBgColor ? `background: ${buttonBgColor};` : ''}
             `}
 			${buttonDesktopPaddingStr && buttonDesktopPadding?.top ? `padding: ${buttonDesktopPaddingStr};` : ''}
 			${buttonDesktopMarginStr && buttonDesktopMargin?.top ? `margin: ${buttonDesktopMarginStr};` : ''}
@@ -1275,7 +1275,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${buttonHoverBackgroundType === 'gradient' ? `   	
                 ${buttonHoverCustomGradientSwitcher && buttonHoverCustomGradientInputValue ? `background: ${buttonHoverCustomGradientInputValue};` : `background: ${buttonHoverGradientColor};`}
             `: `
-                ${buttonHoverClassicColor ? `background: ${buttonHoverClassicColor};` : ''}
+                ${buttonBgHoverColor ? `background: ${buttonBgHoverColor};` : ''}
             `}
 			${buttonBoxShadowHoverCssValue ? `box-shadow: ${buttonBoxShadowHoverCssValue};` : ''} 
 		}
@@ -1605,12 +1605,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		/** Start Background */
 		buttonBgColorSwitcher,
 		buttonNormalBackgroundType,
-		buttonNormalClassicColor,
+		buttonBgColor,
 		buttonNormalGradientColor,
 		buttonNormalCustomGradientSwitcher,
 		buttonNormalCustomGradientInputValue,
 		buttonHoverBackgroundType,
-		buttonHoverClassicColor,
+		buttonBgHoverColor,
 		buttonHoverGradientColor,
 		buttonHoverCustomGradientSwitcher,
 		buttonHoverCustomGradientInputValue,
@@ -1922,8 +1922,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					
 					normalBackgroundType={buttonNormalBackgroundType} 
 					setNormalBackgroundType={(value) => setAttributes({ buttonNormalBackgroundType: value })}
-					normalClassicColor={buttonNormalClassicColor}
-					setNormalClassicColor={(value) => setAttributes({ buttonNormalClassicColor: value })}
+					normalClassicColor={buttonBgColor}
+					setNormalClassicColor={(value) => setAttributes({ buttonBgColor: value })}
 					normalGradientColor={buttonNormalGradientColor}
 					setNormalGradientColor={(value) => setAttributes({ buttonNormalGradientColor: value })}
 					normalCustomGradientSwitcher={buttonNormalCustomGradientSwitcher}
@@ -1933,8 +1933,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					
 					hoverBackgroundType={buttonHoverBackgroundType} 
 					setHoverBackgroundType={(value) => setAttributes({ buttonHoverBackgroundType: value })}
-					hoverClassicColor={buttonHoverClassicColor}
-					setHoverClassicColor={(value) => setAttributes({ buttonHoverClassicColor: value })}
+					hoverClassicColor={buttonBgHoverColor}
+					setHoverClassicColor={(value) => setAttributes({ buttonBgHoverColor: value })}
 					hoverGradientColor={buttonHoverGradientColor} 
 					setHoverGradientColor={(value) => setAttributes({ buttonHoverGradientColor: value })}
 					hoverCustomGradientSwitcher={buttonHoverCustomGradientSwitcher}
