@@ -441,40 +441,20 @@ class Admin {
         );
     }
 
-    // public function get_post_category_info($object, $field_name, $request) {
-    //     $categories = get_the_category($object['id']);
-
-    //     if (empty($categories)) {
-    //         return [];
-    //     }
-
-    //     // Map the categories to include detailed information
-    //     return array_map(function ($category) {
-    //         return array(
-    //             'id'   => $category->term_id,
-    //             'name' => $category->name,
-    //             'slug' => $category->slug,
-    //             'url' => get_category_link($category->term_id),
-    //         );
-    //     }, $categories);
-    // }
-
     public function get_post_category_info( $object, $field_name, $request ) {
         $post_id   = $object['id'];
         $post_type = get_post_type( $post_id );
     
-        // এই পোস্ট টাইপে যুক্ত সব ট্যাক্সোনমি (অবজেক্ট সহ)
         $tax_objects = get_object_taxonomies( $post_type, 'objects' );
     
-        // কোনটা "category-like"—প্রথমে ডিফল্ট 'category' প্রাধান্য দিন
         $category_tax = null;
         foreach ( $tax_objects as $tax ) {
-            if ( $tax->name === 'category' ) { // ডিফল্ট ক্যাটাগরি থাকলে সেটাই
+            if ( $tax->name === 'category' ) {
                 $category_tax = 'category';
                 break;
             }
         }
-        // না পাওয়া গেলে—নামের মধ্যে "category" আছে এমন বা hierarchical ট্যাক্সোনমি নিন
+
         if ( ! $category_tax ) {
             foreach ( $tax_objects as $tax ) {
                 if ( strpos( $tax->name, 'category' ) !== false || ! empty( $tax->hierarchical ) ) {
@@ -485,7 +465,7 @@ class Admin {
         }
     
         if ( ! $category_tax ) {
-            return []; // এই পোস্ট টাইপে কোনো "ক্যাটাগরি-জাতীয়" ট্যাক্সোনমি নেই
+            return [];
         }
     
         $terms = get_the_terms( $post_id, $category_tax );
@@ -503,46 +483,21 @@ class Admin {
             ];
         }, $terms );
     }
-    
-
-    // public function get_post_post_tag_info($object, $field_name, $request) {
-    //     // Get the tags associated with the post
-    //     $tags = get_the_tags($object['id']);
-
-    //     // Prepare a formatted array of tag information
-    //     if (!empty($tags) && is_array($tags)) {
-    //         $tag_info = array_map(function($tag) {
-    //             return array(
-    //                 'id'    => $tag->term_id,
-    //                 'name'  => $tag->name,
-    //                 'slug'  => $tag->slug,
-    //                 'url'   => get_tag_link($tag->term_id),
-    //             );
-    //         }, $tags);
-    //     } else {
-    //         $tag_info = array();
-    //     }
-
-    //     return $tag_info;
-    // }
 
     public function get_post_post_tag_info( $object, $field_name, $request ) {
         $post_id   = $object['id'];
         $post_type = get_post_type( $post_id );
     
-        // এই পোস্ট টাইপে যুক্ত সব ট্যাক্সোনমি (অবজেক্ট সহ)
         $tax_objects = get_object_taxonomies( $post_type, 'objects' );
     
-        // কোনটা "tag-like"—প্রথমে ডিফল্ট 'post_tag' প্রাধান্য দিন (যদি থাকে)
         $tag_tax = null;
         foreach ( $tax_objects as $tax ) {
-            if ( $tax->name === 'post_tag' ) { // ডিফল্ট ট্যাগ থাকলে সেটাই
+            if ( $tax->name === 'post_tag' ) {
                 $tag_tax = 'post_tag';
                 break;
             }
         }
     
-        // না পাওয়া গেলে—নামের মধ্যে "tag" আছে এমন বা non-hierarchical (tag-জাতীয়) ট্যাক্সোনমি নিন
         if ( ! $tag_tax ) {
             foreach ( $tax_objects as $tax ) {
                 if ( strpos( $tax->name, 'tag' ) !== false || empty( $tax->hierarchical ) ) {
@@ -552,18 +507,15 @@ class Admin {
             }
         }
     
-        // এই পোস্ট টাইপে কোনো "ট্যাগ-জাতীয়" ট্যাক্সোনমি নেই
         if ( ! $tag_tax ) {
             return [];
         }
     
-        // টার্মগুলি নিন
         $terms = get_the_terms( $post_id, $tag_tax );
         if ( empty( $terms ) || is_wp_error( $terms ) ) {
             return [];
         }
     
-        // বিস্তারিত দিয়ে ম্যাপ করুন (get_term_link ব্যবহার করুন—সব ট্যাক্সোনমির জন্য সেফ)
         return array_map( function( $term ) use ( $tag_tax ) {
             $url = get_term_link( $term, $tag_tax );
             if ( is_wp_error( $url ) ) {
@@ -579,7 +531,6 @@ class Admin {
         }, $terms );
     }
 
-    // আগে ছিল: function fb_resolve_category_tax_for_post( $post_id ) { ... }
     public function fb_resolve_category_tax_for_post( $post_id ) {
         $post_type   = get_post_type( $post_id );
         $tax_objects = get_object_taxonomies( $post_type, 'objects' );
@@ -595,7 +546,6 @@ class Admin {
         return null;
     }
 
-    // আগে ছিল: function fb_resolve_tag_tax_for_post( $post_id ) { ... }
     public function fb_resolve_tag_tax_for_post( $post_id ) {
         $post_type   = get_post_type( $post_id );
         $tax_objects = get_object_taxonomies( $post_type, 'objects' );
@@ -614,11 +564,6 @@ class Admin {
 
 	/**
 	 * Get excerpt for the rest field
-	 *
-	 * @param object $object Post Object.
-	 * @param string $field_name Field name.
-	 * @param object $request Request Object.
-	 * @since 0.0.1
 	 */
 	public function get_post_excerpt( $object, $field_name, $request ) {
 		$excerpt = wp_trim_words( get_the_excerpt( $object['id'] ) );
@@ -630,11 +575,6 @@ class Admin {
 
 	/**
 	 * Get featured image source for the rest field as per size
-	 *
-	 * @param object $object Post Object.
-	 * @param string $field_name Field name.
-	 * @param object $request Request Object.
-	 * @since 0.0.1
 	 */
 	public function get_post_img_src( $object, $field_name, $request ) {
 		$image_sizes = Helper::get_image_sizes();
@@ -724,6 +664,9 @@ class Admin {
         $author_link_switcher = isset($_POST['authorLinkSwitcher']) ? $_POST['authorLinkSwitcher'] : true;
         $title_link_switcher = isset($_POST['titleLinkSwitcher']) ? $_POST['titleLinkSwitcher'] : true;
 
+        $category_key = isset($_POST['categoryKey']) ? $_POST['categoryKey'] : 'category';
+        $tag_key = isset($_POST['tagKey']) ? $_POST['tagKey'] : 'post_tag';
+
 
         ob_start();
 
@@ -743,7 +686,7 @@ class Admin {
                 SELECT object_id
                 FROM {$wpdb->term_relationships} AS tr
                 INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-                WHERE tt.taxonomy = 'category' AND tt.term_id IN ($placeholders)
+                WHERE tt.taxonomy = '{$category_key}' AND tt.term_id IN ($placeholders)
             )", $category_ids);
         }
         /** End Selected post category */
@@ -756,7 +699,7 @@ class Admin {
                 SELECT object_id
                 FROM {$wpdb->term_relationships} AS tr
                 INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-                WHERE tt.taxonomy = 'category' AND tt.term_id IN ($placeholders)
+                WHERE tt.taxonomy = '{$category_key}' AND tt.term_id IN ($placeholders)
             )", $deselected_post_category_ids);
         }
         /** End Deselected post category */
@@ -769,7 +712,7 @@ class Admin {
                 SELECT object_id
                 FROM {$wpdb->term_relationships} AS tr
                 INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-                WHERE tt.taxonomy = 'post_tag' AND tt.term_id IN ($placeholders)
+                WHERE tt.taxonomy = '{$tag_key}' AND tt.term_id IN ($placeholders)
             )", $post_tag_ids);
         }
         /** End Selected post tag */
@@ -782,7 +725,7 @@ class Admin {
                 SELECT object_id
                 FROM {$wpdb->term_relationships} AS tr
                 INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-                WHERE tt.taxonomy = 'post_tag' AND tt.term_id IN ($placeholders)
+                WHERE tt.taxonomy = '{$tag_key}' AND tt.term_id IN ($placeholders)
             )", $deselected_post_tag_ids);
         }
         /** End Deselected post tag */
@@ -1454,9 +1397,6 @@ class Admin {
 
         wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.css', array(), '1.0.0');
 
-		// // Dynamic content js
-		// wp_enqueue_script('frontis-blocks-dynamic-content', FB_PLUGIN_URL . 'assets/admin/dynamicContent.js', $script_asset['dependencies'], '1.0.0', true);
-		// wp_enqueue_style('frontis-blocks-dynamic-content', FB_PLUGIN_URL . 'assets/admin/style-dynamicContent.css', array(), '1.0.0');
 	}
 
     public function register_block_assets_in_site_editor() {

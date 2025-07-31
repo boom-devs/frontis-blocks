@@ -20,6 +20,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		premadeStyle,
 		postType,
 		postPerPage,
+        categoryKey,
+        tagKey,
 		selectedCatSwitcher,
 		selectedCat,
 		deSelectedCat,
@@ -95,26 +97,32 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}
 
 
-    // === Generic taxonomy bases (একবার ডিফাইন করলেই হবে) ===
+    /**
+     * Get taxonomy data
+     */
     const tax    = FrontisBlocksData?.all_cats?.[postType] || {};
     const terms  = tax?.terms || {};
     const tkeys  = Object.keys(terms);
     const meta   = tax?.taxonomy || {};
 
-    // সম্ভাব্য category / tag কী খুঁজে নিন (খুব সিম্পল নিয়ম)
-    const categoryKey =
+    /**
+     * Get category and tag keys
+     */
+    const category_Key =
     tkeys.find(k => /(^|[-_])category($|[-_])/i.test(k)) ||
     tkeys.find(k => meta?.[k]?.hierarchical === true) ||
     tkeys[0];
 
-    const tagKey =
+    const tag_Key =
     tkeys.find(k => /(^|[-_])(post[-_]?tag|tags?)($|[-_])/i.test(k)) ||
     tkeys.find(k => meta?.[k]?.hierarchical === false) ||
     null;
 
-    // REST base নির্ধারণ (ডিফল্ট post-এর জন্য 'categories' / 'tags')
-    const catBase = meta?.[categoryKey]?.rest_base || (categoryKey === 'category' ? 'categories' : categoryKey);
-    const tagBase = tagKey ? (meta?.[tagKey]?.rest_base || (tagKey === 'post_tag' ? 'tags' : tagKey)) : null;
+    /**
+     * Get REST base
+     */
+    const catBase = meta?.[category_Key]?.rest_base || (category_Key === 'category' ? 'categories' : category_Key);
+    const tagBase = tag_Key ? (meta?.[tag_Key]?.rest_base || (tag_Key === 'post_tag' ? 'tags' : tag_Key)) : null;
 
     const { useSelect } = wp.data;
 
@@ -122,7 +130,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		const query = {
 			orderby: orderBy,
 			order: sortOrder,
-			per_page: -1, // Get all posts
+			per_page: -1,
 		};
 
         if (showFilterByTaxonomy) {
@@ -133,7 +141,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             }
         }
         
-        applyOldCategoryTagFilters(query);
+        applyCategoryTagFilters(query);
         applyAuthorFilters(query);
 
 		return select('core').getEntityRecords('postType', postType, query);
@@ -158,9 +166,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     ]);
     
     /**
-    * Old Category & Tag Filtering
+    * Category & Tag Filtering
     */
-    function applyOldCategoryTagFilters(query) {
+    function applyCategoryTagFilters(query) {
         // Category Filtering (generic)
         if (selectedCatSwitcher === 'include' && Array.isArray(selectedCat) && selectedCat.length > 0) {
             if (catBase) query[catBase] = selectedCat;
@@ -175,6 +183,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             if (tagBase) query[`${tagBase}_exclude`] = deSelectedTag;
         }
     }
+
+    /**
+     * Set categoryKey and tagKey
+     */
+    useEffect(() => {
+        const isValidCategory = category_Key !== undefined && category_Key !== '';
+        const isValidTag = tag_Key !== undefined && tag_Key !== '';
+    
+        if (isValidCategory || isValidTag) {
+            setAttributes({
+                ...(isValidCategory && { categoryKey: category_Key }),
+                ...(isValidTag && { tagKey: tag_Key }),
+            });
+        }
+    }, [category_Key, tag_Key]);
 
     /**
      * Author Filtering
