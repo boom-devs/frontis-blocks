@@ -8,6 +8,11 @@ const attributes = {
         default: ""
     },
 
+	postSwitcher: {
+		type: "string",
+		default: "grid"
+	},
+
     gridColumnsPerSection: {
 		type: "object",
 		default: {
@@ -55,14 +60,6 @@ const attributes = {
 			Desktop: "30",
 			Tablet: "30",
 			Mobile: "30"
-		}
-	},
-	listImageSpacing: {
-		type: "object",
-		default: {
-			Desktop: "40",
-			Tablet: "30",
-			Mobile: "0"
 		}
 	},
 

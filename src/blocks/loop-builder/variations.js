@@ -32,7 +32,8 @@ const variations = [
 						[ [ 'frontis-blocks/advanced-heading' ] ],
 					],
 				],
-			]
+			],
+			[ 'frontis-blocks/query-pagination' ]
 		],
 		scope: [ 'block' ],
 	},
