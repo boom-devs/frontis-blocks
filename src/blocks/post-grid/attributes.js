@@ -25,6 +25,15 @@ const attributes = {
 		default: 6
 	},
 
+	categoryKey: {
+		type: 'string',
+		default: 'category'
+	},
+	tagKey: {
+		type: 'string',
+		default: 'post_tag'
+	},
+
 	postSwitcher: {
 		type: 'string',
 		default: 'grid'

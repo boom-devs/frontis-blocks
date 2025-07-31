@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontis-blocks/query-pagination",
+	"title": "Pagination",
+	"category": "frontis-blocks",
+	"ancestor": [ "frontis-blocks/loop-builder" ], 
+	"allowedBlocks": [
+		"frontis-blocks/query-pagination-previous",
+		"frontis-blocks/query-pagination-numbers",
+		"frontis-blocks/query-pagination-next"
+	],
+	"description": "Displays a paginated navigation to next/previous set of posts, when applicable.",
+	"textdomain": "frontis-blocks",
+	"usesContext": [ "queryId", "query" ],
+	"providesContext": {
+		"paginationArrow": "paginationArrow",
+		"showLabel": "showLabel"
+	},
+	"supports": {
+		"anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false,
+		"html": false,
+		"layout": {
+			"allowSwitching": false,
+			"allowInheriting": false,
+			"default": {
+				"type": "flex"
+			}
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}
