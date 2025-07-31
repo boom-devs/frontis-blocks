@@ -693,11 +693,11 @@ class AssetsGenerator
 
 		if (!empty($css_files)) {
 			foreach ($css_files as $key => $css_file) {
-				if (basename($css_file) === 'swiper-bundle.min.css' &&
-					!in_array('frontis-blocks/slider', $this->used_blocks) &&
-					!in_array('frontis-blocks/marquee-carousel', $this->used_blocks)) {
-					continue;
-				}
+//				if (basename($css_file) === 'swiper-bundle.min.css' &&
+//					!in_array('frontis-blocks/slider', $this->used_blocks) &&
+//					!in_array('frontis-blocks/marquee-carousel', $this->used_blocks)) {
+//					continue;
+//				}
 
 				$this->css_content .= file_get_contents($css_file) . "\n";
 			}
@@ -709,11 +709,11 @@ class AssetsGenerator
 
 		if (!empty($js_files)) {
 			foreach ($js_files as $key => $js_file) {
-				if (basename($css_file) === 'swiper-bundle.min.css' &&
-					!in_array('frontis-blocks/slider', $this->used_blocks) &&
-					!in_array('frontis-blocks/marquee-carousel', $this->used_blocks)) {
-					continue;
-				}
+//				if (basename($css_file) === 'swiper-bundle.min.css' &&
+//					!in_array('frontis-blocks/slider', $this->used_blocks) &&
+//					!in_array('frontis-blocks/marquee-carousel', $this->used_blocks)) {
+//					continue;
+//				}
 
 				if(!in_array('frontis-blocks/advanced-video', $this->used_blocks) && basename($js_file) === 'react-player.standalone.min.js') {
 					continue;
