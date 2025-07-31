@@ -2607,7 +2607,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};` : ""}
             ${fluentFormCheckBoxBorderRadiusDesktopWidth && fluentFormCheckBoxBorderRadiusDesktop.top? `border-radius: ${fluentFormCheckBoxBorderRadiusDesktopWidth};` : ""}
             position: relative;
+<<<<<<< HEAD
             
+=======
+>>>>>>> 5a2d3ecdc00a9180d55d6a27128a1113bb93d6b8
             transition: all .3s ease-in-out;   
         } 
         .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="radio"] {
@@ -2618,7 +2621,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};` : ""}
             ${fluentFormRadioBorderRadiusDesktopWidth && fluentFormRadioBorderRadiusDesktop.top ? `border-radius: ${fluentFormRadioBorderRadiusDesktopWidth};` : ""}
             position: relative;
+<<<<<<< HEAD
             
+=======
+>>>>>>> 5a2d3ecdc00a9180d55d6a27128a1113bb93d6b8
             transition: all .3s ease-in-out;   
         }
         .${blockID}.fb-fluent-form-wrapper input[type="checkbox"]:checked:before,
@@ -2904,7 +2910,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Tablet}${fluentFormRadioBorderWidthUnits.Tablet};` : ""}
                 ${fluentFormCheckBoxBorderRadiusTabletWidth && fluentFormCheckBoxBorderRadiusTablet.top? `border-radius: ${fluentFormCheckBoxBorderRadiusTabletWidth};` : ""}
                 position: relative;
+<<<<<<< HEAD
                 
+=======
+>>>>>>> 5a2d3ecdc00a9180d55d6a27128a1113bb93d6b8
                 transition: all .3s ease-in-out;   
             } 
             .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="radio"] {
@@ -2915,7 +2924,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Tablet}${fluentFormRadioBorderWidthUnits.Tablet};` : ""}
                 ${fluentFormRadioBorderRadiusTabletWidth && fluentFormRadioBorderRadiusTablet.top? `border-radius: ${fluentFormRadioBorderRadiusTabletWidth};` : ""}
                 position: relative;
+<<<<<<< HEAD
                 
+=======
+>>>>>>> 5a2d3ecdc00a9180d55d6a27128a1113bb93d6b8
                 transition: all .3s ease-in-out;   
             }
             .${blockID}.fb-fluent-form-wrapper input[type="checkbox"]:checked:before,
@@ -3152,7 +3164,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Mobile}${fluentFormRadioBorderWidthUnits.Mobile};` : ""}
                 ${fluentFormCheckBoxBorderRadiusMobileWidth && fluentFormCheckBoxBorderRadiusMobile.top? `border-radius: ${fluentFormCheckBoxBorderRadiusMobileWidth};` : ""}
                 position: relative;
+<<<<<<< HEAD
                 
+=======
+>>>>>>> 5a2d3ecdc00a9180d55d6a27128a1113bb93d6b8
                 transition: all .3s ease-in-out;   
             } 
             .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="radio"] {
@@ -3163,7 +3178,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Mobile}${fluentFormRadioBorderWidthUnits.Mobile};` : ""}
                 ${fluentFormRadioBorderRadiusMobileWidth && fluentFormRadioBorderRadiusMobile.top? `border-radius: ${fluentFormRadioBorderRadiusMobileWidth};` : ""}
                 position: relative;
+<<<<<<< HEAD
                 
+=======
+>>>>>>> 5a2d3ecdc00a9180d55d6a27128a1113bb93d6b8
                 transition: all .3s ease-in-out;   
             }
             .${blockID}.fb-fluent-form-wrapper input[type="checkbox"]:checked:before,

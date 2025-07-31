@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontis-blocks/query-pagination-previous",
+	"title": "Previous Page",
+	"category": "frontis-blocks",
+	"parent": [ "frontis-blocks/query-pagination" ],
+	"description": "Displays the previous posts page link.",
+	"textdomain": "frontis-blocks",
+	"usesContext": [
+		"queryId",
+		"query",
+		"paginationArrow",
+		"showLabel",
+		"enhancedPagination"
+	],
+	"supports": {
+        "anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

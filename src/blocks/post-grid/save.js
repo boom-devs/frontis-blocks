@@ -9,6 +9,8 @@ export default function save({ attributes }) {
 		postPerPage,
 		selectedCat,
 		placeholders,
+		categoryKey,
+		tagKey,
 		deSelectedCat,
 		selectedTag,
 		deSelectedTag,
@@ -108,6 +110,8 @@ export default function save({ attributes }) {
 				data-post-type={postType}
 				data-block-id={blockId}
 				data-perpage={postPerPage}
+				data-category-key={categoryKey}
+				data-tag-key={tagKey}
 				data-cat={selectedCat ? selectedCat.join(',') : ''}
 				data-decat={deSelectedCat ? deSelectedCat.join(',') : ''}
 				data-tag={selectedTag ? selectedTag.join(',') : ''}

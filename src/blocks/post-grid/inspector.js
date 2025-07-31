@@ -874,15 +874,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }));
     /** End image size */
 
-    /** Start category */
-	const allTaxs = FrontisBlocksData.all_cats;
-	const allTaxonomies = allTaxs[postType];
-    /** End Taxonomies Options */   
+    // /** Start category */
+	// const allTaxs = FrontisBlocksData.all_cats;
+	// const allTaxonomies = allTaxs[postType];
+    // /** End Taxonomies Options */   
 
-	const taxOptions = allTaxonomies?.terms?.category?.map(item => ({
-		value: item.id,
-		label: item.name
-	})) || [];
+    // console.log(allTaxonomies);
+
+	// const taxOptions = allTaxonomies?.terms?.category?.map(item => ({
+	// 	value: item.id,
+	// 	label: item.name
+	// })) || [];
+
+    // console.log(taxOptions);
+
+
+    /** Start: build filterTaxOptions generically for any post type */
+    const allTaxs = FrontisBlocksData?.all_cats || {};
+    const allTaxonomies = allTaxs?.[postType] || {};   // postType = 'post', 'case-studies', ইত্যাদি
+
+    const termsObj = allTaxonomies?.terms || {};
+    const termKeys = Object.keys(termsObj);
+
+    // 1) category-সদৃশ কী খুঁজুন (যেমন 'category', 'case-study-category')
+    let categoryKey =
+    termKeys.find(k => /(^|[-_])category($|[-_])/i.test(k)) // সবচেয়ে নির্ভুল
+    ?? termKeys.find(k => /category|cat/i.test(k))          // একটু ঢিলা
+    ?? termKeys[0];                                         // ফallback
+
+    // 2) যদি একাধিক ট্যাক্সোনমি থাকে, তাহলে হায়ারার্কিকাল (parent/child) ট্যাক্সোনমি প্রাধান্য দিন
+    // NOTE: আপনার current ডেটায় taxonomy object না থাকলে এটা স্কিপ হবে
+    if (!categoryKey && allTaxonomies?.taxonomy) {
+    const hierarchicalKey = termKeys.find(
+        k => allTaxonomies.taxonomy?.[k]?.hierarchical === true
+    );
+    if (hierarchicalKey) categoryKey = hierarchicalKey;
+    }
+
+    // 3) টার্ম লিস্টকে অপশনে রূপান্তর করুন (id/term_id এবং name/label—দুটোরই সাপোর্ট)
+    const rawTerms = termsObj?.[categoryKey] || [];
+    const taxOptions = rawTerms.map(t => ({
+    value: t.id ?? t.term_id ?? t.termId,
+    label: t.name ?? t.label ?? t.slug
+    }));
 
     const filterTaxOptions = [
         { value: 0, label: 'All' },
@@ -914,19 +948,50 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const [filterSelectedOption, setFilterSelectedOption] = useState(createFilterOptionFromCategory(filterSelectedCat));
     const handleFilterCategoryChange = updateCategorySelection(setFilterSelectedOption, 'filterSelectedCat');
     /** End Filter Category */
+
+        // Generate filter tab array
+        useEffect(() => {
+            // Filter and return full objects
+            if(filterTaxOptions.length > 0) {
+                const result = filterTaxOptions.filter(item => filterSelectedCat.includes(item.value));
+                setAttributes({
+                    filterSelectedCatLabel: result
+                })
+            }
+        }, [filterSelectedCat]);
     /** End category */
 
-    /** Start tag */
-    const tagOptions = allTaxonomies?.terms?.post_tag?.map(item => ({
-        value: item.id,
-        label: item.name
-    })) || [];
+    // /** Start tag */
+    // const tagOptions = allTaxonomies?.terms?.post_tag?.map(item => ({
+    //     value: item.id,
+    //     label: item.name
+    // })) || [];
 
 
+    // const filterTagOptions = [
+    //     { value: 0, label: 'All' },
+    //     ...tagOptions
+    // ];
+
+    // 1) ট্যাগ-সদৃশ কী খুঁজুন (post_tag / tag / tags), নাহলে non-hierarchical নিন
+    let tagKey =
+    termKeys.find(k => /(^|[-_])(post[-_]?tag|tags?)($|[-_])/i.test(k))
+    ?? termKeys.find(k => allTaxonomies?.taxonomy?.[k]?.hierarchical === false)
+    ?? null;
+
+    // 2) টার্ম লিস্ট -> অপশন (id/term_id/termId এবং name/label/slug সাপোর্ট)
+    const rawTagTerms = (tagKey && termsObj?.[tagKey]) || [];
+    const tagOptions = rawTagTerms.map(t => ({
+    value: t.id ?? t.term_id ?? t.termId ?? t.slug ?? t.name,
+    label: t.name ?? t.label ?? t.slug ?? String(t.id ?? t.term_id ?? t.termId ?? '')
+    }));
+
+    // 3) category-এর মতোই 'All' যোগ করে ফাইনাল ফিল্টার অপশন বানানো
     const filterTagOptions = [
-        { value: 0, label: 'All' },
-        ...tagOptions
+    { value: 0, label: 'All' },
+    ...tagOptions
     ];
+    /** End: tagOptions */
 
     const createOptionFromTag = (tagIds) => tagIds.map(tagId => ({
         value: tagId,
@@ -959,13 +1024,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     // Generate filter tab array
     useEffect(() => {
-        // Filter and return full objects
-        if(filterTaxOptions.length > 0) {
-            const result = filterTaxOptions.filter(item => filterSelectedCat.includes(item.value));
-            setAttributes({
-                filterSelectedCatLabel: result
-            })
-        }
 
         if(filterTagOptions.length > 0) {
             const result = filterTagOptions.filter(item => filterSelectedTag.includes(item.value));
@@ -973,7 +1031,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 filterSelectedTagLabel: result
             })
         }
-    }, [filterSelectedCat, filterSelectedTag]);
+    }, [filterSelectedTag]);
 
 
 

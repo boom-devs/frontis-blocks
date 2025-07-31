@@ -441,53 +441,129 @@ class Admin {
         );
     }
 
-    public function get_post_category_info($object, $field_name, $request) {
-        $categories = get_the_category($object['id']);
+    public function get_post_category_info( $object, $field_name, $request ) {
+        $post_id   = $object['id'];
+        $post_type = get_post_type( $post_id );
+    
+        $tax_objects = get_object_taxonomies( $post_type, 'objects' );
+    
+        $category_tax = null;
+        foreach ( $tax_objects as $tax ) {
+            if ( $tax->name === 'category' ) {
+                $category_tax = 'category';
+                break;
+            }
+        }
 
-        if (empty($categories)) {
+        if ( ! $category_tax ) {
+            foreach ( $tax_objects as $tax ) {
+                if ( strpos( $tax->name, 'category' ) !== false || ! empty( $tax->hierarchical ) ) {
+                    $category_tax = $tax->name;
+                    break;
+                }
+            }
+        }
+    
+        if ( ! $category_tax ) {
             return [];
         }
-
-        // Map the categories to include detailed information
-        return array_map(function ($category) {
-            return array(
-                'id'   => $category->term_id,
-                'name' => $category->name,
-                'slug' => $category->slug,
-                'url' => get_category_link($category->term_id),
-            );
-        }, $categories);
-    }
-
-
-    public function get_post_post_tag_info($object, $field_name, $request) {
-        // Get the tags associated with the post
-        $tags = get_the_tags($object['id']);
-
-        // Prepare a formatted array of tag information
-        if (!empty($tags) && is_array($tags)) {
-            $tag_info = array_map(function($tag) {
-                return array(
-                    'id'    => $tag->term_id,
-                    'name'  => $tag->name,
-                    'slug'  => $tag->slug,
-                    'url'   => get_tag_link($tag->term_id),
-                );
-            }, $tags);
-        } else {
-            $tag_info = array();
+    
+        $terms = get_the_terms( $post_id, $category_tax );
+        if ( empty( $terms ) || is_wp_error( $terms ) ) {
+            return [];
         }
-
-        return $tag_info;
+    
+        return array_map( function ( $term ) use ( $category_tax ) {
+            return [
+                'id'       => $term->term_id,
+                'name'     => $term->name,
+                'slug'     => $term->slug,
+                'url'      => get_term_link( $term, $category_tax ),
+                'taxonomy' => $term->taxonomy,
+            ];
+        }, $terms );
     }
+
+    public function get_post_post_tag_info( $object, $field_name, $request ) {
+        $post_id   = $object['id'];
+        $post_type = get_post_type( $post_id );
+    
+        $tax_objects = get_object_taxonomies( $post_type, 'objects' );
+    
+        $tag_tax = null;
+        foreach ( $tax_objects as $tax ) {
+            if ( $tax->name === 'post_tag' ) {
+                $tag_tax = 'post_tag';
+                break;
+            }
+        }
+    
+        if ( ! $tag_tax ) {
+            foreach ( $tax_objects as $tax ) {
+                if ( strpos( $tax->name, 'tag' ) !== false || empty( $tax->hierarchical ) ) {
+                    $tag_tax = $tax->name;
+                    break;
+                }
+            }
+        }
+    
+        if ( ! $tag_tax ) {
+            return [];
+        }
+    
+        $terms = get_the_terms( $post_id, $tag_tax );
+        if ( empty( $terms ) || is_wp_error( $terms ) ) {
+            return [];
+        }
+    
+        return array_map( function( $term ) use ( $tag_tax ) {
+            $url = get_term_link( $term, $tag_tax );
+            if ( is_wp_error( $url ) ) {
+                $url = '';
+            }
+            return [
+                'id'       => $term->term_id,
+                'name'     => $term->name,
+                'slug'     => $term->slug,
+                'url'      => $url,
+                'taxonomy' => $term->taxonomy,
+            ];
+        }, $terms );
+    }
+
+    public function fb_resolve_category_tax_for_post( $post_id ) {
+        $post_type   = get_post_type( $post_id );
+        $tax_objects = get_object_taxonomies( $post_type, 'objects' );
+
+        foreach ( $tax_objects as $tax ) {
+            if ( $tax->name === 'category' ) return 'category';
+        }
+        foreach ( $tax_objects as $tax ) {
+            if ( strpos( $tax->name, 'category' ) !== false || ! empty( $tax->hierarchical ) ) {
+                return $tax->name;
+            }
+        }
+        return null;
+    }
+
+    public function fb_resolve_tag_tax_for_post( $post_id ) {
+        $post_type   = get_post_type( $post_id );
+        $tax_objects = get_object_taxonomies( $post_type, 'objects' );
+
+        foreach ( $tax_objects as $tax ) {
+            if ( $tax->name === 'post_tag' ) return 'post_tag';
+        }
+        foreach ( $tax_objects as $tax ) {
+            if ( strpos( $tax->name, 'tag' ) !== false || empty( $tax->hierarchical ) ) {
+                return $tax->name;
+            }
+        }
+        return null;
+    }
+
 
 	/**
 	 * Get excerpt for the rest field
-	 *
-	 * @param object $object Post Object.
-	 * @param string $field_name Field name.
-	 * @param object $request Request Object.
-	 * @since 0.0.1
 	 */
 	public function get_post_excerpt( $object, $field_name, $request ) {
 		$excerpt = wp_trim_words( get_the_excerpt( $object['id'] ) );
@@ -499,11 +575,6 @@ class Admin {
 
 	/**
 	 * Get featured image source for the rest field as per size
-	 *
-	 * @param object $object Post Object.
-	 * @param string $field_name Field name.
-	 * @param object $request Request Object.
-	 * @since 0.0.1
 	 */
 	public function get_post_img_src( $object, $field_name, $request ) {
 		$image_sizes = Helper::get_image_sizes();
@@ -593,6 +664,9 @@ class Admin {
         $author_link_switcher = isset($_POST['authorLinkSwitcher']) ? $_POST['authorLinkSwitcher'] : true;
         $title_link_switcher = isset($_POST['titleLinkSwitcher']) ? $_POST['titleLinkSwitcher'] : true;
 
+        $category_key = isset($_POST['categoryKey']) ? $_POST['categoryKey'] : 'category';
+        $tag_key = isset($_POST['tagKey']) ? $_POST['tagKey'] : 'post_tag';
+
 
         ob_start();
 
@@ -612,7 +686,7 @@ class Admin {
                 SELECT object_id
                 FROM {$wpdb->term_relationships} AS tr
                 INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-                WHERE tt.taxonomy = 'category' AND tt.term_id IN ($placeholders)
+                WHERE tt.taxonomy = '{$category_key}' AND tt.term_id IN ($placeholders)
             )", $category_ids);
         }
         /** End Selected post category */
@@ -625,7 +699,7 @@ class Admin {
                 SELECT object_id
                 FROM {$wpdb->term_relationships} AS tr
                 INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-                WHERE tt.taxonomy = 'category' AND tt.term_id IN ($placeholders)
+                WHERE tt.taxonomy = '{$category_key}' AND tt.term_id IN ($placeholders)
             )", $deselected_post_category_ids);
         }
         /** End Deselected post category */
@@ -638,7 +712,7 @@ class Admin {
                 SELECT object_id
                 FROM {$wpdb->term_relationships} AS tr
                 INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-                WHERE tt.taxonomy = 'post_tag' AND tt.term_id IN ($placeholders)
+                WHERE tt.taxonomy = '{$tag_key}' AND tt.term_id IN ($placeholders)
             )", $post_tag_ids);
         }
         /** End Selected post tag */
@@ -651,7 +725,7 @@ class Admin {
                 SELECT object_id
                 FROM {$wpdb->term_relationships} AS tr
                 INNER JOIN {$wpdb->term_taxonomy} AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
-                WHERE tt.taxonomy = 'post_tag' AND tt.term_id IN ($placeholders)
+                WHERE tt.taxonomy = '{$tag_key}' AND tt.term_id IN ($placeholders)
             )", $deselected_post_tag_ids);
         }
         /** End Deselected post tag */
@@ -824,18 +898,20 @@ class Admin {
                             <?php if ($show_category_switcher == 'true'): ?>
                                 <div class="fb_post_grid_categories">
                                     <?php
-                                        $categories = get_the_category($single_post->ID);
+                                        $cat_tax   = $this->fb_resolve_category_tax_for_post( $single_post->ID );
+                                        $categories = $cat_tax ? get_the_terms( $single_post->ID, $cat_tax ) : [];
+
                                         if ($categories):
                                             foreach ($categories as $category): ?>
                                                 <div class="fb_post_grid_category" key="<?php echo esc_attr($category->term_id); ?>">
-                                                    <?php if ($category_link_switcher == 'true'): ?>
+                                                    <?php if ( $category_link_switcher == 'true' ): ?>
                                                         <a class="fb_post_grid_category_url"
-                                                            href="<?php echo esc_url(get_category_link($category->term_id)); ?>"
-                                                            aria-label="<?php echo esc_attr(sprintf('View posts in %s category', $category->name)); ?>">
-                                                            <?php echo esc_html($category->name); ?>
+                                                        href="<?php echo esc_url( get_term_link( $category, $category->taxonomy ) ); ?>"
+                                                        aria-label="<?php echo esc_attr( sprintf( 'View posts in %s category', $category->name ) ); ?>">
+                                                        <?php echo esc_html( $category->name ); ?>
                                                         </a>
                                                     <?php else: ?>
-                                                        <span class="fb_post_grid_category_name"><?php echo esc_html($category->name); ?></span>
+                                                        <span class="fb_post_grid_category_name"><?php echo esc_html( $category->name ); ?></span>
                                                     <?php endif; ?>
                                                 </div>
                                             <?php endforeach;
@@ -847,18 +923,19 @@ class Admin {
                             <?php if ($show_tag_switcher == 'true'): ?>
                                 <div class="fb_post_grid_tags">
                                     <?php
-                                        $tags = get_the_tags($single_post->ID);
-                                        if ($tags):
-                                            foreach ($tags as $tag): ?>
-                                                <div class="fb_post_grid_tag" key="<?php echo esc_attr($tag->term_id); ?>">
-                                                    <?php if ($tag_link_switcher == 'true'): ?>
+                                        $tag_tax = $this->fb_resolve_tag_tax_for_post( $single_post->ID );
+                                        $tags    = $tag_tax ? get_the_terms( $single_post->ID, $tag_tax ) : [];
+                                        if ( $tags ):
+                                            foreach ( $tags as $tag ): ?>
+                                                <div class="fb_post_grid_tag" key="<?php echo esc_attr( $tag->term_id ); ?>">
+                                                    <?php if ( $tag_link_switcher == 'true' ): ?>
                                                         <a class="fb_post_grid_tag_url"
-                                                            href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"
-                                                            aria-label="<?php echo esc_attr(sprintf('View posts tagged with %s', $tag->name)); ?>">
-                                                            <?php echo esc_html($tag->name); ?>
+                                                        href="<?php echo esc_url( get_term_link( $tag, $tag->taxonomy ) ); ?>"
+                                                        aria-label="<?php echo esc_attr( sprintf( 'View posts tagged with %s', $tag->name ) ); ?>">
+                                                            <?php echo esc_html( $tag->name ); ?>
                                                         </a>
                                                     <?php else: ?>
-                                                        <span class="fb_post_grid_tag_name"><?php echo esc_html($tag->name); ?></span>
+                                                        <span class="fb_post_grid_tag_name"><?php echo esc_html( $tag->name ); ?></span>
                                                     <?php endif; ?>
                                                 </div>
                                             <?php endforeach;
@@ -958,18 +1035,19 @@ class Admin {
                                 <?php if ($show_category_switcher == 'true'): ?>
                                     <div class="fb_post_grid_categories">
                                         <?php
-                                            $categories = get_the_category($single_post->ID);
+                                            $cat_tax   = $this->fb_resolve_category_tax_for_post( $single_post->ID );
+                                            $categories = $cat_tax ? get_the_terms( $single_post->ID, $cat_tax ) : [];
                                             if ($categories):
                                                 foreach ($categories as $category): ?>
                                                     <div class="fb_post_grid_category" key="<?php echo esc_attr($category->term_id); ?>">
-                                                        <?php if ($category_link_switcher == 'true'): ?>
+                                                        <?php if ( $category_link_switcher == 'true' ): ?>
                                                             <a class="fb_post_grid_category_url"
-                                                                href="<?php echo esc_url(get_category_link($category->term_id)); ?>"
-                                                                aria-label="<?php echo esc_attr(sprintf('View posts in %s category', $category->name)); ?>">
-                                                                <?php echo esc_html($category->name); ?>
+                                                            href="<?php echo esc_url( get_term_link( $category, $category->taxonomy ) ); ?>"
+                                                            aria-label="<?php echo esc_attr( sprintf( 'View posts in %s category', $category->name ) ); ?>">
+                                                            <?php echo esc_html( $category->name ); ?>
                                                             </a>
                                                         <?php else: ?>
-                                                            <span class="fb_post_grid_category_name"><?php echo esc_html($category->name); ?></span>
+                                                            <span class="fb_post_grid_category_name"><?php echo esc_html( $category->name ); ?></span>
                                                         <?php endif; ?>
                                                     </div>
                                                 <?php endforeach;
@@ -981,18 +1059,19 @@ class Admin {
                                 <?php if ($show_tag_switcher == 'true'): ?>
                                     <div class="fb_post_grid_tags">
                                         <?php
-                                            $tags = get_the_tags($single_post->ID);
-                                            if ($tags):
-                                                foreach ($tags as $tag): ?>
-                                                    <div class="fb_post_grid_tag" key="<?php echo esc_attr($tag->term_id); ?>">
-                                                        <?php if ($tag_link_switcher == 'true'): ?>
+                                            $tag_tax = $this->fb_resolve_tag_tax_for_post( $single_post->ID );
+                                            $tags    = $tag_tax ? get_the_terms( $single_post->ID, $tag_tax ) : [];
+                                            if ( $tags ):
+                                                foreach ( $tags as $tag ): ?>
+                                                    <div class="fb_post_grid_tag" key="<?php echo esc_attr( $tag->term_id ); ?>">
+                                                        <?php if ( $tag_link_switcher == 'true' ): ?>
                                                             <a class="fb_post_grid_tag_url"
-                                                                href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"
-                                                                aria-label="<?php echo esc_attr(sprintf('View posts tagged with %s', $tag->name)); ?>">
-                                                                <?php echo esc_html($tag->name); ?>
+                                                            href="<?php echo esc_url( get_term_link( $tag, $tag->taxonomy ) ); ?>"
+                                                            aria-label="<?php echo esc_attr( sprintf( 'View posts tagged with %s', $tag->name ) ); ?>">
+                                                                <?php echo esc_html( $tag->name ); ?>
                                                             </a>
                                                         <?php else: ?>
-                                                            <span class="fb_post_grid_tag_name"><?php echo esc_html($tag->name); ?></span>
+                                                            <span class="fb_post_grid_tag_name"><?php echo esc_html( $tag->name ); ?></span>
                                                         <?php endif; ?>
                                                     </div>
                                                 <?php endforeach;
@@ -1318,9 +1397,6 @@ class Admin {
 
         wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.css', array(), '1.0.0');
 
-		// // Dynamic content js
-		// wp_enqueue_script('frontis-blocks-dynamic-content', FB_PLUGIN_URL . 'assets/admin/dynamicContent.js', $script_asset['dependencies'], '1.0.0', true);
-		// wp_enqueue_style('frontis-blocks-dynamic-content', FB_PLUGIN_URL . 'assets/admin/style-dynamicContent.css', array(), '1.0.0');
 	}
 
     public function register_block_assets_in_site_editor() {
