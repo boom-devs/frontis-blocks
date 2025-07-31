@@ -154,7 +154,7 @@ const attributes = {
 		type: "string",
 		default: "classic",
 	},
-	buttonNormalClassicColor: {
+	buttonBgColor: {
 		type: "string",
 		default: "#399CFF",
 	},
@@ -175,7 +175,7 @@ const attributes = {
 		type: "string",
 		default: "classic",
 	},
-	buttonHoverClassicColor: {
+	buttonBgHoverColor: {
 		type: "string",
 		default: "",
 	},
