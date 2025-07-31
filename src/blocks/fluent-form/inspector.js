@@ -2607,7 +2607,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};` : ""}
             ${fluentFormCheckBoxBorderRadiusDesktopWidth && fluentFormCheckBoxBorderRadiusDesktop.top? `border-radius: ${fluentFormCheckBoxBorderRadiusDesktopWidth};` : ""}
             position: relative;
-            appearance: none;
+            
             transition: all .3s ease-in-out;   
         } 
         .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="radio"] {
@@ -2618,7 +2618,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Desktop}${fluentFormRadioBorderWidthUnits.Desktop};` : ""}
             ${fluentFormRadioBorderRadiusDesktopWidth && fluentFormRadioBorderRadiusDesktop.top ? `border-radius: ${fluentFormRadioBorderRadiusDesktopWidth};` : ""}
             position: relative;
-            appearance: none;
+            
             transition: all .3s ease-in-out;   
         }
         .${blockID}.fb-fluent-form-wrapper input[type="checkbox"]:checked:before,
@@ -2904,7 +2904,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Tablet}${fluentFormRadioBorderWidthUnits.Tablet};` : ""}
                 ${fluentFormCheckBoxBorderRadiusTabletWidth && fluentFormCheckBoxBorderRadiusTablet.top? `border-radius: ${fluentFormCheckBoxBorderRadiusTabletWidth};` : ""}
                 position: relative;
-                appearance: none;
+                
                 transition: all .3s ease-in-out;   
             } 
             .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="radio"] {
@@ -2915,7 +2915,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Tablet}${fluentFormRadioBorderWidthUnits.Tablet};` : ""}
                 ${fluentFormRadioBorderRadiusTabletWidth && fluentFormRadioBorderRadiusTablet.top? `border-radius: ${fluentFormRadioBorderRadiusTabletWidth};` : ""}
                 position: relative;
-                appearance: none;
+                
                 transition: all .3s ease-in-out;   
             }
             .${blockID}.fb-fluent-form-wrapper input[type="checkbox"]:checked:before,
@@ -3152,7 +3152,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Mobile}${fluentFormRadioBorderWidthUnits.Mobile};` : ""}
                 ${fluentFormCheckBoxBorderRadiusMobileWidth && fluentFormCheckBoxBorderRadiusMobile.top? `border-radius: ${fluentFormCheckBoxBorderRadiusMobileWidth};` : ""}
                 position: relative;
-                appearance: none;
+                
                 transition: all .3s ease-in-out;   
             } 
             .${blockID}.fb-fluent-form-wrapper .ff-el-input--content input[type="radio"] {
@@ -3163,7 +3163,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fluentFormRadioBorderWidth ? `border-width: ${fluentFormRadioBorderWidth.Mobile}${fluentFormRadioBorderWidthUnits.Mobile};` : ""}
                 ${fluentFormRadioBorderRadiusMobileWidth && fluentFormRadioBorderRadiusMobile.top? `border-radius: ${fluentFormRadioBorderRadiusMobileWidth};` : ""}
                 position: relative;
-                appearance: none;
+                
                 transition: all .3s ease-in-out;   
             }
             .${blockID}.fb-fluent-form-wrapper input[type="checkbox"]:checked:before,
