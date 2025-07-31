@@ -91,9 +91,16 @@ const Render = ( props ) => {
 		}
 	}, [clientId]);
 
+	const widthHandler = () => {
+		console.log("Hello world")
+	}
+
 	return (
 		<>
 			<Tag { ...modifBlockProps } key={ blockProps.id }>
+				{ !isBlockRootParent && (
+					<div on={() => widthHandler()} className={'width_handler'}>Hey</div>
+				)}
 				{/* Video Background is positioned absolutely. The place in the DOM is to render it underneath the shape dividers and content. */}
 				{ 'video' === backgroundType && (
 					<div className="frontis-blocks-container__video-wrap">
@@ -110,9 +117,7 @@ const Render = ( props ) => {
 						<InnerBlocks { ...innerBlocksParams } />
 					</div>
 				) : (
-					<div className={`frontis-blocks-container-inner-child-blocks-wrap ${containerGlobalCustomCSSClass}`} id={containerGlobalCustomCSSID}>
-						<InnerBlocks { ...innerBlocksParams } />
-					</div>
+					<InnerBlocks { ...innerBlocksParams } />
 				) }
 			</Tag>
 		</>
