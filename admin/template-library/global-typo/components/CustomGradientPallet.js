@@ -50,6 +50,9 @@ const CustomGradientColorPallet = (props) => {
     
         // Also try to add listener to iframe document
         const iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
+		const currentURL = window.location.href;
+		console.log("Testing editor loading issues")
+console.log(currentURL);
         if (iframe && iframe.contentDocument) {
             iframe.contentDocument.addEventListener('mousedown', handleClickOutside);
         }
