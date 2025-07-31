@@ -150,12 +150,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		/** Start Background */
 		buttonIconBgColorSwitcher,
 		buttonIconNormalBackgroundType,
-		buttonIconNormalClassicColor,
+		buttonIconBgColor,
 		buttonIconNormalGradientColor,
 		buttonIconNormalCustomGradientSwitcher,
 		buttonIconNormalCustomGradientInputValue,
 		buttonIconHoverBackgroundType,
-		buttonIconHoverClassicColor,
+		 buttonIconBgHoverColor,
 		buttonIconHoverGradientColor,
 		buttonIconHoverCustomGradientSwitcher,
 		buttonIconHoverCustomGradientInputValue,
@@ -1293,7 +1293,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${buttonIconNormalBackgroundType === 'gradient' ? `   	
                 ${buttonIconNormalCustomGradientSwitcher && buttonIconNormalCustomGradientInputValue ? `background: ${buttonIconNormalCustomGradientInputValue};` : `background: ${buttonIconNormalGradientColor};`}
             `: `
-                ${buttonIconNormalClassicColor ? `background: ${buttonIconNormalClassicColor};` : ''}
+                ${buttonIconBgColor ? `background: ${buttonIconBgColor};` : ''}
             `}
 			${buttonIconPaddingDesktopWidth && buttonIconPaddingDesktop?.top ? `padding: ${buttonIconPaddingDesktopWidth};` : ''}
 
@@ -1306,7 +1306,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${buttonIconHoverBackgroundType === 'gradient' ? `   	
                 ${buttonIconHoverCustomGradientSwitcher && buttonIconHoverCustomGradientInputValue ? `background: ${buttonIconHoverCustomGradientInputValue};` : `background: ${buttonIconHoverGradientColor};`}
             `: `
-                ${buttonIconHoverClassicColor ? `background: ${buttonIconHoverClassicColor};` : ''}
+                ${ buttonIconBgHoverColor ? `background: ${ buttonIconBgHoverColor};` : ''}
             `}
 			${buttonIconBorderHoverColor ? `border-color: ${buttonIconBorderHoverColor};` : ''}
 		}
@@ -1634,12 +1634,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		/** Start Background */
 		buttonIconBgColorSwitcher,
 		buttonIconNormalBackgroundType,
-		buttonIconNormalClassicColor,
+		buttonIconBgColor,
 		buttonIconNormalGradientColor,
 		buttonIconNormalCustomGradientSwitcher,
 		buttonIconNormalCustomGradientInputValue,
 		buttonIconHoverBackgroundType,
-		buttonIconHoverClassicColor,
+		 buttonIconBgHoverColor,
 		buttonIconHoverGradientColor,
 		buttonIconHoverCustomGradientSwitcher,
 		buttonIconHoverCustomGradientInputValue,
@@ -2117,8 +2117,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						
 						normalBackgroundType={buttonIconNormalBackgroundType} 
 						setNormalBackgroundType={(value) => setAttributes({ buttonIconNormalBackgroundType: value })}
-						normalClassicColor={buttonIconNormalClassicColor}
-						setNormalClassicColor={(value) => setAttributes({ buttonIconNormalClassicColor: value })}
+						normalClassicColor={buttonIconBgColor}
+						setNormalClassicColor={(value) => setAttributes({ buttonIconBgColor: value })}
 						normalGradientColor={buttonIconNormalGradientColor}
 						setNormalGradientColor={(value) => setAttributes({ buttonIconNormalGradientColor: value })}
 						normalCustomGradientSwitcher={buttonIconNormalCustomGradientSwitcher}
@@ -2128,8 +2128,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						
 						hoverBackgroundType={buttonIconHoverBackgroundType} 
 						setHoverBackgroundType={(value) => setAttributes({ buttonIconHoverBackgroundType: value })}
-						hoverClassicColor={buttonIconHoverClassicColor}
-						setHoverClassicColor={(value) => setAttributes({ buttonIconHoverClassicColor: value })}
+						hoverClassicColor={ buttonIconBgHoverColor}
+						setHoverClassicColor={(value) => setAttributes({  buttonIconBgHoverColor: value })}
 						hoverGradientColor={buttonIconHoverGradientColor} 
 						setHoverGradientColor={(value) => setAttributes({ buttonIconHoverGradientColor: value })}
 						hoverCustomGradientSwitcher={buttonIconHoverCustomGradientSwitcher}
