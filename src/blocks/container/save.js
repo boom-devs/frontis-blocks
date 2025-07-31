@@ -83,7 +83,7 @@ export default function save( props ) {
 		id: (p_block_id || `container-${p_block_id}`),
 	};
 
-	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : `child`;
+	const isRootContainerClass = isBlockRootParent ? `${ containerType === 'full-width' ? 'alignfull' : 'alignwide' } frontis-blocks-is-root-container` : `child ${containerGlobalCustomCSSClass}`;
 
 	let desktopResponsiveClass = '';
 	let tabletResponsiveClass = '';
@@ -130,9 +130,7 @@ export default function save( props ) {
 						<InnerBlocks.Content />
 					</div>
 				) : (
-					<div className={`frontis-blocks-container-inner-child-blocks-wrap ${containerGlobalCustomCSSClass}`} id={containerGlobalCustomCSSID}>
-						<InnerBlocks.Content />
-					</div>
+					<InnerBlocks.Content />
 				)}
 				{
 					htmlTag === 'a' && 'undefined' !== typeof customTagLinkAttributes.href && (

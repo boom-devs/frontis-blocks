@@ -182,7 +182,9 @@ class Helper
 		if ($wp_query->queried_object && isset($wp_query->queried_object->post_name)) {
 			return $wp_query->queried_object->post_name;
 		} else {
-			return $wp_query->queried_object->name;
+			if(isset($wp_query->queried_object->name)){
+				return $wp_query->queried_object->name;
+			}
 		}
     }
 
@@ -371,7 +373,7 @@ class Helper
                 return str_replace(' ', '+', $font) . ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic";
             }, $fonts));
 
-            echo $font_url;
+//            echo $font_url;
             // $gfonts = '';
             // $gfonts_attr = ':100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
 
