@@ -82,6 +82,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockId,
         loopBuilderWrapperClass,
+		postSwitcher,
 	} = attributes;
 
 	const {
@@ -305,7 +306,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	);
 
 	const blockProps = useBlockProps( {
-		className: `${blockId} fb-loop-builder-wrapper-main-container`,
+		className: `${blockId} fb-loop-builder-wrapper-main-container ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`,
 	} );
 
 	if ( ! posts ) {

@@ -20,6 +20,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		premadeStyle,
 		postType,
 		postPerPage,
+        categoryKey,
+        tagKey,
 		selectedCatSwitcher,
 		selectedCat,
 		deSelectedCat,
@@ -94,24 +96,52 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
 	}
 
+
+    /**
+     * Get taxonomy data
+     */
+    const tax    = FrontisBlocksData?.all_cats?.[postType] || {};
+    const terms  = tax?.terms || {};
+    const tkeys  = Object.keys(terms);
+    const meta   = tax?.taxonomy || {};
+
+    /**
+     * Get category and tag keys
+     */
+    const category_Key =
+    tkeys.find(k => /(^|[-_])category($|[-_])/i.test(k)) ||
+    tkeys.find(k => meta?.[k]?.hierarchical === true) ||
+    tkeys[0];
+
+    const tag_Key =
+    tkeys.find(k => /(^|[-_])(post[-_]?tag|tags?)($|[-_])/i.test(k)) ||
+    tkeys.find(k => meta?.[k]?.hierarchical === false) ||
+    null;
+
+    /**
+     * Get REST base
+     */
+    const catBase = meta?.[category_Key]?.rest_base || (category_Key === 'category' ? 'categories' : category_Key);
+    const tagBase = tag_Key ? (meta?.[tag_Key]?.rest_base || (tag_Key === 'post_tag' ? 'tags' : tag_Key)) : null;
+
     const { useSelect } = wp.data;
 
 	const postLists = useSelect((select) => {
 		const query = {
 			orderby: orderBy,
 			order: sortOrder,
-			per_page: -1, // Get all posts
+			per_page: -1,
 		};
 
-		if (showFilterByTaxonomy) {
-			if (filterSelectedTaxonomy === 'category') {
-				query.categories = filterCatId !== 0 ? filterCatId : filterSelectedCat;
-			} else if (filterSelectedTaxonomy === 'tag') {
-				query.tags = filterTagId !== 0 ? filterTagId : filterSelectedTag;
-			}
-		}
+        if (showFilterByTaxonomy) {
+            if (filterSelectedTaxonomy === 'category' && catBase) {
+              query[catBase] = filterCatId !== 0 ? filterCatId : filterSelectedCat;
+            } else if (filterSelectedTaxonomy === 'tag' && tagBase) {
+              query[tagBase] = filterTagId !== 0 ? filterTagId : filterSelectedTag;
+            }
+        }
         
-        applyOldCategoryTagFilters(query);
+        applyCategoryTagFilters(query);
         applyAuthorFilters(query);
 
 		return select('core').getEntityRecords('postType', postType, query);
@@ -134,25 +164,40 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         selectedAuthor,
         deSelectedAuthor,
     ]);
-
+    
     /**
-    * Old Category & Tag Filtering
+    * Category & Tag Filtering
     */
-    function applyOldCategoryTagFilters(query) {
-        // Category Filtering
+    function applyCategoryTagFilters(query) {
+        // Category Filtering (generic)
         if (selectedCatSwitcher === 'include' && Array.isArray(selectedCat) && selectedCat.length > 0) {
-            query.categories = selectedCat;
+            if (catBase) query[catBase] = selectedCat;
         } else if (selectedCatSwitcher === 'exclude' && Array.isArray(deSelectedCat) && deSelectedCat.length > 0) {
-            query.categories_exclude = deSelectedCat;
+            if (catBase) query[`${catBase}_exclude`] = deSelectedCat;
         }
-
-        // Tag Filtering
+        
+        // Tag Filtering (generic)
         if (selectedTagSwitcher === 'include' && Array.isArray(selectedTag) && selectedTag.length > 0) {
-            query.tags = selectedTag;
+            if (tagBase) query[tagBase] = selectedTag;
         } else if (selectedTagSwitcher === 'exclude' && Array.isArray(deSelectedTag) && deSelectedTag.length > 0) {
-            query.tags_exclude = deSelectedTag;
+            if (tagBase) query[`${tagBase}_exclude`] = deSelectedTag;
         }
     }
+
+    /**
+     * Set categoryKey and tagKey
+     */
+    useEffect(() => {
+        const isValidCategory = category_Key !== undefined && category_Key !== '';
+        const isValidTag = tag_Key !== undefined && tag_Key !== '';
+    
+        if (isValidCategory || isValidTag) {
+            setAttributes({
+                ...(isValidCategory && { categoryKey: category_Key }),
+                ...(isValidTag && { tagKey: tag_Key }),
+            });
+        }
+    }, [category_Key, tag_Key]);
 
     /**
      * Author Filtering

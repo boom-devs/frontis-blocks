@@ -119,6 +119,17 @@ class Enqueues {
 				'whatsapp' => 'https://wa.me/?text=',
 			]
 		]);
+
+		// pagination localize
+		$frontis_pagination_localize = [
+			'ajaxUrl' => admin_url('admin-ajax.php'),
+			'nonce'   => wp_create_nonce('frontis_loop_nonce'),
+		];
+
+		wp_localize_script('frontis-blocks-frontend', 'frontisPagination', $frontis_pagination_localize);
+		wp_localize_script('frontis-blocks-frontend-header', 'frontisPagination', $frontis_pagination_localize);
+		wp_localize_script('frontis-blocks-frontend-footer', 'frontisPagination', $frontis_pagination_localize);
+	
 	}
 
     public function enqueue_header_footer() {

@@ -13,6 +13,7 @@
 	.fb_post_grid_categories {
 		display: flex;
 		align-items: center;
+		flex-wrap: wrap;
 		gap: 10px;
 		a {
 			&:focus {
@@ -24,6 +25,7 @@
 	.fb_post_grid_tags {
 		display: flex;
 		align-items: center;
+		flex-wrap: wrap;
 		gap: 10px;
 		a {
 			&:focus {
