@@ -387,8 +387,10 @@ class AssetsGenerator
 		if (!empty($color_data[0])) {
 			$global_colors .= "/* Base Colors */\n";
 			foreach ($color_data[0] as $color) {
-				$var_name = "--wp--frontis--color--" . $color['slug'];
-				$global_colors .= "{$var_name}: {$color['color']};\n";
+				if($color['color']){
+					$var_name = "--wp--frontis--color--" . $color['slug'];
+					$global_colors .= "{$var_name}: {$color['color']};\n";
+				}
 			}
 		}
 
@@ -397,8 +399,10 @@ class AssetsGenerator
 			$global_colors .= "\n/* Custom Colors */\n";
 			foreach ($color_data[1] as $color) {
 				$original_var = $color['slug'];
-				$prefixed_var = "--wp--frontis--color--" . $original_var;
-				$global_colors .= "{$prefixed_var}: {$color['color']};\n";
+				if($color['color']) {
+					$prefixed_var = "--wp--frontis--color--" . $original_var;
+					$global_colors .= "{$prefixed_var}: {$color['color']};\n";
+				}
 			}
 		}
 
@@ -407,8 +411,10 @@ class AssetsGenerator
 			$global_colors .= "\n/* Gradient Colors */\n";
 			foreach ($color_data[2] as $color) {
 				$original_var = $color['slug'];
-				$prefixed_var = "--wp--frontis--color--" . $original_var;
-				$global_colors .= "{$prefixed_var}: {$color['gradient']};\n";
+				if(isset($color['gradient'])) {
+					$prefixed_var = "--wp--frontis--color--" . $original_var;
+					$global_colors .= "{$prefixed_var}: {$color['gradient']};\n";
+				}
 			}
 		}
 
@@ -417,8 +423,10 @@ class AssetsGenerator
 			$global_colors .= "\n/* Custom Gradient Colors */\n";
 			foreach ($color_data[3] as $color) {
 				$original_var = $color['slug'];
-				$prefixed_var = "--wp--frontis--color--" . $original_var;
-				$global_colors .= "{$prefixed_var}: {$color['gradient']};\n";
+				if(isset($color['gradient'])) {
+					$prefixed_var = "--wp--frontis--color--" . $original_var;
+					$global_colors .= "{$prefixed_var}: {$color['gradient']};\n";
+				}
 			}
 		}
 
@@ -507,7 +515,7 @@ class AssetsGenerator
 							// Desktop
 							if (!empty($typography_data[$key][$prop]['value']['Desktop'])) {
 								$value = $typography_data[$key][$prop]['value']['Desktop'];
-								$unit = $typography_data[$key][$prop]['unit']['Desktop'];
+								$unit = isset($typography_data[$key][$prop]['unit']) ? $typography_data[$key][$prop]['unit']['Desktop'] : 'px';
 								$desktopStyles .= "{$cssVar}: " . Helper::create_value_with_unit($value, $unit) . ";\n";
 
 								switch ($key) {
@@ -550,7 +558,7 @@ class AssetsGenerator
 							// Tablet
 							if (!empty($typography_data[$key][$prop]['value']['Tablet'])) {
 								$value = $typography_data[$key][$prop]['value']['Tablet'];
-								$unit = $typography_data[$key][$prop]['unit']['Tablet'];
+								$unit = isset($typography_data[$key][$prop]['unit']) ? $typography_data[$key][$prop]['unit']['Tablet'] : 'px';
 								$tabletStyles .= "{$cssVar}: " . Helper::create_value_with_unit($value, $unit) . ";\n";
 							}
 
