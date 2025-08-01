@@ -63,7 +63,6 @@ const Render = ( props ) => {
 		setAttributes({containerGlobalCustomCSSValue: customCss});
 	}, [containerGlobalCustomCSS, blockProps.id]);
 
-
 	if (modifBlockProps.className && modifBlockProps.className.includes('alignfull') && containerType !== 'full-width') {
 		modifBlockProps.className = modifBlockProps.className
 		  .split(' ')
