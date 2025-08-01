@@ -121,14 +121,14 @@ class Enqueues {
 		]);
 
 		// pagination localize
-		$frontis_pagination_localize = [
+		$loop_builder_localize = [ 
 			'ajaxUrl' => admin_url('admin-ajax.php'),
-			'nonce'   => wp_create_nonce('frontis_loop_nonce'),
+			'nonce'   => wp_create_nonce('loop_builder_nonce'),
 		];
 
-		wp_localize_script('frontis-blocks-frontend', 'frontisPagination', $frontis_pagination_localize);
-		wp_localize_script('frontis-blocks-frontend-header', 'frontisPagination', $frontis_pagination_localize);
-		wp_localize_script('frontis-blocks-frontend-footer', 'frontisPagination', $frontis_pagination_localize);
+		wp_localize_script('frontis-blocks-frontend', 'LoopBuilderAjax', $loop_builder_localize);
+		wp_localize_script('frontis-blocks-frontend-header', 'LoopBuilderAjax', $loop_builder_localize);
+		wp_localize_script('frontis-blocks-frontend-footer', 'LoopBuilderAjax', $loop_builder_localize);
 	
 	}
 

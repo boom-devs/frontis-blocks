@@ -15,13 +15,13 @@ class PostGrid {
      * Constructor
      */
     public function __construct() {
-        add_action('rest_api_init', [$this, 'fb_register_routes']);
+        add_action('rest_api_init', [$this, 'fb_post_register_routes']);
     }
 
     /**
      * Register routes for the post grid block
      */
-    public function fb_register_routes() {
+    public function fb_post_register_routes() {
 
         register_rest_route('wp/v2/frontis-blocks', '/post', [
 			'methods' => 'POST',

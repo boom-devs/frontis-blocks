@@ -109,7 +109,8 @@ function render_loop_builder($block_content, $block) {
 
 
 		// Wrapper শুরু
-		$output = '<div class="' . esc_attr($blockId) . ' wp-block-frontis-blocks-loop-builder fb-loop-builder ' . esc_attr($align_class) . '">';
+		$attr_json = htmlspecialchars(json_encode($attributes), ENT_QUOTES, 'UTF-8');
+		$output = '<div class="' . esc_attr($blockId) . ' wp-block-frontis-blocks-loop-builder fb-loop-builder ' . esc_attr($align_class) . '" data-attrs="' . $attr_json . '">';
 		$output .= '<div class="'. esc_attr($inner_block_id) .' fb-loop-builder-wrapper-main-container '. esc_attr($postSwitcher) .'-layout">';
 
 
@@ -233,4 +234,29 @@ function render_loop_builder($block_content, $block) {
 }
 
 add_filter('render_block', 'render_loop_builder', 10, 2);
+
+add_action('wp_ajax_nopriv_frontis_loop_pagination', 'frontis_loop_pagination');
+add_action('wp_ajax_frontis_loop_pagination', 'frontis_loop_pagination');
+
+function frontis_loop_pagination() {
+    // ✅ FIXED: Specify _ajax_nonce here
+    if ( ! check_ajax_referer('loop_builder_nonce', '_ajax_nonce') ) {
+        wp_send_json_error(['message' => '❌ Nonce verification failed']);
+        wp_die();
+    }
+
+    $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
+    $block_attrs = isset($_POST['blockAttrs']) ? json_decode(stripslashes($_POST['blockAttrs']), true) : [];
+
+    $block = [
+        'blockName' => 'frontis-blocks/loop-builder',
+        'attrs'     => $block_attrs,
+    ];
+
+    $response = render_loop_builder('', $block);
+    wp_send_json_success(['html' => $response]);
+}
+
+
+
 }
