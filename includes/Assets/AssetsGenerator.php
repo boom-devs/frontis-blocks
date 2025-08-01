@@ -27,6 +27,7 @@ class AssetsGenerator
 	private $wp_template_css_content = '';
 	private $frontis_block_used = false;
 	private $blocks_used_in_page = [];
+	private $combine_swiper_js = false;
 
 	public function generate_page_assets($post_id, $post)
 	{
@@ -135,6 +136,7 @@ class AssetsGenerator
 	{
 		$post_content = $this->post->post_content;
 		$blocks = parse_blocks($post_content);
+
 		$this->get_inner_blocks($blocks);
 	}
 
@@ -172,6 +174,10 @@ class AssetsGenerator
 			}
 
 			$this->used_blocks[] = $block['blockName'];
+
+			if(in_array('frontis-blocks/slider', $this->used_blocks) || in_array('frontis-blocks/marquee-carousel', $this->used_blocks)) {
+				$this->combine_swiper_js = true;
+			}
 
 			// Get the block attributes
 			$block_attributes = $block['attrs'];
@@ -334,8 +340,6 @@ class AssetsGenerator
 				$page_name = get_post_type($this->post->ID);
 			}
 		}
-
-		// var_dump($page_name);
 
 		$this->combine_and_save_css_file($page_name);
 
@@ -694,18 +698,14 @@ class AssetsGenerator
 	public function combine_static_assets()
 	{
 
-//		var_dump($this->used_blocks);
-		// Css files
 		$assets_dir = FB_PLUGIN_PATH . 'assets/css/frontend/';
 		$css_files = Helper::get_css_files($assets_dir);
 
 		if (!empty($css_files)) {
 			foreach ($css_files as $key => $css_file) {
-//				if (basename($css_file) === 'swiper-bundle.min.css' &&
-//					!in_array('frontis-blocks/slider', $this->used_blocks) &&
-//					!in_array('frontis-blocks/marquee-carousel', $this->used_blocks)) {
-//					continue;
-//				}
+				if (!$this->combine_swiper_js && basename($css_file) === 'swiper-bundle.min.css') {
+					continue;
+				}
 
 				$this->css_content .= file_get_contents($css_file) . "\n";
 			}
@@ -717,11 +717,9 @@ class AssetsGenerator
 
 		if (!empty($js_files)) {
 			foreach ($js_files as $key => $js_file) {
-//				if (basename($css_file) === 'swiper-bundle.min.css' &&
-//					!in_array('frontis-blocks/slider', $this->used_blocks) &&
-//					!in_array('frontis-blocks/marquee-carousel', $this->used_blocks)) {
-//					continue;
-//				}
+				if (!$this->combine_swiper_js && basename($js_file) === 'swiper-bundle.min.js') {
+					continue;
+				}
 
 				if(!in_array('frontis-blocks/advanced-video', $this->used_blocks) && basename($js_file) === 'react-player.standalone.min.js') {
 					continue;

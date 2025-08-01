@@ -185,11 +185,11 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
 
 	return (
 		<div className="fb-template-library-store-content">
-			{activeCategory.templateLibrary === 'my-favourites' || activeCategory.templateLibrary === 'my-cloud' ? (
+			{(activeCategory.templateLibrary === 'my-favourites' || activeCategory.templateLibrary === 'my-cloud') && (
 				<div className="fb-template-library-content-header">
 					<div className="fb-template-library-content-header-left">
 						{activeCategory.templateLibrary === 'my-cloud' && <h2>My Clouds</h2>}
-						{activeCategory.templateLibrary === 'my-favourites' ? (
+						{activeCategory.templateLibrary === 'my-favourites' && (
 							<div className="fb-template-library-tags-wrapper">
 								{FavoriteTabsOptions.map(tab => (
 									<button
@@ -201,7 +201,7 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
 									</button>
 								))}
 							</div>
-						) : ''}
+						)}
 					</div>
 					<div className="fb-template-library-content-header-right">
 						<div className="fb-template-library-search-wrapper">
@@ -235,14 +235,16 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
 						</div>
 					</div>
 				</div>
-			) : ''}
+			)}
 			<table className="fb-template-library-cards style-two">
 				<thead className="fb-template-library-card-header">
 					<tr className="fb-template-library-card-header-name">Name</tr>
-					{activeCategory.templateLibrary === 'my-favourites' || activeCategory.templateLibrary === 'my-cloud' ? (<>
-						<tr className="fb-template-library-card-header-date">Last Modified</tr>
-						<tr className="fb-template-library-card-header-actions">Action</tr>
-					</>) : ''}
+					{(activeCategory.templateLibrary === 'my-favourites' || activeCategory.templateLibrary === 'my-cloud') && (
+						<>
+							<tr className="fb-template-library-card-header-date">Last Modified</tr>
+							<tr className="fb-template-library-card-header-actions">Action</tr>
+						</>
+					)}
 				</thead>
 				<tbody className="fb-template-library-card-body">
 					{activeCategory.templateLibrary === 'my-favourites' ? (
