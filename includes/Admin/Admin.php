@@ -320,6 +320,13 @@ class Admin {
         ]);
     }
 
+    public function get_icons() {
+        // Assets er vitore fontawesome icon ache icons.php file a oita fetch korbo using rest api
+        $data = include FB_PLUGIN_PATH . 'assets/fontawesome/icons.php';
+        return $data;
+    }
+
+
     /**
      * Handle the save option REST API endpoint
      *
