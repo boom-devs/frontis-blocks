@@ -15,7 +15,7 @@ const attributes = {
                 marqueeCarouselImageUrl:'',
                 marqueeCarouselImageAlt: '',
                 marqueeCarouselImageID: '',
-                showContentSwitcher: true,
+                showContentSwitcher: false,
                 marqueeCarouselText: 'Carousel Text',
                 marqueeCarouseHoverText: '',
             },
@@ -24,7 +24,7 @@ const attributes = {
                 marqueeCarouselImageUrl:'',
                 marqueeCarouselImageAlt: '',
                 marqueeCarouselImageID: '',
-                showContentSwitcher: true,
+                showContentSwitcher: false,
                 marqueeCarouselText: 'Carousel Text',
                 marqueeCarouseHoverText: '',
             },
@@ -33,7 +33,7 @@ const attributes = {
                 marqueeCarouselImageUrl: '',
                 marqueeCarouselImageAlt: '',
                 marqueeCarouselImageID: '',
-                showContentSwitcher: true,
+                showContentSwitcher: false,
                 marqueeCarouselText: 'Carousel Text',
                 marqueeCarouseHoverText: '',
             },
@@ -59,7 +59,7 @@ const attributes = {
                 },
                 showContentSwitcher: {
                     type: "boolean",
-                    default: true
+                    default: false
                 },
                 marqueeCarouselText    : {
                     type: "string",
@@ -108,6 +108,22 @@ const attributes = {
 		}
 	},
 	slideWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    slideHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	slideHeightUnits: { 
 		type: 'object',
 		default: {
 			Desktop: 'px',

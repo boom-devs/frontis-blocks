@@ -1,27 +1,87 @@
 (function() {
+    // function initMarqueeCarousels() {
+    //     const sliders = document.querySelectorAll('.fb-marquee-carousel-container');
+        
+    //     sliders.forEach((sliderContainer) => {
+    //         // Prevent multiple initializations
+    //         if (sliderContainer.hasAttribute('data-carousel-initialized')) return;
+    //         sliderContainer.setAttribute('data-carousel-initialized', 'true');
+
+    //         try {
+    //             const swiperSettings = sliderContainer.dataset.swiperSettings;
+    //             const slideWidth = sliderContainer.dataset.slideWidth;
+    //             const slideHeight = sliderContainer.dataset.slideHeight;
+    //             if (swiperSettings) {
+    //                 const settings = JSON.parse(swiperSettings);
+                    
+    //                 settings.on = {
+    //                     init: function () {
+    //                         const slides = sliderContainer.querySelectorAll('.swiper-slide');
+    //                         slides.forEach(slide => {
+    //                             slide.style.width = slideWidth;
+    //                             slide.style.height = slideHeight;
+    //                         });
+    //                     }
+    //                 };
+
+    //                 new Swiper(sliderContainer.querySelector('.swiper'), settings);
+    //             }
+    //         } catch (error) {
+    //             console.error('Error initializing slider:', error);
+    //         }
+    //     });
+    // }
+
     function initMarqueeCarousels() {
         const sliders = document.querySelectorAll('.fb-marquee-carousel-container');
-        
+    
         sliders.forEach((sliderContainer) => {
             // Prevent multiple initializations
             if (sliderContainer.hasAttribute('data-carousel-initialized')) return;
             sliderContainer.setAttribute('data-carousel-initialized', 'true');
-
+    
             try {
                 const swiperSettings = sliderContainer.dataset.swiperSettings;
                 const slideWidth = sliderContainer.dataset.slideWidth;
+                const slideHeight = sliderContainer.dataset.slideHeight;
+    
                 if (swiperSettings) {
                     const settings = JSON.parse(swiperSettings);
-                    
+    
+                    // 🔥 Dynamic + Custom Width Handling Here
                     settings.on = {
                         init: function () {
                             const slides = sliderContainer.querySelectorAll('.swiper-slide');
+    
                             slides.forEach(slide => {
-                                slide.style.width = slideWidth;
+                                const img = slide.querySelector('.fb-marquee-carousel-image-wrapper img');
+    
+                                // Always apply height
+                                slide.style.height = slideHeight || 'auto';
+    
+                                // No image fallback
+                                if (!img) {
+                                    slide.style.width = slideWidth || '200px';
+                                    return;
+                                }
+    
+                                // If custom width is provided
+                                if (slideWidth && slideWidth !== '') {
+                                    slide.style.width = slideWidth;
+                                } else {
+                                    // If not provided, use image width
+                                    if (img.complete) {
+                                        slide.style.width = img.naturalWidth + 'px';
+                                    } else {
+                                        img.addEventListener('load', () => {
+                                            slide.style.width = img.naturalWidth + 'px';
+                                        });
+                                    }
+                                }
                             });
                         }
                     };
-
+    
                     new Swiper(sliderContainer.querySelector('.swiper'), settings);
                 }
             } catch (error) {

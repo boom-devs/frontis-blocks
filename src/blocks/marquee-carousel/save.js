@@ -7,6 +7,8 @@ export default function Save({ attributes }) {
 
         slideWidth,
         slideWidthUnits,
+        slideHeight,
+        slideHeightUnits,
 
         autoplay,
         autoplayDirection,
@@ -27,6 +29,7 @@ export default function Save({ attributes }) {
         spaceBetween: 0,
         centeredSlides: false,
         speed: speed,
+        // autoplay: false,
         autoplay: {
             delay: 0,
             reverseDirection: reverseDirection,
@@ -45,10 +48,11 @@ export default function Save({ attributes }) {
         } : false,
     });
 
-    const frontendSlideWidth = slideWidth.Desktop && slideWidthUnits.Desktop ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}` : 'fit-content';
+    const frontendSlideWidth = slideWidth.Desktop && slideWidthUnits.Desktop ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}` : '';
+    const frontendSlideHeight = slideHeight.Desktop && slideHeightUnits.Desktop ? `${slideHeight.Desktop}${slideHeightUnits.Desktop}` : '';
 
     return (
-        <div {...blockProps} data-swiper-settings={swiperSettings} data-slide-width={frontendSlideWidth}>
+        <div {...blockProps} data-swiper-settings={swiperSettings} data-slide-width={frontendSlideWidth} data-slide-height={frontendSlideHeight}>
             <div className="swiper swiper-container">
                 <div className={`swiper-wrapper fb-marquee-carousel-wrapper`}>
                     {sliderItems.map((item) => (

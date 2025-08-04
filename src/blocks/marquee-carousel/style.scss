@@ -2,6 +2,12 @@
     height: auto !important;
 }
 
+.fb-marquee-carousel-item {
+  min-width: 1px; /* অথবা যতটা মিনিমাম দরকার */
+  max-width: 1000px;
+  flex-shrink: 0;
+}
+
 /* In your CSS */
 .swiper-backface-hidden .swiper-slide {
     backface-visibility: visible !important;

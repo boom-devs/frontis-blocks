@@ -42,6 +42,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
         slideWidth,
         slideWidthUnits,
+        slideHeight,
+        slideHeightUnits,
 
         slidePaddingUnits,
         slideDesktopPadding,
@@ -822,6 +824,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         blockStyle,
         slideWidth,
         slideWidthUnits,
+        slideHeight,
+        slideHeightUnits,
 
         slidePaddingUnits,
         slideDesktopPadding,
@@ -1003,6 +1007,19 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                     rangeUnitHandler={(value) => setAttributes({ slideWidthUnits: value })}
                     deviceType={deviceType}
                     units={slideWidthUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+                <FB_Range
+                    min={1}
+                    max={slideHeightUnits[deviceType] === "%" ? 100 : 1000}
+                    label={__("Height", "frontis-blocks")}
+                    rangeValue={slideHeight}
+                    onChangeHandler={(value) => setAttributes({ slideHeight: value })}
+                    rangeUnitHandler={(value) => setAttributes({ slideHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={slideHeightUnits}
                     setAttributes={setAttributes}
                     rangeStep={1}
                     resetFallbackValue={""}

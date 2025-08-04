@@ -16,6 +16,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
         slideWidth,
         slideWidthUnits,
+        slideHeight,
+        slideHeightUnits,
 
         autoplay,
         autoplayDirection,
@@ -30,7 +32,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         className: `fb-marquee-carousel-container ${blockId}`,
     });
 
-    const [sliderItemList, setSliderItemList] = useState(sliderItems);
+    let defaultImageUrl = '';
+    if (typeof FrontisBlocksData !== 'undefined') {
+        defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
+    }
+
+    const [sliderItemList, setSliderItemList] = useState(() => {
+        return sliderItems.map(item => ({
+            ...item,
+            marqueeCarouselImageUrl: item.marqueeCarouselImageUrl || defaultImageUrl,
+        }));
+    });
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
@@ -55,10 +67,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const handleAddItem = () => {
         const newItem = {
             id: `item-${sliderItems.length + 1}`,
-            marqueeCarouselImageUrl: '',
+            marqueeCarouselImageUrl: defaultImageUrl,
             marqueeCarouselImageAlt: '',
             marqueeCarouselImageID: '',
-            showContentSwitcher: true,
+            showContentSwitcher: false,
             marqueeCarouselText: 'Carousel Text',
             marqueeCarouseHoverText: '',
         };
@@ -67,6 +79,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     };
 
     const handleChangeItem = (id, key, value) => {
+        
         const updatedItems = sliderItemList.map(item => {
             if (item.id === id) {
                 if (key === 'marqueeCarouselImageID') { 
@@ -102,14 +115,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     /**
      * Dynamically update the width of the slides
      */
-    const updateSlideWidths = () => {
+    const updateSlideWidthHeight = () => {
         if (!blockId) return;
     
         const slides = document.querySelectorAll(`.${blockId} .swiper-slide`);
         slides.forEach(slide => {
             slide.style.width = slideWidth.Desktop && slideWidthUnits.Desktop
                 ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}`
-                : 'fit-content';
+                : 'auto';
+            slide.style.height = slideHeight.Desktop && slideHeightUnits.Desktop
+                ? `${slideHeight.Desktop}${slideHeightUnits.Desktop}`
+                : 'auto';
         });
     };
 
@@ -137,7 +153,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
            allowTouchMove: false,
 
             on: {
-                init: updateSlideWidths(),
+                init: updateSlideWidthHeight(),
             },
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
@@ -175,11 +191,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showPagination,
         slideWidth,
         slideWidthUnits,
+        slideHeight,
+        slideHeightUnits,
     ]);
 
     useEffect(() => {
-        updateSlideWidths();
-    }, [slideWidth, slideWidthUnits, blockId]);
+        updateSlideWidthHeight();
+    }, [slideWidth, slideWidthUnits, slideHeight, slideHeightUnits, blockId]);
 
 
     const renderSliderToolbarControls = () => {
