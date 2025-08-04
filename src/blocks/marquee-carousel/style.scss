@@ -1,11 +1,17 @@
-.swiper-wrapper {
-    height: auto !important;
-}
-
-.fb-marquee-carousel-item {
-  min-width: 1px; /* অথবা যতটা মিনিমাম দরকার */
-  max-width: 1000px;
-  flex-shrink: 0;
+.fb-marquee-carousel-container  {
+  .swiper {
+    mask-image: linear-gradient( to right,transparent 0%,white 10%,white 90%,transparent 100%);
+  }
+  .swiper-wrapper {
+      transition-timing-function: linear;
+      height: auto !important;
+  }
+  .swiper-slide {
+    width: 12rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /* In your CSS */
