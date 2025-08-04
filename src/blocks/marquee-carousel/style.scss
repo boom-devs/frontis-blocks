@@ -1,5 +1,17 @@
-.swiper-wrapper {
-    height: auto !important;
+.fb-marquee-carousel-container  {
+  .swiper {
+    mask-image: linear-gradient( to right,transparent 0%,white 10%,white 90%,transparent 100%);
+  }
+  .swiper-wrapper {
+      transition-timing-function: linear;
+      height: auto !important;
+  }
+  .swiper-slide {
+    width: 12rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 /* In your CSS */
