@@ -63,7 +63,7 @@ export default function Edit({ attributes, setAttributes, clientId, }) {
 
 	return (
 		<>
-			<InspectorControls>
+			{/* <InspectorControls>
 				<ToolsPanel
 					label={ __( 'Settings' ) }
 					resetAll={ () => setAttributes( { midSize: 2 } ) }
@@ -94,7 +94,7 @@ export default function Edit({ attributes, setAttributes, clientId, }) {
 						/>
 					</ToolsPanelItem>
 				</ToolsPanel>
-			</InspectorControls>
+			</InspectorControls> */}
 			<div { ...useBlockProps() }>{ paginationNumbers }</div>
 		</>
 	);

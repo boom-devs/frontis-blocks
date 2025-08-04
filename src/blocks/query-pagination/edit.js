@@ -77,7 +77,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			{ hasNextPreviousBlocks && (
+			{/* { hasNextPreviousBlocks && (
 				<InspectorControls>
 					<ToolsPanel
 						label={ __( 'Settings' ) }
@@ -123,7 +123,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						) }
 					</ToolsPanel>
 				</InspectorControls>
-			) }
+			) } */}
 			<nav { ...innerBlocksProps } />
 		</>
 	);

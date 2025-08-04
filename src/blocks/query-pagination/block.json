@@ -18,17 +18,10 @@
 		"showLabel": "showLabel"
 	},
 	"supports": {
+		"html": false,
 		"anchor": false,
 		"align": ["wide", "full"],
-        "customClassName": false,
-		"html": false,
-		"layout": {
-			"allowSwitching": false,
-			"allowInheriting": false,
-			"default": {
-				"type": "flex"
-			}
-		}
+        "customClassName": false
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"

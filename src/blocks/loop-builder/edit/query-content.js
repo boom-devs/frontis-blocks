@@ -73,7 +73,9 @@ export default function QueryContent( {
 	const { __unstableMarkNextChangeAsNotPersistent } =
 		useDispatch( blockEditorStore );
 	const instanceId = useInstanceId( QueryContent );
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps({
+		className: 'fb-loop-builder',
+	});
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		template: TEMPLATE,
 	} );
