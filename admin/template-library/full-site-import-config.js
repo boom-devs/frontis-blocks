@@ -6,6 +6,7 @@ import { ClipLoader } from "react-spinners";
 import TemplateHeader from "./template-header";
 import data from "./data.json";
 import FsiGbTypography from "./global-typo/global-typo";
+import SitePreview from "./sitePreview";
 
 const FullSiteImportConfig = ({
     template,
@@ -88,24 +89,9 @@ const FullSiteImportConfig = ({
 
                     {/* Right Panel - Preview */}
                     <div className="fb-import-preview-panel">
-                        <div className="fb-template-preview-card">
-                            <img
-                                src={template?.image}
-                                alt={template?.title}
-                                className="fb-preview-image"
-                            />
-                            <div className="fb-preview-info">
-                                <h3 className="fb-preview-title">
-                                    {template?.title || 'Renovate - Home Decor Website Template'}
-                                </h3>
-                                <div className="fb-preview-meta">
-                                    <span className="fb-preview-category">Construction</span>
-                                    <span className="fb-preview-type">FREE</span>
-                                </div>
-                            </div>
-                        </div>
+						<SitePreview />
                     </div>
-                    <div 
+                    <div
                         className={`fb-import-sidebar-collapse ${isSidebarCollapsed ? 'collapsed' : ''}`}
                         onClick={handleSidebarToggle}
                     >
