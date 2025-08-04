@@ -113,23 +113,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }, [sliderItemList, setAttributes]);
 
     /**
-     * Dynamically update the width of the slides
-     */
-    const updateSlideWidthHeight = () => {
-        if (!blockId) return;
-    
-        const slides = document.querySelectorAll(`.${blockId} .swiper-slide`);
-        slides.forEach(slide => {
-            slide.style.width = slideWidth.Desktop && slideWidthUnits.Desktop
-                ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}`
-                : 'auto';
-            slide.style.height = slideHeight.Desktop && slideHeightUnits.Desktop
-                ? `${slideHeight.Desktop}${slideHeightUnits.Desktop}`
-                : 'auto';
-        });
-    };
-
-    /**
      * Manages tab button settings and switches to block settings on click
      */
 
@@ -152,9 +135,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
            },
            allowTouchMove: false,
 
-            on: {
-                init: updateSlideWidthHeight(),
-            },
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -195,11 +175,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         slideHeightUnits,
     ]);
 
-    useEffect(() => {
-        updateSlideWidthHeight();
-    }, [slideWidth, slideWidthUnits, slideHeight, slideHeightUnits, blockId]);
-
-
     const renderSliderToolbarControls = () => {
         return (
             <BlockControls>
@@ -229,6 +204,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         setAttributes({ sliderItems: newItems });
     };
 
+    const backendSlideWidth = slideWidth.Desktop && slideWidthUnits.Desktop ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}` : 'fit-content';
+    const backendSlideHeight = slideHeight.Desktop && slideHeightUnits.Desktop ? `${slideHeight.Desktop}${slideHeightUnits.Desktop}` : '';
+
     return (
         <>
             <Inspector
@@ -248,7 +226,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 <div className="swiper swiper-container" ref={swiperRef}>
                     <div className={`swiper-wrapper fb-marquee-carousel-wrapper`}>
                         {sliderItems.map((item, index) => (
-                            <div key={item.id} className={`swiper-slide ${blockId} fb-marquee-carousel-item`}>
+                            <div key={item.id} className={`swiper-slide ${blockId} fb-marquee-carousel-item`}   style={{
+                                ...(backendSlideWidth ? { width: backendSlideWidth } : {}),
+                                ...(backendSlideHeight ? { height: backendSlideHeight } : {}),
+                              }}>
                                 {item.marqueeCarouselImageUrl && (
                                     <div className="fb-marquee-carousel-image-wrapper">
                                         <img src={item.marqueeCarouselImageUrl} alt={item.marqueeCarouselImageAlt} />
