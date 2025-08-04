@@ -44,7 +44,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			) }
 			{ displayArrow && (
 				<span
-					className={ `wp-block-query-pagination-next-arrow is-arrow-${ paginationArrow }` }
+					className={ `wp-block-query-pagination-next-arrow fb-page-next is-arrow-${ paginationArrow }` }
 					aria-hidden
 				>
 					{ displayArrow }

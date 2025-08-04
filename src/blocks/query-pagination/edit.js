@@ -57,7 +57,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const { __unstableMarkNextChangeAsNotPersistent } =
 		useDispatch( blockEditorStore );
 	const dropdownMenuProps = useToolsPanelDropdownMenuProps();
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps({
+		className: 'fb-query-pagination',
+	});
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		template: TEMPLATE,
 	} );

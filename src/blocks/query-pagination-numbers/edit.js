@@ -15,7 +15,7 @@ import {
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
 
 const createPaginationItem = ( content, Tag = 'a', extraClass = '' ) => (
-	<Tag key={ content } className={ `page-numbers ${ extraClass }` }>
+	<Tag key={ content } className={ `page-numbers fb-page-numbers ${ extraClass }` }>
 		{ content }
 	</Tag>
 );

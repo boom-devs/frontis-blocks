@@ -181,17 +181,17 @@ function render_loop_builder($block_content, $block) {
 			$next_url = ( $has_next && $paged < $total_pages ) ? get_pagenum_link( $paged + 1 ) : '';
 
 			// justify-content ক্লাস/স্টাইল (আপনার CSS অনুযায়ী এডজাস্ট করুন)
-			$jc_map = [
-				'center'       => 'justify-center',
-				'flex-end'     => 'justify-end',
-				'space-between'=> 'justify-between',
-				'space-around' => 'justify-around',
-				'space-evenly' => 'justify-evenly',
-				'flex-start'   => 'justify-start',
-			];
-			$jc_class = $jc_map[ $justify_content ] ?? 'justify-start';
+			// $jc_map = [
+			// 	'center'       => 'justify-center',
+			// 	'flex-end'     => 'justify-end',
+			// 	'space-between'=> 'justify-between',
+			// 	'space-around' => 'justify-around',
+			// 	'space-evenly' => 'justify-evenly',
+			// 	'flex-start'   => 'justify-start',
+			// ];
+			// $jc_class = $jc_map[ $justify_content ] ?? 'justify-start';
 
-			$output .= '<nav class="fb-query-pagination ' . esc_attr( $jc_class ) . '" aria-label="Pagination">';
+			$output .= '<nav class="fb-query-pagination" aria-label="Pagination">';
 
 			if ( $has_prev ) {
 				$output .= '<span class="fb-page-prev'. ( $prev_url ? '' : ' is-disabled' ) .'">';
