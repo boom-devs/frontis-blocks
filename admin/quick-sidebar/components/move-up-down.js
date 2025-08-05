@@ -25,9 +25,9 @@ export const SortableItem = ( { id, item } ) => {
 			style={style}
 			{...attributes} // Attributes required for accessibility
 			{...listeners} // Event listeners for drag events
-			className='spectra-ee-quick-access__sidebar--blocks--block'
+			className='frontis-blocks-ee-quick-access__sidebar--blocks--block'
 		>
-			<div className={`spectra-ee-quick-access__sidebar-icon__${item?.name?.split( '/' )[0]} spectra-ee-quick-access__sidebar-icon__${item?.name?.split( '/' )[0]}--${item?.name?.split( '/' )[1]} spectra-ee-quick-access__sidebar--blocks--block--icon`}>
+			<div className={`frontis-blocks-ee-quick-access__sidebar-icon__${item?.name?.split( '/' )[0]} frontis-blocks-ee-quick-access__sidebar-icon__${item?.name?.split( '/' )[0]}--${item?.name?.split( '/' )[1]} frontis-blocks-ee-quick-access__sidebar--blocks--block--icon`}>
 				<Icon icon={item.icon.src ? item.icon.src : item.icon} />
 			</div>
 		</div>
@@ -42,7 +42,7 @@ const DragAndDropComponent = ( { initialItems, updateDefaultAllowedQuickSidebarB
 	const onDragStart = () => {
 		const contentDiv = document.querySelector( '.interface-interface-skeleton__content' );
 		if ( contentDiv ) {
-			contentDiv.classList.add( 'spectra-ee-quick-access__sidebar--prevent-editor-interactions' );
+			contentDiv.classList.add( 'frontis-blocks-ee-quick-access__sidebar--prevent-editor-interactions' );
 		}
 	};
 
@@ -50,7 +50,7 @@ const DragAndDropComponent = ( { initialItems, updateDefaultAllowedQuickSidebarB
 	const onDragEnd = ( { active, over } ) => {
 		const contentDiv = document.querySelector( '.interface-interface-skeleton__content' );
 		if ( contentDiv ) {
-			contentDiv.classList.remove( 'spectra-ee-quick-access__sidebar--prevent-editor-interactions' );
+			contentDiv.classList.remove( 'frontis-blocks-ee-quick-access__sidebar--prevent-editor-interactions' );
 		}
 		if ( active.id !== over.id ) {
 			const oldIndex = items.findIndex( item => item.id === active.id );
@@ -90,7 +90,7 @@ const DragAndDropComponent = ( { initialItems, updateDefaultAllowedQuickSidebarB
 				items={items.map( item => item.id )}
 				strategy={verticalListSortingStrategy} // Use vertical list sorting strategy
 			>
-				<div className='spectra-ee-quick-access__sidebar--blocks-sortable'>
+				<div className='frontis-blocks-ee-quick-access__sidebar--blocks-sortable'>
 					{items.map( ( item, index ) => (
 						<SortableItem key={item.id} id={item.id} item={item} isLast={index === items.length - 1} />
 					) )}
