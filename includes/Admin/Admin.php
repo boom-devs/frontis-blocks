@@ -59,6 +59,9 @@ class Admin {
 		$theme_json = wp_get_global_settings();
 		$global_colors = get_option('fb_global_colors');
 
+        $automatic_block_recovery = get_option('fb_automatic_block_recovery');
+        $automatic_block_recovery = trim($automatic_block_recovery, '"'); // remove extra quotes
+
 		if ($theme_json && isset($theme_json['color'])) {
 			if(isset($theme_json['color']['palette'])) {
 				if (isset($theme_json['color']['palette']['theme'])) {
@@ -121,7 +124,11 @@ class Admin {
 			wp_enqueue_style('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/style-tlibrary.css', array(), '1.0.0');
 			wp_enqueue_script('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/tlibrary.js', $tl_script_asset['dependencies'], '1.0.0', true);
 			wp_enqueue_script('frontis-quick-access', FB_PLUGIN_URL . 'assets/admin/quickAccess.js', $tl_script_asset['dependencies'], '1.0.0', true);
-			wp_enqueue_script('frontis-block-recovery', FB_PLUGIN_URL . 'assets/admin/blockRecovery.js', $tl_script_asset['dependencies'], '1.0.0', true);
+
+            if ($automatic_block_recovery === "true") {
+                wp_enqueue_script('frontis-block-recovery', FB_PLUGIN_URL . 'assets/admin/blockRecovery.js', $tl_script_asset['dependencies'], '1.0.0', true);
+            }
+            
 			$localizeArray['nonce'] = wp_create_nonce('fb_import_demo_data');
 			wp_localize_script('frontis-template-library', 'frontisBlocksAdmin', $localizeArray);
 		}
