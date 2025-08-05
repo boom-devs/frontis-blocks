@@ -47,7 +47,7 @@
                 position: relative;
                 flex: 1;
                 max-width: 316px;
-                padding: 32px 24px;
+                padding: 32px 24px 0;
                 border-right: 1px solid $neutral-color-100;
                 overflow-y: auto;
                 scrollbar-width: thin;
@@ -163,8 +163,12 @@
                 }
 
                 .fb-import-actions {
+                    position: sticky;
+                    bottom: 0;
+                    left: 0;
                     margin-top: 32px;
-                    padding-top: 24px;
+                    padding: 24px 0;
+                    background-color: $white-color;
 
                     .fb-import-btn {
                         width: 100%;
@@ -268,7 +272,7 @@
             .fb-import-sidebar-collapse {
                 position: absolute;
                 top: 239px;
-                left: 335px;
+                left: 270px;
                 cursor: pointer;
                 z-index: 10;
                 transition: left 0.1s ease;

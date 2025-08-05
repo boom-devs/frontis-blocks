@@ -457,36 +457,36 @@ const attributes = {
 
 	/** Start Background Normal for fb container */
 	containerBgColorSwitcher: {
-		type: "string",
-		default: "normal",
+		type: 'string',
+		default: 'normal',
 	},
 	containerBgNormalBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	containerBgNormalClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	containerBgNormalGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	containerBgNormalCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	containerBgNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	/** Bg Normal Image for fb container */
 	containerBgNormalBackgroundImageUrl: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: ""
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
         }
     },
     containerBgNormalBackgroundImagePosition: {
@@ -525,36 +525,36 @@ const attributes = {
 
 	/**Bg Hover for fb container */
 	containerBgHoverBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	containerBgHoverClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	containerBgHoverGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	containerBgHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	containerBgHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	/** Hover Image for fb container */
 	containerBgHoverBackgroundImageUrl: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: ""
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	containerBgHoverBackgroundImagePosition: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: { x: 0.5, y: 0.5 },
 			Tablet: { x: 0.5, y: 0.5 },
@@ -562,76 +562,76 @@ const attributes = {
 		}
 	},
 	containerBgHoverBackgroundImageAttachment: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: ""
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	containerBgHoverBackgroundImageRepeat: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: ""
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	containerBgHoverBackgroundImageSize: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: ""
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	/** End Background for fb container */
 
 	/** Start Overlay for fb container */
 	containerBgOverlaySwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	containerBgOverlayOpacity: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
 		}
 	},
 
 	containerBgOverlayColorSwitcher: {
-		type: "string",
-		default: "normal",
+		type: 'string',
+		default: 'normal',
 	},
 	containerBgOverlayNormalBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	containerBgOverlayNormalClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	containerBgOverlayNormalGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	containerBgOverlayNormalCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	containerBgOverlayNormalCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	/** Bg Normal Image for fb container */
 	containerBgOverlayNormalBackgroundImageUrl: {
-        type: "object",
+        type: 'object',
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: ""
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
         }
     },
     containerBgOverlayNormalBackgroundImagePosition: {
@@ -670,36 +670,36 @@ const attributes = {
 
 	/**Bg Hover for fb container */
 	containerBgOverlayHoverBackgroundType: {
-		type: "string",
-		default: "classic",
+		type: 'string',
+		default: 'classic',
 	},
 	containerBgOverlayHoverClassicColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	containerBgOverlayHoverGradientColor: {
-		type: "string",
+		type: 'string',
 		default: null,
 	},
 	containerBgOverlayHoverCustomGradientSwitcher: {
-		type: "boolean",
+		type: 'boolean',
 		default: false,
 	},
 	containerBgOverlayHoverCustomGradientInputValue: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	/** Hover Image for fb container */
 	containerBgOverlayHoverBackgroundImageUrl: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: ""
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	containerBgOverlayHoverBackgroundImagePosition: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: { x: 0.5, y: 0.5 },
 			Tablet: { x: 0.5, y: 0.5 },
@@ -707,27 +707,27 @@ const attributes = {
 		}
 	},
 	containerBgOverlayHoverBackgroundImageAttachment: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: ""
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	containerBgOverlayHoverBackgroundImageRepeat: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: ""
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	containerBgOverlayHoverBackgroundImageSize: {
-		type: "object",
+		type: 'object',
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: ""
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 
@@ -735,7 +735,7 @@ const attributes = {
 
 	/** Start Padding */
 	containerGlobalPadding: {
-		type: "object",
+		type: 'object',
 		default: {
 			Desktop: '',
 			Tablet: '',
@@ -751,34 +751,34 @@ const attributes = {
 		}
 	},
 	containerDesktopPadding: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		}
 	},
 	containerTabletPadding: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		}
 	},
 	containerMobilePadding: {
-		type: "object",
+		type: 'object',
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		}
 	},
 	containerPaddingLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 	containerPaddingHasEdited: {
@@ -795,34 +795,34 @@ const attributes = {
 		}
     },
     containerDesktopMargin: {
-        type: "object",
+        type: 'object',
         default: {
-			top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+			top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     containerTabletMargin: {
-        type: "object",
+        type: 'object',
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     containerMobileMargin: {
-        type: "object",
+        type: 'object',
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-			right: "0",
+            top: '',
+            bottom: '',
+            left: '',
+			right: '',
         },
     },
 	containerMarginLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 	variationSelected: {
@@ -1411,33 +1411,33 @@ const attributes = {
 	},
 
 	containerDesktopSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     containerTabletSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
     containerMobileSwitcher: {
-        type: "boolean",
+        type: 'boolean',
         default: false,
     },
 
 	containerOverflow: {
         type: 'string',
-        default: "default",
+        default: 'default',
     },
 	containerPositionType: {
-        type: "string",
-        default: "default"
+        type: 'string',
+        default: 'default'
     },
     containerHZOrientationType: {
-        type: "string",
-        default: "left"
+        type: 'string',
+        default: 'left'
     },
     containerVROrientationType: {
-        type: "string",
-        default: "top"
+        type: 'string',
+        default: 'top'
     },
     containerHZLeftOffset: {
         type: 'object',
@@ -1506,7 +1506,7 @@ const attributes = {
 
 	containerBorder: {
         type: 'string',
-        default: "none",
+        default: 'none',
     },
     containerBorderColor: {
         type: 'string',
@@ -1515,8 +1515,8 @@ const attributes = {
         type: 'string',
     },
     containerBorderColorSwitcher : {
-        type: "string",
-        default: "normal"
+        type: 'string',
+        default: 'normal'
     },
 
     containerBorderUnits : {
@@ -1528,34 +1528,34 @@ const attributes = {
         }
     },
     containerDesktopBorderWidth: {
-        type: "object",
+        type: 'object',
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     containerTabBorderWidth: {
-        type: "object",
+        type: 'object',
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     containerMobileBorderWidth: {
-        type: "object",
+        type: 'object',
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     containerBorderLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 
@@ -1568,34 +1568,34 @@ const attributes = {
         }
     },
     containerDesktopBorderRadiusWidth: {
-        type: "object",
+        type: 'object',
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     containerTabBorderRadiusWidth: {
-        type: "object",
+        type: 'object',
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     containerMobileBorderRadiusWidth: {
-        type: "object",
+        type: 'object',
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     containerBorderRadiusLink : {
-        type : "boolean",
+        type : 'boolean',
         default: true
     },
 
@@ -1620,20 +1620,20 @@ const attributes = {
         default: '',
     },
 	containerGlobalCustomCSS : {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	containerGlobalCustomCSSValue : {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	containerGlobalCustomCSSID : {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	containerGlobalCustomCSSClass : {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 };
 

@@ -7,6 +7,8 @@ export default function Save({ attributes }) {
 
         slideWidth,
         slideWidthUnits,
+        slideHeight,
+        slideHeightUnits,
 
         autoplay,
         autoplayDirection,
@@ -27,8 +29,9 @@ export default function Save({ attributes }) {
         spaceBetween: 0,
         centeredSlides: false,
         speed: speed,
+        // autoplay: false,
         autoplay: {
-            delay: 0,
+            delay: 1,
             reverseDirection: reverseDirection,
             disableOnInteraction: false,
         },
@@ -45,14 +48,18 @@ export default function Save({ attributes }) {
         } : false,
     });
 
-    const frontendSlideWidth = slideWidth.Desktop && slideWidthUnits.Desktop ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}` : 'fit-content';
+    const frontendSlideWidth = slideWidth.Desktop && slideWidthUnits.Desktop ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}` : '';
+    const frontendSlideHeight = slideHeight.Desktop && slideHeightUnits.Desktop ? `${slideHeight.Desktop}${slideHeightUnits.Desktop}` : '';
 
     return (
-        <div {...blockProps} data-swiper-settings={swiperSettings} data-slide-width={frontendSlideWidth}>
+        <div {...blockProps} data-swiper-settings={swiperSettings}>
             <div className="swiper swiper-container">
                 <div className={`swiper-wrapper fb-marquee-carousel-wrapper`}>
                     {sliderItems.map((item) => (
-                        <div key={item.id} className={`swiper-slide ${blockId} fb-marquee-carousel-item`}>
+                        <div key={item.id} className={`swiper-slide ${blockId} fb-marquee-carousel-item`}   style={{
+                            ...(frontendSlideWidth ? { width: frontendSlideWidth } : {}),
+                            ...(frontendSlideHeight ? { height: frontendSlideHeight } : {}),
+                          }}>
                             {item.marqueeCarouselImageUrl && (
                                 <div className="fb-marquee-carousel-image-wrapper">
                                     <img src={item.marqueeCarouselImageUrl} alt={item.marqueeCarouselImageAlt} />

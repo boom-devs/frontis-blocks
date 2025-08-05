@@ -16,6 +16,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
         slideWidth,
         slideWidthUnits,
+        slideHeight,
+        slideHeightUnits,
 
         autoplay,
         autoplayDirection,
@@ -30,7 +32,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         className: `fb-marquee-carousel-container ${blockId}`,
     });
 
-    const [sliderItemList, setSliderItemList] = useState(sliderItems);
+    let defaultImageUrl = '';
+    if (typeof FrontisBlocksData !== 'undefined') {
+        defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
+    }
+
+    const [sliderItemList, setSliderItemList] = useState(() => {
+        return sliderItems.map(item => ({
+            ...item,
+            marqueeCarouselImageUrl: item.marqueeCarouselImageUrl || defaultImageUrl,
+        }));
+    });
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
@@ -55,10 +67,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const handleAddItem = () => {
         const newItem = {
             id: `item-${sliderItems.length + 1}`,
-            marqueeCarouselImageUrl: '',
+            marqueeCarouselImageUrl: defaultImageUrl,
             marqueeCarouselImageAlt: '',
             marqueeCarouselImageID: '',
-            showContentSwitcher: true,
+            showContentSwitcher: false,
             marqueeCarouselText: 'Carousel Text',
             marqueeCarouseHoverText: '',
         };
@@ -67,6 +79,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     };
 
     const handleChangeItem = (id, key, value) => {
+        
         const updatedItems = sliderItemList.map(item => {
             if (item.id === id) {
                 if (key === 'marqueeCarouselImageID') { 
@@ -100,20 +113,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }, [sliderItemList, setAttributes]);
 
     /**
-     * Dynamically update the width of the slides
-     */
-    const updateSlideWidths = () => {
-        if (!blockId) return;
-    
-        const slides = document.querySelectorAll(`.${blockId} .swiper-slide`);
-        slides.forEach(slide => {
-            slide.style.width = slideWidth.Desktop && slideWidthUnits.Desktop
-                ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}`
-                : 'fit-content';
-        });
-    };
-
-    /**
      * Manages tab button settings and switches to block settings on click
      */
 
@@ -130,15 +129,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
            centeredSlides: false,
            speed: speed,
            autoplay: {
-             delay: 0,
+             delay: 1,
              reverseDirection: reverseDirection,
              disableOnInteraction: true,
            },
            allowTouchMove: false,
 
-            on: {
-                init: updateSlideWidths(),
-            },
             navigation: showNavigation ? {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
@@ -175,12 +171,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showPagination,
         slideWidth,
         slideWidthUnits,
+        slideHeight,
+        slideHeightUnits,
     ]);
-
-    useEffect(() => {
-        updateSlideWidths();
-    }, [slideWidth, slideWidthUnits, blockId]);
-
 
     const renderSliderToolbarControls = () => {
         return (
@@ -211,6 +204,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         setAttributes({ sliderItems: newItems });
     };
 
+    const backendSlideWidth = slideWidth.Desktop && slideWidthUnits.Desktop ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}` : 'fit-content';
+    const backendSlideHeight = slideHeight.Desktop && slideHeightUnits.Desktop ? `${slideHeight.Desktop}${slideHeightUnits.Desktop}` : '';
+
     return (
         <>
             <Inspector
@@ -230,7 +226,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 <div className="swiper swiper-container" ref={swiperRef}>
                     <div className={`swiper-wrapper fb-marquee-carousel-wrapper`}>
                         {sliderItems.map((item, index) => (
-                            <div key={item.id} className={`swiper-slide ${blockId} fb-marquee-carousel-item`}>
+                            <div key={item.id} className={`swiper-slide ${blockId} fb-marquee-carousel-item`}   style={{
+                                ...(backendSlideWidth ? { width: backendSlideWidth } : {}),
+                                ...(backendSlideHeight ? { height: backendSlideHeight } : {}),
+                              }}>
                                 {item.marqueeCarouselImageUrl && (
                                     <div className="fb-marquee-carousel-image-wrapper">
                                         <img src={item.marqueeCarouselImageUrl} alt={item.marqueeCarouselImageAlt} />

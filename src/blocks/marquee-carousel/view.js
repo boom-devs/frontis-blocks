@@ -9,18 +9,8 @@
 
             try {
                 const swiperSettings = sliderContainer.dataset.swiperSettings;
-                const slideWidth = sliderContainer.dataset.slideWidth;
                 if (swiperSettings) {
                     const settings = JSON.parse(swiperSettings);
-                    
-                    settings.on = {
-                        init: function () {
-                            const slides = sliderContainer.querySelectorAll('.swiper-slide');
-                            slides.forEach(slide => {
-                                slide.style.width = slideWidth;
-                            });
-                        }
-                    };
 
                     new Swiper(sliderContainer.querySelector('.swiper'), settings);
                 }
