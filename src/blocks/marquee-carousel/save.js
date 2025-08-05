@@ -31,7 +31,7 @@ export default function Save({ attributes }) {
         speed: speed,
         // autoplay: false,
         autoplay: {
-            delay: 0,
+            delay: 1,
             reverseDirection: reverseDirection,
             disableOnInteraction: false,
         },

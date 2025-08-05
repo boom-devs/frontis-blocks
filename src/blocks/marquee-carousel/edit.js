@@ -129,7 +129,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
            centeredSlides: false,
            speed: speed,
            autoplay: {
-             delay: 0,
+             delay: 1,
              reverseDirection: reverseDirection,
              disableOnInteraction: true,
            },
