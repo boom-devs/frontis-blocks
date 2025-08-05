@@ -91,7 +91,8 @@ const FullSiteImportConfig = ({
                     <div className="fb-import-preview-panel">
 						<SitePreview />
                     </div>
-                    <div
+                    
+                    <div 
                         className={`fb-import-sidebar-collapse ${isSidebarCollapsed ? 'collapsed' : ''}`}
                         onClick={handleSidebarToggle}
                     >
