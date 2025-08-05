@@ -84,11 +84,15 @@ const EditorOptions = () => {
       Tablet: '10',
       Mobile: '10',
     },
+    automatic_block_recovery: false,
     custom_css: false,
     copy_paste_style: false,
   });
 
   const [device, setDevice] = useState('Desktop');
+
+
+  const [ isAutomaticBlockRecoveryChecked, setIsAutomaticBlockRecoveryChecked ] = useState(options.automatic_block_recovery);
 
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
@@ -111,11 +115,12 @@ const EditorOptions = () => {
 					const fetchedOptions = response.data;
 
 					// If default_content_width, container_column_gap, container_row_gap or container_padding is undefined or empty in DB, save your default
-					if (!fetchedOptions.default_content_width || !fetchedOptions.container_column_gap || !fetchedOptions.container_row_gap || !fetchedOptions.container_padding) {
+					if (!fetchedOptions.default_content_width || !fetchedOptions.container_column_gap || !fetchedOptions.container_row_gap || !fetchedOptions.container_padding || !fetchedOptions.automatic_block_recovery) {
 						saveOption('default_content_width', options.default_content_width);
             saveOption('container_column_gap', options.container_column_gap);
             saveOption('container_row_gap', options.container_row_gap);
             saveOption('container_padding', options.container_padding);
+            saveOption('automatic_block_recovery', options.automatic_block_recovery);
 					} else {
 						setOptions(prevOptions => ({
 							...prevOptions,
@@ -124,6 +129,7 @@ const EditorOptions = () => {
               container_column_gap: JSON.parse(fetchedOptions.container_column_gap),
               container_row_gap: JSON.parse(fetchedOptions.container_row_gap),
               container_padding: JSON.parse(fetchedOptions.container_padding),
+              automatic_block_recovery: fetchedOptions.automatic_block_recovery,
 						}));
 					}
         } else {
@@ -263,6 +269,11 @@ const EditorOptions = () => {
     });
   };
 
+  const handleAutomaticBlockRecovery = (checked) => {
+      setIsAutomaticBlockRecoveryChecked(checked);
+      saveOption('automatic_block_recovery', checked);
+  };
+
   return (
     <div className="fb-blocks-settings-options">
       <div className="fb-option">
@@ -327,6 +338,24 @@ const EditorOptions = () => {
           device={device}
           onDeviceChange={handleDevice}
         />
+      </div>
+
+      <div className="fb-option">
+        <div className="fb-option-label">
+          <h3>{__('Automatic Block Recovery', 'frontis-blocks')}</h3>
+          <p>{__('Enable this to automatically recover any erroneous blocks that may occur on your web pages.', 'frontis-blocks')}</p>
+          <p>{__('This will save you time spent on clicking all those "Attempt Block Recovery" Buttons.', 'frontis-blocks')}</p>
+        </div>
+
+          <div className="fb-block-card-switch">
+              <label className="fb-block-card-switch-label">
+                <Switch
+                    checked={isAutomaticBlockRecoveryChecked} 
+                    onChange={handleAutomaticBlockRecovery}
+                    className="fb-block-card-switch-input"
+                />
+              </label>
+          </div>
       </div>
 
       <div className="fb-option">
