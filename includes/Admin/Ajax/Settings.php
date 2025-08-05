@@ -29,6 +29,7 @@ class Settings extends AjaxBase {
             'container_column_gap',
             'container_row_gap',
             'container_padding',
+            'automatic_block_recovery',
             'custom_css',
             'copy_paste_style',
             'file_generation',
@@ -92,6 +93,10 @@ class Settings extends AjaxBase {
 
     public function container_padding() {
         $this->handle_option_update('container_padding', 'number');
+    }
+
+    public function automatic_block_recovery() {
+        $this->handle_option_update('automatic_block_recovery', 'boolean');
     }
 
     public function custom_css() {
