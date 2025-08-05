@@ -44,8 +44,6 @@ class AssetsGenerator
 		$this->post_id = $post_id;
 		$this->post = $post;
 
-		// var_dump(get_post_type($this->post_id) === 'wp_template' && in_array($post->post_name, ['archive', 'single', 'search', '404', 'home', 'page']));
-
 		if(get_post_type($this->post_id) === 'wp_template') {
 			$this->css_generator_functions();
 		}
