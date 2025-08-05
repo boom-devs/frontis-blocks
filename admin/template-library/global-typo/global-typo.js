@@ -470,3 +470,8 @@ function FsiGbTypography() {
 }
 
 export default FsiGbTypography;
+
+color-setttings
+typography-settings
+
+settings.js
