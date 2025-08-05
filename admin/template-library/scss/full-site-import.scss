@@ -46,6 +46,7 @@
             .fb-import-form-panel {
                 position: relative;
                 flex: 1;
+                min-width: 316px;
                 max-width: 316px;
                 padding: 32px 24px 0;
                 border-right: 1px solid $neutral-color-100;
@@ -157,6 +158,15 @@
                                     box-sizing: content-box;
                                     padding: 16px;
                                 }
+                            }
+                        }
+                        .fb-image-control-wrapper {
+                            margin-top: 10px;
+
+                            .fb-image-control {
+                                 background-size: contain;
+                                 height: unset;
+                                 aspect-ratio: 2.6/2;
                             }
                         }
                     }
@@ -272,7 +282,7 @@
             .fb-import-sidebar-collapse {
                 position: absolute;
                 top: 239px;
-                left: 270px;
+                left: 300px;
                 cursor: pointer;
                 z-index: 10;
                 transition: left 0.1s ease;

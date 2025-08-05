@@ -1,17 +1,23 @@
 /**
  * WordPress dependencies
  */
+import { __ } from "@wordpress/i18n";
 import { useState, useCallback, useEffect } from "@wordpress/element";
 import { ClipLoader } from "react-spinners";
 import data from "./data.json";
 import TemplateHeader from "./template-header";
 import FullSiteImportConfig from "./full-site-import-config";
+import FB_ImageControl from '@Components/image-control';
+import FullSiteImportSettingConfig from "./components/FullSiteImportSettingConfig";
+import FullSiteImportSetting from "./components/fullSiteImportSetting";
+import FullSiteImportContent from "./components/fullSiteImportContent";
 
 const FullSiteImport = ({ template, onClose, onBack }) => {
     const [formData, setFormData] = useState({
         siteName: (window.frontisBlocksAdmin && window.frontisBlocksAdmin.siteName) || '',
         siteTagline: '',
-        logo: null,
+        logo: {id: '', url: '', alt: ''},
+        logoUrl: '',
         importContent: true,
         importCustomizer: true,
         importWidgets: true,
@@ -23,33 +29,12 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
     const [activeTab, setActiveTab] = useState('patterns');
     const [showConfigStep, setShowConfigStep] = useState(false);
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-    const [logoPreview, setLogoPreview] = useState(null);
 
     const handleInputChange = useCallback((field, value) => {
         setFormData(prev => ({
             ...prev,
             [field]: value
         }));
-    }, []);
-
-    const handleLogoUpload = useCallback((event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const validTypes = [
-                'image/png',
-                'image/jpeg',
-                'image/gif',
-                'image/svg+xml'
-            ];
-            if (validTypes.includes(file.type)) {
-                setFormData(prev => ({
-                    ...prev,
-                    logo: file
-                }));
-            } else {
-                alert('Please upload a valid file type: PNG, JPG, SVG, or GIF.');
-            }
-        }
     }, []);
 
     const handleNext = useCallback(() => {
@@ -108,32 +93,6 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
         }
     }, [template?.id, formData, onClose]);
 
-    useEffect(() => {
-        if (formData.logo) {
-            const objectUrl = URL.createObjectURL(formData.logo);
-            setLogoPreview(objectUrl);
-            return () => URL.revokeObjectURL(objectUrl);
-        } else {
-            setLogoPreview(null);
-        }
-    }, [formData.logo]);
-
-    if (showConfigStep) {
-        return (
-            <FullSiteImportConfig
-                template={template}
-                formData={formData}
-                onClose={onClose}
-                onBack={() => setShowConfigStep(false)}
-                onImport={handleImport}
-                isImporting={isImporting}
-                importProgress={importProgress}
-                currentStep={currentStep}
-                isSidebarCollapsed = {isSidebarCollapsed}
-                setIsSidebarCollapsed = {setIsSidebarCollapsed}
-            />
-        );
-    }
 
     return (
         <div className="fb-full-site-import-modal">
@@ -150,118 +109,32 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                 {/* Content */}
                 <div className={`fb-full-site-import-content ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
                     {/* Left Panel - Sidebar */}
-                    <div className={`fb-import-form-panel ${isSidebarCollapsed ? 'collapsed' : ''}`}>
-                        <div className="fb-form-section">
-                            <span className="fb-template-label">Template Name:</span>
-                            <h6 className="fb-template-title">{template?.title || 'Renovate - Home Decor Website Template'}</h6>
-
-                            <div className="fb-form-group">
-                                <label htmlFor="siteName">Site Name</label>
-                                <input
-                                    type="text"
-                                    id="siteName"
-                                    placeholder="Enter your site name"
-                                    value={formData.siteName}
-                                    onChange={(e) => handleInputChange('siteName', e.target.value)}
-                                    className="fb-form-input"
-                                />
-                            </div>
-
-                            <div className="fb-form-group">
-                                <label htmlFor="siteTagline">Site Tagline</label>
-                                <input
-                                    type="text"
-                                    id="siteTagline"
-                                    placeholder="Enter your site tagline"
-                                    value={formData.siteTagline}
-                                    onChange={(e) => handleInputChange('siteTagline', e.target.value)}
-                                    className="fb-form-input"
-                                />
-                            </div>
-
-                            <div className="fb-form-group">
-                                <label>Upload Logo</label>
-                                <div className="fb-logo-upload">
-                                    <input
-                                        type="file"
-                                        id="logoUpload"
-                                        accept=".png,.jpg,.jpeg,.svg,.gif"
-                                        onChange={handleLogoUpload}
-                                        className="fb-file-input"
-                                    />
-                                    <input
-                                        type="file"
-                                        id="logoUpload"
-                                        accept=".png,.jpg,.jpeg,.svg,.gif"
-                                        onChange={handleLogoUpload}
-                                        className="fb-file-input"
-                                        style={{ display: 'none' }}
-                                    />
-                                    <label htmlFor="logoUpload" className="fb-upload-btn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M17.4776 9.01106C17.485 9.01102 17.4925 9.01101 17.5 9.01101C19.9853 9.01101 22 11.0294 22 13.5193C22 15.8398 20.25 17.7508 18 18M17.4776 9.01106C17.4924 8.84606 17.5 8.67896 17.5 8.51009C17.5 5.46695 15.0376 3 12 3C9.12324 3 6.76233 5.21267 6.52042 8.03192M17.4776 9.01106C17.3753 10.1476 16.9286 11.1846 16.2428 12.0165M6.52042 8.03192C3.98398 8.27373 2 10.4139 2 13.0183C2 15.4417 3.71776 17.4632 6 17.9273M6.52042 8.03192C6.67826 8.01687 6.83823 8.00917 7 8.00917C8.12582 8.00917 9.16474 8.38194 10.0005 9.01101" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M12 13V21M12 13C11.2998 13 9.99153 14.9943 9.5 15.5M12 13C12.7002 13 14.0085 14.9943 14.5 15.5" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                        
-                                        {formData.logo ? (
-                                            <>
-                                                <span className="fb-file-name">{formData.logo.name}</span>
-                                                {logoPreview && (
-                                                    <img src={logoPreview} alt="Logo Preview" className="fb-logo-preview" style={{maxWidth: '120px', maxHeight: '60px', display: 'block', marginTop: '8px'}} />
-                                                )}
-                                            </>
-                                        ) : (
-                                            'Click to upload SVG, PNG, JPG or GIF (max. 800x400 px)SVG, PNG, JPG or GIF (max. 800x400 px)'
-                                        )}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="fb-import-actions">
-                            <div className="fb-import-step-btn-wrapper">
-                                <button
-                                    className="fb-import-btn next"
-                                    onClick={handleNext}
-                                    disabled={!formData.siteName.trim()}
-                                >
-                                    Next
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </button>
-                                <button
-                                    className="fb-import-btn back"
-                                    onClick={handleBackClick}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="#6A758E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                    Back
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    {showConfigStep ? (
+                        <FullSiteImportSettingConfig
+                            template={template}
+                            onBack={() => setShowConfigStep(false)}
+                            onImport={handleImport}
+                            isImporting={isImporting}
+                            importProgress={importProgress}
+                            currentStep={currentStep}
+                            isSidebarCollapsed = {isSidebarCollapsed}
+                        />
+                    ) : (
+                        <FullSiteImportSetting
+                            template={template}
+                            formData={formData}
+                            setFormData={setFormData}
+                            handleInputChange={handleInputChange}
+                            handleNext={handleNext}
+                            handleBackClick={handleBackClick}
+                            isSidebarCollapsed = {isSidebarCollapsed}
+                        />
+                    )}
                     
                     {/* Right Panel - Preview */}
-                    <div className="fb-import-preview-panel">
-                        <div className="fb-template-preview-card">
-                            <img
-                                src={template?.image}
-                                alt={template?.title}
-                                className="fb-preview-image"
-                            />
-                            <div className="fb-preview-info">
-                                <h3 className="fb-preview-title">
-                                    {template?.title || 'Renovate - Home Decor Website Template'}
-                                </h3>
-                                <div className="fb-preview-meta">
-                                    <span className="fb-preview-category">Construction</span>
-                                    <span className="fb-preview-type">FREE</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <FullSiteImportContent
+                        template={template}
+                    />
                     
                     {/* Collapse Button */}
                     <div 
