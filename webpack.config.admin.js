@@ -25,6 +25,7 @@ module.exports = {
 		sidebar: path.resolve(process.cwd(), 'admin', 'sidebar', 'index.js'),
 		tlibrary:path.resolve(process.cwd(), 'admin', 'template-library', 'index.js'),
 		quickAccess:path.resolve(process.cwd(), 'admin', 'quick-sidebar', 'index.js'),
+		blockRecovery: path.resolve(process.cwd(), 'admin', 'block-recovery', 'index.js')
 	},
 	output: {
 		path: path.resolve(process.cwd(), 'assets', 'admin'),
