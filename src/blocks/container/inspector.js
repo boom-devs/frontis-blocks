@@ -1515,8 +1515,8 @@ const Inspector = (props) => {
 							spacingUnitsHandler={containerPaddingUnitsHandler}
 							spacingUnits={containerPaddingUnits}
 							spacingDesktop={isBlockRootParent && containerDesktopPadding.top === '' ? {top: containerGlobalPadding.Desktop, right: containerGlobalPadding.Desktop, bottom: containerGlobalPadding.Desktop, left: containerGlobalPadding.Desktop} : containerDesktopPadding}
-							spacingTablet={isBlockRootParent && containerTabletPadding.top === '' ? {top: containerGlobalPadding.Tablet, right: containerGlobalPadding.Tablet, bottom: containerGlobalPadding.Tablet, left: containerGlobalPadding.Tablet} : containerTabletPadding}
-							spacingMobile={isBlockRootParent && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Mobile, right: containerGlobalPadding.Mobile, bottom: containerGlobalPadding.Mobile, left: containerGlobalPadding.Mobile} : containerMobilePadding}
+							spacingTablet={isBlockRootParent && containerDesktopPadding.top === '' ? {top: containerGlobalPadding.Tablet, right: containerGlobalPadding.Tablet, bottom: containerGlobalPadding.Tablet, left: containerGlobalPadding.Tablet} : containerTabletPadding}
+							spacingMobile={isBlockRootParent && containerDesktopPadding.top === '' ? {top: containerGlobalPadding.Mobile, right: containerGlobalPadding.Mobile, bottom: containerGlobalPadding.Mobile, left: containerGlobalPadding.Mobile} : containerMobilePadding}
 							handleSpacingUnitHandler={containerPaddingUnitsChange}
 							spacingCombineBtn={containerPaddingLink}
 							spacingCombineBtnHandler={containerPaddingLinkBtn}
