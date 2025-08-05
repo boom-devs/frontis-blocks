@@ -89,11 +89,17 @@ const EditorOptions = () => {
     copy_paste_style: false,
   });
 
+  const [isAutomaticBlockRecoveryChecked, setIsAutomaticBlockRecoveryChecked] = useState(options.automatic_block_recovery);
+
+  useEffect(() => {
+    try {
+      setIsAutomaticBlockRecoveryChecked(JSON.parse(options.automatic_block_recovery) === true);
+    } catch {
+      setIsAutomaticBlockRecoveryChecked(false);
+    }
+  }, [options.automatic_block_recovery]);
+
   const [device, setDevice] = useState('Desktop');
-
-
-  const [ isAutomaticBlockRecoveryChecked, setIsAutomaticBlockRecoveryChecked ] = useState(options.automatic_block_recovery);
-
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
   useEffect(() => {
@@ -129,7 +135,7 @@ const EditorOptions = () => {
               container_column_gap: JSON.parse(fetchedOptions.container_column_gap),
               container_row_gap: JSON.parse(fetchedOptions.container_row_gap),
               container_padding: JSON.parse(fetchedOptions.container_padding),
-              automatic_block_recovery: fetchedOptions.automatic_block_recovery,
+              automatic_block_recovery: JSON.parse(fetchedOptions.automatic_block_recovery),
 						}));
 					}
         } else {
@@ -270,8 +276,8 @@ const EditorOptions = () => {
   };
 
   const handleAutomaticBlockRecovery = (checked) => {
-      setIsAutomaticBlockRecoveryChecked(checked);
-      saveOption('automatic_block_recovery', checked);
+    setIsAutomaticBlockRecoveryChecked(checked);
+    saveOption('automatic_block_recovery', checked);
   };
 
   return (
