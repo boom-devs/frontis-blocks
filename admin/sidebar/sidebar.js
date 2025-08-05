@@ -240,6 +240,7 @@ function FrontisBlocksSidebar() {
 	const [fontFamilies, setFontFamilies] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 
+
 	const mobilePopoverProps = { placement: 'bottom-start', offset: 8 };
 	// Memoized theme colors
 	const themeColors = useMemo(
@@ -574,6 +575,7 @@ function FrontisBlocksSidebar() {
 											paletteLabel={ __( 'Solid' ) }
 											paletteLabelHeadingLevel={ 3 }
 											popoverProps={ popoverProps }
+											classnames="fb-solid-color-panel"
 										/>
 										<PaletteEdit
 											colors={ customColors }
@@ -582,27 +584,32 @@ function FrontisBlocksSidebar() {
 											paletteLabelHeadingLevel={ 3 }
 											slugPrefix="custom-"
 											popoverProps={ popoverProps }
+											classnames="fb-custom-color-panel"	
 										/>
 
 									</div>
 
 									{/* Gradient Section */}
 									<div className="fb-color-section">
-										<PaletteEdit
-											canReset={true}
-											canOnlyChangeValues
-											gradients={ gradientColors || frontisBlocksAdmin?.gradients_colors }
-											onChange={ setGradientColors }
-											paletteLabel={ __( 'Gradient' ) }
-											paletteLabelHeadingLevel={ 3 }
-											popoverProps={ popoverProps }
-										/>
+										{(gradientColors.length !== 0 || frontisBlocksAdmin?.gradients_colors.length !== 0) && (
+											<PaletteEdit
+												canReset={true}
+												canOnlyChangeValues
+												gradients={ gradientColors || frontisBlocksAdmin?.gradients_colors }
+												onChange={ setGradientColors }
+												paletteLabel={ __( 'Gradient' ) }
+												classnames="fb-gradient-color-panel"
+												paletteLabelHeadingLevel={ 3 }
+												popoverProps={ popoverProps }
+											/>
+										)}
 										<PaletteEdit
 											gradients={ customGradientColors }
 											onChange={ setCustomGradientColors }
-											paletteLabel={ __( 'Custom Gradient Colors' ) }
+											paletteLabel={ __( 'Custom Gradients' ) }
 											paletteLabelHeadingLevel={ 3 }
 											slugPrefix="custom-"
+											className="fb-custom-gradient-color-panel"	
 											popoverProps={ popoverProps }
 										/>
 									</div>

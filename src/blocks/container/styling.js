@@ -296,10 +296,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	const rowGapDesktopFallback = getFallbackNumber( rowGap['Desktop'] === '' ? globalRowGap['Desktop'] : rowGap['Desktop'], 'rowGapDesktop', blockName );
 	const columnGapDesktopFallback = getFallbackNumber( columnGap['Desktop'] === '' ? globalColumnGap['Desktop'] : columnGap['Desktop'], 'columnGapDesktop', blockName );
-	const rowGapTabletFallback = getFallbackNumber( rowGap['Tablet'] === '' ? globalRowGap['Tablet'] : rowGap['Tablet'], 'rowGapTablet', blockName );
-	const columnGapTabletFallback = getFallbackNumber( columnGap['Tablet'] === '' ? globalColumnGap['Tablet'] : columnGap['Tablet'], 'columnGapTablet', blockName );
-	const rowGapMobileFallback = getFallbackNumber( rowGap['Mobile'] === '' ? globalRowGap['Mobile'] : rowGap['Mobile'], 'rowGapMobile', blockName );
-	const columnGapMobileFallback = getFallbackNumber( columnGap['Mobile'] === '' ? globalColumnGap['Mobile'] : columnGap['Mobile'], 'columnGapMobile', blockName );
+	const rowGapTabletFallback = getFallbackNumber( rowGap['Desktop'] === '' ? globalRowGap['Tablet'] : rowGap['Tablet'], 'rowGapTablet', blockName );
+	const columnGapTabletFallback = getFallbackNumber( columnGap['Desktop'] === '' ? globalColumnGap['Tablet'] : columnGap['Tablet'], 'columnGapTablet', blockName );
+	const rowGapMobileFallback = getFallbackNumber( rowGap['Desktop'] === '' ? globalRowGap['Mobile'] : rowGap['Mobile'], 'rowGapMobile', blockName );
+	const columnGapMobileFallback = getFallbackNumber( columnGap['Desktop'] === '' ? globalColumnGap['Mobile'] : columnGap['Mobile'], 'columnGapMobile', blockName );
 
 
 	const borderCSS = generateBorderCSS( attributes, 'container' );
@@ -593,58 +593,52 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	// Handle Desktop Border Width - only set values if they are not 0
 	if (containerDesktopBorderWidth && (
-		parseInt(containerDesktopBorderWidth.top) !== 0 ||
-		parseInt(containerDesktopBorderWidth.right) !== 0 ||
-		parseInt(containerDesktopBorderWidth.bottom) !== 0 ||
-		parseInt(containerDesktopBorderWidth.left) !== 0)) {
+		parseInt(containerDesktopBorderWidth.top) !== '' ||
+		parseInt(containerDesktopBorderWidth.right) !== '' ||
+		parseInt(containerDesktopBorderWidth.bottom) !== '' ||
+		parseInt(containerDesktopBorderWidth.left) !== '')) {
 
 		containerBorderDesktopWidthCSS['border-width'] =
 			`${generateCSSUnit(containerDesktopBorderWidth.top, containerBorderUnits.Desktop)} ` +
 			`${generateCSSUnit(containerDesktopBorderWidth.right, containerBorderUnits.Desktop)} ` +
 			`${generateCSSUnit(containerDesktopBorderWidth.bottom, containerBorderUnits.Desktop)} ` +
 			`${generateCSSUnit(containerDesktopBorderWidth.left, containerBorderUnits.Desktop)}`;
-	} else {
-		containerBorderDesktopWidthCSS['border-width'] = "0px";
 	}
 
 	// Handle Tablet Border Width
 	if (containerTabBorderWidth && (
-		parseInt(containerTabBorderWidth.top) !== 0 ||
-		parseInt(containerTabBorderWidth.right) !== 0 ||
-		parseInt(containerTabBorderWidth.bottom) !== 0 ||
-		parseInt(containerTabBorderWidth.left) !== 0)) {
+		parseInt(containerTabBorderWidth.top) !== '' ||
+		parseInt(containerTabBorderWidth.right) !== '' ||
+		parseInt(containerTabBorderWidth.bottom) !== '' ||
+		parseInt(containerTabBorderWidth.left) !== '')) {
 
 		containerBorderTabletWidthCSS['border-width'] =
 			`${generateCSSUnit(containerTabBorderWidth.top, containerBorderUnits.Tablet)} ` +
 			`${generateCSSUnit(containerTabBorderWidth.right, containerBorderUnits.Tablet)} ` +
 			`${generateCSSUnit(containerTabBorderWidth.bottom, containerBorderUnits.Tablet)} ` +
 			`${generateCSSUnit(containerTabBorderWidth.left, containerBorderUnits.Tablet)}`;
-	} else {
-		containerBorderTabletWidthCSS['border-width'] = "0px";
 	}
 
 	// Handle Mobile Border Width
 	if (containerMobileBorderWidth && (
-		parseInt(containerMobileBorderWidth.top) !== 0 ||
-		parseInt(containerMobileBorderWidth.right) !== 0 ||
-		parseInt(containerMobileBorderWidth.bottom) !== 0 ||
-		parseInt(containerMobileBorderWidth.left) !== 0)) {
+		parseInt(containerMobileBorderWidth.top) !== '' ||
+		parseInt(containerMobileBorderWidth.right) !== '' ||
+		parseInt(containerMobileBorderWidth.bottom) !== '' ||
+		parseInt(containerMobileBorderWidth.left) !== '')) {
 
 		containerBorderMobileWidthCSS['border-width'] =
 			`${generateCSSUnit(containerMobileBorderWidth.top, containerBorderUnits.Mobile)} ` +
 			`${generateCSSUnit(containerMobileBorderWidth.right, containerBorderUnits.Mobile)} ` +
 			`${generateCSSUnit(containerMobileBorderWidth.bottom, containerBorderUnits.Mobile)} ` +
 			`${generateCSSUnit(containerMobileBorderWidth.left, containerBorderUnits.Mobile)}`;
-	} else {
-		containerBorderMobileWidthCSS['border-width'] = "0px";
 	}
 
 	// Handle Desktop Border Radius - only set values if they are not 0
 	if (containerDesktopBorderRadiusWidth && (
-		parseInt(containerDesktopBorderRadiusWidth.top) !== 0 ||
-		parseInt(containerDesktopBorderRadiusWidth.right) !== 0 ||
-		parseInt(containerDesktopBorderRadiusWidth.bottom) !== 0 ||
-		parseInt(containerDesktopBorderRadiusWidth.left) !== 0)) {
+		parseInt(containerDesktopBorderRadiusWidth.top) !== '' ||
+		parseInt(containerDesktopBorderRadiusWidth.right) !== '' ||
+		parseInt(containerDesktopBorderRadiusWidth.bottom) !== '' ||
+		parseInt(containerDesktopBorderRadiusWidth.left) !== '')) {
 
 		containerBorderRadiusDesktopWidthCSS['border-radius'] =
 			`${generateCSSUnit(containerDesktopBorderRadiusWidth.top, containerBorderRadiusUnits.Desktop)} ` +
@@ -655,10 +649,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	// Handle Tablet Border Radius
 	if (containerTabBorderRadiusWidth && (
-		parseInt(containerTabBorderRadiusWidth.top) !== 0 ||
-		parseInt(containerTabBorderRadiusWidth.right) !== 0 ||
-		parseInt(containerTabBorderRadiusWidth.bottom) !== 0 ||
-		parseInt(containerTabBorderRadiusWidth.left) !== 0)) {
+		parseInt(containerTabBorderRadiusWidth.top) !== '' ||
+		parseInt(containerTabBorderRadiusWidth.right) !== '' ||
+		parseInt(containerTabBorderRadiusWidth.bottom) !== '' ||
+		parseInt(containerTabBorderRadiusWidth.left) !== '')) {
 
 		containerBorderRadiusTabletWidthCSS['border-radius'] =
 			`${generateCSSUnit(containerTabBorderRadiusWidth.top, containerBorderRadiusUnits.Tablet)} ` +
@@ -669,10 +663,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	// Handle Mobile Border Radius
 	if (containerMobileBorderRadiusWidth && (
-		parseInt(containerMobileBorderRadiusWidth.top) !== 0 ||
-		parseInt(containerMobileBorderRadiusWidth.right) !== 0 ||
-		parseInt(containerMobileBorderRadiusWidth.bottom) !== 0 ||
-		parseInt(containerMobileBorderRadiusWidth.left) !== 0)) {
+		parseInt(containerMobileBorderRadiusWidth.top) !== '' ||
+		parseInt(containerMobileBorderRadiusWidth.right) !== '' ||
+		parseInt(containerMobileBorderRadiusWidth.bottom) !== '' ||
+		parseInt(containerMobileBorderRadiusWidth.left) !== '')) {
 
 		containerBorderRadiusMobileWidthCSS['border-radius'] =
 			`${generateCSSUnit(containerMobileBorderRadiusWidth.top, containerBorderRadiusUnits.Mobile)} ` +
@@ -704,7 +698,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	// Handle Tablet Padding
 	let tabletContainerPadding = {};
-	if (containerTabletPadding.top === '') {
+	if (containerDesktopPadding.top === '') {
 		tabletContainerPadding = {
 			'padding': generateCSSUnit(containerGlobalPadding.Tablet, 'px'),
 		}
@@ -725,7 +719,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 	// Handle Mobile Padding
 	let mobileContainerPadding = {};
-	if (containerMobilePadding.top === '') {
+	if (containerDesktopPadding.top === '') {
 		mobileContainerPadding = {
 			'padding': generateCSSUnit(containerGlobalPadding.Mobile, 'px'),
 		}
@@ -747,53 +741,53 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	/**start margin */
 	let containerMarginCSS = {};
 
-	if (parseInt(containerDesktopMargin.top) !== 0) {
+	if (parseInt(containerDesktopMargin.top) !== '') {
 		containerMarginCSS['margin-top'] = generateCSSUnit(containerDesktopMargin.top, containerMarginUnits['Desktop']);
 	}
 
-	if (parseInt(containerDesktopMargin.bottom) !== 0) {
+	if (parseInt(containerDesktopMargin.bottom) !== '') {
 		containerMarginCSS['margin-bottom'] = generateCSSUnit(containerDesktopMargin.bottom, containerMarginUnits['Desktop']);
 	}
 
-	if (parseInt(containerDesktopMargin.left) !== 0) {
+	if (parseInt(containerDesktopMargin.left) !== '') {
 		containerMarginCSS['margin-left'] = generateCSSUnit(containerDesktopMargin.left, containerMarginUnits['Desktop']);
 	}
 
-	if (parseInt(containerDesktopMargin.right) !== 0) {
+	if (parseInt(containerDesktopMargin.right) !== '') {
 		containerMarginCSS['margin-right'] = generateCSSUnit(containerDesktopMargin.right, containerMarginUnits['Desktop']);
 	}
 
 	let containerTabletMarginCSS = {};
-	if (parseInt(containerTabletMargin.top) !== 0) {
+	if (parseInt(containerTabletMargin.top) !== '') {
 		containerTabletMarginCSS['margin-top'] = generateCSSUnit(containerTabletMargin.top, containerMarginUnits['Tablet']);
 	}
 
-	if (parseInt(containerTabletMargin.bottom) !== 0) {
+	if (parseInt(containerTabletMargin.bottom) !== '') {
 		containerTabletMarginCSS['margin-bottom'] = generateCSSUnit(containerTabletMargin.bottom, containerMarginUnits['Tablet']);
 	}
 
-	if (parseInt(containerTabletMargin.left) !== 0) {
+	if (parseInt(containerTabletMargin.left) !== '') {
 		containerTabletMarginCSS['margin-left'] = generateCSSUnit(containerTabletMargin.left, containerMarginUnits['Tablet']);
 	}
 
-	if (parseInt(containerTabletMargin.right) !== 0) {
+	if (parseInt(containerTabletMargin.right) !== '') {
 		containerTabletMarginCSS['margin-right'] = generateCSSUnit(containerTabletMargin.right, containerMarginUnits['Tablet']);
 	}
 
 	let containerMobileMarginCSS = {};
-	if (parseInt(containerMobileMargin.top) !== 0) {
+	if (parseInt(containerMobileMargin.top) !== '') {
 		containerMobileMarginCSS['margin-top'] = generateCSSUnit(containerMobileMargin.top, containerMarginUnits['Mobile']);
 	}
 
-	if (parseInt(containerMobileMargin.bottom) !== 0) {
+	if (parseInt(containerMobileMargin.bottom) !== '') {
 		containerMobileMarginCSS['margin-bottom'] = generateCSSUnit(containerMobileMargin.bottom, containerMarginUnits['Mobile']);
 	}
 
-	if (parseInt(containerMobileMargin.left) !== 0) {
+	if (parseInt(containerMobileMargin.left) !== '') {
 		containerMobileMarginCSS['margin-left'] = generateCSSUnit(containerMobileMargin.left, containerMarginUnits['Mobile']);
 	}
 
-	if (parseInt(containerMobileMargin.right) !== 0) {
+	if (parseInt(containerMobileMargin.right) !== '') {
 		containerMobileMarginCSS['margin-right'] = generateCSSUnit(containerMobileMargin.right, containerMarginUnits['Mobile']);
 	}
 	/**end margin */
