@@ -7,7 +7,7 @@ import { useDispatch, dispatch } from '@wordpress/data';
 import { __, sprintf } from '@wordpress/i18n';
 import { getBlockTypes } from '@wordpress/blocks';
 
-const PopoverModal = ( { closePopover, updateDefaultAllowedQuickSidebarBlocks, getDefaultAllowedQuickSidebarBlocks } ) => {
+const BlocksList = ( { closePopover, updateDefaultAllowedQuickSidebarBlocks, getDefaultAllowedQuickSidebarBlocks } ) => {
 	const [searchTerm, setSearchTerm] = useState( '' );
 	const { createNotice } = useDispatch( 'core/notices' );
 	const [uniqueId, setUniqueId] = useState( 0 );
@@ -51,7 +51,7 @@ const PopoverModal = ( { closePopover, updateDefaultAllowedQuickSidebarBlocks, g
 		setUniqueId( ( prevUniqueId ) => prevUniqueId + 1 );
 
 		createNotice( 'success',
-			sprintf( /* translators: abbreviation for units */ __( '%s Added to Quick Action Bar.', 'ultimate-addons-for-gutenberg' ), selectedBlock.title ), {
+			sprintf( /* translators: abbreviation for units */ __( '%s Added to Quick Action Bar.', 'frontis-blocks' ), selectedBlock.title ), {
 				type: 'snackbar',
 				id: addedNoticeID,
 				isDismissible: true,
@@ -116,10 +116,10 @@ const PopoverModal = ( { closePopover, updateDefaultAllowedQuickSidebarBlocks, g
 				!item.parent &&
 				<div
 					key={index}
-					className="spectra-block-wrap"
+					className="frontis-blocks-block-wrap"
 				>
 					<div
-						className='spectra-ee-quick-access__sidebar--blocks--block--icon'
+						className='frontis-blocks-ee-quick-access__sidebar--blocks--block--icon'
 					>
 						<Icon icon={item.icon?.src ? item.icon.src : item.icon} />
 					</div>
@@ -135,34 +135,34 @@ const PopoverModal = ( { closePopover, updateDefaultAllowedQuickSidebarBlocks, g
 		<Popover
 			onClose={closePopup}
 			placement="right-start"
-			className="spectra-quick-action-block-popover"
+			className="frontis-blocks-quick-action-block-popover"
 		>
 			<SearchControl
 				value={searchTerm}
 				onChange={handleSearchChange}
 				label="Search Blocks"
-				className="spectra-quick-action-block-popover-search"
+				className="frontis-blocks-quick-action-block-popover-search"
 			/>
-			<div className="spectra-block-container">
+			<div className="frontis-blocks-block-container">
 				{unusedArray.some( item => !item.parent && item.title.toLowerCase().includes( searchTerm.toLowerCase() ) ) && (
-					<div className="block-editor-inserter__panel-header spectra-quick-action-block-popover-header__add-to-quick-action-bar">
+					<div className="block-editor-inserter__panel-header frontis-blocks-quick-action-block-popover-header__add-to-quick-action-bar">
 						<h2 className="block-editor-inserter__panel-title">
-							{__( 'Add to Quick Action Bar', 'ultimate-addons-for-gutenberg' )}
+							{__( 'Add to Quick Action Bar', 'frontis-blocks' )}
 						</h2>
 					</div>
 				) }
 				{addToSidebar()}
 				{usedArray.some( item => !item.parent && item.title.toLowerCase().includes( searchTerm.toLowerCase() ) ) && (
-					<div className="block-editor-inserter__panel-header spectra-quick-action-block-popover-header__already-present-in-quick-action-bar">
+					<div className="block-editor-inserter__panel-header frontis-blocks-quick-action-block-popover-header__already-present-in-quick-action-bar">
 						<h2 className="block-editor-inserter__panel-title">
-							{__( 'Already Present in Quick Action Bar', 'ultimate-addons-for-gutenberg' )}
+							{__( 'Already Present in Quick Action Bar', 'frontis-blocks' )}
 						</h2>
 					</div>
 				) }
 				{alreadyPresentInSidebar()}
 				{ ! unusedArray.some( item => !item.parent && item.title.toLowerCase().includes( searchTerm.toLowerCase() ) ) && ! usedArray.some( item => !item.parent && item.title.toLowerCase().includes( searchTerm.toLowerCase() ) ) && (
 					<div className="block-editor-inserter__no-results">
-						<p>{__( 'No results found.', 'ultimate-addons-for-gutenberg' )}</p>
+						<p>{__( 'No results found.', 'frontis-blocks' )}</p>
 					</div>
 				)}
 			</div>
@@ -170,4 +170,4 @@ const PopoverModal = ( { closePopover, updateDefaultAllowedQuickSidebarBlocks, g
 	);
 };
 
-export default PopoverModal;
+export default BlocksList;
