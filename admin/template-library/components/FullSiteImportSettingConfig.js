@@ -1,5 +1,5 @@
 import { ClipLoader } from "react-spinners";
-import FsiGbTypography from "../global-typo/global-typo";
+import FsiGbTypography from "../global-settings/global-settings";
 
 const FullSiteImportSettingConfig = ({template, onBack, onImport, isImporting, importProgress, currentStep, isSidebarCollapsed}) => {
 

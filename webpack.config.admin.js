@@ -3,8 +3,6 @@ const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extract
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const path = require('path');
-const webpack = require('webpack');
-
 
 module.exports = {
 	...defaultConfig,
@@ -25,7 +23,9 @@ module.exports = {
 		index: path.resolve(process.cwd(), 'admin', 'index.js'),
 		dynamicContent: path.resolve(process.cwd(), 'admin', 'dynamic-content', 'index.js'),
 		sidebar: path.resolve(process.cwd(), 'admin', 'sidebar', 'index.js'),
-		tlibrary:path.resolve(process.cwd(), 'admin', 'template-library', 'index.js')
+		tlibrary:path.resolve(process.cwd(), 'admin', 'template-library', 'index.js'),
+		quickAccess:path.resolve(process.cwd(), 'admin', 'quick-sidebar', 'index.js'),
+		blockRecovery: path.resolve(process.cwd(), 'admin', 'block-recovery', 'index.js')
 	},
 	output: {
 		path: path.resolve(process.cwd(), 'assets', 'admin'),

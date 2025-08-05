@@ -10,7 +10,6 @@ use Sabberworm\CSS\CSSList\CSSList;
 use Sabberworm\CSS\OutputFormat;
 use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\RuleSet\DeclarationBlock;
-use WP_Query;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -116,7 +115,7 @@ class AssetsGenerator
 			],
 		];
 
-		$query = new WP_Query($args);
+		$query = new \WP_Query($args);
 
 		if ($query->have_posts()) {
 			while ($query->have_posts()) {

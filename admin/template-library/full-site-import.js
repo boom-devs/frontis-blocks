@@ -6,8 +6,6 @@ import { useState, useCallback, useEffect } from "@wordpress/element";
 import { ClipLoader } from "react-spinners";
 import data from "./data.json";
 import TemplateHeader from "./template-header";
-import FullSiteImportConfig from "./full-site-import-config";
-import FB_ImageControl from '@Components/image-control';
 import FullSiteImportSettingConfig from "./components/FullSiteImportSettingConfig";
 import FullSiteImportSetting from "./components/fullSiteImportSetting";
 import FullSiteImportContent from "./components/fullSiteImportContent";
@@ -135,20 +133,20 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                     <FullSiteImportContent
                         template={template}
                     />
-                    
+
                     {/* Collapse Button */}
-                    <div 
+                    <div
                         className={`fb-import-sidebar-collapse ${isSidebarCollapsed ? 'collapsed' : ''}`}
                         onClick={handleSidebarToggle}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34" fill="none">
                             <path d="M17 0.5C26.1127 0.5 33.5 7.8873 33.5 17C33.5 26.1127 26.1127 33.5 17 33.5C7.8873 33.5 0.5 26.1127 0.5 17C0.5 7.8873 7.8873 0.5 17 0.5Z" fill="white" />
                             <path d="M17 0.5C26.1127 0.5 33.5 7.8873 33.5 17C33.5 26.1127 26.1127 33.5 17 33.5C7.8873 33.5 0.5 26.1127 0.5 17C0.5 7.8873 7.8873 0.5 17 0.5Z" stroke="#E1E3E8" />
-                            <path 
-                                d="M19.1875 21.375L14.8125 17L19.1875 12.625" 
-                                stroke="#555E72" 
-                                stroke-width="1.5" 
-                                stroke-linecap="round" 
+                            <path
+                                d="M19.1875 21.375L14.8125 17L19.1875 12.625"
+                                stroke="#555E72"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
                                 stroke-linejoin="round"
                                 className={isSidebarCollapsed ? 'rotated' : ''}
                             />
