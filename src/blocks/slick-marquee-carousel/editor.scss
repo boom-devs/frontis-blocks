@@ -1,0 +1,93 @@
+.client-logo-wrapper  {
+    max-width: 100%;
+    width: 100%;
+    box-shadow: 0px 0px   #00000070;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    overflow: visible;
+    order: initial;
+    border-color: inherit;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    row-gap: 20px;
+    column-gap: 0px;
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    transition-property: box-shadow;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+
+
+    .wp-block-uagb-image-gallery {
+      min-width: unset !important;
+      width: 100%;
+      position: relative;
+
+      .spectra-image-gallery {
+        box-sizing: border-box;
+        &.spectra-image-gallery__layout--carousel {
+          width: 100%;
+          margin-bottom: 8px !important;
+
+          .uagb-slick-carousel {
+            padding: 0;
+            .slick-initialized {
+              .slick-slide {
+                display: block;
+              }
+            }
+          }
+          .slick-initialized {
+            visibility: visible;
+          }
+
+          .slick-list {
+            margin: 0px -27.5px;
+            overflow: hidden !important;
+          }
+
+          .slick-track {
+            display: flex;
+            align-items: center;
+          }
+          .spectra-image-gallery__media-wrapper {
+            position: relative;
+            padding: 0px 27.5px;
+
+            .spectra-image-gallery__media {
+              position: relative;
+              overflow: hidden;
+              box-sizing: border-box;
+              width: 100%;
+            }
+          } 
+        }
+      }
+    }
+    .slick-slider {
+      display: block;
+      position: relative;
+      box-sizing: border-box;
+    }
+     .slick-slide {
+      width: 100% !important;
+      float: left;
+      height: 100%;
+      min-height: 1px;
+
+      img {
+        display: block;
+      }
+     }
+
+}
+
+.spectra-image-gallery__media-thumbnail--carousel {
+  width: 100%;
+  vertical-align: middle;
+}
