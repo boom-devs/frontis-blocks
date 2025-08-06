@@ -135,9 +135,12 @@
                 border: 1px solid #E1E3E8;
                 border-radius: 4px;
                 
+                .components-circular-option-picker__option-group {
+                    justify-content: space-between;
+                }
                 .components-circular-option-picker__option-wrapper {
-                    width: 20px;
-                    height: 20px;
+                    width: 22px;
+                    height: 22px;
 
                     .components-circular-option-picker__option {
                         padding: 6px;
@@ -148,11 +151,11 @@
                 margin-bottom: 24px;
 
                 h3 {
-                    font-family: Manrope;
-                    font-size: 18px !important;
-                    font-weight: 700;
-                    line-height: initial;
-                    color: #404655;
+                    font-family: $heading-font-family;
+                    color: $neutral-color-700;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 16px;
                     text-transform: capitalize;
                 }
 

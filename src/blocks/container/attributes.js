@@ -165,9 +165,9 @@ const attributes = {
 	resetFallBackCustomWidth: {
 		type: 'object',
 		default: {
-			Desktop: 100,
-			Tablet: 100,
-			Mobile: 100
+			Desktop: '100',
+			Tablet: '100',
+			Mobile: '100'
 		}
 	},
 
@@ -256,8 +256,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: 'row',
-			Tablet: 'row',
-			Mobile: 'row',
+			Tablet: '',
+			Mobile: '',
 		}
 	},
 	containerLayout: {
@@ -370,24 +370,24 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: 'center',
-			Tablet: 'center',
-			Mobile: 'center',
+			Tablet: '',
+			Mobile: '',
 		}
 	},
 	containerGridAlignItems: {
 		type: 'object',
 		default: {
 			Desktop: 'stretch',
-			Tablet: 'stretch',
-			Mobile: 'stretch',
+			Tablet: '',
+			Mobile: '',
 		}
 	},
 	containerGridJustifyItems: {
 		type: 'object',
 		default: {
 			Desktop: 'stretch',
-			Tablet: 'stretch',
-			Mobile: 'stretch',
+			Tablet: '',
+			Mobile: '',
 		}
 	},
 
@@ -405,8 +405,8 @@ const attributes = {
 		type: 'object',
 		default: {
 			Desktop: 'center',
-			Tablet: 'center',
-			Mobile: 'center',
+			Tablet: '',
+			Mobile: '',
 		}
 	},
 
@@ -1530,10 +1530,10 @@ const attributes = {
     containerDesktopBorderWidth: {
         type: 'object',
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     containerTabBorderWidth: {
