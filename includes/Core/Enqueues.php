@@ -54,10 +54,8 @@ class Enqueues {
 				$page_name = $post->post_name;
 			}
 		} else {
-			if(Helper::is_custom_post_type(get_the_ID()) || (get_post_type(get_the_ID()) === 'post' && !in_array($page_name, ['home', 'archive']))) {
+			if(get_the_ID() && (Helper::is_custom_post_type(get_the_ID()) || (get_post_type(get_the_ID()) === 'post' && !in_array($page_name, ['home', 'archive'])))) {
 				$assigned_template = get_post_meta(get_the_ID(), '_wp_page_template', true);
-
-				// var_dump($assigned_template);
 				if($assigned_template !== '' && $assigned_template !== 'default') {
 					$page_name = $assigned_template;
 				}
@@ -129,7 +127,14 @@ class Enqueues {
 		wp_localize_script('frontis-blocks-frontend', 'frontisPagination', $frontis_pagination_localize);
 		wp_localize_script('frontis-blocks-frontend-header', 'frontisPagination', $frontis_pagination_localize);
 		wp_localize_script('frontis-blocks-frontend-footer', 'frontisPagination', $frontis_pagination_localize);
-	
+
+		// Slick CSS
+		wp_enqueue_style( 'frontis-slick-style', FB_PLUGIN_URL . 'assets/css/frontend/slick/slick.css', [], FB_VERSION );
+		wp_enqueue_style( 'frontis-slick-theme-style', FB_PLUGIN_URL . 'assets/css/frontend/slick/slick-theme.css', [], FB_VERSION );
+		
+		// Slick JS
+		wp_enqueue_script( 'frontis-slick-script', FB_PLUGIN_URL . 'assets/js/frontend/slick/slick.min.js', ['jquery'], FB_VERSION, true );
+
 	}
 
     public function enqueue_header_footer() {

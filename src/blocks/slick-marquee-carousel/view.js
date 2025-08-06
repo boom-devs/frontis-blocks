@@ -1,26 +1,24 @@
 (function () {
 	function initLogoSlick() {
 		const $ = window.jQuery;
-		const sliders = document.querySelectorAll('.client-logo-slider');
+		const sliders = document.querySelectorAll('.uagb-slick-carousel'); 
 
 		sliders.forEach((slider) => {
 			const $slider = $(slider);
 			if ($slider.hasClass('slick-initialized')) return;
 
-			$slider.slick({
-				infinite: true,
-				slidesToShow: 6,
-				slidesToScroll: 1,
-				autoplay: true,
-				autoplaySpeed: 0,
-				speed: 4000,
-				cssEase: 'linear',
-				arrows: true,
-				dots: false,
-				pauseOnHover: false,
-				pauseOnFocus: false,
-				variableWidth: false,
-			});
+			// Find closest wrapper with data-slick-settings
+			const wrapper = slider.closest('.client-logo-wrapper');
+			const slickSettingsData = wrapper?.getAttribute('data-slick-settings') || '{}';
+
+			let slickSettings = {};
+			try {
+				slickSettings = JSON.parse(slickSettingsData);
+			} catch (e) {
+				console.error('Invalid Slick settings JSON:', e);
+			}
+
+			$slider.slick(slickSettings);
 		});
 	}
 

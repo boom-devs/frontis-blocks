@@ -1,48 +1,74 @@
-import { useBlockProps } from '@wordpress/block-editor';
+import { RichText, useBlockProps } from '@wordpress/block-editor';
 
-export default function Save() {
+export default function Save({ attributes }) {
+
+	const {
+        blockId,
+        sliderItems,
+
+        slideWidth,
+        slideWidthUnits,
+        slideHeight,
+        slideHeightUnits,
+
+        autoplay,
+        autoplayDirection,
+        reverseDirection,
+        speed,
+        showNavigation,
+        showPagination,
+    } = attributes;
+
 	const blockProps = useBlockProps.save({
-		className: 'wp-block-uagb-container client-logo-wrapper uagb-block-a2e80f0c',
+		className: `wp-block-uagb-container client-logo-wrapper ${blockId}`,
 	});
 
-	const logos = [
-		'https://wpspectra.com/wp-content/uploads/2025/03/ZipWP-logo.svg',
-		'https://wpspectra.com/wp-content/uploads/2025/03/Astra-logo.svg',
-		'https://wpspectra.com/wp-content/uploads/2025/03/Crafter-logo.svg',
-		'https://wpspectra.com/wp-content/uploads/2025/03/PP-logo.svg',
-	];
+	// Prepare slick settings based on slider type
+	const slickSettings = JSON.stringify({
+		speed: 2000,
+		infinite: true,
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		autoplay: true,
+		autoplaySpeed: 0,
+		centerMode: true,
+		cssEase: 'linear',
+		arrows: false,
+		dots: false,
+		pauseOnHover: false,
+		pauseOnFocus: false,
+		variableWidth: false,
+		touchMove: false,
+		draggable: false,
+		swipe: false,
+		waitForAnimate: false 
+	});
 
 	return (
-		<div {...blockProps}>
+		<div {...blockProps} data-slick-settings={slickSettings}>
 			<div className="client-logos-list-before"></div>
-
-			<div className="wp-block-uagb-image-gallery uagb-block-958af304" style={{ visibility: 'visible' }}>
-				<div className="spectra-image-gallery spectra-image-gallery__layout--carousel">
-					<div className="uagb-slick-carousel uagb-block-958af304">
-						{logos.map((url, index) => (
-							<div key={index}>
-								<div className="spectra-image-gallery__media-wrapper" style={{ width: '100%', display: 'inline-block' }}>
-									<div className="spectra-image-gallery__media spectra-image-gallery__media--carousel">
-										<picture>
-											<source media="(min-width: 1024px)" srcSet={url} loading="lazy" />
-											<source media="(min-width: 768px)" srcSet={url} loading="lazy" />
+				<div className="wp-block-uagb-image-gallery">
+					<div className="spectra-image-gallery spectra-image-gallery__layout--carousel">
+						<div className="uagb-slick-carousel">
+							{sliderItems.map((item, index) => (
+								<div key={item.id || index}>
+									<div className="spectra-image-gallery__media-wrapper">
+										<div className="spectra-image-gallery__media spectra-image-gallery__media--carousel">
 											<img
 												decoding="async"
 												className="spectra-image-gallery__media-thumbnail spectra-image-gallery__media-thumbnail--carousel"
-												src={url}
-												alt={`Client Logo ${index + 1}`}
+												src={item.marqueeCarouselImageUrl}
+												alt={item.marqueeCarouselImageAlt || `Client Logo ${index + 1}`}
 											/>
-										</picture>
-										<div className="spectra-image-gallery__media-thumbnail-blurrer"></div>
-										<div className="spectra-image-gallery__media-thumbnail-caption-wrapper spectra-image-gallery__media-thumbnail-caption-wrapper--overlay"></div>
+											<div className="spectra-image-gallery__media-thumbnail-blurrer"></div>
+											<div className="spectra-image-gallery__media-thumbnail-caption-wrapper spectra-image-gallery__media-thumbnail-caption-wrapper--overlay"></div>
+										</div>
 									</div>
 								</div>
-							</div>
-						))}
+							))}
+						</div>
 					</div>
 				</div>
-			</div>
-
 			<div className="client-logos-list-after"></div>
 		</div>
 	);
