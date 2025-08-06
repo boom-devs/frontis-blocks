@@ -13,7 +13,6 @@ const getDefaultAllowedQuickSidebarBlocks = [
 
 const Blocks = ( props ) => {
 	const { enableRearrange } = props;
-	// const getDefaultAllowedQuickSidebarBlocks = useSelect( ( select ) => select( storeName ).getDefaultAllowedQuickSidebarBlocks() );
 	const blocks = getBlockTypes();
 	const { blockInsertionPoint, getSelectedBlockClientId, getSelectedBlockAllowedBlocks, getBlockRootClientId } = useSelect( ( select ) => {
 		const blockEditor = select( 'core/block-editor' );

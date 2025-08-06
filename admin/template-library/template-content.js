@@ -1,6 +1,7 @@
 /**
  * WordPress dependencies
  */
+import { __ } from "@wordpress/i18n";
 import { useState, useEffect, useCallback } from "@wordpress/element";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -84,6 +85,14 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [], dependenc
 			const alreadyExists = prevData.some(item => item.id === templateData.id);
 			if (alreadyExists) return prevData;
 			return [...prevData, templateData];
+		});
+		toast.success(__('Template saved to library', 'frontis-blocks'), {
+			position: "top-right",
+			autoClose: 3000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
 		});
 	}, [templateData]);
 
