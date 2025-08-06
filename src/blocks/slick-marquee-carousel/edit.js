@@ -3,13 +3,16 @@ import {
     RichText,
     useBlockProps,
     BlockControls,
+	useInnerBlocksProps,
 } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
-import { useState, useEffect, useRef } from '@wordpress/element';
+import { useState, useEffect, useRef, useMemo } from '@wordpress/element';
 import { arrayMove } from '@dnd-kit/sortable';
 import Inspector from './inspector';
 
 import './editor.scss';
+
+const ALLOWED_BLOCKS = ['frontis-blocks/marquee-carousel-item'];
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 
@@ -34,6 +37,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const blockProps = useBlockProps({
 		className: `wp-block-uagb-container client-logo-wrapper ${blockId}`,
 	});
+
+	const getSliderTemplate = useMemo(() => [
+        ['frontis-blocks/marquee-carousel-item'],
+        ['frontis-blocks/marquee-carousel-item'],
+		['frontis-blocks/marquee-carousel-item'],
+		['frontis-blocks/marquee-carousel-item'],
+		['frontis-blocks/marquee-carousel-item'],
+		['frontis-blocks/marquee-carousel-item'],
+    ], []);
+
+    const innerBlocksProps = useInnerBlocksProps(
+		{
+			className: `marquee-carousel-wrapper`,
+		},
+		{
+			allowedBlocks: ALLOWED_BLOCKS,
+			template: getSliderTemplate,
+			renderAppender: false,
+			orientation: 'horizontal',
+		}
+	);
 
     let defaultImageUrl = '';
     if (typeof FrontisBlocksData !== 'undefined') {
@@ -180,18 +204,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         });
         setAttributes({ sliderItems: newItems });
     };
-
-	const logos = [
-		'https://wpspectra.com/wp-content/uploads/2025/03/ZipWP-logo.svg',
-		'https://wpspectra.com/wp-content/uploads/2025/03/Astra-logo.svg',
-		'https://wpspectra.com/wp-content/uploads/2025/03/Crafter-logo.svg',
-		'https://wpspectra.com/wp-content/uploads/2025/03/PP-logo.svg',
-		'https://wpspectra.com/wp-content/uploads/2025/03/ZipWP-logo.svg',
-		'https://wpspectra.com/wp-content/uploads/2025/03/Astra-logo.svg',
-		'https://wpspectra.com/wp-content/uploads/2025/03/Crafter-logo.svg',
-		'https://wpspectra.com/wp-content/uploads/2025/03/PP-logo.svg',
-	];
-
+	
 	return (
 		<>
 		    <Inspector
