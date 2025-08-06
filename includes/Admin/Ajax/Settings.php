@@ -15,7 +15,6 @@ use FrontisBlocks\Utils\Helper;
 class Settings extends AjaxBase {
 
 	use Singleton;
-
 	/**
 	 * register_ajax_events
 	 *
@@ -96,6 +95,9 @@ class Settings extends AjaxBase {
 	public function custom_css() {
 		$this->handle_option_update('custom_css', 'boolean');
 	}
+    public function automatic_block_recovery() {
+        $this->handle_option_update('automatic_block_recovery', 'boolean');
+    }
 
 	public function copy_paste_style() {
 		$this->handle_option_update('copy_paste_style', 'boolean');
@@ -110,9 +112,6 @@ class Settings extends AjaxBase {
 		if (!current_user_can('manage_options')) {
 			wp_send_json_error(['message' => 'Insufficient permissions'], 403);
 		}
-
-
-//         $this->handle_option_update('file_generation', 'boolean');
 	}
 
 	/**
