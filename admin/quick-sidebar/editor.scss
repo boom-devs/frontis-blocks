@@ -1,18 +1,23 @@
-.frontis-blocks-ee-quick-access {
+.frontis-blocks-quick-access-sidebar-wrapper {
 	display: flex;
-	height: auto;
+	height: 100%;
 	width: 60px;
-	background: #1e1e1e;
 	color: #fff;
+	background: #1e1e1e;
+	flex-direction: column;
 
+
+	.frontis-blocks-logo {
+		text-align: center;
+	}
+}
+.frontis-blocks-ee-quick-access {
 	// The sidebar inside the Quick Access area.
 	&__sidebar {
 		width: 60px;
-		height: calc( 100% - 34px );
-		background: #1e1e1e;
 		display: flex;
 		flex-direction: column;
-		position: absolute;
+		background: transparent;
 		overflow: auto;
 
 		::-webkit-scrollbar {

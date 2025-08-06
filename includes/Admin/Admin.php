@@ -130,8 +130,8 @@ class Admin {
             if ($automatic_block_recovery === "true") {
                 wp_enqueue_script('frontis-block-recovery', FB_PLUGIN_URL . 'assets/admin/blockRecovery.js', $tl_script_asset['dependencies'], '1.0.0', true);
             }
-            
-			$localizeArray['nonce'] = wp_create_nonce('fb_import_demo_data');
+
+//			$localizeArray['nonce'] = wp_create_nonce('fb_import_demo_data');
 			wp_localize_script('frontis-template-library', 'frontisBlocksAdmin', $localizeArray);
 		}
 

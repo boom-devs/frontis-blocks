@@ -48,7 +48,9 @@ class Settings extends AjaxBase {
 			'coming_soon_page_id',
 			'maintenance_page_id',
 			'upload_custom_icons',
-			'get_custom_icons_category'
+			'get_custom_icons_category',
+			'update_allowed_blocks',
+			'get_allowed_blocks'
 		];
 
 		$this->init_ajax_events($ajax_events);
@@ -260,6 +262,70 @@ class Settings extends AjaxBase {
 
 	public function enable_templates_button() {
 		$this->handle_option_update('enable_templates_button', 'boolean');
+	}
+
+	public function get_allowed_blocks()
+	{
+		if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
+			wp_send_json_error(['message' => 'Invalid nonce'], 400);
+			return;
+		}
+
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(['message' => 'Insufficient permissions'], 403);
+			return;
+		}
+
+		$allowed_blocks = get_option("fb_update_allowed_blocks");
+
+		if($allowed_blocks) {
+			$allowed_blocks = json_decode($allowed_blocks);
+			wp_send_json_success($allowed_blocks);
+		} else {
+			wp_send_json_error([
+				'message' => 'Allowed blocks not found.',
+			]);
+		}
+	}
+
+	public function update_allowed_blocks()
+	{
+		if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
+			wp_send_json_error(['message' => 'Invalid nonce'], 400);
+			return;
+		}
+
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(['message' => 'Insufficient permissions'], 403);
+			return;
+		}
+
+		$allowed_blocks = isset($_POST['data']) ? ($_POST['data']) : [];
+
+		$value =  json_encode($allowed_blocks);
+
+		$old_value = get_option("fb_update_allowed_blocks");
+
+		$updated = update_option("fb_update_allowed_blocks", $value);
+
+		if ($updated) {
+			wp_send_json_success(['message' => 'Option updated successfully']);
+		} else {
+			$error_message = 'Failed to update option';
+			if ($old_value === false) {
+				$error_message .= ': Option does not exist';
+			} elseif ($old_value === $value) {
+				$error_message .= ': Value unchanged';
+			} else {
+				$error_message .= ': Unknown reason';
+			}
+			wp_send_json_error([
+				'message' => $error_message,
+				'old_value' => $old_value,
+				'new_value' => $value,
+				'option_name' => "fb_update_allowed_blocks"
+			]);
+		}
 	}
 
 	/**
