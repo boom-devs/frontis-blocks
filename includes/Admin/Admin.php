@@ -22,6 +22,7 @@ class Admin {
         // Add the new REST API endpoint
         add_action('rest_api_init', [$this, 'register_rest_routes']);
         add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets']);
+		$this->store_google_fonts();
     }
 
     public function add_menu_page(){
@@ -123,6 +124,7 @@ class Admin {
 			$tl_script_asset['dependencies'][] = 'jquery';
 			wp_enqueue_style('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/style-tlibrary.css', array(), '1.0.0');
 			wp_enqueue_script('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/tlibrary.js', $tl_script_asset['dependencies'], '1.0.0', true);
+			wp_enqueue_style('frontis-quick-access', FB_PLUGIN_URL . 'assets/admin/quickAccess.css', array(), '1.0.0');
 			wp_enqueue_script('frontis-quick-access', FB_PLUGIN_URL . 'assets/admin/quickAccess.js', $tl_script_asset['dependencies'], '1.0.0', true);
 
             if ($automatic_block_recovery === "true") {

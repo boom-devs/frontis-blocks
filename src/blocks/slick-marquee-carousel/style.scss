@@ -1,11 +1,11 @@
 .client-logo-wrapper  {
-  max-width: 100%;
-  width: 100%;
+  // max-width: 100%;
+  // width: 100%;
   box-shadow: 0px 0px   #00000070;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
+  // padding-top: 0px;
+  // padding-bottom: 0px;
+  // padding-left: 0px;
+  // padding-right: 0px;
   overflow: visible;
   order: initial;
   border-color: inherit;
@@ -39,6 +39,7 @@
           .slick-initialized {
             .slick-slide {
               display: block;
+
             }
           }
         }
@@ -47,7 +48,7 @@
         }
 
         .slick-list {
-          margin: 0px -27.5px;
+          // margin: 0px -27.5px;
           overflow: hidden !important;
         }
 
@@ -57,7 +58,11 @@
         }
         .spectra-image-gallery__media-wrapper {
           position: relative;
-          padding: 0px 27.5px;
+          padding: 0px 10px;
+
+          &:focus {
+            outline: none !important;
+          }
 
           .spectra-image-gallery__media {
             position: relative;
@@ -75,10 +80,14 @@
     box-sizing: border-box;
   }
    .slick-slide {
-    width: 100% !important;
-    float: left;
+    width: auto !important;
+    // float: left;
     height: 100%;
     min-height: 1px;
+
+    &:focus {
+      outline: none !important;
+    }
 
     img {
       display: block;
