@@ -68,9 +68,9 @@ const DraggableBlock = ( props ) => {
 	}
 
 	const hoverPopover = (
-		<Popover placement="right" key={id} className='spectra-ee-quick-access__sidebar--blocks--block--icon--name'>
+		<Popover placement="right" key={id} className='frontis-blocks-ee-quick-access__sidebar--blocks--block--icon--name'>
 			<div className='block-title'>
-				<div onClick={() => { handleRemoveBlock( block ) }} className='spectra-ee-quick-access__sidebar--blocks--block--name'>
+				<div onClick={() => { handleRemoveBlock( block ) }} className='frontis-blocks-ee-quick-access__sidebar--blocks--block--name'>
 					<svg className='block-title-svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
 						<path d="M13 11.8l6.1-6.3-1-1-6.1 6.2-6.1-6.2-1 1 6.1 6.3-6.5 6.7 1 1 6.5-6.6 6.5 6.6 1-1z"></path>
 					</svg>
@@ -94,7 +94,7 @@ const DraggableBlock = ( props ) => {
 					   } }>
 				{ ( { onDraggableStart, onDraggableEnd } ) => (
 					<div
-						className='spectra-ee-quick-access__sidebar--blocks--block'
+						className='frontis-blocks-ee-quick-access__sidebar--blocks--block'
 						key={id}
 						onClick = { ( e ) => {
 							handleOnClick( e, block );
@@ -117,7 +117,7 @@ const DraggableBlock = ( props ) => {
 						onFocus={ handleMouseOver }
 						onBlur={ handleMouseOut }
 					>
-						<div className={`spectra-ee-quick-access__sidebar-icon__${slug} spectra-ee-quick-access__sidebar-icon__${slug}--${blockName} spectra-ee-quick-access__sidebar--blocks--block--icon`}>
+						<div className={`frontis-blocks-ee-quick-access__sidebar-icon__${slug} frontis-blocks-ee-quick-access__sidebar-icon__${slug}--${blockName} frontis-blocks-ee-quick-access__sidebar--blocks--block--icon`}>
 							<Icon icon={ block.icon?.src ? block.icon.src : block.icon } />
 						</div>
 						{ hovering && hoverPopover }

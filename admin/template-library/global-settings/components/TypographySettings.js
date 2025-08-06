@@ -1183,68 +1183,10 @@ const TypographySettings = (props) => {
 				</div>
 
 				{/* Custom Typography Section */}
+				{Object.keys(customTypography || {}).length > 0 && (
 				<div className="fb-panel-section">
 					<div className="fb-panel-heading-wrapper">
 						<h3 className="fb-panel-heading">Custom Typography</h3>
-						{!selectCustomTypo && (
-							<div className="add-custom-color">
-								<Button
-									className="add-custom-color-btn"
-									onClick={() => setCustomTypography({
-										...customTypography,
-										[`fb_customtypo_${Math.random().toString(36).substring(2, 7)}`]: {
-											name: `Custom Typography`,
-											fontFamily: "default",
-											lineHeight: {
-												Desktop: '',
-												Tablet: '',
-												Mobile: ''
-											},
-											lineHeightUnits: {
-												Desktop: 'px',
-												Tablet: 'px',
-												Mobile: 'px'
-											},
-											fontSize: {
-												Desktop: '',
-												Tablet: '',
-												Mobile: ''
-											},
-											fontSizeUnit: {
-												Desktop: 'px',
-												Tablet: 'px',
-												Mobile: 'px'
-											},
-											fontWeight: '',
-											fontStyle: '',
-											textTransform: '',
-											textDecoration: '',
-											letterSpacing: {
-												Desktop: '',
-												Tablet: '',
-												Mobile: ''
-											},
-											letterSpacingUnit: {
-												Desktop: 'px',
-												Tablet: 'px',
-												Mobile: 'px'
-											}
-										}
-									})}
-								>
-									<span>
-										<svg width="15" height="14" viewBox="0 0 15 14"
-											fill="none"
-											xmlns="http://www.w3.org/2000/svg">
-											<path d="M7.5 0.75V13.25M13.75 7L1.25 7"
-												stroke="white"
-												strokeWidth="1.5" strokeLinecap="round"
-												strokeLinejoin="round" />
-										</svg>
-									</span>
-								</Button>
-							</div>
-						)}
 					</div>
 
 					<div className={'fb-global-typo-elements'}>
@@ -1341,6 +1283,7 @@ const TypographySettings = (props) => {
 						</div>
 					</div>
 				</div>
+				)}
 			</div>
 		</>
 	)

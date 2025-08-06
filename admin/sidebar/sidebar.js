@@ -566,52 +566,59 @@ function FrontisBlocksSidebar() {
 								{/* Remove TabPanel and display options vertically */}
 								<div className="fb-color-options-vertical">
 									{/* Solid Colors Section */}
-									<div className="fb-color-section">
-										<PaletteEdit
-											canReset={ globalColors || themeColors }
-											canOnlyChangeValues
-											colors={ globalColors || themeColors }
-											onChange={ setGlobalColors }
-											paletteLabel={ __( 'Solid' ) }
-											paletteLabelHeadingLevel={ 3 }
-											popoverProps={ popoverProps }
-											classnames="fb-solid-color-panel"
-										/>
-										<PaletteEdit
-											colors={ customColors }
-											onChange={ setCustomColors }
-											paletteLabel={ __( 'Custom' ) }
-											paletteLabelHeadingLevel={ 3 }
-											slugPrefix="custom-"
-											popoverProps={ popoverProps }
-											classnames="fb-custom-color-panel"	
-										/>
-
+									<div className="fb-color-section-wrapper">
+										<div className="fb-color-section">
+											<PaletteEdit
+												canReset={ globalColors || themeColors }
+												canOnlyChangeValues
+												colors={ globalColors || themeColors }
+												onChange={ setGlobalColors }
+												paletteLabel={ __( 'Solid' ) }
+												paletteLabelHeadingLevel={ 3 }
+												popoverProps={ popoverProps }
+												classnames="fb-solid-color-panel"
+											/>
+										</div>
+										<div className="fb-color-section">
+											<PaletteEdit
+												colors={ customColors }
+												onChange={ setCustomColors }
+												paletteLabel={ __( 'Custom' ) }
+												paletteLabelHeadingLevel={ 3 }
+												slugPrefix="custom-"
+												popoverProps={ popoverProps }
+												classnames="fb-custom-color-panel"	
+											/>
+										</div>
 									</div>
 
 									{/* Gradient Section */}
-									<div className="fb-color-section">
+									<div className="fb-color-section-wrapper">
 										{(gradientColors.length !== 0 || frontisBlocksAdmin?.gradients_colors.length !== 0) && (
+											<div className="fb-color-section">
+												<PaletteEdit
+													canReset={true}
+													canOnlyChangeValues
+													gradients={ gradientColors || frontisBlocksAdmin?.gradients_colors }
+													onChange={ setGradientColors }
+													paletteLabel={ __( 'Gradient' ) }
+													classnames="fb-gradient-color-panel"
+													paletteLabelHeadingLevel={ 3 }
+													popoverProps={ popoverProps }
+												/>
+											</div>
+										)}
+										<div className="fb-color-section">
 											<PaletteEdit
-												canReset={true}
-												canOnlyChangeValues
-												gradients={ gradientColors || frontisBlocksAdmin?.gradients_colors }
-												onChange={ setGradientColors }
-												paletteLabel={ __( 'Gradient' ) }
-												classnames="fb-gradient-color-panel"
+												gradients={ customGradientColors }
+												onChange={ setCustomGradientColors }
+												paletteLabel={ __( 'Custom Gradients' ) }
 												paletteLabelHeadingLevel={ 3 }
+												slugPrefix="custom-"
+												className="fb-custom-gradient-color-panel"	
 												popoverProps={ popoverProps }
 											/>
-										)}
-										<PaletteEdit
-											gradients={ customGradientColors }
-											onChange={ setCustomGradientColors }
-											paletteLabel={ __( 'Custom Gradients' ) }
-											paletteLabelHeadingLevel={ 3 }
-											slugPrefix="custom-"
-											className="fb-custom-gradient-color-panel"	
-											popoverProps={ popoverProps }
-										/>
+										</div>
 									</div>
 								</div>
 							</NavigatorScreen>

@@ -9,6 +9,7 @@ import TemplateHeader from "./template-header";
 import FullSiteImportSettingConfig from "./components/FullSiteImportSettingConfig";
 import FullSiteImportSetting from "./components/fullSiteImportSetting";
 import FullSiteImportContent from "./components/fullSiteImportContent";
+import { toast } from "react-toastify";
 
 const FullSiteImport = ({ template, onClose, onBack }) => {
     const [formData, setFormData] = useState({
@@ -79,11 +80,25 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                 formData
             });
 
-            alert('Site imported successfully!');
+            toast.success(__('Site imported successfully!', 'frontis-blocks'), {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
             onClose();
         } catch (error) {
             console.error('Import failed:', error);
-            alert('Import failed. Please try again.');
+            toast.error(__('Import failed. Please try again.', 'frontis-blocks'), {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
         } finally {
             setIsImporting(false);
             setImportProgress(0);
