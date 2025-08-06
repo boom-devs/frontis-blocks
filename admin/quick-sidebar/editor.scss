@@ -6,10 +6,34 @@
 	background: #1e1e1e;
 	flex-direction: column;
 
-
 	.frontis-blocks-logo {
 		text-align: center;
 	}
+
+	.frontis-blocks-ee-quick-access__sidebar--tabs-container {
+		margin-top: auto;
+	}
+
+	frontis-blocks-quick-action-block-popover-header__add-to-quick-action-bar {
+		.block-editor-inserter__panel-title {
+
+		}
+	}
+
+	.frontis-blocks-ee-quick-access__sidebar--blocks--block--icon {
+		svg {
+			path {
+				color: #FFFFFF !important;
+			}
+		}
+	}
+
+	.frontis-blocks-sidebar-actions {
+		&.active {
+
+		}
+	}
+
 }
 .frontis-blocks-ee-quick-access {
 	// The sidebar inside the Quick Access area.
@@ -109,46 +133,6 @@
 					}
 
 					background: #1d2939;
-				}
-			}
-		}
-
-		&--actions {
-			cursor: pointer;
-			position: relative;
-			bottom: 6px;
-			left: 0;
-			margin-top: 10px;
-
-			.spectra-quick-action-sidebar-wrap {
-
-				#plus-icon,
-				#rearrange-icon {
-					display: flex;
-					align-content: center;
-					justify-content: center;
-					align-items: center;
-					padding: 12px 12px;
-					flex-direction: column;
-				}
-			}
-		}
-
-		&--tab {
-			display: inline-block;
-			cursor: pointer;
-		}
-
-		&--tabs {
-			display: flex;
-			flex-direction: column;
-
-			.tab.active {
-
-				#plus-icon,
-				#rearrange-icon {
-					background-color: #1d2939;
-					color: #fff;
 				}
 			}
 		}

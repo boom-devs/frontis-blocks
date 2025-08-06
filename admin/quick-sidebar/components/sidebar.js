@@ -131,7 +131,7 @@ const Sidebar = () => {
 								{['add', 'sort'].map( ( tab, index ) => (
 									<div
 										key={index}
-										className={`tab ${activeTab === index ? 'active' : ''}`}
+										className={`frontis-blocks-sidebar-actions ${activeTab === index ? 'active' : ''}`}
 										onClick={() => handleTabClick( index )}
 									>
 										{ 'add' === tab &&
