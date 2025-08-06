@@ -5,7 +5,7 @@ import { useState, useCallback } from "@wordpress/element";
 import { ClipLoader } from "react-spinners";
 import TemplateHeader from "./template-header";
 import data from "./data.json";
-import FsiGbTypography from "./global-typo/global-typo";
+import FsiGbTypography from "./global-settings/global-settings";
 import SitePreview from "./sitePreview";
 
 const FullSiteImportConfig = ({
@@ -88,9 +88,9 @@ const FullSiteImportConfig = ({
                     </div>
 
                     {/* Right Panel - Preview */}
-                    <div className="fb-import-preview-panel">
+                    {/* <div className="fb-import-preview-panel">
 						<SitePreview />
-                    </div>
+                    </div> */}
                     
                     <div 
                         className={`fb-import-sidebar-collapse ${isSidebarCollapsed ? 'collapsed' : ''}`}
