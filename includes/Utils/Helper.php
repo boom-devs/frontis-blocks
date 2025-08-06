@@ -542,6 +542,31 @@ class Helper
 		return ! in_array( $post_type, $default_post_types );
 	}
 
+	public static function check_patterns_used($post_content)
+	{
+		$pattern_contents = []; // Store pattern contents
+		$pattern_ids = [];
+
+		// Extract synced pattern IDs
+		preg_match_all('/<!--\s*wp:block\s*{"ref":\s*(\d+)\}\s*\/-->/', $post_content, $matches);
+
+		if (!empty($matches[1])) {
+			$pattern_ids = $matches[1]; // Array of synced pattern IDs
+		}
+
+		// Fetch pattern content for each ID
+		if (!empty($pattern_ids)) {
+			foreach ($pattern_ids as $pattern_id) {
+				$pattern_post = get_post($pattern_id);
+				if ($pattern_post && $pattern_post->post_type === 'wp_block') {
+					$pattern_contents[] = $pattern_post->post_content; // Collect pattern content
+				}
+			}
+		}
+
+		return $pattern_contents; // Return array of pattern contents
+	}
+
 	public static function get_all_posts() {
 		// Get all public post types except the excluded ones
 		$excluded_post_types = array('attachment', 'nav_menu_item', 'wp_block', 'wp_navigation', 'wp_global_styles');
