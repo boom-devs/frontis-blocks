@@ -37,8 +37,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         autoplay,
         autoplaySpeed,
         centerMode,
-        arrows,
-        dots,
         pauseOnHover,
         pauseOnFocus,
         variableWidth,
@@ -47,6 +45,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         swipe,
         swipeToSlide,
         waitForAnimate,
+
+        slideWidth,
+        slideWidthUnits,
+        slideHeight,
+        slideHeightUnits,
         
     } = attributes;
 
@@ -84,18 +87,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     label={ __( 'Center Mode', 'frontis-blocks' ) }
                     checked={ centerMode }
                     onChange={(value) => setAttributes({ centerMode: value })}
-                />
-
-                <ToggleControl
-                    label={ __( 'Arrows', 'frontis-blocks' ) }
-                    checked={ arrows }
-                    onChange={(value) => setAttributes({ arrows: value })}
-                />
-
-                <ToggleControl
-                    label={ __( 'Dots', 'frontis-blocks' ) }
-                    checked={ dots }
-                    onChange={(value) => setAttributes({ dots: value })}
                 />
                 
                 <ToggleControl
@@ -192,7 +183,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	 */
 	const styleControls = (
         <>
-        style
+            <PanelBody 
+                title={__("Style", "frontis-blocks")} 
+                initialOpen={true}
+            >
+                <FB_Range
+                    min={100}
+                    max={1000}
+                    label={__("Slide Width", "frontis-blocks")}
+                    rangeValue={slideWidth}
+                    onChangeHandler={(value) => setAttributes({ slideWidth: value })}
+                    rangeUnitHandler={(value) => setAttributes({ slideWidthUnits: value })}
+                    deviceType={deviceType}
+                    units={slideWidthUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+                <FB_Range
+                    min={100}
+                    max={1000}
+                    label={__("Slide Height", "frontis-blocks")}
+                    rangeValue={slideHeight}
+                    onChangeHandler={(value) => setAttributes({ slideHeight: value })}
+                    rangeUnitHandler={(value) => setAttributes({ slideHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={slideHeightUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+            </PanelBody>
         </>
 	);
 		
