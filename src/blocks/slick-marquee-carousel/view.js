@@ -8,7 +8,7 @@
 			if ($slider.hasClass('slick-initialized')) return;
 
 			// Find closest wrapper with data-slick-settings
-			const wrapper = slider.closest('.client-logo-wrapper');
+			const wrapper = slider.closest('.fb-marquee-slider-container');
 			const slickSettingsData = wrapper?.getAttribute('data-slick-settings') || '{}';
 
 			let slickSettings = {};
