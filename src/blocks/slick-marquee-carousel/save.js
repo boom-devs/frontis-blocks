@@ -27,7 +27,7 @@ export default function Save({ attributes }) {
 	const slickSettings = JSON.stringify({
 		speed: 2000,
 		infinite: true,
-		slidesToShow: 3,
+		slidesToShow: 6,
 		slidesToScroll: 1,
 		autoplay: true,
 		autoplaySpeed: 0,
