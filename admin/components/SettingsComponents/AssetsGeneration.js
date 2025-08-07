@@ -125,6 +125,10 @@ const AssetsGeneration = () => {
 	const confirmAssetGeneration = useCallback(() => {
 		setIsLoading(true); // Start loading
 		setIsModalOpen(false);
+
+		console.log("nonce nonce")
+		console.log(nonce)
+
 		window.jQuery.ajax({
 			url: ajaxUrl,
 			type: 'POST',
