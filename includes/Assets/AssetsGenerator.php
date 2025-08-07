@@ -28,6 +28,20 @@ class AssetsGenerator
 	private $blocks_used_in_page = [];
 	private $combine_swiper_js = false;
 
+	private function reset() {
+		$this->post_id = null;
+    	$this->post = null;
+		$this->used_blocks = [];
+		$this->css_content = '';
+		$this->js_content = '';
+		$this->gfonts = [];
+		$this->block_fonts = [];
+		$this->wp_template_css_content = '';
+		$this->frontis_block_used = false;
+		$this->blocks_used_in_page = [];
+		$this->combine_swiper_js = false;
+	}
+
 	public function generate_page_assets($post_id, $post)
 	{
 
@@ -37,6 +51,7 @@ class AssetsGenerator
 		$frontis_block_used = get_post_meta($post_id, 'frontis_blocks_used', true);
 
 		if(!$frontis_block_used) {
+			$this->reset();
 			return false;
 		}
 
@@ -51,6 +66,8 @@ class AssetsGenerator
 		if (get_post_type($this->post_id) !== 'wp_template' && get_post_type($this->post_id) !== 'wp_template_part') {
 			$this->css_generator_functions(true);
 		}
+
+		$this->reset();
 	}
 
 	function generate_active_header_footer()

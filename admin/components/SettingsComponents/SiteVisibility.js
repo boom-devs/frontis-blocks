@@ -30,7 +30,7 @@ const SiteVisibility = () => {
   })) : [];
 
   useEffect(() => {
-    fetchOptions();
+    // fetchOptions();
   }, []);
 
   const fetchOptions = () => {
