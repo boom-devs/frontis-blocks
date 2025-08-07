@@ -45,12 +45,11 @@ const Edit = (props) => {
     );
 
     const blockProps = useBlockProps({
-        className: `marquee-carousel-item ${blockId || 'default-id'}`,
+        className: `marquee-carousel-item slick-slide ${blockId || 'default-id'}`,
     });
 
     return (
         <>
-            {/* <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} /> */}
             <div {...blockProps}>
                 <div {...innerBlocksProps} />
             </div>
