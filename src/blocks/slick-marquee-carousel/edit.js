@@ -18,20 +18,24 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const {
         blockId,
-        sliderItems,
-
-        slideWidth,
-        slideWidthUnits,
-        slideHeight,
-        slideHeightUnits,
-
-        autoplay,
-        autoplayDirection,
-        reverseDirection,
+        blockStyle,
         speed,
-        showNavigation,
-        showPagination,
-
+        infinite,
+        slidesToShow,
+        slidesToScroll,
+        autoplay,
+        autoplaySpeed,
+        centerMode,
+        arrows,
+        dots,
+        pauseOnHover,
+        pauseOnFocus,
+        variableWidth,
+        touchMove,
+        draggable,
+        swipe,
+        swipeToSlide,
+        waitForAnimate,
     } = attributes;
 
 	const blockProps = useBlockProps({
@@ -59,24 +63,24 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}
 
 		$slider.slick({
-            speed: 2000,
-            infinite: true,
-            slidesToShow: 6,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 0,
-            centerMode: true,
+            speed: speed,
+            infinite: infinite,
+            slidesToShow: slidesToShow,
+            slidesToScroll: slidesToScroll,
+            autoplay: autoplay,
+            autoplaySpeed: autoplaySpeed,
+            centerMode: centerMode,
             cssEase: 'linear',
-            arrows: false,
-            dots: false,
-            pauseOnHover: false,
-            pauseOnFocus: false,
-            variableWidth: false,
-            touchMove: false,
-            draggable: false,
-            swipe: false,
-            swipeToSlide: false,
-            waitForAnimate: false 
+            arrows: arrows,
+            dots: dots,
+            pauseOnHover: pauseOnHover,
+            pauseOnFocus: pauseOnFocus,
+            variableWidth: variableWidth,
+            touchMove: touchMove,
+            draggable: draggable,
+            swipe: swipe,
+            swipeToSlide: swipeToSlide,
+            waitForAnimate: waitForAnimate 
 		});
 
 		return () => {
@@ -84,11 +88,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				$slider.slick('unslick');
 			}
 		};
-	}, []);
+	}, [
+        speed,
+        infinite,
+        slidesToShow,
+        slidesToScroll,
+        autoplay,
+        autoplaySpeed,
+        centerMode,
+        arrows,
+        dots,
+        pauseOnHover,
+        pauseOnFocus,
+        variableWidth,
+        touchMove,
+        draggable,
+        swipe,
+        swipeToSlide,
+        waitForAnimate,
+    ]);
 
     const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: `uagb-slick-carousel`,
+			className: `fb-marquee-carousel-wrapper`,
 			ref: slickRef,
 		},
 		{
@@ -98,6 +120,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			orientation: 'horizontal',
 		}
 	);
+
 
 
 	const renderSliderToolbarControls = () => {
@@ -129,10 +152,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 			{renderSliderToolbarControls()}
 
-			<div {...blockProps}>
+			<div {...blockProps} >
 
-				<div className="wp-block-uagb-image-gallery" style={{ visibility: 'visible' }}>
-					<div className="spectra-image-gallery spectra-image-gallery__layout--carousel">
+				<div className="fb-marquee-image-gallery" style={{ visibility: 'visible' }}>
+					<div className="fb-marquee-carousel-gallery-layout">
                         <div {...innerBlocksProps} />
 					</div>
 				</div>

@@ -10,28 +10,73 @@ const attributes = {
 
     speed: {
         type: 'number',
-        default: 1500,
+        default: 2000,
+    },
+    infinite: {
+        type: 'boolean',
+        default: true,
+    },
+    slidesToShow: {
+        type: 'number',
+        default: 6,
+    },
+    slidesToScroll: {
+        type: 'number',
+        default: 1,
     },
     autoplay: {
         type: 'boolean',
-        default: false,
+        default: true,
     },
-    reverseDirection: {
+    autoplaySpeed: {
+        type: 'number',
+        default: 0,
+    },
+    centerMode: {
+        type: 'boolean',
+        default: true,
+    },
+
+    arrows: {
         type: 'boolean',
         default: false,
     },
-    autoplayDirection: {
-        type: 'string',
+    dots: {
+        type: 'boolean',
         default: false,
     },
-    showNavigation: {
-		type: 'boolean',
-		default: false,
-	},
-	showPagination: {
-		type: 'boolean',
-		default: false,
-	},
+    pauseOnHover: {
+        type: 'boolean',
+        default: false,
+    },
+    pauseOnFocus: {
+        type: 'boolean',
+        default: false,
+    },
+    variableWidth: {
+        type: 'boolean',
+        default: false,
+    },
+    touchMove: {
+        type: 'boolean',
+        default: false,
+    },
+    draggable: {
+        type: 'boolean',
+        default: false,
+    },
+    swipe: {
+        type: 'boolean',
+        default: false,
+    },
+    swipeToSlide: {
+        type: 'boolean',
+        default: false,
+    },
+    waitForAnimate: {
+        type: 'boolean',
+        default: false,
+    },
 
     /** Start Width */
     slideWidth: {
