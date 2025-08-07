@@ -1,7 +1,7 @@
 (function () {
 	function initLogoSlick() {
 		const $ = window.jQuery;
-		const sliders = document.querySelectorAll('.uagb-slick-carousel'); 
+		const sliders = document.querySelectorAll('.fb-marquee-carousel-wrapper'); 
 
 		sliders.forEach((slider) => {
 			const $slider = $(slider);

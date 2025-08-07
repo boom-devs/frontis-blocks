@@ -29,20 +29,24 @@ import './editor.scss';
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockId,
-        sliderItems,
         blockStyle,
-        
-        autoplayDirection,
         speed,
-        reverseDirection,
-        showNavigation,
-        showPagination,
-
-
-        slideWidth,
-        slideWidthUnits,
-        slideHeight,
-        slideHeightUnits,
+        infinite,
+        slidesToShow,
+        slidesToScroll,
+        autoplay,
+        autoplaySpeed,
+        centerMode,
+        arrows,
+        dots,
+        pauseOnHover,
+        pauseOnFocus,
+        variableWidth,
+        touchMove,
+        draggable,
+        swipe,
+        swipeToSlide,
+        waitForAnimate,
         
     } = attributes;
 
@@ -63,22 +67,121 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         <>
             <PanelBody 
                 title={__("General Settings", "frontis-blocks")} 
-                initialOpen={false}
+                initialOpen={true}
             >
+                <ToggleControl
+                    label={ __( 'Autoplay', 'frontis-blocks' ) }
+                    checked={ autoplay }
+                    onChange={(value) => setAttributes({ autoplay: value })}
+                />
+
+                <ToggleControl
+                    label={ __( 'Infinite', 'frontis-blocks' ) }
+                    checked={ infinite }
+                    onChange={(value) => setAttributes({ infinite: value })}
+                />
+                <ToggleControl
+                    label={ __( 'Center Mode', 'frontis-blocks' ) }
+                    checked={ centerMode }
+                    onChange={(value) => setAttributes({ centerMode: value })}
+                />
+
+                <ToggleControl
+                    label={ __( 'Arrows', 'frontis-blocks' ) }
+                    checked={ arrows }
+                    onChange={(value) => setAttributes({ arrows: value })}
+                />
+
+                <ToggleControl
+                    label={ __( 'Dots', 'frontis-blocks' ) }
+                    checked={ dots }
+                    onChange={(value) => setAttributes({ dots: value })}
+                />
+                
+                <ToggleControl
+                    label={ __( 'Pause on Hover', 'frontis-blocks' ) }
+                    checked={ pauseOnHover }
+                    onChange={(value) => setAttributes({ pauseOnHover: value })}
+                />
+
+                <ToggleControl
+                    label={ __( 'Pause on Focus', 'frontis-blocks' ) }
+                    checked={ pauseOnFocus }
+                    onChange={(value) => setAttributes({ pauseOnFocus: value })}
+                />
+
+                <ToggleControl
+                    label={ __( 'Variable Width', 'frontis-blocks' ) }
+                    checked={ variableWidth }
+                    onChange={(value) => setAttributes({ variableWidth: value })}
+                />
+
+                <ToggleControl
+                    label={ __( 'Touch Move', 'frontis-blocks' ) }
+                    checked={ touchMove }
+                    onChange={(value) => setAttributes({ touchMove: value })}
+                />
+
+                <ToggleControl
+                    label={ __( 'Draggable', 'frontis-blocks' ) }
+                    checked={ draggable }
+                    onChange={(value) => setAttributes({ draggable: value })}
+                />
+
+                <ToggleControl
+                    label={ __( 'Swipe', 'frontis-blocks' ) }
+                    checked={ swipe }
+                    onChange={(value) => setAttributes({ swipe: value })}
+                />
+
+                <ToggleControl
+                    label={ __( 'Swipe to Slide', 'frontis-blocks' ) }
+                    checked={ swipeToSlide }
+                    onChange={(value) => setAttributes({ swipeToSlide: value })}
+                />
+                
+                <ToggleControl
+                    label={ __( 'Wait for Animate', 'frontis-blocks' ) }
+                    checked={ waitForAnimate }
+                    onChange={(value) => setAttributes({ waitForAnimate: value })}
+                />
+
                 <RangeControl
-                    label={__("Transition Speed (ms)", "frontis-blocks")}
+                    label={__('Speed (ms)', 'frontis-blocks')}
                     value={speed}
                     onChange={(value) => setAttributes({ speed: value })}
                     min={100}
-                    max={20000}
+                    max={10000}
                     step={100}
+                    initialPosition={2000}
                 />
-                <ToggleControl
-                    label={__("Reverse Direction", "frontis-blocks")}
-                    checked={reverseDirection}
-                    onChange={(value) => setAttributes({ reverseDirection: value })}
+                <RangeControl
+                    label={__('Slides to Show', 'frontis-blocks')}
+                    value={slidesToShow}
+                    onChange={(value) => setAttributes({ slidesToShow: value })}
+                    min={1}
+                    max={100}
+                    step={1}
+                    initialPosition={6}
                 />
-                
+                <RangeControl
+                    label={__('Slides to Scroll', 'frontis-blocks')}
+                    value={slidesToScroll}
+                    onChange={(value) => setAttributes({ slidesToScroll: value })}
+                    min={1}
+                    max={20}
+                    step={1}
+                    initialPosition={1}
+                />
+                <RangeControl
+                    label={__('Slides to Scroll', 'frontis-blocks')}
+                    value={autoplaySpeed}
+                    onChange={(value) => setAttributes({ autoplaySpeed: value })}
+                    min={0}
+                    max={10000}
+                    step={100}
+                    initialPosition={0}
+                />
 
             </PanelBody>
         </>

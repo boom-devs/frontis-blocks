@@ -16,13 +16,7 @@ const Edit = (props) => {
 	} );
 
     const TEMPLATE = [
-        [
-            'frontis-blocks/container',
-            {},
-            [
-                [ 'frontis-blocks/advanced-image' ]
-            ]
-        ]
+        [ 'frontis-blocks/advanced-image' ]
     ];
 
     // Hide slider block.

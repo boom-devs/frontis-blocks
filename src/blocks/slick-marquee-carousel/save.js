@@ -4,19 +4,24 @@ export default function Save({ attributes }) {
 
 	const {
         blockId,
-        sliderItems,
-
-        slideWidth,
-        slideWidthUnits,
-        slideHeight,
-        slideHeightUnits,
-
-        autoplay,
-        autoplayDirection,
-        reverseDirection,
+        blockStyle,
         speed,
-        showNavigation,
-        showPagination,
+        infinite,
+        slidesToShow,
+        slidesToScroll,
+        autoplay,
+        autoplaySpeed,
+        centerMode,
+        arrows,
+        dots,
+        pauseOnHover,
+        pauseOnFocus,
+        variableWidth,
+        touchMove,
+        draggable,
+        swipe,
+        swipeToSlide,
+        waitForAnimate,
     } = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -25,31 +30,31 @@ export default function Save({ attributes }) {
 
 	// Prepare slick settings based on slider type
 	const slickSettings = JSON.stringify({
-		speed: 2000,
-		infinite: true,
-		slidesToShow: 6,
-		slidesToScroll: 1,
-		autoplay: true,
-		autoplaySpeed: 0,
-		centerMode: true,
+		speed: speed,
+		infinite: infinite,
+		slidesToShow: slidesToShow,
+		slidesToScroll: slidesToScroll,
+		autoplay: autoplay,
+		autoplaySpeed: autoplaySpeed,
+		centerMode: centerMode,
 		cssEase: 'linear',
-		arrows: false,
-		dots: false,
-		pauseOnHover: false,
-		pauseOnFocus: false,
-		variableWidth: false,
-		touchMove: false,
-		draggable: false,
-		swipe: false,
-		swipeToSlide: false,
-		waitForAnimate: false 
+		arrows: arrows,
+		dots: dots,
+		pauseOnHover: pauseOnHover,
+		pauseOnFocus: pauseOnFocus,
+		variableWidth: variableWidth,
+		touchMove: touchMove,
+		draggable: draggable,
+		swipe: swipe,
+		swipeToSlide: swipeToSlide,
+		waitForAnimate: waitForAnimate 
 	});
 
 	return (
 		<div {...blockProps} data-slick-settings={slickSettings}>
-			<div className="wp-block-uagb-image-gallery">
-				<div className="spectra-image-gallery spectra-image-gallery__layout--carousel">
-					<div className="uagb-slick-carousel">
+			<div className="fb-marquee-image-gallery">
+				<div className="fb-marquee-carousel-gallery-layout">
+					<div className="fb-marquee-carousel-wrapper">
 						<InnerBlocks.Content />
 					</div>
 				</div>
