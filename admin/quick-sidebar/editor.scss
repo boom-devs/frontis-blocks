@@ -35,6 +35,14 @@
 	}
 
 }
+
+.frontis-blocks-quick-access-container {
+	height: 100%;
+
+	.frontis-blocks-ee-quick-access {
+		height: 100%;
+	}
+}
 .frontis-blocks-ee-quick-access {
 	// The sidebar inside the Quick Access area.
 	&__sidebar {
@@ -43,6 +51,7 @@
 		flex-direction: column;
 		background: transparent;
 		overflow: auto;
+		height: 100%;
 
 		::-webkit-scrollbar {
 			width: 0;

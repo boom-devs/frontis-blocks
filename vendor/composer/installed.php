@@ -3,7 +3,7 @@
         'name' => 'wpmessiah/frontis-blocks',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '90ec4ccf025b1b397e551ceb5592d0b57fbf6631',
+        'reference' => 'da249659ba09b8f88f379f5331c44bfdc10b7ea1',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -35,7 +35,7 @@
         'matthiasmullie/minify' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '4c4eceeaa2f66eeb8de87ae9329b4cc2845073c3',
+            'reference' => '76ba4a5f555fd7bf4aa408af608e991569076671',
             'type' => 'library',
             'install_path' => __DIR__ . '/../matthiasmullie/minify',
             'aliases' => array(
@@ -55,7 +55,7 @@
         'sabberworm/php-css-parser' => array(
             'pretty_version' => 'v8.x-dev',
             'version' => '8.9999999.9999999.9999999-dev',
-            'reference' => 'f5fc39a4baef45f8fcf5231fa8be266d136f7b46',
+            'reference' => 'd8e916507b88e389e26d4ab03c904a082aa66bb9',
             'type' => 'library',
             'install_path' => __DIR__ . '/../sabberworm/php-css-parser',
             'aliases' => array(),
@@ -64,7 +64,7 @@
         'wpmessiah/frontis-blocks' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '90ec4ccf025b1b397e551ceb5592d0b57fbf6631',
+            'reference' => 'da249659ba09b8f88f379f5331c44bfdc10b7ea1',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
