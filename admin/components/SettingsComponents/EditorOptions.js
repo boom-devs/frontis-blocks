@@ -19,7 +19,7 @@ const NumberInputWithPx = ({ value, onChange, onBlur, min, max, device, onDevice
 
   const handleChange = (newValue) => {
     setLocalValue(newValue);
-    onChange(newValue);
+    // onChange(newValue);
   };
 
   const toggleDeviceVisibility = (e) => {
@@ -91,19 +91,19 @@ const EditorOptions = () => {
 
   const [isAutomaticBlockRecoveryChecked, setIsAutomaticBlockRecoveryChecked] = useState(options.automatic_block_recovery);
 
-  useEffect(() => {
-    try {
-      setIsAutomaticBlockRecoveryChecked(JSON.parse(options.automatic_block_recovery) === true);
-    } catch {
-      setIsAutomaticBlockRecoveryChecked(false);
-    }
-  }, [options.automatic_block_recovery]);
+  // useEffect(() => {
+  //   try {
+  //     setIsAutomaticBlockRecoveryChecked(JSON.parse(options.automatic_block_recovery) === true);
+  //   } catch {
+  //     setIsAutomaticBlockRecoveryChecked(false);
+  //   }
+  // }, [options.automatic_block_recovery]);
 
   const [device, setDevice] = useState('Desktop');
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
   useEffect(() => {
-    fetchOptions();
+    // fetchOptions();
   }, []);
 
   const fetchOptions = () => {

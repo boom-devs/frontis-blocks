@@ -14,7 +14,7 @@ const AssetsGeneration = () => {
 	const { nonce, ajaxUrl, all_post_ids } = window.frontisBlocksAdmin;
 
 	useEffect(() => {
-		// fetchOptions();
+		fetchOptions();
 	}, []);
 
 	const fetchOptions = () => {
