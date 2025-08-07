@@ -11,10 +11,10 @@ const AssetsGeneration = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
+	const { nonce, ajaxUrl, all_post_ids } = window.frontisBlocksAdmin;
 
 	useEffect(() => {
-		fetchOptions();
+		// fetchOptions();
 	}, []);
 
 	const fetchOptions = () => {
@@ -126,8 +126,8 @@ const AssetsGeneration = () => {
 		setIsLoading(true); // Start loading
 		setIsModalOpen(false);
 
-		console.log("nonce nonce")
-		console.log(nonce)
+		console.log("all_post_ids all_post_ids")
+		console.log(all_post_ids)
 
 		window.jQuery.ajax({
 			url: ajaxUrl,

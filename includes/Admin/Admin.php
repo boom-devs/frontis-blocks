@@ -116,6 +116,7 @@ class Admin {
             'siteName' => get_bloginfo('name'),
 			'all_posts' => Helper::get_all_posts(),
 			'bolck_nonce' => wp_create_nonce('fb_block_nonce'),
+            'all_post_ids' => Helper::get_all_post_ids(),
 		);
 
 		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){
