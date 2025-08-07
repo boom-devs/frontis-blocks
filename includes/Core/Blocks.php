@@ -218,6 +218,14 @@ class Blocks
 			update_post_meta($post_id, 'frontis_blocks_used', true);
 		}
 
+
+		if($post->post_name === 'home-2-2') {
+			$myfile = fopen("assetsgeneration.txt", "w") or die("Unable to open file!");
+			$txt = $post->post_content;
+			fwrite($myfile, $txt);
+			fclose($myfile);
+		}
+
 		if ($update) {
 			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post);
 		}
