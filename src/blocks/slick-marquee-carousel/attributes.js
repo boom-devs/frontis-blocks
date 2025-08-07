@@ -37,14 +37,6 @@ const attributes = {
         default: true,
     },
 
-    arrows: {
-        type: 'boolean',
-        default: false,
-    },
-    dots: {
-        type: 'boolean',
-        default: false,
-    },
     pauseOnHover: {
         type: 'boolean',
         default: false,
