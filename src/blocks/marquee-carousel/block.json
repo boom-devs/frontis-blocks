@@ -1,6 +1,6 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "frontis-blocks/marquee-carousel",
 	"version": "1.0.0",
 	"title": "Marquee Carousel",
@@ -17,10 +17,11 @@
 	"textdomain": "frontis-blocks",
 	"editorScript": [
 		"file:./index.js",
-        "frontis-swiper-script"
+        "frontis-slick-script"
 	],
 	"editorStyle": [
 		"file:./index.css",
-		"frontis-swiper-style"
+		"frontis-slick-style",
+		"frontis-slick-theme-style"
 	]
 }

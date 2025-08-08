@@ -1,103 +1,116 @@
-import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { RichText, useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 export default function Save({ attributes }) {
-    const {
+
+	const {
         blockId,
-        sliderItems,
-
-        slideWidth,
-        slideWidthUnits,
-        slideHeight,
-        slideHeightUnits,
-
-        autoplay,
-        autoplayDirection,
-        reverseDirection,
+        blockStyle,
         speed,
-        showNavigation,
-        showPagination,
+        infinite,
+        slidesToShow,
+        autoplay,
+        centerMode,
+        pauseOnHover,
+        variableWidth,
+        touchMove,
+        draggable,
+        swipe,
+        swipeToSlide,
+        waitForAnimate,
+		sliderGlobalWraperID,
+        sliderGlobalWraperClass,
     } = attributes;
 
-    const blockProps = useBlockProps.save({
-        className: `fb-marquee-carousel-container ${blockId}`,
-    });
+	const blockProps = useBlockProps.save({
+		className: `fb-marquee-slider-container ${blockId}`,
+	});
 
-    // Prepare Swiper settings based on slider type
-    const swiperSettings = JSON.stringify({
-        loop: true,
-        slidesPerView: 'auto',
-        spaceBetween: 0,
-        centeredSlides: false,
-        speed: speed,
-        // autoplay: false,
-        autoplay: {
-            delay: 1,
-            reverseDirection: reverseDirection,
-            disableOnInteraction: false,
-        },
-        allowTouchMove: false,
-    
-        navigation: showNavigation ? {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        } : false,
-    
-        pagination: showPagination ? {
-            el: '.swiper-pagination',
-            clickable: true,
-        } : false,
-    });
+	// Helper function to get responsive value (same as edit.js)
+	const getResponsiveValue = (responsiveObj, fallbackValue = 1) => {
+		if (typeof responsiveObj === 'object' && responsiveObj !== null) {
+			return responsiveObj.Desktop || fallbackValue;
+		}
+		return responsiveObj || fallbackValue;
+	};
 
-    const frontendSlideWidth = slideWidth.Desktop && slideWidthUnits.Desktop ? `${slideWidth.Desktop}${slideWidthUnits.Desktop}` : '';
-    const frontendSlideHeight = slideHeight.Desktop && slideHeightUnits.Desktop ? `${slideHeight.Desktop}${slideHeightUnits.Desktop}` : '';
+	// Generate responsive settings for frontend
+	const getResponsiveSettings = () => {
+		if (typeof slidesToShow === 'object' && slidesToShow !== null) {
+			const settings = [];
+			
+			// Tablet breakpoint
+			if (slidesToShow.Tablet !== '' && slidesToShow.Tablet !== undefined) {
+				settings.push({
+					breakpoint: 1024,
+					settings: {
+						slidesToShow: parseInt(slidesToShow.Tablet) || 1,
+						slidesToScroll: 1
+					}
+				});
+			}
+			
+			// Mobile breakpoint
+			if (slidesToShow.Mobile !== '' && slidesToShow.Mobile !== undefined) {
+				settings.push({
+					breakpoint: 768,
+					settings: {
+						slidesToShow: parseInt(slidesToShow.Mobile) || 1,
+						slidesToScroll: 1
+					}
+				});
+			}
+			
+			return settings;
+		}
+		
+		return [];
+	};
 
-    return (
-        <div {...blockProps} data-swiper-settings={swiperSettings}>
-            <div className="swiper swiper-container">
-                <div className={`swiper-wrapper fb-marquee-carousel-wrapper`}>
-                    {sliderItems.map((item) => (
-                        <div key={item.id} className={`swiper-slide ${blockId} fb-marquee-carousel-item`}   style={{
-                            ...(frontendSlideWidth ? { width: frontendSlideWidth } : {}),
-                            ...(frontendSlideHeight ? { height: frontendSlideHeight } : {}),
-                          }}>
-                            {item.marqueeCarouselImageUrl && (
-                                <div className="fb-marquee-carousel-image-wrapper">
-                                    <img src={item.marqueeCarouselImageUrl} alt={item.marqueeCarouselImageAlt} />
-                                </div>
-                            )}
-                                {item.showContentSwitcher && (
-                                    <>
-                                        <div className="fb-marquee-carousel-content-wrapper">
-                                            <div className="fb-marquee-carousel-content">
-                                                {item.marqueeCarouselText && (
-                                                    <RichText.Content
-                                                        className="fb-marquee-carousel-text"
-                                                        tagName="div"
-                                                        value={item.marqueeCarouselText}
-                                                    />
-                                                )}
-                                                {item.marqueeCarouseHoverText && (
-                                                    <RichText.Content
-                                                        className="fb-marquee-carousel-hover-text"
-                                                        tagName="div"
-                                                        value={item.marqueeCarouseHoverText}
-                                                    />
-                                                )}
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-                        </div>
-                    ))}
-                </div>
-                {showPagination && <div className="fb-marquee-carousel swiper-pagination"></div>}
-                {showNavigation && 
-                    <>
-                        <div className="fb-marquee-carousel swiper-button-next" aria-label="Next slide"></div>
-                        <div className="fb-marquee-carousel swiper-button-prev" aria-label="Previous slide"></div>
-                    </>
-                }
-            </div>
-        </div>
-    );
+	// Prepare slick settings with responsive support
+	const slickSettings = JSON.stringify({
+		speed: speed,
+		infinite: infinite,
+		slidesToShow: parseInt(getResponsiveValue(slidesToShow, 1)) || 1,
+		slidesToScroll: 1,
+		autoplay: autoplay,
+		autoplaySpeed: 0,
+		centerMode: centerMode,
+		cssEase: 'linear',
+		pauseOnHover: pauseOnHover,
+		pauseOnFocus: false,
+		variableWidth: variableWidth,
+		touchMove: touchMove,
+		draggable: draggable,
+		swipe: swipe,
+		swipeToSlide: swipeToSlide,
+		waitForAnimate: waitForAnimate,
+		arrows: false,
+		dots: false,
+		initialSlide: 0,
+        
+        // Add responsive settings
+        responsive: getResponsiveSettings(),
+        
+        // Core settings for smooth performance
+        useCSS: true,
+        useTransform: true,
+        accessibility: false,
+        focusOnSelect: false,
+        fade: false,
+        vertical: false,
+        rtl: false,
+        respondTo: 'window'
+	});
+
+	return (
+		<div {...blockProps} data-slick-settings={slickSettings}>
+			<div className={`fb-marquee-image-gallery ${sliderGlobalWraperClass}`} id={sliderGlobalWraperID}>
+				<div className="fb-marquee-carousel-gallery-layout">
+					<div className="fb-marquee-carousel-wrapper">
+						<InnerBlocks.Content />
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }
