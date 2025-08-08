@@ -23,7 +23,7 @@ const Edit = (props) => {
 	const ALLOWED_BLOCKS = parentBlocks
     .map( ( block ) => block.name )
     .filter(
-        ( blockName ) => [ 'frontis-blocks/slick-marquee-carousel', ].indexOf( blockName ) === -1
+        ( blockName ) => [ 'frontis-blocks/marquee-carousel', ].indexOf( blockName ) === -1
     );
 
     const innerBlockOptions = {

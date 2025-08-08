@@ -15,6 +15,6 @@ registerBlockType( metadata.name, {
 	attributes,
 	icon: FB_Block_Icons.slider,
 	edit: Edit,
-	parent: ['frontis-blocks/slick-marquee-carousel'],
+	parent: ['frontis-blocks/marquee-carousel'],
 	save,
 } );
