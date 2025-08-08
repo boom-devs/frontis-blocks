@@ -103,6 +103,23 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+    
+    slideGap: {
+		type: 'object',
+		default: {
+			Desktop: '10',
+			Tablet: '10',
+			Mobile: '10'
+		}
+	},
+	slideGapUnits: { 
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
     /** End Width */
     
 };

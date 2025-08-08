@@ -1,56 +1,39 @@
 .fb-marquee-slider-container  {
+  position: relative;
+  box-sizing: border-box;
+
+  .fb-marquee-image-gallery {
+    min-width: unset !important;
+    width: 100%;
     position: relative;
-    box-sizing: border-box;
 
-    .fb-marquee-image-gallery {
-      min-width: unset !important;
+    .fb-marquee-carousel-gallery-layout {
       width: 100%;
-      position: relative;
 
-      .fb-marquee-carousel-gallery-layout {
-        width: 100%;
-
-        .fb-marquee-carousel-wrapper {
-          padding: 0;
-          .slick-initialized {
-            .slick-slide {
-              display: block;
-            }
+      .fb-marquee-carousel-wrapper {
+        padding: 0;
+        .slick-initialized {
+          .slick-slide {
+            display: block;
           }
         }
-        .slick-initialized {
-          visibility: visible;
-        }
+      }
+      .slick-initialized {
+        visibility: visible;
+      }
 
-        .slick-list {
-          padding: 0;
-          overflow: hidden !important;
-        }
-
-        .slick-track {
-          display: flex;
-          align-items: center;
-          gap: 30px;
-        } 
+      .slick-list {
+        padding: 0 !important;
+        overflow: hidden !important;
       }
     }
-    .slick-slider {
-      display: block;
-      position: relative;
-      box-sizing: border-box;
+  }
+  .slick-slide {
+    height: auto;
+    min-height: 1px;
+    &:focus {
+      outline: none !important;
     }
-     .slick-slide {
-      // width: auto !important;
-      float: left;
-      height: auto;
-      min-height: 1px;
-      &:focus {
-        outline: none !important;
-      }
-
-      img {
-        display: block;
-      }
-     }
+  }
 
 }

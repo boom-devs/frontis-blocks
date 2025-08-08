@@ -43,7 +43,10 @@ export default function Save({ attributes }) {
 		draggable: draggable,
 		swipe: swipe,
 		swipeToSlide: swipeToSlide,
-		waitForAnimate: waitForAnimate 
+		waitForAnimate: waitForAnimate,
+		arrows: false,
+		dots: false,
+		initialSlide: 1,
 	});
 
 	return (
