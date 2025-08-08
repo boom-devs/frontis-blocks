@@ -1,21 +1,26 @@
 (function () {
 	function initLogoSlick() {
 		const $ = window.jQuery;
-		const sliders = document.querySelectorAll('.fb-marquee-carousel-wrapper'); 
+
+		if (!$ || !$.fn.slick) {
+			console.warn('jQuery or Slick not loaded.');
+			return;
+		}
+
+		const sliders = document.querySelectorAll('.fb-marquee-carousel-wrapper');
 
 		sliders.forEach((slider) => {
 			const $slider = $(slider);
 			if ($slider.hasClass('slick-initialized')) return;
 
-			// Find closest wrapper with data-slick-settings
 			const wrapper = slider.closest('.fb-marquee-slider-container');
-			const slickSettingsData = wrapper?.getAttribute('data-slick-settings') || '{}';
+			const settingsAttr = wrapper?.getAttribute('data-slick-settings') || '{}';
 
 			let slickSettings = {};
 			try {
-				slickSettings = JSON.parse(slickSettingsData);
+				slickSettings = JSON.parse(settingsAttr);
 			} catch (e) {
-				console.error('Invalid Slick settings JSON:', e);
+				console.error('Invalid slick settings JSON:', e);
 			}
 
 			$slider.slick(slickSettings);
@@ -28,3 +33,4 @@
 		window.addEventListener('load', initLogoSlick);
 	}
 })();
+

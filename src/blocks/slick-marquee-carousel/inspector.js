@@ -50,6 +50,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         slideWidthUnits,
         slideHeight,
         slideHeightUnits,
+
+        slideGap,
+        slideGapUnits,
         
     } = attributes;
 
@@ -188,7 +191,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 initialOpen={true}
             >
                 <FB_Range
-                    min={100}
+                    min={1}
                     max={1000}
                     label={__("Slide Width", "frontis-blocks")}
                     rangeValue={slideWidth}
@@ -201,7 +204,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     resetFallbackValue={""}
                 />
                 <FB_Range
-                    min={100}
+                    min={1}
                     max={1000}
                     label={__("Slide Height", "frontis-blocks")}
                     rangeValue={slideHeight}
@@ -209,6 +212,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     rangeUnitHandler={(value) => setAttributes({ slideHeightUnits: value })}
                     deviceType={deviceType}
                     units={slideHeightUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+                <FB_Range
+                    min={1}
+                    max={500}
+                    label={__("Slide Gap", "frontis-blocks")}
+                    rangeValue={slideGap}
+                    onChangeHandler={(value) => setAttributes({ slideGap: value })}
+                    rangeUnitHandler={(value) => setAttributes({ slideGapUnits: value })}
+                    deviceType={deviceType}
+                    units={slideGapUnits}
                     setAttributes={setAttributes}
                     rangeStep={1}
                     resetFallbackValue={""}
@@ -226,12 +242,69 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
 	);
 
+    /** Start All Block Style */
+    const allBlockStyle = useMemo(() => `
+
+        .${blockId} .slick-slider {
+            display: block;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .${blockId} .slick-track {
+            display: flex;
+            align-items: center;
+            ${slideGap.Desktop && slideGapUnits.Desktop ? `gap: ${slideGap.Desktop}${slideGapUnits.Desktop};` : ''}
+        }
+        .${blockId} .slick-slide {
+          ${slideWidth.Desktop && slideWidthUnits.Desktop ? `width: ${slideWidth.Desktop}${slideWidthUnits.Desktop} !important;` : ''}  
+          ${slideHeight.Desktop && slideHeightUnits.Desktop ? `height: ${slideHeight.Desktop}${slideHeightUnits.Desktop} !important;` : ''}
+          flex-shrink: 0;
+        }
+
+        @media only screen and (max-width: 1024px) {
+            .${blockId} .slick-track {
+                ${slideGap.Tablet && slideGapUnits.Tablet ? `gap: ${slideGap.Tablet}${slideGapUnits.Tablet};` : ''}
+            }
+            .${blockId} .slick-slide {
+                ${slideWidth.Tablet && slideWidthUnits.Tablet ? `width: ${slideWidth.Tablet}${slideWidthUnits.Tablet} !important;` : ''}  
+                ${slideHeight.Tablet && slideHeightUnits.Tablet ? `height: ${slideHeight.Tablet}${slideHeightUnits.Tablet} !important;` : ''}  
+            }
+        }
+        @media only screen and (max-width: 767px) {
+            .${blockId} .slick-track {
+                ${slideGap.Mobile && slideGapUnits.Mobile ? `gap: ${slideGap.Mobile}${slideGapUnits.Mobile};` : ''}
+            }
+            .${blockId} .slick-slide {
+                ${slideWidth.Mobile && slideWidthUnits.Mobile ? `width: ${slideWidth.Mobile}${slideWidthUnits.Mobile} !important;` : ''}  
+                ${slideHeight.Mobile && slideHeightUnits.Mobile ? `height: ${slideHeight.Mobile}${slideHeightUnits.Mobile} !important;` : ''}  
+            }
+        }
+    `, [
+        blockId,
+        slideWidth,
+        slideWidthUnits,
+        slideHeight,
+        slideHeightUnits,
+        slideGap,
+        slideGapUnits,
+
+    ]);
+
+    // const customCss = getCustomCss(marqueeCarouselCustomCSS, `.${blockId}`);
+    
+    useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()}); 
+    }, [allBlockStyle]);
+
+    const editorStyle = `${allBlockStyle}`.replace(/\s+/g, ' ').trim();
+
 
     return (
 
         <>
             <style>
-            	{/* {editorStyle} */}
+            	{editorStyle}
             </style>
 
             <FB_InspectorControls

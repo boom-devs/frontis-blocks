@@ -76,14 +76,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             draggable: draggable,
             swipe: swipe,
             swipeToSlide: swipeToSlide,
-            waitForAnimate: waitForAnimate 
+            waitForAnimate: waitForAnimate,
+            arrows: false,
+            dots: false,
+            initialSlide : 1,
 		});
 
-		return () => {
-			if ($slider.hasClass('slick-initialized')) {
-				$slider.slick('unslick');
-			}
-		};
+        return () => {
+            clearTimeout(timer);
+            if ($slider.hasClass('slick-initialized')) {
+                $slider.slick('unslick');
+            }
+        };
 	}, [
         speed,
         infinite,
