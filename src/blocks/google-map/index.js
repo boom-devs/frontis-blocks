@@ -9,11 +9,11 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import attributes from './attributes.js';
-import { ButtonIcon } from "./icon";
+import FB_Block_Icons from "@Config/fb-blocks-icons";
 
 registerBlockType( metadata.name, {
 	attributes,
-	icon: ButtonIcon,
+	icon: FB_Block_Icons.google_map,
 	edit: Edit,
 	save,
 } );
