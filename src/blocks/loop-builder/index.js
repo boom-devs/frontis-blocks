@@ -15,5 +15,5 @@ registerBlockType( metadata.name, {
 	attributes,
 	edit: Edit,
 	save,
-	icon: FB_Block_Icons.post_grid
+	icon: FB_Block_Icons.loop_builder
 } );

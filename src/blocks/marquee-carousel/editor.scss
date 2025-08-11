@@ -18,6 +18,11 @@
             display: block;
           }
         }
+        .slick-track {
+          transition-timing-function: linear !important;
+          will-change: transform;
+          backface-visibility: hidden;
+        }
       }
       .slick-initialized {
         visibility: visible;

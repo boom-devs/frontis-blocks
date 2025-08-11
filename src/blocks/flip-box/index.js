@@ -15,6 +15,6 @@ registerBlockType( metadata.name, {
 	attributes,
 	edit: Edit,
 	save,
-	icon: FB_Block_Icons.info_box,
+	icon: FB_Block_Icons.flip_box,
 	deprecated
 } );
