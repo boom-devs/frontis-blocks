@@ -14,5 +14,5 @@ registerBlockType( metadata.name, {
 	attributes,
 	edit: Edit,
 	save,
-	icon: FB_Block_Icons.advanced_heading,
+	icon: FB_Block_Icons.animated_heading,
 } );
