@@ -7,7 +7,7 @@ import { dispatch, useDispatch, select } from '@wordpress/data';
 import { __, sprintf } from '@wordpress/i18n';
 
 const DraggableBlock = ( props ) => {
-	const { block, id, create, blockInsertionPoint, getSelectedBlockClientId, getSelectedBlockAllowedBlocks, getBlockRootClientId } = props;
+	const { block, id, create, blockInsertionPoint, getSelectedBlockClientId, getSelectedBlockAllowedBlocks, getBlockRootClientId,getDefaultAllowedQuickSidebarBlocks, updateAllowedBlocksQuickSidebar } = props;
 	const [ hovering, setHovering ] = useState( false );
 	const isDragging = useRef( false );
 	const { createNotice } = useDispatch( 'core/notices' );
@@ -19,29 +19,32 @@ const DraggableBlock = ( props ) => {
 	const handleMouseOut = () => setHovering( false );
 
 	// Saving the allowed blocks to the database.
-	// const saveOptionToDatabase = ( allowedBlocks ) => {
-	// 	updateDefaultAllowedQuickSidebarBlocks( allowedBlocks );
-	// 	const data = {
-	// 		security: uagb_blocks_info.uagb_ajax_nonce,
-	// 		defaultAllowedQuickSidebarBlocks: JSON.stringify( allowedBlocks ),
-	// 	};
-	// 	// Call the getApiData function with the specified parameters.
-	// 	getApiData( {
-	// 		url: uagb_blocks_info.ajax_url,
-	// 		action: 'uag_global_update_allowed_block',
-	// 		data,
-	// 	} );
-	// };
+	const saveOptionToDatabase = ( allowedBlocks ) => {
+		updateAllowedBlocksQuickSidebar( allowedBlocks );
+
+		// Call the getApiData function with the specified parameters.
+		const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
+
+		jQuery.ajax({
+			url: ajaxUrl,
+			type: 'POST',
+			data: {
+				action: 'fb_update_allowed_blocks',
+				security: nonce,
+				data: allowedBlocks,
+			}
+		});
+	};
 
 	// Removes the specified element from an array.
-	// const removeElementFromArray = ( arrayFromWhichElementNeedToRemove, elementToRemove ) => arrayFromWhichElementNeedToRemove.filter( ( element ) => element !== elementToRemove );
+	const removeElementFromArray = ( arrayFromWhichElementNeedToRemove, elementToRemove ) => arrayFromWhichElementNeedToRemove.filter( ( element ) => element !== elementToRemove );
 
 	const handleRemoveBlock = ( elementToRemove ) => {
-		// const updatedArray = removeElementFromArray( getDefaultAllowedQuickSidebarBlocks, elementToRemove.name );
-		// saveOptionToDatabase( updatedArray );
+		const updatedArray = removeElementFromArray( getDefaultAllowedQuickSidebarBlocks, elementToRemove.name );
+		saveOptionToDatabase( updatedArray );
 		// Increment uniqueId when removing a block
 		setUniqueId( ( prevUniqueId ) => prevUniqueId + 1 );
-		createNotice( 'success', sprintf( /* translators: abbreviation for units */ __( '%s Removed from Quick Action Bar.', 'ultimate-addons-for-gutenberg' ), elementToRemove.title ), {
+		createNotice( 'success', sprintf( /* translators: abbreviation for units */ __( '%s Removed from Quick Action Bar.', 'frontis-blocks' ), elementToRemove.title ), {
 			type: 'snackbar',
 			id: removedNoticeID,
 			isDismissible: true,

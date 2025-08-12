@@ -11,7 +11,7 @@ const Performance = () => {
 	const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
 	useEffect(() => {
-		fetchOptions();
+		// fetchOptions();
 	  }, []);
 	
 	  const fetchOptions = () => {
