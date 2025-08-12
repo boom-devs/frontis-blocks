@@ -18,7 +18,6 @@ build
 dist
 assets/admin
 
-
 style-blocks/
 blocks/**/index.js.LICENSE.txt
 *.log
