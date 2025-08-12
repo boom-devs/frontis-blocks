@@ -1,19 +1,57 @@
-.frontis-blocks-ee-quick-access {
+.frontis-blocks-quick-access-sidebar-wrapper {
 	display: flex;
-	height: auto;
+	height: 100%;
 	width: 60px;
-	background: #1e1e1e;
 	color: #fff;
+	background: #1e1e1e;
+	flex-direction: column;
 
+	.frontis-blocks-logo {
+		text-align: center;
+	}
+
+	.frontis-blocks-ee-quick-access__sidebar--tabs-container {
+		margin-top: auto;
+	}
+
+	frontis-blocks-quick-action-block-popover-header__add-to-quick-action-bar {
+		.block-editor-inserter__panel-title {
+
+		}
+	}
+
+	.frontis-blocks-ee-quick-access__sidebar--blocks--block--icon {
+		svg {
+			path {
+				color: #FFFFFF !important;
+			}
+		}
+	}
+
+	.frontis-blocks-sidebar-actions {
+		&.active {
+
+		}
+	}
+
+}
+
+.frontis-blocks-quick-access-container {
+	height: 100%;
+
+	.frontis-blocks-ee-quick-access {
+		height: 100%;
+	}
+}
+.frontis-blocks-ee-quick-access {
 	// The sidebar inside the Quick Access area.
 	&__sidebar {
 		width: 60px;
-		height: calc( 100% - 34px );
-		background: #1e1e1e;
 		display: flex;
 		flex-direction: column;
-		position: absolute;
+		background: transparent;
 		overflow: auto;
+		height: 100%;
 
 		::-webkit-scrollbar {
 			width: 0;
@@ -104,46 +142,6 @@
 					}
 
 					background: #1d2939;
-				}
-			}
-		}
-
-		&--actions {
-			cursor: pointer;
-			position: relative;
-			bottom: 6px;
-			left: 0;
-			margin-top: 10px;
-
-			.spectra-quick-action-sidebar-wrap {
-
-				#plus-icon,
-				#rearrange-icon {
-					display: flex;
-					align-content: center;
-					justify-content: center;
-					align-items: center;
-					padding: 12px 12px;
-					flex-direction: column;
-				}
-			}
-		}
-
-		&--tab {
-			display: inline-block;
-			cursor: pointer;
-		}
-
-		&--tabs {
-			display: flex;
-			flex-direction: column;
-
-			.tab.active {
-
-				#plus-icon,
-				#rearrange-icon {
-					background-color: #1d2939;
-					color: #fff;
 				}
 			}
 		}
