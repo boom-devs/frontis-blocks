@@ -229,3 +229,8 @@ export const READ_MORE_ICON_ALIGN = [
 	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
 	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon-only" },
 ];
+
+export const BACKGROUND_TYPES = [
+	{ label: __('Classic', 'frontis-blocks'), value: 'classic' },
+	{ label: __('Gradient', 'frontis-blocks'), value: 'gradient' },
+];
