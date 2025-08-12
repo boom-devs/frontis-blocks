@@ -609,6 +609,27 @@ class Helper
 		return $posts_by_type;
 	}
 
+    public static function get_all_post_ids() {
+        global $wpdb;
+
+        $query = "SELECT ID
+          FROM {$wpdb->posts}
+          WHERE post_status = 'publish'
+          AND post_name != 'wp-global-styles-frontis-theme'
+          AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type')
+          ORDER BY post_date DESC";
+          
+		$results = $wpdb->get_results($query);
+
+        if(!empty($results)) {
+            return array_map(function($result) {
+                return $result->ID;
+            }, $results);
+        }
+        
+        return [];
+    }
+
 	// Render dynamic content for block
 	public static function render_dynamic_content($block_data) {
 	}
