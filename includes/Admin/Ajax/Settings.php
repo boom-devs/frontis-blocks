@@ -29,6 +29,7 @@ class Settings extends AjaxBase {
 			'container_row_gap',
 			'container_padding',
 			'custom_css',
+			'automatic_block_recovery',
 			'copy_paste_style',
 			'file_generation',
 			'generate_assets',
