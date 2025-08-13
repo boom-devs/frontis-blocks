@@ -10,10 +10,8 @@ import { useState } from "@wordpress/element";
 
 // Component to handle individual sortable items
 export const SortableItem = ( { id, item } ) => {
-	// Use useSortable hook to enable dragging functionality
 	const { attributes, listeners, setNodeRef, transform, transition } = useSortable( { id } );
 
-	// Apply transform and transition styles for drag animation
 	const style = {
 		transform: CSS.Transform.toString( transform ),
 		transition,
@@ -21,10 +19,10 @@ export const SortableItem = ( { id, item } ) => {
 
 	return (
 		<div
-			ref={setNodeRef} // Reference for the sortable item
+			ref={setNodeRef}
 			style={style}
-			{...attributes} // Attributes required for accessibility
-			{...listeners} // Event listeners for drag events
+			{...attributes}
+			{...listeners}
 			className='frontis-blocks-ee-quick-access__sidebar--blocks--block'
 		>
 			<div className={`frontis-blocks-ee-quick-access__sidebar-icon__${item?.name?.split( '/' )[0]} frontis-blocks-ee-quick-access__sidebar-icon__${item?.name?.split( '/' )[0]}--${item?.name?.split( '/' )[1]} frontis-blocks-ee-quick-access__sidebar--blocks--block--icon`}>
@@ -35,7 +33,7 @@ export const SortableItem = ( { id, item } ) => {
 }
 
 // Main drag and drop component
-const DragAndDropComponent = ( { initialItems, updateDefaultAllowedQuickSidebarBlocks } ) => {
+const DragAndDropComponent = ( { initialItems, updateAllowedBlocksQuickSidebar } ) => {
 	const [items, setItems] = useState( initialItems );
 
 	// Function to handle the start of a drag event
@@ -64,16 +62,18 @@ const DragAndDropComponent = ( { initialItems, updateDefaultAllowedQuickSidebarB
 
 	// Function to save the reordered items to the database
 	const saveOptionToDatabase = ( allowedBlocks ) => {
-		updateDefaultAllowedQuickSidebarBlocks( allowedBlocks );
-		const data = {
-			security: uagb_blocks_info.uagb_ajax_nonce,
-			defaultAllowedQuickSidebarBlocks: JSON.stringify( allowedBlocks ),
-		};
-		getApiData( {
-			url: uagb_blocks_info.ajax_url,
-			action: 'uag_global_update_allowed_block',
-			data,
-		} );
+		updateAllowedBlocksQuickSidebar( allowedBlocks );
+		const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
+
+		jQuery.ajax({
+			url: ajaxUrl,
+			type: 'POST',
+			data: {
+				action: 'fb_update_allowed_blocks',
+				security: nonce,
+				data: allowedBlocks,
+			}
+		});
 	};
 
 	return (
