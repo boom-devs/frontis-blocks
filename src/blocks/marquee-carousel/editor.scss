@@ -1,25 +1,21 @@
-.swiper-wrapper{
-  -webkit-transition-timing-function:linear!important;    transition-timing-function:linear!important; 
-  position: relative;
+
+.swiper {
+  overflow: hidden; /* নিরাপদ */
 }
-.swiper-slide {
-  text-align: center;
-  font-size: 33px;
-  background: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: auto !important;
-  position: relative;
-  overflow: hidden;
-  padding: 0 20px;
+.swiper-wrapper{
+  -webkit-transition-timing-function: linear !important;
+  transition-timing-function: linear !important;
+  will-change: transform; /* স্মুথনেস */
 }
 
-@keyframes line-slide {
-  0% {
-    background-position: -5% 0;
-  }
-  100% {
-    background-position: 100% 0;
+.fb-marquee-slider-container {
+  .swiper-slide{
+    flex: 0 0 auto;   /* variable width স্লাইডের জন্য স্থির */
+    // width: auto !important;
+    width: 10rem !important;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
