@@ -16,14 +16,14 @@ const Edit = (props) => {
 	} );
 
     const TEMPLATE = [
-        [ 'frontis-blocks/advanced-image' ]
+        [ 'frontis-blocks/advanced-heading' ]
     ];
 
     // Hide slider block.
 	const ALLOWED_BLOCKS = parentBlocks
     .map( ( block ) => block.name )
     .filter(
-        ( blockName ) => [ 'frontis-blocks/marquee-carousel', ].indexOf( blockName ) === -1
+        ( blockName ) => [ 'frontis-blocks/slider', ].indexOf( blockName ) === -1
     );
 
     const innerBlockOptions = {
@@ -33,17 +33,19 @@ const Edit = (props) => {
 
     const innerBlocksProps = useInnerBlocksProps(
         {
-            className: `marquee-carousel-item-content`,
+            className: `swiper-content`,
+            slot: 'container-start',
         },
         innerBlockOptions
     );
 
     const blockProps = useBlockProps({
-        className: `marquee-carousel-item slick-slide ${blockId || 'default-id'}`,
+        className: `fb-slide-main-wrapper ${blockId || 'default-id'} swiper-slide`,
     });
 
     return (
         <>
+            {/* <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} /> */}
             <div {...blockProps}>
                 <div {...innerBlocksProps} />
             </div>

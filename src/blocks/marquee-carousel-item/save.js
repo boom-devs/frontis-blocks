@@ -5,13 +5,13 @@ export default function save( props ) {
 	const { blockId } = props.attributes;
 
 	const blockProps = useBlockProps.save( {
-		className: classnames( 'marquee-carousel-item', `fb-block-${ blockId }` ),
+		className: classnames( 'fb-slider-child-wrap', 'swiper-slide', `fb-block-${ blockId }` ),
 	} );
 
 	return (
 		<>
 			<div { ...blockProps } key={ blockId }>
-				<div className="marquee-carousel-item-content">
+				<div className="swiper-content">
 					<InnerBlocks.Content />
 				</div>
 			</div>

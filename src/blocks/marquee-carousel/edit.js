@@ -1,216 +1,136 @@
 import { __ } from '@wordpress/i18n';
 import {
-    RichText,
     useBlockProps,
     BlockControls,
-	useInnerBlocksProps,
+    useInnerBlocksProps,
+    store as blockEditorStore
 } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
-import { useState, useEffect, useRef, useMemo } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { withSelect, withDispatch, useDispatch, useSelect } from '@wordpress/data';
 import { createBlock } from '@wordpress/blocks';
+import { useState, useMemo, useEffect, useRef } from "@wordpress/element";
+import { compose } from '@wordpress/compose';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
+import { Swiper } from 'swiper/react';
+import { useDeviceType } from "@Config/displayType";
+import { 
+    Navigation, 
+    Pagination, 
+    Autoplay, 
+    Manipulation,
+    Mousewheel,
+    EffectFade,
+    EffectCube,
+    EffectCoverflow,
+    EffectFlip,
+    EffectCreative,
+    EffectCards
+} from 'swiper/modules';
 
-import './editor.scss';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/mousewheel';
+import 'swiper/css/effect-fade';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/effect-flip';
+import 'swiper/css/effect-creative';
 
-const ALLOWED_BLOCKS = ['frontis-blocks/marquee-carousel-item'];
+const ALLOWED_BLOCKS = ['frontis-blocks/slider-item'];
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+const Edit = (props) => {
+    const {
+        attributes,
+        setAttributes,
+        clientId,
+        block,
+        blockParents,
+        insertBlock,
+    } = props;
 
-	const {
+    const {
         blockId,
-        blockStyle,
-        speed,
-        infinite,
-        slidesToShow,
+        slideContent,
+        slideItem,
+        transitionSpeed,
+        displayArrows,
+		displayDots,
         autoplay,
-        centerMode,
+        autoplaySpeed,
+        loop,
+        allowTouchMove,
         pauseOnHover,
-        variableWidth,
-        touchMove,
-        draggable,
-        swipe,
-        swipeToSlide,
-        waitForAnimate,
-        sliderGlobalWraperID,
+        stopOnLastSlide,
+        reverseDirection,
+        enableMouseWheel,
+        paginationType,
+        sliderType,
+        slideEffect,
+        carouselEffect,
+        carouselPerColumn,
+        carouselPerColumnGap,
+
+        sliderArrowPositionType,
+        sliderArrowPosition,
+
+        sliderArrowsIconSwitcher,
+
+        sliderArrowsIconLeftAlign,
+        sliderArrowsIconLeft,
+        sliderArrowsIconLeftImageUrl,
+        sliderArrowsIconLeftImageAlt,
+
+        sliderArrowsIconRightAlign,
+        sliderArrowsIconRight,
+        sliderArrowsIconRightImageUrl,
+        sliderArrowsIconRightImageAlt,
+
         sliderGlobalWraperClass,
+
+        sliderDesktopSwitcher,
+		sliderTabletSwitcher,
+		sliderMobileSwitcher,
     } = attributes;
 
-    const { insertBlock, duplicateBlocks } = useDispatch('core/block-editor');
-    
-    const { getSelectedBlockClientIds, getBlocks } = useSelect('core/block-editor');
-    
-    const innerBlocks = useSelect(
-        (select) => select('core/block-editor').getBlocks(clientId),
-        [clientId]
-    );
+    const deviceType = useDeviceType();
 
-	const blockProps = useBlockProps({
-		className: `fb-marquee-slider-container ${blockId}`,
-	});
+    const swiperRef = useRef();
+	const sliderNavPrevRef = useRef();
+	const sliderNavNextRef = useRef();
 
-	const getSliderTemplate = useMemo(() => [
-        ['frontis-blocks/marquee-carousel-item'],
-        ['frontis-blocks/marquee-carousel-item'],
-		['frontis-blocks/marquee-carousel-item'],
-		['frontis-blocks/marquee-carousel-item'],
-    ], []);
+    const [swiperInstance, setSwiperInstance] = useState(null);
+	const { selectBlock } = useDispatch( blockEditorStore );
 
-	const slickRef = useRef(null);
-    const timer = useRef(null);
+	// A key to force re-mounting of <Swiper> when critical settings change
+	const [swiperKey, setSwiperKey] = useState(0);
 
-    // Helper function to get responsive value
-    const getResponsiveValue = (responsiveObj, fallbackValue = 1) => {
-        if (typeof responsiveObj === 'object' && responsiveObj !== null) {
-            // Return Desktop value first, then fallback to default
-            return responsiveObj.Desktop || fallbackValue;
-        }
-        // If it's a number (old format), return as is
-        return responsiveObj || fallbackValue;
-    };
+    const hasChildrenClass = hasChildren ? 'fb-slider-has-children' : '';
+	const listViewClass = isListViewOpen ? 'fb-list-view-enabled' : '';
+	const blockProps = useBlockProps( {
+		className: `${ blockId } ${ hasChildrenClass } ${ listViewClass } fb-slider-container fb-slider-editor-wrap ${displayArrows ? sliderArrowPositionType : ''} ${sliderArrowPosition}  fb-editor-preview-mode-${ deviceType.toLowerCase() } ${sliderGlobalWraperClass} ${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}`,
+	} );
 
-    // Generate responsive breakpoints for Slick
-    const getResponsiveSettings = () => {
-        if (typeof slidesToShow === 'object' && slidesToShow !== null) {
-            const settings = [];
-            
-            // Tablet breakpoint
-            if (slidesToShow.Tablet !== '' && slidesToShow.Tablet !== undefined) {
-                settings.push({
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: parseInt(slidesToShow.Tablet) || 1,
-                        slidesToScroll: 1
-                    }
-                });
-            }
-            
-            // Mobile breakpoint
-            if (slidesToShow.Mobile !== '' && slidesToShow.Mobile !== undefined) {
-                settings.push({
-                    breakpoint: 767,
-                    settings: {
-                        slidesToShow: parseInt(slidesToShow.Mobile) || 1,
-                        slidesToScroll: 1
-                    }
-                });
-            }
-            
-            return settings;
-        }
-        
-        return [];
-    };
+    const { isListViewOpen, hasChildren } = useSelect( ( select ) => {
+		const getStore = select( 'core/editor' ) || select( 'core/edit-widgets' );
 
-    // Slick initialization function
-    const initializeSlick = (immediate = false) => {
-        if (!window.jQuery || !slickRef.current) return;
-        const $ = window.jQuery;
-        const $slider = $(slickRef.current);
+		return {
+			isListViewOpen: getStore?.isListViewOpened ? getStore.isListViewOpened() : false,
+			hasChildren: 0 !== select( 'core/block-editor' )?.getBlocks( clientId ).length,
+		};
+	}, [] );
 
-        // Clear any existing timer
-        if (timer.current) {
-            clearTimeout(timer.current);
-        }
-
-        const reinitialize = () => {
-            if ($slider.hasClass('slick-initialized')) {
-                $slider.slick('unslick');
-            }
-
-            const desktopSlidesToShow = getResponsiveValue(slidesToShow, 1);
-            const responsiveSettings = getResponsiveSettings();
-
-            $slider.slick({
-                speed: speed,
-                infinite: infinite,
-                slidesToShow: parseInt(desktopSlidesToShow) || 1,
-                slidesToScroll: 1,
-                autoplay: autoplay,
-                autoplaySpeed: 0,
-                centerMode: centerMode,
-                cssEase: 'linear',
-                pauseOnHover: pauseOnHover,
-                pauseOnFocus: false,
-                variableWidth: variableWidth,
-                touchMove: touchMove,
-                draggable: draggable,
-                swipe: swipe,
-                swipeToSlide: swipeToSlide,
-                waitForAnimate: waitForAnimate,
-                arrows: false,
-                dots: false,
-                initialSlide: 0,
-
-                // Responsive settings
-                responsive: responsiveSettings,
-
-                // Core settings for smooth infinite scroll
-                useCSS: true,
-                useTransform: true,
-                accessibility: false,
-                focusOnSelect: false,
-                // No CSS interference - let slick handle everything
-                fade: false,
-                vertical: false,
-                rtl: false,
-                respondTo: 'window'
-            });
-        };
-
-        if (immediate) {
-            // For immediate initialization (when adding slides)
-            reinitialize();
-        } else {
-            // Small delay for normal initialization
-            timer.current = setTimeout(reinitialize, 100);
-        }
-    };
-
-	useEffect(() => {
-        initializeSlick();
-
-        return () => {
-            if (timer.current) {
-                clearTimeout(timer.current);
-            }
-            if (window.jQuery && slickRef.current) {
-                const $ = window.jQuery;
-                const $slider = $(slickRef.current);
-                if ($slider.hasClass('slick-initialized')) {
-                    $slider.slick('unslick');
-                }
-            }
-        };
-	}, [
-        speed,
-        infinite,
-        slidesToShow, // This will now trigger on responsive changes
-        autoplay,
-        centerMode,
-        pauseOnHover,
-        variableWidth,
-        touchMove,
-        draggable,
-        swipe,
-        swipeToSlide,
-        waitForAnimate,
-    ]);
-
-    // Re-initialize slick when inner blocks change
-    useEffect(() => {
-        if (innerBlocks.length > 0) {
-            // Use requestAnimationFrame for better timing
-            requestAnimationFrame(() => {
-                initializeSlick(true); // Immediate initialization
-            });
-        }
-    }, [innerBlocks.length]);
+    const getSliderTemplate = useMemo(() => [
+        ['frontis-blocks/slider-item'],
+        ['frontis-blocks/slider-item'],
+        ['frontis-blocks/slider-item'],
+        ['frontis-blocks/slider-item'],
+    ], [slideItem, slideContent]);
 
     const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: `fb-marquee-carousel-wrapper`,
-			ref: slickRef,
+			className: `swiper-wrapper fb-swiper-wrapper`,
+			slot: 'container-start',
 		},
 		{
 			allowedBlocks: ALLOWED_BLOCKS,
@@ -220,99 +140,402 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}
 	);
 
-    // Add new slide function
-    const addNewSlide = () => {
-        const newBlock = createBlock('frontis-blocks/marquee-carousel-item');
-        insertBlock(newBlock, innerBlocks.length, clientId);
-        
-        // Force immediate re-initialization after adding
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                initializeSlick(true);
-            });
-        });
-    };
+    // First, move settings into a useMemo to avoid unnecessary recalculations
+    const settings = useMemo(() => ({
+        autoplay: autoplay ? {
+            delay: autoplaySpeed,
+            disableOnInteraction: false,
+            stopOnLastSlide: stopOnLastSlide,
+            reverseDirection: reverseDirection,
+        } : false,
+        speed: transitionSpeed,
+        loop: loop,
+		effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
-    // Duplicate slide function
-    const duplicateSlide = () => {
-        const selectedBlocks = getSelectedBlockClientIds();
-        let blockToDuplicate = null;
+        ...(sliderType === 'carousel' && {
+            breakpoints: {
+                0: {
+                    slidesPerView: carouselPerColumn?.Mobile || 1,
+                    spaceBetween: carouselPerColumnGap?.Mobile || 10,
+                },
+                768: {
+                    slidesPerView: carouselPerColumn?.Tablet || 2,
+                    spaceBetween: carouselPerColumnGap?.Tablet || 15,
+                },
+                1025: {
+                    slidesPerView: carouselPerColumn?.Desktop || 3,
+                    spaceBetween: carouselPerColumnGap?.Desktop || 20,
+                },
+            },
+        }),
+        pagination: false,
+        allowTouchMove: allowTouchMove,
+        mousewheel: enableMouseWheel,
         
-        if (selectedBlocks.length > 0) {
-            // Get the selected block that's a child of this carousel
-            blockToDuplicate = innerBlocks.find(innerBlock => 
-                selectedBlocks.includes(innerBlock.clientId)
-            );
-        }
-        
-        // If no selected block found, use the last slide
-        if (!blockToDuplicate && innerBlocks.length > 0) {
-            blockToDuplicate = innerBlocks[innerBlocks.length - 1];
-        }
-        
-        if (blockToDuplicate) {
-            // Create a new block with same attributes and inner blocks
-            const duplicatedBlock = createBlock(
-                blockToDuplicate.name,
-                { ...blockToDuplicate.attributes },
-                blockToDuplicate.innerBlocks?.map(innerBlock => 
-                    createBlock(
-                        innerBlock.name,
-                        { ...innerBlock.attributes },
-                        innerBlock.innerBlocks || []
-                    )
-                ) || []
-            );
-            
-            // Insert the duplicated block
-            insertBlock(duplicatedBlock, innerBlocks.length, clientId);
-            
-            // Force immediate re-initialization after duplicating
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    initializeSlick(true);
+        onBeforeInit(swiperInst) {
+            swiperRef.current = swiperInst;
+            setSwiperInstance(swiperInst);
+        },
+    }), [
+        deviceType,
+        autoplay,
+        autoplaySpeed,
+        stopOnLastSlide,
+        reverseDirection,
+        transitionSpeed,
+        loop,
+        carouselEffect,
+        slideEffect,
+        allowTouchMove,
+        enableMouseWheel,
+        sliderType,
+        carouselPerColumn,
+        carouselPerColumnGap,
+        sliderArrowPositionType,
+        sliderArrowPosition,
+        paginationType,
+        displayDots,
+    ]);
+
+    /* Dynamic Swiper Key */
+    useEffect(() => {
+        setSwiperKey(prevKey => prevKey + 1);
+    }, [
+        sliderType,
+        carouselEffect,
+        slideEffect,
+        carouselPerColumn?.Desktop,
+        carouselPerColumn?.Tablet,
+        carouselPerColumn?.Mobile,
+        carouselPerColumnGap?.Desktop,
+        carouselPerColumnGap?.Tablet,
+        carouselPerColumnGap?.Mobile,
+        transitionSpeed,
+        loop,
+        autoplay,
+        autoplaySpeed,
+        stopOnLastSlide,
+        reverseDirection,
+        allowTouchMove,
+        enableMouseWheel,
+        paginationType,
+        displayDots,
+        displayArrows,
+        sliderArrowsIconSwitcher,
+        sliderArrowPositionType,
+        sliderArrowPosition,
+        sliderArrowsIconLeft,
+        sliderArrowsIconRight,
+    ]);
+
+    // Add useEffect to update Swiper when settings change
+    useEffect(() => {
+        if (swiperInstance) {
+
+            // Update carousel settings
+            if (sliderType === 'carousel') {
+                swiperInstance.params.slidesPerView = deviceType === 'Desktop' ? carouselPerColumn.Desktop : deviceType === 'Tablet' ? carouselPerColumn.Tablet : carouselPerColumn.Mobile;
+                swiperInstance.params.spaceBetween = deviceType === 'Desktop' ? carouselPerColumnGap.Desktop : deviceType === 'Tablet' ? carouselPerColumnGap.Tablet : carouselPerColumnGap.Mobile;
+            }
+
+            swiperInstance.params.speed = transitionSpeed;
+            swiperInstance.params.loop = loop;
+            swiperInstance.params.allowTouchMove = allowTouchMove;
+    
+            // Handle autoplay settings
+            if (autoplay) {
+                swiperInstance.params.autoplay = {
+                    delay: autoplaySpeed,
+                    disableOnInteraction: false,
+                    stopOnLastSlide: stopOnLastSlide,
+                    reverseDirection: reverseDirection,
+                };
+    
+                // Only start autoplay if we're not on the last slide when stopOnLastSlide is true
+                if (!stopOnLastSlide || (stopOnLastSlide && swiperInstance.activeIndex !== swiperInstance.slides.length - 1)) {
+                    swiperInstance.autoplay.start();
+                }
+            } else {
+                swiperInstance.autoplay.stop();
+            }
+    
+            // Update the Swiper instance with new parameters
+            swiperInstance.update();
+    
+            // If loop setting changed, need to re-initialize
+            if (swiperInstance.params.loop !== loop) {
+                swiperInstance.loopDestroy();
+                if (loop) {
+                    swiperInstance.loopCreate();
+                }
+            }
+    
+            // Reset event listeners
+            swiperInstance.off('reachEnd');
+            if (stopOnLastSlide && !loop && autoplay) {
+                swiperInstance.on('reachEnd', () => {
+                    swiperInstance.autoplay.stop();
                 });
-            });
+            }
         }
-    };
+    }, [
+        deviceType,
+        swiperInstance,
+        autoplay,
+        autoplaySpeed,
+        stopOnLastSlide,
+        reverseDirection,
+        transitionSpeed,
+        loop,
+        allowTouchMove,
+        sliderType,
+        carouselPerColumn,
+        carouselPerColumnGap,
+    ]);
 
-	const renderSliderToolbarControls = () => {
-        return (
-            <BlockControls>
-                <ToolbarGroup>
-                    <ToolbarButton
-                        icon="plus"
-                        label={ __( 'Add New Slide', 'frontis-blocks' ) } 
-                        onClick={addNewSlide}
-                    />
-                    <ToolbarButton
-                        icon="admin-page"
-                        label={ __( 'Duplicate Slide', 'frontis-blocks' ) } 
-                        onClick={duplicateSlide}
-                    />
-                </ToolbarGroup>
-            </BlockControls>
-        );
-    };
-	
-	return (
-		<>
-		    <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+    // Add this new useEffect for pause on hover
+    useEffect(() => {
+        if (swiperInstance && autoplay && pauseOnHover) {
+            const swiperEl = swiperInstance.el;
+            
+            const handleMouseEnter = () => {
+                if (swiperInstance.autoplay.running) {
+                    swiperInstance.autoplay.stop();
+                }
+            };
 
-			{renderSliderToolbarControls()}
+            const handleMouseLeave = () => {
+                if (autoplay && !stopOnLastSlide) {
+                    swiperInstance.autoplay.start();
+                }
+            };
 
-			<div {...blockProps} >
+            swiperEl.addEventListener('mouseenter', handleMouseEnter);
+            swiperEl.addEventListener('mouseleave', handleMouseLeave);
 
-				<div className={`fb-marquee-image-gallery ${sliderGlobalWraperClass}`} id={sliderGlobalWraperID} style={{ visibility: 'visible' }}>
-					<div className="fb-marquee-carousel-gallery-layout">
-                        <div {...innerBlocksProps} />
-					</div>
-				</div>
-			</div>
-		</>
-	);
-}
+            return () => {
+                swiperEl.removeEventListener('mouseenter', handleMouseEnter);
+                swiperEl.removeEventListener('mouseleave', handleMouseLeave);
+            };
+        }
+    }, [swiperInstance, autoplay, pauseOnHover, stopOnLastSlide]);
+
+
+    useEffect( () => {
+		if ( swiperInstance ) {
+			swiperInstance.update();
+		}
+	}, [ props ] );
+
+    /* Custom Icon */
+    useEffect(() => {
+        if (!swiperInstance || !displayArrows) return;
+    
+        const prevEl = sliderNavPrevRef.current;
+        const nextEl = sliderNavNextRef.current;
+    
+        if (prevEl && nextEl && swiperInstance.navigation) {
+            swiperInstance.params.navigation.prevEl = prevEl;
+            swiperInstance.params.navigation.nextEl = nextEl;
+    
+            setTimeout(() => {
+                // Check again in case swiperInstance.navigation was reloaded in the meantime
+                if (swiperInstance.navigation) {
+                    swiperInstance.navigation.destroy();
+                    swiperInstance.navigation.init();
+                    swiperInstance.navigation.update();
+                }
+            }, 100);
+        }
+    }, [
+        swiperInstance,
+        displayArrows,
+        sliderArrowsIconSwitcher,
+        sliderArrowPositionType,
+        sliderArrowPosition,
+        sliderArrowsIconLeft,
+        sliderArrowsIconRight,
+        sliderArrowsIconLeftAlign,
+        sliderArrowsIconRightAlign,
+        sliderArrowsIconLeftImageUrl,
+        sliderArrowsIconRightImageUrl
+    ]);
+
+    useEffect( () => {
+		if ( swiperInstance && swiperInstance.slides ) {
+			const slidesCount = swiperInstance.slides.length;
+
+			// Slide to the slide index more than number of slides, this will reset slider UI.
+			swiperInstance.slideTo( slidesCount + 1, transitionSpeed, false );
+
+			setTimeout( () => {
+				// Reset Slider to first slide to avoid UI break.
+				swiperInstance.slideTo( 0, 0, false );
+			}, 100 );
+
+			const sliderBlocks = [ 'frontis-blocks/slider', 'frontis-blocks/slider-item' ];
+			let hasSliderParent = false;
+
+			for ( let index = 0; index < blockParents.length; index++ ) {
+				if ( sliderBlocks.includes( blockParents[ index ].name ) ) {
+					hasSliderParent = true;
+					break;
+				}
+			}
+
+			if ( hasSliderParent ) {
+				selectBlock( block.clientId );
+			}
+		}
+	}, [ isListViewOpen ] );
+
+    const getBlockControls = () => {
+		return (
+			<BlockControls>
+				<ToolbarGroup>
+					<ToolbarButton
+						icon="insert"
+						label={ __( 'Add Slide', 'ultimate-addons-for-gutenberg' ) }
+						onClick={ () => {
+							insertBlock( createBlock( 'frontis-blocks/slider-item' ), block.innerBlocks.length, block.clientId );
+
+							setAttributes( { slideItem: attributes.slideItem + 1 } );
+							swiperInstance.activeIndex = attributes.slideItem + 1;
+						} }
+					/>
+				</ToolbarGroup>
+			</BlockControls>
+		);
+	};
+
+    return (
+        <>
+            <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+            {getBlockControls()}
+
+            <div {...blockProps}>
+                <Swiper
+                    key={swiperKey}
+                    ref={swiperRef}
+                    {...settings}
+                    modules={[
+                        Navigation,
+                        Pagination,
+                        Autoplay,
+                        Manipulation,
+                        Mousewheel,
+                        EffectFade,
+                        EffectCube,
+                        EffectCoverflow,
+                        EffectFlip,
+                        EffectCreative,
+                        EffectCards
+                    ]}
+                    navigation={
+                        displayArrows
+                            ? {
+                                    nextEl: '#block-' + clientId + ' .swiper-button-next',
+                                    prevEl: '#block-' + clientId + ' .swiper-button-prev',
+                            }
+                            : false
+                    }
+                    onSwiper={(swiper) => {
+                        setSwiperInstance(swiper);
+                        swiper.on('slideChange', () => {
+                            setAttributes({ currentSlideIndex: swiper.activeIndex });
+                        });
+                        
+                        // Add reach end handler for stopOnLastSlide
+                        swiper.on('reachEnd', () => {
+                            if (stopOnLastSlide && !loop && autoplay) {
+                                swiper.autoplay.stop();
+                            }
+                        });
+                    }}
+                    onReachEnd={() => {
+                        if (stopOnLastSlide && !loop && autoplay) {
+                            swiperInstance?.autoplay.stop();
+                        }
+                    }}
+                >
+                    <div {...innerBlocksProps} />
+
+                    { displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (
+                        <>
+                            <div className={`fb-slider-default-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+                                <div className="swiper-button-prev" ref={ sliderNavPrevRef }></div>
+                                <div className="swiper-button-next" ref={ sliderNavNextRef }></div>
+                            </div>
+                        </>
+                    ) }
+
+                    {sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (sliderArrowsIconLeftAlign === 'icon' || sliderArrowsIconRightAlign === 'icon') && (
+                        <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+                            <div className="swiper-button-prev" ref={ sliderNavPrevRef }>{renderSVG(sliderArrowsIconLeft)}</div>
+                            <div className="swiper-button-next" ref={ sliderNavNextRef }>{renderSVG(sliderArrowsIconRight)}</div>
+                        </div>
+                    )}
+
+                    {sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (sliderArrowsIconLeftAlign === 'image' || sliderArrowsIconRightAlign === 'image') && (sliderArrowsIconLeftImageUrl || sliderArrowsIconRightImageUrl) && (
+                        <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+                            <div className="swiper-button-prev" ref={ sliderNavPrevRef }>
+                                <img src={sliderArrowsIconLeftImageUrl} alt={sliderArrowsIconLeftImageAlt} />
+                            </div>
+                            <div className="swiper-button-next" ref={ sliderNavNextRef }>
+                                <img src={sliderArrowsIconRightImageUrl} alt={sliderArrowsIconRightImageAlt} />
+                            </div>
+                        </div>
+                    )}
+                </Swiper>
+                
+                { displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (
+                    <>
+                        <div className={`fb-slider-default-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+                            <div className="swiper-button-prev" ref={ sliderNavPrevRef }></div>
+                            <div className="swiper-button-next" ref={ sliderNavNextRef }></div>
+                        </div>
+                    </>
+                ) }
+
+                {sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (sliderArrowsIconLeftAlign === 'icon' || sliderArrowsIconRightAlign === 'icon') && (
+                    <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+                        <div className="swiper-button-prev" ref={ sliderNavPrevRef }>{renderSVG(sliderArrowsIconLeft)}</div>
+                        <div className="swiper-button-next" ref={ sliderNavNextRef }>{renderSVG(sliderArrowsIconRight)}</div>
+                    </div>
+                )}
+
+                {sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (sliderArrowsIconLeftAlign === 'image' || sliderArrowsIconRightAlign === 'image') && (sliderArrowsIconLeftImageUrl || sliderArrowsIconRightImageUrl) && (
+                    <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
+                        <div className="swiper-button-prev" ref={ sliderNavPrevRef }>
+                            <img src={sliderArrowsIconLeftImageUrl} alt={sliderArrowsIconLeftImageAlt} />
+                        </div>
+                        <div className="swiper-button-next" ref={ sliderNavNextRef }>
+                            <img src={sliderArrowsIconRightImageUrl} alt={sliderArrowsIconRightImageAlt} />
+                        </div>
+                    </div>
+                )}
+
+            </div>
+        </>
+    );
+};
+
+export default compose(
+    withSelect((select, props) => {
+        const { getSelectedBlock, getBlockParents } = select('core/block-editor');
+        const selectedBlock = getSelectedBlock();
+        const parentBlockIds = getBlockParents(selectedBlock?.clientId);
+        const blockParents = select('core/block-editor').getBlocksByClientId(parentBlockIds);
+
+        return {
+            block: select('core/block-editor').getBlock(props.clientId),
+            blockParents,
+        };
+    }),
+    withDispatch((dispatch) => {
+        const { insertBlock } = dispatch('core/block-editor');
+        return {
+            insertBlock,
+        };
+    })
+)(Edit);

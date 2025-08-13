@@ -4,7 +4,6 @@
 	"name": "frontis-blocks/marquee-carousel",
 	"version": "1.0.0",
 	"title": "Marquee Carousel",
-	"icon": "slides",
 	"category": "frontis-blocks",
 	"description": "Create an engaging marquee carousel with smooth transitions and customizable settings.", 
 	"example": {},
@@ -17,11 +16,10 @@
 	"textdomain": "frontis-blocks",
 	"editorScript": [
 		"file:./index.js",
-        "frontis-slick-script"
+        "frontis-swiper-script"
 	],
 	"editorStyle": [
 		"file:./index.css",
-		"frontis-slick-style",
-		"frontis-slick-theme-style"
+        "frontis-swiper-style"
 	]
 }
