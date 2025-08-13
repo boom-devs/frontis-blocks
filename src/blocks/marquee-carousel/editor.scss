@@ -1,21 +1,25 @@
+.fb-marquee-swiper {
+  &::before,
+  &::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+  }
 
-.swiper {
-  overflow: hidden; /* নিরাপদ */
-}
-.swiper-wrapper{
-  -webkit-transition-timing-function: linear !important;
-  transition-timing-function: linear !important;
-  will-change: transform; /* স্মুথনেস */
-}
-
-.fb-marquee-slider-container {
-  .swiper-slide{
-    flex: 0 0 auto;   /* variable width স্লাইডের জন্য স্থির */
-    // width: auto !important;
-    width: 10rem !important;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .swiper-wrapper{
+    -webkit-transition-timing-function: linear !important;
+    transition-timing-function: linear !important;
+    will-change: transform;
+    .swiper-slide{
+      // width: auto !important;
+      width: 10rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+    }
   }
 }

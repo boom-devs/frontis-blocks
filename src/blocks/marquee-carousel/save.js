@@ -4,6 +4,10 @@ export default function Save({ attributes }) {
 
 	const {
         blockId,
+		speed,
+
+		sliderGlobalWraperID,
+		sliderGlobalWraperClass,
     } = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -16,11 +20,12 @@ export default function Save({ attributes }) {
 	 */
 	const swiperSettings = JSON.stringify({
 		spaceBetween: 0,
-		centeredSlides: false,
-		speed: 1000,
+		centeredSlides: true,
+		speed: speed,
 		autoplay: {
 		delay: 1,
 		},
+		// autoplay: false,
 		loop: true,
 		slidesPerView:'auto',
 		allowTouchMove: false,
@@ -29,8 +34,8 @@ export default function Save({ attributes }) {
 
 	return (
 		<div {...blockProps} data-swiper-settings={ swiperSettings }>
-			<div className="fb-marquee-swiper swiper">
-				<div className="swiper-wrapper">
+			<div className={`fb-marquee-swiper swiper ${sliderGlobalWraperClass}`} id={sliderGlobalWraperID}>
+				<div className="fb-swiper-wrapper swiper-wrapper">
 					<InnerBlocks.Content />
 				</div>
 			</div>

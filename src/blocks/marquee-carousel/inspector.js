@@ -45,25 +45,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockId,
         blockStyle,
         speed,
-        infinite,
-        slidesToShow,
-        autoplay,
-        centerMode,
-        pauseOnHover,
-        variableWidth,
-        touchMove,
-        draggable,
-        swipe,
-        swipeToSlide,
-        waitForAnimate,
 
         slideWidth,
         slideWidthUnits,
         slideHeight,
         slideHeightUnits,
 
-        slideGap,
-        slideGapUnits,
+        slidePaddingUnits,
+        slidePaddingDesktop,
+        slidePaddingTablet,
+        slidePaddingMobile,
+        slidePaddingLink,
 
         sliderOverlaySwitcher,
         sliderOverlayStartColor,
@@ -145,6 +137,79 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}, [clientId]);
 
     const deviceType = useDeviceType();
+
+    /** Start slide padding */
+	const handleSlidePaddingUnitChange = ( event, position ) => {  
+		const value = event.target.value;
+		if ( slidePaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						slidePaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						slidePaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						slidePaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {slidePaddingDesktop: {...slidePaddingDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {slidePaddingTablet: {...slidePaddingTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {slidePaddingMobile: {...slidePaddingMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleSlidePaddingCombineBtn = () => {
+		setAttributes( {slidePaddingLink: !slidePaddingLink} );
+	}
+
+	const handleSlidePaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			slidePaddingUnits: {
+				...slidePaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const slideDesktopPaddingWidth    = `${slidePaddingDesktop.top}${slidePaddingUnits.Desktop} ${slidePaddingDesktop.right}${slidePaddingUnits.Desktop} ${slidePaddingDesktop.bottom}${slidePaddingUnits.Desktop} ${slidePaddingDesktop.left}${slidePaddingUnits.Desktop}`;
+	const slideTabletPaddingWidth     = `${slidePaddingTablet.top}${slidePaddingUnits.Tablet} ${slidePaddingTablet.right}${slidePaddingUnits.Tablet} ${slidePaddingTablet.bottom}${slidePaddingUnits.Tablet} ${slidePaddingTablet.left}${slidePaddingUnits.Tablet}`;
+	const slideMobilePaddingWidth     = `${slidePaddingMobile.top}${slidePaddingUnits.Mobile} ${slidePaddingMobile.right}${slidePaddingUnits.Mobile} ${slidePaddingMobile.bottom}${slidePaddingUnits.Mobile} ${slidePaddingMobile.left}${slidePaddingUnits.Mobile}`;
+	/** End slide Padding */
 
     /** Start Global padding */
 	const handleSliderGlobalPaddingUnitChange = ( event, position ) => {  
@@ -451,65 +516,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 title={__("General Settings", "frontis-blocks")} 
                 initialOpen={true}
             >
-                <ToggleControl
-                    label={ __( 'Autoplay', 'frontis-blocks' ) }
-                    checked={ autoplay }
-                    onChange={(value) => setAttributes({ autoplay: value })}
-                />
-
-                <ToggleControl
-                    label={ __( 'Infinite', 'frontis-blocks' ) }
-                    checked={ infinite }
-                    onChange={(value) => setAttributes({ infinite: value })}
-                />
-                <ToggleControl
-                    label={ __( 'Center Mode', 'frontis-blocks' ) }
-                    checked={ centerMode }
-                    onChange={(value) => setAttributes({ centerMode: value })}
-                />
-                
-                <ToggleControl
-                    label={ __( 'Pause on Hover', 'frontis-blocks' ) }
-                    checked={ pauseOnHover }
-                    onChange={(value) => setAttributes({ pauseOnHover: value })}
-                />
-
-                <ToggleControl
-                    label={ __( 'Variable Width', 'frontis-blocks' ) }
-                    checked={ variableWidth }
-                    onChange={(value) => setAttributes({ variableWidth: value })}
-                />
-
-                <ToggleControl
-                    label={ __( 'Touch Move', 'frontis-blocks' ) }
-                    checked={ touchMove }
-                    onChange={(value) => setAttributes({ touchMove: value })}
-                />
-
-                <ToggleControl
-                    label={ __( 'Draggable', 'frontis-blocks' ) }
-                    checked={ draggable }
-                    onChange={(value) => setAttributes({ draggable: value })}
-                />
-
-                <ToggleControl
-                    label={ __( 'Swipe', 'frontis-blocks' ) }
-                    checked={ swipe }
-                    onChange={(value) => setAttributes({ swipe: value })}
-                />
-
-                <ToggleControl
-                    label={ __( 'Swipe to Slide', 'frontis-blocks' ) }
-                    checked={ swipeToSlide }
-                    onChange={(value) => setAttributes({ swipeToSlide: value })}
-                />
-                
-                <ToggleControl
-                    label={ __( 'Wait for Animate', 'frontis-blocks' ) }
-                    checked={ waitForAnimate }
-                    onChange={(value) => setAttributes({ waitForAnimate: value })}
-                />
-
                 <RangeControl
                     label={__('Speed (ms)', 'frontis-blocks')}
                     value={speed}
@@ -518,18 +524,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     max={10000}
                     step={100}
                     initialPosition={2000}
-                />
-                <FB_Range
-                    min={1}
-                    max={20}
-                    label={__("Slides to Show", "frontis-blocks")}
-                    rangeValue={slidesToShow}
-                    onChangeHandler={(value) => setAttributes({ slidesToShow: value })}
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={6}
-                    isRangeUnit={false}
                 />
 
             </PanelBody>
@@ -573,18 +567,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     resetFallbackValue={""}
                 />
 
-                <FB_Range
-                    min={1}
-                    max={500}
-                    label={__("Slide Gap", "frontis-blocks")}
-                    rangeValue={slideGap}
-                    onChangeHandler={(value) => setAttributes({ slideGap: value })}
-                    rangeUnitHandler={(value) => setAttributes({ slideGapUnits: value })}
+                <FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
                     deviceType={deviceType}
-                    units={slideGapUnits}
+                    spacingUnitsHandler={handleSlidePaddingUnitsHandler}
+                    spacingUnits={slidePaddingUnits}
+                    spacingDesktop={slidePaddingDesktop}
+                    spacingTablet={slidePaddingTablet}
+                    spacingMobile={slidePaddingMobile}
+                    handleSpacingUnitHandler={handleSlidePaddingUnitChange}
+                    spacingCombineBtn={slidePaddingLink}
+                    spacingCombineBtnHandler={handleSlidePaddingCombineBtn}
                     setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={"10"}
                 />
 
                 <ToggleControl
@@ -1085,6 +1079,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${globalDesktopBorderRadiusWidth && sliderGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''} 
             ${sliderGlobalBorderColor ? `border-color: ${sliderGlobalBorderColor};` : ''}
             ${sliderGlobalBoxShadowCssValue ? `box-shadow: ${sliderGlobalBoxShadowCssValue};` : ''}
+            ${sliderGlobalZIndex.Desktop ? `z-index: ${sliderGlobalZIndex.Desktop};` : ''}
             transition: all .3s ease-in-out;
             position: relative;
         }
@@ -1094,31 +1089,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${sliderGlobalBoxShadowHoverCssValue ? `box-shadow: ${sliderGlobalBoxShadowHoverCssValue};` : ''}
         }
 
-        .${blockId} .slick-slider {
-            display: block;
-            position: relative;
-            box-sizing: border-box;
-        }
-
-        .${blockId} .slick-track {
-            display: flex;
-            align-items: center;
-            ${slideGap.Desktop && slideGapUnits.Desktop ? `gap: ${slideGap.Desktop}${slideGapUnits.Desktop};` : ''}
-        }
-        .${blockId} .slick-slide {
+        .${blockId} .fb-marquee-swiper .swiper-wrapper .swiper-slide{
           ${slideWidth.Desktop && slideWidthUnits.Desktop ? `width: ${slideWidth.Desktop}${slideWidthUnits.Desktop} !important;` : ''}  
           ${slideHeight.Desktop && slideHeightUnits.Desktop ? `height: ${slideHeight.Desktop}${slideHeightUnits.Desktop} !important;` : ''}
-          flex-shrink: 0;
+          ${slideDesktopPaddingWidth && slidePaddingDesktop?.top ? `padding: ${slideDesktopPaddingWidth} !important;` : ''}
         }
 
         ${sliderOverlaySwitcher ? `
-        .${blockId} .slick-slider::before {
+        .${blockId} .fb-marquee-swiper::before {
             left: 0;
             background: linear-gradient(to right, ${sliderOverlayStartColor} 0%, ${sliderOverlayEndColor} 100%) !important;
             width: ${sliderOverlayWidth.Desktop}${sliderOverlayWidthUnits.Desktop} !important;
         }
 
-        .${blockId} .slick-slider::after {
+        .${blockId} .fb-marquee-swiper::after {
             right: 0;
             background: linear-gradient(to left, ${sliderOverlayStartColor} 0%, ${sliderOverlayEndColor} 100%) !important;
             width: ${sliderOverlayWidth.Desktop}${sliderOverlayWidthUnits.Desktop} !important;
@@ -1126,21 +1110,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ` : ''}
 
         @media only screen and (max-width: 1024px) {
-            .${blockId} .slick-track {
-                ${slideGap.Tablet && slideGapUnits.Tablet ? `gap: ${slideGap.Tablet}${slideGapUnits.Tablet};` : ''}
+
+            .${blockId}.fb-marquee-slider-container { 
+                ${tabletBackgroundNormalStyles}
+                ${globalTabletPaddingWidth && sliderGlobalPaddingTablet?.top ? `padding: ${globalTabletPaddingWidth};` : ''}  
+                ${globalTabletMarginWidth && sliderGlobalMarginTablet?.top ? `margin: ${globalTabletMarginWidth};` : ''} 
+                ${globalTabletBorderWidth && sliderGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''} 
+                ${sliderGlobalZIndex.Tablet ? `z-index: ${sliderGlobalZIndex.Tablet};` : ''}
             }
-            .${blockId} .slick-slide {
+            .${blockId}.fb-marquee-slider-container:hover { 
+                ${tabletBackgroundHoverStyles}
+            }
+ 
+            .${blockId} .swiper-slide { 
                 ${slideWidth.Tablet && slideWidthUnits.Tablet ? `width: ${slideWidth.Tablet}${slideWidthUnits.Tablet} !important;` : ''}  
-                ${slideHeight.Tablet && slideHeightUnits.Tablet ? `height: ${slideHeight.Tablet}${slideHeightUnits.Tablet} !important;` : ''}  
+                ${slideHeight.Tablet && slideHeightUnits.Tablet ? `height: ${slideHeight.Tablet}${slideHeightUnits.Tablet} !important;` : ''}
+                ${slideTabletPaddingWidth && slidePaddingTablet?.top ? `padding: ${slideTabletPaddingWidth} !important;` : ''}
             }
         }
         @media only screen and (max-width: 767px) {
-            .${blockId} .slick-track {
-                ${slideGap.Mobile && slideGapUnits.Mobile ? `gap: ${slideGap.Mobile}${slideGapUnits.Mobile};` : ''}
+            .${blockId}.fb-marquee-slider-container { 
+                ${mobileBackgroundNormalStyles}
+                ${globalMobilePaddingWidth && sliderGlobalPaddingMobile?.top ? `padding: ${globalMobilePaddingWidth};` : ''}  
+                ${globalMobileMarginWidth && sliderGlobalMarginMobile?.top ? `margin: ${globalMobileMarginWidth};` : ''} 
+                ${globalMobileBorderWidth && sliderGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''} 
+                ${sliderGlobalZIndex.Mobile ? `z-index: ${sliderGlobalZIndex.Mobile};` : ''}
             }
-            .${blockId} .slick-slide {
+            .${blockId}.fb-marquee-slider-container:hover { 
+                ${mobileBackgroundHoverStyles}
+            }
+
+            .${blockId} .swiper-slide {
                 ${slideWidth.Mobile && slideWidthUnits.Mobile ? `width: ${slideWidth.Mobile}${slideWidthUnits.Mobile} !important;` : ''}  
-                ${slideHeight.Mobile && slideHeightUnits.Mobile ? `height: ${slideHeight.Mobile}${slideHeightUnits.Mobile} !important;` : ''}  
+                ${slideHeight.Mobile && slideHeightUnits.Mobile ? `height: ${slideHeight.Mobile}${slideHeightUnits.Mobile} !important;` : ''}
+                ${slideMobilePaddingWidth && slidePaddingMobile?.top ? `padding: ${slideMobilePaddingWidth} !important;` : ''}
             }
         }
     `, [
@@ -1149,8 +1152,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         slideWidthUnits,
         slideHeight,
         slideHeightUnits,
-        slideGap,
-        slideGapUnits,
+
+        slidePaddingUnits,
+        slidePaddingDesktop,
+        slidePaddingTablet,
+        slidePaddingMobile,
+        slidePaddingLink,
+        slideDesktopPaddingWidth,
+        slideTabletPaddingWidth,
+        slideMobilePaddingWidth,
 
         sliderOverlaySwitcher,
         sliderOverlayStartColor,
@@ -1170,7 +1180,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         globalDesktopPaddingWidth,
         globalTabletPaddingWidth,
         globalMobilePaddingWidth,
-
 
         sliderGlobalMarginUnits,
         sliderGlobalMarginDesktop,

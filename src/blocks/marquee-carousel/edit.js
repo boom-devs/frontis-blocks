@@ -43,6 +43,10 @@
 
         const {
             blockId,
+            speed,
+
+            sliderGlobalWraperID,
+            sliderGlobalWraperClass,
         } = attributes;
         
         // 👉 editor store hooks
@@ -84,7 +88,7 @@
         const settings = useMemo(() => ({
             spaceBetween: 0,
             centeredSlides: false,
-            speed: 1000,
+            speed: speed,
             autoplay: {
             delay: 1,
             },
@@ -92,7 +96,7 @@
             slidesPerView:'auto',
             allowTouchMove: false,
             disableOnInteraction: true
-        }), []);
+        }), [speed]);
 
 
         // Slide actions
@@ -180,6 +184,8 @@
                             // ensure first mount is synced
                             updateSwiperSoon();
                         }}
+                        className={`fb-marquee-swiper ${sliderGlobalWraperClass}`}
+                        id={sliderGlobalWraperID}
                         modules={[
                             Navigation,
                             Pagination,
