@@ -11,11 +11,12 @@
   .fb-marquee-slider-container {
     .swiper-slide{
       flex: 0 0 auto;   /* variable width স্লাইডের জন্য স্থির */
-      width: auto !important;
-    //   width: 10rem !important;
+      // width: auto !important;
+      width: 10rem !important;
       padding: 0 20px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
   }
+  

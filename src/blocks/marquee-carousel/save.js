@@ -11,6 +11,9 @@ export default function Save({ attributes }) {
 		'data-block-id': blockId,
 	});
 
+	/**
+	 * swiper settings
+	 */
 	const swiperSettings = JSON.stringify({
 		spaceBetween: 0,
 		centeredSlides: false,

@@ -16,7 +16,6 @@
 
     const ALLOWED_BLOCKS = ['frontis-blocks/marquee-carousel-item'];
 
-
     import { 
         Navigation, 
         Pagination, 
@@ -46,10 +45,16 @@
             blockId,
         } = attributes;
         
+        // 👉 editor store hooks
+        const { insertBlock } = useDispatch('core/block-editor');
+        const { getSelectedBlockClientIds } = useSelect('core/block-editor');
         const innerBlocks = useSelect(
             (select) => select('core/block-editor').getBlocks(clientId),
             [clientId]
         );
+
+        //swiper ref
+        const swiperRef = useRef(null);
 
         const blockProps = useBlockProps({
             className: `fb-marquee-slider-container ${blockId}`,
@@ -61,7 +66,6 @@
             ['frontis-blocks/marquee-carousel-item'],
             ['frontis-blocks/marquee-carousel-item'],
         ], []);
-
 
         const innerBlocksProps = useInnerBlocksProps(
             {
@@ -75,7 +79,6 @@
                 orientation: 'horizontal',
             }
         );
-
 
          // First, move settings into a useMemo to avoid unnecessary recalculations
         const settings = useMemo(() => ({
@@ -92,33 +95,73 @@
         }), []);
 
 
-            /**
-     * Renders toolbar controls for slide management
-     * Provides buttons for adding and duplicating slides
-     */
-    const renderSliderToolbarControls = () => {
-        return (
+        // Slide actions
+        const updateSwiperSoon = () => {
+            // Give Gutenberg a tick to commit the inner block change
+            requestAnimationFrame(() => {
+                if (swiperRef.current?.update) {
+                    swiperRef.current.update();
+                }
+            });
+        };
+
+        const addNewSlide = () => {
+            const newBlock = createBlock('frontis-blocks/marquee-carousel-item');
+            insertBlock(newBlock, innerBlocks.length, clientId);
+            updateSwiperSoon();
+        };
+
+        const duplicateSlide = () => {
+            const selectedIds = getSelectedBlockClientIds();
+            let target = null;
+
+            if (selectedIds?.length) {
+                target = innerBlocks.find((b) => selectedIds.includes(b.clientId));
+            }
+            // fallback: last slide
+            if (!target && innerBlocks.length) {
+                target = innerBlocks[innerBlocks.length - 1];
+            }
+            if (!target) return;
+
+            const duplicated = createBlock(
+                target.name,
+                { ...target.attributes },
+                (target.innerBlocks || []).map((ib) =>
+                    createBlock(
+                        ib.name,
+                        { ...ib.attributes },
+                        ib.innerBlocks || []
+                    )
+                )
+            );
+
+            insertBlock(duplicated, innerBlocks.length, clientId);
+            updateSwiperSoon();
+        };
+
+        // If blocks count changes (add/remove/duplicate elsewhere), refresh swiper
+        useEffect(() => {
+            updateSwiperSoon();
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [innerBlocks.length]);
+
+        const renderSliderToolbarControls = () => (
             <BlockControls>
                 <ToolbarGroup>
                     <ToolbarButton
                         icon="plus"
-                        label={ __( 'Add New Slide', 'gslider-blocks' ) }
-                        onClick={() => {
-                            
-                        }}
+                        label={__('Add New Slide', 'gslider-blocks')}
+                        onClick={addNewSlide}
                     />
                     <ToolbarButton
                         icon="admin-page"
-                        label={ __( 'Duplicate Current Slide', 'gslider-blocks' ) } 
-                        onClick={() => {
-
-                        }}
+                        label={__('Duplicate Current Slide', 'gslider-blocks')}
+                        onClick={duplicateSlide}
                     />
                 </ToolbarGroup>
             </BlockControls>
         );
-    };
-
         
         return (
             <>
@@ -132,6 +175,11 @@
 
                     <Swiper
                         {...settings}
+                        onSwiper={(instance) => {
+                            swiperRef.current = instance;
+                            // ensure first mount is synced
+                            updateSwiperSoon();
+                        }}
                         modules={[
                             Navigation,
                             Pagination,
