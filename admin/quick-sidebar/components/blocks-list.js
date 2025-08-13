@@ -6,8 +6,9 @@ import { Popover, SearchControl, Icon } from '@wordpress/components';
 import { useDispatch, dispatch } from '@wordpress/data';
 import { __, sprintf } from '@wordpress/i18n';
 import { getBlockTypes } from '@wordpress/blocks';
+import {toast} from "react-toastify";
 
-const BlocksList = ( { closePopover, updateDefaultAllowedQuickSidebarBlocks, getDefaultAllowedQuickSidebarBlocks } ) => {
+const BlocksList = ( { closePopover, updateAllowedBlocksQuickSidebar, getDefaultAllowedQuickSidebarBlocks } ) => {
 	const [searchTerm, setSearchTerm] = useState( '' );
 	const { createNotice } = useDispatch( 'core/notices' );
 	const [uniqueId, setUniqueId] = useState( 0 );
@@ -16,21 +17,19 @@ const BlocksList = ( { closePopover, updateDefaultAllowedQuickSidebarBlocks, get
 
 	// Saving the allowed blocks to the database.
 	const saveOptionToDatabase = ( allowedBlocks ) => {
-		// // update allowedBlocks.
-		// updateDefaultAllowedQuickSidebarBlocks( allowedBlocks );
-		//
-		// // Create an object with the uagb_ajax_nonce and confirmation properties.
-		// const data = {
-		// 	security: uagb_blocks_info.uagb_ajax_nonce,
-		// 	defaultAllowedQuickSidebarBlocks: JSON.stringify( allowedBlocks ),
-		// };
-		//
-		// // Call the getApiData function with the specified parameters.
-		// getApiData( {
-		// 	url: uagb_blocks_info.ajax_url,
-		// 	action: 'uag_global_update_allowed_block',
-		// 	data,
-		// } );
+		// update allowedBlocks.
+		updateAllowedBlocksQuickSidebar( allowedBlocks );
+		const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
+
+		jQuery.ajax({
+			url: ajaxUrl,
+			type: 'POST',
+			data: {
+				action: 'fb_update_allowed_blocks',
+				security: nonce,
+				data: allowedBlocks,
+			}
+		});
 	};
 
 	// Call the callback function in the parent
@@ -39,19 +38,19 @@ const BlocksList = ( { closePopover, updateDefaultAllowedQuickSidebarBlocks, get
 	const handleSearchChange = ( newSearchTerm ) => setSearchTerm( newSearchTerm );
 
 	const handleBlockClick = ( selectedBlock ) => {
+
 		// You can handle the selected block here, e.g., add it to the state or perform other actions
 		const allowedBlocks = [
 			...getDefaultAllowedQuickSidebarBlocks,
 			selectedBlock.name
 		];
 
-		// saveOptionToDatabase( allowedBlocks );
+		saveOptionToDatabase( allowedBlocks );
 
-		// Increment uniqueId when removing a block
 		setUniqueId( ( prevUniqueId ) => prevUniqueId + 1 );
 
 		createNotice( 'success',
-			sprintf( /* translators: abbreviation for units */ __( '%s Added to Quick Action Bar.', 'frontis-blocks' ), selectedBlock.title ), {
+			sprintf(__( '%s Added to Quick Action Bar.', 'frontis-blocks' ), selectedBlock.title ), {
 				type: 'snackbar',
 				id: addedNoticeID,
 				isDismissible: true,
@@ -65,8 +64,8 @@ const BlocksList = ( { closePopover, updateDefaultAllowedQuickSidebarBlocks, get
 		closePopup();
 	};
 
-	const filteredBlocks = blocks.filter( ( block ) =>
-		block.title.toLowerCase()?.includes( searchTerm.toLowerCase() )
+	const filteredBlocks = blocks.filter((block) =>
+		block.title.toLowerCase()?.includes(searchTerm.toLowerCase()) && !block.parent
 	);
 
 	// Separate arrays for used and unused items
@@ -81,24 +80,18 @@ const BlocksList = ( { closePopover, updateDefaultAllowedQuickSidebarBlocks, get
 			unusedArray.push( item );
 		}
 	} );
-	// Function to check if an item has either a parent or ancestor or both
-	const noParentNoAncestor = ( item ) =>{
-		if ( ! item.parent && ! item.ancestor && 'uagb/popup-builder' !== item.name ){
-			return item;
-		}
-	}
+
 	const addToSidebar = () => {
 		return (
 			unusedArray.map( ( item, index ) => (
-				!['uagb/sure-forms', 'uagb/sure-cart-product', 'uagb/sure-cart-checkout'].includes( item.name ) && noParentNoAncestor( item ) &&
 				<div
 					key={index}
-					className="spectra-block-wrap"
+					className="frontis-blocks-block-wrap"
 					onClick={() => handleBlockClick( item )}
 					style={{ cursor: 'pointer' }}
 				>
 					<div
-						className='spectra-ee-quick-access__sidebar--blocks--block--icon'
+						className='frontis-blocks-ee-quick-access__sidebar--blocks--block--icon'
 					>
 						<Icon icon={item.icon?.src ? item.icon.src : item.icon} />
 					</div>

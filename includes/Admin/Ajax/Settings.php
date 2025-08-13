@@ -15,6 +15,7 @@ use FrontisBlocks\Utils\Helper;
 class Settings extends AjaxBase {
 
 	use Singleton;
+
 	/**
 	 * register_ajax_events
 	 *
@@ -49,7 +50,9 @@ class Settings extends AjaxBase {
 			'coming_soon_page_id',
 			'maintenance_page_id',
 			'upload_custom_icons',
-			'get_custom_icons_category'
+			'get_custom_icons_category',
+			'update_allowed_blocks',
+			'get_allowed_blocks'
 		];
 
 		$this->init_ajax_events($ajax_events);
@@ -130,7 +133,7 @@ class Settings extends AjaxBase {
 		}
 
 		// Upload directory path
-		$response = $this->get_all_pages_post_ids_with_content();
+		$response = $this->generate_assets_for_post();
 
 		if($response) {
 			wp_send_json_success(['message' => 'CSS generated successfully']);
@@ -141,18 +144,20 @@ class Settings extends AjaxBase {
 
 
 	// Get all pages, posts, custom post, etc post ids and get post content
-	public function get_all_pages_post_ids_with_content()
+	public function generate_assets_for_post()
 	{
+		global $wpdb;
 		$upload_directory = WP_CONTENT_DIR . '/uploads/frontis-blocks/';
 
-		// Delete existing upload directory if it exists
-		if (is_dir($upload_directory)) {
-			$this->delete_folder($upload_directory);
+		if (!is_dir($upload_directory)) {
+			if (!mkdir($upload_directory, 0755, true)) {
+				wp_send_json_error(['message' => 'Failed to create upload directory']);
+				return;
+			}
 		}
 
+		// Generate global assets
 		AssetsGenerator::generate_global_assets();
-
-		global $wpdb;
 
 		// Query to get all post IDs
 		$query = "SELECT ID, post_content, post_name
@@ -162,36 +167,54 @@ class Settings extends AjaxBase {
           AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type')
           ORDER BY post_date DESC";
 		$results = $wpdb->get_results($query);
+// 		$query = "SELECT ID, post_content, post_name
+//           FROM {$wpdb->posts}
+//           WHERE post_status = 'publish'
+//           AND post_name != 'wp-global-styles-frontis-theme'
+//           AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type')
+//           AND ID IN (3742)
+//           ORDER BY post_date DESC";
+// $results = $wpdb->get_results($query);
 
 		$generatedPages = [];
-		foreach ($results as $post) {
-
-			$post_content = $post->post_content;
-
-			// Get synced pattern contents
-			$pattern_contents = Helper::check_patterns_used($post->post_content);
-
-			// Append pattern contents to post_content
-			if (!empty($pattern_contents)) {
-				foreach ($pattern_contents as $pattern_content) {
-					$post_content .= "\n" . $pattern_content; // Append each pattern content
+		
+		if(!empty($results)) {
+			foreach ($results as $post) {
+				$modified_post = $post;
+				$post_content = $post->post_content;
+	
+				// Get synced pattern contents
+				$pattern_contents = Helper::check_patterns_used($post->post_content);
+	
+				// Append pattern contents to post_content
+				if (!empty($pattern_contents)) {
+					foreach ($pattern_contents as $pattern_content) {
+						$post_content .= "\n" . $pattern_content; // Append each pattern content
+					}
+	
+					// Pass modified post object to generate_page_assets
+					$modified_post->post_content = $post_content; // Update post object
 				}
-
-				// Pass modified post object to generate_page_assets
-				$post->post_content = $post_content; // Update post object
+	
+				// if($post->post_name == 'home-2-2') {
+					$myfile = fopen("assetsgeneration.txt", "w") or die("Unable to open file!");
+					$txt = $post->post_content;
+					fwrite($myfile, $txt);
+					fclose($myfile);
+				// }
+	
+				$pattern = "/frontis-blocks/i";
+				update_post_meta($post->ID, 'frontis_blocks_used', false);
+	
+				if(preg_match_all($pattern, $post->post_content) > 0) {
+					update_post_meta($post->ID, 'frontis_blocks_used', true);
+				}
+	
+				AssetsGenerator::get_instance()->generate_page_assets($post->ID, $modified_post);
+				$generatedPages[] = $post->post_name;
 			}
-
-			$pattern = "/frontis-blocks/i";
-			update_post_meta($post->ID, 'frontis_blocks_used', false);
-
-			if(preg_match_all($pattern, $post->post_content) > 0) {
-				update_post_meta($post->ID, 'frontis_blocks_used', true);
-			}
-
-			AssetsGenerator::get_instance()->generate_page_assets($post->ID, $post);
-			$generatedPages[] = $post->post_name;
 		}
-
+		
 		$upload_directory = WP_CONTENT_DIR . '/uploads/frontis-blocks/';
 		$files = glob($upload_directory . "/*");
 
@@ -214,7 +237,7 @@ class Settings extends AjaxBase {
 	 * generate_assets_on_activation_update
 	 */
 	public function generate_assets_on_activation_update() {
-		$response = $this->get_all_pages_post_ids_with_content();
+		$response = $this->generate_assets_for_post();
 
 		if ($response) {
 			return true;
@@ -261,6 +284,70 @@ class Settings extends AjaxBase {
 
 	public function enable_templates_button() {
 		$this->handle_option_update('enable_templates_button', 'boolean');
+	}
+
+	public function get_allowed_blocks()
+	{
+		if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
+			wp_send_json_error(['message' => 'Invalid nonce'], 400);
+			return;
+		}
+
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(['message' => 'Insufficient permissions'], 403);
+			return;
+		}
+
+		$allowed_blocks = get_option("fb_update_allowed_blocks");
+
+		if($allowed_blocks) {
+			$allowed_blocks = json_decode($allowed_blocks);
+			wp_send_json_success($allowed_blocks);
+		} else {
+			wp_send_json_error([
+				'message' => 'Allowed blocks not found.',
+			]);
+		}
+	}
+
+	public function update_allowed_blocks()
+	{
+		if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
+			wp_send_json_error(['message' => 'Invalid nonce'], 400);
+			return;
+		}
+
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(['message' => 'Insufficient permissions'], 403);
+			return;
+		}
+
+		$allowed_blocks = isset($_POST['data']) ? ($_POST['data']) : [];
+
+		$value =  json_encode($allowed_blocks);
+
+		$old_value = get_option("fb_update_allowed_blocks");
+
+		$updated = update_option("fb_update_allowed_blocks", $value);
+
+		if ($updated) {
+			wp_send_json_success(['message' => 'Option updated successfully']);
+		} else {
+			$error_message = 'Failed to update option';
+			if ($old_value === false) {
+				$error_message .= ': Option does not exist';
+			} elseif ($old_value === $value) {
+				$error_message .= ': Value unchanged';
+			} else {
+				$error_message .= ': Unknown reason';
+			}
+			wp_send_json_error([
+				'message' => $error_message,
+				'old_value' => $old_value,
+				'new_value' => $value,
+				'option_name' => "fb_update_allowed_blocks"
+			]);
+		}
 	}
 
 	/**
