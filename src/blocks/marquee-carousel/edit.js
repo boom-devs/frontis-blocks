@@ -79,18 +79,46 @@
 
          // First, move settings into a useMemo to avoid unnecessary recalculations
         const settings = useMemo(() => ({
+            spaceBetween: 0,
+            centeredSlides: false,
+            speed: 1000,
+            autoplay: {
+            delay: 1,
+            },
             loop: true,
             slidesPerView:'auto',
-            spaceBetween: 0,
-            centeredSlides: true,
-            speed: 6000,
-            // autoplay: {
-            // delay: 1,
-            // },
-            autoplay:false,
             allowTouchMove: false,
             disableOnInteraction: true
         }), []);
+
+
+            /**
+     * Renders toolbar controls for slide management
+     * Provides buttons for adding and duplicating slides
+     */
+    const renderSliderToolbarControls = () => {
+        return (
+            <BlockControls>
+                <ToolbarGroup>
+                    <ToolbarButton
+                        icon="plus"
+                        label={ __( 'Add New Slide', 'gslider-blocks' ) }
+                        onClick={() => {
+                            
+                        }}
+                    />
+                    <ToolbarButton
+                        icon="admin-page"
+                        label={ __( 'Duplicate Current Slide', 'gslider-blocks' ) } 
+                        onClick={() => {
+
+                        }}
+                    />
+                </ToolbarGroup>
+            </BlockControls>
+        );
+    };
+
         
         return (
             <>
@@ -99,7 +127,7 @@
                     setAttributes={setAttributes}
                     clientId={clientId}
                 />
-
+                {renderSliderToolbarControls()}
                 <div {...blockProps} >
 
                     <Swiper
