@@ -5,7 +5,7 @@ export default function save( props ) {
 	const { blockId } = props.attributes;
 
 	const blockProps = useBlockProps.save( {
-		className: classnames( 'fb-slider-child-wrap', 'swiper-slide', `fb-block-${ blockId }` ),
+		className: classnames( 'marquee-carousel-item', 'swiper-slide', `fb-block-${ blockId }` ),
 	} );
 
 	return (
