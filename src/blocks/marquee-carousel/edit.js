@@ -79,14 +79,15 @@
 
          // First, move settings into a useMemo to avoid unnecessary recalculations
         const settings = useMemo(() => ({
+            loop: true,
+            slidesPerView:'auto',
             spaceBetween: 0,
             centeredSlides: true,
             speed: 6000,
-            autoplay: {
-            delay: 1,
-            },
-            loop: true,
-            slidesPerView:'auto',
+            // autoplay: {
+            // delay: 1,
+            // },
+            autoplay:false,
             allowTouchMove: false,
             disableOnInteraction: true
         }), []);

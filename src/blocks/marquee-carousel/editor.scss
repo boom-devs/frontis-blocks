@@ -9,10 +9,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: auto;
+  width: auto !important;
   position: relative;
   overflow: hidden;
-  padding: 0 50px;
+  padding: 0 20px;
 }
 
 @keyframes line-slide {
