@@ -61,7 +61,9 @@ class Admin {
 		$global_colors = get_option('fb_global_colors');
 
         $automatic_block_recovery = get_option('fb_automatic_block_recovery');
-        $automatic_block_recovery = trim($automatic_block_recovery, '"'); // remove extra quotes
+        $quick_action_bar = get_option('fb_quick_action_bar');
+        $automatic_block_recovery = trim($automatic_block_recovery, '"');
+        $quick_action_bar = trim($quick_action_bar, '"');
 
 		if ($theme_json && isset($theme_json['color'])) {
 			if(isset($theme_json['color']['palette'])) {
@@ -116,6 +118,7 @@ class Admin {
             'siteName' => get_bloginfo('name'),
 			'all_posts' => Helper::get_all_posts(),
 			'bolck_nonce' => wp_create_nonce('fb_block_nonce'),
+            'all_post_ids' => Helper::get_all_post_ids(),
 		);
 
 		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){
@@ -124,14 +127,19 @@ class Admin {
 			$tl_script_asset['dependencies'][] = 'jquery';
 			wp_enqueue_style('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/style-tlibrary.css', array(), '1.0.0');
 			wp_enqueue_script('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/tlibrary.js', $tl_script_asset['dependencies'], '1.0.0', true);
-			wp_enqueue_style('frontis-quick-access', FB_PLUGIN_URL . 'assets/admin/quickAccess.css', array(), '1.0.0');
-			wp_enqueue_script('frontis-quick-access', FB_PLUGIN_URL . 'assets/admin/quickAccess.js', $tl_script_asset['dependencies'], '1.0.0', true);
+
+            if ($quick_action_bar === "true") { 
+                wp_enqueue_style('frontis-quick-access', FB_PLUGIN_URL . 'assets/admin/quickAccess.css', array(), '1.0.0');
+                wp_enqueue_script('frontis-quick-access', FB_PLUGIN_URL . 'assets/admin/quickAccess.js', $tl_script_asset['dependencies'], '1.0.0', true);
+            }
+
+			wp_enqueue_script('frontis-copy-paste', FB_PLUGIN_URL . 'assets/admin/copyPasteStyle.js', $tl_script_asset['dependencies'], '1.0.0', true);
 
             if ($automatic_block_recovery === "true") {
                 wp_enqueue_script('frontis-block-recovery', FB_PLUGIN_URL . 'assets/admin/blockRecovery.js', $tl_script_asset['dependencies'], '1.0.0', true);
             }
-            
-			$localizeArray['nonce'] = wp_create_nonce('fb_import_demo_data');
+
+//			$localizeArray['nonce'] = wp_create_nonce('fb_import_demo_data');
 			wp_localize_script('frontis-template-library', 'frontisBlocksAdmin', $localizeArray);
 		}
 

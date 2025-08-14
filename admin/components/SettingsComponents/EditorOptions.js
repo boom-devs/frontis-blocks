@@ -3,9 +3,6 @@ import { TextControl } from '@wordpress/components';
 import Switch from 'rc-switch';
 import { useState, useEffect } from '@wordpress/element';
 import { toast } from 'react-toastify';
-import { useDispatch, subscribe, select } from '@wordpress/data';
-import { store as editorStore } from '@wordpress/editor';
-import { desktop } from '@wordpress/icons';
 
 /**
  * NumberInputWithPx component
@@ -85,19 +82,23 @@ const EditorOptions = () => {
       Mobile: '10',
     },
     automatic_block_recovery: false,
+    quick_action_bar: false,
     custom_css: false,
     copy_paste_style: false,
   });
 
   const [isAutomaticBlockRecoveryChecked, setIsAutomaticBlockRecoveryChecked] = useState(options.automatic_block_recovery);
+  const [isQuickActionBarChecked, setIsQuickActionBarChecked] = useState(options.quick_action_bar);
 
   useEffect(() => {
     try {
       setIsAutomaticBlockRecoveryChecked(JSON.parse(options.automatic_block_recovery) === true);
+      setIsQuickActionBarChecked(JSON.parse(options.quick_action_bar) === true);
     } catch {
       setIsAutomaticBlockRecoveryChecked(false);
+      setIsQuickActionBarChecked(false);
     }
-  }, [options.automatic_block_recovery]);
+  }, [options.automatic_block_recovery, options.quick_action_bar]);
 
   const [device, setDevice] = useState('Desktop');
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
@@ -121,12 +122,13 @@ const EditorOptions = () => {
 					const fetchedOptions = response.data;
 
 					// If default_content_width, container_column_gap, container_row_gap or container_padding is undefined or empty in DB, save your default
-					if (!fetchedOptions.default_content_width || !fetchedOptions.container_column_gap || !fetchedOptions.container_row_gap || !fetchedOptions.container_padding || !fetchedOptions.automatic_block_recovery) {
+					if (!fetchedOptions.default_content_width || !fetchedOptions.container_column_gap || !fetchedOptions.container_row_gap || !fetchedOptions.container_padding || !fetchedOptions.automatic_block_recovery || !fetchedOptions.quick_action_bar) {
 						saveOption('default_content_width', options.default_content_width);
             saveOption('container_column_gap', options.container_column_gap);
             saveOption('container_row_gap', options.container_row_gap);
             saveOption('container_padding', options.container_padding);
             saveOption('automatic_block_recovery', options.automatic_block_recovery);
+            saveOption('quick_action_bar', options.quick_action_bar);
 					} else {
 						setOptions(prevOptions => ({
 							...prevOptions,
@@ -136,6 +138,7 @@ const EditorOptions = () => {
               container_row_gap: JSON.parse(fetchedOptions.container_row_gap),
               container_padding: JSON.parse(fetchedOptions.container_padding),
               automatic_block_recovery: JSON.parse(fetchedOptions.automatic_block_recovery),
+              quick_action_bar: JSON.parse(fetchedOptions.quick_action_bar),
 						}));
 					}
         } else {
@@ -280,6 +283,11 @@ const EditorOptions = () => {
     saveOption('automatic_block_recovery', checked);
   };
 
+  const handleQuickActionBar = (checked) => {
+    setIsQuickActionBarChecked(checked);
+    saveOption('quick_action_bar', checked);
+  };
+
   return (
     <div className="fb-blocks-settings-options">
       <div className="fb-option">
@@ -358,6 +366,23 @@ const EditorOptions = () => {
                 <Switch
                     checked={isAutomaticBlockRecoveryChecked} 
                     onChange={handleAutomaticBlockRecovery}
+                    className="fb-block-card-switch-input"
+                />
+              </label>
+          </div>
+      </div>
+
+      <div className="fb-option">
+        <div className="fb-option-label">
+          <h3>{__('Enable Quick Action Bar', 'frontis-blocks')}</h3>
+          <p>{__('The Frontis Blocks Quick Action Bar lets you have all your frequently used Frontis Blocks right at your fingertips.', 'frontis-blocks')}</p>
+        </div>
+
+          <div className="fb-block-card-switch">
+              <label className="fb-block-card-switch-label">
+                <Switch
+                    checked={isQuickActionBarChecked} 
+                    onChange={handleQuickActionBar}
                     className="fb-block-card-switch-input"
                 />
               </label>
