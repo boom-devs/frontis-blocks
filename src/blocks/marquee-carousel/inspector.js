@@ -45,6 +45,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockId,
         blockStyle,
         speed,
+        reverseDirection,
 
         slideWidth,
         slideWidthUnits,
@@ -516,6 +517,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 title={__("General Settings", "frontis-blocks")} 
                 initialOpen={true}
             >
+                <ToggleControl
+                    label={__("Reverse Direction", "frontis-blocks")}
+                    checked={reverseDirection}
+                    onChange={(value) => setAttributes({ reverseDirection: value })}
+                />
+
                 <RangeControl
                     label={__('Speed (ms)', 'frontis-blocks')}
                     value={speed}

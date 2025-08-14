@@ -44,6 +44,7 @@
         const {
             blockId,
             speed,
+            reverseDirection,
 
             sliderGlobalWraperID,
             sliderGlobalWraperClass,
@@ -90,13 +91,14 @@
             centeredSlides: false,
             speed: speed,
             autoplay: {
-            delay: 1,
+                delay: 1,
+                reverseDirection: reverseDirection,
             },
             loop: true,
             slidesPerView:'auto',
             allowTouchMove: false,
-            disableOnInteraction: true
-        }), [speed]);
+            disableOnInteraction: true,
+        }), [speed, reverseDirection]);
 
 
         // Slide actions
