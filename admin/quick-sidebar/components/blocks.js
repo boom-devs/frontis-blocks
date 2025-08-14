@@ -6,13 +6,8 @@ import { createBlock, getBlockTypes } from '@wordpress/blocks';
 import DraggableBlock from './dragable-block';
 import DragAndDropComponent from './move-up-down';
 
-const getDefaultAllowedQuickSidebarBlocks = [
-	'frontis-blocks/container',
-	'frontis-blocks/advanced-heading',
-]
-
 const Blocks = ( props ) => {
-	const { enableRearrange } = props;
+	const { enableRearrange, getDefaultAllowedQuickSidebarBlocks, updateAllowedBlocksQuickSidebar } = props;
 	const blocks = getBlockTypes();
 	const { blockInsertionPoint, getSelectedBlockClientId, getSelectedBlockAllowedBlocks, getBlockRootClientId } = useSelect( ( select ) => {
 		const blockEditor = select( 'core/block-editor' );
@@ -57,11 +52,13 @@ const Blocks = ( props ) => {
 						getSelectedBlockClientId,
 						getSelectedBlockAllowedBlocks,
 						getBlockRootClientId,
+						getDefaultAllowedQuickSidebarBlocks,
+						updateAllowedBlocksQuickSidebar
 					}}
 				/>
 			) )}
 			{ enableRearrange &&
-				<DragAndDropComponent initialItems={sortedY} />
+				<DragAndDropComponent initialItems={sortedY} updateAllowedBlocksQuickSidebar={updateAllowedBlocksQuickSidebar} />
 			}
 		</>
 	);
