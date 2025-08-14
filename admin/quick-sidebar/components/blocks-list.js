@@ -93,7 +93,7 @@ const BlocksList = ( { closePopover, updateAllowedBlocksQuickSidebar, getDefault
 					<div
 						className='frontis-blocks-ee-quick-access__sidebar--blocks--block--icon'
 					>
-						<Icon icon={item.icon?.src ? item.icon.src : item.icon} />
+						<Icon className='frontis-blocks-editor-icons' icon={item.icon?.src ? item.icon.src : item.icon} />
 					</div>
 					<div className='block-title'>
 						{item.title}
@@ -114,7 +114,7 @@ const BlocksList = ( { closePopover, updateAllowedBlocksQuickSidebar, getDefault
 					<div
 						className='frontis-blocks-ee-quick-access__sidebar--blocks--block--icon'
 					>
-						<Icon icon={item.icon?.src ? item.icon.src : item.icon} />
+						<Icon className='frontis-blocks-editor-icons' icon={item.icon?.src ? item.icon.src : item.icon} />
 					</div>
 					<div className='block-title'>
 						{item.title}
