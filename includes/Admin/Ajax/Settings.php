@@ -30,7 +30,6 @@ class Settings extends AjaxBase {
 			'container_padding',
 			'custom_css',
 			'automatic_block_recovery',
-			'quick_action_bar',
 			'copy_paste_style',
 			'file_generation',
 			'generate_assets',
@@ -102,9 +101,6 @@ class Settings extends AjaxBase {
 	}
     public function automatic_block_recovery() {
         $this->handle_option_update('automatic_block_recovery', 'boolean');
-    }
-	public function quick_action_bar() {
-        $this->handle_option_update('quick_action_bar', 'boolean');
     }
 
 	public function copy_paste_style() {
