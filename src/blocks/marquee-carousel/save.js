@@ -5,6 +5,7 @@ export default function Save({ attributes }) {
 	const {
         blockId,
 		speed,
+		reverseDirection,
 
 		sliderGlobalWraperID,
 		sliderGlobalWraperClass,
@@ -23,7 +24,8 @@ export default function Save({ attributes }) {
 		centeredSlides: true,
 		speed: speed,
 		autoplay: {
-		delay: 1,
+			delay: 1,
+			reverseDirection: reverseDirection,
 		},
 		// autoplay: false,
 		loop: true,

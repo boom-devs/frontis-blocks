@@ -12,6 +12,10 @@ const attributes = {
         type: 'number',
         default: 3000,
     },
+	reverseDirection : {
+		type: 'boolean',
+		default: false,
+	},
 
     /** Start Width Height */
     slideWidth: {
