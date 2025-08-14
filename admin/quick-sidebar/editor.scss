@@ -16,6 +16,12 @@
 
 	.frontis-blocks-ee-quick-access {
 		height: 100%;
+
+		.frontis-blocks-ee-quick-access__sidebar--blocks--block--icon {
+			svg path {
+				stroke: #ffffff !important;
+			}
+		}
 	}
 }
 
@@ -109,7 +115,7 @@
 				align-items: center;
 
 				svg path {
-					stroke: #ffffff !important;
+					// stroke: #0B0C0E !important;
 				}
 
 				&--name {
