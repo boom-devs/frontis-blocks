@@ -21,13 +21,12 @@ export default function Save({ attributes }) {
 	 */
 	const swiperSettings = JSON.stringify({
 		spaceBetween: 0,
-		centeredSlides: true,
+		centeredSlides: false,
 		speed: speed,
 		autoplay: {
 			delay: 1,
 			reverseDirection: reverseDirection,
 		},
-		// autoplay: false,
 		loop: true,
 		slidesPerView:'auto',
 		allowTouchMove: false,
