@@ -1078,6 +1078,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const allBlockStyle = useMemo(() => `
 
         .${blockId}.fb-marquee-slider-container {
+            width: 100%;
             ${desktopBackgroundNormalStyles}
             ${globalDesktopPaddingWidth && sliderGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPaddingWidth};` : ''} 
             ${globalDesktopMarginWidth && sliderGlobalMarginDesktop?.top ? `margin: ${globalDesktopMarginWidth};` : ''} 
