@@ -86,6 +86,12 @@
 					justify-content: center;
 					align-items: center;
 
+					svg {
+						path {
+							stroke: #FFFFFF !important;
+						}
+					}
+
 					&--name {
 						display: flex;
 						flex-direction: row;
