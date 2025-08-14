@@ -10,6 +10,16 @@ const EditorEnhancements = () => {
     enable_templates_button: false,
   });
 
+  const [isQuickActionBarChecked, setIsQuickActionBarChecked] = useState(options.enable_quick_action_bar);
+
+  useEffect(() => {
+    try {
+      setIsQuickActionBarChecked(JSON.parse(options.enable_quick_action_bar) === true);
+    } catch {
+      setIsQuickActionBarChecked(false);
+    }
+  }, [options.enable_quick_action_bar]);
+
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
   useEffect(() => {
@@ -26,9 +36,19 @@ const EditorEnhancements = () => {
         security: nonce,
         keys: keys,
       },
-      success: function(response) {
+      success: function (response) {
         if (response.success) {
-          setOptions(prevOptions => ({ ...prevOptions, ...response.data }));
+					const fetchedOptions = response.data;
+
+					if (!fetchedOptions.enable_quick_action_bar) {
+            saveOption('enable_quick_action_bar', options.enable_quick_action_bar);
+					} else {
+						setOptions(prevOptions => ({
+							...prevOptions,
+							...fetchedOptions,
+              enable_quick_action_bar: JSON.parse(fetchedOptions.enable_quick_action_bar),
+						}));
+					}
         } else {
           toast.error(__(`Failed to fetch options: ${response.data?.message || 'Unknown error'}`, 'frontis-blocks'), {
             position: "top-right",
@@ -40,7 +60,7 @@ const EditorEnhancements = () => {
           });
         }
       },
-      error: function(xhr, status, error) {
+      error: function (xhr, status, error) {
         toast.error(__(`Failed to fetch options: ${status} - ${error}`, 'frontis-blocks'), {
           position: "top-right",
           autoClose: 5000,
@@ -106,15 +126,9 @@ const EditorEnhancements = () => {
     });
   };
 
-  const handleSwitchChange = async (option) => {
-    const newValue = !options[option];
-    try {
-      await saveOption(option, newValue ? '1' : '0');
-      setOptions(prevOptions => ({ ...prevOptions, [option]: newValue }));
-    } catch (error) {
-      // Revert the switch if saving failed
-      setOptions(prevOptions => ({ ...prevOptions, [option]: !newValue }));
-    }
+  const handleQuickActionBar = (checked) => {
+    setIsQuickActionBarChecked(checked);
+    saveOption('enable_quick_action_bar', checked);
   };
 
   return (
@@ -122,17 +136,18 @@ const EditorEnhancements = () => {
       <div className="fb-option">
         <div className="fb-option-label">
           <h3>{__('Enable Quick Action Bar', 'frontis-blocks')}</h3>
-          <p>{__('Adds a quick action bar to the editor', 'frontis-blocks')}</p>
+          <p>{__('The Frontis Blocks Quick Action Bar lets you have all your frequently used Frontis Blocks right at your fingertips.', 'frontis-blocks')}</p>
         </div>
-        {/* <div className="fb-option-input">
-          <Switch
-            checked={options.enable_quick_action_bar}
-            onChange={() => handleSwitchChange('enable_quick_action_bar')}
-          />
-        </div> */}
-        <p className="fb-button-upcoming">
-          {__('Coming Soon', 'frontis-blocks')}
-        </p>
+
+          <div className="fb-block-card-switch">
+              <label className="fb-block-card-switch-label">
+                <Switch
+                    checked={isQuickActionBarChecked} 
+                    onChange={handleQuickActionBar}
+                    className="fb-block-card-switch-input"
+                />
+              </label>
+          </div>
       </div>
       
       <div className="fb-option">
