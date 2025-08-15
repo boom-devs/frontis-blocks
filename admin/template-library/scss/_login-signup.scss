@@ -46,13 +46,16 @@
             padding: 0 0 32px 0;
 
             .fb-auth-tabs {
-                display: inline-flex;
-                gap: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
 
-                .fb-auth-tab {
+                .fb-auth-tab-title {
                     border: none;
                     border-radius: 4px;
                     background: none;
+                    font-family: $heading-font-family;
                     font-weight: $font-weight-600;
                     font-size: 32px;
                     line-height: 130%;
@@ -65,6 +68,14 @@
                         background: $primary-color;
                     }
                 }
+
+                .fb-auth-tab-description {
+                    font-family: $body-font-family;
+                    font-size: 14px;
+                    line-height: 120%;
+                    color: $neutral-color;
+                    margin: 0;
+                }
             }
         }
 
@@ -75,7 +86,7 @@
                 gap: 16px;
 
                 .fb-form-group {
-                    margin-bottom: 16px;
+                    margin-bottom: 24px;
 
                     label {
                         font-size: $base-font-size;
@@ -87,7 +98,7 @@
             }
 
             .fb-form-group {
-                margin-bottom: 16px;
+                margin-bottom: 24px;
 
                 label {
                     font-size: $base-font-size;
@@ -136,24 +147,39 @@
             }
 
             .fb-checkbox-group {
-                margin: 0 0 14px 0;
+                margin: 0 0 24px 0;
                 padding: 16px;
                 border-radius: 8px;
                 background: $primary-color-50;
 
+                &.fb-checkbox-group-login {
+                    background: transparent;
+                    padding: 0;
+                    margin-bottom: 32px;
+                    margin-top: -10px;
+                    border-radius: unset;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .fb-checkbox-item {
+                        margin: 0;
+                    }
+                }
+
                 .fb-checkbox-item {
                     display: flex;
                     align-items: center;
-                    gap: 12px;
-                    margin-bottom: 12px;
+                    gap: 8px;
+                    margin-bottom: 14px;
 
                     &:last-child {
                         margin-bottom: 0;
                     }
 
                     input[type="checkbox"] {
-                        width: 20px;
-                        height: 20px;
+                        width: 18px;
+                        height: 18px;
                         margin: 0;
                         appearance: none;
                         -webkit-appearance: none;
@@ -186,10 +212,6 @@
                             }
                         }
 
-                        &:hover {
-                            border-color: $neutral-color-400;
-                        }
-
                         &:focus {
                             outline: 1px solid transparent;
                             outline-offset: 0;
@@ -215,6 +237,15 @@
                             text-decoration: underline;
                         }
                     }
+                    .fb-forgot-password {
+                        font-family: $body-font-family;
+                        font-size: $base-font-size;
+                        font-weight: $font-weight-500;
+                        line-height: $line-height-18;
+                        color: $primary-color;
+                        cursor: pointer;
+                        
+                    }
                 }
             }
 
@@ -225,7 +256,7 @@
                 background: #3B82F6;
                 color: white;
                 border: none;
-                border-radius: 8px;
+                border-radius: 4px;
                 font-weight: $font-weight-600;
                 font-size: 18px;
                 line-height: 140%;
@@ -252,30 +283,71 @@
             .fb-auth-divider {
                 text-align: center;
                 position: relative;
-                margin: 32px 0 10px 0;
+                margin: 24px 0 24px;
+
+                hr {
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    transform: translateY(-50%);
+                    border: 1px solid $neutral-color-100;
+                    width: 100%;
+                    margin: 0;
+                }
 
                 span {
-                    font-size: $large-font-size;
-                    font-weight: $font-weight-600;
-                    line-height: $line-height-22;
-                    color: $neutral-color-400;
+                    font-size: $base-font-size;
+                    font-weight: $font-weight-500;
+                    line-height: 120%;
+                    color: $neutral-color-950;
                     position: relative;
                     z-index: 1;
+                    padding: 0 14px;
+                    background-color: $white-color;
                 }
             }
 
-            .fb-connect-api-btn {
+            .fb-sign-with-api {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+                margin-bottom: 24px;
+
+                .fb-sign-with-api-btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 6px;
+                    border: 1px solid $neutral-color-100;
+                    border-radius: 4px;
+                    background-color: transparent;
+                    font-family: $body-font-family;
+                    font-size: $base-font-size;
+                    font-weight: $font-weight-400;
+                    line-height: $line-height-18;
+                    color: $neutral-color-700;
+                    padding: 14px;
+                    cursor: pointer;
+                }
+            }
+
+            .fb-auth-form-switch {
                 display: flex;
+                justify-content: center;
+                align-items: center;
                 margin: 0 auto;
                 border: none;
                 background: none;
-                color: $primary-color;
-                font-weight: $font-weight-600;
-                font-size: $large-font-size;
-                line-height: $heading-line-height;
-                text-decoration: underline;
-                cursor: pointer;
-                transition: all 0.2s ease;
+                color: $neutral-color-200;
+                font-size: $base-font-size;
+                font-weight: $font-weight-400;
+                line-height: $line-height-18;
+                text-align: center;
+
+                a {
+                    color: $neutral-color-950;
+                    cursor: pointer;
+                }
             }
 
             .fb-error-message {
