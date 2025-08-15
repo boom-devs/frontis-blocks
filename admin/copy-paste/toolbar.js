@@ -4,6 +4,7 @@ import { BlockControls } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from "@wordpress/components";
 import { useDispatch, dispatch } from '@wordpress/data';
 import {copy} from "@wordpress/icons";
+import styleExclusions from './styleExclusions'; 
 
 
 function copyPasteStyle(copyStyle) {
@@ -26,16 +27,10 @@ export default function ToolBar() {
 
 
     const pasteStyle = () => {
-        const notAllowedBlocks = [
-            { name: 'frontis-blocks/advanced-heading', skipAttrs: ['subHeadingText', 'headingText', 'headingIcon'] },
-            { name: 'core/paragraph', skipAttrs: ['content', 'placeholder'] }, // Example for other blocks
-            { name: 'core/image', skipAttrs: ['url', 'alt'] } // Example for other blocks
-        ];
 
         // get copiedBlockName from localstorage
         const selectedBlock = wp.data.select('core/block-editor').getSelectedBlock();
 
-        console.log(selectedBlock.attributes)
         const copyStyle = localStorage.getItem('copyStyle');
 
         if (!copyStyle) {
@@ -58,8 +53,8 @@ export default function ToolBar() {
 
             let attributesToApply = { ...parsedCopyStyle.attributes };
 
-            const blockConfig = notAllowedBlocks.find(block => block.name === selectedBlock.name);
-            console.log(blockConfig)
+            const blockConfig = styleExclusions.find(block => block.name === selectedBlock.name);
+
             if (blockConfig) {
                 blockConfig.skipAttrs.forEach(attr => {
                     delete attributesToApply[attr];
