@@ -16,7 +16,7 @@ const NumberInputWithPx = ({ value, onChange, onBlur, min, max, device, onDevice
 
   const handleChange = (newValue) => {
     setLocalValue(newValue);
-    // onChange(newValue);
+    onChange(newValue);
   };
 
   const toggleDeviceVisibility = (e) => {
@@ -87,20 +87,23 @@ const EditorOptions = () => {
   });
 
   const [isAutomaticBlockRecoveryChecked, setIsAutomaticBlockRecoveryChecked] = useState(options.automatic_block_recovery);
+  const [isCopyPasteStyleChecked, setIsCopyPasteStyleChecked] = useState(options.copy_paste_style);
 
-  // useEffect(() => {
-  //   try {
-  //     setIsAutomaticBlockRecoveryChecked(JSON.parse(options.automatic_block_recovery) === true);
-  //   } catch {
-  //     setIsAutomaticBlockRecoveryChecked(false);
-  //   }
-  // }, [options.automatic_block_recovery]);
+  useEffect(() => {
+    try {
+      setIsAutomaticBlockRecoveryChecked(JSON.parse(options.automatic_block_recovery) === true);
+      setIsCopyPasteStyleChecked(JSON.parse(options.copy_paste_style) === true);
+    } catch {
+      setIsAutomaticBlockRecoveryChecked(false);
+      setIsCopyPasteStyleChecked(false);
+    }
+  }, [options.automatic_block_recovery, options.copy_paste_style]);
 
   const [device, setDevice] = useState('Desktop');
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
   useEffect(() => {
-    // fetchOptions();
+    fetchOptions();
   }, []);
 
   const fetchOptions = () => {
@@ -118,12 +121,13 @@ const EditorOptions = () => {
 					const fetchedOptions = response.data;
 
 					// If default_content_width, container_column_gap, container_row_gap or container_padding is undefined or empty in DB, save your default
-					if (!fetchedOptions.default_content_width || !fetchedOptions.container_column_gap || !fetchedOptions.container_row_gap || !fetchedOptions.container_padding || !fetchedOptions.automatic_block_recovery) {
+					if (!fetchedOptions.default_content_width || !fetchedOptions.container_column_gap || !fetchedOptions.container_row_gap || !fetchedOptions.container_padding || !fetchedOptions.automatic_block_recovery || !fetchedOptions.copy_paste_style) {
 						saveOption('default_content_width', options.default_content_width);
             saveOption('container_column_gap', options.container_column_gap);
             saveOption('container_row_gap', options.container_row_gap);
             saveOption('container_padding', options.container_padding);
             saveOption('automatic_block_recovery', options.automatic_block_recovery);
+            saveOption('copy_paste_style', options.copy_paste_style);
 					} else {
 						setOptions(prevOptions => ({
 							...prevOptions,
@@ -133,6 +137,7 @@ const EditorOptions = () => {
               container_row_gap: JSON.parse(fetchedOptions.container_row_gap),
               container_padding: JSON.parse(fetchedOptions.container_padding),
               automatic_block_recovery: JSON.parse(fetchedOptions.automatic_block_recovery),
+              copy_paste_style: JSON.parse(fetchedOptions.copy_paste_style),
 						}));
 					}
         } else {
@@ -277,6 +282,11 @@ const EditorOptions = () => {
     saveOption('automatic_block_recovery', checked);
   };
 
+  const handleCopyPasteStyle = (checked) => {
+    setIsCopyPasteStyleChecked(checked);
+    saveOption('copy_paste_style', checked);
+  };
+
   return (
     <div className="fb-blocks-settings-options">
       <div className="fb-option">
@@ -363,18 +373,25 @@ const EditorOptions = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Custom CSS', 'frontis-blocks')}</h3>
-          <p>{__('Enable custom CSS for blocks', 'frontis-blocks')}</p>
+          <h3>{__('Copy Paste Styles', 'frontis-blocks')}</h3>
+          <p>{__('Enable the "Copy Paste Styles" option to have the ability to copy & paste Spectra & Core Gutenberg Blocks Styles.', 'frontis-blocks')}</p>
         </div>
-        <p className="fb-button-upcoming">
-          {__('Coming Soon', 'frontis-blocks')}
-        </p>
+
+          <div className="fb-block-card-switch">
+              <label className="fb-block-card-switch-label">
+                <Switch
+                    checked={isCopyPasteStyleChecked}
+                    onChange={handleCopyPasteStyle}
+                    className="fb-block-card-switch-input"
+                />
+              </label>
+          </div>
       </div>
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Copy Paste Style', 'frontis-blocks')}</h3>
-          <p>{__('Enable copy and paste style functionality', 'frontis-blocks')}</p>
+          <h3>{__('Custom CSS', 'frontis-blocks')}</h3>
+          <p>{__('Enable custom CSS for blocks', 'frontis-blocks')}</p>
         </div>
         <p className="fb-button-upcoming">
           {__('Coming Soon', 'frontis-blocks')}

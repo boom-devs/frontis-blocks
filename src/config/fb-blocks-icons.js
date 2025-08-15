@@ -17,6 +17,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -41,6 +42,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -66,6 +68,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -89,6 +92,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -110,6 +114,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -131,6 +136,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -152,6 +158,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: '#0B0C0E',
@@ -196,6 +203,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -226,6 +234,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -248,6 +257,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -271,6 +281,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -295,6 +306,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -316,6 +328,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 
 		fb('path', {
@@ -359,6 +372,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -387,6 +401,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 
 		fb('path', {
@@ -412,6 +427,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -435,6 +451,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -457,6 +474,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -478,6 +496,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -508,6 +527,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -529,6 +549,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -550,6 +571,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -570,6 +592,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -592,6 +615,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -617,6 +641,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 
 		fb('path', {
@@ -652,6 +677,7 @@ const FB_Block_Icons = {
 			width: '24',
 			height: '24',
 			viewBox: '0 0 24 24',
+			className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 			fill: 'none',
@@ -676,6 +702,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -696,6 +723,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
@@ -719,6 +747,7 @@ const FB_Block_Icons = {
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
 		},
 		fb('path', {
 		  fill: 'none',
