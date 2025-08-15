@@ -1,56 +1,49 @@
-(function() {
-    function initMarqueeCarousels() {
-        const sliders = document.querySelectorAll('.fb-marquee-carousel-container');
-        
-        sliders.forEach((sliderContainer) => {
-            // Prevent multiple initializations
-            if (sliderContainer.hasAttribute('data-carousel-initialized')) return;
-            sliderContainer.setAttribute('data-carousel-initialized', 'true');
+(function () {
+    function initSliders() {
+        // Select all slider containers
+        document.querySelectorAll('.fb-marquee-slider-container').forEach(function (sliderContainer) {
+            const blockId = sliderContainer.dataset.blockId;
+            if (!blockId) return;
 
-            try {
-                const swiperSettings = sliderContainer.dataset.swiperSettings;
-                if (swiperSettings) {
-                    const settings = JSON.parse(swiperSettings);
+            const swiperSettings = sliderContainer.dataset.swiperSettings;
+            if (!swiperSettings) return;
 
-                    new Swiper(sliderContainer.querySelector('.swiper'), settings);
-                }
-            } catch (error) {
-                console.error('Error initializing slider:', error);
-            }
+            const sliderOptions = JSON.parse(swiperSettings);
+
+            // Initialize Swiper for the current slider
+            new Swiper(sliderContainer.querySelector('.fb-marquee-swiper'), sliderOptions);
         });
     }
 
-    // Initialize on different loading states
-    function setupMarqueeCarousels() {
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initMarqueeCarousels);
+    var setupDone = false;
+
+    function setupInitialization() {
+        if (setupDone) return;
+        setupDone = true;
+
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(initSliders, 100);
         } else {
-            initMarqueeCarousels();
+            document.addEventListener('DOMContentLoaded', function () {
+                setTimeout(initSliders, 100);
+            });
         }
 
-        // Handle dynamic content changes
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if (mutation.addedNodes.length || mutation.removedNodes.length) {
-                    initMarqueeCarousels();
+        if (typeof window !== 'undefined') {
+            var lastUrl = window.location.href;
+            var urlObserver = new MutationObserver(function () {
+                if (lastUrl !== window.location.href) {
+                    lastUrl = window.location.href;
+                    setTimeout(initSliders, 300);
                 }
             });
-        });
 
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-
-        // Support WordPress hooks if available
-        if (window.wp && window.wp.hooks) {
-            window.wp.hooks.addAction('blocks.blockRendered', 'frontis-marquee-carousel', initMarqueeCarousels);
+            urlObserver.observe(document.body, { childList: true, subtree: true });
         }
     }
 
-    // Expose initialization method globally
-    window.reinitMarqueeCarousels = initMarqueeCarousels;
+    setupInitialization();
 
-    // Start setup
-    setupMarqueeCarousels();
+    // If needed, expose re-initialization function
+    window.reinitSliders = initSliders;
 })();
