@@ -127,12 +127,12 @@ const TemplateCard = ({ item, libraryData, setLibraryData }) => {
 			)}
 
 			{/* Login/Signup Modal */}
-			{item.isPro && isPluginUpgrade && isLoginModalOpen && (
+			{/* {item.isPro && isPluginUpgrade && isLoginModalOpen && (
 				<LoginSignupModal
 					onClose={handleCloseLoginModal}
 					onLoginSuccess={handleLoginSuccess}
 				/>
-			)}
+			)} */}
 
 			{/* Template Import Modal */}
 			{isModalOpen && (

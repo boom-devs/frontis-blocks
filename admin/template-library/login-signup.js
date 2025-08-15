@@ -80,15 +80,9 @@ const LoginSignupModal = ({ onClose, onLoginSuccess }) => {
 		setIsLoading(true);
 
 		try {
-			// Simulate API call
 			await new Promise(resolve => setTimeout(resolve, 2000));
-
-			// Mock successful login/signup
 			console.log(`${activeTab} successful:`, formData);
-
-			// Call success callback
 			onLoginSuccess();
-
 		} catch (error) {
 			console.error(`${activeTab} failed:`, error);
 			setErrors({ submit: `${activeTab} failed. Please try again.` });
@@ -109,21 +103,16 @@ const LoginSignupModal = ({ onClose, onLoginSuccess }) => {
 				{/* Header with tabs */}
 				<div className="fb-auth-header">
 					<div className="fb-auth-tabs">
-						<h3 className={`fb-auth-tab`}>
-							Login
+						<h3 className={`fb-auth-tab-title`}>
+							{activeTab === 'signup' ? 'Create a account' : 'Sign In'}
 						</h3>
-						{/* <button
-							className={`fb-auth-tab ${activeTab === 'signup' ? 'active' : ''}`}
-							onClick={() => setActiveTab('signup')}
-						>
-							Free Sign Up
-						</button> */}
+						<p className="fb-auth-tab-description">Welcome back! Please enter your details</p>
 					</div>
 				</div>
 
 				{/* Form */}
 				<form onSubmit={handleSubmit} className="fb-auth-form">
-					{/* {activeTab === 'signup' && (
+					{activeTab === 'signup' && (
 						<div className="fb-form-row">
 							<div className="fb-form-group">
 								<label htmlFor="firstName">First Name</label>
@@ -165,7 +154,7 @@ const LoginSignupModal = ({ onClose, onLoginSuccess }) => {
 								{errors.lastName && <span className="fb-error-message">{errors.lastName}</span>}
 							</div>
 						</div>
-					)} */}
+					)}
 
 					<div className="fb-form-group">
 						<label htmlFor="email">User Name or Email</label>
@@ -209,7 +198,7 @@ const LoginSignupModal = ({ onClose, onLoginSuccess }) => {
 							{errors.password && <span className="fb-error-message">{errors.password}</span>}
 						</div>
 
-						{/* {activeTab === 'signup' && (
+						{activeTab === 'signup' && (
 							<div className="fb-form-group">
 								<label htmlFor="confirmPassword">Confirm Password</label>
 								<div className="fb-input-wrapper">
@@ -230,11 +219,11 @@ const LoginSignupModal = ({ onClose, onLoginSuccess }) => {
 								</div>
 								{errors.confirmPassword && <span className="fb-error-message">{errors.confirmPassword}</span>}
 							</div>
-						)} */}
+						)}
 					</div>
 
-					{/* {activeTab === 'signup' && (
-						<div className="fb-checkbox-group">
+					{activeTab === 'signup' ? (
+						<div className="fb-checkbox-group fb-checkbox-group-signup">
 							<div className="fb-checkbox-item">
 								<input
 									type="checkbox"
@@ -258,7 +247,22 @@ const LoginSignupModal = ({ onClose, onLoginSuccess }) => {
 								</label>
 							</div>
 						</div>
-					)} */}
+					) : (
+						<div className="fb-checkbox-group fb-checkbox-group-login">
+							<div className="fb-checkbox-item">
+								<input
+									type="checkbox"
+									id="remember_me"
+								/>
+								<label htmlFor="agreeTerms">
+									Remember for 30 Days
+								</label>
+							</div>
+							<div className="fb-checkbox-item">
+								<a className="fb-forgot-password">Forgot Password?</a>
+							</div>
+						</div>
+					)}
 
 					{errors.submit && (
 						<div className="fb-error-message fb-submit-error">{errors.submit}</div>
@@ -279,21 +283,55 @@ const LoginSignupModal = ({ onClose, onLoginSuccess }) => {
 						)}
 					</button>
 
-					{/* <div className="fb-auth-divider">
-						<span>Or</span>
-					</div> */}
+					<div className="fb-auth-divider">
+						<hr/>
+						<span>OR</span>
+					</div>
 
-					{/* <button type="button" className="fb-connect-api-btn">
-						Connect via API
-					</button> */}
+					{activeTab === 'login' && (
+						<div className="fb-sign-with-api">
+							<button className="fb-sign-with-api-btn">
+								<svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none">
+									<path d="M16.3541 8.03113H15.75V8H9V11H13.2386C12.6203 12.7464 10.9586 14 9 14C6.51487 14 4.5 11.9851 4.5 9.5C4.5 7.01487 6.51487 5 9 5C10.1471 5 11.1908 5.43275 11.9854 6.13962L14.1068 4.01825C12.7673 2.76987 10.9755 2 9 2C4.85812 2 1.5 5.35812 1.5 9.5C1.5 13.6419 4.85812 17 9 17C13.1419 17 16.5 13.6419 16.5 9.5C16.5 8.99713 16.4482 8.50625 16.3541 8.03113Z" fill="#FBC02D"/>
+									<path d="M2.36475 6.00912L4.82887 7.81625C5.49562 6.1655 7.11037 5 9 5C10.1471 5 11.1907 5.43275 11.9854 6.13962L14.1067 4.01825C12.7672 2.76987 10.9755 2 9 2C6.11925 2 3.621 3.62637 2.36475 6.00912Z" fill="#E53935"/>
+									<path d="M8.99999 17C10.9372 17 12.6975 16.2586 14.0284 15.053L11.7071 13.0888C10.9541 13.6591 10.0181 14 8.99999 14C7.04924 14 5.39287 12.7561 4.76887 11.0203L2.32312 12.9046C3.56437 15.3335 6.08512 17 8.99999 17Z" fill="#4CAF50"/>
+									<path d="M16.3541 8.03113L16.3481 8H15.75H9V11H13.2386C12.9416 11.8389 12.402 12.5622 11.706 13.0891L11.7071 13.0884L14.0284 15.0526C13.8641 15.2019 16.5 13.25 16.5 9.5C16.5 8.99713 16.4482 8.50625 16.3541 8.03113Z" fill="#1565C0"/>
+								</svg>
+								Sign up with Google
+							</button>
+							<button className="fb-sign-with-api-btn">
+								<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+									<g clip-path="url(#clip0_14439_2782)">
+									<path d="M16.5298 13.01C16.1417 13.872 15.9546 14.2573 15.4554 15.0181C14.7565 16.0812 13.7707 17.4087 12.5529 17.4172C11.4687 17.427 11.1889 16.7098 9.71652 16.7225C8.24558 16.7295 7.93902 17.4312 6.85339 17.42C5.63417 17.4087 4.70183 16.2134 4.00292 15.1517C2.04823 12.1747 1.84152 8.68436 3.04948 6.82811C3.90448 5.51186 5.25589 4.73842 6.52573 4.73842C7.81949 4.73842 8.6323 5.44858 9.70105 5.44858C10.7389 5.44858 11.3703 4.73702 12.8665 4.73702C13.9971 4.73702 15.1925 5.35295 16.0475 6.41608C13.2518 7.94889 13.706 11.9412 16.5298 13.01ZM11.7303 3.54874C12.2745 2.84983 12.6879 1.86405 12.5375 0.859985C11.6501 0.920454 10.6123 1.48717 10.0062 2.22124C9.45636 2.89061 9.00073 3.88342 9.17792 4.84389C10.1468 4.87483 11.1495 4.29686 11.7303 3.54874Z" fill="black"/>
+									</g>
+									<defs>
+									<clipPath id="clip0_14439_2782">
+									<rect width="18" height="18" fill="white" transform="translate(0.5 0.5)"/>
+									</clipPath>
+									</defs>
+								</svg>
+								Sign up with Apple
+							</button>
+						</div>
+					)}
+
+					{activeTab === 'signup' ? (
+						<div className="fb-auth-form-switch">
+							Already have an account? <a className="fb-link" onClick={() => setActiveTab('login')}>Sign In</a>
+						</div>
+					) : (
+						<div className="fb-auth-form-switch">
+							Don’t have a account? <a className="fb-link" onClick={() => setActiveTab('signup')}>Sign Up</a>
+						</div>
+					)}
 				</form>
 
 				{/* Close button */}
-				{/* <button className="fb-auth-close" onClick={onClose}>
+				<button className="fb-auth-close" onClick={onClose}>
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none">
 						<path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 					</svg>
-				</button> */}
+				</button>
 			</div>
 		</div>
 	);

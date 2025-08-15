@@ -80,6 +80,8 @@ const PatternLibraryButton = () => {
     const schema = data.$schema;
     const [activeTab, setActiveTab] = useState(Object.keys(schema)[0]);
     const [activeCategory, setActiveCategory] = useState({patterns: 'all', pages: 'all', sites: 'all', templateLibrary: 'my-cloud'});
+    const [isProTemplate, setIsProTemplate] = useState(false);
+    const [activeTag, setActiveTag] = useState('');
     const [libraryData, setLibraryData] = useState([]);
 
 
@@ -114,8 +116,30 @@ const PatternLibraryButton = () => {
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">
                                 <TemplateSidebar activeTab={activeTab} data={data} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
-                                {activeTab !== 'templateLibrary' && <TemplateContent activeTab={activeTab} activeCategory={activeCategory} setLibraryData={setLibraryData} data={data} />}
-                                {activeTab === 'templateLibrary' && <LibraryContent activeTab={activeTab} activeCategory={activeCategory} libraryData={libraryData} setLibraryData={setLibraryData} data={data} />}
+                                {activeTab !== 'templateLibrary' && (
+                                    <TemplateContent activeTab={activeTab}
+                                        activeCategory={activeCategory}
+                                        setLibraryData={setLibraryData}
+                                        data={data}
+                                        isProTemplate={isProTemplate}
+                                        setIsProTemplate={setIsProTemplate}
+                                        activeTag={activeTag}
+                                        setActiveTag={setActiveTag}
+                                    />
+                                )}
+                                {activeTab === 'templateLibrary' && (
+                                    <LibraryContent 
+                                        activeTab={activeTab}
+                                        activeCategory={activeCategory}
+                                        libraryData={libraryData}
+                                        setLibraryData={setLibraryData}
+                                        data={data}
+                                        isProTemplate={isProTemplate}
+                                        setIsProTemplate={setIsProTemplate}
+                                        activeTag={activeTag}
+                                        setActiveTag={setActiveTag}
+                                    />
+                                )}
                             </div>
 
                         </div>

@@ -10,43 +10,24 @@ import TemplateImport from "./template-import";
 import LoginSignupModal from "./login-signup";
 import PluginUpgradeModal from "./plugin-upgrade";
 
-const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [], dependency = [], activeTab, setLibraryData }) => {
+const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [], dependency = [], activeTab, setLibraryData, isLogedIn }) => {
 	const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
-	const [isLoading, setIsLoading] = useState(false);
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 	const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [isPluginUpgrade, setIsPluginUpgrade] = useState(false);
 
-	// Check authentication status on component mount
-	useEffect(() => {
-		setIsAuthenticated(false);
-	}, []);
+	
 
 	const handleFullSiteImport = useCallback(() => {
 
 		if(!isPluginUpgrade) {
 			setIsPluginUpgradeModalOpen(true);
 		}
-		if (!isAuthenticated) {
-			setIsLoginModalOpen(true);
-		}
-		if (!isPro) {
+		if (!isPro && isLogedIn) {
 			setIsModalOpen(true);
 		}
-	}, [isAuthenticated]);
-
-	const handleLoginSuccess = useCallback(() => {
-		setIsLoginModalOpen(false);
-		setIsAuthenticated(true);
-		setIsModalOpen(true);
-	}, []);
-
-	const handleCloseLoginModal = useCallback(() => {
-		setIsLoginModalOpen(false);
-		setIsPluginUpgrade(false);
 	}, []);
 
 	const handleClosePluginUpgradeModal = useCallback(() => {
@@ -176,18 +157,9 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [], dependenc
 				</div>
 			</div>
 
-
 			{isPro && isPluginUpgradeModalOpen && (
 				<PluginUpgradeModal
 					onClose={handleClosePluginUpgradeModal}
-				/>
-			)}
-
-			{/* Login/Signup Modal */}
-			{isPro && isPluginUpgrade && isLoginModalOpen && (
-				<LoginSignupModal
-					onClose={handleCloseLoginModal}
-					onLoginSuccess={handleLoginSuccess}
 				/>
 			)}
 
@@ -203,6 +175,14 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [], dependenc
 };
 
 const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibraryData }) => {
+
+	const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
+	const [isLogedIn, setIsLogedIn] = useState(false);
+
+	// Check authentication status on component mount
+	useEffect(() => {
+		setIsLogedIn(false);
+	}, []);
 
 	const TagTabsOptions = [
 		{name: 'User Experience', value: 'user-experience'},
@@ -232,7 +212,19 @@ const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibr
 		}
 	}, [activeTab, activeCategory[activeTab]]);
 
+	const handleLoginSuccess = useCallback(() => {
+		setIsLoginModalOpen(false);
+		setIsLogedIn(true);
+		setIsModalOpen(true);
+	}, []);
+
+	const handleCloseLoginModal = useCallback(() => {
+		setIsLoginModalOpen(false);
+		setIsPluginUpgrade(false);
+	}, []);
+
 	return (
+		<>
 		<div className="fb-template-library-store-content">
 			<div className="fb-template-library-content-header">
 				<div className="fb-template-library-content-header-left">
@@ -282,10 +274,20 @@ const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibr
 						dependency={template.dependency || []}
 						activeTab={activeTab}
 						setLibraryData={setLibraryData}
+						isLogedIn={isLogedIn}
 					/>
 				))}
 			</div>
 		</div>
+
+		{/* Login/Signup Modal */}
+		{isLoginModalOpen && (
+				<LoginSignupModal
+					onClose={handleCloseLoginModal}
+					onLoginSuccess={handleLoginSuccess}
+				/>
+			)}
+		</>
 	);
 };
 
