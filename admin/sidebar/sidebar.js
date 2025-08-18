@@ -15,6 +15,7 @@ import { getGlobalStyle, updateGlobalStyle } from "./fetch";
 import generateCSSVariables from "./components/GenerateRootCss";
 import generateColorsVariables from "./components/GenerateColorRoot";
 import FrontisMetaBox from "./theme-settings/editor";
+import FrontisThemeSiteEditor from "./theme-settings/site-editor";
 import "./sidebar.scss";
 
 // Default color and gradient configurations
@@ -438,6 +439,9 @@ function FrontisBlocksSidebar() {
 
 	}, [customColors, globalColors, gradientColors, customGradientColors]);
 
+
+	const isSiteEditor = window.location.href.includes('site-editor.php');
+
 	return (
 		<>
 			<div className="fb_plugin_sidebar">
@@ -614,7 +618,11 @@ function FrontisBlocksSidebar() {
 
 						{frontisBlocksAdminSidebar.frontis_theme &&
 							<div className="fb-theme-settings-wrapper">
-								<FrontisMetaBox />
+								{isSiteEditor ? (
+									<FrontisThemeSiteEditor />
+								) : (
+									<FrontisMetaBox />
+								)}
 							</div>
 						}
 					</div>
