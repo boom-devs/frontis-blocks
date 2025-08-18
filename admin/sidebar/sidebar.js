@@ -14,9 +14,7 @@ import { loadGoogleFont, useAfterSave } from "./helper";
 import { getGlobalStyle, updateGlobalStyle } from "./fetch";
 import generateCSSVariables from "./components/GenerateRootCss";
 import generateColorsVariables from "./components/GenerateColorRoot";
-import {
-	GOOGLE_FONTS,
-} from '@Constants/fbConstants';
+import FrontisMetaBox from "./theme-settings/editor";
 import "./sidebar.scss";
 
 // Default color and gradient configurations
@@ -442,9 +440,6 @@ function FrontisBlocksSidebar() {
 
 	return (
 		<>
-			<PluginSidebarMoreMenuItem target="fb_plugin_sidebar">
-				{__("FB Global Settings", "frontis-blocks")}
-			</PluginSidebarMoreMenuItem>
 			<div className="fb_plugin_sidebar">
 				<PluginSidebar
 					name="frontis-blocks-sidebar"
@@ -616,6 +611,12 @@ function FrontisBlocksSidebar() {
 								</div>
 							</NavigatorScreen>
 						</NavigatorProvider>
+
+						{frontisBlocksAdminSidebar.frontis_theme &&
+							<div className="fb-theme-settings-wrapper">
+								<FrontisMetaBox />
+							</div>
+						}
 					</div>
 				</PluginSidebar>
 			</div>
