@@ -12,9 +12,6 @@ const FrontisMetaBox = () => {
 
     const [meta, setMeta] = useEntityProp('postType', postType, 'meta');
 
-    console.log("meta meta")
-    console.log(meta);
-
     // Fetch global lazy loading setting
     const [globalLazyLoading, setGlobalLazyLoading] = useState(false);
     const [globalTransparentHeader, setGlobalTransparentHeader] = useState(false);
@@ -28,11 +25,6 @@ const FrontisMetaBox = () => {
             setGlobalStickyHeader(settings.stickyHeader);
         });
     }, []);
-
-    // Only render for posts and pages
-    if (!['post', 'page'].includes(postType)) {
-        return null;
-    }
 
     const updateSetting = (settingName, value) => {
         setMeta({ ...meta, [settingName]: value });
