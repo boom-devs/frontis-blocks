@@ -938,7 +938,7 @@ function FrontisBlocksSidebarFullSite(props) {
 	return (
 		<>
 			<PluginSidebarMoreMenuItem target="fb_plugin_sidebar">
-				{__("FB Global Settings", "frontis-blocks")}
+				{__("FB Global Settingsd", "frontis-blocks")}
 			</PluginSidebarMoreMenuItem>
 			<div className={'fb_plugin_sidebar'}>
 				<PluginSidebar
