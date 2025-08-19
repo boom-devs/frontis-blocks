@@ -15,10 +15,10 @@ export default function save( { attributes } ) {
 
 		<>
 			<div {...blockProps}>
-				<div className={`uagb-tabs__body-container uagb-inner-tab-${ id }`}
-					id={ `uagb-tabs__panel${ id }` }
+				<div className={`fb-tabs-body-container fb-inner-tab-${ id }`}
+					id={ `fb-tabs-panel${ id }` }
 					role="tabpanel"
-					aria-labelledby={ `uagb-tabs__tab${ id }` }
+					aria-labelledby={ `fb-tabs-tab${ id }` }
 				>
 					<InnerBlocks.Content />
 				</div>
