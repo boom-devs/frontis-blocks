@@ -3,7 +3,7 @@ import { InnerBlocks, RichText, useBlockProps } from '@wordpress/block-editor';
 export default function save({ attributes }) {
   const {
     blockId,
-    TabItems,
+    tabItems, 
     tabActiveFrontend,
   } = attributes;
 
@@ -16,7 +16,7 @@ export default function save({ attributes }) {
     <div {...blockProps}>
       <div className="fb-tabs-wrap">
         <ul className="fb-tabs-panel" role="tablist">
-          {TabItems.map((item, index) => (
+          {tabItems.map((item, index) => (
             <li
               key={item.id}
               className={`fb-tab ${tabActiveFrontend === index ? 'fb-tabs-active' : ''}`}

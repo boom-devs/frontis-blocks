@@ -18,9 +18,9 @@ import {
 /**
  * Internal depencencies
  */
+
 import { 
-    BORDER_STYLES,
-    BACKGROUND_TYPES,
+    TABS_LAYOUT,
 } from '@Constants/fbConstants';
 
 import FB_Range from '@Components/range';
@@ -41,10 +41,13 @@ import SortableItem from './sortableItem';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId}) {
+export default function Inspector({ attributes, setAttributes, clientId, handleDragEnd, handleAddItem, handleChangeItem, handleDeleteItem, handleDuplicateItem, tabsItemList }) {
+    
     const { 
         blockId,
-        
+        blockStyle,
+        tabLayoutSwitcher,
+        tabsItems,
     } = attributes;
 
     useEffect(() => {
@@ -59,65 +62,31 @@ export default function Inspector({ attributes, setAttributes, clientId}) {
 
 
 
-    // const [tabsItemList, setTabsItemList] = useState(tabsItems);    
+    const allBlockStyle = useMemo(() => `
 
-    // const handleDragEnd = (event) => {
-    //     const { active, over } = event;
-    //     if (active && over && active.id !== over.id) {
-    //         const oldIndex = tabsItemList.findIndex(item => item.id === active.id);
-    //         const newIndex = tabsItemList.findIndex(item => item.id === over.id);
-    //         const updatedItems = arrayMove(tabsItemList, oldIndex, newIndex);
-    //         setAttributes({ tabsItems: updatedItems });
-    //         setTabsItemList(updatedItems);
-    //     }
-    // };
+        .${blockId} .fb-tabs-wrap {
+            flex-direction: ${tabLayoutSwitcher === 'horizontal' ? 'column' : 'row'};
+        }
 
-    // const handleAddItem = () => {
-    //     const newItem = {
-    //         id: `item-${tabsItemList.length + 1}`, 
-    //         title: `Tab ${tabsItemList.length + 1}`, 
-    //     };
-    //     setAttributes({ tabsItems: [...tabsItems, newItem] });
-    //     setTabsItemList([...tabsItemList, newItem]);
-    // };
+        @media only screen and (max-width: 1024px) {
 
-    // const handleChangeItem = (id, key, value) => {
-    //     const updatedItems = tabsItemList.map(item => {
-    //         if (item.id === id) {
-    //             return {
-    //                 ...item,
-    //                 [key]: value,
-    //             };
-    //             return { ...item, [key]: value };
-    //         }
-    //         return item;
-    //     });
-        
-    //     setTabsItemList(updatedItems);
-    //     setAttributes({ tabsItems: updatedItems });
-    // };
+        }
 
-    // const handleDeleteItem = (id) => {
-    //     const updatedItems = tabsItemList.filter(item => item.id !== id);
-    //     setAttributes({ tabsItems: updatedItems });
-    //     setTabsItemList(updatedItems);
+        @media only screen and (max-width: 767px) {
 
-    // };
+        }
+    `, [
+        blockId,
+        blockStyle,
+        tabLayoutSwitcher,
+        tabsItems,
+    ]);
 
-    // const handleDuplicateItem = (id) => {
-    //     const itemToDuplicate = tabsItemList.find(item => item.id === id);
-    //     if (itemToDuplicate) {
-    //         const newItem = { ...itemToDuplicate, id: `item-${tabsItemList.length + 1}` };
-    //         setAttributes({tabsItems: [...tabsItems, newItem] });
-    //         setTabsItemList([...tabsItemList, newItem]);
-    //     }
-    // };
+    useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle] );
 
-
-    // //Sync TabsItemList with attributes.tabsItems
-    // useEffect(() => {
-    //     setAttributes({ tabsItems: tabsItemList });
-    // }, [tabsItemList, setAttributes]); 
+    const editorStyle = `${allBlockStyle}`.replace(/\s+/g, ' ').trim();
 
     /**
 	 * Inspector General Controls
@@ -128,7 +97,38 @@ export default function Inspector({ attributes, setAttributes, clientId}) {
                 title={__("General Settings", "frontis-blocks")} 
                 initialOpen={true}
             >
-                General
+                <FB_SwitcherControl
+                    label={__("Layout", "frontis-blocks")}
+                    options={TABS_LAYOUT}
+                    globalSwitcher={tabLayoutSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ tabLayoutSwitcher: value })}
+                />
+                
+                <div className="fb-tabs-wrapper">
+                    <DndContext
+                        collisionDetection={closestCenter}
+                        onDragEnd={handleDragEnd}
+                    >
+                        <SortableContext items={tabsItemList.map(item => item.id)}>
+                            <ul className='dnd-items-wrapper'>
+                                {tabsItemList.map((item, index) => (
+                                    <SortableItem
+                                        key={item.id}
+                                        id={item.id}
+                                        item={item}
+                                        handleChangeItem={handleChangeItem}
+                                        handleDeleteItem={handleDeleteItem}
+                                        handleDuplicateItem={handleDuplicateItem}
+                                        index={index}
+                                    />
+                                ))}
+                            </ul>
+                        </SortableContext>
+                        <Button isPrimary onClick={handleAddItem}>
+                            {__("Add Tab", "frontis-blocks")}
+                        </Button>
+                    </DndContext>
+                </div>
 
             </PanelBody>
         </>
@@ -161,7 +161,9 @@ export default function Inspector({ attributes, setAttributes, clientId}) {
     return (
 
         <>
-
+            <style>
+                {editorStyle}
+            </style>
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
