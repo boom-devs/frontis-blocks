@@ -1,6 +1,7 @@
 .fb-flip-box-wrapper {
 	width: 100%;
 	overflow: hidden;
+	perspective: 1000px;
 	.fb-flipper-wrapper {
 		height: auto;
 		position: relative;
