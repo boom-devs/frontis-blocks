@@ -1,0 +1,20 @@
+.uagb-tabs__wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.uagb-tabs__panel {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.uagb-tab {
+  margin-right: 10px;
+}
+
+.uagb-tabs__body-wrap {
+  padding: 10px;
+  width: 100%;
+}
