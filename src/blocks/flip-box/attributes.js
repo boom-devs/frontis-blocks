@@ -2322,6 +2322,7 @@ const attributes = {
         type: "string",
         default: ""
     },
+    // Flip box front hover background
     flipBoxFrontHoverBackgroundType: {
         type: "string",
         default: "classic"

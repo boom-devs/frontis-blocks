@@ -4407,11 +4407,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${globalBorderColor ? `border-color: ${globalBorderColor};` : ""}
 				${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : ""}
 			}
-		  .fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
-			${flipBoxFrontWidth.Desktop ? `max-width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
-			${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
-			width: 100%;
-		  }
 	  
 		  .fb-flip-box-wrapper.${blockID}:hover .fb-flip-box-wrapper {
 			  ${globalBgHoverColor ? `background-color: ${globalBgHoverColor};` : ""}
@@ -4452,16 +4447,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  }
 		  }
 
-		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
-		  		position: relative;
+		  .fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
 				${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
-				width: 100%;
+		  }
+		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
+				${flipBoxFrontWidth.Desktop ? `min-width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
+				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
 				${flipBoxFrontBackgroundType === "gradient" ? `
 				background: ${flipBoxFrontCustomGradientSwitcher && flipBoxFrontCustomGradientInputValue ? flipBoxFrontCustomGradientInputValue : flipBoxFrontGradientColor};
 				`
 				: flipBoxFrontBackgroundImageUrl && flipBoxFrontBackgroundImageUrl !== "null" ? `
-				${flipBoxFrontBackgroundImageUrl ? `background-image: url(${flipBoxFrontBackgroundImageUrl});` : ""}
+				${flipBoxFrontBackgroundImageUrl ? `background: url(${flipBoxFrontBackgroundImageUrl});` : ""}
 				${flipBoxFrontBackgroundImagePosition ? `background-position: ${flipBoxFrontBackgroundImagePosition};` : ""}
 				${flipBoxFrontBackgroundImageAttachment ? `background-attachment: ${flipBoxFrontBackgroundImageAttachment};` : ""}
 				${flipBoxFrontBackgroundImageRepeat ? `background-repeat: ${flipBoxFrontBackgroundImageRepeat};` : ""}
@@ -4475,7 +4472,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${flipBoxFrontBorderRadiusDesktop && flipBoxFrontBorderRadiusDesktop.top ? `border-radius: ${flipBoxFrontBorderRadiusDesktopWidth};` : ''}
 				background-repeat: none;
 				background-size: cover;
-				${flipBoxFrontClassicColor ? `justify-content: center; ` : ''}
 				transition: all .3s ease-in-out; 
 		  }
 
@@ -4484,7 +4480,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				background: ${flipBoxFrontHoverCustomGradientSwitcher && flipBoxFrontHoverCustomGradientInputValue ? flipBoxFrontHoverCustomGradientInputValue : flipBoxFrontHoverGradientColor};
 				`
 				: flipBoxFrontHoverBackgroundImageUrl && flipBoxFrontHoverBackgroundImageUrl !== "null" ? `
-				${flipBoxFrontHoverBackgroundImageUrl ? `background-image: url(${flipBoxFrontHoverBackgroundImageUrl});` : ""}
+				${flipBoxFrontHoverBackgroundImageUrl ? `background: url(${flipBoxFrontHoverBackgroundImageUrl});` : ""}
 				${flipBoxFrontHoverBackgroundImagePosition ? `background-position: ${flipBoxFrontHoverBackgroundImagePosition};` : ""}
 				${flipBoxFrontHoverBackgroundImageAttachment ? `background-attachment: ${flipBoxFrontHoverBackgroundImageAttachment};` : ""}
 				${flipBoxFrontHoverBackgroundImageRepeat ? `background-repeat: ${flipBoxFrontHoverBackgroundImageRepeat};` : ""}
@@ -4495,12 +4491,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-back {
 			${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 			${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
-			width: 100%;
 			${flipBoxBackBackgroundType === "gradient" ? `
 			background: ${flipBoxBackCustomGradientSwitcher && flipBoxBackCustomGradientInputValue ? flipBoxBackCustomGradientInputValue : flipBoxBackGradientColor};
 			`
 				: flipBoxBackBackgroundImageUrl && flipBoxBackBackgroundImageUrl !== "null" ? `
-			${flipBoxBackBackgroundImageUrl ? `background-image: url(${flipBoxBackBackgroundImageUrl});` : ""}
+			${flipBoxBackBackgroundImageUrl ? `background: url(${flipBoxBackBackgroundImageUrl});` : ""}
 			${flipBoxBackBackgroundImagePosition ? `background-position: ${flipBoxBackBackgroundImagePosition};` : ""}
 			${flipBoxBackBackgroundImageAttachment ? `background-attachment: ${flipBoxBackBackgroundImageAttachment};` : ""}
 			${flipBoxBackBackgroundImageRepeat ? `background-repeat: ${flipBoxBackBackgroundImageRepeat};` : ""}
@@ -4514,7 +4509,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${flipBoxBackBorderRadiusDesktop && flipBoxBackBorderRadiusDesktop.top ? `border-radius: ${flipBoxBackBorderRadiusDesktopWidth};` : ''}
 			background-repeat: none;
 			background-size: cover;
-			${flipBoxBackClassicColor ? `justify-content: center; ` : ''}
 			transition: all .3s ease-in-out; 
 		  }
 		
@@ -4941,7 +4935,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 		
-		.fb-flip-box-wrapper.${blockID}:hover .fb-flip-back-mediaBack-wrapper{
+		.fb-flip-box-wrapper.${blockID} .fb-flip-back-media-wrapper:hover{
 			${mediaBackHoverBackgroundType === "gradient" ? ` background: ${mediaBackHoverCustomGradientSwitcher && mediaBackHoverCustomGradientInputValue ? mediaBackHoverCustomGradientInputValue : mediaBackHoverGradientColor
 				};
 			`: mediaBackHoverBackgroundImageUrl && mediaBackHoverBackgroundImageUrl !== "null" ? `
@@ -5489,10 +5483,57 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			flipButtonBackHoverBorderColor,
 			mediaBorderHoverColor,
 			mediaHoverClassicColor,
+			mediaBackBorderColor,
 			mediaBackBorderHoverColor,
 			mediaBackHoverClassicColor,
 			mediaBackIconHoverColor,
 			btnBackIconHoverColor,
+			flipBoxFrontGradientColor,
+			flipBoxFrontCustomGradientSwitcher,
+			flipBoxFrontCustomGradientInputValue,
+			flipBoxFrontHoverClassicColor,
+			flipBoxFrontHoverGradientColor,
+			flipBoxFrontHoverCustomGradientSwitcher,
+			flipBoxFrontHoverCustomGradientInputValue,
+			flipBoxFrontHoverBackgroundColorStyle,
+			flipBoxFrontHoverBackgroundImageUrl,
+			flipBoxFrontHoverBackgroundImageAlt,
+			flipBoxFrontHoverBackgroundImageID,
+			flipBoxFrontHoverBackgroundImagePosition,
+			flipBoxFrontHoverBackgroundImageAttachment,
+			flipBoxFrontHoverBackgroundImageSize,
+			flipBoxFrontHoverBackgroundImageRepeat,
+			flipBoxFrontBackgroundImageUrl,
+			flipBoxFrontBackgroundImageAlt,
+			flipBoxFrontBackgroundImageID,
+			flipBoxFrontBackgroundImagePosition,
+			flipBoxFrontBackgroundImageAttachment,
+			flipBoxFrontBackgroundImageSize,
+			flipBoxFrontBackgroundImageRepeat,
+			flipBoxBackGradientColor,
+			flipBoxBackCustomGradientSwitcher,
+			flipBoxBackCustomGradientInputValue,
+			flipBoxBackHoverClassicColor,
+			flipBoxBackHoverGradientColor,
+			flipBoxBackHoverCustomGradientSwitcher,
+			flipBoxBackHoverCustomGradientInputValue,
+			flipBoxBackHoverBackgroundColorStyle,
+			flipBoxBackHoverBackgroundImageUrl,
+			flipBoxBackHoverBackgroundImageAlt,
+			flipBoxBackHoverBackgroundImageID,
+			flipBoxBackHoverBackgroundImagePosition,
+			flipBoxBackHoverBackgroundImageAttachment,
+			flipBoxBackHoverBackgroundImageSize,
+			flipBoxBackHoverBackgroundImageRepeat,
+			flipBoxBackBackgroundImageUrl,
+			flipBoxBackBackgroundImageAlt,
+			flipBoxBackBackgroundImageID,
+			flipBoxBackBackgroundImagePosition,
+			flipBoxBackWidth,
+			flipBoxBackWidthUnits,
+			flipBoxBackHeight,
+			flipBoxBackHeightUnits,
+
 		],
 	);
 
@@ -7287,11 +7328,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														min={0}
 														max={600}
 														label={__("Width", "frontis-blocks")}
-														rangeValue={flipBoxBackWidth}
-														onChangeHandler={(value) => setAttributes({ flipBoxBackWidth: value })}
-														rangeUnitHandler={(value) => setAttributes({ flipBoxBackWidthUnits: value })}
+														rangeValue={flipBoxFrontWidth}
+														onChangeHandler={(value) => setAttributes({ flipBoxFrontWidth: value })}
+														rangeUnitHandler={(value) => setAttributes({ flipBoxFrontWidthUnits: value })}
 														deviceType={deviceType}
-														units={flipBoxBackWidthUnits}
+														units={flipBoxFrontWidthUnits}
 														setAttributes={setAttributes}
 														rangeStep={1}
 														resetFallbackValue={""}
@@ -7301,11 +7342,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														min={0}
 														max={600}
 														label={__("Height", "frontis-blocks")}
-														rangeValue={flipBoxBackHeight}
-														onChangeHandler={(value) => setAttributes({ flipBoxBackHeight: value })}
-														rangeUnitHandler={(value) => setAttributes({ flipBoxBackHeightUnits: value })}
+														rangeValue={flipBoxFrontHeight}
+														onChangeHandler={(value) => setAttributes({ flipBoxFrontHeight: value })}
+														rangeUnitHandler={(value) => setAttributes({ flipBoxFrontHeightUnits: value })}
 														deviceType={deviceType}
-														units={flipBoxBackHeightUnits}
+														units={flipBoxFrontHeightUnits}
 														setAttributes={setAttributes}
 														rangeStep={1}
 														resetFallbackValue={""}
