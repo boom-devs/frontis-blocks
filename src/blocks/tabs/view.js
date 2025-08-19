@@ -1,6 +1,6 @@
 /**
  * Tabs frontend behavior (functional only)
- * - স্কোপড ভাবে প্রতিটি .uagb-tabs__wrap এর ভেতরে কাজ করে
+ * - স্কোপড ভাবে প্রতিটি .fb-tabs-wrap এর ভেতরে কাজ করে
  * - ক্লিকে active ট্যাব বদলায়, aria-selected সেট করে, প্যানেল show/hide করে
  */
 
@@ -8,14 +8,14 @@
 	function initTabs( root ) {
 		if ( !root ) return;
 
-		const tablist = root.querySelector( '.uagb-tabs__panel' );
+		const tablist = root.querySelector( '.fb-tabs-panel' );
 		if ( !tablist ) return;
 
-		const tabs = [ ...tablist.querySelectorAll( '.uagb-tabs-list' ) ];
-		const items = [ ...tablist.querySelectorAll( '.uagb-tab' ) ];
+		const tabs = [ ...tablist.querySelectorAll( '.fb-tabs-list' ) ];
+		const items = [ ...tablist.querySelectorAll( '.fb-tab' ) ];
 
-		// find child panels by class 'uagb-tabs__body-container uagb-inner-tab-{i}'
-		const panels = [ ...root.querySelectorAll( '.uagb-tabs__body-container' ) ];
+		// find child panels by class 'fb-tabs-body-container fb-inner-tab-{i}'
+		const panels = [ ...root.querySelectorAll( '.fb-tabs-body-container' ) ];
 
 		function setActive( index ) {
 			const max = Math.max( 0, tabs.length - 1 );
@@ -26,19 +26,19 @@
 
 			// update tab states
 			items.forEach( ( li, idx ) => {
-				if ( idx === i ) li.classList.add( 'uagb-tabs__active' );
-				else li.classList.remove( 'uagb-tabs__active' );
+				if ( idx === i ) li.classList.add( 'fb-tabs-active' );
+				else li.classList.remove( 'fb-tabs-active' );
 			} );
 			tabs.forEach( ( a, idx ) => {
 				a.setAttribute( 'aria-selected', String( idx === i ) );
 			} );
 
-			// update panels visibility — assumes child has .uagb-inner-tab-{id} where id === index
+			// update panels visibility — assumes child has .fb-inner-tab-{id} where id === index
 			panels.forEach( ( panelEl, idx ) => {
-				// if panel has class 'uagb-inner-tab-{idx}' show it, else hide
-				// fallback: match by id attribute '#uagb-tabs__panel{idx}'
-				const matchByClass = panelEl.classList.contains( `uagb-inner-tab-${ i }` );
-				const matchById = panelEl.id === `uagb-tabs__panel${ i }`;
+				// if panel has class 'fb-inner-tab-{idx}' show it, else hide
+				// fallback: match by id attribute '#fb-tabs-panel{idx}'
+				const matchByClass = panelEl.classList.contains( `fb-inner-tab-${ i }` );
+				const matchById = panelEl.id === `fb-tabs-panel${ i }`;
 				const isActive = matchByClass || matchById || idx === i;
 
 				panelEl.style.display = isActive ? 'block' : 'none';
@@ -70,7 +70,7 @@
 	}
 
 	function initAll() {
-		const roots = document.querySelectorAll( '.uagb-tabs__wrap' );
+		const roots = document.querySelectorAll( '.fb-tabs-wrap' );
 		roots.forEach( initTabs );
 	}
 

@@ -1,20 +1,106 @@
-.uagb-tabs__wrap {
+/* Editor-only scope */
+.fb-tabs-wrap {
   display: flex;
   flex-direction: column;
+  gap: 16px;
+  max-width: 100%;
 }
 
-.uagb-tabs__panel {
-  list-style: none;
+/* UL reset (bullets বন্ধ) */
+ul.fb-tabs-panel { 
   display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+/* alignment helpers */
+ul.fb-tabs-panel {
+  &.fb-tabs-align-left {
+    justify-content: flex-start;
+  }
+  &.fb-tabs-align-center {
+    justify-content: center;
+  }
+  &.fb-tabs-align-right {
+    justify-content: flex-end;
+  }
+}
+
+.fb-tabs-wrap .fb-tab {
+  position: relative;
+}
+
+/* Move/Remove controls—ডিফল্টে লুকানো */
+.fb-tabs-wrap .fb-tabs-editor-controls {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  background: #000;
+  color: #fff;
+  padding: 2px;
+  border-radius: 2px;
+  z-index: 2;
+}
+
+.fb-tabs-wrap .fb-tab:hover .fb-tabs-editor-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.fb-tabs-wrap .fb-tabs-editor-controls button {
+  background: #e6e6e6;
+  border: 1px solid #cfcfcf;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+/* Tab “pill” look */
+ .fb-tabs-wrap .fb-tabs-list {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  background: #f4f4f4;
+  color: inherit;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.fb-tabs-wrap .fb-tab.fb-tabs-active .fb-tabs-list {
+  background: #fff;
+  border-color: #bdbdbd;
+  box-shadow: 0 0 0 1px #fff inset;
+}
+
+/* Title reset */
+.fb-tabs-wrap .fb-tabs-panel p {
   margin: 0;
-  padding: 0;
 }
 
-.uagb-tab {
-  margin-right: 10px;
+/* Add Tab button */
+.fb-tabs-wrap .fb-tabs-add-tab button {
+  padding: 6px 12px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-.uagb-tabs__body-wrap {
-  padding: 10px;
-  width: 100%;
+/* Content box */
+.fb-tabs-wrap .fb-tabs-body-wrap {
+  position: relative;
+  max-width: 100%;
+  padding: 24px;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  background: #fff;
 }

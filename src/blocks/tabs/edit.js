@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { useEffect, useMemo } from '@wordpress/element';
 import { InnerBlocks, RichText, useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 import { createBlock } from '@wordpress/blocks';
@@ -11,10 +12,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const {
 		blockId,
-		tabHeaders,
+		TabItems, // Use TabItems instead of tabHeaders
 		tabActive,
 		tabActiveFrontend,
-
 	} = attributes;
 
 	const beSelect = select( 'core/block-editor' );
@@ -36,10 +36,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		} );
 		resetTabOrder();
 	};
+
 	const addTab = () => {
 		const childBlock = createBlock( 'frontis-blocks/tabs-item' );
-		beDispatch.insertBlock( childBlock, tabHeaders.length, clientId );
-		setAttributes( { tabHeaders: [ ...tabHeaders, 'New Tab' ] } );
+		beDispatch.insertBlock( childBlock, TabItems.length, clientId );
+		setAttributes( { TabItems: [ ...TabItems, { id: `item-${TabItems.length + 1}`, title: 'New Tab' } ] } );
 		resetTabOrder();
 	};
 
@@ -48,8 +49,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		updateActiveTab( tabActive );
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [] );
-
-
 
 	useEffect(() => {
 		// ensure unique child ids as soon as children exist once
@@ -91,16 +90,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		className: `fb-tabs-wrapper ${blockId}`,
 	});
 
-
-	const getTabsTemplate = useMemo(() => [
-		['frontis-blocks/tabs-item'],
-		['frontis-blocks/tabs-item'],
-		['frontis-blocks/tabs-item'],
-	], []);
+	// Use TabItems instead of tabHeaders
+	const getTabsTemplate = useMemo(() => TabItems.map(item => ['frontis-blocks/tabs-item']), [TabItems]);
 
 	const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: `uagb-tabs__body-wrap`,
+			className: `fb-tabs-body-wrap`,
 			slot: 'container-start',
 		},
 		{
@@ -119,39 +114,39 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				setAttributes={setAttributes}
 				clientId={clientId}
 			/>
-			<div className="uagb-tabs__wrap">
-				<ul className="uagb-tabs__panel" role="tablist">
-					{ tabHeaders.map( ( title, i ) => (
+			<div className="fb-tabs-wrap">
+				<ul className="fb-tabs-panel" role="tablist">
+					{ TabItems.map( ( { title }, i ) => (
 						<li
 							key={ i }
-							className={ `uagb-tab ${ tabActive === i ? 'uagb-tabs__active' : '' }` }
-							id={ `uagb-tabs__tab${ i }` }
+							className={ `fb-tab ${ tabActive === i ? 'fb-tabs-active' : '' }` }
+							id={ `fb-tabs-tab${ i }` }
 							role="tab"
 						>
 							<button
 								type="button"
-								className="uagb-tabs-list"
+								className="fb-tabs-list"
 								onClick={ () => updateActiveTab( i ) }
 								aria-selected={ tabActive === i }
-								aria-controls={ `uagb-tabs__panel${ i }` }
+								aria-controls={ `fb-tabs-panel${ i }` }
 								data-tab={ i }
 							>
 								<RichText
 									tagName="span"
 									value={ title }
 									onChange={ ( val ) => {
-										const next = [ ...tabHeaders ];
-										next[ i ] = val;
-										setAttributes( { tabHeaders: next } );
+										const next = [ ...TabItems ];
+										next[ i ].title = val;
+										setAttributes( { TabItems: next } );
 									} }
-									placeholder="Title…"
+									placeholder={__("Title…", "frontis-blocks")}
 									allowedFormats={ [ 'core/bold', 'core/italic' ] }
 								/>
 							</button>
 						</li>
 					) ) }
 
-					<li className="uagb-tab uagb-tabs__add-tab">
+					<li className="fb-tab fb-tabs-add-tab">
 						<button type="button" onClick={ addTab }>+ Add Tab</button>
 					</li>
 				</ul>

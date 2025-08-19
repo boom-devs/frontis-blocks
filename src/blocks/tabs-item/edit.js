@@ -12,9 +12,9 @@ const Render = memo( ( { attributes } ) => {
 
 	return (
 		<div
-			className={ `uagb-tabs__body-container uagb-inner-tab-${ id }` }
+			className={ `fb-tabs-body-container fb-inner-tab-${ id }` }
 			style={ { display: isActive ? 'block' : 'none' } }
-			aria-labelledby={ `uagb-tabs__tab${ id }` }
+			aria-labelledby={ `fb-tabs-tab${ id }` }
 		>
 			<InnerBlocks
 				template={ [

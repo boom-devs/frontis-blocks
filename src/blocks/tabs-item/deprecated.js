@@ -13,13 +13,13 @@ const deprecated = [
 		save( props ) {
 			const { attributes, className } = props;
 
-			const { id, block_id } = attributes;
+			const { id, blockId } = attributes;
 
 			return (
-				<div className="uagb-tabs__body-container">
+				<div className="fb-tabs-body-container">
 					<div
-						className={ classnames( className, `uagb-blocks__${ block_id }`, 'uagb-tabs__body' ) }
-						aria-labelledby={ `uagb-tabs__tab${ id }` }
+						className={ classnames( className, `uagb-blocks__${ blockId }`, 'fb-tabs-body' ) }
+						aria-labelledby={ `fb-tabs-tab${ id }` }
 					>
 						<InnerBlocks.Content />
 					</div>
@@ -31,13 +31,13 @@ const deprecated = [
 		attributes,
 		save( props ) {
 			const { attributes, className } = props;
-			const { id, block_id } = attributes;
+			const { id, blockId } = attributes;
 
 			return (
-				<div className={ `uagb-tabs__body-container uagb-tabs__inner-tab uagb-inner-tab-${ id }` }>
+				<div className={ `fb-tabs-body-container fb-tabs-inner-tab fb-inner-tab-${ id }` }>
 					<div
-						className={ classnames( className, `uagb-blocks__${ block_id }`, 'uagb-tabs__body' ) }
-						aria-labelledby={ `uagb-tabs__tab${ id }` }
+						className={ classnames( className, `uagb-blocks__${ blockId }`, 'fb-tabs-body' ) }
+						aria-labelledby={ `fb-tabs-tab${ id }` }
 					>
 						<InnerBlocks.Content />
 					</div>
