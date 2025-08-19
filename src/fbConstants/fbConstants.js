@@ -27,6 +27,11 @@ export const NAVIGATION_LAYOUT = [
 	{ label: __('Vertical', 'frontis-blocks'), value: 'is-vertical' },
 ];
 
+export const TABS_LAYOUT = [
+	{ label: __('Horizontal', 'frontis-blocks'), value: 'horizontal' },
+	{ label: __('Vertical', 'frontis-blocks'), value: 'vertical' },
+];
+
 export const ICON_ALIGN = [
 	{ label: __("None"), value: "none" },
 	{ label: __("Icon"), value: "icon" },

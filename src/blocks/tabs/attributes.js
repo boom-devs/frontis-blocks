@@ -6,16 +6,17 @@ const attributes = {
 		default: "",
 	},
 
-	tabHeaders: {
-		type: 'array',
-		default: [
-			__( 'Tab 1', 'frontis-blocks' ),
-			__( 'Tab 2', 'frontis-blocks' ),
-			__( 'Tab 3', 'frontis-blocks' ),
-		],
-	},
+    blockStyle: {
+        type: 'string',
+        default: '',
+    },
 
-	TabItems: {
+    tabLayoutSwitcher: {
+        type: 'string',
+        default: 'horizontal',
+    },
+
+	tabItems: {
         type: 'array',
         default: [
             // You can define some default items if needed
