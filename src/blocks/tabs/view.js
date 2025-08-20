@@ -1,87 +1,119 @@
-/**
- * Tabs frontend behavior (functional only)
- * - স্কোপড ভাবে প্রতিটি .fb-tabs-wrap এর ভেতরে কাজ করে
- * - ক্লিকে active ট্যাব বদলায়, aria-selected সেট করে, প্যানেল show/hide করে
- * - পুরো li element clickable
- */
+(function () {
+	function initTabs(root) {
+		if (!root) return;
 
-( function () {
-	function initTabs( root ) {
-		if ( !root ) return;
+		const tablist = root.querySelector('.fb-tabs-panel');
+		if (!tablist) return;
 
-		const tablist = root.querySelector( '.fb-tabs-panel' );
-		if ( !tablist ) return;
-
-		const tabs = [ ...tablist.querySelectorAll( '.fb-tabs-list' ) ];
-		const items = [ ...tablist.querySelectorAll( '.fb-tab' ) ];
-
+		// এখানে li elements নিচ্ছি কারণ save.js এ li তেই role="tab" দেওয়া
+		const tabItems = [...tablist.querySelectorAll('.fb-tab')]; // li elements
+		
 		// find child panels by class 'fb-tabs-body-container fb-inner-tab-{i}'
-		const panels = [ ...root.querySelectorAll( '.fb-tabs-body-container' ) ];
+		const panels = [...root.querySelectorAll('.fb-tabs-body-container')];
 
-		function setActive( index ) {
-			const max = Math.max( 0, tabs.length - 1 );
-			const i = Math.min( Math.max( index, 0 ), max );
+		function setActive(index) {
+			const max = Math.max(0, tabItems.length - 1);
+			const i = Math.min(Math.max(index, 0), max);
 
 			// update dataset for persistence
-			root.dataset.tabActive = String( i );
+			root.dataset.tabActive = String(i);
 
-			// update tab states
-			items.forEach( ( li, idx ) => {
-				if ( idx === i ) li.classList.add( 'fb-tabs-active' );
-				else li.classList.remove( 'fb-tabs-active' );
-			} );
-			tabs.forEach( ( a, idx ) => {
-				a.setAttribute( 'aria-selected', String( idx === i ) );
-			} );
+			// update tab states - li elements এর জন্য
+			tabItems.forEach((li, idx) => {
+				const isActive = idx === i;
+				
+				// CSS class update
+				if (isActive) {
+					li.classList.add('fb-tabs-active');
+				} else {
+					li.classList.remove('fb-tabs-active');
+				}
+				
+				// ARIA attributes update
+				li.setAttribute('aria-selected', String(isActive));
+				li.setAttribute('tabIndex', isActive ? '0' : '-1');
+			});
 
-			// update panels visibility — assumes child has .fb-inner-tab-{id} where id === index
-			panels.forEach( ( panelEl, idx ) => {
-				// if panel has class 'fb-inner-tab-{idx}' show it, else hide
-				// fallback: match by id attribute '#fb-tabs-panel{idx}'
-				const matchByClass = panelEl.classList.contains( `fb-inner-tab-${ i }` );
-				const matchById = panelEl.id === `fb-tabs-panel${ i }`;
-				const isActive = matchByClass || matchById || idx === i;
-
+			// update panels visibility
+			panels.forEach((panelEl, idx) => {
+				// Multiple matching strategies
+				const matchByClass = panelEl.classList.contains(`fb-inner-tab-${i}`);
+				const matchById = panelEl.id === `fb-tabs-panel-${root.dataset.blockId || 'x'}-${i}`;
+				const fallbackMatch = idx === i;
+				
+				const isActive = matchByClass || matchById || fallbackMatch;
 				panelEl.style.display = isActive ? 'block' : 'none';
-			} );
+			});
 		}
 
-		// initial
-		const initial = parseInt( root.getAttribute( 'data-tab-active' ) || '0', 10 ) || 0;
-		setActive( initial );
+		// initial setup
+		const initial = parseInt(root.getAttribute('data-tab-active') || '0', 10) || 0;
+		setActive(initial);
 
-		// click handlers - এখন li element এ
-		items.forEach( ( li, idx ) => {
-			li.addEventListener( 'click', function ( e ) {
-				// allow hash but prevent default scroll jump
+		// click handlers - li element এ
+		tabItems.forEach((li, idx) => {
+			li.addEventListener('click', function (e) {
+				// prevent default scroll jump
 				e.preventDefault();
-				setActive( idx );
-			} );
-		} );
-
-		// keyboard handlers - button এ রাখি accessibility এর জন্য
-		tabs.forEach( ( a, idx ) => {
-			a.addEventListener( 'keydown', function ( e ) {
-				// simple left/right keyboard nav (optional)
-				if ( e.key === 'ArrowLeft' ) {
-					e.preventDefault();
-					setActive( Math.max( 0, idx - 1 ) );
-				} else if ( e.key === 'ArrowRight' ) {
-					e.preventDefault();
-					setActive( Math.min( tabs.length - 1, idx + 1 ) );
+				setActive(idx);
+				
+				// focus management for accessibility
+				li.focus();
+			});
+			
+			// keyboard navigation
+			li.addEventListener('keydown', function (e) {
+				let newIndex = idx;
+				
+				switch (e.key) {
+					case 'ArrowLeft':
+						e.preventDefault();
+						newIndex = idx > 0 ? idx - 1 : tabItems.length - 1;
+						break;
+					case 'ArrowRight':
+						e.preventDefault();
+						newIndex = idx < tabItems.length - 1 ? idx + 1 : 0;
+						break;
+					case 'Home':
+						e.preventDefault();
+						newIndex = 0;
+						break;
+					case 'End':
+						e.preventDefault();
+						newIndex = tabItems.length - 1;
+						break;
+					case 'Enter':
+					case ' ': // Space key
+						e.preventDefault();
+						setActive(idx);
+						return;
+					default:
+						return; // exit early for other keys
 				}
-			} );
-		} );
+				
+				setActive(newIndex);
+				tabItems[newIndex].focus();
+			});
+		});
 	}
 
 	function initAll() {
-		const roots = document.querySelectorAll( '.fb-tabs-wrap' );
-		roots.forEach( initTabs );
+		const roots = document.querySelectorAll('.fb-tabs-wrapper'); // save.js অনুযায়ী wrapper class
+		roots.forEach(root => {
+			const tabsWrap = root.querySelector('.fb-tabs-wrap');
+			if (tabsWrap) {
+				initTabs(tabsWrap);
+			}
+		});
 	}
 
-	if ( document.readyState === 'loading' ) {
-		document.addEventListener( 'DOMContentLoaded', initAll );
+	// Initialize when DOM is ready
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initAll);
 	} else {
 		initAll();
 	}
-} )();
+
+	// Re-initialize for dynamic content (if needed)
+	window.fbTabsReinit = initAll;
+})();

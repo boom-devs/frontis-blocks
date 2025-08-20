@@ -13,10 +13,10 @@ import {
 } from '@Constants/fbConstants';
 
 
-export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, handleDuplicateItem, index }) {
+export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, handleDuplicateItem, index, showIcon, showTitle }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
-    const [itemTabIconAlign, setItemTabIconAlign] = useState(ICON_IMAGE_ALIGN[0].value);
+    const [itemTabIconAlign, setItemTabIconAlign] = useState(ICON_IMAGE_ALIGN[1].value);
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -90,49 +90,54 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
             {isOpen && (
                 <div className="sortable-item-content">
 
-                    <TextControl
-                        label={__("Title", "frontis-blocks")}
-                        value={item.title}
-                        onChange={(value) => handleChangeItem(item.id, 'title', value)}
-                        help={__("Leave blank to hide Title", "frontis-blocks")}
-                    />
+                    
+                    {showTitle && (
+                        <TextControl
+                            label={__("Title", "frontis-blocks")}
+                            value={item.title}
+                            onChange={(value) => handleChangeItem(item.id, 'title', value)}
+                            help={__("Leave blank to hide Title", "frontis-blocks")}
+                        />
+                    )}
 
-                    <div className='fb-tab-icon-wrapper'> 
-                        <BaseControl
-                            label={__("Icon", "frontis-blocks")}
-                            className="fb-tab-icon"
-                        >
-                            <ButtonGroup className="fb-tab-icon-group-btn">
-                                {ICON_IMAGE_ALIGN.map((alignItem, key) => (
-                                    <Button
-                                        key={key}
-                                        onClick={() => handleAlignmentChange(alignItem.value)}
-                                        className={`fb-tab-icon-single-btn ${itemTabIconAlign === alignItem.value ? 'active' : ''}`}
-                                    >
-                                        {alignItem.label}
-                                    </Button>
-                                ))}
-                            </ButtonGroup>
-                            {itemTabIconAlign === 'icon' && (
-                                <FBIconPicker value={item.tabIcon} setIconHandler={iconHandler} />
-                            )}
+                    {showIcon && (
+                        <div className='fb-tab-icon-wrapper'> 
+                            <BaseControl
+                                label={__("Icon", "frontis-blocks")}
+                                className="fb-tab-icon"
+                            >
+                                <ButtonGroup className="fb-tab-icon-group-btn">
+                                    {ICON_IMAGE_ALIGN.map((alignItem, key) => (
+                                        <Button
+                                            key={key}
+                                            onClick={() => handleAlignmentChange(alignItem.value)}
+                                            className={`fb-tab-icon-single-btn ${itemTabIconAlign === alignItem.value ? 'active' : ''}`}
+                                        >
+                                            {alignItem.label}
+                                        </Button>
+                                    ))}
+                                </ButtonGroup>
+                                {itemTabIconAlign === 'icon' && (
+                                    <FBIconPicker value={item.tabIcon} setIconHandler={iconHandler} />
+                                )}
 
-                            {itemTabIconAlign === 'image' && (
-                                <>
-                                    <FB_ImageControl
-                                        globalImageUrl={item.tabIconImageUrl}
-                                        setglobalImageUrl={(value) => handleChangeItem(item.id, 'tabIconImageUrl', value)}
-                                        globalImageAlt={item.tabIconImageAlt}
-                                        setglobalImageAlt={(value) => handleChangeItem(item.id, 'tabIconImageAlt', value)}
-                                        globalImageID={item.tabIconImageID}
-                                        setglobalImageID={(value) => handleChangeItem(item.id, 'tabIconImageID', value)}
-                                        isImageSize={false}
-                                    />
-                                </>
+                                {itemTabIconAlign === 'image' && (
+                                    <>
+                                        <FB_ImageControl
+                                            globalImageUrl={item.tabIconImageUrl}
+                                            setglobalImageUrl={(value) => handleChangeItem(item.id, 'tabIconImageUrl', value)}
+                                            globalImageAlt={item.tabIconImageAlt}
+                                            setglobalImageAlt={(value) => handleChangeItem(item.id, 'tabIconImageAlt', value)}
+                                            globalImageID={item.tabIconImageID}
+                                            setglobalImageID={(value) => handleChangeItem(item.id, 'tabIconImageID', value)}
+                                            isImageSize={false}
+                                        />
+                                    </>
 
-                            )}
-                        </BaseControl>
-                    </div>
+                                )}
+                            </BaseControl>
+                        </div>
+                    )}
                 </div>
             )}
         </li>

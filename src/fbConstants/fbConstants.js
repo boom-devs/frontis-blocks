@@ -37,6 +37,13 @@ export const ICON_POSITION = [
 	{ label: __("Right"), value: "right" },
 ];
 
+export const MULTI_ICON_POSITION = [
+	{ label: __("Top", "frontis-blocks"), value: "top" },
+	{ label: __("Right", "frontis-blocks"), value: "right" },
+	{ label: __("Bottom", "frontis-blocks"), value: "bottom" },
+	{ label: __("Left", "frontis-blocks"), value: "left" },
+];
+
 export const ICON_ALIGN = [
 	{ label: __("None"), value: "none" },
 	{ label: __("Icon"), value: "icon" },
