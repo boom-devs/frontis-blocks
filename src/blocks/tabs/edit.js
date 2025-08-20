@@ -5,6 +5,7 @@ import { createBlock, cloneBlock } from '@wordpress/blocks';
 import { InnerBlocks, RichText, useBlockProps, useInnerBlocksProps, BlockControls } from '@wordpress/block-editor';
 import { select, dispatch, subscribe } from '@wordpress/data';
 import { arrayMove } from '@dnd-kit/sortable';
+import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
 import './editor.scss';
 
@@ -17,6 +18,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		tabItems,
 		tabActive,
 		tabActiveFrontend,
+		tabIconPosition,
 	} = attributes;
 
 
@@ -48,6 +50,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		const newItem = {
 			id: newIndex,
 			title: `Tab ${newIndex + 1}`,
+			tabIcon: 'bookmark',
+			tabIconAlign: 'none',
+			tabIconImageUrl: '',
+			tabIconImageAlt: '',
+			tabIconImageID: '',
 		};
 	
 		// 1) insert child block at the right position
@@ -88,14 +95,36 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-    const handleChangeItem = (id, key, value) => {
+    // const handleChangeItem = (id, key, value) => {
+    //     const updatedItems = tabsItemList.map(item => {
+    //         if (item.id === id) {
+    //             return { ...item, [key]: value };
+    //         }
+    //         return item;
+    //     });
+    //     updateTabItems(updatedItems);
+    // };
+
+
+	const handleChangeItem = (id, key, value) => {
         const updatedItems = tabsItemList.map(item => {
             if (item.id === id) {
+                if (key === 'tabIconImageID') { 
+                    // Get the full image data from WordPress media library
+                    const image = wp.media.attachment(value).toJSON();
+                    return {
+                        ...item,
+                        [key]: value,
+                        'tabIconImageUrl': image.url,
+                        'tabIconImageAlt': image.alt || ''
+                    };
+                }
                 return { ...item, [key]: value };
             }
             return item;
         });
-        updateTabItems(updatedItems);
+		updateTabItems(updatedItems);
+        setAttributes({ tabItems: updatedItems }); 
     };
 
 	const handleDeleteItem = (idOrIndex) => {
@@ -292,6 +321,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	return (
 		<>
 		<div {...blockProps} >
+
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
@@ -303,38 +333,79 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				handleDuplicateItem={handleDuplicateItem}
                 tabsItemList={tabsItemList}
 			/>
+
 			{renderTabsToolbarControls()}
+
 			<div className="fb-tabs-wrap">
 				<ul className="fb-tabs-panel" role="tablist">
-					{ tabItems.map( ( { title }, i ) => (
-						<li
-							key={ i }
-							className={ `fb-tab ${ tabActive === i ? 'fb-tabs-active' : '' }` }
-							id={ `fb-tabs-tab${ i }` }
-							role="tab"
-						>
-							<button
-								type="button"
-								className="fb-tabs-list"
-								onClick={ () => updateActiveTab( i ) }
-								aria-selected={ tabActive === i }
-								aria-controls={ `fb-tabs-panel${ i }` }
-								data-tab={ i }
-							>
-								<RichText
-									tagName="span"
-									value={ title }
-									onChange={ ( val ) => {
-										const next = [ ...tabItems ];
-										next[ i ].title = val;
-										setAttributes( { tabItems: next } );
-									} }
-									placeholder={__("Title…", "frontis-blocks")}
-									allowedFormats={ [ 'core/bold', 'core/italic' ] }
-								/>
-							</button>
-						</li>
-					) ) }
+				{tabItems.map((item, index) => (
+					<li
+					key={item.id ?? index}
+					className={`fb-tab ${tabActive === index ? 'fb-tabs-active' : ''}`}
+					role="tab"
+					aria-selected={tabActive === index}
+					aria-controls={`fb-tabs-panel${index}`}
+					tabIndex={tabActive === index ? 0 : -1}
+					data-tab={index}
+					onClick={() => updateActiveTab(index)}
+					style={{ cursor: 'pointer' }}
+					>
+						{tabIconPosition == 'left' && (
+							<>
+								{item.tabIconAlign !== 'none' && (
+									<div className="fb-tab-icon-image-box">
+										{item.tabIconAlign === 'icon' || item.tabIconAlign === undefined ? (
+										<span className="fb-tab-icon">
+											{item.tabIcon ? renderSVG(item.tabIcon) : null}
+										</span>
+										) : item.tabIconAlign === 'image' && item.tabIconImageUrl ? (
+										<div className="fb-tab-icon-image">
+											<img
+											src={item.tabIconImageUrl}
+											alt={item.tabIconImageAlt ?? ''} 
+											/>
+										</div>
+										) : null}
+									</div>
+								)}
+							</>
+						)}
+
+						<RichText
+							tagName="span"
+							value={item.title}
+							onChange={(val) => {
+								const next = [...tabItems];
+								next[index] = { ...next[index], title: val }; 
+								setAttributes({ tabItems: next });
+							}}
+							className="fb-tab-title"
+							placeholder={__("Title…", "frontis-blocks")}
+							allowedFormats={['core/bold', 'core/italic']}
+						/>
+
+						{tabIconPosition == 'right' && (
+							<>
+								{item.tabIconAlign !== 'none' && (
+									<div className="fb-tab-icon-image-box">
+										{item.tabIconAlign === 'icon' || item.tabIconAlign === undefined ? (
+										<span className="fb-tab-icon">
+											{item.tabIcon ? renderSVG(item.tabIcon) : null}
+										</span>
+										) : item.tabIconAlign === 'image' && item.tabIconImageUrl ? (
+										<div className="fb-tab-icon-image">
+											<img
+											src={item.tabIconImageUrl}
+											alt={item.tabIconImageAlt ?? ''} 
+											/>
+										</div>
+										) : null}
+									</div>
+								)}
+							</>
+						)}
+					</li>
+				))}
 				</ul>
 
                 <div {...innerBlocksProps} />
