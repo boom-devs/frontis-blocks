@@ -22,6 +22,7 @@ import {
 import { 
     TABS_LAYOUT,
     ICON_POSITION,
+    MULTI_ICON_POSITION,
     BORDER_STYLES,
 } from '@Constants/fbConstants';
 
@@ -40,6 +41,7 @@ import FB_VisibilityControl from '@Components/visibility-control';
 import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
+import FB_HtmlTagControl from '@Components/html-tag-control';
 import SortableItem from './sortableItem';
 
 import './editor.scss';
@@ -51,6 +53,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         blockStyle,
         tabLayoutSwitcher,
         tabsItems,
+        tabTitleTag,
+
+        showIcon,
+        showTitle,
+        fillTitlesWrapper,
 
         /** Tab Icon Styles */
         tabIconPosition,
@@ -98,8 +105,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabIconPaddingLink,
         /** End Icon Padding */
 
-        tabIconGapSize,
-        tabIconGapUnits,
         tabIconRotateSwitcher,
         tabIconRotate,
         tabIconRotateHover,
@@ -353,6 +358,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         .${blockId} .fb-tabs-wrap {
             display: flex;
             flex-direction: ${tabLayoutSwitcher === 'horizontal' ? 'column' : 'row'};
+            max-width: 100%;
         }
         .${blockId} .fb-tabs-wrap ul.fb-tabs-panel {
             display: flex;
@@ -360,27 +366,45 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             flex-wrap: wrap;
             margin: 0;
             padding: 0;
+            gap: 10px;
+        }
+        .${blockId} .fb-tabs-wrap.horizontal ul.fb-tabs-panel {
             flex-direction: row;
         }
+
+        .${blockId} .fb-tabs-wrap.vertical ul.fb-tabs-panel {
+            flex-direction: column;
+        }
+
         .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li {
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            text-align: center;
             position: relative;
-            flex: 1;
-            flex-direction: row;
             padding: 10px;
             gap: 10px;
         }
+        .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.left ,
+        .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.right {
+            flex-direction: row;
+        }
+
+        .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.top ,
+        .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.bottom {
+            flex-direction: column;
+        }
+
         .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active {
             background-color: #f0f0f0;
         }
+        ${fillTitlesWrapper && `
+            .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li {
+                flex: 1;
+            }
+        `}
 
         .${blockId} .fb-tab-icon-image-box {
-			${tabIconPosition === 'left' && tabIconGapSize.Desktop ? `margin-right: ${tabIconGapSize.Desktop}${tabIconGapUnits.Desktop};` : ''}
-			${tabIconPosition === 'right' && tabIconGapSize.Desktop ? `margin-left: ${tabIconGapSize.Desktop}${tabIconGapUnits.Desktop};` : ''}
 			${tabIconNormalBackgroundType === 'gradient' ? `   	
                 ${tabIconNormalCustomGradientSwitcher && tabIconNormalCustomGradientInputValue ? `background: ${tabIconNormalCustomGradientInputValue};` : `background: ${tabIconNormalGradientColor};`}
             `: `
@@ -428,6 +452,15 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 			transform: rotate(${tabIconImageRotateHover.Desktop}deg);
 		}
 
+
+        .${blockId} .fb-tabs-wrap .fb-tabs-body-wrap {
+            padding: 10px 15px;
+            border: 1px solid #EEEDF0;
+        }
+        .${blockId} .fb-tabs-wrap.vertical .fb-tabs-body-wrap {
+            flex: 1;
+        }
+
         @media only screen and (max-width: 1024px) {
 
         }
@@ -440,6 +473,10 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         blockStyle,
         tabLayoutSwitcher,
         tabsItems,
+        
+        showIcon,
+        showTitle,
+        fillTitlesWrapper,
 
         /** Tab Icon Styles */
         tabIconPosition,
@@ -487,8 +524,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabIconPaddingLink,
         /** End Icon Padding */
 
-        tabIconGapSize,
-        tabIconGapUnits,
         tabIconRotateSwitcher,
         tabIconRotate,
         tabIconRotateHover,
@@ -515,9 +550,27 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 	const generalControls = (
         <>
             <PanelBody 
-                title={__("General Settings", "frontis-blocks")} 
+                title={__("Tabs Settings", "frontis-blocks")} 
                 initialOpen={true}
             >
+                <ToggleControl
+                    label={ __( 'Show Icon', 'frontis-blocks' ) }
+                    checked={ showIcon }  
+                    onChange={(value) => setAttributes({ showIcon: value })}
+                />
+
+                <ToggleControl
+                    label={ __( 'Show Title', 'frontis-blocks' ) }
+                    checked={ showTitle }
+                    onChange={(value) => setAttributes({ showTitle: value })}
+                />
+
+                <ToggleControl
+                    label={ __( 'Fill Titles Wrapper', 'frontis-blocks' ) }
+                    checked={ fillTitlesWrapper }
+                    onChange={(value) => setAttributes({ fillTitlesWrapper: value })}
+                />
+
                 <FB_SwitcherControl
                     label={__("Layout", "frontis-blocks")}
                     options={TABS_LAYOUT}
@@ -541,6 +594,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                                         handleDeleteItem={handleDeleteItem}
                                         handleDuplicateItem={handleDuplicateItem}
                                         index={index}
+                                        showIcon={showIcon}
+                                        showTitle={showTitle}
                                     />
                                 ))}
                             </ul>
@@ -550,6 +605,21 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                         </Button>
                     </DndContext>
                 </div>
+
+                {showIcon && (
+                    <FB_SwitcherControl
+                        label={__("Icon Position", "frontis-blocks")}
+                        options={MULTI_ICON_POSITION}
+                        globalSwitcher={tabIconPosition}
+                        setGlobalSwitcher={(value) => setAttributes({ tabIconPosition: value })}
+                    />
+                )}
+
+                <FB_HtmlTagControl
+                    label={__("Tab Title Tag", "frontis-blocks")}
+                    globalHtmlTag={tabTitleTag}
+                    setGlobalHtmlTag={(value) => setAttributes({ tabTitleTag: value })}
+                />
 
             </PanelBody>
         </>
@@ -570,13 +640,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                 title={__("Icon Styles", "frontis-blocks")}
                 initialOpen={false}
             >
-
-                <FB_SwitcherControl
-                    label={__("Icon Position", "frontis-blocks")}
-                    options={ICON_POSITION}
-                    globalSwitcher={tabIconPosition}
-                    setGlobalSwitcher={(value) => setAttributes({ tabIconPosition: value })}
-                />
                 <FB_Range
                     min={1}
                     max={100}
@@ -714,19 +777,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                     spacingCombineBtnHandler={handleTabIconPaddingCombineBtn}
                     setAttributes={setAttributes}
                 />
-                <FB_Range
-                    min={0}
-                    max={100}
-                    label={__("Icon Gap", "frontis-blocks")}
-                    rangeValue={tabIconGapSize}
-                    onChangeHandler={(value) => setAttributes({ tabIconGapSize: value })}
-                    rangeUnitHandler={(value) => setAttributes({ tabIconGapUnits: value })}
-                    deviceType={deviceType}
-                    units={tabIconGapUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={''}
-                />
 
                 <FB_SwitcherControl
                     label={__("Icon Rotation", "frontis-blocks")}
@@ -802,20 +852,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                     setAttributes={setAttributes}
                     rangeStep={1}
                     resetFallbackValue={20}
-                />
-                
-                <FB_Range
-                    min={0}
-                    max={100}
-                    label={__("Image Gap", "frontis-blocks")}
-                    rangeValue={tabIconGapSize}
-                    onChangeHandler={(value) => setAttributes({ tabIconGapSize: value })}
-                    rangeUnitHandler={(value) => setAttributes({ tabIconGapUnits: value })}
-                    deviceType={deviceType}
-                    units={tabIconGapUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={''}
                 />
 
 

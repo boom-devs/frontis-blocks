@@ -4,9 +4,13 @@ import renderSVG from "@Components/icon-picker/components/icon-picker/controls/r
 export default function save({ attributes }) {
   const {
     blockId,
-    tabItems = [],
-    tabActiveFrontend = 0,
+    tabItems,
+    tabActiveFrontend,
+    tabTitleTag,
     tabIconPosition,
+    showIcon,
+    showTitle,
+    tabLayoutSwitcher,
   } = attributes;
 
   const blockProps = useBlockProps.save({
@@ -16,7 +20,7 @@ export default function save({ attributes }) {
 
   return (
     <div {...blockProps}>
-      <div className="fb-tabs-wrap">
+      <div className={`fb-tabs-wrap ${tabLayoutSwitcher}`}>
         <ul className="fb-tabs-panel" role="tablist">
           {tabItems.map((item, index) => {
             const isActive = tabActiveFrontend === index;
@@ -26,10 +30,16 @@ export default function save({ attributes }) {
             return (
               <li
                 key={item.id ?? index}
-                className={`fb-tab ${isActive ? 'fb-tabs-active' : ''}`}
-                role="presentation"
+                className={`fb-tab ${isActive ? 'fb-tabs-active' : ''} ${tabIconPosition}`}
+                role="tab"
+                id={tabId}
+                aria-selected={isActive}
+                aria-controls={panelId}
+                tabIndex={isActive ? 0 : -1}
+                data-tab={index}
               >
-                {tabIconPosition === 'left' && item.tabIconAlign !== 'none' && (
+                {/* Left Icon */}
+                {tabIconPosition === 'left' && item.tabIconAlign !== 'none' && showIcon && (
                   <div className="fb-tab-icon-image-box" aria-hidden="true">
                     {(item.tabIconAlign === 'icon' || item.tabIconAlign === undefined) ? (
                       <span className="fb-tab-icon">
@@ -48,20 +58,16 @@ export default function save({ attributes }) {
                   </div>
                 )}
 
-                <button
-                  type="button"
-                  className="fb-tabs-list"
-                  role="tab"
-                  id={tabId}
-                  aria-selected={isActive}
-                  aria-controls={panelId}
-                  tabIndex={isActive ? 0 : -1}
-                  data-tab={index}
-                >
-                  <RichText.Content tagName="span" value={item.title} />
-                </button>
+                {showTitle && (
+                  <RichText.Content 
+                    tagName={tabTitleTag}
+                    value={item.title}
+                    className="fb-tab-title"
+                  />
+                )}
 
-                {tabIconPosition === 'right' && item.tabIconAlign !== 'none' && (
+                {/* Right Icon */}
+                {tabIconPosition === 'right' && item.tabIconAlign !== 'none' && showIcon && (
                   <div className="fb-tab-icon-image-box" aria-hidden="true">
                     {(item.tabIconAlign === 'icon' || item.tabIconAlign === undefined) ? (
                       <span className="fb-tab-icon">
@@ -85,7 +91,6 @@ export default function save({ attributes }) {
         </ul>
 
         <div className="fb-tabs-body-wrap">
-          {/* নোট: প্রতিটি ট্যাব প্যানেল যদি আলাদা ID চায়, সেগুলো InnerBlocks-এর ভিতরের টেমপ্লেটে দিন */}
           <InnerBlocks.Content />
         </div>
       </div>

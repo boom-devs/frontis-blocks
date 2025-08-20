@@ -23,7 +23,7 @@ const attributes = {
             { id: 'item-1',
                 title: 'Tab 1',
                 tabIcon: 'bookmark',
-                tabIconAlign: 'none',
+                tabIconAlign: 'icon',
                 tabIconImageUrl: '',
                 tabIconImageAlt: '',
                 tabIconImageID: '',
@@ -31,7 +31,7 @@ const attributes = {
 			{ id: 'item-2',
                 title: 'Tab 2',
                 tabIcon: 'bookmark',
-                tabIconAlign: 'none',
+                tabIconAlign: 'icon',
                 tabIconImageUrl: '',
                 tabIconImageAlt: '',
                 tabIconImageID: '',
@@ -39,7 +39,7 @@ const attributes = {
 			{ id: 'item-3',
                 title: 'Tab 3',
                 tabIcon: 'bookmark',
-                tabIconAlign: 'none',
+                tabIconAlign: 'icon',
                 tabIconImageUrl: '',
                 tabIconImageAlt: '',
                 tabIconImageID: '',
@@ -62,7 +62,7 @@ const attributes = {
                 },
                 tabIconAlign: {
                     type: 'string',
-                    default: 'none',
+                    default: 'icon',
                 },
                 tabIconImageUrl: {
                     type: 'string',
@@ -89,6 +89,26 @@ const attributes = {
 		type: 'number',
 		default: 0,
 	},
+
+    showIcon: {
+        type: 'boolean',
+        default: false,
+    },
+
+    showTitle: {
+        type: 'boolean',
+        default: true,
+    },
+
+    fillTitlesWrapper: {
+        type: 'boolean',
+        default: true,
+    },
+
+    tabTitleTag: {
+        type : 'string',
+        default: 'span'
+    },
 
     /** Tab Icon Styles */
     tabIconPosition: {
@@ -306,23 +326,7 @@ const attributes = {
         default: true
     },
     /** End Icon Padding */
-
-    tabIconGapSize: {
-        type: 'object',
-        default: {
-            Desktop: '10',
-            Tablet: '10',
-            Mobile: '10'
-        }
-    },
-    tabIconGapUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
+    
     tabIconRotateSwitcher: {
         type: 'string',
         default: 'normal',

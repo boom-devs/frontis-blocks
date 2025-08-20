@@ -18,7 +18,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		tabItems,
 		tabActive,
 		tabActiveFrontend,
+		tabTitleTag,
 		tabIconPosition,
+		showIcon,
+		showTitle,
+		tabLayoutSwitcher,
 	} = attributes;
 
 
@@ -51,7 +55,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			id: newIndex,
 			title: `Tab ${newIndex + 1}`,
 			tabIcon: 'bookmark',
-			tabIconAlign: 'none',
+			tabIconAlign: 'icon',
 			tabIconImageUrl: '',
 			tabIconImageAlt: '',
 			tabIconImageID: '',
@@ -336,12 +340,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 			{renderTabsToolbarControls()}
 
-			<div className="fb-tabs-wrap">
+			<div className={`fb-tabs-wrap ${tabLayoutSwitcher}`}>
 				<ul className="fb-tabs-panel" role="tablist">
 				{tabItems.map((item, index) => (
 					<li
 					key={item.id ?? index}
-					className={`fb-tab ${tabActive === index ? 'fb-tabs-active' : ''}`}
+					className={`fb-tab ${tabActive === index ? 'fb-tabs-active' : ''} ${tabIconPosition}`}
 					role="tab"
 					aria-selected={tabActive === index}
 					aria-controls={`fb-tabs-panel${index}`}
@@ -350,7 +354,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					onClick={() => updateActiveTab(index)}
 					style={{ cursor: 'pointer' }}
 					>
-						{tabIconPosition == 'left' && (
+						{(tabIconPosition == 'left' || tabIconPosition == 'top') && showIcon && (
 							<>
 								{item.tabIconAlign !== 'none' && (
 									<div className="fb-tab-icon-image-box">
@@ -371,20 +375,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							</>
 						)}
 
-						<RichText
-							tagName="span"
-							value={item.title}
-							onChange={(val) => {
-								const next = [...tabItems];
-								next[index] = { ...next[index], title: val }; 
-								setAttributes({ tabItems: next });
-							}}
-							className="fb-tab-title"
-							placeholder={__("Title…", "frontis-blocks")}
-							allowedFormats={['core/bold', 'core/italic']}
-						/>
+						{showTitle && (
+							<RichText
+								tagName={tabTitleTag}
+								value={item.title}
+								onChange={(val) => {
+									const next = [...tabItems];
+									next[index] = { ...next[index], title: val }; 
+									setAttributes({ tabItems: next });
+								}}
+								className="fb-tab-title"
+								placeholder={__("Title…", "frontis-blocks")}
+								allowedFormats={['core/bold', 'core/italic']}
+							/>
+						)}
 
-						{tabIconPosition == 'right' && (
+						{(tabIconPosition == 'right' || tabIconPosition == 'bottom') && showIcon && (
 							<>
 								{item.tabIconAlign !== 'none' && (
 									<div className="fb-tab-icon-image-box">
