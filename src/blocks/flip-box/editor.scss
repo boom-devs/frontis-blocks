@@ -20,11 +20,11 @@
 			height: 100%;
 			min-height: 310px;
 			backface-visibility: hidden;
-			-webkit-backface-visibility: hidden;
+			-wfbkit-backface-visibility: hidden;
 			-moz-backface-visibility: hidden;
 			transform-style: preserve-3d;
 			will-change: transform;
-			-webkit-font-smoothing: antialiased;
+			-wfbkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;
 			box-sizing: border-box;
 
@@ -35,10 +35,10 @@
 				position: relative;
 				width: 100%;
 				backface-visibility: hidden;
-				-webkit-backface-visibility: hidden;
+				-wfbkit-backface-visibility: hidden;
 				transform: translateZ(0);
-				-webkit-transform: translateZ(0);
-				-webkit-perspective: 1000;
+				-wfbkit-transform: translateZ(0);
+				-wfbkit-perspective: 1000;
 
 				.fb-flip-media-container,
 				.fb-flip-back-media-container {
@@ -62,7 +62,7 @@
 			.fb-flipbox-front,
 			.fb-flipbox-back {
 				backface-visibility: hidden;
-				-webkit-backface-visibility: hidden;
+				-wfbkit-backface-visibility: hidden;
 				transition: opacity 0.3s ease, visibility 0.3s ease;
 			}
 
@@ -72,81 +72,81 @@
 		}
 
 		// Flip animation styles
-		&.flip-left:hover {
-			transform: rotateY(-180deg);
-		}
+		// &.flip-left:hover {
+		// 	transform: rotateY(-180deg);
+		// }
 
-		&.flip-right:hover {
-			transform: rotateY(180deg);
-		}
+		// &.flip-right:hover {
+		// 	transform: rotateY(180deg);
+		// }
 
-		&.flip-up {
-			.fb-flipbox-back {
-				transform: rotateX(-180deg);
-			}
+		// &.flip-up {
+		// 	.fb-flipbox-back {
+		// 		transform: rotateX(-180deg);
+		// 	}
 
-			&:hover {
-				transform: rotateX(180deg);
-			}
-		}
+		// 	&:hover {
+		// 		transform: rotateX(180deg);
+		// 	}
+		// }
 
-		&.flip-down {
-			.fb-flipbox-back {
-				transform: rotateX(180deg);
-			}
+		// &.flip-down {
+		// 	.fb-flipbox-back {
+		// 		transform: rotateX(180deg);
+		// 	}
 
-			&:hover {
-				transform: rotateX(-180deg);
-			}
-		}
+		// 	&:hover {
+		// 		transform: rotateX(-180deg);
+		// 	}
+		// }
 
-		&.zoom-in:hover {
-			transform: scale(1.1);
+		// &.zoom-in:hover {
+		// 	transform: scale(1.1);
 
-			.fb-flipbox-front {
-				opacity: 0;
-				z-index: 1;
-			}
+		// 	.fb-flipbox-front {
+		// 		opacity: 0;
+		// 		z-index: 1;
+		// 	}
 
-			.fb-flipbox-back {
-				opacity: 1;
-				z-index: 5;
-				transform: none;
-			}
-		}
+		// 	.fb-flipbox-back {
+		// 		opacity: 1;
+		// 		z-index: 5;
+		// 		transform: none;
+		// 	}
+		// }
 
-		&.zoom-out:hover {
-			transform: scale(0.8);
+		// &.zoom-out:hover {
+		// 	transform: scale(0.8);
 
-			.fb-flipbox-front {
-				opacity: 0;
-				z-index: 1;
-			}
+		// 	.fb-flipbox-front {
+		// 		opacity: 0;
+		// 		z-index: 1;
+		// 	}
 
-			.fb-flipbox-back {
-				opacity: 1;
-				z-index: 5;
-				transform: none;
-			}
-		}
+		// 	.fb-flipbox-back {
+		// 		opacity: 1;
+		// 		z-index: 5;
+		// 		transform: none;
+		// 	}
+		// }
 
-		&.fade {
-			.fb-flipbox-back {
-				z-index: 1;
-				transform: none;
-			}
+		// &.fade {
+		// 	.fb-flipbox-back {
+		// 		z-index: 1;
+		// 		transform: none;
+		// 	}
 
-			&:hover {
-				.fb-flipbox-front {
-					opacity: 0;
-				}
+		// 	&:hover {
+		// 		.fb-flipbox-front {
+		// 			opacity: 0;
+		// 		}
 
-				.fb-flipbox-back {
-					opacity: 1;
-					z-index: 5;
-				}
-			}
-		}
+		// 		.fb-flipbox-back {
+		// 			opacity: 1;
+		// 			z-index: 5;
+		// 		}
+		// 	}
+		// }
 
 		.fb-flip-button,
 		.fb-flip-back-button {
@@ -166,6 +166,44 @@
 
 		.fb-btn-icon-wrapper {
 			line-height: 0;
+		}
+	}
+}
+
+.fb-flip-box-wrapper{
+	&:hover {
+		.flip-up {
+			transform: rotateX(180deg) !important;
+		}
+
+		.flip-down {
+			transform: rotateX(-180deg) !important;
+		}
+
+		.flip-left {
+			transform: rotateY(-180deg) !important;
+		}
+
+		.flip-right {
+			transform: rotateY(180deg) !important;
+		}
+
+		.zoom-in {
+			transform: scale(1.1) !important;
+		}
+
+		.zoom-in .fb-flipbox-back {
+			z-index: 5;
+			transform: none;
+		}
+
+		.zoom-out {
+			transform: scale(0.8) !important;
+		}
+
+		.zoom-out .fb-flipbox-back {
+			z-index: 5;
+			transform: none;
 		}
 	}
 }
