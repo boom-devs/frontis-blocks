@@ -388,6 +388,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		flipBoxVRBottomOffset,
 		flipBoxVRBottomOffsetUnits,
 		flipSelectedSide,
+		isHover,
 		// Flip box front
 		flipBoxFrontHeight,
 		flipBoxFrontHeightUnits,
@@ -854,10 +855,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/avatar.png';
 	}
 
-	// Set default value
+	// Set default value for front image
 	useEffect(() => {
 		if (!flipMediaUrl) {
 			setAttributes({ flipMediaUrl: defaultImageUrl });
+		}
+	}, []);
+	// Set default value for back image
+	useEffect(() => {
+		if (!flipBackMediaUrl) {
+			setAttributes({ flipBackMediaUrl: defaultImageUrl });
 		}
 	}, []);
 
@@ -877,8 +884,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({ btnIconBack: iconName });
 	};
 
+	const getFlipTransform = (flipAnimationType) => {
+		switch (flipAnimationType) {
+			case "flip-left":
+				return "rotateY(-180deg)";
+			case "flip-right":
+				return "rotateY(180deg)";
+			case "flip-up":
+				return "rotateX(180deg)";
+			case "flip-down":
+				return "rotateX(-180deg)";
+			case "zoom-in":
+				return "scale(1.1)";
+			case "zoom-out":
+				return "scale(0.8)";
+			default:
+				return "none";
+		}
+	};
 	/** Start Preset Style **/
-
 	const changeflipBoxPreset = (selectedPreset) => {
 		const presetConfigurations = {
 			"preset-1": {
@@ -4451,6 +4475,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
 		  }
+			.fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper.fb-show-back {
+				transform:
+					${isHover || flipSelectedSide === "back" ? getFlipTransform(flipAnimationType) : "none"};
+			}
 		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
 				${flipBoxFrontWidth.Desktop ? `min-width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
@@ -4509,9 +4537,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${flipBoxBackBorderRadiusDesktop && flipBoxBackBorderRadiusDesktop.top ? `border-radius: ${flipBoxBackBorderRadiusDesktopWidth};` : ''}
 			background-repeat: none;
 			background-size: cover;
+			transform:  ${(flipAnimationType === "flip-up" && "rotateX(-180deg)") ||
+			(flipAnimationType === "flip-down" && "rotateX(180deg)") ||
+			((flipAnimationType === "zoom-in" ||
+				flipAnimationType === "zoom-out" ||
+				flipAnimationType === "fade") &&
+				"none")
+			};
+			${
+				isHover && (flipAnimationType === "zoom-in" || flipAnimationType === "zoom-out")
+					? "z-index: 5;"
+					: ""
+			}
 			transition: all .3s ease-in-out; 
 		  }
 		
+		  ${
+            (isHover || flipSelectedSide === "front") && flipAnimationType === "fade"
+                ? `
+			.fb-flip-box-wrapper.${blockID} .fb-flipper-wrapper.fb-show-back .fb-flipbox-front {
+				opacity: 0;
+			}
+			`
+                : ""
+        }
+		  ${
+            (isHover || flipSelectedSide === "back") && flipAnimationType === "fade"
+                ? `
+			.fb-flip-box-wrapper.${blockID} .fb-flipper-wrapper.fb-show-back .fb-flipbox-back {
+				opacity: 1;
+			}
+			`
+                : ""
+        }
 		  .fb-flip-box-wrapper.${blockID} .fb-flip-box-wrapper-inner {
 			${flipIconPosition === 'top' ? 'flex-direction: column;' : ''}
 			${flipIconPosition === 'bottom' ? 'flex-direction: column-reverse;' : ''}
@@ -5135,7 +5193,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			descTabMargin,
 			descMobileMargin,
 			descActiveMarginDevice,
-
+			flipAnimationType,
 			flipBoxPaddingUnits,
 			flipBoxDesktopPadding,
 			flipBoxTabPadding,
@@ -5284,6 +5342,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			flipMediaID,
 			flipMediaAlt,
 			flipMediaUrl,
+			flipBackMediaUrl,
 			mediaBackgroundType,
 			mediaClassicColor,
 			mediaGradientColor,
@@ -5533,7 +5592,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			flipBoxBackWidthUnits,
 			flipBoxBackHeight,
 			flipBoxBackHeightUnits,
-
+			isHover,
+			flipSelectedSide,
+			flipAnimationType,
+			flipBoxFrontGradientColor,
+			flipBoxFrontCustomGradientInputValue,
+			flipBoxBackGradientColor,
+			flipBoxBackCustomGradientInputValue,
 		],
 	);
 
@@ -6515,7 +6580,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<FB_Range
 														min={0}
 														max={500}
-														label={__("Icon Size", "frontis-blocks")}
+														label={__("Size", "frontis-blocks")}
 														rangeValue={mediaSize}
 														onChangeHandler={(value) =>
 															setAttributes({ mediaSize: value })
@@ -6997,7 +7062,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														)}
 
 														{/*Spacing*/}
-														<Heading>Spacing</Heading> 
+														<Heading>Spacing</Heading>
 														{/* Padding */}
 														<FB_Spacing
 															label={__("Padding", "frontis-blocks")}
@@ -7506,7 +7571,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<FB_Range
 														min={0}
 														max={500}
-														label={__("Icon Size", "frontis-blocks")}
+														label={__("Size", "frontis-blocks")}
 														rangeValue={mediaBackSize}
 														onChangeHandler={(value) =>
 															setAttributes({ mediaBackSize: value })

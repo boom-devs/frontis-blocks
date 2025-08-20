@@ -23,6 +23,10 @@ const attributes = {
         type: "boolean",
         default: false
     },
+    isHover: {
+        type: "boolean",
+        default: false,
+    },
     flipSelectedSide: {
         type: "string",
         default: "front"
