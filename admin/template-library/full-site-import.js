@@ -7,8 +7,8 @@ import { ClipLoader } from "react-spinners";
 import data from "./data.json";
 import TemplateHeader from "./template-header";
 import FullSiteImportSettingConfig from "./components/FullSiteImportSettingConfig";
-import FullSiteImportSetting from "./components/fullSiteImportSetting";
-import FullSiteImportContent from "./components/fullSiteImportContent";
+import FullSiteImportSetting from "./components/FullSiteImportSetting.js";
+import FullSiteImportContent from "./components/FullSiteImportContent.js";
 import { toast } from "react-toastify";
 
 const FullSiteImport = ({ template, onClose, onBack }) => {
@@ -88,6 +88,7 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                 pauseOnHover: true,
                 draggable: true,
             });
+            alert('Site imported successfully!');
             onClose();
         } catch (error) {
             console.error('Import failed:', error);

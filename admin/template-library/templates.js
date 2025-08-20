@@ -22,7 +22,7 @@ const PatternLibraryButton = () => {
 
     const handleClick = () => {
         setIsVisible(!isVisible);
-        console.log("isVisible:", !isVisible); 
+        console.log("isVisible:", !isVisible);
     };
 
     const importDemo = () => {
@@ -79,11 +79,10 @@ const PatternLibraryButton = () => {
     // State for active tab
     const schema = data.$schema;
     const [activeTab, setActiveTab] = useState(Object.keys(schema)[0]);
-    const [activeCategory, setActiveCategory] = useState({patterns: 'all', pages: 'all', sites: 'all', templateLibrary: 'my-cloud'});
-    const [isProTemplate, setIsProTemplate] = useState(false);
+    const [activeCategory, setActiveCategory] = useState({ patterns: 'all', pages: 'all', sites: 'all', templateLibrary: 'my-cloud' });
+    const [isProTemplate, setIsProTemplate] = useState('');
     const [activeTag, setActiveTag] = useState('');
     const [libraryData, setLibraryData] = useState([]);
-
 
     return (
         <>
@@ -107,35 +106,41 @@ const PatternLibraryButton = () => {
                     <div className={`fb-template-library-store-wrap`}>
                         <div className={`fb-template-library-store-inner-wrap`}>
                             <div>
-                                <TemplateHeader 
-                                    activeTab={activeTab} 
-                                    setActiveTab={setActiveTab} 
-                                    data={data} 
+                                <TemplateHeader
+                                    activeTab={activeTab}
+                                    setActiveTab={setActiveTab}
+                                    data={data}
                                     onClose={() => setIsVisible(false)}
+                                    setIsProTemplate={setIsProTemplate}
                                 />
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">
-                                <TemplateSidebar activeTab={activeTab} data={data} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+                                <TemplateSidebar
+                                    activeTab={activeTab}
+                                    data={data}
+                                    activeCategory={activeCategory}
+                                    isProTemplate={isProTemplate}
+                                    setIsProTemplate={setIsProTemplate}
+                                    setActiveCategory={setActiveCategory}
+                                />
                                 {activeTab !== 'templateLibrary' && (
                                     <TemplateContent activeTab={activeTab}
                                         activeCategory={activeCategory}
                                         setLibraryData={setLibraryData}
                                         data={data}
                                         isProTemplate={isProTemplate}
-                                        setIsProTemplate={setIsProTemplate}
                                         activeTag={activeTag}
                                         setActiveTag={setActiveTag}
                                     />
                                 )}
                                 {activeTab === 'templateLibrary' && (
-                                    <LibraryContent 
+                                    <LibraryContent
                                         activeTab={activeTab}
                                         activeCategory={activeCategory}
                                         libraryData={libraryData}
                                         setLibraryData={setLibraryData}
                                         data={data}
                                         isProTemplate={isProTemplate}
-                                        setIsProTemplate={setIsProTemplate}
                                         activeTag={activeTag}
                                         setActiveTag={setActiveTag}
                                     />
