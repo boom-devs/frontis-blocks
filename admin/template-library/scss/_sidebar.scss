@@ -43,10 +43,20 @@
                 .fb-tl-free{
                     background: $primary-color-50;
                     color: $primary-color-400;
+
+                    &.active {
+                        background-color: $primary-color-400;
+                        color: $white-color;
+                    }
                 }
                 .fb-tl-pro{
                     background: $warning-color-100;
                     color: $warning-color;
+
+                    &.active {
+                        background-color: $warning-color;
+                        color: $white-color;
+                    }
                 }
             }
         }
