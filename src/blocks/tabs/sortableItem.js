@@ -2,12 +2,21 @@ import { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { TextControl, Button } from '@wordpress/components';
+import { TextControl, Button, BaseControl, ButtonGroup } from '@wordpress/components';
+import FBIconPicker from "@Components/icon-picker";
+import FB_ColorControl from '@Components/color-control';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
+import FB_ImageControl from '@Components/image-control';
+import { 
+    ICON_IMAGE_ALIGN,
+} from '@Constants/fbConstants';
 
 
 export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, handleDuplicateItem, index }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
+    const [itemTabIconAlign, setItemTabIconAlign] = useState(ICON_IMAGE_ALIGN[0].value);
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -15,6 +24,15 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
     };
 
     const toggleOpen = () => setIsOpen(!isOpen);
+
+    const iconHandler = (IconName) => {
+        handleChangeItem(item.id, 'tabIcon', IconName);
+    };
+
+    const handleAlignmentChange = (newAlignment) => {
+        setItemTabIconAlign(newAlignment);
+        handleChangeItem(item.id, 'tabIconAlign', newAlignment);
+    };
 
 
     const TrashIcon = (
@@ -78,6 +96,43 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                         onChange={(value) => handleChangeItem(item.id, 'title', value)}
                         help={__("Leave blank to hide Title", "frontis-blocks")}
                     />
+
+                    <div className='fb-tab-icon-wrapper'> 
+                        <BaseControl
+                            label={__("Icon", "frontis-blocks")}
+                            className="fb-tab-icon"
+                        >
+                            <ButtonGroup className="fb-tab-icon-group-btn">
+                                {ICON_IMAGE_ALIGN.map((alignItem, key) => (
+                                    <Button
+                                        key={key}
+                                        onClick={() => handleAlignmentChange(alignItem.value)}
+                                        className={`fb-tab-icon-single-btn ${itemTabIconAlign === alignItem.value ? 'active' : ''}`}
+                                    >
+                                        {alignItem.label}
+                                    </Button>
+                                ))}
+                            </ButtonGroup>
+                            {itemTabIconAlign === 'icon' && (
+                                <FBIconPicker value={item.tabIcon} setIconHandler={iconHandler} />
+                            )}
+
+                            {itemTabIconAlign === 'image' && (
+                                <>
+                                    <FB_ImageControl
+                                        globalImageUrl={item.tabIconImageUrl}
+                                        setglobalImageUrl={(value) => handleChangeItem(item.id, 'tabIconImageUrl', value)}
+                                        globalImageAlt={item.tabIconImageAlt}
+                                        setglobalImageAlt={(value) => handleChangeItem(item.id, 'tabIconImageAlt', value)}
+                                        globalImageID={item.tabIconImageID}
+                                        setglobalImageID={(value) => handleChangeItem(item.id, 'tabIconImageID', value)}
+                                        isImageSize={false}
+                                    />
+                                </>
+
+                            )}
+                        </BaseControl>
+                    </div>
                 </div>
             )}
         </li>

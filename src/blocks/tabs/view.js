@@ -1,7 +1,8 @@
 /**
  * Tabs frontend behavior (functional only)
  * - স্কোপড ভাবে প্রতিটি .fb-tabs-wrap এর ভেতরে কাজ করে
- * - ক্লিকে active ট্যাব বদলায়, aria-selected সেট করে, প্যানেল show/hide করে
+ * - ক্লিকে active ট্যাব বদলায়, aria-selected সেট করে, প্যানেল show/hide করে
+ * - পুরো li element clickable
  */
 
 ( function () {
@@ -49,13 +50,17 @@
 		const initial = parseInt( root.getAttribute( 'data-tab-active' ) || '0', 10 ) || 0;
 		setActive( initial );
 
-		// click handlers
-		tabs.forEach( ( a, idx ) => {
-			a.addEventListener( 'click', function ( e ) {
+		// click handlers - এখন li element এ
+		items.forEach( ( li, idx ) => {
+			li.addEventListener( 'click', function ( e ) {
 				// allow hash but prevent default scroll jump
 				e.preventDefault();
 				setActive( idx );
 			} );
+		} );
+
+		// keyboard handlers - button এ রাখি accessibility এর জন্য
+		tabs.forEach( ( a, idx ) => {
 			a.addEventListener( 'keydown', function ( e ) {
 				// simple left/right keyboard nav (optional)
 				if ( e.key === 'ArrowLeft' ) {

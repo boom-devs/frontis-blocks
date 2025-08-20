@@ -32,9 +32,19 @@ export const TABS_LAYOUT = [
 	{ label: __('Vertical', 'frontis-blocks'), value: 'vertical' },
 ];
 
+export const ICON_POSITION = [
+	{ label: __("Left"), value: "left" },
+	{ label: __("Right"), value: "right" },
+];
+
 export const ICON_ALIGN = [
 	{ label: __("None"), value: "none" },
 	{ label: __("Icon"), value: "icon" },
+];
+export const ICON_IMAGE_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
+	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
 ];
 
 export const HAMBURGER_MENU_ICON_TYPE = [
