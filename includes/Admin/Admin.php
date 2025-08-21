@@ -454,15 +454,17 @@ class Admin {
 
     public function enqueue_editor_assets() {
         $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '';
+        $theme = wp_get_theme();
 
         $script_path = FB_PLUGIN_PATH . 'assets/admin/sidebar' . $suffix . '.js';
         $script_asset_path = FB_PLUGIN_PATH . 'assets/admin/sidebar.asset.php';
         $script_asset      = file_exists( $script_asset_path ) ? require( $script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( $script_path ) );
 
-        wp_enqueue_script('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.js', $script_asset['dependencies'], '1.0.0', true);
+        wp_enqueue_script('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar.js', $script_asset['dependencies'], '1.0.0', true);
         wp_localize_script('frontis-blocks-admin-sidebar', 'frontisBlocksAdminSidebar', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
 			'nonce' => wp_create_nonce('fb_sidebar_nonce'),
+            'frontis_theme' => 'Frontis' == $theme->name || 'Frontis' == $theme->parent_theme
         ));
 
         wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.css', array(), '1.0.0');
