@@ -157,12 +157,12 @@
                 <ToolbarGroup>
                     <ToolbarButton
                         icon="plus"
-                        label={__('Add New Slide', 'gslider-blocks')}
+                        label={__('Add New Slide', 'frontis-blocks')}  
                         onClick={addNewSlide}
                     />
                     <ToolbarButton
                         icon="admin-page"
-                        label={__('Duplicate Current Slide', 'gslider-blocks')}
+                        label={__('Duplicate Current Slide', 'frontis-blocks')}
                         onClick={duplicateSlide}
                     />
                 </ToolbarGroup>

@@ -653,6 +653,33 @@ class BlockList
                 'complete' => 'true',
                 'child' => 'false',
             ],
+
+            'tabs' => [
+                'slug' => 'tabs',
+                'title' => 'Tabs',
+                'package' => 'free',
+                'category' => 'content',
+                'badge' => 'free',
+                'status' => 'true',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/carousel.svg',
+                'doc' => 'https://wpmessiah.com/',
+                'demo' => 'https://wpmessiah.com/',
+                'complete' => 'true',
+                'child' => 'false',
+            ],
+            'tabs-item' => [
+                'slug' => 'tabs-item',
+                'title' => 'Tabs Item',
+                'package' => 'free',
+                'category' => 'content',
+                'badge' => 'free',
+                'status' => 'true',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/carousel.svg',
+                'doc' => 'https://wpmessiah.com/',
+                'demo' => 'https://wpmessiah.com/',
+                'complete' => 'true',
+                'child' => 'false',
+            ],
         ];
         $this->blocks = apply_filters('frontis/blocks/list', $this->blocks);
     }
