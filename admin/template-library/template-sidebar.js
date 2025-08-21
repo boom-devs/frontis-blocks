@@ -21,7 +21,7 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, i
   ];
 
   const handelTemplates = value => {
-    setIsProTemplate(value);
+    setIsProTemplate(isProTemplate === value ? '' : value);
   }
 
 
