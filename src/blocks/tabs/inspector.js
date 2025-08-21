@@ -1529,7 +1529,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             ${tabDescriptionBorderHoverColor ? `border-color: ${tabDescriptionBorderHoverColor};` : ''} 
         }
 
-        .${blockId} .fb-tab-icon-image-box {
+        .${blockId} .fb-tab-icon-image-box .fb-tab-icon {
 			${tabIconNormalBackgroundType === 'gradient' ? `   	
                 ${tabIconNormalCustomGradientSwitcher && tabIconNormalCustomGradientInputValue ? `background: ${tabIconNormalCustomGradientInputValue};` : `background: ${tabIconNormalGradientColor};`}
             `: `
@@ -1542,17 +1542,17 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 			${tabIconBorderDesktopWidth && tabIconBorderDesktop.top ? `border-width: ${tabIconBorderDesktopWidth};` : ''}
 			${tabIconBorderRadiusDesktopWidth && tabIconBorderRadiusDesktop.top ? `border-radius: ${tabIconBorderRadiusDesktopWidth};` : ''} 
 		}
-
-		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper {
-			${tabIconHoverBackgroundType === 'gradient' ? `   	
+        .${blockId} .fb-tab-icon-image-box .fb-tab-icon:hover {
+            ${tabIconHoverBackgroundType === 'gradient' ? `   	
                 ${tabIconHoverCustomGradientSwitcher && tabIconHoverCustomGradientInputValue ? `background: ${tabIconHoverCustomGradientInputValue};` : `background: ${tabIconHoverGradientColor};`}
             `: `
                 ${ tabIconBgHoverColor ? `background: ${ tabIconBgHoverColor};` : ''}
             `}
-			${tabIconBorderHoverColor ? `border-color: ${tabIconBorderHoverColor};` : ''}
-		}
 
-		.${blockId} .fb-tab-icon-image-box svg {
+			${tabIconBorderHoverColor ? `border-color: ${tabIconBorderHoverColor};` : ''}
+        }
+
+		.${blockId} .fb-tab-icon-image-box .fb-tab-icon svg {
 			${tabIconSize.Desktop && tabIconSizeUnits.Desktop ? `width: ${tabIconSize.Desktop}${tabIconSizeUnits.Desktop};` : ''}
 			${tabIconSize.Desktop && tabIconSizeUnits.Desktop ? `height: ${tabIconSize.Desktop}${tabIconSizeUnits.Desktop};` : ''}
 			${tabIconColor ? `fill: ${tabIconColor};` : ''}
@@ -1561,7 +1561,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 			
 		}
 
-		.${blockId} .fb-tab-icon-image-box:hover svg {
+		.${blockId} .fb-tab-icon-image-box .fb-tab-icon:hover svg {
 			${tabIconHoverColor ? `fill: ${tabIconHoverColor};` : ''}
 			transform: rotate(${tabIconRotateHover.Desktop}deg); 
 		}
@@ -1881,7 +1881,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                 initialOpen={true}
             >
                 <ToggleControl
-                    label={ __( 'Show Icon', 'frontis-blocks' ) }
+                    label={ __( 'Show Icon or Image', 'frontis-blocks' ) }
                     checked={ showIcon }  
                     onChange={(value) => setAttributes({ showIcon: value })}
                 />
@@ -2438,7 +2438,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             </PanelBody>
 
             <PanelBody
-                title={__("Icon Styles", "frontis-blocks")}
+                title={__("Icon", "frontis-blocks")}
                 initialOpen={false}
             >
                 <FB_Range
@@ -2618,19 +2618,19 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
             </PanelBody>
             <PanelBody
-                title={__("Image Styles", "frontis-blocks")}
+                title={__("Image", "frontis-blocks")}
                 initialOpen={false}
             >
                 <SelectControl
-                    label={__("Image Position", "frontis-blocks")}
+                    label={__("Position", "frontis-blocks")}
                     value={tabIconPosition} 
                     options={ICON_POSITION}
                     onChange={(value) => setAttributes({ tabIconPosition: value })}
                 />
                 <FB_Range
                     min={1}
-                    max={100}
-                    label={__("Image Width", "frontis-blocks")}
+                    max={tabIconImageWidthUnits === '%' ? 100 : 1000}
+                    label={__("Width", "frontis-blocks")}
                     rangeValue={tabIconImageWidth}
                     onChangeHandler={(value) => setAttributes({ tabIconImageWidth: value })}
                     rangeUnitHandler={(value) => setAttributes({ tabIconImageWidthUnits: value })}
@@ -2643,8 +2643,8 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
                 <FB_Range
                     min={1}
-                    max={100}
-                    label={__("Image Height", "frontis-blocks")}
+                    max={tabIconImageHeightUnits === '%' ? 100 : 1000}
+                    label={__("Height", "frontis-blocks")}
                     rangeValue={tabIconImageHeight}
                     onChangeHandler={(value) => setAttributes({ tabIconImageHeight: value })}
                     rangeUnitHandler={(value) => setAttributes({ tabIconImageHeightUnits: value })}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -16,7 +16,7 @@ import {
 export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, handleDuplicateItem, index, showIcon, showTitle, showDescription }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
-    const [itemTabIconAlign, setItemTabIconAlign] = useState(ICON_IMAGE_ALIGN[1].value);
+    const [itemTabIconAlign, setItemTabIconAlign] = useState(item.tabIconAlign || ICON_IMAGE_ALIGN[1].value);
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -33,6 +33,9 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         setItemTabIconAlign(newAlignment);
         handleChangeItem(item.id, 'tabIconAlign', newAlignment);
     };
+    useEffect(() => {
+        setItemTabIconAlign(item.tabIconAlign || ICON_IMAGE_ALIGN[1].value);
+    }, [item.tabIconAlign]);      
 
 
     const TrashIcon = (
