@@ -638,6 +638,286 @@ const attributes = {
     },
     /** End Title Style */
 
+    /** Start Description Typography Style */
+    tabDescriptionGlobalTypographyData: { 
+        type: 'object',
+        default: {}
+    },
+    tabDescriptionGlobalTypoSwitcher: {
+        type: 'object',
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    tabDescriptionGlobalTypoType: {
+        type: 'string',
+        default: 'default',
+    },
+    tabDescriptionGlobalTypoOption: {
+        type: 'object',
+        default: {label: 'Default', value: 'default'},
+    },
+    tabDescriptionFontFamily: {
+        type: 'string',
+        default: 'Default',
+    },
+    tabDescriptionFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    tabDescriptionFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    tabDescriptionFontWeight : {
+        type: 'string',
+        default: ''
+    },
+    tabDescriptionFontStyle : {
+        type: 'string',
+        default: ''
+    },
+    tabDescriptionTextTransform : {
+        type: 'string',
+        default: ''
+    },
+    tabDescriptionTextDecoration : {
+        type: 'string',
+        default: ''
+    },
+    tabDescriptionLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    tabDescriptionLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    tabDescriptionLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    tabDescriptionLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+
+    tabDescriptionColorSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    tabDescriptionColor: {
+        type: 'string',
+    },
+    tabDescriptionHoverColor: {
+        type: 'string',
+    },
+
+    tabDescriptionPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabDescriptionPaddingDesktop: { 
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabDescriptionPaddingTablet: { 
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabDescriptionPaddingMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabDescriptionPaddingLink : { 
+        type : "boolean",
+        default: true
+    },
+
+    tabDescriptionMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabDescriptionMarginDesktop: { 
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabDescriptionMarginTablet: { 
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabDescriptionMarginMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabDescriptionMarginLink : { 
+        type : "boolean",
+        default: true
+    },
+
+    tabDescriptionBorder: {
+        type: 'string',
+        default: "none",
+    },
+    tabDescriptionBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    tabDescriptionBorderColor: { 
+        type: 'string',
+    },
+    tabDescriptionBorderHoverColor: {
+        type: 'string',
+    },
+    tabDescriptionBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabDescriptionBorderDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabDescriptionBorderTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabDescriptionBorderMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabDescriptionBorderLink : { 
+        type : "boolean",
+        default: true
+    },
+    tabDescriptionBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabDescriptionBorderRadiusDesktop: { 
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabDescriptionBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabDescriptionBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabDescriptionBorderRadiusLink : {  
+        type : "boolean",
+        default: true
+    },
+    /** End Description Style */
+
     /** Tab Icon Styles */
     tabIconPosition: {
         type: "string",
