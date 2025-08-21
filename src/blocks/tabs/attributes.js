@@ -1461,6 +1461,503 @@ const attributes = {
         }
     },
     /** End Tab Icon Styles */
+
+    /** Tab Content Styles */
+    tabContentBgColorTypeSwitcher: { 
+        type: 'string',
+        default: 'normal'
+    },
+    tabContentBgColorType: {  
+        type: 'string',
+        default: 'classic',
+    },
+    tabContentBgHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    tabContentBgColor: {
+        type: 'string',
+    },
+    tabContentBgHoverColor: {
+        type: 'string',
+    },
+    tabContentBgGradientColor: {
+        type: 'string',
+        default: null
+    },
+    tabContentBgHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    tabContentBgCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    tabContentBgCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    tabContentBgHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    tabContentBgHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    tabContentPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabContentPaddingDesktop: { 
+        type: "object", 
+        default: {
+            top: '10',
+            bottom: '10',
+            left: '10',
+            right: '10',
+        },
+    },
+    tabContentPaddingTablet: { 
+        type: "object", 
+        default: {
+            top: '10',
+            bottom: '10',
+            left: '10',
+            right: '10',
+        },
+    },
+    tabContentPaddingMobile: {
+        type: "object", 
+        default: {
+            top: '10',
+            bottom: '10',
+            left: '10',
+            right: '10',
+        },
+    },
+    tabContentPaddingLink : { 
+        type : "boolean",
+        default: true
+    },
+
+    tabContentMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabContentMarginDesktop: { 
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabContentMarginTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabContentMarginMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabContentMarginLink : { 
+        type : "boolean",
+        default: true
+    },
+
+    tabContentBorder: {
+        type: 'string',
+        default: "solid",
+    },
+    tabContentBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    tabContentBorderColor: {
+        type: 'string',
+        default: '#EEEDF0',
+    },
+    tabContentBorderHoverColor: {
+        type: 'string',
+        default: '',
+    },
+    tabContentBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabContentBorderDesktop: {
+        type: "object", 
+        default: {
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
+        },
+    },
+    tabContentBorderTablet: {
+        type: "object", 
+        default: {
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
+        },
+    },
+    tabContentBorderMobile: {
+        type: "object", 
+        default: {
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
+        },
+    },
+    tabContentBorderLink : { 
+        type : "boolean",
+        default: true
+    },
+    tabContentBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabContentBorderRadiusDesktop: {    
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabContentBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabContentBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabContentBorderRadiusLink : {  
+        type : "boolean",
+        default: true
+    },
+
+    /** Start Global Setting */
+	tabGlobalZIndex : {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+
+    tabGlobalWraperID : {
+        type: 'string',
+        default: ''
+    },
+
+    tabGlobalWraperClass : {
+        type: 'string',
+        default: ''
+    },
+
+	/** Start Padding */
+	tabGlobalPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	tabGlobalPaddingDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	tabGlobalPaddingTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	tabGlobalPaddingMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	tabGlobalPaddingLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End Padding */
+
+	/** Start Margin */
+	tabGlobalMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	tabGlobalMarginDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	tabGlobalMarginTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	tabGlobalMarginMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	tabGlobalMarginLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End Margin */
+
+    /** Start Global Background */
+    tabGlobalBgColorTypeSwitcher: { 
+        type: 'string',
+        default: 'normal'
+    },
+    tabGlobalBgColorType: {  
+        type: 'string',
+        default: 'classic',
+    },
+    tabGlobalBgHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    tabGlobalBgColor: {
+        type: 'string',
+    },
+    tabGlobalBgHoverColor: {
+        type: 'string',
+    },
+    tabGlobalBgGradientColor: {
+        type: 'string',
+        default: null
+    },
+    tabGlobalBgHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    tabGlobalBgCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    tabGlobalBgCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    tabGlobalBgHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    tabGlobalBgHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+	/** End Global Background */
+
+	/** Start Global Border */
+	tabGlobalBorder: {
+		type: 'string',
+		default: 'none',
+	},
+	tabGlobalBorderColorSwitcher : {
+		type: 'string',
+		default: 'normal'
+	},
+	tabGlobalBorderColor: {  
+		type: 'string',
+		default: ''
+	},
+	tabGlobalBorderHoverColor: {
+		type: 'string',
+	},
+	tabGlobalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	tabGlobalBorderDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	tabGlobalBorderTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	tabGlobalBorderMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	tabGlobalBorderLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	tabGlobalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	tabGlobalBorderRadiusDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	tabGlobalBorderRadiusTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	tabGlobalBorderRadiusMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	tabGlobalBorderRadiusLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End Border Radius */
+
+	/** Start Box Shadow */
+    tabGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+	tabGlobalBoxShadowValues: { 
+        type: 'array',
+        default: [],
+    },
+    tabGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    tabGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    tabGlobalBoxShadowHoverCssValue: {
+        type: 'string',
+        default: '',
+    },
+
+    tabGlobalCustomCSS : { 
+        type: 'string',
+        default: '',
+    },
+    /** End Global Box Shadow */
+    
+
+
 };
 
 export default attributes;

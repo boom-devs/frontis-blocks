@@ -13,6 +13,8 @@ export default function save({ attributes }) {
     showTitle,
     showDescription,
     tabLayoutSwitcher,
+    tabGlobalWraperID,
+		tabGlobalWraperClass,
   } = attributes;
 
   const blockProps = useBlockProps.save({
@@ -22,7 +24,7 @@ export default function save({ attributes }) {
 
   return (
     <div {...blockProps}>
-      <div className={`fb-tabs-wrap ${tabLayoutSwitcher}`}>
+      <div className={`fb-tabs-wrap ${tabLayoutSwitcher} ${tabGlobalWraperClass}`} id={tabGlobalWraperID}>
         <ul className="fb-tabs-panel" role="tablist">
           {tabItems.map((item, index) => {
             const isActive = tabActiveFrontend === index;
