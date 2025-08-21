@@ -57,7 +57,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			id: newIndex,
 			title: `Tab ${newIndex + 1}`,
 			description: 'Tab description',
-			tabIcon: 'bookmark',
+			tabIcon: 'house',
 			tabIconAlign: 'icon',
 			tabIconImageUrl: '',
 			tabIconImageAlt: '',

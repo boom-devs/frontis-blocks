@@ -23,7 +23,7 @@ const attributes = {
             { id: 'item-1',
                 title: 'Tab 1',
                 description: 'Tab description',
-                tabIcon: 'bookmark',
+                tabIcon: 'house',
                 tabIconAlign: 'icon',
                 tabIconImageUrl: '',
                 tabIconImageAlt: '',
@@ -32,7 +32,7 @@ const attributes = {
 			{ id: 'item-2',
                 title: 'Tab 2',
                 description: 'Tab description',
-                tabIcon: 'bookmark',
+                tabIcon: 'house',
                 tabIconAlign: 'icon',
                 tabIconImageUrl: '',
                 tabIconImageAlt: '',
@@ -41,7 +41,7 @@ const attributes = {
 			{ id: 'item-3',
                 title: 'Tab 3',
                 description: 'Tab description',
-                tabIcon: 'bookmark',
+                tabIcon: 'house',
                 tabIconAlign: 'icon',
                 tabIconImageUrl: '',
                 tabIconImageAlt: '',
@@ -65,11 +65,11 @@ const attributes = {
                 },
                 tabIcon: {
                     type: 'string',
-                    default: 'bookmark',
+                    default: 'house',
                 },
                 tabIconAlign: {
                     type: 'string',
-                    default: 'icon',
+                    default: '',
                 },
                 tabIconImageUrl: {
                     type: 'string',
@@ -926,9 +926,9 @@ const attributes = {
     tabIconSize: {
         type: 'object',
         default: {
-            Desktop: '16',
-            Tablet: '16',
-            Mobile: '16'
+            Desktop: '20',
+            Tablet: '20',
+            Mobile: '20'
         }
     },
     tabIconSizeUnits: {
