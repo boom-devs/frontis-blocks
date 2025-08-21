@@ -158,6 +158,57 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabTitleBorderRadiusLink,
         /** End Title Style */
 
+        /** Tab Description Styles */
+        tabDescriptionGlobalTypographyData,
+        tabDescriptionGlobalTypoSwitcher,
+        tabDescriptionGlobalTypoType,
+        tabDescriptionGlobalTypoOption,
+        tabDescriptionFontFamily,
+        tabDescriptionFontSize,
+        tabDescriptionFontSizeUnits,
+        tabDescriptionFontWeight,
+        tabDescriptionFontStyle,
+        tabDescriptionTextTransform,
+        tabDescriptionTextDecoration,
+        tabDescriptionLetterSpacing,
+        tabDescriptionLetterSpacingUnits,
+        tabDescriptionLineHeight,
+        tabDescriptionLineHeightUnits,
+
+        tabDescriptionColorSwitcher,
+        tabDescriptionColor,
+        tabDescriptionHoverColor,
+
+        tabDescriptionPaddingUnits,
+        tabDescriptionPaddingDesktop,
+        tabDescriptionPaddingTablet,
+        tabDescriptionPaddingMobile,
+        tabDescriptionPaddingLink,
+
+        tabDescriptionMarginUnits,
+        tabDescriptionMarginDesktop,
+        tabDescriptionMarginTablet,
+        tabDescriptionMarginMobile,
+        tabDescriptionMarginLink,
+
+        tabDescriptionBorder,
+        tabDescriptionBorderColorSwitcher,
+        tabDescriptionBorderColor,
+        tabDescriptionBorderHoverColor,
+
+        tabDescriptionBorderUnits,
+        tabDescriptionBorderDesktop,
+        tabDescriptionBorderTablet,
+        tabDescriptionBorderMobile,
+        tabDescriptionBorderLink,
+
+        tabDescriptionBorderRadiusUnits,
+        tabDescriptionBorderRadiusDesktop,
+        tabDescriptionBorderRadiusTablet,
+        tabDescriptionBorderRadiusMobile,
+        tabDescriptionBorderRadiusLink,
+        /** End Description Style */
+
         /** Tab Icon Styles */
         tabIconPosition,
         tabIconSize,
@@ -820,6 +871,302 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
     const tabTitleBorderRadiusMobileWidth = `${tabTitleBorderRadiusMobile.top}${tabTitleBorderRadiusUnits.Mobile} ${tabTitleBorderRadiusMobile.right}${tabTitleBorderRadiusUnits.Mobile} ${tabTitleBorderRadiusMobile.bottom}${tabTitleBorderRadiusUnits.Mobile} ${tabTitleBorderRadiusMobile.left}${tabTitleBorderRadiusUnits.Mobile}`;
     /** End Title Border Radius */
 
+    /** Start Description Padding */
+    const handleDescriptionPaddingUnitChange = ( event, position ) => { 
+        const value = event.target.value;
+        if ( tabDescriptionPaddingLink ) {    
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        tabDescriptionPaddingDesktop: { 
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        tabDescriptionPaddingTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        tabDescriptionPaddingMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {tabDescriptionPaddingDesktop: {...tabDescriptionPaddingDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {tabDescriptionPaddingTablet: {...tabDescriptionPaddingTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {tabDescriptionPaddingMobile: {...tabDescriptionPaddingMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleDescriptionPaddingCombineBtn = () => {
+        setAttributes( {tabDescriptionPaddingLink: !tabDescriptionPaddingLink} );
+    }
+
+    const handleDescriptionPaddingUnitsHandler = (unit) => {
+        setAttributes( {
+            tabDescriptionPaddingUnits: {
+                ...tabDescriptionPaddingUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const tabDescriptionPaddingDesktopWidth = `${tabDescriptionPaddingDesktop.top}${tabDescriptionPaddingUnits.Desktop} ${tabDescriptionPaddingDesktop.right}${tabDescriptionPaddingUnits.Desktop} ${tabDescriptionPaddingDesktop.bottom}${tabDescriptionPaddingUnits.Desktop} ${tabDescriptionPaddingDesktop.left}${tabDescriptionPaddingUnits.Desktop}`;
+    const tabDescriptionPaddingTabletWidth = `${tabDescriptionPaddingTablet.top}${tabDescriptionPaddingUnits.Tablet} ${tabDescriptionPaddingTablet.right}${tabDescriptionPaddingUnits.Tablet} ${tabDescriptionPaddingTablet.bottom}${tabDescriptionPaddingUnits.Tablet} ${tabDescriptionPaddingTablet.left}${tabDescriptionPaddingUnits.Tablet}`;
+    const tabDescriptionPaddingMobileWidth = `${tabDescriptionPaddingMobile.top}${tabDescriptionPaddingUnits.Mobile} ${tabDescriptionPaddingMobile.right}${tabDescriptionPaddingUnits.Mobile} ${tabDescriptionPaddingMobile.bottom}${tabDescriptionPaddingUnits.Mobile} ${tabDescriptionPaddingMobile.left}${tabDescriptionPaddingUnits.Mobile}`;
+    /** End Description Padding */
+
+    /** Start Description Margin */
+    const handleDescriptionMarginUnitChange = ( event, position ) => { 
+        const value = event.target.value;
+        if ( tabDescriptionMarginLink ) {     
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        tabDescriptionMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        tabDescriptionMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        tabDescriptionMarginMobile: { 
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {tabDescriptionMarginDesktop: {...tabDescriptionMarginDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {tabDescriptionMarginTablet: {...tabDescriptionMarginTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {tabDescriptionMarginMobile: {...tabDescriptionMarginMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleDescriptionMarginCombineBtn = () => {
+        setAttributes( {tabDescriptionMarginLink: !tabDescriptionMarginLink} );
+    }
+
+    const handleDescriptionMarginUnitsHandler = (unit) => {
+        setAttributes( {
+            tabDescriptionMarginUnits: {
+                ...tabDescriptionMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const tabDescriptionMarginDesktopWidth = `${tabDescriptionMarginDesktop.top}${tabDescriptionMarginUnits.Desktop} ${tabDescriptionMarginDesktop.right}${tabDescriptionMarginUnits.Desktop} ${tabDescriptionMarginDesktop.bottom}${tabDescriptionMarginUnits.Desktop} ${tabDescriptionMarginDesktop.left}${tabDescriptionMarginUnits.Desktop}`;
+    const tabDescriptionMarginTabletWidth = `${tabDescriptionMarginTablet.top}${tabDescriptionMarginUnits.Tablet} ${tabDescriptionMarginTablet.right}${tabDescriptionMarginUnits.Tablet} ${tabDescriptionMarginTablet.bottom}${tabDescriptionMarginUnits.Tablet} ${tabDescriptionMarginTablet.left}${tabDescriptionMarginUnits.Tablet}`;
+    const tabDescriptionMarginMobileWidth = `${tabDescriptionMarginMobile.top}${tabDescriptionMarginUnits.Mobile} ${tabDescriptionMarginMobile.right}${tabDescriptionMarginUnits.Mobile} ${tabDescriptionMarginMobile.bottom}${tabDescriptionMarginUnits.Mobile} ${tabDescriptionMarginMobile.left}${tabDescriptionMarginUnits.Mobile}`;
+    /** End Description Margin */
+
+    /** Start Description Border */
+    const handleDescriptionBorderUnitChange = ( event, position ) => {     
+        const value = event.target.value;
+        if ( tabDescriptionBorderLink ) {     
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        tabDescriptionBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        tabDescriptionBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        tabDescriptionBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {tabDescriptionBorderDesktop: {...tabDescriptionBorderDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {tabDescriptionBorderTablet: {...tabDescriptionBorderTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {tabDescriptionBorderMobile: {...tabDescriptionBorderMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleDescriptionBorderCombineBtn = () => {
+        setAttributes( {tabDescriptionBorderLink: !tabDescriptionBorderLink} );
+    }
+
+    const handleDescriptionBorderUnitsHandler = (unit) => {
+        setAttributes( {
+            tabDescriptionBorderUnits: {
+                ...tabDescriptionBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const tabDescriptionBorderDesktopWidth = `${tabDescriptionBorderDesktop.top}${tabDescriptionBorderUnits.Desktop} ${tabDescriptionBorderDesktop.right}${tabDescriptionBorderUnits.Desktop} ${tabDescriptionBorderDesktop.bottom}${tabDescriptionBorderUnits.Desktop} ${tabDescriptionBorderDesktop.left}${tabDescriptionBorderUnits.Desktop}`;
+    const tabDescriptionBorderTabletWidth = `${tabDescriptionBorderTablet.top}${tabDescriptionBorderUnits.Tablet} ${tabDescriptionBorderTablet.right}${tabDescriptionBorderUnits.Tablet} ${tabDescriptionBorderTablet.bottom}${tabDescriptionBorderUnits.Tablet} ${tabDescriptionBorderTablet.left}${tabDescriptionBorderUnits.Tablet}`;
+    const tabDescriptionBorderMobileWidth = `${tabDescriptionBorderMobile.top}${tabDescriptionBorderUnits.Mobile} ${tabDescriptionBorderMobile.right}${tabDescriptionBorderUnits.Mobile} ${tabDescriptionBorderMobile.bottom}${tabDescriptionBorderUnits.Mobile} ${tabDescriptionBorderMobile.left}${tabDescriptionBorderUnits.Mobile}`;
+    /** End Description Border */
+
+    /** Start Description Border Radius */
+    const handleDescriptionBorderRadiusUnitChange = ( event, position ) => {     
+        const value = event.target.value;
+        if ( tabDescriptionBorderRadiusLink ) {     
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        tabDescriptionBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        tabDescriptionBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        tabDescriptionBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {tabDescriptionBorderRadiusDesktop: {...tabDescriptionBorderRadiusDesktop, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {tabDescriptionBorderRadiusTablet: {...tabDescriptionBorderRadiusTablet, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {tabDescriptionBorderRadiusMobile: {...tabDescriptionBorderRadiusMobile, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleDescriptionBorderRadiusCombineBtn = () => {
+        setAttributes( {tabDescriptionBorderRadiusLink: !tabDescriptionBorderRadiusLink} );
+    }
+
+    const handleDescriptionBorderRadiusUnitsHandler = (unit) => {
+        setAttributes( {
+            tabDescriptionBorderRadiusUnits: {
+                ...tabDescriptionBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const tabDescriptionBorderRadiusDesktopWidth = `${tabDescriptionBorderRadiusDesktop.top}${tabDescriptionBorderRadiusUnits.Desktop} ${tabDescriptionBorderRadiusDesktop.right}${tabDescriptionBorderRadiusUnits.Desktop} ${tabDescriptionBorderRadiusDesktop.bottom}${tabDescriptionBorderRadiusUnits.Desktop} ${tabDescriptionBorderRadiusDesktop.left}${tabDescriptionBorderRadiusUnits.Desktop}`;
+    const tabDescriptionBorderRadiusTabletWidth = `${tabDescriptionBorderRadiusTablet.top}${tabDescriptionBorderRadiusUnits.Tablet} ${tabDescriptionBorderRadiusTablet.right}${tabDescriptionBorderRadiusUnits.Tablet} ${tabDescriptionBorderRadiusTablet.bottom}${tabDescriptionBorderRadiusUnits.Tablet} ${tabDescriptionBorderRadiusTablet.left}${tabDescriptionBorderRadiusUnits.Tablet}`;
+    const tabDescriptionBorderRadiusMobileWidth = `${tabDescriptionBorderRadiusMobile.top}${tabDescriptionBorderRadiusUnits.Mobile} ${tabDescriptionBorderRadiusMobile.right}${tabDescriptionBorderRadiusUnits.Mobile} ${tabDescriptionBorderRadiusMobile.bottom}${tabDescriptionBorderRadiusUnits.Mobile} ${tabDescriptionBorderRadiusMobile.left}${tabDescriptionBorderRadiusUnits.Mobile}`;
+    /** End Description Border Radius */
+
     /** Start Icon border */
     const handleTabIconBorderUnitChange = ( event, position ) => { 
         const value = event.target.value;
@@ -1142,9 +1489,44 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             transition: all .3s ease-in-out;
         }
 
+        .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li .fb-tab-description {
+            ${tabDescriptionGlobalTypoSwitcher.fontFamily === true && tabDescriptionGlobalTypographyData.fontFamily ? `font-family: ${tabDescriptionGlobalTypographyData.fontFamily};` : ''}
+            ${tabDescriptionGlobalTypoSwitcher.fontSize === true && tabDescriptionGlobalTypographyData.fontSize ? `font-size: ${tabDescriptionGlobalTypographyData.fontSize};` : ''}
+            ${tabDescriptionGlobalTypoSwitcher.fontWeight === true && tabDescriptionGlobalTypographyData.fontWeight ? `font-weight: ${tabDescriptionGlobalTypographyData.fontWeight};` : ''}
+            ${tabDescriptionGlobalTypoSwitcher.fontStyle === true && tabDescriptionGlobalTypographyData.fontStyle ? `font-style: ${tabDescriptionGlobalTypographyData.fontStyle};` : ''}
+            ${tabDescriptionGlobalTypoSwitcher.textTransform === true && tabDescriptionGlobalTypographyData.textTransform ? `text-transform: ${tabDescriptionGlobalTypographyData.textTransform};` : ''}
+            ${tabDescriptionGlobalTypoSwitcher.textDecoration === true && tabDescriptionGlobalTypographyData.textDecoration ? `text-decoration: ${tabDescriptionGlobalTypographyData.textDecoration};` : ''}
+            ${tabDescriptionGlobalTypoSwitcher.letterSpacing === true && tabDescriptionGlobalTypographyData.letterSpacing ? `letter-spacing: ${tabDescriptionGlobalTypographyData.letterSpacing};` : ''}
+            ${tabDescriptionGlobalTypoSwitcher.lineHeight === true && tabDescriptionGlobalTypographyData.lineHeight ? `line-height: ${tabDescriptionGlobalTypographyData.lineHeight};` : ''}
+
+            ${tabDescriptionGlobalTypoSwitcher.fontFamily === false && tabDescriptionFontFamily && tabDescriptionFontFamily !== 'Default' ? `font-family: ${tabDescriptionFontFamily};` : ''}
+            ${tabDescriptionGlobalTypoSwitcher.fontSize === false && tabDescriptionFontSize.Desktop && tabDescriptionFontSizeUnits.Desktop ? `font-size: ${tabDescriptionFontSize.Desktop}${tabDescriptionFontSizeUnits.Desktop};` : ''}
+            ${tabDescriptionGlobalTypoSwitcher.fontWeight === false && tabDescriptionFontWeight ? `font-weight: ${tabDescriptionFontWeight};` : ''}
+            ${tabDescriptionGlobalTypoSwitcher.fontStyle === false && tabDescriptionFontStyle ? `font-style: ${tabDescriptionFontStyle};` : ''}
+            ${tabDescriptionGlobalTypoSwitcher.textTransform === false && tabDescriptionTextTransform ? `text-transform: ${tabDescriptionTextTransform};` : ''}
+            ${tabDescriptionGlobalTypoSwitcher.textDecoration === false && tabDescriptionTextDecoration ? `text-decoration: ${tabDescriptionTextDecoration};` : ''}
+            ${tabDescriptionGlobalTypoSwitcher.letterSpacing === false && tabDescriptionLetterSpacing.Desktop && tabDescriptionLetterSpacingUnits.Desktop ? `letter-spacing: ${tabDescriptionLetterSpacing.Desktop}${tabDescriptionLetterSpacingUnits.Desktop};` : ''}
+            ${tabDescriptionGlobalTypoSwitcher.lineHeight === false && tabDescriptionLineHeight.Desktop && tabDescriptionLineHeightUnits.Desktop ? `line-height: ${tabDescriptionLineHeight.Desktop}${tabDescriptionLineHeightUnits.Desktop};` : ''}
+            
+            ${tabDescriptionColor ? `color: ${tabDescriptionColor};` : ''}
+            ${tabDescriptionPaddingDesktopWidth && tabDescriptionPaddingDesktop?.top ? `padding: ${tabDescriptionPaddingDesktopWidth};` : ''}     
+            ${tabDescriptionMarginDesktopWidth && tabDescriptionMarginDesktop?.top ? `margin: ${tabDescriptionMarginDesktopWidth};` : ''}
+            ${tabDescriptionBorder ? `border: ${tabDescriptionBorder};` : ''} 
+			${tabDescriptionBorderColor ? `border-color: ${tabDescriptionBorderColor};` : ''}
+			${tabDescriptionBorderDesktopWidth && tabDescriptionBorderDesktop.top ? `border-width: ${tabDescriptionBorderDesktopWidth};` : ''}
+			${tabDescriptionBorderRadiusDesktopWidth && tabDescriptionBorderRadiusDesktop.top ? `border-radius: ${tabDescriptionBorderRadiusDesktopWidth};` : ''} 
+
+            transition: all .3s ease-in-out;
+        }
+
         .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li:hover .fb-tab-title {
             ${tabTitleHoverColor ? `color: ${tabTitleHoverColor};` : ''}
             ${tabTitleBorderHoverColor ? `border-color: ${tabTitleBorderHoverColor};` : ''} 
+        }
+
+        .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li:hover .fb-tab-description {
+            ${tabDescriptionHoverColor ? `color: ${tabDescriptionHoverColor};` : ''}
+            ${tabDescriptionBorderHoverColor ? `border-color: ${tabDescriptionBorderHoverColor};` : ''} 
         }
 
         .${blockId} .fb-tab-icon-image-box {
@@ -1348,6 +1730,69 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabTitleBorderRadiusTabletWidth,
         tabTitleBorderRadiusMobileWidth,
         /** End Title Style */
+
+        /** Start Title Style */
+        tabDescriptionGlobalTypographyData,
+        tabDescriptionGlobalTypoSwitcher,
+        tabDescriptionGlobalTypoType,
+        tabDescriptionGlobalTypoOption,
+        tabDescriptionFontFamily,
+        tabDescriptionFontSize,
+        tabDescriptionFontSizeUnits,
+        tabDescriptionFontWeight,
+        tabDescriptionFontStyle,
+        tabDescriptionTextTransform,
+        tabDescriptionTextDecoration,
+        tabDescriptionLetterSpacing,
+        tabDescriptionLetterSpacingUnits,
+        tabDescriptionLineHeight,
+        tabDescriptionLineHeightUnits,
+
+        tabDescriptionColorSwitcher,
+        tabDescriptionColor,
+        tabDescriptionHoverColor,
+
+        tabDescriptionPaddingUnits,
+        tabDescriptionPaddingDesktop,
+        tabDescriptionPaddingTablet,
+        tabDescriptionPaddingMobile,
+        tabDescriptionPaddingLink,
+        tabDescriptionPaddingDesktopWidth,
+        tabDescriptionPaddingTabletWidth,
+        tabDescriptionPaddingMobileWidth,
+
+        tabDescriptionMarginUnits,
+        tabDescriptionMarginDesktop,
+        tabDescriptionMarginTablet,
+        tabDescriptionMarginMobile,
+        tabDescriptionMarginLink,
+        tabDescriptionMarginDesktopWidth,
+        tabDescriptionMarginTabletWidth,
+        tabDescriptionMarginMobileWidth,
+
+        tabDescriptionBorder, 
+        tabDescriptionBorderColorSwitcher,
+        tabDescriptionBorderColor,
+        tabDescriptionBorderHoverColor,
+
+        tabDescriptionBorderUnits,
+        tabDescriptionBorderDesktop,
+        tabDescriptionBorderTablet,
+        tabDescriptionBorderMobile,
+        tabDescriptionBorderLink,
+        tabDescriptionBorderDesktopWidth,
+        tabDescriptionBorderTabletWidth,
+        tabDescriptionBorderMobileWidth,
+
+        tabDescriptionBorderRadiusUnits,
+        tabDescriptionBorderRadiusDesktop,
+        tabDescriptionBorderRadiusTablet,
+        tabDescriptionBorderRadiusMobile,
+        tabDescriptionBorderRadiusLink,
+        tabDescriptionBorderRadiusDesktopWidth,
+        tabDescriptionBorderRadiusTabletWidth,
+        tabDescriptionBorderRadiusMobileWidth,
+        /** End Description Style */
 
         /** Tab Icon Styles */
         tabIconPosition,
@@ -1768,7 +2213,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                     setAttributes={setAttributes}
                 />
 
-
                 <SelectControl
                     label={__("Border Style", "frontis-blocks")}
                     value={tabTitleBorder}
@@ -1826,6 +2270,173 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                 />
                 
             </PanelBody>
+
+            <PanelBody 
+                title={__("Description", "frontis-blocks")} 
+                initialOpen={false}
+            >
+
+                <FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={tabDescriptionGlobalTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ tabDescriptionGlobalTypographyData: value })}
+
+                    globalTypoType={tabDescriptionGlobalTypoType}
+                    onChangeGlobalTypoType={(value) => {
+                        setAttributes({
+                            tabDescriptionGlobalTypoType: value,
+                            tabDescriptionGlobalTypoSwitcher: value === 'default' ? {...tabDescriptionGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...tabDescriptionGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                        })
+                    }}
+
+                    globalTypoOption={tabDescriptionGlobalTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ tabDescriptionGlobalTypoOption: value })}
+
+                    fontFamily={tabDescriptionFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ tabDescriptionFontFamily: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, fontFamily: value && false} })}
+
+                    fontSize={tabDescriptionFontSize}
+                    onChangeFontSize={(value) => setAttributes({ tabDescriptionFontSize: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, fontSize: value && false} })}
+
+                    fontSizeUnits={tabDescriptionFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ tabDescriptionFontSizeUnits: value })}
+
+                    fontWeight={tabDescriptionFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ tabDescriptionFontWeight: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, fontWeight: value && false} })}
+
+                    fontStyle={tabDescriptionFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ tabDescriptionFontStyle: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, fontStyle: value && false} })}
+
+                    textTransform={tabDescriptionTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ tabDescriptionTextTransform: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, textTransform: value && false} })}
+
+                    textDecoration={tabDescriptionTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ tabDescriptionTextDecoration: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, textDecoration: value && false} })}
+
+                    letterSpacing={tabDescriptionLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ tabDescriptionLetterSpacing: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+                    letterSpacingUnits={tabDescriptionLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ tabDescriptionLetterSpacingUnits: value })}
+
+                    lineHeight={tabDescriptionLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ tabDescriptionLineHeight: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                    lineHeightUnits={tabDescriptionLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ tabDescriptionLineHeightUnits: value })}
+
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Color", "frontis-blocks")}
+                    globalSwitcher={tabDescriptionColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ tabDescriptionColorSwitcher: value })}
+                />
+
+                {tabDescriptionColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={tabDescriptionColor}
+                        setGlobalColor={(value) => setAttributes({ tabDescriptionColor: value })}
+                    />
+                )}
+
+                {tabDescriptionColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={tabDescriptionHoverColor}
+                        setGlobalColor={(value) => setAttributes({ tabDescriptionHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing 
+                    label={__("Padding", "frontis-blocks")} 
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleDescriptionPaddingUnitsHandler} 
+                    spacingUnits={tabDescriptionPaddingUnits}
+                    spacingDesktop={tabDescriptionPaddingDesktop}
+                    spacingTablet={tabDescriptionPaddingTablet}
+                    spacingMobile={tabDescriptionPaddingMobile}
+                    handleSpacingUnitHandler={handleDescriptionPaddingUnitChange}
+                    spacingCombineBtn={tabDescriptionPaddingLink}
+                    spacingCombineBtnHandler={handleDescriptionPaddingCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing 
+                    label={__("Margin", "frontis-blocks")} 
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleDescriptionMarginUnitsHandler}     
+                    spacingUnits={tabDescriptionMarginUnits}
+                    spacingDesktop={tabDescriptionMarginDesktop}
+                    spacingTablet={tabDescriptionMarginTablet}
+                    spacingMobile={tabDescriptionMarginMobile}
+                    handleSpacingUnitHandler={handleDescriptionMarginUnitChange}
+                    spacingCombineBtn={tabDescriptionMarginLink}
+                    spacingCombineBtnHandler={handleDescriptionMarginCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={tabDescriptionBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ tabDescriptionBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={tabDescriptionBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ tabDescriptionBorderColorSwitcher: value })}
+                />
+
+                {tabDescriptionBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={tabDescriptionBorderColor}
+                        setGlobalColor={(value) => setAttributes({ tabDescriptionBorderColor: value })}
+                    />
+                )}
+
+                {tabDescriptionBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={tabDescriptionBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ tabDescriptionBorderHoverColor: value })}
+                    />
+                )}
+
+                <FB_Spacing 
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleDescriptionBorderUnitsHandler}
+                    spacingUnits={tabDescriptionBorderUnits} 
+                    spacingDesktop={tabDescriptionBorderDesktop}
+                    spacingTablet={tabDescriptionBorderTablet}
+                    spacingMobile={tabDescriptionBorderMobile}
+                    handleSpacingUnitHandler={handleDescriptionBorderUnitChange}      
+                    spacingCombineBtn={tabDescriptionBorderLink}
+                    spacingCombineBtnHandler={handleDescriptionBorderCombineBtn}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing 
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleDescriptionBorderRadiusUnitsHandler}
+                    spacingUnits={tabDescriptionBorderRadiusUnits}
+                    spacingDesktop={tabDescriptionBorderRadiusDesktop}
+                    spacingTablet={tabDescriptionBorderRadiusTablet}
+                    spacingMobile={tabDescriptionBorderRadiusMobile}
+                    handleSpacingUnitHandler={handleDescriptionBorderRadiusUnitChange}  
+                    spacingCombineBtn={tabDescriptionBorderRadiusLink}
+                    spacingCombineBtnHandler={handleDescriptionBorderRadiusCombineBtn}
+                    setAttributes={setAttributes}
+                />
+                
+            </PanelBody>
+
             <PanelBody
                 title={__("Icon Styles", "frontis-blocks")}
                 initialOpen={false}
