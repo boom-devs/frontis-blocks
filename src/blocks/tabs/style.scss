@@ -1,6 +1,13 @@
 .fb-tabs-wrap {
   ul {
     &.fb-tabs-panel {
+      display: flex;
+      display: flex;
+      list-style-type: none;
+      flex-wrap: wrap;
+      padding: 0;
+      margin: 0;
+
       li {
         display: flex;
         justify-content: center;

@@ -143,6 +143,257 @@ const attributes = {
             Mobile: 'px',
         }
     },
+    tabListItemGap : {
+        type: 'object',
+        default: {
+            Desktop: '10',
+            Tablet: '10',
+            Mobile: '10',
+        }
+    },
+    tabListItemGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+
+    tabWrapperGap : {
+        type: 'object',
+        default: {
+            Desktop: '10',
+            Tablet: '10',
+            Mobile: '10',
+        }
+    },
+    tabWrapperGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+
+    /** Tab Wrapper */
+    tabWrapperBgColorTypeSwitcher: { 
+        type: 'string',
+        default: 'normal'
+    },
+    tabWrapperBgColorType: {  
+        type: 'string',
+        default: 'classic',
+    },
+    tabWrapperBgHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    tabWrapperBgColor: {
+        type: 'string',
+    },
+    tabWrapperBgHoverColor: {
+        type: 'string',
+    },
+    tabWrapperBgGradientColor: {
+        type: 'string',
+        default: null
+    },
+    tabWrapperBgHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    tabWrapperBgCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    tabWrapperBgCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    tabWrapperBgHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    tabWrapperBgHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    tabWrapperPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabWrapperPaddingDesktop: { 
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabWrapperPaddingTablet: { 
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabWrapperPaddingMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabWrapperPaddingLink : { 
+        type : "boolean",
+        default: true
+    },
+
+    tabWrapperMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabWrapperMarginDesktop: { 
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabWrapperMarginTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabWrapperMarginMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabWrapperMarginLink : { 
+        type : "boolean",
+        default: true
+    },
+
+    tabWrapperBorder: {
+        type: 'string',
+        default: "none",
+    },
+    tabWrapperBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    tabWrapperBorderColor: {
+        type: 'string',
+    },
+    tabWrapperBorderHoverColor: {
+        type: 'string',
+    },
+    tabWrapperBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabWrapperBorderDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabWrapperBorderTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabWrapperBorderMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabWrapperBorderLink : { 
+        type : "boolean",
+        default: true
+    },
+    tabWrapperBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabWrapperBorderRadiusDesktop: {    
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabWrapperBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabWrapperBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabWrapperBorderRadiusLink : {  
+        type : "boolean",
+        default: true
+    },
+
+    /** Tab List */
     tabListBgColorTypeSwitcher: { 
         type: 'string',
         default: 'normal'
@@ -795,28 +1046,28 @@ const attributes = {
     tabDescriptionMarginDesktop: { 
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     tabDescriptionMarginTablet: { 
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     tabDescriptionMarginMobile: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     tabDescriptionMarginLink : { 
