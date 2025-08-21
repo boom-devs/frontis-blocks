@@ -13,7 +13,7 @@ import {
 } from '@Constants/fbConstants';
 
 
-export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, handleDuplicateItem, index, showIcon, showTitle }) {
+export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, handleDuplicateItem, index, showIcon, showTitle, showDescription }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
     const [itemTabIconAlign, setItemTabIconAlign] = useState(ICON_IMAGE_ALIGN[1].value);
@@ -97,6 +97,15 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                             value={item.title}
                             onChange={(value) => handleChangeItem(item.id, 'title', value)}
                             help={__("Leave blank to hide Title", "frontis-blocks")}
+                        />
+                    )}
+
+                    {showDescription && (
+                        <TextControl
+                            label={__("Description", "frontis-blocks")}
+                            value={item.description}
+                            onChange={(value) => handleChangeItem(item.id, 'description', value)}
+                            help={__("Leave blank to hide Description", "frontis-blocks")}
                         />
                     )}
 

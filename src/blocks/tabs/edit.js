@@ -19,9 +19,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		tabActive,
 		tabActiveFrontend,
 		tabTitleTag,
+		tabDescriptionTag,
 		tabIconPosition,
 		showIcon,
 		showTitle,
+		showDescription,
 		tabLayoutSwitcher,
 	} = attributes;
 
@@ -54,6 +56,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		const newItem = {
 			id: newIndex,
 			title: `Tab ${newIndex + 1}`,
+			description: 'Tab description',
 			tabIcon: 'bookmark',
 			tabIconAlign: 'icon',
 			tabIconImageUrl: '',
@@ -84,31 +87,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		const updatedItems = arrayMove(tabsItemList, oldIndex, newIndex);
 		updateTabItems(updatedItems);
 	  
-		// 3) child block সত্যিকারের move করো
 		const childIds = getChildren(); // array of child clientIds
 		const movingChildId = childIds[oldIndex];
 	  
-		// একই parent (root = clientId) এর মধ্যে oldIndex → newIndex এ শিফট
 		beDispatch.moveBlocksToPosition([movingChildId], clientId, clientId, newIndex);
 	  
-		// 4) চাইলে আইডি-ইনডেক্স সিঙ্ক (ঐচ্ছিক, কিন্তু তোমার কোডে দরকার)
-		// move এর পর নতুন অর্ডার নিয়ে প্রত্যেকটাকে তাদের index অনুযায়ী id সেট করো
 		const newChildIds = getChildren();
 		newChildIds.forEach((cid, idx) => {
 		  beDispatch.updateBlockAttributes(cid, { id: idx });
 		});
 	};
-
-    // const handleChangeItem = (id, key, value) => {
-    //     const updatedItems = tabsItemList.map(item => {
-    //         if (item.id === id) {
-    //             return { ...item, [key]: value };
-    //         }
-    //         return item;
-    //     });
-    //     updateTabItems(updatedItems);
-    // };
-
 
 	const handleChangeItem = (id, key, value) => {
         const updatedItems = tabsItemList.map(item => {
@@ -140,7 +128,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		const childIds = getChildren();
 		const targetChildId = childIds[index];
 		if (targetChildId) {
-		  // 1) child remove করো কিন্তু previous select কোরো না
 		  beDispatch.removeBlock(targetChildId, false);
 		}
 	  
@@ -165,26 +152,21 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		  updateActiveTab(nextActive);
 		}
 	  
-		// 5) ফোকাস/সিলেকশন parent-এই রাখো (Inspector parent দেখাবে)
 		beDispatch.selectBlock(clientId);
-		// এক ফ্রেম পরে আবার enforce করা (কখনো কখনো Gutenberg auto-select করে)
 		requestAnimationFrame(() => beDispatch.selectBlock(clientId));
 	};
 
 	const handleDuplicateItem = (idOrIndex) => {
-		// index বের করা (তুমি numeric id == index রাখছো)
 		const index = typeof idOrIndex === 'number'
 		  ? idOrIndex
 		  : tabsItemList.findIndex((it) => it.id === idOrIndex);
 		if (index < 0) return;
 	  
-		// 1) child block টা নাও
-		const childIds = getChildren();              // clientId array
+		const childIds = getChildren();
 		const targetChildId = childIds[index];
 		const targetBlock = beSelect.getBlock(targetChildId);
 		if (!targetBlock) return;
 	  
-		// 2) deep-clone করো (id ক্লিয়ার করে দিচ্ছি যাতে পরে index দিয়ে সেট করা যায়)
 		let cloned = cloneBlock(targetBlock);
 		cloned = {
 		  ...cloned,
@@ -194,17 +176,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		  },
 		};
 	  
-		// 3) ক্লোনটা পাশেই ইনসার্ট করো
 		beDispatch.insertBlock(cloned, index + 1, clientId, false);
 	  
-		// 4) parent list-এও ঠিক একই টাইটেল সহ কপি ঢোকাও (কোনো "(Copy)" নয়)
 		const newItems = [
 		  ...tabsItemList.slice(0, index + 1),
-		  { ...tabsItemList[index] },          // title 그대로
+		  { ...tabsItemList[index] },
 		  ...tabsItemList.slice(index + 1),
 		];
 	  
-		// 5) একবারেই reindex (parent + child)
 		const reindexedItems = newItems.map((it, idx) => ({ ...it, id: idx }));
 		updateTabItems(reindexedItems);
 	  
@@ -213,11 +192,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		  beDispatch.updateBlockAttributes(cid, { id: idx });
 		});
 	  
-		// 6) নতুন কপিটাকে active করো
 		updateActiveTab(index + 1);
 	};	
 
-    // Sync TabsItemList with attributes.tabItems
     useEffect(() => {
         setAttributes({ tabItems: tabsItemList });
     }, [tabsItemList, setAttributes]);
@@ -243,14 +220,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	useEffect( () => {
 		updateTabOrder();
 		updateActiveTab( tabActive );
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [] );
 
 
 
 
 	useEffect(() => {
-		// ensure unique child ids as soon as children exist once
 		const unSub = subscribe(() => {
 		  const beSelect = select('core/block-editor');
 		  const beDispatch = dispatch('core/block-editor');
@@ -261,7 +236,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		  const kids = block.innerBlocks || [];
 		  if (!kids.length) return;
 	  
-		  // if any child missing id or mis-ordered, normalize then unsubscribe
 		  let needsFix = false;
 		  kids.forEach((child, i) => {
 			const cid = child.clientId;
@@ -273,22 +247,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		  });
 	  
 		  if (needsFix) {
-			// also mirror to parent dataset so editor state matches
 			setAttributes({ tabActiveFrontend: attributes.tabActive ?? 0 });
 		  }
-		  // run only once after we’ve normalized
 		  if (kids.length) unSub();
 		});
 	  
 		return () => unSub && unSub();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const blockProps = useBlockProps({
 		className: `fb-tabs-wrapper ${blockId}`,
 	});
 
-	// Use tabItems 
 	const getTabsTemplate = useMemo(() => tabItems.map(item => ['frontis-blocks/tabs-item']), [tabItems]);
 
 	const innerBlocksProps = useInnerBlocksProps(
@@ -385,7 +355,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									setAttributes({ tabItems: next });
 								}}
 								className="fb-tab-title"
-								placeholder={__("Title…", "frontis-blocks")}
+								allowedFormats={['core/bold', 'core/italic']}
+							/>
+						)}
+						{showDescription && (
+							<RichText
+								tagName={tabDescriptionTag}
+								value={item.description}
+								onChange={(val) => {
+									const next = [...tabItems];
+									next[index] = { ...next[index], description: val }; 
+									setAttributes({ tabItems: next });
+								}}
+								className="fb-tab-description"
 								allowedFormats={['core/bold', 'core/italic']}
 							/>
 						)}
