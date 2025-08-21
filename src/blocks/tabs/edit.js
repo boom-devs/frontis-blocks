@@ -25,6 +25,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showTitle,
 		showDescription,
 		tabLayoutSwitcher,
+
+		tabGlobalWraperID,
+		tabGlobalWraperClass,
 	} = attributes;
 
 
@@ -310,7 +313,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 			{renderTabsToolbarControls()}
 
-			<div className={`fb-tabs-wrap ${tabLayoutSwitcher}`}>
+			<div className={`fb-tabs-wrap ${tabLayoutSwitcher} ${tabGlobalWraperClass}` } id={tabGlobalWraperID}>
 				<ul className="fb-tabs-panel" role="tablist">
 				{tabItems.map((item, index) => (
 					<li
