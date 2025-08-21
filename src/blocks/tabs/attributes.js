@@ -22,6 +22,7 @@ const attributes = {
             // You can define some default items if needed
             { id: 'item-1',
                 title: 'Tab 1',
+                description: 'Tab description',
                 tabIcon: 'bookmark',
                 tabIconAlign: 'icon',
                 tabIconImageUrl: '',
@@ -30,6 +31,7 @@ const attributes = {
             },
 			{ id: 'item-2',
                 title: 'Tab 2',
+                description: 'Tab description',
                 tabIcon: 'bookmark',
                 tabIconAlign: 'icon',
                 tabIconImageUrl: '',
@@ -38,6 +40,7 @@ const attributes = {
             },
 			{ id: 'item-3',
                 title: 'Tab 3',
+                description: 'Tab description',
                 tabIcon: 'bookmark',
                 tabIconAlign: 'icon',
                 tabIconImageUrl: '',
@@ -53,6 +56,10 @@ const attributes = {
                     default: ''
                 },
                 title: {
+                    type: 'string',
+                    default: ''
+                },
+                description: {
                     type: 'string',
                     default: ''
                 },
@@ -100,6 +107,11 @@ const attributes = {
         default: true,
     },
 
+    showDescription: {
+        type: 'boolean',
+        default: false,
+    },
+
     fillTitlesWrapper: {
         type: 'boolean',
         default: true,
@@ -109,6 +121,522 @@ const attributes = {
         type : 'string',
         default: 'span'
     },
+    tabDescriptionTag: {
+        type : 'string',
+        default: 'p'
+    },
+
+    /** Tab List Wrapper */
+    tabListMinWidth : {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: '',
+        }
+    },
+    tabListMinWidthUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    tabListBgColorTypeSwitcher: { 
+        type: 'string',
+        default: 'normal'
+    },
+    tabListBgColorType: { 
+        type: 'string',
+        default: 'classic',
+    },
+    tabListBgHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    tabListBgColor: {
+        type: 'string',
+    },
+    tabListBgHoverColor: {
+        type: 'string',
+    },
+    tabListBgGradientColor: {
+        type: 'string',
+        default: null
+    },
+    tabListBgHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    tabListBgCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    tabListBgCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    tabListBgHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    tabListBgHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    tabListPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabListPaddingDesktop: { 
+        type: "object", 
+        default: {
+            top: '5',
+            bottom: '5',
+            left: '5',
+            right: '5',
+        },
+    },
+    tabListPaddingTablet: {
+        type: "object", 
+        default: {
+            top: '5',
+            bottom: '5',
+            left: '5',
+            right: '5',
+        },
+    },
+    tabListPaddingMobile: {
+        type: "object", 
+        default: {
+            top: '5',
+            bottom: '5',
+            left: '5',
+            right: '5',
+        },
+    },
+    tabListPaddingLink : { 
+        type : "boolean",
+        default: true
+    },
+
+    tabListMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabListMarginDesktop: { 
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabListMarginTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabListMarginMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabListMarginLink : { 
+        type : "boolean",
+        default: true
+    },
+
+    tabListBorder: {
+        type: 'string',
+        default: "none",
+    },
+    tabListBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    tabListBorderColor: {
+        type: 'string',
+    },
+    tabListBorderHoverColor: {
+        type: 'string',
+    },
+    tabListBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabListBorderDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabListBorderTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabListBorderMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabListBorderLink : { 
+        type : "boolean",
+        default: true
+    },
+    tabListBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabListBorderRadiusDesktop: {    
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabListBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabListBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabListBorderRadiusLink : {  
+        type : "boolean",
+        default: true
+    },
+
+    /** Start Title Typography Style */
+    tabTitleGlobalTypographyData: { 
+        type: 'object',
+        default: {}
+    },
+    tabTitleGlobalTypoSwitcher: {
+        type: 'object',
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    tabTitleGlobalTypoType: {
+        type: 'string',
+        default: 'default',
+    },
+    tabTitleGlobalTypoOption: {
+        type: 'object',
+        default: {label: 'Default', value: 'default'},
+    },
+    tabTitleFontFamily: {
+        type: 'string',
+        default: 'Default',
+    },
+    tabTitleFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    tabTitleFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    tabTitleFontWeight : {
+        type: 'string',
+        default: ''
+    },
+    tabTitleFontStyle : {
+        type: 'string',
+        default: ''
+    },
+    tabTitleTextTransform : {
+        type: 'string',
+        default: ''
+    },
+    tabTitleTextDecoration : {
+        type: 'string',
+        default: ''
+    },
+    tabTitleLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    tabTitleLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    tabTitleLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    tabTitleLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+
+    tabTitleColorSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    tabTitleColor: {
+        type: 'string',
+    },
+    tabTitleHoverColor: {
+        type: 'string',
+    },
+
+    tabTitlePaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabTitlePaddingDesktop: { 
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabTitlePaddingTablet: { 
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabTitlePaddingMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabTitlePaddingLink : { 
+        type : "boolean",
+        default: true
+    },
+
+    tabTitleMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabTitleMarginDesktop: { 
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabTitleMarginTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabTitleMarginMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabTitleMarginLink : { 
+        type : "boolean",
+        default: true
+    },
+
+    tabTitleBorder: {
+        type: 'string',
+        default: "none",
+    },
+    tabTitleBorderColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    tabTitleBorderColor: { 
+        type: 'string',
+    },
+    tabTitleBorderHoverColor: {
+        type: 'string',
+    },
+    tabTitleBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabTitleBorderDesktop: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabTitleBorderTablet: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabTitleBorderMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabTitleBorderLink : { 
+        type : "boolean",
+        default: true
+    },
+    tabTitleBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    tabTitleBorderRadiusDesktop: {    
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabTitleBorderRadiusTablet: {
+        type: "object", 
+        default: {
+            top: '', 
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabTitleBorderRadiusMobile: {
+        type: "object", 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    tabTitleBorderRadiusLink : {  
+        type : "boolean",
+        default: true
+    },
+    /** End Title Style */
 
     /** Tab Icon Styles */
     tabIconPosition: {
@@ -326,7 +854,7 @@ const attributes = {
         default: true
     },
     /** End Icon Padding */
-    
+
     tabIconRotateSwitcher: {
         type: 'string',
         default: 'normal',

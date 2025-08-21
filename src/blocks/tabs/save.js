@@ -7,9 +7,11 @@ export default function save({ attributes }) {
     tabItems,
     tabActiveFrontend,
     tabTitleTag,
+    tabDescriptionTag,
     tabIconPosition,
     showIcon,
     showTitle,
+    showDescription,
     tabLayoutSwitcher,
   } = attributes;
 
@@ -65,6 +67,16 @@ export default function save({ attributes }) {
                     className="fb-tab-title"
                   />
                 )}
+
+                {showDescription && (
+                  <RichText.Content 
+                    tagName={tabDescriptionTag}
+                    value={item.description}
+                    className="fb-tab-description"
+                  />
+                )}
+
+                
 
                 {/* Right Icon */}
                 {tabIconPosition === 'right' && item.tabIconAlign !== 'none' && showIcon && (
