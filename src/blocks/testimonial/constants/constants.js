@@ -15,6 +15,13 @@ export const PRESETS = [
     { label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
 ];
 
+export const IMAGE_OBJECT_FIT = [
+    { label: __('Default', 'frontis-blocks'), value: 'default' },
+    { label: __('Cover', 'frontis-blocks'), value: 'cover' },
+    { label: __('Contain', 'frontis-blocks'), value: 'contain' },
+    { label: __('Fill', 'frontis-blocks'), value: 'fill' },
+];
+
 export const OVERFLOW_OP = [
     { label: __('Default', 'frontis-blocks'), value: 'default' },
     { label: __('Auto', 'frontis-blocks'), value: 'auto' },
