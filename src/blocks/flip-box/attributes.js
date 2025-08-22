@@ -2257,9 +2257,9 @@ const attributes = {
     flipBoxFrontHeight: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '310',
+            Tablet: '310',
+            Mobile: '310'
         }
     },
     flipBoxFrontHeightUnits: {
