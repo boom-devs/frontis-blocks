@@ -1510,9 +1510,9 @@ const Inspector = (props) => {
 							deviceType={deviceType}
 							spacingUnitsHandler={containerPaddingUnitsHandler}
 							spacingUnits={containerPaddingUnits}
-							spacingDesktop={isBlockRootParent && containerDesktopPadding.top === '' ? {top: containerGlobalPadding.Desktop, right: containerGlobalPadding.Desktop, bottom: containerGlobalPadding.Desktop, left: containerGlobalPadding.Desktop} : containerDesktopPadding}
-							spacingTablet={isBlockRootParent && containerDesktopPadding.top === '' ? {top: containerGlobalPadding.Tablet, right: containerGlobalPadding.Tablet, bottom: containerGlobalPadding.Tablet, left: containerGlobalPadding.Tablet} : containerTabletPadding}
-							spacingMobile={isBlockRootParent && containerDesktopPadding.top === '' ? {top: containerGlobalPadding.Mobile, right: containerGlobalPadding.Mobile, bottom: containerGlobalPadding.Mobile, left: containerGlobalPadding.Mobile} : containerMobilePadding}
+							spacingDesktop={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Desktop, right: containerGlobalPadding.Desktop, bottom: containerGlobalPadding.Desktop, left: containerGlobalPadding.Desktop} : containerDesktopPadding}
+							spacingTablet={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Tablet, right: containerGlobalPadding.Tablet, bottom: containerGlobalPadding.Tablet, left: containerGlobalPadding.Tablet} : containerTabletPadding}
+							spacingMobile={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Mobile, right: containerGlobalPadding.Mobile, bottom: containerGlobalPadding.Mobile, left: containerGlobalPadding.Mobile} : containerMobilePadding}
 							handleSpacingUnitHandler={containerPaddingUnitsChange}
 							spacingCombineBtn={containerPaddingLink}
 							spacingCombineBtnHandler={containerPaddingLinkBtn}
