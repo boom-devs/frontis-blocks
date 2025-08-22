@@ -137,6 +137,11 @@ const attributes = {
         }
     },
 
+    TestimonialImageObjectFit: {
+        type: 'string',
+        default: 'default',
+    },
+
     TestimonialImageRadiusUnits: {
 		type: 'object',
 		default: {
