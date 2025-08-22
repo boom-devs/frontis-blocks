@@ -2039,7 +2039,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialImageWidth,
         TestimonialImageWidthUnits,
         TestimonialImageObjectFit,
-
+        
         TestimonialImageRadiusUnits,
         TestimonialImageDesktopRadiusWidth,
         TestimonialImageTabRadiusWidth,
