@@ -49,7 +49,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                   
                                 <li key={item.id} className={`fb-feature-list-item single-item-${item.id}`}>
 
-                                {item.FeatureIconAlign !== 'none' && (
+                                    {item.FeatureIconAlign !== 'none' && (
                                         <div className="fb-feature-list-icon-box">
                                             <div className={`fb-feature-list-icon-inner ${FeatureIconShape}`}>
                                                 {item.FeatureIconAlign === 'icon' || item.FeatureIconAlign === undefined ? (
