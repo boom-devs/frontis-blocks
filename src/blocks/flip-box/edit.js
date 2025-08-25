@@ -81,7 +81,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		flipSelectedSide,
 		flipAnimationType,
 		buttonIconSwitcherBack,
-		btnIconBack
+		btnIconBack,
+		isHover,
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -110,8 +111,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				<div
 					className={`fb-parent-wrapper fb-flip-box-wrapper ${blockID} ${flipBoxGlobalWraperClass}`}
 					id={flipBoxGlobalWraperID}
+					onMouseEnter={() => setAttributes({ isHover: true })}
+					onMouseLeave={() => setAttributes({ isHover: false })}
 				>
-					<div className={`fb-flipper-wrapper fb-editor-mode ${flipSelectedSide === 'back' ? 'fb-show-back' : ''} ${flipAnimationType}`} >
+					<div className={`fb-flipper-wrapper fb-editor-mode${isHover || flipSelectedSide === "back"
+						? " fb-show-back"
+						: ""
+						}`}>
 						<div className={`fb-flipbox-front ${flipSelectedSide === 'front' ? 'fb-active-side' : 'fb-inactive-side'}`}>
 							<div className="fb-flipbox-content-wrapper">
 								<div className="fb-flip-media-container">
