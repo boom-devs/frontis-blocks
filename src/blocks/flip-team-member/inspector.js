@@ -3347,7 +3347,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Normal Color", "frontis-blocks")}
 							globalColor={teamMemberImageBGColor}
-							setGlobalColor={(value) => setAttributes({ teamMemberImageBGColor: value })}
+							setGlobalColor={(value) => setAttributes({ teamMemberImageBGColor: value === undefined ? '' : value })}
 						/>
 					)}
 							
@@ -3355,7 +3355,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={teamMemberImageBGHoverColor}
-							setGlobalColor={(value) => setAttributes({ teamMemberImageBGHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ teamMemberImageBGHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -3391,7 +3391,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={teamMemberImageBorderColor}
-						setGlobalColor={(value) => setAttributes({ teamMemberImageBorderColor: value })}
+						setGlobalColor={(value) => setAttributes({ teamMemberImageBorderColor: value === undefined ? '' : value })}
 					/>
 				)}
 						
@@ -3399,7 +3399,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={teamMemberImageBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ teamMemberImageBorderHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ teamMemberImageBorderHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3462,11 +3462,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							normalClassicColor={teamMemberContentBgClassicColor}
 							setNormalClassicColor={(value) =>
-								setAttributes({ teamMemberContentBgClassicColor: value })
+								setAttributes({ teamMemberContentBgClassicColor: value === undefined ? '' : value })
 							}
 							normalGradientColor={teamMemberContentBgGradientColor}
 							setNormalGradientColor={(value) =>
-								setAttributes({ teamMemberContentBgGradientColor: value })
+								setAttributes({ teamMemberContentBgGradientColor: value === undefined ? '' : value })
 							}
 							normalCustomGradientSwitcher={
 								teamMemberContentBgCustomGradientSwitcher
@@ -3530,11 +3530,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							hoverClassicColor={teamMemberContentBgHoverClassicColor}
 							setHoverClassicColor={(value) =>
-								setAttributes({ teamMemberContentBgHoverClassicColor: value })
+								setAttributes({ teamMemberContentBgHoverClassicColor: value === undefined ? '' : value })
 							}
 							hoverGradientColor={teamMemberContentBgHoverGradientColor}
 							setHoverGradientColor={(value) =>
-								setAttributes({ teamMemberContentBgHoverGradientColor: value })
+								setAttributes({ teamMemberContentBgHoverGradientColor: value === undefined ? '' : value })
 							}
 							hoverCustomGradientSwitcher={
 								teamMemberContentBgHoverCustomGradientSwitcher
@@ -3636,7 +3636,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={teamMemberContentBorderColor}
-						setGlobalColor={(value) => setAttributes({ teamMemberContentBorderColor: value })}
+						setGlobalColor={(value) => setAttributes({ teamMemberContentBorderColor: value === undefined ? '' : value })}
 					/>
 				)}
 						
@@ -3644,7 +3644,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={teamMemberContentBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ teamMemberContentBorderHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ teamMemberContentBorderHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3757,7 +3757,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={teamMemberNameColor}
-						setGlobalColor={(value) => setAttributes({ teamMemberNameColor: value })}
+						setGlobalColor={(value) => setAttributes({ teamMemberNameColor: value === undefined ? '' : value })}
 					/>
 				)}
 						
@@ -3765,7 +3765,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={teamMemberNameHoverColor}
-						setGlobalColor={(value) => setAttributes({ teamMemberNameHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ teamMemberNameHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3852,7 +3852,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Normal Color", "frontis-blocks")}
 							globalColor={teamMemberDesignationColor}
-							setGlobalColor={(value) => setAttributes({ teamMemberDesignationColor: value })}
+							setGlobalColor={(value) => setAttributes({ teamMemberDesignationColor: value === undefined ? '' : value })}
 						/>
 					)}
 							
@@ -3860,7 +3860,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={teamMemberDesignationHoverColor}
-							setGlobalColor={(value) => setAttributes({ teamMemberDesignationHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ teamMemberDesignationHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -3947,7 +3947,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Normal Color", "frontis-blocks")}
 							globalColor={teamMemberDescColor}
-							setGlobalColor={(value) => setAttributes({ teamMemberDescColor: value })}
+							setGlobalColor={(value) => setAttributes({ teamMemberDescColor: value === undefined ? '' : value })}
 						/>
 					)}
 							
@@ -3955,7 +3955,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={teamMemberDescHoverColor}
-							setGlobalColor={(value) => setAttributes({ teamMemberDescHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ teamMemberDescHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -4011,7 +4011,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Normal Color", "frontis-blocks")}
 							globalColor={socialIconBtnColor}
-							setGlobalColor={(value) => setAttributes({ socialIconBtnColor: value })}
+							setGlobalColor={(value) => setAttributes({ socialIconBtnColor: value === undefined ? '' : value })}
 						/>
 					)}
 							
@@ -4019,7 +4019,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={socialIconBtnHoverColor}
-							setGlobalColor={(value) => setAttributes({ socialIconBtnHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ socialIconBtnHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -4033,7 +4033,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Normal Color", "frontis-blocks")}
 							globalColor={socialIconBtnBGColor}
-							setGlobalColor={(value) => setAttributes({ socialIconBtnBGColor: value })}
+							setGlobalColor={(value) => setAttributes({ socialIconBtnBGColor: value === undefined ? '' : value })}
 						/>
 					)}
 							
@@ -4041,7 +4041,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={socialIconBtnBGHoverColor}
-							setGlobalColor={(value) => setAttributes({ socialIconBtnBGHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ socialIconBtnBGHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 					
@@ -4090,7 +4090,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Normal Color", "frontis-blocks")}
 							globalColor={socialIconBtnBorderColor}
-							setGlobalColor={(value) => setAttributes({ socialIconBtnBorderColor: value })}
+							setGlobalColor={(value) => setAttributes({ socialIconBtnBorderColor: value === undefined ? '' : value })}
 						/>
 					)}
 							
@@ -4098,7 +4098,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={socialIconBtnBorderHoverColor}
-							setGlobalColor={(value) => setAttributes({ socialIconBtnBorderHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ socialIconBtnBorderHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -4175,7 +4175,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Normal Color", "frontis-blocks")}
 							globalColor={teamMemberIconsColor}
-							setGlobalColor={(value) => setAttributes({ teamMemberIconsColor: value })}
+							setGlobalColor={(value) => setAttributes({ teamMemberIconsColor: value === undefined ? '' : value })}
 						/>
 					)}
 							
@@ -4183,7 +4183,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={teamMemberIconsHoverColor}
-							setGlobalColor={(value) => setAttributes({ teamMemberIconsHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ teamMemberIconsHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -4211,7 +4211,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
 								globalColor={teamMemberIconsBGColor}
-								setGlobalColor={(value) => setAttributes({ teamMemberIconsBGColor: value })}
+								setGlobalColor={(value) => setAttributes({ teamMemberIconsBGColor: value === undefined ? '' : value })}
 							/>
 						)}
 								
@@ -4219,7 +4219,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={teamMemberIconsBGHoverColor}
-								setGlobalColor={(value) => setAttributes({ teamMemberIconsBGHoverColor: value })}
+								setGlobalColor={(value) => setAttributes({ teamMemberIconsBGHoverColor: value === undefined ? '' : value })}
 							/>
 						)}
 						
@@ -4254,7 +4254,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
 								globalColor={teamMemberIconsBorderColor}
-								setGlobalColor={(value) => setAttributes({ teamMemberIconsBorderColor: value })}
+								setGlobalColor={(value) => setAttributes({ teamMemberIconsBorderColor: value === undefined ? '' : value })}
 							/>
 						)}
 								
@@ -4262,7 +4262,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={teamMemberIconsBorderHoverColor}
-								setGlobalColor={(value) => setAttributes({ teamMemberIconsBorderHoverColor: value })}
+								setGlobalColor={(value) => setAttributes({ teamMemberIconsBorderHoverColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -4428,11 +4428,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							normalClassicColor={teamMemberBgClassicColor}
 							setNormalClassicColor={(value) =>
-								setAttributes({ teamMemberBgClassicColor: value })
+								setAttributes({ teamMemberBgClassicColor: value === undefined ? '' : value })
 							}
 							normalGradientColor={teamMemberBgGradientColor}
 							setNormalGradientColor={(value) =>
-								setAttributes({ teamMemberBgGradientColor: value })
+								setAttributes({ teamMemberBgGradientColor: value === undefined ? '' : value })
 							}
 							normalCustomGradientSwitcher={
 								teamMemberBgCustomGradientSwitcher
@@ -4496,11 +4496,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							hoverClassicColor={teamMemberBgHoverClassicColor}
 							setHoverClassicColor={(value) =>
-								setAttributes({ teamMemberBgHoverClassicColor: value })
+								setAttributes({ teamMemberBgHoverClassicColor: value === undefined ? '' : value })
 							}
 							hoverGradientColor={teamMemberBgHoverGradientColor}
 							setHoverGradientColor={(value) =>
-								setAttributes({ teamMemberBgHoverGradientColor: value })
+								setAttributes({ teamMemberBgHoverGradientColor: value === undefined ? '' : value })
 							}
 							hoverCustomGradientSwitcher={
 								teamMemberBgHoverCustomGradientSwitcher
@@ -4583,7 +4583,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
 								globalColor={teamMemberBorderColor}
-								setGlobalColor={(value) => setAttributes({ teamMemberBorderColor: value })}
+								setGlobalColor={(value) => setAttributes({ teamMemberBorderColor: value === undefined ? '' : value })}
 							/>
 						)}
 								
@@ -4591,7 +4591,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={teamMemberBorderHoverColor}
-								setGlobalColor={(value) => setAttributes({ teamMemberBorderHoverColor: value })}
+								setGlobalColor={(value) => setAttributes({ teamMemberBorderHoverColor: value === undefined ? '' : value })}
 							/>
 						)}
 

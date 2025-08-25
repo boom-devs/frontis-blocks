@@ -126,13 +126,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             <p>{__("(Overrides theme background)", "frontis-blocks")}</p>
                                             <ColorPalette
                                                 value={customBackgroundColor}
-                                                onChange={(value) => setAttributes({ customBackgroundColor: value })}
+                                                onChange={(value) => setAttributes({ customBackgroundColor: value === undefined ? '' : value })}
                                             />
                                             <p>{__("Custom Text Color", "frontis-blocks")}</p>
                                             <p>{__("(Overrides theme text color)", "frontis-blocks")}</p>
                                             <ColorPalette
                                                 value={customTextColor}
-                                                onChange={(value) => setAttributes({ customTextColor: value })}
+                                                onChange={(value) => setAttributes({ customTextColor: value === undefined ? '' : value })}
                                             />
                                         </PanelBody>
                                     </>
