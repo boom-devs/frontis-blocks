@@ -24,7 +24,8 @@ export default function FrontPreview({fontProps, deviceType, fontSize = false}) 
         <div
             style={generateFontObj(fontProps, fontSize)}
             className="font_preview_box"
-        >Aa
+        >
+			<div className="font_preview_box_inner">Aa</div>
         </div>
     )
 }
