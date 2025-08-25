@@ -1,7 +1,6 @@
 import { useState, useEffect } from "@wordpress/element";
 
-const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data }) => {
-
+const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, isProTemplate, setIsProTemplate }) => {
   // Extract sections from the schema
   const schema = data.$schema;
   const categories = activeTab ? Object.values(schema[activeTab]?.categories || {}) : [];
@@ -14,6 +13,18 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data })
       setActiveCategory(categories[0].id);
     }
   }, [categories]);
+
+
+  const TagTabsOptions = [
+    { name: 'Free', value: 'free' },
+    { name: 'Pro', value: 'pro' },
+  ];
+
+  const handelTemplates = value => {
+    setIsProTemplate(isProTemplate === value ? '' : value);
+  }
+
+
   return (
     <div className="fb-template-library-store-sidebar">
       {activeTab !== 'templateLibrary' && (
@@ -22,8 +33,15 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data })
             <h2>Categories</h2>
           </div>
           <div className="fb-template-category">
-            <span className="fb-tl-free">Free</span>
-            <span className="fb-tl-pro">Pro</span>
+            {TagTabsOptions.map(tab => (
+              <span
+                key={tab.value}
+                className={`${tab.value == 'free' ? 'fb-tl-free' : 'fb-tl-pro'} ${isProTemplate === tab.value ? 'active' : ''}`}
+                onClick={() => handelTemplates(tab.value)}
+              >
+                {tab.name}
+              </span>
+            ))}
           </div>
         </div>
       )}
@@ -35,7 +53,14 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data })
             key={category.id}
             className={`fb-template-library-store-sidebar-tab ${activeCategory[activeTab] === category.id ? 'active' : ''
               }`}
-            onClick={() => setActiveCategory({...activeCategory, [activeTab]: category.id})}
+            onClick={() => {
+              setActiveCategory({
+                ...activeCategory,
+                [activeTab]: category.id
+              });
+              setIsProTemplate('');
+            }}
+
           >
             <span className="fb-template-library-store-sidebar-tab-name">
               <span dangerouslySetInnerHTML={{ __html: category.icon }} />

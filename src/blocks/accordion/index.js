@@ -21,5 +21,4 @@ registerBlockType( metadata.name, {
 } );
 
 
-
 							
