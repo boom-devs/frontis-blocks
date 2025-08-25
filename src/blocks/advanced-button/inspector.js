@@ -1235,6 +1235,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			}
 		}
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button {
+			${buttonIconGapSize.Desktop ? `gap: ${buttonIconGapSize.Desktop}${buttonIconGapUnits.Desktop};` : ''}
+			
 			${buttonGlobalTypoSwitcher.fontFamily === true && buttonGlobalTypographyData.fontFamily ? `font-family: ${buttonGlobalTypographyData.fontFamily};` : ''}
 			${buttonGlobalTypoSwitcher.fontSize === true && buttonGlobalTypographyData.fontSize ? `font-size: ${buttonGlobalTypographyData.fontSize};` : ''}
 			${buttonGlobalTypoSwitcher.fontWeight === true && buttonGlobalTypographyData.fontWeight ? `font-weight: ${buttonGlobalTypographyData.fontWeight};` : ''}
@@ -1288,8 +1290,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		}
 		
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
-			${buttonIconPosition === 'left' && buttonIconGapSize.Desktop ? `margin-right: ${buttonIconGapSize.Desktop}${buttonIconGapUnits.Desktop};` : ''}
-			${buttonIconPosition === 'right' && buttonIconGapSize.Desktop ? `margin-left: ${buttonIconGapSize.Desktop}${buttonIconGapUnits.Desktop};` : ''}
 			${buttonIconNormalBackgroundType === 'gradient' ? `   	
                 ${buttonIconNormalCustomGradientSwitcher && buttonIconNormalCustomGradientInputValue ? `background: ${buttonIconNormalCustomGradientInputValue};` : `background: ${buttonIconNormalGradientColor};`}
             `: `
@@ -1361,20 +1361,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				}
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button {
+				${buttonIconGapSize.Tablet ? `gap: ${buttonIconGapSize.Tablet}${buttonIconGapUnits.Tablet};` : ''}
+				
 				${buttonTabletPaddingStr && buttonTabPadding?.top ? `padding: ${buttonTabletPaddingStr};` : ''}
 				${buttonTabletMarginStr && buttonTabMargin?.top ? `margin: ${buttonTabletMarginStr};` : ''}
-				${buttonBorder ? `border: ${buttonBorder};` : ''}
-				${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
 				${buttonTabletBorderWidthStr && buttonTabBorderWidth?.top ? `border-width: ${buttonTabletBorderWidthStr};` : ''}
 				${buttonTabletBorderRadiusStr && buttonTabBorderRadiusWidth?.top ? `border-radius: ${buttonTabletBorderRadiusStr};` : ''}
 				${buttonWidth.Tablet && buttonWidthUnits.Tablet ? `width: ${buttonWidth.Tablet}${buttonWidthUnits.Tablet};` : ''}
 				${buttonGlobalTypoSwitcher.fontSize === false && buttonFontSize.Tablet && buttonFontSizeUnits.Tablet ? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};` : ''}
 				${buttonGlobalTypoSwitcher.letterSpacing === false && buttonLetterSpacing.Tablet && buttonLetterSpacingUnits.Tablet ? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};` : ''}
 				${buttonGlobalTypoSwitcher.lineHeight === false && buttonLineHeight.Tablet && buttonLineHeightUnits.Tablet ? `line-height: ${buttonLineHeight.Tablet}${buttonLineHeightUnits.Tablet};` : ''}
-			}
-
-			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
-				${buttonHoverColor ? `color: ${buttonHoverColor};` : ''}
 			}
 
 			.${blockId} .fb-advanced-button-wrapper:hover {
@@ -1391,9 +1387,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					)
 				}
 			}
-			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
-				${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
-			}
 
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
 				${buttonIconPaddingTabletWidth && buttonIconPaddingTablet?.top ? `padding: ${buttonIconPaddingTabletWidth};` : ''}
@@ -1406,7 +1399,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `width: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
 				${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `height: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
 				transform: rotate(${buttonIconRotate.Tablet}deg);
-				transition: all .3s ease-in-out;
 			}
 
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
@@ -1416,9 +1408,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
 				${buttonIconImageWidth ? `width: ${buttonIconImageWidth.Tablet}${buttonIconImageWidthUnits.Tablet};` : ''}
 				${buttonIconImageHeight ? `height: ${buttonIconImageHeight.Tablet}${buttonIconImageHeightUnits.Tablet};` : ''}
-				${buttonIconImagedisplay ? `object-fit: ${buttonIconImagedisplay};` : ''}
 				transform: rotate(${buttonImageRotate.Tablet}deg);
-				transition: all .3s ease-in-out;
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
 				transform: rotate(${buttonImageRotateHover.Tablet}deg);
@@ -1452,10 +1442,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				}
 			}
 
-			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
-				${buttonHoverColor ? `color: ${buttonHoverColor};` : ''}
-			}
-
 			.${blockId} .fb-advanced-button-wrapper:hover {
 				${buttonTransformHoverProportions 
 					? (buttonTransformHoverScale?.Mobile 
@@ -1469,14 +1455,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					)
 				}
 			}
-			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
-				${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
-			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button {
+				${buttonIconGapSize.Mobile ? `gap: ${buttonIconGapSize.Mobile}${buttonIconGapUnits.Mobile};` : ''}
 				${buttonMobilePaddingStr && buttonMobilePadding?.top ? `padding: ${buttonMobilePaddingStr};` : ''}
 				${buttonMobileMarginStr && buttonMobileMargin?.top ? `margin: ${buttonMobileMarginStr};` : ''}
-				${buttonBorder ? `border: ${buttonBorder};` : ''}
-				${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
 				${buttonMobileBorderWidthStr && buttonMobileBorderWidth?.top ? `border-width: ${buttonMobileBorderWidthStr};` : ''}
 				${buttonMobileBorderRadiusStr && buttonMobileBorderRadiusWidth?.top ? `border-radius: ${buttonMobileBorderRadiusStr};` : ''}
 				${buttonWidth.Mobile && buttonWidthUnits.Mobile ? `width: ${buttonWidth.Mobile}${buttonWidthUnits.Mobile};` : ''}
@@ -1495,7 +1477,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `width: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
 				${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `height: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
 				transform: rotate(${buttonIconRotate.Mobile}deg);
-				transition: all .3s ease-in-out;
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
 				transform: rotate(${buttonIconRotateHover.Mobile}deg); 
@@ -1503,9 +1484,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
 				${buttonIconImageWidth.Mobile ? `width: ${buttonIconImageWidth.Mobile}${buttonIconImageWidthUnits.Mobile};` : ''}
 				${buttonIconImageHeight.Mobile ? `height: ${buttonIconImageHeight.Mobile}${buttonIconImageHeightUnits.Mobile};` : ''}
-				${buttonIconImagedisplay ? `object-fit: ${buttonIconImagedisplay};` : ''}
 				transform: rotate(${buttonImageRotate.Mobile}deg);
-				transition: all .3s ease-in-out;
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
 				transform: rotate(${buttonImageRotateHover.Mobile}deg);
