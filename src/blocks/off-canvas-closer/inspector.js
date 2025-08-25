@@ -625,7 +625,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<FB_ColorControl
 														label={__("Normal Color", "frontis-blocks")}
 														globalColor={offCanvasIconColor}
-														setGlobalColor={(value) => setAttributes({ offCanvasIconColor: value })}
+														setGlobalColor={(value) => setAttributes({ offCanvasIconColor: value === undefined ? '' : value })}
 													/>
 												)}
 
@@ -633,7 +633,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<FB_ColorControl
 														label={__("Hover Color", "frontis-blocks")}
 														globalColor={offCanvasIconHoverColor}
-														setGlobalColor={(value) => setAttributes({ offCanvasIconHoverColor: value })}
+														setGlobalColor={(value) => setAttributes({ offCanvasIconHoverColor: value === undefined ? '' : value })}
 													/>
 												)}
 
@@ -647,7 +647,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<FB_ColorControl
 														label={__("Normal Color", "frontis-blocks")}
 														globalColor={offCanvasIconBgColor}
-														setGlobalColor={(value) => setAttributes({ offCanvasIconBgColor: value })}
+														setGlobalColor={(value) => setAttributes({ offCanvasIconBgColor: value === undefined ? '' : value })}
 													/>
 												)}
 
@@ -655,7 +655,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<FB_ColorControl
 														label={__("Hover Color", "frontis-blocks")}
 														globalColor={offCanvasIconBgHoverColor}
-														setGlobalColor={(value) => setAttributes({ offCanvasIconBgHoverColor: value })}
+														setGlobalColor={(value) => setAttributes({ offCanvasIconBgHoverColor: value === undefined ? '' : value })}
 													/>
 												)}
 
@@ -690,7 +690,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<FB_ColorControl
 														label={__("Normal Color", "frontis-blocks")}
 														globalColor={offCanvasIconBorderColor}
-														setGlobalColor={(value) => setAttributes({ offCanvasIconBorderColor: value })}
+														setGlobalColor={(value) => setAttributes({ offCanvasIconBorderColor: value === undefined ? '' : value })}
 													/>
 												)}
 
@@ -698,7 +698,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<FB_ColorControl
 														label={__("Hover Color", "frontis-blocks")}
 														globalColor={offCanvasIconBorderHoverColor}
-														setGlobalColor={(value) => setAttributes({ offCanvasIconBorderHoverColor: value })}
+														setGlobalColor={(value) => setAttributes({ offCanvasIconBorderHoverColor: value === undefined ? '' : value })}
 													/>
 												)}
 
@@ -832,7 +832,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<FB_ColorControl
 														label={__("Normal Color", "frontis-blocks")}
 														globalColor={offCanvasIconBorderColor}
-														setGlobalColor={(value) => setAttributes({ offCanvasIconBorderColor: value })}
+														setGlobalColor={(value) => setAttributes({ offCanvasIconBorderColor: value === undefined ? '' : value })}
 													/>
 												)}
 
@@ -840,7 +840,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<FB_ColorControl
 														label={__("Hover Color", "frontis-blocks")}
 														globalColor={offCanvasIconBorderHoverColor}
-														setGlobalColor={(value) => setAttributes({ offCanvasIconBorderHoverColor: value })}
+														setGlobalColor={(value) => setAttributes({ offCanvasIconBorderHoverColor: value === undefined ? '' : value })}
 													/>
 												)}
 

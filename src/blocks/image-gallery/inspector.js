@@ -2877,7 +2877,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
                             globalColor={imageBorderColor}
-                            setGlobalColor={(value) => setAttributes({ imageBorderColor: value })}
+                            setGlobalColor={(value) => setAttributes({ imageBorderColor: value === undefined ? '' : value })}
                         />
                     )}
                         
@@ -2885,7 +2885,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
                             globalColor={imageBorderHoverColor}
-                            setGlobalColor={(value) => setAttributes({ imageBorderHoverColor: value })}
+                            setGlobalColor={(value) => setAttributes({ imageBorderHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 
@@ -2966,7 +2966,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <div className="fb-setting-normal-color">
                                             <ColorPicker
                                                 color={ImageOverlayColor}
-                                                onChange={(value) => setAttributes({ ImageOverlayColor: value })}
+                                                onChange={(value) => setAttributes({ ImageOverlayColor: value === undefined ? '' : value })}
                                                 enableAlpha={true}
                                             />
                                             <div className="fb-setting-color-label">{__("Default Colors", "frontis-blocks")}</div>
@@ -2980,7 +2980,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 ]}
                                                 disableCustomColors={true}
                                                 value={ImageOverlayColor}
-                                                onChange={(value) => setAttributes({ ImageOverlayColor: value })}
+                                                onChange={(value) => setAttributes({ ImageOverlayColor: value === undefined ? '' : value })}
                                             />
                                         </div>
                                     </BaseControl>
@@ -3068,7 +3068,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
                             globalColor={GalleryButtonColor}
-                            setGlobalColor={(value) => setAttributes({ GalleryButtonColor: value })}
+                            setGlobalColor={(value) => setAttributes({ GalleryButtonColor: value === undefined ? '' : value })}
                         />
                     )}
                         
@@ -3076,7 +3076,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
                             globalColor={GalleryButtonHoverColor}
-                            setGlobalColor={(value) => setAttributes({ GalleryButtonHoverColor: value })}
+                            setGlobalColor={(value) => setAttributes({ GalleryButtonHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 
@@ -3090,7 +3090,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
                             globalColor={GalleryButtonBGColor}
-                            setGlobalColor={(value) => setAttributes({ GalleryButtonBGColor: value })}
+                            setGlobalColor={(value) => setAttributes({ GalleryButtonBGColor: value === undefined ? '' : value })}
                         />
                     )}
                         
@@ -3098,7 +3098,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
                             globalColor={GalleryButtonBGHoverColor}
-                            setGlobalColor={(value) => setAttributes({ GalleryButtonBGHoverColor: value })}
+                            setGlobalColor={(value) => setAttributes({ GalleryButtonBGHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 
@@ -3158,7 +3158,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={ButtonBorderColor}
-                        setGlobalColor={(value) => setAttributes({ ButtonBorderColor: value })}
+                        setGlobalColor={(value) => setAttributes({ ButtonBorderColor: value === undefined ? '' : value })}
                     />
                 )}
                         
@@ -3166,7 +3166,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={ButtonBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ ButtonBorderHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ ButtonBorderHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -3246,7 +3246,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
                             globalColor={lightboxColor}
-                            setGlobalColor={(value) => setAttributes({ lightboxColor: value })}
+                            setGlobalColor={(value) => setAttributes({ lightboxColor: value === undefined ? '' : value })}
                         />
                     )}
                         
@@ -3254,7 +3254,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
                             globalColor={lightboxHoverColor}
-                            setGlobalColor={(value) => setAttributes({ lightboxHoverColor: value })}
+                            setGlobalColor={(value) => setAttributes({ lightboxHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 
@@ -3268,7 +3268,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
                             globalColor={lightboxBGColor}
-                            setGlobalColor={(value) => setAttributes({ lightboxBGColor: value })}
+                            setGlobalColor={(value) => setAttributes({ lightboxBGColor: value === undefined ? '' : value })}
                         />
                     )}
                         
@@ -3276,7 +3276,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
                             globalColor={lightboxBGHoverColor}
-                            setGlobalColor={(value) => setAttributes({ lightboxBGHoverColor: value })}
+                            setGlobalColor={(value) => setAttributes({ lightboxBGHoverColor: value === undefined ? '' : value })}
                         />
                     )}
                 </PanelBody>
@@ -3303,7 +3303,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
                             globalColor={lightboxBorderColor}
-                            setGlobalColor={(value) => setAttributes({ lightboxBorderColor: value })}
+                            setGlobalColor={(value) => setAttributes({ lightboxBorderColor: value === undefined ? '' : value })}
                         />
                     )}
                         
@@ -3311,7 +3311,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
                             globalColor={lightboxBorderHoverColor}
-                            setGlobalColor={(value) => setAttributes({ lightboxBorderHoverColor: value })}
+                            setGlobalColor={(value) => setAttributes({ lightboxBorderHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 
@@ -3476,11 +3476,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 }
                                 normalClassicColor={GalleryBgClassicColor}
                                 setNormalClassicColor={(value) =>
-                                    setAttributes({ GalleryBgClassicColor: value })
+                                    setAttributes({ GalleryBgClassicColor: value === undefined ? '' : value })
                                 }
                                 normalGradientColor={GalleryBgGradientColor}
                                 setNormalGradientColor={(value) =>
-                                    setAttributes({ GalleryBgGradientColor: value })
+                                    setAttributes({ GalleryBgGradientColor: value === undefined ? '' : value })
                                 }
                                 normalCustomGradientSwitcher={GalleryBgCustomGradientSwitcher}
                                 setNormalCustomGradientSwitcher={(value) =>
@@ -3534,11 +3534,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 }
                                 hoverClassicColor={GalleryBgHoverClassicColor}
                                 setHoverClassicColor={(value) =>
-                                    setAttributes({ GalleryBgHoverClassicColor: value })
+                                    setAttributes({ GalleryBgHoverClassicColor: value === undefined ? '' : value })
                                 }
                                 hoverGradientColor={GalleryBgHoverGradientColor}
                                 setHoverGradientColor={(value) =>
-                                    setAttributes({ GalleryBgHoverGradientColor: value })
+                                    setAttributes({ GalleryBgHoverGradientColor: value === undefined ? '' : value })
                                 }
                                 hoverCustomGradientSwitcher={GalleryBgHoverCustomGradientSwitcher}
                                 setHoverCustomGradientSwitcher={(value) =>
@@ -3611,7 +3611,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Normal Color", "frontis-blocks")}
                                 globalColor={GalleryBorderColor}
-                                setGlobalColor={(value) => setAttributes({ GalleryBorderColor: value })}
+                                setGlobalColor={(value) => setAttributes({ GalleryBorderColor: value === undefined ? '' : value })}
                             />
                         )}
                             
@@ -3619,7 +3619,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Hover Color", "frontis-blocks")}
                                 globalColor={GalleryBorderHoverColor}
-                                setGlobalColor={(value) => setAttributes({ GalleryBorderHoverColor: value })}
+                                setGlobalColor={(value) => setAttributes({ GalleryBorderHoverColor: value === undefined ? '' : value })}
                             />
                         )}
 

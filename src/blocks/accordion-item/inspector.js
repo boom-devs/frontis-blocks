@@ -513,7 +513,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                             <FB_ColorControl
                                                 label={__("Normal Color", "frontis-blocks")}
                                                 globalColor={titlePrefixColor}
-                                                setGlobalColor={(value) => setAttributes({ titlePrefixColor: value })}
+                                                setGlobalColor={(value) => setAttributes({ titlePrefixColor: value === undefined ? '' : value })}
                                             />
                                         )}
                                         
@@ -521,7 +521,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                             <FB_ColorControl
                                                 label={__("Hover Color", "frontis-blocks")}
                                                 globalColor={titlePrefixHoverColor}
-                                                setGlobalColor={(value) => setAttributes({ titlePrefixHoverColor: value })}
+                                                setGlobalColor={(value) => setAttributes({ titlePrefixHoverColor: value === undefined ? '' : value })}
                                             />
                                         )}
                                     </>
@@ -594,7 +594,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                             <FB_ColorControl
                                                 label={__("Normal Color", "frontis-blocks")}
                                                 globalColor={titleSuffixColor}
-                                                setGlobalColor={(value) => setAttributes({ titleSuffixColor: value })}
+                                                setGlobalColor={(value) => setAttributes({ titleSuffixColor: value === undefined ? '' : value })}
                                             />
                                         )}
                                         
@@ -602,7 +602,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                             <FB_ColorControl
                                                 label={__("Hover Color", "frontis-blocks")}
                                                 globalColor={titleSuffixHoverColor}
-                                                setGlobalColor={(value) => setAttributes({ titleSuffixHoverColor: value })}
+                                                setGlobalColor={(value) => setAttributes({ titleSuffixHoverColor: value === undefined ? '' : value })}
                                             />
                                         )}
                                     </>

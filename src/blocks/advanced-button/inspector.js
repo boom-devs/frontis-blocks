@@ -1881,7 +1881,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={buttonColor}
-						setGlobalColor={(value) => setAttributes({ buttonColor: value })}
+						setGlobalColor={(value) => setAttributes({ buttonColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -1889,7 +1889,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={buttonHoverColor}
-						setGlobalColor={(value) => setAttributes({ buttonHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ buttonHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -1902,9 +1902,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					normalBackgroundType={buttonNormalBackgroundType} 
 					setNormalBackgroundType={(value) => setAttributes({ buttonNormalBackgroundType: value })}
 					normalClassicColor={buttonBgColor}
-					setNormalClassicColor={(value) => setAttributes({ buttonBgColor: value })}
+					setNormalClassicColor={(value) => setAttributes({ buttonBgColor: value === undefined ? '' : value })}
 					normalGradientColor={buttonNormalGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ buttonNormalGradientColor: value })}
+					setNormalGradientColor={(value) => setAttributes({ buttonNormalGradientColor: value === undefined ? '' : value })}
 					normalCustomGradientSwitcher={buttonNormalCustomGradientSwitcher}
 					setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonNormalCustomGradientSwitcher: value })}
 					normalCustomGradientInputValue={buttonNormalCustomGradientInputValue}
@@ -1913,9 +1913,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					hoverBackgroundType={buttonHoverBackgroundType} 
 					setHoverBackgroundType={(value) => setAttributes({ buttonHoverBackgroundType: value })}
 					hoverClassicColor={buttonBgHoverColor}
-					setHoverClassicColor={(value) => setAttributes({ buttonBgHoverColor: value })}
+					setHoverClassicColor={(value) => setAttributes({ buttonBgHoverColor: value === undefined ? '' : value })}
 					hoverGradientColor={buttonHoverGradientColor} 
-					setHoverGradientColor={(value) => setAttributes({ buttonHoverGradientColor: value })}
+					setHoverGradientColor={(value) => setAttributes({ buttonHoverGradientColor: value === undefined ? '' : value })}
 					hoverCustomGradientSwitcher={buttonHoverCustomGradientSwitcher}
 					setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonHoverCustomGradientSwitcher: value })}
 					hoverCustomGradientInputValue={buttonHoverCustomGradientInputValue}
@@ -1977,7 +1977,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						<FB_ColorControl
 							label={__("Normal Color", "frontis-blocks")}
 							globalColor={buttonBorderColor}
-							setGlobalColor={(value) => setAttributes({ buttonBorderColor: value })}
+							setGlobalColor={(value) => setAttributes({ buttonBorderColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -1985,7 +1985,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={buttonBorderHoverColor}
-							setGlobalColor={(value) => setAttributes({ buttonBorderHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ buttonBorderHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -2076,7 +2076,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						<FB_ColorControl
 							label={__("Normal Color", "frontis-blocks")}
 							globalColor={buttonIconColor}
-							setGlobalColor={(value) => setAttributes({ buttonIconColor: value })}
+							setGlobalColor={(value) => setAttributes({ buttonIconColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -2084,7 +2084,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={buttonIconHoverColor}
-							setGlobalColor={(value) => setAttributes({ buttonIconHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ buttonIconHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -2097,9 +2097,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						normalBackgroundType={buttonIconNormalBackgroundType} 
 						setNormalBackgroundType={(value) => setAttributes({ buttonIconNormalBackgroundType: value })}
 						normalClassicColor={buttonIconBgColor}
-						setNormalClassicColor={(value) => setAttributes({ buttonIconBgColor: value })}
+						setNormalClassicColor={(value) => setAttributes({ buttonIconBgColor: value === undefined ? '' : value })}
 						normalGradientColor={buttonIconNormalGradientColor}
-						setNormalGradientColor={(value) => setAttributes({ buttonIconNormalGradientColor: value })}
+						setNormalGradientColor={(value) => setAttributes({ buttonIconNormalGradientColor: value === undefined ? '' : value })}
 						normalCustomGradientSwitcher={buttonIconNormalCustomGradientSwitcher}
 						setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonIconNormalCustomGradientSwitcher: value })}
 						normalCustomGradientInputValue={buttonIconNormalCustomGradientInputValue}
@@ -2108,9 +2108,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						hoverBackgroundType={buttonIconHoverBackgroundType} 
 						setHoverBackgroundType={(value) => setAttributes({ buttonIconHoverBackgroundType: value })}
 						hoverClassicColor={ buttonIconBgHoverColor}
-						setHoverClassicColor={(value) => setAttributes({  buttonIconBgHoverColor: value })}
+						setHoverClassicColor={(value) => setAttributes({  buttonIconBgHoverColor: value === undefined ? '' : value })}
 						hoverGradientColor={buttonIconHoverGradientColor} 
-						setHoverGradientColor={(value) => setAttributes({ buttonIconHoverGradientColor: value })}
+						setHoverGradientColor={(value) => setAttributes({ buttonIconHoverGradientColor: value === undefined ? '' : value })}
 						hoverCustomGradientSwitcher={buttonIconHoverCustomGradientSwitcher}
 						setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonIconHoverCustomGradientSwitcher: value })}
 						hoverCustomGradientInputValue={buttonIconHoverCustomGradientInputValue}
@@ -2137,7 +2137,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						<FB_ColorControl
 							label={__("Normal Color", "frontis-blocks")}
 							globalColor={buttonIconBorderColor}
-							setGlobalColor={(value) => setAttributes({ buttonIconBorderColor: value })}
+							setGlobalColor={(value) => setAttributes({ buttonIconBorderColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -2145,7 +2145,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={buttonIconBorderHoverColor}
-							setGlobalColor={(value) => setAttributes({ buttonIconBorderHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ buttonIconBorderHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -2459,9 +2459,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             normalBackgroundType={buttonGlobalNormalBackgroundType} 
                             setNormalBackgroundType={(value) => setAttributes({ buttonGlobalNormalBackgroundType: value })}
                             normalClassicColor={buttonGlobalNormalClassicColor}
-                            setNormalClassicColor={(value) => setAttributes({ buttonGlobalNormalClassicColor: value })}
+                            setNormalClassicColor={(value) => setAttributes({ buttonGlobalNormalClassicColor: value === undefined ? '' : value })}
                             normalGradientColor={buttonGlobalNormalGradientColor}
-                            setNormalGradientColor={(value) => setAttributes({ buttonGlobalNormalGradientColor: value })}
+                            setNormalGradientColor={(value) => setAttributes({ buttonGlobalNormalGradientColor: value === undefined ? '' : value })}
                             normalCustomGradientSwitcher={buttonGlobalNormalCustomGradientSwitcher}
                             setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonGlobalNormalCustomGradientSwitcher: value })}
                             normalCustomGradientInputValue={buttonGlobalNormalCustomGradientInputValue}
@@ -2470,9 +2470,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             hoverBackgroundType={buttonGlobalHoverBackgroundType} 
                             setHoverBackgroundType={(value) => setAttributes({ buttonGlobalHoverBackgroundType: value })}
                             hoverClassicColor={buttonGlobalHoverClassicColor}
-                            setHoverClassicColor={(value) => setAttributes({ buttonGlobalHoverClassicColor: value })}
+                            setHoverClassicColor={(value) => setAttributes({ buttonGlobalHoverClassicColor: value === undefined ? '' : value })}
                             hoverGradientColor={buttonGlobalHoverGradientColor} 
-                            setHoverGradientColor={(value) => setAttributes({ buttonGlobalHoverGradientColor: value })}
+                            setHoverGradientColor={(value) => setAttributes({ buttonGlobalHoverGradientColor: value === undefined ? '' : value })}
                             hoverCustomGradientSwitcher={buttonGlobalHoverCustomGradientSwitcher}
                             setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonGlobalHoverCustomGradientSwitcher: value })}
                             hoverCustomGradientInputValue={buttonGlobalHoverCustomGradientInputValue}
@@ -2504,7 +2504,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
 								globalColor={buttonGlobalBorderColor}
-								setGlobalColor={(value) => setAttributes({ buttonGlobalBorderColor: value })}
+								setGlobalColor={(value) => setAttributes({ buttonGlobalBorderColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -2512,7 +2512,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={buttonGlobalBorderHoverColor}
-								setGlobalColor={(value) => setAttributes({ buttonGlobalBorderHoverColor: value })}
+								setGlobalColor={(value) => setAttributes({ buttonGlobalBorderHoverColor: value === undefined ? '' : value })}
 							/>
 						)}
 

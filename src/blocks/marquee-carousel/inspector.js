@@ -598,12 +598,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Start Color", "frontis-blocks")}
                             globalColor={sliderOverlayStartColor}
-                            setGlobalColor={(value) => setAttributes({ sliderOverlayStartColor: value })}
+                            setGlobalColor={(value) => setAttributes({ sliderOverlayStartColor: value === undefined ? '' : value })}
                         />
                         <FB_ColorControl 
                             label={__("End Color", "frontis-blocks")}
                             globalColor={sliderOverlayEndColor}
-                            setGlobalColor={(value) => setAttributes({ sliderOverlayEndColor: value })}
+                            setGlobalColor={(value) => setAttributes({ sliderOverlayEndColor: value === undefined ? '' : value })}
                         />
                         <FB_Range
                             min={1}
@@ -751,7 +751,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     <FB_ColorControl
                                                         label={__("Color", "frontis-blocks")}
                                                         globalColor={sliderGlobalBgNormalClassicColor}
-                                                        setGlobalColor={(value) => setAttributes({ sliderGlobalBgNormalClassicColor: value })}
+                                                        setGlobalColor={(value) => setAttributes({ sliderGlobalBgNormalClassicColor: value === undefined ? '' : value })}
                                                     />
 
                                                     <FB_ResponsiveBackgroundImageControl
@@ -779,7 +779,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     globalCustomGradientInputValue={sliderGlobalBgNormalCustomGradientInputValue}
                                                     setGlobalCustomGradientInputValue={(value) => setAttributes({ sliderGlobalBgNormalCustomGradientInputValue: value })}
                                                     globalGradientColor={sliderGlobalBgNormalGradientColor}
-                                                    setGlobalGradientColor={(value) => setAttributes({ sliderGlobalBgNormalGradientColor: value })}
+                                                    setGlobalGradientColor={(value) => setAttributes({ sliderGlobalBgNormalGradientColor: value === undefined ? '' : value })}
                                                 />
                                             )}
                                         </div>
@@ -835,7 +835,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     <FB_ColorControl
                                                         label={__("Color", "frontis-blocks")}
                                                         globalColor={sliderGlobalBgHoverClassicColor}
-                                                        setGlobalColor={(value) => setAttributes({ sliderGlobalBgHoverClassicColor: value })}
+                                                        setGlobalColor={(value) => setAttributes({ sliderGlobalBgHoverClassicColor: value === undefined ? '' : value })}
                                                     />
 
                                                     <FB_ResponsiveBackgroundImageControl
@@ -863,7 +863,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     globalCustomGradientInputValue={sliderGlobalBgHoverCustomGradientInputValue}
                                                     setGlobalCustomGradientInputValue={(value) => setAttributes({ sliderGlobalBgHoverCustomGradientInputValue: value })}
                                                     globalGradientColor={sliderGlobalBgHoverGradientColor}
-                                                    setGlobalGradientColor={(value) => setAttributes({ sliderGlobalBgHoverGradientColor: value })}
+                                                    setGlobalGradientColor={(value) => setAttributes({ sliderGlobalBgHoverGradientColor: value === undefined ? '' : value })}
                                                 />
                                             )}
                                         </div>
@@ -896,7 +896,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Normal Color", "frontis-blocks")}
                                 globalColor={sliderGlobalBorderColor}
-                                setGlobalColor={(value) => setAttributes({ sliderGlobalBorderColor: value })}
+                                setGlobalColor={(value) => setAttributes({ sliderGlobalBorderColor: value === undefined ? '' : value })}
                             />
                         )}
 
@@ -904,7 +904,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Hover Color", "frontis-blocks")}
                                 globalColor={sliderGlobalBorderHoverColor}
-                                setGlobalColor={(value) => setAttributes({ sliderGlobalBorderHoverColor: value })}
+                                setGlobalColor={(value) => setAttributes({ sliderGlobalBorderHoverColor: value === undefined ? '' : value })}
                             />
                         )}
 
