@@ -23,10 +23,7 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [], dependenc
 		if (!isPluginUpgrade) {
 			setIsPluginUpgradeModalOpen(true);
 		}
-		// if (!isPro && isLogedIn) {
-		// 	setIsModalOpen(true);
-		// }
-			if (!isPro) {
+		if (!isPro && isLogedIn) {
 			setIsModalOpen(true);
 		}
 	}, []);
@@ -177,13 +174,10 @@ const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [], dependenc
 };
 
 
-
-const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibraryData, isProTemplate }) => {
+const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibraryData, isProTemplate, TagTabsOptions, activeTagTab, setActiveTagTab }) => {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
     const [isLogedIn, setIsLogedIn] = useState(false);
-    console.log('isProTemplate:' + isProTemplate);
 
-    // Check authentication status on component mount
     useEffect(() => {
         setIsLogedIn(false);
     }, []);
@@ -191,41 +185,12 @@ const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibr
     const schema = data?.$schema || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
     const [originalTemplates, setOriginalTemplates] = useState([]);
-    const [activeTagTab, setActiveTagTab] = useState('');
     const [searchItems, setSearchItems] = useState('');
-
-    // Dynamically generate unique tags from items
-    // const TagTabsOptions = (() => {
-    //     const allTags = schema[activeTab]?.categories
-    //         ?.find(category => category.id === activeCategory[activeTab])
-    //         ?.items
-    //         ?.flatMap(item => item.tags || []) || [];
-    //     const uniqueTags = [...new Set(allTags)]; // Remove duplicates
-    //     return uniqueTags.map(tag => ({
-    //         name: tag,
-    //         value: tag.toLowerCase().replace(/\s+/g, '-'), // Convert to kebab-case for value
-    //     }));
-    // })();
-
-	// Get 0-5 max tag
-	const TagTabsOptions = (() => {
-        const allTags = schema[activeTab]?.categories
-            ?.find(category => category.id === activeCategory[activeTab])
-            ?.items
-            ?.flatMap(item => item.tags || []) || [];
-        const uniqueTags = [...new Set(allTags)].slice(0, 5); // Limit to 5 unique tags
-        return uniqueTags.map(tag => ({
-            name: tag,
-            value: tag.toLowerCase().replace(/\s+/g, '-'), // Convert to kebab-case for value
-        }));
-    })();
-
 
     const searchTemplates = (value) => {
         setSearchItems(value);
 
         if (!value.trim()) {
-            // If search box is empty, apply tag filter if active, else show all original items
             if (activeTagTab) {
                 const filtered = originalTemplates.filter(template =>
                     template.tags?.includes(
@@ -241,7 +206,6 @@ const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibr
             let filtered = originalTemplates.filter(template =>
                 template.title.toLowerCase().includes(lowerValue)
             );
-            // Apply tag filter if active
             if (activeTagTab) {
                 filtered = filtered.filter(template =>
                     template.tags?.includes(
@@ -263,7 +227,6 @@ const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibr
             if (selectedCategory && selectedCategory.items) {
                 let items = selectedCategory.items;
 
-                // Filter based on isProTemplate
                 if (isProTemplate === 'pro') {
                     items = items.filter(item => item.isPro);
                 } else if (isProTemplate === 'free') {
@@ -271,7 +234,6 @@ const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibr
                 }
 
                 setOriginalTemplates(items);
-                // Apply tag filter if active
                 if (activeTagTab) {
                     const filtered = items.filter(template =>
                         template.tags?.includes(
@@ -288,7 +250,7 @@ const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibr
                 setFilteredTemplates([]);
             }
         }
-    }, [activeTab, activeCategory[activeTab], isProTemplate, activeTagTab]);
+    }, [activeTab, activeCategory[activeTab], isProTemplate, activeTagTab, TagTabsOptions]);
 
     const handleLoginSuccess = useCallback(() => {
         setIsLoginModalOpen(false);
@@ -371,8 +333,8 @@ const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibr
 
             {isLoginModalOpen && (
                 <LoginSignupModal
-                    onClose={handleCloseLoginModal}
                     onLoginSuccess={handleLoginSuccess}
+                    onRequestClose={handleCloseLoginModal}
                 />
             )}
         </>
