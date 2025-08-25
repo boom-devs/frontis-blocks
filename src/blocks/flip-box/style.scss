@@ -1,6 +1,5 @@
 .fb-flip-box-wrapper {
 	width: 100%;
-	overflow: hidden;
 	perspective: 1000px;
 
 	.fb-flipper-wrapper {
@@ -156,6 +155,7 @@
 			.fb-flip-btn-wrapper,
 			.fb-flip-back-btn-wrapper {
 				display: inline-flex;
+				align-items: center;
 			}
 		}
 

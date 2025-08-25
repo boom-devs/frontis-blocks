@@ -52,6 +52,7 @@ import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_UrlControl from "@Components/url-control";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_AlignmentControl from '@Components/alignment-control';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from "../../components/color-control";
@@ -836,7 +837,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnIconGap,
 		btnIconGapUnits,
 		btnBackIconGap,
-		btnBackIconGapUnits
+		btnBackIconGapUnits,
+		flipBoxAlignment
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -4430,6 +4432,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${BorderRadiusDesktopWidth && globalBorderRadiusDesktop.top ? `border-radius: ${BorderRadiusDesktopWidth};` : ""}
 				${globalBorderColor ? `border-color: ${globalBorderColor};` : ""}
 				${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : ""}
+				display: flex;
+				align-items: center;
+				${flipBoxAlignment.Desktop ? `justify-content: ${flipBoxAlignment.Desktop};` : ''}
 			}
 	  
 		  .fb-flip-box-wrapper.${blockID}:hover .fb-flip-box-wrapper {
@@ -4440,19 +4445,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			  .fb-flip-box-main-wrapper.${blockID} {
+			  .fb-flip-box-main-wrapper.${blockID} .fb-flip-box-wrapper{
 				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'left' && flipBoxHZLeftOffset.Tablet ? `left: ${flipBoxHZLeftOffset.Tablet}${flipBoxHZLeftOffsetUnits.Tablet};` : ''}
 				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'right' && flipBoxHZRightOffset.Tablet ? `right: ${flipBoxHZRightOffset.Tablet}${flipBoxHZRightOffsetUnits.Tablet};` : ''}
 				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'top' && flipBoxVRTopOffset.Tablet ? `top: ${flipBoxVRTopOffset.Tablet}${flipBoxVRTopOffsetUnits.Tablet};` : ''}
 				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'bottom' && flipBoxVRBottomOffset.Tablet ? `bottom: ${flipBoxVRBottomOffset.Tablet}${flipBoxVRBottomOffsetUnits.Tablet};` : ''}
 				${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ""}
-			  }
-			  .fb-flip-box-wrapper.${blockID} {
+				${flipBoxAlignment.Tablet ? `justify-content: ${flipBoxAlignment.Tablet};` : ''}
 				${TabletPadding && globalPaddingTablet.top ? `padding: ${TabletPadding};` : ""}
 				${TabletMargin && globalMarginTablet.top ? `margin: ${TabletMargin};` : ""}
 				${BorderTabletWidth && globalBorderTablet.top ? `border-width: ${BorderTabletWidth};` : ""}
 				${BorderRadiusTabletWidth && globalBorderRadiusTablet.top ? `border-radius: ${BorderRadiusTabletWidth};` : ""}
 			  }
+			  
 		  }
 	  
 		  @media only screen and (max-width: 767px) {
@@ -4462,13 +4467,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'top' && flipBoxVRTopOffset.Mobile ? `top: ${flipBoxVRTopOffset.Mobile}${flipBoxVRTopOffsetUnits.Mobile};` : ''}
 				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'bottom' && flipBoxVRBottomOffset.Mobile ? `bottom: ${flipBoxVRBottomOffset.Mobile}${flipBoxVRBottomOffsetUnits.Mobile};` : ''} 
 				${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ""}
-			  }
-			  .fb-flip-box-wrapper.${blockID} {
 				${MobilePadding && globalPaddingMobile.top ? `padding: ${MobilePadding};` : ""}
 				${MobileMargin && globalMarginMobile.top ? `margin: ${MobileMargin};` : ""}
 				${BorderMobileWidth && globalBorderMobile.top ? `border-width: ${BorderMobileWidth};` : ""}
 				${BorderRadiusMobileWidth && globalBorderRadiusMobile.top ? `border-radius: ${BorderRadiusMobileWidth};` : ""}
+				${flipBoxAlignment.Mobile ? `justify-content: ${flipBoxAlignment.Mobile};` : ''}
 			  }
+			  
 		  }
 
 		  .fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
@@ -4544,32 +4549,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				flipAnimationType === "fade") &&
 				"none")
 			};
-			${
-				isHover && (flipAnimationType === "zoom-in" || flipAnimationType === "zoom-out")
-					? "z-index: 5;"
-					: ""
+			${isHover && (flipAnimationType === "zoom-in" || flipAnimationType === "zoom-out")
+				? "z-index: 5;"
+				: ""
 			}
 			transition: all .3s ease-in-out; 
 		  }
 		
-		  ${
-            (isHover || flipSelectedSide === "front") && flipAnimationType === "fade"
-                ? `
+		  ${(isHover || flipSelectedSide === "front") && flipAnimationType === "fade"
+				? `
 			.fb-flip-box-wrapper.${blockID} .fb-flipper-wrapper.fb-show-back .fb-flipbox-front {
 				opacity: 0;
 			}
 			`
-                : ""
-        }
-		  ${
-            (isHover || flipSelectedSide === "back") && flipAnimationType === "fade"
-                ? `
+				: ""
+			}
+		  ${(isHover || flipSelectedSide === "back") && flipAnimationType === "fade"
+				? `
 			.fb-flip-box-wrapper.${blockID} .fb-flipper-wrapper.fb-show-back .fb-flipbox-back {
 				opacity: 1;
 			}
 			`
-                : ""
-        }
+				: ""
+			}
 		  .fb-flip-box-wrapper.${blockID} .fb-flip-box-wrapper-inner {
 			${flipIconPosition === 'top' ? 'flex-direction: column;' : ''}
 			${flipIconPosition === 'bottom' ? 'flex-direction: column-reverse;' : ''}
@@ -5599,6 +5601,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			flipBoxFrontCustomGradientInputValue,
 			flipBoxBackGradientColor,
 			flipBoxBackCustomGradientInputValue,
+			flipBoxAlignment
 		],
 	);
 
@@ -5688,6 +5691,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) =>
 															setAttributes({ flipAnimationType: value })
 														}
+													/>
+												</BaseControl>
+												<BaseControl>
+													<FB_ResponsiveAlignmentControl
+														label={__("Alignment", "frontis-blocks")}
+														globalAlignment={flipBoxAlignment}
+														setGlobalAlignment={(value) => setAttributes({ flipBoxAlignment: value })}
+														deviceType={deviceType}
+														setAttributes={setAttributes}
 													/>
 												</BaseControl>
 											</PanelBody>
@@ -6410,6 +6422,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														setAttributes={setAttributes}
 														rangeStep={1}
 														resetFallbackValue={""}
+														
 													/>
 
 													<FB_Range
@@ -6424,6 +6437,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														setAttributes={setAttributes}
 														rangeStep={1}
 														resetFallbackValue={""}
+														units_types_arr={[
+															{ label: 'px', value: 'px' },
+															{ label: 'em', value: 'em' },
+															{ label: 'rem', value: 'rem' },
+															{ label: 'vh', value: 'vh' }
+														]}
 													/>
 
 													{/*Background Color */}
