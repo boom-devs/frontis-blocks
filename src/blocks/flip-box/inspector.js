@@ -7434,6 +7434,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														setAttributes={setAttributes}
 														rangeStep={1}
 														resetFallbackValue={""}
+														units_types_arr={[
+															{ label: 'px', value: 'px' },
+															{ label: 'em', value: 'em' },
+															{ label: 'rem', value: 'rem' },
+															{ label: 'vh', value: 'vh' }
+														]}
 													/>
 
 													{/*Background Color */}
