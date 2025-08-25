@@ -6,13 +6,12 @@ import { select, dispatch } from '@wordpress/data';
 import { createBlock } from '@wordpress/blocks';
 import { __ } from "@wordpress/i18n";
 import { Button, Modal } from "@wordpress/components";
-import { useSelect } from '@wordpress/data';
 import { toast } from "react-toastify";
 import TemplateHeader from "./template-header";
 import TemplateSidebar from "./template-sidebar";
 import TemplateContent from "./template-content";
-import data from "./data.json";
 import LibraryContent from "./library-content";
+import data from "./data.json";
 
 const PatternLibraryButton = () => {
     const [showPatternButton, setShowPatternButton] = useState(true);
@@ -26,8 +25,6 @@ const PatternLibraryButton = () => {
     };
 
     const importDemo = () => {
-
-        // console.log(frontisBlocksAdmin.nonce)
         jQuery.ajax({
             url: frontisBlocksAdmin.ajaxUrl,
             type: 'POST',
@@ -36,11 +33,8 @@ const PatternLibraryButton = () => {
                 nonce: frontisBlocksAdmin.nonce,
             },
             success: function (response) {
-                // Access Gutenberg's block editor store
                 const { getSelectedBlockClientId, getBlockOrder } = select('core/block-editor');
                 const { insertBlock } = dispatch('core/block-editor');
-
-                // Get the currently selected block's ID
                 const selectedBlockClientId = getSelectedBlockClientId();
 
                 if (!selectedBlockClientId) {
@@ -49,7 +43,6 @@ const PatternLibraryButton = () => {
                 }
 
                 try {
-                    // Get the current block order
                     const blockOrder = getBlockOrder();
                     const selectedBlockIndex = blockOrder.indexOf(selectedBlockClientId);
 
@@ -57,32 +50,44 @@ const PatternLibraryButton = () => {
                         throw new Error('Selected block not found in block order');
                     }
 
-                    // Parse the HTML content into blocks
-                    // Note: You might want to use wp.blocks.rawHandler here for proper HTML parsing
                     const newBlock = createBlock('core/html', {
                         content: response.data
                     });
 
-                    // Insert the new block after the selected block
                     insertBlock(newBlock, selectedBlockIndex + 1);
-
                 } catch (error) {
                     console.error('Error inserting blocks:', error);
                 }
             },
             error: function (xhr, status, error) {
-                console.log(xhr, status, error)
+                console.log(xhr, status, error);
             }
         });
-    }
+    };
 
-    // State for active tab
     const schema = data.$schema;
     const [activeTab, setActiveTab] = useState(Object.keys(schema)[0]);
     const [activeCategory, setActiveCategory] = useState({ patterns: 'all', pages: 'all', sites: 'all', templateLibrary: 'my-cloud' });
     const [isProTemplate, setIsProTemplate] = useState('');
-    const [activeTag, setActiveTag] = useState('');
+    const [activeTagTab, setActiveTagTab] = useState({
+        patterns: '',
+        pages: '',
+        sites: '',
+        templateLibrary: ''
+    });
     const [libraryData, setLibraryData] = useState([]);
+
+    const TagTabsOptions = (() => {
+        const allTags = schema[activeTab]?.categories
+            ?.find(category => category.id === activeCategory[activeTab])
+            ?.items
+            ?.flatMap(item => item.tags || []) || [];
+        const uniqueTags = [...new Set(allTags)].slice(0, 5);
+        return uniqueTags.map(tag => ({
+            name: tag,
+            value: tag.toLowerCase().replace(/\s+/g, '-'),
+        }));
+    })();
 
     return (
         <>
@@ -112,6 +117,7 @@ const PatternLibraryButton = () => {
                                     data={data}
                                     onClose={() => setIsVisible(false)}
                                     setIsProTemplate={setIsProTemplate}
+                                    setActiveTagTab={setActiveTagTab}
                                 />
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">
@@ -122,15 +128,18 @@ const PatternLibraryButton = () => {
                                     isProTemplate={isProTemplate}
                                     setIsProTemplate={setIsProTemplate}
                                     setActiveCategory={setActiveCategory}
+                                    setActiveTagTab={setActiveTagTab}
                                 />
                                 {activeTab !== 'templateLibrary' && (
-                                    <TemplateContent activeTab={activeTab}
+                                    <TemplateContent
+                                        activeTab={activeTab}
                                         activeCategory={activeCategory}
                                         setLibraryData={setLibraryData}
                                         data={data}
                                         isProTemplate={isProTemplate}
-                                        activeTag={activeTag}
-                                        setActiveTag={setActiveTag}
+                                        activeTagTab={activeTagTab[activeTab]}
+                                        setActiveTagTab={(value) => setActiveTagTab({ ...activeTagTab, [activeTab]: value })}
+                                        TagTabsOptions={TagTabsOptions}
                                     />
                                 )}
                                 {activeTab === 'templateLibrary' && (
@@ -141,12 +150,11 @@ const PatternLibraryButton = () => {
                                         setLibraryData={setLibraryData}
                                         data={data}
                                         isProTemplate={isProTemplate}
-                                        activeTag={activeTag}
-                                        setActiveTag={setActiveTag}
+                                        activeTag={activeTagTab[activeTab]}
+                                        setActiveTag={(value) => setActiveTagTab({ ...activeTagTab, [activeTab]: value })}
                                     />
                                 )}
                             </div>
-
                         </div>
                     </div>
                 </Modal>
