@@ -1827,7 +1827,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			>
 				<FB_Range
 					min={1}
-					max={100}
+					max={buttonWidthUnits === '%' ? 100 : 1000}
 					label={__("Width", "frontis-blocks")}
 					rangeValue={buttonWidth}
 					onChangeHandler={(value) => setAttributes({ buttonWidth: value })}

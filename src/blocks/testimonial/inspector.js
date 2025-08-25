@@ -30,6 +30,7 @@ import {
     HEADING,
     PRESETS,
     OVERFLOW_OP,
+    IMAGE_OBJECT_FIT,
 } from "./constants/constants";
 
 import FBIconPicker from "../../components/icon-picker";
@@ -90,6 +91,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         TestimonialImageWidth,
         TestimonialImageWidthUnits,
+        TestimonialImageObjectFit,
 
         TestimonialImageRadiusUnits,
         TestimonialImageDesktopRadiusWidth,
@@ -1686,6 +1688,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockID} .fb-testimonial-image img {
             ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `width: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
             ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `height: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
+            ${TestimonialImageObjectFit !== 'default' ? `object-fit: ${TestimonialImageObjectFit};` : ''}
             ${testimonialImageDesktopBorderRadiusWidth && TestimonialImageDesktopRadiusWidth.top ? `border-radius: ${testimonialImageDesktopBorderRadiusWidth};` : ''}
             ${testimonialImageDesktopMargin && TestimonialImageMarginDesktop.top ? `margin: ${testimonialImageDesktopMargin};` : ''}
             ${TestimonialImagePositionSwitcher ? 'position: absolute;' : ''}
@@ -2035,7 +2038,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         TestimonialImageWidth,
         TestimonialImageWidthUnits,
-
+        TestimonialImageObjectFit,
+        
         TestimonialImageRadiusUnits,
         TestimonialImageDesktopRadiusWidth,
         TestimonialImageTabRadiusWidth,
@@ -2906,6 +2910,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     rangeStep={1}
                     resetFallbackValue={""}
                 />
+
+                <SelectControl
+					label={__("Image Object Fit", "frontis-blocks")}
+					value={TestimonialImageObjectFit}
+					options={IMAGE_OBJECT_FIT}
+					onChange={(value) =>
+						setAttributes({ TestimonialImageObjectFit: value })
+					}
+					__nextHasNoMarginBottom
+				/>
 
                 <FB_Spacing
                     label={__("Border Radius", "frontis-blocks")}

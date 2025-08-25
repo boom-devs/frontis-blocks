@@ -54,8 +54,6 @@ const Inspector = (props) => {
 			rowGap,
 			columnGapUnits,
 			rowGapUnits,
-			containerColumnGapHasEdited,
-			containerRowGapHasEdited,
 			containerZIndex,
 			containerGlobalPadding,
 			containerPaddingUnits,
@@ -571,7 +569,6 @@ const Inspector = (props) => {
 
 	const columnGapFn = (width) => {
 		setAttributes({ columnGap: width });
-		setAttributes({ containerColumnGapHasEdited: true });
 	}
 
 	const columnGapUnitsFn = (units) => {
@@ -580,7 +577,6 @@ const Inspector = (props) => {
 
 	const rowGapFn = (width) => {
 		setAttributes({ rowGap: width });
-		setAttributes({ containerRowGapHasEdited: true });
 	}
 
 	const rowGapUnitsFn = (units) => {
@@ -1380,7 +1376,7 @@ const Inspector = (props) => {
 					min={0}
 					max={200}
 					label={__("Column", "frontis-blocks")}
-					rangeValue={columnGap.Desktop === '' ? globalColumnGap : columnGap}
+					rangeValue={columnGap}
 					onChangeHandler={columnGapFn}
 					rangeUnitHandler={columnGapUnitsFn}
 					deviceType={deviceType}
@@ -1398,7 +1394,7 @@ const Inspector = (props) => {
 					min={0}
 					max={200}
 					label={__("Row", "frontis-blocks")}
-					rangeValue={rowGap.Desktop === '' ? globalRowGap : rowGap}
+					rangeValue={rowGap}
 					onChangeHandler={rowGapFn}
 					rangeUnitHandler={rowGapUnitsFn}
 					deviceType={deviceType}
@@ -1514,9 +1510,9 @@ const Inspector = (props) => {
 							deviceType={deviceType}
 							spacingUnitsHandler={containerPaddingUnitsHandler}
 							spacingUnits={containerPaddingUnits}
-							spacingDesktop={isBlockRootParent && containerDesktopPadding.top === '' ? {top: containerGlobalPadding.Desktop, right: containerGlobalPadding.Desktop, bottom: containerGlobalPadding.Desktop, left: containerGlobalPadding.Desktop} : containerDesktopPadding}
-							spacingTablet={isBlockRootParent && containerDesktopPadding.top === '' ? {top: containerGlobalPadding.Tablet, right: containerGlobalPadding.Tablet, bottom: containerGlobalPadding.Tablet, left: containerGlobalPadding.Tablet} : containerTabletPadding}
-							spacingMobile={isBlockRootParent && containerDesktopPadding.top === '' ? {top: containerGlobalPadding.Mobile, right: containerGlobalPadding.Mobile, bottom: containerGlobalPadding.Mobile, left: containerGlobalPadding.Mobile} : containerMobilePadding}
+							spacingDesktop={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Desktop, right: containerGlobalPadding.Desktop, bottom: containerGlobalPadding.Desktop, left: containerGlobalPadding.Desktop} : containerDesktopPadding}
+							spacingTablet={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Tablet, right: containerGlobalPadding.Tablet, bottom: containerGlobalPadding.Tablet, left: containerGlobalPadding.Tablet} : containerTabletPadding}
+							spacingMobile={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Mobile, right: containerGlobalPadding.Mobile, bottom: containerGlobalPadding.Mobile, left: containerGlobalPadding.Mobile} : containerMobilePadding}
 							handleSpacingUnitHandler={containerPaddingUnitsChange}
 							spacingCombineBtn={containerPaddingLink}
 							spacingCombineBtnHandler={containerPaddingLinkBtn}
