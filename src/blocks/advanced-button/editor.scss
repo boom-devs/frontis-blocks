@@ -1,0 +1,110 @@
+$primary_color: #007cba;
+$secondary_color: #5f5f5f;
+$background_color: #dcdcde;
+$white_color: #ffffff;
+
+/** Start General scss for Advanced Button **/
+.fb-link-control-icon-popup {
+    padding: 0.2rem;
+    min-width: 220px;
+    .fb-link-control-icon-popup-inner {
+        position: relative;
+        z-index: 99999;
+        .components-base-control__field {
+            margin-bottom: 0;
+            label {
+                display: block;
+                color: $secondary_color !important;
+                font-size: 12px !important;
+                font-weight: 500 !important;
+                line-height: 16px !important;
+                margin: 10px 0 !important;
+                min-height: auto;
+                text-transform: capitalize !important;
+            }
+            .components-toggle-control {
+                margin-bottom: 0 !important;
+            }
+        }
+    }
+}
+
+.fb-link-control-wrapper {
+    .fb-link-control-inner-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .fb-link-control-url {
+            flex: 1;
+            margin-bottom: 0;
+            .components-base-control__field {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+/** End General scss for Advanced Button **/
+
+.fb-advanced-button-wrapper {
+    .fb-advanced-button {
+        align-items: center;
+        display: inline-flex;
+        justify-content: center;
+        outline: none;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 0px;
+        box-sizing: border-box;
+        cursor: pointer;
+        position: relative;
+        transition: all .3s ease-in-out;
+        white-space: nowrap;
+        &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        .fb-advanced-button-text {
+            transition: all .3s ease-in-out;
+        }
+        .fb-advanced-button-icon-wrapper {
+            display: flex;
+            align-items: center;
+            &.left {
+                margin-right: 10px;
+            }
+            
+            &.right {
+                margin-left: 10px;
+            }
+    
+            .fb-advanced-button-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                z-index: 1;
+                svg {
+                    display: block;
+                    width: 16px;
+                    height: 16px;
+                    box-sizing: content-box;
+                }
+            }
+            .fb-advanced-button-icon-image{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                z-index: 1;
+                width: 20px;
+                height: 20px;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    box-sizing: content-box;
+                }
+            }        
+        }
+    }
+}

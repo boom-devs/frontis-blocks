@@ -1,0 +1,940 @@
+const attributes = {
+    blockID: {
+        type: 'string',
+        default: ''
+    },
+
+	counterAlignment: {
+        type: 'object',
+        default: {
+            Desktop: 'center',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+
+	blockStyle: {
+        type: 'string',
+        default: '',
+    },
+	
+	deviceType: {
+		type: 'string',
+		default: 'Desktop'
+	},
+	mediaSwitcher : {
+		type: 'string',
+		default: 'icon'
+	},
+	counterMediaId: {
+		type: 'number',
+	},
+	counterMediaImagedisplay: {
+		type: 'string',
+		default: 'none'
+	},
+	counterMediaUrl: {
+		type: 'string',
+		default: ''
+	},
+	counterMediaAlt: {
+		type: 'string',
+		default: ''
+	},
+	icon: {
+		type: 'string',
+		default: 'star',
+	},
+	iconPosition: {
+		type: 'string',
+		default: 'top',
+	},
+	counterCardAlignment: {
+		type: 'object',
+		default: {
+			Desktop: 'center',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	titlePosition: {
+		type: 'string',
+		default: 'bottom',
+	},
+	
+
+    counterNumberStart: {
+        type: 'number',
+        default: 0
+    },
+	counterNumberEnd: {
+		type: 'number',
+		default: 1000
+	},
+	counterDuration: {
+		type: 'number',
+		default: 2000
+	},
+	counterPrefix: {
+		type: 'string',
+		default: '+'
+	},
+	counterPrefixSwitch: {
+		type: 'boolean',
+		default: true
+	},
+	counterSuffix: {
+		type: 'string',
+		default: 'M'
+	},
+	counterSuffixSwitch: {
+		type: 'boolean',
+		default: true
+	},
+    counterTitle: {
+        type: 'string',
+        default: 'Happy Clients'
+    },
+	counterTitleTag: {
+		type: 'string',
+		default: 'span'
+	},
+	counterTitleSwitch: {
+		type: 'boolean',
+		default: true
+	},
+    showThousandsSeparator: {
+        type: 'boolean',
+        default: true
+    },
+	showThousandsSeparatorType: {
+		type: 'string',
+		default: 'comma'
+	},
+
+	// Icon Size
+	counterIconSize: {
+		type: 'object',
+		default: {
+			Desktop: '60',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	counterIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	counterIconSizeRatio: {
+		type: 'boolean',
+		default: true,
+	},
+
+	// Icon Color
+	counterIconColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	counterIconColor: {
+		type: 'string',
+		default: ''
+	},
+	counterIconHoverColor: {
+		type: 'string',
+		default: ''
+	},
+
+	// margin
+	counterIconMarginUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterIconMarginDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterIconMarginTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterIconMarginMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterIconMarginLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** Counter Number */
+	counterNumberFontColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	counterNumberFontColor: {
+		type: 'string',
+		default: ''
+	},
+	counterNumberFontHoverColor: {
+		type: 'string',
+		default: ''
+	},
+	counterNumberGlobalTypographyData: {
+		type: 'object',
+		default: {}
+	},
+	counterNumberGlobalTypoSwitcher: {
+		type: 'object',
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	counterNumberGlobalTypoType: {
+		type: 'string',
+		default: 'default',
+	},
+	counterNumberGlobalTypoOption: {
+		type: 'object',
+		default: {label: 'Default', value: 'default'},
+	},
+	counterNumberFontFamily: {
+		type: 'string',
+		default: ''
+	},
+	counterNumberFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '64',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	counterNumberFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterNumberFontWeight: {
+		type: 'string',
+		default: ''
+	},
+	counterNumberFontStyle: {
+		type: 'string',
+		default: ''
+	},
+	counterNumberTextTransform: {
+		type: 'string',
+		default: ''
+	},
+	counterNumberTextDecoration: {
+		type: 'string',
+		default: ''
+	},
+	counterNumberLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	counterNumberLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterNumberLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	counterNumberLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	// margin
+	counterNumberMarginUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterNumberMarginDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterNumberMarginTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterNumberMarginMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterNumberMarginLink : {
+		type : 'boolean',
+		default: true
+	},
+
+	/** Number Title **/
+	counterNumberTitleFontColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	counterNumberTitleFontColor: {
+		type: 'string',
+		default: ''
+	},
+	counterNumberTitleFontHoverColor: {
+		type: 'string',
+		default: ''
+	},
+	counterNumberTitleGlobalTypographyData: {
+		type: 'object',
+		default: {}
+	},
+	counterNumberTitleGlobalTypoSwitcher: {
+		type: 'object',
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	counterNumberTitleGlobalTypoType: {
+		type: 'string',
+		default: 'default',
+	},
+	counterNumberTitleGlobalTypoOption: {
+		type: 'object',
+		default: {label: 'Default', value: 'default'},
+	},
+	counterNumberTitleFontFamily: {
+		type: 'string',
+		default: 'inherit'
+	},
+	counterNumberTitleFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '18',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	counterNumberTitleFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterNumberTitleFontWeight: {
+		type: 'string',
+		default: '400'
+	},
+	counterNumberTitleFontStyle: {
+		type: 'string',
+		default: ''
+	},
+	counterNumberTitleTextTransform: {
+		type: 'string',
+		default: ''
+	},
+	counterNumberTitleTextDecoration: {
+		type: 'string',
+		default: ''
+	},
+	counterNumberTitleLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	counterNumberTitleLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterNumberTitleLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	counterNumberTitleLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	// margin
+	counterNumberTitleMarginUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterNumberTitleMarginDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterNumberTitleMarginTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterNumberTitleMarginMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterNumberTitleMarginLink : {
+		type : 'boolean',
+		default: true
+	},
+	// Item Border Type
+	counterItemBgColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	counterItemBgColor: {
+		type: 'string',
+		default: ''
+	},
+	counterItemBgHoverColor: {
+		type: 'string',
+		default: ''
+	},
+	counterItemBorder: {
+		type: 'string',
+		default: 'none',
+	},
+	counterItemBorderColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	counterItemBorderColor: {
+		type: 'string',
+		default: ''
+	},
+	counterItemBorderHoverColor: {
+		type: 'string',
+		default: ''
+	},
+	counterItemBorderTypeUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterItemBorderTypeDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterItemBorderTypeTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterItemBorderTypeMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterItemBorderTypeLink : {
+		type : 'boolean',
+		default: true
+	},
+	// Item Border Radius
+	counterItemBorderRadiusUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterItemBorderRadiusDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterItemBorderRadiusTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterItemBorderRadiusMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterItemBorderRadiusLink : {
+		type : 'boolean',
+		default: true
+	},
+
+	counterItemSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	counterItemSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	counterItemRatio: {
+		type: 'boolean',
+		default: false,
+	},
+
+	/** Start Global Setting */
+	counterGlobalZIndex : {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+	counterOverflow: {
+        type: 'string',
+        default: 'default',
+    },
+	/** Start Padding */
+	counterGlobalPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterGlobalPaddingDesktop: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterGlobalPaddingTablet: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterGlobalPaddingMobile: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterGlobalPaddingLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End Padding */
+
+	/** Start Margin */
+	counterGlobalMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterGlobalMarginDesktop: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterGlobalMarginTablet: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterGlobalMarginMobile: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterGlobalMarginLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End Margin */
+
+	/** Start Background */
+	counterGlobalBgColorSwitcher : {
+		type: 'string',
+		default: 'normal'
+	},
+	counterGlobalBgColor : {
+		type: 'string',
+	},
+	counterGlobalBgHoverColor: {
+		type: 'string',
+	},
+	/** End Background */
+
+	/** Start Border */
+	counterGlobalBorder: {
+		type: 'string',
+		default: 'none',
+	},
+	counterGlobalBorderColorSwitcher : {
+		type: 'string',
+		default: 'normal'
+	},
+	counterGlobalBorderColor: {
+		type: 'string',
+		default: ''
+	},
+	counterGlobalBorderHoverColor: {
+		type: 'string',
+	},
+	counterGlobalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterGlobalBorderDesktop: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterGlobalBorderTablet: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterGlobalBorderMobile: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterGlobalBorderLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	counterGlobalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterGlobalBorderRadiusDesktop: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterGlobalBorderRadiusTablet: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterGlobalBorderRadiusMobile: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterGlobalBorderRadiusLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End Border Radius */
+
+	/** Start Box Shadow */
+	counterGlobalBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    counterGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    /** End Global Style */
+
+	counterDesktopSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    counterTabletSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    counterMobileSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+
+	counterPositionType: {
+        type: 'string',
+        default: 'default'
+    },
+    counterHZOrientationType: {
+        type: 'string',
+        default: 'left'
+    },
+    counterVROrientationType: {
+        type: 'string',
+        default: 'top'
+    },
+    counterHZLeftOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    counterHZLeftOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    counterHZRightOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    counterHZRightOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    counterVRTopOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    counterVRTopOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    counterVRBottomOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    counterVRBottomOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+
+	/** Start Class & ID Setting */
+	counterGlobalWraperCustomCSS : { 
+		type: 'string',
+		default: '',
+	},
+	counterGlobalWraperID : {
+		type: 'string',
+		default: ''
+	},
+	counterGlobalWraperClass : {
+		type: 'string',
+		default: ''
+	},
+	/** End Class & ID Setting */
+};
+
+export default attributes;

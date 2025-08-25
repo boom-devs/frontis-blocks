@@ -1,0 +1,17 @@
+.progress-bar-text-inSide-wrapper {
+  display: flex;
+  .progress-bar-label {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: width .6s ease;
+      .progress-bar-info {
+          padding-right: 1rem;
+          padding-left: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          line-height: 1;
+      }
+  }
+}

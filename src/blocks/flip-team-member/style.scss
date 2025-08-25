@@ -1,0 +1,74 @@
+.fb-team-member-main-wrapper {
+	position: relative;
+	overflow: hidden;
+}
+
+.fb-team-member-wrapper {
+	.fb-team-member-item {
+		position: relative;
+		overflow: hidden;
+
+		&:hover {
+			.fb-team-member-image-wrapper {
+				.fb-team-member-flip-front {
+					transform: rotateY(-180deg);
+				}
+				  
+				.fb-team-member-flip-back {
+					transform: rotateY(0deg);
+				}
+			}
+		}
+
+		.fb-team-member-image-wrapper {
+			.fb-team-member-image-overlay {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 1;
+			}
+
+			.fb-team-member-flip-card {
+				perspective: 1000px;
+			}
+			.fb-team-member-flip-front {
+				img {
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+				}
+			}
+			.fb-team-member-flip-front,
+			.fb-team-member-flip-back {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				text-align: center;
+				backface-visibility: hidden;
+				transition: transform .5s ease-in-out;
+				transform-style: preserve-3d;
+			}
+			.fb-team-member-flip-front {
+				transform: rotateY(0deg);
+			  }
+			  
+			.fb-team-member-flip-back {
+				transform: rotateY(180deg);
+			}
+			  
+			.fb-team-member-flip-card:hover .fb-team-member-flip-front {
+				transform: rotateY(-180deg);
+			}
+			  
+			.fb-team-member-flip-card:hover .fb-team-member-flip-back {
+				transform: rotateY(0deg);
+			}
+		}
+	}
+}

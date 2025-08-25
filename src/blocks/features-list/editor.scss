@@ -1,0 +1,253 @@
+$primary_color: #007cba;
+$secondary_color: #5f5f5f;
+$background_color: #dcdcde;
+$white_color: #ffffff;
+
+.fb-setting-responsive-control-wrapper {
+    .fb-setting-responsive-control {
+        margin-bottom: 0;
+    }
+}
+
+/** End General scss for Advanced Button **/
+
+.fb-feature-wrapper {
+    .dnd-items-wrapper {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li.sortable-item {
+            margin-bottom: 10px;
+            margin-top: 10px;
+
+            .sortable-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: #f9f9f9;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+
+                .sortable-title {
+                    flex: 12;
+                    cursor: pointer;
+                    overflow: hidden;
+                    padding-left: 5px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    width: 200px;
+                }
+
+                .sortable-sort {
+                    button {
+                        &:focus {
+                            box-shadow: none;
+                            outline: none;
+                        }
+                    }
+                }
+
+                .sortable-delete {
+                    button {
+                        color: #d63638;
+                        &:focus {
+                            box-shadow: none;
+                            outline: none;
+                        }
+                    }
+                }
+            }
+
+            .sortable-item-content {
+                padding-top: 10px;
+            }
+        }
+    }
+}
+
+.fb-feature-icon-group-btn {
+    display: flex;
+}
+
+button {
+    &.components-button {
+        &.fb-feature-icon-single-btn {
+            align-items: center;
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            padding: 6px;
+            height: unset;
+            line-height: 16px;
+            box-shadow: inset 0 0 0 1px #dcdcde;
+            color: #5f5f5f;
+            margin-bottom: 10px;
+            &.active {
+                background-color: #dcdcde !important;
+                color: #5f5f5f !important;
+            }
+        }
+        &:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+}
+
+.fb-feature-list-wrapper {
+    display: flex;
+    align-items: center;
+    transition: ease-in-out .5s;
+
+    &.fb-feature-list-top {
+        .fb-feature-list-item {
+            align-items: flex-start !important;
+        }
+    }
+    &.fb-feature-list-center {
+        .fb-feature-list-item {
+            align-items: center !important;
+        }
+    }
+    &.fb-feature-list-bottom {
+        .fb-feature-list-item {
+            align-items: flex-end !important;
+        }
+    }
+    &.fb-icon-position-left {
+        .fb-feature-list-item {
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+    }
+    &.fb-icon-position-right {
+        .fb-feature-list-item {
+            display: flex;
+            align-items: center;
+            flex-direction: row-reverse;
+            text-align: right;
+
+            .fb-feature-list-icon-inner {
+                margin-left: 20px;
+            }
+            .fb-feature-icon-image-wrapper {
+                margin-left: 20px;
+            }
+        }
+    }
+
+    .fb-feature-list-items {
+        width: 100%;
+        list-style-type: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: center;
+    }
+}
+
+.fb-feature-list-item {
+    position: relative;
+    align-items: center;
+
+    .fb-feature-list-icon-box {
+        transition: ease-in-out .5s;
+        z-index: 2;
+
+        .fb-feature-list-icon-inner {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: ease-in-out .5s;
+
+            .fb-feature-list-icon {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                transition: all 0.5s;
+
+                svg {
+                    transition: all 0.5s;
+                }
+            }
+
+            &.circle {
+                border-radius: 50%;
+            }
+            &.square {
+                border-radius: 0%;
+            }
+            &.rhombus {
+                margin: 15px 0;
+                transform: rotate(45deg);
+                .fb-feature-list-icon {
+                    transform: rotate(-45deg);
+                }
+            }
+            &.none {
+                display: none !important;
+            }
+
+        }
+        .fb-feature-icon-image-wrapper {
+            display: inline-flex;
+            transition: ease-in-out .5s;
+            img {
+                width: 100%;
+                height: 100%;
+                transition: ease-in-out .5s;
+            }
+            &.circle {
+                img {
+                    border-radius: 50%;
+                }
+            }
+            &.square {
+                img{
+                    border-radius: 0%;
+                }
+            }
+            &.rhombus {
+                img {
+                    margin: 15px 0;
+                    transform: rotate(45deg);
+                }
+            }
+            &.none {
+                display: none !important;
+            }
+        }
+    }
+
+    .fb-feature-list-content {
+        .fb-feature-list-title {
+            margin: 0 0 5px;
+            padding: 0;
+        }
+
+        .fb-feature-list-text {
+            margin: 0;
+            padding: 0;
+        }
+    }
+}
+
+@media (min-width: 1025px) {
+    .fb-icon-position-left {
+        .fb-feature-list-item {
+            flex-direction: row;
+            text-align: left;
+
+            &,
+            .fb-icon-position-right .fb-feature-list-item {
+                align-items: flex-start;
+                display: flex;
+            }
+        }
+
+        .fb-feature-list-content-box {
+            margin: 0 !important;
+        }
+    }
+}

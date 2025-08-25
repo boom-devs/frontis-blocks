@@ -1,0 +1,222 @@
+.fb-blocks-pricing {
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: $white-color;
+  border-radius: 14px;
+  overflow: hidden;
+
+  .fb-pricing-header,
+  .fb-pricing-row {
+    display: flex;
+  }
+
+  .fb-pricing-column {
+    flex: 1;
+    padding: 25px 32px;
+    border-right: 1px solid $neutral-color-100;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  .fb-pricing-header {
+    background-color: $white-color;
+    font-weight: bold;
+    border-bottom: 1px solid $neutral-color-100;
+
+    .fb-pricing-column {
+      padding: 42px 42px;
+      text-align: center;
+
+      &:first-child {
+        text-align: left;
+        padding: 42px 52px 42px 32px;
+      }
+
+      &:nth-child(2) {
+        background-color: $success-color-50;
+
+        .fb-pricing-type {
+          color: $success-color;
+        }
+      }
+
+      .fb-pricing-column-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .fb-pricing-type {
+        font-family: $heading-font-family;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 31px;
+        color: $primary-color-base;
+        margin: 0;
+      }
+      .fb-pricing-price {
+        font-family: $heading-font-family;
+        font-size: 32px;
+        font-weight: 600px;
+        line-height: 41px;
+        color: $neutral-color-900;
+        margin: 0;
+
+        span {
+          font-family: $body-font-family;
+          font-size: 18px;
+          font-weight: 400;
+          line-height: 25px;
+          color: $neutral-color;
+        }
+      }
+      .fb-button {
+        width: 226px;
+        padding: 14px;
+        font-family: $body-font-family;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 25px;
+        color: $white-color;
+        border-radius: 14px;
+        margin-top: 24px;
+      }
+    }  
+
+    h2 {
+      font-family: $heading-font-family;
+      font-size: 42px;
+      line-height: 54px;
+      font-weight: 700;
+      color: $neutral-color-900;
+      margin-bottom: 10px;
+      margin-top: 0;
+    }
+
+    p {
+      font-family: $body-font-family;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 25px;
+      color: $neutral-color-600;
+      margin: 0;
+    }
+  }
+
+  .fb-pricing-type {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .fb-pricing-price {
+    display: block;
+    font-size: 36px;
+    margin-bottom: 20px;
+
+    span {
+      font-size: 16px;
+    }
+  }
+
+  .fb-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &.fb-button-green {
+      background-color: #4CAF50;
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+
+    &.fb-button-blue {
+      background-color: #2196F3;
+      &:hover {
+        background-color: #1e87db;
+      }
+    }
+  }
+
+  .fb-pricing-body {
+    .fb-pricing-row {
+      border-bottom: 1px solid $neutral-color-100;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .fb-pricing-column {
+        text-align: center;
+        font-family: $body-font-family;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 25px;
+        color: $neutral-color-600;
+      }
+
+      .fb-pricing-column:first-child {
+        text-align: left;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 28px;
+      }
+      .fb-pricing-column:nth-child(2) {
+        background-color: $success-color-50;
+      }
+    }
+  }
+
+  .fb-pricing-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &-check {
+      background-color: $success-color;
+
+      &::before {
+        width: 6px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: translate(-50%, -60%) rotate(45deg);
+      }
+    }
+
+    &-cross {
+      background-color: #F44336;
+      &::before,
+      &::after {
+        width: 12px;
+        height: 2px;
+        background-color: white;
+      }
+      &::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+      &::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+  }
+}

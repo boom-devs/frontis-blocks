@@ -1,0 +1,128 @@
+.fb-template-library-store-header {
+    padding: 24px;
+    background: $white-color;
+    border-bottom: 1px solid #E1E3E8;
+
+    .fb-template-library-store-header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .fb-template-library-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            span {
+                font-weight: 700;
+                font-size: 30px;
+            }
+        }
+
+        .fb-template-library-tabs {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 360px;
+            gap: 20px;
+
+            @media all and (max-width: 1024px) {
+                margin-left: 50px;
+            }
+
+            @media all and (max-width: 1400px) {
+                margin-left: 50px;
+            }
+
+            span {
+                color: #555E72;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 22px;
+            }
+
+            .single-tab {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+
+                &.active {
+                    position: relative;
+
+                    span {
+                        color: $neutral-color-950;
+                    }
+
+                    &:after {
+                        content: "";
+                        background: $primary-color;
+                        bottom: -36px;
+                        height: 2px;
+                        left: 0;
+                        position: absolute;
+                        width: 100%;
+                    }
+                }
+            }
+
+            button {
+                border: none;
+                background: none;
+                cursor: pointer;
+                z-index: 10;
+            }
+        }
+
+        .fb-template-library-header-right {
+            display: flex;
+            align-items: center;
+            margin-left: 272px;
+            gap: 24px;
+            z-index: 10;
+
+            @media all and (max-width: 1024px) {
+                margin-left: 0;
+            }
+
+            @media all and (max-width: 1400px) {
+                margin-left: 50px;
+            }
+
+            .fb-template-library-support-btn-wrapper {
+                button {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 12px 40px;
+                    background: $primary-color;
+                    color: $white-color;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-family: Manrope;
+                    font-weight: $font-weight-500;
+                    font-size: $large-font-size;
+                    line-height: $line-height-22;
+                }
+            }
+
+            .fb-template-library-user-profile {
+                padding: 10px;
+                border: 1px solid $neutral-color-100;
+                border-radius: 50px;
+                line-height: 0;
+                cursor: pointer;
+            }
+
+            .fb-template-library-close-btn {
+                button {
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+.fb-inspector-control {
+    .components-panel__body {
+        .components-base-control__field {
+            .components-flex{
+                gap: 0;
+            }
+            .components-base-control__label,
+            label {
+                color: $neutral-color-950;
+                font-family: $heading-font-family;
+                font-size: $base-font-size;
+                font-weight: $font-weight-500;
+                line-height: 18px;
+                margin: 0 0 12px;
+                min-height: auto;
+                text-transform: capitalize;
+            }
+        }
+    }
+}

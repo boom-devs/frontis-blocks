@@ -1,0 +1,89 @@
+import { useBlockProps, RichText } from '@wordpress/block-editor';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import attributes from './attributes.js';
+
+const v1_0_3 = {
+    attributes,
+
+    supports: {
+        html: false,
+        className: false,
+    },
+
+    save({ attributes }) {
+        const {
+            blockID,
+            FeatureItems,
+            FeatureIconShape,
+            FeatureAlignment,
+            FeatureIconAlignment,
+            FeatureTag,
+    
+            featuresListGlobalWraperID,
+            featuresListGlobalWraperClass,
+            
+            featuresListDesktopSwitcher,
+            featuresListTabletSwitcher,
+            featuresListMobileSwitcher,
+        } = attributes;
+
+        const blockProps = useBlockProps.save({
+            className: `fb-feature-main-wrapper ${blockID} ${featuresListDesktopSwitcher && 'fb-desktop-responsive'} ${featuresListTabletSwitcher && 'fb-tablet-responsive'} ${featuresListMobileSwitcher && 'fb-mobile-responsive'}`,
+        });
+
+        return (
+            <>
+                <div {...blockProps}>
+                    <div className={`fb-parent-wrapper fb-feature-wrapper ${featuresListGlobalWraperClass}`} id={featuresListGlobalWraperID}>
+                        <div className={`fb-feature-list-wrapper fb-feature-list-${FeatureAlignment} fb-icon-position-${FeatureIconAlignment} `}>
+                            <ul className="fb-feature-list-items">
+                                {FeatureItems.map(item => (
+                                    
+                                    <li key={item.id} className={`fb-feature-list-item single-item-${item.id}`}>
+
+                                        {item.FeatureIconAlign !== 'none' && (
+                                            <div className="fb-feature-list-icon-box">
+                                                {item.FeatureIconAlign === 'icon' || item.FeatureIconAlign === undefined ? (
+                                                    <div className={`fb-feature-list-icon-inner ${FeatureIconShape}`}>
+                                                        <span className="fb-feature-list-icon">
+                                                            {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
+                                                        </span>
+                                                    </div>
+                                                ) : item.FeatureIconAlign === 'image' && item.FeatureIconImageUrl ? (
+                                                    <div className={`fb-feature-icon-image-wrapper ${FeatureIconShape}`}>
+
+                                                        <img
+                                                            src={item.FeatureIconImageUrl}
+                                                            alt={item.FeatureIconImageAlt || 'Feature Image'}
+                                                            className="fb-feature-icon-image"
+                                                        />
+
+                                                    </div>
+                                                ) : null}
+                                            </div>
+                                        )}
+                                        
+                                        <div className="fb-feature-list-content">
+                                            <RichText.Content
+                                                tagName={FeatureTag}
+                                                className="fb-feature-list-title"
+                                                value={item.Title}
+                                            />
+                                            <RichText.Content
+                                                tagName="p"
+                                                className="fb-feature-list-text"
+                                                value={item.Description}
+                                            />
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </>
+        );
+    },
+};
+
+export default [v1_0_3];
