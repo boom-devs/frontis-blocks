@@ -7,6 +7,7 @@
 	flex-direction: column;
 
 	.frontis-blocks-logo {
+		margin-top: 15px;
 		text-align: center;
 	}
 }
@@ -256,13 +257,16 @@
 				.block-title {
 					color: #1e1e1e;
 					text-align: center;
-					width: 57px;
+					width: 80px;
 					height: 28px;
 					padding: 4px 0 8px 0;
 					gap: 10px;
 					font-size: 12px;
 					line-height: 16px;
 					letter-spacing: 0;
+					// white-space: nowrap;
+					// overflow: hidden;
+					// text-overflow: ellipsis;
 				}
 
 				&:hover {
