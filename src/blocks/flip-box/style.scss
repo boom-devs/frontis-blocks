@@ -10,6 +10,7 @@
 		width: 100%;
 		transition: transform 0.6s ease-out;
 		transform-origin: center center;
+
 		.fb-flipbox-front,
 		.fb-flipbox-back {
 			position: absolute;
@@ -26,6 +27,7 @@
 			-webkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;
 			box-sizing: border-box;
+
 			.fb-flipbox-content-wrapper {
 				display: flex;
 				flex-direction: column;
@@ -37,21 +39,22 @@
 				transform: translateZ(0);
 				-webkit-transform: translateZ(0);
 				-webkit-perspective: 1000;
+
 				.fb-flip-media-container,
-				.fb-flip-back-media-container{
+				.fb-flip-back-media-container {
 					display: flex;
 				}
 			}
 		}
 
 		.fb-flipbox-front {
-			transform: rotateY(0deg) translateZ(1px);
+			transform: rotateY(0deg);
 			z-index: 2;
 			background: red;
 		}
 
 		.fb-flipbox-back {
-			transform: rotateY(180deg) translateZ(1px);
+			transform: rotateY(180deg);
 			z-index: 1;
 			background: blue;
 		}
@@ -70,101 +73,100 @@
 			}
 		}
 
-		// Flip animation
-		&.flip-left {
-			&:hover {
-				transform: rotateY(-180deg);
-			}
+		// Flip animation styles
+		&.flip-left:hover {
+			transform: rotateY(-180deg);
 		}
 
-		&.flip-right {
-			&:hover {
-				transform: rotateY(180deg);
-			}
+		&.flip-right:hover {
+			transform: rotateY(180deg);
 		}
 
 		&.flip-up {
-			&:hover {
-				transform: rotateX(180deg) !important;
+			.fb-flipbox-back {
+				transform: rotateX(-180deg);
+			}
 
-				.fb-flipbox-back {
-					transform: rotateX(180deg);
-				}
+			&:hover {
+				transform: rotateX(180deg);
 			}
 		}
 
 		&.flip-down {
-			&:hover {
-				transform: rotateX(-180deg) !important;
+			.fb-flipbox-back {
+				transform: rotateX(180deg);
+			}
 
-				.fb-flipbox-back {
-					transform: rotateX(-180deg);
-				}
+			&:hover {
+				transform: rotateX(-180deg);
 			}
 		}
 
-		&.zoom-in {
-			&:hover {
-				transform: scale(1.1) !important;
+		&.zoom-in:hover {
+			transform: scale(1.1);
 
-				.fb-flipbox-front {
-					opacity: 0;
-					z-index: 1;
-				}
+			.fb-flipbox-front {
+				opacity: 0;
+				z-index: 1;
+			}
 
-				.fb-flipbox-back {
-					opacity: 1;
-					z-index: 5;
-					transform: rotateY(0deg) translateZ(1px);
-				}
+			.fb-flipbox-back {
+				opacity: 1;
+				z-index: 5;
+				transform: none;
 			}
 		}
 
-		&.zoom-out {
-			&:hover {
-				transform: scale(0.8) !important;
+		&.zoom-out:hover {
+			transform: scale(0.8);
 
-				.fb-flipbox-front {
-					opacity: 0;
-					z-index: 1;
-				}
+			.fb-flipbox-front {
+				opacity: 0;
+				z-index: 1;
+			}
 
-				.fb-flipbox-back {
-					opacity: 1;
-					z-index: 5;
-					transform: rotateY(0deg) translateZ(1px);
-				}
+			.fb-flipbox-back {
+				opacity: 1;
+				z-index: 5;
+				transform: none;
 			}
 		}
 
 		&.fade {
+			.fb-flipbox-back {
+				z-index: 1;
+				transform: none;
+			}
+
 			&:hover {
 				.fb-flipbox-front {
 					opacity: 0;
-					z-index: 1;
 				}
 
 				.fb-flipbox-back {
 					opacity: 1;
 					z-index: 5;
-					transform: rotateY(0deg) translateZ(1px);
 				}
 			}
 		}
-		.fb-flip-button, 
-		.fb-flip-back-button{
+
+		.fb-flip-button,
+		.fb-flip-back-button {
+
 			.fb-flip-btn-wrapper,
-			.fb-flip-back-btn-wrapper{
+			.fb-flip-back-btn-wrapper {
 				display: inline-flex;
 			}
 		}
+
 		.fb-flip-media-wrapper,
-		.fb-flip-back-media-wrapper{
-			.fb-icon-wrapper{
+		.fb-flip-back-media-wrapper {
+			.fb-icon-wrapper {
 				line-height: 0;
 			}
 		}
-		.fb-btn-icon-wrapper{
+
+		.fb-btn-icon-wrapper {
 			line-height: 0;
 		}
 	}

@@ -23,6 +23,10 @@ const attributes = {
         type: "boolean",
         default: false
     },
+    isHover: {
+        type: "boolean",
+        default: false,
+    },
     flipSelectedSide: {
         type: "string",
         default: "front"
@@ -2253,9 +2257,9 @@ const attributes = {
     flipBoxFrontHeight: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '310',
+            Tablet: '310',
+            Mobile: '310'
         }
     },
     flipBoxFrontHeightUnits: {
@@ -2322,6 +2326,7 @@ const attributes = {
         type: "string",
         default: ""
     },
+    // Flip box front hover background
     flipBoxFrontHoverBackgroundType: {
         type: "string",
         default: "classic"
