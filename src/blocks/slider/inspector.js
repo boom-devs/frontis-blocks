@@ -2383,7 +2383,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
                             globalColor={sliderArrowsColor}
-                            setGlobalColor={(value) => setAttributes({ sliderArrowsColor: value })}
+                            setGlobalColor={(value) => setAttributes({ sliderArrowsColor: value === undefined ? '' : value })}
                         />
                     )}
                     {sliderArrowsColorSwitcher === 'hover' && (
@@ -2404,7 +2404,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
                             globalColor={sliderArrowsBgColor}
-                            setGlobalColor={(value) => setAttributes({ sliderArrowsBgColor: value })}
+                            setGlobalColor={(value) => setAttributes({ sliderArrowsBgColor: value === undefined ? '' : value })}
                         />
                     )}
                     {sliderArrowsBgColorSwitcher === 'hover' && (
@@ -2473,7 +2473,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
                             globalColor={sliderArrowsBorderColor}
-                            setGlobalColor={(value) => setAttributes({ sliderArrowsBorderColor: value })}
+                            setGlobalColor={(value) => setAttributes({ sliderArrowsBorderColor: value === undefined ? '' : value })}
                         />
                     )}
 
@@ -2481,7 +2481,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
                             globalColor={sliderArrowsBorderHoverColor}
-                            setGlobalColor={(value) => setAttributes({ sliderArrowsBorderHoverColor: value })}
+                            setGlobalColor={(value) => setAttributes({ sliderArrowsBorderHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 
@@ -2607,7 +2607,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     <FB_ColorControl
                                         label={__("Color", "frontis-blocks")}
                                         globalColor={sliderNormalDotsBgColor}
-                                        setGlobalColor={(value) => setAttributes({ sliderNormalDotsBgColor: value })}
+                                        setGlobalColor={(value) => setAttributes({ sliderNormalDotsBgColor: value === undefined ? '' : value })}
                                     />
                                     <SelectControl
                                         label={__("Border Style", "frontis-blocks")}
@@ -2626,7 +2626,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <FB_ColorControl
                                             label={__("Normal Color", "frontis-blocks")}
                                             globalColor={sliderNormalDotsBorderColor}
-                                            setGlobalColor={(value) => setAttributes({ sliderNormalDotsBorderColor: value })}
+                                            setGlobalColor={(value) => setAttributes({ sliderNormalDotsBorderColor: value === undefined ? '' : value })}
                                         />
                                     )}
 
@@ -2634,7 +2634,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <FB_ColorControl
                                             label={__("Hover Color", "frontis-blocks")}
                                             globalColor={sliderNormalDotsBorderHoverColor}
-                                            setGlobalColor={(value) => setAttributes({ sliderNormalDotsBorderHoverColor: value })}
+                                            setGlobalColor={(value) => setAttributes({ sliderNormalDotsBorderHoverColor: value === undefined ? '' : value })}
                                         />
                                     )}
 
@@ -2699,7 +2699,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     <FB_ColorControl
                                         label={__("Color", "frontis-blocks")}
                                         globalColor={sliderActiveDotsBgColor}
-                                        setGlobalColor={(value) => setAttributes({ sliderActiveDotsBgColor: value })}
+                                        setGlobalColor={(value) => setAttributes({ sliderActiveDotsBgColor: value === undefined ? '' : value })}
                                     />
                                     <SelectControl
                                         label={__("Border Style", "frontis-blocks")}
@@ -2718,7 +2718,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <FB_ColorControl
                                             label={__("Normal Color", "frontis-blocks")}
                                             globalColor={sliderActiveDotsBorderColor}
-                                            setGlobalColor={(value) => setAttributes({ sliderActiveDotsBorderColor: value })}
+                                            setGlobalColor={(value) => setAttributes({ sliderActiveDotsBorderColor: value === undefined ? '' : value })}
                                         />
                                     )}
 
@@ -2726,7 +2726,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         <FB_ColorControl
                                             label={__("Hover Color", "frontis-blocks")}
                                             globalColor={sliderActiveDotsBorderHoverColor}
-                                            setGlobalColor={(value) => setAttributes({ sliderActiveDotsBorderHoverColor: value })}
+                                            setGlobalColor={(value) => setAttributes({ sliderActiveDotsBorderHoverColor: value === undefined ? '' : value })}
                                         />
                                     )}
 
@@ -2775,7 +2775,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 <FB_ColorControl
                                     label={__("Normal Color", "frontis-blocks")}
                                     globalColor={sliderFractionColor}
-                                    setGlobalColor={(value) => setAttributes({ sliderFractionColor: value })}
+                                    setGlobalColor={(value) => setAttributes({ sliderFractionColor: value === undefined ? '' : value })}
                                 />
                             )}
 
@@ -2783,7 +2783,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 <FB_ColorControl
                                     label={__("Hover Color", "frontis-blocks")}
                                     globalColor={sliderFractionHoverColor}
-                                    setGlobalColor={(value) => setAttributes({ sliderFractionHoverColor: value })}
+                                    setGlobalColor={(value) => setAttributes({ sliderFractionHoverColor: value === undefined ? '' : value })}
                                 />
                             )}
 
@@ -2853,14 +2853,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 <FB_ColorControl
                                     label={__("Normal Color", "frontis-blocks")}
                                     globalColor={sliderProgressbarBGColor}
-                                    setGlobalColor={(value) => setAttributes({ sliderProgressbarBGColor: value })}
+                                    setGlobalColor={(value) => setAttributes({ sliderProgressbarBGColor: value === undefined ? '' : value })}
                                 />
                             )}
                             {sliderProgressbarBGColorSwitcher === 'active' && (
                                 <FB_ColorControl
                                     label={__("Active Color", "frontis-blocks")}
                                     globalColor={sliderProgressbarBGActiveColor}
-                                    setGlobalColor={(value) => setAttributes({ sliderProgressbarBGActiveColor: value })}
+                                    setGlobalColor={(value) => setAttributes({ sliderProgressbarBGActiveColor: value === undefined ? '' : value })}
                                 />
                             )}
 
@@ -2971,9 +2971,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             normalBackgroundType={sliderGlobalBgNormalBackgroundType}
                             setNormalBackgroundType={(value) => setAttributes({ sliderGlobalBgNormalBackgroundType: value })}
                             normalClassicColor={sliderGlobalBgNormalClassicColor}
-                            setNormalClassicColor={(value) => setAttributes({ sliderGlobalBgNormalClassicColor: value })}
+                            setNormalClassicColor={(value) => setAttributes({ sliderGlobalBgNormalClassicColor: value === undefined ? '' : value })}
                             normalGradientColor={sliderGlobalBgNormalGradientColor}
-                            setNormalGradientColor={(value) => setAttributes({ sliderGlobalBgNormalGradientColor: value })}
+                            setNormalGradientColor={(value) => setAttributes({ sliderGlobalBgNormalGradientColor: value === undefined ? '' : value })}
                             normalCustomGradientSwitcher={sliderGlobalBgNormalCustomGradientSwitcher}
                             setNormalCustomGradientSwitcher={(value) => setAttributes({ sliderGlobalBgNormalCustomGradientSwitcher: value })}
                             normalCustomGradientInputValue={sliderGlobalBgNormalCustomGradientInputValue}
@@ -2982,9 +2982,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             hoverBackgroundType={sliderGlobalBgHoverBackgroundType}
                             setHoverBackgroundType={(value) => setAttributes({ sliderGlobalBgHoverBackgroundType: value })}
                             hoverClassicColor={sliderGlobalBgHoverClassicColor}
-                            setHoverClassicColor={(value) => setAttributes({ sliderGlobalBgHoverClassicColor: value })}
+                            setHoverClassicColor={(value) => setAttributes({ sliderGlobalBgHoverClassicColor: value === undefined ? '' : value })}
                             hoverGradientColor={sliderGlobalBgHoverGradientColor}
-                            setHoverGradientColor={(value) => setAttributes({ sliderGlobalBgHoverGradientColor: value })}
+                            setHoverGradientColor={(value) => setAttributes({ sliderGlobalBgHoverGradientColor: value === undefined ? '' : value })}
                             hoverCustomGradientSwitcher={sliderGlobalBgHoverCustomGradientSwitcher}
                             setHoverCustomGradientSwitcher={(value) => setAttributes({ sliderGlobalBgHoverCustomGradientSwitcher: value })}
                             hoverCustomGradientInputValue={sliderGlobalBgHoverCustomGradientInputValue}
@@ -3045,7 +3045,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Normal Color", "frontis-blocks")}
                                 globalColor={sliderGlobalBorderColor}
-                                setGlobalColor={(value) => setAttributes({ sliderGlobalBorderColor: value })}
+                                setGlobalColor={(value) => setAttributes({ sliderGlobalBorderColor: value === undefined ? '' : value })}
                             />
                         )}
 
@@ -3053,7 +3053,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Hover Color", "frontis-blocks")}
                                 globalColor={sliderGlobalBorderHoverColor}
-                                setGlobalColor={(value) => setAttributes({ sliderGlobalBorderHoverColor: value })}
+                                setGlobalColor={(value) => setAttributes({ sliderGlobalBorderHoverColor: value === undefined ? '' : value })}
                             />
                         )}
 

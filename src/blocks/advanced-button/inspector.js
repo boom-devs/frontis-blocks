@@ -1235,6 +1235,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			}
 		}
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button {
+			${buttonIconGapSize.Desktop ? `gap: ${buttonIconGapSize.Desktop}${buttonIconGapUnits.Desktop};` : ''}
+			
 			${buttonGlobalTypoSwitcher.fontFamily === true && buttonGlobalTypographyData.fontFamily ? `font-family: ${buttonGlobalTypographyData.fontFamily};` : ''}
 			${buttonGlobalTypoSwitcher.fontSize === true && buttonGlobalTypographyData.fontSize ? `font-size: ${buttonGlobalTypographyData.fontSize};` : ''}
 			${buttonGlobalTypoSwitcher.fontWeight === true && buttonGlobalTypographyData.fontWeight ? `font-weight: ${buttonGlobalTypographyData.fontWeight};` : ''}
@@ -1288,8 +1290,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		}
 		
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
-			${buttonIconPosition === 'left' && buttonIconGapSize.Desktop ? `margin-right: ${buttonIconGapSize.Desktop}${buttonIconGapUnits.Desktop};` : ''}
-			${buttonIconPosition === 'right' && buttonIconGapSize.Desktop ? `margin-left: ${buttonIconGapSize.Desktop}${buttonIconGapUnits.Desktop};` : ''}
 			${buttonIconNormalBackgroundType === 'gradient' ? `   	
                 ${buttonIconNormalCustomGradientSwitcher && buttonIconNormalCustomGradientInputValue ? `background: ${buttonIconNormalCustomGradientInputValue};` : `background: ${buttonIconNormalGradientColor};`}
             `: `
@@ -1361,20 +1361,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				}
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button {
+				${buttonIconGapSize.Tablet ? `gap: ${buttonIconGapSize.Tablet}${buttonIconGapUnits.Tablet};` : ''}
+				
 				${buttonTabletPaddingStr && buttonTabPadding?.top ? `padding: ${buttonTabletPaddingStr};` : ''}
 				${buttonTabletMarginStr && buttonTabMargin?.top ? `margin: ${buttonTabletMarginStr};` : ''}
-				${buttonBorder ? `border: ${buttonBorder};` : ''}
-				${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
 				${buttonTabletBorderWidthStr && buttonTabBorderWidth?.top ? `border-width: ${buttonTabletBorderWidthStr};` : ''}
 				${buttonTabletBorderRadiusStr && buttonTabBorderRadiusWidth?.top ? `border-radius: ${buttonTabletBorderRadiusStr};` : ''}
 				${buttonWidth.Tablet && buttonWidthUnits.Tablet ? `width: ${buttonWidth.Tablet}${buttonWidthUnits.Tablet};` : ''}
 				${buttonGlobalTypoSwitcher.fontSize === false && buttonFontSize.Tablet && buttonFontSizeUnits.Tablet ? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};` : ''}
 				${buttonGlobalTypoSwitcher.letterSpacing === false && buttonLetterSpacing.Tablet && buttonLetterSpacingUnits.Tablet ? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};` : ''}
 				${buttonGlobalTypoSwitcher.lineHeight === false && buttonLineHeight.Tablet && buttonLineHeightUnits.Tablet ? `line-height: ${buttonLineHeight.Tablet}${buttonLineHeightUnits.Tablet};` : ''}
-			}
-
-			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
-				${buttonHoverColor ? `color: ${buttonHoverColor};` : ''}
 			}
 
 			.${blockId} .fb-advanced-button-wrapper:hover {
@@ -1391,9 +1387,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					)
 				}
 			}
-			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
-				${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
-			}
 
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
 				${buttonIconPaddingTabletWidth && buttonIconPaddingTablet?.top ? `padding: ${buttonIconPaddingTabletWidth};` : ''}
@@ -1406,7 +1399,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `width: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
 				${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet ? `height: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};` : ''}
 				transform: rotate(${buttonIconRotate.Tablet}deg);
-				transition: all .3s ease-in-out;
 			}
 
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
@@ -1416,9 +1408,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
 				${buttonIconImageWidth ? `width: ${buttonIconImageWidth.Tablet}${buttonIconImageWidthUnits.Tablet};` : ''}
 				${buttonIconImageHeight ? `height: ${buttonIconImageHeight.Tablet}${buttonIconImageHeightUnits.Tablet};` : ''}
-				${buttonIconImagedisplay ? `object-fit: ${buttonIconImagedisplay};` : ''}
 				transform: rotate(${buttonImageRotate.Tablet}deg);
-				transition: all .3s ease-in-out;
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
 				transform: rotate(${buttonImageRotateHover.Tablet}deg);
@@ -1452,10 +1442,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				}
 			}
 
-			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
-				${buttonHoverColor ? `color: ${buttonHoverColor};` : ''}
-			}
-
 			.${blockId} .fb-advanced-button-wrapper:hover {
 				${buttonTransformHoverProportions 
 					? (buttonTransformHoverScale?.Mobile 
@@ -1469,14 +1455,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					)
 				}
 			}
-			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
-				${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ''}
-			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button {
+				${buttonIconGapSize.Mobile ? `gap: ${buttonIconGapSize.Mobile}${buttonIconGapUnits.Mobile};` : ''}
 				${buttonMobilePaddingStr && buttonMobilePadding?.top ? `padding: ${buttonMobilePaddingStr};` : ''}
 				${buttonMobileMarginStr && buttonMobileMargin?.top ? `margin: ${buttonMobileMarginStr};` : ''}
-				${buttonBorder ? `border: ${buttonBorder};` : ''}
-				${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
 				${buttonMobileBorderWidthStr && buttonMobileBorderWidth?.top ? `border-width: ${buttonMobileBorderWidthStr};` : ''}
 				${buttonMobileBorderRadiusStr && buttonMobileBorderRadiusWidth?.top ? `border-radius: ${buttonMobileBorderRadiusStr};` : ''}
 				${buttonWidth.Mobile && buttonWidthUnits.Mobile ? `width: ${buttonWidth.Mobile}${buttonWidthUnits.Mobile};` : ''}
@@ -1495,7 +1477,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `width: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
 				${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile ? `height: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};` : ''}
 				transform: rotate(${buttonIconRotate.Mobile}deg);
-				transition: all .3s ease-in-out;
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper svg {
 				transform: rotate(${buttonIconRotateHover.Mobile}deg); 
@@ -1503,9 +1484,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
 				${buttonIconImageWidth.Mobile ? `width: ${buttonIconImageWidth.Mobile}${buttonIconImageWidthUnits.Mobile};` : ''}
 				${buttonIconImageHeight.Mobile ? `height: ${buttonIconImageHeight.Mobile}${buttonIconImageHeightUnits.Mobile};` : ''}
-				${buttonIconImagedisplay ? `object-fit: ${buttonIconImagedisplay};` : ''}
 				transform: rotate(${buttonImageRotate.Mobile}deg);
-				transition: all .3s ease-in-out;
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image {
 				transform: rotate(${buttonImageRotateHover.Mobile}deg);
@@ -1902,7 +1881,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={buttonColor}
-						setGlobalColor={(value) => setAttributes({ buttonColor: value })}
+						setGlobalColor={(value) => setAttributes({ buttonColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -1910,7 +1889,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={buttonHoverColor}
-						setGlobalColor={(value) => setAttributes({ buttonHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ buttonHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -1923,9 +1902,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					normalBackgroundType={buttonNormalBackgroundType} 
 					setNormalBackgroundType={(value) => setAttributes({ buttonNormalBackgroundType: value })}
 					normalClassicColor={buttonBgColor}
-					setNormalClassicColor={(value) => setAttributes({ buttonBgColor: value })}
+					setNormalClassicColor={(value) => setAttributes({ buttonBgColor: value === undefined ? '' : value })}
 					normalGradientColor={buttonNormalGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ buttonNormalGradientColor: value })}
+					setNormalGradientColor={(value) => setAttributes({ buttonNormalGradientColor: value === undefined ? '' : value })}
 					normalCustomGradientSwitcher={buttonNormalCustomGradientSwitcher}
 					setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonNormalCustomGradientSwitcher: value })}
 					normalCustomGradientInputValue={buttonNormalCustomGradientInputValue}
@@ -1934,9 +1913,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					hoverBackgroundType={buttonHoverBackgroundType} 
 					setHoverBackgroundType={(value) => setAttributes({ buttonHoverBackgroundType: value })}
 					hoverClassicColor={buttonBgHoverColor}
-					setHoverClassicColor={(value) => setAttributes({ buttonBgHoverColor: value })}
+					setHoverClassicColor={(value) => setAttributes({ buttonBgHoverColor: value === undefined ? '' : value })}
 					hoverGradientColor={buttonHoverGradientColor} 
-					setHoverGradientColor={(value) => setAttributes({ buttonHoverGradientColor: value })}
+					setHoverGradientColor={(value) => setAttributes({ buttonHoverGradientColor: value === undefined ? '' : value })}
 					hoverCustomGradientSwitcher={buttonHoverCustomGradientSwitcher}
 					setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonHoverCustomGradientSwitcher: value })}
 					hoverCustomGradientInputValue={buttonHoverCustomGradientInputValue}
@@ -1998,7 +1977,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						<FB_ColorControl
 							label={__("Normal Color", "frontis-blocks")}
 							globalColor={buttonBorderColor}
-							setGlobalColor={(value) => setAttributes({ buttonBorderColor: value })}
+							setGlobalColor={(value) => setAttributes({ buttonBorderColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -2006,7 +1985,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={buttonBorderHoverColor}
-							setGlobalColor={(value) => setAttributes({ buttonBorderHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ buttonBorderHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -2097,7 +2076,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						<FB_ColorControl
 							label={__("Normal Color", "frontis-blocks")}
 							globalColor={buttonIconColor}
-							setGlobalColor={(value) => setAttributes({ buttonIconColor: value })}
+							setGlobalColor={(value) => setAttributes({ buttonIconColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -2105,7 +2084,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={buttonIconHoverColor}
-							setGlobalColor={(value) => setAttributes({ buttonIconHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ buttonIconHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -2118,9 +2097,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						normalBackgroundType={buttonIconNormalBackgroundType} 
 						setNormalBackgroundType={(value) => setAttributes({ buttonIconNormalBackgroundType: value })}
 						normalClassicColor={buttonIconBgColor}
-						setNormalClassicColor={(value) => setAttributes({ buttonIconBgColor: value })}
+						setNormalClassicColor={(value) => setAttributes({ buttonIconBgColor: value === undefined ? '' : value })}
 						normalGradientColor={buttonIconNormalGradientColor}
-						setNormalGradientColor={(value) => setAttributes({ buttonIconNormalGradientColor: value })}
+						setNormalGradientColor={(value) => setAttributes({ buttonIconNormalGradientColor: value === undefined ? '' : value })}
 						normalCustomGradientSwitcher={buttonIconNormalCustomGradientSwitcher}
 						setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonIconNormalCustomGradientSwitcher: value })}
 						normalCustomGradientInputValue={buttonIconNormalCustomGradientInputValue}
@@ -2129,9 +2108,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						hoverBackgroundType={buttonIconHoverBackgroundType} 
 						setHoverBackgroundType={(value) => setAttributes({ buttonIconHoverBackgroundType: value })}
 						hoverClassicColor={ buttonIconBgHoverColor}
-						setHoverClassicColor={(value) => setAttributes({  buttonIconBgHoverColor: value })}
+						setHoverClassicColor={(value) => setAttributes({  buttonIconBgHoverColor: value === undefined ? '' : value })}
 						hoverGradientColor={buttonIconHoverGradientColor} 
-						setHoverGradientColor={(value) => setAttributes({ buttonIconHoverGradientColor: value })}
+						setHoverGradientColor={(value) => setAttributes({ buttonIconHoverGradientColor: value === undefined ? '' : value })}
 						hoverCustomGradientSwitcher={buttonIconHoverCustomGradientSwitcher}
 						setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonIconHoverCustomGradientSwitcher: value })}
 						hoverCustomGradientInputValue={buttonIconHoverCustomGradientInputValue}
@@ -2158,7 +2137,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						<FB_ColorControl
 							label={__("Normal Color", "frontis-blocks")}
 							globalColor={buttonIconBorderColor}
-							setGlobalColor={(value) => setAttributes({ buttonIconBorderColor: value })}
+							setGlobalColor={(value) => setAttributes({ buttonIconBorderColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -2166,7 +2145,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={buttonIconBorderHoverColor}
-							setGlobalColor={(value) => setAttributes({ buttonIconBorderHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ buttonIconBorderHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -2480,9 +2459,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             normalBackgroundType={buttonGlobalNormalBackgroundType} 
                             setNormalBackgroundType={(value) => setAttributes({ buttonGlobalNormalBackgroundType: value })}
                             normalClassicColor={buttonGlobalNormalClassicColor}
-                            setNormalClassicColor={(value) => setAttributes({ buttonGlobalNormalClassicColor: value })}
+                            setNormalClassicColor={(value) => setAttributes({ buttonGlobalNormalClassicColor: value === undefined ? '' : value })}
                             normalGradientColor={buttonGlobalNormalGradientColor}
-                            setNormalGradientColor={(value) => setAttributes({ buttonGlobalNormalGradientColor: value })}
+                            setNormalGradientColor={(value) => setAttributes({ buttonGlobalNormalGradientColor: value === undefined ? '' : value })}
                             normalCustomGradientSwitcher={buttonGlobalNormalCustomGradientSwitcher}
                             setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonGlobalNormalCustomGradientSwitcher: value })}
                             normalCustomGradientInputValue={buttonGlobalNormalCustomGradientInputValue}
@@ -2491,9 +2470,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             hoverBackgroundType={buttonGlobalHoverBackgroundType} 
                             setHoverBackgroundType={(value) => setAttributes({ buttonGlobalHoverBackgroundType: value })}
                             hoverClassicColor={buttonGlobalHoverClassicColor}
-                            setHoverClassicColor={(value) => setAttributes({ buttonGlobalHoverClassicColor: value })}
+                            setHoverClassicColor={(value) => setAttributes({ buttonGlobalHoverClassicColor: value === undefined ? '' : value })}
                             hoverGradientColor={buttonGlobalHoverGradientColor} 
-                            setHoverGradientColor={(value) => setAttributes({ buttonGlobalHoverGradientColor: value })}
+                            setHoverGradientColor={(value) => setAttributes({ buttonGlobalHoverGradientColor: value === undefined ? '' : value })}
                             hoverCustomGradientSwitcher={buttonGlobalHoverCustomGradientSwitcher}
                             setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonGlobalHoverCustomGradientSwitcher: value })}
                             hoverCustomGradientInputValue={buttonGlobalHoverCustomGradientInputValue}
@@ -2525,7 +2504,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
 								globalColor={buttonGlobalBorderColor}
-								setGlobalColor={(value) => setAttributes({ buttonGlobalBorderColor: value })}
+								setGlobalColor={(value) => setAttributes({ buttonGlobalBorderColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -2533,7 +2512,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={buttonGlobalBorderHoverColor}
-								setGlobalColor={(value) => setAttributes({ buttonGlobalBorderHoverColor: value })}
+								setGlobalColor={(value) => setAttributes({ buttonGlobalBorderHoverColor: value === undefined ? '' : value })}
 							/>
 						)}
 
