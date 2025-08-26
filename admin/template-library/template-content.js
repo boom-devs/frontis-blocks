@@ -10,171 +10,164 @@ import TemplateImport from "./template-import";
 import LoginSignupModal from "./login-signup";
 import PluginUpgradeModal from "./plugin-upgrade";
 
-const TemplateCard = ({ imageUrl, title, isPro = false, id, tags = [], dependency = [], activeTab, setLibraryData, isLogedIn }) => {
-	const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
-	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
-	const [isHovered, setIsHovered] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
-	const [isPluginUpgrade, setIsPluginUpgrade] = useState(false);
-	
-	const handleFullSiteImport = useCallback(() => {
+const TemplateCard = ({ imageUrl, title, is_premium = false, id, tags = [], dependencies = [], activeTab, setLibraryData, isLogedIn }) => {
+    const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isPluginUpgrade, setIsPluginUpgrade] = useState(false);
 
-		if (!isPluginUpgrade) {
-			setIsPluginUpgradeModalOpen(true);
-		}
-		if (!isPro && isLogedIn) {
-			setIsModalOpen(true);
-		}
-	}, []);
+    const handleFullSiteImport = useCallback(() => {
+        if (!isPluginUpgrade) {
+            setIsPluginUpgradeModalOpen(true);
+        }
+        if (!is_premium && isLogedIn) {
+            setIsModalOpen(true);
+        }
+    }, [is_premium, isLogedIn, isPluginUpgrade]);
 
-	const handleClosePluginUpgradeModal = useCallback(() => {
-		setIsPluginUpgradeModalOpen(false);
-		setIsPluginUpgrade(true);
-	}, []);
+    const handleClosePluginUpgradeModal = useCallback(() => {
+        setIsPluginUpgradeModalOpen(false);
+        setIsPluginUpgrade(true);
+    }, []);
 
-	const handleCloseModal = useCallback(() => {
-		setIsModalOpen(false);
-	}, []);
+    const handleCloseModal = useCallback(() => {
+        setIsModalOpen(false);
+    }, []);
 
-	const handleDemo = useCallback(() => {
-		console.log("Demo clicked for:", id);
-	}, [id]);
+    const handleDemo = useCallback(() => {
+        console.log("Demo clicked for:", id);
+    }, [id]);
 
-	const currentDay = new Date().toLocaleDateString('en-US', { day: 'numeric' });
-	const currentMonth = new Date().toLocaleDateString('en-US', { month: 'long' });
-	const currentYear = new Date().toLocaleDateString('en-US', { year: 'numeric' });
-	const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-	const currentDateAndTime = { day: currentDay, month: currentMonth, year: currentYear, time: currentTime };
+    const currentDay = new Date().toLocaleDateString('en-US', { day: 'numeric' });
+    const currentMonth = new Date().toLocaleDateString('en-US', { month: 'long' });
+    const currentYear = new Date().toLocaleDateString('en-US', { year: 'numeric' });
+    const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+    const currentDateAndTime = { day: currentDay, month: currentMonth, year: currentYear, time: currentTime };
 
-	const templateData = {
-		id,
-		title,
-		image: imageUrl,
-		isPro,
-		category: ['Blog & Magazine', 'Construction', 'eCommerce'],
-		author: 'Template Author',
-		activeTab: activeTab,
-		dependency: dependency,
-		dateAndTime: currentDateAndTime,
-	};
+    const templateData = {
+        id,
+        title,
+        image: imageUrl,
+        is_premium,
+        category: ['Blog & Magazine', 'Construction', 'eCommerce'],
+        author: 'Template Author',
+        activeTab,
+        dependencies,
+        dateAndTime: currentDateAndTime,
+    };
 
-	const handleSaveLibrary = useCallback(() => {
-		setLibraryData(prevData => {
-			const alreadyExists = prevData.some(item => item.id === templateData.id);
-			if (alreadyExists) return prevData;
-			return [...prevData, templateData];
-		});
-		toast.success(__('Template saved to library', 'frontis-blocks'), {
-			position: "top-right",
-			autoClose: 3000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-		});
-		alert('Template saved to library');
-	}, [templateData]);
+    const handleSaveLibrary = useCallback(() => {
+        setLibraryData(prevData => {
+            const alreadyExists = prevData.some(item => item.id === templateData.id);
+            if (alreadyExists) return prevData;
+            return [...prevData, templateData];
+        });
+        toast.success(__('Template saved to library', 'frontis-blocks'), {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+        });
+        alert('Template saved to library');
+    }, [templateData, setLibraryData]);
 
-	return (
-		<>
-			<div
-				className="fb-template-library-card"
-				onMouseEnter={() => setIsHovered(true)}
-				onMouseLeave={() => setIsHovered(false)}
-			>
-				<div className="fb-template-library-card-img">
-					<img src={imageUrl} alt={title || "Template preview"} />
-					<div className={`fb-template-badge ${isPro ? "pro" : "free"}`}>
-						{isPro ? "PRO" : "FREE"}
-					</div>
-					{/* Hover Overlay */}
-					{isHovered && (
-						<div className="fb-template-overlay">
-							<div className="fb-template-overlay-content">
-								<button className="fb-demo-btn" onClick={handleDemo}>
-									<span>Demo</span>
-									<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-										<path d="M8.32425 2.25C5.58753 2.25493 4.15442 2.32213 3.23856 3.23814C2.25018 4.22667 2.25018 5.81769 2.25018 8.99968C2.25018 12.1817 2.25018 13.7728 3.23856 14.7613C4.22692 15.7498 5.81769 15.7498 8.99925 15.7498C12.1807 15.7498 13.7715 15.7498 14.7599 14.7613C15.6757 13.8453 15.7429 12.4119 15.7478 9.67476" stroke="white" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round" />
-										<path d="M15.4169 2.62224L8.28644 9.7941M15.4169 2.62224C15.0464 2.25128 12.5506 2.28586 12.023 2.29337M15.4169 2.62224C15.7874 2.99321 15.7528 5.4922 15.7453 6.02051" stroke="white" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round" />
-									</svg>
-								</button>
-							</div>
-						</div>
-					)}
-				</div>
+    return (
+        <>
+            <div
+                className="fb-template-library-card"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                <div className="fb-template-library-card-img">
+                    <img src={imageUrl} alt={title || "Template preview"} />
+                    <div className={`fb-template-badge ${is_premium ? "pro" : "free"}`}>
+                        {is_premium ? "PRO" : "FREE"}
+                    </div>
+                    {isHovered && (
+                        <div className="fb-template-overlay">
+                            <div className="fb-template-overlay-content">
+                                <button className="fb-demo-btn" onClick={handleDemo}>
+                                    <span>Demo</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <path d="M8.32425 2.25C5.58753 2.25493 4.15442 2.32213 3.23856 3.23814C2.25018 4.22667 2.25018 5.81769 2.25018 8.99968C2.25018 12.1817 2.25018 13.7728 3.23856 14.7613C4.22692 15.7498 5.81769 15.7498 8.99925 15.7498C12.1807 15.7498 13.7715 15.7498 14.7599 14.7613C15.6757 13.8453 15.7429 12.4119 15.7478 9.67476" stroke="white" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M15.4169 2.62224L8.28644 9.7941M15.4169 2.62224C15.0464 2.25128 12.5506 2.28586 12.023 2.29337M15.4169 2.62224C15.7874 2.99321 15.7528 5.4922 15.7453 6.02051" stroke="white" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
 
-				<div className="fb-template-library-card-content">
-					<div className="fb-template-library-card-content-top">
-						<div className="fb-template-tags">
-							{tags && tags.length > 0 && tags.map((tag, index) => (
-								<span key={index}>
-									{tag}
-									{index < tags.length - 1 && ', '}
-								</span>
-							))}
-						</div>
-					</div>
-					<div className="fb-template-library-card-content-bottom">
-						<h3 className="fb-template-title">{title}</h3>
-					</div>
-				</div>
-				<div className="fb-template-actions">
-					<button
-						className={`fb-import-btn ${isLoading ? "loading" : ""}`}
-						onClick={!isLoading ? handleFullSiteImport : null}
-						disabled={isLoading}
-					>
-						{isLoading ? (
-							<>
-								<span>Importing...</span>
-								<ClipLoader color="#fff" size={16} />
-							</>
-						) : (
-							<>
-								<span>Import</span>
-							</>
-						)}
-					</button>
+                <div className="fb-template-library-card-content">
+                    <div className="fb-template-library-card-content-top">
+                        <div className="fb-template-tags">
+                            {tags?.length > 0 && tags.map((tag, index) => (
+                                <span key={index}>
+                                    {tag}
+                                    {index < tags.length - 1 && ', '}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="fb-template-library-card-content-bottom">
+                        <h3 className="fb-template-title">{title}</h3>
+                    </div>
+                </div>
+                <div className="fb-template-actions">
+                    <button
+                        className={`fb-import-btn ${isLoading ? "loading" : ""}`}
+                        onClick={!isLoading ? handleFullSiteImport : null}
+                        disabled={isLoading}
+                    >
+                        {isLoading ? (
+                            <>
+                                <span>Importing...</span>
+                                <ClipLoader color="#fff" size={16} />
+                            </>
+                        ) : (
+                            <span>Import</span>
+                        )}
+                    </button>
 
-					<button
-						className={`fb-template-save-my-cloud ${isLoading ? "loading" : ""}`}
-						onClick={!isLoading ? handleSaveLibrary : null }
-						disabled={isLoading}
-					>
-						{isLoading ? (
-							<>
-								<span>Saving...</span>
-								<ClipLoader color="#fff" size={16} />
-							</>
-						) : (
-							<>
-								<span>Save Library</span>
-							</>
-						)}
-					</button>
-				</div>
-			</div>
+                    <button
+                        className={`fb-template-save-my-cloud ${isLoading ? "loading" : ""}`}
+                        onClick={!isLoading ? handleSaveLibrary : null}
+                        disabled={isLoading}
+                    >
+                        {isLoading ? (
+                            <>
+                                <span>Saving...</span>
+                                <ClipLoader color="#fff" size={16} />
+                            </>
+                        ) : (
+                            <span>Save Library</span>
+                        )}
+                    </button>
+                </div>
+            </div>
 
-			{isPro && isPluginUpgradeModalOpen && (
-				<PluginUpgradeModal
-					onClose={handleClosePluginUpgradeModal}
-				/>
-			)}
+            {is_premium && isPluginUpgradeModalOpen && (
+                <PluginUpgradeModal
+                    onClose={handleClosePluginUpgradeModal}
+                />
+            )}
 
-			{/* Template Import Modal */}
-			{isModalOpen && (
-				<TemplateImport
-					template={templateData}
-					onClose={handleCloseModal}
-				/>
-			)}
-		</>
-	);
+            {isModalOpen && (
+                <TemplateImport
+                    template={templateData}
+                    onClose={handleCloseModal}
+                    data={data}
+                />
+            )}
+        </>
+    );
 };
 
-
-const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibraryData, isProTemplate, TagTabsOptions, activeTagTab, setActiveTagTab }) => {
+const TemplateContent = ({ activeTab, activeCategory, data, libraryData, setLibraryData, isProTemplate, TagTabsOptions, activeTagTab, setActiveTagTab }) => {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
     const [isLogedIn, setIsLogedIn] = useState(false);
 
@@ -182,7 +175,7 @@ const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibr
         setIsLogedIn(false);
     }, []);
 
-    const schema = data?.$schema || {};
+    const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
     const [originalTemplates, setOriginalTemplates] = useState([]);
     const [searchItems, setSearchItems] = useState('');
@@ -218,39 +211,37 @@ const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibr
     };
 
     useEffect(() => {
-        if (activeTab && activeCategory[activeTab]) {
-            const tabData = schema[activeTab];
-            const selectedCategory = tabData?.categories?.find(
-                (category) => category.id === activeCategory[activeTab]
-            );
+        if (activeTab && schema[activeTab]) {
+            let items = schema[activeTab]?.items || [];
 
-            if (selectedCategory && selectedCategory.items) {
-                let items = selectedCategory.items;
-
-                if (isProTemplate === 'pro') {
-                    items = items.filter(item => item.isPro);
-                } else if (isProTemplate === 'free') {
-                    items = items.filter(item => !item.isPro);
-                }
-
-                setOriginalTemplates(items);
-                if (activeTagTab) {
-                    const filtered = items.filter(template =>
-                        template.tags?.includes(
-                            TagTabsOptions.find(tag => tag.value === activeTagTab)?.name
-                        )
-                    );
-                    setFilteredTemplates(filtered);
-                } else {
-                    setFilteredTemplates(items);
-                }
-                setSearchItems('');
-            } else {
-                setOriginalTemplates([]);
-                setFilteredTemplates([]);
+            // Filter by category
+            if (activeCategory[activeTab] && activeCategory[activeTab] !== 'all') {
+                items = items.filter(item => 
+                    item.categories?.includes(activeCategory[activeTab])
+                );
             }
+
+            // Filter by Pro/Free
+            if (isProTemplate === 'pro') {
+                items = items.filter(item => item.is_premium);
+            } else if (isProTemplate === 'free') {
+                items = items.filter(item => !item.is_premium);
+            }
+
+            setOriginalTemplates(items);
+            if (activeTagTab) {
+                const filtered = items.filter(template =>
+                    template.tags?.includes(
+                        TagTabsOptions.find(tag => tag.value === activeTagTab)?.name
+                    )
+                );
+                setFilteredTemplates(filtered);
+            } else {
+                setFilteredTemplates(items);
+            }
+            setSearchItems('');
         }
-    }, [activeTab, activeCategory[activeTab], isProTemplate, activeTagTab, TagTabsOptions]);
+    }, [activeTab, activeCategory, isProTemplate, activeTagTab, TagTabsOptions, schema]);
 
     const handleLoginSuccess = useCallback(() => {
         setIsLoginModalOpen(false);
@@ -320,9 +311,9 @@ const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibr
                             id={template.id}
                             title={template.title}
                             imageUrl={template.image}
-                            isPro={template.isPro || false}
+                            is_premium={template.is_premium || false}
                             tags={template.tags || []}
-                            dependency={template.dependency || []}
+                            dependencies={template.dependencies || []}
                             activeTab={activeTab}
                             setLibraryData={setLibraryData}
                             isLogedIn={isLogedIn}
@@ -341,4 +332,4 @@ const TemplateLibrary = ({ activeTab, activeCategory, data, libraryData, setLibr
     );
 };
 
-export default TemplateLibrary;
+export default TemplateContent;

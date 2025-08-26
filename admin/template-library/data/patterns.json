@@ -1,0 +1,251 @@
+{
+    "categories": [
+        {
+            "name": "All",
+            "slug": "all",
+            "icon": "categories/all.svg",
+            "count": 7
+        },
+        {
+            "name": "Content Blocks",
+            "slug": "content-blocks",
+            "icon": "categories/content-blocks.svg",
+            "count": 1
+        },
+        {
+            "name": "Creative",
+            "slug": "creative",
+            "icon": "categories/creative.svg",
+            "count": 5
+        },
+        {
+            "name": "Dynamic",
+            "slug": "dynamic",
+            "icon": "categories/dynamic.svg",
+            "count": 30
+        },
+        {
+            "name": "Layout",
+            "slug": "layout",
+            "icon": "categories/layout.svg",
+            "count": 30
+        },
+        {
+            "name": "Form",
+            "slug": "form",
+            "icon": "categories/form.svg",
+            "count": 30
+        },
+        {
+            "name": "Social",
+            "slug": "social",
+            "icon": "categories/social.svg",
+            "count": 30
+        }
+    ],
+    "items": [
+        {
+            "id": 1,
+            "title": "Modern Blog Layout for Creators",
+            "slug": "modern-blog-layout-for-creators",
+            "description": "Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.",
+            "is_premium": false,
+            "image": "https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png",
+            "tags": [
+                "Blog",
+                "Magazine",
+                "Construction"
+            ],
+            "categories": [
+                "All"
+            ],
+            "dependencies": [
+                {
+                    "name": "Frontis Blocks",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "Frontis Theme",
+                    "version": "1.0.0"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "title": "AI-Powered Startup Landing",
+            "slug": "ai-powered-startup-landing",
+            "description": "Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.",
+            "is_premium": true,
+            "image": "https://frontiswp.com/wp-content/uploads/2025/04/pro-1.png",
+            "tags": [
+                "Landing",
+                "AI",
+                "Gutenberg"
+            ],
+            "categories": [
+                "All"
+            ],
+            "dependencies": [
+                {
+                    "name": "Frontis Blocks",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "Frontis Theme",
+                    "version": "1.0.0"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "title": "Creative Portfolio Showcase",
+            "slug": "creative-portfolio-showcase",
+            "description": "Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.",
+            "is_premium": false,
+            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-1.png",
+            "tags": [
+                "Landing",
+                "Creative"
+            ],
+            "categories": [
+                "All",
+                "Creative"
+            ],
+            "dependencies": [
+                {
+                    "name": "Frontis Blocks",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "Frontis Theme",
+                    "version": "1.0.0"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "title": "Business Landing Hero Section",
+            "slug": "business-landing-hero-section",
+            "description": "Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.",
+            "is_premium": false,
+            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-2.png",
+            "tags": [
+                "Landing",
+                "Business"
+            ],
+            "categories": [
+                "All"
+            ],
+            "dependencies": [
+                {
+                    "name": "Frontis Blocks",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "Frontis Theme",
+                    "version": "1.0.0"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "title": "Minimal Portfolio Grid",
+            "slug": "minimal-portfolio-grid",
+            "description": "Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.",
+            "is_premium": true,
+            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-3.png",
+            "tags": [
+                "Landing",
+                "Portfolio"
+            ],
+            "categories": [
+                "All"
+            ],
+            "dependencies": [
+                {
+                    "name": "Frontis Blocks",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "Frontis Theme",
+                    "version": "1.0.0"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "title": "Agency Landing Page Concept",
+            "slug": "agency-landing-page-concept",
+            "description": "Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.",
+            "is_premium": false,
+            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-4.png",
+            "tags": [
+                "Landing",
+                "Agency"
+            ],
+            "categories": [
+                "All"
+            ],
+            "dependencies": [
+                {
+                    "name": "Frontis Blocks",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "Frontis Theme",
+                    "version": "1.0.0"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "title": "Startup Hero with CTA",
+            "slug": "startup-hero-with-cta",
+            "description": "Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.",
+            "is_premium": false,
+            "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-5.png",
+            "tags": [
+                "Landing",
+                "Startup"
+            ],
+            "categories": [
+                "All"
+            ],
+            "dependencies": [
+                {
+                    "name": "Frontis Blocks",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "Frontis Theme",
+                    "version": "1.0.0"
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "title": "Content Block Feature Grid",
+            "slug": "content-block-feature-grid",
+            "description": "Create your dream website in minutes with Frontis! Forget endless theme searches. This high-performance Theme maximizes Gutenberg’s potential, delivering fast, modern, and adaptable designs.",
+            "is_premium": true,
+            "image": "https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png",
+            "tags": [
+                "Content",
+                "Block"
+            ],
+            "categories": [
+                "Content Blocks"
+            ],
+            "dependencies": [
+                {
+                    "name": "Frontis Blocks",
+                    "version": "1.0.0"
+                },
+                {
+                    "name": "Frontis Theme",
+                    "version": "1.0.0"
+                }
+            ]
+        }
+    ]
+}

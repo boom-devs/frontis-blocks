@@ -34,10 +34,10 @@ const TemplateLibraryIcon = () => (
 );
 
 const TemplateHeader = ({ activeTab, setActiveTab, data, onClose, setIsProTemplate, setActiveTagTab }) => {
-    const schema = data.$schema;
+    const schema = data;
     const tabs = Object.keys(schema).map((key) => ({
         id: key,
-        label: schema[key].name,
+        label: schema[key].name || key.charAt(0).toUpperCase() + key.slice(1),
     }));
 
     return (
