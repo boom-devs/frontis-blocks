@@ -35,3 +35,59 @@
 		justify-content: center;
 	}
 }
+
+.fb-query-pagination {
+	.fb-page-prev {
+		&:focus {
+			outline: none !important;
+		}
+		a{
+			text-decoration: none !important;
+			&:focus {
+				outline: none !important;
+			}
+		}
+		&.is-disabled {
+			opacity: .4;
+			pointer-events: none;
+			cursor: default;
+		}
+	}
+	.fb-page-next {
+		&:focus {
+			outline: none !important;
+		}
+		a{
+			text-decoration: none !important;
+			&:focus {
+				outline: none !important;
+			}
+		}
+		&.is-disabled {
+			opacity: .4;
+			pointer-events: none;
+			cursor: default;
+		}
+	}
+	a{
+		&:focus {
+			outline: none !important;
+		}
+	}
+	.page-numbers {
+		width: 36px;
+		aspect-ratio: 1 / 1;
+		border: none;
+		color: #000;
+		background-color: #fff0;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-family: Cabin;
+		font-size: 14px;
+		font-weight: 400;
+		border-radius: 50%;
+		transition: all .3s ease-in-out;
+	}
+}

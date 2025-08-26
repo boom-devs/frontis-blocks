@@ -521,6 +521,133 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${paginationItemGap[deviceType] ? `gap: ${paginationItemGap[deviceType]}${paginationItemGapUnits[deviceType]};` : ''}
         }
 
+        .${blockId} .fb-query-pagination .fb-page-prev,
+        .${blockId} .fb-query-pagination .fb-page-next{
+            ${paginationPrevNextWidth.Desktop ? `width: ${paginationPrevNextWidth.Desktop}${paginationPrevNextWidthUnits.Desktop};` : ''}
+            ${paginationPrevNextWidth.Desktop ? `height: ${paginationPrevNextWidth.Desktop}${paginationPrevNextWidthUnits.Desktop};` : ''}
+
+            ${paginationArrowBorder ? `border: ${paginationArrowBorder};` : ''} 
+            ${paginationArrowBorderColor ? `border-color: ${paginationArrowBorderColor};` : ''}
+            ${paginationArrowDesktopBorderWidth && paginationArrowDesktopBorder.top ? `border-width: ${paginationArrowDesktopBorderWidth};` : ''}
+            ${paginationArrowDesktopBorderRadiusWidth && paginationArrowDesktopBorderRadius.top? `border-radius: ${paginationArrowDesktopBorderRadiusWidth};` : ''}
+
+            ${paginationArrowNormalBackgroundType === 'gradient' ? `   
+                ${paginationArrowNormalCustomGradientSwitcher && paginationArrowNormalCustomGradientInputValue ? `background: ${paginationArrowNormalCustomGradientInputValue};` : `background: ${paginationArrowNormalGradientColor};`}
+            `: `
+                ${paginationArrowNormalClassicColor ? `background: ${paginationArrowNormalClassicColor};` : ''}
+            `}
+        }
+
+        .${blockId} .fb-query-pagination .fb-page-prev:hover,
+        .${blockId} .fb-query-pagination .fb-page-next:hover{
+            ${paginationArrowBorderHoverColor ? `border-color: ${paginationArrowBorderHoverColor};` : ''}
+
+            ${paginationArrowHoverBackgroundType === 'gradient' ? `    
+                ${paginationArrowHoverCustomGradientSwitcher && paginationArrowHoverCustomGradientInputValue ? `background: ${paginationArrowHoverCustomGradientInputValue};` : `background: ${paginationArrowHoverGradientColor};`}
+            `: `
+                ${paginationArrowHoverClassicColor ? `background: ${paginationArrowHoverClassicColor};` : ''}
+            `}
+        }
+
+        .${blockId} .fb-query-pagination .fb-page-prev .fb-pagination_prev_text,
+        .${blockId} .fb-query-pagination .fb-page-next .fb-pagination_next_text{
+            ${paginationArrowTextGlobalTypoSwitcher.fontFamily === true && paginationArrowTextGlobalTypographyData.fontFamily ? `font-family: ${paginationArrowTextGlobalTypographyData.fontFamily};` : ''}  
+            ${paginationArrowTextGlobalTypoSwitcher.fontSize === true && paginationArrowTextGlobalTypographyData.fontSize ? `font-size: ${paginationArrowTextGlobalTypographyData.fontSize};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.fontWeight === true && paginationArrowTextGlobalTypographyData.fontWeight ? `font-weight: ${paginationArrowTextGlobalTypographyData.fontWeight};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.fontStyle === true && paginationArrowTextGlobalTypographyData.fontStyle ? `font-style: ${paginationArrowTextGlobalTypographyData.fontStyle};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.textTransform === true && paginationArrowTextGlobalTypographyData.textTransform ? `text-transform: ${paginationArrowTextGlobalTypographyData.textTransform};` : ''} 
+            ${paginationArrowTextGlobalTypoSwitcher.textDecoration === true && paginationArrowTextGlobalTypographyData.textDecoration ? `text-decoration: ${paginationArrowTextGlobalTypographyData.textDecoration};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.letterSpacing === true && paginationArrowTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${paginationArrowTextGlobalTypographyData.letterSpacing};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.lineHeight === true && paginationArrowTextGlobalTypographyData.lineHeight ? `line-height: ${paginationArrowTextGlobalTypographyData.lineHeight};` : ''}
+            
+        	${paginationArrowTextGlobalTypoSwitcher.fontFamily === false && paginationArrowTextFontFamily && paginationArrowTextFontFamily !== 'Default' ? `font-family: ${paginationArrowTextFontFamily};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.fontSize === false && paginationArrowTextFontSize.Desktop ? `font-size: ${paginationArrowTextFontSize.Desktop}${paginationArrowTextFontSizeUnits.Desktop};` : ''} 
+			${paginationArrowTextGlobalTypoSwitcher.fontWeight === false && paginationArrowTextFontWeight ? `font-weight: ${paginationArrowTextFontWeight};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.fontStyle === false && paginationArrowTextFontStyle ? `font-style: ${paginationArrowTextFontStyle};` : ''}  
+			${paginationArrowTextGlobalTypoSwitcher.textTransform === false && paginationArrowTextTransform ? `text-transform: ${paginationArrowTextTransform};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.textDecoration === false && paginationArrowTextDecoration ? `text-decoration: ${paginationArrowTextDecoration};` : ''} 
+			${paginationArrowTextGlobalTypoSwitcher.letterSpacing === false && paginationArrowTextLetterSpacing.Desktop ? `letter-spacing: ${paginationArrowTextLetterSpacing.Desktop}${paginationArrowTextLetterSpacingUnits.Desktop};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.lineHeight === false && paginationArrowTextLineHeight.Desktop ? `line-height: ${paginationArrowTextLineHeight.Desktop}${paginationArrowTextLineHeightUnits.Desktop};` : ''}
+
+            ${paginationArrowTextColor ? `color: ${paginationArrowTextColor};` : ''}
+        }
+
+        .${blockId} .fb-query-pagination .fb-page-prev:hover .fb-pagination_prev_text,
+        .${blockId} .fb-query-pagination .fb-page-next:hover .fb-pagination_next_text{ 
+            ${paginationArrowTextHoverColor ? `color: ${paginationArrowTextHoverColor};` : ''}
+        }
+
+        .${blockId} .fb-query-pagination .fb-page-numbers{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            ${paginationBtnGap.Desktop ? `gap: ${paginationBtnGap.Desktop}${paginationBtnGapUnits.Desktop};` : ''}
+        }
+
+
+        .${blockId} .fb-query-pagination .fb-page-numbers .page-numbers {
+            ${paginationBtnSize.Desktop ? `width: ${paginationBtnSize.Desktop}${paginationBtnSizeUnits.Desktop};` : ''}  
+            ${paginationBtnSize.Desktop ? `height: ${paginationBtnSize.Desktop}${paginationBtnSizeUnits.Desktop};` : ''}
+
+            ${paginationBtnTextGlobalTypoSwitcher.fontFamily === true && paginationBtnTextGlobalTypographyData.fontFamily ? `font-family: ${paginationBtnTextGlobalTypographyData.fontFamily};` : ''}  
+            ${paginationBtnTextGlobalTypoSwitcher.fontSize === true && paginationBtnTextGlobalTypographyData.fontSize ? `font-size: ${paginationBtnTextGlobalTypographyData.fontSize};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.fontWeight === true && paginationBtnTextGlobalTypographyData.fontWeight ? `font-weight: ${paginationBtnTextGlobalTypographyData.fontWeight};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.fontStyle === true && paginationBtnTextGlobalTypographyData.fontStyle ? `font-style: ${paginationBtnTextGlobalTypographyData.fontStyle};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.textTransform === true && paginationBtnTextGlobalTypographyData.textTransform ? `text-transform: ${paginationBtnTextGlobalTypographyData.textTransform};` : ''} 
+            ${paginationBtnTextGlobalTypoSwitcher.textDecoration === true && paginationBtnTextGlobalTypographyData.textDecoration ? `text-decoration: ${paginationBtnTextGlobalTypographyData.textDecoration};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.letterSpacing === true && paginationBtnTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${paginationBtnTextGlobalTypographyData.letterSpacing};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.lineHeight === true && paginationBtnTextGlobalTypographyData.lineHeight ? `line-height: ${paginationBtnTextGlobalTypographyData.lineHeight};` : ''}
+            
+        	${paginationBtnTextGlobalTypoSwitcher.fontFamily === false && paginationBtnTextFontFamily && paginationBtnTextFontFamily !== 'Default' ? `font-family: ${paginationBtnTextFontFamily};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.fontSize === false && paginationBtnTextFontSize.Desktop ? `font-size: ${paginationBtnTextFontSize.Desktop}${paginationBtnTextFontSizeUnits.Desktop};` : ''} 
+			${paginationBtnTextGlobalTypoSwitcher.fontWeight === false && paginationBtnTextFontWeight ? `font-weight: ${paginationBtnTextFontWeight};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.fontStyle === false && paginationBtnTextFontStyle ? `font-style: ${paginationBtnTextFontStyle};` : ''}  
+			${paginationBtnTextGlobalTypoSwitcher.textTransform === false && paginationBtnTextTransform ? `text-transform: ${paginationBtnTextTransform};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.textDecoration === false && paginationBtnTextDecoration ? `text-decoration: ${paginationBtnTextDecoration};` : ''} 
+			${paginationBtnTextGlobalTypoSwitcher.letterSpacing === false && paginationBtnTextLetterSpacing.Desktop ? `letter-spacing: ${paginationBtnTextLetterSpacing.Desktop}${paginationBtnTextLetterSpacingUnits.Desktop};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.lineHeight === false && paginationBtnTextLineHeight.Desktop ? `line-height: ${paginationBtnTextLineHeight.Desktop}${paginationBtnTextLineHeightUnits.Desktop};` : ''}
+
+            ${paginationBtnTextColor ? `color: ${paginationBtnTextColor};` : ''}
+
+            ${paginationBtnBorder ? `border: ${paginationBtnBorder};` : ''} 
+            ${paginationBtnBorderColor ? `border-color: ${paginationBtnBorderColor};` : ''}
+            ${paginationBtnDesktopBorderWidth && paginationBtnDesktopBorder.top ? `border-width: ${paginationBtnDesktopBorderWidth};` : ''}
+            ${paginationBtnDesktopBorderRadiusWidth && paginationBtnDesktopBorderRadius.top? `border-radius: ${paginationBtnDesktopBorderRadiusWidth};` : ''}
+
+            ${paginationBtnNormalBackgroundType === 'gradient' ? `   
+                ${paginationBtnNormalCustomGradientSwitcher && paginationBtnNormalCustomGradientInputValue ? `background: ${paginationBtnNormalCustomGradientInputValue};` : `background: ${paginationBtnNormalGradientColor};`}
+            `: `
+                ${paginationBtnNormalClassicColor ? `background: ${paginationBtnNormalClassicColor};` : ''}
+            `}
+        }
+
+        .${blockId} .fb-query-pagination .fb-page-numbers .page-numbers:hover {
+            ${paginationBtnTextHoverColor ? `color: ${paginationBtnTextHoverColor};` : ''}
+            ${paginationBtnHoverBackgroundType === 'gradient' ? `    
+                ${paginationBtnHoverCustomGradientSwitcher && paginationBtnHoverCustomGradientInputValue ? `background: ${paginationBtnHoverCustomGradientInputValue};` : `background: ${paginationBtnHoverGradientColor};`}
+            `: `
+                ${paginationBtnHoverClassicColor ? `background: ${paginationBtnHoverClassicColor};` : ''}
+            `}
+        }
+
+        .${blockId} .fb-query-pagination .fb-page-numbers .page-numbers.current { 
+            ${paginationActiveBtnTextColor ? `color: ${paginationActiveBtnTextColor};` : ''} 
+            ${paginationActiveBtnNormalBackgroundType === 'gradient' ? `      
+                ${paginationActiveBtnNormalCustomGradientSwitcher && paginationActiveBtnNormalCustomGradientInputValue ? `background: ${paginationActiveBtnNormalCustomGradientInputValue};` : `background: ${paginationActiveBtnNormalGradientColor};`}
+            `: `
+                ${paginationActiveBtnNormalClassicColor ? `background: ${paginationActiveBtnNormalClassicColor};` : ''} 
+            `}
+        }
+        .${blockId} .fb-query-pagination .fb-page-numbers .page-numbers.current:hover { 
+            ${paginationActiveBtnTextHoverColor ? `color: ${paginationActiveBtnTextHoverColor};` : ''} 
+            ${paginationActiveBtnHoverBackgroundType === 'gradient' ? `    
+                ${paginationActiveBtnHoverCustomGradientSwitcher && paginationActiveBtnHoverCustomGradientInputValue ? `background: ${paginationActiveBtnHoverCustomGradientInputValue};` : `background: ${paginationActiveBtnHoverGradientColor};`}
+            `: `
+                ${paginationActiveBtnHoverClassicColor ? `background: ${paginationActiveBtnHoverClassicColor};` : ''} 
+            `}
+        }
+        
+
         @media only screen and (max-width: 1024px) {
 
         }
