@@ -10,10 +10,6 @@
 		width: 100%;
 		transition: transform 0.6s ease-out;
 		transform-origin: center center;
-<<<<<<< HEAD
-=======
-
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 		.fb-flipbox-front,
 		.fb-flipbox-back {
 			position: absolute;
@@ -23,15 +19,6 @@
 			height: 100%;
 			min-height: 310px;
 			backface-visibility: hidden;
-<<<<<<< HEAD
-			-webkit-backface-visibility: hidden;
-			-moz-backface-visibility: hidden;
-			transform-style: preserve-3d;
-			will-change: transform;
-			-webkit-font-smoothing: antialiased;
-			-moz-osx-font-smoothing: grayscale;
-			box-sizing: border-box;
-=======
 			-wfbkit-backface-visibility: hidden;
 			-moz-backface-visibility: hidden;
 			transform-style: preserve-3d;
@@ -40,7 +27,6 @@
 			-moz-osx-font-smoothing: grayscale;
 			box-sizing: border-box;
 
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 			.fb-flipbox-content-wrapper {
 				display: flex;
 				flex-direction: column;
@@ -48,14 +34,6 @@
 				position: relative;
 				width: 100%;
 				backface-visibility: hidden;
-<<<<<<< HEAD
-				-webkit-backface-visibility: hidden;
-				transform: translateZ(0);
-				-webkit-transform: translateZ(0);
-				-webkit-perspective: 1000;
-				.fb-flip-media-container,
-				.fb-flip-back-media-container{
-=======
 				-wfbkit-backface-visibility: hidden;
 				transform: translateZ(0);
 				-wfbkit-transform: translateZ(0);
@@ -63,24 +41,12 @@
 
 				.fb-flip-media-container,
 				.fb-flip-back-media-container {
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 					display: flex;
 				}
 			}
 		}
 
 		.fb-flipbox-front {
-<<<<<<< HEAD
-			transform: rotateY(0deg) translateZ(1px);
-			z-index: 2;
-			background: red;
-		}
-
-		.fb-flipbox-back {
-			transform: rotateY(180deg) translateZ(1px);
-			z-index: 1;
-			background: blue;
-=======
 			transform: rotateY(0deg);
 			z-index: 2;
 		}
@@ -88,7 +54,6 @@
 		.fb-flipbox-back {
 			transform: rotateY(180deg);
 			z-index: 1;
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 		}
 
 		&.fb-editor-mode {
@@ -96,11 +61,7 @@
 			.fb-flipbox-front,
 			.fb-flipbox-back {
 				backface-visibility: hidden;
-<<<<<<< HEAD
-				-webkit-backface-visibility: hidden;
-=======
 				-wfbkit-backface-visibility: hidden;
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 				transition: opacity 0.3s ease, visibility 0.3s ease;
 			}
 
@@ -109,103 +70,6 @@
 			}
 		}
 
-<<<<<<< HEAD
-		// Flip animation
-		&.flip-left {
-			&:hover {
-				transform: rotateY(-180deg);
-			}
-		}
-
-		&.flip-right {
-			&:hover {
-				transform: rotateY(180deg);
-			}
-		}
-
-		&.flip-up {
-			&:hover {
-				transform: rotateX(180deg) !important;
-
-				.fb-flipbox-back {
-					transform: rotateX(180deg);
-				}
-			}
-		}
-
-		&.flip-down {
-			&:hover {
-				transform: rotateX(-180deg) !important;
-
-				.fb-flipbox-back {
-					transform: rotateX(-180deg);
-				}
-			}
-		}
-
-		&.zoom-in {
-			&:hover {
-				transform: scale(1.1) !important;
-
-				.fb-flipbox-front {
-					opacity: 0;
-					z-index: 1;
-				}
-
-				.fb-flipbox-back {
-					opacity: 1;
-					z-index: 5;
-					transform: rotateY(0deg) translateZ(1px);
-				}
-			}
-		}
-
-		&.zoom-out {
-			&:hover {
-				transform: scale(0.8) !important;
-
-				.fb-flipbox-front {
-					opacity: 0;
-					z-index: 1;
-				}
-
-				.fb-flipbox-back {
-					opacity: 1;
-					z-index: 5;
-					transform: rotateY(0deg) translateZ(1px);
-				}
-			}
-		}
-
-		&.fade {
-			&:hover {
-				.fb-flipbox-front {
-					opacity: 0;
-					z-index: 1;
-				}
-
-				.fb-flipbox-back {
-					opacity: 1;
-					z-index: 5;
-					transform: rotateY(0deg) translateZ(1px);
-				}
-			}
-		}
-		.fb-flip-button, 
-		.fb-flip-back-button{
-			.fb-flip-btn-wrapper,
-			.fb-flip-back-btn-wrapper{
-				display: inline-flex;
-			}
-		}
-		.fb-flip-media-wrapper,
-		.fb-flip-back-media-wrapper{
-			.fb-icon-wrapper{
-				line-height: 0;
-			}
-		}
-		.fb-btn-icon-wrapper{
-=======
 		.fb-flip-button,
 		.fb-flip-back-button {
 
@@ -223,14 +87,11 @@
 		}
 
 		.fb-btn-icon-wrapper {
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 			line-height: 0;
 		}
 	}
 }
 
-<<<<<<< HEAD
-=======
 .fb-flip-box-wrapper{
 	&:hover {
 		.flip-up {
@@ -269,7 +130,6 @@
 	}
 }
 
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 @media (prefers-reduced-motion: reduce) {
 	.fb-flip-box-wrapper {
 		.fb-flipper-wrapper {

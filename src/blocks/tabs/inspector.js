@@ -2711,13 +2711,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         `}
 
         @media only screen and (max-width: 1024px) {
-<<<<<<< HEAD
-
-        }
-
-        @media only screen and (max-width: 767px) {
-
-=======
             .${blockId} .fb-tabs-wrapper {
                 ${tabGlobalPaddingTabletWidth && tabGlobalPaddingTablet?.top ? `padding: ${tabGlobalPaddingTabletWidth};` : ''}   
                 ${tabGlobalMarginTabletWidth && tabGlobalMarginTablet?.top ? `margin: ${tabGlobalMarginTabletWidth};` : ''}
@@ -2875,7 +2868,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                 ${tabContentBorderMobileWidth && tabContentBorderMobile.top ? `border-width: ${tabContentBorderMobileWidth};` : ''}
                 ${tabContentBorderRadiusMobileWidth && tabContentBorderRadiusMobile.top ? `border-radius: ${tabContentBorderRadiusMobileWidth};` : ''} 
             }
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
         }
     `, [
         blockId,
@@ -3418,20 +3410,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                 )}
 
                 <FB_HtmlTagControl
-<<<<<<< HEAD
-                    label={__("Tab Title Tag", "frontis-blocks")}
-=======
                     label={__("Title Tag", "frontis-blocks")}
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
                     globalHtmlTag={tabTitleTag}
                     setGlobalHtmlTag={(value) => setAttributes({ tabTitleTag: value })}
                 />
                 <FB_HtmlTagControl
-<<<<<<< HEAD
-                    label={__("Tab Description Tag", "frontis-blocks")}
-=======
                     label={__("Description Tag", "frontis-blocks")}
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
                     globalHtmlTag={tabDescriptionTag}
                     setGlobalHtmlTag={(value) => setAttributes({ tabDescriptionTag: value })}
                 />

@@ -388,10 +388,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		flipBoxVRBottomOffset,
 		flipBoxVRBottomOffsetUnits,
 		flipSelectedSide,
-<<<<<<< HEAD
-=======
 		isHover,
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 		// Flip box front
 		flipBoxFrontHeight,
 		flipBoxFrontHeightUnits,
@@ -858,25 +855,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/avatar.png';
 	}
 
-<<<<<<< HEAD
-	// Set default value
-=======
 	// Set default value for front image
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 	useEffect(() => {
 		if (!flipMediaUrl) {
 			setAttributes({ flipMediaUrl: defaultImageUrl });
 		}
 	}, []);
-<<<<<<< HEAD
-=======
 	// Set default value for back image
 	useEffect(() => {
 		if (!flipBackMediaUrl) {
 			setAttributes({ flipBackMediaUrl: defaultImageUrl });
 		}
 	}, []);
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 
 	const iconHandler = (iconName) => {
 		setAttributes({ icon: iconName });
@@ -894,10 +884,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({ btnIconBack: iconName });
 	};
 
-<<<<<<< HEAD
-	/** Start Preset Style **/
-
-=======
 	const getFlipTransform = (flipAnimationType) => {
 		switch (flipAnimationType) {
 			case "flip-left":
@@ -917,7 +903,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	};
 	/** Start Preset Style **/
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 	const changeflipBoxPreset = (selectedPreset) => {
 		const presetConfigurations = {
 			"preset-1": {
@@ -4446,14 +4431,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${globalBorderColor ? `border-color: ${globalBorderColor};` : ""}
 				${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : ""}
 			}
-<<<<<<< HEAD
-		  .fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
-			${flipBoxFrontWidth.Desktop ? `max-width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
-			${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
-			width: 100%;
-		  }
-=======
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 	  
 		  .fb-flip-box-wrapper.${blockID}:hover .fb-flip-box-wrapper {
 			  ${globalBgHoverColor ? `background-color: ${globalBgHoverColor};` : ""}
@@ -4494,13 +4471,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  }
 		  }
 
-<<<<<<< HEAD
-		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
-		  		position: relative;
-				${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
-				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
-				width: 100%;
-=======
 		  .fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
 				${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
@@ -4512,16 +4482,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
 				${flipBoxFrontWidth.Desktop ? `min-width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 				${flipBoxFrontBackgroundType === "gradient" ? `
 				background: ${flipBoxFrontCustomGradientSwitcher && flipBoxFrontCustomGradientInputValue ? flipBoxFrontCustomGradientInputValue : flipBoxFrontGradientColor};
 				`
 				: flipBoxFrontBackgroundImageUrl && flipBoxFrontBackgroundImageUrl !== "null" ? `
-<<<<<<< HEAD
-				${flipBoxFrontBackgroundImageUrl ? `background-image: url(${flipBoxFrontBackgroundImageUrl});` : ""}
-=======
 				${flipBoxFrontBackgroundImageUrl ? `background: url(${flipBoxFrontBackgroundImageUrl});` : ""}
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 				${flipBoxFrontBackgroundImagePosition ? `background-position: ${flipBoxFrontBackgroundImagePosition};` : ""}
 				${flipBoxFrontBackgroundImageAttachment ? `background-attachment: ${flipBoxFrontBackgroundImageAttachment};` : ""}
 				${flipBoxFrontBackgroundImageRepeat ? `background-repeat: ${flipBoxFrontBackgroundImageRepeat};` : ""}
@@ -4535,10 +4500,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${flipBoxFrontBorderRadiusDesktop && flipBoxFrontBorderRadiusDesktop.top ? `border-radius: ${flipBoxFrontBorderRadiusDesktopWidth};` : ''}
 				background-repeat: none;
 				background-size: cover;
-<<<<<<< HEAD
-				${flipBoxFrontClassicColor ? `justify-content: center; ` : ''}
-=======
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 				transition: all .3s ease-in-out; 
 		  }
 
@@ -4547,11 +4508,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				background: ${flipBoxFrontHoverCustomGradientSwitcher && flipBoxFrontHoverCustomGradientInputValue ? flipBoxFrontHoverCustomGradientInputValue : flipBoxFrontHoverGradientColor};
 				`
 				: flipBoxFrontHoverBackgroundImageUrl && flipBoxFrontHoverBackgroundImageUrl !== "null" ? `
-<<<<<<< HEAD
-				${flipBoxFrontHoverBackgroundImageUrl ? `background-image: url(${flipBoxFrontHoverBackgroundImageUrl});` : ""}
-=======
 				${flipBoxFrontHoverBackgroundImageUrl ? `background: url(${flipBoxFrontHoverBackgroundImageUrl});` : ""}
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 				${flipBoxFrontHoverBackgroundImagePosition ? `background-position: ${flipBoxFrontHoverBackgroundImagePosition};` : ""}
 				${flipBoxFrontHoverBackgroundImageAttachment ? `background-attachment: ${flipBoxFrontHoverBackgroundImageAttachment};` : ""}
 				${flipBoxFrontHoverBackgroundImageRepeat ? `background-repeat: ${flipBoxFrontHoverBackgroundImageRepeat};` : ""}
@@ -4562,19 +4519,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-back {
 			${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 			${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
-<<<<<<< HEAD
-			width: 100%;
-=======
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 			${flipBoxBackBackgroundType === "gradient" ? `
 			background: ${flipBoxBackCustomGradientSwitcher && flipBoxBackCustomGradientInputValue ? flipBoxBackCustomGradientInputValue : flipBoxBackGradientColor};
 			`
 				: flipBoxBackBackgroundImageUrl && flipBoxBackBackgroundImageUrl !== "null" ? `
-<<<<<<< HEAD
-			${flipBoxBackBackgroundImageUrl ? `background-image: url(${flipBoxBackBackgroundImageUrl});` : ""}
-=======
 			${flipBoxBackBackgroundImageUrl ? `background: url(${flipBoxBackBackgroundImageUrl});` : ""}
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 			${flipBoxBackBackgroundImagePosition ? `background-position: ${flipBoxBackBackgroundImagePosition};` : ""}
 			${flipBoxBackBackgroundImageAttachment ? `background-attachment: ${flipBoxBackBackgroundImageAttachment};` : ""}
 			${flipBoxBackBackgroundImageRepeat ? `background-repeat: ${flipBoxBackBackgroundImageRepeat};` : ""}
@@ -4588,12 +4537,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${flipBoxBackBorderRadiusDesktop && flipBoxBackBorderRadiusDesktop.top ? `border-radius: ${flipBoxBackBorderRadiusDesktopWidth};` : ''}
 			background-repeat: none;
 			background-size: cover;
-<<<<<<< HEAD
-			${flipBoxBackClassicColor ? `justify-content: center; ` : ''}
-			transition: all .3s ease-in-out; 
-		  }
-		
-=======
 			transform:  ${(flipAnimationType === "flip-up" && "rotateX(-180deg)") ||
 			(flipAnimationType === "flip-down" && "rotateX(180deg)") ||
 			((flipAnimationType === "zoom-in" ||
@@ -4627,7 +4570,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			`
                 : ""
         }
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 		  .fb-flip-box-wrapper.${blockID} .fb-flip-box-wrapper-inner {
 			${flipIconPosition === 'top' ? 'flex-direction: column;' : ''}
 			${flipIconPosition === 'bottom' ? 'flex-direction: column-reverse;' : ''}
@@ -5051,11 +4993,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 		
-<<<<<<< HEAD
-		.fb-flip-box-wrapper.${blockID}:hover .fb-flip-back-mediaBack-wrapper{
-=======
 		.fb-flip-box-wrapper.${blockID} .fb-flip-back-media-wrapper:hover{
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 			${mediaBackHoverBackgroundType === "gradient" ? ` background: ${mediaBackHoverCustomGradientSwitcher && mediaBackHoverCustomGradientInputValue ? mediaBackHoverCustomGradientInputValue : mediaBackHoverGradientColor
 				};
 			`: mediaBackHoverBackgroundImageUrl && mediaBackHoverBackgroundImageUrl !== "null" ? `
@@ -5255,11 +5193,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			descTabMargin,
 			descMobileMargin,
 			descActiveMarginDevice,
-<<<<<<< HEAD
-
-=======
 			flipAnimationType,
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 			flipBoxPaddingUnits,
 			flipBoxDesktopPadding,
 			flipBoxTabPadding,
@@ -5408,10 +5342,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			flipMediaID,
 			flipMediaAlt,
 			flipMediaUrl,
-<<<<<<< HEAD
-=======
 			flipBackMediaUrl,
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 			mediaBackgroundType,
 			mediaClassicColor,
 			mediaGradientColor,
@@ -5611,16 +5542,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			flipButtonBackHoverBorderColor,
 			mediaBorderHoverColor,
 			mediaHoverClassicColor,
-<<<<<<< HEAD
-=======
 			mediaBackBorderColor,
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 			mediaBackBorderHoverColor,
 			mediaBackHoverClassicColor,
 			mediaBackIconHoverColor,
 			btnBackIconHoverColor,
-<<<<<<< HEAD
-=======
 			flipBoxFrontGradientColor,
 			flipBoxFrontCustomGradientSwitcher,
 			flipBoxFrontCustomGradientInputValue,
@@ -5673,7 +5599,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			flipBoxFrontCustomGradientInputValue,
 			flipBoxBackGradientColor,
 			flipBoxBackCustomGradientInputValue,
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 		],
 	);
 
@@ -6655,11 +6580,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<FB_Range
 														min={0}
 														max={500}
-<<<<<<< HEAD
-														label={__("Icon Size", "frontis-blocks")}
-=======
 														label={__("Size", "frontis-blocks")}
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 														rangeValue={mediaSize}
 														onChangeHandler={(value) =>
 															setAttributes({ mediaSize: value })
@@ -7141,11 +7062,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														)}
 
 														{/*Spacing*/}
-<<<<<<< HEAD
-														<Heading>Spacing</Heading> 
-=======
 														<Heading>Spacing</Heading>
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 														{/* Padding */}
 														<FB_Spacing
 															label={__("Padding", "frontis-blocks")}
@@ -7476,19 +7393,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														min={0}
 														max={600}
 														label={__("Width", "frontis-blocks")}
-<<<<<<< HEAD
-														rangeValue={flipBoxBackWidth}
-														onChangeHandler={(value) => setAttributes({ flipBoxBackWidth: value })}
-														rangeUnitHandler={(value) => setAttributes({ flipBoxBackWidthUnits: value })}
-														deviceType={deviceType}
-														units={flipBoxBackWidthUnits}
-=======
 														rangeValue={flipBoxFrontWidth}
 														onChangeHandler={(value) => setAttributes({ flipBoxFrontWidth: value })}
 														rangeUnitHandler={(value) => setAttributes({ flipBoxFrontWidthUnits: value })}
 														deviceType={deviceType}
 														units={flipBoxFrontWidthUnits}
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 														setAttributes={setAttributes}
 														rangeStep={1}
 														resetFallbackValue={""}
@@ -7498,19 +7407,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														min={0}
 														max={600}
 														label={__("Height", "frontis-blocks")}
-<<<<<<< HEAD
-														rangeValue={flipBoxBackHeight}
-														onChangeHandler={(value) => setAttributes({ flipBoxBackHeight: value })}
-														rangeUnitHandler={(value) => setAttributes({ flipBoxBackHeightUnits: value })}
-														deviceType={deviceType}
-														units={flipBoxBackHeightUnits}
-=======
 														rangeValue={flipBoxFrontHeight}
 														onChangeHandler={(value) => setAttributes({ flipBoxFrontHeight: value })}
 														rangeUnitHandler={(value) => setAttributes({ flipBoxFrontHeightUnits: value })}
 														deviceType={deviceType}
 														units={flipBoxFrontHeightUnits}
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 														setAttributes={setAttributes}
 														rangeStep={1}
 														resetFallbackValue={""}
@@ -7670,11 +7571,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<FB_Range
 														min={0}
 														max={500}
-<<<<<<< HEAD
-														label={__("Icon Size", "frontis-blocks")}
-=======
 														label={__("Size", "frontis-blocks")}
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 														rangeValue={mediaBackSize}
 														onChangeHandler={(value) =>
 															setAttributes({ mediaBackSize: value })

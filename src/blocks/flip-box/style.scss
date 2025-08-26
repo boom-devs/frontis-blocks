@@ -10,10 +10,6 @@
 		width: 100%;
 		transition: transform 0.6s ease-out;
 		transform-origin: center center;
-<<<<<<< HEAD
-=======
-
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 		.fb-flipbox-front,
 		.fb-flipbox-back {
 			position: absolute;
@@ -30,10 +26,6 @@
 			-webkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;
 			box-sizing: border-box;
-<<<<<<< HEAD
-=======
-
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 			.fb-flipbox-content-wrapper {
 				display: flex;
 				flex-direction: column;
@@ -45,35 +37,22 @@
 				transform: translateZ(0);
 				-webkit-transform: translateZ(0);
 				-webkit-perspective: 1000;
-<<<<<<< HEAD
-				.fb-flip-media-container,
-				.fb-flip-back-media-container{
-=======
 
 				.fb-flip-media-container,
 				.fb-flip-back-media-container {
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 					display: flex;
 				}
 			}
 		}
 
 		.fb-flipbox-front {
-<<<<<<< HEAD
-			transform: rotateY(0deg) translateZ(1px);
-=======
 			transform: rotateY(0deg);
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 			z-index: 2;
 			background: red;
 		}
 
 		.fb-flipbox-back {
-<<<<<<< HEAD
-			transform: rotateY(180deg) translateZ(1px);
-=======
 			transform: rotateY(180deg);
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 			z-index: 1;
 			background: blue;
 		}
@@ -92,28 +71,6 @@
 			}
 		}
 
-<<<<<<< HEAD
-		// Flip animation
-		&.flip-left {
-			&:hover {
-				transform: rotateY(-180deg);
-			}
-		}
-
-		&.flip-right {
-			&:hover {
-				transform: rotateY(180deg);
-			}
-		}
-
-		&.flip-up {
-			&:hover {
-				transform: rotateX(180deg) !important;
-
-				.fb-flipbox-back {
-					transform: rotateX(180deg);
-				}
-=======
 		// Flip animation styles
 		&.flip-left:hover {
 			transform: rotateY(-180deg);
@@ -130,53 +87,10 @@
 
 			&:hover {
 				transform: rotateX(180deg);
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 			}
 		}
 
 		&.flip-down {
-<<<<<<< HEAD
-			&:hover {
-				transform: rotateX(-180deg) !important;
-
-				.fb-flipbox-back {
-					transform: rotateX(-180deg);
-				}
-			}
-		}
-
-		&.zoom-in {
-			&:hover {
-				transform: scale(1.1) !important;
-
-				.fb-flipbox-front {
-					opacity: 0;
-					z-index: 1;
-				}
-
-				.fb-flipbox-back {
-					opacity: 1;
-					z-index: 5;
-					transform: rotateY(0deg) translateZ(1px);
-				}
-			}
-		}
-
-		&.zoom-out {
-			&:hover {
-				transform: scale(0.8) !important;
-
-				.fb-flipbox-front {
-					opacity: 0;
-					z-index: 1;
-				}
-
-				.fb-flipbox-back {
-					opacity: 1;
-					z-index: 5;
-					transform: rotateY(0deg) translateZ(1px);
-				}
-=======
 			.fb-flipbox-back {
 				transform: rotateX(180deg);
 			}
@@ -213,17 +127,10 @@
 				opacity: 1;
 				z-index: 5;
 				transform: none;
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 			}
 		}
 
 		&.fade {
-<<<<<<< HEAD
-			&:hover {
-				.fb-flipbox-front {
-					opacity: 0;
-					z-index: 1;
-=======
 			.fb-flipbox-back {
 				z-index: 1;
 				transform: none;
@@ -232,32 +139,11 @@
 			&:hover {
 				.fb-flipbox-front {
 					opacity: 0;
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 				}
 
 				.fb-flipbox-back {
 					opacity: 1;
 					z-index: 5;
-<<<<<<< HEAD
-					transform: rotateY(0deg) translateZ(1px);
-				}
-			}
-		}
-		.fb-flip-button, 
-		.fb-flip-back-button{
-			.fb-flip-btn-wrapper,
-			.fb-flip-back-btn-wrapper{
-				display: inline-flex;
-			}
-		}
-		.fb-flip-media-wrapper,
-		.fb-flip-back-media-wrapper{
-			.fb-icon-wrapper{
-				line-height: 0;
-			}
-		}
-		.fb-btn-icon-wrapper{
-=======
 				}
 			}
 		}
@@ -279,7 +165,6 @@
 		}
 
 		.fb-btn-icon-wrapper {
->>>>>>> 6fa04dcfe798a84617d53167b1977b2ce72827ec
 			line-height: 0;
 		}
 	}
