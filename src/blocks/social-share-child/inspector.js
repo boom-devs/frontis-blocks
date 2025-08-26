@@ -535,7 +535,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <FB_ColorControl
                                                     label={__("Normal Color", "frontis-blocks")}
                                                     globalColor={socialItemColor}
-                                                    setGlobalColor={(value) => setAttributes({ socialItemColor: value })}
+                                                    setGlobalColor={(value) => setAttributes({ socialItemColor: value === undefined ? '' : value })}
                                                 />
                                             )}
 
@@ -543,7 +543,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <FB_ColorControl
                                                     label={__("Hover Color", "frontis-blocks")}
                                                     globalColor={socialItemHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ socialItemHoverColor: value })}
+                                                    setGlobalColor={(value) => setAttributes({ socialItemHoverColor: value === undefined ? '' : value })}
                                                 />
                                             )}
 
@@ -557,7 +557,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <FB_ColorControl
                                                     label={__("Normal Color", "frontis-blocks")}
                                                     globalColor={socialItemBgColor}
-                                                    setGlobalColor={(value) => setAttributes({ socialItemBgColor: value })}
+                                                    setGlobalColor={(value) => setAttributes({ socialItemBgColor: value === undefined ? '' : value })}
                                                 />
                                             )}
 
@@ -614,7 +614,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <FB_ColorControl
                                                     label={__("Normal Color", "frontis-blocks")}
                                                     globalColor={socialIconBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ socialIconBorderColor: value })}
+                                                    setGlobalColor={(value) => setAttributes({ socialIconBorderColor: value === undefined ? '' : value })}
                                                 />
                                             )}
 
@@ -622,7 +622,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 <FB_ColorControl
                                                     label={__("Hover Color", "frontis-blocks")}
                                                     globalColor={socialIconBorderHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ socialIconBorderHoverColor: value })}
+                                                    setGlobalColor={(value) => setAttributes({ socialIconBorderHoverColor: value === undefined ? '' : value })}
                                                 />
                                             )}
 
