@@ -1012,7 +1012,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={animatedHeadingNormalTextColor}
-                        setGlobalColor={(value) => setAttributes({ animatedHeadingNormalTextColor: value })}
+                        setGlobalColor={(value) => setAttributes({ animatedHeadingNormalTextColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1020,7 +1020,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={animatedHeadingNormalTextHoverColor}
-                        setGlobalColor={(value) => setAttributes({ animatedHeadingNormalTextHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ animatedHeadingNormalTextHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1035,7 +1035,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={animatedHeadingNormalTextBgColor}
-                        setGlobalColor={(value) => setAttributes({ animatedHeadingNormalTextBgColor: value })}
+                        setGlobalColor={(value) => setAttributes({ animatedHeadingNormalTextBgColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1113,7 +1113,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={animatedHeadingAnimationTextColor}
-                        setGlobalColor={(value) => setAttributes({animatedHeadingAnimationTextColor: value })}
+                        setGlobalColor={(value) => setAttributes({animatedHeadingAnimationTextColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1121,7 +1121,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={animatedHeadingAnimationTextHoverColor}
-                        setGlobalColor={(value) => setAttributes({animatedHeadingAnimationTextHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({animatedHeadingAnimationTextHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1136,7 +1136,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={animatedHeadingAnimationTextBgColor}
-                        setGlobalColor={(value) => setAttributes({animatedHeadingAnimationTextBgColor: value })}
+                        setGlobalColor={(value) => setAttributes({animatedHeadingAnimationTextBgColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1210,7 +1210,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Normal Color", "frontis-blocks")}
                                 globalColor={animatedHeadingGlobalBgColor}
-                                setGlobalColor={(value) => setAttributes({ animatedHeadingGlobalBgColor: value })}
+                                setGlobalColor={(value) => setAttributes({ animatedHeadingGlobalBgColor: value === undefined ? '' : value })}
                             />
                         )}
 
@@ -1241,7 +1241,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Normal Color", "frontis-blocks")}
                                 globalColor={animatedHeadingGlobalBorderColor}
-                                setGlobalColor={(value) => setAttributes({ animatedHeadingGlobalBorderColor: value })}
+                                setGlobalColor={(value) => setAttributes({ animatedHeadingGlobalBorderColor: value === undefined ? '' : value })}
                             />
                         )}
 
@@ -1249,7 +1249,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Hover Color", "frontis-blocks")}
                                 globalColor={animatedHeadingGlobalBorderHoverColor}
-                                setGlobalColor={(value) => setAttributes({ animatedHeadingGlobalBorderHoverColor: value })}
+                                setGlobalColor={(value) => setAttributes({ animatedHeadingGlobalBorderHoverColor: value === undefined ? '' : value })}
                             />
                         )}
 
