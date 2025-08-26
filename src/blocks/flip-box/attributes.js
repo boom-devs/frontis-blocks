@@ -11,6 +11,14 @@ const attributes = {
         type: "string",
         default: "preset-1",
     },
+    flipBoxAlignment: {
+        type: 'object',
+        default: {
+            Desktop: 'left',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
     flipBoxBg: {
         type: 'string',
         default: '#EBF5FF'
