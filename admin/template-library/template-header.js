@@ -33,7 +33,7 @@ const TemplateLibraryIcon = () => (
   </svg>
 );
 
-const TemplateHeader = ({ activeTab, setActiveTab, data, onClose }) => {
+const TemplateHeader = ({ activeTab, setActiveTab, data, onClose , setIsProTemplate}) => {
   const schema = data.$schema;
   const tabs = Object.keys(schema).map((key) => ({
     id: key,
@@ -54,7 +54,11 @@ const TemplateHeader = ({ activeTab, setActiveTab, data, onClose }) => {
             <button
               key={tab.id}
               className={`single-tab ${activeTab === tab.id ? 'active' : ''}`}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => { 
+                setActiveTab(tab.id);
+                setIsProTemplate('');
+              }}
+
             >
               <span>{tab.label}</span>
               {/* {tab.icon} */}

@@ -22,12 +22,14 @@ import generateCSSVariables from "./GenerateRootCss";
 
 const TypographySettings = (props) => {
 	const [typography, setTypography] = useState(props.typography);
+	const [customTypography, setCustomTypography] = useState(props.customTypography);
 	const [selectedHeading, setSelectedHeading] = useState('all');
 	const [isSaving, setIsSaving] = useState(false);
 	const [generateHeadingCss, setGenerateHeadingCss] = useState();
 	const [isMount, setIsMount] = useState(false);
 	const [fontFamilies, setFontFamilies] = useState([]);
 	const [globalTypography, setGlobalTypography] = useState(typography);
+	const [selectCustomTypo, setSelectCustomTypo] = useState(false);
 	const deviceType = useDeviceType();
 
 	const isFSE = wp.data.select('core').getCurrentTheme()?.is_block_theme || false;
@@ -60,6 +62,23 @@ const TypographySettings = (props) => {
 		return false
 	}
 
+	const changeCustomTypoName = (key, value) => {
+		let typoObj = { ...customTypography }
+		typoObj[key].name = value
+		setCustomTypography({ ...typoObj })
+	}
+
+	const deleteItem = (item) => {
+		const tempTypography = { ...customTypography };
+		const tempGlobalTypography = { ...globalTypography };
+	
+		delete tempTypography[item];
+		delete tempGlobalTypography[item];
+	
+		setCustomTypography(tempTypography);
+		setGlobalTypography(tempGlobalTypography);
+		setIsMount(true);
+	};
 
 	// Body link font typography
 	const onChangeFontFamily = (value, item) => {
@@ -669,6 +688,289 @@ const TypographySettings = (props) => {
 		setIsMount(true);
 	}
 
+	// Custom typography handler
+	const onChangeCustomFontFamily = (value, item) => {
+		setCustomTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+				...prevTypography[item],
+				fontFamily: value,
+			},
+		}));
+
+		setFontFamilies({
+			...fontFamilies,
+			[item]: value
+		});
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontFamily': {
+					variable: `--fb-global-${item}--font-family`,
+					value: value
+				}
+			}
+		});
+
+		loadGoogleFont(value);
+		setIsMount(true);
+	}
+
+	const onChangeCustomFontSize = (value, item) => {
+		setCustomTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+				...prevTypography[item],
+				fontSize: {
+					...customTypography[item]?.fontSize,
+					[deviceType]: value[deviceType],
+				},
+			},
+		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontSize': {
+					variable: `--fb-global-${item}--font-size`,
+					value: value,
+					unit: {
+						'Desktop': 'px',
+						'Tablet': 'px',
+						'Mobile': 'px'
+					}
+				}
+			}
+		});
+		setIsMount(true);
+	}
+
+	const onChangeCustomFontSizeUnit = (value, item) => {
+		setCustomTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+				...prevTypography[item],
+				fontSizeUnit: {
+					...customTypography[item]?.fontSizeUnit,
+					[deviceType]: value[deviceType],
+				},
+			},
+		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontSize': {
+					...globalTypography[item]['fontSize'],
+					unit: value
+				}
+			}
+		});
+		setIsMount(true);
+	}
+
+	const onChangeCustomFontWeight = (value, item) => {
+		setCustomTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+				...prevTypography[item],
+				fontWeight: value,
+			},
+		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontWeight': {
+					variable: `--fb-global-${item}--font-weight`,
+					value: value
+				}
+			}
+		});
+		setIsMount(true);
+	}
+
+	const onChangeCustomFontStyle = (value, item) => {
+		setCustomTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+				...prevTypography[item],
+				fontStyle: value,
+			},
+		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'fontStyle': {
+					variable: `--fb-global-${item}--font-style`,
+					value: value
+				}
+			}
+		});
+		setIsMount(true);
+	}
+
+	const onChangeCustomTextDecoration = (value, item) => {
+		setCustomTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+				...prevTypography[item],
+				textDecoration: value,
+			},
+		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'textDecoration': {
+					variable: `--fb-global-${item}--font-decoration`,
+					value: value
+				}
+			}
+		});
+		setIsMount(true);
+	}
+
+	const onChangeCustomTextTransform = (value, item) => {
+		setCustomTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+				...prevTypography[item],
+				textTransform: value,
+			},
+		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'textTransform': {
+					variable: `--fb-global-${item}--font-transform`,
+					value: value
+				}
+			}
+		});
+		setIsMount(true);
+	}
+
+	const onChangeCustomLetterSpacing = (value, item) => {
+		setCustomTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+				...prevTypography[item],
+				letterSpacing: {
+					...customTypography[item]?.letterSpacing,
+					[deviceType]: value[deviceType],
+				},
+			},
+		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'letterSpacing': {
+					variable: `--fb-global-${item}--font-letter-spacing`,
+					value: value,
+					unit: {
+						'Desktop': 'px',
+						'Tablet': 'px',
+						'Mobile': 'px',
+					}
+				}
+			}
+		});
+		setIsMount(true);
+	}
+
+	const onChangeCustomLetterSpacingUnit = (value, item) => {
+		setCustomTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+				...prevTypography[item],
+				letterSpacingUnit: {
+					...customTypography[item]?.letterSpacingUnit,
+					[deviceType]: value[deviceType],
+				},
+			},
+		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'letterSpacing': {
+					...globalTypography[item]['letterSpacing'],
+					unit: value
+				}
+			}
+		});
+		setIsMount(true);
+	}
+
+	const onChangeCustomLineHeight = (value, item) => {
+		setCustomTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+				...prevTypography[item],
+				lineHeight: {
+					...customTypography[item]?.lineHeight,
+					[deviceType]: value[deviceType],
+				},
+			},
+		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'lineHeight': {
+					variable: `--fb-global-${item}--font-line-height`,
+					value: value,
+					unit: {
+						'Desktop': 'px',
+						'Tablet': 'px',
+						'Mobile': 'px',
+					}
+				}
+			}
+		});
+		setIsMount(true);
+	}
+
+	const onChangeCustomLineHeightUnit = (value, item) => {
+		setCustomTypography(prevTypography => ({
+			...prevTypography,
+			[item]: {
+				...prevTypography[item],
+				lineHeightUnits: {
+					...customTypography[item]?.lineHeightUnits,
+					[deviceType]: value[deviceType],
+				},
+			},
+		}));
+
+		setGlobalTypography({
+			...globalTypography,
+			[item]: {
+				...globalTypography[item],
+				'lineHeight': {
+					...globalTypography[item]['lineHeight'],
+					unit: value
+				}
+			}
+		});
+		setIsMount(true);
+	}
+
 	const isAfterSave = useAfterSave();
 
 	useEffect(() => {
@@ -679,6 +981,14 @@ const TypographySettings = (props) => {
 					if (response.success) {
 						setTypography(response.data.data);
 						localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
+					}
+				}
+
+				if (customTypography) {
+					const response = await updateGlobalStyle(customTypography, 'fb_update_custom_typography');
+					if (response.success) {
+						setCustomTypography(response.data.data || {});
+						localStorage.setItem('fb_custom_typography', JSON.stringify(response.data.data));
 					}
 				}
 
@@ -733,12 +1043,8 @@ const TypographySettings = (props) => {
 		<>
 			<div className="fb-typography-panel">
 				{/* Typography Elements Section */}
-				<div className="fb-global-header-inner-wrapper">
-					<div className="fb-global-header-inner">
-						<h3>{__("Typography", "frontis-blocks")}</h3>
-					</div>
-				</div>
 				<div className="fb-panel-section">
+					<h3 className="fb-panel-heading">Typography</h3>
 					<div className={'fb-global-typo-elements'}>
 						<div className="fb-global-typo-elements-wrap">
 							<NavigatorProvider initialPath="/">
@@ -875,6 +1181,109 @@ const TypographySettings = (props) => {
 						</div>
 					</div>
 				</div>
+
+				{/* Custom Typography Section */}
+				{Object.keys(customTypography || {}).length > 0 && (
+				<div className="fb-panel-section">
+					<div className="fb-panel-heading-wrapper">
+						<h3 className="fb-panel-heading">Custom Typography</h3>
+					</div>
+
+					<div className={'fb-global-typo-elements'}>
+						<div className="fb-global-typo-elements-wrap">
+							{customTypography && typeof customTypography === 'object' && (
+								<NavigatorProvider initialPath="/">
+									<NavigatorScreen path="/">
+										{Object.keys(customTypography || {}).length > 0 &&
+											<div className="fb-custom-element-wrapper">
+												{Object.keys(customTypography || {}).length > 0 && Object.keys(customTypography).map((item, index) => (
+													<div
+														key={index}
+														className="fb-custom-element fb-global-typography-element"
+													>
+														<NavigatorButton
+															path={`/${item}`}
+															onClick={() => setSelectCustomTypo(true)}
+														>
+															{customTypography[item]?.name}
+														</NavigatorButton>
+														<Button className="fb-delete-custom-typo">
+															<span
+																className={'fb-delete'}
+																title="Delete"
+																onClick={() => deleteItem(item)}
+															>
+																<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+																	<path d="M13 4.16675L12.5869 10.8501C12.4813 12.5577 12.4285 13.4115 12.0005 14.0253C11.7889 14.3288 11.5165 14.5849 11.2005 14.7774C10.5614 15.1667 9.706 15.1667 7.99513 15.1667C6.28208 15.1667 5.42553 15.1667 4.78603 14.7767C4.46987 14.5839 4.19733 14.3273 3.98579 14.0233C3.55792 13.4085 3.5063 12.5535 3.40307 10.8435L3 4.16675" stroke="#E43242" stroke-linecap="round" />
+																	<path d="M2 4.16659H14M10.7038 4.16659L10.2487 3.22774C9.9464 2.60409 9.7952 2.29227 9.53447 2.09779C9.47667 2.05465 9.4154 2.01628 9.35133 1.98305C9.0626 1.83325 8.71607 1.83325 8.023 1.83325C7.31253 1.83325 6.95733 1.83325 6.66379 1.98933C6.59873 2.02393 6.53665 2.06385 6.47819 2.1087C6.21443 2.31105 6.06709 2.63429 5.77241 3.28076L5.36861 4.16659" stroke="#E43242" stroke-linecap="round" />
+																	<path d="M6.3335 11.5V7.5" stroke="#E43242" stroke-linecap="round" />
+																	<path d="M9.6665 11.5V7.5" stroke="#E43242" stroke-linecap="round" />
+																</svg>
+															</span>
+														</Button>
+													</div>
+												))}
+											</div>
+										}
+
+									</NavigatorScreen>
+
+									{Object.keys(customTypography).length > 0 && Object.keys(customTypography).map((item, index) => (
+										<div
+											key={index}
+											className="fb-global-typography-element-content"
+										>
+											<NavigatorScreen path={`/${item}`}>
+												<NavigatorBackButton onClick={() => setSelectCustomTypo(false)}>
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+														<path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="currentcolor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" />
+													</svg>
+													{customTypography[item]?.name}
+												</NavigatorBackButton>
+
+												<div className="fb-typography-settings">
+													<FrontPreview fontProps={customTypography[item]} deviceType={deviceType} fontSize={true} />
+													<TextControl
+														label={__('Typography Name', 'frontis-blocks')}
+														className="fb-custom-typo-name"
+														value={customTypography[item]?.name}
+														onChange={(value) => changeCustomTypoName(item, value)}
+													/>
+													<FB_SidebarTypography
+														fontFamily={customTypography?.[item]?.fontFamily}
+														onChangeFontFamily={(value) => onChangeCustomFontFamily(value, item)}
+														fontSize={customTypography?.[item]?.fontSize}
+														onChangeFontSize={(value) => onChangeCustomFontSize(value, item)}
+														fontSizeUnits={customTypography?.[item]?.fontSizeUnit}
+														onChangeFontSizeUnit={(value) => onChangeCustomFontSizeUnit(value, item)}
+														fontWeight={customTypography?.[item]?.fontWeight}
+														onChangeFontWeight={(value) => onChangeCustomFontWeight(value, item)}
+														fontStyle={customTypography?.[item]?.fontStyle}
+														onChangeFontStyle={(value) => onChangeCustomFontStyle(value, item)}
+														textTransform={customTypography?.[item]?.textTransform}
+														onChangeTextTransform={(value) => onChangeCustomTextTransform(value, item)}
+														textDecoration={customTypography?.[item]?.textDecoration}
+														onChangeTextDecoration={(value) => onChangeCustomTextDecoration(value, item)}
+														letterSpacing={customTypography?.[item]?.letterSpacing}
+														onChangeLetterSpacing={(value) => onChangeCustomLetterSpacing(value, item)}
+														letterSpacingUnits={customTypography?.[item]?.letterSpacingUnit}
+														onChangeLetterSpacingUnit={(value) => onChangeCustomLetterSpacingUnit(value, item)}
+														lineHeight={customTypography?.[item]?.lineHeight}
+														onChangeLineHeight={(value) => onChangeCustomLineHeight(value, item)}
+														lineHeightUnits={customTypography?.[item]?.lineHeightUnits}
+														onChangeLineHeightUnit={(value) => onChangeCustomLineHeightUnit(value, item)}
+														deviceType={deviceType}
+													/>
+												</div>
+											</NavigatorScreen>
+										</div>
+									))}
+								</NavigatorProvider>
+							)}
+						</div>
+					</div>
+				</div>
+				)}
 			</div>
 		</>
 	)

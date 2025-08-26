@@ -150,10 +150,41 @@
                 }
             }
 
-            .fb-color-section {
+            .fb-color-section-wrapper{
                 padding: 0 16px;
-                border-bottom: 1px solid #E1E3E8;
+            }
+            .fb-color-section > div > div:last-child {
+                margin-top: 10px;
+                padding: 12px;
+                border: 1px solid #E1E3E8;
+                border-radius: 4px;
+                
+                .components-circular-option-picker__option-wrapper {
+                    width: 24px;
+                    height: 24px;
+                    border: 1px solid #c9c9c9;
+                    border-radius: 50%;
+
+                    .components-circular-option-picker__option {
+                        padding: 6px;
+
+                        &::after {
+                            display: none;
+                        }
+                    }
+                }
+            }
+            .fb-color-section {
                 margin-bottom: 24px;
+
+                h3 {
+                    font-family: $heading-font-family;
+                    color: $neutral-color-950;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 16px;
+                    text-transform: capitalize;
+                }
 
                 .add-custom-color {
                     text-align: center;
@@ -224,13 +255,6 @@
                             }
                         }
                     }
-                }
-                &:first-child{
-                    padding-bottom: 12px;
-                }
-                &:last-child{
-                    border-bottom: none;
-                    margin-bottom: 0;
                 }
             }
         }

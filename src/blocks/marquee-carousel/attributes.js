@@ -97,7 +97,7 @@ const attributes = {
     /** Start Overlay */
     sliderOverlaySwitcher: {
         type: 'boolean',
-        default: true,
+        default: false,
     },
     sliderOverlayStartColor: {
         type: 'string',
