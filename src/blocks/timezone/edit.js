@@ -92,7 +92,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			return `Will be finished in ${hoursLeft}:${remainingMinutes < 10 ? '0' + remainingMinutes : remainingMinutes} Hrs`;
 		} else {
 			setAttributes({ officeStatus: false });
-			return `Office is closed. Opens at ${startHour}:${startMinute < 10 ? '0' + startMinute : startMinute}`;
+			return `Office is closed. Opens at ${startHour}:${startMinute < 10 ? '0' + startMinute : `${startMinute} AM`}`;
 		}
 	}
 

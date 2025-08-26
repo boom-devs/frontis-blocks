@@ -2968,7 +2968,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={countDownItemBgColor}
-						setGlobalColor={(value) => setAttributes({ countDownItemBgColor: value })}
+						setGlobalColor={(value) => setAttributes({ countDownItemBgColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -2976,7 +2976,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={countDownItemBgHoverColor}
-						setGlobalColor={(value) => setAttributes({ countDownItemBgHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ countDownItemBgHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 				
@@ -2998,7 +2998,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={countDownItemBorderColor}
-						setGlobalColor={(value) => setAttributes({ countDownItemBorderColor: value })}
+						setGlobalColor={(value) => setAttributes({ countDownItemBorderColor: value === undefined ? '' : value })}
 					/>
 				)}
 		
@@ -3006,7 +3006,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={countDownItemBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ countDownItemBorderHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ countDownItemBorderHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3144,7 +3144,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={countDownDigitBgColor}
-						setGlobalColor={(value) => setAttributes({ countDownDigitBgColor: value })}
+						setGlobalColor={(value) => setAttributes({ countDownDigitBgColor: value === undefined ? '' : value })}
 					/>
 				)}
 												
@@ -3152,7 +3152,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={countDownDigitBgHoverColor}
-						setGlobalColor={(value) => setAttributes({ countDownDigitBgHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ countDownDigitBgHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3166,7 +3166,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={digitFontColor}
-						setGlobalColor={(value) => setAttributes({ digitFontColor: value })}
+						setGlobalColor={(value) => setAttributes({ digitFontColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3174,7 +3174,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={digitFontHoverColor}
-						setGlobalColor={(value) => setAttributes({ digitFontHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ digitFontHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3197,7 +3197,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
 								globalColor={daysDigitFontColor}
-								setGlobalColor={(value) => setAttributes({ daysDigitFontColor: value })}
+								setGlobalColor={(value) => setAttributes({ daysDigitFontColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -3205,7 +3205,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={daysDigitFontHoverColor}
-								setGlobalColor={(value) => setAttributes({ daysDigitFontHoverColor: value })}
+								setGlobalColor={(value) => setAttributes({ daysDigitFontHoverColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -3219,7 +3219,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
 								globalColor={hoursDigitFontColor}
-								setGlobalColor={(value) => setAttributes({ hoursDigitFontColor: value })}
+								setGlobalColor={(value) => setAttributes({ hoursDigitFontColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -3227,7 +3227,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={hoursDigitFontHoverColor}
-								setGlobalColor={(value) => setAttributes({ hoursDigitFontHoverColor: value })}
+								setGlobalColor={(value) => setAttributes({ hoursDigitFontHoverColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -3241,7 +3241,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
 								globalColor={minutesDigitFontColor}
-								setGlobalColor={(value) => setAttributes({ minutesDigitFontColor: value })}
+								setGlobalColor={(value) => setAttributes({ minutesDigitFontColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -3249,7 +3249,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={minutesDigitFontHoverColor}
-								setGlobalColor={(value) => setAttributes({ minutesDigitFontHoverColor: value })}
+								setGlobalColor={(value) => setAttributes({ minutesDigitFontHoverColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -3263,7 +3263,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
 								globalColor={secondsDigitFontColor}
-								setGlobalColor={(value) => setAttributes({ secondsDigitFontColor: value })}
+								setGlobalColor={(value) => setAttributes({ secondsDigitFontColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -3271,7 +3271,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={secondsDigitFontHoverColor}
-								setGlobalColor={(value) => setAttributes({ secondsDigitFontHoverColor: value })}
+								setGlobalColor={(value) => setAttributes({ secondsDigitFontHoverColor: value === undefined ? '' : value })}
 							/>
 						)}
 					</>
@@ -3307,7 +3307,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={countDownDigitBorderColor}
-						setGlobalColor={(value) => setAttributes({ countDownDigitBorderColor: value })}
+						setGlobalColor={(value) => setAttributes({ countDownDigitBorderColor: value === undefined ? '' : value })}
 					/>
 				)}
 												
@@ -3315,7 +3315,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={countDownDigitBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ countDownDigitBorderHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ countDownDigitBorderHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3453,7 +3453,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={labelFontColor}
-						setGlobalColor={(value) => setAttributes({ labelFontColor: value })}
+						setGlobalColor={(value) => setAttributes({ labelFontColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3461,7 +3461,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={labelFontHoverColor}
-						setGlobalColor={(value) => setAttributes({ labelFontHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ labelFontHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3475,7 +3475,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={labelBgColor}
-						setGlobalColor={(value) => setAttributes({ labelBgColor: value })}
+						setGlobalColor={(value) => setAttributes({ labelBgColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3483,7 +3483,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={labelBgHoverColor}
-						setGlobalColor={(value) => setAttributes({ labelBgHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ labelBgHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3517,7 +3517,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				<FB_ColorControl
 					label={__("Normal Color", "frontis-blocks")}
 					globalColor={countDownLabelBorderColor}
-					setGlobalColor={(value) => setAttributes({ countDownLabelBorderColor: value })}
+					setGlobalColor={(value) => setAttributes({ countDownLabelBorderColor: value === undefined ? '' : value })}
 				/>
 			)}
 
@@ -3525,7 +3525,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				<FB_ColorControl
 					label={__("Hover Color", "frontis-blocks")}
 					globalColor={countDownLabelBorderHoverColor}
-					setGlobalColor={(value) => setAttributes({ countDownLabelBorderHoverColor: value })}
+					setGlobalColor={(value) => setAttributes({ countDownLabelBorderHoverColor: value === undefined ? '' : value })}
 				/>
 			)}
 			<FB_Spacing
@@ -3567,7 +3567,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={countDownSeparatorFontColor}
-						setGlobalColor={(value) => setAttributes({ countDownSeparatorFontColor: value })}
+						setGlobalColor={(value) => setAttributes({ countDownSeparatorFontColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3575,7 +3575,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={countDownSeparatorFontHoverColor}
-						setGlobalColor={(value) => setAttributes({ countDownSeparatorFontHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ countDownSeparatorFontHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3750,9 +3750,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					normalBackgroundType={globalBackgroundType}
 					setNormalBackgroundType={(value) => setAttributes({ globalBackgroundType: value }) }
 					normalClassicColor={globalClassicColor}
-					setNormalClassicColor={(value) => setAttributes({ globalClassicColor: value }) }
+					setNormalClassicColor={(value) => setAttributes({ globalClassicColor: value === undefined ? '' : value }) }
 					normalGradientColor={globalGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ globalGradientColor: value }) }
+					setNormalGradientColor={(value) => setAttributes({ globalGradientColor: value === undefined ? '' : value }) }
 					normalCustomGradientSwitcher={ globalCustomGradientSwitcher }
 					setNormalCustomGradientSwitcher={(value) => setAttributes({ globalCustomGradientSwitcher: value, }) }
 					normalCustomGradientInputValue={ globalCustomGradientInputValue }
@@ -3774,9 +3774,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					hoverBackgroundType={hoverBackgroundType}
 					setHoverBackgroundType={(value) => setAttributes({ hoverBackgroundType: value }) }
 					hoverClassicColor={hoverClassicColor}
-					setHoverClassicColor={(value) => setAttributes({ hoverClassicColor: value }) }
+					setHoverClassicColor={(value) => setAttributes({ hoverClassicColor: value === undefined ? '' : value }) }
 					hoverGradientColor={hoverGradientColor}
-					setHoverGradientColor={(value) => setAttributes({ hoverGradientColor: value }) }
+					setHoverGradientColor={(value) => setAttributes({ hoverGradientColor: value === undefined ? '' : value }) }
 					hoverCustomGradientSwitcher={ hoverCustomGradientSwitcher }
 					setHoverCustomGradientSwitcher={(value) => setAttributes({ hoverCustomGradientSwitcher: value, }) }
 					hoverCustomGradientInputValue={ hoverCustomGradientInputValue }
@@ -3817,7 +3817,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={countDownItemWrapperBorderColor}
-						setGlobalColor={(value) => setAttributes({ countDownItemWrapperBorderColor: value })}
+						setGlobalColor={(value) => setAttributes({ countDownItemWrapperBorderColor: value === undefined ? '' : value })}
 					/>
 				)}
 		
@@ -3825,7 +3825,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={countDownItemWrapperBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ countDownItemWrapperBorderHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ countDownItemWrapperBorderHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 				<FB_Spacing

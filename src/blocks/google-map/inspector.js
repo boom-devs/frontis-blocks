@@ -700,9 +700,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     normalBackgroundType={googleMapNormalBackgroundType} 
                     setNormalBackgroundType={(value) => setAttributes({ googleMapNormalBackgroundType: value })}
                     normalClassicColor={googleMapNormalClassicColor}
-                    setNormalClassicColor={(value) => setAttributes({ googleMapNormalClassicColor: value })}
+                    setNormalClassicColor={(value) => setAttributes({ googleMapNormalClassicColor: value === undefined ? '' : value })}
                     normalGradientColor={googleMapNormalGradientColor}
-                    setNormalGradientColor={(value) => setAttributes({ googleMapNormalGradientColor: value })}
+                    setNormalGradientColor={(value) => setAttributes({ googleMapNormalGradientColor: value === undefined ? '' : value })}
                     normalCustomGradientSwitcher={googleMapNormalCustomGradientSwitcher}
                     setNormalCustomGradientSwitcher={(value) => setAttributes({ googleMapNormalCustomGradientSwitcher: value })}
                     normalCustomGradientInputValue={googleMapNormalCustomGradientInputValue}
@@ -711,9 +711,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     hoverBackgroundType={googleMapHoverBackgroundType}
                     setHoverBackgroundType={(value) => setAttributes({ googleMapHoverBackgroundType: value })}
                     hoverClassicColor={googleMapHoverClassicColor}
-                    setHoverClassicColor={(value) => setAttributes({ googleMapHoverClassicColor: value })}
+                    setHoverClassicColor={(value) => setAttributes({ googleMapHoverClassicColor: value === undefined ? '' : value })}
                     hoverGradientColor={googleMapHoverGradientColor} 
-                    setHoverGradientColor={(value) => setAttributes({ googleMapHoverGradientColor: value })}
+                    setHoverGradientColor={(value) => setAttributes({ googleMapHoverGradientColor: value === undefined ? '' : value })}
                     hoverCustomGradientSwitcher={googleMapHoverCustomGradientSwitcher}
                     setHoverCustomGradientSwitcher={(value) => setAttributes({ googleMapHoverCustomGradientSwitcher: value })}
                     hoverCustomGradientInputValue={googleMapHoverCustomGradientInputValue}
@@ -741,7 +741,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={googleMapBorderColor}
-                        setGlobalColor={(value) => setAttributes({ googleMapBorderColor: value })}
+                        setGlobalColor={(value) => setAttributes({ googleMapBorderColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -749,7 +749,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={googleMapBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ googleMapBorderHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ googleMapBorderHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
