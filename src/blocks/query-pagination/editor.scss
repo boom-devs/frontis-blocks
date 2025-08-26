@@ -12,3 +12,28 @@
 	}
 }
 
+.fb-query-pagination {
+	.fb-page-prev {
+		&:focus {
+			outline: none !important;
+		}
+		a{
+			text-decoration: none !important;
+			&:focus {
+				outline: none !important;
+			}
+		}
+	}
+	.fb-page-next {
+		&:focus {
+			outline: none !important;
+		}
+		a{
+			text-decoration: none !important;
+			&:focus {
+				outline: none !important;
+			}
+		}
+	}
+}
+

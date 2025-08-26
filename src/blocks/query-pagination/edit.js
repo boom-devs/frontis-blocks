@@ -18,6 +18,11 @@ import { useEffect } from '@wordpress/element';
 /**
  * Internal dependencies
  */
+import Inspector from "./inspector";
+
+/**
+ * Internal dependencies
+ */
 import { QueryPaginationArrowControls } from './query-pagination-arrow-controls';
 import { QueryPaginationLabelControl } from './query-pagination-label-control';
 import { useToolsPanelDropdownMenuProps } from '../utils/hooks';
@@ -36,6 +41,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		paginationArrow,
         showLabel,
 	} = attributes;
+
 
 	const hasNextPreviousBlocks = useSelect(
 		( select ) => {
@@ -57,11 +63,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const { __unstableMarkNextChangeAsNotPersistent } =
 		useDispatch( blockEditorStore );
 	const dropdownMenuProps = useToolsPanelDropdownMenuProps();
-	const blockProps = useBlockProps();
-	const innerBlocksProps = useInnerBlocksProps( blockProps, {
-		template: TEMPLATE,
+
+	const blockProps = useBlockProps( {
+		className: `fb-query-pagination-wrapper ${blockId}`,
 	} );
 
+	const innerBlocksProps = useInnerBlocksProps(
+		{ className: 'fb-query-pagination' },
+		{ template: TEMPLATE }
+	);
 	// Always show label text if paginationArrow is set to 'none'.
 	useEffect( () => {
 		if ( paginationArrow === 'none' && ! showLabel ) {
@@ -124,7 +134,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</ToolsPanel>
 				</InspectorControls>
 			) }
-			<nav { ...innerBlocksProps } />
+			<Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
+			<div { ...blockProps }>
+				<nav { ...innerBlocksProps } />
+			</div>
 		</>
 	);
 }
