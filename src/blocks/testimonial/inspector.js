@@ -2659,7 +2659,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={TestimonialRatingIconColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialRatingIconColor: value })}
+                        setGlobalColor={(value) => setAttributes({ TestimonialRatingIconColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -2667,7 +2667,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={TestimonialRatingIconHoverColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialRatingIconHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ TestimonialRatingIconHoverColor: value === undefined ? '' : value })}
                     />
                 )}
                 </>)}
@@ -2764,7 +2764,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={TestimonialTitleColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialTitleColor: value })}
+                        setGlobalColor={(value) => setAttributes({ TestimonialTitleColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -2772,7 +2772,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={TestimonialTitleHoverColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialTitleHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ TestimonialTitleHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -2862,7 +2862,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <FB_ColorControl
                     label={__("Normal Color", "frontis-blocks")}
                     globalColor={TestimonialDescColor}
-                    setGlobalColor={(value) => setAttributes({ TestimonialDescColor: value })}
+                    setGlobalColor={(value) => setAttributes({ TestimonialDescColor: value === undefined ? '' : value })}
                 />
             )}
 
@@ -2870,7 +2870,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <FB_ColorControl
                     label={__("Hover Color", "frontis-blocks")}
                     globalColor={TestimonialDescHoverColor}
-                    setGlobalColor={(value) => setAttributes({ TestimonialDescHoverColor: value })}
+                    setGlobalColor={(value) => setAttributes({ TestimonialDescHoverColor: value === undefined ? '' : value })}
                 />
             )}
 
@@ -3056,7 +3056,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={TestimonialAuthorColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialAuthorColor: value })}
+                        setGlobalColor={(value) => setAttributes({ TestimonialAuthorColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -3064,7 +3064,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={TestimonialAuthorHoverColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialAuthorHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ TestimonialAuthorHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -3154,7 +3154,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={TestimonialDesignationColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialDesignationColor: value })}
+                        setGlobalColor={(value) => setAttributes({ TestimonialDesignationColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -3162,7 +3162,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={TestimonialDesignationHoverColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialDesignationHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ TestimonialDesignationHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -3213,7 +3213,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={TestimonialQuoteIconColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialQuoteIconColor: value })}
+                        setGlobalColor={(value) => setAttributes({ TestimonialQuoteIconColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -3221,7 +3221,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={TestimonialQuoteIconHoverColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialQuoteIconHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ TestimonialQuoteIconHoverColor: value === undefined ? '' : value })}
                     />
                 )}
                 </>)}
@@ -3374,9 +3374,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         normalBackgroundType={TestimonialGlobalBgNormalBackgroundType}
                         setNormalBackgroundType={(value) => setAttributes({ TestimonialGlobalBgNormalBackgroundType: value })}
                         normalClassicColor={TestimonialGlobalBgNormalClassicColor}
-                        setNormalClassicColor={(value) => setAttributes({ TestimonialGlobalBgNormalClassicColor: value })}
+                        setNormalClassicColor={(value) => setAttributes({ TestimonialGlobalBgNormalClassicColor: value === undefined ? '' : value })}
                         normalGradientColor={TestimonialGlobalBgNormalGradientColor}
-                        setNormalGradientColor={(value) => setAttributes({ TestimonialGlobalBgNormalGradientColor: value })}
+                        setNormalGradientColor={(value) => setAttributes({ TestimonialGlobalBgNormalGradientColor: value === undefined ? '' : value })}
                         normalCustomGradientSwitcher={TestimonialGlobalBgNormalCustomGradientSwitcher}
                         setNormalCustomGradientSwitcher={(value) => setAttributes({ TestimonialGlobalBgNormalCustomGradientSwitcher: value })}
                         normalCustomGradientInputValue={TestimonialGlobalBgNormalCustomGradientInputValue}
@@ -3385,9 +3385,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         hoverBackgroundType={TestimonialGlobalBgHoverBackgroundType}
                         setHoverBackgroundType={(value) => setAttributes({ TestimonialGlobalBgHoverBackgroundType: value })}
                         hoverClassicColor={TestimonialGlobalBgHoverClassicColor}
-                        setHoverClassicColor={(value) => setAttributes({ TestimonialGlobalBgHoverClassicColor: value })}
+                        setHoverClassicColor={(value) => setAttributes({ TestimonialGlobalBgHoverClassicColor: value === undefined ? '' : value })}
                         hoverGradientColor={TestimonialGlobalBgHoverGradientColor}
-                        setHoverGradientColor={(value) => setAttributes({ TestimonialGlobalBgHoverGradientColor: value })}
+                        setHoverGradientColor={(value) => setAttributes({ TestimonialGlobalBgHoverGradientColor: value === undefined ? '' : value })}
                         hoverCustomGradientSwitcher={TestimonialGlobalBgHoverCustomGradientSwitcher}
                         setHoverCustomGradientSwitcher={(value) => setAttributes({ TestimonialGlobalBgHoverCustomGradientSwitcher: value })}
                         hoverCustomGradientInputValue={TestimonialGlobalBgHoverCustomGradientInputValue}
@@ -3447,7 +3447,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
                             globalColor={TestimonialGlobalBorderColor}
-                            setGlobalColor={(value) => setAttributes({ TestimonialGlobalBorderColor: value })}
+                            setGlobalColor={(value) => setAttributes({ TestimonialGlobalBorderColor: value === undefined ? '' : value })}
                         />
                     )}
 
@@ -3455,7 +3455,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
                             globalColor={TestimonialGlobalBorderHoverColor}
-                            setGlobalColor={(value) => setAttributes({ TestimonialGlobalBorderHoverColor: value })}
+                            setGlobalColor={(value) => setAttributes({ TestimonialGlobalBorderHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 

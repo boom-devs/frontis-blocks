@@ -4750,7 +4750,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Nomal Color", "frontis-blocks")}
 							globalColor={pricingTopSectionBorderColor}
-							setGlobalColor={(value) => setAttributes({ pricingTopSectionBorderColor: value })}
+							setGlobalColor={(value) => setAttributes({ pricingTopSectionBorderColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -4758,7 +4758,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={pricingTopSectionBorderHoverColor}
-							setGlobalColor={(value) => setAttributes({ pricingTopSectionBorderHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ pricingTopSectionBorderHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -4798,9 +4798,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						normalBackgroundType={pricingTopSectionNormalBackgroundType}
 						setNormalBackgroundType={(value) => setAttributes({ pricingTopSectionNormalBackgroundType: value })}
 						normalClassicColor={pricingTopSectionNormalClassicColor}
-						setNormalClassicColor={(value) => setAttributes({ pricingTopSectionNormalClassicColor: value })}
+						setNormalClassicColor={(value) => setAttributes({ pricingTopSectionNormalClassicColor: value === undefined ? '' : value })}
 						normalGradientColor={pricingTopSectionNormalGradientColor}
-						setNormalGradientColor={(value) => setAttributes({ pricingTopSectionNormalGradientColor: value })}
+						setNormalGradientColor={(value) => setAttributes({ pricingTopSectionNormalGradientColor: value === undefined ? '' : value })}
 						normalCustomGradientSwitcher={pricingTopSectionNormalCustomGradientSwitcher}
 						setNormalCustomGradientSwitcher={(value) => setAttributes({ pricingTopSectionNormalCustomGradientSwitcher: value })}
 						normalCustomGradientInputValue={pricingTopSectionNormalCustomGradientInputValue}
@@ -4809,9 +4809,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						hoverBackgroundType={pricingTopSectionHoverBackgroundType}
 						setHoverBackgroundType={(value) => setAttributes({ pricingTopSectionHoverBackgroundType: value })}
 						hoverClassicColor={pricingTopSectionHoverClassicColor}
-						setHoverClassicColor={(value) => setAttributes({ pricingTopSectionHoverClassicColor: value })}
+						setHoverClassicColor={(value) => setAttributes({ pricingTopSectionHoverClassicColor: value === undefined ? '' : value })}
 						hoverGradientColor={pricingTopSectionHoverGradientColor} 
-						setHoverGradientColor={(value) => setAttributes({ pricingTopSectionHoverGradientColor: value })}
+						setHoverGradientColor={(value) => setAttributes({ pricingTopSectionHoverGradientColor: value === undefined ? '' : value })}
 						hoverCustomGradientSwitcher={pricingTopSectionHoverCustomGradientSwitcher}
 						setHoverCustomGradientSwitcher={(value) => setAttributes({ pricingTopSectionHoverCustomGradientSwitcher: value })}
 						hoverCustomGradientInputValue={pricingTopSectionHoverCustomGradientInputValue}
@@ -4884,7 +4884,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Color", "frontis-blocks")}
 							globalColor={pricingTopSectionTextColor}
-							setGlobalColor={(value) => setAttributes({ pricingTopSectionTextColor: value })}
+							setGlobalColor={(value) => setAttributes({ pricingTopSectionTextColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -4892,7 +4892,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={pricingTopSectionTextHoverColor}
-							setGlobalColor={(value) => setAttributes({ pricingTopSectionTextHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ pricingTopSectionTextHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -4927,7 +4927,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
 						globalColor={pricingHeaderBgColor}
-						setGlobalColor={(value) => setAttributes({ pricingHeaderBgColor: value })}
+						setGlobalColor={(value) => setAttributes({ pricingHeaderBgColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -4935,7 +4935,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={pricingHeaderBgHoverColor}
-						setGlobalColor={(value) => setAttributes({ pricingHeaderBgHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ pricingHeaderBgHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -4969,7 +4969,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
 						globalColor={pricingHeaderBorderColor}
-						setGlobalColor={(value) => setAttributes({ pricingHeaderBorderColor: value })}
+						setGlobalColor={(value) => setAttributes({ pricingHeaderBorderColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -4977,7 +4977,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={pricingHeaderBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ pricingHeaderBorderHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ pricingHeaderBorderHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -5089,7 +5089,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Nomal Color", "frontis-blocks")}
 							globalColor={priceIconColor}
-							setGlobalColor={(value) => setAttributes({ priceIconColor: value })}
+							setGlobalColor={(value) => setAttributes({ priceIconColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -5097,7 +5097,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={priceIconHoverColor}
-							setGlobalColor={(value) => setAttributes({ priceIconHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ priceIconHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -5111,7 +5111,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Nomal Color", "frontis-blocks")}
 							globalColor={priceIconBgColor}
-							setGlobalColor={(value) => setAttributes({ priceIconBgColor: value })}
+							setGlobalColor={(value) => setAttributes({ priceIconBgColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -5119,7 +5119,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={priceIconBgHoverColor}
-							setGlobalColor={(value) => setAttributes({ priceIconBgHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ priceIconBgHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -5141,7 +5141,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Nomal Color", "frontis-blocks")}
 							globalColor={priceIconBorderColor}
-							setGlobalColor={(value) => setAttributes({ priceIconBorderColor: value })}
+							setGlobalColor={(value) => setAttributes({ priceIconBorderColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -5149,7 +5149,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={priceIconBorderHoverColor}
-							setGlobalColor={(value) => setAttributes({ priceIconBorderHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ priceIconBorderHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -5163,7 +5163,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Nomal Color", "frontis-blocks")}
 							globalColor={priceIconBorderColor}
-							setGlobalColor={(value) => setAttributes({ priceIconBorderColor: value })}
+							setGlobalColor={(value) => setAttributes({ priceIconBorderColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -5171,7 +5171,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={priceIconBorderHoverColor}
-							setGlobalColor={(value) => setAttributes({ priceIconBorderHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ priceIconBorderHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -5298,7 +5298,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
 						globalColor={pricingTitleColor}
-						setGlobalColor={(value) => setAttributes({ pricingTitleColor: value })}
+						setGlobalColor={(value) => setAttributes({ pricingTitleColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -5306,7 +5306,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={pricingTitleHoverColor}
-						setGlobalColor={(value) => setAttributes({ pricingTitleHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ pricingTitleHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -5414,7 +5414,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Nomal Color", "frontis-blocks")}
 							globalColor={pricingSubtitleColor}
-							setGlobalColor={(value) => setAttributes({ pricingSubtitleColor: value })}
+							setGlobalColor={(value) => setAttributes({ pricingSubtitleColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -5422,7 +5422,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={pricingSubtitleHoverColor}
-							setGlobalColor={(value) => setAttributes({ pricingSubtitleHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ pricingSubtitleHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 					<FB_Spacing 
@@ -5529,7 +5529,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
 						globalColor={normalPricingColor}
-						setGlobalColor={(value) => setAttributes({ normalPricingColor: value })}
+						setGlobalColor={(value) => setAttributes({ normalPricingColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -5537,7 +5537,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={normalPricingHoverColor}
-						setGlobalColor={(value) => setAttributes({ normalPricingHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ normalPricingHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -5605,7 +5605,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
 						globalColor={salePricingColor} 
-						setGlobalColor={(value) => setAttributes({ salePricingColor: value })}
+						setGlobalColor={(value) => setAttributes({ salePricingColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -5613,7 +5613,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={salePricingHoverColor}
-						setGlobalColor={(value) => setAttributes({ salePricingHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ salePricingHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -5681,7 +5681,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
 						globalColor={priceCurrencyColor}
-						setGlobalColor={(value) => setAttributes({ priceCurrencyColor: value })}
+						setGlobalColor={(value) => setAttributes({ priceCurrencyColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -5689,7 +5689,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={priceCurrencyHoverColor}
-						setGlobalColor={(value) => setAttributes({ priceCurrencyHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ priceCurrencyHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -5757,7 +5757,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
 						globalColor={pricePeriodColor}
-						setGlobalColor={(value) => setAttributes({ pricePeriodColor: value })}
+						setGlobalColor={(value) => setAttributes({ pricePeriodColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -5765,7 +5765,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={pricePeriodHoverColor}
-						setGlobalColor={(value) => setAttributes({ pricePeriodHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ pricePeriodHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 				<FB_Spacing 
@@ -5851,7 +5851,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
 						globalColor={priceAfterTextColor}
-						setGlobalColor={(value) => setAttributes({ priceAfterTextColor: value })}
+						setGlobalColor={(value) => setAttributes({ priceAfterTextColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -5859,7 +5859,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={priceAfterTextHoverColor}
-						setGlobalColor={(value) => setAttributes({ priceAfterTextHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ priceAfterTextHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -5872,9 +5872,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					normalBackgroundType={priceAfterTextNormalBackgroundType}
 					setNormalBackgroundType={(value) => setAttributes({ priceAfterTextNormalBackgroundType: value })}
 					normalClassicColor={priceAfterTextNormalClassicColor}
-					setNormalClassicColor={(value) => setAttributes({ priceAfterTextNormalClassicColor: value })}
+					setNormalClassicColor={(value) => setAttributes({ priceAfterTextNormalClassicColor: value === undefined ? '' : value })}
 					normalGradientColor={priceAfterTextNormalGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ priceAfterTextNormalGradientColor: value })}
+					setNormalGradientColor={(value) => setAttributes({ priceAfterTextNormalGradientColor: value === undefined ? '' : value })}
 					normalCustomGradientSwitcher={priceAfterTextNormalCustomGradientSwitcher}
 					setNormalCustomGradientSwitcher={(value) => setAttributes({ priceAfterTextNormalCustomGradientSwitcher: value })}
 					normalCustomGradientInputValue={priceAfterTextNormalCustomGradientInputValue}
@@ -5883,9 +5883,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					hoverBackgroundType={priceAfterTextHoverBackgroundType}
 					setHoverBackgroundType={(value) => setAttributes({ priceAfterTextHoverBackgroundType: value })}
 					hoverClassicColor={priceAfterTextHoverClassicColor}
-					setHoverClassicColor={(value) => setAttributes({ priceAfterTextHoverClassicColor: value })}
+					setHoverClassicColor={(value) => setAttributes({ priceAfterTextHoverClassicColor: value === undefined ? '' : value })}
 					hoverGradientColor={priceAfterTextHoverGradientColor} 
-					setHoverGradientColor={(value) => setAttributes({ priceAfterTextHoverGradientColor: value })}
+					setHoverGradientColor={(value) => setAttributes({ priceAfterTextHoverGradientColor: value === undefined ? '' : value })}
 					hoverCustomGradientSwitcher={priceAfterTextHoverCustomGradientSwitcher}
 					setHoverCustomGradientSwitcher={(value) => setAttributes({ priceAfterTextHoverCustomGradientSwitcher: value })}
 					hoverCustomGradientInputValue={priceAfterTextHoverCustomGradientInputValue}
@@ -5926,7 +5926,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
 						globalColor={priceAfterTextBorderColor}
-						setGlobalColor={(value) => setAttributes({ priceAfterTextBorderColor: value })}
+						setGlobalColor={(value) => setAttributes({ priceAfterTextBorderColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -5934,7 +5934,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={priceAfterTextBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ priceAfterTextBorderHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ priceAfterTextBorderHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 				<FB_Spacing 
@@ -5987,7 +5987,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
 						globalColor={priceFeatureIconColor}
-						setGlobalColor={(value) => setAttributes({ priceFeatureIconColor: value })}
+						setGlobalColor={(value) => setAttributes({ priceFeatureIconColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -5995,7 +5995,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={priceFeatureIconHoverColor}
-						setGlobalColor={(value) => setAttributes({ priceFeatureIconHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ priceFeatureIconHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -6076,7 +6076,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
 						globalColor={pricingfeatureTitleColor}
-						setGlobalColor={(value) => setAttributes({ pricingfeatureTitleColor: value })}
+						setGlobalColor={(value) => setAttributes({ pricingfeatureTitleColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -6084,7 +6084,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={pricingfeatureTitleHoverColor}
-						setGlobalColor={(value) => setAttributes({ pricingfeatureTitleHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ pricingfeatureTitleHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -6138,7 +6138,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
 						globalColor={priceFeatureItemBorderColor}
-						setGlobalColor={(value) => setAttributes({ priceFeatureItemBorderColor: value })}
+						setGlobalColor={(value) => setAttributes({ priceFeatureItemBorderColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -6146,7 +6146,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={priceFeatureItemBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ priceFeatureItemBorderHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ priceFeatureItemBorderHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -6261,7 +6261,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Nomal Color", "frontis-blocks")}
 						globalColor={priceFeatureAfterTextColor}
-						setGlobalColor={(value) => setAttributes({ priceFeatureAfterTextColor: value })}
+						setGlobalColor={(value) => setAttributes({ priceFeatureAfterTextColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -6269,7 +6269,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={priceFeatureAfterTextHoverColor}
-						setGlobalColor={(value) => setAttributes({ priceFeatureAfterTextHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ priceFeatureAfterTextHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -6377,7 +6377,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Nomal Color", "frontis-blocks")}
 							globalColor={priceButtonColor}
-							setGlobalColor={(value) => setAttributes({ priceButtonColor: value })}
+							setGlobalColor={(value) => setAttributes({ priceButtonColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -6385,7 +6385,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={priceButtonHoverColor}
-							setGlobalColor={(value) => setAttributes({ priceButtonHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ priceButtonHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -6397,9 +6397,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						normalBackgroundType={priceButtonNormalBackgroundType}
 						setNormalBackgroundType={(value) => setAttributes({ priceButtonNormalBackgroundType: value })}
 						normalClassicColor={priceButtonNormalClassicColor}
-						setNormalClassicColor={(value) => setAttributes({ priceButtonNormalClassicColor: value })}
+						setNormalClassicColor={(value) => setAttributes({ priceButtonNormalClassicColor: value === undefined ? '' : value })}
 						normalGradientColor={priceButtonNormalGradientColor}
-						setNormalGradientColor={(value) => setAttributes({ priceButtonNormalGradientColor: value })}
+						setNormalGradientColor={(value) => setAttributes({ priceButtonNormalGradientColor: value === undefined ? '' : value })}
 						normalCustomGradientSwitcher={priceButtonNormalCustomGradientSwitcher}
 						setNormalCustomGradientSwitcher={(value) => setAttributes({ priceButtonNormalCustomGradientSwitcher: value })}
 						normalCustomGradientInputValue={priceButtonNormalCustomGradientInputValue}
@@ -6408,9 +6408,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						hoverBackgroundType={priceButtonHoverBackgroundType}
 						setHoverBackgroundType={(value) => setAttributes({ priceButtonHoverBackgroundType: value })}
 						hoverClassicColor={priceButtonHoverClassicColor}
-						setHoverClassicColor={(value) => setAttributes({ priceButtonHoverClassicColor: value })}
+						setHoverClassicColor={(value) => setAttributes({ priceButtonHoverClassicColor: value === undefined ? '' : value })}
 						hoverGradientColor={priceButtonHoverGradientColor} 
-						setHoverGradientColor={(value) => setAttributes({ priceButtonHoverGradientColor: value })}
+						setHoverGradientColor={(value) => setAttributes({ priceButtonHoverGradientColor: value === undefined ? '' : value })}
 						hoverCustomGradientSwitcher={priceButtonHoverCustomGradientSwitcher}
 						setHoverCustomGradientSwitcher={(value) => setAttributes({ priceButtonHoverCustomGradientSwitcher: value })}
 						hoverCustomGradientInputValue={priceButtonHoverCustomGradientInputValue}
@@ -6465,7 +6465,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Nomal Color", "frontis-blocks")}
 							globalColor={priceButtonBorderColor}
-							setGlobalColor={(value) => setAttributes({ priceButtonBorderColor: value })}
+							setGlobalColor={(value) => setAttributes({ priceButtonBorderColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -6473,7 +6473,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={priceButtonBorderHoverColor}
-							setGlobalColor={(value) => setAttributes({ priceButtonBorderHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ priceButtonBorderHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -6515,7 +6515,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Nomal Color", "frontis-blocks")}
 							globalColor={priceButtonIconColor}
-							setGlobalColor={(value) => setAttributes({ priceButtonIconColor: value })}
+							setGlobalColor={(value) => setAttributes({ priceButtonIconColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -6523,7 +6523,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_ColorControl
 							label={__("Hover Color", "frontis-blocks")}
 							globalColor={priceButtonIconHoverColor}
-							setGlobalColor={(value) => setAttributes({ priceButtonIconHoverColor: value })}
+							setGlobalColor={(value) => setAttributes({ priceButtonIconHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
 
@@ -6681,9 +6681,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							normalBackgroundType={priceGlobalNormalBackgroundType}
 							setNormalBackgroundType={(value) => setAttributes({ priceGlobalNormalBackgroundType: value })}
 							normalClassicColor={priceGlobalNormalClassicColor}
-							setNormalClassicColor={(value) => setAttributes({ priceGlobalNormalClassicColor: value })}
+							setNormalClassicColor={(value) => setAttributes({ priceGlobalNormalClassicColor: value === undefined ? '' : value })}
 							normalGradientColor={priceGlobalNormalGradientColor}
-							setNormalGradientColor={(value) => setAttributes({ priceGlobalNormalGradientColor: value })}
+							setNormalGradientColor={(value) => setAttributes({ priceGlobalNormalGradientColor: value === undefined ? '' : value })}
 							normalCustomGradientSwitcher={priceGlobalNormalCustomGradientSwitcher}
 							setNormalCustomGradientSwitcher={(value) => setAttributes({ priceGlobalNormalCustomGradientSwitcher: value })}
 							normalCustomGradientInputValue={priceGlobalNormalCustomGradientInputValue}
@@ -6692,9 +6692,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							hoverBackgroundType={priceGlobalHoverBackgroundType}
 							setHoverBackgroundType={(value) => setAttributes({ priceGlobalHoverBackgroundType: value })}
 							hoverClassicColor={priceGlobalHoverClassicColor}
-							setHoverClassicColor={(value) => setAttributes({ priceGlobalHoverClassicColor: value })}
+							setHoverClassicColor={(value) => setAttributes({ priceGlobalHoverClassicColor: value === undefined ? '' : value })}
 							hoverGradientColor={priceGlobalHoverGradientColor} 
-							setHoverGradientColor={(value) => setAttributes({ priceGlobalHoverGradientColor: value })}
+							setHoverGradientColor={(value) => setAttributes({ priceGlobalHoverGradientColor: value === undefined ? '' : value })}
 							hoverCustomGradientSwitcher={priceGlobalHoverCustomGradientSwitcher}
 							setHoverCustomGradientSwitcher={(value) => setAttributes({ priceGlobalHoverCustomGradientSwitcher: value })}
 							hoverCustomGradientInputValue={priceGlobalHoverCustomGradientInputValue}
@@ -6726,7 +6726,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Nomal Color", "frontis-blocks")}
 								globalColor={priceGlobalBorderColor}
-								setGlobalColor={(value) => setAttributes({ priceGlobalBorderColor: value })}
+								setGlobalColor={(value) => setAttributes({ priceGlobalBorderColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -6734,7 +6734,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={priceGlobalBorderHoverColor}
-								setGlobalColor={(value) => setAttributes({ priceGlobalBorderHoverColor: value })}
+								setGlobalColor={(value) => setAttributes({ priceGlobalBorderHoverColor: value === undefined ? '' : value })}
 							/>
 						)}
 
