@@ -487,6 +487,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 separator: "solid",
                 separatorColor: "#399CFF",
                 headingBackgroundImageEnabled: false,
+                subHeadingSwitcher: false,
+                showSeparatorSwitcher: false,
+                headingBackgroundImageEnabled: false,
+                headingIconSwitcher: false,
                 headingTextShadowCssValue: "none",
                 headingColor: "",
                 headingTextStroke: {
@@ -517,6 +521,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 separator: "solid",
                 separatorColor: "#399CFF",
                 headingBackgroundImageEnabled: false,
+            },
+            "preset-1": {
+                subHeadingSwitcher: true,
+                showSeparatorSwitcher: false,
+                headingBackgroundImageEnabled: false,
+                headingIconSwitcher: false,
                 headingTextShadowCssValue: "0px 18px 0px #399cff1a;",
                 headingColor: "transparent",
                 headingTextStroke: {
@@ -546,6 +556,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 separator: "solid",
                 separatorColor: "#399CFF",
                 headingBackgroundImageEnabled: true,
+            },
+            "preset-2": {
+                subHeadingSwitcher: true,
+                subHeadingPosition: "bottom",
+                showSeparatorSwitcher: true,
+                separatorPosition: "bottom",
+                headingBackgroundImageEnabled: true,
+                headingIconSwitcher: false,
                 headingTextShadowCssValue: "none",
                 headingColor: "",
                 headingTextStroke: {
@@ -2450,7 +2468,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
 
         .${blockId} .fb-advanced-wrapper .fb-advanced-title-separator {
-            display: inline-flex;
+            display: inline-block;
             ${separator !== 'zigzag' && separatorWidth.Desktop && separatorWidthUnits.Desktop ? `width: ${separatorWidth.Desktop}${separatorWidthUnits.Desktop};` : ''}
             ${separator !== 'zigzag' && separatorHeight.Desktop && separatorHeightUnits.Desktop ? `border-top-width: ${separatorHeight.Desktop}${separatorHeightUnits.Desktop};` : ''}
             ${separator !== 'zigzag' ? `border-top-style: ${separator};` : ''}
@@ -2566,6 +2584,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
             .${blockId} .fb-advanced-icon-wrapper {
                 ${headingAlignment.Tablet ? `justify-content: ${headingAlignment.Tablet};` : ''}
+
                 ${headingIconTabletPaddingWidth && headingIconTabletPadding.top ? `padding: ${headingIconTabletPaddingWidth};` : ''}
                 width: auto;
             }
@@ -4199,7 +4218,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     spacingCombineBtnHandler={handleHeadingIconBorderRadiusCombineBtn}
                     setAttributes={setAttributes}
                 />
-                 <FB_Spacing
+
+                <FB_Spacing
                     label={__("Padding", "frontis-blocks")}
                     deviceType={deviceType}
                     spacingUnitsHandler={headingIconPaddingUnitsHandler}
@@ -4212,6 +4232,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     spacingCombineBtnHandler={headingIconPaddingLinkBtn}
                     setAttributes={setAttributes}
                 />
+
                 </PanelBody>
 
             )}

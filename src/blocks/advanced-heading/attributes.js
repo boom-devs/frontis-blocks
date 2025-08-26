@@ -963,6 +963,7 @@ const attributes = {
         type: 'object',
         default: {
             Desktop: 'auto',
+            Desktop: '50',
             Tablet: '',
             Mobile: ''
         }
@@ -973,6 +974,9 @@ const attributes = {
 			Desktop: '',
 			Tablet: '',
 			Mobile: '',
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
 		}
 	},
     headingIconColorSwitcher : {
@@ -982,6 +986,7 @@ const attributes = {
     headingIconColor : {
         type: 'string',
         default: '#399CFF',
+        default: '#399CFF'
     },
     headingIconHoverColor: {
         type: 'string',
@@ -1557,6 +1562,7 @@ const attributes = {
         type: 'object',
         default: {
             Desktop: '1',
+            Desktop: '2',
             Tablet: '',
             Mobile: ''
         }
