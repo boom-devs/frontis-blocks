@@ -11,13 +11,18 @@ import TemplateHeader from "./template-header";
 import TemplateSidebar from "./template-sidebar";
 import TemplateContent from "./template-content";
 import LibraryContent from "./library-content";
-import data from "./data.json";
+
+import patterns from "./data/patterns.json";
+import pages from "./data/pages.json";
+import sites from "./data/sites.json";
+import templateLibrary from "./data/templatelibrary.json";
+
+import { usePostDataMutation } from './services/api';
 
 const PatternLibraryButton = () => {
     const [showPatternButton, setShowPatternButton] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
 
     const handleClick = () => {
         setIsVisible(!isVisible);
@@ -65,23 +70,66 @@ const PatternLibraryButton = () => {
         });
     };
 
-    const schema = data.$schema;
-    const [activeTab, setActiveTab] = useState(Object.keys(schema)[0]);
-    const [activeCategory, setActiveCategory] = useState({ patterns: 'all', pages: 'all', sites: 'all', templateLibrary: 'my-cloud' });
+    const [data, setData] = useState({
+        patterns: { name: "Patterns", items: [], categories: [] },
+        pages: { name: "Pages", items: [], categories: [] },
+        sites: { name: "Sites", items: [], categories: [] },
+        templatelibrary: { name: "Template Library", items: [], categories: [] },
+    });
+
+    const [patternsData, { data: patternsResponse, error, isLoading }] = usePostDataMutation();
+
+    const getPattensData = async (value) => {
+        try {
+            const response = await patternsData({
+                endpoint: value,
+                body: {},
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).unwrap();
+            console.log('Response:', response);
+            setData(response); // Assuming API returns the new JSON structure
+        } catch (err) {
+            console.error('Error:', err);
+            console.error('Status:', err.status);
+            console.error('Data:', err.data);
+            if (err.status === 500) {
+                console.error('Server error. Check the API endpoint and server logs.');
+            }
+        }
+    };
+
+    useEffect(() => {
+        // For demo data, using imported JSON files with new structure
+        setData({
+            patterns,
+            pages,
+            sites,
+            templatelibrary: templateLibrary,
+        });
+    }, []);
+
+    const [activeTab, setActiveTab] = useState('patterns'); // Default to 'patterns'
+    const [activeCategory, setActiveCategory] = useState({ 
+        patterns: 'all', 
+        pages: 'all', 
+        sites: 'all', 
+        templatelibrary: 'my-cloud' 
+    });
     const [isProTemplate, setIsProTemplate] = useState('');
     const [activeTagTab, setActiveTagTab] = useState({
         patterns: '',
         pages: '',
         sites: '',
-        templateLibrary: ''
+        templatelibrary: ''
     });
     const [libraryData, setLibraryData] = useState([]);
 
     const TagTabsOptions = (() => {
-        const allTags = schema[activeTab]?.categories
-            ?.find(category => category.id === activeCategory[activeTab])
-            ?.items
-            ?.flatMap(item => item.tags || []) || [];
+        if (!data[activeTab]) return [];
+        const currentItems = data[activeTab].items || [];
+        const allTags = currentItems.flatMap(item => item.tags || []);
         const uniqueTags = [...new Set(allTags)].slice(0, 5);
         return uniqueTags.map(tag => ({
             name: tag,
@@ -92,24 +140,21 @@ const PatternLibraryButton = () => {
     return (
         <>
             <Button
-                onClick={() => handleClick()}
-                className={"fb-template-library-button"}
+                onClick={handleClick}
+                className="fb-template-library-button"
             >
                 <svg id="fb-global-panel-icon" xmlns="http://www.w3.org/2000/svg" fill="none">
-                    <path fill="currentColor"
-                        d="m19.455 11.997 2.408 1.396A2.282 2.282 0 0 1 23 15.373v1.479a2.297 2.297 0 0 1-1.138 1.981l-2.408 1.396-3.56 2.064-2.412 1.4a2.267 2.267 0 0 1-2.276 0l-2.408-1.4v-4.119l3.546 2.06 3.55-2.06 3.546-2.054-3.546-2.06-3.55-2.058 3.55-2.064 3.546-2.055-3.546-2.059-3.55-2.054-3.546-2.06 2.408-1.4a2.267 2.267 0 0 1 2.276 0l2.408 1.4 3.541 2.06 2.408 1.4a2.282 2.282 0 0 1 1.138 1.981v1.474a2.298 2.298 0 0 1-1.138 1.98l-2.385 1.392Z"></path>
-                    <path fill="currentColor"
-                        d="m8.802 5.828-3.541 2.05v12.354l-2.404-1.395a2.282 2.282 0 0 1-1.142-1.982V7.141A2.297 2.297 0 0 1 2.853 5.16l1.265-.732a2.267 2.267 0 0 1 2.276 0l2.408 1.4Z"></path>
-                    <path fill="currentColor"
-                        d="m15.896 9.938-3.55 2.06-2.409 1.395a2.267 2.267 0 0 1-2.276 0l-2.417-1.395L8.79 9.943l2.413-1.4a2.266 2.266 0 0 1 2.276 0l2.417 1.395Z"></path>
+                    <path fill="currentColor" d="m19.455 11.997 2.408 1.396A2.282 2.282 0 0 1 23 15.373v1.479a2.297 2.297 0 0 1-1.138 1.981l-2.408 1.396-3.56 2.064-2.412 1.4a2.267 2.267 0 0 1-2.276 0l-2.408-1.4v-4.119l3.546 2.06 3.55-2.06 3.546-2.054-3.546-2.06-3.55-2.058 3.55-2.064 3.546-2.055-3.546-2.059-3.55-2.054-3.546-2.06 2.408-1.4a2.267 2.267 0 0 1 2.276 0l2.408 1.4 3.541 2.06 2.408 1.4a2.282 2.282 0 0 1 1.138 1.981v1.474a2.298 2.298 0 0 1-1.138 1.98l-2.385 1.392Z"></path>
+                    <path fill="currentColor" d="m8.802 5.828-3.541 2.05v12.354l-2.404-1.395a2.282 2.282 0 0 1-1.142-1.982V7.141A2.297 2.297 0 0 1 2.853 5.16l1.265-.732a2.267 2.267 0 0 1 2.276 0l2.408 1.4Z"></path>
+                    <path fill="currentColor" d="m15.896 9.938-3.55 2.06-2.409 1.395a2.267 2.267 0 0 1-2.276 0l-2.417-1.395L8.79 9.943l2.413-1.4a2.266 2.266 0 0 1 2.276 0l2.417 1.395Z"></path>
                 </svg>
                 {__("Templates", "frontis-blocks")}
             </Button>
 
-            {isVisible &&
-                <Modal className={"fb-template-library-popover"} onRequestClose={handleClick}>
-                    <div className={`fb-template-library-store-wrap`}>
-                        <div className={`fb-template-library-store-inner-wrap`}>
+            {isVisible && (
+                <Modal className="fb-template-library-popover" onRequestClose={handleClick}>
+                    <div className="fb-template-library-store-wrap">
+                        <div className="fb-template-library-store-inner-wrap">
                             <div>
                                 <TemplateHeader
                                     activeTab={activeTab}
@@ -130,7 +175,7 @@ const PatternLibraryButton = () => {
                                     setActiveCategory={setActiveCategory}
                                     setActiveTagTab={setActiveTagTab}
                                 />
-                                {activeTab !== 'templateLibrary' && (
+                                {activeTab !== 'templatelibrary' && (
                                     <TemplateContent
                                         activeTab={activeTab}
                                         activeCategory={activeCategory}
@@ -142,7 +187,7 @@ const PatternLibraryButton = () => {
                                         TagTabsOptions={TagTabsOptions}
                                     />
                                 )}
-                                {activeTab === 'templateLibrary' && (
+                                {activeTab === 'templatelibrary' && (
                                     <LibraryContent
                                         activeTab={activeTab}
                                         activeCategory={activeCategory}
@@ -158,7 +203,7 @@ const PatternLibraryButton = () => {
                         </div>
                     </div>
                 </Modal>
-            }
+            )}
         </>
     );
 };
