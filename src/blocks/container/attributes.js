@@ -797,10 +797,10 @@ const attributes = {
     containerDesktopMargin: {
         type: 'object',
         default: {
-			top: '',
-            bottom: '',
-            left: '',
-            right: '',
+			top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     containerTabletMargin: {
