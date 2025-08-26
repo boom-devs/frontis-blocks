@@ -21,14 +21,7 @@
 		"anchor": false,
 		"align": ["wide", "full"],
         "customClassName": false,
-		"html": false,
-		"layout": {
-			"allowSwitching": false,
-			"allowInheriting": false,
-			"default": {
-				"type": "flex"
-			}
-		}
+		"html": false
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"
