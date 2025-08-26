@@ -125,6 +125,24 @@ function render_loop_builder($block_content, $block) {
 		// Run the query
 		$query = new WP_Query($default_query_args);
 
+
+
+    	global $wpdb;
+		$db_query = $wpdb->prepare("
+			SELECT *
+			FROM {$wpdb->posts}
+			WHERE post_type = %s
+			AND post_status = 'publish'
+		", 'post');
+
+		$count_query = "SELECT COUNT(*) FROM ($db_query) AS CountQuery";
+        $total_records = $wpdb->get_var($count_query);
+
+        /** Start Calculate total number of pages */
+        $total_pages = ceil($total_records / $per_page);
+
+
+
 		// Check if there are posts
 		if ($query->have_posts()) {
 			while ($query->have_posts()) {
@@ -153,6 +171,8 @@ function render_loop_builder($block_content, $block) {
 			$output .= '<p>No posts found.</p>';
 		}
 
+		$output .= '</div>';
+
 		// ===== Pagination render =====
 		if ( $pagination_block ) {
 			$total_posts_all = (int) $query->found_posts; // offset ছাড়া মোট
@@ -177,18 +197,10 @@ function render_loop_builder($block_content, $block) {
 			$prev_url = ( $has_prev && $paged > 1 ) ? get_pagenum_link( $paged - 1 ) : '';
 			$next_url = ( $has_next && $paged < $total_pages ) ? get_pagenum_link( $paged + 1 ) : '';
 
-			// justify-content ক্লাস/স্টাইল (আপনার CSS অনুযায়ী এডজাস্ট করুন)
-			$jc_map = [
-				'center'       => 'justify-center',
-				'flex-end'     => 'justify-end',
-				'space-between'=> 'justify-between',
-				'space-around' => 'justify-around',
-				'space-evenly' => 'justify-evenly',
-				'flex-start'   => 'justify-start',
-			];
-			$jc_class = $jc_map[ $justify_content ] ?? 'justify-start';
+			$output .= '<div class="fb-query-pagination-wrapper '. esc_attr($pagination_attrs["blockId"]) .'">';
 
-			$output .= '<nav class="fb-query-pagination ' . esc_attr( $jc_class ) . '" aria-label="Pagination">';
+
+			$output .= '<nav class="fb-query-pagination" aria-label="Pagination">';
 
 			if ( $has_prev ) {
 				$output .= '<span class="fb-page-prev'. ( $prev_url ? '' : ' is-disabled' ) .'">';
@@ -218,10 +230,10 @@ function render_loop_builder($block_content, $block) {
 			}
 
 			$output .= '</nav>';
+			$output .= '</div>';
 		}
 
-		// Close the wrapper
-		$output .= '</div>';
+		// Close the OUTER wrapper last
 		$output .= '</div>';
 
 		// Return the custom output for the frontend
