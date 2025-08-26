@@ -1698,7 +1698,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Color", "frontis-blocks")}
                         globalColor={progressColor}
-                        setGlobalColor={(value) => setAttributes({ progressColor: value })}
+                        setGlobalColor={(value) => setAttributes({ progressColor: value === undefined ? '' : value })}
                     />
                 </>)}
 
@@ -1716,11 +1716,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             }
                             normalClassicColor={progressColor}
                             setNormalClassicColor={(value) =>
-                                setAttributes({ progressColor: value })
+                                setAttributes({ progressColor: value === undefined ? '' : value })
                             }
                             normalGradientColor={progressGradientColor}
                             setNormalGradientColor={(value) =>
-                                setAttributes({ progressGradientColor: value })
+                                setAttributes({ progressGradientColor: value === undefined ? '' : value })
                             }
                             normalCustomGradientSwitcher={
                                 progressCustomGradientSwitcher
@@ -1799,7 +1799,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={progressBorderColor}
-                        setGlobalColor={(value) => setAttributes({ progressBorderColor: value })}
+                        setGlobalColor={(value) => setAttributes({ progressBorderColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1807,7 +1807,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={progressBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ progressBorderHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ progressBorderHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1866,7 +1866,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Color", "frontis-blocks")}
                         globalColor={progressBgColor}
-                        setGlobalColor={(value) => setAttributes({ progressBgColor: value })}
+                        setGlobalColor={(value) => setAttributes({ progressBgColor: value === undefined ? '' : value })}
                     />
                 </>)}
 
@@ -1884,11 +1884,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             }
                             normalClassicColor={progressBgColor}
                             setNormalClassicColor={(value) =>
-                                setAttributes({ progressBgColor: value })
+                                setAttributes({ progressBgColor: value === undefined ? '' : value })
                             }
                             normalGradientColor={progressBgGradientColor}
                             setNormalGradientColor={(value) =>
-                                setAttributes({ progressBgGradientColor: value })
+                                setAttributes({ progressBgGradientColor: value === undefined ? '' : value })
                             }
                             normalCustomGradientSwitcher={
                                 progressBgCustomGradientSwitcher
@@ -1967,7 +1967,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={progressBgBorderColor}
-                        setGlobalColor={(value) => setAttributes({ progressBgBorderColor: value })}
+                        setGlobalColor={(value) => setAttributes({ progressBgBorderColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1975,7 +1975,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={progressBgBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ progressBgBorderHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ progressBgBorderHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -2072,7 +2072,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={progressNumberColor}
-                        setGlobalColor={(value) => setAttributes({ progressNumberColor: value })}
+                        setGlobalColor={(value) => setAttributes({ progressNumberColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -2080,7 +2080,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={progressNumberHoverColor}
-                        setGlobalColor={(value) => setAttributes({ progressNumberHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ progressNumberHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -2163,7 +2163,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={progressTitleColor}
-                        setGlobalColor={(value) => setAttributes({ progressTitleColor: value })}
+                        setGlobalColor={(value) => setAttributes({ progressTitleColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -2171,7 +2171,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={progressTitleHoverColor}
-                        setGlobalColor={(value) => setAttributes({ progressTitleHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ progressTitleHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -2330,7 +2330,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Normal Color", "frontis-blocks")}
                                 globalColor={progressbarGlobalBorderColor}
-                                setGlobalColor={(value) => setAttributes({ progressbarGlobalBorderColor: value })}
+                                setGlobalColor={(value) => setAttributes({ progressbarGlobalBorderColor: value === undefined ? '' : value })}
                             />
                         )}
                         
@@ -2338,7 +2338,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Hover Color", "frontis-blocks")}
                                 globalColor={progressbarGlobalBorderHoverColor}
-                                setGlobalColor={(value) => setAttributes({ progressbarGlobalBorderHoverColor: value })}
+                                setGlobalColor={(value) => setAttributes({ progressbarGlobalBorderHoverColor: value === undefined ? '' : value })}
                             />
                         )}
 
@@ -2424,11 +2424,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             }
                             normalClassicColor={progressbarGlobalBgClassicColor}
                             setNormalClassicColor={(value) =>
-                                setAttributes({ progressbarGlobalBgClassicColor: value })
+                                setAttributes({ progressbarGlobalBgClassicColor: value === undefined ? '' : value })
                             }
                             normalGradientColor={progressbarGlobalBgGradientColor}
                             setNormalGradientColor={(value) =>
-                                setAttributes({ progressbarGlobalBgGradientColor: value })
+                                setAttributes({ progressbarGlobalBgGradientColor: value === undefined ? '' : value })
                             }
                             normalCustomGradientSwitcher={
                                 progressbarGlobalBgCustomGradientSwitcher
@@ -2492,11 +2492,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             }
                             hoverClassicColor={progressbarGlobalBgHoverClassicColor}
                             setHoverClassicColor={(value) =>
-                                setAttributes({ progressbarGlobalBgHoverClassicColor: value })
+                                setAttributes({ progressbarGlobalBgHoverClassicColor: value === undefined ? '' : value })
                             }
                             hoverGradientColor={progressbarGlobalBgHoverGradientColor}
                             setHoverGradientColor={(value) =>
-                                setAttributes({ progressbarGlobalBgHoverGradientColor: value })
+                                setAttributes({ progressbarGlobalBgHoverGradientColor: value === undefined ? '' : value })
                             }
                             hoverCustomGradientSwitcher={
                                 progressbarGlobalBgHoverCustomGradientSwitcher

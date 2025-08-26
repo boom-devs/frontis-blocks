@@ -2892,7 +2892,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={contactFormLabelColor}
-						setGlobalColor={(value) => setAttributes({ contactFormLabelColor: value })}
+						setGlobalColor={(value) => setAttributes({ contactFormLabelColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -2900,7 +2900,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={contactFormLabelHoverColor}
-						setGlobalColor={(value) => setAttributes({ contactFormLabelHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ contactFormLabelHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -2962,13 +2962,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				<FB_ColorControl
 					label={__("Background Color", "frontis-blocks")}
 					globalColor={contactFormInputBgColor}
-					setGlobalColor={(value) => setAttributes({ contactFormInputBgColor: value })}
+					setGlobalColor={(value) => setAttributes({ contactFormInputBgColor: value === undefined ? '' : value })}
 				/>
 
 				<FB_ColorControl
 					label={__("Color", "frontis-blocks")}
 					globalColor={contactFormInputColor}
-					setGlobalColor={(value) => setAttributes({ contactFormInputColor: value })}
+					setGlobalColor={(value) => setAttributes({ contactFormInputColor: value === undefined ? '' : value })}
 				/>
 
 
@@ -3141,7 +3141,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				<FB_ColorControl
 					label={__("Border Color", "frontis-blocks")}
 					globalColor={contactFormBorderColor}
-					setGlobalColor={(value) => setAttributes({ contactFormBorderColor: value })}
+					setGlobalColor={(value) => setAttributes({ contactFormBorderColor: value === undefined ? '' : value })}
 				/>
 
 				<FB_Spacing 
@@ -3182,7 +3182,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				<FB_ColorControl
 					label={__("Focus Color", "frontis-blocks")}
 					globalColor={contactFormInputFocusColor}
-					setGlobalColor={(value) => setAttributes({ contactFormInputFocusColor: value })}
+					setGlobalColor={(value) => setAttributes({ contactFormInputFocusColor: value === undefined ? '' : value })}
 				/>
 
 				<FB_Spacing 
@@ -3219,7 +3219,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				<FB_ColorControl
 					label={__("Color", "frontis-blocks")}
 					globalColor={contactFormPlaceholderColor}
-					setGlobalColor={(value) => setAttributes({ contactFormPlaceholderColor: value })}
+					setGlobalColor={(value) => setAttributes({ contactFormPlaceholderColor: value === undefined ? '' : value })}
 				/>
 			</PanelBody>
 
@@ -3331,7 +3331,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={contactFormSubmitColor}
-						setGlobalColor={(value) => setAttributes({ contactFormSubmitColor: value })}
+						setGlobalColor={(value) => setAttributes({ contactFormSubmitColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3339,7 +3339,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={contactFormSubmitHoverColor}
-						setGlobalColor={(value) => setAttributes({ contactFormSubmitHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ contactFormSubmitHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3354,7 +3354,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={contactFormSubmitBgColor}
-						setGlobalColor={(value) => setAttributes({ contactFormSubmitBgColor: value })}
+						setGlobalColor={(value) => setAttributes({ contactFormSubmitBgColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3362,7 +3362,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={contactFormSubmitBgHoverColor}
-						setGlobalColor={(value) => setAttributes({ contactFormSubmitBgHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ contactFormSubmitBgHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 				<FB_Spacing 
@@ -3408,7 +3408,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={contactFormSubmitBorderColor}
-						setGlobalColor={(value) => setAttributes({ contactFormSubmitBorderColor: value })}
+						setGlobalColor={(value) => setAttributes({ contactFormSubmitBorderColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3416,7 +3416,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={contactFormSubmitBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ contactFormSubmitBorderHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ contactFormSubmitBorderHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3508,13 +3508,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				<FB_ColorControl
 					label={__("Color", "frontis-blocks")}
 					globalColor={contactFormSuccessColor}
-					setGlobalColor={(value) => setAttributes({ contactFormSuccessColor: value })}
+					setGlobalColor={(value) => setAttributes({ contactFormSuccessColor: value === undefined ? '' : value })}
 				/>
 
 				<FB_ColorControl
 					label={__("Background Color", "frontis-blocks")}
 					globalColor={contactFormSuccessBgColor}
-					setGlobalColor={(value) => setAttributes({ contactFormSuccessBgColor: value })}
+					setGlobalColor={(value) => setAttributes({ contactFormSuccessBgColor: value === undefined ? '' : value })}
 				/>
 
 				<SelectControl
@@ -3534,7 +3534,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={contactFormSuccessBorderColor}
-						setGlobalColor={(value) => setAttributes({ contactFormSuccessBorderColor: value })}
+						setGlobalColor={(value) => setAttributes({ contactFormSuccessBorderColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3542,7 +3542,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={contactFormSuccessBorderHoverColor}
-						setGlobalColor={(value) => setAttributes({ contactFormSuccessBorderHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ contactFormSuccessBorderHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -3632,7 +3632,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				<FB_ColorControl
 					label={__("Color", "frontis-blocks")}
 					globalColor={contactFormErrorColor}
-					setGlobalColor={(value) => setAttributes({ contactFormErrorColor: value })}
+					setGlobalColor={(value) => setAttributes({ contactFormErrorColor: value === undefined ? '' : value })}
 				/>
 
 				<FB_Spacing 
@@ -3789,7 +3789,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
 								globalColor={contactFormGlobalBgColor}
-								setGlobalColor={(value) => setAttributes({ contactFormGlobalBgColor: value })}
+								setGlobalColor={(value) => setAttributes({ contactFormGlobalBgColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -3797,7 +3797,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={contactFormGlobalBgHoverColor}
-								setGlobalColor={(value) => setAttributes({ contactFormGlobalBgHoverColor: value })}
+								setGlobalColor={(value) => setAttributes({ contactFormGlobalBgHoverColor: value === undefined ? '' : value })}
 							/>
 						)}
 					</PanelBody>
@@ -3821,7 +3821,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
 								globalColor={contactFormGlobalBorderColor}
-								setGlobalColor={(value) => setAttributes({ contactFormGlobalBorderColor: value })}
+								setGlobalColor={(value) => setAttributes({ contactFormGlobalBorderColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -3829,7 +3829,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={contactFormGlobalBorderHoverColor}
-								setGlobalColor={(value) => setAttributes({ contactFormGlobalBorderHoverColor: value })}
+								setGlobalColor={(value) => setAttributes({ contactFormGlobalBorderHoverColor: value === undefined ? '' : value })}
 							/>
 						)}
 
