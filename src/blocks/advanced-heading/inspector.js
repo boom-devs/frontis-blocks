@@ -2469,7 +2469,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
         .${blockId} .fb-advanced-wrapper .fb-advanced-title-separator {
             display: inline-block;
-            ${separator !== 'zigzag' && separatorWidth.Desktop && separatorWidthUnits.Desktop ? `width: ${separatorWidth.Desktop}${separatorWidthUnits.Desktop};` : ''}
+            ${separator  && separatorWidth.Desktop && separatorWidthUnits.Desktop ? `width: ${separatorWidth.Desktop}${separatorWidthUnits.Desktop};` : ''}
             ${separator !== 'zigzag' && separatorHeight.Desktop && separatorHeightUnits.Desktop ? `border-top-width: ${separatorHeight.Desktop}${separatorHeightUnits.Desktop};` : ''}
             ${separator !== 'zigzag' ? `border-top-style: ${separator};` : ''}
             ${separator !== 'zigzag' && separatorColor ? `border-top-color: ${separatorColor};` : ''}
@@ -4036,36 +4036,34 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             setGlobalColor={(value) => setAttributes({ separatorHoverColor: value === undefined ? '' : value })}
                         />
                     )}
-
+                    <FB_Range
+                        min={1}
+                        max={1500}
+                        label={__("Width", "frontis-blocks")}
+                        rangeValue={separatorWidth}
+                        onChangeHandler={(value) => setAttributes({ separatorWidth: value })}
+                        rangeUnitHandler={(value) => setAttributes({ separatorWidthUnits: value })}
+                        deviceType={deviceType}
+                        units={separatorWidthUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={"100"}
+                    />
                     {separator !== 'zigzag' && (
-                        <>
-                            <FB_Range
-                                min={1}
-                                max={1500}
-                                label={__("Width", "frontis-blocks")}
-                                rangeValue={separatorWidth}
-                                onChangeHandler={(value) => setAttributes({ separatorWidth: value })}
-                                rangeUnitHandler={(value) => setAttributes({ separatorWidthUnits: value })}
-                                deviceType={deviceType}
-                                units={separatorWidthUnits}
-                                setAttributes={setAttributes}
-                                rangeStep={1}
-                                resetFallbackValue={"100"}
-                            />
-                            <FB_Range
-                                min={1}
-                                max={100}
-                                label={__("Height", "frontis-blocks")}
-                                rangeValue={separatorHeight}
-                                onChangeHandler={(value) => setAttributes({ separatorHeight: value })}
-                                rangeUnitHandler={(value) => setAttributes({ separatorHeightUnits: value })}
-                                deviceType={deviceType}
-                                units={separatorHeightUnits}
-                                setAttributes={setAttributes}
-                                rangeStep={1}
-                                resetFallbackValue={""}
-                            />
-                        </>
+                        <FB_Range
+                            min={1}
+                            max={100}
+                            label={__("Height", "frontis-blocks")}
+                            rangeValue={separatorHeight}
+                            onChangeHandler={(value) => setAttributes({ separatorHeight: value })}
+                            rangeUnitHandler={(value) => setAttributes({ separatorHeightUnits: value })}
+                            deviceType={deviceType}
+                            units={separatorHeightUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={""}
+                        />
+                        
                     )}
                     <FB_Range
                         min={1}
