@@ -1462,7 +1462,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={videoBorderColor}
-                        setGlobalColor={(value) => setAttributes({ videoBorderColor: value })}
+                        setGlobalColor={(value) => setAttributes({ videoBorderColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1470,7 +1470,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={videoBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ videoBorderHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ videoBorderHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1527,7 +1527,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={videoPlayIconColor}
-                        setGlobalColor={(value) => setAttributes({ videoPlayIconColor: value })}
+                        setGlobalColor={(value) => setAttributes({ videoPlayIconColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1535,7 +1535,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={videoPlayIconHoverColor}
-                        setGlobalColor={(value) => setAttributes({ videoPlayIconHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ videoPlayIconHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1549,7 +1549,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={videoPlayIconBgColor}
-                        setGlobalColor={(value) => setAttributes({ videoPlayIconBgColor: value })}
+                        setGlobalColor={(value) => setAttributes({ videoPlayIconBgColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1557,7 +1557,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={videoPlayIconBgHoverColor}
-                        setGlobalColor={(value) => setAttributes({ videoPlayIconBgHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ videoPlayIconBgHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1578,7 +1578,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={videoPlayIconBorderColor}
-                        setGlobalColor={(value) => setAttributes({ videoPlayIconBorderColor: value })}
+                        setGlobalColor={(value) => setAttributes({ videoPlayIconBorderColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1586,7 +1586,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={videoPlayIconBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ videoPlayIconBorderHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ videoPlayIconBorderHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -1757,7 +1757,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Normal Color", "frontis-blocks")}
                                 globalColor={videoGlobalBgColor}
-                                setGlobalColor={(value) => setAttributes({ videoGlobalBgColor: value })}
+                                setGlobalColor={(value) => setAttributes({ videoGlobalBgColor: value === undefined ? '' : value })}
                             />
                         )}
 
@@ -1765,7 +1765,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Hover Color", "frontis-blocks")}
                                 globalColor={videoGlobalBgHoverColor}
-                                setGlobalColor={(value) => setAttributes({ videoGlobalBgHoverColor: value })}
+                                setGlobalColor={(value) => setAttributes({ videoGlobalBgHoverColor: value === undefined ? '' : value })}
                             />
                         )}
                     </PanelBody>
@@ -1788,7 +1788,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Normal Color", "frontis-blocks")}
                                 globalColor={videoGlobalBorderColor}
-                                setGlobalColor={(value) => setAttributes({ videoGlobalBorderColor: value })}
+                                setGlobalColor={(value) => setAttributes({ videoGlobalBorderColor: value === undefined ? '' : value })}
                             />
                         )}
 
@@ -1796,7 +1796,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Hover Color", "frontis-blocks")}
                                 globalColor={videoGlobalBorderHoverColor}
-                                setGlobalColor={(value) => setAttributes({ videoGlobalBorderHoverColor: value })}
+                                setGlobalColor={(value) => setAttributes({ videoGlobalBorderHoverColor: value === undefined ? '' : value })}
                             />
                         )}
 
