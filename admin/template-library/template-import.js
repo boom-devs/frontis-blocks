@@ -46,7 +46,6 @@ const TemplateImport = ({ template, onClose }) => {
 		);
 	}
 
-	console.log(template);
 
 	return (
 		<div className="fb-template-import-modal">
