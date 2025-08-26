@@ -2505,8 +2505,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 </BaseControl>
 
                 <FB_Range
-                    min={1}
-                    max={100}
+                    min={0}
+                    max={FeatureListGapUnits === '%' ? 100 : 200}
                     label={__("List Gap", "frontis-blocks")}
                     rangeValue={FeatureListGap}
                     onChangeHandler={(value) => setAttributes({ FeatureListGap: value })}
@@ -2515,7 +2515,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     units={FeatureListGapUnits}
                     setAttributes={setAttributes}
                     rangeStep={1}
-                    resetFallbackValue={"20"}
+                    resetFallbackValue={''}
                 />
             </PanelBody>
 
