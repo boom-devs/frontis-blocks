@@ -5,8 +5,10 @@ import { useState, useCallback } from "@wordpress/element";
 import { ClipLoader } from "react-spinners";
 import TemplateHeader from "./template-header";
 import FullSiteImport from "./full-site-import";
+import { category } from "@wordpress/icons";
 
 const TemplateImport = ({ template, onClose, data }) => {
+    console.log('cat', template.categories)
     const [isImporting, setIsImporting] = useState(false);
     const [activeTab, setActiveTab] = useState('patterns');
     const [showFullSiteImport, setShowFullSiteImport] = useState(false);
@@ -34,9 +36,10 @@ const TemplateImport = ({ template, onClose, data }) => {
 
     // Map category IDs to names
     const categoryNames = template.categories
-        ?.map(categoryId => {
-            const category = data[activeTab]?.categories?.find(cat => cat.id === categoryId);
-            return category?.name;
+        ?.map(category => {
+            // const category = data[activeTab]?.categories?.find(cat => cat.id === categoryId);
+            // return category?.name;
+            return category;
         })
         .filter(name => name)
         .join(', ');
@@ -69,7 +72,7 @@ const TemplateImport = ({ template, onClose, data }) => {
                     <div className="fb-template-import-main">
                         <div className="fb-template-preview">
                             <img
-                                src={template.image}
+                                src={`https://leech-better-moose.ngrok-free.app/storage/${template.image}`}
                                 alt={template.title}
                                 className="fb-template-preview-image"
                             />

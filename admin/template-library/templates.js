@@ -15,7 +15,7 @@ import LibraryContent from "./library-content";
 import patterns from "./data/patterns.json";
 import pages from "./data/pages.json";
 import sites from "./data/sites.json";
-import templateLibrary from "./data/templatelibrary.json";
+import TemplateLibrary from "./data/templatelibrary.json";
 
 import { usePostDataMutation } from './services/api';
 
@@ -23,6 +23,7 @@ const PatternLibraryButton = () => {
     const [showPatternButton, setShowPatternButton] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [resetCat, setResetCat] = useState(true);
 
     const handleClick = () => {
         setIsVisible(!isVisible);
@@ -79,7 +80,8 @@ const PatternLibraryButton = () => {
 
     const [patternsData, { data: patternsResponse, error, isLoading }] = usePostDataMutation();
 
-    const getPattensData = async (value) => {
+
+    const getTemplatesData = async (value) => {
         try {
             const response = await patternsData({
                 endpoint: value,
@@ -88,8 +90,8 @@ const PatternLibraryButton = () => {
                     'Content-Type': 'application/json',
                 },
             }).unwrap();
-            console.log('Response:', response);
-            setData(response); // Assuming API returns the new JSON structure
+
+            return response;
         } catch (err) {
             console.error('Error:', err);
             console.error('Status:', err.status);
@@ -101,21 +103,64 @@ const PatternLibraryButton = () => {
     };
 
     useEffect(() => {
-        // For demo data, using imported JSON files with new structure
-        setData({
-            patterns,
-            pages,
-            sites,
-            templatelibrary: templateLibrary,
-        });
+        const fetchData = async () => {
+            const patterns = await getTemplatesData("patterns");
+            const pages = await getTemplatesData("pages");
+            const sites = await getTemplatesData("sites");
+
+            if (patterns) {
+                setData((prev) => ({
+                    ...prev,
+                    patterns: {
+                        ...prev.patterns,
+                        items: patterns.items || [],
+                        categories: patterns.categories || [],
+                    },
+                }));
+            }
+
+            if (pages) {
+                setData((prev) => ({
+                    ...prev,
+                    pages: {
+                        ...prev.pages,
+                        items: pages.items || [],
+                        categories: pages.categories || [],
+                    },
+                }));
+            }
+
+            if (sites) {
+                setData((prev) => ({
+                    ...prev,
+                    sites: {
+                        ...prev.sites,
+                        items: sites.items || [],
+                        categories: sites.categories || [],
+                    },
+                }));
+            }
+
+            setData((prev) => ({
+                ...prev,
+                templatelibrary: {
+                    ...prev.templatelibrary,
+                    items: TemplateLibrary.items || [],
+                    categories: TemplateLibrary.categories || []
+                }
+            }));
+        };
+
+        fetchData();
     }, []);
 
+
     const [activeTab, setActiveTab] = useState('patterns'); // Default to 'patterns'
-    const [activeCategory, setActiveCategory] = useState({ 
-        patterns: 'all', 
-        pages: 'all', 
-        sites: 'all', 
-        templatelibrary: 'my-cloud' 
+    const [activeCategory, setActiveCategory] = useState({
+        patterns: 'all',
+        pages: 'all',
+        sites: 'all',
+        templatelibrary: 'my-cloud'
     });
     const [isProTemplate, setIsProTemplate] = useState('');
     const [activeTagTab, setActiveTagTab] = useState({
@@ -163,6 +208,9 @@ const PatternLibraryButton = () => {
                                     onClose={() => setIsVisible(false)}
                                     setIsProTemplate={setIsProTemplate}
                                     setActiveTagTab={setActiveTagTab}
+                                    setActiveCategory={setActiveCategory}
+                                    resetCat={resetCat}
+                                    setResetCat={setResetCat}
                                 />
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">
@@ -174,6 +222,8 @@ const PatternLibraryButton = () => {
                                     setIsProTemplate={setIsProTemplate}
                                     setActiveCategory={setActiveCategory}
                                     setActiveTagTab={setActiveTagTab}
+                                    resetCat={resetCat}
+                                    setResetCat={setResetCat}
                                 />
                                 {activeTab !== 'templatelibrary' && (
                                     <TemplateContent
@@ -181,6 +231,7 @@ const PatternLibraryButton = () => {
                                         activeCategory={activeCategory}
                                         setLibraryData={setLibraryData}
                                         data={data}
+                                        setIsVisible={setIsVisible}
                                         isProTemplate={isProTemplate}
                                         activeTagTab={activeTagTab[activeTab]}
                                         setActiveTagTab={(value) => setActiveTagTab({ ...activeTagTab, [activeTab]: value })}

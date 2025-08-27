@@ -33,7 +33,7 @@ const TemplateLibraryIcon = () => (
     </svg>
 );
 
-const TemplateHeader = ({ activeTab, setActiveTab, data, onClose, setIsProTemplate, setActiveTagTab }) => {
+const TemplateHeader = ({ activeTab, setActiveTab, data, onClose, setIsProTemplate, setActiveTagTab, setActiveCategory, setResetCat }) => {
     const schema = data;
     const tabs = Object.keys(schema).map((key) => ({
         id: key,
@@ -51,51 +51,59 @@ const TemplateHeader = ({ activeTab, setActiveTab, data, onClose, setIsProTempla
                         <button
                             key={tab.id}
                             className={`single-tab ${activeTab === tab.id ? 'active' : ''}`}
-                            onClick={() => {
-                                setActiveTab(tab.id);
-                                setIsProTemplate('');
-                            }}
+                           onClick={() => {
+                            setActiveTab(tab.id);
+                            setIsProTemplate('');
+                            setActiveCategory((prev) => ({
+                                ...prev,
+                                patterns: 'all',
+                                pages: 'all',
+                                sites: 'all',
+                            }));
+                            setResetCat(true);
+                        }}
+
                         >
-                            <span>{tab.label}</span>
-                        </button>
+                    <span>{tab.label}</span>
+                </button>
                     ))}
-                </div>
-                <div className="fb-template-library-header-right">
-                    <div className="fb-template-library-support-btn-wrapper">
-                        <button className="fb-template-library-support-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M14.1666 9.83773C14.1666 9.54965 14.1666 9.40565 14.21 9.27732C14.336 8.90432 14.6681 8.75965 15.0009 8.60807C15.375 8.43765 15.562 8.35248 15.7473 8.33748C15.9577 8.32047 16.1685 8.36582 16.3483 8.46673C16.5867 8.60048 16.753 8.85473 16.9232 9.06148C17.7094 10.0163 18.1024 10.4938 18.2462 11.0203C18.3623 11.4452 18.3623 11.8895 18.2462 12.3143C18.0365 13.0822 17.3737 13.726 16.8831 14.3218C16.6322 14.6266 16.5067 14.779 16.3483 14.8679C16.1685 14.9688 15.9577 15.0142 15.7473 14.9972C15.562 14.9822 15.375 14.897 15.0009 14.7266C14.6681 14.575 14.336 14.4303 14.21 14.0573C14.1666 13.929 14.1666 13.785 14.1666 13.4969V9.83773Z" stroke="white" stroke-width="1.5" />
-                                <path d="M5.83329 9.83779C5.83329 9.47513 5.82311 9.14913 5.52988 8.89413C5.42323 8.80138 5.28183 8.73696 4.99905 8.60813C4.62497 8.43779 4.43793 8.35263 4.25259 8.33763C3.69655 8.29263 3.39739 8.67213 3.07673 9.06163C2.29058 10.0165 1.89751 10.4939 1.75368 11.0204C1.63761 11.4453 1.63761 11.8896 1.75368 12.3145C1.96346 13.0824 2.62623 13.726 3.1168 14.322C3.42603 14.6975 3.72143 15.0402 4.25259 14.9973C4.43793 14.9823 4.62497 14.897 4.99905 14.7267C5.28183 14.5979 5.42323 14.5335 5.52988 14.4407C5.82311 14.1857 5.83329 13.8598 5.83329 13.497V9.83779Z" stroke="white" stroke-width="1.5" />
-                                <path d="M16.6667 8.74935V7.49935C16.6667 4.27769 13.682 1.66602 10 1.66602C6.31814 1.66602 3.33337 4.27769 3.33337 7.49935V8.74935" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M16.6667 14.584C16.6667 18.334 13.3333 18.334 10 18.334" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            <span>Talk to Support</span>
-                        </button>
-                    </div>
-                    <div className="fb-template-library-user-profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10ZM12 20.5C13.784 20.5 15.4397 19.9504 16.8069 19.0112C17.4108 18.5964 17.6688 17.8062 17.3178 17.1632C16.59 15.8303 15.0902 15 11.9999 15C8.90969 15 7.40997 15.8302 6.68214 17.1632C6.33105 17.8062 6.5891 18.5963 7.19296 19.0111C8.56018 19.9503 10.2159 20.5 12 20.5Z" fill="#3991FF" />
+            </div>
+            <div className="fb-template-library-header-right">
+                <div className="fb-template-library-support-btn-wrapper">
+                    <button className="fb-template-library-support-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M14.1666 9.83773C14.1666 9.54965 14.1666 9.40565 14.21 9.27732C14.336 8.90432 14.6681 8.75965 15.0009 8.60807C15.375 8.43765 15.562 8.35248 15.7473 8.33748C15.9577 8.32047 16.1685 8.36582 16.3483 8.46673C16.5867 8.60048 16.753 8.85473 16.9232 9.06148C17.7094 10.0163 18.1024 10.4938 18.2462 11.0203C18.3623 11.4452 18.3623 11.8895 18.2462 12.3143C18.0365 13.0822 17.3737 13.726 16.8831 14.3218C16.6322 14.6266 16.5067 14.779 16.3483 14.8679C16.1685 14.9688 15.9577 15.0142 15.7473 14.9972C15.562 14.9822 15.375 14.897 15.0009 14.7266C14.6681 14.575 14.336 14.4303 14.21 14.0573C14.1666 13.929 14.1666 13.785 14.1666 13.4969V9.83773Z" stroke="white" stroke-width="1.5" />
+                            <path d="M5.83329 9.83779C5.83329 9.47513 5.82311 9.14913 5.52988 8.89413C5.42323 8.80138 5.28183 8.73696 4.99905 8.60813C4.62497 8.43779 4.43793 8.35263 4.25259 8.33763C3.69655 8.29263 3.39739 8.67213 3.07673 9.06163C2.29058 10.0165 1.89751 10.4939 1.75368 11.0204C1.63761 11.4453 1.63761 11.8896 1.75368 12.3145C1.96346 13.0824 2.62623 13.726 3.1168 14.322C3.42603 14.6975 3.72143 15.0402 4.25259 14.9973C4.43793 14.9823 4.62497 14.897 4.99905 14.7267C5.28183 14.5979 5.42323 14.5335 5.52988 14.4407C5.82311 14.1857 5.83329 13.8598 5.83329 13.497V9.83779Z" stroke="white" stroke-width="1.5" />
+                            <path d="M16.6667 8.74935V7.49935C16.6667 4.27769 13.682 1.66602 10 1.66602C6.31814 1.66602 3.33337 4.27769 3.33337 7.49935V8.74935" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M16.6667 14.584C16.6667 18.334 13.3333 18.334 10 18.334" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                    </div>
-                    <div className="fb-template-library-close-btn">
-                        <button
-                            className="fb-template-library-close-btn"
-                            onClick={() => {
-                                if (typeof onClose === 'function') {
-                                    onClose();
-                                    console.log("close");
-                                }
-                            }}
-                            aria-label="Close"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M6 18L18 6M6 6L18 18" stroke="#404655" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </button>
-                    </div>
+                        <span>Talk to Support</span>
+                    </button>
+                </div>
+                <div className="fb-template-library-user-profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10ZM12 20.5C13.784 20.5 15.4397 19.9504 16.8069 19.0112C17.4108 18.5964 17.6688 17.8062 17.3178 17.1632C16.59 15.8303 15.0902 15 11.9999 15C8.90969 15 7.40997 15.8302 6.68214 17.1632C6.33105 17.8062 6.5891 18.5963 7.19296 19.0111C8.56018 19.9503 10.2159 20.5 12 20.5Z" fill="#3991FF" />
+                    </svg>
+                </div>
+                <div className="fb-template-library-close-btn">
+                    <button
+                        className="fb-template-library-close-btn"
+                        onClick={() => {
+                            if (typeof onClose === 'function') {
+                                onClose();
+                                console.log("close");
+                            }
+                        }}
+                        aria-label="Close"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M6 18L18 6M6 6L18 18" stroke="#404655" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
+        </div >
     );
 };
 
