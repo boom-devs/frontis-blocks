@@ -65,6 +65,94 @@ const attributes = {
 	},
 
 
+	/** Start Pagination Wrapper */
+	paginationWrapperPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationWrapperDesktopPadding: {
+		type: 'object', 
+		default: {
+			top: '40',
+			bottom: '40',
+			left: '24',
+			right: '24',
+		},
+	},
+	paginationWrapperTabletPadding: {
+		type: 'object', 
+		default: {
+			top: '40',
+			bottom: '40',
+			left: '24',
+			right: '24',
+		},
+	},
+	paginationWrapperMobilePadding: {
+		type: 'object', 
+		default: {
+			top: '30',
+			bottom: '30',
+			left: '16',
+			right: '16',
+		},
+	},
+	paginationWrapperPaddingLink: {
+		type: 'boolean',
+		default: true
+	},
+
+
+
+	paginationWrapperMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationWrapperDesktopMargin: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationWrapperTabletMargin: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationWrapperMobileMargin: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationWrapperMarginLink: {
+		type: 'boolean',
+		default: true
+	},
+
+	/** End Pagination Wrapper */
+
+
+
+
     /** Pagination Arrow */
 	paginationArrowSize: {
 		type: 'object',

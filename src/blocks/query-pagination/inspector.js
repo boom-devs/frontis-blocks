@@ -63,6 +63,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         paginationItemGap,
         paginationItemGapUnits,
 
+        paginationWrapperPaddingUnits,
+        paginationWrapperDesktopPadding,
+        paginationWrapperTabletPadding,
+        paginationWrapperMobilePadding,
+        paginationWrapperPaddingLink,
+
+        paginationWrapperMarginUnits,
+        paginationWrapperDesktopMargin,
+        paginationWrapperTabletMargin,
+        paginationWrapperMobileMargin,
+        paginationWrapperMarginLink,
+
         /** Start Pagination */
         paginationPrevNextType,
         paginationPrevTxt,
@@ -220,6 +232,152 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({paginationNextIcon: IconName})
 	}
 
+        /** Start Pagination Wrapper Padding */
+	const handlePaginationWrapperPaddingUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( paginationWrapperPaddingLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						paginationWrapperDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						paginationWrapperTabletPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						paginationWrapperMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {paginationWrapperDesktopPadding: {...paginationWrapperDesktopPadding, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {paginationWrapperTabletPadding: {...paginationWrapperTabletPadding, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {paginationWrapperMobilePadding: {...paginationWrapperMobilePadding, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handlePaginationWrapperPaddingCombineBtn = () => {
+		setAttributes( {paginationWrapperPaddingLink: !paginationWrapperPaddingLink} ); 
+	}
+
+	const handlePaginationWrapperPaddingUnitsHandler = (unit) => {
+		setAttributes( {
+			paginationWrapperPaddingUnits: {
+				...paginationWrapperPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const paginationWrapperDesktopPaddingWidth = `${paginationWrapperDesktopPadding.top}${paginationWrapperPaddingUnits.Desktop} ${paginationWrapperDesktopPadding.right}${paginationWrapperPaddingUnits.Desktop} ${paginationWrapperDesktopPadding.bottom}${paginationWrapperPaddingUnits.Desktop} ${paginationWrapperDesktopPadding.left}${paginationWrapperPaddingUnits.Desktop}`;
+	const paginationWrapperTabletPaddingWidth = `${paginationWrapperTabletPadding.top}${paginationWrapperPaddingUnits.Tablet} ${paginationWrapperTabletPadding.right}${paginationWrapperPaddingUnits.Tablet} ${paginationWrapperTabletPadding.bottom}${paginationWrapperPaddingUnits.Tablet} ${paginationWrapperTabletPadding.left}${paginationWrapperPaddingUnits.Tablet}`;
+	const paginationWrapperMobilePaddingWidth = `${paginationWrapperMobilePadding.top}${paginationWrapperPaddingUnits.Mobile} ${paginationWrapperMobilePadding.right}${paginationWrapperPaddingUnits.Mobile} ${paginationWrapperMobilePadding.bottom}${paginationWrapperPaddingUnits.Mobile} ${paginationWrapperMobilePadding.left}${paginationWrapperPaddingUnits.Mobile}`;
+	/** End Pagination Wrapper Padding */
+
+
+     /** Start Pagination Wrapper Margin */
+	const handlePaginationWrapperMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( paginationWrapperMarginLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						paginationWrapperDesktopMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						paginationWrapperTabletMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						paginationWrapperMobileMargin: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {paginationWrapperDesktopMargin: {...paginationWrapperDesktopMargin, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {paginationWrapperTabletMargin: {...paginationWrapperTabletMargin, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {paginationWrapperMobileMargin: {...paginationWrapperMobileMargin, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handlePaginationWrapperMarginCombineBtn = () => {
+		setAttributes( {paginationWrapperMarginLink: !paginationWrapperMarginLink} );
+	}
+
+	const handlePaginationWrapperMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			paginationWrapperMarginUnits: {
+				...paginationWrapperMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const paginationWrapperDesktopMarginWidth = `${paginationWrapperDesktopMargin.top}${paginationWrapperMarginUnits.Desktop} ${paginationWrapperDesktopMargin.right}${paginationWrapperMarginUnits.Desktop} ${paginationWrapperDesktopMargin.bottom}${paginationWrapperMarginUnits.Desktop} ${paginationWrapperDesktopMargin.left}${paginationWrapperMarginUnits.Desktop}`;
+	const paginationWrapperTabletMarginWidth = `${paginationWrapperTabletMargin.top}${paginationWrapperMarginUnits.Tablet} ${paginationWrapperTabletMargin.right}${paginationWrapperMarginUnits.Tablet} ${paginationWrapperTabletMargin.bottom}${paginationWrapperMarginUnits.Tablet} ${paginationWrapperTabletMargin.left}${paginationWrapperMarginUnits.Tablet}`;
+	const paginationWrapperMobileMarginWidth = `${paginationWrapperMobileMargin.top}${paginationWrapperMarginUnits.Mobile} ${paginationWrapperMobileMargin.right}${paginationWrapperMarginUnits.Mobile} ${paginationWrapperMobileMargin.bottom}${paginationWrapperMarginUnits.Mobile} ${paginationWrapperMobileMargin.left}${paginationWrapperMarginUnits.Mobile}`;
+	/** End Pagination Wrapper Margin */
 
     /** Start Pagination Arrow Border */
 	const handlePaginationArrowBorderUnitChange = ( event, position ) => {
@@ -519,6 +677,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             align-items: center;
             ${paginationAlignment[deviceType] ? `justify-content: ${paginationAlignment[deviceType]};` : ''}
             ${paginationItemGap[deviceType] ? `gap: ${paginationItemGap[deviceType]}${paginationItemGapUnits[deviceType]};` : ''}
+
+            ${paginationWrapperDesktopPaddingWidth && paginationWrapperDesktopPadding?.top ? `padding: ${paginationWrapperDesktopPaddingWidth};` : ''}
+            ${paginationWrapperDesktopMarginWidth && paginationWrapperDesktopMargin?.top ? `margin: ${paginationWrapperDesktopMarginWidth};` : ''}
+            
         }
 
         .${blockId} .fb-query-pagination .fb-page-prev,
@@ -670,6 +832,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     paginationAlignment,
     paginationItemGap,
     paginationItemGapUnits,
+
+    paginationWrapperPaddingUnits,
+    paginationWrapperDesktopPadding,
+    paginationWrapperTabletPadding,
+    paginationWrapperMobilePadding,
+    paginationWrapperPaddingLink,
+    paginationWrapperDesktopPaddingWidth,
+    paginationWrapperTabletPaddingWidth,
+    paginationWrapperMobilePaddingWidth,
+
+    paginationWrapperMarginUnits,
+    paginationWrapperDesktopMargin,
+    paginationWrapperTabletMargin,
+    paginationWrapperMobileMargin,
+    paginationWrapperMarginLink,
+    paginationWrapperDesktopMarginWidth,
+    paginationWrapperTabletMarginWidth,
+    paginationWrapperMobileMarginWidth,
 
     /** Start Pagination */
     paginationPrevNextType,
@@ -834,7 +1014,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const generalControls = (
         <>
             <PanelBody
-                title={__("General", "frontis-blocks")} 
+                title={__("Pagination", "frontis-blocks")}
                 initialOpen={true}
             >
                 <FB_ResponsiveAlignmentControl
@@ -844,25 +1024,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     deviceType={deviceType}
                     setAttributes={setAttributes}
                 />
-                <FB_Range
-                    min={0}
-                    max={paginationItemGapUnits[deviceType] === '%' ? 100 : 500}
-                    label={__("Item Gap", "frontis-blocks")}
-                    rangeValue={paginationItemGap}
-                    onChangeHandler={(value) => setAttributes({ paginationItemGap: value })}
-                    rangeUnitHandler={(value) => setAttributes({ paginationItemGapUnits: value })}
-                    deviceType={deviceType}
-                    units={paginationItemGapUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={""}
-                />
-            </PanelBody>
-
-            <PanelBody
-                title={__("Pagination", "frontis-blocks")}
-                initialOpen={false}
-            >
                 <SelectControl
                     label={__("Type", "frontis-blocks")}
                     value={paginationPrevNextType}
@@ -910,6 +1071,57 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	 */
 	const styleControls = (
         <>
+
+            <PanelBody
+                title={__("Pagination Wrapper", "frontis-blocks")} 
+                initialOpen={true}
+             >
+
+                <FB_Range
+                    min={0}
+                    max={paginationItemGapUnits[deviceType] === '%' ? 100 : 500}
+                    label={__("Item Gap", "frontis-blocks")}
+                    rangeValue={paginationItemGap}
+                    onChangeHandler={(value) => setAttributes({ paginationItemGap: value })}
+                    rangeUnitHandler={(value) => setAttributes({ paginationItemGapUnits: value })}
+                    deviceType={deviceType}
+                    units={paginationItemGapUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+
+                <FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handlePaginationWrapperPaddingUnitsHandler}
+                    spacingUnits={paginationWrapperPaddingUnits}
+                    spacingDesktop={paginationWrapperDesktopPadding}
+                    spacingTablet={paginationWrapperTabletPadding}
+                    spacingMobile={paginationWrapperMobilePadding}
+                    handleSpacingUnitHandler={handlePaginationWrapperPaddingUnitChange}
+                    spacingCombineBtn={paginationWrapperPaddingLink}
+                    spacingCombineBtnHandler={handlePaginationWrapperPaddingCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handlePaginationWrapperMarginUnitsHandler}
+                    spacingUnits={paginationWrapperMarginUnits}
+                    spacingDesktop={paginationWrapperDesktopMargin}
+                    spacingTablet={paginationWrapperTabletMargin}
+                    spacingMobile={paginationWrapperMobileMargin}
+                    handleSpacingUnitHandler={handlePaginationWrapperMarginUnitChange}
+                    spacingCombineBtn={paginationWrapperMarginLink}
+                    spacingCombineBtnHandler={handlePaginationWrapperMarginCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+            </PanelBody>
+
+
             <PanelBody
                 title={__("Pagination Arrows", "frontis-blocks")} 
                 initialOpen={true}
