@@ -126,6 +126,7 @@ function render_loop_builder($block_content, $block) {
 
 		// Start output buffering
 		ob_start();
+
 		?>
 
 		<!-- Wrapper শুরু -->
@@ -191,67 +192,67 @@ function render_loop_builder($block_content, $block) {
 				$next_url = ( $has_next && $current_page < $total_pages ) ? get_pagenum_link( $current_page + 1 ) : '';
 				?>
 
-				<div class="fb-query-pagination-wrapper <?php echo esc_attr($pagination_attrs["blockId"]); ?>">
+				<div
+				class="fb-query-pagination-wrapper <?php echo esc_attr( $pagination_attrs['blockId'] ); ?>"
+				data-pagination-prev-icon="<?php echo esc_attr( $paginationPrevIcon ); ?>"
+				data-pagination-next-icon="<?php echo esc_attr( $paginationNextIcon ); ?>"
+				>
 					<nav class="fb-query-pagination" aria-label="Pagination">
-
-						<?php if ( $has_prev ): ?>
-							<button class="fb-page-prev<?php echo ( $prev_url ? '' : ' is-disabled' ); ?>">
-								<?php if ( $prev_url ): ?>
-									<a class="fb-pagination-prev-text" href="<?php echo esc_url( $prev_url ); ?>" rel="prev" aria-label="Previous page">
-										<?php if ( $paginationPrevNextType === 'icon' ): ?>
-											<div class='fb-pagination-icon'></div>
-										<?php endif; ?>
-										<?php if ( $paginationPrevNextType === 'text' ): ?>
-											<?php echo esc_html($paginationPrevTxt); ?>
-										<?php endif; ?>
-									</a>
-								<?php else: ?>
-									<span class="fb-pagination-prev-text" aria-disabled="true">
-										<?php if ( $paginationPrevNextType === 'icon' ): ?>
-											<div class='fb-pagination-icon'></div>
-										<?php endif; ?>
-										<?php if ( $paginationPrevNextType === 'text' ): ?>
-											<?php echo esc_html($paginationPrevTxt); ?>
-										<?php endif; ?>
-									</span>
+						<?php if ( $has_prev ) : ?>
+							<?php if ( $prev_url ) : ?>
+								<a class="fb-page-prev" href="<?php echo esc_url( $prev_url ); ?>" rel="prev" aria-label="Previous page" >
+								<?php if ( $paginationPrevNextType === 'icon' ) : ?>
+									<span class="fb-pagination-icon" aria-hidden="true"></span>
+								<?php else : ?>
+									<?php echo esc_html( $paginationPrevTxt ); ?>
 								<?php endif; ?>
-							</button>
-						<?php endif; ?>
-
-						<?php if ( $has_nums && !empty($number_links) ): ?>
-							<div class="fb-page-numbers">
-								<?php 
-								echo implode( '', $number_links );
-								?>
-							</div>
-						<?php endif; ?>
-
-						<?php if ( $has_next ): ?>
-							<button class="fb-page-next<?php echo ( $next_url ? '' : ' is-disabled' ); ?>">
-								<?php if ( $next_url ): ?>
-									<a class="fb-pagination-next-text" href="<?php echo esc_url( $next_url ); ?>" rel="next" aria-label="Next page">
-										<?php if ( $paginationPrevNextType === 'icon' ): ?>
-											<div class='fb-pagination-icon'></div>
-										<?php endif; ?>
-										<?php if ( $paginationPrevNextType === 'text' ): ?>
-											<?php echo esc_html($paginationNextTxt); ?>
-										<?php endif; ?>
-									</a>
-								<?php else: ?>
-									<span class="fb-pagination-next-text" aria-disabled="true">
-										<?php if ( $paginationPrevNextType === 'icon' ): ?>
-											<div class='fb-pagination-icon'></div>
-										<?php endif; ?>
-										<?php if ( $paginationPrevNextType === 'text' ): ?>
-											<?php echo esc_html($paginationNextTxt); ?>
-										<?php endif; ?>
-									</span>
+								</a>
+							<?php else : ?>
+								<span
+								class="fb-page-prev is-disabled"
+								aria-disabled="true"
+								>
+								<?php if ( $paginationPrevNextType === 'icon' ) : ?>
+									<span class="fb-pagination-icon" aria-hidden="true"></span>
+								<?php else : ?>
+									<?php echo esc_html( $paginationPrevTxt ); ?>
 								<?php endif; ?>
-							</button>
+								</span>
+							<?php endif; ?>
 						<?php endif; ?>
 
+						<?php if ( $has_nums && ! empty( $number_links ) ) : ?>
+						<div class="fb-page-numbers">
+							<?php echo implode( '', $number_links ); ?>
+						</div>
+						<?php endif; ?>
+
+						<?php if ( $has_next ) : ?>
+							<?php if ( $next_url ) : ?>
+								<a class="fb-page-next" href="<?php echo esc_url( $next_url ); ?>" rel="next" aria-label="Next page" >
+								<?php if ( $paginationPrevNextType === 'icon' ) : ?>
+									<span class="fb-pagination-icon" aria-hidden="true"></span>
+								<?php else : ?>
+									<?php echo esc_html( $paginationNextTxt ); ?>
+								<?php endif; ?>
+								</a>
+							<?php else : ?>
+								<span
+								class="fb-page-next is-disabled"
+								aria-disabled="true"
+								>
+								<?php if ( $paginationPrevNextType === 'icon' ) : ?>
+									<span class="fb-pagination-icon" aria-hidden="true"></span>
+								<?php else : ?>
+									<?php echo esc_html( $paginationNextTxt ); ?>
+								<?php endif; ?>
+								</span>
+							<?php endif; ?>
+						<?php endif; ?>
 					</nav>
 				</div>
+
+
 
 			<?php endif; ?>
 
