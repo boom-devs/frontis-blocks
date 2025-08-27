@@ -244,7 +244,7 @@ function render_loop_builder($block_content, $block) {
 								<?php if ( $paginationPrevNextType === 'icon' ) : ?>
 									<span class="fb-pagination-icon" aria-hidden="true"></span>
 								<?php else : ?>
-									<span class="fb-pagination-text"><?php echo esc_html( $paginationNextTxt ); ?></span>
+									<?php echo esc_html( $paginationNextTxt ); ?>
 								<?php endif; ?>
 								</span>
 							<?php endif; ?>
