@@ -1,1 +1,0 @@
-import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
