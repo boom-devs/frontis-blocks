@@ -9,23 +9,31 @@ import { ClipLoader } from "react-spinners";
 import TemplateImport from "./template-import";
 import LoginSignupModal from "./login-signup";
 import PluginUpgradeModal from "./plugin-upgrade";
+import TemplateLoader from "./template-loader";
+import { usePostDataMutation } from "./services/api";
+import { select, dispatch } from '@wordpress/data';
+import { createBlock, parse, rawHandler } from '@wordpress/blocks';
 
-const TemplateCard = ({ imageUrl, title, is_premium = false, id, tags = [], dependencies = [], activeTab, setLibraryData, isLogedIn }) => {
+const TemplateCard = ({ imageUrl, title, is_premium = false, id, tags = [], dependencies = [], activeTab, setLibraryData, isLogedIn, data, setIsVisible }) => {
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isPluginUpgrade, setIsPluginUpgrade] = useState(false);
-
+    const [freeTemplate, setFreeTemplate] = useState(false);
     const handleFullSiteImport = useCallback(() => {
         if (!isPluginUpgrade) {
             setIsPluginUpgradeModalOpen(true);
         }
-        if (!is_premium && isLogedIn) {
+        // if (!is_premium && isLogedIn) {
             setIsModalOpen(true);
-        }
+        // }
     }, [is_premium, isLogedIn, isPluginUpgrade]);
+
+    const handelPatterns = useCallback(() => {
+        setFreeTemplate(true);
+    })
 
     const handleClosePluginUpgradeModal = useCallback(() => {
         setIsPluginUpgradeModalOpen(false);
@@ -59,6 +67,8 @@ const TemplateCard = ({ imageUrl, title, is_premium = false, id, tags = [], depe
     };
 
     const handleSaveLibrary = useCallback(() => {
+
+
         setLibraryData(prevData => {
             const alreadyExists = prevData.some(item => item.id === templateData.id);
             if (alreadyExists) return prevData;
@@ -75,6 +85,120 @@ const TemplateCard = ({ imageUrl, title, is_premium = false, id, tags = [], depe
         alert('Template saved to library');
     }, [templateData, setLibraryData]);
 
+    const fetImportData = () => {
+
+    }
+
+    const [patternsData, { data: patternsResponse, error, isLoading: dataLoading }] = usePostDataMutation();
+
+
+    const getTemplatesData = async (path, key , id ) => {
+        console.log('pattern id', id);
+        try {
+            const response = await patternsData({
+                endpoint: path,
+                body: {
+                    [key] : id
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).unwrap();
+            console.log(key, response);
+            return response;
+        } catch (err) {
+            console.error('Error:', err);
+            console.error('Status:', err.status);
+            console.error('Data:', err.data);
+            if (err.status === 500) {
+                console.error('Server error. Check the API endpoint and server logs.');
+            }
+        }
+    };
+
+    const importPattern = async (id) => {
+        setIsLoading(true);
+
+        const patterns = await getTemplatesData("import/pattern", 'pattern_id' ,id);
+
+        if (patterns) {
+            const patternData = JSON.parse(patterns.data).content;
+            const parsedBlocks = parse(patternData);
+
+            // Get block editor utilities
+            const { insertBlocks, replaceBlocks } = dispatch('core/block-editor');
+            const { getSelectedBlock, getBlocks, getBlockIndex } = select('core/block-editor');
+
+            // Get the currently selected block
+            const selectedBlock = getSelectedBlock();
+
+            if (selectedBlock) {
+                // Check if the selected block has content (e.g., innerBlocks or content attribute)
+                const hasContent = selectedBlock.innerBlocks?.length > 0 ||
+                    (selectedBlock.attributes?.content && selectedBlock.attributes.content.trim() !== '');
+
+                if (!hasContent) {
+                    // If the selected block is empty, replace it with the parsed blocks
+                    replaceBlocks(selectedBlock.clientId, parsedBlocks);
+                } else {
+                    // If the selected block has content, insert parsed blocks after it
+                    const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
+                    insertBlocks(parsedBlocks, selectedBlockIndex + 1);
+                }
+            } else {
+                // If no block is selected, insert at the end of the current blocks
+                const currentBlocks = getBlocks();
+                insertBlocks(parsedBlocks, currentBlocks.length);
+            }
+        }
+
+        setIsLoading(false);
+        setIsVisible(false);
+    };
+    const importPage = async (id) => {
+        setIsLoading(true);
+
+        const page = await getTemplatesData("import/page", 'page_id',id);
+
+        if (page) {
+            const pageData = JSON.parse(page.data).content;
+
+            const parsedBlocks = parse(pageData);
+
+            console.log("parsedBlocks parsedBlocks")
+            console.log(parsedBlocks)
+
+            // Get block editor utilities
+            const { insertBlocks, replaceBlocks } = dispatch('core/block-editor');
+            const { getSelectedBlock, getBlocks, getBlockIndex } = select('core/block-editor');
+
+            // Get the currently selected block
+            const selectedBlock = getSelectedBlock();
+
+            if (selectedBlock) {
+                // Check if the selected block has content (e.g., innerBlocks or content attribute)
+                const hasContent = selectedBlock.innerBlocks?.length > 0 ||
+                    (selectedBlock.attributes?.content && selectedBlock.attributes.content.trim() !== '');
+
+                if (!hasContent) {
+                    // If the selected block is empty, replace it with the parsed blocks
+                    replaceBlocks(selectedBlock.clientId, parsedBlocks);
+                } else {
+                    // If the selected block has content, insert parsed blocks after it
+                    const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
+                    insertBlocks(parsedBlocks, selectedBlockIndex + 1);
+                }
+            } else {
+                // If no block is selected, insert at the end of the current blocks
+                const currentBlocks = getBlocks();
+                insertBlocks(parsedBlocks, currentBlocks.length);
+            }
+        }
+
+        setIsLoading(false);
+        setIsVisible(false);
+    };
+
     return (
         <>
             <div
@@ -83,7 +207,7 @@ const TemplateCard = ({ imageUrl, title, is_premium = false, id, tags = [], depe
                 onMouseLeave={() => setIsHovered(false)}
             >
                 <div className="fb-template-library-card-img">
-                    <img src={imageUrl} alt={title || "Template preview"} />
+                    <img src={`https://leech-better-moose.ngrok-free.app/storage/${imageUrl}`} alt={title || "Template preview"} />
                     <div className={`fb-template-badge ${is_premium ? "pro" : "free"}`}>
                         {is_premium ? "PRO" : "FREE"}
                     </div>
@@ -120,17 +244,20 @@ const TemplateCard = ({ imageUrl, title, is_premium = false, id, tags = [], depe
                 <div className="fb-template-actions">
                     <button
                         className={`fb-import-btn ${isLoading ? "loading" : ""}`}
-                        onClick={!isLoading ? handleFullSiteImport : null}
+                        onClick={() => {
+                            console.log(activeTab)
+                            if (activeTab === 'patterns') {
+                                importPattern(id);
+                            } else if (activeTab === 'pages') {
+                                importPage(id);
+                            } else if (activeTab === 'sites') {
+                                handleFullSiteImport()
+                            }
+                        }}
+
                         disabled={isLoading}
                     >
-                        {isLoading ? (
-                            <>
-                                <span>Importing...</span>
-                                <ClipLoader color="#fff" size={16} />
-                            </>
-                        ) : (
-                            <span>Import</span>
-                        )}
+                        <span>Import</span>
                     </button>
 
                     <button
@@ -163,18 +290,23 @@ const TemplateCard = ({ imageUrl, title, is_premium = false, id, tags = [], depe
                     data={data}
                 />
             )}
+
+            {isLoading && (
+                <TemplateLoader />)
+            }
+
         </>
     );
 };
 
-const TemplateContent = ({ activeTab, activeCategory, data, libraryData, setLibraryData, isProTemplate, TagTabsOptions, activeTagTab, setActiveTagTab }) => {
+const TemplateContent = ({ activeTab, activeCategory, data, libraryData, setLibraryData, isProTemplate, TagTabsOptions, activeTagTab, setActiveTagTab, setIsVisible }) => {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
     const [isLogedIn, setIsLogedIn] = useState(false);
 
     useEffect(() => {
-        setIsLogedIn(false);
+        setIsLogedIn(true);
     }, []);
-
+    console.log('data', data);
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
     const [originalTemplates, setOriginalTemplates] = useState([]);
@@ -216,7 +348,7 @@ const TemplateContent = ({ activeTab, activeCategory, data, libraryData, setLibr
 
             // Filter by category
             if (activeCategory[activeTab] && activeCategory[activeTab] !== 'all') {
-                items = items.filter(item => 
+                items = items.filter(item =>
                     item.categories?.includes(activeCategory[activeTab])
                 );
             }
@@ -317,17 +449,19 @@ const TemplateContent = ({ activeTab, activeCategory, data, libraryData, setLibr
                             activeTab={activeTab}
                             setLibraryData={setLibraryData}
                             isLogedIn={isLogedIn}
+                            data={data}
+                            setIsVisible={setIsVisible}
                         />
                     ))}
                 </div>
             </div>
 
-            {isLoginModalOpen && (
+            {/* {isLoginModalOpen && (
                 <LoginSignupModal
                     onLoginSuccess={handleLoginSuccess}
                     onRequestClose={handleCloseLoginModal}
                 />
-            )}
+            )} */}
         </>
     );
 };
