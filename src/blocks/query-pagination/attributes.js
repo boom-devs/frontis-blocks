@@ -20,9 +20,9 @@ const attributes = {
     paginationAlignment: {
         type: 'object',
         default: {
-            Desktop: 'left',
-            Tablet: '',
-            Mobile: '',
+            Desktop: 'center',
+            Tablet: 'center',
+            Mobile: 'center',
         },
     },
     paginationItemGap: {
@@ -149,9 +149,6 @@ const attributes = {
 	},
 
 	/** End Pagination Wrapper */
-
-
-
 
     /** Pagination Arrow */
 	paginationArrowSize: {
