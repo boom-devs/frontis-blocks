@@ -87,53 +87,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			{ hasNextPreviousBlocks && (
-				<InspectorControls>
-					<ToolsPanel
-						label={ __( 'Settings' ) }
-						resetAll={ () => {
-							setAttributes( {
-								paginationArrow: 'none',
-								showLabel: true,
-							} );
-						} }
-						dropdownMenuProps={ dropdownMenuProps }
-					>
-						<ToolsPanelItem
-							hasValue={ () => paginationArrow !== 'none' }
-							label={ __( 'Pagination arrow' ) }
-							onDeselect={ () =>
-								setAttributes( { paginationArrow: 'none' } )
-							}
-							isShownByDefault
-						>
-							<QueryPaginationArrowControls
-								value={ paginationArrow }
-								onChange={ ( value ) => {
-									setAttributes( { paginationArrow: value } );
-								} }
-							/>
-						</ToolsPanelItem>
-						{ paginationArrow !== 'none' && (
-							<ToolsPanelItem
-								hasValue={ () => ! showLabel }
-								label={ __( 'Show text' ) }
-								onDeselect={ () =>
-									setAttributes( { showLabel: true } )
-								}
-								isShownByDefault
-							>
-								<QueryPaginationLabelControl
-									value={ showLabel }
-									onChange={ ( value ) => {
-										setAttributes( { showLabel: value } );
-									} }
-								/>
-							</ToolsPanelItem>
-						) }
-					</ToolsPanel>
-				</InspectorControls>
-			) }
 			<Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
