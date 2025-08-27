@@ -698,7 +698,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             `: `
                 ${paginationArrowNormalClassicColor ? `background: ${paginationArrowNormalClassicColor};` : ''}
             `}
+        }
 
+        .${blockId} .fb-query-pagination .fb-page-prev:hover,
+        .${blockId} .fb-query-pagination .fb-page-next:hover{
+            ${paginationArrowBorderHoverColor ? `border-color: ${paginationArrowBorderHoverColor};` : ''}
+
+            ${paginationArrowHoverBackgroundType === 'gradient' ? `    
+                ${paginationArrowHoverCustomGradientSwitcher && paginationArrowHoverCustomGradientInputValue ? `background: ${paginationArrowHoverCustomGradientInputValue};` : `background: ${paginationArrowHoverGradientColor};`}
+            `: `
+                ${paginationArrowHoverClassicColor ? `background: ${paginationArrowHoverClassicColor};` : ''}
+            `}
+            
+        }
+
+        .${blockId} .fb-query-pagination .fb-page-prev .fb-pagination-text,
+        .${blockId} .fb-query-pagination .fb-page-next .fb-pagination-text{
             ${paginationArrowTextGlobalTypoSwitcher.fontFamily === true && paginationArrowTextGlobalTypographyData.fontFamily ? `font-family: ${paginationArrowTextGlobalTypographyData.fontFamily};` : ''}  
             ${paginationArrowTextGlobalTypoSwitcher.fontSize === true && paginationArrowTextGlobalTypographyData.fontSize ? `font-size: ${paginationArrowTextGlobalTypographyData.fontSize};` : ''}
             ${paginationArrowTextGlobalTypoSwitcher.fontWeight === true && paginationArrowTextGlobalTypographyData.fontWeight ? `font-weight: ${paginationArrowTextGlobalTypographyData.fontWeight};` : ''}
@@ -719,16 +734,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             ${paginationArrowTextColor ? `color: ${paginationArrowTextColor};` : ''}
         }
-
-        .${blockId} .fb-query-pagination .fb-page-prev:hover,
-        .${blockId} .fb-query-pagination .fb-page-next:hover{
-            ${paginationArrowBorderHoverColor ? `border-color: ${paginationArrowBorderHoverColor};` : ''}
-
-            ${paginationArrowHoverBackgroundType === 'gradient' ? `    
-                ${paginationArrowHoverCustomGradientSwitcher && paginationArrowHoverCustomGradientInputValue ? `background: ${paginationArrowHoverCustomGradientInputValue};` : `background: ${paginationArrowHoverGradientColor};`}
-            `: `
-                ${paginationArrowHoverClassicColor ? `background: ${paginationArrowHoverClassicColor};` : ''}
-            `}
+            
+        .${blockId} .fb-query-pagination .fb-page-prev:hover .fb-pagination-text,
+        .${blockId} .fb-query-pagination .fb-page-next:hover .fb-pagination-text{
             ${paginationArrowTextHoverColor ? `color: ${paginationArrowTextHoverColor};` : ''}
         }
 
