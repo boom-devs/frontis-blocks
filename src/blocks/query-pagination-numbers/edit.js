@@ -8,6 +8,7 @@ import {
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	RangeControl,
 } from '@wordpress/components';
+import './editor.scss';
 
 /**
  * Internal dependencies
