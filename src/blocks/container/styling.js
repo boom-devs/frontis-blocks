@@ -1048,11 +1048,11 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapDesktopFallback, columnGapUnits['Desktop'] ),
 			...selectors[ containerFlexSelector ],
 		};
-		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
+		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
 			'width': containerChildrenWidth === 'full' ? '100%' : containerChildrenWidth === 'auto' ? 'auto !important' : '',
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
-		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
+		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
 			'width': containerChildrenWidth === 'full' ? '100%' : containerChildrenWidth === 'auto' ? 'auto !important' : '',
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
@@ -1068,11 +1068,11 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapDesktopFallback, columnGapUnits['Desktop'] ),
 			...selectors[ containerFlexSelector ],
 		};
-		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
+		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
 			'max-width': 'unset !important',
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
-		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
+		widthSelectorsDesktop[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
 			'max-width': 'unset !important',
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
@@ -1196,10 +1196,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapTabletFallback, columnGapUnits['Tablet'] ),
 			...tablet_selectors[ containerFlexSelector ],
 		};
-		widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
-		widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
 	}
@@ -1213,10 +1213,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapTabletFallback, columnGapUnits['Tablet'] ),
 			...tablet_selectors[ containerFlexSelector ],
 		};
-		widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
-		widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
+		widthSelectorsTablet[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
 	}
@@ -1232,10 +1232,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapMobileFallback, columnGapUnits['Mobile'] ),
 			...mobile_selectors[ containerFlexSelector ],
 		};
-		widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
-		widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
 	}
@@ -1249,10 +1249,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			'column-gap': generateCSSUnit( columnGapMobileFallback, columnGapUnits['Mobile'] ),
 			...mobile_selectors[ containerFlexSelector ],
 		};
-		widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap .block-editor-block-list__layout > div`] = {
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.frontis-blocks-block-block-${clientId} .frontis-blocks-container-inner-blocks-wrap > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
-		widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} .block-editor-block-list__layout > div`] = {
+		widthSelectorsMobile[`.wp-block-frontis-blocks-container.child.frontis-blocks-block-block-${clientId} > .block-editor-inner-blocks > .block-editor-block-list__layout > div`] = {
 			'height': containerEqualHeight === true ? '100%' : '',
 		}
 	}
