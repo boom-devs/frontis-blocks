@@ -87,3 +87,7 @@ export const BACKGROUND_TYPES = [
 	{ label: __('Classic', 'frontis-blocks'), value: 'classic' },
 	{ label: __('Gradient', 'frontis-blocks'), value: 'gradient' },
 ];
+export const PRESETS = [
+	{ label: __("Default", "frontis-blocks"), value: "preset-0" },
+	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+];

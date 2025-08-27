@@ -521,8 +521,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 separator: "solid",
                 separatorColor: "#399CFF",
                 headingBackgroundImageEnabled: false,
+                headingTextShadowCssValue: "",
+                headingColor: "#000000",
+                headingTextStroke: "",
+                headingDesktopPadding: ""
             },
-            "preset-1": {
+            "preset-2": {
                 subHeadingSwitcher: true,
                 showSeparatorSwitcher: false,
                 headingBackgroundImageEnabled: false,
@@ -546,21 +550,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     right: '0',
                 },
             },
-            "preset-2": {
-                headingIconSwitcher: false,
-                subHeadingSwitcher: false,
-                subHeadingPosition: "bottom",
-                activeLineSwitcher: false,
-                showSeparatorSwitcher: true,
-                separatorPosition: "bottom",
-                separator: "solid",
-                separatorColor: "#399CFF",
-                headingBackgroundImageEnabled: true,
-            },
-            "preset-2": {
+            "preset-3": {
                 subHeadingSwitcher: true,
                 subHeadingPosition: "bottom",
-                showSeparatorSwitcher: true,
+                showSeparatorSwitcher: false,
                 separator: "solid",
                 separatorColor: "#399CFF",
                 separatorPosition: "bottom",
@@ -585,7 +578,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     right: '0',
                 },
             },
-            "preset-3": {
+            "preset-4": {
                 headingIconSwitcher: false,
                 subHeadingSwitcher: false,
                 subHeadingPosition: "bottom",
@@ -617,7 +610,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     right: '0',
                 },
             },
-            "preset-4": {
+            "preset-5": {
                 headingIconSwitcher: false,
                 subHeadingSwitcher: false,
                 subHeadingPosition: "bottom",
@@ -649,7 +642,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     right: '0',
                 },
             },
-            "preset-5": {
+            "preset-6": {
                 headingIconSwitcher: false,
                 subHeadingSwitcher: false,
                 subHeadingPosition: "bottom",
@@ -686,7 +679,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     right: '0',
                 },
             },
-            "preset-6": {
+            "preset-7": {
                 headingIconSwitcher: false,
                 subHeadingSwitcher: false,
                 subHeadingPosition: "bottom",
@@ -723,7 +716,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     right: '0',
                 },
             },
-            "preset-7": {
+            "preset-8": {
                 headingIconSwitcher: true,
                 subHeadingSwitcher: false,
                 subHeadingPosition: "bottom",
@@ -770,7 +763,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     right: '0',
                 }
             },
-            "preset-8": {
+            "preset-9": {
                 headingIconSwitcher: true,
                 subHeadingSwitcher: false,
                 subHeadingPosition: "bottom",

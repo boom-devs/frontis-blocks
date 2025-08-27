@@ -28,6 +28,7 @@ import {
 	BORDER_STYLES,
 	ICON_POSITION,
 	OVERFLOW_OP,
+	PRESETS
 } from "./constants/constants";
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
@@ -68,6 +69,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonWidth,
 		buttonWidthUnits,
 
+		buttonPresetStyle,
 		buttonGlobalTypoSwitcher,
 		buttonGlobalTypographyData,
 		buttonGlobalTypoType,
@@ -306,6 +308,54 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             });
         }
     }, [clientId]);
+
+
+	/** Start Preset Style */
+	const changeAdvancedButtonPreset = (selectedPreset) => {
+        const presetConfigurations = {
+			"preset-0": {
+				buttonBgColor: "#399CFF",
+				buttonBorder: "none",
+				buttonBorderColor: "",
+				buttonColor: "#fff",
+            },
+			"preset-1": {
+				buttonBgColor: "#fff",
+				buttonBorder: "solid",
+				buttonBorderColor: "#C3C8D2",
+				buttonColor: "#15171C",
+				buttonDesktopBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonTabBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonMobileBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+            },
+		}
+		const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+                buttonPresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Advanced Button: Preset "${selectedPreset}" not found.`);
+        }
+	}
+	/** End Preset Style */
 
     /** Start Icon border */
     const handlebuttonIconBorderUnitChange = ( event, position ) => {
@@ -1720,6 +1770,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					title={__("Button", "frontis-blocks")}
 					initialOpen={true}
 				>
+					<SelectControl
+						label={__("Preset Style", "frontis-blocks")}
+						value={buttonPresetStyle}
+						options={PRESETS}
+						onChange={(selected) => changeAdvancedButtonPreset(selected)}
+					/>
 					<BaseControl
 						label={__("Alignment", "frontis-blocks")}
 						id="fb-setting-text-alignment"

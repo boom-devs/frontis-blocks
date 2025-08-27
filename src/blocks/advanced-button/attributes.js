@@ -1162,6 +1162,10 @@ const attributes = {
             Mobile: "",
         }
     },
+    buttonPresetStyle: {
+        type: 'string',
+        default: 'preset-0',
+    },
     
 }
 export default attributes;
