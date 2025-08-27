@@ -561,6 +561,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 subHeadingSwitcher: true,
                 subHeadingPosition: "bottom",
                 showSeparatorSwitcher: true,
+                separator: "solid",
+                separatorColor: "#399CFF",
                 separatorPosition: "bottom",
                 headingBackgroundImageEnabled: true,
                 headingIconSwitcher: false,

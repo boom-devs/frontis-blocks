@@ -962,7 +962,6 @@ const attributes = {
     headingIconBgSize: {
         type: 'object',
         default: {
-            Desktop: 'auto',
             Desktop: '50',
             Tablet: '',
             Mobile: ''
@@ -971,9 +970,6 @@ const attributes = {
     headingIconBgSizeUnits: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: '',
 			Desktop: 'px',
 			Tablet: 'px',
 			Mobile: 'px',
@@ -986,7 +982,6 @@ const attributes = {
     headingIconColor : {
         type: 'string',
         default: '#399CFF',
-        default: '#399CFF'
     },
     headingIconHoverColor: {
         type: 'string',
