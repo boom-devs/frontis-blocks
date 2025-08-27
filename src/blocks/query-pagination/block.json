@@ -15,7 +15,12 @@
 	"usesContext": [ "queryId", "query" ],
 	"providesContext": {
 		"paginationArrow": "paginationArrow",
-		"showLabel": "showLabel"
+		"showLabel": "showLabel",
+		"paginationPrevNextType": "paginationPrevNextType",
+		"paginationPrevTxt": "paginationPrevTxt",
+		"paginationNextTxt": "paginationNextTxt",
+		"paginationPrevIcon": "paginationPrevIcon",
+		"paginationNextIcon": "paginationNextIcon"
 	},
 	"supports": {
 		"anchor": false,

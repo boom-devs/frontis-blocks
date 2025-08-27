@@ -67,5 +67,9 @@
 		font-weight: 400;
 		border-radius: 50%;
 		transition: all .3s ease-in-out;
+
+		&:focus {
+			outline: none !important;
+		}
 	}
 }

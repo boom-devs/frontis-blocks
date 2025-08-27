@@ -2,14 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, PlainText } from '@wordpress/block-editor';
-
-const arrowMap = {
-	none: '',
-	arrow: '←',
-	chevron: '«',
-};
-
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
@@ -20,38 +13,21 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		label,
 	} = attributes;
 
-	const { 
-		paginationArrow,
-		showLabel 
+	const {
+		paginationPrevNextType,
+		paginationPrevTxt,
+		paginationPrevIcon,
 	} = context;
 
-	const displayArrow = arrowMap[ paginationArrow ];
 	return (
-		<a
-			href="#pagination-previous-pseudo-link"
-			onClick={ ( event ) => event.preventDefault() }
-			{ ...useBlockProps() }
-		>
-			{ displayArrow && (
-				<span
-					className={ `wp-block-query-pagination-previous-arrow is-arrow-${ paginationArrow }` }
-					aria-hidden
-				>
-					{ displayArrow }
+			<>
+				<span className="fb-page-prev is-disabled">
+					{paginationPrevNextType === 'icon' ? (
+						<span className="fb-pagination-icon">{renderSVG(paginationPrevIcon)}</span>
+					) : (
+						<span className="fb-pagination-text">{paginationPrevTxt}</span>
+					)}
 				</span>
-			) }
-			{ showLabel && (
-				<PlainText
-					__experimentalVersion={ 2 }
-					tagName="span"
-					aria-label={ __( 'Previous page link' ) }
-					placeholder={ __( 'Previous Page' ) }
-					value={ label }
-					onChange={ ( newLabel ) =>
-						setAttributes( { label: newLabel } )
-					}
-				/>
-			) }
-		</a>
+			</>
 	);
 }
