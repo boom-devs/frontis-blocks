@@ -69,9 +69,9 @@ const attributes = {
 	paginationArrowSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '12',
+			Tablet: '12',
+			Mobile: '12'
 		}
 	},
 	paginationArrowSizeUnits: { 

@@ -536,21 +536,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             `: `
                 ${paginationArrowNormalClassicColor ? `background: ${paginationArrowNormalClassicColor};` : ''}
             `}
-        }
 
-        .${blockId} .fb-query-pagination .fb-page-prev:hover,
-        .${blockId} .fb-query-pagination .fb-page-next:hover{
-            ${paginationArrowBorderHoverColor ? `border-color: ${paginationArrowBorderHoverColor};` : ''}
-
-            ${paginationArrowHoverBackgroundType === 'gradient' ? `    
-                ${paginationArrowHoverCustomGradientSwitcher && paginationArrowHoverCustomGradientInputValue ? `background: ${paginationArrowHoverCustomGradientInputValue};` : `background: ${paginationArrowHoverGradientColor};`}
-            `: `
-                ${paginationArrowHoverClassicColor ? `background: ${paginationArrowHoverClassicColor};` : ''}
-            `}
-        }
-
-        .${blockId} .fb-query-pagination .fb-page-prev .fb-pagination_prev_text,
-        .${blockId} .fb-query-pagination .fb-page-next .fb-pagination_next_text{
             ${paginationArrowTextGlobalTypoSwitcher.fontFamily === true && paginationArrowTextGlobalTypographyData.fontFamily ? `font-family: ${paginationArrowTextGlobalTypographyData.fontFamily};` : ''}  
             ${paginationArrowTextGlobalTypoSwitcher.fontSize === true && paginationArrowTextGlobalTypographyData.fontSize ? `font-size: ${paginationArrowTextGlobalTypographyData.fontSize};` : ''}
             ${paginationArrowTextGlobalTypoSwitcher.fontWeight === true && paginationArrowTextGlobalTypographyData.fontWeight ? `font-weight: ${paginationArrowTextGlobalTypographyData.fontWeight};` : ''}
@@ -572,8 +558,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${paginationArrowTextColor ? `color: ${paginationArrowTextColor};` : ''}
         }
 
-        .${blockId} .fb-query-pagination .fb-page-prev:hover .fb-pagination_prev_text,
-        .${blockId} .fb-query-pagination .fb-page-next:hover .fb-pagination_next_text{ 
+        .${blockId} .fb-query-pagination .fb-page-prev:hover,
+        .${blockId} .fb-query-pagination .fb-page-next:hover{
+            ${paginationArrowBorderHoverColor ? `border-color: ${paginationArrowBorderHoverColor};` : ''}
+
+            ${paginationArrowHoverBackgroundType === 'gradient' ? `    
+                ${paginationArrowHoverCustomGradientSwitcher && paginationArrowHoverCustomGradientInputValue ? `background: ${paginationArrowHoverCustomGradientInputValue};` : `background: ${paginationArrowHoverGradientColor};`}
+            `: `
+                ${paginationArrowHoverClassicColor ? `background: ${paginationArrowHoverClassicColor};` : ''}
+            `}
             ${paginationArrowTextHoverColor ? `color: ${paginationArrowTextHoverColor};` : ''}
         }
 
@@ -645,6 +638,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             `: `
                 ${paginationActiveBtnHoverClassicColor ? `background: ${paginationActiveBtnHoverClassicColor};` : ''} 
             `}
+        }
+
+        .${blockId} .fb-query-pagination .fb-page-prev .fb-pagination-icon,
+        .${blockId} .fb-query-pagination .fb-page-next .fb-pagination-icon{
+            ${paginationArrowSize.Desktop ? `width: ${paginationArrowSize.Desktop}${paginationArrowSizeUnits.Desktop};` : ''}
+            ${paginationArrowSize.Desktop ? `height: ${paginationArrowSize.Desktop}${paginationArrowSizeUnits.Desktop};` : ''}
+        }
+
+        .${blockId} .fb-query-pagination .fb-page-prev .fb-pagination-icon svg,
+        .${blockId} .fb-query-pagination .fb-page-next .fb-pagination-icon svg{
+            ${paginationArrowIconColor ? `fill: ${paginationArrowIconColor};` : ''}
+        }
+
+        .${blockId} .fb-query-pagination .fb-page-prev:hover .fb-pagination-icon svg,
+        .${blockId} .fb-query-pagination .fb-page-next:hover .fb-pagination-icon svg{
+            ${paginationArrowIconHoverColor ? `fill: ${paginationArrowIconHoverColor};` : ''}
         }
         
 
