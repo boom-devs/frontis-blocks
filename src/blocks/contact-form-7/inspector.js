@@ -2128,10 +2128,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			font-weight: 300;
         }
 
-		.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit {
-			${contactFormSubmitAlignment === 'center' ? 'margin: 0 auto; display: block;' : ''}
-			${contactFormSubmitAlignment === 'right' ? 'margin-left: auto; display: block;' : ''}
-			${contactFormSubmitAlignment === 'left' ? 'margin-right: auto; display: block;' : ''}
+		.${blockID}.fb-contact-form-wrapper .wpcf7-form p:has(.wpcf7-submit) {
+			display: flex;
+			${contactFormSubmitAlignment ? `justify-content: ${contactFormSubmitAlignment};` : ''}
 		}
 
 		.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit { 
