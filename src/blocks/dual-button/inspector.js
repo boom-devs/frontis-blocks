@@ -389,9 +389,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				},
 			},
 			"preset-2": {
-				buttonIconAlign: 'icon-text',
-				buttonIconPosition: 'right',
-				buttonTwoIconAlign: 'icon-text',
+				buttonIconAlign: 'none',
+				buttonTwoIconAlign: 'none',
 				buttonsDirection: 'vertical',
 				connectorSwitcher: true,
 				ButtonDesktopPadding: {
@@ -401,40 +400,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: "30",
 				},
 				ButtonDesktopBorderRadiusWidth: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
 				},
 				ButtonTabBorderRadiusWidth: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
 				},
 				ButtonMobileBorderRadiusWidth: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
 				},
 				ButtonTwoDesktopBorderRadiusWidth: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
 				},
 				ButtonTwoTabBorderRadiusWidth: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
 				},
 				ButtonTwoMobileBorderRadiusWidth: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
 				},
 				buttonsGap: {
 					Desktop: '0',
@@ -460,6 +459,250 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				},
 				ButtonDesktopBorderRadiusWidth: {
 					top: "50",
+					bottom: "0",
+					left: "50",
+					right: "0",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "50",
+					bottom: "0",
+					left: "50",
+					right: "0",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "50",
+					bottom: "0",
+					left: "50",
+					right: "0",
+				},
+				ButtonTwoDesktopBorderRadiusWidth: {
+					top: "0",
+					bottom: "50",
+					left: "0",
+					right: "50",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "0",
+					bottom: "50",
+					left: "0",
+					right: "50",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "0",
+					bottom: "50",
+					left: "0",
+					right: "50",
+				},
+				buttonsGap: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+			},
+			"preset-4": {
+				ButtonIcon: "chevron-left",
+				buttonIconAlign: 'icon-text',
+				buttonTwoIconAlign: 'none',
+				btnIconPosition: 'left',
+				btnTwoIconPosition: "right",
+				buttonsDirection: 'vertical',
+				connectorSwitcher: true,
+				ButtonDesktopPadding: {
+					top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+				},
+				ButtonDesktopBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoDesktopBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonsGap: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+			},
+			"preset-5": {
+				ButtonIcon: "chevron-right",
+				buttonIconAlign: 'none',
+				buttonTwoIconAlign: 'icon-text',
+				btnIconPosition: 'left',
+				btnTwoIconPosition: "right",
+				buttonsDirection: 'vertical',
+				connectorSwitcher: true,
+				ButtonDesktopPadding: {
+					top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+				},
+				ButtonDesktopBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoDesktopBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonsGap: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+			},
+			"preset-6": {
+				ButtonIcon: "chevron-left",
+				buttonIconAlign: 'icon-text',
+				buttonTwoIconAlign: 'icon-text',
+				btnIconPosition: 'left',
+				btnTwoIconPosition: "right",
+				buttonsDirection: 'vertical',
+				connectorSwitcher: true,
+				ButtonDesktopPadding: {
+					top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+				},
+				ButtonDesktopBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoDesktopBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonsGap: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+			},
+			"preset-7": {
+				ButtonIcon: "chevron-left",
+				buttonIconAlign: 'icon-text',
+				buttonTwoIconAlign: 'icon-text',
+				btnIconPosition: 'left',
+				btnTwoIconPosition: "right",
+				buttonsDirection: 'vertical',
+				connectorSwitcher: true,
+				ButtonDesktopPadding: {
+					top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+				},
+				ButtonDesktopBorderRadiusWidth: {
+					top: "50",
 					bottom: "50",
 					left: "50",
 					right: "50",
@@ -505,7 +748,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: '100'
 				},
 			},
-			"preset-4": {
+			"preset-8": {
 				buttonIconAlign: 'none',
 				buttonTwoIconAlign: 'none',
 				connectorSwitcher: false,
@@ -563,7 +806,190 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: '100'
 				},
 			},
-			"preset-5": {
+			"preset-9": {
+				ButtonIcon: "",
+				buttonIconAlign: 'none',
+				buttonTwoIconAlign: 'none',
+				btnIconPosition: 'left',
+				btnTwoIconPosition: "right",
+				buttonsDirection: 'vertical',
+				connectorSwitcher: false,
+				ButtonDesktopPadding: {
+					top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+				},
+				ButtonDesktopBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTwoDesktopBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				buttonsGap: {
+					Desktop: '10',
+					Tablet: '10',
+					Mobile: '10',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+			},
+			"preset-10": {
+				ButtonIcon: "chevron-left",
+				buttonIconAlign: 'icon-text',
+				buttonTwoIconAlign: 'icon-text',
+				btnIconPosition: 'left',
+				btnTwoIconPosition: "right",
+				connectorSwitcher: false,
+				buttonsDirection: 'vertical',
+				ButtonDesktopPadding: {
+					top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+				},
+				ButtonDesktopBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoDesktopBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonsGap: {
+					Desktop: '10',
+					Tablet: '10',
+					Mobile: '10',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+			},
+			"preset-11": {
+				ButtonIcon: "chevron-left",
+				buttonIconAlign: 'icon-text',
+				buttonTwoIconAlign: 'icon-text',
+				btnIconPosition: 'left',
+				btnTwoIconPosition: "right",
+				buttonsDirection: 'vertical',
+				connectorSwitcher: false,
+				ButtonDesktopPadding: {
+					top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+				},
+				ButtonDesktopBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTwoDesktopBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				buttonsGap: {
+					Desktop: '10',
+					Tablet: '10',
+					Mobile: '10',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+			},
+			"preset-12": {
 				buttonIconAlign: 'none',
 				buttonTwoIconAlign: 'none',
 				buttonsDirection: 'horizontal',
@@ -621,9 +1047,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: ''
 				},
 			},
-			"preset-6": {
-				buttonIconAlign: 'none',
-				buttonTwoIconAlign: 'none',
+			"preset-13": {
+				ButtonIcon: "chevron-left",
+				buttonIconAlign: 'icon-text',
+				buttonTwoIconAlign: 'icon-text',
+				btnIconPosition: 'left',
+				btnTwoIconPosition: "right",
 				buttonsDirection: 'horizontal',
 				connectorSwitcher: false,
 				ButtonDesktopPadding: {
@@ -679,8 +1108,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: ''
 				},
 			},
-			
-
 		};
 
 		const selectedPresetConfig = presetConfigurations[selectedPreset];
