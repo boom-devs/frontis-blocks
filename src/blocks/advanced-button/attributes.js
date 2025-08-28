@@ -72,9 +72,9 @@ const attributes = {
     buttonFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '14',
+			Tablet: '14',
+			Mobile: '14'
 		}
 	},
 	buttonFontSizeUnits: {
@@ -87,7 +87,7 @@ const attributes = {
 	},
     buttonFontWeight: {
         type: "string",
-        default: ""
+        default: "500"
     },
     buttonFontStyle: {
         type: "string",
@@ -1166,6 +1166,5 @@ const attributes = {
         type: 'string',
         default: 'preset-0',
     },
-    
 }
 export default attributes;

@@ -298,9 +298,24 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonTransformHoverScaleY,
 
     } = attributes;    
-    
+    console.log("attributes",attributes);
 	const deviceType= useDeviceType();
 	
+
+	let defaultImageUrl = [];
+	if (typeof FrontisBlocksData !== 'undefined') {
+		defaultImageUrl = [
+			FrontisBlocksData.pluginUrl + 'assets/images/search.svg',
+			FrontisBlocksData.pluginUrl + 'assets/images/search-black.svg'
+		];
+	}	
+	// Set default value for buttonIconImageUrl
+	useEffect(() => {
+		if (!buttonIconImageUrl) {
+			setAttributes({ buttonIconImageUrl: defaultImageUrl });
+		}
+	}, []);
+
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -313,17 +328,241 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	/** Start Preset Style */
 	const changeAdvancedButtonPreset = (selectedPreset) => {
         const presetConfigurations = {
-			"preset-0": {
+			"preset-1": {
 				buttonBgColor: "#399CFF",
 				buttonBorder: "none",
 				buttonBorderColor: "",
 				buttonColor: "#fff",
+				buttonIconImageUrl: "",
+				buttonIcon: "",
+				buttonText: "Primary Button",
+				buttonFontSize: {
+					Desktop: '14',
+					Tablet: '14',
+					Mobile: '14'
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "4",
+					bottom: "4",
+					left: "4",
+					right: "4",
+				},
             },
-			"preset-1": {
+			"preset-2": {
 				buttonBgColor: "#fff",
 				buttonBorder: "solid",
 				buttonBorderColor: "#C3C8D2",
 				buttonColor: "#15171C",
+				buttonIconImageUrl: "",
+				buttonIcon: "",
+				buttonText: "Default Button",
+				buttonFontSize: {
+					Desktop: '14',
+					Tablet: '14',
+					Mobile: '14'
+				},
+				buttonDesktopBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonTabBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonMobileBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "4",
+					bottom: "4",
+					left: "4",
+					right: "4",
+				},
+            },
+			"preset-3": {
+				buttonBgColor: "#fff",
+				buttonBorder: "dashed",
+				buttonBorderColor: "#C3C8D2",
+				buttonColor: "#15171C",
+				buttonIconImageUrl: "",
+				buttonIcon: "",
+				buttonText: "Dashed Button",
+				buttonFontSize: {
+					Desktop: '14',
+					Tablet: '14',
+					Mobile: '14'
+				},
+				buttonDesktopBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonTabBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonMobileBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "4",
+					bottom: "4",
+					left: "4",
+					right: "4",
+				},
+            },
+			"preset-4": {
+				buttonBgColor: "#fff",
+				buttonBorder: "",
+				buttonBorderColor: "#C3C8D2",
+				buttonColor: "#15171C",
+				buttonIconImageUrl: "",
+				buttonIcon: "",
+				buttonText: "Text Button",
+				buttonFontSize: {
+					Desktop: '14',
+					Tablet: '14',
+					Mobile: '14'
+				},
+				buttonDesktopBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonTabBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonMobileBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "4",
+					bottom: "4",
+					left: "4",
+					right: "4",
+				},
+            },
+			"preset-5": {
+				buttonBgColor: "#fff",
+				buttonBorder: "",
+				buttonBorderColor: "#C3C8D2",
+				buttonColor: "#399CFF",
+				buttonIconImageUrl: "",
+				buttonIcon: "",
+				buttonText: "Link Button",
+				buttonFontSize: {
+					Desktop: '14',
+					Tablet: '14',
+					Mobile: '14'
+				},
+				buttonDesktopBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonTabBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonMobileBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "4",
+					bottom: "4",
+					left: "4",
+					right: "4",
+				},
+            },
+			"preset-6": {
+				buttonBgColor: "#399CFF",
+				buttonBorder: "none",
+				buttonBorderColor: "",
+				buttonColor: "#fff",
+				buttonIcon: "",
+				buttonIconAlign: "image",
+				buttonIconPosition: "left",
+				buttonIconImageUrl: defaultImageUrl[0],
+				buttonText: "Search",
+				buttonIconImageWidth: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonIconImageHeight: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonFontSize: {
+					Desktop: '14',
+					Tablet: '14',
+					Mobile: '14'
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "4",
+					bottom: "4",
+					left: "4",
+					right: "4",
+				},
+            },
+			"preset-7": {
+				buttonBgColor: "#fff",
+				buttonBorder: "solid",
+				buttonBorderColor: "#C3C8D2",
+				buttonColor: "#15171C",
+				buttonIcon: "",
+				buttonIconAlign: "image",
+				buttonIconPosition: "right",
+				buttonIconImageUrl: defaultImageUrl[1],
+				buttonText: "Search",
+				buttonIconImageWidth: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "999",
+					bottom: "999",
+					left: "999",
+					right: "999",
+				},
+				buttonIconImageHeight: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonFontSize: {
+					Desktop: '14',
+					Tablet: '14',
+					Mobile: '14'
+				},
 				buttonDesktopBorderWidth:{
 					top: "1",
 					bottom: "1",
