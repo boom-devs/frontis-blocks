@@ -1,16 +1,9 @@
-import { addFilter } from '@wordpress/hooks';
+"use strict";
 
+import { addFilter } from '@wordpress/hooks';
+import renderFrontisHighlightColor from './render';
 addFilter(
-    'blocks.registerBlockType',
-    'frontis-blocks/add-highlight-attr',
-    ( settings ) => {
-        settings.attributes = {
-            ...settings.attributes,
-            highlightColor: {
-                type: 'string',
-                default: '',
-            },
-        };
-        return settings;
-    }
+	'editor.BlockEdit',
+	'frontis-blocks/highlight-color',
+	renderFrontisHighlightColor,
 );
