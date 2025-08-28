@@ -106,7 +106,7 @@ const Edit = (props) => {
                             {titlePrefixType !== 'none' && (
                                 <div className="fb-accordion-title-prefix">
                                     {titlePrefixType === 'icon' && titlePrefixIcon && (
-                                           renderSVG(titlePrefixIcon)
+                                        renderSVG(titlePrefixIcon)
                                     )}
 
                                     {titlePrefixType === "image" ? (
