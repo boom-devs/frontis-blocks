@@ -63,6 +63,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		blockStyle,
 		// deviceType,
 		buttonAlignment,
+		buttonTextSwitcher,
 		buttonText,
 		buttonUrl,
 		buttonTargetUrl,
@@ -2085,12 +2086,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						</ButtonGroup>
 					</BaseControl>
 
-					<TextControl
-						label={__("Text", "frontis-blocks")}
-						value={buttonText}
-						onChange={(value) => setAttributes({ buttonText: value })}
-						className="fb-advanced-button-text"
+					<ToggleControl
+						label={__("Show Text", "frontis-blocks")}
+						checked={buttonTextSwitcher}
+						onChange={(value) => setAttributes({ buttonTextSwitcher: value })}
 					/>
+
+					{buttonTextSwitcher && (
+						<TextControl
+							label={__("Text", "frontis-blocks")}
+							value={buttonText}
+							onChange={(value) => setAttributes({ buttonText: value })}
+							className="fb-advanced-button-text"
+						/>
+					)}
+
 					<div className='fb-advanced-btn-icon-wrapper'>
 						<BaseControl
 							label={__("Icon", "frontis-blocks")}
@@ -2110,7 +2120,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 									</Button>
 								))}
 							</ButtonGroup>
-							{(buttonIconAlign === 'icon-text' || buttonIconAlign === 'icon-only') && (
+							{(buttonIconAlign === 'icon-text') && (
 								<FBIconPicker value={buttonIcon} setIconHandler={iconHandler} /> 
 							)}
 
@@ -2145,132 +2155,134 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	 */
 	const styleControls = (
 		<>
-			<PanelBody
-				title={__("Text Styles", "frontis-blocks")}
-				initialOpen={true}
-			>
-				<FB_Range
-					min={1}
-					max={buttonWidthUnits === '%' ? 100 : 1000}
-					label={__("Width", "frontis-blocks")}
-					rangeValue={buttonWidth}
-					onChangeHandler={(value) => setAttributes({ buttonWidth: value })}
-					rangeUnitHandler={(value) => setAttributes({ buttonWidthUnits: value })}
-					deviceType={deviceType}
-					units={buttonWidthUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
-
-				<FB_TypographyControl
-					globalTypoControlActive={true}
-					globalTypoSwitcher={buttonGlobalTypoSwitcher}
-					storeGlobalTypographyData={(value) => setAttributes({ buttonGlobalTypographyData: value })}
-
-					globalTypoType={buttonGlobalTypoType}
-					onChangeGlobalTypoType={(value) => {
-						setAttributes({ 
-							buttonGlobalTypoType: value, 
-							buttonGlobalTypoSwitcher: value === 'default' ? {...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-						})
-					}}
-
-					globalTypoOption={buttonGlobalTypoOption}
-					onChangeGlobalTypoOption={(value) => setAttributes({ buttonGlobalTypoOption: value })}
-
-					fontFamily={buttonFontFamily}
-					onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontFamily: value && false} })}
-
-					fontSize={buttonFontSize}
-					onChangeFontSize={(value) => setAttributes({ buttonFontSize: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontSize: value && false} })}
-
-					fontSizeUnits={buttonFontSizeUnits}
-					onChangeFontSizeUnit={(value) => setAttributes({ buttonFontSizeUnits: value })}
-
-					fontWeight={buttonFontWeight}
-					onChangeFontWeight={(value) => setAttributes({ buttonFontWeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontWeight: value && false} })}
-
-					fontStyle={buttonFontStyle}
-					onChangeFontStyle={(value) => setAttributes({ buttonFontStyle: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontStyle: value && false} })}
-
-					textTransform={buttonTextTransform}
-					onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textTransform: value && false} })}
-
-					textDecoration={buttonTextDecoration}
-					onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textDecoration: value && false} })}
-
-					letterSpacing={buttonLetterSpacing}
-					onChangeLetterSpacing={(value) => setAttributes({ buttonLetterSpacing: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-					letterSpacingUnits={buttonLetterSpacingUnits}
-					onChangeLetterSpacingUnit={(value) => setAttributes({ buttonLetterSpacingUnits: value })}
-
-					lineHeight={buttonLineHeight}
-					onChangeLineHeight={(value) => setAttributes({ buttonLineHeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, lineHeight: value && false} })}
-
-					lineHeightUnits={buttonLineHeightUnits}
-					onChangeLineHeightUnit={(value) => setAttributes({ buttonLineHeightUnits: value })}
-
-					deviceType={deviceType}
-					setAttributes={setAttributes}
-				/>
-
-				<FB_SwitcherControl
-					label={__("Color", "frontis-blocks")}
-					globalSwitcher={buttonColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
-				/>
-
-				{buttonColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={buttonColor}
-						setGlobalColor={(value) => setAttributes({ buttonColor: value === undefined ? '' : value })}
+			{buttonTextSwitcher && (
+				<PanelBody
+					title={__("Text Styles", "frontis-blocks")}
+					initialOpen={true}
+				>
+					<FB_Range
+						min={1}
+						max={buttonWidthUnits === '%' ? 100 : 1000}
+						label={__("Width", "frontis-blocks")}
+						rangeValue={buttonWidth}
+						onChangeHandler={(value) => setAttributes({ buttonWidth: value })}
+						rangeUnitHandler={(value) => setAttributes({ buttonWidthUnits: value })}
+						deviceType={deviceType}
+						units={buttonWidthUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
 					/>
-				)}
 
-				{buttonColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={buttonHoverColor}
-						setGlobalColor={(value) => setAttributes({ buttonHoverColor: value === undefined ? '' : value })}
+					<FB_TypographyControl
+						globalTypoControlActive={true}
+						globalTypoSwitcher={buttonGlobalTypoSwitcher}
+						storeGlobalTypographyData={(value) => setAttributes({ buttonGlobalTypographyData: value })}
+
+						globalTypoType={buttonGlobalTypoType}
+						onChangeGlobalTypoType={(value) => {
+							setAttributes({ 
+								buttonGlobalTypoType: value, 
+								buttonGlobalTypoSwitcher: value === 'default' ? {...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+							})
+						}}
+
+						globalTypoOption={buttonGlobalTypoOption}
+						onChangeGlobalTypoOption={(value) => setAttributes({ buttonGlobalTypoOption: value })}
+
+						fontFamily={buttonFontFamily}
+						onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontFamily: value && false} })}
+
+						fontSize={buttonFontSize}
+						onChangeFontSize={(value) => setAttributes({ buttonFontSize: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontSize: value && false} })}
+
+						fontSizeUnits={buttonFontSizeUnits}
+						onChangeFontSizeUnit={(value) => setAttributes({ buttonFontSizeUnits: value })}
+
+						fontWeight={buttonFontWeight}
+						onChangeFontWeight={(value) => setAttributes({ buttonFontWeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontWeight: value && false} })}
+
+						fontStyle={buttonFontStyle}
+						onChangeFontStyle={(value) => setAttributes({ buttonFontStyle: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontStyle: value && false} })}
+
+						textTransform={buttonTextTransform}
+						onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textTransform: value && false} })}
+
+						textDecoration={buttonTextDecoration}
+						onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textDecoration: value && false} })}
+
+						letterSpacing={buttonLetterSpacing}
+						onChangeLetterSpacing={(value) => setAttributes({ buttonLetterSpacing: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+						letterSpacingUnits={buttonLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) => setAttributes({ buttonLetterSpacingUnits: value })}
+
+						lineHeight={buttonLineHeight}
+						onChangeLineHeight={(value) => setAttributes({ buttonLineHeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, lineHeight: value && false} })}
+
+						lineHeightUnits={buttonLineHeightUnits}
+						onChangeLineHeightUnit={(value) => setAttributes({ buttonLineHeightUnits: value })}
+
+						deviceType={deviceType}
+						setAttributes={setAttributes}
 					/>
-				)}
+
+					<FB_SwitcherControl
+						label={__("Color", "frontis-blocks")}
+						globalSwitcher={buttonColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
+					/>
+
+					{buttonColorSwitcher === 'normal' && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={buttonColor}
+							setGlobalColor={(value) => setAttributes({ buttonColor: value === undefined ? '' : value })}
+						/>
+					)}
+
+					{buttonColorSwitcher === 'hover' && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={buttonHoverColor}
+							setGlobalColor={(value) => setAttributes({ buttonHoverColor: value === undefined ? '' : value })}
+						/>
+					)}
 
 
-				<FB_BackgroundColorControl
-					label={__("Background Color", "frontis-blocks")}
-					bgColorSwitcher={buttonBgColorSwitcher}  
-					setBgColorSwitcher={(value) => setAttributes({ buttonBgColorSwitcher: value })}
-					
-					normalBackgroundType={buttonNormalBackgroundType} 
-					setNormalBackgroundType={(value) => setAttributes({ buttonNormalBackgroundType: value })}
-					normalClassicColor={buttonBgColor}
-					setNormalClassicColor={(value) => setAttributes({ buttonBgColor: value === undefined ? '' : value })}
-					normalGradientColor={buttonNormalGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ buttonNormalGradientColor: value === undefined ? '' : value })}
-					normalCustomGradientSwitcher={buttonNormalCustomGradientSwitcher}
-					setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonNormalCustomGradientSwitcher: value })}
-					normalCustomGradientInputValue={buttonNormalCustomGradientInputValue}
-					setNormalCustomGradientInputValue={(value) => setAttributes({ buttonNormalCustomGradientInputValue: value })}
-					
-					hoverBackgroundType={buttonHoverBackgroundType} 
-					setHoverBackgroundType={(value) => setAttributes({ buttonHoverBackgroundType: value })}
-					hoverClassicColor={buttonBgHoverColor}
-					setHoverClassicColor={(value) => setAttributes({ buttonBgHoverColor: value === undefined ? '' : value })}
-					hoverGradientColor={buttonHoverGradientColor} 
-					setHoverGradientColor={(value) => setAttributes({ buttonHoverGradientColor: value === undefined ? '' : value })}
-					hoverCustomGradientSwitcher={buttonHoverCustomGradientSwitcher}
-					setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonHoverCustomGradientSwitcher: value })}
-					hoverCustomGradientInputValue={buttonHoverCustomGradientInputValue}
-					setHoverCustomGradientInputValue={(value) => setAttributes({ buttonHoverCustomGradientInputValue: value })}
+					<FB_BackgroundColorControl
+						label={__("Background Color", "frontis-blocks")}
+						bgColorSwitcher={buttonBgColorSwitcher}  
+						setBgColorSwitcher={(value) => setAttributes({ buttonBgColorSwitcher: value })}
+						
+						normalBackgroundType={buttonNormalBackgroundType} 
+						setNormalBackgroundType={(value) => setAttributes({ buttonNormalBackgroundType: value })}
+						normalClassicColor={buttonBgColor}
+						setNormalClassicColor={(value) => setAttributes({ buttonBgColor: value === undefined ? '' : value })}
+						normalGradientColor={buttonNormalGradientColor}
+						setNormalGradientColor={(value) => setAttributes({ buttonNormalGradientColor: value === undefined ? '' : value })}
+						normalCustomGradientSwitcher={buttonNormalCustomGradientSwitcher}
+						setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonNormalCustomGradientSwitcher: value })}
+						normalCustomGradientInputValue={buttonNormalCustomGradientInputValue}
+						setNormalCustomGradientInputValue={(value) => setAttributes({ buttonNormalCustomGradientInputValue: value })}
+						
+						hoverBackgroundType={buttonHoverBackgroundType} 
+						setHoverBackgroundType={(value) => setAttributes({ buttonHoverBackgroundType: value })}
+						hoverClassicColor={buttonBgHoverColor}
+						setHoverClassicColor={(value) => setAttributes({ buttonBgHoverColor: value === undefined ? '' : value })}
+						hoverGradientColor={buttonHoverGradientColor} 
+						setHoverGradientColor={(value) => setAttributes({ buttonHoverGradientColor: value === undefined ? '' : value })}
+						hoverCustomGradientSwitcher={buttonHoverCustomGradientSwitcher}
+						setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonHoverCustomGradientSwitcher: value })}
+						hoverCustomGradientInputValue={buttonHoverCustomGradientInputValue}
+						setHoverCustomGradientInputValue={(value) => setAttributes({ buttonHoverCustomGradientInputValue: value })}
 
-					isBackgroundImage={false}
+						isBackgroundImage={false}
 
-				/>
+					/>
 
-			</PanelBody>
+				</PanelBody>
+			)}
 			<PanelBody title="Padding and Margin" initialOpen={false}>
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
@@ -2386,7 +2398,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					)}
 			</PanelBody>
 
-			{(buttonIconAlign === 'icon-text' || buttonIconAlign === 'icon-only') && (
+			{(buttonIconAlign === 'icon-text') && (
 				<PanelBody
 					title={__("Icon Styles", "frontis-blocks")}
 					initialOpen={false}

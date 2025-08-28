@@ -11,6 +11,10 @@ const attributes = {
         type: "string",
         default: "left",
     },
+    buttonTextSwitcher: {
+        type: "string",
+        default: true,
+    },
     buttonText: {
         type: "string",
         default: "Add Text",
