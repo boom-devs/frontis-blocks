@@ -336,6 +336,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonColor: "#fff",
 				buttonIconImageUrl: "",
 				buttonIcon: "",
+				buttonTextSwitcher: true,
 				buttonText: "Primary Button",
 				buttonFontSize: {
 					Desktop: '14',
@@ -356,6 +357,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonColor: "#15171C",
 				buttonIconImageUrl: "",
 				buttonIcon: "",
+				buttonTextSwitcher: true,
 				buttonText: "Default Button",
 				buttonFontSize: {
 					Desktop: '14',
@@ -394,6 +396,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonColor: "#15171C",
 				buttonIconImageUrl: "",
 				buttonIcon: "",
+				buttonTextSwitcher: true,
 				buttonText: "Dashed Button",
 				buttonFontSize: {
 					Desktop: '14',
@@ -432,6 +435,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonColor: "#15171C",
 				buttonIconImageUrl: "",
 				buttonIcon: "",
+				buttonTextSwitcher: true,
 				buttonText: "Text Button",
 				buttonFontSize: {
 					Desktop: '14',
@@ -470,6 +474,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonColor: "#399CFF",
 				buttonIconImageUrl: "",
 				buttonIcon: "",
+				buttonTextSwitcher: true,
 				buttonText: "Link Button",
 				buttonFontSize: {
 					Desktop: '14',
@@ -510,6 +515,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonIconAlign: "image",
 				buttonIconPosition: "left",
 				buttonIconImageUrl: defaultImageUrl[0],
+				buttonTextSwitcher: true,
 				buttonText: "Search",
 				buttonIconImageWidth: {
 					Desktop: '18',
@@ -542,6 +548,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonIconAlign: "image",
 				buttonIconPosition: "right",
 				buttonIconImageUrl: defaultImageUrl[1],
+				buttonTextSwitcher: true,
 				buttonText: "Search",
 				buttonIconImageWidth: {
 					Desktop: '18',
@@ -584,25 +591,273 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				},
             },
 			"preset-8": {
-				buttonBgColor: "#fff",
-				buttonBorder: "solid",
+				buttonBgColor: "#399CFF",
+				buttonBorder: "none",
 				buttonBorderColor: "#C3C8D2",
-				buttonColor: "#15171C",
+				buttonColor: "#fff",
 				buttonIcon: "",
 				buttonIconAlign: "image",
 				buttonIconPosition: "right",
-				buttonIconImageUrl: defaultImageUrl[1],
+				buttonIconImageUrl: defaultImageUrl[0],
+				buttonTextSwitcher: false,
 				buttonText: "Search",
+				buttonDesktopPadding: {
+					top: "15",
+					bottom: "15",
+					left: "15",
+					right: "15",
+				},
 				buttonIconImageWidth: {
 					Desktop: '18',
 					Tablet: '18',
 					Mobile: '18'
 				},
 				buttonDesktopBorderRadiusWidth: {
+					top: "8",
+					bottom: "8",
+					left: "8",
+					right: "8",
+				},
+				buttonIconImageHeight: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonFontSize: {
+					Desktop: '14',
+					Tablet: '14',
+					Mobile: '14'
+				},
+				buttonDesktopBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonTabBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonMobileBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+            },
+			"preset-9": {
+				buttonBgColor: "#399CFF",
+				buttonBorder: "none",
+				buttonBorderColor: "#C3C8D2",
+				buttonColor: "#fff",
+				buttonIconRotate: {
+					Desktop: '180',
+					Tablet: '180',
+					Mobile: '180'
+				},
+				buttonIconBgColor: "#fff",
+				buttonIconColor: "#399CFF",
+				buttonIcon: "arrow-left-long",
+				buttonIconAlign: "icon-text",
+				buttonIconPosition: "left",
+				buttonIconImageUrl: "",
+				buttonTextSwitcher: true,
+				buttonText: "Style - 1",
+				buttonDesktopPadding: {
+					top: "8",
+					bottom: "8",
+					left: "8",
+					right: "16",
+				},
+				buttonIconPaddingDesktop: {
+					top: "8",
+					bottom: "8",
+					left: "8",
+					right: "8",
+				},
+				buttonIconImageWidth: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonIconBorderRadiusDesktop: {
+					top: "4",
+					bottom: "4",
+					left: "4",
+					right: "4",
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "8",
+					bottom: "8",
+					left: "8",
+					right: "8",
+				},
+				buttonIconImageHeight: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonFontSize: {
+					Desktop: '14',
+					Tablet: '14',
+					Mobile: '14'
+				},
+				buttonDesktopBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonTabBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonMobileBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+            },
+			"preset-10": {
+				buttonBgColor: "#399CFF",
+				buttonBorder: "none",
+				buttonBorderColor: "#C3C8D2",
+				buttonColor: "#fff",
+				buttonIconRotate: {
+					Desktop: '180',
+					Tablet: '180',
+					Mobile: '180'
+				},
+				buttonIconBgColor: "#fff",
+				buttonIconColor: "#399CFF",
+				buttonIcon: "arrow-left-long",
+				buttonIconAlign: "icon-text",
+				buttonIconPosition: "right",
+				buttonIconImageUrl: "",
+				buttonTextSwitcher: true,
+				buttonText: "Style - 2",
+				buttonDesktopPadding: {
+					top: "8",
+					bottom: "8",
+					left: "16",
+					right: "8",
+				},
+				buttonIconPaddingDesktop: {
+					top: "8",
+					bottom: "8",
+					left: "8",
+					right: "8",
+				},
+				buttonIconImageWidth: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonIconBorderRadiusDesktop: {
 					top: "999",
 					bottom: "999",
 					left: "999",
 					right: "999",
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "8",
+					bottom: "8",
+					left: "8",
+					right: "8",
+				},
+				buttonIconImageHeight: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonFontSize: {
+					Desktop: '14',
+					Tablet: '14',
+					Mobile: '14'
+				},
+				buttonDesktopBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonTabBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonMobileBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+            },
+			"preset-11": {
+				buttonBgColor: "#399CFF",
+				buttonBorder: "none",
+				buttonBorderColor: "#C3C8D2",
+				buttonColor: "#fff",
+				buttonIconRotate: {
+					Desktop: '180',
+					Tablet: '180',
+					Mobile: '180'
+				},
+				buttonIconBgColor: "#399CFF",
+				buttonIconColor: "#fff",
+				buttonIcon: "arrow-left-long",
+				buttonIconAlign: "icon-text",
+				buttonIconPosition: "right",
+				buttonIconBorder: "solid",
+				buttonIconBorderColor: "#fff",
+				buttonIconBorderDesktop: {
+					top: "3",
+					bottom: "3",
+					left: "3",
+					right: "3",
+				},
+				buttonIconImageUrl: "",
+				buttonTextSwitcher: true,
+				buttonText: "Style - 3",
+				buttonDesktopPadding: {
+					top: "8",
+					bottom: "8",
+					left: "16",
+					right: "8",
+				},
+				buttonIconGapSize: {
+					Desktop: '13',
+					Tablet: '13',
+					Mobile: '13'
+				},
+				buttonIconPaddingDesktop: {
+					top: "8",
+					bottom: "8",
+					left: "8",
+					right: "8",
+				},
+				buttonIconImageWidth: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonIconBorderRadiusDesktop: {
+					top: "999",
+					bottom: "999",
+					left: "999",
+					right: "999",
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "8",
+					bottom: "8",
+					left: "8",
+					right: "8",
 				},
 				buttonIconImageHeight: {
 					Desktop: '18',
