@@ -1,12 +1,6 @@
-.wp-block-query-pagination-numbers {
+.wp-block-frontis-blocks-query-pagination-numbers {
+	display: flex;
 	a {
-		text-decoration: underline;
-	}
-	.page-numbers {
-		margin-right: 2px;
-		&:last-child {
-			/*rtl:ignore*/
-			margin-right: 0;
-		}
+		text-decoration: none;
 	}
 }
