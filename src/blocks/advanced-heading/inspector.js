@@ -120,6 +120,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingTextHoverCustomGradientColorSwitcher,
         headingTextHoverCustomGradientColor,
 
+        headingHighlightColorSwitcher,
+        headingHighlightColor,
+        headingHighlightHoverColor,
+
         headingBgColorTypeSwitcher,
         headingBgColorType,
         headingBgHoverColorType,
@@ -287,6 +291,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingIconBorderRadiusTablet,
         headingIconBorderRadiusMobile,
         headingIconBorderRadiusLink,
+        headingIconPaddingUnits,
+        headingIconDesktopPadding,
+        headingIconTabletPadding,
+        headingIconMobilePadding,
+        headingIconPaddingLink,
         /** End Icon */
 
         /** Start Global Setting */
@@ -475,6 +484,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const changeAdvancedHeadingPreset = (selectedPreset) => {
         const presetConfigurations = {
             "preset-0": {
+                headingIconSwitcher: false,
+                subHeadingSwitcher: false,
+                showSeparatorSwitcher: false,
+                activeLineSwitcher: false,
+                separator: "solid",
+                separatorColor: "#399CFF",
+                headingBackgroundImageEnabled: false,
                 subHeadingSwitcher: false,
                 showSeparatorSwitcher: false,
                 headingBackgroundImageEnabled: false,
@@ -488,8 +504,33 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 },
                 headingTextStrokeColor: "",
                 headingTextStrokeHoverColor: "",
+                headingAlignment: {
+                    Desktop: "left"
+                },
+                headingDesktopPadding: {
+                    bottom: '24',
+                },
+                headingDesktopPadding: {
+                    top: '',
+                    bottom: '',
+                    left: '',
+                    right: '',
+                },
             },
             "preset-1": {
+                headingIconSwitcher: false,
+                subHeadingSwitcher: true,
+                showSeparatorSwitcher: false,
+                activeLineSwitcher: false,
+                separator: "solid",
+                separatorColor: "#399CFF",
+                headingBackgroundImageEnabled: false,
+                headingTextShadowCssValue: "",
+                headingColor: "#000000",
+                headingTextStroke: "",
+                headingDesktopPadding: ""
+            },
+            "preset-2": {
                 subHeadingSwitcher: true,
                 showSeparatorSwitcher: false,
                 headingBackgroundImageEnabled: false,
@@ -503,11 +544,22 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 },
                 headingTextStrokeColor: "#399CFF",
                 headingTextStrokeHoverColor: "#399CFF",
+                headingAlignment: {
+                    Desktop: "left"
+                },
+                headingDesktopPadding: {
+                    top: '0',
+                    bottom: '24',
+                    left: '0',
+                    right: '0',
+                },
             },
-            "preset-2": {
+            "preset-3": {
                 subHeadingSwitcher: true,
                 subHeadingPosition: "bottom",
-                showSeparatorSwitcher: true,
+                showSeparatorSwitcher: false,
+                separator: "solid",
+                separatorColor: "#399CFF",
                 separatorPosition: "bottom",
                 headingBackgroundImageEnabled: true,
                 headingIconSwitcher: false,
@@ -520,6 +572,247 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 },
                 headingTextStrokeColor: "",
                 headingTextStrokeHoverColor: "",
+                headingAlignment: {
+                    Desktop: "left"
+                },
+                headingDesktopPadding: {
+                    top: '0',
+                    bottom: '24',
+                    left: '0',
+                    right: '0',
+                },
+            },
+            "preset-4": {
+                headingIconSwitcher: false,
+                subHeadingSwitcher: false,
+                subHeadingPosition: "bottom",
+                activeLineSwitcher: false,
+                showSeparatorSwitcher: true,
+                separator: "dashed",
+                separatorWidth: {
+                    Desktop: '270',
+                },
+                separatorColor: "#F89B2E",
+                separatorPosition: "bottom",
+                headingBackgroundImageEnabled: false,
+                headingTextShadowCssValue: "none",
+                headingColor: "#F89B2E",
+                headingTextStroke: {
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
+                },
+                headingTextStrokeColor: "",
+                headingTextStrokeHoverColor: "",
+                headingAlignment: {
+                    Desktop: "left"
+                },
+                headingDesktopPadding: {
+                    top: '0',
+                    bottom: '24',
+                    left: '0',
+                    right: '0',
+                },
+            },
+            "preset-5": {
+                headingIconSwitcher: false,
+                subHeadingSwitcher: false,
+                subHeadingPosition: "bottom",
+                activeLineSwitcher: false,
+                showSeparatorSwitcher: true,
+                separator: "solid",
+                separatorWidth: {
+                    Desktop: '270',
+                },
+                separatorColor: "#4CAF50",
+                separatorPosition: "bottom",
+                headingBackgroundImageEnabled: false,
+                headingTextShadowCssValue: "none",
+                headingColor: "#4CAF50",
+                headingTextStroke: {
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
+                },
+                headingTextStrokeColor: "",
+                headingTextStrokeHoverColor: "",
+                headingAlignment: {
+                    Desktop: "left"
+                },
+                headingDesktopPadding: {
+                    top: '0',
+                    bottom: '24',
+                    left: '0',
+                    right: '0',
+                },
+            },
+            "preset-6": {
+                headingIconSwitcher: false,
+                subHeadingSwitcher: false,
+                subHeadingPosition: "bottom",
+                activeLineSwitcher: true,
+                activeLineBeforeWidth: {
+                    Desktop: '23',
+                },
+                activeLineAfterWidth: {
+                    Desktop: '100',
+                },
+                activeLineBeforeColor: "#399CFF",
+                activeLineAfterColor: "#B0D7FF",
+                showSeparatorSwitcher: false,
+                separator: "",
+                separatorColor: "",
+                separatorPosition: "bottom",
+                headingBackgroundImageEnabled: false,
+                headingTextShadowCssValue: "none",
+                headingColor: "#399CFF",
+                headingTextStroke: {
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
+                },
+                headingTextStrokeColor: "",
+                headingTextStrokeHoverColor: "",
+                headingAlignment: {
+                    Desktop: "left"
+                },
+                headingDesktopPadding: {
+                    top: '0',
+                    bottom: '24',
+                    left: '0',
+                    right: '0',
+                },
+            },
+            "preset-7": {
+                headingIconSwitcher: false,
+                subHeadingSwitcher: false,
+                subHeadingPosition: "bottom",
+                activeLineSwitcher: true,
+                activeLineBeforeWidth: {
+                    Desktop: '23',
+                },
+                activeLineAfterWidth: {
+                    Desktop: '100',
+                },
+                activeLineBeforeColor: "#F89B2E",
+                activeLineAfterColor: "#FCD7AB",
+                showSeparatorSwitcher: false,
+                separator: "",
+                separatorColor: "",
+                separatorPosition: "bottom",
+                headingBackgroundImageEnabled: false,
+                headingTextShadowCssValue: "none",
+                headingColor: "#F89B2E",
+                headingTextStroke: {
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
+                },
+                headingTextStrokeColor: "",
+                headingTextStrokeHoverColor: "",
+                headingAlignment: {
+                    Desktop: "center"
+                },
+                headingDesktopPadding: {
+                    top: '0',
+                    bottom: '24',
+                    left: '0',
+                    right: '0',
+                },
+            },
+            "preset-8": {
+                headingIconSwitcher: true,
+                subHeadingSwitcher: false,
+                subHeadingPosition: "bottom",
+                activeLineSwitcher: false,
+                activeLineBeforeWidth: {
+                    Desktop: '23',
+                },
+                activeLineAfterWidth: {
+                    Desktop: '100',
+                },
+                activeLineBeforeColor: "#E95B68",
+                activeLineAfterColor: "#e7adadff",
+                showSeparatorSwitcher: true,
+                separator: "solid",
+                separatorWidth: {
+                    Desktop: '150',
+                },
+                separatorColor: "#E95B68",
+                separatorPosition: "top",
+                headingBackgroundImageEnabled: false,
+                headingTextShadowCssValue: "none",
+                headingColor: "#E95B68",
+                headingTextStroke: {
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
+                },
+                headingTextStrokeColor: "",
+                headingTextStrokeHoverColor: "",
+                headingAlignment: {
+                    Desktop: "left"
+                },
+                headingDesktopPadding: {
+                    top: '24',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
+                },
+                headingIconColor: "#E95B68",
+                headingIconDesktopPadding: {
+                    top: '0',
+                    bottom: '24',
+                    left: '0',
+                    right: '0',
+                }
+            },
+            "preset-9": {
+                headingIconSwitcher: true,
+                subHeadingSwitcher: false,
+                subHeadingPosition: "bottom",
+                activeLineSwitcher: false,
+                activeLineBeforeWidth: {
+                    Desktop: '23',
+                },
+                activeLineAfterWidth: {
+                    Desktop: '100',
+                },
+                activeLineBeforeColor: "#4CAF50",
+                activeLineAfterColor: "#9cb39cff",
+                showSeparatorSwitcher: true,
+                separator: "zigzag",
+                separatorWidth: {
+                    Desktop: '150',
+                },
+                separatorColor: "#4CAF50",
+                separatorPosition: "top",
+                headingBackgroundImageEnabled: false,
+                headingTextShadowCssValue: "none",
+                headingColor: "#4CAF50",
+                headingTextStroke: {
+                    Desktop: "",
+                    Tablet: "",
+                    Mobile: "",
+                },
+                headingTextStrokeColor: "",
+                headingTextStrokeHoverColor: "",
+                headingAlignment: {
+                    Desktop: "left"
+                },
+                headingDesktopPadding: {
+                    top: '24',
+                    bottom: '0',
+                    left: '0',
+                    right: '0',
+                },
+                headingIconColor: "#4CAF50",
+                headingIconDesktopPadding: {
+                    top: '0',
+                    bottom: '24',
+                    left: '0',
+                    right: '0',
+                }
             },
         };
 
@@ -1440,6 +1733,82 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const headingIconMobileBorderRadiusWidthValue = `${headingIconBorderRadiusMobile.top}${headingIconBorderRadiusUnits.Mobile} ${headingIconBorderRadiusMobile.right}${headingIconBorderRadiusUnits.Mobile} ${headingIconBorderRadiusMobile.bottom}${headingIconBorderRadiusUnits.Mobile} ${headingIconBorderRadiusMobile.left}${headingIconBorderRadiusUnits.Mobile}`;
 	/** End Icon Border Radius */
 
+     /** Start Icon Padding */
+    const headingIconPaddingUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (headingIconPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        headingIconDesktopPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        headingIconTabletPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        headingIconMobilePadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ headingIconDesktopPadding: { ...headingIconDesktopPadding, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ headingIconTabletPadding: { ...headingIconTabletPadding, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ headingIconMobilePadding: { ...headingIconMobilePadding, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const headingIconPaddingLinkBtn = () => {
+        setAttributes({
+            headingPaddingLink: !headingPaddingLink
+        });
+    };
+
+    const headingIconPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            headingIconPaddingUnits: {
+                ...headingIconPaddingUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    /** Default padding for Heading */
+    const headingIconDesktopPaddingWidth = `${headingIconDesktopPadding.top}${headingIconPaddingUnits.Desktop} ${headingIconDesktopPadding.right}${headingIconPaddingUnits.Desktop} ${headingIconDesktopPadding.bottom}${headingIconPaddingUnits.Desktop} ${headingIconDesktopPadding.left}${headingIconPaddingUnits.Desktop}`;
+    const headingIconTabletPaddingWidth = `${headingIconTabletPadding.top}${headingIconPaddingUnits.Tablet} ${headingIconTabletPadding.right}${headingIconPaddingUnits.Tablet} ${headingIconTabletPadding.bottom}${headingIconPaddingUnits.Tablet} ${headingIconTabletPadding.left}${headingIconPaddingUnits.Tablet}`;
+    const headingIconMobilePaddingWidth = `${headingIconMobilePadding.top}${headingIconPaddingUnits.Mobile} ${headingIconMobilePadding.right}${headingIconPaddingUnits.Mobile} ${headingIconMobilePadding.bottom}${headingIconPaddingUnits.Mobile} ${headingIconMobilePadding.left}${headingIconPaddingUnits.Mobile}`;
+    /** End Heading Padding */
+
 	/** Start Global padding */
 	const handleGlobalPaddingUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -1868,6 +2237,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${headingAlignment.Desktop ? `text-align: ${headingAlignment.Desktop};` : ''}
             transition: all .3s ease-in-out;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
         .${blockId} .fb-advanced-wrapper:hover {
             ${desktopBackgroundHoverStyles}
@@ -2067,6 +2438,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
         .${blockId} .fb-advanced-icon-wrapper {
             ${headingAlignment.Desktop ? `justify-content: ${headingAlignment.Desktop};` : ''}
+            ${headingIconDesktopPaddingWidth && headingIconDesktopPadding.top ? `padding: ${headingIconDesktopPaddingWidth};` : ''}
+            width: auto;
         }
 
         .${blockId} .fb-advanced-icon {
@@ -2095,7 +2468,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
         .${blockId} .fb-advanced-wrapper .fb-advanced-title-separator {
             display: inline-block;
-            ${separator !== 'zigzag' && separatorWidth.Desktop && separatorWidthUnits.Desktop ? `width: ${separatorWidth.Desktop}${separatorWidthUnits.Desktop};` : ''}
+            ${separator  && separatorWidth.Desktop && separatorWidthUnits.Desktop ? `width: ${separatorWidth.Desktop}${separatorWidthUnits.Desktop};` : ''}
             ${separator !== 'zigzag' && separatorHeight.Desktop && separatorHeightUnits.Desktop ? `border-top-width: ${separatorHeight.Desktop}${separatorHeightUnits.Desktop};` : ''}
             ${separator !== 'zigzag' ? `border-top-style: ${separator};` : ''}
             ${separator !== 'zigzag' && separatorColor ? `border-top-color: ${separatorColor};` : ''}
@@ -2109,6 +2482,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     : ''}`
                 : ''}
         }
+        .${blockId} .fb-advanced-wrapper .fb-advanced-title-separator-zigzag {
+           display: flex;
+        }        
         .${blockId} .fb-advanced-wrapper .fb-advanced-title-separator:hover {
             ${separatorHoverColor ? `border-top-color: ${separatorHoverColor};` : ''}
         }
@@ -2207,6 +2583,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
             .${blockId} .fb-advanced-icon-wrapper {
                 ${headingAlignment.Tablet ? `justify-content: ${headingAlignment.Tablet};` : ''}
+
+                ${headingIconTabletPaddingWidth && headingIconTabletPadding.top ? `padding: ${headingIconTabletPaddingWidth};` : ''}
+                width: auto;
             }
 
             .${blockId} .fb-advanced-icon {
@@ -2299,6 +2678,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
             .${blockId} .fb-advanced-icon-wrapper {
                 ${headingAlignment.Mobile ? `justify-content: ${headingAlignment.Mobile};` : ''}
+                ${headingIconMobilePaddingWidth && headingIconMobilePadding.top ? `padding: ${headingIconMobilePaddingWidth};` : ''}
+                width: auto;
             }
 
             .${blockId} .fb-advanced-icon {
@@ -2503,6 +2884,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingIconHoverColor,
     headingIconBgHoverColor,
     headingIconBorderHoverColor,
+    headingIconDesktopPadding,
+    headingIconTabletPadding,
+    headingIconMobilePadding,
     separator,
     separatorWidth,
     separatorWidthUnits,
@@ -2621,7 +3005,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingBeforeAfterTabletBorderRadiusWidth,
     headingBeforeAfterMobileBorderRadiusWidth,
     /** End Before After */
-
     ]);
 
     const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
@@ -2910,49 +3293,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     deviceType={deviceType}
                     setAttributes={setAttributes}
                 />
-                <FB_BoxShadowControl
-                    label={__("Text Shadow", "frontis-blocks")}
-                    onBoxShadowChange={(value) => setAttributes({ headingTextShadowValues: value })}
-                    initialShadowValue={headingTextShadowValues}
-                    onBoxShadowStyleChange={(value) => setAttributes({ headingTextShadowCssValue: value })}
-                    isBoxShadow={false}
-                />
-
-                <FB_Range
-                    min={0}
-                    max={10}
-                    label={__("Text Stroke", "frontis-blocks")}
-                    rangeValue={headingTextStroke}
-                    onChangeHandler={(value) => setAttributes({ headingTextStroke: value === 0 ? undefined : value })}
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={""}
-                    isRangeUnit={false}
-
-                />
-
-                <FB_SwitcherControl
-                    label={__("Text Stroke Color", "frontis-blocks")}
-                    globalSwitcher={headingTextStrokeColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ headingTextStrokeColorSwitcher: value })}
-                />
-
-                {headingTextStrokeColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={headingTextStrokeColor}
-                        setGlobalColor={(value) => setAttributes({ headingTextStrokeColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                {headingTextStrokeColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={headingTextStrokeHoverColor}
-                        setGlobalColor={(value) => setAttributes({ headingTextStrokeHoverColor: value === undefined ? '' : value })}
-                    />
-                )}
 
                 <FB_BackgroundColorControl
 					label={__("Text Color", "frontis-blocks")}
@@ -2986,6 +3326,28 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					isBackgroundImage={false}
 
 				/>
+
+                <FB_SwitcherControl
+                    label={__("Highlight Color", "frontis-blocks")}
+                    globalSwitcher={headingHighlightColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ headingHighlightColorSwitcher: value })}
+                />
+
+                {headingHighlightColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={headingHighlightColor}
+                        setGlobalColor={(value) => setAttributes({ headingHighlightColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {headingHighlightColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={headingHighlightHoverColor}
+                        setGlobalColor={(value) => setAttributes({ headingHighlightHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
 
                 <FB_BackgroundColorControl
 					label={__("Background Color", "frontis-blocks")}
@@ -3106,6 +3468,50 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         </button>
                     )}
                 </BaseControl>
+                )}
+
+                <FB_BoxShadowControl
+                    label={__("Text Shadow", "frontis-blocks")}
+                    onBoxShadowChange={(value) => setAttributes({ headingTextShadowValues: value })}
+                    initialShadowValue={headingTextShadowValues}
+                    onBoxShadowStyleChange={(value) => setAttributes({ headingTextShadowCssValue: value })}
+                    isBoxShadow={false}
+                />
+
+                <FB_Range
+                    min={0}
+                    max={10}
+                    label={__("Text Stroke", "frontis-blocks")}
+                    rangeValue={headingTextStroke}
+                    onChangeHandler={(value) => setAttributes({ headingTextStroke: value === 0 ? undefined : value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                    isRangeUnit={false}
+
+                />
+
+                <FB_SwitcherControl
+                    label={__("Text Stroke Color", "frontis-blocks")}
+                    globalSwitcher={headingTextStrokeColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ headingTextStrokeColorSwitcher: value })}
+                />
+
+                {headingTextStrokeColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={headingTextStrokeColor}
+                        setGlobalColor={(value) => setAttributes({ headingTextStrokeColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {headingTextStrokeColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={headingTextStrokeHoverColor}
+                        setGlobalColor={(value) => setAttributes({ headingTextStrokeHoverColor: value === undefined ? '' : value })}
+                    />
                 )}
 
                 <ToggleControl
@@ -3652,36 +4058,34 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             setGlobalColor={(value) => setAttributes({ separatorHoverColor: value === undefined ? '' : value })}
                         />
                     )}
-
+                    <FB_Range
+                        min={1}
+                        max={1500}
+                        label={__("Width", "frontis-blocks")}
+                        rangeValue={separatorWidth}
+                        onChangeHandler={(value) => setAttributes({ separatorWidth: value })}
+                        rangeUnitHandler={(value) => setAttributes({ separatorWidthUnits: value })}
+                        deviceType={deviceType}
+                        units={separatorWidthUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={"100"}
+                    />
                     {separator !== 'zigzag' && (
-                        <>
-                            <FB_Range
-                                min={1}
-                                max={1500}
-                                label={__("Width", "frontis-blocks")}
-                                rangeValue={separatorWidth}
-                                onChangeHandler={(value) => setAttributes({ separatorWidth: value })}
-                                rangeUnitHandler={(value) => setAttributes({ separatorWidthUnits: value })}
-                                deviceType={deviceType}
-                                units={separatorWidthUnits}
-                                setAttributes={setAttributes}
-                                rangeStep={1}
-                                resetFallbackValue={"100"}
-                            />
-                            <FB_Range
-                                min={1}
-                                max={100}
-                                label={__("Height", "frontis-blocks")}
-                                rangeValue={separatorHeight}
-                                onChangeHandler={(value) => setAttributes({ separatorHeight: value })}
-                                rangeUnitHandler={(value) => setAttributes({ separatorHeightUnits: value })}
-                                deviceType={deviceType}
-                                units={separatorHeightUnits}
-                                setAttributes={setAttributes}
-                                rangeStep={1}
-                                resetFallbackValue={""}
-                            />
-                        </>
+                        <FB_Range
+                            min={1}
+                            max={100}
+                            label={__("Height", "frontis-blocks")}
+                            rangeValue={separatorHeight}
+                            onChangeHandler={(value) => setAttributes({ separatorHeight: value })}
+                            rangeUnitHandler={(value) => setAttributes({ separatorHeightUnits: value })}
+                            deviceType={deviceType}
+                            units={separatorHeightUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={""}
+                        />
+                        
                     )}
                     <FB_Range
                         min={1}
@@ -3834,6 +4238,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     spacingCombineBtnHandler={handleHeadingIconBorderRadiusCombineBtn}
                     setAttributes={setAttributes}
                 />
+
+                <FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={headingIconPaddingUnitsHandler}
+                    spacingUnits={headingIconPaddingUnits}
+                    spacingDesktop={headingIconDesktopPadding}
+                    spacingTablet={headingIconTabletPadding}
+                    spacingMobile={headingIconMobilePadding}
+                    handleSpacingUnitHandler={headingIconPaddingUnitsChange}
+                    spacingCombineBtn={headingIconPaddingLink}
+                    spacingCombineBtnHandler={headingIconPaddingLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
                 </PanelBody>
 
             )}

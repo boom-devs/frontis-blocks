@@ -2379,56 +2379,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         </ButtonGroup>
                     </BaseControl>
 
-                    {RatingSwitcher && (
-                        <div className='fb-setting-icon-wrapper'>
-                            <BaseControl
-                                label={__("Rating Icon", "frontis-blocks")}
-                                id="fb-setting-text-alignment"
-                                className="fb-setting-text-alignment"
-                            >
-                                <ButtonGroup
-                                    className="fb-setting-text-alignment-group-btn"
-                                >
-                                    {ICON_ALIGN.map((item, key) => (
-                                        <Button
-                                            key={key}
-                                            onClick={() => setAttributes({ TestimonialRatinIconAlign: item.value })}
-                                            className={`fb-setting-text-alignment-single-btn ${TestimonialRatinIconAlign === item.value ? 'active' : ''}`}
-                                        >
-                                            {item.label}
-                                        </Button>
-                                    ))}
-                                </ButtonGroup>
-                                {TestimonialRatinIconAlign === 'icon' && (
-                                    <FBIconPicker value={TestimonialRatingicon} setIconHandler={ratingIconHandler} /> 
-                                )}
-                                {TestimonialRatinIconAlign === 'image' && (
-                                    <FB_ImageControl
-                                        globalImageUrl={TestimonialRatingImageUrl}
-                                        setglobalImageUrl={(value) => setAttributes({ TestimonialRatingImageUrl: value })}
-                                        globalImageAlt={TestimonialRatingImageAlt}
-                                        setglobalImageAlt={(value) => setAttributes({ TestimonialRatingImageAlt: value })}
-                                        globalImageID={TestimonialRatingImageID}
-                                        setglobalImageID={(value) => setAttributes({ TestimonialRatingImageID: value })}
-                                        isImageSize={false}
-                                    />
-                                )}
-                            </BaseControl>
-                        </div>
-                    )}
-                    {RatingSwitcher && TestimonialRatinIconAlign !== 'none' && (
-                        <div className="fb-setting-rating-rangecontrol">
-                            <RangeControl
-                                label={__("Rating Number", "frontis-blocks")}
-                                value={TestimonialRatingNumber}
-                                onChange={(value) => setAttributes({ TestimonialRatingNumber: value })}
-                                min={1}
-                                max={5}
-                                resetFallbackValue={5}
-                            />
-                        </div>
-                    )}
-
                     {TitleSwitcher && (
                     <TextareaControl
                         label={__("Title", "frontis-blocks")}
@@ -2445,8 +2395,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         className="fb-testimonial-desc-control"
                     />
                     )}
+            </PanelBody>
 
-                    {TestimonialImageSwitcher && (
+            <PanelBody
+                title={__("Avatar Info", "frontis-blocks")}
+                initialOpen={false}
+                className="fb-setting-feature-icon-wrapper"
+            >
+                {TestimonialImageSwitcher && (
                     <BaseControl
                         className="fb-testimonial-image-control-wrapper"
                         label={__("Avatar", "frontis-blocks")}
@@ -2544,13 +2500,74 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         className="fb-testimonial-designation-control"
                     />
                     )}
+            </PanelBody>
 
-                    {QuoteIconSwitcher && (
-                        <div className='fb-setting-icon-wrapper'>
+            {RatingSwitcher && (
+                <PanelBody
+                    title={__("Rating Icon", "frontis-blocks")}
+                    initialOpen={false}
+                    className="fb-setting-feature-icon-wrapper"
+                >
+                    <div className='fb-setting-icon-wrapper'>
                         <BaseControl
-                            label={__("Quote Icon", "frontis-blocks")}
-                                id="fb-setting-text-alignment"
-                                className="fb-setting-text-alignment"
+                            id="fb-setting-text-alignment"
+                            className="fb-setting-text-alignment"
+                        >
+                            <ButtonGroup
+                                className="fb-setting-text-alignment-group-btn"
+                            >
+                                {ICON_ALIGN.map((item, key) => (
+                                    <Button
+                                        key={key}
+                                        onClick={() => setAttributes({ TestimonialRatinIconAlign: item.value })}
+                                        className={`fb-setting-text-alignment-single-btn ${TestimonialRatinIconAlign === item.value ? 'active' : ''}`}
+                                    >
+                                        {item.label}
+                                    </Button>
+                                ))}
+                            </ButtonGroup>
+                            {TestimonialRatinIconAlign === 'icon' && (
+                                <FBIconPicker value={TestimonialRatingicon} setIconHandler={ratingIconHandler} /> 
+                            )}
+                            {TestimonialRatinIconAlign === 'image' && (
+                                <FB_ImageControl
+                                    globalImageUrl={TestimonialRatingImageUrl}
+                                    setglobalImageUrl={(value) => setAttributes({ TestimonialRatingImageUrl: value })}
+                                    globalImageAlt={TestimonialRatingImageAlt}
+                                    setglobalImageAlt={(value) => setAttributes({ TestimonialRatingImageAlt: value })}
+                                    globalImageID={TestimonialRatingImageID}
+                                    setglobalImageID={(value) => setAttributes({ TestimonialRatingImageID: value })}
+                                    isImageSize={false}
+                                />
+                            )}
+                        </BaseControl>
+                    </div>
+                    
+                    {TestimonialRatinIconAlign !== 'none' && (
+                        <div className="fb-setting-rating-rangecontrol">
+                            <RangeControl
+                                label={__("Rating Number", "frontis-blocks")}
+                                value={TestimonialRatingNumber}
+                                onChange={(value) => setAttributes({ TestimonialRatingNumber: value })}
+                                min={1}
+                                max={5}
+                                resetFallbackValue={5}
+                            />
+                        </div>
+                    )}
+                </PanelBody>
+            )}
+
+            {QuoteIconSwitcher && (
+                <PanelBody
+                    title={__("Quote Icon", "frontis-blocks")}
+                    initialOpen={false}
+                    className="fb-setting-feature-icon-wrapper"
+                >
+                    <div className='fb-setting-icon-wrapper'>
+                        <BaseControl
+                            id="fb-setting-text-alignment"
+                            className="fb-setting-text-alignment"
                         >
                             <ButtonGroup
                                 className="fb-setting-text-alignment-group-btn"
@@ -2581,10 +2598,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             )}
                         </BaseControl>
                     </div>
-                    )}
-
-            </PanelBody>
-
+                </PanelBody>
+            )}
         </>
 	);
 
