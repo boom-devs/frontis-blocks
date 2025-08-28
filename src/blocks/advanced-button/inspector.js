@@ -187,6 +187,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonIconPaddingLink,
 		/** End Icon Padding */
 
+		/** Start Icon margin */
+		buttonIconMarginUnits,
+		buttonIconMarginDesktop,
+		buttonIconMarginTablet,
+		buttonIconMarginMobile,
+		buttonIconMarginLink,
+		/** End Icon Margin */
+
 
         buttonIconGapSize,
         buttonIconGapUnits,
@@ -339,6 +347,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonIconBorder: "none",
 				buttonTextSwitcher: true,
 				buttonText: "Primary Button",
+				buttonIconPaddingDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
 				buttonFontSize: {
 					Desktop: '14',
 					Tablet: '14',
@@ -361,6 +381,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonIconBorder: "none",
 				buttonTextSwitcher: true,
 				buttonText: "Default Button",
+				buttonIconPaddingDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
 				buttonFontSize: {
 					Desktop: '14',
 					Tablet: '14',
@@ -401,6 +433,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonIconBorder: "none",
 				buttonTextSwitcher: true,
 				buttonText: "Dashed Button",
+				buttonIconPaddingDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
 				buttonFontSize: {
 					Desktop: '14',
 					Tablet: '14',
@@ -441,6 +485,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonIconBorder: "none",
 				buttonTextSwitcher: true,
 				buttonText: "Text Button",
+				buttonIconPaddingDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
 				buttonFontSize: {
 					Desktop: '14',
 					Tablet: '14',
@@ -481,6 +537,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonIconBorder: "none",
 				buttonTextSwitcher: true,
 				buttonText: "Link Button",
+				buttonIconPaddingDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
 				buttonFontSize: {
 					Desktop: '14',
 					Tablet: '14',
@@ -530,11 +598,29 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					left: "0",
 					right: "0",
 				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconPaddingDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
 				buttonDesktopPadding: {
-					top: "8",
-					bottom: "8",
-					left: "8",
-					right: "16",
+					top: "14",
+					bottom: "14",
+					left: "20",
+					right: "20",
 				},
 				buttonIconImageWidth: {
 					Desktop: '18',
@@ -576,11 +662,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					left: "0",
 					right: "0",
 				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
 				buttonDesktopPadding: {
-					top: "8",
-					bottom: "8",
-					left: "8",
-					right: "16",
+					top: "12",
+					bottom: "12",
+					left: "24",
+					right: "24",
 				},
 				buttonIconImageWidth: {
 					Desktop: '18',
@@ -636,6 +728,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonTextSwitcher: false,
 				buttonText: "Search",
 				buttonIconPaddingDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconMarginDesktop: {
 					top: "0",
 					bottom: "0",
 					left: "0",
@@ -718,6 +816,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					left: "8",
 					right: "8",
 				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
 				buttonIconImageWidth: {
 					Desktop: '18',
 					Tablet: '18',
@@ -795,6 +899,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					left: "8",
 					right: "8",
 				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
 				buttonIconImageWidth: {
 					Desktop: '18',
 					Tablet: '18',
@@ -867,6 +977,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonIconImageUrl: "",
 				buttonTextSwitcher: true,
 				buttonText: "Style - 3",
+				buttonIconSize: {
+					Desktop: '14',
+					Tablet: '14',
+					Mobile: '14'
+				},
 				buttonDesktopPadding: {
 					top: "8",
 					bottom: "8",
@@ -879,10 +994,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					Mobile: '13'
 				},
 				buttonIconPaddingDesktop: {
-					top: "8",
-					bottom: "8",
-					left: "8",
-					right: "8",
+					top: "6",
+					bottom: "6",
+					left: "6",
+					right: "6",
+				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "-22",
 				},
 				buttonIconImageWidth: {
 					Desktop: '18',
@@ -1170,6 +1291,82 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const buttonIconPaddingTabletWidth = `${buttonIconPaddingTablet.top}${buttonIconPaddingUnits.Tablet} ${buttonIconPaddingTablet.right}${buttonIconPaddingUnits.Tablet} ${buttonIconPaddingTablet.bottom}${buttonIconPaddingUnits.Tablet} ${buttonIconPaddingTablet.left}${buttonIconPaddingUnits.Tablet}`;
 	const buttonIconPaddingMobileWidth = `${buttonIconPaddingMobile.top}${buttonIconPaddingUnits.Mobile} ${buttonIconPaddingMobile.right}${buttonIconPaddingUnits.Mobile} ${buttonIconPaddingMobile.bottom}${buttonIconPaddingUnits.Mobile} ${buttonIconPaddingMobile.left}${buttonIconPaddingUnits.Mobile}`;
 	/** End Padding */
+	
+	/** Start Icon Margin*/
+	const handlebuttonIconMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( buttonIconMarginLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						buttonIconMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						buttonIconMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						buttonIconMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {buttonIconMarginDesktop: {...buttonIconMarginDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {buttonIconMarginTablet: {...buttonIconMarginTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {buttonIconMarginMobile: {...buttonIconMarginMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handlebuttonIconMarginCombineBtn = () => {
+		setAttributes( {buttonIconMarginLink: !buttonIconMarginLink} );
+	}
+
+	const handlebuttonIconMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			buttonIconMarginUnits: {
+				...buttonIconMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** end Global Margin */
+
+	/** End Icon Margin */
+	const buttonIconMarginDesktopWidth = `${buttonIconMarginDesktop.top}${buttonIconMarginUnits.Desktop} ${buttonIconMarginDesktop.right}${buttonIconMarginUnits.Desktop} ${buttonIconMarginDesktop.bottom}${buttonIconMarginUnits.Desktop} ${buttonIconMarginDesktop.left}${buttonIconMarginUnits.Desktop}`;
+	const buttonIconMarginTabletWidth = `${buttonIconMarginTablet.top}${buttonIconMarginUnits.Tablet} ${buttonIconMarginTablet.right}${buttonIconMarginUnits.Tablet} ${buttonIconPaddingTablet.bottom}${buttonIconMarginUnits.Tablet} ${buttonIconMarginTablet.left}${buttonIconMarginUnits.Tablet}`;
+	const buttonIconMarginMobileWidth = `${buttonIconMarginMobile.top}${buttonIconMarginUnits.Mobile} ${buttonIconMarginMobile.right}${buttonIconMarginUnits.Mobile} ${buttonIconMarginMobile.bottom}${buttonIconMarginUnits.Mobile} ${buttonIconPaddingMobile.left}${buttonIconMarginUnits.Mobile}`;
+	/** End Margin */
 
 
     /** Start padding */
@@ -1933,6 +2130,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${buttonIconBgColor ? `background: ${buttonIconBgColor};` : ''}
             `}
 			${buttonIconPaddingDesktopWidth && buttonIconPaddingDesktop?.top ? `padding: ${buttonIconPaddingDesktopWidth};` : ''}
+			${buttonIconMarginDesktopWidth && buttonIconPaddingDesktop?.top ? `margin: ${buttonIconMarginDesktopWidth};` : ''}
 
 			${buttonIconBorder ? `border: ${buttonIconBorder};` : ''}
 			${buttonIconBorderColor ? `border-color: ${buttonIconBorderColor};` : ''}
@@ -2027,6 +2225,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
 				${buttonIconPaddingTabletWidth && buttonIconPaddingTablet?.top ? `padding: ${buttonIconPaddingTabletWidth};` : ''}
+				${buttonIconMarginTabletWidth && buttonIconMarginTablet?.top ? `margin: ${buttonIconMarginTabletWidth};` : ''}
 				${buttonIconPosition === 'left' && buttonIconGapSize.Tablet ? `margin-right: ${buttonIconGapSize.Tablet}${buttonIconGapUnits.Tablet};` : ''}
 				${buttonIconPosition === 'right' && buttonIconGapSize.Tablet ? `margin-left: ${buttonIconGapSize.Tablet}${buttonIconGapUnits.Tablet};` : ''}
 				${buttonIconBorderTabletWidth !== 'px px px px' ? `border-width: ${buttonIconBorderTabletWidth};` : ''}
@@ -2105,6 +2304,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
 				${buttonIconPaddingMobileWidth && buttonIconPaddingMobile?.top ? `padding: ${buttonIconPaddingMobileWidth};` : ''}
+				${buttonIconMarginMobileWidth && buttonIconPaddingMobile?.top ? `margin: ${buttonIconMarginMobileWidth};` : ''}
 				${buttonIconPosition === 'left' && buttonIconGapSize.Mobile ? `margin-right: ${buttonIconGapSize.Mobile}${buttonIconGapUnits.Mobile};` : ''}
 				${buttonIconPosition === 'right' && buttonIconGapSize.Mobile ? `margin-left: ${buttonIconGapSize.Mobile}${buttonIconGapUnits.Mobile};` : ''}
 				${buttonIconBorderMobileWidth !== 'px px px px' ? `border-width: ${buttonIconBorderMobileWidth};` : ''}
@@ -2276,6 +2476,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonIconPaddingDesktopWidth,
 		buttonIconPaddingTabletWidth,
 		buttonIconPaddingMobileWidth,
+		/** End Icon Padding */
+
+		/** Start Icon Padding */
+		buttonIconPaddingUnits,
+		buttonIconPaddingDesktop,
+		buttonIconPaddingTablet,
+		buttonIconPaddingMobile,
+		buttonIconPaddingLink,
+		buttonIconMarginDesktopWidth,
+		buttonIconMarginTabletWidth,
+		buttonIconMarginMobileWidth,
 		/** End Icon Padding */
 
 		buttonIconRotateSwitcher,
@@ -2841,6 +3052,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						handleSpacingUnitHandler={handlebuttonIconPaddingUnitChange}
 						spacingCombineBtn={buttonIconPaddingLink}
 						spacingCombineBtnHandler={handlebuttonIconPaddingCombineBtn}
+						setAttributes={setAttributes}
+					/>
+					<FB_Spacing 
+						label={__("Margin", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handlebuttonIconMarginUnitsHandler}
+						spacingUnits={buttonIconMarginUnits}
+						spacingDesktop={buttonIconMarginDesktop}
+						spacingTablet={buttonIconMarginTablet}
+						spacingMobile={buttonIconMarginMobile}
+						handleSpacingUnitHandler={handlebuttonIconMarginUnitChange}
+						spacingCombineBtn={buttonIconMarginLink}
+						spacingCombineBtnHandler={handlebuttonIconMarginCombineBtn}
 						setAttributes={setAttributes}
 					/>
 					<FB_Range

@@ -618,7 +618,47 @@ const attributes = {
 	},
 	/** End Icon Padding */
 
-
+    /** Start Icon margin */
+	buttonIconMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	buttonIconMarginDesktop: { 
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconMarginTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconMarginMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Icon Margin */
 
     buttonIconGapSize: {
         type: 'object',
