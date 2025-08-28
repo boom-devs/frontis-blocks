@@ -52,6 +52,7 @@ import FB_VisibilityControl from '@Components/visibility-control';
 import FB_ImageControl from '@Components/image-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
+import generateSvgIcon from '@Utils/generateSvgIcon';
 
 import './editor.scss';
 
@@ -78,9 +79,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** Start Pagination */
         paginationPrevNextType,
         paginationPrevTxt,
-        paginationPrevIcon, 
+        paginationPrevIcon,
+        paginationPrevFrontendIcon,
         paginationNextTxt,
         paginationNextIcon,
+        paginationNextFrontendIcon,
 
         /** Pagination Arrow */
         paginationArrowSize,
@@ -232,7 +235,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({paginationNextIcon: IconName})
 	}
 
-        /** Start Pagination Wrapper Padding */
+    /**
+     * Generate SVG Icons for Previous and Next Icons
+     */
+    useEffect(() => {
+		setAttributes({
+			paginationPrevFrontendIcon: generateSvgIcon(paginationPrevIcon),
+			paginationNextFrontendIcon: generateSvgIcon(paginationNextIcon),
+		})
+	}, [paginationPrevIcon, paginationNextIcon]);
+
+    /** Start Pagination Wrapper Padding */
 	const handlePaginationWrapperPaddingUnitChange = ( event, position ) => {
 		const value = event.target.value;
 		if ( paginationWrapperPaddingLink ) {
