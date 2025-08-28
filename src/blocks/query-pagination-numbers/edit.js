@@ -62,6 +62,10 @@ export default function Edit({ attributes, setAttributes, clientId, }) {
 	);
 	const dropdownMenuProps = useToolsPanelDropdownMenuProps();
 
+	const blockProps = useBlockProps( {
+		className: `fb-page-numbers ${blockId}`,
+	} );
+
 	return (
 		<>
 			<InspectorControls>
@@ -96,7 +100,7 @@ export default function Edit({ attributes, setAttributes, clientId, }) {
 					</ToolsPanelItem>
 				</ToolsPanel>
 			</InspectorControls>
-			<div { ...useBlockProps() }>{ paginationNumbers }</div>
+			<div { ...blockProps }>{ paginationNumbers }</div>
 		</>
 	);
 }
