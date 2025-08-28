@@ -15,20 +15,18 @@
 	"usesContext": [ "queryId", "query" ],
 	"providesContext": {
 		"paginationArrow": "paginationArrow",
-		"showLabel": "showLabel"
+		"showLabel": "showLabel",
+		"paginationPrevNextType": "paginationPrevNextType",
+		"paginationPrevTxt": "paginationPrevTxt",
+		"paginationNextTxt": "paginationNextTxt",
+		"paginationPrevIcon": "paginationPrevIcon",
+		"paginationNextIcon": "paginationNextIcon"
 	},
 	"supports": {
 		"anchor": false,
 		"align": ["wide", "full"],
         "customClassName": false,
-		"html": false,
-		"layout": {
-			"allowSwitching": false,
-			"allowInheriting": false,
-			"default": {
-				"type": "flex"
-			}
-		}
+		"html": false
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"

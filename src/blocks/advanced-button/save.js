@@ -5,6 +5,7 @@ export default function save({ attributes }) {
     const {
         blockId,
         buttonAlignment,
+        buttonTextSwitcher,
         buttonText,
         buttonUrl,
         buttonTargetUrl,
@@ -65,7 +66,7 @@ export default function save({ attributes }) {
                             </div>
                         )}
 
-                        {buttonIconAlign !== 'icon-only' && (
+                        {buttonTextSwitcher && (
                             <RichText.Content
                                 tagName="span"
                                 value={buttonText}
@@ -88,12 +89,6 @@ export default function save({ attributes }) {
                                         className="button-icon-image"
                                     />
                                 </div>
-                            </div>
-                        )}
-
-                        {buttonIconAlign === 'icon-only' && (
-                            <div className={`fb-advanced-button-icon-wrapper`}>
-                                <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
                             </div>
                         )}
                     </a>

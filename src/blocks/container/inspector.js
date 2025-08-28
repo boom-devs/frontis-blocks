@@ -1510,9 +1510,9 @@ const Inspector = (props) => {
 							deviceType={deviceType}
 							spacingUnitsHandler={containerPaddingUnitsHandler}
 							spacingUnits={containerPaddingUnits}
-							spacingDesktop={isBlockRootParent && containerDesktopPadding.top === '' ? {top: containerGlobalPadding.Desktop, right: containerGlobalPadding.Desktop, bottom: containerGlobalPadding.Desktop, left: containerGlobalPadding.Desktop} : containerDesktopPadding}
-							spacingTablet={isBlockRootParent && containerDesktopPadding.top === '' ? {top: containerGlobalPadding.Tablet, right: containerGlobalPadding.Tablet, bottom: containerGlobalPadding.Tablet, left: containerGlobalPadding.Tablet} : containerTabletPadding}
-							spacingMobile={isBlockRootParent && containerDesktopPadding.top === '' ? {top: containerGlobalPadding.Mobile, right: containerGlobalPadding.Mobile, bottom: containerGlobalPadding.Mobile, left: containerGlobalPadding.Mobile} : containerMobilePadding}
+							spacingDesktop={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Desktop, right: containerGlobalPadding.Desktop, bottom: containerGlobalPadding.Desktop, left: containerGlobalPadding.Desktop} : containerDesktopPadding}
+							spacingTablet={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Tablet, right: containerGlobalPadding.Tablet, bottom: containerGlobalPadding.Tablet, left: containerGlobalPadding.Tablet} : containerTabletPadding}
+							spacingMobile={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Mobile, right: containerGlobalPadding.Mobile, bottom: containerGlobalPadding.Mobile, left: containerGlobalPadding.Mobile} : containerMobilePadding}
 							handleSpacingUnitHandler={containerPaddingUnitsChange}
 							spacingCombineBtn={containerPaddingLink}
 							spacingCombineBtnHandler={containerPaddingLinkBtn}
@@ -1541,7 +1541,7 @@ const Inspector = (props) => {
 							<FB_ColorControl
 								label={__("Normal Color", "frontis-blocks")}
 								globalColor={containerBorderColor}
-								setGlobalColor={(value) => setAttributes({ containerBorderColor: value })}
+								setGlobalColor={(value) => setAttributes({ containerBorderColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -1549,7 +1549,7 @@ const Inspector = (props) => {
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={containerBorderHoverColor}
-								setGlobalColor={(value) => setAttributes({ containerBorderHoverColor: value })}
+								setGlobalColor={(value) => setAttributes({ containerBorderHoverColor: value === undefined ? '' : value })}
 							/>
 						)}
 
@@ -1674,7 +1674,7 @@ const Inspector = (props) => {
 													<FB_ColorControl
 														label={__("Color", "frontis-blocks")}
 														globalColor={containerBgNormalClassicColor}
-														setGlobalColor={(value) => setAttributes({ containerBgNormalClassicColor: value })}
+														setGlobalColor={(value) => setAttributes({ containerBgNormalClassicColor: value === undefined ? '' : value })}
 													/>
 
 													<FB_ResponsiveBackgroundImageControl
@@ -1702,7 +1702,7 @@ const Inspector = (props) => {
 													globalCustomGradientInputValue={containerBgNormalCustomGradientInputValue}
 													setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgNormalCustomGradientInputValue: value })}
 													globalGradientColor={containerBgNormalGradientColor}
-													setGlobalGradientColor={(value) => setAttributes({ containerBgNormalGradientColor: value })}
+													setGlobalGradientColor={(value) => setAttributes({ containerBgNormalGradientColor: value === undefined ? '' : value })}
 												/>
 											)}
 										</div>
@@ -1758,7 +1758,7 @@ const Inspector = (props) => {
 													<FB_ColorControl
 														label={__("Color", "frontis-blocks")}
 														globalColor={containerBgHoverClassicColor}
-														setGlobalColor={(value) => setAttributes({ containerBgHoverClassicColor: value })}
+														setGlobalColor={(value) => setAttributes({ containerBgHoverClassicColor: value === undefined ? '' : value })}
 													/>
 
 													<FB_ResponsiveBackgroundImageControl
@@ -1786,7 +1786,7 @@ const Inspector = (props) => {
 													globalCustomGradientInputValue={containerBgHoverCustomGradientInputValue}
 													setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgHoverCustomGradientInputValue: value })}
 													globalGradientColor={containerBgHoverGradientColor}
-													setGlobalGradientColor={(value) => setAttributes({ containerBgHoverGradientColor: value })}
+													setGlobalGradientColor={(value) => setAttributes({ containerBgHoverGradientColor: value === undefined ? '' : value })}
 												/>
 											)}
 										</div>
@@ -1868,7 +1868,7 @@ const Inspector = (props) => {
 															<FB_ColorControl
 																label={__("Color", "frontis-blocks")}
 																globalColor={containerBgOverlayNormalClassicColor}
-																setGlobalColor={(value) => setAttributes({ containerBgOverlayNormalClassicColor: value })}
+																setGlobalColor={(value) => setAttributes({ containerBgOverlayNormalClassicColor: value === undefined ? '' : value })}
 															/>
 
 															<FB_ResponsiveBackgroundImageControl
@@ -1896,7 +1896,7 @@ const Inspector = (props) => {
 															globalCustomGradientInputValue={containerBgOverlayNormalCustomGradientInputValue}
 															setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgOverlayNormalCustomGradientInputValue: value })}
 															globalGradientColor={containerBgOverlayNormalGradientColor}
-															setGlobalGradientColor={(value) => setAttributes({ containerBgOverlayNormalGradientColor: value })}
+															setGlobalGradientColor={(value) => setAttributes({ containerBgOverlayNormalGradientColor: value === undefined ? '' : value })}
 														/>
 													)}
 												</div>
@@ -1952,7 +1952,7 @@ const Inspector = (props) => {
 															<FB_ColorControl
 																label={__("Color", "frontis-blocks")}
 																globalColor={containerBgOverlayHoverClassicColor}
-																setGlobalColor={(value) => setAttributes({ containerBgOverlayHoverClassicColor: value })}
+																setGlobalColor={(value) => setAttributes({ containerBgOverlayHoverClassicColor: value === undefined ? '' : value })}
 															/>
 
 															<FB_ResponsiveBackgroundImageControl
@@ -1980,7 +1980,7 @@ const Inspector = (props) => {
 															globalCustomGradientInputValue={containerBgOverlayHoverCustomGradientInputValue}
 															setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgOverlayHoverCustomGradientInputValue: value })}
 															globalGradientColor={containerBgOverlayHoverGradientColor}
-															setGlobalGradientColor={(value) => setAttributes({ containerBgOverlayHoverGradientColor: value })}
+															setGlobalGradientColor={(value) => setAttributes({ containerBgOverlayHoverGradientColor: value === undefined ? '' : value })}
 														/>
 													)}
 												</div>

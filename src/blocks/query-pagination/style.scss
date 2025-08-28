@@ -1,37 +1,75 @@
-.wp-block-query-pagination {
-	// This moves the next link to the right side of the container,
-	// which is important when it's the only block displayed
-	// and the block has a "space-between" justification.
-	&.is-content-justification-space-between {
-		> .wp-block-query-pagination-next:last-of-type {
-			margin-inline-start: auto;
-		}
-		> .wp-block-query-pagination-previous:first-child {
-			margin-inline-end: auto;
-		}
-	}
-
-
-	.wp-block-query-pagination-previous-arrow {
-		margin-right: 1ch;
-		display: inline-block; // Needed so that the transform works.
-		// chevron(`»`) symbol doesn't need the mirroring by us.
-		&:not(.is-arrow-chevron) {
-			// Flip for RTL.
-			transform: scaleX(1) #{"/*rtl:scaleX(-1);*/"}; // This points the arrow right for LTR and left for RTL.
-		}
-	}
-	.wp-block-query-pagination-next-arrow {
-		margin-left: 1ch;
-		display: inline-block; // Needed so that the transform works.
-		// chevron(`»`) symbol doesn't need the mirroring by us.
-		&:not(.is-arrow-chevron) {
-			// Flip for RTL.
-			transform: scaleX(1) #{"/*rtl:scaleX(-1);*/"}; // This points the arrow right for LTR and left for RTL.
-		}
-	}
-
-	&.aligncenter {
+.fb-query-pagination {
+	.fb-page-prev {
+		display: flex;
+		align-items: center;
 		justify-content: center;
+
+		text-decoration: none !important;
+		&:focus {
+			outline: none !important;
+		}
+
+		.fb-pagination-icon {
+			display: flex;
+			svg{
+				width: 100%;
+				height: 100%;
+			}
+		}
+		&:focus {
+			outline: none !important;
+		}
+		&.is-disabled {
+			opacity: .4;
+			pointer-events: none;
+			cursor: default;
+		}
+	}
+	.fb-page-next {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		text-decoration: none !important;
+		&:focus {
+			outline: none !important;
+		}
+
+		.fb-pagination-icon {
+			display: flex;
+			svg{
+				width: 100%;
+				height: 100%;
+			}
+		}
+		&:focus {
+			outline: none !important;
+		}
+
+		&.is-disabled {
+			opacity: .4;
+			pointer-events: none;
+			cursor: default;
+		}
+	}
+	.page-numbers {
+		width: 36px;
+		aspect-ratio: 1 / 1;
+		border: none;
+		color: #000;
+		background-color: #fff0;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-family: Cabin;
+		font-size: 14px;
+		font-weight: 400;
+		border-radius: 50%;
+		transition: all .3s ease-in-out;
+		
+		&:focus {
+			outline: none !important;
+		}
 	}
 }

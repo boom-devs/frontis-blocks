@@ -597,3 +597,36 @@ button.fb-custom-color-btn:hover {
 // 		width: 100%;
 // 	}
 // }
+
+
+.fb-theme-settings-wrapper {
+	.components-panel__body {
+		&.is-opened {
+			.components-panel__body-title {
+				margin-bottom: 25px;
+			}
+		}
+	}
+	// .components-panel__body {
+	// 	padding: 0 I !important;
+
+	// 	&.is-opened {
+	// 		padding: 0 17px !important;
+	// 	}
+	// }
+	// .fb-theme-settings-element {
+	// 	min-height: 58px;
+	// 	background: #FFFFFF;
+	// 	padding: 14px 16px;
+	// 	color: #050607;
+	// 	font-family: "Onest", sans-serif;
+	// 	font-size: 14px;
+	// 	font-weight: 600;
+	// 	letter-spacing: 0px;
+	// 	line-height: 19px;
+	// 	border-top: 1px solid #ddd;
+	// 	border-bottom: 1px solid #ddd;
+	// 	display: flex;
+	// 	align-items: center;
+	// }
+}

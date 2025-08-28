@@ -346,7 +346,15 @@
                 gap: 8px;
                 a {
                     color: $neutral-color-950;
+                    text-decoration: underline;
+                    text-decoration-color: transparent;
                     cursor: pointer;
+                    transition: all 0.3s ease-in-out;
+
+                    &:hover {
+                        text-decoration-color: $neutral-color-950;
+                        transition: all 0.3s ease-in-out;
+                    }
                 }
             }
 

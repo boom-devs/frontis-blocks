@@ -3779,7 +3779,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={fluentFormLabelColor}
-                        setGlobalColor={(value) => setAttributes({ fluentFormLabelColor: value })}
+                        setGlobalColor={(value) => setAttributes({ fluentFormLabelColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -3787,7 +3787,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={fluentFormLabelHoverColor}
-                        setGlobalColor={(value) => setAttributes({ fluentFormLabelHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ fluentFormLabelHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -3864,13 +3864,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <FB_ColorControl
                     label={__("Background Color", "frontis-blocks")}
                     globalColor={fluentFormInputBgColor}
-                    setGlobalColor={(value) => setAttributes({ fluentFormInputBgColor: value })}
+                    setGlobalColor={(value) => setAttributes({ fluentFormInputBgColor: value === undefined ? '' : value })}
                 />
 
                 <FB_ColorControl
                     label={__("Color", "frontis-blocks")}
                     globalColor={fluentFormInputColor}
-                    setGlobalColor={(value) => setAttributes({ fluentFormInputColor: value })}
+                    setGlobalColor={(value) => setAttributes({ fluentFormInputColor: value === undefined ? '' : value })}
                 />
 
 
@@ -4029,7 +4029,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <FB_ColorControl
                     label={__("Border Color", "frontis-blocks")}
                     globalColor={fluentFormBorderColor}
-                    setGlobalColor={(value) => setAttributes({ fluentFormBorderColor: value })}
+                    setGlobalColor={(value) => setAttributes({ fluentFormBorderColor: value === undefined ? '' : value })}
                 />
 
                 <FB_Spacing 
@@ -4070,7 +4070,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <FB_ColorControl
                     label={__("Focus Color", "frontis-blocks")}
                     globalColor={fluentFormInputFocusColor}
-                    setGlobalColor={(value) => setAttributes({ fluentFormInputFocusColor: value })}
+                    setGlobalColor={(value) => setAttributes({ fluentFormInputFocusColor: value === undefined ? '' : value })}
                 />
 
                 <FB_Spacing 
@@ -4107,7 +4107,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <FB_ColorControl
                     label={__("Color", "frontis-blocks")}
                     globalColor={fluentFormPlaceholderColor}
-                    setGlobalColor={(value) => setAttributes({ fluentFormPlaceholderColor: value })}
+                    setGlobalColor={(value) => setAttributes({ fluentFormPlaceholderColor: value === undefined ? '' : value })}
                 />
             </PanelBody>
             <PanelBody title={__("Radio & Checkbox", "frontis-blocks")} initialOpen={false}>
@@ -4128,13 +4128,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <FB_ColorControl
                     label={__("Normal Color", "frontis-blocks")}
                     globalColor={fluentFormRadioColor}
-                    setGlobalColor={(value) => setAttributes({ fluentFormRadioColor: value })}
+                    setGlobalColor={(value) => setAttributes({ fluentFormRadioColor: value === undefined ? '' : value })}
                 />
 
                 <FB_ColorControl
                     label={__("Checked Color", "frontis-blocks")}
                     globalColor={fluentFormRadioCheckedColor}
-                    setGlobalColor={(value) => setAttributes({ fluentFormRadioCheckedColor: value })}
+                    setGlobalColor={(value) => setAttributes({ fluentFormRadioCheckedColor: value === undefined ? '' : value })}
                 />
 
                 <FB_Range
@@ -4154,7 +4154,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <FB_ColorControl
                     label={__("Border Color", "frontis-blocks")}
                     globalColor={fluentFormRadioBorderColor}
-                    setGlobalColor={(value) => setAttributes({ fluentFormRadioBorderColor: value })}
+                    setGlobalColor={(value) => setAttributes({ fluentFormRadioBorderColor: value === undefined ? '' : value })}
                 />
 
                 <FB_Spacing 
@@ -4215,7 +4215,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
                             globalColor={fluentFormSectionBreakTitleColor}
-                            setGlobalColor={(value) => setAttributes({ fluentFormSectionBreakTitleColor: value })}
+                            setGlobalColor={(value) => setAttributes({ fluentFormSectionBreakTitleColor: value === undefined ? '' : value })}
                         />
                     )}
 
@@ -4223,7 +4223,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
                             globalColor={fluentFormSectionBreakTitleHoverColor}
-                            setGlobalColor={(value) => setAttributes({ fluentFormSectionBreakTitleHoverColor: value })}
+                            setGlobalColor={(value) => setAttributes({ fluentFormSectionBreakTitleHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 
@@ -4317,7 +4317,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
                             globalColor={fluentFormSectionBreakDescColor}
-                            setGlobalColor={(value) => setAttributes({ fluentFormSectionBreakDescColor: value })}
+                            setGlobalColor={(value) => setAttributes({ fluentFormSectionBreakDescColor: value === undefined ? '' : value })}
                         />
                     )}
 
@@ -4325,7 +4325,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
                             globalColor={fluentFormSectionBreakDescHoverColor}
-                            setGlobalColor={(value) => setAttributes({ fluentFormSectionBreakDescHoverColor: value })}
+                            setGlobalColor={(value) => setAttributes({ fluentFormSectionBreakDescHoverColor: value === undefined ? '' : value })}
                         />
                     )}
 
@@ -4431,7 +4431,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={fluentFormHtmlColor}
-                        setGlobalColor={(value) => setAttributes({ fluentFormHtmlColor: value })}
+                        setGlobalColor={(value) => setAttributes({ fluentFormHtmlColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -4439,7 +4439,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={fluentFormHtmlHoverColor}
-                        setGlobalColor={(value) => setAttributes({ fluentFormHtmlHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ fluentFormHtmlHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -4633,7 +4633,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={fluentFormSubmitColor}
-                        setGlobalColor={(value) => setAttributes({ fluentFormSubmitColor: value })}
+                        setGlobalColor={(value) => setAttributes({ fluentFormSubmitColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -4641,7 +4641,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={fluentFormSubmitHoverColor}
-                        setGlobalColor={(value) => setAttributes({ fluentFormSubmitHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ fluentFormSubmitHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -4656,7 +4656,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={fluentFormSubmitBgColor}
-                        setGlobalColor={(value) => setAttributes({ fluentFormSubmitBgColor: value })}
+                        setGlobalColor={(value) => setAttributes({ fluentFormSubmitBgColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -4664,7 +4664,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={fluentFormSubmitBgHoverColor}
-                        setGlobalColor={(value) => setAttributes({ fluentFormSubmitBgHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ fluentFormSubmitBgHoverColor: value === undefined ? '' : value })}
                     />
                 )}
                 <FB_Spacing 
@@ -4710,7 +4710,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={fluentFormSubmitBorderColor}
-                        setGlobalColor={(value) => setAttributes({ fluentFormSubmitBorderColor: value })}
+                        setGlobalColor={(value) => setAttributes({ fluentFormSubmitBorderColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -4718,7 +4718,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={fluentFormSubmitBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ fluentFormSubmitBorderHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ fluentFormSubmitBorderHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -4810,13 +4810,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <FB_ColorControl
                     label={__("Color", "frontis-blocks")}
                     globalColor={fluentFormSuccessColor}
-                    setGlobalColor={(value) => setAttributes({ fluentFormSuccessColor: value })}
+                    setGlobalColor={(value) => setAttributes({ fluentFormSuccessColor: value === undefined ? '' : value })}
                 />
 
                 <FB_ColorControl
                     label={__("Background Color", "frontis-blocks")}
                     globalColor={fluentFormSuccessBgColor}
-                    setGlobalColor={(value) => setAttributes({ fluentFormSuccessBgColor: value })}
+                    setGlobalColor={(value) => setAttributes({ fluentFormSuccessBgColor: value === undefined ? '' : value })}
                 />
 
                 <SelectControl
@@ -4836,7 +4836,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={fluentFormSuccessBorderColor}
-                        setGlobalColor={(value) => setAttributes({ fluentFormSuccessBorderColor: value })}
+                        setGlobalColor={(value) => setAttributes({ fluentFormSuccessBorderColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -4844,7 +4844,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={fluentFormSuccessBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ fluentFormSuccessBorderHoverColor: value })}
+                        setGlobalColor={(value) => setAttributes({ fluentFormSuccessBorderHoverColor: value === undefined ? '' : value })}
                     />
                 )}
 
@@ -4934,7 +4934,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <FB_ColorControl
                     label={__("Color", "frontis-blocks")}
                     globalColor={fluentFormErrorColor}
-                    setGlobalColor={(value) => setAttributes({ fluentFormErrorColor: value })}
+                    setGlobalColor={(value) => setAttributes({ fluentFormErrorColor: value === undefined ? '' : value })}
                 />
 
                 <FB_Spacing 
@@ -5091,7 +5091,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Normal Color", "frontis-blocks")}
                                 globalColor={fluentFormGlobalBgColor}
-                                setGlobalColor={(value) => setAttributes({ fluentFormGlobalBgColor: value })}
+                                setGlobalColor={(value) => setAttributes({ fluentFormGlobalBgColor: value === undefined ? '' : value })}
                             />
                         )}
 
@@ -5099,7 +5099,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Hover Color", "frontis-blocks")}
                                 globalColor={fluentFormGlobalBgHoverColor}
-                                setGlobalColor={(value) => setAttributes({ fluentFormGlobalBgHoverColor: value })}
+                                setGlobalColor={(value) => setAttributes({ fluentFormGlobalBgHoverColor: value === undefined ? '' : value })}
                             />
                         )}
                     </PanelBody>
@@ -5123,7 +5123,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Normal Color", "frontis-blocks")}
                                 globalColor={fluentFormGlobalBorderColor}
-                                setGlobalColor={(value) => setAttributes({ fluentFormGlobalBorderColor: value })}
+                                setGlobalColor={(value) => setAttributes({ fluentFormGlobalBorderColor: value === undefined ? '' : value })}
                             />
                         )}
 
@@ -5131,7 +5131,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             <FB_ColorControl
                                 label={__("Hover Color", "frontis-blocks")}
                                 globalColor={fluentFormGlobalBorderHoverColor}
-                                setGlobalColor={(value) => setAttributes({ fluentFormGlobalBorderHoverColor: value })}
+                                setGlobalColor={(value) => setAttributes({ fluentFormGlobalBorderHoverColor: value === undefined ? '' : value })}
                             />
                         )}
 

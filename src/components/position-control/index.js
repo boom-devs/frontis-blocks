@@ -47,6 +47,7 @@ const FB_PositionControl = ({
         { label: __('Relative', 'frontis-blocks'), value: 'relative' },
         { label: __('Absolute', 'frontis-blocks'), value: 'absolute' },
         { label: __('Fixed', 'frontis-blocks'), value: 'fixed' },
+        { label: __('Sticky', 'frontis-blocks'), value: 'sticky' },
     ];
 
     const VR_TYPES = [

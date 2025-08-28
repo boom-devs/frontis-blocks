@@ -43,6 +43,10 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, i
         setActiveTagTab('');
     };
 
+  const handelTemplates = value => {
+    setIsProTemplate(isProTemplate === value ? '' : value);
+  }
+
     return (
         <div className="fb-template-library-store-sidebar">
             {activeTab !== 'templatelibrary' && (
