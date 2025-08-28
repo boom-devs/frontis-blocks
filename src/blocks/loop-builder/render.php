@@ -204,7 +204,7 @@ function render_loop_builder($block_content, $block) {
 								<?php if ( $paginationPrevNextType === 'icon' ) : ?>
 									<span class="fb-pagination-icon" aria-hidden="true"></span>
 								<?php else : ?>
-									<?php echo esc_html( $paginationPrevTxt ); ?>
+									<span class="fb-pagination-text"><?php echo esc_html( $paginationPrevTxt ); ?></span>
 								<?php endif; ?>
 								</a>
 							<?php else : ?>
@@ -215,7 +215,7 @@ function render_loop_builder($block_content, $block) {
 								<?php if ( $paginationPrevNextType === 'icon' ) : ?>
 									<span class="fb-pagination-icon" aria-hidden="true"></span>
 								<?php else : ?>
-									<?php echo esc_html( $paginationPrevTxt ); ?>
+									<span class="fb-pagination-text"><?php echo esc_html( $paginationPrevTxt ); ?></span>
 								<?php endif; ?>
 								</span>
 							<?php endif; ?>
@@ -233,7 +233,7 @@ function render_loop_builder($block_content, $block) {
 								<?php if ( $paginationPrevNextType === 'icon' ) : ?>
 									<span class="fb-pagination-icon" aria-hidden="true"></span>
 								<?php else : ?>
-									<?php echo esc_html( $paginationNextTxt ); ?>
+									<span class="fb-pagination-text"><?php echo esc_html( $paginationNextTxt ); ?></span>
 								<?php endif; ?>
 								</a>
 							<?php else : ?>
