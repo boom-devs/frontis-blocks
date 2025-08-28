@@ -7,7 +7,7 @@
         background: $white-color;
         border-right: 1px solid $neutral-color-100;
         height: 100vh;
-       
+
         .fb-template-category-wrapper {
             display: flex;
             align-items: center;
@@ -23,7 +23,7 @@
                     line-height: 28px;
                     color: $neutral-color-950;
                     margin: 0;
-                    
+
                 }
             }
 
@@ -40,7 +40,8 @@
                     border-radius: 50px;
                     cursor: pointer;
                 }
-                .fb-tl-free{
+
+                .fb-tl-free {
                     background: $primary-color-50;
                     color: $primary-color-400;
 
@@ -49,7 +50,8 @@
                         color: $white-color;
                     }
                 }
-                .fb-tl-pro{
+
+                .fb-tl-pro {
                     background: $warning-color-100;
                     color: $warning-color;
 
@@ -87,15 +89,22 @@
                     align-items: center;
                     gap: 8px;
 
+                    .fb-category-icon {
+                        max-width: 20px;
+                        width: 100%;
+                        height: 20px;
+                    }
+
                     span {
                         display: flex;
                         width: 20px;
                         height: 20px;
-                        svg{
+
+                        svg {
                             width: 100%;
                             height: 100%;
-                            
-                            path{
+
+                            path {
                                 stroke: $neutral-color-600;
                             }
                         }
@@ -134,8 +143,8 @@
                         color: $primary-color-base;
 
                         span {
-                            svg{
-                                path{
+                            svg {
+                                path {
                                     stroke: $primary-color-base;
                                 }
                             }
