@@ -1564,7 +1564,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** Start Post Image Margin */
     const handlePostImageMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
-        if ( postGridMarginLink ) {
+        if ( postImageMarginLink ) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {

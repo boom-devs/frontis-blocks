@@ -18,17 +18,19 @@ import ColorSettings from "./components/ColorSettings";
 import { defaultColors, defaultTypography } from "./constants/constants";
 
 
-function FsiGbTypography() {
+function FsiGbTypography({template}) {
 	const deviceType = useDeviceType();
 	const isAfterSave = useAfterSave();
 
+	console.log(template);
+
 	// State management
-	const [globalColors, setGlobalColors] = useState(frontisBlocksAdmin?.global_colors);
+	const [globalColors, setGlobalColors] = useState(template.colors);
 	const [customColors, setCustomColors] = useState([]);
-	const [gradientColors, setGradientColors] = useState(frontisBlocksAdmin?.gradients_colors);
+	const [gradientColors, setGradientColors] = useState(template.gradientColors);
 	const [customGradientColors, setCustomGradientColors] = useState([]);
-	const [typography, setTypography] = useState(defaultTypography);
-	const [customTypography, setCustomTypography] = useState({});
+	const [typography, setTypography] = useState(template.typographies);
+	const [customTypography, setCustomTypography] = useState(template.customTypographies);
 	const [fontFamilies, setFontFamilies] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 

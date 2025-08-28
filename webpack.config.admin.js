@@ -27,6 +27,7 @@ module.exports = {
 		quickAccess:path.resolve(process.cwd(), 'admin', 'quick-sidebar', 'index.js'),
 		blockRecovery: path.resolve(process.cwd(), 'admin', 'block-recovery', 'index.js'),
 		copyPasteStyle: path.resolve(process.cwd(), 'admin', 'copy-paste', 'index.js'),
+		highlightColor: path.resolve(process.cwd(), 'admin', 'highlight-color', 'index.js'),
 
 	},
 	output: {
