@@ -344,9 +344,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonColor: "#fff",
 				buttonIconImageUrl: "",
 				buttonIcon: "",
+				buttonIconColor: "#fff",
 				buttonIconBorder: "none",
 				buttonTextSwitcher: true,
 				buttonText: "Primary Button",
+				buttonIconRotate: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0'
+				},
 				buttonIconPaddingDesktop: {
 					top: "0",
 					bottom: "0",
@@ -378,9 +384,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonColor: "#15171C",
 				buttonIconImageUrl: "",
 				buttonIcon: "",
+				buttonIconColor: "",
 				buttonIconBorder: "none",
 				buttonTextSwitcher: true,
 				buttonText: "Default Button",
+				buttonIconRotate: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0'
+				},
 				buttonIconPaddingDesktop: {
 					top: "0",
 					bottom: "0",
@@ -430,9 +442,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonColor: "#15171C",
 				buttonIconImageUrl: "",
 				buttonIcon: "",
+				buttonIconColor: "#15171C",
 				buttonIconBorder: "none",
 				buttonTextSwitcher: true,
 				buttonText: "Dashed Button",
+				buttonIconRotate: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0'
+				},
 				buttonIconPaddingDesktop: {
 					top: "0",
 					bottom: "0",
@@ -482,9 +500,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonColor: "#15171C",
 				buttonIconImageUrl: "",
 				buttonIcon: "",
+				buttonIconColor: "#15171C",
 				buttonIconBorder: "none",
 				buttonTextSwitcher: true,
 				buttonText: "Text Button",
+				buttonIconRotate: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0'
+				},
 				buttonIconPaddingDesktop: {
 					top: "0",
 					bottom: "0",
@@ -534,9 +558,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonColor: "#399CFF",
 				buttonIconImageUrl: "",
 				buttonIcon: "",
+				buttonIconColor: "#399CFF",
 				buttonIconBorder: "none",
 				buttonTextSwitcher: true,
 				buttonText: "Link Button",
+				buttonIconRotate: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0'
+				},
 				buttonIconPaddingDesktop: {
 					top: "0",
 					bottom: "0",
@@ -585,6 +615,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonBorderColor: "",
 				buttonColor: "#fff",
 				buttonIcon: "",
+				buttonIconColor: "#fff",
 				buttonIconBgColor: "transparent",
 				buttonIconAlign: "image",
 				buttonIconPosition: "left",
@@ -592,6 +623,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonIconImageUrl: defaultImageUrl[0],
 				buttonTextSwitcher: true,
 				buttonText: "Search",
+				buttonIconRotate: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0'
+				},
 				buttonIconPaddingDesktop: {
 					top: "0",
 					bottom: "0",
@@ -650,12 +686,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonBorderColor: "#C3C8D2",
 				buttonColor: "#15171C",
 				buttonIcon: "",
+				buttonIconColor: "#15171C",
 				buttonIconAlign: "image",
 				buttonIconPosition: "right",
 				buttonIconBorder: "none",
 				buttonIconImageUrl: defaultImageUrl[1],
 				buttonTextSwitcher: true,
 				buttonText: "Search",
+				buttonIconRotate: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0'
+				},
 				buttonIconPaddingDesktop: {
 					top: "0",
 					bottom: "0",
@@ -720,6 +762,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonBorderColor: "#C3C8D2",
 				buttonColor: "#fff",
 				buttonIcon: "",
+				buttonIconColor: "#fff",
 				buttonIconBgColor: "transparent",
 				buttonIconAlign: "image",
 				buttonIconPosition: "right",
@@ -727,6 +770,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonIconImageUrl: defaultImageUrl[0],
 				buttonTextSwitcher: false,
 				buttonText: "Search",
+				buttonIconRotate: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0'
+				},
 				buttonIconPaddingDesktop: {
 					top: "0",
 					bottom: "0",
@@ -790,11 +838,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonBorder: "none",
 				buttonBorderColor: "#C3C8D2",
 				buttonColor: "#fff",
-				buttonIconRotate: {
-					Desktop: '180',
-					Tablet: '180',
-					Mobile: '180'
-				},
 				buttonIconBgColor: "#fff",
 				buttonIconColor: "#399CFF",
 				buttonIcon: "arrow-left-long",
@@ -804,6 +847,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonIconImageUrl: "",
 				buttonTextSwitcher: true,
 				buttonText: "Style - 1",
+				buttonIconRotate: {
+					Desktop: '180',
+					Tablet: '180',
+					Mobile: '180'
+				},
 				buttonDesktopPadding: {
 					top: "8",
 					bottom: "8",
@@ -873,11 +921,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonBorder: "none",
 				buttonBorderColor: "#C3C8D2",
 				buttonColor: "#fff",
-				buttonIconRotate: {
-					Desktop: '180',
-					Tablet: '180',
-					Mobile: '180'
-				},
 				buttonIconBgColor: "#fff",
 				buttonIconColor: "#399CFF",
 				buttonIcon: "arrow-left-long",
@@ -887,10 +930,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonIconImageUrl: "",
 				buttonTextSwitcher: true,
 				buttonText: "Style - 2",
+				buttonIconRotate: {
+					Desktop: '180',
+					Tablet: '180',
+					Mobile: '180'
+				},
 				buttonDesktopPadding: {
 					top: "8",
 					bottom: "8",
-					left: "16",
+					left: "24",
 					right: "8",
 				},
 				buttonIconPaddingDesktop: {
@@ -956,11 +1004,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonBorder: "none",
 				buttonBorderColor: "#C3C8D2",
 				buttonColor: "#fff",
-				buttonIconRotate: {
-					Desktop: '180',
-					Tablet: '180',
-					Mobile: '180'
-				},
 				buttonIconBgColor: "#399CFF",
 				buttonIconColor: "#fff",
 				buttonIcon: "arrow-left-long",
@@ -968,6 +1011,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonIconPosition: "right",
 				buttonIconBorder: "solid",
 				buttonIconBorderColor: "#fff",
+				buttonIconRotate: {
+					Desktop: '180',
+					Tablet: '180',
+					Mobile: '180'
+				},
 				buttonIconBorderDesktop: {
 					top: "3",
 					bottom: "3",
@@ -985,8 +1033,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonDesktopPadding: {
 					top: "8",
 					bottom: "8",
-					left: "16",
-					right: "8",
+					left: "24",
+					right: "24",
 				},
 				buttonIconGapSize: {
 					Desktop: '13',
@@ -1003,7 +1051,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					top: "0",
 					bottom: "0",
 					left: "0",
-					right: "-22",
+					right: "-38",
 				},
 				buttonIconImageWidth: {
 					Desktop: '18',
