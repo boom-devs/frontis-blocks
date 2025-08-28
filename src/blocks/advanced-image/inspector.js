@@ -923,10 +923,10 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		setAttributes({ globalBorderColorSwitcher: value });
 	};
 	const handleGlobalBorderColorChange = (value) => {
-		setAttributes({ globalBorderColor: value });
+		setAttributes({ globalBorderColor: value === undefined ? '' : value });
 	};
 	const handleGlobalBorderHoverColorChange = (value) => {
-		setAttributes({ globalBorderHoverColor: value });
+		setAttributes({ globalBorderHoverColor: value === undefined ? '' : value });
 	};
 
 	const advancedImageStyle = useMemo(
@@ -1527,7 +1527,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					<FB_ColorControl
 						label={__("Normal Color", "frontis-blocks")}
 						globalColor={HeadingColor}
-						setGlobalColor={(value) => setAttributes({ HeadingColor: value })}
+						setGlobalColor={(value) => setAttributes({ HeadingColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -1535,7 +1535,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					<FB_ColorControl
 						label={__("Hover Color", "frontis-blocks")}
 						globalColor={HeadingHoverColor}
-						setGlobalColor={(value) => setAttributes({ HeadingHoverColor: value })}
+						setGlobalColor={(value) => setAttributes({ HeadingHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
 
@@ -1645,8 +1645,8 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 				globalColor={imageBorderColor}
 				globalHoverColor={imageBorderHoverColor}
 				handleColorSwitcherChange={(value) => setAttributes({ imageBorderColorSwitcher: value })}
-				handleGlobalColorChange={(value) => setAttributes({ imageBorderColor: value })}
-				handleGlobalHoverColorChange={(value) => setAttributes({ imageBorderHoverColor: value })}
+				handleGlobalColorChange={(value) => setAttributes({ imageBorderColor: value === undefined ? '' : value })}
+				handleGlobalHoverColorChange={(value) => setAttributes({ imageBorderHoverColor: value === undefined ? '' : value })}
 			/>
 			
 			<FB_Spacing
@@ -1698,9 +1698,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					normalBackgroundType={overlayBackgroundType}
 					setNormalBackgroundType={(value) => setAttributes({ overlayBackgroundType: value })}
 					normalClassicColor={overlayClassicColor}
-					setNormalClassicColor={(value) => setAttributes({ overlayClassicColor: value })}
+					setNormalClassicColor={(value) => setAttributes({ overlayClassicColor: value === undefined ? '' : value })}
 					normalGradientColor={overlayGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ overlayGradientColor: value })}
+					setNormalGradientColor={(value) => setAttributes({ overlayGradientColor: value === undefined ? '' : value })}
 					normalCustomGradientSwitcher={overlayCustomGradientSwitcher}
 					setNormalCustomGradientSwitcher={(value) => setAttributes({ overlayCustomGradientSwitcher: value })}
 					normalCustomGradientInputValue={overlayCustomGradientInputValue}
@@ -1709,9 +1709,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					hoverBackgroundType={overlayHoverBackgroundType} 
 					setHoverBackgroundType={(value) => setAttributes({ postGridHoverBackgroundType: value })}
 					hoverClassicColor={overlayHoverClassicColor}
-					setHoverClassicColor={(value) => setAttributes({ overlayHoverClassicColor: value })}
+					setHoverClassicColor={(value) => setAttributes({ overlayHoverClassicColor: value === undefined ? '' : value })}
 					hoverGradientColor={overlayHoverGradientColor} 
-					setHoverGradientColor={(value) => setAttributes({ overlayHoverGradientColor: value })}
+					setHoverGradientColor={(value) => setAttributes({ overlayHoverGradientColor: value === undefined ? '' : value })}
 					hoverCustomGradientSwitcher={overlayHoverCustomGradientSwitcher}
 					setHoverCustomGradientSwitcher={(value) => setAttributes({ overlayHoverCustomGradientSwitcher: value })}
 					hoverCustomGradientInputValue={overlayHoverCustomGradientInputValue}
@@ -1869,9 +1869,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 							normalBackgroundType={testBackgroundType}
 							setNormalBackgroundType={(value) => setAttributes({ testBackgroundType: value }) }
 							normalClassicColor={testClassicColor}
-							setNormalClassicColor={(value) => setAttributes({ testClassicColor: value }) }
+							setNormalClassicColor={(value) => setAttributes({ testClassicColor: value === undefined ? '' : value }) }
 							normalGradientColor={testGradientColor}
-							setNormalGradientColor={(value) => setAttributes({ testGradientColor: value }) }
+							setNormalGradientColor={(value) => setAttributes({ testGradientColor: value === undefined ? '' : value }) }
 							normalCustomGradientSwitcher={ testCustomGradientSwitcher }
 							setNormalCustomGradientSwitcher={(value) => setAttributes({ testCustomGradientSwitcher: value, }) }
 							normalCustomGradientInputValue={ testCustomGradientInputValue }
@@ -1893,9 +1893,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 							hoverBackgroundType={hoverBackgroundType}
 							setHoverBackgroundType={(value) => setAttributes({ hoverBackgroundType: value }) }
 							hoverClassicColor={hoverClassicColor}
-							setHoverClassicColor={(value) => setAttributes({ hoverClassicColor: value }) }
+							setHoverClassicColor={(value) => setAttributes({ hoverClassicColor: value === undefined ? '' : value }) }
 							hoverGradientColor={hoverGradientColor}
-							setHoverGradientColor={(value) => setAttributes({ hoverGradientColor: value }) }
+							setHoverGradientColor={(value) => setAttributes({ hoverGradientColor: value === undefined ? '' : value }) }
 							hoverCustomGradientSwitcher={ hoverCustomGradientSwitcher }
 							setHoverCustomGradientSwitcher={(value) => setAttributes({ hoverCustomGradientSwitcher: value, }) }
 							hoverCustomGradientInputValue={ hoverCustomGradientInputValue }

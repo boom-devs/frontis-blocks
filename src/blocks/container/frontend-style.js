@@ -325,12 +325,12 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 	const widthTabletFallback = getFallbackNumber(customWidth['Tablet'], 'customWidth', blockName);
 	const widthMobileFallback = getFallbackNumber(customWidth['Mobile'], 'customWidth', blockName);
 
-	const rowGapDesktopFallback = getFallbackNumber(rowGap['Desktop'] === '' ? globalRowGap['Desktop'] : rowGap['Desktop'], 'rowGapDesktop', blockName);
-	const columnGapDesktopFallback = getFallbackNumber(columnGap['Desktop'] === '' ? globalColumnGap['Desktop'] : columnGap['Desktop'], 'columnGapDesktop', blockName);
-	const rowGapTabletFallback = getFallbackNumber(rowGap['Desktop'] === '' ? globalRowGap['Tablet'] : rowGap['Tablet'], 'rowGapTablet', blockName);
-	const columnGapTabletFallback = getFallbackNumber(columnGap['Desktop'] === '' ? globalColumnGap['Tablet'] : columnGap['Tablet'], 'columnGapTablet', blockName);
-	const rowGapMobileFallback = getFallbackNumber(rowGap['Desktop'] === '' ? globalRowGap['Mobile'] : rowGap['Mobile'], 'rowGapMobile', blockName);
-	const columnGapMobileFallback = getFallbackNumber(columnGap['Desktop'] === '' ? globalColumnGap['Mobile'] : columnGap['Mobile'], 'columnGapMobile', blockName);
+	const rowGapDesktopFallback = getFallbackNumber((rowGap['Desktop'] === '' && rowGap['Tablet'] === '' && rowGap['Mobile'] === '') ? globalRowGap['Desktop'] : rowGap['Desktop'], 'rowGapDesktop', blockName);
+	const columnGapDesktopFallback = getFallbackNumber((columnGap['Desktop'] === '' && columnGap['Tablet'] === '' && columnGap['Mobile'] === '') ? globalColumnGap['Desktop'] : columnGap['Desktop'], 'columnGapDesktop', blockName);
+	const rowGapTabletFallback = getFallbackNumber((rowGap['Desktop'] === '' && rowGap['Tablet'] === '' && rowGap['Mobile'] === '') ? globalRowGap['Tablet'] : rowGap['Tablet'], 'rowGapTablet', blockName);
+	const columnGapTabletFallback = getFallbackNumber((columnGap['Desktop'] === '' && columnGap['Tablet'] === '' && columnGap['Mobile'] === '') ? globalColumnGap['Tablet'] : columnGap['Tablet'], 'columnGapTablet', blockName);
+	const rowGapMobileFallback = getFallbackNumber((rowGap['Desktop'] === '' && rowGap['Tablet'] === '' && rowGap['Mobile'] === '') ? globalRowGap['Mobile'] : rowGap['Mobile'], 'rowGapMobile', blockName);
+	const columnGapMobileFallback = getFallbackNumber((columnGap['Desktop'] === '' && columnGap['Tablet'] === '' && columnGap['Mobile'] === '') ? globalColumnGap['Mobile'] : columnGap['Mobile'], 'columnGapMobile', blockName);
 
 	const borderCSS = generateBorderCSS(attributes, 'container');
 	const borderCSSTablet = generateBorderCSS(attributes, 'container', 'tablet');
@@ -487,7 +487,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 	// Handle Desktop Padding
 	let desktopContainerPadding = {};
-	if (containerDesktopPadding.top === '') {
+	if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
 		desktopContainerPadding = {
 			'padding': generateCSSUnit(containerGlobalPadding.Desktop, 'px'),
 		}
@@ -508,7 +508,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 	// Handle Tablet Padding
 	let tabletContainerPadding = {};
-	if (containerDesktopPadding.top === '') {
+	if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
 		tabletContainerPadding = {
 			'padding': generateCSSUnit(containerGlobalPadding.Tablet, 'px'),
 		}
@@ -529,7 +529,7 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 
 	// Handle Mobile Padding
 	let mobileContainerPadding = {};
-	if (containerDesktopPadding.top === '') {
+	if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
 		mobileContainerPadding = {
 			'padding': generateCSSUnit(containerGlobalPadding.Mobile, 'px'),
 		}

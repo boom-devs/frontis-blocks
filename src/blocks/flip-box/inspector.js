@@ -52,6 +52,7 @@ import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_UrlControl from "@Components/url-control";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_AlignmentControl from '@Components/alignment-control';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from "../../components/color-control";
@@ -388,6 +389,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		flipBoxVRBottomOffset,
 		flipBoxVRBottomOffsetUnits,
 		flipSelectedSide,
+		isHover,
 		// Flip box front
 		flipBoxFrontHeight,
 		flipBoxFrontHeightUnits,
@@ -835,7 +837,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnIconGap,
 		btnIconGapUnits,
 		btnBackIconGap,
-		btnBackIconGapUnits
+		btnBackIconGapUnits,
+		flipBoxAlignment
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -854,10 +857,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/avatar.png';
 	}
 
-	// Set default value
+	// Set default value for front image
 	useEffect(() => {
 		if (!flipMediaUrl) {
 			setAttributes({ flipMediaUrl: defaultImageUrl });
+		}
+	}, []);
+	// Set default value for back image
+	useEffect(() => {
+		if (!flipBackMediaUrl) {
+			setAttributes({ flipBackMediaUrl: defaultImageUrl });
 		}
 	}, []);
 
@@ -877,8 +886,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({ btnIconBack: iconName });
 	};
 
+	const getFlipTransform = (flipAnimationType) => {
+		switch (flipAnimationType) {
+			case "flip-left":
+				return "rotateY(-180deg)";
+			case "flip-right":
+				return "rotateY(180deg)";
+			case "flip-up":
+				return "rotateX(180deg)";
+			case "flip-down":
+				return "rotateX(-180deg)";
+			case "zoom-in":
+				return "scale(1.1)";
+			case "zoom-out":
+				return "scale(0.8)";
+			default:
+				return "none";
+		}
+	};
 	/** Start Preset Style **/
-
 	const changeflipBoxPreset = (selectedPreset) => {
 		const presetConfigurations = {
 			"preset-1": {
@@ -4406,12 +4432,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${BorderRadiusDesktopWidth && globalBorderRadiusDesktop.top ? `border-radius: ${BorderRadiusDesktopWidth};` : ""}
 				${globalBorderColor ? `border-color: ${globalBorderColor};` : ""}
 				${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : ""}
+				display: flex;
+				align-items: center;
+				${flipBoxAlignment.Desktop ? `justify-content: ${flipBoxAlignment.Desktop};` : ''}
 			}
-		  .fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
-			${flipBoxFrontWidth.Desktop ? `max-width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
-			${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
-			width: 100%;
-		  }
 	  
 		  .fb-flip-box-wrapper.${blockID}:hover .fb-flip-box-wrapper {
 			  ${globalBgHoverColor ? `background-color: ${globalBgHoverColor};` : ""}
@@ -4421,19 +4445,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			  .fb-flip-box-main-wrapper.${blockID} {
+			  .fb-flip-box-main-wrapper.${blockID} .fb-flip-box-wrapper{
 				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'left' && flipBoxHZLeftOffset.Tablet ? `left: ${flipBoxHZLeftOffset.Tablet}${flipBoxHZLeftOffsetUnits.Tablet};` : ''}
 				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'right' && flipBoxHZRightOffset.Tablet ? `right: ${flipBoxHZRightOffset.Tablet}${flipBoxHZRightOffsetUnits.Tablet};` : ''}
 				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'top' && flipBoxVRTopOffset.Tablet ? `top: ${flipBoxVRTopOffset.Tablet}${flipBoxVRTopOffsetUnits.Tablet};` : ''}
 				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'bottom' && flipBoxVRBottomOffset.Tablet ? `bottom: ${flipBoxVRBottomOffset.Tablet}${flipBoxVRBottomOffsetUnits.Tablet};` : ''}
 				${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ""}
-			  }
-			  .fb-flip-box-wrapper.${blockID} {
+				${flipBoxAlignment.Tablet ? `justify-content: ${flipBoxAlignment.Tablet};` : ''}
 				${TabletPadding && globalPaddingTablet.top ? `padding: ${TabletPadding};` : ""}
 				${TabletMargin && globalMarginTablet.top ? `margin: ${TabletMargin};` : ""}
 				${BorderTabletWidth && globalBorderTablet.top ? `border-width: ${BorderTabletWidth};` : ""}
 				${BorderRadiusTabletWidth && globalBorderRadiusTablet.top ? `border-radius: ${BorderRadiusTabletWidth};` : ""}
 			  }
+			  
 		  }
 	  
 		  @media only screen and (max-width: 767px) {
@@ -4443,25 +4467,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'top' && flipBoxVRTopOffset.Mobile ? `top: ${flipBoxVRTopOffset.Mobile}${flipBoxVRTopOffsetUnits.Mobile};` : ''}
 				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'bottom' && flipBoxVRBottomOffset.Mobile ? `bottom: ${flipBoxVRBottomOffset.Mobile}${flipBoxVRBottomOffsetUnits.Mobile};` : ''} 
 				${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ""}
-			  }
-			  .fb-flip-box-wrapper.${blockID} {
 				${MobilePadding && globalPaddingMobile.top ? `padding: ${MobilePadding};` : ""}
 				${MobileMargin && globalMarginMobile.top ? `margin: ${MobileMargin};` : ""}
 				${BorderMobileWidth && globalBorderMobile.top ? `border-width: ${BorderMobileWidth};` : ""}
 				${BorderRadiusMobileWidth && globalBorderRadiusMobile.top ? `border-radius: ${BorderRadiusMobileWidth};` : ""}
+				${flipBoxAlignment.Mobile ? `justify-content: ${flipBoxAlignment.Mobile};` : ''}
 			  }
+			  
 		  }
 
-		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
-		  		position: relative;
+		  .fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
 				${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
-				width: 100%;
+		  }
+			.fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper.fb-show-back {
+				transform:
+					${isHover || flipSelectedSide === "back" ? getFlipTransform(flipAnimationType) : "none"};
+			}
+		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
+				${flipBoxFrontWidth.Desktop ? `min-width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
+				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
 				${flipBoxFrontBackgroundType === "gradient" ? `
 				background: ${flipBoxFrontCustomGradientSwitcher && flipBoxFrontCustomGradientInputValue ? flipBoxFrontCustomGradientInputValue : flipBoxFrontGradientColor};
 				`
 				: flipBoxFrontBackgroundImageUrl && flipBoxFrontBackgroundImageUrl !== "null" ? `
-				${flipBoxFrontBackgroundImageUrl ? `background-image: url(${flipBoxFrontBackgroundImageUrl});` : ""}
+				${flipBoxFrontBackgroundImageUrl ? `background: url(${flipBoxFrontBackgroundImageUrl});` : ""}
 				${flipBoxFrontBackgroundImagePosition ? `background-position: ${flipBoxFrontBackgroundImagePosition};` : ""}
 				${flipBoxFrontBackgroundImageAttachment ? `background-attachment: ${flipBoxFrontBackgroundImageAttachment};` : ""}
 				${flipBoxFrontBackgroundImageRepeat ? `background-repeat: ${flipBoxFrontBackgroundImageRepeat};` : ""}
@@ -4475,7 +4505,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${flipBoxFrontBorderRadiusDesktop && flipBoxFrontBorderRadiusDesktop.top ? `border-radius: ${flipBoxFrontBorderRadiusDesktopWidth};` : ''}
 				background-repeat: none;
 				background-size: cover;
-				${flipBoxFrontClassicColor ? `justify-content: center; ` : ''}
 				transition: all .3s ease-in-out; 
 		  }
 
@@ -4484,7 +4513,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				background: ${flipBoxFrontHoverCustomGradientSwitcher && flipBoxFrontHoverCustomGradientInputValue ? flipBoxFrontHoverCustomGradientInputValue : flipBoxFrontHoverGradientColor};
 				`
 				: flipBoxFrontHoverBackgroundImageUrl && flipBoxFrontHoverBackgroundImageUrl !== "null" ? `
-				${flipBoxFrontHoverBackgroundImageUrl ? `background-image: url(${flipBoxFrontHoverBackgroundImageUrl});` : ""}
+				${flipBoxFrontHoverBackgroundImageUrl ? `background: url(${flipBoxFrontHoverBackgroundImageUrl});` : ""}
 				${flipBoxFrontHoverBackgroundImagePosition ? `background-position: ${flipBoxFrontHoverBackgroundImagePosition};` : ""}
 				${flipBoxFrontHoverBackgroundImageAttachment ? `background-attachment: ${flipBoxFrontHoverBackgroundImageAttachment};` : ""}
 				${flipBoxFrontHoverBackgroundImageRepeat ? `background-repeat: ${flipBoxFrontHoverBackgroundImageRepeat};` : ""}
@@ -4495,12 +4524,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-back {
 			${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 			${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
-			width: 100%;
 			${flipBoxBackBackgroundType === "gradient" ? `
 			background: ${flipBoxBackCustomGradientSwitcher && flipBoxBackCustomGradientInputValue ? flipBoxBackCustomGradientInputValue : flipBoxBackGradientColor};
 			`
 				: flipBoxBackBackgroundImageUrl && flipBoxBackBackgroundImageUrl !== "null" ? `
-			${flipBoxBackBackgroundImageUrl ? `background-image: url(${flipBoxBackBackgroundImageUrl});` : ""}
+			${flipBoxBackBackgroundImageUrl ? `background: url(${flipBoxBackBackgroundImageUrl});` : ""}
 			${flipBoxBackBackgroundImagePosition ? `background-position: ${flipBoxBackBackgroundImagePosition};` : ""}
 			${flipBoxBackBackgroundImageAttachment ? `background-attachment: ${flipBoxBackBackgroundImageAttachment};` : ""}
 			${flipBoxBackBackgroundImageRepeat ? `background-repeat: ${flipBoxBackBackgroundImageRepeat};` : ""}
@@ -4514,10 +4542,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${flipBoxBackBorderRadiusDesktop && flipBoxBackBorderRadiusDesktop.top ? `border-radius: ${flipBoxBackBorderRadiusDesktopWidth};` : ''}
 			background-repeat: none;
 			background-size: cover;
-			${flipBoxBackClassicColor ? `justify-content: center; ` : ''}
+			transform:  ${(flipAnimationType === "flip-up" && "rotateX(-180deg)") ||
+			(flipAnimationType === "flip-down" && "rotateX(180deg)") ||
+			((flipAnimationType === "zoom-in" ||
+				flipAnimationType === "zoom-out" ||
+				flipAnimationType === "fade") &&
+				"none")
+			};
+			${isHover && (flipAnimationType === "zoom-in" || flipAnimationType === "zoom-out")
+				? "z-index: 5;"
+				: ""
+			}
 			transition: all .3s ease-in-out; 
 		  }
 		
+		  ${(isHover || flipSelectedSide === "front") && flipAnimationType === "fade"
+				? `
+			.fb-flip-box-wrapper.${blockID} .fb-flipper-wrapper.fb-show-back .fb-flipbox-front {
+				opacity: 0;
+			}
+			`
+				: ""
+			}
+		  ${(isHover || flipSelectedSide === "back") && flipAnimationType === "fade"
+				? `
+			.fb-flip-box-wrapper.${blockID} .fb-flipper-wrapper.fb-show-back .fb-flipbox-back {
+				opacity: 1;
+			}
+			`
+				: ""
+			}
 		  .fb-flip-box-wrapper.${blockID} .fb-flip-box-wrapper-inner {
 			${flipIconPosition === 'top' ? 'flex-direction: column;' : ''}
 			${flipIconPosition === 'bottom' ? 'flex-direction: column-reverse;' : ''}
@@ -4941,7 +4995,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 		
-		.fb-flip-box-wrapper.${blockID}:hover .fb-flip-back-mediaBack-wrapper{
+		.fb-flip-box-wrapper.${blockID} .fb-flip-back-media-wrapper:hover{
 			${mediaBackHoverBackgroundType === "gradient" ? ` background: ${mediaBackHoverCustomGradientSwitcher && mediaBackHoverCustomGradientInputValue ? mediaBackHoverCustomGradientInputValue : mediaBackHoverGradientColor
 				};
 			`: mediaBackHoverBackgroundImageUrl && mediaBackHoverBackgroundImageUrl !== "null" ? `
@@ -5141,7 +5195,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			descTabMargin,
 			descMobileMargin,
 			descActiveMarginDevice,
-
+			flipAnimationType,
 			flipBoxPaddingUnits,
 			flipBoxDesktopPadding,
 			flipBoxTabPadding,
@@ -5290,6 +5344,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			flipMediaID,
 			flipMediaAlt,
 			flipMediaUrl,
+			flipBackMediaUrl,
 			mediaBackgroundType,
 			mediaClassicColor,
 			mediaGradientColor,
@@ -5489,10 +5544,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			flipButtonBackHoverBorderColor,
 			mediaBorderHoverColor,
 			mediaHoverClassicColor,
+			mediaBackBorderColor,
 			mediaBackBorderHoverColor,
 			mediaBackHoverClassicColor,
 			mediaBackIconHoverColor,
 			btnBackIconHoverColor,
+			flipBoxFrontGradientColor,
+			flipBoxFrontCustomGradientSwitcher,
+			flipBoxFrontCustomGradientInputValue,
+			flipBoxFrontHoverClassicColor,
+			flipBoxFrontHoverGradientColor,
+			flipBoxFrontHoverCustomGradientSwitcher,
+			flipBoxFrontHoverCustomGradientInputValue,
+			flipBoxFrontHoverBackgroundColorStyle,
+			flipBoxFrontHoverBackgroundImageUrl,
+			flipBoxFrontHoverBackgroundImageAlt,
+			flipBoxFrontHoverBackgroundImageID,
+			flipBoxFrontHoverBackgroundImagePosition,
+			flipBoxFrontHoverBackgroundImageAttachment,
+			flipBoxFrontHoverBackgroundImageSize,
+			flipBoxFrontHoverBackgroundImageRepeat,
+			flipBoxFrontBackgroundImageUrl,
+			flipBoxFrontBackgroundImageAlt,
+			flipBoxFrontBackgroundImageID,
+			flipBoxFrontBackgroundImagePosition,
+			flipBoxFrontBackgroundImageAttachment,
+			flipBoxFrontBackgroundImageSize,
+			flipBoxFrontBackgroundImageRepeat,
+			flipBoxBackGradientColor,
+			flipBoxBackCustomGradientSwitcher,
+			flipBoxBackCustomGradientInputValue,
+			flipBoxBackHoverClassicColor,
+			flipBoxBackHoverGradientColor,
+			flipBoxBackHoverCustomGradientSwitcher,
+			flipBoxBackHoverCustomGradientInputValue,
+			flipBoxBackHoverBackgroundColorStyle,
+			flipBoxBackHoverBackgroundImageUrl,
+			flipBoxBackHoverBackgroundImageAlt,
+			flipBoxBackHoverBackgroundImageID,
+			flipBoxBackHoverBackgroundImagePosition,
+			flipBoxBackHoverBackgroundImageAttachment,
+			flipBoxBackHoverBackgroundImageSize,
+			flipBoxBackHoverBackgroundImageRepeat,
+			flipBoxBackBackgroundImageUrl,
+			flipBoxBackBackgroundImageAlt,
+			flipBoxBackBackgroundImageID,
+			flipBoxBackBackgroundImagePosition,
+			flipBoxBackWidth,
+			flipBoxBackWidthUnits,
+			flipBoxBackHeight,
+			flipBoxBackHeightUnits,
+			isHover,
+			flipSelectedSide,
+			flipAnimationType,
+			flipBoxFrontGradientColor,
+			flipBoxFrontCustomGradientInputValue,
+			flipBoxBackGradientColor,
+			flipBoxBackCustomGradientInputValue,
+			flipBoxAlignment
 		],
 	);
 
@@ -5582,6 +5691,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														onChange={(value) =>
 															setAttributes({ flipAnimationType: value })
 														}
+													/>
+												</BaseControl>
+												<BaseControl>
+													<FB_ResponsiveAlignmentControl
+														label={__("Alignment", "frontis-blocks")}
+														globalAlignment={flipBoxAlignment}
+														setGlobalAlignment={(value) => setAttributes({ flipBoxAlignment: value })}
+														deviceType={deviceType}
+														setAttributes={setAttributes}
 													/>
 												</BaseControl>
 											</PanelBody>
@@ -6304,6 +6422,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														setAttributes={setAttributes}
 														rangeStep={1}
 														resetFallbackValue={""}
+														
 													/>
 
 													<FB_Range
@@ -6318,6 +6437,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														setAttributes={setAttributes}
 														rangeStep={1}
 														resetFallbackValue={""}
+														units_types_arr={[
+															{ label: 'px', value: 'px' },
+															{ label: 'em', value: 'em' },
+															{ label: 'rem', value: 'rem' },
+															{ label: 'vh', value: 'vh' }
+														]}
 													/>
 
 													{/*Background Color */}
@@ -6327,9 +6452,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														normalBackgroundType={flipBoxFrontBackgroundType}
 														setNormalBackgroundType={(value) => setAttributes({ flipBoxFrontBackgroundType: value })}
 														normalClassicColor={flipBoxFrontClassicColor}
-														setNormalClassicColor={(value) => setAttributes({ flipBoxFrontClassicColor: value })}
+														setNormalClassicColor={(value) => setAttributes({ flipBoxFrontClassicColor: value === undefined ? '' : value })}
 														normalGradientColor={flipBoxFrontGradientColor}
-														setNormalGradientColor={(value) => setAttributes({ flipBoxFrontGradientColor: value })}
+														setNormalGradientColor={(value) => setAttributes({ flipBoxFrontGradientColor: value === undefined ? '' : value })}
 														normalCustomGradientSwitcher={flipBoxFrontCustomGradientSwitcher}
 														setNormalCustomGradientSwitcher={(value) => setAttributes({ flipBoxFrontCustomGradientSwitcher: value })}
 														normalCustomGradientInputValue={flipBoxFrontCustomGradientInputValue}
@@ -6351,9 +6476,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														hoverBackgroundType={flipBoxFrontHoverBackgroundType}
 														setHoverBackgroundType={(value) => setAttributes({ flipBoxFrontHoverBackgroundType: value })}
 														hoverClassicColor={flipBoxFrontHoverClassicColor}
-														setHoverClassicColor={(value) => setAttributes({ flipBoxFrontHoverClassicColor: value })}
+														setHoverClassicColor={(value) => setAttributes({ flipBoxFrontHoverClassicColor: value === undefined ? '' : value })}
 														hoverGradientColor={flipBoxFrontHoverGradientColor}
-														setHoverGradientColor={(value) => setAttributes({ flipBoxFrontHoverGradientColor: value })}
+														setHoverGradientColor={(value) => setAttributes({ flipBoxFrontHoverGradientColor: value === undefined ? '' : value })}
 														hoverCustomGradientSwitcher={flipBoxFrontHoverCustomGradientSwitcher}
 														setHoverCustomGradientSwitcher={(value) => setAttributes({ flipBoxFrontHoverCustomGradientSwitcher: value })}
 														hoverCustomGradientInputValue={flipBoxFrontHoverCustomGradientInputValue}
@@ -6420,7 +6545,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Normal Color", "frontis-blocks")}
 															globalColor={flipBoxFrontBorderColor}
-															setGlobalColor={(value) => setAttributes({ flipBoxFrontBorderColor: value })}
+															setGlobalColor={(value) => setAttributes({ flipBoxFrontBorderColor: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -6428,7 +6553,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Hover Color", "frontis-blocks")}
 															globalColor={flipBoxFrontBorderHoverColor}
-															setGlobalColor={(value) => setAttributes({ flipBoxFrontBorderHoverColor: value })}
+															setGlobalColor={(value) => setAttributes({ flipBoxFrontBorderHoverColor: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -6474,7 +6599,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<FB_Range
 														min={0}
 														max={500}
-														label={__("Icon Size", "frontis-blocks")}
+														label={__("Size", "frontis-blocks")}
 														rangeValue={mediaSize}
 														onChangeHandler={(value) =>
 															setAttributes({ mediaSize: value })
@@ -6502,7 +6627,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<FB_ColorControl
 																	label={__("Normal Color", "frontis-blocks")}
 																	globalColor={mediaIconColor}
-																	setGlobalColor={(value) => setAttributes({ mediaIconColor: value })}
+																	setGlobalColor={(value) => setAttributes({ mediaIconColor: value === undefined ? '' : value })}
 																/>
 															)}
 
@@ -6510,7 +6635,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<FB_ColorControl
 																	label={__("Hover Color", "frontis-blocks")}
 																	globalColor={mediaIconHoverColor}
-																	setGlobalColor={(value) => setAttributes({ mediaIconHoverColor: value })}
+																	setGlobalColor={(value) => setAttributes({ mediaIconHoverColor: value === undefined ? '' : value })}
 																/>
 															)}
 														</>
@@ -6521,9 +6646,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														normalBackgroundType={mediaBackgroundType}
 														setNormalBackgroundType={(value) => setAttributes({ mediaBackgroundType: value })}
 														normalClassicColor={mediaClassicColor}
-														setNormalClassicColor={(value) => setAttributes({ mediaClassicColor: value })}
+														setNormalClassicColor={(value) => setAttributes({ mediaClassicColor: value === undefined ? '' : value })}
 														normalGradientColor={mediaGradientColor}
-														setNormalGradientColor={(value) => setAttributes({ mediaGradientColor: value })}
+														setNormalGradientColor={(value) => setAttributes({ mediaGradientColor: value === undefined ? '' : value })}
 														normalCustomGradientSwitcher={mediaCustomGradientSwitcher}
 														setNormalCustomGradientSwitcher={(value) => setAttributes({ mediaCustomGradientSwitcher: value })}
 														normalCustomGradientInputValue={mediaCustomGradientInputValue}
@@ -6545,9 +6670,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														hoverBackgroundType={mediaHoverBackgroundType}
 														setHoverBackgroundType={(value) => setAttributes({ mediaHoverBackgroundType: value })}
 														hoverClassicColor={mediaHoverClassicColor}
-														setHoverClassicColor={(value) => setAttributes({ mediaHoverClassicColor: value })}
+														setHoverClassicColor={(value) => setAttributes({ mediaHoverClassicColor: value === undefined ? '' : value })}
 														hoverGradientColor={mediaHoverGradientColor}
-														setHoverGradientColor={(value) => setAttributes({ mediaHoverGradientColor: value })}
+														setHoverGradientColor={(value) => setAttributes({ mediaHoverGradientColor: value === undefined ? '' : value })}
 														hoverCustomGradientSwitcher={mediaHoverCustomGradientSwitcher}
 														setHoverCustomGradientSwitcher={(value) => setAttributes({ mediaHoverCustomGradientSwitcher: value })}
 														hoverCustomGradientInputValue={mediaHoverCustomGradientInputValue}
@@ -6650,7 +6775,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Normal Color", "frontis-blocks")}
 															globalColor={mediaBorderColor}
-															setGlobalColor={(value) => setAttributes({ mediaBorderColor: value })}
+															setGlobalColor={(value) => setAttributes({ mediaBorderColor: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -6658,7 +6783,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Hover Color", "frontis-blocks")}
 															globalColor={mediaBorderHoverColor}
-															setGlobalColor={(value) => setAttributes({ mediaBorderHoverColor: value })}
+															setGlobalColor={(value) => setAttributes({ mediaBorderHoverColor: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -6764,7 +6889,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Normal Color", "frontis-blocks")}
 															globalColor={Heading_Color}
-															setGlobalColor={(value) => setAttributes({ Heading_Color: value })}
+															setGlobalColor={(value) => setAttributes({ Heading_Color: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -6772,7 +6897,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Hover Color", "frontis-blocks")}
 															globalColor={Heading_Hover_Color}
-															setGlobalColor={(value) => setAttributes({ Heading_Hover_Color: value })}
+															setGlobalColor={(value) => setAttributes({ Heading_Hover_Color: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -6825,7 +6950,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Normal Color", "frontis-blocks")}
 															globalColor={Heading_Border_Color}
-															setGlobalColor={(value) => setAttributes({ Heading_Border_Color: value })}
+															setGlobalColor={(value) => setAttributes({ Heading_Border_Color: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -6833,7 +6958,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Hover Color", "frontis-blocks")}
 															globalColor={Heading_Border_Hover_Color}
-															setGlobalColor={(value) => setAttributes({ Heading_Border_Hover_Color: value })}
+															setGlobalColor={(value) => setAttributes({ Heading_Border_Hover_Color: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -6943,7 +7068,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Normal Color", "frontis-blocks")}
 																globalColor={SubHeadingColor}
-																setGlobalColor={(value) => setAttributes({ SubHeadingColor: value })}
+																setGlobalColor={(value) => setAttributes({ SubHeadingColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -6951,12 +7076,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Hover Color", "frontis-blocks")}
 																globalColor={SubHeadingHoverColor}
-																setGlobalColor={(value) => setAttributes({ SubHeadingHoverColor: value })}
+																setGlobalColor={(value) => setAttributes({ SubHeadingHoverColor: value === undefined ? '' : value })}
 															/>
 														)}
 
 														{/*Spacing*/}
-														<Heading>Spacing</Heading> 
+														<Heading>Spacing</Heading>
 														{/* Padding */}
 														<FB_Spacing
 															label={__("Padding", "frontis-blocks")}
@@ -7060,7 +7185,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Normal Color", "frontis-blocks")}
 																globalColor={buttonTextColor}
-																setGlobalColor={(value) => setAttributes({ buttonTextColor: value })}
+																setGlobalColor={(value) => setAttributes({ buttonTextColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -7068,7 +7193,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Hover Color", "frontis-blocks")}
 																globalColor={buttonTextHoverColor}
-																setGlobalColor={(value) => setAttributes({ buttonTextHoverColor: value })}
+																setGlobalColor={(value) => setAttributes({ buttonTextHoverColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -7083,7 +7208,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Normal Color", "frontis-blocks")}
 																globalColor={buttonBgColor}
-																setGlobalColor={(value) => setAttributes({ buttonBgColor: value })}
+																setGlobalColor={(value) => setAttributes({ buttonBgColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -7091,7 +7216,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Hover Color", "frontis-blocks")}
 																globalColor={buttonBgHoverColor}
-																setGlobalColor={(value) => setAttributes({ buttonBgHoverColor: value })}
+																setGlobalColor={(value) => setAttributes({ buttonBgHoverColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -7107,7 +7232,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<FB_ColorControl
 																	label={__("Normal Color", "frontis-blocks")}
 																	globalColor={btnIconColor}
-																	setGlobalColor={(value) => setAttributes({ btnIconColor: value })}
+																	setGlobalColor={(value) => setAttributes({ btnIconColor: value === undefined ? '' : value })}
 																/>
 															)}
 
@@ -7115,7 +7240,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<FB_ColorControl
 																	label={__("Hover Color", "frontis-blocks")}
 																	globalColor={btnIconHoverColor}
-																	setGlobalColor={(value) => setAttributes({ btnIconHoverColor: value })}
+																	setGlobalColor={(value) => setAttributes({ btnIconHoverColor: value === undefined ? '' : value })}
 																/>
 															)}
 
@@ -7232,7 +7357,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Normal Color", "frontis-blocks")}
 																globalColor={flipButtonBorderColor}
-																setGlobalColor={(value) => setAttributes({ flipButtonBorderColor: value })}
+																setGlobalColor={(value) => setAttributes({ flipButtonBorderColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -7240,7 +7365,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Hover Color", "frontis-blocks")}
 																globalColor={flipButtonHoverBorderColor}
-																setGlobalColor={(value) => setAttributes({ flipButtonHoverBorderColor: value })}
+																setGlobalColor={(value) => setAttributes({ flipButtonHoverBorderColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -7287,11 +7412,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														min={0}
 														max={600}
 														label={__("Width", "frontis-blocks")}
-														rangeValue={flipBoxBackWidth}
-														onChangeHandler={(value) => setAttributes({ flipBoxBackWidth: value })}
-														rangeUnitHandler={(value) => setAttributes({ flipBoxBackWidthUnits: value })}
+														rangeValue={flipBoxFrontWidth}
+														onChangeHandler={(value) => setAttributes({ flipBoxFrontWidth: value })}
+														rangeUnitHandler={(value) => setAttributes({ flipBoxFrontWidthUnits: value })}
 														deviceType={deviceType}
-														units={flipBoxBackWidthUnits}
+														units={flipBoxFrontWidthUnits}
 														setAttributes={setAttributes}
 														rangeStep={1}
 														resetFallbackValue={""}
@@ -7301,14 +7426,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														min={0}
 														max={600}
 														label={__("Height", "frontis-blocks")}
-														rangeValue={flipBoxBackHeight}
-														onChangeHandler={(value) => setAttributes({ flipBoxBackHeight: value })}
-														rangeUnitHandler={(value) => setAttributes({ flipBoxBackHeightUnits: value })}
+														rangeValue={flipBoxFrontHeight}
+														onChangeHandler={(value) => setAttributes({ flipBoxFrontHeight: value })}
+														rangeUnitHandler={(value) => setAttributes({ flipBoxFrontHeightUnits: value })}
 														deviceType={deviceType}
-														units={flipBoxBackHeightUnits}
+														units={flipBoxFrontHeightUnits}
 														setAttributes={setAttributes}
 														rangeStep={1}
 														resetFallbackValue={""}
+														units_types_arr={[
+															{ label: 'px', value: 'px' },
+															{ label: 'em', value: 'em' },
+															{ label: 'rem', value: 'rem' },
+															{ label: 'vh', value: 'vh' }
+														]}
 													/>
 
 													{/*Background Color */}
@@ -7318,9 +7449,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														normalBackgroundType={flipBoxBackBackgroundType}
 														setNormalBackgroundType={(value) => setAttributes({ flipBoxBackBackgroundType: value })}
 														normalClassicColor={flipBoxBackClassicColor}
-														setNormalClassicColor={(value) => setAttributes({ flipBoxBackClassicColor: value })}
+														setNormalClassicColor={(value) => setAttributes({ flipBoxBackClassicColor: value === undefined ? '' : value })}
 														normalGradientColor={flipBoxBackGradientColor}
-														setNormalGradientColor={(value) => setAttributes({ flipBoxBackGradientColor: value })}
+														setNormalGradientColor={(value) => setAttributes({ flipBoxBackGradientColor: value === undefined ? '' : value })}
 														normalCustomGradientSwitcher={flipBoxBackCustomGradientSwitcher}
 														setNormalCustomGradientSwitcher={(value) => setAttributes({ flipBoxBackCustomGradientSwitcher: value })}
 														normalCustomGradientInputValue={flipBoxBackCustomGradientInputValue}
@@ -7342,9 +7473,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														hoverBackgroundType={flipBoxBackHoverBackgroundType}
 														setHoverBackgroundType={(value) => setAttributes({ flipBoxBackHoverBackgroundType: value })}
 														hoverClassicColor={flipBoxBackHoverClassicColor}
-														setHoverClassicColor={(value) => setAttributes({ flipBoxBackHoverClassicColor: value })}
+														setHoverClassicColor={(value) => setAttributes({ flipBoxBackHoverClassicColor: value === undefined ? '' : value })}
 														hoverGradientColor={flipBoxBackHoverGradientColor}
-														setHoverGradientColor={(value) => setAttributes({ flipBoxBackHoverGradientColor: value })}
+														setHoverGradientColor={(value) => setAttributes({ flipBoxBackHoverGradientColor: value === undefined ? '' : value })}
 														hoverCustomGradientSwitcher={flipBoxBackHoverCustomGradientSwitcher}
 														setHoverCustomGradientSwitcher={(value) => setAttributes({ flipBoxBackHoverCustomGradientSwitcher: value })}
 														hoverCustomGradientInputValue={flipBoxBackHoverCustomGradientInputValue}
@@ -7411,7 +7542,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Normal Color", "Backis-blocks")}
 															globalColor={flipBoxBackBorderColor}
-															setGlobalColor={(value) => setAttributes({ flipBoxBackBorderColor: value })}
+															setGlobalColor={(value) => setAttributes({ flipBoxBackBorderColor: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -7419,7 +7550,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Hover Color", "Backis-blocks")}
 															globalColor={flipBoxBackBorderHoverColor}
-															setGlobalColor={(value) => setAttributes({ flipBoxBackBorderHoverColor: value })}
+															setGlobalColor={(value) => setAttributes({ flipBoxBackBorderHoverColor: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -7465,7 +7596,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													<FB_Range
 														min={0}
 														max={500}
-														label={__("Icon Size", "frontis-blocks")}
+														label={__("Size", "frontis-blocks")}
 														rangeValue={mediaBackSize}
 														onChangeHandler={(value) =>
 															setAttributes({ mediaBackSize: value })
@@ -7493,7 +7624,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<FB_ColorControl
 																	label={__("Normal Color", "frontis-blocks")}
 																	globalColor={mediaBackIconColor}
-																	setGlobalColor={(value) => setAttributes({ mediaBackIconColor: value })}
+																	setGlobalColor={(value) => setAttributes({ mediaBackIconColor: value === undefined ? '' : value })}
 																/>
 															)}
 
@@ -7501,7 +7632,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<FB_ColorControl
 																	label={__("Hover Color", "frontis-blocks")}
 																	globalColor={mediaBackIconHoverColor}
-																	setGlobalColor={(value) => setAttributes({ mediaBackIconHoverColor: value })}
+																	setGlobalColor={(value) => setAttributes({ mediaBackIconHoverColor: value === undefined ? '' : value })}
 																/>
 															)}
 														</>
@@ -7512,9 +7643,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														normalBackgroundType={mediaBackBackgroundType}
 														setNormalBackgroundType={(value) => setAttributes({ mediaBackBackgroundType: value })}
 														normalClassicColor={mediaBackClassicColor}
-														setNormalClassicColor={(value) => setAttributes({ mediaBackClassicColor: value })}
+														setNormalClassicColor={(value) => setAttributes({ mediaBackClassicColor: value === undefined ? '' : value })}
 														normalGradientColor={mediaBackGradientColor}
-														setNormalGradientColor={(value) => setAttributes({ mediaBackGradientColor: value })}
+														setNormalGradientColor={(value) => setAttributes({ mediaBackGradientColor: value === undefined ? '' : value })}
 														normalCustomGradientSwitcher={mediaBackCustomGradientSwitcher}
 														setNormalCustomGradientSwitcher={(value) => setAttributes({ mediaBackCustomGradientSwitcher: value })}
 														normalCustomGradientInputValue={mediaBackCustomGradientInputValue}
@@ -7536,9 +7667,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														hoverBackgroundType={mediaBackHoverBackgroundType}
 														setHoverBackgroundType={(value) => setAttributes({ mediaBackHoverBackgroundType: value })}
 														hoverClassicColor={mediaBackHoverClassicColor}
-														setHoverClassicColor={(value) => setAttributes({ mediaBackHoverClassicColor: value })}
+														setHoverClassicColor={(value) => setAttributes({ mediaBackHoverClassicColor: value === undefined ? '' : value })}
 														hoverGradientColor={mediaBackHoverGradientColor}
-														setHoverGradientColor={(value) => setAttributes({ mediaBackHoverGradientColor: value })}
+														setHoverGradientColor={(value) => setAttributes({ mediaBackHoverGradientColor: value === undefined ? '' : value })}
 														hoverCustomGradientSwitcher={mediaBackHoverCustomGradientSwitcher}
 														setHoverCustomGradientSwitcher={(value) => setAttributes({ mediaBackHoverCustomGradientSwitcher: value })}
 														hoverCustomGradientInputValue={mediaBackHoverCustomGradientInputValue}
@@ -7641,7 +7772,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Normal Color", "frontis-blocks")}
 															globalColor={mediaBackBorderColor}
-															setGlobalColor={(value) => setAttributes({ mediaBackBorderColor: value })}
+															setGlobalColor={(value) => setAttributes({ mediaBackBorderColor: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -7649,7 +7780,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Hover Color", "frontis-blocks")}
 															globalColor={mediaBackBorderHoverColor}
-															setGlobalColor={(value) => setAttributes({ mediaBackBorderHoverColor: value })}
+															setGlobalColor={(value) => setAttributes({ mediaBackBorderHoverColor: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -7792,7 +7923,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Normal Color", "frontis-blocks")}
 															globalColor={headingBackColor}
-															setGlobalColor={(value) => setAttributes({ headingBackColor: value })}
+															setGlobalColor={(value) => setAttributes({ headingBackColor: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -7800,7 +7931,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Hover Color", "frontis-blocks")}
 															globalColor={headingBackHoverColor}
-															setGlobalColor={(value) => setAttributes({ headingBackHoverColor: value })}
+															setGlobalColor={(value) => setAttributes({ headingBackHoverColor: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -7853,7 +7984,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Normal Color", "frontis-blocks")}
 															globalColor={headingBack_Border_Color}
-															setGlobalColor={(value) => setAttributes({ headingBack_Border_Color: value })}
+															setGlobalColor={(value) => setAttributes({ headingBack_Border_Color: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -7861,7 +7992,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Hover Color", "frontis-blocks")}
 															globalColor={headingBack_Border_Hover_Color}
-															setGlobalColor={(value) => setAttributes({ headingBack_Border_Hover_Color: value })}
+															setGlobalColor={(value) => setAttributes({ headingBack_Border_Hover_Color: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -7971,7 +8102,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Normal Color", "frontis-blocks")}
 																globalColor={subHeadingBackColor}
-																setGlobalColor={(value) => setAttributes({ subHeadingBackColor: value })}
+																setGlobalColor={(value) => setAttributes({ subHeadingBackColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -7979,7 +8110,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Hover Color", "frontis-blocks")}
 																globalColor={subHeadingBackHoverColor}
-																setGlobalColor={(value) => setAttributes({ subHeadingBackHoverColor: value })}
+																setGlobalColor={(value) => setAttributes({ subHeadingBackHoverColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -8088,7 +8219,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Normal Color", "frontis-blocks")}
 																globalColor={buttonBackTextColor}
-																setGlobalColor={(value) => setAttributes({ buttonBackTextColor: value })}
+																setGlobalColor={(value) => setAttributes({ buttonBackTextColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -8096,7 +8227,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Hover Color", "frontis-blocks")}
 																globalColor={buttonBackTextHoverColor}
-																setGlobalColor={(value) => setAttributes({ buttonBackTextHoverColor: value })}
+																setGlobalColor={(value) => setAttributes({ buttonBackTextHoverColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -8111,7 +8242,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Normal Color", "frontis-blocks")}
 																globalColor={buttonBackBgColor}
-																setGlobalColor={(value) => setAttributes({ buttonBackBgColor: value })}
+																setGlobalColor={(value) => setAttributes({ buttonBackBgColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -8119,7 +8250,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Hover Color", "frontis-blocks")}
 																globalColor={buttonBackBgHoverColor}
-																setGlobalColor={(value) => setAttributes({ buttonBackBgHoverColor: value })}
+																setGlobalColor={(value) => setAttributes({ buttonBackBgHoverColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -8135,7 +8266,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<FB_ColorControl
 																	label={__("Normal Color", "frontis-blocks")}
 																	globalColor={btnBackIconColor}
-																	setGlobalColor={(value) => setAttributes({ btnBackIconColor: value })}
+																	setGlobalColor={(value) => setAttributes({ btnBackIconColor: value === undefined ? '' : value })}
 																/>
 															)}
 
@@ -8143,7 +8274,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																<FB_ColorControl
 																	label={__("Hover Color", "frontis-blocks")}
 																	globalColor={btnBackIconHoverColor}
-																	setGlobalColor={(value) => setAttributes({ btnBackIconHoverColor: value })}
+																	setGlobalColor={(value) => setAttributes({ btnBackIconHoverColor: value === undefined ? '' : value })}
 																/>
 															)}
 
@@ -8260,7 +8391,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Normal Color", "frontis-blocks")}
 																globalColor={flipButtonBackBorderColor}
-																setGlobalColor={(value) => setAttributes({ flipButtonBackBorderColor: value })}
+																setGlobalColor={(value) => setAttributes({ flipButtonBackBorderColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -8268,7 +8399,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															<FB_ColorControl
 																label={__("Hover Color", "frontis-blocks")}
 																globalColor={flipButtonBackHoverBorderColor}
-																setGlobalColor={(value) => setAttributes({ flipButtonBackHoverBorderColor: value })}
+																setGlobalColor={(value) => setAttributes({ flipButtonBackHoverBorderColor: value === undefined ? '' : value })}
 															/>
 														)}
 
@@ -8440,7 +8571,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Normal Color", "frontis-blocks")}
 															globalColor={globalBgColor}
-															setGlobalColor={(value) => setAttributes({ globalBgColor: value })}
+															setGlobalColor={(value) => setAttributes({ globalBgColor: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -8448,7 +8579,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Hover Color", "frontis-blocks")}
 															globalColor={globalBgHoverColor}
-															setGlobalColor={(value) => setAttributes({ globalBgHoverColor: value })}
+															setGlobalColor={(value) => setAttributes({ globalBgHoverColor: value === undefined ? '' : value })}
 														/>
 													)}
 												</PanelBody>
@@ -8475,7 +8606,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Normal Color", "frontis-blocks")}
 															globalColor={globalBorderColor}
-															setGlobalColor={(value) => setAttributes({ globalBorderColor: value })}
+															setGlobalColor={(value) => setAttributes({ globalBorderColor: value === undefined ? '' : value })}
 														/>
 													)}
 
@@ -8483,7 +8614,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														<FB_ColorControl
 															label={__("Hover Color", "frontis-blocks")}
 															globalColor={globalBorderHoverColor}
-															setGlobalColor={(value) => setAttributes({ globalBorderHoverColor: value })}
+															setGlobalColor={(value) => setAttributes({ globalBorderHoverColor: value === undefined ? '' : value })}
 														/>
 													)}
 

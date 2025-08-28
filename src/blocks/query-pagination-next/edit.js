@@ -2,13 +2,8 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, PlainText } from '@wordpress/block-editor';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
-const arrowMap = {
-	none: '',
-	arrow: '→',
-	chevron: '»',
-};
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	
@@ -19,37 +14,20 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	} = attributes;
 
 	const { 
-		paginationArrow,
-		showLabel 
+		paginationPrevNextType,
+		paginationNextTxt,
+		paginationNextIcon,
 	} = context;
-	
-	const displayArrow = arrowMap[ paginationArrow ];
+
 	return (
-		<a
-			href="#pagination-next-pseudo-link"
-			onClick={ ( event ) => event.preventDefault() }
-			{ ...useBlockProps() }
-		>
-			{ showLabel && (
-				<PlainText
-					__experimentalVersion={ 2 }
-					tagName="span"
-					aria-label={ __( 'Next page link' ) }
-					placeholder={ __( 'Next Page' ) }
-					value={ label }
-					onChange={ ( newLabel ) =>
-						setAttributes( { label: newLabel } )
-					}
-				/>
-			) }
-			{ displayArrow && (
-				<span
-					className={ `wp-block-query-pagination-next-arrow is-arrow-${ paginationArrow }` }
-					aria-hidden
-				>
-					{ displayArrow }
+			<>
+				<span className="fb-page-next">
+					{paginationPrevNextType === 'icon' ? (
+						<span className="fb-pagination-icon">{renderSVG(paginationNextIcon)}</span>
+					) : (
+						<span className="fb-pagination-text">{paginationNextTxt}</span>
+					)}
 				</span>
-			) }
-		</a>
+			</>
 	);
 }

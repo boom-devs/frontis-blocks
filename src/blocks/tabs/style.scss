@@ -1,0 +1,42 @@
+.fb-tabs-wrap {
+  ul {
+    &.fb-tabs-panel {
+      display: flex;
+      display: flex;
+      list-style-type: none;
+      flex-wrap: wrap;
+      padding: 0;
+      margin: 0;
+
+      li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+        padding: 5px;
+        gap: 10px;
+        &:focus {
+          outline: none !important;
+        }
+        &:focus-visible {
+          outline: none !important;
+        }
+        .fb-tab-icon-image-box {
+          .fb-tab-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .fb-tab-icon-image {
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+  }
+}

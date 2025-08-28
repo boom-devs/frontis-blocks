@@ -11,6 +11,14 @@ const attributes = {
         type: "string",
         default: "preset-1",
     },
+    flipBoxAlignment: {
+        type: 'object',
+        default: {
+            Desktop: 'left',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
     flipBoxBg: {
         type: 'string',
         default: '#EBF5FF'
@@ -22,6 +30,10 @@ const attributes = {
     Sub_Heading_Switcher: {
         type: "boolean",
         default: false
+    },
+    isHover: {
+        type: "boolean",
+        default: false,
     },
     flipSelectedSide: {
         type: "string",
@@ -2253,9 +2265,9 @@ const attributes = {
     flipBoxFrontHeight: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '310',
+            Tablet: '310',
+            Mobile: '310'
         }
     },
     flipBoxFrontHeightUnits: {
@@ -2322,6 +2334,7 @@ const attributes = {
         type: "string",
         default: ""
     },
+    // Flip box front hover background
     flipBoxFrontHoverBackgroundType: {
         type: "string",
         default: "classic"
