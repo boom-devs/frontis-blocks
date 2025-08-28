@@ -299,6 +299,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		dualBtnVRBottomOffset,
 		dualBtnVRBottomOffsetUnits,
 	} = attributes;
+	console.log('attributes', attributes);
 
 	const deviceType = useDeviceType();
 
@@ -389,6 +390,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 			"preset-2": {
 				buttonIconAlign: 'icon-text',
+				buttonIconPosition: 'right',
 				buttonTwoIconAlign: 'icon-text',
 				buttonsDirection: 'vertical',
 				connectorSwitcher: true,
@@ -448,6 +450,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			"preset-3": {
 				buttonIconAlign: 'none',
 				buttonTwoIconAlign: 'none',
+				buttonsDirection: 'vertical',
+				connectorSwitcher: true,
+				ButtonDesktopPadding: {
+					top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+				},
+				ButtonDesktopBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTwoDesktopBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				buttonsGap: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+			},
+			"preset-4": {
+				buttonIconAlign: 'none',
+				buttonTwoIconAlign: 'none',
 				connectorSwitcher: false,
 				buttonsDirection: 'vertical',
 				ButtonDesktopPadding: {
@@ -503,7 +563,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: '100'
 				},
 			},
-			"preset-4": {
+			"preset-5": {
 				buttonIconAlign: 'none',
 				buttonTwoIconAlign: 'none',
 				buttonsDirection: 'horizontal',
@@ -561,11 +621,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: ''
 				},
 			},
-			"preset-5": {
+			"preset-6": {
 				buttonIconAlign: 'none',
 				buttonTwoIconAlign: 'none',
-				buttonsDirection: 'vertical',
-				connectorSwitcher: true,
+				buttonsDirection: 'horizontal',
+				connectorSwitcher: false,
 				ButtonDesktopPadding: {
 					top: "12",
 					bottom: "12",
@@ -573,52 +633,53 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: "30",
 				},
 				ButtonDesktopBorderRadiusWidth: {
-					top: "50",
-					bottom: "50",
-					left: "50",
-					right: "50",
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
 				},
 				ButtonTabBorderRadiusWidth: {
-					top: "50",
-					bottom: "50",
-					left: "50",
-					right: "50",
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
 				},
 				ButtonMobileBorderRadiusWidth: {
-					top: "50",
-					bottom: "50",
-					left: "50",
-					right: "50",
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
 				},
 				ButtonTwoDesktopBorderRadiusWidth: {
-					top: "50",
-					bottom: "50",
-					left: "50",
-					right: "50",
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
 				},
 				ButtonTwoTabBorderRadiusWidth: {
-					top: "50",
-					bottom: "50",
-					left: "50",
-					right: "50",
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
 				},
 				ButtonTwoMobileBorderRadiusWidth: {
-					top: "50",
-					bottom: "50",
-					left: "50",
-					right: "50",
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
 				},
 				buttonsGap: {
-					Desktop: '0',
-					Tablet: '0',
-					Mobile: '0',
+					Desktop: '10',
+					Tablet: '10',
+					Mobile: '10',
 				},
 				ButtonWidth: {
-					Desktop: '100',
-					Tablet: '100',
-					Mobile: '100'
+					Desktop: '',
+					Tablet: '',
+					Mobile: ''
 				},
 			},
+			
 
 		};
 
