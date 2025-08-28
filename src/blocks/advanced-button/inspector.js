@@ -582,6 +582,56 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					right: "1",
 				},
             },
+			"preset-8": {
+				buttonBgColor: "#fff",
+				buttonBorder: "solid",
+				buttonBorderColor: "#C3C8D2",
+				buttonColor: "#15171C",
+				buttonIcon: "",
+				buttonIconAlign: "image",
+				buttonIconPosition: "right",
+				buttonIconImageUrl: defaultImageUrl[1],
+				buttonText: "Search",
+				buttonIconImageWidth: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "999",
+					bottom: "999",
+					left: "999",
+					right: "999",
+				},
+				buttonIconImageHeight: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonFontSize: {
+					Desktop: '14',
+					Tablet: '14',
+					Mobile: '14'
+				},
+				buttonDesktopBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonTabBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonMobileBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+            },
 		}
 		const selectedPresetConfig = presetConfigurations[selectedPreset];
 
