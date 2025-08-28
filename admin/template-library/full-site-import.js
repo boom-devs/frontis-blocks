@@ -107,6 +107,7 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
         }
     }, [template?.id, formData, onClose]);
 
+    console.log(template);
 
     return (
         <div className="fb-full-site-import-modal">

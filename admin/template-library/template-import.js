@@ -35,10 +35,7 @@ const TemplateImport = ({ template, onClose, data }) => {
     }
 
     // Map category IDs to names
-    const categoryNames = template.categories
-        ?.map(category => {
-            // const category = data[activeTab]?.categories?.find(cat => cat.id === categoryId);
-            // return category?.name;
+    const categoryNames = template.categories?.map(category => {
             return category;
         })
         .filter(name => name)
@@ -85,7 +82,7 @@ const TemplateImport = ({ template, onClose, data }) => {
                             <div className="fb-template-category">
                                 <span className="fb-category-label">Category: </span>
                                 <div className="fb-category-tags">
-                                    <span className="fb-category-tag">{categoryNames || 'Blog & Magazine, Construction, eCommerce'}</span>
+                                    <span className="fb-category-tag">{categoryNames}</span>
                                 </div>
                             </div>
 

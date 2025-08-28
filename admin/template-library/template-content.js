@@ -14,7 +14,24 @@ import { usePostDataMutation } from "./services/api";
 import { select, dispatch } from '@wordpress/data';
 import { createBlock, parse, rawHandler } from '@wordpress/blocks';
 
-const TemplateCard = ({ imageUrl, title, is_premium = false, id, tags = [], dependencies = [], activeTab, setLibraryData, isLogedIn, data, setIsVisible }) => {
+const TemplateCard = ({ 
+    imageUrl, 
+    title, 
+    is_premium = false, 
+    id, 
+    tags = [], 
+    dependencies = [], 
+    colors,
+    gradientColors,
+    typographies, 
+    customTypographies,
+    categories, 
+    activeTab, 
+    setLibraryData, 
+    isLogedIn, 
+    data, 
+    setIsVisible 
+}) => {
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
@@ -59,9 +76,13 @@ const TemplateCard = ({ imageUrl, title, is_premium = false, id, tags = [], depe
         title,
         image: imageUrl,
         is_premium,
-        category: ['Blog & Magazine', 'Construction', 'eCommerce'],
+        categories,
         author: 'Template Author',
         activeTab,
+        colors,
+        gradientColors,
+        typographies,
+        customTypographies,
         dependencies,
         dateAndTime: currentDateAndTime,
     };
@@ -245,7 +266,6 @@ const TemplateCard = ({ imageUrl, title, is_premium = false, id, tags = [], depe
                     <button
                         className={`fb-import-btn ${isLoading ? "loading" : ""}`}
                         onClick={() => {
-                            console.log(activeTab)
                             if (activeTab === 'patterns') {
                                 importPattern(id);
                             } else if (activeTab === 'pages') {
@@ -306,11 +326,12 @@ const TemplateContent = ({ activeTab, activeCategory, data, libraryData, setLibr
     useEffect(() => {
         setIsLogedIn(true);
     }, []);
-    console.log('data', data);
+    // console.log('data', data);
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
     const [originalTemplates, setOriginalTemplates] = useState([]);
     const [searchItems, setSearchItems] = useState('');
+
 
     const searchTemplates = (value) => {
         setSearchItems(value);
@@ -445,6 +466,11 @@ const TemplateContent = ({ activeTab, activeCategory, data, libraryData, setLibr
                             imageUrl={template.image}
                             is_premium={template.is_premium || false}
                             tags={template.tags || []}
+                            categories={template.categories || []}
+                            colors={template.colors || []}
+                            gradientColors={template.gradientColors || []}
+                            typographies={template.typographies || []}
+                            customTypographies={template.customTypographies || []}
                             dependencies={template.dependencies || []}
                             activeTab={activeTab}
                             setLibraryData={setLibraryData}

@@ -3,21 +3,31 @@
  */
 import { useState, useCallback } from "@wordpress/element";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { ClipLoader } from "react-spinners";
 
 const LoginSignupModal = ({ onLoginSuccess }) => {
 	const [activeTab, setActiveTab] = useState('login');
 	const [isLoading, setIsLoading] = useState(false);
-	const [formData, setFormData] = useState({
-		email: '',
-		password: '',
-		confirmPassword: '',
-		first_name: '',
-		last_name: ''
-	});
-	const [errors, setErrors] = useState({});
 	const [agreedToTerms, setAgreedToTerms] = useState(false);
 	const [agreedToPrivacy, setAgreedToPrivacy] = useState(false);
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		setError,
+		clearErrors,
+		watch
+	} = useForm({
+		defaultValues: {
+			email: '',
+			password: '',
+			confirmPassword: '',
+			first_name: '',
+			last_name: ''
+		}
+	});
 
 	useEffect(() => {
 		const localUserData = JSON.parse(localStorage.getItem('userData'));
@@ -61,70 +71,6 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 		return "Unknown Device";
 	}
 
-	const handleInputChange = useCallback((e) => {
-		const { name, value } = e.target;
-		setFormData(prev => ({
-			...prev,
-			[name]: value
-		}));
-		// Clear error when user starts typing
-		if (errors[name]) {
-			setErrors(prev => ({
-				...prev,
-				[name]: ''
-			}));
-		}
-	}, [errors]);
-
-	const validateForm = useCallback(() => {
-		const newErrors = {};
-		if (activeTab === 'login') {
-
-			if (!formData.email) {
-				newErrors.email = 'Email or username is required';
-			} else if (formData.email.includes('@')) {
-				if (!/\S+@\S+\.\S+/.test(formData.email)) {
-					newErrors.email = 'Please enter a valid email';
-				}
-			}
-		} else {
-
-			if (!formData.email) {
-				newErrors.email = 'Email is required';
-			} else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-				newErrors.email = 'Please enter a valid email';
-			}
-		}
-
-		if (!formData.password) {
-			newErrors.password = 'Password is required';
-		} else if (formData.password.length < 6) {
-			newErrors.password = 'Password must be at least 6 characters';
-		}
-
-		if (activeTab === 'signup') {
-			if (!formData.first_name) {
-				newErrors.first_name = 'First name is required';
-			}
-			if (!formData.last_name) {
-				newErrors.last_name = 'Last name is required';
-			}
-			if (!formData.confirmPassword) {
-				newErrors.confirmPassword = 'Please confirm your password';
-			} else if (formData.password !== formData.confirmPassword) {
-				newErrors.confirmPassword = 'Passwords do not match';
-			}
-			if (!agreedToTerms) {
-				newErrors.terms = 'You must agree to the Terms of Service';
-			}
-			if (!agreedToPrivacy) {
-				newErrors.privacy = 'You must agree to the Privacy Policy';
-			}
-		}
-
-		setErrors(newErrors);
-		return Object.keys(newErrors).length === 0;
-	}, [formData, activeTab, agreedToTerms, agreedToPrivacy]);
 
 	// const handleSubmit = useCallback(async (e) => {
 	// 	e.preventDefault();
@@ -156,13 +102,23 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 		return s && String(s[0]).toUpperCase() + String(s).slice(1);
 	}
 
-	const handleSubmit = useCallback(async (e) => {
-		e.preventDefault();
+	const onSubmit = useCallback(async (data) => {
+		// Validate terms and privacy for signup
+		if (activeTab === 'signup') {
+			if (!agreedToTerms) {
+				setError('terms', { message: 'You must agree to the Terms of Service' });
+				return;
+			}
+			if (!agreedToPrivacy) {
+				setError('privacy', { message: 'You must agree to the Privacy Policy' });
+				return;
+			}
+		}
+
 		const validationKey = generateValidationKey();
 		const apiBase = 'http://frontis.local/wp-json';
 		const deviceName = getDeviceType();
 
-		if (!validateForm()) return;
 		setIsLoading(true);
 
 		try {
@@ -170,15 +126,15 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 
 			let body = activeTab === 'signup'
 				? {
-					email: formData.email,
-					first_name: formData.first_name,
-					last_name: formData.last_name,
-					password: formData.password,
+					email: data.email,
+					first_name: data.first_name,
+					last_name: data.last_name,
+					password: data.password,
 					device_name: deviceName
 				}
 				: {
-					email: formData.email,
-					password: formData.password,
+					email: data.email,
+					password: data.password,
 				};
 
 			// Then stringify it for sending in a fetch request
@@ -198,28 +154,27 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 
 			if (!response.ok) {
 				if (data.code === 'invalid_username') {
-					setErrors({ email: data.message });
+					setError('email', { message: data.message });
 				} else if (data.code === 'invalid_password') {
-					setErrors({ password: data.message });
+					setError('password', { message: data.message });
 				} else if (data.code === 'email_already_registered') {
-					setErrors({ email: data.message });
+					setError('email', { message: data.message });
 				} else {
-					setErrors({ submit: data.message || "Something went wrong" });
+					setError('submit', { message: data.message || "Something went wrong" });
 				}
 				throw new Error(data.message || `HTTP error! status: ${response.status}`);
 			}
 
 			// Success case
 			localStorage.setItem('userData', JSON.stringify(data.user_data));
-			setFormData(data.user_data);
 			onLoginSuccess(data);
 
 		} catch (error) {
-			console.error(`${activeTab} failed:`, error);
-		} finally {
-			setIsLoading(false);
-		}
-	}, [formData, activeTab, validateForm, onLoginSuccess]);
+				console.error(`${activeTab} failed:`, error);
+			} finally {
+				setIsLoading(false);
+			}
+		}, [activeTab, agreedToTerms, agreedToPrivacy, onLoginSuccess, setError]);
 
 	return (
 		<div className="fb-auth-modal">
@@ -235,7 +190,7 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 				</div>
 
 				{/* Form */}
-				<form onSubmit={handleSubmit} className="fb-auth-form">
+				<form onSubmit={handleSubmit(onSubmit)} className="fb-auth-form">
 					{activeTab === 'signup' && (
 						<div className="fb-form-row">
 							<div className="fb-form-group">
@@ -248,14 +203,14 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 									<input
 										type="text"
 										id="first_name"
-										name="first_name"
-										value={formData.first_name}
-										onChange={handleInputChange}
+										{...register('first_name', {
+											required: activeTab === 'signup' ? 'First name is required' : false
+										})}
 										className={errors.first_name ? 'error' : ''}
 										placeholder="First Name"
 									/>
 								</div>
-								{errors.first_name && <span className="fb-error-message">{errors.first_name}</span>}
+								{errors.first_name && <span className="fb-error-message">{errors.first_name.message}</span>}
 							</div>
 
 							<div className="fb-form-group">
@@ -268,14 +223,14 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 									<input
 										type="text"
 										id="last_name"
-										name="last_name"
-										value={formData.last_name}
-										onChange={handleInputChange}
+										{...register('last_name', {
+											required: activeTab === 'signup' ? 'Last name is required' : false
+										})}
 										className={errors.last_name ? 'error' : ''}
 										placeholder="Last Name"
 									/>
 								</div>
-								{errors.last_name && <span className="fb-error-message">{errors.last_name}</span>}
+								{errors.last_name && <span className="fb-error-message">{errors.last_name.message}</span>}
 							</div>
 						</div>
 					)}
@@ -291,14 +246,18 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 							<input
 								type="text"
 								id="email"
-								name="email"
-								value={formData.email}
-								onChange={handleInputChange}
+								{...register('email', {
+									required: 'Email is required',
+									pattern: {
+										value: /\S+@\S+\.\S+/,
+										message: 'Please enter a valid email'
+									}
+								})}
 								className={errors.email ? 'error' : ''}
 								placeholder={activeTab === 'login' ? "Email or Username" : "Email Address"}
 							/>
 						</div>
-						{errors.email && <span className="fb-error-message">{errors.email}</span>}
+						{errors.email && <span className="fb-error-message">{errors.email.message}</span>}
 					</div>
 
 					<div className={activeTab === 'signup' ? 'fb-form-row' : ''}>
@@ -313,14 +272,18 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 								<input
 									type="password"
 									id="password"
-									name="password"
-									value={formData.password}
-									onChange={handleInputChange}
+									{...register('password', {
+										required: 'Password is required',
+										minLength: {
+											value: 6,
+											message: 'Password must be at least 6 characters'
+										}
+									})}
 									className={errors.password ? 'error' : ''}
 									placeholder="Password"
 								/>
 							</div>
-							{errors.password && <span className="fb-error-message">{errors.password}</span>}
+							{errors.password && <span className="fb-error-message">{errors.password.message}</span>}
 						</div>
 
 						{activeTab === 'signup' && (
@@ -335,14 +298,20 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 									<input
 										type="password"
 										id="confirmPassword"
-										name="confirmPassword"
-										value={formData.confirmPassword}
-										onChange={handleInputChange}
+										{...register('confirmPassword', {
+											required: activeTab === 'signup' ? 'Please confirm your password' : false,
+											validate: (value) => {
+												if (activeTab === 'signup' && value !== watch('password')) {
+													return 'Passwords do not match';
+												}
+												return true;
+											}
+										})}
 										className={errors.confirmPassword ? 'error' : ''}
 										placeholder="Confirm Password"
 									/>
 								</div>
-								{errors.confirmPassword && <span className="fb-error-message">{errors.confirmPassword}</span>}
+								{errors.confirmPassword && <span className="fb-error-message">{errors.confirmPassword.message}</span>}
 							</div>
 						)}
 					</div>
@@ -373,6 +342,8 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 									I agree to the Frontis <a href="#" className="fb-link">Privacy Policy</a>
 								</label>
 							</div>
+							{errors.terms && <span className="fb-error-message">{errors.terms.message}</span>}
+							{errors.privacy && <span className="fb-error-message">{errors.privacy.message}</span>}
 						</div>
 					) : (
 						<div className="fb-checkbox-group fb-checkbox-group-login">
@@ -392,7 +363,7 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 					)}
 
 					{errors.submit && (
-						<div className="fb-error-message fb-submit-error">{errors.submit}</div>
+						<div className="fb-error-message fb-submit-error">{errors.submit.message}</div>
 					)}
 
 					<button
