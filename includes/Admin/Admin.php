@@ -141,6 +141,10 @@ class Admin {
             if ($copy_paste_style === "true") { 
 			    wp_enqueue_script('frontis-copy-paste', FB_PLUGIN_URL . 'assets/admin/copyPasteStyle.js', $tl_script_asset['dependencies'], '1.0.0', true);
             }
+
+            if ($highlight_color === "true") { 
+			    wp_enqueue_script('frontis-highlight-color', FB_PLUGIN_URL . 'assets/admin/highlightColor.js', $tl_script_asset['dependencies'], '1.0.0', true);
+            }
             
             if ($automatic_block_recovery === "true") {
                 wp_enqueue_script('frontis-block-recovery', FB_PLUGIN_URL . 'assets/admin/blockRecovery.js', $tl_script_asset['dependencies'], '1.0.0', true);
