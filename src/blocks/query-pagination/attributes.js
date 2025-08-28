@@ -339,9 +339,9 @@ const attributes = {
 	paginationArrowTextFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '12',
+			Tablet: '12',
+			Mobile: '12'
 		}
 	},
 	paginationArrowTextFontSizeUnits: { 
