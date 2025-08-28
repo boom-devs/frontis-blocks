@@ -88,8 +88,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${buttonGlobalWraperClass}` } id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }} ref={panelRef}>
                     <a 
                         className="fb-advanced-button" 
-                        href={buttonUrl} 
-                        target={buttonTargetUrl ? '_blank' : undefined}
                         rel={buttonTargetUrl ? 'noopener noreferrer' : undefined}
                         onClick={handleButtonClick}
                     >

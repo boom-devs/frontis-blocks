@@ -55,6 +55,10 @@ const attributes = {
 		type: 'string',
 		default: 'angle-left'
 	},
+	paginationPrevFrontendIcon: {
+		type: 'string',
+		default: ''
+	},
 	paginationNextTxt: {
 		type: 'string',
 		default: 'Next'
@@ -62,6 +66,10 @@ const attributes = {
 	paginationNextIcon: {
 		type: 'string',
 		default: 'angle-right'
+	},
+	paginationNextFrontendIcon: {
+		type: 'string',
+		default: ''
 	},
 
 

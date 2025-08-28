@@ -89,7 +89,7 @@ export default function ToolBar() {
 
     const copyIcon = () => {
         return (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <svg style={{ fill: '#fff' }} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M9 17H5C3.89543 17 3 16.1046 3 15V5C3 3.89543 3.89543 3 5 3H15C16.1046 3 17 3.89543 17 5V9M9 17V19C9 20.1046 9.89543 21 11 21H19C20.1046 21 21 20.1046 21 19V11C21 9.89543 20.1046 9 19 9H17M9 17V11C9 9.89543 9.89543 9 11 9H17" stroke="#0B0C0E" stroke-width="1.4"/>
             </svg>
         )
@@ -98,7 +98,7 @@ export default function ToolBar() {
     const pasteIcon = () => {
 
         return (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <svg style={{ fill: '#fff' }} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M19 15V5C19 3.89543 18.1046 3 17 3H12M19 15L13 21M19 15H14C13.4477 15 13 15.4477 13 16V21M13 21H7C5.89543 21 5 20.1046 5 19V10M5 5H10C11.1046 5 12 5.89543 12 7V8M5 5L7 7M5 5L7 3" stroke="#0B0C0E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         )
@@ -112,12 +112,12 @@ export default function ToolBar() {
 			<ToolbarGroup>
 				<ToolbarButton
 					label={__('Copy style', 'frontis-blocks')}
-					icon={copy}
+					icon={copyIcon()}
 					onClick={() => copyStyle()}
 				/>
                 <ToolbarButton
 					label={__('Paste style', 'frontis-blocks')}
-					icon={'admin-settings'}
+					icon={pasteIcon()}
 					onClick={() => pasteStyle()}
 				/>
 			</ToolbarGroup>

@@ -120,6 +120,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingTextHoverCustomGradientColorSwitcher,
         headingTextHoverCustomGradientColor,
 
+        headingHighlightColorSwitcher,
+        headingHighlightColor,
+        headingHighlightHoverColor,
+
         headingBgColorTypeSwitcher,
         headingBgColorType,
         headingBgHoverColorType,
@@ -3289,49 +3293,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     deviceType={deviceType}
                     setAttributes={setAttributes}
                 />
-                <FB_BoxShadowControl
-                    label={__("Text Shadow", "frontis-blocks")}
-                    onBoxShadowChange={(value) => setAttributes({ headingTextShadowValues: value })}
-                    initialShadowValue={headingTextShadowValues}
-                    onBoxShadowStyleChange={(value) => setAttributes({ headingTextShadowCssValue: value })}
-                    isBoxShadow={false}
-                />
-
-                <FB_Range
-                    min={0}
-                    max={10}
-                    label={__("Text Stroke", "frontis-blocks")}
-                    rangeValue={headingTextStroke}
-                    onChangeHandler={(value) => setAttributes({ headingTextStroke: value === 0 ? undefined : value })}
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={""}
-                    isRangeUnit={false}
-
-                />
-
-                <FB_SwitcherControl
-                    label={__("Text Stroke Color", "frontis-blocks")}
-                    globalSwitcher={headingTextStrokeColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ headingTextStrokeColorSwitcher: value })}
-                />
-
-                {headingTextStrokeColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={headingTextStrokeColor}
-                        setGlobalColor={(value) => setAttributes({ headingTextStrokeColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                {headingTextStrokeColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={headingTextStrokeHoverColor}
-                        setGlobalColor={(value) => setAttributes({ headingTextStrokeHoverColor: value === undefined ? '' : value })}
-                    />
-                )}
 
                 <FB_BackgroundColorControl
 					label={__("Text Color", "frontis-blocks")}
@@ -3365,6 +3326,28 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					isBackgroundImage={false}
 
 				/>
+
+                <FB_SwitcherControl
+                    label={__("Highlight Color", "frontis-blocks")}
+                    globalSwitcher={headingHighlightColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ headingHighlightColorSwitcher: value })}
+                />
+
+                {headingHighlightColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={headingHighlightColor}
+                        setGlobalColor={(value) => setAttributes({ headingHighlightColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {headingHighlightColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={headingHighlightHoverColor}
+                        setGlobalColor={(value) => setAttributes({ headingHighlightHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
 
                 <FB_BackgroundColorControl
 					label={__("Background Color", "frontis-blocks")}
@@ -3485,6 +3468,50 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         </button>
                     )}
                 </BaseControl>
+                )}
+
+                <FB_BoxShadowControl
+                    label={__("Text Shadow", "frontis-blocks")}
+                    onBoxShadowChange={(value) => setAttributes({ headingTextShadowValues: value })}
+                    initialShadowValue={headingTextShadowValues}
+                    onBoxShadowStyleChange={(value) => setAttributes({ headingTextShadowCssValue: value })}
+                    isBoxShadow={false}
+                />
+
+                <FB_Range
+                    min={0}
+                    max={10}
+                    label={__("Text Stroke", "frontis-blocks")}
+                    rangeValue={headingTextStroke}
+                    onChangeHandler={(value) => setAttributes({ headingTextStroke: value === 0 ? undefined : value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                    isRangeUnit={false}
+
+                />
+
+                <FB_SwitcherControl
+                    label={__("Text Stroke Color", "frontis-blocks")}
+                    globalSwitcher={headingTextStrokeColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ headingTextStrokeColorSwitcher: value })}
+                />
+
+                {headingTextStrokeColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={headingTextStrokeColor}
+                        setGlobalColor={(value) => setAttributes({ headingTextStrokeColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {headingTextStrokeColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={headingTextStrokeHoverColor}
+                        setGlobalColor={(value) => setAttributes({ headingTextStrokeHoverColor: value === undefined ? '' : value })}
+                    />
                 )}
 
                 <ToggleControl

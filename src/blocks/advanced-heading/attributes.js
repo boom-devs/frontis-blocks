@@ -175,6 +175,17 @@ const attributes = {
         default: '',
     },
 
+    headingHighlightColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    headingHighlightColor: {
+        type: 'string',
+    },
+    headingHighlightHoverColor: {
+        type: 'string',
+    },
+
     headingColorSwitcher : {
         type: 'string',
         default: 'normal'
