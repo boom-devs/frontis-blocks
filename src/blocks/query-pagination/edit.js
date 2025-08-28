@@ -3,8 +3,8 @@
  */
 import { __ } from '@wordpress/i18n';
 import {
-	useBlockProps,
-	useInnerBlocksProps,
+  useBlockProps,
+  useInnerBlocksProps,
 } from '@wordpress/block-editor';
 
 /**
@@ -12,44 +12,36 @@ import {
  */
 import Inspector from "./inspector";
 
-/**
- * Internal dependencies
- */
-
 const TEMPLATE = [
-	[ 'frontis-blocks/query-pagination-previous' ],
-	[ 'frontis-blocks/query-pagination-numbers' ],
-	[ 'frontis-blocks/query-pagination-next' ],
+  ['frontis-blocks/query-pagination-previous'],
+  ['frontis-blocks/query-pagination-numbers'],
+  ['frontis-blocks/query-pagination-next'],
 ];
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-	
 	const {
 		blockId,
-		blockStyle,
-		paginationArrow,
-        showLabel,
 	} = attributes;
 
-	const blockProps = useBlockProps( {
+	const blockProps = useBlockProps({
 		className: `fb-query-pagination-wrapper ${blockId}`,
-	} );
+	});
 
 	const innerBlocksProps = useInnerBlocksProps(
 		{ className: 'fb-query-pagination' },
 		{ template: TEMPLATE }
 	);
 
-	return (
-		<>
-			<Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
-			<div { ...blockProps }>
-				<nav { ...innerBlocksProps } />
-			</div>
-		</>
-	);
+  return (
+    <>
+      <Inspector
+        attributes={attributes}
+        setAttributes={setAttributes}
+        clientId={clientId}
+      />
+      <div {...blockProps}>
+        <nav {...innerBlocksProps} />
+      </div>
+    </>
+  );
 }
