@@ -21,7 +21,11 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, i
     ];
 
     const handleTemplates = value => {
-        setIsProTemplate(value);
+        if (value !== isProTemplate) {
+            setIsProTemplate(value);
+        } else {
+            setIsProTemplate('');
+        }
     };
 
     const handleCategoryClick = (catName) => {

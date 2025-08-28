@@ -8,7 +8,9 @@ const FullSiteImportSettingConfig = ({template, onBack, onImport, isImporting, i
                         <div className="fb-form-section">
                             <span className="fb-template-label">Template Name:</span>
                             <h6 className="fb-template-title">{template?.title || 'Renovate - Home Decor Website Template'}</h6>
-                            <FsiGbTypography/>
+                            <FsiGbTypography
+                                template={template}
+                            />
                         </div>
 
                         <div className="fb-import-actions">
