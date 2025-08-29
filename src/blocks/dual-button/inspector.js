@@ -334,6 +334,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				buttonIconAlign: 'none',
 				buttonTwoIconAlign: 'none',
 				connectorSwitcher: true,
+				ButtonIcon: '',
+				ButtonTwoIcon: '',
 				buttonsDirection: 'vertical',
 				ButtonDesktopPadding: {
 					top: "12",
@@ -390,8 +392,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 			"preset-2": {
 				buttonIconAlign: 'icon-text',
-				buttonIconPosition: 'right',
 				buttonTwoIconAlign: 'icon-text',
+				ButtonIcon: 'arrow-left',
+				ButtonTwoIcon: 'arrow-right',
 				buttonsDirection: 'vertical',
 				connectorSwitcher: true,
 				ButtonDesktopPadding: {
@@ -450,6 +453,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			"preset-3": {
 				buttonIconAlign: 'none',
 				buttonTwoIconAlign: 'none',
+				ButtonIcon: '',
+				ButtonTwoIcon: '',
 				buttonsDirection: 'vertical',
 				connectorSwitcher: true,
 				ButtonDesktopPadding: {
@@ -508,6 +513,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			"preset-4": {
 				buttonIconAlign: 'none',
 				buttonTwoIconAlign: 'none',
+				ButtonIcon: '',
+				ButtonTwoIcon: '',
 				connectorSwitcher: false,
 				buttonsDirection: 'vertical',
 				ButtonDesktopPadding: {
@@ -566,6 +573,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			"preset-5": {
 				buttonIconAlign: 'none',
 				buttonTwoIconAlign: 'none',
+				ButtonIcon: '',
+				ButtonTwoIcon: '',
 				buttonsDirection: 'horizontal',
 				connectorSwitcher: false,
 				ButtonDesktopPadding: {
@@ -624,6 +633,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			"preset-6": {
 				buttonIconAlign: 'none',
 				buttonTwoIconAlign: 'none',
+				ButtonIcon: '',
+				ButtonTwoIcon: '',
 				buttonsDirection: 'horizontal',
 				connectorSwitcher: false,
 				ButtonDesktopPadding: {
