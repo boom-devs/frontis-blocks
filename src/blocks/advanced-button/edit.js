@@ -22,6 +22,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockId,
         buttonAlignment,
+        buttonTextSwitcher,
         buttonText,
         buttonUrl,
         buttonTargetUrl,
@@ -87,8 +88,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${buttonGlobalWraperClass}` } id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }} ref={panelRef}>
                     <a 
                         className="fb-advanced-button" 
-                        href={buttonUrl} 
-                        target={buttonTargetUrl ? '_blank' : undefined}
                         rel={buttonTargetUrl ? 'noopener noreferrer' : undefined}
                         onClick={handleButtonClick}
                     >
@@ -121,7 +120,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             </div>
                         )}
 
-                        {buttonIconAlign !== 'icon-only' && (
+                        {buttonTextSwitcher && (
                             <RichText
                                 tagName="span"
                                 value={buttonText}
@@ -157,12 +156,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         />
                                     )}
                                 </div>
-                            </div>
-                        )}
-
-                        {buttonIconAlign === 'icon-only' && (
-                            <div className={`fb-advanced-button-icon-wrapper`}>
-                                <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
                             </div>
                         )}
                     </a>

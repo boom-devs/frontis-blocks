@@ -1,0 +1,198 @@
+{
+    "categories": [
+        {
+            "name": "Landing",
+            "slug": "landing",
+            "icon": "categories/01K3K2CK5VP4BNKEP40BD1NR40.svg",
+            "count": 1
+        },
+        {
+            "name": "Marketing",
+            "slug": "marketing",
+            "icon": "categories/01K3K2D2AWBPMB5W4M83BJJKEP.svg",
+            "count": 1
+        }
+    ],
+    "items": [
+        {
+            "id": 1,
+            "title": "Dicta velit voluptas",
+            "slug": "dicta-velit-voluptas",
+            "description": "asdf",
+            "is_premium": 1,
+            "image": "sites/01K3K9ATTA1QGGXAKEB1HZ8WPE.jpg",
+            "tags": [
+                "Exercitationem minus"
+            ],
+            "dependencies": [
+                {
+                    "name": "Kalia Fernandez",
+                    "slug": "Nisi aspernatur recu",
+                    "version": "Elit consequatur du"
+                }
+            ],
+            "typographies": {
+                "body": {
+                    "fontFamily": "Default",
+                    "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                    "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                    "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                    "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                    "fontWeight": "Default",
+                    "fontStyle": "Default",
+                    "textTransform": "Default",
+                    "textDecoration": "Default",
+                    "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                    "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                },
+                "link": {
+                    "fontFamily": "Default",
+                    "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                    "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                    "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                    "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                    "fontWeight": "Default",
+                    "fontStyle": "Default",
+                    "textTransform": "Default",
+                    "textDecoration": "Default",
+                    "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                    "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                },
+                "button": {
+                    "fontFamily": "Default",
+                    "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                    "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                    "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                    "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                    "fontWeight": "Default",
+                    "fontStyle": "Default",
+                    "textTransform": "Default",
+                    "textDecoration": "Default",
+                    "letterSpacing": { "Desktop": "Default", "Tablet": "Default", "Mobile": "Default" },
+                    "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                },
+                "captions": {
+                    "fontFamily": "Default",
+                    "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                    "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                    "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                    "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                    "fontWeight": "Default",
+                    "fontStyle": "Default",
+                    "textTransform": "Default",
+                    "textDecoration": "Default",
+                    "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                    "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                },
+                "heading": {
+                    "all": {
+                        "fontFamily": "Default",
+                        "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "fontWeight": "Default",
+                        "fontStyle": "Default",
+                        "textTransform": "Default",
+                        "textDecoration": "Default",
+                        "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                    },
+                    "h1": {
+                        "fontFamily": "Default",
+                        "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "fontWeight": "Default",
+                        "fontStyle": "Default",
+                        "textTransform": "Default",
+                        "textDecoration": "Default",
+                        "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                    },
+                    "h2": {
+                        "fontFamily": "Default",
+                        "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "fontWeight": "Default",
+                        "fontStyle": "Default",
+                        "textTransform": "Default",
+                        "textDecoration": "Default",
+                        "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                    },
+                    "h3": {
+                        "fontFamily": "Default",
+                        "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "fontSizeUnit": {
+                            "Desktop": "px",
+                            "Tablet": "FrontisBlocksSidebar.jsx",
+                            "Mobile": "px"
+                        },
+                        "fontWeight": "Default",
+                        "fontStyle": "Default",
+                        "textTransform": "Default",
+                        "textDecoration": "Default",
+                        "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                    },
+                    "h4": {
+                        "fontFamily": "Default",
+                        "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "fontWeight": "Default",
+                        "fontStyle": "Default",
+                        "textTransform": "Default",
+                        "textDecoration": "Default",
+                        "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                    },
+                    "h5": {
+                        "fontFamily": "Default",
+                        "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "fontWeight": "Default",
+                        "fontStyle": "Default",
+                        "textTransform": "Default",
+                        "textDecoration": "Default",
+                        "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                    },
+                    "h6": {
+                        "fontFamily": "Default",
+                        "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "fontWeight": "Default",
+                        "fontStyle": "Default",
+                        "textTransform": "Default",
+                        "textDecoration": "Default",
+                        "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                    }
+                }
+            },
+            "colors": [
+                {
+                    "name": "asdfe",
+                    "value": "#b85f5f",
+                    "variable": "asdf"
+                }
+            ],
+            "categories": [
+                "Landing",
+                "Marketing"
+            ]
+        }
+    ]
+}

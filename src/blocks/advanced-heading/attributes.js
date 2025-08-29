@@ -175,6 +175,17 @@ const attributes = {
         default: '',
     },
 
+    headingHighlightColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    headingHighlightColor: {
+        type: 'string',
+    },
+    headingHighlightHoverColor: {
+        type: 'string',
+    },
+
     headingColorSwitcher : {
         type: 'string',
         default: 'normal'
@@ -981,7 +992,7 @@ const attributes = {
     },
     headingIconColor : {
         type: 'string',
-        default: '#399CFF'
+        default: '#399CFF',
     },
     headingIconHoverColor: {
         type: 'string',
@@ -1053,6 +1064,47 @@ const attributes = {
 		type : 'boolean',
 		default: true
 	},
+
+    //spacing padding for icon
+    headingIconPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    headingIconDesktopPadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    headingIconTabletPadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    headingIconMobilePadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    headingIconPaddingLink : {
+        type : 'boolean',
+        default: true
+    },
 	/** End Border */
 
 	/** Start Border Radius */
@@ -1515,6 +1567,7 @@ const attributes = {
     activeLineAfterHeight: {
         type: 'object',
         default: {
+            Desktop: '1',
             Desktop: '2',
             Tablet: '',
             Mobile: ''

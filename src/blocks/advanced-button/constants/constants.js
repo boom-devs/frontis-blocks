@@ -36,7 +36,6 @@ export const ICON_ALIGN = [
 	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
 	{ label: __(<Dashicon icon={"text"} />), value: "icon-text" },
 	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
-	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon-only" },
 ];
 
 export const ICON_POSITION = [
