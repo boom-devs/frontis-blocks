@@ -383,8 +383,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		ctaVRBottomOffset,
 		ctaVRBottomOffsetUnits,
 	} = attributes;
-
+	console.log(attributes);
 	const deviceType = useDeviceType();
+
+	let defaultImageUrl = [];
+	if (typeof FrontisBlocksData !== 'undefined') {
+		defaultImageUrl = [
+			FrontisBlocksData.pluginUrl + 'assets/images/ctabg-one.png',
+			FrontisBlocksData.pluginUrl + 'assets/images/ctabgtwo.png',
+			FrontisBlocksData.pluginUrl + 'assets/images/ctabgthree.png',
+		];
+	}	
+	// Set default value for buttonIconImageUrl
+	useEffect(() => {
+		if (!ctaGlobalBackgroundImageUrl) {
+			setAttributes({ ctaGlobalBackgroundImageUrl: defaultImageUrl });
+		}
+	}, []);
 	
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
@@ -402,6 +417,668 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const buttonTwoIconHandler = (iconName) => {
 		setAttributes({ btnTwoIcon: iconName });
 	};
+
+	/** Start Preset Style */
+	const changeCTAPreset = (selectedPreset) => {
+        const presetConfigurations = {
+			"preset-1": {
+				Alignment: "center",
+				descriptionSwitcher: true,
+				buttonIconSwitcher: true,
+				buttonTwoIconSwitcher: true,
+				ctaBtnOneSwitcher: true,
+				btnTwoSwitcher: true,
+			},
+			"preset-2": {
+				Alignment: "center",
+				descriptionSwitcher: true,
+				buttonIconSwitcher: true,
+				buttonTwoIconSwitcher: true,
+				ctaBtnOneSwitcher: true,
+				btnTwoSwitcher: true,
+				btnTwoIcon: "arrow-left",
+				btnIcon: "arrow-left",
+				ctaGlobalBackgroundImageUrl: "",
+				ctaGlobalBackgroundImagePosition: "center",
+				ctaGlobalBackgroundImageRepeat: "no-repeat",
+				ctaGlobalBackgroundImageSize: "cover",
+				ctaGlobalClassicColor: "#399CFF",
+				headingColor: "#ffffff",
+				SubHeadingColor: "#ffffff",
+				buttonBgColor: "#4361EE",
+				buttonTwoBgColor: "transparent",
+				buttonTextColor: "#ffffff",
+				buttonTwoTextColor: "#ffffff",
+				btnTwoBorderP: "border",
+				btnTwoBorderColor: "#ffffff",
+				btnIconColor: "#ffffff",
+				btnTwoIconColor: "#ffffff",
+				globalPaddingDesktop: {
+					top: "100",
+					bottom: "100",
+					left: "20",
+					right: "20",
+				},
+				globalBorderRadiusDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",	
+				},
+				headingDesktopMargin: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",	
+				},
+				descDesktopMargin: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				headingFontSize: {
+					Desktop: "72",
+					Tablet: "48",
+					Mobile: "36",
+				},
+				SubHeadingFontSize: {
+					Desktop: "16",
+					Tablet: "16",
+					Mobile: "16",
+				},
+				btnOneDesktopPadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnOneTabPadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnOneMobilePadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnTwoDesktopPadding:{
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnTwoTabPadding: {
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnTwoMobilePadding: {
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnIconRotate: {
+					Desktop: "145",
+					Tablet: "145",
+					Mobile: "145",
+				},
+				btnIconSize: {
+					Desktop: "14",
+					Tablet: "14",
+					Mobile: "14",
+				},
+				btnTwoIconSize: {
+					Desktop: "14",
+					Tablet: "14",
+					Mobile: "14",
+				},
+				btnOneDesktopBorder: {
+					bottom: "0",
+					left: "0",
+					right: "0",
+					top: "0",
+				}, 
+				btnTwoDesktopBorder: {
+					bottom: "1",
+					left: "1",
+					right: "1",
+					top: "1",
+				},
+				btnOneDesktopBorderRadius: {
+					bottom: "50",
+					left: "50",
+					right: "50",
+					top: "50",
+				}
+			},
+			"preset-3": {
+				Alignment: "center",
+				descriptionSwitcher: true,
+				buttonIconSwitcher: false,
+				buttonTwoIconSwitcher: false,
+				ctaBtnOneSwitcher: true,
+				btnTwoSwitcher: true,
+				btnTwoIcon: "arrow-left",
+				btnIcon: "arrow-left",
+				ctaGlobalBackgroundImageUrl: defaultImageUrl[0],
+				ctaGlobalBackgroundImagePosition: "center",
+				ctaGlobalBackgroundImageRepeat: "no-repeat",
+				ctaGlobalBackgroundImageSize: "cover",
+				ctaGlobalClassicColor: "",
+				headingColor: "#ffffff",
+				SubHeadingColor: "#ffffff",
+				buttonBgColor: "#ffffff",
+				buttonTwoBgColor: "transparent",
+				buttonTextColor: "#000000",
+				buttonTwoTextColor: "#ffffff",
+				btnTwoBorderP: "border",
+				btnTwoBorderColor: "#ffffff",
+				btnTwoIconColor: "#ffffff",
+				globalPaddingDesktop: {
+					top: "100",
+					bottom: "100",
+					left: "20",
+					right: "20",
+				},
+				globalBorderRadiusDesktop: {
+					top: "24",
+					bottom: "24",
+					left: "24",
+					right: "24",	
+				},
+				headingDesktopMargin: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",	
+				},
+				descDesktopMargin: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				headingFontSize: {
+					Desktop: "72",
+					Tablet: "48",
+					Mobile: "36",
+				},
+				SubHeadingFontSize: {
+					Desktop: "16",
+					Tablet: "16",
+					Mobile: "16",
+				},
+				btnOneDesktopPadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnOneTabPadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnOneMobilePadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnTwoDesktopPadding:{
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnTwoTabPadding: {
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnTwoMobilePadding: {
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnIconRotate: {
+					Desktop: "145",
+					Tablet: "145",
+					Mobile: "145",
+				},
+				btnIconSize: {
+					Desktop: "14",
+					Tablet: "14",
+					Mobile: "14",
+				},
+				btnTwoIconSize: {
+					Desktop: "14",
+					Tablet: "14",
+					Mobile: "14",
+				},
+				btnOneDesktopBorder: {
+					bottom: "0",
+					left: "0",
+					right: "0",
+					top: "0",
+				}, 
+				btnTwoDesktopBorder: {
+					bottom: "1",
+					left: "1",
+					right: "1",
+					top: "1",
+				},
+				btnOneDesktopBorderRadius: {
+					bottom: "50",
+					left: "50",
+					right: "50",
+					top: "50",
+				}
+			},
+			"preset-4": {
+				Alignment: "center",
+				descriptionSwitcher: true,
+				buttonIconSwitcher: true,
+				buttonTwoIconSwitcher: true,
+				ctaBtnOneSwitcher: true,
+				btnTwoSwitcher: true,
+				btnTwoIcon: "arrow-left",
+				btnIcon: "arrow-left",
+				ctaGlobalBackgroundImageUrl: defaultImageUrl[1],
+				ctaGlobalBackgroundImagePosition: "center",
+				ctaGlobalBackgroundImageRepeat: "no-repeat",
+				ctaGlobalBackgroundImageSize: "cover",
+				ctaGlobalClassicColor: "",
+				headingColor: "#ffffff",
+				SubHeadingColor: "#ffffff",
+				buttonBgColor: "#fff",
+				buttonTwoBgColor: "transparent",
+				buttonTextColor: "#000",
+				buttonTwoTextColor: "#ffffff",
+				btnTwoBorderP: "border",
+				btnTwoBorderColor: "#ffffff",
+				btnIconColor: "#000",
+				btnTwoIconColor: "#ffffff",
+				globalPaddingDesktop: {
+					top: "100",
+					bottom: "100",
+					left: "20",
+					right: "20",
+				},
+				globalBorderRadiusDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",	
+				},
+				headingDesktopMargin: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",	
+				},
+				descDesktopMargin: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				headingFontSize: {
+					Desktop: "72",
+					Tablet: "48",
+					Mobile: "36",
+				},
+				SubHeadingFontSize: {
+					Desktop: "16",
+					Tablet: "16",
+					Mobile: "16",
+				},
+				btnOneDesktopPadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnOneTabPadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnOneMobilePadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnTwoDesktopPadding:{
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnTwoTabPadding: {
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnTwoMobilePadding: {
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnIconRotate: {
+					Desktop: "145",
+					Tablet: "145",
+					Mobile: "145",
+				},
+				btnIconSize: {
+					Desktop: "14",
+					Tablet: "14",
+					Mobile: "14",
+				},
+				btnTwoIconSize: {
+					Desktop: "14",
+					Tablet: "14",
+					Mobile: "14",
+				},
+				btnOneDesktopBorder: {
+					bottom: "0",
+					left: "0",
+					right: "0",
+					top: "0",
+				}, 
+				btnTwoDesktopBorder: {
+					bottom: "1",
+					left: "1",
+					right: "1",
+					top: "1",
+				},
+				btnOneDesktopBorderRadius: {
+					bottom: "50",
+					left: "50",
+					right: "50",
+					top: "50",
+				}
+			},
+			"preset-5": {
+				Alignment: "center",
+				descriptionSwitcher: true,
+				buttonIconSwitcher: true,
+				buttonTwoIconSwitcher: false,
+				ctaBtnOneSwitcher: true,
+				btnTwoSwitcher: false,
+				btnTwoIcon: "arrow-left",
+				btnIcon: "arrow-left",
+				ctaGlobalBackgroundImageUrl: defaultImageUrl[2],
+				ctaGlobalBackgroundImagePosition: "center",
+				ctaGlobalBackgroundImageRepeat: "no-repeat",
+				ctaGlobalBackgroundImageSize: "cover",
+				ctaGlobalClassicColor: "",
+				headingColor: "#ffffff",
+				SubHeadingColor: "#ffffff",
+				buttonBgColor: "#fff",
+				buttonTwoBgColor: "transparent",
+				buttonTextColor: "#000",
+				buttonTwoTextColor: "#ffffff",
+				btnTwoBorderP: "border",
+				btnTwoBorderColor: "#ffffff",
+				btnTwoIconColor: "#ffffff",
+				globalPaddingDesktop: {
+					top: "100",
+					bottom: "100",
+					left: "20",
+					right: "20",
+				},
+				globalBorderRadiusDesktop: {
+					top: "24",
+					bottom: "24",
+					left: "24",
+					right: "24",	
+				},
+				headingDesktopMargin: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",	
+				},
+				descDesktopMargin: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				headingFontSize: {
+					Desktop: "72",
+					Tablet: "48",
+					Mobile: "36",
+				},
+				SubHeadingFontSize: {
+					Desktop: "16",
+					Tablet: "16",
+					Mobile: "16",
+				},
+				btnOneDesktopPadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnOneTabPadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnOneMobilePadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnTwoDesktopPadding:{
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnTwoTabPadding: {
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnTwoMobilePadding: {
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnIconRotate: {
+					Desktop: "145",
+					Tablet: "145",
+					Mobile: "145",
+				},
+				btnIconSize: {
+					Desktop: "14",
+					Tablet: "14",
+					Mobile: "14",
+				},
+				btnTwoIconSize: {
+					Desktop: "14",
+					Tablet: "14",
+					Mobile: "14",
+				},
+				btnOneDesktopBorder: {
+					bottom: "0",
+					left: "0",
+					right: "0",
+					top: "0",
+				}, 
+				btnTwoDesktopBorder: {
+					bottom: "1",
+					left: "1",
+					right: "1",
+					top: "1",
+				},
+				btnOneDesktopBorderRadius: {
+					bottom: "14",
+					left: "14",
+					right: "14",
+					top: "14",
+				}
+			},
+			"preset-6": {
+				Alignment: "center",
+				descriptionSwitcher: true,
+				buttonIconSwitcher: false,
+				buttonTwoIconSwitcher: false,
+				ctaBtnOneSwitcher: true,
+				btnTwoSwitcher: false,
+				btnTwoIcon: "arrow-left",
+				btnIcon: "arrow-left",
+				ctaGlobalBackgroundImageUrl: '',
+				ctaGlobalBackgroundImagePosition: "center",
+				ctaGlobalBackgroundImageRepeat: "no-repeat",
+				ctaGlobalBackgroundImageSize: "cover",
+				ctaGlobalClassicColor: "#fff",
+				headingColor: "#15171C",
+				SubHeadingColor: "#555E72",
+				buttonBgColor: "#399CFF",
+				buttonTwoBgColor: "transparent",
+				buttonTextColor: "#fff",
+				buttonTwoTextColor: "#ffffff",
+				btnTwoBorderP: "border",
+				btnTwoBorderColor: "#ffffff",
+				btnTwoIconColor: "#ffffff",
+				globalPaddingDesktop: {
+					top: "100",
+					bottom: "100",
+					left: "20",
+					right: "20",
+				},
+				globalBorderRadiusDesktop: {
+					top: "24",
+					bottom: "24",
+					left: "24",
+					right: "24",	
+				},
+				headingDesktopMargin: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",	
+				},
+				descDesktopMargin: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				headingFontSize: {
+					Desktop: "72",
+					Tablet: "48",
+					Mobile: "36",
+				},
+				SubHeadingFontSize: {
+					Desktop: "16",
+					Tablet: "16",
+					Mobile: "16",
+				},
+				btnOneDesktopPadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnOneTabPadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnOneMobilePadding: {
+					top: "13",
+					bottom: "13",
+					left: "20",
+					right: "20",
+				},
+				btnTwoDesktopPadding:{
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnTwoTabPadding: {
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnTwoMobilePadding: {
+					top: "12",
+					bottom: "12",
+					left: "20",
+					right: "20",
+				},
+				btnIconRotate: {
+					Desktop: "145",
+					Tablet: "145",
+					Mobile: "145",
+				},
+				btnIconSize: {
+					Desktop: "14",
+					Tablet: "14",
+					Mobile: "14",
+				},
+				btnTwoIconSize: {
+					Desktop: "14",
+					Tablet: "14",
+					Mobile: "14",
+				},
+				btnOneDesktopBorder: {
+					bottom: "0",
+					left: "0",
+					right: "0",
+					top: "0",
+				}, 
+				btnTwoDesktopBorder: {
+					bottom: "1",
+					left: "1",
+					right: "1",
+					top: "1",
+				},
+				btnOneDesktopBorderRadius: {
+					bottom: "14",
+					left: "14",
+					right: "14",
+					top: "14",
+				}
+			},
+			
+		}
+		const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+				ctaPresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Call to Action: Preset "${selectedPreset}" not found.`);
+        }
+	}
 
 	/** Start Heading padding */
 	const handleHeadingPaddingUnitChange = (event, position) => {
@@ -1912,7 +2589,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							? `background: ${ctaGlobalGradientColor};` 
 							: `background: ${ctaGlobalClassicColor};`))
 					: (ctaGlobalBackgroundImageUrl && ctaGlobalBackgroundImageUrl !== "null" 
-						? `
+						? 
+						`
 							${ctaGlobalBackgroundImageUrl ? `background-image: url(${ctaGlobalBackgroundImageUrl});` : "" }
 							${ctaGlobalBackgroundImagePosition ? `background-position: ${ctaGlobalBackgroundImagePosition};` : "" }
 							${ctaGlobalBackgroundImageAttachment ? `background-attachment: ${ctaGlobalBackgroundImageAttachment};` : "" }
@@ -2439,6 +3117,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	 */
 	const generalControls = (
 		<>
+			{/* Preset Style */}
+			<PanelBody title={__("Preset", "frontis-blocks")} initialOpen={true}>
+				<SelectControl
+					label={__("Preset Style", "frontis-blocks")}
+					value={ctaPresetStyle}
+					options={PRESETS}
+					onChange={(selected) => changeCTAPreset(selected)}
+				/>
+			</PanelBody>
 			{/* Title Element */}
 			<div className="fb-advanced-wrapper">
 				<PanelBody

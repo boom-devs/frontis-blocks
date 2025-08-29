@@ -299,7 +299,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		dualBtnVRBottomOffset,
 		dualBtnVRBottomOffsetUnits,
 	} = attributes;
-	console.log('attributes', attributes);
 
 	const deviceType = useDeviceType();
 
