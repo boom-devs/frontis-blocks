@@ -6,7 +6,6 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, i
     const categories = schema[activeTab]?.categories || [];
 
     useEffect(() => {
-        // Set the first category as default only if no category is selected yet
         if (categories.length > 0 && !activeCategory[activeTab]) {
             setActiveCategory(prev => ({
                 ...prev,
@@ -31,7 +30,7 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, i
     const handleCategoryClick = (catName) => {
 
         if (catName === null) {
-            setResetCat(true);   
+            setResetCat(true);
         } else {
             setResetCat(false);
         }
@@ -41,14 +40,15 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, i
         }));
         setIsProTemplate('');
         setActiveTagTab('');
+
     };
 
-  const handelTemplates = value => {
-    setIsProTemplate(isProTemplate === value ? '' : value);
-  }
+    const handelTemplates = value => {
+        setIsProTemplate(isProTemplate === value ? '' : value);
+    }
 
     return (
-        <div className="fb-template-library-store-sidebar">
+        <div className="fb-template-library-store-sidebar" style={activeTab === 'templatelibrary' ? { paddingTop: 0 } : {}} >
             {activeTab !== 'templatelibrary' && (
                 <div className="fb-template-category-wrapper">
                     <div className="fb-template-category-label">
@@ -68,6 +68,7 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, i
                 </div>
             )}
             <div className="fb-template-library-store-sidebar-tabs">
+                {activeTab !== "templatelibrary" && (
                 <button
                     className={`fb-template-library-store-sidebar-tab ${resetCat ? 'active' : ''}`}
                     onClick={() => handleCategoryClick(null)}
@@ -79,6 +80,7 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, i
                         All
                     </span>
                 </button>
+                ) }
 
                 {categories.map((category) => (
                     <button
@@ -86,10 +88,25 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, i
                         className={`fb-template-library-store-sidebar-tab ${activeCategory[activeTab] === category.name ? 'active' : ''}`}
                         onClick={() => handleCategoryClick(category.name)}
                     >
-                        <span className="fb-template-library-store-sidebar-tab-name">
-                            <img src={`https://leech-better-moose.ngrok-free.app/storage/${category.icon}`} alt={category.name} className="fb-category-icon" />
-                            {category.name}
-                        </span>
+                        {activeTab === "templatelibrary" ? (
+                            <span className="fb-template-library-store-sidebar-tab-name">
+                                <span
+                                    dangerouslySetInnerHTML={{ __html: category.icon }}
+                                    className="fb-category-icon"
+                                />
+                                {category.name}
+                            </span>
+                        ) : (
+                            <span className="fb-template-library-store-sidebar-tab-name">
+                                <img
+                                    src={`https://leech-better-moose.ngrok-free.app/storage/${category.icon}`}
+                                    alt={category.name}
+                                    className="fb-category-icon"
+                                />
+                                {category.name}
+                            </span>
+                        )}
+
                         {activeTab !== 'templatelibrary' && (
                             <span className="fb-template-library-store-sidebar-tab-count">
                                 {String(category.count).padStart(2, "0")}

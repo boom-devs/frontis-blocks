@@ -24,6 +24,8 @@ const PatternLibraryButton = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resetCat, setResetCat] = useState(true);
+    const [isLogedIn, setIsLogedIn] = useState(false);
+
 
     const handleClick = () => {
         setIsVisible(!isVisible);
@@ -103,10 +105,11 @@ const PatternLibraryButton = () => {
     };
 
     useEffect(() => {
+         setIsLogedIn(true);
         const fetchData = async () => {
             const patterns = await getTemplatesData("patterns");
             const pages = await getTemplatesData("pages");
-            // const sites = await getTemplatesData("sites");
+            const sites = await getTemplatesData("sites");
 
             if (patterns) {
                 setData((prev) => ({
@@ -236,6 +239,7 @@ const PatternLibraryButton = () => {
                                         activeTagTab={activeTagTab[activeTab]}
                                         setActiveTagTab={(value) => setActiveTagTab({ ...activeTagTab, [activeTab]: value })}
                                         TagTabsOptions={TagTabsOptions}
+                                        isLogedIn={isLogedIn}
                                     />
                                 )}
                                 {activeTab === 'templatelibrary' && (
@@ -244,10 +248,12 @@ const PatternLibraryButton = () => {
                                         activeCategory={activeCategory}
                                         libraryData={libraryData}
                                         setLibraryData={setLibraryData}
+                                        setIsVisible={setIsVisible}
                                         data={data}
                                         isProTemplate={isProTemplate}
                                         activeTag={activeTagTab[activeTab]}
                                         setActiveTag={(value) => setActiveTagTab({ ...activeTagTab, [activeTab]: value })}
+                                        isLogedIn={isLogedIn}
                                     />
                                 )}
                             </div>
