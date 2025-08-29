@@ -21,6 +21,13 @@ export const PRESETS = [
     { label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
     { label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
     { label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
+    { label: __("Preset 7", "frontis-blocks"), value: "preset-7" },
+    { label: __("Preset 8", "frontis-blocks"), value: "preset-8" },
+    { label: __("Preset 9", "frontis-blocks"), value: "preset-9" },
+    { label: __("Preset 10", "frontis-blocks"), value: "preset-10" },
+    { label: __("Preset 11", "frontis-blocks"), value: "preset-11" },
+    { label: __("Preset 12", "frontis-blocks"), value: "preset-12" },
+    { label: __("Preset 13", "frontis-blocks"), value: "preset-13" },
 ];
 
 export const OVERFLOW_OP = [

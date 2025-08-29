@@ -183,11 +183,7 @@ const TemplateCard = ({
 
         if (page) {
             const pageData = JSON.parse(page.data).content;
-
             const parsedBlocks = parse(pageData);
-
-            console.log("parsedBlocks parsedBlocks")
-            console.log(parsedBlocks)
 
             // Get block editor utilities
             const { insertBlocks, replaceBlocks } = dispatch('core/block-editor');
@@ -197,18 +193,8 @@ const TemplateCard = ({
             const selectedBlock = getSelectedBlock();
 
             if (selectedBlock) {
-                // Check if the selected block has content (e.g., innerBlocks or content attribute)
-                const hasContent = selectedBlock.innerBlocks?.length > 0 ||
-                    (selectedBlock.attributes?.content && selectedBlock.attributes.content.trim() !== '');
-
-                if (!hasContent) {
-                    // If the selected block is empty, replace it with the parsed blocks
-                    replaceBlocks(selectedBlock.clientId, parsedBlocks);
-                } else {
-                    // If the selected block has content, insert parsed blocks after it
-                    const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
-                    insertBlocks(parsedBlocks, selectedBlockIndex + 1);
-                }
+                const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
+                insertBlocks(parsedBlocks, selectedBlockIndex + 1);
             } else {
                 // If no block is selected, insert at the end of the current blocks
                 const currentBlocks = getBlocks();
@@ -218,6 +204,42 @@ const TemplateCard = ({
 
         setIsLoading(false);
         setIsVisible(false);
+    };
+
+    // Function to insert blocks in chunks
+    const insertBlocksInChunks = async (chunks, selectedBlock) => {
+        const { insertBlocks, replaceBlocks } = wp.data.dispatch('core/block-editor');
+            const { getBlocks, getBlockIndex } = wp.data.select('core/block-editor');
+        if (selectedBlock) {
+            const hasContent = selectedBlock.innerBlocks?.length > 0 ||
+                (selectedBlock.attributes?.content && selectedBlock.attributes.content.trim() !== '');
+
+            if (!hasContent) {
+                // Replace the empty selected block with the first chunk
+                replaceBlocks(selectedBlock.clientId, chunks[0]);
+
+                // Insert remaining chunks after the selected block
+                const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
+                for (let i = 1; i < chunks.length; i++) {
+                    await new Promise(resolve => setTimeout(resolve, 100)); // Small delay to prevent UI freeze
+                    insertBlocks(chunks[i], selectedBlockIndex + i);
+                }
+            } else {
+                // Insert all chunks after the selected block
+                const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
+                for (let i = 0; i < chunks.length; i++) {
+                    await new Promise(resolve => setTimeout(resolve, 100)); // Small delay to prevent UI freeze
+                    insertBlocks(chunks[i], selectedBlockIndex + i + 1);
+                }
+            }
+        } else {
+            // Insert all chunks at the end of the current blocks
+            const currentBlocks = getBlocks();
+            for (let i = 0; i < chunks.length; i++) {
+                await new Promise(resolve => setTimeout(resolve, 100)); // Small delay to prevent UI freeze
+                insertBlocks(chunks[i], currentBlocks.length + i);
+            }
+        }
     };
 
     return (
