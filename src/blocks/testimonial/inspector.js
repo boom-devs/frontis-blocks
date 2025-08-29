@@ -343,7 +343,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}
     const ratingIconHandler = (IconName) => {
 		setAttributes({TestimonialRatingicon: IconName})
-
 	}
 
 
@@ -726,8 +725,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
     /** End Preset Style */
     
-
-
     /** Start Testimonial Rating Icon Margin */
     const testimonialRatingIconMarginUnitsChange = (event, position) => {
         const value = event.target.value;
