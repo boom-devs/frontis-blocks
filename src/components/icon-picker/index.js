@@ -286,7 +286,6 @@ export default function FBIconPicker(props) {
 	}
 
 	useEffect(  () => {
-		fetchCustomIcons();
 		fetchSvgIcons().then(icons => {
 			if (icons) {
 				setSvgIcon(icons);

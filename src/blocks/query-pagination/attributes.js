@@ -20,9 +20,9 @@ const attributes = {
     paginationAlignment: {
         type: 'object',
         default: {
-            Desktop: 'left',
-            Tablet: '',
-            Mobile: '',
+            Desktop: 'center',
+            Tablet: 'center',
+            Mobile: 'center',
         },
     },
     paginationItemGap: {
@@ -55,6 +55,10 @@ const attributes = {
 		type: 'string',
 		default: 'angle-left'
 	},
+	paginationPrevFrontendIcon: {
+		type: 'string',
+		default: ''
+	},
 	paginationNextTxt: {
 		type: 'string',
 		default: 'Next'
@@ -63,15 +67,104 @@ const attributes = {
 		type: 'string',
 		default: 'angle-right'
 	},
+	paginationNextFrontendIcon: {
+		type: 'string',
+		default: ''
+	},
 
+
+	/** Start Pagination Wrapper */
+	paginationWrapperPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationWrapperDesktopPadding: {
+		type: 'object', 
+		default: {
+			top: '40',
+			bottom: '40',
+			left: '24',
+			right: '24',
+		},
+	},
+	paginationWrapperTabletPadding: {
+		type: 'object', 
+		default: {
+			top: '40',
+			bottom: '40',
+			left: '24',
+			right: '24',
+		},
+	},
+	paginationWrapperMobilePadding: {
+		type: 'object', 
+		default: {
+			top: '30',
+			bottom: '30',
+			left: '16',
+			right: '16',
+		},
+	},
+	paginationWrapperPaddingLink: {
+		type: 'boolean',
+		default: true
+	},
+
+
+
+	paginationWrapperMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	paginationWrapperDesktopMargin: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationWrapperTabletMargin: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationWrapperMobileMargin: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	paginationWrapperMarginLink: {
+		type: 'boolean',
+		default: true
+	},
+
+	/** End Pagination Wrapper */
 
     /** Pagination Arrow */
 	paginationArrowSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '12',
+			Tablet: '12',
+			Mobile: '12'
 		}
 	},
 	paginationArrowSizeUnits: { 
@@ -254,9 +347,9 @@ const attributes = {
 	paginationArrowTextFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '12',
+			Tablet: '12',
+			Mobile: '12'
 		}
 	},
 	paginationArrowTextFontSizeUnits: { 

@@ -13,6 +13,8 @@
     -webkit-transition-timing-function: linear !important;
     transition-timing-function: linear !important;
     will-change: transform;
+    height: auto;
+    
     .swiper-slide{
       // width: auto !important;
       width: 12rem;

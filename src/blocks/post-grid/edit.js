@@ -1,13 +1,7 @@
 // Edit.js
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
-import {
-	SelectControl,
-	PanelBody,
-	TabPanel, RangeControl,
-} from '@wordpress/components';
+import { useBlockProps } from '@wordpress/block-editor';
 import LayoutGrid from './layoutGrid';
 import './editor.scss';
 import Inspector from "./inspector";

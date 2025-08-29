@@ -4,7 +4,7 @@ const FullSiteImportContent = ({template}) => {
                     <div className="fb-import-preview-panel">
                         <div className="fb-template-preview-card">
                             <img
-                                src={template?.image}
+                                src={`https://leech-better-moose.ngrok-free.app/storage/${template?.image}`}
                                 alt={template?.title}
                                 className="fb-preview-image"
                             />

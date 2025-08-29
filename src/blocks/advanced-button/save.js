@@ -5,6 +5,7 @@ export default function save({ attributes }) {
     const {
         blockId,
         buttonAlignment,
+        buttonTextSwitcher,
         buttonText,
         buttonUrl,
         buttonTargetUrl,
@@ -36,17 +37,26 @@ export default function save({ attributes }) {
         className: `frontis-block fb-advanced-button-main-wrapper ${blockId} ${advancedBtnDesktopSwitcher && 'fb-desktop-responsive'} ${advancedBtnTabletSwitcher && 'fb-tablet-responsive'} ${advancedBtnMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
+    const handleButtonClick = (event) => {
+        event.preventDefault();
+    };
 
     return (
         <>
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${buttonGlobalWraperClass}`} id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }}>
-                    <a 
-                        className="fb-advanced-button" 
-                        href={buttonUrl} 
-                        target={buttonTargetUrl ? '_blank' : undefined}
-                        rel={buttonTargetUrl ? 'noopener noreferrer' : undefined}
-                    >
+                <a
+                    className="fb-advanced-button"
+                    href={buttonUrl || undefined} 
+                    target={buttonTargetUrl ? "_blank" : undefined}
+                    rel={buttonUrl ? "noopener noreferrer" : undefined}
+                    onClick={(e) => {
+                        if (!buttonUrl) {
+                        e.preventDefault();
+                        }
+                        handleButtonClick?.(e);
+                    }}
+                >
                         {buttonIconPosition === 'left' && buttonIconAlign === 'icon-text' && (
                             <div className={`fb-advanced-button-icon-wrapper ${buttonIconPosition}`}> 
                                 <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
@@ -65,7 +75,7 @@ export default function save({ attributes }) {
                             </div>
                         )}
 
-                        {buttonIconAlign !== 'icon-only' && (
+                        {buttonTextSwitcher && (
                             <RichText.Content
                                 tagName="span"
                                 value={buttonText}
@@ -88,12 +98,6 @@ export default function save({ attributes }) {
                                         className="button-icon-image"
                                     />
                                 </div>
-                            </div>
-                        )}
-
-                        {buttonIconAlign === 'icon-only' && (
-                            <div className={`fb-advanced-button-icon-wrapper`}>
-                                <div className="fb-advanced-button-icon">{renderSVG(buttonIcon)}</div>
                             </div>
                         )}
                     </a>

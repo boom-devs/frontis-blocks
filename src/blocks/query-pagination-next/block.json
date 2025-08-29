@@ -12,7 +12,10 @@
 		"query",
 		"paginationArrow",
 		"showLabel",
-		"enhancedPagination"
+		"enhancedPagination",
+		"paginationPrevNextType",
+		"paginationNextTxt",
+		"paginationNextIcon"
 	],
 	"supports": {
         "anchor": false,
