@@ -9,7 +9,7 @@ import TemplateImport from "./template-import";
 import LoginSignupModal from "./login-signup";
 import PluginUpgradeModal from "./plugin-upgrade";
 
-const TemplateList = ({ item, libraryData, setLibraryData, data, cardListType }) => {
+const TemplateList = ({ item, libraryData, setLibraryData, data }) => {
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +18,6 @@ const TemplateList = ({ item, libraryData, setLibraryData, data, cardListType })
     const [isHovered, setIsHovered] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isPluginUpgrade, setIsPluginUpgrade] = useState(false);
-    console.log(cardListType);
 
     useEffect(() => {
         setIsAuthenticated(false);

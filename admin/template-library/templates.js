@@ -107,9 +107,9 @@ const PatternLibraryButton = () => {
     useEffect(() => {
          setIsLogedIn(true);
         const fetchData = async () => {
-            const patterns = await getTemplatesData("patterns");
-            const pages = await getTemplatesData("pages");
-            const sites = await getTemplatesData("sites");
+            // const patterns = await getTemplatesData("patterns");
+            // const pages = await getTemplatesData("pages");
+            // const sites = await getTemplatesData("sites");
 
             if (patterns) {
                 setData((prev) => ({

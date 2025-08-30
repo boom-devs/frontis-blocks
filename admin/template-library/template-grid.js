@@ -29,7 +29,9 @@ const TemplateGrid = ({
     setLibraryData,
     isLogedIn,
     data,
-    setIsVisible
+    setIsVisible,
+    isLibrary = false,
+    handelRemoveLibraryItem
 }) => {
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -70,8 +72,6 @@ const TemplateGrid = ({
     const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
     const currentDateAndTime = { day: currentDay, month: currentMonth, year: currentYear, time: currentTime };
 
-    console.log();
-
     const templateData = {
         id,
         title,
@@ -87,9 +87,7 @@ const TemplateGrid = ({
         dependencies,
         dateAndTime: currentDateAndTime,
     };
-
     const handleSaveLibrary = useCallback(() => {
-
 
         setLibraryData(prevData => {
             const alreadyExists = prevData.some(item => item.id === templateData.id);
@@ -302,10 +300,12 @@ const TemplateGrid = ({
                     >
                         <span>Import</span>
                     </button>
-
                     <button
                         className={`fb-template-save-my-cloud ${isLoading ? "loading" : ""}`}
-                        onClick={!isLoading ? handleSaveLibrary : null}
+                        onClick={() => {
+                            if (isLoading) return;
+                            isLibrary ? handelRemoveLibraryItem(id) : handleSaveLibrary();
+                        }}
                         disabled={isLoading}
                     >
                         {isLoading ? (
@@ -313,10 +313,13 @@ const TemplateGrid = ({
                                 <span>Saving...</span>
                                 <ClipLoader color="#fff" size={16} />
                             </>
+                        ) : isLibrary ? (
+                            <span>Remove</span>
                         ) : (
                             <span>Save Library</span>
                         )}
                     </button>
+
                 </div>
             </div>
 

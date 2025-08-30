@@ -50,6 +50,7 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
     const [activeFavoriteTab, setActiveFavoriteTab] = useState('all');
     const [cardListType, setCardListType] = useState('list');
     const [searchItems, setSearchItems] = useState('');
+    const [isLibrary, setIsLibrary] = useState(true);
 
     const searchTemplates = (value) => {
         setSearchItems(value);
@@ -82,9 +83,10 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
     useEffect(() => {
         let filteredData = originalLibraryData;
 
-        // if (activeCategory.templatelibrary === 'my-favourites' && activeFavoriteTab !== 'all') {
-        //     filteredData = filteredData.filter(item => item.activeTab === activeFavoriteTab);
-        // }
+        // Filter by activeTab when not 'all'
+        if (activeFavoriteTab !== 'all') {
+            filteredData = filteredData.filter(item => item.activeTab === activeFavoriteTab);
+        }
 
         if (activeCategory.templatelibrary === 'my-cloud') {
             filteredData = filteredData.filter(item => item.categories?.includes(activeCategory.templatelibrary));
@@ -104,10 +106,42 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
 
     const handleFavoriteTabClick = useCallback((tab) => {
         setActiveFavoriteTab(tab.value);
-        const activeTemplate = tab.value;
-        console.log(activeTemplate);
-        console.log(displayedData)
-    }, [displayedData]);
+        // Clear search when switching tabs to show full results for the selected tab
+        setSearchItems('');
+    }, []);
+
+    const handleRemoveLibraryItem = useCallback((id) => {
+        // Remove item from original library data
+        const updatedOriginalData = originalLibraryData.filter(item => item.id !== id);
+        setOriginalLibraryData(updatedOriginalData);
+
+        // Remove item from displayed data
+        const updatedDisplayedData = displayedData.filter(item => item.id !== id);
+        setDisplayedData(updatedDisplayedData);
+
+        // Update the main library data if setLibraryData is available
+        if (setLibraryData) {
+            const updatedLibraryData = libraryData.filter(item => item.id !== id);
+            setLibraryData(updatedLibraryData);
+        }
+    }, [originalLibraryData, displayedData, libraryData, setLibraryData]);
+
+    const handelRemoveLibraryItem = useCallback((id) => {
+        // Remove item from original library data
+        const updatedOriginalData = originalLibraryData.filter(item => item.id !== id);
+        setOriginalLibraryData(updatedOriginalData);
+
+        // Remove item from displayed data
+        const updatedDisplayedData = displayedData.filter(item => item.id !== id);
+        setDisplayedData(updatedDisplayedData);
+
+        // Update the main library data if setLibraryData is available
+        if (setLibraryData) {
+            const updatedLibraryData = libraryData.filter(item => item.id !== id);
+            setLibraryData(updatedLibraryData);
+        }
+        alert(`Item with ID ${id} removed from library`);
+    }, [originalLibraryData, displayedData, libraryData, setLibraryData]);
 
     return (
         <div className="fb-template-library-store-content">
@@ -142,7 +176,7 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
                                         <clipPath id="clip0_13116_5586">
                                             <rect width="18" height="18" fill="white" />
                                         </clipPath>
-                                  activeTemplate  </defs>
+                                        activeTemplate  </defs>
                                 </svg>
                             </div>
                             <input
@@ -168,34 +202,37 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
             </div>
             {/* )} */}
 
-            {cardListType === 'list' ? (
-                <table className="fb-template-library-cards style-two">
-                    <thead className="fb-template-library-card-header">
-                        <tr className="fb-template-library-card-header-name">Name</tr>
-                        {(activeCategory.templatelibrary === 'my-favourites' || activeCategory.templatelibrary === 'my-cloud') && (
-                            <>
-                                <tr className="fb-template-library-card-header-date">Last Modified</tr>
-                                <tr className="fb-template-library-card-header-actions">Action</tr>
-                            </>
-                        )}
-                    </thead>
-                    <tbody className="fb-template-library-card-body">
+            {displayedData && displayedData.length > 0 ? (
+                cardListType === 'list' ? (
+                    <table className="fb-template-library-cards style-two">
+                        <thead className="fb-template-library-card-header">
+                            <tr>
+                                <th className="fb-template-library-card-header-name">Name</th>
+                                {(activeCategory.templatelibrary === 'my-favourites' || activeCategory.templatelibrary === 'my-cloud') && (
+                                    <>
+                                        <th className="fb-template-library-card-header-date">Last Modified</th>
+                                        <th className="fb-template-library-card-header-actions">Action</th>
+                                    </>
+                                )}
+                            </tr>
+                        </thead>
+                        <tbody className="fb-template-library-card-body">
+                            {displayedData.map(item => (
+                                <TemplateList
+                                    key={item.id}
+                                    item={item}
+                                    libraryData={libraryData}
+                                    setLibraryData={setLibraryData}
+                                    data={data}
+                                    isLibrary={isLibrary}
+                                    handelRemoveLibraryItem={handelRemoveLibraryItem}
+                                />
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <div className="fb-template-library-cards">
                         {displayedData.map(item => (
-                            <TemplateList
-                                key={item.id}
-                                item={item}
-                                libraryData={libraryData}
-                                setLibraryData={setLibraryData}
-                                data={data}
-                            />
-                        ))}
-                    </tbody>
-                </table>
-
-            ) : (
-                <div className="fb-template-library-cards">
-                    {
-                        displayedData.map(item => (
                             <TemplateGrid
                                 key={item.id}
                                 id={item.id}
@@ -213,11 +250,17 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
                                 setLibraryData={setLibraryData}
                                 isLogedIn={isLogedIn}
                                 data={data}
-                                setIsVisible={setIsVisible} />
-                        ))
-                    }
-                </div>
+                                setIsVisible={setIsVisible}
+                                isLibrary={isLibrary}
+                                handelRemoveLibraryItem={handelRemoveLibraryItem}
+                            />
+                        ))}
+                    </div>
+                )
+            ) : (
+                <h2>No {activeTab} found</h2>
             )}
+
         </div>
     );
 };

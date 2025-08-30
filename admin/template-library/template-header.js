@@ -53,6 +53,7 @@ const TemplateHeader = ({ activeTab, setActiveTab, data, onClose, setIsProTempla
                             className={`single-tab ${activeTab === tab.id ? 'active' : ''}`}
                            onClick={() => {
                             setActiveTab(tab.id);
+                            console.log(activeTab)
                             setIsProTemplate('');
                             setActiveCategory((prev) => ({
                                 ...prev,
