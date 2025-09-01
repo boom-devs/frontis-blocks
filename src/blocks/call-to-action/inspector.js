@@ -396,8 +396,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}	
 	// Set default value for buttonIconImageUrl
 	useEffect(() => {
-		if (!ctaGlobalBackgroundImageUrl) {
-			setAttributes({ ctaGlobalBackgroundImageUrl: defaultImageUrl });
+		if (!ctaGlobalBackgroundImageUrl && typeof FrontisBlocksData !== 'undefined') {
+			setAttributes({ ctaGlobalBackgroundImageUrl: '' });
 		}
 	}, []);
 	
@@ -421,15 +421,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Start Preset Style */
 	const changeCTAPreset = (selectedPreset) => {
         const presetConfigurations = {
+			
 			"preset-1": {
-				Alignment: "center",
-				descriptionSwitcher: true,
-				buttonIconSwitcher: true,
-				buttonTwoIconSwitcher: true,
-				ctaBtnOneSwitcher: true,
-				btnTwoSwitcher: true,
-			},
-			"preset-2": {
+				info_Button_Text: "Get Start",
+				btnTwoText: "Learn More",
 				Alignment: "center",
 				descriptionSwitcher: true,
 				buttonIconSwitcher: true,
@@ -438,7 +433,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				btnTwoSwitcher: true,
 				btnTwoIcon: "arrow-left",
 				btnIcon: "arrow-left",
-				ctaGlobalBackgroundImageUrl: "",
+				ctaGlobalBackgroundImageUrl: '',
 				ctaGlobalBackgroundImagePosition: "center",
 				ctaGlobalBackgroundImageRepeat: "no-repeat",
 				ctaGlobalBackgroundImageSize: "cover",
@@ -449,8 +444,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				buttonTwoBgColor: "transparent",
 				buttonTextColor: "#ffffff",
 				buttonTwoTextColor: "#ffffff",
-				btnTwoBorderP: "border",
-				btnTwoBorderColor: "#ffffff",
+				btnTwoBorder: "solid",
+				btnTwoBorderColor: "#ffffffa1",
 				btnIconColor: "#ffffff",
 				btnTwoIconColor: "#ffffff",
 				globalPaddingDesktop: {
@@ -483,27 +478,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: "36",
 				},
 				SubHeadingFontSize: {
-					Desktop: "16",
+					Desktop: "24",
 					Tablet: "16",
 					Mobile: "16",
 				},
 				btnOneDesktopPadding: {
-					top: "13",
-					bottom: "13",
+					top: "12",
+					bottom: "12",
 					left: "20",
 					right: "20",
 				},
 				btnOneTabPadding: {
-					top: "13",
-					bottom: "13",
-					left: "20",
-					right: "20",
+					top: "",
+					bottom: "",
+					left: "",
+					right: "",
 				},
 				btnOneMobilePadding: {
-					top: "13",
-					bottom: "13",
-					left: "20",
-					right: "20",
+					top: "",
+					bottom: "",
+					left: "",
+					right: "",
 				},
 				btnTwoDesktopPadding:{
 					top: "12",
@@ -512,43 +507,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: "20",
 				},
 				btnTwoTabPadding: {
-					top: "12",
-					bottom: "12",
-					left: "20",
-					right: "20",
+					top: "",
+					bottom: "",
+					left: "",
+					right: "",
 				},
 				btnTwoMobilePadding: {
-					top: "12",
-					bottom: "12",
-					left: "20",
-					right: "20",
+					top: "",
+					bottom: "",
+					left: "",
+					right: "",
 				},
 				btnIconRotate: {
 					Desktop: "145",
-					Tablet: "145",
-					Mobile: "145",
+					Tablet: "",
+					Mobile: "",
 				},
 				btnIconSize: {
-					Desktop: "14",
-					Tablet: "14",
-					Mobile: "14",
+					Desktop: "16",
+					Tablet: "",
+					Mobile: "",
 				},
 				btnTwoIconSize: {
-					Desktop: "14",
-					Tablet: "14",
-					Mobile: "14",
+					Desktop: "16",
+					Tablet: "",
+					Mobile: "",
 				},
 				btnOneDesktopBorder: {
-					bottom: "0",
-					left: "0",
-					right: "0",
-					top: "0",
+					bottom: "2",
+					left: "2",
+					right: "2",
+					top: "2",
 				}, 
 				btnTwoDesktopBorder: {
-					bottom: "1",
-					left: "1",
-					right: "1",
-					top: "1",
+					bottom: "2",
+					left: "2",
+					right: "2",
+					top: "2",
 				},
 				btnOneDesktopBorderRadius: {
 					bottom: "50",
@@ -557,7 +552,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					top: "50",
 				}
 			},
-			"preset-3": {
+			"preset-2": {
+				info_Button_Text: "Get Start",
+				btnTwoText: "Learn More",
 				Alignment: "center",
 				descriptionSwitcher: true,
 				buttonIconSwitcher: false,
@@ -577,8 +574,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				buttonTwoBgColor: "transparent",
 				buttonTextColor: "#000000",
 				buttonTwoTextColor: "#ffffff",
-				btnTwoBorderP: "border",
+				btnTwoBorder: "solid",
 				btnTwoBorderColor: "#ffffff",
+				btnIconColor: "#000",
 				btnTwoIconColor: "#ffffff",
 				globalPaddingDesktop: {
 					top: "100",
@@ -684,7 +682,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					top: "50",
 				}
 			},
-			"preset-4": {
+			"preset-3": {
+				info_Button_Text: "Get Start",
+				btnTwoText: "Learn More",
 				Alignment: "center",
 				descriptionSwitcher: true,
 				buttonIconSwitcher: true,
@@ -704,7 +704,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				buttonTwoBgColor: "transparent",
 				buttonTextColor: "#000",
 				buttonTwoTextColor: "#ffffff",
-				btnTwoBorderP: "border",
+				btnTwoBorder: "solid",
 				btnTwoBorderColor: "#ffffff",
 				btnIconColor: "#000",
 				btnTwoIconColor: "#ffffff",
@@ -812,7 +812,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					top: "50",
 				}
 			},
-			"preset-5": {
+			"preset-4": {
+				info_Button_Text: "Sign Up Now",
+				btnTwoText: "",
 				Alignment: "center",
 				descriptionSwitcher: true,
 				buttonIconSwitcher: true,
@@ -832,9 +834,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				buttonTwoBgColor: "transparent",
 				buttonTextColor: "#000",
 				buttonTwoTextColor: "#ffffff",
-				btnTwoBorderP: "border",
+				btnTwoBorder: "none",
 				btnTwoBorderColor: "#ffffff",
-				btnTwoIconColor: "#ffffff",
+				btnIconColor: "#000",
+				btnTwoIconColor: "#000",
 				globalPaddingDesktop: {
 					top: "100",
 					bottom: "100",
@@ -939,7 +942,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					top: "14",
 				}
 			},
-			"preset-6": {
+			"preset-5": {
+				info_Button_Text: "Sign Up Now",
+				btnTwoText: "",
 				Alignment: "center",
 				descriptionSwitcher: true,
 				buttonIconSwitcher: false,
@@ -959,9 +964,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				buttonTwoBgColor: "transparent",
 				buttonTextColor: "#fff",
 				buttonTwoTextColor: "#ffffff",
-				btnTwoBorderP: "border",
+				btnTwoBorder: "none",
 				btnTwoBorderColor: "#ffffff",
-				btnTwoIconColor: "#ffffff",
+				btnIconColor: "#15171C",
+				btnTwoIconColor: "#15171C",
 				globalPaddingDesktop: {
 					top: "100",
 					bottom: "100",

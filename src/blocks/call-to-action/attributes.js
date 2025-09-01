@@ -186,7 +186,7 @@ const attributes = {
 	},
 	btnTwoIconColor: {
 		type: 'string',
-		default: '#4361EE'
+		default: '#ffffff'
 	},
 	btnTwoIconHoverColor: {
 		type: 'string',
@@ -806,7 +806,7 @@ const attributes = {
     //Info Button
     info_Button_Text: {
         type: 'string',
-        default: 'Learn More'
+        default: 'Get Start'
     },
     ctaBtnOneSwitcher: {
         type: 'boolean',
@@ -1105,7 +1105,7 @@ const attributes = {
 	},
 	buttonTwoTextColor: {
 		type: 'string',
-		default: '#4361EE'
+		default: '#ffffff'
 	},
 	buttonTwoTextHoverColor: {
 		type: 'string'
@@ -1116,7 +1116,7 @@ const attributes = {
 	},
 	buttonTwoBgColor: {
 		type: 'string',
-		default: ''
+		default: '#399cff'
 	},
 	buttonTwoBgHoverColor: {
 		type: 'string'
@@ -1235,7 +1235,7 @@ const attributes = {
 	},
 	btnTwoBorderColor: {
 		type: 'string',
-        default: '#4361EE'
+        default: '#ffffffa1'
 	},
 	btnTwoHoverBorderColor: {
 		type: 'string',
@@ -1606,8 +1606,8 @@ const attributes = {
     globalPaddingDesktop: {
         type: 'object',
         default: {
-            top: '120',
-            bottom: '120',
+            top: '100',
+            bottom: '100',
             left: '20',
             right: '20',
         },
