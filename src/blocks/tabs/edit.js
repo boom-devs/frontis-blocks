@@ -81,7 +81,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		const { active, over } = event;
 		if (!active || !over || active.id === over.id) return;
 	  
-		// 1) index বের করো
+		// 1) get the old and new indexes
 		const oldIndex = tabsItemList.findIndex((item) => item.id === active.id);
 		const newIndex = tabsItemList.findIndex((item) => item.id === over.id);
 		if (oldIndex === -1 || newIndex === -1) return;
@@ -326,6 +326,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					data-tab={index}
 					onClick={() => updateActiveTab(index)}
 					style={{ cursor: 'pointer' }}
+					aria-hidden = "true"
 					>
 						{(tabIconPosition == 'left' || tabIconPosition == 'top') && showIcon && (
 							<>

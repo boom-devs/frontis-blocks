@@ -41,6 +41,7 @@ export default function save({ attributes }) {
                 aria-controls={panelId}
                 tabIndex={isActive ? 0 : -1}
                 data-tab={index}
+                aria-hidden = "true"
               >
                 {/* Left Icon */}
                 {tabIconPosition === 'left' && item.tabIconAlign !== 'none' && showIcon && (
