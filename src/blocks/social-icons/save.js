@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
@@ -26,7 +27,7 @@ export default function save({ attributes }) {
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-social-wrapper ${socialGlobalWraperClass}`} id={socialGlobalWraperID}>
                     <div className="fb-social-links-wrapper">
-                        <ul className="fb-socials">
+                        <ul className="fb-socials" aria-label={__("Social Icons", "frontis-blocks")}>
                             {socialItems.map(item => (
                                 <li key={item.id} className={`fb-social-list-item single-item-${item.id}`}>
                                     <a
@@ -34,13 +35,14 @@ export default function save({ attributes }) {
                                         href={item.socialIconUrl} 
                                         target={item.socialIconTargetUrl ? '_blank' : undefined}
                                         rel={item.socialIconTargetUrl ? 'noopener noreferrer' : undefined}
+                                        aria-label={__("Social Icon", "frontis-blocks")}
                                     >
                                         <div className="fb-social-icon-wrapper">
-                                            <div className="fb-social-icon">
+                                            <div className="fb-social-icon" aria-hidden="true">
                                                 {item.socialIcon ? renderSVG(item.socialIcon) : ''}
                                             </div>
                                             {socialTitleSwitcher && (
-                                                <span className="fb-social-icon-title">{item.socialIconTitle}</span>
+                                                <span className="fb-social-icon-title" aria-hidden="true">{item.socialIconTitle}</span>
                                             )}
                                         </div>
                                     </a>

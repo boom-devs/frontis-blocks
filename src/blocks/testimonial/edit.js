@@ -135,7 +135,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     {TestimonialImageSwitcher && (
                                                         <div className="fb-testimonial-image">
                                                             {TestimonialImageUrl ? (
-                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt} />
+                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt}  aria-hidden="true"/>
                                                             ) : (
                                                                 <MediaPlaceholder
                                                                     onSelect={(media) => setAttributes({
@@ -208,7 +208,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         )}
                                         {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'image' && (
                                             <div className="fb-testimonial-quote-icon">
-                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} /> : ''}
+                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt}  aria-hidden="true"/> : ''}
                                             </div>
                                         )}
                                     </>
@@ -244,7 +244,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     {TestimonialImageSwitcher && (
                                                         <div className="fb-testimonial-image">
                                                             {TestimonialImageUrl ? (
-                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt} />
+                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt}  aria-hidden="true"/>
                                                             ) : (
                                                                 <MediaPlaceholder
                                                                     onSelect={(media) => setAttributes({
@@ -294,7 +294,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         )}
                                         {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'image' && (
                                             <div className="fb-testimonial-quote-icon">
-                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} /> : ''}
+                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt}  aria-hidden="true"/> : ''}
                                             </div>
                                         )}
                                     </>
@@ -336,7 +336,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     {TestimonialImageSwitcher && (
                                                         <div className="fb-testimonial-image">
                                                             {TestimonialImageUrl ? (
-                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt} />
+                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt}  aria-hidden="true"/>
                                                             ) : (
                                                                 <MediaPlaceholder
                                                                     onSelect={(media) => setAttributes({
@@ -381,7 +381,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         )}
                                         {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'image' && (
                                             <div className="fb-testimonial-quote-icon">
-                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} /> : ''}
+                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt}  aria-hidden="true"/> : ''}
                                             </div>
                                         )}
                                     </>
