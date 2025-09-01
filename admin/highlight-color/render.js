@@ -1,26 +1,23 @@
-// render.js
+"use strict";
+
 import { createHigherOrderComponent } from '@wordpress/compose';
-import ToolBar from './toolbar';
+import { Fragment } from '@wordpress/element';
+import HighlightToolbar from './toolbar';
 
-const FRONTIS_BLOCKS_PREFIX = 'frontis-blocks/';
-
-export default createHigherOrderComponent((BlockEdit) => {
+const renderFrontisHighlightColor = createHigherOrderComponent((BlockEdit) => {
     return (props) => {
+        const { attributes, setAttributes } = props;
 
-        const { isSelected, name } = props;
-
-        if (!name?.startsWith(FRONTIS_BLOCKS_PREFIX)) {  
-            return <BlockEdit {...props} />;
-        }
-
-        if(isSelected) {
-            return (
-                <>
-                    <BlockEdit {...props} />
-                    <ToolBar />
-                </>
-            );
-        }
-        return <BlockEdit {...props} />;
+        return (
+            <Fragment>
+                <BlockEdit {...props} />
+                <HighlightToolbar
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            </Fragment>
+        );
     };
 }, 'renderFrontisHighlightColor');
+
+export default renderFrontisHighlightColor;
