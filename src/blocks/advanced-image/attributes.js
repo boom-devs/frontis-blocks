@@ -41,6 +41,23 @@ const attributes = {
 		default: '',
 	},
 	/** Image Size */
+	maskImageUrl : {
+		type: 'string',
+		default: '',
+	},
+	maskImageSize : {
+		type: 'string',
+		default: 'cover',
+	},
+	maskImagePosition : {
+		type: 'string',
+		default: 'center',
+	},
+	maskImageRepeat : {
+		type: 'string',
+		default: 'no-repeat',
+	},
+	/** Image Size */
 	mediaSize: {
 		type: 'object',
 		default: {
