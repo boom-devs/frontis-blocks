@@ -44,6 +44,22 @@ const attributes = {
     },
 
 	/** Start Navigation Typography */
+    navigationGap: {
+        type: 'object',
+        default: {
+            Desktop: '12',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    navigationGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
     navigationGlobalTypographyData: {
         type: 'object',
         default: {}
