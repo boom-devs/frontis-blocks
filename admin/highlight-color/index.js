@@ -1,9 +1,15 @@
 import { addFilter } from '@wordpress/hooks';
 import renderFrontisHighlightColor from './render';
+import { isAllowed } from './visibility';
 // import './format';
 
 // Extend attributes for all blocks
 function addHighlightAttributes(settings, name) {
+
+    if (!isAllowed(name)) {
+        return settings;
+    }
+
     if (typeof settings.attributes !== 'undefined') {
         settings.attributes = {
             ...settings.attributes,
