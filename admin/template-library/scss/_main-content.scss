@@ -146,6 +146,9 @@
         }
 
         .fb-template-library-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             width: 100%;
             background: $white-color;
             border-radius: 14px;
@@ -280,6 +283,18 @@
                                 color: $primary-color;
                                 text-decoration: underline;
                             }
+                        }
+                    }
+                    .fb-template-library-card-date {
+                        margin-left: -8px;
+
+                        span {
+                            color: $neutral-color;
+                            font-weight: $font-weight-600;
+                            font-size: $small-font-size;
+                            line-height: $body-line-height;
+                            text-transform: capitalize;
+                            cursor: pointer;
                         }
                     }
                 }

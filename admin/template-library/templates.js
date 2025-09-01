@@ -25,7 +25,23 @@ const PatternLibraryButton = () => {
     const [loading, setLoading] = useState(false);
     const [resetCat, setResetCat] = useState(true);
     const [isLogedIn, setIsLogedIn] = useState(false);
-
+    const [cardListType, setCardListType] = useState('list');
+    const [activeTab, setActiveTab] = useState('patterns');
+    const [activeCategory, setActiveCategory] = useState({
+        patterns: 'all',
+        pages: 'all',
+        sites: 'all',
+        templatelibrary: 'my-cloud'
+    });
+    const [isProTemplate, setIsProTemplate] = useState('');
+    const [activeTagTab, setActiveTagTab] = useState({
+        patterns: '',
+        pages: '',
+        sites: '',
+        templatelibrary: ''
+    });
+    const [libraryData, setLibraryData] = useState([]);
+    const [savedItems, setSavedItems] = useState([]);
 
     const handleClick = () => {
         setIsVisible(!isVisible);
@@ -104,13 +120,22 @@ const PatternLibraryButton = () => {
         }
     };
 
-    useEffect(() => {
-         setIsLogedIn(true);
-        const fetchData = async () => {
-            // const patterns = await getTemplatesData("patterns");
-            // const pages = await getTemplatesData("pages");
-            // const sites = await getTemplatesData("sites");
+    const alreadySaved = (savedItems, id, activeTab) => {
+        return activeTab !== 'templatelibrary'
+            ? savedItems.some(item => item?.id === id && item?.activeTab === activeTab)
+            : false;
+    };
 
+    const removeSavedItem = (savedItems, id, activeTab) => {
+        return savedItems.filter(
+            (item) => !(item?.id === id && item?.activeTab === activeTab)
+        );
+    };
+
+
+    useEffect(() => {
+        setIsLogedIn(true);
+        const fetchData = async () => {
             if (patterns) {
                 setData((prev) => ({
                     ...prev,
@@ -155,25 +180,10 @@ const PatternLibraryButton = () => {
         };
 
         fetchData();
+
+        setLoading(false)
+
     }, []);
-
-
-    const [activeTab, setActiveTab] = useState('patterns'); // Default to 'patterns'
-    const [activeCategory, setActiveCategory] = useState({
-        patterns: 'all',
-        pages: 'all',
-        sites: 'all',
-        templatelibrary: 'my-cloud'
-    });
-    const [isProTemplate, setIsProTemplate] = useState('');
-    const [activeTagTab, setActiveTagTab] = useState({
-        patterns: '',
-        pages: '',
-        sites: '',
-        templatelibrary: ''
-    });
-    const [libraryData, setLibraryData] = useState([]);
-
     const TagTabsOptions = (() => {
         if (!data[activeTab]) return [];
         const currentItems = data[activeTab].items || [];
@@ -227,6 +237,7 @@ const PatternLibraryButton = () => {
                                     setActiveTagTab={setActiveTagTab}
                                     resetCat={resetCat}
                                     setResetCat={setResetCat}
+                                    loading={loading}
                                 />
                                 {activeTab !== 'templatelibrary' && (
                                     <TemplateContent
@@ -240,6 +251,9 @@ const PatternLibraryButton = () => {
                                         setActiveTagTab={(value) => setActiveTagTab({ ...activeTagTab, [activeTab]: value })}
                                         TagTabsOptions={TagTabsOptions}
                                         isLogedIn={isLogedIn}
+                                        savedItems={savedItems}
+                                        setSavedItems={setSavedItems}
+                                        alreadySaved={alreadySaved}
                                     />
                                 )}
                                 {activeTab === 'templatelibrary' && (
@@ -254,6 +268,10 @@ const PatternLibraryButton = () => {
                                         activeTag={activeTagTab[activeTab]}
                                         setActiveTag={(value) => setActiveTagTab({ ...activeTagTab, [activeTab]: value })}
                                         isLogedIn={isLogedIn}
+                                        cardListType={cardListType}
+                                        setCardListType={setCardListType}
+                                        savedItems={savedItems}
+                                        setSavedItems={setSavedItems}
                                     />
                                 )}
                             </div>
