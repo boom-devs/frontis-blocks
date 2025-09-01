@@ -247,7 +247,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterPresetStyle
     } = attributes;
 
-    console.log(attributes);
     const counterRef = useRef(null);
     const observerRef = useRef(null);
 
