@@ -51,6 +51,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         hamburgerMenuSwitcher,
 
         /** Start Navigation Typography */
+        navigationGap,
+        navigationGapUnits,
         navigationGlobalTypographyData,
         navigationGlobalTypoSwitcher,
         navigationGlobalTypoType,
@@ -1909,6 +1911,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             `}
         }
 
+        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation__container {
+            ${navigationGap.Desktop ? `gap: ${navigationGap.Desktop}${navigationGapUnits.Desktop};` : ''}	
+        }
         .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content {
             ${navigationGlobalTypoSwitcher.fontFamily === true && navigationGlobalTypographyData.fontFamily ? `font-family: ${navigationGlobalTypographyData.fontFamily};` : ''}
             ${navigationGlobalTypoSwitcher.fontSize === true && navigationGlobalTypographyData.fontSize ? `font-size: ${navigationGlobalTypographyData.fontSize};` : ''}
@@ -2002,6 +2007,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             outline: none !important;
             box-shadow: none !important;
             transition: all .3s ease-in-out;
+        }
+        .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container .wp-block-navigation-item__content:hover {
+            ${dropDownItemHoverColor ? `color: ${dropDownItemHoverColor};` : ''}
         }
 
         .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container .wp-block-navigation-item.current-menu-item .wp-block-navigation-item__content {
@@ -2113,6 +2121,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${navigationTabletBorderRadiusWidth && navigationTabletBorderRadius.top? `border-radius: ${navigationTabletBorderRadiusWidth};` : ''}
             }
 
+            .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation__container {
+                ${navigationGap.Tablet ? `gap: ${navigationGap.Tablet}${navigationGapUnits.Tablet};` : ''}	
+            }
             .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content {
                 ${navigationGlobalTypoSwitcher.fontSize === false && navigationFontSize.Tablet && navigationFontSizeUnits.Tablet ? `font-size: ${navigationFontSize.Tablet}${navigationFontSizeUnits.Tablet};` : ''}
                 ${navigationGlobalTypoSwitcher.letterSpacing === false && navigationLetterSpacing.Tablet && navigationLetterSpacingUnits.Tablet ? `letter-spacing: ${navigationLetterSpacing.Tablet}${navigationLetterSpacingUnits.Tablet};` : ''}
@@ -2190,6 +2201,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${navigationMobileBorderRadiusWidth && navigationMobileBorderRadius.top? `border-radius: ${navigationMobileBorderRadiusWidth};` : ''}
             }
 
+            .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation__container {
+                ${navigationGap.Mobile ? `gap: ${navigationGap.Mobile}${navigationGapUnits.Mobile};` : ''}	
+            }
             .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content {
                 ${navigationGlobalTypoSwitcher.fontSize === false && navigationFontSize.Mobile && navigationFontSizeUnits.Mobile ? `font-size: ${navigationFontSize.Mobile}${navigationFontSizeUnits.Mobile};` : ''}
                 ${navigationGlobalTypoSwitcher.letterSpacing === false && navigationLetterSpacing.Mobile && navigationLetterSpacingUnits.Mobile ? `letter-spacing: ${navigationLetterSpacing.Mobile}${navigationLetterSpacingUnits.Mobile};` : ''}
@@ -2258,6 +2272,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         hamburgerMenuSwitcher,
 
         /** Start Navigation Typography */
+        navigationGap,
+        navigationGapUnits,
         navigationGlobalTypographyData,
         navigationGlobalTypoSwitcher,
         navigationGlobalTypoType,
@@ -2776,6 +2792,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 title={__("Navigation", "frontis-blocks")}
                 initialOpen={true}
             >
+                <FB_Range
+                    min={1}
+                    max={200}
+                    label={__("Gap", "frontis-blocks")}
+                    rangeValue={navigationGap}
+                    onChangeHandler={(value) => setAttributes({ navigationGap: value })}
+                    rangeUnitHandler={(value) => setAttributes({ navigationGapUnits: value })}
+                    deviceType={deviceType}
+                    units={navigationGapUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+
                 <FB_TypographyControl
                     globalTypoControlActive={true}
                     globalTypoSwitcher={navigationGlobalTypoSwitcher}
