@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './style.scss';
@@ -61,8 +62,9 @@ export default function Save({ attributes }) {
                                     
                                     <a href={item.image.url} key={item.id} 
                                         className={`fb-image-gallery-item ${blockID} ${item.id}`}
+                                        aria-label={item.image.alt || __("Image", "frontis-blocks")}
                                     >
-                                        <img className="fb-image-gallery-image" src={item.image.url} alt={item.image.alt}></img>
+                                        <img className="fb-image-gallery-image" src={item.image.url} alt={item.image.alt} aria-hidden="true"></img>
                                         {ImageOverlayStyle === 'overlay' && <span className="fb-image-overlay"></span>}
                                         { lightboxIconSwitcher === true && 
                                                 <div className="fb-lightbox-icon-wrapper">

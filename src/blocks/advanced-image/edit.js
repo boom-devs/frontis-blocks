@@ -157,6 +157,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										target={linkTargetUrl ? "_blank" : undefined}
 										rel={linkTargetUrl ? "noopener noreferrer" : undefined}
 										onClick={handleImageClick}
+										aria-label={advancedImageAlt}
 									>
 										<img
 											width={advancedImageDefaultWidth}
@@ -164,6 +165,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											src={advancedImageUrl}
 											alt={advancedImageAlt}
 											srcSet={advancedImageSrcSet || undefined}
+											aria-hidden="true"
 										/>
 									</a>
 								) : (
@@ -173,6 +175,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										src={advancedImageUrl} 
 										alt={advancedImageAlt} 
 										srcSet={advancedImageSrcSet || undefined}
+										aria-hidden="true"
 									/>
 								)
 							) : (
