@@ -12,7 +12,8 @@ import TemplateGrid from "./template-grid";
 import TemplateList from "./template-list";
 
 
-const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibraryData, setIsVisible, isLogedIn }) => {
+const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibraryData, setIsVisible, isLogedIn, cardListType, setCardListType, savedItems, setSavedItems }) => {
+
     const FavoriteTabsOptions = [
         { name: 'All', value: 'all' },
         { name: 'Patterns', value: 'patterns' },
@@ -48,7 +49,6 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
     const [displayedData, setDisplayedData] = useState([]);
     const [originalLibraryData, setOriginalLibraryData] = useState([]);
     const [activeFavoriteTab, setActiveFavoriteTab] = useState('all');
-    const [cardListType, setCardListType] = useState('list');
     const [searchItems, setSearchItems] = useState('');
     const [isLibrary, setIsLibrary] = useState(true);
 
@@ -63,7 +63,6 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
 
         if (!value.trim()) {
             setDisplayedData(dataToSearch);
-            console.log(dataToSearch)
         } else {
             const lowerValue = value.toLowerCase();
             const filtered = dataToSearch.filter(item =>
@@ -88,7 +87,7 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
             filteredData = filteredData.filter(item => item.activeTab === activeFavoriteTab);
         }
 
-        if (activeCategory.templatelibrary === 'my-cloud') {
+        if (activeCategory.templatelibrary === 'my-favourites') {
             filteredData = filteredData.filter(item => item.categories?.includes(activeCategory.templatelibrary));
         }
 
@@ -106,42 +105,38 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
 
     const handleFavoriteTabClick = useCallback((tab) => {
         setActiveFavoriteTab(tab.value);
-        // Clear search when switching tabs to show full results for the selected tab
         setSearchItems('');
     }, []);
 
-    const handleRemoveLibraryItem = useCallback((id) => {
-        // Remove item from original library data
-        const updatedOriginalData = originalLibraryData.filter(item => item.id !== id);
+
+    console.log('LibraryData', libraryData)
+
+    const handleRemoveLibraryItem = useCallback((id, type) => {
+        const updatedOriginalData = originalLibraryData.filter(
+            (item) => !(item.id === id && item.type === type)
+        );
         setOriginalLibraryData(updatedOriginalData);
 
-        // Remove item from displayed data
-        const updatedDisplayedData = displayedData.filter(item => item.id !== id);
+        const updatedDisplayedData = displayedData.filter(
+            (item) => !(item.id === id && item.type === type)
+        );
         setDisplayedData(updatedDisplayedData);
 
-        // Update the main library data if setLibraryData is available
         if (setLibraryData) {
-            const updatedLibraryData = libraryData.filter(item => item.id !== id);
+            const updatedLibraryData = libraryData.filter(
+                (item) => !(item.id === id && item.type === type)
+            );
             setLibraryData(updatedLibraryData);
         }
-    }, [originalLibraryData, displayedData, libraryData, setLibraryData]);
 
-    const handelRemoveLibraryItem = useCallback((id) => {
-        // Remove item from original library data
-        const updatedOriginalData = originalLibraryData.filter(item => item.id !== id);
-        setOriginalLibraryData(updatedOriginalData);
+        setSavedItems((prev) =>
+            prev.filter((item) => !(item?.id === id && item?.type === type))
+        );
 
-        // Remove item from displayed data
-        const updatedDisplayedData = displayedData.filter(item => item.id !== id);
-        setDisplayedData(updatedDisplayedData);
+        alert(`Removed item with id: ${id}, type: ${type}`);
+    }, [originalLibraryData, displayedData, libraryData, setLibraryData, setSavedItems]);
 
-        // Update the main library data if setLibraryData is available
-        if (setLibraryData) {
-            const updatedLibraryData = libraryData.filter(item => item.id !== id);
-            setLibraryData(updatedLibraryData);
-        }
-        alert(`Item with ID ${id} removed from library`);
-    }, [originalLibraryData, displayedData, libraryData, setLibraryData]);
+
 
     return (
         <div className="fb-template-library-store-content">
@@ -222,10 +217,11 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
                                     key={item.id}
                                     item={item}
                                     libraryData={libraryData}
+                                    type={item.type}
                                     setLibraryData={setLibraryData}
                                     data={data}
                                     isLibrary={isLibrary}
-                                    handelRemoveLibraryItem={handelRemoveLibraryItem}
+                                    handleRemoveLibraryItem={handleRemoveLibraryItem}
                                 />
                             ))}
                         </tbody>
@@ -234,12 +230,14 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
                     <div className="fb-template-library-cards">
                         {displayedData.map(item => (
                             <TemplateGrid
+                                item={item}
                                 key={item.id}
                                 id={item.id}
                                 title={item.title}
                                 imageUrl={item.image}
                                 is_premium={item.is_premium || false}
                                 tags={item.tags || []}
+                                templateType={item.type}
                                 categories={item.categories || []}
                                 colors={item.colors || []}
                                 gradientColors={item.gradientColors || []}
@@ -252,13 +250,13 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
                                 data={data}
                                 setIsVisible={setIsVisible}
                                 isLibrary={isLibrary}
-                                handelRemoveLibraryItem={handelRemoveLibraryItem}
+                                handleRemoveLibraryItem={handleRemoveLibraryItem}
                             />
                         ))}
                     </div>
                 )
             ) : (
-                <h2>No {activeTab} found</h2>
+                <h3>No template found</h3>
             )}
 
         </div>

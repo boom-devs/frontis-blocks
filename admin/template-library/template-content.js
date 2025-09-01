@@ -6,7 +6,24 @@ import LoginSignupModal from "./login-signup";
 import { useState, useEffect, useCallback } from "@wordpress/element";
 import TemplateGrid from "./template-grid";
 
-const TemplateContent = ({ activeTab, activeCategory, data, libraryData, setLibraryData, isProTemplate, TagTabsOptions, activeTagTab, setActiveTagTab, setIsVisible, isLogedIn }) => {
+
+const TemplateContent = ({ 
+    activeTab, 
+    activeCategory,
+    data, 
+    libraryData, 
+    setLibraryData, 
+    isProTemplate, 
+    TagTabsOptions, 
+    activeTagTab, 
+    setActiveTagTab, 
+    setIsVisible, 
+    isLogedIn,
+    savedItems,
+    setSavedItems,
+    alreadySaved
+
+}) => {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
@@ -50,8 +67,12 @@ const TemplateContent = ({ activeTab, activeCategory, data, libraryData, setLibr
 
             // Filter by category
             if (activeCategory[activeTab] && activeCategory[activeTab] !== 'all') {
+                const selectedCat = activeCategory[activeTab].toLowerCase();
+
                 items = items.filter(item =>
-                    item.categories?.includes(activeCategory[activeTab])
+                    item.categories?.some(catName =>
+                        catName.toLowerCase().replace(/\s+/g, '-') === selectedCat
+                    )
                 );
             }
 
@@ -149,6 +170,7 @@ const TemplateContent = ({ activeTab, activeCategory, data, libraryData, setLibr
                                 is_premium={template.is_premium || false}
                                 tags={template.tags || []}
                                 categories={template.categories || []}
+                                templateType={activeTab}
                                 colors={template.colors || []}
                                 gradientColors={template.gradientColors || []}
                                 typographies={template.typographies || []}
@@ -159,10 +181,13 @@ const TemplateContent = ({ activeTab, activeCategory, data, libraryData, setLibr
                                 isLogedIn={isLogedIn}
                                 data={data}
                                 setIsVisible={setIsVisible}
+                                savedItems={savedItems}
+                                setSavedItems={setSavedItems}
+                                alreadySaved={alreadySaved}
                             />
                         ))
                     ) : (
-                        <p>No {activeTab} found</p>
+                        <h3>No {activeTab} found</h3>
                     )}
                 </div>
 

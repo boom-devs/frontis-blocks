@@ -13,4 +13,17 @@ const TemplateLoader = () => {
     );
 };
 
-export default TemplateLoader;
+
+const TemplateCategoryLoader = ({ count = 1, width = '100%', height = '53px' }) => {
+  const spans = Array.from({ length: count }).map((_, index) => (
+    <span
+      key={index}
+      className="fb-template-category-loader"
+      style={{ width, height, display: 'inline-block' }}
+    ></span>
+  ));
+
+  return <>{spans}</>;
+};
+
+export {TemplateCategoryLoader, TemplateLoader}

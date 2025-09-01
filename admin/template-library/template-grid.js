@@ -7,13 +7,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 import TemplateImport from "./template-import";
 import PluginUpgradeModal from "./plugin-upgrade";
-import TemplateLoader from "./template-loader";
+import {TemplateLoader}  from "./template-loader";
 import { usePostDataMutation } from "./services/api";
 import { select, dispatch } from '@wordpress/data';
 import { createBlock, parse, rawHandler } from '@wordpress/blocks';
 import { useState, useEffect, useCallback } from "@wordpress/element";
 
 const TemplateGrid = ({
+    item = '',
     imageUrl,
     title,
     is_premium = false,
@@ -21,6 +22,7 @@ const TemplateGrid = ({
     tags = [],
     dependencies = [],
     colors,
+    templateType,
     gradientColors,
     typographies,
     customTypographies,
@@ -31,8 +33,12 @@ const TemplateGrid = ({
     data,
     setIsVisible,
     isLibrary = false,
-    handelRemoveLibraryItem
+    handleRemoveLibraryItem,
+    savedItems = [],
+    setSavedItems = [],
+    alreadySaved = () => {}
 }) => {
+
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
@@ -40,9 +46,12 @@ const TemplateGrid = ({
     const [isLoading, setIsLoading] = useState(false);
     const [isPluginUpgrade, setIsPluginUpgrade] = useState(false);
     const [freeTemplate, setFreeTemplate] = useState(false);
+
+    const isAlreadySaved = alreadySaved(savedItems, id, activeTab)
+
     const handleFullSiteImport = useCallback(() => {
         if (!isPluginUpgrade) {
-            setIsPluginUpgradeModalOpen(true);
+            setIsPladmin/template-library/scss/_main-content.scssuginUpgradeModalOpen(true);
         }
         // if (!is_premium && isLogedIn) {
         setIsModalOpen(true);
@@ -86,24 +95,21 @@ const TemplateGrid = ({
         customTypographies,
         dependencies,
         dateAndTime: currentDateAndTime,
+        type: templateType
     };
-    const handleSaveLibrary = useCallback(() => {
 
-        setLibraryData(prevData => {
-            const alreadyExists = prevData.some(item => item.id === templateData.id);
-            if (alreadyExists) return prevData;
-            return [...prevData, templateData];
-        });
+    const handleSaveLibrary = useCallback(() => {
+        if (isAlreadySaved) return;
+
+        setLibraryData(prevData => [...prevData, templateData]);
+        setSavedItems(prev => [...prev, templateData]);
+
         toast.success(__('Template saved to library', 'frontis-blocks'), {
             position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
+            autoClose: false,
         });
-        alert('Template saved to library');
-    }, [templateData, setLibraryData]);
+        alert(__('Template saved to library', 'frontis-blocks'));
+    }, [isAlreadySaved, templateData, setLibraryData, setSavedItems]);
 
     const fetImportData = () => {
 
@@ -113,7 +119,6 @@ const TemplateGrid = ({
 
 
     const getTemplatesData = async (path, key, id) => {
-        console.log('pattern id', id);
         try {
             const response = await patternsData({
                 endpoint: path,
@@ -278,6 +283,14 @@ const TemplateGrid = ({
                                 </span>
                             ))}
                         </div>
+                        {item && (
+                            <div className="fb-template-library-card-date">
+                                <span>
+                                    Last Modified: {item.dateAndTime.month} {item.dateAndTime.day}, {item.dateAndTime.year}
+                                </span>
+                            </div>
+                        )}
+
                     </div>
                     <div className="fb-template-library-card-content-bottom">
                         <h3 className="fb-template-title">{title}</h3>
@@ -293,6 +306,19 @@ const TemplateGrid = ({
                                 importPage(id);
                             } else if (activeTab === 'sites') {
                                 handleFullSiteImport()
+                            } else if (activeTab === 'templatelibrary') {
+                                // console.log(templateData);
+                                if (templateData.type === 'patterns') {
+                                    importPattern(id);
+                                    // console.log('patterns');
+
+                                } else if (templateData.type === 'pages') {
+                                    // console.log('pages');
+                                    importPage(id);
+                                } else if (templateData.type === 'sites') {
+                                    // console.log('sites');
+                                    handleFullSiteImport()
+                                }
                             }
                         }}
 
@@ -303,16 +329,18 @@ const TemplateGrid = ({
                     <button
                         className={`fb-template-save-my-cloud ${isLoading ? "loading" : ""}`}
                         onClick={() => {
-                            if (isLoading) return;
-                            isLibrary ? handelRemoveLibraryItem(id) : handleSaveLibrary();
+                            if (isLoading || isAlreadySaved) return;
+                            isLibrary ? handleRemoveLibraryItem(id, templateType) : handleSaveLibrary();
                         }}
-                        disabled={isLoading}
+                        disabled={isLoading || isAlreadySaved}
                     >
                         {isLoading ? (
                             <>
                                 <span>Saving...</span>
                                 <ClipLoader color="#fff" size={16} />
                             </>
+                        ) : isAlreadySaved ? (
+                            <span>Saved</span>
                         ) : isLibrary ? (
                             <span>Remove</span>
                         ) : (

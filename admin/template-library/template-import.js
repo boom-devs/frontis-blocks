@@ -8,7 +8,6 @@ import FullSiteImport from "./full-site-import";
 import { category } from "@wordpress/icons";
 
 const TemplateImport = ({ template, onClose, data }) => {
-    console.log('cat', template.categories)
     const [isImporting, setIsImporting] = useState(false);
     const [activeTab, setActiveTab] = useState('patterns');
     const [showFullSiteImport, setShowFullSiteImport] = useState(false);
