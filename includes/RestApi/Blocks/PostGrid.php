@@ -901,10 +901,10 @@ class PostGrid {
 
             $has_more = (int)$current_page < (int)$total_pages;
 
-            // কন্ট্রোলস: Load More (button) ও Pagination—দুইটাই সাপোর্ট
+            // show load more button or pagination
             if ($show_load_more_switcher == 'true') :
 
-                // 1) LOAD MORE BUTTON: শুধু তখন দেখাবো যখন আরও পেজ আছে
+                // 1) LOAD MORE BUTTON: show when there is more page
                 if ($load_more_type === 'button' && $has_more) : ?>
                     <div class="fb_load_more_wrapper">
                         <div class="fb_load_more"
@@ -914,7 +914,7 @@ class PostGrid {
                     </div>
                 <?php endif;
 
-                // 2) PAGINATION: total_pages > 1 হলে সবসময় দেখাবো (লাস্ট পেজেও)
+                // 2) PAGINATION: show when total_pages > 1 (also on last page)
                 if ($load_more_type === 'pagination' && (int)$total_pages > 1) : ?>
                     <div class="fb_load_more_wrapper">
                         <div class="fb_pagination_wrapper"
@@ -934,16 +934,16 @@ class PostGrid {
                             $range = 2; // current page before and after how many pages
                             echo '<div class="fb_pagination">';
 
-                            // এক পেজ হলে লিস্ট না দেখালেও wrapper থাকবে
+                            // if there is only one page, the list will not be shown, but the wrapper will still be there
                             if ($total_pages > 1) {
 
-                                // শুরুর ডটস
+                                // start dots
                                 if ($current_page > ($range + 2)) {
                                     echo '<button class="fb_pagination_item" data-pagenumber="1">1</button>';
                                     echo '<span class="fb_pagination_ellipsis">...</span>';
                                 }
 
-                                // প্রধান পেজ নম্বরগুলো
+                                // main page numbers
                                 $start = max(1, $current_page - $range);
                                 $end   = min($total_pages, $current_page + $range);
 
@@ -952,7 +952,7 @@ class PostGrid {
                                     echo '<button class="fb_pagination_item ' . esc_attr($active) . '" data-pagenumber="' . esc_attr($page) . '">' . esc_html($page) . '</button>';
                                 }
 
-                                // শেষের ডটস
+                                // end dots
                                 if ($current_page < $total_pages - ($range + 2)) {
                                     echo '<span class="fb_pagination_ellipsis">...</span>';
                                     echo '<button class="fb_pagination_item" data-pagenumber="' . $total_pages . '">' . $total_pages . '</button>';
