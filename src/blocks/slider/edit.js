@@ -476,25 +476,25 @@ const Edit = (props) => {
                     { displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (
                         <>
                             <div className={`fb-slider-default-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-                                <div className="swiper-button-prev" ref={ sliderNavPrevRef }></div>
-                                <div className="swiper-button-next" ref={ sliderNavNextRef }></div>
+                                <div className="swiper-button-prev" ref={ sliderNavPrevRef } aria-label="Previous slide" title='Previous slide'></div>
+                                <div className="swiper-button-next" ref={ sliderNavNextRef } aria-label="Next slide" title='Next slide'></div>
                             </div>
                         </>
                     ) }
 
                     {sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (sliderArrowsIconLeftAlign === 'icon' || sliderArrowsIconRightAlign === 'icon') && (
                         <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-                            <div className="swiper-button-prev" ref={ sliderNavPrevRef }>{renderSVG(sliderArrowsIconLeft)}</div>
-                            <div className="swiper-button-next" ref={ sliderNavNextRef }>{renderSVG(sliderArrowsIconRight)}</div>
+                            <div className="swiper-button-prev" ref={ sliderNavPrevRef } aria-label="Previous slide" title='Previous slide'>{renderSVG(sliderArrowsIconLeft)}</div>
+                            <div className="swiper-button-next" ref={ sliderNavNextRef } aria-label="Next slide" title='Next slide'>{renderSVG(sliderArrowsIconRight)}</div>
                         </div>
                     )}
 
                     {sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (sliderArrowsIconLeftAlign === 'image' || sliderArrowsIconRightAlign === 'image') && (sliderArrowsIconLeftImageUrl || sliderArrowsIconRightImageUrl) && (
                         <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-                            <div className="swiper-button-prev" ref={ sliderNavPrevRef }>
+                            <div className="swiper-button-prev" ref={ sliderNavPrevRef } aria-label="Previous slide" title='Previous slide'>
                                 <img src={sliderArrowsIconLeftImageUrl} alt={sliderArrowsIconLeftImageAlt} />
                             </div>
-                            <div className="swiper-button-next" ref={ sliderNavNextRef }>
+                            <div className="swiper-button-next" ref={ sliderNavNextRef } aria-label="Next slide" title='Next slide'>
                                 <img src={sliderArrowsIconRightImageUrl} alt={sliderArrowsIconRightImageAlt} />
                             </div>
                         </div>
@@ -504,25 +504,25 @@ const Edit = (props) => {
                 { displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (
                     <>
                         <div className={`fb-slider-default-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-                            <div className="swiper-button-prev" ref={ sliderNavPrevRef }></div>
-                            <div className="swiper-button-next" ref={ sliderNavNextRef }></div>
+                            <div className="swiper-button-prev" ref={ sliderNavPrevRef } aria-label="Previous slide" title='Previous slide'></div>
+                            <div className="swiper-button-next" ref={ sliderNavNextRef } aria-label="Next slide" title='Next slide'></div>
                         </div>
                     </>
                 ) }
 
                 {sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (sliderArrowsIconLeftAlign === 'icon' || sliderArrowsIconRightAlign === 'icon') && (
                     <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-                        <div className="swiper-button-prev" ref={ sliderNavPrevRef }>{renderSVG(sliderArrowsIconLeft)}</div>
-                        <div className="swiper-button-next" ref={ sliderNavNextRef }>{renderSVG(sliderArrowsIconRight)}</div>
+                        <div className="swiper-button-prev" ref={ sliderNavPrevRef } aria-label="Previous slide" title='Previous slide'>{renderSVG(sliderArrowsIconLeft)}</div>
+                        <div className="swiper-button-next" ref={ sliderNavNextRef } aria-label="Next slide" title='Next slide'>{renderSVG(sliderArrowsIconRight)}</div>
                     </div>
                 )}
 
                 {sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (sliderArrowsIconLeftAlign === 'image' || sliderArrowsIconRightAlign === 'image') && (sliderArrowsIconLeftImageUrl || sliderArrowsIconRightImageUrl) && (
                     <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-                        <div className="swiper-button-prev" ref={ sliderNavPrevRef }>
+                        <div className="swiper-button-prev" ref={ sliderNavPrevRef } aria-label="Previous slide" title='Previous slide'>
                             <img src={sliderArrowsIconLeftImageUrl} alt={sliderArrowsIconLeftImageAlt} />
                         </div>
-                        <div className="swiper-button-next" ref={ sliderNavNextRef }>
+                        <div className="swiper-button-next" ref={ sliderNavNextRef } aria-label="Next slide" title='Next slide'>
                             <img src={sliderArrowsIconRightImageUrl} alt={sliderArrowsIconRightImageAlt} />
                         </div>
                     </div>
