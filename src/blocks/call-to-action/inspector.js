@@ -384,7 +384,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		ctaVRBottomOffsetUnits,
 	} = attributes;
 	console.log(attributes);
-	const deviceType = useDeviceType();
 
 	let defaultImageUrl = [];
 	if (typeof FrontisBlocksData !== 'undefined') {
