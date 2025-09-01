@@ -4257,8 +4257,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockId}.fb_post_grid_container.list-layout .fb_post_grid_wrapper .fb_post_grid_image_wrapper img {
             max-width: 100% ;
             object-fit: cover;
-            border-radius: 0px;
-            display: block;
         }
         .${blockId}.fb_post_grid_container.list-layout .fb_post_grid_content_wrapper {
             flex: 1;
@@ -4307,12 +4305,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${postGridBoxShadowHoverCssValue ? `box-shadow: ${postGridBoxShadowHoverCssValue};` : ''}
         }
 
+        .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image a {
+            display: flex;
+            ${postImageMarginDesktopWidth && postImageMarginDesktop.top? `margin: ${postImageMarginDesktopWidth};` : ''}
+        }
         .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image img {
             ${postImageBorder ? `border: ${postImageBorder};` : ''}
             ${postImageDesktopBorderWidth && postImageDesktopBorder.top? `border-width: ${postImageDesktopBorderWidth};` : ''}
             ${postImageBorderColor ? `border-color: ${postImageBorderColor};` : ''}
             ${postImageDesktopBorderRadiusWidth && postImageDesktopBorderRadius.top? `border-radius: ${postImageDesktopBorderRadiusWidth};` : ''}
-            ${postImageMarginDesktopWidth && postImageMarginDesktop.top? `margin: ${postImageMarginDesktopWidth};` : ''}
             ${postImageWidth.Desktop ? `width: ${postImageWidth.Desktop}${postImageWidthUnits.Desktop};` : ''}
             height: clamp(
                 ${postImageHeight.Desktop ? `${postImageHeight.Desktop - 3}${postImageHeightUnits.Desktop}` : '18.75rem'}, 
@@ -4755,12 +4756,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${postGridBoxShadowHoverCssValue ? `box-shadow: ${postGridBoxShadowHoverCssValue};` : ''}
             }
 
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image a {
+                ${postImageMarginTabletWidth && postImageMarginTablet.top? `margin: ${postImageMarginTabletWidth};` : ''}
+            }
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image img {
                 ${postImageBorder ? `border: ${postImageBorder};` : ''}
                 ${postImageTabletBorderWidth && postImageTabletBorder.top? `border-width: ${postImageTabletBorderWidth};` : ''}
                 ${postImageBorderColor ? `border-color: ${postImageBorderColor};` : ''}
                 ${postImageTabletBorderRadiusWidth && postImageTabletBorderRadius.top? `border-radius: ${postImageTabletBorderRadiusWidth};` : ''}
-                ${postImageMarginTabletWidth && postImageMarginTablet.top? `margin: ${postImageMarginTabletWidth};` : ''}
                 ${postImageWidth.Tablet ? `width: ${postImageWidth.Tablet}${postImageWidthUnits.Tablet};` : ''}
 
                 height: clamp(
@@ -5091,12 +5094,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${postGridBoxShadowHoverCssValue ? `box-shadow: ${postGridBoxShadowHoverCssValue};` : ''}
             }
 
+            .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image a {
+                ${postImageMarginMobileWidth && postImageMarginMobile.top? `margin: ${postImageMarginMobileWidth};` : ''}
+            }
             .${blockId}.fb_post_grid_container .fb_post_grid_wrapper .fb_post_grid_image img {
                 ${postImageBorder ? `border: ${postImageBorder};` : ''}
                 ${postImageMobileBorderWidth && postImageMobileBorder.top? `border-width: ${postImageMobileBorderWidth};` : ''}
                 ${postImageBorderColor ? `border-color: ${postImageBorderColor};` : ''}
                 ${postImageMobileBorderRadiusWidth && postImageMobileBorderRadius.top? `border-radius: ${postImageMobileBorderRadiusWidth};` : ''}
-                ${postImageMarginMobileWidth && postImageMarginMobile.top? `margin: ${postImageMarginMobileWidth};` : ''}
                 ${postImageWidth.Mobile ? `width: ${postImageWidth.Mobile}${postImageWidthUnits.Mobile};` : ''}
                 height: clamp(
                     ${postImageHeight.Mobile ? `${postImageHeight.Mobile - 3}${postImageHeightUnits.Mobile}` : '10rem'}, 
@@ -6553,6 +6558,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         className="fb-select2-control"
                                     />
                                 )}
+                                <br/>
                                 <ToggleControl
                                     label={__("Show Selected Count", "frontis-blocks")}
                                     checked={filerselectedCountSwitcher}
@@ -6665,8 +6671,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                         <BaseControl
                             label={__("Icon", "frontis-blocks")}
-                                id="fb-setting-text-alignment"
-                                className="fb-setting-text-alignment"
+                            id="fb-setting-text-alignment"
+                            className="fb-setting-text-alignment"
                         >
                             <ButtonGroup
                                 className="fb-setting-text-alignment-group-btn"
@@ -6693,6 +6699,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     setglobalImageAlt={(value) => setAttributes({ readMoreIconImageAlt: value })}
                                     globalImageID={readMoreIconImageID}
                                     setglobalImageID={(value) => setAttributes({ readMoreIconImageID: value })}
+                                    isImageSize={false}
                                 />
                             )}
 
