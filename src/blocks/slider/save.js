@@ -89,6 +89,10 @@ export default function save( props ) {
 					el: `.fb-slider-container[data-block-id="${blockId}"] .swiper-pagination`,
 					clickable: true,
 					type: paginationType || 'bullets',
+					renderBullet: (index, className) =>
+						`<button class="${className}" aria-label="Go to slide ${index + 1}" ${
+						  index === 0 ? 'aria-current="true"' : ''
+						}></button>`,
 				},
 			}),
 			
@@ -116,54 +120,54 @@ export default function save( props ) {
 				{ displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (
 					<>
 						<div className={`fb-slider-default-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-							<div className="swiper-button-prev"></div>
-							<div className="swiper-button-next"></div>
+							<div className="swiper-button-prev" aria-label="Previous slide" title='Previous slide'></div>
+							<div className="swiper-button-next" aria-label="Next slide" title='Next slide'></div>
 						</div>
 					</>
 				) }
 
 				{sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (sliderArrowsIconLeftAlign === 'icon' || sliderArrowsIconRightAlign === 'icon') && (
 					<div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-						<div className="swiper-button-prev">{renderSVG(sliderArrowsIconLeft)}</div>
-						<div className="swiper-button-next">{renderSVG(sliderArrowsIconRight)}</div>
+						<div className="swiper-button-prev" aria-label="Previous slide" title='Previous slide'>{renderSVG(sliderArrowsIconLeft)}</div>
+						<div className="swiper-button-next" aria-label="Next slide" title='Next slide'>{renderSVG(sliderArrowsIconRight)}</div>
 					</div>
 				)}
 
 				{sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (sliderArrowsIconLeftAlign === 'image' || sliderArrowsIconRightAlign === 'image') && (sliderArrowsIconLeftImageUrl || sliderArrowsIconRightImageUrl) && (
 					<div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-						<div className="swiper-button-prev">
+						<div className="swiper-button-prev" aria-label="Previous slide" title='Previous slide'>
                                 <img src={sliderArrowsIconLeftImageUrl} alt={sliderArrowsIconLeftImageAlt} />
                             </div>
-						<div className="swiper-button-next">
+						<div className="swiper-button-next" aria-label="Next slide" title='Next slide'>
 							<img src={sliderArrowsIconRightImageUrl} alt={sliderArrowsIconRightImageAlt} />
 						</div>
                     </div>
                 )}
 			</div>
-			{ displayDots && <div className="swiper-pagination"></div> }
+			{ displayDots && <div className="swiper-pagination" aria-label="Slider pagination" role="region"></div> }
 
 			{ displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (
 				<>
 					<div className={`fb-slider-default-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-						<div className="swiper-button-prev"></div>
-						<div className="swiper-button-next"></div>
+						<div className="swiper-button-prev" aria-label="Previous slide" title='Previous slide'></div>
+						<div className="swiper-button-next" aria-label="Next slide" title='Next slide'></div>
 					</div>
 				</>
 			) }
 
 			{sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (sliderArrowsIconLeftAlign === 'icon' || sliderArrowsIconRightAlign === 'icon') && (
 				<div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-					<div className="swiper-button-prev">{renderSVG(sliderArrowsIconLeft)}</div>
-					<div className="swiper-button-next">{renderSVG(sliderArrowsIconRight)}</div>
+					<div className="swiper-button-prev" aria-label="Previous slide" title='Previous slide'>{renderSVG(sliderArrowsIconLeft)}</div>
+					<div className="swiper-button-next" aria-label="Next slide" title='Next slide'>{renderSVG(sliderArrowsIconRight)}</div>
 				</div>
 			)}
 
 			{sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (sliderArrowsIconLeftAlign === 'image' || sliderArrowsIconRightAlign === 'image') && (sliderArrowsIconLeftImageUrl || sliderArrowsIconRightImageUrl) && (
 				<div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-					<div className="swiper-button-prev">
+					<div className="swiper-button-prev" aria-label="Previous slide" title='Previous slide'>
 							<img src={sliderArrowsIconLeftImageUrl} alt={sliderArrowsIconLeftImageAlt} />
 						</div>
-					<div className="swiper-button-next">
+					<div className="swiper-button-next" aria-label="Next slide" title='Next slide'>
 						<img src={sliderArrowsIconRightImageUrl} alt={sliderArrowsIconRightImageAlt} />
 					</div>
 				</div>

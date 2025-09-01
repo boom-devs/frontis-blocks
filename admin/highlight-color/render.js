@@ -3,10 +3,15 @@
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { Fragment } from '@wordpress/element';
 import HighlightToolbar from './toolbar';
+import { isAllowed } from './visibility';
 
 const renderFrontisHighlightColor = createHigherOrderComponent((BlockEdit) => {
     return (props) => {
-        const { attributes, setAttributes } = props;
+        const { attributes, setAttributes, name } = props;
+
+        if (!isAllowed(name)) {
+            return <BlockEdit {...props} />;
+        }
 
         return (
             <Fragment>
