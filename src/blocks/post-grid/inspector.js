@@ -6671,8 +6671,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                         <BaseControl
                             label={__("Icon", "frontis-blocks")}
-                                id="fb-setting-text-alignment"
-                                className="fb-setting-text-alignment"
+                            id="fb-setting-text-alignment"
+                            className="fb-setting-text-alignment"
                         >
                             <ButtonGroup
                                 className="fb-setting-text-alignment-group-btn"
@@ -6699,6 +6699,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     setglobalImageAlt={(value) => setAttributes({ readMoreIconImageAlt: value })}
                                     globalImageID={readMoreIconImageID}
                                     setglobalImageID={(value) => setAttributes({ readMoreIconImageID: value })}
+                                    isImageSize={false}
                                 />
                             )}
 

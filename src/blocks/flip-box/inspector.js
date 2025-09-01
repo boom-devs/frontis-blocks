@@ -4479,6 +4479,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  .fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
 				${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
+				height: fit-content;
 		  }
 			.fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper.fb-show-back {
 				transform:
@@ -4487,6 +4488,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
 				${flipBoxFrontWidth.Desktop ? `min-width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
+				height: auto;
 				${flipBoxFrontBackgroundType === "gradient" ? `
 				background: ${flipBoxFrontCustomGradientSwitcher && flipBoxFrontCustomGradientInputValue ? flipBoxFrontCustomGradientInputValue : flipBoxFrontGradientColor};
 				`
@@ -4524,6 +4526,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-back {
 			${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 			${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
+			height: auto;
 			${flipBoxBackBackgroundType === "gradient" ? `
 			background: ${flipBoxBackCustomGradientSwitcher && flipBoxBackCustomGradientInputValue ? flipBoxBackCustomGradientInputValue : flipBoxBackGradientColor};
 			`
