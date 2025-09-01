@@ -1903,6 +1903,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
 
         .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item:hover {
+            ${navigationBorderHoverColor ? `border-color: ${navigationBorderHoverColor};` : ''}
             ${navigationBoxShadowHoverCssValue ? `box-shadow: ${navigationBoxShadowHoverCssValue};` : ''}
             ${navigationHoverBackgroundType === 'gradient' ? `  
                 ${navigationHoverCustomGradientSwitcher && navigationHoverCustomGradientInputValue ? `background: ${navigationHoverCustomGradientInputValue};` : `background: ${navigationHoverGradientColor};`}
