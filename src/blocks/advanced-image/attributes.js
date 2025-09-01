@@ -26,7 +26,7 @@ const attributes = {
 	},
 	advancedImageAlt: {
 		type: 'string',
-		default: ''
+		default: 'Image'
 	},
 	advancedImageDefaultWidth: {
 		type: 'number',
