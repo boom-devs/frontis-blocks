@@ -116,11 +116,6 @@ export default function HighlightToolbar({ attributes, setAttributes }) {
         };
     }, [highlightColor]);
 
-    
-    console.log(globalColors);
-    console.log(highlightColor);
-    console.log(hoverHighlightColor);
-
 
     return (
         <BlockControls group="block">
