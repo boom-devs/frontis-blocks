@@ -402,7 +402,6 @@ const styleExclusions = [
             'blockID',
             'socialGlobalWraperID',
             'socialGlobalWraperClass',
-            'socialItems', 
         ],
     },
     {

@@ -1372,7 +1372,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterIconSizeRatio ? `aspect-ratio: 1 / 1;` : ''}
         ${counterIconColor ? `fill: ${counterIconColor};` : ''}
     }
-    .fb-counter-wrapper.${blockID} .fb-counter-item:hover svg{
+    .fb-counter-wrapper.${blockID} .fb-counter-item:hover .fb-counter-icon-wrapper .fb-counter-icon svg {
         ${counterIconHoverColor ? `fill: ${counterIconHoverColor};` : ''}
     }
 
