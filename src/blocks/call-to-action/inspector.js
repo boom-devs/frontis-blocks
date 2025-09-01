@@ -383,7 +383,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		ctaVRBottomOffset,
 		ctaVRBottomOffsetUnits,
 	} = attributes;
-	console.log(attributes);
+
+	const deviceType = useDeviceType();
 
 	let defaultImageUrl = [];
 	if (typeof FrontisBlocksData !== 'undefined') {
@@ -3131,6 +3132,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					onChange={(selected) => changeCTAPreset(selected)}
 				/>
 			</PanelBody>
+			
 			{/* Title Element */}
 			<div className="fb-advanced-wrapper">
 				<PanelBody

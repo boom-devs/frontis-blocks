@@ -29,6 +29,7 @@ import {
 	BORDER_STYLES,
 	NORMAL_HOVER,
 	OVERFLOW_OP,
+	PRESETS
 } from "./constants/constants";
 
 import FBIconPicker from "../../components/icon-picker";
@@ -62,6 +63,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockId,
 		// deviceType,
 		blockStyle,
+
+		//Preset Style
+		pricingTablePreset,
 
 		/** Start Top Section */
 		pricingTopSectionBgColorSwitcher,
@@ -685,7 +689,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         pricingTableVRBottomOffsetUnits,
     } = attributes;
 
+	console.log(attributes);
+
 	const deviceType= useDeviceType();
+
+		// let defaultImageUrl = [];
+		// if (typeof FrontisBlocksData !== 'undefined') {
+		// 	defaultImageUrl = [
+		// 		FrontisBlocksData.pluginUrl + 'assets/images/ctabg-one.png',
+		// 		FrontisBlocksData.pluginUrl + 'assets/images/ctabgtwo.png',
+		// 		FrontisBlocksData.pluginUrl + 'assets/images/ctabgthree.png',
+		// 	];
+		// }	
+		// // Set default value for buttonIconImageUrl
+		// useEffect(() => {
+		// 	if (!ctaGlobalBackgroundImageUrl && typeof FrontisBlocksData !== 'undefined') {
+		// 		setAttributes({ ctaGlobalBackgroundImageUrl: '' });
+		// 	}
+		// }, []);
 
 	useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -728,6 +749,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const priceButtonIconHandler = (IconName) => {
 		setAttributes({priceButtonIcon: IconName})
 	}
+
+	/** Start Preset Style */
+	const changeCTAPreset = (selectedPreset) => {
+        const presetConfigurations = {
+			"preset-1": {
+				priceGlobalNormalClassicColor: 'EBF5FF',
+				priceGlobalHoverClassicColor: '#EBF5FF',
+				priceGlobalBorder: 'solid',
+				priceGlobalBorderColor: '',
+				priceGlobalPaddingDesktop: {
+					top: '30',
+					bottom: '30',
+					left: '30',
+					right: '30',
+				},
+				priceGlobalBorderDesktop: {
+					top: '0',
+					bottom: '0',
+					left: '0',
+					right: '0',
+				},
+				priceGlobalBorderRadiusDesktop: {
+					top: '24',
+					bottom: '24',
+					left: '24',
+					right: '24',
+				},
+			}
+		}
+		const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+				pricingTablePreset: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Call to Action: Preset "${selectedPreset}" not found.`);
+        }
+	}
+
 
 	/** Start section Top Padding */ 
 	const handleTopSectionPaddingUnitChange = ( event, position ) => {
@@ -4478,6 +4540,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	 */
 	const generalControls = (
 		<>
+			{/* Preset Style */}
+			<PanelBody title={__("Preset", "frontis-blocks")} initialOpen={true}>
+				<SelectControl
+					label={__("Preset Style", "frontis-blocks")}
+					value={pricingTablePreset}
+					options={PRESETS}
+					onChange={(selected) => changeCTAPreset(selected)}
+				/>
+			</PanelBody>
+
 			{/** Start Header */}
 			<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
 

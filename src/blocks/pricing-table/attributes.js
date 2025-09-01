@@ -3378,6 +3378,10 @@ const attributes = {
             Mobile: 'px',
         }
     },
+	pricingTablePreset: {
+        type: 'string',
+        default: 'preset-1',
+    },
 }
 
 export default attributes;
