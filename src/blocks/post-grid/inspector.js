@@ -961,37 +961,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }, [filterSelectedCat]);
     /** End category */
 
-    // /** Start tag */
-    // const tagOptions = allTaxonomies?.terms?.post_tag?.map(item => ({
-    //     value: item.id,
-    //     label: item.name
-    // })) || [];
-
-
-    // const filterTagOptions = [
-    //     { value: 0, label: 'All' },
-    //     ...tagOptions
-    // ];
-
-    // 1) ট্যাগ-সদৃশ কী খুঁজুন (post_tag / tag / tags), নাহলে non-hierarchical নিন
+    /** Start tag */
     let tagKey =
     termKeys.find(k => /(^|[-_])(post[-_]?tag|tags?)($|[-_])/i.test(k))
     ?? termKeys.find(k => allTaxonomies?.taxonomy?.[k]?.hierarchical === false)
     ?? null;
 
-    // 2) টার্ম লিস্ট -> অপশন (id/term_id/termId এবং name/label/slug সাপোর্ট)
+    // set tag options
     const rawTagTerms = (tagKey && termsObj?.[tagKey]) || [];
     const tagOptions = rawTagTerms.map(t => ({
     value: t.id ?? t.term_id ?? t.termId ?? t.slug ?? t.name,
     label: t.name ?? t.label ?? t.slug ?? String(t.id ?? t.term_id ?? t.termId ?? '')
     }));
 
-    // 3) category-এর মতোই 'All' যোগ করে ফাইনাল ফিল্টার অপশন বানানো
+    // set filter tag options
     const filterTagOptions = [
     { value: 0, label: 'All' },
     ...tagOptions
     ];
-    /** End: tagOptions */
+    /** End tag */
 
     const createOptionFromTag = (tagIds) => tagIds.map(tagId => ({
         value: tagId,
@@ -1564,7 +1552,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** Start Post Image Margin */
     const handlePostImageMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
-        if ( postGridMarginLink ) {
+        if ( postImageMarginLink ) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
@@ -6728,7 +6716,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     normalClassicColor={postGridNormalClassicColor}
                     setNormalClassicColor={(value) => setAttributes({ postGridNormalClassicColor: value === undefined ? '' : value })}
                     normalGradientColor={postGridNormalGradientColor}
-                    setNormalGradientColor={(value) => setAttributes({ postGridNormalGradientColor: value === undefined ? '' : value })}
+                    setNormalGradientColor={(value) => setAttributes({ postGridNormalGradientColor: value === undefined ? null : value })}
                     normalCustomGradientSwitcher={postGridNormalCustomGradientSwitcher}
                     setNormalCustomGradientSwitcher={(value) => setAttributes({ postGridNormalCustomGradientSwitcher: value })}
                     normalCustomGradientInputValue={postGridNormalCustomGradientInputValue}
@@ -6739,7 +6727,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     hoverClassicColor={postGridHoverClassicColor}
                     setHoverClassicColor={(value) => setAttributes({ postGridHoverClassicColor: value === undefined ? '' : value })}
                     hoverGradientColor={postGridHoverGradientColor} 
-                    setHoverGradientColor={(value) => setAttributes({ postGridHoverGradientColor: value === undefined ? '' : value })}
+                    setHoverGradientColor={(value) => setAttributes({ postGridHoverGradientColor: value === undefined ? null : value })}
                     hoverCustomGradientSwitcher={postGridHoverCustomGradientSwitcher}
                     setHoverCustomGradientSwitcher={(value) => setAttributes({ postGridHoverCustomGradientSwitcher: value })}
                     hoverCustomGradientInputValue={postGridHoverCustomGradientInputValue}
@@ -8068,7 +8056,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         normalClassicColor={loadMoreButtonNormalClassicColor}
                         setNormalClassicColor={(value) => setAttributes({ loadMoreButtonNormalClassicColor: value === undefined ? '' : value })}
                         normalGradientColor={loadMoreButtonNormalGradientColor}
-                        setNormalGradientColor={(value) => setAttributes({ loadMoreButtonNormalGradientColor: value === undefined ? '' : value })}
+                        setNormalGradientColor={(value) => setAttributes({ loadMoreButtonNormalGradientColor: value === undefined ? null : value })}
                         normalCustomGradientSwitcher={loadMoreButtonNormalCustomGradientSwitcher}
                         setNormalCustomGradientSwitcher={(value) => setAttributes({ loadMoreButtonNormalCustomGradientSwitcher: value })}
                         normalCustomGradientInputValue={loadMoreButtonNormalCustomGradientInputValue}
@@ -8079,7 +8067,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         hoverClassicColor={loadMoreButtonHoverClassicColor}
                         setHoverClassicColor={(value) => setAttributes({ loadMoreButtonHoverClassicColor: value === undefined ? '' : value })}
                         hoverGradientColor={loadMoreButtonHoverGradientColor} 
-                        setHoverGradientColor={(value) => setAttributes({ loadMoreButtonHoverGradientColor: value === undefined ? '' : value })}
+                        setHoverGradientColor={(value) => setAttributes({ loadMoreButtonHoverGradientColor: value === undefined ? null : value })}
                         hoverCustomGradientSwitcher={loadMoreButtonHoverCustomGradientSwitcher}
                         setHoverCustomGradientSwitcher={(value) => setAttributes({ loadMoreButtonHoverCustomGradientSwitcher: value })}
                         hoverCustomGradientInputValue={loadMoreButtonHoverCustomGradientInputValue}
@@ -8779,7 +8767,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         normalClassicColor={paginationArrowNormalClassicColor}
                         setNormalClassicColor={(value) => setAttributes({ paginationArrowNormalClassicColor: value === undefined ? '' : value })}
                         normalGradientColor={paginationArrowNormalGradientColor}
-                        setNormalGradientColor={(value) => setAttributes({ paginationArrowNormalGradientColor: value === undefined ? '' : value })}
+                        setNormalGradientColor={(value) => setAttributes({ paginationArrowNormalGradientColor: value === undefined ? null : value })}
                         normalCustomGradientSwitcher={paginationArrowNormalCustomGradientSwitcher}
                         setNormalCustomGradientSwitcher={(value) => setAttributes({ paginationArrowNormalCustomGradientSwitcher: value })}
                         normalCustomGradientInputValue={paginationArrowNormalCustomGradientInputValue}
@@ -8790,7 +8778,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         hoverClassicColor={paginationArrowHoverClassicColor}
                         setHoverClassicColor={(value) => setAttributes({ paginationArrowHoverClassicColor: value === undefined ? '' : value })}
                         hoverGradientColor={paginationArrowHoverGradientColor} 
-                        setHoverGradientColor={(value) => setAttributes({ paginationArrowHoverGradientColor: value === undefined ? '' : value })}
+                        setHoverGradientColor={(value) => setAttributes({ paginationArrowHoverGradientColor: value === undefined ? null : value })}
                         hoverCustomGradientSwitcher={paginationArrowHoverCustomGradientSwitcher}
                         setHoverCustomGradientSwitcher={(value) => setAttributes({ paginationArrowHoverCustomGradientSwitcher: value })}
                         hoverCustomGradientInputValue={paginationArrowHoverCustomGradientInputValue}
@@ -8990,7 +8978,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         normalClassicColor={paginationBtnNormalClassicColor}
                         setNormalClassicColor={(value) => setAttributes({ paginationBtnNormalClassicColor: value === undefined ? '' : value })}
                         normalGradientColor={paginationBtnNormalGradientColor}
-                        setNormalGradientColor={(value) => setAttributes({ paginationBtnNormalGradientColor: value === undefined ? '' : value })}
+                        setNormalGradientColor={(value) => setAttributes({ paginationBtnNormalGradientColor: value === undefined ? null : value })}
                         normalCustomGradientSwitcher={paginationBtnNormalCustomGradientSwitcher}
                         setNormalCustomGradientSwitcher={(value) => setAttributes({ paginationBtnNormalCustomGradientSwitcher: value })}
                         normalCustomGradientInputValue={paginationBtnNormalCustomGradientInputValue}
@@ -9001,7 +8989,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         hoverClassicColor={paginationBtnHoverClassicColor}
                         setHoverClassicColor={(value) => setAttributes({ paginationBtnHoverClassicColor: value === undefined ? '' : value })}
                         hoverGradientColor={paginationBtnHoverGradientColor} 
-                        setHoverGradientColor={(value) => setAttributes({ paginationBtnHoverGradientColor: value === undefined ? '' : value })}
+                        setHoverGradientColor={(value) => setAttributes({ paginationBtnHoverGradientColor: value === undefined ? null : value })}
                         hoverCustomGradientSwitcher={paginationBtnHoverCustomGradientSwitcher}
                         setHoverCustomGradientSwitcher={(value) => setAttributes({ paginationBtnHoverCustomGradientSwitcher: value })}
                         hoverCustomGradientInputValue={paginationBtnHoverCustomGradientInputValue}
@@ -9043,7 +9031,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         normalClassicColor={paginationActiveBtnNormalClassicColor}
                         setNormalClassicColor={(value) => setAttributes({ paginationActiveBtnNormalClassicColor: value === undefined ? '' : value })}
                         normalGradientColor={paginationActiveBtnNormalGradientColor}
-                        setNormalGradientColor={(value) => setAttributes({ paginationActiveBtnNormalGradientColor: value === undefined ? '' : value })}
+                        setNormalGradientColor={(value) => setAttributes({ paginationActiveBtnNormalGradientColor: value === undefined ? null : value })}
                         normalCustomGradientSwitcher={paginationActiveBtnNormalCustomGradientSwitcher}
                         setNormalCustomGradientSwitcher={(value) => setAttributes({ paginationActiveBtnNormalCustomGradientSwitcher: value })}
                         normalCustomGradientInputValue={paginationActiveBtnNormalCustomGradientInputValue}
@@ -9054,7 +9042,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         hoverClassicColor={paginationActiveBtnHoverClassicColor}
                         setHoverClassicColor={(value) => setAttributes({ paginationActiveBtnHoverClassicColor: value === undefined ? '' : value })}
                         hoverGradientColor={paginationActiveBtnHoverGradientColor} 
-                        setHoverGradientColor={(value) => setAttributes({ paginationActiveBtnHoverGradientColor: value === undefined ? '' : value })}
+                        setHoverGradientColor={(value) => setAttributes({ paginationActiveBtnHoverGradientColor: value === undefined ? null : value })}
                         hoverCustomGradientSwitcher={paginationActiveBtnHoverCustomGradientSwitcher}
                         setHoverCustomGradientSwitcher={(value) => setAttributes({ paginationActiveBtnHoverCustomGradientSwitcher: value })}
                         hoverCustomGradientInputValue={paginationActiveBtnHoverCustomGradientInputValue}
@@ -9268,7 +9256,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             normalClassicColor={postGlobalNormalClassicColor}
                             setNormalClassicColor={(value) => setAttributes({ postGlobalNormalClassicColor: value === undefined ? '' : value })}
                             normalGradientColor={postGlobalNormalGradientColor}
-                            setNormalGradientColor={(value) => setAttributes({ postGlobalNormalGradientColor: value === undefined ? '' : value })}
+                            setNormalGradientColor={(value) => setAttributes({ postGlobalNormalGradientColor: value === undefined ? null : value })}
                             normalCustomGradientSwitcher={postGlobalNormalCustomGradientSwitcher}
                             setNormalCustomGradientSwitcher={(value) => setAttributes({ postGlobalNormalCustomGradientSwitcher: value })}
                             normalCustomGradientInputValue={postGlobalNormalCustomGradientInputValue}
@@ -9279,7 +9267,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             hoverClassicColor={postGlobalHoverClassicColor}
                             setHoverClassicColor={(value) => setAttributes({ postGlobalHoverClassicColor: value === undefined ? '' : value })}
                             hoverGradientColor={postGlobalHoverGradientColor} 
-                            setHoverGradientColor={(value) => setAttributes({ postGlobalHoverGradientColor: value === undefined ? '' : value })}
+                            setHoverGradientColor={(value) => setAttributes({ postGlobalHoverGradientColor: value === undefined ? null : value })}
                             hoverCustomGradientSwitcher={postGlobalHoverCustomGradientSwitcher}
                             setHoverCustomGradientSwitcher={(value) => setAttributes({ postGlobalHoverCustomGradientSwitcher: value })}
                             hoverCustomGradientInputValue={postGlobalHoverCustomGradientInputValue}

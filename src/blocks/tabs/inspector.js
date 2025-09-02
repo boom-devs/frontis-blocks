@@ -3456,22 +3456,22 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 					normalClassicColor={tabWrapperBgColor}
 					setNormalClassicColor={(value) => setAttributes({ tabWrapperBgColor: value === undefined ? '' : value })}
 					normalGradientColor={tabWrapperBgGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ tabWrapperBgGradientColor: value === undefined ? '' : value })}
+					setNormalGradientColor={(value) => setAttributes({ tabWrapperBgGradientColor: value === undefined ? null : value })}
 					normalCustomGradientSwitcher={tabWrapperBgCustomGradientColorSwitcher}
 					setNormalCustomGradientSwitcher={(value) => setAttributes({ tabWrapperBgCustomGradientColorSwitcher: value })}
 					normalCustomGradientInputValue={tabWrapperBgCustomGradientColor}
-					setNormalCustomGradientInputValue={(value) => setAttributes({ tabWrapperBgCustomGradientColor: value === undefined ? '' : value })}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ tabWrapperBgCustomGradientColor: value === undefined ? null : value })}
 
 					hoverBackgroundType={tabWrapperBgHoverColorType}
 					setHoverBackgroundType={(value) => setAttributes({ tabWrapperBgHoverColorType: value })}
 					hoverClassicColor={tabWrapperBgHoverColor}
 					setHoverClassicColor={(value) => setAttributes({ tabWrapperBgHoverColor: value === undefined ? '' : value })}
 					hoverGradientColor={tabWrapperBgHoverGradientColor}
-					setHoverGradientColor={(value) => setAttributes({ tabWrapperBgHoverGradientColor: value === undefined ? '' : value })}
+					setHoverGradientColor={(value) => setAttributes({ tabWrapperBgHoverGradientColor: value === undefined ? null : value })}
 					hoverCustomGradientSwitcher={tabWrapperBgHoverCustomGradientColorSwitcher}
 					setHoverCustomGradientSwitcher={(value) => setAttributes({ tabWrapperBgHoverCustomGradientColorSwitcher: value })}
 					hoverCustomGradientInputValue={tabWrapperBgHoverCustomGradientColor}
-					setHoverCustomGradientInputValue={(value) => setAttributes({ tabWrapperBgHoverCustomGradientColor: value === undefined ? '' : value })}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ tabWrapperBgHoverCustomGradientColor: value === undefined ? null : value })}
 
 					isBackgroundImage={false}
 
@@ -3602,22 +3602,22 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 					normalClassicColor={tabListBgColor}
 					setNormalClassicColor={(value) => setAttributes({ tabListBgColor: value === undefined ? '' : value })}
 					normalGradientColor={tabListBgGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ tabListBgGradientColor: value === undefined ? '' : value })}
+					setNormalGradientColor={(value) => setAttributes({ tabListBgGradientColor: value === undefined ? null : value })}
 					normalCustomGradientSwitcher={tabListBgCustomGradientColorSwitcher}
 					setNormalCustomGradientSwitcher={(value) => setAttributes({ tabListBgCustomGradientColorSwitcher: value })}
 					normalCustomGradientInputValue={tabListBgCustomGradientColor}
-					setNormalCustomGradientInputValue={(value) => setAttributes({ tabListBgCustomGradientColor: value === undefined ? '' : value })}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ tabListBgCustomGradientColor: value === undefined ? null : value })}
 
 					hoverBackgroundType={tabListBgHoverColorType}
 					setHoverBackgroundType={(value) => setAttributes({ tabListBgHoverColorType: value })}
 					hoverClassicColor={tabListBgHoverColor}
 					setHoverClassicColor={(value) => setAttributes({ tabListBgHoverColor: value === undefined ? '' : value })}
 					hoverGradientColor={tabListBgHoverGradientColor}
-					setHoverGradientColor={(value) => setAttributes({ tabListBgHoverGradientColor: value === undefined ? '' : value })}
+					setHoverGradientColor={(value) => setAttributes({ tabListBgHoverGradientColor: value === undefined ? null : value })}
 					hoverCustomGradientSwitcher={tabListBgHoverCustomGradientColorSwitcher}
 					setHoverCustomGradientSwitcher={(value) => setAttributes({ tabListBgHoverCustomGradientColorSwitcher: value })}
 					hoverCustomGradientInputValue={tabListBgHoverCustomGradientColor}
-					setHoverCustomGradientInputValue={(value) => setAttributes({ tabListBgHoverCustomGradientColor: value === undefined ? '' : value })}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ tabListBgHoverCustomGradientColor: value === undefined ? null : value })}
 
 					isBackgroundImage={false}
 
@@ -4092,7 +4092,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                     normalClassicColor={tabIconBgColor}
                     setNormalClassicColor={(value) => setAttributes({ tabIconBgColor: value === undefined ? '' : value })}
                     normalGradientColor={tabIconNormalGradientColor}
-                    setNormalGradientColor={(value) => setAttributes({ tabIconNormalGradientColor: value === undefined ? '' : value })}
+                    setNormalGradientColor={(value) => setAttributes({ tabIconNormalGradientColor: value === undefined ? null : value })}
                     normalCustomGradientSwitcher={tabIconNormalCustomGradientSwitcher}
                     setNormalCustomGradientSwitcher={(value) => setAttributes({ tabIconNormalCustomGradientSwitcher: value })}
                     normalCustomGradientInputValue={tabIconNormalCustomGradientInputValue}
@@ -4103,7 +4103,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                     hoverClassicColor={ tabIconBgHoverColor}
                     setHoverClassicColor={(value) => setAttributes({  tabIconBgHoverColor: value === undefined ? '' : value })}
                     hoverGradientColor={tabIconHoverGradientColor} 
-                    setHoverGradientColor={(value) => setAttributes({ tabIconHoverGradientColor: value === undefined ? '' : value })}
+                    setHoverGradientColor={(value) => setAttributes({ tabIconHoverGradientColor: value === undefined ? null : value })}
                     hoverCustomGradientSwitcher={tabIconHoverCustomGradientSwitcher}
                     setHoverCustomGradientSwitcher={(value) => setAttributes({ tabIconHoverCustomGradientSwitcher: value })}
                     hoverCustomGradientInputValue={tabIconHoverCustomGradientInputValue}
@@ -4311,22 +4311,22 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 					normalClassicColor={tabContentBgColor}
 					setNormalClassicColor={(value) => setAttributes({ tabContentBgColor: value === undefined ? '' : value })}
 					normalGradientColor={tabContentBgGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ tabContentBgGradientColor: value === undefined ? '' : value })}
+					setNormalGradientColor={(value) => setAttributes({ tabContentBgGradientColor: value === undefined ? null : value })}
 					normalCustomGradientSwitcher={tabContentBgCustomGradientColorSwitcher}
 					setNormalCustomGradientSwitcher={(value) => setAttributes({ tabContentBgCustomGradientColorSwitcher: value })}
 					normalCustomGradientInputValue={tabContentBgCustomGradientColor}
-					setNormalCustomGradientInputValue={(value) => setAttributes({ tabContentBgCustomGradientColor: value === undefined ? '' : value })}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ tabContentBgCustomGradientColor: value === undefined ? null : value })}
 
 					hoverBackgroundType={tabContentBgHoverColorType}
 					setHoverBackgroundType={(value) => setAttributes({ tabContentBgHoverColorType: value })}
 					hoverClassicColor={tabContentBgHoverColor}
 					setHoverClassicColor={(value) => setAttributes({ tabContentBgHoverColor: value === undefined ? '' : value })}
 					hoverGradientColor={tabContentBgHoverGradientColor}
-					setHoverGradientColor={(value) => setAttributes({ tabContentBgHoverGradientColor: value === undefined ? '' : value })}
+					setHoverGradientColor={(value) => setAttributes({ tabContentBgHoverGradientColor: value === undefined ? null : value })}
 					hoverCustomGradientSwitcher={tabContentBgHoverCustomGradientColorSwitcher}
 					setHoverCustomGradientSwitcher={(value) => setAttributes({ tabContentBgHoverCustomGradientColorSwitcher: value })}
 					hoverCustomGradientInputValue={tabContentBgHoverCustomGradientColor}
-					setHoverCustomGradientInputValue={(value) => setAttributes({ tabContentBgHoverCustomGradientColor: value === undefined ? '' : value })}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ tabContentBgHoverCustomGradientColor: value === undefined ? null : value })}
 
 					isBackgroundImage={false}
 
@@ -4506,22 +4506,22 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 					normalClassicColor={tabGlobalBgColor}
 					setNormalClassicColor={(value) => setAttributes({ tabGlobalBgColor: value === undefined ? '' : value })}
 					normalGradientColor={tabGlobalBgGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ tabGlobalBgGradientColor: value === undefined ? '' : value })}
+					setNormalGradientColor={(value) => setAttributes({ tabGlobalBgGradientColor: value === undefined ? null : value })}
 					normalCustomGradientSwitcher={tabGlobalBgCustomGradientColorSwitcher}
 					setNormalCustomGradientSwitcher={(value) => setAttributes({ tabGlobalBgCustomGradientColorSwitcher: value })}
 					normalCustomGradientInputValue={tabGlobalBgCustomGradientColor}
-					setNormalCustomGradientInputValue={(value) => setAttributes({ tabGlobalBgCustomGradientColor: value === undefined ? '' : value })}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ tabGlobalBgCustomGradientColor: value === undefined ? null : value })}
 
 					hoverBackgroundType={tabGlobalBgHoverColorType}
 					setHoverBackgroundType={(value) => setAttributes({ tabGlobalBgHoverColorType: value })}
 					hoverClassicColor={tabGlobalBgHoverColor}
 					setHoverClassicColor={(value) => setAttributes({ tabGlobalBgHoverColor: value === undefined ? '' : value })}
 					hoverGradientColor={tabGlobalBgHoverGradientColor}
-					setHoverGradientColor={(value) => setAttributes({ tabGlobalBgHoverGradientColor: value === undefined ? '' : value })}
+					setHoverGradientColor={(value) => setAttributes({ tabGlobalBgHoverGradientColor: value === undefined ? null : value })}
 					hoverCustomGradientSwitcher={tabGlobalBgHoverCustomGradientColorSwitcher}
 					setHoverCustomGradientSwitcher={(value) => setAttributes({ tabGlobalBgHoverCustomGradientColorSwitcher: value })}
 					hoverCustomGradientInputValue={tabGlobalBgHoverCustomGradientColor}
-					setHoverCustomGradientInputValue={(value) => setAttributes({ tabGlobalBgHoverCustomGradientColor: value === undefined ? '' : value })}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ tabGlobalBgHoverCustomGradientColor: value === undefined ? null : value })}
 
 					isBackgroundImage={false}
 

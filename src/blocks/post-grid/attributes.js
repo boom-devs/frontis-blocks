@@ -31,7 +31,7 @@ const attributes = {
 	},
 	tagKey: {
 		type: 'string',
-		default: 'post_tag'
+		default: ''
 	},
 
 	postSwitcher: {

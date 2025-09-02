@@ -66,6 +66,10 @@
 
 			&.fb-show-back {
 				transform: rotateY(-180deg);
+				.fb-flipbox-front.fb-inactive-side{
+					opacity: 0;
+					z-index: -1;
+				}
 			}
 		}
 

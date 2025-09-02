@@ -2973,7 +2973,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             normalClassicColor={sliderGlobalBgNormalClassicColor}
                             setNormalClassicColor={(value) => setAttributes({ sliderGlobalBgNormalClassicColor: value === undefined ? '' : value })}
                             normalGradientColor={sliderGlobalBgNormalGradientColor}
-                            setNormalGradientColor={(value) => setAttributes({ sliderGlobalBgNormalGradientColor: value === undefined ? '' : value })}
+                            setNormalGradientColor={(value) => setAttributes({ sliderGlobalBgNormalGradientColor: value === undefined ? null : value })}
                             normalCustomGradientSwitcher={sliderGlobalBgNormalCustomGradientSwitcher}
                             setNormalCustomGradientSwitcher={(value) => setAttributes({ sliderGlobalBgNormalCustomGradientSwitcher: value })}
                             normalCustomGradientInputValue={sliderGlobalBgNormalCustomGradientInputValue}
@@ -2984,7 +2984,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             hoverClassicColor={sliderGlobalBgHoverClassicColor}
                             setHoverClassicColor={(value) => setAttributes({ sliderGlobalBgHoverClassicColor: value === undefined ? '' : value })}
                             hoverGradientColor={sliderGlobalBgHoverGradientColor}
-                            setHoverGradientColor={(value) => setAttributes({ sliderGlobalBgHoverGradientColor: value === undefined ? '' : value })}
+                            setHoverGradientColor={(value) => setAttributes({ sliderGlobalBgHoverGradientColor: value === undefined ? null : value })}
                             hoverCustomGradientSwitcher={sliderGlobalBgHoverCustomGradientSwitcher}
                             setHoverCustomGradientSwitcher={(value) => setAttributes({ sliderGlobalBgHoverCustomGradientSwitcher: value })}
                             hoverCustomGradientInputValue={sliderGlobalBgHoverCustomGradientInputValue}
