@@ -38,6 +38,14 @@ const attributes = {
 		type: 'string',
 		default: 'grid'
 	},
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
+	},
 	/** Start category */
 	selectedCatSwitcher: {
 		type: 'string',
