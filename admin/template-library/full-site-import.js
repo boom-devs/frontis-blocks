@@ -4,14 +4,14 @@
 import { __ } from "@wordpress/i18n";
 import { useState, useCallback, useEffect } from "@wordpress/element";
 import { ClipLoader } from "react-spinners";
-import data from "./data.json";
+// import data from "./data.json";
 import TemplateHeader from "./template-header";
 import FullSiteImportSettingConfig from "./components/FullSiteImportSettingConfig";
 import FullSiteImportSetting from "./components/FullSiteImportSetting.js";
 import FullSiteImportContent from "./components/FullSiteImportContent.js";
 import { toast } from "react-toastify";
 
-const FullSiteImport = ({ template, onClose, onBack }) => {
+const FullSiteImport = ({ template, onClose, onBack, data }) => {
     const [formData, setFormData] = useState({
         siteName: (window.frontisBlocksAdmin && window.frontisBlocksAdmin.siteName) || '',
         siteTagline: '',

@@ -2,12 +2,12 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 import TemplateImport from "./template-import";
 import PluginUpgradeModal from "./plugin-upgrade";
-import {TemplateLoader}  from "./template-loader";
+import { TemplateLoader } from "./template-loader";
 import { usePostDataMutation } from "./services/api";
 import { select, dispatch } from '@wordpress/data';
 import { createBlock, parse, rawHandler } from '@wordpress/blocks';
@@ -36,7 +36,10 @@ const TemplateGrid = ({
     handleRemoveLibraryItem,
     savedItems = [],
     setSavedItems = [],
-    alreadySaved = () => {}
+    alreadySaved = () => { },
+    setActiveCategory
+    
+    // setIsPladmin
 }) => {
 
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
@@ -50,9 +53,9 @@ const TemplateGrid = ({
     const isAlreadySaved = alreadySaved(savedItems, id, activeTab)
 
     const handleFullSiteImport = useCallback(() => {
-        if (!isPluginUpgrade) {
-            setIsPladmin/template-library/scss/_main-content.scssuginUpgradeModalOpen(true);
-        }
+        // if (!isPluginUpgrade) {
+        //     setIsPladmin / template - library / scss / _main - content.scssuginUpgradeModalOpen(true);
+        // }
         // if (!is_premium && isLogedIn) {
         setIsModalOpen(true);
         // }
@@ -104,11 +107,13 @@ const TemplateGrid = ({
         setLibraryData(prevData => [...prevData, templateData]);
         setSavedItems(prev => [...prev, templateData]);
 
-        toast.success(__('Template saved to library', 'frontis-blocks'), {
+        toast.success(__( `Template saved to library`, 'frontis-blocks'), {
             position: "top-right",
-            autoClose: false,
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
         });
-        alert(__('Template saved to library', 'frontis-blocks'));
     }, [isAlreadySaved, templateData, setLibraryData, setSavedItems]);
 
     const fetImportData = () => {
@@ -118,10 +123,10 @@ const TemplateGrid = ({
     const [patternsData, { data: patternsResponse, error, isLoading: dataLoading }] = usePostDataMutation();
 
 
-    const getTemplatesData = async (path, key, id) => {
+    const getTemplatesData = async (route, key, id) => {
         try {
             const response = await patternsData({
-                endpoint: path,
+                endpoint: route,
                 body: {
                     [key]: id
                 },
@@ -362,12 +367,15 @@ const TemplateGrid = ({
                     template={templateData}
                     onClose={handleCloseModal}
                     data={data}
+                    setActiveCategory={setActiveCategory}
+                    
                 />
             )}
 
             {isLoading && (
                 <TemplateLoader />)
             }
+
 
         </>
     );

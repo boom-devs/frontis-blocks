@@ -91,7 +91,7 @@
             }
 
             .fb-template-library-support-btn-wrapper {
-                button {
+                a {
                     display: flex;
                     align-items: center;
                     gap: 6px;
@@ -105,6 +105,10 @@
                     font-weight: $font-weight-500;
                     font-size: $large-font-size;
                     line-height: $line-height-22;
+                    text-decoration: none;
+                    &:focus {
+                        box-shadow: none;
+                    }
                 }
             }
 
