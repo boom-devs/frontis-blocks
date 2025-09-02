@@ -307,6 +307,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonTransformHoverScaleY,
 
     } = attributes;    
+
+	console.log(attributes);
+
 	const deviceType= useDeviceType();
 
 	let defaultImageUrl = [];
