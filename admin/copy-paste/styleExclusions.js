@@ -403,6 +403,14 @@ const styleExclusions = [
             'socialGlobalWraperID',
             'socialGlobalWraperClass',
         ],
+        skipNestedAttrs: {
+            socialItems: [
+                'socialIcon',
+                'socialIconUrl',
+                'socialIconTitle',
+                'socialIconTargetUrl'
+            ]
+        }
     },
     {
         name: 'frontis-blocks/team-member',
