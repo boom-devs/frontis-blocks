@@ -7,7 +7,7 @@ import TemplateHeader from "./template-header";
 import FullSiteImport from "./full-site-import";
 import { category } from "@wordpress/icons";
 
-const TemplateImport = ({ template, onClose, data }) => {
+const TemplateImport = ({ template, onClose, data , setActiveCategory }) => {
     const [isImporting, setIsImporting] = useState(false);
     const [activeTab, setActiveTab] = useState('patterns');
     const [showFullSiteImport, setShowFullSiteImport] = useState(false);
@@ -43,6 +43,7 @@ const TemplateImport = ({ template, onClose, data }) => {
     if (showFullSiteImport) {
         return (
             <FullSiteImport
+            data={data}
                 template={template}
                 onClose={handleFullSiteImportClose}
                 onBack={() => setShowFullSiteImport(false)}
@@ -60,6 +61,7 @@ const TemplateImport = ({ template, onClose, data }) => {
                     setActiveTab={setActiveTab}
                     data={data}
                     onClose={onClose}
+                    setActiveCategory={setActiveCategory}
                 />
 
                 {/* Content */}

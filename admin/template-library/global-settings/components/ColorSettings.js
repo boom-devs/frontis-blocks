@@ -15,12 +15,8 @@ import { updateGlobalStyle } from "../fetch";
 const ColorSettings = ({
 	globalColors,
 	setGlobalColors,
-	customColors,
-	setCustomColors,
 	gradientColors,
 	setGradientColors,
-	customGradientColors,
-	setCustomGradientColors,
 	deviceType,
 	isAfterSave,
 	isLoading,
@@ -42,8 +38,6 @@ const ColorSettings = ({
 	// Generate color variables
 	useEffect(() => {
 		const mergedColors = [
-			...(customColors ?? []),
-			...(customGradientColors ?? []),
 			...(gradientColors ?? []),
 			...(globalColors ?? (Array.isArray(themeColors) ? themeColors : [])),
 		];
@@ -51,67 +45,51 @@ const ColorSettings = ({
 		setTimeout(() => generateColorsVariables(mergedColors, deviceType), 1000);
 	}, [
 		globalColors,
-		customColors,
-		customGradientColors,
 		gradientColors,
 		deviceType,
 	]);
 
-	// Save settings after post save
-	const handleUpdateSettings = useCallback(async () => {
-		if (!isAfterSave || !isLoading) return;
-		const settings = [
-			{
-				key: "fb_update_global_colors",
-				data: globalColors,
-				setter: setGlobalColors,
-				storeKey: "fb_global_colors",
-			},
-			{
-				key: "fb_update_custom_colors",
-				data: customColors,
-				setter: setCustomColors,
-				storeKey: "fb_custom_colors",
-			},
-			{
-				key: "fb_update_gradient_colors",
-				data: gradientColors,
-				setter: setGradientColors,
-				storeKey: "fb_gradient_colors",
-			},
-			{
-				key: "fb_update_custom_gradient_colors",
-				data: customGradientColors,
-				setter: setCustomGradientColors,
-				storeKey: "fb_custom_gradient_colors",
-			},
-		];
+	// // Save settings after post save
+	// const handleUpdateSettings = useCallback(async () => {
+	// 	if (!isAfterSave || !isLoading) return;
+	// 	const settings = [
+	// 		{
+	// 			key: "fb_update_global_colors",
+	// 			data: globalColors,
+	// 			setter: setGlobalColors,
+	// 			storeKey: "fb_global_colors",
+	// 		},
+	// 		{
+	// 			key: "fb_update_gradient_colors",
+	// 			data: gradientColors,
+	// 			setter: setGradientColors,
+	// 			storeKey: "fb_gradient_colors",
+	// 		},
+	// 	];
 
-		try {
-			for (const { key, data, setter, storeKey } of settings) {
-				const response = await updateGlobalStyle(data, key);
-				if (response.success) {
-					setter(response.data.data);
-					localStorage.setItem(storeKey, JSON.stringify(response.data.data));
-				}
-			}
+	// 	try {
+	// 		for (const { key, data, setter, storeKey } of settings) {
+	// 			const response = await updateGlobalStyle(data, key);
+	// 			if (response.success) {
+	// 				setter(response.data.data);
+	// 				localStorage.setItem(storeKey, JSON.stringify(response.data.data));
+	// 			}
+	// 		}
 
-			setIsLoading(false);
-		} catch (error) {
-			console.error("Error updating settings:", error);
-		}
-	}, [
-		isAfterSave,
-		isLoading,
-		globalColors,
-		customColors,
-		gradientColors,
-		customGradientColors,
-	]);
+	// 		setIsLoading(false);
+	// 	} catch (error) {
+	// 		console.error("Error updating settings:", error);
+	// 	}
+	// }, [
+	// 	isAfterSave,
+	// 	isLoading,
+	// 	globalColors,
+	// 	gradientColors,
+	// ]);
 
-	useEffect(() => {
-		handleUpdateSettings();
-	}, [handleUpdateSettings]);
+	// useEffect(() => {
+	// 	handleUpdateSettings();
+	// }, [handleUpdateSettings]);
 
 	useEffect(() => {
 		if (!isLoading) {
@@ -123,7 +101,7 @@ const ColorSettings = ({
 			setGlobalColors(themeColors);
 		}
 
-	}, [customColors, globalColors, gradientColors, customGradientColors]);
+	}, [globalColors, gradientColors]);
 
 
 	return (
@@ -144,29 +122,15 @@ const ColorSettings = ({
 										/>
 									</div>
 									)}
-									{ customColors.length !== 0 && (
-									<div className="fb-color-section">
-										<PaletteEdit
-											canOnlyChangeValues
-											colors={ customColors }
-											onChange={ setCustomColors }
-											paletteLabel={ __( 'Custom' ) }
-											paletteLabelHeadingLevel={ 3 }
-											slugPrefix="custom-"
-											popoverProps={ popoverProps }
-											classnames="fb-custom-color-panel"	
-										/>
-									</div>
-									)}
 								</div>
 
 								{/* Gradient Section */}
 								<div className="fb-color-section-wrapper">
-									{(gradientColors.length !== 0 || frontisBlocksAdmin?.gradients_colors.length !== 0) && (
+									{(gradientColors.length !== 0) && (
 										<div className="fb-color-section">
 											<PaletteEdit
 												canOnlyChangeValues
-												gradients={ gradientColors || frontisBlocksAdmin?.gradients_colors }
+												gradients={ gradientColors }
 												onChange={ setGradientColors }
 												paletteLabel={ __( 'Gradient' ) }
 												classnames="fb-gradient-color-panel"
@@ -174,20 +138,6 @@ const ColorSettings = ({
 												popoverProps={ popoverProps }
 											/>
 										</div>
-									)}
-									{ customGradientColors.length !== 0 && (
-									<div className="fb-color-section">
-										<PaletteEdit
-											canOnlyChangeValues
-											gradients={ customGradientColors }
-											onChange={ setCustomGradientColors }
-											paletteLabel={ __( 'Custom Gradients' ) }
-											paletteLabelHeadingLevel={ 3 }
-											slugPrefix="custom-"
-											className="fb-custom-gradient-color-panel"	
-											popoverProps={ popoverProps }
-										/>
-									</div>
 									)}
 								</div>
 			</div>

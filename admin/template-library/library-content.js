@@ -1,6 +1,7 @@
 /**
  * WordPress dependencies
  */
+import { __ } from "@wordpress/i18n";
 import { useState, useEffect, useCallback } from "@wordpress/element";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,9 +11,10 @@ import LoginSignupModal from "./login-signup";
 import PluginUpgradeModal from "./plugin-upgrade";
 import TemplateGrid from "./template-grid";
 import TemplateList from "./template-list";
+import { TemplateContentLoader } from "./template-loader";
 
 
-const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibraryData, setIsVisible, isLogedIn, cardListType, setCardListType, savedItems, setSavedItems }) => {
+const LibraryContent = ({ activeTab, activeCategory,setActiveCategory ,data, libraryData, setLibraryData, setIsVisible, isLogedIn, cardListType, setCardListType, savedItems, setSavedItems, loading, setLoading }) => {
 
     const FavoriteTabsOptions = [
         { name: 'All', value: 'all' },
@@ -100,6 +102,10 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
             );
         }
 
+        setTimeout(() => {
+            setLoading(false)
+        }, 2000)
+        
         setDisplayedData(filteredData);
     }, [activeFavoriteTab, originalLibraryData, searchItems, activeCategory.templatelibrary]);
 
@@ -108,8 +114,6 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
         setSearchItems('');
     }, []);
 
-
-    console.log('LibraryData', libraryData)
 
     const handleRemoveLibraryItem = useCallback((id, type) => {
         const updatedOriginalData = originalLibraryData.filter(
@@ -133,132 +137,160 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
             prev.filter((item) => !(item?.id === id && item?.type === type))
         );
 
-        alert(`Removed item with id: ${id}, type: ${type}`);
+        toast.success(__('Template removed from library', 'frontis-blocks'), {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+        });
+
+
     }, [originalLibraryData, displayedData, libraryData, setLibraryData, setSavedItems]);
 
 
 
     return (
         <div className="fb-template-library-store-content">
-            {/* {(activeCategory.templatelibrary === 'my-favourites' || activeCategory.templatelibrary === 'my-cloud') && ( */}
-            <div className="fb-template-library-content-header">
-                <div className="fb-template-library-content-header-left">
-                    {/* {activeCategory.templatelibrary === 'my-cloud' && <h2>My Cloud</h2>} */}
-                    {/* {activeCategory.templatelibrary === 'my-favourites' && ( */}
-                    <div className="fb-template-library-tags-wrapper">
-                        {FavoriteTabsOptions.map(tab => (
-                            <button
-                                key={tab.value}
-                                className={`fb-template-library-tag-btn ${activeFavoriteTab === tab.value ? 'active' : ''}`}
-                                onClick={() => handleFavoriteTabClick(tab)}
-                            >
-                                {tab.name}
-                            </button>
-                        ))}
-                    </div>
-                    {/* )} */}
-                </div>
-                <div className="fb-template-library-content-header-right">
-                    <div className="fb-template-library-search-wrapper">
-                        <div className="fb-search-input-wrapper">
-                            <div className="fb-search-input-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                    <g clipPath="url(#clip0_13116_5586)">
-                                        <circle cx="8.625" cy="8.625" r="7.125" stroke="white" strokeWidth="1.5" />
-                                        <path d="M13.875 13.875L16.5 16.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_13116_5586">
-                                            <rect width="18" height="18" fill="white" />
-                                        </clipPath>
-                                        activeTemplate  </defs>
-                                </svg>
+            {loading ? (
+                <TemplateContentLoader />
+            ) : (
+                <>
+                    {/* {(activeCategory.templatelibrary === 'my-favourites' || activeCategory.templatelibrary === 'my-cloud') && ( */}
+                    <div className="fb-template-library-content-header">
+                        <div className="fb-template-library-content-header-left">
+                            {/* {activeCategory.templatelibrary === 'my-cloud' && <h2>My Cloud</h2>} */}
+                            {/* {activeCategory.templatelibrary === 'my-favourites' && ( */}
+                            <div className="fb-template-library-tags-wrapper">
+                                {FavoriteTabsOptions.map(tab => (
+                                    <button
+                                        key={tab.value}
+                                        className={`fb-template-library-tag-btn ${activeFavoriteTab === tab.value ? 'active' : ''}`}
+                                        onClick={() => handleFavoriteTabClick(tab)}
+                                    >
+                                        {tab.name}
+                                    </button>
+                                ))}
                             </div>
-                            <input
-                                type="search"
-                                placeholder="Search Templates"
-                                value={searchItems}
-                                onChange={e => searchTemplates(e.target.value)}
-                            />
+                            {/* )} */}
+                        </div>
+                        <div className="fb-template-library-content-header-right">
+                            <div className="fb-template-library-search-wrapper">
+                                <div className="fb-search-input-wrapper">
+                                    <div className="fb-search-input-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                            <g clipPath="url(#clip0_13116_5586)">
+                                                <circle cx="8.625" cy="8.625" r="7.125" stroke="white" strokeWidth="1.5" />
+                                                <path d="M13.875 13.875L16.5 16.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_13116_5586">
+                                                    <rect width="18" height="18" fill="white" />
+                                                </clipPath>
+                                                activeTemplate  </defs>
+                                        </svg>
+                                    </div>
+                                    <input
+                                        type="search"
+                                        placeholder="Search Templates"
+                                        value={searchItems}
+                                        onChange={e => searchTemplates(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                            <div className="fb-template-library-card-list-wrapper">
+                                {CardListOptions.map(tab => (
+                                    <button
+                                        key={tab.value}
+                                        className={`fb-template-library-card-list-btn ${cardListType === tab.value ? 'active' : ''}`}
+                                        onClick={() => setCardListType(tab.value)}
+                                    >
+                                        {tab.svg}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
-                    <div className="fb-template-library-card-list-wrapper">
-                        {CardListOptions.map(tab => (
-                            <button
-                                key={tab.value}
-                                className={`fb-template-library-card-list-btn ${cardListType === tab.value ? 'active' : ''}`}
-                                onClick={() => setCardListType(tab.value)}
-                            >
-                                {tab.svg}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            </div>
-            {/* )} */}
 
-            {displayedData && displayedData.length > 0 ? (
-                cardListType === 'list' ? (
-                    <table className="fb-template-library-cards style-two">
-                        <thead className="fb-template-library-card-header">
-                            <tr>
-                                <th className="fb-template-library-card-header-name">Name</th>
-                                {(activeCategory.templatelibrary === 'my-favourites' || activeCategory.templatelibrary === 'my-cloud') && (
-                                    <>
-                                        <th className="fb-template-library-card-header-date">Last Modified</th>
-                                        <th className="fb-template-library-card-header-actions">Action</th>
-                                    </>
-                                )}
-                            </tr>
-                        </thead>
-                        <tbody className="fb-template-library-card-body">
-                            {displayedData.map(item => (
-                                <TemplateList
-                                    key={item.id}
-                                    item={item}
-                                    libraryData={libraryData}
-                                    type={item.type}
-                                    setLibraryData={setLibraryData}
-                                    data={data}
-                                    isLibrary={isLibrary}
-                                    handleRemoveLibraryItem={handleRemoveLibraryItem}
-                                />
-                            ))}
-                        </tbody>
-                    </table>
-                ) : (
-                    <div className="fb-template-library-cards">
-                        {displayedData.map(item => (
-                            <TemplateGrid
-                                item={item}
-                                key={item.id}
-                                id={item.id}
-                                title={item.title}
-                                imageUrl={item.image}
-                                is_premium={item.is_premium || false}
-                                tags={item.tags || []}
-                                templateType={item.type}
-                                categories={item.categories || []}
-                                colors={item.colors || []}
-                                gradientColors={item.gradientColors || []}
-                                typographies={item.typographies || []}
-                                customTypographies={item.customTypographies || []}
-                                dependencies={item.dependencies || []}
-                                activeTab={activeTab}
-                                setLibraryData={setLibraryData}
-                                isLogedIn={isLogedIn}
-                                data={data}
-                                setIsVisible={setIsVisible}
-                                isLibrary={isLibrary}
-                                handleRemoveLibraryItem={handleRemoveLibraryItem}
-                            />
-                        ))}
-                    </div>
-                )
-            ) : (
-                <h3>No template found</h3>
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={3000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                    />
+
+                    {displayedData && displayedData.length > 0 ? (
+                        cardListType === 'list' ? (
+                            <table className="fb-template-library-cards style-two">
+                                <thead className="fb-template-library-card-header">
+                                    <tr>
+                                        <th className="fb-template-library-card-header-name">Name</th>
+                                        {(activeCategory.templatelibrary === 'my-favourites' || activeCategory.templatelibrary === 'my-cloud') && (
+                                            <>
+                                                <th className="fb-template-library-card-header-date">Last Modified</th>
+                                                <th className="fb-template-library-card-header-actions">Action</th>
+                                            </>
+                                        )}
+                                    </tr>
+                                </thead>
+                                <tbody className="fb-template-library-card-body">
+                                    {displayedData.map(item => (
+                                        <TemplateList
+                                            key={item.id}
+                                            item={item}
+                                            libraryData={libraryData}
+                                            type={item.type}
+                                            setLibraryData={setLibraryData}
+                                            data={data}
+                                            isLibrary={isLibrary}
+                                            handleRemoveLibraryItem={handleRemoveLibraryItem}
+                                            setIsVisible={setIsVisible}
+                                            setActiveCategory={setActiveCategory}
+                                        />
+                                    ))}
+                                </tbody>
+                            </table>
+                        ) : (
+                            <div className="fb-template-library-cards">
+                                {displayedData.map(item => (
+                                    <TemplateGrid
+                                        item={item}
+                                        key={item.id}
+                                        id={item.id}
+                                        title={item.title}
+                                        imageUrl={item.image}
+                                        is_premium={item.is_premium || false}
+                                        tags={item.tags || []}
+                                        templateType={item.type}
+                                        categories={item.categories || []}
+                                        colors={item.colors || []}
+                                        gradientColors={item.gradientColors || []}
+                                        typographies={item.typographies || []}
+                                        customTypographies={item.customTypographies || []}
+                                        dependencies={item.dependencies || []}
+                                        activeTab={activeTab}
+                                        setLibraryData={setLibraryData}
+                                        isLogedIn={isLogedIn}
+                                        data={data}
+                                        setIsVisible={setIsVisible}
+                                        isLibrary={isLibrary}
+                                        handleRemoveLibraryItem={handleRemoveLibraryItem}
+                                        setActiveCategory={setActiveCategory}
+                                    />
+                                ))}
+                            </div>
+                        )
+                    ) : (
+                        <h3>No template found</h3>
+                    )}
+                </>
             )}
-
         </div>
     );
 };

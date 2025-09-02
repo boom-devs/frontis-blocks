@@ -6,7 +6,6 @@ import { select, dispatch } from '@wordpress/data';
 import { createBlock } from '@wordpress/blocks';
 import { __ } from "@wordpress/i18n";
 import { Button, Modal } from "@wordpress/components";
-import { toast } from "react-toastify";
 import TemplateHeader from "./template-header";
 import TemplateSidebar from "./template-sidebar";
 import TemplateContent from "./template-content";
@@ -18,6 +17,7 @@ import sites from "./data/sites.json";
 import TemplateLibrary from "./data/templatelibrary.json";
 
 import { usePostDataMutation } from './services/api';
+import { TemplateContentLoader } from "./template-loader";
 
 const PatternLibraryButton = () => {
     const [showPatternButton, setShowPatternButton] = useState(true);
@@ -135,55 +135,65 @@ const PatternLibraryButton = () => {
 
     useEffect(() => {
         setIsLogedIn(true);
+
         const fetchData = async () => {
-            if (patterns) {
-                setData((prev) => ({
-                    ...prev,
-                    patterns: {
-                        ...prev.patterns,
-                        items: patterns.items || [],
-                        categories: patterns.categories || [],
-                    },
-                }));
-            }
+            setLoading(true);
+            try {
+                const patterns = await getTemplatesData("patterns");
+                const pages = await getTemplatesData("pages");
+                // const sites = await getTemplatesData("sites");
 
-            if (pages) {
-                setData((prev) => ({
-                    ...prev,
-                    pages: {
-                        ...prev.pages,
-                        items: pages.items || [],
-                        categories: pages.categories || [],
-                    },
-                }));
-            }
-
-            if (sites) {
-                setData((prev) => ({
-                    ...prev,
-                    sites: {
-                        ...prev.sites,
-                        items: sites.items || [],
-                        categories: sites.categories || [],
-                    },
-                }));
-            }
-
-            setData((prev) => ({
-                ...prev,
-                templatelibrary: {
-                    ...prev.templatelibrary,
-                    items: TemplateLibrary.items || [],
-                    categories: TemplateLibrary.categories || []
+                if (patterns) {
+                    setData((prev) => ({
+                        ...prev,
+                        patterns: {
+                            ...prev.patterns,
+                            items: patterns.items || [],
+                            categories: patterns.categories || [],
+                        },
+                    }));
                 }
-            }));
+
+                if (pages) {
+                    setData((prev) => ({
+                        ...prev,
+                        pages: {
+                            ...prev.pages,
+                            items: pages.items || [],
+                            categories: pages.categories || [],
+                        },
+                    }));
+                }
+
+                if (sites) {
+                    setData((prev) => ({
+                        ...prev,
+                        sites: {
+                            ...prev.sites,
+                            items: sites.items || [],
+                            categories: sites.categories || [],
+                        },
+                    }));
+                }
+
+                setData((prev) => ({
+                    ...prev,
+                    templatelibrary: {
+                        ...prev.templatelibrary,
+                        items: TemplateLibrary.items || [],
+                        categories: TemplateLibrary.categories || []
+                    }
+                }));
+            } catch (err) {
+                console.error("Error fetching templates:", err);
+            } finally {
+                setLoading(false);
+            }
         };
 
         fetchData();
-
-        setLoading(false)
-
     }, []);
+
     const TagTabsOptions = (() => {
         if (!data[activeTab]) return [];
         const currentItems = data[activeTab].items || [];
@@ -224,6 +234,7 @@ const PatternLibraryButton = () => {
                                     setActiveCategory={setActiveCategory}
                                     resetCat={resetCat}
                                     setResetCat={setResetCat}
+                                    setLoading={setLoading}
                                 />
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">
@@ -238,7 +249,9 @@ const PatternLibraryButton = () => {
                                     resetCat={resetCat}
                                     setResetCat={setResetCat}
                                     loading={loading}
+                                    setLoading={setLoading}
                                 />
+
                                 {activeTab !== 'templatelibrary' && (
                                     <TemplateContent
                                         activeTab={activeTab}
@@ -254,12 +267,17 @@ const PatternLibraryButton = () => {
                                         savedItems={savedItems}
                                         setSavedItems={setSavedItems}
                                         alreadySaved={alreadySaved}
+                                        loading={loading}
+                                        setLoading={setLoading}
+                                        setIsLogedIn={setIsLogedIn}
+                                        setActiveCategory={setActiveCategory}
                                     />
                                 )}
                                 {activeTab === 'templatelibrary' && (
                                     <LibraryContent
                                         activeTab={activeTab}
                                         activeCategory={activeCategory}
+                                        setActiveCategory={setActiveCategory}
                                         libraryData={libraryData}
                                         setLibraryData={setLibraryData}
                                         setIsVisible={setIsVisible}
@@ -272,8 +290,11 @@ const PatternLibraryButton = () => {
                                         setCardListType={setCardListType}
                                         savedItems={savedItems}
                                         setSavedItems={setSavedItems}
+                                        loading={loading}
+                                        setLoading={setLoading}
                                     />
                                 )}
+
                             </div>
                         </div>
                     </div>
