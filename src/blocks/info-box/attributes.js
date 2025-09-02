@@ -37,25 +37,9 @@ const attributes = {
     infoMediaID: {
         type: "number",
     },
-    mediaSize: {
-        type: 'object',
-        default: {
-            Desktop: '25',
-            Tablet: '20',
-            Mobile: '15'
-        }
-    },
-    mediaSizeDesktop: {
-        type: "number",
-        default: 20
-    },
-    mediaSizeSizeTablet: {
-        type: "number",
-        default: 20
-    },
-    mediaSizeSizeMobile: {
-        type: "number",
-        default: 20
+    infoMediaSize: {
+        type: 'string',
+        default: 'cover'
     },
     mediaSizeUnitsSave: {
         type: "string",
@@ -73,15 +57,15 @@ const attributes = {
         type: "string",
         default: ''
     },
-    mediaBgWidth: {
+    mediaSize: {
         type: 'object',
         default: {
-            Desktop: '76',
-            Tablet: '50',
-            Mobile: '40'
+            Desktop: '24',
+            Tablet: '',
+            Mobile: ''
         }
     },
-    mediaBgWidthUnits: {
+    mediaSizeUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -89,15 +73,15 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    mediaBgHeight: {
+    mediaHeight: {
         type: 'object',
         default: {
-            Desktop: '76',
-            Tablet: '50',
-            Mobile: '40'
+            Desktop: '24',
+            Tablet: '',
+            Mobile: ''
         }
     },
-    mediaBgHeightUnits: {
+    mediaHeightUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -1405,10 +1389,10 @@ const attributes = {
     mediaPaddingDesktop: {
         type: "object",
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '24',
+            bottom: '24',
+            left: '24',
+            right: '24',
         },
     },
     mediaPaddingTablet: {
