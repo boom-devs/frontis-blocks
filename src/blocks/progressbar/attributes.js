@@ -7,6 +7,14 @@ const attributes = {
         type: 'string',
         default: 'Desktop'
     },
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
     progressGlobalZIndex : {
         type: 'object',
 		default: {

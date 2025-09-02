@@ -15,6 +15,14 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
+	},
 	/** Image URL and ID and alt */
 	advancedImageUrl : {
 		type: 'string',
