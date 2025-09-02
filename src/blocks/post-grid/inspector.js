@@ -836,7 +836,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	} = attributes;
 
     const deviceType= useDeviceType();
-    console.log(paginationArrowNormalGradientColor);
     
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -962,37 +961,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }, [filterSelectedCat]);
     /** End category */
 
-    // /** Start tag */
-    // const tagOptions = allTaxonomies?.terms?.post_tag?.map(item => ({
-    //     value: item.id,
-    //     label: item.name
-    // })) || [];
-
-
-    // const filterTagOptions = [
-    //     { value: 0, label: 'All' },
-    //     ...tagOptions
-    // ];
-
-    // 1) ট্যাগ-সদৃশ কী খুঁজুন (post_tag / tag / tags), নাহলে non-hierarchical নিন
+    /** Start tag */
     let tagKey =
     termKeys.find(k => /(^|[-_])(post[-_]?tag|tags?)($|[-_])/i.test(k))
     ?? termKeys.find(k => allTaxonomies?.taxonomy?.[k]?.hierarchical === false)
     ?? null;
 
-    // 2) টার্ম লিস্ট -> অপশন (id/term_id/termId এবং name/label/slug সাপোর্ট)
+    // set tag options
     const rawTagTerms = (tagKey && termsObj?.[tagKey]) || [];
     const tagOptions = rawTagTerms.map(t => ({
     value: t.id ?? t.term_id ?? t.termId ?? t.slug ?? t.name,
     label: t.name ?? t.label ?? t.slug ?? String(t.id ?? t.term_id ?? t.termId ?? '')
     }));
 
-    // 3) category-এর মতোই 'All' যোগ করে ফাইনাল ফিল্টার অপশন বানানো
+    // set filter tag options
     const filterTagOptions = [
     { value: 0, label: 'All' },
     ...tagOptions
     ];
-    /** End: tagOptions */
+    /** End tag */
 
     const createOptionFromTag = (tagIds) => tagIds.map(tagId => ({
         value: tagId,
