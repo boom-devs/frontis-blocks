@@ -16,6 +16,14 @@ const attributes = {
         type: 'string',
         default: '',
     },
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
+	},
     slideContent: {
         type: 'array',
 		default: slideContent

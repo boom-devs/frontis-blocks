@@ -28,6 +28,14 @@ const attributes = {
 		type: "string",
 		default: "grid"
 	},
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
+	},
 
 	/** Start Core Query */
 	queryId: {
