@@ -49,41 +49,80 @@ export default function ToolBar() {
 
         const parsedCopyStyle = JSON.parse(copyStyle);
 
-        if(selectedBlock.name === parsedCopyStyle.name) {
-
+        if (selectedBlock.name === parsedCopyStyle.name) {
             let attributesToApply = { ...parsedCopyStyle.attributes };
-
-            const blockConfig = styleExclusions.find(block => block.name === selectedBlock.name);
-
+        
+            const blockConfig = styleExclusions.find(
+                block => block.name === selectedBlock.name
+            );
+        
             if (blockConfig) {
-                blockConfig.skipAttrs.forEach(attr => {
+                blockConfig.skipAttrs?.forEach(attr => {
                     delete attributesToApply[attr];
                 });
+        
+                // Nested skip (preserve values from selectedBlock)
+                if (blockConfig.skipNestedAttrs) {
+                    Object.keys(blockConfig.skipNestedAttrs).forEach(nestedAttr => {
+                        if (Array.isArray(attributesToApply[nestedAttr]) && Array.isArray(selectedBlock.attributes[nestedAttr])) {
+                            attributesToApply[nestedAttr] = attributesToApply[nestedAttr].map((item, index) => {
+                                let newItem = { ...item };
+        
+                                blockConfig.skipNestedAttrs[nestedAttr].forEach(skipKey => {
+                                    if (selectedBlock.attributes[nestedAttr][index]) {
+                                        newItem[skipKey] = selectedBlock.attributes[nestedAttr][index][skipKey];
+                                    }
+                                });
+        
+                                return newItem;
+                            });
+                        }
+                    });
+                }
             }
-
-            // Check boolean attributes: apply only if copied attr is true and selected block attr is also true
+        
+            const isBlockDisabled = (
+                selectedBlock.name !== "frontis-blocks/countdown" &&
+                selectedBlock.name !== "frontis-blocks/social-icons"
+            );
+        
             Object.keys(attributesToApply).forEach(attr => {
-                if (typeof attributesToApply[attr] === 'boolean' && attributesToApply[attr] === true) {
+                if (
+                    typeof attributesToApply[attr] === "boolean" &&
+                    attributesToApply[attr] === true &&
+                    isBlockDisabled
+                ) {
                     if (selectedBlock.attributes[attr] !== true) {
-                        delete attributesToApply[attr]; // Skip if selected block's attr is not true
+                        delete attributesToApply[attr];
                     }
                 }
             });
-
-            // Update the block with the appropriate attributes
-            wp.data.dispatch('core/block-editor').updateBlockAttributes(
+        
+            // Block attributes update
+            wp.data.dispatch("core/block-editor").updateBlockAttributes(
                 selectedBlock.clientId,
                 attributesToApply
             );
         } else {
-            // Your copied blocks is not same to your selected block set notifications using wp.data.dispatch
-            createNotice( 'success',
-                sprintf(__( 'Your copied blocks is not same to your selected block.', 'frontis-blocks' ), selectedBlock.title ), {
-                    type: 'snackbar',
-                    id: 'testing_id',
+            // আলাদা block হলে নোটিফিকেশন
+            createNotice(
+                "success",
+                sprintf(
+                    __(
+                        "Your copied blocks is not same to your selected block.",
+                        "frontis-blocks"
+                    ),
+                    selectedBlock.title
+                ),
+                {
+                    type: "snackbar",
+                    id: "testing_id",
                     isDismissible: true,
-                } );
+                }
+            );
         }
+        
+        
     }
 
 
