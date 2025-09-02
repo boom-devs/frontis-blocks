@@ -111,7 +111,7 @@ export default function save({ attributes }) {
 				data-block-id={blockId}
 				data-perpage={postPerPage}
 				data-category-key={categoryKey}
-				data-tag-key={tagKey}
+				data-tag-key={tagKey || undefined}
 				data-cat={selectedCat ? selectedCat.join(',') : ''}
 				data-decat={deSelectedCat ? deSelectedCat.join(',') : ''}
 				data-tag={selectedTag ? selectedTag.join(',') : ''}
