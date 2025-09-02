@@ -3539,7 +3539,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							normalGradientColor={ctaGlobalGradientColor}
 							setNormalGradientColor={(value) =>
-								setAttributes({ ctaGlobalGradientColor: value === undefined ? '' : value })
+								setAttributes({ ctaGlobalGradientColor: value === undefined ? null : value })
 							}
 							normalCustomGradientSwitcher={
 								ctaGlobalCustomGradientSwitcher
@@ -3607,7 +3607,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							hoverGradientColor={hoverGradientColor}
 							setHoverGradientColor={(value) =>
-								setAttributes({ hoverGradientColor: value === undefined ? '' : value })
+								setAttributes({ hoverGradientColor: value === undefined ? null : value })
 							}
 							hoverCustomGradientSwitcher={
 								hoverCustomGradientSwitcher

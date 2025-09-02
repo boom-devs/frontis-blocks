@@ -4176,7 +4176,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							normalGradientColor={teamMemberContentBgGradientColor}
 							setNormalGradientColor={(value) =>
-								setAttributes({ teamMemberContentBgGradientColor: value === undefined ? '' : value })
+								setAttributes({ teamMemberContentBgGradientColor: value === undefined ? null : value })
 							}
 							normalCustomGradientSwitcher={
 								teamMemberContentBgCustomGradientSwitcher
@@ -4244,7 +4244,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							hoverGradientColor={teamMemberContentBgHoverGradientColor}
 							setHoverGradientColor={(value) =>
-								setAttributes({ teamMemberContentBgHoverGradientColor: value === undefined ? '' : value })
+								setAttributes({ teamMemberContentBgHoverGradientColor: value === undefined ? null : value })
 							}
 							hoverCustomGradientSwitcher={
 								teamMemberContentBgHoverCustomGradientSwitcher
@@ -5449,7 +5449,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							normalGradientColor={teamMemberBgGradientColor}
 							setNormalGradientColor={(value) =>
-								setAttributes({ teamMemberBgGradientColor: value === undefined ? '' : value })
+								setAttributes({ teamMemberBgGradientColor: value === undefined ? null : value })
 							}
 							normalCustomGradientSwitcher={
 								teamMemberBgCustomGradientSwitcher
@@ -5517,7 +5517,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							hoverGradientColor={teamMemberBgHoverGradientColor}
 							setHoverGradientColor={(value) =>
-								setAttributes({ teamMemberBgHoverGradientColor: value === undefined ? '' : value })
+								setAttributes({ teamMemberBgHoverGradientColor: value === undefined ? null : value })
 							}
 							hoverCustomGradientSwitcher={
 								teamMemberBgHoverCustomGradientSwitcher
