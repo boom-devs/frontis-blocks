@@ -763,7 +763,33 @@ const FB_Block_Icons = {
 			  M15 19V20.5
 			  M9 3.5V6`,
 		})
-	),	   
+	),
+	tabs: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'tabIcon', 
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  strokeLinejoin: 'round',
+		  d: `M9 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V8C21 6.89543 20.1046 6 19 6V6
+			  M9 3V6H14
+			  M9 3H12C13.1046 3 14 3.89543 14 5V6
+			  M14 6H19
+			  M19 6V5C19 3.89543 18.1046 3 17 3H12
+			  M7 12H14
+			  M7 16H17`,
+		})
+	),  
 
 };
 
