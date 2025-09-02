@@ -40,6 +40,8 @@ export default function LayoutGrid({
     const tags = data.fb_post_tag_info;
     const excerpt = showExcerptSwitcher ? trimWords(data.fb_post_excerpt, postDescriptionExcerptLength || 10) : '';
 
+
+
     return (
         <>
 
@@ -49,7 +51,7 @@ export default function LayoutGrid({
                 <div className="fb_post_grid_image_wrapper">
                     <div className="fb_post_grid_image">
                         {thumbnailLinkSwitcher && (
-                            <a href={data.link}>
+                            <a onClick={(e) => e.preventDefault()}>
                                 <img src={src} alt={title || "Post image"} />
                             </a>
                         )}
@@ -65,7 +67,7 @@ export default function LayoutGrid({
                             {postAuthorAvatarSwitcher && (
                                 <div className="fb_post_grid_author_avatar">
                                     {authorLinkSwitcher && (
-                                        <a className="fb_post_grid_author_avatar_url" href={author.archive_url}>
+                                        <a className="fb_post_grid_author_avatar_url" onClick={(e) => e.preventDefault()}>
                                             <img src={author.avatar} alt={author.name} />
                                         </a>
                                     )}
@@ -100,7 +102,7 @@ export default function LayoutGrid({
                             {categories.map((category, index) => (
                                 <div className="fb_post_grid_category" key={index}>
                                     {categoryLinkSwitcher && (
-                                        <a className="fb_post_grid_category_url" href={category.url}>{category.name}</a>
+                                        <a className="fb_post_grid_category_url" onClick={(e) => e.preventDefault()}>{category.name}</a>
                                     )}
                                     {!categoryLinkSwitcher && (
                                         <span className="fb_post_grid_category_name">{category.name}</span>
@@ -115,7 +117,7 @@ export default function LayoutGrid({
                             {tags.map((tag, index) => (
                                 <div className="fb_post_grid_tag" key={index}>
                                     {tagLinkSwitcher && (
-                                        <a className="fb_post_grid_tag_url" href={tag.url}>{tag.name}</a>
+                                        <a className="fb_post_grid_tag_url" onClick={(e) => e.preventDefault()}>{tag.name}</a>
                                     )}
                                     {!tagLinkSwitcher && (
                                         <span className="fb_post_grid_tag_name">{tag.name}</span>
@@ -126,12 +128,12 @@ export default function LayoutGrid({
                     )}
 
                     <div className="fb_post_grid_content">
-                        <a href="#" className="fb_post_link">{React.createElement(postTitleTag || 'h3', { className: 'fb_post_title' }, title)}</a>
+                        <a onClick={(e) => e.preventDefault()} className="fb_post_link">{React.createElement(postTitleTag || 'h3', { className: 'fb_post_title' }, title)}</a>
                         {React.createElement(postDescriptionTag || 'p', { className: 'fb_post_desc' }, excerpt)}
                     </div>
 
                     {readMoreSwitcher && (
-                        <a href="#" className="fb_post_grid_read_more_button">
+                        <a onClick={(e) => e.preventDefault()} className="fb_post_grid_read_more_button">
 
                             {readMoreIconAlign !== 'icon-only' && (
                                 <span className="fb_post_grid_read_more_text">{readMoreText}</span>
@@ -167,7 +169,7 @@ export default function LayoutGrid({
                 <div className="fb_post_grid_image_wrapper">
                     <div className="fb_post_grid_image">
                         {thumbnailLinkSwitcher && (
-                            <a href={data.link}>
+                            <a onClick={(e) => e.preventDefault()}>
                                 <img src={src} alt={title || "Post image"} />
                             </a>
                         )}
@@ -180,7 +182,7 @@ export default function LayoutGrid({
                                 {categories.map((category, index) => (
                                     <div className="fb_post_grid_category" key={index}>
                                         {categoryLinkSwitcher && (
-                                            <a className="post_category" href={category.url}>{category.name}</a>
+                                            <a className="post_category" onClick={(e) => e.preventDefault()}>{category.name}</a>
                                         )}
                                         {!categoryLinkSwitcher && (
                                             <span className="fb_post_grid_category_name">{category.name}</span>
@@ -194,7 +196,7 @@ export default function LayoutGrid({
                                 {tags.map((tag, index) => (
                                     <div className="fb_post_grid_tag" key={index}>
                                         {tagLinkSwitcher && (
-                                            <a className="fb_post_grid_tag_url" href={tag.url}>{tag.name}</a>
+                                            <a className="fb_post_grid_tag_url" onClick={(e) => e.preventDefault()}>{tag.name}</a>
                                         )}
                                         {!tagLinkSwitcher && (
                                             <span className="fb_post_grid_tag_name">{tag.name}</span>
@@ -213,7 +215,7 @@ export default function LayoutGrid({
                             {postAuthorAvatarSwitcher && (
                                 <div className="fb_post_grid_author_avatar">
                                     {authorLinkSwitcher && (
-                                        <a className="fb_post_grid_author_avatar_url" href={author.archive_url}>
+                                        <a className="fb_post_grid_author_avatar_url" onClick={(e) => e.preventDefault()}>
                                             <img src={author.avatar} alt={author.name} />
                                         </a>
                                     )}
@@ -229,7 +231,7 @@ export default function LayoutGrid({
                                     )}
                                     <div className="fb_post_grid_author_name">
                                         {authorLinkSwitcher && (
-                                            <a className="fb_post_grid_author_name_url" href={author.archive_url}>{author.name}</a>
+                                            <a className="fb_post_grid_author_name_url" onClick={(e) => e.preventDefault()}>{author.name}</a>
                                         )}
                                         {!authorLinkSwitcher && (
                                             author.name
@@ -243,11 +245,11 @@ export default function LayoutGrid({
                         </div>
                     )}
                     <div className="fb_post_grid_content">
-                        <a href="#" className="fb_post_link">{React.createElement(postTitleTag || 'h3', { className: 'fb_post_title' }, title)}</a>
+                        <a onClick={(e) => e.preventDefault()} className="fb_post_link">{React.createElement(postTitleTag || 'h3', { className: 'fb_post_title' }, title)}</a>
                         {React.createElement(postDescriptionTag || 'p', { className: 'fb_post_desc' }, excerpt)}
                     </div>
                     {readMoreSwitcher && (
-                        <a href="#" className="fb_post_grid_read_more_button">
+                        <a onClick={(e) => e.preventDefault()} className="fb_post_grid_read_more_button">
 
                             {readMoreIconAlign !== 'icon-only' && (
                                 <span className="fb_post_grid_read_more_text">{readMoreText}</span>

@@ -26,6 +26,14 @@ const attributes = {
     buttonTargetUrl: {
         type: "boolean",
     },
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
     /** Start Button Text Style */
     buttonWidth: {
 		type: 'object',

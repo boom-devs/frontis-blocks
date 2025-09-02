@@ -1204,6 +1204,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${progressBorderColor ? `border-color: ${progressBorderColor};` : ''}
             ${progressBorderWidthDesktop.top ? `border-width: ${progressBorderWidthDesktopGet};` : ''}
             ${progressBorderRadiusDesktop.top ? `border-radius: ${progressBorderRadiusDesktopGet};` : ''}
+            box-sizing: border-box;
             transition: ${progressbarType === 'vertical' ? 'height' : 'width'} 1.5s ease-in-out;
         }
         .${blockID} .fb-progressbar-wrapper .fb-progressbar-item:hover .fb-progressbar-line-wrapper .fb-progressbar-line {

@@ -21,7 +21,15 @@ const attributes = {
     customItems: {
         type: "array",
         default: []
-    }
+    },
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
 };
 
 export default attributes;
