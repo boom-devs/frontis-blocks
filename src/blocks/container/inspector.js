@@ -1702,7 +1702,7 @@ const Inspector = (props) => {
 													globalCustomGradientInputValue={containerBgNormalCustomGradientInputValue}
 													setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgNormalCustomGradientInputValue: value })}
 													globalGradientColor={containerBgNormalGradientColor}
-													setGlobalGradientColor={(value) => setAttributes({ containerBgNormalGradientColor: value === undefined ? '' : value })}
+													setGlobalGradientColor={(value) => setAttributes({ containerBgNormalGradientColor: value === undefined ? null : value })}
 												/>
 											)}
 										</div>
@@ -1786,7 +1786,7 @@ const Inspector = (props) => {
 													globalCustomGradientInputValue={containerBgHoverCustomGradientInputValue}
 													setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgHoverCustomGradientInputValue: value })}
 													globalGradientColor={containerBgHoverGradientColor}
-													setGlobalGradientColor={(value) => setAttributes({ containerBgHoverGradientColor: value === undefined ? '' : value })}
+													setGlobalGradientColor={(value) => setAttributes({ containerBgHoverGradientColor: value === undefined ? null : value })}
 												/>
 											)}
 										</div>
@@ -1896,7 +1896,7 @@ const Inspector = (props) => {
 															globalCustomGradientInputValue={containerBgOverlayNormalCustomGradientInputValue}
 															setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgOverlayNormalCustomGradientInputValue: value })}
 															globalGradientColor={containerBgOverlayNormalGradientColor}
-															setGlobalGradientColor={(value) => setAttributes({ containerBgOverlayNormalGradientColor: value === undefined ? '' : value })}
+															setGlobalGradientColor={(value) => setAttributes({ containerBgOverlayNormalGradientColor: value === undefined ? null : value })}
 														/>
 													)}
 												</div>
@@ -1980,7 +1980,7 @@ const Inspector = (props) => {
 															globalCustomGradientInputValue={containerBgOverlayHoverCustomGradientInputValue}
 															setGlobalCustomGradientInputValue={(value) => setAttributes({ containerBgOverlayHoverCustomGradientInputValue: value })}
 															globalGradientColor={containerBgOverlayHoverGradientColor}
-															setGlobalGradientColor={(value) => setAttributes({ containerBgOverlayHoverGradientColor: value === undefined ? '' : value })}
+															setGlobalGradientColor={(value) => setAttributes({ containerBgOverlayHoverGradientColor: value === undefined ? null : value })}
 														/>
 													)}
 												</div>

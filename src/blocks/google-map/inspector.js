@@ -702,7 +702,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     normalClassicColor={googleMapNormalClassicColor}
                     setNormalClassicColor={(value) => setAttributes({ googleMapNormalClassicColor: value === undefined ? '' : value })}
                     normalGradientColor={googleMapNormalGradientColor}
-                    setNormalGradientColor={(value) => setAttributes({ googleMapNormalGradientColor: value === undefined ? '' : value })}
+                    setNormalGradientColor={(value) => setAttributes({ googleMapNormalGradientColor: value === undefined ? null : value })}
                     normalCustomGradientSwitcher={googleMapNormalCustomGradientSwitcher}
                     setNormalCustomGradientSwitcher={(value) => setAttributes({ googleMapNormalCustomGradientSwitcher: value })}
                     normalCustomGradientInputValue={googleMapNormalCustomGradientInputValue}
@@ -713,7 +713,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     hoverClassicColor={googleMapHoverClassicColor}
                     setHoverClassicColor={(value) => setAttributes({ googleMapHoverClassicColor: value === undefined ? '' : value })}
                     hoverGradientColor={googleMapHoverGradientColor} 
-                    setHoverGradientColor={(value) => setAttributes({ googleMapHoverGradientColor: value === undefined ? '' : value })}
+                    setHoverGradientColor={(value) => setAttributes({ googleMapHoverGradientColor: value === undefined ? null : value })}
                     hoverCustomGradientSwitcher={googleMapHoverCustomGradientSwitcher}
                     setHoverCustomGradientSwitcher={(value) => setAttributes({ googleMapHoverCustomGradientSwitcher: value })}
                     hoverCustomGradientInputValue={googleMapHoverCustomGradientInputValue}

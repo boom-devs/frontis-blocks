@@ -779,7 +779,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     globalCustomGradientInputValue={sliderGlobalBgNormalCustomGradientInputValue}
                                                     setGlobalCustomGradientInputValue={(value) => setAttributes({ sliderGlobalBgNormalCustomGradientInputValue: value })}
                                                     globalGradientColor={sliderGlobalBgNormalGradientColor}
-                                                    setGlobalGradientColor={(value) => setAttributes({ sliderGlobalBgNormalGradientColor: value === undefined ? '' : value })}
+                                                    setGlobalGradientColor={(value) => setAttributes({ sliderGlobalBgNormalGradientColor: value === undefined ? null : value })}
                                                 />
                                             )}
                                         </div>
@@ -863,7 +863,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     globalCustomGradientInputValue={sliderGlobalBgHoverCustomGradientInputValue}
                                                     setGlobalCustomGradientInputValue={(value) => setAttributes({ sliderGlobalBgHoverCustomGradientInputValue: value })}
                                                     globalGradientColor={sliderGlobalBgHoverGradientColor}
-                                                    setGlobalGradientColor={(value) => setAttributes({ sliderGlobalBgHoverGradientColor: value === undefined ? '' : value })}
+                                                    setGlobalGradientColor={(value) => setAttributes({ sliderGlobalBgHoverGradientColor: value === undefined ? null : value })}
                                                 />
                                             )}
                                         </div>
