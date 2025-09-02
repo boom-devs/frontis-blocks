@@ -42,6 +42,14 @@ const attributes = {
         type: 'boolean',
         default: false
     },
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
+	},
 
 	/** Start Navigation Typography */
     navigationGap: {
