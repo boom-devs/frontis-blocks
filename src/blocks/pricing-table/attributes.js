@@ -355,6 +355,10 @@ const attributes = {
 		type: 'boolean',
 		default: false
 	},
+	pricingHeaderSwitcher: {
+		type: 'boolean',
+		default: true
+	},
 	pricingSectionTopText: {
 		type: 'string',
 		default: 'Best Deal'
@@ -3389,6 +3393,30 @@ const attributes = {
 	pricingTablePreset: {
         type: 'string',
         default: 'preset-1',
+    },
+	pricingHeaderOrder : {
+        type: 'object',
+		default: {
+			Desktop: '1',
+			Tablet: '',
+			Mobile: '',
+		}
+    },
+	pricingFeatureOrder : {
+        type: 'object',
+		default: {
+			Desktop: '2',
+			Tablet: '',
+			Mobile: '',
+		}
+    },
+	pricingButtonOrder : {
+        type: 'object',
+		default: {
+			Desktop: '3',
+			Tablet: '',
+			Mobile: '',
+		}
     },
 }
 

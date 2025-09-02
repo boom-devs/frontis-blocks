@@ -133,6 +133,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		/** End Top Section */
 		/** Start Header */
 		pricingSectionTopSwitcher,
+		pricingHeaderSwitcher,
 		pricingSectionTopText,
 		pricingTitleTag,
 		pricingTitle,
@@ -687,26 +688,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         pricingTableVRTopOffsetUnits,
         pricingTableVRBottomOffset,
         pricingTableVRBottomOffsetUnits,
+
+		//Order Pricing Table
+		pricingHeaderOrder,
+		pricingFeatureOrder,
+		pricingButtonOrder,
     } = attributes;
 
 	console.log(attributes);
 
 	const deviceType= useDeviceType();
-
-		// let defaultImageUrl = [];
-		// if (typeof FrontisBlocksData !== 'undefined') {
-		// 	defaultImageUrl = [
-		// 		FrontisBlocksData.pluginUrl + 'assets/images/ctabg-one.png',
-		// 		FrontisBlocksData.pluginUrl + 'assets/images/ctabgtwo.png',
-		// 		FrontisBlocksData.pluginUrl + 'assets/images/ctabgthree.png',
-		// 	];
-		// }	
-		// // Set default value for buttonIconImageUrl
-		// useEffect(() => {
-		// 	if (!ctaGlobalBackgroundImageUrl && typeof FrontisBlocksData !== 'undefined') {
-		// 		setAttributes({ ctaGlobalBackgroundImageUrl: '' });
-		// 	}
-		// }, []);
 
 	useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -754,11 +745,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const changeCTAPreset = (selectedPreset) => {
         const presetConfigurations = {
 			"preset-1": {
+				priceIconPositionSwitcher: false,
 				pricingSectionTopSwitcher: false,
 				priceAfterTextSwitcher: true,
 				priceFeatureItemBorderBottom: true,
 				priceFeatureAfterTextSwitcher: true,
 				priceButtonSwitcher: true,
+				pricingHeaderBorder: 'none',
+				pricingHeaderBorderColor: '',
 				pricingIconAlign: 'none',
 				pricingIcon: 'bookmark',
 				pricingTopSectionNormalBackgroundType: 'classic',
@@ -886,14 +880,50 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: '30',
 					bottom: '30',
 					left: '30'
-				}
+				},
+				priceAfterTextFontSize: {
+					Desktop: '14',
+					Tablet: '',
+					Mobile: '',
+				},
+				priceAfterTextFontWeight: '',
+				pricingHeaderBorderDesktop: {
+					top: '0',
+					right: '0',
+					bottom: '1',
+					left: '0',
+				},
+				pricingHeaderDesktopPadding: {
+					top: '0',
+					right: '50',
+					bottom: '0',
+					left: '0',
+				},
+				pricingHeaderOrder: {
+					Desktop: '1',
+					Tablet: '',
+					Mobile: '',	
+				},
+				pricingFeatureOrder: {
+					Desktop: '2',
+					Tablet: '',
+					Mobile: '',	
+				},
+				pricingButtonOrder: {
+					Desktop: '3',
+					Tablet: '',
+					Mobile: '',	
+				},
 			},
 			"preset-2": {
+				priceIconPositionSwitcher: false,
 				pricingSectionTopSwitcher: false,
 				priceAfterTextSwitcher: false,
 				priceFeatureItemBorderBottom: true,
 				priceFeatureAfterTextSwitcher: false,
 				priceButtonSwitcher: true,
+				pricingHeaderBorder: 'solid',
+				pricingHeaderBorderColor: '#E1E3E8',
 				pricingIconAlign: 'none',
 				pricingIcon: 'bookmark',
 				pricingTopSectionNormalBackgroundType: 'classic',
@@ -964,7 +994,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					left: '0',
 				},
 				priceFeatureDesktopPadding: {
-					top: '0',
+					top: '42',
 					bottom: '32',
 					left: '0',
 					right: '0',
@@ -1022,15 +1052,51 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: '30',
 					bottom: '30',
 					left: '30'
-				}
+				},
+				priceAfterTextFontSize: {
+					Desktop: '14',
+					Tablet: '',
+					Mobile: '',
+				},
+				priceAfterTextFontWeight: '',
+				pricingHeaderBorderDesktop: {
+					top: '0',
+					right: '0',
+					bottom: '1',
+					left: '0',
+				},
+				pricingHeaderDesktopPadding: {
+					top: '0',
+					right: '50',
+					bottom: '0',
+					left: '0',
+				},
+				pricingHeaderOrder: {
+					Desktop: '1',
+					Tablet: '',
+					Mobile: '',	
+				},
+				pricingFeatureOrder: {
+					Desktop: '2',
+					Tablet: '',
+					Mobile: '',	
+				},
+				pricingButtonOrder: {
+					Desktop: '3',
+					Tablet: '',
+					Mobile: '',	
+				},
 			},
 			
 			"preset-3": {
+				priceIconPositionSwitcher: false,
 				pricingSectionTopSwitcher: true,
 				priceAfterTextSwitcher: false,
 				priceFeatureItemBorderBottom: true,
 				priceFeatureAfterTextSwitcher: false,
 				priceButtonSwitcher: true,
+				pricingHeaderBorder: 'solid',
+				pricingHeaderBorderColor: '#E1E3E8',
 				pricingIconAlign: 'none',
 				pricingIcon: 'bookmark',
 				pricingTopSectionNormalBackgroundType: 'gradient',
@@ -1105,7 +1171,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					left: '0',
 				},
 				priceFeatureDesktopPadding: {
-					top: '0',
+					top: '42',
 					bottom: '32',
 					left: '0',
 					right: '0',
@@ -1129,9 +1195,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					left: '10',
 				},
 				priceFeatureItemDesktopPadding: {
-					top: '12',
+					top: '6',
 					right: '0',
-					bottom: '12',
+					bottom: '6',
 					left: '0',
 				},
 				priceButtonDesktopBorderRadiusWidth: {
@@ -1163,7 +1229,775 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: '30',
 					bottom: '30',
 					left: '30'
-				}
+				},
+				priceAfterTextFontSize: {
+					Desktop: '14',
+					Tablet: '',
+					Mobile: '',
+				},
+				priceAfterTextFontWeight: '',
+				pricingHeaderBorderDesktop: {
+					top: '0',
+					right: '0',
+					bottom: '1',
+					left: '0',
+				},
+				pricingHeaderDesktopPadding: {
+					top: '0',
+					right: '50',
+					bottom: '0',
+					left: '0',
+				},
+				pricingHeaderOrder: {
+					Desktop: '1',
+					Tablet: '',
+					Mobile: '',	
+				},
+				pricingFeatureOrder: {
+					Desktop: '2',
+					Tablet: '',
+					Mobile: '',	
+				},
+				pricingButtonOrder: {
+					Desktop: '3',
+					Tablet: '',
+					Mobile: '',	
+				},
+			},
+			
+			"preset-4": {
+				priceIconPositionSwitcher: false,
+				pricingSectionTopSwitcher: false,
+				priceAfterTextSwitcher: true,
+				priceFeatureItemBorderBottom: true,
+				priceFeatureAfterTextSwitcher: true,
+				priceButtonSwitcher: true,
+				pricingHeaderBorder: 'none',
+				pricingIconAlign: 'none',
+				pricingIcon: 'bookmark',
+				pricingTopSectionNormalBackgroundType: 'classic',
+				pricingTopSectionNormalCustomGradientSwitcher: true,
+				priceAfterTextNormalBackgroundType: 'classic',
+				priceAfterTextNormalCustomGradientSwitcher: true,
+				priceButtonNormalBackgroundType: 'classic',
+				priceButtonNormalCustomGradientSwitcher: true,
+				priceGlobalNormalBackgroundType: 'gradient',
+				priceGlobalNormalCustomGradientSwitcher: true,
+				priceGlobalBorder: 'none',
+				pricingSectionTopText: 'Best Deal',
+				pricingTitle: 'Pro Plan',
+				pricingSubTitle: 'Everything you need to get start building your website.',
+				normalPrice: '49.00',
+				pricePeriod: 'Yearly',
+				priceAfterText: 'What Value Add For Your Business',
+				priceFeatureItems: [
+					{ id: 'item-1', Title: 'Customization options', FeatureIcon: 'circle-check' },
+					{ id: 'item-2', Title: 'Essential pattern library', FeatureIcon: 'circle-check' },
+					{ id: 'item-3', Title: 'Handcrafted theme styles', FeatureIcon: 'circle-check' },
+					{ id: 'item-4', Title: 'Unmatched performance', FeatureIcon: 'circle-check' },
+				],
+				priceFeatureItemBorder: 'none',
+				priceFeatureAfterText: 'Billed every year Popular amongst entrepeneurs $497 per year',
+				priceButtonText: 'Select Plan',
+				priceGlobalBorderColor: '',
+				pricingTopSectionNormalCustomGradientInputValue: 'linear-gradient(142deg, #FF38FC 0%, #8091FF 50%, #1868BE 100%)',
+				priceGlobalNormalCustomGradientInputValue: 'linear-gradient(180deg, #CC65FE 0%, #6D08E8 100%)',
+				pricingTopSectionNormalClassicColor: '#6302E6',
+				pricingTopSectionTextColor: '#fff',
+				priceGlobalNormalClassicColor: '#F7F7F7',
+				priceGlobalHoverClassicColor: '',
+				pricingTitleColor: '#ffffff',
+				pricingSubtitleColor: '#ffffff',
+				normalPricingColor: '#ffffff',
+				pricePeriodColor: '#ffffff',
+				priceAfterTextNormalClassicColor: 'rgba(255, 255, 255, 0.10)',
+				priceAfterTextBgColor: '#fff',
+				priceAfterTextColor: '#ffffff',
+				priceFeatureAfterTextColor: '#ffffff',
+				pricingfeatureTitleColor: '#ffffff',
+				priceFeatureIconColor: '#ffffff',
+				priceFeatureItemBorderColor: '#E1E3E8',
+				priceButtonColor: '#ffffff',
+				priceButtonNormalClassicColor: 'rgba(255, 255, 255, 0.10)',
+				priceButtonNormalCustomGradientInputValue: 'linear-gradient(142deg, #FF38FC 0%, #8091FF 100%)',
+				priceButtonHoverClassicColor: '',
+				priceGlobalPaddingDesktop: {
+					top: '32',
+					bottom: '32',
+					left: '32',
+					right: '32',
+				},
+				priceGlobalBorderDesktop: {
+					top: '0',
+					bottom: '0',
+					left: '0',
+					right: '0',
+				},
+				priceGlobalBorderRadiusDesktop: {
+					top: '24',
+					bottom: '24',
+					left: '24',
+					right: '24',
+				},
+				pricingTitleDesktopMargin: {
+					top: '0',
+					bottom: '10',
+					left: '0',
+					right: '0',
+				},
+				priceFeatureItemDesktopBorder: {
+					top: '0',
+					right: '0',
+					bottom: '1',
+					left: '0',
+				},
+				priceFeatureDesktopPadding: {
+					top: '0',
+					bottom: '32',
+					left: '0',
+					right: '0',
+				},
+				priceButtonDesktopMargin: {
+					top: '42',
+					right: '0',
+					bottom: '0',
+					left: '0',
+				},
+				priceButtonDesktopPadding: {
+					top: '20',
+					right: '20',
+					bottom: '20',
+					left: '20',
+				},
+				priceAfterTextPaddingDesktop: {
+					top: '5',
+					right: '10',
+					bottom: '5',
+					left: '10',
+				},
+				priceFeatureItemDesktopPadding: {
+					top: '6',
+					right: '0',
+					bottom: '6',
+					left: '0',
+				},
+				priceButtonDesktopBorderRadiusWidth: {
+					top: '999',
+					right: '999',
+					bottom: '999',
+					left: '999',
+				},
+				pricingTopSectionDesktopPadding: {
+					top: '5',
+					right: '5',
+					bottom: '5',
+					left: '5'
+				},
+				priceDesktopPadding: {
+					top: '32',
+					right: '0',
+					bottom: '34',
+					left: '0'
+				},
+				pricingTopSectionTextDesktopPadding: {
+					top: '20',
+					right: '0',
+					bottom: '20',
+					left: '0'
+				},
+				pricingTopSectionBorderRadiusDesktop: {
+					top: '30',
+					right: '30',
+					bottom: '30',
+					left: '30'
+				},
+				priceAfterTextFontSize: {
+					Desktop: '14',
+					Tablet: '',
+					Mobile: '',
+				},
+				priceAfterTextFontWeight: '',
+				pricingHeaderBorderDesktop: {
+					top: '0',
+					right: '0',
+					bottom: '1',
+					left: '0',
+				},
+				pricingHeaderDesktopPadding: {
+					top: '0',
+					right: '50',
+					bottom: '0',
+					left: '0',
+				},
+				pricingHeaderOrder: {
+					Desktop: '1',
+					Tablet: '',
+					Mobile: '',	
+				},
+				pricingFeatureOrder: {
+					Desktop: '2',
+					Tablet: '',
+					Mobile: '',	
+				},
+				pricingButtonOrder: {
+					Desktop: '3',
+					Tablet: '',
+					Mobile: '',	
+				},
+			},
+			"preset-5": {
+				priceIconPositionSwitcher: false,
+				pricingSectionTopSwitcher: false,
+				priceAfterTextSwitcher: true,
+				priceFeatureItemBorderBottom: true,
+				priceFeatureAfterTextSwitcher: true,
+				priceButtonSwitcher: true,
+				pricingHeaderBorder: 'none',
+				pricingIconAlign: 'none',
+				pricingIcon: 'bookmark',
+				pricingTopSectionNormalBackgroundType: 'gradient',
+				pricingTopSectionNormalCustomGradientSwitcher: true,
+				priceAfterTextNormalBackgroundType: 'classic',
+				priceAfterTextNormalCustomGradientSwitcher: true,
+				priceButtonNormalBackgroundType: 'classic',
+				priceButtonNormalCustomGradientSwitcher: true,
+				priceGlobalNormalBackgroundType: 'classic',
+				priceGlobalNormalCustomGradientSwitcher: true,
+				priceGlobalBorder: 'none',
+				pricingSectionTopText: 'Best Deal',
+				pricingTitle: 'Enterprise Plan',
+				pricingSubTitle: 'Everything you need to get start building your website.',
+				normalPrice: '499.00',
+				pricePeriod: 'Yearly',
+				priceAfterText: 'What Value Add For Your Business',
+				priceFeatureItems: [
+					{ id: 'item-1', Title: 'Customization options', FeatureIcon: 'circle-check' },
+					{ id: 'item-2', Title: 'Essential pattern library', FeatureIcon: 'circle-check' },
+					{ id: 'item-3', Title: 'Handcrafted theme styles', FeatureIcon: 'circle-check' },
+					{ id: 'item-4', Title: 'Unmatched performance', FeatureIcon: 'circle-check' },
+				],
+				priceFeatureItemBorder: 'none',
+				priceFeatureAfterText: 'Billed every year Popular amongst entrepeneurs $497 per year',
+				priceButtonText: 'Select Plan',
+				priceGlobalBorderColor: '',
+				pricingTopSectionNormalCustomGradientInputValue: 'linear-gradient(142deg, #FF38FC 0%, #8091FF 50%, #1868BE 100%)',
+				priceGlobalNormalCustomGradientInputValue: 'linear-gradient(180deg, #CC65FE 0%, #6D08E8 100%)',
+				pricingTopSectionNormalClassicColor: '#399CFF',
+				pricingTopSectionTextColor: '#fff',
+				priceGlobalNormalClassicColor: '#6302E6',
+				priceGlobalHoverClassicColor: '',
+				pricingTitleColor: '#ffffff',
+				pricingSubtitleColor: '#ffffff',
+				normalPricingColor: '#ffffff',
+				pricePeriodColor: '#ffffff',
+				priceAfterTextNormalClassicColor: 'rgba(255, 255, 255, 0.10)',
+				priceAfterTextBgColor: '#fff',
+				priceAfterTextColor: '#ffffff',
+				priceFeatureAfterTextColor: '#ffffff',
+				pricingfeatureTitleColor: '#ffffff',
+				priceFeatureIconColor: '#ffffff',
+				priceFeatureItemBorderColor: '#E1E3E8',
+				priceButtonColor: '#6302E6',
+				priceButtonNormalClassicColor: '#fff',
+				priceButtonNormalCustomGradientInputValue: 'linear-gradient(142deg, #FF38FC 0%, #8091FF 100%)',
+				priceButtonHoverClassicColor: '',
+				priceGlobalPaddingDesktop: {
+					top: '32',
+					bottom: '32',
+					left: '32',
+					right: '32',
+				},
+				priceGlobalBorderDesktop: {
+					top: '0',
+					bottom: '0',
+					left: '0',
+					right: '0',
+				},
+				priceGlobalBorderRadiusDesktop: {
+					top: '24',
+					bottom: '24',
+					left: '24',
+					right: '24',
+				},
+				pricingTitleDesktopMargin: {
+					top: '0',
+					bottom: '10',
+					left: '0',
+					right: '0',
+				},
+				priceFeatureItemDesktopBorder: {
+					top: '0',
+					right: '0',
+					bottom: '1',
+					left: '0',
+				},
+				priceFeatureDesktopPadding: {
+					top: '0',
+					bottom: '32',
+					left: '0',
+					right: '0',
+				},
+				priceButtonDesktopMargin: {
+					top: '42',
+					right: '0',
+					bottom: '0',
+					left: '0',
+				},
+				priceButtonDesktopPadding: {
+					top: '20',
+					right: '20',
+					bottom: '20',
+					left: '20',
+				},
+				priceAfterTextPaddingDesktop: {
+					top: '5',
+					right: '10',
+					bottom: '5',
+					left: '10',
+				},
+				priceFeatureItemDesktopPadding: {
+					top: '6',
+					right: '0',
+					bottom: '6',
+					left: '0',
+				},
+				priceButtonDesktopBorderRadiusWidth: {
+					top: '999',
+					right: '999',
+					bottom: '999',
+					left: '999',
+				},
+				pricingTopSectionDesktopPadding: {
+					top: '5',
+					right: '5',
+					bottom: '5',
+					left: '5'
+				},
+				priceDesktopPadding: {
+					top: '32',
+					right: '0',
+					bottom: '34',
+					left: '0'
+				},
+				pricingTopSectionTextDesktopPadding: {
+					top: '20',
+					right: '0',
+					bottom: '20',
+					left: '0'
+				},
+				pricingTopSectionBorderRadiusDesktop: {
+					top: '30',
+					right: '30',
+					bottom: '30',
+					left: '30'
+				},
+				priceAfterTextFontSize: {
+					Desktop: '14',
+					Tablet: '',
+					Mobile: '',
+				},
+				priceAfterTextFontWeight: '',
+				pricingHeaderBorderDesktop: {
+					top: '0',
+					right: '0',
+					bottom: '1',
+					left: '0',
+				},
+				pricingHeaderDesktopPadding: {
+					top: '0',
+					right: '50',
+					bottom: '0',
+					left: '0',
+				},
+				pricingHeaderOrder: {
+					Desktop: '1',
+					Tablet: '',
+					Mobile: '',	
+				},
+				pricingFeatureOrder: {
+					Desktop: '2',
+					Tablet: '',
+					Mobile: '',	
+				},
+				pricingButtonOrder: {
+					Desktop: '3',
+					Tablet: '',
+					Mobile: '',	
+				},
+			},
+			"preset-6": {
+				priceIconPositionSwitcher: true,
+				pricingSectionTopSwitcher: false,
+				priceAfterTextSwitcher: true,
+				priceFeatureItemBorderBottom: true,
+				priceFeatureAfterTextSwitcher: false,
+				priceButtonSwitcher: true,
+				pricingHeaderBorder: 'none',
+				pricingIconAlign: 'icon',
+				pricingIcon: 'bookmark',
+				pricingTopSectionNormalBackgroundType: 'gradient',
+				pricingTopSectionNormalCustomGradientSwitcher: true,
+				priceAfterTextNormalBackgroundType: '',
+				priceAfterTextNormalCustomGradientSwitcher: true,
+				priceButtonNormalBackgroundType: 'classic',
+				priceButtonNormalCustomGradientSwitcher: true,
+				priceGlobalNormalBackgroundType: 'classic',
+				priceGlobalNormalCustomGradientSwitcher: true,
+				priceGlobalBorder: 'solid',
+				pricingSectionTopText: 'Best Deal',
+				pricingTitle: 'Enterprise Plan',
+				pricingSubTitle: 'Everything you need to get start building your website.',
+				normalPrice: '49.00',
+				pricePeriod: 'Yearly',
+				priceAfterText: 'Basic features for up to 15 user',
+				priceFeatureItems: [
+					{ id: 'item-1', Title: 'Customization options', FeatureIcon: 'circle-check' },
+					{ id: 'item-2', Title: 'Essential pattern library', FeatureIcon: 'circle-check' },
+					{ id: 'item-3', Title: 'Handcrafted theme styles', FeatureIcon: 'circle-check' },
+					{ id: 'item-4', Title: 'Unmatched performance', FeatureIcon: 'circle-check' },
+				],
+				priceFeatureItemBorder: 'none',
+				priceFeatureAfterText: 'Billed every year Popular amongst entrepeneurs $497 per year',
+				priceButtonText: 'Select Plan',
+				priceGlobalBorderColor: '#E95B68',
+				pricingTopSectionNormalCustomGradientInputValue: 'linear-gradient(142deg, #FF38FC 0%, #8091FF 50%, #1868BE 100%)',
+				priceGlobalNormalCustomGradientInputValue: 'linear-gradient(180deg, #CC65FE 0%, #6D08E8 100%)',
+				pricingTopSectionNormalClassicColor: '#399CFF',
+				pricingTopSectionTextColor: '#fff',
+				priceGlobalNormalClassicColor: '#fff',
+				priceGlobalHoverClassicColor: '',
+				priceIconColor: '#E95B68',
+				pricingTitleColor: '#15171C',
+				pricingSubtitleColor: '#15171C',
+				normalPricingColor: '#15171C',
+				pricePeriodColor: '#555E72',
+				priceAfterTextNormalClassicColor: '',
+				priceAfterTextBgColor: '#fff',
+				priceAfterTextColor: '#15171C',
+				priceFeatureAfterTextColor: '#15171C',
+				pricingfeatureTitleColor: '#555E72',
+				priceFeatureIconColor: '#E95B68',
+				priceFeatureItemBorderColor: '#E1E3E8',
+				priceButtonColor: '#fff',
+				priceButtonNormalClassicColor: '#E95B68',
+				priceButtonNormalCustomGradientInputValue: 'linear-gradient(142deg, #FF38FC 0%, #8091FF 100%)',
+				priceButtonHoverClassicColor: '',
+				priceGlobalPaddingDesktop: {
+					top: '32',
+					bottom: '32',
+					left: '32',
+					right: '32',
+				},
+				priceGlobalBorderDesktop: {
+					top: '2',
+					bottom: '2',
+					left: '2',
+					right: '2',
+				},
+				priceGlobalBorderRadiusDesktop: {
+					top: '24',
+					bottom: '24',
+					left: '24',
+					right: '24',
+				},
+				pricingTitleDesktopMargin: {
+					top: '0',
+					bottom: '10',
+					left: '0',
+					right: '0',
+				},
+				priceFeatureItemDesktopBorder: {
+					top: '0',
+					right: '0',
+					bottom: '1',
+					left: '0',
+				},
+				priceFeatureDesktopPadding: {
+					top: '0',
+					bottom: '32',
+					left: '0',
+					right: '0',
+				},
+				priceButtonDesktopMargin: {
+					top: '0',
+					right: '0',
+					bottom: '0',
+					left: '0',
+				},
+				priceButtonDesktopPadding: {
+					top: '20',
+					right: '20',
+					bottom: '20',
+					left: '20',
+				},
+				priceAfterTextPaddingDesktop: {
+					top: '',
+					right: '',
+					bottom: '',
+					left: '',
+				},
+				priceFeatureItemDesktopPadding: {
+					top: '6',
+					right: '0',
+					bottom: '6',
+					left: '0',
+				},
+				priceButtonDesktopBorderRadiusWidth: {
+					top: '999',
+					right: '999',
+					bottom: '999',
+					left: '999',
+				},
+				pricingTopSectionDesktopPadding: {
+					top: '5',
+					right: '5',
+					bottom: '5',
+					left: '5'
+				},
+				priceDesktopPadding: {
+					top: '32',
+					right: '0',
+					bottom: '34',
+					left: '0'
+				},
+				pricingTopSectionTextDesktopPadding: {
+					top: '20',
+					right: '0',
+					bottom: '20',
+					left: '0'
+				},
+				pricingTopSectionBorderRadiusDesktop: {
+					top: '30',
+					right: '30',
+					bottom: '30',
+					left: '30'
+				},
+				priceIconPositionLeft: {
+					Desktop: '85',
+					Tablet: '',
+					Mobile: '',
+				},
+				priceAfterTextFontSize: {
+					Desktop: '14',
+					Tablet: '',
+					Mobile: '',
+				},
+				priceAfterTextFontWeight: '',
+				pricingHeaderBorderDesktop: {
+					top: '0',
+					right: '0',
+					bottom: '1',
+					left: '0',
+				},
+				pricingHeaderDesktopPadding: {
+					top: '0',
+					right: '50',
+					bottom: '0',
+					left: '0',
+				},
+				pricingHeaderOrder: {
+					Desktop: '1',
+					Tablet: '',
+					Mobile: '',	
+				},
+				pricingFeatureOrder: {
+					Desktop: '2',
+					Tablet: '',
+					Mobile: '',	
+				},
+				pricingButtonOrder: {
+					Desktop: '3',
+					Tablet: '',
+					Mobile: '',	
+				},
+			},
+
+			"preset-7": {
+				pricingHeaderSwitcher: true,
+				priceIconPositionSwitcher: true,
+				pricingSectionTopSwitcher: false,
+				priceAfterTextSwitcher: true,
+				priceFeatureItemBorderBottom: true,
+				priceFeatureAfterTextSwitcher: false,
+				priceButtonSwitcher: true,
+				pricingHeaderBorder: 'none',
+				pricingIconAlign: 'icon',
+				pricingIcon: 'bookmark',
+				pricingTopSectionNormalBackgroundType: 'gradient',
+				pricingTopSectionNormalCustomGradientSwitcher: true,
+				priceAfterTextNormalBackgroundType: '',
+				priceAfterTextNormalCustomGradientSwitcher: true,
+				priceButtonNormalBackgroundType: 'classic',
+				priceButtonNormalCustomGradientSwitcher: true,
+				priceGlobalNormalBackgroundType: 'classic',
+				priceGlobalNormalCustomGradientSwitcher: true,
+				priceGlobalBorder: 'solid',
+				pricingSectionTopText: 'Best Deal',
+				pricingTitle: 'Enterprise Plan',
+				pricingSubTitle: 'Everything you need to get start building your website.',
+				normalPrice: '49.00',
+				pricePeriod: 'Yearly',
+				priceAfterText: 'Basic features for up to 15 user',
+				priceFeatureItems: [
+					{ id: 'item-1', Title: 'Customization options', FeatureIcon: 'circle-check' },
+					{ id: 'item-2', Title: 'Essential pattern library', FeatureIcon: 'circle-check' },
+					{ id: 'item-3', Title: 'Handcrafted theme styles', FeatureIcon: 'circle-check' },
+					{ id: 'item-4', Title: 'Unmatched performance', FeatureIcon: 'circle-check' },
+				],
+				priceFeatureItemBorder: 'none',
+				priceFeatureAfterText: 'Billed every year Popular amongst entrepeneurs $497 per year',
+				priceButtonText: 'Select Plan',
+				priceGlobalBorderColor: '#E95B68',
+				pricingTopSectionNormalCustomGradientInputValue: 'linear-gradient(142deg, #FF38FC 0%, #8091FF 50%, #1868BE 100%)',
+				priceGlobalNormalCustomGradientInputValue: 'linear-gradient(180deg, #CC65FE 0%, #6D08E8 100%)',
+				pricingTopSectionNormalClassicColor: '#399CFF',
+				pricingTopSectionTextColor: '#fff',
+				priceGlobalNormalClassicColor: '#fff',
+				priceGlobalHoverClassicColor: '',
+				priceIconColor: '#E95B68',
+				pricingTitleColor: '#15171C',
+				pricingSubtitleColor: '#15171C',
+				normalPricingColor: '#15171C',
+				pricePeriodColor: '#555E72',
+				priceAfterTextNormalClassicColor: '',
+				priceAfterTextBgColor: '#fff',
+				priceAfterTextColor: '#15171C',
+				priceFeatureAfterTextColor: '#15171C',
+				pricingfeatureTitleColor: '#555E72',
+				priceFeatureIconColor: '#E95B68',
+				priceFeatureItemBorderColor: '#E1E3E8',
+				priceButtonColor: '#fff',
+				priceButtonNormalClassicColor: '#E95B68',
+				priceButtonNormalCustomGradientInputValue: 'linear-gradient(142deg, #FF38FC 0%, #8091FF 100%)',
+				priceButtonHoverClassicColor: '',
+				priceGlobalPaddingDesktop: {
+					top: '32',
+					bottom: '32',
+					left: '32',
+					right: '32',
+				},
+				priceGlobalBorderDesktop: {
+					top: '2',
+					bottom: '2',
+					left: '2',
+					right: '2',
+				},
+				priceGlobalBorderRadiusDesktop: {
+					top: '24',
+					bottom: '24',
+					left: '24',
+					right: '24',
+				},
+				pricingTitleDesktopMargin: {
+					top: '0',
+					bottom: '10',
+					left: '0',
+					right: '0',
+				},
+				priceFeatureItemDesktopBorder: {
+					top: '0',
+					right: '0',
+					bottom: '1',
+					left: '0',
+				},
+				priceFeatureDesktopPadding: {
+					top: '0',
+					bottom: '0',
+					left: '0',
+					right: '0',
+				},
+				priceButtonDesktopMargin: {
+					top: '0',
+					right: '0',
+					bottom: '26',
+					left: '0',
+				},
+				priceButtonDesktopPadding: {
+					top: '20',
+					right: '20',
+					bottom: '20',
+					left: '20',
+				},
+				priceAfterTextPaddingDesktop: {
+					top: '',
+					right: '',
+					bottom: '',
+					left: '',
+				},
+				priceFeatureItemDesktopPadding: {
+					top: '6',
+					right: '0',
+					bottom: '6',
+					left: '0',
+				},
+				priceButtonDesktopBorderRadiusWidth: {
+					top: '999',
+					right: '999',
+					bottom: '999',
+					left: '999',
+				},
+				pricingTopSectionDesktopPadding: {
+					top: '5',
+					right: '5',
+					bottom: '5',
+					left: '5'
+				},
+				priceDesktopPadding: {
+					top: '32',
+					right: '0',
+					bottom: '34',
+					left: '0'
+				},
+				pricingTopSectionTextDesktopPadding: {
+					top: '20',
+					right: '0',
+					bottom: '20',
+					left: '0'
+				},
+				pricingTopSectionBorderRadiusDesktop: {
+					top: '30',
+					right: '30',
+					bottom: '30',
+					left: '30'
+				},
+				priceIconPositionLeft: {
+					Desktop: '85',
+					Tablet: '',
+					Mobile: '',
+				},
+				priceAfterTextFontSize: {
+					Desktop: '14',
+					Tablet: '',
+					Mobile: '',
+				},
+				priceAfterTextFontWeight: '',
+				pricingHeaderBorderDesktop: {
+					top: '0',
+					right: '0',
+					bottom: '1',
+					left: '0',
+				},
+				pricingHeaderDesktopPadding: {
+					top: '0',
+					right: '50',
+					bottom: '0',
+					left: '0',
+				},
+				pricingHeaderOrder: {
+					Desktop: '1',
+					Tablet: '',
+					Mobile: '',	
+				},
+				pricingFeatureOrder: {
+					Desktop: '3',
+					Tablet: '',
+					Mobile: '',	
+				},
+				pricingButtonOrder: {
+					Desktop: '2',
+					Tablet: '',
+					Mobile: '',	
+				},
 			},
 			
 		}
@@ -3455,6 +4289,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		.${blockId} .fb-pricing-main-wrapper {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
 			${priceGlobalNormalBackgroundType === 'gradient' ? `  
                 background: ${priceGlobalNormalCustomGradientSwitcher && priceGlobalNormalCustomGradientInputValue ? priceGlobalNormalCustomGradientInputValue : priceGlobalNormalGradientColor};
             `: `
@@ -3480,6 +4317,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceGlobalBoxShadowHoverCssValue ? `box-shadow: ${priceGlobalBoxShadowHoverCssValue};` : ''}
 		}
 		.${blockId} .fb-pricing-header {
+			${pricingHeaderOrder.Desktop ? `order: ${pricingHeaderOrder.Desktop};` : ''}
 			${pricingHeaderBgColor ? `background-color: ${pricingHeaderBgColor};` : ''}
 			${headerDesktopPadding && pricingHeaderDesktopPadding.top? `padding: ${headerDesktopPadding};` : ''}
 			${pricingHeaderBorder ? `border: ${pricingHeaderBorder};` : ''}
@@ -3733,6 +4571,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${priceAfterTextBorderHoverColor ? `border-color: ${priceAfterTextBorderHoverColor};` : ''}
 		}
 
+		.${blockId} .fb-pricing-content {
+			${pricingFeatureOrder.Desktop ? `order: ${pricingFeatureOrder.Desktop};` : ''}
+		}
+
 		.${blockId} .fb-pricing-features-wrapper {
 			${priceFeatureDesktopPaddingWidth && priceFeatureDesktopPadding.top? `padding: ${priceFeatureDesktopPaddingWidth};` : ''}
 		}
@@ -3821,7 +4663,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		.${blockId} .fb-pricing-feature-text:hover {
 			${pricingfeatureTitleHoverColor ? `color: ${pricingfeatureTitleHoverColor};` : ''}
 		}
-
+		.${blockId} .fb-pricing-footer-wrapper {
+			width: 100%;
+			${pricingButtonOrder.Desktop ? `order: ${pricingButtonOrder.Desktop};` : ''}
+		}
 
 		.${blockId} .fb-pricing-button-wrapper {
 			justify-content: ${priceButtonAlignment === 'left' ? 'flex-start' : priceButtonAlignment === 'center' ? 'center' : priceButtonAlignment === 'right' ? 'flex-end' : 'center'};
@@ -3929,6 +4774,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			.${blockId} .fb-pricing-main-wrapper {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
 				${priceGlobalNormalBackgroundType === 'gradient' ? `  
 					background: ${priceGlobalNormalCustomGradientSwitcher && priceGlobalNormalCustomGradientInputValue ? priceGlobalNormalCustomGradientInputValue : priceGlobalNormalGradientColor};
 				`: `
@@ -4018,6 +4866,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			.${blockId} .fb-pricing-header {
+				${pricingHeaderOrder.Desktop ? `order: ${pricingHeaderOrder.Desktop};` : ''}
 				${headerTabletPadding && pricingHeaderTabletPadding.top ? `padding: ${headerTabletPadding};` : ''}
 				${headerTabletBorderWidth && pricingHeaderBorderTablet.top ? `border-width: ${headerTabletBorderWidth};` : ''}
 				${headerTabletBorderRadiusWidth && pricingHeaderBorderRadiusTablet.top? `border-radius: ${headerTabletBorderRadiusWidth};` : ''}
@@ -4042,6 +4891,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.${blockId} .fb-pricing-ribbon-icon svg {
 				width: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
 				height: ${priceIconSize.Tablet}${priceIconSizeUnits.Tablet};
+			}
+
+			.${blockId} .fb-pricing-content {
+				${pricingFeatureOrder.Desktop ? `order: ${pricingFeatureOrder.Desktop};` : ''}
+			}
+
+			.${blockId} .fb-pricing-footer-wrapper {
+				width: 100%;
+				${pricingButtonOrder.Desktop ? `order: ${pricingButtonOrder.Desktop};` : ''}
 			}
 
 			.${blockId} .fb-pricing-button {
@@ -4110,6 +4968,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			.${blockId} .fb-pricing-main-wrapper {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
 				${priceGlobalNormalBackgroundType === 'gradient' ? `  
 					background: ${priceGlobalNormalCustomGradientSwitcher && priceGlobalNormalCustomGradientInputValue ? priceGlobalNormalCustomGradientInputValue : priceGlobalNormalGradientColor};
 				`: `
@@ -4135,6 +4996,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${priceGlobalBoxShadowHoverCssValue ? `box-shadow: ${priceGlobalBoxShadowHoverCssValue};` : ''}
 			}
 			.${blockId} .fb-pricing-header {
+				${pricingHeaderOrder.Desktop ? `order: ${pricingHeaderOrder.Desktop};` : ''}
 				${headerMobilePadding && pricingHeaderMobilePadding.top? `padding: ${headerMobilePadding};` : ''}
 				${headerMobileBorderWidth && pricingHeaderBorderMobile.top ? `border-width: ${headerMobileBorderWidth};` : ''}
 				${headerMobileBorderRadiusWidth && pricingHeaderBorderRadiusMobile.top? `border-radius: ${headerMobileBorderRadiusWidth};` : ''}
@@ -4144,6 +5006,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				text-align: ${pricingAlignment === 'left' ? 'left' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'right' : 'center'};
 			}
 
+			.${blockId} .fb-pricing-content {
+				${pricingFeatureOrder.Desktop ? `order: ${pricingFeatureOrder.Desktop};` : ''}
+			}
+				
 			.${blockId} .fb-pricing-features-wrapper {
 				${priceFeatureMobilePaddingWidth && priceFeatureMobilePadding.top? `padding: ${priceFeatureMobilePaddingWidth};` : ''} 
 			}
@@ -4223,6 +5089,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.${blockId} .fb-pricing-ribbon-icon svg {
 				width: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
 				height: ${priceIconSize.Mobile}${priceIconSizeUnits.Mobile};
+			}
+
+			.${blockId} .fb-pricing-footer-wrapper {
+				width: 100%;
+				${pricingButtonOrder.Desktop ? `order: ${pricingButtonOrder.Desktop};` : ''}
 			}
 
 			.${blockId} .fb-pricing-button {
@@ -4914,6 +5785,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         pricingTableVRTopOffsetUnits,
         pricingTableVRBottomOffset,
         pricingTableVRBottomOffsetUnits,
+
+		//Order Pricing Table
+		pricingHeaderOrder,
+		pricingFeatureOrder,
+		pricingButtonOrder,
 	]);
 
 	const customCss = getCustomCss(pricingTableGlobalCustomCSS, `.${blockId}`);
@@ -4978,26 +5854,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FBIconPicker value={pricingIcon} setIconHandler={priceIconHandler} /> 
 						)}
 				</BaseControl>
-
-				<TextControl
-					label={__("Title", "frontis-blocks")}
-					value={pricingTitle}
-					onChange={(value) => setAttributes({ pricingTitle: value })}
-					placeholder={__('Startup', 'frontis-block')}
-				/>
+				
 				<ToggleControl
-					label={__("Show Sub Title", "frontis-blocks")}
-					checked={pricingSubTitleSwitcher}
-					onChange={(value) => setAttributes({pricingSubTitleSwitcher: value})}
+					label={__("Show Header Content", "frontis-blocks")}
+					checked={pricingHeaderSwitcher}	
+					onChange={(value) => setAttributes({pricingHeaderSwitcher: value})}
 				/>
-				{pricingSubTitleSwitcher && (
-					<TextareaControl
-						label={__("Sub Title", "frontis-blocks")}
-						value={pricingSubTitle}
-						onChange={(value) => setAttributes({ pricingSubTitle: value })}
-						placeholder={__('sub title', 'frontis-block')}
-					/>
+				{pricingHeaderSwitcher && (
+					<>
+						<TextControl
+							label={__("Title", "frontis-blocks")}
+							value={pricingTitle}
+							onChange={(value) => setAttributes({ pricingTitle: value })}
+							placeholder={__('Startup', 'frontis-block')}
+						/>
+						<ToggleControl
+							label={__("Show Sub Title", "frontis-blocks")}
+							checked={pricingSubTitleSwitcher}
+							onChange={(value) => setAttributes({pricingSubTitleSwitcher: value})}
+						/>
+						{pricingSubTitleSwitcher && (
+							<TextareaControl
+								label={__("Sub Title", "frontis-blocks")}
+								value={pricingSubTitle}
+								onChange={(value) => setAttributes({ pricingSubTitle: value })}
+								placeholder={__('sub title', 'frontis-block')}
+							/>
+						)}
+					</>
+
 				)}
+				
 			</PanelBody>
 			{/** End Header */}
 
@@ -5377,6 +6264,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				title={__("Header", "frontis-blocks")}
 				initialOpen={false}
 			>
+				<FB_Range
+					min={1}
+					max={3}
+					label={__("Header Order", "frontis-blocks")}
+					rangeValue={pricingHeaderOrder}
+					onChangeHandler={(value) => setAttributes({ pricingHeaderOrder: value === 0 ? undefined : value })}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+					isRangeUnit={false}
+
+				/>
 
 				<FB_SwitcherControl
 					label={__("Background Color", "frontis-blocks")}
@@ -6242,6 +7142,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					spacingCombineBtnHandler={handlePricePaddingCombineBtn}
 					setAttributes={setAttributes}
 				/>
+				
 			</PanelBody>
 
 			<PanelBody
@@ -6431,6 +7332,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				title={__("Feature", "frontis-blocks")}
 				initialOpen={false}
 			>
+				<FB_Range
+					min={1}
+					max={3}
+					label={__("Feature Order", "frontis-blocks")}
+					rangeValue={pricingFeatureOrder}
+					onChangeHandler={(value) => setAttributes({ pricingFeatureOrder: value === 0 ? undefined : value })}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+					isRangeUnit={false}
+
+				/>	
 
 				<FB_AlignmentControl
 					label={__("Alignment", "frontis-blocks")}
@@ -6774,7 +7688,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						rangeStep={1}
 						resetFallbackValue={""}
 					/>
+					<FB_Range
+						min={1}
+						max={3}
+						label={__("Button Order", "frontis-blocks")}
+						rangeValue={pricingButtonOrder}
+						onChangeHandler={(value) => setAttributes({ pricingButtonOrder: value === 0 ? undefined : value })}
+						deviceType={deviceType}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
+						isRangeUnit={false}
 
+					/>
 					<FB_TypographyControl
 						globalTypoControlActive={true}
 						globalTypoSwitcher={priceButtonGlobalTypoSwitcher}

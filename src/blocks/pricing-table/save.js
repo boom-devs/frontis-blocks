@@ -6,6 +6,7 @@ export default function save({ attributes }) {
         blockId,
 		/** Start Header */
 		pricingSectionTopSwitcher,
+        pricingHeaderSwitcher,
 		pricingSectionTopText,
 		pricingTitle,
 		pricingTitleTag,
@@ -85,20 +86,24 @@ export default function save({ attributes }) {
                                     <div className="fb-pricing-ribbon-icon">{renderSVG(pricingIcon)}</div>
                                 )}
                             </div>
-                            <div className="fb-pricing-title-wrapper">
-                                <RichText.Content
-                                    tagName={pricingTitleTag}
-                                    className="fb-pricing-title"
-                                    value={pricingTitle}
-                                />
-                                {pricingSubTitleSwitcher && (
+
+                            {pricingHeaderSwitcher && (
+                                <div className="fb-pricing-title-wrapper">
                                     <RichText.Content
-                                        tagName={pricingSubTitleTag}
-                                        className="fb-pricing-subtitle"
-                                        value={pricingSubTitle}
+                                        tagName={pricingTitleTag}
+                                        className="fb-pricing-title"
+                                        value={pricingTitle}
                                     />
-                                )}
-                            </div>
+                                    {pricingSubTitleSwitcher && (
+                                        <RichText.Content
+                                            tagName={pricingSubTitleTag}
+                                            className="fb-pricing-subtitle"
+                                            value={pricingSubTitle}
+                                        />
+                                    )}
+                                </div>
+                            )}
+                            
                             <div className="fb-pricing-price-wrapper">
                                 <div className="fb-pricing-price-inner-wrapper">
                                     <span className={`fb-pricing-normal-price ${salePriceSwitcher ? 'line-through' : ''}`}>
