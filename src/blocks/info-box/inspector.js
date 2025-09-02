@@ -213,6 +213,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infobtnTargetUrl,
 		icon,
 		btnIcon,
+		btnImageUrl,
+		btnImageAlt,
+		btnImageID,
 		width,
 		mediaSwitcher,
 		contentAlignment,
@@ -311,6 +314,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnIconSize,
 		btnIconSizeUnits,
 		buttonIconSwitcher,
+		buttonIconType,
 		btnIconColor,
 		btnIconHoverColor,
 		btnIconColorSwitcher,
@@ -2562,6 +2566,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		}
 
+		.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper img,
 		.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
 			${btnIconSize.Desktop ? `width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};` : ''}
 			${btnIconColor ? `fill: ${btnIconColor};` : "#ffffff"}
@@ -2569,21 +2574,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 
-		.fb-info-box-wrapper.${blockID}:hover .fb-btn-icon-wrapper svg {
+		.fb-info-box-wrapper.${blockID}:hover .fb-btn-icon-wrapper svg,
+		.fb-info-box-wrapper.${blockID}:hover .fb-btn-icon-wrapper img {
 			${btnIconHoverColor ? `fill: ${btnIconHoverColor};` : "#ffffff"}
 			transform: rotate(${buttonIconRotateHover.Desktop}deg);
 			transition: all .3s ease-in-out;
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
+			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg,
+			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper img {
 				${btnIconSize.Tablet ? `width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};` : ''}
 				transform: rotate(${buttonIconRotate.Tablet}deg);
 			}
 		}
 
 		@media only screen and (max-width: 767px) {
-			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
+			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg,
+			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper img {
 				${btnIconSize.Mobile ? `width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};` : ''}
 				transform: rotate(${buttonIconRotate.Mobile}deg);
 			}
@@ -3054,7 +3062,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					{info_Button_Switcher && (
 						<>
-
 							<FB_AlignmentControl
 								label={__("Alignment", "frontis-blocks")}
 								globalAlignment={buttonAlignment}
@@ -3077,12 +3084,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							/>
 							{buttonIconSwitcher && (
 								<>
-									<BaseControl>
-										<FBIconPicker
-											value={btnIcon}
-											setIconHandler={buttonIconHandler}
+									<FB_SwitcherControl
+										globalSwitcher={buttonIconType}
+										setGlobalSwitcher={(value) => setAttributes({ buttonIconType: value })}
+										options={[
+											{ label: __('Icon', 'frontis-blocks'), value: 'icon' },
+											{ label: __('Image', 'frontis-blocks'), value: 'image' },
+										]}
+									/>
+									{buttonIconType === 'icon' && (
+										<BaseControl>
+											<FBIconPicker
+												value={btnIcon}
+												setIconHandler={buttonIconHandler}
+											/>
+										</BaseControl>
+									)}
+									{buttonIconType === 'image' && (
+										<FB_ImageControl
+											globalImageUrl={btnImageUrl}
+											setglobalImageUrl={(value) => setAttributes({ btnImageUrl: value })}
+											globalImageAlt={btnImageAlt}
+											setglobalImageAlt={(value) => setAttributes({ btnImageAlt: value })}
+											globalImageID={btnImageID}
+											setglobalImageID={(value) => setAttributes({ btnImageID: value })}
+											isImageSize={false}
 										/>
-									</BaseControl>
+									)}
 									<SelectControl
 										label={__("Icon Position", "frontis-block")}
 										value={btnIconPosition}
@@ -3126,7 +3154,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				<FB_Range
 					min={0}
 					max={mediaSizeUnits === '%' ? 100 : 1000}
-					label={__("Background Width", "frontis-blocks")}
+					label={__("Width", "frontis-blocks")}
 					rangeValue={mediaSize}
 					onChangeHandler={(value) =>
 						setAttributes({ mediaSize: value })
@@ -3144,7 +3172,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				<FB_Range
 					min={0}
 					max={mediaHeightUnits === '%' ? 100 : 1000}
-					label={__("Background Height", "frontis-blocks")}
+					label={__("Height", "frontis-blocks")}
 					rangeValue={mediaHeight}
 					onChangeHandler={(value) =>
 						setAttributes({ mediaHeight: value })
@@ -3731,6 +3759,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					{/* Button Icon color */}
 					{buttonIconSwitcher && <>
+						<FB_Range
+							min={0}
+							max={btnIconSizeUnits === '%' ? 100 : 200}
+							label={__("Icon Size", "frontis-blocks")}
+							rangeValue={btnIconSize}
+							onChangeHandler={(value) =>
+								setAttributes({ btnIconSize: value })
+							}
+							rangeUnitHandler={(value) =>
+								setAttributes({ btnIconSizeUnits: value })
+							}
+							deviceType={deviceType}
+							units={btnIconSizeUnits}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={''}
+						/>
+
 						<FB_SwitcherControl
 							label={__("Icon Color", "frontis-blocks")}
 							globalSwitcher={btnIconColorSwitcher}

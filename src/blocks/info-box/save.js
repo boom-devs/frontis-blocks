@@ -20,11 +20,14 @@ export default function save({ attributes }) {
 		icon,
 		mediaSwitcher,
 
-		
 		Sub_Heading_Tag,
 		btnIconPosition,
 		buttonIconSwitcher,
 		btnIcon,
+		btnImageUrl,
+		btnImageAlt,
+		btnImageID,
+		buttonIconType,
 		infoIconPosition,
 		infobtnTargetUrl,
 		infoButtonLink,
@@ -93,7 +96,8 @@ export default function save({ attributes }) {
 										
 										{buttonIconSwitcher && (
 											<div className="fb-btn-icon-wrapper">
-												{renderSVG(btnIcon)}
+												{buttonIconType === 'icon' && renderSVG(btnIcon)}
+												{buttonIconType === 'image' && <img src={btnImageUrl} alt={btnImageAlt} />}
 											</div>
 										)}
 									</a>
