@@ -3064,7 +3064,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setGlobalSwitcher={(value) => setAttributes({ TestimonialAuthorColorSwitcher: value })}
                 />
 
-                {TestimonialDescColorSwitcher === 'normal' && (
+                {TestimonialAuthorColorSwitcher === 'normal' && (
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={TestimonialAuthorColor}
@@ -3072,7 +3072,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 )}
 
-                {TestimonialDescColorSwitcher === 'hover' && (
+                {TestimonialAuthorColorSwitcher === 'hover' && (
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={TestimonialAuthorHoverColor}
