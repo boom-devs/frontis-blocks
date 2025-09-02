@@ -12,6 +12,15 @@ const attributes = {
         default: 'Desktop'
     },
 
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
+
     accordionIconBorder: {
         type: 'string',
         default: 'none',

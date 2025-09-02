@@ -15,6 +15,14 @@ const attributes = {
         type: "boolean",
         default: true
     },
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
+	},
 
     /** Start Pagination Style */
     paginationAlignment: {

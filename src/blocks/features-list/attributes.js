@@ -11,6 +11,14 @@ const attributes = {
         type: 'string',
         default: ''
     },
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
     FeatureItems: {
         type: 'array',
         default: [
