@@ -3237,7 +3237,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				normalClassicColor={mediaClassicColor}
 				setNormalClassicColor={(value) => setAttributes({ mediaClassicColor: value === undefined ? '' : value })}
 				normalGradientColor={mediaGradientColor}
-				setNormalGradientColor={(value) => setAttributes({ mediaGradientColor: value === undefined ? '' : value })}
+				setNormalGradientColor={(value) => setAttributes({ mediaGradientColor: value === undefined ? null : value })}
 				normalCustomGradientSwitcher={mediaCustomGradientSwitcher}
 				setNormalCustomGradientSwitcher={(value) => setAttributes({ mediaCustomGradientSwitcher: value })}
 				normalCustomGradientInputValue={mediaCustomGradientInputValue}
@@ -3261,7 +3261,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				hoverClassicColor={mediaHoverClassicColor}
 				setHoverClassicColor={(value) => setAttributes({ mediaHoverClassicColor: value === undefined ? '' : value })}
 				hoverGradientColor={mediaHoverGradientColor}
-				setHoverGradientColor={(value) => setAttributes({ mediaHoverGradientColor: value === undefined ? '' : value })}
+				setHoverGradientColor={(value) => setAttributes({ mediaHoverGradientColor: value === undefined ? null : value })}
 				hoverCustomGradientSwitcher={mediaHoverCustomGradientSwitcher}
 				setHoverCustomGradientSwitcher={(value) => setAttributes({ mediaHoverCustomGradientSwitcher: value }) }
 				hoverCustomGradientInputValue={mediaHoverCustomGradientInputValue}
