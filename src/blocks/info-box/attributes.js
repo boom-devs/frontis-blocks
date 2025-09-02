@@ -181,6 +181,18 @@ const attributes = {
         type: 'string',
         default: 'arrow-up-right-from-square',
     },
+    btnImageUrl: {
+        type: 'string',
+        default: '',
+    },
+    btnImageAlt: {
+        type: 'string',
+        default: '',
+    },
+    btnImageID: {
+        type: 'number',
+        default: 0,
+    },
     boxBgColor: {
         type: 'string',
         default: '#fff'
@@ -732,6 +744,10 @@ const attributes = {
     buttonIconSwitcher: {
         type: "boolean",
         default: true,
+    },
+    buttonIconType: {
+        type: "string",
+        default: "icon",
     },
     infoButtonLink: {
         type: "string",
