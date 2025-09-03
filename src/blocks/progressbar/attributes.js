@@ -600,10 +600,10 @@ const attributes = {
     progressNumberMarginDesktop: {
         type: 'object', 
         default: {
-            top: '',
+            top: '0',
             bottom: '20',
-            left: '',
-            right: '',
+            left: '0',
+            right: '0',
         },
     },
     progressNumberMarginTablet: {

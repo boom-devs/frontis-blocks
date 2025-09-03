@@ -303,6 +303,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const changeCTAPreset = (selectedPreset) => {
         const presetConfigurations = {
             "preset-1": {
+                progressTextPosition: 'text-outSide',
+                progressNumberPosition: 'default',
+                progressNumber: 50,
+                progressTitleColor: '#000000',
+                progressNumberColor: '#000000',
+                progressBgColorType: 'classic',
+                progressBgCustomGradientSwitcher: false,
+                progressBgColor: '#EBF5FF',
+                progressColorType: 'classic',
+                progressCustomGradientSwitcher: false,
+                progressColor: '#399CFF',
+                progressBgZebraTrackSwitcher: false,
+                progressZebraTrackSwitcher: false,
+                progressBarHeight: {
+                    Desktop: '14',
+                    Tablet: '',
+                    Mobile: ''
+                },
                 progressTitleMarginDesktop: {
                     top: '0',
                     bottom: '20',
@@ -315,11 +333,236 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     left: '0',
                     right: '0',
                 },
+                progressBgZebraTrackWidth: {
+                    Desktop: '3',
+                    Tablet: '',
+                    Mobile: ''
+                },
+                progressZebraTrackWidth: {
+                    Desktop: '3',
+                    Tablet: '',
+                    Mobile: ''
+                },
+                progressBorderRadiusDesktop: {
+                    top: '',
+                    bottom: '',
+                    left: '',
+                    right: '',
+                },
+                progressBgBorderRadiusDesktop: {
+                    top: '',
+                    bottom: '',
+                    left: '',
+                    right: '',
+                },
+                progressTitleFontSize: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: ''
+                },
+                progressNumberFontSize: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: ''
+                },
+            },
+
+            "preset-2": {
+                progressTextPosition: 'text-outSide',
+                progressNumberPosition: 'default',
                 progressNumber: 50,
-                progressBarHeight: '14',
                 progressTitleColor: '#000000',
                 progressNumberColor: '#000000',
-            }
+                progressBgColorType: 'classic',
+                progressBgCustomGradientSwitcher: false,
+                progressBgColor: '#EBF5FF',
+                progressColorType: 'classic',
+                progressCustomGradientSwitcher: false,
+                progressColor: '#399CFF',
+                progressBgZebraTrackSwitcher: true,
+                progressZebraTrackSwitcher: false,
+                progressBarHeight: {
+                    Desktop: '14',
+                    Tablet: '',
+                    Mobile: ''
+                },
+                progressTitleMarginDesktop: {
+                    top: '0',
+                    bottom: '20',
+                    left: '0',
+                    right: '0',
+                },
+                progressNumberMarginDesktop: {
+                    top: '0',
+                    bottom: '20',
+                    left: '0',
+                    right: '0',
+                },
+                progressBgZebraTrackWidth: {
+                    Desktop: '3',
+                    Tablet: '',
+                    Mobile: ''
+                },
+                progressZebraTrackWidth: {
+                    Desktop: '3',
+                    Tablet: '',
+                    Mobile: ''
+                },
+                progressBorderRadiusDesktop: {
+                    top: '999',
+                    bottom: '999',
+                    left: '999',
+                    right: '999',
+                },
+                progressBgBorderRadiusDesktop: {
+                    top: '999',
+                    bottom: '999',
+                    left: '999',
+                    right: '999',
+                },
+                progressTitleFontSize: {
+                    Desktop: '16',
+                    Tablet: '16',
+                    Mobile: '16'
+                },
+                progressNumberFontSize: {
+                    Desktop: '16',
+                    Tablet: '16',
+                    Mobile: '16'
+                },
+            },
+
+            "preset-3": {
+                progressTextPosition: 'text-outSide',
+                progressNumberPosition: 'default',
+                progressNumber: 50,
+                progressTitleColor: '#000000',
+                progressNumberColor: '#000000',
+                progressBgColorType: 'classic',
+                progressBgCustomGradientSwitcher: false,
+                progressBgColor: 'transparent',
+                progressColorType: 'classic',
+                progressCustomGradientSwitcher: false,
+                progressColor: '#F9AF58',
+                progressBgZebraTrackSwitcher: false,
+                progressZebraTrackSwitcher: true,
+                progressBarHeight: {
+                    Desktop: '14',
+                    Tablet: '',
+                    Mobile: ''
+                },
+                progressTitleMarginDesktop: {
+                    top: '0',
+                    bottom: '20',
+                    left: '0',
+                    right: '0',
+                },
+                progressNumberMarginDesktop: {
+                    top: '0',
+                    bottom: '20',
+                    left: '0',
+                    right: '0',
+                },
+                progressBgZebraTrackWidth: {
+                    Desktop: '2',
+                    Tablet: '',
+                    Mobile: ''
+                },
+                progressZebraTrackWidth: {
+                    Desktop: '2',
+                    Tablet: '',
+                    Mobile: ''
+                },
+                progressBorderRadiusDesktop: {
+                    top: '999',
+                    bottom: '999',
+                    left: '999',
+                    right: '999',
+                },
+                progressBgBorderRadiusDesktop: {
+                    top: '999',
+                    bottom: '999',
+                    left: '999',
+                    right: '999',
+                },
+                progressTitleFontSize: {
+                    Desktop: '16',
+                    Tablet: '16',
+                    Mobile: '16'
+                },
+                progressNumberFontSize: {
+                    Desktop: '16',
+                    Tablet: '16',
+                    Mobile: '16'
+                },
+            },
+
+            "preset-4": {
+                progressTextPosition: 'text-inSide',
+                progressNumberPosition: 'default',
+                progressNumber: 50,
+                progressTitleColor: '#fff',
+                progressNumberColor: '#000000',
+                progressBgColorType: 'classic',
+                progressBgCustomGradientSwitcher: false,
+                progressBgColor: '#FFF',
+                progressColorType: 'classic',
+                progressCustomGradientSwitcher: false,
+                progressColor: '#70BF73',
+                progressBgZebraTrackSwitcher: false,
+                progressZebraTrackSwitcher: false,
+                progressBarHeight: {
+                    Desktop: '40',
+                    Tablet: '',
+                    Mobile: ''
+                },
+                progressTitleMarginDesktop: {
+                    top: '0',
+                    bottom: '0',
+                    left: '20',
+                    right: '0',
+                },
+                progressNumberMarginDesktop: {
+                    top: '0',
+                    bottom: '0',
+                    left: '0',
+                    right: '20',
+                },
+                progressBgZebraTrackWidth: {
+                    Desktop: '2',
+                    Tablet: '',
+                    Mobile: ''
+                },
+                progressZebraTrackWidth: {
+                    Desktop: '2',
+                    Tablet: '',
+                    Mobile: ''
+                },
+                progressBorderRadiusDesktop: {
+                    top: '999',
+                    bottom: '0',
+                    left: '999',
+                    right: '0',
+                },
+                progressBgBorderRadiusDesktop: {
+                    top: '999',
+                    bottom: '999',
+                    left: '999',
+                    right: '999',
+                },
+                progressTitleFontSize: {
+                    Desktop: '16',
+                    Tablet: '16',
+                    Mobile: '16'
+                },
+                progressNumberFontSize: {
+                    Desktop: '16',
+                    Tablet: '16',
+                    Mobile: '16'
+                },
+            },
+
+            
         }
         const selectedPresetConfig = presetConfigurations[selectedPreset];
 
@@ -1654,7 +1897,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 options={PROGRESS_NUMBER_POSITION}
                 onChange={(value) => setAttributes({ progressNumberPosition: value })}
             />
-
 
             <div className="progress-general-wrapper">
                 <div className="progress-percentage">
