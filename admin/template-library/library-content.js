@@ -14,7 +14,7 @@ import TemplateList from "./template-list";
 import { TemplateContentLoader } from "./template-loader";
 
 
-const LibraryContent = ({ activeTab, activeCategory,setActiveCategory ,data, libraryData, setLibraryData, setIsVisible, isLogedIn, cardListType, setCardListType, savedItems, setSavedItems, loading, setLoading }) => {
+const LibraryContent = ({ activeTab, activeCategory, setActiveCategory, data, libraryData, setLibraryData, setIsVisible, isLogedIn, cardListType, setCardListType, savedItems, setSavedItems, loading, setLoading }) => {
 
     const FavoriteTabsOptions = [
         { name: 'All', value: 'all' },
@@ -105,7 +105,7 @@ const LibraryContent = ({ activeTab, activeCategory,setActiveCategory ,data, lib
         setTimeout(() => {
             setLoading(false)
         }, 2000)
-        
+
         setDisplayedData(filteredData);
     }, [activeFavoriteTab, originalLibraryData, searchItems, activeCategory.templatelibrary]);
 
@@ -248,6 +248,8 @@ const LibraryContent = ({ activeTab, activeCategory,setActiveCategory ,data, lib
                                             type={item.type}
                                             setLibraryData={setLibraryData}
                                             data={data}
+                                            customColors={item.custom_colors || []}
+                                            customGradientColors={item.custom_gradientColors || []}
                                             isLibrary={isLibrary}
                                             handleRemoveLibraryItem={handleRemoveLibraryItem}
                                             setIsVisible={setIsVisible}
@@ -270,7 +272,9 @@ const LibraryContent = ({ activeTab, activeCategory,setActiveCategory ,data, lib
                                         templateType={item.type}
                                         categories={item.categories || []}
                                         colors={item.colors || []}
+                                        customColors={item.customColors || []}
                                         gradientColors={item.gradientColors || []}
+                                        customGradientColors={item.customGradientColors || []}
                                         typographies={item.typographies || []}
                                         customTypographies={item.customTypographies || []}
                                         dependencies={item.dependencies || []}

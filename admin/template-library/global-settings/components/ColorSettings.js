@@ -15,23 +15,28 @@ import { updateGlobalStyle } from "../fetch";
 const ColorSettings = ({
 	globalColors,
 	setGlobalColors,
+	customColors,
+	setCustomColors,
 	gradientColors,
 	setGradientColors,
+	customGradientColors,
+	setCustomGradientColors,
 	deviceType,
 	isAfterSave,
 	isLoading,
 	setIsLoading,
 }) => {
 
+	console.log("customGrediantColor" ,customGradientColors);
 
 	// Memoized theme colors
 	const themeColors = useMemo(
 		() => frontisBlocksAdmin?.theme_colors || defaultColors,
 		[],
 	);
-	
+
 	const mobilePopoverProps = { placement: 'bottom-start', offset: 8 };
-	const isMobileViewport = useViewportMatch( 'small', '<' );
+	const isMobileViewport = useViewportMatch('small', '<');
 	const popoverProps = isMobileViewport ? mobilePopoverProps : undefined;
 
 
@@ -107,39 +112,65 @@ const ColorSettings = ({
 	return (
 		<>
 			<div className="fb-color-options-vertical">
-									{/* Solid Colors Section */}
-								<div className="fb-color-section-wrapper">
-									{(globalColors.length !== 0 || themeColors.length !== 0) && (
-									<div className="fb-color-section">
-										<PaletteEdit
-											canOnlyChangeValues
-											colors={ globalColors || themeColors }
-											onChange={ setGlobalColors }
-											paletteLabel={ __( 'Solid' ) }
-											paletteLabelHeadingLevel={ 3 }
-											popoverProps={ popoverProps }
-											classnames="fb-solid-color-panel"
-										/>
-									</div>
-									)}
-								</div>
+				{/* Solid Colors Section */}
+				<div className="fb-color-section-wrapper">
+					{(globalColors.length !== 0 || themeColors.length !== 0) && (
+						<div className="fb-color-section">
+							<PaletteEdit
+								canOnlyChangeValues
+								colors={globalColors || themeColors}
+								onChange={setGlobalColors}
+								paletteLabel={__('Color')}
+								paletteLabelHeadingLevel={3}
+								popoverProps={popoverProps}
+								classnames="fb-solid-color-panel"
+							/>
+						</div>
+					)}
+					{(customColors.length !== 0 || themeColors.length !== 0) && (
+						<div className="fb-color-section">
+							<PaletteEdit
+								canOnlyChangeValues
+								colors={customColors || themeColors}
+								onChange={setCustomColors}
+								paletteLabel={__('Custom Colors')}
+								paletteLabelHeadingLevel={3}
+								popoverProps={popoverProps}
+								classnames="fb-solid-color-panel"
+							/>
+						</div>
+					)}
+				</div>
 
-								{/* Gradient Section */}
-								<div className="fb-color-section-wrapper">
-									{(gradientColors.length !== 0) && (
-										<div className="fb-color-section">
-											<PaletteEdit
-												canOnlyChangeValues
-												gradients={ gradientColors }
-												onChange={ setGradientColors }
-												paletteLabel={ __( 'Gradient' ) }
-												classnames="fb-gradient-color-panel"
-												paletteLabelHeadingLevel={ 3 }
-												popoverProps={ popoverProps }
-											/>
-										</div>
-									)}
-								</div>
+				{/* Gradient Section */}
+				<div className="fb-color-section-wrapper">
+					{(gradientColors.length !== 0) && (
+						<div className="fb-color-section">
+							<PaletteEdit
+								canOnlyChangeValues
+								gradients={gradientColors}
+								onChange={setGradientColors}
+								paletteLabel={__('Gradient')}
+								classnames="fb-gradient-color-panel"
+								paletteLabelHeadingLevel={3}
+								popoverProps={popoverProps}
+							/>
+						</div>
+					)}
+					{(customGradientColors.length !== 0) && (
+						<div className="fb-color-section">
+							<PaletteEdit
+								canOnlyChangeValues
+								gradients={customGradientColors}
+								onChange={setCustomGradientColors}
+								paletteLabel={__('Custom Gradient')}
+								classnames="fb-gradient-color-panel"
+								paletteLabelHeadingLevel={3}
+								popoverProps={popoverProps}
+							/>
+						</div>
+					)}
+				</div>
 			</div>
 		</>
 	)

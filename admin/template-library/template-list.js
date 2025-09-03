@@ -13,6 +13,7 @@ import LoginSignupModal from "./login-signup";
 import PluginUpgradeModal from "./plugin-upgrade";
 
 const TemplateList = ({ item, libraryData, setLibraryData, data, setIsVisible, handleRemoveLibraryItem, setActiveCategory }) => {
+    console.log(item)
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
