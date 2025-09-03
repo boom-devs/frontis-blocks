@@ -24,6 +24,8 @@ const TemplateGrid = ({
     colors,
     templateType,
     gradientColors,
+    customColors,
+    customGradientColors,
     typographies,
     customTypographies,
     categories,
@@ -38,7 +40,7 @@ const TemplateGrid = ({
     setSavedItems = [],
     alreadySaved = () => { },
     setActiveCategory
-    
+
     // setIsPladmin
 }) => {
 
@@ -93,7 +95,9 @@ const TemplateGrid = ({
         author: 'Template Author',
         activeTab,
         colors,
+        customColors,
         gradientColors,
+        customGradientColors,
         typographies,
         customTypographies,
         dependencies,
@@ -107,7 +111,7 @@ const TemplateGrid = ({
         setLibraryData(prevData => [...prevData, templateData]);
         setSavedItems(prev => [...prev, templateData]);
 
-        toast.success(__( `Template saved to library`, 'frontis-blocks'), {
+        toast.success(__(`Template saved to library`, 'frontis-blocks'), {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -368,7 +372,7 @@ const TemplateGrid = ({
                     onClose={handleCloseModal}
                     data={data}
                     setActiveCategory={setActiveCategory}
-                    
+
                 />
             )}
 

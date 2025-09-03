@@ -6,8 +6,9 @@ import { ClipLoader } from "react-spinners";
 import TemplateHeader from "./template-header";
 import FullSiteImport from "./full-site-import";
 import { category } from "@wordpress/icons";
+import { ToastContainer } from "react-toastify";
 
-const TemplateImport = ({ template, onClose, data , setActiveCategory }) => {
+const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
     const [isImporting, setIsImporting] = useState(false);
     const [activeTab, setActiveTab] = useState('patterns');
     const [showFullSiteImport, setShowFullSiteImport] = useState(false);
@@ -35,19 +36,34 @@ const TemplateImport = ({ template, onClose, data , setActiveCategory }) => {
 
     // Map category IDs to names
     const categoryNames = template.categories?.map(category => {
-            return category;
-        })
+        return category;
+    })
         .filter(name => name)
         .join(', ');
 
     if (showFullSiteImport) {
         return (
-            <FullSiteImport
-            data={data}
-                template={template}
-                onClose={handleFullSiteImportClose}
-                onBack={() => setShowFullSiteImport(false)}
-            />
+            <>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
+
+                <FullSiteImport
+                    data={data}
+                    template={template}
+                    onClose={handleFullSiteImportClose}
+                    onBack={() => setShowFullSiteImport(false)}
+                />
+            </>
         );
     }
 

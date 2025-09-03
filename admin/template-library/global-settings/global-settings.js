@@ -18,15 +18,18 @@ import ColorSettings from "./components/ColorSettings";
 import { defaultColors, defaultTypography } from "./constants/constants";
 
 
-function FsiGbTypography({template}) {
+function FsiGbTypography({ template }) {
 	const deviceType = useDeviceType();
 	const isAfterSave = useAfterSave();
 
-	console.log(template.gradientColors);
+	console.log('template:', template)
+	// console.log(template.gradientColors);
 
 	// State management
 	const [globalColors, setGlobalColors] = useState(template.colors);
+	const [customColors, setCustomColors] = useState(template.customColors);
 	const [gradientColors, setGradientColors] = useState(template.gradientColors);
+	const [customGradientColors, setCustomGradientColors] = useState(template.customGradientColors);
 	const [typography, setTypography] = useState(template.typographies);
 	const [customTypography, setCustomTypography] = useState(template.customTypographies);
 	const [fontFamilies, setFontFamilies] = useState({});
@@ -107,31 +110,35 @@ function FsiGbTypography({template}) {
 	// 	handleUpdateState();
 	// }, [handleUpdateState]);
 
-	console.log('gradient_2', gradientColors);
+	// console.log('gradient_2', gradientColors);
 
 	return (
 		<>
 			<div className="fb_template_library_sidebar">
-					<div className="fb-panel-control">
-						<NavigatorProvider initialPath="/">
-								<ColorSettings
-									globalColors={globalColors}
-									setGlobalColors={setGlobalColors}
-									gradientColors={gradientColors}
-									setGradientColors={setGradientColors}
-									deviceType={deviceType}
-									isAfterSave={isAfterSave}
-									isLoading={isLoading}
-									setIsLoading={setIsLoading}
-								/>
+				<div className="fb-panel-control">
+					<NavigatorProvider initialPath="/">
+						<ColorSettings
+							globalColors={globalColors}
+							setGlobalColors={setGlobalColors}
+							customColors={customColors}
+							setCustomColors={setCustomColors}
+							gradientColors={gradientColors}
+							setGradientColors={setGradientColors}
+							customGradientColors={customGradientColors}
+							setCustomGradientColors={setCustomGradientColors}
+							deviceType={deviceType}
+							isAfterSave={isAfterSave}
+							isLoading={isLoading}
+							setIsLoading={setIsLoading}
+						/>
 
-								<TypographySettings
-									typography={typography}
-									customTypography={customTypography}
-									isAfterSave={isAfterSave}
-								/>
-						</NavigatorProvider>
-					</div>
+						<TypographySettings
+							typography={typography}
+							customTypography={customTypography}
+							isAfterSave={isAfterSave}
+						/>
+					</NavigatorProvider>
+				</div>
 			</div>
 		</>
 	);

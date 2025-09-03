@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "@wordpress/element";
 import { useForm } from "react-hook-form";
 import { ClipLoader } from "react-spinners";
 
-const LoginSignupModal = ({ onLoginSuccess }) => {
+const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 	const [activeTab, setActiveTab] = useState("login");
 	const [isLoading, setIsLoading] = useState(false);
 	const [agreedToTerms, setAgreedToTerms] = useState(false);
@@ -17,7 +17,8 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 		formState: { errors },
 		setError,
 		watch,
-	} = useForm({
+		clearErrors,
+		} = useForm({
 		defaultValues: {
 			email: "",
 			password: "",
@@ -49,11 +50,15 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 		if (/android/i.test(ua)) return "Android";
 		if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return "iOS";
 		if (/Macintosh/i.test(ua)) return "Mac";
-		if (/Windows/i.test(ua)) return "Windows";
+		if (/Windows/i.test(ua)) return "Wisndow";
 		if (/Linux/i.test(ua)) return "Linux";
 		return "Unknown Device";
 	}
 
+	const handleSignupSignin = (tab) => {
+		setActiveTab(tab);
+		clearErrors();
+	};
 	const onSubmit = useCallback(
 		async (data) => {
 			// Validate terms and privacy for signup
@@ -69,7 +74,7 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 			}
 
 			const validationKey = generateValidationKey();
-			const apiBase = "http://frontis.local/wp-json";
+			const apiBase = "https://frontis-sync.boomdevshub.com";
 			const deviceName = getDeviceType();
 			setIsLoading(true);
 
@@ -89,18 +94,17 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 							password: data.password,
 						};
 
-						// console.log(body)
-						// return
 				const response = await fetch(`${apiBase}/frontis-sync/v1/${endpoint}`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
-						"X-API-Key": validationKey,
+						// "Authorization": `Bearer nbcnrqfyorftyzpiojzfnjbidchpgnawnifdbnhhbxbuedphusbaunvecxtvvjvnrehznbmccyanndwrjloncuhobjtfbkcazfjtbbvtsuvgiokjknvgrwdwfgfsonbw`,
 					},
 					body: JSON.stringify(body),
 				});
 
 				const responseData = await response.json();
+				console.log(response)
 
 				if (!response.ok) {
 					const errorMessage = responseData.message || "Something went wrong";
@@ -440,12 +444,12 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 							<span>{activeTab === "login" ? "Login" : "Sign Up"}</span>
 						)}
 					</button>
-{/* 
+					{/* 
 					<div className="fb-auth-divider">
 						<hr />
 						<span>OR</span>
 					</div> */}
-{/* 
+					{/* 
 					{activeTab === "login" && (
 						<div className="fb-sign-with-api">
 							<button className="fb-sign-with-api-btn">
@@ -493,14 +497,14 @@ const LoginSignupModal = ({ onLoginSuccess }) => {
 					{activeTab === "signup" ? (
 						<div className="fb-auth-form-switch">
 							Already have an account?{" "}
-							<a className="fb-link" onClick={() => setActiveTab("login")}>
+							<a className="fb-link" onClick={() => handleSignupSignin('login')}>
 								Sign In
 							</a>
 						</div>
 					) : (
 						<div className="fb-auth-form-switch">
 							Don’t have an account?{" "}
-							<a className="fb-link" onClick={() => setActiveTab("signup")}>
+							<a className="fb-link" onClick={() => handleSignupSignin('signup')}>
 								Sign Up
 							</a>
 						</div>

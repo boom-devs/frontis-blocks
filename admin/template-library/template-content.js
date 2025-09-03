@@ -103,7 +103,7 @@ const TemplateContent = ({
         setTimeout(() => {
             setLoading(false)
         }, 2000)
-        
+
     }, [activeTab, activeCategory, isProTemplate, activeTagTab, TagTabsOptions, schema]);
 
     const handleLoginSuccess = useCallback(() => {
@@ -198,7 +198,9 @@ const TemplateContent = ({
                                         categories={template.categories || []}
                                         templateType={activeTab}
                                         colors={template.colors || []}
+                                        customColors={template.custom_colors || []}
                                         gradientColors={template.gradientColors || []}
+                                        customGradientColors={template.custom_gradientColors || []}
                                         typographies={template.typographies || []}
                                         customTypographies={template.customTypographies || []}
                                         dependencies={template.dependencies || []}
@@ -220,12 +222,12 @@ const TemplateContent = ({
                     </>
                 )}
             </div>
-            {/* {isLoginModalOpen && (
+            {isLoginModalOpen && (
                 <LoginSignupModal
                     onLoginSuccess={handleLoginSuccess}
                     onRequestClose={handleCloseLoginModal}
                 />
-            )} */}
+            )}
         </>
     );
 };
