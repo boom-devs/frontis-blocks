@@ -2094,6 +2094,10 @@ const attributes = {
 		type : 'string',
 		default: 'bottom'
 	},
+	teamMemberSocialAlignment: {
+		type : 'string',
+		default: 'center'
+	},
 	socialIconBtnSwitcher: {
 		type : 'boolean',
 		default: false
