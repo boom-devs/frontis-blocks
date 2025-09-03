@@ -16,6 +16,10 @@ const Sidebar = () => {
 	const [getDefaultAllowedQuickSidebarBlocks, setDefaultAllowedQuickSidebarBlocks] = useState([
 		'frontis-blocks/container',
 		'frontis-blocks/advanced-heading',
+		'frontis-blocks/advanced-button',
+		'frontis-blocks/advanced-image',
+		'frontis-blocks/features-list',
+
 	]);
 
 	const handleMouseOver = ( button ) => setHovering( button );

@@ -46,6 +46,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockStyle,
         speed,
         reverseDirection,
+        pauseOnHover,
 
         slideWidth,
         slideWidthUnits,
@@ -517,6 +518,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 title={__("General Settings", "frontis-blocks")} 
                 initialOpen={true}
             >
+                <ToggleControl
+                    label={__("Pause on Hover", "frontis-blocks")}
+                    checked={pauseOnHover}
+                    onChange={(value) => setAttributes({ pauseOnHover: value })}
+                />
                 <ToggleControl
                     label={__("Reverse Direction", "frontis-blocks")}
                     checked={reverseDirection}
