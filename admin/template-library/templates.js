@@ -188,15 +188,10 @@ const PatternLibraryButton = () => {
                 onClick={handleClick}
                 className="fb-template-library-button"
             >
-                <svg id="fb-global-panel-icon" xmlns="http://www.w3.org/2000/svg" fill="none">
-                    <path fill="currentColor" d="m19.455 11.997 2.408 1.396A2.282 2.282 0 0 1 23 15.373v1.479a2.297 2.297 0 0 1-1.138 1.981l-2.408 1.396-3.56 2.064-2.412 1.4a2.267 2.267 0 0 1-2.276 0l-2.408-1.4v-4.119l3.546 2.06 3.55-2.06 3.546-2.054-3.546-2.06-3.55-2.058 3.55-2.064 3.546-2.055-3.546-2.059-3.55-2.054-3.546-2.06 2.408-1.4a2.267 2.267 0 0 1 2.276 0l2.408 1.4 3.541 2.06 2.408 1.4a2.282 2.282 0 0 1 1.138 1.981v1.474a2.298 2.298 0 0 1-1.138 1.98l-2.385 1.392Z"></path>
-                    <path fill="currentColor" d="m8.802 5.828-3.541 2.05v12.354l-2.404-1.395a2.282 2.282 0 0 1-1.142-1.982V7.141A2.297 2.297 0 0 1 2.853 5.16l1.265-.732a2.267 2.267 0 0 1 2.276 0l2.408 1.4Z"></path>
-                    <path fill="currentColor" d="m15.896 9.938-3.55 2.06-2.409 1.395a2.267 2.267 0 0 1-2.276 0l-2.417-1.395L8.79 9.943l2.413-1.4a2.266 2.266 0 0 1 2.276 0l2.417 1.395Z"></path>
-                </svg>
-                {__("Templates", "frontis-blocks")}
+                {__("Upcoming Templates", "frontis-blocks")}
             </Button>
 
-            {isVisible && (
+            {/* {isVisible && (
                 <Modal className="fb-template-library-popover" onRequestClose={handleClick}>
                     <div className="fb-template-library-store-wrap">
                         <div className="fb-template-library-store-inner-wrap">
@@ -254,7 +249,7 @@ const PatternLibraryButton = () => {
                         </div>
                     </div>
                 </Modal>
-            )}
+            )} */}
         </>
     );
 };
