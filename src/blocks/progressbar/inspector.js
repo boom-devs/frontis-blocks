@@ -20,6 +20,7 @@ import {
     PROGRESSBAR_TYPE,
     PROGRESS_NUMBER_POSITION,
     BORDER_STYLES,
+    PRESETS,
 } from "./constants/constants";
 
 import FB_Spacing from '@Components/spacing';
@@ -55,6 +56,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		progressNumber,
         progressbarVrAlignment,
 
+        //Presets
+        progressbarPreset,
 
         progressNumberColorSwitcher,
 		progressNumberColor,
@@ -276,6 +279,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         progressbarGlobalHoverBoxShadowCssValue,
 
 	} = attributes;
+
+    console.log(attributes);
     
     const deviceType= useDeviceType();
 
@@ -294,6 +299,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }, [progressTitleFontFamily, progressNumberFontFamily]);
     /** End load font */
 
+    /** Start Preset Style */
+	const changeCTAPreset = (selectedPreset) => {
+        const presetConfigurations = {
+            "preset-1": {
+                progressTitleMarginDesktop: {
+                    top: '0',
+                    bottom: '20',
+                    left: '0',
+                    right: '0',
+                },
+                progressNumberMarginDesktop: {
+                    top: '0',
+                    bottom: '20',
+                    left: '0',
+                    right: '0',
+                },
+                progressNumber: 50,
+                progressBarHeight: '14',
+                progressTitleColor: '#000000',
+                progressNumberColor: '#000000',
+            }
+        }
+        const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+				progressbarPreset: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Call to Action: Preset "${selectedPreset}" not found.`);
+        }
+    }
 
     /** Start Progress Border Radius */
     const progressBorderWidthUnitsChange = (event, position) => {
@@ -1572,7 +1610,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
      */
     const generalControls = (
         <>
-        <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
+
+        {/* Preset Style */}
+        <PanelBody title={__("Preset", "frontis-blocks")} initialOpen={true}>
+            <SelectControl
+                label={__("Preset Style", "frontis-blocks")}
+                value={progressbarPreset}
+                options={PRESETS}
+                onChange={(selected) => changeCTAPreset(selected)}
+            />
+        </PanelBody>
+
+        <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={false}>
             <SelectControl
                 label={__("Layout Type", "frontis-blocks")}
                 value={progressbarType}
@@ -1650,7 +1699,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
             </div>
         </PanelBody>
-        <PanelBody title={__("Title", "frontis-blocks")} initialOpen={true}>
+        <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
                 <TextControl
                     label={__("Title", "frontis-blocks")}
                     value={progressTitle}

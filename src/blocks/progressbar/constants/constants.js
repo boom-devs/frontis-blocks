@@ -1,5 +1,11 @@
 import { __ } from "@wordpress/i18n";
 
+export const PRESETS = [
+	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
+];
 
 export const PROGRESS_TEXT_OPTIONS = [
 	{ label: __("Text Outside", "frontis-blocks"), value: "text-outSide" },

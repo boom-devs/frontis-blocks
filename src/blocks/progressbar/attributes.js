@@ -560,10 +560,10 @@ const attributes = {
     progressTitleMarginDesktop: {
         type: 'object', 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '0',
+            bottom: '20',
+            left: '0',
+            right: '0',
         },
     },
     progressTitleMarginTablet: {
@@ -601,7 +601,7 @@ const attributes = {
         type: 'object', 
         default: {
             top: '',
-            bottom: '',
+            bottom: '20',
             left: '',
             right: '',
         },
@@ -1134,6 +1134,10 @@ const attributes = {
     progressbarGlobalHoverBoxShadowCssValue: {
         type: 'string',
         default: '',
+    },
+    progressbarPreset: {
+        type: 'string',
+        default: 'preset-1',
     },
 };
 export default attributes;

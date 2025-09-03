@@ -695,8 +695,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		pricingButtonOrder,
     } = attributes;
 
-	console.log(attributes);
-
 	const deviceType= useDeviceType();
 
 	useEffect(() => {
@@ -916,6 +914,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: '',	
 				},
 			},
+
 			"preset-2": {
 				priceIconPositionSwitcher: false,
 				pricingSectionTopSwitcher: false,
@@ -1446,6 +1445,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: '',	
 				},
 			},
+
 			"preset-5": {
 				priceIconPositionSwitcher: false,
 				pricingSectionTopSwitcher: false,
@@ -2211,7 +2211,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				pricingSectionTopSwitcher: false,
 				priceAfterTextSwitcher: true,
 				priceFeatureItemBorderBottom: true,
-				priceFeatureAfterTextSwitcher: false,
+				priceFeatureAfterTextSwitcher: true,
 				priceButtonSwitcher: true,
 				pricingHeaderBorder: 'none',
 				pricingIconAlign: 'icon',
@@ -2295,7 +2295,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				},
 				priceFeatureDesktopPadding: {
 					top: '32',
-					bottom: '0',
+					bottom: '32',
 					left: '0',
 					right: '0',
 				},
@@ -2312,10 +2312,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					left: '20',
 				},
 				priceAfterTextPaddingDesktop: {
-					top: '',
-					right: '',
-					bottom: '',
-					left: '',
+					top: '0',
+					right: '0',
+					bottom: '0',
+					left: '0',
 				},
 				priceFeatureItemDesktopPadding: {
 					top: '6',
