@@ -485,9 +485,18 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		'min-height': generateCSSUnit(minHeight['Desktop'], minHeightUnits['Desktop']),
 	}
 
+	const isAllPaddingEmpty = () => {
+		const directions = ['top', 'bottom', 'left', 'right'];
+		return directions.every(direction => 
+			containerDesktopPadding[direction] === '' &&
+			containerTabletPadding[direction] === '' &&
+			containerMobilePadding[direction] === ''
+		);
+	};
+	
 	// Handle Desktop Padding
 	let desktopContainerPadding = {};
-	if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
+	if (isAllPaddingEmpty()) {
 		desktopContainerPadding = {
 			'padding': generateCSSUnit(containerGlobalPadding.Desktop, 'px'),
 		}
@@ -505,10 +514,10 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		'padding-left': generateCSSUnit(containerDesktopPadding.left, containerPaddingUnits['Desktop']),
 		'padding-right': generateCSSUnit(containerDesktopPadding.right, containerPaddingUnits['Desktop']),
 	}
-
+	
 	// Handle Tablet Padding
 	let tabletContainerPadding = {};
-	if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
+	if (isAllPaddingEmpty()) {
 		tabletContainerPadding = {
 			'padding': generateCSSUnit(containerGlobalPadding.Tablet, 'px'),
 		}
@@ -526,10 +535,10 @@ function frontEndStyle(attributes, clientId, name, deviceType, gbsSelector = fal
 		'padding-left': generateCSSUnit(containerTabletPadding.left, containerPaddingUnits['Tablet']),
 		'padding-right': generateCSSUnit(containerTabletPadding.right, containerPaddingUnits['Tablet']),
 	}
-
+	
 	// Handle Mobile Padding
 	let mobileContainerPadding = {};
-	if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
+	if (isAllPaddingEmpty()) {
 		mobileContainerPadding = {
 			'padding': generateCSSUnit(containerGlobalPadding.Mobile, 'px'),
 		}
