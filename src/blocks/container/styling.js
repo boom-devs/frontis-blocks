@@ -675,9 +675,18 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 			`${generateCSSUnit(containerMobileBorderRadiusWidth.left, containerBorderRadiusUnits.Mobile)}`;
 	}
 
+	const isAllPaddingEmpty = () => {
+		const directions = ['top', 'bottom', 'left', 'right'];
+		return directions.every(direction => 
+			containerDesktopPadding[direction] === '' &&
+			containerTabletPadding[direction] === '' &&
+			containerMobilePadding[direction] === ''
+		);
+	};
+	
 	// Handle Desktop Padding
 	let desktopContainerPadding = {};
-	if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
+	if (isAllPaddingEmpty()) {
 		desktopContainerPadding = {
 			'padding': generateCSSUnit(containerGlobalPadding.Desktop, 'px'),
 		}
@@ -695,10 +704,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'padding-left': generateCSSUnit(containerDesktopPadding.left, containerPaddingUnits['Desktop']),
 		'padding-right': generateCSSUnit(containerDesktopPadding.right, containerPaddingUnits['Desktop']),
 	}
-
+	
 	// Handle Tablet Padding
 	let tabletContainerPadding = {};
-	if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
+	if (isAllPaddingEmpty()) {
 		tabletContainerPadding = {
 			'padding': generateCSSUnit(containerGlobalPadding.Tablet, 'px'),
 		}
@@ -716,10 +725,10 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'padding-left': generateCSSUnit(containerTabletPadding.left, containerPaddingUnits['Tablet']),
 		'padding-right': generateCSSUnit(containerTabletPadding.right, containerPaddingUnits['Tablet']),
 	}
-
+	
 	// Handle Mobile Padding
 	let mobileContainerPadding = {};
-	if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
+	if (isAllPaddingEmpty()) {
 		mobileContainerPadding = {
 			'padding': generateCSSUnit(containerGlobalPadding.Mobile, 'px'),
 		}
@@ -737,6 +746,70 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'padding-left': generateCSSUnit(containerMobilePadding.left, containerPaddingUnits['Mobile']),
 		'padding-right': generateCSSUnit(containerMobilePadding.right, containerPaddingUnits['Mobile']),
 	}
+
+	// // Handle Desktop Padding
+	// let desktopContainerPadding = {};
+	// if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
+	// 	desktopContainerPadding = {
+	// 		'padding': generateCSSUnit(containerGlobalPadding.Desktop, 'px'),
+	// 	}
+	// } else {
+	// 	desktopContainerPadding = {
+	// 		'padding-top': generateCSSUnit(containerDesktopPadding.top, containerPaddingUnits['Desktop']),
+	// 		'padding-bottom': generateCSSUnit(containerDesktopPadding.bottom, containerPaddingUnits['Desktop']),
+	// 		'padding-left': generateCSSUnit(containerDesktopPadding.left, containerPaddingUnits['Desktop']),
+	// 		'padding-right': generateCSSUnit(containerDesktopPadding.right, containerPaddingUnits['Desktop']),
+	// 	}
+	// }
+	// let desktopChildContainerPadding = {
+	// 	'padding-top': generateCSSUnit(containerDesktopPadding.top, containerPaddingUnits['Desktop']),
+	// 	'padding-bottom': generateCSSUnit(containerDesktopPadding.bottom, containerPaddingUnits['Desktop']),
+	// 	'padding-left': generateCSSUnit(containerDesktopPadding.left, containerPaddingUnits['Desktop']),
+	// 	'padding-right': generateCSSUnit(containerDesktopPadding.right, containerPaddingUnits['Desktop']),
+	// }
+
+	// // Handle Tablet Padding
+	// let tabletContainerPadding = {};
+	// if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
+	// 	tabletContainerPadding = {
+	// 		'padding': generateCSSUnit(containerGlobalPadding.Tablet, 'px'),
+	// 	}
+	// } else {
+	// 	tabletContainerPadding = {
+	// 		'padding-top': generateCSSUnit(containerTabletPadding.top, containerPaddingUnits['Tablet']),
+	// 		'padding-bottom': generateCSSUnit(containerTabletPadding.bottom, containerPaddingUnits['Tablet']),
+	// 		'padding-left': generateCSSUnit(containerTabletPadding.left, containerPaddingUnits['Tablet']),
+	// 		'padding-right': generateCSSUnit(containerTabletPadding.right, containerPaddingUnits['Tablet']),
+	// 	}
+	// }
+	// let tabletChildContainerPadding = {
+	// 	'padding-top': generateCSSUnit(containerTabletPadding.top, containerPaddingUnits['Tablet']),
+	// 	'padding-bottom': generateCSSUnit(containerTabletPadding.bottom, containerPaddingUnits['Tablet']),
+	// 	'padding-left': generateCSSUnit(containerTabletPadding.left, containerPaddingUnits['Tablet']),
+	// 	'padding-right': generateCSSUnit(containerTabletPadding.right, containerPaddingUnits['Tablet']),
+	// }
+
+	// // Handle Mobile Padding
+	// let mobileContainerPadding = {};
+	// if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
+	// 	mobileContainerPadding = {
+	// 		'padding': generateCSSUnit(containerGlobalPadding.Mobile, 'px'),
+	// 	}
+	// } else {
+	// 	mobileContainerPadding = {
+	// 		'padding-top': generateCSSUnit(containerMobilePadding.top, containerPaddingUnits['Mobile']),
+	// 		'padding-bottom': generateCSSUnit(containerMobilePadding.bottom, containerPaddingUnits['Mobile']),
+	// 		'padding-left': generateCSSUnit(containerMobilePadding.left, containerPaddingUnits['Mobile']),
+	// 		'padding-right': generateCSSUnit(containerMobilePadding.right, containerPaddingUnits['Mobile']),
+	// 	}
+	// }
+	// let mobileChildContainerPadding = {
+	// 	'padding-top': generateCSSUnit(containerMobilePadding.top, containerPaddingUnits['Mobile']),
+	// 	'padding-bottom': generateCSSUnit(containerMobilePadding.bottom, containerPaddingUnits['Mobile']),
+	// 	'padding-left': generateCSSUnit(containerMobilePadding.left, containerPaddingUnits['Mobile']),
+	// 	'padding-right': generateCSSUnit(containerMobilePadding.right, containerPaddingUnits['Mobile']),
+	// }
+	
 
 	/**start margin */
 	let containerMarginCSS = {};
