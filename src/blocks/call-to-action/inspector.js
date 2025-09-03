@@ -389,9 +389,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	let defaultImageUrl = [];
 	if (typeof FrontisBlocksData !== 'undefined') {
 		defaultImageUrl = [
-			FrontisBlocksData.pluginUrl + 'assets/images/ctabg-one.png',
-			FrontisBlocksData.pluginUrl + 'assets/images/ctabgtwo.png',
-			FrontisBlocksData.pluginUrl + 'assets/images/ctabgthree.png',
+			FrontisBlocksData.pluginUrl + 'assets/images/ctabg-one.webp',
+			FrontisBlocksData.pluginUrl + 'assets/images/ctabgtwo.webp',
+			FrontisBlocksData.pluginUrl + 'assets/images/ctabgthree.webp',
 		];
 	}	
 	// Set default value for buttonIconImageUrl
