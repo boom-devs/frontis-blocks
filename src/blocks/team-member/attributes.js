@@ -1746,32 +1746,7 @@ const attributes = {
 				link: '#',
 				teamMemberSocialIcon: 'linkedin',
 			},
-		],
-		items: {
-			type: 'object',
-			properties: {
-				id: {
-					type: 'string',
-					default: ''
-				},
-				Title: {
-					type: 'string',
-					default: ''
-				},
-				Description: {
-					type: 'string',
-					default: ''
-				},
-				teamMemberSocialIcon: {
-					type: 'string',
-					default: 'check',
-				},
-				teamMemberSocialIconAlign: {
-					type: 'string',
-					default: 'icon',
-				},
-			}
-		}
+		]
 	},
 
 	teamMemberIconsAlignment: {
