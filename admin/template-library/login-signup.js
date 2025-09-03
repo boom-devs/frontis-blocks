@@ -74,7 +74,7 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 			}
 
 			const validationKey = generateValidationKey();
-			const apiBase = "https://frontis-sync.boomdevshub.com";
+			const apiBase = "https://frontis-sync.boomdevshub.com/wp-json";
 			const deviceName = getDeviceType();
 			setIsLoading(true);
 

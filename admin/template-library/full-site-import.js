@@ -56,11 +56,93 @@ const FullSiteImport = ({ template, onClose, onBack, data }) => {
         setIsSidebarCollapsed(prev => !prev);
     }, []);
 
+    const handleUpdateState = useCallback(async () => {
+        setIsLoading(true);
+        const localStorageKeys = [
+            {
+                key: "fb_global_colors",
+                setter: setGlobalColors,
+                defaultValue: themeColors,
+                api: "fb_get_global_colors",
+            },
+            {
+                key: "fb_custom_colors",
+                setter: setCustomColors,
+                defaultValue: [],
+                api: "fb_get_custom_colors",
+            },
+            {
+                key: "fb_gradient_colors",
+                setter: setGradientColors,
+                defaultValue: frontisBlocksAdmin?.gradients_colors,
+                api: "fb_get_gradient_colors",
+            },
+            {
+                key: "fb_custom_gradient_colors",
+                setter: setCustomGradientColors,
+                defaultValue: [],
+                api: "fb_get_custom_gradient_colors",
+            },
+            {
+                key: "fb_typography",
+                setter: setTypography,
+                defaultValue: defaultTypography,
+                api: "fb_get_typography",
+            },
+            {
+                key: "fb_custom_typography",
+                setter: setCustomTypography,
+                defaultValue: [],
+                api: "fb_get_custom_typography",
+            },
+            {
+                key: "fb_fontfamilies",
+                setter: setFontFamilies,
+                defaultValue: [],
+                api: "fb_get_fontfamilies",
+                postProcess: getAllFontFamilies,
+            },
+            {
+                key: "fb_globaltypo",
+                setter: null,
+                defaultValue: null,
+                api: "fb_get_globaltypo",
+                postProcess: (data) => generateCSSVariables(data, deviceType),
+            },
+        ];
+
+        try {
+            for (const {
+                key,
+                setter,
+                defaultValue,
+                api,
+                postProcess,
+            } of localStorageKeys) {
+                if (key === "fb_global_colors") {
+                    setter(globalColors ?? themeColors);
+                    localStorage.setItem(key, JSON.stringify(globalColors ?? themeColors));
+                    if (postProcess) setTimeout(() => postProcess(globalColors ?? themeColors), 1000);
+                } else {
+                    const res = await getGlobalStyle(api);
+                    const data = res.success ? res.data : defaultValue;
+                    if (setter) setter(data);
+                    localStorage.setItem(key, JSON.stringify(data));
+                    if (postProcess) setTimeout(() => postProcess(data), 1000);
+                }
+            }
+        } catch (error) {
+            console.error("Error fetching global settings:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
+
     const handleImport = useCallback(async () => {
         setIsImporting(true);
         setImportProgress(0);
 
-        const steps = [
+        const steps = [ 
             'Preparing import...',
             'Importing content...',
             'Setting up customizer...',
@@ -122,7 +204,6 @@ const FullSiteImport = ({ template, onClose, onBack, data }) => {
 
                 {/* Content */}
                 <div className={`fb-full-site-import-content ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
-
 
                     {/* Left Panel - Sidebar */}
                     {showConfigStep ? (
