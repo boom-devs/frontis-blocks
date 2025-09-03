@@ -222,12 +222,12 @@ const TemplateContent = ({
                     </>
                 )}
             </div>
-            {isLoginModalOpen && (
+            {/* {isLoginModalOpen && (
                 <LoginSignupModal
                     onLoginSuccess={handleLoginSuccess}
                     onRequestClose={handleCloseLoginModal}
                 />
-            )}
+            )} */}
         </>
     );
 };
