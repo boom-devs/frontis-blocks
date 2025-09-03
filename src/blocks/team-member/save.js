@@ -23,6 +23,7 @@ export default function save({ attributes }) {
 		teamMemberDesc,
 
 		// Social Profile
+		teamMemberSocialPosition,
 		teamMemberSocialProfileSwitcher,
 		teamMemberSocialProfileSeparator,
 		teamMemberSocialItems,
@@ -126,7 +127,7 @@ export default function save({ attributes }) {
 							{teamMemberSocialProfileSwitcher === true && 
 								<>
 									{teamMemberSocialType === 'content' && <>
-										{teamMemberSocialProfileSeparatorPosition === 'top' && teamMemberSocialProfileSeparator === true && <div className="fb-team-member-social-profile-separator"><hr/></div>}
+										{(teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') && (teamMemberSocialProfileSeparatorPosition === 'top' && teamMemberSocialProfileSeparator === true) && <div className="fb-team-member-social-profile-separator"><hr/></div>}
 
 										<div className="fb-team-member-social-profile-wrapper">
 											{socialIconBtnSwitcher === true && 
@@ -143,7 +144,7 @@ export default function save({ attributes }) {
 											</div> 
 										</div>
 
-										{teamMemberSocialProfileSeparatorPosition === 'bottom' && teamMemberSocialProfileSeparator === true && <div className="fb-team-member-social-profile-separator"><hr/></div>}
+										{(teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') &&(teamMemberSocialProfileSeparatorPosition === 'bottom' && teamMemberSocialProfileSeparator === true) && <div className="fb-team-member-social-profile-separator"><hr/></div>}
 									</>}
 								</>
 							}
