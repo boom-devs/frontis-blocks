@@ -376,6 +376,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberSocialItems,
 		teamMemberSocialType,
 		teamMemberSocialPosition,
+		teamMemberSocialAlignment,
 		socialIconBtnSwitcher,
 		teamMemberSocialIconAnimationType,
 
@@ -2799,6 +2800,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberSocialType === 'content' && teamMemberSocialPosition === 'bottom' ? 'flex-direction: column;' : ''}
 				${teamMemberSocialType === 'content' && teamMemberSocialPosition === 'left' ? 'flex-direction: row-reverse;' : ''}
 				${teamMemberSocialType === 'content' && teamMemberSocialPosition === 'right' ? 'flex-direction: row;' : ''}
+				${(teamMemberSocialPosition === 'left' || teamMemberSocialPosition === 'right') && teamMemberSocialAlignment ? `justify-content: ${teamMemberSocialAlignment};` : ''}
+
 				${teamMemberContentBorder ? `border: ${teamMemberContentBorder};` : ''}
 				${teamMemberContentBorderColor ? `border-color: ${teamMemberContentBorderColor};` : ''}
 				${teamMemberContentBorderTypeGetDesktop && teamMemberContentBorderDesktop.top ? `border-width: ${teamMemberContentBorderTypeGetDesktop};` : ''}
@@ -3638,6 +3641,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			teamMemberSocialItems,
 			teamMemberSocialType,
 			teamMemberSocialPosition,
+			teamMemberSocialAlignment,
 			socialIconBtnSwitcher,
 			teamMemberSocialIconAnimationType,
 
@@ -3934,6 +3938,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						options={teamMemberSocialType === 'content' ? CONTENT_SOCIAL_ICON_POSITION : IMAGE_SOCIAL_ICON_POSITION}
 						onChange={(value) => setAttributes({ teamMemberSocialPosition: value })}
 					/>
+
+					{teamMemberSocialPosition === 'left' || teamMemberSocialPosition === 'right' ? 
+						<SelectControl
+							label={__("Alignment", "frontis-blocks")}
+							value={teamMemberSocialAlignment}
+							options={CARD_WRAP_ALIGNMENT}
+							onChange={(value) => setAttributes({ teamMemberSocialAlignment: value })}
+						/>
+					: ''}
 
 					<ToggleControl
 						label={__("Icon Wrapper Button", "frontis-blocks")}
@@ -5013,7 +5026,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				</PanelBody>
 			}
 
-			{teamMemberSocialProfileSwitcher === true &&
+			{teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom' && teamMemberSocialProfileSwitcher === true &&
 				<PanelBody
 					title={__("Social Profile Separator", "frontis-blocks")}
 					initialOpen={false}
