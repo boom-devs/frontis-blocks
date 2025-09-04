@@ -240,7 +240,8 @@ class GlobalSettings extends AjaxBase
      */
     private function update_option($option_name, $type)
     {
-        $updated = update_option($option_name, $_POST['data'], true);
+        $post_data = isset($_POST['data']) ? $_POST['data'] : [];
+        $updated = update_option($option_name, $post_data, true);
 
         if ($updated) {
             $global_colors = get_option($option_name);
