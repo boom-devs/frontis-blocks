@@ -29,13 +29,6 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 		},
 	});
 
-	useEffect(() => {
-		const localUserData = JSON.parse(localStorage.getItem("userData"));
-		if (localUserData?.username) {
-			onLoginSuccess(localUserData);
-		}
-	}, [onLoginSuccess]);
-
 	function generateValidationKey() {
 		const timestamp = Math.floor(Date.now() / 1000); // Current Unix timestamp in seconds
 		const randomBytes = Array.from(crypto.getRandomValues(new Uint8Array(16)))
@@ -74,7 +67,7 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 			}
 
 			const validationKey = generateValidationKey();
-			const apiBase = "https://frontis-sync.boomdevshub.com";
+			const apiBase = "https://frontis-sync.boomdevshub.com/wp-json";
 			const deviceName = getDeviceType();
 			setIsLoading(true);
 
@@ -104,7 +97,6 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 				});
 
 				const responseData = await response.json();
-				console.log(response)
 
 				if (!response.ok) {
 					const errorMessage = responseData.message || "Something went wrong";
@@ -121,11 +113,19 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 				}
 
 				// Success case
-				if (responseData.user_data) {
-					localStorage.setItem("userData", JSON.stringify(responseData.user_data));
-					onLoginSuccess(responseData.user_data);
+				if (responseData.status) {
+					const responseUserData = {
+						'name': responseData.user.name,
+						'email': responseData.user.email,
+						'access_token': responseData.access_token,
+						'refresh_token': responseData.refresh_token,
+					}
+
+					localStorage.setItem("userData", JSON.stringify(responseUserData));
+					onLoginSuccess(responseData);
 				} else {
-					throw new Error("Invalid response data: user_data missing");
+					setIsLoading(false);
+					throw new Error("Something went wrong try again letter");
 				}
 			} catch (error) {
 				console.error(`${activeTab} failed:`, error);
@@ -433,7 +433,7 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 					<button
 						type="submit"
 						className={`fb-auth-submit-btn ${isLoading ? "loading" : ""}`}
-						disabled={isLoading}
+						// disabled={isLoading}
 					>
 						{isLoading ? (
 							<>
