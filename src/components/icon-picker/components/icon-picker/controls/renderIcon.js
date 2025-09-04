@@ -54,7 +54,7 @@ function generateSvg(svgArgData) {
     const elements = svgData.elements;
 
     // Start the SVG string
-    let svg = `<svg xmlns="https://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="${viewBox}">\n`;
+    let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="${viewBox}">\n`;
 
     // Loop through each element and create the appropriate SVG tag
     elements.forEach(element => {
@@ -126,18 +126,18 @@ function processSvgData(data, svg, setAttributes, extraProps) {
 
         if (align) {
             return (
-                <svg width="18" height="12" viewBox="0 0 18 12" xmlns="https://www.w3.org/2000/svg">
+                <svg width="18" height="12" viewBox="0 0 18 12" xmlns="http://www.w3.org/2000/svg">
                     <path {...align} />
                 </svg>
             );
         }
 
         return !setAttributes || setAttributes === 'not_set' ? (
-            <svg xmlns="https://www.w3.org/2000/svg" viewBox={viewBox} {...extraProps}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox={viewBox} {...extraProps}>
                 <path d={path}></path>
             </svg>
         ) : (
-            <svg width="20" height="20" xmlns="https://www.w3.org/2000/svg" viewBox={viewBox} {...extraProps}>
+            <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox={viewBox} {...extraProps}>
                 <path d={path}></path>
             </svg>
         );

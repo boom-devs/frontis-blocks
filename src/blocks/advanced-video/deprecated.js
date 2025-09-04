@@ -13,7 +13,7 @@ const v1_0_3 = {
     save({ attributes }) {
         const {
             blockID,
-            videoURL='https://www.youtube.com/watch?v=WZdCL4Y5EBY',
+            videoURL,
             autoPlaySwitcher,
             muteSwitcher,
             loopSwitcher,

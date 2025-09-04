@@ -110,7 +110,7 @@ const FB_PositionControl = ({
                                 aria-expanded={isOpen}
                                 className="fb-setting-background-color-setting-icon-btn"
                             >
-                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="https://www.w3.org/2000/svg">
+                                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7 4.5L9.5 2M9.5 2L12 4.5M9.5 2V17M9.5 17L12 14.5M9.5 17L7 14.5" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
                                     <path d="M4.5 12L2 9.5M2 9.5L4.5 7M2 9.5L17 9.5M17 9.5L14.5 7M17 9.5L14.5 12" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>

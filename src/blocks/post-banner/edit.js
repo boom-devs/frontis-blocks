@@ -119,7 +119,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									</span>
 								</div>
 								<div className="fb-post-author-seperator">
-									<svg xmlns="https://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none">
+									<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none">
 										<circle cx="2" cy="2" r="2" fill="#717680" />
 									</svg>
 								</div>
@@ -127,7 +127,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									<span className='fb-post-date'>
 										{formatDate(postData.date) || 'Feb 17, 2025'}
 									</span>
-									<svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 										<path d="M9.66536 7.10001H6.33203" stroke="black" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
 										<path d="M8 5.47333V8.80666" stroke="black" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
 										<path d="M11.2148 1.33334H4.78818C3.36818 1.33334 2.21484 2.49334 2.21484 3.90668V13.3C2.21484 14.5 3.07484 15.0067 4.12818 14.4267L7.38151 12.62C7.72818 12.4267 8.28818 12.4267 8.62818 12.62L11.8815 14.4267C12.9348 15.0133 13.7948 14.5067 13.7948 13.3V3.90668C13.7882 2.49334 12.6348 1.33334 11.2148 1.33334Z" stroke="black" strokeLinecap="round" strokeLinejoin="round" />
@@ -140,7 +140,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								<div className='fb-post-metrics'>
 									{/* Views Metric */}
 									<div className='fb-post-metric-item'>
-										<svg className='fb-post-metric-icon' width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="https://www.w3.org/2000/svg">
+										<svg className='fb-post-metric-icon' width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M8 3C4.5 3 1.73 5.61 1 8c.73 2.39 3.5 5 7 5s6.27-2.61 7-5c-.73-2.39-3.5-5-7-5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 											<circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 										</svg>
@@ -151,7 +151,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 									{/* Reactions Metric */}
 									<div className='fb-post-metric-item'>
-										<svg className='fb-post-metric-icon' width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="https://www.w3.org/2000/svg">
+										<svg className='fb-post-metric-icon' width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M8 14.5s6.5-3.5 6.5-8.5c0-3.5-2.5-5.5-6.5-4.5-4-1-6.5 1-6.5 4.5 0 5 6.5 8.5 6.5 8.5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 										</svg>
 										<span className='fb-post-metric-count'>
@@ -161,7 +161,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 									{/* Comments Metric */}
 									<div className='fb-post-metric-item'>
-										<svg className='fb-post-metric-icon' width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="https://www.w3.org/2000/svg">
+										<svg className='fb-post-metric-icon' width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path d="M14 10c0 1.1-.9 2-2 2H4l-2 2V4c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2v6z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 											<path d="M5 7h6M5 9h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 										</svg>

@@ -3,7 +3,7 @@ export const FrontisIcon = () => (
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      xmlns="https://www.w3.org/2000/svg"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M12 2L2 7V17L12 22L22 17V7L12 2ZM12 4.618L19 8.309V15.691L12 19.382L5 15.691V8.309L12 4.618Z"
@@ -13,7 +13,7 @@ export const FrontisIcon = () => (
   );
   
   export const HomeIcon = () => (
-    <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeWidth={1.5}
@@ -29,7 +29,7 @@ export const FrontisIcon = () => (
   );
   
   export const BlockIcon = () => (
-    <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeWidth={1.5}
@@ -39,7 +39,7 @@ export const FrontisIcon = () => (
   );
   
   export const OptionsIcon = () => (
-    <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <circle cx={10} cy={10} r={2.5} stroke="currentColor" strokeWidth={1.5} />
     <path
       stroke="currentColor"
@@ -50,7 +50,7 @@ export const FrontisIcon = () => (
   );
   
   export const IntegrationsIcon = () => (
-    <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeWidth={1.5}
@@ -60,7 +60,7 @@ export const FrontisIcon = () => (
   );
 
 export const Crown = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
   <path
     stroke="#fff"
     strokeWidth={1.5}
@@ -76,7 +76,7 @@ export const Crown = () => (
 );
 
 export const Logo = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" width="143" height="48" viewBox="0 0 143 48" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" width="143" height="48" viewBox="0 0 143 48" fill="none">
 <g clip-path="url(#clip0_5725_6336)">
 <path d="M35.4765 23.992L40.2921 26.783C40.984 27.1845 41.5586 27.7621 41.9581 28.4576C42.3575 29.1531 42.5678 29.9421 42.5679 30.7453V33.701C42.5678 34.5041 42.3575 35.2931 41.9581 35.9886C41.5586 36.6841 40.984 37.2617 40.2921 37.6633L35.4765 40.4543L28.3578 44.5813L23.5332 47.3814C22.8413 47.783 22.0564 47.9944 21.2574 47.9944C20.4584 47.9944 19.6735 47.783 18.9816 47.3814L14.166 44.5813V36.3456L21.2574 40.4634L28.3578 36.3456L35.4492 32.2369L28.3578 28.119L21.2574 24.0011L28.3578 19.8741L35.4492 15.7654L28.3578 11.6475L21.2574 7.5388L14.166 3.42093L18.9816 0.620789C19.6735 0.219214 20.4584 0.0078125 21.2574 0.0078125C22.0564 0.0078125 22.8413 0.219214 23.5332 0.620789L28.3487 3.42093L35.431 7.5388L40.2466 10.3389C40.9385 10.7405 41.5131 11.3181 41.9126 12.0136C42.312 12.7091 42.5223 13.4981 42.5224 14.3013V17.2478C42.5223 18.051 42.312 18.8399 41.9126 19.5354C41.5131 20.231 40.9385 20.8085 40.2466 21.2101L35.4765 23.992Z" fill="#050607"/>
 <path d="M14.1736 11.6573L7.09137 15.7568V40.464L2.28487 37.673C1.59127 37.2726 1.01489 36.6955 0.613758 35.9999C0.21263 35.3043 0.000941756 34.5147 0 33.7107V14.2836C2.02965e-05 13.4804 0.210329 12.6914 0.609813 11.9959C1.0093 11.3004 1.58388 10.7228 2.27579 10.3213L4.80647 8.85712C5.4984 8.45554 6.28329 8.24414 7.08226 8.24414C7.88123 8.24414 8.66612 8.45554 9.35805 8.85712L14.1736 11.6573Z" fill="#3991FF"/>
@@ -104,7 +104,7 @@ export const Logo = () => (
 );
 
 export const Doc = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeLinecap="round"
@@ -115,7 +115,7 @@ export const Doc = () => (
 );
 
 export const Link = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeLinecap="round"
@@ -125,7 +125,7 @@ export const Link = () => (
   </svg>
 );
 export const Grid = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeWidth={1.5}
@@ -135,7 +135,7 @@ export const Grid = () => (
 );
 
 export const PricingIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <g clipPath="url(#a)">
       <path
         stroke="currentColor"
@@ -152,7 +152,7 @@ export const PricingIcon = () => (
 );
 
 export const CheckIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="#4CAF50"
       strokeLinecap="round"
@@ -164,7 +164,7 @@ export const CheckIcon = () => (
 );
 
 export const XIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="#E43242"
       strokeLinecap="round"
@@ -175,7 +175,7 @@ export const XIcon = () => (
 );
 
 export const All = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeLinecap="round"
@@ -187,7 +187,7 @@ export const All = () => (
 );
 
 export const Content = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeLinecap="round"
@@ -199,7 +199,7 @@ export const Content = () => (
 );
 
 export const Creative = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeLinecap="round"
@@ -217,7 +217,7 @@ export const Creative = () => (
 );
 
 export const FBIcon = () => (
-  <svg id="fb-global-panel-icon" xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg id="fb-global-panel-icon" xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       fill="currentColor"
       d="m19.455 11.997 2.408 1.396A2.282 2.282 0 0 1 23 15.373v1.479a2.297 2.297 0 0 1-1.138 1.981l-2.408 1.396-3.56 2.064-2.412 1.4a2.267 2.267 0 0 1-2.276 0l-2.408-1.4v-4.119l3.546 2.06 3.55-2.06 3.546-2.054-3.546-2.06-3.55-2.058 3.55-2.064 3.546-2.055-3.546-2.059-3.55-2.054-3.546-2.06 2.408-1.4a2.267 2.267 0 0 1 2.276 0l2.408 1.4 3.541 2.06 2.408 1.4a2.282 2.282 0 0 1 1.138 1.981v1.474a2.298 2.298 0 0 1-1.138 1.98l-2.385 1.392Z"
@@ -233,7 +233,7 @@ export const FBIcon = () => (
   </svg>
 );
 export const EditorOptionIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeWidth={2}
@@ -250,7 +250,7 @@ export const EditorOptionIcon = () => (
 );
 
 export const AssetGenerationIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeLinecap="round"
@@ -269,7 +269,7 @@ export const AssetGenerationIcon = () => (
 );
 
 export const EditorEnhancementIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeLinejoin="round"
@@ -287,7 +287,7 @@ export const EditorEnhancementIcon = () => (
 );
 
 export const VersionControlIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeLinecap="round"
@@ -313,7 +313,7 @@ export const VersionControlIcon = () => (
 );
 
 export const PerformanceIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeLinecap="round"
@@ -325,7 +325,7 @@ export const PerformanceIcon = () => (
 );
 
 export const SiteVisibilityIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeLinecap="round"
@@ -347,7 +347,7 @@ export const SiteVisibilityIcon = () => (
 );
 
 export const ThemeFontIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
     <path
       stroke="currentColor"
       strokeLinecap="round"
@@ -366,13 +366,13 @@ export const ThemeFontIcon = () => (
 );
 
 export const ArrowRightIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 13 12" fill="none">
     <path d="M7.62406 0.347125L12.8014 5.52456C12.9338 5.65694 13 5.83044 13 6.00394C13 6.17744 12.9338 6.35094 12.8014 6.48331L7.62397 11.6608C7.35922 11.9256 6.92991 11.9256 6.66516 11.6608C6.40047 11.3961 6.40047 10.9668 6.66516 10.7021L10.6852 6.682L-2.32203 6.682C-2.69644 6.68197 -3 6.37844 -3 6.004C-3 5.62956 -2.69644 5.32603 -2.32203 5.32603L10.6854 5.32603L6.66522 1.30588C6.40053 1.04109 6.40066 0.611813 6.66522 0.347125C6.93 0.0823747 7.35928 0.0823747 7.62406 0.347125Z" fill="#6A758E"/>
   </svg>
 );
 
 export const CommunityIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 <ellipse cx="8.83925" cy="5.05214" rx="5.05214" ry="5.05214" fill="white"/>
 <ellipse cx="8.84125" cy="18.9486" rx="8.84125" ry="5.05214" fill="white"/>
 <path d="M23.9963 18.9536C23.9963 21.0463 21.4253 22.7427 18.2863 22.7427C19.2111 21.7319 19.847 20.463 19.847 18.9554C19.847 17.446 19.2097 16.176 18.2831 15.1646C21.4221 15.1646 23.9963 16.861 23.9963 18.9536Z" fill="white"/>
@@ -381,13 +381,13 @@ export const CommunityIcon = () => (
 );
 
 export const RateIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M13.304 23.2653L13.9546 22.1663C14.4591 21.3138 14.7114 20.8876 15.1167 20.6519C15.5219 20.4162 16.0321 20.4074 17.0525 20.3898C18.559 20.3639 19.5038 20.2716 20.2962 19.9434C21.7664 19.3344 22.9344 18.1663 23.5434 16.6962C24.0001 15.5935 24.0001 14.1957 24.0001 11.4V10.2C24.0001 6.27191 24.0001 4.30784 23.1159 2.86502C22.6212 2.05768 21.9424 1.3789 21.1351 0.884163C19.6923 0 17.7282 0 13.8001 0H10.2C6.27191 0 4.30784 0 2.86502 0.884163C2.05768 1.3789 1.3789 2.05768 0.884163 2.86502C0 4.30784 0 6.27191 0 10.2V11.4C0 14.1957 0 15.5935 0.456725 16.6962C1.06569 18.1663 2.23374 19.3344 3.70391 19.9434C4.49628 20.2716 5.44108 20.3639 6.94752 20.3898C7.96794 20.4074 8.47815 20.4162 8.88339 20.6519C9.28862 20.8876 9.54091 21.3138 10.0455 22.1663L10.696 23.2653C11.2758 24.2449 12.7242 24.2449 13.304 23.2653ZM6.60003 9.25774C6.60003 11.3609 9.196 13.5965 10.7881 14.7699C11.3331 15.1716 11.6056 15.3724 12.0001 15.3724C12.3945 15.3724 12.667 15.1716 13.212 14.7699C14.8041 13.5966 17.4001 11.3609 17.4001 9.25773C17.4001 6.04513 14.43 4.84569 12 7.3274C9.57013 4.84569 6.60003 6.04513 6.60003 9.25774Z" fill="white"/>
 </svg>
 );
 
 export const DocumentationIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 <path d="M0 9.60003V14.4C0 17.7941 0 19.4912 1.05442 20.5456C1.31522 20.8064 1.61534 21.0027 1.97074 21.1505C1.96268 21.0971 1.95506 21.0436 1.94785 20.99C1.79983 19.889 1.79991 18.5141 1.8 16.9185L1.8 7.19997L1.8 7.08147C1.79991 5.4858 1.79983 4.11093 1.94785 3.00994C1.95505 2.95639 1.96266 2.90294 1.97072 2.84961C1.61533 2.99735 1.31522 3.19365 1.05442 3.45445C0 4.50886 0 6.20592 0 9.60003Z" fill="white"/>
 <path d="M24 9.60003V14.4C24 17.7941 24 19.4912 22.9456 20.5456C22.6848 20.8064 22.3847 21.0027 22.0293 21.1505C22.0373 21.0971 22.0449 21.0436 22.0521 20.99C22.2002 19.889 22.2001 18.5141 22.2 16.9185V7.08148C22.2001 5.4858 22.2002 4.11093 22.0521 3.00994C22.0449 2.95639 22.0373 2.90294 22.0293 2.84961C22.3847 2.99735 22.6848 3.19365 22.9456 3.45445C24 4.50886 24 6.20592 24 9.60003Z" fill="white"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M4.65402 1.05442C3.59961 2.10883 3.59961 3.80589 3.59961 7.2V16.8C3.59961 20.1941 3.59961 21.8912 4.65402 22.9456C5.70844 24 7.4055 24 10.7996 24H13.1996C16.5937 24 18.2908 24 19.3452 22.9456C20.3996 21.8912 20.3996 20.1941 20.3996 16.8V7.2C20.3996 3.80589 20.3996 2.10883 19.3452 1.05442C18.2908 0 16.5937 0 13.1996 0H10.7996C7.4055 0 5.70844 0 4.65402 1.05442ZM7.49961 18C7.49961 17.5029 7.90255 17.1 8.39961 17.1H11.9996C12.4967 17.1 12.8996 17.5029 12.8996 18C12.8996 18.4971 12.4967 18.9 11.9996 18.9H8.39961C7.90255 18.9 7.49961 18.4971 7.49961 18ZM8.39961 12.3C7.90255 12.3 7.49961 12.7029 7.49961 13.2C7.49961 13.6971 7.90255 14.1 8.39961 14.1H15.5996C16.0967 14.1 16.4996 13.6971 16.4996 13.2C16.4996 12.7029 16.0967 12.3 15.5996 12.3H8.39961ZM7.49961 8.4C7.49961 7.90294 7.90255 7.5 8.39961 7.5H15.5996C16.0967 7.5 16.4996 7.90294 16.4996 8.4C16.4996 8.89706 16.0967 9.3 15.5996 9.3H8.39961C7.90255 9.3 7.49961 8.89706 7.49961 8.4Z" fill="white"/>
@@ -395,14 +395,14 @@ export const DocumentationIcon = () => (
 );
 
 export const DocLinkIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
     <path d="M10.666 9.33398L16.666 3.33399M16.666 3.33399H13.1035M16.666 3.33399V6.89648" stroke="#050607" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M16.6673 10.0007C16.6673 13.1433 16.6673 14.7147 15.691 15.691C14.7147 16.6673 13.1433 16.6673 10.0007 16.6673C6.85796 16.6673 5.28661 16.6673 4.3103 15.691C3.33398 14.7147 3.33398 13.1433 3.33398 10.0007C3.33398 6.85796 3.33398 5.28661 4.3103 4.3103C5.28661 3.33398 6.85796 3.33398 10.0007 3.33398" stroke="#050607" stroke-width="1.5" stroke-linecap="round"/>
   </svg>
 );
 
 export const VersionIcon = () => (
-  <svg xmlns="https://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 <g clip-path="url(#clip0_11997_406)">
 <path d="M5.83268 10H4.99935C3.428 10 2.64233 10 2.15417 10.4882C1.66602 10.9763 1.66602 11.762 1.66602 13.3333V15C1.66602 16.5713 1.66602 17.357 2.15417 17.8452C2.64233 18.3333 3.428 18.3333 4.99935 18.3333H6.66602C8.23736 18.3333 9.02304 18.3333 9.51119 17.8452C9.99935 17.357 9.99935 16.5713 9.99935 15V14.1667" stroke="#8891A5" stroke-width="1.5"/>
 <path d="M10.0007 5.83398H9.16732C7.59597 5.83398 6.8103 5.83398 6.32214 6.32214C5.83398 6.8103 5.83398 7.59597 5.83398 9.16732V10.834C5.83398 12.4053 5.83398 13.191 6.32214 13.6792C6.8103 14.1673 7.59597 14.1673 9.16732 14.1673H10.834C12.4053 14.1673 13.191 14.1673 13.6792 13.6792C14.1673 13.191 14.1673 12.4053 14.1673 10.834V10.0007" stroke="#8891A5" stroke-width="1.5"/>
@@ -418,7 +418,7 @@ export const VersionIcon = () => (
 
 export const CtaIcon = () => (
   <svg
-                        xmlns="https://www.w3.org/2000/svg"
+                        xmlns="http://www.w3.org/2000/svg"
                         width="104"
                         height="104"
                         viewBox="0 0 104 104"

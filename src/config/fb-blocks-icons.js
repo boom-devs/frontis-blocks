@@ -13,7 +13,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'bookSpineIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -38,7 +38,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'bookIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -64,7 +64,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'imageIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -88,7 +88,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'videoIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -110,7 +110,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'menuIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -132,7 +132,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'sendIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -154,7 +154,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'targetIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -199,7 +199,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'openBookIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -230,7 +230,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'menuIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -253,7 +253,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'listIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -277,7 +277,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'imageUploadIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -302,7 +302,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'profileCardIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -324,7 +324,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'gridIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -368,7 +368,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'documentIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -397,7 +397,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'userProfileIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -423,7 +423,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'commentBoxIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -447,7 +447,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'shareIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -470,7 +470,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'formIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -492,7 +492,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'tableIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -523,7 +523,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'idCardIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -545,7 +545,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'formIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -567,7 +567,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'menuLinesIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -588,7 +588,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'pauseIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -611,7 +611,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'accordionIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -637,7 +637,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'layoutIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -673,7 +673,7 @@ const FB_Block_Icons = {
 		{
 			version: '1.1',
 			id: 'calendarListIcon',
-			xmlns: 'https://www.w3.org/2000/svg',
+			xmlns: 'http://www.w3.org/2000/svg',
 			width: '24',
 			height: '24',
 			viewBox: '0 0 24 24',
@@ -698,7 +698,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'columnsIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -719,7 +719,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'splitScreenIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -743,7 +743,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'buildingIcon',
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
@@ -769,7 +769,7 @@ const FB_Block_Icons = {
 		{
 		  version: '1.1',
 		  id: 'tabIcon', 
-		  xmlns: 'https://www.w3.org/2000/svg',
+		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
 		  viewBox: '0 0 24 24',
