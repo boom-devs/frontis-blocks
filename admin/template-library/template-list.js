@@ -7,7 +7,7 @@ import { parse } from "@wordpress/blocks";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
-import { usePostDataMutation } from "./services/api";
+import { usePostDataMutation } from "./services/laravelapi";
 import TemplateImport from "./template-import";
 import LoginSignupModal from "./login-signup";
 import PluginUpgradeModal from "./plugin-upgrade";

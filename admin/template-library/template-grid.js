@@ -8,7 +8,7 @@ import { ClipLoader } from "react-spinners";
 import TemplateImport from "./template-import";
 import PluginUpgradeModal from "./plugin-upgrade";
 import { TemplateLoader } from "./template-loader";
-import { usePostDataMutation } from "./services/api";
+import { usePostDataMutation } from "./services/laravelapi";
 import { select, dispatch } from '@wordpress/data';
 import { createBlock, parse, rawHandler } from '@wordpress/blocks';
 import { useState, useEffect, useCallback } from "@wordpress/element";
@@ -124,9 +124,7 @@ const TemplateGrid = ({
 
     }
 
-    const [patternsData, { data: patternsResponse, error, isLoading: dataLoading }] = usePostDataMutation();
-
-
+    const [patternsData] = usePostDataMutation();
     const getTemplatesData = async (route, key, id) => {
         try {
             const response = await patternsData({
