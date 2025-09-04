@@ -4,18 +4,18 @@
 import { __ } from "@wordpress/i18n";
 import { useState, useCallback, useEffect } from "@wordpress/element";
 import { ClipLoader } from "react-spinners";
-import data from "./data.json";
+// import data from "./data.json";
 import TemplateHeader from "./template-header";
 import FullSiteImportSettingConfig from "./components/FullSiteImportSettingConfig";
 import FullSiteImportSetting from "./components/FullSiteImportSetting.js";
 import FullSiteImportContent from "./components/FullSiteImportContent.js";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
-const FullSiteImport = ({ template, onClose, onBack }) => {
+const FullSiteImport = ({ template, onClose, onBack, data }) => {
     const [formData, setFormData] = useState({
         siteName: (window.frontisBlocksAdmin && window.frontisBlocksAdmin.siteName) || '',
         siteTagline: '',
-        logo: {id: '', url: '', alt: ''},
+        logo: { id: '', url: '', alt: '' },
         logoUrl: '',
         importContent: true,
         importCustomizer: true,
@@ -56,11 +56,93 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
         setIsSidebarCollapsed(prev => !prev);
     }, []);
 
+    const handleUpdateState = useCallback(async () => {
+        setIsLoading(true);
+        const localStorageKeys = [
+            {
+                key: "fb_global_colors",
+                setter: setGlobalColors,
+                defaultValue: themeColors,
+                api: "fb_get_global_colors",
+            },
+            {
+                key: "fb_custom_colors",
+                setter: setCustomColors,
+                defaultValue: [],
+                api: "fb_get_custom_colors",
+            },
+            {
+                key: "fb_gradient_colors",
+                setter: setGradientColors,
+                defaultValue: frontisBlocksAdmin?.gradients_colors,
+                api: "fb_get_gradient_colors",
+            },
+            {
+                key: "fb_custom_gradient_colors",
+                setter: setCustomGradientColors,
+                defaultValue: [],
+                api: "fb_get_custom_gradient_colors",
+            },
+            {
+                key: "fb_typography",
+                setter: setTypography,
+                defaultValue: defaultTypography,
+                api: "fb_get_typography",
+            },
+            {
+                key: "fb_custom_typography",
+                setter: setCustomTypography,
+                defaultValue: [],
+                api: "fb_get_custom_typography",
+            },
+            {
+                key: "fb_fontfamilies",
+                setter: setFontFamilies,
+                defaultValue: [],
+                api: "fb_get_fontfamilies",
+                postProcess: getAllFontFamilies,
+            },
+            {
+                key: "fb_globaltypo",
+                setter: null,
+                defaultValue: null,
+                api: "fb_get_globaltypo",
+                postProcess: (data) => generateCSSVariables(data, deviceType),
+            },
+        ];
+
+        try {
+            for (const {
+                key,
+                setter,
+                defaultValue,
+                api,
+                postProcess,
+            } of localStorageKeys) {
+                if (key === "fb_global_colors") {
+                    setter(globalColors ?? themeColors);
+                    localStorage.setItem(key, JSON.stringify(globalColors ?? themeColors));
+                    if (postProcess) setTimeout(() => postProcess(globalColors ?? themeColors), 1000);
+                } else {
+                    const res = await getGlobalStyle(api);
+                    const data = res.success ? res.data : defaultValue;
+                    if (setter) setter(data);
+                    localStorage.setItem(key, JSON.stringify(data));
+                    if (postProcess) setTimeout(() => postProcess(data), 1000);
+                }
+            }
+        } catch (error) {
+            console.error("Error fetching global settings:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    }, []);
+
     const handleImport = useCallback(async () => {
         setIsImporting(true);
         setImportProgress(0);
 
-        const steps = [
+        const steps = [ 
             'Preparing import...',
             'Importing content...',
             'Setting up customizer...',
@@ -76,7 +158,7 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
             }
 
             console.log('Full site import completed:', {
-                template: template?.id,
+                template: template,
                 formData
             });
 
@@ -88,7 +170,6 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                 pauseOnHover: true,
                 draggable: true,
             });
-            alert('Site imported successfully!');
             onClose();
         } catch (error) {
             console.error('Import failed:', error);
@@ -107,7 +188,7 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
         }
     }, [template?.id, formData, onClose]);
 
-    console.log(template);
+    // console.log(template);
 
     return (
         <div className="fb-full-site-import-modal">
@@ -123,6 +204,7 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
 
                 {/* Content */}
                 <div className={`fb-full-site-import-content ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
+
                     {/* Left Panel - Sidebar */}
                     {showConfigStep ? (
                         <FullSiteImportSettingConfig
@@ -132,7 +214,7 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                             isImporting={isImporting}
                             importProgress={importProgress}
                             currentStep={currentStep}
-                            isSidebarCollapsed = {isSidebarCollapsed}
+                            isSidebarCollapsed={isSidebarCollapsed}
                         />
                     ) : (
                         <FullSiteImportSetting
@@ -142,15 +224,14 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                             handleInputChange={handleInputChange}
                             handleNext={handleNext}
                             handleBackClick={handleBackClick}
-                            isSidebarCollapsed = {isSidebarCollapsed}
+                            isSidebarCollapsed={isSidebarCollapsed}
                         />
                     )}
-                    
+
                     {/* Right Panel - Preview */}
                     <FullSiteImportContent
                         template={template}
                     />
-
                     {/* Collapse Button */}
                     <div
                         className={`fb-import-sidebar-collapse ${isSidebarCollapsed ? 'collapsed' : ''}`}

@@ -6,7 +6,6 @@ import { select, dispatch } from '@wordpress/data';
 import { createBlock } from '@wordpress/blocks';
 import { __ } from "@wordpress/i18n";
 import { Button, Modal } from "@wordpress/components";
-import { toast } from "react-toastify";
 import TemplateHeader from "./template-header";
 import TemplateSidebar from "./template-sidebar";
 import TemplateContent from "./template-content";
@@ -18,12 +17,31 @@ import sites from "./data/sites.json";
 import TemplateLibrary from "./data/templatelibrary.json";
 
 import { usePostDataMutation } from './services/api';
+import { TemplateContentLoader } from "./template-loader";
 
 const PatternLibraryButton = () => {
     const [showPatternButton, setShowPatternButton] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [resetCat, setResetCat] = useState(true);
+    const [isLogedIn, setIsLogedIn] = useState(false);
+    const [cardListType, setCardListType] = useState('list');
+    const [activeTab, setActiveTab] = useState('patterns');
+    const [activeCategory, setActiveCategory] = useState({
+        patterns: 'all',
+        pages: 'all',
+        sites: 'all',
+        templatelibrary: 'my-cloud'
+    });
+    const [isProTemplate, setIsProTemplate] = useState('');
+    const [activeTagTab, setActiveTagTab] = useState({
+        patterns: '',
+        pages: '',
+        sites: '',
+        templatelibrary: ''
+    });
+    const [libraryData, setLibraryData] = useState([]);
+    const [savedItems, setSavedItems] = useState([]);
 
     const handleClick = () => {
         setIsVisible(!isVisible);
@@ -102,74 +120,80 @@ const PatternLibraryButton = () => {
         }
     };
 
+    const alreadySaved = (savedItems, id, activeTab) => {
+        return activeTab !== 'templatelibrary'
+            ? savedItems.some(item => item?.id === id && item?.activeTab === activeTab)
+            : false;
+    };
+
+    const removeSavedItem = (savedItems, id, activeTab) => {
+        return savedItems.filter(
+            (item) => !(item?.id === id && item?.activeTab === activeTab)
+        );
+    };
+
+
     useEffect(() => {
+        setIsLogedIn(true);
+
         const fetchData = async () => {
-            const patterns = await getTemplatesData("patterns");
-            const pages = await getTemplatesData("pages");
-            // const sites = await getTemplatesData("sites");
+            setLoading(true);
+            try {
+                const patterns = await getTemplatesData("patterns");
+                const pages = await getTemplatesData("pages");
+                // const sites = await getTemplatesData("sites");
 
-            if (patterns) {
-                setData((prev) => ({
-                    ...prev,
-                    patterns: {
-                        ...prev.patterns,
-                        items: patterns.items || [],
-                        categories: patterns.categories || [],
-                    },
-                }));
-            }
-
-            if (pages) {
-                setData((prev) => ({
-                    ...prev,
-                    pages: {
-                        ...prev.pages,
-                        items: pages.items || [],
-                        categories: pages.categories || [],
-                    },
-                }));
-            }
-
-            if (sites) {
-                setData((prev) => ({
-                    ...prev,
-                    sites: {
-                        ...prev.sites,
-                        items: sites.items || [],
-                        categories: sites.categories || [],
-                    },
-                }));
-            }
-
-            setData((prev) => ({
-                ...prev,
-                templatelibrary: {
-                    ...prev.templatelibrary,
-                    items: TemplateLibrary.items || [],
-                    categories: TemplateLibrary.categories || []
+                if (patterns) {
+                    setData((prev) => ({
+                        ...prev,
+                        patterns: {
+                            ...prev.patterns,
+                            items: patterns.items || [],
+                            categories: patterns.categories || [],
+                        },
+                    }));
                 }
-            }));
+
+                if (pages) {
+                    setData((prev) => ({
+                        ...prev,
+                        pages: {
+                            ...prev.pages,
+                            items: pages.items || [],
+                            categories: pages.categories || [],
+                        },
+                    }));
+                }
+
+                if (sites) {
+                    setData((prev) => ({
+                        ...prev,
+                        sites: {
+                            ...prev.sites,
+                            items: sites.items || [],
+                            categories: sites.categories || [],
+                        },
+                    }));
+                }
+
+                setData((prev) => ({
+                    ...prev,
+                    templatelibrary: {
+                        ...prev.templatelibrary,
+                        items: TemplateLibrary.items || [],
+                        categories: TemplateLibrary.categories || []
+                    }
+                }));
+            } catch (err) {
+                console.error("Error fetching templates:", err);
+            } finally {
+                setLoading(false);
+            }
         };
 
         fetchData();
     }, []);
 
-
-    const [activeTab, setActiveTab] = useState('patterns'); // Default to 'patterns'
-    const [activeCategory, setActiveCategory] = useState({
-        patterns: 'all',
-        pages: 'all',
-        sites: 'all',
-        templatelibrary: 'my-cloud'
-    });
-    const [isProTemplate, setIsProTemplate] = useState('');
-    const [activeTagTab, setActiveTagTab] = useState({
-        patterns: '',
-        pages: '',
-        sites: '',
-        templatelibrary: ''
-    });
-    const [libraryData, setLibraryData] = useState([]);
 
     const TagTabsOptions = (() => {
         if (!data[activeTab]) return [];
@@ -211,6 +235,7 @@ const PatternLibraryButton = () => {
                                     setActiveCategory={setActiveCategory}
                                     resetCat={resetCat}
                                     setResetCat={setResetCat}
+                                    setLoading={setLoading}
                                 />
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">
@@ -224,7 +249,10 @@ const PatternLibraryButton = () => {
                                     setActiveTagTab={setActiveTagTab}
                                     resetCat={resetCat}
                                     setResetCat={setResetCat}
+                                    loading={loading}
+                                    setLoading={setLoading}
                                 />
+
                                 {activeTab !== 'templatelibrary' && (
                                     <TemplateContent
                                         activeTab={activeTab}
@@ -236,20 +264,38 @@ const PatternLibraryButton = () => {
                                         activeTagTab={activeTagTab[activeTab]}
                                         setActiveTagTab={(value) => setActiveTagTab({ ...activeTagTab, [activeTab]: value })}
                                         TagTabsOptions={TagTabsOptions}
+                                        isLogedIn={isLogedIn}
+                                        savedItems={savedItems}
+                                        setSavedItems={setSavedItems}
+                                        alreadySaved={alreadySaved}
+                                        loading={loading}
+                                        setLoading={setLoading}
+                                        setIsLogedIn={setIsLogedIn}
+                                        setActiveCategory={setActiveCategory}
                                     />
                                 )}
                                 {activeTab === 'templatelibrary' && (
                                     <LibraryContent
                                         activeTab={activeTab}
                                         activeCategory={activeCategory}
+                                        setActiveCategory={setActiveCategory}
                                         libraryData={libraryData}
                                         setLibraryData={setLibraryData}
+                                        setIsVisible={setIsVisible}
                                         data={data}
                                         isProTemplate={isProTemplate}
                                         activeTag={activeTagTab[activeTab]}
                                         setActiveTag={(value) => setActiveTagTab({ ...activeTagTab, [activeTab]: value })}
+                                        isLogedIn={isLogedIn}
+                                        cardListType={cardListType}
+                                        setCardListType={setCardListType}
+                                        savedItems={savedItems}
+                                        setSavedItems={setSavedItems}
+                                        loading={loading}
+                                        setLoading={setLoading}
                                     />
                                 )}
+
                             </div>
                         </div>
                     </div>

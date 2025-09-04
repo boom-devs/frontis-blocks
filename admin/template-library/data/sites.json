@@ -34,101 +34,281 @@
             "typographies": {
                 "body": {
                     "fontFamily": "Default",
-                    "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                    "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
-                    "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                    "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                    "lineHeight": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "lineHeightUnits": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    },
+                    "fontSize": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "fontSizeUnit": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    },
                     "fontWeight": "Default",
                     "fontStyle": "Default",
                     "textTransform": "Default",
                     "textDecoration": "Default",
-                    "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                    "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                    "letterSpacing": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "letterSpacingUnit": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    }
                 },
                 "link": {
                     "fontFamily": "Default",
-                    "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                    "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
-                    "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                    "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                    "lineHeight": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "lineHeightUnits": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    },
+                    "fontSize": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "fontSizeUnit": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    },
                     "fontWeight": "Default",
                     "fontStyle": "Default",
                     "textTransform": "Default",
                     "textDecoration": "Default",
-                    "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                    "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                    "letterSpacing": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "letterSpacingUnit": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    }
                 },
                 "button": {
                     "fontFamily": "Default",
-                    "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                    "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
-                    "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                    "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                    "lineHeight": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "lineHeightUnits": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    },
+                    "fontSize": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "fontSizeUnit": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    },
                     "fontWeight": "Default",
                     "fontStyle": "Default",
                     "textTransform": "Default",
                     "textDecoration": "Default",
-                    "letterSpacing": { "Desktop": "Default", "Tablet": "Default", "Mobile": "Default" },
-                    "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                    "letterSpacing": {
+                        "Desktop": "Default",
+                        "Tablet": "Default",
+                        "Mobile": "Default"
+                    },
+                    "letterSpacingUnit": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    }
                 },
                 "captions": {
                     "fontFamily": "Default",
-                    "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                    "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
-                    "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                    "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                    "lineHeight": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "lineHeightUnits": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    },
+                    "fontSize": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "fontSizeUnit": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    },
                     "fontWeight": "Default",
                     "fontStyle": "Default",
                     "textTransform": "Default",
                     "textDecoration": "Default",
-                    "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                    "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                    "letterSpacing": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "letterSpacingUnit": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    }
                 },
                 "heading": {
                     "all": {
                         "fontFamily": "Default",
-                        "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
-                        "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "lineHeight": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "lineHeightUnits": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        },
+                        "fontSize": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "fontSizeUnit": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        },
                         "fontWeight": "Default",
                         "fontStyle": "Default",
                         "textTransform": "Default",
                         "textDecoration": "Default",
-                        "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                        "letterSpacing": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "letterSpacingUnit": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        }
                     },
                     "h1": {
                         "fontFamily": "Default",
-                        "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
-                        "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "lineHeight": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "lineHeightUnits": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        },
+                        "fontSize": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "fontSizeUnit": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        },
                         "fontWeight": "Default",
                         "fontStyle": "Default",
                         "textTransform": "Default",
                         "textDecoration": "Default",
-                        "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                        "letterSpacing": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "letterSpacingUnit": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        }
                     },
                     "h2": {
                         "fontFamily": "Default",
-                        "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
-                        "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "lineHeight": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "lineHeightUnits": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        },
+                        "fontSize": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "fontSizeUnit": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        },
                         "fontWeight": "Default",
                         "fontStyle": "Default",
                         "textTransform": "Default",
                         "textDecoration": "Default",
-                        "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                        "letterSpacing": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "letterSpacingUnit": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        }
                     },
                     "h3": {
                         "fontFamily": "Default",
-                        "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
-                        "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
+                        "lineHeight": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "lineHeightUnits": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        },
+                        "fontSize": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
                         "fontSizeUnit": {
                             "Desktop": "px",
                             "Tablet": "FrontisBlocksSidebar.jsx",
@@ -138,55 +318,304 @@
                         "fontStyle": "Default",
                         "textTransform": "Default",
                         "textDecoration": "Default",
-                        "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                        "letterSpacing": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "letterSpacingUnit": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        }
                     },
                     "h4": {
                         "fontFamily": "Default",
-                        "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
-                        "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "lineHeight": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "lineHeightUnits": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        },
+                        "fontSize": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "fontSizeUnit": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        },
                         "fontWeight": "Default",
                         "fontStyle": "Default",
                         "textTransform": "Default",
                         "textDecoration": "Default",
-                        "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                        "letterSpacing": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "letterSpacingUnit": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        }
                     },
                     "h5": {
                         "fontFamily": "Default",
-                        "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
-                        "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "lineHeight": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "lineHeightUnits": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        },
+                        "fontSize": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "fontSizeUnit": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        },
                         "fontWeight": "Default",
                         "fontStyle": "Default",
                         "textTransform": "Default",
                         "textDecoration": "Default",
-                        "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                        "letterSpacing": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "letterSpacingUnit": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        }
                     },
                     "h6": {
                         "fontFamily": "Default",
-                        "lineHeight": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "lineHeightUnits": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
-                        "fontSize": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "fontSizeUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" },
+                        "lineHeight": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "lineHeightUnits": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        },
+                        "fontSize": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "fontSizeUnit": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        },
                         "fontWeight": "Default",
                         "fontStyle": "Default",
                         "textTransform": "Default",
                         "textDecoration": "Default",
-                        "letterSpacing": { "Desktop": "", "Tablet": "", "Mobile": "" },
-                        "letterSpacingUnit": { "Desktop": "px", "Tablet": "px", "Mobile": "px" }
+                        "letterSpacing": {
+                            "Desktop": "",
+                            "Tablet": "",
+                            "Mobile": ""
+                        },
+                        "letterSpacingUnit": {
+                            "Desktop": "px",
+                            "Tablet": "px",
+                            "Mobile": "px"
+                        }
+                    }
+                }
+            },
+            "customTypographies": {
+                "fb_customtypo_subtitle": {
+                    "name": "Subtitle",
+                    "fontFamily": "Default",
+                    "lineHeight": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "lineHeightUnits": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    },
+                    "fontSize": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "fontSizeUnit": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    },
+                    "fontWeight": "Default",
+                    "fontStyle": "Default",
+                    "textTransform": "Default",
+                    "textDecoration": "Default",
+                    "letterSpacing": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "letterSpacingUnit": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    }
+                },
+                "fb_customtypo_quote": {
+                    "name": "Quote",
+                    "fontFamily": "Default",
+                    "lineHeight": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "lineHeightUnits": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    },
+                    "fontSize": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "fontSizeUnit": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
+                    },
+                    "fontWeight": "Default",
+                    "fontStyle": "Default",
+                    "textTransform": "Default",
+                    "textDecoration": "Default",
+                    "letterSpacing": {
+                        "Desktop": "",
+                        "Tablet": "",
+                        "Mobile": ""
+                    },
+                    "letterSpacingUnit": {
+                        "Desktop": "px",
+                        "Tablet": "px",
+                        "Mobile": "px"
                     }
                 }
             },
             "colors": [
                 {
-                    "name": "asdfe",
-                    "value": "#b85f5f",
-                    "variable": "asdf"
+                    "color": "#f9f9f9",
+                    "name": "Base",
+                    "slug": "base"
+                },
+                {
+                    "color": "#ffffff",
+                    "name": "Base / Two",
+                    "slug": "base-2"
+                },
+                {
+                    "color": "#111111",
+                    "name": "Contrast",
+                    "slug": "contrast"
+                },
+                {
+                    "color": "#636363",
+                    "name": "Contrast / Two",
+                    "slug": "contrast-2"
+                }
+            ],
+            "custom_colors": [
+                {
+                    "color": "#f9f9f9",
+                    "name": "Base",
+                    "slug": "base"
+                },
+                {
+                    "color": "#ffffff",
+                    "name": "Base / Two",
+                    "slug": "base-2"
+                },
+                {
+                    "color": "#111111",
+                    "name": "Contrast",
+                    "slug": "contrast"
+                },
+                {
+                    "color": "#636363",
+                    "name": "Contrast / Two",
+                    "slug": "contrast-2"
+                },
+                {
+                    "color": "#8B4F96",
+                    "name": "Vibrant Plum",
+                    "slug": "vibrant-plum"
+                }
+            ],
+            "gradientColors": [
+                {
+                    "slug": "gradient-1",
+                    "gradient": "linear-gradient(to bottom, #cfcabe 0%, #F9F9F9 100%)",
+                    "name": "Vertical soft beige to white"
+                },
+                {
+                    "slug": "gradient-2",
+                    "gradient": "linear-gradient(to bottom, #C2A990 0%, #F9F9F9 100%)",
+                    "name": "Vertical soft sandstone to white"
+                },
+                {
+                    "slug": "gradient-3",
+                    "gradient": "linear-gradient(to bottom, #D8613C 0%, #F9F9F9 100%)",
+                    "name": "Vertical soft rust to white"
+                },
+                {
+                    "slug": "gradient-4",
+                    "gradient": "linear-gradient(to bottom, #B1C5A4 0%, #F9F9F9 100%)",
+                    "name": "Vertical soft sage to white"
+                }
+            ],
+            "custom_gradientColors": [
+                {
+                    "slug": "gradient-1",
+                    "gradient": "linear-gradient(to bottom, #cfcabe 0%, #F9F9F9 100%)",
+                    "name": "Vertical soft beige to white"
+                },
+                {
+                    "slug": "gradient-2",
+                    "gradient": "linear-gradient(to bottom, #C2A990 0%, #F9F9F9 100%)",
+                    "name": "Vertical soft sandstone to white"
+                },
+                {
+                    "slug": "gradient-3",
+                    "gradient": "linear-gradient(to bottom, #D8613C 0%, #F9F9F9 100%)",
+                    "name": "Vertical soft rust to white"
+                },
+                {
+                    "slug": "gradient-4",
+                    "gradient": "linear-gradient(to bottom, #B1C5A4 0%, #F9F9F9 100%)",
+                    "name": "Vertical soft sage to white"
+                },
+                {
+                    "slug": "gradient-5",
+                    "gradient": "linear-gradient(to bottom, #4A7B9D 0%, #F9F9F9 100%)",
+                    "name": "Vertical soft ocean blue to white"
                 }
             ],
             "categories": [
