@@ -21,7 +21,7 @@ import { useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
-import {BADGE_ALIGNMENT, BADGE_POSITION, BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, EMAIL_ICON_POSITION, EMAIL_ICON_SWITCHER, HEADING, IMAGE_SOCIAL_ICON_POSITION, OVERFLOW_OP, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE} from "./constants/constants";
+import {BADGE_ALIGNMENT, BADGE_POSITION, BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, EMAIL_ICON_POSITION, EMAIL_ICON_SWITCHER, HEADING, IMAGE_SOCIAL_ICON_POSITION, OVERFLOW_OP, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE, PRESETS} from "./constants/constants";
 
 import SortableItem from './sortableItem.js';
 import FB_Spacing from '@Components/spacing';
@@ -505,7 +505,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberGlobalWraperClass,
 	} = attributes;
 
-	console.log(teamMemberNameGlobalTypoType);
+	console.log(attributes);
 
 	const deviceType= useDeviceType();
 
@@ -580,6 +580,362 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	}, []);
 
+
+	/** Start Preset Style */
+	const changeTeamMemberPreset = (selectedPreset) => {
+        const presetConfigurations = {
+			'preset-0': {
+				teamMemberBgType: 'classic',
+				teamMemberBgCustomGradientSwitcher: false,
+				teamMemberBgClassicColor: '#fff',
+				teamMemberBgHoverType: 'classic',
+				teamMemberBgHoverCustomGradientSwitcher: false,
+				teamMemberBgHoverClassicColor: '#EBF5FF',
+				teamMemberBorder: 'solid',
+				teamMemberBorderColor: '#E1E3E8',
+				teamMemberContentPosition: 'bottom',
+				teamMemberDescSwitcher: false,
+				teamMemberNameColor: '',
+				teamMemberNameHoverColor: '',
+				teamMemberDesignationColor: '',
+				teamMemberDesignationHoverColor: '',
+				teamMemberDescSwitcher: false,
+				teamMemberDescColor: '',
+				teamMemberSocialPosition: 'bottom',
+				teamMemberSocialProfileSwitcher: true,
+				teamMemberSocialProfileSeparator: true,
+				socialProfileSeparatorColor: '#E1E3E8',
+				teamMemberIconsBorder: 'none',
+				teamMemberIconsColor: '',
+				teamMemberIconsBGColor: '#fff',
+				socialIconBtnSwitcher: false,
+				teamMemberSocialType: 'content',
+				teamMemberSocialIconAnimationType: 'default',
+				teamMemberNameFontSize: {
+					Desktop: '32',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberNameFontWeight: '500',
+				teamMemberDesignationFontSize: {
+					Desktop: '20',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberDesignationFontWeight: '500',
+				teamMemberDescFontSize: {
+					Desktop: '18',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberDescFontWeight: '400',
+				teamMemberImageAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberImageMarginDesktop: {
+					top: '0',
+					bottom: '0',
+					left: '20',
+					right: '20',
+				},
+				teamMemberImageHeight: {
+					Desktop: '260',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberImageWidth: {
+					Desktop: '260',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberImageWidthUnits: {
+					Desktop: 'px',
+					Tablet: 'px',
+					Mobile: 'px'
+				},
+				teamMemberImageBorderRadiusDesktop: {
+					bottom: '50',
+					left: '50',
+					right: '50',
+					top: '50',
+				},
+				teamMemberImageBorderRadiusUnits: {
+					Desktop: '%',
+					Tablet: '%',
+					Mobile: '%'
+				},
+				teamMemberIconsDesktopBorderRadiusWidth: {
+					bottom: '150',
+					left: '150',
+					right: '150',
+					top: '150',
+				},
+				teamMemberIconsDesktopPadding: {
+					bottom: '16',
+					left: '16',
+					right: '16',
+					top: '16',
+				},
+				teamMemberIconsAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberDesktopBorderRadiusWidth: {
+					bottom: '16',
+					left: '16',
+					right: '16',
+					top: '16',
+				},
+				teamMemberDesktopBorderWidth: {
+					bottom: '1',
+					left: '1',
+					right: '1',
+					top: '1',
+				},
+				teamMemberDesktopPadding: {
+					bottom: '42',
+					left: '32',
+					right: '32',
+					top: '42',
+				},
+				teamMemberContentAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberContentBorderRadiusDesktop: {
+					bottom: '8',
+					left: '8',
+					right: '8',
+					top: '8',
+				},
+				teamMemberContentMarginDesktop: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '32',
+				},
+				socialIconBtnDesktopMargin: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '0',
+				},
+				socialIconBtnDesktopPadding: {
+					top: '20',
+					bottom: '20',
+					left: '20',
+					right: '20',
+				},
+				teamMemberIconsDesktopMargin: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '0',
+				},
+				teamMemberDescMarginDesktop: {
+					top: '',
+					bottom: '',
+					left: '',
+					right: '',
+				}
+			},
+			'preset-1': {
+				teamMemberBgType: 'classic',
+				teamMemberBgCustomGradientSwitcher: false,
+				teamMemberBgClassicColor: '#fff',
+				teamMemberBgHoverType: 'classic',
+				teamMemberBgHoverCustomGradientSwitcher: false,
+				teamMemberBgHoverClassicColor: '',
+				teamMemberBorder: 'none',
+				teamMemberBorderColor: '#E1E3E8',
+				teamMemberContentPosition: 'bottom',
+				teamMemberDescSwitcher: true,
+				teamMemberNameColor: '#15171C',
+				teamMemberNameHoverColor: '',
+				teamMemberDesignationColor: '#F89B2E',
+				teamMemberDesignationHoverColor: '',
+				teamMemberDescColor: '#555E72',
+				teamMemberSocialPosition: 'bottom_left',
+				teamMemberSocialProfileSwitcher: true,
+				teamMemberSocialProfileSeparator: true,
+				socialProfileSeparatorColor: '#E1E3E8',
+				teamMemberIconsBorder: 'solid',
+				teamMemberIconsBorderColor: '#fff',
+				teamMemberIconsColor: '#fff',
+				teamMemberIconsBGColor: 'rgba(255, 255, 255, 0.40)',
+				socialIconBtnSwitcher: true,
+				socialIconBtnBGColor: 'rgba(255, 255, 255, 0.40)',
+				socialIconBtnBorder: 'solid',
+				socialIconBtnBorderColor: '#fff',
+				socialIconBtnColor: '#fff',
+				teamMemberSocialType: 'image',
+				teamMemberSocialIconAnimationType: 'right',
+				teamMemberNameFontSize: {
+					Desktop: '32',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberNameFontWeight: '500',
+				teamMemberDesignationFontSize: {
+					Desktop: '20',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberDesignationFontWeight: '500',
+				teamMemberDescFontSize: {
+					Desktop: '18',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberDescFontWeight: '400',
+				teamMemberImageAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberImageAlignment: {
+					Desktop: 'start',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberImageMarginDesktop: {
+					top: '',
+					bottom: '',
+					left: '',
+					right: '',
+				},
+				teamMemberImageHeight: {
+					Desktop: '410',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberImageWidth: {
+					Desktop: '100',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberImageWidthUnits: {
+					Desktop: '%',
+					Tablet: '%',
+					Mobile: '%'
+				},
+				teamMemberImageBorderRadiusDesktop: {
+					bottom: '16',
+					left: '16',
+					right: '16',
+					top: '16',
+				},
+				teamMemberImageBorderRadiusUnits: {
+					Desktop: 'px',
+					Tablet: 'px',
+					Mobile: 'px'
+				},
+				teamMemberIconsDesktopBorderRadiusWidth: {
+					bottom: '150',
+					left: '150',
+					right: '150',
+					top: '150',
+				},
+				teamMemberIconsDesktopPadding: {
+					bottom: '16',
+					left: '16',
+					right: '16',
+					top: '16',
+				},
+				teamMemberIconsAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberDesktopBorderRadiusWidth: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberDesktopBorderWidth: {
+					bottom: '1',
+					left: '1',
+					right: '1',
+					top: '1',
+				},
+				teamMemberDesktopPadding: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberContentAlignment: {
+					Desktop: 'left',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberContentBorderRadiusDesktop: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberContentMarginDesktop: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '32',
+				},
+				socialIconBtnDesktopMargin: {
+					bottom: '0',
+					left: '0',
+					right: '10',
+					top: '0',
+				},
+				socialIconBtnDesktopPadding: {
+					bottom: '14',
+					left: '14',
+					right: '14',
+					top: '14',
+				},
+				teamMemberIconsDesktopMargin: {
+					bottom: '24',
+					left: '24',
+					right: '0',
+					top: '0',
+				},
+				teamMemberDescMarginDesktop: {
+					top: '20',
+					bottom: '',
+					left: '',
+					right: '',
+				},
+				socialIconBtnDesktopBorderWidth: {
+					top: '1',
+					bottom: '1',
+					left: '1',
+					right: '1',
+				},
+				teamMemberIconsDesktopBorderWidth: {
+					top: '1',
+					bottom: '1',
+					left: '1',
+					right: '1',
+				}
+			},
+			
+		}
+		const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+				teamMemberPresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Team Member: Preset "${selectedPreset}" not found.`);
+        }
+	}
 
 	const handleTeamMemberMarginUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -3797,7 +4153,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	 */
 	const generalControls = (
 		<>
-			<PanelBody title={__("Avatar", "frontis-blocks")} initialOpen={true}>
+			{/* Preset Style */}
+			<PanelBody title={__("Preset", "frontis-blocks")} initialOpen={true}>
+				<SelectControl
+					label={__("Preset Style", "frontis-blocks")}
+					value={teamMemberPresetStyle}
+					options={PRESETS}
+					onChange={(selected) => changeTeamMemberPreset(selected)}
+				/>
+			</PanelBody>
+
+			<PanelBody title={__("Avatar", "frontis-blocks")} initialOpen={false}>
 				<FB_ImageControl 
 					globalImageUrl={teamMemberImageUrl}
 					setglobalImageUrl={(value) => setAttributes({ teamMemberImageUrl: value })}

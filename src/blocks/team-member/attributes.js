@@ -1818,7 +1818,7 @@ const attributes = {
 	},
 	teamMemberIconsBGColor: {
 		type: 'string',
-		default: ''
+		default: '#fff'
 	},
 	teamMemberIconsBGHoverColor: {
 		type: 'string',

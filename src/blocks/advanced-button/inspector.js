@@ -308,8 +308,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     } = attributes;    
 
-	console.log(attributes);
-
 	const deviceType= useDeviceType();
 
 	let defaultImageUrl = [];
