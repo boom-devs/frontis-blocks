@@ -23,6 +23,7 @@ export default function save({ attributes }) {
 		teamMemberDesc,
 
 		// Social Profile
+		teamMemberSocialPosition,
 		teamMemberSocialProfileSwitcher,
 		teamMemberSocialProfileSeparator,
 		teamMemberSocialItems,
@@ -79,20 +80,20 @@ export default function save({ attributes }) {
 							<div className={`fb-team-member-image`}>
 								{teamMemberImageOverlaySwitcher === true && <div className={`fb-team-member-image-overlay`}></div>}
 								{teamMemberImageUrl && (
-									<img src={teamMemberImageUrl} alt={teamMemberImageAlt}/>
+									<img src={teamMemberImageUrl} alt={teamMemberImageAlt} aria-hidden="true"/>
 								)}
 								
 								{teamMemberSocialProfileSwitcher === true && 
 									<>
 										{teamMemberSocialType === 'image' && <div className="fb-team-member-social-profile-wrapper">
 											{socialIconBtnSwitcher === true && 
-												<button className="fb-team-member-social-icon-wrapper-btn">
+												<button className="fb-team-member-social-icon-wrapper-btn" aria-label={__("Social Icon", "frontis-blocks")}>
 													{socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''}
 												</button>
 											}
 											<div className={`fb-team-member-social-profile`}>
 												{teamMemberSocialItems.map(item => (
-													<a href={item.link} key={item.id} className="fb-team-member-social-icon">
+													<a href={item.link} key={item.id} className="fb-team-member-social-icon" aria-label={__("Social Icon", "frontis-blocks")}>
 														{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
 													</a>
 												))}
@@ -126,24 +127,24 @@ export default function save({ attributes }) {
 							{teamMemberSocialProfileSwitcher === true && 
 								<>
 									{teamMemberSocialType === 'content' && <>
-										{teamMemberSocialProfileSeparatorPosition === 'top' && teamMemberSocialProfileSeparator === true && <div className="fb-team-member-social-profile-separator"><hr/></div>}
+										{(teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') && (teamMemberSocialProfileSeparatorPosition === 'top' && teamMemberSocialProfileSeparator === true) && <div className="fb-team-member-social-profile-separator"><hr/></div>}
 
 										<div className="fb-team-member-social-profile-wrapper">
 											{socialIconBtnSwitcher === true && 
-												<button className="fb-team-member-social-icon-wrapper-btn">
+												<button className="fb-team-member-social-icon-wrapper-btn" aria-label={__("Social Icon", "frontis-blocks")}>
 													{socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''}
 												</button>
 											}
 											<div className={`fb-team-member-social-profile`}>
 												{teamMemberSocialItems.map(item => (
-													<a href={item.link} key={item.id} className="fb-team-member-social-icon">
+													<a href={item.link} key={item.id} className="fb-team-member-social-icon" aria-label={__("Social Icon", "frontis-blocks")}>
 														{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
 													</a>
 												))}
 											</div> 
 										</div>
 
-										{teamMemberSocialProfileSeparatorPosition === 'bottom' && teamMemberSocialProfileSeparator === true && <div className="fb-team-member-social-profile-separator"><hr/></div>}
+										{(teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') &&(teamMemberSocialProfileSeparatorPosition === 'bottom' && teamMemberSocialProfileSeparator === true) && <div className="fb-team-member-social-profile-separator"><hr/></div>}
 									</>}
 								</>
 							}

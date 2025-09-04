@@ -21,6 +21,14 @@ const attributes = {
         type: 'string',
         default: 'frontis_block',
     },
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
     // blockMeta is for keeping all the styles ⬇
     blockMeta: {
         type: 'object',

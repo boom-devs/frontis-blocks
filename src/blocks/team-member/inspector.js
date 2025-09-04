@@ -376,6 +376,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberSocialItems,
 		teamMemberSocialType,
 		teamMemberSocialPosition,
+		teamMemberSocialAlignment,
 		socialIconBtnSwitcher,
 		teamMemberSocialIconAnimationType,
 
@@ -2799,6 +2800,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberSocialType === 'content' && teamMemberSocialPosition === 'bottom' ? 'flex-direction: column;' : ''}
 				${teamMemberSocialType === 'content' && teamMemberSocialPosition === 'left' ? 'flex-direction: row-reverse;' : ''}
 				${teamMemberSocialType === 'content' && teamMemberSocialPosition === 'right' ? 'flex-direction: row;' : ''}
+				${(teamMemberSocialPosition === 'left' || teamMemberSocialPosition === 'right') && teamMemberSocialAlignment ? `justify-content: ${teamMemberSocialAlignment};` : ''}
+
 				${teamMemberContentBorder ? `border: ${teamMemberContentBorder};` : ''}
 				${teamMemberContentBorderColor ? `border-color: ${teamMemberContentBorderColor};` : ''}
 				${teamMemberContentBorderTypeGetDesktop && teamMemberContentBorderDesktop.top ? `border-width: ${teamMemberContentBorderTypeGetDesktop};` : ''}
@@ -3638,6 +3641,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			teamMemberSocialItems,
 			teamMemberSocialType,
 			teamMemberSocialPosition,
+			teamMemberSocialAlignment,
 			socialIconBtnSwitcher,
 			teamMemberSocialIconAnimationType,
 
@@ -3935,6 +3939,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						onChange={(value) => setAttributes({ teamMemberSocialPosition: value })}
 					/>
 
+					{teamMemberSocialPosition === 'left' || teamMemberSocialPosition === 'right' ? 
+						<SelectControl
+							label={__("Alignment", "frontis-blocks")}
+							value={teamMemberSocialAlignment}
+							options={CARD_WRAP_ALIGNMENT}
+							onChange={(value) => setAttributes({ teamMemberSocialAlignment: value })}
+						/>
+					: ''}
+
 					<ToggleControl
 						label={__("Icon Wrapper Button", "frontis-blocks")}
 						className="fb-setting-responsive-control"
@@ -4176,7 +4189,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							normalGradientColor={teamMemberContentBgGradientColor}
 							setNormalGradientColor={(value) =>
-								setAttributes({ teamMemberContentBgGradientColor: value === undefined ? '' : value })
+								setAttributes({ teamMemberContentBgGradientColor: value === undefined ? null : value })
 							}
 							normalCustomGradientSwitcher={
 								teamMemberContentBgCustomGradientSwitcher
@@ -4244,7 +4257,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							hoverGradientColor={teamMemberContentBgHoverGradientColor}
 							setHoverGradientColor={(value) =>
-								setAttributes({ teamMemberContentBgHoverGradientColor: value === undefined ? '' : value })
+								setAttributes({ teamMemberContentBgHoverGradientColor: value === undefined ? null : value })
 							}
 							hoverCustomGradientSwitcher={
 								teamMemberContentBgHoverCustomGradientSwitcher
@@ -5013,7 +5026,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				</PanelBody>
 			}
 
-			{teamMemberSocialProfileSwitcher === true &&
+			{teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom' && teamMemberSocialProfileSwitcher === true &&
 				<PanelBody
 					title={__("Social Profile Separator", "frontis-blocks")}
 					initialOpen={false}
@@ -5449,7 +5462,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							normalGradientColor={teamMemberBgGradientColor}
 							setNormalGradientColor={(value) =>
-								setAttributes({ teamMemberBgGradientColor: value === undefined ? '' : value })
+								setAttributes({ teamMemberBgGradientColor: value === undefined ? null : value })
 							}
 							normalCustomGradientSwitcher={
 								teamMemberBgCustomGradientSwitcher
@@ -5517,7 +5530,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							hoverGradientColor={teamMemberBgHoverGradientColor}
 							setHoverGradientColor={(value) =>
-								setAttributes({ teamMemberBgHoverGradientColor: value === undefined ? '' : value })
+								setAttributes({ teamMemberBgHoverGradientColor: value === undefined ? null : value })
 							}
 							hoverCustomGradientSwitcher={
 								teamMemberBgHoverCustomGradientSwitcher

@@ -51,6 +51,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         hamburgerMenuSwitcher,
 
         /** Start Navigation Typography */
+        navigationGap,
+        navigationGapUnits,
         navigationGlobalTypographyData,
         navigationGlobalTypoSwitcher,
         navigationGlobalTypoType,
@@ -1901,6 +1903,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
 
         .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item:hover {
+            ${navigationBorderHoverColor ? `border-color: ${navigationBorderHoverColor};` : ''}
             ${navigationBoxShadowHoverCssValue ? `box-shadow: ${navigationBoxShadowHoverCssValue};` : ''}
             ${navigationHoverBackgroundType === 'gradient' ? `  
                 ${navigationHoverCustomGradientSwitcher && navigationHoverCustomGradientInputValue ? `background: ${navigationHoverCustomGradientInputValue};` : `background: ${navigationHoverGradientColor};`}
@@ -1909,6 +1912,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             `}
         }
 
+        .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation__container {
+            ${navigationGap.Desktop ? `gap: ${navigationGap.Desktop}${navigationGapUnits.Desktop};` : ''}	
+        }
         .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content {
             ${navigationGlobalTypoSwitcher.fontFamily === true && navigationGlobalTypographyData.fontFamily ? `font-family: ${navigationGlobalTypographyData.fontFamily};` : ''}
             ${navigationGlobalTypoSwitcher.fontSize === true && navigationGlobalTypographyData.fontSize ? `font-size: ${navigationGlobalTypographyData.fontSize};` : ''}
@@ -2002,6 +2008,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             outline: none !important;
             box-shadow: none !important;
             transition: all .3s ease-in-out;
+        }
+        .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container .wp-block-navigation-item__content:hover {
+            ${dropDownItemHoverColor ? `color: ${dropDownItemHoverColor};` : ''}
         }
 
         .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container .wp-block-navigation-item.current-menu-item .wp-block-navigation-item__content {
@@ -2113,6 +2122,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${navigationTabletBorderRadiusWidth && navigationTabletBorderRadius.top? `border-radius: ${navigationTabletBorderRadiusWidth};` : ''}
             }
 
+            .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation__container {
+                ${navigationGap.Tablet ? `gap: ${navigationGap.Tablet}${navigationGapUnits.Tablet};` : ''}	
+            }
             .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content {
                 ${navigationGlobalTypoSwitcher.fontSize === false && navigationFontSize.Tablet && navigationFontSizeUnits.Tablet ? `font-size: ${navigationFontSize.Tablet}${navigationFontSizeUnits.Tablet};` : ''}
                 ${navigationGlobalTypoSwitcher.letterSpacing === false && navigationLetterSpacing.Tablet && navigationLetterSpacingUnits.Tablet ? `letter-spacing: ${navigationLetterSpacing.Tablet}${navigationLetterSpacingUnits.Tablet};` : ''}
@@ -2190,6 +2202,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${navigationMobileBorderRadiusWidth && navigationMobileBorderRadius.top? `border-radius: ${navigationMobileBorderRadiusWidth};` : ''}
             }
 
+            .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation__container {
+                ${navigationGap.Mobile ? `gap: ${navigationGap.Mobile}${navigationGapUnits.Mobile};` : ''}	
+            }
             .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content {
                 ${navigationGlobalTypoSwitcher.fontSize === false && navigationFontSize.Mobile && navigationFontSizeUnits.Mobile ? `font-size: ${navigationFontSize.Mobile}${navigationFontSizeUnits.Mobile};` : ''}
                 ${navigationGlobalTypoSwitcher.letterSpacing === false && navigationLetterSpacing.Mobile && navigationLetterSpacingUnits.Mobile ? `letter-spacing: ${navigationLetterSpacing.Mobile}${navigationLetterSpacingUnits.Mobile};` : ''}
@@ -2258,6 +2273,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         hamburgerMenuSwitcher,
 
         /** Start Navigation Typography */
+        navigationGap,
+        navigationGapUnits,
         navigationGlobalTypographyData,
         navigationGlobalTypoSwitcher,
         navigationGlobalTypoType,
@@ -2776,6 +2793,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 title={__("Navigation", "frontis-blocks")}
                 initialOpen={true}
             >
+                <FB_Range
+                    min={1}
+                    max={200}
+                    label={__("Gap", "frontis-blocks")}
+                    rangeValue={navigationGap}
+                    onChangeHandler={(value) => setAttributes({ navigationGap: value })}
+                    rangeUnitHandler={(value) => setAttributes({ navigationGapUnits: value })}
+                    deviceType={deviceType}
+                    units={navigationGapUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+
                 <FB_TypographyControl
                     globalTypoControlActive={true}
                     globalTypoSwitcher={navigationGlobalTypoSwitcher}
@@ -2882,7 +2913,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     normalClassicColor={navigationNormalClassicColor}
                     setNormalClassicColor={(value) => setAttributes({ navigationNormalClassicColor: value === undefined ? '' : value })}
                     normalGradientColor={navigationNormalGradientColor}
-                    setNormalGradientColor={(value) => setAttributes({ navigationNormalGradientColor: value === undefined ? '' : value })}
+                    setNormalGradientColor={(value) => setAttributes({ navigationNormalGradientColor: value === undefined ? null : value })}
                     normalCustomGradientSwitcher={navigationNormalCustomGradientSwitcher}
                     setNormalCustomGradientSwitcher={(value) => setAttributes({ navigationNormalCustomGradientSwitcher: value })}
                     normalCustomGradientInputValue={navigationNormalCustomGradientInputValue}
@@ -2893,7 +2924,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     hoverClassicColor={navigationHoverClassicColor}
                     setHoverClassicColor={(value) => setAttributes({ navigationHoverClassicColor: value === undefined ? '' : value })}
                     hoverGradientColor={navigationHoverGradientColor} 
-                    setHoverGradientColor={(value) => setAttributes({ navigationHoverGradientColor: value === undefined ? '' : value })}
+                    setHoverGradientColor={(value) => setAttributes({ navigationHoverGradientColor: value === undefined ? null : value })}
                     hoverCustomGradientSwitcher={navigationHoverCustomGradientSwitcher}
                     setHoverCustomGradientSwitcher={(value) => setAttributes({ navigationHoverCustomGradientSwitcher: value })}
                     hoverCustomGradientInputValue={navigationHoverCustomGradientInputValue}
@@ -3039,7 +3070,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     normalClassicColor={dropDownNormalClassicColor}
                     setNormalClassicColor={(value) => setAttributes({ dropDownNormalClassicColor: value === undefined ? '' : value })}
                     normalGradientColor={dropDownNormalGradientColor}
-                    setNormalGradientColor={(value) => setAttributes({ dropDownNormalGradientColor: value === undefined ? '' : value })}
+                    setNormalGradientColor={(value) => setAttributes({ dropDownNormalGradientColor: value === undefined ? null : value })}
                     normalCustomGradientSwitcher={dropDownNormalCustomGradientSwitcher}
                     setNormalCustomGradientSwitcher={(value) => setAttributes({ dropDownNormalCustomGradientSwitcher: value })}
                     normalCustomGradientInputValue={dropDownNormalCustomGradientInputValue}
@@ -3050,7 +3081,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     hoverClassicColor={dropDownHoverClassicColor}
                     setHoverClassicColor={(value) => setAttributes({ dropDownHoverClassicColor: value === undefined ? '' : value })}
                     hoverGradientColor={dropDownHoverGradientColor} 
-                    setHoverGradientColor={(value) => setAttributes({ dropDownHoverGradientColor: value === undefined ? '' : value })}
+                    setHoverGradientColor={(value) => setAttributes({ dropDownHoverGradientColor: value === undefined ? null : value })}
                     hoverCustomGradientSwitcher={dropDownHoverCustomGradientSwitcher}
                     setHoverCustomGradientSwitcher={(value) => setAttributes({ dropDownHoverCustomGradientSwitcher: value })}
                     hoverCustomGradientInputValue={dropDownHoverCustomGradientInputValue}
@@ -3478,7 +3509,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     normalClassicColor={hamburgerMenuPopupNormalClassicColor}
                     setNormalClassicColor={(value) => setAttributes({ hamburgerMenuPopupNormalClassicColor: value === undefined ? '' : value })}
                     normalGradientColor={hamburgerMenuPopupNormalGradientColor}
-                    setNormalGradientColor={(value) => setAttributes({ hamburgerMenuPopupNormalGradientColor: value === undefined ? '' : value })}
+                    setNormalGradientColor={(value) => setAttributes({ hamburgerMenuPopupNormalGradientColor: value === undefined ? null : value })}
                     normalCustomGradientSwitcher={hamburgerMenuPopupNormalCustomGradientSwitcher}
                     setNormalCustomGradientSwitcher={(value) => setAttributes({ hamburgerMenuPopupNormalCustomGradientSwitcher: value })}
                     normalCustomGradientInputValue={hamburgerMenuPopupNormalCustomGradientInputValue}
@@ -3489,7 +3520,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     hoverClassicColor={hamburgerMenuPopupHoverClassicColor}
                     setHoverClassicColor={(value) => setAttributes({ hamburgerMenuPopupHoverClassicColor: value === undefined ? '' : value })}
                     hoverGradientColor={hamburgerMenuPopupHoverGradientColor} 
-                    setHoverGradientColor={(value) => setAttributes({ hamburgerMenuPopupHoverGradientColor: value === undefined ? '' : value })}
+                    setHoverGradientColor={(value) => setAttributes({ hamburgerMenuPopupHoverGradientColor: value === undefined ? null : value })}
                     hoverCustomGradientSwitcher={hamburgerMenuPopupHoverCustomGradientSwitcher}
                     setHoverCustomGradientSwitcher={(value) => setAttributes({ hamburgerMenuPopupHoverCustomGradientSwitcher: value })}
                     hoverCustomGradientInputValue={hamburgerMenuPopupHoverCustomGradientInputValue}
@@ -3751,7 +3782,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             normalClassicColor={navigationGlobalNormalClassicColor}
                             setNormalClassicColor={(value) => setAttributes({ navigationGlobalNormalClassicColor: value === undefined ? '' : value })}
                             normalGradientColor={navigationGlobalNormalGradientColor}
-                            setNormalGradientColor={(value) => setAttributes({ navigationGlobalNormalGradientColor: value === undefined ? '' : value })}
+                            setNormalGradientColor={(value) => setAttributes({ navigationGlobalNormalGradientColor: value === undefined ? null : value })}
                             normalCustomGradientSwitcher={navigationGlobalNormalCustomGradientSwitcher}
                             setNormalCustomGradientSwitcher={(value) => setAttributes({ navigationGlobalNormalCustomGradientSwitcher: value })}
                             normalCustomGradientInputValue={navigationGlobalNormalCustomGradientInputValue}
@@ -3762,7 +3793,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             hoverClassicColor={navigationGlobalHoverClassicColor}
                             setHoverClassicColor={(value) => setAttributes({ navigationGlobalHoverClassicColor: value === undefined ? '' : value })}
                             hoverGradientColor={navigationGlobalHoverGradientColor} 
-                            setHoverGradientColor={(value) => setAttributes({ navigationGlobalHoverGradientColor: value === undefined ? '' : value })}
+                            setHoverGradientColor={(value) => setAttributes({ navigationGlobalHoverGradientColor: value === undefined ? null : value })}
                             hoverCustomGradientSwitcher={navigationGlobalHoverCustomGradientSwitcher}
                             setHoverCustomGradientSwitcher={(value) => setAttributes({ navigationGlobalHoverCustomGradientSwitcher: value })}
                             hoverCustomGradientInputValue={navigationGlobalHoverCustomGradientInputValue}

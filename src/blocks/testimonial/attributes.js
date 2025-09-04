@@ -7,6 +7,14 @@ const attributes = {
         type: 'string',
         default: 'Desktop'
     },
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
     TestimonialPresetStyle: {
         type: 'string',
         default: 'preset-1',
@@ -25,6 +33,7 @@ const attributes = {
     },
     TestimonialImageAlt : {
         type: 'string',
+        default: 'Testimonial Image',
     },
     TestimonialImageID : {
         type: 'number',

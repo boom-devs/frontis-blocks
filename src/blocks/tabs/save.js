@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { InnerBlocks, RichText, useBlockProps } from '@wordpress/block-editor';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 
@@ -22,6 +23,8 @@ export default function save({ attributes }) {
     'data-tab-active': tabActiveFrontend,
   });
 
+  const contentId = `fb-tabs-body-${blockId || 'x'}`;
+
   return (
     <div {...blockProps}>
       <div className={`fb-tabs-wrap ${tabLayoutSwitcher} ${tabGlobalWraperClass}`} id={tabGlobalWraperID}>
@@ -29,7 +32,6 @@ export default function save({ attributes }) {
           {tabItems.map((item, index) => {
             const isActive = tabActiveFrontend === index;
             const tabId = `fb-tabs-tab-${blockId || 'x'}-${index}`;
-            const panelId = `fb-tabs-panel-${blockId || 'x'}-${index}`;
 
             return (
               <li
@@ -38,9 +40,10 @@ export default function save({ attributes }) {
                 role="tab"
                 id={tabId}
                 aria-selected={isActive}
-                aria-controls={panelId}
+                aria-controls={contentId}
                 tabIndex={isActive ? 0 : -1}
                 data-tab={index}
+                aria-label = {__("Tab", "frontis-blocks")}
               >
                 {/* Left Icon */}
                 {tabIconPosition === 'left' && item.tabIconAlign !== 'none' && showIcon && (
@@ -53,9 +56,10 @@ export default function save({ attributes }) {
                       <div className="fb-tab-icon-image">
                         <img
                           src={item.tabIconImageUrl}
-                          alt={item.tabIconImageAlt || ''}
+                          alt={item.tabIconImageAlt || __("Tab Icon", "frontis-blocks")}
                           loading="lazy"
                           decoding="async"
+                          aria-hidden="true"
                         />
                       </div>
                     ) : null}
@@ -91,9 +95,10 @@ export default function save({ attributes }) {
                       <div className="fb-tab-icon-image">
                         <img
                           src={item.tabIconImageUrl}
-                          alt={item.tabIconImageAlt || ''}
+                          alt={item.tabIconImageAlt || __("Tab Icon", "frontis-blocks")}
                           loading="lazy"
                           decoding="async"
+                          aria-hidden="true"
                         />
                       </div>
                     ) : null}
@@ -104,7 +109,7 @@ export default function save({ attributes }) {
           })}
         </ul>
 
-        <div className="fb-tabs-body-wrap">
+        <div className="fb-tabs-body-wrap" id={contentId}>
           <InnerBlocks.Content />
         </div>
       </div>

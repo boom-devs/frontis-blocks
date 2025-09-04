@@ -13,7 +13,7 @@ import FB_Block_Icons from "@Config/fb-blocks-icons";
 
 registerBlockType( metadata.name, {
 	attributes,
-	icon: FB_Block_Icons.carousel,
+	icon: FB_Block_Icons.tabs,
 	edit: Edit,
 	save,
 } );

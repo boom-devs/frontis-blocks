@@ -30,7 +30,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		tabGlobalWraperClass,
 	} = attributes;
 
-
 	const beSelect = select( 'core/block-editor' );
 	const beDispatch = dispatch( 'core/block-editor' );
 	const getChildren = () => beSelect.getBlockOrder( clientId ) || [];
@@ -81,7 +80,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		const { active, over } = event;
 		if (!active || !over || active.id === over.id) return;
 	  
-		// 1) index বের করো
+		// 1) get the old and new indexes
 		const oldIndex = tabsItemList.findIndex((item) => item.id === active.id);
 		const newIndex = tabsItemList.findIndex((item) => item.id === over.id);
 		if (oldIndex === -1 || newIndex === -1) return;
@@ -326,6 +325,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					data-tab={index}
 					onClick={() => updateActiveTab(index)}
 					style={{ cursor: 'pointer' }}
+					aria-label = {__("Tab", "frontis-blocks")}
 					>
 						{(tabIconPosition == 'left' || tabIconPosition == 'top') && showIcon && (
 							<>
@@ -339,7 +339,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										<div className="fb-tab-icon-image">
 											<img
 											src={item.tabIconImageUrl}
-											alt={item.tabIconImageAlt ?? ''} 
+											alt={item.tabIconImageAlt ?? __("Tab Icon", "frontis-blocks")} 
+											aria-hidden="true"
 											/>
 										</div>
 										) : null}
@@ -387,7 +388,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										<div className="fb-tab-icon-image">
 											<img
 											src={item.tabIconImageUrl}
-											alt={item.tabIconImageAlt ?? ''} 
+											alt={item.tabIconImageAlt ?? __("Tab Icon", "frontis-blocks")} 
+											aria-hidden="true"
 											/>
 										</div>
 										) : null}
