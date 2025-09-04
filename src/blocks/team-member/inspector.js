@@ -585,6 +585,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const changeTeamMemberPreset = (selectedPreset) => {
         const presetConfigurations = {
 			'preset-0': {
+				teamMemberImageOverlaySwitcher: false,
 				teamMemberBgType: 'classic',
 				teamMemberBgCustomGradientSwitcher: false,
 				teamMemberBgClassicColor: '#fff',
@@ -744,6 +745,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 			},
 			'preset-1': {
+				teamMemberImageOverlaySwitcher: true,
 				teamMemberBgType: 'classic',
 				teamMemberBgCustomGradientSwitcher: false,
 				teamMemberBgClassicColor: '#fff',
@@ -906,6 +908,187 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				},
 				teamMemberDescMarginDesktop: {
 					top: '20',
+					bottom: '0',
+					left: '0',
+					right: '0',
+				},
+				socialIconBtnDesktopBorderWidth: {
+					top: '1',
+					bottom: '1',
+					left: '1',
+					right: '1',
+				},
+				teamMemberIconsDesktopBorderWidth: {
+					top: '1',
+					bottom: '1',
+					left: '1',
+					right: '1',
+				}
+			},
+			'preset-2': {
+				teamMemberImageOverlaySwitcher: true,
+				teamMemberBgType: 'classic',
+				teamMemberBgCustomGradientSwitcher: false,
+				teamMemberBgClassicColor: '#fff',
+				teamMemberBgHoverType: 'classic',
+				teamMemberBgHoverCustomGradientSwitcher: false,
+				teamMemberBgHoverClassicColor: '',
+				teamMemberBorder: 'none',
+				teamMemberBorderColor: '#E1E3E8',
+				teamMemberContentPosition: 'image',
+				teamMemberDescSwitcher: false,
+				teamMemberNameColor: '#fff',
+				teamMemberNameHoverColor: '',
+				teamMemberDesignationColor: '#F89B2E',
+				teamMemberDesignationHoverColor: '',
+				teamMemberDescColor: '#555E72',
+				teamMemberSocialPosition: 'bottom_right',
+				teamMemberSocialProfileSwitcher: true,
+				teamMemberSocialProfileSeparator: true,
+				socialProfileSeparatorColor: '#E1E3E8',
+				teamMemberIconsBorder: 'solid',
+				teamMemberIconsBorderColor: '#fff',
+				teamMemberIconsColor: '#fff',
+				teamMemberIconsBGColor: 'rgba(255, 255, 255, 0.40)',
+				socialIconBtnSwitcher: true,
+				socialIconBtnBGColor: 'rgba(255, 255, 255, 0.40)',
+				socialIconBtnBorder: 'solid',
+				socialIconBtnBorderColor: '#fff',
+				socialIconBtnColor: '#fff',
+				teamMemberSocialType: 'image',
+				teamMemberSocialIconAnimationType: 'top',
+				teamMemberNameFontSize: {
+					Desktop: '32',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberNameFontWeight: '500',
+				teamMemberDesignationFontSize: {
+					Desktop: '20',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberDesignationFontWeight: '500',
+				teamMemberDescFontSize: {
+					Desktop: '18',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberDescFontWeight: '400',
+				teamMemberImageAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberImageAlignment: {
+					Desktop: 'start',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberImageMarginDesktop: {
+					top: '',
+					bottom: '',
+					left: '',
+					right: '',
+				},
+				teamMemberImageHeight: {
+					Desktop: '410',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberImageWidth: {
+					Desktop: '100',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberImageWidthUnits: {
+					Desktop: '%',
+					Tablet: '%',
+					Mobile: '%'
+				},
+				teamMemberImageBorderRadiusDesktop: {
+					bottom: '16',
+					left: '16',
+					right: '16',
+					top: '16',
+				},
+				teamMemberImageBorderRadiusUnits: {
+					Desktop: 'px',
+					Tablet: 'px',
+					Mobile: 'px'
+				},
+				teamMemberIconsDesktopBorderRadiusWidth: {
+					bottom: '150',
+					left: '150',
+					right: '150',
+					top: '150',
+				},
+				teamMemberIconsDesktopPadding: {
+					bottom: '16',
+					left: '16',
+					right: '16',
+					top: '16',
+				},
+				teamMemberIconsAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberDesktopBorderRadiusWidth: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberDesktopBorderWidth: {
+					bottom: '1',
+					left: '1',
+					right: '1',
+					top: '1',
+				},
+				teamMemberDesktopPadding: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberContentAlignment: {
+					Desktop: 'left',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberContentBorderRadiusDesktop: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberContentMarginDesktop: {
+					bottom: '32',
+					left: '32',
+					right: '0',
+					top: '0',
+				},
+				socialIconBtnDesktopMargin: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '10',
+				},
+				socialIconBtnDesktopPadding: {
+					bottom: '14',
+					left: '14',
+					right: '14',
+					top: '14',
+				},
+				teamMemberIconsDesktopMargin: {
+					bottom: '32',
+					left: '0',
+					right: '32',
+					top: '0',
+				},
+				teamMemberDescMarginDesktop: {
+					top: '20',
 					bottom: '',
 					left: '',
 					right: '',
@@ -921,6 +1104,382 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					bottom: '1',
 					left: '1',
 					right: '1',
+				}
+			},
+			'preset-3': {
+				teamMemberImageOverlaySwitcher: true,
+				teamMemberBgType: 'classic',
+				teamMemberBgCustomGradientSwitcher: false,
+				teamMemberBgClassicColor: '#fff',
+				teamMemberBgHoverType: 'classic',
+				teamMemberBgHoverCustomGradientSwitcher: false,
+				teamMemberBgHoverClassicColor: '',
+				teamMemberBorder: 'none',
+				teamMemberBorderColor: '#E1E3E8',
+				teamMemberContentPosition: 'bottom',
+				teamMemberDescSwitcher: false,
+				teamMemberNameColor: '#15171C',
+				teamMemberNameHoverColor: '',
+				teamMemberDesignationColor: '#F89B2E',
+				teamMemberDesignationHoverColor: '',
+				teamMemberDescColor: '#555E72',
+				teamMemberSocialPosition: 'top',
+				teamMemberSocialProfileSwitcher: true,
+				teamMemberSocialProfileSeparator: false,
+				teamMemberSocialProfileSeparatorPosition: 'top',
+				socialProfileSeparatorColor: '#E1E3E8',
+				teamMemberIconsBorder: 'solid',
+				teamMemberIconsBorderColor: 'rgba(195, 200, 210, 0.40)',
+				teamMemberIconsColor: '#fff',
+				teamMemberIconsBGColor: 'rgba(21, 23, 28, 0.40)',
+				socialIconBtnSwitcher: true,
+				socialIconBtnBGColor: '#15171C',
+				socialIconBtnBorder: 'solid',
+				socialIconBtnBorderColor: '#fff',
+				socialIconBtnColor: '#fff',
+				teamMemberSocialType: 'content',
+				teamMemberSocialIconAnimationType: 'top',
+				teamMemberNameFontSize: {
+					Desktop: '32',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberNameFontWeight: '600',
+				teamMemberDesignationFontSize: {
+					Desktop: '20',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberDesignationFontWeight: '500',
+				teamMemberDescFontSize: {
+					Desktop: '18',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberDescFontWeight: '400',
+				teamMemberImageAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberImageAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberImageMarginDesktop: {
+					top: '',
+					bottom: '',
+					left: '',
+					right: '',
+				},
+				teamMemberImageHeight: {
+					Desktop: '410',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberImageWidth: {
+					Desktop: '100',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberImageWidthUnits: {
+					Desktop: '%',
+					Tablet: '%',
+					Mobile: '%'
+				},
+				teamMemberImageBorderRadiusDesktop: {
+					bottom: '999',
+					left: '999',
+					right: '999',
+					top: '999',
+				},
+				teamMemberImageBorderRadiusUnits: {
+					Desktop: 'px',
+					Tablet: 'px',
+					Mobile: 'px'
+				},
+				teamMemberIconsDesktopBorderRadiusWidth: {
+					bottom: '150',
+					left: '150',
+					right: '150',
+					top: '150',
+				},
+				teamMemberIconsDesktopPadding: {
+					bottom: '16',
+					left: '16',
+					right: '16',
+					top: '16',
+				},
+				teamMemberIconsAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberDesktopBorderRadiusWidth: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberDesktopBorderWidth: {
+					bottom: '1',
+					left: '1',
+					right: '1',
+					top: '1',
+				},
+				teamMemberDesktopPadding: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberContentAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberContentBorderRadiusDesktop: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberContentMarginDesktop: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '32',
+				},
+				socialIconBtnDesktopMargin: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '10',
+				},
+				socialIconBtnDesktopPadding: {
+					bottom: '14',
+					left: '14',
+					right: '14',
+					top: '14',
+				},
+				teamMemberIconsDesktopMargin: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '-270',
+				},
+				teamMemberDescMarginDesktop: {
+					top: '20',
+					bottom: '',
+					left: '',
+					right: '',
+				},
+				socialIconBtnDesktopBorderWidth: {
+					top: '2',
+					bottom: '2',
+					left: '2',
+					right: '2',
+				},
+				teamMemberIconsDesktopBorderWidth: {
+					top: '2',
+					bottom: '2',
+					left: '2',
+					right: '2',
+				},
+				teamMemberNameMarginDesktop: {
+					top: '14',
+					bottom: '8',
+					left: '0',
+					right: '0',
+				}
+			},
+			'preset-4': {
+				teamMemberImageOverlaySwitcher: true,
+				teamMemberBgType: 'classic',
+				teamMemberBgCustomGradientSwitcher: false,
+				teamMemberBgClassicColor: '#6e7484',
+				teamMemberBgHoverType: 'classic',
+				teamMemberBgHoverCustomGradientSwitcher: false,
+				teamMemberBgHoverClassicColor: '',
+				teamMemberBorder: 'none',
+				teamMemberBorderColor: '#E1E3E8',
+				teamMemberContentPosition: 'top',
+				teamMemberDescSwitcher: false,
+				teamMemberNameColor: '#fff',
+				teamMemberNameHoverColor: '',
+				teamMemberDesignationColor: '#fff',
+				teamMemberDesignationHoverColor: '',
+				teamMemberDescColor: '#555E72',
+				teamMemberSocialPosition: 'bottom_center',
+				teamMemberSocialProfileSwitcher: true,
+				teamMemberSocialProfileSeparator: false,
+				teamMemberSocialProfileSeparatorPosition: 'top',
+				socialProfileSeparatorColor: '#E1E3E8',
+				teamMemberIconsBorder: 'solid',
+				teamMemberIconsBorderColor: 'rgba(195, 200, 210, 0.40)',
+				teamMemberIconsColor: '#fff',
+				teamMemberIconsBGColor: 'rgba(21, 23, 28, 0.40)',
+				socialIconBtnSwitcher: true,
+				socialIconBtnBGColor: '#15171C',
+				socialIconBtnBorder: 'solid',
+				socialIconBtnBorderColor: '#fff',
+				socialIconBtnColor: '#fff',
+				teamMemberSocialType: 'image',
+				teamMemberSocialIconAnimationType: 'top',
+				teamMemberNameFontSize: {
+					Desktop: '32',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberNameFontWeight: '600',
+				teamMemberDesignationFontSize: {
+					Desktop: '20',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberDesignationFontWeight: '500',
+				teamMemberDescFontSize: {
+					Desktop: '18',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberDescFontWeight: '400',
+				teamMemberImageAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberImageAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberImageMarginDesktop: {
+					top: '',
+					bottom: '',
+					left: '',
+					right: '',
+				},
+				teamMemberImageHeight: {
+					Desktop: '410',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberImageWidth: {
+					Desktop: '100',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberImageWidthUnits: {
+					Desktop: '%',
+					Tablet: '%',
+					Mobile: '%'
+				},
+				teamMemberImageBorderRadiusDesktop: {
+					bottom: '999',
+					left: '999',
+					right: '999',
+					top: '999',
+				},
+				teamMemberImageBorderRadiusUnits: {
+					Desktop: 'px',
+					Tablet: 'px',
+					Mobile: 'px'
+				},
+				teamMemberIconsDesktopBorderRadiusWidth: {
+					bottom: '150',
+					left: '150',
+					right: '150',
+					top: '150',
+				},
+				teamMemberIconsDesktopPadding: {
+					bottom: '16',
+					left: '16',
+					right: '16',
+					top: '16',
+				},
+				teamMemberIconsAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberDesktopBorderRadiusWidth: {
+					bottom: '999',
+					left: '999',
+					right: '999',
+					top: '999',
+				},
+				teamMemberDesktopBorderWidth: {
+					bottom: '1',
+					left: '1',
+					right: '1',
+					top: '1',
+				},
+				teamMemberDesktopPadding: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberContentAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberContentBorderRadiusDesktop: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberContentMarginDesktop: {
+					bottom: '30',
+					left: '0',
+					right: '0',
+					top: '48',
+				},
+				socialIconBtnDesktopMargin: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '10',
+				},
+				socialIconBtnDesktopPadding: {
+					bottom: '14',
+					left: '14',
+					right: '14',
+					top: '14',
+				},
+				teamMemberIconsDesktopMargin: {
+					bottom: '-26',
+					left: '0',
+					right: '0',
+					top: '0',
+				},
+				teamMemberDescMarginDesktop: {
+					top: '20',
+					bottom: '',
+					left: '',
+					right: '',
+				},
+				socialIconBtnDesktopBorderWidth: {
+					top: '2',
+					bottom: '2',
+					left: '2',
+					right: '2',
+				},
+				teamMemberIconsDesktopBorderWidth: {
+					top: '2',
+					bottom: '2',
+					left: '2',
+					right: '2',
+				},
+				teamMemberNameMarginDesktop: {
+					top: '0',
+					bottom: '8',
+					left: '0',
+					right: '0',
 				}
 			},
 			
@@ -3152,6 +3711,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				` }
 				height: fit-content;
 				display: flex;
+				${teamMemberSocialType === 'image' ? 'flex-direction: column;' : ''}
 				${teamMemberSocialType === 'content' && teamMemberSocialPosition === 'top' ? 'flex-direction: column-reverse;' : ''}
 				${teamMemberSocialType === 'content' && teamMemberSocialPosition === 'bottom' ? 'flex-direction: column;' : ''}
 				${teamMemberSocialType === 'content' && teamMemberSocialPosition === 'left' ? 'flex-direction: row-reverse;' : ''}
@@ -3324,6 +3884,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-social-profile-wrapper {
+				position: relative;
+				z-index: 9;
 				display: flex;
 				align-items: center;
 				${teamMemberSocialIconAnimationType === 'left' ? 'flex-direction: row-reverse;' : ''}

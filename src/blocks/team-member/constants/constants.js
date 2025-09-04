@@ -18,6 +18,7 @@ export const PRESETS = [
 	{ label: __("Preset 1", "frontis-block"), value: "preset-1" },
 	{ label: __("Preset 2", "frontis-block"), value: "preset-2" },
 	{ label: __("Preset 3", "frontis-block"), value: "preset-3" },
+	{ label: __("Preset 4", "frontis-block"), value: "preset-4" },
 ];
 
 export const UNIT_TYPES = [
