@@ -108,24 +108,24 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 == Changelog ==
 
-= 1.0.9 – 2025 =
+= 1.0.9 – 04 September 2025 =
 New Blocks:
-- Advanced Navigation
-- Gogle map
-- Flip Box
-- Tabs
+Advanced Navigation
+Gogle map
+Flip Box
+Tabs
 
 New Features:
-- Added Default Container Width option in the Frontis dashboard
-- Added Container Column Gap
-- Added Container Row Gap
-- Added Container Padding
-- Automatic Block Recovery
-- Copy & Paste Styles
-- Quick Action Bar
+Added Default Container Width option in the Frontis dashboard
+Added Container Column Gap
+Added Container Row Gap
+Added Container Padding
+Automatic Block Recovery
+Copy & Paste Styles
+Quick Action Bar
 
 Resolved Issues
-- Advanced Button Block – Fixed background color reset, removed width limitation (now supports larger values), eliminated unnecessary icon gap for icon-only buttons, removed unwanted placeholder text when button text is cleared, and resolved <a> wrapper conflict with slider controls.
+- Advanced Button Block – Fixed background color reset, removed width limitation (now supports larger values), eliminated unnecessary icon gap for icon-only buttons, removed unwanted placeholder text when button text is cleared, and resolved wrapper conflict with slider controls.
 
 - Post Grid Block – Fixed “Read More” button background reset issue and ensured “Load More” button hides automatically once all posts are loaded.
 
