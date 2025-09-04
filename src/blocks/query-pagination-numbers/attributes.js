@@ -10,7 +10,15 @@ const attributes = {
     midSize: {
         type: "number",
         default: 2
-    }
+    },
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
 };
 
 export default attributes;

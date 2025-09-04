@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
@@ -43,7 +44,7 @@ export default function save({ attributes }) {
             height: advancedImageDefaultHeight,
             'data-src': advancedImageUrl,
             src: (smartLazyLoadSwitcher && smartLazyLoadImageUrl) ? smartLazyLoadImageUrl : advancedImageUrl,
-            alt: advancedImageAlt || '',
+            alt: advancedImageAlt || __("Image", "frontis-blocks"),
         };
 
         if (advancedImageLazyLoadSwitcher) {
@@ -67,12 +68,13 @@ export default function save({ attributes }) {
                     href={linkUrl}
                     target={linkTargetUrl ? '_blank' : undefined}
                     rel={linkTargetUrl ? 'noopener noreferrer' : undefined}
+                    aria-label={advancedImageAlt}
                 >
-                    <img {...imgAttributes} />
+                    <img {...imgAttributes} aria-hidden="true" />
                 </a>
             );
         }
-        return <img {...imgAttributes} />;
+        return <img {...imgAttributes} aria-hidden="true" />;
     };
 
     return (

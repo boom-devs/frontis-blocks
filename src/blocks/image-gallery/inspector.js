@@ -3480,7 +3480,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 }
                                 normalGradientColor={GalleryBgGradientColor}
                                 setNormalGradientColor={(value) =>
-                                    setAttributes({ GalleryBgGradientColor: value === undefined ? '' : value })
+                                    setAttributes({ GalleryBgGradientColor: value === undefined ? null : value })
                                 }
                                 normalCustomGradientSwitcher={GalleryBgCustomGradientSwitcher}
                                 setNormalCustomGradientSwitcher={(value) =>
@@ -3538,7 +3538,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 }
                                 hoverGradientColor={GalleryBgHoverGradientColor}
                                 setHoverGradientColor={(value) =>
-                                    setAttributes({ GalleryBgHoverGradientColor: value === undefined ? '' : value })
+                                    setAttributes({ GalleryBgHoverGradientColor: value === undefined ? null : value })
                                 }
                                 hoverCustomGradientSwitcher={GalleryBgHoverCustomGradientSwitcher}
                                 setHoverCustomGradientSwitcher={(value) =>

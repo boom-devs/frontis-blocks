@@ -43,6 +43,14 @@ const attributes = {
         type: 'boolean',
         default: false,
     },
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
 
     /** Start Image Settings */
     imageOverlaySwitcher: {

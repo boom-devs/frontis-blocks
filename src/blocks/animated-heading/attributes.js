@@ -21,6 +21,14 @@ const attributes = {
             Mobile: '',
         },
     },
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
 
    animatedHeadingMainTag: {
         type: 'string',

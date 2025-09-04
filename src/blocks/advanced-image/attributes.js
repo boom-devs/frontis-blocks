@@ -15,6 +15,14 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
+	},
 	/** Image URL and ID and alt */
 	advancedImageUrl : {
 		type: 'string',
@@ -26,7 +34,7 @@ const attributes = {
 	},
 	advancedImageAlt: {
 		type: 'string',
-		default: ''
+		default: 'Image'
 	},
 	advancedImageDefaultWidth: {
 		type: 'number',
@@ -39,6 +47,23 @@ const attributes = {
 	advancedImageSrcSet: {
 		type: 'string',
 		default: '',
+	},
+	/** Image Size */
+	maskImageUrl : {
+		type: 'string',
+		default: '',
+	},
+	maskImageSize : {
+		type: 'string',
+		default: 'cover',
+	},
+	maskImagePosition : {
+		type: 'string',
+		default: 'center',
+	},
+	maskImageRepeat : {
+		type: 'string',
+		default: 'no-repeat',
 	},
 	/** Image Size */
 	mediaSize: {

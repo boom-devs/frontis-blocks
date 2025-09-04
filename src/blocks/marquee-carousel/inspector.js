@@ -46,6 +46,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockStyle,
         speed,
         reverseDirection,
+        pauseOnHover,
 
         slideWidth,
         slideWidthUnits,
@@ -518,6 +519,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 initialOpen={true}
             >
                 <ToggleControl
+                    label={__("Pause on Hover", "frontis-blocks")}
+                    checked={pauseOnHover}
+                    onChange={(value) => setAttributes({ pauseOnHover: value })}
+                />
+                <ToggleControl
                     label={__("Reverse Direction", "frontis-blocks")}
                     checked={reverseDirection}
                     onChange={(value) => setAttributes({ reverseDirection: value })}
@@ -779,7 +785,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     globalCustomGradientInputValue={sliderGlobalBgNormalCustomGradientInputValue}
                                                     setGlobalCustomGradientInputValue={(value) => setAttributes({ sliderGlobalBgNormalCustomGradientInputValue: value })}
                                                     globalGradientColor={sliderGlobalBgNormalGradientColor}
-                                                    setGlobalGradientColor={(value) => setAttributes({ sliderGlobalBgNormalGradientColor: value === undefined ? '' : value })}
+                                                    setGlobalGradientColor={(value) => setAttributes({ sliderGlobalBgNormalGradientColor: value === undefined ? null : value })}
                                                 />
                                             )}
                                         </div>
@@ -863,7 +869,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                     globalCustomGradientInputValue={sliderGlobalBgHoverCustomGradientInputValue}
                                                     setGlobalCustomGradientInputValue={(value) => setAttributes({ sliderGlobalBgHoverCustomGradientInputValue: value })}
                                                     globalGradientColor={sliderGlobalBgHoverGradientColor}
-                                                    setGlobalGradientColor={(value) => setAttributes({ sliderGlobalBgHoverGradientColor: value === undefined ? '' : value })}
+                                                    setGlobalGradientColor={(value) => setAttributes({ sliderGlobalBgHoverGradientColor: value === undefined ? null : value })}
                                                 />
                                             )}
                                         </div>

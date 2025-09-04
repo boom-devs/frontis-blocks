@@ -343,7 +343,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}
     const ratingIconHandler = (IconName) => {
 		setAttributes({TestimonialRatingicon: IconName})
-
 	}
 
 
@@ -726,8 +725,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
     /** End Preset Style */
     
-
-
     /** Start Testimonial Rating Icon Margin */
     const testimonialRatingIconMarginUnitsChange = (event, position) => {
         const value = event.target.value;
@@ -3067,7 +3064,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setGlobalSwitcher={(value) => setAttributes({ TestimonialAuthorColorSwitcher: value })}
                 />
 
-                {TestimonialDescColorSwitcher === 'normal' && (
+                {TestimonialAuthorColorSwitcher === 'normal' && (
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
                         globalColor={TestimonialAuthorColor}
@@ -3075,7 +3072,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 )}
 
-                {TestimonialDescColorSwitcher === 'hover' && (
+                {TestimonialAuthorColorSwitcher === 'hover' && (
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={TestimonialAuthorHoverColor}

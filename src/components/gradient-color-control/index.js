@@ -94,10 +94,11 @@ const FB_GradientColorControl = ({
             ) : (
                 <BaseControl className="fb-gradient-picker-wrapper">
                     <GradientPicker
-                        value={globalGradientColor} 
+                        value={globalGradientColor}
                         onChange={setGlobalGradientColor}
                         className='fb-gradient-picker'
-                        gradients={globalGradientColors}                                    
+                        gradients={globalGradientColors}
+                        clearable={true}
                     />                                         
                 </BaseControl>
                 )}

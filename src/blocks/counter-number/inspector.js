@@ -1,30 +1,35 @@
 import { __ } from '@wordpress/i18n';
 import {
-	MediaUpload,
-	MediaUploadCheck,
-	useBlockProps,
-	InspectorControls,
+    MediaUpload,
+    MediaUploadCheck,
+    useBlockProps,
+    InspectorControls,
 } from '@wordpress/block-editor';
 
 import {
-	TabPanel,
-	PanelBody,
-	TextControl,
-	ColorPicker,
-	BaseControl,
-	RangeControl,
-	ToggleControl,
-	DateTimePicker,
-	Dropdown,
-	Button,
-	Dashicon,
-	SelectControl,
-	ButtonGroup,
-	ResponsiveWrapper, __experimentalHStack as HStack,
+    TabPanel,
+    PanelBody,
+    TextControl,
+    ColorPicker,
+    BaseControl,
+    RangeControl,
+    ToggleControl,
+    DateTimePicker,
+    Dropdown,
+    Button,
+    Dashicon,
+    SelectControl,
+    ButtonGroup,
+    ResponsiveWrapper, __experimentalHStack as HStack,
 } from '@wordpress/components';
-import {useEffect, useRef, useState, useMemo} from '@wordpress/element';
+
+import {
+    PRESETS
+} from "./constants/constants";
+
+import { useEffect, useRef, useState, useMemo } from '@wordpress/element';
 import './editor.scss';
-import {mediaType, BORDER_STYLES, UNIT_TYPES, OVERFLOW_OP, separatorType, CARD_WRAP_HZ_ALIGNMENT, CARD_WRAP_VR_ALIGNMENT, ICON_POSITION, TITLE_POSITION} from "./constants/constants";
+import { mediaType, BORDER_STYLES, UNIT_TYPES, OVERFLOW_OP, separatorType, CARD_WRAP_HZ_ALIGNMENT, CARD_WRAP_VR_ALIGNMENT, ICON_POSITION, TITLE_POSITION } from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
@@ -34,7 +39,7 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
-import {useDeviceType} from "@Config/displayType";
+import { useDeviceType } from "@Config/displayType";
 import FB_ImageControl from '@Components/image-control';
 import FB_PositionControl from '@Components/position-control';
 import FB_InputControl from '@Components/input-control';
@@ -47,124 +52,144 @@ import FB_InspectorControls from '@Components/InspectorControls';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
-	const {
-		blockID,
+    const {
+        blockID,
         counterAlignment,
-		// deviceType,
-		counterNumberStart,
-		counterNumberEnd,
-		counterDuration,
-		counterPrefix,
+        // deviceType,
+        counterNumberStart,
+        counterNumberEnd,
+        counterDuration,
+        counterPrefix,
         counterPrefixSwitch,
-		counterSuffix,
+        counterSuffix,
         counterSuffixSwitch,
-		counterTitle,
+        counterTitle,
         counterTitleSwitch,
-		counterTitleTag,
-		showThousandsSeparator,
-		showThousandsSeparatorType,
-		icon,
-		iconPosition,
-		titlePosition,
-		counterCardAlignment,
-		mediaSwitcher,
-		counterMediaId,
-		counterMediaUrl,
-		counterMediaAlt,
-		counterMediaImagedisplay,
-        
-		counterItemSize,
-		counterItemSizeUnits,
-        counterItemRatio,
+        counterTitleTag,
+        showThousandsSeparator,
+        showThousandsSeparatorType,
+        icon,
+        iconPosition,
+        titlePosition,
+        counterCardAlignment,
+        mediaSwitcher,
+        counterMediaId,
+        counterMediaUrl,
+        counterMediaAlt,
+        counterMediaImagedisplay,
 
-		// Item Border Type
-		counterItemBorder,
+        counterItemSize,
+        counterItemSizeUnits,
+        counterItemRatio,
+        counterItemHeight,
+        counterItemHeightUnits,
+
+        // Item Border Type
+        counterItemBorder,
         counterItemBorderColorSwitcher,
-		counterItemBorderColor,
+        counterItemBorderColor,
         counterItemBorderHoverColor,
 
-		counterItemBorderTypeUnits,
-		counterItemBorderTypeDesktop,
-		counterItemBorderTypeTablet,
-		counterItemBorderTypeMobile,
-		counterItemBorderTypeLink,
+        counterItemBorderTypeUnits,
+        counterItemBorderTypeDesktop,
+        counterItemBorderTypeTablet,
+        counterItemBorderTypeMobile,
+        counterItemBorderTypeLink,
 
-		// Item Border Radius
-		counterItemBorderRadiusUnits,
-		counterItemBorderRadiusDesktop,
-		counterItemBorderRadiusTablet,
-		counterItemBorderRadiusMobile,
-		counterItemBorderRadiusLink,
+        // Item Border Radius
+        counterItemBorderRadiusUnits,
+        counterItemBorderRadiusDesktop,
+        counterItemBorderRadiusTablet,
+        counterItemBorderRadiusMobile,
+        counterItemBorderRadiusLink,
 
         // Item Background attributes
-		counterItemBgColorSwitcher,
-		counterItemBgColor,
-		counterItemBgHoverColor,
+        counterItemBgColorSwitcher,
+        counterItemBgColor,
+        counterItemBgHoverColor,
+
+        // Item Padding
+        counterItemPaddingUnits,
+        counterItemPaddingDesktop,
+        counterItemPaddingTablet,
+        counterItemPaddingMobile,
+        counterItemPaddingLink,
+
+        // Item Margin
+        counterItemMarginUnits,
+        counterItemMarginDesktop,
+        counterItemMarginTablet,
+        counterItemMarginMobile,
+        counterItemMarginLink,
 
         //Counter Icon attributes
-		counterIconMarginUnits,
-		counterIconMarginDesktop,
-		counterIconMarginTablet,
-		counterIconMarginMobile,
-		counterIconMarginLink,
+        counterIconMarginUnits,
+        counterIconMarginDesktop,
+        counterIconMarginTablet,
+        counterIconMarginMobile,
+        counterIconMarginLink,
         counterIconColorSwitcher,
-		counterIconColor,
-		counterIconHoverColor,
-		counterIconSize,
-		counterIconSizeUnits,
-		counterIconSizeRatio,
+        counterIconColor,
+        counterIconHoverColor,
+        counterIconSize,
+        counterIconSizeUnits,
+        counterIconSizeRatio,
+
+        // Gap between icon and content
+        counterItemGap,
+        counterItemGapUnits,
 
         //Counter Number attributes
-		counterNumberFontColorSwitcher,
-		counterNumberFontColor,
-		counterNumberFontHoverColor,
+        counterNumberFontColorSwitcher,
+        counterNumberFontColor,
+        counterNumberFontHoverColor,
         counterNumberGlobalTypoSwitcher,
         counterNumberGlobalTypographyData,
         counterNumberGlobalTypoType,
         counterNumberGlobalTypoOption,
-		counterNumberFontFamily,
-		counterNumberFontSize,
-		counterNumberFontSizeUnits,
-		counterNumberFontWeight,
-		counterNumberFontStyle,
-		counterNumberTextTransform,
-		counterNumberTextDecoration,
-		counterNumberLetterSpacing,
-		counterNumberLetterSpacingUnits,
-		counterNumberLineHeight,
-		counterNumberLineHeightUnits,
+        counterNumberFontFamily,
+        counterNumberFontSize,
+        counterNumberFontSizeUnits,
+        counterNumberFontWeight,
+        counterNumberFontStyle,
+        counterNumberTextTransform,
+        counterNumberTextDecoration,
+        counterNumberLetterSpacing,
+        counterNumberLetterSpacingUnits,
+        counterNumberLineHeight,
+        counterNumberLineHeightUnits,
 
-		counterNumberMarginUnits,
-		counterNumberMarginDesktop,
-		counterNumberMarginTablet,
-		counterNumberMarginMobile,
-		counterNumberMarginLink,
+        counterNumberMarginUnits,
+        counterNumberMarginDesktop,
+        counterNumberMarginTablet,
+        counterNumberMarginMobile,
+        counterNumberMarginLink,
 
         //Counter Number Title attributes
         counterNumberTitleGlobalTypoSwitcher,
         counterNumberTitleGlobalTypographyData,
         counterNumberTitleGlobalTypoType,
         counterNumberTitleGlobalTypoOption,
-		counterNumberTitleFontFamily,
-		counterNumberTitleFontSize,
-		counterNumberTitleFontSizeUnits,
-		counterNumberTitleFontWeight,
-		counterNumberTitleFontStyle,
-		counterNumberTitleTextTransform,
-		counterNumberTitleTextDecoration,
-		counterNumberTitleLetterSpacing,
-		counterNumberTitleLetterSpacingUnits,
-		counterNumberTitleLineHeight,
-		counterNumberTitleLineHeightUnits,
+        counterNumberTitleFontFamily,
+        counterNumberTitleFontSize,
+        counterNumberTitleFontSizeUnits,
+        counterNumberTitleFontWeight,
+        counterNumberTitleFontStyle,
+        counterNumberTitleTextTransform,
+        counterNumberTitleTextDecoration,
+        counterNumberTitleLetterSpacing,
+        counterNumberTitleLetterSpacingUnits,
+        counterNumberTitleLineHeight,
+        counterNumberTitleLineHeightUnits,
         counterNumberTitleFontColorSwitcher,
-		counterNumberTitleFontColor,
-		counterNumberTitleFontHoverColor,
+        counterNumberTitleFontColor,
+        counterNumberTitleFontHoverColor,
 
-		counterNumberTitleMarginUnits,
-		counterNumberTitleMarginDesktop,
-		counterNumberTitleMarginTablet,
-		counterNumberTitleMarginMobile,
-		counterNumberTitleMarginLink,
+        counterNumberTitleMarginUnits,
+        counterNumberTitleMarginDesktop,
+        counterNumberTitleMarginTablet,
+        counterNumberTitleMarginMobile,
+        counterNumberTitleMarginLink,
 
         //Global attributes
         counterGlobalZIndex,
@@ -200,8 +225,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterGlobalBoxShadowCssValue,
 
         counterDesktopSwitcher,
-		counterTabletSwitcher,
-		counterMobileSwitcher,
+        counterTabletSwitcher,
+        counterMobileSwitcher,
 
         // Position
         counterPositionType,
@@ -219,392 +244,727 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterGlobalWraperCustomCSS,
         counterGlobalWraperID,
         counterGlobalWraperClass,
-	} = attributes;
+        counterPresetStyle
+    } = attributes;
 
-	const counterRef = useRef(null);
-	const observerRef = useRef(null);
+    const counterRef = useRef(null);
+    const observerRef = useRef(null);
 
-    const deviceType= useDeviceType();
+    const deviceType = useDeviceType();
+
+    let defaultImageUrl = '';
+    if (typeof FrontisBlocksData !== 'undefined') {
+        defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/users-group.svg';
+    }
+
+    // Set default value for counterMediaUrl
+    useEffect(() => {
+        if (!counterMediaUrl) {
+            setAttributes({ counterMediaUrl: defaultImageUrl });
+        }
+    }, []);
+
+    /** Start Preset Style */
+    const changeCounterPreset = (selectedPreset) => {
+        const presetConfigurations = {
+            "preset-1": {
+                counterItemBgColor: '#FFFBF5',
+                iconPosition: 'left',
+                counterNumberEnd: 250,
+                counterSuffixSwitch: true,
+                counterPrefixSwitch: true,
+                counterSuffix: "M",
+                mediaSwitcher: 'image',
+                counterItemBorder: "none",
+                counterItemBorder: "none",
+                counterItemBorderRadiusMobile: {
+                    top: '24', bottom: '24', left: '24', right: '24'
+                },
+                counterItemBorderRadiusTablet: {
+                    top: '24', bottom: '24', left: '24', right: '24'
+                },
+                counterItemBorderRadiusUnits: {
+                    Desktop: 'px', Tablet: 'px', Mobile: 'px'
+                },
+                counterItemPaddingDesktop: { top: '42', right: '32', bottom: '42', left: '32' },
+                counterItemPaddingMobile: { top: '32', bottom: '32', left: '32', right: '32' },
+                counterItemPaddingTablet: { top: '24', bottom: '24', left: '24', right: '24' },
+                counterItemSize: {
+                    Desktop: '410',
+                    Tablet: '306',
+                    Mobile: '250'
+                },
+                counterItemHeight: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: ''
+                },
+            },
+            "preset-2": {
+                counterItemBgColor: '#F7F7F7',
+                iconPosition: 'top',
+                counterNumberEnd: 250,
+                counterSuffixSwitch: true,
+                counterPrefixSwitch: true,
+                mediaSwitcher: 'image',
+                counterItemBorder: "none",
+                counterItemBorderRadiusMobile: {
+                    top: '24', bottom: '24', left: '24', right: '24'
+                },
+                counterItemBorderRadiusTablet: {
+                    top: '24', bottom: '24', left: '24', right: '24'
+                },
+                counterItemBorderRadiusUnits: {
+                    Desktop: 'px', Tablet: 'px', Mobile: 'px'
+                },
+                counterItemPaddingDesktop: { top: '42', right: '32', bottom: '42', left: '32' },
+                counterItemPaddingMobile: { top: '32', bottom: '32', left: '32', right: '32' },
+                counterItemPaddingTablet: { top: '24', bottom: '24', left: '24', right: '24' },
+                counterItemSize: {
+                    Desktop: '410',
+                    Tablet: '306',
+                    Mobile: '250'
+                },
+                counterItemHeight: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: ''
+                },
+            },
+            "preset-3": {
+                counterItemBgColor: '#EBF5FF',
+                counterAlignment: {
+                    Desktop: 'left',
+                    Tablet: 'left',
+                    Mobile: 'left'
+                },
+                counterCardAlignment: {
+                    Desktop: 'center',
+                    Tablet: 'center',
+                    Mobile: 'center'
+                },
+                counterNumberEnd: 32,
+                counterSuffixSwitch: false,
+                counterPrefixSwitch: false,
+                mediaSwitcher: 'icon',
+                icon: 'bolt',
+                counterItemBorder: "none",
+                counterItemBorderRadiusDesktop: {
+                    top: '24',
+                    right: '24',
+                    bottom: '24',
+                    left: '24'
+                },
+                counterItemBorderRadiusMobile: {
+                    top: '24', bottom: '24', left: '24', right: '24'
+                },
+                counterItemBorderRadiusTablet: {
+                    top: '24', bottom: '24', left: '24', right: '24'
+                },
+                counterItemBorderRadiusUnits: {
+                    Desktop: 'px', Tablet: 'px', Mobile: 'px'
+                },
+                counterItemPaddingDesktop: { top: '42', right: '32', bottom: '42', left: '32' },
+                counterItemPaddingMobile: { top: '32', bottom: '32', left: '32', right: '32' },
+                counterItemPaddingTablet: { top: '24', bottom: '24', left: '24', right: '24' },
+                counterItemSize: {
+                    Desktop: '410',
+                    Tablet: '306',
+                    Mobile: '250'
+                },
+                counterItemHeight: {
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: ''
+                },
+            },
+            "preset-4": {
+                counterItemBgColor: 'EBF5FF00',
+                counterAlignment: {
+                    Desktop: 'left',
+                    Tablet: 'left',
+                    Mobile: 'left'
+                },
+                counterCardAlignment: {
+                    Desktop: 'center',
+                    Tablet: 'center',
+                    Mobile: 'center'
+                },
+                counterNumberEnd: 80,
+                counterSuffixSwitch: true,
+                counterPrefixSwitch: false,
+                counterSuffix: "%",
+                mediaSwitcher: 'icon',
+                icon: 'trophy',
+                counterItemBorder: "solid",
+                counterItemBorderColor: "#399cff",
+                counterItemBorderRadiusDesktop: {
+                    top: '50',
+                    right: '50',
+                    bottom: '50',
+                    left: '50'
+                },
+                counterItemBorderRadiusMobile: {
+                    top: '50', bottom: '50', left: '50', right: '50'
+                },
+                counterItemBorderRadiusTablet: {
+                    top: '50', bottom: '50', left: '50', right: '50'
+                },
+                counterItemBorder: "solid",
+                counterItemBorderRadiusUnits: {
+                    Desktop: '%', Tablet: '%', Mobile: '%'
+                },
+                counterItemPaddingDesktop: { top: '0', right: '0', bottom: '0', left: '0' },
+                counterItemPaddingMobile: { top: '0', bottom: '0', left: '0', right: '0' },
+                counterItemPaddingTablet: { top: '0', bottom: '0', left: '0', right: '0' },
+                counterItemSize: {
+                    Desktop: '306',
+                    Tablet: '306',
+                    Mobile: '306'
+                },
+                counterItemHeight: {
+                    Desktop: '306',
+                    Tablet: '306',
+                    Mobile: '306'
+                },
+            },
+        };
+
+        const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+                counterPresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Counter: Preset "${selectedPreset}" not found.`);
+        }
+    };
 
     // Generate unique block ID if not set
-	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-			setAttributes({
-				blockID: "counter-number-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "counter-number-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
-	// Icon media remove handler
-	const removeCounterMedia = () => {
-		setAttributes({
-			counterMediaId: '',
-			counterMediaUrl: ''
-		});
-	}
-	const iconHandler = (iconName) => {
-		setAttributes({icon: iconName || 'star' })
-	}
+    // Icon media remove handler
+    const removeCounterMedia = () => {
+        setAttributes({
+            counterMediaId: '',
+            counterMediaUrl: ''
+        });
+    }
+    const iconHandler = (iconName) => {
+        setAttributes({ icon: iconName || 'star' })
+    }
 
     const counterItemSizeHandler = (value) => {
-		setAttributes({ counterItemSize: value });
-	};
+        setAttributes({ counterItemSize: value });
+    };
 
-	const counterItemSizeUnitsHandler = (value) => {
-		setAttributes({ counterItemSizeUnits: value });
-	};
+    const counterItemSizeUnitsHandler = (value) => {
+        setAttributes({ counterItemSizeUnits: value });
+    };
 
-	const blockProps = useBlockProps();
+    const blockProps = useBlockProps();
 
     /** Counter Item Border **/
-    const handleCounterItemBorderUnitHandler = ( event, position ) => {
-		const value = event.target.value;
-		if ( counterItemBorderTypeLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						counterItemBorderTypeDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						counterItemBorderTypeTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						counterItemBorderTypeMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {counterItemBorderTypeDesktop: {...counterItemBorderTypeDesktop, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {counterItemBorderTypeTablet: {...counterItemBorderTypeTablet, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {counterItemBorderTypeMobile: {...counterItemBorderTypeMobile, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
-	}
-	const counterItemBorderCombineBtnHandler = () => {
-		setAttributes( {counterItemBorderTypeLink: !counterItemBorderTypeLink} );
-	}
+    const handleCounterItemBorderUnitHandler = (event, position) => {
+        const value = event.target.value;
+        if (counterItemBorderTypeLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        counterItemBorderTypeDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        counterItemBorderTypeTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        counterItemBorderTypeMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ counterItemBorderTypeDesktop: { ...counterItemBorderTypeDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ counterItemBorderTypeTablet: { ...counterItemBorderTypeTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ counterItemBorderTypeMobile: { ...counterItemBorderTypeMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    const counterItemBorderCombineBtnHandler = () => {
+        setAttributes({ counterItemBorderTypeLink: !counterItemBorderTypeLink });
+    }
 
-	const counterItemBorderTypeUnitsHandler = (unit) => {
-		setAttributes( {
-			counterItemBorderTypeUnits: {
-				...counterItemBorderTypeUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-	
+    const counterItemBorderTypeUnitsHandler = (unit) => {
+        setAttributes({
+            counterItemBorderTypeUnits: {
+                ...counterItemBorderTypeUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
     const counterItemDesktopBorder = `${counterItemBorderTypeDesktop.top}${counterItemBorderTypeUnits.Desktop} ${counterItemBorderTypeDesktop.right}${counterItemBorderTypeUnits.Desktop} ${counterItemBorderTypeDesktop.bottom}${counterItemBorderTypeUnits.Desktop} ${counterItemBorderTypeDesktop.left}${counterItemBorderTypeUnits.Desktop}`;
     const counterItemTabletBorder = `${counterItemBorderTypeTablet.top}${counterItemBorderTypeUnits.Tablet} ${counterItemBorderTypeTablet.right}${counterItemBorderTypeUnits.Tablet} ${counterItemBorderTypeTablet.bottom}${counterItemBorderTypeUnits.Tablet} ${counterItemBorderTypeTablet.left}${counterItemBorderTypeUnits.Tablet}`;
     const counterItemMobileBorder = `${counterItemBorderTypeMobile.top}${counterItemBorderTypeUnits.Mobile} ${counterItemBorderTypeMobile.right}${counterItemBorderTypeUnits.Mobile} ${counterItemBorderTypeMobile.bottom}${counterItemBorderTypeUnits.Mobile} ${counterItemBorderTypeMobile.left}${counterItemBorderTypeUnits.Mobile}`;
 
     /** Counter Item Border Radius **/
-    const handleItemBorderRadiusUnitHandler = ( event, position ) => {
-		const value = event.target.value;
-		if ( counterItemBorderRadiusLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						counterItemBorderRadiusDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						counterItemBorderRadiusTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						counterItemBorderRadiusMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {counterItemBorderRadiusDesktop: {...counterItemBorderRadiusDesktop, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {counterItemBorderRadiusTablet: {...counterItemBorderRadiusTablet, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {counterItemBorderRadiusMobile: {...counterItemBorderRadiusMobile, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
+    const handleItemBorderRadiusUnitHandler = (event, position) => {
+        const value = event.target.value;
+        if (counterItemBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        counterItemBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        counterItemBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        counterItemBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ counterItemBorderRadiusDesktop: { ...counterItemBorderRadiusDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ counterItemBorderRadiusTablet: { ...counterItemBorderRadiusTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ counterItemBorderRadiusMobile: { ...counterItemBorderRadiusMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
 
-	}
+    }
 
-	const counterItemBorderRadiusCombineBtnHandler = () => {
-		setAttributes( {counterItemBorderRadiusLink: !counterItemBorderRadiusLink} );
-	}
+    const counterItemBorderRadiusCombineBtnHandler = () => {
+        setAttributes({ counterItemBorderRadiusLink: !counterItemBorderRadiusLink });
+    }
 
-	const counterItemBorderRadiusUnitsHandler = (unit) => {
-		setAttributes( {
-			counterItemBorderRadiusUnits: {
-				...counterItemBorderRadiusUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+    const counterItemBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            counterItemBorderRadiusUnits: {
+                ...counterItemBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
 
     const counterItemDesktopBorderRadius = `${counterItemBorderRadiusDesktop.top}${counterItemBorderRadiusUnits.Desktop} ${counterItemBorderRadiusDesktop.right}${counterItemBorderRadiusUnits.Desktop} ${counterItemBorderRadiusDesktop.bottom}${counterItemBorderRadiusUnits.Desktop} ${counterItemBorderRadiusDesktop.left}${counterItemBorderRadiusUnits.Desktop}`;
     const counterItemTabletBorderRadius = `${counterItemBorderRadiusTablet.top}${counterItemBorderRadiusUnits.Tablet} ${counterItemBorderRadiusTablet.right}${counterItemBorderRadiusUnits.Tablet} ${counterItemBorderRadiusTablet.bottom}${counterItemBorderRadiusUnits.Tablet} ${counterItemBorderRadiusTablet.left}${counterItemBorderRadiusUnits.Tablet}`;
     const counterItemMobileBorderRadius = `${counterItemBorderRadiusMobile.top}${counterItemBorderRadiusUnits.Mobile} ${counterItemBorderRadiusMobile.right}${counterItemBorderRadiusUnits.Mobile} ${counterItemBorderRadiusMobile.bottom}${counterItemBorderRadiusUnits.Mobile} ${counterItemBorderRadiusMobile.left}${counterItemBorderRadiusUnits.Mobile}`;
 
+    /** Counter Item Padding **/
+    const handleCounterItemPaddingUnitHandler = (event, position) => {
+        const value = event.target.value;
+        if (counterItemPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        counterItemPaddingDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        counterItemPaddingTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        counterItemPaddingMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ counterItemPaddingDesktop: { ...counterItemPaddingDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ counterItemPaddingTablet: { ...counterItemPaddingTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ counterItemPaddingMobile: { ...counterItemPaddingMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const counterItemPaddingCombineBtnHandler = () => {
+        setAttributes({ counterItemPaddingLink: !counterItemPaddingLink });
+    };
+
+    const counterItemPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            counterItemPaddingUnits: {
+                ...counterItemPaddingUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    const counterItemDesktopPadding = `${counterItemPaddingDesktop.top}${counterItemPaddingUnits.Desktop} ${counterItemPaddingDesktop.right}${counterItemPaddingUnits.Desktop} ${counterItemPaddingDesktop.bottom}${counterItemPaddingUnits.Desktop} ${counterItemPaddingDesktop.left}${counterItemPaddingUnits.Desktop}`;
+    const counterItemTabletPadding = `${counterItemPaddingTablet.top}${counterItemPaddingUnits.Tablet} ${counterItemPaddingTablet.right}${counterItemPaddingUnits.Tablet} ${counterItemPaddingTablet.bottom}${counterItemPaddingUnits.Tablet} ${counterItemPaddingTablet.left}${counterItemPaddingUnits.Tablet}`;
+    const counterItemMobilePadding = `${counterItemPaddingMobile.top}${counterItemPaddingUnits.Mobile} ${counterItemPaddingMobile.right}${counterItemPaddingUnits.Mobile} ${counterItemPaddingMobile.bottom}${counterItemPaddingUnits.Mobile} ${counterItemPaddingMobile.left}${counterItemPaddingUnits.Mobile}`;
+
+    /** Counter Item Margin **/
+    const handleCounterItemMarginUnitHandler = (event, position) => {
+        const value = event.target.value;
+        if (counterItemMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        counterItemMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        counterItemMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        counterItemMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ counterItemMarginDesktop: { ...counterItemMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ counterItemMarginTablet: { ...counterItemMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ counterItemMarginMobile: { ...counterItemMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const counterItemMarginCombineBtnHandler = () => {
+        setAttributes({ counterItemMarginLink: !counterItemMarginLink });
+    };
+
+    const counterItemMarginUnitsHandler = (unit) => {
+        setAttributes({
+            counterItemMarginUnits: {
+                ...counterItemMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+    const counterItemDesktopMargin = `${counterItemMarginDesktop.top}${counterItemMarginUnits.Desktop} ${counterItemMarginDesktop.right}${counterItemMarginUnits.Desktop} ${counterItemMarginDesktop.bottom}${counterItemMarginUnits.Desktop} ${counterItemMarginDesktop.left}${counterItemMarginUnits.Desktop}`;
+    const counterItemTabletMargin = `${counterItemMarginTablet.top}${counterItemMarginUnits.Tablet} ${counterItemMarginTablet.right}${counterItemMarginUnits.Tablet} ${counterItemMarginTablet.bottom}${counterItemMarginUnits.Tablet} ${counterItemMarginTablet.left}${counterItemMarginUnits.Tablet}`;
+    const counterItemMobileMargin = `${counterItemMarginMobile.top}${counterItemMarginUnits.Mobile} ${counterItemMarginMobile.right}${counterItemMarginUnits.Mobile} ${counterItemMarginMobile.bottom}${counterItemMarginUnits.Mobile} ${counterItemMarginMobile.left}${counterItemMarginUnits.Mobile}`;
+
     /** Counter Icon Margin **/
-    const handleCounterIconMarginUnitHandler = ( event, position ) => {
-		const value = event.target.value;
-		if ( counterIconMarginLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						counterIconMarginDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						counterIconMarginTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						counterIconMarginMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {counterIconMarginDesktop: {...counterIconMarginDesktop, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {counterIconMarginTablet: {...counterIconMarginTablet, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {counterIconMarginMobile: {...counterIconMarginMobile, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
+    const handleCounterIconMarginUnitHandler = (event, position) => {
+        const value = event.target.value;
+        if (counterIconMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        counterIconMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        counterIconMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        counterIconMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ counterIconMarginDesktop: { ...counterIconMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ counterIconMarginTablet: { ...counterIconMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ counterIconMarginMobile: { ...counterIconMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
 
-	}
-	
-	const counterIconMarginCombineBtnHandler = () => {
-		setAttributes( {counterIconMarginLink: !counterIconMarginLink} );
-	}
+    }
 
-	const counterIconMarginUnitsHandler = (unit) => {
-		setAttributes( {
-			counterIconMarginUnits: {
-				...counterIconMarginUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+    const counterIconMarginCombineBtnHandler = () => {
+        setAttributes({ counterIconMarginLink: !counterIconMarginLink });
+    }
+
+    const counterIconMarginUnitsHandler = (unit) => {
+        setAttributes({
+            counterIconMarginUnits: {
+                ...counterIconMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
 
     const counterIconDesktopMargin = `${counterIconMarginDesktop.top}${counterIconMarginUnits.Desktop} ${counterIconMarginDesktop.right}${counterIconMarginUnits.Desktop} ${counterIconMarginDesktop.bottom}${counterIconMarginUnits.Desktop} ${counterIconMarginDesktop.left}${counterIconMarginUnits.Desktop}`;
     const counterIconTabletMargin = `${counterIconMarginTablet.top}${counterIconMarginUnits.Tablet} ${counterIconMarginTablet.right}${counterIconMarginUnits.Tablet} ${counterIconMarginTablet.bottom}${counterIconMarginUnits.Tablet} ${counterIconMarginTablet.left}${counterIconMarginUnits.Tablet}`;
     const counterIconMobileMargin = `${counterIconMarginMobile.top}${counterIconMarginUnits.Mobile} ${counterIconMarginMobile.right}${counterIconMarginUnits.Mobile} ${counterIconMarginMobile.bottom}${counterIconMarginUnits.Mobile} ${counterIconMarginMobile.left}${counterIconMarginUnits.Mobile}`;
 
     /** Counter Number Margin**/
-    const handleCounterNumberMarginUnitHandler = ( event, position ) => {
-		const value = event.target.value;
-		if ( counterNumberMarginLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						counterNumberMarginDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						counterNumberMarginTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						counterNumberMarginMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {counterNumberMarginDesktop: {...counterNumberMarginDesktop, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {counterNumberMarginTablet: {...counterNumberMarginTablet, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {counterNumberMarginMobile: {...counterNumberMarginMobile, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
+    const handleCounterNumberMarginUnitHandler = (event, position) => {
+        const value = event.target.value;
+        if (counterNumberMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        counterNumberMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        counterNumberMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        counterNumberMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ counterNumberMarginDesktop: { ...counterNumberMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ counterNumberMarginTablet: { ...counterNumberMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ counterNumberMarginMobile: { ...counterNumberMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
 
-	}
-	const counterNumberMarginCombineBtnHandler = () => {
-		setAttributes( {counterNumberMarginLink: !counterNumberMarginLink} );
-	}
+    }
+    const counterNumberMarginCombineBtnHandler = () => {
+        setAttributes({ counterNumberMarginLink: !counterNumberMarginLink });
+    }
 
-	const counterNumberMarginUnitsHandler = (unit) => {
-		setAttributes( {
-			counterNumberMarginUnits: {
-				...counterNumberMarginUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+    const counterNumberMarginUnitsHandler = (unit) => {
+        setAttributes({
+            counterNumberMarginUnits: {
+                ...counterNumberMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
 
     const counterNumberDesktopMargin = `${counterNumberMarginDesktop.top}${counterNumberMarginUnits.Desktop} ${counterNumberMarginDesktop.right}${counterNumberMarginUnits.Desktop} ${counterNumberMarginDesktop.bottom}${counterNumberMarginUnits.Desktop} ${counterNumberMarginDesktop.left}${counterNumberMarginUnits.Desktop}`;
     const counterNumberTabletMargin = `${counterNumberMarginTablet.top}${counterNumberMarginUnits.Tablet} ${counterNumberMarginTablet.right}${counterNumberMarginUnits.Tablet} ${counterNumberMarginTablet.bottom}${counterNumberMarginUnits.Tablet} ${counterNumberMarginTablet.left}${counterNumberMarginUnits.Tablet}`;
     const counterNumberMobileMargin = `${counterNumberMarginMobile.top}${counterNumberMarginUnits.Mobile} ${counterNumberMarginMobile.right}${counterNumberMarginUnits.Mobile} ${counterNumberMarginMobile.bottom}${counterNumberMarginUnits.Mobile} ${counterNumberMarginMobile.left}${counterNumberMarginUnits.Mobile}`;
 
-    const handleCounterNumberTitleMarginUnitHandler = ( event, position ) => {
+    const handleCounterNumberTitleMarginUnitHandler = (event, position) => {
         const value = event.target.value;
-        if ( counterNumberTitleMarginLink ) {
-            switch ( deviceType ) {
+        if (counterNumberTitleMarginLink) {
+            switch (deviceType) {
                 case 'Desktop':
-                    setAttributes( {
+                    setAttributes({
                         counterNumberTitleMarginDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
                         }
-                    } );
+                    });
                     break;
                 case 'Tablet':
-                    setAttributes( {
+                    setAttributes({
                         counterNumberTitleMarginTablet: {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
                         }
-                    } );
+                    });
                     break;
                 case 'Mobile':
-                    setAttributes( {
+                    setAttributes({
                         counterNumberTitleMarginMobile: {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
                         }
-                    } );
+                    });
                     break;
                 default:
                     break;
             }
         } else {
-            switch ( deviceType ) {
+            switch (deviceType) {
                 case 'Desktop':
-                    setAttributes( {counterNumberTitleMarginDesktop: {...counterNumberTitleMarginDesktop, [position]: value}} );
+                    setAttributes({ counterNumberTitleMarginDesktop: { ...counterNumberTitleMarginDesktop, [position]: value } });
                     break;
                 case 'Tablet':
-                    setAttributes( {counterNumberTitleMarginTablet: {...counterNumberTitleMarginTablet, [position]: value}} );
+                    setAttributes({ counterNumberTitleMarginTablet: { ...counterNumberTitleMarginTablet, [position]: value } });
                     break;
                 case 'Mobile':
-                    setAttributes( {counterNumberTitleMarginMobile: {...counterNumberTitleMarginMobile, [position]: value}} );
+                    setAttributes({ counterNumberTitleMarginMobile: { ...counterNumberTitleMarginMobile, [position]: value } });
                     break;
                 default:
                     break;
             }
         }
-    
+
     }
     const counterNumberTitleMarginCombineBtnHandler = () => {
-        setAttributes( {counterNumberTitleMarginLink: !counterNumberTitleMarginLink} );
+        setAttributes({ counterNumberTitleMarginLink: !counterNumberTitleMarginLink });
     }
-    
+
     const counterNumberTitleMarginUnitsHandler = (unit) => {
-        setAttributes( {
+        setAttributes({
             counterNumberTitleMarginUnits: {
                 ...counterNumberTitleMarginUnits,
                 [deviceType]: unit
@@ -792,146 +1152,146 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const globalMobileMargin = `${counterGlobalMarginMobile.top}${counterGlobalMarginUnits.Mobile} ${counterGlobalMarginMobile.right}${counterGlobalMarginUnits.Mobile} ${counterGlobalMarginMobile.bottom}${counterGlobalMarginUnits.Mobile} ${counterGlobalMarginMobile.left}${counterGlobalMarginUnits.Mobile}`;
     /** End Global Margin */
 
-    const handleGlobalBorderUnitChange = ( event, position ) => {
+    const handleGlobalBorderUnitChange = (event, position) => {
         const value = event.target.value;
-        if ( counterGlobalBorderLink ) {
-            switch ( deviceType ) {
+        if (counterGlobalBorderLink) {
+            switch (deviceType) {
                 case 'Desktop':
-                    setAttributes( {
+                    setAttributes({
                         counterGlobalBorderDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
                         }
-                    } );
+                    });
                     break;
                 case 'Tablet':
-                    setAttributes( {
+                    setAttributes({
                         counterGlobalBorderTablet: {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
                         }
-                    } );
+                    });
                     break;
                 case 'Mobile':
-                    setAttributes( {
+                    setAttributes({
                         counterGlobalBorderMobile: {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
                         }
-                    } );
+                    });
                     break;
                 default:
                     break;
             }
         } else {
-            switch ( deviceType ) {
+            switch (deviceType) {
                 case 'Desktop':
-                    setAttributes( {counterGlobalBorderDesktop: {...counterGlobalBorderDesktop, [position]: value}} );
+                    setAttributes({ counterGlobalBorderDesktop: { ...counterGlobalBorderDesktop, [position]: value } });
                     break;
                 case 'Tablet':
-                    setAttributes( {counterGlobalBorderTablet: {...counterGlobalBorderTablet, [position]: value}} );
+                    setAttributes({ counterGlobalBorderTablet: { ...counterGlobalBorderTablet, [position]: value } });
                     break;
                 case 'Mobile':
-                    setAttributes( {counterGlobalBorderMobile: {...counterGlobalBorderMobile, [position]: value}} );
+                    setAttributes({ counterGlobalBorderMobile: { ...counterGlobalBorderMobile, [position]: value } });
                     break;
                 default:
                     break;
             }
         }
     }
-    
+
     const handleGlobalBorderCombineBtn = () => {
-        setAttributes( {counterGlobalBorderLink: !counterGlobalBorderLink} );
+        setAttributes({ counterGlobalBorderLink: !counterGlobalBorderLink });
     }
-    
+
     const handleGlobalBorderUnitsHandler = (unit) => {
-        setAttributes( {
+        setAttributes({
             counterGlobalBorderUnits: {
                 ...counterGlobalBorderUnits,
                 [deviceType]: unit
             }
         })
     }
-    
+
     const globalDesktopBorderWidth = `${counterGlobalBorderDesktop.top}${counterGlobalBorderUnits.Desktop} ${counterGlobalBorderDesktop.right}${counterGlobalBorderUnits.Desktop} ${counterGlobalBorderDesktop.bottom}${counterGlobalBorderUnits.Desktop} ${counterGlobalBorderDesktop.left}${counterGlobalBorderUnits.Desktop}`;
     const globalTabletBorderWidth = `${counterGlobalBorderTablet.top}${counterGlobalBorderUnits.Tablet} ${counterGlobalBorderTablet.right}${counterGlobalBorderUnits.Tablet} ${counterGlobalBorderTablet.bottom}${counterGlobalBorderUnits.Tablet} ${counterGlobalBorderTablet.left}${counterGlobalBorderUnits.Tablet}`;
     const globalMobileBorderWidth = `${counterGlobalBorderMobile.top}${counterGlobalBorderUnits.Mobile} ${counterGlobalBorderMobile.right}${counterGlobalBorderUnits.Mobile} ${counterGlobalBorderMobile.bottom}${counterGlobalBorderUnits.Mobile} ${counterGlobalBorderMobile.left}${counterGlobalBorderUnits.Mobile}`;
     /** End Border */
-    
+
     /** Start Global border radius*/
-    const handleGlobalBorderRadiusUnitChange = ( event, position ) => {
+    const handleGlobalBorderRadiusUnitChange = (event, position) => {
         const value = event.target.value;
-        if ( counterGlobalBorderRadiusLink ) {
-            switch ( deviceType ) {
+        if (counterGlobalBorderRadiusLink) {
+            switch (deviceType) {
                 case 'Desktop':
-                    setAttributes( {
+                    setAttributes({
                         counterGlobalBorderRadiusDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
                         }
-                    } );
+                    });
                     break;
                 case 'Tablet':
-                    setAttributes( {
+                    setAttributes({
                         counterGlobalBorderRadiusTablet: {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
                         }
-                    } );
+                    });
                     break;
                 case 'Mobile':
-                    setAttributes( {
+                    setAttributes({
                         counterGlobalBorderRadiusMobile: {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
                         }
-                    } );
+                    });
                     break;
                 default:
                     break;
             }
         } else {
-            switch ( deviceType ) {
+            switch (deviceType) {
                 case 'Desktop':
-                    setAttributes( {counterGlobalBorderRadiusDesktop: {...counterGlobalBorderRadiusDesktop, [position]: value}} );
+                    setAttributes({ counterGlobalBorderRadiusDesktop: { ...counterGlobalBorderRadiusDesktop, [position]: value } });
                     break;
                 case 'Tablet':
-                    setAttributes( {counterGlobalBorderRadiusTablet: {...counterGlobalBorderRadiusTablet, [position]: value}} );
+                    setAttributes({ counterGlobalBorderRadiusTablet: { ...counterGlobalBorderRadiusTablet, [position]: value } });
                     break;
                 case 'Mobile':
-                    setAttributes( {counterGlobalBorderRadiusMobile: {...counterGlobalBorderRadiusMobile, [position]: value}} );
+                    setAttributes({ counterGlobalBorderRadiusMobile: { ...counterGlobalBorderRadiusMobile, [position]: value } });
                     break;
                 default:
                     break;
             }
         }
     }
-    
+
     const handleGlobalBorderRadiusCombineBtn = () => {
-        setAttributes( {counterGlobalBorderRadiusLink: !counterGlobalBorderRadiusLink} );
+        setAttributes({ counterGlobalBorderRadiusLink: !counterGlobalBorderRadiusLink });
     }
-    
+
     const handleGlobalBorderRadiusUnitsHandler = (unit) => {
-        setAttributes( {
+        setAttributes({
             counterGlobalBorderRadiusUnits: {
                 ...counterGlobalBorderRadiusUnits,
                 [deviceType]: unit
             }
         })
     }
-    
+
     const globalDesktopBorderRadiusWidth = `${counterGlobalBorderRadiusDesktop.top}${counterGlobalBorderRadiusUnits.Desktop} ${counterGlobalBorderRadiusDesktop.right}${counterGlobalBorderRadiusUnits.Desktop} ${counterGlobalBorderRadiusDesktop.bottom}${counterGlobalBorderRadiusUnits.Desktop} ${counterGlobalBorderRadiusDesktop.left}${counterGlobalBorderRadiusUnits.Desktop}`;
     const globalTabletBorderRadiusWidth = `${counterGlobalBorderRadiusTablet.top}${counterGlobalBorderRadiusUnits.Tablet} ${counterGlobalBorderRadiusTablet.right}${counterGlobalBorderRadiusUnits.Tablet} ${counterGlobalBorderRadiusTablet.bottom}${counterGlobalBorderRadiusUnits.Tablet} ${counterGlobalBorderRadiusTablet.left}${counterGlobalBorderRadiusUnits.Tablet}`;
     const globalMobileBorderRadiusWidth = `${counterGlobalBorderRadiusMobile.top}${counterGlobalBorderRadiusUnits.Mobile} ${counterGlobalBorderRadiusMobile.right}${counterGlobalBorderRadiusUnits.Mobile} ${counterGlobalBorderRadiusMobile.bottom}${counterGlobalBorderRadiusUnits.Mobile} ${counterGlobalBorderRadiusMobile.left}${counterGlobalBorderRadiusUnits.Mobile}`;
@@ -954,10 +1314,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${globalDesktopPadding && counterGlobalPaddingDesktop.top ? `padding: ${globalDesktopPadding};` : ""}
         ${globalDesktopMargin && counterGlobalMarginDesktop.top ? `margin: ${globalDesktopMargin};` : ""}
         ${counterGlobalBorder ? `border-style: ${counterGlobalBorder};` : ""}
-        ${counterGlobalBorderColor ? `border-color: ${counterGlobalBorderColor};` : "" } 
+        ${counterGlobalBorderColor ? `border-color: ${counterGlobalBorderColor};` : ""} 
         ${globalDesktopBorderWidth && counterGlobalBorderDesktop.top ? `border-width: ${globalDesktopBorderWidth};` : ""}
         ${globalDesktopBorderRadiusWidth && counterGlobalBorderRadiusDesktop.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
-        ${counterGlobalBoxShadowCssValue ? `box-shadow: ${counterGlobalBoxShadowCssValue};` : "" }
+        ${counterGlobalBoxShadowCssValue ? `box-shadow: ${counterGlobalBoxShadowCssValue};` : ""}
 
         ${counterAlignment.Desktop === 'left' ? `justify-content: flex-start;` : ''}
         ${counterAlignment.Desktop === 'center' ? `justify-content: center;` : ''}
@@ -965,7 +1325,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
     .fb-counter-wrapper.${blockID}:hover{
         ${counterGlobalBgHoverColor ? `background: ${counterGlobalBgHoverColor};` : ''}
-        ${counterGlobalBorderHoverColor ? `border-color: ${counterGlobalBorderHoverColor};` : "" }
+        ${counterGlobalBorderHoverColor ? `border-color: ${counterGlobalBorderHoverColor};` : ""}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item {
         display: flex;
@@ -981,11 +1341,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         ${counterItemBgColor ? `background: ${counterItemBgColor};` : ''}
         ${counterItemSize.Desktop ? `width: ${counterItemSize.Desktop}${counterItemSizeUnits.Desktop};` : ''}
+        ${counterItemHeight && counterItemHeight.Desktop ? `height: ${counterItemHeight.Desktop}${counterItemHeightUnits.Desktop};` : ''}
         ${counterItemRatio ? `aspect-ratio: 1 / 1;` : ''}
         ${counterItemBorder ? `border: ${counterItemBorder};` : ''}
         ${counterItemDesktopBorder && counterItemBorderTypeDesktop.top ? `border-width: ${counterItemDesktopBorder};` : ''}
         ${counterItemBorderColor ? `border-color: ${counterItemBorderColor};` : ''}
         ${counterItemDesktopBorderRadius && counterItemBorderRadiusDesktop.top ? `border-radius: ${counterItemDesktopBorderRadius};` : ''}
+        ${counterItemDesktopPadding && counterItemPaddingDesktop.top ? `padding: ${counterItemDesktopPadding};` : ''}
+        ${counterItemDesktopMargin && counterItemMarginDesktop.top ? `margin: ${counterItemDesktopMargin};` : ''}
+        ${counterItemGap.Desktop ? `gap: ${counterItemGap.Desktop}${counterItemGapUnits.Desktop};` : ''}
     }
     .fb-counter-wrapper.${blockID} .fb-counter-item:hover{
         ${counterItemBgHoverColor ? `background: ${counterItemBgHoverColor};` : ''}
@@ -1008,7 +1372,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         ${counterIconSizeRatio ? `aspect-ratio: 1 / 1;` : ''}
         ${counterIconColor ? `fill: ${counterIconColor};` : ''}
     }
-    .fb-counter-wrapper.${blockID} .fb-counter-item:hover svg{
+    .fb-counter-wrapper.${blockID} .fb-counter-item:hover .fb-counter-icon-wrapper .fb-counter-icon svg {
         ${counterIconHoverColor ? `fill: ${counterIconHoverColor};` : ''}
     }
 
@@ -1102,10 +1466,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .fb-counter-wrapper.${blockID} .fb-counter-item {
             ${counterItemTabletBorder && counterItemBorderTypeTablet.top ? `border-width: ${counterItemTabletBorder};` : ''}
             ${counterItemTabletBorderRadius && counterItemBorderRadiusTablet.top ? `border-radius: ${counterItemTabletBorderRadius};` : ''}
+            ${counterItemTabletPadding && counterItemPaddingTablet.top ? `padding: ${counterItemTabletPadding};` : ''}
+            ${counterItemTabletMargin && counterItemMarginTablet.top ? `margin: ${counterItemTabletMargin};` : ''}
+            ${counterItemHeight && counterItemHeight.Tablet ? `height: ${counterItemHeight.Tablet}${counterItemHeightUnits.Tablet};` : ''}
             ${iconPosition !== 'top' && iconPosition !== 'bottom' && counterAlignment.Tablet ? `justify-content: ${counterAlignment.Tablet};` : ''}
             ${iconPosition !== 'left' && iconPosition !== 'right' && counterCardAlignment.Tablet === 'left' ? `align-items: flex-start;` : ''}
             ${iconPosition !== 'left' && iconPosition !== 'right' && counterCardAlignment.Tablet === 'center' ? `align-items: center;` : ''}
             ${iconPosition !== 'left' && iconPosition !== 'right' && counterCardAlignment.Tablet === 'right' ? `align-items: flex-end;` : ''}
+            ${counterItemGap.Tablet ? `gap: ${counterItemGap.Tablet}${counterItemGapUnits.Tablet};` : ''}
         }
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper {
             ${counterIconTabletMargin && counterIconMarginTablet.top ? `margin: ${counterIconTabletMargin};` : ''}
@@ -1159,10 +1527,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .fb-counter-wrapper.${blockID} .fb-counter-item {
             ${counterItemMobileBorder && counterItemBorderTypeMobile.top ? `border-width: ${counterItemMobileBorder};` : ''}
             ${counterItemMobileBorderRadius && counterItemBorderRadiusMobile.top ? `border-radius: ${counterItemMobileBorderRadius};` : ''}
+            ${counterItemMobilePadding && counterItemPaddingMobile.top ? `padding: ${counterItemMobilePadding};` : ''}
+            ${counterItemMobileMargin && counterItemMarginMobile.top ? `margin: ${counterItemMobileMargin};` : ''}
+            ${counterItemHeight && counterItemHeight.Mobile ? `height: ${counterItemHeight.Mobile}${counterItemHeightUnits.Mobile};` : ''}
             ${iconPosition !== 'top' && iconPosition !== 'bottom' && counterAlignment.Mobile ? `justify-content: ${counterAlignment.Mobile};` : ''}
             ${iconPosition !== 'left' && iconPosition !== 'right' && counterCardAlignment.Mobile === 'left' ? `align-items: flex-start;` : ''}
             ${iconPosition !== 'left' && iconPosition !== 'right' && counterCardAlignment.Mobile === 'center' ? `align-items: center;` : ''}
             ${iconPosition !== 'left' && iconPosition !== 'right' && counterCardAlignment.Mobile === 'right' ? `align-items: flex-end;` : ''}
+            ${counterItemGap.Mobile ? `gap: ${counterItemGap.Mobile}${counterItemGapUnits.Mobile};` : ''}
         }
 
         .fb-counter-wrapper.${blockID} .fb-counter-item .fb-counter-icon-wrapper {
@@ -1199,94 +1571,94 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     `, [
         blockID,
         counterAlignment,
-		deviceType,
+        deviceType,
 
-		iconPosition,
-		titlePosition,
-		counterCardAlignment,
-		counterMediaImagedisplay,
-        
-		counterItemSize,
+        iconPosition,
+        titlePosition,
+        counterCardAlignment,
+        counterMediaImagedisplay,
+
+        counterItemSize,
         counterItemRatio,
 
-		// Item Border Type
-		counterItemBorder,
-		counterItemBorderColor,
+        // Item Border Type
+        counterItemBorder,
+        counterItemBorderColor,
         counterItemBorderHoverColor,
 
-		counterItemBorderTypeUnits,
-		counterItemBorderTypeDesktop,
-		counterItemBorderTypeTablet,
-		counterItemBorderTypeMobile,
+        counterItemBorderTypeUnits,
+        counterItemBorderTypeDesktop,
+        counterItemBorderTypeTablet,
+        counterItemBorderTypeMobile,
 
-		// Item Border Radius
-		counterItemBorderRadiusUnits,
-		counterItemBorderRadiusDesktop,
-		counterItemBorderRadiusTablet,
-		counterItemBorderRadiusMobile,
+        // Item Border Radius
+        counterItemBorderRadiusUnits,
+        counterItemBorderRadiusDesktop,
+        counterItemBorderRadiusTablet,
+        counterItemBorderRadiusMobile,
 
         // Item Background attributes
-		counterItemBgColor,
-		counterItemBgHoverColor,
+        counterItemBgColor,
+        counterItemBgHoverColor,
 
         //Counter Icon attributes
-		counterIconMarginUnits,
-		counterIconMarginDesktop,
-		counterIconMarginTablet,
-		counterIconMarginMobile,
-		counterIconColor,
-		counterIconHoverColor,
-		counterIconSize,
-		counterIconSizeUnits,
-		counterIconSizeRatio,
+        counterIconMarginUnits,
+        counterIconMarginDesktop,
+        counterIconMarginTablet,
+        counterIconMarginMobile,
+        counterIconColor,
+        counterIconHoverColor,
+        counterIconSize,
+        counterIconSizeUnits,
+        counterIconSizeRatio,
 
         //Counter Number attributes
-		counterNumberFontColor,
-		counterNumberFontHoverColor,
+        counterNumberFontColor,
+        counterNumberFontHoverColor,
         counterNumberGlobalTypoSwitcher,
         counterNumberGlobalTypographyData,
         counterNumberGlobalTypoType,
         counterNumberGlobalTypoOption,
-		counterNumberFontFamily,
-		counterNumberFontSize,
-		counterNumberFontSizeUnits,
-		counterNumberFontWeight,
-		counterNumberFontStyle,
-		counterNumberTextTransform,
-		counterNumberTextDecoration,
-		counterNumberLetterSpacing,
-		counterNumberLetterSpacingUnits,
-		counterNumberLineHeight,
-		counterNumberLineHeightUnits,
+        counterNumberFontFamily,
+        counterNumberFontSize,
+        counterNumberFontSizeUnits,
+        counterNumberFontWeight,
+        counterNumberFontStyle,
+        counterNumberTextTransform,
+        counterNumberTextDecoration,
+        counterNumberLetterSpacing,
+        counterNumberLetterSpacingUnits,
+        counterNumberLineHeight,
+        counterNumberLineHeightUnits,
 
-		counterNumberMarginUnits,
-		counterNumberMarginDesktop,
-		counterNumberMarginTablet,
-		counterNumberMarginMobile,
+        counterNumberMarginUnits,
+        counterNumberMarginDesktop,
+        counterNumberMarginTablet,
+        counterNumberMarginMobile,
 
         //Counter Number Title attributes
         counterNumberTitleGlobalTypoSwitcher,
         counterNumberTitleGlobalTypographyData,
         counterNumberTitleGlobalTypoType,
         counterNumberTitleGlobalTypoOption,
-		counterNumberTitleFontFamily,
-		counterNumberTitleFontSize,
-		counterNumberTitleFontSizeUnits,
-		counterNumberTitleFontWeight,
-		counterNumberTitleFontStyle,
-		counterNumberTitleTextTransform,
-		counterNumberTitleTextDecoration,
-		counterNumberTitleLetterSpacing,
-		counterNumberTitleLetterSpacingUnits,
-		counterNumberTitleLineHeight,
-		counterNumberTitleLineHeightUnits,
-		counterNumberTitleFontColor,
-		counterNumberTitleFontHoverColor,
+        counterNumberTitleFontFamily,
+        counterNumberTitleFontSize,
+        counterNumberTitleFontSizeUnits,
+        counterNumberTitleFontWeight,
+        counterNumberTitleFontStyle,
+        counterNumberTitleTextTransform,
+        counterNumberTitleTextDecoration,
+        counterNumberTitleLetterSpacing,
+        counterNumberTitleLetterSpacingUnits,
+        counterNumberTitleLineHeight,
+        counterNumberTitleLineHeightUnits,
+        counterNumberTitleFontColor,
+        counterNumberTitleFontHoverColor,
 
-		counterNumberTitleMarginUnits,
-		counterNumberTitleMarginDesktop,
-		counterNumberTitleMarginTablet,
-		counterNumberTitleMarginMobile,
+        counterNumberTitleMarginUnits,
+        counterNumberTitleMarginDesktop,
+        counterNumberTitleMarginTablet,
+        counterNumberTitleMarginMobile,
 
         //Global attributes
         counterGlobalZIndex,
@@ -1316,8 +1688,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterGlobalBoxShadowCssValue,
 
         counterDesktopSwitcher,
-		counterTabletSwitcher,
-		counterMobileSwitcher,
+        counterTabletSwitcher,
+        counterMobileSwitcher,
 
         // Position
         counterPositionType,
@@ -1335,23 +1707,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         counterGlobalWraperCustomCSS,
         counterGlobalWraperID,
         counterGlobalWraperClass,
+        changeCounterPreset
     ]);
- 
+
     const customCss = getCustomCss(counterGlobalWraperCustomCSS, `.${blockID}`);
 
     useEffect(() => {
-        setAttributes({blockStyle: `${counterBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+        setAttributes({ blockStyle: `${counterBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim() });
     }, [counterBlockStyle, customCss]);
 
 
     const editorStyle = `${counterBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
     /**
-	 * Inspector General Controls
-	 */
-	const generalControls = (
+     * Inspector General Controls
+     */
+    const generalControls = (
         <>
             <PanelBody title={__("Counter Settings", "frontis-blocks")} initialOpen={true}>
+                <SelectControl
+                    label={__("Preset Style", "frontis-blocks")}
+                    value={counterPresetStyle}
+                    options={PRESETS}
+                    onChange={(selected) => changeCounterPreset(selected)}
+                />
 
                 <FB_ResponsiveAlignmentControl
                     label={__("Alignment", "frontis-blocks")}
@@ -1423,7 +1802,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         label={__("Counter Icon", "frontis-block")}
                         value={mediaSwitcher}
                         options={mediaType}
-                        onChange={(value) => setAttributes({mediaSwitcher: value})}
+                        onChange={(value) => setAttributes({ mediaSwitcher: value })}
                     />
                 </BaseControl>
 
@@ -1440,7 +1819,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                 {mediaSwitcher === 'icon' && (
                     <BaseControl>
-                        <FBIconPicker value={icon} setIconHandler={iconHandler}/>
+                        <FBIconPicker value={icon} setIconHandler={iconHandler} />
                     </BaseControl>
                 )}
             </PanelBody>
@@ -1464,12 +1843,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />)}
             </PanelBody>
         </>
-	);
+    );
 
-	/**
-	 * Inspector Style Controls
-	 */
-	const styleControls = (
+    /**
+     * Inspector Style Controls
+     */
+    const styleControls = (
         <>
             <PanelBody
                 title={__("Item", "frontis-blocks")}
@@ -1493,12 +1872,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <FB_Range
                     min={1}
                     max={counterItemSizeUnits.Desktop === '%' ? 100 : 800}
-                    label={__("Item Size", "frontis-blocks")}
+                    label={__("Width", "frontis-blocks")}
                     rangeValue={counterItemSize}
                     onChangeHandler={counterItemSizeHandler}
                     rangeUnitHandler={counterItemSizeUnitsHandler}
                     deviceType={deviceType}
                     units={counterItemSizeUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={''}
+                />
+
+                <FB_Range
+                    min={0}
+                    max={counterItemHeightUnits.Desktop === '%' ? 100 : 800}
+                    label={__("Height", "frontis-blocks")}
+                    rangeValue={counterItemHeight}
+                    onChangeHandler={(value) => setAttributes({ counterItemHeight: value })}
+                    rangeUnitHandler={(value) => setAttributes({ counterItemHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={counterItemHeightUnits}
                     setAttributes={setAttributes}
                     rangeStep={1}
                     resetFallbackValue={''}
@@ -1531,14 +1924,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setGlobalColor={(value) => setAttributes({ counterItemBgHoverColor: value === undefined ? '' : value })}
                     />
                 )}
-                
+
                 <SelectControl
                     label={__("Border Style", "frontis-blocks")}
                     value={counterItemBorder}
                     options={BORDER_STYLES}
                     onChange={(value) => setAttributes({ counterItemBorder: value })}
                 />
-        
+
                 <FB_SwitcherControl
                     label={__("Border Color", "frontis-blocks")}
                     globalSwitcher={counterItemBorderColorSwitcher}
@@ -1562,7 +1955,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 )}
 
                 <FB_Spacing
-                    label={ 'Border' }
+                    label={'Border'}
                     deviceType={deviceType}
                     spacingUnitsHandler={counterItemBorderTypeUnitsHandler}
                     spacingUnits={counterItemBorderTypeUnits}
@@ -1571,12 +1964,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     spacingMobile={counterItemBorderTypeMobile}
                     handleSpacingUnitHandler={handleCounterItemBorderUnitHandler}
                     spacingCombineBtn={counterItemBorderTypeLink}
-                    spacingCombineBtnHandler={counterItemBorderCombineBtnHandler} 
+                    spacingCombineBtnHandler={counterItemBorderCombineBtnHandler}
                     setAttributes={setAttributes}
                 />
 
                 <FB_Spacing
-                    label={ 'Border Radius'}
+                    label={'Border Radius'}
                     deviceType={deviceType}
                     spacingUnitsHandler={counterItemBorderRadiusUnitsHandler}
                     spacingUnits={counterItemBorderRadiusUnits}
@@ -1585,7 +1978,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     spacingMobile={counterItemBorderRadiusMobile}
                     handleSpacingUnitHandler={handleItemBorderRadiusUnitHandler}
                     spacingCombineBtn={counterItemBorderRadiusLink}
-                    spacingCombineBtnHandler={counterItemBorderRadiusCombineBtnHandler} 
+                    spacingCombineBtnHandler={counterItemBorderRadiusCombineBtnHandler}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={'Padding'}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={counterItemPaddingUnitsHandler}
+                    spacingUnits={counterItemPaddingUnits}
+                    spacingDesktop={counterItemPaddingDesktop}
+                    spacingTablet={counterItemPaddingTablet}
+                    spacingMobile={counterItemPaddingMobile}
+                    handleSpacingUnitHandler={handleCounterItemPaddingUnitHandler}
+                    spacingCombineBtn={counterItemPaddingLink}
+                    spacingCombineBtnHandler={counterItemPaddingCombineBtnHandler}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={'Margin'}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={counterItemMarginUnitsHandler}
+                    spacingUnits={counterItemMarginUnits}
+                    spacingDesktop={counterItemMarginDesktop}
+                    spacingTablet={counterItemMarginTablet}
+                    spacingMobile={counterItemMarginMobile}
+                    handleSpacingUnitHandler={handleCounterItemMarginUnitHandler}
+                    spacingCombineBtn={counterItemMarginLink}
+                    spacingCombineBtnHandler={counterItemMarginCombineBtnHandler}
                     setAttributes={setAttributes}
                 />
 
@@ -1631,6 +2052,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     resetFallbackValue={"25"}
                 />
 
+                <FB_Range
+                    min={0}
+                    max={100}
+                    label={__("Gap", "frontis-blocks")}
+                    rangeValue={counterItemGap}
+                    onChangeHandler={(value) => setAttributes({ counterItemGap: value })}
+                    rangeUnitHandler={(value) => setAttributes({ counterItemGapUnits: value })}
+                    deviceType={deviceType}
+                    units={counterItemGapUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"10"}
+                />
+
                 <ToggleControl
                     label={__("Icon Square Ratio", "frontis-blocks")}
                     checked={counterIconSizeRatio}
@@ -1638,7 +2073,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
 
                 <FB_Spacing
-                    label={ 'Margin' }
+                    label={'Margin'}
                     deviceType={deviceType}
                     spacingUnitsHandler={counterIconMarginUnitsHandler}
                     spacingUnits={counterIconMarginUnits}
@@ -1647,7 +2082,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     spacingMobile={counterIconMarginMobile}
                     handleSpacingUnitHandler={handleCounterIconMarginUnitHandler}
                     spacingCombineBtn={counterIconMarginLink}
-                    spacingCombineBtnHandler={counterIconMarginCombineBtnHandler} 
+                    spacingCombineBtnHandler={counterIconMarginCombineBtnHandler}
                     setAttributes={setAttributes}
                 />
             </PanelBody>}
@@ -1685,9 +2120,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                     globalTypoType={counterNumberGlobalTypoType}
                     onChangeGlobalTypoType={(value) => {
-                        setAttributes({ 
-                            counterNumberGlobalTypoType: value, 
-                            counterNumberGlobalTypoSwitcher: value === 'default' ? {...counterNumberGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...counterNumberGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                        setAttributes({
+                            counterNumberGlobalTypoType: value,
+                            counterNumberGlobalTypoSwitcher: value === 'default' ? { ...counterNumberGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...counterNumberGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
                         })
                     }}
 
@@ -1695,34 +2130,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     onChangeGlobalTypoOption={(value) => setAttributes({ counterNumberGlobalTypoOption: value })}
 
                     fontFamily={counterNumberFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ counterNumberFontFamily: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, fontFamily: value && false} })}
+                    onChangeFontFamily={(value) => setAttributes({ counterNumberFontFamily: value, counterNumberGlobalTypoSwitcher: { ...counterNumberGlobalTypoSwitcher, fontFamily: value && false } })}
 
                     fontSize={counterNumberFontSize}
-                    onChangeFontSize={(value) => setAttributes({ counterNumberFontSize: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, fontSize: value && false} })}
+                    onChangeFontSize={(value) => setAttributes({ counterNumberFontSize: value, counterNumberGlobalTypoSwitcher: { ...counterNumberGlobalTypoSwitcher, fontSize: value && false } })}
 
                     fontSizeUnits={counterNumberFontSizeUnits}
                     onChangeFontSizeUnit={(value) => setAttributes({ counterNumberFontSizeUnits: value })}
 
                     fontWeight={counterNumberFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ counterNumberFontWeight: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, fontWeight: value && false} })}
+                    onChangeFontWeight={(value) => setAttributes({ counterNumberFontWeight: value, counterNumberGlobalTypoSwitcher: { ...counterNumberGlobalTypoSwitcher, fontWeight: value && false } })}
 
                     fontStyle={counterNumberFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ counterNumberFontStyle: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, fontStyle: value && false} })}
+                    onChangeFontStyle={(value) => setAttributes({ counterNumberFontStyle: value, counterNumberGlobalTypoSwitcher: { ...counterNumberGlobalTypoSwitcher, fontStyle: value && false } })}
 
                     textTransform={counterNumberTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ counterNumberTextTransform: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, textTransform: value && false} })}
+                    onChangeTextTransform={(value) => setAttributes({ counterNumberTextTransform: value, counterNumberGlobalTypoSwitcher: { ...counterNumberGlobalTypoSwitcher, textTransform: value && false } })}
 
                     textDecoration={counterNumberTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ counterNumberTextDecoration: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, textDecoration: value && false} })}
+                    onChangeTextDecoration={(value) => setAttributes({ counterNumberTextDecoration: value, counterNumberGlobalTypoSwitcher: { ...counterNumberGlobalTypoSwitcher, textDecoration: value && false } })}
 
                     letterSpacing={counterNumberLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ counterNumberLetterSpacing: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, letterSpacing: value && false} })}
+                    onChangeLetterSpacing={(value) => setAttributes({ counterNumberLetterSpacing: value, counterNumberGlobalTypoSwitcher: { ...counterNumberGlobalTypoSwitcher, letterSpacing: value && false } })}
 
                     letterSpacingUnits={counterNumberLetterSpacingUnits}
                     onChangeLetterSpacingUnit={(value) => setAttributes({ counterNumberLetterSpacingUnits: value })}
 
                     lineHeight={counterNumberLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ counterNumberLineHeight: value, counterNumberGlobalTypoSwitcher: {...counterNumberGlobalTypoSwitcher, lineHeight: value && false} })}
+                    onChangeLineHeight={(value) => setAttributes({ counterNumberLineHeight: value, counterNumberGlobalTypoSwitcher: { ...counterNumberGlobalTypoSwitcher, lineHeight: value && false } })}
 
                     lineHeightUnits={counterNumberLineHeightUnits}
                     onChangeLineHeightUnit={(value) => setAttributes({ counterNumberLineHeightUnits: value })}
@@ -1731,7 +2166,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     setAttributes={setAttributes}
                 />
                 <FB_Spacing
-                    label={ 'Margin' }
+                    label={'Margin'}
                     deviceType={deviceType}
                     spacingUnitsHandler={counterNumberMarginUnitsHandler}
                     spacingUnits={counterNumberMarginUnits}
@@ -1740,7 +2175,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     spacingMobile={counterNumberMarginMobile}
                     handleSpacingUnitHandler={handleCounterNumberMarginUnitHandler}
                     spacingCombineBtn={counterNumberMarginLink}
-                    spacingCombineBtnHandler={counterNumberMarginCombineBtnHandler} 
+                    spacingCombineBtnHandler={counterNumberMarginCombineBtnHandler}
                     setAttributes={setAttributes}
                 />
             </PanelBody>
@@ -1785,9 +2220,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                     globalTypoType={counterNumberTitleGlobalTypoType}
                     onChangeGlobalTypoType={(value) => {
-                        setAttributes({ 
-                            counterNumberTitleGlobalTypoType: value, 
-                            counterNumberTitleGlobalTypoSwitcher: value === 'default' ? {...counterNumberTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...counterNumberTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                        setAttributes({
+                            counterNumberTitleGlobalTypoType: value,
+                            counterNumberTitleGlobalTypoSwitcher: value === 'default' ? { ...counterNumberTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...counterNumberTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
                         })
                     }}
 
@@ -1795,34 +2230,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     onChangeGlobalTypoOption={(value) => setAttributes({ counterNumberTitleGlobalTypoOption: value })}
 
                     fontFamily={counterNumberTitleFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ counterNumberTitleFontFamily: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, fontFamily: value && false} })}
+                    onChangeFontFamily={(value) => setAttributes({ counterNumberTitleFontFamily: value, counterNumberTitleGlobalTypoSwitcher: { ...counterNumberTitleGlobalTypoSwitcher, fontFamily: value && false } })}
 
                     fontSize={counterNumberTitleFontSize}
-                    onChangeFontSize={(value) => setAttributes({ counterNumberTitleFontSize: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, fontSize: value && false} })}
+                    onChangeFontSize={(value) => setAttributes({ counterNumberTitleFontSize: value, counterNumberTitleGlobalTypoSwitcher: { ...counterNumberTitleGlobalTypoSwitcher, fontSize: value && false } })}
 
                     fontSizeUnits={counterNumberTitleFontSizeUnits}
                     onChangeFontSizeUnit={(value) => setAttributes({ counterNumberTitleFontSizeUnits: value })}
 
                     fontWeight={counterNumberTitleFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ counterNumberTitleFontWeight: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, fontWeight: value && false} })}
+                    onChangeFontWeight={(value) => setAttributes({ counterNumberTitleFontWeight: value, counterNumberTitleGlobalTypoSwitcher: { ...counterNumberTitleGlobalTypoSwitcher, fontWeight: value && false } })}
 
                     fontStyle={counterNumberTitleFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ counterNumberTitleFontStyle: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, fontStyle: value && false} })}
+                    onChangeFontStyle={(value) => setAttributes({ counterNumberTitleFontStyle: value, counterNumberTitleGlobalTypoSwitcher: { ...counterNumberTitleGlobalTypoSwitcher, fontStyle: value && false } })}
 
                     textTransform={counterNumberTitleTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ counterNumberTitleTextTransform: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, textTransform: value && false} })}
+                    onChangeTextTransform={(value) => setAttributes({ counterNumberTitleTextTransform: value, counterNumberTitleGlobalTypoSwitcher: { ...counterNumberTitleGlobalTypoSwitcher, textTransform: value && false } })}
 
                     textDecoration={counterNumberTitleTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ counterNumberTitleTextDecoration: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, textDecoration: value && false} })}
+                    onChangeTextDecoration={(value) => setAttributes({ counterNumberTitleTextDecoration: value, counterNumberTitleGlobalTypoSwitcher: { ...counterNumberTitleGlobalTypoSwitcher, textDecoration: value && false } })}
 
                     letterSpacing={counterNumberTitleLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ counterNumberTitleLetterSpacing: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, letterSpacing: value && false} })}
+                    onChangeLetterSpacing={(value) => setAttributes({ counterNumberTitleLetterSpacing: value, counterNumberTitleGlobalTypoSwitcher: { ...counterNumberTitleGlobalTypoSwitcher, letterSpacing: value && false } })}
 
                     letterSpacingUnits={counterNumberTitleLetterSpacingUnits}
                     onChangeLetterSpacingUnit={(value) => setAttributes({ counterNumberTitleLetterSpacingUnits: value })}
 
                     lineHeight={counterNumberTitleLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ counterNumberTitleLineHeight: value, counterNumberTitleGlobalTypoSwitcher: {...counterNumberTitleGlobalTypoSwitcher, lineHeight: value && false} })}
+                    onChangeLineHeight={(value) => setAttributes({ counterNumberTitleLineHeight: value, counterNumberTitleGlobalTypoSwitcher: { ...counterNumberTitleGlobalTypoSwitcher, lineHeight: value && false } })}
 
                     lineHeightUnits={counterNumberTitleLineHeightUnits}
                     onChangeLineHeightUnit={(value) => setAttributes({ counterNumberTitleLineHeightUnits: value })}
@@ -1832,7 +2267,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
 
                 <FB_Spacing
-                    label={ 'Margin' }
+                    label={'Margin'}
                     deviceType={deviceType}
                     spacingUnitsHandler={counterNumberTitleMarginUnitsHandler}
                     spacingUnits={counterNumberTitleMarginUnits}
@@ -1841,24 +2276,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     spacingMobile={counterNumberTitleMarginMobile}
                     handleSpacingUnitHandler={handleCounterNumberTitleMarginUnitHandler}
                     spacingCombineBtn={counterNumberTitleMarginLink}
-                    spacingCombineBtnHandler={counterNumberTitleMarginCombineBtnHandler} 
+                    spacingCombineBtnHandler={counterNumberTitleMarginCombineBtnHandler}
                     setAttributes={setAttributes}
                 />
             </PanelBody>}
         </>
-	);
-		
-	/**
-	 * Inspector Advanced Controls
-	 */
-	const advancedControls = (
+    );
+
+    /**
+     * Inspector Advanced Controls
+     */
+    const advancedControls = (
         <>
             <div className="fb-setting-advanced-tab-wrapper">
                 <div className="fb-setting-inner-wrapper">
                     <PanelBody
                         title={__("Layout", "frontis-blocks")}
                         initialOpen={true}
-                        className='fb-setting-layout-header' 
+                        className='fb-setting-layout-header'
                     >
                         <FB_Range
                             min={0}
@@ -1873,61 +2308,61 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             isRangeUnit={false}
                         />
 
-                            <SelectControl
-                                label={__("Overflow", "frontis-blocks")}
-                                value={counterOverflow}
-                                options={OVERFLOW_OP}
-                                onChange={(value) => setAttributes({ counterOverflow: value })}
-                            />
+                        <SelectControl
+                            label={__("Overflow", "frontis-blocks")}
+                            value={counterOverflow}
+                            options={OVERFLOW_OP}
+                            onChange={(value) => setAttributes({ counterOverflow: value })}
+                        />
 
                         <FB_PositionControl
-                                deviceType={deviceType}
-                                positionType={counterPositionType}
-                                setPositionType={(value) => setAttributes({ counterPositionType: value })}
-                                                                                
-                                HZOrientationType={counterHZOrientationType}
-                                setHZOrientationType={(value) =>
-                                    setAttributes({ counterHZOrientationType: value })
-                                }
-                                VROrientationType={counterVROrientationType}
-                                setVROrientationType={(value) =>
-                                    setAttributes({ counterVROrientationType: value })
-                                }
-                                                                                    
-                                HZLeftOffset={counterHZLeftOffset}
-                                setHZLeftOffset={(value) => setAttributes({ counterHZLeftOffset: value })}
-                                HZLeftOffsetUnits={counterHZLeftOffsetUnits}
-                                setHZLeftOffsetUnits={(value) => setAttributes({ counterHZLeftOffsetUnits: value })}
-                                HZRightOffset={counterHZRightOffset}
-                                setHZRightOffset={(value) => setAttributes({ counterHZRightOffset: value })}
-                                HZRightOffsetUnits={counterHZRightOffsetUnits}
-                                setHZRightOffsetUnits={(value) => setAttributes({ counterHZRightOffsetUnits: value })}
-                                                                                
-                                VRTopOffset={counterVRTopOffset}
-                                setVRTopOffset={(value) => setAttributes({ counterVRTopOffset: value })}
-                                VRTopOffsetUnits={counterVRTopOffsetUnits}
-                                setVRTopOffsetUnits={(value) => setAttributes({ counterVRTopOffsetUnits: value })}
-                                VRBottomOffset={counterVRBottomOffset}
-                                setVRBottomOffset={(value) => setAttributes({ counterVRBottomOffset: value })}
-                                VRBottomOffsetUnits={counterVRBottomOffsetUnits}
-                                setVRBottomOffsetUnits={(value) => setAttributes({ counterVRBottomOffsetUnits: value })}
+                            deviceType={deviceType}
+                            positionType={counterPositionType}
+                            setPositionType={(value) => setAttributes({ counterPositionType: value })}
 
-                                setAttributes={setAttributes}
-                            />
+                            HZOrientationType={counterHZOrientationType}
+                            setHZOrientationType={(value) =>
+                                setAttributes({ counterHZOrientationType: value })
+                            }
+                            VROrientationType={counterVROrientationType}
+                            setVROrientationType={(value) =>
+                                setAttributes({ counterVROrientationType: value })
+                            }
 
-                            <FB_InputControl
-                                label={__("CSS ID", "frontis-blocks")}
-                                value={counterGlobalWraperID} 
-                                onChangeValue={(value) => setAttributes({ counterGlobalWraperID: value })}
-                                helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
-                            />
+                            HZLeftOffset={counterHZLeftOffset}
+                            setHZLeftOffset={(value) => setAttributes({ counterHZLeftOffset: value })}
+                            HZLeftOffsetUnits={counterHZLeftOffsetUnits}
+                            setHZLeftOffsetUnits={(value) => setAttributes({ counterHZLeftOffsetUnits: value })}
+                            HZRightOffset={counterHZRightOffset}
+                            setHZRightOffset={(value) => setAttributes({ counterHZRightOffset: value })}
+                            HZRightOffsetUnits={counterHZRightOffsetUnits}
+                            setHZRightOffsetUnits={(value) => setAttributes({ counterHZRightOffsetUnits: value })}
 
-                            <FB_InputControl
-                                label={__("CSS Class", "frontis-blocks")}
-                                value={counterGlobalWraperClass}
-                                onChangeValue={(value) => setAttributes({ counterGlobalWraperClass: value })}
-                                helpText={__("Separate with spaces key.", "frontis-blocks")}
-                            />
+                            VRTopOffset={counterVRTopOffset}
+                            setVRTopOffset={(value) => setAttributes({ counterVRTopOffset: value })}
+                            VRTopOffsetUnits={counterVRTopOffsetUnits}
+                            setVRTopOffsetUnits={(value) => setAttributes({ counterVRTopOffsetUnits: value })}
+                            VRBottomOffset={counterVRBottomOffset}
+                            setVRBottomOffset={(value) => setAttributes({ counterVRBottomOffset: value })}
+                            VRBottomOffsetUnits={counterVRBottomOffsetUnits}
+                            setVRBottomOffsetUnits={(value) => setAttributes({ counterVRBottomOffsetUnits: value })}
+
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_InputControl
+                            label={__("CSS ID", "frontis-blocks")}
+                            value={counterGlobalWraperID}
+                            onChangeValue={(value) => setAttributes({ counterGlobalWraperID: value })}
+                            helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                        />
+
+                        <FB_InputControl
+                            label={__("CSS Class", "frontis-blocks")}
+                            value={counterGlobalWraperClass}
+                            onChangeValue={(value) => setAttributes({ counterGlobalWraperClass: value })}
+                            helpText={__("Separate with spaces key.", "frontis-blocks")}
+                        />
                     </PanelBody>
 
                     <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
@@ -1959,9 +2394,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                     </PanelBody>
 
-                    <PanelBody 
+                    <PanelBody
                         title={__("Background Color", "frontis-blocks")}
-                        initialOpen={false} 
+                        initialOpen={false}
                     >
                         <FB_SwitcherControl
                             label={__("Background Color", "frontis-blocks")}
@@ -2056,20 +2491,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     </PanelBody>
 
                     <PanelBody
-                            title={__("Responsive Control", "frontis-blocks")}
-                            initialOpen={false}
-                            className="fb-setting-responsive-control-wrapper"
-                        >
-                            <FB_VisibilityControl
-                                desktopValue={counterDesktopSwitcher}
-                                setDesktopValue={(value) => setAttributes({ counterDesktopSwitcher: value })}
+                        title={__("Responsive Control", "frontis-blocks")}
+                        initialOpen={false}
+                        className="fb-setting-responsive-control-wrapper"
+                    >
+                        <FB_VisibilityControl
+                            desktopValue={counterDesktopSwitcher}
+                            setDesktopValue={(value) => setAttributes({ counterDesktopSwitcher: value })}
 
-                                tabletValue={counterTabletSwitcher}
-                                setTabletValue={(value) => setAttributes({ counterTabletSwitcher: value })}
+                            tabletValue={counterTabletSwitcher}
+                            setTabletValue={(value) => setAttributes({ counterTabletSwitcher: value })}
 
-                                mobileValue={counterMobileSwitcher}
-                                setMobileValue={(value) => setAttributes({ counterMobileSwitcher: value })}
-                            />
+                            mobileValue={counterMobileSwitcher}
+                            setMobileValue={(value) => setAttributes({ counterMobileSwitcher: value })}
+                        />
                     </PanelBody>
 
                     <PanelBody
@@ -2084,19 +2519,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 </div>
             </div>
         </>
-	);
+    );
 
-	return (
-		<>
-			<style>
+    return (
+        <>
+            <style>
                 {editorStyle}
-			</style>
+            </style>
 
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
                 advancedControls={advancedControls}
             />
-		</>
-	);
+        </>
+    );
 }

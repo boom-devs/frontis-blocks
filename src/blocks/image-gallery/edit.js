@@ -85,9 +85,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         </style>}
                                         
                                         <a key={item.id} 
-                                            className={`fb-image-gallery-item ${item.id}`} 
+                                            className={`fb-image-gallery-item ${item.id}`}
+                                            aria-label={item.image.alt || __("Image", "frontis-blocks")}
                                         >
-                                            <img className="fb-image-gallery-image" src={item.image.url} alt={item.image.alt}></img>
+                                            <img className="fb-image-gallery-image" src={item.image.url} alt={item.image.alt} aria-hidden="true"></img>
                                             {ImageOverlayStyle === 'overlay' && <span className="fb-image-overlay"></span>}
                                             { lightboxIconSwitcher === true && 
                                                 <div className="fb-lightbox-icon-wrapper">
