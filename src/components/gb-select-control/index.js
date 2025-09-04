@@ -99,7 +99,7 @@ const FB_GBSelectControl = ({
 									aria-expanded={isOpen}
 									className={`fb-setting-global-icon-btn ${globalTypographyValue !== 'none' && 'global-active'}`}
 								>
-									<svg width="16px" height="16px" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
+									<svg width="16px" height="16px" viewBox="0 0 25 25" xmlns="https://www.w3.org/2000/svg">
 										<g>
 											<path class="st0" d="M12.5,21.8c-4.5,0-8.3-3-9.4-7.3c0,0,0,0,0,0c-0.2-0.8-0.3-1.6-0.3-2.4c0-1.7,0.4-3.3,1.2-4.8c0,0,0,0,0,0
 											c1.7-3.1,5-5,8.5-5c3.5,0,6.8,1.9,8.5,5c0,0,0,0,0,0c0.8,1.4,1.2,3.1,1.2,4.8c0,0.8-0.1,1.6-0.3,2.4c0,0,0,0,0,0

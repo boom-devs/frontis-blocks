@@ -7,7 +7,7 @@ function ProBanner() {
       <div className="fb-pro-banner">
           <div className="fb-pro-title-flex">
               {/* <span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none">
+                <svg xmlns="https://www.w3.org/2000/svg" fill="none">
                     <path
                         stroke="#F89B2E"
                         strokeWidth={4}

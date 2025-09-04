@@ -80,20 +80,20 @@ export default function save({ attributes }) {
 							<div className={`fb-team-member-image`}>
 								{teamMemberImageOverlaySwitcher === true && <div className={`fb-team-member-image-overlay`}></div>}
 								{teamMemberImageUrl && (
-									<img src={teamMemberImageUrl} alt={teamMemberImageAlt} aria-hidden="true"/>
+									<img src={teamMemberImageUrl} alt={teamMemberImageAlt}/>
 								)}
 								
 								{teamMemberSocialProfileSwitcher === true && 
 									<>
 										{teamMemberSocialType === 'image' && <div className="fb-team-member-social-profile-wrapper">
 											{socialIconBtnSwitcher === true && 
-												<button className="fb-team-member-social-icon-wrapper-btn" aria-label={__("Social Icon", "frontis-blocks")}>
+												<button className="fb-team-member-social-icon-wrapper-btn">
 													{socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''}
 												</button>
 											}
 											<div className={`fb-team-member-social-profile`}>
 												{teamMemberSocialItems.map(item => (
-													<a href={item.link} key={item.id} className="fb-team-member-social-icon" aria-label={__("Social Icon", "frontis-blocks")}>
+													<a href={item.link} key={item.id} className="fb-team-member-social-icon">
 														{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
 													</a>
 												))}
@@ -131,13 +131,13 @@ export default function save({ attributes }) {
 
 										<div className="fb-team-member-social-profile-wrapper">
 											{socialIconBtnSwitcher === true && 
-												<button className="fb-team-member-social-icon-wrapper-btn" aria-label={__("Social Icon", "frontis-blocks")}>
+												<button className="fb-team-member-social-icon-wrapper-btn">
 													{socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''}
 												</button>
 											}
 											<div className={`fb-team-member-social-profile`}>
 												{teamMemberSocialItems.map(item => (
-													<a href={item.link} key={item.id} className="fb-team-member-social-icon" aria-label={__("Social Icon", "frontis-blocks")}>
+													<a href={item.link} key={item.id} className="fb-team-member-social-icon">
 														{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
 													</a>
 												))}

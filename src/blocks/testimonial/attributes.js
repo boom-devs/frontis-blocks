@@ -33,7 +33,7 @@ const attributes = {
     },
     TestimonialImageAlt : {
         type: 'string',
-        default: 'Testimonial Image',
+        default: '',
     },
     TestimonialImageID : {
         type: 'number',

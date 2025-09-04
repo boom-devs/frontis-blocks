@@ -16,7 +16,7 @@ registerBlockType( metadata.name, {
 	save,
 	icon: {
         src: (
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg">
                 <path d="M3 5h18v2H3z"/>
                 <path d="M7 9h14v2H7z"/>
                 <path d="M7 13h14v2H7z"/>

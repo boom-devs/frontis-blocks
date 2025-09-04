@@ -3,12 +3,12 @@
  */
 const rowIcons = {
 	'100': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<rect x="7.62939e-06" width="114" height="60" rx="2" fill="inherit" />
 		</svg>
 	),
 	'50-50+100_100': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -18,7 +18,7 @@ const rowIcons = {
 		</svg>
 	),
 	'50-50': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -28,7 +28,7 @@ const rowIcons = {
 		</svg>
 	),
 	'75-25': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -38,7 +38,7 @@ const rowIcons = {
 		</svg>
 	),
 	'50-25-25': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -48,7 +48,7 @@ const rowIcons = {
 		</svg>
 	),
 	'33-33-33': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -58,7 +58,7 @@ const rowIcons = {
 		</svg>
 	),
 	'25-75': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -68,7 +68,7 @@ const rowIcons = {
 		</svg>
 	),
 	'25-50-25': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -78,7 +78,7 @@ const rowIcons = {
 		</svg>
 	),
 	'25-25-50': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -88,7 +88,7 @@ const rowIcons = {
 		</svg>
 	),
 	'25-25-25-25': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -98,7 +98,7 @@ const rowIcons = {
 		</svg>
 	),
 	'20-20-20-20-20': (
-		<svg width="113" height="60" viewBox="0 0 113 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="113" height="60" viewBox="0 0 113 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -108,7 +108,7 @@ const rowIcons = {
 		</svg>
 	),
 	'100_50-50': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -118,7 +118,7 @@ const rowIcons = {
 		</svg>
 	),
 	'75+100_100+50-50-25': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -128,7 +128,7 @@ const rowIcons = {
 		</svg>
 	),
 	'75-25_25_75': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -138,7 +138,7 @@ const rowIcons = {
 		</svg>
 	),
 	'50+100_100+50-50-50+50-50': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -148,7 +148,7 @@ const rowIcons = {
 		</svg>
 	),
 	'50+100_100-50': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -158,7 +158,7 @@ const rowIcons = {
 		</svg>
 	),
 	'50-50_100': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -168,7 +168,7 @@ const rowIcons = {
 		</svg>
 	),
 	'50-50_50-50': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -178,7 +178,7 @@ const rowIcons = {
 		</svg>
 	),
 	'33-33+100_100-33': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -188,7 +188,7 @@ const rowIcons = {
 		</svg>
 	),
 	'33-33-33+100_100': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -198,7 +198,7 @@ const rowIcons = {
 		</svg>
 	),
 	'33-33-33_33-33-33': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -208,7 +208,7 @@ const rowIcons = {
 		</svg>
 	),
 	'25-75+100+50-50_100': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"
@@ -218,7 +218,7 @@ const rowIcons = {
 		</svg>
 	),
 	'25-75_75-25': (
-		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg width="114" height="60" viewBox="0 0 114 60" fill="none" xmlns="https://www.w3.org/2000/svg">
 			<path
 				fillRule="evenodd"
 				clipRule="evenodd"

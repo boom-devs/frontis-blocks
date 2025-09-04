@@ -957,7 +957,7 @@ function FrontisBlocksSidebarFullSite(props) {
 										<NavigatorButton path="/typography">
 											<div className="fb-tab-wrapper">
 												<span className="fb-tab-icon">
-													<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="edit-site-global-styles-icon-with-current-color" aria-hidden="true" focusable="false"><path fill="currentcolor" d="M6.9 7L3 17.8h1.7l1-2.8h4.1l1 2.8h1.7L8.6 7H6.9zm-.7 6.6l1.5-4.3 1.5 4.3h-3zM21.6 17c-.1.1-.2.2-.3.2-.1.1-.2.1-.4.1s-.3-.1-.4-.2c-.1-.1-.1-.3-.1-.6V12c0-.5 0-1-.1-1.4-.1-.4-.3-.7-.5-1-.2-.2-.5-.4-.9-.5-.4 0-.8-.1-1.3-.1s-1 .1-1.4.2c-.4.1-.7.3-1 .4-.2.2-.4.3-.6.5-.1.2-.2.4-.2.7 0 .3.1.5.2.8.2.2.4.3.8.3.3 0 .6-.1.8-.3.2-.2.3-.4.3-.7 0-.3-.1-.5-.2-.7-.2-.2-.4-.3-.6-.4.2-.2.4-.3.7-.4.3-.1.6-.1.8-.1.3 0 .6 0 .8.1.2.1.4.3.5.5.1.2.2.5.2.9v1.1c0 .3-.1.5-.3.6-.2.2-.5.3-.9.4-.3.1-.7.3-1.1.4-.4.1-.8.3-1.1.5-.3.2-.6.4-.8.7-.2.3-.3.7-.3 1.2 0 .6.2 1.1.5 1.4.3.4.9.5 1.6.5.5 0 1-.1 1.4-.3.4-.2.8-.6 1.1-1.1 0 .4.1.7.3 1 .2.3.6.4 1.2.4.4 0 .7-.1.9-.2.2-.1.5-.3.7-.4h-.3zm-3-.9c-.2.4-.5.7-.8.8-.3.2-.6.2-.8.2-.4 0-.6-.1-.9-.3-.2-.2-.3-.6-.3-1.1 0-.5.1-.9.3-1.2s.5-.5.8-.7c.3-.2.7-.3 1-.5.3-.1.6-.3.7-.6v3.4z"></path></svg>
+													<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="edit-site-global-styles-icon-with-current-color" aria-hidden="true" focusable="false"><path fill="currentcolor" d="M6.9 7L3 17.8h1.7l1-2.8h4.1l1 2.8h1.7L8.6 7H6.9zm-.7 6.6l1.5-4.3 1.5 4.3h-3zM21.6 17c-.1.1-.2.2-.3.2-.1.1-.2.1-.4.1s-.3-.1-.4-.2c-.1-.1-.1-.3-.1-.6V12c0-.5 0-1-.1-1.4-.1-.4-.3-.7-.5-1-.2-.2-.5-.4-.9-.5-.4 0-.8-.1-1.3-.1s-1 .1-1.4.2c-.4.1-.7.3-1 .4-.2.2-.4.3-.6.5-.1.2-.2.4-.2.7 0 .3.1.5.2.8.2.2.4.3.8.3.3 0 .6-.1.8-.3.2-.2.3-.4.3-.7 0-.3-.1-.5-.2-.7-.2-.2-.4-.3-.6-.4.2-.2.4-.3.7-.4.3-.1.6-.1.8-.1.3 0 .6 0 .8.1.2.1.4.3.5.5.1.2.2.5.2.9v1.1c0 .3-.1.5-.3.6-.2.2-.5.3-.9.4-.3.1-.7.3-1.1.4-.4.1-.8.3-1.1.5-.3.2-.6.4-.8.7-.2.3-.3.7-.3 1.2 0 .6.2 1.1.5 1.4.3.4.9.5 1.6.5.5 0 1-.1 1.4-.3.4-.2.8-.6 1.1-1.1 0 .4.1.7.3 1 .2.3.6.4 1.2.4.4 0 .7-.1.9-.2.2-.1.5-.3.7-.4h-.3zm-3-.9c-.2.4-.5.7-.8.8-.3.2-.6.2-.8.2-.4 0-.6-.1-.9-.3-.2-.2-.3-.6-.3-1.1 0-.5.1-.9.3-1.2s.5-.5.8-.7c.3-.2.7-.3 1-.5.3-.1.6-.3.7-.6v3.4z"></path></svg>
 												</span>
 												<span className="fb-tab-title">{__("Typography","frontis-blocks")}</span>
 											</div>
@@ -967,7 +967,7 @@ function FrontisBlocksSidebarFullSite(props) {
 										<NavigatorButton path="/colors">
 											<div className="fb-tab-wrapper">
 												<span className="fb-tab-icon">
-													<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="edit-site-global-styles-icon-with-current-color" aria-hidden="true" focusable="false"><path fill="currentcolor" d="M17.2 10.9c-.5-1-1.2-2.1-2.1-3.2-.6-.9-1.3-1.7-2.1-2.6L12 4l-1 1.1c-.6.9-1.3 1.7-2 2.6-.8 1.2-1.5 2.3-2 3.2-.6 1.2-1 2.2-1 3 0 3.4 2.7 6.1 6.1 6.1s6.1-2.7 6.1-6.1c0-.8-.3-1.8-1-3zm-5.1 7.6c-2.5 0-4.6-2.1-4.6-4.6 0-.3.1-1 .8-2.3.5-.9 1.1-1.9 2-3.1.7-.9 1.3-1.7 1.8-2.3.7.8 1.3 1.6 1.8 2.3.8 1.1 1.5 2.2 2 3.1.7 1.3.8 2 .8 2.3 0 2.5-2.1 4.6-4.6 4.6z"></path></svg>
+													<svg viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg" width="24" height="24" class="edit-site-global-styles-icon-with-current-color" aria-hidden="true" focusable="false"><path fill="currentcolor" d="M17.2 10.9c-.5-1-1.2-2.1-2.1-3.2-.6-.9-1.3-1.7-2.1-2.6L12 4l-1 1.1c-.6.9-1.3 1.7-2 2.6-.8 1.2-1.5 2.3-2 3.2-.6 1.2-1 2.2-1 3 0 3.4 2.7 6.1 6.1 6.1s6.1-2.7 6.1-6.1c0-.8-.3-1.8-1-3zm-5.1 7.6c-2.5 0-4.6-2.1-4.6-4.6 0-.3.1-1 .8-2.3.5-.9 1.1-1.9 2-3.1.7-.9 1.3-1.7 1.8-2.3.7.8 1.3 1.6 1.8 2.3.8 1.1 1.5 2.2 2 3.1.7 1.3.8 2 .8 2.3 0 2.5-2.1 4.6-4.6 4.6z"></path></svg>
 												</span>
 												<span className="fb-tab-title">{__("Colors","frontis-blocks")}</span>
 											</div>
@@ -983,7 +983,7 @@ function FrontisBlocksSidebarFullSite(props) {
 									<div className="fb-global-header-inner-wrapper">
 										<NavigatorButton path="/" className="back-button">
 											<span>
-												<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="https://www.w3.org/2000/svg">
 													<path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="#404655" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
 												</svg>
 											</span>
@@ -1003,7 +1003,7 @@ function FrontisBlocksSidebarFullSite(props) {
 									<div className="fb-global-header-inner-wrapper">
 										<NavigatorButton path="/" className="back-button">
 											<span>
-												<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="https://www.w3.org/2000/svg">
 													<path d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="#404655" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
 												</svg>
 											</span>
@@ -1048,7 +1048,7 @@ function FrontisBlocksSidebarFullSite(props) {
 																className="add-custom-color-btn"
 																onClick={() => setNewCustomColorFn()}
 															>Add Custom Color <span>
-																<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+																<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="https://www.w3.org/2000/svg">
 																	<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
 																</svg>
 															</span>
@@ -1095,7 +1095,7 @@ function FrontisBlocksSidebarFullSite(props) {
 																	}
 																])}
 															>Add Custom Color <span>
-																<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+																<svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="https://www.w3.org/2000/svg">
 																	<path d="M7.5 0.75V13.25M13.75 7L1.25 7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
 																</svg>
 															</span>
