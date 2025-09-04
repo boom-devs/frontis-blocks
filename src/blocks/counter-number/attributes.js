@@ -3,20 +3,30 @@ const attributes = {
         type: 'string',
         default: ''
     },
-
 	counterAlignment: {
         type: 'object',
         default: {
-            Desktop: 'center',
-            Tablet: '',
-            Mobile: '',
+            Desktop: 'left',
+            Tablet: 'left',
+            Mobile: 'left',
         },
     },
-
+	counterPresetStyle: {
+        type: 'string',
+        default: 'preset-1',
+    },
 	blockStyle: {
         type: 'string',
         default: '',
     },
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
+	},
 	
 	deviceType: {
 		type: 'string',
@@ -24,7 +34,7 @@ const attributes = {
 	},
 	mediaSwitcher : {
 		type: 'string',
-		default: 'icon'
+		default: 'image'
 	},
 	counterMediaId: {
 		type: 'number',
@@ -47,14 +57,14 @@ const attributes = {
 	},
 	iconPosition: {
 		type: 'string',
-		default: 'top',
+		default: 'left',
 	},
 	counterCardAlignment: {
 		type: 'object',
 		default: {
-			Desktop: 'center',
-			Tablet: '',
-			Mobile: '',
+			Desktop: 'left',
+			Tablet: 'left',
+			Mobile: 'left',
 		},
 	},
 	titlePosition: {
@@ -62,14 +72,13 @@ const attributes = {
 		default: 'bottom',
 	},
 	
-
     counterNumberStart: {
         type: 'number',
         default: 0
     },
 	counterNumberEnd: {
 		type: 'number',
-		default: 1000
+		default: 250
 	},
 	counterDuration: {
 		type: 'number',
@@ -129,9 +138,44 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+	// Icon Height
+	counterIconHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	counterIconHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 	counterIconSizeRatio: {
 		type: 'boolean',
 		default: true,
+	},
+
+	// Item Gap (space between icon and content)
+	counterItemGap: {
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '16',
+			Mobile: '16'
+		}
+	},
+	counterItemGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 
 	// Icon Color
@@ -195,7 +239,7 @@ const attributes = {
 	},
 	counterNumberFontColor: {
 		type: 'string',
-		default: ''
+		default: '#15171C'
 	},
 	counterNumberFontHoverColor: {
 		type: 'string',
@@ -233,9 +277,9 @@ const attributes = {
 	counterNumberFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '64',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '48',
+			Tablet: '36',
+			Mobile: '24'
 		}
 	},
 	counterNumberFontSizeUnits: {
@@ -248,7 +292,7 @@ const attributes = {
 	},
 	counterNumberFontWeight: {
 		type: 'string',
-		default: ''
+		default: '700'
 	},
 	counterNumberFontStyle: {
 		type: 'string',
@@ -342,7 +386,7 @@ const attributes = {
 	},
 	counterNumberTitleFontColor: {
 		type: 'string',
-		default: ''
+		default: '#555E72'
 	},
 	counterNumberTitleFontHoverColor: {
 		type: 'string',
@@ -488,7 +532,7 @@ const attributes = {
 	},
 	counterItemBgColor: {
 		type: 'string',
-		default: ''
+		default: '#FFFBF5'
 	},
 	counterItemBgHoverColor: {
 		type: 'string',
@@ -561,22 +605,84 @@ const attributes = {
 	counterItemBorderRadiusDesktop: {
 		type: 'object',
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '24',
+			bottom: '24',
+			left: '24',
+			right: '24',
 		},
 	},
 	counterItemBorderRadiusTablet: {
 		type: 'object',
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '24',
+			bottom: '24',
+			left: '24',
+			right: '24',
 		},
 	},
 	counterItemBorderRadiusMobile: {
+		type: 'object',
+		default: {
+			top: '24',
+			bottom: '24',
+			left: '24',
+			right: '24',
+		},
+	},
+	counterItemBorderRadiusLink : {
+		type : 'boolean',
+		default: true
+	},
+	// Item Padding
+	counterItemPaddingUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterItemPaddingDesktop: {
+		type: 'object',
+		default: {
+			top: '42',
+			bottom: '42',
+			left: '32',
+			right: '32',
+		},
+	},
+	counterItemPaddingTablet: {
+		type: 'object',
+		default: {
+			top: '32',
+			bottom: '32',
+			left: '22',
+			right: '22',
+		},
+	},
+	counterItemPaddingMobile: {
+		type: 'object',
+		default: {
+			top: '22',
+			bottom: '22',
+			left: '16',
+			right: '16',
+		},
+	},
+	counterItemPaddingLink : {
+		type : 'boolean',
+		default: true
+	},
+	// Item Margin
+	counterItemMarginUnits : {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	counterItemMarginDesktop: {
 		type: 'object',
 		default: {
 			top: '',
@@ -585,7 +691,25 @@ const attributes = {
 			right: '',
 		},
 	},
-	counterItemBorderRadiusLink : {
+	counterItemMarginTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterItemMarginMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	counterItemMarginLink : {
 		type : 'boolean',
 		default: true
 	},
@@ -593,9 +717,9 @@ const attributes = {
 	counterItemSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '410',
+			Tablet: '300',
+			Mobile: '250'
 		}
 	},
 	counterItemSizeUnits: {
@@ -609,6 +733,23 @@ const attributes = {
 	counterItemRatio: {
 		type: 'boolean',
 		default: false,
+	},
+	// Item Height
+	counterItemHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	counterItemHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 
 	/** Start Global Setting */

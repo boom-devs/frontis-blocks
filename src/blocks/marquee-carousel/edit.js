@@ -45,6 +45,7 @@
             blockId,
             speed,
             reverseDirection,
+            pauseOnHover,
 
             sliderGlobalWraperID,
             sliderGlobalWraperClass,
@@ -93,12 +94,13 @@
             autoplay: {
                 delay: 1,
                 reverseDirection: reverseDirection,
+                pauseOnMouseEnter: pauseOnHover,
             },
             loop: true,
             slidesPerView:'auto',
             allowTouchMove: false,
             disableOnInteraction: true,
-        }), [speed, reverseDirection]);
+        }), [speed, reverseDirection, pauseOnHover]);
 
 
         // Slide actions

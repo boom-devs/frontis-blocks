@@ -11,6 +11,14 @@ const attributes = {
 		type: 'string',
 		default: 'Desktop'
 	},
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
+	},
 
 	teamMemberZIndex : {
         type: 'object',
@@ -1738,32 +1746,7 @@ const attributes = {
 				link: '#',
 				teamMemberSocialIcon: 'linkedin',
 			},
-		],
-		items: {
-			type: 'object',
-			properties: {
-				id: {
-					type: 'string',
-					default: ''
-				},
-				Title: {
-					type: 'string',
-					default: ''
-				},
-				Description: {
-					type: 'string',
-					default: ''
-				},
-				teamMemberSocialIcon: {
-					type: 'string',
-					default: 'check',
-				},
-				teamMemberSocialIconAlign: {
-					type: 'string',
-					default: 'icon',
-				},
-			}
-		}
+		]
 	},
 
 	teamMemberIconsAlignment: {
@@ -2085,6 +2068,10 @@ const attributes = {
 	teamMemberSocialPosition: {
 		type : 'string',
 		default: 'bottom'
+	},
+	teamMemberSocialAlignment: {
+		type : 'string',
+		default: 'center'
 	},
 	socialIconBtnSwitcher: {
 		type : 'boolean',

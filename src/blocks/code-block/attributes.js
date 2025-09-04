@@ -6,6 +6,14 @@ const attributes = {
 	blockID: {
 		type: 'string',
 	},
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
+	},
 	code: {
 		type: 'string',
 		source: 'text',

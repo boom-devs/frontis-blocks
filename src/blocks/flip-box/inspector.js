@@ -4479,6 +4479,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  .fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
 				${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
+				height: fit-content;
 		  }
 			.fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper.fb-show-back {
 				transform:
@@ -4487,6 +4488,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
 				${flipBoxFrontWidth.Desktop ? `min-width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
+				height: auto;
 				${flipBoxFrontBackgroundType === "gradient" ? `
 				background: ${flipBoxFrontCustomGradientSwitcher && flipBoxFrontCustomGradientInputValue ? flipBoxFrontCustomGradientInputValue : flipBoxFrontGradientColor};
 				`
@@ -4524,6 +4526,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-back {
 			${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 			${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
+			height: auto;
 			${flipBoxBackBackgroundType === "gradient" ? `
 			background: ${flipBoxBackCustomGradientSwitcher && flipBoxBackCustomGradientInputValue ? flipBoxBackCustomGradientInputValue : flipBoxBackGradientColor};
 			`
@@ -6454,7 +6457,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														normalClassicColor={flipBoxFrontClassicColor}
 														setNormalClassicColor={(value) => setAttributes({ flipBoxFrontClassicColor: value === undefined ? '' : value })}
 														normalGradientColor={flipBoxFrontGradientColor}
-														setNormalGradientColor={(value) => setAttributes({ flipBoxFrontGradientColor: value === undefined ? '' : value })}
+														setNormalGradientColor={(value) => setAttributes({ flipBoxFrontGradientColor: value === undefined ? null : value })}
 														normalCustomGradientSwitcher={flipBoxFrontCustomGradientSwitcher}
 														setNormalCustomGradientSwitcher={(value) => setAttributes({ flipBoxFrontCustomGradientSwitcher: value })}
 														normalCustomGradientInputValue={flipBoxFrontCustomGradientInputValue}
@@ -6478,7 +6481,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														hoverClassicColor={flipBoxFrontHoverClassicColor}
 														setHoverClassicColor={(value) => setAttributes({ flipBoxFrontHoverClassicColor: value === undefined ? '' : value })}
 														hoverGradientColor={flipBoxFrontHoverGradientColor}
-														setHoverGradientColor={(value) => setAttributes({ flipBoxFrontHoverGradientColor: value === undefined ? '' : value })}
+														setHoverGradientColor={(value) => setAttributes({ flipBoxFrontHoverGradientColor: value === undefined ? null : value })}
 														hoverCustomGradientSwitcher={flipBoxFrontHoverCustomGradientSwitcher}
 														setHoverCustomGradientSwitcher={(value) => setAttributes({ flipBoxFrontHoverCustomGradientSwitcher: value })}
 														hoverCustomGradientInputValue={flipBoxFrontHoverCustomGradientInputValue}
@@ -6648,7 +6651,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														normalClassicColor={mediaClassicColor}
 														setNormalClassicColor={(value) => setAttributes({ mediaClassicColor: value === undefined ? '' : value })}
 														normalGradientColor={mediaGradientColor}
-														setNormalGradientColor={(value) => setAttributes({ mediaGradientColor: value === undefined ? '' : value })}
+														setNormalGradientColor={(value) => setAttributes({ mediaGradientColor: value === undefined ? null : value })}
 														normalCustomGradientSwitcher={mediaCustomGradientSwitcher}
 														setNormalCustomGradientSwitcher={(value) => setAttributes({ mediaCustomGradientSwitcher: value })}
 														normalCustomGradientInputValue={mediaCustomGradientInputValue}
@@ -6672,7 +6675,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														hoverClassicColor={mediaHoverClassicColor}
 														setHoverClassicColor={(value) => setAttributes({ mediaHoverClassicColor: value === undefined ? '' : value })}
 														hoverGradientColor={mediaHoverGradientColor}
-														setHoverGradientColor={(value) => setAttributes({ mediaHoverGradientColor: value === undefined ? '' : value })}
+														setHoverGradientColor={(value) => setAttributes({ mediaHoverGradientColor: value === undefined ? null : value })}
 														hoverCustomGradientSwitcher={mediaHoverCustomGradientSwitcher}
 														setHoverCustomGradientSwitcher={(value) => setAttributes({ mediaHoverCustomGradientSwitcher: value })}
 														hoverCustomGradientInputValue={mediaHoverCustomGradientInputValue}
@@ -7451,7 +7454,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														normalClassicColor={flipBoxBackClassicColor}
 														setNormalClassicColor={(value) => setAttributes({ flipBoxBackClassicColor: value === undefined ? '' : value })}
 														normalGradientColor={flipBoxBackGradientColor}
-														setNormalGradientColor={(value) => setAttributes({ flipBoxBackGradientColor: value === undefined ? '' : value })}
+														setNormalGradientColor={(value) => setAttributes({ flipBoxBackGradientColor: value === undefined ? null : value })}
 														normalCustomGradientSwitcher={flipBoxBackCustomGradientSwitcher}
 														setNormalCustomGradientSwitcher={(value) => setAttributes({ flipBoxBackCustomGradientSwitcher: value })}
 														normalCustomGradientInputValue={flipBoxBackCustomGradientInputValue}
@@ -7475,7 +7478,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														hoverClassicColor={flipBoxBackHoverClassicColor}
 														setHoverClassicColor={(value) => setAttributes({ flipBoxBackHoverClassicColor: value === undefined ? '' : value })}
 														hoverGradientColor={flipBoxBackHoverGradientColor}
-														setHoverGradientColor={(value) => setAttributes({ flipBoxBackHoverGradientColor: value === undefined ? '' : value })}
+														setHoverGradientColor={(value) => setAttributes({ flipBoxBackHoverGradientColor: value === undefined ? null : value })}
 														hoverCustomGradientSwitcher={flipBoxBackHoverCustomGradientSwitcher}
 														setHoverCustomGradientSwitcher={(value) => setAttributes({ flipBoxBackHoverCustomGradientSwitcher: value })}
 														hoverCustomGradientInputValue={flipBoxBackHoverCustomGradientInputValue}
@@ -7645,7 +7648,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														normalClassicColor={mediaBackClassicColor}
 														setNormalClassicColor={(value) => setAttributes({ mediaBackClassicColor: value === undefined ? '' : value })}
 														normalGradientColor={mediaBackGradientColor}
-														setNormalGradientColor={(value) => setAttributes({ mediaBackGradientColor: value === undefined ? '' : value })}
+														setNormalGradientColor={(value) => setAttributes({ mediaBackGradientColor: value === undefined ? null : value })}
 														normalCustomGradientSwitcher={mediaBackCustomGradientSwitcher}
 														setNormalCustomGradientSwitcher={(value) => setAttributes({ mediaBackCustomGradientSwitcher: value })}
 														normalCustomGradientInputValue={mediaBackCustomGradientInputValue}
@@ -7669,7 +7672,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														hoverClassicColor={mediaBackHoverClassicColor}
 														setHoverClassicColor={(value) => setAttributes({ mediaBackHoverClassicColor: value === undefined ? '' : value })}
 														hoverGradientColor={mediaBackHoverGradientColor}
-														setHoverGradientColor={(value) => setAttributes({ mediaBackHoverGradientColor: value === undefined ? '' : value })}
+														setHoverGradientColor={(value) => setAttributes({ mediaBackHoverGradientColor: value === undefined ? null : value })}
 														hoverCustomGradientSwitcher={mediaBackHoverCustomGradientSwitcher}
 														setHoverCustomGradientSwitcher={(value) => setAttributes({ mediaBackHoverCustomGradientSwitcher: value })}
 														hoverCustomGradientInputValue={mediaBackHoverCustomGradientInputValue}

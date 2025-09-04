@@ -132,6 +132,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									target={iconBoxbtnTargetUrl ? '_blank' : undefined}
 									rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
 									onClick={handleButtonClick}
+									aria-label={__("Icon Button", "frontis-blocks")}
 								>
 									<RichText
 										value={icon_Box_Button_Text}
@@ -144,7 +145,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										
 									/>
 									{buttonIconSwitcher && (
-										<div className="fb-btn-icon-wrapper">
+										<div className="fb-btn-icon-wrapper" aria-hidden="true">
 											{renderSVG(btnIcon)}
 										</div>
 									)}

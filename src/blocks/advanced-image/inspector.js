@@ -3,12 +3,9 @@ import { __ } from "@wordpress/i18n";
 
 import {
 	BaseControl,
-	Button,
-	ButtonGroup,
 	PanelBody,
 	RangeControl,
 	SelectControl,
-	TabPanel,
 	TextControl,
 	ToggleControl
 } from "@wordpress/components";
@@ -28,7 +25,7 @@ import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
-import {useDeviceType} from "@Config/displayType";
+import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_ImageControl from '@Components/image-control';
@@ -42,7 +39,11 @@ import {
 	TITLE_POSITION,
 	HOVER_EFFECTS,
 	AUTO_FIT,
-	OVERFLOW_OP
+	OVERFLOW_OP,
+	MASK_IMAEGS,
+	MASK_SIZE,
+	MASK_POSITION,
+	MASK_REPEAT
 } from "./constants/constants";
 import "./editor.scss";
 
@@ -52,15 +53,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		// deviceType,
 		imageStyle,
 		displayCaption,
-		imageSize,
-		imageWidth,
-		horizontalAlign,
-		borderType,
-		normalBorderColor,
-		borderStyle,
-		normalBorderRadUnit,
-		normalBorderRad,
-		normalBorderRadiusLink,
 		imageBorder,
 		imageBorderColorSwitcher,
 		imageBorderColor,
@@ -86,11 +78,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		mediaSizeUnits,
 		mediaHeightUnits,
 		advancedImageUrl,
-		advancedImageAlt,
-		advancedImageId,
-		advancedImageDefaultWidth,
-		advancedImageDefaultHeight,
-		advancedImageSrcSet,
 		linkUrl,
 		linkTargetUrl,
 		imageHover,
@@ -120,17 +107,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		HeadingBorder,
 		HeadingBorderColor,
 		HeadingBorderHoverColor,
-		HeadingBorderColorSwitcher,
-		HeadingBorderUnits,
-		HeadingDesktopBorderWidth,
-		HeadingTabBorderWidth,
-		HeadingMobileBorderWidth,
-		HeadingBorderLink,
-		HeadingBorderRadiusUnits,
-		HeadingDesktopBorderRadiusWidth,
-		HeadingTabBorderRadiusWidth,
-		HeadingMobileBorderRadiusWidth,
-		HeadingBorderRadiusLink,
 		HeadingPaddingUnits,
 		HeadingDesktopPadding,
 		HeadingTabPadding,
@@ -142,7 +118,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		HeadingMobileMargin,
 		HeadingMarginLink,
 		titlePosition,
-		titleHoverEffects,
 		boxGlobalBoxShadowValues,
 		boxGlobalBoxShadowCssValue,
 		testBgColorSwitcher,
@@ -151,7 +126,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		testGradientColor,
 		testCustomGradientSwitcher,
 		testCustomGradientInputValue,
-		testBackgroundColorStyle,
 		testBackgroundImageUrl,
 		testBackgroundImageAlt,
 		testBackgroundImageID,
@@ -164,7 +138,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		hoverGradientColor,
 		hoverCustomGradientSwitcher,
 		hoverCustomGradientInputValue,
-		hoverBackgroundColorStyle,
 		hoverBackgroundImageUrl,
 		hoverBackgroundImageAlt,
 		hoverBackgroundImageID,
@@ -209,8 +182,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		overlayCustomGradientSwitcher,
 		overlayCustomGradientInputValue,
 		overlayBackgroundImageUrl,
-		overlayBackgroundImageAlt,
-		overlayBackgroundImageID,
 		overlayBackgroundImagePosition,
 		overlayBackgroundImageAttachment,
 		overlayBackgroundImageRepeat,
@@ -220,13 +191,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		overlayHoverGradientColor,
 		overlayHoverCustomGradientSwitcher,
 		overlayHoverCustomGradientInputValue,
-		overlayHoverBackgroundImageUrl,
-		overlayHoverBackgroundImageAlt,
-		overlayHoverBackgroundImageID,
-		overlayHoverBackgroundImagePosition,
-		overlayHoverBackgroundImageAttachment,
-		overlayHoverBackgroundImageRepeat,
-		overlayHoverBackgroundImageSize,
 		overlayOpacity,
 
 		advancedImageDesktopSwitcher,
@@ -255,10 +219,14 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		smartLazyLoadImageUrl,
 		smartLazyLoadImageId,
 		smartLazyLoadImageAlt,
+		maskImageUrl,
+		maskImageSize,
+		maskImagePosition,
+		maskImageRepeat
 	} = attributes;
 
-	const deviceType= useDeviceType();
-	
+	const deviceType = useDeviceType();
+
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
 			setAttributes({
@@ -310,7 +278,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					break;
 				default:
 					break;
-		}
+			}
 		} else {
 			switch (deviceType) {
 				case "Desktop":
@@ -389,7 +357,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					break;
 				default:
 					break;
-		}
+			}
 		} else {
 			switch (deviceType) {
 				case "Desktop":
@@ -430,7 +398,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 	const headingDesktopMarginValue = `${HeadingDesktopMargin.top}${HeadingMarginUnits.Desktop} ${HeadingDesktopMargin.right}${HeadingMarginUnits.Desktop} ${HeadingDesktopMargin.bottom}${HeadingMarginUnits.Desktop} ${HeadingDesktopMargin.left}${HeadingMarginUnits.Desktop}`;
 	const headingTabletMarginValue = `${HeadingTabMargin.top}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.right}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.bottom}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.left}${HeadingMarginUnits.Tablet}`;
 	const headingMobileMarginValue = `${HeadingMobileMargin.top}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.right}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.bottom}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.left}${HeadingMarginUnits.Mobile}`;
-	
+
 	/** Start Image Border */
 	const handleImageBorderUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -468,7 +436,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					break;
 				default:
 					break;
-		}
+			}
 		} else {
 			switch (deviceType) {
 				case "Desktop":
@@ -509,7 +477,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 	const imageDesktopBorder = `${imageBorderDesktop.top}${imageBorderUnits.Desktop} ${imageBorderDesktop.right}${imageBorderUnits.Desktop} ${imageBorderDesktop.bottom}${imageBorderUnits.Desktop} ${imageBorderDesktop.left}${imageBorderUnits.Desktop}`;
 	const imageTabletBorder = `${imageBorderTablet.top}${imageBorderUnits.Tablet} ${imageBorderTablet.right}${imageBorderUnits.Tablet} ${imageBorderTablet.bottom}${imageBorderUnits.Tablet} ${imageBorderTablet.left}${imageBorderUnits.Tablet}`;
 	const imageMobileBorder = `${imageBorderMobile.top}${imageBorderUnits.Mobile} ${imageBorderMobile.right}${imageBorderUnits.Mobile} ${imageBorderMobile.bottom}${imageBorderUnits.Mobile} ${imageBorderMobile.left}${imageBorderUnits.Mobile}`;
-	
+
 	/** Start Image Border Radius */
 	const handleImageBorderRadiusUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -570,11 +538,11 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			}
 		}
 	};
-	
+
 	const handleImageBorderRadiusCombineBtn = () => {
 		setAttributes({ imageBorderRadiusLink: !imageBorderRadiusLink });
 	};
-	
+
 	const handleImageBorderRadiusUnitsHandler = (unit) => {
 		setAttributes({
 			imageBorderRadiusUnits: {
@@ -583,12 +551,12 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			},
 		});
 	};
-	
+
 	/** Default border radius for desktop (using desktop_border_radius) */
 	const imageDesktopBorderRadius = `${imageBorderRadiusDesktop.top}${imageBorderRadiusUnits.Desktop} ${imageBorderRadiusDesktop.right}${imageBorderRadiusUnits.Desktop} ${imageBorderRadiusDesktop.bottom}${imageBorderRadiusUnits.Desktop} ${imageBorderRadiusDesktop.left}${imageBorderRadiusUnits.Desktop}`;
 	const imageTabletBorderRadius = `${imageBorderRadiusTablet.top}${imageBorderRadiusUnits.Tablet} ${imageBorderRadiusTablet.right}${imageBorderRadiusUnits.Tablet} ${imageBorderRadiusTablet.bottom}${imageBorderRadiusUnits.Tablet} ${imageBorderRadiusTablet.left}${imageBorderRadiusUnits.Tablet}`;
 	const imageMobileBorderRadius = `${imageBorderRadiusMobile.top}${imageBorderRadiusUnits.Mobile} ${imageBorderRadiusMobile.right}${imageBorderRadiusUnits.Mobile} ${imageBorderRadiusMobile.bottom}${imageBorderRadiusUnits.Mobile} ${imageBorderRadiusMobile.left}${imageBorderRadiusUnits.Mobile}`;
-	
+
 
 	/** Start Global padding */
 	const handleGlobalPaddingUnitChange = (event, position) => {
@@ -671,7 +639,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 	const globalTabPadding = `${globalPaddingTablet.top}${globalPaddingUnits.Tablet} ${globalPaddingTablet.right}${globalPaddingUnits.Tablet} ${globalPaddingTablet.bottom}${globalPaddingUnits.Tablet} ${globalPaddingTablet.left}${globalPaddingUnits.Tablet}`;
 	const globalMobPadding = `${globalPaddingMobile.top}${globalPaddingUnits.Mobile} ${globalPaddingMobile.right}${globalPaddingUnits.Mobile} ${globalPaddingMobile.bottom}${globalPaddingUnits.Mobile} ${globalPaddingMobile.left}${globalPaddingUnits.Mobile}`;
 
-	
+
 	/** Start Global margin */
 	const handleGlobalMarginUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -950,29 +918,29 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			border-width: ${globalDeskBorder};
 			border-radius: ${globalDeskBorderRadius} !important;
 			${globalBorderColor !== undefined ? `border-color: ${globalBorderColor};` : ""}
-			${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : "" }
-			${testBackgroundType === "gradient" ? ` background: ${ testCustomGradientSwitcher && testCustomGradientInputValue ? testCustomGradientInputValue : testGradientColor };
+			${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : ""}
+			${testBackgroundType === "gradient" ? ` background: ${testCustomGradientSwitcher && testCustomGradientInputValue ? testCustomGradientInputValue : testGradientColor};
 			`
-			: testBackgroundImageUrl && testBackgroundImageUrl !== "null"
-			? `
+				: testBackgroundImageUrl && testBackgroundImageUrl !== "null"
+					? `
 			background-image: url(${testBackgroundImageUrl});
 			background-position: ${testBackgroundImagePosition};
 			background-attachment: ${testBackgroundImageAttachment};
 			background-repeat: ${testBackgroundImageRepeat};
-			background-size: ${testBackgroundImageSize};` 
-			: testClassicColor ? `background: ${testClassicColor}` : ''
+			background-size: ${testBackgroundImageSize};`
+					: testClassicColor ? `background: ${testClassicColor}` : ''
 			}
 			transition: all .3s ease-in-out;
 		}
 		.${blockID} .fb-advanced-image-wrapper:hover{
 			${globalBorderHoverColor !== undefined ? `border-color: ${globalBorderHoverColor};` : ""}
-			${hoverBackgroundType === "gradient" ? `background: ${ hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor };` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null" ? `
-			${hoverBackgroundImageUrl ? `background-image: url(${hoverBackgroundImageUrl});` : "" }
-			${hoverBackgroundImagePosition ? `background-position: ${hoverBackgroundImagePosition};` : "" }
-			${hoverBackgroundImageAttachment ? `background-attachment: ${hoverBackgroundImageAttachment};` : "" }
-			${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : "" }
-			${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : "" } ` 
-			: hoverClassicColor ? `background: ${hoverClassicColor}` : ''
+			${hoverBackgroundType === "gradient" ? `background: ${hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor};` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null" ? `
+			${hoverBackgroundImageUrl ? `background-image: url(${hoverBackgroundImageUrl});` : ""}
+			${hoverBackgroundImagePosition ? `background-position: ${hoverBackgroundImagePosition};` : ""}
+			${hoverBackgroundImageAttachment ? `background-attachment: ${hoverBackgroundImageAttachment};` : ""}
+			${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : ""}
+			${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : ""} `
+				: hoverClassicColor ? `background: ${hoverClassicColor}` : ''
 			}
 		}
 		.${blockID} .fb-advanced-image .fb-advanced-image-inner{
@@ -983,21 +951,28 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
             ${imageDesktopBorderRadius && imageBorderRadiusDesktop.top ? `border-radius: ${imageDesktopBorderRadius};` : ''}
             ${imageBorderColor ? `border-color: ${imageBorderColor};` : ''}
 			${imageBoxShadowCssValue ? `box-shadow: ${imageBoxShadowCssValue};` : ''}
+			${maskImageUrl && `
+				-webkit-mask-image: url(${maskImageUrl});
+				mask-image: url(${maskImageUrl});
+				mask-size: ${maskImageSize};
+				mask-position: ${maskImagePosition};
+				mask-repeat: ${maskImageRepeat};
+			`}
 		}
 		.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover{
 			${imageBorderHoverColor ? `border-color: ${imageBorderHoverColor};` : ''}
 		}
 		.${blockID} .fb-advanced-image .fb-advanced-image-inner:before{
-			${overlayBackgroundType === "gradient" ? ` background: ${ overlayCustomGradientSwitcher && overlayCustomGradientInputValue ? overlayCustomGradientInputValue : overlayGradientColor };
+			${overlayBackgroundType === "gradient" ? ` background: ${overlayCustomGradientSwitcher && overlayCustomGradientInputValue ? overlayCustomGradientInputValue : overlayGradientColor};
 			`
-			: overlayBackgroundImageUrl && overlayBackgroundImageUrl !== "null"
-			? `
+				: overlayBackgroundImageUrl && overlayBackgroundImageUrl !== "null"
+					? `
 			background-image: url(${overlayBackgroundImageUrl});
 			background-position: ${overlayBackgroundImagePosition};
 			background-attachment: ${overlayBackgroundImageAttachment};
 			background-repeat: ${overlayBackgroundImageRepeat};
-			background-size: ${overlayBackgroundImageSize};` 
-			: overlayClassicColor ? `background: ${overlayClassicColor};` : ''
+			background-size: ${overlayBackgroundImageSize};`
+					: overlayClassicColor ? `background: ${overlayClassicColor};` : ''
 			}
 			opacity: ${overlayOpacity};
 			transition: all .3s ease-in-out;
@@ -1048,7 +1023,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			${HeadingBorderHoverColor ? `background-color: ${HeadingBorderHoverColor};` : ''}
 			border: ${HeadingBorderHoverColor};
 		}
-		@media all and (max-width: 1024px) {
+		@media all and (max-width: 1024px) {	
 		.fb-advanced-image-main-wrapper.${blockID} {
 			${advancedImagePositionType !== 'default' ? `position: ${advancedImagePositionType};` : ''}
 			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'left' && advancedImageHZLeftOffset.Tablet ? `left: ${advancedImageHZLeftOffset.Tablet}${advancedImageHZLeftOffsetUnits.Tablet};` : ''}
@@ -1113,110 +1088,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		}
 		}
 	`,
-		[
-			blockID,
-			globalDeskPadding,
-			globalTabPadding,
-			globalMobPadding,
-			globalDeskMargin,
-			globalTabMargin,
-			globalMobMargin,
-			globalBorder,
-			globalDeskBorder,
-			globalTabBorder,
-			globalMobBorder,
-			globalDeskBorderRadius,
-			globalTabBorderRadius,
-			globalMobBorderRadius,
-			globalBorderColor,
-			globalZIndex,
-			advancedImageOverflow,
-			boxGlobalBoxShadowCssValue,
-			testBackgroundType,
-			testCustomGradientSwitcher,
-			testCustomGradientInputValue,
-			testGradientColor,
-			testBackgroundImageUrl,
-			testBackgroundImagePosition,
-			testBackgroundImageAttachment,
-			testBackgroundImageRepeat,
-			testBackgroundImageSize,
-			testClassicColor,
-			overlayBackgroundType,
-			overlayCustomGradientSwitcher,
-			overlayCustomGradientInputValue,
-			overlayGradientColor,
-			overlayBackgroundImageUrl,
-			overlayBackgroundImagePosition,
-			overlayBackgroundImageAttachment,
-			overlayBackgroundImageRepeat,
-			overlayBackgroundImageSize,
-			overlayClassicColor,
-			overlayOpacity,
-			overlayHoverBackgroundType,
-			overlayHoverCustomGradientSwitcher,
-			overlayHoverCustomGradientInputValue,
-			overlayHoverGradientColor,
-			overlayHoverBackgroundImageUrl,
-			overlayHoverBackgroundImagePosition,
-			overlayHoverBackgroundImageAttachment,
-			overlayHoverBackgroundImageRepeat,
-			overlayHoverBackgroundImageSize,
-			overlayHoverClassicColor,
-			mediaSize,
-			mediaSizeUnits,
-			autoFitSwitch,
-			autoHeightSwitch,
-			mediaHeight,
-			mediaHeightUnits,
-			imageBorder,
-			imageBorderColor,
-			imageDesktopBorder,
-			imageTabletBorder,
-			imageMobileBorder,
-			imageDesktopBorderRadius,
-			imageTabletBorderRadius,
-			imageMobileBorderRadius,
-			imageBoxShadowCssValue,
-			captionAlignment,
-			HeadingColor,
-			HeadingBackgroundColor,
-			headingGlobalTypoSwitcher,
-			headingGlobalTypographyData,
-			headingGlobalTypoType,
-			headingFontFamily,
-			headingFontSize,
-			headingFontSizeUnits,
-			headingFontWeight,
-			headingFontStyle,
-			headingTextTransform,
-			headingTextDecoration,
-			headingLetterSpacing,
-			headingLetterSpacingUnits,
-			headingLineHeight,
-			headingLineHeightUnits,
-			HeadingBorder,
-			HeadingDesktopPadding,
-			HeadingTabPadding,
-			HeadingMobilePadding,
-			HeadingDesktopMargin,
-			HeadingTabMargin,
-			HeadingMobileMargin,
-
-			// Position
-			advancedImagePositionType,
-			advancedImageHZOrientationType,
-			advancedImageVROrientationType,
-			advancedImageHZLeftOffset,
-			advancedImageHZLeftOffsetUnits,
-			advancedImageHZRightOffset,
-			advancedImageHZRightOffsetUnits,
-			advancedImageVRTopOffset,
-			advancedImageVRTopOffsetUnits,
-			advancedImageVRBottomOffset,
-			advancedImageVRBottomOffsetUnits,
-		],
-	);
+		[attributes]);
 
 	const customCss = getCustomCss(advancedImageCustomCSS, `.${blockID}`);
 
@@ -1228,6 +1100,14 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 
 	const editorStyle = `${advancedImageStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
+
+	useEffect(() => {
+		console.log(MASK_IMAEGS[imageStyle]);
+		if (MASK_IMAEGS[imageStyle]) {
+			setAttributes({ maskImageUrl: MASK_IMAEGS[imageStyle] });
+		}
+	}, [imageStyle]);
+
 	/**
 	 * Inspector General Controls
 	 */
@@ -1238,31 +1118,58 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					title={__("General", "frontis-blocks")}
 					initialOpen={true}
 				>
-				{/** Image Uploader **/}
-				<BaseControl
-				label={__("Image", "frontis-blocks")}
-				className="fb-advanced-heading-bg-image"
-				>
-					{advancedImageUrl ? (
-						<div className="fb-image-avatar-control" style={{backgroundImage: `url(${advancedImageUrl})`}}>
+					{/** Image Uploader **/}
+					<BaseControl
+						label={__("Image", "frontis-blocks")}
+						className="fb-advanced-heading-bg-image"
+					>
+						{advancedImageUrl ? (
+							<div className="fb-image-avatar-control" style={{ backgroundImage: `url(${advancedImageUrl})` }}>
+								<button
+									className='fb-image-avatar-delete'
+									onClick={() => {
+										setAttributes({
+											advancedImageUrl: null,
+											advancedImageAlt: null,
+											advancedImageId: null,
+											advancedImageSrcSet: null,
+										});
+									}}
+								>
+									<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M12.9431 22C18.466 22 22.9431 17.5228 22.9431 12C22.9431 6.47715 18.466 2 12.9431 2C7.42027 2 2.94312 6.47715 2.94312 12C2.94312 17.5228 7.42027 22 12.9431 22Z" stroke="#1C274C" />
+										<path d="M15.4431 9.50002L10.4431 14.5M10.4431 9.5L15.4431 14.5" stroke="#1C274C" />
+									</svg>
+								</button>
+								<button
+									className='fb-image-replace-btn'
+									onClick={() => {
+										const mediaUploader = wp.media({
+											title: __('Select or Upload Background Image', 'frontis-blocks'),
+											button: {
+												text: __('Use this image', 'frontis-blocks'),
+											},
+											multiple: false
+										});
+
+										mediaUploader.on('select', function () {
+											const attachment = mediaUploader.state().get('selection').first().toJSON();
+											onSelectImage(attachment);
+										});
+
+										mediaUploader.open();
+									}}
+								>
+									<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C" />
+										<path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C" />
+									</svg>
+									Replace
+								</button>
+							</div>
+						) : (
 							<button
-								className='fb-image-avatar-delete'
-								onClick={() => {
-									setAttributes({
-										advancedImageUrl: null,
-										advancedImageAlt: null,
-										advancedImageId: null,
-										advancedImageSrcSet: null,
-									});
-								}}
-							>
-								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M12.9431 22C18.466 22 22.9431 17.5228 22.9431 12C22.9431 6.47715 18.466 2 12.9431 2C7.42027 2 2.94312 6.47715 2.94312 12C2.94312 17.5228 7.42027 22 12.9431 22Z" stroke="#1C274C"/>
-										<path d="M15.4431 9.50002L10.4431 14.5M10.4431 9.5L15.4431 14.5" stroke="#1C274C"/>
-								</svg>
-							</button>
-							<button
-								className='fb-image-replace-btn'
+								className='fb-image-upload-btn'
 								onClick={() => {
 									const mediaUploader = wp.media({
 										title: __('Select or Upload Background Image', 'frontis-blocks'),
@@ -1272,7 +1179,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 										multiple: false
 									});
 
-									mediaUploader.on('select', function() {
+									mediaUploader.on('select', function () {
 										const attachment = mediaUploader.state().get('selection').first().toJSON();
 										onSelectImage(attachment);
 									});
@@ -1280,46 +1187,19 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 									mediaUploader.open();
 								}}
 							>
-								<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C"/>
-										<path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C"/>
-								</svg>
-								Replace
+								<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M11.492 10.172l-2.5 3.064-.737-.677 3.737-4.559 3.753 4.585-.753.665-2.5-3.076v7.826h-1v-7.828zm7.008 9.828h-13c-2.481 0-4.5-2.018-4.5-4.5 0-2.178 1.555-4.038 3.698-4.424l.779-.14.043-.789c.185-3.448 3.031-6.147 6.48-6.147 3.449 0 6.295 2.699 6.478 6.147l.044.789.78.14c2.142.386 3.698 2.246 3.698 4.424 0 2.482-2.019 4.5-4.5 4.5m.978-9.908c-.212-3.951-3.472-7.092-7.478-7.092s-7.267 3.141-7.479 7.092c-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.522-5.408"></path></svg>
+								Upload
 							</button>
-						</div>
-					) : (
-						<button
-							className='fb-image-upload-btn'
-							onClick={() => {
-								const mediaUploader = wp.media({
-									title: __('Select or Upload Background Image', 'frontis-blocks'),
-									button: {
-										text: __('Use this image', 'frontis-blocks'),
-									},
-									multiple: false
-								});
-
-								mediaUploader.on('select', function() {
-									const attachment = mediaUploader.state().get('selection').first().toJSON();
-									onSelectImage(attachment);
-								});
-
-								mediaUploader.open();
-							}}
-						>
-							<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M11.492 10.172l-2.5 3.064-.737-.677 3.737-4.559 3.753 4.585-.753.665-2.5-3.076v7.826h-1v-7.828zm7.008 9.828h-13c-2.481 0-4.5-2.018-4.5-4.5 0-2.178 1.555-4.038 3.698-4.424l.779-.14.043-.789c.185-3.448 3.031-6.147 6.48-6.147 3.449 0 6.295 2.699 6.478 6.147l.044.789.78.14c2.142.386 3.698 2.246 3.698 4.424 0 2.482-2.019 4.5-4.5 4.5m.978-9.908c-.212-3.951-3.472-7.092-7.478-7.092s-7.267 3.141-7.479 7.092c-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.522-5.408"></path></svg>
-							Upload
-						</button>
-					)}
+						)}
 					</BaseControl>
 
-					
+
 					<SelectControl
 						label={__("Styles", "frontis-blocks")}
 						value={imageStyle || "square"}
 						options={STYLES}
 						onChange={(value) => {
-							setAttributes({ imageStyle: value }); 
+							setAttributes({ imageStyle: value });
 						}}
 						__nextHasNoMarginBottom
 					/>
@@ -1370,7 +1250,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 								className="fb-advance-title"
 								placeholder={__("Enter Title", "frontis-blocks")}
 							/>
-							
+
 							<FB_HtmlTagControl
 								label={__("Title Tag", "frontis-blocks")}
 								globalHtmlTag={titleTag}
@@ -1400,14 +1280,14 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 
 					{linkSwitch && (
 						<FB_UrlControl
-						url={linkUrl}
-						onChangeUrl={(value) =>
-							setAttributes({ linkUrl: value })
-						}
-						openInNewTab={linkTargetUrl}
-						onChangeOpenInNewTab={(value) =>
-							setAttributes({ linkTargetUrl: value })
-						}
+							url={linkUrl}
+							onChangeUrl={(value) =>
+								setAttributes({ linkUrl: value })
+							}
+							openInNewTab={linkTargetUrl}
+							onChangeOpenInNewTab={(value) =>
+								setAttributes({ linkTargetUrl: value })
+							}
 						/>
 					)}
 					{/*	Hover Effect */}
@@ -1461,281 +1341,304 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			{/*	Title */}
 			{displayTitle && (
 				<PanelBody
-				title={__("Title", "frontis-blocks")}
-				initialOpen={true}
-			>
-				<FB_TypographyControl
-					globalTypoControlActive={true}
-					globalTypoSwitcher={headingGlobalTypoSwitcher}
-					storeGlobalTypographyData={(value) => setAttributes({ headingGlobalTypographyData: value })}
+					title={__("Title", "frontis-blocks")}
+					initialOpen={true}
+				>
+					<FB_TypographyControl
+						globalTypoControlActive={true}
+						globalTypoSwitcher={headingGlobalTypoSwitcher}
+						storeGlobalTypographyData={(value) => setAttributes({ headingGlobalTypographyData: value })}
 
-					globalTypoType={headingGlobalTypoType}
-					onChangeGlobalTypoType={(value) => {
-						setAttributes({ 
-							headingGlobalTypoType: value, 
-							headingGlobalTypoSwitcher: value === 'default' ? {...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-						})
-					}}
+						globalTypoType={headingGlobalTypoType}
+						onChangeGlobalTypoType={(value) => {
+							setAttributes({
+								headingGlobalTypoType: value,
+								headingGlobalTypoSwitcher: value === 'default' ? { ...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+							})
+						}}
 
-					globalTypoOption={headingGlobalTypoOption}
-					onChangeGlobalTypoOption={(value) => setAttributes({ headingGlobalTypoOption: value })}
+						globalTypoOption={headingGlobalTypoOption}
+						onChangeGlobalTypoOption={(value) => setAttributes({ headingGlobalTypoOption: value })}
 
-					fontFamily={headingFontFamily}
-					onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontFamily: value && false} })}
+						fontFamily={headingFontFamily}
+						onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontFamily: value && false } })}
 
-					fontSize={headingFontSize}
-					onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontSize: value && false} })}
+						fontSize={headingFontSize}
+						onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontSize: value && false } })}
 
-					fontSizeUnits={headingFontSizeUnits}
-					onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
+						fontSizeUnits={headingFontSizeUnits}
+						onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
 
-					fontWeight={headingFontWeight}
-					onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontWeight: value && false} })}
+						fontWeight={headingFontWeight}
+						onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontWeight: value && false } })}
 
-					fontStyle={headingFontStyle}
-					onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontStyle: value && false} })}
+						fontStyle={headingFontStyle}
+						onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontStyle: value && false } })}
 
-					textTransform={headingTextTransform}
-					onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textTransform: value && false} })}
+						textTransform={headingTextTransform}
+						onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, textTransform: value && false } })}
 
-					textDecoration={headingTextDecoration}
-					onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textDecoration: value && false} })}
+						textDecoration={headingTextDecoration}
+						onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, textDecoration: value && false } })}
 
-					letterSpacing={headingLetterSpacing}
-					onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, letterSpacing: value && false} })}
+						letterSpacing={headingLetterSpacing}
+						onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, letterSpacing: value && false } })}
 
-					letterSpacingUnits={headingLetterSpacingUnits}
-					onChangeLetterSpacingUnit={(value) => setAttributes({ headingLetterSpacingUnits: value })}
+						letterSpacingUnits={headingLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) => setAttributes({ headingLetterSpacingUnits: value })}
 
-					lineHeight={headingLineHeight}
-					onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, lineHeight: value && false} })}
+						lineHeight={headingLineHeight}
+						onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, lineHeight: value && false } })}
 
-					lineHeightUnits={headingLineHeightUnits}
-					onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
+						lineHeightUnits={headingLineHeightUnits}
+						onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
 
-					deviceType={deviceType}
-					setAttributes={setAttributes}
-				/>
-
-				<FB_SwitcherControl
-					label={__("Color", "frontis-blocks")}
-					globalSwitcher={HeadingColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ HeadingColorSwitcher: value })}
-				/>
-
-				{HeadingColorSwitcher === 'normal' && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={HeadingColor}
-						setGlobalColor={(value) => setAttributes({ HeadingColor: value === undefined ? '' : value })}
+						deviceType={deviceType}
+						setAttributes={setAttributes}
 					/>
-				)}
 
-				{HeadingColorSwitcher === 'hover' && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={HeadingHoverColor}
-						setGlobalColor={(value) => setAttributes({ HeadingHoverColor: value === undefined ? '' : value })}
+					<FB_SwitcherControl
+						label={__("Color", "frontis-blocks")}
+						globalSwitcher={HeadingColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ HeadingColorSwitcher: value })}
 					/>
-				)}
 
-				<FB_Spacing
-					label={__("Padding", "frontis-blocks")}
-					deviceType={deviceType}
-					spacingUnitsHandler={handleHeadingPaddingUnitsHandler}
-					spacingUnits={HeadingPaddingUnits}
-					spacingDesktop={HeadingDesktopPadding}
-					spacingTablet={HeadingTabPadding}
-					spacingMobile={HeadingMobilePadding}
-					handleSpacingUnitHandler={handleHeadingPaddingUnitChange}
-					spacingCombineBtn={HeadingPaddingLink}
-					spacingCombineBtnHandler={handleHeadingPaddingCombineBtn}
-					setAttributes={setAttributes}
-				/>
+					{HeadingColorSwitcher === 'normal' && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={HeadingColor}
+							setGlobalColor={(value) => setAttributes({ HeadingColor: value === undefined ? '' : value })}
+						/>
+					)}
 
-				<FB_Spacing
-					label={__("Margin", "frontis-blocks")}
-					deviceType={deviceType}
-					spacingUnitsHandler={handleHeadingMarginUnitsHandler}
-					spacingUnits={HeadingMarginUnits}
-					spacingDesktop={HeadingDesktopMargin}
-					spacingTablet={HeadingTabMargin}
-					spacingMobile={HeadingMobileMargin}
-					handleSpacingUnitHandler={handleHeadingMarginUnitChange}
-					spacingCombineBtn={HeadingMarginLink}
-					spacingCombineBtnHandler={handleHeadingMarginCombineBtn}
-					setAttributes={setAttributes}
-				/>
-			</PanelBody>
+					{HeadingColorSwitcher === 'hover' && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={HeadingHoverColor}
+							setGlobalColor={(value) => setAttributes({ HeadingHoverColor: value === undefined ? '' : value })}
+						/>
+					)}
+
+					<FB_Spacing
+						label={__("Padding", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleHeadingPaddingUnitsHandler}
+						spacingUnits={HeadingPaddingUnits}
+						spacingDesktop={HeadingDesktopPadding}
+						spacingTablet={HeadingTabPadding}
+						spacingMobile={HeadingMobilePadding}
+						handleSpacingUnitHandler={handleHeadingPaddingUnitChange}
+						spacingCombineBtn={HeadingPaddingLink}
+						spacingCombineBtnHandler={handleHeadingPaddingCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+					<FB_Spacing
+						label={__("Margin", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleHeadingMarginUnitsHandler}
+						spacingUnits={HeadingMarginUnits}
+						spacingDesktop={HeadingDesktopMargin}
+						spacingTablet={HeadingTabMargin}
+						spacingMobile={HeadingMobileMargin}
+						handleSpacingUnitHandler={handleHeadingMarginUnitChange}
+						spacingCombineBtn={HeadingMarginLink}
+						spacingCombineBtnHandler={handleHeadingMarginCombineBtn}
+						setAttributes={setAttributes}
+					/>
+				</PanelBody>
 			)}
 			{/*	Image Style*/}
 			<PanelBody
 				title={__("Image", "frontis-blocks")}
 				initialOpen={false}
 			>
-			<FB_Range
-				min={1}
-				max={1400}
-				label={__("Width", "frontis-blocks")}
-				rangeValue={mediaSize}
-				onChangeHandler={(value) => setAttributes({ mediaSize: value })}
-				rangeUnitHandler={(value) => setAttributes({ mediaSizeUnits: value })}
-				deviceType={deviceType}
-				units={mediaSizeUnits}
-				setAttributes={setAttributes}
-				rangeStep={1}
-				resetFallbackValue={"100"}
-			/>
-			<FB_Range
-				min={1}
-				max={1400}
-				label={__("Height", "frontis-blocks")}
-				rangeValue={mediaHeight}
-				onChangeHandler={(value) => setAttributes({ mediaHeight: value })}
-				rangeUnitHandler={(value) => setAttributes({ mediaHeightUnits: value })}
-				deviceType={deviceType}
-				units={mediaHeightUnits}
-				setAttributes={setAttributes}
-				rangeStep={1}
-				resetFallbackValue={"100"}
-			/>
-
-			{/* Auto Height */}
-			<ToggleControl
-			__nextHasNoMarginBottom
-			label={__("Auto Height", "frontis-block")}
-			checked={autoHeightSwitch}
-			onChange={(newValue) => {
-				setAttributes({ autoHeightSwitch: newValue });
-			}}
-			/>
-
-			{/* Auto Fit Image */}
-			<ToggleControl
-				__nextHasNoMarginBottom
-				label={__("Auto Fit Image?", "frontis-block")}
-				checked={autoFitSwitch}
-				onChange={(newValue) => {
-					setAttributes({ autoFitSwitch: newValue });
-				}}
-			/>
-
-			{/* Image Fit Options */}
-			{autoFitSwitch && (
-				<SelectControl
-					label={__("Image Fit Options", "frontis-blocks")}
-					value={imageFit || "cover"}
-					options={AUTO_FIT}
-					onChange={(size) =>
-						setAttributes({ imageFit: size })
-					}
-					__nextHasNoMarginBottom
+				<FB_Range
+					min={1}
+					max={1400}
+					label={__("Width", "frontis-blocks")}
+					rangeValue={mediaSize}
+					onChangeHandler={(value) => setAttributes({ mediaSize: value })}
+					rangeUnitHandler={(value) => setAttributes({ mediaSizeUnits: value })}
+					deviceType={deviceType}
+					units={mediaSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={"100"}
 				/>
-			)}
+				<FB_Range
+					min={1}
+					max={1400}
+					label={__("Height", "frontis-blocks")}
+					rangeValue={mediaHeight}
+					onChangeHandler={(value) => setAttributes({ mediaHeight: value })}
+					rangeUnitHandler={(value) => setAttributes({ mediaHeightUnits: value })}
+					deviceType={deviceType}
+					units={mediaHeightUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={"100"}
+				/>
 
-			<SelectControl
-			label={__("Border Style", "frontis-blocks")}
-			value={imageBorder}
-			options={BORDER_STYLES}
-			onChange={(value) => setAttributes({ imageBorder: value }) }
-			/>
-			<FB_Color
-				label={__("Border Color", "frontis-blocks")}
-				globalColorSwitcher={imageBorderColorSwitcher}
-				globalColor={imageBorderColor}
-				globalHoverColor={imageBorderHoverColor}
-				handleColorSwitcherChange={(value) => setAttributes({ imageBorderColorSwitcher: value })}
-				handleGlobalColorChange={(value) => setAttributes({ imageBorderColor: value === undefined ? '' : value })}
-				handleGlobalHoverColorChange={(value) => setAttributes({ imageBorderHoverColor: value === undefined ? '' : value })}
-			/>
-			
-			<FB_Spacing
-			label={__("Border Width", "frontis-blocks")}
-			deviceType={deviceType}
-			spacingUnitsHandler={handleImageBorderUnitsHandler}
-			spacingUnits={imageBorderUnits}
-			spacingDesktop={imageBorderDesktop}
-			spacingTablet={imageBorderTablet}
-			spacingMobile={imageBorderMobile}
-			handleSpacingUnitHandler={handleImageBorderUnitChange}
-			spacingCombineBtn={imageBorderLink}
-			spacingCombineBtnHandler={handleImageBorderCombineBtn}
-			setAttributes={setAttributes}
-			/>
+				{/* Auto Height */}
+				<ToggleControl
+					__nextHasNoMarginBottom
+					label={__("Auto Height", "frontis-block")}
+					checked={autoHeightSwitch}
+					onChange={(newValue) => {
+						setAttributes({ autoHeightSwitch: newValue });
+					}}
+				/>
 
-			<FB_Spacing
-			label={__("Border Radius", "frontis-blocks")}
-			deviceType={deviceType}
-			spacingUnitsHandler={handleImageBorderRadiusUnitsHandler}
-			spacingUnits={imageBorderRadiusUnits}
-			spacingDesktop={imageBorderRadiusDesktop}
-			spacingTablet={imageBorderRadiusTablet}
-			spacingMobile={imageBorderRadiusMobile}
-			handleSpacingUnitHandler={handleImageBorderRadiusUnitChange}
-			spacingCombineBtn={imageBorderRadiusLink}
-			spacingCombineBtnHandler={handleImageBorderRadiusCombineBtn}
-			setAttributes={setAttributes}
-			/>
+				{/* Auto Fit Image */}
+				<ToggleControl
+					__nextHasNoMarginBottom
+					label={__("Auto Fit Image?", "frontis-block")}
+					checked={autoFitSwitch}
+					onChange={(newValue) => {
+						setAttributes({ autoFitSwitch: newValue });
+					}}
+				/>
 
-			<FB_BoxShadowControl
-			onBoxShadowChange={(value) => setAttributes({ imageBoxShadowValues: value }) }
-			initialShadowValue={imageBoxShadowValues}
-			onBoxShadowStyleChange={(value) => setAttributes({ imageBoxShadowCssValue: value, }) }
-			/>
-			{/*	Overlay Style*/}
+				{/* Image Fit Options */}
+				{autoFitSwitch && (
+					<SelectControl
+						label={__("Image Fit Options", "frontis-blocks")}
+						value={imageFit || "cover"}
+						options={AUTO_FIT}
+						onChange={(size) =>
+							setAttributes({ imageFit: size })
+						}
+						__nextHasNoMarginBottom
+					/>
+				)}
+
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={imageBorder}
+					options={BORDER_STYLES}
+					onChange={(value) => setAttributes({ imageBorder: value })}
+				/>
+				<FB_Color
+					label={__("Border Color", "frontis-blocks")}
+					globalColorSwitcher={imageBorderColorSwitcher}
+					globalColor={imageBorderColor}
+					globalHoverColor={imageBorderHoverColor}
+					handleColorSwitcherChange={(value) => setAttributes({ imageBorderColorSwitcher: value })}
+					handleGlobalColorChange={(value) => setAttributes({ imageBorderColor: value === undefined ? '' : value })}
+					handleGlobalHoverColorChange={(value) => setAttributes({ imageBorderHoverColor: value === undefined ? '' : value })}
+				/>
+
+				<FB_Spacing
+					label={__("Border Width", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleImageBorderUnitsHandler}
+					spacingUnits={imageBorderUnits}
+					spacingDesktop={imageBorderDesktop}
+					spacingTablet={imageBorderTablet}
+					spacingMobile={imageBorderMobile}
+					handleSpacingUnitHandler={handleImageBorderUnitChange}
+					spacingCombineBtn={imageBorderLink}
+					spacingCombineBtnHandler={handleImageBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleImageBorderRadiusUnitsHandler}
+					spacingUnits={imageBorderRadiusUnits}
+					spacingDesktop={imageBorderRadiusDesktop}
+					spacingTablet={imageBorderRadiusTablet}
+					spacingMobile={imageBorderRadiusMobile}
+					handleSpacingUnitHandler={handleImageBorderRadiusUnitChange}
+					spacingCombineBtn={imageBorderRadiusLink}
+					spacingCombineBtnHandler={handleImageBorderRadiusCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_BoxShadowControl
+					onBoxShadowChange={(value) => setAttributes({ imageBoxShadowValues: value })}
+					initialShadowValue={imageBoxShadowValues}
+					onBoxShadowStyleChange={(value) => setAttributes({ imageBoxShadowCssValue: value, })}
+				/>
+				{/*	Overlay Style*/}
 			</PanelBody>
 			{showOverlay && (
+				<PanelBody
+					title={__("Overlay", "frontis-blocks")}
+					initialOpen={false}
+				>
+
+					<FB_BackgroundColorControl
+						label={__("Overlay Color", "frontis-blocks")}
+						bgColorSwitcher={overlayBgColorSwitcher}
+						setBgColorSwitcher={(value) => setAttributes({ overlayBgColorSwitcher: value })}
+
+						normalBackgroundType={overlayBackgroundType}
+						setNormalBackgroundType={(value) => setAttributes({ overlayBackgroundType: value })}
+						normalClassicColor={overlayClassicColor}
+						setNormalClassicColor={(value) => setAttributes({ overlayClassicColor: value === undefined ? '' : value })}
+						normalGradientColor={overlayGradientColor}
+						setNormalGradientColor={(value) => setAttributes({ overlayGradientColor: value === undefined ? null : value })}
+						normalCustomGradientSwitcher={overlayCustomGradientSwitcher}
+						setNormalCustomGradientSwitcher={(value) => setAttributes({ overlayCustomGradientSwitcher: value })}
+						normalCustomGradientInputValue={overlayCustomGradientInputValue}
+						setNormalCustomGradientInputValue={(value) => setAttributes({ overlayCustomGradientInputValue: value })}
+
+						hoverBackgroundType={overlayHoverBackgroundType}
+						setHoverBackgroundType={(value) => setAttributes({ postGridHoverBackgroundType: value })}
+						hoverClassicColor={overlayHoverClassicColor}
+						setHoverClassicColor={(value) => setAttributes({ overlayHoverClassicColor: value === undefined ? '' : value })}
+						hoverGradientColor={overlayHoverGradientColor}
+						setHoverGradientColor={(value) => setAttributes({ overlayHoverGradientColor: value === undefined ? null : value })}
+						hoverCustomGradientSwitcher={overlayHoverCustomGradientSwitcher}
+						setHoverCustomGradientSwitcher={(value) => setAttributes({ overlayHoverCustomGradientSwitcher: value })}
+						hoverCustomGradientInputValue={overlayHoverCustomGradientInputValue}
+						setHoverCustomGradientInputValue={(value) => setAttributes({ overlayHoverCustomGradientInputValue: value })}
+
+						isBackgroundImage={false}
+
+					/>
+
+					<RangeControl
+						label="Opacity"
+						value={overlayOpacity}
+						onChange={(value) => setAttributes({ overlayOpacity: value, })}
+						min={0}
+						max={1}
+						step={0.1}
+						allowReset
+						resetFallbackValue={undefined}
+					/>
+				</PanelBody>
+			)}
 			<PanelBody
-				title={__("Overlay", "frontis-blocks")}
+				title={__("Mask Image", "frontis-blocks")}
 				initialOpen={false}
 			>
-			
-				<FB_BackgroundColorControl
-					label={__("Overlay Color", "frontis-blocks")}
-					bgColorSwitcher={overlayBgColorSwitcher}  
-					setBgColorSwitcher={(value) => setAttributes({ overlayBgColorSwitcher: value })}
-					
-					normalBackgroundType={overlayBackgroundType}
-					setNormalBackgroundType={(value) => setAttributes({ overlayBackgroundType: value })}
-					normalClassicColor={overlayClassicColor}
-					setNormalClassicColor={(value) => setAttributes({ overlayClassicColor: value === undefined ? '' : value })}
-					normalGradientColor={overlayGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ overlayGradientColor: value === undefined ? '' : value })}
-					normalCustomGradientSwitcher={overlayCustomGradientSwitcher}
-					setNormalCustomGradientSwitcher={(value) => setAttributes({ overlayCustomGradientSwitcher: value })}
-					normalCustomGradientInputValue={overlayCustomGradientInputValue}
-					setNormalCustomGradientInputValue={(value) => setAttributes({ overlayCustomGradientInputValue: value })}
-					
-					hoverBackgroundType={overlayHoverBackgroundType} 
-					setHoverBackgroundType={(value) => setAttributes({ postGridHoverBackgroundType: value })}
-					hoverClassicColor={overlayHoverClassicColor}
-					setHoverClassicColor={(value) => setAttributes({ overlayHoverClassicColor: value === undefined ? '' : value })}
-					hoverGradientColor={overlayHoverGradientColor} 
-					setHoverGradientColor={(value) => setAttributes({ overlayHoverGradientColor: value === undefined ? '' : value })}
-					hoverCustomGradientSwitcher={overlayHoverCustomGradientSwitcher}
-					setHoverCustomGradientSwitcher={(value) => setAttributes({ overlayHoverCustomGradientSwitcher: value })}
-					hoverCustomGradientInputValue={overlayHoverCustomGradientInputValue}
-					setHoverCustomGradientInputValue={(value) => setAttributes({ overlayHoverCustomGradientInputValue: value })}
-
-					isBackgroundImage={false}
-
+				<SelectControl
+					label={__("Size", "frontis-blocks")}
+					value={maskImageSize}
+					options={MASK_SIZE}
+					onChange={(value) => setAttributes({ maskImageSize: value })}
 				/>
-
-				<RangeControl
-				label="Opacity"
-				value={overlayOpacity}
-				onChange={(value) => setAttributes({ overlayOpacity: value, }) }
-				min={0}
-				max={1}
-				step={0.1}
-				allowReset
-				resetFallbackValue={undefined}
+				<SelectControl
+					label={__("Position", "frontis-blocks")}
+					value={maskImagePosition}
+					options={MASK_POSITION}
+					onChange={(value) => setAttributes({ maskImagePosition: value })}
+				/>
+				<SelectControl
+					label={__("Repeat", "frontis-blocks")}
+					value={maskImageRepeat}
+					options={MASK_REPEAT}
+					onChange={(value) => setAttributes({ maskImageRepeat: value })}
 				/>
 			</PanelBody>
-		)}
 		</>
 	);
-		
+
 	/**
 	 * Inspector Advanced Controls
 	 */
@@ -1746,9 +1649,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					<PanelBody
 						title={__("Layout", "frontis-blocks")}
 						initialOpen={true}
-						className="fb-setting-layout-header" 
+						className="fb-setting-layout-header"
 					>
-						
+
 						<FB_Range
 							min={0}
 							max={10000000}
@@ -1774,7 +1677,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 							deviceType={deviceType}
 							positionType={advancedImagePositionType}
 							setPositionType={(value) => setAttributes({ advancedImagePositionType: value })}
-																			
+
 							HZOrientationType={advancedImageHZOrientationType}
 							setHZOrientationType={(value) =>
 								setAttributes({ advancedImageHZOrientationType: value })
@@ -1783,7 +1686,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 							setVROrientationType={(value) =>
 								setAttributes({ advancedImageVROrientationType: value })
 							}
-																				
+
 							HZLeftOffset={advancedImageHZLeftOffset}
 							setHZLeftOffset={(value) => setAttributes({ advancedImageHZLeftOffset: value })}
 							HZLeftOffsetUnits={advancedImageHZLeftOffsetUnits}
@@ -1792,7 +1695,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 							setHZRightOffset={(value) => setAttributes({ advancedImageHZRightOffset: value })}
 							HZRightOffsetUnits={advancedImageHZRightOffsetUnits}
 							setHZRightOffsetUnits={(value) => setAttributes({ advancedImageHZRightOffsetUnits: value })}
-																			
+
 							VRTopOffset={advancedImageVRTopOffset}
 							setVRTopOffset={(value) => setAttributes({ advancedImageVRTopOffset: value })}
 							VRTopOffsetUnits={advancedImageVRTopOffsetUnits}
@@ -1818,7 +1721,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 							onChangeValue={(value) => setAttributes({ advancedImageGlobalWraperClass: value })}
 							helpText={__("Separate with spaces key.", "frontis-blocks")}
 						/>
-						
+
 					</PanelBody>
 					<PanelBody
 						title={__("Padding and Margin", "frontis-blocks")}
@@ -1865,55 +1768,55 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					<PanelBody title="Background" initialOpen={false}>
 						<FB_BackgroundColorControl
 							bgColorSwitcher={testBgColorSwitcher}
-							setBgColorSwitcher={(value) => setAttributes({ testBgColorSwitcher: value }) }
+							setBgColorSwitcher={(value) => setAttributes({ testBgColorSwitcher: value })}
 							normalBackgroundType={testBackgroundType}
-							setNormalBackgroundType={(value) => setAttributes({ testBackgroundType: value }) }
+							setNormalBackgroundType={(value) => setAttributes({ testBackgroundType: value })}
 							normalClassicColor={testClassicColor}
-							setNormalClassicColor={(value) => setAttributes({ testClassicColor: value === undefined ? '' : value }) }
+							setNormalClassicColor={(value) => setAttributes({ testClassicColor: value === undefined ? '' : value })}
 							normalGradientColor={testGradientColor}
-							setNormalGradientColor={(value) => setAttributes({ testGradientColor: value === undefined ? '' : value }) }
-							normalCustomGradientSwitcher={ testCustomGradientSwitcher }
-							setNormalCustomGradientSwitcher={(value) => setAttributes({ testCustomGradientSwitcher: value, }) }
-							normalCustomGradientInputValue={ testCustomGradientInputValue }
-							setNormalCustomGradientInputValue={(value) => setAttributes({ testCustomGradientInputValue: value, }) }
+							setNormalGradientColor={(value) => setAttributes({ testGradientColor: value === undefined ? null : value })}
+							normalCustomGradientSwitcher={testCustomGradientSwitcher}
+							setNormalCustomGradientSwitcher={(value) => setAttributes({ testCustomGradientSwitcher: value, })}
+							normalCustomGradientInputValue={testCustomGradientInputValue}
+							setNormalCustomGradientInputValue={(value) => setAttributes({ testCustomGradientInputValue: value, })}
 							normalBackgroundImageUrl={testBackgroundImageUrl}
-							setNormalBackgroundImageUrl={(value) => setAttributes({ testBackgroundImageUrl: value }) }
+							setNormalBackgroundImageUrl={(value) => setAttributes({ testBackgroundImageUrl: value })}
 							normalBackgroundImageAlt={testBackgroundImageAlt}
-							setNormalBackgroundImageAlt={(value) => setAttributes({ testBackgroundImageAlt: value }) }
+							setNormalBackgroundImageAlt={(value) => setAttributes({ testBackgroundImageAlt: value })}
 							normalBackgroundImageID={testBackgroundImageID}
 							setNormalBackgroundImageID={(value) => setAttributes({ testBackgroundImageID: value })}
-							normalBackgroundImagePosition={ testBackgroundImagePosition }
-							setNormalBackgroundImagePosition={(value) => setAttributes({ testBackgroundImagePosition: value, }) }
-							normalBackgroundImageAttachment={ testBackgroundImageAttachment }
-							setNormalBackgroundImageAttachment={(value) => setAttributes({ testBackgroundImageAttachment: value, }) }
-							normalBackgroundImageRepeat={ testBackgroundImageRepeat }
-							setNormalBackgroundImageRepeat={(value) => setAttributes({ testBackgroundImageRepeat: value, }) }
+							normalBackgroundImagePosition={testBackgroundImagePosition}
+							setNormalBackgroundImagePosition={(value) => setAttributes({ testBackgroundImagePosition: value, })}
+							normalBackgroundImageAttachment={testBackgroundImageAttachment}
+							setNormalBackgroundImageAttachment={(value) => setAttributes({ testBackgroundImageAttachment: value, })}
+							normalBackgroundImageRepeat={testBackgroundImageRepeat}
+							setNormalBackgroundImageRepeat={(value) => setAttributes({ testBackgroundImageRepeat: value, })}
 							normalBackgroundImageSize={testBackgroundImageSize}
-							setNormalBackgroundImageSize={(value) => setAttributes({ testBackgroundImageSize: value }) }
+							setNormalBackgroundImageSize={(value) => setAttributes({ testBackgroundImageSize: value })}
 							hoverBackgroundType={hoverBackgroundType}
-							setHoverBackgroundType={(value) => setAttributes({ hoverBackgroundType: value }) }
+							setHoverBackgroundType={(value) => setAttributes({ hoverBackgroundType: value })}
 							hoverClassicColor={hoverClassicColor}
-							setHoverClassicColor={(value) => setAttributes({ hoverClassicColor: value === undefined ? '' : value }) }
+							setHoverClassicColor={(value) => setAttributes({ hoverClassicColor: value === undefined ? '' : value })}
 							hoverGradientColor={hoverGradientColor}
-							setHoverGradientColor={(value) => setAttributes({ hoverGradientColor: value === undefined ? '' : value }) }
-							hoverCustomGradientSwitcher={ hoverCustomGradientSwitcher }
-							setHoverCustomGradientSwitcher={(value) => setAttributes({ hoverCustomGradientSwitcher: value, }) }
-							hoverCustomGradientInputValue={ hoverCustomGradientInputValue }
-							setHoverCustomGradientInputValue={(value) => setAttributes({ hoverCustomGradientInputValue: value, }) }
+							setHoverGradientColor={(value) => setAttributes({ hoverGradientColor: value === undefined ? null : value })}
+							hoverCustomGradientSwitcher={hoverCustomGradientSwitcher}
+							setHoverCustomGradientSwitcher={(value) => setAttributes({ hoverCustomGradientSwitcher: value, })}
+							hoverCustomGradientInputValue={hoverCustomGradientInputValue}
+							setHoverCustomGradientInputValue={(value) => setAttributes({ hoverCustomGradientInputValue: value, })}
 							hoverBackgroundImageUrl={hoverBackgroundImageUrl}
-							setHoverBackgroundImageUrl={(value) => setAttributes({ hoverBackgroundImageUrl: value }) }
+							setHoverBackgroundImageUrl={(value) => setAttributes({ hoverBackgroundImageUrl: value })}
 							hoverBackgroundImageAlt={hoverBackgroundImageAlt}
-							setHoverBackgroundImageAlt={(value) => setAttributes({ hoverBackgroundImageAlt: value }) }
+							setHoverBackgroundImageAlt={(value) => setAttributes({ hoverBackgroundImageAlt: value })}
 							hoverBackgroundImageID={hoverBackgroundImageID}
-							setHoverBackgroundImageID={(value) => setAttributes({ hoverBackgroundImageID: value }) }
-							hoverBackgroundImagePosition={ hoverBackgroundImagePosition }
-							setHoverBackgroundImagePosition={(value) => setAttributes({ hoverBackgroundImagePosition: value, }) }
-							hoverBackgroundImageAttachment={ hoverBackgroundImageAttachment }
-							setHoverBackgroundImageAttachment={(value) => setAttributes({ hoverBackgroundImageAttachment: value, }) }
-							hoverBackgroundImageRepeat={ hoverBackgroundImageRepeat }
-							setHoverBackgroundImageRepeat={(value) => setAttributes({ hoverBackgroundImageRepeat: value, }) }
+							setHoverBackgroundImageID={(value) => setAttributes({ hoverBackgroundImageID: value })}
+							hoverBackgroundImagePosition={hoverBackgroundImagePosition}
+							setHoverBackgroundImagePosition={(value) => setAttributes({ hoverBackgroundImagePosition: value, })}
+							hoverBackgroundImageAttachment={hoverBackgroundImageAttachment}
+							setHoverBackgroundImageAttachment={(value) => setAttributes({ hoverBackgroundImageAttachment: value, })}
+							hoverBackgroundImageRepeat={hoverBackgroundImageRepeat}
+							setHoverBackgroundImageRepeat={(value) => setAttributes({ hoverBackgroundImageRepeat: value, })}
 							hoverBackgroundImageSize={hoverBackgroundImageSize}
-							setHoverBackgroundImageSize={(value) => setAttributes({ hoverBackgroundImageSize: value }) }
+							setHoverBackgroundImageSize={(value) => setAttributes({ hoverBackgroundImageSize: value })}
 						/>
 					</PanelBody>
 					<PanelBody
@@ -2015,8 +1918,8 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 						title={__("Custom CSS", "frontis-blocks")}
 						initialOpen={false}
 					>
-						<FB_CustomCSSEditor  
-							value={advancedImageCustomCSS} 
+						<FB_CustomCSSEditor
+							value={advancedImageCustomCSS}
 							onChangeValue={(value) => setAttributes({ advancedImageCustomCSS: value })}
 						/>
 					</PanelBody>

@@ -7,6 +7,14 @@ const attributes = {
         type: "string",
         default: "Desktop"
     },
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
     flipBoxPresetStyle: {
         type: "string",
         default: "preset-1",
@@ -2265,9 +2273,9 @@ const attributes = {
     flipBoxFrontHeight: {
         type: 'object',
         default: {
-            Desktop: '310',
-            Tablet: '310',
-            Mobile: '310'
+            Desktop: '366',
+            Tablet: '366',
+            Mobile: '366'
         }
     },
     flipBoxFrontHeightUnits: {

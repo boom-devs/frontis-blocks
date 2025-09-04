@@ -40,6 +40,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		contentAlignment,
 		mediaSize,
 		btnIcon,
+		buttonIconType,
+		btnImageUrl,
+		btnImageAlt,
+		btnImageID,
 		buttonIconSwitcher,
 		btnIconPosition,
 		infoIconPosition,
@@ -54,6 +58,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		infoBoxDesktopSwitcher,
 		infoBoxTabletSwitcher,
 		infoBoxMobileSwitcher,
+		infoBoxPresetStyle
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -89,7 +94,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</BlockControls>
 
 			<div {...blockProps}>
-				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID} ${infoBoxGlobalWraperClass}`} id={infoBoxGlobalWraperID} ref={panelRef}>
+				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID} ${infoBoxGlobalWraperClass} ${infoBoxPresetStyle}`} id={infoBoxGlobalWraperID} ref={panelRef}>
 					<div className={`fb-info-box-wrapper-inner ${blockID}`}>
 						<div className="fb-info-media-container">
 							<div
@@ -141,17 +146,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												onChange={(value) =>
 													setAttributes({ info_Button_Text: value })
 												}
-												placeholder={__("Info Button", "frontis-block")}
+												placeholder={__("", "frontis-block")}
 
 
 											/>
 											{buttonIconSwitcher && (
 												<div className="fb-btn-icon-wrapper">
-													{renderSVG(btnIcon)}
+													{buttonIconType === 'icon' && renderSVG(btnIcon)}
+													{buttonIconType === 'image' && <img src={btnImageUrl} alt={btnImageAlt} />}
 												</div>
 											)}
 										</a>
 									</div>
+								</div>
+							)}
+							{infoBoxPresetStyle === 'preset-6' && (
+								<div class="shape">
+									<svg width="111" height="111" viewBox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M0 0C19.33 0 35 15.67 35 35V41C35 60.33 50.67 76 70 76H76C95.33 76 111 91.67 111 111V0H0Z" fill="white"></path>
+									</svg>
 								</div>
 							)}
 						</div>

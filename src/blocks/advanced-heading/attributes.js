@@ -40,6 +40,14 @@ const attributes = {
         type : 'string',
         default: 'h2'
     },
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
     /** Start Heading Style */
     headingGlobalTypographyData: {
         type: 'object',

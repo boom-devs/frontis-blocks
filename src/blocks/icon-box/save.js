@@ -46,6 +46,7 @@ export default function save({ attributes }) {
 						href={wrapperLink}
 						target={wrapperTargetUrl ? "_blank" : undefined}
 						rel={wrapperTargetUrl ? "noopener noreferrer" : undefined}
+						aria-label={__("Icon Box", "frontis-blocks")}
 					>
 						<div className={`fb-parent-wrapper fb-icon-box-wrapper ${iconBoxGlobalWraperClass} ${blockID} `} id={iconBoxGlobalWraperID}>
 							<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
@@ -85,6 +86,7 @@ export default function save({ attributes }) {
 												target={iconBoxbtnTargetUrl ? '_blank' : undefined}
 												rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
 												className="fb-icon-btn-wrapper"
+												aria-label={__("Icon Button", "frontis-blocks")}
 											>
 												<RichText.Content
 													value={icon_Box_Button_Text}
@@ -93,7 +95,7 @@ export default function save({ attributes }) {
 												/>
 												
 												{buttonIconSwitcher && (
-													<div className="fb-btn-icon-wrapper">
+													<div className="fb-btn-icon-wrapper" aria-hidden="true">
 														{renderSVG(btnIcon)}
 													</div>
 												)}
@@ -144,6 +146,7 @@ export default function save({ attributes }) {
 												target={iconBoxbtnTargetUrl ? '_blank' : undefined}
 												rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
 												className="fb-icon-btn-wrapper"
+												aria-label={__("Icon Button", "frontis-blocks")}
 											>
 												<RichText.Content
 													value={icon_Box_Button_Text}
@@ -152,7 +155,7 @@ export default function save({ attributes }) {
 												/>
 												
 												{buttonIconSwitcher && (
-													<div className="fb-btn-icon-wrapper">
+													<div className="fb-btn-icon-wrapper" aria-hidden="true">
 														{renderSVG(btnIcon)}
 													</div>
 												)}

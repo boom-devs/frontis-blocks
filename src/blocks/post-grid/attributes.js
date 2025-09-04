@@ -31,12 +31,20 @@ const attributes = {
 	},
 	tagKey: {
 		type: 'string',
-		default: 'post_tag'
+		default: ''
 	},
 
 	postSwitcher: {
 		type: 'string',
 		default: 'grid'
+	},
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
 	},
 	/** Start category */
 	selectedCatSwitcher: {

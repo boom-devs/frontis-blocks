@@ -18,7 +18,15 @@ const attributes = {
 	animation: {
 		type: "string",
 		default: "fade"
-	}
+	},
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
+	},
 	
 };
 
