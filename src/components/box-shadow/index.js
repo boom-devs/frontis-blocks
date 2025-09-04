@@ -65,7 +65,7 @@ export default function FB_BoxShadowControl({ label, onBoxShadowChange, initialS
 							aria-expanded={isOpen}
 							className="fb-box-shadow-icon-btn"
 						>
-							<svg xmlns="https://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+							<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
 							<rect x="2" y="2" width="12" height="12" fill="#404655"/>
 							<rect x="0.5" y="0.5" width="11" height="11" fill="#F7F7F7" stroke="#404655"/>
 							</svg>

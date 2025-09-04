@@ -94,14 +94,14 @@ function format_metric_count($count)
                             <span class="author-info">by <a href="<?php echo esc_url($author_archive_link); ?>" class='fb-post-author-name'><?php echo esc_html($author_name); ?></a></span>
                         </div>
                         <div class="fb-post-author-seperator">
-                            <svg xmlns="https://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none">
                                 <circle cx="2" cy="2" r="2" fill="#D5D7DA" />
                             </svg>
                         </div>
                         <div class='fb-post-author-meta'>
                             <span class='fb-post-date'><?php echo esc_html($post_date); ?></span>
                             <button class="fb-bookmark-btn" data-post-id="<?php echo $post_id; ?>" data-post-title="<?php echo esc_attr($post_title); ?>" data-post-url="<?php echo esc_url(get_permalink($post_id)); ?>" title="Bookmark this post">
-                                <svg xmlns="https://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                 <path d="M9.66634 7.10004H6.33301" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M8 5.47333V8.80666" stroke="black" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M11.2139 1.33331H4.7872C3.3672 1.33331 2.21387 2.49331 2.21387 3.90665V13.3C2.21387 14.5 3.07387 15.0066 4.1272 14.4266L7.38053 12.62C7.7272 12.4266 8.2872 12.4266 8.6272 12.62L11.8805 14.4266C12.9339 15.0133 13.7939 14.5066 13.7939 13.3V3.90665C13.7872 2.49331 12.6339 1.33331 11.2139 1.33331Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
@@ -117,7 +117,7 @@ function format_metric_count($count)
 
                             <!-- Comments Metric -->
                             <div class='fb-post-metric-item fb-comments-btn' data-post-id="<?php echo $post_id; ?>">
-                                <svg class='fb-post-metric-icon' xmlns="https://www.w3.org/2000/svg" width="16" height="16"
+                                <svg class='fb-post-metric-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     viewBox="0 0 16 16" fill="none">
                                     <path
                                         d="M11.3335 1.33331H4.66683C2.82683 1.33331 1.3335 2.81998 1.3335 4.65331V8.63998V9.30665C1.3335 11.14 2.82683 12.6266 4.66683 12.6266H5.66683C5.84683 12.6266 6.08683 12.7466 6.20016 12.8933L7.20016 14.22C7.64016 14.8066 8.36016 14.8066 8.80016 14.22L9.80016 12.8933C9.92683 12.7266 10.1268 12.6266 10.3335 12.6266H11.3335C13.1735 12.6266 14.6668 11.14 14.6668 9.30665V4.65331C14.6668 2.81998 13.1735 1.33331 11.3335 1.33331ZM8.66683 9.16665H4.66683C4.3935 9.16665 4.16683 8.93998 4.16683 8.66665C4.16683 8.39331 4.3935 8.16665 4.66683 8.16665H8.66683C8.94016 8.16665 9.16683 8.39331 9.16683 8.66665C9.16683 8.93998 8.94016 9.16665 8.66683 9.16665ZM11.3335 5.83331H4.66683C4.3935 5.83331 4.16683 5.60665 4.16683 5.33331C4.16683 5.05998 4.3935 4.83331 4.66683 4.83331H11.3335C11.6068 4.83331 11.8335 5.05998 11.8335 5.33331C11.8335 5.60665 11.6068 5.83331 11.3335 5.83331Z"

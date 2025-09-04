@@ -48,7 +48,7 @@ const withGlobalToolbar = createHigherOrderComponent((BlockEdit) => {
 						<ToolbarButton
 							className={`frontis-dynamic-content`}
 							icon={
-								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="https://www.w3.org/2000/svg">
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M10 7.99988C14.4183 7.99988 18 6.65673 18 4.99988C18 3.34302 14.4183 1.99988 10 1.99988C5.58172 1.99988 2 3.34302 2 4.99988C2 6.65673 5.58172 7.99988 10 7.99988Z" stroke="#090909" strokeWidth="1.5"/>
 									<path d="M2 19C2 20.5299 5.05369 21.7923 9 21.9768" stroke="#090909" strokeWidth="1.5" strokeLinecap="round"/>
 									<path d="M5 10.8419C5.60158 11.0227 6.27434 11.1716 7 11.2818" stroke="#090909" strokeWidth="1.5" strokeLinecap="round"/>

@@ -49,7 +49,7 @@ export default function Save({ attributes }) {
             icons.push(
                 <div key={i} className="fb-testimonial-rating-icon">
                     {TestimonialRatinIconAlign === 'icon' && TestimonialRatingicon ? renderSVG(TestimonialRatingicon) : ''}
-                    {TestimonialRatinIconAlign === 'image' && TestimonialRatingImageUrl ? <img src={TestimonialRatingImageUrl} alt={TestimonialRatingImageAlt}/> : ''}
+                    {TestimonialRatinIconAlign === 'image' && TestimonialRatingImageUrl ? <img src={TestimonialRatingImageUrl} alt={TestimonialRatingImageAlt} /> : ''}
                 </div>
             );
         }
@@ -69,7 +69,7 @@ export default function Save({ attributes }) {
                                             <div className="fb-testimonial-author-image-container">
                                                 {TestimonialImageSwitcher && TestimonialImageUrl && (
                                                     <div className="fb-testimonial-image">
-                                                        <img src={TestimonialImageUrl} alt={TestimonialImageAlt}/>
+                                                        <img src={TestimonialImageUrl} alt={TestimonialImageAlt}  aria-hidden="true"/>
                                                     </div>
                                                 )}
                                             </div>
@@ -117,7 +117,7 @@ export default function Save({ attributes }) {
                                     {QuoteIconSwitcher && TestimonialQuoteIconAlign !== 'none' && (
                                         <div className="fb-testimonial-quote-icon">
                                             {TestimonialQuoteIconAlign === 'icon' && TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
-                                            {TestimonialQuoteIconAlign === 'image' && TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt}/> : ''}
+                                            {TestimonialQuoteIconAlign === 'image' && TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt}  aria-hidden="true"/> : ''}
                                         </div>
                                     )}
                                 </>
@@ -146,7 +146,7 @@ export default function Save({ attributes }) {
                                             <div className="fb-testimonial-author-image-container">
                                                 {TestimonialImageSwitcher && TestimonialImageUrl && (
                                                     <div className="fb-testimonial-image">
-                                                        <img src={TestimonialImageUrl} alt={TestimonialImageAlt}/>
+                                                        <img src={TestimonialImageUrl} alt={TestimonialImageAlt}  aria-hidden="true"/>
                                                     </div>
                                                 )}
                                             </div>
@@ -176,7 +176,7 @@ export default function Save({ attributes }) {
                                     {QuoteIconSwitcher && TestimonialQuoteIconAlign !== 'none' && (
                                         <div className="fb-testimonial-quote-icon">
                                             {TestimonialQuoteIconAlign === 'icon' && TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
-                                            {TestimonialQuoteIconAlign === 'image' && TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt}/> : ''}
+                                            {TestimonialQuoteIconAlign === 'image' && TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt}  aria-hidden="true"/> : ''}
                                         </div>
                                     )}
                                 </>
@@ -210,7 +210,7 @@ export default function Save({ attributes }) {
                                             <div className="fb-testimonial-author-image-container">
                                                 {TestimonialImageSwitcher && TestimonialImageUrl && (
                                                     <div className="fb-testimonial-image">
-                                                        <img src={TestimonialImageUrl} alt={TestimonialImageAlt}/>
+                                                        <img src={TestimonialImageUrl} alt={TestimonialImageAlt}  aria-hidden="true"/>
                                                     </div>
                                                 )}
                                             </div>
@@ -235,7 +235,7 @@ export default function Save({ attributes }) {
                                     {QuoteIconSwitcher && TestimonialQuoteIconAlign !== 'none' && (
                                         <div className="fb-testimonial-quote-icon">
                                             {TestimonialQuoteIconAlign === 'icon' && TestimonialQuoteIcon ? renderSVG(TestimonialQuoteIcon) : ''}
-                                            {TestimonialQuoteIconAlign === 'image' && TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt}/> : ''}
+                                            {TestimonialQuoteIconAlign === 'image' && TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} /> : ''}
                                         </div>
                                     )}
                                 </>

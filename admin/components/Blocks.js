@@ -153,7 +153,7 @@ const Blocks = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             <span className="fb-blocks-search-icon">
-              <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
               <g clip-path="url(#clip0_4834_1174)">
               <circle cx="8.625" cy="8.625" r="7.125" stroke="#6A758E" strokeWidth="1.5"/>
               <path d="M13.875 13.875L16.5 16.5" stroke="#6A758E" strokeWidth="1.5" strokeLinecap="round"/>
