@@ -48,6 +48,9 @@ import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-cont
 export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const {
+		//Presets
+		teamMemberPresetStyle,
+		
 		blockID,
 		blockStyle,
 		// deviceType,
@@ -161,9 +164,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberBadgeBorderRadiusTablet,
 		teamMemberBadgeBorderRadiusMobile,
 		teamMemberBadgeBorderRadiusLink,		
-		
-
-
 
 		// Team Name
 		teamMemberName,

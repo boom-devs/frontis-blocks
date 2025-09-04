@@ -542,7 +542,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 progressNumberColor: '#000000',
                 progressBgColorType: 'classic',
                 progressBgCustomGradientSwitcher: false,
-                progressBgColor: '#FFF',
+                progressBgColor: '#F5f5f5',
                 progressColorType: 'classic',
                 progressCustomGradientSwitcher: false,
                 progressColor: '#70BF73',

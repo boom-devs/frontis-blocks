@@ -348,7 +348,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonIconColor: "#fff",
 				buttonIconBorder: "none",
 				buttonTextSwitcher: true,
-				buttonText: "Primary Button",
+				buttonText: "Add Text",
 				buttonIconRotate: {
 					Desktop: '0',
 					Tablet: '0',
@@ -379,180 +379,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				},
             },
 			"preset-2": {
-				buttonBgColor: "#fff",
-				buttonBorder: "solid",
-				buttonBorderColor: "#C3C8D2",
-				buttonColor: "#15171C",
-				buttonIconImageUrl: "",
-				buttonIcon: "",
-				buttonIconColor: "",
-				buttonIconBorder: "none",
-				buttonTextSwitcher: true,
-				buttonText: "Default Button",
-				buttonIconRotate: {
-					Desktop: '0',
-					Tablet: '0',
-					Mobile: '0'
-				},
-				buttonIconPaddingDesktop: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
-				},
-				buttonIconMarginDesktop: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
-				},
-				buttonFontSize: {
-					Desktop: '14',
-					Tablet: '14',
-					Mobile: '14'
-				},
-				buttonDesktopBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-				buttonTabBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-				buttonMobileBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-				buttonDesktopBorderRadiusWidth: {
-					top: "4",
-					bottom: "4",
-					left: "4",
-					right: "4",
-				},
-            },
-			"preset-3": {
-				buttonBgColor: "#fff",
-				buttonBorder: "dashed",
-				buttonBorderColor: "#C3C8D2",
-				buttonColor: "#15171C",
-				buttonIconImageUrl: "",
-				buttonIcon: "",
-				buttonIconColor: "#15171C",
-				buttonIconBorder: "none",
-				buttonTextSwitcher: true,
-				buttonText: "Dashed Button",
-				buttonIconRotate: {
-					Desktop: '0',
-					Tablet: '0',
-					Mobile: '0'
-				},
-				buttonIconPaddingDesktop: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
-				},
-				buttonIconMarginDesktop: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
-				},
-				buttonFontSize: {
-					Desktop: '14',
-					Tablet: '14',
-					Mobile: '14'
-				},
-				buttonDesktopBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-				buttonTabBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-				buttonMobileBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-				buttonDesktopBorderRadiusWidth: {
-					top: "4",
-					bottom: "4",
-					left: "4",
-					right: "4",
-				},
-            },
-			"preset-4": {
-				buttonBgColor: "#fff",
-				buttonBorder: "",
-				buttonBorderColor: "#C3C8D2",
-				buttonColor: "#15171C",
-				buttonIconImageUrl: "",
-				buttonIcon: "",
-				buttonIconColor: "#15171C",
-				buttonIconBorder: "none",
-				buttonTextSwitcher: true,
-				buttonText: "Text Button",
-				buttonIconRotate: {
-					Desktop: '0',
-					Tablet: '0',
-					Mobile: '0'
-				},
-				buttonIconPaddingDesktop: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
-				},
-				buttonIconMarginDesktop: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
-				},
-				buttonFontSize: {
-					Desktop: '14',
-					Tablet: '14',
-					Mobile: '14'
-				},
-				buttonDesktopBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-				buttonTabBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-				buttonMobileBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-				buttonDesktopBorderRadiusWidth: {
-					top: "4",
-					bottom: "4",
-					left: "4",
-					right: "4",
-				},
-            },
-			"preset-5": {
 				buttonBgColor: "#fff",
 				buttonBorder: "",
 				buttonBorderColor: "#C3C8D2",
@@ -610,7 +436,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					right: "4",
 				},
             },
-			"preset-6": {
+			"preset-3": {
 				buttonBgColor: "#399CFF",
 				buttonBorder: "none",
 				buttonBorderColor: "",
@@ -681,160 +507,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					right: "4",
 				},
             },
-			"preset-7": {
-				buttonBgColor: "#fff",
-				buttonBorder: "solid",
-				buttonBorderColor: "#C3C8D2",
-				buttonColor: "#15171C",
-				buttonIcon: "",
-				buttonIconColor: "#15171C",
-				buttonIconAlign: "image",
-				buttonIconPosition: "right",
-				buttonIconBorder: "none",
-				buttonIconImageUrl: defaultImageUrl[1],
-				buttonTextSwitcher: true,
-				buttonText: "Search",
-				buttonIconRotate: {
-					Desktop: '0',
-					Tablet: '0',
-					Mobile: '0'
-				},
-				buttonIconPaddingDesktop: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
-				},
-				buttonIconMarginDesktop: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
-				},
-				buttonDesktopPadding: {
-					top: "12",
-					bottom: "12",
-					left: "24",
-					right: "24",
-				},
-				buttonIconImageWidth: {
-					Desktop: '18',
-					Tablet: '18',
-					Mobile: '18'
-				},
-				buttonDesktopBorderRadiusWidth: {
-					top: "999",
-					bottom: "999",
-					left: "999",
-					right: "999",
-				},
-				buttonIconImageHeight: {
-					Desktop: '18',
-					Tablet: '18',
-					Mobile: '18'
-				},
-				buttonFontSize: {
-					Desktop: '14',
-					Tablet: '14',
-					Mobile: '14'
-				},
-				buttonDesktopBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-				buttonTabBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-				buttonMobileBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-            },
-			"preset-8": {
-				buttonBgColor: "#399CFF",
-				buttonBorder: "none",
-				buttonBorderColor: "#C3C8D2",
-				buttonColor: "#fff",
-				buttonIcon: "",
-				buttonIconColor: "#fff",
-				buttonIconBgColor: "transparent",
-				buttonIconAlign: "image",
-				buttonIconPosition: "right",
-				buttonIconBorder: "none",
-				buttonIconImageUrl: defaultImageUrl[0],
-				buttonTextSwitcher: false,
-				buttonText: "Search",
-				buttonIconRotate: {
-					Desktop: '0',
-					Tablet: '0',
-					Mobile: '0'
-				},
-				buttonIconPaddingDesktop: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
-				},
-				buttonIconMarginDesktop: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
-				},
-				buttonDesktopPadding: {
-					top: "15",
-					bottom: "15",
-					left: "15",
-					right: "15",
-				},
-				buttonIconImageWidth: {
-					Desktop: '18',
-					Tablet: '18',
-					Mobile: '18'
-				},
-				buttonDesktopBorderRadiusWidth: {
-					top: "8",
-					bottom: "8",
-					left: "8",
-					right: "8",
-				},
-				buttonIconImageHeight: {
-					Desktop: '18',
-					Tablet: '18',
-					Mobile: '18'
-				},
-				buttonFontSize: {
-					Desktop: '14',
-					Tablet: '14',
-					Mobile: '14'
-				},
-				buttonDesktopBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-				buttonTabBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-				buttonMobileBorderWidth:{
-					top: "1",
-					bottom: "1",
-					left: "1",
-					right: "1",
-				},
-            },
-			"preset-9": {
+			
+			"preset-4": {
 				buttonBgColor: "#399CFF",
 				buttonBorder: "none",
 				buttonBorderColor: "#C3C8D2",
@@ -917,7 +591,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					right: "1",
 				},
             },
-			"preset-10": {
+			"preset-5": {
 				buttonBgColor: "#399CFF",
 				buttonBorder: "none",
 				buttonBorderColor: "#C3C8D2",
@@ -1000,7 +674,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					right: "1",
 				},
             },
-			"preset-11": {
+			"preset-6": {
 				buttonBgColor: "#399CFF",
 				buttonBorder: "none",
 				buttonBorderColor: "#C3C8D2",

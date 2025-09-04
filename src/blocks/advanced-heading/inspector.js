@@ -618,41 +618,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 headingIconSwitcher: false,
                 subHeadingSwitcher: false,
                 subHeadingPosition: "bottom",
-                activeLineSwitcher: false,
-                showSeparatorSwitcher: true,
-                separator: "solid",
-                separatorWidth: {
-                    Desktop: '270',
-                },
-                separatorColor: "#4CAF50",
-                separatorPosition: "bottom",
-                headingBackgroundImageEnabled: false,
-                headingTextShadowCssValue: "none",
-                headingColor: "#4CAF50",
-                headingTextStroke: {
-                    Desktop: "",
-                    Tablet: "",
-                    Mobile: "",
-                },
-                headingTextStrokeColor: "",
-                headingTextStrokeHoverColor: "",
-                headingAlignment: {
-                    Desktop: "left"
-                },
-                headingDesktopPadding: {
-                    top: '0',
-                    bottom: '24',
-                    left: '0',
-                    right: '0',
-                },
-            },
-            "preset-6": {
-                headingIconSwitcher: false,
-                subHeadingSwitcher: false,
-                subHeadingPosition: "bottom",
                 activeLineSwitcher: true,
                 activeLineBeforeWidth: {
-                    Desktop: '23',
+                    Desktop: '42',
                 },
                 activeLineAfterWidth: {
                     Desktop: '100',
@@ -683,13 +651,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     right: '0',
                 },
             },
-            "preset-7": {
+            "preset-6": {
                 headingIconSwitcher: false,
                 subHeadingSwitcher: false,
                 subHeadingPosition: "bottom",
                 activeLineSwitcher: true,
                 activeLineBeforeWidth: {
-                    Desktop: '23',
+                    Desktop: '42',
                 },
                 activeLineAfterWidth: {
                     Desktop: '100',
@@ -720,13 +688,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     right: '0',
                 },
             },
-            "preset-8": {
+            "preset-7": {
                 headingIconSwitcher: true,
                 subHeadingSwitcher: false,
                 subHeadingPosition: "bottom",
                 activeLineSwitcher: false,
                 activeLineBeforeWidth: {
-                    Desktop: '23',
+                    Desktop: '42',
                 },
                 activeLineAfterWidth: {
                     Desktop: '100',
@@ -760,53 +728,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     right: '0',
                 },
                 headingIconColor: "#E95B68",
-                headingIconDesktopPadding: {
-                    top: '0',
-                    bottom: '24',
-                    left: '0',
-                    right: '0',
-                }
-            },
-            "preset-9": {
-                headingIconSwitcher: true,
-                subHeadingSwitcher: false,
-                subHeadingPosition: "bottom",
-                activeLineSwitcher: false,
-                activeLineBeforeWidth: {
-                    Desktop: '23',
-                },
-                activeLineAfterWidth: {
-                    Desktop: '100',
-                },
-                activeLineBeforeColor: "#4CAF50",
-                activeLineAfterColor: "#9cb39cff",
-                showSeparatorSwitcher: true,
-                separator: "zigzag",
-                separatorWidth: {
-                    Desktop: '150',
-                },
-                separatorColor: "#4CAF50",
-                separatorPosition: "top",
-                headingBackgroundImageEnabled: false,
-                headingTextShadowCssValue: "none",
-                headingColor: "#4CAF50",
-                headingTextStroke: {
-                    Desktop: "",
-                    Tablet: "",
-                    Mobile: "",
-                },
-                headingTextStrokeColor: "",
-                headingTextStrokeHoverColor: "",
-                headingAlignment: {
-                    Desktop: "left"
-                },
-                headingDesktopPadding: {
-                    top: '24',
-                    bottom: '0',
-                    left: '0',
-                    right: '0',
-                },
-                headingIconColor: "#4CAF50",
                 headingIconDesktopPadding: {
                     top: '0',
                     bottom: '24',

@@ -3101,6 +3101,10 @@ const attributes = {
         type: 'string',
         default: '',
     },
+	teamMemberPresetStyle: {
+        type: 'string',
+        default: 'preset-0',
+    },
 };
 
 export default attributes;
