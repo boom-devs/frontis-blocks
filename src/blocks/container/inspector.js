@@ -27,7 +27,6 @@ import FB_InspectorControls from '@Components/InspectorControls';
 import { SortableContext } from "@dnd-kit/sortable";
 import ColumnSortableItem from "./columnSortableItem";
 import RowSortableItem from "./rowSortableItem";
-import { use } from "@wordpress/data";
 
 const Inspector = (props) => {
 	let deviceType = useDeviceType();
@@ -60,13 +59,13 @@ const Inspector = (props) => {
 			containerDesktopPadding,
 			containerTabletPadding,
 			containerMobilePadding,
-			containerPaddingHasEdited,
 			containerPaddingLink,
 			containerMarginUnits,
 			containerDesktopMargin,
 			containerTabletMargin,
 			containerMobileMargin,
 			containerMarginLink,
+
 
 			/** Normal Bg for fb container */
 			containerBgColorSwitcher,
@@ -185,7 +184,6 @@ const Inspector = (props) => {
 			try {
 				return JSON.parse(value);
 			} catch (e) {
-				console.error("Parsing error:", e);
 				return {
 					Desktop: value,
 					Tablet: value,
@@ -354,6 +352,7 @@ const Inspector = (props) => {
 
 	const [containerColumnsItem, setContainerColumnsItem] = useState(containerColumnsItemList);
 	const [containerRowsItem, setContainerRowsItem] = useState(containerRowsItemList);
+	const [containerLocalDesktopPadding, setContainerLocalDesktopPadding] = useState(containerDesktopPadding);
 
 	const handleColumnAddItem = () => {
         const newItem = {
@@ -553,7 +552,60 @@ const Inspector = (props) => {
 		const updatedItems = [...items, newItem];
 		setContainerRowsItem({...containerRowsItem, [deviceType]: updatedItems});
 		setAttributes({containerRowsItemList: {...containerRowsItemList,[deviceType]: updatedItems}});
-	  };
+	};
+
+
+	const isDesktopPaddingEmpty = () => {
+		const directions = ['top', 'bottom', 'left', 'right'];
+		return directions.every(direction => 
+			containerDesktopPadding[direction] === ''
+		);
+	};
+
+	const isTabletPaddingEmpty = () => {
+		const directions = ['top', 'bottom', 'left', 'right'];
+		return directions.every(direction => 
+			containerTabletPadding[direction] === ''
+		);
+	};
+
+	const isMobilePaddingEmpty = () => {
+		const directions = ['top', 'bottom', 'left', 'right'];
+		return directions.every(direction => 
+			containerMobilePadding[direction] === ''
+		);
+	};
+	
+	// Correct const declarations (removed the curly braces after =)
+	let getPaddingDesktop = 
+		isBlockRootParent && isDesktopPaddingEmpty()
+		? {
+			top: containerGlobalPadding.Desktop, 
+			right: containerGlobalPadding.Desktop, 
+			bottom: containerGlobalPadding.Desktop, 
+			left: containerGlobalPadding.Desktop
+		  }
+		: containerDesktopPadding;
+	
+	let getPaddingTablet = 
+		isBlockRootParent && isTabletPaddingEmpty()
+		? {
+			top: containerGlobalPadding.Tablet, 
+			right: containerGlobalPadding.Tablet, 
+			bottom: containerGlobalPadding.Tablet, 
+			left: containerGlobalPadding.Tablet
+		  } 
+		: containerTabletPadding;
+	
+	let getPaddingMobile = 
+		isBlockRootParent && isMobilePaddingEmpty()
+		? {
+			top: containerGlobalPadding.Mobile, 
+			right: containerGlobalPadding.Mobile, 
+			bottom: containerGlobalPadding.Mobile, 
+			left: containerGlobalPadding.Mobile
+		  } 
+		: containerMobilePadding;
 
 	// Handle full width content boxed width
 	const fullWidthContentBoxedWidthFn = (width) => {
@@ -618,9 +670,6 @@ const Inspector = (props) => {
 	const containerPaddingUnitsChange = (event, position) => {
 		const value = event.target.value;
 
-		// Set the containerPaddingHasEdited to true to trigger the useEffect
-		setAttributes({ containerPaddingHasEdited: true });
-
 		if (containerPaddingLink) {
 			switch (deviceType) {
 				case 'Desktop':
@@ -659,19 +708,79 @@ const Inspector = (props) => {
 		} else {
 			switch (deviceType) {
 				case 'Desktop':
-					setAttributes({ containerDesktopPadding: { ...containerDesktopPadding, [position]: value } });
+					const updatedDesktopPadding = updateContainerPadding(containerDesktopPadding, position, value, isBlockRootParent, formatted_container_padding);
+					setAttributes({ containerDesktopPadding: updatedDesktopPadding});
 					break;
 				case 'Tablet':
-					setAttributes({ containerTabletPadding: { ...containerTabletPadding, [position]: value } });
+					let formatedContainerPaddingTablet = formatted_container_padding;
+					if( isTabletPaddingEmpty() && containerTabletPadding.top === '') {
+						formatedContainerPaddingTablet = containerDesktopPadding;
+					}
+
+					if(containerTabletPadding.top !== '') {
+						formatedContainerPaddingTablet = containerTabletPadding;
+					}
+
+					const updatedTabletPadding = updateContainerPadding(formatedContainerPaddingTablet, position, value, isBlockRootParent, formatted_container_padding);
+					setAttributes({containerTabletPadding: updatedTabletPadding});
 					break;
 				case 'Mobile':
-					setAttributes({ containerMobilePadding: { ...containerMobilePadding, [position]: value } });
+					let formatedContainerPaddingMob = formatted_container_padding;
+					if( isMobilePaddingEmpty() && isTabletPaddingEmpty() && containerMobilePadding.top === '') {
+						formatedContainerPaddingMob = containerDesktopPadding;
+					}
+					if(isMobilePaddingEmpty() && !isTabletPaddingEmpty() && containerMobilePadding.top === '') {
+						formatedContainerPaddingMob = containerTabletPadding;
+					}
+
+					if(containerMobilePadding.top !== '') {
+						formatedContainerPaddingMob = containerMobilePadding;
+					}
+					
+					const updatedMobilePadding = updateContainerPadding(formatedContainerPaddingMob, position, value, isBlockRootParent, formatted_container_padding);
+					setAttributes({ containerMobilePadding: updatedMobilePadding });
 					break;
 				default:
 					break;
 			}
 		}
 	};
+
+	if( isTabletPaddingEmpty() && !isDesktopPaddingEmpty()) {
+		getPaddingTablet = containerDesktopPadding;
+	}
+
+	if( isMobilePaddingEmpty() && isTabletPaddingEmpty() && !isDesktopPaddingEmpty()) {
+		getPaddingMobile = containerDesktopPadding;
+	}
+
+	if(isMobilePaddingEmpty() && !isTabletPaddingEmpty()) {
+		getPaddingMobile = containerTabletPadding;
+	}
+
+	function updateContainerPadding(padding, position, value, isBlockRootParent, formatted_container_padding) {
+		// Create a new padding object with the updated position
+		let updatedPadding = { ...padding, [position]: value };
+	  
+		if (!isBlockRootParent) {
+			// If not block root parent, set empty attributes to '0', preserve non-empty ones
+			updatedPadding = {
+				top: updatedPadding.top === '' ? '0' : updatedPadding.top,
+				bottom: updatedPadding.bottom === '' ? '0' : updatedPadding.bottom,
+				left: updatedPadding.left === '' ? '0' : updatedPadding.left,
+				right: updatedPadding.right === '' ? '0' : updatedPadding.right
+			};
+		} else if (padding[position] === '') {
+			updatedPadding = {
+				top: updatedPadding.top === '' ? formatted_container_padding[deviceType] : updatedPadding.top,
+				bottom: updatedPadding.bottom === '' ? formatted_container_padding[deviceType] : updatedPadding.bottom,
+				left: updatedPadding.left === '' ? formatted_container_padding[deviceType] : updatedPadding.left,
+				right: updatedPadding.right === '' ? formatted_container_padding[deviceType] : updatedPadding.right
+			};
+		}
+	  
+		return updatedPadding;
+	}
 
 	const containerPaddingLinkBtn = () => {
 		setAttributes({
@@ -732,7 +841,14 @@ const Inspector = (props) => {
 					setAttributes({ containerDesktopMargin: { ...containerDesktopMargin, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes({ containerTabletMargin: { ...containerTabletMargin, [position]: value } });
+					let containerMarginTablet = containerTabletMargin
+					if(containerTabletMargin[position] === '') {
+						containerMarginTablet[position] = containerDesktopMargin[position];
+					}
+
+					console.log(containerMarginTablet)
+
+					setAttributes({ containerTabletMargin: { ...containerMarginTablet, [position]: value } });
 					break;
 				case 'Mobile':
 					setAttributes({ containerMobileMargin: { ...containerMobileMargin, [position]: value } });
@@ -894,46 +1010,6 @@ const Inspector = (props) => {
             }
         })
     }
-
-	const isAllPaddingEmpty = () => {
-		const directions = ['top', 'bottom', 'left', 'right'];
-		return directions.every(direction => 
-			containerDesktopPadding[direction] === '' &&
-			containerTabletPadding[direction] === '' &&
-			containerMobilePadding[direction] === ''
-		);
-	};
-	
-	// Correct const declarations (removed the curly braces after =)
-	const getPaddingDesktop = 
-		isBlockRootParent && isAllPaddingEmpty()
-		? {
-			top: containerGlobalPadding.Desktop, 
-			right: containerGlobalPadding.Desktop, 
-			bottom: containerGlobalPadding.Desktop, 
-			left: containerGlobalPadding.Desktop
-		  } 
-		: containerDesktopPadding;
-	
-	const getPaddingTablet = 
-		isBlockRootParent && isAllPaddingEmpty()
-		? {
-			top: containerGlobalPadding.Tablet, 
-			right: containerGlobalPadding.Tablet, 
-			bottom: containerGlobalPadding.Tablet, 
-			left: containerGlobalPadding.Tablet
-		  } 
-		: containerTabletPadding;
-	
-	const getPaddingMobile = 
-		isBlockRootParent && isAllPaddingEmpty()
-		? {
-			top: containerGlobalPadding.Mobile, 
-			right: containerGlobalPadding.Mobile, 
-			bottom: containerGlobalPadding.Mobile, 
-			left: containerGlobalPadding.Mobile
-		  } 
-		: containerMobilePadding;
 
 	/**
 	 * Inspector General Controls
