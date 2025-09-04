@@ -1102,7 +1102,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 
 
 	useEffect(() => {
-		console.log(MASK_IMAEGS[imageStyle]);
 		if (MASK_IMAEGS[imageStyle]) {
 			setAttributes({ maskImageUrl: MASK_IMAEGS[imageStyle] });
 		}
