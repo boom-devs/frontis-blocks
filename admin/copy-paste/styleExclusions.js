@@ -114,11 +114,15 @@ const styleExclusions = [
             'blockId',
             'animatedHeadingGlobalWraperID',
             'animatedHeadingGlobalWraperClass',
-            'animatedHeadingItems',
             'animatedHeadingPrefix',
             'animatedHeadingSuffix',
             'animatedHeadingMainTag',
         ],
+        skipNestedAttrs: {
+            animatedHeadingItems: [
+                'animatedHeadingTitle',
+            ]
+        }
     },
     {
         name: 'frontis-blocks/call-to-action',
@@ -197,9 +201,19 @@ const styleExclusions = [
             'blockID',
             'featuresListGlobalWraperID',
             'featuresListGlobalWraperClass',
-            'FeatureItems',
             'FeatureTag',
         ],
+        skipNestedAttrs: {
+            FeatureItems: [
+                'Title',
+                'Description',
+                'FeatureIcon',
+                'FeatureIconAlign',
+                'FeatureIconImageUrl',
+                'FeatureIconImageAlt',
+                'FeatureIconImageID',
+            ]
+        }
     },
     {
         name: 'frontis-blocks/flip-box',
@@ -268,10 +282,17 @@ const styleExclusions = [
             'blockID',
             'imageGalleryGlobalWraperID',
             'imageGalleryGlobalWraperClass',
-            'GalleryItems',
             'GalleryButtonText',
             'GalleryButtonLink',
         ],
+        skipNestedAttrs: {
+            GalleryItems: [
+                'title',
+                'column',
+                'row',
+                'image',
+            ]
+        }
     },
     {
         name: 'frontis-blocks/info-box',
@@ -357,7 +378,6 @@ const styleExclusions = [
             'priceCurrency',
             'pricePeriod',
             'pricePeriodSeparator',
-            'priceFeatureItems',
             'priceButtonText',
             'priceButtonUrl',
             'priceButtonTargetUrl',
@@ -366,6 +386,13 @@ const styleExclusions = [
             'pricingTitleTag',
             'pricingSubTitleTag',
         ],
+        skipNestedAttrs: {
+            priceFeatureItems: [
+                'Title',
+                'FeatureIcon',
+                'FeatureIconAlign',
+            ]
+        }
     },
     {
         name: 'frontis-blocks/progressbar',
@@ -402,8 +429,15 @@ const styleExclusions = [
             'blockID',
             'socialGlobalWraperID',
             'socialGlobalWraperClass',
-            'socialItems', 
         ],
+        skipNestedAttrs: {
+            socialItems: [
+                'socialIcon',
+                'socialIconUrl',
+                'socialIconTitle',
+                'socialIconTargetUrl'
+            ]
+        }
     },
     {
         name: 'frontis-blocks/team-member',
@@ -418,8 +452,15 @@ const styleExclusions = [
             'teamMemberDesc',
             'teamMemberBadge',
             'teamMemberNameHeadingTag',
-            'teamMemberSocialItems',
         ],
+        skipNestedAttrs: {
+            teamMemberSocialItems: [
+                'Title',
+                'Description',
+                'teamMemberSocialIcon',
+                'teamMemberSocialIconAlign'
+            ]
+        }
     },
     {
         name: 'frontis-blocks/testimonial',
@@ -440,7 +481,31 @@ const styleExclusions = [
             'TestimonialDesignation',
             'TestimonialTitleTag',
         ],
-    },          
+    },
+    {
+        name: 'frontis-blocks/tabs',
+        skipAttrs: [
+            'blockId',
+            'tabGlobalWraperID',
+            'tabGlobalWraperClass',
+            'tabTitleTag',
+            'tabDescriptionTag',
+            'showIcon',
+            'showTitle',
+            'showDescription',
+        ],
+        skipNestedAttrs: {
+            tabItems: [
+                'title',
+                'description',
+                'tabIcon',
+                'tabIconAlign',
+                'tabIconImageUrl',
+                'tabIconImageAlt',
+                'tabIconImageID',
+            ]
+        }
+    },       
 ];
 
 export default styleExclusions;

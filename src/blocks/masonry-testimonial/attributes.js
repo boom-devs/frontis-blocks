@@ -7,6 +7,14 @@ const attributes = {
         type: "string",
         default: "post"
     },
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
     postOrder: {
         type: "string",
         default: "desc"

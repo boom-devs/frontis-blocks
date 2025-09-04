@@ -6,6 +6,7 @@ export default function Save({ attributes }) {
         blockId,
 		speed,
 		reverseDirection,
+		pauseOnHover,
 
 		sliderGlobalWraperID,
 		sliderGlobalWraperClass,
@@ -26,6 +27,7 @@ export default function Save({ attributes }) {
 		autoplay: {
 			delay: 1,
 			reverseDirection: reverseDirection,
+			pauseOnMouseEnter: pauseOnHover,
 		},
 		loop: true,
 		slidesPerView:'auto',

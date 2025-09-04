@@ -1204,6 +1204,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${progressBorderColor ? `border-color: ${progressBorderColor};` : ''}
             ${progressBorderWidthDesktop.top ? `border-width: ${progressBorderWidthDesktopGet};` : ''}
             ${progressBorderRadiusDesktop.top ? `border-radius: ${progressBorderRadiusDesktopGet};` : ''}
+            box-sizing: border-box;
             transition: ${progressbarType === 'vertical' ? 'height' : 'width'} 1.5s ease-in-out;
         }
         .${blockID} .fb-progressbar-wrapper .fb-progressbar-item:hover .fb-progressbar-line-wrapper .fb-progressbar-line {
@@ -1720,7 +1721,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             }
                             normalGradientColor={progressGradientColor}
                             setNormalGradientColor={(value) =>
-                                setAttributes({ progressGradientColor: value === undefined ? '' : value })
+                                setAttributes({ progressGradientColor: value === undefined ? null : value })
                             }
                             normalCustomGradientSwitcher={
                                 progressCustomGradientSwitcher
@@ -1888,7 +1889,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             }
                             normalGradientColor={progressBgGradientColor}
                             setNormalGradientColor={(value) =>
-                                setAttributes({ progressBgGradientColor: value === undefined ? '' : value })
+                                setAttributes({ progressBgGradientColor: value === undefined ? null : value })
                             }
                             normalCustomGradientSwitcher={
                                 progressBgCustomGradientSwitcher
@@ -2428,7 +2429,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             }
                             normalGradientColor={progressbarGlobalBgGradientColor}
                             setNormalGradientColor={(value) =>
-                                setAttributes({ progressbarGlobalBgGradientColor: value === undefined ? '' : value })
+                                setAttributes({ progressbarGlobalBgGradientColor: value === undefined ? null : value })
                             }
                             normalCustomGradientSwitcher={
                                 progressbarGlobalBgCustomGradientSwitcher
@@ -2496,7 +2497,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             }
                             hoverGradientColor={progressbarGlobalBgHoverGradientColor}
                             setHoverGradientColor={(value) =>
-                                setAttributes({ progressbarGlobalBgHoverGradientColor: value === undefined ? '' : value })
+                                setAttributes({ progressbarGlobalBgHoverGradientColor: value === undefined ? null : value })
                             }
                             hoverCustomGradientSwitcher={
                                 progressbarGlobalBgHoverCustomGradientSwitcher

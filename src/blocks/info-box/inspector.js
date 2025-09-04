@@ -61,6 +61,7 @@ import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
+import FB_ImageControl from '@Components/image-control';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -212,6 +213,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infobtnTargetUrl,
 		icon,
 		btnIcon,
+		btnImageUrl,
+		btnImageAlt,
+		btnImageID,
 		width,
 		mediaSwitcher,
 		contentAlignment,
@@ -236,8 +240,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		boxBgColor,
 		boxBgColorSwitcher,
 		boxBgHoverColor,
-		mediaSize,
-		mediaSizeUnits,
 		globalZIndex,
 		infoBoxOverflow,
 		globalPaddingUnits,
@@ -272,10 +274,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		globalBorderRadiusMobile,
 		globalBorderRadiusLink,
 
-		mediaBgWidth,
-		mediaBgWidthUnits,
-		mediaBgHeight,
-		mediaBgHeightUnits,
+		mediaSize,
+		mediaSizeUnits,
+		mediaHeight,
+		mediaHeightUnits,
 
 		mediaPaddingUnits,
 		mediaPaddingDesktop,
@@ -312,10 +314,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnIconSize,
 		btnIconSizeUnits,
 		buttonIconSwitcher,
+		buttonIconType,
 		btnIconColor,
 		btnIconHoverColor,
 		btnIconColorSwitcher,
 		btnIconPosition,
+		buttonIconRotateSwitcher,
+		buttonIconRotate,
+		buttonIconRotateHover,
 		infoIconPosition,
 
 		mediaIconColor,
@@ -331,6 +337,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infoMediaID,
 		infoMediaAlt,
 		infoMediaUrl,
+		infoMediaSize,
 		mediaBackColorSwitcher,
 		mediaBackgroundType,
 		mediaClassicColor,
@@ -420,6 +427,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const presetConfigurations = {
 			"preset-1": {
 				info_Button_Switcher: true,
+				info_Button_Text: 'Learn more',
 				mediaClassicColor: '#399CFF',
 				mediaHoverClassicColor: '#ffffff',
 				globalBgColor: '#EBF5FF',
@@ -432,11 +440,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				SubHeadingHoverColor: '#ffffff',
 				buttonTextColor: '#399CFF',
 				btnIconColor: '#399CFF',
-				globalBorderRadiusDesktop: {
-					top: "6",
-					bottom: "6",
-					left: "6",
-					right: "6",
+				buttonBgColor: '',
+				buttonBgHoverColor: '',
+				btnIcon: 'arrow-left',
+				buttonIconRotate: {
+					Desktop: "145",
+					Tablet: "145",
+					Mobile: "145",
+				},
+				btnIconPosition: 'right',
+				infoButtonDesktopMargin: {
+					top: "0",
+					bottom: "0",
+					left: "16",
+					right: "16",
+				},
+				infoButtonDesktopPadding: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				infoBtnDesktopBorderradiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
 				},
 				mediaBorderRadiusDesktop: {
 					top: "50",
@@ -447,6 +476,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 			"preset-2": {
 				info_Button_Switcher: false,
+				info_Button_Text: 'Learn more',
 				mediaClassicColor: '',
 				mediaHoverClassicColor: '',
 				globalBgColor: '#399CFF',
@@ -472,6 +502,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 			"preset-3": {
 				info_Button_Switcher: false,
+				info_Button_Text: 'Learn more',
 				mediaClassicColor: '#399CFF',
 				mediaHoverClassicColor: '399CFF',
 				globalBgColor: '',
@@ -497,6 +528,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 			"preset-4": {
 				info_Button_Switcher: true,
+				info_Button_Text: 'Learn more',
 				mediaClassicColor: '#399CFF',
 				mediaHoverClassicColor: '#ffffff',
 				globalBgColor: '#FFFBF5',
@@ -511,6 +543,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				buttonTextHoverColor: '#F89B2E',
 				btnIconColor: '#F89B2E',
 				btnIconHoverColor: '#F89B2E',
+				buttonBgColor: '',
+				buttonBgHoverColor: '',
+				btnIcon: 'arrow-left',
+				buttonIconRotate: {
+					Desktop: "145",
+					Tablet: "145",
+					Mobile: "145",
+				},
+				btnIconPosition: 'right',
 				globalBorderRadiusDesktop: {
 					top: "6",
 					bottom: "6",
@@ -526,6 +567,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 			"preset-5": {
 				info_Button_Switcher: true,
+				info_Button_Text: 'Learn more',
 				mediaClassicColor: '#399CFF',
 				mediaHoverClassicColor: '399CFF',
 				globalBgColor: '',
@@ -540,11 +582,89 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				buttonTextHoverColor: '#399CFF',
 				btnIconColor: '#399CFF',
 				btnIconHoverColor: '#399CFF',
+				buttonBgColor: '',
+				buttonBgHoverColor: '',
+				btnIcon: 'arrow-left',
+				buttonIconRotate: {
+					Desktop: "145",
+					Tablet: "145",
+					Mobile: "145",
+				},
+				btnIconPosition: 'right',
+				infoButtonDesktopMargin: {
+					top: "0",
+					bottom: "0",
+					left: "16",
+					right: "16",
+				},
+				infoButtonDesktopPadding: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				infoBtnDesktopBorderradiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
 				globalBorderRadiusDesktop: {
 					top: "",
 					bottom: "",
 					left: "",
 					right: "",
+				},
+			},
+			"preset-6": {
+				info_Button_Switcher: true,
+				info_Button_Text: '',
+				mediaClassicColor: '',
+				mediaHoverClassicColor: '',
+				globalBgColor: '#EBF5FF',
+				globalBgHoverColor: '#EBF5FF',
+				mediaIconColor: '#399CFF',
+				mediaIconHoverColor: '#399CFF',
+				Heading_Color: '#15171C',
+				Heading_Hover_Color: '#15171C',
+				SubHeadingColor: '#555E72',
+				SubHeadingHoverColor: '#555E72',
+				buttonTextColor: '#399CFF',
+				buttonTextHoverColor: '#399CFF',
+				buttonBgColor: '#EBF5FF',
+				buttonBgHoverColor: '#EBF5FF',
+				btnIcon: 'arrow-left',
+				btnIconColor: '#399CFF',
+				btnIconHoverColor: '#399CFF',
+				buttonIconRotate: {
+					Desktop: "145",
+					Tablet: "145",
+					Mobile: "145",
+				},
+				btnIconPosition: 'left',
+				infoButtonDesktopMargin: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				infoButtonDesktopPadding: {
+					top: "19",
+					bottom: "19",
+					left: "19",
+					right: "19",
+				},
+				infoBtnDesktopBorderradiusWidth: {
+					top: "18",
+					bottom: "18",
+					left: "8",
+					right: "18",
+				},
+				globalBorderRadiusDesktop: {
+					top: "18",
+					bottom: "18",
+					left: "18",
+					right: "18",
 				},
 			},
 
@@ -558,7 +678,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				...selectedPresetConfig,
 			});
 		} else {
-			console.warn(`Dual Button: Preset "${selectedPreset}" not found.`);
+			console.warn(`Info Box: Preset "${selectedPreset}" not found.`);
 		}
 	};
 	/** End Preset Style **/
@@ -2282,6 +2402,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${subHeadingGlobalTypoSwitcher.lineHeight === false && subHeadingLineHeight.Mobile && subHeadingLineHeightUnits.Mobile ? `line-height: ${subHeadingLineHeight.Mobile}${subHeadingLineHeightUnits.Mobile};` : ''}
 			}
 		}
+		.fb-info-box-wrapper.${blockID}.preset-6 .fb-info-button {
+			position: absolute;
+			top: 0;
+			right: 0;
+			z-index: 6;
+		}
 		.fb-info-box-wrapper.${blockID} .fb-info-btn-container {
 			${buttonAlignment ? `text-align: ${buttonAlignment};` : ''}
 		}
@@ -2355,11 +2481,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${mediaBackgroundImagePosition ? `background-position: ${mediaBackgroundImagePosition};` : ""}
 			${mediaBackgroundImageAttachment ? `background-attachment: ${mediaBackgroundImageAttachment};` : ""}
 			${mediaBackgroundImageRepeat ? `background-repeat: ${mediaBackgroundImageRepeat};` : ""}
-			${mediaBackgroundImageSize ? `background-size: ${mediaBackgroundImageSize};` : ""}` 
-			: mediaClassicColor ? `background: ${mediaClassicColor}; ` : ""
+			${mediaBackgroundImageSize ? `background-size: ${mediaBackgroundImageSize};` : ""}`
+					: mediaClassicColor ? `background: ${mediaClassicColor}; ` : ""
 			}
-			${mediaBgWidth.Desktop ? `width: ${mediaBgWidth.Desktop}${mediaBgWidthUnits.Desktop};` : ''}
-			${mediaBgHeight.Desktop ? `height: ${mediaBgHeight.Desktop}${mediaBgHeightUnits.Desktop};` : ''}
 			${mediaDesktopPadding && mediaPaddingDesktop.top ? `padding: ${mediaDesktopPadding};` : ''}
 			${mediaDesktopMargin && mediaMarginDesktop.top ? `margin: ${mediaDesktopMargin};` : ''}
 			${mediaBorder ? `border-style: ${mediaBorder};` : ''}
@@ -2369,6 +2493,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			background-repeat: none;
 			background-size: cover;
 			${mediaClassicColor ? `justify-content: center; ` : ''}
+			overflow: hidden;
 			transition: all .3s ease-in-out;
 		}
 		.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper{
@@ -2387,8 +2512,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${mediaHoverBackgroundImagePosition ? `background-position: ${mediaHoverBackgroundImagePosition};` : ""}
 			${mediaHoverBackgroundImageAttachment ? `background-attachment: ${mediaHoverBackgroundImageAttachment};` : ""}
 			${mediaHoverBackgroundImageRepeat ? `background-repeat: ${mediaHoverBackgroundImageRepeat};` : ""}
-			${mediaHoverBackgroundImageSize ? `background-size: ${mediaHoverBackgroundImageSize};` : ""} ` 
-			: mediaHoverClassicColor ? `background: ${mediaHoverClassicColor}; ` : ""
+			${mediaHoverBackgroundImageSize ? `background-size: ${mediaHoverBackgroundImageSize};` : ""} `
+				: mediaHoverClassicColor ? `background: ${mediaHoverClassicColor}; ` : ""
 			}
 			${mediaBorderHoverColor ? `border-color: ${mediaBorderHoverColor};` : ''}
 			transition: all .3s ease-in-out;
@@ -2400,8 +2525,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${mediaTabletMargin && mediaMarginTablet.top ? `margin: ${mediaTabletMargin};` : ''}
 				${mediaBorderTabletWidth && mediaBorderTablet.top ? `border-width: ${mediaBorderTabletWidth};` : ''}
 				${mediaBorderRadiusTabletWidth && mediaBorderRadiusTablet.top ? `border-radius: ${mediaBorderRadiusTabletWidth};` : ''}
-				${mediaBgWidth.Tablet ? `width: ${mediaBgWidth.Tablet}${mediaBgWidthUnits.Tablet};` : ''}
-				${mediaBgHeight.Tablet ? `height: ${mediaBgHeight.Tablet}${mediaBgHeightUnits.Tablet};` : ''}
 			}
 		}
 
@@ -2411,16 +2534,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${mediaMobileMargin && mediaMarginMobile.top ? `margin: ${mediaMobileMargin};` : ''}
 				${mediaBorderMobileWidth && mediaBorderMobile.top ? `border-width: ${mediaBorderMobileWidth};` : ''}
 				${mediaBorderRadiusMobileWidth && mediaBorderRadiusMobile.top ? `border-radius: ${mediaBorderRadiusMobileWidth};` : ''}
-				${mediaBgWidth.Mobile ? `width: ${mediaBgWidth.Mobile}${mediaBgWidthUnits.Mobile};` : ''}
-				${mediaBgHeight.Mobile ? `height: ${mediaBgHeight.Mobile}${mediaBgHeightUnits.Mobile};` : ''}
 			}
 		}
 
 		.fb-info-box-wrapper.${blockID} .fb-icon-wrapper svg,
 		.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper img {
 			${mediaSize.Desktop ? `width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};` : ''}
-			${mediaSize.Desktop ? `height: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};` : ''}
-			${mediaIconColor ? `fill: ${mediaIconColor};` : ""}
+			${mediaHeight.Desktop ? `height: ${mediaHeight.Desktop}${mediaHeightUnits.Desktop};` : ''}
+			${mediaSwitcher === "icon" && mediaIconColor ? `fill: ${mediaIconColor};` : ""}
+			${mediaSwitcher === "image" && infoMediaSize ? `object-fit: ${infoMediaSize};` : ""}
 		}
 
 		.fb-info-box-wrapper.${blockID}:hover .fb-icon-wrapper svg {
@@ -2432,7 +2554,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.fb-info-box-wrapper.${blockID} .fb-icon-wrapper svg,
 			.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper img {
 				${mediaSize.Tablet ? `width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};` : ''}
-				${mediaSize.Tablet ? `height: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};` : ''}
+				${mediaHeight.Tablet ? `height: ${mediaHeight.Tablet}${mediaHeightUnits.Tablet};` : ''}
 			}
 		}
 
@@ -2440,31 +2562,44 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.fb-info-box-wrapper.${blockID} .fb-icon-wrapper svg,
 			.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper img {
 				${mediaSize.Mobile ? `width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};` : ''}
-				${mediaSize.Mobile ? `height: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};` : ''}
+				${mediaHeight.Mobile ? `height: ${mediaHeight.Mobile}${mediaHeightUnits.Mobile};` : ''}
 			}
 		}
 
+		.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper img,
 		.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
 			${btnIconSize.Desktop ? `width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};` : ''}
 			${btnIconColor ? `fill: ${btnIconColor};` : "#ffffff"}
+			transform: rotate(${buttonIconRotate.Desktop}deg);
 			transition: all .3s ease-in-out;
 		}
 
-		.fb-info-box-wrapper.${blockID}:hover .fb-btn-icon-wrapper svg {
+		.fb-info-box-wrapper.${blockID}:hover .fb-btn-icon-wrapper svg,
+		.fb-info-box-wrapper.${blockID}:hover .fb-btn-icon-wrapper img {
 			${btnIconHoverColor ? `fill: ${btnIconHoverColor};` : "#ffffff"}
+			transform: rotate(${buttonIconRotateHover.Desktop}deg);
 			transition: all .3s ease-in-out;
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
+			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg,
+			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper img {
 				${btnIconSize.Tablet ? `width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};` : ''}
+				transform: rotate(${buttonIconRotate.Tablet}deg);
 			}
 		}
 
 		@media only screen and (max-width: 767px) {
-			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
+			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper svg,
+			.fb-info-box-wrapper.${blockID} .fb-btn-icon-wrapper img {
 				${btnIconSize.Mobile ? `width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};` : ''}
+				transform: rotate(${buttonIconRotate.Mobile}deg);
 			}
+		}
+		.fb-info-box-wrapper.${blockID}.preset-6 .shape{
+			position: absolute;
+			top: 0;
+			right: 0;
 		}
 		`,
 		[
@@ -2610,8 +2745,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			infoButtonHoverBorderColor,
 			boxBgColor,
 			boxBgHoverColor,
-			mediaSize,
-			mediaSizeUnits,
 			globalZIndex,
 			infoBoxOverflow,
 			globalPaddingUnits,
@@ -2641,10 +2774,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			globalBorderRadiusTablet,
 			globalBorderRadiusMobile,
 
-			mediaBgWidth,
-			mediaBgWidthUnits,
-			mediaBgHeight,
-			mediaBgHeightUnits,
+			mediaSize,
+			mediaSizeUnits,
+			mediaHeight,
+			mediaHeightUnits,
 
 			mediaPaddingUnits,
 			mediaPaddingDesktop,
@@ -2677,6 +2810,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			btnIconColor,
 			btnIconHoverColor,
 			btnIconPosition,
+			buttonIconRotateSwitcher,
+			buttonIconRotate,
+			buttonIconRotateHover,
 			infoIconPosition,
 
 			mediaIconColor,
@@ -2691,6 +2827,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			infoMediaID,
 			infoMediaAlt,
 			infoMediaUrl,
+			infoMediaSize,
 			mediaBackgroundType,
 			mediaClassicColor,
 			mediaGradientColor,
@@ -2743,9 +2880,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const editorStyle = `${fbInfoBoxStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
-	 /**
-	 * Inspector General Controls
-	 */
+	/**
+	* Inspector General Controls
+	*/
 	const generalControls = (
 		<>
 			<div className="fb-presets-wrapper">
@@ -2823,140 +2960,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					<div className="fb-image-upload-field-wrapper">
 						{mediaSwitcher === "image" && (
-							<>
-								<BaseControl
-									label={__("Background Image", "frontis-blocks")}
-									className="fb-advanced-heading-bg-image"
-								>
-									{infoMediaUrl ? (
-										<div
-											className="fb-image-avatar-control"
-											style={{
-												backgroundImage: `url(${infoMediaUrl})`,
-											}}
-										>
-											<button
-												className="fb-image-avatar-delete"
-												onClick={() => {
-													setAttributes({
-														infoMediaUrl: null,
-														infoMediaAlt: null,
-														infoMediaID: null,
-													});
-												}}
-											>
-												<svg
-													width="24"
-													height="24"
-													viewBox="0 0 24 24"
-													fill="none"
-													xmlns="http://www.w3.org/2000/svg"
-												>
-													<path
-														d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-														stroke="#4D4D4D"
-														strokeWidth="1.5"
-														strokeLinecap="round"
-													></path>
-													<path
-														d="M15 9L9 15"
-														stroke="#4D4D4D"
-														strokeWidth="1.5"
-														strokeLinecap="round"
-													></path>
-													<path
-														d="M9 9L15 15"
-														stroke="#4D4D4D"
-														strokeWidth="1.5"
-														strokeLinecap="round"
-													></path>
-												</svg>
-											</button>
-											<button
-												className="fb-image-replace-btn"
-												onClick={() => {
-													const mediaUploader = wp.media({
-														title: __(
-															"Select or Upload Background Image",
-															"frontis-blocks",
-														),
-														button: {
-															text: __(
-																"Use this image",
-																"frontis-blocks",
-															),
-														},
-														multiple: false,
-													});
-
-													mediaUploader.on("select", function () {
-														const attachment = mediaUploader
-															.state()
-															.get("selection")
-															.first()
-															.toJSON();
-														setAttributes({
-															infoMediaUrl: attachment.url,
-															infoMediaAlt: attachment.alt,
-															infoMediaID: attachment.id,
-														});
-													});
-
-													mediaUploader.open();
-												}}
-											>
-												<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C"></path><path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C"></path></svg>
-												Replace
-											</button>
-										</div>
-									) : (
-										<button
-											className="fb-image-upload-btn"
-											onClick={() => {
-												const mediaUploader = wp.media({
-													title: __(
-														"Select or Upload Background Image",
-														"frontis-blocks",
-													),
-													button: {
-														text: __(
-															"Use this image",
-															"frontis-blocks",
-														),
-													},
-													multiple: false,
-												});
-
-												mediaUploader.on("select", function () {
-													const attachment = mediaUploader
-														.state()
-														.get("selection")
-														.first()
-														.toJSON();
-													setAttributes({
-														infoMediaUrl: attachment.url,
-														infoMediaAlt: attachment.alt,
-														infoMediaID: attachment.id,
-													});
-												});
-
-												mediaUploader.open();
-											}}
-										>
-											<svg
-												width="24"
-												height="24"
-												xmlns="http://www.w3.org/2000/svg"
-												fillRule="evenodd"
-												clipRule="evenodd"
-											>
-												<path d="M11.492 10.172l-2.5 3.064-.737-.677 3.737-4.559 3.753 4.585-.753.665-2.5-3.076v7.826h-1v-7.828zm7.008 9.828h-13c-2.481 0-4.5-2.018-4.5-4.5 0-2.178 1.555-4.038 3.698-4.424l.779-.14.043-.789c.185-3.448 3.031-6.147 6.48-6.147 3.449 0 6.295 2.699 6.478 6.147l.044.789.78.14c2.142.386 3.698 2.246 3.698 4.424 0 2.482-2.019 4.5-4.5 4.5m.978-9.908c-.212-3.951-3.472-7.092-7.478-7.092s-7.267 3.141-7.479 7.092c-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.522-5.408"></path>
-											</svg>
-											Upload
-										</button>
-									)}
-								</BaseControl>
-							</>
+							<FB_ImageControl
+								globalImageUrl={infoMediaUrl}
+								setglobalImageUrl={(value) => setAttributes({ infoMediaUrl: value })}
+								globalImageAlt={infoMediaAlt}
+								setglobalImageAlt={(value) => setAttributes({ infoMediaAlt: value })}
+								globalImageID={infoMediaID}
+								setglobalImageID={(value) => setAttributes({ infoMediaID: value })}
+								globalImageSize={infoMediaSize}
+								setglobalImageSize={(value) => setAttributes({ infoMediaSize: value })}
+							/>
 						)}
 
 						{mediaSwitcher === "icon" && (
@@ -3049,7 +3062,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					{info_Button_Switcher && (
 						<>
-
 							<FB_AlignmentControl
 								label={__("Alignment", "frontis-blocks")}
 								globalAlignment={buttonAlignment}
@@ -3072,12 +3084,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							/>
 							{buttonIconSwitcher && (
 								<>
-									<BaseControl>
-										<FBIconPicker
-											value={btnIcon}
-											setIconHandler={buttonIconHandler}
+									<FB_SwitcherControl
+										globalSwitcher={buttonIconType}
+										setGlobalSwitcher={(value) => setAttributes({ buttonIconType: value })}
+										options={[
+											{ label: __('Icon', 'frontis-blocks'), value: 'icon' },
+											{ label: __('Image', 'frontis-blocks'), value: 'image' },
+										]}
+									/>
+									{buttonIconType === 'icon' && (
+										<BaseControl>
+											<FBIconPicker
+												value={btnIcon}
+												setIconHandler={buttonIconHandler}
+											/>
+										</BaseControl>
+									)}
+									{buttonIconType === 'image' && (
+										<FB_ImageControl
+											globalImageUrl={btnImageUrl}
+											setglobalImageUrl={(value) => setAttributes({ btnImageUrl: value })}
+											globalImageAlt={btnImageAlt}
+											setglobalImageAlt={(value) => setAttributes({ btnImageAlt: value })}
+											globalImageID={btnImageID}
+											setglobalImageID={(value) => setAttributes({ btnImageID: value })}
+											isImageSize={false}
 										/>
-									</BaseControl>
+									)}
 									<SelectControl
 										label={__("Icon Position", "frontis-block")}
 										value={btnIconPosition}
@@ -3120,8 +3153,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			>
 				<FB_Range
 					min={0}
-					max={500}
-					label={__("Icon Size", "frontis-blocks")}
+					max={mediaSizeUnits === '%' ? 100 : 1000}
+					label={__("Width", "frontis-blocks")}
 					rangeValue={mediaSize}
 					onChangeHandler={(value) =>
 						setAttributes({ mediaSize: value })
@@ -3131,6 +3164,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					}
 					deviceType={deviceType}
 					units={mediaSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+
+				<FB_Range
+					min={0}
+					max={mediaHeightUnits === '%' ? 100 : 1000}
+					label={__("Height", "frontis-blocks")}
+					rangeValue={mediaHeight}
+					onChangeHandler={(value) =>
+						setAttributes({ mediaHeight: value })
+					}
+					rangeUnitHandler={(value) =>
+						setAttributes({ mediaHeightUnits: value })
+					}
+					deviceType={deviceType}
+					units={mediaHeightUnits}
 					setAttributes={setAttributes}
 					rangeStep={1}
 					resetFallbackValue={""}
@@ -3170,7 +3221,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					normalClassicColor={mediaClassicColor}
 					setNormalClassicColor={(value) => setAttributes({ mediaClassicColor: value === undefined ? '' : value })}
 					normalGradientColor={mediaGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ mediaGradientColor: value === undefined ? '' : value })}
+					setNormalGradientColor={(value) => setAttributes({ mediaGradientColor: value === undefined ? null : value })}
 					normalCustomGradientSwitcher={mediaCustomGradientSwitcher}
 					setNormalCustomGradientSwitcher={(value) => setAttributes({ mediaCustomGradientSwitcher: value })}
 					normalCustomGradientInputValue={mediaCustomGradientInputValue}
@@ -3194,7 +3245,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					hoverClassicColor={mediaHoverClassicColor}
 					setHoverClassicColor={(value) => setAttributes({ mediaHoverClassicColor: value === undefined ? '' : value })}
 					hoverGradientColor={mediaHoverGradientColor}
-					setHoverGradientColor={(value) => setAttributes({ mediaHoverGradientColor: value === undefined ? '' : value })}
+					setHoverGradientColor={(value) => setAttributes({ mediaHoverGradientColor: value === undefined ? null : value })}
 					hoverCustomGradientSwitcher={mediaHoverCustomGradientSwitcher}
 					setHoverCustomGradientSwitcher={(value) => setAttributes({ mediaHoverCustomGradientSwitcher: value })}
 					hoverCustomGradientInputValue={mediaHoverCustomGradientInputValue}
@@ -3213,42 +3264,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					setHoverBackgroundImageRepeat={(value) => setAttributes({ mediaHoverBackgroundImageRepeat: value })}
 					hoverBackgroundImageSize={mediaHoverBackgroundImageSize}
 					setHoverBackgroundImageSize={(value) => setAttributes({ mediaHoverBackgroundImageSize: value })}
-				/>
-
-				<FB_Range
-					min={0}
-					max={500}
-					label={__("Background Width", "frontis-blocks")}
-					rangeValue={mediaBgWidth}
-					onChangeHandler={(value) =>
-						setAttributes({ mediaBgWidth: value })
-					}
-					rangeUnitHandler={(value) =>
-						setAttributes({ mediaBgWidthUnits: value })
-					}
-					deviceType={deviceType}
-					units={mediaBgWidthUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
-
-				<FB_Range
-					min={0}
-					max={500}
-					label={__("Background Height", "frontis-blocks")}
-					rangeValue={mediaBgHeight}
-					onChangeHandler={(value) =>
-						setAttributes({ mediaBgHeight: value })
-					}
-					rangeUnitHandler={(value) =>
-						setAttributes({ mediaBgHeightUnits: value })
-					}
-					deviceType={deviceType}
-					units={mediaBgHeightUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
 				/>
 
 				<FB_Spacing
@@ -3355,9 +3370,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					globalTypoType={headingGlobalTypoType}
 					onChangeGlobalTypoType={(value) => {
-						setAttributes({ 
-							headingGlobalTypoType: value, 
-							headingGlobalTypoSwitcher: value === 'default' ? {...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+						setAttributes({
+							headingGlobalTypoType: value,
+							headingGlobalTypoSwitcher: value === 'default' ? { ...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 						})
 					}}
 
@@ -3365,34 +3380,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					onChangeGlobalTypoOption={(value) => setAttributes({ headingGlobalTypoOption: value })}
 
 					fontFamily={headingFontFamily}
-					onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontFamily: value && false} })}
+					onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontFamily: value && false } })}
 
 					fontSize={headingFontSize}
-					onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontSize: value && false} })}
+					onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontSize: value && false } })}
 
 					fontSizeUnits={headingFontSizeUnits}
 					onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
 
 					fontWeight={headingFontWeight}
-					onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontWeight: value && false} })}
+					onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontWeight: value && false } })}
 
 					fontStyle={headingFontStyle}
-					onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontStyle: value && false} })}
+					onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontStyle: value && false } })}
 
 					textTransform={headingTextTransform}
-					onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textTransform: value && false} })}
+					onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, textTransform: value && false } })}
 
 					textDecoration={headingTextDecoration}
-					onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textDecoration: value && false} })}
+					onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, textDecoration: value && false } })}
 
 					letterSpacing={headingLetterSpacing}
-					onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, letterSpacing: value && false} })}
+					onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 					letterSpacingUnits={headingLetterSpacingUnits}
 					onChangeLetterSpacingUnit={(value) => setAttributes({ headingLetterSpacingUnits: value })}
 
 					lineHeight={headingLineHeight}
-					onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, lineHeight: value && false} })}
+					onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, lineHeight: value && false } })}
 
 					lineHeightUnits={headingLineHeightUnits}
 					onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
@@ -3533,9 +3548,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						globalTypoType={subHeadingGlobalTypoType}
 						onChangeGlobalTypoType={(value) => {
-							setAttributes({ 
-								subHeadingGlobalTypoType: value, 
-								subHeadingGlobalTypoSwitcher: value === 'default' ? {...subHeadingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...subHeadingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+							setAttributes({
+								subHeadingGlobalTypoType: value,
+								subHeadingGlobalTypoSwitcher: value === 'default' ? { ...subHeadingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...subHeadingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 							})
 						}}
 
@@ -3543,34 +3558,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						onChangeGlobalTypoOption={(value) => setAttributes({ subHeadingGlobalTypoOption: value })}
 
 						fontFamily={subHeadingFontFamily}
-						onChangeFontFamily={(value) => setAttributes({ subHeadingFontFamily: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontFamily: value && false} })}
+						onChangeFontFamily={(value) => setAttributes({ subHeadingFontFamily: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, fontFamily: value && false } })}
 
 						fontSize={subHeadingFontSize}
-						onChangeFontSize={(value) => setAttributes({ subHeadingFontSize: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontSize: value && false} })}
+						onChangeFontSize={(value) => setAttributes({ subHeadingFontSize: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, fontSize: value && false } })}
 
 						fontSizeUnits={subHeadingFontSizeUnits}
 						onChangeFontSizeUnit={(value) => setAttributes({ subHeadingFontSizeUnits: value })}
 
 						fontWeight={subHeadingFontWeight}
-						onChangeFontWeight={(value) => setAttributes({ subHeadingFontWeight: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontWeight: value && false} })}
+						onChangeFontWeight={(value) => setAttributes({ subHeadingFontWeight: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, fontWeight: value && false } })}
 
 						fontStyle={subHeadingFontStyle}
-						onChangeFontStyle={(value) => setAttributes({ subHeadingFontStyle: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, fontStyle: value && false} })}
+						onChangeFontStyle={(value) => setAttributes({ subHeadingFontStyle: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, fontStyle: value && false } })}
 
 						textTransform={subHeadingTextTransform}
-						onChangeTextTransform={(value) => setAttributes({ subHeadingTextTransform: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, textTransform: value && false} })}
+						onChangeTextTransform={(value) => setAttributes({ subHeadingTextTransform: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, textTransform: value && false } })}
 
 						textDecoration={subHeadingTextDecoration}
-						onChangeTextDecoration={(value) => setAttributes({ subHeadingTextDecoration: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, textDecoration: value && false} })}
+						onChangeTextDecoration={(value) => setAttributes({ subHeadingTextDecoration: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, textDecoration: value && false } })}
 
 						letterSpacing={subHeadingLetterSpacing}
-						onChangeLetterSpacing={(value) => setAttributes({ subHeadingLetterSpacing: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, letterSpacing: value && false} })}
+						onChangeLetterSpacing={(value) => setAttributes({ subHeadingLetterSpacing: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 						letterSpacingUnits={subHeadingLetterSpacingUnits}
 						onChangeLetterSpacingUnit={(value) => setAttributes({ subHeadingLetterSpacingUnits: value })}
 
 						lineHeight={subHeadingLineHeight}
-						onChangeLineHeight={(value) => setAttributes({ subHeadingLineHeight: value, subHeadingGlobalTypoSwitcher: {...subHeadingGlobalTypoSwitcher, lineHeight: value && false} })}
+						onChangeLineHeight={(value) => setAttributes({ subHeadingLineHeight: value, subHeadingGlobalTypoSwitcher: { ...subHeadingGlobalTypoSwitcher, lineHeight: value && false } })}
 
 						lineHeightUnits={subHeadingLineHeightUnits}
 						onChangeLineHeightUnit={(value) => setAttributes({ subHeadingLineHeightUnits: value })}
@@ -3649,9 +3664,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						globalTypoType={buttonGlobalTypoType}
 						onChangeGlobalTypoType={(value) => {
-							setAttributes({ 
-								buttonGlobalTypoType: value, 
-								buttonGlobalTypoSwitcher: value === 'default' ? {...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+							setAttributes({
+								buttonGlobalTypoType: value,
+								buttonGlobalTypoSwitcher: value === 'default' ? { ...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 							})
 						}}
 
@@ -3659,34 +3674,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						onChangeGlobalTypoOption={(value) => setAttributes({ buttonGlobalTypoOption: value })}
 
 						fontFamily={buttonFontFamily}
-						onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontFamily: value && false} })}
+						onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontFamily: value && false } })}
 
 						fontSize={buttonFontSize}
-						onChangeFontSize={(value) => setAttributes({ buttonFontSize: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontSize: value && false} })}
+						onChangeFontSize={(value) => setAttributes({ buttonFontSize: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontSize: value && false } })}
 
 						fontSizeUnits={buttonFontSizeUnits}
 						onChangeFontSizeUnit={(value) => setAttributes({ buttonFontSizeUnits: value })}
 
 						fontWeight={buttonFontWeight}
-						onChangeFontWeight={(value) => setAttributes({ buttonFontWeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontWeight: value && false} })}
+						onChangeFontWeight={(value) => setAttributes({ buttonFontWeight: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontWeight: value && false } })}
 
 						fontStyle={buttonFontStyle}
-						onChangeFontStyle={(value) => setAttributes({ buttonFontStyle: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontStyle: value && false} })}
+						onChangeFontStyle={(value) => setAttributes({ buttonFontStyle: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontStyle: value && false } })}
 
 						textTransform={buttonTextTransform}
-						onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textTransform: value && false} })}
+						onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, textTransform: value && false } })}
 
 						textDecoration={buttonTextDecoration}
-						onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textDecoration: value && false} })}
+						onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, textDecoration: value && false } })}
 
 						letterSpacing={buttonLetterSpacing}
-						onChangeLetterSpacing={(value) => setAttributes({ buttonLetterSpacing: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, letterSpacing: value && false} })}
+						onChangeLetterSpacing={(value) => setAttributes({ buttonLetterSpacing: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 						letterSpacingUnits={buttonLetterSpacingUnits}
 						onChangeLetterSpacingUnit={(value) => setAttributes({ buttonLetterSpacingUnits: value })}
 
 						lineHeight={buttonLineHeight}
-						onChangeLineHeight={(value) => setAttributes({ buttonLineHeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, lineHeight: value && false} })}
+						onChangeLineHeight={(value) => setAttributes({ buttonLineHeight: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, lineHeight: value && false } })}
 
 						lineHeightUnits={buttonLineHeightUnits}
 						onChangeLineHeightUnit={(value) => setAttributes({ buttonLineHeightUnits: value })}
@@ -3744,6 +3759,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					{/* Button Icon color */}
 					{buttonIconSwitcher && <>
+						<FB_Range
+							min={0}
+							max={btnIconSizeUnits === '%' ? 100 : 200}
+							label={__("Icon Size", "frontis-blocks")}
+							rangeValue={btnIconSize}
+							onChangeHandler={(value) =>
+								setAttributes({ btnIconSize: value })
+							}
+							rangeUnitHandler={(value) =>
+								setAttributes({ btnIconSizeUnits: value })
+							}
+							deviceType={deviceType}
+							units={btnIconSizeUnits}
+							setAttributes={setAttributes}
+							rangeStep={1}
+							resetFallbackValue={''}
+						/>
+
 						<FB_SwitcherControl
 							label={__("Icon Color", "frontis-blocks")}
 							globalSwitcher={btnIconColorSwitcher}
@@ -3763,6 +3796,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								label={__("Hover Color", "frontis-blocks")}
 								globalColor={btnIconHoverColor}
 								setGlobalColor={(value) => setAttributes({ btnIconHoverColor: value === undefined ? '' : value })}
+							/>
+						)}
+
+						<FB_SwitcherControl
+							label={__("Icon Rotation", "frontis-blocks")}
+							globalSwitcher={buttonIconRotateSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ buttonIconRotateSwitcher: value })}
+						/>
+
+						{buttonIconRotateSwitcher === 'normal' && (
+							<FB_Range
+								min={-360}
+								max={360}
+								label={__("Icon Rotation", "frontis-blocks")}
+								rangeValue={buttonIconRotate}
+								onChangeHandler={(value) => setAttributes({ buttonIconRotate: value === 0 ? undefined : value })}
+								deviceType={deviceType}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={""}
+								isRangeUnit={false}
+
+							/>
+						)}
+
+						{buttonIconRotateSwitcher === 'hover' && (
+							<FB_Range
+								min={-360}
+								max={360}
+								label={__("Icon Rotation", "frontis-blocks")}
+								rangeValue={buttonIconRotateHover}
+								onChangeHandler={(value) => setAttributes({ buttonIconRotateHover: value === 0 ? undefined : value })}
+								deviceType={deviceType}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={""}
+								isRangeUnit={false}
 							/>
 						)}
 					</>}
@@ -3859,7 +3929,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		</>
 	);
-		
+
 	/**
 	 * Inspector Advanced Controls
 	 */
@@ -3870,7 +3940,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<PanelBody
 						title={__("Layout", "frontis-blocks")}
 						initialOpen={true}
-						className="fb-setting-layout-header" 
+						className="fb-setting-layout-header"
 					>
 						<FB_Range
 							min={0}
@@ -4147,7 +4217,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			</div>
 		</>
 	);
-	
+
 	return (
 		<>
 			<style>

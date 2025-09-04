@@ -899,14 +899,27 @@ class PostGrid {
                 <?php endif; ?>
             <?php endforeach;
 
-            if ($total_pages > 1 && $show_load_more_switcher == 'true') { ?>
-                <div class="fb_load_more_wrapper">
-                    <?php if ($load_more_type === 'button'): ?>
+            $has_more = (int)$current_page < (int)$total_pages;
 
-                        <div class="fb_load_more" data-current_page="<?php echo esc_attr($current_page); ?>"></div>
+            // show load more button or pagination
+            if ($show_load_more_switcher == 'true') :
 
-                    <?php elseif ( $load_more_type === 'pagination' ) : ?>
-                        <div class="fb_pagination_wrapper" data-current_page="<?php echo esc_attr( $current_page ); ?>" data-total_pages="<?php echo esc_attr( $total_pages ); ?>">
+                // 1) LOAD MORE BUTTON: show when there is more page
+                if ($load_more_type === 'button' && $has_more) : ?>
+                    <div class="fb_load_more_wrapper">
+                        <div class="fb_load_more"
+                            data-current_page="<?php echo esc_attr($current_page); ?>"
+                            data-total_pages="<?php echo esc_attr($total_pages); ?>">
+                        </div>
+                    </div>
+                <?php endif;
+
+                // 2) PAGINATION: show when total_pages > 1 (also on last page)
+                if ($load_more_type === 'pagination' && (int)$total_pages > 1) : ?>
+                    <div class="fb_load_more_wrapper">
+                        <div class="fb_pagination_wrapper"
+                            data-current_page="<?php echo esc_attr($current_page); ?>"
+                            data-total_pages="<?php echo esc_attr($total_pages); ?>">
 
                             <!-- Previous Button -->
                             <button class="fb_pagination_previous <?php echo $current_page==1 ? 'disabled' : ''; ?>">
@@ -919,38 +932,32 @@ class PostGrid {
 
                             <?php
                             $range = 2; // current page before and after how many pages
-
                             echo '<div class="fb_pagination">';
 
-                            if ($total_pages <= 1) return; // if one page then no pagination
+                            // if there is only one page, the list will not be shown, but the wrapper will still be there
+                            if ($total_pages > 1) {
 
-                            /**
-                             * If current page is in the middle
-                             */
-                            if ($current_page > ($range + 2)) {
-                                echo '<button class="fb_pagination_item" data-pagenumber="1">1</button>';
-                                echo '<span class="fb_pagination_ellipsis">...</span>';
+                                // start dots
+                                if ($current_page > ($range + 2)) {
+                                    echo '<button class="fb_pagination_item" data-pagenumber="1">1</button>';
+                                    echo '<span class="fb_pagination_ellipsis">...</span>';
+                                }
+
+                                // main page numbers
+                                $start = max(1, $current_page - $range);
+                                $end   = min($total_pages, $current_page + $range);
+
+                                for ($page = $start; $page <= $end; $page++) {
+                                    $active = $page == $current_page ? 'active' : '';
+                                    echo '<button class="fb_pagination_item ' . esc_attr($active) . '" data-pagenumber="' . esc_attr($page) . '">' . esc_html($page) . '</button>';
+                                }
+
+                                // end dots
+                                if ($current_page < $total_pages - ($range + 2)) {
+                                    echo '<span class="fb_pagination_ellipsis">...</span>';
+                                    echo '<button class="fb_pagination_item" data-pagenumber="' . $total_pages . '">' . $total_pages . '</button>';
+                                }
                             }
-
-                            /**
-                             * Loop through page numbers
-                             */
-                            $start = max(1, $current_page - $range);
-                            $end = min($total_pages, $current_page + $range);
-
-                            for ($page = $start; $page <= $end; $page++) {
-                                $active = $page == $current_page ? 'active' : '';
-                                echo '<button class="fb_pagination_item ' . esc_attr($active) . '" data-pagenumber="' . esc_attr($page) . '">' . esc_html($page) . '</button>';
-                            }
-
-                            /**
-                             * If the last page is far away
-                             */
-                            if ($current_page < $total_pages - ($range + 2)) {
-                                echo '<span class="fb_pagination_ellipsis">...</span>';
-                                echo '<button class="fb_pagination_item" data-pagenumber="' . $total_pages . '">' . $total_pages . '</button>';
-                            }
-
                             echo '</div>';
                             ?>
 
@@ -964,13 +971,15 @@ class PostGrid {
                             </button>
 
                         </div>
+                    </div>
+                <?php endif;
 
-                    <?php endif; ?>
-                </div>
-            <?php }
-        } else { ?>
-            <div class="empty-post">Nothing found.</div>
-        <?php }
+            endif; // $show_load_more_switcher
+        } else {
+            if ((int)$offset === 0) {
+                echo '<div class="empty-post">Nothing found.</div>';
+            }
+        }
 
         $content = ob_get_contents();
         ob_end_clean();
@@ -979,9 +988,10 @@ class PostGrid {
          * Send response with content and total pages
          */
         wp_send_json_success(array(
-            'content' => $content,
-            'total_pages' => $total_pages,
-            'current_page' => $current_page
+            'content'      => $content,
+            'total_pages'  => (int)$total_pages,
+            'current_page' => (int)$current_page,
+            'has_more'     => ((int)$current_page < (int)$total_pages),
         ));
     }
 }

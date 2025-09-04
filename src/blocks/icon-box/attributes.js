@@ -7,6 +7,14 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
     iconBoxPresetStyle: {
         type: 'string',
         default: 'preset-1',
