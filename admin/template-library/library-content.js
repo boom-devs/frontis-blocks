@@ -101,7 +101,7 @@ const TemplateCard = ({ item, libraryData, setLibraryData, data }) => {
                                 <ClipLoader color="#fff" size={16} />
                             </>
                         ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <svg xmlns="https://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                 <path d="M9.99316 10H10.0007" stroke="#0B0C0E" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M9.98682 15H9.99432" stroke="#0B0C0E" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M9.99976 5H10.0073" stroke="#0B0C0E" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/>
@@ -138,7 +138,7 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
     const CardListOptions = [
         {
             svg: (
-                <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
+                <svg xmlns='https://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
                     <path d='M3.88886 9.66294C4.39331 10 5.09554 10 6.5 10C7.90447 10 8.6067 10 9.11115 9.66294C9.32953 9.51702 9.51703 9.32952 9.66294 9.11114C10 8.60669 10 7.90446 10 6.5C10 5.09554 10 4.39331 9.66294 3.88886C9.51703 3.67048 9.32953 3.48298 9.11115 3.33706C8.6067 3 7.90447 3 6.5 3C5.09554 3 4.39331 3 3.88886 3.33706C3.67048 3.48298 3.48298 3.67048 3.33707 3.88886C3 4.39331 3 5.09554 3 6.5C3 7.90446 3 8.60669 3.33707 9.11114C3.48298 9.32952 3.67048 9.51702 3.88886 9.66294Z' stroke='#404655' strokeWidth='1.5' strokeLinejoin='round'/>
                     <path d='M14.8888 9.66294C15.3933 10 16.0955 10 17.5 10C18.9044 10 19.6067 10 20.1111 9.66294C20.3295 9.51702 20.517 9.32952 20.6629 9.11114C21 8.60669 21 7.90446 21 6.5C21 5.09554 21 4.39331 20.6629 3.88886C20.517 3.67048 20.3295 3.48298 20.1111 3.33706C19.6067 3 18.9044 3 17.5 3C16.0955 3 15.3933 3 14.8888 3.33706C14.6705 3.48298 14.483 3.67048 14.337 3.88886C14 4.39331 14 5.09554 14 6.5C14 7.90446 14 8.60669 14.337 9.11114C14.483 9.32952 14.6705 9.51702 14.8888 9.66294Z' stroke='#404655' strokeWidth='1.5' strokeLinejoin='round'/>
                     <path d='M3.88886 20.6629C4.39331 21 5.09554 21 6.5 21C7.90447 21 8.6067 21 9.11115 20.6629C9.32953 20.517 9.51703 20.3295 9.66294 20.1111C10 19.6067 10 18.9045 10 17.5C10 16.0955 10 15.3933 9.66294 14.8889C9.51703 14.6705 9.32953 14.483 9.11115 14.3371C8.6067 14 7.90447 14 6.5 14C5.09554 14 4.39331 14 3.88886 14.3371C3.67048 14.483 3.48298 14.6705 3.33707 14.8889C3 15.3933 3 16.0955 3 17.5C3 18.9045 3 19.6067 3.33707 20.1111C3.48298 20.3295 3.67048 20.517 3.88886 20.6629Z' stroke='#404655' strokeWidth='1.5' strokeLinejoin='round'/>
@@ -149,7 +149,7 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
         },
         {
             svg: (
-                <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='https://www.w3.org/2000/svg'>
                     <path d='M4 5H20' stroke='#404655' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'/>
                     <path d='M4 12H20' stroke='#404655' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'/>
                     <path d='M4 19H20' stroke='#404655' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round'/>
@@ -245,7 +245,7 @@ const LibraryContent = ({ activeTab, activeCategory, data, libraryData, setLibra
                         <div className="fb-template-library-search-wrapper">
                             <div className="fb-search-input-wrapper">
                                 <div className="fb-search-input-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <svg xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                                         <g clipPath="url(#clip0_13116_5586)">
                                             <circle cx="8.625" cy="8.625" r="7.125" stroke="white" strokeWidth="1.5" />
                                             <path d="M13.875 13.875L16.5 16.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
