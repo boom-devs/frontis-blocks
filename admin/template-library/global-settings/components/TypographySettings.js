@@ -973,70 +973,59 @@ const TypographySettings = (props) => {
 
 	const isAfterSave = useAfterSave();
 
-	useEffect(() => {
-		const handleUpdateSettings = async () => {
-			if (isAfterSave && isMount) {
-				if (typography) {
-					const response = await updateGlobalStyle(typography, 'fb_update_typography');
-					if (response.success) {
-						setTypography(response.data.data);
-						localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
-					}
-				}
+	// useEffect(() => {
+	// 	const handleUpdateSettings = async () => {
+	// 		if (isAfterSave && isMount) {
+	// 			if (typography) {
+	// 				const response = await updateGlobalStyle(typography, 'fb_update_typography');
+	// 				if (response.success) {
+	// 					setTypography(response.data.data);
+	// 				}
+	// 			}
 
-				if (customTypography) {
-					const response = await updateGlobalStyle(customTypography, 'fb_update_custom_typography');
-					if (response.success) {
-						setCustomTypography(response.data.data || {});
-						localStorage.setItem('fb_custom_typography', JSON.stringify(response.data.data));
-					}
-				}
+	// 			if (customTypography) {
+	// 				const response = await updateGlobalStyle(customTypography, 'fb_update_custom_typography');
+	// 				if (response.success) {
+	// 					setCustomTypography(response.data.data || {});
+	// 				}
+	// 			}
 
-				if (globalTypography) {
-					const response = await updateGlobalStyle(globalTypography, 'fb_update_globaltypo');
-					if (response.success) {
-						setGlobalTypography(response.data.data);
-						localStorage.setItem('fb_globaltypo', JSON.stringify(response.data.data));
-					}
-				}
+	// 			if (globalTypography) {
+	// 				const response = await updateGlobalStyle(globalTypography, 'fb_update_globaltypo');
+	// 				if (response.success) {
+	// 					setGlobalTypography(response.data.data);
+	// 				}
+	// 			}
+	// 			setIsMount(false);
+	// 		}
+	// 	}
 
-				if (fontFamilies) {
-					const response = await updateGlobalStyle(fontFamilies, 'fb_update_fontfamilies');
-					if (response.success) {
-						setFontFamilies(response.data.data);
-						localStorage.setItem('fb_fontFamilies', JSON.stringify(response.data.data));
-					}
-				}
-				setIsMount(false);
-			}
-		}
+	// 	handleUpdateSettings();
+	// }, [isAfterSave])
 
-		handleUpdateSettings();
-	}, [isAfterSave])
+	// useEffect(() => {
+	// 	if (isMount) {
+	// 		wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
+	// 	}
+	// }, [isMount]);
 
-	useEffect(() => {
-		if (isMount) {
-			wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
-		}
-	}, [isMount]);
+	// useEffect(() => {
+	// 	if (globalTypography) {
+	// 		generateCSSVariables(globalTypography, deviceType);
+	// 	}
 
-	useEffect(() => {
-		if (globalTypography) {
-			generateCSSVariables(globalTypography, deviceType);
-		}
-
-	}, [globalTypography, deviceType]);
+	// }, [globalTypography, deviceType]);
 
 	// Load saved data and generate root css
-	useEffect(() => {
-		setTimeout(() => {
-			let globalTypoData = localStorage.getItem("fb_globaltypo");
-			if (globalTypoData !== 'null') {
-				globalTypoData = JSON.parse(globalTypoData);
-				setGlobalTypography(globalTypoData)
-			}
-		}, 1000);
-	}, [deviceType]);
+	// useEffect(() => {
+	// 	setTimeout(() => {
+	// 		let globalTypoData = localStorage.getItem("fb_globaltypo");
+	// 		if (globalTypoData !== 'null') {
+	// 			globalTypoData = JSON.parse(globalTypoData);
+	// 			setGlobalTypography(globalTypoData)
+	// 		}
+	// 	}, 1000);
+	// }, [deviceType]);
 
 
 	return (
