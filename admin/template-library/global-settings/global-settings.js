@@ -22,9 +22,6 @@ function FsiGbTypography({ template }) {
 	const deviceType = useDeviceType();
 	const isAfterSave = useAfterSave();
 
-	console.log('template:', template)
-	// console.log(template.gradientColors);
-
 	// State management
 	const [globalColors, setGlobalColors] = useState(template.colors);
 	const [customColors, setCustomColors] = useState(template.customColors);

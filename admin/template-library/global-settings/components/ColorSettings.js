@@ -27,8 +27,6 @@ const ColorSettings = ({
 	setIsLoading,
 }) => {
 
-	console.log("customGrediantColor" ,customGradientColors);
-
 	// Memoized theme colors
 	const themeColors = useMemo(
 		() => frontisBlocksAdmin?.theme_colors || defaultColors,
