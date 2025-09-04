@@ -124,7 +124,7 @@ Automatic Block Recovery
 Copy & Paste Styles
 Quick Action Bar
 
-Resolved Issues
+Resolved Issues:
 - Advanced Button Block – Fixed background color reset, removed width limitation (now supports larger values), eliminated unnecessary icon gap for icon-only buttons, removed unwanted placeholder text when button text is cleared, and resolved wrapper conflict with slider controls.
 
 - Post Grid Block – Fixed “Read More” button background reset issue and ensured “Load More” button hides automatically once all posts are loaded.
