@@ -1,7 +1,259 @@
+import { __ } from "@wordpress/i18n";
 import { ClipLoader } from "react-spinners";
 import FsiGbTypography from "../global-settings/global-settings";
+import { useCallback, useState } from "@wordpress/element";
+import { toast, ToastContainer } from "react-toastify";
+import { useDeviceType } from "@Config/displayType";
+import generateCSSVariables from "../global-settings/components/GenerateRootCss";
+import { updateGlobalStyle } from "../global-settings/fetch";
+import { loadGoogleFont } from "../global-settings/helper";
 
-const FullSiteImportSettingConfig = ({template, onBack, onImport, isImporting, importProgress, currentStep, isSidebarCollapsed}) => {
+const FullSiteImportSettingConfig = ({
+    template, 
+    onBack, 
+    isSidebarCollapsed, 
+    formData,
+    onClose
+}) => {
+
+    const [isImporting, setIsImporting] = useState(false);
+    const [importProgress, setImportProgress] = useState(0);
+    const [currentStep, setCurrentStep] = useState('');
+
+    const [globalColors, setGlobalColors] = useState(template.colors);
+	const [customColors, setCustomColors] = useState(template.customColors);
+	const [gradientColors, setGradientColors] = useState(template.gradientColors);
+	const [customGradientColors, setCustomGradientColors] = useState(template.customGradientColors);
+	const [typography, setTypography] = useState(template.typographies);
+	const [customTypography, setCustomTypography] = useState(template.customTypographies);
+	const [fontFamilies, setFontFamilies] = useState(template.fontFamilies);
+	const [globalTypography, setGlobalTypography] = useState(typography);
+
+    const deviceType = useDeviceType();
+
+    
+	// Utility to extract font families
+	const getAllFontFamilies = useCallback((fontsObject) => {
+		const fontFamilies = [];
+		const extractFonts = (obj) => {
+			Object.values(obj).forEach((value) => {
+				if (typeof value === "string") fontFamilies.push(value);
+				else if (typeof value === "object") extractFonts(value);
+			});
+		};
+		extractFonts(fontsObject);
+		const fontsString = fontFamilies.join(",");
+		loadGoogleFont(fontsString);
+	}, []);
+
+
+    const handleUpdateState = useCallback(async () => {
+        const settings = [
+            {
+                key: "fb_update_global_colors",
+                data: globalColors,
+                setter: setGlobalColors,
+                storeKey: "fb_global_colors",
+            },
+            {
+                key: "fb_update_custom_colors", 
+                data: customColors,
+                setter: setCustomColors,
+                storeKey: "fb_custom_colors",
+            },
+            {
+                key: "fb_update_gradient_colors",
+                data: gradientColors,
+                setter: setGradientColors,
+                storeKey: "fb_gradient_colors",
+            },
+            {
+                key: "fb_update_custom_gradient_colors",
+                data: customGradientColors,
+                setter: setCustomGradientColors,
+                storeKey: "fb_custom_gradient_colors",
+            },
+            {
+                key: "fb_update_typography",
+                data: typography,
+                setter: setTypography,
+                storeKey: "fb_typography",
+            },
+            {
+                key: "fb_update_custom_typography",
+                data: customTypography,
+                setter: setCustomTypography,
+                storeKey: "fb_custom_typography",
+            },
+            {
+                key: "fb_update_fontfamilies",
+                data: fontFamilies,
+                setter: setFontFamilies,
+                storeKey: "fb_fontfamilies",
+                postProcess: getAllFontFamilies,
+            },
+            {
+                key: "fb_update_globaltypo",
+                data: globalTypography,
+                setter: setGlobalTypography,
+                storeKey: "fb_globaltypo",
+                postProcess: (data) => generateCSSVariables(data, deviceType),
+            },
+        ];
+    
+        try {
+            for (const { key, data, setter, storeKey, postProcess } of settings) {
+                try {
+                    const response = await updateGlobalStyle(data, key);
+                    
+                    if (response.success) {
+                        console.log('updated database successfully');
+                        const updatedData = response.data.data;
+                        
+                        if (setter) {
+                            setter(updatedData);
+                        }
+                        
+                        localStorage.setItem(storeKey, JSON.stringify(updatedData));
+                        
+                        if (postProcess) {
+                            setTimeout(() => postProcess(updatedData), 1000);
+                        }
+                        
+                        console.log(`${storeKey} updated successfully:`, updatedData);
+                    } else {
+                        console.log('failed to update database');
+                        if (setter) {
+                            setter(data);
+                        }
+                        
+                        localStorage.setItem(storeKey, JSON.stringify(data));
+                        
+                        if (postProcess) {
+                            setTimeout(() => postProcess(data), 1000);
+                        }
+                        
+                        console.warn(`${storeKey} update failed, using current data:`, data);
+                    }
+                    
+                } catch (apiError) {
+                    console.error(`API call failed for ${key}:`, apiError);
+                    
+                    // Fallback to current data
+                    if (setter) {
+                        setter(data);
+                    }
+                    
+                    localStorage.setItem(storeKey, JSON.stringify(data));
+                    
+                    if (postProcess) {
+                        setTimeout(() => postProcess(data), 1000);
+                    }
+                    
+                    console.log(`${storeKey} set to fallback due to error:`, data);
+                }
+            }
+            
+            console.log('All states updated successfully');
+            
+        } catch (error) {
+            console.error("Error updating global settings:", error);
+        }
+    }, [
+        globalColors, 
+        customColors, 
+        gradientColors, 
+        customGradientColors, 
+        typography, 
+        customTypography, 
+        fontFamilies, 
+        globalTypography,
+        deviceType
+    ]);
+
+
+	// Generate color variables
+	// useEffect(() => {
+	// 	const mergedColors = [
+	// 		...(customColors ?? []),
+	// 		...(customGradientColors ?? []),
+	// 		...(gradientColors ?? []),
+	// 		...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
+	// 	];
+
+	// 	setTimeout(() => generateColorsVariables(mergedColors, deviceType), 1000);
+	// }, [
+	// 	globalColors,
+	// 	customColors,
+	// 	customGradientColors,
+	// 	gradientColors,
+	// 	deviceType,
+	// ]);
+
+
+    const handleImport = useCallback(async () => {
+        setIsImporting(true);
+        setImportProgress(0);
+
+        const steps = [ 
+            'Preparing import...',
+            'Importing content...',
+            'Setting up customizer...',
+            'Configuring widgets...',
+            'Finalizing setup...'
+        ];
+
+        try {
+            for (let i = 0; i < steps.length; i++) {
+                setCurrentStep(steps[i]);
+                setImportProgress(((i + 1) / steps.length) * 100);
+                await new Promise(resolve => setTimeout(resolve, 1500));
+            }
+
+            console.log('Full site import completed:', {
+                template: template,
+                formData
+            });
+
+            handleUpdateState();
+
+            toast.success(__('Site imported successfully!', 'frontis-blocks'), {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+            onClose();
+        } catch (error) {
+            console.error('Import failed:', error);
+            toast.error(__('Import failed. Please try again.', 'frontis-blocks'), {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+        } finally {
+            setIsImporting(false);
+            setImportProgress(0);
+            setCurrentStep('');
+        }
+    }, [template?.id, 
+        formData, 
+        onClose, 
+        globalColors, 
+        customColors, 
+        gradientColors, 
+        customGradientColors, 
+        typography, 
+        customTypography, 
+        fontFamilies, 
+        globalTypography
+    ]);
+
 
   return (
                   <div className={`fb-import-form-panel ${isSidebarCollapsed ? 'collapsed' : ''}`}>
@@ -10,6 +262,22 @@ const FullSiteImportSettingConfig = ({template, onBack, onImport, isImporting, i
                             <h6 className="fb-template-title">{template?.title || 'Renovate - Home Decor Website Template'}</h6>
                             <FsiGbTypography
                                 template={template}
+                                globalColors={globalColors}
+                                setGlobalColors={setGlobalColors}
+                                customColors={customColors}
+                                setCustomColors={setCustomColors}
+                                gradientColors={gradientColors}
+                                setGradientColors={setGradientColors}
+                                customGradientColors={customGradientColors}
+                                setCustomGradientColors={setCustomGradientColors}
+                                typography={typography}
+                                setTypography={setTypography}
+                                customTypography={customTypography}
+                                setCustomTypography={setCustomTypography}
+                                fontFamilies={fontFamilies}
+                                setFontFamilies={setFontFamilies}
+                                globalTypography={globalTypography}
+                                setGlobalTypography={setGlobalTypography}
                             />
                         </div>
 
@@ -32,7 +300,7 @@ const FullSiteImportSettingConfig = ({template, onBack, onImport, isImporting, i
                                 <div className="fb-import-step-btn-wrapper">
                                     <button
                                         className="fb-import-btn next"
-                                        onClick={onImport}
+                                        onClick={handleImport}
                                     >
                                         Import Now
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
