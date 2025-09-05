@@ -21,7 +21,7 @@ import { useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
-import {BADGE_ALIGNMENT, BADGE_POSITION, BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, EMAIL_ICON_POSITION, EMAIL_ICON_SWITCHER, HEADING, IMAGE_SOCIAL_ICON_POSITION, OVERFLOW_OP, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE, PRESETS} from "./constants/constants";
+import {BADGE_ALIGNMENT, BADGE_POSITION, BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, EMAIL_ICON_POSITION, EMAIL_ICON_SWITCHER, HEADING, IMAGE_SOCIAL_ICON_POSITION, OVERFLOW_OP, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE, PRESETS, ICON_ALIGN} from "./constants/constants";
 
 import SortableItem from './sortableItem.js';
 import FB_Spacing from '@Components/spacing';
@@ -50,7 +50,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		//Presets
 		teamMemberPresetStyle,
-		
+
+		//Wrapper Button Icon Settings
+		buttonIconAlign,
+		buttonIcon,
+
 		blockID,
 		blockStyle,
 		// deviceType,
@@ -5135,6 +5139,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						checked={socialIconBtnSwitcher}
 						onChange={(value) => setAttributes({ socialIconBtnSwitcher: value })}
 					/>
+					<BaseControl label={__("Wrapper Icon", "frontis-blocks")}>
+						<ButtonGroup>
+							{ICON_ALIGN.map((item, key) => (
+								<Button
+									key={key}
+									onClick={() => setAttributes({ buttonIconAlign: item.value })}
+									className={`fb-setting-text-alignment-single-btn ${buttonIconAlign === item.value ? 'active' : ''}`}
+								>
+									{item.label}
+								</Button>
+							))}
+						</ButtonGroup>
+					</BaseControl>
+					
 
 					<div className="fb-feature-wrapper">
 						<DndContext

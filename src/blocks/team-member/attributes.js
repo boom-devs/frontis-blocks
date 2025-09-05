@@ -3105,6 +3105,15 @@ const attributes = {
         type: 'string',
         default: 'preset-0',
     },
+	/** Wrapper Icon Settings */
+    buttonIconAlign: {
+        type: "string",
+        default: "none",
+    },
+    buttonIcon: {
+		type: 'string',
+		default: 'angle-right',
+	},
 };
 
 export default attributes;

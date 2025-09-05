@@ -201,3 +201,8 @@ export const BORDER_STYLES = [
 	{ label: __("Outset", "frontis-block"), value: "outset" },
 	{ label: __("Ridge", "frontis-block"), value: "ridge" },
 ];
+export const ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"text"} />), value: "icon-text" },
+	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
+];
