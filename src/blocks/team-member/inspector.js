@@ -585,6 +585,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const changeTeamMemberPreset = (selectedPreset) => {
         const presetConfigurations = {
 			'preset-0': {
+				teamMemberImageSize: 'cover',
 				teamMemberImageOverlaySwitcher: false,
 				teamMemberBgType: 'classic',
 				teamMemberBgCustomGradientSwitcher: false,
@@ -595,6 +596,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				teamMemberBorder: 'solid',
 				teamMemberBorderColor: '#E1E3E8',
 				teamMemberContentPosition: 'bottom',
+				teamMemberContentBgType: 'classic',
+				teamMemberContentBgClassicColor: 'transparent',
 				teamMemberDescSwitcher: false,
 				teamMemberNameColor: '',
 				teamMemberNameHoverColor: '',
@@ -742,9 +745,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					bottom: '',
 					left: '',
 					right: '',
+				},
+				socialIconBtnDesktopBorderRadiusWidth: {
+					bottom: '50',
+					left: '50',
+					right: '50',
+					top: '50',
+				},
+				teamMemberContentPaddingDesktop: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '0',
 				}
 			},
 			'preset-1': {
+				teamMemberImageSize: 'cover',
 				teamMemberImageOverlaySwitcher: true,
 				teamMemberBgType: 'classic',
 				teamMemberBgCustomGradientSwitcher: false,
@@ -755,6 +771,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				teamMemberBorder: 'none',
 				teamMemberBorderColor: '#E1E3E8',
 				teamMemberContentPosition: 'bottom',
+				teamMemberContentBgType: 'classic',
+				teamMemberContentBgClassicColor: '#ffffff',
 				teamMemberDescSwitcher: true,
 				teamMemberNameColor: '#15171C',
 				teamMemberNameHoverColor: '',
@@ -796,11 +814,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				teamMemberDescFontWeight: '400',
 				teamMemberImageAlignment: {
 					Desktop: 'center',
-					Tablet: '',
-					Mobile: ''
-				},
-				teamMemberImageAlignment: {
-					Desktop: 'start',
 					Tablet: '',
 					Mobile: ''
 				},
@@ -923,9 +936,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					bottom: '1',
 					left: '1',
 					right: '1',
+				},
+				socialIconBtnDesktopBorderRadiusWidth: {
+					bottom: '50',
+					left: '50',
+					right: '50',
+					top: '50',
+				},
+				teamMemberContentPaddingDesktop: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '0',
 				}
 			},
 			'preset-2': {
+				teamMemberImageSize: 'cover',
 				teamMemberImageOverlaySwitcher: true,
 				teamMemberBgType: 'classic',
 				teamMemberBgCustomGradientSwitcher: false,
@@ -936,6 +962,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				teamMemberBorder: 'none',
 				teamMemberBorderColor: '#E1E3E8',
 				teamMemberContentPosition: 'image',
+				teamMemberContentBgType: 'classic',
+				teamMemberContentBgClassicColor: 'transparent',
 				teamMemberDescSwitcher: false,
 				teamMemberNameColor: '#fff',
 				teamMemberNameHoverColor: '',
@@ -977,11 +1005,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				teamMemberDescFontWeight: '400',
 				teamMemberImageAlignment: {
 					Desktop: 'center',
-					Tablet: '',
-					Mobile: ''
-				},
-				teamMemberImageAlignment: {
-					Desktop: 'start',
 					Tablet: '',
 					Mobile: ''
 				},
@@ -1104,9 +1127,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					bottom: '1',
 					left: '1',
 					right: '1',
+				},
+				socialIconBtnDesktopBorderRadiusWidth: {
+					bottom: '50',
+					left: '50',
+					right: '50',
+					top: '50',
+				},
+				teamMemberContentPaddingDesktop: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '0',
 				}
 			},
 			'preset-3': {
+				teamMemberImageSize: 'cover',
 				teamMemberImageOverlaySwitcher: true,
 				teamMemberBgType: 'classic',
 				teamMemberBgCustomGradientSwitcher: false,
@@ -1117,6 +1153,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				teamMemberBorder: 'none',
 				teamMemberBorderColor: '#E1E3E8',
 				teamMemberContentPosition: 'bottom',
+				teamMemberContentBgType: 'classic',
+				teamMemberContentBgClassicColor: '#ffffff',
 				teamMemberDescSwitcher: false,
 				teamMemberNameColor: '#15171C',
 				teamMemberNameHoverColor: '',
@@ -1157,11 +1195,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: ''
 				},
 				teamMemberDescFontWeight: '400',
-				teamMemberImageAlignment: {
-					Desktop: 'center',
-					Tablet: '',
-					Mobile: ''
-				},
 				teamMemberImageAlignment: {
 					Desktop: 'center',
 					Tablet: '',
@@ -1292,9 +1325,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					bottom: '8',
 					left: '0',
 					right: '0',
+				},
+				socialIconBtnDesktopBorderRadiusWidth: {
+					bottom: '50',
+					left: '50',
+					right: '50',
+					top: '50',
+				},
+				teamMemberContentPaddingDesktop: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '0',
 				}
 			},
 			'preset-4': {
+				teamMemberImageSize: 'cover',
 				teamMemberImageOverlaySwitcher: true,
 				teamMemberBgType: 'classic',
 				teamMemberBgCustomGradientSwitcher: false,
@@ -1305,6 +1351,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				teamMemberBorder: 'none',
 				teamMemberBorderColor: '#E1E3E8',
 				teamMemberContentPosition: 'top',
+				teamMemberContentBgType: 'classic',
+				teamMemberContentBgClassicColor: 'transparent',
 				teamMemberDescSwitcher: false,
 				teamMemberNameColor: '#fff',
 				teamMemberNameHoverColor: '',
@@ -1345,11 +1393,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: ''
 				},
 				teamMemberDescFontWeight: '400',
-				teamMemberImageAlignment: {
-					Desktop: 'center',
-					Tablet: '',
-					Mobile: ''
-				},
 				teamMemberImageAlignment: {
 					Desktop: 'center',
 					Tablet: '',
@@ -1480,6 +1523,216 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					bottom: '8',
 					left: '0',
 					right: '0',
+				},
+				socialIconBtnDesktopBorderRadiusWidth: {
+					bottom: '50',
+					left: '50',
+					right: '50',
+					top: '50',
+				},
+				teamMemberContentPaddingDesktop: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '0',
+				}
+			},
+			'preset-5': {
+				teamMemberImageSize: 'cover',
+				teamMemberImageOverlaySwitcher: true,
+				teamMemberBgType: 'classic',
+				teamMemberBgCustomGradientSwitcher: false,
+				teamMemberBgClassicColor: '',
+				teamMemberBgHoverType: 'classic',
+				teamMemberBgHoverCustomGradientSwitcher: false,
+				teamMemberBgHoverClassicColor: '',
+				teamMemberBorder: 'none',
+				teamMemberBorderColor: '',
+				teamMemberContentPosition: 'bottom',
+				teamMemberContentBgType: 'classic',
+				teamMemberContentBgClassicColor: '#15171C',
+				teamMemberDescSwitcher: false,
+				teamMemberDescColor: '',
+				teamMemberNameColor: '#fff',
+				teamMemberNameHoverColor: '',
+				teamMemberDesignationColor: '#399cff',
+				teamMemberDesignationHoverColor: '',
+				teamMemberSocialPosition: 'bottom_left',
+				teamMemberSocialProfileSwitcher: true,
+				teamMemberSocialProfileSeparator: false,
+				teamMemberSocialProfileSeparatorPosition: 'top',
+				socialProfileSeparatorColor: '',
+				teamMemberIconsBorder: 'solid',
+				teamMemberIconsBorderColor: 'rgba(195, 200, 210, 0.40)',
+				teamMemberIconsColor: '#fff',
+				teamMemberIconsBGColor: 'rgba(21, 23, 28, 0.40)',
+				socialIconBtnSwitcher: true,
+				socialIconBtnBGColor: '#399cff',
+				socialIconBtnBorder: 'none',
+				socialIconBtnBorderColor: '#fff',
+				socialIconBtnColor: '#fff',
+				teamMemberSocialType: 'image',
+				teamMemberSocialIconAnimationType: 'top',
+				teamMemberNameFontSize: {
+					Desktop: '32',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberNameFontWeight: '600',
+				teamMemberDesignationFontSize: {
+					Desktop: '20',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberDesignationFontWeight: '500',
+				teamMemberDescFontSize: {
+					Desktop: '18',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberDescFontWeight: '400',
+				teamMemberImageAlignment: {
+					Desktop: 'center',
+					Tablet: '',
+					Mobile: ''
+				},
+				teamMemberImageMarginDesktop: {
+					top: '',
+					bottom: '',
+					left: '',
+					right: '',
+				},
+				teamMemberImageHeight: {
+					Desktop: '410',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberImageWidth: {
+					Desktop: '100',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberImageWidthUnits: {
+					Desktop: '%',
+					Tablet: '%',
+					Mobile: '%'
+				},
+				teamMemberImageBorderRadiusDesktop: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '0',
+				},
+				teamMemberImageBorderRadiusUnits: {
+					Desktop: 'px',
+					Tablet: 'px',
+					Mobile: 'px'
+				},
+				teamMemberIconsDesktopBorderRadiusWidth: {
+					bottom: '150',
+					left: '150',
+					right: '150',
+					top: '150',
+				},
+				teamMemberIconsDesktopPadding: {
+					bottom: '14',
+					left: '14',
+					right: '14',
+					top: '14',
+				},
+				teamMemberIconsAlignment: {
+					Desktop: 'right',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberDesktopBorderRadiusWidth: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '0',
+				},
+				teamMemberDesktopBorderWidth: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberDesktopPadding: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberContentAlignment: {
+					Desktop: 'right',
+					Tablet: '',
+					Mobile: '',
+				},
+				teamMemberContentBorderRadiusDesktop: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberContentMarginDesktop: {
+					bottom: '0',
+					left: '50',
+					right: '0',
+					top: '0',
+				},
+				socialIconBtnDesktopMargin: {
+					bottom: '0',
+					left: '0',
+					right: '0',
+					top: '10',
+				},
+				socialIconBtnDesktopPadding: {
+					bottom: '18',
+					left: '32',
+					right: '32',
+					top: '18',
+				},
+				teamMemberIconsDesktopMargin: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberDescMarginDesktop: {
+					top: '',
+					bottom: '',
+					left: '',
+					right: '',
+				},
+				socialIconBtnDesktopBorderWidth: {
+					top: '',
+					bottom: '',
+					left: '',
+					right: '',
+				},
+				teamMemberIconsDesktopBorderWidth: {
+					top: '',
+					bottom: '',
+					left: '',
+					right: '',
+				},
+				teamMemberNameMarginDesktop: {
+					top: '0',
+					bottom: '8',
+					left: '0',
+					right: '0',
+				},
+				socialIconBtnDesktopBorderRadiusWidth: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+				},
+				teamMemberContentPaddingDesktop: {
+					bottom: '32',
+					left: '42',
+					right: '42',
+					top: '32',
 				}
 			},
 			
