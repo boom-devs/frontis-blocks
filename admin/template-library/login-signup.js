@@ -115,10 +115,10 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 				// Success case
 				if (responseData.status) {
 					const responseUserData = {
-						'name': responseData.user.name,
-						'email': responseData.user.email,
-						'access_token': responseData.access_token,
-						'refresh_token': responseData.refresh_token,
+						'name': responseData?.user?.name,
+						'email': responseData?.user?.email,
+						'access_token': responseData?.access_token,
+						'refresh_token': responseData?.refresh_token,
 					}
 
 					localStorage.setItem("userData", JSON.stringify(responseUserData));

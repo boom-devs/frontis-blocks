@@ -161,10 +161,10 @@ const TemplateContent = ({
         } );
 
         updateUserDataToDb('frontis_tl_user_data', {
-            'name': response.data.name,
-            'email': response.data.email,
-            'access_token': response.data.access_token,
-            'refresh_token': response.data.refresh_token,
+            'name': response?.data?.name,
+            'email': response?.data?.email,
+            'access_token': response?.data?.access_token,
+            'refresh_token': response?.data?.refresh_token,
         })
         setIsLoginModalOpen(false);
         setIsLogedIn(true);
@@ -284,12 +284,12 @@ const TemplateContent = ({
                     </>
                 )}
             </div>
-            {/* {isLoginModalOpen && (
+            {isLoginModalOpen && (
                 <LoginSignupModal
                     onLoginSuccess={handleLoginSuccess}
                     onRequestClose={handleCloseLoginModal}
                 />
-            )} */}
+            )}
         </>
     );
 };
