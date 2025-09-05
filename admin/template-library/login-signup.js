@@ -80,11 +80,12 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 							first_name: data.first_name,
 							last_name: data.last_name,
 							password: data.password,
-							device_name: deviceName,
+							device_name: deviceName
 						}
 						: {
 							email: data.email,
 							password: data.password,
+							device_name: deviceName
 						};
 
 				const response = await fetch(`${apiBase}/frontis-sync/v1/${endpoint}`, {
@@ -97,7 +98,7 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 				});
 
 				const responseData = await response.json();
-
+				
 				if (!response.ok) {
 					const errorMessage = responseData.message || "Something went wrong";
 					if (responseData.code === "invalid_username") {
@@ -122,7 +123,7 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 					}
 
 					localStorage.setItem("userData", JSON.stringify(responseUserData));
-					onLoginSuccess(responseData);
+					onLoginSuccess(responseData, activeTab);
 				} else {
 					setIsLoading(false);
 					throw new Error("Something went wrong try again letter");
