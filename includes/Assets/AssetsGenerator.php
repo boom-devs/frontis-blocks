@@ -405,7 +405,7 @@ class AssetsGenerator
 		if (!empty($color_data[0])) {
 			$global_colors .= "/* Base Colors */\n";
 			foreach ($color_data[0] as $color) {
-				if($color['color']){
+				if(isset($color['color'])){
 					$var_name = "--wp--frontis--color--" . $color['slug'];
 					$global_colors .= "{$var_name}: {$color['color']};\n";
 				}
@@ -417,7 +417,7 @@ class AssetsGenerator
 			$global_colors .= "\n/* Custom Colors */\n";
 			foreach ($color_data[1] as $color) {
 				$original_var = $color['slug'];
-				if($color['color']) {
+				if(isset($color['color'])) {
 					$prefixed_var = "--wp--frontis--color--" . $original_var;
 					$global_colors .= "{$prefixed_var}: {$color['color']};\n";
 				}
