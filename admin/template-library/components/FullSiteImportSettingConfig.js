@@ -26,7 +26,7 @@ const FullSiteImportSettingConfig = ({
 	const [customGradientColors, setCustomGradientColors] = useState(template.customGradientColors);
 	const [typography, setTypography] = useState(template.typographies);
 	const [customTypography, setCustomTypography] = useState(template.customTypographies);
-	const [fontFamilies, setFontFamilies] = useState(template.fontFamilies);
+	const [fontFamilies, setFontFamilies] = useState({});
 	const [globalTypography, setGlobalTypography] = useState(typography);
 
     const deviceType = useDeviceType();
