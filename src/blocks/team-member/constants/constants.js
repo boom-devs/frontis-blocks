@@ -49,7 +49,7 @@ export const NORMAL_HOVER = [
 ];
 
 export const OVERFLOW_OP = [
-    { label: __('Default', 'frontis-blocks'), value: 'default' },
+    { label: __('Default', 'frontis-blocks'), value: 'visible' },
     { label: __('Auto', 'frontis-blocks'), value: 'auto' },
     { label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
     { label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
@@ -202,7 +202,5 @@ export const BORDER_STYLES = [
 	{ label: __("Ridge", "frontis-block"), value: "ridge" },
 ];
 export const ICON_ALIGN = [
-	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
 	{ label: __(<Dashicon icon={"text"} />), value: "icon-text" },
-	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
 ];

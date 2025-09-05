@@ -50,11 +50,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		//Presets
 		teamMemberPresetStyle,
-
-		//Wrapper Button Icon Settings
-		buttonIconAlign,
-		buttonIcon,
-
+		wrapperButtonIconRotate,
 		blockID,
 		blockStyle,
 		// deviceType,
@@ -584,6 +580,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	}, []);
 
+	/** Start Icon Handler */
+	const iconHandler = (IconName) => {
+		setAttributes({socialIconBtnIcon: IconName})
+	}
+	/** End Icon Handler */
 
 	/** Start Preset Style */
 	const changeTeamMemberPreset = (selectedPreset) => {
@@ -3903,13 +3904,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberImageAlignment.Desktop === 'right' ? 'justify-content: end' : ''}
 			}
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image img {
+				${teamMemberImageBorderRadiusGetDesktop && teamMemberImageBorderRadiusDesktop.top ? `border-radius: ${teamMemberImageBorderRadiusGetDesktop};` : ''}
 				${teamMemberImagePosition ? `object-position: ${teamMemberImagePosition};` : ''}
                 ${teamMemberImageSize ? `object-fit: ${teamMemberImageSize};` : ''}
 			}
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image {
 				position: relative;
 				z-index: 2;
-				overflow: hidden;
 				${teamMemberImageWidth.Desktop ? `width: ${teamMemberImageWidth.Desktop}${teamMemberImageWidthUnits.Desktop};` : ''}
 				${teamMemberImageHeight.Desktop ? `height: ${teamMemberImageHeight.Desktop}${teamMemberImageHeightUnits.Desktop};` : ''}
 				${teamMemberImageBorder ? `border: ${teamMemberImageBorder};` : ''}
@@ -3926,8 +3927,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item {
 				position: relative;
-				overflow: hidden;
 				display: flex;
+				overflow: visible;
 				${teamMemberContentPosition === 'top' ? 'flex-direction: column-reverse;' : ''}
 				${teamMemberContentPosition === 'bottom' ? 'flex-direction: column;' : ''}
 				${teamMemberContentPosition === 'left' ? 'flex-direction: row-reverse;' : ''}
@@ -4030,6 +4031,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay {
+				${teamMemberImageBorderRadiusGetDesktop && teamMemberImageBorderRadiusDesktop.top ? `border-radius: ${teamMemberImageBorderRadiusGetDesktop};` : ''}
 				${teamMemberImageBGColor ? `background: ${teamMemberImageBGColor};` : ''}
 				${teamMemberImageOverlayOpacity.Desktop ? `opacity: ${teamMemberImageOverlayOpacity.Desktop};` : ''}
 				transition: all 0.3s ease-in-out;
@@ -5134,25 +5136,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					: ''}
 
 					<ToggleControl
-						label={__("Icon Wrapper Button", "frontis-blocks")}
+						label={__("Wrapper Button", "frontis-blocks")}
 						className="fb-setting-responsive-control"
 						checked={socialIconBtnSwitcher}
 						onChange={(value) => setAttributes({ socialIconBtnSwitcher: value })}
 					/>
-					<BaseControl label={__("Wrapper Icon", "frontis-blocks")}>
-						<ButtonGroup>
-							{ICON_ALIGN.map((item, key) => (
-								<Button
-									key={key}
-									onClick={() => setAttributes({ buttonIconAlign: item.value })}
-									className={`fb-setting-text-alignment-single-btn ${buttonIconAlign === item.value ? 'active' : ''}`}
-								>
-									{item.label}
-								</Button>
-							))}
-						</ButtonGroup>
-					</BaseControl>
-					
+
+					{socialIconBtnSwitcher && (
+						<>
+							<BaseControl 
+								label={__("Select Icon", "frontis-blocks")}
+								className="fb-setting-text-alignment"
+							>
+								<FBIconPicker 
+									value={socialIconBtnIcon || 'plus'}
+									setIconHandler={iconHandler}	
+								/>
+							</BaseControl>
+
+							<RangeControl 
+								label={__("Icon Rotate(deg)", "frontis-blocks")}
+								value={wrapperButtonIconRotate}
+								onChange={(value) => setAttributes({ wrapperButtonIconRotate: value })}
+								min={0}
+								max={360}
+							/>
+						</>
+					)}
 
 					<div className="fb-feature-wrapper">
 						<DndContext

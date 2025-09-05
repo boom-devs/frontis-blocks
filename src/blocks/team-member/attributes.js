@@ -30,7 +30,7 @@ const attributes = {
     },
 	teamMemberOverflow: {
         type: 'string',
-        default: 'default',
+        default: 'visible',
     },
 
     teamMemberPaddingUnits : {
@@ -3105,15 +3105,10 @@ const attributes = {
         type: 'string',
         default: 'preset-0',
     },
-	/** Wrapper Icon Settings */
-    buttonIconAlign: {
-        type: "string",
-        default: "none",
-    },
-    buttonIcon: {
-		type: 'string',
-		default: 'angle-right',
-	},
+	wrapperButtonIconRotate: {
+		type: 'number',
+		default: 0
+	}
 };
 
 export default attributes;

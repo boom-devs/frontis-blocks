@@ -30,6 +30,7 @@ export default function save({ attributes }) {
 		teamMemberSocialType,
 		socialIconBtnSwitcher,
 		socialIconBtnIcon,
+		wrapperButtonIconRotate,
 		teamMemberSocialProfileSeparatorPosition,
 
 		teamMemberDesktopSwitcher,
@@ -87,7 +88,11 @@ export default function save({ attributes }) {
 									<>
 										{teamMemberSocialType === 'image' && <div className="fb-team-member-social-profile-wrapper">
 											{socialIconBtnSwitcher === true && 
-												<button className="fb-team-member-social-icon-wrapper-btn" aria-label={__("Social Icon", "frontis-blocks")}>
+												<button 
+													className="fb-team-member-social-icon-wrapper-btn" 
+													aria-label={__("Social Icon", "frontis-blocks")}
+													style={{ transform: `rotate(${wrapperButtonIconRotate}deg)` }}
+												>
 													{socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''}
 												</button>
 											}
@@ -131,7 +136,11 @@ export default function save({ attributes }) {
 
 										<div className="fb-team-member-social-profile-wrapper">
 											{socialIconBtnSwitcher === true && 
-												<button className="fb-team-member-social-icon-wrapper-btn" aria-label={__("Social Icon", "frontis-blocks")}>
+												<button 
+													className="fb-team-member-social-icon-wrapper-btn" 
+													aria-label={__("Social Icon", "frontis-blocks")}
+													style={{ transform: `rotate(${wrapperButtonIconRotate}deg)` }}
+												>
 													{socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''}
 												</button>
 											}
