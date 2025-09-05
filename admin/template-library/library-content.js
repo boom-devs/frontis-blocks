@@ -14,7 +14,22 @@ import TemplateList from "./template-list";
 import { TemplateContentLoader } from "./template-loader";
 
 
-const LibraryContent = ({ activeTab, activeCategory, setActiveCategory, data, libraryData, setLibraryData, setIsVisible, isLogedIn, cardListType, setCardListType, savedItems, setSavedItems, loading, setLoading }) => {
+const LibraryContent = ({ 
+    activeTab, 
+    activeCategory, 
+    setActiveCategory, 
+    data, 
+    libraryData, 
+    setLibraryData, 
+    setIsVisible, 
+    isLogedIn, 
+    cardListType, 
+    setCardListType, 
+    savedItems, 
+    setSavedItems, 
+    loading, 
+    setLoading 
+}) => {
 
     const FavoriteTabsOptions = [
         { name: 'All', value: 'all' },

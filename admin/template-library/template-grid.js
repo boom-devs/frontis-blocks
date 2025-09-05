@@ -28,6 +28,8 @@ const TemplateGrid = ({
     customGradientColors,
     typographies,
     customTypographies,
+    globalTypographies,
+    fontFamilies,
     categories,
     activeTab,
     setLibraryData,
@@ -100,6 +102,8 @@ const TemplateGrid = ({
         customGradientColors,
         typographies,
         customTypographies,
+        globalTypographies,
+        fontFamilies,
         dependencies,
         dateAndTime: currentDateAndTime,
         type: templateType
