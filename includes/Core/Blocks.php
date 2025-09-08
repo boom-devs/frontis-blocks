@@ -195,21 +195,7 @@ class Blocks
 
 	public function get_blocks_on_save($post_id, $post, $update)
 	{
-		$post_content = $post->post_content;
 		AssetsGenerator::generate_global_assets();
-
-		// Get synced pattern contents
-		$pattern_contents = Helper::check_patterns_used($post_content);
-
-		// Append pattern contents to post_content
-		if (!empty($pattern_contents)) {
-			foreach ($pattern_contents as $pattern_content) {
-				$post_content .= "\n" . $pattern_content; // Append each pattern content
-			}
-
-			// Pass modified post object to generate_page_assets
-			$post->post_content = $post_content; // Update post object
-		}
 
 		$pattern = "/frontis-blocks/i";
 		update_post_meta($post_id, 'frontis_blocks_used', false);

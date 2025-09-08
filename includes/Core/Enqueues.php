@@ -89,7 +89,7 @@ class Enqueues {
         // Enqueue page CSS in header
         if (file_exists($css_file_system_path)) {
             $version = filemtime($css_file_system_path);
-            wp_enqueue_style('frontis-blocks-frontend', $css_file_url, [], $version);
+            // wp_enqueue_style('frontis-blocks-frontend', $css_file_url, [], $version);
         }
 
         // Enqueue JS in footer with defer
