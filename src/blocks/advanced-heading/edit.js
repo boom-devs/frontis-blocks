@@ -65,63 +65,6 @@ export default function Edit({ attributes, setAttributes, clientId, context, ins
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
-
-	// Dynamic content
-	// const isDescendentOfQueryLoop = Number.isFinite( queryId );
-	// const userCanEdit = useSelect(
-	// 	( select ) => {
-	// 		if ( isDescendentOfQueryLoop ) {
-	// 			return false;
-	// 		}
-	// 		return select( coreStore ).canUser( 'update', {
-	// 			kind: 'postType',
-	// 			name: postType,
-	// 			id: postId,
-	// 		} );
-	// 	},
-	// 	[ isDescendentOfQueryLoop, postType, postId ]
-	// );
-	// const [ rawTitle = '', setTitle, fullTitle ] = useEntityProp(
-	// 	'postType',
-	// 	postType,
-	// 	'title',
-	// 	postId
-	// );
-
-	// const [ link ] = useEntityProp( 'postType', postType, 'link', postId );
-	// const onSplitAtEnd = () => {
-	// 	insertBlocksAfter( createBlock( getDefaultBlockName() ) );
-	// };
-
-	// Synchronize headingText with rawTitle
-	// useEffect(() => {
-	// 	if (!isHeadingTextChanged) {
-	// 		setAttributes(
-	// 			{
-	// 				headingText: rawTitle,
-	// 			}
-	// 		);
-	// 	}
-	// }, [rawTitle, headingText, setAttributes]);
-
-	// let titleElement = <h2 { ...blockProps }>{ __( 'Title' ) }</h2>;
-	// if ( postType && postId ) {
-	// 	titleElement = <RichText
-	// 		tagName={headingTag}
-	// 		value={headingText}
-	// 		onChange={(value) => onChangeHeadingText(value)}
-	// 		placeholder={__('Advanced Heading', 'frontis-blocks')}
-	// 		className={`fb-advanced-heading ${activeLineSwitcher ? 'active-line' : ''}`}
-	// 		key={`heading-${clientId}-${context?.postId || 'default'}`}
-	// 	/>
-	// }
-
-	const onChangeHeadingText = (value) => {
-		setAttributes({
-			headingText: value,
-			isHeadingTextChanged: true
-		})
-	}
 	return (
 		<>
 			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
