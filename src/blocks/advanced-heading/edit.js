@@ -246,7 +246,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			  case 'default':
 				return formatDateByPhp(getSiteDateFormat(), d);
 		  
-			  case 'F j, Y':
+			  case 'jS F Y':
 			  case 'Y-m-d':
 			  case 'm/d/Y':
 			  case 'd/m/Y':
