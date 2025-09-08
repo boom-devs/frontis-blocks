@@ -15,13 +15,12 @@
 		"align": ["wide", "full"]
 	},
 	"textdomain": "frontis-blocks",
-	"editorScript": [
-		"file:./index.js",
-        "frontis-slick-script"
-	],
-	"editorStyle": [
-		"file:./index.css",
-		"frontis-slick-style",
-		"frontis-slick-theme-style"
-	]
+    "editorScript": [
+        "file:./index.js",
+        "frontis-swiper-script"
+    ],
+    "editorStyle": [
+        "file:./index.css",
+        "frontis-swiper-style"
+    ]
 }
