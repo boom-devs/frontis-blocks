@@ -51,6 +51,8 @@ import {
 import { 
     DYNAMIC_CURRENT_POST_OPTIONS,
     DYNAMIC_FEATURED_IMAGE_OPTIONS,
+    DYNAMIC_DATE_TYPE_OPTIONS,
+    getDynamicDateFormatOptions
 
 } from '@Constants/fbConstants';
 
@@ -85,7 +87,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         blockId,
         // deviceType,
         headingText,
-        dynamicContent,
         headingTag,
         headingAlignment,
 
@@ -440,6 +441,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dynamicEnableLink,
         dynamicReplaceAll,
         dynamicFeaturedImageField,
+        dynamicDateType,
+        dynamicDateFormat,
 
     } = attributes;
 
@@ -471,26 +474,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
     }, []);
 
-    const [isPopoverVisible, setIsPopoverVisible] = useState(false);
 
-    // Get dynamic content preview for editing
-    const dynamicValue = useSelect((select) => {
-        if (!dynamicContent) return '';
-
-        const postType = select('core/editor').getCurrentPostType();
-        const postId = select('core/editor').getCurrentPostId();
-        const post = select('core').getEditedEntityRecord('postType', postType, postId);
-
-        switch (dynamicContent) {
-        case 'post_title':
-            return post.title;
-        case 'post_date':
-            return new Date(post.date).toLocaleDateString();
-        // Add other cases for terms, author, etc.
-        default:
-            return '';
-        }
-    }, [dynamicContent]);
 
     /** Start Preset Style */
     const changeAdvancedHeadingPreset = (selectedPreset) => {
@@ -3034,7 +3018,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
-
+    console.log(dynamicField);
     /**
 	 * Inspector General Controls
 	 */
@@ -3079,6 +3063,22 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                         options={DYNAMIC_FEATURED_IMAGE_OPTIONS}
                                         onChange={(value) => setAttributes({ dynamicFeaturedImageField: value })}
                                     />
+                                )}
+                                {dynamicField === 'post_date' && (
+                                    <>
+                                        <SelectControl
+                                            label={__("Date Type", "frontis-blocks")}
+                                            value={dynamicDateType}
+                                            options={DYNAMIC_DATE_TYPE_OPTIONS}
+                                            onChange={(value) => setAttributes({ dynamicDateType: value })}
+                                        />
+                                        <SelectControl
+                                            label={__("Date Format", "frontis-blocks")}
+                                            value={dynamicDateFormat}
+                                            options={getDynamicDateFormatOptions(new Date())}
+                                            onChange={(value) => setAttributes({ dynamicDateFormat: value })}
+                                        />
+                                    </>
                                 )}
                                 </>
                             )}
@@ -3150,60 +3150,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     <div className="advanced-heading-block">
                         <div className="heading-input-wrapper">
                             <TextareaControl
-                            label={__("Heading Text", "frontis-blocks")}
-                            value={dynamicContent ? `[Dynamic: ${dynamicContent}]` : headingText}
-                            onChange={(value) => {
-                                if (!dynamicContent) {
-                                setAttributes({ headingText: value });
-                                }
-                            }}
-                            disabled={!!dynamicContent}
-                            className="fb-advanced-text"
+                                label={__("Heading Text", "frontis-blocks")}
+                                value={headingText}
+                                onChange={(value) => setAttributes({ headingText: value })}
+                                className="fb-advanced-text"
                             />
-
-                            {/* <Button
-                            icon="database"
-                            onClick={() => setIsPopoverVisible(true)}
-                            label="Insert dynamic content"
-                            /> */}
-
-                            {/* {isPopoverVisible && (
-                                <Popover
-                                    onClose={() => setIsPopoverVisible(false)}
-                                    position="bottom center"
-                                >
-                                    <MenuGroup label="Dynamic Content">
-                                    <MenuItem
-                                        onClick={() => {
-                                        setAttributes({ dynamicContent: 'post_title' });
-                                        setIsPopoverVisible(false);
-                                        }}
-                                    >
-                                        Post Title
-                                    </MenuItem>
-                                    <MenuItem
-                                        onClick={() => {
-                                        setAttributes({ dynamicContent: 'post_date' });
-                                        setIsPopoverVisible(false);
-                                        }}
-                                    >
-                                        Post Date
-                                    </MenuItem>
-                                    </MenuGroup>
-                                    {dynamicContent && (
-                                    <MenuGroup>
-                                        <MenuItem
-                                        onClick={() => {
-                                            setAttributes({ dynamicContent: '' });
-                                            setIsPopoverVisible(false);
-                                        }}
-                                        >
-                                        Reset to Static Text
-                                        </MenuItem>
-                                    </MenuGroup>
-                                    )}
-                                </Popover>
-                            )} */}
                         </div>
                     </div>
                 </PanelBody>
