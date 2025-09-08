@@ -1,318 +1,212 @@
-import { __ } from '@wordpress/i18n';
-import {
-    RichText,
-    useBlockProps,
-    BlockControls,
-	useInnerBlocksProps,
-} from '@wordpress/block-editor';
-import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
-import { useState, useEffect, useRef, useMemo } from '@wordpress/element';
-import { useDispatch, useSelect } from '@wordpress/data';
-import { createBlock } from '@wordpress/blocks';
-import Inspector from './inspector';
+    import { __ } from '@wordpress/i18n';
+    import {
+        RichText,
+        useBlockProps,
+        BlockControls,
+        useInnerBlocksProps,
+    } from '@wordpress/block-editor';
+    import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
+    import { useState, useEffect, useRef, useMemo } from '@wordpress/element';
+    import { useDispatch, useSelect } from '@wordpress/data';
+    import { createBlock } from '@wordpress/blocks';
+    import Inspector from './inspector';
+    import { Swiper } from 'swiper/react';
 
-import './editor.scss';
+    import './editor.scss';
 
-const ALLOWED_BLOCKS = ['frontis-blocks/marquee-carousel-item'];
+    const ALLOWED_BLOCKS = ['frontis-blocks/marquee-carousel-item'];
 
-export default function Edit({ attributes, setAttributes, clientId }) {
-
-	const {
-        blockId,
-        blockStyle,
-        speed,
-        infinite,
-        slidesToShow,
-        autoplay,
-        centerMode,
-        pauseOnHover,
-        variableWidth,
-        touchMove,
-        draggable,
-        swipe,
-        swipeToSlide,
-        waitForAnimate,
-        sliderGlobalWraperID,
-        sliderGlobalWraperClass,
-    } = attributes;
-
-    const { insertBlock, duplicateBlocks } = useDispatch('core/block-editor');
+    import { 
+        Navigation, 
+        Pagination, 
+        Autoplay, 
+        Manipulation,
+        Mousewheel,
+        EffectFade,
+        EffectCube,
+        EffectCoverflow,
+        EffectFlip,
+        EffectCreative,
+        EffectCards
+    } from 'swiper/modules';
     
-    const { getSelectedBlockClientIds, getBlocks } = useSelect('core/block-editor');
-    
-    const innerBlocks = useSelect(
-        (select) => select('core/block-editor').getBlocks(clientId),
-        [clientId]
-    );
+    import 'swiper/css';
+    import 'swiper/css/navigation';
+    import 'swiper/css/pagination';
+    import 'swiper/css/mousewheel';
+    import 'swiper/css/effect-fade';
+    import 'swiper/css/effect-coverflow';
+    import 'swiper/css/effect-flip';
+    import 'swiper/css/effect-creative';
 
-	const blockProps = useBlockProps({
-		className: `fb-marquee-slider-container ${blockId}`,
-	});
+    export default function Edit({ attributes, setAttributes, clientId }) {
 
-	const getSliderTemplate = useMemo(() => [
-        ['frontis-blocks/marquee-carousel-item'],
-        ['frontis-blocks/marquee-carousel-item'],
-		['frontis-blocks/marquee-carousel-item'],
-		['frontis-blocks/marquee-carousel-item'],
-    ], []);
+        const {
+            blockId,
+            speed,
+            reverseDirection,
+            pauseOnHover,
 
-	const slickRef = useRef(null);
-    const timer = useRef(null);
-
-    // Helper function to get responsive value
-    const getResponsiveValue = (responsiveObj, fallbackValue = 1) => {
-        if (typeof responsiveObj === 'object' && responsiveObj !== null) {
-            // Return Desktop value first, then fallback to default
-            return responsiveObj.Desktop || fallbackValue;
-        }
-        // If it's a number (old format), return as is
-        return responsiveObj || fallbackValue;
-    };
-
-    // Generate responsive breakpoints for Slick
-    const getResponsiveSettings = () => {
-        if (typeof slidesToShow === 'object' && slidesToShow !== null) {
-            const settings = [];
-            
-            // Tablet breakpoint
-            if (slidesToShow.Tablet !== '' && slidesToShow.Tablet !== undefined) {
-                settings.push({
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: parseInt(slidesToShow.Tablet) || 1,
-                        slidesToScroll: 1
-                    }
-                });
-            }
-            
-            // Mobile breakpoint
-            if (slidesToShow.Mobile !== '' && slidesToShow.Mobile !== undefined) {
-                settings.push({
-                    breakpoint: 767,
-                    settings: {
-                        slidesToShow: parseInt(slidesToShow.Mobile) || 1,
-                        slidesToScroll: 1
-                    }
-                });
-            }
-            
-            return settings;
-        }
+            sliderGlobalWraperID,
+            sliderGlobalWraperClass,
+        } = attributes;
         
-        return [];
-    };
+        // 👉 editor store hooks
+        const { insertBlock } = useDispatch('core/block-editor');
+        const { getSelectedBlockClientIds } = useSelect('core/block-editor');
+        const innerBlocks = useSelect(
+            (select) => select('core/block-editor').getBlocks(clientId),
+            [clientId]
+        );
 
-    // Slick initialization function
-    const initializeSlick = (immediate = false) => {
-        if (!window.jQuery || !slickRef.current) return;
-        const $ = window.jQuery;
-        const $slider = $(slickRef.current);
+        //swiper ref
+        const swiperRef = useRef(null);
 
-        // Clear any existing timer
-        if (timer.current) {
-            clearTimeout(timer.current);
-        }
-
-        const reinitialize = () => {
-            if ($slider.hasClass('slick-initialized')) {
-                $slider.slick('unslick');
-            }
-
-            const desktopSlidesToShow = getResponsiveValue(slidesToShow, 1);
-            const responsiveSettings = getResponsiveSettings();
-
-            $slider.slick({
-                speed: speed,
-                infinite: infinite,
-                slidesToShow: parseInt(desktopSlidesToShow) || 1,
-                slidesToScroll: 1,
-                autoplay: autoplay,
-                autoplaySpeed: 0,
-                // centerMode: centerMode,
-                cssEase: 'linear',
-                pauseOnHover: pauseOnHover,
-                pauseOnFocus: false,
-                variableWidth: variableWidth,
-                touchMove: touchMove,
-                draggable: draggable,
-                swipe: swipe,
-                swipeToSlide: swipeToSlide,
-                waitForAnimate: waitForAnimate,
-                arrows: false,
-                dots: false,
-                initialSlide: 0,
-
-                // Responsive settings
-                responsive: responsiveSettings,
-
-                // Core settings for smooth infinite scroll
-                useCSS: true,
-                useTransform: true,
-                accessibility: false,
-                focusOnSelect: false,
-                // No CSS interference - let slick handle everything
-                fade: false,
-                vertical: false,
-                rtl: false,
-                respondTo: 'window'
-            });
-        };
-
-        if (immediate) {
-            // For immediate initialization (when adding slides)
-            reinitialize();
-        } else {
-            // Small delay for normal initialization
-            timer.current = setTimeout(reinitialize, 100);
-        }
-    };
-
-	useEffect(() => {
-        initializeSlick();
-
-        return () => {
-            if (timer.current) {
-                clearTimeout(timer.current);
-            }
-            if (window.jQuery && slickRef.current) {
-                const $ = window.jQuery;
-                const $slider = $(slickRef.current);
-                if ($slider.hasClass('slick-initialized')) {
-                    $slider.slick('unslick');
-                }
-            }
-        };
-	}, [
-        speed,
-        infinite,
-        slidesToShow, // This will now trigger on responsive changes
-        autoplay,
-        centerMode,
-        pauseOnHover,
-        variableWidth,
-        touchMove,
-        draggable,
-        swipe,
-        swipeToSlide,
-        waitForAnimate,
-    ]);
-
-    // Re-initialize slick when inner blocks change
-    useEffect(() => {
-        if (innerBlocks.length > 0) {
-            // Use requestAnimationFrame for better timing
-            requestAnimationFrame(() => {
-                initializeSlick(true); // Immediate initialization
-            });
-        }
-    }, [innerBlocks.length]);
-
-    const innerBlocksProps = useInnerBlocksProps(
-		{
-			className: `fb-marquee-carousel-wrapper`,
-			ref: slickRef,
-		},
-		{
-			allowedBlocks: ALLOWED_BLOCKS,
-			template: getSliderTemplate,
-			renderAppender: false,
-			orientation: 'horizontal',
-		}
-	);
-
-    // Add new slide function
-    const addNewSlide = () => {
-        const newBlock = createBlock('frontis-blocks/marquee-carousel-item');
-        insertBlock(newBlock, innerBlocks.length, clientId);
-        
-        // Force immediate re-initialization after adding
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                initializeSlick(true);
-            });
+        const blockProps = useBlockProps({
+            className: `fb-marquee-slider-container ${blockId}`,
         });
-    };
 
-    // Duplicate slide function
-    const duplicateSlide = () => {
-        const selectedBlocks = getSelectedBlockClientIds();
-        let blockToDuplicate = null;
-        
-        if (selectedBlocks.length > 0) {
-            // Get the selected block that's a child of this carousel
-            blockToDuplicate = innerBlocks.find(innerBlock => 
-                selectedBlocks.includes(innerBlock.clientId)
-            );
-        }
-        
-        // If no selected block found, use the last slide
-        if (!blockToDuplicate && innerBlocks.length > 0) {
-            blockToDuplicate = innerBlocks[innerBlocks.length - 1];
-        }
-        
-        if (blockToDuplicate) {
-            // Create a new block with same attributes and inner blocks
-            const duplicatedBlock = createBlock(
-                blockToDuplicate.name,
-                { ...blockToDuplicate.attributes },
-                blockToDuplicate.innerBlocks?.map(innerBlock => 
-                    createBlock(
-                        innerBlock.name,
-                        { ...innerBlock.attributes },
-                        innerBlock.innerBlocks || []
-                    )
-                ) || []
-            );
-            
-            // Insert the duplicated block
-            insertBlock(duplicatedBlock, innerBlocks.length, clientId);
-            
-            // Force immediate re-initialization after duplicating
+        const getSliderTemplate = useMemo(() => [
+            ['frontis-blocks/marquee-carousel-item'],
+            ['frontis-blocks/marquee-carousel-item'],
+            ['frontis-blocks/marquee-carousel-item'],
+            ['frontis-blocks/marquee-carousel-item'],
+        ], []);
+
+        const innerBlocksProps = useInnerBlocksProps(
+            {
+                className: `swiper-wrapper fb-swiper-wrapper`,
+                slot: 'container-start',
+            },
+            {
+                allowedBlocks: ALLOWED_BLOCKS,
+                template: getSliderTemplate,
+                renderAppender: false,
+                orientation: 'horizontal',
+            }
+        );
+
+         // First, move settings into a useMemo to avoid unnecessary recalculations
+        const settings = useMemo(() => ({
+            spaceBetween: 0,
+            centeredSlides: false,
+            speed: speed,
+            autoplay: {
+                delay: 1,
+                reverseDirection: reverseDirection,
+                pauseOnMouseEnter: pauseOnHover,
+            },
+            loop: true,
+            slidesPerView:'auto',
+            allowTouchMove: false,
+            disableOnInteraction: true,
+        }), [speed, reverseDirection, pauseOnHover]);
+
+
+        // Slide actions
+        const updateSwiperSoon = () => {
+            // Give Gutenberg a tick to commit the inner block change
             requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    initializeSlick(true);
-                });
+                if (swiperRef.current?.update) {
+                    swiperRef.current.update();
+                }
             });
-        }
-    };
+        };
 
-	const renderSliderToolbarControls = () => {
-        return (
+        const addNewSlide = () => {
+            const newBlock = createBlock('frontis-blocks/marquee-carousel-item');
+            insertBlock(newBlock, innerBlocks.length, clientId);
+            updateSwiperSoon();
+        };
+
+        const duplicateSlide = () => {
+            const selectedIds = getSelectedBlockClientIds();
+            let target = null;
+
+            if (selectedIds?.length) {
+                target = innerBlocks.find((b) => selectedIds.includes(b.clientId));
+            }
+            // fallback: last slide
+            if (!target && innerBlocks.length) {
+                target = innerBlocks[innerBlocks.length - 1];
+            }
+            if (!target) return;
+
+            const duplicated = createBlock(
+                target.name,
+                { ...target.attributes },
+                (target.innerBlocks || []).map((ib) =>
+                    createBlock(
+                        ib.name,
+                        { ...ib.attributes },
+                        ib.innerBlocks || []
+                    )
+                )
+            );
+
+            insertBlock(duplicated, innerBlocks.length, clientId);
+            updateSwiperSoon();
+        };
+
+        // If blocks count changes (add/remove/duplicate elsewhere), refresh swiper
+        useEffect(() => {
+            updateSwiperSoon();
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+        }, [innerBlocks.length]);
+
+        const renderSliderToolbarControls = () => (
             <BlockControls>
                 <ToolbarGroup>
                     <ToolbarButton
                         icon="plus"
-                        label={ __( 'Add New Slide', 'frontis-blocks' ) } 
+                        label={__('Add New Slide', 'frontis-blocks')}  
                         onClick={addNewSlide}
                     />
                     <ToolbarButton
                         icon="admin-page"
-                        label={ __( 'Duplicate Slide', 'frontis-blocks' ) } 
+                        label={__('Duplicate Current Slide', 'frontis-blocks')}
                         onClick={duplicateSlide}
                     />
                 </ToolbarGroup>
             </BlockControls>
         );
-    };
-	
-	return (
-		<>
-		    <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+        
+        return (
+            <>
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    clientId={clientId}
+                />
+                {renderSliderToolbarControls()}
+                <div {...blockProps} >
 
-			{renderSliderToolbarControls()}
-
-			<div {...blockProps} >
-
-				<div className={`fb-marquee-image-gallery ${sliderGlobalWraperClass}`} id={sliderGlobalWraperID} style={{ visibility: 'visible' }}>
-					<div className="fb-marquee-carousel-gallery-layout">
+                    <Swiper
+                        {...settings}
+                        onSwiper={(instance) => {
+                            swiperRef.current = instance;
+                            // ensure first mount is synced
+                            updateSwiperSoon();
+                        }}
+                        className={`fb-marquee-swiper ${sliderGlobalWraperClass}`}
+                        id={sliderGlobalWraperID}
+                        modules={[
+                            Navigation,
+                            Pagination,
+                            Autoplay,
+                            Manipulation,
+                            Mousewheel,
+                            EffectFade,
+                            EffectCube,
+                            EffectCoverflow,
+                            EffectFlip,
+                            EffectCreative,
+                            EffectCards
+                        ]}
+                    >
                         <div {...innerBlocksProps} />
-					</div>
-				</div>
-			</div>
-		</>
-	);
-}
+                    </Swiper>
+                </div>
+            </>
+        );
+    }

@@ -7,64 +7,29 @@ const attributes = {
         type: "string",
         default: ""
     },
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
+	},
 
     speed: {
         type: 'number',
         default: 3000,
     },
-    infinite: {
-        type: 'boolean',
-        default: true,
-    },
-
-    slidesToShow: {
-		type: 'object',
-		default: {
-			Desktop: 6,
-			Tablet: 4,
-			Mobile: 2
-		}
+	reverseDirection : {
+		type: 'boolean',
+		default: false,
 	},
-
-    autoplay: {
-        type: 'boolean',
-        default: true,
-    },
-    centerMode: {
-        type: 'boolean',
-        default: true,
+	pauseOnHover: {
+        'type': 'boolean',
+        'default': false
     },
 
-    pauseOnHover: {
-        type: 'boolean',
-        default: false,
-    },
-    variableWidth: {
-        type: 'boolean',
-        default: false,
-    },
-    touchMove: {
-        type: 'boolean',
-        default: false,
-    },
-    draggable: {
-        type: 'boolean',
-        default: false,
-    },
-    swipe: {
-        type: 'boolean',
-        default: false,
-    },
-    swipeToSlide: {
-        type: 'boolean',
-        default: false,
-    },
-    waitForAnimate: {
-        type: 'boolean',
-        default: false,
-    },
-
-    /** Start Width */
+    /** Start Width Height */
     slideWidth: {
 		type: 'object',
 		default: {
@@ -97,16 +62,10 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-    
-    slideGap: {
-		type: 'object',
-		default: {
-			Desktop: '10',
-			Tablet: '10',
-			Mobile: '10'
-		}
-	},
-	slideGapUnits: { 
+	/** End Width Height */
+
+	/** Start slide Padding */
+	slidePaddingUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -114,12 +73,43 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-    /** End Width */
+	slidePaddingDesktop: {
+		type: 'object',
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '5',
+			right: '5',
+		},
+	},
+	slidePaddingTablet: {	
+		type: 'object',
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '5',
+			right: '5',
+		},
+	},
+	slidePaddingMobile: {
+		type: 'object',
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '5',
+			right: '5',
+		},
+	},
+	slidePaddingLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End slide Padding */
 
     /** Start Overlay */
     sliderOverlaySwitcher: {
         type: 'boolean',
-        default: true,
+        default: false,
     },
     sliderOverlayStartColor: {
         type: 'string',

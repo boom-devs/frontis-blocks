@@ -1,69 +1,25 @@
-.fb-marquee-slider-container  {
-  position: relative;
-  box-sizing: border-box;
-  overflow: hidden;
-
-  .fb-marquee-image-gallery {
-    min-width: unset !important;
-    width: 100%;
-    position: relative;
-
-    .fb-marquee-carousel-gallery-layout {
-      width: 100%;
-
-      .fb-marquee-carousel-wrapper {
-        padding: 0;
-        .slick-initialized {
-          .slick-slide {
-            display: block;
-          }
-        }
-        .slick-track {
-          transition-timing-function: linear !important;
-          will-change: transform;
-          backface-visibility: hidden;
-        }
-      }
-      .slick-initialized {
-        visibility: visible;
-      }
-
-      .slick-list {
-        padding: 0 !important;
-        overflow: hidden !important;
-      }
-    }
-  }
-  .slick-slider::before,
-  .slick-slider::after {
-    content: "";
+.fb-marquee-swiper {
+  &::before,
+  &::after{
+    content: '';
     position: absolute;
     top: 0;
     height: 100%;
     z-index: 2;
     pointer-events: none;
   }
-  .slick-slide {
-    height: auto;
-    min-height: 1px;
-    &:focus {
-      outline: none !important;
+
+  .swiper-wrapper{
+    -webkit-transition-timing-function: linear !important;
+    transition-timing-function: linear !important;
+    will-change: transform;
+    .swiper-slide{
+      // width: auto !important;
+      width: 12rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
     }
-  }
-
-}
-
-
-/* Only essential CSS - no transition interference */
-.fb-marquee-slider-container {
-  overflow: hidden;
-}
-
-.fb-marquee-carousel-wrapper {
-  width: 100%;
-  
-  .slick-slide {
-      /* Only essential styling */
-      outline: none;
   }
 }
