@@ -30,6 +30,7 @@ class AssetsGenerator
 	private $critical_css_content = '';
 	private $genrating_critical_css = false;
 	private $generate_general_assets = false;
+	private $generate_static_assets_critical = [];
 
 	private function reset() {
 		$this->post_id = null;
@@ -46,8 +47,7 @@ class AssetsGenerator
 		$this->critical_css_content = '';
 		$this->genrating_critical_css = false;
 		$this->generate_general_assets = false;
-		$this->get_static_css_content = false;
-		$this->critical_static_css_combined = [];
+		$this->generate_static_assets_critical = [];
 	}
 
 	public function generate_page_assets($post_id, $post, $generate_critical_css = false)
@@ -73,7 +73,6 @@ class AssetsGenerator
 		$this->post = $post;
 		$this->genrating_critical_css = $generate_critical_css;
 		$this->generate_general_assets = $generate_critical_css;
-		$this->get_static_css_content = $generate_critical_css;
 
 		// Generate header footer for wp_template for page post or any custom template
 		$refined_content = $this->get_page_content_with_template_parts();
@@ -147,7 +146,27 @@ class AssetsGenerator
 		}
 
 		// Get static css inside critical css
-		
+		if($this->genrating_critical_css) {
+			$assets_dir = FB_PLUGIN_PATH . 'assets/css/frontend/';
+			$css_files = Helper::get_css_files($assets_dir);
+
+			if (!empty($css_files)) {
+				foreach ($css_files as $key => $css_file) {
+					if(!in_array(basename($css_file), $this->generate_static_assets_critical)) {
+						if (!$this->combine_swiper_js && basename($css_file) === 'swiper-bundle.min.css') {
+							continue;
+						}
+	
+						if(!in_array('frontis-blocks/marquee-carousel', $this->used_blocks) && (basename($css_file) === 'slick-theme.css' || basename($css_file) === 'slick.css')) {
+							continue;
+						}
+	
+						$this->generate_static_assets_critical[] = basename($css_file);
+						$this->critical_css_content .= file_get_contents($css_file) . "\n";
+					}
+				}
+			}
+		}
 	}
 
 	public function get_page_content_with_template_parts() {
@@ -233,7 +252,6 @@ class AssetsGenerator
 
 		return $template_content;
 	}
-
 
 	public function generate_all_blocks_assets()
 	{
@@ -823,26 +841,17 @@ class AssetsGenerator
 		$assets_dir = FB_PLUGIN_PATH . 'assets/css/frontend/';
 		$css_files = Helper::get_css_files($assets_dir);
 
-		var_dump($this->used_blocks);
-
-
-		if(!empty($this->used_blocks)) {
-			foreach ($this->used_blocks as $key => $used_block) {
-				
-			}
-		}
-
-		if (!empty($css_files)) {
+		if (!empty($css_files) && !$this->generate_general_assets) {
 			foreach ($css_files as $key => $css_file) {
 				if (!$this->combine_swiper_js && basename($css_file) === 'swiper-bundle.min.css') {
 					continue;
 				}
 				
-				if($this->generate_general_assets) {
-					$this->css_content .= file_get_contents($css_file) . "\n";
-				} else {
-					$this->critical_css_content .= file_get_contents($css_file) . "\n";
+				if(!in_array(basename($css_file), $this->generate_static_assets_critical)) {
+					continue;
 				}
+
+				$this->css_content .= file_get_contents($css_file) . "\n";
 			}
 		}
 

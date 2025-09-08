@@ -207,10 +207,7 @@ class Blocks
 
 		$critical_css_used = preg_match_all("/frontis-blocks\/critical-css/i", $post->post_content) > 0;
 
-		// var_dump(get_post_type($post_id));
-
 		if($critical_css_used) {
-			delete_post_meta($post_id, 'generate_critical_css');
 			update_post_meta($post_id, 'generate_critical_css', $critical_css_used);
 		}
 
