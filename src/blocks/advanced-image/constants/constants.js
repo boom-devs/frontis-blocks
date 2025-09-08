@@ -36,6 +36,15 @@ export const STYLES = [
     { label: __("Rhombus", "frontis-block"), value: "rhombus" },
     { label: __("Hexagon", "frontis-block"), value: "hexagon" },
     { label: __("Bevel", "frontis-block"), value: "bevel" },
+    { label: __("Collage", "frontis-block"), value: "collage" },
+    { label: __("Abstract", "frontis-block"), value: "abstract" },
+    { label: __("Irregular Blob", "frontis-block"), value: "irregular" },
+    { label: __("Flower", "frontis-block"), value: "flower" },
+    { label: __("Organic Blob", "frontis-block"), value: "organic-blob" },
+    { label: __("Teardrop", "frontis-block"), value: "teardrop" },
+    { label: __("Triangle Blob", "frontis-block"), value: "triangle-blob" },
+    { label: __("Wavy Stripes", "frontis-block"), value: "wavy-stripes" },
+    { label: __("Token", "frontis-block"), value: "token" },
 ];
 
 export const TITLE_POSITION = [
@@ -123,3 +132,31 @@ export const BORDER_STYLES = [
     { label: __("Outset", "frontis-blocks"), value: "outset" },
     { label: __("Ridge", "frontis-blocks"), value: "ridge" },
 ];
+
+export const MASK_SIZE = [
+    { label: __("Cover", "frontis-blocks"), value: "cover" },
+    { label: __("Contain", "frontis-blocks"), value: "contain" },
+    { label: __("Auto", "frontis-blocks"), value: "auto" },
+];
+export const MASK_POSITION = [
+    { label: __("Center", "frontis-blocks"), value: "center" },
+    { label: __("Top", "frontis-blocks"), value: "top" },
+    { label: __("Left", "frontis-blocks"), value: "left" },
+    { label: __("Right", "frontis-blocks"), value: "right" },
+];
+export const MASK_REPEAT = [
+    { label: __("No Repeat", "frontis-blocks"), value: "no-repeat" },
+    { label: __("Repeat", "frontis-blocks"), value: "repeat" },
+];
+
+export const MASK_IMAEGS = {
+    'collage': FrontisBlocksData.pluginUrl + '/assets/images/photo-collage.svg',
+    'abstract': FrontisBlocksData.pluginUrl + '/assets/images/abstract.svg',
+    'irregular': FrontisBlocksData.pluginUrl + '/assets/images/irregular-blob.svg',
+    'flower': FrontisBlocksData.pluginUrl + '/assets/images/Flower.svg',
+    'organic-blob': FrontisBlocksData.pluginUrl + '/assets/images/organic-blob.svg',
+    'teardrop': FrontisBlocksData.pluginUrl + '/assets/images/teardrop.svg',
+    'triangle-blob': FrontisBlocksData.pluginUrl + '/assets/images/triangle-blob.svg',
+    'wavy-stripes': FrontisBlocksData.pluginUrl + '/assets/images/wavy-stripes.svg',
+    'token': FrontisBlocksData.pluginUrl + '/assets/images/token.svg',
+}

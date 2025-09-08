@@ -40,6 +40,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		contentAlignment,
 		mediaSize,
 		btnIcon,
+		buttonIconType,
+		btnImageUrl,
+		btnImageAlt,
+		btnImageID,
 		buttonIconSwitcher,
 		btnIconPosition,
 		infoIconPosition,
@@ -148,7 +152,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											/>
 											{buttonIconSwitcher && (
 												<div className="fb-btn-icon-wrapper">
-													{renderSVG(btnIcon)}
+													{buttonIconType === 'icon' && renderSVG(btnIcon)}
+													{buttonIconType === 'image' && <img src={btnImageUrl} alt={btnImageAlt} />}
 												</div>
 											)}
 										</a>

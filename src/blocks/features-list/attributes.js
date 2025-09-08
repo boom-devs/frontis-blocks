@@ -11,6 +11,14 @@ const attributes = {
         type: 'string',
         default: ''
     },
+    highlightColor: {
+        type: 'string',
+        default: '',
+    },
+    hoverHighlightColor: {
+        type: 'string',
+        default: '',
+    },
     FeatureItems: {
         type: 'array',
         default: [
@@ -19,6 +27,7 @@ const attributes = {
                 Title: 'Feature Item 1',
                 Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.',
                 FeatureIcon: 'check',
+                FeatureIconAlign: 'icon',
 
                 FeatureIconImageUrl: '',
                 FeatureIconImageAlt: '',
@@ -64,6 +73,7 @@ const attributes = {
                 Title: 'Feature Item 2',
                 Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.',
                 FeatureIcon: 'check',
+                FeatureIconAlign: 'icon',
 
                 FeatureIconImageUrl: '',
                 FeatureIconImageAlt: '',
@@ -109,6 +119,7 @@ const attributes = {
                 Title: 'Feature Item 3',
                 Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.',
                 FeatureIcon: 'check',
+                FeatureIconAlign: 'icon',
 
                 FeatureIconImageUrl: '',
                 FeatureIconImageAlt: '',

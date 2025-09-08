@@ -7,6 +7,14 @@ const attributes = {
         type: "string",
         default: ""
     },
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
+	},
 
     speed: {
         type: 'number',
@@ -16,6 +24,10 @@ const attributes = {
 		type: 'boolean',
 		default: false,
 	},
+	pauseOnHover: {
+        'type': 'boolean',
+        'default': false
+    },
 
     /** Start Width Height */
     slideWidth: {

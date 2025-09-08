@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -35,6 +35,9 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         setFeatureIconAlign(newAlignment);
         handleChangeItem(item.id, 'FeatureIconAlign', newAlignment);
     };
+    useEffect(() => {
+        setFeatureIconAlign(item.FeatureIconAlign || ICON_ALIGN[1].value);
+    }, [item.FeatureIconAlign]);  
 
     const TrashIcon = (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
