@@ -32,10 +32,7 @@ const attributes = {
 			sourceField: '',
 		}
 	},
-    dynamicContent: {
-        type: 'string',
-        default: '',
-      },
+
     headingTag: {
         type : 'string',
         default: 'h2'
@@ -101,6 +98,14 @@ const attributes = {
     dynamicFeaturedImageField:{
         type: 'string',
         default: 'title'
+    },
+    dynamicDateType: {
+        type: 'string',
+        default: 'published'
+    },
+    dynamicDateFormat: {
+        type: 'string',
+        default: 'default'
     },
 
 

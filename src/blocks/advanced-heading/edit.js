@@ -8,6 +8,7 @@ import {
 import { useEffect, useRef } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { decodeEntities } from '@wordpress/html-entities';
+import { dateI18n, __experimentalGetSettings as getDateSettings } from '@wordpress/date';
 
 /**
  * Internal dependencies
@@ -57,6 +58,9 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicEnableLink,
 		dynamicReplaceAll,
 		dynamicFeaturedImageField,
+
+		dynamicDateType,
+		dynamicDateFormat,
 
 
 	} = attributes;
@@ -132,6 +136,38 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			: null,
 		[shouldUseDynamic, dynamicField, postRecord?.featured_media, dynamicFeaturedImageField]
 	);
+
+	// সাইট সেটিংসের ডিফল্ট date format (Settings → General)
+	const getSiteDateFormat = () => {
+		const settings = getDateSettings?.() || {};
+		return settings?.formats?.date || 'F j, Y';
+	};
+	
+	// PHP স্টাইল ফরম্যাটে লোকেল/টাইমজোন রেসপেক্ট করে আউটপুট
+	const formatDateByPhp = (phpFmt, jsDate) => dateI18n(phpFmt, jsDate);
+	
+	// “2 days ago” টাইপ
+	const humanizeDate = (date) => {
+		if (!date) return '';
+		const now = new Date();
+		const diffSec = Math.round((now - date) / 1000);
+		const abs = Math.abs(diffSec);
+		const units = [
+		['year',   31536000],
+		['month',  2592000],
+		['week',   604800],
+		['day',    86400],
+		['hour',   3600],
+		['minute', 60],
+		['second', 1],
+		];
+		for (const [u, s] of units) {
+		const v = Math.floor(abs / s);
+		if (v >= 1) return diffSec >= 0 ? `${v} ${v===1?u:`${u}s`} ${__('ago','frontis-blocks')}` : `${__('in','frontis-blocks')} ${v} ${v===1?u:`${u}s`}`;
+		}
+		return __('just now','frontis-blocks');
+	};
+
 	
 	// author (only when needed)
 	const authorRecord = useSelect(
@@ -198,8 +234,32 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			}
 		}
 	
-		case 'post_date':
-			return postRecord.date ? new Date(postRecord.date).toLocaleDateString() : '';
+		case 'post_date': {
+			// Date Type: published | modified
+			const raw = dynamicDateType === 'modified' ? postRecord.modified : postRecord.date;
+			if (!raw) return __('No Content', 'frontis-blocks');
+		  
+			const d = new Date(raw);
+			if (isNaN(d.getTime())) return __('No Content', 'frontis-blocks');
+		  
+			switch (dynamicDateFormat) {
+			  case 'default':
+				return formatDateByPhp(getSiteDateFormat(), d);
+		  
+			  case 'F j, Y':
+			  case 'Y-m-d':
+			  case 'm/d/Y':
+			  case 'd/m/Y':
+				return formatDateByPhp(dynamicDateFormat, d);
+		  
+			  case 'human':
+				return humanizeDate(d);
+		  
+			  default:
+				// অজানা/অসমর্থিত হলে সাইট ডিফল্ট
+				return formatDateByPhp(getSiteDateFormat(), d);
+			}
+		  }
 	
 		case 'post_time':
 			return postRecord.date ? new Date(postRecord.date).toLocaleTimeString() : '';

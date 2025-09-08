@@ -1,5 +1,6 @@
 import { __ } from "@wordpress/i18n";
 import { Dashicon } from "@wordpress/components";
+import { dateI18n, __experimentalGetSettings as getDateSettings } from '@wordpress/date';
 
 export const STORE_NAME = 'frontis';
 
@@ -286,3 +287,24 @@ export const DYNAMIC_FEATURED_IMAGE_OPTIONS = [
 	{ label: __('Description', 'frontis-blocks'), value: 'description' },
 	{ label: __('Attachment URL', 'frontis-blocks'), value: 'attachment_url' },
 ];
+
+export const DYNAMIC_DATE_TYPE_OPTIONS = [
+	{ label: __('Post Published', 'frontis-blocks'), value: 'published' },
+	{ label: __('Post Modified',  'frontis-blocks'), value: 'modified' },
+];
+  
+export const getDynamicDateFormatOptions = (sampleDate = new Date()) => {
+	const settings = getDateSettings?.() || {};
+	const siteDefault = settings?.formats?.date || 'F j, Y';
+  
+	const fmt = (phpFmt) => dateI18n(phpFmt, sampleDate);
+  
+	return [
+	  { label: `${__('Default','frontis-blocks')} (${fmt(siteDefault)})`, value: 'default' },
+	  { label: fmt('F j, Y'), value: 'F j, Y' },
+	  { label: fmt('Y-m-d'),  value: 'Y-m-d' },
+	  { label: fmt('m/d/Y'),  value: 'm/d/Y' },
+	  { label: fmt('d/m/Y'),  value: 'd/m/Y' },
+	  { label: __('Human Readable','frontis-blocks'), value: 'human' },
+	];
+};
