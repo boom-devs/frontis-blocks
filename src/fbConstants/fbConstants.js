@@ -261,7 +261,6 @@ export const DYNAMIC_CURRENT_POST_OPTIONS = [
     { label: __('Post Title', 'frontis-blocks'), value: 'post_title' },
     { label: __('Post Excerpt', 'frontis-blocks'), value: 'post_excerpt' },
     { label: __('Featured Image', 'frontis-blocks'), value: 'post_thumbnail' },
-    { label: __('Post Custom Field', 'frontis-blocks'), value: 'post_meta' },
     { label: __('Post Date', 'frontis-blocks'), value: 'post_date' },
     { label: __('Post Time', 'frontis-blocks'), value: 'post_time' },
     { label: __('Post Terms', 'frontis-blocks'), value: 'post_terms' },

@@ -79,7 +79,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	// কোন কোন ফিল্ড dynamic preview করবে (Current Post)
 	const CURRENT_POST_FIELDS = [
-		'post_title','post_excerpt','post_thumbnail','post_meta',
+		'post_title','post_excerpt','post_thumbnail',
 		'post_date','post_time','post_terms','post_id','comments_number',
 		'author_name','author_first_name','author_last_name','author_nickname',
 		'author_description','author_email','author_url','author_avatar','author_meta'
@@ -196,16 +196,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			  default:
 				return mediaRecord.source_url || __('No Content', 'frontis-blocks');
 			}
-		}
-	
-		case 'post_meta': {
-			// editor preview only works if meta registered show_in_rest=true
-			const key = attributes?.metaKey;
-			if (key && postRecord.meta && typeof postRecord.meta[key] !== 'undefined') {
-			const val = postRecord.meta[key];
-			return Array.isArray(val) ? val.join(', ') : String(val ?? '');
-			}
-			return __('(post meta will render on frontend)', 'frontis-blocks');
 		}
 	
 		case 'post_date':
