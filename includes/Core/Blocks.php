@@ -213,21 +213,23 @@ class Blocks
 
 		$pattern = "/frontis-blocks/i";
 		update_post_meta($post_id, 'frontis_blocks_used', false);
+		update_post_meta($post_id, 'generate_critical_css', false);
 
 		if(preg_match_all($pattern, $post->post_content) > 0) {
 			update_post_meta($post_id, 'frontis_blocks_used', true);
 		}
 
+		$critical_css_used = preg_match_all("/frontis-blocks\/critical-css/i", $post->post_content) > 0;
 
-		if($post->post_name === 'home-2-2') {
-			$myfile = fopen("assetsgeneration.txt", "w") or die("Unable to open file!");
-			$txt = $post->post_content;
-			fwrite($myfile, $txt);
-			fclose($myfile);
+		// var_dump(get_post_type($post_id));
+
+		if($critical_css_used) {
+			delete_post_meta($post_id, 'generate_critical_css');
+			update_post_meta($post_id, 'generate_critical_css', $critical_css_used);
 		}
 
 		if ($update) {
-			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post);
+			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post, $critical_css_used);
 		}
 	}
 
