@@ -652,43 +652,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 },
             },
             "preset-6": {
-                headingIconSwitcher: false,
-                subHeadingSwitcher: false,
-                subHeadingPosition: "bottom",
-                activeLineSwitcher: true,
-                activeLineBeforeWidth: {
-                    Desktop: '42',
-                },
-                activeLineAfterWidth: {
-                    Desktop: '100',
-                },
-                activeLineBeforeColor: "#F89B2E",
-                activeLineAfterColor: "#FCD7AB",
-                showSeparatorSwitcher: false,
-                separator: "",
-                separatorColor: "",
-                separatorPosition: "bottom",
-                headingBackgroundImageEnabled: false,
-                headingTextShadowCssValue: "none",
-                headingColor: "#F89B2E",
-                headingTextStroke: {
-                    Desktop: "",
-                    Tablet: "",
-                    Mobile: "",
-                },
-                headingTextStrokeColor: "",
-                headingTextStrokeHoverColor: "",
-                headingAlignment: {
-                    Desktop: "center"
-                },
-                headingDesktopPadding: {
-                    top: '0',
-                    bottom: '24',
-                    left: '0',
-                    right: '0',
-                },
-            },
-            "preset-7": {
                 headingIconSwitcher: true,
                 subHeadingSwitcher: false,
                 subHeadingPosition: "bottom",
