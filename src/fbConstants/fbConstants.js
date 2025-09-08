@@ -288,7 +288,7 @@ export const DYNAMIC_FEATURED_IMAGE_OPTIONS = [
 	{ label: __('Attachment URL', 'frontis-blocks'), value: 'attachment_url' },
 ];
 
-export const DYNAMIC_DATE_TYPE_OPTIONS = [
+export const DYNAMIC_DATE_TIME_TYPE_OPTIONS = [
 	{ label: __('Post Published', 'frontis-blocks'), value: 'published' },
 	{ label: __('Post Modified',  'frontis-blocks'), value: 'modified' },
 ];
@@ -305,5 +305,20 @@ export const getDynamicDateFormatOptions = (sampleDate = new Date()) => {
 	  { label: fmt('d/m/Y'),  value: 'd/m/Y' },
 	  
 	  { label: __('Human Readable','frontis-blocks'), value: 'human' },
+	];
+};
+
+export const getDynamicTimeFormatOptions = (sampleDate = new Date()) => {
+
+	const d = sampleDate instanceof Date ? sampleDate : new Date(sampleDate);
+  
+	const fmt = (phpFmt) => dateI18n(phpFmt, d);
+  
+	return [
+	  { label: `${__('Default','frontis-blocks')}`, value: 'default' },
+	  { label: fmt('g:i A'),  value: 'g:i A' },
+	  { label: fmt('g:i'),    value: 'g:i' },
+	  { label: fmt('g:i:s a'),value: 'g:i:s a' },
+
 	];
 };
