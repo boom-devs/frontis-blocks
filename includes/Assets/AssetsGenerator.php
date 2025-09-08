@@ -9,7 +9,7 @@ use Sabberworm\CSS\CSSList\AtRuleBlockList;
 use Sabberworm\CSS\CSSList\CSSList;
 use Sabberworm\CSS\OutputFormat;
 use Sabberworm\CSS\Parser;
-use Sabberworm\CSS\RuleSet\DeclarationBlock;
+use FrontisBlocks\Assets\TemplateProcessor;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -46,14 +46,8 @@ class AssetsGenerator
 		$this->critical_css_content = '';
 		$this->genrating_critical_css = false;
 		$this->generate_general_assets = false;
-	}
-
-	public function generate_header_css() {
-
-	}
-
-	public function generate_footer_css() {
-
+		$this->get_static_css_content = false;
+		$this->critical_static_css_combined = [];
 	}
 
 	public function generate_page_assets($post_id, $post, $generate_critical_css = false)
@@ -61,18 +55,28 @@ class AssetsGenerator
 		$current_url = $_SERVER['HTTP_REFERER'];
 
 		if (preg_match('/site-editor\.php/', $current_url)) {
-			return $post;
+			return false;
+		}
+
+		$upload_dir = wp_upload_dir();
+		$global_css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
+		$page_name = get_post_type($post_id) === 'post' ? 'single' : get_post_type($post_id).'-single';
+
+		$frontis_block_used = get_post_meta($post_id, 'frontis_blocks_used', true);
+		if(!$frontis_block_used) {
+			$css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/' . $page_name . '/';
+			if (file_exists($css_dir)) {
+				return false;
+			}
 		}
 
 		$this->post = $post;
-
 		$this->genrating_critical_css = $generate_critical_css;
 		$this->generate_general_assets = $generate_critical_css;
+		$this->get_static_css_content = $generate_critical_css;
 
 		// Generate header footer for wp_template for page post or any custom template
-		$this->combine_static_assets();
 		$refined_content = $this->get_page_content_with_template_parts();
-
 		$pattern = "/frontis-blocks/i";
 
 		// var_dump(preg_match_all($pattern, $refined_content) < 1);
@@ -81,12 +85,17 @@ class AssetsGenerator
 		}
 
 		$this->post->post_content = $refined_content;
-
 		$this->post_id = $post_id;
 		$this->generate_all_blocks_assets();
+		$this->combine_static_assets();
 
 		// Combine and save CSS files
-		$this->combine_and_save_css_file($post->post_name);
+		$page_name = $post->post_name;
+		if(!$frontis_block_used) {
+			$page_name = get_post_type($post_id) === 'post' ? 'single' : get_post_type($post_id).'-single';
+		}
+
+		$this->combine_and_save_css_file($page_name);
 
 		$this->reset();
 	}
@@ -136,17 +145,21 @@ class AssetsGenerator
 
 			$this->critical_css_content .= $this->clean_CSS($blockStyle) . "\n";
 		}
-	}
 
+		// Get static css inside critical css
+		
+	}
 
 	public function get_page_content_with_template_parts() {
 		global $wpdb;
 
-		$post_name = Helper::is_custom_post_type($this->post->ID) || get_post_type($this->post->ID) === 'post' ? 'single' : 'page';
+		$post_name = Helper::is_custom_post_type($this->post->ID) || get_post_type($this->post->ID) === 'post' ? 'single' : get_post_type($this->post->ID);
 		$assigned_template = get_post_meta($this->post->ID, '_wp_page_template', true);
 
 		if ($assigned_template !== '') {
-			$post_name = $assigned_template;
+			if($assigned_template !== 'default') {
+				$post_name = $assigned_template;
+			}
 		}
 
 		$query = $wpdb->prepare(
@@ -164,11 +177,10 @@ class AssetsGenerator
                 post_modified DESC",
 			$post_name
 		);
-
+		
 		// Execute the query
 		$template_contents = $wpdb->get_results($query);
-
-		return $this->process_template_content($template_contents);
+		return TemplateProcessor::get_instance($this->post)->process_template($template_contents);
 	}
 
 	// Function to process the array and replace template parts with their post content
@@ -811,13 +823,26 @@ class AssetsGenerator
 		$assets_dir = FB_PLUGIN_PATH . 'assets/css/frontend/';
 		$css_files = Helper::get_css_files($assets_dir);
 
+		var_dump($this->used_blocks);
+
+
+		if(!empty($this->used_blocks)) {
+			foreach ($this->used_blocks as $key => $used_block) {
+				
+			}
+		}
+
 		if (!empty($css_files)) {
 			foreach ($css_files as $key => $css_file) {
 				if (!$this->combine_swiper_js && basename($css_file) === 'swiper-bundle.min.css') {
 					continue;
 				}
-
-				$this->css_content .= file_get_contents($css_file) . "\n";
+				
+				if($this->generate_general_assets) {
+					$this->css_content .= file_get_contents($css_file) . "\n";
+				} else {
+					$this->critical_css_content .= file_get_contents($css_file) . "\n";
+				}
 			}
 		}
 
