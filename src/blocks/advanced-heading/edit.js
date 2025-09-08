@@ -7,6 +7,7 @@ import {
 } from '@wordpress/block-editor';
 import { useEffect, useRef } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
+import { decodeEntities } from '@wordpress/html-entities';
 
 /**
  * Internal dependencies
@@ -55,6 +56,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicField,
 		dynamicEnableLink,
 		dynamicReplaceAll,
+		dynamicFeaturedImageField,
 
 
 	} = attributes;
@@ -88,8 +90,22 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicSource === 'current_post' &&
 		CURRENT_POST_FIELDS.includes(dynamicField);
 	
-	// helper
-	const getPlainText = (html) => html?.replace(/<[^>]+>/g, '') ?? '';
+	// HTML ➜ clean plain text (editor-safe)
+	const getPlainText = (html) => {
+		const raw = html ?? '';
+		// decode &amp; &nbsp; etc.
+		const decoded = decodeEntities(raw);
+		// remove html tags
+		let text = decoded.replace(/<[^>]+>/g, '');
+		// kill line breaks (otherwise RichText ⇒ <br data-rich-text-line-break>)
+		text = text.replace(/\r?\n|\r/g, ' ');
+		// replace non-breaking space with normal space
+		text = text.replace(/\u00A0/g, ' ');
+		// remove zero-width chars (ZWSP, ZWNJ, ZWJ, BOM)
+		text = text.replace(/[\u200B-\u200D\uFEFF]/g, '');
+		// collapse multiple spaces and trim
+		return text.replace(/\s{2,}/g, ' ').trim();
+	};
 	
 	// pull post record
 	const postRecord = useSelect(
@@ -109,12 +125,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	// featured image (only when needed)
 	const mediaRecord = useSelect(
 		(select) =>
-		shouldUseDynamic &&
-		dynamicField === 'post_thumbnail' &&
-		postRecord?.featured_media
+		  shouldUseDynamic &&
+		  dynamicField === 'post_thumbnail' &&
+		  postRecord?.featured_media
 			? select(coreStore).getEntityRecord('postType', 'attachment', postRecord.featured_media)
 			: null,
-		[shouldUseDynamic, dynamicField, postRecord?.featured_media]
+		[shouldUseDynamic, dynamicField, postRecord?.featured_media, dynamicFeaturedImageField]
 	);
 	
 	// author (only when needed)
@@ -152,9 +168,35 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			// raw খালি মানে user কিছু লেখেনি → show "No Content"
 			return __('No Content', 'frontis-blocks');
 		}		  
-	
-		case 'post_thumbnail':
-			return mediaRecord?.source_url || __('(no featured image)', 'frontis-blocks');
+
+		case 'post_thumbnail': {
+			if (!postRecord?.featured_media) return __('No Content', 'frontis-blocks');
+			if (!mediaRecord) return __('(loading...)', 'frontis-blocks');
+		  
+			const sub = dynamicFeaturedImageField || 'attachment_url';
+		  
+			switch (sub) {
+			  case 'title':
+				return getPlainText(mediaRecord.title?.rendered || mediaRecord.title) || __('No Content', 'frontis-blocks');
+		  
+			  case 'alt':
+				return getPlainText(mediaRecord.alt_text) || __('No Content', 'frontis-blocks');
+		  
+			  case 'caption':
+				return getPlainText(mediaRecord.caption?.rendered) || __('No Content', 'frontis-blocks');
+		  
+			  case 'description':
+				return getPlainText(
+				  typeof mediaRecord.description === 'string'
+					? mediaRecord.description
+					: (mediaRecord.description?.rendered ?? '')
+				) || __('No Content', 'frontis-blocks');
+		  
+			  case 'attachment_url':
+			  default:
+				return mediaRecord.source_url || __('No Content', 'frontis-blocks');
+			}
+		}
 	
 		case 'post_meta': {
 			// editor preview only works if meta registered show_in_rest=true
@@ -205,12 +247,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	
 		case 'author_avatar':
 			// user object usually has avatar_urls; pick 96px
-			return authorRecord?.avatar_urls?.['96'] || __('(avatar url on frontend)', 'frontis-blocks');
+			return authorRecord?.avatar_urls?.['96'] || __('No Content', 'frontis-blocks');
 	
 		case 'author_meta': {
 			const key = attributes?.authorMetaKey;
 			// user meta not in REST by default; show hint
-			return key ? __('(author meta will render on frontend)', 'frontis-blocks') : '';
+			return key ? __('No Content', 'frontis-blocks') : '';
 		}
 	
 		default:

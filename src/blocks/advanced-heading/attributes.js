@@ -98,6 +98,10 @@ const attributes = {
         type: 'boolean',
         default: false
     },
+    dynamicFeaturedImageField:{
+        type: 'string',
+        default: 'title'
+    },
 
 
     /** Start Heading Style */
