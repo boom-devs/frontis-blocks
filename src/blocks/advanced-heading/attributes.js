@@ -48,6 +48,58 @@ const attributes = {
         type: 'string',
         default: '',
     },
+
+
+    dynamicEnabled : {
+        type: 'boolean',
+        default: false
+    },
+    dynamicSource: {
+        type: 'string',
+        default: 'current_post'
+    },
+    dynamicField: {
+        type: 'string',
+        default: 'post_title'
+    },
+    metaKey: {
+        type: 'string',
+        default: ''
+    },
+    authorMetaKey : {
+        type: 'string',
+        default: ''
+    },
+    termsTaxonomy: {
+        type: 'string',
+        default: ''
+    },
+    termsFormat: {
+        type: 'string',
+        default: 'names'
+    },
+    requestParamKey: {
+        type: 'string',
+        default: ''
+    },
+    shortcode: {
+        type: 'string',
+        default: ''
+    },
+    userScope: {
+        type: 'string',
+        default: 'current'
+    },
+    dynamicEnableLink: {
+        type: 'boolean',
+        default: false
+    },
+    dynamicReplaceAll: {
+        type: 'boolean',
+        default: false
+    },
+
+
     /** Start Heading Style */
     headingGlobalTypographyData: {
         type: 'object',
