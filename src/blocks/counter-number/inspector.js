@@ -290,9 +290,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 counterItemPaddingMobile: { top: '32', bottom: '32', left: '32', right: '32' },
                 counterItemPaddingTablet: { top: '24', bottom: '24', left: '24', right: '24' },
                 counterItemSize: {
-                    Desktop: '410',
-                    Tablet: '306',
-                    Mobile: '250'
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: ''
                 },
                 counterItemHeight: {
                     Desktop: '',
@@ -321,9 +321,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 counterItemPaddingMobile: { top: '32', bottom: '32', left: '32', right: '32' },
                 counterItemPaddingTablet: { top: '24', bottom: '24', left: '24', right: '24' },
                 counterItemSize: {
-                    Desktop: '410',
-                    Tablet: '306',
-                    Mobile: '250'
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: ''
                 },
                 counterItemHeight: {
                     Desktop: '',
@@ -368,9 +368,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 counterItemPaddingMobile: { top: '32', bottom: '32', left: '32', right: '32' },
                 counterItemPaddingTablet: { top: '24', bottom: '24', left: '24', right: '24' },
                 counterItemSize: {
-                    Desktop: '410',
-                    Tablet: '306',
-                    Mobile: '250'
+                    Desktop: '',
+                    Tablet: '',
+                    Mobile: ''
                 },
                 counterItemHeight: {
                     Desktop: '',
@@ -427,6 +427,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     Tablet: '306',
                     Mobile: '306'
                 },
+                iconPosition: {
+                    default: 'center'
+                }
             },
         };
 
