@@ -50,7 +50,8 @@ import {
 
 import { 
     DYNAMIC_CURRENT_POST_OPTIONS,
-    
+    DYNAMIC_FEATURED_IMAGE_OPTIONS,
+
 } from '@Constants/fbConstants';
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
@@ -438,6 +439,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dynamicField,
         dynamicEnableLink,
         dynamicReplaceAll,
+        dynamicFeaturedImageField,
 
     } = attributes;
 
@@ -3021,6 +3023,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     dynamicField,
     dynamicEnableLink,
     dynamicReplaceAll,
+    dynamicFeaturedImageField,
     ]);
 
     const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
@@ -3062,12 +3065,22 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             />
 
                             {dynamicSource === 'current_post' && (
+                                <>
                                 <SelectControl
                                     label={__("Source Field", "frontis-blocks")}
                                     value={dynamicField}
                                     options={DYNAMIC_CURRENT_POST_OPTIONS}
                                     onChange={(value) => setAttributes({ dynamicField: value })}
                                 />
+                                {dynamicField === 'post_thumbnail' && (
+                                    <SelectControl
+                                        label={__("Featured Image", "frontis-blocks")}
+                                        value={dynamicFeaturedImageField}
+                                        options={DYNAMIC_FEATURED_IMAGE_OPTIONS}
+                                        onChange={(value) => setAttributes({ dynamicFeaturedImageField: value })}
+                                    />
+                                )}
+                                </>
                             )}
 
                             <ToggleControl

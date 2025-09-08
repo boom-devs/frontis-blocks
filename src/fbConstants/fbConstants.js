@@ -260,7 +260,7 @@ export const BACKGROUND_TYPES = [
 export const DYNAMIC_CURRENT_POST_OPTIONS = [
     { label: __('Post Title', 'frontis-blocks'), value: 'post_title' },
     { label: __('Post Excerpt', 'frontis-blocks'), value: 'post_excerpt' },
-    { label: __('Featured Image URL', 'frontis-blocks'), value: 'post_thumbnail' },
+    { label: __('Featured Image', 'frontis-blocks'), value: 'post_thumbnail' },
     { label: __('Post Custom Field', 'frontis-blocks'), value: 'post_meta' },
     { label: __('Post Date', 'frontis-blocks'), value: 'post_date' },
     { label: __('Post Time', 'frontis-blocks'), value: 'post_time' },
@@ -278,4 +278,12 @@ export const DYNAMIC_CURRENT_POST_OPTIONS = [
     { label: __('Author Website', 'frontis-blocks'), value: 'author_url' },
     { label: __('Author Avatar URL', 'frontis-blocks'), value: 'author_avatar' },
     { label: __('Author Custom Field', 'frontis-blocks'), value: 'author_meta' },
+];
+
+export const DYNAMIC_FEATURED_IMAGE_OPTIONS = [
+	{ label: __('Title', 'frontis-blocks'), value: 'title' },
+	{ label: __('Alt', 'frontis-blocks'), value: 'alt' },
+	{ label: __('Caption', 'frontis-blocks'), value: 'caption' },
+	{ label: __('Description', 'frontis-blocks'), value: 'description' },
+	{ label: __('Attachment URL', 'frontis-blocks'), value: 'attachment_url' },
 ];
