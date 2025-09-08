@@ -17,6 +17,14 @@ const attributes = {
 	},
 	tabActive: {
 		type: 'number',
-	}
+	},
+	highlightColor: {
+		type: 'string',
+		default: '',
+	},
+	hoverHighlightColor: {
+		type: 'string',
+		default: '',
+	},
 };
 export default attributes;

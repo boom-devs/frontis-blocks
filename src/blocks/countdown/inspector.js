@@ -3752,7 +3752,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					normalClassicColor={globalClassicColor}
 					setNormalClassicColor={(value) => setAttributes({ globalClassicColor: value === undefined ? '' : value }) }
 					normalGradientColor={globalGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ globalGradientColor: value === undefined ? '' : value }) }
+					setNormalGradientColor={(value) => setAttributes({ globalGradientColor: value === undefined ? null : value }) }
 					normalCustomGradientSwitcher={ globalCustomGradientSwitcher }
 					setNormalCustomGradientSwitcher={(value) => setAttributes({ globalCustomGradientSwitcher: value, }) }
 					normalCustomGradientInputValue={ globalCustomGradientInputValue }
@@ -3776,7 +3776,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					hoverClassicColor={hoverClassicColor}
 					setHoverClassicColor={(value) => setAttributes({ hoverClassicColor: value === undefined ? '' : value }) }
 					hoverGradientColor={hoverGradientColor}
-					setHoverGradientColor={(value) => setAttributes({ hoverGradientColor: value === undefined ? '' : value }) }
+					setHoverGradientColor={(value) => setAttributes({ hoverGradientColor: value === undefined ? null : value }) }
 					hoverCustomGradientSwitcher={ hoverCustomGradientSwitcher }
 					setHoverCustomGradientSwitcher={(value) => setAttributes({ hoverCustomGradientSwitcher: value, }) }
 					hoverCustomGradientInputValue={ hoverCustomGradientInputValue }
