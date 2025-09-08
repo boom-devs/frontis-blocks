@@ -616,6 +616,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				socialProfileSeparatorColor: '#E1E3E8',
 				teamMemberIconsBorder: 'none',
 				teamMemberIconsColor: '',
+				socialIconBtnIcon: '',
+				wrapperButtonIconRotate: '',
 				teamMemberIconsBGColor: '#fff',
 				socialIconBtnSwitcher: false,
 				teamMemberSocialType: 'content',
@@ -646,8 +648,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				teamMemberImageMarginDesktop: {
 					top: '0',
 					bottom: '0',
-					left: '20',
-					right: '20',
+					left: '0',
+					right: '0',
 				},
 				teamMemberImageHeight: {
 					Desktop: '260',
@@ -769,7 +771,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				teamMemberImageOverlaySwitcher: true,
 				teamMemberBgType: 'classic',
 				teamMemberBgCustomGradientSwitcher: false,
-				teamMemberBgClassicColor: '#fff',
+				teamMemberBgClassicColor: 'transparent',
 				teamMemberBgHoverType: 'classic',
 				teamMemberBgHoverCustomGradientSwitcher: false,
 				teamMemberBgHoverClassicColor: '',
@@ -777,7 +779,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				teamMemberBorderColor: '#E1E3E8',
 				teamMemberContentPosition: 'bottom',
 				teamMemberContentBgType: 'classic',
-				teamMemberContentBgClassicColor: '#ffffff',
+				teamMemberContentBgClassicColor: 'transparent',
 				teamMemberDescSwitcher: true,
 				teamMemberNameColor: '#15171C',
 				teamMemberNameHoverColor: '',
@@ -796,6 +798,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				socialIconBtnBGColor: 'rgba(255, 255, 255, 0.40)',
 				socialIconBtnBorder: 'solid',
 				socialIconBtnBorderColor: '#fff',
+				socialIconBtnIcon: 'arrow-down',
+				wrapperButtonIconRotate: '230',
 				socialIconBtnColor: '#fff',
 				teamMemberSocialType: 'image',
 				teamMemberSocialIconAnimationType: 'right',
@@ -960,7 +964,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				teamMemberImageOverlaySwitcher: true,
 				teamMemberBgType: 'classic',
 				teamMemberBgCustomGradientSwitcher: false,
-				teamMemberBgClassicColor: '#fff',
+				teamMemberBgClassicColor: 'transparent',
 				teamMemberBgHoverType: 'classic',
 				teamMemberBgHoverCustomGradientSwitcher: false,
 				teamMemberBgHoverClassicColor: '',
@@ -987,6 +991,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				socialIconBtnBGColor: 'rgba(255, 255, 255, 0.40)',
 				socialIconBtnBorder: 'solid',
 				socialIconBtnBorderColor: '#fff',
+				socialIconBtnIcon: 'arrow-down',
+				wrapperButtonIconRotate: '230',
 				socialIconBtnColor: '#fff',
 				teamMemberSocialType: 'image',
 				teamMemberSocialIconAnimationType: 'top',
@@ -1025,14 +1031,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: '',
 				},
 				teamMemberImageWidth: {
-					Desktop: '100',
+					Desktop: '410',
 					Tablet: '',
 					Mobile: '',
 				},
 				teamMemberImageWidthUnits: {
-					Desktop: '%',
-					Tablet: '%',
-					Mobile: '%'
+					Desktop: 'px',
+					Tablet: 'px',
+					Mobile: ''
 				},
 				teamMemberImageBorderRadiusDesktop: {
 					bottom: '16',
@@ -1179,6 +1185,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				socialIconBtnBGColor: '#15171C',
 				socialIconBtnBorder: 'solid',
 				socialIconBtnBorderColor: '#fff',
+				socialIconBtnIcon: 'arrow-down',
+				wrapperButtonIconRotate: '230',
 				socialIconBtnColor: '#fff',
 				teamMemberSocialType: 'content',
 				teamMemberSocialIconAnimationType: 'top',
@@ -1217,14 +1225,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: '',
 				},
 				teamMemberImageWidth: {
-					Desktop: '100',
+					Desktop: '280',
 					Tablet: '',
 					Mobile: '',
 				},
 				teamMemberImageWidthUnits: {
-					Desktop: '%',
-					Tablet: '%',
-					Mobile: '%'
+					Desktop: 'px',
+					Tablet: 'px',
+					Mobile: ''
 				},
 				teamMemberImageBorderRadiusDesktop: {
 					bottom: '999',
@@ -1377,6 +1385,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				socialIconBtnBGColor: '#15171C',
 				socialIconBtnBorder: 'solid',
 				socialIconBtnBorderColor: '#fff',
+				socialIconBtnIcon: 'plus',
+				wrapperButtonIconRotate: '0',
 				socialIconBtnColor: '#fff',
 				teamMemberSocialType: 'image',
 				teamMemberSocialIconAnimationType: 'top',
@@ -1415,14 +1425,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: '',
 				},
 				teamMemberImageWidth: {
-					Desktop: '100',
+					Desktop: '300',
 					Tablet: '',
 					Mobile: '',
 				},
 				teamMemberImageWidthUnits: {
-					Desktop: '%',
-					Tablet: '%',
-					Mobile: '%'
+					Desktop: 'px',
+					Tablet: 'px',
+					Mobile: ''
 				},
 				teamMemberImageBorderRadiusDesktop: {
 					bottom: '999',
@@ -1575,6 +1585,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				socialIconBtnBGColor: '#399cff',
 				socialIconBtnBorder: 'none',
 				socialIconBtnBorderColor: '#fff',
+				socialIconBtnIcon: 'arrow-down',
+				wrapperButtonIconRotate: '230',
 				socialIconBtnColor: '#fff',
 				teamMemberSocialType: 'image',
 				teamMemberSocialIconAnimationType: 'top',
@@ -1613,14 +1625,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: '',
 				},
 				teamMemberImageWidth: {
-					Desktop: '100',
+					Desktop: '410',
 					Tablet: '',
 					Mobile: '',
 				},
 				teamMemberImageWidthUnits: {
-					Desktop: '%',
-					Tablet: '%',
-					Mobile: '%'
+					Desktop: 'px',
+					Tablet: 'px',
+					Mobile: ''
 				},
 				teamMemberImageBorderRadiusDesktop: {
 					bottom: '0',
@@ -1698,10 +1710,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					top: '18',
 				},
 				teamMemberIconsDesktopMargin: {
-					bottom: '',
-					left: '',
-					right: '',
-					top: '',
+					bottom: '-26',
+					left: '0',
+					right: '0',
+					top: '0',
 				},
 				teamMemberDescMarginDesktop: {
 					top: '',
