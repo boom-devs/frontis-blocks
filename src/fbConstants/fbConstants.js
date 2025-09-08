@@ -1,6 +1,6 @@
 import { __ } from "@wordpress/i18n";
 import { Dashicon } from "@wordpress/components";
-import { dateI18n, __experimentalGetSettings as getDateSettings } from '@wordpress/date';
+import { dateI18n } from '@wordpress/date';
 
 export const STORE_NAME = 'frontis';
 
@@ -294,17 +294,16 @@ export const DYNAMIC_DATE_TYPE_OPTIONS = [
 ];
   
 export const getDynamicDateFormatOptions = (sampleDate = new Date()) => {
-	const settings = getDateSettings?.() || {};
-	const siteDefault = settings?.formats?.date || 'F j, Y';
-  
+
 	const fmt = (phpFmt) => dateI18n(phpFmt, sampleDate);
   
 	return [
-	  { label: `${__('Default','frontis-blocks')} (${fmt(siteDefault)})`, value: 'default' },
-	  { label: fmt('F j, Y'), value: 'F j, Y' },
+	  { label: `${__('Default','frontis-blocks')}`, value: 'default' },
+	  { label: fmt('jS F Y'),   value: 'jS F Y' },
 	  { label: fmt('Y-m-d'),  value: 'Y-m-d' },
 	  { label: fmt('m/d/Y'),  value: 'm/d/Y' },
 	  { label: fmt('d/m/Y'),  value: 'd/m/Y' },
+	  
 	  { label: __('Human Readable','frontis-blocks'), value: 'human' },
 	];
 };
