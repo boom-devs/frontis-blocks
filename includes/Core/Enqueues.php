@@ -13,43 +13,44 @@ class Enqueues {
 
     use Singleton;
 
+    private $upload_dir = '';
+
     /**
      * Constructor
      */
     public function __construct() {
+        $this->upload_dir = wp_upload_dir();
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
         add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_scripts']);
         add_action('wp_head', [$this, 'add_preconnect_to_head']);
-        add_action('wp_footer', [$this, 'enqueue_footer_styles']);
+        add_action('wp_footer', [$this, 'enqueue_assets_footer']);
     }
 
-    public function enqueue_scripts() {
+    public function get_page_name(){
         $page_name = Helper::get_page_name();
-        $upload_dir = wp_upload_dir();
         $post = get_post(get_the_ID());
         $frontis_used = get_post_meta(get_the_ID(), 'frontis_blocks_used', true);
-        $frontis_critical_css_generation = get_post_meta(get_the_ID(), 'generate_critical_css', true);
-
+    
         if (is_home()) {
             $page_name = 'home';
         }
-
+    
         if (is_single()) {
             $page_name = 'single';
         }
-
+    
         if (is_archive()) {
             $page_name = 'archive';
         }
-
+    
         if (is_search()) {
             $page_name = 'search';
         }
-
+    
         if (is_404()) {
             $page_name = '404';
         }
-
+    
         if ($frontis_used) {
             if (Helper::is_custom_post_type(get_the_ID()) || (get_post_type(get_the_ID()) === 'post' && !in_array($page_name, ['home', 'archive']))) {
                 $page_name = $post->post_name;
@@ -63,36 +64,56 @@ class Enqueues {
             }
         }
 
-        
-        $frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
-        $frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
+        return $page_name;
+    }
 
-        // critical css file enqueue
-        if($frontis_critical_css_generation) {
-            // Enqueue critical css
+    public function enqueue_scripts() {
+        $frontis_critical_css_generation = get_post_meta(get_the_ID(), 'generate_critical_css', true);
+        $page_name = $this->get_page_name();
+        $frontend_dir = $this->upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
+        $frontend_url = $this->upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
+
+        // CSS and JS file paths
+        $css_file_system_path = $frontend_dir . $page_name . '.min.css';
+        $css_file_url = $frontend_url . $page_name . '.min.css';
+        
+    
+        // Critical CSS file enqueue (remains in header for performance)
+        if ($frontis_critical_css_generation) {
             $critical_css_file_system_path = $frontend_dir . $page_name . '-critical.min.css';
             $critical_css_file_url = $frontend_url . $page_name . '-critical.min.css';
-            if(file_exists($critical_css_file_system_path)) {
+            if (file_exists($critical_css_file_system_path)) {
                 $version = filemtime($critical_css_file_system_path);
                 wp_enqueue_style('frontis-blocks-frontend-critical', $critical_css_file_url, [], $version);
             }
+
+            // Enqueue CSS and JS in footer
+            add_action('wp_footer', function() use ($css_file_system_path, $css_file_url) {
+                // Enqueue page CSS and print it in footer
+                if (file_exists($css_file_system_path)) {
+                    $version = filemtime($css_file_system_path);
+                    wp_enqueue_style('frontis-blocks-frontend', $css_file_url, [], $version);
+                    wp_print_styles('frontis-blocks-frontend'); // Outputs the CSS in the footer
+                }
+            }, 100);
+        } else {
+            // Enqueue page CSS in header
+            if (file_exists($css_file_system_path)) {
+                $version = filemtime($css_file_system_path);
+                wp_enqueue_style('frontis-blocks-frontend', $css_file_url, [], $version);
+            }
         }
+    }
 
-        // Css file
-        $css_file_system_path = $frontend_dir . $page_name . '.min.css';
-        $css_file_url = $frontend_url . $page_name . '.min.css';
+    public function enqueue_assets_footer() {
+        
+        $page_name = $this->get_page_name();
+        $frontend_dir = $this->upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
+        $frontend_url = $this->upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
 
-        // Js file
         $js_file_system_path = $frontend_dir . $page_name . '.js';
         $js_file_url = $frontend_url . $page_name . '.js';
-
-        // Enqueue page CSS in header
-        if (file_exists($css_file_system_path)) {
-            $version = filemtime($css_file_system_path);
-            // wp_enqueue_style('frontis-blocks-frontend', $css_file_url, [], $version);
-        }
-
-        // Enqueue JS in footer with defer
+         // Enqueue JS in footer with defer
         if (file_exists($js_file_system_path)) {
             wp_enqueue_script('frontis-blocks-frontend', $js_file_url, [], $version, true);
             add_filter('script_loader_tag', function($tag, $handle) {
@@ -102,131 +123,15 @@ class Enqueues {
                 return $tag;
             }, 10, 2);
         }
-
-
-        /**
-         * Localize script for frontend
-         */
+    
+        // Localize script for frontend
         $localize_array = [
             'site_url' => site_url(),
-        ];
-
-        wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', $localize_array);
-        wp_localize_script('frontis-blocks-frontend-header', 'FrontisBlocksData', $localize_array);
-        wp_localize_script('frontis-blocks-frontend-footer', 'FrontisBlocksData', $localize_array);
-
-        wp_localize_script('frontis-blocks-frontend', 'SocialShareData', [
-            'permalink' => get_permalink(),
-            'title' => get_the_title(),
-            'network_labels' => [
-                'facebook' => 'Facebook',
-                'twitter' => 'Twitter',
-                'linkedin' => 'LinkedIn',
-                'whatsapp' => 'WhatsApp',
-                'pinterest' => 'Pinterest',
-                'reddit' => 'Reddit',
-            ],
-            'share_urls' => [
-                'facebook' => 'https://www.facebook.com/sharer/sharer.php?u=',
-                'twitter' => 'https://twitter.com/intent/tweet?url=',
-                'linkedin' => 'https://www.linkedin.com/sharing/share-offsite/?url=',
-                'pinterest' => 'https://pinterest.com/pin/create/button/?url=',
-                'reddit' => 'https://reddit.com/submit?url=',
-                'whatsapp' => 'https://wa.me/?text=',
-            ]
-        ]);
-
-        // pagination localize
-        $frontis_pagination_localize = [
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce'   => wp_create_nonce('frontis_loop_nonce'),
         ];
-
-        wp_localize_script('frontis-blocks-frontend', 'frontisPagination', $frontis_pagination_localize);
-        wp_localize_script('frontis-blocks-frontend-header', 'frontisPagination', $frontis_pagination_localize);
-        wp_localize_script('frontis-blocks-frontend-footer', 'frontisPagination', $frontis_pagination_localize);
-
-        // Register Slick CSS for footer enqueuing
-        wp_register_style('frontis-slick-style', FB_PLUGIN_URL . 'assets/css/frontend/slick/slick.css', [], FB_VERSION);
-        wp_register_style('frontis-slick-theme-style', FB_PLUGIN_URL . 'assets/css/frontend/slick/slick-theme.css', [], FB_VERSION);
-        
-        // Enqueue Slick JS in footer with defer
-        wp_enqueue_script('frontis-slick-script', FB_PLUGIN_URL . 'assets/js/frontend/slick/slick.min.js', ['jquery'], FB_VERSION, true);
-        add_filter('script_loader_tag', function($tag, $handle) {
-            if ($handle === 'frontis-slick-script') {
-                return str_replace(' src', ' defer src', $tag);
-            }
-            return $tag;
-        }, 10, 2);
-    }
-
-    public function enqueue_footer_styles() {
-        // Enqueue footer CSS and Slick CSS in footer
-        if (wp_style_is('frontis-blocks-frontend-footer', 'registered')) {
-            wp_enqueue_style('frontis-blocks-frontend-footer');
-        }
-        if (wp_style_is('frontis-slick-style', 'registered')) {
-            wp_enqueue_style('frontis-slick-style');
-        }
-        if (wp_style_is('frontis-slick-theme-style', 'registered')) {
-            wp_enqueue_style('frontis-slick-theme-style');
-        }
-    }
-
-    public function enqueue_header_footer() {
-        $upload_dir = wp_upload_dir();
-
-        // Header
-        $frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/header/';
-        $frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/header/';
-
-        // Header CSS file (load in header)
-        $css_file_system_path = $frontend_dir . 'header.min.css';
-        $css_file_url = $frontend_url . 'header.min.css';
-
-        if (file_exists($css_file_system_path)) {
-            $version = filemtime($css_file_system_path);
-            wp_enqueue_style('frontis-blocks-frontend-header', $css_file_url, [], $version);
-        }
-
-        // Footer
-        $footer_frontend_dir = $upload_dir['basedir'] . '/frontis-blocks/footer/';
-        $footer_frontend_url = $upload_dir['baseurl'] . '/frontis-blocks/footer/';
-
-        // Footer CSS file (register for footer)
-        $css_file_system_path = $footer_frontend_dir . 'footer.min.css';
-        $css_file_url = $footer_frontend_url . 'footer.min.css';
-        if (file_exists($css_file_system_path)) {
-            wp_register_style('frontis-blocks-frontend-footer', $css_file_url, [], filemtime($css_file_system_path));
-        }
-
-        // Header JS (load in footer with defer)
-        $header_js_system_path = $frontend_dir . 'header.js';
-        $js_file_url = $frontend_url . 'header.js';
-        if (file_exists($header_js_system_path)) {
-            $version = filemtime($header_js_system_path);
-            wp_enqueue_script('frontis-blocks-frontend-header', $js_file_url, [], $version, true);
-            add_filter('script_loader_tag', function($tag, $handle) {
-                if ($handle === 'frontis-blocks-frontend-header') {
-                    return str_replace(' src', ' defer src', $tag);
-                }
-                return $tag;
-            }, 10, 2);
-        }
-
-        // Footer JS (load in footer with defer)
-        $footer_js_system_path = $footer_frontend_dir . 'footer.js';
-        $footer_js_file_url = $footer_frontend_url . 'footer.js';
-        if (file_exists($footer_js_system_path)) {
-            $version = filemtime($footer_js_system_path);
-            wp_enqueue_script('frontis-blocks-frontend-footer', $footer_js_file_url, [], $version, true);
-            add_filter('script_loader_tag', function($tag, $handle) {
-                if ($handle === 'frontis-blocks-frontend-footer') {
-                    return str_replace(' src', ' defer src', $tag);
-                }
-                return $tag;
-            }, 10, 2);
-        }
+    
+        wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', $localize_array);
     }
 
     public function enqueue_editor_scripts() {
