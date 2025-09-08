@@ -1425,13 +1425,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: '',
 				},
 				teamMemberImageWidth: {
-					Desktop: '300',
+					Desktop: '100',
 					Tablet: '',
 					Mobile: '',
 				},
 				teamMemberImageWidthUnits: {
-					Desktop: 'px',
-					Tablet: 'px',
+					Desktop: '%',
+					Tablet: '%',
 					Mobile: ''
 				},
 				teamMemberImageBorderRadiusDesktop: {
@@ -1625,13 +1625,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: '',
 				},
 				teamMemberImageWidth: {
-					Desktop: '410',
+					Desktop: '100',
 					Tablet: '',
 					Mobile: '',
 				},
 				teamMemberImageWidthUnits: {
-					Desktop: 'px',
-					Tablet: 'px',
+					Desktop: '%',
+					Tablet: '%',
 					Mobile: ''
 				},
 				teamMemberImageBorderRadiusDesktop: {

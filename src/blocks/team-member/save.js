@@ -91,12 +91,10 @@ export default function save({ attributes }) {
 												<button 
 													className="fb-team-member-social-icon-wrapper-btn" 
 													aria-label={__("Social Icon", "frontis-blocks")}
-													// style={{ transform: `rotate(${wrapperButtonIconRotate}deg)` }}
 												>
 													<span style={{ transform: `rotate(${wrapperButtonIconRotate}deg)`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 														{socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''}
 													</span>
-													{/* {socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''} */}
 												</button>
 											}
 											<div className={`fb-team-member-social-profile`}>
@@ -142,12 +140,10 @@ export default function save({ attributes }) {
 												<button 
 													className="fb-team-member-social-icon-wrapper-btn" 
 													aria-label={__("Social Icon", "frontis-blocks")}
-													// style={{ transform: `rotate(${wrapperButtonIconRotate}deg)` }}
 												>
 													<span style={{ transform: `rotate(${wrapperButtonIconRotate}deg)`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 														{socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''}
 													</span>
-													{/* {socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''} */}
 												</button>
 											}
 											<div className={`fb-team-member-social-profile`}>
