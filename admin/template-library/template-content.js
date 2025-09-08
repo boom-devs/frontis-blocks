@@ -109,25 +109,24 @@ const TemplateContent = ({
 
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
-
     // Update user data inside database
     const updateUserDataToDb = (optionName, data) => {
         window.jQuery.ajax({
-			url: ajaxUrl,
-			type: 'POST',
-			data: {
-				action: 'fb_update_option',
+            url: ajaxUrl,
+            type: 'POST',
+            data: {
+                action: 'fb_update_option',
                 'option_name': optionName,
                 'value': data,
-				security: nonce,
-			},
-			success: function(response) {
+                security: nonce
+            },
+            success: function(response) {
                 console.log(response)
-			},
-			error: function(xhr, status, error) {
-				console.log("Somthing went wrong.")
-			}
-		});
+            },
+            error: function(xhr, status, error) {
+                console.log("Somthing went wrong.")
+            }
+        });
     }
 
     const getUserDataFromDb = () => {
@@ -146,8 +145,8 @@ const TemplateContent = ({
         });
     }
 
-    const handleLoginSuccess = useCallback((response) => {
-        toast( "Account created successfully", {
+    const handleLoginSuccess = useCallback((response, activeTab) => {
+        toast( activeTab === "signup" ? "Your account has been created!" : "Logged in successfully!", {
             position:"top-right",
             autoClose:3000,
             hideProgressBar:false,
@@ -161,10 +160,10 @@ const TemplateContent = ({
         } );
 
         updateUserDataToDb('frontis_tl_user_data', {
-            'name': response.data.name,
-            'email': response.data.email,
-            'access_token': response.data.access_token,
-            'refresh_token': response.data.refresh_token,
+            'name': response?.user?.name,
+            'email': response?.user?.email,
+            'access_token': response?.access_token,
+            'refresh_token': response?.refresh_token,
         })
         setIsLoginModalOpen(false);
         setIsLogedIn(true);
@@ -284,12 +283,12 @@ const TemplateContent = ({
                     </>
                 )}
             </div>
-            {/* {isLoginModalOpen && (
+            {isLoginModalOpen && (
                 <LoginSignupModal
                     onLoginSuccess={handleLoginSuccess}
                     onRequestClose={handleCloseLoginModal}
                 />
-            )} */}
+            )}
         </>
     );
 };
