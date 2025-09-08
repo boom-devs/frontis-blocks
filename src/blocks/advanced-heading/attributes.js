@@ -107,6 +107,14 @@ const attributes = {
         type: 'string',
         default: 'default'
     },
+    dynamicTimeType: {
+        type: 'string',
+        default: 'published'
+    },
+    dynamicTimeFormat: {
+        type: 'string',
+        default: 'default'
+    },
 
 
     /** Start Heading Style */

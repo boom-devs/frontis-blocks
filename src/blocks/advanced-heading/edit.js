@@ -62,6 +62,9 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicDateType,
 		dynamicDateFormat,
 
+		dynamicTimeType,
+		dynamicTimeFormat,
+
 
 	} = attributes;
 
@@ -168,6 +171,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		return __('just now','frontis-blocks');
 	};
 
+	const getSiteTimeFormat = () => {
+		const settings = getDateSettings?.() || {};
+		return settings?.formats?.time || 'g:i a';
+	};
+
 	
 	// author (only when needed)
 	const authorRecord = useSelect(
@@ -261,8 +269,26 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			}
 		  }
 	
-		case 'post_time':
-			return postRecord.date ? new Date(postRecord.date).toLocaleTimeString() : '';
+		case 'post_time': {
+			const raw = dynamicTimeType === 'modified' ? postRecord?.modified : postRecord?.date;
+			if (!raw) return __('No Content', 'frontis-blocks');
+			
+			const d = new Date(raw);
+			if (isNaN(d.getTime())) return __('No Content', 'frontis-blocks');
+			
+			switch (dynamicTimeFormat) {
+				case 'default':
+				return dateI18n(getSiteTimeFormat(), d);
+			
+				case 'g:i A':
+				case 'g:i':
+				case 'g:i:s a':
+				return dateI18n(dynamicTimeFormat, d);
+			
+				default:
+				return dateI18n(getSiteTimeFormat(), d);
+			}
+		}
 	
 		case 'post_terms':
 			return __('(terms will render on frontend)', 'frontis-blocks');

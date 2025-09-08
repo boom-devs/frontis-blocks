@@ -51,8 +51,9 @@ import {
 import { 
     DYNAMIC_CURRENT_POST_OPTIONS,
     DYNAMIC_FEATURED_IMAGE_OPTIONS,
-    DYNAMIC_DATE_TYPE_OPTIONS,
-    getDynamicDateFormatOptions
+    DYNAMIC_DATE_TIME_TYPE_OPTIONS,
+    getDynamicDateFormatOptions,
+    getDynamicTimeFormatOptions,
 
 } from '@Constants/fbConstants';
 
@@ -443,6 +444,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dynamicFeaturedImageField,
         dynamicDateType,
         dynamicDateFormat,
+        dynamicTimeType,
+        dynamicTimeFormat,
 
     } = attributes;
 
@@ -3069,7 +3072,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                         <SelectControl
                                             label={__("Date Type", "frontis-blocks")}
                                             value={dynamicDateType}
-                                            options={DYNAMIC_DATE_TYPE_OPTIONS}
+                                            options={DYNAMIC_DATE_TIME_TYPE_OPTIONS}
                                             onChange={(value) => setAttributes({ dynamicDateType: value })}
                                         />
                                         <SelectControl
@@ -3077,6 +3080,22 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             value={dynamicDateFormat}
                                             options={getDynamicDateFormatOptions(new Date())}
                                             onChange={(value) => setAttributes({ dynamicDateFormat: value })}
+                                        />
+                                    </>
+                                )}
+                                {dynamicField === 'post_time' && (
+                                    <>
+                                        <SelectControl
+                                            label={__("Time Type", "frontis-blocks")}
+                                            value={dynamicTimeType} 
+                                            options={DYNAMIC_DATE_TIME_TYPE_OPTIONS}
+                                            onChange={(value) => setAttributes({ dynamicTimeType: value })}
+                                        />
+                                        <SelectControl
+                                            label={__("Time Format", "frontis-blocks")}
+                                            value={dynamicTimeFormat}
+                                            options={getDynamicTimeFormatOptions(new Date())}
+                                            onChange={(value) => setAttributes({ dynamicTimeFormat: value })}
                                         />
                                     </>
                                 )}
