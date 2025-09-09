@@ -447,6 +447,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dynamicTimeType,
         dynamicTimeFormat,
 
+        commentsZeroText,
+        commentsOneText,
+        commentsManyText,
+
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -3096,6 +3100,28 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             value={dynamicTimeFormat}
                                             options={getDynamicTimeFormatOptions(new Date())}
                                             onChange={(value) => setAttributes({ dynamicTimeFormat: value })}
+                                        />
+                                    </>
+                                )}
+                                {dynamicField === 'comments_number' && (
+                                    <>
+                                        <TextControl
+                                        label={__('No Comments Format', 'frontis-blocks')}
+                                        value={commentsZeroText}
+                                        onChange={(value) => setAttributes({ commentsZeroText: value })}
+                                        help={__('Shown when there are 0 comments', 'frontis-blocks')}
+                                        />
+                                        <TextControl
+                                        label={__('One Comment Format', 'frontis-blocks')}
+                                        value={commentsOneText}
+                                        onChange={(value) => setAttributes({ commentsOneText: value })}
+                                        help={__('Shown when there is exactly 1 comment', 'frontis-blocks')}
+                                        />
+                                        <TextControl
+                                        label={__('Many Comment Format', 'frontis-blocks')}
+                                        value={commentsManyText}
+                                        onChange={(value) => setAttributes({ commentsManyText: value })}
+                                        help={__('Use {num} to insert the number', 'frontis-blocks')}
                                         />
                                     </>
                                 )}

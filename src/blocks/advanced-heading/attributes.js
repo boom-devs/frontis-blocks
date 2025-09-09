@@ -115,6 +115,18 @@ const attributes = {
         type: 'string',
         default: 'default'
     },
+    commentsZeroText: {
+        type: 'string',
+        default: 'No Response',
+    },
+    commentsOneText: {
+        type: 'string',
+        default: 'One Response',
+    },
+    commentsManyText: {
+        type: 'string',
+        default: '{num} Response',
+    },      
 
 
     /** Start Heading Style */

@@ -65,6 +65,10 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicTimeType,
 		dynamicTimeFormat,
 
+		commentsZeroText,
+		commentsOneText,
+		commentsManyText,
+
 
 	} = attributes;
 
@@ -176,6 +180,20 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		return settings?.formats?.time || 'g:i a';
 	};
 
+		// comments (only when needed)
+	const commentsList = useSelect(
+		(select) =>
+			shouldUseDynamic &&
+			dynamicField === 'comments_number' &&
+			postId
+				? select(coreStore).getEntityRecords('root', 'comment', {
+						post: postId,
+						status: 'approve',
+						per_page: 100,
+				})
+				: null,
+		[shouldUseDynamic, dynamicField, postId]
+	);
 	
 	// author (only when needed)
 	const authorRecord = useSelect(
@@ -296,8 +314,27 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		case 'post_id':
 			return String(postRecord.id ?? '');
 	
-		case 'comments_number':
-			return __('(comments count on frontend)', 'frontis-blocks');
+		case 'comments_number': {
+			let count = (typeof postRecord?.comment_count !== 'undefined')
+				? Number(postRecord.comment_count)
+				: null;
+
+			if (count === null) {
+				if (!commentsList) {
+				return __('(loading comments...)', 'frontis-blocks');
+				}
+				count = Number(commentsList.length || 0);
+			}
+
+			const zeroTxt = (commentsZeroText || __('No Responses', 'frontis-blocks')).trim();
+			const oneTxt  = (commentsOneText  || __('One Response', 'frontis-blocks')).trim();
+			const manyTxt = (commentsManyText || __('Responses {num}', 'frontis-blocks')).trim();
+
+			if (count === 0) return zeroTxt;
+			if (count === 1) return oneTxt;
+
+			return manyTxt.replace('{num}', String(count));
+		}
 	
 		// AUTHOR
 		case 'author_name':
