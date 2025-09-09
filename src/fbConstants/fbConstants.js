@@ -256,3 +256,26 @@ export const BACKGROUND_TYPES = [
 	{ label: __('Classic', 'frontis-blocks'), value: 'classic' },
 	{ label: __('Gradient', 'frontis-blocks'), value: 'gradient' },
 ];
+
+export const DYNAMIC_CURRENT_POST_OPTIONS = [
+    { label: __('Post Title', 'frontis-blocks'), value: 'post_title' },
+    { label: __('Post Excerpt', 'frontis-blocks'), value: 'post_excerpt' },
+    { label: __('Featured Image URL', 'frontis-blocks'), value: 'post_thumbnail' },
+    { label: __('Post Custom Field', 'frontis-blocks'), value: 'post_meta' },
+    { label: __('Post Date', 'frontis-blocks'), value: 'post_date' },
+    { label: __('Post Time', 'frontis-blocks'), value: 'post_time' },
+    { label: __('Post Terms', 'frontis-blocks'), value: 'post_terms' },
+    { label: __('Post ID', 'frontis-blocks'), value: 'post_id' },
+    { label: __('Comments Number', 'frontis-blocks'), value: 'comments_number' },
+
+    // ==== AUTHOR ====
+    { label: __('Author Name', 'frontis-blocks'), value: 'author_name' },
+    { label: __('Author First Name', 'frontis-blocks'), value: 'author_first_name' },
+    { label: __('Author Last Name', 'frontis-blocks'), value: 'author_last_name' },
+    { label: __('Author Nickname', 'frontis-blocks'), value: 'author_nickname' },
+    { label: __('Author Bio', 'frontis-blocks'), value: 'author_description' },
+    { label: __('Author Email', 'frontis-blocks'), value: 'author_email' },
+    { label: __('Author Website', 'frontis-blocks'), value: 'author_url' },
+    { label: __('Author Avatar URL', 'frontis-blocks'), value: 'author_avatar' },
+    { label: __('Author Custom Field', 'frontis-blocks'), value: 'author_meta' },
+];
