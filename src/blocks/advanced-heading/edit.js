@@ -54,6 +54,9 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		dynamicEnabled,
 		dynamicSource,
+		dynamicPostId,
+		dynamicPostType,
+		dynamicPostLabel,
 		dynamicField,
 		dynamicEnableLink,
 		dynamicReplaceAll,
@@ -90,7 +93,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
-
 	/**
 	 * Current Post Fields
 	 */
@@ -101,13 +103,18 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		'author_description','author_email','author_url','author_avatar'
 	];
 	
+	const isPostBasedSource = dynamicEnabled && (dynamicSource === 'current_post' || dynamicSource === 'post_type');
+
+	const targetPostId   = dynamicSource === 'post_type' && dynamicPostId ? dynamicPostId : postId;
+	const targetPostType =
+		dynamicSource === 'post_type'
+		? (dynamicPostType || 'post')
+		: postType;
+
 	/**
 	 * Should Use Dynamic
 	 */
-	const shouldUseDynamic =
-		dynamicEnabled &&
-		dynamicSource === 'current_post' &&
-		CURRENT_POST_FIELDS.includes(dynamicField);
+	const shouldUseDynamic = isPostBasedSource && CURRENT_POST_FIELDS.includes(dynamicField);
 	
 	/**
 	 * Get Plain Text
@@ -122,36 +129,46 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		return text.replace(/\s{2,}/g, ' ').trim();
 	};
 	
-	/**
-	 * Post Record
-	 */
 	const postRecord = useSelect(
 		(select) =>
-		shouldUseDynamic && postType && postId
-			? select(coreStore).getEntityRecord('postType', postType, postId)
+		  isPostBasedSource && targetPostType && targetPostId
+			? select(coreStore).getEntityRecord('postType', targetPostType, targetPostId)
 			: null,
-		[shouldUseDynamic, postType, postId]
+		[isPostBasedSource, targetPostType, targetPostId]
 	);
 
 	/**
-	 * Post Type Object
+	 * Wait Until Ready (no flicker)
 	 */
-	const postTypeObj = useSelect(
-		(select) => postType ? select(coreStore).getPostType(postType) : null,
-		[postType]
-	);
+	const isReady = useSelect( (select) => {
+		if (!isPostBasedSource || !targetPostType || !targetPostId) return true;
+		return select(coreStore).hasFinishedResolution(
+		'getEntityRecord',
+		['postType', targetPostType, targetPostId]
+		);
+	}, [isPostBasedSource, targetPostType, targetPostId]);
 	
+	/**
+	 * Store the previous value; if isReady=false, show the previous value in the UI
+	 */
+	const lastValueRef = useRef('');
+	  
+	const postTypeObj = useSelect(
+		(select) => targetPostType ? select(coreStore).getPostType(targetPostType) : null,
+		[targetPostType]
+	);
+
 	/**
 	 * Media Record
 	 */
 	const mediaRecord = useSelect(
 		(select) =>
-		  shouldUseDynamic &&
+		  isPostBasedSource &&
 		  dynamicField === 'post_thumbnail' &&
 		  postRecord?.featured_media
 			? select(coreStore).getEntityRecord('postType', 'attachment', postRecord.featured_media)
 			: null,
-		[shouldUseDynamic, dynamicField, postRecord?.featured_media, dynamicFeaturedImageField]
+		[isPostBasedSource, dynamicField, postRecord?.featured_media, dynamicFeaturedImageField]
 	);
 
 	/**
@@ -201,39 +218,39 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 */
 	const taxonomySupported =
 	!!dynamicTermsTaxonomy && !!postTypeObj?.taxonomies?.includes(dynamicTermsTaxonomy);
-
+  
 	const shouldQueryTerms =
-	shouldUseDynamic &&
-	dynamicField === 'post_terms' &&
-	postId &&
-	taxonomySupported;
-
+		isPostBasedSource &&
+		dynamicField === 'post_terms' &&
+		targetPostId &&
+		taxonomySupported;
+	
 	const dynamicTermsForPost = useSelect(
 		(select) =>
-			shouldQueryTerms
+		shouldQueryTerms
 			? select(coreStore).getEntityRecords('taxonomy', dynamicTermsTaxonomy, {
-				post: postId,
+				post: targetPostId,
 				per_page: 100,
-				})
+			})
 			: null,
-		[shouldQueryTerms, dynamicTermsTaxonomy, postId]
-	);
+		[shouldQueryTerms, dynamicTermsTaxonomy, targetPostId]
+	);  
 
 	/**
 	 * Comments for Post
 	 */
 	const commentsList = useSelect(
 		(select) =>
-			shouldUseDynamic &&
-			dynamicField === 'comments_number' &&
-			postId
-				? select(coreStore).getEntityRecords('root', 'comment', {
-						post: postId,
-						status: 'approve',
-						per_page: 100,
-				})
-				: null,
-		[shouldUseDynamic, dynamicField, postId]
+		  isPostBasedSource &&
+		  dynamicField === 'comments_number' &&
+		  targetPostId
+			? select(coreStore).getEntityRecords('root', 'comment', {
+				post: targetPostId,
+				status: 'approve',
+				per_page: 100,
+			  })
+			: null,
+		[isPostBasedSource, dynamicField, targetPostId]
 	);
 	
 	/**
@@ -241,27 +258,23 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 */
 	const authorRecord = useSelect(
 		(select) =>
-			shouldUseDynamic &&
-			dynamicField.startsWith('author_') &&
-			postRecord?.author
-				? select(coreStore).getUser(postRecord.author)
-				: null,
-		[shouldUseDynamic, dynamicField, postRecord?.author]
+		  isPostBasedSource &&
+		  dynamicField.startsWith('author_') &&
+		  postRecord?.author
+			? select(coreStore).getUser(postRecord.author)
+			: null,
+		[isPostBasedSource, dynamicField, postRecord?.author]
 	);
-	if (dynamicField.startsWith('author_')) {
-		if (typeof authorRecord === 'undefined') {
-			return __('(loading...)', 'frontis-blocks');
-		}
-		if (!authorRecord) {
-			return __('No Content', 'frontis-blocks');
-		}
-	}
 	
 	const dynamicValue = (() => {
-		if (!shouldUseDynamic || !postRecord) return '';
+		
+		if (!shouldUseDynamic) return '';
+
+		if (!isReady) return undefined;
+
+		if (!postRecord) return __('No Content', 'frontis-blocks');
 	
 		switch (dynamicField) {
-		// POST
 		case 'post_title':
 			return getPlainText(postRecord.title?.rendered);
 	
@@ -356,19 +369,16 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		}
 	
 		case 'post_terms': {
-			if (!postId || !dynamicTermsTaxonomy) return __('No Content', 'frontis-blocks');
-		  
-			if (!taxonomySupported) return __('No Content', 'frontis-blocks');
-		  
-			if (typeof dynamicTermsForPost === 'undefined') {
-			  return __('(loading terms...)', 'frontis-blocks');
-			}
-		  
-			if (!dynamicTermsForPost || !dynamicTermsForPost.length) {
-			  return __('No Content', 'frontis-blocks');
-			}
-		  
-			return dynamicTermsForPost.map((t) => t.name).join(dynamicTermsSeparator || ', ');
+		if (!targetPostId || !dynamicTermsTaxonomy) return __('No Content', 'frontis-blocks');
+		if (!taxonomySupported) return __('No Content', 'frontis-blocks');
+
+		if (typeof dynamicTermsForPost === 'undefined') {
+			return __('(loading terms...)', 'frontis-blocks');
+		}
+		if (!dynamicTermsForPost || !dynamicTermsForPost.length) {
+			return __('No Content', 'frontis-blocks');
+		}
+		return dynamicTermsForPost.map((t) => t.name).join(dynamicTermsSeparator || ', ');
 		}
 	
 		case 'post_id':
@@ -378,50 +388,64 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			let count = (typeof postRecord?.comment_count !== 'undefined')
 				? Number(postRecord.comment_count)
 				: null;
-
+			
 			if (count === null) {
-				if (!commentsList) {
+				if (typeof commentsList === 'undefined') {
 				return __('(loading comments...)', 'frontis-blocks');
 				}
-				count = Number(commentsList.length || 0);
+				count = Number((commentsList?.length) || 0);
 			}
-
+			
 			const zeroTxt = (dynamicCommentsZeroText || __('No Responses', 'frontis-blocks')).trim();
 			const oneTxt  = (dynamicCommentsOneText  || __('One Response', 'frontis-blocks')).trim();
 			const manyTxt = (dynamicCommentsManyText || __('Responses {num}', 'frontis-blocks')).trim();
-
+			
 			if (count === 0) return zeroTxt;
 			if (count === 1) return oneTxt;
-
 			return manyTxt.replace('{num}', String(count));
 		}
 	
 		case 'author_name':
+			if (typeof authorRecord === 'undefined') return __('(loading...)', 'frontis-blocks');
+			if (!authorRecord) return __('No Content', 'frontis-blocks');
 			return authorRecord?.name?.trim() || __('No Content', 'frontis-blocks');
-		
+	  
 		case 'author_first_name':
+			if (typeof authorRecord === 'undefined') return __('(loading...)', 'frontis-blocks');
+			if (!authorRecord) return __('No Content', 'frontis-blocks');
 			return authorRecord?.first_name?.trim() || __('No Content', 'frontis-blocks');
-		
+	
 		case 'author_last_name':
+			if (typeof authorRecord === 'undefined') return __('(loading...)', 'frontis-blocks');
+			if (!authorRecord) return __('No Content', 'frontis-blocks');
 			return authorRecord?.last_name?.trim() || __('No Content', 'frontis-blocks');
-		
+	
 		case 'author_nickname':
+			if (typeof authorRecord === 'undefined') return __('(loading...)', 'frontis-blocks');
+			if (!authorRecord) return __('No Content', 'frontis-blocks');
 			return authorRecord?.nickname?.trim() || __('No Content', 'frontis-blocks');
-		
-		case 'author_description': {
+	
+		case 'author_description':
+			if (typeof authorRecord === 'undefined') return __('(loading...)', 'frontis-blocks');
+			if (!authorRecord) return __('No Content', 'frontis-blocks');
+			{
 			const v = authorRecord?.description;
-			return (typeof v === 'string' && v.trim())
-				? v.trim()
-				: __('No Content', 'frontis-blocks');
-		}
-		
+			return (typeof v === 'string' && v.trim()) ? v.trim() : __('No Content', 'frontis-blocks');
+			}
+	
 		case 'author_email':
+			if (typeof authorRecord === 'undefined') return __('(loading...)', 'frontis-blocks');
+			if (!authorRecord) return __('No Content', 'frontis-blocks');
 			return authorRecord?.email?.trim() || __('No Content', 'frontis-blocks');
-		
+	
 		case 'author_url':
+			if (typeof authorRecord === 'undefined') return __('(loading...)', 'frontis-blocks');
+			if (!authorRecord) return __('No Content', 'frontis-blocks');
 			return authorRecord?.url?.trim() || __('No Content', 'frontis-blocks');
-		
+	
 		case 'author_avatar':
+			if (typeof authorRecord === 'undefined') return __('(loading...)', 'frontis-blocks');
+			if (!authorRecord) return __('No Content', 'frontis-blocks');
 			return authorRecord?.avatar_urls?.['96'] || __('No Content', 'frontis-blocks');
 
 	
@@ -429,6 +453,17 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			return '';
 		}
 	})();
+
+	/**
+	 * Display Value for No loading flicker
+	 */
+	const displayValue = (typeof dynamicValue === 'undefined')? lastValueRef.current: dynamicValue;
+
+	useEffect(() => {
+		if (typeof dynamicValue !== 'undefined') {
+		lastValueRef.current = dynamicValue;
+	}
+	}, [dynamicValue]);
 	
 
 	return (
@@ -490,7 +525,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                     <div className="fb-advanced-heading-wrapper">
                         <RichText
                             tagName={headingTag}
-                            value={shouldUseDynamic ? dynamicValue : headingText} 
+                            value={shouldUseDynamic ? displayValue : headingText} 
                             onChange={(value) => {
                                 if (!shouldUseDynamic) {
                                     setAttributes({ headingText: value });

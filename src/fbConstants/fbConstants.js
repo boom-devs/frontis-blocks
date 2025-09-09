@@ -268,7 +268,7 @@ export const DYNAMIC_DATA_SOURCE_OPTIONS = [
 	{ label: __('Shortcode', 'frontis-blocks'), value: 'shortcode' },
 ];
 
-export const DYNAMIC_CURRENT_POST_OPTIONS = [
+export const DYNAMIC_DATA_SOURCE_FIELD_OPTIONS = [
     { label: __('Post Title', 'frontis-blocks'), value: 'post_title' },
     { label: __('Post Excerpt', 'frontis-blocks'), value: 'post_excerpt' },
     { label: __('Featured Image', 'frontis-blocks'), value: 'post_thumbnail' },
