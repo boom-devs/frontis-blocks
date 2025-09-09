@@ -145,25 +145,22 @@ class AssetsGenerator
 			$this->critical_css_content .= $this->clean_CSS($blockStyle) . "\n";
 		}
 
-		// Get static css inside critical css
-		if($this->genrating_critical_css) {
-			$assets_dir = FB_PLUGIN_PATH . 'assets/css/frontend/';
-			$css_files = Helper::get_css_files($assets_dir);
+		$assets_dir = FB_PLUGIN_PATH . 'assets/css/frontend/';
+		$css_files = Helper::get_css_files($assets_dir);
 
-			if (!empty($css_files)) {
-				foreach ($css_files as $key => $css_file) {
-					if(!in_array(basename($css_file), $this->generate_static_assets_critical)) {
-						if (!$this->combine_swiper_js && basename($css_file) === 'swiper-bundle.min.css') {
-							continue;
-						}
-	
-						if(!in_array('frontis-blocks/marquee-carousel', $this->used_blocks) && (basename($css_file) === 'slick-theme.css' || basename($css_file) === 'slick.css')) {
-							continue;
-						}
-	
-						$this->generate_static_assets_critical[] = basename($css_file);
-						$this->critical_css_content .= file_get_contents($css_file) . "\n";
+		if (!empty($css_files)) {
+			foreach ($css_files as $key => $css_file) {
+				if(!in_array(basename($css_file), $this->generate_static_assets_critical)) {
+					if (!$this->combine_swiper_js && basename($css_file) === 'swiper-bundle.min.css') {
+						continue;
 					}
+
+					if(!in_array('frontis-blocks/marquee-carousel', $this->used_blocks) && (basename($css_file) === 'slick-theme.css' || basename($css_file) === 'slick.css')) {
+						continue;
+					}
+
+					$this->generate_static_assets_critical[] = basename($css_file);
+					$this->critical_css_content .= file_get_contents($css_file) . "\n";
 				}
 			}
 		}
@@ -847,7 +844,7 @@ class AssetsGenerator
 					continue;
 				}
 				
-				if(!in_array(basename($css_file), $this->generate_static_assets_critical)) {
+				if(in_array(basename($css_file), $this->generate_static_assets_critical)) {
 					continue;
 				}
 
