@@ -28,6 +28,7 @@ import {
     MenuGroup,
     MenuItem
 } from '@wordpress/components';
+import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 
 /**
  * Internal depencencies
@@ -50,7 +51,7 @@ import {
 
 import { 
     DYNAMIC_DATA_SOURCE_OPTIONS,
-    DYNAMIC_CURRENT_POST_OPTIONS,
+    DYNAMIC_DATA_SOURCE_FIELD_OPTIONS,
     DYNAMIC_FEATURED_IMAGE_OPTIONS,
     DYNAMIC_DATE_TIME_TYPE_OPTIONS,
     DYNAMIC_TAXONOMY_OPTIONS,
@@ -440,6 +441,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
         dynamicEnabled,
         dynamicSource,
+        dynamicPostId,
+        dynamicPostType,
+        dynamicPostLabel,
         dynamicField,
         dynamicEnableLink,
         dynamicReplaceAll,
@@ -454,6 +458,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dynamicCommentsManyText,
         dynamicTermsTaxonomy,
         dynamicTermsSeparator,
+
+
 
     } = attributes;
 
@@ -3015,6 +3021,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     dynamicEnabled,
     dynamicSource,
+    dynamicPostId,
+    dynamicPostType,
+    dynamicPostLabel,
     dynamicField,
     dynamicEnableLink,
     dynamicReplaceAll,
@@ -3032,6 +3041,40 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     const dateFormatOptions = getDynamicDateFormatOptions(new Date());
     const timeFormatOptions = getDynamicTimeFormatOptions(new Date());
+
+
+
+    // সব single post টাইপ আনো (post, page + public queryable CPT)
+    const postTypes = useSelect( (select) => {
+        const all = select(coreStore).getPostTypes({ per_page: -1 }) || [];
+        return all.filter( (pt) => pt.viewable && pt.supports?.title );
+    }, []);
+    
+    // বাছাই করা টাইপগুলোর কন্টেন্ট লিস্ট (title + id)
+    const postOptions = useSelect( (select) => {
+        // যেসব টাইপ দেখাতে চাও
+        const types = (postTypes || []).map((t) => t.slug);
+        if (!types.length) return [];
+    
+        // একবারে কিছু লোড; চাইলে সার্চ টার্ম ব্যবহার করো
+        const items = [];
+        types.forEach((t) => {
+        const recs = select(coreStore).getEntityRecords(
+            'postType',
+            t,
+            { per_page: 20, _fields: 'id,title,type' } // দ্রুত লোডের জন্য
+        ) || [];
+        recs.forEach((r) => items.push(r));
+        });
+    
+        return items.map((r) => ({
+        value: r.id,
+        label: r.title?.rendered ? r.title.rendered.replace(/<[^>]+>/g, '') : `(no title)`,
+        meta: r.type, // UI-তে টাইপ badge দেখাতে চাইলে কাজে লাগবে
+        }));
+    }, [postTypes]);
+
+    const isPostBasedSource = dynamicEnabled && (dynamicSource === 'current_post' || dynamicSource === 'post_type');
 
     /**
 	 * Inspector General Controls
@@ -3064,14 +3107,31 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                     />
                             </BaseControl>
 
-                            {dynamicSource === 'current_post' && (
+                            {dynamicSource === 'post_type' && (
+                                <>
+                                    <BaseControl label={__("Search Posts","frontis-blocks")}>
+                                        <Select2
+                                            options={postOptions}
+                                            value={ postOptions.find(o => o.value === dynamicPostId) || null }
+                                            onChange={(opt)=> setAttributes({
+                                            dynamicPostId: opt?.value ?? 0,
+                                            dynamicPostType: opt?.meta ?? '',
+                                            dynamicPostLabel: opt?.label ?? ''
+                                            })}
+                                            className="fb-select2-control"
+                                        />
+                                    </BaseControl>
+                                </>
+                            )}
+
+                            {isPostBasedSource && (
                                 <>
                                 <BaseControl
                                     label={__("Source Field", "frontis-blocks")}
                                     >
                                         <Select2 
-                                            options={DYNAMIC_CURRENT_POST_OPTIONS}
-                                            value={DYNAMIC_CURRENT_POST_OPTIONS.find(o => o.value === dynamicField) || null }                                                     // option object
+                                            options={DYNAMIC_DATA_SOURCE_FIELD_OPTIONS}
+                                            value={DYNAMIC_DATA_SOURCE_FIELD_OPTIONS.find(o => o.value === dynamicField) || null }                                                     // option object
                                             onChange={(opt) => setAttributes({ dynamicField: opt?.value ?? '' })}
                                             className="fb-select2-control"
                                         />

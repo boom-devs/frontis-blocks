@@ -55,6 +55,18 @@ const attributes = {
         type: 'string',
         default: 'current_post'
     },
+    dynamicPostId: {
+        type: 'number',
+        default: 0
+    },
+    dynamicPostType: {
+        type: 'string',
+        default: ''
+    },
+    dynamicPostLabel: {
+        type: 'string',
+        default: ''
+    },
     dynamicField: {
         type: 'string',
         default: 'post_title'
