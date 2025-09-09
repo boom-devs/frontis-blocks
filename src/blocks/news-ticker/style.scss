@@ -1,0 +1,25 @@
+.fb-news-ticker-wrapper {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    .fb-news-ticker-inner {
+        display: flex;
+        width: 100%;
+    }
+
+    .fb-news-ticker-label {
+        background: #2196f3;
+        color: #fff;
+        font-weight: bold;
+        padding: 8px 16px;
+        white-space: nowrap;
+    }
+
+    .fb-news-ticker-content {
+        flex: 1;
+        overflow: hidden;
+    }
+}

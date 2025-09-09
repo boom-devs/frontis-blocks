@@ -1,0 +1,3451 @@
+import { __ } from '@wordpress/i18n';
+import { InspectorControls } from '@wordpress/block-editor';
+import { useState, useEffect, useMemo } from '@wordpress/element';
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import { SortableContext, arrayMove } from '@dnd-kit/sortable';
+import FB_BoxShadowControl from '@Components/box-shadow';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_Range from '@Components/range';
+import FB_ColorControl from '@Components/color-control';
+import FB_Spacing from '@Components/spacing';
+import FB_TypographyControl from '@Components/typography-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
+import FB_UrlControl from '@Components/url-control';
+import FB_HtmlTagControl from '@Components/html-tag-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
+import { useDeviceType } from "@Config/displayType";
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
+import FB_InspectorControls from '@Components/InspectorControls';
+import FB_ResponsiveControl from '@Components/responsive-control';
+import FBIconPicker from "../../components/icon-picker";
+
+
+import {
+    SelectControl,
+    PanelBody,
+    BaseControl,
+    Button,
+    ButtonGroup,
+    TextControl
+} from '@wordpress/components';
+
+import {
+    ICON_VERTICAL_ALIGN,
+    TEXT_ALIGN,
+    BORDER_STYLES,
+    OVERFLOW_OP,
+    LIST_DIRECTION_ICON,
+    LIST_WRAP_ICON,
+    CONTENT_TYPE
+} from "./constants/constants";
+
+import SortableItem from './sortableItem';
+
+import './editor.scss';
+
+export default function Inspector({ attributes, setAttributes, clientId }) {
+    const {
+        blockID,
+        // deviceType,
+        blockStyle,
+        FeatureItems,
+        FeatureTag,
+        FeatureAlignment,
+        FeatureIconAlignment,
+        FeatureIconShape,
+        FeatureListDirection,
+        FeatureListDirectionWrap,
+        FeatureListGap,
+        FeatureListGapUnits,
+
+        /** Icon Style */
+        FeatureIconColorSwitcher,
+        FeatureIconColor,
+        FeatureIconHoverColor,
+
+        FeatureIconBgColorSwitcher,
+
+        FeatureIconNormalBackgroundType,
+        FeatureIconNormalClassicColor,
+        FeatureIconNormalGradientColor,
+        FeatureIconNormalCustomGradientSwitcher,
+        FeatureIconNormalCustomGradientInputValue,
+
+        FeatureIconHoverBackgroundType,
+        FeatureIconHoverClassicColor,
+        FeatureIconHoverGradientColor,
+        FeatureIconHoverCustomGradientSwitcher,
+        FeatureIconHoverCustomGradientInputValue,
+
+        FeatureIconPaddingUnits,
+        FeatureIconPaddingDesktop,
+        FeatureIconPaddingTablet,
+        FeatureIconPaddingMobile,
+        FeatureIconPaddingLink,
+
+        FeatureIconMarginUnits,
+        FeatureIconMarginDesktop,
+        FeatureIconMarginTablet,
+        FeatureIconMarginMobile,
+        FeatureIconMarginLink,
+
+        FeatureIconBorder,
+        FeatureIconBorderColorSwitcher,
+        FeatureIconBorderColor,
+        FeatureIconBorderHoverColor,
+        FeatureIconBorderUnits,
+        FeatureIconBorderDesktop,
+        FeatureIconBorderTablet,
+        FeatureIconBorderMobile,
+        FeatureIconBorderLink,
+
+        FeatureIconBorderRadiusUnits,
+        FeatureIconBorderRadiusDesktop,
+        FeatureIconBorderRadiusTablet,
+        FeatureIconBorderRadiusMobile,
+        FeatureIconBorderRadiusLink,
+
+        FeatureIconBoxShadowSwitcher,
+        FeatureIconBoxShadowValues,
+        FeatureIconBoxShadowCssValue,
+        FeatureIconBoxShadowHoverValues,
+        FeatureIconBoxShadowHoverCssValue,
+
+        FeatureIconSize,
+        FeatureIconSizeUnits,
+        /** End Icon Style */
+
+        /** Title Style */
+
+        FeatureTitleGlobalTypoSwitcher,
+        FeatureTitleGlobalTypographyData,
+        FeatureTitleGlobalTypoType,
+        FeatureTitleGlobalTypoOption,
+        FeatureTitleFontFamily,
+        FeatureTitleFontSize,
+        FeatureTitleFontSizeUnits,
+        FeatureTitleFontWeight,
+        FeatureTitleFontStyle,
+        FeatureTitleTextTransform,
+        FeatureTitleTextDecoration,
+        FeatureTitleLetterSpacing,
+        FeatureTitleLetterSpacingUnits,
+        FeatureTitleLineHeight,
+        FeatureTitleLineHeightUnits,
+
+        FeatureTitleColorSwitcher,
+        FeatureTitleColor,
+        FeatureTitleHoverColor,
+        FeatureTitleMarginUnits,
+        FeatureTitleMarginDesktop,
+        FeatureTitleMarginTablet,
+        FeatureTitleMarginMobile,
+        FeatureTitleMarginLink,
+        /** End Title Style */
+
+        /** Description Style */
+        FeatureDescGlobalTypoSwitcher,
+        FeatureDescGlobalTypographyData,
+        FeatureDescGlobalTypoType,
+        FeatureDescGlobalTypoOption,
+        FeatureDescFontFamily,
+        FeatureDescFontSize,
+        FeatureDescFontSizeUnits,
+        FeatureDescFontWeight,
+        FeatureDescFontStyle,
+        FeatureDescTextTransform,
+        FeatureDescTextDecoration,
+        FeatureDescLetterSpacing,
+        FeatureDescLetterSpacingUnits,
+        FeatureDescLineHeight,
+        FeatureDescLineHeightUnits,
+
+        FeatureDescColorSwitcher,
+        FeatureDescColor,
+        FeatureDescHoverColor,
+        FeatureDescMarginUnits,
+        FeatureDescMarginDesktop,
+        FeatureDescMarginTablet,
+        FeatureDescMarginMobile,
+        FeatureDescMarginLink,
+        /** End Description Style */
+
+        /** Single Item */
+        FeatureSingleItemBgColorSwitcher,
+        FeatureSingleItemNormalBackgroundType,
+        FeatureSingleItemNormalClassicColor,
+        FeatureSingleItemNormalGradientColor,
+        FeatureSingleItemNormalCustomGradientSwitcher,
+        FeatureSingleItemNormalCustomGradientInputValue,
+        FeatureSingleItemHoverBackgroundType,
+        FeatureSingleItemHoverClassicColor,
+        FeatureSingleItemHoverGradientColor,
+        FeatureSingleItemHoverCustomGradientSwitcher,
+        FeatureSingleItemHoverCustomGradientInputValue,
+
+        FeatureSingleItemPaddingUnits,
+        FeatureSingleItemPaddingDesktop,
+        FeatureSingleItemPaddingTablet,
+        FeatureSingleItemPaddingMobile,
+        FeatureSingleItemPaddingLink,
+
+        FeatureSingleItemBorder,
+        FeatureSingleItemBorderColorSwitcher,
+        FeatureSingleItemBorderColor,
+        FeatureSingleItemBorderHoverColor,
+
+        FeatureSingleItemBorderUnits,
+        FeatureSingleItemBorderDesktop,
+        FeatureSingleItemBorderTablet,
+        FeatureSingleItemBorderMobile,
+        FeatureSingleItemBorderLink,
+
+        FeatureSingleItemBorderRadiusUnits,
+        FeatureSingleItemBorderRadiusDesktop,
+        FeatureSingleItemBorderRadiusTablet,
+        FeatureSingleItemBorderRadiusMobile,
+        FeatureSingleItemBorderRadiusLink,
+
+        FeatureSingleItemBoxShadowSwitcher,
+        FeatureSingleItemBoxShadowValues,
+        FeatureSingleItemBoxShadowCssValue,
+        FeatureSingleItemBoxShadowHoverValues,
+        FeatureSingleItemBoxShadowHoverCssValue,
+        /** End Single Item */
+
+        /** Global Style */
+        FeatureGlobalZIndex,
+        featuresListOverflow,
+        FeatureGlobalPaddingUnits,
+        FeatureGlobalPaddingDesktop,
+        FeatureGlobalPaddingTablet,
+        FeatureGlobalPaddingMobile,
+        FeatureGlobalPaddingLink,
+
+        FeatureGlobalMarginUnits,
+        FeatureGlobalMarginDesktop,
+        FeatureGlobalMarginTablet,
+        FeatureGlobalMarginMobile,
+        FeatureGlobalMarginLink,
+
+        /** Start Global Background Color */
+        FeatureGlobalBgColorSwitcher,
+
+        FeatureGlobalNormalBackgroundType,
+        FeatureGlobalNormalClassicColor,
+        FeatureGlobalNormalGradientColor,
+        FeatureGlobalNormalCustomGradientSwitcher,
+        FeatureGlobalNormalCustomGradientInputValue,
+
+        FeatureGlobalNormalBackgroundImageUrl,
+        FeatureGlobalNormalBackgroundImageAlt,
+        FeatureGlobalNormalBackgroundImageID,
+        FeatureGlobalNormalBackgroundImagePosition,
+        FeatureGlobalNormalBackgroundImageAttachment,
+        FeatureGlobalNormalBackgroundImageRepeat,
+        FeatureGlobalNormalBackgroundImageSize,
+
+        FeatureGlobalHoverBackgroundType,
+        FeatureGlobalHoverClassicColor,
+        FeatureGlobalHoverGradientColor,
+        FeatureGlobalHoverCustomGradientSwitcher,
+        FeatureGlobalHoverCustomGradientInputValue,
+
+        FeatureGlobalHoverBackgroundImageUrl,
+        FeatureGlobalHoverBackgroundImageAlt,
+        FeatureGlobalHoverBackgroundImageID,
+        FeatureGlobalHoverBackgroundImagePosition,
+        FeatureGlobalHoverBackgroundImageAttachment,
+        FeatureGlobalHoverBackgroundImageRepeat,
+        FeatureGlobalHoverBackgroundImageSize,
+        /** End Global Background Color */
+
+        FeatureGlobalBorder,
+        FeatureGlobalBorderColorSwitcher,
+        FeatureGlobalBorderColor,
+        FeatureGlobalBorderHoverColor,
+
+        FeatureGlobalBorderUnits,
+        FeatureGlobalBorderDesktop,
+        FeatureGlobalBorderTablet,
+        FeatureGlobalBorderMobile,
+        FeatureGlobalBorderLink,
+
+        FeatureGlobalBorderRadiusUnits,
+        FeatureGlobalBorderRadiusDesktop,
+        FeatureGlobalBorderRadiusTablet,
+        FeatureGlobalBorderRadiusMobile,
+        FeatureGlobalBorderRadiusLink,
+
+        FeatureGlobalBoxShadowSwitcher,
+        FeatureGlobalBoxShadowValues,
+        FeatureGlobalBoxShadowCssValue,
+        FeatureGlobalBoxShadowHoverValues,
+        FeatureGlobalBoxShadowHoverCssValue,
+        /** End Global Style */
+
+        /** FeatureIconImage */
+
+        FeatureIconImageUnits,
+        FeatureIconImageWidth,
+        FeatureIconImageHeight,
+
+        FeatureIconImageBorder,
+        FeatureIconImageBorderColorSwitcher,
+        FeatureIconImageBorderColor,
+        FeatureIconImageBorderHoverColor,
+
+        FeatureIconImageBorderUnits,
+        FeatureIconImageBorderDesktop,
+        FeatureIconImageBorderTablet,
+        FeatureIconImageBorderMobile,
+        FeatureIconImageBorderLink,
+
+        FeatureIconImageBorderRadiusUnits,
+        FeatureIconImageBorderRadiusDesktop,
+        FeatureIconImageBorderRadiusTablet,
+        FeatureIconImageBorderRadiusMobile,
+        FeatureIconImageBorderRadiusLink,
+        /** FeatureIconImage */
+
+        featuresListDesktopSwitcher,
+        featuresListTabletSwitcher,
+        featuresListMobileSwitcher,
+
+        featuresListGlobalWraperCustomCSS,
+        featuresListGlobalWraperID,
+        featuresListGlobalWraperClass,
+
+        // Position
+        featuresListPositionType,
+        featuresListHZOrientationType,
+        featuresListVROrientationType,
+        featuresListHZLeftOffset,
+        featuresListHZLeftOffsetUnits,
+        featuresListHZRightOffset,
+        featuresListHZRightOffsetUnits,
+        featuresListVRTopOffset,
+        featuresListVRTopOffsetUnits,
+        featuresListVRBottomOffset,
+        featuresListVRBottomOffsetUnits,
+        contentType,
+        tickerLabel,
+        tickerLabelIcon
+    } = attributes;
+
+    const deviceType = useDeviceType();
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-feature-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
+    const [FeatureItemList, setFeatureItemList] = useState(FeatureItems);
+
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (active && over && active.id !== over.id) {
+            const oldIndex = FeatureItemList.findIndex(item => item.id === active.id);
+            const newIndex = FeatureItemList.findIndex(item => item.id === over.id);
+            const updatedItems = arrayMove(FeatureItemList, oldIndex, newIndex);
+            setAttributes({ FeatureItems: updatedItems });
+            setFeatureItemList(updatedItems);
+        }
+    };
+
+    const handleAddItem = () => {
+        const newItem = {
+            id: `item-${FeatureItemList.length + 1}`,
+            Title: `Feature Item ${FeatureItemList.length + 1}`,
+            Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.',
+            FeatureIcon: 'check',
+            FeatureIconImageUrl: '',
+            FeatureIconImageAlt: '',
+            FeatureIconImageID: '',
+
+            FeatureSingleItemIconColorSwitcher: "normal",
+            FeatureSingleItemIconColor: "",
+            FeatureSingleItemIconHoverColor: "",
+
+            FeatureSingleItemIconBgColorSwitcher: "normal",
+            FeatureSingleItemIconNormalBackgroundType: "classic",
+            FeatureSingleItemIconNormalClassicColor: "",
+            FeatureSingleItemIconNormalGradientColor: null,
+            FeatureSingleItemIconNormalCustomGradientSwitcher: false,
+            FeatureSingleItemIconNormalCustomGradientInputValue: "",
+
+            FeatureSingleItemIconHoverBackgroundType: "classic",
+            FeatureSingleItemIconHoverClassicColor: "",
+            FeatureSingleItemIconHoverGradientColor: null,
+            FeatureSingleItemIconHoverCustomGradientSwitcher: false,
+            FeatureSingleItemIconHoverCustomGradientInputValue: "",
+
+            FeatureSingleItemTextColorSwitcher: "normal",
+            FeatureSingleItemTextColor: "",
+            FeatureSingleItemTextHoverColor: "",
+
+            /** Start Single Item Background Color */
+            FeatureItemBgColorSwitcher: "normal",
+            FeatureItemNormalBackgroundType: "classic",
+            FeatureItemNormalClassicColor: "",
+            FeatureItemNormalGradientColor: null,
+            FeatureItemNormalCustomGradientSwitcher: false,
+            FeatureItemNormalCustomGradientInputValue: "",
+
+            FeatureItemHoverBackgroundType: "classic",
+            FeatureItemHoverClassicColor: "",
+            FeatureItemHoverGradientColor: null,
+            FeatureItemHoverCustomGradientSwitcher: false,
+            FeatureItemHoverCustomGradientInputValue: "",
+            /** End Single Item Background Color */
+        };
+        setAttributes({ FeatureItems: [...FeatureItems, newItem] });
+        setFeatureItemList([...FeatureItemList, newItem]);
+    };
+
+    const handleChangeItem = (id, key, value) => {
+        const updatedItems = FeatureItemList.map(item => {
+            if (item.id === id) {
+                if (key === 'FeatureIconImageID') {
+                    // Get the full image data from WordPress media library
+                    const image = wp.media.attachment(value).toJSON();
+                    return {
+                        ...item,
+                        [key]: value,
+                        'FeatureIconImageUrl': image.url,
+                        'FeatureIconImageAlt': image.alt || ''
+                    };
+                }
+                return { ...item, [key]: value };
+            }
+            return item;
+        });
+
+        setFeatureItemList(updatedItems);
+        setAttributes({ FeatureItems: updatedItems });
+    };
+
+    const handleDeleteItem = (id) => {
+        const updatedItems = FeatureItemList.filter(item => item.id !== id);
+        setAttributes({ FeatureItems: updatedItems });
+        setFeatureItemList(updatedItems);
+
+    };
+
+    const handleDuplicateItem = (id) => {
+        const itemToDuplicate = FeatureItemList.find(item => item.id === id);
+        if (itemToDuplicate) {
+            const newItem = { ...itemToDuplicate, id: `item-${FeatureItemList.length + 1}` };
+            setAttributes({ FeatureItems: [...FeatureItems, newItem] });
+            setFeatureItemList([...FeatureItemList, newItem]);
+        }
+    };
+
+
+    //Sync FeatureItemList with attributes.FeatureItems
+    useEffect(() => {
+        setAttributes({ FeatureItems: FeatureItemList });
+    }, [FeatureItemList, setAttributes]);
+
+    /** Start Global padding */
+    const handleFeatureIconPaddingUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureIconPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureIconPaddingDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureIconPaddingTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureIconPaddingMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureIconPaddingDesktop: { ...FeatureIconPaddingDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureIconPaddingTablet: { ...FeatureIconPaddingTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureIconPaddingMobile: { ...FeatureIconPaddingMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleFeatureIconPaddingCombineBtn = () => {
+        setAttributes({ FeatureIconPaddingLink: !FeatureIconPaddingLink });
+    }
+
+    const handleFeatureIconPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureIconPaddingUnits: {
+                ...FeatureIconPaddingUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const featureIconDesktopPadding = `${FeatureIconPaddingDesktop.top}${FeatureIconPaddingUnits.Desktop} ${FeatureIconPaddingDesktop.right}${FeatureIconPaddingUnits.Desktop} ${FeatureIconPaddingDesktop.bottom}${FeatureIconPaddingUnits.Desktop} ${FeatureIconPaddingDesktop.left}${FeatureIconPaddingUnits.Desktop}`;
+    const featureIconTabletPadding = `${FeatureIconPaddingTablet.top}${FeatureIconPaddingUnits.Tablet} ${FeatureIconPaddingTablet.right}${FeatureIconPaddingUnits.Tablet} ${FeatureIconPaddingTablet.bottom}${FeatureIconPaddingUnits.Tablet} ${FeatureIconPaddingTablet.left}${FeatureIconPaddingUnits.Tablet}`;
+    const featureIconMobilePadding = `${FeatureIconPaddingMobile.top}${FeatureIconPaddingUnits.Mobile} ${FeatureIconPaddingMobile.right}${FeatureIconPaddingUnits.Mobile} ${FeatureIconPaddingMobile.bottom}${FeatureIconPaddingUnits.Mobile} ${FeatureIconPaddingMobile.left}${FeatureIconPaddingUnits.Mobile}`;
+    /** End Global Padding */
+
+    /** Start Global Margin */
+    const handleFeatureIconMarginUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureIconMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureIconMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureIconMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureIconMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureIconMarginDesktop: { ...FeatureIconMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureIconMarginTablet: { ...FeatureIconMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureIconMarginMobile: { ...FeatureIconMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleFeatureIconMarginCombineBtn = () => {
+        setAttributes({ FeatureIconMarginLink: !FeatureIconMarginLink });
+    }
+
+    const handleFeatureIconMarginUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureIconMarginUnits: {
+                ...FeatureIconMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const featureIconDesktopMargin = `${FeatureIconMarginDesktop.top}${FeatureIconMarginUnits.Desktop} ${FeatureIconMarginDesktop.right}${FeatureIconMarginUnits.Desktop} ${FeatureIconMarginDesktop.bottom}${FeatureIconMarginUnits.Desktop} ${FeatureIconMarginDesktop.left}${FeatureIconMarginUnits.Desktop}`;
+    const featureIconTabletMargin = `${FeatureIconMarginTablet.top}${FeatureIconMarginUnits.Tablet} ${FeatureIconMarginTablet.right}${FeatureIconMarginUnits.Tablet} ${FeatureIconMarginTablet.bottom}${FeatureIconMarginUnits.Tablet} ${FeatureIconMarginTablet.left}${FeatureIconMarginUnits.Tablet}`;
+    const featureIconMobileMargin = `${FeatureIconMarginMobile.top}${FeatureIconMarginUnits.Mobile} ${FeatureIconMarginMobile.right}${FeatureIconMarginUnits.Mobile} ${FeatureIconMarginMobile.bottom}${FeatureIconMarginUnits.Mobile} ${FeatureIconMarginMobile.left}${FeatureIconMarginUnits.Mobile}`;
+    /** End Global Margin */
+
+    /** Start Global border */
+    const handleFeatureIconBorderUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureIconBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureIconBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureIconBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureIconBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureIconBorderDesktop: { ...FeatureIconBorderDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureIconBorderTablet: { ...FeatureIconBorderTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureIconBorderMobile: { ...FeatureIconBorderMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleFeatureIconBorderCombineBtn = () => {
+        setAttributes({ FeatureIconBorderLink: !FeatureIconBorderLink });
+    }
+
+    const handleFeatureIconBorderUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureIconBorderUnits: {
+                ...FeatureIconBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const featureIconDesktopBorderWidth = `${FeatureIconBorderDesktop.top}${FeatureIconBorderUnits.Desktop} ${FeatureIconBorderDesktop.right}${FeatureIconBorderUnits.Desktop} ${FeatureIconBorderDesktop.bottom}${FeatureIconBorderUnits.Desktop} ${FeatureIconBorderDesktop.left}${FeatureIconBorderUnits.Desktop}`;
+    const featureIconTabletBorderWidth = `${FeatureIconBorderTablet.top}${FeatureIconBorderUnits.Tablet} ${FeatureIconBorderTablet.right}${FeatureIconBorderUnits.Tablet} ${FeatureIconBorderTablet.bottom}${FeatureIconBorderUnits.Tablet} ${FeatureIconBorderTablet.left}${FeatureIconBorderUnits.Tablet}`;
+    const featureIconMobileBorderWidth = `${FeatureIconBorderMobile.top}${FeatureIconBorderUnits.Mobile} ${FeatureIconBorderMobile.right}${FeatureIconBorderUnits.Mobile} ${FeatureIconBorderMobile.bottom}${FeatureIconBorderUnits.Mobile} ${FeatureIconBorderMobile.left}${FeatureIconBorderUnits.Mobile}`;
+    /** End Border */
+
+
+    /** Start Global border radius*/
+    const handleFeatureIconBorderRadiusUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureIconBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureIconBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureIconBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureIconBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureIconBorderRadiusDesktop: { ...FeatureIconBorderRadiusDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureIconBorderRadiusTablet: { ...FeatureIconBorderRadiusTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureIconBorderRadiusMobile: { ...FeatureIconBorderRadiusMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleFeatureIconBorderRadiusCombineBtn = () => {
+        setAttributes({ FeatureIconBorderRadiusLink: !FeatureIconBorderRadiusLink });
+    }
+
+    const handleFeatureIconBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureIconBorderRadiusUnits: {
+                ...FeatureIconBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** end Global border */
+
+    /** End Global Border Radius */
+    const featureIconDesktopBorderRadiusWidth = `${FeatureIconBorderRadiusDesktop.top}${FeatureIconBorderRadiusUnits.Desktop} ${FeatureIconBorderRadiusDesktop.right}${FeatureIconBorderRadiusUnits.Desktop} ${FeatureIconBorderRadiusDesktop.bottom}${FeatureIconBorderRadiusUnits.Desktop} ${FeatureIconBorderRadiusDesktop.left}${FeatureIconBorderRadiusUnits.Desktop}`;
+    const featureIconTabletBorderRadiusWidth = `${FeatureIconBorderRadiusTablet.top}${FeatureIconBorderRadiusUnits.Tablet} ${FeatureIconBorderRadiusTablet.right}${FeatureIconBorderRadiusUnits.Tablet} ${FeatureIconBorderRadiusTablet.bottom}${FeatureIconBorderRadiusUnits.Tablet} ${FeatureIconBorderRadiusTablet.left}${FeatureIconBorderRadiusUnits.Tablet}`;
+    const featureIconMobileBorderRadiusWidth = `${FeatureIconBorderRadiusMobile.top}${FeatureIconBorderRadiusUnits.Mobile} ${FeatureIconBorderRadiusMobile.right}${FeatureIconBorderRadiusUnits.Mobile} ${FeatureIconBorderRadiusMobile.bottom}${FeatureIconBorderRadiusUnits.Mobile} ${FeatureIconBorderRadiusMobile.left}${FeatureIconBorderRadiusUnits.Mobile}`;
+    /** End Border Radius */
+
+    /** Start Single Item Padding */
+    const handleSingleItemPaddingUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureSingleItemPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureSingleItemPaddingDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureSingleItemPaddingTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureSingleItemPaddingMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureSingleItemPaddingDesktop: { ...FeatureSingleItemPaddingDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureSingleItemPaddingTablet: { ...FeatureSingleItemPaddingTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureSingleItemPaddingMobile: { ...FeatureSingleItemPaddingMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleSingleItemPaddingCombineBtn = () => {
+        setAttributes({ FeatureSingleItemPaddingLink: !FeatureSingleItemPaddingLink });
+    }
+
+    const handleSingleItemPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureSingleItemPaddingUnits: {
+                ...FeatureSingleItemPaddingUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const singleItemDesktopPadding = `${FeatureSingleItemPaddingDesktop.top}${FeatureSingleItemPaddingUnits.Desktop} ${FeatureSingleItemPaddingDesktop.right}${FeatureSingleItemPaddingUnits.Desktop} ${FeatureSingleItemPaddingDesktop.bottom}${FeatureSingleItemPaddingUnits.Desktop} ${FeatureSingleItemPaddingDesktop.left}${FeatureSingleItemPaddingUnits.Desktop}`;
+    const singleItemTabletPadding = `${FeatureSingleItemPaddingTablet.top}${FeatureSingleItemPaddingUnits.Tablet} ${FeatureSingleItemPaddingTablet.right}${FeatureSingleItemPaddingUnits.Tablet} ${FeatureSingleItemPaddingTablet.bottom}${FeatureSingleItemPaddingUnits.Tablet} ${FeatureSingleItemPaddingTablet.left}${FeatureSingleItemPaddingUnits.Tablet}`;
+    const singleItemMobilePadding = `${FeatureSingleItemPaddingMobile.top}${FeatureSingleItemPaddingUnits.Mobile} ${FeatureSingleItemPaddingMobile.right}${FeatureSingleItemPaddingUnits.Mobile} ${FeatureSingleItemPaddingMobile.bottom}${FeatureSingleItemPaddingUnits.Mobile} ${FeatureSingleItemPaddingMobile.left}${FeatureSingleItemPaddingUnits.Mobile}`;
+    /** End Single Item Padding */
+
+    /** Start Single Item Border */
+    const handleSingleItemBorderUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureSingleItemBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureSingleItemBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureSingleItemBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureSingleItemBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureSingleItemBorderDesktop: { ...FeatureSingleItemBorderDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureSingleItemBorderTablet: { ...FeatureSingleItemBorderTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureSingleItemBorderMobile: { ...FeatureSingleItemBorderMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleSingleItemBorderCombineBtn = () => {
+        setAttributes({ FeatureSingleItemBorderLink: !FeatureSingleItemBorderLink });
+    }
+
+    const handleSingleItemBorderUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureSingleItemBorderUnits: {
+                ...FeatureSingleItemBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const singleItemDesktopBorderWidth = `${FeatureSingleItemBorderDesktop.top}${FeatureSingleItemBorderUnits.Desktop} ${FeatureSingleItemBorderDesktop.right}${FeatureSingleItemBorderUnits.Desktop} ${FeatureSingleItemBorderDesktop.bottom}${FeatureSingleItemBorderUnits.Desktop} ${FeatureSingleItemBorderDesktop.left}${FeatureSingleItemBorderUnits.Desktop}`;
+    const singleItemTabletBorderWidth = `${FeatureSingleItemBorderTablet.top}${FeatureSingleItemBorderUnits.Tablet} ${FeatureSingleItemBorderTablet.right}${FeatureSingleItemBorderUnits.Tablet} ${FeatureSingleItemBorderTablet.bottom}${FeatureSingleItemBorderUnits.Tablet} ${FeatureSingleItemBorderTablet.left}${FeatureSingleItemBorderUnits.Tablet}`;
+    const singleItemMobileBorderWidth = `${FeatureSingleItemBorderMobile.top}${FeatureSingleItemBorderUnits.Mobile} ${FeatureSingleItemBorderMobile.right}${FeatureSingleItemBorderUnits.Mobile} ${FeatureSingleItemBorderMobile.bottom}${FeatureSingleItemBorderUnits.Mobile} ${FeatureSingleItemBorderMobile.left}${FeatureSingleItemBorderUnits.Mobile}`;
+    /** End Border */
+
+    /** Start Single Item Border Radius*/
+    const handleSingleItemBorderRadiusUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureSingleItemBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureSingleItemBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureSingleItemBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureSingleItemBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureSingleItemBorderRadiusDesktop: { ...FeatureSingleItemBorderRadiusDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureSingleItemBorderRadiusTablet: { ...FeatureSingleItemBorderRadiusTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureSingleItemBorderRadiusMobile: { ...FeatureSingleItemBorderRadiusMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleSingleItemBorderRadiusCombineBtn = () => {
+        setAttributes({ FeatureSingleItemBorderRadiusLink: !FeatureSingleItemBorderRadiusLink });
+    }
+
+    const handleSingleItemBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureSingleItemBorderRadiusUnits: {
+                ...FeatureSingleItemBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** end Single Item Border */
+
+    /** End Global Border Radius */
+    const singleItemDesktopBorderRadiusWidth = `${FeatureSingleItemBorderRadiusDesktop.top}${FeatureSingleItemBorderRadiusUnits.Desktop} ${FeatureSingleItemBorderRadiusDesktop.right}${FeatureSingleItemBorderRadiusUnits.Desktop} ${FeatureSingleItemBorderRadiusDesktop.bottom}${FeatureSingleItemBorderRadiusUnits.Desktop} ${FeatureSingleItemBorderRadiusDesktop.left}${FeatureSingleItemBorderRadiusUnits.Desktop}`;
+    const singleItemTabletBorderRadiusWidth = `${FeatureSingleItemBorderRadiusTablet.top}${FeatureSingleItemBorderRadiusUnits.Tablet} ${FeatureSingleItemBorderRadiusTablet.right}${FeatureSingleItemBorderRadiusUnits.Tablet} ${FeatureSingleItemBorderRadiusTablet.bottom}${FeatureSingleItemBorderRadiusUnits.Tablet} ${FeatureSingleItemBorderRadiusTablet.left}${FeatureSingleItemBorderRadiusUnits.Tablet}`;
+    const singleItemMobileBorderRadiusWidth = `${FeatureSingleItemBorderRadiusMobile.top}${FeatureSingleItemBorderRadiusUnits.Mobile} ${FeatureSingleItemBorderRadiusMobile.right}${FeatureSingleItemBorderRadiusUnits.Mobile} ${FeatureSingleItemBorderRadiusMobile.bottom}${FeatureSingleItemBorderRadiusUnits.Mobile} ${FeatureSingleItemBorderRadiusMobile.left}${FeatureSingleItemBorderRadiusUnits.Mobile}`;
+    /** End Single Item Border Radius */
+
+
+
+    /** Start Global padding */
+    const handleGlobalPaddingUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureGlobalPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureGlobalPaddingDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureGlobalPaddingTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureGlobalPaddingMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureGlobalPaddingDesktop: { ...FeatureGlobalPaddingDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureGlobalPaddingTablet: { ...FeatureGlobalPaddingTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureGlobalPaddingMobile: { ...FeatureGlobalPaddingMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleGlobalPaddingCombineBtn = () => {
+        setAttributes({ FeatureGlobalPaddingLink: !FeatureGlobalPaddingLink });
+    }
+
+    const handleGlobalPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureGlobalPaddingUnits: {
+                ...FeatureGlobalPaddingUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const globalDesktopPadding = `${FeatureGlobalPaddingDesktop.top}${FeatureGlobalPaddingUnits.Desktop} ${FeatureGlobalPaddingDesktop.right}${FeatureGlobalPaddingUnits.Desktop} ${FeatureGlobalPaddingDesktop.bottom}${FeatureGlobalPaddingUnits.Desktop} ${FeatureGlobalPaddingDesktop.left}${FeatureGlobalPaddingUnits.Desktop}`;
+    const globalTabletPadding = `${FeatureGlobalPaddingTablet.top}${FeatureGlobalPaddingUnits.Tablet} ${FeatureGlobalPaddingTablet.right}${FeatureGlobalPaddingUnits.Tablet} ${FeatureGlobalPaddingTablet.bottom}${FeatureGlobalPaddingUnits.Tablet} ${FeatureGlobalPaddingTablet.left}${FeatureGlobalPaddingUnits.Tablet}`;
+    const globalMobilePadding = `${FeatureGlobalPaddingMobile.top}${FeatureGlobalPaddingUnits.Mobile} ${FeatureGlobalPaddingMobile.right}${FeatureGlobalPaddingUnits.Mobile} ${FeatureGlobalPaddingMobile.bottom}${FeatureGlobalPaddingUnits.Mobile} ${FeatureGlobalPaddingMobile.left}${FeatureGlobalPaddingUnits.Mobile}`;
+    /** End Global Padding */
+
+    /** Start Global Margin */
+    const handleGlobalMarginUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureGlobalMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureGlobalMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureGlobalMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureGlobalMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureGlobalMarginDesktop: { ...FeatureGlobalMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureGlobalMarginTablet: { ...FeatureGlobalMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureGlobalMarginMobile: { ...FeatureGlobalMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleGlobalMarginCombineBtn = () => {
+        setAttributes({ FeatureGlobalMarginLink: !FeatureGlobalMarginLink });
+    }
+
+    const handleGlobalMarginUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureGlobalMarginUnits: {
+                ...FeatureGlobalMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const globalDesktopMargin = `${FeatureGlobalMarginDesktop.top}${FeatureGlobalMarginUnits.Desktop} ${FeatureGlobalMarginDesktop.right}${FeatureGlobalMarginUnits.Desktop} ${FeatureGlobalMarginDesktop.bottom}${FeatureGlobalMarginUnits.Desktop} ${FeatureGlobalMarginDesktop.left}${FeatureGlobalMarginUnits.Desktop}`;
+    const globalTabletMargin = `${FeatureGlobalMarginTablet.top}${FeatureGlobalMarginUnits.Tablet} ${FeatureGlobalMarginTablet.right}${FeatureGlobalMarginUnits.Tablet} ${FeatureGlobalMarginTablet.bottom}${FeatureGlobalMarginUnits.Tablet} ${FeatureGlobalMarginTablet.left}${FeatureGlobalMarginUnits.Tablet}`;
+    const globalMobileMargin = `${FeatureGlobalMarginMobile.top}${FeatureGlobalMarginUnits.Mobile} ${FeatureGlobalMarginMobile.right}${FeatureGlobalMarginUnits.Mobile} ${FeatureGlobalMarginMobile.bottom}${FeatureGlobalMarginUnits.Mobile} ${FeatureGlobalMarginMobile.left}${FeatureGlobalMarginUnits.Mobile}`;
+    /** End Global Margin */
+
+    /** Start Global border */
+    const handleGlobalBorderUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureGlobalBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureGlobalBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureGlobalBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureGlobalBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureGlobalBorderDesktop: { ...FeatureGlobalBorderDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureGlobalBorderTablet: { ...FeatureGlobalBorderTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureGlobalBorderMobile: { ...FeatureGlobalBorderMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleGlobalBorderCombineBtn = () => {
+        setAttributes({ FeatureGlobalBorderLink: !FeatureGlobalBorderLink });
+    }
+
+    const handleGlobalBorderUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureGlobalBorderUnits: {
+                ...FeatureGlobalBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const globalDesktopBorderWidth = `${FeatureGlobalBorderDesktop.top}${FeatureGlobalBorderUnits.Desktop} ${FeatureGlobalBorderDesktop.right}${FeatureGlobalBorderUnits.Desktop} ${FeatureGlobalBorderDesktop.bottom}${FeatureGlobalBorderUnits.Desktop} ${FeatureGlobalBorderDesktop.left}${FeatureGlobalBorderUnits.Desktop}`;
+    const globalTabletBorderWidth = `${FeatureGlobalBorderTablet.top}${FeatureGlobalBorderUnits.Tablet} ${FeatureGlobalBorderTablet.right}${FeatureGlobalBorderUnits.Tablet} ${FeatureGlobalBorderTablet.bottom}${FeatureGlobalBorderUnits.Tablet} ${FeatureGlobalBorderTablet.left}${FeatureGlobalBorderUnits.Tablet}`;
+    const globalMobileBorderWidth = `${FeatureGlobalBorderMobile.top}${FeatureGlobalBorderUnits.Mobile} ${FeatureGlobalBorderMobile.right}${FeatureGlobalBorderUnits.Mobile} ${FeatureGlobalBorderMobile.bottom}${FeatureGlobalBorderUnits.Mobile} ${FeatureGlobalBorderMobile.left}${FeatureGlobalBorderUnits.Mobile}`;
+    /** End Border */
+
+
+    /** Start Global border radius*/
+    const handleGlobalBorderRadiusUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureGlobalBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureGlobalBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureGlobalBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureGlobalBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureGlobalBorderRadiusDesktop: { ...FeatureGlobalBorderRadiusDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureGlobalBorderRadiusTablet: { ...FeatureGlobalBorderRadiusTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureGlobalBorderRadiusMobile: { ...FeatureGlobalBorderRadiusMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleGlobalBorderRadiusCombineBtn = () => {
+        setAttributes({ FeatureGlobalBorderRadiusLink: !FeatureGlobalBorderRadiusLink });
+    }
+
+    const handleGlobalBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureGlobalBorderRadiusUnits: {
+                ...FeatureGlobalBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** end Global border */
+
+    /** End Global Border Radius */
+    const globalDesktopBorderRadiusWidth = `${FeatureGlobalBorderRadiusDesktop.top}${FeatureGlobalBorderRadiusUnits.Desktop} ${FeatureGlobalBorderRadiusDesktop.right}${FeatureGlobalBorderRadiusUnits.Desktop} ${FeatureGlobalBorderRadiusDesktop.bottom}${FeatureGlobalBorderRadiusUnits.Desktop} ${FeatureGlobalBorderRadiusDesktop.left}${FeatureGlobalBorderRadiusUnits.Desktop}`;
+    const globalTabletBorderRadiusWidth = `${FeatureGlobalBorderRadiusTablet.top}${FeatureGlobalBorderRadiusUnits.Tablet} ${FeatureGlobalBorderRadiusTablet.right}${FeatureGlobalBorderRadiusUnits.Tablet} ${FeatureGlobalBorderRadiusTablet.bottom}${FeatureGlobalBorderRadiusUnits.Tablet} ${FeatureGlobalBorderRadiusTablet.left}${FeatureGlobalBorderRadiusUnits.Tablet}`;
+    const globalMobileBorderRadiusWidth = `${FeatureGlobalBorderRadiusMobile.top}${FeatureGlobalBorderRadiusUnits.Mobile} ${FeatureGlobalBorderRadiusMobile.right}${FeatureGlobalBorderRadiusUnits.Mobile} ${FeatureGlobalBorderRadiusMobile.bottom}${FeatureGlobalBorderRadiusUnits.Mobile} ${FeatureGlobalBorderRadiusMobile.left}${FeatureGlobalBorderRadiusUnits.Mobile}`;
+    /** End Border Radius */
+
+    /** Start Image border */
+    const handleFeatureIconImageBorderUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureIconImageBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureIconImageBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureIconImageBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureIconImageBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureIconImageBorderDesktop: { ...FeatureIconImageBorderDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureIconImageBorderTablet: { ...FeatureIconImageBorderTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureIconImageBorderMobile: { ...FeatureIconImageBorderMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleFeatureIconImageBorderCombineBtn = () => {
+        setAttributes({ FeatureIconImageBorderLink: !FeatureIconImageBorderLink });
+    }
+
+    const handleFeatureIconImageBorderUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureIconImageBorderUnits: {
+                ...FeatureIconImageBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const featureIconImageDesktopBorderWidth = `${FeatureIconImageBorderDesktop.top}${FeatureIconImageBorderUnits.Desktop} ${FeatureIconImageBorderDesktop.right}${FeatureIconImageBorderUnits.Desktop} ${FeatureIconImageBorderDesktop.bottom}${FeatureIconImageBorderUnits.Desktop} ${FeatureIconImageBorderDesktop.left}${FeatureIconImageBorderUnits.Desktop}`;
+    const featureIconImageTabletBorderWidth = `${FeatureIconImageBorderTablet.top}${FeatureIconImageBorderUnits.Tablet} ${FeatureIconImageBorderTablet.right}${FeatureIconImageBorderUnits.Tablet} ${FeatureIconImageBorderTablet.bottom}${FeatureIconImageBorderUnits.Tablet} ${FeatureIconImageBorderTablet.left}${FeatureIconImageBorderUnits.Tablet}`;
+    const featureIconImageMobileBorderWidth = `${FeatureIconImageBorderMobile.top}${FeatureIconImageBorderUnits.Mobile} ${FeatureIconImageBorderMobile.right}${FeatureIconImageBorderUnits.Mobile} ${FeatureIconImageBorderMobile.bottom}${FeatureIconImageBorderUnits.Mobile} ${FeatureIconImageBorderMobile.left}${FeatureIconImageBorderUnits.Mobile}`;
+    /** End Border */
+
+
+    /** Start Image Border Radius */
+    const handleFeatureIconImageBorderRadiusUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureIconImageBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureIconImageBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value,
+                        },
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureIconImageBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value,
+                        },
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureIconImageBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value,
+                        },
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureIconImageBorderRadiusDesktop: { ...FeatureIconImageBorderRadiusDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureIconImageBorderRadiusTablet: { ...FeatureIconImageBorderRadiusTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureIconImageBorderRadiusMobile: { ...FeatureIconImageBorderRadiusMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const handleFeatureIconImageBorderRadiusCombineBtn = () => {
+        setAttributes({
+            FeatureIconImageBorderRadiusLink: !FeatureIconImageBorderRadiusLink,
+        });
+    };
+
+    const handleFeatureIconImageBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureIconImageBorderRadiusUnits: {
+                ...FeatureIconImageBorderRadiusUnits,
+                [deviceType]: unit,
+            },
+        });
+    };
+
+    /** End Global Border Radius */
+
+    // Calculating border radius for each device type
+    const featureIconImageDesktopBorderRadiusWidth = `${FeatureIconImageBorderRadiusDesktop.top}${FeatureIconImageBorderRadiusUnits.Desktop} ${FeatureIconImageBorderRadiusDesktop.right}${FeatureIconImageBorderRadiusUnits.Desktop} ${FeatureIconImageBorderRadiusDesktop.bottom}${FeatureIconImageBorderRadiusUnits.Desktop} ${FeatureIconImageBorderRadiusDesktop.left}${FeatureIconImageBorderRadiusUnits.Desktop}`;
+    const featureIconImageTabletBorderRadiusWidth = `${FeatureIconImageBorderRadiusTablet.top}${FeatureIconImageBorderRadiusUnits.Tablet} ${FeatureIconImageBorderRadiusTablet.right}${FeatureIconImageBorderRadiusUnits.Tablet} ${FeatureIconImageBorderRadiusTablet.bottom}${FeatureIconImageBorderRadiusUnits.Tablet} ${FeatureIconImageBorderRadiusTablet.left}${FeatureIconImageBorderRadiusUnits.Tablet}`;
+    const featureIconImageMobileBorderRadiusWidth = `${FeatureIconImageBorderRadiusMobile.top}${FeatureIconImageBorderRadiusUnits.Mobile} ${FeatureIconImageBorderRadiusMobile.right}${FeatureIconImageBorderRadiusUnits.Mobile} ${FeatureIconImageBorderRadiusMobile.bottom}${FeatureIconImageBorderRadiusUnits.Mobile} ${FeatureIconImageBorderRadiusMobile.left}${FeatureIconImageBorderRadiusUnits.Mobile}`;
+
+    /** End Border Radius */
+
+
+
+
+
+    /* Start Load Google Fonts */
+    useEffect(() => {
+        loadGoogleFont(FeatureTitleFontFamily);
+        loadGoogleFont(FeatureDescFontFamily);
+    }, [FeatureTitleFontFamily, FeatureDescFontFamily]);
+
+    /* End Load Google Fonts */
+
+
+    /** Start Feature Item Color Style */
+    const featureSingleItemStyle = useMemo(() => {
+        let style = '';
+        FeatureItems.forEach(item => {
+
+            /** Start Single Item Icon Color */
+            const singleIconColorStyle = `.${blockID} .fb-feature-list-item.single-item-${item.id} .fb-feature-list-icon svg {
+                ${item.FeatureSingleItemIconColor ? `fill: ${item.FeatureSingleItemIconColor};` : ''}
+            }`;
+            style += singleIconColorStyle;
+
+            const singleIconHoverColorStyle = `.${blockID} .fb-feature-list-item.single-item-${item.id} .fb-feature-list-icon:hover svg {
+                ${item.FeatureSingleItemIconHoverColor ? `fill: ${item.FeatureSingleItemIconHoverColor};` : ''}
+            }`;
+            style += singleIconHoverColorStyle;
+            /** End Single Item Icon Color */
+
+            /** Start Single Item Icon Background Color */
+            const singleIconNormalBackgroundType = item.FeatureSingleItemIconNormalBackgroundType;
+            if (singleIconNormalBackgroundType === 'gradient') {
+                const gradientStyle = `.${blockID} .fb-feature-list-item.single-item-${item.id} .fb-feature-list-icon-inner {
+                    ${item.FeatureSingleItemIconNormalCustomGradientSwitcher ? `background: ${item.FeatureSingleItemIconNormalCustomGradientInputValue};` : `background: ${item.FeatureSingleItemIconNormalGradientColor};`}
+				}`;
+                style += gradientStyle;
+
+            } else {
+                const singleIconNormalClassicStyle = `.${blockID} .fb-feature-list-item.single-item-${item.id} .fb-feature-list-icon-inner {
+					${item.FeatureSingleItemIconNormalClassicColor ? `background: ${item.FeatureSingleItemIconNormalClassicColor};` : ''}
+				}`;
+                style += singleIconNormalClassicStyle;
+            }
+
+            const singleIconHoverBackgroundType = item.FeatureSingleItemIconHoverBackgroundType;
+            if (singleIconHoverBackgroundType === 'gradient') {
+                const singleIconHoverGradientStyle = `.${blockID} .fb-feature-list-item.single-item-${item.id}:hover .fb-feature-list-icon-inner {
+					${item.FeatureSingleItemIconHoverCustomGradientSwitcher ? `background: ${item.FeatureSingleItemIconHoverCustomGradientInputValue};` : `background: ${item.FeatureSingleItemIconHoverGradientColor};`}
+				}`;
+                style += singleIconHoverGradientStyle;
+
+            } else {
+                const hoverClassicStyle = `.${blockID} .fb-feature-list-item.single-item-${item.id}:hover {
+					${item.FeatureSingleItemIconHoverClassicColor ? `background: ${item.FeatureSingleItemIconHoverClassicColor};` : ''}
+				}`;
+                style += hoverClassicStyle;
+            }
+            /** End Single Item Icon Background Color */
+
+            /** Start Single Item Title Color */
+            const singleItemTitleColorStyle = `.${blockID} .fb-feature-list-item.single-item-${item.id} .fb-feature-list-title, .${blockID} .fb-feature-list-item.single-item-${item.id} .fb-feature-list-text {
+                ${item.FeatureSingleItemTextColor ? `color: ${item.FeatureSingleItemTextColor};` : ''}
+            }`;
+            style += singleItemTitleColorStyle;
+
+            const singleItemTitleHoverColorStyle = `.${blockID} .fb-feature-list-item.single-item-${item.id}:hover .fb-feature-list-title, .${blockID} .fb-feature-list-item.single-item-${item.id}:hover .fb-feature-list-text {
+                ${item.FeatureSingleItemTextHoverColor ? `color: ${item.FeatureSingleItemTextHoverColor};` : ''}
+            }`;
+            style += singleItemTitleHoverColorStyle;
+            /** End Single Item Title Color */
+
+            /** Start Single Item Background Color */
+            const normalItemBackgroundType = item.FeatureItemNormalBackgroundType;
+            if (normalItemBackgroundType === 'gradient') {
+                const gradientStyle = `.${blockID} .fb-feature-list-item.single-item-${item.id} {
+					${item.FeatureItemNormalCustomGradientSwitcher && item.FeatureItemNormalCustomGradientInputValue ? `background: ${item.FeatureItemNormalCustomGradientInputValue};` : `background: ${item.FeatureItemNormalGradientColor};`}
+				}`;
+                style += gradientStyle;
+
+            } else {
+                const classicStyle = `.${blockID} .fb-feature-list-item.single-item-${item.id} {
+                    ${item.FeatureItemNormalClassicColor ? `background: ${item.FeatureItemNormalClassicColor} !important;` : ''}
+				}`;
+                style += classicStyle;
+            }
+
+            const hoverItemBackgroundType = item.FeatureItemHoverBackgroundType;
+            if (hoverItemBackgroundType === 'gradient') {
+                const hoverGradientStyle = `.${blockID} .fb-feature-list-item.single-item-${item.id}:hover {
+					${item.FeatureItemHoverCustomGradientSwitcher && item.FeatureItemHoverCustomGradientInputValue ? `background: ${item.FeatureItemHoverCustomGradientInputValue};` : `background: ${item.FeatureItemHoverGradientColor};`}
+				}`;
+                style += hoverGradientStyle;
+
+            } else {
+                const hoverClassicStyle = `.${blockID} .fb-feature-list-item.single-item-${item.id}:hover {
+					${item.FeatureItemHoverClassicColor ? `background: ${item.FeatureItemHoverClassicColor} !important;` : ''}
+				}`;
+                style += hoverClassicStyle;
+            }
+            /** End Single Item Background Color */
+
+        });
+        return style;
+    }, [FeatureItems, blockID]);
+
+
+    /** Start Feature Title Margin */
+    const handleFeatureTitleMarginUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureTitleMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureTitleMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureTitleMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureTitleMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureTitleMarginDesktop: { ...FeatureTitleMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureTitleMarginTablet: { ...FeatureTitleMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureTitleMarginMobile: { ...FeatureTitleMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleFeatureTitleMarginCombineBtn = () => {
+        setAttributes({ FeatureTitleMarginLink: !FeatureTitleMarginLink });
+    }
+
+    const handleFeatureTitleMarginUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureTitleMarginUnits: {
+                ...FeatureTitleMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const featureTitleDesktopMargin = `${FeatureTitleMarginDesktop.top}${FeatureTitleMarginUnits.Desktop} ${FeatureTitleMarginDesktop.right}${FeatureTitleMarginUnits.Desktop} ${FeatureTitleMarginDesktop.bottom}${FeatureTitleMarginUnits.Desktop} ${FeatureTitleMarginDesktop.left}${FeatureTitleMarginUnits.Desktop}`;
+    const featureTitleTabletMargin = `${FeatureTitleMarginTablet.top}${FeatureTitleMarginUnits.Tablet} ${FeatureTitleMarginTablet.right}${FeatureTitleMarginUnits.Tablet} ${FeatureTitleMarginTablet.bottom}${FeatureTitleMarginUnits.Tablet} ${FeatureTitleMarginTablet.left}${FeatureTitleMarginUnits.Tablet}`;
+    const featureTitleMobileMargin = `${FeatureTitleMarginMobile.top}${FeatureTitleMarginUnits.Mobile} ${FeatureTitleMarginMobile.right}${FeatureTitleMarginUnits.Mobile} ${FeatureTitleMarginMobile.bottom}${FeatureTitleMarginUnits.Mobile} ${FeatureTitleMarginMobile.left}${FeatureTitleMarginUnits.Mobile}`;
+    /** End Feature Title Margin */
+
+
+    /** Start Feature Description Margin */
+    const handleFeatureDescMarginUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (FeatureDescMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        FeatureDescMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        FeatureDescMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        FeatureDescMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ FeatureDescMarginDesktop: { ...FeatureDescMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ FeatureDescMarginTablet: { ...FeatureDescMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ FeatureDescMarginMobile: { ...FeatureDescMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleFeatureDescMarginCombineBtn = () => {
+        setAttributes({ FeatureDescMarginLink: !FeatureDescMarginLink });
+    }
+
+    const handleFeatureDescMarginUnitsHandler = (unit) => {
+        setAttributes({
+            FeatureDescMarginUnits: {
+                ...FeatureDescMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const featureDescDesktopMargin = `${FeatureDescMarginDesktop.top}${FeatureDescMarginUnits.Desktop} ${FeatureDescMarginDesktop.right}${FeatureDescMarginUnits.Desktop} ${FeatureDescMarginDesktop.bottom}${FeatureDescMarginUnits.Desktop} ${FeatureDescMarginDesktop.left}${FeatureDescMarginUnits.Desktop}`;
+    const featureDescTabletMargin = `${FeatureDescMarginTablet.top}${FeatureDescMarginUnits.Tablet} ${FeatureDescMarginTablet.right}${FeatureDescMarginUnits.Tablet} ${FeatureDescMarginTablet.bottom}${FeatureDescMarginUnits.Tablet} ${FeatureDescMarginTablet.left}${FeatureDescMarginUnits.Tablet}`;
+    const featureDescMobileMargin = `${FeatureDescMarginMobile.top}${FeatureDescMarginUnits.Mobile} ${FeatureDescMarginMobile.right}${FeatureDescMarginUnits.Mobile} ${FeatureDescMarginMobile.bottom}${FeatureDescMarginUnits.Mobile} ${FeatureDescMarginMobile.left}${FeatureDescMarginUnits.Mobile}`;
+    /** End Feature Description Margin */
+
+
+    const allBlockStyle = useMemo(() => {
+        let style = `
+
+            .fb-feature-main-wrapper.${blockID} {
+                ${FeatureGlobalNormalBackgroundType === 'gradient' ? `
+                    background: ${FeatureGlobalNormalCustomGradientSwitcher && FeatureGlobalNormalCustomGradientInputValue ? FeatureGlobalNormalCustomGradientInputValue : FeatureGlobalNormalGradientColor};
+                ` : FeatureGlobalNormalBackgroundImageUrl && FeatureGlobalNormalBackgroundImageUrl !== 'null' ? `
+                    ${FeatureGlobalNormalBackgroundImageUrl ? `background-image: url(${FeatureGlobalNormalBackgroundImageUrl});` : ''}
+                    ${FeatureGlobalNormalBackgroundImagePosition ? `background-position: ${FeatureGlobalNormalBackgroundImagePosition};` : ''}
+                    ${FeatureGlobalNormalBackgroundImageAttachment ? `background-attachment: ${FeatureGlobalNormalBackgroundImageAttachment};` : ''}
+                    ${FeatureGlobalNormalBackgroundImageRepeat ? `background-repeat: ${FeatureGlobalNormalBackgroundImageRepeat};` : ''}
+                    ${FeatureGlobalNormalBackgroundImageSize ? `background-size: ${FeatureGlobalNormalBackgroundImageSize};` : ''}
+                ` : `
+                    ${FeatureGlobalNormalClassicColor ? `background: ${FeatureGlobalNormalClassicColor};` : ''}
+                `}
+                ${globalDesktopPadding && FeatureGlobalPaddingDesktop.top ? `padding: ${globalDesktopPadding};` : ''}
+                ${globalDesktopMargin && FeatureGlobalMarginDesktop.top ? `margin: ${globalDesktopMargin};` : ''} 
+                ${FeatureGlobalBorder ? `border: ${FeatureGlobalBorder};` : ''} 
+                ${globalDesktopBorderWidth && FeatureGlobalBorderDesktop.top ? `border-width: ${globalDesktopBorderWidth};` : ''}
+                ${globalDesktopBorderRadiusWidth && FeatureGlobalBorderRadiusDesktop.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+                ${FeatureGlobalBorderColor ? `border-color: ${FeatureGlobalBorderColor};` : ''}
+                ${FeatureGlobalBoxShadowCssValue ? `box-shadow: ${FeatureGlobalBoxShadowCssValue};` : ''}
+                ${featuresListPositionType === 'default' ? `position: relative;` : ''}
+                ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' ? `width: 100%;` : ''}
+                ${featuresListPositionType !== 'default' ? `position: ${featuresListPositionType};` : ''}
+                ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListHZOrientationType === 'left' && featuresListHZLeftOffset.Desktop !== undefined ? `left: ${featuresListHZLeftOffset.Desktop}${featuresListHZLeftOffsetUnits.Desktop};` : ''}
+                ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListHZOrientationType === 'right' && featuresListHZRightOffset.Desktop !== undefined ? `right: ${featuresListHZRightOffset.Desktop}${featuresListHZRightOffsetUnits.Desktop};` : ''}
+                ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'top' && featuresListVRTopOffset.Desktop !== undefined ? `top: ${featuresListVRTopOffset.Desktop}${featuresListVRTopOffsetUnits.Desktop};` : ''}
+                ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'bottom' && featuresListVRBottomOffset.Desktop !== undefined ? `bottom: ${featuresListVRBottomOffset.Desktop}${featuresListVRBottomOffsetUnits.Desktop};` : ''}
+                ${FeatureGlobalZIndex.Desktop ? `z-index: ${FeatureGlobalZIndex.Desktop};` : ''}
+                ${featuresListOverflow !== 'default' ? `overflow: ${featuresListOverflow};` : ''}
+                transition: all .3s ease-in-out;
+            }
+            .fb-feature-main-wrapper.${blockID}:hover {
+                ${FeatureGlobalHoverBackgroundType === 'gradient' ? `
+                    background: ${FeatureGlobalHoverCustomGradientSwitcher && FeatureGlobalHoverCustomGradientInputValue ? FeatureGlobalHoverCustomGradientInputValue : FeatureGlobalHoverGradientColor};
+                ` : FeatureGlobalHoverBackgroundImageUrl && FeatureGlobalHoverBackgroundImageUrl !== 'null' ? `
+                    ${FeatureGlobalHoverBackgroundImageUrl ? `background-image: url(${FeatureGlobalHoverBackgroundImageUrl});` : ''}
+                    ${FeatureGlobalHoverBackgroundImagePosition ? `background-position: ${FeatureGlobalHoverBackgroundImagePosition};` : ''}
+                    ${FeatureGlobalHoverBackgroundImageAttachment ? `background-attachment: ${FeatureGlobalHoverBackgroundImageAttachment};` : ''}
+                    ${FeatureGlobalHoverBackgroundImageRepeat ? `background-repeat: ${FeatureGlobalHoverBackgroundImageRepeat};` : ''}
+                    ${FeatureGlobalHoverBackgroundImageSize ? `background-size: ${FeatureGlobalHoverBackgroundImageSize};` : ''}
+                ` : `
+                    ${FeatureGlobalHoverClassicColor ? `background: ${FeatureGlobalHoverClassicColor};` : ''}
+                `}
+                ${FeatureGlobalBorderHoverColor ? `border-color: ${FeatureGlobalBorderHoverColor};` : ''}
+                ${FeatureGlobalBoxShadowHoverCssValue ? `box-shadow: ${FeatureGlobalBoxShadowHoverCssValue};` : ''}
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-item {
+                ${FeatureSingleItemNormalBackgroundType === 'gradient' ? `  
+                    background: ${FeatureSingleItemNormalCustomGradientSwitcher && FeatureSingleItemNormalCustomGradientInputValue ? FeatureSingleItemNormalCustomGradientInputValue : FeatureSingleItemNormalGradientColor};
+                `: `
+                    ${FeatureSingleItemNormalClassicColor ? `background: ${FeatureSingleItemNormalClassicColor};` : ''}
+                `}
+                ${singleItemDesktopPadding && FeatureSingleItemPaddingDesktop.top ? `padding: ${singleItemDesktopPadding};` : ''}
+                ${FeatureSingleItemBorder ? `border: ${FeatureSingleItemBorder};` : ''} 
+                ${singleItemDesktopBorderWidth && FeatureSingleItemBorderDesktop.top ? `border-width: ${singleItemDesktopBorderWidth};` : ''}
+                ${singleItemDesktopBorderRadiusWidth && FeatureSingleItemBorderRadiusDesktop.top ? `border-radius: ${singleItemDesktopBorderRadiusWidth};` : ''}
+                ${FeatureSingleItemBorderColor ? `border-color: ${FeatureSingleItemBorderColor};` : ''}
+                ${FeatureSingleItemBoxShadowCssValue ? `box-shadow: ${FeatureSingleItemBoxShadowCssValue};` : ''}
+                transition: all .3s ease-in-out;
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:hover {
+                ${FeatureSingleItemHoverBackgroundType === 'gradient' ? `  
+                    background: ${FeatureSingleItemHoverCustomGradientSwitcher && FeatureSingleItemHoverCustomGradientInputValue ? FeatureSingleItemHoverCustomGradientInputValue : FeatureSingleItemHoverGradientColor};
+                `: `
+                    ${FeatureSingleItemHoverClassicColor ? `background: ${FeatureSingleItemHoverClassicColor};` : ''}
+                `}
+                ${FeatureSingleItemBorderHoverColor ? `border-color: ${FeatureSingleItemBorderHoverColor};` : ''}
+                ${FeatureSingleItemBoxShadowHoverCssValue ? `box-shadow: ${FeatureSingleItemBoxShadowHoverCssValue};` : ''}
+                transition: all .3s ease-in-out;
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-items {
+                display: flex;
+                flex-direction: ${FeatureListDirection.Desktop};
+                flex-wrap: ${FeatureListDirectionWrap.Desktop};
+                gap: ${FeatureListGap.Desktop}${FeatureListGapUnits.Desktop};
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
+                ${FeatureIconColor ? `fill: ${FeatureIconColor};` : ''}
+                height: ${FeatureIconSize.Desktop}${FeatureIconSizeUnits.Desktop};
+                width: ${FeatureIconSize.Desktop}${FeatureIconSizeUnits.Desktop};
+                transition: all .3s ease-in-out;
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:hover .fb-feature-list-icon svg {
+                ${FeatureIconHoverColor ? `fill: ${FeatureIconHoverColor};` : ''}
+                transition: all .3s ease-in-out;
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box {
+                ${featureIconDesktopMargin && FeatureIconMarginDesktop.top ? `margin: ${featureIconDesktopMargin};` : ''}
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner {
+                ${FeatureIconNormalBackgroundType === 'gradient' ? ` 
+                    background: ${FeatureIconNormalCustomGradientSwitcher && FeatureIconNormalCustomGradientInputValue ? FeatureIconNormalCustomGradientInputValue : FeatureIconNormalGradientColor};
+                `: `
+                    ${FeatureIconNormalClassicColor ? `background: ${FeatureIconNormalClassicColor};` : ''}
+                `}
+                ${featureIconDesktopPadding && FeatureIconPaddingDesktop.top ? `padding: ${featureIconDesktopPadding};` : ''} 
+                ${FeatureIconBorder ? `border: ${FeatureIconBorder};` : ''} 
+                ${featureIconDesktopBorderWidth && FeatureIconBorderDesktop.top ? `border-width: ${featureIconDesktopBorderWidth};` : ''}
+                ${FeatureIconBorderColor ? `border-color: ${FeatureIconBorderColor};` : ''}
+                ${FeatureIconBoxShadowCssValue ? `box-shadow: ${FeatureIconBoxShadowCssValue};` : ''}
+                ${featureIconDesktopBorderRadiusWidth && FeatureIconBorderRadiusDesktop.top ? `border-radius: ${featureIconDesktopBorderRadiusWidth};` : ''}
+                transition: all .3s ease-in-out;
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner.circle {
+                ${featureIconDesktopBorderRadiusWidth && FeatureIconBorderRadiusDesktop.top ? `border-radius: ${featureIconDesktopBorderRadiusWidth};` : 'border-radius: 50%;'} 
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner.square {
+                ${featureIconDesktopBorderRadiusWidth && FeatureIconBorderRadiusDesktop.top ? `border-radius: ${featureIconDesktopBorderRadiusWidth};` : 'border-radius: 0;'} 
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner.rhombus {
+                ${featureIconDesktopBorderRadiusWidth && FeatureIconBorderRadiusDesktop.top ? `border-radius: ${featureIconDesktopBorderRadiusWidth};` : 'border-radius: 0;'} 
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:hover .fb-feature-list-icon-inner {
+                ${FeatureIconHoverBackgroundType === 'gradient' ? ` 
+                    background: ${FeatureIconHoverCustomGradientSwitcher && FeatureIconHoverCustomGradientInputValue ? FeatureIconHoverCustomGradientInputValue : FeatureIconHoverGradientColor};
+                `: `
+                    ${FeatureIconHoverClassicColor ? `background: ${FeatureIconHoverClassicColor};` : ''}
+                `}
+                ${FeatureIconBorderHoverColor ? `border-color: ${FeatureIconBorderHoverColor};` : ''}
+                ${FeatureIconBoxShadowHoverCssValue ? `box-shadow: ${FeatureIconBoxShadowHoverCssValue};` : ''}
+                transition: all .3s ease-in-out;
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-content ${FeatureTag} {
+                ${FeatureTitleGlobalTypoSwitcher.fontFamily === true && FeatureTitleGlobalTypographyData.fontFamily ? `font-family: ${FeatureTitleGlobalTypographyData.fontFamily};` : ''}
+                ${FeatureTitleGlobalTypoSwitcher.fontSize === true && FeatureTitleGlobalTypographyData.fontSize ? `font-size: ${FeatureTitleGlobalTypographyData.fontSize};` : ''}
+                ${FeatureTitleGlobalTypoSwitcher.fontWeight === true && FeatureTitleGlobalTypographyData.fontWeight ? `font-weight: ${FeatureTitleGlobalTypographyData.fontWeight};` : ''}
+                ${FeatureTitleGlobalTypoSwitcher.fontStyle === true && FeatureTitleGlobalTypographyData.fontStyle ? `font-style: ${FeatureTitleGlobalTypographyData.fontStyle};` : ''}
+                ${FeatureTitleGlobalTypoSwitcher.textTransform === true && FeatureTitleGlobalTypographyData.textTransform ? `text-transform: ${FeatureTitleGlobalTypographyData.textTransform};` : ''}
+                ${FeatureTitleGlobalTypoSwitcher.textDecoration === true && FeatureTitleGlobalTypographyData.textDecoration ? `text-decoration: ${FeatureTitleGlobalTypographyData.textDecoration};` : ''}
+                ${FeatureTitleGlobalTypoSwitcher.letterSpacing === true && FeatureTitleGlobalTypographyData.letterSpacing ? `letter-spacing: ${FeatureTitleGlobalTypographyData.letterSpacing};` : ''}
+                ${FeatureTitleGlobalTypoSwitcher.lineHeight === true && FeatureTitleGlobalTypographyData.lineHeight ? `line-height: ${FeatureTitleGlobalTypographyData.lineHeight};` : ''}
+                
+                ${FeatureTitleGlobalTypoSwitcher.fontFamily === false && FeatureTitleFontFamily ? `font-family: ${FeatureTitleFontFamily};` : ''}
+                ${FeatureTitleGlobalTypoSwitcher.fontSize === false && FeatureTitleFontSize.Desktop && FeatureTitleFontSizeUnits.Desktop ? `font-size: ${FeatureTitleFontSize.Desktop}${FeatureTitleFontSizeUnits.Desktop};` : ''}
+                ${FeatureTitleGlobalTypoSwitcher.fontWeight === false && FeatureTitleFontWeight ? `font-weight: ${FeatureTitleFontWeight};` : ''}
+                ${FeatureTitleGlobalTypoSwitcher.fontStyle === false && FeatureTitleFontStyle ? `font-style: ${FeatureTitleFontStyle};` : ''}
+                ${FeatureTitleGlobalTypoSwitcher.textTransform === false && FeatureTitleTextTransform ? `text-transform: ${FeatureTitleTextTransform};` : ''}
+                ${FeatureTitleGlobalTypoSwitcher.textDecoration === false && FeatureTitleTextDecoration ? `text-decoration: ${FeatureTitleTextDecoration};` : ''}
+                ${FeatureTitleGlobalTypoSwitcher.letterSpacing === false && FeatureTitleLetterSpacing.Desktop && FeatureTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${FeatureTitleLetterSpacing.Desktop}${FeatureTitleLetterSpacingUnits.Desktop};` : ''}
+                ${FeatureTitleGlobalTypoSwitcher.lineHeight === false && FeatureTitleLineHeight.Desktop && FeatureTitleLineHeightUnits.Desktop ? `line-height: ${FeatureTitleLineHeight.Desktop}${FeatureTitleLineHeightUnits.Desktop};` : ''}
+                ${FeatureTitleColor ? `color: ${FeatureTitleColor};` : ''}
+                ${featureTitleDesktopMargin ? `margin: ${featureTitleDesktopMargin};` : ''}
+                transition: all .3s ease-in-out;
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:hover .fb-feature-list-content ${FeatureTag} {
+                ${FeatureTitleHoverColor ? `color: ${FeatureTitleHoverColor};` : ''}
+                transition: all .3s ease-in-out;
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text {
+                ${FeatureDescGlobalTypoSwitcher.fontFamily === true && FeatureDescGlobalTypographyData.fontFamily ? `font-family: ${FeatureDescGlobalTypographyData.fontFamily};` : ''}
+                ${FeatureDescGlobalTypoSwitcher.fontSize === true && FeatureDescGlobalTypographyData.fontSize ? `font-size: ${FeatureDescGlobalTypographyData.fontSize};` : ''}
+                ${FeatureDescGlobalTypoSwitcher.fontWeight === true && FeatureDescGlobalTypographyData.fontWeight ? `font-weight: ${FeatureDescGlobalTypographyData.fontWeight};` : ''}
+                ${FeatureDescGlobalTypoSwitcher.fontStyle === true && FeatureDescGlobalTypographyData.fontStyle ? `font-style: ${FeatureDescGlobalTypographyData.fontStyle};` : ''}
+                ${FeatureDescGlobalTypoSwitcher.textTransform === true && FeatureDescGlobalTypographyData.textTransform ? `text-transform: ${FeatureDescGlobalTypographyData.textTransform};` : ''}
+                ${FeatureDescGlobalTypoSwitcher.textDecoration === true && FeatureDescGlobalTypographyData.textDecoration ? `text-decoration: ${FeatureDescGlobalTypographyData.textDecoration};` : ''}
+                ${FeatureDescGlobalTypoSwitcher.letterSpacing === true && FeatureDescGlobalTypographyData.letterSpacing ? `letter-spacing: ${FeatureDescGlobalTypographyData.letterSpacing};` : ''}
+                ${FeatureDescGlobalTypoSwitcher.lineHeight === true && FeatureDescGlobalTypographyData.lineHeight ? `line-height: ${FeatureDescGlobalTypographyData.lineHeight};` : ''}
+                
+                ${FeatureDescGlobalTypoSwitcher.fontFamily === false && FeatureDescFontFamily ? `font-family: ${FeatureDescFontFamily};` : ''}
+                ${FeatureDescGlobalTypoSwitcher.fontSize === false && FeatureDescFontSize.Desktop && FeatureDescFontSizeUnits.Desktop ? `font-size: ${FeatureDescFontSize.Desktop}${FeatureDescFontSizeUnits.Desktop};` : ''}
+                ${FeatureDescGlobalTypoSwitcher.fontWeight === false && FeatureDescFontWeight ? `font-weight: ${FeatureDescFontWeight};` : ''}
+                ${FeatureDescGlobalTypoSwitcher.fontStyle === false && FeatureDescFontStyle ? `font-style: ${FeatureDescFontStyle};` : ''}
+                ${FeatureDescGlobalTypoSwitcher.textTransform === false && FeatureDescTextTransform ? `text-transform: ${FeatureDescTextTransform};` : ''}
+                ${FeatureDescGlobalTypoSwitcher.textDecoration === false && FeatureDescTextDecoration ? `text-decoration: ${FeatureDescTextDecoration};` : ''}
+                ${FeatureDescGlobalTypoSwitcher.letterSpacing === false && FeatureDescLetterSpacing.Desktop && FeatureDescLetterSpacingUnits.Desktop ? `letter-spacing: ${FeatureDescLetterSpacing.Desktop}${FeatureDescLetterSpacingUnits.Desktop};` : ''}
+                ${FeatureDescGlobalTypoSwitcher.lineHeight === false && FeatureDescLineHeight.Desktop && FeatureDescLineHeightUnits.Desktop ? `line-height: ${FeatureDescLineHeight.Desktop}${FeatureDescLineHeightUnits.Desktop};` : ''}
+                ${FeatureDescColor ? `color: ${FeatureDescColor};` : ''}
+                ${featureDescDesktopMargin ? `margin: ${featureDescDesktopMargin};` : ''}
+                transition: all .3s ease-in-out;
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-item:hover .fb-feature-list-content .fb-feature-list-text {
+                ${FeatureDescHoverColor ? `color: ${FeatureDescHoverColor};` : ''}
+                transition: all .3s ease-in-out;
+            }
+ 
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box .fb-feature-icon-image-wrapper {
+                height: ${FeatureIconImageHeight.Desktop}${FeatureIconImageUnits.Desktop};
+                width: ${FeatureIconImageWidth.Desktop}${FeatureIconImageUnits.Desktop};  
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box .fb-feature-icon-image-wrapper img {
+                ${FeatureIconImageBorder ? `border: ${FeatureIconImageBorder};` : ''} 
+                ${FeatureIconImageBorderColor ? `border-color: ${FeatureIconImageBorderColor};` : ''}
+                ${featureIconImageDesktopBorderWidth && FeatureIconImageBorderDesktop.top ? `border-width: ${featureIconImageDesktopBorderWidth};` : ''}
+                ${featureIconImageDesktopBorderRadiusWidth && FeatureIconImageBorderRadiusDesktop.top ? `border-radius: ${featureIconImageDesktopBorderRadiusWidth};` : ''}
+                transition: all .3s ease-in-out;
+            }
+            .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box .fb-feature-icon-image-wrapper img:hover {
+                ${FeatureIconImageBorderHoverColor ? `border-color: ${FeatureIconImageBorderHoverColor};` : ''}
+                transition: all .3s ease-in-out;
+            }
+
+            @media only screen and (max-width: 1024px) {
+                .fb-feature-main-wrapper.${blockID} {
+                    ${featuresListPositionType !== 'default' ? `position: ${featuresListPositionType};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListHZOrientationType === 'left' && featuresListHZLeftOffset.Tablet !== undefined ? `left: ${featuresListHZLeftOffset.Tablet}${featuresListHZLeftOffsetUnits.Tablet};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListHZOrientationType === 'right' && featuresListHZRightOffset.Tablet !== undefined ? `right: ${featuresListHZRightOffset.Tablet}${featuresListHZRightOffsetUnits.Tablet};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'top' && featuresListVRTopOffset.Tablet !== undefined ? `top: ${featuresListVRTopOffset.Tablet}${featuresListVRTopOffsetUnits.Tablet};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'bottom' && featuresListVRBottomOffset.Tablet !== undefined ? `bottom: ${featuresListVRBottomOffset.Tablet}${featuresListVRBottomOffsetUnits.Tablet};` : ''}
+                    ${FeatureGlobalZIndex.Tablet ? `z-index: ${FeatureGlobalZIndex.Tablet};` : ''}
+                    ${globalTabletPadding && FeatureGlobalPaddingTablet.top ? `padding: ${globalTabletPadding};` : ''}
+                    ${globalTabletMargin && FeatureGlobalMarginTablet.top ? `margin: ${globalTabletMargin};` : ''} 
+                    ${globalTabletBorderWidth && FeatureGlobalBorderTablet.top ? `border-width: ${globalTabletBorderWidth};` : ''}
+                    ${globalTabletBorderRadiusWidth && FeatureGlobalBorderRadiusTablet.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+                }
+
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-item {
+                    ${singleItemTabletPadding && FeatureSingleItemPaddingTablet.top ? `padding: ${singleItemTabletPadding};` : ''}
+                    ${singleItemTabletBorderWidth && FeatureSingleItemBorderTablet.top ? `border-width: ${singleItemTabletBorderWidth};` : ''}
+                    ${singleItemTabletBorderRadiusWidth && FeatureSingleItemBorderRadiusTablet.top ? `border-radius: ${singleItemTabletBorderRadiusWidth};` : ''}
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-items {
+                    flex-direction: ${FeatureListDirection.Tablet};
+                    flex-wrap: ${FeatureListDirectionWrap.Tablet};
+                    gap: ${FeatureListGap.Tablet}${FeatureListGapUnits.Tablet};
+                }
+
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
+                    height: ${FeatureIconSize.Tablet}${FeatureIconSizeUnits.Tablet};
+                    width: ${FeatureIconSize.Tablet}${FeatureIconSizeUnits.Tablet};
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner {
+                    ${featureIconTabletPadding && FeatureIconPaddingTablet.top ? `padding: ${featureIconTabletPadding};` : ''} 
+                    ${featureIconTabletBorderWidth && FeatureIconBorderTablet.top ? `border-width: ${featureIconTabletBorderWidth};` : ''}
+                    ${featureIconTabletBorderRadiusWidth && FeatureIconBorderRadiusTablet.top ? `border-radius: ${featureIconTabletBorderRadiusWidth};` : ''}
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner.circle {
+                    ${featureIconTabletBorderRadiusWidth && FeatureIconBorderRadiusTablet.top ? `border-radius: ${featureIconTabletBorderRadiusWidth};` : 'border-radius: 50%;'} 
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner.square {
+                    ${featureIconTabletBorderRadiusWidth && FeatureIconBorderRadiusTablet.top ? `border-radius: ${featureIconTabletBorderRadiusWidth};` : 'border-radius: 0;'} 
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner.rhombus {
+                    ${featureIconTabletBorderRadiusWidth && FeatureIconBorderRadiusTablet.top ? `border-radius: ${featureIconTabletBorderRadiusWidth};` : 'border-radius: 0;'} 
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box {
+                    ${featureIconTabletMargin && FeatureIconMarginTablet.top ? `margin: ${featureIconTabletMargin};` : ''} 
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-content ${FeatureTag} {
+                    ${FeatureTitleGlobalTypoSwitcher.fontSize === false && FeatureTitleFontSize.Tablet && FeatureTitleFontSizeUnits.Tablet ? `font-size: ${FeatureTitleFontSize.Tablet}${FeatureTitleFontSizeUnits.Tablet};` : ''}
+                    ${FeatureTitleGlobalTypoSwitcher.letterSpacing === false && FeatureTitleLetterSpacing.Tablet && FeatureTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${FeatureTitleLetterSpacing.Tablet}${FeatureTitleLetterSpacingUnits.Tablet};` : ''}
+                    ${FeatureTitleGlobalTypoSwitcher.lineHeight === false && FeatureTitleLineHeight.Tablet && FeatureTitleLineHeightUnits.Tablet ? `line-height: ${FeatureTitleLineHeight.Tablet}${FeatureTitleLineHeightUnits.Tablet};` : ''}
+                    ${featureTitleTabletMargin ? `margin: ${featureTitleTabletMargin};` : ''}
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text {
+                    ${FeatureDescGlobalTypoSwitcher.fontSize === false && FeatureDescFontSize.Tablet && FeatureDescFontSizeUnits.Tablet ? `font-size: ${FeatureDescFontSize.Tablet}${FeatureDescFontSizeUnits.Tablet};` : ''}
+                    ${FeatureDescGlobalTypoSwitcher.letterSpacing === false && FeatureDescLetterSpacing.Tablet && FeatureDescLetterSpacingUnits.Tablet ? `letter-spacing: ${FeatureDescLetterSpacing.Tablet}${FeatureDescLetterSpacingUnits.Tablet};` : ''}
+                    ${FeatureDescGlobalTypoSwitcher.lineHeight === false && FeatureDescLineHeight.Tablet && FeatureDescLineHeightUnits.Tablet ? `line-height: ${FeatureDescLineHeight.Tablet}${FeatureDescLineHeightUnits.Tablet};` : ''}
+                    ${featureDescTabletMargin ? `margin: ${featureDescTabletMargin};` : ''}
+                }
+
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box .fb-feature-icon-image-wrapper {
+                    height: ${FeatureIconImageHeight.Tablet}${FeatureIconImageUnits.Tablet};
+                    width: ${FeatureIconImageWidth.Tablet}${FeatureIconImageUnits.Tablet};  
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box .fb-feature-icon-image-wrapper img {
+                    ${FeatureIconImageBorder ? `border: ${FeatureIconImageBorder};` : ''} 
+                    ${FeatureIconImageBorderColor ? `border-color: ${FeatureIconImageBorderColor};` : ''}
+                    ${featureIconImageTabletBorderWidth && FeatureIconImageBorderTablet.top ? `border-width: ${featureIconImageTabletBorderWidth};` : ''}
+                    ${featureIconImageTabletBorderRadiusWidth && FeatureIconImageBorderRadiusTablet.top ? `border-radius: ${featureIconImageTabletBorderRadiusWidth};` : ''}
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box .fb-feature-icon-image-wrapper img:hover {
+                    ${FeatureIconImageBorderHoverColor ? `border-color: ${FeatureIconImageBorderHoverColor};` : ''}
+                }
+            }
+            @media only screen and (max-width: 767px) {
+                .fb-feature-main-wrapper.${blockID} {
+                    ${featuresListPositionType !== 'default' ? `position: ${featuresListPositionType};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListHZOrientationType === 'left' && featuresListHZLeftOffset.Mobile !== undefined ? `left: ${featuresListHZLeftOffset.Mobile}${featuresListHZLeftOffsetUnits.Mobile};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListHZOrientationType === 'right' && featuresListHZRightOffset.Mobile !== undefined ? `right: ${featuresListHZRightOffset.Mobile}${featuresListHZRightOffsetUnits.Mobile};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'top' && featuresListVRTopOffset.Mobile !== undefined ? `top: ${featuresListVRTopOffset.Mobile}${featuresListVRTopOffsetUnits.Mobile};` : ''}
+                    ${featuresListPositionType !== 'default' && featuresListPositionType !== 'relative' && featuresListVROrientationType === 'bottom' && featuresListVRBottomOffset.Mobile !== undefined ? `bottom: ${featuresListVRBottomOffset.Mobile}${featuresListVRBottomOffsetUnits.Mobile};` : ''}
+                    ${FeatureGlobalZIndex.Mobile ? `z-index: ${FeatureGlobalZIndex.Mobile};` : ''}
+                    ${globalMobilePadding && FeatureGlobalPaddingMobile.top ? `padding: ${globalMobilePadding};` : ''}
+                    ${globalMobileMargin && FeatureGlobalMarginMobile.top ? `margin: ${globalMobileMargin};` : ''} 
+                    ${globalMobileBorderWidth && FeatureGlobalBorderMobile.top ? `border-width: ${globalMobileBorderWidth};` : ''}
+                    ${globalMobileBorderRadiusWidth && FeatureGlobalBorderRadiusMobile.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-item {
+                    ${singleItemMobilePadding && FeatureSingleItemPaddingMobile.top ? `padding: ${singleItemMobilePadding};` : ''}
+                    ${singleItemMobileBorderWidth && FeatureSingleItemBorderMobile.top ? `border-width: ${singleItemMobileBorderWidth};` : ''}
+                    ${singleItemMobileBorderRadiusWidth && FeatureSingleItemBorderRadiusMobile.top ? `border-radius: ${singleItemMobileBorderRadiusWidth};` : ''}
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-items {
+                    flex-direction: ${FeatureListDirection.Mobile};
+                    flex-wrap: ${FeatureListDirectionWrap.Mobile};
+                    gap: ${FeatureListGap.Mobile}${FeatureListGapUnits.Mobile};
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon svg {
+                    height: ${FeatureIconSize.Mobile}${FeatureIconSizeUnits.Mobile}; 
+                    width: ${FeatureIconSize.Mobile}${FeatureIconSizeUnits.Mobile};
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner {
+                    ${featureIconMobilePadding && FeatureIconPaddingMobile.top ? `padding: ${featureIconMobilePadding};` : ''} 
+                    ${featureIconMobileBorderWidth && FeatureIconBorderMobile.top ? `border-width: ${featureIconMobileBorderWidth};` : ''}
+                    ${featureIconMobileBorderRadiusWidth && FeatureIconBorderRadiusMobile.top ? `border-radius: ${featureIconMobileBorderRadiusWidth};` : ''}
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner.circle {
+                    ${featureIconMobileBorderRadiusWidth && FeatureIconBorderRadiusMobile.top ? `border-radius: ${featureIconMobileBorderRadiusWidth};` : 'border-radius: 50%;'} 
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner.square {
+                    ${featureIconMobileBorderRadiusWidth && FeatureIconBorderRadiusMobile.top ? `border-radius: ${featureIconMobileBorderRadiusWidth};` : 'border-radius: 0;'} 
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-inner.rhombus {
+                    ${featureIconMobileBorderRadiusWidth && FeatureIconBorderRadiusMobile.top ? `border-radius: ${featureIconMobileBorderRadiusWidth};` : 'border-radius: 0;'} 
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box {
+                    ${featureIconMobileMargin && FeatureIconMarginMobile.top ? `margin: ${featureIconMobileMargin};` : ''}
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-content ${FeatureTag} {
+                    ${FeatureTitleGlobalTypoSwitcher.fontSize === false && FeatureTitleFontSize.Mobile && FeatureTitleFontSizeUnits.Mobile ? `font-size: ${FeatureTitleFontSize.Mobile}${FeatureTitleFontSizeUnits.Mobile};` : ''}
+                    ${FeatureTitleGlobalTypoSwitcher.letterSpacing === false && FeatureTitleLetterSpacing.Mobile && FeatureTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${FeatureTitleLetterSpacing.Mobile}${FeatureTitleLetterSpacingUnits.Mobile};` : ''}
+                    ${FeatureTitleGlobalTypoSwitcher.lineHeight === false && FeatureTitleLineHeight.Mobile && FeatureTitleLineHeightUnits.Mobile ? `line-height: ${FeatureTitleLineHeight.Mobile}${FeatureTitleLineHeightUnits.Mobile};` : ''}
+                    ${featureTitleMobileMargin ? `margin: ${featureTitleMobileMargin};` : ''}
+                }
+
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-content .fb-feature-list-text {
+                    ${FeatureDescGlobalTypoSwitcher.fontSize === false && FeatureDescFontSize.Mobile && FeatureDescFontSizeUnits.Mobile ? `font-size: ${FeatureDescFontSize.Mobile}${FeatureDescFontSizeUnits.Mobile};` : ''} 
+                    ${FeatureDescGlobalTypoSwitcher.letterSpacing === false && FeatureDescLetterSpacing.Mobile && FeatureDescLetterSpacingUnits.Mobile ? `letter-spacing: ${FeatureDescLetterSpacing.Mobile}${FeatureDescLetterSpacingUnits.Mobile};` : ''}
+                    ${FeatureDescGlobalTypoSwitcher.lineHeight === false && FeatureDescLineHeight.Mobile && FeatureDescLineHeightUnits.Mobile ? `line-height: ${FeatureDescLineHeight.Mobile}${FeatureDescLineHeightUnits.Mobile};` : ''}
+                    ${featureDescMobileMargin ? `margin: ${featureDescMobileMargin};` : ''}
+                }
+
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box .fb-feature-icon-image-wrapper {
+                    height: ${FeatureIconImageHeight.Mobile}${FeatureIconImageUnits.Mobile};
+                    width: ${FeatureIconImageWidth.Mobile}${FeatureIconImageUnits.Mobile};  
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box .fb-feature-icon-image-wrapper img {
+                    ${FeatureIconImageBorder ? `border: ${FeatureIconImageBorder};` : ''} 
+                    ${FeatureIconImageBorderColor ? `border-color: ${FeatureIconImageBorderColor};` : ''}
+                    ${featureIconImageMobileBorderWidth && FeatureIconImageBorderMobile.top ? `border-width: ${featureIconImageMobileBorderWidth};` : ''}
+                    ${featureIconImageMobileBorderRadiusWidth && FeatureIconImageBorderRadiusMobile.top ? `border-radius: ${featureIconImageMobileBorderRadiusWidth};` : ''}
+                }
+                .fb-feature-main-wrapper.${blockID} .fb-feature-list-icon-box .fb-feature-icon-image-wrapper img:hover {
+                    ${FeatureIconImageBorderHoverColor ? `border-color: ${FeatureIconImageBorderHoverColor};` : ''}
+                }
+            }
+        `;
+        return style;
+    }, [
+        blockID,
+        deviceType,
+        blockStyle,
+        FeatureItems,
+        FeatureTag,
+        FeatureAlignment,
+        FeatureIconAlignment,
+        FeatureIconShape,
+        FeatureListDirection,
+        FeatureListDirectionWrap,
+        FeatureListGap,
+        FeatureListGapUnits,
+        FeatureIconColorSwitcher,
+        FeatureIconColor,
+        FeatureIconHoverColor,
+        FeatureIconBgColorSwitcher,
+        FeatureIconNormalBackgroundType,
+        FeatureIconNormalClassicColor,
+        FeatureIconNormalGradientColor,
+        FeatureIconNormalCustomGradientSwitcher,
+        FeatureIconNormalCustomGradientInputValue,
+        FeatureIconHoverBackgroundType,
+        FeatureIconHoverClassicColor,
+        FeatureIconHoverGradientColor,
+        FeatureIconHoverCustomGradientSwitcher,
+        FeatureIconHoverCustomGradientInputValue,
+        FeatureIconPaddingUnits,
+        FeatureIconPaddingDesktop,
+        FeatureIconPaddingTablet,
+        FeatureIconPaddingMobile,
+        FeatureIconPaddingLink,
+        FeatureIconMarginUnits,
+        FeatureIconMarginDesktop,
+        FeatureIconMarginTablet,
+        FeatureIconMarginMobile,
+        FeatureIconMarginLink,
+        FeatureIconBorder,
+        FeatureIconBorderColorSwitcher,
+        FeatureIconBorderColor,
+        FeatureIconBorderHoverColor,
+        FeatureIconBorderUnits,
+        FeatureIconBorderDesktop,
+        FeatureIconBorderTablet,
+        FeatureIconBorderMobile,
+        FeatureIconBorderLink,
+        FeatureIconBorderRadiusUnits,
+        FeatureIconBorderRadiusDesktop,
+        FeatureIconBorderRadiusTablet,
+        FeatureIconBorderRadiusMobile,
+        FeatureIconBorderRadiusLink,
+        FeatureIconBoxShadowValues,
+        FeatureIconBoxShadowSwitcher,
+        FeatureIconBoxShadowValues,
+        FeatureIconBoxShadowCssValue,
+        FeatureIconBoxShadowHoverValues,
+        FeatureIconBoxShadowHoverCssValue,
+        FeatureIconSize,
+        FeatureIconSizeUnits,
+        FeatureTitleGlobalTypoSwitcher,
+        FeatureTitleGlobalTypographyData,
+        FeatureTitleGlobalTypoType,
+        FeatureTitleFontFamily,
+        FeatureTitleFontSize,
+        FeatureTitleFontSizeUnits,
+        FeatureTitleFontWeight,
+        FeatureTitleFontStyle,
+        FeatureTitleTextTransform,
+        FeatureTitleTextDecoration,
+        FeatureTitleLetterSpacing,
+        FeatureTitleLetterSpacingUnits,
+        FeatureTitleLineHeight,
+        FeatureTitleLineHeightUnits,
+        FeatureTitleColorSwitcher,
+        FeatureTitleColor,
+        FeatureTitleHoverColor,
+        FeatureDescGlobalTypoSwitcher,
+        FeatureDescGlobalTypographyData,
+        FeatureDescGlobalTypoType,
+        FeatureDescFontFamily,
+        FeatureDescFontSize,
+        FeatureDescFontSizeUnits,
+        FeatureDescFontWeight,
+        FeatureDescFontStyle,
+        FeatureDescTextTransform,
+        FeatureDescTextDecoration,
+        FeatureDescLetterSpacing,
+        FeatureDescLetterSpacingUnits,
+        FeatureDescLineHeight,
+        FeatureDescLineHeightUnits,
+        FeatureDescColorSwitcher,
+        FeatureDescColor,
+        FeatureDescHoverColor,
+        FeatureSingleItemBgColorSwitcher,
+        FeatureSingleItemNormalBackgroundType,
+        FeatureSingleItemNormalClassicColor,
+        FeatureSingleItemNormalGradientColor,
+        FeatureSingleItemNormalCustomGradientSwitcher,
+        FeatureSingleItemNormalCustomGradientInputValue,
+        FeatureSingleItemHoverBackgroundType,
+        FeatureSingleItemHoverClassicColor,
+        FeatureSingleItemHoverGradientColor,
+        FeatureSingleItemHoverCustomGradientSwitcher,
+        FeatureSingleItemHoverCustomGradientInputValue,
+        FeatureSingleItemPaddingUnits,
+        FeatureSingleItemPaddingDesktop,
+        FeatureSingleItemPaddingTablet,
+        FeatureSingleItemPaddingMobile,
+        FeatureSingleItemPaddingLink,
+        FeatureSingleItemBorder,
+        FeatureSingleItemBorderColorSwitcher,
+        FeatureSingleItemBorderColor,
+        FeatureSingleItemBorderHoverColor,
+        FeatureSingleItemBorderUnits,
+        FeatureSingleItemBorderDesktop,
+        FeatureSingleItemBorderTablet,
+        FeatureSingleItemBorderMobile,
+        FeatureSingleItemBorderLink,
+        FeatureSingleItemBorderRadiusUnits,
+        FeatureSingleItemBorderRadiusDesktop,
+        FeatureSingleItemBorderRadiusTablet,
+        FeatureSingleItemBorderRadiusMobile,
+        FeatureSingleItemBorderRadiusLink,
+        FeatureSingleItemBoxShadowSwitcher,
+        FeatureSingleItemBoxShadowValues,
+        FeatureSingleItemBoxShadowCssValue,
+        FeatureSingleItemBoxShadowHoverValues,
+        FeatureSingleItemBoxShadowHoverCssValue,
+        FeatureGlobalZIndex,
+        featuresListOverflow,
+        FeatureGlobalPaddingUnits,
+        FeatureGlobalPaddingDesktop,
+        FeatureGlobalPaddingTablet,
+        FeatureGlobalPaddingMobile,
+        FeatureGlobalPaddingLink,
+        FeatureGlobalMarginUnits,
+        FeatureGlobalMarginDesktop,
+        FeatureGlobalMarginTablet,
+        FeatureGlobalMarginMobile,
+        FeatureGlobalMarginLink,
+        FeatureGlobalBgColorSwitcher,
+        FeatureGlobalNormalBackgroundType,
+        FeatureGlobalNormalClassicColor,
+        FeatureGlobalNormalGradientColor,
+        FeatureGlobalNormalCustomGradientSwitcher,
+        FeatureGlobalNormalCustomGradientInputValue,
+        FeatureGlobalNormalBackgroundImageUrl,
+        FeatureGlobalNormalBackgroundImageAlt,
+        FeatureGlobalNormalBackgroundImageID,
+        FeatureGlobalNormalBackgroundImagePosition,
+        FeatureGlobalNormalBackgroundImageAttachment,
+        FeatureGlobalNormalBackgroundImageRepeat,
+        FeatureGlobalNormalBackgroundImageSize,
+        FeatureGlobalHoverBackgroundType,
+        FeatureGlobalHoverClassicColor,
+        FeatureGlobalHoverGradientColor,
+        FeatureGlobalHoverCustomGradientSwitcher,
+        FeatureGlobalHoverCustomGradientInputValue,
+        FeatureGlobalHoverBackgroundImageUrl,
+        FeatureGlobalHoverBackgroundImageAlt,
+        FeatureGlobalHoverBackgroundImageID,
+        FeatureGlobalHoverBackgroundImagePosition,
+        FeatureGlobalHoverBackgroundImageAttachment,
+        FeatureGlobalHoverBackgroundImageRepeat,
+        FeatureGlobalHoverBackgroundImageSize,
+        FeatureGlobalBorder,
+        FeatureGlobalBorderColorSwitcher,
+        FeatureGlobalBorderColor,
+        FeatureGlobalBorderHoverColor,
+        FeatureGlobalBorderUnits,
+        FeatureGlobalBorderDesktop,
+        FeatureGlobalBorderTablet,
+        FeatureGlobalBorderMobile,
+        FeatureGlobalBorderLink,
+        FeatureGlobalBorderRadiusUnits,
+        FeatureGlobalBorderRadiusDesktop,
+        FeatureGlobalBorderRadiusTablet,
+        FeatureGlobalBorderRadiusMobile,
+        FeatureGlobalBorderRadiusLink,
+        FeatureGlobalBoxShadowValues,
+        FeatureGlobalBoxShadowSwitcher,
+        FeatureGlobalBoxShadowValues,
+        FeatureGlobalBoxShadowCssValue,
+        FeatureGlobalBoxShadowHoverValues,
+        FeatureGlobalBoxShadowHoverCssValue,
+        globalDesktopPadding,
+        globalDesktopMargin,
+        globalDesktopBorderWidth,
+        globalDesktopBorderRadiusWidth,
+        globalTabletPadding,
+        globalTabletMargin,
+        globalTabletBorderWidth,
+        globalTabletBorderRadiusWidth,
+        globalMobilePadding,
+        globalMobileMargin,
+        globalMobileBorderWidth,
+        globalMobileBorderRadiusWidth,
+        singleItemDesktopPadding,
+        singleItemTabletPadding,
+        singleItemMobilePadding,
+        singleItemDesktopBorderWidth,
+        singleItemTabletBorderWidth,
+        singleItemMobileBorderWidth,
+        singleItemDesktopBorderRadiusWidth,
+        singleItemTabletBorderRadiusWidth,
+        singleItemMobileBorderRadiusWidth,
+        featureIconDesktopMargin,
+        featureIconDesktopPadding,
+        featureIconDesktopBorderWidth,
+        featureIconDesktopBorderRadiusWidth,
+        featureIconTabletPadding,
+        featureIconTabletBorderWidth,
+        featureIconTabletBorderRadiusWidth,
+        featureIconTabletMargin,
+        featureIconMobilePadding,
+        featureIconMobileBorderWidth,
+        featureIconMobileBorderRadiusWidth,
+        featureIconMobileMargin,
+        FeatureTitleFontSize.Tablet,
+        FeatureTitleFontSizeUnits.Tablet,
+        FeatureTitleLetterSpacing.Tablet,
+        FeatureTitleLetterSpacingUnits.Tablet,
+        FeatureTitleLineHeight.Tablet,
+        FeatureTitleLineHeightUnits.Tablet,
+        FeatureDescFontSize.Tablet,
+        FeatureDescFontSizeUnits.Tablet,
+        FeatureDescLetterSpacing.Tablet,
+        FeatureDescLetterSpacingUnits.Tablet,
+        FeatureDescLineHeight.Tablet,
+        FeatureDescLineHeightUnits.Tablet,
+        FeatureTitleFontSize.Mobile,
+        FeatureTitleFontSizeUnits.Mobile,
+        FeatureTitleLetterSpacing.Mobile,
+        FeatureTitleLetterSpacingUnits.Mobile,
+        FeatureTitleLineHeight.Mobile,
+        FeatureTitleLineHeightUnits.Mobile,
+        FeatureDescFontSize.Mobile,
+        FeatureDescFontSizeUnits.Mobile,
+        FeatureDescLetterSpacing.Mobile,
+        FeatureDescLetterSpacingUnits.Mobile,
+        FeatureDescLineHeight.Mobile,
+        FeatureDescLineHeightUnits.Mobile,
+
+        FeatureIconImageUnits,
+        FeatureIconImageWidth,
+        FeatureIconImageHeight,
+
+        FeatureIconImageBorder,
+        FeatureIconImageBorderColorSwitcher,
+        FeatureIconImageBorderColor,
+        FeatureIconImageBorderHoverColor,
+
+        FeatureIconImageBorderUnits,
+        FeatureIconImageBorderDesktop,
+        FeatureIconImageBorderTablet,
+        FeatureIconImageBorderMobile,
+        FeatureIconImageBorderLink,
+        featureIconImageDesktopBorderWidth,
+        featureIconImageTabletBorderWidth,
+        featureIconImageMobileBorderWidth,
+
+
+        FeatureIconImageBorderRadiusUnits,
+        FeatureIconImageBorderRadiusDesktop,
+        FeatureIconImageBorderRadiusTablet,
+        FeatureIconImageBorderRadiusMobile,
+        FeatureIconImageBorderRadiusLink,
+        featureIconImageDesktopBorderRadiusWidth,
+        featureIconImageTabletBorderRadiusWidth,
+        featureIconImageMobileBorderRadiusWidth,
+
+        // Position
+        featuresListPositionType,
+        featuresListHZOrientationType,
+        featuresListVROrientationType,
+        featuresListHZLeftOffset,
+        featuresListHZLeftOffsetUnits,
+        featuresListHZRightOffset,
+        featuresListHZRightOffsetUnits,
+        featuresListVRTopOffset,
+        featuresListVRTopOffsetUnits,
+        featuresListVRBottomOffset,
+        featuresListVRBottomOffsetUnits,
+
+
+
+        FeatureTitleMarginUnits,
+        FeatureTitleMarginDesktop,
+        FeatureTitleMarginTablet,
+        FeatureTitleMarginMobile,
+        FeatureTitleMarginLink,
+        featureTitleDesktopMargin,
+        featureTitleTabletMargin,
+        featureTitleMobileMargin,
+
+        FeatureDescMarginUnits,
+        FeatureDescMarginDesktop,
+        FeatureDescMarginTablet,
+        FeatureDescMarginMobile,
+        FeatureDescMarginLink,
+        featureDescDesktopMargin,
+        featureDescTabletMargin,
+        featureDescMobileMargin,
+    ]);
+
+    const customCss = getCustomCss(featuresListGlobalWraperCustomCSS, `.${blockID}`);
+
+    useEffect(() => {
+        setAttributes({ blockStyle: `${featureSingleItemStyle}${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim() });
+    }, [featureSingleItemStyle, allBlockStyle, customCss]);
+
+    const editorStyle = `${featureSingleItemStyle}${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+
+    /**
+     * Inspector General Controls
+     */
+    const generalControls = (
+        <>
+            <PanelBody
+                title={__("Feature", "frontis-blocks")}
+                initialOpen={true}
+            >
+                <SelectControl
+                    label={__("Content Type", "frontis-block")}
+                    value={contentType}
+                    options={CONTENT_TYPE}
+                    onChange={(value) =>
+                        setAttributes({ contentType: value })
+                    }
+                />
+
+                <TextControl
+                    label={__("Label", "frontis-block")}
+                    value={tickerLabel}
+                    onChange={(value) =>
+                        setAttributes({ tickerLabel: value })
+                    }
+                    className="fb-setting-text"
+                />
+
+                <FBIconPicker
+                    value={tickerLabelIcon}
+                    setIconHandler={tickerLabelIcon}
+                />
+                <div className="fb-feature-wrapper">
+                    <DndContext
+                        collisionDetection={closestCenter}
+                        onDragEnd={handleDragEnd}
+                    >
+                        <SortableContext items={FeatureItemList.map(item => item.id)}>
+                            <ul className='dnd-items-wrapper'>
+                                {FeatureItemList.map((item, index) => (
+                                    <SortableItem
+                                        key={item.id}
+                                        id={item.id}
+                                        item={item}
+                                        handleChangeItem={handleChangeItem}
+                                        handleDeleteItem={handleDeleteItem}
+                                        handleDuplicateItem={handleDuplicateItem}
+                                        index={index}
+                                    />
+                                ))}
+                            </ul>
+                        </SortableContext>
+                        <Button isPrimary onClick={handleAddItem}>
+                            {__("Add Feature", "frontis-blocks")}
+                        </Button>
+                    </DndContext>
+                </div>
+
+                <FB_HtmlTagControl
+                    label={__("Title Tag", "frontis-blocks")}
+                    globalHtmlTag={FeatureTag}
+                    setGlobalHtmlTag={(value) => setAttributes({ FeatureTag: value })}
+                />
+
+                <BaseControl
+                    label={__("Icon Shape", "frontis-blocks")}
+                    className="fb-setting-icon-shape-wrapper"
+                >
+                    <SelectControl
+                        value={attributes.FeatureIconShape}
+                        options={[
+                            { label: __("None", "frontis-blocks"), value: "none" },
+                            { label: __("Circle", "frontis-blocks"), value: "circle" },
+                            { label: __("Square", "frontis-blocks"), value: "square" },
+                            { label: __("Rhombus", "frontis-blocks"), value: "rhombus" },
+                        ]}
+                        onChange={(value) => setAttributes({ FeatureIconShape: value })}
+                    />
+                </BaseControl>
+                <BaseControl
+                    label={__("Icon Position", "frontis-blocks")}
+                    id="fb-setting-text-alignment"
+                    className="fb-setting-text-alignment"
+                >
+                    <ButtonGroup
+                        className="fb-setting-text-alignment-group-btn"
+                    >
+                        {TEXT_ALIGN.map((item, key) => (
+                            <Button
+                                key={key}
+                                onClick={() => setAttributes({ FeatureIconAlignment: item.value })}
+                                className={`fb-setting-text-alignment-single-btn ${FeatureIconAlignment === item.value ? 'active' : ''}`}
+                            >
+                                {item.label}
+                            </Button>
+                        ))}
+                    </ButtonGroup>
+                </BaseControl>
+                {FeatureIconAlignment !== 'center' && (
+                    <BaseControl
+                        label={__("Icon Alignment", "frontis-blocks")}
+                        id="fb-setting-text-alignment"
+                        className="fb-setting-text-alignment"
+                    >
+                        <ButtonGroup
+                            className="fb-setting-text-alignment-group-btn"
+                        >
+                            {ICON_VERTICAL_ALIGN.map((item, key) => (
+                                <Button
+                                    key={key}
+                                    onClick={() => setAttributes({ FeatureAlignment: item.value })}
+                                    className={`fb-setting-text-alignment-single-btn ${FeatureAlignment === item.value ? 'active' : ''}`}
+                                >
+                                    {item.label}
+                                </Button>
+                            ))}
+                        </ButtonGroup>
+                    </BaseControl>
+                )}
+            </PanelBody>
+
+        </>
+    );
+
+    /**
+     * Inspector Style Controls
+     */
+    const styleControls = (
+        <>
+            <PanelBody
+                title={__("Feature List", "frontis-blocks")}
+                initialOpen={true}
+                className="fb-setting-feature-list-wrapper"
+            >
+
+                <BaseControl
+                    id="fb-setting-alignment"
+                    className="fb-advanced-alignment list"
+                >
+                    <FB_ResponsiveControl
+                        labelText={__('List Direction', 'frontis-blocks')}
+                        device={deviceType}
+                    />
+                    <br />
+                    <ButtonGroup className="fb-advanced-alignment-group-btn">
+                        {LIST_DIRECTION_ICON.map((item, key) => (
+                            <Button
+                                key={key}
+                                onClick={() =>
+                                    setAttributes({
+                                        FeatureListDirection: {
+                                            ...FeatureListDirection,
+                                            [deviceType]: item.value,
+                                        },
+                                    })
+                                }
+                                title={item.title}
+                                className={`fb-advanced-alignment-single-btn ${FeatureListDirection[deviceType] === item.value ? 'active' : ''}`}
+                            >
+                                {item.label}
+                            </Button>
+                        ))}
+                    </ButtonGroup>
+                </BaseControl>
+
+                <BaseControl
+                    id="fb-setting-alignment"
+                    className="fb-advanced-alignment list"
+                >
+                    <FB_ResponsiveControl
+                        labelText={__('List Wrap', 'frontis-blocks')}
+                        device={deviceType}
+                    />
+                    <br />
+                    <ButtonGroup className="fb-advanced-alignment-group-btn">
+                        {LIST_WRAP_ICON.map((item, key) => (
+                            <Button
+                                key={key}
+                                onClick={() =>
+                                    setAttributes({
+                                        FeatureListDirectionWrap: {
+                                            ...FeatureListDirectionWrap,
+                                            [deviceType]: item.value,
+                                        },
+                                    })
+                                }
+                                title={item.title}
+                                className={`fb-advanced-alignment-single-btn ${FeatureListDirectionWrap[deviceType] === item.value ? 'active' : ''}`}
+                            >
+                                {item.label}
+                            </Button>
+                        ))}
+                    </ButtonGroup>
+                </BaseControl>
+
+                <FB_Range
+                    min={0}
+                    max={FeatureListGapUnits === '%' ? 100 : 200}
+                    label={__("List Gap", "frontis-blocks")}
+                    rangeValue={FeatureListGap}
+                    onChangeHandler={(value) => setAttributes({ FeatureListGap: value })}
+                    rangeUnitHandler={(value) => setAttributes({ FeatureListGapUnits: value })}
+                    deviceType={deviceType}
+                    units={FeatureListGapUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={''}
+                />
+            </PanelBody>
+
+            <PanelBody
+                title={__("Icon Style", "frontis-blocks")}
+                initialOpen={false}
+                className="fb-setting-feature-icon-wrapper"
+            >
+                <FB_BackgroundColorControl
+                    label={__("Background Color", "frontis-blocks")}
+                    bgColorSwitcher={FeatureIconBgColorSwitcher}
+                    setBgColorSwitcher={(value) => setAttributes({ FeatureIconBgColorSwitcher: value })}
+
+                    normalBackgroundType={FeatureIconNormalBackgroundType}
+                    setNormalBackgroundType={(value) => setAttributes({ FeatureIconNormalBackgroundType: value })}
+                    normalClassicColor={FeatureIconNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ FeatureIconNormalClassicColor: value === undefined ? '' : value })}
+                    normalGradientColor={FeatureIconNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ FeatureIconNormalGradientColor: value === undefined ? null : value })}
+                    normalCustomGradientSwitcher={FeatureIconNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ FeatureIconNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={FeatureIconNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ FeatureGlobalNormalCustomGradientInputValue: value })}
+
+                    hoverBackgroundType={FeatureIconHoverBackgroundType}
+                    setHoverBackgroundType={(value) => setAttributes({ FeatureIconHoverBackgroundType: value })}
+                    hoverClassicColor={FeatureIconHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ FeatureIconHoverClassicColor: value === undefined ? '' : value })}
+                    hoverGradientColor={FeatureIconHoverGradientColor}
+                    setHoverGradientColor={(value) => setAttributes({ FeatureIconHoverGradientColor: value === undefined ? null : value })}
+                    hoverCustomGradientSwitcher={FeatureIconHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ FeatureGlobalHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={FeatureIconHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ FeatureIconHoverCustomGradientInputValue: value })}
+
+                    isBackgroundImage={false}
+
+                />
+
+                <FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleFeatureIconPaddingUnitsHandler}
+                    spacingUnits={FeatureIconPaddingUnits}
+                    spacingDesktop={FeatureIconPaddingDesktop}
+                    spacingTablet={FeatureIconPaddingTablet}
+                    spacingMobile={FeatureIconPaddingMobile}
+                    handleSpacingUnitHandler={handleFeatureIconPaddingUnitChange}
+                    spacingCombineBtn={FeatureIconPaddingLink}
+                    spacingCombineBtnHandler={handleFeatureIconPaddingCombineBtn}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleFeatureIconMarginUnitsHandler}
+                    spacingUnits={FeatureIconMarginUnits}
+                    spacingDesktop={FeatureIconMarginDesktop}
+                    spacingTablet={FeatureIconMarginTablet}
+                    spacingMobile={FeatureIconMarginMobile}
+                    handleSpacingUnitHandler={handleFeatureIconMarginUnitChange}
+                    spacingCombineBtn={FeatureIconMarginLink}
+                    spacingCombineBtnHandler={handleFeatureIconMarginCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={FeatureIconBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ FeatureIconBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={FeatureIconBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ FeatureIconBorderColorSwitcher: value })}
+                />
+
+                {FeatureIconBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Color", "frontis-blocks")}
+                        globalColor={FeatureIconBorderColor}
+                        setGlobalColor={(value) => setAttributes({ FeatureIconBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {FeatureIconBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={FeatureIconBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ FeatureIconBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleFeatureIconBorderUnitsHandler}
+                    spacingUnits={FeatureIconBorderUnits}
+                    spacingDesktop={FeatureIconBorderDesktop}
+                    spacingTablet={FeatureIconBorderTablet}
+                    spacingMobile={FeatureIconBorderMobile}
+                    handleSpacingUnitHandler={handleFeatureIconBorderUnitChange}
+                    spacingCombineBtn={FeatureIconBorderLink}
+                    spacingCombineBtnHandler={handleFeatureIconBorderCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleFeatureIconBorderRadiusUnitsHandler}
+                    spacingUnits={FeatureIconBorderRadiusUnits}
+                    spacingDesktop={FeatureIconBorderRadiusDesktop}
+                    spacingTablet={FeatureIconBorderRadiusTablet}
+                    spacingMobile={FeatureIconBorderRadiusMobile}
+                    handleSpacingUnitHandler={handleFeatureIconBorderRadiusUnitChange}
+                    spacingCombineBtn={FeatureIconBorderRadiusLink}
+                    spacingCombineBtnHandler={handleFeatureIconBorderRadiusCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    globalSwitcher={FeatureIconBoxShadowSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ FeatureIconBoxShadowSwitcher: value })}
+                />
+
+                {FeatureIconBoxShadowSwitcher === 'normal' && (
+                    <FB_BoxShadowControl
+                        label={__("Normal Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ FeatureIconBoxShadowValues: value })}
+                        initialShadowValue={FeatureIconBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ FeatureIconBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {FeatureIconBoxShadowSwitcher === 'hover' && (
+                    <FB_BoxShadowControl
+                        label={__("Hover Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ FeatureIconBoxShadowHoverValues: value })}
+                        initialShadowValue={FeatureIconBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ FeatureIconBoxShadowHoverCssValue: value })}
+                    />
+                )}
+            </PanelBody>
+            <PanelBody
+                title={__("Icon Size & Color", "frontis-blocks")}
+                initialOpen={false}
+                className="fb-setting-feature-icon-wrapper"
+            >
+
+                <FB_SwitcherControl
+                    label={__("Icon Color", "frontis-blocks")}
+                    globalSwitcher={FeatureIconColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ FeatureIconColorSwitcher: value })}
+                />
+
+                {FeatureIconColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Color", "frontis-blocks")}
+                        globalColor={FeatureIconColor}
+                        setGlobalColor={(value) => setAttributes({ FeatureIconColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {FeatureIconColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={FeatureIconHoverColor}
+                        setGlobalColor={(value) => setAttributes({ FeatureIconHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Range
+                    min={1}
+                    max={150}
+                    label={__("Icon Size", "frontis-blocks")}
+                    rangeValue={FeatureIconSize}
+                    onChangeHandler={(value) => setAttributes({ FeatureIconSize: value })}
+                    rangeUnitHandler={(value) => setAttributes({ FeatureIconSizeUnits: value })}
+                    deviceType={deviceType}
+                    units={FeatureIconSizeUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"25"}
+                />
+
+            </PanelBody>
+
+            <PanelBody
+                title={__("Image Size", "frontis-blocks")}
+                initialOpen={false}
+                className="fb-setting-feature-icon-image-wrapper"
+            >
+
+                <FB_Range
+                    min={1}
+                    max={200}
+                    label={__("Width", "frontis-blocks")}
+                    rangeValue={FeatureIconImageWidth}
+                    onChangeHandler={(value) => setAttributes({ FeatureIconImageWidth: value })}
+                    rangeUnitHandler={(value) => setAttributes({ FeatureIconImageUnits: value })}
+                    deviceType={deviceType}
+                    units={FeatureIconImageUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"60"}
+                />
+
+                <FB_Range
+                    min={1}
+                    max={200}
+                    label={__("Height", "frontis-blocks")}
+                    rangeValue={FeatureIconImageHeight}
+                    onChangeHandler={(value) => setAttributes({ FeatureIconImageHeight: value })}
+                    rangeUnitHandler={(value) => setAttributes({ FeatureIconImageUnits: value })}
+                    deviceType={deviceType}
+                    units={FeatureIconImageUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"60"}
+                />
+
+
+                {/* <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={FeatureIconImageBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ FeatureIconImageBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={FeatureIconImageBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ FeatureIconImageBorderColorSwitcher: value })}
+                />
+
+                {FeatureIconImageBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Color", "frontis-blocks")}
+                        globalColor={FeatureIconImageBorderColor}
+                        setGlobalColor={(value) => setAttributes({ FeatureIconImageBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {FeatureIconImageBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={FeatureIconImageBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ FeatureIconImageBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing 
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleFeatureIconImageBorderUnitsHandler}
+                    spacingUnits={FeatureIconImageBorderUnits}
+                    spacingDesktop={FeatureIconImageBorderDesktop}
+                    spacingTablet={FeatureIconImageBorderTablet}
+                    spacingMobile={FeatureIconImageBorderMobile}
+                    handleSpacingUnitHandler={handleFeatureIconImageBorderUnitChange}
+                    spacingCombineBtn={FeatureIconImageBorderLink}
+                    spacingCombineBtnHandler={handleFeatureIconImageBorderCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing 
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleFeatureIconImageBorderRadiusUnitsHandler}
+                    spacingUnits={FeatureIconImageBorderRadiusUnits}
+                    spacingDesktop={FeatureIconImageBorderRadiusDesktop}
+                    spacingTablet={FeatureIconImageBorderRadiusTablet}
+                    spacingMobile={FeatureIconImageBorderRadiusMobile}
+                    handleSpacingUnitHandler={handleFeatureIconImageBorderRadiusUnitChange}
+                    spacingCombineBtn={FeatureIconImageBorderRadiusLink}
+                    spacingCombineBtnHandler={handleFeatureIconImageBorderRadiusCombineBtn}
+                    setAttributes={setAttributes}
+                /> */}
+            </PanelBody>
+            <PanelBody
+                title={__("Title", "frontis-blocks")}
+                initialOpen={false}
+                className="fb-setting-feature-title-wrapper"
+            >
+                <FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={FeatureTitleGlobalTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ FeatureTitleGlobalTypographyData: value })}
+
+                    globalTypoType={FeatureTitleGlobalTypoType}
+                    onChangeGlobalTypoType={(value) => {
+                        setAttributes({
+                            FeatureTitleGlobalTypoType: value,
+                            FeatureTitleGlobalTypoSwitcher: value === 'default' ? { ...FeatureTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...FeatureTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+                        })
+                    }}
+
+                    globalTypoOption={FeatureTitleGlobalTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ FeatureTitleGlobalTypoOption: value })}
+
+                    fontFamily={FeatureTitleFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ FeatureTitleFontFamily: value, FeatureTitleGlobalTypoSwitcher: { ...FeatureTitleGlobalTypoSwitcher, fontFamily: value && false } })}
+
+                    fontSize={FeatureTitleFontSize}
+                    onChangeFontSize={(value) => setAttributes({ FeatureTitleFontSize: value, FeatureTitleGlobalTypoSwitcher: { ...FeatureTitleGlobalTypoSwitcher, fontSize: value && false } })}
+
+                    fontSizeUnits={FeatureTitleFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ FeatureTitleFontSizeUnits: value })}
+
+                    fontWeight={FeatureTitleFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ FeatureTitleFontWeight: value, FeatureTitleGlobalTypoSwitcher: { ...FeatureTitleGlobalTypoSwitcher, fontWeight: value && false } })}
+
+                    fontStyle={FeatureTitleFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ FeatureTitleFontStyle: value, FeatureTitleGlobalTypoSwitcher: { ...FeatureTitleGlobalTypoSwitcher, fontStyle: value && false } })}
+
+                    textTransform={FeatureTitleTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ FeatureTitleTextTransform: value, FeatureTitleGlobalTypoSwitcher: { ...FeatureTitleGlobalTypoSwitcher, textTransform: value && false } })}
+
+                    textDecoration={FeatureTitleTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ FeatureTitleTextDecoration: value, FeatureTitleGlobalTypoSwitcher: { ...FeatureTitleGlobalTypoSwitcher, textDecoration: value && false } })}
+
+                    letterSpacing={FeatureTitleLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ FeatureTitleLetterSpacing: value, FeatureTitleGlobalTypoSwitcher: { ...FeatureTitleGlobalTypoSwitcher, letterSpacing: value && false } })}
+
+                    letterSpacingUnits={FeatureTitleLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ FeatureTitleLetterSpacingUnits: value })}
+
+                    lineHeight={FeatureTitleLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ FeatureTitleLineHeight: value, FeatureTitleGlobalTypoSwitcher: { ...FeatureTitleGlobalTypoSwitcher, lineHeight: value && false } })}
+
+                    lineHeightUnits={FeatureTitleLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ FeatureTitleLineHeightUnits: value })}
+
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Color", "frontis-blocks")}
+                    globalSwitcher={FeatureTitleColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ FeatureTitleColorSwitcher: value })}
+                />
+
+                {FeatureTitleColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Color", "frontis-blocks")}
+                        globalColor={FeatureTitleColor}
+                        setGlobalColor={(value) => setAttributes({ FeatureTitleColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {FeatureTitleColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={FeatureTitleHoverColor}
+                        setGlobalColor={(value) => setAttributes({ FeatureTitleHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleFeatureTitleMarginUnitsHandler}
+                    spacingUnits={FeatureTitleMarginUnits}
+                    spacingDesktop={FeatureTitleMarginDesktop}
+                    spacingTablet={FeatureTitleMarginTablet}
+                    spacingMobile={FeatureTitleMarginMobile}
+                    handleSpacingUnitHandler={handleFeatureTitleMarginUnitChange}
+                    spacingCombineBtn={FeatureTitleMarginLink}
+                    spacingCombineBtnHandler={handleFeatureTitleMarginCombineBtn}
+                    setAttributes={setAttributes}
+                />
+            </PanelBody>
+            <PanelBody
+                title={__("Description", "frontis-blocks")}
+                initialOpen={false}
+                className="fb-setting-feature-description-wrapper"
+            >
+
+                <FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={FeatureDescGlobalTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ FeatureDescGlobalTypographyData: value })}
+
+                    globalTypoType={FeatureDescGlobalTypoType}
+                    onChangeGlobalTypoType={(value) => {
+                        setAttributes({
+                            FeatureDescGlobalTypoType: value,
+                            FeatureDescGlobalTypoSwitcher: value === 'default' ? { ...FeatureDescGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...FeatureDescGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+                        })
+                    }}
+
+                    globalTypoOption={FeatureDescGlobalTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ FeatureDescGlobalTypoOption: value })}
+
+                    fontFamily={FeatureDescFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ FeatureDescFontFamily: value, FeatureDescGlobalTypoSwitcher: { ...FeatureDescGlobalTypoSwitcher, fontFamily: value && false } })}
+
+                    fontSize={FeatureDescFontSize}
+                    onChangeFontSize={(value) => setAttributes({ FeatureDescFontSize: value, FeatureDescGlobalTypoSwitcher: { ...FeatureDescGlobalTypoSwitcher, fontSize: value && false } })}
+
+                    fontSizeUnits={FeatureDescFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ FeatureDescFontSizeUnits: value })}
+
+                    fontWeight={FeatureDescFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ FeatureDescFontWeight: value, FeatureDescGlobalTypoSwitcher: { ...FeatureDescGlobalTypoSwitcher, fontWeight: value && false } })}
+
+                    fontStyle={FeatureDescFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ FeatureDescFontStyle: value, FeatureDescGlobalTypoSwitcher: { ...FeatureDescGlobalTypoSwitcher, fontStyle: value && false } })}
+
+                    textTransform={FeatureDescTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ FeatureDescTextTransform: value, FeatureDescGlobalTypoSwitcher: { ...FeatureDescGlobalTypoSwitcher, textTransform: value && false } })}
+
+                    textDecoration={FeatureDescTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ FeatureDescTextDecoration: value, FeatureDescGlobalTypoSwitcher: { ...FeatureDescGlobalTypoSwitcher, textDecoration: value && false } })}
+
+                    letterSpacing={FeatureDescLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ FeatureDescLetterSpacing: value, FeatureDescGlobalTypoSwitcher: { ...FeatureDescGlobalTypoSwitcher, letterSpacing: value && false } })}
+
+                    letterSpacingUnits={FeatureDescLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ FeatureDescLetterSpacingUnits: value })}
+
+                    lineHeight={FeatureDescLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ FeatureDescLineHeight: value, FeatureDescGlobalTypoSwitcher: { ...FeatureDescGlobalTypoSwitcher, lineHeight: value && false } })}
+
+                    lineHeightUnits={FeatureDescLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ FeatureDescLineHeightUnits: value })}
+
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Color", "frontis-blocks")}
+                    globalSwitcher={FeatureDescColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ FeatureDescColorSwitcher: value })}
+                />
+
+                {FeatureDescColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Color", "frontis-blocks")}
+                        globalColor={FeatureDescColor}
+                        setGlobalColor={(value) => setAttributes({ FeatureDescColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {FeatureDescColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={FeatureDescHoverColor}
+                        setGlobalColor={(value) => setAttributes({ FeatureDescHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleFeatureDescMarginUnitsHandler}
+                    spacingUnits={FeatureDescMarginUnits}
+                    spacingDesktop={FeatureDescMarginDesktop}
+                    spacingTablet={FeatureDescMarginTablet}
+                    spacingMobile={FeatureDescMarginMobile}
+                    handleSpacingUnitHandler={handleFeatureDescMarginUnitChange}
+                    spacingCombineBtn={FeatureDescMarginLink}
+                    spacingCombineBtnHandler={handleFeatureDescMarginCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+            </PanelBody>
+
+            <PanelBody
+                title={__("Background Color", "frontis-blocks")}
+                initialOpen={false}
+            >
+                <FB_BackgroundColorControl
+                    label={__("BackgroundColor", "frontis-blocks")}
+                    bgColorSwitcher={FeatureSingleItemBgColorSwitcher}
+                    setBgColorSwitcher={(value) => setAttributes({ FeatureSingleItemBgColorSwitcher: value })}
+
+                    normalBackgroundType={FeatureSingleItemNormalBackgroundType}
+                    setNormalBackgroundType={(value) => setAttributes({ FeatureSingleItemNormalBackgroundType: value })}
+                    normalClassicColor={FeatureSingleItemNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ FeatureSingleItemNormalClassicColor: value === undefined ? '' : value })}
+                    normalGradientColor={FeatureSingleItemNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ FeatureSingleItemNormalGradientColor: value === undefined ? null : value })}
+                    normalCustomGradientSwitcher={FeatureSingleItemNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ FeatureSingleItemNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={FeatureSingleItemNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ FeatureSingleItemNormalCustomGradientInputValue: value })}
+
+                    hoverBackgroundType={FeatureSingleItemHoverBackgroundType}
+                    setHoverBackgroundType={(value) => setAttributes({ FeatureSingleItemHoverBackgroundType: value })}
+                    hoverClassicColor={FeatureSingleItemHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ FeatureSingleItemHoverClassicColor: value === undefined ? '' : value })}
+                    hoverGradientColor={FeatureSingleItemHoverGradientColor}
+                    setHoverGradientColor={(value) => setAttributes({ FeatureSingleItemHoverGradientColor: value === undefined ? null : value })}
+                    hoverCustomGradientSwitcher={FeatureSingleItemHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ FeatureSingleItemHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={FeatureSingleItemHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ FeatureSingleItemHoverCustomGradientInputValue: value })}
+                    isBackgroundImage={false}
+
+                />
+            </PanelBody>
+            <PanelBody
+                title={__("Padding", "frontis-blocks")}
+                initialOpen={false}
+            >
+                <FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleSingleItemPaddingUnitsHandler}
+                    spacingUnits={FeatureSingleItemPaddingUnits}
+                    spacingDesktop={FeatureSingleItemPaddingDesktop}
+                    spacingTablet={FeatureSingleItemPaddingTablet}
+                    spacingMobile={FeatureSingleItemPaddingMobile}
+                    handleSpacingUnitHandler={handleSingleItemPaddingUnitChange}
+                    spacingCombineBtn={FeatureSingleItemPaddingLink}
+                    spacingCombineBtnHandler={handleSingleItemPaddingCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+            </PanelBody>
+
+            <PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
+
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={FeatureSingleItemBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ FeatureSingleItemBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={FeatureSingleItemBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ FeatureSingleItemBorderColorSwitcher: value })}
+                />
+
+                {FeatureSingleItemBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Color", "frontis-blocks")}
+                        globalColor={FeatureSingleItemBorderColor}
+                        setGlobalColor={(value) => setAttributes({ FeatureSingleItemBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {FeatureSingleItemBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={FeatureSingleItemBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ FeatureSingleItemBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleSingleItemBorderUnitsHandler}
+                    spacingUnits={FeatureSingleItemBorderUnits}
+                    spacingDesktop={FeatureSingleItemBorderDesktop}
+                    spacingTablet={FeatureSingleItemBorderTablet}
+                    spacingMobile={FeatureSingleItemBorderMobile}
+                    handleSpacingUnitHandler={handleSingleItemBorderUnitChange}
+                    spacingCombineBtn={FeatureSingleItemBorderLink}
+                    spacingCombineBtnHandler={handleSingleItemBorderCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleSingleItemBorderRadiusUnitsHandler}
+                    spacingUnits={FeatureSingleItemBorderRadiusUnits}
+                    spacingDesktop={FeatureSingleItemBorderRadiusDesktop}
+                    spacingTablet={FeatureSingleItemBorderRadiusTablet}
+                    spacingMobile={FeatureSingleItemBorderRadiusMobile}
+                    handleSpacingUnitHandler={handleSingleItemBorderRadiusUnitChange}
+                    spacingCombineBtn={FeatureSingleItemBorderRadiusLink}
+                    spacingCombineBtnHandler={handleSingleItemBorderRadiusCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    globalSwitcher={FeatureSingleItemBoxShadowSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ FeatureSingleItemBoxShadowSwitcher: value })}
+                />
+
+                {FeatureSingleItemBoxShadowSwitcher === 'normal' && (
+                    <FB_BoxShadowControl
+                        label={__("Normal Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ FeatureSingleItemBoxShadowValues: value })}
+                        initialShadowValue={FeatureSingleItemBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ FeatureSingleItemBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {FeatureSingleItemBoxShadowSwitcher === 'hover' && (
+                    <FB_BoxShadowControl
+                        label={__("Hover Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ FeatureSingleItemBoxShadowHoverValues: value })}
+                        initialShadowValue={FeatureSingleItemBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ FeatureSingleItemBoxShadowHoverCssValue: value })}
+                    />
+                )}
+            </PanelBody>
+
+        </>
+    );
+
+    /**
+     * Inspector Advanced Controls
+     */
+    const advancedControls = (
+        <>
+            <div className="fb-setting-advanced-tab-wrapper">
+                <div className="fb-setting-inner-wrapper">
+                    <PanelBody
+                        title={__("Layout", "frontis-blocks")}
+                        initialOpen={true}
+                        className='fb-setting-layout-header'
+                    >
+                        <FB_Range
+                            min={0}
+                            max={10000000}
+                            label={__("Z Index", "frontis-blocks")}
+                            rangeValue={FeatureGlobalZIndex}
+                            onChangeHandler={(value) => setAttributes({ FeatureGlobalZIndex: value === 0 ? undefined : value })}
+                            deviceType={deviceType}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={""}
+                            isRangeUnit={false}
+
+                        />
+
+                        <SelectControl
+                            label={__("Overflow", "frontis-blocks")}
+                            value={featuresListOverflow}
+                            options={OVERFLOW_OP}
+                            onChange={(value) => setAttributes({ featuresListOverflow: value })}
+                        />
+
+                        <FB_PositionControl
+                            deviceType={deviceType}
+                            positionType={featuresListPositionType}
+                            setPositionType={(value) => setAttributes({ featuresListPositionType: value })}
+
+                            HZOrientationType={featuresListHZOrientationType}
+                            setHZOrientationType={(value) =>
+                                setAttributes({ featuresListHZOrientationType: value })
+                            }
+                            VROrientationType={featuresListVROrientationType}
+                            setVROrientationType={(value) =>
+                                setAttributes({ featuresListVROrientationType: value })
+                            }
+
+                            HZLeftOffset={featuresListHZLeftOffset}
+                            setHZLeftOffset={(value) => setAttributes({ featuresListHZLeftOffset: value })}
+                            HZLeftOffsetUnits={featuresListHZLeftOffsetUnits}
+                            setHZLeftOffsetUnits={(value) => setAttributes({ featuresListHZLeftOffsetUnits: value })}
+                            HZRightOffset={featuresListHZRightOffset}
+                            setHZRightOffset={(value) => setAttributes({ featuresListHZRightOffset: value })}
+                            HZRightOffsetUnits={featuresListHZRightOffsetUnits}
+                            setHZRightOffsetUnits={(value) => setAttributes({ featuresListHZRightOffsetUnits: value })}
+
+                            VRTopOffset={featuresListVRTopOffset}
+                            setVRTopOffset={(value) => setAttributes({ featuresListVRTopOffset: value })}
+                            VRTopOffsetUnits={featuresListVRTopOffsetUnits}
+                            setVRTopOffsetUnits={(value) => setAttributes({ featuresListVRTopOffsetUnits: value })}
+                            VRBottomOffset={featuresListVRBottomOffset}
+                            setVRBottomOffset={(value) => setAttributes({ featuresListVRBottomOffset: value })}
+                            VRBottomOffsetUnits={featuresListVRBottomOffsetUnits}
+                            setVRBottomOffsetUnits={(value) => setAttributes({ featuresListVRBottomOffsetUnits: value })}
+
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_InputControl
+                            label={__("CSS ID", "frontis-blocks")}
+                            value={featuresListGlobalWraperID}
+                            onChangeValue={(value) => setAttributes({ featuresListGlobalWraperID: value })}
+                            helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                        />
+
+                        <FB_InputControl
+                            label={__("CSS Class", "frontis-blocks")}
+                            value={featuresListGlobalWraperClass}
+                            onChangeValue={(value) => setAttributes({ featuresListGlobalWraperClass: value })}
+                            helpText={__("Separate with spaces key.", "frontis-blocks")}
+                        />
+
+                    </PanelBody>
+
+                    <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
+                        <FB_Spacing
+                            label={__("Padding", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
+                            spacingUnits={FeatureGlobalPaddingUnits}
+                            spacingDesktop={FeatureGlobalPaddingDesktop}
+                            spacingTablet={FeatureGlobalPaddingTablet}
+                            spacingMobile={FeatureGlobalPaddingMobile}
+                            handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
+                            spacingCombineBtn={FeatureGlobalPaddingLink}
+                            spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+                        <FB_Spacing
+                            label={__("Margin", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalMarginUnitsHandler}
+                            spacingUnits={FeatureGlobalMarginUnits}
+                            spacingDesktop={FeatureGlobalMarginDesktop}
+                            spacingTablet={FeatureGlobalMarginTablet}
+                            spacingMobile={FeatureGlobalMarginMobile}
+                            handleSpacingUnitHandler={handleGlobalMarginUnitChange}
+                            spacingCombineBtn={FeatureGlobalMarginLink}
+                            spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+                    </PanelBody>
+
+                    <PanelBody
+                        title={__("Background Color", "frontis-blocks")}
+                        initialOpen={false}
+                    >
+                        <FB_BackgroundColorControl
+                            bgColorSwitcher={FeatureGlobalBgColorSwitcher}
+                            setBgColorSwitcher={(value) => setAttributes({ FeatureGlobalBgColorSwitcher: value })}
+
+                            normalBackgroundType={FeatureGlobalNormalBackgroundType}
+                            setNormalBackgroundType={(value) => setAttributes({ FeatureGlobalNormalBackgroundType: value })}
+                            normalClassicColor={FeatureGlobalNormalClassicColor}
+                            setNormalClassicColor={(value) => setAttributes({ FeatureGlobalNormalClassicColor: value === undefined ? '' : value })}
+                            normalGradientColor={FeatureGlobalNormalGradientColor}
+                            setNormalGradientColor={(value) => setAttributes({ FeatureGlobalNormalGradientColor: value === undefined ? null : value })}
+                            normalCustomGradientSwitcher={FeatureGlobalNormalCustomGradientSwitcher}
+                            setNormalCustomGradientSwitcher={(value) => setAttributes({ FeatureGlobalNormalCustomGradientSwitcher: value })}
+                            normalCustomGradientInputValue={FeatureGlobalNormalCustomGradientInputValue}
+                            setNormalCustomGradientInputValue={(value) => setAttributes({ FeatureGlobalNormalCustomGradientInputValue: value })}
+                            normalBackgroundImageUrl={FeatureGlobalNormalBackgroundImageUrl}
+                            setNormalBackgroundImageUrl={(value) => setAttributes({ FeatureGlobalNormalBackgroundImageUrl: value })}
+                            normalBackgroundImageAlt={FeatureGlobalNormalBackgroundImageAlt}
+                            setNormalBackgroundImageAlt={(value) => setAttributes({ FeatureGlobalNormalBackgroundImageAlt: value })}
+                            normalBackgroundImageID={FeatureGlobalNormalBackgroundImageID}
+                            setNormalBackgroundImageID={(value) => setAttributes({ FeatureGlobalNormalBackgroundImageID: value })}
+                            normalBackgroundImagePosition={FeatureGlobalNormalBackgroundImagePosition}
+                            setNormalBackgroundImagePosition={(value) => setAttributes({ FeatureGlobalNormalBackgroundImagePosition: value })}
+                            normalBackgroundImageAttachment={FeatureGlobalNormalBackgroundImageAttachment}
+                            setNormalBackgroundImageAttachment={(value) => setAttributes({ FeatureGlobalNormalBackgroundImageAttachment: value })}
+                            normalBackgroundImageRepeat={FeatureGlobalNormalBackgroundImageRepeat}
+                            setNormalBackgroundImageRepeat={(value) => setAttributes({ FeatureGlobalNormalBackgroundImageRepeat: value })}
+                            normalBackgroundImageSize={FeatureGlobalNormalBackgroundImageSize}
+                            setNormalBackgroundImageSize={(value) => setAttributes({ FeatureGlobalNormalBackgroundImageSize: value })}
+
+                            hoverBackgroundType={FeatureGlobalHoverBackgroundType}
+                            setHoverBackgroundType={(value) => setAttributes({ FeatureGlobalHoverBackgroundType: value })}
+                            hoverClassicColor={FeatureGlobalHoverClassicColor}
+                            setHoverClassicColor={(value) => setAttributes({ FeatureGlobalHoverClassicColor: value === undefined ? '' : value })}
+                            hoverGradientColor={FeatureGlobalHoverGradientColor}
+                            setHoverGradientColor={(value) => setAttributes({ FeatureGlobalHoverGradientColor: value === undefined ? null : value })}
+                            hoverCustomGradientSwitcher={FeatureGlobalHoverCustomGradientSwitcher}
+                            setHoverCustomGradientSwitcher={(value) => setAttributes({ FeatureGlobalHoverCustomGradientSwitcher: value })}
+                            hoverCustomGradientInputValue={FeatureGlobalHoverCustomGradientInputValue}
+                            setHoverCustomGradientInputValue={(value) => setAttributes({ FeatureGlobalHoverCustomGradientInputValue: value })}
+                            hoverBackgroundImageUrl={FeatureGlobalHoverBackgroundImageUrl}
+                            setHoverBackgroundImageUrl={(value) => setAttributes({ FeatureGlobalHoverBackgroundImageUrl: value })}
+                            hoverBackgroundImageAlt={FeatureGlobalHoverBackgroundImageAlt}
+                            setHoverBackgroundImageAlt={(value) => setAttributes({ FeatureGlobalHoverBackgroundImageAlt: value })}
+                            hoverBackgroundImageID={FeatureGlobalHoverBackgroundImageID}
+                            setHoverBackgroundImageID={(value) => setAttributes({ FeatureGlobalHoverBackgroundImageID: value })}
+                            hoverBackgroundImagePosition={FeatureGlobalHoverBackgroundImagePosition}
+                            setHoverBackgroundImagePosition={(value) => setAttributes({ FeatureGlobalHoverBackgroundImagePosition: value })}
+                            hoverBackgroundImageAttachment={FeatureGlobalHoverBackgroundImageAttachment}
+                            setHoverBackgroundImageAttachment={(value) => setAttributes({ FeatureGlobalHoverBackgroundImageAttachment: value })}
+                            hoverBackgroundImageRepeat={FeatureGlobalHoverBackgroundImageRepeat}
+                            setHoverBackgroundImageRepeat={(value) => setAttributes({ FeatureGlobalHoverBackgroundImageRepeat: value })}
+                            hoverBackgroundImageSize={FeatureGlobalHoverBackgroundImageSize}
+                            setHoverBackgroundImageSize={(value) => setAttributes({ FeatureGlobalHoverBackgroundImageSize: value })}
+                        />
+                    </PanelBody>
+                    <PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
+
+                        <SelectControl
+                            label={__("Border Style", "frontis-blocks")}
+                            value={FeatureGlobalBorder}
+                            options={BORDER_STYLES}
+                            onChange={(value) => setAttributes({ FeatureGlobalBorder: value })}
+                        />
+
+                        <FB_SwitcherControl
+                            label={__("Border Color", "frontis-blocks")}
+                            globalSwitcher={FeatureGlobalBorderColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ FeatureGlobalBorderColorSwitcher: value })}
+                        />
+
+                        {FeatureGlobalBorderColorSwitcher === 'normal' && (
+                            <FB_ColorControl
+                                label={__("Color", "frontis-blocks")}
+                                globalColor={FeatureGlobalBorderColor}
+                                setGlobalColor={(value) => setAttributes({ FeatureGlobalBorderColor: value === undefined ? '' : value })}
+                            />
+                        )}
+
+                        {FeatureGlobalBorderColorSwitcher === 'hover' && (
+                            <FB_ColorControl
+                                label={__("Hover Color", "frontis-blocks")}
+                                globalColor={FeatureGlobalBorderHoverColor}
+                                setGlobalColor={(value) => setAttributes({ FeatureGlobalBorderHoverColor: value === undefined ? '' : value })}
+                            />
+                        )}
+
+                        <FB_Spacing
+                            label={__("Border", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalBorderUnitsHandler}
+                            spacingUnits={FeatureGlobalBorderUnits}
+                            spacingDesktop={FeatureGlobalBorderDesktop}
+                            spacingTablet={FeatureGlobalBorderTablet}
+                            spacingMobile={FeatureGlobalBorderMobile}
+                            handleSpacingUnitHandler={handleGlobalBorderUnitChange}
+                            spacingCombineBtn={FeatureGlobalBorderLink}
+                            spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_Spacing
+                            label={__("Border Radius", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
+                            spacingUnits={FeatureGlobalBorderRadiusUnits}
+                            spacingDesktop={FeatureGlobalBorderRadiusDesktop}
+                            spacingTablet={FeatureGlobalBorderRadiusTablet}
+                            spacingMobile={FeatureGlobalBorderRadiusMobile}
+                            handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
+                            spacingCombineBtn={FeatureGlobalBorderRadiusLink}
+                            spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_SwitcherControl
+                            label={__("Box Shadow", "frontis-blocks")}
+                            globalSwitcher={FeatureGlobalBoxShadowSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ FeatureGlobalBoxShadowSwitcher: value })}
+                        />
+
+                        {FeatureGlobalBoxShadowSwitcher === 'normal' && (
+                            <FB_BoxShadowControl
+                                label={__("Normal Shadow", "frontis-blocks")}
+                                onBoxShadowChange={(value) => setAttributes({ FeatureGlobalBoxShadowValues: value })}
+                                initialShadowValue={FeatureGlobalBoxShadowValues}
+                                onBoxShadowStyleChange={(value) => setAttributes({ FeatureGlobalBoxShadowCssValue: value })}
+                            />
+                        )}
+
+                        {FeatureGlobalBoxShadowSwitcher === 'hover' && (
+                            <FB_BoxShadowControl
+                                label={__("Hover Shadow", "frontis-blocks")}
+                                onBoxShadowChange={(value) => setAttributes({ FeatureGlobalBoxShadowHoverValues: value })}
+                                initialShadowValue={FeatureGlobalBoxShadowHoverValues}
+                                onBoxShadowStyleChange={(value) => setAttributes({ FeatureGlobalBoxShadowHoverCssValue: value })}
+                            />
+                        )}
+                    </PanelBody>
+
+                    <PanelBody
+                        title={__("Responsive Control", "frontis-blocks")}
+                        initialOpen={false}
+                        className="fb-setting-responsive-control-wrapper"
+                    >
+                        <FB_VisibilityControl
+                            desktopValue={featuresListDesktopSwitcher}
+                            setDesktopValue={(value) => setAttributes({ featuresListDesktopSwitcher: value })}
+
+                            tabletValue={featuresListTabletSwitcher}
+                            setTabletValue={(value) => setAttributes({ featuresListTabletSwitcher: value })}
+
+                            mobileValue={featuresListMobileSwitcher}
+                            setMobileValue={(value) => setAttributes({ featuresListMobileSwitcher: value })}
+                        />
+                    </PanelBody>
+                    <PanelBody
+                        title={__("Custom CSS", "frontis-blocks")}
+                        initialOpen={false}
+                    >
+                        <FB_CustomCSSEditor
+                            value={featuresListGlobalWraperCustomCSS}
+                            onChangeValue={(value) => setAttributes({ featuresListGlobalWraperCustomCSS: value })}
+                        />
+                    </PanelBody>
+
+                </div>
+            </div>
+        </>
+    );
+
+    return (
+        <>
+            <style>
+                {editorStyle}
+            </style>
+            <FB_InspectorControls
+                generalControls={generalControls}
+                styleControls={styleControls}
+                advancedControls={advancedControls}
+            />
+        </>
+    );
+}
