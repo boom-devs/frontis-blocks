@@ -929,7 +929,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			background-repeat: ${testBackgroundImageRepeat};
 			background-size: ${testBackgroundImageSize};`
 					: testClassicColor ? `background: ${testClassicColor}` : ''
-			}
+			};
 			transition: all .3s ease-in-out;
 		}
 		.${blockID} .fb-advanced-image-wrapper:hover{
