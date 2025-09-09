@@ -115,18 +115,26 @@ const attributes = {
         type: 'string',
         default: 'default'
     },
-    commentsZeroText: {
+    dynamicCommentsZeroText: {
         type: 'string',
         default: 'No Response',
     },
-    commentsOneText: {
+    dynamicCommentsOneText: {
         type: 'string',
         default: 'One Response',
     },
-    commentsManyText: {
+    dynamicCommentsManyText: {
         type: 'string',
         default: '{num} Response',
-    },      
+    },   
+    dynamicTermsTaxonomy: {
+        type: 'string',
+        default: 'category',
+    },
+    dynamicTermsSeparator: {
+        type: 'string',
+        default: ', ',
+    },
 
 
     /** Start Heading Style */
