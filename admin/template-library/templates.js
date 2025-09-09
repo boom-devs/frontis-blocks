@@ -95,7 +95,6 @@ const PatternLibraryButton = () => {
 
     const [patternsData, { data: patternsResponse, error, isLoading }] = usePostDataMutation();
 
-
     const getTemplatesData = async (value) => {
         try {
             const response = await patternsData({
@@ -138,7 +137,8 @@ const PatternLibraryButton = () => {
             try {
                 const patterns = await getTemplatesData("patterns");
                 const pages = await getTemplatesData("pages");
-                // const sites = await getTemplatesData("sites");
+                const templatelibrary = await getTemplatesData("clouds");
+                
 
                 if (patterns) {
                     setData((prev) => ({
@@ -190,6 +190,60 @@ const PatternLibraryButton = () => {
 
         fetchData();
     }, []);
+
+    useEffect(async () => {
+        // if (activeTab === 'patterns') {
+        //     const fetchPatternsData = async () => {
+        //         setLoading(true);
+
+        //         try {
+        //             const patterns = await getTemplatesData("patterns");
+        //             if (patterns) {
+        //                 setData((prev) => ({
+        //                     ...prev,
+        //                     patterns: {
+        //                         ...prev.patterns,
+        //                         items: patterns.items || [],
+        //                         categories: patterns.categories || [],
+        //                     },
+        //                 }));
+        //             }
+        //         } catch (err) {
+        //             console.error("Error fetching patterns:", err);
+        //         } finally {
+        //             setLoading(false);
+        //         }
+        //     };
+
+        //     fetchPatternsData();
+        // }
+
+        // if (activeTab === 'templatelibrary') {
+        //     const fetchTemplateLibraryData = async () => {
+        //         setLoading(true);
+
+        //         try {
+        //             const templatelibrary = await getTemplatesData("clouds");
+        //             if (patterns) {
+        //                 setData((prev) => ({
+        //                     ...prev,
+        //                     patterns: {
+        //                         ...prev.patterns,
+        //                         items: templatelibrary.items || [],
+        //                         categories: patterns.categories || [],
+        //                     },
+        //                 }));
+        //             }
+        //         } catch (err) {
+        //             console.error("Error fetching patterns:", err);
+        //         } finally {
+        //             setLoading(false);
+        //         }
+        //     };
+
+        //     fetchTemplateLibraryData();
+        // }
+    }, [activeTab]);
 
 
     const TagTabsOptions = (() => {
@@ -250,7 +304,7 @@ const PatternLibraryButton = () => {
                                     setLoading={setLoading}
                                 />
 
-                                {activeTab !== 'templatelibrary' && (
+                                {/* {activeTab === 'patterns' && (
                                     <TemplateContent
                                         activeTab={activeTab}
                                         activeCategory={activeCategory}
@@ -270,7 +324,32 @@ const PatternLibraryButton = () => {
                                         setIsLogedIn={setIsLogedIn}
                                         setActiveCategory={setActiveCategory}
                                     />
-                                )}
+                                )} */}
+
+                                {
+                                activeTab !== 'templatelibrary' && (
+                                    <TemplateContent
+                                        activeTab={activeTab}
+                                        activeCategory={activeCategory}
+                                        setLibraryData={setLibraryData}
+                                        data={data}
+                                        setIsVisible={setIsVisible}
+                                        isProTemplate={isProTemplate}
+                                        activeTagTab={activeTagTab[activeTab]}
+                                        setActiveTagTab={(value) => setActiveTagTab({ ...activeTagTab, [activeTab]: value })}
+                                        TagTabsOptions={TagTabsOptions}
+                                        isLogedIn={isLogedIn}
+                                        savedItems={savedItems}
+                                        setSavedItems={setSavedItems}
+                                        alreadySaved={alreadySaved}
+                                        loading={loading}
+                                        setLoading={setLoading}
+                                        setIsLogedIn={setIsLogedIn}
+                                        setActiveCategory={setActiveCategory}
+                                    />
+                                )
+                                }
+
                                 {activeTab === 'templatelibrary' && (
                                     <LibraryContent
                                         activeTab={activeTab}
@@ -288,7 +367,7 @@ const PatternLibraryButton = () => {
                                         setCardListType={setCardListType}
                                         savedItems={savedItems}
                                         setSavedItems={setSavedItems}
-                                        loading={loading}
+                                        loading={isLoading}
                                         setLoading={setLoading}
                                     />
                                 )}

@@ -15,13 +15,15 @@ import { TemplateContentLoader } from "./template-loader";
 
 
 const LibraryContent = ({ activeTab, activeCategory, setActiveCategory, data, libraryData, setLibraryData, setIsVisible, isLogedIn, cardListType, setCardListType, savedItems, setSavedItems, loading, setLoading }) => {
-
     const FavoriteTabsOptions = [
         { name: 'All', value: 'all' },
         { name: 'Patterns', value: 'patterns' },
         { name: 'Pages', value: 'pages' },
         { name: 'Sites', value: 'sites' },
     ];
+
+    console.log(libraryData);
+    console.log(data);
 
     const CardListOptions = [
         {
@@ -75,9 +77,10 @@ const LibraryContent = ({ activeTab, activeCategory, setActiveCategory, data, li
             setDisplayedData(filtered);
         }
     };
+    
     useEffect(() => {
         setOriginalLibraryData(libraryData);
-        setDisplayedData(libraryData);
+        setDisplayedData(data.templatelibrary.items);
         setSearchItems('');
     }, [libraryData]);
 
@@ -147,8 +150,6 @@ const LibraryContent = ({ activeTab, activeCategory, setActiveCategory, data, li
 
 
     }, [originalLibraryData, displayedData, libraryData, setLibraryData, setSavedItems]);
-
-
 
     return (
         <div className="fb-template-library-store-content">
