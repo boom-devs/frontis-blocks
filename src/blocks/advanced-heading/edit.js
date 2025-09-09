@@ -105,6 +105,9 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	
 	const isPostBasedSource = dynamicEnabled && (dynamicSource === 'current_post' || dynamicSource === 'post_type');
 
+	const isSiteField    = ['site_title','site_tagline'].includes(dynamicSource);
+	const isArchiveField = ['archive_title','archive_description'].includes(dynamicSource);
+
 	const targetPostId   = dynamicSource === 'post_type' && dynamicPostId ? dynamicPostId : postId;
 	const targetPostType =
 		dynamicSource === 'post_type'
@@ -114,7 +117,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	/**
 	 * Should Use Dynamic
 	 */
-	const shouldUseDynamic = isPostBasedSource && CURRENT_POST_FIELDS.includes(dynamicField);
+	const shouldUseDynamic =
+	dynamicEnabled && (
+	  (isPostBasedSource && CURRENT_POST_FIELDS.includes(dynamicField)) ||
+	  isSiteField ||
+	  isArchiveField
+	);
 	
 	/**
 	 * Get Plain Text
@@ -265,10 +273,40 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			: null,
 		[isPostBasedSource, dynamicField, postRecord?.author]
 	);
+
+	/**
+	 * Site Info
+	 */
+	const siteInfo = useSelect(
+		(select) => isSiteField
+		  ? select(coreStore).getEntityRecord('root', 'site', undefined)
+		  : null,
+		[isSiteField]
+	);
 	
 	const dynamicValue = (() => {
 		
 		if (!shouldUseDynamic) return '';
+
+		if (isSiteField) {
+			switch (dynamicSource) {
+				case 'site_title':
+					return getPlainText(siteInfo?.title) || __('No Content', 'frontis-blocks');
+				case 'site_tagline':
+					return getPlainText(siteInfo?.description) || __('No Content', 'frontis-blocks');
+				default:
+					return '';
+			}
+		}
+	
+		if (isArchiveField) {
+		// just show placeholder in editor because editor does not show this archive title and description and real value will be rendered in PHP
+		return dynamicSource === 'archive_title'
+			? __('Archive Title', 'frontis-blocks')
+			: __('Archive Description', 'frontis-blocks');
+		}
+
+		if (!isPostBasedSource) return '';
 
 		if (!isReady) return undefined;
 
@@ -448,7 +486,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			if (!authorRecord) return __('No Content', 'frontis-blocks');
 			return authorRecord?.avatar_urls?.['96'] || __('No Content', 'frontis-blocks');
 
-	
 		default:
 			return '';
 		}
