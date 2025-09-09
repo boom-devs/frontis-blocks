@@ -3038,39 +3038,57 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
-
+    /**
+     * Date and Time Format Options
+     */
     const dateFormatOptions = getDynamicDateFormatOptions(new Date());
     const timeFormatOptions = getDynamicTimeFormatOptions(new Date());
 
+    /**
+     * Exclude Post Types
+     */
+    const EXCLUDE_POST_TYPES = [
+        'attachment','revision','nav_menu_item','custom_css','customize_changeset',
+        'oembed_cache','user_request','wp_block','wp_navigation',
+        'wp_template','wp_template_part','wp_global_styles',
+        'wp_font_family','wp_font_face','wp_font_collection'
+    ];
 
-
-    // সব single post টাইপ আনো (post, page + public queryable CPT)
-    const postTypes = useSelect( (select) => {
+    /**
+     * Post Types
+     */
+    const postTypes = useSelect((select) => {
         const all = select(coreStore).getPostTypes({ per_page: -1 }) || [];
-        return all.filter( (pt) => pt.viewable && pt.supports?.title );
+        return all.filter(
+        (pt) => pt.viewable && pt.supports?.title && !EXCLUDE_POST_TYPES.includes(pt.slug)
+        );
     }, []);
     
-    // বাছাই করা টাইপগুলোর কন্টেন্ট লিস্ট (title + id)
-    const postOptions = useSelect( (select) => {
-        // যেসব টাইপ দেখাতে চাও
+    /**
+     * Post Options
+     */
+    const postOptions = useSelect((select) => {
         const types = (postTypes || []).map((t) => t.slug);
         if (!types.length) return [];
-    
-        // একবারে কিছু লোড; চাইলে সার্চ টার্ম ব্যবহার করো
+      
         const items = [];
         types.forEach((t) => {
-        const recs = select(coreStore).getEntityRecords(
-            'postType',
-            t,
-            { per_page: 20, _fields: 'id,title,type' } // দ্রুত লোডের জন্য
-        ) || [];
-        recs.forEach((r) => items.push(r));
+          const recs = select(coreStore).getEntityRecords('postType', t, {
+            status: 'publish',
+            per_page: 20,
+            orderby: 'date',
+            order: 'desc',
+            _fields: ['id', 'title', 'type'],
+          }) || [];
+          recs.forEach((r) => items.push(r));
         });
-    
+      
         return items.map((r) => ({
-        value: r.id,
-        label: r.title?.rendered ? r.title.rendered.replace(/<[^>]+>/g, '') : `(no title)`,
-        meta: r.type, // UI-তে টাইপ badge দেখাতে চাইলে কাজে লাগবে
+          value: r.id,
+          label: r.title?.rendered
+            ? r.title.rendered.replace(/<[^>]+>/g, '')
+            : '(no title)',
+          meta: r.type,
         }));
     }, [postTypes]);
 
