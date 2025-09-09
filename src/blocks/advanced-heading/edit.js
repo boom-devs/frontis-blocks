@@ -98,7 +98,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		'post_title','post_excerpt','post_thumbnail',
 		'post_date','post_time','post_terms','post_id','comments_number',
 		'author_name','author_first_name','author_last_name','author_nickname',
-		'author_description','author_email','author_url','author_avatar','author_meta'
+		'author_description','author_email','author_url','author_avatar'
 	];
 	
 	/**
@@ -241,13 +241,21 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 */
 	const authorRecord = useSelect(
 		(select) =>
-		shouldUseDynamic &&
-		dynamicField.startsWith('author_') &&
-		postRecord?.author
-			? select(coreStore).getUser(postRecord.author)
-			: null,
+			shouldUseDynamic &&
+			dynamicField.startsWith('author_') &&
+			postRecord?.author
+				? select(coreStore).getUser(postRecord.author)
+				: null,
 		[shouldUseDynamic, dynamicField, postRecord?.author]
 	);
+	if (dynamicField.startsWith('author_')) {
+		if (typeof authorRecord === 'undefined') {
+			return __('(loading...)', 'frontis-blocks');
+		}
+		if (!authorRecord) {
+			return __('No Content', 'frontis-blocks');
+		}
+	}
 	
 	const dynamicValue = (() => {
 		if (!shouldUseDynamic || !postRecord) return '';
@@ -388,37 +396,34 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			return manyTxt.replace('{num}', String(count));
 		}
 	
-		// AUTHOR
 		case 'author_name':
-			return authorRecord?.name || '';
-	
+			return authorRecord?.name?.trim() || __('No Content', 'frontis-blocks');
+		
 		case 'author_first_name':
-			return authorRecord?.first_name || '';
-	
+			return authorRecord?.first_name?.trim() || __('No Content', 'frontis-blocks');
+		
 		case 'author_last_name':
-			return authorRecord?.last_name || '';
-	
+			return authorRecord?.last_name?.trim() || __('No Content', 'frontis-blocks');
+		
 		case 'author_nickname':
-			return authorRecord?.nickname || '';
-	
-		case 'author_description':
-			return authorRecord?.description || '';
-	
-		case 'author_email':
-			return authorRecord?.email || '';
-	
-		case 'author_url':
-			return authorRecord?.url || '';
-	
-		case 'author_avatar':
-			// user object usually has avatar_urls; pick 96px
-			return authorRecord?.avatar_urls?.['96'] || __('No Content', 'frontis-blocks');
-	
-		case 'author_meta': {
-			const key = attributes?.authorMetaKey;
-			// user meta not in REST by default; show hint
-			return key ? __('No Content', 'frontis-blocks') : '';
+			return authorRecord?.nickname?.trim() || __('No Content', 'frontis-blocks');
+		
+		case 'author_description': {
+			const v = authorRecord?.description;
+			return (typeof v === 'string' && v.trim())
+				? v.trim()
+				: __('No Content', 'frontis-blocks');
 		}
+		
+		case 'author_email':
+			return authorRecord?.email?.trim() || __('No Content', 'frontis-blocks');
+		
+		case 'author_url':
+			return authorRecord?.url?.trim() || __('No Content', 'frontis-blocks');
+		
+		case 'author_avatar':
+			return authorRecord?.avatar_urls?.['96'] || __('No Content', 'frontis-blocks');
+
 	
 		default:
 			return '';

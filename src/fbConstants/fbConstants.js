@@ -258,6 +258,16 @@ export const BACKGROUND_TYPES = [
 	{ label: __('Gradient', 'frontis-blocks'), value: 'gradient' },
 ];
 
+export const DYNAMIC_DATA_SOURCE_OPTIONS = [
+	{ label: __('Current Post', 'frontis-blocks'), value: 'current_post' },
+	{ label: __('Post Type', 'frontis-blocks'), value: 'post_type' },
+	{ label: __('Archive Description', 'frontis-blocks'), value: 'archive_description' },
+	{ label: __('Archive Title', 'frontis-blocks'), value: 'archive_title' },
+	{ label: __('Site Tagline', 'frontis-blocks'), value: 'site_tagline' },
+	{ label: __('Site Title', 'frontis-blocks'), value: 'site_title' },
+	{ label: __('Shortcode', 'frontis-blocks'), value: 'shortcode' },
+];
+
 export const DYNAMIC_CURRENT_POST_OPTIONS = [
     { label: __('Post Title', 'frontis-blocks'), value: 'post_title' },
     { label: __('Post Excerpt', 'frontis-blocks'), value: 'post_excerpt' },
@@ -277,7 +287,6 @@ export const DYNAMIC_CURRENT_POST_OPTIONS = [
     { label: __('Author Email', 'frontis-blocks'), value: 'author_email' },
     { label: __('Author Website', 'frontis-blocks'), value: 'author_url' },
     { label: __('Author Avatar URL', 'frontis-blocks'), value: 'author_avatar' },
-    { label: __('Author Custom Field', 'frontis-blocks'), value: 'author_meta' },
 ];
 
 export const DYNAMIC_FEATURED_IMAGE_OPTIONS = [
@@ -291,6 +300,11 @@ export const DYNAMIC_FEATURED_IMAGE_OPTIONS = [
 export const DYNAMIC_DATE_TIME_TYPE_OPTIONS = [
 	{ label: __('Post Published', 'frontis-blocks'), value: 'published' },
 	{ label: __('Post Modified',  'frontis-blocks'), value: 'modified' },
+];
+
+export const DYNAMIC_TAXONOMY_OPTIONS = [
+	{ label: __('Categories', 'frontis-blocks'), value: 'category' },
+	{ label: __('Tags', 'frontis-blocks'), value: 'post_tag' },
 ];
   
 export const getDynamicDateFormatOptions = (sampleDate = new Date()) => {
