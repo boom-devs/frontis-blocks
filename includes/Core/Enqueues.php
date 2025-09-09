@@ -113,8 +113,10 @@ class Enqueues {
 
         $js_file_system_path = $frontend_dir . $page_name . '.js';
         $js_file_url = $frontend_url . $page_name . '.js';
+
          // Enqueue JS in footer with defer
         if (file_exists($js_file_system_path)) {
+            $version = filemtime($js_file_system_path);
             wp_enqueue_script('frontis-blocks-frontend', $js_file_url, [], $version, true);
             add_filter('script_loader_tag', function($tag, $handle) {
                 if ($handle === 'frontis-blocks-frontend') {
