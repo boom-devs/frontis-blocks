@@ -447,9 +447,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dynamicTimeType,
         dynamicTimeFormat,
 
-        commentsZeroText,
-        commentsOneText,
-        commentsManyText,
+        dynamicCommentsZeroText,
+        dynamicCommentsOneText,
+        dynamicCommentsManyText,
+        dynamicTermsTaxonomy,
+        dynamicTermsSeparator,
 
     } = attributes;
 
@@ -3025,7 +3027,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
-    console.log(dynamicField);
     /**
 	 * Inspector General Controls
 	 */
@@ -3063,6 +3064,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                     options={DYNAMIC_CURRENT_POST_OPTIONS}
                                     onChange={(value) => setAttributes({ dynamicField: value })}
                                 />
+
                                 {dynamicField === 'post_thumbnail' && (
                                     <SelectControl
                                         label={__("Featured Image", "frontis-blocks")}
@@ -3071,6 +3073,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                         onChange={(value) => setAttributes({ dynamicFeaturedImageField: value })}
                                     />
                                 )}
+
                                 {dynamicField === 'post_date' && (
                                     <>
                                         <SelectControl
@@ -3087,6 +3090,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                         />
                                     </>
                                 )}
+
                                 {dynamicField === 'post_time' && (
                                     <>
                                         <SelectControl
@@ -3103,25 +3107,46 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                         />
                                     </>
                                 )}
+
                                 {dynamicField === 'comments_number' && (
                                     <>
                                         <TextControl
-                                        label={__('No Comments Format', 'frontis-blocks')}
-                                        value={commentsZeroText}
-                                        onChange={(value) => setAttributes({ commentsZeroText: value })}
-                                        help={__('Shown when there are 0 comments', 'frontis-blocks')}
+                                            label={__('No Comments Format', 'frontis-blocks')}
+                                            value={dynamicCommentsZeroText}
+                                            onChange={(value) => setAttributes({ dynamicCommentsZeroText: value })}
+                                            help={__('Shown when there are 0 comments', 'frontis-blocks')}
                                         />
                                         <TextControl
-                                        label={__('One Comment Format', 'frontis-blocks')}
-                                        value={commentsOneText}
-                                        onChange={(value) => setAttributes({ commentsOneText: value })}
-                                        help={__('Shown when there is exactly 1 comment', 'frontis-blocks')}
+                                            label={__('One Comment Format', 'frontis-blocks')}
+                                            value={dynamicCommentsOneText}
+                                            onChange={(value) => setAttributes({ dynamicCommentsOneText: value })}
+                                            help={__('Shown when there is exactly 1 comment', 'frontis-blocks')}
                                         />
                                         <TextControl
-                                        label={__('Many Comment Format', 'frontis-blocks')}
-                                        value={commentsManyText}
-                                        onChange={(value) => setAttributes({ commentsManyText: value })}
-                                        help={__('Use {num} to insert the number', 'frontis-blocks')}
+                                            label={__('Many Comment Format', 'frontis-blocks')}
+                                            value={dynamicCommentsManyText}
+                                            onChange={(value) => setAttributes({ dynamicCommentsManyText: value })}
+                                            help={__('Use {num} to insert the number', 'frontis-blocks')}
+                                        />
+                                    </>
+                                )}
+
+                                {dynamicField === 'post_terms' && (
+                                    <>
+                                        <SelectControl
+                                            label={__("Taxonomy", "frontis-blocks")}
+                                            value={dynamicTermsTaxonomy}
+                                            options={[
+                                                { label: __('Categories', 'frontis-blocks'), value: 'category' },
+                                                { label: __('Tags', 'frontis-blocks'), value: 'post_tag' },
+                                            ]}
+                                            onChange={(value) => setAttributes({ dynamicTermsTaxonomy: value })}
+                                        />
+
+                                        <TextControl
+                                            label={__("Separator", "frontis-blocks")}
+                                            value={dynamicTermsSeparator}
+                                            onChange={(value) => setAttributes({ dynamicTermsSeparator: value })}
                                         />
                                     </>
                                 )}

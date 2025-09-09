@@ -65,9 +65,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicTimeType,
 		dynamicTimeFormat,
 
-		commentsZeroText,
-		commentsOneText,
-		commentsManyText,
+		dynamicCommentsZeroText,
+		dynamicCommentsOneText,
+		dynamicCommentsManyText,
+
+		dynamicTermsTaxonomy,
+		dynamicTermsSeparator,
 
 
 	} = attributes;
@@ -88,7 +91,9 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	SwitchToBlockSettings(panelRef);
 
 
-	// কোন কোন ফিল্ড dynamic preview করবে (Current Post)
+	/**
+	 * Current Post Fields
+	 */
 	const CURRENT_POST_FIELDS = [
 		'post_title','post_excerpt','post_thumbnail',
 		'post_date','post_time','post_terms','post_id','comments_number',
@@ -96,29 +101,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		'author_description','author_email','author_url','author_avatar','author_meta'
 	];
 	
+	/**
+	 * Should Use Dynamic
+	 */
 	const shouldUseDynamic =
 		dynamicEnabled &&
 		dynamicSource === 'current_post' &&
 		CURRENT_POST_FIELDS.includes(dynamicField);
 	
-	// HTML ➜ clean plain text (editor-safe)
+	/**
+	 * Get Plain Text
+	 */
 	const getPlainText = (html) => {
 		const raw = html ?? '';
-		// decode &amp; &nbsp; etc.
 		const decoded = decodeEntities(raw);
-		// remove html tags
 		let text = decoded.replace(/<[^>]+>/g, '');
-		// kill line breaks (otherwise RichText ⇒ <br data-rich-text-line-break>)
 		text = text.replace(/\r?\n|\r/g, ' ');
-		// replace non-breaking space with normal space
 		text = text.replace(/\u00A0/g, ' ');
-		// remove zero-width chars (ZWSP, ZWNJ, ZWJ, BOM)
 		text = text.replace(/[\u200B-\u200D\uFEFF]/g, '');
-		// collapse multiple spaces and trim
 		return text.replace(/\s{2,}/g, ' ').trim();
 	};
 	
-	// pull post record
+	/**
+	 * Post Record
+	 */
 	const postRecord = useSelect(
 		(select) =>
 		shouldUseDynamic && postType && postId
@@ -127,13 +133,17 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		[shouldUseDynamic, postType, postId]
 	);
 
-	// check post type supports excerpt
+	/**
+	 * Post Type Object
+	 */
 	const postTypeObj = useSelect(
 		(select) => postType ? select(coreStore).getPostType(postType) : null,
 		[postType]
 	);
 	
-	// featured image (only when needed)
+	/**
+	 * Media Record
+	 */
 	const mediaRecord = useSelect(
 		(select) =>
 		  shouldUseDynamic &&
@@ -144,16 +154,22 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		[shouldUseDynamic, dynamicField, postRecord?.featured_media, dynamicFeaturedImageField]
 	);
 
-	// সাইট সেটিংসের ডিফল্ট date format (Settings → General)
+	/**
+	 * Get Site Date Format
+	 */
 	const getSiteDateFormat = () => {
 		const settings = getDateSettings?.() || {};
 		return settings?.formats?.date || 'F j, Y';
 	};
 	
-	// PHP স্টাইল ফরম্যাটে লোকেল/টাইমজোন রেসপেক্ট করে আউটপুট
+	/**
+	 * Format Date By PHP
+	 */
 	const formatDateByPhp = (phpFmt, jsDate) => dateI18n(phpFmt, jsDate);
 	
-	// “2 days ago” টাইপ
+	/**
+	 * Humanize Date
+	 */
 	const humanizeDate = (date) => {
 		if (!date) return '';
 		const now = new Date();
@@ -180,7 +196,32 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		return settings?.formats?.time || 'g:i a';
 	};
 
-		// comments (only when needed)
+	/**
+	 * Dynamic Terms for Post
+	 */
+	const taxonomySupported =
+	!!dynamicTermsTaxonomy && !!postTypeObj?.taxonomies?.includes(dynamicTermsTaxonomy);
+
+	const shouldQueryTerms =
+	shouldUseDynamic &&
+	dynamicField === 'post_terms' &&
+	postId &&
+	taxonomySupported;
+
+	const dynamicTermsForPost = useSelect(
+		(select) =>
+			shouldQueryTerms
+			? select(coreStore).getEntityRecords('taxonomy', dynamicTermsTaxonomy, {
+				post: postId,
+				per_page: 100,
+				})
+			: null,
+		[shouldQueryTerms, dynamicTermsTaxonomy, postId]
+	);
+
+	/**
+	 * Comments for Post
+	 */
 	const commentsList = useSelect(
 		(select) =>
 			shouldUseDynamic &&
@@ -195,7 +236,9 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		[shouldUseDynamic, dynamicField, postId]
 	);
 	
-	// author (only when needed)
+	/**
+	 * Author for Post
+	 */
 	const authorRecord = useSelect(
 		(select) =>
 		shouldUseDynamic &&
@@ -220,14 +263,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 				return __('No Content', 'frontis-blocks');
 			}
 			
-			// raw value database থেকে
 			const rawExcerpt = postRecord.excerpt?.raw?.trim();
 			
 			if (rawExcerpt) {
 				return getPlainText(rawExcerpt);
 			}
 			
-			// raw খালি মানে user কিছু লেখেনি → show "No Content"
 			return __('No Content', 'frontis-blocks');
 		}		  
 
@@ -261,7 +302,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		}
 	
 		case 'post_date': {
-			// Date Type: published | modified
 			const raw = dynamicDateType === 'modified' ? postRecord.modified : postRecord.date;
 			if (!raw) return __('No Content', 'frontis-blocks');
 		  
@@ -282,7 +322,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 				return humanizeDate(d);
 		  
 			  default:
-				// অজানা/অসমর্থিত হলে সাইট ডিফল্ট
 				return formatDateByPhp(getSiteDateFormat(), d);
 			}
 		  }
@@ -308,8 +347,21 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			}
 		}
 	
-		case 'post_terms':
-			return __('(terms will render on frontend)', 'frontis-blocks');
+		case 'post_terms': {
+			if (!postId || !dynamicTermsTaxonomy) return __('No Content', 'frontis-blocks');
+		  
+			if (!taxonomySupported) return __('No Content', 'frontis-blocks');
+		  
+			if (typeof dynamicTermsForPost === 'undefined') {
+			  return __('(loading terms...)', 'frontis-blocks');
+			}
+		  
+			if (!dynamicTermsForPost || !dynamicTermsForPost.length) {
+			  return __('No Content', 'frontis-blocks');
+			}
+		  
+			return dynamicTermsForPost.map((t) => t.name).join(dynamicTermsSeparator || ', ');
+		}
 	
 		case 'post_id':
 			return String(postRecord.id ?? '');
@@ -326,9 +378,9 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 				count = Number(commentsList.length || 0);
 			}
 
-			const zeroTxt = (commentsZeroText || __('No Responses', 'frontis-blocks')).trim();
-			const oneTxt  = (commentsOneText  || __('One Response', 'frontis-blocks')).trim();
-			const manyTxt = (commentsManyText || __('Responses {num}', 'frontis-blocks')).trim();
+			const zeroTxt = (dynamicCommentsZeroText || __('No Responses', 'frontis-blocks')).trim();
+			const oneTxt  = (dynamicCommentsOneText  || __('One Response', 'frontis-blocks')).trim();
+			const manyTxt = (dynamicCommentsManyText || __('Responses {num}', 'frontis-blocks')).trim();
 
 			if (count === 0) return zeroTxt;
 			if (count === 1) return oneTxt;
