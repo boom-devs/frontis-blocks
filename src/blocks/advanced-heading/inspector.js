@@ -49,14 +49,16 @@ import {
 } from "./constants/constants";
 
 import { 
+    DYNAMIC_DATA_SOURCE_OPTIONS,
     DYNAMIC_CURRENT_POST_OPTIONS,
     DYNAMIC_FEATURED_IMAGE_OPTIONS,
     DYNAMIC_DATE_TIME_TYPE_OPTIONS,
+    DYNAMIC_TAXONOMY_OPTIONS,
     getDynamicDateFormatOptions,
     getDynamicTimeFormatOptions,
 
 } from '@Constants/fbConstants';
-
+import Select2 from "react-select";
 import { useState, useEffect, useMemo } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import FB_Spacing from '@Components/spacing';
@@ -3027,6 +3029,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
+
+    const dateFormatOptions = getDynamicDateFormatOptions(new Date());
+    const timeFormatOptions = getDynamicTimeFormatOptions(new Date());
+
     /**
 	 * Inspector General Controls
 	 */
@@ -3047,64 +3053,90 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                     {dynamicEnabled && (
                         <>
-                            <SelectControl
+                            <BaseControl
                                 label={__("Data Source", "frontis-blocks")}
-                                value={dynamicSource}
-                                options={[
-                                    { label: __('Current Post', 'frontis-blocks'), value: 'current_post' },
-                                ]}
-                                onChange={(value) => setAttributes({ dynamicSource: value })}
-                            />
+                                >
+                                    <Select2 
+                                        options={DYNAMIC_DATA_SOURCE_OPTIONS}
+                                        value={DYNAMIC_DATA_SOURCE_OPTIONS.find(o => o.value === dynamicSource) || null }                                                     // option object
+                                        onChange={(opt) => setAttributes({ dynamicSource: opt?.value ?? '' })}
+                                        className="fb-select2-control"
+                                    />
+                            </BaseControl>
 
                             {dynamicSource === 'current_post' && (
                                 <>
-                                <SelectControl
+                                <BaseControl
                                     label={__("Source Field", "frontis-blocks")}
-                                    value={dynamicField}
-                                    options={DYNAMIC_CURRENT_POST_OPTIONS}
-                                    onChange={(value) => setAttributes({ dynamicField: value })}
-                                />
+                                    >
+                                        <Select2 
+                                            options={DYNAMIC_CURRENT_POST_OPTIONS}
+                                            value={DYNAMIC_CURRENT_POST_OPTIONS.find(o => o.value === dynamicField) || null }                                                     // option object
+                                            onChange={(opt) => setAttributes({ dynamicField: opt?.value ?? '' })}
+                                            className="fb-select2-control"
+                                        />
+                                </BaseControl>
 
                                 {dynamicField === 'post_thumbnail' && (
-                                    <SelectControl
+                                    <BaseControl
                                         label={__("Featured Image", "frontis-blocks")}
-                                        value={dynamicFeaturedImageField}
-                                        options={DYNAMIC_FEATURED_IMAGE_OPTIONS}
-                                        onChange={(value) => setAttributes({ dynamicFeaturedImageField: value })}
-                                    />
+                                        >
+                                            <Select2 
+                                                options={DYNAMIC_FEATURED_IMAGE_OPTIONS} 
+                                                value={DYNAMIC_FEATURED_IMAGE_OPTIONS.find(o => o.value === dynamicFeaturedImageField) || null }                                                     // option object
+                                                onChange={(opt) => setAttributes({ dynamicFeaturedImageField: opt?.value ?? '' })}
+                                                className="fb-select2-control"
+                                            />
+                                    </BaseControl>
                                 )}
 
                                 {dynamicField === 'post_date' && (
                                     <>
-                                        <SelectControl
+                                        <BaseControl
                                             label={__("Date Type", "frontis-blocks")}
-                                            value={dynamicDateType}
-                                            options={DYNAMIC_DATE_TIME_TYPE_OPTIONS}
-                                            onChange={(value) => setAttributes({ dynamicDateType: value })}
-                                        />
-                                        <SelectControl
+                                            >
+                                                <Select2 
+                                                    options={DYNAMIC_DATE_TIME_TYPE_OPTIONS} 
+                                                    value={DYNAMIC_DATE_TIME_TYPE_OPTIONS.find(o => o.value === dynamicDateType) || null }                                                     // option object
+                                                    onChange={(opt) => setAttributes({ dynamicDateType: opt?.value ?? '' })}
+                                                    className="fb-select2-control"
+                                                />
+                                        </BaseControl>
+                                        <BaseControl
                                             label={__("Date Format", "frontis-blocks")}
-                                            value={dynamicDateFormat}
-                                            options={getDynamicDateFormatOptions(new Date())}
-                                            onChange={(value) => setAttributes({ dynamicDateFormat: value })}
-                                        />
+                                            >
+                                                <Select2 
+                                                    options={dateFormatOptions} 
+                                                    value={dateFormatOptions.find(o => o.value === dynamicDateFormat) || null }                                                     // option object
+                                                    onChange={(opt) => setAttributes({ dynamicDateFormat: opt?.value ?? '' })}
+                                                    className="fb-select2-control"
+                                                />
+                                        </BaseControl>
                                     </>
                                 )}
 
                                 {dynamicField === 'post_time' && (
                                     <>
-                                        <SelectControl
-                                            label={__("Time Type", "frontis-blocks")}
-                                            value={dynamicTimeType} 
-                                            options={DYNAMIC_DATE_TIME_TYPE_OPTIONS}
-                                            onChange={(value) => setAttributes({ dynamicTimeType: value })}
-                                        />
-                                        <SelectControl
+                                        <BaseControl
+                                            label={__("Date Type", "frontis-blocks")}
+                                            >
+                                                <Select2 
+                                                    options={DYNAMIC_DATE_TIME_TYPE_OPTIONS} 
+                                                    value={DYNAMIC_DATE_TIME_TYPE_OPTIONS.find(o => o.value === dynamicTimeType) || null }                                                     // option object
+                                                    onChange={(opt) => setAttributes({ dynamicTimeType: opt?.value ?? '' })}
+                                                    className="fb-select2-control"
+                                                />
+                                        </BaseControl>
+                                        <BaseControl
                                             label={__("Time Format", "frontis-blocks")}
-                                            value={dynamicTimeFormat}
-                                            options={getDynamicTimeFormatOptions(new Date())}
-                                            onChange={(value) => setAttributes({ dynamicTimeFormat: value })}
-                                        />
+                                            >
+                                                <Select2 
+                                                    options={timeFormatOptions}  
+                                                    value={timeFormatOptions.find(o => o.value === dynamicTimeFormat) || null }                                                     // option object
+                                                    onChange={(opt) => setAttributes({ dynamicTimeFormat: opt?.value ?? '' })}
+                                                    className="fb-select2-control"
+                                                />
+                                        </BaseControl>
                                     </>
                                 )}
 
@@ -3133,15 +3165,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                                 {dynamicField === 'post_terms' && (
                                     <>
-                                        <SelectControl
+                                        <BaseControl
                                             label={__("Taxonomy", "frontis-blocks")}
-                                            value={dynamicTermsTaxonomy}
-                                            options={[
-                                                { label: __('Categories', 'frontis-blocks'), value: 'category' },
-                                                { label: __('Tags', 'frontis-blocks'), value: 'post_tag' },
-                                            ]}
-                                            onChange={(value) => setAttributes({ dynamicTermsTaxonomy: value })}
-                                        />
+                                            >
+                                                <Select2 
+                                                    options={DYNAMIC_TAXONOMY_OPTIONS} 
+                                                    value={DYNAMIC_TAXONOMY_OPTIONS.find(o => o.value === dynamicTermsTaxonomy) || null }                                                     // option object
+                                                    onChange={(opt) => setAttributes({ dynamicTermsTaxonomy: opt?.value ?? '' })}
+                                                    className="fb-select2-control"
+                                                />
+                                        </BaseControl>
 
                                         <TextControl
                                             label={__("Separator", "frontis-blocks")}
