@@ -54,12 +54,43 @@ const TemplateGrid = ({
 
     const isAlreadySaved = alreadySaved(savedItems, id, activeTab)
 
-    const handleFullSiteImport = useCallback(() => {
+    const handleFullSiteImport = useCallback(async (id) => {
+        setIsLoading(true);
+
+        if (is_premium) {
+            const verified = await verifySubscription();
+            console.log(id);
+            
+
+            if(verified.status) {
+                console.log('Now import the pro pattern.');
+                setIsLoading(false);
+                setIsVisible(false);
+            } else {
+                toast(verified.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    newestOnTop: false,
+                    closeOnClick: true,
+                    rtl: false,
+                    pauseOnFocusLoss: true,
+                    draggable: true,
+                    pauseOnHover: true,
+                    theme: "light"
+                });
+
+                setIsLoading(false);
+            }
+        } else {
+            console.log('Free pattern will be imported directly.');
+        }
+        
         // if (!isPluginUpgrade) {
         //     setIsPladmin / template - library / scss / _main - content.scssuginUpgradeModalOpen(true);
         // }
         // if (!is_premium && isLogedIn) {
-        setIsModalOpen(true);
+        // setIsModalOpen(true);
         // }
     }, [is_premium, isLogedIn, isPluginUpgrade]);
 
@@ -105,13 +136,34 @@ const TemplateGrid = ({
         type: templateType
     };
 
-    const handleSaveLibrary = useCallback(() => {
+    const handleSaveLibrary = useCallback(async () => {
         if (isAlreadySaved) return;
+
+        console.log(templateData);
+        
 
         setLibraryData(prevData => [...prevData, templateData]);
         setSavedItems(prev => [...prev, templateData]);
 
-        toast.success(__(`Template saved to library`, 'frontis-blocks'), {
+        const apiBase = "https://frontis-sync.boomdevshub.com/wp-json";
+        const body = {
+            item_id: templateData.id,
+            item_type: templateData.type,
+            license_key: FB_TLibrary.activationKey,
+            website: window.location.origin,
+        };
+
+        const response = await fetch(`${apiBase}/frontis-sync/v1/saved-item`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body),
+        });
+
+        const responseData = await response.json();
+
+        toast.success('Template saved to library', {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -148,73 +200,148 @@ const TemplateGrid = ({
         }
     };
 
+    const verifySubscription = async () => {
+        const apiBase = "https://frontis-sync.boomdevshub.com/wp-json";
+        const body = {
+            license_key: FB_TLibrary.activationKey,
+            domain_name: window.location.origin,
+        };
+
+        const response = await fetch(`${apiBase}/frontis-sync/v1/verify-subscription`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body),
+        });
+
+        const responseData = await response.json();
+
+        return responseData;
+    }
+
     const importPattern = async (id) => {
         setIsLoading(true);
 
-        const patterns = await getTemplatesData("import/pattern", 'pattern_id', id);
+        if (is_premium) {
+            const verified = await verifySubscription();
 
-        if (patterns) {
-            const patternData = JSON.parse(patterns.data).content;
-            const parsedBlocks = parse(patternData);
-
-            // Get block editor utilities
-            const { insertBlocks, replaceBlocks } = dispatch('core/block-editor');
-            const { getSelectedBlock, getBlocks, getBlockIndex } = select('core/block-editor');
-
-            // Get the currently selected block
-            const selectedBlock = getSelectedBlock();
-
-            if (selectedBlock) {
-                // Check if the selected block has content (e.g., innerBlocks or content attribute)
-                const hasContent = selectedBlock.innerBlocks?.length > 0 ||
-                    (selectedBlock.attributes?.content && selectedBlock.attributes.content.trim() !== '');
-
-                if (!hasContent) {
-                    // If the selected block is empty, replace it with the parsed blocks
-                    replaceBlocks(selectedBlock.clientId, parsedBlocks);
-                } else {
-                    // If the selected block has content, insert parsed blocks after it
-                    const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
-                    insertBlocks(parsedBlocks, selectedBlockIndex + 1);
-                }
+            if(verified.status) {
+                console.log('Now import the pro pattern.');
+                setIsLoading(false);
+                setIsVisible(false);
             } else {
-                // If no block is selected, insert at the end of the current blocks
-                const currentBlocks = getBlocks();
-                insertBlocks(parsedBlocks, currentBlocks.length);
+                toast(verified.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    newestOnTop: false,
+                    closeOnClick: true,
+                    rtl: false,
+                    pauseOnFocusLoss: true,
+                    draggable: true,
+                    pauseOnHover: true,
+                    theme: "light"
+                });
+
+                setIsLoading(false);
             }
+        } else {
+            console.log('Free pattern will be imported directly.');
         }
 
-        setIsLoading(false);
-        setIsVisible(false);
+        // const patterns = await getTemplatesData("import/pattern", 'pattern_id', id);
+
+        // if (patterns) {
+        //     const patternData = JSON.parse(patterns.data).content;
+        //     const parsedBlocks = parse(patternData);
+
+        //     // Get block editor utilities
+        //     const { insertBlocks, replaceBlocks } = dispatch('core/block-editor');
+        //     const { getSelectedBlock, getBlocks, getBlockIndex } = select('core/block-editor');
+
+        //     // Get the currently selected block
+        //     const selectedBlock = getSelectedBlock();
+
+        //     if (selectedBlock) {
+        //         // Check if the selected block has content (e.g., innerBlocks or content attribute)
+        //         const hasContent = selectedBlock.innerBlocks?.length > 0 ||
+        //             (selectedBlock.attributes?.content && selectedBlock.attributes.content.trim() !== '');
+
+        //         if (!hasContent) {
+        //             // If the selected block is empty, replace it with the parsed blocks
+        //             replaceBlocks(selectedBlock.clientId, parsedBlocks);
+        //         } else {
+        //             // If the selected block has content, insert parsed blocks after it
+        //             const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
+        //             insertBlocks(parsedBlocks, selectedBlockIndex + 1);
+        //         }
+        //     } else {
+        //         // If no block is selected, insert at the end of the current blocks
+        //         const currentBlocks = getBlocks();
+        //         insertBlocks(parsedBlocks, currentBlocks.length);
+        //     }
+        // }
+
+        // setIsLoading(false);
+        // setIsVisible(false);
     };
+    
     const importPage = async (id) => {
         setIsLoading(true);
 
-        const page = await getTemplatesData("import/page", 'page_id', id);
+        if (is_premium) {
+            const verified = await verifySubscription();
 
-        if (page) {
-            const pageData = JSON.parse(page.data).content;
-            const parsedBlocks = parse(pageData);
-
-            // Get block editor utilities
-            const { insertBlocks, replaceBlocks } = dispatch('core/block-editor');
-            const { getSelectedBlock, getBlocks, getBlockIndex } = select('core/block-editor');
-
-            // Get the currently selected block
-            const selectedBlock = getSelectedBlock();
-
-            if (selectedBlock) {
-                const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
-                insertBlocks(parsedBlocks, selectedBlockIndex + 1);
+            if(verified.status) {
+                console.log('Now import the pro page.');
+                setIsLoading(false);
+                setIsVisible(false);
             } else {
-                // If no block is selected, insert at the end of the current blocks
-                const currentBlocks = getBlocks();
-                insertBlocks(parsedBlocks, currentBlocks.length);
+                toast(verified.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    newestOnTop: false,
+                    closeOnClick: true,
+                    rtl: false,
+                    pauseOnFocusLoss: true,
+                    draggable: true,
+                    pauseOnHover: true,
+                    theme: "light"
+                });
+
+                setIsLoading(false);
             }
+        } else {
+            console.log('Free page will be imported directly.');
         }
 
-        setIsLoading(false);
-        setIsVisible(false);
+        // const page = await getTemplatesData("import/page", 'page_id', id);
+
+        // if (page) {
+        //     const pageData = JSON.parse(page.data).content;
+        //     const parsedBlocks = parse(pageData);
+
+        //     // Get block editor utilities
+        //     const { insertBlocks, replaceBlocks } = dispatch('core/block-editor');
+        //     const { getSelectedBlock, getBlocks, getBlockIndex } = select('core/block-editor');
+
+        //     // Get the currently selected block
+        //     const selectedBlock = getSelectedBlock();
+
+        //     if (selectedBlock) {
+        //         const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
+        //         insertBlocks(parsedBlocks, selectedBlockIndex + 1);
+        //     } else {
+        //         // If no block is selected, insert at the end of the current blocks
+        //         const currentBlocks = getBlocks();
+        //         insertBlocks(parsedBlocks, currentBlocks.length);
+        //     }
+        // }
+
+        // setIsLoading(false);
+        // setIsVisible(false);
     };
 
     // Function to insert blocks in chunks
@@ -312,7 +439,7 @@ const TemplateGrid = ({
                             } else if (activeTab === 'pages') {
                                 importPage(id);
                             } else if (activeTab === 'sites') {
-                                handleFullSiteImport()
+                                handleFullSiteImport(id)
                             } else if (activeTab === 'templatelibrary') {
                                 // console.log(templateData);
                                 if (templateData.type === 'patterns') {
@@ -341,12 +468,7 @@ const TemplateGrid = ({
                         }}
                         disabled={isLoading || isAlreadySaved}
                     >
-                        {isLoading ? (
-                            <>
-                                <span>Saving...</span>
-                                <ClipLoader color="#fff" size={16} />
-                            </>
-                        ) : isAlreadySaved ? (
+                        {isAlreadySaved ? (
                             <span>Saved</span>
                         ) : isLibrary ? (
                             <span>Remove</span>
