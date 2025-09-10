@@ -39,6 +39,10 @@ const attributes = {
         "type": "string",
         "default": "p"
     },
+    labelIconSwitcher: {
+        type: "boolean",
+        default: false,
+    },
     iconSizeUnits: {
         type: 'object',
         default: {
@@ -1488,6 +1492,686 @@ const attributes = {
             Tablet: 'px',
             Mobile: 'px',
         }
+    },
+
+    /** Start Label Container Styling */
+    // Label typography
+    tickerLabelTypographyData: {
+        type: "object",
+        default: {}
+    },
+    tickerLabelTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    tickerLabelTypoType: {
+        type: "string",
+        default: 'default',
+    },
+    tickerLabelTypoOption: {
+        type: "object",
+        default: { label: 'Default', value: 'default' },
+    },
+    tickerLabelFontFamily: {
+        type: "string",
+        default: "Default",
+    },
+    tickerLabelFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
+        }
+    },
+    tickerLabelFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    tickerLabelFontWeight: {
+        type: "string",
+        default: "600"
+    },
+    tickerLabelFontStyle: {
+        type: "string",
+        default: ""
+    },
+    tickerLabelTextTransform: {
+        type: "string",
+        default: ""
+    },
+    tickerLabelTextDecoration: {
+        type: "string",
+        default: ""
+    },
+    tickerLabelLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    tickerLabelLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    tickerLabelLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    tickerLabelLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    // Label Container Padding
+    labelContainerPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    labelContainerPaddingDesktop: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelContainerPaddingTablet: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelContainerPaddingMobile: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelContainerPaddingLink: {
+        type: 'boolean',
+        default: true
+    },
+
+    // Label Container Margin
+    labelContainerMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    labelContainerMarginDesktop: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelContainerMarginTablet: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelContainerMarginMobile: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelContainerMarginLink: {
+        type: 'boolean',
+        default: true
+    },
+
+    // Label Container Border
+    labelContainerBorder: {
+        type: 'string',
+        default: 'none',
+    },
+    labelContainerBorderColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    labelContainerBorderColor: {
+        type: 'string',
+        default: ''
+    },
+    labelContainerBorderHoverColor: {
+        type: 'string',
+        default: ''
+    },
+    labelContainerBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    labelContainerBorderDesktop: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelContainerBorderTablet: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelContainerBorderMobile: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelContainerBorderLink: {
+        type: 'boolean',
+        default: true
+    },
+
+    // Label Container Border Radius
+    labelContainerBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    labelContainerBorderRadiusDesktop: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelContainerBorderRadiusTablet: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelContainerBorderRadiusMobile: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelContainerBorderRadiusLink: {
+        type: 'boolean',
+        default: true
+    },
+
+    // Label Container Background Color
+    labelContainerBgColorSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    labelContainerNormalBackgroundType: {
+        type: 'string',
+        default: 'classic',
+    },
+    labelContainerNormalClassicColor: {
+        type: 'string',
+        default: '',
+    },
+    labelContainerNormalGradientColor: {
+        type: 'string',
+        default: null,
+    },
+    labelContainerNormalCustomGradientSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    labelContainerNormalCustomGradientInputValue: {
+        type: 'string',
+        default: '',
+    },
+
+    labelContainerNormalBackgroundImageUrl: {
+        type: 'string',
+        default: ''
+    },
+    labelContainerNormalBackgroundImageAlt: {
+        type: 'string',
+        default: ''
+    },
+    labelContainerNormalBackgroundImageID: {
+        type: 'string',
+        default: ''
+    },
+    labelContainerNormalBackgroundImagePosition: {
+        type: 'string',
+        default: ''
+    },
+    labelContainerNormalBackgroundImageAttachment: {
+        type: 'string',
+        default: ''
+    },
+    labelContainerNormalBackgroundImageRepeat: {
+        type: 'string',
+        default: ''
+    },
+    labelContainerNormalBackgroundImageSize: {
+        type: 'string',
+        default: ''
+    },
+
+    labelContainerHoverBackgroundType: {
+        type: 'string',
+        default: 'classic',
+    },
+    labelContainerHoverClassicColor: {
+        type: 'string',
+        default: '',
+    },
+    labelContainerHoverGradientColor: {
+        type: 'string',
+        default: null,
+    },
+    labelContainerHoverCustomGradientSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    labelContainerHoverCustomGradientInputValue: {
+        type: 'string',
+        default: '',
+    },
+
+    labelContainerHoverBackgroundImageUrl: {
+        type: 'string',
+        default: ''
+    },
+    labelContainerHoverBackgroundImageAlt: {
+        type: 'string',
+        default: ''
+    },
+    labelContainerHoverBackgroundImageID: {
+        type: 'string',
+        default: ''
+    },
+    labelContainerHoverBackgroundImagePosition: {
+        type: 'string',
+        default: ''
+    },
+    labelContainerHoverBackgroundImageAttachment: {
+        type: 'string',
+        default: ''
+    },
+    labelContainerHoverBackgroundImageRepeat: {
+        type: 'string',
+        default: ''
+    },
+    labelContainerHoverBackgroundImageSize: {
+        type: 'string',
+        default: ''
+    },
+    /** End Label Container Styling */
+
+    /** Start Label Icon Styling */
+    //Icon color
+    labelIconColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    labelIconColor: {
+        type: 'string',
+        default: ''
+    },
+    labelIconHoverColor: {
+        type: 'string',
+        default: ''
+    },
+    // Label Icon Padding
+    labelIconPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    labelIconPaddingDesktop: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelIconPaddingTablet: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelIconPaddingMobile: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelIconPaddingLink: {
+        type: 'boolean',
+        default: true
+    },
+
+    // Label Icon Margin
+    labelIconMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    labelIconMarginDesktop: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelIconMarginTablet: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelIconMarginMobile: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelIconMarginLink: {
+        type: 'boolean',
+        default: true
+    },
+
+    // Label Icon Border
+    labelIconBorder: {
+        type: 'string',
+        default: 'none',
+    },
+    labelIconBorderColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    labelIconBorderColor: {
+        type: 'string',
+        default: ''
+    },
+    labelIconBorderHoverColor: {
+        type: 'string',
+        default: ''
+    },
+    labelIconBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    labelIconBorderDesktop: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelIconBorderTablet: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelIconBorderMobile: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelIconBorderLink: {
+        type: 'boolean',
+        default: true
+    },
+
+    // Label Icon Border Radius
+    labelIconBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    labelIconBorderRadiusDesktop: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelIconBorderRadiusTablet: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelIconBorderRadiusMobile: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    labelIconBorderRadiusLink: {
+        type: 'boolean',
+        default: true
+    },
+
+    // Label Icon Background Color
+    labelIconBgColorSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    labelIconNormalBackgroundType: {
+        type: 'string',
+        default: 'classic',
+    },
+    labelIconNormalClassicColor: {
+        type: 'string',
+        default: '',
+    },
+    labelIconNormalGradientColor: {
+        type: 'string',
+        default: null,
+    },
+    labelIconNormalCustomGradientSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    labelIconNormalCustomGradientInputValue: {
+        type: 'string',
+        default: '',
+    },
+
+    labelIconNormalBackgroundImageUrl: {
+        type: 'string',
+        default: ''
+    },
+    labelIconNormalBackgroundImageAlt: {
+        type: 'string',
+        default: ''
+    },
+    labelIconNormalBackgroundImageID: {
+        type: 'string',
+        default: ''
+    },
+    labelIconNormalBackgroundImagePosition: {
+        type: 'string',
+        default: ''
+    },
+    labelIconNormalBackgroundImageAttachment: {
+        type: 'string',
+        default: ''
+    },
+    labelIconNormalBackgroundImageRepeat: {
+        type: 'string',
+        default: ''
+    },
+    labelIconNormalBackgroundImageSize: {
+        type: 'string',
+        default: ''
+    },
+
+    labelIconHoverBackgroundType: {
+        type: 'string',
+        default: 'classic',
+    },
+    labelIconHoverClassicColor: {
+        type: 'string',
+        default: '',
+    },
+    labelIconHoverGradientColor: {
+        type: 'string',
+        default: null,
+    },
+    labelIconHoverCustomGradientSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    labelIconHoverCustomGradientInputValue: {
+        type: 'string',
+        default: '',
+    },
+
+    labelIconHoverBackgroundImageUrl: {
+        type: 'string',
+        default: ''
+    },
+    labelIconHoverBackgroundImageAlt: {
+        type: 'string',
+        default: ''
+    },
+    labelIconHoverBackgroundImageID: {
+        type: 'string',
+        default: ''
+    },
+    labelIconHoverBackgroundImagePosition: {
+        type: 'string',
+        default: ''
+    },
+    labelIconHoverBackgroundImageAttachment: {
+        type: 'string',
+        default: ''
+    },
+    labelIconHoverBackgroundImageRepeat: {
+        type: 'string',
+        default: ''
+    },
+    labelIconHoverBackgroundImageSize: {
+        type: 'string',
+        default: ''
     },
 };
 
