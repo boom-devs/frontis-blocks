@@ -717,9 +717,9 @@ const attributes = {
 	counterItemSize: {
 		type: 'object',
 		default: {
-			Desktop: '410',
-			Tablet: '300',
-			Mobile: '250'
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	counterItemSizeUnits: {

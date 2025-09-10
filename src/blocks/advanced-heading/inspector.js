@@ -48,6 +48,11 @@ import {
     NORMAL_GRADIENT,
 } from "./constants/constants";
 
+import { 
+    DYNAMIC_CURRENT_POST_OPTIONS,
+    
+} from '@Constants/fbConstants';
+
 import { useState, useEffect, useMemo } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import FB_Spacing from '@Components/spacing';
@@ -428,6 +433,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingBeforeAfterBorderRadiusLink,
         /** End Before After */
 
+        dynamicEnabled,
+        dynamicSource,
+        dynamicField,
+        dynamicEnableLink,
+        dynamicReplaceAll,
 
     } = attributes;
 
@@ -3005,6 +3015,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingBeforeAfterTabletBorderRadiusWidth,
     headingBeforeAfterMobileBorderRadiusWidth,
     /** End Before After */
+
+    dynamicEnabled,
+    dynamicSource,
+    dynamicField,
+    dynamicEnableLink,
+    dynamicReplaceAll,
     ]);
 
     const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
@@ -3026,6 +3042,53 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     title={__("General", "frontis-blocks")}
                     initialOpen={true}
                 >
+
+
+                    <ToggleControl
+                        label={__("Enable Dynamic Content", "frontis-blocks")}
+                        checked={dynamicEnabled}
+                        onChange={(value) => setAttributes({ dynamicEnabled: value })}
+                    />
+
+                    {dynamicEnabled && (
+                        <>
+                            <SelectControl
+                                label={__("Data Source", "frontis-blocks")}
+                                value={dynamicSource}
+                                options={[
+                                    { label: __('Current Post', 'frontis-blocks'), value: 'current_post' },
+                                ]}
+                                onChange={(value) => setAttributes({ dynamicSource: value })}
+                            />
+
+                            {dynamicSource === 'current_post' && (
+                                <SelectControl
+                                    label={__("Source Field", "frontis-blocks")}
+                                    value={dynamicField}
+                                    options={DYNAMIC_CURRENT_POST_OPTIONS}
+                                    onChange={(value) => setAttributes({ dynamicField: value })}
+                                />
+                            )}
+
+                            <ToggleControl
+                            label={__("Enable Link (permalink)", "frontis-blocks")}
+                            checked={dynamicEnableLink}
+                            onChange={(value) => setAttributes({ dynamicEnableLink: value })}
+                            />
+
+                            <ToggleControl
+                            label={__("Replace Full Content", "frontis-blocks")}
+                            checked={dynamicReplaceAll}
+                            onChange={(value) => setAttributes({ dynamicReplaceAll: value })}
+                            help={__("If off, you can prepend/append static text later.", "frontis-blocks")}
+                            />
+                        </>
+                    )}
+
+
+
+
+
                     <SelectControl
                         label={__("Preset Style", "frontis-blocks")}
                         value={headingPresetStyle}
