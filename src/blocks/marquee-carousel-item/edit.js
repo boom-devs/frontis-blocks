@@ -23,9 +23,6 @@ const Edit = (props) => {
     
     const TEMPLATE = isNewsTicker ? NEWS_TICKER_TEMPLATE : DEFAULT_TEMPLATE;
 
-    console.log(TEMPLATE);
-    console.log(isNewsTicker);
-
 
     // Allowed blocks: all except marquee-carousel itself
     const parentBlocks = wp.blocks.getBlockTypes().filter((item) => !item.parent);
