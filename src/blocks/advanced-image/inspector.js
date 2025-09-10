@@ -951,13 +951,14 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
             ${imageDesktopBorderRadius && imageBorderRadiusDesktop.top ? `border-radius: ${imageDesktopBorderRadius};` : ''}
             ${imageBorderColor ? `border-color: ${imageBorderColor};` : ''}
 			${imageBoxShadowCssValue ? `box-shadow: ${imageBoxShadowCssValue};` : ''}
-			${maskImageUrl && `
+			${maskImageUrl && !['square', 'octagon', 'triangle', 'rhombus', 'hexagon', 'bevel'].includes(imageStyle) && `
 				-webkit-mask-image: url(${maskImageUrl});
 				mask-image: url(${maskImageUrl});
 				mask-size: ${maskImageSize};
 				mask-position: ${maskImagePosition};
 				mask-repeat: ${maskImageRepeat};
 			`}
+
 		}
 		.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover{
 			${imageBorderHoverColor ? `border-color: ${imageBorderHoverColor};` : ''}
