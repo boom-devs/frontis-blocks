@@ -15,11 +15,6 @@ const attributes = {
         },
     },
 
-	isHeadingTextChanged: {
-		type: 'boolean',
-		default: false
-	},
-
     headingText: {
         type : 'string',
         default: 'Advanced Heading'

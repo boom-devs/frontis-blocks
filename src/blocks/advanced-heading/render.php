@@ -42,6 +42,35 @@ $advanced_tablet_switcher      = !empty($attributes['advancedHeadingTabletSwitch
 $advanced_mobile_switcher      = !empty($attributes['advancedHeadingMobileSwitcher']);
 $heading_before_after_switcher = !empty($attributes['headingBeforeAfterSwitcher']);
 
+
+
+$dynamicEnabled                = !empty($attributes['dynamicEnabled']);
+$dynamicSource                 = fb_norm_str(isset($attributes['dynamicSource']) ? $attributes['dynamicSource'] : 'current_post');
+$dynamicPostId                 = fb_norm_str(isset($attributes['dynamicPostId']) ? $attributes['dynamicPostId'] : 0);
+$dynamicPostType               = fb_norm_str(isset($attributes['dynamicPostType']) ? $attributes['dynamicPostType'] : '');
+$dynamicPostLabel              = fb_norm_str(isset($attributes['dynamicPostLabel']) ? $attributes['dynamicPostLabel'] : '');
+$dynamicField                  = fb_norm_str(isset($attributes['dynamicField']) ? $attributes['dynamicField'] : 'post_title');
+$dynamicEnableLink             = !empty($attributes['dynamicEnableLink']);
+$dynamicReplaceAll             = !empty($attributes['dynamicReplaceAll']);
+$dynamicFeaturedImageField     = fb_norm_str(isset($attributes['dynamicFeaturedImageField']) ? $attributes['dynamicFeaturedImageField'] : '');
+
+$dynamicDateType               = fb_norm_str(isset($attributes['dynamicDateType']) ? $attributes['dynamicDateType'] : '');
+$dynamicDateFormat             = fb_norm_str(isset($attributes['dynamicDateFormat']) ? $attributes['dynamicDateFormat'] : '');
+
+$dynamicTimeType               = fb_norm_str(isset($attributes['dynamicTimeType']) ? $attributes['dynamicTimeType'] : '');
+$dynamicTimeFormat             = fb_norm_str(isset($attributes['dynamicTimeFormat']) ? $attributes['dynamicTimeFormat'] : '');
+
+$dynamicCommentsZeroText       = fb_norm_str(isset($attributes['dynamicCommentsZeroText']) ? $attributes['dynamicCommentsZeroText'] : '');
+$dynamicCommentsOneText        = fb_norm_str(isset($attributes['dynamicCommentsOneText']) ? $attributes['dynamicCommentsOneText'] : '');
+$dynamicCommentsManyText       = fb_norm_str(isset($attributes['dynamicCommentsManyText']) ? $attributes['dynamicCommentsManyText'] : '');
+
+$dynamicTermsTaxonomy          = fb_norm_str(isset($attributes['dynamicTermsTaxonomy']) ? $attributes['dynamicTermsTaxonomy'] : '');
+$dynamicTermsSeparator         = fb_norm_str(isset($attributes['dynamicTermsSeparator']) ? $attributes['dynamicTermsSeparator'] : '');
+
+
+
+
+
 // ---------- classes (match save.js) ----------
 $responsive_classes = [];
 if ($advanced_desktop_switcher)  $responsive_classes[] = 'fb-desktop-responsive';

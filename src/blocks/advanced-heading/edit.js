@@ -50,7 +50,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		advancedHeadingDesktopSwitcher,
 		advancedHeadingTabletSwitcher,
 		advancedHeadingMobileSwitcher,
-		isHeadingTextChanged,
 
 		dynamicEnabled,
 		dynamicSource,
