@@ -33,7 +33,7 @@ $heading_icon_frontend         = fb_norm_str(isset($attributes['headingIconFront
 $show_separator_switcher       = !empty($attributes['showSeparatorSwitcher']);
 $separator                     = fb_norm_str(isset($attributes['separator']) ? $attributes['separator'] : '');
 $separator_position            = fb_norm_str(isset($attributes['separatorPosition']) ? $attributes['separatorPosition'] : 'bottom');
-$separator_color               = fb_norm_str(isset($attributes['separatorColor']) ? $attributes['separatorColor'] : '#000000');
+$separator_color               = fb_norm_str(isset($attributes['separatorColor']) ? $attributes['separatorColor'] : '#399CFF');
 $heading_global_wraper_id      = fb_norm_str(isset($attributes['headingGlobalWraperID']) ? $attributes['headingGlobalWraperID'] : '');
 $heading_global_wraper_class   = fb_norm_str(isset($attributes['headingGlobalWraperClass']) ? $attributes['headingGlobalWraperClass'] : '');
 
@@ -80,7 +80,24 @@ $wrapper_attributes = get_block_wrapper_attributes([
 		<?php endif; ?>
 
 		<?php if ( $show_separator_switcher && $separator_position === 'top' ) : ?>
-			<div class="fb-advanced-title-separator"></div>
+			<div class="fb-advanced-title-separator">
+                <?php if ( $separator === 'zigzag' ) : ?>
+                    <div class='fb-advanced-title-separator-zigzag'>
+                        <svg 
+                            class='fb-advanced-title-separator-zigzag-svg' 
+                            width="322" 
+                            height="7" 
+                            viewBox="0 0 322 7" 
+                            fill="none" 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            style="stroke: <?php echo esc_attr( $separator_color ); ?>;"
+                        >
+                            <path d="M0.349609 5.71094L5.34961 0.710938L10.3496 5.71094L15.3496 0.710938L20.3496 5.71094L25.3496 0.710938L30.3496 5.71094L35.3496 0.710938L40.3496 5.71094L45.3496 0.710938L50.3496 5.71094L55.3496 0.710938L60.3496 5.71094L65.3496 0.710938L70.3496 5.71094L75.3496 0.710938L80.3496 5.71094L85.3496 0.710938L90.3496 5.71094L95.3496 0.710938L100.35 5.71094L105.35 0.710938L110.35 5.71094L115.35 0.710938L120.35 5.71094L125.35 0.710938L130.35 5.71094L135.35 0.710938L140.35 5.71094L145.35 0.710938L150.35 5.71094L155.35 0.710938L160.35 5.71094L165.35 0.710938L170.35 5.71094L175.35 0.710938L180.35 5.71094L185.35 0.710938L190.35 5.71094L195.35 0.710938L200.35 5.71094L205.35 0.710938L210.35 5.71094L215.35 0.710938L220.35 5.71094L225.35 0.710938L230.35 5.71094L235.35 0.710938L240.35 5.71094L245.35 0.710938L250.35 5.71094L255.35 0.710938L260.35 5.71094L265.35 0.710938L270.35 5.71094L275.35 0.710938L280.35 5.71094L285.35 0.710938L290.35 5.71094L295.35 0.710938L300.35 5.71094L305.35 0.710938L310.35 5.71094L315.35 0.710938L320.35 5.71094" 
+                            strokeWidth="2" stroke-miterlimit="10" />
+                        </svg>
+                    </div>
+                <?php endif; ?>
+            </div>
 		<?php endif; ?>
 
 		<?php if ( $sub_heading_switcher && $sub_heading_position === 'top' ) : ?>
@@ -106,7 +123,24 @@ $wrapper_attributes = get_block_wrapper_attributes([
 		<?php endif; ?>
 
 		<?php if ( $show_separator_switcher && $separator_position === 'bottom' ) : ?>
-			<div class="fb-advanced-title-separator"></div>
+			<div class="fb-advanced-title-separator">
+                <?php if ( $separator === 'zigzag' ) : ?>
+                    <div class='fb-advanced-title-separator-zigzag'>
+                        <svg 
+                            class='fb-advanced-title-separator-zigzag-svg' 
+                            width="322" 
+                            height="7" 
+                            viewBox="0 0 322 7" 
+                            fill="none" 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            style="stroke: <?php echo esc_attr( $separator_color ); ?>;"
+                        >
+                            <path d="M0.349609 5.71094L5.34961 0.710938L10.3496 5.71094L15.3496 0.710938L20.3496 5.71094L25.3496 0.710938L30.3496 5.71094L35.3496 0.710938L40.3496 5.71094L45.3496 0.710938L50.3496 5.71094L55.3496 0.710938L60.3496 5.71094L65.3496 0.710938L70.3496 5.71094L75.3496 0.710938L80.3496 5.71094L85.3496 0.710938L90.3496 5.71094L95.3496 0.710938L100.35 5.71094L105.35 0.710938L110.35 5.71094L115.35 0.710938L120.35 5.71094L125.35 0.710938L130.35 5.71094L135.35 0.710938L140.35 5.71094L145.35 0.710938L150.35 5.71094L155.35 0.710938L160.35 5.71094L165.35 0.710938L170.35 5.71094L175.35 0.710938L180.35 5.71094L185.35 0.710938L190.35 5.71094L195.35 0.710938L200.35 5.71094L205.35 0.710938L210.35 5.71094L215.35 0.710938L220.35 5.71094L225.35 0.710938L230.35 5.71094L235.35 0.710938L240.35 5.71094L245.35 0.710938L250.35 5.71094L255.35 0.710938L260.35 5.71094L265.35 0.710938L270.35 5.71094L275.35 0.710938L280.35 5.71094L285.35 0.710938L290.35 5.71094L295.35 0.710938L300.35 5.71094L305.35 0.710938L310.35 5.71094L315.35 0.710938L320.35 5.71094" 
+                            strokeWidth="2" stroke-miterlimit="10" />
+                        </svg>
+                    </div>
+                <?php endif; ?>
+            </div>
 		<?php endif; ?>
 
 	</div>
