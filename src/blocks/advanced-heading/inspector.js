@@ -83,6 +83,7 @@ import FB_ResponsiveBackgroundImageControl from '@Components/responsive-backgrou
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_BackgroundColorControl from '@Components/background-color-control';
+import generateSvgIcon from '@Utils/generateSvgIcon';
 
 import './editor.scss';
 
@@ -278,6 +279,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingIconSwitcher,
         headingIconAlign,
         headingIcon,
+        headingIconFrontend,
         headingIconSize,
         headingIconSizeUnits,
         headingIconBgSize,
@@ -491,6 +493,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
     }, []);
 
+
+    /**
+     * Generate SVG Icons for Icon
+     */
+    useEffect(() => {
+        setAttributes({
+            headingIconFrontend: generateSvgIcon(headingIcon),
+        })
+    }, [headingIcon]);
 
 
     /** Start Preset Style */
