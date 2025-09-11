@@ -1063,6 +1063,9 @@ const attributes = {
 		type: 'string',
 		default: 'bookmark',
 	},
+    headingIconFrontend:{
+        type: 'string',
+    },
     headingIconSize: {
         type: 'object',
         default: {
