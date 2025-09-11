@@ -1,12 +1,13 @@
 import { __ } from "@wordpress/i18n";
 import { ClipLoader } from "react-spinners";
 import FsiGbTypography from "../global-settings/global-settings";
-import { useCallback, useState } from "@wordpress/element";
+import { useCallback, useEffect, useState } from "@wordpress/element";
 import { toast, ToastContainer } from "react-toastify";
 import { useDeviceType } from "@Config/displayType";
 import generateCSSVariables from "../global-settings/components/GenerateRootCss";
 import { updateGlobalStyle } from "../global-settings/fetch";
 import { loadGoogleFont } from "../global-settings/helper";
+import generateColorsVariables from "../global-settings/components/GenerateColorRoot";
 
 const FullSiteImportSettingConfig = ({
     template, 
@@ -26,8 +27,8 @@ const FullSiteImportSettingConfig = ({
 	const [customGradientColors, setCustomGradientColors] = useState(template.customGradientColors);
 	const [typography, setTypography] = useState(template.typographies);
 	const [customTypography, setCustomTypography] = useState(template.customTypographies);
-	const [fontFamilies, setFontFamilies] = useState({});
-	const [globalTypography, setGlobalTypography] = useState(typography);
+	const [fontFamilies, setFontFamilies] = useState(template.fontFamilies);
+	const [globalTypography, setGlobalTypography] = useState(template.globalTypographies);
 
     const deviceType = useDeviceType();
 
@@ -97,7 +98,7 @@ const FullSiteImportSettingConfig = ({
                 data: globalTypography,
                 setter: setGlobalTypography,
                 storeKey: "fb_globaltypo",
-                postProcess: (data) => generateCSSVariables(data, deviceType),
+                postProcess: (data) => generateCSSVariables(data, deviceType, 'import'),
             },
         ];
     
@@ -135,7 +136,7 @@ const FullSiteImportSettingConfig = ({
                         
                         console.warn(`${storeKey} update failed, using current data:`, data);
                     }
-                    
+
                 } catch (apiError) {
                     console.error(`API call failed for ${key}:`, apiError);
                     
@@ -153,6 +154,16 @@ const FullSiteImportSettingConfig = ({
                     console.log(`${storeKey} set to fallback due to error:`, data);
                 }
             }
+
+            // Generate color variables
+            const mergedColors = [
+                ...(customColors ?? []),
+                ...(customGradientColors ?? []),
+                ...(gradientColors ?? []),
+                ...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
+            ];
+
+            setTimeout(() => generateColorsVariables(mergedColors, deviceType, 'import'), 1000);
             
             console.log('All states updated successfully');
             
@@ -172,23 +183,32 @@ const FullSiteImportSettingConfig = ({
     ]);
 
 
-	// Generate color variables
-	// useEffect(() => {
-	// 	const mergedColors = [
-	// 		...(customColors ?? []),
-	// 		...(customGradientColors ?? []),
-	// 		...(gradientColors ?? []),
-	// 		...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
-	// 	];
+	useEffect(() => {
+        const mergedColors = [
+            ...(customColors ?? []),
+            ...(customGradientColors ?? []),
+            ...(gradientColors ?? []),
+            ...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
+        ];
+    
+        const timeoutId = setTimeout(() => {
+            generateColorsVariables(mergedColors, deviceType, "preview");
+        }, 1000);
+    
+        // cleanup function
+        return () => clearTimeout(timeoutId);
+    
+    }, [globalColors, customColors, customGradientColors, gradientColors, deviceType]);
 
-	// 	setTimeout(() => generateColorsVariables(mergedColors, deviceType), 1000);
-	// }, [
-	// 	globalColors,
-	// 	customColors,
-	// 	customGradientColors,
-	// 	gradientColors,
-	// 	deviceType,
-	// ]);
+	useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            generateCSSVariables(globalTypography, deviceType, "preview");
+        }, 1000);
+    
+        // cleanup function
+        return () => clearTimeout(timeoutId);
+    
+    }, [globalTypography, deviceType]);
 
 
     const handleImport = useCallback(async () => {
