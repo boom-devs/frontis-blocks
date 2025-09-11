@@ -5,7 +5,7 @@
 		display: flex;
 		align-items: center;
 		overflow: hidden;
-
+		position: relative;
 		.fb-news-ticker-label-container {
 			display: flex;
 			align-items: center;
@@ -13,15 +13,34 @@
 			background: #399cff;
 			color: #fff;
 			padding: 8px 16px;
-			svg {
-				fill: #fff;
+			.fb-icon-wrapper {
 				line-height: 0;
+				svg {
+					fill: #fff;
+					line-height: 0;
+				}
 			}
 		}
 
 		.fb-news-ticker-content {
 			flex: 1;
 			overflow: hidden;
+		}
+		.fb-news-ticker-arrows {
+			display: flex;
+			gap: 10px;
+			align-items: center;
+			margin-left: auto;
+			position: absolute;
+			top: 12px;
+			right: 20px;
+			z-index: 99;
+		}
+
+		.fb-news-ticker-prev,
+		.fb-news-ticker-next {
+			cursor: pointer;
+			user-select: none;
 		}
 	}
 }

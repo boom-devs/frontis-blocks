@@ -279,3 +279,16 @@ export const DYNAMIC_CURRENT_POST_OPTIONS = [
     { label: __('Author Avatar URL', 'frontis-blocks'), value: 'author_avatar' },
     { label: __('Author Custom Field', 'frontis-blocks'), value: 'author_meta' },
 ];
+
+export const CONTENT_TYPE = [
+	{ label: __("Custom", "frontis-blocks"), value: "custom" },
+	{ label: __("Dynamic", "frontis-blocks"), value: "dynamic" },
+];
+
+export const TIMER_POSITION = [
+	{ label: __("Top Right", "frontis-blocks"), value: "top-right" },
+	{ label: __("Bottom Right", "frontis-blocks"), value: "bottom-right" },
+	{ label: __("Top Left", "frontis-blocks"), value: "top-left" },
+	{ label: __("Bottom Left", "frontis-blocks"), value: "bottom-left" },
+];
+
