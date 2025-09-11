@@ -206,6 +206,8 @@ const PatternLibraryButton = () => {
         }));
     })();
 
+    console.log("data:", data);
+
     return (
         <>
             <Button
