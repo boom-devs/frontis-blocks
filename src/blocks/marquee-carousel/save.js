@@ -17,6 +17,9 @@ export default function Save({ attributes }) {
 		'data-block-id': blockId,
 	});
 
+	const navBase = sliderGlobalWraperID
+        ? `#${sliderGlobalWraperID}`
+        : '';
 	/**
 	 * swiper settings
 	 */
@@ -24,15 +27,19 @@ export default function Save({ attributes }) {
 		spaceBetween: 0,
 		centeredSlides: false,
 		speed: speed,
-		autoplay: {
-			delay: 1,
-			reverseDirection: reverseDirection,
-			pauseOnMouseEnter: pauseOnHover,
-		},
+		// autoplay: {
+		// 	delay: 1,
+		// 	reverseDirection: reverseDirection,
+		// 	pauseOnMouseEnter: pauseOnHover,
+		// },
 		loop: true,
 		slidesPerView:'auto',
 		allowTouchMove: false,
-		disableOnInteraction: true
+		disableOnInteraction: true,
+		navigation: {
+            nextEl: `.fb-news-ticker-next`,
+            prevEl: `.fb-news-ticker-prev`,
+        },
 	});
 
 	return (
