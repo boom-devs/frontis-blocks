@@ -3105,6 +3105,53 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     const isPostBasedSource = dynamicEnabled && (dynamicSource === 'current_post' || dynamicSource === 'post_type');
 
+    /**  
+     * Featured Image Field
+     */
+    const [featuredField, setFeaturedField] = useState(dynamicFeaturedImageField || "title");
+
+    useEffect(() => {
+        setFeaturedField(dynamicFeaturedImageField || "title");
+    }, [dynamicFeaturedImageField]);
+
+    const selectedFeaturedField = useMemo(() => {
+        const v = featuredField || "title";
+        return (
+        DYNAMIC_FEATURED_IMAGE_OPTIONS.find((o) => o.value === v) ||
+        DYNAMIC_FEATURED_IMAGE_OPTIONS[0]
+        );
+    }, [featuredField]);
+
+    const handleFeaturedFieldChange = (opt) => {
+        const val = opt && typeof opt.value === "string" ? opt.value : "title";
+        setFeaturedField(val);
+        setAttributes({ dynamicFeaturedImageField: val });
+    };
+
+    /**
+     * dynamicTermsTaxonomy
+     */
+
+    const [termsTaxonomy, setTermsTaxonomy] = useState(dynamicTermsTaxonomy || "category");
+
+    useEffect(() => {
+        setTermsTaxonomy(dynamicTermsTaxonomy || "category");
+    }, [dynamicTermsTaxonomy]);
+
+    const selectedTermsTaxonomy = useMemo(() => {
+        const v = termsTaxonomy || "category";
+        return (
+        DYNAMIC_TAXONOMY_OPTIONS.find((o) => o.value === v) ||
+        DYNAMIC_TAXONOMY_OPTIONS[0]
+        );
+    }, [termsTaxonomy]);
+
+    const handleTermsTaxonomyChange = (opt) => {
+        const val = opt && typeof opt.value === "string" ? opt.value : "category";
+        setTermsTaxonomy(val);
+        setAttributes({ dynamicTermsTaxonomy: val });
+    };
+    
     /**
 	 * Inspector General Controls
 	 */
@@ -3172,8 +3219,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                         >
                                             <Select2 
                                                 options={DYNAMIC_FEATURED_IMAGE_OPTIONS} 
-                                                value={DYNAMIC_FEATURED_IMAGE_OPTIONS.find(o => o.value === dynamicFeaturedImageField) || null }                                                     // option object
-                                                onChange={(opt) => setAttributes({ dynamicFeaturedImageField: opt?.value ?? '' })}
+                                                value={selectedFeaturedField}
+                                                onChange={handleFeaturedFieldChange}
                                                 className="fb-select2-control"
                                             />
                                     </BaseControl>
@@ -3259,8 +3306,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                             >
                                                 <Select2 
                                                     options={DYNAMIC_TAXONOMY_OPTIONS} 
-                                                    value={DYNAMIC_TAXONOMY_OPTIONS.find(o => o.value === dynamicTermsTaxonomy) || null }                                                     // option object
-                                                    onChange={(opt) => setAttributes({ dynamicTermsTaxonomy: opt?.value ?? '' })}
+                                                    value={selectedTermsTaxonomy}
+                                                    onChange={handleTermsTaxonomyChange}
                                                     className="fb-select2-control"
                                                 />
                                         </BaseControl>

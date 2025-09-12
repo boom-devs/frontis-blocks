@@ -108,7 +108,7 @@ $dynamicPostLabel              = fb_norm_str(isset($attributes['dynamicPostLabel
 $dynamicField                  = fb_norm_str(isset($attributes['dynamicField']) ? $attributes['dynamicField'] : 'post_title');
 $dynamicEnableLink             = !empty($attributes['dynamicEnableLink']);
 $dynamicReplaceAll             = !empty($attributes['dynamicReplaceAll']);
-$dynamicFeaturedImageField     = fb_norm_str(isset($attributes['dynamicFeaturedImageField']) ? $attributes['dynamicFeaturedImageField'] : '');
+$dynamicFeaturedImageField     = fb_norm_str(isset($attributes['dynamicFeaturedImageField']) ? $attributes['dynamicFeaturedImageField'] : 'title');
 
 $dynamicDateType               = fb_norm_str(isset($attributes['dynamicDateType']) ? $attributes['dynamicDateType'] : '');
 $dynamicDateFormat             = fb_norm_str(isset($attributes['dynamicDateFormat']) ? $attributes['dynamicDateFormat'] : '');
@@ -122,6 +122,7 @@ $dynamicCommentsManyText       = fb_norm_str(isset($attributes['dynamicCommentsM
 
 $dynamicTermsTaxonomy          = fb_norm_str(isset($attributes['dynamicTermsTaxonomy']) ? $attributes['dynamicTermsTaxonomy'] : 'category');
 $dynamicTermsSeparator         = fb_norm_str(isset($attributes['dynamicTermsSeparator']) ? $attributes['dynamicTermsSeparator'] : '');
+
 
 // -------- DYNAMIC: compute $dynamic_value and $dynamic_permalink ----------
 $dynamic_value     = '';
