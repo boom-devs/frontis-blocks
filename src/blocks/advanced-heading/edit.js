@@ -220,6 +220,17 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		return settings?.formats?.time || 'g:i a';
 	};
 
+	// WP REST *_gmt string → ensure UTC parse
+	const parseWpDate = (raw, useGmt = false) => {
+		if (!raw) return null;
+		const s = String(raw).trim();
+		// যদি শেষেতে Z বা timezone offset না থাকে, আর useGmt=true হয়, তাহলে Z যোগ করো
+		const hasTZ = /([Zz]|[+\-]\d{2}:?\d{2})$/.test(s);
+		const iso  = useGmt && !hasTZ ? `${s}Z` : s;
+		const d = new Date(iso);
+		return isNaN(d.getTime()) ? null : d;
+	};
+
 	/**
 	 * Dynamic Terms for Post
 	 */
@@ -360,47 +371,42 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		}
 	
 		case 'post_date': {
-			const raw = dynamicDateType === 'modified' ? postRecord.modified : postRecord.date;
-			if (!raw) return __('No Content', 'frontis-blocks');
-		  
-			const d = new Date(raw);
-			if (isNaN(d.getTime())) return __('No Content', 'frontis-blocks');
+			const isModified = dynamicDateType === 'modified';
+			// prefer *_gmt; না থাকলে local ফিল্ড
+			const rawGMT = isModified ? postRecord?.modified_gmt : postRecord?.date_gmt;
+			const rawLOC = isModified ? postRecord?.modified     : postRecord?.date;
+			const d = parseWpDate(rawGMT ?? rawLOC, Boolean(rawGMT));
+			if (!d) return __('No Content', 'frontis-blocks');
 		  
 			switch (dynamicDateFormat) {
-			  case 'default':
-				return formatDateByPhp(getSiteDateFormat(), d);
-		  
 			  case 'jS F Y':
 			  case 'Y-m-d':
 			  case 'm/d/Y':
 			  case 'd/m/Y':
 				return formatDateByPhp(dynamicDateFormat, d);
-		  
 			  case 'human':
 				return humanizeDate(d);
-		  
+			  case 'default':
 			  default:
 				return formatDateByPhp(getSiteDateFormat(), d);
 			}
-		  }
+		}
 	
 		case 'post_time': {
-			const raw = dynamicTimeType === 'modified' ? postRecord?.modified : postRecord?.date;
-			if (!raw) return __('No Content', 'frontis-blocks');
-			
-			const d = new Date(raw);
-			if (isNaN(d.getTime())) return __('No Content', 'frontis-blocks');
-			
+			const isModified = dynamicTimeType === 'modified';
+			const rawGMT = isModified ? postRecord?.modified_gmt : postRecord?.date_gmt;
+			const rawLOC = isModified ? postRecord?.modified     : postRecord?.date;
+			const d = parseWpDate(rawGMT ?? rawLOC, Boolean(rawGMT));
+			if (!d) return __('No Content', 'frontis-blocks');
+		  
 			switch (dynamicTimeFormat) {
-				case 'default':
+			  case 'default':
 				return dateI18n(getSiteTimeFormat(), d);
-			
-				case 'g:i A':
-				case 'g:i':
-				case 'g:i:s a':
+			  case 'g:i A':
+			  case 'g:i':
+			  case 'g:i:s a':
 				return dateI18n(dynamicTimeFormat, d);
-			
-				default:
+			  default:
 				return dateI18n(getSiteTimeFormat(), d);
 			}
 		}
