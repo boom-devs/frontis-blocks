@@ -9,12 +9,68 @@ if ( ! function_exists('fb_norm_str') ) {
         return (string) $val;
     }
 }
+
 if ( ! function_exists('fb_tag_whitelist') ) {
     function fb_tag_whitelist($tag, $fallback = 'div') {
         $allowed = ['h1','h2','h3','h4','h5','h6','p','div','span'];
         $tag = strtolower(fb_norm_str($tag, $fallback));
         return in_array($tag, $allowed, true) ? $tag : $fallback;
     }
+}
+
+// --- Dynamic helpers (add after your existing helpers) ---
+if ( ! function_exists('fb_get_plain_text') ) {
+	function fb_get_plain_text( $html ) {
+		$raw = (string) ( $html ?? '' );
+		$decoded = wp_specialchars_decode( $raw, ENT_QUOTES );
+		$decoded = html_entity_decode( $decoded, ENT_QUOTES, 'UTF-8' );
+		$txt = wp_strip_all_tags( $decoded, true );
+		$txt = preg_replace( '/\x{00A0}/u', ' ', $txt ); // nbsp
+		$txt = preg_replace( '/[\x{200B}-\x{200D}\x{FEFF}]/u', '', $txt ); // zero-width
+		$txt = preg_replace( '/\s{2,}/', ' ', $txt );
+		return trim( (string) $txt );
+	}
+}
+
+if ( ! function_exists('fb_humanize_date') ) {
+	function fb_humanize_date( $date ) {
+		if ( ! $date ) return '';
+		$timestamp = is_numeric( $date ) ? (int) $date : strtotime( (string) $date );
+		if ( ! $timestamp ) return '';
+		$diff = time() - $timestamp;
+		$abs  = abs( $diff );
+
+		$units = [
+			'year'   => 31536000,
+			'month'  => 2592000,
+			'week'   => 604800,
+			'day'    => 86400,
+			'hour'   => 3600,
+			'minute' => 60,
+			'second' => 1,
+		];
+		foreach ( $units as $u => $s ) {
+			$v = floor( $abs / $s );
+			if ( $v >= 1 ) {
+				return $diff >= 0 ? sprintf( _n( '%d '.$u.' ago', '%d '.$u.'s ago', $v, 'frontis-blocks' ), $v )
+				                  : sprintf( _n( 'in %d '.$u, 'in %d '.$u.'s', $v, 'frontis-blocks' ), $v );
+			}
+		}
+		return __( 'just now', 'frontis-blocks' );
+	}
+}
+
+if ( ! function_exists('fb_get_site_date_format') ) {
+	function fb_get_site_date_format() {
+		$fmt = get_option( 'date_format' );
+		return $fmt ? $fmt : 'F j, Y';
+	}
+}
+if ( ! function_exists('fb_get_site_time_format') ) {
+	function fb_get_site_time_format() {
+		$fmt = get_option( 'time_format' );
+		return $fmt ? $fmt : 'g:i a';
+	}
 }
 
 // ---------- extract & normalize ----------
@@ -66,6 +122,211 @@ $dynamicCommentsManyText       = fb_norm_str(isset($attributes['dynamicCommentsM
 
 $dynamicTermsTaxonomy          = fb_norm_str(isset($attributes['dynamicTermsTaxonomy']) ? $attributes['dynamicTermsTaxonomy'] : '');
 $dynamicTermsSeparator         = fb_norm_str(isset($attributes['dynamicTermsSeparator']) ? $attributes['dynamicTermsSeparator'] : '');
+
+// -------- DYNAMIC: compute $dynamic_value and $dynamic_permalink ----------
+$dynamic_value     = '';
+$dynamic_permalink = '';
+
+$is_site_field    = in_array( $dynamicSource, ['site_title','site_tagline'], true );
+$is_archive_field = in_array( $dynamicSource, ['archive_title','archive_description'], true );
+$is_post_based    = in_array( $dynamicSource, ['current_post','post_type'], true );
+
+$target_post_id   = ($dynamicSource === 'post_type' && $dynamicPostId) ? (int) $dynamicPostId : get_the_ID();
+$target_post_type = ($dynamicSource === 'post_type' && $dynamicPostType) ? $dynamicPostType : get_post_type( $target_post_id );
+
+// Only compute if enabled
+if ( $dynamicEnabled ) {
+
+	if ( $is_site_field ) {
+		if ( $dynamicSource === 'site_title' ) {
+			$dynamic_value = fb_get_plain_text( get_bloginfo( 'name' ) ?: __( 'No Content', 'frontis-blocks' ) );
+		} elseif ( $dynamicSource === 'site_tagline' ) {
+			$dynamic_value = fb_get_plain_text( get_bloginfo( 'description' ) ?: __( 'No Content', 'frontis-blocks' ) );
+		}
+	}
+	elseif ( $is_archive_field ) {
+		// Editor এ placeholder দেখানো হয়েছিল; PHP তে আসল আর্কাইভ ভ্যালু
+		if ( $dynamicSource === 'archive_title' ) {
+			$dynamic_value = fb_get_plain_text( get_the_archive_title() ?: __( 'No Content', 'frontis-blocks' ) );
+		} else {
+			$dynamic_value = fb_get_plain_text( get_the_archive_description() ?: __( 'No Content', 'frontis-blocks' ) );
+		}
+	}
+	elseif ( $is_post_based && $target_post_id ) {
+		$post = get_post( $target_post_id );
+
+		// permalink (for optional link)
+		if ( $post && ! is_wp_error( $post ) ) {
+			$dynamic_permalink = get_permalink( $post );
+		}
+
+		switch ( $dynamicField ) {
+			case 'post_title':
+				$dynamic_value = fb_get_plain_text( $post ? get_the_title( $post ) : '' );
+				break;
+
+			case 'post_excerpt':
+				if ( $post ) {
+					$raw = has_excerpt( $post ) ? $post->post_excerpt : '';
+					$dynamic_value = $raw ? fb_get_plain_text( $raw ) : __( 'No Content', 'frontis-blocks' );
+				}
+				break;
+
+			case 'post_thumbnail':
+				// pick subfield
+				$thumb_id = $post ? get_post_thumbnail_id( $post ) : 0;
+				if ( ! $thumb_id ) { $dynamic_value = __( 'No Content', 'frontis-blocks' ); break; }
+
+				$sub = $dynamicFeaturedImageField ?: 'attachment_url';
+				switch ( $sub ) {
+					case 'title':
+						$dynamic_value = fb_get_plain_text( get_the_title( $thumb_id ) );
+						break;
+					case 'alt':
+						$dynamic_value = fb_get_plain_text( get_post_meta( $thumb_id, '_wp_attachment_image_alt', true ) );
+						break;
+					case 'caption':
+						$dynamic_value = fb_get_plain_text( wp_get_attachment_caption( $thumb_id ) );
+						break;
+					case 'description': {
+						$att = get_post( $thumb_id );
+						$dynamic_value = fb_get_plain_text( $att ? $att->post_content : '' );
+						break;
+					}
+					case 'attachment_url':
+					default:
+						$dynamic_value = wp_get_attachment_url( $thumb_id ) ?: __( 'No Content', 'frontis-blocks' );
+						break;
+				}
+				break;
+
+			case 'post_date': {
+				$raw = ($dynamicDateType === 'modified') ? get_post_modified_time( 'U', true, $post ) : get_post_time( 'U', true, $post );
+				if ( ! $raw ) { $dynamic_value = __( 'No Content', 'frontis-blocks' ); break; }
+
+				switch ( $dynamicDateFormat ) {
+					case 'jS F Y':
+					case 'Y-m-d':
+					case 'm/d/Y':
+					case 'd/m/Y':
+						$dynamic_value = date_i18n( $dynamicDateFormat, (int) $raw );
+						break;
+					case 'human':
+						$dynamic_value = fb_humanize_date( (int) $raw );
+						break;
+					case 'default':
+					default:
+						$dynamic_value = date_i18n( fb_get_site_date_format(), (int) $raw );
+						break;
+				}
+				break;
+			}
+
+			case 'post_time': {
+				$raw = ($dynamicTimeType === 'modified') ? get_post_modified_time( 'U', true, $post ) : get_post_time( 'U', true, $post );
+				if ( ! $raw ) { $dynamic_value = __( 'No Content', 'frontis-blocks' ); break; }
+
+				$fmt = $dynamicTimeFormat && $dynamicTimeFormat !== 'default' ? $dynamicTimeFormat : fb_get_site_time_format();
+				$dynamic_value = date_i18n( $fmt, (int) $raw );
+				break;
+			}
+
+			case 'post_terms': {
+				$tax = $dynamicTermsTaxonomy ?: '';
+				if ( ! $tax ) { $dynamic_value = __( 'No Content', 'frontis-blocks' ); break; }
+				$terms = get_the_terms( $post, $tax );
+				if ( is_wp_error( $terms ) || empty( $terms ) ) { $dynamic_value = __( 'No Content', 'frontis-blocks' ); break; }
+				$sep = $dynamicTermsSeparator !== '' ? $dynamicTermsSeparator : ', ';
+				$dynamic_value = implode( $sep, wp_list_pluck( $terms, 'name' ) );
+				break;
+			}
+
+			case 'post_id':
+				$dynamic_value = $post ? (string) $post->ID : '';
+				break;
+
+			case 'comments_number': {
+				$count = $post ? get_comments_number( $post ) : 0;
+				$zero = trim( $dynamicCommentsZeroText ?: __( 'No Responses', 'frontis-blocks' ) );
+				$one  = trim( $dynamicCommentsOneText  ?: __( 'One Response', 'frontis-blocks' ) );
+				$many = trim( $dynamicCommentsManyText ?: __( 'Responses {num}', 'frontis-blocks' ) );
+
+				if ( $count === 0 ) $dynamic_value = $zero;
+				elseif ( $count === 1 ) $dynamic_value = $one;
+				else $dynamic_value = str_replace( '{num}', (string) $count, $many );
+				break;
+			}
+
+			// ---- Author fields ----
+            case 'author_name':
+            case 'author_first_name':
+            case 'author_last_name':
+            case 'author_nickname':
+            case 'author_description':
+            case 'author_email':
+            case 'author_url':
+            case 'author_avatar': {
+                $author_id = $post ? (int) $post->post_author : 0;
+                if ( ! $author_id ) { $dynamic_value = __( 'No Content', 'frontis-blocks' ); break; }
+            
+                switch ( $dynamicField ) {
+                    case 'author_name': {
+                        $val = fb_get_plain_text( get_the_author_meta( 'display_name', $author_id ) );
+                        $dynamic_value = $val !== '' ? $val : __( 'No Content', 'frontis-blocks' );
+                        break;
+                    }
+                    case 'author_first_name': {
+                        $val = fb_get_plain_text( get_the_author_meta( 'first_name', $author_id ) );
+                        $dynamic_value = $val !== '' ? $val : __( 'No Content', 'frontis-blocks' );
+                        break;
+                    }
+                    case 'author_last_name': {
+                        $val = fb_get_plain_text( get_the_author_meta( 'last_name', $author_id ) );
+                        $dynamic_value = $val !== '' ? $val : __( 'No Content', 'frontis-blocks' );
+                        break;
+                    }
+                    case 'author_nickname': {
+                        $val = fb_get_plain_text( get_the_author_meta( 'nickname', $author_id ) );
+                        $dynamic_value = $val !== '' ? $val : __( 'No Content', 'frontis-blocks' );
+                        break;
+                    }
+                    case 'author_description': {
+                        $val = fb_get_plain_text( get_the_author_meta( 'description', $author_id ) );
+                        $dynamic_value = $val !== '' ? $val : __( 'No Content', 'frontis-blocks' );
+                        break;
+                    }
+                    case 'author_email': {
+                        $raw = get_the_author_meta( 'email', $author_id );
+                        $val = is_string( $raw ) ? trim( $raw ) : '';
+                        $dynamic_value = $val !== '' ? $val : __( 'No Content', 'frontis-blocks' );
+                        break;
+                    }
+                    case 'author_url': {
+                        $raw = get_the_author_meta( 'url', $author_id );
+                        $val = is_string( $raw ) ? trim( $raw ) : '';
+                        $dynamic_value = $val !== '' ? $val : __( 'No Content', 'frontis-blocks' );
+                        break;
+                    }
+                    case 'author_avatar': {
+                        $val = get_avatar_url( $author_id, [ 'size' => 96 ] );
+                        $dynamic_value = $val ? $val : __( 'No Content', 'frontis-blocks' );
+                        break;
+                    }
+                }
+                break;
+            }
+
+			default:
+				$dynamic_value = '';
+		}
+	}
+}
+
+// Final text that will appear in heading (only heading is dynamic like in Edit.js)
+$__final_heading_text = $dynamicEnabled ? $dynamic_value : $heading_text;
+
+
+
 
 
 
@@ -139,7 +400,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 
 		<div class="fb-advanced-heading-wrapper">
 			<<?php echo esc_attr( $heading_tag ); ?> class="fb-advanced-heading<?php echo $active_line_switcher ? ' active-line' : ''; ?>">
-				<?php echo wp_kses_post( $heading_text ); ?>
+				<?php echo wp_kses_post( $__final_heading_text ); ?>
 			</<?php echo esc_attr( $heading_tag ); ?>>
 		</div>
 
