@@ -155,6 +155,8 @@ const FullSiteImportSettingConfig = ({
                 }
             }
 
+            console.log('All states updated successfully');
+
             // Generate color variables
             const mergedColors = [
                 ...(customColors ?? []),
@@ -163,9 +165,11 @@ const FullSiteImportSettingConfig = ({
                 ...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
             ];
 
-            setTimeout(() => generateColorsVariables(mergedColors, deviceType, 'import'), 1000);
-            
-            console.log('All states updated successfully');
+            const timeoutId = setTimeout(() => {
+                generateColorsVariables(mergedColors, deviceType, "import");
+            }, 1000);
+
+            return () => clearTimeout(timeoutId);
             
         } catch (error) {
             console.error("Error updating global settings:", error);
@@ -199,6 +203,7 @@ const FullSiteImportSettingConfig = ({
         return () => clearTimeout(timeoutId);
     
     }, [globalColors, customColors, customGradientColors, gradientColors, deviceType]);
+
 
 	useEffect(() => {
         const timeoutId = setTimeout(() => {
