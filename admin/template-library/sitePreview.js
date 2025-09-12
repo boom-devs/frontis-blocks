@@ -9,48 +9,15 @@ const SitePreview = () => {
 		const currentOrigin = window.location.origin; // dynamic origin
 		const remoteUrl = encodeURIComponent('https://yakutansi.boomdevshub.com/?hide_admin_bar=true&preview=true');
 
-		// 1. Try pretty permalink version first
 		let siteUrl = `${currentOrigin}/template-proxy/?url=${remoteUrl}`;
 
-		// 2. Fallback: check if pretty permalink is not supported
-		//    Simple trick: WordPress sites with "plain permalink" usually contain "?p=" in home URL
 		if (window?.wpApiSettings?.permalink_structure === '' || window.location.href.includes('index.php')) {
-			// fallback to query-string style
 			siteUrl = `${currentOrigin}/?template_proxy=1&url=${remoteUrl}`;
 		}
 
 		setPreviewUrl(siteUrl);
 	}, []);
 
-
-	// useEffect(() => {
-	// 	if (!isLoading && iframeRef.current) {
-	// 		try {
-	// 			const iframeDoc = iframeRef.current.contentDocument || iframeRef.current.contentWindow.document;
-				
-	// 			if (iframeDoc) {
-	// 				let styleEl = iframeDoc.getElementById("global-colors-preview");
-
-	// 				if (!styleEl) {
-	// 					styleEl = iframeDoc.createElement("style");
-	// 					styleEl.id = "global-colors-preview";
-	// 					iframeDoc.head.appendChild(styleEl);
-	// 				}
-
-	// 				// Add demo CSS variables to :root
-	// 				styleEl.innerHTML = `
-	// 					:root {
-	// 						--wp-frontis-color-primary: #FF0000;
-	// 						--wp-frontis-color-secondary: #00FF00;
-	// 						--wp-frontis-color-accent: #0000FF;
-	// 					}
-	// 				`;
-	// 			}
-	// 		} catch (err) {
-	// 			console.warn("Cannot inject styles into iframe:", err);
-	// 		}
-	// 	}
-	// }, [isLoading]);
 
 	return (
 		<div className="fb-site-preview-container">
