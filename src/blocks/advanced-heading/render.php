@@ -245,17 +245,27 @@ if ( $dynamicEnabled ) {
 				$dynamic_value = $post ? (string) $post->ID : '';
 				break;
 
-			case 'comments_number': {
-				$count = $post ? get_comments_number( $post ) : 0;
-				$zero = trim( $dynamicCommentsZeroText ?: __( 'No Responses', 'frontis-blocks' ) );
-				$one  = trim( $dynamicCommentsOneText  ?: __( 'One Response', 'frontis-blocks' ) );
-				$many = trim( $dynamicCommentsManyText ?: __( 'Responses {num}', 'frontis-blocks' ) );
-
-				if ( $count === 0 ) $dynamic_value = $zero;
-				elseif ( $count === 1 ) $dynamic_value = $one;
-				else $dynamic_value = str_replace( '{num}', (string) $count, $many );
-				break;
-			}
+            case 'comments_number': {
+                $count = ($post instanceof WP_Post) ? get_comments_number( $post ) : 0;
+                $count = is_numeric( $count ) ? (int) $count : 0;
+            
+                $zeroTxt = trim( $dynamicCommentsZeroText ?: __( 'No Responses', 'frontis-blocks' ) );
+                $oneTxt  = trim( $dynamicCommentsOneText  ?: __( 'One Response',  'frontis-blocks' ) );
+                $manyTxt = trim( $dynamicCommentsManyText ?: __( 'Responses {num}', 'frontis-blocks' ) );
+            
+                if ( $count === 0 ) {
+                    $dynamic_value = $zeroTxt;
+                } elseif ( $count === 1 ) {
+                    $dynamic_value = $oneTxt;
+                } else {
+                    if ( strpos( $manyTxt, '{num}' ) !== false ) {
+                        $dynamic_value = str_replace( '{num}', (string) $count, $manyTxt );
+                    } else {
+                        $dynamic_value = $manyTxt;
+                    }
+                }
+                break;
+            }
 
 			// ---- Author fields ----
             case 'author_name':
