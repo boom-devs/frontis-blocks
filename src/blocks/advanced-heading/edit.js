@@ -499,7 +499,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	/**
 	 * Display Value for No loading flicker
 	 */
-	const displayValue = (typeof dynamicValue === 'undefined')? lastValueRef.current: dynamicValue;
+	const dynamicDisplayValue = (typeof dynamicValue === 'undefined')? lastValueRef.current: dynamicValue;
 
 	useEffect(() => {
 		if (typeof dynamicValue !== 'undefined') {
@@ -567,7 +567,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                     <div className="fb-advanced-heading-wrapper">
                         <RichText
                             tagName={headingTag}
-                            value={shouldUseDynamic ? displayValue : headingText} 
+                            value={shouldUseDynamic ? dynamicDisplayValue : headingText}  
                             onChange={(value) => {
                                 if (!shouldUseDynamic) {
                                     setAttributes({ headingText: value });

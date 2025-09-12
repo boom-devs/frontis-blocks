@@ -334,12 +334,7 @@ if ( $dynamicEnabled ) {
 }
 
 // Final text that will appear in heading (only heading is dynamic like in Edit.js)
-$__final_heading_text = $dynamicEnabled ? $dynamic_value : $heading_text;
-
-
-
-
-
+$dynamicDisplayValue = $dynamicEnabled ? $dynamic_value : $heading_text;
 
 
 
@@ -411,7 +406,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 
 		<div class="fb-advanced-heading-wrapper">
 			<<?php echo esc_attr( $heading_tag ); ?> class="fb-advanced-heading<?php echo $active_line_switcher ? ' active-line' : ''; ?>">
-				<?php echo wp_kses_post( $__final_heading_text ); ?>
+				<?php echo wp_kses_post( $dynamicDisplayValue ); ?>
 			</<?php echo esc_attr( $heading_tag ); ?>>
 		</div>
 
