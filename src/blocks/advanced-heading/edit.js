@@ -241,7 +241,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			})
 			: null,
 		[shouldQueryTerms, dynamicTermsTaxonomy, targetPostId]
-	);  
+	);
 
 	/**
 	 * Comments for Post
