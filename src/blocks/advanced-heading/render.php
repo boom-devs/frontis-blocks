@@ -120,7 +120,7 @@ $dynamicCommentsZeroText       = fb_norm_str(isset($attributes['dynamicCommentsZ
 $dynamicCommentsOneText        = fb_norm_str(isset($attributes['dynamicCommentsOneText']) ? $attributes['dynamicCommentsOneText'] : '');
 $dynamicCommentsManyText       = fb_norm_str(isset($attributes['dynamicCommentsManyText']) ? $attributes['dynamicCommentsManyText'] : '');
 
-$dynamicTermsTaxonomy          = fb_norm_str(isset($attributes['dynamicTermsTaxonomy']) ? $attributes['dynamicTermsTaxonomy'] : '');
+$dynamicTermsTaxonomy          = fb_norm_str(isset($attributes['dynamicTermsTaxonomy']) ? $attributes['dynamicTermsTaxonomy'] : 'category');
 $dynamicTermsSeparator         = fb_norm_str(isset($attributes['dynamicTermsSeparator']) ? $attributes['dynamicTermsSeparator'] : '');
 
 // -------- DYNAMIC: compute $dynamic_value and $dynamic_permalink ----------
@@ -261,7 +261,7 @@ if ( $dynamicEnabled ) {
                     if ( strpos( $manyTxt, '{num}' ) !== false ) {
                         $dynamic_value = str_replace( '{num}', (string) $count, $manyTxt );
                     } else {
-                        $dynamic_value = $manyTxt;
+                        $dynamic_value = $manyTxt; // no auto-append
                     }
                 }
                 break;
