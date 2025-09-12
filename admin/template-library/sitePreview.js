@@ -8,9 +8,20 @@ const SitePreview = () => {
 	useEffect(() => {
 		const currentOrigin = window.location.origin; // dynamic origin
 		const remoteUrl = encodeURIComponent('https://yakutansi.boomdevshub.com/?hide_admin_bar=true&preview=true');
-		const siteUrl = `${currentOrigin}/template-proxy/?url=${remoteUrl}`;
+
+		// 1. Try pretty permalink version first
+		let siteUrl = `${currentOrigin}/template-proxy/?url=${remoteUrl}`;
+
+		// 2. Fallback: check if pretty permalink is not supported
+		//    Simple trick: WordPress sites with "plain permalink" usually contain "?p=" in home URL
+		if (window?.wpApiSettings?.permalink_structure === '' || window.location.href.includes('index.php')) {
+			// fallback to query-string style
+			siteUrl = `${currentOrigin}/?template_proxy=1&url=${remoteUrl}`;
+		}
+
 		setPreviewUrl(siteUrl);
 	}, []);
+
 
 	// useEffect(() => {
 	// 	if (!isLoading && iframeRef.current) {

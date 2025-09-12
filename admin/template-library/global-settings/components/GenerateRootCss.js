@@ -356,7 +356,7 @@ const generateCSSVariables = (data, deviceType, previewType) => {
 
     let iframe;
 
-    // 🔹 Select iframe based on previewType
+    // Select iframe based on previewType
     if (previewType === "preview") {
         iframe = document.querySelector("iframe.fb-preview-frame");
     } else {
@@ -367,11 +367,9 @@ const generateCSSVariables = (data, deviceType, previewType) => {
 
     let iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
 
-    // 🔹 Style ID depends on preview mode
     const styleId = previewType === "preview" ? "global-typo-preview" : "global-typo";
     let styleTag = iframeDocument.getElementById(styleId);
 
-    // 🔹 Extra handling for post.php
     if (previewType !== "preview" && fileName === "post.php") {
         iframe = document.querySelector('iframe[name="editor-canvas"]');
         iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
@@ -380,21 +378,16 @@ const generateCSSVariables = (data, deviceType, previewType) => {
         console.log("iframeDocument", iframeDocument);
     }
 
-    // 🔹 Create <style> inside iframe if missing
     if (!styleTag) {
         styleTag = iframeDocument.createElement("style");
         styleTag.id = styleId;
         iframeDocument.head.appendChild(styleTag);
     }
 
-    // 🔹 ✅ Always inject variables inside iframe head
     styleTag.textContent = `
-        :root {
-            ${styles}
-        }
+        ${styles}
     `;
 
-    // 🔹 ✅ If not preview → also inject into main document
     if (previewType !== "preview") {
         let mainStyleTag = document.getElementById(styleId);
         if (!mainStyleTag) {
@@ -403,9 +396,7 @@ const generateCSSVariables = (data, deviceType, previewType) => {
             document.head.appendChild(mainStyleTag);
         }
         mainStyleTag.textContent = `
-            :root {
-                ${styles}
-            }
+            ${styles}
         `;
     }
 
