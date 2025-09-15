@@ -2,6 +2,7 @@
  * WordPress dependencies
  */
 import { useState, useEffect } from "@wordpress/element";
+import { toast } from "react-toastify";
 import { select, dispatch } from '@wordpress/data';
 import { createBlock } from '@wordpress/blocks';
 import { __ } from "@wordpress/i18n";
@@ -116,10 +117,59 @@ const PatternLibraryButton = () => {
         }
     };
 
+    const getPatternTemplatesData = async (value, email, license_key) => {
+        try {
+            const response = await patternsData({
+                endpoint: value,
+                body: {
+                    email: email,
+                    license_key: license_key
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).unwrap();
+
+            return response;
+        } catch (err) {
+            console.error('Error:', err);
+            console.error('Status:', err.status);
+            console.error('Data:', err.data);
+            if (err.status === 500) {
+                console.error('Server error. Check the API endpoint and server logs.');
+            }
+        }
+    };
+
+    const getSavedTemplatesData = async (value, email) => {
+        try {
+            const response = await patternsData({
+                endpoint: value,
+                body: {
+                    email: email
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).unwrap();
+
+            return response;
+        } catch (err) {
+            console.error('Error:', err);
+            console.error('Status:', err.status);
+            console.error('Data:', err.data);
+            if (err.status === 500) {
+                console.error('Server error. Check the API endpoint and server logs.');
+            }
+        }
+    };
+
     const alreadySaved = (savedItems, id, activeTab) => {
-        return activeTab !== 'templatelibrary'
-            ? savedItems.some(item => item?.id === id && item?.activeTab === activeTab)
-            : false;
+        if (activeTab !== 'templatelibrary') {
+            return savedItems.some(item => item?.id === id && item?.activeTab === 'templatelibrary');
+        }
+
+        return savedItems.some(item => item?.id === id && item?.activeTab === activeTab);
     };
 
     const removeSavedItem = (savedItems, id, activeTab) => {
@@ -128,123 +178,207 @@ const PatternLibraryButton = () => {
         );
     };
 
+    // useEffect(() => {
+    //     setIsLogedIn(true);
 
-    useEffect(() => {
-        setIsLogedIn(true);
-
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                const patterns = await getTemplatesData("patterns");
-                const pages = await getTemplatesData("pages");
-                const templatelibrary = await getTemplatesData("clouds");
+    //     const fetchData = async () => {
+    //         setLoading(true);
+    //         try {
+    //             const patterns = await getTemplatesData("patterns");
+    //             const pages = await getTemplatesData("pages");
+    //             const templatelibrary = await getTemplatesData("clouds");
                 
 
-                if (patterns) {
-                    setData((prev) => ({
-                        ...prev,
-                        patterns: {
-                            ...prev.patterns,
-                            items: patterns.items || [],
-                            categories: patterns.categories || [],
-                        },
-                    }));
-                }
+    //             if (patterns) {
+    //                 setData((prev) => ({
+    //                     ...prev,
+    //                     patterns: {
+    //                         ...prev.patterns,
+    //                         items: patterns.items || [],
+    //                         categories: patterns.categories || [],
+    //                     },
+    //                 }));
+    //             }
 
-                if (pages) {
-                    setData((prev) => ({
-                        ...prev,
-                        pages: {
-                            ...prev.pages,
-                            items: pages.items || [],
-                            categories: pages.categories || [],
-                        },
-                    }));
-                }
+    //             if (pages) {
+    //                 setData((prev) => ({
+    //                     ...prev,
+    //                     pages: {
+    //                         ...prev.pages,
+    //                         items: pages.items || [],
+    //                         categories: pages.categories || [],
+    //                     },
+    //                 }));
+    //             }
 
-                if (sites) {
-                    setData((prev) => ({
-                        ...prev,
-                        sites: {
-                            ...prev.sites,
-                            items: sites.items || [],
-                            categories: sites.categories || [],
-                        },
-                    }));
-                }
+    //             if (sites) {
+    //                 setData((prev) => ({
+    //                     ...prev,
+    //                     sites: {
+    //                         ...prev.sites,
+    //                         items: sites.items || [],
+    //                         categories: sites.categories || [],
+    //                     },
+    //                 }));
+    //             }
 
-                setData((prev) => ({
-                    ...prev,
-                    templatelibrary: {
-                        ...prev.templatelibrary,
-                        items: TemplateLibrary.items || [],
-                        categories: TemplateLibrary.categories || []
+    //             setData((prev) => ({
+    //                 ...prev,
+    //                 templatelibrary: {
+    //                     ...prev.templatelibrary,
+    //                     items: TemplateLibrary.items || [],
+    //                     categories: TemplateLibrary.categories || []
+    //                 }
+    //             }));
+    //         } catch (err) {
+    //             console.error("Error fetching templates:", err);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+
+    //     fetchData();
+    // }, []);
+
+    useEffect(() => {
+        setIsLogedIn(true); // Assuming this is part of your auth logic
+
+        // Only fetch if the tab's data is not already present
+        if (data[activeTab].items.length === 0) {
+            const fetchData = async () => {
+                setLoading(true);
+
+                try {
+                    let response;
+                    if (activeTab === 'patterns') {
+                        response = await getPatternTemplatesData("patterns", "fasfeagaeg@gmail.com", "8c29b662-1837-419e-9e28-96042a27cf02");
+                        if (response) {
+                            setData((prev) => ({
+                                ...prev,
+                                patterns: {
+                                    ...prev.patterns,
+                                    items: response.items || [],
+                                    categories: response.categories || [],
+                                },
+                            }));
+                        }
+                    } else if (activeTab === 'pages') {
+                        response = await getTemplatesData("pages");
+                        if (response) {
+                            setData((prev) => ({
+                                ...prev,
+                                pages: {
+                                    ...prev.pages,
+                                    items: response.items || [],
+                                    categories: response.categories || [],
+                                },
+                            }));
+                        }
+                    } else if (activeTab === 'sites') {
+                        response = await getTemplatesData("sites");
+                        if (response) {
+                            setData((prev) => ({
+                                ...prev,
+                                sites: {
+                                    ...prev.sites,
+                                    items: response.items || [],
+                                    categories: response.categories || [],
+                                },
+                            }));
+                        }
+                    } else if (activeTab === 'templatelibrary') {
+                        let userData = JSON.parse(localStorage.getItem("userData"));
+                        response = await getSavedTemplatesData("clouds", "fasfeagaeg@gmail.com");
+                        if (response) {
+                            setData((prev) => ({
+                                ...prev,
+                                templatelibrary: {
+                                    ...prev.templatelibrary,
+                                    items: response.items || [],
+                                    categories: TemplateLibrary.categories || [],
+                                },
+                            }));
+                        }
                     }
-                }));
-            } catch (err) {
-                console.error("Error fetching templates:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
+                } catch (err) {
+                    console.error(`Error fetching ${activeTab}:`, err);
+                } finally {
+                    setLoading(false);
+                }
+            };
 
-        fetchData();
-    }, []);
-
-    useEffect(async () => {
-        // if (activeTab === 'patterns') {
-        //     const fetchPatternsData = async () => {
-        //         setLoading(true);
-
-        //         try {
-        //             const patterns = await getTemplatesData("patterns");
-        //             if (patterns) {
-        //                 setData((prev) => ({
-        //                     ...prev,
-        //                     patterns: {
-        //                         ...prev.patterns,
-        //                         items: patterns.items || [],
-        //                         categories: patterns.categories || [],
-        //                     },
-        //                 }));
-        //             }
-        //         } catch (err) {
-        //             console.error("Error fetching patterns:", err);
-        //         } finally {
-        //             setLoading(false);
-        //         }
-        //     };
-
-        //     fetchPatternsData();
-        // }
-
-        // if (activeTab === 'templatelibrary') {
-        //     const fetchTemplateLibraryData = async () => {
-        //         setLoading(true);
-
-        //         try {
-        //             const templatelibrary = await getTemplatesData("clouds");
-        //             if (patterns) {
-        //                 setData((prev) => ({
-        //                     ...prev,
-        //                     patterns: {
-        //                         ...prev.patterns,
-        //                         items: templatelibrary.items || [],
-        //                         categories: patterns.categories || [],
-        //                     },
-        //                 }));
-        //             }
-        //         } catch (err) {
-        //             console.error("Error fetching patterns:", err);
-        //         } finally {
-        //             setLoading(false);
-        //         }
-        //     };
-
-        //     fetchTemplateLibraryData();
-        // }
+            fetchData();
+        }
     }, [activeTab]);
 
+    const handleSaveLibrary = async (templateData, isAlreadySaved) => {
+        if (isAlreadySaved) return;
+
+        if (loading) return;
+        setLoading(true);
+
+        let userData = JSON.parse(localStorage.getItem("userData"));
+
+        setData((prev) => {
+            const updatedItems = prev.patterns.items.map((item) =>
+                item.id === templateData.id ? { ...item, loading: true } : item
+            );
+            return {
+                ...prev,
+                patterns: {
+                    ...prev.patterns,
+                    items: updatedItems,
+                },
+            };
+        });
+
+        const apiBase = "https://frontis-sync.boomdevshub.com/wp-json";
+        const body = {
+            email: userData.email,
+            item_id: templateData.id,
+            item_type: templateData.type,
+            license_key: FB_TLibrary.activationKey,
+            website: window.location.origin,
+        };
+
+        const response = await fetch(`${apiBase}/frontis-sync/v1/saved-item`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body),
+        });
+
+        const responseData = await response.json();
+
+        if(responseData.status === 'success') {
+            toast.success('Template saved to library', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+            });
+
+            setData((prev) => {
+                const updatedItems = prev.patterns.items.map((item) =>
+                    item.id === templateData.id ? { ...item, saved: true, loading: false } : item
+                );
+                return {
+                    ...prev,
+                    patterns: {
+                        ...prev.patterns,
+                        items: updatedItems,
+                    },
+                };
+            });
+        } else {
+            toast.error('Failed to save template', {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        }
+    }
 
     const TagTabsOptions = (() => {
         if (!data[activeTab]) return [];
@@ -304,7 +438,7 @@ const PatternLibraryButton = () => {
                                     setLoading={setLoading}
                                 />
 
-                                {/* {activeTab === 'patterns' && (
+                                {activeTab === 'patterns' && (
                                     <TemplateContent
                                         activeTab={activeTab}
                                         activeCategory={activeCategory}
@@ -319,35 +453,36 @@ const PatternLibraryButton = () => {
                                         savedItems={savedItems}
                                         setSavedItems={setSavedItems}
                                         alreadySaved={alreadySaved}
-                                        loading={loading}
-                                        setLoading={setLoading}
+                                        loading={isLoading}
+                                        setLoading={loading}
                                         setIsLogedIn={setIsLogedIn}
                                         setActiveCategory={setActiveCategory}
+                                        onSaveLibrary={handleSaveLibrary}
                                     />
-                                )} */}
+                                )}
 
                                 {
-                                activeTab !== 'templatelibrary' && (
-                                    <TemplateContent
-                                        activeTab={activeTab}
-                                        activeCategory={activeCategory}
-                                        setLibraryData={setLibraryData}
-                                        data={data}
-                                        setIsVisible={setIsVisible}
-                                        isProTemplate={isProTemplate}
-                                        activeTagTab={activeTagTab[activeTab]}
-                                        setActiveTagTab={(value) => setActiveTagTab({ ...activeTagTab, [activeTab]: value })}
-                                        TagTabsOptions={TagTabsOptions}
-                                        isLogedIn={isLogedIn}
-                                        savedItems={savedItems}
-                                        setSavedItems={setSavedItems}
-                                        alreadySaved={alreadySaved}
-                                        loading={loading}
-                                        setLoading={setLoading}
-                                        setIsLogedIn={setIsLogedIn}
-                                        setActiveCategory={setActiveCategory}
-                                    />
-                                )
+                                // activeTab !== 'templatelibrary' && (
+                                //     <TemplateContent
+                                //         activeTab={activeTab}
+                                //         activeCategory={activeCategory}
+                                //         setLibraryData={setLibraryData}
+                                //         data={data}
+                                //         setIsVisible={setIsVisible}
+                                //         isProTemplate={isProTemplate}
+                                //         activeTagTab={activeTagTab[activeTab]}
+                                //         setActiveTagTab={(value) => setActiveTagTab({ ...activeTagTab, [activeTab]: value })}
+                                //         TagTabsOptions={TagTabsOptions}
+                                //         isLogedIn={isLogedIn}
+                                //         savedItems={savedItems}
+                                //         setSavedItems={setSavedItems}
+                                //         alreadySaved={alreadySaved}
+                                //         loading={loading}
+                                //         setLoading={setLoading}
+                                //         setIsLogedIn={setIsLogedIn}
+                                //         setActiveCategory={setActiveCategory}
+                                //     />
+                                // )
                                 }
 
                                 {activeTab === 'templatelibrary' && (

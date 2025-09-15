@@ -22,9 +22,6 @@ const LibraryContent = ({ activeTab, activeCategory, setActiveCategory, data, li
         { name: 'Sites', value: 'sites' },
     ];
 
-    console.log(libraryData);
-    console.log(data);
-
     const CardListOptions = [
         {
             svg: (
@@ -79,17 +76,19 @@ const LibraryContent = ({ activeTab, activeCategory, setActiveCategory, data, li
     };
     
     useEffect(() => {
-        setOriginalLibraryData(libraryData);
-        setDisplayedData(data.templatelibrary.items);
+        setOriginalLibraryData(schema[activeTab]?.items || []);
+        setDisplayedData(schema[activeTab]?.items || []);
         setSearchItems('');
-    }, [libraryData]);
+    }, [schema]);
 
     useEffect(() => {
+        let libraryData = schema[activeTab]?.items || [];
+        
         let filteredData = originalLibraryData;
 
         // Filter by activeTab when not 'all'
         if (activeFavoriteTab !== 'all') {
-            filteredData = filteredData.filter(item => item.activeTab === activeFavoriteTab);
+            filteredData = filteredData.filter(item => item.item_type === activeFavoriteTab);
         }
 
         if (activeCategory.templatelibrary === 'my-favourites') {
@@ -110,10 +109,13 @@ const LibraryContent = ({ activeTab, activeCategory, setActiveCategory, data, li
         }, 2000)
 
         setDisplayedData(filteredData);
-    }, [activeFavoriteTab, originalLibraryData, searchItems, activeCategory.templatelibrary]);
+    }, [activeFavoriteTab, activeCategory, searchItems, originalLibraryData]);
 
     const handleFavoriteTabClick = useCallback((tab) => {
         setActiveFavoriteTab(tab.value);
+        console.log(tab.value);
+        console.log(tab);
+        
         setSearchItems('');
     }, []);
 

@@ -36,11 +36,13 @@ const TemplateGrid = ({
     setIsVisible,
     isLibrary = false,
     handleRemoveLibraryItem,
+    onSaveLibrary,
     savedItems = [],
     setSavedItems = [],
     alreadySaved = () => { },
-    setActiveCategory
-
+    setActiveCategory,
+    saved,
+    setLoading
     // setIsPladmin
 }) => {
 
@@ -137,39 +139,39 @@ const TemplateGrid = ({
     };
 
     const handleSaveLibrary = useCallback(async () => {
-        if (isAlreadySaved) return;
+        // if (isAlreadySaved) return;
 
-        console.log(templateData);
-        
+        // let userData = JSON.parse(localStorage.getItem("userData"));
 
-        setLibraryData(prevData => [...prevData, templateData]);
-        setSavedItems(prev => [...prev, templateData]);
+        // // setLibraryData(prevData => [...prevData, templateData]);
+        // // setSavedItems(prev => [...prev, templateData]);
 
-        const apiBase = "https://frontis-sync.boomdevshub.com/wp-json";
-        const body = {
-            item_id: templateData.id,
-            item_type: templateData.type,
-            license_key: FB_TLibrary.activationKey,
-            website: window.location.origin,
-        };
+        // const apiBase = "https://frontis-sync.boomdevshub.com/wp-json";
+        // const body = {
+        //     email: userData.email,
+        //     item_id: templateData.id,
+        //     item_type: templateData.type,
+        //     license_key: FB_TLibrary.activationKey,
+        //     website: window.location.origin,
+        // };
 
-        const response = await fetch(`${apiBase}/frontis-sync/v1/saved-item`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body),
-        });
+        // const response = await fetch(`${apiBase}/frontis-sync/v1/saved-item`, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify(body),
+        // });
 
-        const responseData = await response.json();
+        // const responseData = await response.json();
 
-        toast.success('Template saved to library', {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-        });
+        // toast.success('Template saved to library', {
+        //     position: "top-right",
+        //     autoClose: 3000,
+        //     hideProgressBar: false,
+        //     closeOnClick: true,
+        //     pauseOnHover: true,
+        // });
     }, [isAlreadySaved, templateData, setLibraryData, setSavedItems]);
 
     const fetImportData = () => {
@@ -461,14 +463,19 @@ const TemplateGrid = ({
                         <span>Import</span>
                     </button>
                     <button
-                        className={`fb-template-save-my-cloud ${isLoading ? "loading" : ""}`}
+                        className={`fb-template-save-my-cloud ${setLoading ? "loading" : ""}`}
                         onClick={() => {
-                            if (isLoading || isAlreadySaved) return;
-                            isLibrary ? handleRemoveLibraryItem(id, templateType) : handleSaveLibrary();
+                            if(setLoading) return;
+                            isLibrary ? handleRemoveLibraryItem(id, templateType) : onSaveLibrary(templateData, isAlreadySaved);
                         }}
-                        disabled={isLoading || isAlreadySaved}
+                        disabled={setLoading || saved}
                     >
-                        {isAlreadySaved ? (
+                        {setLoading ? (
+                            <>
+                                <span>Saving...</span>
+                                <ClipLoader color="fff" size={16} />
+                            </>
+                        ) : saved ? (
                             <span>Saved</span>
                         ) : isLibrary ? (
                             <span>Remove</span>

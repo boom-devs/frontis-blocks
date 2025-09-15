@@ -52,8 +52,11 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 		setActiveTab(tab);
 		clearErrors();
 	};
+
 	const onSubmit = useCallback(
 		async (data) => {
+			clearErrors();
+
 			// Validate terms and privacy for signup
 			if (activeTab === "signup") {
 				if (!agreedToTerms) {
