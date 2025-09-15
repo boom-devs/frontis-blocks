@@ -22,7 +22,8 @@ class TemplateLibrary extends AjaxBase {
 	public function register_ajax_events() {
 		$ajax_events = [
 			'update_option',
-			'get_option'
+			'get_option',
+            'full_site_import'
 		];
 
 		$this->init_ajax_events($ajax_events);
@@ -68,4 +69,23 @@ class TemplateLibrary extends AjaxBase {
         }
     }
 
+    public function  full_site_import() {
+        $this->check_permission();
+
+        $title = isset($_POST['title']) ? $_POST['title'] : '';
+        $content = isset($_POST['content']) ? $_POST['content'] : '';
+        
+        $page_id = wp_insert_post([
+            'post_title' => $title,
+            'post_content' => $content,
+            'post_status' => 'publish',
+            'post_type' => 'page',
+        ]);
+        
+        if ($page_id) {
+            wp_send_json_success(['message' => 'Page created successfully']);
+        } else {
+            wp_send_json_error(['message' => 'Failed to create page']);
+        }
+    }
 }
