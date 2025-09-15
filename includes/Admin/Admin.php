@@ -2,6 +2,7 @@
 
 namespace FrontisBlocks\Admin;
 use FrontisBlocks\Admin\Settings;
+use FrontisBlocks\Admin\TemplateLibrary;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Utils\Helper;

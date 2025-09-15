@@ -8,7 +8,7 @@ import { ClipLoader } from "react-spinners";
 import TemplateImport from "./template-import";
 import PluginUpgradeModal from "./plugin-upgrade";
 import { TemplateLoader } from "./template-loader";
-import { usePostDataMutation } from "./services/api";
+import { usePostDataMutation } from "./services/laravelapi";
 import { select, dispatch } from '@wordpress/data';
 import { createBlock, parse, rawHandler } from '@wordpress/blocks';
 import { useState, useEffect, useCallback } from "@wordpress/element";
@@ -30,6 +30,7 @@ const TemplateGrid = ({
     customTypographies,
     globalTypographies,
     fontFamilies,
+    pages,
     categories,
     activeTab,
     setLibraryData,
@@ -41,7 +42,9 @@ const TemplateGrid = ({
     savedItems = [],
     setSavedItems = [],
     alreadySaved = () => { },
-    setActiveCategory
+    setActiveCategory,
+    setIsLoginModalOpen,
+    isLoginModalOpen
 
     // setIsPladmin
 }) => {
@@ -55,12 +58,17 @@ const TemplateGrid = ({
     const [freeTemplate, setFreeTemplate] = useState(false);
 
     const isAlreadySaved = alreadySaved(savedItems, id, activeTab)
+    const userData = localStorage.getItem('userData');
 
     const handleFullSiteImport = useCallback(() => {
         // if (!isPluginUpgrade) {
         //     setIsPladmin / template - library / scss / _main - content.scssuginUpgradeModalOpen(true);
         // }
         // if (!is_premium && isLogedIn) {
+        if (!userData) {
+            setIsLoginModalOpen(true);
+            return;
+        }
         setIsModalOpen(true);
         // }
     }, [is_premium, isLogedIn, isPluginUpgrade]);
@@ -104,13 +112,29 @@ const TemplateGrid = ({
         customTypographies,
         globalTypographies,
         fontFamilies,
+        pages,
         dependencies,
         dateAndTime: currentDateAndTime,
         type: templateType
     };
 
     const handleSaveLibrary = useCallback(() => {
-        if (isAlreadySaved) return;
+        if (!userData) {
+            setIsLoginModalOpen(true);
+            return;
+        }
+
+        if (isAlreadySaved) {
+            toast.warn(__(`Template already saved`, 'frontis-blocks'), {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+            });
+            console.log('Template already saved');
+            return;
+        }
 
         setLibraryData(prevData => [...prevData, templateData]);
         setSavedItems(prev => [...prev, templateData]);
@@ -124,13 +148,8 @@ const TemplateGrid = ({
         });
     }, [isAlreadySaved, templateData, setLibraryData, setSavedItems]);
 
-    const fetImportData = () => {
 
-    }
-
-    const [patternsData, { data: patternsResponse, error, isLoading: dataLoading }] = usePostDataMutation();
-
-
+    const [patternsData] = usePostDataMutation();
     const getTemplatesData = async (route, key, id) => {
         try {
             const response = await patternsData({
@@ -155,6 +174,12 @@ const TemplateGrid = ({
     };
 
     const importPattern = async (id) => {
+
+        if (!userData) {
+            setIsLoginModalOpen(true);
+            return;
+        }
+
         setIsLoading(true);
 
         const patterns = await getTemplatesData("import/pattern", 'pattern_id', id);
@@ -194,6 +219,11 @@ const TemplateGrid = ({
         setIsVisible(false);
     };
     const importPage = async (id) => {
+        if (!userData) {
+            setIsLoginModalOpen(true);
+            return;
+        }
+
         setIsLoading(true);
 
         const page = await getTemplatesData("import/page", 'page_id', id);
@@ -342,10 +372,10 @@ const TemplateGrid = ({
                     <button
                         className={`fb-template-save-my-cloud ${isLoading ? "loading" : ""}`}
                         onClick={() => {
-                            if (isLoading || isAlreadySaved) return;
+                            if (isLoading) return;
                             isLibrary ? handleRemoveLibraryItem(id, templateType) : handleSaveLibrary();
                         }}
-                        disabled={isLoading || isAlreadySaved}
+                        disabled={isLoading}
                     >
                         {isLoading ? (
                             <>

@@ -5,8 +5,9 @@ import { __ } from "@wordpress/i18n";
 import LoginSignupModal from "./login-signup";
 import { useState, useEffect, useCallback } from "@wordpress/element";
 import TemplateGrid from "./template-grid";
-import { ToastContainer } from "react-toastify";
+import {ToastContainer, toast } from "react-toastify";
 import { TemplateContentLoader } from "./template-loader";
+import { usePostDataMutation } from "./services/wpapi";
 
 const TemplateContent = ({
     activeTab,
@@ -106,7 +107,64 @@ const TemplateContent = ({
 
     }, [activeTab, activeCategory, isProTemplate, activeTagTab, TagTabsOptions, schema]);
 
-    const handleLoginSuccess = useCallback(() => {
+    const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
+
+    // Update user data inside database
+    const updateUserDataToDb = (optionName, data) => {
+        window.jQuery.ajax({
+            url: ajaxUrl,
+            type: 'POST',
+            data: {
+                action: 'fb_update_option',
+                'option_name': optionName,
+                'value': data,
+                security: nonce
+            },
+            success: function(response) {
+                console.log(response)
+            },
+            error: function(xhr, status, error) {
+                console.log("Somthing went wrong.")
+            }
+        });
+    }
+
+    const getUserDataFromDb = () => {
+        window.jQuery.ajax({
+            data: {
+                action: 'fb_get_option',
+                'option_name': 'frontis_tl_user_data',
+                security: nonce,
+            },
+            success: function(response) {
+                localStorage.setItem('userData', JSON.stringify(response.data));
+            },
+            error: function(xhr, status, error) {
+                console.log("Somthing went wrong.")
+            }
+        });
+    }
+
+    const handleLoginSuccess = useCallback((response, activeTab) => {
+        toast( activeTab === "signup" ? "Your account has been created!" : "Logged in successfully!", {
+            position:"top-right",
+            autoClose:3000,
+            hideProgressBar:false,
+            newestOnTop:false,
+            closeOnClick:true,
+            rtl:false,
+            pauseOnFocusLoss:true,
+            draggable:true,
+            pauseOnHover:true,
+            theme:"light"
+        } );
+
+        updateUserDataToDb('frontis_tl_user_data', {
+            'name': response?.user?.name,
+            'email': response?.user?.email,
+            'access_token': response?.access_token,
+            'refresh_token': response?.refresh_token,
+        })
         setIsLoginModalOpen(false);
         setIsLogedIn(true);
     }, []);
@@ -116,6 +174,21 @@ const TemplateContent = ({
     }, []);
 
     const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+    // Get user data from local storage
+    useEffect(() => {
+        // Get userData from local storage
+        const userData = localStorage.getItem('userData');
+        if (userData === 'undefined' || userData === 'null' || userData === '') {
+            getUserDataFromDb();
+        }
+
+        // Get user data from localstorage and set setIsLoginModalOpen is false
+        if (userData) {
+            setIsLoginModalOpen(false);
+        }
+        
+    }, []);
 
     return (
         <>
@@ -172,19 +245,7 @@ const TemplateContent = ({
                                 </div>
                             </div>
                         </div>
-                        <ToastContainer
-                            position="top-right"
-                            autoClose={3000}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover
-                            theme="light"
-                        />
-
+                        <ToastContainer />
                         <div className="fb-template-library-cards">
                             {filteredTemplates && filteredTemplates.length > 0 ? (
                                 filteredTemplates.map(template => (
@@ -205,6 +266,7 @@ const TemplateContent = ({
                                         customTypographies={template.customTypographies || {}}
                                         globalTypographies={template.globalTypographies || {}}
                                         fontFamilies={template.fontFamilies || {}}
+                                        pages={template.pages || []}
                                         dependencies={template.dependencies || []}
                                         activeTab={activeTab}
                                         setLibraryData={setLibraryData}
@@ -215,6 +277,8 @@ const TemplateContent = ({
                                         setSavedItems={setSavedItems}
                                         alreadySaved={alreadySaved}
                                         setActiveCategory={setActiveCategory}
+                                        setIsLoginModalOpen={setIsLoginModalOpen}
+                                        isLoginModalOpen={isLoginModalOpen}
                                     />
                                 ))
                             ) : (
@@ -224,12 +288,14 @@ const TemplateContent = ({
                     </>
                 )}
             </div>
-            {/* {isLoginModalOpen && (
+            {isLoginModalOpen && (
                 <LoginSignupModal
                     onLoginSuccess={handleLoginSuccess}
                     onRequestClose={handleCloseLoginModal}
+                    isLoginModalOpen={isLoginModalOpen}
+                    setIsLoginModalOpen={setIsLoginModalOpen}
                 />
-            )} */}
+            )}
         </>
     );
 };

@@ -26,9 +26,9 @@ const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
         console.log('Download clicked for:', template?.id);
     }, [template?.id]);
 
-    const handleFullSiteImportClose = useCallback(() => {
-        setShowFullSiteImport(false);
-    }, []);
+    // const handleFullSiteImportClose = useCallback(() => {
+    //     setShowFullSiteImport(false);
+    // }, []);
 
     if (!template) {
         return null;
@@ -60,7 +60,7 @@ const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
                 <FullSiteImport
                     data={data}
                     template={template}
-                    onClose={handleFullSiteImportClose}
+                    onClose={onClose}
                     onBack={() => setShowFullSiteImport(false)}
                 />
             </>

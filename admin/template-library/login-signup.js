@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "@wordpress/element";
 import { useForm } from "react-hook-form";
 import { ClipLoader } from "react-spinners";
 
-const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
+const LoginSignupModal = ({ onLoginSuccess = () => {}, isLoginModalOpen, setIsLoginModalOpen }) => {
 	const [activeTab, setActiveTab] = useState("login");
 	const [isLoading, setIsLoading] = useState(false);
 	const [agreedToTerms, setAgreedToTerms] = useState(false);
@@ -28,13 +28,6 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 			remember_me: false,
 		},
 	});
-
-	useEffect(() => {
-		const localUserData = JSON.parse(localStorage.getItem("userData"));
-		if (localUserData?.username) {
-			onLoginSuccess(localUserData);
-		}
-	}, [onLoginSuccess]);
 
 	function generateValidationKey() {
 		const timestamp = Math.floor(Date.now() / 1000); // Current Unix timestamp in seconds
@@ -87,11 +80,12 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 							first_name: data.first_name,
 							last_name: data.last_name,
 							password: data.password,
-							device_name: deviceName,
+							device_name: deviceName
 						}
 						: {
 							email: data.email,
 							password: data.password,
+							device_name: deviceName
 						};
 
 				const response = await fetch(`${apiBase}/frontis-sync/v1/${endpoint}`, {
@@ -104,8 +98,7 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 				});
 
 				const responseData = await response.json();
-				console.log(response)
-
+				
 				if (!response.ok) {
 					const errorMessage = responseData.message || "Something went wrong";
 					if (responseData.code === "invalid_username") {
@@ -121,11 +114,19 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 				}
 
 				// Success case
-				if (responseData.user_data) {
-					localStorage.setItem("userData", JSON.stringify(responseData.user_data));
-					onLoginSuccess(responseData.user_data);
+				if (responseData.status) {
+					const responseUserData = {
+						'name': responseData?.user?.name,
+						'email': responseData?.user?.email,
+						'access_token': responseData?.access_token,
+						'refresh_token': responseData?.refresh_token,
+					}
+
+					localStorage.setItem("userData", JSON.stringify(responseUserData));
+					onLoginSuccess(responseData, activeTab);
 				} else {
-					throw new Error("Invalid response data: user_data missing");
+					setIsLoading(false);
+					throw new Error("Something went wrong try again letter");
 				}
 			} catch (error) {
 				console.error(`${activeTab} failed:`, error);
@@ -138,8 +139,8 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 	);
 
 	return (
-		<div className="fb-auth-modal">
-			<div className="fb-auth-container">
+		<div className="fb-auth-modal" onClick={() => isLoginModalOpen && setIsLoginModalOpen(false)}>
+			<div className="fb-auth-container" onClick={(e) => e.stopPropagation()}>
 				{/* Header with tabs */}
 				<div className="fb-auth-header">
 					<div className="fb-auth-tabs">
@@ -433,7 +434,7 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 					<button
 						type="submit"
 						className={`fb-auth-submit-btn ${isLoading ? "loading" : ""}`}
-						disabled={isLoading}
+						// disabled={isLoading}
 					>
 						{isLoading ? (
 							<>

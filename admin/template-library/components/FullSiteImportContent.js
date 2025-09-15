@@ -4,13 +4,8 @@ const FullSiteImportContent = ({template}) => {
   return (
                     <div className="fb-import-preview-panel">
                         <div className="fb-template-preview-card">
-                            {/* <img
-                                src={`https://leech-better-moose.ngrok-free.app/storage/${template?.image}`}
-                                alt={template?.title}
-                                className="fb-preview-image"
-                            /> */}
                             <SitePreview />
-                            <div className="fb-preview-info">
+                            {/* <div className="fb-preview-info">
                                 <h3 className="fb-preview-title">
                                     {template?.title}
                                 </h3>
@@ -26,7 +21,7 @@ const FullSiteImportContent = ({template}) => {
                                     </span>
                                     <span className="fb-preview-type">{template.is_premium ? "PRO" : "FREE"}</span>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
   )
