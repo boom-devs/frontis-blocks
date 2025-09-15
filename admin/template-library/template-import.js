@@ -10,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 
 const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
     const [isImporting, setIsImporting] = useState(false);
-    const [activeTab, setActiveTab] = useState('patterns');
+    const [activeTab, setActiveTab] = useState(template.activeTab || 'pattern');
     const [showFullSiteImport, setShowFullSiteImport] = useState(false);
 
     const handleFullSiteImport = useCallback(async () => {

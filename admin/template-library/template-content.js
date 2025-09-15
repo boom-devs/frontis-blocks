@@ -27,9 +27,10 @@ const TemplateContent = ({
     loading,
     setLoading,
     setIsLogedIn,
-    setActiveCategory
+    setActiveCategory,
+    setIsLoginModalOpen,
+    isLoginModalOpen
 }) => {
-    const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
     const [originalTemplates, setOriginalTemplates] = useState([]);
@@ -178,6 +179,7 @@ const TemplateContent = ({
     // Get user data from local storage
     useEffect(() => {
         // Get userData from local storage
+        
         const userData = localStorage.getItem('userData');
         if (userData === 'undefined' || userData === 'null' || userData === '') {
             getUserDataFromDb();

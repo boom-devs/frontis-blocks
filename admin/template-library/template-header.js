@@ -43,6 +43,8 @@ const TemplateHeader = ({
     setActiveCategory = () => { },
     setResetCat = () => { },
     setLoading = () => { },
+    isLoginModalOpen,
+    setIsLoginModalOpen,
 }) => {
     
     const schema = data;
@@ -54,23 +56,32 @@ const TemplateHeader = ({
     const userData = localStorage.getItem('userData');
 
     const handleTabClick = (tab) => {
-        if (tab.label === 'Template Library') {
-            if (!userData) {
-                setIsLoginModalOpen(true);
-                return;
-            }
+        if (tab.label === 'Template Library' && !userData) {
+            setIsLoginModalOpen(true);
+            return;
         }
-        setActiveTab(tab.id);
+    
+        if (activeTab !== tab.id) {
+            setActiveTab(tab.id);
+        }
+    
         setIsProTemplate('');
-        setActiveCategory((prev) => ({
-            ...prev,
-            patterns: 'all',
-            pages: 'all',
-            sites: 'all',
-        }));
+    
+        setActiveCategory((prev) => {
+            const updated = {
+                ...prev,
+                patterns: 'all',
+                pages: 'all',
+                sites: 'all',
+            };
+
+            return JSON.stringify(prev) === JSON.stringify(updated) ? prev : updated;
+        });
+    
         setResetCat(true);
-        setLoading(true)
-    }
+        setLoading(true);
+    };
+    
 
     return (
         <div className="fb-template-library-store-header">

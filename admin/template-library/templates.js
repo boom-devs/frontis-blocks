@@ -39,6 +39,7 @@ const PatternLibraryButton = () => {
     });
     const [libraryData, setLibraryData] = useState([]);
     const [savedItems, setSavedItems] = useState([]);
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
 
     const handleClick = () => {
         setIsVisible(!isVisible);
@@ -235,6 +236,8 @@ const PatternLibraryButton = () => {
                                     resetCat={resetCat}
                                     setResetCat={setResetCat}
                                     setLoading={setLoading}
+                                    isLoginModalOpen={isLoginModalOpen}
+                                    setIsLoginModalOpen={setIsLoginModalOpen}
                                 />
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">
@@ -271,6 +274,8 @@ const PatternLibraryButton = () => {
                                         setLoading={setLoading}
                                         setIsLogedIn={setIsLogedIn}
                                         setActiveCategory={setActiveCategory}
+                                        setIsLoginModalOpen={setIsLoginModalOpen}
+                                        isLoginModalOpen={isLoginModalOpen}
                                     />
                                 )}
                                 {activeTab === 'templatelibrary' && (
@@ -292,6 +297,8 @@ const PatternLibraryButton = () => {
                                         setSavedItems={setSavedItems}
                                         loading={loading}
                                         setLoading={setLoading}
+                                        setIsLoginModalOpen={setIsLoginModalOpen}
+                                        isLoginModalOpen={isLoginModalOpen}
                                     />
                                 )}
 
