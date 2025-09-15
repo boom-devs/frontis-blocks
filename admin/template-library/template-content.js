@@ -27,7 +27,8 @@ const TemplateContent = ({
     loading,
     setLoading,
     setIsLogedIn,
-    setActiveCategory
+    setActiveCategory,
+    onSaveLibrary
 }) => {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
     const schema = data || {};
@@ -101,9 +102,9 @@ const TemplateContent = ({
             setSearchItems('');
         }
 
-        setTimeout(() => {
-            setLoading(false)
-        }, 2000)
+        // setTimeout(() => {
+        //     setLoading(false)
+        // }, 2000)
 
     }, [activeTab, activeCategory, isProTemplate, activeTagTab, TagTabsOptions, schema]);
 
@@ -274,6 +275,9 @@ const TemplateContent = ({
                                         setSavedItems={setSavedItems}
                                         alreadySaved={alreadySaved}
                                         setActiveCategory={setActiveCategory}
+                                        onSaveLibrary={onSaveLibrary}
+                                        saved={template.saved}
+                                        setLoading={template.loading}
                                     />
                                 ))
                             ) : (
