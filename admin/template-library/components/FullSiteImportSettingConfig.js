@@ -2,7 +2,6 @@ import { __ } from "@wordpress/i18n";
 import { ClipLoader } from "react-spinners";
 import FsiGbTypography from "../global-settings/global-settings";
 import { useCallback, useEffect, useState } from "@wordpress/element";
-import { toast, ToastContainer } from "react-toastify";
 import { useDeviceType } from "@Config/displayType";
 import generateCSSVariables from "../global-settings/components/GenerateRootCss";
 import { updateGlobalStyle } from "../global-settings/fetch";
@@ -29,8 +28,40 @@ const FullSiteImportSettingConfig = ({
 	const [customTypography, setCustomTypography] = useState(template.customTypographies);
 	const [fontFamilies, setFontFamilies] = useState(template.fontFamilies);
 	const [globalTypography, setGlobalTypography] = useState(template.globalTypographies);
+    const [pages, setPages] = useState(template.pages);
+
+    const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
     const deviceType = useDeviceType();
+
+
+    const handleStorePages = async () => {
+        for (const page of pages) {
+          try {
+            const pageData = new FormData();
+            pageData.append("action", "fb_full_site_import");
+            pageData.append("security", nonce);
+            pageData.append("title", page.title);
+            pageData.append("content", page.content);
+      
+            const response = await fetch(ajaxUrl, {
+              method: "POST",
+              body: pageData,
+              credentials: "same-origin",
+            });
+      
+            const result = await response.json();
+      
+            if (result.success) {
+              console.log(`${page.title} created successfully`);
+            } else {
+              console.error(`Failed to create ${page.title}`, result.data);
+            }
+          } catch (error) {
+            console.error(`Error creating ${page.title}:`, error);
+          }
+        }
+      };
 
     
 	// Utility to extract font families
@@ -219,65 +250,58 @@ const FullSiteImportSettingConfig = ({
     const handleImport = useCallback(async () => {
         setIsImporting(true);
         setImportProgress(0);
-
-        const steps = [ 
-            'Preparing import...',
-            'Importing content...',
-            'Setting up customizer...',
-            'Configuring widgets...',
-            'Finalizing setup...'
+      
+        const steps = [
+          "Preparing import...",
+          "Importing content...",
+          "Setting up customizer...",
+          "Configuring widgets...",
+          "Creating pages...",
+          "Finalizing setup...",
         ];
-
+      
         try {
-            for (let i = 0; i < steps.length; i++) {
-                setCurrentStep(steps[i]);
-                setImportProgress(((i + 1) / steps.length) * 100);
-                await new Promise(resolve => setTimeout(resolve, 1500));
+          for (let i = 0; i < steps.length; i++) {
+            setCurrentStep(steps[i]);
+            setImportProgress(((i + 1) / steps.length) * 100);
+      
+            if (steps[i] === "Creating pages...") {
+              await handleStorePages();
+            } else {
+              await new Promise((resolve) => setTimeout(resolve, 1500));
             }
-
-            console.log('Full site import completed:', {
-                template: template,
-                formData
-            });
-
-            handleUpdateState();
-
-            toast.success(__('Site imported successfully!', 'frontis-blocks'), {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
-            onClose();
+          }
+      
+          handleUpdateState();
+          onClose();
         } catch (error) {
-            console.error('Import failed:', error);
-            toast.error(__('Import failed. Please try again.', 'frontis-blocks'), {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
+          console.error("Import failed:", error);
+          // toast.error(__('Import failed. Please try again.', 'frontis-blocks'), {
+          //     position: "top-right",
+          //     autoClose: 3000,
+          //     hideProgressBar: false,
+          //     closeOnClick: true,
+          //     pauseOnHover: true,
+          //     draggable: true,
+          // });
         } finally {
-            setIsImporting(false);
-            setImportProgress(0);
-            setCurrentStep('');
+          setIsImporting(false);
+          setImportProgress(0);
+          setCurrentStep("");
         }
-    }, [template?.id, 
-        formData, 
-        onClose, 
-        globalColors, 
-        customColors, 
-        gradientColors, 
-        customGradientColors, 
-        typography, 
-        customTypography, 
-        fontFamilies, 
-        globalTypography
-    ]);
+      }, [
+        template?.id,
+        formData,
+        onClose,
+        globalColors,
+        customColors,
+        gradientColors,
+        customGradientColors,
+        typography,
+        customTypography,
+        fontFamilies,
+        globalTypography,
+    ]);      
 
 
   return (

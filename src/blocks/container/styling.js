@@ -688,7 +688,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	let desktopContainerPadding = {};
 	if (isAllPaddingEmpty()) {
 		desktopContainerPadding = {
-			'padding': generateCSSUnit(containerGlobalPadding.Desktop, 'px'),
+			'padding': generateCSSUnit(containerGlobalPadding.Desktop, containerPaddingUnits['Desktop']),
 		}
 	} else {
 		desktopContainerPadding = {
@@ -709,7 +709,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	let tabletContainerPadding = {};
 	if (isAllPaddingEmpty()) {
 		tabletContainerPadding = {
-			'padding': generateCSSUnit(containerGlobalPadding.Tablet, 'px'),
+			'padding': generateCSSUnit(containerGlobalPadding.Tablet, containerPaddingUnits['Tablet']),
 		}
 	} else {
 		tabletContainerPadding = {
@@ -730,7 +730,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	let mobileContainerPadding = {};
 	if (isAllPaddingEmpty()) {
 		mobileContainerPadding = {
-			'padding': generateCSSUnit(containerGlobalPadding.Mobile, 'px'),
+			'padding': generateCSSUnit(containerGlobalPadding.Mobile, containerPaddingUnits['Mobile']),
 		}
 	} else {
 		mobileContainerPadding = {

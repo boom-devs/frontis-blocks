@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "@wordpress/element";
+import { TemplateContentLoader } from "./template-loader";
 
 const SitePreview = () => {
 	const [previewUrl, setPreviewUrl] = useState('');
@@ -22,10 +23,7 @@ const SitePreview = () => {
 	return (
 		<div className="fb-site-preview-container">
 			{isLoading && (
-				<div className="fb-preview-loader">
-					<div className="fb-loader-spinner"></div>
-					<span>Loading preview...</span>
-				</div>
+				<TemplateContentLoader />
 			)}
 			<iframe
 				ref={iframeRef}

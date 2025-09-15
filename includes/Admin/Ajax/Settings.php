@@ -167,14 +167,6 @@ class Settings extends AjaxBase {
           AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type')
           ORDER BY post_date DESC";
 		$results = $wpdb->get_results($query);
-// 		$query = "SELECT ID, post_content, post_name
-//           FROM {$wpdb->posts}
-//           WHERE post_status = 'publish'
-//           AND post_name != 'wp-global-styles-frontis-theme'
-//           AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type')
-//           AND ID IN (3742)
-//           ORDER BY post_date DESC";
-// $results = $wpdb->get_results($query);
 
 		$generatedPages = [];
 		
@@ -195,13 +187,11 @@ class Settings extends AjaxBase {
 					// Pass modified post object to generate_page_assets
 					$modified_post->post_content = $post_content; // Update post object
 				}
-	
-				// if($post->post_name == 'home-2-2') {
-					$myfile = fopen("assetsgeneration.txt", "w") or die("Unable to open file!");
-					$txt = $post->post_content;
-					fwrite($myfile, $txt);
-					fclose($myfile);
-				// }
+
+				$myfile = fopen("assetsgeneration.txt", "w") or die("Unable to open file!");
+				$txt = $post->post_content;
+				fwrite($myfile, $txt);
+				fclose($myfile);
 	
 				$pattern = "/frontis-blocks/i";
 				update_post_meta($post->ID, 'frontis_blocks_used', false);

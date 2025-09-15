@@ -11,13 +11,10 @@ import TemplateSidebar from "./template-sidebar";
 import TemplateContent from "./template-content";
 import LibraryContent from "./library-content";
 
-import patterns from "./data/patterns.json";
-import pages from "./data/pages.json";
 import sites from "./data/sites.json";
 import TemplateLibrary from "./data/templatelibrary.json";
 
-import { usePostDataMutation } from './services/api';
-import { TemplateContentLoader } from "./template-loader";
+import { usePostDataMutation } from './services/laravelapi';
 
 const PatternLibraryButton = () => {
     const [showPatternButton, setShowPatternButton] = useState(true);

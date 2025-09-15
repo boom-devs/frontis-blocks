@@ -1878,6 +1878,23 @@
             "categories": [
                 "Landing",
                 "Marketing"
+            ],
+            "pages": [
+                {
+                    "id": 1,
+                    "title": "Home",
+                    "content": "page-1"
+                },
+                {
+                    "id": 2,
+                    "title": "Blog",
+                    "content": "page-1"
+                },
+                {
+                    "id": 3,
+                    "title": "About",
+                    "content": "page-1"
+                }
             ]
         }
     ]

@@ -37,14 +37,13 @@ const Edit = (props) => {
 
     const innerBlocksProps = useInnerBlocksProps(
         {
-            className: `swiper-content`,
-            slot: 'container-start',
+            className: `marquee-carousel-item-content`,
         },
         innerBlockOptions
     );
 
     const blockProps = useBlockProps({
-        className: `marquee-carousel-item ${blockId || 'default-id'} swiper-slide`,
+        className: `marquee-carousel-item slick-slide ${blockId || 'default-id'}`,
     });
 
     return (
