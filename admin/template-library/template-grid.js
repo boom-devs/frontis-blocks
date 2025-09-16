@@ -49,12 +49,13 @@ const TemplateGrid = ({
     setIsLoginModalOpen,
     isLoginModalOpen,
     isProPlugin,
+    isPluginUpgradeModalOpen,
+    setIsPluginUpgradeModalOpen,
     // setIsPladmin
 }) => {
 
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(isProPlugin);
     const [isHovered, setIsHovered] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [freeTemplate, setFreeTemplate] = useState(false);
@@ -63,6 +64,15 @@ const TemplateGrid = ({
     const userData = localStorage.getItem('userData');
 
     const handleFullSiteImport = useCallback(async (id) => {
+        if (!userData) {
+            setIsLoginModalOpen(true);
+            return;
+        }
+        if (is_premium === true && !isProPlugin) {
+            setIsPluginUpgradeModalOpen(true);
+            return;
+        }
+
         setIsLoading(true);
 
         if (is_premium) {
@@ -111,9 +121,6 @@ const TemplateGrid = ({
         setFreeTemplate(true);
     })
 
-    const handleClosePluginUpgradeModal = useCallback(() => {
-        setIsPluginUpgradeModalOpen(false);
-    }, []);
 
     const handleCloseModal = useCallback(() => {
         setIsModalOpen(false);
@@ -201,10 +208,10 @@ const TemplateGrid = ({
             setIsLoginModalOpen(true);
             return;
         }
-        // if (!isProPlugin) {
-        //     setIsPluginUpgradeModalOpen(true);
-        //     return;
-        // }
+        if (is_premium === true && !isProPlugin) {
+            setIsPluginUpgradeModalOpen(true);
+            return;
+        }
 
         setIsLoading(true);
 
@@ -278,7 +285,7 @@ const TemplateGrid = ({
             return;
         }
 
-        if (!isProPlugin) {
+        if (is_premium === true && !isProPlugin) {
             setIsPluginUpgradeModalOpen(true);
             return;
         }

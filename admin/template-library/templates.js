@@ -41,8 +41,9 @@ const PatternLibraryButton = () => {
     const [libraryData, setLibraryData] = useState([]);
     const [savedItems, setSavedItems] = useState([]);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
-
+    
     const isProPlugin = true;
+    const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
 
     const userData = JSON.parse(localStorage.getItem("userData"));
 
@@ -328,6 +329,13 @@ const PatternLibraryButton = () => {
             return;
         }
 
+        console.log(templateData.is_premium);
+
+        if (templateData.is_premium === true && !isProPlugin) {
+            setIsPluginUpgradeModalOpen(true);
+            return;
+        }
+
         if (isAlreadySaved) return;
 
         if (loading) return;
@@ -476,6 +484,9 @@ const PatternLibraryButton = () => {
                                         onSaveLibrary={handleSaveLibrary}
                                         setIsLoginModalOpen={setIsLoginModalOpen}
                                         isLoginModalOpen={isLoginModalOpen}
+                                        isProPlugin={isProPlugin}
+                                        isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
+                                        setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                                     />
                                 )}
 
@@ -522,7 +533,6 @@ const PatternLibraryButton = () => {
                                         setSavedItems={setSavedItems}
                                         loading={isLoading}
                                         setLoading={setLoading}
-                                        isProPlugin={isProPlugin}
                                     />
                                 )}
 
