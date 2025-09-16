@@ -189,74 +189,72 @@ const PatternLibraryButton = () => {
         setIsLogedIn(true);
 
         // Only fetch if the tab's data is not already present
-        if (data[activeTab].items.length === 0) {
-            const fetchData = async () => {
-                setLoading(true);
+        const fetchData = async () => {
+            setLoading(true);
 
-                const logged_in = userData?.email ? 'true' : 'false';
+            const logged_in = userData?.email ? 'true' : 'false';
 
-                try {
-                    let response;
-                    if (activeTab === 'patterns') {
-                        response = await getPatternTemplatesData("patterns", logged_in, userData?.email, FB_TLibrary?.activationKey);
+            try {
+                let response;
+                if (activeTab === 'patterns') {
+                    response = await getPatternTemplatesData("patterns", logged_in, userData?.email, FB_TLibrary?.activationKey);
+                    if (response) {
+                        setData((prev) => ({
+                            ...prev,
+                            patterns: {
+                                ...prev.patterns,
+                                items: response.items || [],
+                                categories: response.categories || [],
+                            },
+                        }));
+                    }
+                } else if (activeTab === 'pages') {
+                    response = await getTemplatesData("pages");
+                    if (response) {
+                        setData((prev) => ({
+                            ...prev,
+                            pages: {
+                                ...prev.pages,
+                                items: response.items || [],
+                                categories: response.categories || [],
+                            },
+                        }));
+                    }
+                } else if (activeTab === 'sites') {
+                    response = await getTemplatesData("sites");
+                    if (response) {
+                        setData((prev) => ({
+                            ...prev,
+                            sites: {
+                                ...prev.sites,
+                                items: response.items || [],
+                                categories: response.categories || [],
+                            },
+                        }));
+                    }
+                } else if (activeTab === 'templatelibrary') {
+                    if(userData) {
+                        response = await getSavedTemplatesData("clouds", userData?.email);
                         if (response) {
                             setData((prev) => ({
                                 ...prev,
-                                patterns: {
-                                    ...prev.patterns,
+                                templatelibrary: {
+                                    ...prev.templatelibrary,
                                     items: response.items || [],
-                                    categories: response.categories || [],
+                                    categories: TemplateLibrary.categories || [],
                                 },
                             }));
-                        }
-                    } else if (activeTab === 'pages') {
-                        response = await getTemplatesData("pages");
-                        if (response) {
-                            setData((prev) => ({
-                                ...prev,
-                                pages: {
-                                    ...prev.pages,
-                                    items: response.items || [],
-                                    categories: response.categories || [],
-                                },
-                            }));
-                        }
-                    } else if (activeTab === 'sites') {
-                        response = await getTemplatesData("sites");
-                        if (response) {
-                            setData((prev) => ({
-                                ...prev,
-                                sites: {
-                                    ...prev.sites,
-                                    items: response.items || [],
-                                    categories: response.categories || [],
-                                },
-                            }));
-                        }
-                    } else if (activeTab === 'templatelibrary') {
-                        if(userData) {
-                            response = await getSavedTemplatesData("clouds", userData?.email);
-                            if (response) {
-                                setData((prev) => ({
-                                    ...prev,
-                                    templatelibrary: {
-                                        ...prev.templatelibrary,
-                                        items: response.items || [],
-                                        categories: TemplateLibrary.categories || [],
-                                    },
-                                }));
-                            }
                         }
                     }
-                } catch (err) {
-                    console.error(`Error fetching ${activeTab}:`, err);
-                } finally {
-                    setLoading(false);
                 }
-            };
+            } catch (err) {
+                console.error(`Error fetching ${activeTab}:`, err);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-            fetchData();
-        }
+        fetchData();
     }, [activeTab]);
 
     const handleSaveLibrary = async (templateData, isAlreadySaved) => {
