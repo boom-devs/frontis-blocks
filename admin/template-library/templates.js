@@ -193,7 +193,7 @@ const PatternLibraryButton = () => {
             const fetchData = async () => {
                 setLoading(true);
 
-                const logged_in = (userData && userData.email) ? 'true' : 'false';
+                const logged_in = userData?.email ? 'true' : 'false';
 
                 try {
                     let response;
