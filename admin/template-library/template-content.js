@@ -31,7 +31,7 @@ const TemplateContent = ({
     onSaveLibrary,
     setIsLoginModalOpen,
     isLoginModalOpen,
-    isProPlugin,
+    isProPlugin
 }) => {
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
