@@ -109,10 +109,6 @@ const TemplateGrid = ({
         // }
         // if (!is_premium && isLogedIn) {
         // setIsModalOpen(true);
-        if (!userData) {
-            setIsLoginModalOpen(true);
-            return;
-        }
         setIsModalOpen(true);
         // }
     }, [is_premium, isLogedIn]);
