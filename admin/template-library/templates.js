@@ -235,7 +235,7 @@ const PatternLibraryButton = () => {
                         }
                     } else if (activeTab === 'templatelibrary') {
                         if(userData) {
-                            response = await getSavedTemplatesData("clouds", "fasfeagaeg@gmail.com");
+                            response = await getSavedTemplatesData("clouds", userData.email);
                             if (response) {
                                 setData((prev) => ({
                                     ...prev,
