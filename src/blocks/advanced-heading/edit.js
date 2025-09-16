@@ -58,7 +58,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicPostLabel,
 		dynamicField,
 		dynamicEnableLink,
-		dynamicReplaceAll,
 		dynamicFeaturedImageField,
 
 		dynamicDateType,
@@ -73,6 +72,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		dynamicTermsTaxonomy,
 		dynamicTermsSeparator,
+		dynamicLinkSource,
 
 
 	} = attributes;
@@ -564,19 +564,36 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                         </div>
                     )}
 
-                    <div className="fb-advanced-heading-wrapper">
-                        <RichText
-                            tagName={headingTag}
-                            value={shouldUseDynamic ? dynamicDisplayValue : headingText}  
-                            onChange={(value) => {
-                                if (!shouldUseDynamic) {
-                                    setAttributes({ headingText: value });
-                                }
-                            }}
-                            placeholder={__('Advanced Heading', 'frontis-blocks')}
-                            className={`fb-advanced-heading ${activeLineSwitcher ? 'active-line' : ''}`}
-                        />
-                    </div>
+					<div className="fb-advanced-heading-wrapper">
+						{dynamicEnableLink ? (
+							(() => {
+							const HeadingTag = headingTag || 'h2';
+							return (
+								<HeadingTag className={`fb-advanced-heading ${activeLineSwitcher ? 'active-line' : ''}`}>
+								<span className="fb-dynamic-link">
+									<RichText
+										value={shouldUseDynamic ? dynamicDisplayValue : headingText}
+										onChange={(value) => {
+											if (!shouldUseDynamic) setAttributes({ headingText: value });
+										}}
+										placeholder={__('Advanced Heading', 'frontis-blocks')}
+									/>
+								</span>
+								</HeadingTag>
+							);
+							})()
+						) : (
+							<RichText
+							tagName={headingTag}
+							value={shouldUseDynamic ? dynamicDisplayValue : headingText}
+							onChange={(value) => {
+								if (!shouldUseDynamic) setAttributes({ headingText: value });
+							}}
+							placeholder={__('Advanced Heading', 'frontis-blocks')}
+							className={`fb-advanced-heading ${activeLineSwitcher ? 'active-line' : ''}`}
+							/>
+						)}
+					</div>
 
                     {subHeadingSwitcher && subHeadingPosition === 'bottom' && (
                         <div className="fb-advanced-sub-heading-wrapper">

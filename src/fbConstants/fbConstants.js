@@ -214,11 +214,31 @@ export const SEPARATOR_POSITION = [
 	{ label: __("Top", "frontis-blocks"), value: "top" },
 	{ label: __("Bottom", "frontis-blocks"), value: "bottom" },
 ];
+export const SEPARATOR_STYLE_OPTIONS = [
+	{ label: __("Solid", "frontis-blocks"), value: "solid" },
+	{ label: __("Dashed", "frontis-blocks"), value: "dashed" },
+	{ label: __("Dotted", "frontis-blocks"), value: "dotted" },
+	{ label: __("Double", "frontis-blocks"), value: "double" },
+	{ label: __("Zigzag", "frontis-blocks"), value: "zigzag" },
+];
 
 export const PRESETS = [
 	{ label: __("Default", "frontis-blocks"), value: "preset-0" },
 	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
 	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+];
+
+export const ADVANCED_HEADING_PRESETS = [
+	{ label: __("Default", "frontis-blocks"), value: "preset-0" },
+	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
+	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
+	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
+	{ label: __("Preset 7", "frontis-blocks"), value: "preset-7" },
+	{ label: __("Preset 8", "frontis-blocks"), value: "preset-8" },
+	{ label: __("Preset 9", "frontis-blocks"), value: "preset-9" },
 ];
 
 export const POST_SWITCHER = [
@@ -305,6 +325,15 @@ export const DYNAMIC_DATE_TIME_TYPE_OPTIONS = [
 export const DYNAMIC_TAXONOMY_OPTIONS = [
 	{ label: __('Categories', 'frontis-blocks'), value: 'category' },
 	{ label: __('Tags', 'frontis-blocks'), value: 'post_tag' },
+];
+
+export const DYNAMIC_LINK_SOURCE_OPTIONS = [
+	{ label: __('Post Permalink', 'frontis-blocks'), value: 'post_permalink' },
+	{ label: __('Comments Area', 'frontis-blocks'), value: 'comments_area' },
+	{ label: __('Featured Image', 'frontis-blocks'), value: 'featured_image' },
+	{ label: __('Avatar (Profile URL)', 'frontis-blocks'), value: 'avatar_profile_url' },
+	{ label: __('Author Page URL', 'frontis-blocks'), value: 'author_page_url' },
+	{ label: __('Author Archive URL', 'frontis-blocks'), value: 'archive_url' },
 ];
   
 export const getDynamicDateFormatOptions = (sampleDate = new Date()) => {

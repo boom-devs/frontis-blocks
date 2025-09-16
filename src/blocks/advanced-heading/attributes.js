@@ -98,10 +98,6 @@ const attributes = {
         type: 'boolean',
         default: false
     },
-    dynamicReplaceAll: {
-        type: 'boolean',
-        default: false
-    },
     dynamicFeaturedImageField:{
         type: 'string',
         default: 'title'
@@ -141,6 +137,10 @@ const attributes = {
     dynamicTermsSeparator: {
         type: 'string',
         default: ', ',
+    },
+    dynamicLinkSource: {
+        type: 'string',
+        default: 'post_permalink',
     },
 
 
@@ -204,7 +204,7 @@ const attributes = {
     },
     headingTextDecoration : {
         type: 'string',
-        default: ''
+        default: 'none'
     },
     headingLetterSpacing: {
 		type: 'object',
