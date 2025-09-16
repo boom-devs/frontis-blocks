@@ -195,39 +195,24 @@ class Blocks
 
 	public function get_blocks_on_save($post_id, $post, $update)
 	{
-		$post_content = $post->post_content;
 		AssetsGenerator::generate_global_assets();
-
-		// Get synced pattern contents
-		$pattern_contents = Helper::check_patterns_used($post_content);
-
-		// Append pattern contents to post_content
-		if (!empty($pattern_contents)) {
-			foreach ($pattern_contents as $pattern_content) {
-				$post_content .= "\n" . $pattern_content; // Append each pattern content
-			}
-
-			// Pass modified post object to generate_page_assets
-			$post->post_content = $post_content; // Update post object
-		}
 
 		$pattern = "/frontis-blocks/i";
 		update_post_meta($post_id, 'frontis_blocks_used', false);
+		update_post_meta($post_id, 'generate_critical_css', false);
 
 		if(preg_match_all($pattern, $post->post_content) > 0) {
 			update_post_meta($post_id, 'frontis_blocks_used', true);
 		}
 
+		$critical_css_used = preg_match_all("/frontis-blocks\/critical-css/i", $post->post_content) > 0;
 
-		if($post->post_name === 'home-2-2') {
-			$myfile = fopen("assetsgeneration.txt", "w") or die("Unable to open file!");
-			$txt = $post->post_content;
-			fwrite($myfile, $txt);
-			fclose($myfile);
+		if($critical_css_used) {
+			update_post_meta($post_id, 'generate_critical_css', $critical_css_used);
 		}
 
 		if ($update) {
-			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post);
+			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post, $critical_css_used);
 		}
 	}
 
