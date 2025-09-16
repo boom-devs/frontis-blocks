@@ -47,16 +47,16 @@ const TemplateGrid = ({
     saved,
     setLoading,
     setIsLoginModalOpen,
-    isLoginModalOpen
+    isLoginModalOpen,
+    isProPlugin,
     // setIsPladmin
 }) => {
 
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
+    const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(isProPlugin);
     const [isHovered, setIsHovered] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [isPluginUpgrade, setIsPluginUpgrade] = useState(false);
     const [freeTemplate, setFreeTemplate] = useState(false);
 
     const isAlreadySaved = alreadySaved(savedItems, id, activeTab)
@@ -105,7 +105,7 @@ const TemplateGrid = ({
         }
         setIsModalOpen(true);
         // }
-    }, [is_premium, isLogedIn, isPluginUpgrade]);
+    }, [is_premium, isLogedIn]);
 
     const handelPatterns = useCallback(() => {
         setFreeTemplate(true);
@@ -113,7 +113,6 @@ const TemplateGrid = ({
 
     const handleClosePluginUpgradeModal = useCallback(() => {
         setIsPluginUpgradeModalOpen(false);
-        setIsPluginUpgrade(true);
     }, []);
 
     const handleCloseModal = useCallback(() => {
@@ -202,6 +201,10 @@ const TemplateGrid = ({
             setIsLoginModalOpen(true);
             return;
         }
+        // if (!isProPlugin) {
+        //     setIsPluginUpgradeModalOpen(true);
+        //     return;
+        // }
 
         setIsLoading(true);
 
@@ -272,6 +275,11 @@ const TemplateGrid = ({
     const importPage = async (id) => {
         if (!userData) {
             setIsLoginModalOpen(true);
+            return;
+        }
+
+        if (!isProPlugin) {
+            setIsPluginUpgradeModalOpen(true);
             return;
         }
 
@@ -472,9 +480,10 @@ const TemplateGrid = ({
                 </div>
             </div>
 
-            {is_premium && isPluginUpgradeModalOpen && (
+            {isPluginUpgradeModalOpen && (
                 <PluginUpgradeModal
-                    onClose={handleClosePluginUpgradeModal}
+                    isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
+                    setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                 />
             )}
 

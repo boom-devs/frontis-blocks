@@ -42,6 +42,10 @@ const PatternLibraryButton = () => {
     const [savedItems, setSavedItems] = useState([]);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
 
+    const isProPlugin = true;
+
+    const userData = JSON.parse(localStorage.getItem("userData"));
+
     const handleClick = () => {
         setIsVisible(!isVisible);
         console.log("isVisible:", !isVisible);
@@ -118,11 +122,12 @@ const PatternLibraryButton = () => {
         }
     };
 
-    const getPatternTemplatesData = async (value, email, license_key) => {
+    const getPatternTemplatesData = async (value, logged_in, email, license_key) => {
         try {
             const response = await patternsData({
                 endpoint: value,
                 body: {
+                    logged_in: logged_in,
                     email: email,
                     license_key: license_key
                 },
@@ -249,10 +254,12 @@ const PatternLibraryButton = () => {
             const fetchData = async () => {
                 setLoading(true);
 
+                const logged_in = userData.email ? true : false;
+
                 try {
                     let response;
                     if (activeTab === 'patterns') {
-                        response = await getPatternTemplatesData("patterns", "fasfeagaeg@gmail.com", "8c29b662-1837-419e-9e28-96042a27cf02");
+                        response = await getPatternTemplatesData("patterns");
                         if (response) {
                             setData((prev) => ({
                                 ...prev,
@@ -288,17 +295,18 @@ const PatternLibraryButton = () => {
                             }));
                         }
                     } else if (activeTab === 'templatelibrary') {
-                        let userData = JSON.parse(localStorage.getItem("userData"));
-                        response = await getSavedTemplatesData("clouds", "fasfeagaeg@gmail.com");
-                        if (response) {
-                            setData((prev) => ({
-                                ...prev,
-                                templatelibrary: {
-                                    ...prev.templatelibrary,
-                                    items: response.items || [],
-                                    categories: TemplateLibrary.categories || [],
-                                },
-                            }));
+                        if(userData) {
+                            response = await getSavedTemplatesData("clouds", "fasfeagaeg@gmail.com");
+                            if (response) {
+                                setData((prev) => ({
+                                    ...prev,
+                                    templatelibrary: {
+                                        ...prev.templatelibrary,
+                                        items: response.items || [],
+                                        categories: TemplateLibrary.categories || [],
+                                    },
+                                }));
+                            }
                         }
                     }
                 } catch (err) {
@@ -313,12 +321,15 @@ const PatternLibraryButton = () => {
     }, [activeTab]);
 
     const handleSaveLibrary = async (templateData, isAlreadySaved) => {
+        if (!userData) {
+            setIsLoginModalOpen(true);
+            return;
+        }
+
         if (isAlreadySaved) return;
 
         if (loading) return;
         setLoading(true);
-
-        let userData = JSON.parse(localStorage.getItem("userData"));
 
         setData((prev) => {
             const updatedItems = prev.patterns.items.map((item) =>
@@ -511,8 +522,7 @@ const PatternLibraryButton = () => {
                                         setSavedItems={setSavedItems}
                                         loading={isLoading}
                                         setLoading={setLoading}
-                                        setIsLoginModalOpen={setIsLoginModalOpen}
-                                        isLoginModalOpen={isLoginModalOpen}
+                                        isProPlugin={isProPlugin}
                                     />
                                 )}
 
