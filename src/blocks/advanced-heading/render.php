@@ -98,8 +98,6 @@ $advanced_tablet_switcher      = !empty($attributes['advancedHeadingTabletSwitch
 $advanced_mobile_switcher      = !empty($attributes['advancedHeadingMobileSwitcher']);
 $heading_before_after_switcher = !empty($attributes['headingBeforeAfterSwitcher']);
 
-
-
 $dynamicEnabled                = !empty($attributes['dynamicEnabled']);
 $dynamicSource                 = fb_norm_str(isset($attributes['dynamicSource']) ? $attributes['dynamicSource'] : 'current_post');
 $dynamicPostId                 = fb_norm_str(isset($attributes['dynamicPostId']) ? $attributes['dynamicPostId'] : 0);
@@ -123,8 +121,6 @@ $dynamicTermsTaxonomy          = fb_norm_str(isset($attributes['dynamicTermsTaxo
 $dynamicTermsSeparator         = fb_norm_str(isset($attributes['dynamicTermsSeparator']) ? $attributes['dynamicTermsSeparator'] : '');
 
 $dynamicLinkSource             = fb_norm_str(isset($attributes['dynamicLinkSource']) ? $attributes['dynamicLinkSource'] : 'post_permalink');
-
-
 
 // -------- DYNAMIC: compute $dynamic_value and $dynamic_permalink ----------
 $dynamic_value     = '';
@@ -335,7 +331,6 @@ if ( $dynamicEnabled ) {
 	}
 }
 
-
 // Only compute link when dynamic is enabled & link toggle is on
 if ( $dynamicEnabled && $dynamicEnableLink ) {
 
@@ -379,8 +374,6 @@ if ( $dynamicEnabled && $dynamicEnableLink ) {
 
 // Final text that will appear in heading (only heading is dynamic like in Edit.js)
 $dynamicDisplayValue = $dynamicEnabled ? $dynamic_value : $heading_text;
-
-
 
 // ---------- classes (match save.js) ----------
 $responsive_classes = [];
@@ -488,6 +481,5 @@ $wrapper_attributes = get_block_wrapper_attributes([
                 <?php endif; ?>
             </div>
 		<?php endif; ?>
-
 	</div>
 </div>
