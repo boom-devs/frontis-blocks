@@ -680,9 +680,9 @@ class BlockList
                 'complete' => 'true',
                 'child' => 'false',
             ],
-            'critical-css' => [
-                'slug' => 'critical-css',
-                'title' => 'Critical',
+            'news-ticker' => [
+                'slug' => 'news-ticker',
+                'title' => 'News Ticker',
                 'package' => 'free',
                 'category' => 'content',
                 'badge' => 'free',

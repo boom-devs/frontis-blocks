@@ -1,30 +1,34 @@
 import { __ } from '@wordpress/i18n';
-import { RichText, useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import { withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 
 const Edit = (props) => {
-    const { attributes, setAttributes, clientId, context, slideIndex } = props;
-
+    const { attributes, clientId, context, slideIndex } = props;
     const { blockId } = attributes;
 
-
-    const parentBlocks = wp.blocks.getBlockTypes().filter( function ( item ) {
-		return ! item.parent;
-	} );
-
-    const TEMPLATE = [
-        [ 'frontis-blocks/advanced-image' ]
+    // Default template (outside news ticker)
+    const DEFAULT_TEMPLATE = [
+        ['frontis-blocks/advanced-image']
     ];
 
-    // Hide slider block.
-	const ALLOWED_BLOCKS = parentBlocks
-    .map( ( block ) => block.name )
-    .filter(
-        ( blockName ) => [ 'frontis-blocks/marquee-carousel', ].indexOf( blockName ) === -1
-    );
+    // Template when inside news ticker
+    const NEWS_TICKER_TEMPLATE = [
+        ['frontis-blocks/advanced-heading', { headingTag: 'p' }]
+    ];
+
+    // Decide template based on context
+    const isNewsTicker = context?.['frontisBlocks:isNewsTicker'];
+    
+    const TEMPLATE = isNewsTicker ? NEWS_TICKER_TEMPLATE : DEFAULT_TEMPLATE;
+
+
+    // Allowed blocks: all except marquee-carousel itself
+    const parentBlocks = wp.blocks.getBlockTypes().filter((item) => !item.parent);
+    const ALLOWED_BLOCKS = parentBlocks
+        .map((block) => block.name)
+        .filter((blockName) => blockName !== 'frontis-blocks/marquee-carousel');
 
     const innerBlockOptions = {
         allowedBlocks: ALLOWED_BLOCKS,
@@ -43,16 +47,16 @@ const Edit = (props) => {
     });
 
     return (
-        <>
-            <div {...blockProps}>
-                <div {...innerBlocksProps} />
-            </div>
-        </>
+        <div {...blockProps}>
+            <div {...innerBlocksProps} />
+        </div>
     );
 };
 
 const applyWithSelect = withSelect((select, props) => {
-    const deviceType = select('core/editor')?.getDeviceType ? select('core/editor').getDeviceType() : null;
+    const deviceType = select('core/editor')?.getDeviceType
+        ? select('core/editor').getDeviceType()
+        : null;
     const { getBlocks, getBlockIndex } = select('core/block-editor');
     const innerBlocks = getBlocks(props.clientId);
     const slideIndex = getBlockIndex(props.clientId);
