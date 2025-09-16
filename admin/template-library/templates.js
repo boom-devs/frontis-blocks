@@ -3,7 +3,7 @@
  */
 import { useState, useEffect } from "@wordpress/element";
 import { toast } from "react-toastify";
-import { select, dispatch } from '@wordpress/data';
+import { select, dispatch, use } from '@wordpress/data';
 import { createBlock } from '@wordpress/blocks';
 import { __ } from "@wordpress/i18n";
 import { Button, Modal } from "@wordpress/components";
@@ -198,7 +198,7 @@ const PatternLibraryButton = () => {
                 try {
                     let response;
                     if (activeTab === 'patterns') {
-                        response = await getPatternTemplatesData("patterns", logged_in, userData.email, FB_TLibrary.activationKey);
+                        response = await getPatternTemplatesData("patterns", logged_in, userData?.email, FB_TLibrary?.activationKey);
                         if (response) {
                             setData((prev) => ({
                                 ...prev,
@@ -235,7 +235,7 @@ const PatternLibraryButton = () => {
                         }
                     } else if (activeTab === 'templatelibrary') {
                         if(userData) {
-                            response = await getSavedTemplatesData("clouds", userData.email);
+                            response = await getSavedTemplatesData("clouds", userData?.email);
                             if (response) {
                                 setData((prev) => ({
                                     ...prev,
