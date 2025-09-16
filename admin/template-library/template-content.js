@@ -32,6 +32,8 @@ const TemplateContent = ({
     setIsLoginModalOpen,
     isLoginModalOpen,
     isProPlugin,
+    isPluginUpgradeModalOpen,
+    setIsPluginUpgradeModalOpen,
 }) => {
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
@@ -253,13 +255,13 @@ const TemplateContent = ({
                         <div className="fb-template-library-cards">
                             {filteredTemplates && filteredTemplates.length > 0 ? (
                                 filteredTemplates.map(template => (
+                                    console.log(template),
                                     <TemplateGrid
                                         key={template.id}
                                         id={template.id}
                                         title={template.title}
                                         imageUrl={template.image}
                                         is_premium={template.is_premium || false}
-                                        isProPlugin={isProPlugin}
                                         tags={template.tags || []}
                                         categories={template.categories || []}
                                         templateType={activeTab}
@@ -287,6 +289,9 @@ const TemplateContent = ({
                                         setLoading={template.loading}
                                         setIsLoginModalOpen={setIsLoginModalOpen}
                                         isLoginModalOpen={isLoginModalOpen}
+                                        isProPlugin={isProPlugin}
+                                        isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
+                                        setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                                     />
                                 ))
                             ) : (
