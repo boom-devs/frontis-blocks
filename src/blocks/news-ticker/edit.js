@@ -41,8 +41,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     // Use the generated/saved ID
     const finalArrowsId = arrowsUniqueId || generatedArrowsId;
 
-    console.log("News", finalArrowsId);
-
+	// console.log(finalArrowsId);
+	// console.log(arrowsUniqueId);
 	const blockProps = useBlockProps({
 		className: `fb-news-ticker-wrapper ${blockID} ${
 			newsTickerDesktopSwitcher && "fb-desktop-responsive"

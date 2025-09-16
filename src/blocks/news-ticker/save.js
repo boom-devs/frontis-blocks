@@ -18,7 +18,6 @@ export default function Save({ attributes }) {
 		arrowsUniqueId
 	} = attributes;
 
-	console.log("save", arrowsUniqueId)
 	const blockProps = useBlockProps.save({
 		className: `fb-news-ticker-wrapper ${blockID} 
             ${newsTickerDesktopSwitcher && "fb-desktop-responsive"} 

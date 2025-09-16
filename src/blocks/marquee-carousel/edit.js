@@ -47,8 +47,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		sliderGlobalWraperClass,
 	} = attributes;
 
-    const arrowsId = context['frontisBlocks:arrowsUniqueId'];
-    console.log("Marque", arrowsId);
+	const arrowsId = context["frontisBlocks:arrowsUniqueId"];
+	// console.log("Marque edit ", arrowsId);
+
+	useEffect(() => {
+		if (arrowsId && arrowsId !== attributes.arrowsUniqueId) {
+			setAttributes({ arrowsUniqueId: arrowsId });
+		}
+	}, [arrowsId]);
+
 	// editor store hooks
 	const { insertBlock } = useDispatch("core/block-editor");
 	const { getSelectedBlockClientIds } = useSelect("core/block-editor");
@@ -93,19 +100,21 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			spaceBetween: 0,
 			centeredSlides: false,
 			speed: speed,
-			// autoplay: {
-			//     delay: 1,
-			//     reverseDirection: reverseDirection,
-			//     pauseOnMouseEnter: pauseOnHover,
-			// },
+			autoplay: {
+				delay: 1,
+				reverseDirection: reverseDirection,
+				pauseOnMouseEnter: pauseOnHover,
+				disableOnInteraction: false,
+				waitForTransition: false,
+			},
 			loop: true,
 			slidesPerView: "auto",
 			allowTouchMove: false,
-			disableOnInteraction: true,
 			navigation: arrowsId
 				? {
 						nextEl: `.${arrowsId} .fb-news-ticker-next`,
 						prevEl: `.${arrowsId} .fb-news-ticker-prev`,
+						hideOnClick: false, // Keep navigation always visible
 				  }
 				: false,
 		}),

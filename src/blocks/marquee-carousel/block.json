@@ -6,7 +6,7 @@
 	"title": "Marquee Carousel",
 	"icon": "slides",
 	"category": "frontis-blocks",
-	"description": "Create an engaging marquee carousel with smooth transitions and customizable settings.", 
+	"description": "Create an engaging marquee carousel with smooth transitions and customizable settings.",
 	"example": {},
 	"supports": {
 		"html": false,
@@ -16,12 +16,6 @@
 	},
 	"textdomain": "frontis-blocks",
 	"usesContext": ["frontisBlocks:arrowsUniqueId"],
-    "editorScript": [
-        "file:./index.js",
-        "frontis-swiper-script"
-    ],
-    "editorStyle": [
-        "file:./index.css",
-        "frontis-swiper-style"
-    ]
+	"editorScript": ["file:./index.js", "frontis-swiper-script"],
+	"editorStyle": ["file:./index.css", "frontis-swiper-style"]
 }

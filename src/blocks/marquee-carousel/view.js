@@ -8,10 +8,21 @@
             const swiperSettings = sliderContainer.dataset.swiperSettings;
             if (!swiperSettings) return;
 
-            const sliderOptions = JSON.parse(swiperSettings);
+            let sliderOptions = {};
+            try {
+                sliderOptions = JSON.parse(swiperSettings);
+            } catch (e) {
+                console.error("Invalid Swiper settings JSON", e);
+                return;
+            }
 
-            // Initialize Swiper for the current slider
-            new Swiper(sliderContainer.querySelector('.fb-marquee-swiper'), sliderOptions);
+            const swiperEl = sliderContainer.querySelector('.fb-marquee-swiper');
+            if (!swiperEl) return;
+
+            // ✅ Add required modules to ensure navigation & autoplay work
+            new Swiper(swiperEl, {
+                ...sliderOptions,
+            });
         });
     }
 
