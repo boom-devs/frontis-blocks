@@ -198,7 +198,7 @@ const PatternLibraryButton = () => {
                 try {
                     let response;
                     if (activeTab === 'patterns') {
-                        response = await getPatternTemplatesData("patterns", logged_in, "fasfeagaeg@gmail.com", "8c29b662-1837-419e-9e28-96042a27cf02");
+                        response = await getPatternTemplatesData("patterns", logged_in, userData.email, FB_TLibrary.activationKey);
                         if (response) {
                             setData((prev) => ({
                                 ...prev,
