@@ -185,70 +185,8 @@ const PatternLibraryButton = () => {
         );
     };
 
-    // useEffect(() => {
-    //     setIsLogedIn(true);
-
-    //     const fetchData = async () => {
-    //         setLoading(true);
-    //         try {
-    //             const patterns = await getTemplatesData("patterns");
-    //             const pages = await getTemplatesData("pages");
-    //             const templatelibrary = await getTemplatesData("clouds");
-                
-
-    //             if (patterns) {
-    //                 setData((prev) => ({
-    //                     ...prev,
-    //                     patterns: {
-    //                         ...prev.patterns,
-    //                         items: patterns.items || [],
-    //                         categories: patterns.categories || [],
-    //                     },
-    //                 }));
-    //             }
-
-    //             if (pages) {
-    //                 setData((prev) => ({
-    //                     ...prev,
-    //                     pages: {
-    //                         ...prev.pages,
-    //                         items: pages.items || [],
-    //                         categories: pages.categories || [],
-    //                     },
-    //                 }));
-    //             }
-
-    //             if (sites) {
-    //                 setData((prev) => ({
-    //                     ...prev,
-    //                     sites: {
-    //                         ...prev.sites,
-    //                         items: sites.items || [],
-    //                         categories: sites.categories || [],
-    //                     },
-    //                 }));
-    //             }
-
-    //             setData((prev) => ({
-    //                 ...prev,
-    //                 templatelibrary: {
-    //                     ...prev.templatelibrary,
-    //                     items: TemplateLibrary.items || [],
-    //                     categories: TemplateLibrary.categories || []
-    //                 }
-    //             }));
-    //         } catch (err) {
-    //             console.error("Error fetching templates:", err);
-    //         } finally {
-    //             setLoading(false);
-    //         }
-    //     };
-
-    //     fetchData();
-    // }, []);
-
     useEffect(() => {
-        setIsLogedIn(true); // Assuming this is part of your auth logic
+        setIsLogedIn(true);
 
         // Only fetch if the tab's data is not already present
         if (data[activeTab].items.length === 0) {
@@ -326,8 +264,6 @@ const PatternLibraryButton = () => {
             setIsLoginModalOpen(true);
             return;
         }
-
-        console.log(templateData.is_premium);
 
         if (templateData.is_premium === true && !isProPlugin) {
             setIsPluginUpgradeModalOpen(true);
