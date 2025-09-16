@@ -193,12 +193,12 @@ const PatternLibraryButton = () => {
             const fetchData = async () => {
                 setLoading(true);
 
-                const logged_in = (userData && userData.email) ? true : false;
+                const logged_in = (userData && userData.email) ? 'true' : 'false';
 
                 try {
                     let response;
                     if (activeTab === 'patterns') {
-                        response = await getPatternTemplatesData("patterns");
+                        response = await getPatternTemplatesData("patterns", logged_in, "fasfeagaeg@gmail.com", "8c29b662-1837-419e-9e28-96042a27cf02");
                         if (response) {
                             setData((prev) => ({
                                 ...prev,
