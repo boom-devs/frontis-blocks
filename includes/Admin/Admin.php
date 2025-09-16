@@ -134,9 +134,9 @@ class Admin {
 
             $activation_key = get_option('frontisblockspro_license_options');
             // $activation_key = '8c29b662-1837-419e-9e28-96042a27cf02';
-            if($activation_key && count($activation_key) > 0 && isset($activation_key['sc_license_key']) && $activation_key['sc_license_key'] !== '') {
-                $activation_key = $activation_key['sc_license_key'];
-            }
+            // if($activation_key && count($activation_key) > 0 && isset($activation_key['sc_license_key']) && $activation_key['sc_license_key'] !== '') {
+            //     $activation_key = $activation_key['sc_license_key'];
+            // }
 
 			wp_enqueue_style('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/style-tlibrary.css', array(), '1.0.0');
 			wp_enqueue_script('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/tlibrary.js', $tl_script_asset['dependencies'], '1.0.0', true);
