@@ -390,7 +390,7 @@ const TemplateGrid = ({
                 onMouseLeave={() => setIsHovered(false)}
             >
                 <div className="fb-template-library-card-img">
-                    <img src={`https://leech-better-moose.ngrok-free.app/storage/${imageUrl}`} alt={title || "Template preview"} />
+                    <img src={`https://6a53d3fee448.ngrok-free.app/storage/${imageUrl}`} alt={title || "Template preview"} />
                     <div className={`fb-template-badge ${is_premium ? "pro" : "free"}`}>
                         {is_premium ? "PRO" : "FREE"}
                     </div>
