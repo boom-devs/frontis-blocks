@@ -254,11 +254,13 @@ const PatternLibraryButton = () => {
             const fetchData = async () => {
                 setLoading(true);
 
-                const logged_in = userData.email ? true : false;
+                const logged_in = (userData && userData.email) ? true : false;
 
                 try {
                     let response;
                     if (activeTab === 'patterns') {
+                        console.log('asdfadsf');
+                        
                         response = await getPatternTemplatesData("patterns");
                         if (response) {
                             setData((prev) => ({
@@ -402,8 +404,6 @@ const PatternLibraryButton = () => {
             value: tag.toLowerCase().replace(/\s+/g, '-'),
         }));
     })();
-
-    console.log("data:", data);
 
     return (
         <>
