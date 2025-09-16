@@ -107,7 +107,6 @@ $dynamicPostType               = fb_norm_str(isset($attributes['dynamicPostType'
 $dynamicPostLabel              = fb_norm_str(isset($attributes['dynamicPostLabel']) ? $attributes['dynamicPostLabel'] : '');
 $dynamicField                  = fb_norm_str(isset($attributes['dynamicField']) ? $attributes['dynamicField'] : 'post_title');
 $dynamicEnableLink             = !empty($attributes['dynamicEnableLink']);
-$dynamicReplaceAll             = !empty($attributes['dynamicReplaceAll']);
 $dynamicFeaturedImageField     = fb_norm_str(isset($attributes['dynamicFeaturedImageField']) ? $attributes['dynamicFeaturedImageField'] : 'title');
 
 $dynamicDateType               = fb_norm_str(isset($attributes['dynamicDateType']) ? $attributes['dynamicDateType'] : '');
@@ -123,10 +122,14 @@ $dynamicCommentsManyText       = fb_norm_str(isset($attributes['dynamicCommentsM
 $dynamicTermsTaxonomy          = fb_norm_str(isset($attributes['dynamicTermsTaxonomy']) ? $attributes['dynamicTermsTaxonomy'] : 'category');
 $dynamicTermsSeparator         = fb_norm_str(isset($attributes['dynamicTermsSeparator']) ? $attributes['dynamicTermsSeparator'] : '');
 
+$dynamicLinkSource             = fb_norm_str(isset($attributes['dynamicLinkSource']) ? $attributes['dynamicLinkSource'] : 'post_permalink');
+
+
 
 // -------- DYNAMIC: compute $dynamic_value and $dynamic_permalink ----------
 $dynamic_value     = '';
 $dynamic_permalink = '';
+$dynamic_link_url = '';
 
 $is_site_field    = in_array( $dynamicSource, ['site_title','site_tagline'], true );
 $is_archive_field = in_array( $dynamicSource, ['archive_title','archive_description'], true );
@@ -146,7 +149,6 @@ if ( $dynamicEnabled ) {
 		}
 	}
 	elseif ( $is_archive_field ) {
-		// Editor এ placeholder দেখানো হয়েছিল; PHP তে আসল আর্কাইভ ভ্যালু
 		if ( $dynamicSource === 'archive_title' ) {
 			$dynamic_value = fb_get_plain_text( get_the_archive_title() ?: __( 'No Content', 'frontis-blocks' ) );
 		} else {
@@ -333,6 +335,48 @@ if ( $dynamicEnabled ) {
 	}
 }
 
+
+// Only compute link when dynamic is enabled & link toggle is on
+if ( $dynamicEnabled && $dynamicEnableLink ) {
+
+    switch ( $dynamicLinkSource ) {
+        case 'post_permalink':
+            // Already computed above
+            $dynamic_link_url = $dynamic_permalink ?: '';
+            break;
+
+        case 'comments_area':
+			$dynamic_link_url = $post ? get_comments_link( $post ) : '';
+            break;
+
+        case 'featured_image':
+            // Full size thumbnail URL
+            $dynamic_link_url = $post ? ( get_the_post_thumbnail_url( $post, 'full' ) ?: '' ) : '';
+            break;
+
+        case 'avatar_profile_url': {
+            $author_id = $post ? (int) $post->post_author : 0;
+            $dynamic_link_url = $author_id ? ( get_avatar_url( $author_id ) ?: '' ) : '';
+            break;
+        }
+
+        case 'author_page_url': {
+            $pt = $post ? get_post_type( $post ) : ( $target_post_type ?: '' );
+            $dynamic_link_url = $pt ? ( get_post_type_archive_link( $pt ) ?: '' ) : '';
+            break;
+        }
+
+        case 'archive_url':
+            $author_id = $post ? (int) $post->post_author : 0;
+            $dynamic_link_url = $author_id ? get_author_posts_url( $author_id ) : '';
+            break;
+
+        default:
+            $dynamic_link_url = '';
+            break;
+    }
+}
+
 // Final text that will appear in heading (only heading is dynamic like in Edit.js)
 $dynamicDisplayValue = $dynamicEnabled ? $dynamic_value : $heading_text;
 
@@ -406,7 +450,13 @@ $wrapper_attributes = get_block_wrapper_attributes([
 
 		<div class="fb-advanced-heading-wrapper">
 			<<?php echo esc_attr( $heading_tag ); ?> class="fb-advanced-heading<?php echo $active_line_switcher ? ' active-line' : ''; ?>">
-				<?php echo wp_kses_post( $dynamicDisplayValue ); ?>
+				<?php if ( $dynamicEnabled && $dynamicEnableLink && $dynamic_link_url ) : ?>
+					<a class="fb-dynamic-link" href="<?php echo esc_url( $dynamic_link_url ); ?>">
+						<?php echo wp_kses_post( $dynamicDisplayValue ); ?>
+					</a>
+				<?php else : ?>
+					<?php echo wp_kses_post( $dynamicDisplayValue ); ?>
+				<?php endif; ?>
 			</<?php echo esc_attr( $heading_tag ); ?>>
 		</div>
 

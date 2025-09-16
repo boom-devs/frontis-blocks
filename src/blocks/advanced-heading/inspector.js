@@ -30,26 +30,8 @@ import {
 } from '@wordpress/components';
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 
-/**
- * Internal depencencies
- */
-import {
-    SEPARATOR_POSITION,
-    SUBHEADING_POSITION,
-    NORMAL_HOVER,
-    UNIT_TYPES,
-    TEXT_ALIGN,
-    HEADING,
-    SEPERATOR_STYLES,
-    PRESETS,
-    BORDER_STYLES,
-    ICON_ALIGN,
-    OVERFLOW_OP,
-    BACKGROUND_TYPES,
-    NORMAL_GRADIENT,
-} from "./constants/constants";
-
 import { 
+    ADVANCED_HEADING_PRESETS,
     DYNAMIC_DATA_SOURCE_OPTIONS,
     DYNAMIC_DATA_SOURCE_FIELD_OPTIONS,
     DYNAMIC_FEATURED_IMAGE_OPTIONS,
@@ -57,8 +39,17 @@ import {
     DYNAMIC_TAXONOMY_OPTIONS,
     getDynamicDateFormatOptions,
     getDynamicTimeFormatOptions,
+    DYNAMIC_LINK_SOURCE_OPTIONS,
+    SEPARATOR_POSITION,
+    SUBHEADING_POSITION,
+    BORDER_STYLES,
+    BACKGROUND_TYPES,
+    OVERFLOW_OP,
+    ICON_ALIGN,
+    SEPARATOR_STYLE_OPTIONS,
 
 } from '@Constants/fbConstants';
+
 import Select2 from "react-select";
 import { useState, useEffect, useMemo } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
@@ -448,7 +439,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dynamicPostLabel,
         dynamicField,
         dynamicEnableLink,
-        dynamicReplaceAll,
         dynamicFeaturedImageField,
         dynamicDateType,
         dynamicDateFormat,
@@ -460,6 +450,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dynamicCommentsManyText,
         dynamicTermsTaxonomy,
         dynamicTermsSeparator,
+        dynamicLinkSource,
 
 
 
@@ -851,6 +842,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             console.warn(`Advanced Heading: Preset "${selectedPreset}" not found.`);
         }
     };
+
+    /**
+     * selected preset option
+     */
+    const selectedPresetOption = useMemo(
+        () => ADVANCED_HEADING_PRESETS.find(o => o.value === headingPresetStyle) || null,
+        [headingPresetStyle]
+    );
     /** End Preset Style */
 
     /** Start Heading Padding */
@@ -2294,7 +2293,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             }
             transition: all .3s ease-in-out;
         }
-        .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading,
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link {
             ${headingGlobalTypoSwitcher.fontFamily === true && headingGlobalTypographyData.fontFamily ? `font-family: ${headingGlobalTypographyData.fontFamily};` : ''}
             ${headingGlobalTypoSwitcher.fontSize === true && headingGlobalTypographyData.fontSize ? `font-size: ${headingGlobalTypographyData.fontSize};` : ''}
             ${headingGlobalTypoSwitcher.fontWeight === true && headingGlobalTypographyData.fontWeight ? `font-weight: ${headingGlobalTypographyData.fontWeight};` : ''}
@@ -2345,7 +2345,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             transition: all .3s ease-in-out;
         }
 
-        .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover,
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link:hover {
             ${headingHoverColor ? `color: ${headingHoverColor};` : ''}
             ${headingTextStrokeHoverColor ? `
                 ${headingTextStroke.Desktop ? `-webkit-text-stroke: ${headingTextStroke.Desktop}px ${headingTextStrokeHoverColor};` : ''}
@@ -2363,14 +2364,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
 
         ${headingBeforeAfterSwitcher ? `
-        .${blockId} .fb-advanced-wrapper .fb-advanced-heading{
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading,
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link{
             display: flex;
             align-items: center;
             justify-content: center;
             ${headingBeforeAfterGap.Desktop ? `gap: ${headingBeforeAfterGap.Desktop}${headingBeforeAfterGapUnits.Desktop};` : ''}
         }
         .${blockId} .fb-advanced-wrapper .fb-advanced-heading::before,
-        .${blockId} .fb-advanced-wrapper .fb-advanced-heading::after {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading::after,
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link::before,
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link::after {
             content: '';
             ${headingBeforeAfterWidth.Desktop ? `width: ${headingBeforeAfterWidth.Desktop}${headingBeforeAfterWidthUnits.Desktop};` : 'flex-grow: 1;'}
             ${headingBeforeAfterHeight.Desktop ? `height: ${headingBeforeAfterHeight.Desktop}${headingBeforeAfterHeightUnits.Desktop};` : ''}
@@ -2512,13 +2516,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         .${blockId} .fb-advanced-wrapper .fb-advanced-title-separator:hover {
             ${separatorHoverColor ? `border-top-color: ${separatorHoverColor};` : ''}
         }
-        .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after,
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link.active-line::after {
             ${activeLineAfterWidth.Desktop && activeLineAfterWidthUnits.Desktop ? `width: ${activeLineAfterWidth.Desktop}${activeLineAfterWidthUnits.Desktop};` : ''}
             ${activeLineAfterHeight.Desktop && activeLineAfterHeightUnits.Desktop ? `height: ${activeLineAfterHeight.Desktop}${activeLineAfterHeightUnits.Desktop};` : ''}
             ${activeLineAfterColor ? `background-color: ${activeLineAfterColor};` : ''}
         }
 
-        .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::before {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::before,
+        .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link.active-line::before {
             ${activeLineBeforeWidth.Desktop && activeLineBeforeWidthUnits.Desktop ? `width: ${activeLineBeforeWidth.Desktop}${activeLineBeforeWidthUnits.Desktop};` : ''}
             ${activeLineBeforeHeight.Desktop && activeLineBeforeHeightUnits.Desktop ? `height: ${activeLineBeforeHeight.Desktop}${activeLineBeforeHeightUnits.Desktop};` : ''}
             ${activeLineBeforeColor ? `background-color: ${activeLineBeforeColor};` : ''}
@@ -2549,7 +2555,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${tabletBackgroundHoverStyles}
             }
 
-            .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link {
                 ${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
                 ${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
                 ${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
@@ -2564,7 +2571,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ` : ''}
             }
 
-            .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link:hover {
                 ${headingTextStrokeHoverColor ? `
                     ${headingTextStroke.Tablet ? `-webkit-text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};` : ''}
                     ${headingTextStroke.Tablet ? `text-stroke: ${headingTextStroke.Tablet}px ${headingTextStrokeHoverColor};` : ''}
@@ -2572,11 +2580,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             }
 
             ${headingBeforeAfterSwitcher ? `
-            .${blockId} .fb-advanced-wrapper .fb-advanced-heading{
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link{
                 ${headingBeforeAfterGap.Tablet ? `gap: ${headingBeforeAfterGap.Tablet}${headingBeforeAfterGapUnits.Tablet};` : ''}
             }
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading::before,
-            .${blockId} .fb-advanced-wrapper .fb-advanced-heading::after {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading::after,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link::before,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link::after {
                 ${headingBeforeAfterWidth.Tablet ? `width: ${headingBeforeAfterWidth.Tablet}${headingBeforeAfterWidthUnits.Tablet};` : 'flex-grow: 1;'}
                 ${headingBeforeAfterHeight.Tablet ? `height: ${headingBeforeAfterHeight.Tablet}${headingBeforeAfterHeightUnits.Tablet};` : ''}
                 ${headingBeforeAfterTabletBorderWidth && headingBeforeAfterTabletBorder.top ? `border-width: ${headingBeforeAfterTabletBorderWidth};` : ''}
@@ -2635,18 +2646,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         : ''}`
                     : ''}
             }
-            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link.active-line::after {
                 ${activeLineAfterWidth.Tablet && activeLineAfterWidthUnits.Tablet ? `width: ${activeLineAfterWidth.Tablet}${activeLineAfterWidthUnits.Tablet};` : ''}
                 ${activeLineAfterHeight.Tablet && activeLineAfterHeightUnits.Tablet ? `height: ${activeLineAfterHeight.Tablet}${activeLineAfterHeightUnits.Tablet};` : ''}
             }
-            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::before {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::before,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link.active-line::before {
                 ${activeLineBeforeWidth.Tablet && activeLineBeforeWidthUnits.Tablet ? `width: ${activeLineBeforeWidth.Tablet}${activeLineBeforeWidthUnits.Tablet};` : ''}
                 ${activeLineBeforeHeight.Tablet && activeLineBeforeHeightUnits.Tablet ? `height: ${activeLineBeforeHeight.Tablet}${activeLineBeforeHeightUnits.Tablet};` : ''}
             }
         }
 
         @media only screen and (max-width: 767px) {
-            .${blockId} .fb-advanced-wrapper .fb-advanced-heading {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link {
                 ${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
                 ${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
                 ${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
@@ -2660,7 +2674,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ` : ''}
             }
 
-            .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading:hover,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link:hover {
                 ${headingTextStrokeHoverColor ? `
                     ${headingTextStroke.Mobile ? `-webkit-text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};` : ''}
                     ${headingTextStroke.Mobile ? `text-stroke: ${headingTextStroke.Mobile}px ${headingTextStrokeHoverColor};` : ''}
@@ -2688,11 +2703,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             }
 
             ${headingBeforeAfterSwitcher ? `
-                .${blockId} .fb-advanced-wrapper .fb-advanced-heading{
+                .${blockId} .fb-advanced-wrapper .fb-advanced-heading,
+                .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link{
                     ${headingBeforeAfterGap.Mobile ? `gap: ${headingBeforeAfterGap.Mobile}${headingBeforeAfterGapUnits.Mobile};` : ''}
                 }
             .${blockId} .fb-advanced-wrapper .fb-advanced-heading::before,
-            .${blockId} .fb-advanced-wrapper .fb-advanced-heading::after {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading::after,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link::before,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link::after {
                 ${headingBeforeAfterWidth.Mobile ? `width: ${headingBeforeAfterWidth.Mobile}${headingBeforeAfterWidthUnits.Mobile};` : 'flex-grow: 1;'}
                 ${headingBeforeAfterHeight.Mobile ? `height: ${headingBeforeAfterHeight.Mobile}${headingBeforeAfterHeightUnits.Mobile};` : ''}
                 ${headingBeforeAfterMobileBorderWidth && headingBeforeAfterMobileBorder.top ? `border-width: ${headingBeforeAfterMobileBorderWidth};` : ''}
@@ -2751,11 +2769,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${mobileBackgroundHoverStyles}
             }
 
-            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::after,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link.active-line::after {
                 ${activeLineAfterWidth.Mobile && activeLineAfterWidthUnits.Mobile ? `width: ${activeLineAfterWidth.Mobile}${activeLineAfterWidthUnits.Mobile};` : ''}
                 ${activeLineAfterHeight.Mobile && activeLineAfterHeightUnits.Mobile ? `height: ${activeLineAfterHeight.Mobile}${activeLineAfterHeightUnits.Mobile};` : ''}
             }
-            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::before {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading.active-line::before,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link.active-line::before {
                 ${activeLineBeforeWidth.Mobile && activeLineBeforeWidthUnits.Mobile ? `width: ${activeLineBeforeWidth.Mobile}${activeLineBeforeWidthUnits.Mobile};` : ''}
                 ${activeLineBeforeHeight.Mobile && activeLineBeforeHeightUnits.Mobile ? `height: ${activeLineBeforeHeight.Mobile}${activeLineBeforeHeightUnits.Mobile};` : ''}
             }
@@ -3037,7 +3057,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     dynamicPostLabel,
     dynamicField,
     dynamicEnableLink,
-    dynamicReplaceAll,
     dynamicFeaturedImageField,
     ]);
 
@@ -3151,7 +3170,99 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         setTermsTaxonomy(val);
         setAttributes({ dynamicTermsTaxonomy: val });
     };
-    
+
+    /**
+     * dynamic link source
+     */
+    const [linkSource, setLinkSource] = useState(dynamicLinkSource || "post_permalink");
+
+    useEffect(() => {
+        setLinkSource(dynamicLinkSource || "post_permalink");
+    }, [dynamicLinkSource]);
+
+    const selectedLinkSource = useMemo(() => {
+        const v = linkSource || "post_permalink";
+        return (
+        DYNAMIC_LINK_SOURCE_OPTIONS.find((o) => o.value === v) ||
+        DYNAMIC_LINK_SOURCE_OPTIONS[0]
+        );
+    }, [linkSource]);
+
+    const handleLinkSourceChange = (opt) => {
+        const val = opt && typeof opt.value === "string" ? opt.value : "post_permalink";
+        setLinkSource(val);
+        setAttributes({ dynamicLinkSource: val });
+    };
+
+    /**
+     * subHeadingPosition
+     */
+    const [subPos, setSubPos] = useState(subHeadingPosition || 'bottom');
+
+    useEffect(() => {
+        setSubPos(subHeadingPosition || 'bottom');
+    }, [subHeadingPosition]);
+
+    const selectedSubPosOption = useMemo(() => {
+        const v = subPos || 'bottom';
+        return (
+            SUBHEADING_POSITION.find(o => o.value === v) ||
+            SUBHEADING_POSITION[1]
+        );
+    }, [subPos]);
+
+    const handleSubHeadingPositionChange = (opt) => {
+        const val = (opt && typeof opt.value === 'string') ? opt.value : 'bottom';
+        setSubPos(val);
+        setAttributes({ subHeadingPosition: val });
+    };
+
+    /**
+     * separator position
+     */
+    const [headingSeparatorPosition, setHeadingSeparatorPosition] = useState(separatorPosition || "top"); 
+
+    useEffect(() => {
+        setHeadingSeparatorPosition(separatorPosition || "top");
+    }, [separatorPosition]);
+
+    const selectedSeparatorPosition = useMemo(() => {
+        const v = headingSeparatorPosition || "top";
+        return (
+        SEPARATOR_POSITION.find((o) => o.value === v) ||
+        SEPARATOR_POSITION[1]
+        );
+    }, [headingSeparatorPosition]);
+
+    const handleSeparatorPositionChange = (opt) => {
+        const val = opt && typeof opt.value === "string" ? opt.value : "top";
+        setHeadingSeparatorPosition(val);
+        setAttributes({ separatorPosition: val });
+    };
+
+    /**
+     * separator style
+     */
+    const [sep, setSep] = useState(separator || 'solid');
+
+    useEffect(() => {
+        setSep(separator || 'solid');
+    }, [separator]);
+
+    const selectedSeparator = useMemo(() => {
+        const v = sep || 'solid';
+        return (
+            SEPARATOR_STYLE_OPTIONS.find(o => o.value === v) ||
+            SEPARATOR_STYLE_OPTIONS[0]
+        );
+    }, [sep]);
+
+    const handleSeparatorChange = (opt) => {
+        const val = (opt && typeof opt.value === 'string') ? opt.value : 'solid';
+        setSep(val);
+        setAttributes({ separator: val });
+    };
+
     /**
 	 * Inspector General Controls
 	 */
@@ -3323,30 +3434,36 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             )}
 
                             <ToggleControl
-                            label={__("Enable Link (permalink)", "frontis-blocks")}
+                            label={__("Enable Link", "frontis-blocks")}
                             checked={dynamicEnableLink}
                             onChange={(value) => setAttributes({ dynamicEnableLink: value })}
                             />
 
-                            <ToggleControl
-                            label={__("Replace Full Content", "frontis-blocks")}
-                            checked={dynamicReplaceAll}
-                            onChange={(value) => setAttributes({ dynamicReplaceAll: value })}
-                            help={__("If off, you can prepend/append static text later.", "frontis-blocks")}
-                            />
+                            {dynamicEnableLink && (
+                                <BaseControl
+                                    label={__("Link Source", "frontis-blocks")}
+                                >
+                                    <Select2 
+                                        options={DYNAMIC_LINK_SOURCE_OPTIONS}
+                                        value={selectedLinkSource}
+                                        onChange={handleLinkSourceChange}
+                                        className="fb-select2-control"
+                                    />
+                                </BaseControl>
+                            )}
                         </>
                     )}
 
-
-
-
-
-                    <SelectControl
-                        label={__("Preset Style", "frontis-blocks")}
-                        value={headingPresetStyle}
-                        options={PRESETS}
-                        onChange={(selected) => changeAdvancedHeadingPreset(selected)}
+                    <BaseControl label={__("Preset Style", "frontis-blocks")}>
+                    <Select2
+                        options={ADVANCED_HEADING_PRESETS}
+                        value={selectedPresetOption}
+                        onChange={(opt) => changeAdvancedHeadingPreset(opt?.value ?? '')}
+                        isClearable={false}
+                        className="fb-select2-control"
                     />
+                    </BaseControl>
+
                     <BaseControl
                         label={__("Element Visibility", "frontis-blocks")}
                         className="fb-setting-show-hide-elements"
@@ -3405,12 +3522,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     className="fb-advanced-sub-heading-wrapper"
                 >
                     <>
-                        <BaseControl className="fb-advanced-sub-heading-position" >
-                            <SelectControl
-                                label={__("Sub Heading Position", "frontis-blocks")}
-                                value={subHeadingPosition}
-                                options={SUBHEADING_POSITION}
-                                onChange={(value) => setAttributes({ subHeadingPosition: value})}
+                        <BaseControl
+                            label={__("Sub Heading Position", "frontis-blocks")}
+                        >
+                            <Select2 
+                                options={SUBHEADING_POSITION} 
+                                value={selectedSubPosOption} 
+                                onChange={handleSubHeadingPositionChange}
+                                className="fb-select2-control"
                             />
                         </BaseControl>
 
@@ -3437,27 +3556,23 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     className="fb-advanced-separator-wrapper"
                 >
                     <>
-                        <BaseControl className="fb-advanced-separator-position" >
-                            <SelectControl
-                                label={__("Separator Position", "frontis-blocks")}
-                                value={separatorPosition}
+                        <BaseControl
+                            label={__("Separator Position", "frontis-blocks")}
+                        >
+                            <Select2 
                                 options={SEPARATOR_POSITION}
-                                onChange={(value) => setAttributes({ separatorPosition: value})}
+                                value={selectedSeparatorPosition} 
+                                onChange={handleSeparatorPositionChange}
+                                className="fb-select2-control"
                             />
                         </BaseControl>
 
-                        <BaseControl className="fb-advanced-separator-style" >
-                            <SelectControl
-                                label={__("Separator Style", "frontis-blocks")}
-                                value={separator}
-                                options={[
-                                    { label: __('Solid', 'frontis-blocks'), value: 'solid' },
-                                    { label: __('Dashed', 'frontis-blocks'), value: 'dashed' },
-                                    { label: __('Dotted', 'frontis-blocks'), value: 'dotted' },
-                                    { label: __('Double', 'frontis-blocks'), value: 'double' },
-                                    { label: __('Zigzag', 'frontis-blocks'), value: 'zigzag' }
-                                ]}
-                                onChange={(value) => setAttributes({ separator: value })}
+                        <BaseControl label={__("Separator Style", "frontis-blocks")}>
+                            <Select2
+                                options={SEPARATOR_STYLE_OPTIONS}
+                                value={selectedSeparator}
+                                onChange={handleSeparatorChange}
+                                className="fb-select2-control"
                             />
                         </BaseControl>
                     </>
