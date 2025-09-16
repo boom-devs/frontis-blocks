@@ -1,25 +1,22 @@
-import { RichText, useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { RichText, useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 
 export default function Save({ attributes }) {
-
 	const {
-        blockId,
+		blockId,
 		speed,
 		reverseDirection,
 		pauseOnHover,
-
 		sliderGlobalWraperID,
 		sliderGlobalWraperClass,
-    } = attributes;
+		arrowsUniqueId,
+	} = attributes;
 
 	const blockProps = useBlockProps.save({
 		className: `fb-marquee-slider-container ${blockId}`,
-		'data-block-id': blockId,
+		"data-block-id": blockId,
 	});
 
-	const navBase = sliderGlobalWraperID
-        ? `#${sliderGlobalWraperID}`
-        : '';
+	console.log(arrowsUniqueId)
 	/**
 	 * swiper settings
 	 */
@@ -27,24 +24,31 @@ export default function Save({ attributes }) {
 		spaceBetween: 0,
 		centeredSlides: false,
 		speed: speed,
-		// autoplay: {
-		// 	delay: 1,
-		// 	reverseDirection: reverseDirection,
-		// 	pauseOnMouseEnter: pauseOnHover,
-		// },
+		autoplay: {
+			delay: 1,
+			reverseDirection: reverseDirection,
+			pauseOnMouseEnter: pauseOnHover,
+			disableOnInteraction: false,
+		},
 		loop: true,
-		slidesPerView:'auto',
+		slidesPerView: "auto",
 		allowTouchMove: false,
-		disableOnInteraction: true,
-		navigation: {
-            nextEl: `.fb-news-ticker-next`,
-            prevEl: `.fb-news-ticker-prev`,
-        },
+		navigation: arrowsUniqueId
+			? {
+					nextEl: `.${arrowsUniqueId} .fb-news-ticker-next`,
+					prevEl: `.${arrowsUniqueId} .fb-news-ticker-prev`,
+					disabledClass: "swiper-button-disabled",
+					hiddenClass: "swiper-button-hidden",
+			  }
+			: false,
 	});
 
 	return (
-		<div {...blockProps} data-swiper-settings={ swiperSettings }>
-			<div className={`fb-marquee-swiper swiper ${sliderGlobalWraperClass}`} id={sliderGlobalWraperID}>
+		<div {...blockProps} data-swiper-settings={swiperSettings}>
+			<div
+				className={`fb-marquee-swiper swiper ${sliderGlobalWraperClass}`}
+				id={sliderGlobalWraperID}
+			>
 				<div className="fb-swiper-wrapper swiper-wrapper">
 					<InnerBlocks.Content />
 				</div>
