@@ -38,7 +38,7 @@ import {
 	BORDER_STYLES,
 	OVERFLOW_OP,
 	CONTENT_TYPE,
-	TIMER_POSITION
+	TIMER_POSITION,
 } from "../../fbConstants/fbConstants";
 
 import "./editor.scss";
@@ -362,9 +362,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		tickerTimerHoverBackgroundImageSize,
 		tickerTimerColorSwitcher,
 		tickerTimerColor,
-		tickerTimerHoverColor
+		tickerTimerHoverColor,
+		newsTickerPresetStyle
 	} = attributes;
 
+	console.log(attributes);
 	const deviceType = useDeviceType();
 
 	useEffect(() => {
@@ -378,6 +380,84 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const iconHandler = (iconName) => {
 		setAttributes({ tickerLabelIcon: iconName });
 	};
+
+	const PRESETS = [
+		{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+		{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+		{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+		{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
+		{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
+	];
+	/** Start Preset Style **/
+	const changeNewsTickerPreset = (selectedPreset) => {
+		const presetConfigurations = {
+			"preset-1": {
+				labelContainerPaddingDesktop: {
+					top: "28",
+					bottom: "28",
+					left: "36",
+					right: "36",
+				},
+				labelContainerNormalClassicColor: '#399CFF',
+				newsTickerGlobalBorder: "solid",
+				newsTickerGlobalBorderColor: "#399CFF",
+				newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
+				showArrows: false,
+				labelIconSwitcher: false
+			},
+			"preset-2": {
+				labelContainerPaddingDesktop: {
+					top: "28",
+					bottom: "28",
+					left: "36",
+					right: "36",
+				},
+				labelContainerNormalClassicColor: '#B9087B',
+				newsTickerGlobalBorder: "solid",
+				newsTickerGlobalBorderColor: "#B9087B",
+				newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
+				showArrows: true,
+				labelIconSwitcher: true
+			},
+			"preset-3": {
+				labelContainerPaddingDesktop: {
+					top: "18",
+					bottom: "18",
+					left: "24",
+					right: "24",
+				},
+				labelContainerNormalClassicColor: '#B9087B',
+				newsTickerGlobalBorder: "solid",
+				newsTickerGlobalBorderColor: "#FFF4EC",
+				newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
+				showArrows: false,
+				labelIconSwitcher: true,
+				showTime: true,
+			},
+			"preset-4": {
+				
+			},
+			"preset-5": {
+				
+			},
+			"preset-6": {
+				
+			},
+
+		};
+
+		const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+		if (selectedPresetConfig) {
+			setAttributes({
+				newsTickerPresetStyle: selectedPreset,
+				...selectedPresetConfig,
+			});
+		} else {
+			console.warn(`Info Box: Preset "${selectedPreset}" not found.`);
+		}
+	};
+	/** End Preset Style **/
 
 	/** Start Global padding */
 	const handleGlobalPaddingUnitChange = (event, position) => {
@@ -1804,7 +1884,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const allBlockStyle = useMemo(() => {
         let style = `
-            .fb-news-ticker-wrapper.${blockID} {
+            .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner{
                 ${newsTickerGlobalNormalBackgroundType === "gradient"
                     ? `background: ${
                         newsTickerGlobalNormalCustomGradientSwitcher && newsTickerGlobalNormalCustomGradientInputValue
@@ -1840,7 +1920,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 transition: all .3s ease-in-out;
             }
     
-            .fb-news-ticker-wrapper.${blockID}:hover {
+            .fb-news-ticker-wrapper.${blockID}:hover .fb-news-ticker-inner{
                 ${newsTickerGlobalHoverBackgroundType === "gradient"
                     ? `background: ${
                         newsTickerGlobalHoverCustomGradientSwitcher && newsTickerGlobalHoverCustomGradientInputValue
@@ -2154,6 +2234,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	 */
 	const generalControls = (
 		<>
+			<div className="fb-presets-wrapper">
+				<PanelBody
+					title={__("Presets", "frontis-block")}
+					initialOpen={true}
+				>
+					<SelectControl
+						label={__("Preset Style", "frontis-blocks")}
+						value={newsTickerPresetStyle}
+						options={PRESETS}
+						onChange={(selected) => changeNewsTickerPreset(selected)}
+					/>
+				</PanelBody>
+			</div>
 			<PanelBody title={__("Settings", "frontis-blocks")} initialOpen={true}>
 				<ToggleControl
 					label={__("Show Navigation Arrows", "frontis-blocks")}
