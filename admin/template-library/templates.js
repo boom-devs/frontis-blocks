@@ -260,8 +260,6 @@ const PatternLibraryButton = () => {
                 try {
                     let response;
                     if (activeTab === 'patterns') {
-                        console.log('asdfadsf');
-                        
                         response = await getPatternTemplatesData("patterns");
                         if (response) {
                             setData((prev) => ({
@@ -462,7 +460,7 @@ const PatternLibraryButton = () => {
                                     setLoading={setLoading}
                                 />
 
-                                {activeTab === 'patterns' && (
+                                {activeTab !== 'templatelibrary' && (
                                     <TemplateContent
                                         activeTab={activeTab}
                                         activeCategory={activeCategory}
