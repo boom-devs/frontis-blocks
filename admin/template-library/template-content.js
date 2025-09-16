@@ -30,7 +30,8 @@ const TemplateContent = ({
     setActiveCategory,
     onSaveLibrary,
     setIsLoginModalOpen,
-    isLoginModalOpen
+    isLoginModalOpen,
+    isProPlugin,
 }) => {
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
@@ -258,6 +259,7 @@ const TemplateContent = ({
                                         title={template.title}
                                         imageUrl={template.image}
                                         is_premium={template.is_premium || false}
+                                        isProPlugin={isProPlugin}
                                         tags={template.tags || []}
                                         categories={template.categories || []}
                                         templateType={activeTab}
