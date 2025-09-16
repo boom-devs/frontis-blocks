@@ -1,6 +1,8 @@
 .fb-news-ticker-wrapper {
 	.fb-news-ticker-inner {
-		border: 1px solid #399cff;
+		border: solid;
+		border-color: #399cff;
+		border-width: 1px;
 		border-radius: 6px;
 		display: flex;
 		align-items: center;
@@ -12,7 +14,7 @@
 			gap: 10px;
 			background: #399cff;
 			color: #fff;
-			padding: 8px 16px;
+			padding: 28px 36px;
 			.fb-icon-wrapper {
 				line-height: 0;
 				svg {
@@ -32,9 +34,9 @@
 			align-items: center;
 			margin-left: auto;
 			position: absolute;
-			top: 12px;
 			right: 20px;
 			z-index: 99;
+			line-height: 0;
 		}
 
 		.fb-news-ticker-prev,

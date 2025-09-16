@@ -15,11 +15,11 @@ export const NORMAL_HOVER = [
 ];
 
 export const OVERFLOW_OP = [
-    { label: __('Default', 'frontis-blocks'), value: 'default' },
-    { label: __('Auto', 'frontis-blocks'), value: 'auto' },
-    { label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
-    { label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
-    { label: __('Clip', 'frontis-blocks'), value: 'clip' },
+	{ label: __('Default', 'frontis-blocks'), value: 'default' },
+	{ label: __('Auto', 'frontis-blocks'), value: 'auto' },
+	{ label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
+	{ label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
+	{ label: __('Clip', 'frontis-blocks'), value: 'clip' },
 ];
 
 export const NAVIGATION_LAYOUT = [
@@ -67,7 +67,7 @@ export const HAMBURGER_MENU_SCREEN = [
 export const DISPLAY_HAMBURGER_MENU = [
 	{ label: __("Hide", 'frontis-blocks'), value: 'hide' },
 	{ label: __("Mobile", 'frontis-blocks'), value: 'mobile' },
-    { label: __("Always", 'frontis-blocks'), value: 'always' },
+	{ label: __("Always", 'frontis-blocks'), value: 'always' },
 ];
 
 export const HORIZONTAL_NAVIGATION_ALIGN = [
@@ -129,42 +129,42 @@ export const FONT_STYLE = [
 ];
 
 export const TEXT_TRANSFORM = [
-    {
-        label: __("Default", "frontis-blocks"),
-        value: "none",
-        icon: (
-            <svg viewBox="0 0 24 24" width="24" height="24">
-                <path d="M7 11.5h10V13H7z"></path>
-            </svg>
-        ),
-    },
-    {
-        label: __("Uppercase", "frontis-blocks"),
-        value: "uppercase",
-        icon: (
-            <svg viewBox="0 0 24 24" width="24" height="24">
-                <path d="M6.1 6.8L2.1 18h1.6l1.1-3h4.3l1.1 3h1.6l-4-11.2H6.1zm-.8 6.8L7 8.9l1.7 4.7H5.3zm15.1-.7c-.4-.5-.9-.8-1.6-1 .4-.2.7-.5.8-.9.2-.4.3-.9.3-1.4 0-.9-.3-1.6-.8-2-.6-.5-1.3-.7-2.4-.7h-3.5V18h4.2c1.1 0 2-.3 2.6-.8.6-.6 1-1.4 1-2.4-.1-.8-.3-1.4-.6-1.9zm-5.7-4.7h1.8c.6 0 1.1.1 1.4.4.3.2.5.7.5 1.3 0 .6-.2 1.1-.5 1.3-.3.2-.8.4-1.4.4h-1.8V8.2zm4 8c-.4.3-.9.5-1.5.5h-2.6v-3.8h2.6c1.4 0 2 .6 2 1.9.1.6-.1 1-.5 1.4z"></path>
-            </svg>
-        ),
-    },
-    {
-        label: __("Lowercase", "frontis-blocks"),
-        value: "lowercase",
-        icon: (
-            <svg viewBox="0 0 24 24" width="24" height="24">
-                <path d="M11 16.8c-.1-.1-.2-.3-.3-.5v-2.6c0-.9-.1-1.7-.3-2.2-.2-.5-.5-.9-.9-1.2-.4-.2-.9-.3-1.6-.3-.5 0-1 .1-1.5.2s-.9.3-1.2.6l.2 1.2c.4-.3.7-.4 1.1-.5.3-.1.7-.2 1-.2.6 0 1 .1 1.3.4.3.2.4.7.4 1.4-1.2 0-2.3.2-3.3.7s-1.4 1.1-1.4 2.1c0 .7.2 1.2.7 1.6.4.4 1 .6 1.8.6.9 0 1.7-.4 2.4-1.2.1.3.2.5.4.7.1.2.3.3.6.4.3.1.6.1 1.1.1h.1l.2-1.2h-.1c-.4.1-.6 0-.7-.1zM9.2 16c-.2.3-.5.6-.9.8-.3.1-.7.2-1.1.2-.4 0-.7-.1-.9-.3-.2-.2-.3-.5-.3-.9 0-.6.2-1 .7-1.3.5-.3 1.3-.4 2.5-.5v2zm10.6-3.9c-.3-.6-.7-1.1-1.2-1.5-.6-.4-1.2-.6-1.9-.6-.5 0-.9.1-1.4.3-.4.2-.8.5-1.1.8V6h-1.4v12h1.3l.2-1c.2.4.6.6 1 .8.4.2.9.3 1.4.3.7 0 1.2-.2 1.8-.5.5-.4 1-.9 1.3-1.5.3-.6.5-1.3.5-2.1-.1-.6-.2-1.3-.5-1.9zm-1.7 4c-.4.5-.9.8-1.6.8s-1.2-.2-1.7-.7c-.4-.5-.7-1.2-.7-2.1 0-.9.2-1.6.7-2.1.4-.5 1-.7 1.7-.7s1.2.3 1.6.8c.4.5.6 1.2.6 2s-.2 1.4-.6 2z"></path>
-            </svg>
-        ),
-    },
-    {
-        label: __("Capitalize", "frontis-blocks"),
-        value: "capitalize",
-        icon: (
-            <svg viewBox="0 0 24 24" width="24" height="24">
-                <path d="M7.1 6.8L3.1 18h1.6l1.1-3h4.3l1.1 3h1.6l-4-11.2H7.1zm-.8 6.8L8 8.9l1.7 4.7H6.3zm14.5-1.5c-.3-.6-.7-1.1-1.2-1.5-.6-.4-1.2-.6-1.9-.6-.5 0-.9.1-1.4.3-.4.2-.8.5-1.1.8V6h-1.4v12h1.3l.2-1c.2.4.6.6 1 .8.4.2.9.3 1.4.3.7 0 1.2-.2 1.8-.5.5-.4 1-.9 1.3-1.5.3-.6.5-1.3.5-2.1-.1-.6-.2-1.3-.5-1.9zm-1.7 4c-.4.5-.9.8-1.6.8s-1.2-.2-1.7-.7c-.4-.5-.7-1.2-.7-2.1 0-.9.2-1.6.7-2.1.4-.5 1-.7 1.7-.7s1.2.3 1.6.8c.4.5.6 1.2.6 2 .1.8-.2 1.4-.6 2z"></path>
-            </svg>
-        ),
-    },
+	{
+		label: __("Default", "frontis-blocks"),
+		value: "none",
+		icon: (
+			<svg viewBox="0 0 24 24" width="24" height="24">
+				<path d="M7 11.5h10V13H7z"></path>
+			</svg>
+		),
+	},
+	{
+		label: __("Uppercase", "frontis-blocks"),
+		value: "uppercase",
+		icon: (
+			<svg viewBox="0 0 24 24" width="24" height="24">
+				<path d="M6.1 6.8L2.1 18h1.6l1.1-3h4.3l1.1 3h1.6l-4-11.2H6.1zm-.8 6.8L7 8.9l1.7 4.7H5.3zm15.1-.7c-.4-.5-.9-.8-1.6-1 .4-.2.7-.5.8-.9.2-.4.3-.9.3-1.4 0-.9-.3-1.6-.8-2-.6-.5-1.3-.7-2.4-.7h-3.5V18h4.2c1.1 0 2-.3 2.6-.8.6-.6 1-1.4 1-2.4-.1-.8-.3-1.4-.6-1.9zm-5.7-4.7h1.8c.6 0 1.1.1 1.4.4.3.2.5.7.5 1.3 0 .6-.2 1.1-.5 1.3-.3.2-.8.4-1.4.4h-1.8V8.2zm4 8c-.4.3-.9.5-1.5.5h-2.6v-3.8h2.6c1.4 0 2 .6 2 1.9.1.6-.1 1-.5 1.4z"></path>
+			</svg>
+		),
+	},
+	{
+		label: __("Lowercase", "frontis-blocks"),
+		value: "lowercase",
+		icon: (
+			<svg viewBox="0 0 24 24" width="24" height="24">
+				<path d="M11 16.8c-.1-.1-.2-.3-.3-.5v-2.6c0-.9-.1-1.7-.3-2.2-.2-.5-.5-.9-.9-1.2-.4-.2-.9-.3-1.6-.3-.5 0-1 .1-1.5.2s-.9.3-1.2.6l.2 1.2c.4-.3.7-.4 1.1-.5.3-.1.7-.2 1-.2.6 0 1 .1 1.3.4.3.2.4.7.4 1.4-1.2 0-2.3.2-3.3.7s-1.4 1.1-1.4 2.1c0 .7.2 1.2.7 1.6.4.4 1 .6 1.8.6.9 0 1.7-.4 2.4-1.2.1.3.2.5.4.7.1.2.3.3.6.4.3.1.6.1 1.1.1h.1l.2-1.2h-.1c-.4.1-.6 0-.7-.1zM9.2 16c-.2.3-.5.6-.9.8-.3.1-.7.2-1.1.2-.4 0-.7-.1-.9-.3-.2-.2-.3-.5-.3-.9 0-.6.2-1 .7-1.3.5-.3 1.3-.4 2.5-.5v2zm10.6-3.9c-.3-.6-.7-1.1-1.2-1.5-.6-.4-1.2-.6-1.9-.6-.5 0-.9.1-1.4.3-.4.2-.8.5-1.1.8V6h-1.4v12h1.3l.2-1c.2.4.6.6 1 .8.4.2.9.3 1.4.3.7 0 1.2-.2 1.8-.5.5-.4 1-.9 1.3-1.5.3-.6.5-1.3.5-2.1-.1-.6-.2-1.3-.5-1.9zm-1.7 4c-.4.5-.9.8-1.6.8s-1.2-.2-1.7-.7c-.4-.5-.7-1.2-.7-2.1 0-.9.2-1.6.7-2.1.4-.5 1-.7 1.7-.7s1.2.3 1.6.8c.4.5.6 1.2.6 2s-.2 1.4-.6 2z"></path>
+			</svg>
+		),
+	},
+	{
+		label: __("Capitalize", "frontis-blocks"),
+		value: "capitalize",
+		icon: (
+			<svg viewBox="0 0 24 24" width="24" height="24">
+				<path d="M7.1 6.8L3.1 18h1.6l1.1-3h4.3l1.1 3h1.6l-4-11.2H7.1zm-.8 6.8L8 8.9l1.7 4.7H6.3zm14.5-1.5c-.3-.6-.7-1.1-1.2-1.5-.6-.4-1.2-.6-1.9-.6-.5 0-.9.1-1.4.3-.4.2-.8.5-1.1.8V6h-1.4v12h1.3l.2-1c.2.4.6.6 1 .8.4.2.9.3 1.4.3.7 0 1.2-.2 1.8-.5.5-.4 1-.9 1.3-1.5.3-.6.5-1.3.5-2.1-.1-.6-.2-1.3-.5-1.9zm-1.7 4c-.4.5-.9.8-1.6.8s-1.2-.2-1.7-.7c-.4-.5-.7-1.2-.7-2.1 0-.9.2-1.6.7-2.1.4-.5 1-.7 1.7-.7s1.2.3 1.6.8c.4.5.6 1.2.6 2 .1.8-.2 1.4-.6 2z"></path>
+			</svg>
+		),
+	},
 ];
 
 export const TEXT_DECORATION = [
@@ -176,14 +176,14 @@ export const TEXT_DECORATION = [
 ];
 
 export const GOOGLE_FONTS = async () => {
-    const res = await fetch(FrontisBlocksData.pluginUrl + 'assets/google-fonts/google-fonts.json');
-    const data = await res.json();
+	const res = await fetch(FrontisBlocksData.pluginUrl + 'assets/google-fonts/google-fonts.json');
+	const data = await res.json();
 
-    return Object.keys(data).map(family => ({
-        label: family,
-        value: family,
-        weights: data[family]
-    }));
+	return Object.keys(data).map(family => ({
+		label: family,
+		value: family,
+		weights: data[family]
+	}));
 };
 
 export const FONT_WEIGHT = [
@@ -258,26 +258,26 @@ export const BACKGROUND_TYPES = [
 ];
 
 export const DYNAMIC_CURRENT_POST_OPTIONS = [
-    { label: __('Post Title', 'frontis-blocks'), value: 'post_title' },
-    { label: __('Post Excerpt', 'frontis-blocks'), value: 'post_excerpt' },
-    { label: __('Featured Image URL', 'frontis-blocks'), value: 'post_thumbnail' },
-    { label: __('Post Custom Field', 'frontis-blocks'), value: 'post_meta' },
-    { label: __('Post Date', 'frontis-blocks'), value: 'post_date' },
-    { label: __('Post Time', 'frontis-blocks'), value: 'post_time' },
-    { label: __('Post Terms', 'frontis-blocks'), value: 'post_terms' },
-    { label: __('Post ID', 'frontis-blocks'), value: 'post_id' },
-    { label: __('Comments Number', 'frontis-blocks'), value: 'comments_number' },
+	{ label: __('Post Title', 'frontis-blocks'), value: 'post_title' },
+	{ label: __('Post Excerpt', 'frontis-blocks'), value: 'post_excerpt' },
+	{ label: __('Featured Image URL', 'frontis-blocks'), value: 'post_thumbnail' },
+	{ label: __('Post Custom Field', 'frontis-blocks'), value: 'post_meta' },
+	{ label: __('Post Date', 'frontis-blocks'), value: 'post_date' },
+	{ label: __('Post Time', 'frontis-blocks'), value: 'post_time' },
+	{ label: __('Post Terms', 'frontis-blocks'), value: 'post_terms' },
+	{ label: __('Post ID', 'frontis-blocks'), value: 'post_id' },
+	{ label: __('Comments Number', 'frontis-blocks'), value: 'comments_number' },
 
-    // ==== AUTHOR ====
-    { label: __('Author Name', 'frontis-blocks'), value: 'author_name' },
-    { label: __('Author First Name', 'frontis-blocks'), value: 'author_first_name' },
-    { label: __('Author Last Name', 'frontis-blocks'), value: 'author_last_name' },
-    { label: __('Author Nickname', 'frontis-blocks'), value: 'author_nickname' },
-    { label: __('Author Bio', 'frontis-blocks'), value: 'author_description' },
-    { label: __('Author Email', 'frontis-blocks'), value: 'author_email' },
-    { label: __('Author Website', 'frontis-blocks'), value: 'author_url' },
-    { label: __('Author Avatar URL', 'frontis-blocks'), value: 'author_avatar' },
-    { label: __('Author Custom Field', 'frontis-blocks'), value: 'author_meta' },
+	// ==== AUTHOR ====
+	{ label: __('Author Name', 'frontis-blocks'), value: 'author_name' },
+	{ label: __('Author First Name', 'frontis-blocks'), value: 'author_first_name' },
+	{ label: __('Author Last Name', 'frontis-blocks'), value: 'author_last_name' },
+	{ label: __('Author Nickname', 'frontis-blocks'), value: 'author_nickname' },
+	{ label: __('Author Bio', 'frontis-blocks'), value: 'author_description' },
+	{ label: __('Author Email', 'frontis-blocks'), value: 'author_email' },
+	{ label: __('Author Website', 'frontis-blocks'), value: 'author_url' },
+	{ label: __('Author Avatar URL', 'frontis-blocks'), value: 'author_avatar' },
+	{ label: __('Author Custom Field', 'frontis-blocks'), value: 'author_meta' },
 ];
 
 export const CONTENT_TYPE = [

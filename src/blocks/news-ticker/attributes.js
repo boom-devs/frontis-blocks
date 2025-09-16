@@ -15,6 +15,10 @@ const attributes = {
         type: 'string',
         default: ''
     },
+    newsTickerPresetStyle: {
+        type: "string",
+        default: "preset-1",
+    },
     highlightColor: {
         type: 'string',
         default: '',
@@ -302,7 +306,7 @@ const attributes = {
     /** Start Border */
     newsTickerGlobalBorder: {
         type: 'string',
-        default: 'none',
+        default: '',
     },
     newsTickerGlobalBorderColorSwitcher: {
         type: 'string',
@@ -1401,7 +1405,7 @@ const attributes = {
     // Ticker Timer Border
     tickerTimerBorder: {
         type: 'string',
-        default: 'none',
+        default: '',
     },
     tickerTimerBorderColorSwitcher: {
         type: 'string',
