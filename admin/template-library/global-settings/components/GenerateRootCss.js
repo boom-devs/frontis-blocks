@@ -1,4 +1,4 @@
-const generateCSSVariables = (data, deviceType) => {
+const generateCSSVariables = (data, deviceType, previewType) => {
 
     const createValueWithUnit = (value, unit) => {
         if (!value || value === 'Default') return '0px';
@@ -279,78 +279,6 @@ const generateCSSVariables = (data, deviceType) => {
             ${allCombinedStyles}
             ${headingGrouped}
         `;
-        // // Apply individual styles for each heading (h1, h2, h3, etc.)
-        // if(deviceType !== 'Desktop') {
-
-        // } else {
-        //     headingGrouped = `
-        //         body .editor-visual-editor h1 {
-        //             ${heading1Styles}
-        //         }
-        //         body .editor-visual-editor h2 {
-        //             ${heading2Styles}
-        //         }
-        //         body .editor-visual-editor h3 {
-        //             ${heading3Styles}
-        //         }
-        //         body .editor-visual-editor h4 {
-        //             ${heading4Styles}
-        //         }
-        //         body .editor-visual-editor h5 {
-        //             ${heading5Styles}
-        //         }
-        //         body .editor-visual-editor h6 {
-        //             ${heading6Styles}
-        //         }
-        //     `;
-
-        //     // Styles for the "all" combined typography
-        //     allCombinedStyles = `
-        //         body .editor-visual-editor h1,
-        //         body .editor-visual-editor h2,
-        //         body .editor-visual-editor h3,
-        //         body .editor-visual-editor h4,
-        //         body .editor-visual-editor h5,
-        //         body .editor-visual-editor h6 {
-        //             ${combinedHeadingStyles}
-        //         }
-        //     `;
-
-        //     styles = `
-        //         :root {
-        //             ${rootStyles}
-        //             ${desktopStyles}
-        //         }
-        //         @media (max-width: 1024px) {
-        //             :root {
-        //                 ${tabletStyles}
-        //             }
-        //         }
-        //         @media (max-width: 767px) {
-        //             :root {
-        //                 ${mobileStyles}
-        //             }
-        //         }
-
-        //         body .editor-visual-editor p {
-        //             ${paragraphStyles}
-        //         }
-
-        //         body .editor-visual-editor a, body .editor-visual-editor p a {
-        //             ${linkStyles}
-        //         }
-
-        //         body .editor-visual-editor .wp-block-button__link, body .editor-visual-editor button {
-        //             ${buttonStyles}
-        //         }
-
-        //         body .editor-visual-editor figcaption {
-        //             ${captionStyles}
-        //         }
-        //         ${allCombinedStyles}
-        //         ${headingGrouped}
-        //     `;
-        // }
     } else {
 
         // Apply individual styles for each heading (h1, h2, h3, etc.)
@@ -426,33 +354,51 @@ const generateCSSVariables = (data, deviceType) => {
         `;
     }
 
-    let iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+    let iframe;
+
+    // Select iframe based on previewType
+    if (previewType === "preview") {
+        iframe = document.querySelector("iframe.fb-preview-frame");
+    } else {
+        iframe =
+            document.querySelector("iframe.edit-site-visual-editor__editor-canvas") ||
+            document.querySelector('iframe[name="editor-canvas"]');
+    }
+
     let iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
-    let styleTag = iframeDocument.getElementById("global-typo");
 
-    if(fileName === 'post.php') {
+    const styleId = previewType === "preview" ? "global-typo-preview" : "global-typo";
+    let styleTag = iframeDocument.getElementById(styleId);
 
-        if(deviceType !== 'Desktop') {
-            iframe = document.querySelector('iframe[name="editor-canvas"]');
-            iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
-            styleTag = iframeDocument.getElementById("global-typo");
+    if (previewType !== "preview" && fileName === "post.php") {
+        iframe = document.querySelector('iframe[name="editor-canvas"]');
+        iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
+        styleTag = iframeDocument.getElementById(styleId);
 
-            console.log("iframeDocument")
-            console.log(iframeDocument)
-        } else {
-            iframe = document.querySelector('iframe[name="editor-canvas"]');
-            iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
-            styleTag = iframeDocument.getElementById("global-typo");
-        }
+        console.log("iframeDocument", iframeDocument);
     }
 
     if (!styleTag) {
         styleTag = iframeDocument.createElement("style");
-        styleTag.id = "global-typo";
+        styleTag.id = styleId;
         iframeDocument.head.appendChild(styleTag);
     }
 
-    styleTag.innerHTML = styles;
+    styleTag.textContent = `
+        ${styles}
+    `;
+
+    if (previewType !== "preview") {
+        let mainStyleTag = document.getElementById(styleId);
+        if (!mainStyleTag) {
+            mainStyleTag = document.createElement("style");
+            mainStyleTag.id = styleId;
+            document.head.appendChild(mainStyleTag);
+        }
+        mainStyleTag.textContent = `
+            ${styles}
+        `;
+    }
 
     return styles;
 };

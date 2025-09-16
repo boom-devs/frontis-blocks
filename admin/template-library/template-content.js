@@ -28,9 +28,10 @@ const TemplateContent = ({
     setLoading,
     setIsLogedIn,
     setActiveCategory,
-    onSaveLibrary
+    onSaveLibrary,
+    setIsLoginModalOpen,
+    isLoginModalOpen
 }) => {
-    const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
     const [originalTemplates, setOriginalTemplates] = useState([]);
@@ -179,6 +180,7 @@ const TemplateContent = ({
     // Get user data from local storage
     useEffect(() => {
         // Get userData from local storage
+        
         const userData = localStorage.getItem('userData');
         if (userData === 'undefined' || userData === 'null' || userData === '') {
             getUserDataFromDb();
@@ -189,7 +191,7 @@ const TemplateContent = ({
             setIsLoginModalOpen(false);
         }
         
-    }, [])
+    }, []);
 
     return (
         <>
@@ -263,8 +265,11 @@ const TemplateContent = ({
                                         customColors={template.custom_colors || []}
                                         gradientColors={template.gradientColors || []}
                                         customGradientColors={template.custom_gradientColors || []}
-                                        typographies={template.typographies || []}
-                                        customTypographies={template.customTypographies || []}
+                                        typographies={template.typographies || {}}
+                                        customTypographies={template.customTypographies || {}}
+                                        globalTypographies={template.globalTypographies || {}}
+                                        fontFamilies={template.fontFamilies || {}}
+                                        pages={template.pages || []}
                                         dependencies={template.dependencies || []}
                                         activeTab={activeTab}
                                         setLibraryData={setLibraryData}
@@ -278,6 +283,8 @@ const TemplateContent = ({
                                         onSaveLibrary={onSaveLibrary}
                                         saved={template.saved}
                                         setLoading={template.loading}
+                                        setIsLoginModalOpen={setIsLoginModalOpen}
+                                        isLoginModalOpen={isLoginModalOpen}
                                     />
                                 ))
                             ) : (
@@ -291,6 +298,8 @@ const TemplateContent = ({
                 <LoginSignupModal
                     onLoginSuccess={handleLoginSuccess}
                     onRequestClose={handleCloseLoginModal}
+                    isLoginModalOpen={isLoginModalOpen}
+                    setIsLoginModalOpen={setIsLoginModalOpen}
                 />
             )}
         </>

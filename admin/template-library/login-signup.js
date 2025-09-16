@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "@wordpress/element";
 import { useForm } from "react-hook-form";
 import { ClipLoader } from "react-spinners";
 
-const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
+const LoginSignupModal = ({ onLoginSuccess = () => {}, isLoginModalOpen, setIsLoginModalOpen }) => {
 	const [activeTab, setActiveTab] = useState("login");
 	const [isLoading, setIsLoading] = useState(false);
 	const [agreedToTerms, setAgreedToTerms] = useState(false);
@@ -142,8 +142,8 @@ const LoginSignupModal = ({ onLoginSuccess = () => {} }) => {
 	);
 
 	return (
-		<div className="fb-auth-modal">
-			<div className="fb-auth-container">
+		<div className="fb-auth-modal" onClick={() => isLoginModalOpen && setIsLoginModalOpen(false)}>
+			<div className="fb-auth-container" onClick={(e) => e.stopPropagation()}>
 				{/* Header with tabs */}
 				<div className="fb-auth-header">
 					<div className="fb-auth-tabs">

@@ -28,6 +28,9 @@ const TemplateGrid = ({
     customGradientColors,
     typographies,
     customTypographies,
+    globalTypographies,
+    fontFamilies,
+    pages,
     categories,
     activeTab,
     setLibraryData,
@@ -42,7 +45,9 @@ const TemplateGrid = ({
     alreadySaved = () => { },
     setActiveCategory,
     saved,
-    setLoading
+    setLoading,
+    setIsLoginModalOpen,
+    isLoginModalOpen
     // setIsPladmin
 }) => {
 
@@ -55,6 +60,7 @@ const TemplateGrid = ({
     const [freeTemplate, setFreeTemplate] = useState(false);
 
     const isAlreadySaved = alreadySaved(savedItems, id, activeTab)
+    const userData = localStorage.getItem('userData');
 
     const handleFullSiteImport = useCallback(async (id) => {
         setIsLoading(true);
@@ -93,6 +99,11 @@ const TemplateGrid = ({
         // }
         // if (!is_premium && isLogedIn) {
         // setIsModalOpen(true);
+        if (!userData) {
+            setIsLoginModalOpen(true);
+            return;
+        }
+        setIsModalOpen(true);
         // }
     }, [is_premium, isLogedIn, isPluginUpgrade]);
 
@@ -133,50 +144,13 @@ const TemplateGrid = ({
         customGradientColors,
         typographies,
         customTypographies,
+        globalTypographies,
+        fontFamilies,
+        pages,
         dependencies,
         dateAndTime: currentDateAndTime,
         type: templateType
     };
-
-    const handleSaveLibrary = useCallback(async () => {
-        // if (isAlreadySaved) return;
-
-        // let userData = JSON.parse(localStorage.getItem("userData"));
-
-        // // setLibraryData(prevData => [...prevData, templateData]);
-        // // setSavedItems(prev => [...prev, templateData]);
-
-        // const apiBase = "https://frontis-sync.boomdevshub.com/wp-json";
-        // const body = {
-        //     email: userData.email,
-        //     item_id: templateData.id,
-        //     item_type: templateData.type,
-        //     license_key: FB_TLibrary.activationKey,
-        //     website: window.location.origin,
-        // };
-
-        // const response = await fetch(`${apiBase}/frontis-sync/v1/saved-item`, {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify(body),
-        // });
-
-        // const responseData = await response.json();
-
-        // toast.success('Template saved to library', {
-        //     position: "top-right",
-        //     autoClose: 3000,
-        //     hideProgressBar: false,
-        //     closeOnClick: true,
-        //     pauseOnHover: true,
-        // });
-    }, [isAlreadySaved, templateData, setLibraryData, setSavedItems]);
-
-    const fetImportData = () => {
-
-    }
 
     const [patternsData] = usePostDataMutation();
     const getTemplatesData = async (route, key, id) => {
@@ -223,6 +197,12 @@ const TemplateGrid = ({
     }
 
     const importPattern = async (id) => {
+
+        if (!userData) {
+            setIsLoginModalOpen(true);
+            return;
+        }
+
         setIsLoading(true);
 
         if (is_premium) {
@@ -290,6 +270,11 @@ const TemplateGrid = ({
     };
     
     const importPage = async (id) => {
+        if (!userData) {
+            setIsLoginModalOpen(true);
+            return;
+        }
+
         setIsLoading(true);
 
         if (is_premium) {
