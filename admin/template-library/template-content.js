@@ -9,6 +9,7 @@ import {ToastContainer, toast } from "react-toastify";
 import { TemplateContentLoader } from "./template-loader";
 import { usePostDataMutation } from "./services/wpapi";
 
+
 const TemplateContent = ({
     activeTab,
     activeCategory,
@@ -35,6 +36,7 @@ const TemplateContent = ({
     isPluginUpgradeModalOpen,
     setIsPluginUpgradeModalOpen,
 }) => {
+
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
     const [originalTemplates, setOriginalTemplates] = useState([]);
