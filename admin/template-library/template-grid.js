@@ -12,6 +12,8 @@ import { usePostDataMutation } from "./services/laravelapi";
 import { select, dispatch } from '@wordpress/data';
 import { createBlock, parse, rawHandler } from '@wordpress/blocks';
 import { useState, useEffect, useCallback } from "@wordpress/element";
+import { useSelector, useDispatch } from "react-redux";
+import { setAttribute } from "./store/attributesSlice";
 
 const TemplateGrid = ({
     item = '',
@@ -53,6 +55,12 @@ const TemplateGrid = ({
     setIsPluginUpgradeModalOpen,
     // setIsPladmin
 }) => {
+
+    const { siteTitle, primaryColor, enableFeatureX } = useSelector(
+        (state) => state.attributes
+      );
+    const dispatch = useDispatch();
+    console.log(siteTitle, primaryColor, enableFeatureX);
 
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -199,6 +207,8 @@ const TemplateGrid = ({
     }
 
     const importPattern = async (id) => {
+
+        dispatch(setAttribute({ key: "siteTitle", value: "test" }));
 
         if (!userData) {
             setIsLoginModalOpen(true);
