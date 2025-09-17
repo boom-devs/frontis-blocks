@@ -3171,6 +3171,30 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         setAttributes({ dynamicTermsTaxonomy: val });
     };
 
+
+    /**
+     * Dynamic Data Source
+     */
+    const [dataSource, setDataSource] = useState(dynamicSource || "current_post");
+
+    useEffect(() => {
+        setDataSource(dynamicSource || "current_post");
+    }, [dynamicSource]);
+
+    const selectedDataSource = useMemo(() => {
+        const v = dataSource || "current_post";
+        return (
+            DYNAMIC_DATA_SOURCE_OPTIONS.find((o) => o.value === v) ||
+            DYNAMIC_DATA_SOURCE_OPTIONS[0]
+        );
+    }, [dataSource]);
+
+    const handleDataSourceChange = (opt) => {
+        const val = (opt && typeof opt.value === "string") ? opt.value : "current_post";
+        setDataSource(val);
+        setAttributes({ dynamicSource: val });
+    };
+
     /**
      * dynamic link source
      */
@@ -3288,8 +3312,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                 >
                                     <Select2 
                                         options={DYNAMIC_DATA_SOURCE_OPTIONS}
-                                        value={DYNAMIC_DATA_SOURCE_OPTIONS.find(o => o.value === dynamicSource) || null }                                                     // option object
-                                        onChange={(opt) => setAttributes({ dynamicSource: opt?.value ?? '' })}
+										value={selectedDataSource}
+										onChange={handleDataSourceChange}
                                         className="fb-select2-control"
                                     />
                             </BaseControl>
