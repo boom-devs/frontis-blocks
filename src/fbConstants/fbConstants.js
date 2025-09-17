@@ -285,7 +285,6 @@ export const DYNAMIC_DATA_SOURCE_OPTIONS = [
 	{ label: __('Archive Title', 'frontis-blocks'), value: 'archive_title' },
 	{ label: __('Site Tagline', 'frontis-blocks'), value: 'site_tagline' },
 	{ label: __('Site Title', 'frontis-blocks'), value: 'site_title' },
-	{ label: __('Shortcode', 'frontis-blocks'), value: 'shortcode' },
 ];
 
 export const DYNAMIC_DATA_SOURCE_FIELD_OPTIONS = [
@@ -334,6 +333,25 @@ export const DYNAMIC_LINK_SOURCE_OPTIONS = [
 	{ label: __('Avatar (Profile URL)', 'frontis-blocks'), value: 'avatar_profile_url' },
 	{ label: __('Author Page URL', 'frontis-blocks'), value: 'author_page_url' },
 	{ label: __('Author Archive URL', 'frontis-blocks'), value: 'archive_url' },
+];
+
+export const DYNAMIC_IMAGE_SOURCE_OPTIONS = [
+	{ label: __('Current Post', 'frontis-blocks'), value: 'current_post' },
+	{ label: __('Post Type', 'frontis-blocks'), value: 'post_type' },
+	{ label: __('Site Logo Url', 'frontis-blocks'), value: 'site_logo_url' },
+];
+
+export const DYNAMIC_IMAGE_FIELD_OPTIONS = [
+	{ label: __('Featured Image', 'frontis-blocks'), value: 'featured_image' },
+	{ label: __('Avatar (Profile Image)', 'frontis-blocks'), value: 'avatar_profile' },
+]
+
+export const WP_IMAGE_SIZE_OPTIONS = [
+	{ label: __('Full', 'frontis-blocks'), value: 'full' },
+	{ label: __('Thumbnail', 'frontis-blocks'), value: 'thumbnail' },
+	{ label: __('Small', 'frontis-blocks'), value: 'small' },
+	{ label: __('Medium', 'frontis-blocks'), value: 'medium' },
+	{ label: __('Large', 'frontis-blocks'), value: 'large' },
 ];
   
 export const getDynamicDateFormatOptions = (sampleDate = new Date()) => {
