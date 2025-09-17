@@ -51,6 +51,14 @@ const attributes = {
         type: 'string',
         default: 'top-right',
     },
+    navigationPosition: {
+        type: 'string',
+        default: 'right',
+    },
+    labelPosition: {
+        type: 'string',
+        default: 'left',
+    },
     labelIconSwitcher: {
         type: "boolean",
         default: false,
@@ -80,6 +88,10 @@ const attributes = {
         default: false,
     },
     showTime: {
+        type: "boolean",
+        default: false,
+    },
+    showAutoplayButton: {
         type: "boolean",
         default: false,
     },
@@ -627,6 +639,20 @@ const attributes = {
             Mobile: 'px',
         }
     },
+
+    // Label color
+    labelTextColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    labelTextColor: {
+        type: 'string',
+        default: ''
+    },
+    labelTextHoverColor: {
+        type: 'string',
+        default: ''
+    },
     // Label Container Padding
     labelContainerPaddingUnits: {
         type: 'object',
@@ -914,7 +940,8 @@ const attributes = {
     /** End Label Container Styling */
 
     /** Start Label Icon Styling */
-    //Icon color
+
+    // Label Icon color
     labelIconColorSwitcher: {
         type: 'string',
         default: 'normal'
@@ -924,6 +951,19 @@ const attributes = {
         default: ''
     },
     labelIconHoverColor: {
+        type: 'string',
+        default: ''
+    },
+    //Navigation Icon color
+    navigationIconColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    navigationIconColor: {
+        type: 'string',
+        default: ''
+    },
+    navigationIconHoverColor: {
         type: 'string',
         default: ''
     },

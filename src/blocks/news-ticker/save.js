@@ -15,7 +15,8 @@ export default function Save({ attributes }) {
 		labelIconSwitcher,
         showArrows,
 		showTime,
-		arrowsUniqueId
+		arrowsUniqueId,
+		timerPosition
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -57,7 +58,7 @@ export default function Save({ attributes }) {
 					</div>
                 )}
 				{showTime && (
-					<div className="fb-news-ticker-time">
+					<div className={`fb-news-ticker-time ${timerPosition}`}>
 						<span>
 							{new Date()
 								.toLocaleTimeString("en-US", {

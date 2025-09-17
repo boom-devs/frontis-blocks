@@ -56,6 +56,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		}
 	}, [arrowsId]);
 
+	useEffect(() => {
+		if (!arrowsId || !swiperRef.current) return;
+
+		const wrapper = document.querySelector(`.${arrowsId}`);
+		if (!wrapper) return;
+
+		const btn = wrapper.querySelector(".fb-news-ticker-pause-btn");
+		if (!btn) return;
+
+		const handleClick = () => {
+			if (swiperRef.current.autoplay?.running) {
+				swiperRef.current.autoplay.stop();
+				btn.classList.add("paused"); 
+			} else {
+				swiperRef.current.autoplay.start();
+				btn.classList.remove("paused"); 
+			}
+		};
+
+		btn.addEventListener("click", handleClick);
+		return () => btn.removeEventListener("click", handleClick);
+	}, [arrowsId]);
+
+
 	// editor store hooks
 	const { insertBlock } = useDispatch("core/block-editor");
 	const { getSelectedBlockClientIds } = useSelect("core/block-editor");

@@ -292,3 +292,12 @@ export const TIMER_POSITION = [
 	{ label: __("Bottom Left", "frontis-blocks"), value: "bottom-left" },
 ];
 
+export const NAVIGATION_POSITION = [
+	{ label: __("Right", "frontis-blocks"), value: "right" },
+	{ label: __("Left", "frontis-blocks"), value: "left" },
+];
+
+export const LABEL_POSITION = [
+	{ label: __("Right", "frontis-blocks"), value: "right" },
+	{ label: __("Left", "frontis-blocks"), value: "left" },
+];
