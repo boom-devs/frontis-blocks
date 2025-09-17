@@ -102,33 +102,11 @@ const PatternLibraryButton = () => {
 
     const [patternsData, { data: patternsResponse, error, isLoading }] = usePostDataMutation();
 
-    const getTemplatesData = async (value) => {
-        try {
-            const response = await patternsData({
-                endpoint: value,
-                body: {},
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }).unwrap();
-
-            return response;
-        } catch (err) {
-            console.error('Error:', err);
-            console.error('Status:', err.status);
-            console.error('Data:', err.data);
-            if (err.status === 500) {
-                console.error('Server error. Check the API endpoint and server logs.');
-            }
-        }
-    };
-
-    const getPatternTemplatesData = async (value, logged_in, email, license_key) => {
+    const getTemplatesData = async (value, email, license_key) => {
         try {
             const response = await patternsData({
                 endpoint: value,
                 body: {
-                    logged_in: logged_in,
                     email: email,
                     license_key: license_key
                 },
@@ -139,21 +117,22 @@ const PatternLibraryButton = () => {
 
             return response;
         } catch (err) {
-            console.error('Error:', err);
-            console.error('Status:', err.status);
-            console.error('Data:', err.data);
-            if (err.status === 500) {
-                console.error('Server error. Check the API endpoint and server logs.');
+            if(err.data.status === 'error') {
+                toast.error(err.data.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                });
             }
         }
     };
 
-    const getSavedTemplatesData = async (value, email) => {
+    const getSavedTemplatesData = async (value, email, license_key) => {
         try {
             const response = await patternsData({
                 endpoint: value,
                 body: {
-                    email: email
+                    email: email,
+                    license_key: license_key
                 },
                 headers: {
                     'Content-Type': 'application/json',
@@ -162,11 +141,11 @@ const PatternLibraryButton = () => {
 
             return response;
         } catch (err) {
-            console.error('Error:', err);
-            console.error('Status:', err.status);
-            console.error('Data:', err.data);
-            if (err.status === 500) {
-                console.error('Server error. Check the API endpoint and server logs.');
+            if(err.data.status === 'error') {
+                toast.error(err.data.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                });
             }
         }
     };
@@ -192,12 +171,10 @@ const PatternLibraryButton = () => {
         const fetchData = async () => {
             setLoading(true);
 
-            const logged_in = userData?.email ? 'true' : 'false';
-
             try {
                 let response;
                 if (activeTab === 'patterns') {
-                    response = await getPatternTemplatesData("patterns", logged_in, userData?.email, FB_TLibrary?.activationKey);
+                    response = await getTemplatesData("patterns", userData?.email, FB_TLibrary?.activationKey);
                     if (response) {
                         setData((prev) => ({
                             ...prev,
@@ -209,7 +186,7 @@ const PatternLibraryButton = () => {
                         }));
                     }
                 } else if (activeTab === 'pages') {
-                    response = await getTemplatesData("pages");
+                    response = await getTemplatesData("pages", userData?.email, FB_TLibrary?.activationKey);
                     if (response) {
                         setData((prev) => ({
                             ...prev,
@@ -221,7 +198,7 @@ const PatternLibraryButton = () => {
                         }));
                     }
                 } else if (activeTab === 'sites') {
-                    response = await getTemplatesData("sites");
+                    response = await getTemplatesData("sites", userData?.email, FB_TLibrary?.activationKey);
                     if (response) {
                         setData((prev) => ({
                             ...prev,
@@ -234,7 +211,7 @@ const PatternLibraryButton = () => {
                     }
                 } else if (activeTab === 'templatelibrary') {
                     if(userData) {
-                        response = await getSavedTemplatesData("clouds", userData?.email);
+                        response = await getSavedTemplatesData("clouds", userData?.email, FB_TLibrary?.activationKey);
                         if (response) {
                             setData((prev) => ({
                                 ...prev,
@@ -274,13 +251,13 @@ const PatternLibraryButton = () => {
         setLoading(true);
 
         setData((prev) => {
-            const updatedItems = prev.patterns.items.map((item) =>
+            const updatedItems = prev[activeTab].items.map((item) =>
                 item.id === templateData.id ? { ...item, loading: true } : item
             );
             return {
                 ...prev,
-                patterns: {
-                    ...prev.patterns,
+                [activeTab]: {
+                    ...prev[activeTab],
                     items: updatedItems,
                 },
             };
@@ -315,13 +292,13 @@ const PatternLibraryButton = () => {
             });
 
             setData((prev) => {
-                const updatedItems = prev.patterns.items.map((item) =>
+                const updatedItems = prev[activeTab].items.map((item) =>
                     item.id === templateData.id ? { ...item, saved: true, loading: false } : item
                 );
                 return {
                     ...prev,
-                    patterns: {
-                        ...prev.patterns,
+                    [activeTab]: {
+                        ...prev[activeTab],
                         items: updatedItems,
                     },
                 };
