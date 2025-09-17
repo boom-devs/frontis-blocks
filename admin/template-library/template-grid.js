@@ -60,7 +60,6 @@ const TemplateGrid = ({
         (state) => state.attributes
       );
     const dispatch = useDispatch();
-    console.log(siteTitle, primaryColor, enableFeatureX);
 
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -124,7 +123,6 @@ const TemplateGrid = ({
     const handelPatterns = useCallback(() => {
         setFreeTemplate(true);
     })
-
 
     const handleCloseModal = useCallback(() => {
         setIsModalOpen(false);

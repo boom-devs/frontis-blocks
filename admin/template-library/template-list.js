@@ -12,7 +12,7 @@ import TemplateImport from "./template-import";
 import LoginSignupModal from "./login-signup";
 import PluginUpgradeModal from "./plugin-upgrade";
 
-const TemplateList = ({ item, libraryData, setLibraryData, data, setIsVisible, handleRemoveLibraryItem, setActiveCategory }) => {
+const TemplateList = ({ item, libraryData, setLibraryData, data, setIsVisible, handleRemoveLibraryItem, type, setActiveCategory }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -161,7 +161,7 @@ const TemplateList = ({ item, libraryData, setLibraryData, data, setIsVisible, h
                     <button
                         className={`fb-template-action-btn option-btn ${isLoading ? "loading" : ""}`}
                         disabled={isLoading}
-                        onClick={() => handleRemoveLibraryItem(item.id, item.type) }
+                        onClick={() => handleRemoveLibraryItem(item.id, type) }
                     >
                         {/* <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M9.99316 10H10.0007" stroke="#0B0C0E" strokeWidth="2.08333" strokeLinecap="round" strokeLinejoin="round" /><path d="M9.98682 15H9.99432" stroke="#0B0C0E" strokeWidth="2.08333" strokeLinecap="round" strokeLinejoin="round" /><path d="M9.99976 5H10.0073" stroke="#0B0C0E" strokeWidth="2.08333" strokeLinecap="round" strokeLinejoin="round" />
