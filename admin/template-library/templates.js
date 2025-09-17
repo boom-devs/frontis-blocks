@@ -248,7 +248,6 @@ const PatternLibraryButton = () => {
         if (isAlreadySaved) return;
 
         if (loading) return;
-        setLoading(true);
 
         setData((prev) => {
             const updatedItems = prev[activeTab].items.map((item) =>

@@ -12,11 +12,7 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, i
                 [activeTab]: categories[0].slug
             }));
         }
-
-        setTimeout(() => {
-            setLoading(false)
-        }, 2000)
-    }, [categories, activeTab, setActiveCategory]);
+    }, [activeTab]);
     
     const TagTabsOptions = [
         { name: 'Free', value: 'free' },
