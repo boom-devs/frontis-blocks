@@ -49,7 +49,6 @@ const PatternLibraryButton = () => {
 
     const handleClick = () => {
         setIsVisible(!isVisible);
-        console.log("isVisible:", !isVisible);
     };
 
     const importDemo = () => {
@@ -282,7 +281,7 @@ const PatternLibraryButton = () => {
         const responseData = await response.json();
 
         if(responseData.status === 'success') {
-            toast.success('Template saved to library', {
+            toast.success(responseData.message, {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,
