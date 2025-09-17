@@ -1,6 +1,8 @@
 .fb-news-ticker-wrapper {
 	.fb-news-ticker-inner {
-		border: 1px solid #399cff;
+		border: solid;
+		border-color: #399cff;
+		border-width: 1px;
 		border-radius: 6px;
 		display: flex;
 		align-items: center;
@@ -32,15 +34,36 @@
 			align-items: center;
 			margin-left: auto;
 			position: absolute;
-			top: 12px;
-			right: 20px;
 			z-index: 99;
+			line-height: 0;
+			.fb-news-ticker-pause-btn{
+				cursor: pointer;
+			}
 		}
 
 		.fb-news-ticker-prev,
 		.fb-news-ticker-next {
 			cursor: pointer;
 			user-select: none;
+		}
+		.fb-news-ticker-time{
+			position: absolute;
+			&.top-right{
+				top: 0;
+				right: 0;
+			}
+			&.bottom-right{
+				bottom: 0;
+				right: 0;
+			}
+			&.top-left{
+				top: 0;
+				left: 0;
+			}
+			&.bottom-left{
+				bottom: 0;
+				left: 0;
+			}
 		}
 	}
 }
