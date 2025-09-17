@@ -41,6 +41,12 @@ const PatternLibraryButton = () => {
     const [libraryData, setLibraryData] = useState([]);
     const [savedItems, setSavedItems] = useState([]);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
+    const [currentPage, setCurrentPage] = useState({
+        patterns: 1,
+        pages: 1,
+        sites: 1,
+        templatelibrary: 1
+    });
     
     const isProPlugin = true;
     const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
@@ -93,7 +99,7 @@ const PatternLibraryButton = () => {
     };
 
     const [data, setData] = useState({
-        patterns: { name: "Patterns", items: [], categories: [] },
+        patterns: { name: "Patterns", items: [], categories: [], pagination: {} },
         pages: { name: "Pages", items: [], categories: [] },
         sites: { name: "Sites", items: [], categories: [] },
         templatelibrary: { name: "Template Library", items: [], categories: [] },
@@ -101,13 +107,14 @@ const PatternLibraryButton = () => {
 
     const [patternsData, { data: patternsResponse, error, isLoading }] = usePostDataMutation();
 
-    const getTemplatesData = async (value, email, license_key) => {
+    const getTemplatesData = async (value, email, license_key, page) => {
         try {
             const response = await patternsData({
                 endpoint: value,
                 body: {
                     email: email,
-                    license_key: license_key
+                    license_key: license_key,
+                    page: page
                 },
                 headers: {
                     'Content-Type': 'application/json',
@@ -163,74 +170,78 @@ const PatternLibraryButton = () => {
         );
     };
 
-    useEffect(() => {
-        setIsLogedIn(true);
+    const handlePageChange = (tab, page) => {
+        setCurrentPage((prev) => ({ ...prev, [tab]: page }));
+        fetchData(tab, page);
+    };
 
-        // Only fetch if the tab's data is not already present
-        const fetchData = async () => {
-            setLoading(true);
+    const fetchData = async (tab = activeTab, page = currentPage[activeTab]) => {
+        setLoading(true);
 
-            try {
-                let response;
-                if (activeTab === 'patterns') {
-                    response = await getTemplatesData("patterns", userData?.email, FB_TLibrary?.activationKey);
+        try {
+            let response;
+            if (tab === 'patterns') {
+                response = await getTemplatesData("patterns", userData?.email, FB_TLibrary?.activationKey, page);
+                if (response) {
+                    setData((prev) => ({
+                        ...prev,
+                        patterns: {
+                            ...prev.patterns,
+                            items: response.items || [],
+                            categories: response.categories || [],
+                            pagination: response.pagination || {}
+                        },
+                    }));
+                }
+            } else if (tab === 'pages') {
+                response = await getTemplatesData("pages", userData?.email, FB_TLibrary?.activationKey);
+                if (response) {
+                    setData((prev) => ({
+                        ...prev,
+                        pages: {
+                            ...prev.pages,
+                            items: response.items || [],
+                            categories: response.categories || [],
+                        },
+                    }));
+                }
+            } else if (tab === 'sites') {
+                response = await getTemplatesData("sites", userData?.email, FB_TLibrary?.activationKey);
+                if (response) {
+                    setData((prev) => ({
+                        ...prev,
+                        sites: {
+                            ...prev.sites,
+                            items: response.items || [],
+                            categories: response.categories || [],
+                        },
+                    }));
+                }
+            } else if (tab === 'templatelibrary') {
+                if(userData) {
+                    response = await getSavedTemplatesData("clouds", userData?.email, FB_TLibrary?.activationKey);
                     if (response) {
                         setData((prev) => ({
                             ...prev,
-                            patterns: {
-                                ...prev.patterns,
+                            templatelibrary: {
+                                ...prev.templatelibrary,
                                 items: response.items || [],
-                                categories: response.categories || [],
+                                categories: TemplateLibrary.categories || [],
                             },
                         }));
-                    }
-                } else if (activeTab === 'pages') {
-                    response = await getTemplatesData("pages", userData?.email, FB_TLibrary?.activationKey);
-                    if (response) {
-                        setData((prev) => ({
-                            ...prev,
-                            pages: {
-                                ...prev.pages,
-                                items: response.items || [],
-                                categories: response.categories || [],
-                            },
-                        }));
-                    }
-                } else if (activeTab === 'sites') {
-                    response = await getTemplatesData("sites", userData?.email, FB_TLibrary?.activationKey);
-                    if (response) {
-                        setData((prev) => ({
-                            ...prev,
-                            sites: {
-                                ...prev.sites,
-                                items: response.items || [],
-                                categories: response.categories || [],
-                            },
-                        }));
-                    }
-                } else if (activeTab === 'templatelibrary') {
-                    if(userData) {
-                        response = await getSavedTemplatesData("clouds", userData?.email, FB_TLibrary?.activationKey);
-                        if (response) {
-                            setData((prev) => ({
-                                ...prev,
-                                templatelibrary: {
-                                    ...prev.templatelibrary,
-                                    items: response.items || [],
-                                    categories: TemplateLibrary.categories || [],
-                                },
-                            }));
-                        }
                     }
                 }
-            } catch (err) {
-                console.error(`Error fetching ${activeTab}:`, err);
-            } finally {
-                setLoading(false);
             }
-        };
+        } catch (err) {
+            console.error(`Error fetching ${activeTab}:`, err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-        fetchData();
+    useEffect(() => {
+        setCurrentPage((prev) => ({ ...prev, [activeTab]: 1 }));
+        fetchData(activeTab, 1);
     }, [activeTab]);
 
     const handleSaveLibrary = async (templateData, isAlreadySaved) => {
@@ -394,6 +405,8 @@ const PatternLibraryButton = () => {
                                         isProPlugin={isProPlugin}
                                         isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
                                         setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
+                                        currentPage={currentPage[activeTab]}
+                                        onPageChange={handlePageChange}
                                     />
                                 )}
 
