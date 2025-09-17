@@ -9,6 +9,7 @@ import {ToastContainer, toast } from "react-toastify";
 import { TemplateContentLoader } from "./template-loader";
 import { usePostDataMutation } from "./services/wpapi";
 
+
 const TemplateContent = ({
     activeTab,
     activeCategory,
@@ -35,6 +36,7 @@ const TemplateContent = ({
     isPluginUpgradeModalOpen,
     setIsPluginUpgradeModalOpen,
 }) => {
+
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
     const [originalTemplates, setOriginalTemplates] = useState([]);
@@ -267,10 +269,10 @@ const TemplateContent = ({
                                         templateType={activeTab}
                                         colors={template.colors || []}
                                         customColors={template.custom_colors || []}
-                                        gradientColors={template.gradientColors || []}
+                                        gradientColors={template.color_gradients || []}
                                         customGradientColors={template.custom_gradientColors || []}
                                         typographies={template.typographies || {}}
-                                        customTypographies={template.customTypographies || {}}
+                                        customTypographies={template.custom_typographies || {}}
                                         globalTypographies={template.globalTypographies || {}}
                                         fontFamilies={template.fontFamilies || {}}
                                         pages={template.pages || []}
