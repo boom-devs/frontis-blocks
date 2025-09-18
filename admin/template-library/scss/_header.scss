@@ -113,11 +113,66 @@
             }
 
             .fb-template-library-user-profile {
+                position: relative;
                 padding: 10px;
                 border: 1px solid $neutral-color-100;
                 border-radius: 50px;
                 line-height: 0;
                 cursor: pointer;
+
+                .fb-template-library-user-dropdown {
+                    position: absolute;
+                    top: calc(100% + 30px);
+                    right: 0;
+                    background: $white-color;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    min-width: 270px;
+                    height: max-content;
+                    box-shadow: 0px 10px 30px 0px #00000029;
+
+                    .fb-template-library-user-info {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 16px;
+                        border-bottom: 1px solid $neutral-color-100;
+
+                        .fb-template-library-user-info-name {
+                            display: flex;
+                            flex-direction: column;
+                        }
+
+                        span {
+                            font-family: $body-font-family;
+                            font-size: 14px;
+                            line-height: 24px;
+                            font-weight: $font-weight-500;
+                            color: $neutral-color-950;
+                        }
+                    }
+                    .fb-template-library-user-dropdown-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 12px 16px;
+                        border-bottom: 1px solid $neutral-color-100;
+                        font-size: unset;
+                        line-height: unset;
+                        cursor: pointer;
+
+                        &:last-child {
+                            border-bottom: none;
+                        }
+                        span {
+                            font-family: $body-font-family;
+                            font-size: 14px;
+                            line-height: 24px;
+                            font-weight: $font-weight-500;
+                            color: $neutral-color-950;
+                        }
+                    }
+                }
             }
 
             .fb-template-library-close-btn {
