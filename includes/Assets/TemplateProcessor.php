@@ -1,14 +1,10 @@
 <?php
 namespace FrontisBlocks\Assets;
 use FrontisBlocks\Traits\Singleton;
+use FrontisBlocks\Utils\Helper;
 
 class TemplateProcessor {
     use Singleton;
-    private $post;
-
-    public function __construct($post) {
-        $this->post = $post;
-    }
 
     public function process_template($data) {
         $template_content = $data[0]->post_content;
@@ -68,14 +64,6 @@ class TemplateProcessor {
                 }
             }
         }
-
-        // Step 4: Replace wp:post-content (with or without attributes) with provided post_content
-        $post_content_pattern = '/<!-- wp:post-content\s*(?:{.*?})?\s*\/-->/';
-        $template_content = preg_replace(
-            $post_content_pattern,
-            $this->post->post_content,
-            $template_content
-        );
 
         return $template_content;
     }

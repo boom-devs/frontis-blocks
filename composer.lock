@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "35ebbeb4dcfcb3b919eec8648ba4cd59",
+    "content-hash": "1a5df3cf4d339608b22c26045f82b348",
     "packages": [
         {
             "name": "appsero/client",
@@ -63,7 +63,7 @@
         },
         {
             "name": "deliciousbrains/wp-background-processing",
-            "version": "dev-master",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deliciousbrains/wp-background-processing.git",
@@ -88,7 +88,6 @@
             "suggest": {
                 "coenjacobs/mozart": "Easily wrap this library with your own prefix, to prevent collisions when multiple plugins use this library"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "classmap": [
@@ -308,7 +307,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "appsero/client": 20,
-        "deliciousbrains/wp-background-processing": 20,
         "matthiasmullie/minify": 20
     },
     "prefer-stable": false,

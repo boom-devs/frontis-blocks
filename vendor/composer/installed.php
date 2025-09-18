@@ -3,7 +3,7 @@
         'name' => 'wpmessiah/frontis-blocks',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '2b5846472d1d7f6a89caa5d9d6ca735a31234e3a',
+        'reference' => '3fa5a96c2ae5e1ea79f442380eaaccbe78f2ff6e',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,14 +22,12 @@
             'dev_requirement' => false,
         ),
         'deliciousbrains/wp-background-processing' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
+            'pretty_version' => '1.4.0',
+            'version' => '1.4.0.0',
             'reference' => '7ca7cc3504333db3a291bbab7f1917124fba4816',
             'type' => 'library',
             'install_path' => __DIR__ . '/../deliciousbrains/wp-background-processing',
-            'aliases' => array(
-                0 => '9999999-dev',
-            ),
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'matthiasmullie/minify' => array(
@@ -64,7 +62,7 @@
         'wpmessiah/frontis-blocks' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '2b5846472d1d7f6a89caa5d9d6ca735a31234e3a',
+            'reference' => '3fa5a96c2ae5e1ea79f442380eaaccbe78f2ff6e',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
