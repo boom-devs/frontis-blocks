@@ -2403,7 +2403,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			</div>
 			<PanelBody title={__("Settings", "frontis-blocks")} initialOpen={true}>
 				<ToggleControl
-					label={__("Show Arrows", "frontis-blocks")}
+					label={__("Show Navigation", "frontis-blocks")}
 					checked={showArrows}
 					onChange={(value) => setAttributes({ showArrows: value })}
 				/>
@@ -2412,12 +2412,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					checked={showTime}
 					onChange={(value) => setAttributes({ showTime: value })}
 				/>
-				<ToggleControl
-					label={__("Show Auto Play Button", "frontis-blocks")}
-					checked={showAutoplayButton}
-					onChange={(value) => setAttributes({ showAutoplayButton: value })}
-				/>
-
+				{showArrows && (
+					<ToggleControl
+						label={__("Show Auto Play Button", "frontis-blocks")}
+						checked={showAutoplayButton}
+						onChange={(value) => setAttributes({ showAutoplayButton: value })}
+					/>
+				)}
+				
 				{showArrows && (
 					<SelectControl
 						label={__("Navigation Position", "frontis-block")}
