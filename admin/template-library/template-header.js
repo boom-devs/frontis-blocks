@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { useState } from "@wordpress/element";
+import { useEffect, useRef, useState } from "@wordpress/element";
 
 const TemplateLogo = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="102" height="40" viewBox="0 0 102 40" fill="none">
@@ -53,7 +53,9 @@ const TemplateHeader = ({
         label: schema[key].name || key.charAt(0).toUpperCase() + key.slice(1),
     }));
 
-    const userData = localStorage.getItem('userData');
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
     const handleTabClick = (tab) => {
         if (tab.label === 'Template Library' && !userData) {
@@ -81,6 +83,31 @@ const TemplateHeader = ({
         setResetCat(true);
         setLoading(true);
     };
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        localStorage.removeItem('userData');
+        setIsLoginModalOpen(true);
+    };
+
+
+    const handleUserDropdown = (e) => {
+        e.preventDefault();
+        setIsUserDropdownOpen((prev) => !prev);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+                setIsUserDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
     
 
     return (
@@ -112,10 +139,30 @@ const TemplateHeader = ({
                             <span>Talk to Support</span>
                         </a>
                     </div>
-                    <div className="fb-template-library-user-profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10ZM12 20.5C13.784 20.5 15.4397 19.9504 16.8069 19.0112C17.4108 18.5964 17.6688 17.8062 17.3178 17.1632C16.59 15.8303 15.0902 15 11.9999 15C8.90969 15 7.40997 15.8302 6.68214 17.1632C6.33105 17.8062 6.5891 18.5963 7.19296 19.0111C8.56018 19.9503 10.2159 20.5 12 20.5Z" fill="#3991FF" />
-                        </svg>
+                    <div className="fb-template-library-user-profile" ref={dropdownRef}>
+                        <span onClick={handleUserDropdown}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15 10C15 11.6569 13.6569 13 12 13C10.3431 13 9 11.6569 9 10C9 8.34315 10.3431 7 12 7C13.6569 7 15 8.34315 15 10ZM12 20.5C13.784 20.5 15.4397 19.9504 16.8069 19.0112C17.4108 18.5964 17.6688 17.8062 17.3178 17.1632C16.59 15.8303 15.0902 15 11.9999 15C8.90969 15 7.40997 15.8302 6.68214 17.1632C6.33105 17.8062 6.5891 18.5963 7.19296 19.0111C8.56018 19.9503 10.2159 20.5 12 20.5Z" fill="#3991FF" />
+                            </svg>
+                        </span>
+                        {userData?.email && isUserDropdownOpen && (
+                        <div className="fb-template-library-user-dropdown">
+                            <div className="fb-template-library-user-info">
+                                <div className="fb-template-library-user-info-avatar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M44 24C44 35.0456 35.0456 44 24 44C12.9543 44 4 35.0456 4 24C4 12.9543 12.9543 4 24 4C35.0456 4 44 12.9543 44 24ZM30 20C30 23.3138 27.3138 26 24 26C20.6862 26 18 23.3138 18 20C18 16.6863 20.6862 14 24 14C27.3138 14 30 16.6863 30 20ZM24 41C27.568 41 30.8794 39.9008 33.6138 38.0224C34.8216 37.1928 35.3376 35.6124 34.6356 34.3264C33.18 31.6606 30.1804 30 23.9998 30C17.8194 30 14.8199 31.6604 13.3643 34.3264C12.6621 35.6124 13.1782 37.1926 14.3859 38.0222C17.1204 39.9006 20.4318 41 24 41Z" fill="#3991FF"/>
+                                    </svg>
+                                </div>
+                                <div className="fb-template-library-user-info-name">
+                                    <span>{userData?.name}</span>
+                                    <span>{userData?.email}</span>
+                                </div>
+                            </div>
+                            <div className="fb-template-library-user-dropdown-item" onClick={handleLogout}>
+                                <span>Logout</span>
+                            </div>
+                        </div>
+                        )}
                     </div>
                     <div className="fb-template-library-close-btn">
                         <button
