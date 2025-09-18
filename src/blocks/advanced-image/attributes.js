@@ -1269,6 +1269,17 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
+
+
+	dynamicEnableLink: {
+        type: 'boolean',
+        default: false
+    },
+	dynamicLinkSource: {
+        type: 'string',
+        default: 'post_permalink',
+    },
+
 	/** End Dynamic Image */
 }
 export default attributes;

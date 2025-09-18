@@ -3458,9 +3458,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             )}
 
                             <ToggleControl
-                            label={__("Enable Link", "frontis-blocks")}
-                            checked={dynamicEnableLink}
-                            onChange={(value) => setAttributes({ dynamicEnableLink: value })}
+                                label={__("Enable Link", "frontis-blocks")}
+                                checked={dynamicEnableLink}
+                                onChange={(value) => setAttributes({ dynamicEnableLink: value })}
                             />
 
                             {dynamicEnableLink && (

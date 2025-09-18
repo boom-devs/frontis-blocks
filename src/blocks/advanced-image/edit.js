@@ -233,19 +233,19 @@
 // }
 
 /**
- * Advanced Image – Edit.js (stable view + no shake)
+ * Advanced Image – Edit.js (full, updated)
  */
 import { __ } from "@wordpress/i18n";
 import {
-  useBlockProps,
-  RichText,
-  BlockControls,
-  MediaPlaceholder,
-  MediaUpload,
-  MediaUploadCheck,
+	useBlockProps,
+	RichText,
+	BlockControls,
+	MediaPlaceholder,
+	MediaUpload,
+	MediaUploadCheck,
 } from "@wordpress/block-editor";
 import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
-import { useEffect, useMemo, useState } from "@wordpress/element";
+import { useEffect, useMemo } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import { store as coreStore } from "@wordpress/core-data";
 import { decodeEntities } from "@wordpress/html-entities";
@@ -256,440 +256,469 @@ import "./editor.scss";
 import generateSrcSet from "@Utils/generateSrcSet";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-  const {
-    /* Manual image */
-    advancedImageUrl,
-    advancedImageId,
-    advancedImageAlt,
-    advancedImageDefaultWidth,
-    advancedImageDefaultHeight,
-    advancedImageSrcSet,
+	const {
+		// base
+		blockID,
 
-    /* UI / layout */
-    imageCaption,
-    imageSize,
-    imageStyle,
-    imageHover,
-    imageFit,
-    autoFitSwitch,
-    displayCaption,
-    displayTitle,
-    titleText,
-    titleTag,
-    titlePosition,
-    linkSwitch,
-    linkTargetUrl,
-    linkUrl,
+		// manual image
+		advancedImageUrl,
+		advancedImageId,
+		advancedImageAlt,
+		advancedImageDefaultWidth,
+		advancedImageDefaultHeight,
+		advancedImageSrcSet,
 
-    /* wrap / responsive */
-    blockID,
-    advancedImageGlobalWraperID,
-    advancedImageGlobalWraperClass,
-    advancedImageDesktopSwitcher,
-    advancedImageTabletSwitcher,
-    advancedImageMobileSwitcher,
+		// display options
+		imageCaption,
+		imageSize,
+		imageStyle,
+		imageHover,
+		imageFit,
+		autoFitSwitch,
+		displayCaption,
+		displayTitle,
+		titleText,
+		titleTag,
+		titlePosition,
 
-    /* Dynamic image attrs */
-    dynamicImageEnabled,
-    dynamicImageSource,      // current_post | post_type | site_logo_url
-    dynamicImagePostId,
-    dynamicImagePostType,
-    dynamicImageField,       // featured_image | avatar_profile
-    dynamicImageSize,        // full | thumbnail | small | medium | large
-    dynamicImageFallbackUrl,
-    dynamicImageFallbackAlt,
-  } = attributes;
+		// linking
+		linkSwitch,
+		linkTargetUrl,
+		linkUrl,
 
-  /* Block props */
-  const blockProps = useBlockProps({
-    className: `fb-advanced-image-main-wrapper ${blockID} ${
-      advancedImageDesktopSwitcher && "fb-desktop-responsive"
-    } ${advancedImageTabletSwitcher && "fb-tablet-responsive"} ${
-      advancedImageMobileSwitcher && "fb-mobile-responsive"
-    }`,
-  });
+		// wrappers / responsive flags
+		advancedImageGlobalWraperID,
+		advancedImageGlobalWraperClass,
+		advancedImageDesktopSwitcher,
+		advancedImageTabletSwitcher,
+		advancedImageMobileSwitcher,
 
-  /* Current post context (editor) */
-  const currentPostId   = useSelect((s) => s("core/editor")?.getCurrentPostId?.(), []);
-  const currentPostType = useSelect((s) => s("core/editor")?.getCurrentPostType?.(), []);
+		// dynamic image attrs
+		dynamicImageEnabled,
+		dynamicImageSource,      // current_post | post_type | site_logo_url
+		dynamicImagePostId,
+		dynamicImagePostType,
+		dynamicImagePostLabel,
+		dynamicImageField,       // featured_image | avatar_profile
+		dynamicImageSize,        // full | thumbnail | small | medium | large
+		dynamicImageFallbackUrl,
+		dynamicImageFallbackAlt,
+		dynamicImageFallbackId,
+		dynamicEnableLink,
+		dynamicLinkSource,
+	} = attributes;
 
-  const targetPostId =
-    dynamicImageSource === "post_type" && dynamicImagePostId
-      ? dynamicImagePostId
-      : currentPostId;
+	console.log('dynamicLinkSource', dynamicLinkSource);
+	console.log('dynamicEnableLink', dynamicEnableLink);
 
-  const targetPostType =
-    dynamicImageSource === "post_type"
-      ? dynamicImagePostType || "post"
-      : currentPostType;
+	/** ------ normalized defaults (critical fix) ------ */
+	const normSource = dynamicImageSource || "current_post";
+	const normField  = dynamicImageField  || "featured_image";
+	const normSize   = dynamicImageSize   || "full";
 
-  const isPostBasedImage =
-    dynamicImageEnabled &&
-    (dynamicImageSource === "current_post" || dynamicImageSource === "post_type");
+	/** block props */
+	const blockProps = useBlockProps({
+		className: `fb-advanced-image-main-wrapper ${blockID} ${
+			advancedImageDesktopSwitcher && "fb-desktop-responsive"
+		} ${advancedImageTabletSwitcher && "fb-tablet-responsive"} ${
+			advancedImageMobileSwitcher && "fb-mobile-responsive"
+		}`,
+	});
 
-  /* Records */
-  const postRecord = useSelect(
-    (select) =>
-      isPostBasedImage && targetPostType && targetPostId
-        ? select(coreStore).getEntityRecord("postType", targetPostType, targetPostId)
-        : null,
-    [isPostBasedImage, targetPostType, targetPostId]
-  );
+	/** derive current post context (editor) */
+	const currentPostId = useSelect(
+		(select) => select("core/editor")?.getCurrentPostId?.(),
+		[]
+	);
+	const currentPostType = useSelect(
+		(select) => select("core/editor")?.getCurrentPostType?.(),
+		[]
+	);
 
-  const isReady = useSelect(
-    (select) => {
-      if (!isPostBasedImage || !targetPostType || !targetPostId) return true;
-      return select(coreStore).hasFinishedResolution("getEntityRecord", [
-        "postType",
-        targetPostType,
-        targetPostId,
-      ]);
-    },
-    [isPostBasedImage, targetPostType, targetPostId]
-  );
+	/** target post (for current_post / post_type) */
+	const targetPostId =
+		normSource === "post_type" && dynamicImagePostId
+			? dynamicImagePostId
+			: currentPostId;
 
-  const featuredAttachment = useSelect(
-    (select) =>
-      isPostBasedImage &&
-      dynamicImageField === "featured_image" &&
-      postRecord?.featured_media
-        ? select(coreStore).getEntityRecord(
-            "postType",
-            "attachment",
-            postRecord.featured_media
-          )
-        : null,
-    [isPostBasedImage, dynamicImageField, postRecord?.featured_media]
-  );
+	const targetPostType =
+		normSource === "post_type"
+			? dynamicImagePostType || "post"
+			: currentPostType;
 
-  const authorRecord = useSelect(
-    (select) =>
-      isPostBasedImage &&
-      dynamicImageField === "avatar_profile" &&
-      postRecord?.author
-        ? select(coreStore).getUser(postRecord.author)
-        : null,
-    [isPostBasedImage, dynamicImageField, postRecord?.author]
-  );
+	const isPostBasedImage =
+		dynamicImageEnabled &&
+		(normSource === "current_post" || normSource === "post_type");
 
-  const siteEntity = useSelect(
-    (select) =>
-      dynamicImageEnabled && dynamicImageSource === "site_logo_url"
-        ? select(coreStore).getEntityRecord("root", "site", undefined)
-        : null,
-    [dynamicImageEnabled, dynamicImageSource]
-  );
+	/** fetch post/author/attachment/site records */
+	const postRecord = useSelect(
+		(select) =>
+			isPostBasedImage && targetPostType && targetPostId
+				? select(coreStore).getEntityRecord(
+						"postType",
+						targetPostType,
+						targetPostId
+				  )
+				: null,
+		[isPostBasedImage, targetPostType, targetPostId]
+	);
 
-  const siteLogoAttachment = useSelect(
-    (select) =>
-      siteEntity?.site_logo
-        ? select(coreStore).getEntityRecord("postType", "attachment", siteEntity.site_logo)
-        : null,
-    [siteEntity?.site_logo]
-  );
+	const isReady = useSelect(
+		(select) => {
+			if (!isPostBasedImage || !targetPostType || !targetPostId) return true;
+			return select(coreStore).hasFinishedResolution("getEntityRecord", [
+				"postType",
+				targetPostType,
+				targetPostId,
+			]);
+		},
+		[isPostBasedImage, targetPostType, targetPostId]
+	);
 
-  /* Utils */
-  const pickSizeFromAttachment = (att, sizeSlug) => {
-    if (!att) return null;
-    const sizes = att?.media_details?.sizes || {};
-    const chosen = sizes?.[sizeSlug] || sizes?.[String(sizeSlug).toLowerCase?.()] || null;
-    if (chosen) {
-      return { url: chosen.source_url, width: chosen.width, height: chosen.height };
-    }
-    return {
-      url: att?.source_url,
-      width: att?.media_details?.width,
-      height: att?.media_details?.height,
-    };
-  };
+	const featuredAttachment = useSelect(
+		(select) =>
+			isPostBasedImage &&
+			normField === "featured_image" &&
+			postRecord?.featured_media
+				? select(coreStore).getEntityRecord(
+						"postType",
+						"attachment",
+						postRecord.featured_media
+				  )
+				: null,
+		[isPostBasedImage, normField, postRecord?.featured_media]
+	);
 
-  const buildSrcSetFromAttachment = (att) => {
-    const sizes = att?.media_details?.sizes || {};
-    const entries = Object.values(sizes)
-      .filter(Boolean)
-      .map((s) => `${s.source_url} ${s.width}w${s.height ? ` ${s.height}h` : ""}`);
-    return entries.length ? entries.join(", ") : undefined;
-  };
+	const authorRecord = useSelect(
+		(select) =>
+			isPostBasedImage &&
+			normField === "avatar_profile" &&
+			postRecord?.author
+				? select(coreStore).getUser(postRecord.author)
+				: null,
+		[isPostBasedImage, normField, postRecord?.author]
+	);
 
-  /* Compute NEW dynamic image (may be loading or null) */
-  const dynamicImg = useMemo(() => {
-    if (!dynamicImageEnabled) return null;
+	const siteEntity = useSelect(
+		(select) =>
+			dynamicImageEnabled && normSource === "site_logo_url"
+				? select(coreStore).getEntityRecord("root", "site", undefined)
+				: null,
+		[dynamicImageEnabled, normSource]
+	);
 
-    /* Loading? keep old view */
-    if (isPostBasedImage && !isReady) return { loading: true };
+	const siteLogoAttachment = useSelect(
+		(select) =>
+			siteEntity?.site_logo
+				? select(coreStore).getEntityRecord(
+						"postType",
+						"attachment",
+						siteEntity.site_logo
+				  )
+				: null,
+		[siteEntity?.site_logo]
+	);
 
-    if (dynamicImageSource === "site_logo_url") {
-      const pic = pickSizeFromAttachment(siteLogoAttachment, dynamicImageSize || "full");
-      if (pic?.url) {
-        return {
-          url: pic.url,
-          width: pic.width,
-          height: pic.height,
-          alt: decodeEntities(siteLogoAttachment?.alt_text || "") || "Site Logo",
-          srcSet: buildSrcSetFromAttachment(siteLogoAttachment),
-        };
-      }
-      return null;
-    }
+	/** helpers */
+	const pickSizeFromAttachment = (att, sizeSlug) => {
+		if (!att) return null;
+		const sizes = att?.media_details?.sizes || {};
+		const chosen =
+			sizes?.[sizeSlug] || sizes?.[String(sizeSlug).toLowerCase?.()] || null;
+		if (chosen) {
+			return {
+				url: chosen.source_url,
+				width: chosen.width,
+				height: chosen.height,
+			};
+		}
+		return {
+			url: att?.source_url,
+			width: att?.media_details?.width,
+			height: att?.media_details?.height,
+		};
+	};
 
-    if (isPostBasedImage) {
-      if (!postRecord) return null;
+	const buildSrcSetFromAttachment = (att) => {
+		const sizes = att?.media_details?.sizes || {};
+		const entries = Object.values(sizes)
+			.filter(Boolean)
+			.map(
+				(s) =>
+					`${s.source_url} ${s.width}w${s.height ? ` ${s.height}h` : ""}`
+			);
+		return entries.length ? entries.join(", ") : undefined;
+	};
 
-      if (dynamicImageField === "featured_image") {
-        if (!featuredAttachment) return null;
-        const pic = pickSizeFromAttachment(
-          featuredAttachment,
-          dynamicImageSize || "full"
-        );
-        return {
-          url: pic?.url,
-          width: pic?.width,
-          height: pic?.height,
-          alt: decodeEntities(featuredAttachment?.alt_text || ""),
-          srcSet: buildSrcSetFromAttachment(featuredAttachment),
-        };
-      }
+	/** compute dynamic image */
+	const dynamicImg = useMemo(() => {
+		if (!dynamicImageEnabled) return null;
 
-      if (dynamicImageField === "avatar_profile") {
-        const avatar = authorRecord?.avatar_urls || {};
-        const sizeMap = { thumbnail: 48, small: 48, medium: 96, large: 96, full: 96 };
-        const px = sizeMap[dynamicImageSize || "full"] || 96;
-        const url = avatar[String(px)] || avatar["96"] || avatar["48"];
-        return url ? { url, alt: authorRecord?.name || "" } : null;
-      }
-    }
+		// still loading post record
+		if (isPostBasedImage && !isReady) return { loading: true };
 
-    return dynamicImageFallbackUrl
-      ? { url: dynamicImageFallbackUrl, alt: dynamicImageFallbackAlt || "" }
-      : null;
-  }, [
-    dynamicImageEnabled,
-    dynamicImageSource,
-    dynamicImageField,
-    dynamicImageSize,
-    dynamicImageFallbackUrl,
-    dynamicImageFallbackAlt,
-    isPostBasedImage,
-    isReady,
-    siteLogoAttachment,
-    postRecord,
-    featuredAttachment,
-    authorRecord,
-  ]);
+		// site logo
+		if (normSource === "site_logo_url") {
+			const pic = pickSizeFromAttachment(siteLogoAttachment, normSize);
+			if (pic?.url) {
+				return {
+					url: pic.url,
+					width: pic.width,
+					height: pic.height,
+					alt: decodeEntities(siteLogoAttachment?.alt_text || "") || "Site Logo",
+					srcSet: buildSrcSetFromAttachment(siteLogoAttachment),
+				};
+			}
+		}
 
-  /* ===== Stable view (no shake) =====
-     viewSource-ই UI তে দেখানো হবে।
-     নতুন সোর্স url না পাওয়া পর্যন্ত আগেরটাই থাকবে।
-  */
-  const [viewSource, setViewSource] = useState(() => {
-    if (dynamicImageEnabled && dynamicImg?.url) return dynamicImg;
-    if (!dynamicImageEnabled && advancedImageUrl) {
-      return {
-        url: advancedImageUrl,
-        alt: advancedImageAlt || "",
-        width: advancedImageDefaultWidth,
-        height: advancedImageDefaultHeight,
-        srcSet: advancedImageSrcSet || undefined,
-      };
-    }
-    return null;
-  });
+		// current_post / post_type
+		if (isPostBasedImage) {
+			if (!postRecord) {
+				if (dynamicImageFallbackUrl) {
+					return {
+						url: dynamicImageFallbackUrl,
+						alt: dynamicImageFallbackAlt || "",
+					};
+				}
+				return null;
+			}
 
-  /* manual → viewSource */
-  useEffect(() => {
-    if (dynamicImageEnabled) return; // dynamic থাকলে এখানে না
-    if (advancedImageUrl) {
-      setViewSource({
-        url: advancedImageUrl,
-        alt: advancedImageAlt || "",
-        width: advancedImageDefaultWidth,
-        height: advancedImageDefaultHeight,
-        srcSet: advancedImageSrcSet || undefined,
-      });
-    } else {
-      setViewSource(null);
-    }
-  }, [
-    dynamicImageEnabled,
-    advancedImageUrl,
-    advancedImageAlt,
-    advancedImageDefaultWidth,
-    advancedImageDefaultHeight,
-    advancedImageSrcSet,
-  ]);
+			if (normField === "featured_image") {
+				if (!featuredAttachment) {
+					if (dynamicImageFallbackUrl) {
+						return {
+							url: dynamicImageFallbackUrl,
+							alt: dynamicImageFallbackAlt || "",
+						};
+					}
+					return null;
+				}
+				const pic = pickSizeFromAttachment(
+					featuredAttachment,
+					normSize
+				);
+				return {
+					url: pic?.url,
+					width: pic?.width,
+					height: pic?.height,
+					alt: decodeEntities(featuredAttachment?.alt_text || ""),
+					srcSet: buildSrcSetFromAttachment(featuredAttachment),
+				};
+			}
 
-  /* dynamic → viewSource (only when ready url arrives) */
-  useEffect(() => {
-    if (!dynamicImageEnabled) return;
-    if (dynamicImg?.url) {
-      setViewSource((prev) => {
-        // একই url হলে অপ্রয়োজনীয় re-render নয়
-        if (prev?.url === dynamicImg.url) return prev;
-        return dynamicImg;
-      });
-    } else if (!viewSource?.url && dynamicImageFallbackUrl) {
-      // একদম কিছু না থাকলে fallback দেখাও
-      setViewSource({
-        url: dynamicImageFallbackUrl,
-        alt: dynamicImageFallbackAlt || "",
-      });
-    }
-    // নইলে previous viewSource যেমন ছিল তেমনই থাকবে
-  }, [
-    dynamicImageEnabled,
-    dynamicImg?.url,
-    dynamicImg?.alt,
-    dynamicImg?.width,
-    dynamicImg?.height,
-    dynamicImg?.srcSet,
-    dynamicImageFallbackUrl,
-    dynamicImageFallbackAlt,
-  ]);
+			if (normField === "avatar_profile") {
+				const avatar = authorRecord?.avatar_urls || {};
+				const sizeMap = {
+					thumbnail: 48,
+					small: 48,
+					medium: 96,
+					large: 96,
+					full: 96,
+				};
+				const px = sizeMap[normSize] || 96;
+				const url = avatar[String(px)] || avatar["96"] || avatar["48"];
+				if (url) return { url, alt: authorRecord?.name || "" };
+			}
+		}
 
-  /* manual srcset থেকে ডিফল্ট ডিমেনশন detect (একবার) */
-  useEffect(() => {
-    if (!advancedImageSrcSet) return;
-    const items = advancedImageSrcSet.split(", ");
-    const last = items[items.length - 1] || "";
-    const w = last.match(/(\d+)w/);
-    const h = last.match(/(\d+)h/);
-    if (w && h) {
-      setAttributes({
-        advancedImageDefaultWidth: parseInt(w[1], 10),
-        advancedImageDefaultHeight: parseInt(h[1], 10),
-      });
-    }
-  }, [advancedImageSrcSet]);
+		// global fallback
+		if (dynamicImageFallbackUrl) {
+			return {
+				url: dynamicImageFallbackUrl,
+				alt: dynamicImageFallbackAlt || "",
+			};
+		}
+		return null;
+	}, [
+		dynamicImageEnabled,
+		normSource,
+		normField,
+		normSize,
+		dynamicImageFallbackUrl,
+		dynamicImageFallbackAlt,
+		isPostBasedImage,
+		isReady,
+		siteLogoAttachment,
+		postRecord,
+		featuredAttachment,
+		authorRecord,
+	]);
 
-  /* Media select (manual) */
-  const onSelectImage = (media) => {
-    const newSrcSet = generateSrcSet(media.sizes);
-    setAttributes({
-      advancedImageUrl: media.url,
-      advancedImageId: media.id,
-      advancedImageAlt: media.alt || "",
-      advancedImageSrcSet: newSrcSet,
-    });
-  };
+	/** read manual image size from srcset (once) */
+	useEffect(() => {
+		if (!advancedImageSrcSet) return;
+		const items = advancedImageSrcSet.split(", ");
+		const last = items[items.length - 1] || "";
+		const w = last.match(/(\d+)w/);
+		const h = last.match(/(\d+)h/);
+		if (w && h) {
+			setAttributes({
+				advancedImageDefaultWidth: parseInt(w[1], 10),
+				advancedImageDefaultHeight: parseInt(h[1], 10),
+			});
+		}
+	}, [advancedImageSrcSet]);
 
-  const handleAnchorClick = (e) => e.preventDefault();
+	/** media select */
+	const onSelectImage = (media) => {
+		const newSrcSet = generateSrcSet(media.sizes);
+		setAttributes({
+			advancedImageUrl: media.url,
+			advancedImageId: media.id,
+			advancedImageAlt: media.alt || "",
+			advancedImageSrcSet: newSrcSet,
+		});
+	};
 
-  return (
-    <>
-      <Inspector
-        attributes={attributes}
-        setAttributes={setAttributes}
-        clientId={clientId}
-        onSelectImage={onSelectImage}
-      />
+	const handleAnchorClick = (e) => e.preventDefault();
 
-      <BlockControls>
-        <ToolbarGroup>
-          {/* Dynamic থাকলে ম্যানুয়াল এডিট/ডিলিট নয় */}
-          {viewSource?.url && !dynamicImageEnabled && (
-            <>
-              <ToolbarButton
-                icon="trash"
-                onClick={() =>
-                  setAttributes({
-                    advancedImageId: "",
-                    advancedImageUrl: "",
-                    advancedImageAlt: "",
-                    advancedImageDefaultWidth: "",
-                    advancedImageDefaultHeight: "",
-                    advancedImageSrcSet: "",
-                  })
-                }
-              />
-              <MediaUploadCheck>
-                <MediaUpload
-                  onSelect={onSelectImage}
-                  allowedTypes={["image"]}
-                  value={advancedImageId}
-                  render={({ open }) => <ToolbarButton onClick={open} icon="edit" />}
-                />
-              </MediaUploadCheck>
-            </>
-          )}
-        </ToolbarGroup>
-      </BlockControls>
+	/** pick what to render (dynamic vs manual) */
+	const renderSource = dynamicImageEnabled
+		? {
+				url: dynamicImg?.url,
+				alt: dynamicImg?.alt || "",
+				width: dynamicImg?.width || advancedImageDefaultWidth,
+				height: dynamicImg?.height || advancedImageDefaultHeight,
+				srcSet: dynamicImg?.srcSet || undefined,
+		  }
+		: {
+				url: advancedImageUrl,
+				alt: advancedImageAlt || "",
+				width: advancedImageDefaultWidth,
+				height: advancedImageDefaultHeight,
+				srcSet: advancedImageSrcSet || undefined,
+		  };
 
-      <div {...blockProps}>
-        <div
-          className={`fb-parent-wrapper fb-advanced-image-wrapper ${advancedImageGlobalWraperClass}`}
-          id={advancedImageGlobalWraperID}
-        >
-          <div
-            className={`fb-advanced-image ${imageStyle || ""} ${imageSize || ""} ${
-              imageHover || ""
-            } ${autoFitSwitch ? imageFit || "" : ""} ${titlePosition || ""}`}
-          >
-            <div className="fb-advanced-image-inner">
-              {viewSource?.url ? (
-                linkSwitch ? (
-                  <a
-                    href={linkUrl}
-                    target={linkTargetUrl ? "_blank" : undefined}
-                    rel={linkTargetUrl ? "noopener noreferrer" : undefined}
-                    onClick={handleAnchorClick}
-                    aria-label={viewSource.alt || ""}
-                  >
-                    <img
-                      width={viewSource.width}
-                      height={viewSource.height}
-                      src={viewSource.url}
-                      alt={viewSource.alt || ""}
-                      srcSet={viewSource.srcSet}
-                      aria-hidden="true"
-                    />
-                  </a>
-                ) : (
-                  <img
-                    width={viewSource.width}
-                    height={viewSource.height}
-                    src={viewSource.url}
-                    alt={viewSource.alt || ""}
-                    srcSet={viewSource.srcSet}
-                    aria-hidden="true"
-                  />
-                )
-              ) : (
-                <MediaPlaceholder
-                  onSelect={onSelectImage}
-                  allowedTypes={["image"]}
-                  multiple={false}
-                  labels={{ title: __("Add Image", "frontis-blocks") }}
-                />
-              )}
-            </div>
+	return (
+		<>
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+				onSelectImage={onSelectImage}
+			/>
 
-            {displayTitle && (
-              <div className="fb-advanced-image-title">
-                <div className="fb-advanced-image-title-inner">
-                  <RichText
-                    tagName={titleTag}
-                    value={titleText}
-                    onChange={(value) => setAttributes({ titleText: value })}
-                    placeholder={__("Add your title here...", "frontis-blocks")}
-                    className="fb-advanced-title"
-                  />
-                </div>
-              </div>
-            )}
-          </div>
+			<BlockControls>
+				<ToolbarGroup>
+					{/* manual mode only */}
+					{!dynamicImageEnabled && renderSource.url && (
+						<>
+							<ToolbarButton
+								icon="trash"
+								onClick={() =>
+									setAttributes({
+										advancedImageId: "",
+										advancedImageUrl: "",
+										advancedImageAlt: "",
+										advancedImageDefaultWidth: "",
+										advancedImageDefaultHeight: "",
+										advancedImageSrcSet: "",
+									})
+								}
+							/>
+							<MediaUploadCheck>
+								<MediaUpload
+									onSelect={onSelectImage}
+									allowedTypes={["image"]}
+									value={advancedImageId}
+									render={({ open }) => (
+										<ToolbarButton onClick={open} icon="edit" />
+									)}
+								/>
+							</MediaUploadCheck>
+						</>
+					)}
+				</ToolbarGroup>
+			</BlockControls>
 
-          {displayCaption && (
-            <div className="fb-advanced-image-caption">
-              <RichText
-                tagName="figcaption"
-                value={imageCaption}
-                onChange={(value) => setAttributes({ imageCaption: value })}
-                placeholder={__("Add your caption here...", "frontis-blocks")}
-              />
-            </div>
-          )}
-        </div>
-      </div>
-    </>
-  );
+			<div {...blockProps}>
+				<div
+					className={`fb-parent-wrapper fb-advanced-image-wrapper ${advancedImageGlobalWraperClass}`}
+					id={advancedImageGlobalWraperID}
+				>
+					<div
+						className={`fb-advanced-image ${imageStyle || ""} ${imageSize || ""} ${
+							imageHover || ""
+						} ${autoFitSwitch ? imageFit || "" : ""} ${titlePosition || ""}`}
+					>
+						<div className="fb-advanced-image-inner">
+							{renderSource.url ? (
+								linkSwitch ? (
+									<a
+										href={linkUrl}
+										target={linkTargetUrl ? "_blank" : undefined}
+										rel={linkTargetUrl ? "noopener noreferrer" : undefined}
+										onClick={handleAnchorClick}
+										aria-label={renderSource.alt}
+									>
+										<img
+											width={renderSource.width}
+											height={renderSource.height}
+											src={renderSource.url}
+											alt={renderSource.alt}
+											srcSet={renderSource.srcSet}
+											aria-hidden="true"
+										/>
+									</a>
+								) : (
+									<img
+										width={renderSource.width}
+										height={renderSource.height}
+										src={renderSource.url}
+										alt={renderSource.alt}
+										srcSet={renderSource.srcSet}
+										aria-hidden="true"
+									/>
+								)
+							) : (
+								<>
+									{/* Dynamic ON → no upload UI */}
+									{dynamicImageEnabled ? (
+										<div className="fb-advanced-image-dynamic-empty" style={{ opacity: 0.75 }}>
+											{dynamicImg?.loading
+												? __("Loading dynamic image…", "frontis-blocks")
+												: __("No image available from the selected dynamic source.", "frontis-blocks")}
+										</div>
+									) : (
+										/* Manual mode → upload placeholder */
+										<MediaPlaceholder
+											onSelect={onSelectImage}
+											allowedTypes={["image"]}
+											multiple={false}
+											labels={{ title: __("Add Image", "frontis-blocks") }}
+										/>
+									)}
+								</>
+							)}
+						</div>
+
+						{displayTitle && (
+							<div className="fb-advanced-image-title">
+								<div className="fb-advanced-image-title-inner">
+									<RichText
+										tagName={titleTag}
+										value={titleText}
+										onChange={(value) => setAttributes({ titleText: value })}
+										placeholder={__("Add your title here...", "frontis-blocks")}
+										className="fb-advanced-title"
+									/>
+								</div>
+							</div>
+						)}
+					</div>
+
+					{displayCaption && (
+						<div className="fb-advanced-image-caption">
+							<RichText
+								tagName="figcaption"
+								value={imageCaption}
+								onChange={(value) => setAttributes({ imageCaption: value })}
+								placeholder={__("Add your caption here...", "frontis-blocks")}
+							/>
+						</div>
+					)}
+				</div>
+			</div>
+		</>
+	);
 }
