@@ -164,7 +164,7 @@ class Settings extends AjaxBase {
           FROM {$wpdb->posts}
           WHERE post_status = 'publish'
           AND post_name != 'wp-global-styles-frontis-theme'
-          AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type')
+          AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'wp_block')
           ORDER BY post_date DESC";
 		$results = $wpdb->get_results($query);
 
@@ -174,6 +174,12 @@ class Settings extends AjaxBase {
 			foreach ($results as $post) {
 				$modified_post = $post;
 				$post_content = $post->post_content;
+
+				$pattern = "/frontis-blocks/i";
+
+				if((preg_match_all($pattern, $post->post_content) === 0 && get_post_type($post->ID) !== 'wp_template')) {
+					continue;
+				}
 	
 				// Get synced pattern contents
 				$pattern_contents = Helper::check_patterns_used($post->post_content);
@@ -187,20 +193,21 @@ class Settings extends AjaxBase {
 					// Pass modified post object to generate_page_assets
 					$modified_post->post_content = $post_content; // Update post object
 				}
-
-				$myfile = fopen("assetsgeneration.txt", "w") or die("Unable to open file!");
-				$txt = $post->post_content;
-				fwrite($myfile, $txt);
-				fclose($myfile);
 	
-				$pattern = "/frontis-blocks/i";
 				update_post_meta($post->ID, 'frontis_blocks_used', false);
+				update_post_meta($post->ID, 'generate_critical_css', false);
 	
 				if(preg_match_all($pattern, $post->post_content) > 0) {
 					update_post_meta($post->ID, 'frontis_blocks_used', true);
 				}
+
+				$critical_css_used = preg_match_all("/frontis-blocks\/critical-css/i", $post->post_content) > 0;
+
+				if($critical_css_used) {
+					update_post_meta($post->ID, 'generate_critical_css', $critical_css_used);
+				}
 	
-				AssetsGenerator::get_instance()->generate_page_assets($post->ID, $modified_post);
+				AssetsGenerator::get_instance()->generate_page_assets($post->ID, $modified_post, $critical_css_used);
 				$generatedPages[] = $post->post_name;
 			}
 		}

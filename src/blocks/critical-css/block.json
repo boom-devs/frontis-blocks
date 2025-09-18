@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"title": "Critical css",
+	"title": "Critical css separator",
 	"name": "frontis-blocks/critical-css",
 	"version": "1.0.0",
 	"category": "frontis-blocks",

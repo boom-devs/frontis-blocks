@@ -15,6 +15,8 @@ use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Core\SupportSVG;
 use FrontisBlocks\Core\Enqueues;
 use FrontisBlocks\RestApi\RestApi;
+use FrontisBlocks\BackgroundProcess\AssetsGenerationProcess;
+use FrontisBlocks\Assets\AssetsGenerationStatus;
 
 final class Plugin {
 	/**
@@ -165,5 +167,7 @@ final class Plugin {
 		TemplateLibrary::get_instance()->register_ajax_events();
 		SupportSVG::get_instance();
 		RestApi::get_instance();
+		AssetsGenerationStatus::get_instance();
+		AssetsGenerationProcess::get_instance();
 	}
 }
