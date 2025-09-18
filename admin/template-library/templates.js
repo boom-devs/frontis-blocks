@@ -443,7 +443,7 @@ const PatternLibraryButton = () => {
                                     setActiveTagTab={setActiveTagTab}
                                     resetCat={resetCat}
                                     setResetCat={setResetCat}
-                                    loading={loading}
+                                    loading={isLoading}
                                     setLoading={setLoading}
                                 />
 
