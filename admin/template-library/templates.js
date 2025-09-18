@@ -285,7 +285,7 @@ const PatternLibraryButton = () => {
                             templatelibrary: {
                                 ...prev.templatelibrary,
                                 items: response.items || [],
-                                categories: TemplateLibrary.categories || [],
+                                categories: response.categories || [],
                                 pagination: response.pagination || {}
                             },
                         }));
