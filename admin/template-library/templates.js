@@ -2,7 +2,8 @@
  * WordPress dependencies
  */
 import { useState, useEffect } from "@wordpress/element";
-import { select, dispatch } from '@wordpress/data';
+import { toast } from "react-toastify";
+import { select, dispatch, use } from '@wordpress/data';
 import { createBlock } from '@wordpress/blocks';
 import { __ } from "@wordpress/i18n";
 import { Button, Modal } from "@wordpress/components";
@@ -39,10 +40,15 @@ const PatternLibraryButton = () => {
     });
     const [libraryData, setLibraryData] = useState([]);
     const [savedItems, setSavedItems] = useState([]);
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
+    
+    const isProPlugin = true;
+    const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
+
+    const userData = JSON.parse(localStorage.getItem("userData"));
 
     const handleClick = () => {
         setIsVisible(!isVisible);
-        console.log("isVisible:", !isVisible);
     };
 
     const importDemo = () => {
@@ -95,12 +101,14 @@ const PatternLibraryButton = () => {
 
     const [patternsData, { data: patternsResponse, error, isLoading }] = usePostDataMutation();
 
-
-    const getTemplatesData = async (value) => {
+    const getTemplatesData = async (value, email, license_key) => {
         try {
             const response = await patternsData({
                 endpoint: value,
-                body: {},
+                body: {
+                    email: email,
+                    license_key: license_key
+                },
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -108,19 +116,45 @@ const PatternLibraryButton = () => {
 
             return response;
         } catch (err) {
-            console.error('Error:', err);
-            console.error('Status:', err.status);
-            console.error('Data:', err.data);
-            if (err.status === 500) {
-                console.error('Server error. Check the API endpoint and server logs.');
+            if(err.data.status === 'error') {
+                toast.error(err.data.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                });
+            }
+        }
+    };
+
+    const getSavedTemplatesData = async (value, email, license_key) => {
+        try {
+            const response = await patternsData({
+                endpoint: value,
+                body: {
+                    email: email,
+                    license_key: license_key
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).unwrap();
+
+            return response;
+        } catch (err) {
+            if(err.data.status === 'error') {
+                toast.error(err.data.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                });
             }
         }
     };
 
     const alreadySaved = (savedItems, id, activeTab) => {
-        return activeTab !== 'templatelibrary'
-            ? savedItems.some(item => item?.id === id && item?.activeTab === activeTab)
-            : false;
+        if (activeTab !== 'templatelibrary') {
+            return savedItems.some(item => item?.id === id && item?.activeTab === 'templatelibrary');
+        }
+
+        return savedItems.some(item => item?.id === id && item?.activeTab === activeTab);
     };
 
     const removeSavedItem = (savedItems, id, activeTab) => {
@@ -129,68 +163,151 @@ const PatternLibraryButton = () => {
         );
     };
 
-
     useEffect(() => {
         setIsLogedIn(true);
 
+        // Only fetch if the tab's data is not already present
         const fetchData = async () => {
             setLoading(true);
+
             try {
-                const patterns = await getTemplatesData("patterns");
-                const pages = await getTemplatesData("pages");
-                // const sites = await getTemplatesData("sites");
-
-                if (patterns) {
-                    setData((prev) => ({
-                        ...prev,
-                        patterns: {
-                            ...prev.patterns,
-                            items: patterns.items || [],
-                            categories: patterns.categories || [],
-                        },
-                    }));
-                }
-
-                if (pages) {
-                    setData((prev) => ({
-                        ...prev,
-                        pages: {
-                            ...prev.pages,
-                            items: pages.items || [],
-                            categories: pages.categories || [],
-                        },
-                    }));
-                }
-
-                if (sites) {
-                    setData((prev) => ({
-                        ...prev,
-                        sites: {
-                            ...prev.sites,
-                            items: sites.items || [],
-                            categories: sites.categories || [],
-                        },
-                    }));
-                }
-
-                setData((prev) => ({
-                    ...prev,
-                    templatelibrary: {
-                        ...prev.templatelibrary,
-                        items: TemplateLibrary.items || [],
-                        categories: TemplateLibrary.categories || []
+                let response;
+                if (activeTab === 'patterns') {
+                    response = await getTemplatesData("patterns", userData?.email, FB_TLibrary?.activationKey);
+                    if (response) {
+                        setData((prev) => ({
+                            ...prev,
+                            patterns: {
+                                ...prev.patterns,
+                                items: response.items || [],
+                                categories: response.categories || [],
+                            },
+                        }));
                     }
-                }));
+                } else if (activeTab === 'pages') {
+                    response = await getTemplatesData("pages", userData?.email, FB_TLibrary?.activationKey);
+                    if (response) {
+                        setData((prev) => ({
+                            ...prev,
+                            pages: {
+                                ...prev.pages,
+                                items: response.items || [],
+                                categories: response.categories || [],
+                            },
+                        }));
+                    }
+                } else if (activeTab === 'sites') {
+                    response = await getTemplatesData("sites", userData?.email, FB_TLibrary?.activationKey);
+                    if (response) {
+                        setData((prev) => ({
+                            ...prev,
+                            sites: {
+                                ...prev.sites,
+                                items: response.items || [],
+                                categories: response.categories || [],
+                            },
+                        }));
+                    }
+                } else if (activeTab === 'templatelibrary') {
+                    if(userData) {
+                        response = await getSavedTemplatesData("clouds", userData?.email, FB_TLibrary?.activationKey);
+                        if (response) {
+                            setData((prev) => ({
+                                ...prev,
+                                templatelibrary: {
+                                    ...prev.templatelibrary,
+                                    items: response.items || [],
+                                    categories: TemplateLibrary.categories || [],
+                                },
+                            }));
+                        }
+                    }
+                }
             } catch (err) {
-                console.error("Error fetching templates:", err);
+                console.error(`Error fetching ${activeTab}:`, err);
             } finally {
                 setLoading(false);
             }
         };
 
         fetchData();
-    }, []);
+    }, [activeTab]);
 
+    const handleSaveLibrary = async (templateData, isAlreadySaved) => {
+        if (!userData) {
+            setIsLoginModalOpen(true);
+            return;
+        }
+
+        if (templateData.is_premium === true && !isProPlugin) {
+            setIsPluginUpgradeModalOpen(true);
+            return;
+        }
+
+        if (isAlreadySaved) return;
+
+        if (loading) return;
+
+        setData((prev) => {
+            const updatedItems = prev[activeTab].items.map((item) =>
+                item.id === templateData.id ? { ...item, loading: true } : item
+            );
+            return {
+                ...prev,
+                [activeTab]: {
+                    ...prev[activeTab],
+                    items: updatedItems,
+                },
+            };
+        });
+
+        const apiBase = "https://frontis-sync.boomdevshub.com/wp-json";
+        const body = {
+            email: userData.email,
+            item_id: templateData.id,
+            item_type: templateData.type,
+            license_key: FB_TLibrary.activationKey,
+            website: window.location.origin,
+        };
+
+        const response = await fetch(`${apiBase}/frontis-sync/v1/saved-item`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body),
+        });
+
+        const responseData = await response.json();
+
+        if(responseData.status === 'success') {
+            toast.success(responseData.message, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+            });
+
+            setData((prev) => {
+                const updatedItems = prev[activeTab].items.map((item) =>
+                    item.id === templateData.id ? { ...item, saved: true, loading: false } : item
+                );
+                return {
+                    ...prev,
+                    [activeTab]: {
+                        ...prev[activeTab],
+                        items: updatedItems,
+                    },
+                };
+            });
+        } else {
+            toast.error('Failed to save template', {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        }
+    }
 
     const TagTabsOptions = (() => {
         if (!data[activeTab]) return [];
@@ -233,6 +350,8 @@ const PatternLibraryButton = () => {
                                     resetCat={resetCat}
                                     setResetCat={setResetCat}
                                     setLoading={setLoading}
+                                    isLoginModalOpen={isLoginModalOpen}
+                                    setIsLoginModalOpen={setIsLoginModalOpen}
                                 />
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">
@@ -265,12 +384,43 @@ const PatternLibraryButton = () => {
                                         savedItems={savedItems}
                                         setSavedItems={setSavedItems}
                                         alreadySaved={alreadySaved}
-                                        loading={loading}
-                                        setLoading={setLoading}
+                                        loading={isLoading}
+                                        setLoading={loading}
                                         setIsLogedIn={setIsLogedIn}
                                         setActiveCategory={setActiveCategory}
+                                        onSaveLibrary={handleSaveLibrary}
+                                        setIsLoginModalOpen={setIsLoginModalOpen}
+                                        isLoginModalOpen={isLoginModalOpen}
+                                        isProPlugin={isProPlugin}
+                                        isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
+                                        setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                                     />
                                 )}
+
+                                {
+                                // activeTab !== 'templatelibrary' && (
+                                //     <TemplateContent
+                                //         activeTab={activeTab}
+                                //         activeCategory={activeCategory}
+                                //         setLibraryData={setLibraryData}
+                                //         data={data}
+                                //         setIsVisible={setIsVisible}
+                                //         isProTemplate={isProTemplate}
+                                //         activeTagTab={activeTagTab[activeTab]}
+                                //         setActiveTagTab={(value) => setActiveTagTab({ ...activeTagTab, [activeTab]: value })}
+                                //         TagTabsOptions={TagTabsOptions}
+                                //         isLogedIn={isLogedIn}
+                                //         savedItems={savedItems}
+                                //         setSavedItems={setSavedItems}
+                                //         alreadySaved={alreadySaved}
+                                //         loading={loading}
+                                //         setLoading={setLoading}
+                                //         setIsLogedIn={setIsLogedIn}
+                                //         setActiveCategory={setActiveCategory}
+                                //     />
+                                // )
+                                }
+
                                 {activeTab === 'templatelibrary' && (
                                     <LibraryContent
                                         activeTab={activeTab}
@@ -288,7 +438,7 @@ const PatternLibraryButton = () => {
                                         setCardListType={setCardListType}
                                         savedItems={savedItems}
                                         setSavedItems={setSavedItems}
-                                        loading={loading}
+                                        loading={isLoading}
                                         setLoading={setLoading}
                                     />
                                 )}

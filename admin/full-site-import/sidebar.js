@@ -724,7 +724,7 @@ function FrontisBlocksSidebarFullSite(props) {
 							} else {
 								setFontfamilies(res.data);
 								getAllFontFamilies(res.data)
-								localStorage.setItem('fb_fontFamilies', JSON.stringify(res.data));
+								localStorage.setItem('fb_fontfamilies', JSON.stringify(res.data));
 							}
 						} else {
 							getAllFontFamilies(localStorageData)

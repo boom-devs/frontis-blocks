@@ -131,8 +131,22 @@ class Admin {
 			$tl_script_asset_path = FB_PLUGIN_PATH . 'assets/admin/index.asset.php';
 			$tl_script_asset = file_exists( $tl_script_asset_path ) ? require( $tl_script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( FB_VERSION ) );
 			$tl_script_asset['dependencies'][] = 'jquery';
+
+            $activation_key = get_option('frontisblockspro_license_options');
+            // $activation_key = '8c29b662-1837-419e-9e28-96042a27cf02';
+            // if($activation_key && count($activation_key) > 0 && isset($activation_key['sc_license_key']) && $activation_key['sc_license_key'] !== '') {
+            //     $activation_key = $activation_key['sc_license_key'];
+            // }
+
 			wp_enqueue_style('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/style-tlibrary.css', array(), '1.0.0');
 			wp_enqueue_script('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/tlibrary.js', $tl_script_asset['dependencies'], '1.0.0', true);
+            wp_localize_script(
+                'frontis-template-library',
+                'FB_TLibrary',
+                array(
+                    'activationKey' => $activation_key
+                )
+            );
 
             if ($enable_quick_action_bar === "true") { 
                 wp_enqueue_style('frontis-quick-access', FB_PLUGIN_URL . 'assets/admin/quickAccess.css', array(), '1.0.0');

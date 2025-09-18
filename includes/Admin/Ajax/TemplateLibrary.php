@@ -22,7 +22,8 @@ class TemplateLibrary extends AjaxBase {
 	public function register_ajax_events() {
 		$ajax_events = [
 			'update_option',
-			'get_option'
+			'get_option',
+            'full_site_import'
 		];
 
 		$this->init_ajax_events($ajax_events);
@@ -68,4 +69,40 @@ class TemplateLibrary extends AjaxBase {
         }
     }
 
+    public function full_site_import() {
+        $this->check_permission();
+    
+        $title   = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
+        $content = isset($_POST['content']) ? wp_kses_post($_POST['content']) : '';
+    
+        if (empty($title)) {
+            wp_send_json_error(['message' => 'Title is required']);
+        }
+    
+        // Duplicate title handle
+        $original_title = $title;
+        $count = 1;
+        while (get_page_by_title($title, OBJECT, 'page')) {
+            $title = $original_title . ' ' . $count;
+            $count++;
+        }
+    
+        $page_id = wp_insert_post([
+            'post_title'   => $title,
+            'post_content' => $content,
+            'post_status'  => 'publish',
+            'post_type'    => 'page',
+        ]);
+    
+        if ($page_id) {
+            wp_send_json_success([
+                'message' => 'Page created successfully',
+                'page_id' => $page_id,
+                'title'   => $title
+            ]);
+        } else {
+            wp_send_json_error(['message' => 'Failed to create page']);
+        }
+    }
+    
 }
