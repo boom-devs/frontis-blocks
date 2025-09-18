@@ -11,6 +11,6 @@
         "sabberworm/php-css-parser": "^8.8",
         "matthiasmullie/minify": "dev-master",
         "appsero/client": "dev-develop",
-        "deliciousbrains/wp-background-processing": "dev-master"
+        "deliciousbrains/wp-background-processing": "^1.3"
     }
 }
