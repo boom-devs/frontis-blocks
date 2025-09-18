@@ -532,7 +532,7 @@ const attributes = {
 	},
 	counterItemBgColor: {
 		type: 'string',
-		default: '#FFFBF5'
+		default: ''
 	},
 	counterItemBgHoverColor: {
 		type: 'string',

@@ -6,14 +6,20 @@
     "title": "Marquee Carousel Item",
     "category": "frontis-blocks",
     "textdomain": "frontis-blocks",
-	"description": "A customizable slide item block with various styling options.", 
+    "description": "A customizable slide item block with various styling options.",
     "example": {},
     "supports": {
         "anchor": false,
-        "align": ["wide", "full"],
+        "align": [
+            "wide",
+            "full"
+        ],
         "customClassName": false
     },
+    "usesContext": [
+        "frontisBlocks:isNewsTicker",
+        "frontisBlocks:headingTag"
+    ],
     "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css"
 }
-
