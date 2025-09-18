@@ -1,4 +1,4 @@
-import { RichText, useBlockProps, InnerBlocks } from "@wordpress/block-editor";
+import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 
 export default function Save({ attributes }) {
 	const {
@@ -16,9 +16,8 @@ export default function Save({ attributes }) {
 		"data-block-id": blockId,
 	});
 
-	console.log(arrowsUniqueId)
 	/**
-	 * swiper settings
+	 * Swiper settings
 	 */
 	const swiperSettings = JSON.stringify({
 		spaceBetween: 0,
@@ -29,6 +28,7 @@ export default function Save({ attributes }) {
 			reverseDirection: reverseDirection,
 			pauseOnMouseEnter: pauseOnHover,
 			disableOnInteraction: false,
+			waitForTransition: false,
 		},
 		loop: true,
 		slidesPerView: "auto",
@@ -37,6 +37,7 @@ export default function Save({ attributes }) {
 			? {
 					nextEl: `.${arrowsUniqueId} .fb-news-ticker-next`,
 					prevEl: `.${arrowsUniqueId} .fb-news-ticker-prev`,
+					hideOnClick: false, // keep arrows always visible
 					disabledClass: "swiper-button-disabled",
 					hiddenClass: "swiper-button-hidden",
 			  }
