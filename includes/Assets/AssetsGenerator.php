@@ -10,6 +10,7 @@ use Sabberworm\CSS\CSSList\CSSList;
 use Sabberworm\CSS\OutputFormat;
 use Sabberworm\CSS\Parser;
 use FrontisBlocks\Assets\TemplateProcessor;
+use FrontisBlocks\BackgroundProcess\AssetsGenerationProcess;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -25,14 +26,20 @@ class AssetsGenerator
 	private $block_fonts = [];
 	private $wp_template_css_content = '';
 	private $frontis_block_used = false;
-	private $blocks_used_in_page = [];
 	private $combine_swiper_js = false;
 	private $critical_css_content = '';
 	private $genrating_critical_css = false;
 	private $generate_general_assets = false;
 	private $generate_static_assets_critical = [];
+	private $skip_swiper_js = false;
+	private $combine_static_to_critical = false;
+	private $skip_advanced_video_js = false;
+	private $skip_animated_heading_js = false;
+	private $skip_animated_heading_textplugin_js = false;
 
 	private function reset() {
+		update_post_meta($this->post_id, 'fb_page_assets_generation', 'compiling');
+
 		$this->post_id = null;
     	$this->post = null;
 		$this->used_blocks = [];
@@ -42,61 +49,154 @@ class AssetsGenerator
 		$this->block_fonts = [];
 		$this->wp_template_css_content = '';
 		$this->frontis_block_used = false;
-		$this->blocks_used_in_page = [];
 		$this->combine_swiper_js = false;
 		$this->critical_css_content = '';
 		$this->genrating_critical_css = false;
 		$this->generate_general_assets = false;
 		$this->generate_static_assets_critical = [];
+		$this->combine_static_to_critical = false;
+		$this->skip_swiper_js = false;
+		$this->skip_advanced_video_js = false;
+		$this->skip_animated_heading_js = false;
+		$this->skip_animated_heading_textplugin_js = false;
 	}
+
+	public function get_block_style($content) {
+		// Regex for blockStyle (unchanged)
+		$style_pattern = '/"blockStyle":\s*"((?:\\\\.|[^"\\\\])*)"/';
+		preg_match_all($style_pattern, $content, $style_matches);
+	
+		// Regex for frontis-blocks name
+		$block_name_pattern = '/<!--\s*wp:(frontis-blocks\/[a-zA-Z0-9_-]+)\s*{?/';
+		preg_match_all($block_name_pattern, $content, $name_matches);
+	
+		$styles = [];
+		// Process each matched blockStyle value
+		foreach ($style_matches[1] as $escaped_style) {
+			// Unescape JSON unicode sequences like \u003e to actual characters
+			$unescaped = json_decode('"'.$escaped_style.'"');
+			if ($unescaped !== null) {
+				$styles[] = $unescaped;
+			}
+		}
+	
+		// Extract block names and ensure uniqueness
+		$block_names = $name_matches[1] ?? [];
+		$unique_block_names = array_unique($block_names);
+	
+		// Process unique block names (if needed)
+		if (!empty($unique_block_names)) {
+			foreach ($unique_block_names as $block_name) {
+				if(!in_array($block_name, $this->used_blocks)) {
+					$this->used_blocks[] = $block_name;
+					$slug = str_replace('frontis-blocks/', '', $block_name);
+					$block_static_css_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $slug . '/style-index.css';
+
+					if (file_exists($block_static_css_file_path)) {
+						$this->css_content .= $this->clean_CSS(file_get_contents($block_static_css_file_path)) . "\n";
+					}
+
+					// Js file
+					$block_static_js_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $slug . '/view.js';
+					if (file_exists($block_static_js_file_path)) {
+						$this->js_content .= file_get_contents($block_static_js_file_path) . "\n";
+					}
+				}
+			}
+		}
+	
+		return implode("\n\n", $styles);
+	}
+
+	// public function generate_template_part_header_footer_assets($post) {
+	// 	$header_content = Helper::get_template_part_content($post, 'header');
+	// 	$footer_content = Helper::get_template_part_content($post, 'footer');
+
+	// 	if($header_content) {
+	// 		$this->header_style['content'] = $this->get_block_style($header_content);
+	// 		$this->header_style['page_name'] = $post->post_name;
+	// 		update_post_meta($this->post->ID, 'fb_related_header', $post->post_name);
+	// 	}
+
+	// 	if($footer_content) {
+	// 		$this->footer_style['content'] = $this->get_block_style($footer_content);
+	// 		$this->footer_style['page_name'] = $post->post_name;
+	// 		update_post_meta($this->post->ID, 'fb_related_footer', $post->post_name);
+	// 	}
+	// }
 
 	public function generate_page_assets($post_id, $post, $generate_critical_css = false)
 	{
-		$current_url = $_SERVER['HTTP_REFERER'];
+		$this->genrating_critical_css = $generate_critical_css;
 
-		if (preg_match('/site-editor\.php/', $current_url)) {
-			return false;
+		if(get_post_type($post_id) != 'wp_template_part') {
+			$this->post = $post;
+			$this->post_id = $post_id;
+
+			if(get_post_type($post_id) === 'wp_template') {
+				$post_data[] = $this->post;
+				$this->post->post_content = TemplateProcessor::get_instance()->process_template($post_data);
+			}
+
+			if(get_post_type($post_id) !== 'wp_template') {
+				$this->post->post_content = $this->get_page_content_with_template_parts();
+			}
+
+			$this->generate_all_blocks_assets();
+			$this->combine_static_assets();
+
+			$page_name = $this->post->post_name;
+			$this->combine_and_save_css_file($page_name);
+			$this->get_font_families();
+			$this->reset();
 		}
 
-		$upload_dir = wp_upload_dir();
-		$global_css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
-		$page_name = get_post_type($post_id) === 'post' ? 'single' : get_post_type($post_id).'-single';
-
-		$frontis_block_used = get_post_meta($post_id, 'frontis_blocks_used', true);
-		if(!$frontis_block_used) {
-			$css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/' . $page_name . '/';
-			if (file_exists($css_dir)) {
-				return false;
+		// Queue only for specific conditions
+		if (Helper::check_url_has_fse_template() || get_post_type($post_id) === 'wp_template') {
+			global $wpdb;
+			$table_name = $wpdb->prefix . 'fb_job_schedule';
+			
+			// Use transaction for bulk operations
+			$wpdb->query('START TRANSACTION');
+			
+			try {
+				// Clear all existing jobs first
+				$wpdb->query("DELETE FROM $table_name");
+				
+				$post_ids = Helper::get_all_post_ids();
+				
+				if (!empty($post_ids)) {
+					foreach ($post_ids as $single_post_id) {
+						$single_post = get_post($single_post_id);
+						if (!$single_post) continue;
+						
+						$post_content = $single_post->post_content;
+						$pattern = "/frontis-blocks/i";
+						
+						if (get_post_type($single_post_id) !== 'wp_template' && 
+							preg_match_all($pattern, $post_content) === 0) {
+							continue;
+						}
+						
+						// Set compiling status (keeping your existing code)
+						update_post_meta($single_post_id, 'fb_page_assets_generation', 'compiling');
+						
+						// Insert job using your existing Helper method
+						Helper::insert_job($single_post_id, $this->post->post_name . $single_post_id);
+					}
+				}
+				
+				$wpdb->query('COMMIT');
+				
+				// Clear any existing cron and reschedule
+				wp_clear_scheduled_hook('fb_process_assets_generation');
+				// AssetsGenerationProcess::get_instance()->setup_data_processing_cron();
+				
+			} catch (Exception $e) {
+				$wpdb->query('ROLLBACK');
+				error_log('Failed to schedule assets generation: ' . $e->getMessage());
 			}
 		}
-
-		$this->post = $post;
-		$this->genrating_critical_css = $generate_critical_css;
-		$this->generate_general_assets = $generate_critical_css;
-
-		// Generate header footer for wp_template for page post or any custom template
-		$refined_content = $this->get_page_content_with_template_parts();
-		$pattern = "/frontis-blocks/i";
-
-		// var_dump(preg_match_all($pattern, $refined_content) < 1);
-		if(preg_match_all($pattern, $refined_content) < 1) {
-			$refined_content = $post->post_content;
-		}
-
-		$this->post->post_content = $refined_content;
-		$this->post_id = $post_id;
-		$this->generate_all_blocks_assets();
-		$this->combine_static_assets();
-
-		// Combine and save CSS files
-		$page_name = $post->post_name;
-		if(!$frontis_block_used) {
-			$page_name = get_post_type($post_id) === 'post' ? 'single' : get_post_type($post_id).'-single';
-		}
-
-		$this->combine_and_save_css_file($page_name);
-
-		$this->reset();
 	}
 
 	public function get_critical_css_content($block) {
@@ -119,17 +219,18 @@ class AssetsGenerator
 
 			if(in_array('frontis-blocks/slider', $this->used_blocks) || in_array('frontis-blocks/marquee-carousel', $this->used_blocks)) {
 				$this->combine_swiper_js = true;
+				$this->combine_static_to_critical = true;
 			}
 
-			$this->used_blocks[] = $block['blockName'];
+			if($block['blockName'] !== 'frontis-blocks/critical-css'){
+				$this->used_blocks[] = $block['blockName'];
+			}
 
 			// Get the block attributes
 			$block_attributes = $block['attrs'];
 			$blockStyle = isset($block_attributes['blockStyle']) ? sanitize_text_field($block_attributes['blockStyle']) : '';
 
 			if (get_post_type($this->post_id) !== 'wp_template_part') {
-				$this->blocks_used_in_page[] = $block['blockName'];
-
 				$fonts = Helper::get_fonts_family($block_attributes);
 				if (!empty($fonts)) {
 					foreach ($fonts as $font => $weight) {
@@ -144,27 +245,42 @@ class AssetsGenerator
 
 			$this->critical_css_content .= $this->clean_CSS($blockStyle) . "\n";
 		}
-
-		$assets_dir = FB_PLUGIN_PATH . 'assets/css/frontend/';
-		$css_files = Helper::get_css_files($assets_dir);
-
-		if (!empty($css_files)) {
-			foreach ($css_files as $key => $css_file) {
-				if(!in_array(basename($css_file), $this->generate_static_assets_critical)) {
-					if (!$this->combine_swiper_js && basename($css_file) === 'swiper-bundle.min.css') {
-						continue;
-					}
-
-					if(!in_array('frontis-blocks/marquee-carousel', $this->used_blocks) && (basename($css_file) === 'slick-theme.css' || basename($css_file) === 'slick.css')) {
-						continue;
-					}
-
-					$this->generate_static_assets_critical[] = basename($css_file);
-					$this->critical_css_content .= file_get_contents($css_file) . "\n";
-				}
-			}
-		}
 	}
+
+	// public function get_header_footer_content($template_content) {
+    //     $pattern = '/<!-- wp:template-part\s*{(.*?)} \/-->/';
+    //     $slugs = [];
+
+    //     if (preg_match_all($pattern, $template_content, $template_part_matches)) {
+    //         foreach ($template_part_matches[1] as $attributes) {
+    //             // Extract slug from attributes
+    //             if (preg_match('/"slug":"(.*?)"/', $attributes, $slug_match)) {
+    //                 $slugs[] = $slug_match[1];
+    //             }
+    //         }
+    //     }
+
+    //     if (!empty($slugs)) {
+	// 		foreach ($slugs as $index => $slug) {
+	// 			// Query WordPress for post with post_name = slug and post_type = wp_template_part
+	// 			$args = [
+	// 				'name' => $slug,
+	// 				'post_type' => 'wp_template_part',
+	// 				'post_status' => 'publish',
+	// 				'numberposts' => 1
+	// 			];
+	// 			$template_parts = get_posts($args);
+				
+	// 			// Check if a post was found and get the first post object
+	// 			if (!empty($template_parts)) {
+	// 				$template_part = $template_parts[0]; // Get the first (and only) post object
+	// 				if (isset($template_part->post_content)) {
+	// 					$this->generate_template_part_header_footer_assets($template_part);
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// }
 
 	public function get_page_content_with_template_parts() {
 		global $wpdb;
@@ -196,7 +312,100 @@ class AssetsGenerator
 		
 		// Execute the query
 		$template_contents = $wpdb->get_results($query);
-		return TemplateProcessor::get_instance($this->post)->process_template($template_contents);
+		$template_contents = TemplateProcessor::get_instance()->process_template($template_contents);
+		$pattern = '/<!--\s*wp:post-content\s*/i';
+        if (preg_match_all($pattern, $template_contents, $wp_post_content_matchs) > 0) {
+            if(isset($wp_post_content_matchs[0])){
+				foreach($wp_post_content_matchs[0] as $index => $post_content) {
+					$template_contents = str_replace(
+                        $wp_post_content_matchs[0][$index],
+                        $this->post->post_content,
+                        $template_contents
+                    );
+				}
+			}
+        }
+
+		return $template_contents;
+	}
+
+
+	function find_pages_using_template($template_id) {
+		global $wpdb;
+		
+		$template_post = get_post($template_id);
+		if (!$template_post) {
+			return false;
+		}
+		
+		$template_name = $template_post->post_name;
+		$template_slug = $template_post->post_name;
+		
+		// Multiple possible template formats check করা
+		$possible_templates = [
+			$template_name,
+			$template_slug,
+			'page-' . $template_name . '.php',
+			$template_slug . '.php'
+		];
+		
+		$results = [];
+		
+		foreach ($possible_templates as $template) {
+			$pages = $wpdb->get_results($wpdb->prepare("
+				SELECT DISTINCT p.ID, p.post_title, p.post_name, pm.meta_value as template_used
+				FROM {$wpdb->posts} p
+				INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+				WHERE pm.meta_key = '_wp_page_template'
+				AND (pm.meta_value = %s OR pm.meta_value LIKE %s)
+				AND p.post_type = 'page'
+				AND p.post_status = 'publish'
+			", $template, '%' . $template . '%'));
+			
+			if ($pages) {
+				$results = array_merge($results, $pages);
+			}
+		}
+		
+		// Duplicate remove করা
+		$unique_results = [];
+		foreach ($results as $page) {
+			$unique_results[$page->ID] = $page;
+		}
+		
+		return array_values($unique_results);
+	}
+
+	public function store_blocks_used_blocks($blocks) {
+		foreach ($blocks as $block) {
+			if(str_contains($block['blockName'], 'frontis-blocks')) {
+				if ($block && isset($block['blockName'])) {
+					if (!in_array($block['blockName'], $this->used_blocks)) {
+						$this->used_blocks[] = $block['blockName'];
+					}
+				}
+
+				if(in_array('frontis-blocks/slider', $this->used_blocks) || in_array('frontis-blocks/marquee-carousel', $this->used_blocks)) {
+					$this->skip_swiper_js = true;
+				}
+
+				if(in_array('frontis-blocks/advanced-video', $this->used_blocks)) {
+					$this->skip_advanced_video_js = true;
+				}
+
+				if(in_array('frontis-blocks/animated-heading', $this->used_blocks)) {
+					$this->skip_animated_heading_js = true;
+				}
+
+				if(in_array('frontis-blocks/animated-heading', $this->used_blocks)) {
+					$this->skip_animated_heading_textplugin_js = true;
+				}
+
+				if (!empty($block['innerBlocks']) && is_array($block['innerBlocks'])) {
+					$this->store_blocks_used_blocks($block['innerBlocks']);
+				}
+			}
+		}
 	}
 
 	// Function to process the array and replace template parts with their post content
@@ -263,11 +472,11 @@ class AssetsGenerator
 		// Generate page css js
 		foreach ($blocks as $block) {
 			if ($block && isset($block['blockName'])) {
-				
-				if($this->genrating_critical_css && $block['blockName'] !== 'frontis-blocks/critical-css' && $this->generate_general_assets) {
+
+				if($block['blockName'] !== 'frontis-blocks/critical-css' && !$this->generate_general_assets && $this->genrating_critical_css) {
 					$this->get_critical_css_content($block);
 				} else {
-					$this->generate_general_assets = false;
+					$this->generate_general_assets = true;
 					$this->generate_block_assets($block);
 				}
 			}
@@ -282,7 +491,9 @@ class AssetsGenerator
 	{
 		if (str_contains($block['blockName'], 'frontis-blocks')) {
 			$single_block['slug'] = str_replace('frontis-blocks/', '', $block['blockName']);
+
 			if (!in_array($block['blockName'], $this->used_blocks)) {
+				$this->used_blocks[] = $block['blockName'];
 
 				$block_static_css_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $single_block['slug'] . '/style-index.css';
 
@@ -300,8 +511,6 @@ class AssetsGenerator
 			if(in_array('frontis-blocks/slider', $this->used_blocks) || in_array('frontis-blocks/marquee-carousel', $this->used_blocks)) {
 				$this->combine_swiper_js = true;
 			}
-
-			$this->used_blocks[] = $block['blockName'];
 
 			// Get the block attributes
 			$block_attributes = $block['attrs'];
@@ -405,52 +614,58 @@ class AssetsGenerator
 		}
 	}
 
-	public function combine_and_save_css_file($page_name)
-	{
+	public function combine_and_save_css_file($page_name) {
+		// Get upload directory and prepare paths
 		$upload_dir = wp_upload_dir();
-		$global_css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
-		$css_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/' . $page_name . '/';
-		if (!file_exists($css_dir)) {
-			wp_mkdir_p($css_dir);
+		$base_dir = trailingslashit($upload_dir['basedir']) . 'frontis-blocks/';
+		$css_dir = $base_dir . trailingslashit($page_name);
+	
+		// Create directory if it doesn't exist
+		if (!is_dir($css_dir) && !wp_mkdir_p($css_dir)) {
+			error_log("Failed to create directory: $css_dir");
+			return false;
 		}
-
-		if (get_post_type($this->post_id) !== 'wp_template_part') {
-			// Add global css
-			$global_css_file = $global_css_dir . '/global/global.css';
-			if (file_exists($global_css_file)) {
-				if($this->genrating_critical_css) {
-					$this->critical_css_content .= file_get_contents($global_css_file) . "\n";
-				} else {
-					$this->css_content .= file_get_contents($global_css_file) . "\n";
-				}
-			}
+	
+		// Add global CSS if not a template part and not skipping
+		$global_css_file = $base_dir . 'global/global.css';
+		if (is_readable($global_css_file)) {
+			$css_content = file_get_contents($global_css_file) . "\n";
+			$this->genrating_critical_css
+				? $this->critical_css_content .= $css_content
+				: $this->css_content .= $css_content;
 		}
-
-		$minifier = new CSS($this->css_content);
-		$minified_css = $minifier->minify();
-
-		// Css file
+	
+		// Minify main CSS content
 		$css_file_name = $page_name . '.min.css';
-
-		if($this->genrating_critical_css && $this->critical_css_content !== '') {
+		$css_file = $css_dir . $css_file_name;
+		$minified_css = (new CSS($this->css_content))->minify();
+		if (!file_put_contents($css_file, $minified_css)) {
+			error_log("Failed to write CSS file: $css_file");
+		}
+	
+		// Handle critical CSS if applicable
+		if ($this->genrating_critical_css && !empty($this->critical_css_content)) {
 			$critical_css_filename = $page_name . '-critical.min.css';
 			$critical_css_file = $css_dir . $critical_css_filename;
-
-			$critical_css_minifier = new CSS($this->critical_css_content);
-			$critical_minified_css = $critical_css_minifier->minify();
-			file_put_contents($critical_css_file, $critical_minified_css);
+			$critical_minified_css = (new CSS($this->critical_css_content))->minify();
+			if (!file_put_contents($critical_css_file, $critical_minified_css)) {
+				error_log("Failed to write critical CSS file: $critical_css_file");
+			}
 		}
-
-		$css_file = $css_dir . $css_file_name;
-		file_put_contents($css_file, $minified_css);
-
-		// Js file
+	
+		// Save JS file
 		$js_file_name = $page_name . '.js';
 		$js_file = $css_dir . $js_file_name;
-		file_put_contents($js_file, $this->js_content);
-
+		if (!file_put_contents($js_file, $this->js_content)) {
+			error_log("Failed to write JS file: $js_file");
+		}
+	
+		// Reset content properties
 		$this->css_content = '';
 		$this->js_content = '';
+		$this->critical_css_content = '';
+	
+		return true;
 	}
 
 	public function css_generator_functions($generate_template_css = false)
@@ -490,18 +705,18 @@ class AssetsGenerator
 		$global_custom_colors = get_option('fb_custom_colors');
 		$global_gradient_colors = get_option('fb_gradient_colors');
 		$global_custom_gradient_colors = get_option('fb_custom_gradient_colors');
+		$global_typography = get_option('fb_globaltypo');
 
 		$merged_colors = array_filter([
 			'global_colors' => $global_colors,
 			'global_custom_colors' => $global_custom_colors,
 			'global_gradient_colors' => $global_gradient_colors,
-			'global_custom_gradient_colors' => $global_custom_gradient_colors
+			'global_custom_gradient_colors' => $global_custom_gradient_colors,
 		], function ($value) {
 			return !empty($value);
 		});
 
 		$merged_colors = array_values($merged_colors);
-		$global_typography = get_option('fb_globaltypo');
 		$root_css = self::generate_root_css($merged_colors, $global_typography);
 
 		if ($root_css) {
@@ -838,17 +1053,21 @@ class AssetsGenerator
 		$assets_dir = FB_PLUGIN_PATH . 'assets/css/frontend/';
 		$css_files = Helper::get_css_files($assets_dir);
 
-		if (!empty($css_files) && !$this->generate_general_assets) {
+		if (!empty($css_files)) {
 			foreach ($css_files as $key => $css_file) {
 				if (!$this->combine_swiper_js && basename($css_file) === 'swiper-bundle.min.css') {
 					continue;
 				}
-				
-				if(in_array(basename($css_file), $this->generate_static_assets_critical)) {
+
+				if($this->skip_swiper_js) {
 					continue;
 				}
-
-				$this->css_content .= file_get_contents($css_file) . "\n";
+			
+				if($this->combine_static_to_critical) {
+					$this->critical_css_content .= file_get_contents($css_file) . "\n";
+				} else {
+					$this->css_content .= file_get_contents($css_file) . "\n";
+				}
 			}
 		}
 
@@ -858,19 +1077,19 @@ class AssetsGenerator
 
 		if (!empty($js_files)) {
 			foreach ($js_files as $key => $js_file) {
-				if (!$this->combine_swiper_js && basename($js_file) === 'swiper-bundle.min.js') {
+				if ((!$this->combine_swiper_js && basename($js_file) === 'swiper-bundle.min.js') || $this->skip_swiper_js) {
 					continue;
 				}
 
-				if(!in_array('frontis-blocks/advanced-video', $this->used_blocks) && basename($js_file) === 'react-player.standalone.min.js') {
+				if((!in_array('frontis-blocks/advanced-video', $this->used_blocks) && basename($js_file) === 'react-player.standalone.min.js') || $this->skip_advanced_video_js) {
 					continue;
 				}
 
-				if(!in_array('frontis-blocks/animated-heading', $this->used_blocks) && basename($js_file) === 'gsap.min.js') {
+				if((!in_array('frontis-blocks/animated-heading', $this->used_blocks) && basename($js_file) === 'gsap.min.js') || $this->skip_animated_heading_js) {
 					continue;
 				}
 
-				if(!in_array('frontis-blocks/animated-heading', $this->used_blocks) && basename($js_file) === 'gsap-textplugin.min.js') {
+				if((!in_array('frontis-blocks/animated-heading', $this->used_blocks) && basename($js_file) === 'gsap-textplugin.min.js') || $this->skip_animated_heading_textplugin_js) {
 					continue;
 				}
 

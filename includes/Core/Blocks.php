@@ -195,21 +195,19 @@ class Blocks
 
 	public function get_blocks_on_save($post_id, $post, $update)
 	{
+		// Skip autosaves and revisions
+		if (wp_is_post_autosave($post_id) || wp_is_post_revision($post_id)) {
+			return;
+		}
+
 		AssetsGenerator::generate_global_assets();
 
 		$pattern = "/frontis-blocks/i";
-		update_post_meta($post_id, 'frontis_blocks_used', false);
-		update_post_meta($post_id, 'generate_critical_css', false);
-
-		if(preg_match_all($pattern, $post->post_content) > 0) {
-			update_post_meta($post_id, 'frontis_blocks_used', true);
+		if((!preg_match_all($pattern, $post->post_content) > 0 && get_post_type($post_id) !== 'wp_template')) {
+			return;
 		}
 
-		$critical_css_used = preg_match_all("/frontis-blocks\/critical-css/i", $post->post_content) > 0;
-
-		if($critical_css_used) {
-			update_post_meta($post_id, 'generate_critical_css', $critical_css_used);
-		}
+		$critical_css_used = Helper::post_content_has_blocks_critical($post, $post_id);
 
 		if ($update) {
 			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post, $critical_css_used);
