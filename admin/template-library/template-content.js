@@ -9,6 +9,7 @@ import {ToastContainer, toast } from "react-toastify";
 import { TemplateContentLoader } from "./template-loader";
 import { usePostDataMutation } from "./services/wpapi";
 
+
 const TemplateContent = ({
     activeTab,
     activeCategory,
@@ -27,9 +28,15 @@ const TemplateContent = ({
     loading,
     setLoading,
     setIsLogedIn,
-    setActiveCategory
+    setActiveCategory,
+    onSaveLibrary,
+    setIsLoginModalOpen,
+    isLoginModalOpen,
+    isProPlugin,
+    isPluginUpgradeModalOpen,
+    setIsPluginUpgradeModalOpen,
 }) => {
-    const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
+
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
     const [originalTemplates, setOriginalTemplates] = useState([]);
@@ -101,9 +108,9 @@ const TemplateContent = ({
             setSearchItems('');
         }
 
-        setTimeout(() => {
-            setLoading(false)
-        }, 2000)
+        // setTimeout(() => {
+        //     setLoading(false)
+        // }, 2000)
 
     }, [activeTab, activeCategory, isProTemplate, activeTagTab, TagTabsOptions, schema]);
 
@@ -178,6 +185,7 @@ const TemplateContent = ({
     // Get user data from local storage
     useEffect(() => {
         // Get userData from local storage
+        
         const userData = localStorage.getItem('userData');
         if (userData === 'undefined' || userData === 'null' || userData === '') {
             getUserDataFromDb();
@@ -188,7 +196,7 @@ const TemplateContent = ({
             setIsLoginModalOpen(false);
         }
         
-    }, [])
+    }, []);
 
     return (
         <>
@@ -260,10 +268,13 @@ const TemplateContent = ({
                                         templateType={activeTab}
                                         colors={template.colors || []}
                                         customColors={template.custom_colors || []}
-                                        gradientColors={template.gradientColors || []}
+                                        gradientColors={template.color_gradients || []}
                                         customGradientColors={template.custom_gradientColors || []}
-                                        typographies={template.typographies || []}
-                                        customTypographies={template.customTypographies || []}
+                                        typographies={template.typographies || {}}
+                                        customTypographies={template.custom_typographies || {}}
+                                        globalTypographies={template.globalTypographies || {}}
+                                        fontFamilies={template.fontFamilies || {}}
+                                        pages={template.pages || []}
                                         dependencies={template.dependencies || []}
                                         activeTab={activeTab}
                                         setLibraryData={setLibraryData}
@@ -274,6 +285,14 @@ const TemplateContent = ({
                                         setSavedItems={setSavedItems}
                                         alreadySaved={alreadySaved}
                                         setActiveCategory={setActiveCategory}
+                                        onSaveLibrary={onSaveLibrary}
+                                        saved={template.saved}
+                                        setLoading={template.loading}
+                                        setIsLoginModalOpen={setIsLoginModalOpen}
+                                        isLoginModalOpen={isLoginModalOpen}
+                                        isProPlugin={isProPlugin}
+                                        isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
+                                        setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                                     />
                                 ))
                             ) : (
@@ -287,6 +306,8 @@ const TemplateContent = ({
                 <LoginSignupModal
                     onLoginSuccess={handleLoginSuccess}
                     onRequestClose={handleCloseLoginModal}
+                    isLoginModalOpen={isLoginModalOpen}
+                    setIsLoginModalOpen={setIsLoginModalOpen}
                 />
             )}
         </>

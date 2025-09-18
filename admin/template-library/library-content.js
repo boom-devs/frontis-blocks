@@ -13,9 +13,22 @@ import TemplateGrid from "./template-grid";
 import TemplateList from "./template-list";
 import { TemplateContentLoader } from "./template-loader";
 
-
-const LibraryContent = ({ activeTab, activeCategory, setActiveCategory, data, libraryData, setLibraryData, setIsVisible, isLogedIn, cardListType, setCardListType, savedItems, setSavedItems, loading, setLoading }) => {
-
+const LibraryContent = ({ 
+    activeTab, 
+    activeCategory, 
+    setActiveCategory, 
+    data, 
+    libraryData, 
+    setLibraryData, 
+    setIsVisible, 
+    isLogedIn, 
+    cardListType, 
+    setCardListType, 
+    savedItems, 
+    setSavedItems, 
+    loading, 
+    setLoading 
+}) => {
     const FavoriteTabsOptions = [
         { name: 'All', value: 'all' },
         { name: 'Patterns', value: 'patterns' },
@@ -54,6 +67,8 @@ const LibraryContent = ({ activeTab, activeCategory, setActiveCategory, data, li
     const [searchItems, setSearchItems] = useState('');
     const [isLibrary, setIsLibrary] = useState(true);
 
+    const userData = JSON.parse(localStorage.getItem("userData"));
+
     const searchTemplates = (value) => {
         setSearchItems(value);
 
@@ -75,18 +90,21 @@ const LibraryContent = ({ activeTab, activeCategory, setActiveCategory, data, li
             setDisplayedData(filtered);
         }
     };
+    
     useEffect(() => {
-        setOriginalLibraryData(libraryData);
-        setDisplayedData(libraryData);
+        setOriginalLibraryData(schema[activeTab]?.items || []);
+        setDisplayedData(schema[activeTab]?.items || []);
         setSearchItems('');
-    }, [libraryData]);
+    }, [schema]);
 
     useEffect(() => {
+        let libraryData = schema[activeTab]?.items || [];
+        
         let filteredData = originalLibraryData;
 
         // Filter by activeTab when not 'all'
         if (activeFavoriteTab !== 'all') {
-            filteredData = filteredData.filter(item => item.activeTab === activeFavoriteTab);
+            filteredData = filteredData.filter(item => item.item_type === activeFavoriteTab);
         }
 
         if (activeCategory.templatelibrary === 'my-favourites') {
@@ -107,48 +125,106 @@ const LibraryContent = ({ activeTab, activeCategory, setActiveCategory, data, li
         }, 2000)
 
         setDisplayedData(filteredData);
-    }, [activeFavoriteTab, originalLibraryData, searchItems, activeCategory.templatelibrary]);
+    }, [activeFavoriteTab, activeCategory, searchItems, originalLibraryData]);
 
     const handleFavoriteTabClick = useCallback((tab) => {
         setActiveFavoriteTab(tab.value);
+        console.log(tab.value);
+        console.log(tab);
+        
         setSearchItems('');
     }, []);
 
 
-    const handleRemoveLibraryItem = useCallback((id, type) => {
-        const updatedOriginalData = originalLibraryData.filter(
-            (item) => !(item.id === id && item.type === type)
-        );
-        setOriginalLibraryData(updatedOriginalData);
+    const handleRemoveLibraryItem = async (id, type) => {
 
-        const updatedDisplayedData = displayedData.filter(
-            (item) => !(item.id === id && item.type === type)
-        );
-        setDisplayedData(updatedDisplayedData);
+        const apiBase = "https://frontis-sync.boomdevshub.com/wp-json";
+        const body = {
+            email: userData?.email,
+            item_id: id,
+            item_type: type,
+            license_key: FB_TLibrary?.activationKey
+        };
 
-        if (setLibraryData) {
-            const updatedLibraryData = libraryData.filter(
-                (item) => !(item.id === id && item.type === type)
-            );
-            setLibraryData(updatedLibraryData);
-        }
-
-        setSavedItems((prev) =>
-            prev.filter((item) => !(item?.id === id && item?.type === type))
-        );
-
-        toast.success(__('Template removed from library', 'frontis-blocks'), {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
+        const response = await fetch(`${apiBase}/frontis-sync/v1/remove-item`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body),
         });
 
+        const responseData = await response.json();
 
-    }, [originalLibraryData, displayedData, libraryData, setLibraryData, setSavedItems]);
+        if(responseData.status === 'success') {
+            toast.success(responseData.message, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+            });
 
+            // Update originalLibraryData
+            const updatedOriginalData = originalLibraryData.filter(
+                (item) => !(item.id === id && item.item_type === type)
+            );
+            setOriginalLibraryData(updatedOriginalData);
 
+            // Update displayedData
+            const updatedDisplayedData = displayedData.filter(
+                (item) => !(item.id === id && item.item_type === type)
+            );
+            setDisplayedData(updatedDisplayedData);
+
+            // Update libraryData if setLibraryData is provided
+            if (setLibraryData) {
+                const updatedLibraryData = libraryData.filter(
+                    (item) => !(item.id === id && item.item_type === type)
+                );
+                setLibraryData(updatedLibraryData);
+            }
+
+            // Update savedItems
+            setSavedItems((prev) =>
+                prev.filter((item) => !(item?.id === id && item?.item_type === type))
+            );
+        } else {
+            toast.error('Failed to remove template', {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        }
+
+        // const updatedOriginalData = originalLibraryData.filter(
+        //     (item) => !(item.id === id && item.type === type)
+        // );
+        // setOriginalLibraryData(updatedOriginalData);
+
+        // const updatedDisplayedData = displayedData.filter(
+        //     (item) => !(item.id === id && item.type === type)
+        // );
+        // setDisplayedData(updatedDisplayedData);
+
+        // if (setLibraryData) {
+        //     const updatedLibraryData = libraryData.filter(
+        //         (item) => !(item.id === id && item.type === type)
+        //     );
+        //     setLibraryData(updatedLibraryData);
+        // }
+
+        // setSavedItems((prev) =>
+        //     prev.filter((item) => !(item?.id === id && item?.type === type))
+        // );
+
+        // toast.success(__('Template removed from library', 'frontis-blocks'), {
+        //     position: "top-right",
+        //     autoClose: 3000,
+        //     hideProgressBar: false,
+        //     closeOnClick: true,
+        //     pauseOnHover: true,
+        // });
+    };
 
     return (
         <div className="fb-template-library-store-content">
@@ -245,7 +321,7 @@ const LibraryContent = ({ activeTab, activeCategory, setActiveCategory, data, li
                                             key={item.id}
                                             item={item}
                                             libraryData={libraryData}
-                                            type={item.type}
+                                            type={item.item_type}
                                             setLibraryData={setLibraryData}
                                             data={data}
                                             customColors={item.custom_colors || []}
@@ -269,7 +345,7 @@ const LibraryContent = ({ activeTab, activeCategory, setActiveCategory, data, li
                                         imageUrl={item.image}
                                         is_premium={item.is_premium || false}
                                         tags={item.tags || []}
-                                        templateType={item.type}
+                                        templateType={item.item_type}
                                         categories={item.categories || []}
                                         colors={item.colors || []}
                                         customColors={item.customColors || []}

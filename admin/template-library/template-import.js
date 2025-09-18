@@ -10,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 
 const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
     const [isImporting, setIsImporting] = useState(false);
-    const [activeTab, setActiveTab] = useState('patterns');
+    const [activeTab, setActiveTab] = useState(template.activeTab || 'pattern');
     const [showFullSiteImport, setShowFullSiteImport] = useState(false);
 
     const handleFullSiteImport = useCallback(async () => {
@@ -26,9 +26,9 @@ const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
         console.log('Download clicked for:', template?.id);
     }, [template?.id]);
 
-    const handleFullSiteImportClose = useCallback(() => {
-        setShowFullSiteImport(false);
-    }, []);
+    // const handleFullSiteImportClose = useCallback(() => {
+    //     setShowFullSiteImport(false);
+    // }, []);
 
     if (!template) {
         return null;
@@ -60,7 +60,7 @@ const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
                 <FullSiteImport
                     data={data}
                     template={template}
-                    onClose={handleFullSiteImportClose}
+                    onClose={onClose}
                     onBack={() => setShowFullSiteImport(false)}
                 />
             </>

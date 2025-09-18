@@ -43,6 +43,8 @@ const TemplateHeader = ({
     setActiveCategory = () => { },
     setResetCat = () => { },
     setLoading = () => { },
+    isLoginModalOpen,
+    setIsLoginModalOpen,
 }) => {
     
     const schema = data;
@@ -50,6 +52,36 @@ const TemplateHeader = ({
         id: key,
         label: schema[key].name || key.charAt(0).toUpperCase() + key.slice(1),
     }));
+
+    const userData = localStorage.getItem('userData');
+
+    const handleTabClick = (tab) => {
+        if (tab.label === 'Template Library' && !userData) {
+            setIsLoginModalOpen(true);
+            return;
+        }
+    
+        if (activeTab !== tab.id) {
+            setActiveTab(tab.id);
+        }
+    
+        setIsProTemplate('');
+    
+        setActiveCategory((prev) => {
+            const updated = {
+                ...prev,
+                patterns: 'all',
+                pages: 'all',
+                sites: 'all',
+            };
+
+            return JSON.stringify(prev) === JSON.stringify(updated) ? prev : updated;
+        });
+    
+        setResetCat(true);
+        setLoading(true);
+    };
+    
 
     return (
         <div className="fb-template-library-store-header">
@@ -62,19 +94,7 @@ const TemplateHeader = ({
                         <button
                             key={tab.id}
                             className={`single-tab ${activeTab === tab.id ? 'active' : ''}`}
-                            onClick={() => {
-                                setActiveTab(tab.id);
-                                setIsProTemplate('');
-                                setActiveCategory((prev) => ({
-                                    ...prev,
-                                    patterns: 'all',
-                                    pages: 'all',
-                                    sites: 'all',
-                                }));
-                                setResetCat(true);
-                                setLoading(true)
-                            }}
-
+                            onClick={() => handleTabClick(tab)}
                         >
                             <span>{tab.label}</span>
                         </button>
