@@ -19,7 +19,7 @@ import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes, clientId, context, insertBlocksAfter }) {
+export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockId,
 		headingText,
@@ -48,10 +48,19 @@ export default function Edit({ attributes, setAttributes, clientId, context, ins
 		advancedHeadingDesktopSwitcher,
 		advancedHeadingTabletSwitcher,
 		advancedHeadingMobileSwitcher,
-		dynamicContent,
-		isHeadingTextChanged
+		isHeadingTextChanged,
+
+		dynamicEnabled,
+		dynamicSource,
+		dynamicField,
+		dynamicEnableLink,
+		dynamicReplaceAll,
+
+
 	} = attributes;
-	const {postType, postId, queryId} = context;
+
+	// Dynamic Content Value
+	const {postType, postId} = context;
 
 	const blockProps = useBlockProps({
 		className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'} ${headingBeforeAfterSwitcher && 'fb-advanced-heading-before-after'}`,
@@ -66,62 +75,150 @@ export default function Edit({ attributes, setAttributes, clientId, context, ins
 	SwitchToBlockSettings(panelRef);
 
 
-	// Dynamic content
-	// const isDescendentOfQueryLoop = Number.isFinite( queryId );
-	// const userCanEdit = useSelect(
-	// 	( select ) => {
-	// 		if ( isDescendentOfQueryLoop ) {
-	// 			return false;
-	// 		}
-	// 		return select( coreStore ).canUser( 'update', {
-	// 			kind: 'postType',
-	// 			name: postType,
-	// 			id: postId,
-	// 		} );
-	// 	},
-	// 	[ isDescendentOfQueryLoop, postType, postId ]
-	// );
-	// const [ rawTitle = '', setTitle, fullTitle ] = useEntityProp(
-	// 	'postType',
-	// 	postType,
-	// 	'title',
-	// 	postId
-	// );
+	// কোন কোন ফিল্ড dynamic preview করবে (Current Post)
+	const CURRENT_POST_FIELDS = [
+		'post_title','post_excerpt','post_thumbnail','post_meta',
+		'post_date','post_time','post_terms','post_id','comments_number',
+		'author_name','author_first_name','author_last_name','author_nickname',
+		'author_description','author_email','author_url','author_avatar','author_meta'
+	];
+	
+	const shouldUseDynamic =
+		dynamicEnabled &&
+		dynamicSource === 'current_post' &&
+		CURRENT_POST_FIELDS.includes(dynamicField);
+	
+	// helper
+	const getPlainText = (html) => html?.replace(/<[^>]+>/g, '') ?? '';
+	
+	// pull post record
+	const postRecord = useSelect(
+		(select) =>
+		shouldUseDynamic && postType && postId
+			? select(coreStore).getEntityRecord('postType', postType, postId)
+			: null,
+		[shouldUseDynamic, postType, postId]
+	);
 
-	// const [ link ] = useEntityProp( 'postType', postType, 'link', postId );
-	// const onSplitAtEnd = () => {
-	// 	insertBlocksAfter( createBlock( getDefaultBlockName() ) );
-	// };
+	// check post type supports excerpt
+	const postTypeObj = useSelect(
+		(select) => postType ? select(coreStore).getPostType(postType) : null,
+		[postType]
+	);
+	
+	// featured image (only when needed)
+	const mediaRecord = useSelect(
+		(select) =>
+		shouldUseDynamic &&
+		dynamicField === 'post_thumbnail' &&
+		postRecord?.featured_media
+			? select(coreStore).getEntityRecord('postType', 'attachment', postRecord.featured_media)
+			: null,
+		[shouldUseDynamic, dynamicField, postRecord?.featured_media]
+	);
+	
+	// author (only when needed)
+	const authorRecord = useSelect(
+		(select) =>
+		shouldUseDynamic &&
+		dynamicField.startsWith('author_') &&
+		postRecord?.author
+			? select(coreStore).getUser(postRecord.author)
+			: null,
+		[shouldUseDynamic, dynamicField, postRecord?.author]
+	);
+	
+	const dynamicValue = (() => {
+		if (!shouldUseDynamic || !postRecord) return '';
+	
+		switch (dynamicField) {
+		// POST
+		case 'post_title':
+			return getPlainText(postRecord.title?.rendered);
+	
+		case 'post_excerpt': {
+			const supportsExcerpt = !!postTypeObj?.supports?.excerpt;
+			if (!supportsExcerpt) {
+				return __('No Content', 'frontis-blocks');
+			}
+			
+			// raw value database থেকে
+			const rawExcerpt = postRecord.excerpt?.raw?.trim();
+			
+			if (rawExcerpt) {
+				return getPlainText(rawExcerpt);
+			}
+			
+			// raw খালি মানে user কিছু লেখেনি → show "No Content"
+			return __('No Content', 'frontis-blocks');
+		}		  
+	
+		case 'post_thumbnail':
+			return mediaRecord?.source_url || __('(no featured image)', 'frontis-blocks');
+	
+		case 'post_meta': {
+			// editor preview only works if meta registered show_in_rest=true
+			const key = attributes?.metaKey;
+			if (key && postRecord.meta && typeof postRecord.meta[key] !== 'undefined') {
+			const val = postRecord.meta[key];
+			return Array.isArray(val) ? val.join(', ') : String(val ?? '');
+			}
+			return __('(post meta will render on frontend)', 'frontis-blocks');
+		}
+	
+		case 'post_date':
+			return postRecord.date ? new Date(postRecord.date).toLocaleDateString() : '';
+	
+		case 'post_time':
+			return postRecord.date ? new Date(postRecord.date).toLocaleTimeString() : '';
+	
+		case 'post_terms':
+			return __('(terms will render on frontend)', 'frontis-blocks');
+	
+		case 'post_id':
+			return String(postRecord.id ?? '');
+	
+		case 'comments_number':
+			return __('(comments count on frontend)', 'frontis-blocks');
+	
+		// AUTHOR
+		case 'author_name':
+			return authorRecord?.name || '';
+	
+		case 'author_first_name':
+			return authorRecord?.first_name || '';
+	
+		case 'author_last_name':
+			return authorRecord?.last_name || '';
+	
+		case 'author_nickname':
+			return authorRecord?.nickname || '';
+	
+		case 'author_description':
+			return authorRecord?.description || '';
+	
+		case 'author_email':
+			return authorRecord?.email || '';
+	
+		case 'author_url':
+			return authorRecord?.url || '';
+	
+		case 'author_avatar':
+			// user object usually has avatar_urls; pick 96px
+			return authorRecord?.avatar_urls?.['96'] || __('(avatar url on frontend)', 'frontis-blocks');
+	
+		case 'author_meta': {
+			const key = attributes?.authorMetaKey;
+			// user meta not in REST by default; show hint
+			return key ? __('(author meta will render on frontend)', 'frontis-blocks') : '';
+		}
+	
+		default:
+			return '';
+		}
+	})();
+	
 
-	// Synchronize headingText with rawTitle
-	// useEffect(() => {
-	// 	if (!isHeadingTextChanged) {
-	// 		setAttributes(
-	// 			{
-	// 				headingText: rawTitle,
-	// 			}
-	// 		);
-	// 	}
-	// }, [rawTitle, headingText, setAttributes]);
-
-	// let titleElement = <h2 { ...blockProps }>{ __( 'Title' ) }</h2>;
-	// if ( postType && postId ) {
-	// 	titleElement = <RichText
-	// 		tagName={headingTag}
-	// 		value={headingText}
-	// 		onChange={(value) => onChangeHeadingText(value)}
-	// 		placeholder={__('Advanced Heading', 'frontis-blocks')}
-	// 		className={`fb-advanced-heading ${activeLineSwitcher ? 'active-line' : ''}`}
-	// 		key={`heading-${clientId}-${context?.postId || 'default'}`}
-	// 	/>
-	// }
-
-	const onChangeHeadingText = (value) => {
-		setAttributes({
-			headingText: value,
-			isHeadingTextChanged: true
-		})
-	}
 	return (
 		<>
 			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
@@ -181,9 +278,9 @@ export default function Edit({ attributes, setAttributes, clientId, context, ins
                     <div className="fb-advanced-heading-wrapper">
                         <RichText
                             tagName={headingTag}
-                            value={dynamicContent ? dynamicValue : headingText}
+                            value={shouldUseDynamic ? dynamicValue : headingText} 
                             onChange={(value) => {
-                                if (!dynamicContent) {
+                                if (!shouldUseDynamic) {
                                     setAttributes({ headingText: value });
                                 }
                             }}

@@ -114,7 +114,7 @@ class Enqueues {
         ];
     
         wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', $localize_array);
-    }
+	}
 
     public function enqueue_editor_scripts() {
         wp_enqueue_script('frontis-responsive-css', FB_PLUGIN_URL . 'assets/js/backend/responsive-css.js', [], FB_VERSION, true);
