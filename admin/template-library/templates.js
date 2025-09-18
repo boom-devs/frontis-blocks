@@ -305,6 +305,7 @@ const PatternLibraryButton = () => {
         setActiveTagTab({ [activeTab]: '' });
         setActiveCategory({ [activeTab]: '' });
         setIsProTemplate('');
+        setSavedTemplateType('');
         fetchData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab], isProTemplate);
     }, [activeTab]);
 
