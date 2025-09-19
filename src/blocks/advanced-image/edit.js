@@ -26,7 +26,6 @@
 // export default function Edit({ attributes, setAttributes, clientId }) {
 // 	const {
 // 		blockID,
-// 		imageLink,
 // 		advancedImageUrl,
 // 		advancedImageId,
 // 		advancedImageAlt,
@@ -232,9 +231,11 @@
 // 	);
 // }
 
-/**
- * Advanced Image – Edit.js (full, updated)
- */
+
+
+
+
+//Advanced Image – Edit.js (full, updated) (modified)
 import { __ } from "@wordpress/i18n";
 import {
 	useBlockProps,
@@ -250,7 +251,7 @@ import { useSelect } from "@wordpress/data";
 import { store as coreStore } from "@wordpress/core-data";
 import { decodeEntities } from "@wordpress/html-entities";
 
-/** Internal */
+// Internal
 import Inspector from "./inspector";
 import "./editor.scss";
 import generateSrcSet from "@Utils/generateSrcSet";
@@ -311,12 +312,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	console.log('dynamicLinkSource', dynamicLinkSource);
 	console.log('dynamicEnableLink', dynamicEnableLink);
 
-	/** ------ normalized defaults (critical fix) ------ */
+	//normalized defaults (critical fix)
 	const normSource = dynamicImageSource || "current_post";
 	const normField  = dynamicImageField  || "featured_image";
 	const normSize   = dynamicImageSize   || "full";
 
-	/** block props */
+	// block props
 	const blockProps = useBlockProps({
 		className: `fb-advanced-image-main-wrapper ${blockID} ${
 			advancedImageDesktopSwitcher && "fb-desktop-responsive"
@@ -325,7 +326,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}`,
 	});
 
-	/** derive current post context (editor) */
+	// derive current post context (editor)
 	const currentPostId = useSelect(
 		(select) => select("core/editor")?.getCurrentPostId?.(),
 		[]
@@ -335,7 +336,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		[]
 	);
 
-	/** target post (for current_post / post_type) */
+	// target post (for current_post / post_type)
 	const targetPostId =
 		normSource === "post_type" && dynamicImagePostId
 			? dynamicImagePostId
@@ -350,7 +351,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		dynamicImageEnabled &&
 		(normSource === "current_post" || normSource === "post_type");
 
-	/** fetch post/author/attachment/site records */
+	// fetch post/author/attachment/site records
 	const postRecord = useSelect(
 		(select) =>
 			isPostBasedImage && targetPostType && targetPostId
@@ -419,7 +420,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		[siteEntity?.site_logo]
 	);
 
-	/** helpers */
+	// helpers
 	const pickSizeFromAttachment = (att, sizeSlug) => {
 		if (!att) return null;
 		const sizes = att?.media_details?.sizes || {};
@@ -450,7 +451,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		return entries.length ? entries.join(", ") : undefined;
 	};
 
-	/** compute dynamic image */
+	// compute dynamic image
 	const dynamicImg = useMemo(() => {
 		if (!dynamicImageEnabled) return null;
 
@@ -544,7 +545,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		authorRecord,
 	]);
 
-	/** read manual image size from srcset (once) */
+	// read manual image size from srcset (once)
 	useEffect(() => {
 		if (!advancedImageSrcSet) return;
 		const items = advancedImageSrcSet.split(", ");
@@ -559,7 +560,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}
 	}, [advancedImageSrcSet]);
 
-	/** media select */
+	// media select
 	const onSelectImage = (media) => {
 		const newSrcSet = generateSrcSet(media.sizes);
 		setAttributes({
@@ -572,7 +573,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const handleAnchorClick = (e) => e.preventDefault();
 
-	/** pick what to render (dynamic vs manual) */
+	// pick what to render (dynamic vs manual)
 	const renderSource = dynamicImageEnabled
 		? {
 				url: dynamicImg?.url,
@@ -600,7 +601,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 			<BlockControls>
 				<ToolbarGroup>
-					{/* manual mode only */}
 					{!dynamicImageEnabled && renderSource.url && (
 						<>
 							<ToolbarButton
@@ -672,7 +672,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								)
 							) : (
 								<>
-									{/* Dynamic ON → no upload UI */}
 									{dynamicImageEnabled ? (
 										<div className="fb-advanced-image-dynamic-empty" style={{ opacity: 0.75 }}>
 											{dynamicImg?.loading
@@ -680,7 +679,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												: __("No image available from the selected dynamic source.", "frontis-blocks")}
 										</div>
 									) : (
-										/* Manual mode → upload placeholder */
 										<MediaPlaceholder
 											onSelect={onSelectImage}
 											allowedTypes={["image"]}
