@@ -1464,6 +1464,25 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 										</button>
 									)}
 								</BaseControl>
+
+								<ToggleControl
+									label={__("Enable Dynamic Link", "frontis-blocks")}
+									checked={dynamicEnableLink}
+									onChange={(value) => setAttributes({ dynamicEnableLink: value })}
+								/>
+
+								{dynamicEnableLink && (
+									<BaseControl
+										label={__("Link Source", "frontis-blocks")}
+									>
+										<Select2 
+											options={DYNAMIC_LINK_SOURCE_OPTIONS}
+											value={selectedLinkSource}
+											onChange={handleLinkSourceChange}
+											className="fb-select2-control"
+										/>
+									</BaseControl>
+								)}
 							</div>
 						) : (
 						<>
@@ -1543,25 +1562,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 							</button>
 							)}
 						</>
-						)}
-
-						<ToggleControl
-							label={__("Enable Dynamic Link", "frontis-blocks")}
-							checked={dynamicEnableLink}
-							onChange={(value) => setAttributes({ dynamicEnableLink: value })}
-						/>
-
-						{dynamicEnableLink && (
-							<BaseControl
-								label={__("Link Source", "frontis-blocks")}
-							>
-								<Select2 
-									options={DYNAMIC_LINK_SOURCE_OPTIONS}
-									value={selectedLinkSource}
-									onChange={handleLinkSourceChange}
-									className="fb-select2-control"
-								/>
-							</BaseControl>
 						)}
 					</BaseControl>
 
@@ -1826,7 +1826,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			>
 				<FB_Range
 					min={1}
-					max={1400}
+					max={mediaSizeUnits === '%' ? 100 : 1400}
 					label={__("Width", "frontis-blocks")}
 					rangeValue={mediaSize}
 					onChangeHandler={(value) => setAttributes({ mediaSize: value })}
@@ -1839,7 +1839,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 				/>
 				<FB_Range
 					min={1}
-					max={1400}
+					max={mediaHeightUnits === '%' ? 100 : 1400}
 					label={__("Height", "frontis-blocks")}
 					rangeValue={mediaHeight}
 					onChangeHandler={(value) => setAttributes({ mediaHeight: value })}
