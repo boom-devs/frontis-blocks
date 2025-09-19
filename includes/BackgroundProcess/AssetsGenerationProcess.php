@@ -70,7 +70,6 @@ class AssetsGenerationProcess {
                 $assets_generation_completed = AssetsGenerator::get_instance()->generate_page_assets($row->job_id, $post, $critical_css_used);
 
                 if($assets_generation_completed) {
-                    update_post_meta($row->job_id, 'fb_page_assets_generation', 'compiled');
                     // Handle NULL job_attempts
                     $current_attempts = $row->job_attempts ?? 0;
                     $current_attempts = (int) $current_attempts;

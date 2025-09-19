@@ -91,8 +91,6 @@ $render_icon_svg = function($icon) {
 };
 
 
-var_dump($heading_icon);
-
 // Start building the HTML output
 $output = '<div ' . $wrapper_attributes . '>';
 $output .= '<div class="fb-parent-wrapper fb-advanced-wrapper ' . esc_attr($heading_global_wraper_class) . '" id="' . esc_attr($heading_global_wraper_id) . '" style="text-align: ' . esc_attr($heading_alignment) . ';">';

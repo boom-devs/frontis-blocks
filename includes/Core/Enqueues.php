@@ -4,6 +4,7 @@ namespace FrontisBlocks\Core;
 
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Utils\Helper;
+use FrontisBlocks\Assets\AssetsGenerator;
 
 /**
  * Class Enqueues
@@ -42,26 +43,54 @@ class Enqueues {
     }
 
     public function enqueue_scripts() {
-
         $page_compiling_mode = get_post_meta(get_the_ID(), 'fb_page_assets_generation', true);
 
         // var_dump($page_compiling_mode);
         if($page_compiling_mode === 'compiling') {
+            global $wpdb;
+            $upload_directory = WP_CONTENT_DIR . '/uploads/frontis-blocks/';
 
-            // Critical CSS file paths based on post_name
-            $global_base_dir = trailingslashit($this->upload_dir['basedir']) . 'frontis-blocks/';
-
-            if (is_readable($global_base_dir . 'global/global.css')) {
-                $css_content = file_get_contents($global_base_dir . 'global/global.css') . "\n";
-                echo '<style id="fb-pre-compiled-root-css">' . $css_content . '</style>';
+            if (!is_dir($upload_directory)) {
+                if (!mkdir($upload_directory, 0755, true)) {
+                    wp_send_json_error(['message' => 'Failed to create upload directory']);
+                    return;
+                }
             }
 
-            $css = Helper::pre_render_assets_on_compile();
-            if (!empty($css['css'])) {
-                echo '<style id="fb-pre-compiled-css">' . $css['css'] . '</style>';
+            // Generate global assets
+            AssetsGenerator::generate_global_assets();
+
+            $modified_post = get_post(get_the_ID());
+            $post_content = $modified_post->post_content;
+
+            $pattern = "/frontis-blocks/i";
+            // Get synced pattern contents
+            $pattern_contents = Helper::check_patterns_used($post_content);
+
+            // Append pattern contents to post_content
+            if (!empty($pattern_contents)) {
+                foreach ($pattern_contents as $pattern_content) {
+                    $post_content .= "\n" . $pattern_content; // Append each pattern content
+                }
+
+                // Pass modified post object to generate_page_assets
+                $modified_post->post_content = $post_content; // Update post object
             }
 
-            return;
+            update_post_meta($modified_post->ID, 'frontis_blocks_used', false);
+            update_post_meta($modified_post->ID, 'generate_critical_css', false);
+
+            if(preg_match_all($pattern, $post_content) > 0) {
+                update_post_meta($modified_post->ID, 'frontis_blocks_used', true);
+            }
+
+            $critical_css_used = preg_match_all("/frontis-blocks\/critical-css/i", $post_content) > 0;
+
+            if($critical_css_used) {
+                update_post_meta($modified_post->ID, 'generate_critical_css', $critical_css_used);
+            }
+
+            AssetsGenerator::get_instance()->generate_page_assets($modified_post->ID, $modified_post, $critical_css_used);
         }
 
         $page_name = $this->get_page_template_name();
@@ -103,16 +132,6 @@ class Enqueues {
 
     public function enqueue_assets_footer() {
         $this->load_google_font();
-
-        $page_compiling_mode = get_post_meta(get_the_ID(), 'fb_page_assets_generation', true);
-
-        if($page_compiling_mode === 'compiling') {
-            $assets = Helper::pre_render_assets_on_compile();
-            if (!empty($assets['js'])) {
-                echo '<script id="frontis-blocks-frontend">' . $assets['js'] . '</script>';
-            }
-            return;
-        }
 
         $page_name = $this->get_page_template_name();
         $frontis_used = get_post_meta(get_the_ID(), 'frontis_blocks_used', true);
