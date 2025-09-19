@@ -119,31 +119,60 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	);
 
 	// Settings using the arrowsId for navigation
+	// const settings = useMemo(
+	// 	() => ({
+	// 		spaceBetween: 0,
+	// 		centeredSlides: false,
+	// 		speed: speed,
+	// 		autoplay: {
+	// 			delay: 1,
+	// 			reverseDirection: reverseDirection,
+	// 			pauseOnMouseEnter: pauseOnHover,
+	// 			disableOnInteraction: false,
+	// 			waitForTransition: false,
+	// 		},
+	// 		loop: true,
+	// 		slidesPerView: "auto",
+	// 		allowTouchMove: false,
+	// 		navigation: arrowsId
+	// 			? {
+	// 					nextEl: `.${arrowsId} .fb-news-ticker-next`,
+	// 					prevEl: `.${arrowsId} .fb-news-ticker-prev`,
+	// 					hideOnClick: false, // Keep navigation always visible
+	// 			  }
+	// 			: false,
+	// 	}),
+	// 	[speed, reverseDirection, pauseOnHover, arrowsId],
+	// );
+
 	const settings = useMemo(
-		() => ({
-			spaceBetween: 0,
-			centeredSlides: false,
-			speed: speed,
-			autoplay: {
-				delay: 1,
-				reverseDirection: reverseDirection,
-				pauseOnMouseEnter: pauseOnHover,
-				disableOnInteraction: false,
-				waitForTransition: false,
-			},
-			loop: true,
-			slidesPerView: "auto",
-			allowTouchMove: false,
-			navigation: arrowsId
-				? {
-						nextEl: `.${arrowsId} .fb-news-ticker-next`,
-						prevEl: `.${arrowsId} .fb-news-ticker-prev`,
-						hideOnClick: false, // Keep navigation always visible
-				  }
-				: false,
-		}),
-		[speed, reverseDirection, pauseOnHover, arrowsId],
+	() => ({
+		spaceBetween: 0,
+		centeredSlides: false,
+		speed: speed || 5000,
+		autoplay: {
+		delay: 0,
+		reverseDirection: reverseDirection,
+		pauseOnMouseEnter: pauseOnHover,
+		disableOnInteraction: false,
+		waitForTransition: true,
+		},
+		loop: true,
+		slidesPerView: "auto",
+		allowTouchMove: false,
+		freeMode: true,
+		freeModeMomentum: false,
+		navigation: arrowsId
+		? {
+			nextEl: `.${arrowsId} .fb-news-ticker-next`,
+			prevEl: `.${arrowsId} .fb-news-ticker-prev`,
+			hideOnClick: false,
+			}
+		: false,
+	}),
+	[speed, reverseDirection, pauseOnHover, arrowsId],
 	);
+
 
 	// Slide actions
 	const updateSwiperSoon = () => {
