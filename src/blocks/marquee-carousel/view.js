@@ -1,49 +1,90 @@
 (function () {
-    function initSliders() {
-        // Select all slider containers
-        document.querySelectorAll('.fb-marquee-slider-container').forEach(function (sliderContainer) {
-            const blockId = sliderContainer.dataset.blockId;
-            if (!blockId) return;
+	function initSliders() {
+		// Select all slider containers
+		document
+			.querySelectorAll(".fb-marquee-slider-container")
+			.forEach(function (sliderContainer) {
+				const blockId = sliderContainer.dataset.blockId;
+				if (!blockId) return;
 
-            const swiperSettings = sliderContainer.dataset.swiperSettings;
-            if (!swiperSettings) return;
+				const swiperSettings = sliderContainer.dataset.swiperSettings;
+				if (!swiperSettings) return;
 
-            const sliderOptions = JSON.parse(swiperSettings);
+				let sliderOptions = {};
+				try {
+					sliderOptions = JSON.parse(swiperSettings);
+				} catch (e) {
+					console.error("Invalid Swiper settings JSON", e);
+					return;
+				}
 
-            // Initialize Swiper for the current slider
-            new Swiper(sliderContainer.querySelector('.fb-marquee-swiper'), sliderOptions);
-        });
-    }
+				const swiperEl = sliderContainer.querySelector(".fb-marquee-swiper");
+				if (!swiperEl) return;
 
-    var setupDone = false;
+				// init swiper
+				const swiperInstance = new Swiper(swiperEl, {
+					...sliderOptions,
+				});
 
-    function setupInitialization() {
-        if (setupDone) return;
-        setupDone = true;
+				// ===== Autoplay toggle support =====
+				if (sliderOptions.navigation?.nextEl) {
+					// Extract arrowsId from nextEl selector
+					const match = sliderOptions.navigation.nextEl.match(/\.([^ ]+)/);
+					if (match) {
+						const arrowsId = match[1];
+						const wrapper = document.querySelector(`.${arrowsId}`);
+						if (wrapper) {
+							const btn = wrapper.querySelector(".fb-news-ticker-pause-btn");
+							if (btn) {
+								btn.addEventListener("click", function () {
+									if (swiperInstance.autoplay?.running) {
+										swiperInstance.autoplay.stop();
+										btn.classList.add("paused");
+									} else {
+										swiperInstance.autoplay.start();
+										btn.classList.remove("paused");
+									}
+								});
+							}
+						}
+					}
+				}
+				// ===================================
+			});
+	}
 
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            setTimeout(initSliders, 100);
-        } else {
-            document.addEventListener('DOMContentLoaded', function () {
-                setTimeout(initSliders, 100);
-            });
-        }
+	var setupDone = false;
 
-        if (typeof window !== 'undefined') {
-            var lastUrl = window.location.href;
-            var urlObserver = new MutationObserver(function () {
-                if (lastUrl !== window.location.href) {
-                    lastUrl = window.location.href;
-                    setTimeout(initSliders, 300);
-                }
-            });
+	function setupInitialization() {
+		if (setupDone) return;
+		setupDone = true;
 
-            urlObserver.observe(document.body, { childList: true, subtree: true });
-        }
-    }
+		if (
+			document.readyState === "complete" ||
+			document.readyState === "interactive"
+		) {
+			setTimeout(initSliders, 100);
+		} else {
+			document.addEventListener("DOMContentLoaded", function () {
+				setTimeout(initSliders, 100);
+			});
+		}
 
-    setupInitialization();
+		if (typeof window !== "undefined") {
+			var lastUrl = window.location.href;
+			var urlObserver = new MutationObserver(function () {
+				if (lastUrl !== window.location.href) {
+					lastUrl = window.location.href;
+					setTimeout(initSliders, 300);
+				}
+			});
 
-    // If needed, expose re-initialization function
-    window.reinitSliders = initSliders;
+			urlObserver.observe(document.body, { childList: true, subtree: true });
+		}
+	}
+
+	setupInitialization();
+
+	// If needed, expose re-initialization function
+	window.reinitSliders = initSliders;
 })();
