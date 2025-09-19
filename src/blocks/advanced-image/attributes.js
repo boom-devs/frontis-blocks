@@ -110,6 +110,7 @@ const attributes = {
 	},
 	imageCaption: {
 		type: 'string',
+		default: '',
 	},
 	/** Image Border **/
 	imageBorder: {
