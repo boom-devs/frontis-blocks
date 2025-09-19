@@ -451,55 +451,6 @@ class Helper
         return false;
     }
 
-    public static function load_google_font($fonts)
-    {
-        if (is_array($fonts) && !empty($fonts)) {
-
-            $font_url = "https://fonts.googleapis.com/css?family=";
-            $font_url .= implode("|", array_map(function($font) {
-                return str_replace(' ', '+', $font) . ":100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic";
-            }, $fonts));
-
-//            echo $font_url;
-            // $gfonts = '';
-            // $gfonts_attr = ':100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic';
-
-            // foreach ($fonts as $font) {
-            //     $gfonts .= str_replace(' ', '+', trim($font)) . $gfonts_attr . '|';
-            // }
-
-            // $gfonts = rtrim($gfonts, '|');
-
-            // if (!empty($gfonts)) {
-            //     $query_args = [
-            //         'family' => $gfonts,
-            //         'display' => 'swap'
-            //     ];
-
-            //     wp_enqueue_style(
-            //         'frontis-blocks-preconnect',
-            //         'https://fonts.googleapis.com',
-            //         [],
-            //         null
-            //     );
-
-            //     wp_style_add_data('frontis-blocks-preconnect', 'crossorigin', 'anonymous');
-
-            //     wp_register_style(
-            //         'frontis-blocks-fonts',
-            //         add_query_arg($query_args, 'https://fonts.googleapis.com/css2'),
-            //         [],
-            //         FB_VERSION
-            //     );
-
-            //     wp_enqueue_style('frontis-blocks-fonts');
-            // }
-
-            // Reset.
-            $gfonts = '';
-        }
-    }
-
         /**
      * Generate Font family from Blocks Attributes
      *
@@ -813,6 +764,7 @@ class Helper
         // check $post_id not exist then insert
         $check_post_id = $wpdb->get_var($wpdb->prepare("SELECT job_id FROM $table_name WHERE job_id = %d", $post_id));
         if(!$check_post_id) {
+            update_post_meta($post_id, 'fb_page_assets_generation', 'compiling');
             $wpdb->insert(
                 $table_name,
                 array(
@@ -825,5 +777,57 @@ class Helper
                 array('%s', '%s', '%s', '%d', '%d')
             );
         }
+    }
+
+    public static function pre_render_assets_on_compile() {
+        $active_blocks = get_option('fb_active_blocks');
+        $css_content = '';
+        $js_content = '';
+    
+        if (!empty($active_blocks)) {
+    
+            $js_dir = FB_PLUGIN_PATH . 'assets/js/frontend/';
+            $js_files = Helper::get_js_files($js_dir);
+    
+            if ($js_files) {
+                foreach ($js_files as $key => $js_file) {
+                    $js_content .= file_get_contents($js_file) . "\n";
+                }
+            }
+    
+            $assets_dir = FB_PLUGIN_PATH . 'assets/css/frontend/';
+            $css_files = Helper::get_css_files($assets_dir);
+    
+            if ($css_files) {
+                foreach ($css_files as $key => $css_file) {
+                    $css_content .= file_get_contents($css_file) . "\n";
+                }
+            }
+    
+            foreach ($active_blocks as $key => $single_block) {
+                $block_static_css_file_path = FB_PLUGIN_PATH . 'build/blocks/' . $key . '/style-index.css';
+
+                // var_dump($block_static_css_file_path);
+    
+                if (file_exists($block_static_css_file_path)) {
+                    $css_content .= file_get_contents($block_static_css_file_path) . "\n";
+                }
+    
+                // Js file
+                $block_static_js_file_path = FB_PLUGIN_PATH . 'build/blocks/' . $key . '/view.js';
+
+                if (file_exists($block_static_js_file_path)) {
+                    $js_content .= file_get_contents($block_static_js_file_path) . "\n";
+                }
+            }
+        }
+
+        // var_dump($js_content);
+    
+        // Return both CSS and JS for initial compilation
+        return [
+            'css' => $css_content,
+            'js' => $js_content
+        ];
     }
 }

@@ -24,7 +24,6 @@ class Blocks
 		add_filter('block_categories_all', [$this, 'register_block_categories'], 10, 1);
 		add_filter('render_block', [$this, 'render_block'], 10, 3);
 		add_action('save_post', [$this, 'get_blocks_on_save'], 10, 3);
-		// add_action('wp_footer', [$this, 'enqueue_google_fonts'], 15);
 	}
 
 	public function register_blocks()
@@ -183,12 +182,51 @@ class Blocks
 		);
 	}
 
+	function get_block_styles_recursive($block) {
+		$styles = [];
+		
+		// Process current block
+		$styles = array_merge($styles, $this->get_block_styles($block));
+		
+		// Process inner blocks
+		if (isset($block['innerBlocks']) && is_array($block['innerBlocks'])) {
+			foreach ($block['innerBlocks'] as $inner_block) {
+				$styles = array_merge($styles, $this->get_block_styles_recursive($inner_block));
+			}
+		}
+		
+		return $styles;
+	}
+	
+	function get_block_styles($block) {
+		$styles = [];
+		$attrs = $block['attrs'] ?? [];
+
+		// Standard WordPress block style
+		if (isset($attrs['blockStyle']) && !empty($attrs['blockStyle'])) {
+			$styles[] = $attrs['blockStyle'];
+		}
+		
+		return $styles;
+	}
+
 	public function render_block($block_content, $parsed_block, $block_obj)
 	{
 		if (Helper::is_frontis_block($block_content, $parsed_block)) {
 			$block_content = $this->add_wrapper_class($block_content, $parsed_block);
 			$block_content = $this->add_block_id($block_content, $parsed_block);
 			$block_content = apply_filters('frontis_blocks_render_block', $block_content, $parsed_block, $block_obj);
+
+			$page_compiling_mode = get_post_meta(get_the_ID(), 'fb_page_assets_generation', true);
+			if($page_compiling_mode === 'compiling') {
+				// Get all styles from this block and its children
+				$block_styles = $this->get_block_styles_recursive($parsed_block);
+
+				// Output styles if any exist
+				if (!empty($block_styles)) {
+					echo '<style type="text/css">' . implode("\n", $block_styles) . '</style>';
+				}
+			}
 		}
 		return $block_content;
 	}
@@ -246,23 +284,5 @@ class Blocks
 	public function get_registered_blocks()
 	{
 		return $this->registered_blocks;
-	}
-
-	public function enqueue_google_fonts()
-	{
-		$google_fonts = get_option('fb_fontfamilies');
-
-		if (!empty($google_fonts)) {
-			foreach ($google_fonts as $key => $value) {
-				// unique fonts family
-				if (!in_array($value, $this->gfonts)) {
-					$this->gfonts[$value] = $value;
-				}
-			}
-		}
-
-		if (!empty($this->gfonts)) {
-			// Helper::load_google_font( $this->gfonts );
-		}
 	}
 }
