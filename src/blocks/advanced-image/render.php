@@ -58,6 +58,20 @@ $smart_lazy_load_image_url        = fb_norm_str( isset($attributes['smartLazyLoa
 
 $show_overlay                     = !empty( $attributes['showOverlay'] );
 
+
+$dynamic_image_enabled             = !empty( $attributes['dynamicImageEnabled'] );
+$dynamic_image_source              = fb_norm_str( isset($attributes['dynamicImageSource']) ? $attributes['dynamicImageSource'] : 'current_post' );
+$dynamic_image_post_id             = fb_norm_str( isset($attributes['dynamicImagePostId']) ? $attributes['dynamicImagePostId'] : 0 );
+$dynamic_image_post_type           = fb_norm_str( isset($attributes['dynamicImagePostType']) ? $attributes['dynamicImagePostType'] : '' );
+$dynamic_image_post_label          = fb_norm_str( isset($attributes['dynamicImagePostLabel']) ? $attributes['dynamicImagePostLabel'] : '' );
+$dynamic_image_field               = fb_norm_str( isset($attributes['dynamicImageField']) ? $attributes['dynamicImageField'] : 'featured_image' );
+$dynamic_image_size                = fb_norm_str( isset($attributes['dynamicImageSize']) ? $attributes['dynamicImageSize'] : 'full' );
+$dynamic_image_fallback_url        = fb_norm_str( isset($attributes['dynamicImageFallbackUrl']) ? $attributes['dynamicImageFallbackUrl'] : '' );
+$dynamic_image_fallback_alt        = fb_norm_str( isset($attributes['dynamicImageFallbackAlt']) ? $attributes['dynamicImageFallbackAlt'] : __( 'Image', 'frontis-blocks' ) );
+$dynamic_image_fallback_id         = fb_norm_str( isset($attributes['dynamicImageFallbackId']) ? $attributes['dynamicImageFallbackId'] : '' );
+$dynamic_enable_link               = !empty( $attributes['dynamicEnableLink'] );
+$dynamic_link_source               = fb_norm_str( isset($attributes['dynamicLinkSource']) ? $attributes['dynamicLinkSource'] : 'post_permalink' );
+
 // ---------- classes (match save.js) ----------
 $responsive_classes = [];
 if ($desktop_switcher) $responsive_classes[] = 'fb-desktop-responsive';
