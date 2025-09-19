@@ -292,12 +292,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		// dynamic image attrs
 		dynamicImageEnabled,
-		dynamicImageSource,      // current_post | post_type | site_logo_url
+		dynamicImageSource,
 		dynamicImagePostId,
 		dynamicImagePostType,
 		dynamicImagePostLabel,
-		dynamicImageField,       // featured_image | avatar_profile
-		dynamicImageSize,        // full | thumbnail | small | medium | large
+		dynamicImageField,
+		dynamicImageSize,
 		dynamicImageFallbackUrl,
 		dynamicImageFallbackAlt,
 		dynamicImageFallbackId,
