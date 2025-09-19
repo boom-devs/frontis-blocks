@@ -21,16 +21,22 @@ const LibraryContent = ({
     libraryData, 
     setLibraryData, 
     setIsVisible, 
-    isLogedIn, 
+    isLogedIn,
+    searchText,
     cardListType, 
     setCardListType, 
     savedItems, 
     setSavedItems, 
     loading, 
-    setLoading 
+    setLoading,
+    currentPage,
+    onPageChange,
+    onSearchTemplates,
+    onChangeSavedTemplateType,
+    savedTemplateType
 }) => {
     const FavoriteTabsOptions = [
-        { name: 'All', value: 'all' },
+        { name: 'All', value: '' },
         { name: 'Patterns', value: 'patterns' },
         { name: 'Pages', value: 'pages' },
         { name: 'Sites', value: 'sites' },
@@ -69,27 +75,27 @@ const LibraryContent = ({
 
     const userData = JSON.parse(localStorage.getItem("userData"));
 
-    const searchTemplates = (value) => {
-        setSearchItems(value);
+    // const searchTemplates = (value) => {
+    //     setSearchItems(value);
 
-        let dataToSearch = originalLibraryData;
+    //     let dataToSearch = originalLibraryData;
 
-        if (activeCategory.templatelibrary === 'my-favourites' && activeFavoriteTab !== 'all') {
-            dataToSearch = dataToSearch.filter(item => item.activeTab === activeFavoriteTab);
-        }
+    //     if (activeCategory.templatelibrary === 'my-favourites' && activeFavoriteTab !== 'all') {
+    //         dataToSearch = dataToSearch.filter(item => item.activeTab === activeFavoriteTab);
+    //     }
 
-        if (!value.trim()) {
-            setDisplayedData(dataToSearch);
-        } else {
-            const lowerValue = value.toLowerCase();
-            const filtered = dataToSearch.filter(item =>
-                (item.title && item.title.toLowerCase().includes(lowerValue)) ||
-                (item.name && item.name.toLowerCase().includes(lowerValue)) ||
-                (item.activeTab && item.activeTab.toLowerCase().includes(lowerValue))
-            );
-            setDisplayedData(filtered);
-        }
-    };
+    //     if (!value.trim()) {
+    //         setDisplayedData(dataToSearch);
+    //     } else {
+    //         const lowerValue = value.toLowerCase();
+    //         const filtered = dataToSearch.filter(item =>
+    //             (item.title && item.title.toLowerCase().includes(lowerValue)) ||
+    //             (item.name && item.name.toLowerCase().includes(lowerValue)) ||
+    //             (item.activeTab && item.activeTab.toLowerCase().includes(lowerValue))
+    //         );
+    //         setDisplayedData(filtered);
+    //     }
+    // };
     
     useEffect(() => {
         setOriginalLibraryData(schema[activeTab]?.items || []);
@@ -127,13 +133,13 @@ const LibraryContent = ({
         setDisplayedData(filteredData);
     }, [activeFavoriteTab, activeCategory, searchItems, originalLibraryData]);
 
-    const handleFavoriteTabClick = useCallback((tab) => {
-        setActiveFavoriteTab(tab.value);
-        console.log(tab.value);
-        console.log(tab);
+    // const handleFavoriteTabClick = useCallback((tab) => {
+    //     setActiveFavoriteTab(tab.value);
+    //     console.log(tab.value);
+    //     console.log(tab);
         
-        setSearchItems('');
-    }, []);
+    //     setSearchItems('');
+    // }, []);
 
 
     const handleRemoveLibraryItem = async (id, type) => {
@@ -241,8 +247,9 @@ const LibraryContent = ({
                                 {FavoriteTabsOptions.map(tab => (
                                     <button
                                         key={tab.value}
-                                        className={`fb-template-library-tag-btn ${activeFavoriteTab === tab.value ? 'active' : ''}`}
-                                        onClick={() => handleFavoriteTabClick(tab)}
+                                        className={`fb-template-library-tag-btn ${savedTemplateType === tab.value ? 'active' : ''}`}
+                                        onClick={() => onChangeSavedTemplateType(tab.value)}
+                                        disabled={savedTemplateType === tab.value}
                                     >
                                         {tab.name}
                                     </button>
@@ -269,8 +276,8 @@ const LibraryContent = ({
                                     <input
                                         type="search"
                                         placeholder="Search Templates"
-                                        value={searchItems}
-                                        onChange={e => searchTemplates(e.target.value)}
+                                        value={searchText}
+                                        onChange={e => onSearchTemplates(e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -369,6 +376,161 @@ const LibraryContent = ({
                     ) : (
                         <h3>No template found</h3>
                     )}
+
+{ schema[activeTab]?.pagination && (
+                            <div className="fb-template-library-pagination" style={{ marginTop: '20px', textAlign: 'center' }}>
+                                <button
+                                className="fb-pagination-btn"
+                                disabled={currentPage === 1}
+                                onClick={() => onPageChange(activeTab, currentPage - 1)}
+                                style={{
+                                    marginRight: '10px',
+                                    padding: '8px 16px',
+                                    cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+                                    opacity: currentPage === 1 ? 0.5 : 1,
+                                }}
+                                >
+                                Previous
+                                </button>
+
+                                {/* Page Numbers */}
+                                <div style={{ display: 'inline-block', margin: '0 10px' }}>
+                                {(() => {
+                                    const { last_page } = schema[activeTab].pagination;
+                                    const maxVisiblePages = 3; // Number of pages to show in the range
+                                    const pages = [];
+
+                                    // If total pages <= maxVisiblePages, show all pages
+                                    if (last_page <= maxVisiblePages) {
+                                    for (let i = 1; i <= last_page; i++) {
+                                        pages.push(
+                                        <button
+                                            key={i}
+                                            className={`fb-pagination-btn ${currentPage === i ? 'active' : ''}`}
+                                            onClick={() => onPageChange(activeTab, i)}
+                                            style={{
+                                            margin: '0 5px',
+                                            padding: '8px 12px',
+                                            cursor: 'pointer',
+                                            background: currentPage === i ? '#007cba' : '#f1f1f1',
+                                            color: currentPage === i ? '#fff' : '#000',
+                                            border: 'none',
+                                            borderRadius: '4px',
+                                            }}
+                                        >
+                                            {i}
+                                        </button>
+                                        );
+                                    }
+                                    } else {
+                                    // Always show page 1
+                                    pages.push(
+                                        <button
+                                        key={1}
+                                        className={`fb-pagination-btn ${currentPage === 1 ? 'active' : ''}`}
+                                        onClick={() => onPageChange(activeTab, 1)}
+                                        style={{
+                                            margin: '0 5px',
+                                            padding: '8px 12px',
+                                            cursor: 'pointer',
+                                            background: currentPage === 1 ? '#007cba' : '#f1f1f1',
+                                            color: currentPage === 1 ? '#fff' : '#000',
+                                            border: 'none',
+                                            borderRadius: '4px',
+                                        }}
+                                        >
+                                        1
+                                        </button>
+                                    );
+
+                                    // Show ellipsis after page 1 if currentPage > 2
+                                    if (currentPage > 2) {
+                                        pages.push(<span key="start-ellipsis" style={{ margin: '0 5px' }}>...</span>);
+                                    }
+
+                                    // Calculate the range of pages to show
+                                    let startPage = Math.max(2, currentPage - 1);
+                                    let endPage = Math.min(last_page - 1, currentPage + 1);
+
+                                    // Adjust range if near the end
+                                    if (currentPage > last_page - 2) {
+                                        startPage = Math.max(2, last_page - maxVisiblePages + 1);
+                                        endPage = last_page - 1;
+                                    }
+
+                                    // Add pages in the range
+                                    for (let i = startPage; i <= endPage; i++) {
+                                        pages.push(
+                                        <button
+                                            key={i}
+                                            className={`fb-pagination-btn ${currentPage === i ? 'active' : ''}`}
+                                            onClick={() => onPageChange(activeTab, i)}
+                                            style={{
+                                            margin: '0 5px',
+                                            padding: '8px 12px',
+                                            cursor: 'pointer',
+                                            background: currentPage === i ? '#007cba' : '#f1f1f1',
+                                            color: currentPage === i ? '#fff' : '#000',
+                                            border: 'none',
+                                            borderRadius: '4px',
+                                            }}
+                                        >
+                                            {i}
+                                        </button>
+                                        );
+                                    }
+
+                                    // Show ellipsis before last page if endPage < last_page - 1
+                                    if (endPage < last_page - 1) {
+                                        pages.push(<span key="end-ellipsis" style={{ margin: '0 5px' }}>...</span>);
+                                    }
+
+                                    // Always show last page
+                                    if (last_page > 1) {
+                                        pages.push(
+                                        <button
+                                            key={last_page}
+                                            className={`fb-pagination-btn ${currentPage === last_page ? 'active' : ''}`}
+                                            onClick={() => onPageChange(activeTab, last_page)}
+                                            style={{
+                                            margin: '0 5px',
+                                            padding: '8px 12px',
+                                            cursor: 'pointer',
+                                            background: currentPage === last_page ? '#007cba' : '#f1f1f1',
+                                            color: currentPage === last_page ? '#fff' : '#000',
+                                            border: 'none',
+                                            borderRadius: '4px',
+                                            }}
+                                        >
+                                            {last_page}
+                                        </button>
+                                        );
+                                    }
+                                    }
+
+                                    return pages;
+                                })()}
+                                </div>
+
+                                <button
+                                className="fb-pagination-btn"
+                                disabled={currentPage === schema[activeTab].pagination.last_page}
+                                onClick={() => onPageChange(activeTab, currentPage + 1)}
+                                style={{
+                                    marginLeft: '10px',
+                                    padding: '8px 16px',
+                                    cursor: currentPage === schema[activeTab].pagination.last_page ? 'not-allowed' : 'pointer',
+                                    opacity: currentPage === schema[activeTab].pagination.last_page ? 0.5 : 1,
+                                }}
+                                >
+                                Next
+                                </button>
+
+                                {/* <span style={{ marginLeft: '15px' }}>
+                                ({schema[activeTab].pagination.from} - {schema[activeTab].pagination.to} of {schema[activeTab].pagination.total})
+                                </span> */}
+                            </div>
+                        )}
                 </>
             )}
         </div>

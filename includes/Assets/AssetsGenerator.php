@@ -108,23 +108,6 @@ class AssetsGenerator
 		return implode("\n\n", $styles);
 	}
 
-	// public function generate_template_part_header_footer_assets($post) {
-	// 	$header_content = Helper::get_template_part_content($post, 'header');
-	// 	$footer_content = Helper::get_template_part_content($post, 'footer');
-
-	// 	if($header_content) {
-	// 		$this->header_style['content'] = $this->get_block_style($header_content);
-	// 		$this->header_style['page_name'] = $post->post_name;
-	// 		update_post_meta($this->post->ID, 'fb_related_header', $post->post_name);
-	// 	}
-
-	// 	if($footer_content) {
-	// 		$this->footer_style['content'] = $this->get_block_style($footer_content);
-	// 		$this->footer_style['page_name'] = $post->post_name;
-	// 		update_post_meta($this->post->ID, 'fb_related_footer', $post->post_name);
-	// 	}
-	// }
-
 	public function generate_page_assets($post_id, $post, $generate_critical_css = false)
 	{
 		$this->genrating_critical_css = $generate_critical_css;
@@ -156,12 +139,9 @@ class AssetsGenerator
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'fb_job_schedule';
 			
-			// Use transaction for bulk operations
-			$wpdb->query('START TRANSACTION');
-			
 			try {
 				// Clear all existing jobs first
-				$wpdb->query("DELETE FROM $table_name");
+				// $wpdb->query("DELETE FROM $table_name");
 				
 				$post_ids = Helper::get_all_post_ids();
 				
@@ -178,25 +158,16 @@ class AssetsGenerator
 							continue;
 						}
 						
-						// Set compiling status (keeping your existing code)
-						update_post_meta($single_post_id, 'fb_page_assets_generation', 'compiling');
-						
 						// Insert job using your existing Helper method
 						Helper::insert_job($single_post_id, $this->post->post_name . $single_post_id);
 					}
 				}
-				
-				$wpdb->query('COMMIT');
-				
-				// Clear any existing cron and reschedule
-				wp_clear_scheduled_hook('fb_process_assets_generation');
-				// AssetsGenerationProcess::get_instance()->setup_data_processing_cron();
-				
-			} catch (Exception $e) {
-				$wpdb->query('ROLLBACK');
+				} catch (Exception $e) {
 				error_log('Failed to schedule assets generation: ' . $e->getMessage());
 			}
 		}
+
+		return true;
 	}
 
 	public function get_critical_css_content($block) {

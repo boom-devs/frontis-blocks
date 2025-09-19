@@ -43,6 +43,27 @@ class Enqueues {
 
     public function enqueue_scripts() {
 
+        $page_compiling_mode = get_post_meta(get_the_ID(), 'fb_page_assets_generation', true);
+
+        // var_dump($page_compiling_mode);
+        if($page_compiling_mode === 'compiling') {
+
+            // Critical CSS file paths based on post_name
+            $global_base_dir = trailingslashit($this->upload_dir['basedir']) . 'frontis-blocks/';
+
+            if (is_readable($global_base_dir . 'global/global.css')) {
+                $css_content = file_get_contents($global_base_dir . 'global/global.css') . "\n";
+                echo '<style id="fb-pre-compiled-root-css">' . $css_content . '</style>';
+            }
+
+            $css = Helper::pre_render_assets_on_compile();
+            if (!empty($css['css'])) {
+                echo '<style id="fb-pre-compiled-css">' . $css['css'] . '</style>';
+            }
+
+            return;
+        }
+
         $page_name = $this->get_page_template_name();
         $frontis_used = get_post_meta(get_the_ID(), 'frontis_blocks_used', true);
         $page_name = $frontis_used ? get_post(get_the_ID())->post_name : $page_name;
@@ -82,6 +103,17 @@ class Enqueues {
 
     public function enqueue_assets_footer() {
         $this->load_google_font();
+
+        $page_compiling_mode = get_post_meta(get_the_ID(), 'fb_page_assets_generation', true);
+
+        if($page_compiling_mode === 'compiling') {
+            $assets = Helper::pre_render_assets_on_compile();
+            if (!empty($assets['js'])) {
+                echo '<script id="frontis-blocks-frontend">' . $assets['js'] . '</script>';
+            }
+            return;
+        }
+
         $page_name = $this->get_page_template_name();
         $frontis_used = get_post_meta(get_the_ID(), 'frontis_blocks_used', true);
 

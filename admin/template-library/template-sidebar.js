@@ -1,49 +1,49 @@
 import { useState, useEffect } from "@wordpress/element";
 import { TemplateCategoryLoader } from "./template-loader";
 
-const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, isProTemplate, setIsProTemplate, setActiveTagTab, resetCat, setResetCat, loading , setLoading}) => {
+const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, onChangeTemplates, isProTemplate, setIsProTemplate, setActiveTagTab, setActiveCategoryTab, resetCat, setResetCat, loading , setLoading}) => {
     const schema = data;
     const categories = schema[activeTab]?.categories || [];
 
-    useEffect(() => {
-        if (categories.length > 0 && !activeCategory[activeTab]) {
-            setActiveCategory(prev => ({
-                ...prev,
-                [activeTab]: categories[0].slug
-            }));
-        }
-    }, [activeTab]);
+    // useEffect(() => {
+    //     if (categories.length > 0 && !activeCategory[activeTab]) {
+    //         setActiveCategory(prev => ({
+    //             ...prev,
+    //             [activeTab]: categories[0].slug
+    //         }));
+    //     }
+    // }, [activeTab]);
     
     const TagTabsOptions = [
         { name: 'Free', value: 'free' },
         { name: 'Pro', value: 'pro' },
     ];
 
-    const handleTemplates = value => {
-        if (value !== isProTemplate) {
-            setIsProTemplate(value);
-        } else {
-            setIsProTemplate('');
-        }
-    };
+    // const handleTemplates = value => {
+    //     if (value !== isProTemplate) {
+    //         setIsProTemplate(value);
+    //     } else {
+    //         setIsProTemplate('');
+    //     }
+    // };
 
-    const handleCategoryClick = (catName) => {
-        if (catName === null) {
-            setResetCat(true);
-        } else {
-            setResetCat(false);
-        }
-        setActiveCategory((prev) => ({
-            ...prev,
-            [activeTab]: catName || "",
-        }));
-        setIsProTemplate('');
-        setActiveTagTab('');
-    };
+    // const handleCategoryClick = (catName) => {
+    //     if (catName === null) {
+    //         setResetCat(true);
+    //     } else {
+    //         setResetCat(false);
+    //     }
+    //     setActiveCategory((prev) => ({
+    //         ...prev,
+    //         [activeTab]: catName || "",
+    //     }));
+    //     setIsProTemplate('');
+    //     setActiveTagTab('');
+    // };
 
-    const handelTemplates = value => {
-        setIsProTemplate(isProTemplate === value ? '' : value);
-    };
+    // const handelTemplates = value => {
+    //     setIsProTemplate(isProTemplate === value ? '' : value);
+    // };
 
     return (
         <div className="fb-template-library-store-sidebar" style={activeTab === 'templatelibrary' && !loading ? { paddingTop: 0 } : {}}>
@@ -57,7 +57,7 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, i
                             <span
                                 key={tab.value}
                                 className={`${tab.value === 'free' ? 'fb-tl-free' : 'fb-tl-pro'} ${isProTemplate === tab.value ? 'active' : ''}`}
-                                onClick={() => handleTemplates(tab.value)}
+                                onClick={() => onChangeTemplates(tab.value)}
                             >
                                 {tab.name}
                             </span>
@@ -73,8 +73,9 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, i
                     <>
                         {activeTab !== "templatelibrary" && (
                             <button
-                                className={`fb-template-library-store-sidebar-tab ${resetCat ? "active" : ""}`}
-                                onClick={() => handleCategoryClick(null)}
+                                className={`fb-template-library-store-sidebar-tab ${activeCategory[activeTab] === '' ? "active" : ""}`}
+                                onClick={() => setActiveCategoryTab('')}
+                                disabled={activeCategory[activeTab] === ''}
                             >
                                 <span className="fb-template-library-store-sidebar-tab-name">
                                     <span className="fb-category-icon">
@@ -124,7 +125,8 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, i
                             <button
                                 key={category.slug}
                                 className={`fb-template-library-store-sidebar-tab ${activeCategory[activeTab] === category.slug ? "active" : ""}`}
-                                onClick={() => handleCategoryClick(category.slug)}
+                                onClick={() => setActiveCategoryTab(category.slug)}
+                                disabled={activeCategory[activeTab] === category.slug}
                             >
                                 <span className="fb-template-library-store-sidebar-tab-name">
                                     {activeTab === "templatelibrary" ? (
