@@ -40,10 +40,10 @@ $image_hover                      = fb_norm_str( isset($attributes['imageHover']
 $image_fit                        = fb_norm_str( isset($attributes['imageFit']) ? $attributes['imageFit'] : '' );
 $auto_fit_switch                  = !empty( $attributes['autoFitSwitch'] );
 
-$title_text                       = fb_norm_str( isset($attributes['titleText']) ? $attributes['titleText'] : '' );
+$title_text                       = fb_norm_str( isset($attributes['titleText']) ? $attributes['titleText'] : 'Fly in the sky' ); 
 $title_tag                        = fb_tag_whitelist( isset($attributes['titleTag']) ? $attributes['titleTag'] : 'h3', 'h3' );
 $display_title                    = !empty( $attributes['displayTitle'] );
-$title_position                   = fb_norm_str( isset($attributes['titlePosition']) ? $attributes['titlePosition'] : '' );
+$title_position                   = fb_norm_str( isset($attributes['titlePosition']) ? $attributes['titlePosition'] : 'center' );
 
 $global_wrapper_id                = fb_norm_str( isset($attributes['advancedImageGlobalWraperID']) ? $attributes['advancedImageGlobalWraperID'] : '' );
 $global_wrapper_class             = fb_norm_str( isset($attributes['advancedImageGlobalWraperClass']) ? $attributes['advancedImageGlobalWraperClass'] : '' );
@@ -55,6 +55,8 @@ $lazy_load_switcher               = !empty( $attributes['advancedImageLazyLoadSw
 
 $smart_lazy_load_switcher         = !empty( $attributes['smartLazyLoadSwitcher'] );
 $smart_lazy_load_image_url        = fb_norm_str( isset($attributes['smartLazyLoadImageUrl']) ? $attributes['smartLazyLoadImageUrl'] : '' );
+
+$show_overlay                     = !empty( $attributes['showOverlay'] );
 
 // ---------- classes (match save.js) ----------
 $responsive_classes = [];
@@ -90,7 +92,7 @@ if ( $lazy_load_switcher ) {
 
 if ( $advanced_image_srcset ) {
     if ( $smart_lazy_load_switcher && $smart_lazy_load_image_url ) {
-        $img_attributes['data-srcset'] = esc_attr( $advanced_image_srcset );
+        $img_attributes['data-srcset'] = esc_attr( $advanced_image_srcset ); // save.js: data-srcset for smart lazy
     } else {
         $img_attributes['srcset'] = esc_attr( $advanced_image_srcset );
     }
@@ -105,7 +107,7 @@ foreach ( $img_attributes as $key => $value ) {
 }
 $img_html .= ' />';
 
-// wrap with link if enabled
+// wrap with link if enabled (exactly like save.js)
 if ( $link_switch && $link_url ) {
     $img_html = sprintf(
         '<a href="%s"%s%s aria-label="%s">%s</a>',
@@ -116,7 +118,6 @@ if ( $link_switch && $link_url ) {
         $img_html
     );
 }
-
 ?>
 <div <?php echo $wrapper_attributes; ?>>
     <div
@@ -126,7 +127,17 @@ if ( $link_switch && $link_url ) {
         <?php endif; ?>
         data-smart-lazy-load-switcher="<?php echo esc_attr( $smart_lazy_load_switcher ); ?>"
     >
-        <div class="fb-advanced-image <?php echo esc_attr( trim("$image_style $image_size $image_hover " . ( $auto_fit_switch ? $image_fit : '' ) . " $title_position") ); ?>">
+        <div class="fb-advanced-image <?php
+            // save.js: `${imageStyle} ${imageSize} ${imageHover} ${autoFit?imageFit:''} ${titlePosition} ${showOverlay ? 'overlay-simple' : ''}`
+            echo esc_attr( trim(
+                $image_style . ' ' .
+                $image_size . ' ' .
+                $image_hover . ' ' .
+                ( $auto_fit_switch ? $image_fit : '' ) . ' ' .
+                $title_position . ' ' .
+                ( $show_overlay ? 'overlay-simple' : '' )
+            ) );
+        ?>">
             <div class="fb-advanced-image-inner">
                 <?php echo $advanced_image_url ? $img_html : ''; ?>
             </div>
