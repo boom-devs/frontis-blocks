@@ -540,6 +540,86 @@
             }
         }
     }
+
+    .fb-template-library-pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 62px;
+      
+        .fb-page-numbers {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+        .fb-pagination-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            padding: 10px;
+            background: transparent;
+            color: $neutral-color-700;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-family: $body-font-family;
+            font-size: $base-font-size;
+            font-weight: $font-weight-500;
+            line-height: $body-line-height;
+            transition: all 0.3s ease-in-out;
+      
+          &:hover:not(:disabled):not(.active) {
+            background: $neutral-color-100;
+          }
+      
+          &:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+          }
+      
+          &.active {
+            width: 44px;
+            height: 44px;
+            background: $primary-color;
+            color: $white-color;
+            transition: all 0.3s ease-in-out;
+          }
+        }
+      
+        .fb-pagination-prev,
+        .fb-pagination-next {            padding: 9px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 1px solid $neutral-color-100;
+            border-radius: 2px;
+            cursor: pointer;
+            background: transparent;
+            color: $neutral-color-700;
+            transition: all 0.3s ease-in-out;
+        }
+      
+        .fb-pagination-next {
+            svg {
+                rotate: 180deg;
+            }
+        }
+      
+        .fb-pagination-pages {
+          display: inline-block;
+          margin: 0 10px;
+        }
+      
+        .fb-pagination-ellipsis {
+          display: inline-block;
+        }
+      }
+      
 }
 
 @keyframes fadeIn {

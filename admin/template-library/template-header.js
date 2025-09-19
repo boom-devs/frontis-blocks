@@ -92,6 +92,10 @@ const TemplateHeader = ({
 
 
     const handleUserDropdown = (e) => {
+        if (!userData) {
+            setIsLoginModalOpen(true);
+            return;
+        }
         e.preventDefault();
         setIsUserDropdownOpen((prev) => !prev);
     };

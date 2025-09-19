@@ -17,6 +17,7 @@ import TemplateLibrary from "./data/templatelibrary.json";
 
 import { usePostDataMutation } from './services/laravelapi';
 
+
 const PatternLibraryButton = () => {
     const [showPatternButton, setShowPatternButton] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
@@ -108,6 +109,13 @@ const PatternLibraryButton = () => {
         sites: { name: "Sites", items: [], categories: [], pagination: {} },
         templatelibrary: { name: "Template Library", items: [], categories: [], pagination: {} },
     });
+    const [tagData, setTagData] = useState({
+        patterns: [],
+        pages: [],
+        sites: [],
+        templatelibrary: []
+    });
+    
 
     const [patternsData, { data: patternsResponse, error, isLoading }] = usePostDataMutation();
 
@@ -299,6 +307,58 @@ const PatternLibraryButton = () => {
         }
     };
 
+    const fetchTagData = async (tab = activeTab, page = currentPage[activeTab], tag = activeTagTab[activeTab], search = searchText, category = activeCategory[activeTab], isPro = isProTemplate, savedTemplate = savedTemplateType) => {
+        try {
+            let response;
+            if (tab === 'patterns') {
+                response = await getTemplatesData("patterns", userData?.email, FB_TLibrary?.activationKey, page, '', '', '', '');
+                if (response) {
+                    setTagData((prev) => ({
+                        ...prev,
+                        patterns: {
+                            ...prev.patterns,
+                            items: response.items || [],
+                            categories: response.categories || [],
+                            pagination: response.pagination || {}
+                        },
+                    }));
+                }
+            } else if (tab === 'pages') {
+                response = await getTemplatesData("pages", userData?.email, FB_TLibrary?.activationKey, page, '', '', '', '');
+                if (response) {
+                    setTagData((prev) => ({
+                        ...prev,
+                        pages: {
+                            ...prev.pages,
+                            items: response.items || [],
+                            categories: response.categories || [],
+                            pagination: response.pagination || {}
+                        },
+                    }));
+                }
+            } else if (tab === 'sites') {
+                response = await getTemplatesData("sites", userData?.email, FB_TLibrary?.activationKey, page, '', '', '', '');
+                if (response) {
+                    setTagData((prev) => ({
+                        ...prev,
+                        sites: {
+                            ...prev.sites,
+                            items: response.items || [],
+                            categories: response.categories || [],
+                            pagination: response.pagination || {}
+                        },
+                    }));
+                }
+            }
+        } catch (err) {
+            console.error(`Error fetching ${activeTab}:`, err);
+        } finally {
+            setLoading(false);
+        }
+    };
+      
+      
+
     useEffect(() => {
         setSearchText('');
         setCurrentPage({ [activeTab]: 1 });
@@ -307,7 +367,9 @@ const PatternLibraryButton = () => {
         setIsProTemplate('');
         setSavedTemplateType('');
         fetchData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab], isProTemplate);
+        fetchTagData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab], isProTemplate);
     }, [activeTab]);
+
 
     const handleSaveLibrary = async (templateData, isAlreadySaved) => {
         if (!userData) {
@@ -385,9 +447,11 @@ const PatternLibraryButton = () => {
         }
     }
 
+    console.log('Tag Data:', tagData);
+
     const TagTabsOptions = (() => {
-        if (!data[activeTab]) return [];
-        const currentItems = data[activeTab].items || [];
+        if (!tagData[activeTab]) return [];
+        const currentItems = tagData[activeTab].items || [];
         const allTags = currentItems.flatMap(item => item.tags || []);
         const uniqueTags = [...new Set(allTags)].slice(0, 5);
         return uniqueTags.map(tag => ({
