@@ -597,18 +597,6 @@ const attributes = {
 		type: 'boolean',
 		default: false,
 	},
-	imgSquare: {
-		type: 'string',
-		default: '',
-	},
-	imgCircle: {
-		type: 'string',
-		default: '',
-	},
-	imgRounded: {
-		type: 'string',
-		default: '',
-	},
 	autoHeight: {
 		type: 'boolean',
 		default: true,
