@@ -234,66 +234,67 @@ const LibraryContent = ({
 
     return (
         <div className="fb-template-library-store-content">
+            <div className="fb-template-library-content-header">
+                <div className="fb-template-library-content-header-left">
+                    {/* {activeCategory.templatelibrary === 'my-cloud' && <h2>My Cloud</h2>} */}
+                    {/* {activeCategory.templatelibrary === 'my-favourites' && ( */}
+                    <div className="fb-template-library-tags-wrapper">
+                        {FavoriteTabsOptions.map(tab => (
+                            <button
+                                key={tab.value}
+                                className={`fb-template-library-tag-btn ${savedTemplateType === tab.value ? 'active' : ''}`}
+                                onClick={() => onChangeSavedTemplateType(tab.value)}
+                                disabled={savedTemplateType === tab.value}
+                            >
+                                {tab.name}
+                            </button>
+                        ))}
+                    </div>
+                    {/* )} */}
+                </div>
+                <div className="fb-template-library-content-header-right">
+                    <div className="fb-template-library-search-wrapper">
+                        <div className="fb-search-input-wrapper">
+                            <div className="fb-search-input-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <g clipPath="url(#clip0_13116_5586)">
+                                        <circle cx="8.625" cy="8.625" r="7.125" stroke="white" strokeWidth="1.5" />
+                                        <path d="M13.875 13.875L16.5 16.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_13116_5586">
+                                            <rect width="18" height="18" fill="white" />
+                                        </clipPath>
+                                        activeTemplate  </defs>
+                                </svg>
+                            </div>
+                            <input
+                                type="search"
+                                placeholder="Search Templates"
+                                value={searchText}
+                                onChange={e => onSearchTemplates(e.target.value)}
+                            />
+                        </div>
+                    </div>
+                    <div className="fb-template-library-card-list-wrapper">
+                        {CardListOptions.map(tab => (
+                            <button
+                                key={tab.value}
+                                className={`fb-template-library-card-list-btn ${cardListType === tab.value ? 'active' : ''}`}
+                                onClick={() => setCardListType(tab.value)}
+                            >
+                                {tab.svg}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </div>
+            
             {loading ? (
                 <TemplateContentLoader />
             ) : (
                 <>
                     {/* {(activeCategory.templatelibrary === 'my-favourites' || activeCategory.templatelibrary === 'my-cloud') && ( */}
-                    <div className="fb-template-library-content-header">
-                        <div className="fb-template-library-content-header-left">
-                            {/* {activeCategory.templatelibrary === 'my-cloud' && <h2>My Cloud</h2>} */}
-                            {/* {activeCategory.templatelibrary === 'my-favourites' && ( */}
-                            <div className="fb-template-library-tags-wrapper">
-                                {FavoriteTabsOptions.map(tab => (
-                                    <button
-                                        key={tab.value}
-                                        className={`fb-template-library-tag-btn ${savedTemplateType === tab.value ? 'active' : ''}`}
-                                        onClick={() => onChangeSavedTemplateType(tab.value)}
-                                        disabled={savedTemplateType === tab.value}
-                                    >
-                                        {tab.name}
-                                    </button>
-                                ))}
-                            </div>
-                            {/* )} */}
-                        </div>
-                        <div className="fb-template-library-content-header-right">
-                            <div className="fb-template-library-search-wrapper">
-                                <div className="fb-search-input-wrapper">
-                                    <div className="fb-search-input-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                            <g clipPath="url(#clip0_13116_5586)">
-                                                <circle cx="8.625" cy="8.625" r="7.125" stroke="white" strokeWidth="1.5" />
-                                                <path d="M13.875 13.875L16.5 16.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_13116_5586">
-                                                    <rect width="18" height="18" fill="white" />
-                                                </clipPath>
-                                                activeTemplate  </defs>
-                                        </svg>
-                                    </div>
-                                    <input
-                                        type="search"
-                                        placeholder="Search Templates"
-                                        value={searchText}
-                                        onChange={e => onSearchTemplates(e.target.value)}
-                                    />
-                                </div>
-                            </div>
-                            <div className="fb-template-library-card-list-wrapper">
-                                {CardListOptions.map(tab => (
-                                    <button
-                                        key={tab.value}
-                                        className={`fb-template-library-card-list-btn ${cardListType === tab.value ? 'active' : ''}`}
-                                        onClick={() => setCardListType(tab.value)}
-                                    >
-                                        {tab.svg}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
 
                     <ToastContainer
                         position="top-right"
