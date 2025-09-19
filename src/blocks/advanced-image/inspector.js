@@ -912,6 +912,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		}
 		.${blockID} .fb-advanced-image-wrapper{
 			${autoFitSwitch ? `display: block;` : `display: flex;`}
+			flex-direction: column;
 			padding: ${globalDeskPadding};	
 			margin: ${globalDeskMargin};
 			border: ${globalBorder};
