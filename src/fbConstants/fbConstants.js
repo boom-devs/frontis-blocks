@@ -1,5 +1,6 @@
 import { __ } from "@wordpress/i18n";
 import { Dashicon } from "@wordpress/components";
+import { dateI18n } from '@wordpress/date';
 
 export const STORE_NAME = 'frontis';
 
@@ -257,11 +258,20 @@ export const BACKGROUND_TYPES = [
 	{ label: __('Gradient', 'frontis-blocks'), value: 'gradient' },
 ];
 
-export const DYNAMIC_CURRENT_POST_OPTIONS = [
+export const DYNAMIC_DATA_SOURCE_OPTIONS = [
+	{ label: __('Current Post', 'frontis-blocks'), value: 'current_post' },
+	{ label: __('Post Type', 'frontis-blocks'), value: 'post_type' },
+	{ label: __('Archive Description', 'frontis-blocks'), value: 'archive_description' },
+	{ label: __('Archive Title', 'frontis-blocks'), value: 'archive_title' },
+	{ label: __('Site Tagline', 'frontis-blocks'), value: 'site_tagline' },
+	{ label: __('Site Title', 'frontis-blocks'), value: 'site_title' },
+	{ label: __('Shortcode', 'frontis-blocks'), value: 'shortcode' },
+];
+
+export const DYNAMIC_DATA_SOURCE_FIELD_OPTIONS = [
     { label: __('Post Title', 'frontis-blocks'), value: 'post_title' },
     { label: __('Post Excerpt', 'frontis-blocks'), value: 'post_excerpt' },
-    { label: __('Featured Image URL', 'frontis-blocks'), value: 'post_thumbnail' },
-    { label: __('Post Custom Field', 'frontis-blocks'), value: 'post_meta' },
+    { label: __('Featured Image', 'frontis-blocks'), value: 'post_thumbnail' },
     { label: __('Post Date', 'frontis-blocks'), value: 'post_date' },
     { label: __('Post Time', 'frontis-blocks'), value: 'post_time' },
     { label: __('Post Terms', 'frontis-blocks'), value: 'post_terms' },
@@ -277,5 +287,52 @@ export const DYNAMIC_CURRENT_POST_OPTIONS = [
     { label: __('Author Email', 'frontis-blocks'), value: 'author_email' },
     { label: __('Author Website', 'frontis-blocks'), value: 'author_url' },
     { label: __('Author Avatar URL', 'frontis-blocks'), value: 'author_avatar' },
-    { label: __('Author Custom Field', 'frontis-blocks'), value: 'author_meta' },
 ];
+
+export const DYNAMIC_FEATURED_IMAGE_OPTIONS = [
+	{ label: __('Title', 'frontis-blocks'), value: 'title' },
+	{ label: __('Alt', 'frontis-blocks'), value: 'alt' },
+	{ label: __('Caption', 'frontis-blocks'), value: 'caption' },
+	{ label: __('Description', 'frontis-blocks'), value: 'description' },
+	{ label: __('Attachment URL', 'frontis-blocks'), value: 'attachment_url' },
+];
+
+export const DYNAMIC_DATE_TIME_TYPE_OPTIONS = [
+	{ label: __('Post Published', 'frontis-blocks'), value: 'published' },
+	{ label: __('Post Modified',  'frontis-blocks'), value: 'modified' },
+];
+
+export const DYNAMIC_TAXONOMY_OPTIONS = [
+	{ label: __('Categories', 'frontis-blocks'), value: 'category' },
+	{ label: __('Tags', 'frontis-blocks'), value: 'post_tag' },
+];
+  
+export const getDynamicDateFormatOptions = (sampleDate = new Date()) => {
+
+	const fmt = (phpFmt) => dateI18n(phpFmt, sampleDate);
+  
+	return [
+	  { label: `${__('Default','frontis-blocks')}`, value: 'default' },
+	  { label: fmt('jS F Y'),   value: 'jS F Y' },
+	  { label: fmt('Y-m-d'),  value: 'Y-m-d' },
+	  { label: fmt('m/d/Y'),  value: 'm/d/Y' },
+	  { label: fmt('d/m/Y'),  value: 'd/m/Y' },
+	  
+	  { label: __('Human Readable','frontis-blocks'), value: 'human' },
+	];
+};
+
+export const getDynamicTimeFormatOptions = (sampleDate = new Date()) => {
+
+	const d = sampleDate instanceof Date ? sampleDate : new Date(sampleDate);
+  
+	const fmt = (phpFmt) => dateI18n(phpFmt, d);
+  
+	return [
+	  { label: `${__('Default','frontis-blocks')}`, value: 'default' },
+	  { label: fmt('g:i A'),  value: 'g:i A' },
+	  { label: fmt('g:i'),    value: 'g:i' },
+	  { label: fmt('g:i:s a'),value: 'g:i:s a' },
+
+	];
+};

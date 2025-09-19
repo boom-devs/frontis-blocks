@@ -15,11 +15,6 @@ const attributes = {
         },
     },
 
-	isHeadingTextChanged: {
-		type: 'boolean',
-		default: false
-	},
-
     headingText: {
         type : 'string',
         default: 'Advanced Heading'
@@ -32,10 +27,7 @@ const attributes = {
 			sourceField: '',
 		}
 	},
-    dynamicContent: {
-        type: 'string',
-        default: '',
-      },
+
     headingTag: {
         type : 'string',
         default: 'h2'
@@ -57,6 +49,18 @@ const attributes = {
     dynamicSource: {
         type: 'string',
         default: 'current_post'
+    },
+    dynamicPostId: {
+        type: 'number',
+        default: 0
+    },
+    dynamicPostType: {
+        type: 'string',
+        default: ''
+    },
+    dynamicPostLabel: {
+        type: 'string',
+        default: ''
     },
     dynamicField: {
         type: 'string',
@@ -94,9 +98,45 @@ const attributes = {
         type: 'boolean',
         default: false
     },
-    dynamicReplaceAll: {
-        type: 'boolean',
-        default: false
+    dynamicFeaturedImageField:{
+        type: 'string',
+        default: 'title'
+    },
+    dynamicDateType: {
+        type: 'string',
+        default: 'published'
+    },
+    dynamicDateFormat: {
+        type: 'string',
+        default: 'default'
+    },
+    dynamicTimeType: {
+        type: 'string',
+        default: 'published'
+    },
+    dynamicTimeFormat: {
+        type: 'string',
+        default: 'default'
+    },
+    dynamicCommentsZeroText: {
+        type: 'string',
+        default: 'No Response',
+    },
+    dynamicCommentsOneText: {
+        type: 'string',
+        default: 'One Response',
+    },
+    dynamicCommentsManyText: {
+        type: 'string',
+        default: '{num} Response',
+    },   
+    dynamicTermsTaxonomy: {
+        type: 'string',
+        default: 'category',
+    },
+    dynamicTermsSeparator: {
+        type: 'string',
+        default: ', ',
     },
 
 
@@ -1014,6 +1054,9 @@ const attributes = {
 		type: 'string',
 		default: 'bookmark',
 	},
+    headingIconFrontend:{
+        type: 'string',
+    },
     headingIconSize: {
         type: 'object',
         default: {

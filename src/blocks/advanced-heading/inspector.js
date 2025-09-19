@@ -28,6 +28,7 @@ import {
     MenuGroup,
     MenuItem
 } from '@wordpress/components';
+import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 
 /**
  * Internal depencencies
@@ -49,10 +50,16 @@ import {
 } from "./constants/constants";
 
 import { 
-    DYNAMIC_CURRENT_POST_OPTIONS,
-    
-} from '@Constants/fbConstants';
+    DYNAMIC_DATA_SOURCE_OPTIONS,
+    DYNAMIC_DATA_SOURCE_FIELD_OPTIONS,
+    DYNAMIC_FEATURED_IMAGE_OPTIONS,
+    DYNAMIC_DATE_TIME_TYPE_OPTIONS,
+    DYNAMIC_TAXONOMY_OPTIONS,
+    getDynamicDateFormatOptions,
+    getDynamicTimeFormatOptions,
 
+} from '@Constants/fbConstants';
+import Select2 from "react-select";
 import { useState, useEffect, useMemo } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import FB_Spacing from '@Components/spacing';
@@ -76,6 +83,7 @@ import FB_ResponsiveBackgroundImageControl from '@Components/responsive-backgrou
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_BackgroundColorControl from '@Components/background-color-control';
+import generateSvgIcon from '@Utils/generateSvgIcon';
 
 import './editor.scss';
 
@@ -84,7 +92,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         blockId,
         // deviceType,
         headingText,
-        dynamicContent,
         headingTag,
         headingAlignment,
 
@@ -272,6 +279,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingIconSwitcher,
         headingIconAlign,
         headingIcon,
+        headingIconFrontend,
         headingIconSize,
         headingIconSizeUnits,
         headingIconBgSize,
@@ -435,9 +443,24 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
         dynamicEnabled,
         dynamicSource,
+        dynamicPostId,
+        dynamicPostType,
+        dynamicPostLabel,
         dynamicField,
         dynamicEnableLink,
-        dynamicReplaceAll,
+        dynamicFeaturedImageField,
+        dynamicDateType,
+        dynamicDateFormat,
+        dynamicTimeType,
+        dynamicTimeFormat,
+
+        dynamicCommentsZeroText,
+        dynamicCommentsOneText,
+        dynamicCommentsManyText,
+        dynamicTermsTaxonomy,
+        dynamicTermsSeparator,
+
+
 
     } = attributes;
 
@@ -469,26 +492,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
     }, []);
 
-    const [isPopoverVisible, setIsPopoverVisible] = useState(false);
 
-    // Get dynamic content preview for editing
-    const dynamicValue = useSelect((select) => {
-        if (!dynamicContent) return '';
+    /**
+     * Generate SVG Icons for Icon
+     */
+    useEffect(() => {
+        setAttributes({
+            headingIconFrontend: generateSvgIcon(headingIcon),
+        })
+    }, [headingIcon]);
 
-        const postType = select('core/editor').getCurrentPostType();
-        const postId = select('core/editor').getCurrentPostId();
-        const post = select('core').getEditedEntityRecord('postType', postType, postId);
-
-        switch (dynamicContent) {
-        case 'post_title':
-            return post.title;
-        case 'post_date':
-            return new Date(post.date).toLocaleDateString();
-        // Add other cases for terms, author, etc.
-        default:
-            return '';
-        }
-    }, [dynamicContent]);
 
     /** Start Preset Style */
     const changeAdvancedHeadingPreset = (selectedPreset) => {
@@ -3018,9 +3031,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     dynamicEnabled,
     dynamicSource,
+    dynamicPostId,
+    dynamicPostType,
+    dynamicPostLabel,
     dynamicField,
     dynamicEnableLink,
-    dynamicReplaceAll,
+    dynamicFeaturedImageField,
     ]);
 
     const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
@@ -3031,7 +3047,109 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
+    /**
+     * Date and Time Format Options
+     */
+    const dateFormatOptions = getDynamicDateFormatOptions(new Date());
+    const timeFormatOptions = getDynamicTimeFormatOptions(new Date());
 
+    /**
+     * Exclude Post Types
+     */
+    const EXCLUDE_POST_TYPES = [
+        'attachment','revision','nav_menu_item','custom_css','customize_changeset',
+        'oembed_cache','user_request','wp_block','wp_navigation',
+        'wp_template','wp_template_part','wp_global_styles',
+        'wp_font_family','wp_font_face','wp_font_collection'
+    ];
+
+    /**
+     * Post Types
+     */
+    const postTypes = useSelect((select) => {
+        const all = select(coreStore).getPostTypes({ per_page: -1 }) || [];
+        return all.filter(
+        (pt) => pt.viewable && pt.supports?.title && !EXCLUDE_POST_TYPES.includes(pt.slug)
+        );
+    }, []);
+    
+    /**
+     * Post Options
+     */
+    const postOptions = useSelect((select) => {
+        const types = (postTypes || []).map((t) => t.slug);
+        if (!types.length) return [];
+      
+        const items = [];
+        types.forEach((t) => {
+          const recs = select(coreStore).getEntityRecords('postType', t, {
+            status: 'publish',
+            per_page: 20,
+            orderby: 'date',
+            order: 'desc',
+            _fields: ['id', 'title', 'type'],
+          }) || [];
+          recs.forEach((r) => items.push(r));
+        });
+      
+        return items.map((r) => ({
+          value: r.id,
+          label: r.title?.rendered
+            ? r.title.rendered.replace(/<[^>]+>/g, '')
+            : '(no title)',
+          meta: r.type,
+        }));
+    }, [postTypes]);
+
+    const isPostBasedSource = dynamicEnabled && (dynamicSource === 'current_post' || dynamicSource === 'post_type');
+
+    /**  
+     * Featured Image Field
+     */
+    const [featuredField, setFeaturedField] = useState(dynamicFeaturedImageField || "title");
+
+    useEffect(() => {
+        setFeaturedField(dynamicFeaturedImageField || "title");
+    }, [dynamicFeaturedImageField]);
+
+    const selectedFeaturedField = useMemo(() => {
+        const v = featuredField || "title";
+        return (
+        DYNAMIC_FEATURED_IMAGE_OPTIONS.find((o) => o.value === v) ||
+        DYNAMIC_FEATURED_IMAGE_OPTIONS[0]
+        );
+    }, [featuredField]);
+
+    const handleFeaturedFieldChange = (opt) => {
+        const val = opt && typeof opt.value === "string" ? opt.value : "title";
+        setFeaturedField(val);
+        setAttributes({ dynamicFeaturedImageField: val });
+    };
+
+    /**
+     * dynamicTermsTaxonomy
+     */
+
+    const [termsTaxonomy, setTermsTaxonomy] = useState(dynamicTermsTaxonomy || "category");
+
+    useEffect(() => {
+        setTermsTaxonomy(dynamicTermsTaxonomy || "category");
+    }, [dynamicTermsTaxonomy]);
+
+    const selectedTermsTaxonomy = useMemo(() => {
+        const v = termsTaxonomy || "category";
+        return (
+        DYNAMIC_TAXONOMY_OPTIONS.find((o) => o.value === v) ||
+        DYNAMIC_TAXONOMY_OPTIONS[0]
+        );
+    }, [termsTaxonomy]);
+
+    const handleTermsTaxonomyChange = (opt) => {
+        const val = opt && typeof opt.value === "string" ? opt.value : "category";
+        setTermsTaxonomy(val);
+        setAttributes({ dynamicTermsTaxonomy: val });
+    };
+    
     /**
 	 * Inspector General Controls
 	 */
@@ -3052,35 +3170,160 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                     {dynamicEnabled && (
                         <>
-                            <SelectControl
+                            <BaseControl
                                 label={__("Data Source", "frontis-blocks")}
-                                value={dynamicSource}
-                                options={[
-                                    { label: __('Current Post', 'frontis-blocks'), value: 'current_post' },
-                                ]}
-                                onChange={(value) => setAttributes({ dynamicSource: value })}
-                            />
+                                >
+                                    <Select2 
+                                        options={DYNAMIC_DATA_SOURCE_OPTIONS}
+                                        value={DYNAMIC_DATA_SOURCE_OPTIONS.find(o => o.value === dynamicSource) || null }                                                     // option object
+                                        onChange={(opt) => setAttributes({ dynamicSource: opt?.value ?? '' })}
+                                        className="fb-select2-control"
+                                    />
+                            </BaseControl>
 
-                            {dynamicSource === 'current_post' && (
-                                <SelectControl
+                            {dynamicSource === 'post_type' && (
+                                <>
+                                    <BaseControl label={__("Search Posts","frontis-blocks")}>
+                                        <Select2
+                                            options={postOptions}
+                                            value={ postOptions.find(o => o.value === dynamicPostId) || null }
+                                            onChange={(opt)=> setAttributes({
+                                            dynamicPostId: opt?.value ?? 0,
+                                            dynamicPostType: opt?.meta ?? '',
+                                            dynamicPostLabel: opt?.label ?? ''
+                                            })}
+                                            className="fb-select2-control"
+                                        />
+                                    </BaseControl>
+                                </>
+                            )}
+
+                            {isPostBasedSource && (
+                                <>
+                                <BaseControl
                                     label={__("Source Field", "frontis-blocks")}
-                                    value={dynamicField}
-                                    options={DYNAMIC_CURRENT_POST_OPTIONS}
-                                    onChange={(value) => setAttributes({ dynamicField: value })}
-                                />
+                                    >
+                                        <Select2 
+                                            options={DYNAMIC_DATA_SOURCE_FIELD_OPTIONS}
+                                            value={DYNAMIC_DATA_SOURCE_FIELD_OPTIONS.find(o => o.value === dynamicField) || null }                                                     // option object
+                                            onChange={(opt) => setAttributes({ dynamicField: opt?.value ?? '' })}
+                                            className="fb-select2-control"
+                                        />
+                                </BaseControl>
+
+                                {dynamicField === 'post_thumbnail' && (
+                                    <BaseControl
+                                        label={__("Featured Image", "frontis-blocks")}
+                                        >
+                                            <Select2 
+                                                options={DYNAMIC_FEATURED_IMAGE_OPTIONS} 
+                                                value={selectedFeaturedField}
+                                                onChange={handleFeaturedFieldChange}
+                                                className="fb-select2-control"
+                                            />
+                                    </BaseControl>
+                                )}
+
+                                {dynamicField === 'post_date' && (
+                                    <>
+                                        <BaseControl
+                                            label={__("Date Type", "frontis-blocks")}
+                                            >
+                                                <Select2 
+                                                    options={DYNAMIC_DATE_TIME_TYPE_OPTIONS} 
+                                                    value={DYNAMIC_DATE_TIME_TYPE_OPTIONS.find(o => o.value === dynamicDateType) || null }                                                     // option object
+                                                    onChange={(opt) => setAttributes({ dynamicDateType: opt?.value ?? '' })}
+                                                    className="fb-select2-control"
+                                                />
+                                        </BaseControl>
+                                        <BaseControl
+                                            label={__("Date Format", "frontis-blocks")}
+                                            >
+                                                <Select2 
+                                                    options={dateFormatOptions} 
+                                                    value={dateFormatOptions.find(o => o.value === dynamicDateFormat) || null }                                                     // option object
+                                                    onChange={(opt) => setAttributes({ dynamicDateFormat: opt?.value ?? '' })}
+                                                    className="fb-select2-control"
+                                                />
+                                        </BaseControl>
+                                    </>
+                                )}
+
+                                {dynamicField === 'post_time' && (
+                                    <>
+                                        <BaseControl
+                                            label={__("Date Type", "frontis-blocks")}
+                                            >
+                                                <Select2 
+                                                    options={DYNAMIC_DATE_TIME_TYPE_OPTIONS} 
+                                                    value={DYNAMIC_DATE_TIME_TYPE_OPTIONS.find(o => o.value === dynamicTimeType) || null }                                                     // option object
+                                                    onChange={(opt) => setAttributes({ dynamicTimeType: opt?.value ?? '' })}
+                                                    className="fb-select2-control"
+                                                />
+                                        </BaseControl>
+                                        <BaseControl
+                                            label={__("Time Format", "frontis-blocks")}
+                                            >
+                                                <Select2 
+                                                    options={timeFormatOptions}  
+                                                    value={timeFormatOptions.find(o => o.value === dynamicTimeFormat) || null }                                                     // option object
+                                                    onChange={(opt) => setAttributes({ dynamicTimeFormat: opt?.value ?? '' })}
+                                                    className="fb-select2-control"
+                                                />
+                                        </BaseControl>
+                                    </>
+                                )}
+
+                                {dynamicField === 'comments_number' && (
+                                    <>
+                                        <TextControl
+                                            label={__('No Comments Format', 'frontis-blocks')}
+                                            value={dynamicCommentsZeroText}
+                                            onChange={(value) => setAttributes({ dynamicCommentsZeroText: value })}
+                                            help={__('Shown when there are 0 comments', 'frontis-blocks')}
+                                        />
+                                        <TextControl
+                                            label={__('One Comment Format', 'frontis-blocks')}
+                                            value={dynamicCommentsOneText}
+                                            onChange={(value) => setAttributes({ dynamicCommentsOneText: value })}
+                                            help={__('Shown when there is exactly 1 comment', 'frontis-blocks')}
+                                        />
+                                        <TextControl
+                                            label={__('Many Comment Format', 'frontis-blocks')}
+                                            value={dynamicCommentsManyText}
+                                            onChange={(value) => setAttributes({ dynamicCommentsManyText: value })}
+                                            help={__('Use {num} to insert the number', 'frontis-blocks')}
+                                        />
+                                    </>
+                                )}
+
+                                {dynamicField === 'post_terms' && (
+                                    <>
+                                        <BaseControl
+                                            label={__("Taxonomy", "frontis-blocks")}
+                                            >
+                                                <Select2 
+                                                    options={DYNAMIC_TAXONOMY_OPTIONS} 
+                                                    value={selectedTermsTaxonomy}
+                                                    onChange={handleTermsTaxonomyChange}
+                                                    className="fb-select2-control"
+                                                />
+                                        </BaseControl>
+
+                                        <TextControl
+                                            label={__("Separator", "frontis-blocks")}
+                                            value={dynamicTermsSeparator}
+                                            onChange={(value) => setAttributes({ dynamicTermsSeparator: value })}
+                                        />
+                                    </>
+                                )}
+                                </>
                             )}
 
                             <ToggleControl
                             label={__("Enable Link (permalink)", "frontis-blocks")}
                             checked={dynamicEnableLink}
                             onChange={(value) => setAttributes({ dynamicEnableLink: value })}
-                            />
-
-                            <ToggleControl
-                            label={__("Replace Full Content", "frontis-blocks")}
-                            checked={dynamicReplaceAll}
-                            onChange={(value) => setAttributes({ dynamicReplaceAll: value })}
-                            help={__("If off, you can prepend/append static text later.", "frontis-blocks")}
                             />
                         </>
                     )}
@@ -3137,60 +3380,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     <div className="advanced-heading-block">
                         <div className="heading-input-wrapper">
                             <TextareaControl
-                            label={__("Heading Text", "frontis-blocks")}
-                            value={dynamicContent ? `[Dynamic: ${dynamicContent}]` : headingText}
-                            onChange={(value) => {
-                                if (!dynamicContent) {
-                                setAttributes({ headingText: value });
-                                }
-                            }}
-                            disabled={!!dynamicContent}
-                            className="fb-advanced-text"
+                                label={__("Heading Text", "frontis-blocks")}
+                                value={headingText}
+                                onChange={(value) => setAttributes({ headingText: value })}
+                                className="fb-advanced-text"
                             />
-
-                            {/* <Button
-                            icon="database"
-                            onClick={() => setIsPopoverVisible(true)}
-                            label="Insert dynamic content"
-                            /> */}
-
-                            {/* {isPopoverVisible && (
-                                <Popover
-                                    onClose={() => setIsPopoverVisible(false)}
-                                    position="bottom center"
-                                >
-                                    <MenuGroup label="Dynamic Content">
-                                    <MenuItem
-                                        onClick={() => {
-                                        setAttributes({ dynamicContent: 'post_title' });
-                                        setIsPopoverVisible(false);
-                                        }}
-                                    >
-                                        Post Title
-                                    </MenuItem>
-                                    <MenuItem
-                                        onClick={() => {
-                                        setAttributes({ dynamicContent: 'post_date' });
-                                        setIsPopoverVisible(false);
-                                        }}
-                                    >
-                                        Post Date
-                                    </MenuItem>
-                                    </MenuGroup>
-                                    {dynamicContent && (
-                                    <MenuGroup>
-                                        <MenuItem
-                                        onClick={() => {
-                                            setAttributes({ dynamicContent: '' });
-                                            setIsPopoverVisible(false);
-                                        }}
-                                        >
-                                        Reset to Static Text
-                                        </MenuItem>
-                                    </MenuGroup>
-                                    )}
-                                </Popover>
-                            )} */}
                         </div>
                     </div>
                 </PanelBody>

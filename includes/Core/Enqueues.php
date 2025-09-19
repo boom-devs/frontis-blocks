@@ -91,8 +91,6 @@ class Enqueues {
          */
         $localize_array = [
             'site_url' => site_url(),
-			'ajaxUrl' => admin_url('admin-ajax.php'),
-			'nonce'   => wp_create_nonce('frontis_loop_nonce'),
         ];
 
         wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', $localize_array);
@@ -119,6 +117,16 @@ class Enqueues {
 				'whatsapp' => 'https://wa.me/?text=',
 			]
 		]);
+
+		// pagination localize
+		$frontis_pagination_localize = [
+			'ajaxUrl' => admin_url('admin-ajax.php'),
+			'nonce'   => wp_create_nonce('frontis_loop_nonce'),
+		];
+
+		wp_localize_script('frontis-blocks-frontend', 'frontisPagination', $frontis_pagination_localize);
+		wp_localize_script('frontis-blocks-frontend-header', 'frontisPagination', $frontis_pagination_localize);
+		wp_localize_script('frontis-blocks-frontend-footer', 'frontisPagination', $frontis_pagination_localize);
 
 		// Slick CSS
 		wp_enqueue_style( 'frontis-slick-style', FB_PLUGIN_URL . 'assets/css/frontend/slick/slick.css', [], FB_VERSION );

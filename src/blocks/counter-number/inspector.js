@@ -276,6 +276,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 counterSuffix: "M",
                 mediaSwitcher: 'image',
                 counterItemBorder: "none",
+                counterItemBorder: "none",
                 counterItemBorderRadiusMobile: {
                     top: '24', bottom: '24', left: '24', right: '24'
                 },

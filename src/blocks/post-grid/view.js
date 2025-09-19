@@ -226,7 +226,7 @@
 		const formData = convertToFormData(filterPost);
 		const siteUrl = FrontisBlocksData.site_url;
 
-		fetch(`${siteUrl}/wp-json/wp/v2/frontis-blocks/post`, {
+		fetch(`${siteUrl}/	wp-json/wp/v2/frontis-blocks/post`, {
 			method: 'POST',
 			body: formData,
 		})

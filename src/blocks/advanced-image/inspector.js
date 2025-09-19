@@ -929,7 +929,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			background-repeat: ${testBackgroundImageRepeat};
 			background-size: ${testBackgroundImageSize};`
 					: testClassicColor ? `background: ${testClassicColor}` : ''
-			};
+			}
 			transition: all .3s ease-in-out;
 		}
 		.${blockID} .fb-advanced-image-wrapper:hover{
@@ -951,14 +951,13 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
             ${imageDesktopBorderRadius && imageBorderRadiusDesktop.top ? `border-radius: ${imageDesktopBorderRadius};` : ''}
             ${imageBorderColor ? `border-color: ${imageBorderColor};` : ''}
 			${imageBoxShadowCssValue ? `box-shadow: ${imageBoxShadowCssValue};` : ''}
-			${maskImageUrl && !['square', 'octagon', 'triangle', 'rhombus', 'hexagon', 'bevel'].includes(imageStyle) && `
+			${maskImageUrl && `
 				-webkit-mask-image: url(${maskImageUrl});
 				mask-image: url(${maskImageUrl});
 				mask-size: ${maskImageSize};
 				mask-position: ${maskImagePosition};
 				mask-repeat: ${maskImageRepeat};
 			`}
-
 		}
 		.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover{
 			${imageBorderHoverColor ? `border-color: ${imageBorderHoverColor};` : ''}

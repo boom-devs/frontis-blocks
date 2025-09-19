@@ -165,3 +165,35 @@ final class Plugin {
 		RestApi::get_instance();
 	}
 }
+
+
+//register_block_type( 'frontis-blocks/post-meta', [
+//    'render_callback' => function( $attributes ) {
+//        $post_id = get_the_ID();
+//        $items_html = '';
+//
+//        if ( ! empty( $attributes['postMetatems'] ) ) {
+//            foreach ( $attributes['postMetatems'] as $item ) {
+//                $meta_output = '';
+//
+//                if ( $item['metaType'] === 'author' ) {
+//                    $meta_output = get_the_author_meta( 'display_name', get_post_field( 'post_author', $post_id ) );
+//                } elseif ( $item['metaType'] === 'date' ) {
+//                    $meta_output = get_the_date( '', $post_id );
+//                } elseif ( $item['metaType'] === 'comments' ) {
+//                    $meta_output = get_comments_number( $post_id ) . ' ' . __( 'Comments', 'frontis-blocks' );
+//                }
+//
+//                $items_html .= sprintf(
+//                    '<li class="fb-post-meta-item"><span class="fb-post-meta-value">%s</span></li>',
+//                    esc_html( $meta_output )
+//                );
+//            }
+//        }
+//
+//        return sprintf(
+//            '<div class="fb-post-meta-wrapper"><ul class="fb-post-meta">%s</ul></div>',
+//            $items_html
+//        );
+//    }
+//] );

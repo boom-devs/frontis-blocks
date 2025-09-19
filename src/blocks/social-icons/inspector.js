@@ -112,7 +112,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		socialTitlePaddingTablet,
 		socialTitlePaddingMobile,
 		socialTitlePaddingLink,
-		
+
 		/** End Title Styles */
 
         /** Social Padding */
@@ -173,7 +173,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         socialGlobalBgColorSwitcher,
         socialGlobalBgColor,
         socialGlobalBgHoverColor,
-        
+
         socialGlobalBorder,
         socialGlobalBorderColorSwitcher,
         socialGlobalBorderColor,
@@ -183,7 +183,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         socialGlobalBorderTablet,
         socialGlobalBorderMobile,
         socialGlobalBorderLink,
-        
+
         socialGlobalBorderRadiusUnits,
         socialGlobalBorderRadiusDesktop,
         socialGlobalBorderRadiusTablet,
@@ -222,7 +222,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         socialIconsVRBottomOffset,
         socialIconsVRBottomOffsetUnits,
     } = attributes;
-	
+
     const deviceType= useDeviceType();
 
     useEffect(() => {
@@ -301,16 +301,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const handleAddItem = () => {
 		const presetColors = getPresetColors(socialIconsPresetStyle);
-	
+
 		const newItem = {
 			id: `item-${socialItems.length + 1}`,
 			socialIconTitle: 'Facebook',
 			socialIconUrl: '',
 			socialIcon: 'facebook-f',
-	
+
 			socialIconTargetUrl: false,
 			socialIconColorSwitcher: 'normal',
-	
+
 			// Apply preset colors as default values
 			socialIconColor: presetColors.socialIconColor || '',
 			socialIconHoverColor: presetColors.socialIconHoverColor || '',
@@ -318,25 +318,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			socialIconHoverBgColor: presetColors.socialIconHoverBgColor || '',
 
 			socialItemBgColorSwitcher: 'normal',
-	
+
 			normalItemBackgroundType: 'classic',
 			normalItemClassicColor: presetColors.normalItemClassicColor || '',
 			normalItemGradientColor: '',
 			normalItemCustomGradientSwitcher: false,
 			normalItemCustomGradientInputValue: '',
-	
+
 			hoverItemBackgroundType: 'classic',
 			hoverItemClassicColor: '',
 			hoverItemGradientColor: '',
 			hoverItemCustomGradientSwitcher: false,
 			hoverItemCustomGradientInputValue: '',
 		};
-	
+
 		setAttributes({ socialItems: [...socialItems, newItem] });
 	};
 
     const handleChangeItem = (id, key, value) => {
-        const updatedItems = socialItems.map(item => 
+        const updatedItems = socialItems.map(item =>
             item.id === id ? { ...item, [key]: value } : item
         );
         setAttributes({ socialItems: updatedItems });
@@ -660,7 +660,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** Start Social padding */
 	const handleSocialPaddingUnitChange = ( event, position ) => {
 		const value = event.target.value;
-		if ( socialPaddingLink ) { 
+		if ( socialPaddingLink ) {
 			switch ( deviceType ) {
 				case 'Desktop':
 					setAttributes( {
@@ -714,7 +714,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}
 
 	const handleSocialPaddingCombineBtn = () => {
-		setAttributes( {socialPaddingLink: !socialPaddingLink} ); 
+		setAttributes( {socialPaddingLink: !socialPaddingLink} );
 	}
 
 	const handleSocialPaddingUnitsHandler = (unit) => {
@@ -729,7 +729,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const socialTabletPadding     = `${socialPaddingTablet.top}${socialPaddingUnits.Tablet} ${socialPaddingTablet.right}${socialPaddingUnits.Tablet} ${socialPaddingTablet.bottom}${socialPaddingUnits.Tablet} ${socialPaddingTablet.left}${socialPaddingUnits.Tablet}`;
 	const socialMobilePadding     = `${socialPaddingMobile.top}${socialPaddingUnits.Mobile} ${socialPaddingMobile.right}${socialPaddingUnits.Mobile} ${socialPaddingMobile.bottom}${socialPaddingUnits.Mobile} ${socialPaddingMobile.left}${socialPaddingUnits.Mobile}`;
 	/** End Social Padding */
-	
+
 	/** Start Social Margin */
 	const handleSocialMarginUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -952,7 +952,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const socialDesktopBorderRadiusWidth = `${socialBorderRadiusDesktop.top}${socialBorderRadiusUnits.Desktop} ${socialBorderRadiusDesktop.right}${socialBorderRadiusUnits.Desktop} ${socialBorderRadiusDesktop.bottom}${socialBorderRadiusUnits.Desktop} ${socialBorderRadiusDesktop.left}${socialBorderRadiusUnits.Desktop}`;
 	const socialTabletBorderRadiusWidth = `${socialBorderRadiusTablet.top}${socialBorderRadiusUnits.Tablet} ${socialBorderRadiusTablet.right}${socialBorderRadiusUnits.Tablet} ${socialBorderRadiusTablet.bottom}${socialBorderRadiusUnits.Tablet} ${socialBorderRadiusTablet.left}${socialBorderRadiusUnits.Tablet}`;
 	const socialMobileBorderRadiusWidth = `${socialBorderRadiusMobile.top}${socialBorderRadiusUnits.Mobile} ${socialBorderRadiusMobile.right}${socialBorderRadiusUnits.Mobile} ${socialBorderRadiusMobile.bottom}${socialBorderRadiusUnits.Mobile} ${socialBorderRadiusMobile.left}${socialBorderRadiusUnits.Mobile}`;
-	/** End Border Radius */    
+	/** End Border Radius */
 
 	/** Start Social Global padding */
 	const handleGlobalPaddingUnitChange = ( event, position ) => {
@@ -1026,7 +1026,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const globalTabletPadding     = `${socialGlobalPaddingTablet.top}${socialGlobalPaddingUnits.Tablet} ${socialGlobalPaddingTablet.right}${socialGlobalPaddingUnits.Tablet} ${socialGlobalPaddingTablet.bottom}${socialGlobalPaddingUnits.Tablet} ${socialGlobalPaddingTablet.left}${socialGlobalPaddingUnits.Tablet}`;
 	const globalMobilePadding     = `${socialGlobalPaddingMobile.top}${socialGlobalPaddingUnits.Mobile} ${socialGlobalPaddingMobile.right}${socialGlobalPaddingUnits.Mobile} ${socialGlobalPaddingMobile.bottom}${socialGlobalPaddingUnits.Mobile} ${socialGlobalPaddingMobile.left}${socialGlobalPaddingUnits.Mobile}`;
 	/** End Global Padding */
-	
+
 	/** Start Global Margin */
 	const handleGlobalMarginUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -2251,7 +2251,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						case 2:
 							return {
 								...item,
-								socialIconColor: "#FFFFFF", 
+								socialIconColor: "#FFFFFF",
 								socialIconHoverColor: "#FFFFFF",
 								socialIconBgColor: "#15171C",
 								socialIconHoverBgColor: "#15171C",
@@ -2862,7 +2862,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					/>
 				)}
 
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Border", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={handleSocialIconBorderUnitsHandler}
@@ -2875,7 +2875,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					spacingCombineBtnHandler={handleSocialIconBorderCombineBtn}
 					setAttributes={setAttributes}
 				/>
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Radius Border", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={handleSocialIconBorderRadiusUnitsHandler}
@@ -2888,7 +2888,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					spacingCombineBtnHandler={handleSocialIconBorderRadiusCombineBtn}
 					setAttributes={setAttributes}
 				/>
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={socialIconspacingUnitsHandler}
@@ -2918,8 +2918,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 							globalTypoType={socialTitleGlobalTypoType}
 							onChangeGlobalTypoType={(value) => {
-								setAttributes({ 
-									socialTitleGlobalTypoType: value, 
+								setAttributes({
+									socialTitleGlobalTypoType: value,
 									socialTitleGlobalTypoSwitcher: value === 'default' ? {...socialTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...socialTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
 								})
 							}}
@@ -2986,7 +2986,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							/>
 						)}
 
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Padding", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={socialTitlePaddingUnitsHandler}
@@ -3004,7 +3004,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			</PanelBody>
 
-			<PanelBody 
+			<PanelBody
 				title={__("Background", "frontis-blocks")}
 				initialOpen={false}
 			>
@@ -3062,7 +3062,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					/>
 				)}
 
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Border", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={handleSocialBorderUnitsHandler}
@@ -3075,7 +3075,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					spacingCombineBtnHandler={handleSocialBorderCombineBtn}
 					setAttributes={setAttributes}
 				/>
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Radius Border", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={handleSocialBorderRadiusUnitsHandler}
@@ -3103,10 +3103,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					rangeStep={1}
 					resetFallbackValue={10}
 				/>
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
-					spacingUnitsHandler={handleSocialPaddingUnitsHandler} 
+					spacingUnitsHandler={handleSocialPaddingUnitsHandler}
 					spacingUnits={socialPaddingUnits}
 					spacingDesktop={socialPaddingDesktop}
 					spacingTablet={socialPaddingTablet}
@@ -3116,7 +3116,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					spacingCombineBtnHandler={handleSocialPaddingCombineBtn}
 					setAttributes={setAttributes}
 				/>
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={handleSocialMarginUnitsHandler}
@@ -3132,7 +3132,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			</PanelBody>
 		</>
 	);
-		
+
 	/**
 	 * Inspector Advanced Controls
 	 */
@@ -3143,7 +3143,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<PanelBody
 						title={__("Layout", "frontis-blocks")}
 						initialOpen={true}
-						className='fb-setting-layout-header' 
+						className='fb-setting-layout-header'
 					>
 						<FB_Range
 							min={0}
@@ -3170,7 +3170,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							deviceType={deviceType}
 							positionType={socialIconsPositionType}
 							setPositionType={(value) => setAttributes({ socialIconsPositionType: value })}
-																			
+
 							HZOrientationType={socialIconsHZOrientationType}
 							setHZOrientationType={(value) =>
 								setAttributes({ socialIconsHZOrientationType: value })
@@ -3179,7 +3179,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setVROrientationType={(value) =>
 								setAttributes({ socialIconsVROrientationType: value })
 							}
-																				
+
 							HZLeftOffset={socialIconsHZLeftOffset}
 							setHZLeftOffset={(value) => setAttributes({ socialIconsHZLeftOffset: value })}
 							HZLeftOffsetUnits={socialIconsHZLeftOffsetUnits}
@@ -3188,7 +3188,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setHZRightOffset={(value) => setAttributes({ socialIconsHZRightOffset: value })}
 							HZRightOffsetUnits={socialIconsHZRightOffsetUnits}
 							setHZRightOffsetUnits={(value) => setAttributes({ socialIconsHZRightOffsetUnits: value })}
-																			
+
 							VRTopOffset={socialIconsVRTopOffset}
 							setVRTopOffset={(value) => setAttributes({ socialIconsVRTopOffset: value })}
 							VRTopOffsetUnits={socialIconsVRTopOffsetUnits}
@@ -3214,11 +3214,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							onChangeValue={(value) => setAttributes({ socialGlobalWraperClass: value })}
 							helpText={__("Separate with spaces key.", "frontis-blocks")}
 						/>
-						
+
 					</PanelBody>
 
 					<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Padding", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
@@ -3231,7 +3231,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
 							setAttributes={setAttributes}
 						/>
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Margin", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalMarginUnitsHandler}
@@ -3246,9 +3246,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						/>
 					</PanelBody>
 
-					<PanelBody 
-						title={__("Background Color", "frontis-blocks")} 
-						initialOpen={false} 
+					<PanelBody
+						title={__("Background Color", "frontis-blocks")}
+						initialOpen={false}
 					>
 						<FB_SwitcherControl
 							label={__("Background Color", "frontis-blocks")}
@@ -3303,7 +3303,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							/>
 						)}
 
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Border", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalBorderUnitsHandler}
@@ -3317,7 +3317,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setAttributes={setAttributes}
 						/>
 
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Border Radius", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
@@ -3377,8 +3377,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						title={__("Custom CSS", "frontis-blocks")}
 						initialOpen={false}
 					>
-						<FB_CustomCSSEditor  
-							value={socialGlobalCustomCSS} 
+						<FB_CustomCSSEditor
+							value={socialGlobalCustomCSS}
 							onChangeValue={(value) => setAttributes({ socialGlobalCustomCSS: value })}
 						/>
 					</PanelBody>
@@ -3386,7 +3386,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			</div>
 		</>
 	);
-    
+
 
     return (
         <>
