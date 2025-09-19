@@ -17,27 +17,29 @@ export default function Save({ attributes }) {
 	});
 
 	/**
-	 * Swiper settings
+	 * Swiper settings (frontend)
 	 */
 	const swiperSettings = JSON.stringify({
 		spaceBetween: 0,
 		centeredSlides: false,
-		speed: speed,
+		speed: speed || 5000, // smoother scrolling
 		autoplay: {
-			delay: 1,
+			delay: 0, // continuous scroll (no pause)
 			reverseDirection: reverseDirection,
 			pauseOnMouseEnter: pauseOnHover,
 			disableOnInteraction: false,
-			waitForTransition: false,
+			waitForTransition: true,
 		},
 		loop: true,
 		slidesPerView: "auto",
 		allowTouchMove: false,
+		freeMode: true,            // continuous ticker effect
+		freeModeMomentum: false,   // prevents sudden stops
 		navigation: arrowsUniqueId
 			? {
 					nextEl: `.${arrowsUniqueId} .fb-news-ticker-next`,
 					prevEl: `.${arrowsUniqueId} .fb-news-ticker-prev`,
-					hideOnClick: false, // keep arrows always visible
+					hideOnClick: false,
 					disabledClass: "swiper-button-disabled",
 					hiddenClass: "swiper-button-hidden",
 			  }
