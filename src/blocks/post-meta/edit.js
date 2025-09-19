@@ -11,7 +11,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         className: `fb-post-meta-main-wrapper ${blockID} ${blockStyle} align-${alignment}`,
     });
 
-    const postId = 1; // test with static ID
+    const postId = useSelect(
+        ( select ) => select( 'core/editor' ).getCurrentPostId(),
+        []
+    );
 
     // 🔹 Fetch the post
     const post = useSelect(
