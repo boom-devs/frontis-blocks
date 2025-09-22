@@ -1,74 +1,4 @@
 const attributes = {
-<<<<<<< HEAD
-    blockId: {
-        type: "string",
-        default: ""
-    },
-    blockStyle: {
-        type: "string",
-        default: ""
-    },
-
-    speed: {
-        type: 'number',
-        default: 3000,
-    },
-    infinite: {
-        type: 'boolean',
-        default: true,
-    },
-
-    slidesToShow: {
-		type: 'object',
-		default: {
-			Desktop: 6,
-			Tablet: 4,
-			Mobile: 2
-		}
-	},
-
-    autoplay: {
-        type: 'boolean',
-        default: true,
-    },
-    centerMode: {
-        type: 'boolean',
-        default: true,
-    },
-
-    pauseOnHover: {
-        type: 'boolean',
-        default: false,
-    },
-    variableWidth: {
-        type: 'boolean',
-        default: false,
-    },
-    touchMove: {
-        type: 'boolean',
-        default: false,
-    },
-    draggable: {
-        type: 'boolean',
-        default: false,
-    },
-    swipe: {
-        type: 'boolean',
-        default: false,
-    },
-    swipeToSlide: {
-        type: 'boolean',
-        default: false,
-    },
-    waitForAnimate: {
-        type: 'boolean',
-        default: false,
-    },
-
-    /** Start Width */
-    slideWidth: {
-		type: 'object',
-=======
 	blockId: {
 		type: "string",
 		default: "",
@@ -106,7 +36,6 @@ const attributes = {
 	/** Start Width Height */
 	slideWidth: {
 		type: "object",
->>>>>>> d5b48575042516fa1ff8f6a7e64ff34247ff3de4
 		default: {
 			Desktop: "",
 			Tablet: "",
@@ -137,57 +66,6 @@ const attributes = {
 			Mobile: "px",
 		},
 	},
-<<<<<<< HEAD
-    
-    slideGap: {
-		type: 'object',
-		default: {
-			Desktop: '10',
-			Tablet: '10',
-			Mobile: '10'
-		}
-	},
-	slideGapUnits: { 
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-    /** End Width */
-
-    /** Start Overlay */
-    sliderOverlaySwitcher: {
-        type: 'boolean',
-        default: true,
-    },
-    sliderOverlayStartColor: {
-        type: 'string',
-        default: '#FFFFFF',
-    },
-    sliderOverlayEndColor: {
-        type: 'string',
-        default: '#FFFFFF00',
-    },
-    sliderOverlayWidth: {
-        type: 'object',
-        default: {
-            Desktop: '100',
-            Tablet: '100',
-            Mobile: '100',
-        },
-    },
-    sliderOverlayWidthUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        },
-    },
-    /** End Overlay */
-=======
 	/** End Width Height */
 
 	/** Start slide Padding */
@@ -262,7 +140,6 @@ const attributes = {
 		},
 	},
 	/** End Overlay */
->>>>>>> d5b48575042516fa1ff8f6a7e64ff34247ff3de4
 
 	/** Start Global Setting */
 	sliderGlobalZIndex: {

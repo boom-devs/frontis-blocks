@@ -29,6 +29,7 @@ const TemplateContent = ({
     alreadySaved,
     loading,
     setLoading,
+    tagLoading,
     setIsLogedIn,
     setActiveCategory,
     onSaveLibrary,
@@ -233,7 +234,7 @@ const TemplateContent = ({
                                 />
                             </div>
                         </div>
-                        {loading ? (
+                        { tagLoading ? (
                             <>
                                 <ClipLoader color="fff" size={24} />
                             </>

@@ -15,19 +15,7 @@
 		"align": ["wide", "full"]
 	},
 	"textdomain": "frontis-blocks",
-<<<<<<< HEAD
-	"editorScript": [
-		"file:./index.js",
-        "frontis-slick-script"
-	],
-	"editorStyle": [
-		"file:./index.css",
-		"frontis-slick-style",
-		"frontis-slick-theme-style"
-	]
-=======
 	"usesContext": ["frontisBlocks:arrowsUniqueId"],
 	"editorScript": ["file:./index.js", "frontis-swiper-script"],
 	"editorStyle": ["file:./index.css", "frontis-swiper-style"]
->>>>>>> d5b48575042516fa1ff8f6a7e64ff34247ff3de4
 }
