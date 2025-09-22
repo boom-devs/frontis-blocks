@@ -906,6 +906,10 @@ const attributes = {
 		type: 'boolean',
 		default: false
 	},
+	enableCategoryLinkSwitcher: {
+		type: 'boolean',
+		default: false
+	},
 	postCategoryGlobalTypographyData: {
 		type: 'object',
 		default: {}

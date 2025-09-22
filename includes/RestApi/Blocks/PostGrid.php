@@ -363,6 +363,7 @@ class PostGrid {
 
         $thumbnail_link_switcher = isset($_POST['thumbnailLinkSwitcher']) ? $_POST['thumbnailLinkSwitcher'] : true;
         $category_link_switcher = isset($_POST['categoryLinkSwitcher']) ? $_POST['categoryLinkSwitcher'] : true;
+        $category_link_switcher = isset($_POST['categoryLinkSwitcher']) ? $_POST['categoryLinkSwitcher'] : true;
         $tag_link_switcher = isset($_POST['tagLinkSwitcher']) ? $_POST['tagLinkSwitcher'] : true;
         $author_link_switcher = isset($_POST['authorLinkSwitcher']) ? $_POST['authorLinkSwitcher'] : true;
         $title_link_switcher = isset($_POST['titleLinkSwitcher']) ? $_POST['titleLinkSwitcher'] : true;
