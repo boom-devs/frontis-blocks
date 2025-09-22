@@ -32,18 +32,13 @@ export const OVERFLOW_OP = [
     { label: __('Clip', 'frontis-blocks'), value: 'clip' },
 ];
 
-export const ICON_ALIGN = [
-	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
-	{ label: __(<Dashicon icon={"text"} />), value: "icon-text" },
-	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
-];
 
 export const ICON_POSITION = [
 	{ label: __("Left"), value: "left" },
 	{ label: __("Right"), value: "right" },
 ];
 
-export const TEXT_ALIGN = [
+export const TEXT_ALIGN_JUSTIFY = [
 	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
 	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
