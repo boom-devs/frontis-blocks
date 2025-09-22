@@ -11,24 +11,20 @@ import {
 } from "@wordpress/components";
 
 import { 
-    ADVANCED_HEADING_PRESETS,
     DYNAMIC_IMAGE_SOURCE_OPTIONS,
-    DYNAMIC_DATA_SOURCE_FIELD_OPTIONS,
-    DYNAMIC_FEATURED_IMAGE_OPTIONS,
-    DYNAMIC_DATE_TIME_TYPE_OPTIONS,
-    DYNAMIC_TAXONOMY_OPTIONS,
-    getDynamicDateFormatOptions,
-    getDynamicTimeFormatOptions,
     DYNAMIC_LINK_SOURCE_OPTIONS,
-    SEPARATOR_POSITION,
-    SUBHEADING_POSITION,
     BORDER_STYLES,
-    BACKGROUND_TYPES,
     OVERFLOW_OP,
-    ICON_ALIGN,
-    SEPARATOR_STYLE_OPTIONS,
 	DYNAMIC_IMAGE_FIELD_OPTIONS,
 	WP_IMAGE_SIZE_OPTIONS,
+	IMAGE_STYLES,
+	TITLE_POSITION,
+	IMAGE_HOVER_EFFECTS,
+	IMAGE_AUTO_FIT,
+	IMAGE_MASK_SIZE,
+	IMAGE_MASK_POSITION,
+	IMAGE_MASK_REPEAT,
+	IMAGE_MASK_IMAEGS,
 
 } from '@Constants/fbConstants';
 
@@ -57,17 +53,6 @@ import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_ImageControl from '@Components/image-control';
 import FB_InspectorControls from '@Components/InspectorControls';
-
-import {
-	STYLES,
-	TITLE_POSITION,
-	HOVER_EFFECTS,
-	AUTO_FIT,
-	MASK_IMAEGS,
-	MASK_SIZE,
-	MASK_POSITION,
-	MASK_REPEAT
-} from "./constants/constants";
 import "./editor.scss";
 
 export default function Inspector({ attributes, setAttributes, clientId, onSelectImage }) {
@@ -1141,8 +1126,8 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 
 
 	useEffect(() => {
-		if (MASK_IMAEGS[imageStyle]) {
-			setAttributes({ maskImageUrl: MASK_IMAEGS[imageStyle] });
+		if (IMAGE_MASK_IMAEGS[imageStyle]) {
+			setAttributes({ maskImageUrl: IMAGE_MASK_IMAEGS[imageStyle] });
 		}
 	}, [imageStyle]);
 
@@ -1568,7 +1553,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					<SelectControl
 						label={__("Styles", "frontis-blocks")}
 						value={imageStyle || "square"}
-						options={STYLES}
+						options={IMAGE_STYLES}
 						onChange={(value) => {
 							setAttributes({ imageStyle: value });
 						}}
@@ -1665,7 +1650,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					<SelectControl
 						label={__("Hover Effect", "frontis-blocks")}
 						value={imageHover}
-						options={HOVER_EFFECTS}
+						options={IMAGE_HOVER_EFFECTS}
 						onChange={(value) =>
 							setAttributes({ imageHover: value })
 						}
@@ -1876,7 +1861,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					<SelectControl
 						label={__("Image Fit Options", "frontis-blocks")}
 						value={imageFit || "cover"}
-						options={AUTO_FIT}
+						options={IMAGE_AUTO_FIT}
 						onChange={(size) =>
 							setAttributes({ imageFit: size })
 						}
@@ -1991,19 +1976,19 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 				<SelectControl
 					label={__("Size", "frontis-blocks")}
 					value={maskImageSize}
-					options={MASK_SIZE}
+					options={IMAGE_MASK_SIZE}
 					onChange={(value) => setAttributes({ maskImageSize: value })}
 				/>
 				<SelectControl
 					label={__("Position", "frontis-blocks")}
 					value={maskImagePosition}
-					options={MASK_POSITION}
+					options={IMAGE_MASK_POSITION}
 					onChange={(value) => setAttributes({ maskImagePosition: value })}
 				/>
 				<SelectControl
 					label={__("Repeat", "frontis-blocks")}
 					value={maskImageRepeat}
-					options={MASK_REPEAT}
+					options={IMAGE_MASK_REPEAT}
 					onChange={(value) => setAttributes({ maskImageRepeat: value })}
 				/>
 			</PanelBody>
