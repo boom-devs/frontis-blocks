@@ -458,8 +458,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     const deviceType= useDeviceType();
 
-
-
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -3056,8 +3054,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     dynamicTextPostType,
     dynamicTextPostLabel,
     dynamicTextField,
-    dynamicEnableLink,
     dynamicFeaturedImageField,
+    dynamicTextDateType,
+    dynamicTextDateFormat,
+    dynamicTextTimeType,
+    dynamicTextTimeFormat,
+
+    dynamicTextCommentsZeroText,
+    dynamicTextCommentsOneText,
+    dynamicTextCommentsManyText,
+    dynamicTextTermsTaxonomy,
+    dynamicTextTermsSeparator,
+    dynamicEnableLink,
+    dynamicLinkSource,
+
     ]);
 
     const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
@@ -3170,7 +3180,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         setTermsTaxonomy(val);
         setAttributes({ dynamicTextTermsTaxonomy: val });
     };
-
 
     /**
      * Dynamic Data Source
