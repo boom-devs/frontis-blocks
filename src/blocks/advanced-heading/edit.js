@@ -9,6 +9,7 @@ import { useEffect, useRef } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { decodeEntities } from '@wordpress/html-entities';
 import { dateI18n, __experimentalGetSettings as getDateSettings } from '@wordpress/date';
+import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 
 /**
  * Internal dependencies
@@ -18,7 +19,6 @@ import renderSVG from '../../components/icon-picker/components/icon-picker/contr
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import { useDeviceType } from '@Config/displayType';
 import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
@@ -77,9 +77,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	} = attributes;
 
-	// Dynamic Content Value
-	const {postType, postId} = context;
-
 	const blockProps = useBlockProps({
 		className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'} ${headingBeforeAfterSwitcher && 'fb-advanced-heading-before-after'}`,
 	});
@@ -91,6 +88,9 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 */
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
+
+	// Dynamic Content Value
+	const {postType, postId} = context;
 
 	/**
 	 * Current Post Fields
