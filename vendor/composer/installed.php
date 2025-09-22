@@ -3,7 +3,11 @@
         'name' => 'wpmessiah/frontis-blocks',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
+<<<<<<< HEAD
         'reference' => '3fa5a96c2ae5e1ea79f442380eaaccbe78f2ff6e',
+=======
+        'reference' => 'd5b48575042516fa1ff8f6a7e64ff34247ff3de4',
+>>>>>>> e59a609f556490324f815e55e92bd5c5ca555b02
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,9 +26,15 @@
             'dev_requirement' => false,
         ),
         'deliciousbrains/wp-background-processing' => array(
+<<<<<<< HEAD
             'pretty_version' => '1.4.0',
             'version' => '1.4.0.0',
             'reference' => '7ca7cc3504333db3a291bbab7f1917124fba4816',
+=======
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '004009c62309c655cdb9e40a915721519e5d6d36',
+>>>>>>> e59a609f556490324f815e55e92bd5c5ca555b02
             'type' => 'library',
             'install_path' => __DIR__ . '/../deliciousbrains/wp-background-processing',
             'aliases' => array(),
@@ -62,7 +72,11 @@
         'wpmessiah/frontis-blocks' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
+<<<<<<< HEAD
             'reference' => '3fa5a96c2ae5e1ea79f442380eaaccbe78f2ff6e',
+=======
+            'reference' => 'd5b48575042516fa1ff8f6a7e64ff34247ff3de4',
+>>>>>>> e59a609f556490324f815e55e92bd5c5ca555b02
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
