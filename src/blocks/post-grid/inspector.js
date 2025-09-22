@@ -831,7 +831,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /** Start Post Grid Settings */
         postGridSkeletonBgColor,
-        postGridSkeletonHighlightBgColor,
+        postGridSkeletonHighlightBgColor
         /** End Post Grid Settings */
 	} = attributes;
 
@@ -6191,6 +6191,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             checked={showCategorySwitcher}
                             onChange={(value) => setAttributes({ showCategorySwitcher: value })}
                         />
+                        {showCategorySwitcher && (
+                            <ToggleControl
+                                label={__("Category Link", "frontis-blocks")}
+                                checked={categoryLinkSwitcher}
+                                onChange={(value) => setAttributes({ categoryLinkSwitcher: value })}
+                            />
+                        )}
                         <ToggleControl
                             label={__("Show Tag", "frontis-blocks")}
                             checked={showTagSwitcher}
@@ -7176,12 +7183,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             </PanelBody>
 
             <PanelBody title={__("Category", "frontis-blocks")} initialOpen={false}>
-
-                <ToggleControl
-                    label={__("Category Link", "frontis-blocks")}
-                    checked={categoryLinkSwitcher}
-                    onChange={(value) => setAttributes({ categoryLinkSwitcher: value })}
-                />
 
                 <FB_TypographyControl
                     globalTypoControlActive={true}
