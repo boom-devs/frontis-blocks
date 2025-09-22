@@ -1240,11 +1240,11 @@ const attributes = {
         type: 'string',
         default: ', ',
     },
-    dynamicEnableLink: {
+    dynamicTextEnableLink: {
         type: 'boolean',
         default: false
     },
-    dynamicLinkSource: {
+    dynamicTextLinkSource: {
         type: 'string',
         default: 'post_permalink',
     },
