@@ -51,27 +51,27 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		advancedHeadingTabletSwitcher,
 		advancedHeadingMobileSwitcher,
 
-		dynamicEnabled,
-		dynamicSource,
-		dynamicPostId,
-		dynamicPostType,
-		dynamicPostLabel,
-		dynamicField,
-		dynamicEnableLink,
+		dynamicTextEnabled,
+		dynamicTextSource,
+		dynamicTextPostId,
+		dynamicTextPostType,
+		dynamicTextPostLabel,
+		dynamicTextField,
 		dynamicFeaturedImageField,
 
-		dynamicDateType,
-		dynamicDateFormat,
+		dynamicTextDateType,
+		dynamicTextDateFormat,
 
-		dynamicTimeType,
-		dynamicTimeFormat,
+		dynamicTextTimeType,
+		dynamicTextTimeFormat,
 
-		dynamicCommentsZeroText,
-		dynamicCommentsOneText,
-		dynamicCommentsManyText,
+		dynamicTextCommentsZeroText,
+		dynamicTextCommentsOneText,
+		dynamicTextCommentsManyText,
 
-		dynamicTermsTaxonomy,
-		dynamicTermsSeparator,
+		dynamicTextTermsTaxonomy,
+		dynamicTextTermsSeparator,
+		dynamicEnableLink,
 		dynamicLinkSource,
 
 
@@ -102,23 +102,23 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		'author_description','author_email','author_url','author_avatar'
 	];
 	
-	const isPostBasedSource = dynamicEnabled && (dynamicSource === 'current_post' || dynamicSource === 'post_type');
+	const isPostBasedSource = dynamicTextEnabled && (dynamicTextSource === 'current_post' || dynamicTextSource === 'post_type');
 
-	const isSiteField    = ['site_title','site_tagline'].includes(dynamicSource);
-	const isArchiveField = ['archive_title','archive_description'].includes(dynamicSource);
+	const isSiteField    = ['site_title','site_tagline'].includes(dynamicTextSource);
+	const isArchiveField = ['archive_title','archive_description'].includes(dynamicTextSource);
 
-	const targetPostId   = dynamicSource === 'post_type' && dynamicPostId ? dynamicPostId : postId;
+	const targetPostId   = dynamicTextSource === 'post_type' && dynamicTextPostId ? dynamicTextPostId : postId;
 	const targetPostType =
-		dynamicSource === 'post_type'
-		? (dynamicPostType || 'post')
+		dynamicTextSource === 'post_type'
+		? (dynamicTextPostType || 'post')
 		: postType;
 
 	/**
 	 * Should Use Dynamic
 	 */
 	const shouldUseDynamic =
-	dynamicEnabled && (
-	  (isPostBasedSource && CURRENT_POST_FIELDS.includes(dynamicField)) ||
+	dynamicTextEnabled && (
+	  (isPostBasedSource && CURRENT_POST_FIELDS.includes(dynamicTextField)) ||
 	  isSiteField ||
 	  isArchiveField
 	);
@@ -171,11 +171,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const mediaRecord = useSelect(
 		(select) =>
 		  isPostBasedSource &&
-		  dynamicField === 'post_thumbnail' &&
+		  dynamicTextField === 'post_thumbnail' &&
 		  postRecord?.featured_media
 			? select(coreStore).getEntityRecord('postType', 'attachment', postRecord.featured_media)
 			: null,
-		[isPostBasedSource, dynamicField, postRecord?.featured_media, dynamicFeaturedImageField]
+		[isPostBasedSource, dynamicTextField, postRecord?.featured_media, dynamicFeaturedImageField]
 	);
 
 	/**
@@ -235,23 +235,23 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Terms for Post
 	 */
 	const taxonomySupported =
-	!!dynamicTermsTaxonomy && !!postTypeObj?.taxonomies?.includes(dynamicTermsTaxonomy);
+	!!dynamicTextTermsTaxonomy && !!postTypeObj?.taxonomies?.includes(dynamicTextTermsTaxonomy);
   
 	const shouldQueryTerms =
 		isPostBasedSource &&
-		dynamicField === 'post_terms' &&
+		dynamicTextField === 'post_terms' &&
 		targetPostId &&
 		taxonomySupported;
 	
 	const dynamicTermsForPost = useSelect(
 		(select) =>
 		shouldQueryTerms
-			? select(coreStore).getEntityRecords('taxonomy', dynamicTermsTaxonomy, {
+			? select(coreStore).getEntityRecords('taxonomy', dynamicTextTermsTaxonomy, {
 				post: targetPostId,
 				per_page: 100,
 			})
 			: null,
-		[shouldQueryTerms, dynamicTermsTaxonomy, targetPostId]
+		[shouldQueryTerms, dynamicTextTermsTaxonomy, targetPostId]
 	);
 
 	/**
@@ -260,7 +260,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const commentsList = useSelect(
 		(select) =>
 		  isPostBasedSource &&
-		  dynamicField === 'comments_number' &&
+		  dynamicTextField === 'comments_number' &&
 		  targetPostId
 			? select(coreStore).getEntityRecords('root', 'comment', {
 				post: targetPostId,
@@ -268,7 +268,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 				per_page: 100,
 			  })
 			: null,
-		[isPostBasedSource, dynamicField, targetPostId]
+		[isPostBasedSource, dynamicTextField, targetPostId]
 	);
 	
 	/**
@@ -277,11 +277,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const authorRecord = useSelect(
 		(select) =>
 		  isPostBasedSource &&
-		  dynamicField.startsWith('author_') &&
+		  dynamicTextField.startsWith('author_') &&
 		  postRecord?.author
 			? select(coreStore).getUser(postRecord.author)
 			: null,
-		[isPostBasedSource, dynamicField, postRecord?.author]
+		[isPostBasedSource, dynamicTextField, postRecord?.author]
 	);
 
 	/**
@@ -299,7 +299,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		if (!shouldUseDynamic) return '';
 
 		if (isSiteField) {
-			switch (dynamicSource) {
+			switch (dynamicTextSource) {
 				case 'site_title':
 					return getPlainText(siteInfo?.title) || __('No Content', 'frontis-blocks');
 				case 'site_tagline':
@@ -311,7 +311,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	
 		if (isArchiveField) {
 		// just show placeholder in editor because editor does not show this archive title and description and real value will be rendered in PHP
-		return dynamicSource === 'archive_title'
+		return dynamicTextSource === 'archive_title'
 			? __('Archive Title', 'frontis-blocks')
 			: __('Archive Description', 'frontis-blocks');
 		}
@@ -322,7 +322,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		if (!postRecord) return __('No Content', 'frontis-blocks');
 	
-		switch (dynamicField) {
+		switch (dynamicTextField) {
 		case 'post_title':
 			return getPlainText(postRecord.title?.rendered);
 	
@@ -371,19 +371,19 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		}
 	
 		case 'post_date': {
-			const isModified = dynamicDateType === 'modified';
+			const isModified = dynamicTextDateType === 'modified';
 			// prefer *_gmt; if not, use local field
 			const rawGMT = isModified ? postRecord?.modified_gmt : postRecord?.date_gmt;
 			const rawLOC = isModified ? postRecord?.modified     : postRecord?.date;
 			const d = parseWpDate(rawGMT ?? rawLOC, Boolean(rawGMT));
 			if (!d) return __('No Content', 'frontis-blocks');
 		  
-			switch (dynamicDateFormat) {
+			switch (dynamicTextDateFormat) {
 			  case 'jS F Y':
 			  case 'Y-m-d':
 			  case 'm/d/Y':
 			  case 'd/m/Y':
-				return formatDateByPhp(dynamicDateFormat, d);
+				return formatDateByPhp(dynamicTextDateFormat, d);
 			  case 'human':
 				return humanizeDate(d);
 			  case 'default':
@@ -393,26 +393,26 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		}
 	
 		case 'post_time': {
-			const isModified = dynamicTimeType === 'modified';
+			const isModified = dynamicTextTimeType === 'modified';
 			const rawGMT = isModified ? postRecord?.modified_gmt : postRecord?.date_gmt;
 			const rawLOC = isModified ? postRecord?.modified     : postRecord?.date;
 			const d = parseWpDate(rawGMT ?? rawLOC, Boolean(rawGMT));
 			if (!d) return __('No Content', 'frontis-blocks');
 		  
-			switch (dynamicTimeFormat) {
+			switch (dynamicTextTimeFormat) {
 			  case 'default':
 				return dateI18n(getSiteTimeFormat(), d);
 			  case 'g:i A':
 			  case 'g:i':
 			  case 'g:i:s a':
-				return dateI18n(dynamicTimeFormat, d);
+				return dateI18n(dynamicTextTimeFormat, d);
 			  default:
 				return dateI18n(getSiteTimeFormat(), d);
 			}
 		}
 	
 		case 'post_terms': {
-		if (!targetPostId || !dynamicTermsTaxonomy) return __('No Content', 'frontis-blocks');
+		if (!targetPostId || !dynamicTextTermsTaxonomy) return __('No Content', 'frontis-blocks');
 		if (!taxonomySupported) return __('No Content', 'frontis-blocks');
 
 		if (typeof dynamicTermsForPost === 'undefined') {
@@ -421,7 +421,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		if (!dynamicTermsForPost || !dynamicTermsForPost.length) {
 			return __('No Content', 'frontis-blocks');
 		}
-		return dynamicTermsForPost.map((t) => t.name).join(dynamicTermsSeparator || ', ');
+		return dynamicTermsForPost.map((t) => t.name).join(dynamicTextTermsSeparator || ', ');
 		}
 	
 		case 'post_id':
@@ -439,9 +439,9 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 				count = Number((commentsList?.length) || 0);
 			}
 			
-			const zeroTxt = (dynamicCommentsZeroText || __('No Responses', 'frontis-blocks')).trim();
-			const oneTxt  = (dynamicCommentsOneText  || __('One Response', 'frontis-blocks')).trim();
-			const manyTxt = (dynamicCommentsManyText || __('Responses {num}', 'frontis-blocks')).trim();
+			const zeroTxt = (dynamicTextCommentsZeroText || __('No Responses', 'frontis-blocks')).trim();
+			const oneTxt  = (dynamicTextCommentsOneText  || __('One Response', 'frontis-blocks')).trim();
+			const manyTxt = (dynamicTextCommentsManyText || __('Responses {num}', 'frontis-blocks')).trim();
 			
 			if (count === 0) return zeroTxt;
 			if (count === 1) return oneTxt;
