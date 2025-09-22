@@ -182,51 +182,12 @@ class Blocks
 		);
 	}
 
-	function get_block_styles_recursive($block) {
-		$styles = [];
-		
-		// Process current block
-		$styles = array_merge($styles, $this->get_block_styles($block));
-		
-		// Process inner blocks
-		if (isset($block['innerBlocks']) && is_array($block['innerBlocks'])) {
-			foreach ($block['innerBlocks'] as $inner_block) {
-				$styles = array_merge($styles, $this->get_block_styles_recursive($inner_block));
-			}
-		}
-		
-		return $styles;
-	}
-	
-	function get_block_styles($block) {
-		$styles = [];
-		$attrs = $block['attrs'] ?? [];
-
-		// Standard WordPress block style
-		if (isset($attrs['blockStyle']) && !empty($attrs['blockStyle'])) {
-			$styles[] = $attrs['blockStyle'];
-		}
-		
-		return $styles;
-	}
-
 	public function render_block($block_content, $parsed_block, $block_obj)
 	{
 		if (Helper::is_frontis_block($block_content, $parsed_block)) {
 			$block_content = $this->add_wrapper_class($block_content, $parsed_block);
 			$block_content = $this->add_block_id($block_content, $parsed_block);
 			$block_content = apply_filters('frontis_blocks_render_block', $block_content, $parsed_block, $block_obj);
-
-			$page_compiling_mode = get_post_meta(get_the_ID(), 'fb_page_assets_generation', true);
-			if($page_compiling_mode === 'compiling') {
-				// Get all styles from this block and its children
-				$block_styles = $this->get_block_styles_recursive($parsed_block);
-
-				// Output styles if any exist
-				if (!empty($block_styles)) {
-					echo '<style type="text/css">' . implode("\n", $block_styles) . '</style>';
-				}
-			}
 		}
 		return $block_content;
 	}
