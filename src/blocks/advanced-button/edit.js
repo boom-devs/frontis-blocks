@@ -4,8 +4,6 @@ import {
     RichText, 
     BlockControls,
     AlignmentToolbar,
-    MediaUpload,
-    MediaUploadCheck,
     MediaPlaceholder,
 } from '@wordpress/block-editor';
 import { useRef } from '@wordpress/element';
@@ -26,20 +24,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         buttonText,
         buttonUrl,
         buttonTargetUrl,
-        buttonWidth,
         buttonIcon,
-        buttonZIndex,
         buttonIconAlign,
         buttonIconPosition,
 
         buttonIconImageUrl,
 		buttonIconImageAlt,
-		buttonIconImageID,
-		buttonIconImageWidth,
-		buttonIconImageWidthUnits,
-		buttonIconImageHeight,
-		buttonIconImageHeightUnits,
-		buttonIconImagedisplay,
 
         buttonGlobalWraperID,
         buttonGlobalWraperClass,
