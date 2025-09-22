@@ -45,6 +45,12 @@ export const MULTI_ICON_POSITION = [
 	{ label: __("Left", "frontis-blocks"), value: "left" },
 ];
 
+export const ICON_TEXT_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"text"} />), value: "icon-text" },
+	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
+];
+
 export const ICON_ALIGN = [
 	{ label: __("None"), value: "none" },
 	{ label: __("Icon"), value: "icon" },
@@ -88,6 +94,13 @@ export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
 	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
+];
+
+export const TEXT_ALIGN_JUSTIFY = [
+	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
+	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
+	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
+	{ label: __(<Dashicon icon={"menu"} />), value: "justify" }
 ];
 
 export const HEADING = [
