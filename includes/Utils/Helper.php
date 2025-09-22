@@ -1,6 +1,7 @@
 <?php
 
 namespace FrontisBlocks\Utils;
+use FrontisBlocks\Assets\TemplateProcessor;
 
 class Helper
 {
@@ -59,7 +60,7 @@ class Helper
     public static function is_gutenberg_editor()
     {
         global $pagenow;
-        return in_array($pagenow, ['post.php', 'post-new.php', 'site-editor.php', 'widgets.php']);
+        return in_array($pagenow, ['post.php', 'post-new.php', 'site-editor.php', 'widgets.php', 'index.php']);
     }
 
     public static function get_post_id_by_slug($post_name, $post_type = 'post') {
@@ -779,7 +780,80 @@ class Helper
         }
     }
 
-    public static function pre_render_assets_on_compile() {
+    public static function get_current_page_blockstyles($post_id, $given_post_content) {
+        global $wpdb;
+
+		$post_name = Helper::is_custom_post_type($post_id) || get_post_type($post_id) === 'post' ? 'single' : get_post_type($post_id);
+		$assigned_template = get_post_meta($post_id, '_wp_page_template', true);
+
+		if ($assigned_template !== '') {
+			if($assigned_template !== 'default') {
+				$post_name = $assigned_template;
+			}
+		}
+
+		$query = $wpdb->prepare(
+			"SELECT
+                ID,
+                post_type,
+                post_content
+            FROM
+                {$wpdb->posts}
+            WHERE
+                post_type = 'wp_template'
+                AND post_status = 'publish'
+                AND post_name = %s
+            ORDER BY
+                post_modified DESC",
+			$post_name
+		);
+		
+		// Execute the query
+		$template_contents = $wpdb->get_results($query);
+
+        
+		$template_contents = TemplateProcessor::get_instance()->process_template($template_contents);
+        
+		$pattern = '/<!--\s*wp:post-content\s*/i';
+
+        if (preg_match_all($pattern, $template_contents, $wp_post_content_matchs) > 0) {
+            if(isset($wp_post_content_matchs[0])){
+				foreach($wp_post_content_matchs[0] as $index => $post_content) {
+					$template_contents = str_replace(
+                        $wp_post_content_matchs[0][$index],
+                        $given_post_content,
+                        $template_contents
+                    );
+				}
+			}
+        }
+
+        if(!empty($template_contents)) {
+            // Regex for blockStyle (unchanged)
+            $style_pattern = '/"blockStyle":\s*"((?:\\\\.|[^"\\\\])*)"/';
+            preg_match_all($style_pattern, $template_contents, $style_matches);
+        
+            // write post content file php
+            $myfile = fopen($post_id."tempalte_content.txt", "w") or die("Unable to open file!");
+            fwrite($myfile, json_encode($style_matches[1]));
+            fclose($myfile);
+            $styles = [];
+            // Process each matched blockStyle value
+            foreach ($style_matches[1] as $escaped_style) {
+                // Unescape JSON unicode sequences like \u003e to actual characters
+                $unescaped = json_decode('"'.$escaped_style.'"');
+                if ($unescaped !== null) {
+                    $styles[] = $unescaped;
+                }
+            }
+
+            return implode("\n\n", $styles);
+        }
+
+		return false;
+    }
+
+    public static function pre_render_assets_on_compile($post_id) {
         $active_blocks = get_option('fb_active_blocks');
         $css_content = '';
         $js_content = '';
@@ -803,6 +877,15 @@ class Helper
                     $css_content .= file_get_contents($css_file) . "\n";
                 }
             }
+
+
+            // var_dump(get_post($post_id)->post_content);
+
+            $dynamic_styles = Helper::get_current_page_blockstyles($post_id, get_post($post_id)->post_content);
+
+            if($dynamic_styles) {
+                $css_content .= $dynamic_styles . "\n";
+            }
     
             foreach ($active_blocks as $key => $single_block) {
                 $block_static_css_file_path = FB_PLUGIN_PATH . 'build/blocks/' . $key . '/style-index.css';
@@ -821,8 +904,6 @@ class Helper
                 }
             }
         }
-
-        // var_dump($js_content);
     
         // Return both CSS and JS for initial compilation
         return [

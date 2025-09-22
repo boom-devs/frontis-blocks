@@ -61,53 +61,6 @@ class AssetsGenerator
 		$this->skip_animated_heading_textplugin_js = false;
 	}
 
-	public function get_block_style($content) {
-		// Regex for blockStyle (unchanged)
-		$style_pattern = '/"blockStyle":\s*"((?:\\\\.|[^"\\\\])*)"/';
-		preg_match_all($style_pattern, $content, $style_matches);
-	
-		// Regex for frontis-blocks name
-		$block_name_pattern = '/<!--\s*wp:(frontis-blocks\/[a-zA-Z0-9_-]+)\s*{?/';
-		preg_match_all($block_name_pattern, $content, $name_matches);
-	
-		$styles = [];
-		// Process each matched blockStyle value
-		foreach ($style_matches[1] as $escaped_style) {
-			// Unescape JSON unicode sequences like \u003e to actual characters
-			$unescaped = json_decode('"'.$escaped_style.'"');
-			if ($unescaped !== null) {
-				$styles[] = $unescaped;
-			}
-		}
-	
-		// Extract block names and ensure uniqueness
-		$block_names = $name_matches[1] ?? [];
-		$unique_block_names = array_unique($block_names);
-	
-		// Process unique block names (if needed)
-		if (!empty($unique_block_names)) {
-			foreach ($unique_block_names as $block_name) {
-				if(!in_array($block_name, $this->used_blocks)) {
-					$this->used_blocks[] = $block_name;
-					$slug = str_replace('frontis-blocks/', '', $block_name);
-					$block_static_css_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $slug . '/style-index.css';
-
-					if (file_exists($block_static_css_file_path)) {
-						$this->css_content .= $this->clean_CSS(file_get_contents($block_static_css_file_path)) . "\n";
-					}
-
-					// Js file
-					$block_static_js_file_path = plugin_dir_path(__DIR__) . '../build/blocks/' . $slug . '/view.js';
-					if (file_exists($block_static_js_file_path)) {
-						$this->js_content .= file_get_contents($block_static_js_file_path) . "\n";
-					}
-				}
-			}
-		}
-	
-		return implode("\n\n", $styles);
-	}
-
 	public function generate_page_assets($post_id, $post, $generate_critical_css = false)
 	{
 		$this->genrating_critical_css = $generate_critical_css;
@@ -132,6 +85,7 @@ class AssetsGenerator
 			$this->combine_and_save_css_file($page_name);
 			$this->get_font_families();
 			$this->reset();
+			update_post_meta($post_id, 'fb_page_assets_generation', 'compiled');
 		}
 
 		// Queue only for specific conditions
@@ -140,9 +94,6 @@ class AssetsGenerator
 			$table_name = $wpdb->prefix . 'fb_job_schedule';
 			
 			try {
-				// Clear all existing jobs first
-				// $wpdb->query("DELETE FROM $table_name");
-				
 				$post_ids = Helper::get_all_post_ids();
 				
 				if (!empty($post_ids)) {
@@ -217,41 +168,6 @@ class AssetsGenerator
 			$this->critical_css_content .= $this->clean_CSS($blockStyle) . "\n";
 		}
 	}
-
-	// public function get_header_footer_content($template_content) {
-    //     $pattern = '/<!-- wp:template-part\s*{(.*?)} \/-->/';
-    //     $slugs = [];
-
-    //     if (preg_match_all($pattern, $template_content, $template_part_matches)) {
-    //         foreach ($template_part_matches[1] as $attributes) {
-    //             // Extract slug from attributes
-    //             if (preg_match('/"slug":"(.*?)"/', $attributes, $slug_match)) {
-    //                 $slugs[] = $slug_match[1];
-    //             }
-    //         }
-    //     }
-
-    //     if (!empty($slugs)) {
-	// 		foreach ($slugs as $index => $slug) {
-	// 			// Query WordPress for post with post_name = slug and post_type = wp_template_part
-	// 			$args = [
-	// 				'name' => $slug,
-	// 				'post_type' => 'wp_template_part',
-	// 				'post_status' => 'publish',
-	// 				'numberposts' => 1
-	// 			];
-	// 			$template_parts = get_posts($args);
-				
-	// 			// Check if a post was found and get the first post object
-	// 			if (!empty($template_parts)) {
-	// 				$template_part = $template_parts[0]; // Get the first (and only) post object
-	// 				if (isset($template_part->post_content)) {
-	// 					$this->generate_template_part_header_footer_assets($template_part);
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// }
 
 	public function get_page_content_with_template_parts() {
 		global $wpdb;
