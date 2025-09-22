@@ -119,8 +119,8 @@ $dynamicTextCommentsManyText   = fb_norm_str(isset($attributes['dynamicTextComme
 $dynamicTextTermsTaxonomy      = fb_norm_str(isset($attributes['dynamicTextTermsTaxonomy']) ? $attributes['dynamicTextTermsTaxonomy'] : 'category');
 $dynamicTextTermsSeparator     = fb_norm_str(isset($attributes['dynamicTextTermsSeparator']) ? $attributes['dynamicTextTermsSeparator'] : '');
 
-$dynamicEnableLink             = !empty($attributes['dynamicEnableLink']);
-$dynamicLinkSource             = fb_norm_str(isset($attributes['dynamicLinkSource']) ? $attributes['dynamicLinkSource'] : 'post_permalink');
+$dynamicTextEnableLink             = !empty($attributes['dynamicTextEnableLink']);
+$dynamicTextLinkSource             = fb_norm_str(isset($attributes['dynamicTextLinkSource']) ? $attributes['dynamicTextLinkSource'] : 'post_permalink');
 
 // -------- DYNAMIC: compute $dynamic_value and $dynamic_permalink ----------
 $dynamic_value     = '';
@@ -332,9 +332,9 @@ if ( $dynamicTextEnabled ) {
 }
 
 // Only compute link when dynamic is enabled & link toggle is on
-if ( $dynamicTextEnabled && $dynamicEnableLink ) {
+if ( $dynamicTextEnabled && $dynamicTextEnableLink ) {
 
-    switch ( $dynamicLinkSource ) {
+    switch ( $dynamicTextLinkSource ) {
         case 'post_permalink':
             // Already computed above
             $dynamic_link_url = $dynamic_permalink ?: '';
@@ -443,7 +443,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 
 		<div class="fb-advanced-heading-wrapper">
 			<<?php echo esc_attr( $heading_tag ); ?> class="fb-advanced-heading<?php echo $active_line_switcher ? ' active-line' : ''; ?>">
-				<?php if ( $dynamicTextEnabled && $dynamicEnableLink && $dynamic_link_url ) : ?>
+				<?php if ( $dynamicTextEnabled && $dynamicTextEnableLink && $dynamic_link_url ) : ?>
 					<a class="fb-dynamic-link" href="<?php echo esc_url( $dynamic_link_url ); ?>">
 						<?php echo wp_kses_post( $dynamicDisplayValue ); ?>
 					</a>

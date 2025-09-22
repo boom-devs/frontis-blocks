@@ -449,16 +449,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dynamicTextCommentsManyText,
         dynamicTextTermsTaxonomy,
         dynamicTextTermsSeparator,
-        dynamicEnableLink,
-        dynamicLinkSource,
+        dynamicTextEnableLink,
+        dynamicTextLinkSource,
 
 
 
     } = attributes;
 
     const deviceType= useDeviceType();
-
-
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -3056,8 +3054,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     dynamicTextPostType,
     dynamicTextPostLabel,
     dynamicTextField,
-    dynamicEnableLink,
     dynamicFeaturedImageField,
+    dynamicTextDateType,
+    dynamicTextDateFormat,
+    dynamicTextTimeType,
+    dynamicTextTimeFormat,
+
+    dynamicTextCommentsZeroText,
+    dynamicTextCommentsOneText,
+    dynamicTextCommentsManyText,
+    dynamicTextTermsTaxonomy,
+    dynamicTextTermsSeparator,
+    dynamicTextEnableLink,
+    dynamicTextLinkSource,
+
     ]);
 
     const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
@@ -3171,7 +3181,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         setAttributes({ dynamicTextTermsTaxonomy: val });
     };
 
-
     /**
      * Dynamic Data Source
      */
@@ -3198,11 +3207,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /**
      * dynamic link source
      */
-    const [linkSource, setLinkSource] = useState(dynamicLinkSource || "post_permalink");
+    const [linkSource, setLinkSource] = useState(dynamicTextLinkSource || "post_permalink");
 
     useEffect(() => {
-        setLinkSource(dynamicLinkSource || "post_permalink");
-    }, [dynamicLinkSource]);
+        setLinkSource(dynamicTextLinkSource || "post_permalink");
+    }, [dynamicTextLinkSource]);
 
     const selectedLinkSource = useMemo(() => {
         const v = linkSource || "post_permalink";
@@ -3215,7 +3224,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const handleLinkSourceChange = (opt) => {
         const val = opt && typeof opt.value === "string" ? opt.value : "post_permalink";
         setLinkSource(val);
-        setAttributes({ dynamicLinkSource: val });
+        setAttributes({ dynamicTextLinkSource: val });
     };
 
     /**
@@ -3459,11 +3468,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
                             <ToggleControl
                                 label={__("Enable Link", "frontis-blocks")}
-                                checked={dynamicEnableLink}
-                                onChange={(value) => setAttributes({ dynamicEnableLink: value })}
+                                checked={dynamicTextEnableLink}
+                                onChange={(value) => setAttributes({ dynamicTextEnableLink: value })}
                             />
 
-                            {dynamicEnableLink && (
+                            {dynamicTextEnableLink && (
                                 <BaseControl
                                     label={__("Link Source", "frontis-blocks")}
                                 >
