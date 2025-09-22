@@ -22,13 +22,13 @@ import {
 /**
  * Internal depencencies
  */
-import {
-	TEXT_ALIGN,
-	ICON_ALIGN,
+import { 
+	TEXT_ALIGN_JUSTIFY,
+	ICON_TEXT_ALIGN,
 	BORDER_STYLES,
 	ICON_POSITION,
 	OVERFLOW_OP,
-} from "./constants/constants";
+} from '@Constants/fbConstants';
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
 import FBIconPicker from "../../components/icon-picker";
@@ -1729,7 +1729,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						<ButtonGroup
 							className="fb-setting-text-alignment-group-btn"
 						>
-							{TEXT_ALIGN.map((item, key) => (
+							{TEXT_ALIGN_JUSTIFY.map((item, key) => (
 								<Button
 									key={key}
 									onClick={() => setAttributes({ buttonAlignment: item.value })}
@@ -1765,7 +1765,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							<ButtonGroup
 								className="fb-setting-text-alignment-group-btn"
 							>
-								{ICON_ALIGN.map((item, key) => (
+								{ICON_TEXT_ALIGN.map((item, key) => (
 									<Button
 										key={key}
 										onClick={() => setAttributes({ buttonIconAlign: item.value })}
