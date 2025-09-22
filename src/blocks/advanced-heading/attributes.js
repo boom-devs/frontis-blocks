@@ -41,107 +41,80 @@ const attributes = {
         default: '',
     },
 
-
-    dynamicEnabled : {
+    /** Start Dynamic Text */
+    dynamicTextEnabled : {
         type: 'boolean',
         default: false
     },
-    dynamicSource: {
+    dynamicTextSource: {
         type: 'string',
         default: 'current_post'
     },
-    dynamicPostId: {
+    dynamicTextPostId: {
         type: 'number',
         default: 0
     },
-    dynamicPostType: {
+    dynamicTextPostType: {
         type: 'string',
         default: ''
     },
-    dynamicPostLabel: {
+    dynamicTextPostLabel: {
         type: 'string',
         default: ''
     },
-    dynamicField: {
+    dynamicTextField: {
         type: 'string',
         default: 'post_title'
-    },
-    metaKey: {
-        type: 'string',
-        default: ''
-    },
-    authorMetaKey : {
-        type: 'string',
-        default: ''
-    },
-    termsTaxonomy: {
-        type: 'string',
-        default: ''
-    },
-    termsFormat: {
-        type: 'string',
-        default: 'names'
-    },
-    requestParamKey: {
-        type: 'string',
-        default: ''
-    },
-    shortcode: {
-        type: 'string',
-        default: ''
-    },
-    userScope: {
-        type: 'string',
-        default: 'current'
-    },
-    dynamicEnableLink: {
-        type: 'boolean',
-        default: false
     },
     dynamicFeaturedImageField:{
         type: 'string',
         default: 'title'
     },
-    dynamicDateType: {
+    dynamicTextDateType: {
         type: 'string',
         default: 'published'
     },
-    dynamicDateFormat: {
+    dynamicTextDateFormat: {
         type: 'string',
         default: 'default'
     },
-    dynamicTimeType: {
+    dynamicTextTimeType: {
         type: 'string',
         default: 'published'
     },
-    dynamicTimeFormat: {
+    dynamicTextTimeFormat: {
         type: 'string',
         default: 'default'
     },
-    dynamicCommentsZeroText: {
+    dynamicTextCommentsZeroText: {
         type: 'string',
         default: 'No Response',
     },
-    dynamicCommentsOneText: {
+    dynamicTextCommentsOneText: {
         type: 'string',
         default: 'One Response',
     },
-    dynamicCommentsManyText: {
+    dynamicTextCommentsManyText: {
         type: 'string',
         default: '{num} Response',
     },   
-    dynamicTermsTaxonomy: {
+    dynamicTextTermsTaxonomy: {
         type: 'string',
         default: 'category',
     },
-    dynamicTermsSeparator: {
+    dynamicTextTermsSeparator: {
         type: 'string',
         default: ', ',
+    },
+    dynamicEnableLink: {
+        type: 'boolean',
+        default: false
     },
     dynamicLinkSource: {
         type: 'string',
         default: 'post_permalink',
     },
+    /** End Dynamic Text */
 
 
     /** Start Heading Style */

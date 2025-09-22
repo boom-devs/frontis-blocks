@@ -367,7 +367,7 @@ export const WP_IMAGE_SIZE_OPTIONS = [
 	{ label: __('Large', 'frontis-blocks'), value: 'large' },
 ];
   
-export const getDynamicDateFormatOptions = (sampleDate = new Date()) => {
+export const getdynamicTextDateFormatOptions = (sampleDate = new Date()) => {
 
 	const fmt = (phpFmt) => dateI18n(phpFmt, sampleDate);
   
@@ -382,7 +382,7 @@ export const getDynamicDateFormatOptions = (sampleDate = new Date()) => {
 	];
 };
 
-export const getDynamicTimeFormatOptions = (sampleDate = new Date()) => {
+export const getdynamicTextTimeFormatOptions = (sampleDate = new Date()) => {
 
 	const d = sampleDate instanceof Date ? sampleDate : new Date(sampleDate);
   

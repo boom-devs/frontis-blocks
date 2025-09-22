@@ -98,28 +98,28 @@ $advanced_tablet_switcher      = !empty($attributes['advancedHeadingTabletSwitch
 $advanced_mobile_switcher      = !empty($attributes['advancedHeadingMobileSwitcher']);
 $heading_before_after_switcher = !empty($attributes['headingBeforeAfterSwitcher']);
 
-$dynamicEnabled                = !empty($attributes['dynamicEnabled']);
-$dynamicSource                 = fb_norm_str(isset($attributes['dynamicSource']) ? $attributes['dynamicSource'] : 'current_post');
-$dynamicPostId                 = fb_norm_str(isset($attributes['dynamicPostId']) ? $attributes['dynamicPostId'] : 0);
-$dynamicPostType               = fb_norm_str(isset($attributes['dynamicPostType']) ? $attributes['dynamicPostType'] : '');
-$dynamicPostLabel              = fb_norm_str(isset($attributes['dynamicPostLabel']) ? $attributes['dynamicPostLabel'] : '');
-$dynamicField                  = fb_norm_str(isset($attributes['dynamicField']) ? $attributes['dynamicField'] : 'post_title');
-$dynamicEnableLink             = !empty($attributes['dynamicEnableLink']);
+$dynamicTextEnabled            = !empty($attributes['dynamicTextEnabled']);
+$dynamicTextSource             = fb_norm_str(isset($attributes['dynamicTextSource']) ? $attributes['dynamicTextSource'] : 'current_post');
+$dynamicTextPostId             = fb_norm_str(isset($attributes['dynamicTextPostId']) ? $attributes['dynamicTextPostId'] : 0);
+$dynamicTextPostType           = fb_norm_str(isset($attributes['dynamicTextPostType']) ? $attributes['dynamicTextPostType'] : '');
+$dynamicTextPostLabel          = fb_norm_str(isset($attributes['dynamicTextPostLabel']) ? $attributes['dynamicTextPostLabel'] : '');
+$dynamicTextField              = fb_norm_str(isset($attributes['dynamicTextField']) ? $attributes['dynamicTextField'] : 'post_title');
 $dynamicFeaturedImageField     = fb_norm_str(isset($attributes['dynamicFeaturedImageField']) ? $attributes['dynamicFeaturedImageField'] : 'title');
 
-$dynamicDateType               = fb_norm_str(isset($attributes['dynamicDateType']) ? $attributes['dynamicDateType'] : '');
-$dynamicDateFormat             = fb_norm_str(isset($attributes['dynamicDateFormat']) ? $attributes['dynamicDateFormat'] : '');
+$dynamicTextDateType           = fb_norm_str(isset($attributes['dynamicTextDateType']) ? $attributes['dynamicTextDateType'] : '');
+$dynamicTextDateFormat         = fb_norm_str(isset($attributes['dynamicTextDateFormat']) ? $attributes['dynamicTextDateFormat'] : '');
 
-$dynamicTimeType               = fb_norm_str(isset($attributes['dynamicTimeType']) ? $attributes['dynamicTimeType'] : '');
-$dynamicTimeFormat             = fb_norm_str(isset($attributes['dynamicTimeFormat']) ? $attributes['dynamicTimeFormat'] : '');
+$dynamicTextTimeType           = fb_norm_str(isset($attributes['dynamicTextTimeType']) ? $attributes['dynamicTextTimeType'] : '');
+$dynamicTextTimeFormat         = fb_norm_str(isset($attributes['dynamicTextTimeFormat']) ? $attributes['dynamicTextTimeFormat'] : '');
 
-$dynamicCommentsZeroText       = fb_norm_str(isset($attributes['dynamicCommentsZeroText']) ? $attributes['dynamicCommentsZeroText'] : '');
-$dynamicCommentsOneText        = fb_norm_str(isset($attributes['dynamicCommentsOneText']) ? $attributes['dynamicCommentsOneText'] : '');
-$dynamicCommentsManyText       = fb_norm_str(isset($attributes['dynamicCommentsManyText']) ? $attributes['dynamicCommentsManyText'] : '');
+$dynamicTextCommentsZeroText   = fb_norm_str(isset($attributes['dynamicTextCommentsZeroText']) ? $attributes['dynamicTextCommentsZeroText'] : '');
+$dynamicTextCommentsOneText    = fb_norm_str(isset($attributes['dynamicTextCommentsOneText']) ? $attributes['dynamicTextCommentsOneText'] : '');
+$dynamicTextCommentsManyText   = fb_norm_str(isset($attributes['dynamicTextCommentsManyText']) ? $attributes['dynamicTextCommentsManyText'] : '');
 
-$dynamicTermsTaxonomy          = fb_norm_str(isset($attributes['dynamicTermsTaxonomy']) ? $attributes['dynamicTermsTaxonomy'] : 'category');
-$dynamicTermsSeparator         = fb_norm_str(isset($attributes['dynamicTermsSeparator']) ? $attributes['dynamicTermsSeparator'] : '');
+$dynamicTextTermsTaxonomy      = fb_norm_str(isset($attributes['dynamicTextTermsTaxonomy']) ? $attributes['dynamicTextTermsTaxonomy'] : 'category');
+$dynamicTextTermsSeparator     = fb_norm_str(isset($attributes['dynamicTextTermsSeparator']) ? $attributes['dynamicTextTermsSeparator'] : '');
 
+$dynamicEnableLink             = !empty($attributes['dynamicEnableLink']);
 $dynamicLinkSource             = fb_norm_str(isset($attributes['dynamicLinkSource']) ? $attributes['dynamicLinkSource'] : 'post_permalink');
 
 // -------- DYNAMIC: compute $dynamic_value and $dynamic_permalink ----------
@@ -127,25 +127,25 @@ $dynamic_value     = '';
 $dynamic_permalink = '';
 $dynamic_link_url = '';
 
-$is_site_field    = in_array( $dynamicSource, ['site_title','site_tagline'], true );
-$is_archive_field = in_array( $dynamicSource, ['archive_title','archive_description'], true );
-$is_post_based    = in_array( $dynamicSource, ['current_post','post_type'], true );
+$is_site_field    = in_array( $dynamicTextSource, ['site_title','site_tagline'], true );
+$is_archive_field = in_array( $dynamicTextSource, ['archive_title','archive_description'], true );
+$is_post_based    = in_array( $dynamicTextSource, ['current_post','post_type'], true );
 
-$target_post_id   = ($dynamicSource === 'post_type' && $dynamicPostId) ? (int) $dynamicPostId : get_the_ID();
-$target_post_type = ($dynamicSource === 'post_type' && $dynamicPostType) ? $dynamicPostType : get_post_type( $target_post_id );
+$target_post_id   = ($dynamicTextSource === 'post_type' && $dynamicTextPostId) ? (int) $dynamicTextPostId : get_the_ID();
+$target_post_type = ($dynamicTextSource === 'post_type' && $dynamicTextPostType) ? $dynamicTextPostType : get_post_type( $target_post_id );
 
 // Only compute if enabled
-if ( $dynamicEnabled ) {
+if ( $dynamicTextEnabled ) {
 
 	if ( $is_site_field ) {
-		if ( $dynamicSource === 'site_title' ) {
+		if ( $dynamicTextSource === 'site_title' ) {
 			$dynamic_value = fb_get_plain_text( get_bloginfo( 'name' ) ?: __( 'No Content', 'frontis-blocks' ) );
-		} elseif ( $dynamicSource === 'site_tagline' ) {
+		} elseif ( $dynamicTextSource === 'site_tagline' ) {
 			$dynamic_value = fb_get_plain_text( get_bloginfo( 'description' ) ?: __( 'No Content', 'frontis-blocks' ) );
 		}
 	}
 	elseif ( $is_archive_field ) {
-		if ( $dynamicSource === 'archive_title' ) {
+		if ( $dynamicTextSource === 'archive_title' ) {
 			$dynamic_value = fb_get_plain_text( get_the_archive_title() ?: __( 'No Content', 'frontis-blocks' ) );
 		} else {
 			$dynamic_value = fb_get_plain_text( get_the_archive_description() ?: __( 'No Content', 'frontis-blocks' ) );
@@ -159,7 +159,7 @@ if ( $dynamicEnabled ) {
 			$dynamic_permalink = get_permalink( $post );
 		}
 
-		switch ( $dynamicField ) {
+		switch ( $dynamicTextField ) {
 			case 'post_title':
 				$dynamic_value = fb_get_plain_text( $post ? get_the_title( $post ) : '' );
 				break;
@@ -200,15 +200,15 @@ if ( $dynamicEnabled ) {
 				break;
 
 			case 'post_date': {
-				$raw = ($dynamicDateType === 'modified') ? get_post_modified_time( 'U', true, $post ) : get_post_time( 'U', true, $post );
+				$raw = ($dynamicTextDateType === 'modified') ? get_post_modified_time( 'U', true, $post ) : get_post_time( 'U', true, $post );
 				if ( ! $raw ) { $dynamic_value = __( 'No Content', 'frontis-blocks' ); break; }
 
-				switch ( $dynamicDateFormat ) {
+				switch ( $dynamicTextDateFormat ) {
 					case 'jS F Y':
 					case 'Y-m-d':
 					case 'm/d/Y':
 					case 'd/m/Y':
-						$dynamic_value = date_i18n( $dynamicDateFormat, (int) $raw );
+						$dynamic_value = date_i18n( $dynamicTextDateFormat, (int) $raw );
 						break;
 					case 'human':
 						$dynamic_value = fb_humanize_date( (int) $raw );
@@ -222,20 +222,20 @@ if ( $dynamicEnabled ) {
 			}
 
 			case 'post_time': {
-				$raw = ($dynamicTimeType === 'modified') ? get_post_modified_time( 'U', true, $post ) : get_post_time( 'U', true, $post );
+				$raw = ($dynamicTextTimeType === 'modified') ? get_post_modified_time( 'U', true, $post ) : get_post_time( 'U', true, $post );
 				if ( ! $raw ) { $dynamic_value = __( 'No Content', 'frontis-blocks' ); break; }
 
-				$fmt = $dynamicTimeFormat && $dynamicTimeFormat !== 'default' ? $dynamicTimeFormat : fb_get_site_time_format();
+				$fmt = $dynamicTextTimeFormat && $dynamicTextTimeFormat !== 'default' ? $dynamicTextTimeFormat : fb_get_site_time_format();
 				$dynamic_value = date_i18n( $fmt, (int) $raw );
 				break;
 			}
 
 			case 'post_terms': {
-				$tax = $dynamicTermsTaxonomy ?: '';
+				$tax = $dynamicTextTermsTaxonomy ?: '';
 				if ( ! $tax ) { $dynamic_value = __( 'No Content', 'frontis-blocks' ); break; }
 				$terms = get_the_terms( $post, $tax );
 				if ( is_wp_error( $terms ) || empty( $terms ) ) { $dynamic_value = __( 'No Content', 'frontis-blocks' ); break; }
-				$sep = $dynamicTermsSeparator !== '' ? $dynamicTermsSeparator : ', ';
+				$sep = $dynamicTextTermsSeparator !== '' ? $dynamicTextTermsSeparator : ', ';
 				$dynamic_value = implode( $sep, wp_list_pluck( $terms, 'name' ) );
 				break;
 			}
@@ -248,9 +248,9 @@ if ( $dynamicEnabled ) {
                 $count = ($post instanceof WP_Post) ? get_comments_number( $post ) : 0;
                 $count = is_numeric( $count ) ? (int) $count : 0;
             
-                $zeroTxt = trim( $dynamicCommentsZeroText ?: __( 'No Responses', 'frontis-blocks' ) );
-                $oneTxt  = trim( $dynamicCommentsOneText  ?: __( 'One Response',  'frontis-blocks' ) );
-                $manyTxt = trim( $dynamicCommentsManyText ?: __( 'Responses {num}', 'frontis-blocks' ) );
+                $zeroTxt = trim( $dynamicTextCommentsZeroText ?: __( 'No Responses', 'frontis-blocks' ) );
+                $oneTxt  = trim( $dynamicTextCommentsOneText  ?: __( 'One Response',  'frontis-blocks' ) );
+                $manyTxt = trim( $dynamicTextCommentsManyText ?: __( 'Responses {num}', 'frontis-blocks' ) );
             
                 if ( $count === 0 ) {
                     $dynamic_value = $zeroTxt;
@@ -278,7 +278,7 @@ if ( $dynamicEnabled ) {
                 $author_id = $post ? (int) $post->post_author : 0;
                 if ( ! $author_id ) { $dynamic_value = __( 'No Content', 'frontis-blocks' ); break; }
             
-                switch ( $dynamicField ) {
+                switch ( $dynamicTextField ) {
                     case 'author_name': {
                         $val = fb_get_plain_text( get_the_author_meta( 'display_name', $author_id ) );
                         $dynamic_value = $val !== '' ? $val : __( 'No Content', 'frontis-blocks' );
@@ -332,7 +332,7 @@ if ( $dynamicEnabled ) {
 }
 
 // Only compute link when dynamic is enabled & link toggle is on
-if ( $dynamicEnabled && $dynamicEnableLink ) {
+if ( $dynamicTextEnabled && $dynamicEnableLink ) {
 
     switch ( $dynamicLinkSource ) {
         case 'post_permalink':
@@ -373,7 +373,7 @@ if ( $dynamicEnabled && $dynamicEnableLink ) {
 }
 
 // Final text that will appear in heading (only heading is dynamic like in Edit.js)
-$dynamicDisplayValue = $dynamicEnabled ? $dynamic_value : $heading_text;
+$dynamicDisplayValue = $dynamicTextEnabled ? $dynamic_value : $heading_text;
 
 // ---------- classes (match save.js) ----------
 $responsive_classes = [];
@@ -443,7 +443,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 
 		<div class="fb-advanced-heading-wrapper">
 			<<?php echo esc_attr( $heading_tag ); ?> class="fb-advanced-heading<?php echo $active_line_switcher ? ' active-line' : ''; ?>">
-				<?php if ( $dynamicEnabled && $dynamicEnableLink && $dynamic_link_url ) : ?>
+				<?php if ( $dynamicTextEnabled && $dynamicEnableLink && $dynamic_link_url ) : ?>
 					<a class="fb-dynamic-link" href="<?php echo esc_url( $dynamic_link_url ); ?>">
 						<?php echo wp_kses_post( $dynamicDisplayValue ); ?>
 					</a>
