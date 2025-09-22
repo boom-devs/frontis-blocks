@@ -15,7 +15,7 @@ import {
 /**
  * Internal depencencies
  */
-import { BORDER_STYLES, OVERFLOW_OP } from "./constants/constants";
+import { BORDER_STYLES, OVERFLOW_OP } from '@Constants/fbConstants';
 import { useEffect, useMemo } from "@wordpress/element";
 import FB_Spacing from "@Components/spacing";
 import FB_TypographyControl from "@Components/typography-control";
