@@ -292,7 +292,6 @@ if ( $lazy_load_switcher ) {
 
 if ( $final_srcset ) {
     if ( $smart_lazy_load_switcher && $smart_lazy_load_image_url ) {
-        // For smart lazy: real srcset stays in data-srcset (like save.js)
         $img_attributes['data-srcset'] = esc_attr( $final_srcset );
     } else {
         $img_attributes['srcset'] = esc_attr( $final_srcset );
