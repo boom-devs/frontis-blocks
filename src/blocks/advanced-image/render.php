@@ -74,9 +74,17 @@ $dynamic_image_fallback_id     = fb_norm_str( $attributes['dynamicImageFallbackI
 $dynamic_enable_link           = !empty( $attributes['dynamicEnableLink'] );
 $dynamic_link_source           = fb_norm_str( $attributes['dynamicLinkSource'] ?? 'post_permalink' );
 
+$loop_post_id   = isset( $block->context['postId'] ) ? (int) $block->context['postId'] : 0;
+$loop_post_type = isset( $block->context['postType'] ) ? (string) $block->context['postType'] : '';
+
 // Resolve target post/type (for current_post/post_type)
-$target_post_id   = ($dynamic_image_source === 'post_type' && $dynamic_image_post_id) ? (int)$dynamic_image_post_id : get_the_ID();
-$target_post_type = ($dynamic_image_source === 'post_type' && $dynamic_image_post_type) ? $dynamic_image_post_type : get_post_type( $target_post_id );
+$target_post_id   = ($dynamic_image_source === 'post_type' && $dynamic_image_post_id)
+    ? (int) $dynamic_image_post_id
+    : ( $loop_post_id ?: get_the_ID() );
+
+$target_post_type = ($dynamic_image_source === 'post_type' && $dynamic_image_post_type)
+    ? $dynamic_image_post_type
+    : ( $loop_post_type ?: get_post_type( $target_post_id ) );
 
 // classes (match save.js)
 $responsive_classes = [];
