@@ -2076,25 +2076,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                                 )}
                                 </>
                             )}
-
-                            <ToggleControl
-                                label={__("Enable Link", "frontis-blocks")}
-                                checked={dynamicTextEnableLink}
-                                onChange={(value) => setAttributes({ dynamicTextEnableLink: value })}
-                            />
-
-                            {dynamicTextEnableLink && (
-                                <BaseControl
-                                    label={__("Link Source", "frontis-blocks")}
-                                >
-                                    <Select2 
-                                        options={DYNAMIC_LINK_SOURCE_OPTIONS}
-                                        value={selectedLinkSource}
-                                        onChange={handleLinkSourceChange}
-                                        className="fb-select2-control"
-                                    />
-                                </BaseControl>
-                            )}
                         </>
                     )}
 
@@ -2171,12 +2152,30 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 						</BaseControl>
 					</div>
-					<FB_UrlControl
-						url={buttonUrl}
-						onChangeUrl={(value) => setAttributes({ buttonUrl: value })}
-						openInNewTab={buttonTargetUrl}
-						onChangeOpenInNewTab={(value) => setAttributes({ buttonTargetUrl: value })}
+
+					<ToggleControl
+						label={__("Enable Dynamic Link", "frontis-blocks")} 
+						checked={dynamicTextEnableLink}
+						onChange={(value) => setAttributes({ dynamicTextEnableLink: value })}
 					/>
+
+					{dynamicTextEnableLink ? (
+						<BaseControl label={__("Link Source", "frontis-blocks")}>
+							<Select2 
+							options={DYNAMIC_LINK_SOURCE_OPTIONS}
+							value={selectedLinkSource}
+							onChange={handleLinkSourceChange}
+							className="fb-select2-control"
+							/>
+						</BaseControl>
+						) : (
+						<FB_UrlControl
+							url={buttonUrl}
+							onChangeUrl={(value) => setAttributes({ buttonUrl: value })}
+							openInNewTab={buttonTargetUrl}
+							onChangeOpenInNewTab={(value) => setAttributes({ buttonTargetUrl: value })}
+						/>
+					)}
 				</PanelBody>
 			</div>
 		</>
