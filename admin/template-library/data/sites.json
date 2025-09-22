@@ -442,7 +442,7 @@
                     }
                 }
             },
-            "customTypographies": {
+            "custom_typographies": {
                 "fb_customtypo_sst4o": {
                     "name": "Team Name",
                     "fontFamily": "Onest",
@@ -710,7 +710,7 @@
                     }
                 }
             },
-            "globalTypographies": {
+            "global_typographies": {
                 "body": {
                     "fontFamily": {
                         "variable": "--fb-global-body--font-family",
@@ -1744,7 +1744,7 @@
                     }
                 }
             },
-            "fontFamilies": {
+            "font_families": {
                 "heading": {
                     "all": "Onest"
                 }
@@ -1873,7 +1873,7 @@
                     "slug": "custom-neutral-400"
                 }
             ],
-            "gradientColors": [],
+            "color_gradients": [],
             "custom_gradientColors": [],
             "categories": [
                 "Landing",

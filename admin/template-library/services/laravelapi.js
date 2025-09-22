@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://6a53d3fee448.ngrok-free.app/api/',
+    baseUrl: 'https://898a8c457e94.ngrok-free.app/api/',
     prepareHeaders: (headers) => {
       headers.set(
         'Authorization',

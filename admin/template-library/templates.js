@@ -22,6 +22,7 @@ const PatternLibraryButton = () => {
     const [showPatternButton, setShowPatternButton] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [tagLoading, setTagLoading] = useState(false);
     const [resetCat, setResetCat] = useState(true);
     const [isLogedIn, setIsLogedIn] = useState(false);
     const [cardListType, setCardListType] = useState('list');
@@ -308,6 +309,8 @@ const PatternLibraryButton = () => {
     };
 
     const fetchTagData = async (tab = activeTab, page = currentPage[activeTab], tag = activeTagTab[activeTab], search = searchText, category = activeCategory[activeTab], isPro = isProTemplate, savedTemplate = savedTemplateType) => {
+        setTagLoading(true);
+
         try {
             let response;
             if (tab === 'patterns') {
@@ -353,7 +356,7 @@ const PatternLibraryButton = () => {
         } catch (err) {
             console.error(`Error fetching ${activeTab}:`, err);
         } finally {
-            setLoading(false);
+            setTagLoading(false);
         }
     };
       
@@ -447,8 +450,6 @@ const PatternLibraryButton = () => {
         }
     }
 
-    console.log('Tag Data:', tagData);
-
     const TagTabsOptions = (() => {
         if (!tagData[activeTab]) return [];
         const currentItems = tagData[activeTab].items || [];
@@ -530,6 +531,7 @@ const PatternLibraryButton = () => {
                                         alreadySaved={alreadySaved}
                                         loading={isLoading}
                                         setLoading={loading}
+                                        tagLoading={tagLoading}
                                         setIsLogedIn={setIsLogedIn}
                                         // setActiveCategory={setActiveCategory}
                                         onSaveLibrary={handleSaveLibrary}
