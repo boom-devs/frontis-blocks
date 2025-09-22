@@ -109,7 +109,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicImageEnabled &&
 		(normSource === "current_post" || normSource === "post_type");
 
-	// --- NEW: detect switching & remember last-good image ---
+	// detect switching & remember last-good image
 	const [isSwitching, setIsSwitching] = useState(false);
 	const lastGoodRef = useRef({});
 	const lastShownRef = useRef({ key: null, data: null });
@@ -131,6 +131,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		[isPostBasedImage, targetPostType, targetPostId]
 	);
 
+	// ready
 	const isReady = useSelect(
 		(select) => {
 			if (!isPostBasedImage || !targetPostType || !targetPostId) return true;
@@ -235,10 +236,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const dynamicImg = useMemo(() => {
 		if (!dynamicImageEnabled) return null;
 
-		// --- important: switching/loading will not show fallback; keep the previous image ---
 		if ((isPostBasedImage && (!isReady || (normField === 'avatar_profile' && !authorReady))) || isSwitching) {
 			const cached = lastGoodRef.current[targetKey];
-			// reuse lastShown only if it matches current field (part of targetKey)
 			const display =
 			  cached ||
 			  (lastShownRef.current.key &&
@@ -265,7 +264,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		// current_post / post_type
 		if (isPostBasedImage) {
 			if (!postRecord) {
-				// prevent flicker: use cache for this key or last shown for same field
 				return lastGoodRef.current[targetKey] ||
 					   (lastShownRef.current.key &&
 						lastShownRef.current.key.split(':')[2] === normField
@@ -275,7 +273,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 			if (normField === "featured_image") {
 				if (!featuredAttachment) {
-					// really no image—then only fallback
 					if (dynamicImageFallbackUrl) {
 					  return { url: dynamicImageFallbackUrl, alt: dynamicImageFallbackAlt || "" };
 					}
@@ -338,7 +335,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			alt: dynamicImg.alt || "",
 			srcSet: dynamicImg.srcSet || undefined,
 		  };
-		  // store with key so we can check the same field later
+		  
 		  lastShownRef.current = { key: targetKey, data: lastGoodRef.current[targetKey] };
 		}
 	  }, [dynamicImg?.url, targetKey]);

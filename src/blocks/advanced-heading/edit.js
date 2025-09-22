@@ -224,7 +224,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const parseWpDate = (raw, useGmt = false) => {
 		if (!raw) return null;
 		const s = String(raw).trim();
-		// যদি শেষেতে Z বা timezone offset না থাকে, আর useGmt=true হয়, তাহলে Z যোগ করো
+		// if the last character is Z or timezone offset, add Z
 		const hasTZ = /([Zz]|[+\-]\d{2}:?\d{2})$/.test(s);
 		const iso  = useGmt && !hasTZ ? `${s}Z` : s;
 		const d = new Date(iso);
@@ -372,7 +372,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	
 		case 'post_date': {
 			const isModified = dynamicDateType === 'modified';
-			// prefer *_gmt; না থাকলে local ফিল্ড
+			// prefer *_gmt; if not, use local field
 			const rawGMT = isModified ? postRecord?.modified_gmt : postRecord?.date_gmt;
 			const rawLOC = isModified ? postRecord?.modified     : postRecord?.date;
 			const d = parseWpDate(rawGMT ?? rawLOC, Boolean(rawGMT));
