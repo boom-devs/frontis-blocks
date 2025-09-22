@@ -13,6 +13,8 @@
         "customClassName": false
     },
 	"textdomain": "frontis-blocks",
+	"usesContext": ["postId", "postType"],
 	"editorScript": "file:./index.js",
-    "editorStyle": "file:./index.css"
+    "editorStyle": "file:./index.css",
+	"render": "file:./render.php"
 }
