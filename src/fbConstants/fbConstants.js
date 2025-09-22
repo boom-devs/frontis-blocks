@@ -23,6 +23,11 @@ export const OVERFLOW_OP = [
 	{ label: __('Clip', 'frontis-blocks'), value: 'clip' },
 ];
 
+export const LINK_TARGET_OPTIONS = [
+    { label: __("Same tab", "frontis-blocks"), value: "_self" },
+    { label: __("New tab", "frontis-blocks"), value: "_blank" },
+];
+
 export const NAVIGATION_LAYOUT = [
 	{ label: __('Horizontal', 'frontis-blocks'), value: 'is-horizontal' },
 	{ label: __('Vertical', 'frontis-blocks'), value: 'is-vertical' },
