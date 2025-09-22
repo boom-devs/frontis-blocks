@@ -17,7 +17,8 @@
 	},
 	"providesContext": {
 		"frontisBlocks:isNewsTicker": "isNewsTicker",
-		"frontisBlocks:headingTag": "tickerHeadingTag"
+		"frontisBlocks:headingTag": "tickerHeadingTag",
+		"frontisBlocks:arrowsUniqueId": "arrowsUniqueId"
 	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",

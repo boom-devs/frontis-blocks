@@ -34,14 +34,14 @@ import {
 } from "@wordpress/components";
 
 import {
-	ICON_VERTICAL_ALIGN,
 	TEXT_ALIGN,
 	BORDER_STYLES,
 	OVERFLOW_OP,
-	LIST_DIRECTION_ICON,
-	LIST_WRAP_ICON,
 	CONTENT_TYPE,
-} from "./constants/constants";
+	TIMER_POSITION,
+	NAVIGATION_POSITION,
+	LABEL_POSITION
+} from "../../fbConstants/fbConstants";
 
 import "./editor.scss";
 
@@ -50,102 +50,100 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		blockID,
 		// deviceType,
 		blockStyle,
-		FeatureAlignment,
-		FeatureIconAlignment,
-		FeatureTitleFontFamily,
-		FeatureDescFontFamily,
-
+		newsTickerIconAlignment,
+		showArrows,
+		showTime,
 		/** Global Style */
-		FeatureGlobalZIndex,
-		featuresListOverflow,
-		FeatureGlobalPaddingUnits,
-		FeatureGlobalPaddingDesktop,
-		FeatureGlobalPaddingTablet,
-		FeatureGlobalPaddingMobile,
-		FeatureGlobalPaddingLink,
+		newsTickerGlobalZIndex,
+		newsTickerOverflow,
+		newsTickerGlobalPaddingUnits,
+		newsTickerGlobalPaddingDesktop,
+		newsTickerGlobalPaddingTablet,
+		newsTickerGlobalPaddingMobile,
+		newsTickerGlobalPaddingLink,
 
-		FeatureGlobalMarginUnits,
-		FeatureGlobalMarginDesktop,
-		FeatureGlobalMarginTablet,
-		FeatureGlobalMarginMobile,
-		FeatureGlobalMarginLink,
+		newsTickerGlobalMarginUnits,
+		newsTickerGlobalMarginDesktop,
+		newsTickerGlobalMarginTablet,
+		newsTickerGlobalMarginMobile,
+		newsTickerGlobalMarginLink,
 
 		/** Start Global Background Color */
-		FeatureGlobalBgColorSwitcher,
+		newsTickerGlobalBgColorSwitcher,
 
-		FeatureGlobalNormalBackgroundType,
-		FeatureGlobalNormalClassicColor,
-		FeatureGlobalNormalGradientColor,
-		FeatureGlobalNormalCustomGradientSwitcher,
-		FeatureGlobalNormalCustomGradientInputValue,
+		newsTickerGlobalNormalBackgroundType,
+		newsTickerGlobalNormalClassicColor,
+		newsTickerGlobalNormalGradientColor,
+		newsTickerGlobalNormalCustomGradientSwitcher,
+		newsTickerGlobalNormalCustomGradientInputValue,
 
-		FeatureGlobalNormalBackgroundImageUrl,
-		FeatureGlobalNormalBackgroundImageAlt,
-		FeatureGlobalNormalBackgroundImageID,
-		FeatureGlobalNormalBackgroundImagePosition,
-		FeatureGlobalNormalBackgroundImageAttachment,
-		FeatureGlobalNormalBackgroundImageRepeat,
-		FeatureGlobalNormalBackgroundImageSize,
+		newsTickerGlobalNormalBackgroundImageUrl,
+		newsTickerGlobalNormalBackgroundImageAlt,
+		newsTickerGlobalNormalBackgroundImageID,
+		newsTickerGlobalNormalBackgroundImagePosition,
+		newsTickerGlobalNormalBackgroundImageAttachment,
+		newsTickerGlobalNormalBackgroundImageRepeat,
+		newsTickerGlobalNormalBackgroundImageSize,
 
-		FeatureGlobalHoverBackgroundType,
-		FeatureGlobalHoverClassicColor,
-		FeatureGlobalHoverGradientColor,
-		FeatureGlobalHoverCustomGradientSwitcher,
-		FeatureGlobalHoverCustomGradientInputValue,
+		newsTickerGlobalHoverBackgroundType,
+		newsTickerGlobalHoverClassicColor,
+		newsTickerGlobalHoverGradientColor,
+		newsTickerGlobalHoverCustomGradientSwitcher,
+		newsTickerGlobalHoverCustomGradientInputValue,
 
-		FeatureGlobalHoverBackgroundImageUrl,
-		FeatureGlobalHoverBackgroundImageAlt,
-		FeatureGlobalHoverBackgroundImageID,
-		FeatureGlobalHoverBackgroundImagePosition,
-		FeatureGlobalHoverBackgroundImageAttachment,
-		FeatureGlobalHoverBackgroundImageRepeat,
-		FeatureGlobalHoverBackgroundImageSize,
+		newsTickerGlobalHoverBackgroundImageUrl,
+		newsTickerGlobalHoverBackgroundImageAlt,
+		newsTickerGlobalHoverBackgroundImageID,
+		newsTickerGlobalHoverBackgroundImagePosition,
+		newsTickerGlobalHoverBackgroundImageAttachment,
+		newsTickerGlobalHoverBackgroundImageRepeat,
+		newsTickerGlobalHoverBackgroundImageSize,
 		/** End Global Background Color */
 
-		FeatureGlobalBorder,
-		FeatureGlobalBorderColorSwitcher,
-		FeatureGlobalBorderColor,
-		FeatureGlobalBorderHoverColor,
+		newsTickerGlobalBorder,
+		newsTickerGlobalBorderColorSwitcher,
+		newsTickerGlobalBorderColor,
+		newsTickerGlobalBorderHoverColor,
 
-		FeatureGlobalBorderUnits,
-		FeatureGlobalBorderDesktop,
-		FeatureGlobalBorderTablet,
-		FeatureGlobalBorderMobile,
-		FeatureGlobalBorderLink,
+		newsTickerGlobalBorderUnits,
+		newsTickerGlobalBorderDesktop,
+		newsTickerGlobalBorderTablet,
+		newsTickerGlobalBorderMobile,
+		newsTickerGlobalBorderLink,
 
-		FeatureGlobalBorderRadiusUnits,
-		FeatureGlobalBorderRadiusDesktop,
-		FeatureGlobalBorderRadiusTablet,
-		FeatureGlobalBorderRadiusMobile,
-		FeatureGlobalBorderRadiusLink,
+		newsTickerGlobalBorderRadiusUnits,
+		newsTickerGlobalBorderRadiusDesktop,
+		newsTickerGlobalBorderRadiusTablet,
+		newsTickerGlobalBorderRadiusMobile,
+		newsTickerGlobalBorderRadiusLink,
 
-		FeatureGlobalBoxShadowSwitcher,
-		FeatureGlobalBoxShadowValues,
-		FeatureGlobalBoxShadowCssValue,
-		FeatureGlobalBoxShadowHoverValues,
-		FeatureGlobalBoxShadowHoverCssValue,
+		newsTickerGlobalBoxShadowSwitcher,
+		newsTickerGlobalBoxShadowValues,
+		newsTickerGlobalBoxShadowCssValue,
+		newsTickerGlobalBoxShadowHoverValues,
+		newsTickerGlobalBoxShadowHoverCssValue,
 		/** End Global Style */
 
-		featuresListDesktopSwitcher,
-		featuresListTabletSwitcher,
-		featuresListMobileSwitcher,
+		newsTickerDesktopSwitcher,
+		newsTickerTabletSwitcher,
+		newsTickerMobileSwitcher,
 
-		featuresListGlobalWraperCustomCSS,
-		featuresListGlobalWraperID,
-		featuresListGlobalWraperClass,
+		newsTickerGlobalWraperCustomCSS,
+		newsTickerGlobalWraperID,
+		newsTickerGlobalWraperClass,
 
 		// Position
-		featuresListPositionType,
-		featuresListHZOrientationType,
-		featuresListVROrientationType,
-		featuresListHZLeftOffset,
-		featuresListHZLeftOffsetUnits,
-		featuresListHZRightOffset,
-		featuresListHZRightOffsetUnits,
-		featuresListVRTopOffset,
-		featuresListVRTopOffsetUnits,
-		featuresListVRBottomOffset,
-		featuresListVRBottomOffsetUnits,
+		newsTickerPositionType,
+		newsTickerHZOrientationType,
+		newsTickerVROrientationType,
+		newsTickerHZLeftOffset,
+		newsTickerHZLeftOffsetUnits,
+		newsTickerHZRightOffset,
+		newsTickerHZRightOffsetUnits,
+		newsTickerVRTopOffset,
+		newsTickerVRTopOffsetUnits,
+		newsTickerVRBottomOffset,
+		newsTickerVRBottomOffsetUnits,
 		contentType,
 		tickerLabel,
 		tickerLabelIcon,
@@ -289,8 +287,97 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         tickerLabelLetterSpacingUnits,
         tickerLabelLineHeight,
         tickerLabelLineHeightUnits,
+		// ticker timer
+		timerPosition,
+		tickerTimerTypographyData,
+		tickerTimerTypoSwitcher,
+		tickerTimerTypoType,
+		tickerTimerTypoOption,
+		tickerTimerFontFamily,
+		tickerTimerFontSize,
+		tickerTimerFontSizeUnits,
+		tickerTimerFontWeight,
+		tickerTimerFontStyle,
+		tickerTimerTextTransform,
+		tickerTimerTextDecoration,
+		tickerTimerLetterSpacing,
+		tickerTimerLetterSpacingUnits,
+		tickerTimerLineHeight,
+		tickerTimerLineHeightUnits,
+		// Padding
+		tickerTimerPaddingUnits,
+		tickerTimerPaddingDesktop,
+		tickerTimerPaddingTablet,
+		tickerTimerPaddingMobile,
+		tickerTimerPaddingLink,
+	
+		// Margin
+		tickerTimerMarginUnits,
+		tickerTimerMarginDesktop,
+		tickerTimerMarginTablet,
+		tickerTimerMarginMobile,
+		tickerTimerMarginLink,
+	
+		// Border
+		tickerTimerBorder,
+		tickerTimerBorderColorSwitcher,
+		tickerTimerBorderColor,
+		tickerTimerBorderHoverColor,
+		tickerTimerBorderUnits,
+		tickerTimerBorderDesktop,
+		tickerTimerBorderTablet,
+		tickerTimerBorderMobile,
+		tickerTimerBorderLink,
+	
+		// Border Radius
+		tickerTimerBorderRadiusUnits,
+		tickerTimerBorderRadiusDesktop,
+		tickerTimerBorderRadiusTablet,
+		tickerTimerBorderRadiusMobile,
+		tickerTimerBorderRadiusLink,
+	
+		// Background
+		tickerTimerBgColorSwitcher,
+		tickerTimerNormalBackgroundType,
+		tickerTimerNormalClassicColor,
+		tickerTimerNormalGradientColor,
+		tickerTimerNormalCustomGradientSwitcher,
+		tickerTimerNormalCustomGradientInputValue,
+		tickerTimerNormalBackgroundImageUrl,
+		tickerTimerNormalBackgroundImageAlt,
+		tickerTimerNormalBackgroundImageID,
+		tickerTimerNormalBackgroundImagePosition,
+		tickerTimerNormalBackgroundImageAttachment,
+		tickerTimerNormalBackgroundImageRepeat,
+		tickerTimerNormalBackgroundImageSize,
+		tickerTimerHoverBackgroundType,
+		tickerTimerHoverClassicColor,
+		tickerTimerHoverGradientColor,
+		tickerTimerHoverCustomGradientSwitcher,
+		tickerTimerHoverCustomGradientInputValue,
+		tickerTimerHoverBackgroundImageUrl,
+		tickerTimerHoverBackgroundImageAlt,
+		tickerTimerHoverBackgroundImageID,
+		tickerTimerHoverBackgroundImagePosition,
+		tickerTimerHoverBackgroundImageAttachment,
+		tickerTimerHoverBackgroundImageRepeat,
+		tickerTimerHoverBackgroundImageSize,
+		tickerTimerColorSwitcher,
+		tickerTimerColor,
+		tickerTimerHoverColor,
+		newsTickerPresetStyle,
+		labelTextColorSwitcher,
+		labelTextColor,
+		labelTextHoverColor,
+		navigationPosition,
+		labelPosition,
+		navigationIconColorSwitcher,
+		navigationIconColor,
+		navigationIconHoverColor,
+		showAutoplayButton
 	} = attributes;
 
+	console.log(attributes);
 	const deviceType = useDeviceType();
 
 	useEffect(() => {
@@ -305,14 +392,214 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({ tickerLabelIcon: iconName });
 	};
 
+	const PRESETS = [
+		{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+		{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+		{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+		{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
+		{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
+	];
+	/** Start Preset Style **/
+	const changeNewsTickerPreset = (selectedPreset) => {
+		const presetConfigurations = {
+			"preset-1": {
+				labelContainerPaddingDesktop: {
+					top: "28",
+					bottom: "28",
+					left: "36",
+					right: "36",
+				},
+				labelContainerNormalBackgroundType: "classic",
+				labelContainerNormalClassicColor: '#399CFF',
+				labelContainerNormalCustomGradientInputValue: "",
+				labelContainerNormalCustomGradientSwitcher: false,
+				newsTickerGlobalBorder: "solid",
+				newsTickerGlobalBorderColor: "#399CFF",
+				newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
+				labelContainerBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+				newsTickerGlobalBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+				newsTickerGlobalPaddingDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+				labelIconColor: "#ffffff",
+				labelTextColor: "#ffffff",
+				showArrows: false,
+				labelIconSwitcher: false,
+				showTime: false,
+				labelPosition: "left",
+				navigationPosition: "right",
+			},
+			"preset-2": {
+				labelContainerPaddingDesktop: {
+					top: "28",
+					bottom: "28",
+					left: "36",
+					right: "36",
+				},
+				labelContainerNormalBackgroundType: "gradient",
+				labelContainerNormalClassicColor: '',
+				labelContainerNormalCustomGradientInputValue: "linear-gradient(270deg, #B9087B 0%, #F67C87 100%);",
+				labelContainerNormalCustomGradientSwitcher: true,
+				newsTickerGlobalBorder: "solid",
+				newsTickerGlobalBorderColor: "#B9087B",
+				newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
+				labelContainerBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+				newsTickerGlobalBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+				newsTickerGlobalPaddingDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+				tickerTimerBorderRadiusDesktop: {top: '50', right: '0', bottom: '0', left: '50'},
+				labelIconColor: "#ffffff",
+				labelTextColor: "#ffffff",
+				showArrows: true,
+				labelIconSwitcher: true,
+				showTime: false,
+				timerPosition: 'top-right',
+				labelPosition: "left",
+				navigationPosition: "right",
+				navigationIconColor: "#E95B68"
+			},
+			"preset-3": {
+				labelContainerPaddingDesktop: {
+					top: "18",
+					bottom: "18",
+					left: "24",
+					right: "24",
+				},
+				labelContainerNormalBackgroundType: "gradient",
+				labelContainerNormalClassicColor: "",
+				labelContainerNormalCustomGradientInputValue: "linear-gradient(103deg, rgba(248, 155, 46, 0.10) 0%, rgba(86, 165, 243, 0.10) 25%, rgba(189, 89, 255, 0.10) 49.5%, rgba(228, 50, 66, 0.10) 75%, rgba(223, 242, 127, 0.20) 100%);",
+				labelContainerNormalCustomGradientSwitcher: true,
+				newsTickerGlobalBorder: "solid",
+				newsTickerGlobalBorderColor: "#FFF4EC",
+				newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
+				tickerTimerNormalClassicColor: "",
+				tickerTimerNormalBackgroundType: "gradient",
+			    tickerTimerNormalCustomGradientInputValue: "linear-gradient(270deg, #B9087B 0%, #F67C87 100%);",
+				tickerTimerNormalCustomGradientSwitcher: true,
+				labelContainerBorderRadiusDesktop: {top: '50', right: '50', bottom: '50', left: '50'},
+				newsTickerGlobalBorderRadiusDesktop: {top: '50', right: '50', bottom: '50', left: '50'},
+				tickerTimerPaddingDesktop: {top: '4', right: '16', bottom: '4', left: '16'},
+				newsTickerGlobalPaddingDesktop: {top: '10', right: '10', bottom: '10', left: '10'},
+				tickerTimerColor: "#ffffff",
+				labelIconColor: "#0b0c0e",
+				labelTextColor: "#0b0c0e",
+				showArrows: false,
+				labelIconSwitcher: true,
+				showTime: true,
+				labelPosition: "left",
+				navigationPosition: "right",
+				timerPosition: 'top-right',
+			},
+			"preset-4": {
+				labelContainerPaddingDesktop: {
+					top: "18",
+					bottom: "18",
+					left: "24",
+					right: "24",
+				},
+				labelContainerNormalBackgroundType: "classic",
+				labelContainerNormalClassicColor: "#70BF73",
+				labelContainerNormalCustomGradientInputValue: "",
+				labelContainerNormalCustomGradientSwitcher: false,
+				newsTickerGlobalBorder: "solid",
+				newsTickerGlobalBorderColor: "#70BF73",
+				newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
+				tickerTimerNormalClassicColor: "",
+			    tickerTimerNormalCustomGradientInputValue: "linear-gradient(270deg, #B9087B 0%, #F67C87 100%);",
+				labelContainerBorderRadiusDesktop: {top: '50', right: '50', bottom: '50', left: '50'},
+				newsTickerGlobalBorderRadiusDesktop: {top: '50', right: '50', bottom: '50', left: '50'},
+				tickerTimerPaddingDesktop: {top: '4', right: '16', bottom: '4', left: '16'},
+				newsTickerGlobalPaddingDesktop: {top: '10', right: '10', bottom: '10', left: '10'},
+				tickerTimerColor: "#ffffff",
+				labelIconColor: "#ffffff",
+				labelTextColor: "#ffffff",
+				tickerTimerNormalCustomGradientSwitcher: true,
+				showArrows: true,
+				labelIconSwitcher: true,
+				showTime: false,
+				labelPosition: "right",
+				navigationPosition: "left",
+				navigationIconColor: "#C3C8D2"
+			},
+			"preset-5": {
+				labelContainerPaddingDesktop: {
+					top: "28",
+					bottom: "28",
+					left: "36",
+					right: "36",
+				},
+				labelContainerNormalBackgroundType: "gradient",
+				labelContainerNormalClassicColor: '',
+				labelContainerNormalCustomGradientInputValue: "linear-gradient(270deg, #F67C87 0%, #B9087B 100%);",
+				labelContainerNormalCustomGradientSwitcher: true,
+				newsTickerGlobalBorder: "solid",
+				newsTickerGlobalBorderColor: "#F67C87",
+				tickerTimerNormalClassicColor: "",
+				tickerTimerNormalBackgroundType: "gradient",
+			    tickerTimerNormalCustomGradientInputValue: "linear-gradient(270deg, #B9087B 0%, #F67C87 100%);",
+				tickerTimerNormalCustomGradientSwitcher: true,
+				newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
+				labelContainerBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+				newsTickerGlobalBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+				newsTickerGlobalPaddingDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+				tickerTimerBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+				labelIconColor: "#ffffff",
+				labelTextColor: "#ffffff",
+				showArrows: true,
+				labelIconSwitcher: true,
+				showTime: true,
+				timerPosition: 'bottom-left',
+				labelPosition: "left",
+				navigationPosition: "right",
+				navigationIconColor: "#0B0C0E"
+			},
+			"preset-6": {
+				labelContainerPaddingDesktop: {
+					top: "28",
+					bottom: "28",
+					left: "36",
+					right: "36",
+				},
+				labelContainerNormalBackgroundType: "gradient",
+				labelContainerNormalClassicColor: '',
+				labelContainerNormalCustomGradientInputValue: "linear-gradient(270deg, #B9087B 0%, #F67C87 100%);",
+				labelContainerNormalCustomGradientSwitcher: true,
+				newsTickerGlobalBorder: "solid",
+				newsTickerGlobalBorderColor: "#B9087B",
+				newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
+				labelContainerBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+				newsTickerGlobalBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+				newsTickerGlobalPaddingDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+				labelIconColor: "#ffffff",
+				labelTextColor: "#ffffff",
+				showArrows: true,
+				labelIconSwitcher: true,
+				showTime: false,
+				labelPosition: "left",
+				navigationPosition: "right",
+				navigationIconColor: "#E95B68"
+			},
+
+		};
+
+		const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+		if (selectedPresetConfig) {
+			setAttributes({
+				newsTickerPresetStyle: selectedPreset,
+				...selectedPresetConfig,
+			});
+		} else {
+			console.warn(`Info Box: Preset "${selectedPreset}" not found.`);
+		}
+	};
+	/** End Preset Style **/
+
 	/** Start Global padding */
 	const handleGlobalPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
-		if (FeatureGlobalPaddingLink) {
+		if (newsTickerGlobalPaddingLink) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
-						FeatureGlobalPaddingDesktop: {
+						newsTickerGlobalPaddingDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -322,7 +609,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 				case "Tablet":
 					setAttributes({
-						FeatureGlobalPaddingTablet: {
+						newsTickerGlobalPaddingTablet: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -332,7 +619,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 				case "Mobile":
 					setAttributes({
-						FeatureGlobalPaddingMobile: {
+						newsTickerGlobalPaddingMobile: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -347,24 +634,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
-						FeatureGlobalPaddingDesktop: {
-							...FeatureGlobalPaddingDesktop,
+						newsTickerGlobalPaddingDesktop: {
+							...newsTickerGlobalPaddingDesktop,
 							[position]: value,
 						},
 					});
 					break;
 				case "Tablet":
 					setAttributes({
-						FeatureGlobalPaddingTablet: {
-							...FeatureGlobalPaddingTablet,
+						newsTickerGlobalPaddingTablet: {
+							...newsTickerGlobalPaddingTablet,
 							[position]: value,
 						},
 					});
 					break;
 				case "Mobile":
 					setAttributes({
-						FeatureGlobalPaddingMobile: {
-							...FeatureGlobalPaddingMobile,
+						newsTickerGlobalPaddingMobile: {
+							...newsTickerGlobalPaddingMobile,
 							[position]: value,
 						},
 					});
@@ -376,30 +663,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	const handleGlobalPaddingCombineBtn = () => {
-		setAttributes({ FeatureGlobalPaddingLink: !FeatureGlobalPaddingLink });
+		setAttributes({ newsTickerGlobalPaddingLink: !newsTickerGlobalPaddingLink });
 	};
 
 	const handleGlobalPaddingUnitsHandler = (unit) => {
 		setAttributes({
-			FeatureGlobalPaddingUnits: {
-				...FeatureGlobalPaddingUnits,
+			newsTickerGlobalPaddingUnits: {
+				...newsTickerGlobalPaddingUnits,
 				[deviceType]: unit,
 			},
 		});
 	};
-	const globalDesktopPadding = `${FeatureGlobalPaddingDesktop.top}${FeatureGlobalPaddingUnits.Desktop} ${FeatureGlobalPaddingDesktop.right}${FeatureGlobalPaddingUnits.Desktop} ${FeatureGlobalPaddingDesktop.bottom}${FeatureGlobalPaddingUnits.Desktop} ${FeatureGlobalPaddingDesktop.left}${FeatureGlobalPaddingUnits.Desktop}`;
-	const globalTabletPadding = `${FeatureGlobalPaddingTablet.top}${FeatureGlobalPaddingUnits.Tablet} ${FeatureGlobalPaddingTablet.right}${FeatureGlobalPaddingUnits.Tablet} ${FeatureGlobalPaddingTablet.bottom}${FeatureGlobalPaddingUnits.Tablet} ${FeatureGlobalPaddingTablet.left}${FeatureGlobalPaddingUnits.Tablet}`;
-	const globalMobilePadding = `${FeatureGlobalPaddingMobile.top}${FeatureGlobalPaddingUnits.Mobile} ${FeatureGlobalPaddingMobile.right}${FeatureGlobalPaddingUnits.Mobile} ${FeatureGlobalPaddingMobile.bottom}${FeatureGlobalPaddingUnits.Mobile} ${FeatureGlobalPaddingMobile.left}${FeatureGlobalPaddingUnits.Mobile}`;
+	const globalDesktopPadding = `${newsTickerGlobalPaddingDesktop.top}${newsTickerGlobalPaddingUnits.Desktop} ${newsTickerGlobalPaddingDesktop.right}${newsTickerGlobalPaddingUnits.Desktop} ${newsTickerGlobalPaddingDesktop.bottom}${newsTickerGlobalPaddingUnits.Desktop} ${newsTickerGlobalPaddingDesktop.left}${newsTickerGlobalPaddingUnits.Desktop}`;
+	const globalTabletPadding = `${newsTickerGlobalPaddingTablet.top}${newsTickerGlobalPaddingUnits.Tablet} ${newsTickerGlobalPaddingTablet.right}${newsTickerGlobalPaddingUnits.Tablet} ${newsTickerGlobalPaddingTablet.bottom}${newsTickerGlobalPaddingUnits.Tablet} ${newsTickerGlobalPaddingTablet.left}${newsTickerGlobalPaddingUnits.Tablet}`;
+	const globalMobilePadding = `${newsTickerGlobalPaddingMobile.top}${newsTickerGlobalPaddingUnits.Mobile} ${newsTickerGlobalPaddingMobile.right}${newsTickerGlobalPaddingUnits.Mobile} ${newsTickerGlobalPaddingMobile.bottom}${newsTickerGlobalPaddingUnits.Mobile} ${newsTickerGlobalPaddingMobile.left}${newsTickerGlobalPaddingUnits.Mobile}`;
 	/** End Global Padding */
 
 	/** Start Global Margin */
 	const handleGlobalMarginUnitChange = (event, position) => {
 		const value = event.target.value;
-		if (FeatureGlobalMarginLink) {
+		if (newsTickerGlobalMarginLink) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
-						FeatureGlobalMarginDesktop: {
+						newsTickerGlobalMarginDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -409,7 +696,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 				case "Tablet":
 					setAttributes({
-						FeatureGlobalMarginTablet: {
+						newsTickerGlobalMarginTablet: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -419,7 +706,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 				case "Mobile":
 					setAttributes({
-						FeatureGlobalMarginMobile: {
+						newsTickerGlobalMarginMobile: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -434,24 +721,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
-						FeatureGlobalMarginDesktop: {
-							...FeatureGlobalMarginDesktop,
+						newsTickerGlobalMarginDesktop: {
+							...newsTickerGlobalMarginDesktop,
 							[position]: value,
 						},
 					});
 					break;
 				case "Tablet":
 					setAttributes({
-						FeatureGlobalMarginTablet: {
-							...FeatureGlobalMarginTablet,
+						newsTickerGlobalMarginTablet: {
+							...newsTickerGlobalMarginTablet,
 							[position]: value,
 						},
 					});
 					break;
 				case "Mobile":
 					setAttributes({
-						FeatureGlobalMarginMobile: {
-							...FeatureGlobalMarginMobile,
+						newsTickerGlobalMarginMobile: {
+							...newsTickerGlobalMarginMobile,
 							[position]: value,
 						},
 					});
@@ -463,31 +750,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	const handleGlobalMarginCombineBtn = () => {
-		setAttributes({ FeatureGlobalMarginLink: !FeatureGlobalMarginLink });
+		setAttributes({ newsTickerGlobalMarginLink: !newsTickerGlobalMarginLink });
 	};
 
 	const handleGlobalMarginUnitsHandler = (unit) => {
 		setAttributes({
-			FeatureGlobalMarginUnits: {
-				...FeatureGlobalMarginUnits,
+			newsTickerGlobalMarginUnits: {
+				...newsTickerGlobalMarginUnits,
 				[deviceType]: unit,
 			},
 		});
 	};
 
-	const globalDesktopMargin = `${FeatureGlobalMarginDesktop.top}${FeatureGlobalMarginUnits.Desktop} ${FeatureGlobalMarginDesktop.right}${FeatureGlobalMarginUnits.Desktop} ${FeatureGlobalMarginDesktop.bottom}${FeatureGlobalMarginUnits.Desktop} ${FeatureGlobalMarginDesktop.left}${FeatureGlobalMarginUnits.Desktop}`;
-	const globalTabletMargin = `${FeatureGlobalMarginTablet.top}${FeatureGlobalMarginUnits.Tablet} ${FeatureGlobalMarginTablet.right}${FeatureGlobalMarginUnits.Tablet} ${FeatureGlobalMarginTablet.bottom}${FeatureGlobalMarginUnits.Tablet} ${FeatureGlobalMarginTablet.left}${FeatureGlobalMarginUnits.Tablet}`;
-	const globalMobileMargin = `${FeatureGlobalMarginMobile.top}${FeatureGlobalMarginUnits.Mobile} ${FeatureGlobalMarginMobile.right}${FeatureGlobalMarginUnits.Mobile} ${FeatureGlobalMarginMobile.bottom}${FeatureGlobalMarginUnits.Mobile} ${FeatureGlobalMarginMobile.left}${FeatureGlobalMarginUnits.Mobile}`;
+	const globalDesktopMargin = `${newsTickerGlobalMarginDesktop.top}${newsTickerGlobalMarginUnits.Desktop} ${newsTickerGlobalMarginDesktop.right}${newsTickerGlobalMarginUnits.Desktop} ${newsTickerGlobalMarginDesktop.bottom}${newsTickerGlobalMarginUnits.Desktop} ${newsTickerGlobalMarginDesktop.left}${newsTickerGlobalMarginUnits.Desktop}`;
+	const globalTabletMargin = `${newsTickerGlobalMarginTablet.top}${newsTickerGlobalMarginUnits.Tablet} ${newsTickerGlobalMarginTablet.right}${newsTickerGlobalMarginUnits.Tablet} ${newsTickerGlobalMarginTablet.bottom}${newsTickerGlobalMarginUnits.Tablet} ${newsTickerGlobalMarginTablet.left}${newsTickerGlobalMarginUnits.Tablet}`;
+	const globalMobileMargin = `${newsTickerGlobalMarginMobile.top}${newsTickerGlobalMarginUnits.Mobile} ${newsTickerGlobalMarginMobile.right}${newsTickerGlobalMarginUnits.Mobile} ${newsTickerGlobalMarginMobile.bottom}${newsTickerGlobalMarginUnits.Mobile} ${newsTickerGlobalMarginMobile.left}${newsTickerGlobalMarginUnits.Mobile}`;
 	/** End Global Margin */
 
 	/** Start Global border */
 	const handleGlobalBorderUnitChange = (event, position) => {
 		const value = event.target.value;
-		if (FeatureGlobalBorderLink) {
+		if (newsTickerGlobalBorderLink) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
-						FeatureGlobalBorderDesktop: {
+						newsTickerGlobalBorderDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -497,7 +784,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 				case "Tablet":
 					setAttributes({
-						FeatureGlobalBorderTablet: {
+						newsTickerGlobalBorderTablet: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -507,7 +794,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 				case "Mobile":
 					setAttributes({
-						FeatureGlobalBorderMobile: {
+						newsTickerGlobalBorderMobile: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -522,24 +809,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
-						FeatureGlobalBorderDesktop: {
-							...FeatureGlobalBorderDesktop,
+						newsTickerGlobalBorderDesktop: {
+							...newsTickerGlobalBorderDesktop,
 							[position]: value,
 						},
 					});
 					break;
 				case "Tablet":
 					setAttributes({
-						FeatureGlobalBorderTablet: {
-							...FeatureGlobalBorderTablet,
+						newsTickerGlobalBorderTablet: {
+							...newsTickerGlobalBorderTablet,
 							[position]: value,
 						},
 					});
 					break;
 				case "Mobile":
 					setAttributes({
-						FeatureGlobalBorderMobile: {
-							...FeatureGlobalBorderMobile,
+						newsTickerGlobalBorderMobile: {
+							...newsTickerGlobalBorderMobile,
 							[position]: value,
 						},
 					});
@@ -551,30 +838,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	const handleGlobalBorderCombineBtn = () => {
-		setAttributes({ FeatureGlobalBorderLink: !FeatureGlobalBorderLink });
+		setAttributes({ newsTickerGlobalBorderLink: !newsTickerGlobalBorderLink });
 	};
 
 	const handleGlobalBorderUnitsHandler = (unit) => {
 		setAttributes({
-			FeatureGlobalBorderUnits: {
-				...FeatureGlobalBorderUnits,
+			newsTickerGlobalBorderUnits: {
+				...newsTickerGlobalBorderUnits,
 				[deviceType]: unit,
 			},
 		});
 	};
-	const globalDesktopBorderWidth = `${FeatureGlobalBorderDesktop.top}${FeatureGlobalBorderUnits.Desktop} ${FeatureGlobalBorderDesktop.right}${FeatureGlobalBorderUnits.Desktop} ${FeatureGlobalBorderDesktop.bottom}${FeatureGlobalBorderUnits.Desktop} ${FeatureGlobalBorderDesktop.left}${FeatureGlobalBorderUnits.Desktop}`;
-	const globalTabletBorderWidth = `${FeatureGlobalBorderTablet.top}${FeatureGlobalBorderUnits.Tablet} ${FeatureGlobalBorderTablet.right}${FeatureGlobalBorderUnits.Tablet} ${FeatureGlobalBorderTablet.bottom}${FeatureGlobalBorderUnits.Tablet} ${FeatureGlobalBorderTablet.left}${FeatureGlobalBorderUnits.Tablet}`;
-	const globalMobileBorderWidth = `${FeatureGlobalBorderMobile.top}${FeatureGlobalBorderUnits.Mobile} ${FeatureGlobalBorderMobile.right}${FeatureGlobalBorderUnits.Mobile} ${FeatureGlobalBorderMobile.bottom}${FeatureGlobalBorderUnits.Mobile} ${FeatureGlobalBorderMobile.left}${FeatureGlobalBorderUnits.Mobile}`;
+	const globalDesktopBorderWidth = `${newsTickerGlobalBorderDesktop.top}${newsTickerGlobalBorderUnits.Desktop} ${newsTickerGlobalBorderDesktop.right}${newsTickerGlobalBorderUnits.Desktop} ${newsTickerGlobalBorderDesktop.bottom}${newsTickerGlobalBorderUnits.Desktop} ${newsTickerGlobalBorderDesktop.left}${newsTickerGlobalBorderUnits.Desktop}`;
+	const globalTabletBorderWidth = `${newsTickerGlobalBorderTablet.top}${newsTickerGlobalBorderUnits.Tablet} ${newsTickerGlobalBorderTablet.right}${newsTickerGlobalBorderUnits.Tablet} ${newsTickerGlobalBorderTablet.bottom}${newsTickerGlobalBorderUnits.Tablet} ${newsTickerGlobalBorderTablet.left}${newsTickerGlobalBorderUnits.Tablet}`;
+	const globalMobileBorderWidth = `${newsTickerGlobalBorderMobile.top}${newsTickerGlobalBorderUnits.Mobile} ${newsTickerGlobalBorderMobile.right}${newsTickerGlobalBorderUnits.Mobile} ${newsTickerGlobalBorderMobile.bottom}${newsTickerGlobalBorderUnits.Mobile} ${newsTickerGlobalBorderMobile.left}${newsTickerGlobalBorderUnits.Mobile}`;
 	/** End Border */
 
 	/** Start Global border radius*/
 	const handleGlobalBorderRadiusUnitChange = (event, position) => {
 		const value = event.target.value;
-		if (FeatureGlobalBorderRadiusLink) {
+		if (newsTickerGlobalBorderRadiusLink) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
-						FeatureGlobalBorderRadiusDesktop: {
+						newsTickerGlobalBorderRadiusDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -584,7 +871,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 				case "Tablet":
 					setAttributes({
-						FeatureGlobalBorderRadiusTablet: {
+						newsTickerGlobalBorderRadiusTablet: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -594,7 +881,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					break;
 				case "Mobile":
 					setAttributes({
-						FeatureGlobalBorderRadiusMobile: {
+						newsTickerGlobalBorderRadiusMobile: {
 							top: value,
 							right: value,
 							bottom: value,
@@ -609,24 +896,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			switch (deviceType) {
 				case "Desktop":
 					setAttributes({
-						FeatureGlobalBorderRadiusDesktop: {
-							...FeatureGlobalBorderRadiusDesktop,
+						newsTickerGlobalBorderRadiusDesktop: {
+							...newsTickerGlobalBorderRadiusDesktop,
 							[position]: value,
 						},
 					});
 					break;
 				case "Tablet":
 					setAttributes({
-						FeatureGlobalBorderRadiusTablet: {
-							...FeatureGlobalBorderRadiusTablet,
+						newsTickerGlobalBorderRadiusTablet: {
+							...newsTickerGlobalBorderRadiusTablet,
 							[position]: value,
 						},
 					});
 					break;
 				case "Mobile":
 					setAttributes({
-						FeatureGlobalBorderRadiusMobile: {
-							...FeatureGlobalBorderRadiusMobile,
+						newsTickerGlobalBorderRadiusMobile: {
+							...newsTickerGlobalBorderRadiusMobile,
 							[position]: value,
 						},
 					});
@@ -639,14 +926,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const handleGlobalBorderRadiusCombineBtn = () => {
 		setAttributes({
-			FeatureGlobalBorderRadiusLink: !FeatureGlobalBorderRadiusLink,
+			newsTickerGlobalBorderRadiusLink: !newsTickerGlobalBorderRadiusLink,
 		});
 	};
 
 	const handleGlobalBorderRadiusUnitsHandler = (unit) => {
 		setAttributes({
-			FeatureGlobalBorderRadiusUnits: {
-				...FeatureGlobalBorderRadiusUnits,
+			newsTickerGlobalBorderRadiusUnits: {
+				...newsTickerGlobalBorderRadiusUnits,
 				[deviceType]: unit,
 			},
 		});
@@ -654,9 +941,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** end Global border */
 
 	/** End Global Border Radius */
-	const globalDesktopBorderRadiusWidth = `${FeatureGlobalBorderRadiusDesktop.top}${FeatureGlobalBorderRadiusUnits.Desktop} ${FeatureGlobalBorderRadiusDesktop.right}${FeatureGlobalBorderRadiusUnits.Desktop} ${FeatureGlobalBorderRadiusDesktop.bottom}${FeatureGlobalBorderRadiusUnits.Desktop} ${FeatureGlobalBorderRadiusDesktop.left}${FeatureGlobalBorderRadiusUnits.Desktop}`;
-	const globalTabletBorderRadiusWidth = `${FeatureGlobalBorderRadiusTablet.top}${FeatureGlobalBorderRadiusUnits.Tablet} ${FeatureGlobalBorderRadiusTablet.right}${FeatureGlobalBorderRadiusUnits.Tablet} ${FeatureGlobalBorderRadiusTablet.bottom}${FeatureGlobalBorderRadiusUnits.Tablet} ${FeatureGlobalBorderRadiusTablet.left}${FeatureGlobalBorderRadiusUnits.Tablet}`;
-	const globalMobileBorderRadiusWidth = `${FeatureGlobalBorderRadiusMobile.top}${FeatureGlobalBorderRadiusUnits.Mobile} ${FeatureGlobalBorderRadiusMobile.right}${FeatureGlobalBorderRadiusUnits.Mobile} ${FeatureGlobalBorderRadiusMobile.bottom}${FeatureGlobalBorderRadiusUnits.Mobile} ${FeatureGlobalBorderRadiusMobile.left}${FeatureGlobalBorderRadiusUnits.Mobile}`;
+	const globalDesktopBorderRadiusWidth = `${newsTickerGlobalBorderRadiusDesktop.top}${newsTickerGlobalBorderRadiusUnits.Desktop} ${newsTickerGlobalBorderRadiusDesktop.right}${newsTickerGlobalBorderRadiusUnits.Desktop} ${newsTickerGlobalBorderRadiusDesktop.bottom}${newsTickerGlobalBorderRadiusUnits.Desktop} ${newsTickerGlobalBorderRadiusDesktop.left}${newsTickerGlobalBorderRadiusUnits.Desktop}`;
+	const globalTabletBorderRadiusWidth = `${newsTickerGlobalBorderRadiusTablet.top}${newsTickerGlobalBorderRadiusUnits.Tablet} ${newsTickerGlobalBorderRadiusTablet.right}${newsTickerGlobalBorderRadiusUnits.Tablet} ${newsTickerGlobalBorderRadiusTablet.bottom}${newsTickerGlobalBorderRadiusUnits.Tablet} ${newsTickerGlobalBorderRadiusTablet.left}${newsTickerGlobalBorderRadiusUnits.Tablet}`;
+	const globalMobileBorderRadiusWidth = `${newsTickerGlobalBorderRadiusMobile.top}${newsTickerGlobalBorderRadiusUnits.Mobile} ${newsTickerGlobalBorderRadiusMobile.right}${newsTickerGlobalBorderRadiusUnits.Mobile} ${newsTickerGlobalBorderRadiusMobile.bottom}${newsTickerGlobalBorderRadiusUnits.Mobile} ${newsTickerGlobalBorderRadiusMobile.left}${newsTickerGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */
 
 	/** Start Label Container Padding */
@@ -1367,71 +1654,425 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const labelIconMobileBorderRadiusWidth = `${labelIconBorderRadiusMobile.top}${labelIconBorderRadiusUnits.Mobile} ${labelIconBorderRadiusMobile.right}${labelIconBorderRadiusUnits.Mobile} ${labelIconBorderRadiusMobile.bottom}${labelIconBorderRadiusUnits.Mobile} ${labelIconBorderRadiusMobile.left}${labelIconBorderRadiusUnits.Mobile}`;
 	/** End Label Container Border Radius */
 
+	/** Start Ticker Timer Padding */
+	const handletickerTimerPaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (tickerTimerPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						tickerTimerPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						tickerTimerPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						tickerTimerPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						tickerTimerPaddingDesktop: {
+							...tickerTimerPaddingDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						tickerTimerPaddingTablet: {
+							...tickerTimerPaddingTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						tickerTimerPaddingMobile: {
+							...tickerTimerPaddingMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handletickerTimerPaddingCombineBtn = () => {
+		setAttributes({ tickerTimerPaddingLink: !tickerTimerPaddingLink });
+	};
+
+	const handletickerTimerPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			tickerTimerPaddingUnits: {
+				...tickerTimerPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+	const tickerTimerDesktopPadding = `${tickerTimerPaddingDesktop.top}${tickerTimerPaddingUnits.Desktop} ${tickerTimerPaddingDesktop.right}${tickerTimerPaddingUnits.Desktop} ${tickerTimerPaddingDesktop.bottom}${tickerTimerPaddingUnits.Desktop} ${tickerTimerPaddingDesktop.left}${tickerTimerPaddingUnits.Desktop}`;
+	const tickerTimerTabletPadding = `${tickerTimerPaddingTablet.top}${tickerTimerPaddingUnits.Tablet} ${tickerTimerPaddingTablet.right}${tickerTimerPaddingUnits.Tablet} ${tickerTimerPaddingTablet.bottom}${tickerTimerPaddingUnits.Tablet} ${tickerTimerPaddingTablet.left}${tickerTimerPaddingUnits.Tablet}`;
+	const tickerTimerMobilePadding = `${tickerTimerPaddingMobile.top}${tickerTimerPaddingUnits.Mobile} ${tickerTimerPaddingMobile.right}${tickerTimerPaddingUnits.Mobile} ${tickerTimerPaddingMobile.bottom}${tickerTimerPaddingUnits.Mobile} ${tickerTimerPaddingMobile.left}${tickerTimerPaddingUnits.Mobile}`;
+	/** End Ticker Timer Padding */
+
+	/** Start Ticker Timer Margin */
+	const handletickerTimerMarginUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (tickerTimerMarginLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						tickerTimerMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						tickerTimerMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						tickerTimerMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						tickerTimerMarginDesktop: {
+							...tickerTimerMarginDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						tickerTimerMarginTablet: {
+							...tickerTimerMarginTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						tickerTimerMarginMobile: {
+							...tickerTimerMarginMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handletickerTimerMarginCombineBtn = () => {
+		setAttributes({ tickerTimerMarginLink: !tickerTimerMarginLink });
+	};
+
+	const handletickerTimerMarginUnitsHandler = (unit) => {
+		setAttributes({
+			tickerTimerMarginUnits: {
+				...tickerTimerMarginUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const tickerTimerDesktopMargin = `${tickerTimerMarginDesktop.top}${tickerTimerMarginUnits.Desktop} ${tickerTimerMarginDesktop.right}${tickerTimerMarginUnits.Desktop} ${tickerTimerMarginDesktop.bottom}${tickerTimerMarginUnits.Desktop} ${tickerTimerMarginDesktop.left}${tickerTimerMarginUnits.Desktop}`;
+	const tickerTimerTabletMargin = `${tickerTimerMarginTablet.top}${tickerTimerMarginUnits.Tablet} ${tickerTimerMarginTablet.right}${tickerTimerMarginUnits.Tablet} ${tickerTimerMarginTablet.bottom}${tickerTimerMarginUnits.Tablet} ${tickerTimerMarginTablet.left}${tickerTimerMarginUnits.Tablet}`;
+	const tickerTimerMobileMargin = `${tickerTimerMarginMobile.top}${tickerTimerMarginUnits.Mobile} ${tickerTimerMarginMobile.right}${tickerTimerMarginUnits.Mobile} ${tickerTimerMarginMobile.bottom}${tickerTimerMarginUnits.Mobile} ${tickerTimerMarginMobile.left}${tickerTimerMarginUnits.Mobile}`;
+	/** End Ticker Timer Margin */
+
+	/** Start Ticker Timer border */
+	const handletickerTimerBorderUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (tickerTimerBorderLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						tickerTimerBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						tickerTimerBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						tickerTimerBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						tickerTimerBorderDesktop: {
+							...tickerTimerBorderDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						tickerTimerBorderTablet: {
+							...tickerTimerBorderTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						tickerTimerBorderMobile: {
+							...tickerTimerBorderMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handletickerTimerBorderCombineBtn = () => {
+		setAttributes({ tickerTimerBorderLink: !tickerTimerBorderLink });
+	};
+
+	const handletickerTimerBorderUnitsHandler = (unit) => {
+		setAttributes({
+			tickerTimerBorderUnits: {
+				...tickerTimerBorderUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+	const tickerTimerDesktopBorderWidth = `${tickerTimerBorderDesktop.top}${tickerTimerBorderUnits.Desktop} ${tickerTimerBorderDesktop.right}${tickerTimerBorderUnits.Desktop} ${tickerTimerBorderDesktop.bottom}${tickerTimerBorderUnits.Desktop} ${tickerTimerBorderDesktop.left}${tickerTimerBorderUnits.Desktop}`;
+	const tickerTimerTabletBorderWidth = `${tickerTimerBorderTablet.top}${tickerTimerBorderUnits.Tablet} ${tickerTimerBorderTablet.right}${tickerTimerBorderUnits.Tablet} ${tickerTimerBorderTablet.bottom}${tickerTimerBorderUnits.Tablet} ${tickerTimerBorderTablet.left}${tickerTimerBorderUnits.Tablet}`;
+	const tickerTimerMobileBorderWidth = `${tickerTimerBorderMobile.top}${tickerTimerBorderUnits.Mobile} ${tickerTimerBorderMobile.right}${tickerTimerBorderUnits.Mobile} ${tickerTimerBorderMobile.bottom}${tickerTimerBorderUnits.Mobile} ${tickerTimerBorderMobile.left}${tickerTimerBorderUnits.Mobile}`;
+	/** End Ticker Timer Border */
+
+	/** Start Ticker Timer border radius*/
+	const handletickerTimerBorderRadiusUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (tickerTimerBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						tickerTimerBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						tickerTimerBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						tickerTimerBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						tickerTimerBorderRadiusDesktop: {
+							...tickerTimerBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						tickerTimerBorderRadiusTablet: {
+							...tickerTimerBorderRadiusTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						tickerTimerBorderRadiusMobile: {
+							...tickerTimerBorderRadiusMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handletickerTimerBorderRadiusCombineBtn = () => {
+		setAttributes({
+			tickerTimerBorderRadiusLink: !tickerTimerBorderRadiusLink,
+		});
+	};
+
+	const handletickerTimerBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			tickerTimerBorderRadiusUnits: {
+				...tickerTimerBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+	/** End Ticker Timer border */
+
+	/** End Ticker Timer Border Radius */
+	const tickerTimerDesktopBorderRadiusWidth = `${tickerTimerBorderRadiusDesktop.top}${tickerTimerBorderRadiusUnits.Desktop} ${tickerTimerBorderRadiusDesktop.right}${tickerTimerBorderRadiusUnits.Desktop} ${tickerTimerBorderRadiusDesktop.bottom}${tickerTimerBorderRadiusUnits.Desktop} ${tickerTimerBorderRadiusDesktop.left}${tickerTimerBorderRadiusUnits.Desktop}`;
+	const tickerTimerTabletBorderRadiusWidth = `${tickerTimerBorderRadiusTablet.top}${tickerTimerBorderRadiusUnits.Tablet} ${tickerTimerBorderRadiusTablet.right}${tickerTimerBorderRadiusUnits.Tablet} ${tickerTimerBorderRadiusTablet.bottom}${tickerTimerBorderRadiusUnits.Tablet} ${tickerTimerBorderRadiusTablet.left}${tickerTimerBorderRadiusUnits.Tablet}`;
+	const tickerTimerMobileBorderRadiusWidth = `${tickerTimerBorderRadiusMobile.top}${tickerTimerBorderRadiusUnits.Mobile} ${tickerTimerBorderRadiusMobile.right}${tickerTimerBorderRadiusUnits.Mobile} ${tickerTimerBorderRadiusMobile.bottom}${tickerTimerBorderRadiusUnits.Mobile} ${tickerTimerBorderRadiusMobile.left}${tickerTimerBorderRadiusUnits.Mobile}`;
+	/** End Ticker Timer Border Radius */
+
 	/* Start Load Google Fonts */
 	useEffect(() => {
-		loadGoogleFont(FeatureTitleFontFamily);
-		loadGoogleFont(FeatureDescFontFamily);
-	}, [FeatureTitleFontFamily, FeatureDescFontFamily]);
+		loadGoogleFont(tickerLabelFontFamily);
+	}, [tickerLabelFontFamily]);
 
 	/* End Load Google Fonts */
 
 	const allBlockStyle = useMemo(() => {
         let style = `
-            .fb-news-ticker-wrapper.${blockID} {
-                ${FeatureGlobalNormalBackgroundType === "gradient"
+            .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner{
+                ${newsTickerGlobalNormalBackgroundType === "gradient"
                     ? `background: ${
-                        FeatureGlobalNormalCustomGradientSwitcher && FeatureGlobalNormalCustomGradientInputValue
-                            ? FeatureGlobalNormalCustomGradientInputValue
-                            : FeatureGlobalNormalGradientColor
+                        newsTickerGlobalNormalCustomGradientSwitcher && newsTickerGlobalNormalCustomGradientInputValue
+                            ? newsTickerGlobalNormalCustomGradientInputValue
+                            : newsTickerGlobalNormalGradientColor
                     };`
-                    : FeatureGlobalNormalBackgroundImageUrl && FeatureGlobalNormalBackgroundImageUrl !== "null"
+                    : newsTickerGlobalNormalBackgroundImageUrl && newsTickerGlobalNormalBackgroundImageUrl !== "null"
                     ? `
-                        ${FeatureGlobalNormalBackgroundImageUrl ? `background-image: url(${FeatureGlobalNormalBackgroundImageUrl});` : ""}
-                        ${FeatureGlobalNormalBackgroundImagePosition ? `background-position: ${FeatureGlobalNormalBackgroundImagePosition};` : ""}
-                        ${FeatureGlobalNormalBackgroundImageAttachment ? `background-attachment: ${FeatureGlobalNormalBackgroundImageAttachment};` : ""}
-                        ${FeatureGlobalNormalBackgroundImageRepeat ? `background-repeat: ${FeatureGlobalNormalBackgroundImageRepeat};` : ""}
-                        ${FeatureGlobalNormalBackgroundImageSize ? `background-size: ${FeatureGlobalNormalBackgroundImageSize};` : ""}
+                        ${newsTickerGlobalNormalBackgroundImageUrl ? `background-image: url(${newsTickerGlobalNormalBackgroundImageUrl});` : ""}
+                        ${newsTickerGlobalNormalBackgroundImagePosition ? `background-position: ${newsTickerGlobalNormalBackgroundImagePosition};` : ""}
+                        ${newsTickerGlobalNormalBackgroundImageAttachment ? `background-attachment: ${newsTickerGlobalNormalBackgroundImageAttachment};` : ""}
+                        ${newsTickerGlobalNormalBackgroundImageRepeat ? `background-repeat: ${newsTickerGlobalNormalBackgroundImageRepeat};` : ""}
+                        ${newsTickerGlobalNormalBackgroundImageSize ? `background-size: ${newsTickerGlobalNormalBackgroundImageSize};` : ""}
                     `
-                    : `${FeatureGlobalNormalClassicColor ? `background: ${FeatureGlobalNormalClassicColor};` : ""}`
+                    : `${newsTickerGlobalNormalClassicColor ? `background: ${newsTickerGlobalNormalClassicColor};` : ""}`
                 }
-                ${globalDesktopPadding && FeatureGlobalPaddingDesktop.top ? `padding: ${globalDesktopPadding};` : ""}
-                ${globalDesktopMargin && FeatureGlobalMarginDesktop.top ? `margin: ${globalDesktopMargin};` : ""}
-                ${FeatureGlobalBorder ? `border: ${FeatureGlobalBorder};` : ""}
-                ${globalDesktopBorderWidth && FeatureGlobalBorderDesktop.top ? `border-width: ${globalDesktopBorderWidth};` : ""}
-                ${globalDesktopBorderRadiusWidth && FeatureGlobalBorderRadiusDesktop.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
-                ${FeatureGlobalBorderColor ? `border-color: ${FeatureGlobalBorderColor};` : ""}
-                ${FeatureGlobalBoxShadowCssValue ? `box-shadow: ${FeatureGlobalBoxShadowCssValue};` : ""}
-                ${featuresListPositionType === "default" ? `position: relative;` : ""}
-                ${featuresListPositionType !== "default" && featuresListPositionType !== "relative" ? `width: 100%;` : ""}
-                ${featuresListPositionType !== "default" ? `position: ${featuresListPositionType};` : ""}
-                ${featuresListPositionType !== "default" && featuresListPositionType !== "relative" && featuresListHZOrientationType === "left" && featuresListHZLeftOffset.Desktop !== undefined ? `left: ${featuresListHZLeftOffset.Desktop}${featuresListHZLeftOffsetUnits.Desktop};` : ""}
-                ${featuresListPositionType !== "default" && featuresListPositionType !== "relative" && featuresListHZOrientationType === "right" && featuresListHZRightOffset.Desktop !== undefined ? `right: ${featuresListHZRightOffset.Desktop}${featuresListHZRightOffsetUnits.Desktop};` : ""}
-                ${featuresListPositionType !== "default" && featuresListPositionType !== "relative" && featuresListVROrientationType === "top" && featuresListVRTopOffset.Desktop !== undefined ? `top: ${featuresListVRTopOffset.Desktop}${featuresListVRTopOffsetUnits.Desktop};` : ""}
-                ${featuresListPositionType !== "default" && featuresListPositionType !== "relative" && featuresListVROrientationType === "bottom" && featuresListVRBottomOffset.Desktop !== undefined ? `bottom: ${featuresListVRBottomOffset.Desktop}${featuresListVRBottomOffsetUnits.Desktop};` : ""}
-                ${FeatureGlobalZIndex.Desktop ? `z-index: ${FeatureGlobalZIndex.Desktop};` : ""}
-                ${featuresListOverflow !== "default" ? `overflow: ${featuresListOverflow};` : ""}
+                ${globalDesktopPadding && newsTickerGlobalPaddingDesktop.top ? `padding: ${globalDesktopPadding};` : ""}
+                ${globalDesktopMargin && newsTickerGlobalMarginDesktop.top ? `margin: ${globalDesktopMargin};` : ""}
+                ${newsTickerGlobalBorder ? `border: ${newsTickerGlobalBorder};` : ""}
+                ${globalDesktopBorderWidth && newsTickerGlobalBorderDesktop.top ? `border-width: ${globalDesktopBorderWidth};` : ""}
+                ${globalDesktopBorderRadiusWidth && newsTickerGlobalBorderRadiusDesktop.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
+                ${newsTickerGlobalBorderColor ? `border-color: ${newsTickerGlobalBorderColor};` : ""}
+                ${newsTickerGlobalBoxShadowCssValue ? `box-shadow: ${newsTickerGlobalBoxShadowCssValue};` : ""}
+                ${newsTickerPositionType === "default" ? `position: relative;` : ""}
+                ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" ? `width: 100%;` : ""}
+                ${newsTickerPositionType !== "default" ? `position: ${newsTickerPositionType};` : ""}
+                ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "left" && newsTickerHZLeftOffset.Desktop !== undefined ? `left: ${newsTickerHZLeftOffset.Desktop}${newsTickerHZLeftOffsetUnits.Desktop};` : ""}
+                ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "right" && newsTickerHZRightOffset.Desktop !== undefined ? `right: ${newsTickerHZRightOffset.Desktop}${newsTickerHZRightOffsetUnits.Desktop};` : ""}
+                ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "top" && newsTickerVRTopOffset.Desktop !== undefined ? `top: ${newsTickerVRTopOffset.Desktop}${newsTickerVRTopOffsetUnits.Desktop};` : ""}
+                ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "bottom" && newsTickerVRBottomOffset.Desktop !== undefined ? `bottom: ${newsTickerVRBottomOffset.Desktop}${newsTickerVRBottomOffsetUnits.Desktop};` : ""}
+                ${newsTickerGlobalZIndex.Desktop ? `z-index: ${newsTickerGlobalZIndex.Desktop};` : ""}
+                ${newsTickerOverflow !== "default" ? `overflow: ${newsTickerOverflow};` : ""}
+				${labelPosition === "right" ? "flex-direction: row-reverse;" : "flex-direction: row;"}
                 transition: all .3s ease-in-out;
             }
     
-            .fb-feature-main-wrapper.${blockID}:hover {
-                ${FeatureGlobalHoverBackgroundType === "gradient"
+            .fb-news-ticker-wrapper.${blockID}:hover .fb-news-ticker-inner{
+                ${newsTickerGlobalHoverBackgroundType === "gradient"
                     ? `background: ${
-                        FeatureGlobalHoverCustomGradientSwitcher && FeatureGlobalHoverCustomGradientInputValue
-                            ? FeatureGlobalHoverCustomGradientInputValue
-                            : FeatureGlobalHoverGradientColor
+                        newsTickerGlobalHoverCustomGradientSwitcher && newsTickerGlobalHoverCustomGradientInputValue
+                            ? newsTickerGlobalHoverCustomGradientInputValue
+                            : newsTickerGlobalHoverGradientColor
                     };`
-                    : FeatureGlobalHoverBackgroundImageUrl && FeatureGlobalHoverBackgroundImageUrl !== "null"
+                    : newsTickerGlobalHoverBackgroundImageUrl && newsTickerGlobalHoverBackgroundImageUrl !== "null"
                     ? `
-                        ${FeatureGlobalHoverBackgroundImageUrl ? `background-image: url(${FeatureGlobalHoverBackgroundImageUrl});` : ""}
-                        ${FeatureGlobalHoverBackgroundImagePosition ? `background-position: ${FeatureGlobalHoverBackgroundImagePosition};` : ""}
-                        ${FeatureGlobalHoverBackgroundImageAttachment ? `background-attachment: ${FeatureGlobalHoverBackgroundImageAttachment};` : ""}
-                        ${FeatureGlobalHoverBackgroundImageRepeat ? `background-repeat: ${FeatureGlobalHoverBackgroundImageRepeat};` : ""}
-                        ${FeatureGlobalHoverBackgroundImageSize ? `background-size: ${FeatureGlobalHoverBackgroundImageSize};` : ""}
+                        ${newsTickerGlobalHoverBackgroundImageUrl ? `background-image: url(${newsTickerGlobalHoverBackgroundImageUrl});` : ""}
+                        ${newsTickerGlobalHoverBackgroundImagePosition ? `background-position: ${newsTickerGlobalHoverBackgroundImagePosition};` : ""}
+                        ${newsTickerGlobalHoverBackgroundImageAttachment ? `background-attachment: ${newsTickerGlobalHoverBackgroundImageAttachment};` : ""}
+                        ${newsTickerGlobalHoverBackgroundImageRepeat ? `background-repeat: ${newsTickerGlobalHoverBackgroundImageRepeat};` : ""}
+                        ${newsTickerGlobalHoverBackgroundImageSize ? `background-size: ${newsTickerGlobalHoverBackgroundImageSize};` : ""}
                     `
-                    : `${FeatureGlobalHoverClassicColor ? `background: ${FeatureGlobalHoverClassicColor};` : ""}`
+                    : `${newsTickerGlobalHoverClassicColor ? `background: ${newsTickerGlobalHoverClassicColor};` : ""}`
                 }
-                ${FeatureGlobalBorderHoverColor ? `border-color: ${FeatureGlobalBorderHoverColor};` : ""}
-                ${FeatureGlobalBoxShadowHoverCssValue ? `box-shadow: ${FeatureGlobalBoxShadowHoverCssValue};` : ""}
+                ${newsTickerGlobalBorderHoverColor ? `border-color: ${newsTickerGlobalBorderHoverColor};` : ""}
+                ${newsTickerGlobalBoxShadowHoverCssValue ? `box-shadow: ${newsTickerGlobalBoxShadowHoverCssValue};` : ""}
             }
     
             .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container {
@@ -1548,7 +2189,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${tickerLabelTypoSwitcher.textDecoration === false && tickerLabelTextDecoration ? `text-decoration: ${tickerLabelTextDecoration};` : ''}
                 ${tickerLabelTypoSwitcher.letterSpacing === false && tickerLabelLetterSpacing.Desktop && tickerLabelLetterSpacingUnits.Desktop ? `letter-spacing: ${tickerLabelLetterSpacing.Desktop}${tickerLabelLetterSpacingUnits.Desktop};` : ''}
                 ${tickerLabelTypoSwitcher.lineHeight === false && tickerLabelLineHeight.Desktop && tickerLabelLineHeightUnits.Desktop ? `line-height: ${tickerLabelLineHeight.Desktop}${tickerLabelLineHeightUnits.Desktop};` : ''}
+				${labelTextColor ? `color: ${labelTextColor};` : ""}
             }
+			
+			.fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container .fb-news-ticker-label:hover span{
+				${labelTextHoverColor ? `color: ${labelTextHoverColor};` : ""}
+			}
             .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container .fb-news-ticker-label-icon .fb-icon-wrapper svg {
                 ${iconSize.Desktop ? `width: ${iconSize.Desktop}${iconSizeUnits.Desktop};` : ""}
                 ${iconSize.Desktop ? `height: ${iconSize.Desktop}${iconSizeUnits.Desktop};` : ""}
@@ -1558,18 +2204,99 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container .fb-news-ticker-label-icon .fb-icon-wrapper:hover svg{
                 ${labelIconHoverColor ? `fill: ${labelIconHoverColor};` : ""}
             }
+			.fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner .fb-news-ticker-time{
+				${tickerTimerNormalBackgroundType === "gradient"
+                    ? `background: ${
+                        tickerTimerNormalCustomGradientSwitcher && tickerTimerNormalCustomGradientInputValue
+                            ? tickerTimerNormalCustomGradientInputValue
+                            : tickerTimerNormalGradientColor
+                    };`
+                    : tickerTimerNormalBackgroundImageUrl && tickerTimerNormalBackgroundImageUrl !== "null"
+                    ? `
+                        ${tickerTimerNormalBackgroundImageUrl ? `background-image: url(${tickerTimerNormalBackgroundImageUrl});` : ""}
+                        ${tickerTimerNormalBackgroundImagePosition ? `background-position: ${tickerTimerNormalBackgroundImagePosition};` : ""}
+                        ${tickerTimerNormalBackgroundImageAttachment ? `background-attachment: ${tickerTimerNormalBackgroundImageAttachment};` : ""}
+                        ${tickerTimerNormalBackgroundImageRepeat ? `background-repeat: ${tickerTimerNormalBackgroundImageRepeat};` : ""}
+                        ${tickerTimerNormalBackgroundImageSize ? `background-size: ${tickerTimerNormalBackgroundImageSize};` : ""}
+                    `
+                    : `${tickerTimerNormalClassicColor ? `background: ${tickerTimerNormalClassicColor};` : ""}`
+                }
+                ${tickerTimerDesktopPadding && tickerTimerPaddingDesktop.top ? `padding: ${tickerTimerDesktopPadding};` : ""}
+                ${tickerTimerDesktopMargin && tickerTimerMarginDesktop.top ? `margin: ${tickerTimerDesktopMargin};` : ""}
+                ${tickerTimerBorder ? `border: ${tickerTimerBorder};` : ""}
+                ${tickerTimerDesktopBorderWidth && tickerTimerBorderDesktop.top ? `border-width: ${tickerTimerDesktopBorderWidth};` : ""}
+                ${tickerTimerDesktopBorderRadiusWidth && tickerTimerBorderRadiusDesktop.top ? `border-radius: ${tickerTimerDesktopBorderRadiusWidth};` : ""}
+                ${tickerTimerBorderColor ? `border-color: ${tickerTimerBorderColor};` : ""}
+                transition: all .3s ease-in-out;
+			}
+			.fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner .fb-news-ticker-time:hover{
+				${tickerTimerHoverBackgroundType === "gradient"
+                    ? `background: ${
+                        tickerTimerHoverCustomGradientSwitcher && tickerTimerHoverCustomGradientInputValue
+                            ? tickerTimerHoverCustomGradientInputValue
+                            : tickerTimerHoverGradientColor
+                    };`
+                    : tickerTimerHoverBackgroundImageUrl && tickerTimerHoverBackgroundImageUrl !== "null"
+                    ? `
+                        ${tickerTimerHoverBackgroundImageUrl ? `background-image: url(${tickerTimerHoverBackgroundImageUrl});` : ""}
+                        ${tickerTimerHoverBackgroundImagePosition ? `background-position: ${tickerTimerHoverBackgroundImagePosition};` : ""}
+                        ${tickerTimerHoverBackgroundImageAttachment ? `background-attachment: ${tickerTimerHoverBackgroundImageAttachment};` : ""}
+                        ${tickerTimerHoverBackgroundImageRepeat ? `background-repeat: ${tickerTimerHoverBackgroundImageRepeat};` : ""}
+                        ${tickerTimerHoverBackgroundImageSize ? `background-size: ${tickerTimerHoverBackgroundImageSize};` : ""}
+                    `
+                    : `${tickerTimerHoverClassicColor ? `background: ${tickerTimerHoverClassicColor};` : ""}`
+                }
+                ${tickerTimerBorderHoverColor ? `border-color: ${tickerTimerBorderHoverColor};` : ""}
+			}
+			.fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner .fb-news-ticker-time span{
+				${tickerTimerTypoSwitcher.fontFamily === true && tickerTimerTypographyData.fontFamily ? `font-family: ${tickerTimerTypographyData.fontFamily};` : ''}
+				${tickerTimerTypoSwitcher.fontSize === true && tickerTimerTypographyData.fontSize ? `font-size: ${tickerTimerTypographyData.fontSize};` : ''}
+				${tickerTimerTypoSwitcher.fontWeight === true && tickerTimerTypographyData.fontWeight ? `font-weight: ${tickerTimerTypographyData.fontWeight};` : ''}
+				${tickerTimerTypoSwitcher.fontStyle === true && tickerTimerTypographyData.fontStyle ? `font-style: ${tickerTimerTypographyData.fontStyle};` : ''}
+				${tickerTimerTypoSwitcher.textTransform === true && tickerTimerTypographyData.textTransform ? `text-transform: ${tickerTimerTypographyData.textTransform};` : ''}
+				${tickerTimerTypoSwitcher.textDecoration === true && tickerTimerTypographyData.textDecoration ? `text-decoration: ${tickerTimerTypographyData.textDecoration};` : ''}
+				${tickerTimerTypoSwitcher.letterSpacing === true && tickerTimerTypographyData.letterSpacing ? `letter-spacing: ${tickerTimerTypographyData.letterSpacing};` : ''}
+				${tickerTimerTypoSwitcher.lineHeight === true && tickerTimerTypographyData.lineHeight ? `line-height: ${tickerTimerTypographyData.lineHeight};` : ''}
+
+                ${tickerTimerTypoSwitcher.fontFamily === false && tickerTimerFontFamily && tickerTimerFontFamily !== "Default" ? `font-family: ${tickerTimerFontFamily};` : ''}
+                ${tickerTimerTypoSwitcher.fontSize === false && tickerTimerFontSize.Desktop && tickerTimerFontSizeUnits.Desktop ? `font-size: ${tickerTimerFontSize.Desktop}${tickerTimerFontSizeUnits.Desktop};` : ''}
+                ${tickerTimerTypoSwitcher.fontWeight === false && tickerTimerFontWeight ? `font-weight: ${tickerTimerFontWeight};` : ''}
+                ${tickerTimerTypoSwitcher.fontStyle === false && tickerTimerFontStyle ? `font-style: ${tickerTimerFontStyle};` : ''}
+                ${tickerTimerTypoSwitcher.textTransform === false && tickerTimerTextTransform ? `text-transform: ${tickerTimerTextTransform};` : ''}
+                ${tickerTimerTypoSwitcher.textDecoration === false && tickerTimerTextDecoration ? `text-decoration: ${tickerTimerTextDecoration};` : ''}
+                ${tickerTimerTypoSwitcher.letterSpacing === false && tickerTimerLetterSpacing.Desktop && tickerTimerLetterSpacingUnits.Desktop ? `letter-spacing: ${tickerTimerLetterSpacing.Desktop}${tickerTimerLetterSpacingUnits.Desktop};` : ''}
+                ${tickerTimerTypoSwitcher.lineHeight === false && tickerTimerLineHeight.Desktop && tickerTimerLineHeightUnits.Desktop ? `line-height: ${tickerTimerLineHeight.Desktop}${tickerTimerLineHeightUnits.Desktop};` : ''}
+				${tickerTimerColor ? `color: ${tickerTimerColor};` : ""}
+			}
+			
+			.fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner .fb-news-ticker-time:hover span{
+				${tickerTimerHoverColor ? `color: ${tickerTimerHoverColor};` : ""}
+			}
+
+			.fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner .fb-news-ticker-arrows {
+				${navigationPosition === "right" ? "right: 20px;" : "left: 20px;"}
+			}
+			.fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner .fb-news-ticker-arrows svg path{
+				${navigationIconColor ? `stroke: ${navigationIconColor};` : ""}
+			}
+			.fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner .fb-news-ticker-arrows .fb-news-ticker-pause-btn svg path{
+				${navigationIconColor ? `fill: ${navigationIconColor};` : ""}
+			}
+			.fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner .fb-news-ticker-arrows:hover svg path{
+				${navigationIconHoverColor ? `stroke: ${navigationIconHoverColor};` : ""}
+			}
             @media only screen and (max-width: 1024px) {
-                .fb-feature-main-wrapper.${blockID} {
-                    ${featuresListPositionType !== "default" ? `position: ${featuresListPositionType};` : ""}
-                    ${featuresListPositionType !== "default" && featuresListPositionType !== "relative" && featuresListHZOrientationType === "left" && featuresListHZLeftOffset.Tablet !== undefined ? `left: ${featuresListHZLeftOffset.Tablet}${featuresListHZLeftOffsetUnits.Tablet};` : ""}
-                    ${featuresListPositionType !== "default" && featuresListPositionType !== "relative" && featuresListHZOrientationType === "right" && featuresListHZRightOffset.Tablet !== undefined ? `right: ${featuresListHZRightOffset.Tablet}${featuresListHZRightOffsetUnits.Tablet};` : ""}
-                    ${featuresListPositionType !== "default" && featuresListPositionType !== "relative" && featuresListVROrientationType === "top" && featuresListVRTopOffset.Tablet !== undefined ? `top: ${featuresListVRTopOffset.Tablet}${featuresListVRTopOffsetUnits.Tablet};` : ""}
-                    ${featuresListPositionType !== "default" && featuresListPositionType !== "relative" && featuresListVROrientationType === "bottom" && featuresListVRBottomOffset.Tablet !== undefined ? `bottom: ${featuresListVRBottomOffset.Tablet}${featuresListVRBottomOffsetUnits.Tablet};` : ""}
-                    ${FeatureGlobalZIndex.Tablet ? `z-index: ${FeatureGlobalZIndex.Tablet};` : ""}
-                    ${globalTabletPadding && FeatureGlobalPaddingTablet.top ? `padding: ${globalTabletPadding};` : ""}
-                    ${globalTabletMargin && FeatureGlobalMarginTablet.top ? `margin: ${globalTabletMargin};` : ""}
-                    ${globalTabletBorderWidth && FeatureGlobalBorderTablet.top ? `border-width: ${globalTabletBorderWidth};` : ""}
-                    ${globalTabletBorderRadiusWidth && FeatureGlobalBorderRadiusTablet.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ""}
+                .fb-news-ticker-wrapper.${blockID} {
+                    ${newsTickerPositionType !== "default" ? `position: ${newsTickerPositionType};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "left" && newsTickerHZLeftOffset.Tablet !== undefined ? `left: ${newsTickerHZLeftOffset.Tablet}${newsTickerHZLeftOffsetUnits.Tablet};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "right" && newsTickerHZRightOffset.Tablet !== undefined ? `right: ${newsTickerHZRightOffset.Tablet}${newsTickerHZRightOffsetUnits.Tablet};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "top" && newsTickerVRTopOffset.Tablet !== undefined ? `top: ${newsTickerVRTopOffset.Tablet}${newsTickerVRTopOffsetUnits.Tablet};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "bottom" && newsTickerVRBottomOffset.Tablet !== undefined ? `bottom: ${newsTickerVRBottomOffset.Tablet}${newsTickerVRBottomOffsetUnits.Tablet};` : ""}
+                    ${newsTickerGlobalZIndex.Tablet ? `z-index: ${newsTickerGlobalZIndex.Tablet};` : ""}
+                    ${globalTabletPadding && newsTickerGlobalPaddingTablet.top ? `padding: ${globalTabletPadding};` : ""}
+                    ${globalTabletMargin && newsTickerGlobalMarginTablet.top ? `margin: ${globalTabletMargin};` : ""}
+                    ${globalTabletBorderWidth && newsTickerGlobalBorderTablet.top ? `border-width: ${globalTabletBorderWidth};` : ""}
+                    ${globalTabletBorderRadiusWidth && newsTickerGlobalBorderRadiusTablet.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ""}
                 }
                 .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container .fb-news-ticker-label-icon .fb-icon-wrapper{
                     ${labelIconTabletPadding && labelIconPaddingTablet.top ? `padding: ${labelIconTabletPadding};` : ""}
@@ -1589,20 +2316,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${iconSize.Tablet ? `width: ${iconSize.Tablet}${iconSizeUnits.Tablet};` : ""}
                     ${iconSize.Tablet ? `height: ${iconSize.Tablet}${iconSizeUnits.Tablet};` : ""}
                 }
+				.fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner .fb-news-ticker-time{
+					${tickerTimerTabletPadding && tickerTimerPaddingTablet.top ? `padding: ${tickerTimerTabletPadding};` : ""}
+					${tickerTimerTabletMargin && tickerTimerMarginTablet.top ? `margin: ${tickerTimerTabletMargin};` : ""}
+					${tickerTimerTabletBorderWidth && tickerTimerBorderTablet.top ? `border-width: ${tickerTimerTabletBorderWidth};` : ""}
+					${tickerTimerTabletBorderRadiusWidth && tickerTimerBorderRadiusTablet.top ? `border-radius: ${tickerTimerTabletBorderRadiusWidth};` : ""}
+				}
             }
     
             @media only screen and (max-width: 767px) {
-                .fb-feature-main-wrapper.${blockID} {
-                    ${featuresListPositionType !== "default" ? `position: ${featuresListPositionType};` : ""}
-                    ${featuresListPositionType !== "default" && featuresListPositionType !== "relative" && featuresListHZOrientationType === "left" && featuresListHZLeftOffset.Mobile !== undefined ? `left: ${featuresListHZLeftOffset.Mobile}${featuresListHZLeftOffsetUnits.Mobile};` : ""}
-                    ${featuresListPositionType !== "default" && featuresListPositionType !== "relative" && featuresListHZOrientationType === "right" && featuresListHZRightOffset.Mobile !== undefined ? `right: ${featuresListHZRightOffset.Mobile}${featuresListHZRightOffsetUnits.Mobile};` : ""}
-                    ${featuresListPositionType !== "default" && featuresListPositionType !== "relative" && featuresListVROrientationType === "top" && featuresListVRTopOffset.Mobile !== undefined ? `top: ${featuresListVRTopOffset.Mobile}${featuresListVRTopOffsetUnits.Mobile};` : ""}
-                    ${featuresListPositionType !== "default" && featuresListPositionType !== "relative" && featuresListVROrientationType === "bottom" && featuresListVRBottomOffset.Mobile !== undefined ? `bottom: ${featuresListVRBottomOffset.Mobile}${featuresListVRBottomOffsetUnits.Mobile};` : ""}
-                    ${FeatureGlobalZIndex.Mobile ? `z-index: ${FeatureGlobalZIndex.Mobile};` : ""}
-                    ${globalMobilePadding && FeatureGlobalPaddingMobile.top ? `padding: ${globalMobilePadding};` : ""}
-                    ${globalMobileMargin && FeatureGlobalMarginMobile.top ? `margin: ${globalMobileMargin};` : ""}
-                    ${globalMobileBorderWidth && FeatureGlobalBorderMobile.top ? `border-width: ${globalMobileBorderWidth};` : ""}
-                    ${globalMobileBorderRadiusWidth && FeatureGlobalBorderRadiusMobile.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ""}
+                .fb-news-ticker-wrapper.${blockID} {
+                    ${newsTickerPositionType !== "default" ? `position: ${newsTickerPositionType};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "left" && newsTickerHZLeftOffset.Mobile !== undefined ? `left: ${newsTickerHZLeftOffset.Mobile}${newsTickerHZLeftOffsetUnits.Mobile};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "right" && newsTickerHZRightOffset.Mobile !== undefined ? `right: ${newsTickerHZRightOffset.Mobile}${newsTickerHZRightOffsetUnits.Mobile};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "top" && newsTickerVRTopOffset.Mobile !== undefined ? `top: ${newsTickerVRTopOffset.Mobile}${newsTickerVRTopOffsetUnits.Mobile};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "bottom" && newsTickerVRBottomOffset.Mobile !== undefined ? `bottom: ${newsTickerVRBottomOffset.Mobile}${newsTickerVRBottomOffsetUnits.Mobile};` : ""}
+                    ${newsTickerGlobalZIndex.Mobile ? `z-index: ${newsTickerGlobalZIndex.Mobile};` : ""}
+                    ${globalMobilePadding && newsTickerGlobalPaddingMobile.top ? `padding: ${globalMobilePadding};` : ""}
+                    ${globalMobileMargin && newsTickerGlobalMarginMobile.top ? `margin: ${globalMobileMargin};` : ""}
+                    ${globalMobileBorderWidth && newsTickerGlobalBorderMobile.top ? `border-width: ${globalMobileBorderWidth};` : ""}
+                    ${globalMobileBorderRadiusWidth && newsTickerGlobalBorderRadiusMobile.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ""}
                 }
                 .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container {
                     ${labelContainerMobilePadding && labelContainerPaddingMobile.top ? `padding: ${labelContainerMobilePadding};` : ""}
@@ -1622,6 +2355,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${iconSize.Mobile ? `width: ${iconSize.Mobile}${iconSizeUnits.Mobile};` : ""}
                     ${iconSize.Mobile ? `height: ${iconSize.Mobile}${iconSizeUnits.Mobile};` : ""}
                 }
+				.fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner .fb-news-ticker-time{
+					${tickerTimerTabletPadding && tickerTimerPaddingTablet.top ? `padding: ${tickerTimerTabletPadding};` : ""}
+					${tickerTimerTabletMargin && tickerTimerMarginTablet.top ? `margin: ${tickerTimerTabletMargin};` : ""}
+					${tickerTimerTabletBorderWidth && tickerTimerBorderTablet.top ? `border-width: ${tickerTimerTabletBorderWidth};` : ""}
+					${tickerTimerTabletBorderRadiusWidth && tickerTimerBorderRadiusTablet.top ? `border-radius: ${tickerTimerTabletBorderRadiusWidth};` : ""}
+				}
+
             }
         `;
         return style;
@@ -1629,7 +2369,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     
 
 	const customCss = getCustomCss(
-		featuresListGlobalWraperCustomCSS,
+		newsTickerGlobalWraperCustomCSS,
 		`.${blockID}`,
 	);
 
@@ -1648,12 +2388,70 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	 */
 	const generalControls = (
 		<>
-			<PanelBody title={__("Label", "frontis-blocks")} initialOpen={true}>
+			<div className="fb-presets-wrapper">
+				<PanelBody
+					title={__("Presets", "frontis-block")}
+					initialOpen={true}
+				>
+					<SelectControl
+						label={__("Preset Style", "frontis-blocks")}
+						value={newsTickerPresetStyle}
+						options={PRESETS}
+						onChange={(selected) => changeNewsTickerPreset(selected)}
+					/>
+				</PanelBody>
+			</div>
+			<PanelBody title={__("Settings", "frontis-blocks")} initialOpen={true}>
+				<ToggleControl
+					label={__("Show Navigation", "frontis-blocks")}
+					checked={showArrows}
+					onChange={(value) => setAttributes({ showArrows: value })}
+				/>
+				<ToggleControl
+					label={__("Show Time", "frontis-blocks")}
+					checked={showTime}
+					onChange={(value) => setAttributes({ showTime: value })}
+				/>
+				{showArrows && (
+					<ToggleControl
+						label={__("Show Auto Play Button", "frontis-blocks")}
+						checked={showAutoplayButton}
+						onChange={(value) => setAttributes({ showAutoplayButton: value })}
+					/>
+				)}
+				
+				{showArrows && (
+					<SelectControl
+						label={__("Navigation Position", "frontis-block")}
+						value={navigationPosition}
+						options={NAVIGATION_POSITION}
+						onChange={(value) => setAttributes({ navigationPosition: value })}
+					/>
+				)}
+
+				{showTime && (
+					<SelectControl
+						label={__("Time Position", "frontis-block")}
+						value={timerPosition}
+						options={TIMER_POSITION}
+						onChange={(value) => setAttributes({ timerPosition: value })}
+					/>
+				)}
+				
+			</PanelBody>
+			<PanelBody title={__("Label", "frontis-blocks")} initialOpen={false}>
 				<SelectControl
 					label={__("Content Type", "frontis-block")}
 					value={contentType}
 					options={CONTENT_TYPE}
 					onChange={(value) => setAttributes({ contentType: value })}
+				/>
+
+				<SelectControl
+					label={__("Label Position", "frontis-block")}
+					value={labelPosition}
+					options={LABEL_POSITION}
+					onChange={(value) => setAttributes({ labelPosition: value })}
 				/>
 
 				<TextControl
@@ -1687,10 +2485,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									<Button
 										key={key}
 										onClick={() =>
-											setAttributes({ FeatureIconAlignment: item.value })
+											setAttributes({ newsTickerIconAlignment: item.value })
 										}
 										className={`fb-setting-text-alignment-single-btn ${
-											FeatureIconAlignment === item.value ? "active" : ""
+											newsTickerIconAlignment === item.value ? "active" : ""
 										}`}
 									>
 										{item.label}
@@ -1766,6 +2564,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					deviceType={deviceType}
 					setAttributes={setAttributes}
 				/>
+
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={labelTextColorSwitcher}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ labelTextColorSwitcher: value })
+					}
+				/>
+
+				{labelTextColorSwitcher === "normal" && (
+					<FB_ColorControl
+						label={__("Color", "frontis-blocks")}
+						globalColor={labelTextColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								labelTextColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+
+				{labelTextColorSwitcher === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={labelTextHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								labelTextHoverColor:
+									value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
@@ -2003,7 +2835,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			</PanelBody>
             {labelIconSwitcher &&(
                 <PanelBody
-				title={__("Icon", "frontis-blocks")}
+				title={__("Label Icon", "frontis-blocks")}
 				initialOpen={true}
 				className="fb-setting-layout-header"
                 >
@@ -2289,7 +3121,373 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 </PanelBody>
             )}
-			
+			{showArrows &&(
+				<PanelBody
+				title={__("Navigation Icon", "frontis-blocks")}
+				initialOpen={true}
+				className="fb-setting-layout-header"
+                >
+                    <FB_SwitcherControl
+                        label={__("Color", "frontis-blocks")}
+                        globalSwitcher={navigationIconColorSwitcher}
+                        setGlobalSwitcher={(value) =>
+                            setAttributes({ navigationIconColorSwitcher: value })
+                        }
+                    />
+
+                    {navigationIconColorSwitcher === "normal" && (
+                        <FB_ColorControl
+                            label={__("Color", "frontis-blocks")}
+                            globalColor={navigationIconColor}
+                            setGlobalColor={(value) =>
+                                setAttributes({
+                                    navigationIconColor: value === undefined ? "" : value,
+                                })
+                            }
+                        />
+                    )}
+
+                    {navigationIconColorSwitcher === "hover" && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={navigationIconHoverColor}
+                            setGlobalColor={(value) =>
+                                setAttributes({
+                                    navigationIconHoverColor:
+                                        value === undefined ? "" : value,
+                                })
+                            }
+                        />
+                    )}
+                </PanelBody>
+			)}
+			{showTime &&(
+				<PanelBody
+				title={__("Time", "frontis-blocks")}
+				initialOpen={true}
+				className="fb-setting-layout-header"
+				>
+					<FB_SwitcherControl
+						label={__("Border Color", "frontis-blocks")}
+						globalSwitcher={tickerTimerColorSwitcher}
+						setGlobalSwitcher={(value) =>
+							setAttributes({ tickerTimerColorSwitcher: value })
+						}
+					/>
+
+					{tickerTimerColorSwitcher === "normal" && (
+						<FB_ColorControl
+							label={__("Color", "frontis-blocks")}
+							globalColor={tickerTimerColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									tickerTimerColor: value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+
+					{tickerTimerColorSwitcher === "hover" && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={tickerTimerHoverColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									tickerTimerHoverColor:
+										value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+
+					<FB_TypographyControl
+						globalTypoControlActive={true}
+						globalTypoSwitcher={tickerTimerTypoSwitcher}
+						storeGlobalTypographyData={(value) => setAttributes({ tickerTimerTypographyData: value })}
+
+						globalTypoType={tickerTimerTypoType}
+						onChangeGlobalTypoType={(value) => {
+							setAttributes({
+								tickerTimerTypoType: value,
+								tickerTimerTypoSwitcher: value === 'default' ? { ...tickerTimerTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...tickerTimerTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+							})
+						}}
+
+						globalTypoOption={tickerTimerTypoOption}
+						onChangeGlobalTypoOption={(value) => setAttributes({ tickerTimerTypoOption: value })}
+
+						fontFamily={tickerTimerFontFamily}
+						onChangeFontFamily={(value) => setAttributes({ tickerTimerFontFamily: value, tickerTimerTypoSwitcher: { ...tickerTimerTypoSwitcher, fontFamily: value && false } })}
+
+						fontSize={tickerTimerFontSize}
+						onChangeFontSize={(value) => setAttributes({ tickerTimerFontSize: value, tickerTimerTypoSwitcher: { ...tickerTimerTypoSwitcher, fontSize: value && false } })}
+
+						fontSizeUnits={tickerTimerFontSizeUnits}
+						onChangeFontSizeUnit={(value) => setAttributes({ tickerTimerFontSizeUnits: value })}
+
+						fontWeight={tickerTimerFontWeight}
+						onChangeFontWeight={(value) => setAttributes({ tickerTimerFontWeight: value, tickerTimerTypoSwitcher: { ...tickerTimerTypoSwitcher, fontWeight: value && false } })}
+
+						fontStyle={tickerTimerFontStyle}
+						onChangeFontStyle={(value) => setAttributes({ tickerTimerFontStyle: value, tickerTimerTypoSwitcher: { ...tickerTimerTypoSwitcher, fontStyle: value && false } })}
+
+						textTransform={tickerTimerTextTransform}
+						onChangeTextTransform={(value) => setAttributes({ tickerTimerTextTransform: value, tickerTimerTypoSwitcher: { ...tickerTimerTypoSwitcher, textTransform: value && false } })}
+
+						textDecoration={tickerTimerTextDecoration}
+						onChangeTextDecoration={(value) => setAttributes({ tickerTimerTextDecoration: value, tickerTimerTypoSwitcher: { ...tickerTimerTypoSwitcher, textDecoration: value && false } })}
+
+						letterSpacing={tickerTimerLetterSpacing}
+						onChangeLetterSpacing={(value) => setAttributes({ tickerTimerLetterSpacing: value, tickerTimerTypoSwitcher: { ...tickerTimerTypoSwitcher, letterSpacing: value && false } })}
+
+						letterSpacingUnits={tickerTimerLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) => setAttributes({ tickerTimerLetterSpacingUnits: value })}
+
+						lineHeight={tickerTimerLineHeight}
+						onChangeLineHeight={(value) => setAttributes({ tickerTimerLineHeight: value, tickerTimerTypoSwitcher: { ...tickerTimerTypoSwitcher, lineHeight: value && false } })}
+
+						lineHeightUnits={tickerTimerLineHeightUnits}
+						onChangeLineHeightUnit={(value) => setAttributes({ tickerTimerLineHeightUnits: value })}
+
+						deviceType={deviceType}
+						setAttributes={setAttributes}
+					/>
+					<FB_Spacing
+						label={__("Padding", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handletickerTimerPaddingUnitsHandler}
+						spacingUnits={tickerTimerPaddingUnits}
+						spacingDesktop={tickerTimerPaddingDesktop}
+						spacingTablet={tickerTimerPaddingTablet}
+						spacingMobile={tickerTimerPaddingMobile}
+						handleSpacingUnitHandler={handletickerTimerPaddingUnitChange}
+						spacingCombineBtn={tickerTimerPaddingLink}
+						spacingCombineBtnHandler={handletickerTimerPaddingCombineBtn}
+						setAttributes={setAttributes}
+					/>
+					<FB_Spacing
+						label={__("Margin", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handletickerTimerMarginUnitsHandler}
+						spacingUnits={tickerTimerMarginUnits}
+						spacingDesktop={tickerTimerMarginDesktop}
+						spacingTablet={tickerTimerMarginTablet}
+						spacingMobile={tickerTimerMarginMobile}
+						handleSpacingUnitHandler={handletickerTimerMarginUnitChange}
+						spacingCombineBtn={tickerTimerMarginLink}
+						spacingCombineBtnHandler={handletickerTimerMarginCombineBtn}
+						setAttributes={setAttributes}
+					/>
+					<FB_BackgroundColorControl
+						bgColorSwitcher={tickerTimerBgColorSwitcher}
+						setBgColorSwitcher={(value) =>
+							setAttributes({ tickerTimerBgColorSwitcher: value })
+						}
+						normalBackgroundType={tickerTimerNormalBackgroundType}
+						setNormalBackgroundType={(value) =>
+							setAttributes({ tickerTimerNormalBackgroundType: value })
+						}
+						normalClassicColor={tickerTimerNormalClassicColor}
+						setNormalClassicColor={(value) =>
+							setAttributes({
+								tickerTimerNormalClassicColor:
+									value === undefined ? "" : value,
+							})
+						}
+						normalGradientColor={tickerTimerNormalGradientColor}
+						setNormalGradientColor={(value) =>
+							setAttributes({
+								tickerTimerNormalGradientColor:
+									value === undefined ? null : value,
+							})
+						}
+						normalCustomGradientSwitcher={
+							tickerTimerNormalCustomGradientSwitcher
+						}
+						setNormalCustomGradientSwitcher={(value) =>
+							setAttributes({ tickerTimerNormalCustomGradientSwitcher: value })
+						}
+						normalCustomGradientInputValue={
+							tickerTimerNormalCustomGradientInputValue
+						}
+						setNormalCustomGradientInputValue={(value) =>
+							setAttributes({
+								tickerTimerNormalCustomGradientInputValue: value,
+							})
+						}
+						normalBackgroundImageUrl={tickerTimerNormalBackgroundImageUrl}
+						setNormalBackgroundImageUrl={(value) =>
+							setAttributes({ tickerTimerNormalBackgroundImageUrl: value })
+						}
+						normalBackgroundImageAlt={tickerTimerNormalBackgroundImageAlt}
+						setNormalBackgroundImageAlt={(value) =>
+							setAttributes({ tickerTimerNormalBackgroundImageAlt: value })
+						}
+						normalBackgroundImageID={tickerTimerNormalBackgroundImageID}
+						setNormalBackgroundImageID={(value) =>
+							setAttributes({ tickerTimerNormalBackgroundImageID: value })
+						}
+						normalBackgroundImagePosition={
+							tickerTimerNormalBackgroundImagePosition
+						}
+						setNormalBackgroundImagePosition={(value) =>
+							setAttributes({
+								tickerTimerNormalBackgroundImagePosition: value,
+							})
+						}
+						normalBackgroundImageAttachment={
+							tickerTimerNormalBackgroundImageAttachment
+						}
+						setNormalBackgroundImageAttachment={(value) =>
+							setAttributes({
+								tickerTimerNormalBackgroundImageAttachment: value,
+							})
+						}
+						normalBackgroundImageRepeat={
+							tickerTimerNormalBackgroundImageRepeat
+						}
+						setNormalBackgroundImageRepeat={(value) =>
+							setAttributes({ tickerTimerNormalBackgroundImageRepeat: value })
+						}
+						normalBackgroundImageSize={tickerTimerNormalBackgroundImageSize}
+						setNormalBackgroundImageSize={(value) =>
+							setAttributes({ tickerTimerNormalBackgroundImageSize: value })
+						}
+						hoverBackgroundType={tickerTimerHoverBackgroundType}
+						setHoverBackgroundType={(value) =>
+							setAttributes({ tickerTimerHoverBackgroundType: value })
+						}
+						hoverClassicColor={tickerTimerHoverClassicColor}
+						setHoverClassicColor={(value) =>
+							setAttributes({
+								tickerTimerHoverClassicColor: value === undefined ? "" : value,
+							})
+						}
+						hoverGradientColor={tickerTimerHoverGradientColor}
+						setHoverGradientColor={(value) =>
+							setAttributes({
+								tickerTimerHoverGradientColor:
+									value === undefined ? null : value,
+							})
+						}
+						hoverCustomGradientSwitcher={
+							tickerTimerHoverCustomGradientSwitcher
+						}
+						setHoverCustomGradientSwitcher={(value) =>
+							setAttributes({ tickerTimerHoverCustomGradientSwitcher: value })
+						}
+						hoverCustomGradientInputValue={
+							tickerTimerHoverCustomGradientInputValue
+						}
+						setHoverCustomGradientInputValue={(value) =>
+							setAttributes({
+								tickerTimerHoverCustomGradientInputValue: value,
+							})
+						}
+						hoverBackgroundImageUrl={tickerTimerHoverBackgroundImageUrl}
+						setHoverBackgroundImageUrl={(value) =>
+							setAttributes({ tickerTimerHoverBackgroundImageUrl: value })
+						}
+						hoverBackgroundImageAlt={tickerTimerHoverBackgroundImageAlt}
+						setHoverBackgroundImageAlt={(value) =>
+							setAttributes({ tickerTimerHoverBackgroundImageAlt: value })
+						}
+						hoverBackgroundImageID={tickerTimerHoverBackgroundImageID}
+						setHoverBackgroundImageID={(value) =>
+							setAttributes({ tickerTimerHoverBackgroundImageID: value })
+						}
+						hoverBackgroundImagePosition={
+							tickerTimerHoverBackgroundImagePosition
+						}
+						setHoverBackgroundImagePosition={(value) =>
+							setAttributes({ tickerTimerHoverBackgroundImagePosition: value })
+						}
+						hoverBackgroundImageAttachment={
+							tickerTimerHoverBackgroundImageAttachment
+						}
+						setHoverBackgroundImageAttachment={(value) =>
+							setAttributes({
+								tickerTimerHoverBackgroundImageAttachment: value,
+							})
+						}
+						hoverBackgroundImageRepeat={tickerTimerHoverBackgroundImageRepeat}
+						setHoverBackgroundImageRepeat={(value) =>
+							setAttributes({ tickerTimerHoverBackgroundImageRepeat: value })
+						}
+						hoverBackgroundImageSize={tickerTimerHoverBackgroundImageSize}
+						setHoverBackgroundImageSize={(value) =>
+							setAttributes({ tickerTimerHoverBackgroundImageSize: value })
+						}
+					/>
+					<SelectControl
+						label={__("Border Style", "frontis-blocks")}
+						value={tickerTimerBorder}
+						options={BORDER_STYLES}
+						onChange={(value) => setAttributes({ tickerTimerBorder: value })}
+					/>
+
+					<FB_SwitcherControl
+						label={__("Border Color", "frontis-blocks")}
+						globalSwitcher={tickerTimerBorderColorSwitcher}
+						setGlobalSwitcher={(value) =>
+							setAttributes({ tickerTimerBorderColorSwitcher: value })
+						}
+					/>
+
+					{tickerTimerBorderColorSwitcher === "normal" && (
+						<FB_ColorControl
+							label={__("Color", "frontis-blocks")}
+							globalColor={tickerTimerBorderColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									tickerTimerBorderColor: value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+
+					{tickerTimerBorderColorSwitcher === "hover" && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={tickerTimerBorderHoverColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									tickerTimerBorderHoverColor:
+										value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+
+					<FB_Spacing
+						label={__("Border", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handletickerTimerBorderUnitsHandler}
+						spacingUnits={tickerTimerBorderUnits}
+						spacingDesktop={tickerTimerBorderDesktop}
+						spacingTablet={tickerTimerBorderTablet}
+						spacingMobile={tickerTimerBorderMobile}
+						handleSpacingUnitHandler={handletickerTimerBorderUnitChange}
+						spacingCombineBtn={tickerTimerBorderLink}
+						spacingCombineBtnHandler={handletickerTimerBorderCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+					<FB_Spacing
+						label={__("Border Radius", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handletickerTimerBorderRadiusUnitsHandler}
+						spacingUnits={tickerTimerBorderRadiusUnits}
+						spacingDesktop={tickerTimerBorderRadiusDesktop}
+						spacingTablet={tickerTimerBorderRadiusTablet}
+						spacingMobile={tickerTimerBorderRadiusMobile}
+						handleSpacingUnitHandler={handletickerTimerBorderRadiusUnitChange}
+						spacingCombineBtn={tickerTimerBorderRadiusLink}
+						spacingCombineBtnHandler={handletickerTimerBorderRadiusCombineBtn}
+						setAttributes={setAttributes}
+					/>
+				</PanelBody>
+			)}
 		</>
 	);
 
@@ -2309,10 +3507,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							min={0}
 							max={10000000}
 							label={__("Z Index", "frontis-blocks")}
-							rangeValue={FeatureGlobalZIndex}
+							rangeValue={newsTickerGlobalZIndex}
 							onChangeHandler={(value) =>
 								setAttributes({
-									FeatureGlobalZIndex: value === 0 ? undefined : value,
+									newsTickerGlobalZIndex: value === 0 ? undefined : value,
 								})
 							}
 							deviceType={deviceType}
@@ -2324,76 +3522,76 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						<SelectControl
 							label={__("Overflow", "frontis-blocks")}
-							value={featuresListOverflow}
+							value={newsTickerOverflow}
 							options={OVERFLOW_OP}
 							onChange={(value) =>
-								setAttributes({ featuresListOverflow: value })
+								setAttributes({ newsTickerOverflow: value })
 							}
 						/>
 
 						<FB_PositionControl
 							deviceType={deviceType}
-							positionType={featuresListPositionType}
+							positionType={newsTickerPositionType}
 							setPositionType={(value) =>
-								setAttributes({ featuresListPositionType: value })
+								setAttributes({ newsTickerPositionType: value })
 							}
-							HZOrientationType={featuresListHZOrientationType}
+							HZOrientationType={newsTickerHZOrientationType}
 							setHZOrientationType={(value) =>
-								setAttributes({ featuresListHZOrientationType: value })
+								setAttributes({ newsTickerHZOrientationType: value })
 							}
-							VROrientationType={featuresListVROrientationType}
+							VROrientationType={newsTickerVROrientationType}
 							setVROrientationType={(value) =>
-								setAttributes({ featuresListVROrientationType: value })
+								setAttributes({ newsTickerVROrientationType: value })
 							}
-							HZLeftOffset={featuresListHZLeftOffset}
+							HZLeftOffset={newsTickerHZLeftOffset}
 							setHZLeftOffset={(value) =>
-								setAttributes({ featuresListHZLeftOffset: value })
+								setAttributes({ newsTickerHZLeftOffset: value })
 							}
-							HZLeftOffsetUnits={featuresListHZLeftOffsetUnits}
+							HZLeftOffsetUnits={newsTickerHZLeftOffsetUnits}
 							setHZLeftOffsetUnits={(value) =>
-								setAttributes({ featuresListHZLeftOffsetUnits: value })
+								setAttributes({ newsTickerHZLeftOffsetUnits: value })
 							}
-							HZRightOffset={featuresListHZRightOffset}
+							HZRightOffset={newsTickerHZRightOffset}
 							setHZRightOffset={(value) =>
-								setAttributes({ featuresListHZRightOffset: value })
+								setAttributes({ newsTickerHZRightOffset: value })
 							}
-							HZRightOffsetUnits={featuresListHZRightOffsetUnits}
+							HZRightOffsetUnits={newsTickerHZRightOffsetUnits}
 							setHZRightOffsetUnits={(value) =>
-								setAttributes({ featuresListHZRightOffsetUnits: value })
+								setAttributes({ newsTickerHZRightOffsetUnits: value })
 							}
-							VRTopOffset={featuresListVRTopOffset}
+							VRTopOffset={newsTickerVRTopOffset}
 							setVRTopOffset={(value) =>
-								setAttributes({ featuresListVRTopOffset: value })
+								setAttributes({ newsTickerVRTopOffset: value })
 							}
-							VRTopOffsetUnits={featuresListVRTopOffsetUnits}
+							VRTopOffsetUnits={newsTickerVRTopOffsetUnits}
 							setVRTopOffsetUnits={(value) =>
-								setAttributes({ featuresListVRTopOffsetUnits: value })
+								setAttributes({ newsTickerVRTopOffsetUnits: value })
 							}
-							VRBottomOffset={featuresListVRBottomOffset}
+							VRBottomOffset={newsTickerVRBottomOffset}
 							setVRBottomOffset={(value) =>
-								setAttributes({ featuresListVRBottomOffset: value })
+								setAttributes({ newsTickerVRBottomOffset: value })
 							}
-							VRBottomOffsetUnits={featuresListVRBottomOffsetUnits}
+							VRBottomOffsetUnits={newsTickerVRBottomOffsetUnits}
 							setVRBottomOffsetUnits={(value) =>
-								setAttributes({ featuresListVRBottomOffsetUnits: value })
+								setAttributes({ newsTickerVRBottomOffsetUnits: value })
 							}
 							setAttributes={setAttributes}
 						/>
 
 						<FB_InputControl
 							label={__("CSS ID", "frontis-blocks")}
-							value={featuresListGlobalWraperID}
+							value={newsTickerGlobalWraperID}
 							onChangeValue={(value) =>
-								setAttributes({ featuresListGlobalWraperID: value })
+								setAttributes({ newsTickerGlobalWraperID: value })
 							}
 							helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
 						/>
 
 						<FB_InputControl
 							label={__("CSS Class", "frontis-blocks")}
-							value={featuresListGlobalWraperClass}
+							value={newsTickerGlobalWraperClass}
 							onChangeValue={(value) =>
-								setAttributes({ featuresListGlobalWraperClass: value })
+								setAttributes({ newsTickerGlobalWraperClass: value })
 							}
 							helpText={__("Separate with spaces key.", "frontis-blocks")}
 						/>
@@ -2407,12 +3605,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							label={__("Padding", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
-							spacingUnits={FeatureGlobalPaddingUnits}
-							spacingDesktop={FeatureGlobalPaddingDesktop}
-							spacingTablet={FeatureGlobalPaddingTablet}
-							spacingMobile={FeatureGlobalPaddingMobile}
+							spacingUnits={newsTickerGlobalPaddingUnits}
+							spacingDesktop={newsTickerGlobalPaddingDesktop}
+							spacingTablet={newsTickerGlobalPaddingTablet}
+							spacingMobile={newsTickerGlobalPaddingMobile}
 							handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
-							spacingCombineBtn={FeatureGlobalPaddingLink}
+							spacingCombineBtn={newsTickerGlobalPaddingLink}
 							spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
 							setAttributes={setAttributes}
 						/>
@@ -2420,12 +3618,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							label={__("Margin", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalMarginUnitsHandler}
-							spacingUnits={FeatureGlobalMarginUnits}
-							spacingDesktop={FeatureGlobalMarginDesktop}
-							spacingTablet={FeatureGlobalMarginTablet}
-							spacingMobile={FeatureGlobalMarginMobile}
+							spacingUnits={newsTickerGlobalMarginUnits}
+							spacingDesktop={newsTickerGlobalMarginDesktop}
+							spacingTablet={newsTickerGlobalMarginTablet}
+							spacingMobile={newsTickerGlobalMarginMobile}
 							handleSpacingUnitHandler={handleGlobalMarginUnitChange}
-							spacingCombineBtn={FeatureGlobalMarginLink}
+							spacingCombineBtn={newsTickerGlobalMarginLink}
 							spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
 							setAttributes={setAttributes}
 						/>
@@ -2436,157 +3634,157 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						initialOpen={false}
 					>
 						<FB_BackgroundColorControl
-							bgColorSwitcher={FeatureGlobalBgColorSwitcher}
+							bgColorSwitcher={newsTickerGlobalBgColorSwitcher}
 							setBgColorSwitcher={(value) =>
-								setAttributes({ FeatureGlobalBgColorSwitcher: value })
+								setAttributes({ newsTickerGlobalBgColorSwitcher: value })
 							}
-							normalBackgroundType={FeatureGlobalNormalBackgroundType}
+							normalBackgroundType={newsTickerGlobalNormalBackgroundType}
 							setNormalBackgroundType={(value) =>
-								setAttributes({ FeatureGlobalNormalBackgroundType: value })
+								setAttributes({ newsTickerGlobalNormalBackgroundType: value })
 							}
-							normalClassicColor={FeatureGlobalNormalClassicColor}
+							normalClassicColor={newsTickerGlobalNormalClassicColor}
 							setNormalClassicColor={(value) =>
 								setAttributes({
-									FeatureGlobalNormalClassicColor:
+									newsTickerGlobalNormalClassicColor:
 										value === undefined ? "" : value,
 								})
 							}
-							normalGradientColor={FeatureGlobalNormalGradientColor}
+							normalGradientColor={newsTickerGlobalNormalGradientColor}
 							setNormalGradientColor={(value) =>
 								setAttributes({
-									FeatureGlobalNormalGradientColor:
+									newsTickerGlobalNormalGradientColor:
 										value === undefined ? null : value,
 								})
 							}
 							normalCustomGradientSwitcher={
-								FeatureGlobalNormalCustomGradientSwitcher
+								newsTickerGlobalNormalCustomGradientSwitcher
 							}
 							setNormalCustomGradientSwitcher={(value) =>
 								setAttributes({
-									FeatureGlobalNormalCustomGradientSwitcher: value,
+									newsTickerGlobalNormalCustomGradientSwitcher: value,
 								})
 							}
 							normalCustomGradientInputValue={
-								FeatureGlobalNormalCustomGradientInputValue
+								newsTickerGlobalNormalCustomGradientInputValue
 							}
 							setNormalCustomGradientInputValue={(value) =>
 								setAttributes({
-									FeatureGlobalNormalCustomGradientInputValue: value,
+									newsTickerGlobalNormalCustomGradientInputValue: value,
 								})
 							}
-							normalBackgroundImageUrl={FeatureGlobalNormalBackgroundImageUrl}
+							normalBackgroundImageUrl={newsTickerGlobalNormalBackgroundImageUrl}
 							setNormalBackgroundImageUrl={(value) =>
-								setAttributes({ FeatureGlobalNormalBackgroundImageUrl: value })
+								setAttributes({ newsTickerGlobalNormalBackgroundImageUrl: value })
 							}
-							normalBackgroundImageAlt={FeatureGlobalNormalBackgroundImageAlt}
+							normalBackgroundImageAlt={newsTickerGlobalNormalBackgroundImageAlt}
 							setNormalBackgroundImageAlt={(value) =>
-								setAttributes({ FeatureGlobalNormalBackgroundImageAlt: value })
+								setAttributes({ newsTickerGlobalNormalBackgroundImageAlt: value })
 							}
-							normalBackgroundImageID={FeatureGlobalNormalBackgroundImageID}
+							normalBackgroundImageID={newsTickerGlobalNormalBackgroundImageID}
 							setNormalBackgroundImageID={(value) =>
-								setAttributes({ FeatureGlobalNormalBackgroundImageID: value })
+								setAttributes({ newsTickerGlobalNormalBackgroundImageID: value })
 							}
 							normalBackgroundImagePosition={
-								FeatureGlobalNormalBackgroundImagePosition
+								newsTickerGlobalNormalBackgroundImagePosition
 							}
 							setNormalBackgroundImagePosition={(value) =>
 								setAttributes({
-									FeatureGlobalNormalBackgroundImagePosition: value,
+									newsTickerGlobalNormalBackgroundImagePosition: value,
 								})
 							}
 							normalBackgroundImageAttachment={
-								FeatureGlobalNormalBackgroundImageAttachment
+								newsTickerGlobalNormalBackgroundImageAttachment
 							}
 							setNormalBackgroundImageAttachment={(value) =>
 								setAttributes({
-									FeatureGlobalNormalBackgroundImageAttachment: value,
+									newsTickerGlobalNormalBackgroundImageAttachment: value,
 								})
 							}
 							normalBackgroundImageRepeat={
-								FeatureGlobalNormalBackgroundImageRepeat
+								newsTickerGlobalNormalBackgroundImageRepeat
 							}
 							setNormalBackgroundImageRepeat={(value) =>
 								setAttributes({
-									FeatureGlobalNormalBackgroundImageRepeat: value,
+									newsTickerGlobalNormalBackgroundImageRepeat: value,
 								})
 							}
-							normalBackgroundImageSize={FeatureGlobalNormalBackgroundImageSize}
+							normalBackgroundImageSize={newsTickerGlobalNormalBackgroundImageSize}
 							setNormalBackgroundImageSize={(value) =>
-								setAttributes({ FeatureGlobalNormalBackgroundImageSize: value })
+								setAttributes({ newsTickerGlobalNormalBackgroundImageSize: value })
 							}
-							hoverBackgroundType={FeatureGlobalHoverBackgroundType}
+							hoverBackgroundType={newsTickerGlobalHoverBackgroundType}
 							setHoverBackgroundType={(value) =>
-								setAttributes({ FeatureGlobalHoverBackgroundType: value })
+								setAttributes({ newsTickerGlobalHoverBackgroundType: value })
 							}
-							hoverClassicColor={FeatureGlobalHoverClassicColor}
+							hoverClassicColor={newsTickerGlobalHoverClassicColor}
 							setHoverClassicColor={(value) =>
 								setAttributes({
-									FeatureGlobalHoverClassicColor:
+									newsTickerGlobalHoverClassicColor:
 										value === undefined ? "" : value,
 								})
 							}
-							hoverGradientColor={FeatureGlobalHoverGradientColor}
+							hoverGradientColor={newsTickerGlobalHoverGradientColor}
 							setHoverGradientColor={(value) =>
 								setAttributes({
-									FeatureGlobalHoverGradientColor:
+									newsTickerGlobalHoverGradientColor:
 										value === undefined ? null : value,
 								})
 							}
 							hoverCustomGradientSwitcher={
-								FeatureGlobalHoverCustomGradientSwitcher
+								newsTickerGlobalHoverCustomGradientSwitcher
 							}
 							setHoverCustomGradientSwitcher={(value) =>
 								setAttributes({
-									FeatureGlobalHoverCustomGradientSwitcher: value,
+									newsTickerGlobalHoverCustomGradientSwitcher: value,
 								})
 							}
 							hoverCustomGradientInputValue={
-								FeatureGlobalHoverCustomGradientInputValue
+								newsTickerGlobalHoverCustomGradientInputValue
 							}
 							setHoverCustomGradientInputValue={(value) =>
 								setAttributes({
-									FeatureGlobalHoverCustomGradientInputValue: value,
+									newsTickerGlobalHoverCustomGradientInputValue: value,
 								})
 							}
-							hoverBackgroundImageUrl={FeatureGlobalHoverBackgroundImageUrl}
+							hoverBackgroundImageUrl={newsTickerGlobalHoverBackgroundImageUrl}
 							setHoverBackgroundImageUrl={(value) =>
-								setAttributes({ FeatureGlobalHoverBackgroundImageUrl: value })
+								setAttributes({ newsTickerGlobalHoverBackgroundImageUrl: value })
 							}
-							hoverBackgroundImageAlt={FeatureGlobalHoverBackgroundImageAlt}
+							hoverBackgroundImageAlt={newsTickerGlobalHoverBackgroundImageAlt}
 							setHoverBackgroundImageAlt={(value) =>
-								setAttributes({ FeatureGlobalHoverBackgroundImageAlt: value })
+								setAttributes({ newsTickerGlobalHoverBackgroundImageAlt: value })
 							}
-							hoverBackgroundImageID={FeatureGlobalHoverBackgroundImageID}
+							hoverBackgroundImageID={newsTickerGlobalHoverBackgroundImageID}
 							setHoverBackgroundImageID={(value) =>
-								setAttributes({ FeatureGlobalHoverBackgroundImageID: value })
+								setAttributes({ newsTickerGlobalHoverBackgroundImageID: value })
 							}
 							hoverBackgroundImagePosition={
-								FeatureGlobalHoverBackgroundImagePosition
+								newsTickerGlobalHoverBackgroundImagePosition
 							}
 							setHoverBackgroundImagePosition={(value) =>
 								setAttributes({
-									FeatureGlobalHoverBackgroundImagePosition: value,
+									newsTickerGlobalHoverBackgroundImagePosition: value,
 								})
 							}
 							hoverBackgroundImageAttachment={
-								FeatureGlobalHoverBackgroundImageAttachment
+								newsTickerGlobalHoverBackgroundImageAttachment
 							}
 							setHoverBackgroundImageAttachment={(value) =>
 								setAttributes({
-									FeatureGlobalHoverBackgroundImageAttachment: value,
+									newsTickerGlobalHoverBackgroundImageAttachment: value,
 								})
 							}
 							hoverBackgroundImageRepeat={
-								FeatureGlobalHoverBackgroundImageRepeat
+								newsTickerGlobalHoverBackgroundImageRepeat
 							}
 							setHoverBackgroundImageRepeat={(value) =>
 								setAttributes({
-									FeatureGlobalHoverBackgroundImageRepeat: value,
+									newsTickerGlobalHoverBackgroundImageRepeat: value,
 								})
 							}
-							hoverBackgroundImageSize={FeatureGlobalHoverBackgroundImageSize}
+							hoverBackgroundImageSize={newsTickerGlobalHoverBackgroundImageSize}
 							setHoverBackgroundImageSize={(value) =>
-								setAttributes({ FeatureGlobalHoverBackgroundImageSize: value })
+								setAttributes({ newsTickerGlobalHoverBackgroundImageSize: value })
 							}
 						/>
 					</PanelBody>
@@ -2596,40 +3794,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					>
 						<SelectControl
 							label={__("Border Style", "frontis-blocks")}
-							value={FeatureGlobalBorder}
+							value={newsTickerGlobalBorder}
 							options={BORDER_STYLES}
 							onChange={(value) =>
-								setAttributes({ FeatureGlobalBorder: value })
+								setAttributes({ newsTickerGlobalBorder: value })
 							}
 						/>
 
 						<FB_SwitcherControl
 							label={__("Border Color", "frontis-blocks")}
-							globalSwitcher={FeatureGlobalBorderColorSwitcher}
+							globalSwitcher={newsTickerGlobalBorderColorSwitcher}
 							setGlobalSwitcher={(value) =>
-								setAttributes({ FeatureGlobalBorderColorSwitcher: value })
+								setAttributes({ newsTickerGlobalBorderColorSwitcher: value })
 							}
 						/>
 
-						{FeatureGlobalBorderColorSwitcher === "normal" && (
+						{newsTickerGlobalBorderColorSwitcher === "normal" && (
 							<FB_ColorControl
 								label={__("Color", "frontis-blocks")}
-								globalColor={FeatureGlobalBorderColor}
+								globalColor={newsTickerGlobalBorderColor}
 								setGlobalColor={(value) =>
 									setAttributes({
-										FeatureGlobalBorderColor: value === undefined ? "" : value,
+										newsTickerGlobalBorderColor: value === undefined ? "" : value,
 									})
 								}
 							/>
 						)}
 
-						{FeatureGlobalBorderColorSwitcher === "hover" && (
+						{newsTickerGlobalBorderColorSwitcher === "hover" && (
 							<FB_ColorControl
 								label={__("Hover Color", "frontis-blocks")}
-								globalColor={FeatureGlobalBorderHoverColor}
+								globalColor={newsTickerGlobalBorderHoverColor}
 								setGlobalColor={(value) =>
 									setAttributes({
-										FeatureGlobalBorderHoverColor:
+										newsTickerGlobalBorderHoverColor:
 											value === undefined ? "" : value,
 									})
 								}
@@ -2640,12 +3838,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							label={__("Border", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalBorderUnitsHandler}
-							spacingUnits={FeatureGlobalBorderUnits}
-							spacingDesktop={FeatureGlobalBorderDesktop}
-							spacingTablet={FeatureGlobalBorderTablet}
-							spacingMobile={FeatureGlobalBorderMobile}
+							spacingUnits={newsTickerGlobalBorderUnits}
+							spacingDesktop={newsTickerGlobalBorderDesktop}
+							spacingTablet={newsTickerGlobalBorderTablet}
+							spacingMobile={newsTickerGlobalBorderMobile}
 							handleSpacingUnitHandler={handleGlobalBorderUnitChange}
-							spacingCombineBtn={FeatureGlobalBorderLink}
+							spacingCombineBtn={newsTickerGlobalBorderLink}
 							spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
 							setAttributes={setAttributes}
 						/>
@@ -2654,46 +3852,46 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							label={__("Border Radius", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
-							spacingUnits={FeatureGlobalBorderRadiusUnits}
-							spacingDesktop={FeatureGlobalBorderRadiusDesktop}
-							spacingTablet={FeatureGlobalBorderRadiusTablet}
-							spacingMobile={FeatureGlobalBorderRadiusMobile}
+							spacingUnits={newsTickerGlobalBorderRadiusUnits}
+							spacingDesktop={newsTickerGlobalBorderRadiusDesktop}
+							spacingTablet={newsTickerGlobalBorderRadiusTablet}
+							spacingMobile={newsTickerGlobalBorderRadiusMobile}
 							handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
-							spacingCombineBtn={FeatureGlobalBorderRadiusLink}
+							spacingCombineBtn={newsTickerGlobalBorderRadiusLink}
 							spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
 							setAttributes={setAttributes}
 						/>
 
 						<FB_SwitcherControl
 							label={__("Box Shadow", "frontis-blocks")}
-							globalSwitcher={FeatureGlobalBoxShadowSwitcher}
+							globalSwitcher={newsTickerGlobalBoxShadowSwitcher}
 							setGlobalSwitcher={(value) =>
-								setAttributes({ FeatureGlobalBoxShadowSwitcher: value })
+								setAttributes({ newsTickerGlobalBoxShadowSwitcher: value })
 							}
 						/>
 
-						{FeatureGlobalBoxShadowSwitcher === "normal" && (
+						{newsTickerGlobalBoxShadowSwitcher === "normal" && (
 							<FB_BoxShadowControl
 								label={__("Normal Shadow", "frontis-blocks")}
 								onBoxShadowChange={(value) =>
-									setAttributes({ FeatureGlobalBoxShadowValues: value })
+									setAttributes({ newsTickerGlobalBoxShadowValues: value })
 								}
-								initialShadowValue={FeatureGlobalBoxShadowValues}
+								initialShadowValue={newsTickerGlobalBoxShadowValues}
 								onBoxShadowStyleChange={(value) =>
-									setAttributes({ FeatureGlobalBoxShadowCssValue: value })
+									setAttributes({ newsTickerGlobalBoxShadowCssValue: value })
 								}
 							/>
 						)}
 
-						{FeatureGlobalBoxShadowSwitcher === "hover" && (
+						{newsTickerGlobalBoxShadowSwitcher === "hover" && (
 							<FB_BoxShadowControl
 								label={__("Hover Shadow", "frontis-blocks")}
 								onBoxShadowChange={(value) =>
-									setAttributes({ FeatureGlobalBoxShadowHoverValues: value })
+									setAttributes({ newsTickerGlobalBoxShadowHoverValues: value })
 								}
-								initialShadowValue={FeatureGlobalBoxShadowHoverValues}
+								initialShadowValue={newsTickerGlobalBoxShadowHoverValues}
 								onBoxShadowStyleChange={(value) =>
-									setAttributes({ FeatureGlobalBoxShadowHoverCssValue: value })
+									setAttributes({ newsTickerGlobalBoxShadowHoverCssValue: value })
 								}
 							/>
 						)}
@@ -2705,17 +3903,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						className="fb-setting-responsive-control-wrapper"
 					>
 						<FB_VisibilityControl
-							desktopValue={featuresListDesktopSwitcher}
+							desktopValue={newsTickerDesktopSwitcher}
 							setDesktopValue={(value) =>
-								setAttributes({ featuresListDesktopSwitcher: value })
+								setAttributes({ newsTickerDesktopSwitcher: value })
 							}
-							tabletValue={featuresListTabletSwitcher}
+							tabletValue={newsTickerTabletSwitcher}
 							setTabletValue={(value) =>
-								setAttributes({ featuresListTabletSwitcher: value })
+								setAttributes({ newsTickerTabletSwitcher: value })
 							}
-							mobileValue={featuresListMobileSwitcher}
+							mobileValue={newsTickerMobileSwitcher}
 							setMobileValue={(value) =>
-								setAttributes({ featuresListMobileSwitcher: value })
+								setAttributes({ newsTickerMobileSwitcher: value })
 							}
 						/>
 					</PanelBody>
@@ -2724,9 +3922,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						initialOpen={false}
 					>
 						<FB_CustomCSSEditor
-							value={featuresListGlobalWraperCustomCSS}
+							value={newsTickerGlobalWraperCustomCSS}
 							onChangeValue={(value) =>
-								setAttributes({ featuresListGlobalWraperCustomCSS: value })
+								setAttributes({ newsTickerGlobalWraperCustomCSS: value })
 							}
 						/>
 					</PanelBody>

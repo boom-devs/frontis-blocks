@@ -3,27 +3,21 @@ import {
 	useBlockProps,
 	RichText,
 	BlockControls,
-	AlignmentToolbar,
-	MediaReplaceFlow,
 	MediaPlaceholder,
 	MediaUpload,
 	MediaUploadCheck,
 } from "@wordpress/block-editor";
-import { upload } from "@wordpress/icons";
 import { useEffect } from "@wordpress/element";
 
-/**
- * Internal dependencies
- */
+//Internal dependencies
 import Inspector from "./inspector";
 import "./editor.scss";
-import { Button, ToolbarButton, ToolbarGroup } from "@wordpress/components";
+import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
 import generateSrcSet from "@Utils/generateSrcSet";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		imageLink,
 		advancedImageUrl,
 		advancedImageId,
 		advancedImageAlt,
@@ -31,13 +25,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		advancedImageDefaultHeight,
 		advancedImageSrcSet,
 		imageCaption,
-		imageWidth,
-		imgRounded,
-		imgSquare,
-		imgCircle,
 		imageStyle,
 		displayCaption,
-		captionAlignment,
 		imageSize,
 		linkSwitch,
 		linkTargetUrl,
@@ -86,9 +75,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}
 	}, [advancedImageSrcSet]);
 
-	/**
-	 * Callback: Media Upload
-	 */
+	//Callback: Media Upload
 		const onSelectImage = (media) => {
 			const newSrcSet = generateSrcSet(media.sizes);
 			setAttributes({

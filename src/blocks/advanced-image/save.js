@@ -31,6 +31,7 @@ export default function save({ attributes }) {
         advancedImageLazyLoadSwitcher,
 		smartLazyLoadSwitcher,
         smartLazyLoadImageUrl,
+        showOverlay
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -85,7 +86,9 @@ export default function save({ attributes }) {
                     id={advancedImageGlobalWraperID}
                     data-smart-lazy-load-switcher={smartLazyLoadSwitcher}
                 >
-                    <div className={`fb-advanced-image ${imageStyle || ''} ${imageSize || ''} ${imageHover || ''} ${autoFitSwitch ? imageFit || '' : ''} ${titlePosition || ''}`}>
+                    <div className={`fb-advanced-image ${imageStyle || ''} ${imageSize || ''} ${imageHover || ''} ${autoFitSwitch ? imageFit || '' : ''} ${titlePosition || ''} ${
+							showOverlay ? "overlay-simple" : ""
+						}`}>
                         <div className="fb-advanced-image-inner">
                             {advancedImageUrl ? AdvancedImageRender() : null}
                         </div>

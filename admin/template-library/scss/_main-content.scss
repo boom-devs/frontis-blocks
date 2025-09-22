@@ -567,7 +567,7 @@
             border-radius: 2px;
             cursor: pointer;
             font-family: $body-font-family;
-            font-size: $base-font-size;
+            font-size: 18px;
             font-weight: $font-weight-500;
             line-height: $body-line-height;
             transition: all 0.3s ease-in-out;
@@ -591,7 +591,8 @@
         }
       
         .fb-pagination-prev,
-        .fb-pagination-next {            padding: 9px 16px;
+        .fb-pagination-next {
+            padding: 9px 16px;
             display: flex;
             align-items: center;
             justify-content: center;

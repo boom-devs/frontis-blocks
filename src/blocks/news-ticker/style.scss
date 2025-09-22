@@ -1,10 +1,13 @@
 .fb-news-ticker-wrapper {
 	.fb-news-ticker-inner {
-		border: 1px solid #399cff;
+		border: solid;
+		border-color: #399cff;
+		border-width: 1px;
 		border-radius: 6px;
 		display: flex;
 		align-items: center;
 		overflow: hidden;
+		position: relative;
 
 		.fb-news-ticker-label-container {
 			display: flex;
@@ -12,16 +15,79 @@
 			gap: 10px;
 			background: #399cff;
 			color: #fff;
-			padding: 8px 16px;
-			svg {
-				fill: #fff;
+			padding: 28px 36px;
+
+			.fb-icon-wrapper {
 				line-height: 0;
+
+				svg {
+					fill: #fff;
+					line-height: 0;
+				}
 			}
 		}
 
 		.fb-news-ticker-content {
 			flex: 1;
 			overflow: hidden;
+		}
+
+		.fb-news-ticker-arrows {
+			display: flex;
+			gap: 10px;
+			align-items: center;
+			margin-left: auto;
+			position: absolute;
+			z-index: 99;
+			line-height: 0;
+
+			.fb-news-ticker-pause-btn {
+				cursor: pointer;
+
+				.icon-play {
+					display: none;
+				}
+
+				&.paused {
+					.icon-pause {
+						display: none;
+					}
+
+					.icon-play {
+						display: inline;
+					}
+				}
+			}
+		}
+
+		.fb-news-ticker-prev,
+		.fb-news-ticker-next {
+			cursor: pointer;
+			user-select: none;
+		}
+
+		.fb-news-ticker-time {
+			position: absolute;
+
+			&.top-right {
+				top: 0;
+				right: 0;
+			}
+
+			&.bottom-right {
+				bottom: 0;
+				right: 0;
+			}
+
+			&.top-left {
+				top: 0;
+				left: 0;
+			}
+
+			&.bottom-left {
+				bottom: 0;
+				left: 0;
+			}
 		}
 	}
 }
