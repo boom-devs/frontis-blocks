@@ -1260,11 +1260,11 @@ const attributes = {
 	},
 
 
-	dynamicEnableLink: {
+	dynamicImageEnableLink: {
         type: 'boolean',
         default: false
     },
-	dynamicLinkSource: {
+	dynamicImageLinkSource: {
         type: 'string',
         default: 'post_permalink',
     },

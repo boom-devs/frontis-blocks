@@ -243,8 +243,8 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		dynamicImageFallbackAlt,
 		dynamicImageFallbackId,
 
-		dynamicEnableLink,
-		dynamicLinkSource,
+		dynamicImageEnableLink,
+		dynamicImageLinkSource,
 
 	} = attributes;
 
@@ -1255,11 +1255,11 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 	/**
      * dynamic link source
      */
-	const [linkSource, setLinkSource] = useState(dynamicLinkSource || "post_permalink");
+	const [linkSource, setLinkSource] = useState(dynamicImageLinkSource || "post_permalink");
 
 	useEffect(() => {
-		setLinkSource(dynamicLinkSource || "post_permalink");
-	}, [dynamicLinkSource]);
+		setLinkSource(dynamicImageLinkSource || "post_permalink");
+	}, [dynamicImageLinkSource]);
 
 	const selectedLinkSource = useMemo(() => {
 		const v = linkSource || "post_permalink";
@@ -1272,7 +1272,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 	const handleLinkSourceChange = (opt) => {
 		const val = opt && typeof opt.value === "string" ? opt.value : "post_permalink";
 		setLinkSource(val);
-		setAttributes({ dynamicLinkSource: val });
+		setAttributes({ dynamicImageLinkSource: val });
 	};
 
 
@@ -1452,11 +1452,11 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 
 								<ToggleControl
 									label={__("Enable Dynamic Link", "frontis-blocks")}
-									checked={dynamicEnableLink}
-									onChange={(value) => setAttributes({ dynamicEnableLink: value })}
+									checked={dynamicImageEnableLink}
+									onChange={(value) => setAttributes({ dynamicImageEnableLink: value })}
 								/>
 
-								{dynamicEnableLink && (
+								{dynamicImageEnableLink && (
 									<BaseControl
 										label={__("Link Source", "frontis-blocks")}
 									>

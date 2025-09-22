@@ -71,8 +71,8 @@ $dynamic_image_fallback_url    = fb_norm_str( $attributes['dynamicImageFallbackU
 $dynamic_image_fallback_alt    = fb_norm_str( $attributes['dynamicImageFallbackAlt'] ?? __( 'Image', 'frontis-blocks' ) );
 $dynamic_image_fallback_id     = fb_norm_str( $attributes['dynamicImageFallbackId'] ?? '' );
 
-$dynamic_enable_link           = !empty( $attributes['dynamicEnableLink'] );
-$dynamic_link_source           = fb_norm_str( $attributes['dynamicLinkSource'] ?? 'post_permalink' );
+$dynamic_enable_link           = !empty( $attributes['dynamicImageEnableLink'] );
+$dynamic_link_source           = fb_norm_str( $attributes['dynamicImageLinkSource'] ?? 'post_permalink' );
 
 $loop_post_id   = isset( $block->context['postId'] ) ? (int) $block->context['postId'] : 0;
 $loop_post_type = isset( $block->context['postType'] ) ? (string) $block->context['postType'] : '';
