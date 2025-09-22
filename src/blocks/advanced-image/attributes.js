@@ -110,6 +110,7 @@ const attributes = {
 	},
 	imageCaption: {
 		type: 'string',
+		default: '',
 	},
 	/** Image Border **/
 	imageBorder: {
@@ -588,6 +589,10 @@ const attributes = {
 	enableLink: {
 		type: 'boolean',
 		default: false,
+	},
+	imageLink: {
+		type: 'string',
+		default: '',
 	},
 	openInNewTab: {
 		type: 'boolean',
@@ -1211,5 +1216,59 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
+
+	/** Start Dynamic Image */
+    dynamicImageEnabled : {
+        type: 'boolean',
+        default: false
+    },
+    dynamicImageSource: {
+        type: 'string',
+        default: 'current_post'
+    },
+    dynamicImagePostId: {
+        type: 'number',
+        default: 0
+    },
+    dynamicImagePostType: {
+        type: 'string',
+        default: ''
+    },
+    dynamicImagePostLabel: {
+        type: 'string',
+        default: ''
+    },
+	dynamicImageField:{
+        type: 'string',
+        default: ''
+    },
+	dynamicImageSize: {
+		type: 'string',
+		default: 'full'
+	},
+	dynamicImageFallbackUrl: {
+		type: 'string',
+		default: ''
+	},
+	dynamicImageFallbackAlt: {
+		type: 'string',
+		default: ''
+	},
+	dynamicImageFallbackId: {
+		type: 'string',
+		default: ''
+	},
+
+
+	dynamicEnableLink: {
+        type: 'boolean',
+        default: false
+    },
+	dynamicLinkSource: {
+        type: 'string',
+        default: 'post_permalink',
+    },
+
+	/** End Dynamic Image */
 }
 export default attributes;
