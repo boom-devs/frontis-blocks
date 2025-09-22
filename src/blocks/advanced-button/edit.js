@@ -37,6 +37,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         advancedBtnDesktopSwitcher,
         advancedBtnTabletSwitcher,
         advancedBtnMobileSwitcher,
+
+        dynamicTextEnabled,
+		dynamicTextSource,
+		dynamicTextPostId,
+		dynamicTextPostType,
+		dynamicTextPostLabel,
+		dynamicTextField,
+		dynamicFeaturedImageField,
+
+		dynamicTextDateType,
+		dynamicTextDateFormat,
+
+		dynamicTextTimeType,
+		dynamicTextTimeFormat,
+
+		dynamicTextCommentsZeroText,
+		dynamicTextCommentsOneText,
+		dynamicTextCommentsManyText,
+
+		dynamicTextTermsTaxonomy,
+		dynamicTextTermsSeparator,
+		dynamicEnableLink,
+		dynamicLinkSource,
     } = attributes;
 
     const blockProps = useBlockProps({
