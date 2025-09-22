@@ -58,8 +58,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		dynamicTextTermsTaxonomy,
 		dynamicTextTermsSeparator,
-		dynamicEnableLink,
-		dynamicLinkSource,
+		dynamicTextEnableLink,
+		dynamicTextLinkSource,
     } = attributes;
 
     const blockProps = useBlockProps({

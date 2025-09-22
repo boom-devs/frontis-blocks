@@ -71,8 +71,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		dynamicTextTermsTaxonomy,
 		dynamicTextTermsSeparator,
-		dynamicEnableLink,
-		dynamicLinkSource,
+		dynamicTextEnableLink,
+		dynamicTextLinkSource,
 
 
 	} = attributes;
@@ -565,7 +565,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                     )}
 
 					<div className="fb-advanced-heading-wrapper">
-						{dynamicEnableLink ? (
+						{dynamicTextEnableLink ? (
 							(() => {
 							const HeadingTag = headingTag || 'h2';
 							return (
