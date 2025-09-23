@@ -172,26 +172,34 @@ if ( $dynamicTextEnabled ) {
 				break;
 
 			case 'post_thumbnail':
-				// pick subfield
 				$thumb_id = $post ? get_post_thumbnail_id( $post ) : 0;
-				if ( ! $thumb_id ) { $dynamic_value = __( 'No Content', 'frontis-blocks' ); break; }
-
+			
+				if ( ! $thumb_id ) {
+					$dynamic_value = __( 'No Content', 'frontis-blocks' );
+					break;
+				}
+			
 				$sub = $dynamicFeaturedImageField ?: 'attachment_url';
+			
 				switch ( $sub ) {
 					case 'title':
-						$dynamic_value = fb_get_plain_text( get_the_title( $thumb_id ) );
+						$dynamic_value = fb_get_plain_text( get_the_title( $thumb_id ) ) ?: __( 'No Content', 'frontis-blocks' );
 						break;
+			
 					case 'alt':
-						$dynamic_value = fb_get_plain_text( get_post_meta( $thumb_id, '_wp_attachment_image_alt', true ) );
+						$dynamic_value = fb_get_plain_text( get_post_meta( $thumb_id, '_wp_attachment_image_alt', true ) ) ?: __( 'No Content', 'frontis-blocks' );
 						break;
+			
 					case 'caption':
-						$dynamic_value = fb_get_plain_text( wp_get_attachment_caption( $thumb_id ) );
+						$dynamic_value = fb_get_plain_text( wp_get_attachment_caption( $thumb_id ) ) ?: __( 'No Content', 'frontis-blocks' );
 						break;
+			
 					case 'description': {
 						$att = get_post( $thumb_id );
-						$dynamic_value = fb_get_plain_text( $att ? $att->post_content : '' );
+						$dynamic_value = fb_get_plain_text( $att ? $att->post_content : '' ) ?: __( 'No Content', 'frontis-blocks' );
 						break;
 					}
+			
 					case 'attachment_url':
 					default:
 						$dynamic_value = wp_get_attachment_url( $thumb_id ) ?: __( 'No Content', 'frontis-blocks' );

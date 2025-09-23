@@ -54,6 +54,7 @@ import FB_VisibilityControl from '@Components/visibility-control';
 import FB_ScaleControl from '@Components/scale-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_BackgroundColorControl from '@Components/background-color-control';
+import generateSvgIcon from '@Utils/generateSvgIcon';
 
 
 import './editor.scss';
@@ -142,6 +143,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
         buttonIconAlign,
         buttonIcon,
+		buttonIconFrontend,
         buttonIconPosition,
 
         buttonIconSize,
@@ -332,6 +334,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             });
         }
     }, [clientId]);
+
+	/**
+     * Generate SVG Icons for Icon
+     */
+	useEffect(() => {
+		setAttributes({
+			buttonIconFrontend: generateSvgIcon(buttonIcon), 
+		})
+	}, [buttonIcon]);
 
     /** Start Icon border */
     const handlebuttonIconBorderUnitChange = ( event, position ) => {
