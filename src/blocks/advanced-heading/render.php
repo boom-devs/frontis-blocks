@@ -122,6 +122,8 @@ $dynamicTextTermsSeparator     = fb_norm_str(isset($attributes['dynamicTextTerms
 $dynamicTextEnableLink             = !empty($attributes['dynamicTextEnableLink']);
 $dynamicTextLinkSource             = fb_norm_str(isset($attributes['dynamicTextLinkSource']) ? $attributes['dynamicTextLinkSource'] : 'post_permalink');
 
+var_dump($sub_heading_switcher);
+
 // -------- DYNAMIC: compute $dynamic_value and $dynamic_permalink ----------
 $dynamic_value     = '';
 $dynamic_permalink = '';
