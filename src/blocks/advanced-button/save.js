@@ -12,18 +12,9 @@ export default function save({ attributes }) {
         buttonIconAlign,
         buttonIcon,
         buttonIconPosition,
-        buttonIconSize,
-        buttonIconColor,
-
 
         buttonIconImageUrl,
 		buttonIconImageAlt,
-		buttonIconImageID,
-		bbuttonIconImageWidth,
-		buttonIconImageWidthUnits,
-		buttonIconImageHeight,
-		buttonIconImageHeightUnits,
-		buttonIconImagedisplay,
 
         buttonGlobalWraperID,
         buttonGlobalWraperClass,
