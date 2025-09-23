@@ -15,11 +15,6 @@ const attributes = {
         },
     },
 
-	isHeadingTextChanged: {
-		type: 'boolean',
-		default: false
-	},
-
     headingText: {
         type : 'string',
         default: 'Advanced Heading'
@@ -32,10 +27,7 @@ const attributes = {
 			sourceField: '',
 		}
 	},
-    dynamicContent: {
-        type: 'string',
-        default: '',
-      },
+
     headingTag: {
         type : 'string',
         default: 'h2'
@@ -48,6 +40,83 @@ const attributes = {
         type: 'string',
         default: '',
     },
+
+    /** Start Dynamic Text */
+    dynamicTextEnabled : {
+        type: 'boolean',
+        default: false
+    },
+    dynamicTextSource: {
+        type: 'string',
+        default: 'current_post'
+    },
+    dynamicTextPostId: {
+        type: 'number',
+        default: 0
+    },
+    dynamicTextPostType: {
+        type: 'string',
+        default: ''
+    },
+    dynamicTextPostLabel: {
+        type: 'string',
+        default: ''
+    },
+    dynamicTextField: {
+        type: 'string',
+        default: 'post_title'
+    },
+    dynamicFeaturedImageField:{
+        type: 'string',
+        default: 'title'
+    },
+    dynamicTextDateType: {
+        type: 'string',
+        default: 'published'
+    },
+    dynamicTextDateFormat: {
+        type: 'string',
+        default: 'default'
+    },
+    dynamicTextTimeType: {
+        type: 'string',
+        default: 'published'
+    },
+    dynamicTextTimeFormat: {
+        type: 'string',
+        default: 'default'
+    },
+    dynamicTextCommentsZeroText: {
+        type: 'string',
+        default: 'No Response',
+    },
+    dynamicTextCommentsOneText: {
+        type: 'string',
+        default: 'One Response',
+    },
+    dynamicTextCommentsManyText: {
+        type: 'string',
+        default: '{num} Response',
+    },   
+    dynamicTextTermsTaxonomy: {
+        type: 'string',
+        default: 'category',
+    },
+    dynamicTextTermsSeparator: {
+        type: 'string',
+        default: ', ',
+    },
+    dynamicTextEnableLink: {
+        type: 'boolean',
+        default: false
+    },
+    dynamicTextLinkSource: {
+        type: 'string',
+        default: 'post_permalink',
+    },
+    /** End Dynamic Text */
+
+
     /** Start Heading Style */
     headingGlobalTypographyData: {
         type: 'object',
@@ -108,7 +177,7 @@ const attributes = {
     },
     headingTextDecoration : {
         type: 'string',
-        default: ''
+        default: 'none'
     },
     headingLetterSpacing: {
 		type: 'object',
@@ -962,6 +1031,9 @@ const attributes = {
 		type: 'string',
 		default: 'bookmark',
 	},
+    headingIconFrontend:{
+        type: 'string',
+    },
     headingIconSize: {
         type: 'object',
         default: {

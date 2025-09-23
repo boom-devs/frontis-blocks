@@ -1,43 +1,57 @@
-import { RichText, useBlockProps, InnerBlocks } from '@wordpress/block-editor';
+import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 
 export default function Save({ attributes }) {
-
 	const {
-        blockId,
+		blockId,
 		speed,
 		reverseDirection,
 		pauseOnHover,
-
 		sliderGlobalWraperID,
 		sliderGlobalWraperClass,
-    } = attributes;
+		arrowsUniqueId,
+	} = attributes;
 
 	const blockProps = useBlockProps.save({
 		className: `fb-marquee-slider-container ${blockId}`,
-		'data-block-id': blockId,
+		"data-block-id": blockId,
 	});
 
 	/**
-	 * swiper settings
+	 * Swiper settings (frontend)
 	 */
 	const swiperSettings = JSON.stringify({
 		spaceBetween: 0,
 		centeredSlides: false,
-		speed: speed,
+		speed: speed || 5000, // smoother scrolling
 		autoplay: {
-			delay: 1,
+			delay: 0, // continuous scroll (no pause)
 			reverseDirection: reverseDirection,
 			pauseOnMouseEnter: pauseOnHover,
+			disableOnInteraction: false,
+			waitForTransition: true,
 		},
 		loop: true,
-		slidesPerView:'auto',
+		slidesPerView: "auto",
 		allowTouchMove: false,
-		disableOnInteraction: true
+		freeMode: true,            // continuous ticker effect
+		freeModeMomentum: false,   // prevents sudden stops
+		navigation: arrowsUniqueId
+			? {
+					nextEl: `.${arrowsUniqueId} .fb-news-ticker-next`,
+					prevEl: `.${arrowsUniqueId} .fb-news-ticker-prev`,
+					hideOnClick: false,
+					disabledClass: "swiper-button-disabled",
+					hiddenClass: "swiper-button-hidden",
+			  }
+			: false,
 	});
 
 	return (
-		<div {...blockProps} data-swiper-settings={ swiperSettings }>
-			<div className={`fb-marquee-swiper swiper ${sliderGlobalWraperClass}`} id={sliderGlobalWraperID}>
+		<div {...blockProps} data-swiper-settings={swiperSettings}>
+			<div
+				className={`fb-marquee-swiper swiper ${sliderGlobalWraperClass}`}
+				id={sliderGlobalWraperID}
+			>
 				<div className="fb-swiper-wrapper swiper-wrapper">
 					<InnerBlocks.Content />
 				</div>
