@@ -82,7 +82,6 @@ const FB_SidebarTypography = ({
 		}
 	};
 
-	console.log(availableFontWeights);
 
 	const handleFontSizeChange = (newFontSize) => {
 		onChangeFontSize(newFontSize);
