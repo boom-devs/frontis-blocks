@@ -12,7 +12,7 @@ const attributes = {
         default: "left",
     },
     buttonTextSwitcher: {
-        type: "string",
+        type: "boolean",
         default: true,
     },
     buttonText: {
@@ -407,6 +407,9 @@ const attributes = {
 		type: 'string',
 		default: 'angle-right',
 	},
+    buttonIconFrontend:{
+        type: 'string',
+    },
     buttonIconPosition: {
         type: "string",
         default: "right",
