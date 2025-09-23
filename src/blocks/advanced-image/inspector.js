@@ -10,6 +10,29 @@ import {
 	ToggleControl
 } from "@wordpress/components";
 
+import { 
+    DYNAMIC_IMAGE_SOURCE_OPTIONS,
+    DYNAMIC_LINK_SOURCE_OPTIONS,
+    BORDER_STYLES,
+    OVERFLOW_OP,
+	DYNAMIC_IMAGE_FIELD_OPTIONS,
+	WP_IMAGE_SIZE_OPTIONS,
+	IMAGE_STYLES,
+	TITLE_POSITION,
+	IMAGE_HOVER_EFFECTS,
+	IMAGE_AUTO_FIT,
+	IMAGE_MASK_SIZE,
+	IMAGE_MASK_POSITION,
+	IMAGE_MASK_REPEAT,
+	IMAGE_MASK_IMAEGS,
+
+} from '@Constants/fbConstants';
+
+import Select2 from "react-select";
+import { useSelect } from "@wordpress/data";
+import { useState, useEffect, useMemo } from "@wordpress/element";
+import { useEntityProp, store as coreStore } from '@wordpress/core-data';
+
 import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_Color from "@Components/color";
@@ -30,21 +53,6 @@ import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_ImageControl from '@Components/image-control';
 import FB_InspectorControls from '@Components/InspectorControls';
-
-
-import { useEffect, useMemo, useState } from "@wordpress/element";
-import {
-	BORDER_STYLES,
-	STYLES,
-	TITLE_POSITION,
-	HOVER_EFFECTS,
-	AUTO_FIT,
-	OVERFLOW_OP,
-	MASK_IMAEGS,
-	MASK_SIZE,
-	MASK_POSITION,
-	MASK_REPEAT
-} from "./constants/constants";
 import "./editor.scss";
 
 export default function Inspector({ attributes, setAttributes, clientId, onSelectImage }) {
@@ -222,7 +230,22 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		maskImageUrl,
 		maskImageSize,
 		maskImagePosition,
-		maskImageRepeat
+		maskImageRepeat,
+
+		dynamicImageEnabled,
+		dynamicImageSource,
+		dynamicImagePostId,
+		dynamicImagePostType,
+		dynamicImagePostLabel,
+		dynamicImageField,
+		dynamicImageSize,
+		dynamicImageFallbackUrl,
+		dynamicImageFallbackAlt,
+		dynamicImageFallbackId,
+
+		dynamicImageEnableLink,
+		dynamicImageLinkSource,
+
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -930,7 +953,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			background-repeat: ${testBackgroundImageRepeat};
 			background-size: ${testBackgroundImageSize};`
 					: testClassicColor ? `background: ${testClassicColor}` : ''
-			};
+			}
 			transition: all .3s ease-in-out;
 		}
 		.${blockID} .fb-advanced-image-wrapper:hover{
@@ -959,7 +982,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 				mask-position: ${maskImagePosition};
 				mask-repeat: ${maskImageRepeat};
 			`}
-
 		}
 		.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover{
 			${imageBorderHoverColor ? `border-color: ${imageBorderHoverColor};` : ''}
@@ -1104,10 +1126,167 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 
 
 	useEffect(() => {
-		if (MASK_IMAEGS[imageStyle]) {
-			setAttributes({ maskImageUrl: MASK_IMAEGS[imageStyle] });
+		if (IMAGE_MASK_IMAEGS[imageStyle]) {
+			setAttributes({ maskImageUrl: IMAGE_MASK_IMAEGS[imageStyle] });
 		}
 	}, [imageStyle]);
+
+	/**
+	 * Exclude Post Types
+	 */
+	const EXCLUDE_POST_TYPES = [
+		'attachment','revision','nav_menu_item','custom_css','customize_changeset',
+		'oembed_cache','user_request','wp_block','wp_navigation',
+		'wp_template','wp_template_part','wp_global_styles',
+		'wp_font_family','wp_font_face','wp_font_collection'
+	];
+
+	/**
+	 * Post Types
+	 */
+	const postTypes = useSelect((select) => {
+		const all = select(coreStore).getPostTypes({ per_page: -1 }) || [];
+		return all.filter(
+		(pt) => pt.viewable && pt.supports?.title && !EXCLUDE_POST_TYPES.includes(pt.slug)
+		);
+	}, []);
+	
+	/**
+	 * Post Options
+	 */
+	const postOptions = useSelect((select) => {
+		const types = (postTypes || []).map((t) => t.slug);
+		if (!types.length) return [];
+		
+		const items = [];
+		types.forEach((t) => {
+			const recs = select(coreStore).getEntityRecords('postType', t, {
+			status: 'publish',
+			per_page: 20,
+			orderby: 'date',
+			order: 'desc',
+			_fields: ['id', 'title', 'type'],
+			}) || [];
+			recs.forEach((r) => items.push(r));
+		});
+		
+		return items.map((r) => ({
+			value: r.id,
+			label: r.title?.rendered
+			? r.title.rendered.replace(/<[^>]+>/g, '')
+			: '(no title)',
+			meta: r.type,
+		}));
+	}, [postTypes]);
+
+	const isPostBasedSource = dynamicImageEnabled && (dynamicImageSource === 'current_post' || dynamicImageSource === 'post_type'); 
+
+	/**
+	 * Dynamic Image Source
+	 */
+	const [imageSource, setImageSource] = useState(dynamicImageSource || "current_post");
+
+	useEffect(() => {
+		setImageSource(dynamicImageSource || "current_post");
+	}, [dynamicImageSource]);
+
+	const selectedImageSource = useMemo(() => {
+		const v = imageSource || "current_post";
+		return (
+			DYNAMIC_IMAGE_SOURCE_OPTIONS.find(o => o.value === v) ||
+			DYNAMIC_IMAGE_SOURCE_OPTIONS[0]
+		);
+	}, [imageSource]);
+
+	const handleImageSourceChange = (opt) => {
+		const val = (opt && typeof opt.value === "string") ? opt.value : "current_post";
+		setImageSource(val);
+		setAttributes({ dynamicImageSource: val });
+	};
+
+
+	/**
+	 * Dynamic Image Field
+	 */
+	const [imageField, setImageField] = useState(dynamicImageField || "featured_image");
+
+	useEffect(() => {
+		setImageField(dynamicImageField || "featured_image");
+	}, [dynamicImageField]);
+
+	const selectedImageField = useMemo(() => {
+		const v = imageField || "featured_image";
+		return (
+			DYNAMIC_IMAGE_FIELD_OPTIONS.find((o) => o.value === v) ||
+			null
+		);
+	}, [imageField]);
+
+	const handleImageFieldChange = (opt) => {
+		const val = opt && typeof opt.value === "string" ? opt.value : "featured_image";
+		setImageField(val);
+		setAttributes({ dynamicImageField: val });
+	};
+
+	/**
+	 * Dynamic Image Size
+	 */
+	const [imageSize, setImageSize] = useState(dynamicImageSize || "full");
+
+	useEffect(() => {
+		setImageSize(dynamicImageSize || "full"); 
+	}, [dynamicImageSize]);
+
+	const selectedImageSize = useMemo(() => {
+	const v = imageSize || "full";
+	return (
+		WP_IMAGE_SIZE_OPTIONS.find((o) => o.value === v) ||
+		null
+	);
+	}, [imageSize]);
+
+	const handleImageSizeChange = (opt) => {
+		const val = opt && typeof opt.value === "string" ? opt.value : "full";
+		setImageSize(val);
+		setAttributes({ dynamicImageSize: val });
+	};
+
+
+	/**
+     * dynamic link source
+     */
+	const [linkSource, setLinkSource] = useState(dynamicImageLinkSource || "post_permalink");
+
+	useEffect(() => {
+		setLinkSource(dynamicImageLinkSource || "post_permalink");
+	}, [dynamicImageLinkSource]);
+
+	const selectedLinkSource = useMemo(() => {
+		const v = linkSource || "post_permalink";
+		return (
+		DYNAMIC_LINK_SOURCE_OPTIONS.find((o) => o.value === v) ||
+		DYNAMIC_LINK_SOURCE_OPTIONS[0]
+		);
+	}, [linkSource]);
+
+	const handleLinkSourceChange = (opt) => {
+		const val = opt && typeof opt.value === "string" ? opt.value : "post_permalink";
+		setLinkSource(val);
+		setAttributes({ dynamicImageLinkSource: val });
+	};
+
+
+	let defaultFallbackImageUrl = '';
+    if (typeof FrontisBlocksData !== 'undefined') {
+        defaultFallbackImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
+    }
+
+    // Set default value for dynamicImageFallbackUrl
+    useEffect(() => {
+        if (!dynamicImageFallbackUrl) {
+            setAttributes({ dynamicImageFallbackUrl: defaultFallbackImageUrl });
+        }
+    }, []);
 
 	/**
 	 * Inspector General Controls
@@ -1119,86 +1298,262 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					title={__("General", "frontis-blocks")}
 					initialOpen={true}
 				>
-					{/** Image Uploader **/}
-					<BaseControl
-						label={__("Image", "frontis-blocks")}
-						className="fb-advanced-heading-bg-image"
-					>
-						{advancedImageUrl ? (
-							<div className="fb-image-avatar-control" style={{ backgroundImage: `url(${advancedImageUrl})` }}>
-								<button
-									className='fb-image-avatar-delete'
-									onClick={() => {
+					<BaseControl label={__("Image", "frontis-blocks")} className="fb-advanced-image-upload-control">
+						{/* ===== Dynamic Image View ===== */}
+						{dynamicImageEnabled ? (
+							<div className="fb-dynamic-image-panel">
+								<ToggleControl
+									label={__("Dynamic Image", "frontis-blocks")}
+									checked={dynamicImageEnabled}
+									onChange={(value) => {
 										setAttributes({
-											advancedImageUrl: null,
-											advancedImageAlt: null,
-											advancedImageId: null,
-											advancedImageSrcSet: null,
+											dynamicImageEnabled: value,
+											...(value ? {
+												dynamicImageSource: dynamicImageSource || "current_post",
+												dynamicImageField:  dynamicImageField  || "featured_image",
+												dynamicImageSize:   dynamicImageSize   || "full",
+											} : {})
 										});
 									}}
-								>
-									<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M12.9431 22C18.466 22 22.9431 17.5228 22.9431 12C22.9431 6.47715 18.466 2 12.9431 2C7.42027 2 2.94312 6.47715 2.94312 12C2.94312 17.5228 7.42027 22 12.9431 22Z" stroke="#1C274C" />
-										<path d="M15.4431 9.50002L10.4431 14.5M10.4431 9.5L15.4431 14.5" stroke="#1C274C" />
-									</svg>
-								</button>
-								<button
-									className='fb-image-replace-btn'
-									onClick={() => {
-										const mediaUploader = wp.media({
-											title: __('Select or Upload Background Image', 'frontis-blocks'),
-											button: {
-												text: __('Use this image', 'frontis-blocks'),
-											},
-											multiple: false
-										});
+								/>
 
-										mediaUploader.on('select', function () {
-											const attachment = mediaUploader.state().get('selection').first().toJSON();
-											onSelectImage(attachment);
+								{/* small safety: when enabled but attrs missing, set once */}
+								{dynamicImageEnabled && (!dynamicImageSource || !dynamicImageField || !dynamicImageSize) && (
+									(() => {
+										setAttributes({
+											dynamicImageSource: dynamicImageSource || "current_post",
+											dynamicImageField:  dynamicImageField  || "featured_image",
+											dynamicImageSize:   dynamicImageSize   || "full",
 										});
+										return null;
+									})()
+								)}
 
-										mediaUploader.open();
-									}}
-								>
-									<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-										<path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C" />
-										<path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C" />
-									</svg>
-									Replace
-								</button>
+								<BaseControl label={__("Data Source", "frontis-blocks")}>
+									<Select2
+										options={DYNAMIC_IMAGE_SOURCE_OPTIONS}
+										value={selectedImageSource}
+										onChange={handleImageSourceChange}
+										className="fb-select2-control"
+									/>
+								</BaseControl>
+
+								{dynamicImageSource === 'post_type' && (
+									<BaseControl label={__("Search Posts","frontis-blocks")}>
+										<Select2
+										options={postOptions}
+										value={postOptions.find(o => o.value === dynamicImagePostId) || null}
+										onChange={(opt)=> setAttributes({
+											dynamicImagePostId:   opt?.value ?? 0,
+											dynamicImagePostType: opt?.meta  ?? '',
+											dynamicImagePostLabel:opt?.label ?? ''
+										})}
+										className="fb-select2-control"
+										/>
+									</BaseControl>
+								)}
+								{isPostBasedSource && (
+									<>
+										<BaseControl label={__("Source Field", "frontis-blocks")}>
+											<Select2
+												options={DYNAMIC_IMAGE_FIELD_OPTIONS}
+												value={selectedImageField}
+												onChange={handleImageFieldChange}
+												className="fb-select2-control"
+											/>
+										</BaseControl>
+									</>
+								)}
+
+								<BaseControl label={__("Image Size", "frontis-blocks")}>
+								<Select2
+									options={WP_IMAGE_SIZE_OPTIONS}
+									value={selectedImageSize}
+									onChange={handleImageSizeChange}
+									className="fb-select2-control"
+								/>
+								</BaseControl>
+
+								<BaseControl label={__("Fallback Image", "frontis-blocks")} className="fb-advanced-heading-bg-image">
+									{dynamicImageFallbackUrl ? (
+										<>
+											<div className="fb-image-avatar-control" style={{backgroundImage: `url(${dynamicImageFallbackUrl})`}}> 
+												<button
+													className='fb-image-avatar-delete'
+													onClick={() => {
+														setAttributes({
+															dynamicImageFallbackUrl: null,
+															dynamicImageFallbackAlt: null,
+															dynamicImageFallbackId: null,
+														});
+													}}
+												>
+													<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M12.9431 22C18.466 22 22.9431 17.5228 22.9431 12C22.9431 6.47715 18.466 2 12.9431 2C7.42027 2 2.94312 6.47715 2.94312 12C2.94312 17.5228 7.42027 22 12.9431 22Z" stroke="#1C274C" strokeWidth="1.5"/>
+														<path d="M15.4431 9.50002L10.4431 14.5M10.4431 9.5L15.4431 14.5" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round"/>
+													</svg>
+
+												</button>
+												<button
+													className='fb-image-replace-btn'
+													onClick={() => {
+														const mediaUploader = wp.media({
+															title: __('Select or Upload Background Image', 'frontis-blocks'),
+															button: {
+																text: __('Use this image', 'frontis-blocks'),
+															},
+															multiple: false
+														});
+
+														mediaUploader.on('select', function() {
+															const attachment = mediaUploader.state().get('selection').first().toJSON();
+															setAttributes({
+																dynamicImageFallbackUrl: attachment.url,
+																dynamicImageFallbackAlt: attachment.alt,
+																dynamicImageFallbackId: attachment.id,
+															});
+														});
+
+														mediaUploader.open();
+													}}
+												>
+													<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C"/>
+														<path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C"/>
+													</svg>
+													Replace
+												</button>
+											</div>
+										</>
+									) : (
+										<button
+											className='fb-image-upload-btn'
+											onClick={() => {
+												const mediaUploader = wp.media({
+												title: __('Select or Upload Image', 'frontis-blocks'),
+												button: { text: __('Use this image', 'frontis-blocks') },
+												multiple: false
+												});
+												mediaUploader.on('select', () => {
+												const a = mediaUploader.state().get('selection').first().toJSON();
+												setAttributes({
+													dynamicImageFallbackUrl: a?.url ?? null,
+													dynamicImageFallbackAlt: a?.alt ?? null,
+													dynamicImageFallbackId:  String(a?.id ?? null)
+												});
+												});
+												mediaUploader.open();
+											}}
+										>
+											{__('Choose Image','frontis-blocks')}
+										</button>
+									)}
+								</BaseControl>
+
+								<ToggleControl
+									label={__("Enable Dynamic Link", "frontis-blocks")}
+									checked={dynamicImageEnableLink}
+									onChange={(value) => setAttributes({ dynamicImageEnableLink: value })}
+								/>
+
+								{dynamicImageEnableLink && (
+									<BaseControl
+										label={__("Link Source", "frontis-blocks")}
+									>
+										<Select2 
+											options={DYNAMIC_LINK_SOURCE_OPTIONS}
+											value={selectedLinkSource}
+											onChange={handleLinkSourceChange}
+											className="fb-select2-control"
+										/>
+									</BaseControl>
+								)}
 							</div>
 						) : (
+						<>
+							{advancedImageUrl ? (
+								<div className="fb-image-avatar-control" style={{ backgroundImage: `url(${advancedImageUrl})` }}>
+									<button
+										className='fb-image-avatar-delete'
+										onClick={() => {
+											setAttributes({
+												advancedImageUrl: null,
+												advancedImageAlt: null,
+												advancedImageId: null,
+												advancedImageSrcSet: null,
+											});
+										}}
+									>
+										<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M12.9431 22C18.466 22 22.9431 17.5228 22.9431 12C22.9431 6.47715 18.466 2 12.9431 2C7.42027 2 2.94312 6.47715 2.94312 12C2.94312 17.5228 7.42027 22 12.9431 22Z" stroke="#1C274C" />
+											<path d="M15.4431 9.50002L10.4431 14.5M10.4431 9.5L15.4431 14.5" stroke="#1C274C" />
+										</svg>
+									</button>
+									<div className="fb-image-replace-dynamic-btn-wrapper">
+										<button
+											className='fb-image-replace-btn'
+											onClick={() => {
+												const mediaUploader = wp.media({
+													title: __('Select or Upload Background Image', 'frontis-blocks'),
+													button: {
+														text: __('Use this image', 'frontis-blocks'),
+													},
+													multiple: false
+												});
+
+												mediaUploader.on('select', function () {
+													const attachment = mediaUploader.state().get('selection').first().toJSON();
+													onSelectImage(attachment);
+												});
+
+												mediaUploader.open();
+											}}
+										>
+											<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C" />
+												<path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C" />
+											</svg>
+											Replace
+										</button>
+										<button
+											type="button"
+											className="fb-components-button"
+											onClick={() => setAttributes({ dynamicImageEnabled: true })}
+											title={__('Switch to Dynamic', 'frontis-blocks')}
+										>
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+												<path d="M3 12V16.5C3 18.9853 7.02944 21 12 21C16.9706 21 21 18.9853 21 16.5V12M3 12C3 14.4853 7.02944 16.5 12 16.5C16.9706 16.5 21 14.4853 21 12M3 12V7.5M21 12V7.5M21 7.5C21 9.98528 16.9706 12 12 12C7.02944 12 3 9.98528 3 7.5M21 7.5C21 5.01472 16.9706 3 12 3C7.02944 3 3 5.01472 3 7.5" stroke="#0B0C0E" stroke-width="1.4"/>
+											</svg>
+										</button>
+									</div>
+								</div>
+							) : (
 							<button
 								className='fb-image-upload-btn'
 								onClick={() => {
-									const mediaUploader = wp.media({
-										title: __('Select or Upload Background Image', 'frontis-blocks'),
-										button: {
-											text: __('Use this image', 'frontis-blocks'),
-										},
-										multiple: false
-									});
-
-									mediaUploader.on('select', function () {
-										const attachment = mediaUploader.state().get('selection').first().toJSON();
-										onSelectImage(attachment);
-									});
-
-									mediaUploader.open();
+								const mediaUploader = wp.media({
+									title: __('Select or Upload Background Image', 'frontis-blocks'),
+									button: { text: __('Use this image', 'frontis-blocks') },
+									multiple: false
+								});
+								mediaUploader.on('select', () => {
+									const attachment = mediaUploader.state().get('selection').first().toJSON();
+									onSelectImage(attachment);
+								});
+								mediaUploader.open();
 								}}
 							>
-								<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M11.492 10.172l-2.5 3.064-.737-.677 3.737-4.559 3.753 4.585-.753.665-2.5-3.076v7.826h-1v-7.828zm7.008 9.828h-13c-2.481 0-4.5-2.018-4.5-4.5 0-2.178 1.555-4.038 3.698-4.424l.779-.14.043-.789c.185-3.448 3.031-6.147 6.48-6.147 3.449 0 6.295 2.699 6.478 6.147l.044.789.78.14c2.142.386 3.698 2.246 3.698 4.424 0 2.482-2.019 4.5-4.5 4.5m.978-9.908c-.212-3.951-3.472-7.092-7.478-7.092s-7.267 3.141-7.479 7.092c-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.522-5.408"></path></svg>
-								Upload
+								{__('Upload','frontis-blocks')}
 							</button>
+							)}
+						</>
 						)}
 					</BaseControl>
-
 
 					<SelectControl
 						label={__("Styles", "frontis-blocks")}
 						value={imageStyle || "square"}
-						options={STYLES}
+						options={IMAGE_STYLES}
 						onChange={(value) => {
 							setAttributes({ imageStyle: value });
 						}}
@@ -1295,7 +1650,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					<SelectControl
 						label={__("Hover Effect", "frontis-blocks")}
 						value={imageHover}
-						options={HOVER_EFFECTS}
+						options={IMAGE_HOVER_EFFECTS}
 						onChange={(value) =>
 							setAttributes({ imageHover: value })
 						}
@@ -1456,7 +1811,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			>
 				<FB_Range
 					min={1}
-					max={1400}
+					max={mediaSizeUnits === '%' ? 100 : 1400}
 					label={__("Width", "frontis-blocks")}
 					rangeValue={mediaSize}
 					onChangeHandler={(value) => setAttributes({ mediaSize: value })}
@@ -1469,7 +1824,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 				/>
 				<FB_Range
 					min={1}
-					max={1400}
+					max={mediaHeightUnits === '%' ? 100 : 1400}
 					label={__("Height", "frontis-blocks")}
 					rangeValue={mediaHeight}
 					onChangeHandler={(value) => setAttributes({ mediaHeight: value })}
@@ -1506,7 +1861,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					<SelectControl
 						label={__("Image Fit Options", "frontis-blocks")}
 						value={imageFit || "cover"}
-						options={AUTO_FIT}
+						options={IMAGE_AUTO_FIT}
 						onChange={(size) =>
 							setAttributes({ imageFit: size })
 						}
@@ -1621,19 +1976,19 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 				<SelectControl
 					label={__("Size", "frontis-blocks")}
 					value={maskImageSize}
-					options={MASK_SIZE}
+					options={IMAGE_MASK_SIZE}
 					onChange={(value) => setAttributes({ maskImageSize: value })}
 				/>
 				<SelectControl
 					label={__("Position", "frontis-blocks")}
 					value={maskImagePosition}
-					options={MASK_POSITION}
+					options={IMAGE_MASK_POSITION}
 					onChange={(value) => setAttributes({ maskImagePosition: value })}
 				/>
 				<SelectControl
 					label={__("Repeat", "frontis-blocks")}
 					value={maskImageRepeat}
-					options={MASK_REPEAT}
+					options={IMAGE_MASK_REPEAT}
 					onChange={(value) => setAttributes({ maskImageRepeat: value })}
 				/>
 			</PanelBody>

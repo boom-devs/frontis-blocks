@@ -44,3 +44,13 @@
 .fb-advanced-wrapper[style*="text-align: right"] .fb-advanced-heading.active-line::before {
     right: 0;
 }
+
+.fb-dynamic-link {
+    &:focus{
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    &.active {
+        color: inherit;
+    }
+}

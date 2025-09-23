@@ -4,10 +4,14 @@
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
 <<<<<<< HEAD
+<<<<<<< HEAD
         'reference' => '3fa5a96c2ae5e1ea79f442380eaaccbe78f2ff6e',
 =======
         'reference' => 'd5b48575042516fa1ff8f6a7e64ff34247ff3de4',
 >>>>>>> e59a609f556490324f815e55e92bd5c5ca555b02
+=======
+        'reference' => 'b00d4d4445d12c0b56a2b76a7dda4ed4018685b6',
+>>>>>>> d8a1466c872e3e5c560f1c6d868c0bdb5453c644
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -73,10 +77,14 @@
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
 <<<<<<< HEAD
+<<<<<<< HEAD
             'reference' => '3fa5a96c2ae5e1ea79f442380eaaccbe78f2ff6e',
 =======
             'reference' => 'd5b48575042516fa1ff8f6a7e64ff34247ff3de4',
 >>>>>>> e59a609f556490324f815e55e92bd5c5ca555b02
+=======
+            'reference' => 'b00d4d4445d12c0b56a2b76a7dda4ed4018685b6',
+>>>>>>> d8a1466c872e3e5c560f1c6d868c0bdb5453c644
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
