@@ -394,11 +394,6 @@ $wrapper_attributes = get_block_wrapper_attributes([
     'class' => implode(' ', $wrapper_classes_arr),
 ]);
 
-<<<<<<< HEAD
-// Start building the HTML output
-$output = '<div ' . $wrapper_attributes . '>';
-$output .= '<div class="fb-parent-wrapper fb-advanced-wrapper ' . esc_attr($heading_global_wraper_class) . '" id="' . esc_attr($heading_global_wraper_id) . '" style="text-align: ' . esc_attr($heading_alignment) . ';">';
-=======
 ?>
 
 <div <?php echo $wrapper_attributes; ?>>
@@ -410,7 +405,6 @@ $output .= '<div class="fb-parent-wrapper fb-advanced-wrapper ' . esc_attr($head
 		     style="text-align:<?php echo esc_attr( $heading_alignment ); ?>;"
 	     <?php endif; ?>
 	>
->>>>>>> d8a1466c872e3e5c560f1c6d868c0bdb5453c644
 
 		<?php if ( $heading_icon_switcher && $heading_icon_align === 'icon' ) : ?>
 			<div class="fb-advanced-icon-wrapper" style="justify-content:<?php echo esc_attr( $heading_alignment ?: 'initial' ); ?>;">

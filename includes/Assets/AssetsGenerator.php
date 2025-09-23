@@ -200,20 +200,25 @@ class AssetsGenerator
 		// Execute the query
 		$template_contents = $wpdb->get_results($query);
 		$template_contents = TemplateProcessor::get_instance()->process_template($template_contents);
-		$pattern = '/<!--\s*wp:post-content\s*/i';
-        if (preg_match_all($pattern, $template_contents, $wp_post_content_matchs) > 0) {
-            if(isset($wp_post_content_matchs[0])){
-				foreach($wp_post_content_matchs[0] as $index => $post_content) {
-					$template_contents = str_replace(
-                        $wp_post_content_matchs[0][$index],
-                        $this->post->post_content,
-                        $template_contents
-                    );
+
+		if($template_contents) {
+			$pattern = '/<!--\s*wp:post-content\s*/i';
+			if (preg_match_all($pattern, $template_contents, $wp_post_content_matchs) > 0) {
+				if(isset($wp_post_content_matchs[0])){
+					foreach($wp_post_content_matchs[0] as $index => $post_content) {
+						$template_contents = str_replace(
+							$wp_post_content_matchs[0][$index],
+							$this->post->post_content,
+							$template_contents
+						);
+					}
 				}
 			}
-        }
+	
+			return $template_contents;
+		}
 
-		return $template_contents;
+		return $this->post->post_content;
 	}
 
 
