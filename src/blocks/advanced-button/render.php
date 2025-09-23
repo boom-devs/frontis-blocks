@@ -66,54 +66,52 @@ if ( ! function_exists('fb_get_site_time_format') ) {
 }
 
 // ---------- extract & normalize (attributes) ----------
-$block_id                  = fb_norm_str( $attributes['blockId'] ?? '' );
+$block_id                  = fb_norm_str( isset($attributes['blockId']) ? $attributes['blockId'] : '' );
 
-$button_alignment          = fb_norm_str( $attributes['buttonAlignment'] ?? '' );
-$button_text_switcher      = ! empty( $attributes['buttonTextSwitcher'] );
-$button_text               = fb_norm_str( $attributes['buttonText'] ?? '' );
+$button_alignment          = fb_norm_str( isset($attributes['buttonAlignment']) ? $attributes['buttonAlignment'] : 'left' );
+$button_text_switcher      = isset($attributes['buttonTextSwitcher']) ? ! empty($attributes['buttonTextSwitcher']) : true;
+$button_text               = fb_norm_str( isset($attributes['buttonText']) ? $attributes['buttonText'] : 'Add Text' );
 
-$button_url                = fb_norm_str( $attributes['buttonUrl'] ?? '' );
+$button_url                = fb_norm_str( isset($attributes['buttonUrl']) ? $attributes['buttonUrl'] : '' );
 $button_target_url         = ! empty( $attributes['buttonTargetUrl'] );
 
-$button_icon_align         = fb_norm_str( $attributes['buttonIconAlign'] ?? 'icon-text' );
-$button_icon_position      = fb_norm_str( $attributes['buttonIconPosition'] ?? 'left' );
+$button_icon_align         = fb_norm_str( isset($attributes['buttonIconAlign']) ? $attributes['buttonIconAlign'] : 'none' );
+$button_icon_position      = fb_norm_str( isset($attributes['buttonIconPosition']) ? $attributes['buttonIconPosition'] : 'right' );
 
-$button_icon_frontend      = fb_norm_str( $attributes['buttonIconFrontend'] ?? '' );
-$button_icon_image_url     = fb_norm_str( $attributes['buttonIconImageUrl'] ?? '' );
-$button_icon_image_alt     = fb_norm_str( $attributes['buttonIconImageAlt'] ?? '' );
+$button_icon_frontend      = fb_norm_str( isset($attributes['buttonIconFrontend']) ? $attributes['buttonIconFrontend'] : '' );
+$button_icon_image_url     = fb_norm_str( isset($attributes['buttonIconImageUrl']) ? $attributes['buttonIconImageUrl'] : '' );
+$button_icon_image_alt     = fb_norm_str( isset($attributes['buttonIconImageAlt']) ? $attributes['buttonIconImageAlt'] : '' );
 
-$button_global_wraper_id   = fb_norm_str( $attributes['buttonGlobalWraperID'] ?? '' );
-$button_global_wraper_class= fb_norm_str( $attributes['buttonGlobalWraperClass'] ?? '' );
+$button_global_wraper_id   = fb_norm_str( isset($attributes['buttonGlobalWraperID']) ? $attributes['buttonGlobalWraperID'] : '' );
+$button_global_wraper_class= fb_norm_str( isset($attributes['buttonGlobalWraperClass']) ? $attributes['buttonGlobalWraperClass'] : '' );
 
 $advanced_btn_desktop      = ! empty( $attributes['advancedBtnDesktopSwitcher'] );
 $advanced_btn_tablet       = ! empty( $attributes['advancedBtnTabletSwitcher'] );
 $advanced_btn_mobile       = ! empty( $attributes['advancedBtnMobileSwitcher'] );
 
 $dynamic_enabled           = ! empty( $attributes['dynamicTextEnabled'] );
-$dynamic_source            = fb_norm_str( $attributes['dynamicTextSource'] ?? 'current_post' );
-$dynamic_post_id_attr      = fb_norm_str( $attributes['dynamicTextPostId'] ?? 0 );
-$dynamic_post_type_attr    = fb_norm_str( $attributes['dynamicTextPostType'] ?? '' );
-$dynamic_post_label        = fb_norm_str( $attributes['dynamicTextPostLabel'] ?? '' ); // optional
-$dynamic_field             = fb_norm_str( $attributes['dynamicTextField'] ?? 'post_title' );
-$dynamic_feat_img_field    = fb_norm_str( $attributes['dynamicFeaturedImageField'] ?? 'title' );
+$dynamic_source            = fb_norm_str( isset($attributes['dynamicTextSource']) ? $attributes['dynamicTextSource'] : 'current_post' );
+$dynamic_post_id_attr      = fb_norm_str( isset($attributes['dynamicTextPostId']) ? $attributes['dynamicTextPostId'] : 0 );
+$dynamic_post_type_attr    = fb_norm_str( isset($attributes['dynamicTextPostType']) ? $attributes['dynamicTextPostType'] : '' );
+$dynamic_post_label        = fb_norm_str( isset($attributes['dynamicTextPostLabel']) ? $attributes['dynamicTextPostLabel'] : '' ); // optional
+$dynamic_field             = fb_norm_str( isset($attributes['dynamicTextField']) ? $attributes['dynamicTextField'] : 'post_title' );
+$dynamic_feat_img_field    = fb_norm_str( isset($attributes['dynamicFeaturedImageField']) ? $attributes['dynamicFeaturedImageField'] : 'title' );
 
-$dynamic_date_type         = fb_norm_str( $attributes['dynamicTextDateType'] ?? '' );
-$dynamic_date_format       = fb_norm_str( $attributes['dynamicTextDateFormat'] ?? '' );
+$dynamic_date_type         = fb_norm_str( isset($attributes['dynamicTextDateType']) ? $attributes['dynamicTextDateType'] : 'published' );
+$dynamic_date_format       = fb_norm_str( isset($attributes['dynamicTextDateFormat']) ? $attributes['dynamicTextDateFormat'] : 'default' );
 
-$dynamic_time_type         = fb_norm_str( $attributes['dynamicTextTimeType'] ?? '' );
-$dynamic_time_format       = fb_norm_str( $attributes['dynamicTextTimeFormat'] ?? '' );
+$dynamic_time_type         = fb_norm_str( isset($attributes['dynamicTextTimeType']) ? $attributes['dynamicTextTimeType'] : 'published' );
+$dynamic_time_format       = fb_norm_str( isset($attributes['dynamicTextTimeFormat']) ? $attributes['dynamicTextTimeFormat'] : 'default' );
 
-$dynamic_comments_zero     = fb_norm_str( $attributes['dynamicTextCommentsZeroText'] ?? '' );
-$dynamic_comments_one      = fb_norm_str( $attributes['dynamicTextCommentsOneText'] ?? '' );
-$dynamic_comments_many     = fb_norm_str( $attributes['dynamicTextCommentsManyText'] ?? '' );
+$dynamic_comments_zero     = fb_norm_str( isset($attributes['dynamicTextCommentsZeroText']) ? $attributes['dynamicTextCommentsZeroText'] : 'No Response' );
+$dynamic_comments_one      = fb_norm_str( isset($attributes['dynamicTextCommentsOneText']) ? $attributes['dynamicTextCommentsOneText'] : 'One Response' ); 
+$dynamic_comments_many     = fb_norm_str( isset($attributes['dynamicTextCommentsManyText']) ? $attributes['dynamicTextCommentsManyText'] : '{num} Response' );
 
-$dynamic_terms_taxonomy    = fb_norm_str( $attributes['dynamicTextTermsTaxonomy'] ?? 'category' );
-$dynamic_terms_separator   = fb_norm_str( $attributes['dynamicTextTermsSeparator'] ?? '' );
+$dynamic_terms_taxonomy    = fb_norm_str( isset($attributes['dynamicTextTermsTaxonomy']) ? $attributes['dynamicTextTermsTaxonomy'] : 'category' );
+$dynamic_terms_separator   = fb_norm_str( isset($attributes['dynamicTextTermsSeparator']) ? $attributes['dynamicTextTermsSeparator'] : ',' );
 
 $dynamic_enable_link       = ! empty( $attributes['dynamicTextEnableLink'] );
-$dynamic_link_source       = fb_norm_str( $attributes['dynamicTextLinkSource'] ?? 'post_permalink' );
-
-var_dump($button_alignment);
+$dynamic_link_source       = fb_norm_str( isset($attributes['dynamicTextLinkSource']) ? $attributes['dynamicTextLinkSource'] : 'post_permalink' );
 
 // -------- DYNAMIC: compute $dynamic_value and $dynamic_permalink ----------
 $dynamic_value     = '';
@@ -166,24 +164,33 @@ if ( $dynamic_enabled ) {
 
             case 'post_thumbnail':
                 $thumb_id = $post ? get_post_thumbnail_id( $post ) : 0;
-                if ( ! $thumb_id ) { $dynamic_value = __( 'No Content', 'frontis-blocks' ); break; }
-
+            
+                if ( ! $thumb_id ) {
+                    $dynamic_value = __( 'No Content', 'frontis-blocks' );
+                    break;
+                }
+            
                 $sub = $dynamic_feat_img_field ?: 'attachment_url';
+            
                 switch ( $sub ) {
                     case 'title':
-                        $dynamic_value = fb_get_plain_text( get_the_title( $thumb_id ) );
+                        $dynamic_value = fb_get_plain_text( get_the_title( $thumb_id ) ) ?: __( 'No Content', 'frontis-blocks' );
                         break;
+            
                     case 'alt':
-                        $dynamic_value = fb_get_plain_text( get_post_meta( $thumb_id, '_wp_attachment_image_alt', true ) );
+                        $dynamic_value = fb_get_plain_text( get_post_meta( $thumb_id, '_wp_attachment_image_alt', true ) ) ?: __( 'No Content', 'frontis-blocks' );
                         break;
+            
                     case 'caption':
-                        $dynamic_value = fb_get_plain_text( wp_get_attachment_caption( $thumb_id ) );
+                        $dynamic_value = fb_get_plain_text( wp_get_attachment_caption( $thumb_id ) ) ?: __( 'No Content', 'frontis-blocks' );
                         break;
+            
                     case 'description': {
                         $att = get_post( $thumb_id );
-                        $dynamic_value = fb_get_plain_text( $att ? $att->post_content : '' );
+                        $dynamic_value = fb_get_plain_text( $att ? $att->post_content : '' ) ?: __( 'No Content', 'frontis-blocks' );
                         break;
                     }
+            
                     case 'attachment_url':
                     default:
                         $dynamic_value = wp_get_attachment_url( $thumb_id ) ?: __( 'No Content', 'frontis-blocks' );
