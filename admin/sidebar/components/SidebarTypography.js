@@ -12,7 +12,8 @@ import Select2 from 'react-select';
 import {
 	FONT_STYLE,
 	TEXT_TRANSFORM,
-	TEXT_DECORATION
+	TEXT_DECORATION,
+	FONT_WEIGHT
 } from '@Constants/fbConstants';
 
 import FB_Range from '@Components/range';
@@ -80,6 +81,7 @@ const FB_SidebarTypography = ({
 			loadGoogleFont(newFontFamily);
 		}
 	};
+
 
 	const handleFontSizeChange = (newFontSize) => {
 		onChangeFontSize(newFontSize);
@@ -162,7 +164,7 @@ const FB_SidebarTypography = ({
 			<div className='fb_global_typo_wrap'>
 				<SelectControl
 					label={__("Font Weight", "frontis-blocks")}
-					options={availableFontWeights}
+					options={availableFontWeights.length > 0 ? availableFontWeights : FONT_WEIGHT}
 					value={fontWeight}
 					onChange={handleFontWeightChange}
 				/>

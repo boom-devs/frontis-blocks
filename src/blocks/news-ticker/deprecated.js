@@ -12,25 +12,25 @@ const v1_0_3 = {
     save({ attributes }) {
         const { 
             blockID = '',
-            featuresListGlobalWraperID = '',
-            featuresListGlobalWraperClass = '',
-            featuresListDesktopSwitcher = false,
-            featuresListTabletSwitcher = false,
-            featuresListMobileSwitcher = false,
+            newsTickerGlobalWraperID = '',
+            newsTickerGlobalWraperClass = '',
+            newsTickerDesktopSwitcher = false,
+            newsTickerTabletSwitcher = false,
+            newsTickerMobileSwitcher = false,
             tickerLabel = '',
             tickerLabelIcon = null,
         } = attributes;
 
         const blockProps = useBlockProps.save({
             className: `fb-news-ticker-wrapper ${blockID} 
-                ${featuresListDesktopSwitcher && 'fb-desktop-responsive'} 
-                ${featuresListTabletSwitcher && 'fb-tablet-responsive'} 
-                ${featuresListMobileSwitcher && 'fb-mobile-responsive'}`,
+                ${newsTickerDesktopSwitcher && 'fb-desktop-responsive'} 
+                ${newsTickerTabletSwitcher && 'fb-tablet-responsive'} 
+                ${newsTickerMobileSwitcher && 'fb-mobile-responsive'}`,
         });
 
         return (
-            <div {...blockProps} id={featuresListGlobalWraperID || undefined}>
-                <div className={`fb-news-ticker-inner ${featuresListGlobalWraperClass || ''}`}>
+            <div {...blockProps} id={newsTickerGlobalWraperID || undefined}>
+                <div className={`fb-news-ticker-inner ${newsTickerGlobalWraperClass || ''}`}>
                     
                     {/* Label container with icon + text */}
                     <div className="fb-news-ticker-label-container">
