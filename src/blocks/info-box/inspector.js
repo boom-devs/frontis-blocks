@@ -2526,6 +2526,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${mediaBorderTabletWidth && mediaBorderTablet.top ? `border-width: ${mediaBorderTabletWidth};` : ''}
 				${mediaBorderRadiusTabletWidth && mediaBorderRadiusTablet.top ? `border-radius: ${mediaBorderRadiusTabletWidth};` : ''}
 			}
+			.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper{
+				${infoBoxPresetStyle === "preset-5" ?
+					`
+					border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
+					` : ''
+				}
+			}
 		}
 
 		@media only screen and (max-width: 767px) {
@@ -2534,6 +2541,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${mediaMobileMargin && mediaMarginMobile.top ? `margin: ${mediaMobileMargin};` : ''}
 				${mediaBorderMobileWidth && mediaBorderMobile.top ? `border-width: ${mediaBorderMobileWidth};` : ''}
 				${mediaBorderRadiusMobileWidth && mediaBorderRadiusMobile.top ? `border-radius: ${mediaBorderRadiusMobileWidth};` : ''}
+			}
+			.fb-info-box-wrapper.${blockID} .fb-info-media-wrapper{
+				${infoBoxPresetStyle === "preset-5" ?
+					`
+					border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
+					` : ''
+				}
 			}
 		}
 

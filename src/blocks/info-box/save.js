@@ -40,6 +40,7 @@ export default function save({ attributes }) {
 		infoBoxDesktopSwitcher,
 		infoBoxTabletSwitcher,
 		infoBoxMobileSwitcher,
+		infoBoxPresetStyle
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -49,7 +50,7 @@ export default function save({ attributes }) {
 	return (
 		<>
 			<div {...blockProps}>
-				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID} ${infoBoxGlobalWraperClass}`} id={infoBoxGlobalWraperID}>
+				<div className={`fb-parent-wrapper fb-info-box-wrapper ${blockID} ${infoBoxGlobalWraperClass} ${infoBoxPresetStyle}`} id={infoBoxGlobalWraperID}>
 					<div className={`fb-info-box-wrapper-inner ${blockID}`}>
 						<div className="fb-info-media-container">
 							<div className="fb-info-media-wrapper">
@@ -102,6 +103,13 @@ export default function save({ attributes }) {
 										)}
 									</a>
 								</div>
+								</div>
+							)}
+							{infoBoxPresetStyle === 'preset-6' && (
+								<div class="shape">
+									<svg width="111" height="111" viewBox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd" clip-rule="evenodd" d="M0 0C19.33 0 35 15.67 35 35V41C35 60.33 50.67 76 70 76H76C95.33 76 111 91.67 111 111V0H0Z" fill="white"></path>
+									</svg>
 								</div>
 							)}
 						</div>
