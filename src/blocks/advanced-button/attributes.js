@@ -12,7 +12,7 @@ const attributes = {
         default: "left",
     },
     buttonTextSwitcher: {
-        type: "string",
+        type: "boolean",
         default: true,
     },
     buttonText: {
@@ -407,6 +407,9 @@ const attributes = {
 		type: 'string',
 		default: 'angle-right',
 	},
+    buttonIconFrontend:{
+        type: 'string',
+    },
     buttonIconPosition: {
         type: "string",
         default: "right",
@@ -1175,5 +1178,79 @@ const attributes = {
         }
     },
     
+    /** Start Dynamic Text */
+    dynamicTextEnabled : {
+        type: 'boolean',
+        default: false
+    },
+    dynamicTextSource: {
+        type: 'string',
+        default: 'current_post'
+    },
+    dynamicTextPostId: {
+        type: 'number',
+        default: 0
+    },
+    dynamicTextPostType: {
+        type: 'string',
+        default: ''
+    },
+    dynamicTextPostLabel: {
+        type: 'string',
+        default: ''
+    },
+    dynamicTextField: {
+        type: 'string',
+        default: 'post_title'
+    },
+    dynamicFeaturedImageField:{
+        type: 'string',
+        default: 'title'
+    },
+    dynamicTextDateType: {
+        type: 'string',
+        default: 'published'
+    },
+    dynamicTextDateFormat: {
+        type: 'string',
+        default: 'default'
+    },
+    dynamicTextTimeType: {
+        type: 'string',
+        default: 'published'
+    },
+    dynamicTextTimeFormat: {
+        type: 'string',
+        default: 'default'
+    },
+    dynamicTextCommentsZeroText: {
+        type: 'string',
+        default: 'No Response',
+    },
+    dynamicTextCommentsOneText: {
+        type: 'string',
+        default: 'One Response',
+    },
+    dynamicTextCommentsManyText: {
+        type: 'string',
+        default: '{num} Response',
+    },   
+    dynamicTextTermsTaxonomy: {
+        type: 'string',
+        default: 'category',
+    },
+    dynamicTextTermsSeparator: {
+        type: 'string',
+        default: ', ',
+    },
+    dynamicTextEnableLink: {
+        type: 'boolean',
+        default: false
+    },
+    dynamicTextLinkSource: {
+        type: 'string',
+        default: 'post_permalink',
+    },
+    /** End Dynamic Text */
 }
 export default attributes;

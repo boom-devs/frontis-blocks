@@ -832,6 +832,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /** Start Post Grid Settings */
         postGridSkeletonBgColor,
         postGridSkeletonHighlightBgColor,
+
+        postWrapperLinkSwitcher,
         /** End Post Grid Settings */
 	} = attributes;
 
@@ -4232,6 +4234,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             width: 100% !important;
             height: 100% !important;
             overflow: hidden;
+            text-decoration: none;
         }
         .${blockId}.fb_post_grid_container.list-layout .fb_post_grid_wrapper .fb_post_grid_image_wrapper {
             margin-right: ${listImageSpacing.Desktop}${listGapUnits.Desktop};
@@ -6191,6 +6194,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             checked={showCategorySwitcher}
                             onChange={(value) => setAttributes({ showCategorySwitcher: value })}
                         />
+                        {showCategorySwitcher && (
+                            <ToggleControl
+                                label={__("Category Link", "frontis-blocks")}
+                                checked={categoryLinkSwitcher}
+                                onChange={(value) => setAttributes({ categoryLinkSwitcher: value })}
+                            />
+                        )}
                         <ToggleControl
                             label={__("Show Tag", "frontis-blocks")}
                             checked={showTagSwitcher}
@@ -6211,6 +6221,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             label={__("Show Read More Button", "frontis-blocks")}
                             checked={readMoreSwitcher}
                             onChange={(value) => setAttributes({ readMoreSwitcher: value })}
+                        />
+                        <ToggleControl
+                            label={__("Wrapper Link", "frontis-blocks")}
+                            checked={postWrapperLinkSwitcher}
+                            onChange={(value) => setAttributes({ postWrapperLinkSwitcher: value })}
                         />
                     </BaseControl>
                     
@@ -7176,12 +7191,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             </PanelBody>
 
             <PanelBody title={__("Category", "frontis-blocks")} initialOpen={false}>
-
-                <ToggleControl
-                    label={__("Category Link", "frontis-blocks")}
-                    checked={categoryLinkSwitcher}
-                    onChange={(value) => setAttributes({ categoryLinkSwitcher: value })}
-                />
 
                 <FB_TypographyControl
                     globalTypoControlActive={true}

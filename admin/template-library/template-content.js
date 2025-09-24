@@ -8,6 +8,7 @@ import TemplateGrid from "./template-grid";
 import {ToastContainer, toast } from "react-toastify";
 import { TemplateContentLoader } from "./template-loader";
 import { usePostDataMutation } from "./services/wpapi";
+import { ClipLoader } from "react-spinners";
 
 const TemplateContent = ({
     activeTab,
@@ -28,6 +29,7 @@ const TemplateContent = ({
     alreadySaved,
     loading,
     setLoading,
+    tagLoading,
     setIsLogedIn,
     setActiveCategory,
     onSaveLibrary,
@@ -204,60 +206,66 @@ const TemplateContent = ({
     return (
         <>
             <div className="fb-template-library-store-content">
+                <div className="fb-template-library-content-header">
+                    <div className="fb-template-library-content-header-left">
+                        <h2>All {capitalize(activeTab)}</h2>
+                    </div>
+                    <div className="fb-template-library-content-header-right">
+                        <div className="fb-template-library-search-wrapper">
+                            <div className="fb-search-input-wrapper">
+                                <div className="fb-search-input-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <g clipPath="url(#clip0_13116_5586)">
+                                            <circle cx="8.625" cy="8.625" r="7.125" stroke="white" strokeWidth="1.5" />
+                                            <path d="M13.875 13.875L16.5 16.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_131ikt16_5586">
+                                                <rect width="18" height="18" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </div>
+                                <input
+                                    type="search"
+                                    placeholder={`Search ${capitalize(activeTab)}`}
+                                    value={searchText}
+                                    onChange={e => searchTemplates(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        { tagLoading ? (
+                            <>
+                                <ClipLoader color="fff" size={24} />
+                            </>
+                        ) : (
+                            <div className="fb-template-library-tags-wrapper">
+                                <button
+                                    className={`fb-template-library-tag-btn ${activeTagTab === '' ? 'active' : ''}`}
+                                    onClick={() => setActiveTagTab('')}
+                                    disabled={activeTagTab === ''}
+                                >
+                                    All
+                                </button>
+                                {TagTabsOptions.map(tab => (
+                                    <button
+                                        key={tab.value}
+                                        className={`fb-template-library-tag-btn ${activeTagTab === tab.value ? 'active' : ''}`}
+                                        onClick={() => setActiveTagTab(tab.value)}
+                                        disabled={activeTagTab === tab.value}
+                                    >
+                                        {tab.name}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+
                 {loading ? (
                     <TemplateContentLoader />
                 ) : (
                     <>
-
-                        <div className="fb-template-library-content-header">
-                            <div className="fb-template-library-content-header-left">
-                                <h2>All {capitalize(activeTab)}</h2>
-                            </div>
-                            <div className="fb-template-library-content-header-right">
-                                <div className="fb-template-library-search-wrapper">
-                                    <div className="fb-search-input-wrapper">
-                                        <div className="fb-search-input-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                                <g clipPath="url(#clip0_13116_5586)">
-                                                    <circle cx="8.625" cy="8.625" r="7.125" stroke="white" strokeWidth="1.5" />
-                                                    <path d="M13.875 13.875L16.5 16.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_131ikt16_5586">
-                                                        <rect width="18" height="18" fill="white" />
-                                                    </clipPath>
-                                                </defs>
-                                            </svg>
-                                        </div>
-                                        <input
-                                            type="search"
-                                            placeholder={`Search ${capitalize(activeTab)}`}
-                                            value={searchText}
-                                            onChange={e => searchTemplates(e.target.value)}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="fb-template-library-tags-wrapper">
-                                    <button
-                                        className={`fb-template-library-tag-btn ${activeTagTab === '' ? 'active' : ''}`}
-                                        onClick={() => setActiveTagTab('')}
-                                        disabled={activeTagTab === ''}
-                                    >
-                                        All
-                                    </button>
-                                    {TagTabsOptions.map(tab => (
-                                        <button
-                                            key={tab.value}
-                                            className={`fb-template-library-tag-btn ${activeTagTab === tab.value ? 'active' : ''}`}
-                                            onClick={() => setActiveTagTab(tab.value)}
-                                            disabled={activeTagTab === tab.value}
-                                        >
-                                            {tab.name}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
                         <ToastContainer />
                         <div className="fb-template-library-cards">
                             {filteredTemplates && filteredTemplates.length > 0 ? (
@@ -305,45 +313,32 @@ const TemplateContent = ({
                             )}
                         </div>
                         { schema[activeTab]?.pagination && (
-                            <div className="fb-template-library-pagination" style={{ marginTop: '20px', textAlign: 'center' }}>
+                            <div className="fb-template-library-pagination">
                                 <button
-                                className="fb-pagination-btn"
-                                disabled={currentPage === 1}
-                                onClick={() => onPageChange(activeTab, currentPage - 1)}
-                                style={{
-                                    marginRight: '10px',
-                                    padding: '8px 16px',
-                                    cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
-                                    opacity: currentPage === 1 ? 0.5 : 1,
-                                }}
+                                    className="fb-pagination-btn fb-btn-prev"
+                                    disabled={currentPage === 1}
+                                    onClick={() => onPageChange(activeTab, currentPage - 1)}
                                 >
-                                Previous
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
+                                        <path d="M8.93735 15L2 8M2 8L8.93735 1M2 8L20 8" stroke="#0B0C0E" stroke-width="1.5"/>
+                                    </svg>
+                                    Previous
                                 </button>
-
+                            
                                 {/* Page Numbers */}
-                                <div style={{ display: 'inline-block', margin: '0 10px' }}>
+                                <div className="fb-page-numbers">
                                 {(() => {
                                     const { last_page } = schema[activeTab].pagination;
-                                    const maxVisiblePages = 3; // Number of pages to show in the range
+                                    const maxVisiblePages = 3;
                                     const pages = [];
-
-                                    // If total pages <= maxVisiblePages, show all pages
+                            
                                     if (last_page <= maxVisiblePages) {
                                     for (let i = 1; i <= last_page; i++) {
                                         pages.push(
                                         <button
                                             key={i}
-                                            className={`fb-pagination-btn ${currentPage === i ? 'active' : ''}`}
+                                            className={`fb-pagination-btn ${currentPage === i ? "active" : ""}`}
                                             onClick={() => onPageChange(activeTab, i)}
-                                            style={{
-                                            margin: '0 5px',
-                                            padding: '8px 12px',
-                                            cursor: 'pointer',
-                                            background: currentPage === i ? '#007cba' : '#f1f1f1',
-                                            color: currentPage === i ? '#fff' : '#000',
-                                            border: 'none',
-                                            borderRadius: '4px',
-                                            }}
                                         >
                                             {i}
                                         </button>
@@ -354,108 +349,68 @@ const TemplateContent = ({
                                     pages.push(
                                         <button
                                         key={1}
-                                        className={`fb-pagination-btn ${currentPage === 1 ? 'active' : ''}`}
+                                        className={`fb-pagination-btn ${currentPage === 1 ? "active" : ""}`}
                                         onClick={() => onPageChange(activeTab, 1)}
-                                        style={{
-                                            margin: '0 5px',
-                                            padding: '8px 12px',
-                                            cursor: 'pointer',
-                                            background: currentPage === 1 ? '#007cba' : '#f1f1f1',
-                                            color: currentPage === 1 ? '#fff' : '#000',
-                                            border: 'none',
-                                            borderRadius: '4px',
-                                        }}
                                         >
                                         1
                                         </button>
                                     );
-
-                                    // Show ellipsis after page 1 if currentPage > 2
+                            
                                     if (currentPage > 2) {
-                                        pages.push(<span key="start-ellipsis" style={{ margin: '0 5px' }}>...</span>);
+                                        pages.push(<span key="start-ellipsis" className="fb-ellipsis">...</span>);
                                     }
-
-                                    // Calculate the range of pages to show
+                            
                                     let startPage = Math.max(2, currentPage - 1);
                                     let endPage = Math.min(last_page - 1, currentPage + 1);
-
-                                    // Adjust range if near the end
+                            
                                     if (currentPage > last_page - 2) {
                                         startPage = Math.max(2, last_page - maxVisiblePages + 1);
                                         endPage = last_page - 1;
                                     }
-
-                                    // Add pages in the range
+                            
                                     for (let i = startPage; i <= endPage; i++) {
                                         pages.push(
                                         <button
                                             key={i}
-                                            className={`fb-pagination-btn ${currentPage === i ? 'active' : ''}`}
+                                            className={`fb-pagination-btn ${currentPage === i ? "active" : ""}`}
                                             onClick={() => onPageChange(activeTab, i)}
-                                            style={{
-                                            margin: '0 5px',
-                                            padding: '8px 12px',
-                                            cursor: 'pointer',
-                                            background: currentPage === i ? '#007cba' : '#f1f1f1',
-                                            color: currentPage === i ? '#fff' : '#000',
-                                            border: 'none',
-                                            borderRadius: '4px',
-                                            }}
                                         >
                                             {i}
                                         </button>
                                         );
                                     }
-
-                                    // Show ellipsis before last page if endPage < last_page - 1
+                            
                                     if (endPage < last_page - 1) {
-                                        pages.push(<span key="end-ellipsis" style={{ margin: '0 5px' }}>...</span>);
+                                        pages.push(<span key="end-ellipsis" className="fb-ellipsis">...</span>);
                                     }
-
-                                    // Always show last page
+                            
                                     if (last_page > 1) {
                                         pages.push(
                                         <button
                                             key={last_page}
-                                            className={`fb-pagination-btn ${currentPage === last_page ? 'active' : ''}`}
+                                            className={`fb-pagination-btn ${currentPage === last_page ? "active" : ""}`}
                                             onClick={() => onPageChange(activeTab, last_page)}
-                                            style={{
-                                            margin: '0 5px',
-                                            padding: '8px 12px',
-                                            cursor: 'pointer',
-                                            background: currentPage === last_page ? '#007cba' : '#f1f1f1',
-                                            color: currentPage === last_page ? '#fff' : '#000',
-                                            border: 'none',
-                                            borderRadius: '4px',
-                                            }}
                                         >
                                             {last_page}
                                         </button>
                                         );
                                     }
                                     }
-
+                            
                                     return pages;
                                 })()}
                                 </div>
-
+                            
                                 <button
-                                className="fb-pagination-btn"
-                                disabled={currentPage === schema[activeTab].pagination.last_page}
-                                onClick={() => onPageChange(activeTab, currentPage + 1)}
-                                style={{
-                                    marginLeft: '10px',
-                                    padding: '8px 16px',
-                                    cursor: currentPage === schema[activeTab].pagination.last_page ? 'not-allowed' : 'pointer',
-                                    opacity: currentPage === schema[activeTab].pagination.last_page ? 0.5 : 1,
-                                }}
+                                    className="fb-pagination-btn fb-btn-next"
+                                    disabled={currentPage === schema[activeTab].pagination.last_page}
+                                    onClick={() => onPageChange(activeTab, currentPage + 1)}
                                 >
-                                Next
+                                    Next
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
+                                        <path d="M8.93735 15L2 8M2 8L8.93735 1M2 8L20 8" stroke="#0B0C0E" stroke-width="1.5"/>
+                                    </svg>
                                 </button>
-
-                                {/* <span style={{ marginLeft: '15px' }}>
-                                ({schema[activeTab].pagination.from} - {schema[activeTab].pagination.to} of {schema[activeTab].pagination.total})
-                                </span> */}
                             </div>
                         )}
                     </>
