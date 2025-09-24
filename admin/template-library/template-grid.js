@@ -185,7 +185,7 @@ const TemplateGrid = ({
     };
 
     const verifySubscription = async () => {
-        const apiBase = "https://frontis-sync.boomdevshub.com/wp-json";
+        const apiBase = `${FB_TLibrary.wordpressSyncApi}/wp-json`;
         const body = {
             license_key: FB_TLibrary.activationKey,
             domain_name: window.location.origin,

@@ -225,7 +225,7 @@ class Admin {
 			$tl_script_asset['dependencies'][] = 'jquery';
 
             $activation_key = get_option('frontisblockspro_license_options');
-            if($activation_key && count($activation_key) > 0 && isset($activation_key['sc_license_key']) && $activation_key['sc_license_key'] !== '') {
+            if(is_array($activation_key) && $activation_key && count($activation_key) > 0 && isset($activation_key['sc_license_key']) && $activation_key['sc_license_key'] !== '') {
                 $activation_key = $activation_key['sc_license_key'];
             }
 
@@ -235,7 +235,9 @@ class Admin {
                 'frontis-template-library',
                 'FB_TLibrary',
                 array(
-                    'activationKey' => $activation_key
+                    'activationKey' => $activation_key,
+                    'portalApi' => PORTAL_API,
+                    'wordpressSyncApi' => WORDPRESS_SYNC_API
                 )
             );
 
