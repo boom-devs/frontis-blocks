@@ -974,7 +974,6 @@ const TypographySettings = ({
 	}
 
 
-	console.log(customTypography);
 	return (
 		<>
 			<div className="fb-typography-panel">
