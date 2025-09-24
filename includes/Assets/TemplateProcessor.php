@@ -68,5 +68,3 @@ class TemplateProcessor {
         return $template_content;
     }
 }
-
-?>
