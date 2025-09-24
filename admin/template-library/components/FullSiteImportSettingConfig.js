@@ -39,179 +39,183 @@ const FullSiteImportSettingConfig = ({
     useEffect(() => {
         const updatedGlobalTypography = {};
       
-        // Normal typography loop
-        Object.keys(typography).forEach((item) => {
-          const typo = typography[item];
-          if (!typo) return;
+        const processTypographies = (source, target) => {
+          Object.keys(source).forEach((item) => {
+            const typo = source[item];
+            if (!typo) return;
       
-          updatedGlobalTypography[item] = {
-            ...(globalTypography[item] || {})
-          };
+            // যদি item === 'heading' হয়, তাহলে এর ভিতরের h1-h6 & all আলাদা key হবে
+            if (item === "heading") {
+              Object.keys(typo).forEach((headingKey) => {
+                const headingTypo = typo[headingKey];
+                if (!headingTypo) return;
       
-          // fontSize
-          if (typo.fontSize) {
-            updatedGlobalTypography[item].fontSize = {
-              variable: `--fb-global-${item}--font-size`,
-              value: typo.fontSize,
-              unit: typo.fontSizeUnit || {
-                Desktop: "px",
-                Tablet: "px",
-                Mobile: "px"
+                const keyName = headingKey === "all" ? "headingAll" : headingKey;
+      
+                target[keyName] = {
+                  ...(globalTypography[keyName] || {})
+                };
+      
+                if (headingTypo.fontSize) {
+                  target[keyName].fontSize = {
+                    variable: `--fb-global-${keyName}--font-size`,
+                    value: headingTypo.fontSize,
+                    unit: headingTypo.fontSizeUnit || {
+                      Desktop: "px",
+                      Tablet: "px",
+                      Mobile: "px"
+                    }
+                  };
+                }
+      
+                if (headingTypo.fontWeight) {
+                  target[keyName].fontWeight = {
+                    variable: `--fb-global-${keyName}--font-weight`,
+                    value: headingTypo.fontWeight
+                  };
+                }
+      
+                if (headingTypo.lineHeight) {
+                  target[keyName].lineHeight = {
+                    variable: `--fb-global-${keyName}--line-height`,
+                    value: headingTypo.lineHeight,
+                    unit: headingTypo.lineHeightUnits || {
+                      Desktop: "px",
+                      Tablet: "px",
+                      Mobile: "px"
+                    }
+                  };
+                }
+      
+                if (headingTypo.letterSpacing) {
+                  target[keyName].letterSpacing = {
+                    variable: `--fb-global-${keyName}--letter-spacing`,
+                    value: headingTypo.letterSpacing,
+                    unit: headingTypo.letterSpacingUnit || {
+                      Desktop: "px",
+                      Tablet: "px",
+                      Mobile: "px"
+                    }
+                  };
+                }
+      
+                if (headingTypo.fontStyle) {
+                  target[keyName].fontStyle = {
+                    variable: `--fb-global-${keyName}--font-style`,
+                    value: headingTypo.fontStyle
+                  };
+                }
+      
+                if (headingTypo.textTransform) {
+                  target[keyName].textTransform = {
+                    variable: `--fb-global-${keyName}--text-transform`,
+                    value: headingTypo.textTransform
+                  };
+                }
+      
+                if (headingTypo.textDecoration) {
+                  target[keyName].textDecoration = {
+                    variable: `--fb-global-${keyName}--text-decoration`,
+                    value: headingTypo.textDecoration
+                  };
+                }
+      
+                if (headingTypo.fontFamily) {
+                  target[keyName].fontFamily = {
+                    variable: `--fb-global-${keyName}--font-family`,
+                    value: headingTypo.fontFamily
+                  };
+                }
+              });
+            } else {
+              // Normal typography যেমন body, link, button, captions
+              target[item] = {
+                ...(globalTypography[item] || {})
+              };
+      
+              if (typo.fontSize) {
+                target[item].fontSize = {
+                  variable: `--fb-global-${item}--font-size`,
+                  value: typo.fontSize,
+                  unit: typo.fontSizeUnit || {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                  }
+                };
               }
-            };
-          }
       
-          // fontWeight
-          if (typo.fontWeight) {
-            updatedGlobalTypography[item].fontWeight = {
-              variable: `--fb-global-${item}--font-weight`,
-              value: typo.fontWeight
-            };
-          }
-      
-          // lineHeight
-          if (typo.lineHeight) {
-            updatedGlobalTypography[item].lineHeight = {
-              variable: `--fb-global-${item}--line-height`,
-              value: typo.lineHeight,
-              unit: typo.lineHeightUnits || {
-                Desktop: "px",
-                Tablet: "px",
-                Mobile: "px"
+              if (typo.fontWeight) {
+                target[item].fontWeight = {
+                  variable: `--fb-global-${item}--font-weight`,
+                  value: typo.fontWeight
+                };
               }
-            };
-          }
       
-          // letterSpacing
-          if (typo.letterSpacing) {
-            updatedGlobalTypography[item].letterSpacing = {
-              variable: `--fb-global-${item}--letter-spacing`,
-              value: typo.letterSpacing,
-              unit: typo.letterSpacingUnit || {
-                Desktop: "px",
-                Tablet: "px",
-                Mobile: "px"
+              if (typo.lineHeight) {
+                target[item].lineHeight = {
+                  variable: `--fb-global-${item}--line-height`,
+                  value: typo.lineHeight,
+                  unit: typo.lineHeightUnits || {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                  }
+                };
               }
-            };
-          }
       
-          // fontStyle
-          if (typo.fontStyle) {
-            updatedGlobalTypography[item].fontStyle = {
-              variable: `--fb-global-${item}--font-style`,
-              value: typo.fontStyle
-            };
-          }
-      
-          // textTransform
-          if (typo.textTransform) {
-            updatedGlobalTypography[item].textTransform = {
-              variable: `--fb-global-${item}--text-transform`,
-              value: typo.textTransform
-            };
-          }
-      
-          // textDecoration
-          if (typo.textDecoration) {
-            updatedGlobalTypography[item].textDecoration = {
-              variable: `--fb-global-${item}--text-decoration`,
-              value: typo.textDecoration
-            };
-          }
-      
-          // fontFamily ✅ (new)
-          if (typo.fontFamily) {
-            updatedGlobalTypography[item].fontFamily = {
-              variable: `--fb-global-${item}--font-family`,
-              value: typo.fontFamily
-            };
-          }
-        });
-      
-        // Custom typography loop
-        Object.keys(customTypography).forEach((item) => {
-          const typo = customTypography[item];
-          if (!typo) return;
-      
-          updatedGlobalTypography[item] = {
-            ...(globalTypography[item] || {})
-          };
-      
-          if (typo.fontSize) {
-            updatedGlobalTypography[item].fontSize = {
-              variable: `--fb-global-${item}--font-size`,
-              value: typo.fontSize,
-              unit: typo.fontSizeUnit || {
-                Desktop: "px",
-                Tablet: "px",
-                Mobile: "px"
+              if (typo.letterSpacing) {
+                target[item].letterSpacing = {
+                  variable: `--fb-global-${item}--letter-spacing`,
+                  value: typo.letterSpacing,
+                  unit: typo.letterSpacingUnit || {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                  }
+                };
               }
-            };
-          }
       
-          if (typo.fontWeight) {
-            updatedGlobalTypography[item].fontWeight = {
-              variable: `--fb-global-${item}--font-weight`,
-              value: typo.fontWeight
-            };
-          }
-      
-          if (typo.lineHeight) {
-            updatedGlobalTypography[item].lineHeight = {
-              variable: `--fb-global-${item}--line-height`,
-              value: typo.lineHeight,
-              unit: typo.lineHeightUnits || {
-                Desktop: "px",
-                Tablet: "px",
-                Mobile: "px"
+              if (typo.fontStyle) {
+                target[item].fontStyle = {
+                  variable: `--fb-global-${item}--font-style`,
+                  value: typo.fontStyle
+                };
               }
-            };
-          }
       
-          if (typo.letterSpacing) {
-            updatedGlobalTypography[item].letterSpacing = {
-              variable: `--fb-global-${item}--letter-spacing`,
-              value: typo.letterSpacing,
-              unit: typo.letterSpacingUnit || {
-                Desktop: "px",
-                Tablet: "px",
-                Mobile: "px"
+              if (typo.textTransform) {
+                target[item].textTransform = {
+                  variable: `--fb-global-${item}--text-transform`,
+                  value: typo.textTransform
+                };
               }
-            };
-          }
       
-          if (typo.fontStyle) {
-            updatedGlobalTypography[item].fontStyle = {
-              variable: `--fb-global-${item}--font-style`,
-              value: typo.fontStyle
-            };
-          }
+              if (typo.textDecoration) {
+                target[item].textDecoration = {
+                  variable: `--fb-global-${item}--text-decoration`,
+                  value: typo.textDecoration
+                };
+              }
       
-          if (typo.textTransform) {
-            updatedGlobalTypography[item].textTransform = {
-              variable: `--fb-global-${item}--text-transform`,
-              value: typo.textTransform
-            };
-          }
+              if (typo.fontFamily) {
+                target[item].fontFamily = {
+                  variable: `--fb-global-${item}--font-family`,
+                  value: typo.fontFamily
+                };
+              }
+            }
+          });
+        };
       
-          if (typo.textDecoration) {
-            updatedGlobalTypography[item].textDecoration = {
-              variable: `--fb-global-${item}--text-decoration`,
-              value: typo.textDecoration
-            };
-          }
+        // normal typographies
+        processTypographies(typography, updatedGlobalTypography);
       
-          // fontFamily ✅ (new)
-          if (typo.fontFamily) {
-            updatedGlobalTypography[item].fontFamily = {
-              variable: `--fb-global-${item}--font-family`,
-              value: typo.fontFamily
-            };
-          }
-        });
+        // custom typographies
+        processTypographies(customTypography, updatedGlobalTypography);
       
         setGlobalTypography(updatedGlobalTypography);
-      }, [typography, customTypography]);
+    }, []);
+      
       
 
     console.log('globalTypography', globalTypography);
