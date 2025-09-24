@@ -123,8 +123,8 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, o
 
                         {categories.map((category) => (
                             <button
-                                key={category.slug}
-                                className={`fb-template-library-store-sidebar-tab ${activeCategory[activeTab] === category.slug ? "active" : ""}`}
+                                key={category?.slug}
+                                className={`fb-template-library-store-sidebar-tab ${activeCategory[activeTab] === category?.slug ? "active" : ""}`}
                                 onClick={() => setActiveCategoryTab(category.slug)}
                                 disabled={activeCategory[activeTab] === category.slug}
                             >

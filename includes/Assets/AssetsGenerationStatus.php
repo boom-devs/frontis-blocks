@@ -76,30 +76,6 @@ class AssetsGenerationStatus {
             #fb_page_assets_generation span {
                 margin-left: 8px;
             }
-
-            /* Compiling state - blue */
-            #fb_page_assets_generation span:contains("compiling") {
-                color: #007bff;
-                background-color: #e7f1ff;
-                padding: 5px 10px;
-                border-radius: 4px;
-            }
-
-            /* Error state - red */
-            #fb_page_assets_generation span:contains("error") {
-                color: #dc3545;
-                background-color: #f8d7da;
-                padding: 5px 10px;
-                border-radius: 4px;
-            }
-
-            /* Compiled state - green */
-            #fb_page_assets_generation span:contains("compiled") {
-                color: #28a745;
-                background-color: #d4edda;
-                padding: 5px 10px;
-                border-radius: 4px;
-            }
         </style>
         <?php
     }
