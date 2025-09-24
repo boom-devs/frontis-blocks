@@ -1,5 +1,3 @@
-import { PluginSidebar, PluginSidebarMoreMenuItem } from '@wordpress/editor';
-import { registerPlugin } from '@wordpress/plugins';
 import { useSelect } from '@wordpress/data';
 import { ToggleControl, PanelBody, PanelRow, ColorPalette, RangeControl, Dropdown, Button } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element';
@@ -9,10 +7,7 @@ const FrontisThemeSiteEditor = () => {
 
     // Check if 'site-editor.php' exists in the URL
     const isSiteEditor = window.location.href.includes('site-editor.php');
-
-    console.log("isSiteEditor isSiteEditor")
-    console.log(isSiteEditor);
-
+    
     // Only render in the site editor
     if (!isSiteEditor) {
         return null;
@@ -35,7 +30,6 @@ const FrontisThemeSiteEditor = () => {
         transparentHeaderColor: 'transparent',
     });
 
-
     const updateSetting = (settingName, value) => {
         const newSettings = {
             ...settings,
@@ -52,6 +46,9 @@ const FrontisThemeSiteEditor = () => {
             data: { setting: newSettings }
         }).then((response) => {
             console.log('Settings updated:', response);
+            if(response === 'success') {
+
+            }
         }).catch((error) => {
             console.error('Error updating settings:', error);
             // Revert the local state if the API call fails
@@ -73,73 +70,72 @@ const FrontisThemeSiteEditor = () => {
 
 
     const setStickyHeaderClass = (settings) => {
-        console.log(settings);
-         const iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
-         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-         const headerTag = iframeDoc.querySelector('header');
-         const footerTag = iframeDoc.querySelector('footer');
+        //  const iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
+        //  const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        //  const headerTag = iframeDoc.querySelector('header');
+        //  const footerTag = iframeDoc.querySelector('footer');
 
-         if(settings.disableHeader) {
-            headerTag.style.background = 'repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px)';
-            headerTag.style.opacity = '.4';
-         } else if(headerTag) {
-            headerTag.style.background = '';
-            headerTag.style.opacity = '1';
-         }
+        //  if(settings.disableHeader) {
+        //     headerTag.style.background = 'repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px)';
+        //     headerTag.style.opacity = '.4';
+        //  } else if(headerTag) {
+        //     headerTag.style.background = '';
+        //     headerTag.style.opacity = '1';
+        //  }
 
-         if(settings.disableFooter) {
-            footerTag.style.background = 'repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px)';
-            footerTag.style.opacity = '.4';
-         } else if(footerTag) {
-            footerTag.style.background = '';
-            footerTag.style.opacity = '1';
-         }
+        //  if(settings.disableFooter) {
+        //     footerTag.style.background = 'repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px)';
+        //     footerTag.style.opacity = '.4';
+        //  } else if(footerTag) {
+        //     footerTag.style.background = '';
+        //     footerTag.style.opacity = '1';
+        //  }
          
-         if(settings.stickyHeader) {
-            if (iframe && iframe.contentDocument) {
-                if (headerTag) {
-                    headerTag.classList.add('fb-sticky-header');
-                    headerTag.style.paddingTop = `${settings.stickyHeaderOffset}rem`;
+        //  if(settings.stickyHeader) {
+        //     if (iframe && iframe.contentDocument) {
+        //         if (headerTag) {
+        //             headerTag.classList.add('fb-sticky-header');
+        //             headerTag.style.paddingTop = `${settings.stickyHeaderOffset}rem`;
 
-                    iframe.contentWindow.addEventListener('scroll', function () {
-                        if (iframe.contentWindow.scrollY > 50) {
-                            headerTag.classList.add('scrolled');
+        //             iframe.contentWindow.addEventListener('scroll', function () {
+        //                 if (iframe.contentWindow.scrollY > 50) {
+        //                     headerTag.classList.add('scrolled');
 
-                            const headerScrolled = iframeDoc.querySelector('.scrolled');
+        //                     const headerScrolled = iframeDoc.querySelector('.scrolled');
 
-                            if(headerScrolled && settings.stickyHeaderColor){
-                                headerScrolled.style.setProperty('--wp--preset--sticky--bg', settings.stickyHeaderColor);
-                            }
-                        } else {
-                            headerTag.classList.remove('scrolled');
-                        }
-                    });
-                }
-            }
-        } else {
-            if (iframe && iframe.contentDocument) {
+        //                     if(headerScrolled && settings.stickyHeaderColor){
+        //                         headerScrolled.style.setProperty('--wp--preset--sticky--bg', settings.stickyHeaderColor);
+        //                     }
+        //                 } else {
+        //                     headerTag.classList.remove('scrolled');
+        //                 }
+        //             });
+        //         }
+        //     }
+        // } else {
+        //     if (iframe && iframe.contentDocument) {
 
-                if (headerTag) {
-                    headerTag.classList.remove('fb-sticky-header');
-                    headerTag.style.paddingTop = '';
-                }
-            }
-        }
+        //         if (headerTag) {
+        //             headerTag.classList.remove('fb-sticky-header');
+        //             headerTag.style.paddingTop = '';
+        //         }
+        //     }
+        // }
 
-        if(settings.transparentHeader) {
-            if (iframe && iframe.contentDocument) {
-                if (headerTag) {
-                    headerTag.classList.add('fb-transparent-header');
-                    headerTag.style.setProperty('--wp--preset--transparent--bg', settings.transparentHeaderColor);
-                }
-            }
-        } else {
-            if (iframe && iframe.contentDocument) {
-                if (headerTag) {
-                    headerTag.classList.remove('fb-transparent-header');
-                }
-            }
-        }
+        // if(settings.transparentHeader) {
+        //     if (iframe && iframe.contentDocument) {
+        //         if (headerTag) {
+        //             headerTag.classList.add('fb-transparent-header');
+        //             headerTag.style.setProperty('--wp--preset--transparent--bg', settings.transparentHeaderColor);
+        //         }
+        //     }
+        // } else {
+        //     if (iframe && iframe.contentDocument) {
+        //         if (headerTag) {
+        //             headerTag.classList.remove('fb-transparent-header');
+        //         }
+        //     }
+        // }
     }
     
     return (
@@ -170,7 +166,7 @@ const FrontisThemeSiteEditor = () => {
                                 width: '100%'
                             }}>
                                 <div>
-                                    <span>Background Color</span>
+                                    <span style={{fontWeight: 600}}>Background Color</span>
                                 </div>
                                 <Dropdown
                                     className="fb-sticky-header-bg-dropdown"
@@ -221,7 +217,7 @@ const FrontisThemeSiteEditor = () => {
                             width: '100%'
                         }}>
                             <div>
-                                <span>Background Color</span>
+                                <span style={{fontWeight: 600}}>Background Color</span>
                             </div>
                             <Dropdown
                                 className="fb-sticky-header-bg-dropdown"
@@ -269,29 +265,31 @@ const FrontisThemeSiteEditor = () => {
                 </PanelRow>
 
             </PanelBody>
-            <PanelBody title='Features'>
-                <PanelRow>
-                    <ToggleControl
-                        label="Scroll To Top"
-                        checked={settings.scrollToTop}
-                        onChange={(value) => updateSetting('scrollToTop', value)}
-                    />
-                </PanelRow>
-                <PanelRow>
-                    <ToggleControl
-                        label="Enable Smooth Scroll"
-                        checked={settings.smoothScroll}
-                        onChange={(value) => updateSetting('smoothScroll', value)}
-                    />
-                </PanelRow>
-                <PanelRow>
-                    <ToggleControl
-                        label="Enable Lazy Loading"
-                        checked={settings.lazyLoading}
-                        onChange={(value) => updateSetting('lazyLoading', value)}
-                    />
-                </PanelRow>
-            </PanelBody>
+            {frontisBlocksAdminSidebar.frontis_theme &&
+                <PanelBody title='Features'>
+                    <PanelRow>
+                        <ToggleControl
+                            label="Scroll To Top"
+                            checked={settings.scrollToTop}
+                            onChange={(value) => updateSetting('scrollToTop', value)}
+                        />
+                    </PanelRow>
+                    <PanelRow>
+                        <ToggleControl
+                            label="Enable Smooth Scroll"
+                            checked={settings.smoothScroll}
+                            onChange={(value) => updateSetting('smoothScroll', value)}
+                        />
+                    </PanelRow>
+                    <PanelRow>
+                        <ToggleControl
+                            label="Enable Lazy Loading"
+                            checked={settings.lazyLoading}
+                            onChange={(value) => updateSetting('lazyLoading', value)}
+                        />
+                    </PanelRow>
+                </PanelBody>
+            }
         </>
     );
 };
