@@ -130,10 +130,7 @@ class Helper
      * @access public
      */
     public static function get_related_taxonomy(){
-
-
         $post_types = self::get_post_types();
-
         $return_array = array();
 
         foreach ($post_types as $key => $value) {
@@ -148,9 +145,7 @@ class Helper
                 }
 
                 $data[$tax_slug] = $tax;
-
                 $terms = get_terms($tax_slug);
-
                 $related_tax = array();
 
                 if (!empty($terms)) {
@@ -166,7 +161,6 @@ class Helper
             }
 
             $return_array[$post_type]['taxonomy'] = $data;
-
         }
 
         return apply_filters('fb_post_loop_taxonomies', $return_array);
@@ -780,7 +774,7 @@ class Helper
         }
     }
 
-    public static function get_current_page_blockstyles($post_id, $given_post_content) {
+    public static function get_template_content($post_id) {
         global $wpdb;
 
 		$post_name = Helper::is_custom_post_type($post_id) || get_post_type($post_id) === 'post' ? 'single' : get_post_type($post_id);
@@ -811,104 +805,38 @@ class Helper
 		// Execute the query
 		$template_contents = $wpdb->get_results($query);
 
-        
-		$template_contents = TemplateProcessor::get_instance()->process_template($template_contents);
-        
-		$pattern = '/<!--\s*wp:post-content\s*/i';
-
-        if (preg_match_all($pattern, $template_contents, $wp_post_content_matchs) > 0) {
-            if(isset($wp_post_content_matchs[0])){
-				foreach($wp_post_content_matchs[0] as $index => $post_content) {
-					$template_contents = str_replace(
-                        $wp_post_content_matchs[0][$index],
-                        $given_post_content,
-                        $template_contents
-                    );
-				}
-			}
-        }
-
-        if(!empty($template_contents)) {
-            // Regex for blockStyle (unchanged)
-            $style_pattern = '/"blockStyle":\s*"((?:\\\\.|[^"\\\\])*)"/';
-            preg_match_all($style_pattern, $template_contents, $style_matches);
-        
-            // write post content file php
-            $myfile = fopen($post_id."tempalte_content.txt", "w") or die("Unable to open file!");
-            fwrite($myfile, json_encode($style_matches[1]));
-            fclose($myfile);
-            $styles = [];
-            // Process each matched blockStyle value
-            foreach ($style_matches[1] as $escaped_style) {
-                // Unescape JSON unicode sequences like \u003e to actual characters
-                $unescaped = json_decode('"'.$escaped_style.'"');
-                if ($unescaped !== null) {
-                    $styles[] = $unescaped;
-                }
-            }
-
-            return implode("\n\n", $styles);
-        }
-
-		return false;
+        return $template_contents;
     }
 
-    public static function pre_render_assets_on_compile($post_id) {
-        $active_blocks = get_option('fb_active_blocks');
-        $css_content = '';
-        $js_content = '';
-    
-        if (!empty($active_blocks)) {
-    
-            $js_dir = FB_PLUGIN_PATH . 'assets/js/frontend/';
-            $js_files = Helper::get_js_files($js_dir);
-    
-            if ($js_files) {
-                foreach ($js_files as $key => $js_file) {
-                    $js_content .= file_get_contents($js_file) . "\n";
-                }
-            }
-    
-            $assets_dir = FB_PLUGIN_PATH . 'assets/css/frontend/';
-            $css_files = Helper::get_css_files($assets_dir);
-    
-            if ($css_files) {
-                foreach ($css_files as $key => $css_file) {
-                    $css_content .= file_get_contents($css_file) . "\n";
-                }
-            }
+    public static function get_template_id($post_id) {
+        global $wpdb;
 
+		$post_name = Helper::is_custom_post_type($post_id) || get_post_type($post_id) === 'post' ? 'single' : get_post_type($post_id);
+		$assigned_template = get_post_meta($post_id, '_wp_page_template', true);
 
-            // var_dump(get_post($post_id)->post_content);
+		if ($assigned_template !== '') {
+			if($assigned_template !== 'default') {
+				$post_name = $assigned_template;
+			}
+		}
 
-            $dynamic_styles = Helper::get_current_page_blockstyles($post_id, get_post($post_id)->post_content);
+		$query = $wpdb->prepare(
+			"SELECT
+                ID
+            FROM
+                {$wpdb->posts}
+            WHERE
+                post_type = 'wp_template'
+                AND post_status = 'publish'
+                AND post_name = %s
+            ORDER BY
+                post_modified DESC",
+			$post_name
+		);
+		
+		// Execute the query
+		$template_id = $wpdb->get_var($query);
 
-            if($dynamic_styles) {
-                $css_content .= $dynamic_styles . "\n";
-            }
-    
-            foreach ($active_blocks as $key => $single_block) {
-                $block_static_css_file_path = FB_PLUGIN_PATH . 'build/blocks/' . $key . '/style-index.css';
-
-                // var_dump($block_static_css_file_path);
-    
-                if (file_exists($block_static_css_file_path)) {
-                    $css_content .= file_get_contents($block_static_css_file_path) . "\n";
-                }
-    
-                // Js file
-                $block_static_js_file_path = FB_PLUGIN_PATH . 'build/blocks/' . $key . '/view.js';
-
-                if (file_exists($block_static_js_file_path)) {
-                    $js_content .= file_get_contents($block_static_js_file_path) . "\n";
-                }
-            }
-        }
-    
-        // Return both CSS and JS for initial compilation
-        return [
-            'css' => $css_content,
-            'js' => $js_content
-        ];
+        return $template_id;
     }
 }

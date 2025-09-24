@@ -3,6 +3,7 @@ namespace FrontisBlocks\Activator;
 
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Admin\Ajax\Settings;
+use FrontisBlocks\Utils\Helper;
 
 /**
  * Class Activator
@@ -43,8 +44,31 @@ class Activator {
 	public function fb_on_activate_or_update()
 	{
 		update_option('frontis_blocks_version', self::VERSION);
-		Settings::get_instance()->generate_assets_on_activation_update();
 		$this->generate_job_table();
+		
+		try {
+			$post_ids = Helper::get_all_post_ids();
+			
+			if (!empty($post_ids)) {
+				foreach ($post_ids as $single_post_id) {
+					$single_post = get_post($single_post_id);
+					if (!$single_post) continue;
+					
+					$post_content = $single_post->post_content;
+					$pattern = "/frontis-blocks/i";
+					
+					if (get_post_type($single_post_id) !== 'wp_template' && 
+						preg_match_all($pattern, $post_content) === 0) {
+						continue;
+					}
+					
+					// Insert job using your existing Helper method
+					Helper::insert_job($single_post_id, $single_post->post_name . $single_post_id);
+				}
+			}
+			} catch (Exception $e) {
+			error_log('Failed to schedule assets generation: ' . $e->getMessage());
+		}
 	}
 
 	public function generate_job_table() {
