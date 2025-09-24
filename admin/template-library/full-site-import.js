@@ -3,29 +3,28 @@
  */
 import { __ } from "@wordpress/i18n";
 import { useState, useCallback, useEffect } from "@wordpress/element";
-import { ClipLoader } from "react-spinners";
-import data from "./data.json";
+// import data from "./data.json";
 import TemplateHeader from "./template-header";
 import FullSiteImportSettingConfig from "./components/FullSiteImportSettingConfig";
 import FullSiteImportSetting from "./components/FullSiteImportSetting.js";
 import FullSiteImportContent from "./components/FullSiteImportContent.js";
-import { toast } from "react-toastify";
 
-const FullSiteImport = ({ template, onClose, onBack }) => {
+const FullSiteImport = ({ template, onClose, onBack, data }) => {
+
     const [formData, setFormData] = useState({
         siteName: (window.frontisBlocksAdmin && window.frontisBlocksAdmin.siteName) || '',
         siteTagline: '',
-        logo: {id: '', url: '', alt: ''},
+        logo: { id: '', url: '', alt: '' },
         logoUrl: '',
         importContent: true,
         importCustomizer: true,
         importWidgets: true,
         importOptions: true
     });
-    const [isImporting, setIsImporting] = useState(false);
-    const [importProgress, setImportProgress] = useState(0);
-    const [currentStep, setCurrentStep] = useState('');
-    const [activeTab, setActiveTab] = useState('patterns');
+
+    console.log(template);
+    
+    const [activeTab, setActiveTab] = useState(template.activeTab || 'pattern');
     const [showConfigStep, setShowConfigStep] = useState(false);
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
@@ -56,58 +55,7 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
         setIsSidebarCollapsed(prev => !prev);
     }, []);
 
-    const handleImport = useCallback(async () => {
-        setIsImporting(true);
-        setImportProgress(0);
 
-        const steps = [
-            'Preparing import...',
-            'Importing content...',
-            'Setting up customizer...',
-            'Configuring widgets...',
-            'Finalizing setup...'
-        ];
-
-        try {
-            for (let i = 0; i < steps.length; i++) {
-                setCurrentStep(steps[i]);
-                setImportProgress(((i + 1) / steps.length) * 100);
-                await new Promise(resolve => setTimeout(resolve, 1500));
-            }
-
-            console.log('Full site import completed:', {
-                template: template?.id,
-                formData
-            });
-
-            toast.success(__('Site imported successfully!', 'frontis-blocks'), {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
-            alert('Site imported successfully!');
-            onClose();
-        } catch (error) {
-            console.error('Import failed:', error);
-            toast.error(__('Import failed. Please try again.', 'frontis-blocks'), {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
-        } finally {
-            setIsImporting(false);
-            setImportProgress(0);
-            setCurrentStep('');
-        }
-    }, [template?.id, formData, onClose]);
-
-    console.log(template);
 
     return (
         <div className="fb-full-site-import-modal">
@@ -123,16 +71,15 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
 
                 {/* Content */}
                 <div className={`fb-full-site-import-content ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
+
                     {/* Left Panel - Sidebar */}
                     {showConfigStep ? (
                         <FullSiteImportSettingConfig
                             template={template}
                             onBack={() => setShowConfigStep(false)}
-                            onImport={handleImport}
-                            isImporting={isImporting}
-                            importProgress={importProgress}
-                            currentStep={currentStep}
-                            isSidebarCollapsed = {isSidebarCollapsed}
+                            isSidebarCollapsed={isSidebarCollapsed}
+                            formData={formData}
+                            onClose={onClose}
                         />
                     ) : (
                         <FullSiteImportSetting
@@ -142,15 +89,14 @@ const FullSiteImport = ({ template, onClose, onBack }) => {
                             handleInputChange={handleInputChange}
                             handleNext={handleNext}
                             handleBackClick={handleBackClick}
-                            isSidebarCollapsed = {isSidebarCollapsed}
+                            isSidebarCollapsed={isSidebarCollapsed}
                         />
                     )}
-                    
+
                     {/* Right Panel - Preview */}
                     <FullSiteImportContent
                         template={template}
                     />
-
                     {/* Collapse Button */}
                     <div
                         className={`fb-import-sidebar-collapse ${isSidebarCollapsed ? 'collapsed' : ''}`}

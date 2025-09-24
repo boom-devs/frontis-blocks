@@ -1,36 +1,185 @@
 .fb-template-loader-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background: #ffffff;
-    opacity: 0.5;
-    
-    .fb-template-loader-inner {
-        .fb-template-loader {
-            width: 48px;
-            height: 48px;
-            border: 5px solid $primary-color;
-            border-bottom-color: transparent;
-            border-radius: 50%;
-            display: inline-block;
-            box-sizing: border-box;
-            animation: rotation 1s linear infinite;
-        }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  opacity: 0.5;
+  z-index: 999;
 
-        @keyframes rotation {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+  .fb-template-loader-inner {
+    .fb-template-loader {
+      width: 48px;
+      height: 48px;
+      border: 5px solid $primary-color;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;
     }
+
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+  }
+}
+
+
+@keyframes fb-template-category-loader {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.fb-template-category-loader-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  .fb-template-category-loader {
+    --base-color: #F8F8F8;
+    --highlight-color: #efefefcc;
+    --animation-duration: 1.5s;
+    --animation-direction: normal;
+    --pseudo-element-display: block;
+
+    background-color: var(--base-color);
+    width: 100%;
+    display: inline-flex;
+    line-height: 1;
+    position: relative;
+    user-select: none;
+    overflow: hidden;
+    max-width: 200px;
+    width: 100%;
+    height: 30px;
+    border-radius: 8px;
+
+    &::after {
+      content: ' ';
+      display: var(--pseudo-element-display);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-image: var(--custom-highlight-background,
+          linear-gradient(90deg,
+            var(--base-color) 0%,
+            var(--highlight-color) 50%,
+            var(--base-color) 100%));
+      transform: translateX(-100%);
+
+      animation-name: fb-template-category-loader;
+      animation-direction: var(--animation-direction);
+      animation-duration: var(--animation-duration);
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+
+    }
+  }
+
+  @media (prefers-reduced-motion) {
+    .fb-template-category-loader {
+      --pseudo-element-display: none;
+    }
+  }
+
+}
+
+.fb-template-content-loader-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+
+  .fb-template-content-loader {
+    color: $primary-color;
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    position: relative;
+    text-indent: -9999em;
+    animation: mulShdSpin 1.3s infinite linear;
+    transform: translateZ(0);
+  }
+
+  @keyframes mulShdSpin {
+
+    0%,
+    100% {
+      box-shadow: 0 -3em 0 0.2em,
+        2em -2em 0 0em, 3em 0 0 -1em,
+        2em 2em 0 -1em, 0 3em 0 -1em,
+        -2em 2em 0 -1em, -3em 0 0 -1em,
+        -2em -2em 0 0;
+    }
+
+    12.5% {
+      box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em,
+        3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em,
+        -2em 2em 0 -1em, -3em 0 0 -1em,
+        -2em -2em 0 -1em;
+    }
+
+    25% {
+      box-shadow: 0 -3em 0 -0.5em,
+        2em -2em 0 0, 3em 0 0 0.2em,
+        2em 2em 0 0, 0 3em 0 -1em,
+        -2em 2em 0 -1em, -3em 0 0 -1em,
+        -2em -2em 0 -1em;
+    }
+
+    37.5% {
+      box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
+        3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em,
+        -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+    }
+
+    50% {
+      box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
+        3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em,
+        -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+    }
+
+    62.5% {
+      box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
+        3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0,
+        -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+    }
+
+    75% {
+      box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em,
+        3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em,
+        -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+    }
+
+    87.5% {
+      box-shadow: 0em -3em 0 0, 2em -2em 0 -1em,
+        3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em,
+        -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+    }
+  }
+
 }

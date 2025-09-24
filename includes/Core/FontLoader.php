@@ -82,7 +82,7 @@ class FontLoader
 
 		if ( 'false' !== $googleFont ) {
 			$fonts = self::$gfonts;
-			Helper::load_google_font( $fonts );
+			// Helper::load_google_font( $fonts );
 		}
 	}
 }
