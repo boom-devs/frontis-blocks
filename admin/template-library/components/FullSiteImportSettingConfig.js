@@ -21,9 +21,9 @@ const FullSiteImportSettingConfig = ({
     const [currentStep, setCurrentStep] = useState('');
 
     const [globalColors, setGlobalColors] = useState(template.colors);
-	const [customColors, setCustomColors] = useState(template.customColors);
+	const [customColors, setCustomColors] = useState(template.colors);
 	const [gradientColors, setGradientColors] = useState(template.gradientColors);
-	const [customGradientColors, setCustomGradientColors] = useState(template.customGradientColors);
+	const [customGradientColors, setCustomGradientColors] = useState(template.gradientColors);
 	const [typography, setTypography] = useState(template.typographies);
 	const [customTypography, setCustomTypography] = useState(template.customTypographies);
 	const [fontFamilies, setFontFamilies] = useState(template.fontFamilies);
@@ -33,6 +33,188 @@ const FullSiteImportSettingConfig = ({
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
     const deviceType = useDeviceType();
+
+
+    // Set global typography
+    useEffect(() => {
+        const updatedGlobalTypography = {};
+      
+        // Normal typography loop
+        Object.keys(typography).forEach((item) => {
+          const typo = typography[item];
+          if (!typo) return;
+      
+          updatedGlobalTypography[item] = {
+            ...(globalTypography[item] || {})
+          };
+      
+          // fontSize
+          if (typo.fontSize) {
+            updatedGlobalTypography[item].fontSize = {
+              variable: `--fb-global-${item}--font-size`,
+              value: typo.fontSize,
+              unit: typo.fontSizeUnit || {
+                Desktop: "px",
+                Tablet: "px",
+                Mobile: "px"
+              }
+            };
+          }
+      
+          // fontWeight
+          if (typo.fontWeight) {
+            updatedGlobalTypography[item].fontWeight = {
+              variable: `--fb-global-${item}--font-weight`,
+              value: typo.fontWeight
+            };
+          }
+      
+          // lineHeight
+          if (typo.lineHeight) {
+            updatedGlobalTypography[item].lineHeight = {
+              variable: `--fb-global-${item}--line-height`,
+              value: typo.lineHeight,
+              unit: typo.lineHeightUnits || {
+                Desktop: "px",
+                Tablet: "px",
+                Mobile: "px"
+              }
+            };
+          }
+      
+          // letterSpacing
+          if (typo.letterSpacing) {
+            updatedGlobalTypography[item].letterSpacing = {
+              variable: `--fb-global-${item}--letter-spacing`,
+              value: typo.letterSpacing,
+              unit: typo.letterSpacingUnit || {
+                Desktop: "px",
+                Tablet: "px",
+                Mobile: "px"
+              }
+            };
+          }
+      
+          // fontStyle
+          if (typo.fontStyle) {
+            updatedGlobalTypography[item].fontStyle = {
+              variable: `--fb-global-${item}--font-style`,
+              value: typo.fontStyle
+            };
+          }
+      
+          // textTransform
+          if (typo.textTransform) {
+            updatedGlobalTypography[item].textTransform = {
+              variable: `--fb-global-${item}--text-transform`,
+              value: typo.textTransform
+            };
+          }
+      
+          // textDecoration
+          if (typo.textDecoration) {
+            updatedGlobalTypography[item].textDecoration = {
+              variable: `--fb-global-${item}--text-decoration`,
+              value: typo.textDecoration
+            };
+          }
+      
+          // fontFamily ✅ (new)
+          if (typo.fontFamily) {
+            updatedGlobalTypography[item].fontFamily = {
+              variable: `--fb-global-${item}--font-family`,
+              value: typo.fontFamily
+            };
+          }
+        });
+      
+        // Custom typography loop
+        Object.keys(customTypography).forEach((item) => {
+          const typo = customTypography[item];
+          if (!typo) return;
+      
+          updatedGlobalTypography[item] = {
+            ...(globalTypography[item] || {})
+          };
+      
+          if (typo.fontSize) {
+            updatedGlobalTypography[item].fontSize = {
+              variable: `--fb-global-${item}--font-size`,
+              value: typo.fontSize,
+              unit: typo.fontSizeUnit || {
+                Desktop: "px",
+                Tablet: "px",
+                Mobile: "px"
+              }
+            };
+          }
+      
+          if (typo.fontWeight) {
+            updatedGlobalTypography[item].fontWeight = {
+              variable: `--fb-global-${item}--font-weight`,
+              value: typo.fontWeight
+            };
+          }
+      
+          if (typo.lineHeight) {
+            updatedGlobalTypography[item].lineHeight = {
+              variable: `--fb-global-${item}--line-height`,
+              value: typo.lineHeight,
+              unit: typo.lineHeightUnits || {
+                Desktop: "px",
+                Tablet: "px",
+                Mobile: "px"
+              }
+            };
+          }
+      
+          if (typo.letterSpacing) {
+            updatedGlobalTypography[item].letterSpacing = {
+              variable: `--fb-global-${item}--letter-spacing`,
+              value: typo.letterSpacing,
+              unit: typo.letterSpacingUnit || {
+                Desktop: "px",
+                Tablet: "px",
+                Mobile: "px"
+              }
+            };
+          }
+      
+          if (typo.fontStyle) {
+            updatedGlobalTypography[item].fontStyle = {
+              variable: `--fb-global-${item}--font-style`,
+              value: typo.fontStyle
+            };
+          }
+      
+          if (typo.textTransform) {
+            updatedGlobalTypography[item].textTransform = {
+              variable: `--fb-global-${item}--text-transform`,
+              value: typo.textTransform
+            };
+          }
+      
+          if (typo.textDecoration) {
+            updatedGlobalTypography[item].textDecoration = {
+              variable: `--fb-global-${item}--text-decoration`,
+              value: typo.textDecoration
+            };
+          }
+      
+          // fontFamily ✅ (new)
+          if (typo.fontFamily) {
+            updatedGlobalTypography[item].fontFamily = {
+              variable: `--fb-global-${item}--font-family`,
+              value: typo.fontFamily
+            };
+          }
+        });
+      
+        setGlobalTypography(updatedGlobalTypography);
+      }, [typography, customTypography]);
+      
+
+    console.log('globalTypography', globalTypography);
 
 
     const handleStorePages = async () => {
@@ -81,24 +263,24 @@ const FullSiteImportSettingConfig = ({
 
     const handleUpdateState = useCallback(async () => {
         const settings = [
-            {
-                key: "fb_update_global_colors",
-                data: globalColors,
-                setter: setGlobalColors,
-                storeKey: "fb_global_colors",
-            },
+            // {
+            //     key: "fb_update_global_colors",
+            //     data: globalColors,
+            //     setter: setGlobalColors,
+            //     storeKey: "fb_global_colors",
+            // },
             {
                 key: "fb_update_custom_colors", 
                 data: customColors,
                 setter: setCustomColors,
                 storeKey: "fb_custom_colors",
             },
-            {
-                key: "fb_update_gradient_colors",
-                data: gradientColors,
-                setter: setGradientColors,
-                storeKey: "fb_gradient_colors",
-            },
+            // {
+            //     key: "fb_update_gradient_colors",
+            //     data: gradientColors,
+            //     setter: setGradientColors,
+            //     storeKey: "fb_gradient_colors",
+            // },
             {
                 key: "fb_update_custom_gradient_colors",
                 data: customGradientColors,
@@ -192,8 +374,8 @@ const FullSiteImportSettingConfig = ({
             const mergedColors = [
                 ...(customColors ?? []),
                 ...(customGradientColors ?? []),
-                ...(gradientColors ?? []),
-                ...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
+                // ...(gradientColors ?? []),
+                // ...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
             ];
 
             const timeoutId = setTimeout(() => {
@@ -206,9 +388,9 @@ const FullSiteImportSettingConfig = ({
             console.error("Error updating global settings:", error);
         }
     }, [
-        globalColors, 
+        // globalColors, 
         customColors, 
-        gradientColors, 
+        // gradientColors, 
         customGradientColors, 
         typography, 
         customTypography, 
@@ -222,8 +404,8 @@ const FullSiteImportSettingConfig = ({
         const mergedColors = [
             ...(customColors ?? []),
             ...(customGradientColors ?? []),
-            ...(gradientColors ?? []),
-            ...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
+            // ...(gradientColors ?? []),
+            // ...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
         ];
     
         const timeoutId = setTimeout(() => {
@@ -233,7 +415,7 @@ const FullSiteImportSettingConfig = ({
         // cleanup function
         return () => clearTimeout(timeoutId);
     
-    }, [globalColors, customColors, customGradientColors, gradientColors, deviceType]);
+    }, [customColors, customGradientColors, deviceType]);
 
 
 	useEffect(() => {
@@ -293,15 +475,16 @@ const FullSiteImportSettingConfig = ({
         template?.id,
         formData,
         onClose,
-        globalColors,
+        // globalColors,
         customColors,
-        gradientColors,
+        // gradientColors,
         customGradientColors,
         typography,
         customTypography,
         fontFamilies,
         globalTypography,
     ]);      
+
 
 
   return (
