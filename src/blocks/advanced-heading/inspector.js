@@ -3372,13 +3372,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     )}
 
                     <BaseControl label={__("Preset Style", "frontis-blocks")}>
-                    <Select2
-                        options={ADVANCED_HEADING_PRESETS}
-                        value={selectedPresetOption}
-                        onChange={(opt) => changeAdvancedHeadingPreset(opt?.value ?? '')}
-                        isClearable={false}
-                        className="fb-select2-control"
-                    />
+                        <Select2
+                            options={ADVANCED_HEADING_PRESETS}
+                            value={selectedPresetOption}
+                            onChange={(opt) => changeAdvancedHeadingPreset(opt?.value ?? '')}
+                            isClearable={false}
+                            className="fb-select2-control"
+                        />
                     </BaseControl>
 
                     <BaseControl

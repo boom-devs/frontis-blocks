@@ -14,6 +14,7 @@ import {
  * Internal depencencies
  */
 import { 
+	ADVANCED_BUTTON_PRESETS,
 	TEXT_ALIGN_JUSTIFY,
 	ICON_TEXT_ALIGN,
 	BORDER_STYLES,
@@ -2485,6 +2486,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					title={__("Button", "frontis-blocks")}
 					initialOpen={true}
 				>
+  					<BaseControl label={__("Preset Style", "frontis-blocks")}>
+						<SelectControl
+							value={buttonPresetStyle}
+							options={ADVANCED_BUTTON_PRESETS}
+							onChange={(selected) => changeAdvancedButtonPreset(selected)}
+						/>
+					</BaseControl>
 
 					<ToggleControl
                         label={__("Enable Dynamic Content", "frontis-blocks")}

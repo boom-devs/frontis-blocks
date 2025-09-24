@@ -86,11 +86,3 @@ export const BACKGROUND_TYPES = [
 	{ label: __('Classic', 'frontis-blocks'), value: 'classic' },
 	{ label: __('Gradient', 'frontis-blocks'), value: 'gradient' },
 ];
-export const PRESETS = [
-	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
-	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
-	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
-	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
-	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
-	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
-];
