@@ -86,7 +86,7 @@ const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
                     <div className="fb-template-import-main">
                         <div className="fb-template-preview">
                             <img
-                                src={`https://leech-better-moose.ngrok-free.app/storage/${template.image}`}
+                                src={`${FB_TLibrary.portalApi}/storage/${template.image}`}
                                 alt={template.title}
                                 className="fb-template-preview-image"
                             />
