@@ -52,8 +52,6 @@ class ContactForms7
 		return $options;
 	}
 	
-	
-
 	public static function wf7_form_html() {
 		// Try to get the cached results
 		$cache_key = 'frontis_blocks_cf7_form_html';
@@ -85,5 +83,4 @@ class ContactForms7
 	
 		return $options;
 	}
-		
 }
