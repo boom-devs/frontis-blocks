@@ -32,6 +32,7 @@ const TypographySettings = (props) => {
 	const [selectCustomTypo, setSelectCustomTypo] = useState(false);
 	const deviceType = useDeviceType();
 
+
 	const isFSE = wp.data.select('core').getCurrentTheme()?.is_block_theme || false;
 
 	// Typography elements

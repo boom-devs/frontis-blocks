@@ -24,7 +24,6 @@ class Blocks
 		add_filter('block_categories_all', [$this, 'register_block_categories'], 10, 1);
 		add_filter('render_block', [$this, 'render_block'], 10, 3);
 		add_action('save_post', [$this, 'get_blocks_on_save'], 10, 3);
-		// add_action('wp_footer', [$this, 'enqueue_google_fonts'], 15);
 	}
 
 	public function register_blocks()
@@ -195,39 +194,22 @@ class Blocks
 
 	public function get_blocks_on_save($post_id, $post, $update)
 	{
-		$post_content = $post->post_content;
+		// Skip autosaves and revisions
+		if (wp_is_post_autosave($post_id) || wp_is_post_revision($post_id)) {
+			return;
+		}
+
 		AssetsGenerator::generate_global_assets();
 
-		// Get synced pattern contents
-		$pattern_contents = Helper::check_patterns_used($post_content);
-
-		// Append pattern contents to post_content
-		if (!empty($pattern_contents)) {
-			foreach ($pattern_contents as $pattern_content) {
-				$post_content .= "\n" . $pattern_content; // Append each pattern content
-			}
-
-			// Pass modified post object to generate_page_assets
-			$post->post_content = $post_content; // Update post object
-		}
-
 		$pattern = "/frontis-blocks/i";
-		update_post_meta($post_id, 'frontis_blocks_used', false);
-
-		if(preg_match_all($pattern, $post->post_content) > 0) {
-			update_post_meta($post_id, 'frontis_blocks_used', true);
+		if((!preg_match_all($pattern, $post->post_content) > 0 && get_post_type($post_id) !== 'wp_template')) {
+			return;
 		}
 
-
-		if($post->post_name === 'home-2-2') {
-			$myfile = fopen("assetsgeneration.txt", "w") or die("Unable to open file!");
-			$txt = $post->post_content;
-			fwrite($myfile, $txt);
-			fclose($myfile);
-		}
+		$critical_css_used = Helper::post_content_has_blocks_critical($post, $post_id);
 
 		if ($update) {
-			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post);
+			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post, $critical_css_used);
 		}
 	}
 
@@ -263,23 +245,5 @@ class Blocks
 	public function get_registered_blocks()
 	{
 		return $this->registered_blocks;
-	}
-
-	public function enqueue_google_fonts()
-	{
-		$google_fonts = get_option('fb_fontfamilies');
-
-		if (!empty($google_fonts)) {
-			foreach ($google_fonts as $key => $value) {
-				// unique fonts family
-				if (!in_array($value, $this->gfonts)) {
-					$this->gfonts[$value] = $value;
-				}
-			}
-		}
-
-		if (!empty($this->gfonts)) {
-			// Helper::load_google_font( $this->gfonts );
-		}
 	}
 }

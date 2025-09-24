@@ -9,11 +9,14 @@ use FrontisBlocks\Utils\Enqueue;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Admin\Ajax\Settings;
 use FrontisBlocks\Admin\Ajax\GlobalSettings;
+use FrontisBlocks\Admin\Ajax\TemplateLibrary;
 use FrontisBlocks\Core\FontLoader;
 use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Core\SupportSVG;
 use FrontisBlocks\Core\Enqueues;
 use FrontisBlocks\RestApi\RestApi;
+use FrontisBlocks\BackgroundProcess\AssetsGenerationProcess;
+use FrontisBlocks\Assets\AssetsGenerationStatus;
 
 final class Plugin {
 	/**
@@ -161,7 +164,10 @@ final class Plugin {
 		InitialActivatedBlocks::blocks();
 		GlobalSettings::get_instance()->register_global_settings_events();
 		BlocksAjax::get_instance()->register_blocks_ajax_events();
+		TemplateLibrary::get_instance()->register_ajax_events();
 		SupportSVG::get_instance();
 		RestApi::get_instance();
+		AssetsGenerationStatus::get_instance();
+		AssetsGenerationProcess::get_instance();
 	}
 }
