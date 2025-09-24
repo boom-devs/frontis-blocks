@@ -136,7 +136,7 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, o
                                         />
                                     ) : (
                                         <img
-                                            src={`https://leech-better-moose.ngrok-free.app/storage/${category.icon}`}
+                                            src={`${FB_TLibrary.portalApi}/storage/${category.icon}`}
                                             alt={category.name}
                                             className="fb-category-icon"
                                         />
