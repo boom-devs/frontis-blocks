@@ -131,7 +131,7 @@ const PatternLibraryButton = () => {
 
             return response;
         } catch (err) {
-            if(err.data.status === 'error') {
+            if(err?.data?.status === 'error') {
                 toast.error(err.data.message, {
                     position: "top-right",
                     autoClose: 3000,
@@ -158,7 +158,7 @@ const PatternLibraryButton = () => {
 
             return response;
         } catch (err) {
-            if(err.data.status === 'error') {
+            if(err?.data?.status === 'error') {
                 toast.error(err.data.message, {
                     position: "top-right",
                     autoClose: 3000,

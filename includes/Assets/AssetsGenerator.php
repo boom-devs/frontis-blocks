@@ -141,8 +141,9 @@ class AssetsGenerator
 
 			if(in_array('frontis-blocks/slider', $this->used_blocks) || in_array('frontis-blocks/marquee-carousel', $this->used_blocks)) {
 				$this->combine_swiper_js = true;
-				$this->combine_static_to_critical = true;
 			}
+
+			$this->combine_static_to_critical = true;
 
 			if($block['blockName'] !== 'frontis-blocks/critical-css'){
 				$this->used_blocks[] = $block['blockName'];
@@ -170,52 +171,27 @@ class AssetsGenerator
 	}
 
 	public function get_page_content_with_template_parts() {
-		global $wpdb;
-
-		$post_name = Helper::is_custom_post_type($this->post->ID) || get_post_type($this->post->ID) === 'post' ? 'single' : get_post_type($this->post->ID);
-		$assigned_template = get_post_meta($this->post->ID, '_wp_page_template', true);
-
-		if ($assigned_template !== '') {
-			if($assigned_template !== 'default') {
-				$post_name = $assigned_template;
-			}
-		}
-
-		$query = $wpdb->prepare(
-			"SELECT
-                ID,
-                post_type,
-                post_content
-            FROM
-                {$wpdb->posts}
-            WHERE
-                post_type = 'wp_template'
-                AND post_status = 'publish'
-                AND post_name = %s
-            ORDER BY
-                post_modified DESC",
-			$post_name
-		);
-		
-		// Execute the query
-		$template_contents = $wpdb->get_results($query);
+		$template_contents = Helper::get_template_content($this->post->ID);
 		$template_contents = TemplateProcessor::get_instance()->process_template($template_contents);
-		$pattern = '/<!--\s*wp:post-content\s*/i';
-        if (preg_match_all($pattern, $template_contents, $wp_post_content_matchs) > 0) {
-            if(isset($wp_post_content_matchs[0])){
-				foreach($wp_post_content_matchs[0] as $index => $post_content) {
-					$template_contents = str_replace(
-                        $wp_post_content_matchs[0][$index],
-                        $this->post->post_content,
-                        $template_contents
-                    );
+		if($template_contents) {
+			$pattern = '/<!--\s*wp:post-content\s*/i';
+			if (preg_match_all($pattern, $template_contents, $wp_post_content_matchs) > 0) {
+				if(isset($wp_post_content_matchs[0])){
+					foreach($wp_post_content_matchs[0] as $index => $post_content) {
+						$template_contents = str_replace(
+							$wp_post_content_matchs[0][$index],
+							$this->post->post_content,
+							$template_contents
+						);
+					}
 				}
 			}
-        }
-
-		return $template_contents;
+	
+			return $template_contents;
+		}
+		
+		return $this->post->post_content;
 	}
-
 
 	function find_pages_using_template($template_id) {
 		global $wpdb;
@@ -418,7 +394,11 @@ class AssetsGenerator
 				}
 			}
 
-			$this->css_content .= $this->clean_CSS($blockStyle) . "\n";
+			if($this->genrating_critical_css && $single_block['slug'] === 'container') {
+				$this->critical_css_content .= $this->clean_CSS($blockStyle) . "\n";
+			}else {
+				$this->css_content .= $this->clean_CSS($blockStyle) . "\n";
+			}
 		}
 	}
 
