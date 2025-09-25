@@ -402,7 +402,7 @@ const PatternLibraryButton = () => {
             };
         });
 
-        const apiBase = "https://frontis-sync.boomdevshub.com/wp-json";
+        const apiBase = `${FB_TLibrary.wordpressSyncApi}/wp-json`;
         const body = {
             email: userData.email,
             item_id: templateData.id,
