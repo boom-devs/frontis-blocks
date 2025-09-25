@@ -97,6 +97,9 @@ const attributes = {
     inheritedTabImageUrl: {
         type: 'string',
     },
+    inheritedTabImageAlt: {
+        type: 'string',
+    },
     inheritedExpandedIconSwitcher: {
         type: 'string',
     },
@@ -104,6 +107,9 @@ const attributes = {
         type: 'string',
     },
     inheritedExpandedImageUrl: {
+        type: 'string',
+    },
+    inheritedExpandedImageAlt: {
         type: 'string',
     },
     faqSchema: {
