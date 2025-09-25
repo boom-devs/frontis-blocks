@@ -246,31 +246,27 @@ if (empty($taxonomy_type)) {
 
         $output .= '<div class="fb-taxonomy-item">';
 
-        // Show image for style-2
+                // Show image for style-2
         if ($premade_style === 'style-2' && $term_image) {
             $output .= '<div class="fb-taxonomy-image">';
             $output .= '<img src="' . esc_url($term_image) . '" alt="' . esc_attr($term->name) . '" />';
             $output .= '</div>';
         }
 
-        $output .= '<div class="fb-taxonomy-link-count">';
-        $output .= '<a href="' . esc_url($term_link) . '" class="fb-taxonomy-link">';
-
-        // Visual indicator for child terms in grid layout
-        // if ($term->parent !== 0) {
-        //     $output .= '<span class="fb-child-indicator">(Child Category)</span>';
-        // }
-
-        $output .= '<h4 class="fb-taxonomy-name">' . esc_html($term->name) . '</h4>';
-        $output .= '</a>';
-
-        if ($show_count) {
-            $output .= '<span class="fb-taxonomy-count">' . esc_html($term->count) . '</span>';
-        }
-
-        $output .= '</div>';
-
         $output .= '<div class="fb-taxonomy-meta">';
+
+        $output .= '<div class="fb-taxonomy-link-count">';
+            if ($show_count) {
+                $output .= '<span class="fb-taxonomy-count">' . esc_html($term->count) . '</span>';
+            }
+            $output .= '<a href="' . esc_url($term_link) . '" class="fb-taxonomy-link">';
+            // Visual indicator for child terms in grid layout
+            // if ($term->parent !== 0) {
+            //     $output .= '<span class="fb-child-indicator">(Child Category)</span>';
+            // }
+            $output .= '<h4 class="fb-taxonomy-name">' . esc_html($term->name) . '</h4>';
+            $output .= '</a>';
+        $output .= '</div>';
 
         if ($show_description && $term->description) {
             $output .= '<p class="fb-taxonomy-description">';
@@ -278,8 +274,9 @@ if (empty($taxonomy_type)) {
             $output .= '</p>';
         }
 
+        $output .= '</div>';
+
         if ($read_more_switcher) {
-            $output .= '<div class="fb-taxonomy-read-more-wrapper">';
             $output .= '<a href="' . esc_url($term_link) . '" class="fb-taxonomy-read-more-button">';
 
             if ($read_more_icon_align !== 'icon-only') {
@@ -302,12 +299,9 @@ if (empty($taxonomy_type)) {
                 $output .= '</div>';
             }
 
-
             $output .= '</a>';
-            $output .= '</div>';
         }
 
-        $output .= '</div>';
         $output .= '</div>';
     }
 

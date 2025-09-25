@@ -517,3 +517,35 @@ export const IMAGE_MASK_IMAEGS = {
     'wavy-stripes': FrontisBlocksData.pluginUrl + '/assets/images/wavy-stripes.svg',
     'token': FrontisBlocksData.pluginUrl + '/assets/images/token.svg',
 }
+
+/** POST CATEGORY BLOCK */
+// export const PREMADE_STYLE = [
+//   { label: 'Style 1', value: 'style-1' },
+//   { label: 'Style 2', value: 'style-2' },
+//   // Future: Style-3 placeholder
+//   // { label: __('Style 3', 'frontis-blocks'), value: 'style-3' }
+// ];
+
+
+export const SELECTION_TYPE_OPTIONS = [
+	{ value: 'none', label: __('Show All', 'frontis-blocks') },
+	{ value: 'include', label: __('Include Specific', 'frontis-blocks') },
+	{ value: 'exclude', label: __('Exclude Specific', 'frontis-blocks') }
+];
+
+export const ORDER_BY_OPTIONS = [
+	{ value: 'name', label: __('Name', 'frontis-blocks') },
+	{ value: 'count', label: __('Count', 'frontis-blocks') },
+	{ value: 'slug', label: __('Slug', 'frontis-blocks') }
+];
+
+export const SORT_ORDER_OPTIONS = [
+	{ value: 'asc', label: __('Ascending', 'frontis-blocks') },
+	{ value: 'desc', label: __('Descending', 'frontis-blocks') }
+];
+
+export const LIST_STYLE_OPTIONS = [
+	{ value: 'none', label: __('None', 'frontis-blocks') },
+	{ value: 'bullet', label: __('Bullet', 'frontis-blocks') },
+	{ value: 'number', label: __('Number', 'frontis-blocks') }
+];
