@@ -485,15 +485,15 @@ export const IMAGE_HOVER_EFFECTS = [
 ];
 
 export const IMAGE_AUTO_FIT = [
-    { label: __("Cover", "frontis-blocks"), value: "cover", },
-    { label: __("Fill", "frontis-blocks"), value: "fill", },
-    { label: __("Contain", "frontis-blocks"), value: "contain", },
+    { label: __("Cover", "frontis-blocks"), value:"cover",},
+    { label: __("Fill", "frontis-blocks"), value:"fill",},
+    { label: __("Contain", "frontis-blocks"), value:"contain",},
 ];
 
 export const IMAGE_MASK_SIZE = [
-    { label: __("Cover", "frontis-blocks"), value: "cover" },
-    { label: __("Contain", "frontis-blocks"), value: "contain" },
-    { label: __("Auto", "frontis-blocks"), value: "auto" },
+    { label: __("Cover", "frontis-blocks"), value: "cover"},
+    { label: __("Contain", "frontis-blocks"), value: "contain"},
+    { label: __("Auto", "frontis-blocks"), value: "auto"},
 ];
 export const IMAGE_MASK_POSITION = [ 
     { label: __("Center", "frontis-blocks"), value: "center" },

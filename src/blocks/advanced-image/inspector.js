@@ -1617,7 +1617,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 								value={titlePosition || "center"}
 								options={TITLE_POSITION}
 								onChange={(value) =>
-									setAttributes({ titlePosition: value })
+									setAttributes({ titlePosition:value })
 								}
 								__nextHasNoMarginBottom
 							/>

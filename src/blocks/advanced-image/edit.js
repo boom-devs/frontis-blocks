@@ -443,11 +443,14 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 					id={advancedImageGlobalWraperID}
 				>
 					<div
-						className={`fb-advanced-image ${imageStyle || ""} ${imageSize || ""} ${
-							imageHover || ""
-						} ${autoFitSwitch ? imageFit || "" : ""} ${titlePosition || ""} ${
-							showOverlay ? "overlay-simple" : ""
-						}`}
+						className={["fb-advanced-image",
+							imageStyle,
+							imageSize,
+							imageHover,
+							autoFitSwitch ? imageFit : "",
+							titlePosition,
+							showOverlay ? "overlay-simple" : "",
+						].filter(Boolean).join(" ")}
 					>
 						<div className="fb-advanced-image-inner">
 							{renderSource.url ? (
