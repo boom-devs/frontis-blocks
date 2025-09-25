@@ -191,27 +191,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			>
 				{sortedTaxonomies.map((taxonomy) => (
 					<div key={taxonomy.id} className="fb-taxonomy-item">
+
 						{premadeStyle === "style-2" && taxonomy.fb_taxonomy_image && (
 							<div className="fb-taxonomy-image">
 								<img src={taxonomy.fb_taxonomy_image} alt={taxonomy.name} />
 							</div>
 						)}
 
-						<div className="fb-taxonomy-link-count">
-							<a href={taxonomy.link} className="fb-taxonomy-link">
-								{/* visual indicator for child terms in grid */}
-								{/* {taxonomy.parent !== 0 && (
-									<span className="fb-child-indicator">(Child Category)</span>
-								)} */}
-								<h4 className="fb-taxonomy-name">{taxonomy.name}</h4>
-							</a>
-
-							{showCount && (
-								<span className="fb-taxonomy-count">{taxonomy.count}</span>
-							)}
-						</div>
-
 						<div className="fb-taxonomy-meta">
+
+							<div className="fb-taxonomy-link-count">
+								{showCount && (
+									<span className="fb-taxonomy-count">{taxonomy.count}</span>
+								)}
+								<a href={taxonomy.link} className="fb-taxonomy-link">
+									{/* visual indicator for child terms in grid */}
+									{/* {taxonomy.parent !== 0 && (
+										<span className="fb-child-indicator">(Child Category)</span>
+									)} */}
+									<h4 className="fb-taxonomy-name">{taxonomy.name}</h4>
+								</a>
+							</div>
+
 							{showDescription && taxonomy.description && (
 								<p className="fb-taxonomy-description">
 									{trimWords(
@@ -220,9 +221,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									)}
 								</p>
 							)}
+						</div>
 
-							{readMoreSwitcher && (
-								<div className="fb-taxonomy-read-more-wrapper">
+						{readMoreSwitcher && (
 									<a
 										href={taxonomy.link}
 										className="fb-taxonomy-read-more-button"
@@ -260,9 +261,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											</div>
 										)}
 									</a>
-								</div>
-							)}
-						</div>
+						)}
+						
 					</div>
 				))}
 			</div>

@@ -16,11 +16,11 @@ import {
 	SELECTION_TYPE_OPTIONS,
 	ORDER_BY_OPTIONS,
 	SORT_ORDER_OPTIONS,
-	LAYOUT_TYPE_OPTIONS,
+	POST_SWITCHER,
 	LIST_STYLE_OPTIONS,
 	READ_MORE_ICON_ALIGN,
 	BORDER_STYLES,
-} from "./constants/constants";
+} from '@Constants/fbConstants';
 import loadGoogleFont from "@Utils/loadGoogleFont";
 import getCustomCss from "@Utils/getCustomCss";
 import { useDeviceType } from "@Config/displayType";
@@ -217,6 +217,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		postCountColorSwitcher,
 		postCountColor,
 		postCountHoverColor,
+
+		postCountSpacing,
+		postCountSpacingUnits,
 		/** End count */
 
 		/** Start Read More Button style */
@@ -2224,15 +2227,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const allBlockStyle = useMemo(
 		() => `
 
-
+			/* style-1 specific styles for taxonomy item in grid */
 			
 			/* Style-2 specific styles for image in grid */
 
-      .${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item {
-        position: relative;
-				min-height: 300px;
-				overflow: hidden;
-      }
+			${premadeStyle === 'style-2' && `
+							.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
+								position: relative;
+								min-height: 300px;
+								overflow: hidden;
+							}
+				
+				` }
 
 			.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-count{
 				background: hsla(0,0%,100%,.3);	
@@ -2283,19 +2289,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         /* Common styles */
 
-				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count{
+				.${blockId} .fb_post_category_container  .fb-taxonomy-item .fb-taxonomy-link-count{
 						display: flex;
-            align-items: center;
-						gap: 5px;
+						flex-direction: column;
+						gap: 42px;
 				}
 
-        .${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link-count{
-            justify-content: space-between;
-        }
 
+				.${blockId} .fb-taxonomy-list .fb-taxonomy-item .fb-taxonomy-link-count {
+					flex-direction: row;
+					align-items: center;
+					gap: 5px;
+				}
 
 				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
-					font-size: 18px;
+					font-size: 24px;
+					line-height: 130%;
+					letter-spacing: -2%;
+					font-weight: 500;
+					color: #15171C;
+					margin: 0;
 				}
 
 				.${blockId}.fb-taxonomy-style-1 .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link:hover, 
@@ -2310,10 +2323,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 
         .${blockId} .fb-taxonomy-description {
-            color: #595959;
-            font-size: 14px;
-            line-height: 1.4;
+            color: #555E72;
+            font-size: 18px;
+            line-height: 140%;
             margin: 0;
+						margin-top: 14px;
         }
 
         .${blockId} .fb-taxonomy-count {
@@ -2322,25 +2336,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						display: flex;
 						justify-content: center;
 						align-items: center;
-						line-height: normal;
-            color: #595959;
-            font-size: 18px;
+						line-height: 24px;
+            color: #15171C;
+						background: #DBEFDC;
+						padding: 6px 14px;
+						border-radius: 50px;
+            font-size: 16px;
             font-weight: 500;
 						box-sizing: content-box;
         }
 
 				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
-						margin-top: 15px;
+						margin-top: 42px;
+						width: fit-content;		
 						display: inline-flex;
 						align-items: center;
-						gap: 8px;
-						padding: 8px 16px;
-						background-color: #399cff;
-						color: white;
+						justify-content: space-between;
+						gap: 10px;
+						padding: 14px 18px;
+						background-color: #0B0C0E;
+						color: #FFFFFF;
 						text-decoration: none;
-						border-radius: 4px;
-						font-size: 14px;
+						border-radius: 50px;
+						font-size: 16px;
 						font-weight: 500;
+						line-height: 20px;
+						letter-spacing: -2%;
+						box-sizing: border-box;
+						z-index: 2;
 						transition: all 0.3s ease;
 				}
 
@@ -2431,10 +2454,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						display: flex;
 						flex-direction: column;
 						justify-content: space-between;
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
+            background: #F4FCF5;
+            padding: 24px;
+            border-radius: 10px;
         }
 
 				.${blockId} .fb_post_category_container .fb-taxonomy-item{
@@ -2542,7 +2564,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name {
 
-						margin: 0;
 			
             ${postTitleColor ? `color: ${postTitleColor};` : ""}
 
@@ -2766,7 +2787,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							${postDescriptionHoverColor ? `color: ${postDescriptionHoverColor};` : ""}
 					}
 
-
+						.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count {
+							${postCountSpacing.Desktop ? `gap: ${postCountSpacing.Desktop}${postCountSpacingUnits.Desktop};` : ''}
+						}
 
 
 						.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count .fb-taxonomy-count{
@@ -3538,6 +3561,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								}
 						}
 
+						.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count {
+							${postCountSpacing.Tablet ? `gap: ${postCountSpacing.Tablet}${postCountSpacingUnits.Tablet};` : ''}
+						}
+
 
 						.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count .fb-taxonomy-count{
 							 ${
@@ -3869,6 +3896,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name  {
+
 					  ${
 							postTitleGlobalTypoSwitcher.fontSize === false &&
 							postTitleFontSize.Mobile
@@ -3916,6 +3944,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								}
 					}
 
+						.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count {
+							${postCountSpacing.Mobile ? `gap: ${postCountSpacing.Mobile}${postCountSpacingUnits.Mobile};` : ''}
+						}
+
 					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count .fb-taxonomy-count{
 						 ${
 								postCountGlobalTypoSwitcher.fontSize === false &&
@@ -3953,6 +3985,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										: ""
 								}
 					}
+
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
 						${
@@ -4300,7 +4333,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			postTitleLetterSpacingUnits,
 			postTitleLineHeight,
 			postTitleLineHeightUnits,
-
 			postTitleColorSwitcher,
 			postTitleColor,
 			postTitleHoverColor,
@@ -4319,14 +4351,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			postDescriptionLetterSpacingUnits,
 			postDescriptionLineHeight,
 			postDescriptionLineHeightUnits,
-
 			postDescriptionColorSwitcher,
 			postDescriptionColor,
 			postDescriptionHoverColor,
-
 			postDescriptionSpacing,
 			postDescriptionSpacingUnits,
-
 			postDescriptionExcerptLength,
 
 			postCountGlobalTypoSwitcher,
@@ -4344,11 +4373,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			postCountLetterSpacingUnits,
 			postCountLineHeight,
 			postCountLineHeightUnits,
-
 			postCountColorSwitcher,
 			postCountColor,
 			postCountHoverColor,
-
+			postCountSpacing,
+			postCountSpacingUnits,
 			postCountBgColorSwitcher,
 			postCountNormalBackgroundType,
 			postCountNormalClassicColor,
@@ -4360,7 +4389,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			postCountHoverGradientColor,
 			postCountHoverCustomGradientSwitcher,
 			postCountHoverCustomGradientInputValue,
-
 			postCountPaddingUnits,
 			postCountPaddingDesktop,
 			postCountPaddingTablet,
@@ -4696,7 +4724,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						{layoutType === "grid" && (
 							<ToggleControl
-								label={__("Show Read More Button", "frontis-blocks")}
+								label={__("Show View All Button", "frontis-blocks")}
 								checked={readMoreSwitcher}
 								onChange={(value) => setAttributes({ readMoreSwitcher: value })}
 							/>
@@ -4724,7 +4752,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						className="fb-setting-layout-type"
 					>
 						<ButtonGroup className="fb-setting-layout-type-group">
-							{LAYOUT_TYPE_OPTIONS.map((option, key) => (
+							{POST_SWITCHER.map((option, key) => (
 								<Button
 									key={key}
 									className={`fb-setting-switcher-panel-btn-switcher ${
@@ -5324,6 +5352,374 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				</PanelBody>
 			)}
 
+						{showCount && (
+				<PanelBody title={__("Count", "frontis-blocks")} initialOpen={false}>
+					<FB_TypographyControl
+						globalTypoControlActive={true}
+						globalTypoSwitcher={postCountGlobalTypoSwitcher}
+						storeGlobalTypographyData={(value) =>
+							setAttributes({ postCountGlobalTypographyData: value })
+						}
+						globalTypoType={postCountGlobalTypoType}
+						onChangeGlobalTypoType={(value) => {
+							setAttributes({
+								postCountGlobalTypoType: value,
+								postCountGlobalTypoSwitcher:
+									value === "default"
+										? {
+												...postCountGlobalTypoSwitcher,
+												fontFamily: false,
+												fontSize: false,
+												fontWeight: false,
+												fontStyle: false,
+												textTransform: false,
+												textDecoration: false,
+												letterSpacing: false,
+												lineHeight: false,
+										  }
+										: {
+												...postCountGlobalTypoSwitcher,
+												fontFamily: true,
+												fontSize: true,
+												fontWeight: true,
+												fontStyle: true,
+												textTransform: true,
+												textDecoration: true,
+												letterSpacing: true,
+												lineHeight: true,
+										  },
+							});
+						}}
+						globalTypoOption={postCountGlobalTypoOption}
+						onChangeGlobalTypoOption={(value) =>
+							setAttributes({ postCountGlobalTypoOption: value })
+						}
+						fontFamily={postCountFontFamily}
+						onChangeFontFamily={(value) =>
+							setAttributes({
+								postCountFontFamily: value,
+								postCountGlobalTypoSwitcher: {
+									...postCountGlobalTypoSwitcher,
+									fontFamily: value && false,
+								},
+							})
+						}
+						fontSize={postCountFontSize}
+						onChangeFontSize={(value) =>
+							setAttributes({
+								postCountFontSize: value,
+								postCountGlobalTypoSwitcher: {
+									...postCountGlobalTypoSwitcher,
+									fontSize: value && false,
+								},
+							})
+						}
+						fontSizeUnits={postCountFontSizeUnits}
+						onChangeFontSizeUnit={(value) =>
+							setAttributes({ postCountFontSizeUnits: value })
+						}
+						fontWeight={postCountFontWeight}
+						onChangeFontWeight={(value) =>
+							setAttributes({
+								postCountFontWeight: value,
+								postCountGlobalTypoSwitcher: {
+									...postCountGlobalTypoSwitcher,
+									fontWeight: value && false,
+								},
+							})
+						}
+						fontStyle={postCountFontStyle}
+						onChangeFontStyle={(value) =>
+							setAttributes({
+								postCountFontStyle: value,
+								postCountGlobalTypoSwitcher: {
+									...postCountGlobalTypoSwitcher,
+									fontStyle: value && false,
+								},
+							})
+						}
+						textTransform={postCountTextTransform}
+						onChangeTextTransform={(value) =>
+							setAttributes({
+								postCountTextTransform: value,
+								postCountGlobalTypoSwitcher: {
+									...postCountGlobalTypoSwitcher,
+									textTransform: value && false,
+								},
+							})
+						}
+						textDecoration={postCountTextDecoration}
+						onChangeTextDecoration={(value) =>
+							setAttributes({
+								postCountTextDecoration: value,
+								postCountGlobalTypoSwitcher: {
+									...postCountGlobalTypoSwitcher,
+									textDecoration: value && false,
+								},
+							})
+						}
+						letterSpacing={postCountLetterSpacing}
+						onChangeLetterSpacing={(value) =>
+							setAttributes({
+								postCountLetterSpacing: value,
+								postCountGlobalTypoSwitcher: {
+									...postCountGlobalTypoSwitcher,
+									letterSpacing: value && false,
+								},
+							})
+						}
+						letterSpacingUnits={postCountLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) =>
+							setAttributes({ postCountLetterSpacingUnits: value })
+						}
+						lineHeight={postCountLineHeight}
+						onChangeLineHeight={(value) =>
+							setAttributes({
+								postCountLineHeight: value,
+								postCountGlobalTypoSwitcher: {
+									...postCountGlobalTypoSwitcher,
+									lineHeight: value && false,
+								},
+							})
+						}
+						lineHeightUnits={postCountLineHeightUnits}
+						onChangeLineHeightUnit={(value) =>
+							setAttributes({ postCountLineHeightUnits: value })
+						}
+						deviceType={deviceType}
+						setAttributes={setAttributes}
+					/>
+
+					<FB_SwitcherControl
+						label={__("Color", "frontis-blocks")}
+						globalSwitcher={postCountColorSwitcher}
+						setGlobalSwitcher={(value) =>
+							setAttributes({ postCountColorSwitcher: value })
+						}
+					/>
+
+					{postCountColorSwitcher === "normal" && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={postCountColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									postCountColor: value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+
+					{postCountColorSwitcher === "hover" && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={postCountHoverColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									postCountHoverColor: value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+
+					<div className="fb-control-divider"></div>
+
+					<FB_Range
+						min={1}
+						max={100}
+						label={__("Spacing", "frontis-blocks")}
+						rangeValue={postCountSpacing}
+						onChangeHandler={(value) =>
+							setAttributes({ postCountSpacing: value })
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({ postCountSpacingUnits: value })
+						}
+						deviceType={deviceType}
+						units={postCountSpacingUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
+					/>
+
+					<FB_BackgroundColorControl
+						label={__("Background Color", "frontis-blocks")}
+						bgColorSwitcher={postCountBgColorSwitcher}
+						setBgColorSwitcher={(value) =>
+							setAttributes({ postCountBgColorSwitcher: value })
+						}
+						normalBackgroundType={postCountNormalBackgroundType}
+						setNormalBackgroundType={(value) =>
+							setAttributes({ postCountNormalBackgroundType: value })
+						}
+						normalClassicColor={postCountNormalClassicColor}
+						setNormalClassicColor={(value) =>
+							setAttributes({
+								postCountNormalClassicColor: value === undefined ? "" : value,
+							})
+						}
+						normalGradientColor={postCountNormalGradientColor}
+						setNormalGradientColor={(value) =>
+							setAttributes({
+								postCountNormalGradientColor: value === undefined ? "" : value,
+							})
+						}
+						normalCustomGradientSwitcher={postCountNormalCustomGradientSwitcher}
+						setNormalCustomGradientSwitcher={(value) =>
+							setAttributes({ postCountNormalCustomGradientSwitcher: value })
+						}
+						normalCustomGradientInputValue={
+							postCountNormalCustomGradientInputValue
+						}
+						setNormalCustomGradientInputValue={(value) =>
+							setAttributes({ postCountNormalCustomGradientInputValue: value })
+						}
+						hoverBackgroundType={postCountHoverBackgroundType}
+						setHoverBackgroundType={(value) =>
+							setAttributes({ postCountHoverBackgroundType: value })
+						}
+						hoverClassicColor={postCountHoverClassicColor}
+						setHoverClassicColor={(value) =>
+							setAttributes({
+								postCountHoverClassicColor: value === undefined ? "" : value,
+							})
+						}
+						hoverGradientColor={postCountHoverGradientColor}
+						setHoverGradientColor={(value) =>
+							setAttributes({
+								postCountHoverGradientColor: value === undefined ? "" : value,
+							})
+						}
+						hoverCustomGradientSwitcher={postCountHoverCustomGradientSwitcher}
+						setHoverCustomGradientSwitcher={(value) =>
+							setAttributes({ postCountHoverCustomGradientSwitcher: value })
+						}
+						hoverCustomGradientInputValue={
+							postCountHoverCustomGradientInputValue
+						}
+						setHoverCustomGradientInputValue={(value) =>
+							setAttributes({ postCountHoverCustomGradientInputValue: value })
+						}
+						isBackgroundImage={false}
+					/>
+
+					<FB_Spacing
+						label={__("Padding", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handlePostCountPaddingUnitsHandler}
+						spacingUnits={postCountPaddingUnits}
+						spacingDesktop={postCountPaddingDesktop}
+						spacingTablet={postCountPaddingTablet}
+						spacingMobile={postCountPaddingMobile}
+						handleSpacingUnitHandler={handlePostCountPaddingUnitChange}
+						spacingCombineBtn={postCountPaddingLink}
+						spacingCombineBtnHandler={handlePostCountPaddingCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+					<SelectControl
+						label={__("Border Style", "frontis-blocks")}
+						value={postCountBorder}
+						options={BORDER_STYLES}
+						onChange={(value) => setAttributes({ postCountBorder: value })}
+					/>
+
+					<FB_SwitcherControl
+						label={__("Border", "frontis-blocks")}
+						globalSwitcher={postCountBorderColorSwitcher}
+						setGlobalSwitcher={(value) =>
+							setAttributes({ postCountBorderColorSwitcher: value })
+						}
+					/>
+
+					{postCountBorderColorSwitcher === "normal" && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={postCountBorderColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									postCountBorderColor: value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+
+					{postCountBorderColorSwitcher === "hover" && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={postCountBorderHoverColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									postCountBorderHoverColor: value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+
+					<FB_Spacing
+						label={__("Border", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handlePostCountBorderUnitsHandler}
+						spacingUnits={postCountBorderUnits}
+						spacingDesktop={postCountBorderDesktop}
+						spacingTablet={postCountBorderTablet}
+						spacingMobile={postCountBorderMobile}
+						handleSpacingUnitHandler={handlePostCountBorderUnitChange}
+						spacingCombineBtn={postCountBorderLink}
+						spacingCombineBtnHandler={handlePostCountBorderCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+					<FB_Spacing
+						label={__("Border Radius", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handlePostCountBorderRadiusUnitsHandler}
+						spacingUnits={postCountBorderRadiusUnits}
+						spacingDesktop={postCountBorderRadiusDesktop}
+						spacingTablet={postCountBorderRadiusTablet}
+						spacingMobile={postCountBorderRadiusMobile}
+						handleSpacingUnitHandler={handlePostCountBorderRadiusUnitChange}
+						spacingCombineBtn={postCountBorderRadiusLink}
+						spacingCombineBtnHandler={handlePostCountBorderRadiusCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+					<FB_SwitcherControl
+						label={__("Box Shadow", "frontis-blocks")}
+						globalSwitcher={postCountBoxShadowSwitcher}
+						setGlobalSwitcher={(value) =>
+							setAttributes({ postCountBoxShadowSwitcher: value })
+						}
+					/>
+
+					{postCountBoxShadowSwitcher === "normal" && (
+						<FB_BoxShadowControl
+							label={__("Normal Shadow", "frontis-blocks")}
+							onBoxShadowChange={(value) =>
+								setAttributes({ postCountBoxShadowValues: value })
+							}
+							initialShadowValue={postCountBoxShadowValues}
+							onBoxShadowStyleChange={(value) =>
+								setAttributes({ postCountBoxShadowCssValue: value })
+							}
+						/>
+					)}
+
+					{postCountBoxShadowSwitcher === "hover" && (
+						<FB_BoxShadowControl
+							label={__("Hover Shadow", "frontis-blocks")}
+							onBoxShadowChange={(value) =>
+								setAttributes({ postCountBoxShadowHoverValues: value })
+							}
+							initialShadowValue={postCountBoxShadowHoverValues}
+							onBoxShadowStyleChange={(value) =>
+								setAttributes({ postCountBoxShadowHoverCssValue: value })
+							}
+						/>
+					)}
+				</PanelBody>
+			)}
+
 			<PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
 				<FB_TypographyControl
 					globalTypoControlActive={true}
@@ -5700,354 +6096,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						step={1}
 						resetFallbackValue={10}
 					/>
-				</PanelBody>
-			)}
-
-			{showCount && (
-				<PanelBody title={__("Count", "frontis-blocks")} initialOpen={false}>
-					<FB_TypographyControl
-						globalTypoControlActive={true}
-						globalTypoSwitcher={postCountGlobalTypoSwitcher}
-						storeGlobalTypographyData={(value) =>
-							setAttributes({ postCountGlobalTypographyData: value })
-						}
-						globalTypoType={postCountGlobalTypoType}
-						onChangeGlobalTypoType={(value) => {
-							setAttributes({
-								postCountGlobalTypoType: value,
-								postCountGlobalTypoSwitcher:
-									value === "default"
-										? {
-												...postCountGlobalTypoSwitcher,
-												fontFamily: false,
-												fontSize: false,
-												fontWeight: false,
-												fontStyle: false,
-												textTransform: false,
-												textDecoration: false,
-												letterSpacing: false,
-												lineHeight: false,
-										  }
-										: {
-												...postCountGlobalTypoSwitcher,
-												fontFamily: true,
-												fontSize: true,
-												fontWeight: true,
-												fontStyle: true,
-												textTransform: true,
-												textDecoration: true,
-												letterSpacing: true,
-												lineHeight: true,
-										  },
-							});
-						}}
-						globalTypoOption={postCountGlobalTypoOption}
-						onChangeGlobalTypoOption={(value) =>
-							setAttributes({ postCountGlobalTypoOption: value })
-						}
-						fontFamily={postCountFontFamily}
-						onChangeFontFamily={(value) =>
-							setAttributes({
-								postCountFontFamily: value,
-								postCountGlobalTypoSwitcher: {
-									...postCountGlobalTypoSwitcher,
-									fontFamily: value && false,
-								},
-							})
-						}
-						fontSize={postCountFontSize}
-						onChangeFontSize={(value) =>
-							setAttributes({
-								postCountFontSize: value,
-								postCountGlobalTypoSwitcher: {
-									...postCountGlobalTypoSwitcher,
-									fontSize: value && false,
-								},
-							})
-						}
-						fontSizeUnits={postCountFontSizeUnits}
-						onChangeFontSizeUnit={(value) =>
-							setAttributes({ postCountFontSizeUnits: value })
-						}
-						fontWeight={postCountFontWeight}
-						onChangeFontWeight={(value) =>
-							setAttributes({
-								postCountFontWeight: value,
-								postCountGlobalTypoSwitcher: {
-									...postCountGlobalTypoSwitcher,
-									fontWeight: value && false,
-								},
-							})
-						}
-						fontStyle={postCountFontStyle}
-						onChangeFontStyle={(value) =>
-							setAttributes({
-								postCountFontStyle: value,
-								postCountGlobalTypoSwitcher: {
-									...postCountGlobalTypoSwitcher,
-									fontStyle: value && false,
-								},
-							})
-						}
-						textTransform={postCountTextTransform}
-						onChangeTextTransform={(value) =>
-							setAttributes({
-								postCountTextTransform: value,
-								postCountGlobalTypoSwitcher: {
-									...postCountGlobalTypoSwitcher,
-									textTransform: value && false,
-								},
-							})
-						}
-						textDecoration={postCountTextDecoration}
-						onChangeTextDecoration={(value) =>
-							setAttributes({
-								postCountTextDecoration: value,
-								postCountGlobalTypoSwitcher: {
-									...postCountGlobalTypoSwitcher,
-									textDecoration: value && false,
-								},
-							})
-						}
-						letterSpacing={postCountLetterSpacing}
-						onChangeLetterSpacing={(value) =>
-							setAttributes({
-								postCountLetterSpacing: value,
-								postCountGlobalTypoSwitcher: {
-									...postCountGlobalTypoSwitcher,
-									letterSpacing: value && false,
-								},
-							})
-						}
-						letterSpacingUnits={postCountLetterSpacingUnits}
-						onChangeLetterSpacingUnit={(value) =>
-							setAttributes({ postCountLetterSpacingUnits: value })
-						}
-						lineHeight={postCountLineHeight}
-						onChangeLineHeight={(value) =>
-							setAttributes({
-								postCountLineHeight: value,
-								postCountGlobalTypoSwitcher: {
-									...postCountGlobalTypoSwitcher,
-									lineHeight: value && false,
-								},
-							})
-						}
-						lineHeightUnits={postCountLineHeightUnits}
-						onChangeLineHeightUnit={(value) =>
-							setAttributes({ postCountLineHeightUnits: value })
-						}
-						deviceType={deviceType}
-						setAttributes={setAttributes}
-					/>
-
-					<FB_SwitcherControl
-						label={__("Color", "frontis-blocks")}
-						globalSwitcher={postCountColorSwitcher}
-						setGlobalSwitcher={(value) =>
-							setAttributes({ postCountColorSwitcher: value })
-						}
-					/>
-
-					{postCountColorSwitcher === "normal" && (
-						<FB_ColorControl
-							label={__("Normal Color", "frontis-blocks")}
-							globalColor={postCountColor}
-							setGlobalColor={(value) =>
-								setAttributes({
-									postCountColor: value === undefined ? "" : value,
-								})
-							}
-						/>
-					)}
-
-					{postCountColorSwitcher === "hover" && (
-						<FB_ColorControl
-							label={__("Hover Color", "frontis-blocks")}
-							globalColor={postCountHoverColor}
-							setGlobalColor={(value) =>
-								setAttributes({
-									postCountHoverColor: value === undefined ? "" : value,
-								})
-							}
-						/>
-					)}
-
-					<FB_BackgroundColorControl
-						label={__("Background Color", "frontis-blocks")}
-						bgColorSwitcher={postCountBgColorSwitcher}
-						setBgColorSwitcher={(value) =>
-							setAttributes({ postCountBgColorSwitcher: value })
-						}
-						normalBackgroundType={postCountNormalBackgroundType}
-						setNormalBackgroundType={(value) =>
-							setAttributes({ postCountNormalBackgroundType: value })
-						}
-						normalClassicColor={postCountNormalClassicColor}
-						setNormalClassicColor={(value) =>
-							setAttributes({
-								postCountNormalClassicColor: value === undefined ? "" : value,
-							})
-						}
-						normalGradientColor={postCountNormalGradientColor}
-						setNormalGradientColor={(value) =>
-							setAttributes({
-								postCountNormalGradientColor: value === undefined ? "" : value,
-							})
-						}
-						normalCustomGradientSwitcher={postCountNormalCustomGradientSwitcher}
-						setNormalCustomGradientSwitcher={(value) =>
-							setAttributes({ postCountNormalCustomGradientSwitcher: value })
-						}
-						normalCustomGradientInputValue={
-							postCountNormalCustomGradientInputValue
-						}
-						setNormalCustomGradientInputValue={(value) =>
-							setAttributes({ postCountNormalCustomGradientInputValue: value })
-						}
-						hoverBackgroundType={postCountHoverBackgroundType}
-						setHoverBackgroundType={(value) =>
-							setAttributes({ postCountHoverBackgroundType: value })
-						}
-						hoverClassicColor={postCountHoverClassicColor}
-						setHoverClassicColor={(value) =>
-							setAttributes({
-								postCountHoverClassicColor: value === undefined ? "" : value,
-							})
-						}
-						hoverGradientColor={postCountHoverGradientColor}
-						setHoverGradientColor={(value) =>
-							setAttributes({
-								postCountHoverGradientColor: value === undefined ? "" : value,
-							})
-						}
-						hoverCustomGradientSwitcher={postCountHoverCustomGradientSwitcher}
-						setHoverCustomGradientSwitcher={(value) =>
-							setAttributes({ postCountHoverCustomGradientSwitcher: value })
-						}
-						hoverCustomGradientInputValue={
-							postCountHoverCustomGradientInputValue
-						}
-						setHoverCustomGradientInputValue={(value) =>
-							setAttributes({ postCountHoverCustomGradientInputValue: value })
-						}
-						isBackgroundImage={false}
-					/>
-
-					<FB_Spacing
-						label={__("Padding", "frontis-blocks")}
-						deviceType={deviceType}
-						spacingUnitsHandler={handlePostCountPaddingUnitsHandler}
-						spacingUnits={postCountPaddingUnits}
-						spacingDesktop={postCountPaddingDesktop}
-						spacingTablet={postCountPaddingTablet}
-						spacingMobile={postCountPaddingMobile}
-						handleSpacingUnitHandler={handlePostCountPaddingUnitChange}
-						spacingCombineBtn={postCountPaddingLink}
-						spacingCombineBtnHandler={handlePostCountPaddingCombineBtn}
-						setAttributes={setAttributes}
-					/>
-
-					<SelectControl
-						label={__("Border Style", "frontis-blocks")}
-						value={postCountBorder}
-						options={BORDER_STYLES}
-						onChange={(value) => setAttributes({ postCountBorder: value })}
-					/>
-
-					<FB_SwitcherControl
-						label={__("Border", "frontis-blocks")}
-						globalSwitcher={postCountBorderColorSwitcher}
-						setGlobalSwitcher={(value) =>
-							setAttributes({ postCountBorderColorSwitcher: value })
-						}
-					/>
-
-					{postCountBorderColorSwitcher === "normal" && (
-						<FB_ColorControl
-							label={__("Normal Color", "frontis-blocks")}
-							globalColor={postCountBorderColor}
-							setGlobalColor={(value) =>
-								setAttributes({
-									postCountBorderColor: value === undefined ? "" : value,
-								})
-							}
-						/>
-					)}
-
-					{postCountBorderColorSwitcher === "hover" && (
-						<FB_ColorControl
-							label={__("Hover Color", "frontis-blocks")}
-							globalColor={postCountBorderHoverColor}
-							setGlobalColor={(value) =>
-								setAttributes({
-									postCountBorderHoverColor: value === undefined ? "" : value,
-								})
-							}
-						/>
-					)}
-
-					<FB_Spacing
-						label={__("Border", "frontis-blocks")}
-						deviceType={deviceType}
-						spacingUnitsHandler={handlePostCountBorderUnitsHandler}
-						spacingUnits={postCountBorderUnits}
-						spacingDesktop={postCountBorderDesktop}
-						spacingTablet={postCountBorderTablet}
-						spacingMobile={postCountBorderMobile}
-						handleSpacingUnitHandler={handlePostCountBorderUnitChange}
-						spacingCombineBtn={postCountBorderLink}
-						spacingCombineBtnHandler={handlePostCountBorderCombineBtn}
-						setAttributes={setAttributes}
-					/>
-
-					<FB_Spacing
-						label={__("Border Radius", "frontis-blocks")}
-						deviceType={deviceType}
-						spacingUnitsHandler={handlePostCountBorderRadiusUnitsHandler}
-						spacingUnits={postCountBorderRadiusUnits}
-						spacingDesktop={postCountBorderRadiusDesktop}
-						spacingTablet={postCountBorderRadiusTablet}
-						spacingMobile={postCountBorderRadiusMobile}
-						handleSpacingUnitHandler={handlePostCountBorderRadiusUnitChange}
-						spacingCombineBtn={postCountBorderRadiusLink}
-						spacingCombineBtnHandler={handlePostCountBorderRadiusCombineBtn}
-						setAttributes={setAttributes}
-					/>
-
-					<FB_SwitcherControl
-						label={__("Box Shadow", "frontis-blocks")}
-						globalSwitcher={postCountBoxShadowSwitcher}
-						setGlobalSwitcher={(value) =>
-							setAttributes({ postCountBoxShadowSwitcher: value })
-						}
-					/>
-
-					{postCountBoxShadowSwitcher === "normal" && (
-						<FB_BoxShadowControl
-							label={__("Normal Shadow", "frontis-blocks")}
-							onBoxShadowChange={(value) =>
-								setAttributes({ postCountBoxShadowValues: value })
-							}
-							initialShadowValue={postCountBoxShadowValues}
-							onBoxShadowStyleChange={(value) =>
-								setAttributes({ postCountBoxShadowCssValue: value })
-							}
-						/>
-					)}
-
-					{postCountBoxShadowSwitcher === "hover" && (
-						<FB_BoxShadowControl
-							label={__("Hover Shadow", "frontis-blocks")}
-							onBoxShadowChange={(value) =>
-								setAttributes({ postCountBoxShadowHoverValues: value })
-							}
-							initialShadowValue={postCountBoxShadowHoverValues}
-							onBoxShadowStyleChange={(value) =>
-								setAttributes({ postCountBoxShadowHoverCssValue: value })
-							}
-						/>
-					)}
 				</PanelBody>
 			)}
 

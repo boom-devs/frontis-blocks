@@ -121,7 +121,7 @@ const attributes = {
 	},
 	readMoreText: {
 		type: "string",
-		default: "Read More",
+		default: "View All",
 	},
 	readMoreIconAlign: {
 		type: "string",
@@ -459,7 +459,7 @@ const attributes = {
 	postTitleFontSize: {
 		type: "object",
 		default: {
-			Desktop: "18",
+			Desktop: "",
 			Tablet: "",
 			Mobile: "",
 		},
@@ -569,7 +569,7 @@ const attributes = {
 	postDescriptionFontSize: {
 		type: "object",
 		default: {
-			Desktop: "14",
+			Desktop: "",
 			Tablet: "",
 			Mobile: "",
 		},
@@ -774,6 +774,22 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
+	postCountSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		}
+	},
+	postCountSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		}
+	},
 	/** End Count */
 
 	/** Start Button Text Style */
@@ -826,7 +842,7 @@ const attributes = {
 	buttonFontSize: {
 		type: "object",
 		default: {
-			Desktop: "14",
+			Desktop: "",
 			Tablet: "",
 			Mobile: "",
 		},
