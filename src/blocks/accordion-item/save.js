@@ -15,11 +15,11 @@ const save = ({ attributes }) => {
         inheritedDisplayIcon,
         inheritedTabIconSwitcher,
         inheritedTabImageUrl,
-        inheritedTabImgAlt,
+        inheritedTabImageAlt,
         inheritedTabIcon,
         inheritedExpandedIconSwitcher,
         inheritedExpandedImageUrl,
-        inheritedExpandedImgAlt,
+        inheritedExpandedImageAlt,
         inheritedExpandedIcon,
 
         title,
@@ -91,13 +91,13 @@ const save = ({ attributes }) => {
                         {inheritedDisplayIcon && 
                             <div className="fb-accordion-tab-icon">
                                 {inheritedTabIconSwitcher === 'icon' && inheritedTabIcon && renderSVG(inheritedTabIcon)}
-                                {inheritedTabIconSwitcher === 'image' && inheritedTabIcon && <img src={inheritedTabImageUrl} alt={inheritedTabImgAlt}/>}
+                                {inheritedTabIconSwitcher === 'image' && inheritedTabIcon && <img src={inheritedTabImageUrl} alt={inheritedTabImageAlt}/>}
                             </div>
                         }
                         {inheritedDisplayIcon && 
                             <div className="fb-accordion-expanded-icon">
                                 {inheritedExpandedIconSwitcher === 'icon' && inheritedExpandedIcon && renderSVG(inheritedExpandedIcon)}
-                                {inheritedExpandedIconSwitcher === 'image' && inheritedExpandedIcon && <img src={inheritedExpandedImageUrl} alt={inheritedExpandedImgAlt}/>}
+                                {inheritedExpandedIconSwitcher === 'image' && inheritedExpandedIcon && <img src={inheritedExpandedImageUrl} alt={inheritedExpandedImageAlt}/>}
                             </div>
                         }
                     </div>

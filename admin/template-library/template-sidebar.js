@@ -5,6 +5,7 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, o
     const schema = data;
     const categories = schema[activeTab]?.categories || [];
 
+
     // useEffect(() => {
     //     if (categories.length > 0 && !activeCategory[activeTab]) {
     //         setActiveCategory(prev => ({

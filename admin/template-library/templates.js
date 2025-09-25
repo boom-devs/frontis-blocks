@@ -12,9 +12,6 @@ import TemplateSidebar from "./template-sidebar";
 import TemplateContent from "./template-content";
 import LibraryContent from "./library-content";
 
-import sites from "./data/sites.json";
-import TemplateLibrary from "./data/templatelibrary.json";
-
 import { usePostDataMutation } from './services/laravelapi';
 
 
@@ -54,7 +51,7 @@ const PatternLibraryButton = () => {
         templatelibrary: 1
     });
     
-    const isProPlugin = true;
+    const isProPlugin = false;
     const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
 
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -105,9 +102,9 @@ const PatternLibraryButton = () => {
     };
 
     const [data, setData] = useState({
-        patterns: { name: "Patterns", items: [], categories: [], pagination: {} },
-        pages: { name: "Pages", items: [], categories: [], pagination: {} },
-        sites: { name: "Sites", items: [], categories: [], pagination: {} },
+        patterns: { name: "Patterns", items: [], categories: [], pagination: {}, tags: [] },
+        pages: { name: "Pages", items: [], categories: [], pagination: {}, tags: [] },
+        sites: { name: "Sites", items: [], categories: [], pagination: {}, tags: [] },
         templatelibrary: { name: "Template Library", items: [], categories: [], pagination: {} },
     });
     const [tagData, setTagData] = useState({
@@ -255,7 +252,8 @@ const PatternLibraryButton = () => {
                             ...prev.patterns,
                             items: response.items || [],
                             categories: response.categories || [],
-                            pagination: response.pagination || {}
+                            pagination: response.pagination || {},
+                            tags: response.tags || []
                         },
                     }));
                 }
@@ -268,7 +266,8 @@ const PatternLibraryButton = () => {
                             ...prev.pages,
                             items: response.items || [],
                             categories: response.categories || [],
-                            pagination: response.pagination || {}
+                            pagination: response.pagination || {},
+                            tags: response.tags || []
                         },
                     }));
                 }
@@ -281,7 +280,8 @@ const PatternLibraryButton = () => {
                             ...prev.sites,
                             items: response.items || [],
                             categories: response.categories || [],
-                            pagination: response.pagination || {}
+                            pagination: response.pagination || {},
+                            tags: response.tags || []
                         },
                     }));
                 }
@@ -320,9 +320,7 @@ const PatternLibraryButton = () => {
                         ...prev,
                         patterns: {
                             ...prev.patterns,
-                            items: response.items || [],
-                            categories: response.categories || [],
-                            pagination: response.pagination || {}
+                            tags: response.tags || []
                         },
                     }));
                 }
@@ -333,9 +331,7 @@ const PatternLibraryButton = () => {
                         ...prev,
                         pages: {
                             ...prev.pages,
-                            items: response.items || [],
-                            categories: response.categories || [],
-                            pagination: response.pagination || {}
+                            tags: response.tags || []
                         },
                     }));
                 }
@@ -346,9 +342,7 @@ const PatternLibraryButton = () => {
                         ...prev,
                         sites: {
                             ...prev.sites,
-                            items: response.items || [],
-                            categories: response.categories || [],
-                            pagination: response.pagination || {}
+                            tags: response.tags || []
                         },
                     }));
                 }
@@ -447,19 +441,22 @@ const PatternLibraryButton = () => {
                 position: "top-right",
                 autoClose: 3000,
             });
+
         }
     }
 
+    console.log('activationKey', FB_TLibrary.activationKey);
+
     const TagTabsOptions = (() => {
-        if (!tagData[activeTab]) return [];
-        const currentItems = tagData[activeTab].items || [];
-        const allTags = currentItems.flatMap(item => item.tags || []);
-        const uniqueTags = [...new Set(allTags)].slice(0, 5);
+        if (!data[activeTab]) return [];
+        const currentItems = tagData[activeTab].tags || [];
+        const uniqueTags = [...new Set(currentItems)].slice(0, 5);
         return uniqueTags.map(tag => ({
-            name: tag,
-            value: tag.toLowerCase().replace(/\s+/g, '-'),
+            name: tag.name,
+            value: tag.name,
         }));
     })();
+
 
     return (
         <>
@@ -526,13 +523,13 @@ const PatternLibraryButton = () => {
                                         setActiveTagTab={handleActiveTag}
                                         TagTabsOptions={TagTabsOptions}
                                         isLogedIn={isLogedIn}
+                                        setIsLogedIn={setIsLogedIn}
                                         savedItems={savedItems}
                                         setSavedItems={setSavedItems}
                                         alreadySaved={alreadySaved}
                                         loading={isLoading}
                                         setLoading={loading}
                                         tagLoading={tagLoading}
-                                        setIsLogedIn={setIsLogedIn}
                                         // setActiveCategory={setActiveCategory}
                                         onSaveLibrary={handleSaveLibrary}
                                         setIsLoginModalOpen={setIsLoginModalOpen}
