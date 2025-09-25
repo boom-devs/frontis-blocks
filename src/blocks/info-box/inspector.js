@@ -667,7 +667,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: "18",
 				},
 			},
-
 		};
 
 		const selectedPresetConfig = presetConfigurations[selectedPreset];
@@ -765,6 +764,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const headingPaddingDesktopWidthValue = `${Heading_Desktop_padding.top}${Heading_padding_units.Desktop} ${Heading_Desktop_padding.right}${Heading_padding_units.Desktop} ${Heading_Desktop_padding.bottom}${Heading_padding_units.Desktop} ${Heading_Desktop_padding.left}${Heading_padding_units.Desktop}`;
 	const headingPaddingTabWidthValue = `${Heading_Tab_padding.top}${Heading_padding_units.Tablet} ${Heading_Tab_padding.right}${Heading_padding_units.Tablet} ${Heading_Tab_padding.bottom}${Heading_padding_units.Tablet} ${Heading_Tab_padding.left}${Heading_padding_units.Tablet}`;
 	const headingPaddingMobileWidthValue = `${Heading_Mobile_padding.top}${Heading_padding_units.Mobile} ${Heading_Mobile_padding.right}${Heading_padding_units.Mobile} ${Heading_Mobile_padding.bottom}${Heading_padding_units.Mobile} ${Heading_Mobile_padding.left}${Heading_padding_units.Mobile}`;
+	
 	/** Heading Margin */
 	const handleHeadingMarginUnitChange = (event, position) => {
 		const value = event.target.value;

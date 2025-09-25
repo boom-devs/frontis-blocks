@@ -237,6 +237,7 @@
                             text-decoration: underline;
                         }
                     }
+
                     .fb-forgot-password {
                         font-family: $body-font-family;
                         font-size: $base-font-size;
@@ -244,7 +245,7 @@
                         line-height: $line-height-18;
                         color: $primary-color;
                         cursor: pointer;
-                        
+
                     }
                 }
             }
@@ -311,7 +312,7 @@
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
                 gap: 16px;
-                margin-bottom: 24px;
+                // margin-bottom: 24px;
 
                 .fb-sign-with-api-btn {
                     display: flex;
@@ -344,6 +345,8 @@
                 line-height: $line-height-18;
                 text-align: center;
                 gap: 8px;
+                margin-top: 24px;
+
                 a {
                     color: $neutral-color-950;
                     text-decoration: underline;

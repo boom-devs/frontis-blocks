@@ -16,6 +16,9 @@ import generateCSSVariables from "./components/GenerateRootCss";
 import generateColorsVariables from "./components/GenerateColorRoot";
 import FrontisMetaBox from "./theme-settings/editor";
 import FrontisThemeSiteEditor from "./theme-settings/site-editor";
+import { addFilter } from '@wordpress/hooks';
+import { InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, ToggleControl } from '@wordpress/components';
 import "./sidebar.scss";
 
 // Default color and gradient configurations
@@ -439,6 +442,50 @@ function FrontisBlocksSidebar() {
 
 	}, [customColors, globalColors, gradientColors, customGradientColors]);
 
+
+	function addCustomSettingsToCoreColumns( settings, name ) {
+		if ( name !== 'core/template-part' ) {
+		  return settings;
+		}
+	  
+		return {
+		  ...settings,
+		  attributes: {
+			...settings.attributes,
+			isReverseDirection: {
+			  type: 'boolean',
+			  default: false,
+			},
+		  },
+		  edit( props ) {
+			const { attributes, setAttributes } = props;
+			const { isReverseDirection } = attributes;
+	  
+			return (
+			  <>
+				<InspectorControls>
+				  <PanelBody title="Custom Column Settings">
+					<ToggleControl
+					  label="Reverse Direction on Mobile"
+					  checked={ isReverseDirection }
+					  onChange={ ( value ) =>
+						setAttributes( { isReverseDirection: value } )
+					  }
+					/>
+				  </PanelBody>
+				</InspectorControls>
+				{ /* Rest of the edit function to use the attribute */ }
+			  </>
+			);
+		  },
+		};
+	  }
+	  
+	  addFilter(
+		'blocks.registerBlockType',
+		'my-plugin/add-custom-settings',
+		addCustomSettingsToCoreColumns
+	  );
 
 	const isSiteEditor = window.location.href.includes('site-editor.php');
 
