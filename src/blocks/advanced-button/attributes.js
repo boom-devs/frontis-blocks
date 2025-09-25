@@ -156,7 +156,38 @@ const attributes = {
     buttonHoverColor: {
         type: 'string',
     },
-
+    buttonTextColorType: {     
+		type: "string",
+		default: "classic",
+	},
+    buttonTextCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    buttonTextCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    buttonTextGradientColor: {
+        type: 'string',
+        default: null
+    },
+    buttonTextHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    buttonTextHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    buttonTextHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    buttonTextHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
     /** Start Background */
     buttonBgColorSwitcher : {
 		type: "string",

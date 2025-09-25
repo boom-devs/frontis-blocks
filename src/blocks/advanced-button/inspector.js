@@ -94,6 +94,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonColor,
 		buttonHoverColor,
 
+		buttonTextColorType,
+		buttonTextCustomGradientColorSwitcher,
+		buttonTextCustomGradientColor,
+		buttonTextGradientColor,
+		buttonTextHoverColorType,
+		buttonTextHoverGradientColor,
+		buttonTextHoverCustomGradientColorSwitcher,
+		buttonTextHoverCustomGradientColor,
+
 		/** Start Background */
 		buttonBgColorSwitcher,
 		buttonNormalBackgroundType,
@@ -1872,10 +1881,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		}
 
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-text {
-			${buttonColor ? `color: ${buttonColor};` : ''}  
+			${buttonTextColorType === 'gradient' ? `
+				background: ${buttonTextCustomGradientColorSwitcher && buttonTextCustomGradientColor ? buttonTextCustomGradientColor : buttonTextGradientColor};
+				${buttonTextCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+				${buttonTextGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+		` : `${buttonColor ? `color: ${buttonColor};` : ''}` }
 		}
+
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
-			${buttonHoverColor ? `color: ${buttonHoverColor};` : ''}
+			${buttonTextHoverColorType === 'gradient' ? `
+                background: ${buttonTextHoverCustomGradientColorSwitcher && buttonTextHoverCustomGradientColor ? buttonTextHoverCustomGradientColor : buttonTextHoverGradientColor};
+                ${buttonTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ${buttonTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+            ` : `${buttonHoverColor ? `color: ${buttonHoverColor};` : ''}`}
 		}
 		
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
@@ -2842,7 +2860,39 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						setAttributes={setAttributes}
 					/>
 
-					<FB_SwitcherControl
+					<FB_BackgroundColorControl
+						label={__("Text Color", "frontis-blocks")}
+						bgColorSwitcher={buttonColorSwitcher}  
+						setBgColorSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
+
+						normalLabel={__("Text Color Type", "frontis-blocks")}
+						normalBackgroundType={buttonTextColorType}
+						setNormalBackgroundType={(value) => setAttributes({ buttonTextColorType: value })}
+						normalClassicColor={buttonColor}
+						setNormalClassicColor={(value) => setAttributes({ buttonColor: value === undefined ? '' : value })}
+						normalGradientColor={buttonTextGradientColor}
+						setNormalGradientColor={(value) => setAttributes({ buttonTextGradientColor: value === undefined ? null : value })}
+						normalCustomGradientSwitcher={buttonTextCustomGradientColorSwitcher}
+						setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonTextCustomGradientColorSwitcher: value })}
+						normalCustomGradientInputValue={buttonTextCustomGradientColor}
+						setNormalCustomGradientInputValue={(value) => setAttributes({ buttonTextCustomGradientColor: value === undefined ? null : value })}
+
+						hoverLabel={__("Text Hover Color", "frontis-blocks")}
+						hoverBackgroundType={buttonTextHoverColorType}
+						setHoverBackgroundType={(value) => setAttributes({ buttonTextHoverColorType: value })}
+						hoverClassicColor={buttonHoverColor}
+						setHoverClassicColor={(value) => setAttributes({ buttonHoverColor: value === undefined ? '' : value })}
+						hoverGradientColor={buttonTextHoverGradientColor}
+						setHoverGradientColor={(value) => setAttributes({ buttonTextHoverGradientColor: value === undefined ? null : value })}
+						hoverCustomGradientSwitcher={buttonTextHoverCustomGradientColorSwitcher}
+						setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonTextHoverCustomGradientColorSwitcher: value })}
+						hoverCustomGradientInputValue={buttonTextHoverCustomGradientColor}
+						setHoverCustomGradientInputValue={(value) => setAttributes({ buttonTextHoverCustomGradientColor: value === undefined ? null : value })}
+	
+						isBackgroundImage={false}
+					/>	
+
+					{/* <FB_SwitcherControl
 						label={__("Color", "frontis-blocks")}
 						globalSwitcher={buttonColorSwitcher}
 						setGlobalSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
@@ -2862,7 +2912,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							globalColor={buttonHoverColor}
 							setGlobalColor={(value) => setAttributes({ buttonHoverColor: value === undefined ? '' : value })}
 						/>
-					)}
+					)} */}
 
 
 					<FB_BackgroundColorControl
