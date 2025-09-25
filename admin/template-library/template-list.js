@@ -120,7 +120,7 @@ const TemplateList = ({ item, libraryData, setLibraryData, data, setIsVisible, h
             >
                 <td className="fb-template-library-card-content">
                     <img
-                        src={`https://leech-better-moose.ngrok-free.app/storage/${item.image}`}
+                        src={`${FB_TLibrary.portalApi}/storage/${item.image}`}
                         alt={item.title || "Template preview"}
                     />
                     <h4 className="fb-template-title">{item.title}</h4>
