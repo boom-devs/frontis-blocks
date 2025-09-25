@@ -16,18 +16,18 @@ const FrontisThemeSiteEditor = () => {
     const themeColors = useSelect((select) => select('core/editor').getEditorSettings()?.colors || [], []);
     
     const [settings, setSettings] = useState({
-        disableHeader: false,
-        disableFooter: false,
-        stickyHeader: false,
-        stickyHeaderOffset: 0,
-        transparentHeader: false,
-        scrollToTop: false,
-        smoothScroll: false,
-        relatedPosts: false,
-        authorBox: false,
-        lazyLoading: false,
-        stickyHeaderColor: null,
-        transparentHeaderColor: 'transparent',
+        disableGlobalHeader: false,
+        disableGlobalFooter: false,
+        stickyGlobalHeader: false,
+        stickyGlobalHeaderOffset: 0,
+        transparentGlobalHeader: false,
+        scrollGlobalToTop: false,
+        smoothGlobalScroll: false,
+        relatedGlobalPosts: false,
+        authorGlobalBox: false,
+        lazyGlobalLoading: false,
+        stickyGlobalHeaderColor: null,
+        transparentGlobalHeaderColor: 'transparent',
     });
 
     const updateSetting = (settingName, value) => {
@@ -137,6 +137,11 @@ const FrontisThemeSiteEditor = () => {
         //     }
         // }
     }
+
+    // Enable save button on change any thing
+    useEffect(() => {
+        wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
+    },[settings]);
     
     return (
         <>
@@ -144,17 +149,17 @@ const FrontisThemeSiteEditor = () => {
                 <PanelRow>
                     <ToggleControl
                         label="Enable Sticky Header"
-                        checked={settings.stickyHeader}
-                        onChange={(value) => updateSetting('stickyHeader', value)}
+                        checked={settings.stickyGlobalHeader}
+                        onChange={(value) => updateSetting('stickyGlobalHeader', value)}
                     />
 
                 </PanelRow>
-                {settings.stickyHeader && (
+                {settings.stickyGlobalHeader && (
                     <>
                         <RangeControl
                             label="Header Offset (Rem)"
-                            value={settings.stickyHeaderOffset}
-                            onChange={(value) => updateSetting('stickyHeaderOffset', value)}
+                            value={settings.stickyGlobalHeaderOffset}
+                            onChange={(value) => updateSetting('stickyGlobalHeaderOffset', value)}
                             min={0}
                             max={100}
                         />
@@ -191,8 +196,8 @@ const FrontisThemeSiteEditor = () => {
                                         // />
                                         <ColorPalette
                                             colors={themeColors}
-                                            value={settings.stickyHeaderColor}
-                                            onChange={(value) => updateSetting('stickyHeaderColor', value)}
+                                            value={settings.stickyGlobalHeaderColor}
+                                            onChange={(value) => updateSetting('stickyGlobalHeaderColor', value)}
                                         />
                                     )}
                                 />
@@ -204,11 +209,11 @@ const FrontisThemeSiteEditor = () => {
                 <PanelRow>
                     <ToggleControl
                         label="Enable Transparent Header"
-                        checked={settings.transparentHeader}
-                        onChange={(value) => updateSetting('transparentHeader', value)}
+                        checked={settings.transparentGlobalHeader}
+                        onChange={(value) => updateSetting('transparentGlobalHeader', value)}
                     />
                 </PanelRow>
-                {settings.transparentHeader && (
+                {settings.transparentGlobalHeader && (
                     <PanelRow>
                         <div className='sticky-wrapper' style={{
                             display: 'flex',
@@ -238,8 +243,8 @@ const FrontisThemeSiteEditor = () => {
                                 renderContent={() => (
                                     <ColorPalette
                                         colors={themeColors}
-                                        value={settings.transparentHeaderColor}
-                                        onChange={(value) => updateSetting('transparentHeaderColor', value)}
+                                        value={settings.transparentGlobalHeaderColor}
+                                        onChange={(value) => updateSetting('transparentGlobalHeaderColor', value)}
                                     />
                                 )}
                             />
@@ -252,15 +257,15 @@ const FrontisThemeSiteEditor = () => {
                 <PanelRow>
                     <ToggleControl
                         label="Disable Header"
-                        checked={settings.disableHeader}
-                        onChange={(value) => updateSetting('disableHeader', value)}
+                        checked={settings.disableGlobalHeader}
+                        onChange={(value) => updateSetting('disableGlobalHeader', value)}
                     />
                 </PanelRow>
                 <PanelRow>
                     <ToggleControl
                         label="Disable Footer"
-                        checked={settings.disableFooter}
-                        onChange={(value) => updateSetting('disableFooter', value)}
+                        checked={settings.disableGlobalFooter}
+                        onChange={(value) => updateSetting('disableGlobalFooter', value)}
                     />
                 </PanelRow>
 
@@ -270,22 +275,22 @@ const FrontisThemeSiteEditor = () => {
                     <PanelRow>
                         <ToggleControl
                             label="Scroll To Top"
-                            checked={settings.scrollToTop}
-                            onChange={(value) => updateSetting('scrollToTop', value)}
+                            checked={settings.scrollGlobalToTop}
+                            onChange={(value) => updateSetting('scrollGlobalToTop', value)}
                         />
                     </PanelRow>
                     <PanelRow>
                         <ToggleControl
                             label="Enable Smooth Scroll"
-                            checked={settings.smoothScroll}
-                            onChange={(value) => updateSetting('smoothScroll', value)}
+                            checked={settings.smoothGlobalScroll}
+                            onChange={(value) => updateSetting('smoothGlobalScroll', value)}
                         />
                     </PanelRow>
                     <PanelRow>
                         <ToggleControl
                             label="Enable Lazy Loading"
-                            checked={settings.lazyLoading}
-                            onChange={(value) => updateSetting('lazyLoading', value)}
+                            checked={settings.lazyGlobalLoading}
+                            onChange={(value) => updateSetting('lazyGlobalLoading', value)}
                         />
                     </PanelRow>
                 </PanelBody>
