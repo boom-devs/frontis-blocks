@@ -487,8 +487,24 @@ function FrontisBlocksSidebar() {
 		addCustomSettingsToCoreColumns
 	  );
 
-	const isSiteEditor = window.location.href.includes('site-editor.php');
+	const url = new URL(window.location.href);
+	const pValue = url.searchParams.get('p');
+	const canvas = url.searchParams.get('canvas');
+	
+	const isSiteEditor = window.location.href.includes('site-editor.php') && 
+						pValue?.includes('wp_template') && 
+						!pValue?.startsWith('/wp_template_part/');
+	const isPagePost = window.location.href.includes('post.php');
 
+	const onlyCanvasEditor = window.location.pathname.includes('site-editor.php') &&
+	decodeURIComponent(pValue) === '/' &&
+	canvas === 'edit';
+
+
+	console.log("isSiteEditor isSiteEditor")
+	console.log(isSiteEditor)
+	console.log("isPagePost")
+	console.log(isPagePost)
 	return (
 		<>
 			<div className="fb_plugin_sidebar">
@@ -670,15 +686,15 @@ function FrontisBlocksSidebar() {
 							</NavigatorScreen>
 						</NavigatorProvider>
 
-						{frontisBlocksAdminSidebar.frontis_theme &&
-							<div className="fb-theme-settings-wrapper">
-								{isSiteEditor ? (
-									<FrontisThemeSiteEditor />
-								) : (
-									<FrontisMetaBox />
-								)}
-							</div>
-						}
+						<div className="fb-theme-settings-wrapper">
+							{/* {onlyCanvasEditor &&
+								<FrontisThemeSiteEditor />
+							} */}
+
+							{(isPagePost || isSiteEditor) &&
+								<FrontisMetaBox whichEditor={isPagePost ? 'post' : 'template'} />
+							}
+						</div>
 					</div>
 				</PluginSidebar>
 			</div>

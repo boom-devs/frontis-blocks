@@ -4,18 +4,50 @@ import { useEntityProp } from '@wordpress/core-data';
 import { useState, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
-const FrontisMetaBox = () => {
+const FrontisMetaBox = ({whichEditor}) => {
     const postType = useSelect(
         (select) => select('core/editor').getCurrentPostType(),
         []
     );
 
+    const currentPostId = useSelect(select => select('core/editor').getCurrentPostId());
+
     const [meta, setMeta] = useEntityProp('postType', postType, 'meta');
+    const [templateMeta, setTemplateMeta] = useState({
+        disableHeader: false,
+        disableFooter: false,
+        stickyHeader: false,
+        stickyHeaderOffset: 0,
+        transparentHeader: false,
+        scrollToTop: false,
+        smoothScroll: false,
+        relatedPosts: false,
+        authorBox: false,
+        lazyLoading: false,
+        stickyHeaderColor: null,
+        transparentHeaderColor: 'transparent',
+    });
 
     // Fetch global lazy loading setting
     const [globalLazyLoading, setGlobalLazyLoading] = useState(false);
     const [globalTransparentHeader, setGlobalTransparentHeader] = useState(false);
     const [globalStickyHeader, setGlobalStickyHeader] = useState(false);
+    const [templateMetaPostEdit, setTemplateMetaPostEdit] = useState({
+        disableHeader: false,
+        disableFooter: false,
+        stickyHeader: false,
+        stickyHeaderOffset: 0,
+        transparentHeader: false,
+        scrollToTop: false,
+        smoothScroll: false,
+        relatedPosts: false,
+        authorBox: false,
+        lazyLoading: false,
+        stickyHeaderColor: null,
+        transparentHeaderColor: 'transparent',
+    });
+
+    const [postId, setPostId] = useState();
 
     const themeColors = useSelect((select) => select('core/editor').getEditorSettings()?.colors || [], []);
     useEffect(() => {
@@ -27,27 +59,112 @@ const FrontisMetaBox = () => {
     }, []);
 
     const updateSetting = (settingName, value) => {
-        setMeta({ ...meta, [settingName]: value });
+        if(postType === 'wp_template') {
+            setTemplateMeta({ ...templateMeta, [settingName]: value });
+        } else {
+            setMeta({ ...meta, [settingName]: value });
+        }
     };
 
     // Helper function to get meta value with default false
     const getMetaValue = (key) => {
-        if (!key || !meta || typeof meta !== 'object') {
-            return false;
+        if(postType === 'wp_template') {
+            if (!key || !templateMeta || typeof templateMeta !== 'object') {
+                return false;
+            }
+            return templateMeta[key] ?? false;
+        } else {
+            console.log("Inside meta")
+            if (!key || !meta || typeof meta !== 'object') {
+                return false;
+            }
+            return meta[key] ?? false;
         }
-        return meta[key] ?? false;
     };
+
+    useEffect(() => {
+        if(postType === 'wp_template') {
+            const template = wp.data.select('core').getEntityRecord('postType', 'wp_template', currentPostId);
+            setPostId(template?.wp_id);
+
+            // Make the apiFetch GET request with post_id as a query parameter
+            wp.apiFetch({
+                path: `frontis/v1/template-settings?post_id=${template?.wp_id}`,
+                method: 'GET',
+            }).then((response) => {
+                if(response) {
+                    console.log("Getting when page loaded");
+                    console.log(response)
+                    setTemplateMeta(response);
+                }
+            }).catch((error) => {
+                console.error("Error fetching template settings:", error);
+            });
+        } else {
+            setPostId(currentPostId);
+        }
+
+        checkPostPageTemplateMeta();
+    }, []);
+
+
+    console.log("getMetaValue('_frontis_meta_header_display')");
+    console.log(getMetaValue('_frontis_meta_header_display'));
+
+    // Update template meta when template meta changes
+    useEffect(() => {
+        if(postType === 'wp_template') {
+            apiFetch({ path: 'frontis/v1/template-settings', method: 'POST', data: { setting: templateMeta, post_id: postId } }).then((response) => {
+                console.log("response response")
+                console.log(response);
+            });
+        }
+    }, [templateMeta]);
+
+    // Check this is post editor then get this page or post template and check what the status of header footer disabled
+    const checkPostPageTemplateMeta = () => {
+        if(whichEditor === 'post') {
+            // Make the apiFetch GET request with post_id as a query parameter
+            wp.apiFetch({
+                path: `frontis/v1/template?id=${currentPostId}`,
+                method: 'GET',
+            }).then((response) => {
+                if(response) {
+                    setTemplateMetaPostEdit(response);
+                }
+            }).catch((error) => {
+                console.error("Error fetching template settings:", error);
+            });
+        }
+    }
+
+    console.log("templateMetaPostEdit templateMetaPostEdit")
+    console.log(templateMetaPostEdit)
 
     return (
         <>
             <PanelBody title="Disable Elements">
+                {/* {
+                    (whichEditor === 'post' && templateMetaPostEdit.disableHeader) ? (
+                        <PanelRow>
+                            <ToggleControl
+                                label="Enable Header"
+                                checked={templateMetaPostEdit.disableHeader}
+                                onChange={(value) => updateSetting('_frontis_meta_header_override_global', value)}
+                            />
+                        </PanelRow>
+                    ) : (
+                        
+                    )
+                } */}
                 <PanelRow>
                     <ToggleControl
-                        label="Disable Header"
-                        checked={getMetaValue('_frontis_meta_header_display')}
-                        onChange={(value) => updateSetting('_frontis_meta_header_display', value)}
+                        label={(whichEditor === 'post' && templateMetaPostEdit.disableHeader) ? 'Enable Header' : 'Disable Header'}
+                        checked={postType === 'wp_template' ? getMetaValue('disableHeader') : getMetaValue('_frontis_meta_header_display')}
+                        onChange={(value) => postType === 'wp_template' ? updateSetting('disableHeader', value) : updateSetting('_frontis_meta_header_display', value)}
                     />
                 </PanelRow>
+
                 <PanelRow>
                     <ToggleControl
                         label="Disable Footer"

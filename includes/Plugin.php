@@ -5,12 +5,10 @@ namespace FrontisBlocks;
 use FrontisBlocks\Admin\Admin;
 use FrontisBlocks\Admin\Ajax\BlocksAjax;
 use FrontisBlocks\Core\Blocks;
-use FrontisBlocks\Utils\Enqueue;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Admin\Ajax\Settings;
 use FrontisBlocks\Admin\Ajax\GlobalSettings;
 use FrontisBlocks\Admin\Ajax\TemplateLibrary;
-use FrontisBlocks\Core\FontLoader;
 use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Core\SupportSVG;
 use FrontisBlocks\Core\Enqueues;
@@ -134,16 +132,12 @@ final class Plugin {
 	 * Initialize classes
 	 */
 	private function init_classes() {
-		$this->asset = Enqueue::get_instance(FB_PLUGIN_URL, FB_PLUGIN_PATH, self::VERSION);
 
 		//load blocks
 		self::$blocks = BlockList::get_instance()->get_blocks();
 
 		//load blocks
 		self::$blocks = BlockList::get_instance()->get_blocks();
-
-		// Load google font
-		FontLoader::get_instance();
 	}
 
 	/**
