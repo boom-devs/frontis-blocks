@@ -66,6 +66,11 @@
         }
 
         .fb-template-library-store-sidebar-tabs {
+            overflow: auto;
+            scrollbar-width: none;
+            height: calc(100vh - 200px);
+            position: relative;
+
             .fb-template-library-store-sidebar-tab {
                 display: flex;
                 justify-content: space-between;
@@ -90,6 +95,10 @@
                     display: flex;
                     align-items: center;
                     gap: 8px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    max-width: 160px;
 
                     .fb-category-icon {
                         max-width: 20px;
