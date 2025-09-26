@@ -244,7 +244,7 @@ const PatternLibraryButton = () => {
         try {
             let response;
             if (tab === 'patterns') {
-                response = await getTemplatesData("patterns", userData?.email, FB_TLibrary?.activationKey, page, tag, search, category, isPro);
+                response = await getTemplatesData("patterns", userData?.email, '', page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -258,7 +258,7 @@ const PatternLibraryButton = () => {
                     }));
                 }
             } else if (tab === 'pages') {
-                response = await getTemplatesData("pages", userData?.email, FB_TLibrary?.activationKey, page, tag, search, category, isPro);
+                response = await getTemplatesData("pages", userData?.email, '', page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -272,7 +272,7 @@ const PatternLibraryButton = () => {
                     }));
                 }
             } else if (tab === 'sites') {
-                response = await getTemplatesData("sites", userData?.email, FB_TLibrary?.activationKey, page, tag, search, category, isPro);
+                response = await getTemplatesData("sites", userData?.email, '', page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -314,7 +314,7 @@ const PatternLibraryButton = () => {
         try {
             let response;
             if (tab === 'patterns') {
-                response = await getTemplatesData("patterns", userData?.email, FB_TLibrary?.activationKey, page, '', '', '', '');
+                response = await getTemplatesData("patterns", userData?.email, '', page, '', '', '', '');
                 if (response) {
                     setTagData((prev) => ({
                         ...prev,
@@ -325,7 +325,7 @@ const PatternLibraryButton = () => {
                     }));
                 }
             } else if (tab === 'pages') {
-                response = await getTemplatesData("pages", userData?.email, FB_TLibrary?.activationKey, page, '', '', '', '');
+                response = await getTemplatesData("pages", userData?.email, '', page, '', '', '', '');
                 if (response) {
                     setTagData((prev) => ({
                         ...prev,
@@ -336,7 +336,7 @@ const PatternLibraryButton = () => {
                     }));
                 }
             } else if (tab === 'sites') {
-                response = await getTemplatesData("sites", userData?.email, FB_TLibrary?.activationKey, page, '', '', '', '');
+                response = await getTemplatesData("sites", userData?.email, '', page, '', '', '', '');
                 if (response) {
                     setTagData((prev) => ({
                         ...prev,
