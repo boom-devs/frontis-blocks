@@ -9,6 +9,7 @@ import Render from "@Blocks/container/render";
 import styling from "@Blocks/container/styling";
 import frontEndStyle from "@Blocks/container/frontend-style";
 import {useDeviceType} from "@Config/displayType";
+import useIsInsideLoopBuilder from '@Utils/useIsInsideLoopBuilder';
 
 const Edit = (props) => {
 	let deviceType= useDeviceType();
@@ -30,6 +31,7 @@ const Edit = (props) => {
 			containerDirection,
 			containerChildrenWidth,
 			containerGlobalPadding,
+			loopAutoApplied,
 		},
 		clientId,
 		setAttributes,
@@ -38,6 +40,16 @@ const Edit = (props) => {
 		context,
 		hasDynamicContent,
 	} = props;
+
+	// Loop Builder Check
+	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
+	useEffect(() => {
+		if (isInsideLoopBuilder && !loopAutoApplied) {
+			setAttributes({ containerDirection: { Desktop: 'column', Tablet: 'column', Mobile: 'column' } });
+			setAttributes({ containerChildrenWidth: 'full' });
+			setAttributes({loopAutoApplied: true});
+		}
+	}, [isInsideLoopBuilder, loopAutoApplied]);
 
 	const {
 		isParentOfSelectedBlock,
@@ -162,28 +174,6 @@ const Edit = (props) => {
 
 		return <ColumnsPicker { ...{ ...props, variations, defaultVariation } } />
 	}
-
-	// Loop Builder Check
-	// Loop Builder Check
-	const isInsideLoopBuilder = useSelect( (select) => {
-		const { getBlockParents, getBlock } = select(blockEditorStore);
-		const parents = getBlockParents(clientId);
-		return parents.some((pid) => {
-			const name = getBlock(pid)?.name;
-			return (
-			name === 'frontis-blocks/loop-builder' ||
-			name === 'frontis-blocks/loop-builder-wrapper'
-			);
-		});
-	}, [clientId]);
-
-	// Loop Builder Check
-	useEffect(() => {
-		if (isInsideLoopBuilder) {
-			setAttributes({ containerDirection: { Desktop: 'column', Tablet: 'column', Mobile: 'column' } });
-			setAttributes({ containerChildrenWidth: 'full' });
-		}
-	}, [isInsideLoopBuilder,]);
 
 	return (
 		<>
