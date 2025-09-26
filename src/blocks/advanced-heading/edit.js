@@ -10,7 +10,6 @@ import { useSelect } from '@wordpress/data';
 import { decodeEntities } from '@wordpress/html-entities';
 import { dateI18n, __experimentalGetSettings as getDateSettings } from '@wordpress/date';
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
-import { store as blockEditorStore } from '@wordpress/block-editor'; 
 
 /**
  * Internal dependencies
@@ -19,7 +18,7 @@ import Inspector from './inspector';
 import renderSVG from '../../components/icon-picker/components/icon-picker/controls/renderIcon';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import { useDeviceType } from '@Config/displayType';
-import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
+import useIsInsideLoopBuilder from '@Utils/useIsInsideLoopBuilder';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
@@ -74,7 +73,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicTextTermsSeparator,
 		dynamicTextEnableLink,
 		dynamicTextLinkSource,
-
+		loopAutoApplied,
 
 	} = attributes;
 
@@ -508,31 +507,18 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	}
 	}, [dynamicValue]);
 
-
 	// Loop Builder Check
-	const parentIds = useSelect(
-		(select) => select(blockEditorStore).getBlockParents(clientId),
-		[clientId]
-	);
-
-	// Loop Builder Check
-	const isInsideLoopBuilder = useSelect((select) => {
-		const editor = select(blockEditorStore);
-		return parentIds.some((pid) => {
-		  const p = editor.getBlock(pid);
-		  return [
-			'frontis-blocks/loop-builder',
-			'frontis-blocks/loop-builder-wrapper',
-			'frontis-blocks/container',
-		  ].includes(p?.name);
-		});
-	}, [parentIds]);
+	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
 	useEffect(() => {
-		if (isInsideLoopBuilder && !attributes.dynamicTextEnabled) {
-			setAttributes({ dynamicTextEnabled: true });
+		if (isInsideLoopBuilder && !loopAutoApplied) {
+			setAttributes({
+				dynamicTextEnabled: true,
+				dynamicTextEnableLink: true,
+				dynamicTextLinkSource: 'post_permalink',
+				loopAutoApplied: true,
+			});
 		}
-	}, [isInsideLoopBuilder]);
-	
+	}, [isInsideLoopBuilder, loopAutoApplied]);
 
 	return (
 		<>
