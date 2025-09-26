@@ -2191,6 +2191,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonColor,
 		buttonHoverColor,
 
+		buttonTextColorType,
+		buttonTextCustomGradientColorSwitcher,
+		buttonTextCustomGradientColor,
+		buttonTextGradientColor,
+		buttonTextHoverColorType,
+		buttonTextHoverGradientColor,
+		buttonTextHoverCustomGradientColorSwitcher,
+		buttonTextHoverCustomGradientColor,
+
 		/** Start Background */
 		buttonBgColorSwitcher,
 		buttonNormalBackgroundType,
