@@ -49,7 +49,7 @@ $list_style = fb_norm_str(isset($attributes['listStyle']) ? $attributes['listSty
 // Read More attributes
 $read_more_icon_frontend         = fb_norm_str(isset($attributes['readMoreIconFrontend']) ? $attributes['readMoreIconFrontend'] : '');
 $read_more_switcher = isset($attributes['readMoreSwitcher']) ? (bool) $attributes['readMoreSwitcher'] : true;
-$read_more_text = fb_norm_str(isset($attributes['readMoreText']) ? $attributes['readMoreText'] : 'Read More');
+$read_more_text = fb_norm_str(isset($attributes['readMoreText']) ? $attributes['readMoreText'] : 'View All');
 $read_more_icon_align = fb_norm_str(isset($attributes['readMoreIconAlign']) ? $attributes['readMoreIconAlign'] : 'none');
 $read_more_icon_image_url = fb_norm_str(isset($attributes['readMoreIconImageUrl']) ? $attributes['readMoreIconImageUrl'] : '');
 $read_more_icon_image_alt = fb_norm_str(isset($attributes['readMoreIconImageAlt']) ? $attributes['readMoreIconImageAlt'] : 'icon');
@@ -247,7 +247,7 @@ if (empty($taxonomy_type)) {
         $output .= '<div class="fb-taxonomy-item">';
 
                 // Show image for style-2
-        if ($premade_style === 'style-2' && $term_image) {
+        if ($premade_style === 'style-3' && $term_image) {
             $output .= '<div class="fb-taxonomy-image">';
             $output .= '<img src="' . esc_url($term_image) . '" alt="' . esc_attr($term->name) . '" />';
             $output .= '</div>';

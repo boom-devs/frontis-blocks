@@ -519,12 +519,11 @@ export const IMAGE_MASK_IMAEGS = {
 }
 
 /** POST CATEGORY BLOCK */
-// export const PREMADE_STYLE = [
-//   { label: 'Style 1', value: 'style-1' },
-//   { label: 'Style 2', value: 'style-2' },
-//   // Future: Style-3 placeholder
-//   // { label: __('Style 3', 'frontis-blocks'), value: 'style-3' }
-// ];
+export const POST_CATEGORY_PREMADE_STYLE  = [
+  { label: __('Style 1', 'frontis-blocks'), value: 'style-1' },
+  { label: __('Style 2', 'frontis-blocks'), value: 'style-2' },
+  { label: __('Style 3', 'frontis-blocks'), value: 'style-3' },
+];
 
 
 export const SELECTION_TYPE_OPTIONS = [

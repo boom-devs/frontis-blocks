@@ -81,16 +81,16 @@ const attributes = {
 	gridRowGap: {
 		type: "object",
 		default: {
-			Desktop: 20,
-			Tablet: 15,
+			Desktop: 30,
+			Tablet: 20,
 			Mobile: 10,
 		},
 	},
 	gridColumnGap: {
 		type: "object",
 		default: {
-			Desktop: 20,
-			Tablet: 15,
+			Desktop: 30,
+			Tablet: 20,
 			Mobile: 10,
 		},
 	},
@@ -454,7 +454,7 @@ const attributes = {
 	},
 	postTitleFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Onest",
 	},
 	postTitleFontSize: {
 		type: "object",
@@ -474,7 +474,7 @@ const attributes = {
 	},
 	postTitleFontWeight: {
 		type: "string",
-		default: "600",
+		default: "",
 	},
 	postTitleFontStyle: {
 		type: "string",
@@ -564,7 +564,7 @@ const attributes = {
 	},
 	postDescriptionFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Work Sans",
 	},
 	postDescriptionFontSize: {
 		type: "object",
@@ -695,7 +695,7 @@ const attributes = {
 	},
 	postCountFontFamily: {
 		type: "string",
-		default: "inherit",
+		default: "Manrope",
 	},
 	postCountFontSize: {
 		type: "object",
@@ -837,7 +837,7 @@ const attributes = {
 	},
 	buttonFontFamily: {
 		type: "string",
-		default: "Default",
+		default: "Onest",
 	},
 	buttonFontSize: {
 		type: "object",
