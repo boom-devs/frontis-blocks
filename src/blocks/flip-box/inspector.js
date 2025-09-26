@@ -4414,6 +4414,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fbflipBoxStyle = useMemo(
 		() => `
+			.fb-flip-box-main-wrapper.${blockID} {
+				width: 100%;
+			}
+
 			.fb-flip-box-main-wrapper.${blockID} .fb-flip-box-wrapper{
 				${flipBoxPositionType === 'default' ? `position: relative;` : ''}
 				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' ? `width: 100%;` : ''}
@@ -4476,16 +4480,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  
 		  }
 
-		  .fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
+		  	.fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
 				${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
 				height: fit-content;
-		  }
+		  	}
 			.fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper.fb-show-back {
 				transform:
 					${isHover || flipSelectedSide === "back" ? getFlipTransform(flipAnimationType) : "none"};
 			}
-		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
+		  	.fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
 				${flipBoxFrontWidth.Desktop ? `min-width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
 				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
 				height: auto;
@@ -4661,7 +4665,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${headingBack_Border_Hover_Color ? `border-color: ${headingBack_Border_Hover_Color};` : ''}
 		  }
 		  @media only screen and (max-width: 1024px) {
-			  .fb-flip-box-wrapper.${blockID} .fb-heading {
+			  .fb-flip-box-wrapper.${blockID} .fb-flip-box-content-wrapper .fb-heading {
 				  ${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
                   ${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
                   ${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
@@ -4679,6 +4683,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${headingBackBorderTabWidthValue && headingBack_Tab_Border_Width.top ? `border-width: ${headingBackBorderTabWidthValue};` : ''}
 			    ${headingBackBorderRadiusTabWidthValue && headingBack_Tab_Border_radius_Width.top ? `border-radius: ${headingBackBorderRadiusTabWidthValue};` : ''}
 			  }
+
+			  	.fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
+					${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
+					${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
+					height: fit-content;
+				}
 
 			  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
 				${flipBoxFrontWidth.Tablet ? `width: ${flipBoxFrontWidth.Tablet}${flipBoxFrontWidthUnits.Tablet};` : ''}
@@ -4699,7 +4709,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		  }
 		  @media only screen and (max-width: 724px) {
-			  .fb-flip-box-wrapper.${blockID} .fb-heading {
+			  .fb-flip-box-wrapper.${blockID} .fb-flip-box-content-wrapper .fb-heading {
 				  ${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
                   ${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
                   ${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
@@ -4718,6 +4728,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${headingBackBorderMobileWidthValue && headingBack_Mobile_Border_Width.top ? `border-width: ${headingBackBorderMobileWidthValue};` : ''}
 			    ${headingBackBorderRadiusMobileWidthValue && headingBack_Mobile_Border_radius_Width.top ? `border-radius: ${headingBackBorderRadiusMobileWidthValue};` : ''}
 			  }
+
+			  	.fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
+					${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
+					${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
+					height: fit-content;
+				}
 
 			  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
 				${flipBoxFrontWidth.Mobile ? `width: ${flipBoxFrontWidth.Mobile}${flipBoxFrontWidthUnits.Mobile};` : ''}
@@ -5033,7 +5049,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		}
 
-		.fb-flip-box-wrapper.${blockID} .fb-icon-wrapper svg,
+		.fb-flip-box-wrapper.${blockID} .fb-flip-back-media-wrapper .fb-icon-wrapper svg,
 		.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper img {
 			${mediaSize.Desktop ? `width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};` : ''}
 			${mediaSize.Desktop ? `height: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};` : ''}
@@ -5055,7 +5071,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${mediaBackIconHoverColor ? `fill: ${mediaBackIconHoverColor};` : ""}
 		}
 		@media only screen and (max-width: 1024px) {
-			.fb-flip-box-wrapper.${blockID} .fb-icon-wrapper svg,
+			.fb-flip-box-wrapper.${blockID} .fb-flip-back-media-wrapper .fb-icon-wrapper svg,
 			.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper img {
 				${mediaSize.Tablet ? `width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};` : ''}
 				${mediaSize.Tablet ? `height: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};` : ''}
@@ -5063,7 +5079,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		@media only screen and (max-width: 767px) {
-			.fb-flip-box-wrapper.${blockID} .fb-icon-wrapper svg,
+			.fb-flip-box-wrapper.${blockID} .fb-flip-back-media-wrapper .fb-icon-wrapper svg,
 			.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper img {
 				${mediaSize.Mobile ? `width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};` : ''}
 				${mediaSize.Mobile ? `height: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};` : ''}
