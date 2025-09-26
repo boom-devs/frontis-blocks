@@ -21,9 +21,11 @@
 	  "fb/accordionInheritedTabIconSwitcher": "tabIconSwitcher",
 	  "fb/accordionInheritedTabIcon": "tabIcon",
 	  "fb/accordionInheritedTabImageUrl": "tabImageUrl",
+	  "fb/accordionInheritedTabImageAlt": "tabImageAlt",
 	  "fb/accordionInheritedExpandedIconSwitcher": "expandedIconSwitcher",
 	  "fb/accordionInheritedExpandedIcon": "expandedIcon",
 	  "fb/accordionInheritedExpandedImageUrl": "expandedImageUrl",
+	  "fb/accordionInheritedExpandedImageAlt": "expandedImageAlt",
 	  "fb/accordionInheritedTagName": "tagName",
 	  "fb/accordionFaqSchema": "faqSchema"
 	},

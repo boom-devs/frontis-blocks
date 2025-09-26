@@ -571,10 +571,6 @@
             line-height: $body-line-height;
             transition: all 0.3s ease-in-out;
       
-          &:hover:not(:disabled):not(.active) {
-            background: $neutral-color-100;
-          }
-      
           &:disabled {
             cursor: not-allowed;
             opacity: 0.5;
@@ -605,8 +601,13 @@
             color: $neutral-color-700;
             transition: all 0.3s ease-in-out;
 
+            svg path {
+                stroke: $neutral-color-700;
+                transition: all 0.3s ease-in-out;
+            }
+
             &:hover {
-                background: $neutral-color-950 !important;
+                background: $neutral-color-950;
                 color: $white-color;
                 border-color: transparent;
                 transition: all 0.3s ease-in-out;
@@ -614,6 +615,16 @@
                 svg path {
                     stroke: $white-color;
                     transition: all 0.3s ease-in-out;
+                }
+
+                &:disabled {
+                    background-color: transparent;
+                    color: $neutral-color-700;
+                    border-color: $neutral-color-100;
+
+                    svg path {
+                        stroke: $neutral-color-700;
+                    }
                 }
             }
         }

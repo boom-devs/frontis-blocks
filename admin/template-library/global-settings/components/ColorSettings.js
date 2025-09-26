@@ -33,7 +33,7 @@ const ColorSettings = ({
 			<div className="fb-color-options-vertical">
 				{/* Solid Colors Section */}
 				<div className="fb-color-section-wrapper">
-					{(globalColors.length !== 0) && (
+					{/* {(globalColors.length !== 0) && (
 						<div className="fb-color-section">
 							<PaletteEdit
 								canOnlyChangeValues
@@ -45,14 +45,14 @@ const ColorSettings = ({
 								classnames="fb-solid-color-panel"
 							/>
 						</div>
-					)}
+					)} */}
 					{(customColors.length !== 0) && (
 						<div className="fb-color-section">
 							<PaletteEdit
 								canOnlyChangeValues
 								colors={customColors}
 								onChange={setCustomColors}
-								paletteLabel={__('Custom Colors')}
+								paletteLabel={__('Colors')}
 								paletteLabelHeadingLevel={3}
 								popoverProps={popoverProps}
 								classnames="fb-solid-color-panel"
@@ -63,7 +63,7 @@ const ColorSettings = ({
 
 				{/* Gradient Section */}
 				<div className="fb-color-section-wrapper">
-					{(gradientColors.length !== 0) && (
+					{/* {(gradientColors.length !== 0) && (
 						<div className="fb-color-section">
 							<PaletteEdit
 								canOnlyChangeValues
@@ -75,14 +75,14 @@ const ColorSettings = ({
 								popoverProps={popoverProps}
 							/>
 						</div>
-					)}
+					)} */}
 					{(customGradientColors.length !== 0) && (
 						<div className="fb-color-section">
 							<PaletteEdit
 								canOnlyChangeValues
 								gradients={customGradientColors}
 								onChange={setCustomGradientColors}
-								paletteLabel={__('Custom Gradient')}
+								paletteLabel={__('Gradient Colors')}
 								classnames="fb-gradient-color-panel"
 								paletteLabelHeadingLevel={3}
 								popoverProps={popoverProps}

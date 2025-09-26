@@ -1,5 +1,6 @@
 import {select, useSelect} from '@wordpress/data';
 import {useEffect, useMemo} from '@wordpress/element';
+import { store as blockEditorStore } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import {ColumnsPicker} from './variationPicker';
 import './editor.scss';
@@ -26,6 +27,9 @@ const Edit = (props) => {
 			backgroundType,
 			backgroundVideoOpacity,
 			isGridCssInParent,
+			containerDirection,
+			containerChildrenWidth,
+			containerGlobalPadding,
 		},
 		clientId,
 		setAttributes,
@@ -158,6 +162,28 @@ const Edit = (props) => {
 
 		return <ColumnsPicker { ...{ ...props, variations, defaultVariation } } />
 	}
+
+	// Loop Builder Check
+	// Loop Builder Check
+	const isInsideLoopBuilder = useSelect( (select) => {
+		const { getBlockParents, getBlock } = select(blockEditorStore);
+		const parents = getBlockParents(clientId);
+		return parents.some((pid) => {
+			const name = getBlock(pid)?.name;
+			return (
+			name === 'frontis-blocks/loop-builder' ||
+			name === 'frontis-blocks/loop-builder-wrapper'
+			);
+		});
+	}, [clientId]);
+
+	// Loop Builder Check
+	useEffect(() => {
+		if (isInsideLoopBuilder) {
+			setAttributes({ containerDirection: { Desktop: 'column', Tablet: 'column', Mobile: 'column' } });
+			setAttributes({ containerChildrenWidth: 'full' });
+		}
+	}, [isInsideLoopBuilder,]);
 
 	return (
 		<>

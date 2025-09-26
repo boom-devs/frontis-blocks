@@ -182,8 +182,110 @@ class Blocks
 		);
 	}
 
+	public function header_footer_settings($block_content, $block) {
+		$post_id = absint( get_the_ID() );
+
+		// Retrieve global options from the database.
+		// $global_options = get_option( 'frontis_theme_options', [] );
+
+		// echo "<pre>";
+		// var_dump($global_options);
+		// echo "</pre>";
+
+
+		// $theme_options = is_array( $theme_options ) ? $theme_options : maybe_unserialize( $theme_options );
+
+		// // if($block['blockName'] === 'core/template-part'){
+		// // 	var_dump(get_post_meta( $post_id, '_frontis_meta_header_display', true ));
+		// // }
+
+		// // Check if the header should be disabled (global or per post).
+		// $disable_header = ! empty( $theme_options['disableHeader'] ) || get_post_meta( $post_id, '_frontis_meta_header_display', true );
+		// if ( $disable_header && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'header' === $block['attrs']['tagName'] ) {
+		// 	return '';
+		// }
+
+		// // Check if the footer should be disabled (global or per post).
+		// $disable_footer = ! empty( $theme_options['disableFooter'] ) || get_post_meta( $post_id, '_frontis_meta_footer_display', true );
+		// if ( $disable_footer && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'footer' === $block['attrs']['tagName'] ) {
+		// 	return '';
+		// }
+
+		// // Check if the header should have sticky behavior.
+		// $sticky_header = ! empty( $theme_options['stickyHeader'] );
+
+
+		// if ( $sticky_header && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'header' === $block['attrs']['tagName'] ) {
+
+		// 	$sticky_header_color_gb = ! empty( $theme_options['stickyHeaderColor'] ) ? $theme_options['stickyHeaderColor'] : '';
+		
+		// 	// Get the post-specific sticky header color
+		// 	$post_id = get_the_ID();
+		// 	$sticky_header_color_sg = get_post_meta( $post_id, '_frontis_meta_sticky_bg_color', true );
+		
+		// 	$sticky_header_color = ! empty( $sticky_header_color_sg ) ? $sticky_header_color_sg : $sticky_header_color_gb;
+		
+		// 	// Output the CSS custom property dynamically
+		// 	$custom_css = sprintf(
+		// 		'<style>:root { --wp--preset--sticky--bg: %s; }</style>',
+		// 		esc_attr( $sticky_header_color )
+		// 	);
+		
+		// 	// Add the CSS custom property to the <head>
+		// 	echo $custom_css;
+		
+		// 	// Add a custom class to the block
+		// 	$block_content = $this->add_custom_class( $block_content, 'fb-sticky-header' );
+		// }
+		
+
+		// // Check if the header should have a transparent style.
+		// $transparent_header = ! empty( $theme_options['transparentHeader'] );
+
+		// if ( $transparent_header && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'header' === $block['attrs']['tagName'] ) {
+
+		// 	$transparent_header_color_gb = ! empty( $theme_options['transparentHeaderColor'] ) ? $theme_options['transparentHeaderColor'] : 'transparent';
+
+		// 	// Get the post-specific sticky header color
+		// 	$post_id = get_the_ID();
+		// 	$transparent_header_color_sg = get_post_meta( $post_id, '_frontis_meta_transparent_bg_color', true );
+
+		// 	$transparent_header_color = ! empty( $transparent_header_color_sg ) ? $transparent_header_color_sg : $transparent_header_color_gb;
+
+		// 	// Output the CSS custom property dynamically
+		// 	$custom_css = sprintf(
+		// 		'<style>:root { --wp--preset--transparent--bg: %s; }</style>',
+		// 		esc_attr( $transparent_header_color )
+		// 	);
+
+		// 	// Add the CSS custom property to the <head>
+		// 	echo $custom_css;
+
+		// 	// Add a custom class to the block
+		// 	$block_content = $this->add_custom_class( $block_content, 'fb-transparent-header' );
+		// }
+
+		return $block_content;
+	}
+
+	/**
+	 * Add custom class to block content.
+	 *
+	 * @param string $block_content Entire Block Content.
+	 * @param string $class CSS class to add.
+	 * @return string Modified block content with additional class.
+	 */
+	public function add_custom_class( string $block_content, string $class ): string {
+		// Add the custom class to the block's wrapper div.
+		return preg_replace( '/class="([^"]*)"/', 'class="$1 ' . esc_attr( $class ) . '"', $block_content, 1 );
+	}
+
 	public function render_block($block_content, $parsed_block, $block_obj)
 	{
+
+		// echo get_the_ID();
+		$block_content = $this->header_footer_settings($block_content, $parsed_block);
+
 		if (Helper::is_frontis_block($block_content, $parsed_block)) {
 			$block_content = $this->add_wrapper_class($block_content, $parsed_block);
 			$block_content = $this->add_block_id($block_content, $parsed_block);

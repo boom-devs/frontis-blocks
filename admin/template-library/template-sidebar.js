@@ -5,6 +5,7 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, o
     const schema = data;
     const categories = schema[activeTab]?.categories || [];
 
+
     // useEffect(() => {
     //     if (categories.length > 0 && !activeCategory[activeTab]) {
     //         setActiveCategory(prev => ({
@@ -123,8 +124,8 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, o
 
                         {categories.map((category) => (
                             <button
-                                key={category.slug}
-                                className={`fb-template-library-store-sidebar-tab ${activeCategory[activeTab] === category.slug ? "active" : ""}`}
+                                key={category?.slug}
+                                className={`fb-template-library-store-sidebar-tab ${activeCategory[activeTab] === category?.slug ? "active" : ""}`}
                                 onClick={() => setActiveCategoryTab(category.slug)}
                                 disabled={activeCategory[activeTab] === category.slug}
                             >
@@ -136,7 +137,7 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, o
                                         />
                                     ) : (
                                         <img
-                                            src={`https://leech-better-moose.ngrok-free.app/storage/${category.icon}`}
+                                            src={`${FB_TLibrary.portalApi}/storage/${category.icon}`}
                                             alt={category.name}
                                             className="fb-category-icon"
                                         />

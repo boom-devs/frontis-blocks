@@ -713,8 +713,6 @@ class Settings extends AjaxBase {
 				unlink($tempZipFile);
 			}
 
-			var_dump($custom_icons);
-
 			update_option('fb_custom_icons', $custom_icons, true);
 			update_option('fb_custom_icons_name', $custom_icons_name, true);
 		}

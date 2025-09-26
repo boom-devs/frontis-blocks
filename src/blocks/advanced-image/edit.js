@@ -12,6 +12,7 @@ import { useEffect, useMemo, useRef, useState } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import { store as coreStore } from "@wordpress/core-data";
 import { decodeEntities } from "@wordpress/html-entities";
+import { store as blockEditorStore } from '@wordpress/block-editor'; 
 
 // Internal
 import Inspector from "./inspector";
@@ -395,6 +396,34 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			height: advancedImageDefaultHeight,
 			srcSet: advancedImageSrcSet || undefined,
 		};
+
+
+			// Loop Builder Check
+	const parentIds = useSelect(
+		(select) => select(blockEditorStore).getBlockParents(clientId),
+		[clientId]
+	);
+
+	// Loop Builder Check
+	const isInsideLoopBuilder = useSelect((select) => {
+		const editor = select(blockEditorStore);
+		return parentIds.some((pid) => {
+		  const p = editor.getBlock(pid);
+		  return [
+			'frontis-blocks/loop-builder',
+			'frontis-blocks/loop-builder-wrapper',
+			'frontis-blocks/container',
+		  ].includes(p?.name);
+		});
+	}, [parentIds]);
+	useEffect(() => {
+		if (isInsideLoopBuilder && !dynamicImageEnabled) {  
+			setAttributes({ dynamicImageEnabled: true });
+			setAttributes({ mediaHeight: { Desktop: "200", Tablet: "200", Mobile: "200" } });
+			setAttributes({ mediaHeightUnits: { Desktop: "px", Tablet: "px", Mobile: "px" } });
+			setAttributes({autoFitSwitch: true});
+		}
+	}, [isInsideLoopBuilder]);
 
 	return (
 		<>

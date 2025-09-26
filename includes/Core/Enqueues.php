@@ -43,6 +43,9 @@ class Enqueues {
     }
 
     public function enqueue_scripts() {
+        $this->load_google_font();
+
+        // Enqueue assets
         $page_compiling_mode = get_post_meta(get_the_ID(), 'fb_page_assets_generation', true);
 
         // var_dump($page_compiling_mode);
@@ -131,18 +134,11 @@ class Enqueues {
     }
 
     public function enqueue_assets_footer() {
-        $this->load_google_font();
-
         $page_name = $this->get_page_template_name();
         $frontis_used = get_post_meta(get_the_ID(), 'frontis_blocks_used', true);
-
         $page_name = $frontis_used ? get_post(get_the_ID())->post_name : $page_name;
-
-       // Update frontend paths to use page_name
        $frontend_dir_page_js = $this->upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
        $frontend_url_page_js = $this->upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
-
-       // CSS file paths based on post_name
        $file_system_path_page_js = $frontend_dir_page_js . $page_name . '.js';
        $file_url_page_js = $frontend_url_page_js . $page_name . '.js';
 
