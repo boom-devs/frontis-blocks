@@ -28,7 +28,6 @@ const variations = [
 						'frontis-blocks/container',
 						{
 							variationSelected: true,
-							loopAutoApplied: true,
 						},
 						[ 
 							[ 
