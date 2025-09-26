@@ -10,6 +10,7 @@ import { useSelect } from '@wordpress/data';
 import { decodeEntities } from '@wordpress/html-entities';
 import { dateI18n, __experimentalGetSettings as getDateSettings } from '@wordpress/date';
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
+import { store as blockEditorStore } from '@wordpress/block-editor'; 
 
 /**
  * Internal dependencies
@@ -506,6 +507,31 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		lastValueRef.current = dynamicValue;
 	}
 	}, [dynamicValue]);
+
+
+	// Loop Builder Check
+	const parentIds = useSelect(
+		(select) => select(blockEditorStore).getBlockParents(clientId),
+		[clientId]
+	);
+
+	// Loop Builder Check
+	const isInsideLoopBuilder = useSelect((select) => {
+		const editor = select(blockEditorStore);
+		return parentIds.some((pid) => {
+		  const p = editor.getBlock(pid);
+		  return [
+			'frontis-blocks/loop-builder',
+			'frontis-blocks/loop-builder-wrapper',
+			'frontis-blocks/container',
+		  ].includes(p?.name);
+		});
+	}, [parentIds]);
+	useEffect(() => {
+		if (isInsideLoopBuilder && !attributes.dynamicTextEnabled) {
+			setAttributes({ dynamicTextEnabled: true });
+		}
+	}, [isInsideLoopBuilder]);
 	
 
 	return (
