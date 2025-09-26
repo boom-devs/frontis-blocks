@@ -13,12 +13,14 @@ import { decodeEntities } from '@wordpress/html-entities';
 import { dateI18n, __experimentalGetSettings as getDateSettings } from '@wordpress/date';
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 
+
 /**
  * Internal dependencies
  */
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings'; 
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import useIsInsideLoopBuilder from '@Utils/useIsInsideLoopBuilder';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
@@ -65,6 +67,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicTextTermsSeparator,
 		dynamicTextEnableLink,
 		dynamicTextLinkSource,
+		loopAutoApplied,
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -503,6 +506,17 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	}
 	}, [dynamicValue]);
 
+	// Loop Builder Check
+	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
+	useEffect(() => {
+		if (isInsideLoopBuilder && !loopAutoApplied) {
+			setAttributes({
+				dynamicTextEnableLink: true,
+				dynamicTextLinkSource: 'post_permalink',
+				loopAutoApplied: true,
+			});
+		}
+	}, [isInsideLoopBuilder, loopAutoApplied]);
 
     return (
         <>
