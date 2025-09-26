@@ -12,12 +12,11 @@ import { useEffect, useMemo, useRef, useState } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import { store as coreStore } from "@wordpress/core-data";
 import { decodeEntities } from "@wordpress/html-entities";
-import { store as blockEditorStore } from '@wordpress/block-editor'; 
-
 // Internal
 import Inspector from "./inspector";
 import "./editor.scss";
 import generateSrcSet from "@Utils/generateSrcSet";
+import useIsInsideLoopBuilder from '@Utils/useIsInsideLoopBuilder';
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
@@ -71,6 +70,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicImageFallbackId,
 		dynamicImageEnableLink,
 		dynamicImageLinkSource,
+		loopAutoApplied,
 	} = attributes;
 
 	// block props
@@ -398,32 +398,16 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		};
 
 
-			// Loop Builder Check
-	const parentIds = useSelect(
-		(select) => select(blockEditorStore).getBlockParents(clientId),
-		[clientId]
-	);
-
 	// Loop Builder Check
-	const isInsideLoopBuilder = useSelect((select) => {
-		const editor = select(blockEditorStore);
-		return parentIds.some((pid) => {
-		  const p = editor.getBlock(pid);
-		  return [
-			'frontis-blocks/loop-builder',
-			'frontis-blocks/loop-builder-wrapper',
-			'frontis-blocks/container',
-		  ].includes(p?.name);
-		});
-	}, [parentIds]);
+	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
 	useEffect(() => {
-		if (isInsideLoopBuilder && !dynamicImageEnabled) {  
+		if (isInsideLoopBuilder && !loopAutoApplied) {
 			setAttributes({ dynamicImageEnabled: true });
-			setAttributes({ mediaHeight: { Desktop: "200", Tablet: "200", Mobile: "200" } });
-			setAttributes({ mediaHeightUnits: { Desktop: "px", Tablet: "px", Mobile: "px" } });
-			setAttributes({autoFitSwitch: true});
+			setAttributes({dynamicImageEnableLink: true});
+			setAttributes({dynamicImageLinkSource: 'post_permalink'});
+			setAttributes({loopAutoApplied: true});
 		}
-	}, [isInsideLoopBuilder]);
+	}, [isInsideLoopBuilder, loopAutoApplied]);
 
 	return (
 		<>
