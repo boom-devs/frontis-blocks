@@ -28,7 +28,6 @@ const TemplateContent = ({
     setSavedItems,
     alreadySaved,
     loading,
-    setLoading,
     tagLoading,
     setIsLogedIn,
     setActiveCategory,
@@ -112,10 +111,6 @@ const TemplateContent = ({
             }
             setSearchItems('');
         }
-
-        // setTimeout(() => {
-        //     setLoading(false)
-        // }, 2000)
 
     }, [activeTab, activeCategory, isProTemplate, activeTagTab, TagTabsOptions, schema]);
 
@@ -279,6 +274,7 @@ const TemplateContent = ({
                                         tags={template.tags || []}
                                         categories={template.categories || []}
                                         templateType={activeTab}
+                                        preview_url={template.preview_url || ''}
                                         colors={template.colors || []}
                                         customColors={template.custom_colors || []}
                                         gradientColors={template.color_gradients || []}
@@ -300,7 +296,7 @@ const TemplateContent = ({
                                         setActiveCategory={setActiveCategory}
                                         onSaveLibrary={onSaveLibrary}
                                         saved={template.saved}
-                                        setLoading={template.loading}
+                                        saveLoading={template.saveLoading}
                                         setIsLoginModalOpen={setIsLoginModalOpen}
                                         isLoginModalOpen={isLoginModalOpen}
                                         isProPlugin={isProPlugin}
