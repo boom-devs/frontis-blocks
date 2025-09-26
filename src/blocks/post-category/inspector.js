@@ -11,7 +11,7 @@ import {
 } from "@wordpress/components";
 import Select2 from "react-select";
 import {
-	PREMADE_STYLE,
+	POST_CATEGORY_PREMADE_STYLE,
 	OVERFLOW_OP,
 	SELECTION_TYPE_OPTIONS,
 	ORDER_BY_OPTIONS,
@@ -20,7 +20,7 @@ import {
 	LIST_STYLE_OPTIONS,
 	READ_MORE_ICON_ALIGN,
 	BORDER_STYLES,
-} from '@Constants/fbConstants';
+} from "@Constants/fbConstants";
 import loadGoogleFont from "@Utils/loadGoogleFont";
 import getCustomCss from "@Utils/getCustomCss";
 import { useDeviceType } from "@Config/displayType";
@@ -568,9 +568,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		(select) => {
 			return taxonomyType
 				? select("core").getEntityRecords("taxonomy", taxonomyType, {
-						per_page: 100,
-						hide_empty: false,
-				  })
+					per_page: 100,
+					hide_empty: false,
+				})
 				: [];
 		},
 		[taxonomyType],
@@ -578,9 +578,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const taxonomyOptions = taxonomyItems
 		? taxonomyItems.map((tax) => ({
-				value: tax.id,
-				label: tax.name,
-		  }))
+			value: tax.id,
+			label: tax.name,
+		}))
 		: [];
 
 	const handleIncludeTaxonomiesChange = (options) => {
@@ -2224,76 +2224,164 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const postGlobalMobileBorderRadiusWidth = `${postGlobalBorderRadiusMobile.top}${postGlobalBorderRadiusUnits.Mobile} ${postGlobalBorderRadiusMobile.right}${postGlobalBorderRadiusUnits.Mobile} ${postGlobalBorderRadiusMobile.bottom}${postGlobalBorderRadiusUnits.Mobile} ${postGlobalBorderRadiusMobile.left}${postGlobalBorderRadiusUnits.Mobile}`;
 	/** End Global Border Radius */
 
+
+	// Helper function to calculate inner padding
+	const calculateInnerPadding = (originalValue, unit) => {
+			const calculatedValue = Math.max(10, (originalValue * 10) / 24);
+			return `${calculatedValue}${unit}`;
+	};
+
+	// Calculate inner padding strings
+	const postCategoryInnerPaddingDesktopWidth = `${calculateInnerPadding(postCategoryPaddingDesktop.top, postCategoryPaddingUnits.Desktop)} ${calculateInnerPadding(postCategoryPaddingDesktop.right, postCategoryPaddingUnits.Desktop)} ${calculateInnerPadding(postCategoryPaddingDesktop.bottom, postCategoryPaddingUnits.Desktop)} ${calculateInnerPadding(postCategoryPaddingDesktop.left, postCategoryPaddingUnits.Desktop)}`;
+
+	const postCategoryInnerPaddingTabletWidth = `${calculateInnerPadding(postCategoryPaddingTablet.top, postCategoryPaddingUnits.Tablet)} ${calculateInnerPadding(postCategoryPaddingTablet.right, postCategoryPaddingUnits.Tablet)} ${calculateInnerPadding(postCategoryPaddingTablet.bottom, postCategoryPaddingUnits.Tablet)} ${calculateInnerPadding(postCategoryPaddingTablet.left, postCategoryPaddingUnits.Tablet)}`;
+
+	const postCategoryInnerPaddingMobileWidth = `${calculateInnerPadding(postCategoryPaddingMobile.top, postCategoryPaddingUnits.Mobile)} ${calculateInnerPadding(postCategoryPaddingMobile.right, postCategoryPaddingUnits.Mobile)} ${calculateInnerPadding(postCategoryPaddingMobile.bottom, postCategoryPaddingUnits.Mobile)} ${calculateInnerPadding(postCategoryPaddingMobile.left, postCategoryPaddingUnits.Mobile)}`;
+
 	const allBlockStyle = useMemo(
 		() => `
 
 			/* style-1 specific styles for taxonomy item in grid */
-			
-			/* Style-2 specific styles for image in grid */
-
-			${premadeStyle === 'style-2' && `
-							.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
-								position: relative;
-								min-height: 300px;
-								overflow: hidden;
-							}
+			${premadeStyle === "style-1" ? `
 				
-				` }
+				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
+					padding: 24px;
+					border-radius: 10px;
+				}
+	
+				.${blockId} .fb_post_category_container  .fb-taxonomy-item .fb-taxonomy-link-count{
+						gap: 42px;
+				}
 
-			.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-count{
-				background: hsla(0,0%,100%,.3);	
-				padding: 5px;
-				border-radius: 6px;
+				
+				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
+					font-size: 24px;
+					font-weight: 500;
+				}
+	
+				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
+					margin-top: 42px;
+				}
+
+				` : ''}
+
+			
+
+			/* style-2 specific styles for taxonomy item in grid */
+
+			${premadeStyle === "style-2"
+				? `
+
+				.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item {
+					background: #FFFFFF;
+					${postCategoryBorderRadiusDesktopWidth &&
+						postCategoryBorderRadiusDesktop.top
+						? ""
+						: "border-radius: 20px;"
+					}
+					padding: 10px;
+					padding-bottom: 24px;
+					box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02), 0 0px 6px rgba(0, 0, 0, 0.02);
+				}
+	
+				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta {
+					height: 100%;
+					background: #EBF4FF;
+					padding: 24px;
+						${postCategoryBorderRadiusDesktopWidth &&
+						postCategoryBorderRadiusDesktop.top
+						? ""
+						: "border-radius: 10px;"
+					}
+				}
+
+				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
+					font-size: 32px;
+					font-weight: 600;
+				}
+	
+				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
+					margin-left: 14px;
+					margin-top: 32px;
+				}
+				
+				`
+				: ""
 			}
 
-			.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				z-index: 0;
-			}
+			
+			/* Style-3 specific styles for image in grid */
 
-			.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image:before{
-		  	background: linear-gradient(45deg, rgba(0, 0, 0, .4), transparent);
-				content: "";
-				width: 100%;
-				height: 100%;
-				position: absolute;
-				top: 0;
-				left: 0;
-				z-index: 1;
-			}
+				${premadeStyle === "style-3"
+					? `
 
-			.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				vertical-align: middle;
-				transition: transform 0.4s cubic-bezier(0.33, 0.04, 0.63, 0.99),
-                filter 0.4s ease; /* Slightly longer duration for smoothness */
-			}
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
+						position: relative;
+						min-height: 300px;
+						overflow: hidden;
+					}
+						
 
-			.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item:hover .fb-taxonomy-image img{
-				transform: scale(1.08) translateY(-8px);
-				filter: brightness(1.05);
-			}
+					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-count{
+						background: hsla(0,0%,100%,.3);	
+						padding: 5px;
+						border-radius: 6px;
+					}
 
-			.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link-count,
-			.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta{
-				z-index: 2;
-			}
+					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						z-index: 0;
+					}
 
+					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image:before{
+						background: linear-gradient(45deg, rgba(0, 0, 0, .4), transparent);
+						content: "";
+						width: 100%;
+						height: 100%;
+						position: absolute;
+						top: 0;
+						left: 0;
+						z-index: 1;
+					}
 
+					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						vertical-align: middle;
+						transition: transform 0.4s cubic-bezier(0.33, 0.04, 0.63, 0.99),
+										filter 0.4s ease; /* Slightly longer duration for smoothness */
+					}
+
+					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item:hover .fb-taxonomy-image img{
+						transform: scale(1.08) translateY(-8px);
+						filter: brightness(1.05);
+					}
+
+					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link-count,
+					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta{
+						z-index: 2;
+					}
+
+					`
+					: ""
+				}
 
         /* Common styles */
 
 				.${blockId} .fb_post_category_container  .fb-taxonomy-item .fb-taxonomy-link-count{
 						display: flex;
 						flex-direction: column;
-						gap: 42px;
+						${premadeStyle === 'style-1' ? '' : `
+									gap: 32px;
+								
+							`}
 				}
+
 
 
 				.${blockId} .fb-taxonomy-list .fb-taxonomy-item .fb-taxonomy-link-count {
@@ -2303,10 +2391,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 
 				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
-					font-size: 24px;
 					line-height: 130%;
 					letter-spacing: -2%;
-					font-weight: 500;
 					color: #15171C;
 					margin: 0;
 				}
@@ -2318,7 +2404,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					color: #399cff;
 				}
 
-				.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link:hover{
+				.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link:hover{
 					color: unset;
 				}
 
@@ -2331,14 +2417,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockId} .fb-taxonomy-count {
-						width: 1em;
-						height: 1em;
+						width: fit-content;
+						height: auto;
 						display: flex;
 						justify-content: center;
 						align-items: center;
 						line-height: 24px;
             color: #15171C;
-						background: #DBEFDC;
+						background: #D7E9FF;
 						padding: 6px 14px;
 						border-radius: 50px;
             font-size: 16px;
@@ -2347,7 +2433,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
 				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
-						margin-top: 42px;
 						width: fit-content;		
 						display: inline-flex;
 						align-items: center;
@@ -2451,12 +2536,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
         .${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
+						background: #EBF4FF;
 						display: flex;
 						flex-direction: column;
 						justify-content: space-between;
-            background: #F4FCF5;
-            padding: 24px;
-            border-radius: 10px;
         }
 
 				.${blockId} .fb_post_category_container .fb-taxonomy-item{
@@ -2464,100 +2547,137 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 
 
+				${premadeStyle === 'style-2' ? `
+
+						.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item {					
+						
+								${postCategoryInnerPaddingDesktopWidth && 
+									postCategoryPaddingDesktop.top ? `
+										padding: ${postCategoryInnerPaddingDesktopWidth};
+									` : ""
+								}
+						
+							${postCategoryPaddingDesktopWidth &&
+								postCategoryPaddingDesktop.top
+								? `padding-bottom: ${postCategoryPaddingDesktop.top}${postCategoryPaddingUnits.Desktop};`
+								: ""
+								}
+
+						}				
+
+
+						.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta{
+						
+								${postCategoryNormalBackgroundType === "gradient"
+									? `  
+															${postCategoryNormalCustomGradientSwitcher &&
+										postCategoryNormalCustomGradientInputValue
+										? `background: ${postCategoryNormalCustomGradientInputValue};`
+										: `background: ${postCategoryNormalGradientColor};`
+									}
+													`
+									: `
+															${postCategoryNormalClassicColor
+										? `background: ${postCategoryNormalClassicColor};`
+										: ""
+									}
+													`
+								}
+
+								${postCategoryPaddingDesktopWidth &&
+									postCategoryPaddingDesktop.top
+									? `padding: ${postCategoryPaddingDesktopWidth};`
+									: ""
+								}
+
+								  ${ postCategoryBorderRadiusDesktopWidth && postCategoryBorderRadiusDesktop.top
+											? `border-radius: ${postCategoryBorderRadiusDesktop.top / 2}${postCategoryBorderRadiusUnits.Desktop} ${postCategoryBorderRadiusDesktop.right / 2}${postCategoryBorderRadiusUnits.Desktop} ${postCategoryBorderRadiusDesktop.bottom / 2}${postCategoryBorderRadiusUnits.Desktop} ${postCategoryBorderRadiusDesktop.left / 2}${postCategoryBorderRadiusUnits.Desktop};`
+											: ""
+									}
+
+						}
+					` : ''}
+
 
 
 				  	.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
 
-								${
-									taxonomyHeight.Desktop
-										? `min-height: ${taxonomyHeight.Desktop}${taxonomyHeightUnits.Desktop};`
-										: ""
-								}
+								${taxonomyHeight.Desktop
+				? `min-height: ${taxonomyHeight.Desktop}${taxonomyHeightUnits.Desktop};`
+				: ""
+			}
 
-                ${
-									postCategoryNormalBackgroundType === "gradient"
-										? `  
-                    ${
-											postCategoryNormalCustomGradientSwitcher &&
-											postCategoryNormalCustomGradientInputValue
-												? `background: ${postCategoryNormalCustomGradientInputValue};`
-												: `background: ${postCategoryNormalGradientColor};`
-										}
+                ${postCategoryNormalBackgroundType === "gradient"
+				? `  
+                    ${postCategoryNormalCustomGradientSwitcher &&
+					postCategoryNormalCustomGradientInputValue
+					? `background: ${postCategoryNormalCustomGradientInputValue};`
+					: `background: ${postCategoryNormalGradientColor};`
+				}
                 `
-										: `
-                    ${
-											postCategoryNormalClassicColor
-												? `background: ${postCategoryNormalClassicColor};`
-												: ""
-										}
+				: `
+                    ${postCategoryNormalClassicColor
+					? `background: ${postCategoryNormalClassicColor};`
+					: ""
+				}
                 `
-								}
+			}
 
-								${
-									postCategoryPaddingDesktopWidth &&
-									postCategoryPaddingDesktop.top
-										? `padding: ${postCategoryPaddingDesktopWidth};`
-										: ""
-								}
-								${
-									postCategoryMarginDesktopWidth &&
-									postCategoryMarginDesktop.top
-										? `margin: ${postCategoryMarginDesktopWidth};`
-										: ""
-								}
+								${postCategoryPaddingDesktopWidth &&
+				postCategoryPaddingDesktop.top
+				? `padding: ${postCategoryPaddingDesktopWidth};`
+				: ""
+			}
+								${postCategoryMarginDesktopWidth &&
+				postCategoryMarginDesktop.top
+				? `margin: ${postCategoryMarginDesktopWidth};`
+				: ""
+			}
 
 								${postCategoryBorder ? `border: ${postCategoryBorder};` : ""}
-								${
-									postCategoryBorderDesktopWidth &&
-									postCategoryBorderDesktop.top
-										? `border-width: ${postCategoryBorderDesktopWidth};`
-										: ""
-								}
-								${
-									postCategoryBorderRadiusDesktopWidth &&
-									postCategoryBorderRadiusDesktop.top
-										? `border-radius: ${postCategoryBorderRadiusDesktopWidth};`
-										: ""
-								}
+								${postCategoryBorderDesktopWidth &&
+				postCategoryBorderDesktop.top
+				? `border-width: ${postCategoryBorderDesktopWidth};`
+				: ""
+			}
+								${postCategoryBorderRadiusDesktopWidth &&
+				postCategoryBorderRadiusDesktop.top
+				? `border-radius: ${postCategoryBorderRadiusDesktopWidth};`
+				: ""
+			}
 								${postCategoryBorderColor ? `border-color: ${postCategoryBorderColor};` : ""}
-            		${
-									postCategoryBoxShadowCssValue
-										? `box-shadow: ${postCategoryBoxShadowCssValue};`
-										: ""
-								}
+            		${postCategoryBoxShadowCssValue
+				? `box-shadow: ${postCategoryBoxShadowCssValue};`
+				: ""
+			}
 								
                 transition: background-color 0.3s ease, border-color 0.3s ease;
             }
 
             .${blockId} .fb-taxonomy-grid .fb-taxonomy-item:hover {
-                ${
-									postCategoryHoverBackgroundType === "gradient"
-										? `  
-                    ${
-											postCategoryHoverCustomGradientSwitcher &&
-											postCategoryHoverCustomGradientInputValue
-												? `background: ${postCategoryHoverCustomGradientInputValue};`
-												: `background: ${postCategoryHoverGradientColor};`
-										}
+                ${postCategoryHoverBackgroundType === "gradient"
+				? `  
+                    ${postCategoryHoverCustomGradientSwitcher &&
+					postCategoryHoverCustomGradientInputValue
+					? `background: ${postCategoryHoverCustomGradientInputValue};`
+					: `background: ${postCategoryHoverGradientColor};`
+				}
                 `
-										: `
-                    ${
-											postCategoryHoverClassicColor
-												? `background: ${postCategoryHoverClassicColor};`
-												: ""
-										}
+				: `
+                    ${postCategoryHoverClassicColor
+					? `background: ${postCategoryHoverClassicColor};`
+					: ""
+				}
                 `
-								}
-								${
-									postCategoryBorderHoverColor
-										? `border-color: ${postCategoryBorderHoverColor};`
-										: ""
-								}
-            		${
-									postCategoryBoxShadowHoverCssValue
-										? `box-shadow: ${postCategoryBoxShadowHoverCssValue};`
-										: ""
-								}
+			}
+								${postCategoryBorderHoverColor
+				? `border-color: ${postCategoryBorderHoverColor};`
+				: ""
+			}
+            		${postCategoryBoxShadowHoverCssValue
+				? `box-shadow: ${postCategoryBoxShadowHoverCssValue};`
+				: ""
+			}
             }
 
 
@@ -2567,103 +2687,87 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			
             ${postTitleColor ? `color: ${postTitleColor};` : ""}
 
-            ${
-							postTitleGlobalTypoSwitcher.fontFamily === true &&
-							postTitleGlobalTypographyData.fontFamily
-								? `font-family: ${postTitleGlobalTypographyData.fontFamily};`
-								: ""
-						}
-            ${
-							postTitleGlobalTypoSwitcher.fontSize === true &&
-							postTitleGlobalTypographyData.fontSize
-								? `font-size: ${postTitleGlobalTypographyData.fontSize};`
-								: ""
-						}
-            ${
-							postTitleGlobalTypoSwitcher.fontWeight === true &&
-							postTitleGlobalTypographyData.fontWeight
-								? `font-weight: ${postTitleGlobalTypographyData.fontWeight};`
-								: ""
-						}
-            ${
-							postTitleGlobalTypoSwitcher.fontStyle === true &&
-							postTitleGlobalTypographyData.fontStyle
-								? `font-style: ${postTitleGlobalTypographyData.fontStyle};`
-								: ""
-						}
-            ${
-							postTitleGlobalTypoSwitcher.textTransform === true &&
-							postTitleGlobalTypographyData.textTransform
-								? `text-transform: ${postTitleGlobalTypographyData.textTransform};`
-								: ""
-						}
-            ${
-							postTitleGlobalTypoSwitcher.textDecoration === true &&
-							postTitleGlobalTypographyData.textDecoration
-								? `text-decoration: ${postTitleGlobalTypographyData.textDecoration};`
-								: ""
-						}
-            ${
-							postTitleGlobalTypoSwitcher.letterSpacing === true &&
-							postTitleGlobalTypographyData.letterSpacing
-								? `letter-spacing: ${postTitleGlobalTypographyData.letterSpacing};`
-								: ""
-						}
-            ${
-							postTitleGlobalTypoSwitcher.lineHeight === true &&
-							postTitleGlobalTypographyData.lineHeight
-								? `line-height: ${postTitleGlobalTypographyData.lineHeight};`
-								: ""
-						}
+            ${postTitleGlobalTypoSwitcher.fontFamily === true &&
+				postTitleGlobalTypographyData.fontFamily
+				? `font-family: ${postTitleGlobalTypographyData.fontFamily};`
+				: ""
+			}
+            ${postTitleGlobalTypoSwitcher.fontSize === true &&
+				postTitleGlobalTypographyData.fontSize
+				? `font-size: ${postTitleGlobalTypographyData.fontSize};`
+				: ""
+			}
+            ${postTitleGlobalTypoSwitcher.fontWeight === true &&
+				postTitleGlobalTypographyData.fontWeight
+				? `font-weight: ${postTitleGlobalTypographyData.fontWeight};`
+				: ""
+			}
+            ${postTitleGlobalTypoSwitcher.fontStyle === true &&
+				postTitleGlobalTypographyData.fontStyle
+				? `font-style: ${postTitleGlobalTypographyData.fontStyle};`
+				: ""
+			}
+            ${postTitleGlobalTypoSwitcher.textTransform === true &&
+				postTitleGlobalTypographyData.textTransform
+				? `text-transform: ${postTitleGlobalTypographyData.textTransform};`
+				: ""
+			}
+            ${postTitleGlobalTypoSwitcher.textDecoration === true &&
+				postTitleGlobalTypographyData.textDecoration
+				? `text-decoration: ${postTitleGlobalTypographyData.textDecoration};`
+				: ""
+			}
+            ${postTitleGlobalTypoSwitcher.letterSpacing === true &&
+				postTitleGlobalTypographyData.letterSpacing
+				? `letter-spacing: ${postTitleGlobalTypographyData.letterSpacing};`
+				: ""
+			}
+            ${postTitleGlobalTypoSwitcher.lineHeight === true &&
+				postTitleGlobalTypographyData.lineHeight
+				? `line-height: ${postTitleGlobalTypographyData.lineHeight};`
+				: ""
+			}
 
-						${
-							postTitleGlobalTypoSwitcher.fontFamily === false &&
-							postTitleFontFamily
-								? `font-family: ${postTitleFontFamily};`
-								: ""
-						}
-						${
-							postTitleGlobalTypoSwitcher.fontSize === false &&
-							postTitleFontSize.Desktop
-								? `font-size: ${postTitleFontSize.Desktop}${postTitleFontSizeUnits.Desktop};`
-								: ""
-						}
-						${
-							postTitleGlobalTypoSwitcher.fontWeight === false &&
-							postTitleFontWeight
-								? `font-weight: ${postTitleFontWeight};`
-								: ""
-						}
-						${
-							postTitleGlobalTypoSwitcher.fontStyle === false &&
-							postTitleFontStyle
-								? `font-style: ${postTitleFontStyle};`
-								: ""
-						}
-						${
-							postTitleGlobalTypoSwitcher.textTransform === false &&
-							postTitleTextTransform
-								? `text-transform: ${postTitleTextTransform};`
-								: ""
-						}
-						${
-							postTitleGlobalTypoSwitcher.textDecoration === false &&
-							postTitleTextDecoration
-								? `text-decoration: ${postTitleTextDecoration};`
-								: ""
-						}
-						${
-							postTitleGlobalTypoSwitcher.letterSpacing === false &&
-							postTitleLetterSpacing.Desktop
-								? `letter-spacing: ${postTitleLetterSpacing.Desktop}${postTitleLetterSpacingUnits.Desktop};`
-								: ""
-						}
-						${
-							postTitleGlobalTypoSwitcher.lineHeight === false &&
-							postTitleLineHeight.Desktop
-								? `line-height: ${postTitleLineHeight.Desktop}${postTitleLineHeightUnits.Desktop};`
-								: ""
-						}
+						${postTitleGlobalTypoSwitcher.fontFamily === false &&
+				postTitleFontFamily
+				? `font-family: ${postTitleFontFamily};`
+				: ""
+			}
+						${postTitleGlobalTypoSwitcher.fontSize === false &&
+				postTitleFontSize.Desktop
+				? `font-size: ${postTitleFontSize.Desktop}${postTitleFontSizeUnits.Desktop};`
+				: ""
+			}
+						${postTitleGlobalTypoSwitcher.fontWeight === false &&
+				postTitleFontWeight
+				? `font-weight: ${postTitleFontWeight};`
+				: ""
+			}
+						${postTitleGlobalTypoSwitcher.fontStyle === false &&
+				postTitleFontStyle
+				? `font-style: ${postTitleFontStyle};`
+				: ""
+			}
+						${postTitleGlobalTypoSwitcher.textTransform === false &&
+				postTitleTextTransform
+				? `text-transform: ${postTitleTextTransform};`
+				: ""
+			}
+						${postTitleGlobalTypoSwitcher.textDecoration === false &&
+				postTitleTextDecoration
+				? `text-decoration: ${postTitleTextDecoration};`
+				: ""
+			}
+						${postTitleGlobalTypoSwitcher.letterSpacing === false &&
+				postTitleLetterSpacing.Desktop
+				? `letter-spacing: ${postTitleLetterSpacing.Desktop}${postTitleLetterSpacingUnits.Desktop};`
+				: ""
+			}
+						${postTitleGlobalTypoSwitcher.lineHeight === false &&
+				postTitleLineHeight.Desktop
+				? `line-height: ${postTitleLineHeight.Desktop}${postTitleLineHeightUnits.Desktop};`
+				: ""
+			}
 			}
 
 			
@@ -2676,110 +2780,94 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-description{
 						${postDescriptionColor ? `color: ${postDescriptionColor};` : ""}
 
-            ${
-							postDescriptionGlobalTypoSwitcher.fontFamily === true &&
-							postDescriptionGlobalTypographyData.fontFamily
-								? `font-family: ${postDescriptionGlobalTypographyData.fontFamily};`
-								: ""
-						}
-            ${
-							postDescriptionGlobalTypoSwitcher.fontSize === true &&
-							postDescriptionGlobalTypographyData.fontSize
-								? `font-size: ${postDescriptionGlobalTypographyData.fontSize};`
-								: ""
-						}
-            ${
-							postDescriptionGlobalTypoSwitcher.fontWeight === true &&
-							postDescriptionGlobalTypographyData.fontWeight
-								? `font-weight: ${postDescriptionGlobalTypographyData.fontWeight};`
-								: ""
-						}
-            ${
-							postDescriptionGlobalTypoSwitcher.fontStyle === true &&
-							postDescriptionGlobalTypographyData.fontStyle
-								? `font-style: ${postDescriptionGlobalTypographyData.fontStyle};`
-								: ""
-						}
-            ${
-							postDescriptionGlobalTypoSwitcher.textTransform === true &&
-							postDescriptionGlobalTypographyData.textTransform
-								? `text-transform: ${postDescriptionGlobalTypographyData.textTransform};`
-								: ""
-						}
-            ${
-							postDescriptionGlobalTypoSwitcher.textDecoration === true &&
-							postDescriptionGlobalTypographyData.textDecoration
-								? `text-decoration: ${postDescriptionGlobalTypographyData.textDecoration};`
-								: ""
-						}
-            ${
-							postDescriptionGlobalTypoSwitcher.letterSpacing === true &&
-							postDescriptionGlobalTypographyData.letterSpacing
-								? `letter-spacing: ${postDescriptionGlobalTypographyData.letterSpacing};`
-								: ""
-						}
-            ${
-							postDescriptionGlobalTypoSwitcher.lineHeight === true &&
-							postDescriptionGlobalTypographyData.lineHeight
-								? `line-height: ${postDescriptionGlobalTypographyData.lineHeight};`
-								: ""
-						}
+            ${postDescriptionGlobalTypoSwitcher.fontFamily === true &&
+				postDescriptionGlobalTypographyData.fontFamily
+				? `font-family: ${postDescriptionGlobalTypographyData.fontFamily};`
+				: ""
+			}
+${postDescriptionGlobalTypoSwitcher.fontSize === true &&
+				postDescriptionGlobalTypographyData.fontSize
+				? `font-size: ${postDescriptionGlobalTypographyData.fontSize};`
+				: ""
+			}
+${postDescriptionGlobalTypoSwitcher.fontWeight === true &&
+				postDescriptionGlobalTypographyData.fontWeight
+				? `font-weight: ${postDescriptionGlobalTypographyData.fontWeight};`
+				: ""
+			}
+${postDescriptionGlobalTypoSwitcher.fontStyle === true &&
+				postDescriptionGlobalTypographyData.fontStyle
+				? `font-style: ${postDescriptionGlobalTypographyData.fontStyle};`
+				: ""
+			}
+${postDescriptionGlobalTypoSwitcher.textTransform === true &&
+				postDescriptionGlobalTypographyData.textTransform
+				? `text-transform: ${postDescriptionGlobalTypographyData.textTransform};`
+				: ""
+			}
+${postDescriptionGlobalTypoSwitcher.textDecoration === true &&
+				postDescriptionGlobalTypographyData.textDecoration
+				? `text-decoration: ${postDescriptionGlobalTypographyData.textDecoration};`
+				: ""
+			}
+${postDescriptionGlobalTypoSwitcher.letterSpacing === true &&
+				postDescriptionGlobalTypographyData.letterSpacing
+				? `letter-spacing: ${postDescriptionGlobalTypographyData.letterSpacing};`
+				: ""
+			}
+${postDescriptionGlobalTypoSwitcher.lineHeight === true &&
+				postDescriptionGlobalTypographyData.lineHeight
+				? `line-height: ${postDescriptionGlobalTypographyData.lineHeight};`
+				: ""
+			}
 
-						${
-							postDescriptionGlobalTypoSwitcher.fontFamily === false &&
-							postDescriptionFontFamily
-								? `font-family: ${postDescriptionFontFamily};`
-								: ""
-						}
-						${
-							postDescriptionGlobalTypoSwitcher.fontSize === false &&
-							postDescriptionFontSize.Desktop
-								? `font-size: ${postDescriptionFontSize.Desktop}${postDescriptionFontSizeUnits.Desktop};`
-								: ""
-						}
-						${
-							postDescriptionGlobalTypoSwitcher.fontWeight === false &&
-							postDescriptionFontWeight
-								? `font-weight: ${postDescriptionFontWeight};`
-								: ""
-						}
-						${
-							postDescriptionGlobalTypoSwitcher.fontStyle === false &&
-							postDescriptionFontStyle
-								? `font-style: ${postDescriptionFontStyle};`
-								: ""
-						}
-						${
-							postDescriptionGlobalTypoSwitcher.textTransform === false &&
-							postDescriptionTextTransform
-								? `text-transform: ${postDescriptionTextTransform};`
-								: ""
-						}
-						${
-							postDescriptionGlobalTypoSwitcher.textDecoration === false &&
-							postDescriptionTextDecoration
-								? `text-decoration: ${postDescriptionTextDecoration};`
-								: ""
-						}
-						${
-							postDescriptionGlobalTypoSwitcher.letterSpacing === false &&
-							postDescriptionLetterSpacing.Desktop
-								? `letter-spacing: ${postDescriptionLetterSpacing.Desktop}${postDescriptionLetterSpacingUnits.Desktop};`
-								: ""
-						}
-						${
-							postDescriptionGlobalTypoSwitcher.lineHeight === false &&
-							postDescriptionLineHeight.Desktop
-								? `line-height: ${postDescriptionLineHeight.Desktop}${postDescriptionLineHeightUnits.Desktop};`
-								: ""
-						}				
+${postDescriptionGlobalTypoSwitcher.fontFamily === false &&
+				postDescriptionFontFamily
+				? `font-family: ${postDescriptionFontFamily};`
+				: ""
+			}
+${postDescriptionGlobalTypoSwitcher.fontSize === false &&
+				postDescriptionFontSize.Desktop
+				? `font-size: ${postDescriptionFontSize.Desktop}${postDescriptionFontSizeUnits.Desktop};`
+				: ""
+			}
+${postDescriptionGlobalTypoSwitcher.fontWeight === false &&
+				postDescriptionFontWeight
+				? `font-weight: ${postDescriptionFontWeight};`
+				: ""
+			}
+${postDescriptionGlobalTypoSwitcher.fontStyle === false &&
+				postDescriptionFontStyle
+				? `font-style: ${postDescriptionFontStyle};`
+				: ""
+			}
+${postDescriptionGlobalTypoSwitcher.textTransform === false &&
+				postDescriptionTextTransform
+				? `text-transform: ${postDescriptionTextTransform};`
+				: ""
+			}
+${postDescriptionGlobalTypoSwitcher.textDecoration === false &&
+				postDescriptionTextDecoration
+				? `text-decoration: ${postDescriptionTextDecoration};`
+				: ""
+			}
+${postDescriptionGlobalTypoSwitcher.letterSpacing === false &&
+				postDescriptionLetterSpacing.Desktop
+				? `letter-spacing: ${postDescriptionLetterSpacing.Desktop}${postDescriptionLetterSpacingUnits.Desktop};`
+				: ""
+			}
+${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
+				postDescriptionLineHeight.Desktop
+				? `line-height: ${postDescriptionLineHeight.Desktop}${postDescriptionLineHeightUnits.Desktop};`
+				: ""
+			}
 
 
-						${
-							postDescriptionSpacing.Desktop
-								? `margin-top: ${postDescriptionSpacing.Desktop}${postDescriptionSpacingUnits.Desktop};`
-								: ""
-						}
+
+						${postDescriptionSpacing.Desktop
+				? `margin-top: ${postDescriptionSpacing.Desktop}${postDescriptionSpacingUnits.Desktop};`
+				: ""
+			}
 
 				}
  
@@ -2788,7 +2876,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					}
 
 						.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count {
-							${postCountSpacing.Desktop ? `gap: ${postCountSpacing.Desktop}${postCountSpacingUnits.Desktop};` : ''}
+							${postCountSpacing.Desktop
+				? `gap: ${postCountSpacing.Desktop}${postCountSpacingUnits.Desktop};`
+				: ""
+			}
 						}
 
 
@@ -2796,146 +2887,123 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						
 							${postCountColor ? `color: ${postCountColor};` : ""}
 
-							${
-								postCountGlobalTypoSwitcher.fontFamily === true &&
-								postCountGlobalTypographyData.fontFamily
-									? `font-family: ${postCountGlobalTypographyData.fontFamily};`
-									: ""
-							}
-							${
-								postCountGlobalTypoSwitcher.fontSize === true &&
-								postCountGlobalTypographyData.fontSize
-									? `font-size: ${postCountGlobalTypographyData.fontSize};`
-									: ""
-							}
-							${
-								postCountGlobalTypoSwitcher.fontWeight === true &&
-								postCountGlobalTypographyData.fontWeight
-									? `font-weight: ${postCountGlobalTypographyData.fontWeight};`
-									: ""
-							}
-							${
-								postCountGlobalTypoSwitcher.fontStyle === true &&
-								postCountGlobalTypographyData.fontStyle
-									? `font-style: ${postCountGlobalTypographyData.fontStyle};`
-									: ""
-							}
-							${
-								postCountGlobalTypoSwitcher.textTransform === true &&
-								postCountGlobalTypographyData.textTransform
-									? `text-transform: ${postCountGlobalTypographyData.textTransform};`
-									: ""
-							}
-							${
-								postCountGlobalTypoSwitcher.textDecoration === true &&
-								postCountGlobalTypographyData.textDecoration
-									? `text-decoration: ${posCounteGlobalTypographyData.textDecoration};`
-									: ""
-							}
-							${
-								postCountGlobalTypoSwitcher.letterSpacing === true &&
-								postCountGlobalTypographyData.letterSpacing
-									? `letter-spacing: ${postCountGlobalTypographyData.letterSpacing};`
-									: ""
-							}
-							${
-								postCountGlobalTypoSwitcher.lineHeight === true &&
-								postCountGlobalTypographyData.lineHeight
-									? `line-height: ${postCountGlobalTypographyData.lineHeight};`
-									: ""
-							}
+							${postCountGlobalTypoSwitcher.fontFamily === true &&
+				postCountGlobalTypographyData.fontFamily
+				? `font-family: ${postCountGlobalTypographyData.fontFamily};`
+				: ""
+			}
+							${postCountGlobalTypoSwitcher.fontSize === true &&
+				postCountGlobalTypographyData.fontSize
+				? `font-size: ${postCountGlobalTypographyData.fontSize};`
+				: ""
+			}
+							${postCountGlobalTypoSwitcher.fontWeight === true &&
+				postCountGlobalTypographyData.fontWeight
+				? `font-weight: ${postCountGlobalTypographyData.fontWeight};`
+				: ""
+			}
+							${postCountGlobalTypoSwitcher.fontStyle === true &&
+				postCountGlobalTypographyData.fontStyle
+				? `font-style: ${postCountGlobalTypographyData.fontStyle};`
+				: ""
+			}
+							${postCountGlobalTypoSwitcher.textTransform === true &&
+				postCountGlobalTypographyData.textTransform
+				? `text-transform: ${postCountGlobalTypographyData.textTransform};`
+				: ""
+			}
+							${postCountGlobalTypoSwitcher.textDecoration === true &&
+				postCountGlobalTypographyData.textDecoration
+				? `text-decoration: ${posCounteGlobalTypographyData.textDecoration};`
+				: ""
+			}
+							${postCountGlobalTypoSwitcher.letterSpacing === true &&
+				postCountGlobalTypographyData.letterSpacing
+				? `letter-spacing: ${postCountGlobalTypographyData.letterSpacing};`
+				: ""
+			}
+							${postCountGlobalTypoSwitcher.lineHeight === true &&
+				postCountGlobalTypographyData.lineHeight
+				? `line-height: ${postCountGlobalTypographyData.lineHeight};`
+				: ""
+			}
 
-							${
-								postCountGlobalTypoSwitcher.fontFamily === false &&
-								postCountFontFamily
-									? `font-family: ${postCountFontFamily};`
-									: ""
-							}
-							${
-								postCountGlobalTypoSwitcher.fontSize === false &&
-								postCountFontSize.Desktop
-									? `font-size: ${postCountFontSize.Desktop}${postCountFontSizeUnits.Desktop};`
-									: ""
-							}
-							${
-								postCountGlobalTypoSwitcher.fontWeight === false &&
-								postCountFontWeight
-									? `font-weight: ${postCountFontWeight};`
-									: ""
-							}
-							${
-								postCountGlobalTypoSwitcher.fontStyle === false &&
-								postCountFontStyle
-									? `font-style: ${postCountFontStyle};`
-									: ""
-							}
-							${
-								postCountGlobalTypoSwitcher.textTransform === false &&
-								postCountTextTransform
-									? `text-transform: ${postCountTextTransform};`
-									: ""
-							}
-							${
-								postCountGlobalTypoSwitcher.textDecoration === false &&
-								postCountTextDecoration
-									? `text-decoration: ${postCountTextDecoration};`
-									: ""
-							}
-							${
-								postCountGlobalTypoSwitcher.letterSpacing === false &&
-								postCountLetterSpacing.Desktop
-									? `letter-spacing: ${postCountLetterSpacing.Desktop}${postCountLetterSpacingUnits.Desktop};`
-									: ""
-							}
-							${
-								postCountGlobalTypoSwitcher.lineHeight === false &&
-								postCountLineHeight.Desktop
-									? `line-height: ${postCountLineHeight.Desktop}${postCountLineHeightUnits.Desktop};`
-									: ""
-							}
-							${
-								postCountNormalBackgroundType === "gradient"
-									? `
-									${
-										postCountNormalCustomGradientSwitcher &&
-										postCountNormalCustomGradientInputValue
-											? `background: ${postCountNormalCustomGradientInputValue};`
-											: `background: ${postCountNormalGradientColor};`
-									}
+							${postCountGlobalTypoSwitcher.fontFamily === false &&
+				postCountFontFamily
+				? `font-family: ${postCountFontFamily};`
+				: ""
+			}
+							${postCountGlobalTypoSwitcher.fontSize === false &&
+				postCountFontSize.Desktop
+				? `font-size: ${postCountFontSize.Desktop}${postCountFontSizeUnits.Desktop};`
+				: ""
+			}
+							${postCountGlobalTypoSwitcher.fontWeight === false &&
+				postCountFontWeight
+				? `font-weight: ${postCountFontWeight};`
+				: ""
+			}
+							${postCountGlobalTypoSwitcher.fontStyle === false &&
+				postCountFontStyle
+				? `font-style: ${postCountFontStyle};`
+				: ""
+			}
+							${postCountGlobalTypoSwitcher.textTransform === false &&
+				postCountTextTransform
+				? `text-transform: ${postCountTextTransform};`
+				: ""
+			}
+							${postCountGlobalTypoSwitcher.textDecoration === false &&
+				postCountTextDecoration
+				? `text-decoration: ${postCountTextDecoration};`
+				: ""
+			}
+							${postCountGlobalTypoSwitcher.letterSpacing === false &&
+				postCountLetterSpacing.Desktop
+				? `letter-spacing: ${postCountLetterSpacing.Desktop}${postCountLetterSpacingUnits.Desktop};`
+				: ""
+			}
+							${postCountGlobalTypoSwitcher.lineHeight === false &&
+				postCountLineHeight.Desktop
+				? `line-height: ${postCountLineHeight.Desktop}${postCountLineHeightUnits.Desktop};`
+				: ""
+			}
+							${postCountNormalBackgroundType === "gradient"
+				? `
+									${postCountNormalCustomGradientSwitcher &&
+					postCountNormalCustomGradientInputValue
+					? `background: ${postCountNormalCustomGradientInputValue};`
+					: `background: ${postCountNormalGradientColor};`
+				}
 								`
-									: `
-									${
-										postCountNormalClassicColor
-											? `background: ${postCountNormalClassicColor};`
-											: ""
-									}
+				: `
+									${postCountNormalClassicColor
+					? `background: ${postCountNormalClassicColor};`
+					: ""
+				}
 							`
-							}
+			}
 
-							${
-								postCountPaddingDesktopWidth && postCountPaddingDesktop.top
-									? `padding: ${postCountPaddingDesktopWidth};`
-									: ""
-							}
+							${postCountPaddingDesktopWidth && postCountPaddingDesktop.top
+				? `padding: ${postCountPaddingDesktopWidth};`
+				: ""
+			}
 
 							${postCountBorder ? `border: ${postCountBorder};` : ""}
-							${
-								postCountBorderDesktopWidth && postCountBorderDesktop.top
-									? `border-width: ${postCountBorderDesktopWidth};`
-									: ""
-							}
-							${
-								postCountBorderRadiusDesktopWidth &&
-								postCountBorderRadiusDesktop.top
-									? `border-radius: ${postCountBorderRadiusDesktopWidth};`
-									: ""
-							}
+							${postCountBorderDesktopWidth && postCountBorderDesktop.top
+				? `border-width: ${postCountBorderDesktopWidth};`
+				: ""
+			}
+							${postCountBorderRadiusDesktopWidth &&
+				postCountBorderRadiusDesktop.top
+				? `border-radius: ${postCountBorderRadiusDesktopWidth};`
+				: ""
+			}
 							${postCountBorderColor ? `border-color: ${postCountBorderColor};` : ""}
-            	${
-								postCountBoxShadowCssValue
-									? `box-shadow: ${postCountBoxShadowCssValue};`
-									: ""
-							}
+            	${postCountBoxShadowCssValue
+				? `box-shadow: ${postCountBoxShadowCssValue};`
+				: ""
+			}
 						
 							transition: background-color .3s ease, border-color .3s ease;
 						}
@@ -2943,34 +3011,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						.${blockId} .fb_post_category_container .fb-taxonomy-item:hover .fb-taxonomy-count{
 							${postCountHoverColor ? `color: ${postCountHoverColor};` : ""}
-							${
-								postCountHoverBackgroundType === "gradient"
-									? `  
-							${
-								postCountHoverCustomGradientSwitcher &&
-								postCountHoverCustomGradientInputValue
-									? `background: ${postCountHoverCustomGradientInputValue};`
-									: `background: ${postCountHoverGradientColor};`
-							}
+							${postCountHoverBackgroundType === "gradient"
+				? `  
+							${postCountHoverCustomGradientSwitcher &&
+					postCountHoverCustomGradientInputValue
+					? `background: ${postCountHoverCustomGradientInputValue};`
+					: `background: ${postCountHoverGradientColor};`
+				}
 							`
-									: `
-									${
-										postCountHoverClassicColor
-											? `background: ${postCountHoverClassicColor};`
-											: ""
-									}
+				: `
+									${postCountHoverClassicColor
+					? `background: ${postCountHoverClassicColor};`
+					: ""
+				}
 							`
-							}
-							${
-								postCountBorderHoverColor
-									? `border-color: ${postCountBorderHoverColor};`
-									: ""
-							}
-            	${
-								postCountBoxShadowHoverCssValue
-									? `box-shadow: ${postCountBoxShadowHoverCssValue};`
-									: ""
-							}
+			}
+							${postCountBorderHoverColor
+				? `border-color: ${postCountBorderHoverColor};`
+				: ""
+			}
+            	${postCountBoxShadowHoverCssValue
+				? `box-shadow: ${postCountBoxShadowHoverCssValue};`
+				: ""
+			}
 						}
 
 
@@ -2978,142 +3041,120 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
 
-						${
-							buttonWidth.Desktop && buttonWidthUnits.Desktop
-								? `width: ${buttonWidth.Desktop}${buttonWidthUnits.Desktop};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.fontFamily === true &&
-							buttonGlobalTypographyData.fontFamily
-								? `font-family: ${buttonGlobalTypographyData.fontFamily};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.fontSize === true &&
-							buttonGlobalTypographyData.fontSize
-								? `font-size: ${buttonGlobalTypographyData.fontSize};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.fontWeight === true &&
-							buttonGlobalTypographyData.fontWeight
-								? `font-weight: ${buttonGlobalTypographyData.fontWeight};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.fontStyle === true &&
-							buttonGlobalTypographyData.fontStyle
-								? `font-style: ${buttonGlobalTypographyData.fontStyle};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.textTransform === true &&
-							buttonGlobalTypographyData.textTransform
-								? `text-transform: ${buttonGlobalTypographyData.textTransform};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.textDecoration === true &&
-							buttonGlobalTypographyData.textDecoration
-								? `text-decoration: ${buttonGlobalTypographyData.textDecoration};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.letterSpacing === true &&
-							buttonGlobalTypographyData.letterSpacing
-								? `letter-spacing: ${buttonGlobalTypographyData.letterSpacing};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.lineHeight === true &&
-							buttonGlobalTypographyData.lineHeight
-								? `line-height: ${buttonGlobalTypographyData.lineHeight};`
-								: ""
-						}
+						${buttonWidth.Desktop && buttonWidthUnits.Desktop
+				? `width: ${buttonWidth.Desktop}${buttonWidthUnits.Desktop};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.fontFamily === true &&
+				buttonGlobalTypographyData.fontFamily
+				? `font-family: ${buttonGlobalTypographyData.fontFamily};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.fontSize === true &&
+				buttonGlobalTypographyData.fontSize
+				? `font-size: ${buttonGlobalTypographyData.fontSize};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.fontWeight === true &&
+				buttonGlobalTypographyData.fontWeight
+				? `font-weight: ${buttonGlobalTypographyData.fontWeight};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.fontStyle === true &&
+				buttonGlobalTypographyData.fontStyle
+				? `font-style: ${buttonGlobalTypographyData.fontStyle};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.textTransform === true &&
+				buttonGlobalTypographyData.textTransform
+				? `text-transform: ${buttonGlobalTypographyData.textTransform};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.textDecoration === true &&
+				buttonGlobalTypographyData.textDecoration
+				? `text-decoration: ${buttonGlobalTypographyData.textDecoration};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.letterSpacing === true &&
+				buttonGlobalTypographyData.letterSpacing
+				? `letter-spacing: ${buttonGlobalTypographyData.letterSpacing};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.lineHeight === true &&
+				buttonGlobalTypographyData.lineHeight
+				? `line-height: ${buttonGlobalTypographyData.lineHeight};`
+				: ""
+			}
 						
-						${
-							buttonGlobalTypoSwitcher.fontFamily === false &&
-							buttonFontFamily &&
-							buttonFontFamily !== "Default"
-								? `font-family: ${buttonFontFamily};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.fontSize === false &&
-							buttonFontSize.Desktop &&
-							buttonFontSizeUnits.Desktop
-								? `font-size: ${buttonFontSize.Desktop}${buttonFontSizeUnits.Desktop};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.fontWeight === false && buttonFontWeight
-								? `font-weight: ${buttonFontWeight};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.fontStyle === false && buttonFontStyle
-								? `font-style: ${buttonFontStyle};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.textTransform === false &&
-							buttonTextTransform
-								? `text-transform: ${buttonTextTransform};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.textDecoration === false &&
-							buttonTextDecoration
-								? `text-decoration: ${buttonTextDecoration};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.letterSpacing === false &&
-							buttonLetterSpacing.Desktop &&
-							buttonLetterSpacingUnits.Desktop
-								? `letter-spacing: ${buttonLetterSpacing.Desktop}${buttonLetterSpacingUnits.Desktop};`
-								: ""
-						}
-						${
-							buttonGlobalTypoSwitcher.lineHeight === false &&
-							buttonLineHeight.Desktop &&
-							buttonLineHeightUnits.Desktop
-								? `line-height: ${buttonLineHeight.Desktop}${buttonLineHeightUnits.Desktop};`
-								: ""
-						}
+						${buttonGlobalTypoSwitcher.fontFamily === false &&
+				buttonFontFamily &&
+				buttonFontFamily !== "Default"
+				? `font-family: ${buttonFontFamily};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.fontSize === false &&
+				buttonFontSize.Desktop &&
+				buttonFontSizeUnits.Desktop
+				? `font-size: ${buttonFontSize.Desktop}${buttonFontSizeUnits.Desktop};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.fontWeight === false && buttonFontWeight
+				? `font-weight: ${buttonFontWeight};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.fontStyle === false && buttonFontStyle
+				? `font-style: ${buttonFontStyle};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.textTransform === false &&
+				buttonTextTransform
+				? `text-transform: ${buttonTextTransform};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.textDecoration === false &&
+				buttonTextDecoration
+				? `text-decoration: ${buttonTextDecoration};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.letterSpacing === false &&
+				buttonLetterSpacing.Desktop &&
+				buttonLetterSpacingUnits.Desktop
+				? `letter-spacing: ${buttonLetterSpacing.Desktop}${buttonLetterSpacingUnits.Desktop};`
+				: ""
+			}
+						${buttonGlobalTypoSwitcher.lineHeight === false &&
+				buttonLineHeight.Desktop &&
+				buttonLineHeightUnits.Desktop
+				? `line-height: ${buttonLineHeight.Desktop}${buttonLineHeightUnits.Desktop};`
+				: ""
+			}
 						${buttonBgColor ? `background-color: ${buttonBgColor};` : ""}
 
 						${buttonBorder ? `border: ${buttonBorder};` : ""}
-						${
-							buttonDesktopBorderWidthStr && buttonDesktopBorderWidth?.top
-								? `border-width: ${buttonDesktopBorderWidthStr};`
-								: ""
-						}
-						${
-							buttonDesktopBorderRadiusStr &&
-							buttonDesktopBorderRadiusWidth?.top
-								? `border-radius: ${buttonDesktopBorderRadiusStr};`
-								: ""
-						}
+						${buttonDesktopBorderWidthStr && buttonDesktopBorderWidth?.top
+				? `border-width: ${buttonDesktopBorderWidthStr};`
+				: ""
+			}
+						${buttonDesktopBorderRadiusStr &&
+				buttonDesktopBorderRadiusWidth?.top
+				? `border-radius: ${buttonDesktopBorderRadiusStr};`
+				: ""
+			}
 						${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ""}
 						${buttonBoxShadowCssValue ? `box-shadow: ${buttonBoxShadowCssValue};` : ""} 
-						${
-							buttonDesktopPaddingStr && buttonDesktopPadding?.top
-								? `padding: ${buttonDesktopPaddingStr};`
-								: ""
-						}
-						${
-							buttonDesktopMarginStr && buttonDesktopMargin?.top
-								? `margin: ${buttonDesktopMarginStr};`
-								: ""
-						}
+						${buttonDesktopPaddingStr && buttonDesktopPadding?.top
+				? `padding: ${buttonDesktopPaddingStr};`
+				: ""
+			}
+						${buttonDesktopMarginStr && buttonDesktopMargin?.top
+				? `margin: ${buttonDesktopMarginStr};`
+				: ""
+			}
 
-						${
-							buttonIconGapSize.Desktop
-								? `gap: ${buttonIconGapSize.Desktop}${buttonIconGapUnits.Desktop};`
-								: ""
-						}
+						${buttonIconGapSize.Desktop
+				? `gap: ${buttonIconGapSize.Desktop}${buttonIconGapUnits.Desktop};`
+				: ""
+			}
 						
 						transition: all 0.3s ease;
 					}
@@ -3122,11 +3163,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover{
 						${buttonBgHoverColor ? `background-color: ${buttonBgHoverColor};` : ""}
 						${buttonBorderHoverColor ? `border-color: ${buttonBorderHoverColor};` : ""}
-							${
-								buttonBoxShadowHoverCssValue
-									? `box-shadow: ${buttonBoxShadowHoverCssValue};`
-									: ""
-							}
+							${buttonBoxShadowHoverCssValue
+				? `box-shadow: ${buttonBoxShadowHoverCssValue};`
+				: ""
+			}
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-text{
@@ -3142,88 +3182,76 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						${buttonIconBgColor ? `background-color: ${buttonIconBgColor};` : ""}
 						${buttonIconBorder ? `border: ${buttonIconBorder};` : ""}
 						${buttonIconBorderColor ? `border-color: ${buttonIconBorderColor};` : ""}
-						${
-							buttonIconBorderDesktopWidth !== buttonIconBorderDesktop.top
-								? `border-width: ${buttonIconBorderDesktopWidth};`
-								: ""
-						}
-						${
-							buttonIconBorderRadiusDesktopWidth !==
-							buttonIconBorderRadiusDesktop.top
-								? `border-radius: ${buttonIconBorderRadiusDesktopWidth};`
-								: ""
-						}
-						${
-							buttonIconDesktopPaddingStr && buttonIconDesktopPadding?.top
-								? `padding: ${buttonIconDesktopPaddingStr}`
-								: ""
-						}
+						${buttonIconBorderDesktopWidth !== buttonIconBorderDesktop.top
+				? `border-width: ${buttonIconBorderDesktopWidth};`
+				: ""
+			}
+						${buttonIconBorderRadiusDesktopWidth !==
+				buttonIconBorderRadiusDesktop.top
+				? `border-radius: ${buttonIconBorderRadiusDesktopWidth};`
+				: ""
+			}
+						${buttonIconDesktopPaddingStr && buttonIconDesktopPadding?.top
+				? `padding: ${buttonIconDesktopPaddingStr}`
+				: ""
+			}
 					}
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon-wrapper {
 						${buttonIconBgHoverColor ? `background-color: ${buttonIconBgHoverColor};` : ""}
-						${
-							buttonIconBorderHoverColor
-								? `border-color: ${buttonIconBorderHoverColor};`
-								: ""
-						}
+						${buttonIconBorderHoverColor
+				? `border-color: ${buttonIconBorderHoverColor};`
+				: ""
+			}
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon svg{
-						${
-							buttonIconSize.Desktop && buttonIconSizeUnits.Desktop
-								? `width: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};`
-								: ""
-						}
-						${
-							buttonIconSize.Desktop && buttonIconSizeUnits.Desktop
-								? `height: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};`
-								: ""
-						}
+						${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop
+				? `width: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};`
+				: ""
+			}
+						${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop
+				? `height: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};`
+				: ""
+			}
 						${buttonIconColor ? `fill: ${buttonIconColor};` : ""}
-						${
-							buttonIconRotate.Desktop
-								? `transform: rotate(${buttonIconRotate.Desktop}deg);`
-								: ""
-						}
+						${buttonIconRotate.Desktop
+				? `transform: rotate(${buttonIconRotate.Desktop}deg);`
+				: ""
+			}
 						transition: all .3s ease-in-out;
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon svg{
 						${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ""}
-						${
-							buttonIconRotateHover.Desktop
-								? `transform: rotate(${buttonIconRotateHover.Desktop}deg);`
-								: ""
-						}
+						${buttonIconRotateHover.Desktop
+				? `transform: rotate(${buttonIconRotateHover.Desktop}deg);`
+				: ""
+			}
 					}
 
 
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image{
-							${
-								buttonIconImageWidth
-									? `width: ${buttonIconImageWidth.Desktop}${buttonIconImageWidthUnits.Desktop};`
-									: ""
-							}
-							${
-								buttonIconImageHeight
-									? `height: ${buttonIconImageHeight.Desktop}${buttonIconImageHeightUnits.Desktop};`
-									: ""
-							}
-							${
-								buttonImageRotate.Desktop
-									? `transform: rotate(${buttonImageRotate.Desktop}deg);`
-									: ""
-							}
+							${buttonIconImageWidth
+				? `width: ${buttonIconImageWidth.Desktop}${buttonIconImageWidthUnits.Desktop};`
+				: ""
+			}
+							${buttonIconImageHeight
+				? `height: ${buttonIconImageHeight.Desktop}${buttonIconImageHeightUnits.Desktop};`
+				: ""
+			}
+							${buttonImageRotate.Desktop
+				? `transform: rotate(${buttonImageRotate.Desktop}deg);`
+				: ""
+			}
 							transition: all .3s ease-in-out;
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon-image {
-							${
-								buttonImageRotateHover.Desktop
-									? `transform: rotate(${buttonImageRotateHover.Desktop}deg);`
-									: ""
-							}
+							${buttonImageRotateHover.Desktop
+				? `transform: rotate(${buttonImageRotateHover.Desktop}deg);`
+				: ""
+			}
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image img{
@@ -3235,59 +3263,53 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         /* List Layout Styles - Desktop */
 
         .${blockId} .fb-taxonomy-list {
-            list-style: ${
-							listStyle === "bullet"
-								? "disc"
-								: listStyle === "number"
-								? "decimal"
-								: "none"
-						};
+            list-style: ${listStyle === "bullet"
+				? "disc"
+				: listStyle === "number"
+					? "decimal"
+					: "none"
+			};
 						${listStyle !== "none" ? `padding-left: 20px;` : "padding-left: 0px;"}
             margin: 0;
         }
 
 
 				.${blockId} .fb-taxonomy-list .fb-taxonomy-item[data-parent-id="0"] {
-						${
-							postListItemSpacing.Desktop
-								? `margin-bottom: ${postListItemSpacing.Desktop}${postListItemSpacingUnits.Desktop};`
-								: ""
-						}
+						${postListItemSpacing.Desktop
+				? `margin-bottom: ${postListItemSpacing.Desktop}${postListItemSpacingUnits.Desktop};`
+				: ""
+			}
 				}
 
 				.${blockId} .fb_taxonomy_sublist .fb-taxonomy-item {
-						${
-							postListItemSpacing.Desktop
-								? `margin-top: ${postListItemSpacing.Desktop}${postListItemSpacingUnits.Desktop};`
-								: ""
-						}
+						${postListItemSpacing.Desktop
+				? `margin-top: ${postListItemSpacing.Desktop}${postListItemSpacingUnits.Desktop};`
+				: ""
+			}
 				}
 
 
         .${blockId} .fb-taxonomy-list .fb-taxonomy-item[data-parent-id] {
-						${
-							listIndentation.Desktop
-								? `padding-left: ${listIndentation.Desktop}${listIndentationUnits.Desktop};`
-								: ""
-						}
+						${listIndentation.Desktop
+				? `padding-left: ${listIndentation.Desktop}${listIndentationUnits.Desktop};`
+				: ""
+			}
 						transition: all .3s ease;
         }
 
 
 				.${blockId} .fb-taxonomy-list .fb-taxonomy-item::marker{
 						${postListTypeColor ? `color: ${postListTypeColor};` : ""}
-							 ${
-									postTitleGlobalTypoSwitcher.fontSize === true &&
-									postTitleGlobalTypographyData.fontSize
-										? `font-size: ${postTitleGlobalTypographyData.fontSize};`
-										: ""
-								}
-						${
-							postTitleGlobalTypoSwitcher.fontSize === false &&
-							postTitleFontSize.Desktop
-								? `font-size: ${postTitleFontSize.Desktop}${postTitleFontSizeUnits.Desktop};`
-								: ""
-						}
+							 ${postTitleGlobalTypoSwitcher.fontSize === true &&
+				postTitleGlobalTypographyData.fontSize
+				? `font-size: ${postTitleGlobalTypographyData.fontSize};`
+				: ""
+			}
+						${postTitleGlobalTypoSwitcher.fontSize === false &&
+				postTitleFontSize.Desktop
+				? `font-size: ${postTitleFontSize.Desktop}${postTitleFontSizeUnits.Desktop};`
+				: ""
+			}
 						transition: all .3s ease-in-out;
 				}
 
@@ -3296,17 +3318,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 
 				.${blockId} .fb-taxonomy-list .fb-taxonomy-item .fb-tax-separator{
-						${
-							separatorWidth.Desktop && separatorWidthUnits.Desktop
-								? `width: ${separatorWidth.Desktop}${separatorWidthUnits.Desktop};`
-								: ""
-						}
+						${separatorWidth.Desktop && separatorWidthUnits.Desktop
+				? `width: ${separatorWidth.Desktop}${separatorWidthUnits.Desktop};`
+				: ""
+			}
 						${separatorStyle ? `border-top-style: ${separatorStyle};` : ""}
-						${
-							separatorThickness.Desktop && separatorThicknessUnits.Desktop
-								? `border-top-width: ${separatorThickness.Desktop}${separatorThicknessUnits.Desktop};`
-								: ""
-						}
+						${separatorThickness.Desktop && separatorThicknessUnits.Desktop
+				? `border-top-width: ${separatorThickness.Desktop}${separatorThicknessUnits.Desktop};`
+				: ""
+			}
 						${separatorColor ? `border-color: ${separatorColor};` : ""}
 
 						transition: all .3s ease;
@@ -3320,49 +3340,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				/* Advance Control Global Style */
 				.${blockId}.fb-post-category-area {
 			   ${postCategoryPositionType === "default" ? `position: relative;` : ""}
-            ${
-							postCategoryPositionType !== "default" &&
-							postCategoryPositionType !== "relative"
-								? `width: 100%;`
-								: ""
-						}
-            ${
-							postCategoryPositionType !== "default"
-								? `position: ${postCategoryPositionType};`
-								: ""
-						}
-            ${
-							postCategoryPositionType !== "default" &&
-							postCategoryPositionType !== "relative" &&
-							postCategoryHZOrientationType === "left" &&
-							postCategoryHZLeftOffset.Desktop !== undefined
-								? `left: ${postCategoryHZLeftOffset.Desktop}${postCategoryHZLeftOffsetUnits.Desktop};`
-								: ""
-						}
-            ${
-							postCategoryPositionType !== "default" &&
-							postCategoryPositionType !== "relative" &&
-							postCategoryHZOrientationType === "right" &&
-							postCategoryHZRightOffset.Desktop !== undefined
-								? `right: ${postCategoryHZRightOffset.Desktop}${postCategoryHZRightOffsetUnits.Desktop};`
-								: ""
-						}
-            ${
-							postCategoryPositionType !== "default" &&
-							postCategoryPositionType !== "relative" &&
-							postCategoryVROrientationType === "top" &&
-							postCategoryVRTopOffset.Desktop !== undefined
-								? `top: ${postCategoryVRTopOffset.Desktop}${postCategoryVRTopOffsetUnits.Desktop};`
-								: ""
-						}
-            ${
-							postCategoryPositionType !== "default" &&
-							postCategoryPositionType !== "relative" &&
-							postCategoryVROrientationType === "bottom" &&
-							postCategoryVRBottomOffset.Desktop !== undefined
-								? `bottom: ${postCategoryVRBottomOffset.Desktop}${postCategoryVRBottomOffsetUnits.Desktop};`
-								: ""
-						}
+            ${postCategoryPositionType !== "default" &&
+				postCategoryPositionType !== "relative"
+				? `width: 100%;`
+				: ""
+			}
+            ${postCategoryPositionType !== "default"
+				? `position: ${postCategoryPositionType};`
+				: ""
+			}
+            ${postCategoryPositionType !== "default" &&
+				postCategoryPositionType !== "relative" &&
+				postCategoryHZOrientationType === "left" &&
+				postCategoryHZLeftOffset.Desktop !== undefined
+				? `left: ${postCategoryHZLeftOffset.Desktop}${postCategoryHZLeftOffsetUnits.Desktop};`
+				: ""
+			}
+            ${postCategoryPositionType !== "default" &&
+				postCategoryPositionType !== "relative" &&
+				postCategoryHZOrientationType === "right" &&
+				postCategoryHZRightOffset.Desktop !== undefined
+				? `right: ${postCategoryHZRightOffset.Desktop}${postCategoryHZRightOffsetUnits.Desktop};`
+				: ""
+			}
+            ${postCategoryPositionType !== "default" &&
+				postCategoryPositionType !== "relative" &&
+				postCategoryVROrientationType === "top" &&
+				postCategoryVRTopOffset.Desktop !== undefined
+				? `top: ${postCategoryVRTopOffset.Desktop}${postCategoryVRTopOffsetUnits.Desktop};`
+				: ""
+			}
+            ${postCategoryPositionType !== "default" &&
+				postCategoryPositionType !== "relative" &&
+				postCategoryVROrientationType === "bottom" &&
+				postCategoryVRBottomOffset.Desktop !== undefined
+				? `bottom: ${postCategoryVRBottomOffset.Desktop}${postCategoryVRBottomOffsetUnits.Desktop};`
+				: ""
+			}
 
 
 					${postGlobalZIndex.Desktop ? `z-index: ${postGlobalZIndex.Desktop};` : ""}
@@ -3371,96 +3385,81 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 
 				.${blockId}.fb-post-category-area  {
-						${
-							postGlobalDesktopPaddingWidth && postGlobalPaddingDesktop.top
-								? `padding: ${postGlobalDesktopPaddingWidth};`
-								: ""
-						}
-						${
-							postGlobalDesktopMarginWidth && postGlobalMarginDesktop.top
-								? `margin: ${postGlobalDesktopMarginWidth};`
-								: ""
-						}
+						${postGlobalDesktopPaddingWidth && postGlobalPaddingDesktop.top
+				? `padding: ${postGlobalDesktopPaddingWidth};`
+				: ""
+			}
+						${postGlobalDesktopMarginWidth && postGlobalMarginDesktop.top
+				? `margin: ${postGlobalDesktopMarginWidth};`
+				: ""
+			}
 
 						${postGlobalBorder ? `border: ${postGlobalBorder};` : ""} 
-            ${
-							postGlobalDesktopBorderWidth && postGlobalBorderDesktop.top
-								? `border-width: ${postGlobalDesktopBorderWidth};`
-								: ""
-						}
-            ${
-							postGlobalDesktopBorderRadiusWidth &&
-							postGlobalBorderRadiusDesktop.top
-								? `border-radius: ${postGlobalDesktopBorderRadiusWidth}!important;`
-								: ""
-						}
-            ${
-							postGlobalBorderColor
-								? `border-color: ${postGlobalBorderColor};`
-								: ""
-						}
-            ${
-							postGlobalBoxShadowCssValue
-								? `box-shadow: ${postGlobalBoxShadowCssValue};`
-								: ""
-						}
-						${
-							postGlobalNormalBackgroundType === "gradient"
-								? `  
-                ${
-									postGlobalNormalCustomGradientSwitcher &&
-									postGlobalNormalCustomGradientInputValue
-										? `background: ${postGlobalNormalCustomGradientInputValue};`
-										: `background: ${postGlobalNormalGradientColor};`
-								}
+            ${postGlobalDesktopBorderWidth && postGlobalBorderDesktop.top
+				? `border-width: ${postGlobalDesktopBorderWidth};`
+				: ""
+			}
+            ${postGlobalDesktopBorderRadiusWidth &&
+				postGlobalBorderRadiusDesktop.top
+				? `border-radius: ${postGlobalDesktopBorderRadiusWidth}!important;`
+				: ""
+			}
+            ${postGlobalBorderColor
+				? `border-color: ${postGlobalBorderColor};`
+				: ""
+			}
+            ${postGlobalBoxShadowCssValue
+				? `box-shadow: ${postGlobalBoxShadowCssValue};`
+				: ""
+			}
+						${postGlobalNormalBackgroundType === "gradient"
+				? `  
+                ${postGlobalNormalCustomGradientSwitcher &&
+					postGlobalNormalCustomGradientInputValue
+					? `background: ${postGlobalNormalCustomGradientInputValue};`
+					: `background: ${postGlobalNormalGradientColor};`
+				}
             `
-								: `
-                ${
-									postGlobalNormalClassicColor
-										? `background: ${postGlobalNormalClassicColor};`
-										: ""
-								}
+				: `
+                ${postGlobalNormalClassicColor
+					? `background: ${postGlobalNormalClassicColor};`
+					: ""
+				}
             `
-						}
+			}
 
-						${
-							postCategoryOverflow !== "default"
-								? `overflow: ${postCategoryOverflow};`
-								: ""
-						}
+						${postCategoryOverflow !== "default"
+				? `overflow: ${postCategoryOverflow};`
+				: ""
+			}
 
 						transition: all 0.3s ease-in-out;
 				}
 
 				.${blockId}.fb-post-category-area:hover {
-						  ${
-								postGlobalHoverBackgroundType === "gradient"
-									? `  
-                ${
-									postGlobalHoverCustomGradientSwitcher &&
-									postGlobalHoverCustomGradientInputValue
-										? `background: ${postGlobalHoverCustomGradientInputValue};`
-										: `background: ${postGlobalHoverGradientColor};`
-								}
+						  ${postGlobalHoverBackgroundType === "gradient"
+				? `  
+                ${postGlobalHoverCustomGradientSwitcher &&
+					postGlobalHoverCustomGradientInputValue
+					? `background: ${postGlobalHoverCustomGradientInputValue};`
+					: `background: ${postGlobalHoverGradientColor};`
+				}
             `
-									: `
-                ${
-									postGlobalHoverClassicColor
-										? `background: ${postGlobalHoverClassicColor};`
-										: ""
-								}
-								  ${
-										postGlobalBorderHoverColor
-											? `border-color: ${postGlobalBorderHoverColor};`
-											: ""
-									}
-                ${
-									postGlobalBoxShadowHoverCssValue
-										? `box-shadow: ${postGlobalBoxShadowHoverCssValue};`
-										: ""
-								}
+				: `
+                ${postGlobalHoverClassicColor
+					? `background: ${postGlobalHoverClassicColor};`
+					: ""
+				}
+								  ${postGlobalBorderHoverColor
+					? `border-color: ${postGlobalBorderHoverColor};`
+					: ""
+				}
+                ${postGlobalBoxShadowHoverCssValue
+					? `box-shadow: ${postGlobalBoxShadowHoverCssValue};`
+					: ""
+				}
             `
-							}
+			}
 				}
 
 
@@ -3478,371 +3477,356 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
 
-								${
-									taxonomyHeight.Tablet
-										? `min-height: ${taxonomyHeight.Tablet}${taxonomyHeightUnits.Tablet};`
-										: ""
+								${taxonomyHeight.Tablet
+									? `min-height: ${taxonomyHeight.Tablet}${taxonomyHeightUnits.Tablet};`
+									: ""
 								}
-							
-							 ${
-									postCategoryPaddingTabletWidth &&
+							 ${postCategoryPaddingTabletWidth &&
 									postCategoryPaddingTablet.top
-										? `padding: ${postCategoryPaddingTabletWidth};`
-										: ""
+									? `padding: ${postCategoryPaddingTabletWidth};`
+									: ""
 								}
-                ${
-									postCategoryMarginTabletWidth && postCategoryMarginTablet.top
-										? `margin: ${postCategoryMarginTabletWidth};`
-										: ""
-								}
-  
-                ${
-									postCategoryBorderTabletWidth && postCategoryBorderTablet.top
-										? `border-width: ${postCategoryBorderTabletWidth};`
-										: ""
-								}
-                ${
-									postCategoryBorderRadiusTabletWidth &&
-									postCategoryBorderRadiusTablet.top
-										? `border-radius: ${postCategoryBorderRadiusTabletWidth};`
-										: ""
+													${postCategoryMarginTabletWidth && postCategoryMarginTablet.top
+									? `margin: ${postCategoryMarginTabletWidth};`
+									: ""
 								}
 						
+													${postCategoryBorderTabletWidth && postCategoryBorderTablet.top
+									? `border-width: ${postCategoryBorderTabletWidth};`
+									: ""
+								}
+													${postCategoryBorderRadiusTabletWidth &&
+									postCategoryBorderRadiusTablet.top
+									? `border-radius: ${postCategoryBorderRadiusTabletWidth};`
+									: ""
+								}
+											
 						}
+
+
+						${premadeStyle === 'style-2' ? `
+
+								.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item {			
+
+																${postCategoryInnerPaddingTabletWidth && 
+									postCategoryPaddingTablet.top ? `
+										padding: ${postCategoryInnerPaddingTabletWidth};
+									` : ""
+								}
+								
+									${postCategoryPaddingTabletWidth &&
+										postCategoryPaddingTablet.top
+										? `padding-bottom: ${postCategoryPaddingTablet.top}${postCategoryPaddingUnits.Tablet};`
+										: ""
+										}
+								}
+
+								.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta{
+
+										${postCategoryPaddingTabletWidth &&
+											postCategoryPaddingTablet.top
+											? `padding: ${postCategoryPaddingTabletWidth};`
+											: ""
+										}
+
+										 ${ postCategoryBorderRadiusTabletWidth &&
+											 postCategoryBorderRadiusTablet.top
+												? `border-radius: ${postCategoryBorderRadiusTablet.top / 2}${postCategoryBorderRadiusUnits.Tablet} ${postCategoryBorderRadiusTablet.right / 2}${postCategoryBorderRadiusUnits.Tablet} ${postCategoryBorderRadiusTablet.bottom / 2}${postCategoryBorderRadiusUnits.Tablet} ${postCategoryBorderRadiusTablet.left / 2}${postCategoryBorderRadiusUnits.Tablet};`
+												: ""
+										}
+
+								}
+							` : ''}						
 
 
 
 						.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name {
-							  ${
-									postTitleGlobalTypoSwitcher.fontSize === false &&
-									postTitleFontSize.Tablet
-										? `font-size: ${postTitleFontSize.Tablet}${postTitleFontSizeUnits.Tablet};`
-										: ""
-								}
-                ${
-									postTitleGlobalTypoSwitcher.letterSpacing === false &&
-									postTitleLetterSpacing.Tablet
-										? `letter-spacing: ${postTitleLetterSpacing.Tablet}${postTitleLetterSpacingUnits.Tablet};`
-										: ""
-								}
-                ${
-									postTitleGlobalTypoSwitcher.lineHeight === false &&
-									postTitleLineHeight.Tablet
-										? `line-height: ${postTitleLineHeight.Tablet}${postTitleLineHeightUnits.Tablet};`
-										: ""
-								}
+							  ${postTitleGlobalTypoSwitcher.fontSize === false &&
+				postTitleFontSize.Tablet
+				? `font-size: ${postTitleFontSize.Tablet}${postTitleFontSizeUnits.Tablet};`
+				: ""
+			}
+                ${postTitleGlobalTypoSwitcher.letterSpacing === false &&
+				postTitleLetterSpacing.Tablet
+				? `letter-spacing: ${postTitleLetterSpacing.Tablet}${postTitleLetterSpacingUnits.Tablet};`
+				: ""
+			}
+                ${postTitleGlobalTypoSwitcher.lineHeight === false &&
+				postTitleLineHeight.Tablet
+				? `line-height: ${postTitleLineHeight.Tablet}${postTitleLineHeightUnits.Tablet};`
+				: ""
+			}
 						}
 
 
 						.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-description{
-								 ${
-										postDescriptionGlobalTypoSwitcher.fontSize === false &&
-										postDescriptionFontSize.Tablet
-											? `font-size: ${postDescriptionFontSize.Tablet}${postDescriptionFontSizeUnits.Tablet};`
-											: ""
-									}
-                ${
-									postDescriptionGlobalTypoSwitcher.letterSpacing === false &&
-									postDescriptionLetterSpacing.Tablet
-										? `letter-spacing: ${postDescriptionLetterSpacing.Tablet}${postDescriptionLetterSpacingUnits.Tablet};`
-										: ""
-								}
-                ${
-									postDescriptionGlobalTypoSwitcher.lineHeight === false &&
-									postDescriptionLineHeight.Tablet
-										? `line-height: ${postDescriptionLineHeight.Tablet}${postDescriptionLineHeightUnits.Tablet};`
-										: ""
-								}
+								 ${postDescriptionGlobalTypoSwitcher.fontSize === false &&
+				postDescriptionFontSize.Tablet
+				? `font-size: ${postDescriptionFontSize.Tablet}${postDescriptionFontSizeUnits.Tablet};`
+				: ""
+			}
+                ${postDescriptionGlobalTypoSwitcher.letterSpacing === false &&
+				postDescriptionLetterSpacing.Tablet
+				? `letter-spacing: ${postDescriptionLetterSpacing.Tablet}${postDescriptionLetterSpacingUnits.Tablet};`
+				: ""
+			}
+                ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
+				postDescriptionLineHeight.Tablet
+				? `line-height: ${postDescriptionLineHeight.Tablet}${postDescriptionLineHeightUnits.Tablet};`
+				: ""
+			}
 
-								${
-									postDescriptionSpacing.Tablet
-										? `margin-top: ${postDescriptionSpacing.Tablet}${postDescriptionSpacingUnits.Tablet};`
-										: ""
-								}
+								${postDescriptionSpacing.Tablet
+				? `margin-top: ${postDescriptionSpacing.Tablet}${postDescriptionSpacingUnits.Tablet};`
+				: ""
+			}
 						}
 
 						.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count {
-							${postCountSpacing.Tablet ? `gap: ${postCountSpacing.Tablet}${postCountSpacingUnits.Tablet};` : ''}
+							${postCountSpacing.Tablet
+				? `gap: ${postCountSpacing.Tablet}${postCountSpacingUnits.Tablet};`
+				: ""
+			}
 						}
 
 
 						.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count .fb-taxonomy-count{
-							 ${
-									postCountGlobalTypoSwitcher.fontSize === false &&
-									postCountFontSize.Tablet
-										? `font-size: ${postCountFontSize.Tablet}${postCountFontSizeUnits.Tablet};`
-										: ""
-								}
-                ${
-									postCountGlobalTypoSwitcher.letterSpacing === false &&
-									postCountLetterSpacing.Tablet
-										? `letter-spacing: ${postCountLetterSpacing.Tablet}${postCountLetterSpacingUnits.Tablet};`
-										: ""
-								}
-                ${
-									postCountGlobalTypoSwitcher.lineHeight === false &&
-									postCountLineHeight.Tablet
-										? `line-height: ${postCountLineHeight.Tablet}${postCountLineHeightUnits.Tablet};`
-										: ""
-								}
+							 ${postCountGlobalTypoSwitcher.fontSize === false &&
+				postCountFontSize.Tablet
+				? `font-size: ${postCountFontSize.Tablet}${postCountFontSizeUnits.Tablet};`
+				: ""
+			}
+                ${postCountGlobalTypoSwitcher.letterSpacing === false &&
+				postCountLetterSpacing.Tablet
+				? `letter-spacing: ${postCountLetterSpacing.Tablet}${postCountLetterSpacingUnits.Tablet};`
+				: ""
+			}
+                ${postCountGlobalTypoSwitcher.lineHeight === false &&
+				postCountLineHeight.Tablet
+				? `line-height: ${postCountLineHeight.Tablet}${postCountLineHeightUnits.Tablet};`
+				: ""
+			}
 
-								${
-									postCountPaddingTabletWidth && postCountPaddingTablet.top
-										? `padding: ${postCountPaddingTabletWidth};`
-										: ""
-								}
-								 ${
-										postCountBorderTabletWidth && postCountBorderTablet.top
-											? `border-width: ${postCountBorderTabletWidth};`
-											: ""
-									}
-                ${
-									postCountBorderRadiusTabletWidth &&
-									postCountBorderRadiusTablet.top
-										? `border-radius: ${postCountBorderRadiusTabletWidth};`
-										: ""
-								}
+								${postCountPaddingTabletWidth && postCountPaddingTablet.top
+				? `padding: ${postCountPaddingTabletWidth};`
+				: ""
+			}
+								 ${postCountBorderTabletWidth && postCountBorderTablet.top
+				? `border-width: ${postCountBorderTabletWidth};`
+				: ""
+			}
+                ${postCountBorderRadiusTabletWidth &&
+				postCountBorderRadiusTablet.top
+				? `border-radius: ${postCountBorderRadiusTabletWidth};`
+				: ""
+			}
 						}
 					
 
 
 						.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
-								${
-									buttonWidth.Tablet && buttonWidthUnits.Tablet
-										? `width: ${buttonWidth.Tablet}${buttonWidthUnits.Tablet};`
-										: ""
-								}
-								${
-									buttonGlobalTypoSwitcher.fontSize === false &&
-									buttonFontSize.Tablet &&
-									buttonFontSizeUnits.Tablet
-										? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};`
-										: ""
-								}
-                ${
-									buttonGlobalTypoSwitcher.letterSpacing === false &&
-									buttonLetterSpacing.Tablet &&
-									buttonLetterSpacingUnits.Tablet
-										? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};`
-										: ""
-								}
-                ${
-									buttonGlobalTypoSwitcher.lineHeight === false &&
-									buttonLineHeight.Tablet &&
-									buttonLineHeightUnits.Tablet
-										? `line-height: ${buttonLineHeight.Tablet}${buttonLineHeightUnits.Tablet};`
-										: ""
-								}
-								    ${
-											buttonTabletBorderWidthStr && buttonTabBorderWidth?.top
-												? `border-width: ${buttonTabletBorderWidthStr};`
-												: ""
-										}
-                ${
-									buttonTabletBorderRadiusStr && buttonTabBorderRadiusWidth?.top
-										? `border-radius: ${buttonTabletBorderRadiusStr};`
-										: ""
-								}
-								   ${
-											buttonTabletPaddingStr && buttonTabPadding?.top
-												? `padding: ${buttonTabletPaddingStr};`
-												: ""
-										}  
-                ${
-									buttonTabletMarginStr && buttonTabMargin?.top
-										? `margin: ${buttonTabletMarginStr};`
-										: ""
-								} 
+								${buttonWidth.Tablet && buttonWidthUnits.Tablet
+				? `width: ${buttonWidth.Tablet}${buttonWidthUnits.Tablet};`
+				: ""
+			}
+								${buttonGlobalTypoSwitcher.fontSize === false &&
+				buttonFontSize.Tablet &&
+				buttonFontSizeUnits.Tablet
+				? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};`
+				: ""
+			}
+                ${buttonGlobalTypoSwitcher.letterSpacing === false &&
+				buttonLetterSpacing.Tablet &&
+				buttonLetterSpacingUnits.Tablet
+				? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};`
+				: ""
+			}
+                ${buttonGlobalTypoSwitcher.lineHeight === false &&
+				buttonLineHeight.Tablet &&
+				buttonLineHeightUnits.Tablet
+				? `line-height: ${buttonLineHeight.Tablet}${buttonLineHeightUnits.Tablet};`
+				: ""
+			}
+								    ${buttonTabletBorderWidthStr && buttonTabBorderWidth?.top
+				? `border-width: ${buttonTabletBorderWidthStr};`
+				: ""
+			}
+                ${buttonTabletBorderRadiusStr && buttonTabBorderRadiusWidth?.top
+				? `border-radius: ${buttonTabletBorderRadiusStr};`
+				: ""
+			}
+								   ${buttonTabletPaddingStr && buttonTabPadding?.top
+				? `padding: ${buttonTabletPaddingStr};`
+				: ""
+			}  
+                ${buttonTabletMarginStr && buttonTabMargin?.top
+				? `margin: ${buttonTabletMarginStr};`
+				: ""
+			} 
 
-								${
-									buttonIconGapSize.Tablet
-										? `gap: ${buttonIconGapSize.Tablet}${buttonIconGapUnits.Tablet};`
-										: ""
-								}
+								${buttonIconGapSize.Tablet
+				? `gap: ${buttonIconGapSize.Tablet}${buttonIconGapUnits.Tablet};`
+				: ""
+			}
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon{
-							  ${
-									buttonIconBorderTabletWidth !== buttonIconBorderTablet.top
-										? `border-width: ${buttonIconBorderTabletWidth};`
-										: ""
-								}
-                ${
-									buttonIconBorderRadiusTabletWidth !==
-									buttonIconBorderRadiusTablet.top
-										? `border-radius: ${buttonIconBorderRadiusTabletWidth};`
-										: ""
-								}
+							  ${buttonIconBorderTabletWidth !== buttonIconBorderTablet.top
+				? `border-width: ${buttonIconBorderTabletWidth};`
+				: ""
+			}
+                ${buttonIconBorderRadiusTabletWidth !==
+				buttonIconBorderRadiusTablet.top
+				? `border-radius: ${buttonIconBorderRadiusTabletWidth};`
+				: ""
+			}
 
-								${
-									buttonIconTabletPaddingStr && buttonIconTabPadding?.top
-										? `padding: ${buttonIconTabletPaddingStr};`
-										: ""
-								}
+								${buttonIconTabletPaddingStr && buttonIconTabPadding?.top
+				? `padding: ${buttonIconTabletPaddingStr};`
+				: ""
+			}
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon svg{
-							   ${
-										buttonIconSize.Tablet && buttonIconSizeUnits.Tablet
-											? `width: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};`
-											: ""
-									}
-                ${
-									buttonIconSize.Tablet && buttonIconSizeUnits.Tablet
-										? `height: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};`
-										: ""
-								}
-								${
-									buttonIconRotate.Tablet
-										? `transform: rotate(${buttonIconRotate.Tablet}deg);`
-										: ""
-								}
+							   ${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet
+				? `width: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};`
+				: ""
+			}
+                ${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet
+				? `height: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};`
+				: ""
+			}
+								${buttonIconRotate.Tablet
+				? `transform: rotate(${buttonIconRotate.Tablet}deg);`
+				: ""
+			}
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon svg{
-								${
-									buttonIconRotateHover.Tablet
-										? `transform: rotate(${buttonIconRotateHover.Tablet}deg);`
-										: ""
-								}
+								${buttonIconRotateHover.Tablet
+				? `transform: rotate(${buttonIconRotateHover.Tablet}deg);`
+				: ""
+			}
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image{
-								  ${
-										buttonIconImageWidth
-											? `width: ${buttonIconImageWidth.Tablet}${buttonIconImageWidthUnits.Tablet};`
-											: ""
-									}
-                ${
-									buttonIconImageHeight
-										? `height: ${buttonIconImageHeight.Tablet}${buttonIconImageHeightUnits.Tablet};`
-										: ""
-								}
-								${
-									buttonImageRotate.Tablet
-										? `transform: rotate(${buttonImageRotate.Tablet}deg);`
-										: ""
-								}
+								  ${buttonIconImageWidth
+				? `width: ${buttonIconImageWidth.Tablet}${buttonIconImageWidthUnits.Tablet};`
+				: ""
+			}
+                ${buttonIconImageHeight
+				? `height: ${buttonIconImageHeight.Tablet}${buttonIconImageHeightUnits.Tablet};`
+				: ""
+			}
+								${buttonImageRotate.Tablet
+				? `transform: rotate(${buttonImageRotate.Tablet}deg);`
+				: ""
+			}
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon-image{
-						${
-							buttonImageRotateHover.Tablet
-								? `transform: rotate(${buttonImageRotateHover.Tablet}deg);`
-								: ""
-						}
+						${buttonImageRotateHover.Tablet
+				? `transform: rotate(${buttonImageRotateHover.Tablet}deg);`
+				: ""
+			}
 					}
 
 
 					/* List Layout Styles - Tablet */
 						.${blockId} .fb-taxonomy-list .fb-taxonomy-item::marker{
-								${
-									postTitleGlobalTypoSwitcher.fontSize === false &&
-									postTitleFontSize.Tablet
-										? `font-size: ${postTitleFontSize.Tablet}${postTitleFontSizeUnits.Tablet};`
-										: ""
-								}
+								${postTitleGlobalTypoSwitcher.fontSize === false &&
+				postTitleFontSize.Tablet
+				? `font-size: ${postTitleFontSize.Tablet}${postTitleFontSizeUnits.Tablet};`
+				: ""
+			}
 						}
 
 
 				.${blockId} .fb-taxonomy-list .fb-taxonomy-item[data-parent-id="0"] {
-					${
-						postListItemSpacing.Tablet
-							? `margin-bottom: ${postListItemSpacing.Tablet}${postListItemSpacingUnits.Tablet};`
-							: ""
-					}
+					${postListItemSpacing.Tablet
+				? `margin-bottom: ${postListItemSpacing.Tablet}${postListItemSpacingUnits.Tablet};`
+				: ""
+			}
 				}
 
 				.${blockId} .fb_taxonomy_sublist .fb-taxonomy-item{
-					${
-						postListItemSpacing.Tablet
-							? `margin-top: ${postListItemSpacing.Tablet}${postListItemSpacingUnits.Tablet}`
-							: ""
-					}
+					${postListItemSpacing.Tablet
+				? `margin-top: ${postListItemSpacing.Tablet}${postListItemSpacingUnits.Tablet}`
+				: ""
+			}
 				}
 
 					.${blockId} .fb-taxonomy-list .fb-taxonomy-item[data-parent-id] {
-								${
-									listIndentation.Tablet
-										? `padding-left: ${listIndentation.Tablet}${listIndentationUnits.Tablet};`
-										: ""
-								}
+								${listIndentation.Tablet
+				? `padding-left: ${listIndentation.Tablet}${listIndentationUnits.Tablet};`
+				: ""
+			}
             }
 
 					.${blockId} .fb-taxonomy-list .fb-taxonomy-item .fb-tax-separator{
-						${
-							separatorWidth.Tablet && separatorWidthUnits.Tablet
-								? `width: ${separatorWidth.Tablet}${separatorWidthUnits.Tablet};`
-								: ""
-						}
-						${
-							separatorThickness.Tablet && separatorThicknessUnits.Tablet
-								? `border-top-width: ${separatorThickness.Tablet}${separatorThicknessUnits.Tablet};`
-								: ""
-						}
+						${separatorWidth.Tablet && separatorWidthUnits.Tablet
+				? `width: ${separatorWidth.Tablet}${separatorWidthUnits.Tablet};`
+				: ""
+			}
+						${separatorThickness.Tablet && separatorThicknessUnits.Tablet
+				? `border-top-width: ${separatorThickness.Tablet}${separatorThicknessUnits.Tablet};`
+				: ""
+			}
 					}
 						
 						/* Advance Control Global Style - Tablet */
 						.${blockId}.fb-post-category-area {
-								${
-									postCategoryPositionType !== "default" &&
-									postCategoryPositionType !== "relative" &&
-									postCategoryHZOrientationType === "left" &&
-									postCategoryHZLeftOffset.Tablet !== undefined
-										? `left: ${postCategoryHZLeftOffset.Tablet}${postCategoryHZLeftOffsetUnits.Tablet};`
-										: ""
-								}
-								${
-									postCategoryPositionType !== "default" &&
-									postCategoryPositionType !== "relative" &&
-									postCategoryHZOrientationType === "right" &&
-									postCategoryHZRightOffset.Tablet !== undefined
-										? `right: ${postCategoryHZRightOffset.Tablet}${postCategoryHZRightOffsetUnits.Tablet};`
-										: ""
-								}
-								${
-									postCategoryPositionType !== "default" &&
-									postCategoryPositionType !== "relative" &&
-									postCategoryVROrientationType === "top" &&
-									postCategoryVRTopOffset.Tablet !== undefined
-										? `top: ${postCategoryVRTopOffset.Tablet}${postCategoryVRTopOffsetUnits.Tablet};`
-										: ""
-								}
-								${
-									postCategoryPositionType !== "default" &&
-									postCategoryPositionType !== "relative" &&
-									postCategoryVROrientationType === "bottom" &&
-									postCategoryVRBottomOffset.Tablet !== undefined
-										? `bottom: ${postCategoryVRBottomOffset.Tablet}${postCategoryVRBottomOffsetUnits.Tablet};`
-										: ""
-								}
+								${postCategoryPositionType !== "default" &&
+				postCategoryPositionType !== "relative" &&
+				postCategoryHZOrientationType === "left" &&
+				postCategoryHZLeftOffset.Tablet !== undefined
+				? `left: ${postCategoryHZLeftOffset.Tablet}${postCategoryHZLeftOffsetUnits.Tablet};`
+				: ""
+			}
+								${postCategoryPositionType !== "default" &&
+				postCategoryPositionType !== "relative" &&
+				postCategoryHZOrientationType === "right" &&
+				postCategoryHZRightOffset.Tablet !== undefined
+				? `right: ${postCategoryHZRightOffset.Tablet}${postCategoryHZRightOffsetUnits.Tablet};`
+				: ""
+			}
+								${postCategoryPositionType !== "default" &&
+				postCategoryPositionType !== "relative" &&
+				postCategoryVROrientationType === "top" &&
+				postCategoryVRTopOffset.Tablet !== undefined
+				? `top: ${postCategoryVRTopOffset.Tablet}${postCategoryVRTopOffsetUnits.Tablet};`
+				: ""
+			}
+								${postCategoryPositionType !== "default" &&
+				postCategoryPositionType !== "relative" &&
+				postCategoryVROrientationType === "bottom" &&
+				postCategoryVRBottomOffset.Tablet !== undefined
+				? `bottom: ${postCategoryVRBottomOffset.Tablet}${postCategoryVRBottomOffsetUnits.Tablet};`
+				: ""
+			}
 								${postGlobalZIndex.Tablet ? `z-index: ${postGlobalZIndex.Tablet}` : ""}
 						}
 								
 						.${blockId}.fb-post-category-area  {
-								${
-									postGlobalTabletPaddingWidth && postGlobalPaddingTablet.top
-										? `padding: ${postGlobalTabletPaddingWidth};`
-										: ""
-								}
-								${
-									postGlobalTabletMarginWidth && postGlobalMarginTablet.top
-										? `margin: ${postGlobalTabletMarginWidth};`
-										: ""
-								}
+								${postGlobalTabletPaddingWidth && postGlobalPaddingTablet.top
+				? `padding: ${postGlobalTabletPaddingWidth};`
+				: ""
+			}
+								${postGlobalTabletMarginWidth && postGlobalMarginTablet.top
+				? `margin: ${postGlobalTabletMarginWidth};`
+				: ""
+			}
 
 								${postGlobalBorder ? `border: ${postGlobalBorder};` : ""} 
-                ${
-									postGlobalTabletBorderWidth && postGlobalBorderTablet.top
-										? `border-width: ${postGlobalTabletBorderWidth};`
-										: ""
-								}
-                ${
-									postGlobalTabletBorderRadiusWidth &&
-									postGlobalBorderRadiusTablet.top
-										? `border-radius: ${postGlobalTabletBorderRadiusWidth}!important;`
-										: ""
-								}
+                ${postGlobalTabletBorderWidth && postGlobalBorderTablet.top
+				? `border-width: ${postGlobalTabletBorderWidth};`
+				: ""
+			}
+                ${postGlobalTabletBorderRadiusWidth &&
+				postGlobalBorderRadiusTablet.top
+				? `border-radius: ${postGlobalTabletBorderRadiusWidth}!important;`
+				: ""
+			}
 
 						}
 
@@ -3865,254 +3849,252 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
-						${
-							taxonomyHeight.Mobile
-								? `min-height: ${taxonomyHeight.Mobile}${taxonomyHeightUnits.Mobile};`
-								: ""
-						}
-						${
-							postCategoryPaddingMobileWidth && postCategoryPaddingMobile.top
-								? `padding: ${postCategoryPaddingMobileWidth};`
-								: ""
-						}
-						${
-							postCategoryMarginMobileWidth && postCategoryMarginMobile.top
-								? `margin: ${postCategoryMarginMobileWidth};`
-								: ""
-						}
-						${
-							postCategoryBorderMobileWidth && postCategoryBorderMobile.top
-								? `border-width: ${postCategoryBorderMobileWidth};`
-								: ""
-						}
-						${
-							postCategoryBorderRadiusMobileWidth &&
-							postCategoryBorderRadiusMobile.top
-								? `border-radius: ${postCategoryBorderRadiusMobileWidth};`
-								: ""
-						}
+						${taxonomyHeight.Mobile
+				? `min-height: ${taxonomyHeight.Mobile}${taxonomyHeightUnits.Mobile};`
+				: ""
+			}
+						${postCategoryPaddingMobileWidth && postCategoryPaddingMobile.top
+				? `padding: ${postCategoryPaddingMobileWidth};`
+				: ""
+			}
+						${postCategoryMarginMobileWidth && postCategoryMarginMobile.top
+				? `margin: ${postCategoryMarginMobileWidth};`
+				: ""
+			}
+						${postCategoryBorderMobileWidth && postCategoryBorderMobile.top
+				? `border-width: ${postCategoryBorderMobileWidth};`
+				: ""
+			}
+						${postCategoryBorderRadiusMobileWidth &&
+				postCategoryBorderRadiusMobile.top
+				? `border-radius: ${postCategoryBorderRadiusMobileWidth};`
+				: ""
+			}
 				}
+
+						${premadeStyle === 'style-2' ? `
+
+								.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item {		
+								
+																${postCategoryInnerPaddingMobileWidth && 
+									postCategoryPaddingMobile.top ? `
+										padding: ${postCategoryInnerPaddingMobileWidth};
+									` : ""
+								}
+								
+									${postCategoryPaddingMobileWidth &&
+										postCategoryPaddingMobile.top
+										? `padding-bottom: ${postCategoryPaddingMobile.top}${postCategoryPaddingUnits.Mobile};`
+										: ""
+										}
+								}
+
+								.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta{
+
+										${postCategoryPaddingMobileWidth &&
+											postCategoryPaddingMobile.top
+											? `padding: ${postCategoryPaddingMobileWidth};`
+											: ""
+										}
+
+										  ${ postCategoryBorderRadiusMobileWidth && postCategoryBorderRadiusMobile.top
+            ? `border-radius: ${postCategoryBorderRadiusMobile.top / 2}${postCategoryBorderRadiusUnits.Mobile} ${postCategoryBorderRadiusMobile.right / 2}${postCategoryBorderRadiusUnits.Mobile} ${postCategoryBorderRadiusMobile.bottom / 2}${postCategoryBorderRadiusUnits.Mobile} ${postCategoryBorderRadiusMobile.left / 2}${postCategoryBorderRadiusUnits.Mobile};`
+            : ""
+        }
+
+								}
+							` : ''}	
 
 
 
 					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name  {
 
-					  ${
-							postTitleGlobalTypoSwitcher.fontSize === false &&
-							postTitleFontSize.Mobile
-								? `font-size: ${postTitleFontSize.Mobile}${postTitleFontSizeUnits.Mobile};`
-								: ""
-						}
-						${
-							postTitleGlobalTypoSwitcher.letterSpacing === false &&
-							postTitleLetterSpacing.Mobile
-								? `letter-spacing: ${postTitleLetterSpacing.Mobile}${postTitleLetterSpacingUnits.Mobile};`
-								: ""
-						}
-						${
-							postTitleGlobalTypoSwitcher.lineHeight === false &&
-							postTitleLineHeight.Mobile
-								? `line-height: ${postTitleLineHeight.Mobile}${postTitleLineHeightUnits.Mobile};`
-								: ""
-						}
+					  ${postTitleGlobalTypoSwitcher.fontSize === false &&
+				postTitleFontSize.Mobile
+				? `font-size: ${postTitleFontSize.Mobile}${postTitleFontSizeUnits.Mobile};`
+				: ""
+			}
+						${postTitleGlobalTypoSwitcher.letterSpacing === false &&
+				postTitleLetterSpacing.Mobile
+				? `letter-spacing: ${postTitleLetterSpacing.Mobile}${postTitleLetterSpacingUnits.Mobile};`
+				: ""
+			}
+						${postTitleGlobalTypoSwitcher.lineHeight === false &&
+				postTitleLineHeight.Mobile
+				? `line-height: ${postTitleLineHeight.Mobile}${postTitleLineHeightUnits.Mobile};`
+				: ""
+			}
 					}
 
 
 					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-description{
-						 ${
-								postDescriptionGlobalTypoSwitcher.fontSize === false &&
-								postDescriptionFontSize.Mobile
-									? `font-size: ${postDescriptionFontSize.Mobile}${postDescriptionFontSizeUnits.Mobile};`
-									: ""
-							}
-                ${
-									postDescriptionGlobalTypoSwitcher.letterSpacing === false &&
-									postDescriptionLetterSpacing.Mobile
-										? `letter-spacing: ${postDescriptionLetterSpacing.Mobile}${postDescriptionLetterSpacingUnits.Mobile};`
-										: ""
-								}
-                ${
-									postDescriptionGlobalTypoSwitcher.lineHeight === false &&
-									postDescriptionLineHeight.Mobile
-										? `line-height: ${postDescriptionLineHeight.Mobile}${postDescriptionLineHeightUnits.Mobile};`
-										: ""
-								}
-								${
-									postDescriptionSpacing.Mobile
-										? `margin-top: ${postDescriptionSpacing.Mobile}${postDescriptionSpacingUnits.Mobile};`
-										: ""
-								}
+						 ${postDescriptionGlobalTypoSwitcher.fontSize === false &&
+				postDescriptionFontSize.Mobile
+				? `font-size: ${postDescriptionFontSize.Mobile}${postDescriptionFontSizeUnits.Mobile};`
+				: ""
+			}
+                ${postDescriptionGlobalTypoSwitcher.letterSpacing === false &&
+				postDescriptionLetterSpacing.Mobile
+				? `letter-spacing: ${postDescriptionLetterSpacing.Mobile}${postDescriptionLetterSpacingUnits.Mobile};`
+				: ""
+			}
+                ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
+				postDescriptionLineHeight.Mobile
+				? `line-height: ${postDescriptionLineHeight.Mobile}${postDescriptionLineHeightUnits.Mobile};`
+				: ""
+			}
+								${postDescriptionSpacing.Mobile
+				? `margin-top: ${postDescriptionSpacing.Mobile}${postDescriptionSpacingUnits.Mobile};`
+				: ""
+			}
 					}
 
 						.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count {
-							${postCountSpacing.Mobile ? `gap: ${postCountSpacing.Mobile}${postCountSpacingUnits.Mobile};` : ''}
+							${postCountSpacing.Mobile
+				? `gap: ${postCountSpacing.Mobile}${postCountSpacingUnits.Mobile};`
+				: ""
+			}
 						}
 
 					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count .fb-taxonomy-count{
-						 ${
-								postCountGlobalTypoSwitcher.fontSize === false &&
-								postCountFontSize.Mobile
-									? `font-size: ${postCountFontSize.Mobile}${postCountFontSizeUnits.Mobile};`
-									: ""
-							}
-                ${
-									postCountGlobalTypoSwitcher.letterSpacing === false &&
-									postCountLetterSpacing.Mobile
-										? `letter-spacing: ${postCountLetterSpacing.Mobile}${postCountLetterSpacingUnits.Mobile};`
-										: ""
-								}
-                ${
-									postCountGlobalTypoSwitcher.lineHeight === false &&
-									postCountLineHeight.Mobile
-										? `line-height: ${postCountLineHeight.Mobile}${postCountLineHeightUnits.Mobile};`
-										: ""
-								}
+						 ${postCountGlobalTypoSwitcher.fontSize === false &&
+				postCountFontSize.Mobile
+				? `font-size: ${postCountFontSize.Mobile}${postCountFontSizeUnits.Mobile};`
+				: ""
+			}
+                ${postCountGlobalTypoSwitcher.letterSpacing === false &&
+				postCountLetterSpacing.Mobile
+				? `letter-spacing: ${postCountLetterSpacing.Mobile}${postCountLetterSpacingUnits.Mobile};`
+				: ""
+			}
+                ${postCountGlobalTypoSwitcher.lineHeight === false &&
+				postCountLineHeight.Mobile
+				? `line-height: ${postCountLineHeight.Mobile}${postCountLineHeightUnits.Mobile};`
+				: ""
+			}
 								
-							${
-								postCountPaddingMobileWidth && postCountPaddingMobile.top
-									? `padding: ${postCountPaddingMobileWidth};`
-									: ""
-							}
-							 ${
-									postCountBorderMobileWidth && postCountBorderMobile.top
-										? `border-width: ${postCountBorderMobileWidth};`
-										: ""
-								}
-                ${
-									postCountBorderRadiusMobileWidth &&
-									postCountBorderRadiusMobile.top
-										? `border-radius: ${postCountBorderRadiusMobileWidth};`
-										: ""
-								}
+							${postCountPaddingMobileWidth && postCountPaddingMobile.top
+				? `padding: ${postCountPaddingMobileWidth};`
+				: ""
+			}
+							 ${postCountBorderMobileWidth && postCountBorderMobile.top
+				? `border-width: ${postCountBorderMobileWidth};`
+				: ""
+			}
+                ${postCountBorderRadiusMobileWidth &&
+				postCountBorderRadiusMobile.top
+				? `border-radius: ${postCountBorderRadiusMobileWidth};`
+				: ""
+			}
 					}
 
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
-						${
-							buttonWidth.Mobile && buttonWidthUnits.Mobile
-								? `width: ${buttonWidth.Mobile}${buttonWidthUnits.Mobile};`
-								: ""
-						}
-						                ${
-															buttonGlobalTypoSwitcher.fontSize === false &&
-															buttonFontSize.Mobile &&
-															buttonFontSizeUnits.Mobile
-																? `font-size: ${buttonFontSize.Mobile}${buttonFontSizeUnits.Mobile};`
-																: ""
-														}
-                ${
-									buttonGlobalTypoSwitcher.letterSpacing === false &&
-									buttonLetterSpacing.Mobile &&
-									buttonLetterSpacingUnits.Mobile
-										? `letter-spacing: ${buttonLetterSpacing.Mobile}${buttonLetterSpacingUnits.Mobile};`
-										: ""
-								}
-                ${
-									buttonGlobalTypoSwitcher.lineHeight === false &&
-									buttonLineHeight.Mobile &&
-									buttonLineHeightUnits.Mobile
-										? `line-height: ${buttonLineHeight.Mobile}${buttonLineHeightUnits.Mobile};`
-										: ""
-								}
-								   ${
-											buttonMobileBorderWidthStr && buttonMobileBorderWidth?.top
-												? `border-width: ${buttonMobileBorderWidthStr};`
-												: ""
-										}
-                ${
-									buttonMobileBorderRadiusStr &&
-									buttonMobileBorderRadiusWidth?.top
-										? `border-radius: ${buttonMobileBorderRadiusStr};`
-										: ""
-								}
-								 ${
-										buttonMobilePaddingStr && buttonMobilePadding?.top
-											? `padding: ${buttonMobilePaddingStr};`
-											: ""
-									}  
-                ${
-									buttonMobileMarginStr && buttonMobileMargin?.top
-										? `margin: ${buttonMobileMarginStr};`
-										: ""
-								} 
+						${buttonWidth.Mobile && buttonWidthUnits.Mobile
+				? `width: ${buttonWidth.Mobile}${buttonWidthUnits.Mobile};`
+				: ""
+			}
+						                ${buttonGlobalTypoSwitcher.fontSize === false &&
+				buttonFontSize.Mobile &&
+				buttonFontSizeUnits.Mobile
+				? `font-size: ${buttonFontSize.Mobile}${buttonFontSizeUnits.Mobile};`
+				: ""
+			}
+                ${buttonGlobalTypoSwitcher.letterSpacing === false &&
+				buttonLetterSpacing.Mobile &&
+				buttonLetterSpacingUnits.Mobile
+				? `letter-spacing: ${buttonLetterSpacing.Mobile}${buttonLetterSpacingUnits.Mobile};`
+				: ""
+			}
+                ${buttonGlobalTypoSwitcher.lineHeight === false &&
+				buttonLineHeight.Mobile &&
+				buttonLineHeightUnits.Mobile
+				? `line-height: ${buttonLineHeight.Mobile}${buttonLineHeightUnits.Mobile};`
+				: ""
+			}
+								   ${buttonMobileBorderWidthStr && buttonMobileBorderWidth?.top
+				? `border-width: ${buttonMobileBorderWidthStr};`
+				: ""
+			}
+                ${buttonMobileBorderRadiusStr &&
+				buttonMobileBorderRadiusWidth?.top
+				? `border-radius: ${buttonMobileBorderRadiusStr};`
+				: ""
+			}
+								 ${buttonMobilePaddingStr && buttonMobilePadding?.top
+				? `padding: ${buttonMobilePaddingStr};`
+				: ""
+			}  
+                ${buttonMobileMarginStr && buttonMobileMargin?.top
+				? `margin: ${buttonMobileMarginStr};`
+				: ""
+			} 
 
-								${
-									buttonIconGapSize.Mobile
-										? `gap: ${buttonIconGapSize.Mobile}${buttonIconGapUnits.Mobile};`
-										: ""
-								}
+								${buttonIconGapSize.Mobile
+				? `gap: ${buttonIconGapSize.Mobile}${buttonIconGapUnits.Mobile};`
+				: ""
+			}
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon {
-						    ${
-									buttonIconBorderMobileWidth !== buttonIconBorderMobile.top
-										? `border-width: ${buttonIconBorderMobileWidth};`
-										: ""
-								} 
-                ${
-									buttonIconBorderRadiusMobileWidth !==
-									buttonIconBorderRadiusMobile.top
-										? `border-radius: ${buttonIconBorderRadiusMobileWidth};`
-										: ""
-								}
+						    ${buttonIconBorderMobileWidth !== buttonIconBorderMobile.top
+				? `border-width: ${buttonIconBorderMobileWidth};`
+				: ""
+			} 
+                ${buttonIconBorderRadiusMobileWidth !==
+				buttonIconBorderRadiusMobile.top
+				? `border-radius: ${buttonIconBorderRadiusMobileWidth};`
+				: ""
+			}
 
-								${
-									buttonIconMobilePaddingStr && buttonIconMobilePadding?.top
-										? `padding: ${buttonIconMobilePaddingStr};`
-										: ""
-								}
+								${buttonIconMobilePaddingStr && buttonIconMobilePadding?.top
+				? `padding: ${buttonIconMobilePaddingStr};`
+				: ""
+			}
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon svg{
-						  ${
-								buttonIconSize.Mobile && buttonIconSizeUnits.Mobile
-									? `width: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};`
-									: ""
-							}
-              ${
-								buttonIconSize.Mobile && buttonIconSizeUnits.Mobile
-									? `height: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};`
-									: ""
-							}
-							${
-								buttonIconRotate.Mobile
-									? `transform: rotate(${buttonIconRotate.Mobile}deg);`
-									: ""
-							}
+						  ${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile
+				? `width: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};`
+				: ""
+			}
+              ${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile
+				? `height: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};`
+				: ""
+			}
+							${buttonIconRotate.Mobile
+				? `transform: rotate(${buttonIconRotate.Mobile}deg);`
+				: ""
+			}
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon svg{
-							${
-								buttonIconRotateHover.Mobile
-									? `transform: rotate(${buttonIconRotateHover.Mobile}deg);`
-									: ""
-							}
+							${buttonIconRotateHover.Mobile
+				? `transform: rotate(${buttonIconRotateHover.Mobile}deg);`
+				: ""
+			}
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image{
-							${
-								buttonIconImageWidth
-									? `width: ${buttonIconImageWidth.Mobile}${buttonIconImageWidthUnits.Mobile};`
-									: ""
-							}
-            	${
-								buttonIconImageHeight
-									? `height: ${buttonIconImageHeight.Mobile}${buttonIconImageHeightUnits.Mobile};`
-									: ""
-							}
-							${
-								buttonImageRotate.Mobile
-									? `transform: rotate(${buttonImageRotate.Mobile}deg);`
-									: ""
-							}
+							${buttonIconImageWidth
+				? `width: ${buttonIconImageWidth.Mobile}${buttonIconImageWidthUnits.Mobile};`
+				: ""
+			}
+            	${buttonIconImageHeight
+				? `height: ${buttonIconImageHeight.Mobile}${buttonIconImageHeightUnits.Mobile};`
+				: ""
+			}
+							${buttonImageRotate.Mobile
+				? `transform: rotate(${buttonImageRotate.Mobile}deg);`
+				: ""
+			}
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon-image{
-							${
-								buttonImageRotateHover.Mobile
-									? `transform: rotate(${buttonImageRotateHover.Mobile}deg);`
-									: ""
-							}
+							${buttonImageRotateHover.Mobile
+				? `transform: rotate(${buttonImageRotateHover.Mobile}deg);`
+				: ""
+			}
 					}
 
 
@@ -4121,114 +4103,100 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         
 
 										.${blockId} .fb-taxonomy-list .fb-taxonomy-item[data-parent-id="0"] {
-						${
-							postListItemSpacing.Mobile
-								? `margin-bottom: ${postListItemSpacing.Mobile}${postListItemSpacingUnits.Mobile};`
-								: ""
-						}
+						${postListItemSpacing.Mobile
+				? `margin-bottom: ${postListItemSpacing.Mobile}${postListItemSpacingUnits.Mobile};`
+				: ""
+			}
 				}
 
 				.${blockId} .fb_taxonomy_sublist .fb-taxonomy-item{
-						${
-							postListItemSpacing.Mobile
-								? `margin-top: ${postListItemSpacing.Mobile}${postListItemSpacingUnits.Mobile};`
-								: ""
-						}
+						${postListItemSpacing.Mobile
+				? `margin-top: ${postListItemSpacing.Mobile}${postListItemSpacingUnits.Mobile};`
+				: ""
+			}
 				}
 
 														.${blockId} .fb-taxonomy-list .fb-taxonomy-item::marker{
-								 ${
-										postTitleGlobalTypoSwitcher.fontSize === false &&
-										postTitleFontSize.Mobile
-											? `font-size: ${postTitleFontSize.Mobile}${postTitleFontSizeUnits.Mobile};`
-											: ""
-									}
+								 ${postTitleGlobalTypoSwitcher.fontSize === false &&
+				postTitleFontSize.Mobile
+				? `font-size: ${postTitleFontSize.Mobile}${postTitleFontSizeUnits.Mobile};`
+				: ""
+			}
 						}
 
 						 .${blockId} .fb-taxonomy-list .fb-taxonomy-item[data-parent-id] {
-									${
-										listIndentation.Mobile
-											? ` padding-left: ${listIndentation.Mobile}${listIndentationUnits.Mobile};`
-											: ""
-									}
+									${listIndentation.Mobile
+				? ` padding-left: ${listIndentation.Mobile}${listIndentationUnits.Mobile};`
+				: ""
+			}
             }
 
 						.${blockId} .fb-taxonomy-list .fb-taxonomy-item .fb-tax-separator{
-							${
-								separatorWidth.Mobile && separatorWidthUnits.Mobile
-									? `width: ${separatorWidth.Mobile}${separatorWidthUnits.Mobile};`
-									: ""
-							}
-							${
-								separatorThickness.Mobile && separatorThicknessUnits.Mobile
-									? `border-top-width: ${separatorThickness.Mobile}${separatorThicknessUnits.Mobile};`
-									: ""
-							}
+							${separatorWidth.Mobile && separatorWidthUnits.Mobile
+				? `width: ${separatorWidth.Mobile}${separatorWidthUnits.Mobile};`
+				: ""
+			}
+							${separatorThickness.Mobile && separatorThicknessUnits.Mobile
+				? `border-top-width: ${separatorThickness.Mobile}${separatorThicknessUnits.Mobile};`
+				: ""
+			}
 						}
 
 
 					/* Advance Control Global Style - Mobile */
 					.${blockId}.fb-post-category-area {
-							${
-								postCategoryPositionType !== "default" &&
-								postCategoryPositionType !== "relative" &&
-								postCategoryHZOrientationType === "left" &&
-								postCategoryHZLeftOffset.Mobile !== undefined
-									? `left: ${postCategoryHZLeftOffset.Mobile}${postCategoryHZLeftOffsetUnits.Mobile};`
-									: ""
-							}
-							${
-								postCategoryPositionType !== "default" &&
-								postCategoryPositionType !== "relative" &&
-								postCategoryHZOrientationType === "right" &&
-								postCategoryHZRightOffset.Mobile !== undefined
-									? `right: ${postCategoryHZRightOffset.Mobile}${postCategoryHZRightOffsetUnits.Mobile};`
-									: ""
-							}
-							${
-								postCategoryPositionType !== "default" &&
-								postCategoryPositionType !== "relative" &&
-								postCategoryVROrientationType === "top" &&
-								postCategoryVRTopOffset.Mobile !== undefined
-									? `top: ${postCategoryVRTopOffset.Mobile}${postCategoryVRTopOffsetUnits.Mobile};`
-									: ""
-							}
-							${
-								postCategoryPositionType !== "default" &&
-								postCategoryPositionType !== "relative" &&
-								postCategoryVROrientationType === "bottom" &&
-								postCategoryVRBottomOffset.Mobile !== undefined
-									? `bottom: ${postCategoryVRBottomOffset.Mobile}${postCategoryVRBottomOffsetUnits.Mobile};`
-									: ""
-							} 
+							${postCategoryPositionType !== "default" &&
+				postCategoryPositionType !== "relative" &&
+				postCategoryHZOrientationType === "left" &&
+				postCategoryHZLeftOffset.Mobile !== undefined
+				? `left: ${postCategoryHZLeftOffset.Mobile}${postCategoryHZLeftOffsetUnits.Mobile};`
+				: ""
+			}
+							${postCategoryPositionType !== "default" &&
+				postCategoryPositionType !== "relative" &&
+				postCategoryHZOrientationType === "right" &&
+				postCategoryHZRightOffset.Mobile !== undefined
+				? `right: ${postCategoryHZRightOffset.Mobile}${postCategoryHZRightOffsetUnits.Mobile};`
+				: ""
+			}
+							${postCategoryPositionType !== "default" &&
+				postCategoryPositionType !== "relative" &&
+				postCategoryVROrientationType === "top" &&
+				postCategoryVRTopOffset.Mobile !== undefined
+				? `top: ${postCategoryVRTopOffset.Mobile}${postCategoryVRTopOffsetUnits.Mobile};`
+				: ""
+			}
+							${postCategoryPositionType !== "default" &&
+				postCategoryPositionType !== "relative" &&
+				postCategoryVROrientationType === "bottom" &&
+				postCategoryVRBottomOffset.Mobile !== undefined
+				? `bottom: ${postCategoryVRBottomOffset.Mobile}${postCategoryVRBottomOffsetUnits.Mobile};`
+				: ""
+			} 
 
 									${postGlobalZIndex.Mobile ? `z-index: ${postGlobalZIndex.Mobile}` : ""}
 					}
 
 					.${blockId}.fb-post-category-area  {
-							${
-								postGlobalMobilePaddingWidth && postGlobalPaddingMobile.top
-									? `padding: ${postGlobalMobilePaddingWidth}`
-									: ""
-							}
-							${
-								postGlobalMobileMarginWidth && postGlobalMarginMobile.top
-									? `margin: ${postGlobalMobileMarginWidth}`
-									: ""
-							}
+							${postGlobalMobilePaddingWidth && postGlobalPaddingMobile.top
+				? `padding: ${postGlobalMobilePaddingWidth}`
+				: ""
+			}
+							${postGlobalMobileMarginWidth && postGlobalMarginMobile.top
+				? `margin: ${postGlobalMobileMarginWidth}`
+				: ""
+			}
 
 							${postGlobalBorder ? `border: ${postGlobalBorder};` : ""} 
-              ${
-								postGlobalMobileBorderWidth && postGlobalBorderMobile.top
-									? `border-width: ${postGlobalMobileBorderWidth};`
-									: ""
-							}
-              ${
-								postGlobalMobileBorderRadiusWidth &&
-								postGlobalBorderRadiusMobile.top
-									? `border-radius: ${postGlobalMobileBorderRadiusWidth}!important;`
-									: ""
-							}
+              ${postGlobalMobileBorderWidth && postGlobalBorderMobile.top
+				? `border-width: ${postGlobalMobileBorderWidth};`
+				: ""
+			}
+              ${postGlobalMobileBorderRadiusWidth &&
+				postGlobalBorderRadiusMobile.top
+				? `border-radius: ${postGlobalMobileBorderRadiusWidth}!important;`
+				: ""
+			}
 					}
 
 
@@ -4639,7 +4607,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					>
 						<SelectControl
 							value={premadeStyle}
-							options={PREMADE_STYLE}
+							options={POST_CATEGORY_PREMADE_STYLE}
 							onChange={(value) => setAttributes({ premadeStyle: value })}
 						/>
 					</BaseControl>
@@ -4755,9 +4723,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							{POST_SWITCHER.map((option, key) => (
 								<Button
 									key={key}
-									className={`fb-setting-switcher-panel-btn-switcher ${
-										layoutType === option.value ? "active" : ""
-									}`}
+									className={`fb-setting-switcher-panel-btn-switcher ${layoutType === option.value ? "active" : ""
+										}`}
 									onClick={() => setAttributes({ layoutType: option.value })}
 								>
 									{option.label}
@@ -4798,7 +4765,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								units={gridGapUnits}
 								setAttributes={setAttributes}
 								rangeStep={1}
-								resetFallbackValue={20}
+								resetFallbackValue={30}
 							/>
 
 							<FB_Range
@@ -4816,7 +4783,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								units={gridGapUnits}
 								setAttributes={setAttributes}
 								rangeStep={1}
-								resetFallbackValue={20}
+								resetFallbackValue={30}
 							/>
 						</>
 					)}
@@ -4932,9 +4899,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								{READ_MORE_ICON_ALIGN.map((option, key) => (
 									<Button
 										key={key}
-										className={`fb-setting-switcher-panel-btn-switcher ${
-											readMoreIconAlign === option.value ? "active" : ""
-										}`}
+										className={`fb-setting-switcher-panel-btn-switcher ${readMoreIconAlign === option.value ? "active" : ""
+											}`}
 										onClick={() =>
 											setAttributes({ readMoreIconAlign: option.value })
 										}
@@ -4947,15 +4913,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						{(readMoreIconAlign === "icon-text" ||
 							readMoreIconAlign === "icon-only") && (
-							// <FBIconPicker
-							// 	value={readMoreIcon}
-							// 	setIconHandler={readMoreIconHandler}
-							// />
-							<FBIconPicker
-								value={readMoreIcon}
-								setIconHandler={readMoreIconHandler}
-							/>
-						)}
+								// <FBIconPicker
+								// 	value={readMoreIcon}
+								// 	setIconHandler={readMoreIconHandler}
+								// />
+								<FBIconPicker
+									value={readMoreIcon}
+									setIconHandler={readMoreIconHandler}
+								/>
+							)}
 
 						{readMoreIconAlign === "image" && (
 							<FB_ImageControl
@@ -5352,7 +5318,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				</PanelBody>
 			)}
 
-						{showCount && (
+			{showCount && (
 				<PanelBody title={__("Count", "frontis-blocks")} initialOpen={false}>
 					<FB_TypographyControl
 						globalTypoControlActive={true}
@@ -5367,27 +5333,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								postCountGlobalTypoSwitcher:
 									value === "default"
 										? {
-												...postCountGlobalTypoSwitcher,
-												fontFamily: false,
-												fontSize: false,
-												fontWeight: false,
-												fontStyle: false,
-												textTransform: false,
-												textDecoration: false,
-												letterSpacing: false,
-												lineHeight: false,
-										  }
+											...postCountGlobalTypoSwitcher,
+											fontFamily: false,
+											fontSize: false,
+											fontWeight: false,
+											fontStyle: false,
+											textTransform: false,
+											textDecoration: false,
+											letterSpacing: false,
+											lineHeight: false,
+										}
 										: {
-												...postCountGlobalTypoSwitcher,
-												fontFamily: true,
-												fontSize: true,
-												fontWeight: true,
-												fontStyle: true,
-												textTransform: true,
-												textDecoration: true,
-												letterSpacing: true,
-												lineHeight: true,
-										  },
+											...postCountGlobalTypoSwitcher,
+											fontFamily: true,
+											fontSize: true,
+											fontWeight: true,
+											fontStyle: true,
+											textTransform: true,
+											textDecoration: true,
+											letterSpacing: true,
+											lineHeight: true,
+										},
 							});
 						}}
 						globalTypoOption={postCountGlobalTypoOption}
@@ -5734,27 +5700,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							postTitleGlobalTypoSwitcher:
 								value === "default"
 									? {
-											...postTitleGlobalTypoSwitcher,
-											fontFamily: false,
-											fontSize: false,
-											fontWeight: false,
-											fontStyle: false,
-											textTransform: false,
-											textDecoration: false,
-											letterSpacing: false,
-											lineHeight: false,
-									  }
+										...postTitleGlobalTypoSwitcher,
+										fontFamily: false,
+										fontSize: false,
+										fontWeight: false,
+										fontStyle: false,
+										textTransform: false,
+										textDecoration: false,
+										letterSpacing: false,
+										lineHeight: false,
+									}
 									: {
-											...postTitleGlobalTypoSwitcher,
-											fontFamily: true,
-											fontSize: true,
-											fontWeight: true,
-											fontStyle: true,
-											textTransform: true,
-											textDecoration: true,
-											letterSpacing: true,
-											lineHeight: true,
-									  },
+										...postTitleGlobalTypoSwitcher,
+										fontFamily: true,
+										fontSize: true,
+										fontWeight: true,
+										fontStyle: true,
+										textTransform: true,
+										textDecoration: true,
+										letterSpacing: true,
+										lineHeight: true,
+									},
 						});
 					}}
 					globalTypoOption={postTitleGlobalTypoOption}
@@ -5908,27 +5874,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								postDescriptionGlobalTypoSwitcher:
 									value === "default"
 										? {
-												...postDescriptionGlobalTypoSwitcher,
-												fontFamily: false,
-												fontSize: false,
-												fontWeight: false,
-												fontStyle: false,
-												textTransform: false,
-												textDecoration: false,
-												letterSpacing: false,
-												lineHeight: false,
-										  }
+											...postDescriptionGlobalTypoSwitcher,
+											fontFamily: false,
+											fontSize: false,
+											fontWeight: false,
+											fontStyle: false,
+											textTransform: false,
+											textDecoration: false,
+											letterSpacing: false,
+											lineHeight: false,
+										}
 										: {
-												...postDescriptionGlobalTypoSwitcher,
-												fontFamily: true,
-												fontSize: true,
-												fontWeight: true,
-												fontStyle: true,
-												textTransform: true,
-												textDecoration: true,
-												letterSpacing: true,
-												lineHeight: true,
-										  },
+											...postDescriptionGlobalTypoSwitcher,
+											fontFamily: true,
+											fontSize: true,
+											fontWeight: true,
+											fontStyle: true,
+											textTransform: true,
+											textDecoration: true,
+											letterSpacing: true,
+											lineHeight: true,
+										},
 							});
 						}}
 						globalTypoOption={postDescriptionGlobalTypoOption}
@@ -6134,27 +6100,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									buttonGlobalTypoSwitcher:
 										value === "default"
 											? {
-													...buttonGlobalTypoSwitcher,
-													fontFamily: false,
-													fontSize: false,
-													fontWeight: false,
-													fontStyle: false,
-													textTransform: false,
-													textDecoration: false,
-													letterSpacing: false,
-													lineHeight: false,
-											  }
+												...buttonGlobalTypoSwitcher,
+												fontFamily: false,
+												fontSize: false,
+												fontWeight: false,
+												fontStyle: false,
+												textTransform: false,
+												textDecoration: false,
+												letterSpacing: false,
+												lineHeight: false,
+											}
 											: {
-													...buttonGlobalTypoSwitcher,
-													fontFamily: true,
-													fontSize: true,
-													fontWeight: true,
-													fontStyle: true,
-													textTransform: true,
-													textDecoration: true,
-													letterSpacing: true,
-													lineHeight: true,
-											  },
+												...buttonGlobalTypoSwitcher,
+												fontFamily: true,
+												fontSize: true,
+												fontWeight: true,
+												fontStyle: true,
+												textTransform: true,
+												textDecoration: true,
+												letterSpacing: true,
+												lineHeight: true,
+											},
 								});
 							}}
 							globalTypoOption={buttonGlobalTypoOption}

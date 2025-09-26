@@ -192,7 +192,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				{sortedTaxonomies.map((taxonomy) => (
 					<div key={taxonomy.id} className="fb-taxonomy-item">
 
-						{premadeStyle === "style-2" && taxonomy.fb_taxonomy_image && (
+						{premadeStyle === "style-3" && taxonomy.fb_taxonomy_image && (
 							<div className="fb-taxonomy-image">
 								<img src={taxonomy.fb_taxonomy_image} alt={taxonomy.name} />
 							</div>
