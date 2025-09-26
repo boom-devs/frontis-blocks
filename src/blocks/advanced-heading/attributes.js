@@ -114,6 +114,10 @@ const attributes = {
         type: 'string',
         default: 'post_permalink',
     },
+    loopAutoApplied: {
+        type: 'boolean',
+        default: false
+    },
     /** End Dynamic Text */
 
 
