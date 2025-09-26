@@ -10,6 +10,9 @@ import {
 } from "@wordpress/components";
 import {useEffect, useState, useRef, useMemo } from "@wordpress/element";
 
+import {select, useSelect} from '@wordpress/data';
+import { store as blockEditorStore } from '@wordpress/block-editor';
+
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_Spacing from "@Components/spacing";
 import FB_Range from "@Components/range";
@@ -175,6 +178,7 @@ const Inspector = (props) => {
 			containerGlobalCustomCSSID,
 			containerGlobalCustomCSSClass
 		},
+		clientId,
 		setAttributes
 	} = props;
 
