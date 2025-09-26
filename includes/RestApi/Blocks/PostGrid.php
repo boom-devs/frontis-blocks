@@ -120,7 +120,6 @@ class PostGrid {
      */
     public function get_post_author_info($object, $field_name, $request) {
         $author_id = $object['author'];
-
         $author_has_posts = count_user_posts($author_id, 'post', true) > 0;
 
         if (!$author_has_posts) {
@@ -137,15 +136,10 @@ class PostGrid {
         ));
 
         $latest_post_date = $latest_post ? get_the_date('j M Y', $latest_post[0]) : null;
-
         $author_name = get_the_author_meta('display_name', $author_id);
-
         $author_avatar = get_avatar_url($author_id);
-
         $author_bio = get_the_author_meta('description', $author_id);
-
         $author_archive_url = get_author_posts_url($author_id);
-
         $author_email = get_the_author_meta('email', $author_id);
 
         return array(

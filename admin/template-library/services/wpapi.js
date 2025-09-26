@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://frontis-sync.boomdevshub.com/wp-json',
+    baseUrl: `${FB_TLibrary.wordpressSyncApi}/wp-json`,
     prepareHeaders: (headers) => {
       headers.set(
         'Authorization',
