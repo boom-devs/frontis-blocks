@@ -86,12 +86,7 @@
             "suggest": {
                 "coenjacobs/mozart": "Easily wrap this library with your own prefix, to prevent collisions when multiple plugins use this library"
             },
-<<<<<<< HEAD
-            "time": "2024-12-17T14:04:30+00:00",
-=======
             "time": "2025-09-19T14:51:35+00:00",
-            "default-branch": true,
->>>>>>> e59a609f556490324f815e55e92bd5c5ca555b02
             "type": "library",
             "installation-source": "dist",
             "autoload": {

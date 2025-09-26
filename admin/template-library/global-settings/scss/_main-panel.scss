@@ -138,6 +138,10 @@
                 padding: 12px;
                 border: 1px solid #E1E3E8;
                 border-radius: 4px;
+
+                .components-circular-option-picker__swatches {
+                    justify-content: start !important;
+                }
                 
                 .components-circular-option-picker__option-wrapper {
                     width: 22px;
