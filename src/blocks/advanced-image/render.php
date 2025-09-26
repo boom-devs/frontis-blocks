@@ -38,7 +38,7 @@ $display_caption               = !empty( $attributes['displayCaption'] );
 $image_style                   = fb_norm_str( $attributes['imageStyle'] ?? '' );
 $image_size                    = fb_norm_str( $attributes['imageSize'] ?? '' );
 $image_hover                   = fb_norm_str( $attributes['imageHover'] ?? '' );
-$image_fit                     = fb_norm_str( $attributes['imageFit'] ?? '' );
+$image_fit                     = fb_norm_str( $attributes['imageFit'] ?? 'cover' );
 $auto_fit_switch               = !empty( $attributes['autoFitSwitch'] );
 
 $title_text                    = fb_norm_str( $attributes['titleText'] ?? 'Fly in the sky' );
