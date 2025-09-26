@@ -29,7 +29,10 @@ const variations = [
 						{
 							variationSelected: true,
 						},
-						[ [ 'frontis-blocks/advanced-heading' ] ],
+						[ 
+							[ 'frontis-blocks/advanced-image' ],
+							[ 'frontis-blocks/advanced-heading' ]
+						 ],
 					],
 				],
 			],
