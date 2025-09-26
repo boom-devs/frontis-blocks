@@ -50,8 +50,9 @@ const PatternLibraryButton = () => {
         sites: 1,
         templatelibrary: 1
     });
-    
-    const isProPlugin = false;
+
+    const licenseKey = '8c29b662-1837-419e-9e28-96042a27cf02';
+    const isProPlugin = FB_TLibrary.activationKey.length > 0 ? true : false;
     const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
 
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -244,7 +245,7 @@ const PatternLibraryButton = () => {
         try {
             let response;
             if (tab === 'patterns') {
-                response = await getTemplatesData("patterns", userData?.email, '', page, tag, search, category, isPro);
+                response = await getTemplatesData("patterns", userData?.email, licenseKey, page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -258,7 +259,7 @@ const PatternLibraryButton = () => {
                     }));
                 }
             } else if (tab === 'pages') {
-                response = await getTemplatesData("pages", userData?.email, '', page, tag, search, category, isPro);
+                response = await getTemplatesData("pages", userData?.email, licenseKey, page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -272,7 +273,7 @@ const PatternLibraryButton = () => {
                     }));
                 }
             } else if (tab === 'sites') {
-                response = await getTemplatesData("sites", userData?.email, '', page, tag, search, category, isPro);
+                response = await getTemplatesData("sites", userData?.email, licenseKey, page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -287,7 +288,7 @@ const PatternLibraryButton = () => {
                 }
             } else if (tab === 'templatelibrary') {
                 if(userData) {
-                    response = await getSavedTemplatesData("clouds", userData?.email, FB_TLibrary?.activationKey, page, tag, search, category, isPro, savedTemplate);
+                    response = await getSavedTemplatesData("clouds", userData?.email, licenseKey, page, tag, search, category, isPro, savedTemplate);
                     if (response) {
                         setData((prev) => ({
                             ...prev,
@@ -354,7 +355,6 @@ const PatternLibraryButton = () => {
         }
     };
       
-      
 
     useEffect(() => {
         setSearchText('');
@@ -374,7 +374,7 @@ const PatternLibraryButton = () => {
             return;
         }
 
-        if (templateData.is_premium === true && !isProPlugin) {
+        if (!isProPlugin) {
             setIsPluginUpgradeModalOpen(true);
             return;
         }
@@ -385,7 +385,7 @@ const PatternLibraryButton = () => {
 
         setData((prev) => {
             const updatedItems = prev[activeTab].items.map((item) =>
-                item.id === templateData.id ? { ...item, loading: true } : item
+                item.id === templateData.id ? { ...item, saveLoading: true } : item
             );
             return {
                 ...prev,
@@ -401,7 +401,7 @@ const PatternLibraryButton = () => {
             email: userData.email,
             item_id: templateData.id,
             item_type: templateData.type,
-            license_key: FB_TLibrary.activationKey,
+            license_key: licenseKey,
             website: window.location.origin,
         };
 
@@ -426,7 +426,7 @@ const PatternLibraryButton = () => {
 
             setData((prev) => {
                 const updatedItems = prev[activeTab].items.map((item) =>
-                    item.id === templateData.id ? { ...item, saved: true, loading: false } : item
+                    item.id === templateData.id ? { ...item, saved: true, saveLoading: false } : item
                 );
                 return {
                     ...prev,
@@ -442,10 +442,20 @@ const PatternLibraryButton = () => {
                 autoClose: 3000,
             });
 
+            setData((prev) => {
+                const updatedItems = prev[activeTab].items.map((item) =>
+                    item.id === templateData.id ? { ...item, saveLoading: false } : item
+                );
+                return {
+                    ...prev,
+                    [activeTab]: {
+                        ...prev[activeTab],
+                        items: updatedItems,
+                    },
+                };
+            });
         }
     }
-
-    console.log('activationKey', FB_TLibrary.activationKey);
 
     const TagTabsOptions = (() => {
         if (!data[activeTab]) return [];

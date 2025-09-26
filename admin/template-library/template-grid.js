@@ -14,6 +14,7 @@ import { createBlock, parse, rawHandler } from '@wordpress/blocks';
 import { useState, useEffect, useCallback } from "@wordpress/element";
 import { useSelector, useDispatch } from "react-redux";
 import { setAttribute } from "./store/attributesSlice";
+import { importBlocksFromApi } from "./components/importBlocks";
 
 const TemplateGrid = ({
     item = '',
@@ -23,6 +24,7 @@ const TemplateGrid = ({
     id,
     tags = [],
     dependencies = [],
+    preview_url,
     colors,
     templateType,
     gradientColors,
@@ -47,7 +49,7 @@ const TemplateGrid = ({
     alreadySaved = () => { },
     setActiveCategory,
     saved,
-    setLoading,
+    saveLoading,
     setIsLoginModalOpen,
     isLoginModalOpen,
     isProPlugin,
@@ -84,6 +86,7 @@ const TemplateGrid = ({
         categories,
         author: 'Template Author',
         activeTab,
+        preview_url,
         colors,
         customColors,
         gradientColors,
@@ -135,7 +138,7 @@ const TemplateGrid = ({
 
         setIsLoading(true);
 
-        if (is_premium) {
+        if (isProPlugin && is_premium) {
             const verified = await verifySubscription();
             console.log(id);
             
@@ -158,14 +161,12 @@ const TemplateGrid = ({
                     theme: "light"
                 });
 
+                setIsModalOpen(true);
                 setIsLoading(false);
             }
         } else {
-            console.log('Free pattern will be imported directly.');
-        }
-        
-        if (!is_premium && isLogedIn) {
             setIsModalOpen(true);
+            setIsLoading(false);
         }
     }, [is_premium, isLogedIn]);
 
@@ -227,13 +228,86 @@ const TemplateGrid = ({
         return responseData;
     }
 
-    console.log(verifySubscription);
 
+    // const importPattern = async (id) => {
+
+    //     if (!userData) {
+    //         setIsLoginModalOpen(true);
+    //         return;
+    //     }
+    //     if (is_premium === true && !isProPlugin) {
+    //         setIsPluginUpgradeModalOpen(true);
+    //         return;
+    //     }
+
+    //     setIsLoading(true);
+
+    //     if (is_premium) {
+    //         const verified = await verifySubscription();
+
+    //         if(verified.status) {
+    //             console.log('Now import the pro pattern.');
+    //             setIsLoading(false);
+    //             setIsVisible(false);
+    //         } else {
+    //             toast(verified.message, {
+    //                 position: "top-right",
+    //                 autoClose: 3000,
+    //                 hideProgressBar: false,
+    //                 newestOnTop: false,
+    //                 closeOnClick: true,
+    //                 rtl: false,
+    //                 pauseOnFocusLoss: true,
+    //                 draggable: true,
+    //                 pauseOnHover: true,
+    //                 theme: "light"
+    //             });
+
+    //             setIsLoading(false);
+    //         }
+    //     } else {
+    //         console.log('Free pattern will be imported directly.');
+    //     }
+
+    //     const pattern = await getTemplatesData("import/pattern", 'pattern_id', id);
+
+
+    //     if (pattern.data) {
+    //         const patternData = JSON.parse(pattern.data);
+    //         const parsedBlocks = parse(patternData);
+
+    //         // Get block editor utilities
+    //         const { insertBlocks, replaceBlocks } = dispatch('core/block-editor');
+    //         const { getSelectedBlock, getBlocks, getBlockIndex } = select('core/block-editor');
+
+    //         // Get the currently selected block
+    //         const selectedBlock = getSelectedBlock();
+
+    //         if (selectedBlock) {
+    //             // Check if the selected block has content (e.g., innerBlocks or content attribute)
+    //             const hasContent = selectedBlock.innerBlocks?.length > 0 ||
+    //                 (selectedBlock.attributes?.content && selectedBlock.attributes.content.trim() !== '');
+
+    //             if (!hasContent) {
+    //                 // If the selected block is empty, replace it with the parsed blocks
+    //                 replaceBlocks(selectedBlock.clientId, parsedBlocks);
+    //             } else {
+    //                 // If the selected block has content, insert parsed blocks after it
+    //                 const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
+    //                 insertBlocks(parsedBlocks, selectedBlockIndex + 1);
+    //             }
+    //         } else {
+    //             // If no block is selected, insert at the end of the current blocks
+    //             const currentBlocks = getBlocks();
+    //             insertBlocks(parsedBlocks, currentBlocks.length);
+    //         }
+    //     }
+
+    //     setIsLoading(false);
+    //     setIsVisible(false);
+    // };
 
     const importPattern = async (id) => {
-
-        dispatch(setAttribute({ key: "siteTitle", value: "test" }));
-
         if (!userData) {
             setIsLoginModalOpen(true);
             return;
@@ -242,14 +316,14 @@ const TemplateGrid = ({
             setIsPluginUpgradeModalOpen(true);
             return;
         }
-
+    
         setIsLoading(true);
-
+    
         if (is_premium) {
             const verified = await verifySubscription();
-
-            if(verified.status) {
-                console.log('Now import the pro pattern.');
+    
+            if (verified.status) {
+                console.log("Now import the pro pattern.");
                 setIsLoading(false);
                 setIsVisible(false);
             } else {
@@ -263,53 +337,46 @@ const TemplateGrid = ({
                     pauseOnFocusLoss: true,
                     draggable: true,
                     pauseOnHover: true,
-                    theme: "light"
+                    theme: "light",
                 });
-
+    
                 setIsLoading(false);
+                return;
             }
         } else {
-            console.log('Free pattern will be imported directly.');
+            console.log("Free pattern will be imported directly.");
         }
-
-        const patterns = await getTemplatesData("import/pattern", 'pattern_id', id);
-
-        if (patterns) {
-            const patternData = JSON.parse(patterns.data).content;
-            const parsedBlocks = parse(patternData);
-
-            console.log(parsedBlocks);
-
-            // Get block editor utilities
-            const { insertBlocks, replaceBlocks } = dispatch('core/block-editor');
-            const { getSelectedBlock, getBlocks, getBlockIndex } = select('core/block-editor');
-
-            // Get the currently selected block
-            const selectedBlock = getSelectedBlock();
-
-            if (selectedBlock) {
-                // Check if the selected block has content (e.g., innerBlocks or content attribute)
-                const hasContent = selectedBlock.innerBlocks?.length > 0 ||
-                    (selectedBlock.attributes?.content && selectedBlock.attributes.content.trim() !== '');
-
-                if (!hasContent) {
-                    // If the selected block is empty, replace it with the parsed blocks
-                    replaceBlocks(selectedBlock.clientId, parsedBlocks);
-                } else {
-                    // If the selected block has content, insert parsed blocks after it
-                    const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
-                    insertBlocks(parsedBlocks, selectedBlockIndex + 1);
-                }
-            } else {
-                // If no block is selected, insert at the end of the current blocks
-                const currentBlocks = getBlocks();
-                insertBlocks(parsedBlocks, currentBlocks.length);
+    
+        // 🔹 Fetch pattern from API
+        const pattern = await getTemplatesData("import/pattern", "pattern_id", id);
+    
+        console.log("pattern", pattern);
+    
+        if (pattern.data) {
+            try {
+                const patternData = JSON.parse(pattern.data);
+    
+                // Safe importer call
+                await importBlocksFromApi(patternData);
+    
+                toast.success("Pattern imported successfully!", {
+                    position: "top-right",
+                    autoClose: 3000,
+                });
+    
+            } catch (err) {
+                console.error("Import error:", err);
+                toast.error("Failed to import pattern", {
+                    position: "top-right",
+                    autoClose: 3000,
+                });
             }
         }
-
+    
         setIsLoading(false);
         setIsVisible(false);
     };
+    
     
     const importPage = async (id) => {
         if (!userData) {
@@ -495,14 +562,14 @@ const TemplateGrid = ({
                         <span>Import</span>
                     </button>
                     <button
-                        className={`fb-template-save-my-cloud ${(is_premium && isProPlugin) && setLoading ? "loading" : ""}`}
+                        className={`fb-template-save-my-cloud ${isProPlugin && saveLoading ? "loading" : ""}`}
                         onClick={() => {
-                            if(setLoading) return;
+                            if(isProPlugin && saveLoading) return;
                             isLibrary ? handleRemoveLibraryItem(id, templateType) : onSaveLibrary(templateData, isAlreadySaved);
                         }}
-                        disabled={setLoading || saved}
+                        disabled={saveLoading || saved}
                     >
-                        {setLoading ? (
+                        {isProPlugin && saveLoading ? (
                             <>
                                 <span>Saving...</span>
                                 <ClipLoader color="fff" size={16} />
