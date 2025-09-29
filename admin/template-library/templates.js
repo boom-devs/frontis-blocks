@@ -147,7 +147,7 @@ const PatternLibraryButton = () => {
         }
     };
 
-    const getSavedTemplatesData = async (value, email, license_key, page, search, savedTemplate) => {
+    const getSavedTemplatesData = async (value, email, license_key, page, tag, search, category, isPro, savedTemplate) => {
         try {
             const response = await patternsData({
                 endpoint: value,

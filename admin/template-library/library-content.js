@@ -378,7 +378,7 @@ const LibraryContent = ({
                         <h3>No template found</h3>
                     )}
 
-                    {schema[activeTab]?.pagination && (
+                    {schema[activeTab]?.pagination?.last_page > 1 && (
                         <div className="fb-template-library-pagination">
                             <button
                                 className="fb-pagination-btn fb-btn-prev"
