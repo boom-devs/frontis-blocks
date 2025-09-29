@@ -51,53 +51,41 @@ const cleanBlockAttributes = (blocks) => {
  */
 export const importBlocksFromApi = async (patternData) => {
     try {
-
-        // Upload
-
-
-        const parsedBlocks = parse(patternData.content);
+        let parsedBlocks = parse(patternData.content);
         const imageUrls = extractImageUrls(parsedBlocks);
-
-        if(imageUrls.length > 0) {
-            imageUrls.forEach(async (url) => {
-                console.log(url)
-                
-                const newuploadedSrcs = await uploadImagesToMedia(url);
-                console.log(newuploadedSrcs.source_url);
-                patternData.content = patternData.content.replaceAll(url, newuploadedSrcs.source_url); // Replace each old URL with new URL
-            });
+        
+        console.log(imageUrls)
+        // Process image uploads and replace URLs sequentially
+        if (imageUrls.length > 0) {
+            for (const url of imageUrls) {
+                const newUploadedSrcs = await uploadImagesToMedia(url);
+                console.log(newUploadedSrcs.source_url);
+                patternData.content = patternData.content.replaceAll(url, newUploadedSrcs.source_url); // Replace each old URL with new URL
+            }
         }
 
-        console.log(patternData.content);
+        parsedBlocks = parse(patternData.content);
+        const safeBlocks = cleanBlockAttributes(parsedBlocks);
+        const { insertBlocks, replaceBlocks } = dispatch("core/block-editor");
+        const { getSelectedBlock, getBlocks, getBlockIndex } = select("core/block-editor");
+        const selectedBlock = getSelectedBlock();
 
-        // const newuploadedSrcs = await uploadImagesToMedia(imageUrls);
+        if (selectedBlock) {
+            const hasContent =
+                selectedBlock.innerBlocks?.length > 0 ||
+                (selectedBlock.attributes?.content &&
+                    selectedBlock.attributes.content.trim() !== "");
 
-        // console.log(newuploadedSrcs);
-
-        // // Step 4: Replace old URLs with new URLs in the blocks
-        // // const updatedBlocks = replaceImageUrls(parsedBlocks, urlMap);
-
-        // const safeBlocks = cleanBlockAttributes(parsedBlocks);
-        // const { insertBlocks, replaceBlocks } = dispatch("core/block-editor");
-        // const { getSelectedBlock, getBlocks, getBlockIndex } = select("core/block-editor");
-        // const selectedBlock = getSelectedBlock();
-
-        // if (selectedBlock) {
-        //     const hasContent =
-        //         selectedBlock.innerBlocks?.length > 0 ||
-        //         (selectedBlock.attributes?.content &&
-        //             selectedBlock.attributes.content.trim() !== "");
-
-        //     if (!hasContent) {
-        //         replaceBlocks(selectedBlock.clientId, safeBlocks);
-        //     } else {
-        //         const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
-        //         insertBlocks(safeBlocks, selectedBlockIndex + 1);
-        //     }
-        // } else {
-        //     const currentBlocks = getBlocks();
-        //     insertBlocks(safeBlocks, currentBlocks.length);
-        // }
+            if (!hasContent) {
+                replaceBlocks(selectedBlock.clientId, safeBlocks);
+            } else {
+                const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
+                insertBlocks(safeBlocks, selectedBlockIndex + 1);
+            }
+        } else {
+            const currentBlocks = getBlocks();
+            insertBlocks(safeBlocks, currentBlocks.length);
+        }
         
         // dispatch('core/editor').savePost();
         // autoAttemptRecovery();
