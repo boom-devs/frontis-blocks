@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 import TemplateImport from "./template-import";
 import PluginUpgradeModal from "./plugin-upgrade";
-import { TemplateLoader } from "./template-loader";
 import { usePostDataMutation } from "./services/laravelapi";
 import { select, dispatch } from '@wordpress/data';
 import { createBlock, parse, rawHandler } from '@wordpress/blocks';
@@ -55,6 +54,8 @@ const TemplateGrid = ({
     isProPlugin,
     isPluginUpgradeModalOpen,
     setIsPluginUpgradeModalOpen,
+    isImporting,
+    setIsImporting,
     // setIsPladmin
 }) => {
 
@@ -66,7 +67,7 @@ const TemplateGrid = ({
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    
     const [freeTemplate, setFreeTemplate] = useState(false);
 
     const isAlreadySaved = alreadySaved(savedItems, id, activeTab)
@@ -112,7 +113,7 @@ const TemplateGrid = ({
             return;
         }
 
-        setIsLoading(true);
+        setIsImporting(true);
 
         if (isProPlugin && is_premium) {
             const verified = await verifySubscription();
@@ -121,7 +122,7 @@ const TemplateGrid = ({
 
             if(verified.status) {
                 console.log('Now import the pro pattern.');
-                setIsLoading(false);
+                setIsImporting(false);
                 setIsVisible(false);
             } else {
                 toast(verified.message, {
@@ -138,11 +139,11 @@ const TemplateGrid = ({
                 });
 
                 setIsModalOpen(true);
-                setIsLoading(false);
+                setIsImporting(false);
             }
         } else {
             setIsModalOpen(true);
-            setIsLoading(false);
+            setIsImporting(false);
         }
     }, [is_premium, isLogedIn]);
 
@@ -216,14 +217,14 @@ const TemplateGrid = ({
             return;
         }
     
-        setIsLoading(true);
+        setIsImporting(true);
     
         if (is_premium) {
             const verified = await verifySubscription();
     
             if (verified.status) {
                 console.log("Now import the pro pattern.");
-                setIsLoading(false);
+                setIsImporting(false);
                 setIsVisible(false);
             } else {
                 toast(verified.message, {
@@ -239,7 +240,7 @@ const TemplateGrid = ({
                     theme: "light",
                 });
     
-                setIsLoading(false);
+                setIsImporting(false);
                 return;
             }
         } else {
@@ -270,7 +271,7 @@ const TemplateGrid = ({
             }
         }
     
-        setIsLoading(false);
+        setIsImporting(false);
         setIsVisible(false);
     };
     
@@ -286,13 +287,13 @@ const TemplateGrid = ({
             return;
         }
     
-        setIsLoading(true);
+        setIsImporting(true);
     
         if (is_premium) {
             const verified = await verifySubscription();
             if (!verified.status) {
                 toast(verified.message, { position: "top-right", autoClose: 3000 });
-                setIsLoading(false);
+                setIsImporting(false);
                 return;
             }
         }
@@ -313,7 +314,7 @@ const TemplateGrid = ({
             });
         }
     
-        setIsLoading(false);
+        setIsImporting(false);
         setIsVisible(false);
     };
 
@@ -405,7 +406,7 @@ const TemplateGrid = ({
                 </div>
                 <div className="fb-template-actions">
                     <button
-                        className={`fb-import-btn ${isLoading ? "loading" : ""}`}
+                        className={`fb-import-btn ${isImporting ? "loading" : ""}`}
                         onClick={() => {
                             if (activeTab === 'patterns') {
                                 importPattern(id);
@@ -429,7 +430,7 @@ const TemplateGrid = ({
                             }
                         }}
 
-                        disabled={isLoading}
+                        disabled={isImporting}
                     >
                         <span>Import</span>
                     </button>
@@ -474,10 +475,6 @@ const TemplateGrid = ({
 
                 />
             )}
-
-            {isLoading && (
-                <TemplateLoader />)
-            }
         </>
     );
 };
