@@ -67,10 +67,13 @@ const TemplateList = ({ item, libraryData, setLibraryData, data, setIsVisible, h
     };
 
     const importPattern = async (id) => {
+        console.log("Inside pattern import system");
         setIsLoading(true);
         const patterns = await getTemplatesData("import/pattern", "pattern_id", id);
         if (patterns) {
             const patternData = JSON.parse(patterns.data).content;
+            console.log("Pattern data");
+            console.log(patternData);
             const parsedBlocks = parse(patternData);
             const { insertBlocks, replaceBlocks } = dispatch("core/block-editor");
             const { getSelectedBlock, getBlocks, getBlockIndex } = select("core/block-editor");
