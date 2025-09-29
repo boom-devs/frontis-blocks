@@ -300,62 +300,115 @@ const FullSiteImportSettingConfig = ({
     };
 
 
-  const handleStorePages = async () => {
-      const site = await getTemplatesData("import/site", "site_id", template.id);
+  // const handleStorePages = async () => {
+  //     const site = await getTemplatesData("import/site", "site_id", template.id);
 
-      if (site.data.length > 0) {
-          try {
-              const siteData = site.data;
+  //     if (site.data.length > 0) {
+  //         try {
+  //             const siteData = site.data;
               
-              for (const page of siteData) {
+  //             for (const page of siteData) {
+  //               try {
+  //                 // Parse block content
+  //                     const parsedBlocks = parse(page.page).content;
+
+  //                     console.log('parsedBlocks', parsedBlocks);
+
+  //                     // Serialize blocks → HTML for saving in WP page
+  //                     const serializedContent = serialize(parsedBlocks);
+  //                     console.log('serializedContent', serializedContent);
+
+  //                     // Prepare request
+  //                     const pageData = new FormData();
+  //                     pageData.append("action", "fb_full_site_import");
+  //                     pageData.append("security", nonce);
+  //                     pageData.append("title", page.name);
+  //                     pageData.append("content", serializedContent);
+
+  //                     const response = await fetch(ajaxUrl, {
+  //                         method: "POST",
+  //                         body: pageData,
+  //                         credentials: "same-origin",
+  //                     });
+
+  //                     const result = await response.json();
+
+  //                     if (result.success) {
+  //                         console.log(`${page.name} created successfully`);
+  //                     } else {
+  //                         console.error(`Failed to create ${page.name}`, result.data);
+  //                     }
+  //                 } catch (error) {
+  //                     console.error(`Error creating ${page.name}:`, error);
+  //                 }
+  //             }
+
+  //             toast.success("Site imported successfully!", {
+  //                 position: "top-right",
+  //                 autoClose: 3000,
+  //             });
+  //         } catch (err) {
+  //             console.error("Import error:", err);
+  //             toast.error("Failed to import site", {
+  //                 position: "top-right",
+  //                 autoClose: 3000,
+  //             });
+  //         }
+  //     }
+  // };
+
+
+  const handleStorePages = async () => {
+    const site = await getTemplatesData("import/site", "site_id", template.id);
+
+    if (site.data) {
+        try {
+            const siteData = site.data;
+
+            console.log('siteData', siteData);
+            
+            for (const page of siteData) {
                 try {
-                  // Parse block content
-                      const parsedBlocks = parse(page.page).content;
+                    console.log('page', page);
 
-                      console.log('parsedBlocks', parsedBlocks);
+                    // Directly send JSON as content (no parse/serialize)
+                    const pageData = new FormData();
+                    pageData.append("action", "fb_full_site_import");
+                    pageData.append("security", nonce);
+                    pageData.append("title", page.name);
+                    pageData.append("content", page.page); // RAW JSON
 
-                      // Serialize blocks → HTML for saving in WP page
-                      const serializedContent = serialize(parsedBlocks);
-                      console.log('serializedContent', serializedContent);
+                    const response = await fetch(ajaxUrl, {
+                        method: "POST",
+                        body: pageData,
+                        credentials: "same-origin",
+                    });
 
-                      // Prepare request
-                      const pageData = new FormData();
-                      pageData.append("action", "fb_full_site_import");
-                      pageData.append("security", nonce);
-                      pageData.append("title", page.name);
-                      pageData.append("content", serializedContent);
+                    const result = await response.json();
 
-                      const response = await fetch(ajaxUrl, {
-                          method: "POST",
-                          body: pageData,
-                          credentials: "same-origin",
-                      });
+                    if (result.success) {
+                        console.log(`${page.name} created successfully`);
+                    } else {
+                        console.error(`Failed to create ${page.name}`, result.data);
+                    }
+                } catch (error) {
+                    console.error(`Error creating ${page.name}:`, error);
+                }
+            }
 
-                      const result = await response.json();
-
-                      if (result.success) {
-                          console.log(`${page.name} created successfully`);
-                      } else {
-                          console.error(`Failed to create ${page.name}`, result.data);
-                      }
-                  } catch (error) {
-                      console.error(`Error creating ${page.name}:`, error);
-                  }
-              }
-
-              toast.success("Site imported successfully!", {
-                  position: "top-right",
-                  autoClose: 3000,
-              });
-          } catch (err) {
-              console.error("Import error:", err);
-              toast.error("Failed to import site", {
-                  position: "top-right",
-                  autoClose: 3000,
-              });
-          }
-      }
-  };
+            toast.success("Site imported successfully!", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        } catch (err) {
+            console.error("Import error:", err);
+            toast.error("Failed to import site", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        }
+    }
+};
 
 
     
