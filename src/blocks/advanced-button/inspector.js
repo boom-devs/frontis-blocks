@@ -411,10 +411,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             }
         })
     }
+	
     /** End Icon border */
-    const buttonIconBorderDesktopWidth = `${buttonIconBorderDesktop.top}${buttonIconBorderUnits.Desktop} ${buttonIconBorderDesktop.right}${buttonIconBorderUnits.Desktop} ${buttonIconBorderDesktop.bottom}${buttonIconBorderUnits.Desktop} ${buttonIconBorderDesktop.left}${buttonIconBorderUnits.Desktop}`;
-    const buttonIconBorderTabletWidth = `${buttonIconBorderTablet.top}${buttonIconBorderUnits.Tablet} ${buttonIconBorderTablet.right}${buttonIconBorderUnits.Tablet} ${buttonIconBorderTablet.bottom}${buttonIconBorderUnits.Tablet} ${buttonIconBorderTablet.left}${buttonIconBorderUnits.Tablet}`;
-    const buttonIconBorderMobileWidth = `${buttonIconBorderMobile.top}${buttonIconBorderUnits.Mobile} ${buttonIconBorderMobile.right}${buttonIconBorderUnits.Mobile} ${buttonIconBorderMobile.bottom}${buttonIconBorderUnits.Mobile} ${buttonIconBorderMobile.left}${buttonIconBorderUnits.Mobile}`;
+    const buttonIconBorderDesktopWidth = `${buttonIconBorderDesktop?.top}${buttonIconBorderUnits?.Desktop} ${buttonIconBorderDesktop?.right}${buttonIconBorderUnits?.Desktop} ${buttonIconBorderDesktop?.bottom}${buttonIconBorderUnits?.Desktop} ${buttonIconBorderDesktop?.left}${buttonIconBorderUnits?.Desktop}`;
+    const buttonIconBorderTabletWidth = `${buttonIconBorderTablet?.top}${buttonIconBorderUnits?.Tablet} ${buttonIconBorderTablet?.right}${buttonIconBorderUnits?.Tablet} ${buttonIconBorderTablet?.bottom}${buttonIconBorderUnits?.Tablet} ${buttonIconBorderTablet?.left}${buttonIconBorderUnits?.Tablet}`;
+    const buttonIconBorderMobileWidth = `${buttonIconBorderMobile?.top}${buttonIconBorderUnits?.Mobile} ${buttonIconBorderMobile?.right}${buttonIconBorderUnits?.Mobile} ${buttonIconBorderMobile?.bottom}${buttonIconBorderUnits?.Mobile} ${buttonIconBorderMobile?.left}${buttonIconBorderUnits?.Mobile}`;
     /** End Border */
 
     /** Start Icon border radius*/

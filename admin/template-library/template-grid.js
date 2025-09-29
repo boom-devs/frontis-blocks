@@ -249,7 +249,6 @@ const TemplateGrid = ({
     
         // 🔹 Fetch pattern from API
         const pattern = await getTemplatesData("import/pattern", "pattern_id", id);
-        
         if (pattern.data) {
             try {
                 const patternData = JSON.parse(pattern.data);

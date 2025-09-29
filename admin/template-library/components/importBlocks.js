@@ -1,5 +1,6 @@
 import { parse } from "@wordpress/blocks";
 import { dispatch, select } from "@wordpress/data";
+import { autoAttemptRecovery } from '../../block-recovery/attempt-recovery';
 
 /**
  * Allowed attributes (optional strict mode)
@@ -7,7 +8,6 @@ import { dispatch, select } from "@wordpress/data";
 const allowedAttributes = {
     "frontis-blocks/advanced-image": ["url", "alt", "caption"],
     "frontis-blocks/advanced-button": ["text", "url", "style"],
-    // baki block gula ekhane add korte paren
 };
 
 /**
@@ -19,23 +19,15 @@ const allowedAttributes = {
 const cleanBlockAttributes = (blocks) => {
     return blocks.map((block) => {
         if (!block) return block;
-
-        // jodi attributes na thake → skip
         const blockAttrs = block.attributes || {};
-
-        // allowedAttributes e define thakle → shei list use korbo
-        // otherwise sob keys allow hobe
         const allowList = allowedAttributes[block.name] || Object.keys(blockAttrs);
-
         const safeAttrs = {};
-
         allowList.forEach((key) => {
             if (blockAttrs[key] !== undefined) {
                 safeAttrs[key] = blockAttrs[key];
             }
         });
 
-        // ✅ Special case: text/content preserve
         if (block.originalContent) {
             safeAttrs.originalContent = block.originalContent;
         }
@@ -43,7 +35,6 @@ const cleanBlockAttributes = (blocks) => {
             safeAttrs.content = blockAttrs.content;
         }
 
-        // Recursive clean innerBlocks
         const cleanedInnerBlocks = cleanBlockAttributes(block.innerBlocks || []);
 
         return {
@@ -60,16 +51,23 @@ const cleanBlockAttributes = (blocks) => {
  */
 export const importBlocksFromApi = async (patternData) => {
     try {
-        // Parse
-        const parsedBlocks = parse(patternData.content);
+        let parsedBlocks = parse(patternData.content);
+        const imageUrls = extractImageUrls(parsedBlocks);
+        
+        console.log(imageUrls)
+        // Process image uploads and replace URLs sequentially
+        if (imageUrls.length > 0) {
+            for (const url of imageUrls) {
+                const newUploadedSrcs = await uploadImagesToMedia(url);
+                console.log(newUploadedSrcs.source_url);
+                patternData.content = patternData.content.replaceAll(url, newUploadedSrcs.source_url); // Replace each old URL with new URL
+            }
+        }
 
-        // Clean
+        parsedBlocks = parse(patternData.content);
         const safeBlocks = cleanBlockAttributes(parsedBlocks);
-
-        // Gutenberg dispatcher
         const { insertBlocks, replaceBlocks } = dispatch("core/block-editor");
         const { getSelectedBlock, getBlocks, getBlockIndex } = select("core/block-editor");
-
         const selectedBlock = getSelectedBlock();
 
         if (selectedBlock) {
@@ -88,10 +86,139 @@ export const importBlocksFromApi = async (patternData) => {
             const currentBlocks = getBlocks();
             insertBlocks(safeBlocks, currentBlocks.length);
         }
-
+        
+        // dispatch('core/editor').savePost();
+        // autoAttemptRecovery();
         return { success: true };
     } catch (error) {
         console.error("Block import failed:", error);
         return { success: false, error };
     }
+};
+
+/**
+ * Extract image URLs from parsed blocks
+ */
+const extractImageUrls = (blocks) => {
+    const imageUrls = [];
+
+    const traverseBlocks = (block) => {
+        // Check for image URLs in block attributes
+        const attributes = block.attributes || {};
+        for (const key in attributes) {
+            if (
+                typeof attributes[key] === "string" &&
+                attributes[key].match(/\.(png|jpg|jpeg|svg|gif)$/i)
+            ) {
+                // Add URLs that end with common image extensions
+                imageUrls.push(attributes[key]);
+            } else if (key === "containerBgNormalBackgroundImageUrl" && attributes[key]?.Desktop) {
+                // Handle nested background image URLs
+                imageUrls.push(attributes[key].Desktop);
+            }
+        }
+
+        // Recursively check inner blocks
+        if (block.innerBlocks && block.innerBlocks.length > 0) {
+            block.innerBlocks.forEach(traverseBlocks);
+        }
+    };
+
+    blocks.forEach(traverseBlocks);
+    return [...new Set(imageUrls)]; // Remove duplicates
+};
+
+/**
+ * Replace old image URLs with new URLs in blocks
+ */
+// const replaceImageUrls = (blocks, urlMap) => {
+//     const updatedBlocks = JSON.parse(JSON.stringify(blocks)); // Deep copy to avoid mutating original
+//     const traverseBlocks = (block) => {
+//         const attributes = block.attributes || {};
+//         // Special handling for frontis-blocks/advanced-block
+//         if (block.name === "frontis-blocks/advanced-image" && attributes.advancedImageUrl) {
+//             const originalUrl = attributes.advancedImageUrl;
+
+//             console.log(urlMap[originalUrl])
+//             console.log(urlMap)
+//             console.log(originalUrl)
+//             if (urlMap[originalUrl]) {
+//                 block.attributes.advancedImageUrl = urlMap[originalUrl].source_url;
+//                 block.attributes.advancedImageId = urlMap[originalUrl].id;
+//                 block.attributes.advancedImageAlt = urlMap[originalUrl].slug;
+//             }
+//         } else {
+//             // Existing logic for other blocks
+//             for (const key in attributes) {
+//                 if (
+//                     typeof attributes[key] === "string" &&
+//                     urlMap[attributes[key]]?.source_url
+//                 ) {
+//                     block.attributes[key] = urlMap[attributes[key]].source_url;
+//                 } else if (key === "containerBgNormalBackgroundImageUrl") {
+//                     // Handle Desktop, Tablet, and Mobile URLs
+//                     if (attributes[key]?.Desktop && urlMap[attributes[key].Desktop]?.source_url) {
+//                         block.attributes[key].Desktop = urlMap[attributes[key].Desktop].source_url;
+//                     }
+//                     if (attributes[key]?.Tablet && urlMap[attributes[key].Tablet]?.source_url) {
+//                         block.attributes[key].Tablet = urlMap[attributes[key].Tablet].source_url;
+//                     }
+//                     if (attributes[key]?.Mobile && urlMap[attributes[key].Mobile]?.source_url) {
+//                         block.attributes[key].Mobile = urlMap[attributes[key].Mobile].source_url;
+//                     }
+//                 }
+//             }
+//         }
+
+//         // Recursively update inner blocks
+//         if (block.innerBlocks && block.innerBlocks.length > 0) {
+//             block.innerBlocks.forEach(traverseBlocks);
+//         }
+//     };
+
+//     updatedBlocks.forEach(traverseBlocks);
+//     return updatedBlocks;
+// };
+
+/**
+ * Upload images to WordPress media library
+ */
+const uploadImagesToMedia = async (url) => {
+    let urlMap = {};
+
+    try {
+        // Use the proxy endpoint to fetch the image
+        const proxyUrl = `/wp-json/custom/v1/proxy-image?url=${encodeURIComponent(url)}`;
+        const response = await fetch(proxyUrl);
+        if (!response.ok) throw new Error(`Failed to fetch image via proxy: ${url}`);
+        const blob = await response.blob();
+
+        // Create FormData for WordPress media upload
+        const formData = new FormData();
+        formData.append('file', blob, url.split('/').pop());
+
+        // Upload to WordPress media library
+        const uploadResponse = await fetch('/wp-json/wp/v2/media', {
+            method: 'POST',
+            headers: {
+                'X-WP-Nonce': wpApiSettings.nonce, // Ensure nonce is available
+            },
+            body: formData,
+        });
+
+        if (!uploadResponse.ok) throw new Error(`Failed to upload image: ${url}`);
+        const mediaData = await uploadResponse.json();
+
+        // Map the original URL to an object with source_url, id, and slug
+        urlMap = {
+            source_url: mediaData.source_url,
+            id: mediaData.id,
+            slug: mediaData.slug,
+        };
+    } catch (error) {
+        console.error(`Error uploading image ${url}:`, error);
+        urlMap[url] = { source_url: url, id: null, slug: null }; // Fallback to original URL with null id and slug
+    }
+
+    return urlMap;
 };
