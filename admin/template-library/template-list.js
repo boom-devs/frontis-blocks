@@ -12,105 +12,216 @@ import TemplateImport from "./template-import";
 import LoginSignupModal from "./login-signup";
 import PluginUpgradeModal from "./plugin-upgrade";
 
-const TemplateList = ({ item, libraryData, setLibraryData, data, setIsVisible, handleRemoveLibraryItem, type, setActiveCategory }) => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-    const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
-    const [isHovered, setIsHovered] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [isPluginUpgrade, setIsPluginUpgrade] = useState(false);
+const TemplateList = ({ 
+    item, 
+    libraryData, 
+    setLibraryData, 
+    data, 
+    setIsVisible, 
+    handleRemoveLibraryItem, 
+    type, 
+    setActiveCategory,
+    isImporting,
+    setIsImporting,
+}) => {
 
-    const [patternsData] = usePostDataMutation();
+    const userData = localStorage.getItem('userData');
 
     useEffect(() => {
         setIsAuthenticated(false);
     }, []);
 
-    const handleFullSiteImport = useCallback(() => {
-        if (!isPluginUpgrade) setIsPluginUpgradeModalOpen(true);
-        if (!isAuthenticated) setIsLoginModalOpen(true);
-        if (!item.is_premium) setIsModalOpen(true);
-    }, [isAuthenticated, isPluginUpgrade, item.is_premium]);
+    const handleFullSiteImport = useCallback(async (id) => {
+        setIsImporting(true);
 
-    const handleLoginSuccess = useCallback(() => {
-        setIsLoginModalOpen(false);
-        setIsAuthenticated(true);
-        setIsModalOpen(true);
-    }, []);
+        if (isProPlugin && is_premium) {
+            const verified = await verifySubscription();            
 
-    const handleCloseLoginModal = useCallback(() => {
-        setIsLoginModalOpen(false);
-        setIsPluginUpgrade(false);
-    }, []);
+            if(verified.status) {
+                console.log('Now import the pro pattern.');
+                setIsImporting(false);
+                setIsVisible(false);
+            } else {
+                toast(verified.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    newestOnTop: false,
+                    closeOnClick: true,
+                    rtl: false,
+                    pauseOnFocusLoss: true,
+                    draggable: true,
+                    pauseOnHover: true,
+                    theme: "light"
+                });
 
-    const handleClosePluginUpgradeModal = useCallback(() => {
-        setIsPluginUpgradeModalOpen(false);
-        setIsPluginUpgrade(true);
+                setIsModalOpen(true);
+                setIsImporting(false);
+            }
+        } else {
+            setIsModalOpen(true);
+            setIsImporting(false);
+        }
     }, []);
 
     const handleCloseModal = useCallback(() => {
         setIsModalOpen(false);
     }, []);
 
+    const handleDemo = useCallback(() => {
+        console.log("Demo clicked for:", id);
+    }, [id]);
+
+    const [patternsData] = usePostDataMutation();
     const getTemplatesData = async (route, key, id) => {
         try {
             const response = await patternsData({
                 endpoint: route,
-                body: { [key]: id },
-                headers: { "Content-Type": "application/json" },
+                body: {
+                    [key]: id
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             }).unwrap();
+            console.log(key, response);
             return response;
         } catch (err) {
             console.error("Error:", err);
         }
     };
 
-    const importPattern = async (id) => {
-        console.log("Inside pattern import system");
-        setIsLoading(true);
-        const patterns = await getTemplatesData("import/pattern", "pattern_id", id);
-        if (patterns) {
-            const patternData = JSON.parse(patterns.data).content;
-            console.log("Pattern data");
-            console.log(patternData);
-            const parsedBlocks = parse(patternData);
-            const { insertBlocks, replaceBlocks } = dispatch("core/block-editor");
-            const { getSelectedBlock, getBlocks, getBlockIndex } = select("core/block-editor");
+    const verifySubscription = async () => {
+        const apiBase = `${FB_TLibrary.wordpressSyncApi}/wp-json`;
+        const body = {
+            license_key: FB_TLibrary.activationKey,
+            domain_name: window.location.origin,
+        };
 
-            const selectedBlock = getSelectedBlock();
-            if (selectedBlock) {
-                const hasContent =
-                    selectedBlock.innerBlocks?.length > 0 ||
-                    (selectedBlock.attributes?.content &&
-                        selectedBlock.attributes.content.trim() !== "");
-                if (!hasContent) {
-                    replaceBlocks(selectedBlock.clientId, parsedBlocks);
-                } else {
-                    const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
-                    insertBlocks(parsedBlocks, selectedBlockIndex + 1);
-                }
+        const response = await fetch(`${apiBase}/frontis-sync/v1/verify-subscription`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body),
+        });
+
+        const responseData = await response.json();
+
+        console.log(responseData);
+
+        return responseData;
+    }
+    
+
+    const importPattern = async (id) => {
+        if (!userData) {
+            setIsLoginModalOpen(true);
+            return;
+        }
+        if (is_premium === true && !isProPlugin) {
+            setIsPluginUpgradeModalOpen(true);
+            return;
+        }
+    
+        setIsImporting(true);
+    
+        if (is_premium) {
+            const verified = await verifySubscription();
+    
+            if (verified.status) {
+                console.log("Now import the pro pattern.");
+                setIsImporting(false);
+                setIsVisible(false);
             } else {
-                const currentBlocks = getBlocks();
-                insertBlocks(parsedBlocks, currentBlocks.length);
+                toast(verified.message, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    newestOnTop: false,
+                    closeOnClick: true,
+                    rtl: false,
+                    pauseOnFocusLoss: true,
+                    draggable: true,
+                    pauseOnHover: true,
+                    theme: "light",
+                });
+    
+                setIsImporting(false);
+                return;
+            }
+        } else {
+            console.log("Free pattern will be imported directly.");
+        }
+    
+        // 🔹 Fetch pattern from API
+        const pattern = await getTemplatesData("import/pattern", "pattern_id", id);
+        
+        if (pattern.data) {
+            try {
+                const patternData = JSON.parse(pattern.data);
+    
+                // Safe importer call
+                await importBlocksFromApi(patternData);
+    
+                toast.success("Pattern imported successfully!", {
+                    position: "top-right",
+                    autoClose: 3000,
+                });
+    
+            } catch (err) {
+                console.error("Import error:", err);
+                toast.error("Failed to import pattern", {
+                    position: "top-right",
+                    autoClose: 3000,
+                });
             }
         }
-        setIsLoading(false);
+    
+        setIsImporting(false);
         setIsVisible(false);
     };
+    
 
     const importPage = async (id) => {
-        setIsLoading(true);
-        const page = await getTemplatesData("import/page", "page_id", id);
-        if (page) {
-            const pageData = JSON.parse(page.data).content;
-            const parsedBlocks = parse(pageData);
-            const { insertBlocks } = dispatch("core/block-editor");
-            const { getBlocks } = select("core/block-editor");
-            const currentBlocks = getBlocks();
-            insertBlocks(parsedBlocks, currentBlocks.length);
+        if (!userData) {
+            setIsLoginModalOpen(true);
+            return;
         }
-        setIsLoading(false);
+    
+        if (is_premium === true && !isProPlugin) {
+            setIsPluginUpgradeModalOpen(true);
+            return;
+        }
+    
+        setIsImporting(true);
+    
+        if (is_premium) {
+            const verified = await verifySubscription();
+            if (!verified.status) {
+                toast(verified.message, { position: "top-right", autoClose: 3000 });
+                setIsImporting(false);
+                return;
+            }
+        }
+    
+        try {
+            const page = await getTemplatesData("import/page", "page_id", id);
+    
+            if (page) {
+                const pageData = JSON.parse(page.data).content;
+    
+                await importBlocksFromApi({ content: pageData });
+            }
+        } catch (error) {
+            console.error("Page import failed:", error);
+            toast.error("Failed to import page!", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        }
+    
+        setIsImporting(false);
         setIsVisible(false);
     };
 
@@ -175,21 +286,6 @@ const TemplateList = ({ item, libraryData, setLibraryData, data, setIsVisible, h
                     </button>
                 </td>
             </tr>
-
-            {item.is_premium && isPluginUpgradeModalOpen && (
-                <PluginUpgradeModal onClose={handleClosePluginUpgradeModal} />
-            )}
-
-            {isModalOpen && (
-                <TemplateImport template={item} onClose={handleCloseModal} data={data} setActiveCategory={setActiveCategory}/>
-            )}
-
-            {isLoginModalOpen && (
-                <LoginSignupModal
-                    onClose={handleCloseLoginModal}
-                    onSuccess={handleLoginSuccess}
-                />
-            )}
         </>
     );
 };
