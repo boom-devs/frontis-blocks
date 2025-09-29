@@ -147,7 +147,7 @@ const PatternLibraryButton = () => {
         }
     };
 
-    const getSavedTemplatesData = async (value, email, license_key, page, search, savedTemplate) => {
+    const getSavedTemplatesData = async (value, email, license_key, page, tag, search, category, isPro, savedTemplate) => {
         try {
             const response = await patternsData({
                 endpoint: value,
@@ -239,7 +239,7 @@ const PatternLibraryButton = () => {
         }
     } 
 
-    const fetchData = async (tab = activeTab, page = currentPage[activeTab], tag = activeTagTab[activeTab], search = searchText, category = activeCategory[activeTab], isPro = isProTemplate, savedTemplate = savedTemplateType) => {
+    const fetchData = async (tab = activeTab, page, tag, search, category, isPro, savedTemplate) => {
         setLoading(true);
 
         try {
@@ -309,7 +309,7 @@ const PatternLibraryButton = () => {
         }
     };
 
-    const fetchTagData = async (tab = activeTab, page = currentPage[activeTab], tag = activeTagTab[activeTab], search = searchText, category = activeCategory[activeTab], isPro = isProTemplate, savedTemplate = savedTemplateType) => {
+    const fetchTagData = async (tab = activeTab, page, tag, search = searchText, category, isPro, savedTemplate) => {
         setTagLoading(true);
 
         try {
@@ -355,7 +355,6 @@ const PatternLibraryButton = () => {
         }
     };
       
-
     useEffect(() => {
         setSearchText('');
         setCurrentPage({ [activeTab]: 1 });
@@ -363,8 +362,8 @@ const PatternLibraryButton = () => {
         setActiveCategory({ [activeTab]: '' });
         setIsProTemplate('');
         setSavedTemplateType('');
-        fetchData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab], isProTemplate);
-        fetchTagData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab], isProTemplate);
+        fetchData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab], '');
+        fetchTagData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab], '');
     }, [activeTab]);
 
 

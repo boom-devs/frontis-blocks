@@ -94,7 +94,7 @@
                         }
 
                         .fb-form-input {
-                            width: 100%;
+                            width: calc(100% - 1px);
                             padding: 14px;
                             margin-top: 10px;
                             border: 1px solid $neutral-color-100;
