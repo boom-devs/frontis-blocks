@@ -21,8 +21,6 @@ const FullSiteImport = ({ template, onClose, onBack, data }) => {
         importWidgets: true,
         importOptions: true
     });
-
-    console.log(template);
     
     const [activeTab, setActiveTab] = useState(template.activeTab || 'pattern');
     const [showConfigStep, setShowConfigStep] = useState(false);
