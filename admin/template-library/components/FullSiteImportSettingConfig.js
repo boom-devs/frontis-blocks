@@ -364,19 +364,27 @@ const FullSiteImportSettingConfig = ({
     if (site.data) {
         try {
             const siteData = site.data;
-
-            console.log('siteData', siteData);
             
             for (const page of siteData) {
                 try {
-                    console.log('page', page);
+                  let pageObj = page.page;
+                  if (typeof page.page === "string") {
+                      try {
+                          pageObj = JSON.parse(page.page);
+                      } catch (err) {
+                          console.error("JSON parse failed for page.page:", err);
+                          pageObj = { content: page.page }; // fallback
+                      }
+                  }
+          
+                  const parsedBlocks = pageObj.content || "";
 
                     // Directly send JSON as content (no parse/serialize)
                     const pageData = new FormData();
                     pageData.append("action", "fb_full_site_import");
                     pageData.append("security", nonce);
                     pageData.append("title", page.name);
-                    pageData.append("content", page.page); // RAW JSON
+                    pageData.append("content", parsedBlocks); // RAW JSON
 
                     const response = await fetch(ajaxUrl, {
                         method: "POST",
