@@ -339,9 +339,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
-	const headingDesktopPaddingValue = `${HeadingDesktopPadding.top}${HeadingPaddingUnits.Desktop} ${HeadingDesktopPadding.right}${HeadingPaddingUnits.Desktop} ${HeadingDesktopPadding.bottom}${HeadingPaddingUnits.Desktop} ${HeadingDesktopPadding.left}${HeadingPaddingUnits.Desktop}`;
-	const headingTabletPaddingValue = `${HeadingTabPadding.top}${HeadingPaddingUnits.Tablet} ${HeadingTabPadding.right}${HeadingPaddingUnits.Tablet} ${HeadingTabPadding.bottom}${HeadingPaddingUnits.Tablet} ${HeadingTabPadding.left}${HeadingPaddingUnits.Tablet}`;
-	const headingMobilePaddingValue = `${HeadingMobilePadding.top}${HeadingPaddingUnits.Mobile} ${HeadingMobilePadding.right}${HeadingPaddingUnits.Mobile} ${HeadingMobilePadding.bottom}${HeadingPaddingUnits.Mobile} ${HeadingMobilePadding.left}${HeadingPaddingUnits.Mobile}`;
+	const headingDesktopPaddingValue = `${HeadingDesktopPadding?.top}${HeadingPaddingUnits?.Desktop} ${HeadingDesktopPadding?.right}${HeadingPaddingUnits?.Desktop} ${HeadingDesktopPadding?.bottom}${HeadingPaddingUnits?.Desktop} ${HeadingDesktopPadding?.left}${HeadingPaddingUnits?.Desktop}`;
+	const headingTabletPaddingValue = `${HeadingTabPadding?.top}${HeadingPaddingUnits?.Tablet} ${HeadingTabPadding?.right}${HeadingPaddingUnits?.Tablet} ${HeadingTabPadding?.bottom}${HeadingPaddingUnits?.Tablet} ${HeadingTabPadding?.left}${HeadingPaddingUnits?.Tablet}`;
+	const headingMobilePaddingValue = `${HeadingMobilePadding?.top}${HeadingPaddingUnits?.Mobile} ${HeadingMobilePadding?.right}${HeadingPaddingUnits?.Mobile} ${HeadingMobilePadding?.bottom}${HeadingPaddingUnits?.Mobile} ${HeadingMobilePadding?.left}${HeadingPaddingUnits?.Mobile}`;
 
 	// Heading Margin
 	const handleHeadingMarginUnitChange = (event, position) => {
