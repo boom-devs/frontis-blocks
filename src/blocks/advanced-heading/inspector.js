@@ -1,8 +1,7 @@
 import { __ } from '@wordpress/i18n';
 
-import {
-    InspectorControls,
-} from '@wordpress/block-editor';
+import { applyFilters } from "@wordpress/hooks";
+
 
 import {
     SelectControl,
@@ -3296,6 +3295,24 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         setAttributes({ separator: val });
     };
 
+    // apply filters with below hooks
+    let toggleControls = applyFilters('frontisblocks-advanced-heading-toggle-controls',[], { attributes, setAttributes });
+
+    // Add default control if no external controls are provided
+    if (toggleControls.length === 0) {
+        toggleControls = [
+            {
+                comp: (
+                    <ToggleControl
+                        label={__('Enable Dynamic Content', 'frontis-blocks')}
+                        checked={!!dynamicTextEnabled}
+                        onChange={(value) => setAttributes({ dynamicTextEnabled: value })}
+                    />
+                ),
+            },
+        ];
+    }
+
     /**
 	 * Inspector General Controls
 	 */
@@ -3307,13 +3324,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     initialOpen={true}
                 >
 
-
-                    <ToggleControl
-                        label={__("Enable Dynamic Content", "frontis-blocks")}
-                        checked={dynamicTextEnabled}
-                        onChange={(value) => setAttributes({ dynamicTextEnabled: value })}
-                    />
-
+                    {toggleControls.map((control, index) => (
+                        <div key={index}>{control.comp}</div>
+                    ))}
+                    
                     {dynamicTextEnabled && (
                         <>
                             <BaseControl
