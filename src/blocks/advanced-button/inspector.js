@@ -55,8 +55,7 @@ import FB_ScaleControl from '@Components/scale-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
-
-
+import getProToggleControls from '@Utils/getProToggleControls';
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
@@ -1920,6 +1919,40 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	};
 
 	/**
+     * Toggle Controls for Dynamic Content
+     */
+	const toggleControls = getProToggleControls({
+		hook: 'frontisblocks-advanced-button-dynamic-controls', 
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicTextEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'advanced-button-dynamic',
+		links: {
+			upgrade: 'https://frontiswp.com/pro',
+			docs: 'https://frontiswp.com/docs',
+			support: 'https://frontiswp.com/contact',
+		},
+	});
+
+	/**
+	 * Toggle Controls for Dynamic Link
+	 */
+	const toggleControlsLink = getProToggleControls({
+		hook: 'frontisblocks-advanced-button-link-dynamic-controls', 
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicTextEnableLink',
+		label: __('Dynamic Link', 'frontis-blocks'),
+		keyPrefix: 'advanced-button-dynamic-link',
+		links: {
+			upgrade: 'https://frontiswp.com/pro',
+			docs: 'https://frontiswp.com/docs',
+			support: 'https://frontiswp.com/contact',
+		},
+	});
+
+	/**
 	 * Inspector General Controls
 	 */
 	const generalControls = (
@@ -1930,11 +1963,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					initialOpen={true}
 				>
 
-					<ToggleControl
-                        label={__("Enable Dynamic Content", "frontis-blocks")}
-                        checked={dynamicTextEnabled}
-                        onChange={(value) => setAttributes({ dynamicTextEnabled: value })}
-                    />
+					{toggleControls.map((control, index) => (
+                        <div key={control.key || index}>{control.comp}</div>
+                    ))}
 
                     {dynamicTextEnabled && (
                         <>
@@ -2164,11 +2195,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						</BaseControl>
 					</div>
 
-					<ToggleControl
-						label={__("Enable Dynamic Link", "frontis-blocks")} 
-						checked={dynamicTextEnableLink}
-						onChange={(value) => setAttributes({ dynamicTextEnableLink: value })}
-					/>
+					{toggleControlsLink.map((control, index) => (
+                        <div key={control.key || index}>{control.comp}</div>
+                    ))}
+
 
 					{dynamicTextEnableLink ? (
 						<BaseControl label={__("Link Source", "frontis-blocks")}>
