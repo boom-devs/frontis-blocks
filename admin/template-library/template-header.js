@@ -45,6 +45,7 @@ const TemplateHeader = ({
     setLoading = () => { },
     isLoginModalOpen,
     setIsLoginModalOpen,
+    disableMenu = false,
 }) => {
     
     const schema = data;
@@ -126,6 +127,8 @@ const TemplateHeader = ({
                             key={tab.id}
                             className={`single-tab ${activeTab === tab.id ? 'active' : ''}`}
                             onClick={() => handleTabClick(tab)}
+                            style={{ cursor: disableMenu ? 'not-allowed' : 'pointer' }}
+                            disabled={disableMenu}
                         >
                             <span>{tab.label}</span>
                         </button>

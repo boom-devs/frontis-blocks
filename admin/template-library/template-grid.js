@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { ClipLoader } from "react-spinners";
 import TemplateImport from "./template-import";
 import PluginUpgradeModal from "./plugin-upgrade";
-import { TemplateLoader } from "./template-loader";
 import { usePostDataMutation } from "./services/laravelapi";
 import { select, dispatch } from '@wordpress/data';
 import { createBlock, parse, rawHandler } from '@wordpress/blocks';
@@ -55,6 +54,8 @@ const TemplateGrid = ({
     isProPlugin,
     isPluginUpgradeModalOpen,
     setIsPluginUpgradeModalOpen,
+    isImporting,
+    setIsImporting,
     // setIsPladmin
 }) => {
 
@@ -66,7 +67,7 @@ const TemplateGrid = ({
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    
     const [freeTemplate, setFreeTemplate] = useState(false);
 
     const isAlreadySaved = alreadySaved(savedItems, id, activeTab)
@@ -101,30 +102,6 @@ const TemplateGrid = ({
         type: templateType
     });
 
-    // const fetchTemplateJson = async (type, id) => {
-    //     const response = await fetch(`${FB_TLibrary.portalApi}/api/import/${type}`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Authorization": "Bearer nbcnrqfyorftyzpiojzfnjbidchpgnawnifdbnhhbxbuedphusbaunvecxtvvjvnrehznbmccyanndwrjloncuhobjtfbkcazfjtbbvtsuvgiokjknvgrwdwfgfsonbw",
-    //             "Accept": "*/*",
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({
-    //             [`${type}_id`]: id
-    //         })
-    //     });
-    
-    //     if (!response.ok) {
-    //         throw new Error(`HTTP error! Status: ${response.status}`);
-    //     }
-    
-    //     const data = await response.json()
-    //     data.then(data => setTemplateData({...templateData, pages: data.data}));
-
-    //     return data;
-    // };
-
-    // fetchTemplateJson('site', 1);
 
     const handleFullSiteImport = useCallback(async (id) => {
         if (!userData) {
@@ -136,7 +113,7 @@ const TemplateGrid = ({
             return;
         }
 
-        setIsLoading(true);
+        setIsImporting(true);
 
         if (isProPlugin && is_premium) {
             const verified = await verifySubscription();
@@ -145,7 +122,7 @@ const TemplateGrid = ({
 
             if(verified.status) {
                 console.log('Now import the pro pattern.');
-                setIsLoading(false);
+                setIsImporting(false);
                 setIsVisible(false);
             } else {
                 toast(verified.message, {
@@ -162,11 +139,11 @@ const TemplateGrid = ({
                 });
 
                 setIsModalOpen(true);
-                setIsLoading(false);
+                setIsImporting(false);
             }
         } else {
             setIsModalOpen(true);
-            setIsLoading(false);
+            setIsImporting(false);
         }
     }, [is_premium, isLogedIn]);
 
@@ -228,6 +205,7 @@ const TemplateGrid = ({
         return responseData;
     }
 
+    
 
     const importPattern = async (id) => {
         if (!userData) {
@@ -239,14 +217,14 @@ const TemplateGrid = ({
             return;
         }
     
-        setIsLoading(true);
+        setIsImporting(true);
     
         if (is_premium) {
             const verified = await verifySubscription();
     
             if (verified.status) {
                 console.log("Now import the pro pattern.");
-                setIsLoading(false);
+                setIsImporting(false);
                 setIsVisible(false);
             } else {
                 toast(verified.message, {
@@ -262,7 +240,7 @@ const TemplateGrid = ({
                     theme: "light",
                 });
     
-                setIsLoading(false);
+                setIsImporting(false);
                 return;
             }
         } else {
@@ -271,7 +249,6 @@ const TemplateGrid = ({
     
         // 🔹 Fetch pattern from API
         const pattern = await getTemplatesData("import/pattern", "pattern_id", id);
-    
         if (pattern.data) {
             try {
                 const patternData = JSON.parse(pattern.data);
@@ -293,7 +270,7 @@ const TemplateGrid = ({
             }
         }
     
-        setIsLoading(false);
+        setIsImporting(false);
         setIsVisible(false);
     };
     
@@ -309,13 +286,13 @@ const TemplateGrid = ({
             return;
         }
     
-        setIsLoading(true);
+        setIsImporting(true);
     
         if (is_premium) {
             const verified = await verifySubscription();
             if (!verified.status) {
                 toast(verified.message, { position: "top-right", autoClose: 3000 });
-                setIsLoading(false);
+                setIsImporting(false);
                 return;
             }
         }
@@ -326,7 +303,6 @@ const TemplateGrid = ({
             if (page) {
                 const pageData = JSON.parse(page.data).content;
     
-                // 🔥 Utility function call korbo ekhane
                 await importBlocksFromApi({ content: pageData });
             }
         } catch (error) {
@@ -337,7 +313,7 @@ const TemplateGrid = ({
             });
         }
     
-        setIsLoading(false);
+        setIsImporting(false);
         setIsVisible(false);
     };
 
@@ -429,7 +405,7 @@ const TemplateGrid = ({
                 </div>
                 <div className="fb-template-actions">
                     <button
-                        className={`fb-import-btn ${isLoading ? "loading" : ""}`}
+                        className={`fb-import-btn ${isImporting ? "loading" : ""}`}
                         onClick={() => {
                             if (activeTab === 'patterns') {
                                 importPattern(id);
@@ -453,7 +429,7 @@ const TemplateGrid = ({
                             }
                         }}
 
-                        disabled={isLoading}
+                        disabled={isImporting}
                     >
                         <span>Import</span>
                     </button>
@@ -498,12 +474,6 @@ const TemplateGrid = ({
 
                 />
             )}
-
-            {isLoading && (
-                <TemplateLoader />)
-            }
-
-
         </>
     );
 };
