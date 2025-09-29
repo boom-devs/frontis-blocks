@@ -373,32 +373,32 @@ const FullSiteImportSettingConfig = ({
                           pageObj = JSON.parse(page.page);
                       } catch (err) {
                           console.error("JSON parse failed for page.page:", err);
-                          pageObj = { content: page.page }; // fallback
+                          pageObj = { content: page.page };
                       }
                   }
           
                   const parsedBlocks = pageObj.content || "";
 
-                    // Directly send JSON as content (no parse/serialize)
-                    const pageData = new FormData();
-                    pageData.append("action", "fb_full_site_import");
-                    pageData.append("security", nonce);
-                    pageData.append("title", page.name);
-                    pageData.append("content", parsedBlocks); // RAW JSON
+                  // Directly send JSON as content (no parse/serialize)
+                  const pageData = new FormData();
+                  pageData.append("action", "fb_full_site_import");
+                  pageData.append("security", nonce);
+                  pageData.append("title", page.name);
+                  pageData.append("content", parsedBlocks);
 
-                    const response = await fetch(ajaxUrl, {
-                        method: "POST",
-                        body: pageData,
-                        credentials: "same-origin",
-                    });
+                  const response = await fetch(ajaxUrl, {
+                      method: "POST",
+                      body: pageData,
+                      credentials: "same-origin",
+                  });
 
-                    const result = await response.json();
+                  const result = await response.json();
 
-                    if (result.success) {
-                        console.log(`${page.name} created successfully`);
-                    } else {
-                        console.error(`Failed to create ${page.name}`, result.data);
-                    }
+                  if (result.success) {
+                      console.log(`${page.name} created successfully`);
+                  } else {
+                      console.error(`Failed to create ${page.name}`, result.data);
+                  }
                 } catch (error) {
                     console.error(`Error creating ${page.name}:`, error);
                 }
