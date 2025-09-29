@@ -101,30 +101,6 @@ const TemplateGrid = ({
         type: templateType
     });
 
-    // const fetchTemplateJson = async (type, id) => {
-    //     const response = await fetch(`${FB_TLibrary.portalApi}/api/import/${type}`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Authorization": "Bearer nbcnrqfyorftyzpiojzfnjbidchpgnawnifdbnhhbxbuedphusbaunvecxtvvjvnrehznbmccyanndwrjloncuhobjtfbkcazfjtbbvtsuvgiokjknvgrwdwfgfsonbw",
-    //             "Accept": "*/*",
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({
-    //             [`${type}_id`]: id
-    //         })
-    //     });
-    
-    //     if (!response.ok) {
-    //         throw new Error(`HTTP error! Status: ${response.status}`);
-    //     }
-    
-    //     const data = await response.json()
-    //     data.then(data => setTemplateData({...templateData, pages: data.data}));
-
-    //     return data;
-    // };
-
-    // fetchTemplateJson('site', 1);
 
     const handleFullSiteImport = useCallback(async (id) => {
         if (!userData) {
@@ -228,6 +204,7 @@ const TemplateGrid = ({
         return responseData;
     }
 
+    
 
     const importPattern = async (id) => {
         if (!userData) {
@@ -271,9 +248,7 @@ const TemplateGrid = ({
     
         // 🔹 Fetch pattern from API
         const pattern = await getTemplatesData("import/pattern", "pattern_id", id);
-    
-        console.log("pattern", pattern);
-    
+        
         if (pattern.data) {
             try {
                 const patternData = JSON.parse(pattern.data);
@@ -328,7 +303,6 @@ const TemplateGrid = ({
             if (page) {
                 const pageData = JSON.parse(page.data).content;
     
-                // 🔥 Utility function call korbo ekhane
                 await importBlocksFromApi({ content: pageData });
             }
         } catch (error) {
