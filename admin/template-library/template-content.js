@@ -43,38 +43,6 @@ const TemplateContent = ({
 
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
-    const [originalTemplates, setOriginalTemplates] = useState([]);
-    const [searchItems, setSearchItems] = useState('');
-
-    // const searchTemplates = (value) => {
-    //     setSearchItems(value);
-
-    //     if (!value.trim()) {
-    //         if (activeTagTab) {
-    //             const filtered = originalTemplates.filter(template =>
-    //                 template.tags?.includes(
-    //                     TagTabsOptions.find(tag => tag.value === activeTagTab)?.name
-    //                 )
-    //             );
-    //             setFilteredTemplates(filtered);
-    //         } else {
-    //             setFilteredTemplates(originalTemplates);
-    //         }
-    //     } else {
-    //         const lowerValue = value.toLowerCase();
-    //         let filtered = originalTemplates.filter(template =>
-    //             template.title.toLowerCase().includes(lowerValue)
-    //         );
-    //         if (activeTagTab) {
-    //             filtered = filtered.filter(template =>
-    //                 template.tags?.includes(
-    //                     TagTabsOptions.find(tag => tag.value === activeTagTab)?.name
-    //                 )
-    //             );
-    //         }
-    //         setFilteredTemplates(filtered);
-    //     }
-    // };
 
     useEffect(() => {
         if (activeTab && schema[activeTab]) {
@@ -90,13 +58,6 @@ const TemplateContent = ({
                     )
                 );
             }
-
-            // Filter by Pro/Free
-            // if (isProTemplate === 'pro') {
-            //     items = items.filter(item => item.is_premium);
-            // } else if (isProTemplate === 'free') {
-            //     items = items.filter(item => !item.is_premium);
-            // }
 
             setOriginalTemplates(items);
             if (activeTagTab) {
