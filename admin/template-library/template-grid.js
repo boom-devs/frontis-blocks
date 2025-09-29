@@ -229,84 +229,6 @@ const TemplateGrid = ({
     }
 
 
-    // const importPattern = async (id) => {
-
-    //     if (!userData) {
-    //         setIsLoginModalOpen(true);
-    //         return;
-    //     }
-    //     if (is_premium === true && !isProPlugin) {
-    //         setIsPluginUpgradeModalOpen(true);
-    //         return;
-    //     }
-
-    //     setIsLoading(true);
-
-    //     if (is_premium) {
-    //         const verified = await verifySubscription();
-
-    //         if(verified.status) {
-    //             console.log('Now import the pro pattern.');
-    //             setIsLoading(false);
-    //             setIsVisible(false);
-    //         } else {
-    //             toast(verified.message, {
-    //                 position: "top-right",
-    //                 autoClose: 3000,
-    //                 hideProgressBar: false,
-    //                 newestOnTop: false,
-    //                 closeOnClick: true,
-    //                 rtl: false,
-    //                 pauseOnFocusLoss: true,
-    //                 draggable: true,
-    //                 pauseOnHover: true,
-    //                 theme: "light"
-    //             });
-
-    //             setIsLoading(false);
-    //         }
-    //     } else {
-    //         console.log('Free pattern will be imported directly.');
-    //     }
-
-    //     const pattern = await getTemplatesData("import/pattern", 'pattern_id', id);
-
-
-    //     if (pattern.data) {
-    //         const patternData = JSON.parse(pattern.data);
-    //         const parsedBlocks = parse(patternData);
-
-    //         // Get block editor utilities
-    //         const { insertBlocks, replaceBlocks } = dispatch('core/block-editor');
-    //         const { getSelectedBlock, getBlocks, getBlockIndex } = select('core/block-editor');
-
-    //         // Get the currently selected block
-    //         const selectedBlock = getSelectedBlock();
-
-    //         if (selectedBlock) {
-    //             // Check if the selected block has content (e.g., innerBlocks or content attribute)
-    //             const hasContent = selectedBlock.innerBlocks?.length > 0 ||
-    //                 (selectedBlock.attributes?.content && selectedBlock.attributes.content.trim() !== '');
-
-    //             if (!hasContent) {
-    //                 // If the selected block is empty, replace it with the parsed blocks
-    //                 replaceBlocks(selectedBlock.clientId, parsedBlocks);
-    //             } else {
-    //                 // If the selected block has content, insert parsed blocks after it
-    //                 const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
-    //                 insertBlocks(parsedBlocks, selectedBlockIndex + 1);
-    //             }
-    //         } else {
-    //             // If no block is selected, insert at the end of the current blocks
-    //             const currentBlocks = getBlocks();
-    //             insertBlocks(parsedBlocks, currentBlocks.length);
-    //         }
-    //     }
-
-    //     setIsLoading(false);
-    //     setIsVisible(false);
-    // };
-
     const importPattern = async (id) => {
         if (!userData) {
             setIsLoginModalOpen(true);
@@ -377,72 +299,48 @@ const TemplateGrid = ({
         setIsVisible(false);
     };
     
-    
+
     const importPage = async (id) => {
         if (!userData) {
             setIsLoginModalOpen(true);
             return;
         }
-
+    
         if (is_premium === true && !isProPlugin) {
             setIsPluginUpgradeModalOpen(true);
             return;
         }
-
+    
         setIsLoading(true);
-
+    
         if (is_premium) {
             const verified = await verifySubscription();
-
-            if(verified.status) {
-                console.log('Now import the pro page.');
+            if (!verified.status) {
+                toast(verified.message, { position: "top-right", autoClose: 3000 });
                 setIsLoading(false);
-                setIsVisible(false);
-            } else {
-                toast(verified.message, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    newestOnTop: false,
-                    closeOnClick: true,
-                    rtl: false,
-                    pauseOnFocusLoss: true,
-                    draggable: true,
-                    pauseOnHover: true,
-                    theme: "light"
-                });
-
-                setIsLoading(false);
+                return;
             }
-        } else {
-            console.log('Free page will be imported directly.');
         }
-
-        // const page = await getTemplatesData("import/page", 'page_id', id);
-
-        // if (page) {
-        //     const pageData = JSON.parse(page.data).content;
-        //     const parsedBlocks = parse(pageData);
-
-        //     // Get block editor utilities
-        //     const { insertBlocks, replaceBlocks } = dispatch('core/block-editor');
-        //     const { getSelectedBlock, getBlocks, getBlockIndex } = select('core/block-editor');
-
-        //     // Get the currently selected block
-        //     const selectedBlock = getSelectedBlock();
-
-        //     if (selectedBlock) {
-        //         const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
-        //         insertBlocks(parsedBlocks, selectedBlockIndex + 1);
-        //     } else {
-        //         // If no block is selected, insert at the end of the current blocks
-        //         const currentBlocks = getBlocks();
-        //         insertBlocks(parsedBlocks, currentBlocks.length);
-        //     }
-        // }
-
-        // setIsLoading(false);
-        // setIsVisible(false);
+    
+        try {
+            const page = await getTemplatesData("import/page", "page_id", id);
+    
+            if (page) {
+                const pageData = JSON.parse(page.data).content;
+    
+                // 🔥 Utility function call korbo ekhane
+                await importBlocksFromApi({ content: pageData });
+            }
+        } catch (error) {
+            console.error("Page import failed:", error);
+            toast.error("Failed to import page!", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        }
+    
+        setIsLoading(false);
+        setIsVisible(false);
     };
 
     // Function to insert blocks in chunks
