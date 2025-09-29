@@ -43,9 +43,10 @@ const TemplateHeader = ({
     setActiveCategory = () => { },
     setResetCat = () => { },
     setLoading = () => { },
-    isLoginModalOpen,
     setIsLoginModalOpen,
+    setIsPluginUpgradeModalOpen,
     disableMenu = false,
+    isProPlugin = false,
 }) => {
     
     const schema = data;
@@ -61,6 +62,11 @@ const TemplateHeader = ({
     const handleTabClick = (tab) => {
         if (tab.label === 'Template Library' && !userData) {
             setIsLoginModalOpen(true);
+            return;
+        }
+
+        if (tab.label === 'Template Library' && !isProPlugin) {
+            setIsPluginUpgradeModalOpen(true);
             return;
         }
     
