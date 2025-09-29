@@ -1,0 +1,50 @@
+.fb-pro-lock {
+    &.switcher-control {
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+        gap: 8px;
+    }
+    .components-base-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 0 !important;
+    }
+  
+    .fb-pro-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        cursor: pointer;
+  
+        &.components-button {
+            background: transparent !important;
+            color: transparent !important;
+            border-radius: 0 !important;
+            padding: 0 !important;
+            height: unset !important;
+            margin-bottom: 0 !important;
+            font-size: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+  
+        .fb-pro-badge-icon {
+            display: flex;
+            align-items: center;
+        }
+  
+        .fb-pro-badge-text {
+            padding: 4px 8px;
+            color: #FFF;
+            border-radius: 20px;
+            background-color: #F89B2E;
+            font-size: 10px;
+            font-weight: 700;
+            font-family: "Onest", sans-serif;
+            line-height: 13px;
+        }
+    }
+  }

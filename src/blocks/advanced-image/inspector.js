@@ -1288,6 +1288,24 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
         }
     }, []);
 
+
+	    /**
+     * Toggle Controls for Dynamic Content
+     */
+	const toggleControls = getProToggleControls({
+		hook: 'frontisblocks-advanced-image-dynamic-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicImageEnabled',
+		label: __('Dynamic Image', 'frontis-blocks'),
+		keyPrefix: 'advanced-image-dynamic',
+		links: {
+			upgrade: 'https://frontiswp.com/pro',
+			docs: 'https://frontiswp.com/docs',
+			support: 'https://frontiswp.com/contact',
+		},
+	});
+
 	/**
 	 * Inspector General Controls
 	 */
