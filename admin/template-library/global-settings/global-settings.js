@@ -12,7 +12,7 @@ import TypographySettings from "./components/TypographySettings";
 import { useDeviceType } from "@Config/displayType";
 import { loadGoogleFont, useAfterSave } from "./helper";
 import { getGlobalStyle, updateGlobalStyle } from "./fetch";
-import generateCSSVariables from "./components/GenerateRootCss";
+// import generateCSSVariables from "./components/GenerateRootCss";
 import './scss/global-settings.scss';
 import ColorSettings from "./components/ColorSettings";
 
