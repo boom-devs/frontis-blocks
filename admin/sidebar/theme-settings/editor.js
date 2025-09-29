@@ -138,9 +138,6 @@ const FrontisMetaBox = ({whichEditor}) => {
         }
     }
 
-    console.log("templateMetaPostEdit templateMetaPostEdit")
-    console.log(templateMetaPostEdit)
-
     return (
         <>
             <PanelBody title="Disable Elements">
