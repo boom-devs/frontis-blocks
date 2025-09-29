@@ -87,12 +87,7 @@ const TemplateList = ({
             console.log(key, response);
             return response;
         } catch (err) {
-            console.error('Error:', err);
-            console.error('Status:', err.status);
-            console.error('Data:', err.data);
-            if (err.status === 500) {
-                console.error('Server error. Check the API endpoint and server logs.');
-            }
+            console.error("Error:", err);
         }
     };
 
