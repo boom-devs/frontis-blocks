@@ -445,8 +445,6 @@ const PatternLibraryButton = () => {
         }
     }
 
-    console.log('activationKey', FB_TLibrary.activationKey);
-
     const TagTabsOptions = (() => {
         if (!data[activeTab]) return [];
         const currentItems = tagData[activeTab].tags || [];

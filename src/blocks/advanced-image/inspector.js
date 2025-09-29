@@ -1287,7 +1287,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
             setAttributes({ dynamicImageFallbackUrl: defaultFallbackImageUrl });
         }
     }, []);
-
 	/**
 	 * Inspector General Controls
 	 */
