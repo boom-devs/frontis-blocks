@@ -336,8 +336,8 @@ if ( $dynamic_enabled ) {
     }
 }
 
-// Only compute link when dynamic is enabled & link toggle is on
-if ( $dynamic_enabled && $dynamic_enable_link ) {
+// Only compute link when the toggle is on
+if ( $dynamic_enable_link ) {
 
     // ensure $post if needed
     if ( ! isset( $post ) && $is_post_based && $target_post_id ) {
@@ -346,7 +346,7 @@ if ( $dynamic_enabled && $dynamic_enable_link ) {
 
     switch ( $dynamic_link_source ) {
         case 'post_permalink':
-            $dynamic_link_url = $dynamic_permalink ?: '';
+            $dynamic_link_url = $dynamic_permalink ?: ( $target_post_id ? get_permalink( $target_post_id ) : '' );
             break;
 
         case 'comments_area':
@@ -404,7 +404,7 @@ $final_button_text = $dynamic_enabled ? $dynamic_value : $button_text;
 $final_href   = '';
 $final_target = $button_target_url ? ' target="_blank" rel="noopener noreferrer"' : '';
 
-if ( $dynamic_enabled && $dynamic_enable_link && $dynamic_link_url ) {
+if ( $dynamic_enable_link && $dynamic_link_url ) {
     $final_href = esc_url( $dynamic_link_url );
 } else {
     $final_href = esc_url( $button_url );

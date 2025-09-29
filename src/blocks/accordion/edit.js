@@ -24,8 +24,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         tabIconSwitcher,
         tabIcon,
         tabImageUrl,
+        tabImageAlt,
         expandedIcon,
         expandedImageUrl,
+        expandedImageAlt,
         tagName,
         faqSchema,
         accordionChildCount,
@@ -64,9 +66,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             inheritedTabIconSwitcher: tabIconSwitcher,
             inheritedTabIcon: tabIcon,
             inheritedTabImageUrl: tabImageUrl,
+            inheritedTabImageAlt: tabImageAlt,
             inheritedExpandedIconSwitcher: tabIconSwitcher,
             inheritedExpandedIcon: expandedIcon,
             inheritedExpandedImageUrl: expandedImageUrl,
+            inheritedExpandedImageAlt: expandedImageAlt,
             parentBlockID: blockID,
         });
         innerBlocks.splice(innerBlocks.length, 0, newBlock);

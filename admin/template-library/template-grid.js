@@ -70,6 +70,59 @@ const TemplateGrid = ({
     const isAlreadySaved = alreadySaved(savedItems, id, activeTab)
     const userData = localStorage.getItem('userData');
 
+    const currentDay = new Date().toLocaleDateString('en-US', { day: 'numeric' });
+    const currentMonth = new Date().toLocaleDateString('en-US', { month: 'long' });
+    const currentYear = new Date().toLocaleDateString('en-US', { year: 'numeric' });
+    const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+    const currentDateAndTime = { day: currentDay, month: currentMonth, year: currentYear, time: currentTime };
+
+    const [templateData, setTemplateData] = useState({
+        id,
+        title,
+        image: imageUrl,
+        is_premium,
+        categories,
+        author: 'Template Author',
+        activeTab,
+        colors,
+        customColors,
+        gradientColors,
+        customGradientColors,
+        typographies,
+        customTypographies,
+        globalTypographies,
+        fontFamilies,
+        pages: [],
+        dependencies,
+        dateAndTime: currentDateAndTime,
+        type: templateType
+    });
+
+    // const fetchTemplateJson = async (type, id) => {
+    //     const response = await fetch(`${FB_TLibrary.portalApi}/api/import/${type}`, {
+    //         method: "POST",
+    //         headers: {
+    //             "Authorization": "Bearer nbcnrqfyorftyzpiojzfnjbidchpgnawnifdbnhhbxbuedphusbaunvecxtvvjvnrehznbmccyanndwrjloncuhobjtfbkcazfjtbbvtsuvgiokjknvgrwdwfgfsonbw",
+    //             "Accept": "*/*",
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({
+    //             [`${type}_id`]: id
+    //         })
+    //     });
+    
+    //     if (!response.ok) {
+    //         throw new Error(`HTTP error! Status: ${response.status}`);
+    //     }
+    
+    //     const data = await response.json()
+    //     data.then(data => setTemplateData({...templateData, pages: data.data}));
+
+    //     return data;
+    // };
+
+    // fetchTemplateJson('site', 1);
+
     const handleFullSiteImport = useCallback(async (id) => {
         if (!userData) {
             setIsLoginModalOpen(true);
@@ -111,13 +164,9 @@ const TemplateGrid = ({
             console.log('Free pattern will be imported directly.');
         }
         
-        // if (!isPluginUpgrade) {
-        //     setIsPladmin / template - library / scss / _main - content.scssuginUpgradeModalOpen(true);
-        // }
-        // if (!is_premium && isLogedIn) {
-        // setIsModalOpen(true);
-        setIsModalOpen(true);
-        // }
+        if (!is_premium && isLogedIn) {
+            setIsModalOpen(true);
+        }
     }, [is_premium, isLogedIn]);
 
     const handelPatterns = useCallback(() => {
@@ -131,34 +180,6 @@ const TemplateGrid = ({
     const handleDemo = useCallback(() => {
         console.log("Demo clicked for:", id);
     }, [id]);
-
-    const currentDay = new Date().toLocaleDateString('en-US', { day: 'numeric' });
-    const currentMonth = new Date().toLocaleDateString('en-US', { month: 'long' });
-    const currentYear = new Date().toLocaleDateString('en-US', { year: 'numeric' });
-    const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    const currentDateAndTime = { day: currentDay, month: currentMonth, year: currentYear, time: currentTime };
-
-    const templateData = {
-        id,
-        title,
-        image: imageUrl,
-        is_premium,
-        categories,
-        author: 'Template Author',
-        activeTab,
-        colors,
-        customColors,
-        gradientColors,
-        customGradientColors,
-        typographies,
-        customTypographies,
-        globalTypographies,
-        fontFamilies,
-        pages,
-        dependencies,
-        dateAndTime: currentDateAndTime,
-        type: templateType
-    };
 
     const [patternsData] = usePostDataMutation();
     const getTemplatesData = async (route, key, id) => {
@@ -201,8 +222,13 @@ const TemplateGrid = ({
 
         const responseData = await response.json();
 
+        console.log(responseData);
+
         return responseData;
     }
+
+    console.log(verifySubscription);
+
 
     const importPattern = async (id) => {
 
@@ -246,41 +272,43 @@ const TemplateGrid = ({
             console.log('Free pattern will be imported directly.');
         }
 
-        // const patterns = await getTemplatesData("import/pattern", 'pattern_id', id);
+        const patterns = await getTemplatesData("import/pattern", 'pattern_id', id);
 
-        // if (patterns) {
-        //     const patternData = JSON.parse(patterns.data).content;
-        //     const parsedBlocks = parse(patternData);
+        if (patterns) {
+            const patternData = JSON.parse(patterns.data).content;
+            const parsedBlocks = parse(patternData);
 
-        //     // Get block editor utilities
-        //     const { insertBlocks, replaceBlocks } = dispatch('core/block-editor');
-        //     const { getSelectedBlock, getBlocks, getBlockIndex } = select('core/block-editor');
+            console.log(parsedBlocks);
 
-        //     // Get the currently selected block
-        //     const selectedBlock = getSelectedBlock();
+            // Get block editor utilities
+            const { insertBlocks, replaceBlocks } = dispatch('core/block-editor');
+            const { getSelectedBlock, getBlocks, getBlockIndex } = select('core/block-editor');
 
-        //     if (selectedBlock) {
-        //         // Check if the selected block has content (e.g., innerBlocks or content attribute)
-        //         const hasContent = selectedBlock.innerBlocks?.length > 0 ||
-        //             (selectedBlock.attributes?.content && selectedBlock.attributes.content.trim() !== '');
+            // Get the currently selected block
+            const selectedBlock = getSelectedBlock();
 
-        //         if (!hasContent) {
-        //             // If the selected block is empty, replace it with the parsed blocks
-        //             replaceBlocks(selectedBlock.clientId, parsedBlocks);
-        //         } else {
-        //             // If the selected block has content, insert parsed blocks after it
-        //             const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
-        //             insertBlocks(parsedBlocks, selectedBlockIndex + 1);
-        //         }
-        //     } else {
-        //         // If no block is selected, insert at the end of the current blocks
-        //         const currentBlocks = getBlocks();
-        //         insertBlocks(parsedBlocks, currentBlocks.length);
-        //     }
-        // }
+            if (selectedBlock) {
+                // Check if the selected block has content (e.g., innerBlocks or content attribute)
+                const hasContent = selectedBlock.innerBlocks?.length > 0 ||
+                    (selectedBlock.attributes?.content && selectedBlock.attributes.content.trim() !== '');
 
-        // setIsLoading(false);
-        // setIsVisible(false);
+                if (!hasContent) {
+                    // If the selected block is empty, replace it with the parsed blocks
+                    replaceBlocks(selectedBlock.clientId, parsedBlocks);
+                } else {
+                    // If the selected block has content, insert parsed blocks after it
+                    const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
+                    insertBlocks(parsedBlocks, selectedBlockIndex + 1);
+                }
+            } else {
+                // If no block is selected, insert at the end of the current blocks
+                const currentBlocks = getBlocks();
+                insertBlocks(parsedBlocks, currentBlocks.length);
+            }
+        }
+
+        setIsLoading(false);
+        setIsVisible(false);
     };
     
     const importPage = async (id) => {
@@ -467,7 +495,7 @@ const TemplateGrid = ({
                         <span>Import</span>
                     </button>
                     <button
-                        className={`fb-template-save-my-cloud ${setLoading ? "loading" : ""}`}
+                        className={`fb-template-save-my-cloud ${(is_premium && isProPlugin) && setLoading ? "loading" : ""}`}
                         onClick={() => {
                             if(setLoading) return;
                             isLibrary ? handleRemoveLibraryItem(id, templateType) : onSaveLibrary(templateData, isAlreadySaved);

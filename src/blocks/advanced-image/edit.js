@@ -12,11 +12,11 @@ import { useEffect, useMemo, useRef, useState } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import { store as coreStore } from "@wordpress/core-data";
 import { decodeEntities } from "@wordpress/html-entities";
-
 // Internal
 import Inspector from "./inspector";
 import "./editor.scss";
 import generateSrcSet from "@Utils/generateSrcSet";
+import useIsInsideLoopBuilder from '@Utils/useIsInsideLoopBuilder';
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
@@ -70,6 +70,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicImageFallbackId,
 		dynamicImageEnableLink,
 		dynamicImageLinkSource,
+		loopAutoApplied,
 	} = attributes;
 
 	// block props
@@ -395,6 +396,18 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			height: advancedImageDefaultHeight,
 			srcSet: advancedImageSrcSet || undefined,
 		};
+
+
+	// Loop Builder Check
+	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
+	useEffect(() => {
+		if (isInsideLoopBuilder && !loopAutoApplied) {
+			setAttributes({ dynamicImageEnabled: true });
+			setAttributes({dynamicImageEnableLink: true});
+			setAttributes({dynamicImageLinkSource: 'post_permalink'});
+			setAttributes({loopAutoApplied: true});
+		}
+	}, [isInsideLoopBuilder, loopAutoApplied]);
 
 	return (
 		<>

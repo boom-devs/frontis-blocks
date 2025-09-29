@@ -21,9 +21,9 @@ const FullSiteImportSettingConfig = ({
     const [currentStep, setCurrentStep] = useState('');
 
     const [globalColors, setGlobalColors] = useState(template.colors);
-	const [customColors, setCustomColors] = useState(template.customColors);
+	const [customColors, setCustomColors] = useState(template.colors);
 	const [gradientColors, setGradientColors] = useState(template.gradientColors);
-	const [customGradientColors, setCustomGradientColors] = useState(template.customGradientColors);
+	const [customGradientColors, setCustomGradientColors] = useState(template.gradientColors);
 	const [typography, setTypography] = useState(template.typographies);
 	const [customTypography, setCustomTypography] = useState(template.customTypographies);
 	const [fontFamilies, setFontFamilies] = useState(template.fontFamilies);
@@ -33,6 +33,192 @@ const FullSiteImportSettingConfig = ({
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
     const deviceType = useDeviceType();
+
+
+    // Set global typography
+    useEffect(() => {
+        const updatedGlobalTypography = {};
+      
+        const processTypographies = (source, target) => {
+          Object.keys(source).forEach((item) => {
+            const typo = source[item];
+            if (!typo) return;
+      
+            // যদি item === 'heading' হয়, তাহলে এর ভিতরের h1-h6 & all আলাদা key হবে
+            if (item === "heading") {
+              Object.keys(typo).forEach((headingKey) => {
+                const headingTypo = typo[headingKey];
+                if (!headingTypo) return;
+      
+                const keyName = headingKey === "all" ? "headingAll" : headingKey;
+      
+                target[keyName] = {
+                  ...(globalTypography[keyName] || {})
+                };
+      
+                if (headingTypo.fontSize) {
+                  target[keyName].fontSize = {
+                    variable: `--fb-global-${keyName}--font-size`,
+                    value: headingTypo.fontSize,
+                    unit: headingTypo.fontSizeUnit || {
+                      Desktop: "px",
+                      Tablet: "px",
+                      Mobile: "px"
+                    }
+                  };
+                }
+      
+                if (headingTypo.fontWeight) {
+                  target[keyName].fontWeight = {
+                    variable: `--fb-global-${keyName}--font-weight`,
+                    value: headingTypo.fontWeight
+                  };
+                }
+      
+                if (headingTypo.lineHeight) {
+                  target[keyName].lineHeight = {
+                    variable: `--fb-global-${keyName}--line-height`,
+                    value: headingTypo.lineHeight,
+                    unit: headingTypo.lineHeightUnits || {
+                      Desktop: "px",
+                      Tablet: "px",
+                      Mobile: "px"
+                    }
+                  };
+                }
+      
+                if (headingTypo.letterSpacing) {
+                  target[keyName].letterSpacing = {
+                    variable: `--fb-global-${keyName}--letter-spacing`,
+                    value: headingTypo.letterSpacing,
+                    unit: headingTypo.letterSpacingUnit || {
+                      Desktop: "px",
+                      Tablet: "px",
+                      Mobile: "px"
+                    }
+                  };
+                }
+      
+                if (headingTypo.fontStyle) {
+                  target[keyName].fontStyle = {
+                    variable: `--fb-global-${keyName}--font-style`,
+                    value: headingTypo.fontStyle
+                  };
+                }
+      
+                if (headingTypo.textTransform) {
+                  target[keyName].textTransform = {
+                    variable: `--fb-global-${keyName}--text-transform`,
+                    value: headingTypo.textTransform
+                  };
+                }
+      
+                if (headingTypo.textDecoration) {
+                  target[keyName].textDecoration = {
+                    variable: `--fb-global-${keyName}--text-decoration`,
+                    value: headingTypo.textDecoration
+                  };
+                }
+      
+                if (headingTypo.fontFamily) {
+                  target[keyName].fontFamily = {
+                    variable: `--fb-global-${keyName}--font-family`,
+                    value: headingTypo.fontFamily
+                  };
+                }
+              });
+            } else {
+              // Normal typography যেমন body, link, button, captions
+              target[item] = {
+                ...(globalTypography[item] || {})
+              };
+      
+              if (typo.fontSize) {
+                target[item].fontSize = {
+                  variable: `--fb-global-${item}--font-size`,
+                  value: typo.fontSize,
+                  unit: typo.fontSizeUnit || {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                  }
+                };
+              }
+      
+              if (typo.fontWeight) {
+                target[item].fontWeight = {
+                  variable: `--fb-global-${item}--font-weight`,
+                  value: typo.fontWeight
+                };
+              }
+      
+              if (typo.lineHeight) {
+                target[item].lineHeight = {
+                  variable: `--fb-global-${item}--line-height`,
+                  value: typo.lineHeight,
+                  unit: typo.lineHeightUnits || {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                  }
+                };
+              }
+      
+              if (typo.letterSpacing) {
+                target[item].letterSpacing = {
+                  variable: `--fb-global-${item}--letter-spacing`,
+                  value: typo.letterSpacing,
+                  unit: typo.letterSpacingUnit || {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                  }
+                };
+              }
+      
+              if (typo.fontStyle) {
+                target[item].fontStyle = {
+                  variable: `--fb-global-${item}--font-style`,
+                  value: typo.fontStyle
+                };
+              }
+      
+              if (typo.textTransform) {
+                target[item].textTransform = {
+                  variable: `--fb-global-${item}--text-transform`,
+                  value: typo.textTransform
+                };
+              }
+      
+              if (typo.textDecoration) {
+                target[item].textDecoration = {
+                  variable: `--fb-global-${item}--text-decoration`,
+                  value: typo.textDecoration
+                };
+              }
+      
+              if (typo.fontFamily) {
+                target[item].fontFamily = {
+                  variable: `--fb-global-${item}--font-family`,
+                  value: typo.fontFamily
+                };
+              }
+            }
+          });
+        };
+      
+        // normal typographies
+        processTypographies(typography, updatedGlobalTypography);
+      
+        // custom typographies
+        processTypographies(customTypography, updatedGlobalTypography);
+      
+        setGlobalTypography(updatedGlobalTypography);
+    }, []);
+      
+      
+
+    console.log('globalTypography', globalTypography);
 
 
     const handleStorePages = async () => {
@@ -81,24 +267,24 @@ const FullSiteImportSettingConfig = ({
 
     const handleUpdateState = useCallback(async () => {
         const settings = [
-            {
-                key: "fb_update_global_colors",
-                data: globalColors,
-                setter: setGlobalColors,
-                storeKey: "fb_global_colors",
-            },
+            // {
+            //     key: "fb_update_global_colors",
+            //     data: globalColors,
+            //     setter: setGlobalColors,
+            //     storeKey: "fb_global_colors",
+            // },
             {
                 key: "fb_update_custom_colors", 
                 data: customColors,
                 setter: setCustomColors,
                 storeKey: "fb_custom_colors",
             },
-            {
-                key: "fb_update_gradient_colors",
-                data: gradientColors,
-                setter: setGradientColors,
-                storeKey: "fb_gradient_colors",
-            },
+            // {
+            //     key: "fb_update_gradient_colors",
+            //     data: gradientColors,
+            //     setter: setGradientColors,
+            //     storeKey: "fb_gradient_colors",
+            // },
             {
                 key: "fb_update_custom_gradient_colors",
                 data: customGradientColors,
@@ -192,8 +378,8 @@ const FullSiteImportSettingConfig = ({
             const mergedColors = [
                 ...(customColors ?? []),
                 ...(customGradientColors ?? []),
-                ...(gradientColors ?? []),
-                ...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
+                // ...(gradientColors ?? []),
+                // ...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
             ];
 
             const timeoutId = setTimeout(() => {
@@ -206,9 +392,9 @@ const FullSiteImportSettingConfig = ({
             console.error("Error updating global settings:", error);
         }
     }, [
-        globalColors, 
+        // globalColors, 
         customColors, 
-        gradientColors, 
+        // gradientColors, 
         customGradientColors, 
         typography, 
         customTypography, 
@@ -222,8 +408,8 @@ const FullSiteImportSettingConfig = ({
         const mergedColors = [
             ...(customColors ?? []),
             ...(customGradientColors ?? []),
-            ...(gradientColors ?? []),
-            ...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
+            // ...(gradientColors ?? []),
+            // ...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
         ];
     
         const timeoutId = setTimeout(() => {
@@ -233,7 +419,7 @@ const FullSiteImportSettingConfig = ({
         // cleanup function
         return () => clearTimeout(timeoutId);
     
-    }, [globalColors, customColors, customGradientColors, gradientColors, deviceType]);
+    }, [customColors, customGradientColors, deviceType]);
 
 
 	useEffect(() => {
@@ -293,15 +479,16 @@ const FullSiteImportSettingConfig = ({
         template?.id,
         formData,
         onClose,
-        globalColors,
+        // globalColors,
         customColors,
-        gradientColors,
+        // gradientColors,
         customGradientColors,
         typography,
         customTypography,
         fontFamilies,
         globalTypography,
     ]);      
+
 
 
   return (
