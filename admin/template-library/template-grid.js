@@ -478,8 +478,6 @@ const TemplateGrid = ({
             {isLoading && (
                 <TemplateLoader />)
             }
-
-
         </>
     );
 };
