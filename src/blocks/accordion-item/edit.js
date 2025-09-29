@@ -56,9 +56,11 @@ const Edit = (props) => {
             inheritedTabIconSwitcher: context["fb/accordionInheritedTabIconSwitcher"],
             inheritedTabIcon: context["fb/accordionInheritedTabIcon"],
             inheritedTabImageUrl: context["fb/accordionInheritedTabImageUrl"],
+            inheritedTabImageAlt: context["fb/accordionInheritedTabImageAlt"],
             inheritedExpandedIconSwitcher: context["fb/accordionInheritedExpandedIconSwitcher"],
             inheritedExpandedIcon: context["fb/accordionInheritedExpandedIcon"],
             inheritedExpandedImageUrl: context["fb/accordionInheritedExpandedImageUrl"],
+            inheritedExpandedImageAlt: context["fb/accordionInheritedExpandedImageAlt"],
             inheritedTagName: context["fb/accordionInheritedTagName"],
             faqSchema: context["fb/accordionFaqSchema"],
         })
@@ -69,9 +71,11 @@ const Edit = (props) => {
         context["fb/accordionInheritedTabIconSwitcher"],
         context["fb/accordionInheritedTabIcon"],
         context["fb/accordionInheritedTabImageUrl"],
+        context["fb/accordionInheritedTabImageAlt"],
         context["fb/accordionInheritedExpandedIconSwitcher"],
         context["fb/accordionInheritedExpandedIcon"],
         context["fb/accordionInheritedExpandedImageUrl"],
+        context["fb/accordionInheritedExpandedImageAlt"],
         context["fb/accordionInheritedTagName"],
         context["fb/accordionFaqSchema"]
     ])

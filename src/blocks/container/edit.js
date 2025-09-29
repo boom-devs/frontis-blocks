@@ -1,5 +1,6 @@
 import {select, useSelect} from '@wordpress/data';
 import {useEffect, useMemo} from '@wordpress/element';
+import { store as blockEditorStore } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import {ColumnsPicker} from './variationPicker';
 import './editor.scss';
@@ -8,6 +9,7 @@ import Render from "@Blocks/container/render";
 import styling from "@Blocks/container/styling";
 import frontEndStyle from "@Blocks/container/frontend-style";
 import {useDeviceType} from "@Config/displayType";
+import useIsInsideLoopBuilder from '@Utils/useIsInsideLoopBuilder';
 
 const Edit = (props) => {
 	let deviceType= useDeviceType();
@@ -26,6 +28,10 @@ const Edit = (props) => {
 			backgroundType,
 			backgroundVideoOpacity,
 			isGridCssInParent,
+			containerDirection,
+			containerChildrenWidth,
+			containerGlobalPadding,
+			loopAutoApplied,
 		},
 		clientId,
 		setAttributes,
@@ -34,6 +40,16 @@ const Edit = (props) => {
 		context,
 		hasDynamicContent,
 	} = props;
+
+	// Loop Builder Check
+	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
+	useEffect(() => {
+		if (isInsideLoopBuilder && !loopAutoApplied) {
+			setAttributes({ containerDirection: { Desktop: 'column', Tablet: 'column', Mobile: 'column' } });
+			setAttributes({ containerChildrenWidth: 'full' });
+			setAttributes({loopAutoApplied: true});
+		}
+	}, [isInsideLoopBuilder, loopAutoApplied]);
 
 	const {
 		isParentOfSelectedBlock,

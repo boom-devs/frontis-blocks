@@ -18,7 +18,7 @@ import Inspector from './inspector';
 import renderSVG from '../../components/icon-picker/components/icon-picker/controls/renderIcon';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import { useDeviceType } from '@Config/displayType';
-import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
+import useIsInsideLoopBuilder from '@Utils/useIsInsideLoopBuilder';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
@@ -73,7 +73,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicTextTermsSeparator,
 		dynamicTextEnableLink,
 		dynamicTextLinkSource,
-
+		loopAutoApplied,
 
 	} = attributes;
 
@@ -506,7 +506,19 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		lastValueRef.current = dynamicValue;
 	}
 	}, [dynamicValue]);
-	
+
+	// Loop Builder Check
+	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
+	useEffect(() => {
+		if (isInsideLoopBuilder && !loopAutoApplied) {
+			setAttributes({
+				dynamicTextEnabled: true,
+				dynamicTextEnableLink: true,
+				dynamicTextLinkSource: 'post_permalink',
+				loopAutoApplied: true,
+			});
+		}
+	}, [isInsideLoopBuilder, loopAutoApplied]);
 
 	return (
 		<>
