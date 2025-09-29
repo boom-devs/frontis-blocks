@@ -1,5 +1,6 @@
 import { __ } from "@wordpress/i18n";
 import { PluginSidebar, PluginSidebarMoreMenuItem } from "@wordpress/editor";
+import domReady from '@wordpress/dom-ready';
 import { useDispatch } from '@wordpress/data';
 import {
 	Button,
@@ -758,7 +759,9 @@ function FrontisBlocksSidebarFullSite(props) {
 			}
 		}
 
-		handleUpdateState();
+		domReady(() => {
+			handleUpdateState();
+		});
 
 	}, []);
 
