@@ -1025,7 +1025,6 @@ const TypographySettings = (props) => {
 		if (globalTypography) {
 			generateCSSVariables(globalTypography, deviceType);
 		}
-
 	}, [globalTypography, deviceType]);
 
 	// Load saved data and generate root css

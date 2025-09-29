@@ -687,9 +687,9 @@ function FrontisBlocksSidebar() {
 						</NavigatorProvider>
 
 						<div className="fb-theme-settings-wrapper">
-							{/* {onlyCanvasEditor &&
+							{onlyCanvasEditor &&
 								<FrontisThemeSiteEditor />
-							} */}
+							}
 
 							{(isPagePost || isSiteEditor) &&
 								<FrontisMetaBox whichEditor={isPagePost ? 'post' : 'template'} />
