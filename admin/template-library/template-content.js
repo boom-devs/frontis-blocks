@@ -6,7 +6,7 @@ import LoginSignupModal from "./login-signup";
 import { useState, useEffect, useCallback } from "@wordpress/element";
 import TemplateGrid from "./template-grid";
 import {ToastContainer, toast } from "react-toastify";
-import { TemplateContentLoader } from "./template-loader";
+import { TemplateContentLoader, TemplateLoader } from "./template-loader";
 import { usePostDataMutation } from "./services/wpapi";
 import { ClipLoader } from "react-spinners";
 
@@ -43,6 +43,7 @@ const TemplateContent = ({
 
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
+    const [isImporting, setIsImporting] = useState(false);
 
     useEffect(() => {
         if (activeTab && schema[activeTab]) {
@@ -59,7 +60,6 @@ const TemplateContent = ({
                 );
             }
 
-            setOriginalTemplates(items);
             if (activeTagTab) {
                 const filtered = items.filter(template =>
                     template.tags?.includes(
@@ -70,7 +70,6 @@ const TemplateContent = ({
             } else {
                 setFilteredTemplates(items);
             }
-            setSearchItems('');
         }
 
     }, [activeTab, activeCategory, isProTemplate, activeTagTab, TagTabsOptions, schema]);
@@ -226,6 +225,7 @@ const TemplateContent = ({
                         <div className="fb-template-library-cards">
                             {filteredTemplates && filteredTemplates.length > 0 ? (
                                 filteredTemplates.map(template => (
+                                    console.log(template),
                                     <TemplateGrid
                                         key={template.id}
                                         id={template.id}
@@ -263,6 +263,8 @@ const TemplateContent = ({
                                         isProPlugin={isProPlugin}
                                         isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
                                         setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
+                                        isImporting={isImporting}
+                                        setIsImporting={setIsImporting}
                                     />
                                 ))
                             ) : (
@@ -380,6 +382,9 @@ const TemplateContent = ({
                     isLoginModalOpen={isLoginModalOpen}
                     setIsLoginModalOpen={setIsLoginModalOpen}
                 />
+            )}
+            {isImporting && (
+                <TemplateLoader />
             )}
         </>
     );
