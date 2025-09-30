@@ -26,9 +26,11 @@ const TemplateList = ({
     libraryData,
     setLibraryData,
     isLibrary,
+    setIsLoginModalOpen,
+    isLoginModalOpen,
 }) => {
 
-    const userData = localStorage.getItem('userData');
+    const userData = JSON.parse(localStorage.getItem("userData"));
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const currentDay = new Date().toLocaleDateString('en-US', { day: 'numeric' });
@@ -66,6 +68,7 @@ const TemplateList = ({
     const handleCloseModal = useCallback(() => {
         setIsModalOpen(false);
     }, []);
+
 
     const [patternsData] = usePostDataMutation();
     const getTemplatesData = async (route, key, id) => {
@@ -217,7 +220,8 @@ const TemplateList = ({
                     onClose={handleCloseModal}
                     data={data}
                     setActiveCategory={setActiveCategory}
-
+                    setIsLoginModalOpen={setIsLoginModalOpen}
+                    isLoginModalOpen={isLoginModalOpen}
                 />
             )}
         </>
