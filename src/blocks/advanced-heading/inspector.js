@@ -3299,18 +3299,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /**
      * Toggle Controls for Dynamic Content
      */
-    const toggleControls = getProToggleControls({
+    const dynamicContentToggleControls = getProToggleControls({
         hook: 'frontisblocks-advanced-heading-toggle-controls',
         attributes,
         setAttributes,
         dynamicAttr: 'dynamicTextEnabled',
         label: __('Dynamic Content', 'frontis-blocks'),
-        keyPrefix: 'advanced-heading-dynamic',
-        links: {
-          upgrade: 'https://frontiswp.com/pro',
-          docs: 'https://frontiswp.com/docs',
-          support: 'https://frontiswp.com/contact',
-        },
+        keyPrefix: 'advanced-heading-dynamic-content',
     });
 
     /**
@@ -3324,7 +3319,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     initialOpen={true}
                 >
 
-                    {toggleControls.map((control, index) => (
+                    {dynamicContentToggleControls.map((control, index) => (
                         <div key={control.key || index}>{control.comp}</div>
                     ))}
                     
