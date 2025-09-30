@@ -54,6 +54,7 @@ import FB_VisibilityControl from '@Components/visibility-control';
 import FB_ImageControl from '@Components/image-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import "./editor.scss";
+import { applyFilters } from "@wordpress/hooks";
 
 export default function Inspector({ attributes, setAttributes, clientId, onSelectImage }) {
 	const {
@@ -1251,7 +1252,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		setAttributes({ dynamicImageSize: val });
 	};
 
-
 	/**
      * dynamic link source
      */
@@ -1274,7 +1274,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		setLinkSource(val);
 		setAttributes({ dynamicImageLinkSource: val });
 	};
-
 
 	let defaultFallbackImageUrl = '';
     if (typeof FrontisBlocksData !== 'undefined') {

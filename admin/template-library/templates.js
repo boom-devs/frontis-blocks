@@ -51,7 +51,7 @@ const PatternLibraryButton = () => {
         templatelibrary: 1
     });
 
-    const licenseKey = '8c29b662-1837-419e-9e28-96042a27cf02';
+    const licenseKey = FB_TLibrary.activationKey;
     const isProPlugin = FB_TLibrary.activationKey.length > 0 ? true : false;
     const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
 
