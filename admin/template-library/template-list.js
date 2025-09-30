@@ -58,8 +58,6 @@ const TemplateList = ({
         dateAndTime: currentDateAndTime,
     });
 
-    console.log(item);
-
 
     const handleFullSiteImport = useCallback(async () => {
         setIsModalOpen(true);

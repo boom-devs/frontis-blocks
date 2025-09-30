@@ -158,7 +158,6 @@ const TemplateGrid = ({
     useEffect(() => {
         if(!userData?.email) {
             handleCloseModal();
-            setIsLoginModalOpen(true);
         }
     }, [userData?.email]);
 
