@@ -1,9 +1,14 @@
 .fb-pro-lock {
-    &.switcher-control {
+
+    &.switcher-control,
+    &.dynamic-button {
         display: flex;
         align-items: center;
         margin-bottom: 24px;
         gap: 8px;
+    }
+    &.dynamic-button {
+        margin-bottom: 0 !important;
     }
     .components-base-control {
         display: flex;
@@ -29,11 +34,26 @@
             font-size: inherit !important;
             font-weight: inherit !important;
             line-height: inherit !important;
+            position: relative;
+        }
+
+        &.dynamic-button {
+            &::before {
+                content: "";
+                position: absolute;
+                left: -8px;
+                top: 6px;
+                bottom: 6px;
+                width: 1px;
+                background: #a7a7a7;
+                border-radius: 1px;
+            }
         }
   
         .fb-pro-badge-icon {
             display: flex;
             align-items: center;
+            margin-top: -3px;
         }
   
         .fb-pro-badge-text {
