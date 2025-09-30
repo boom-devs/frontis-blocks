@@ -175,7 +175,7 @@ const LibraryContent = ({
                 position: "top-right",
                 autoClose: 3000,
             });
-            
+
             setIsImporting(false);
         }
     };
@@ -264,12 +264,8 @@ const LibraryContent = ({
                                 <thead className="fb-template-library-card-header">
                                     <tr>
                                         <th className="fb-template-library-card-header-name">Name</th>
-                                        {(activeCategory.templatelibrary === 'my-favourites' || activeCategory.templatelibrary === 'my-cloud') && (
-                                            <>
-                                                <th className="fb-template-library-card-header-date">Last Modified</th>
-                                                <th className="fb-template-library-card-header-actions">Action</th>
-                                            </>
-                                        )}
+                                        <th className="fb-template-library-card-header-date">Last Modified</th>
+                                        <th className="fb-template-library-card-header-actions">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody className="fb-template-library-card-body">
