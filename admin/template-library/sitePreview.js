@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from "@wordpress/element";
 import { TemplateContentLoader } from "./template-loader";
 
-const SitePreview = () => {
+const SitePreview = ({preview_url}) => {
 	const [previewUrl, setPreviewUrl] = useState('');
 	const [isLoading, setIsLoading] = useState(true);
 	const iframeRef = useRef(null);
 
 	useEffect(() => {
-		const currentOrigin = window.location.origin; // dynamic origin
-		const remoteUrl = encodeURIComponent('https://yakutansi.boomdevshub.com/?hide_admin_bar=true&preview=true');
+		const currentOrigin = window.location.origin;
+		const remoteUrl = encodeURIComponent(preview_url);
 
 		let siteUrl = `${currentOrigin}/template-proxy/?url=${remoteUrl}`;
 

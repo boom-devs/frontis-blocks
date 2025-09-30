@@ -78,6 +78,7 @@ const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
                     data={data}
                     onClose={onClose}
                     setActiveCategory={setActiveCategory}
+                    disableMenu={true}
                 />
 
                 {/* Content */}

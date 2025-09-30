@@ -6,7 +6,7 @@ import LoginSignupModal from "./login-signup";
 import { useState, useEffect, useCallback } from "@wordpress/element";
 import TemplateGrid from "./template-grid";
 import {ToastContainer, toast } from "react-toastify";
-import { TemplateContentLoader } from "./template-loader";
+import { TemplateContentLoader, TemplateLoader } from "./template-loader";
 import { usePostDataMutation } from "./services/wpapi";
 import { ClipLoader } from "react-spinners";
 
@@ -28,7 +28,6 @@ const TemplateContent = ({
     setSavedItems,
     alreadySaved,
     loading,
-    setLoading,
     tagLoading,
     setIsLogedIn,
     setActiveCategory,
@@ -44,38 +43,7 @@ const TemplateContent = ({
 
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
-    const [originalTemplates, setOriginalTemplates] = useState([]);
-    const [searchItems, setSearchItems] = useState('');
-
-    // const searchTemplates = (value) => {
-    //     setSearchItems(value);
-
-    //     if (!value.trim()) {
-    //         if (activeTagTab) {
-    //             const filtered = originalTemplates.filter(template =>
-    //                 template.tags?.includes(
-    //                     TagTabsOptions.find(tag => tag.value === activeTagTab)?.name
-    //                 )
-    //             );
-    //             setFilteredTemplates(filtered);
-    //         } else {
-    //             setFilteredTemplates(originalTemplates);
-    //         }
-    //     } else {
-    //         const lowerValue = value.toLowerCase();
-    //         let filtered = originalTemplates.filter(template =>
-    //             template.title.toLowerCase().includes(lowerValue)
-    //         );
-    //         if (activeTagTab) {
-    //             filtered = filtered.filter(template =>
-    //                 template.tags?.includes(
-    //                     TagTabsOptions.find(tag => tag.value === activeTagTab)?.name
-    //                 )
-    //             );
-    //         }
-    //         setFilteredTemplates(filtered);
-    //     }
-    // };
+    const [isImporting, setIsImporting] = useState(false);
 
     useEffect(() => {
         if (activeTab && schema[activeTab]) {
@@ -92,14 +60,6 @@ const TemplateContent = ({
                 );
             }
 
-            // Filter by Pro/Free
-            // if (isProTemplate === 'pro') {
-            //     items = items.filter(item => item.is_premium);
-            // } else if (isProTemplate === 'free') {
-            //     items = items.filter(item => !item.is_premium);
-            // }
-
-            setOriginalTemplates(items);
             if (activeTagTab) {
                 const filtered = items.filter(template =>
                     template.tags?.includes(
@@ -110,12 +70,7 @@ const TemplateContent = ({
             } else {
                 setFilteredTemplates(items);
             }
-            setSearchItems('');
         }
-
-        // setTimeout(() => {
-        //     setLoading(false)
-        // }, 2000)
 
     }, [activeTab, activeCategory, isProTemplate, activeTagTab, TagTabsOptions, schema]);
 
@@ -279,6 +234,7 @@ const TemplateContent = ({
                                         tags={template.tags || []}
                                         categories={template.categories || []}
                                         templateType={activeTab}
+                                        preview_url={template.preview_url || ''}
                                         colors={template.colors || []}
                                         customColors={template.custom_colors || []}
                                         gradientColors={template.color_gradients || []}
@@ -300,19 +256,21 @@ const TemplateContent = ({
                                         setActiveCategory={setActiveCategory}
                                         onSaveLibrary={onSaveLibrary}
                                         saved={template.saved}
-                                        setLoading={template.loading}
+                                        saveLoading={template.saveLoading}
                                         setIsLoginModalOpen={setIsLoginModalOpen}
                                         isLoginModalOpen={isLoginModalOpen}
                                         isProPlugin={isProPlugin}
                                         isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
                                         setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
+                                        isImporting={isImporting}
+                                        setIsImporting={setIsImporting}
                                     />
                                 ))
                             ) : (
                                 <h3>No {activeTab} found</h3>
                             )}
                         </div>
-                        { schema[activeTab]?.pagination && (
+                        { schema[activeTab]?.pagination?.last_page > 1 && (
                             <div className="fb-template-library-pagination">
                                 <button
                                     className="fb-pagination-btn fb-btn-prev"
@@ -423,6 +381,9 @@ const TemplateContent = ({
                     isLoginModalOpen={isLoginModalOpen}
                     setIsLoginModalOpen={setIsLoginModalOpen}
                 />
+            )}
+            {isImporting && (
+                <TemplateLoader />
             )}
         </>
     );

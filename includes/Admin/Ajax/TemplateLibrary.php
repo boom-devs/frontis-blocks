@@ -23,7 +23,8 @@ class TemplateLibrary extends AjaxBase {
 		$ajax_events = [
 			'update_option',
 			'get_option',
-            'full_site_import'
+            'full_site_import',
+            'demo_import'
 		];
 
 		$this->init_ajax_events($ajax_events);
@@ -69,11 +70,47 @@ class TemplateLibrary extends AjaxBase {
         }
     }
 
+    // public function full_site_import() {
+    //     $this->check_permission();
+    
+    //     $title   = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
+    //     $content = isset($_POST['content']) ? wp_kses_post($_POST['content']) : '';
+    
+    //     if (empty($title)) {
+    //         wp_send_json_error(['message' => 'Title is required']);
+    //     }
+    
+    //     // Duplicate title handle
+    //     $original_title = $title;
+    //     $count = 1;
+    //     while (get_page_by_title($title, OBJECT, 'page')) {
+    //         $title = $original_title . ' ' . $count;
+    //         $count++;
+    //     }
+    
+    //     $page_id = wp_insert_post([
+    //         'post_title'   => $title,
+    //         'post_content' => $content,
+    //         'post_status'  => 'publish',
+    //         'post_type'    => 'page',
+    //     ]);
+    
+    //     if ($page_id) {
+    //         wp_send_json_success([
+    //             'message' => 'Page created successfully',
+    //             'page_id' => $page_id,
+    //             'title'   => $title
+    //         ]);
+    //     } else {
+    //         wp_send_json_error(['message' => 'Failed to create page']);
+    //     }
+    // }
+
     public function full_site_import() {
         $this->check_permission();
     
         $title   = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content = isset($_POST['content']) ? wp_kses_post($_POST['content']) : '';
+        $content = isset($_POST['content']) ? wp_unslash($_POST['content']) : ''; // RAW JSON রাখো
     
         if (empty($title)) {
             wp_send_json_error(['message' => 'Title is required']);
@@ -89,7 +126,7 @@ class TemplateLibrary extends AjaxBase {
     
         $page_id = wp_insert_post([
             'post_title'   => $title,
-            'post_content' => $content,
+            'post_content' => $content, // Save raw JSON directly
             'post_status'  => 'publish',
             'post_type'    => 'page',
         ]);
@@ -104,5 +141,86 @@ class TemplateLibrary extends AjaxBase {
             wp_send_json_error(['message' => 'Failed to create page']);
         }
     }
-    
+
+    public function demo_import() {
+        if (!isset($_POST['json_data'])) {
+            wp_send_json_error('No JSON data found');
+            return;
+        }
+
+        $data    = json_decode($_POST['json_data'], true);
+        $content = $data['content'] ?? '';
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            wp_send_json_error('Invalid JSON data');
+            return;
+        }
+
+        // Define patterns for img src and background-image
+        $patterns = [
+            'img' => '/<img[^>]+src=[\'"]([^\'"]+)[\'"][^>]*>/i',
+            'bg'  => '/background-image\s*:\s*url\((["\']?)([^"\')]+)\1\)/i'
+        ];
+
+        $all_img_srcs = [];
+
+        foreach ($patterns as $type => $pattern) {
+            preg_match_all($pattern, $content, $matches);
+            $srcs = $matches[1] ?? $matches[2];
+
+            if ($type === 'bg') {
+                $srcs = array_map(function ($src) {
+                    return str_replace('\\u0022', '', $src);
+                }, $srcs);
+            }
+
+            $all_img_srcs = array_merge($all_img_srcs, array_filter($srcs));
+        }
+
+        foreach ($all_img_srcs as $img_src) {
+            $response = wp_remote_get($img_src);
+            if (is_wp_error($response)) {
+                continue;
+            }
+
+            $body     = wp_remote_retrieve_body($response);
+            $filename = basename($img_src);
+
+            // Use WordPress functions to handle file uploads
+            $upload = wp_upload_bits($filename, null, $body);
+
+            if ($upload['error'] || !file_exists($upload['file'])) {
+                continue;
+            }
+
+            // Add image to media library
+            $wp_filetype = wp_check_filetype($filename, null);
+            $attachment  = [
+                'post_mime_type' => $wp_filetype['type'],
+                'post_title'     => sanitize_file_name($filename),
+                'post_content'   => '',
+                'post_status'    => 'inherit',
+            ];
+            $attach_id = wp_insert_attachment($attachment, $upload['file']);
+
+            // Require the needed file
+            require_once(ABSPATH . 'wp-admin/includes/image.php');
+            $attached_data = wp_generate_attachment_metadata($attach_id, $upload['file']);
+
+            // Update the attachment metadata
+            wp_update_attachment_metadata($attach_id, $attached_data);
+
+            // Replace the image URL in the content
+            $content = str_replace($img_src, $upload['url'], $content);
+        }
+
+        // Process your JSON data here
+        wp_send_json_success([
+            'status'   => 'success',
+            'message'  => __('Pattern imported successfully!', 'zoloblocks'),
+            'content'  => $content,
+            'img_srcs' => $img_srcs,
+            'bg_srcs'  => $bg_srcs,
+        ]);
+    }
 }

@@ -500,6 +500,11 @@ function FrontisBlocksSidebar() {
 	decodeURIComponent(pValue) === '/' &&
 	canvas === 'edit';
 
+	// console.log("isSiteEditor isSiteEditor")
+	// console.log(isSiteEditor)
+	// console.log("isPagePost")
+	// console.log(isPagePost)
+
 	return (
 		<>
 			<div className="fb_plugin_sidebar">

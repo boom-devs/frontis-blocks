@@ -11,7 +11,7 @@ import LoginSignupModal from "./login-signup";
 import PluginUpgradeModal from "./plugin-upgrade";
 import TemplateGrid from "./template-grid";
 import TemplateList from "./template-list";
-import { TemplateContentLoader } from "./template-loader";
+import { TemplateContentLoader, TemplateLoader } from "./template-loader";
 
 const LibraryContent = ({ 
     activeTab, 
@@ -72,30 +72,10 @@ const LibraryContent = ({
     const [activeFavoriteTab, setActiveFavoriteTab] = useState('all');
     const [searchItems, setSearchItems] = useState('');
     const [isLibrary, setIsLibrary] = useState(true);
+    const [isImporting, setIsImporting] = useState(false);
 
     const userData = JSON.parse(localStorage.getItem("userData"));
 
-    // const searchTemplates = (value) => {
-    //     setSearchItems(value);
-
-    //     let dataToSearch = originalLibraryData;
-
-    //     if (activeCategory.templatelibrary === 'my-favourites' && activeFavoriteTab !== 'all') {
-    //         dataToSearch = dataToSearch.filter(item => item.activeTab === activeFavoriteTab);
-    //     }
-
-    //     if (!value.trim()) {
-    //         setDisplayedData(dataToSearch);
-    //     } else {
-    //         const lowerValue = value.toLowerCase();
-    //         const filtered = dataToSearch.filter(item =>
-    //             (item.title && item.title.toLowerCase().includes(lowerValue)) ||
-    //             (item.name && item.name.toLowerCase().includes(lowerValue)) ||
-    //             (item.activeTab && item.activeTab.toLowerCase().includes(lowerValue))
-    //         );
-    //         setDisplayedData(filtered);
-    //     }
-    // };
     
     useEffect(() => {
         setOriginalLibraryData(schema[activeTab]?.items || []);
@@ -132,14 +112,6 @@ const LibraryContent = ({
 
         setDisplayedData(filteredData);
     }, [activeFavoriteTab, activeCategory, searchItems, originalLibraryData]);
-
-    // const handleFavoriteTabClick = useCallback((tab) => {
-    //     setActiveFavoriteTab(tab.value);
-    //     console.log(tab.value);
-    //     console.log(tab);
-        
-    //     setSearchItems('');
-    // }, []);
 
 
     const handleRemoveLibraryItem = async (id, type) => {
@@ -201,38 +173,10 @@ const LibraryContent = ({
                 autoClose: 3000,
             });
         }
-
-        // const updatedOriginalData = originalLibraryData.filter(
-        //     (item) => !(item.id === id && item.type === type)
-        // );
-        // setOriginalLibraryData(updatedOriginalData);
-
-        // const updatedDisplayedData = displayedData.filter(
-        //     (item) => !(item.id === id && item.type === type)
-        // );
-        // setDisplayedData(updatedDisplayedData);
-
-        // if (setLibraryData) {
-        //     const updatedLibraryData = libraryData.filter(
-        //         (item) => !(item.id === id && item.type === type)
-        //     );
-        //     setLibraryData(updatedLibraryData);
-        // }
-
-        // setSavedItems((prev) =>
-        //     prev.filter((item) => !(item?.id === id && item?.type === type))
-        // );
-
-        // toast.success(__('Template removed from library', 'frontis-blocks'), {
-        //     position: "top-right",
-        //     autoClose: 3000,
-        //     hideProgressBar: false,
-        //     closeOnClick: true,
-        //     pauseOnHover: true,
-        // });
     };
 
     return (
+        <>
         <div className="fb-template-library-store-content">
             <div className="fb-template-library-content-header">
                 <div className="fb-template-library-content-header-left">
@@ -338,6 +282,8 @@ const LibraryContent = ({
                                             handleRemoveLibraryItem={handleRemoveLibraryItem}
                                             setIsVisible={setIsVisible}
                                             setActiveCategory={setActiveCategory}
+                                            isImporting={isImporting}
+                                            setIsImporting={setIsImporting}
                                         />
                                     ))}
                                 </tbody>
@@ -369,7 +315,8 @@ const LibraryContent = ({
                                         setIsVisible={setIsVisible}
                                         isLibrary={isLibrary}
                                         handleRemoveLibraryItem={handleRemoveLibraryItem}
-                                        setActiveCategory={setActiveCategory}
+                                        isImporting={isImporting}
+                                        setIsImporting={setIsImporting}
                                     />
                                 ))}
                             </div>
@@ -378,7 +325,7 @@ const LibraryContent = ({
                         <h3>No template found</h3>
                     )}
 
-                    {schema[activeTab]?.pagination && (
+                    {schema[activeTab]?.pagination?.last_page > 1 && (
                         <div className="fb-template-library-pagination">
                             <button
                                 className="fb-pagination-btn fb-btn-prev"
@@ -482,6 +429,11 @@ const LibraryContent = ({
                 </>
             )}
         </div>
+
+        {isImporting && (
+            <TemplateLoader />
+        )}
+        </>
     );
 };
 
