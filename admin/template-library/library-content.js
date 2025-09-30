@@ -115,6 +115,7 @@ const LibraryContent = ({
 
 
     const handleRemoveLibraryItem = async (id, type) => {
+        setIsImporting(true);
 
         const apiBase = `${FB_TLibrary.wordpressSyncApi}/wp-json`;
         const body = {
@@ -167,11 +168,15 @@ const LibraryContent = ({
             setSavedItems((prev) =>
                 prev.filter((item) => !(item?.id === id && item?.item_type === type))
             );
+
+            setIsImporting(false);
         } else {
             toast.error('Failed to remove template', {
                 position: "top-right",
                 autoClose: 3000,
             });
+            
+            setIsImporting(false);
         }
     };
 
@@ -276,8 +281,6 @@ const LibraryContent = ({
                                             type={item.item_type}
                                             setLibraryData={setLibraryData}
                                             data={data}
-                                            customColors={item.custom_colors || []}
-                                            customGradientColors={item.custom_gradientColors || []}
                                             isLibrary={isLibrary}
                                             handleRemoveLibraryItem={handleRemoveLibraryItem}
                                             setIsVisible={setIsVisible}
