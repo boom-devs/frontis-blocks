@@ -2277,17 +2277,9 @@ const attributes = {
     flipBoxFrontHeight: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    flipBoxHeightManual: {
-        type: 'object',
-        default: {
-            Desktop: false,
-            Tablet: false,
-            Mobile: false
+            Desktop: '310',
+            Tablet: '310',
+            Mobile: '310'
         }
     },
     flipBoxFrontHeightUnits: {
