@@ -2257,7 +2257,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				.${blockId} .fb-taxonomy-list .fb-taxonomy-item .fb-taxonomy-link-count {
 					flex-direction: row;
 					align-items: center;
-					gap: 5px;
+					gap: 16px;
 				}
 
 				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
@@ -2265,6 +2265,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					letter-spacing: -2%;
 					color: #15171C;
 					margin: 0;
+					font-size: 24px;
+					font-weight: 500;
+					width: fit-content;
 				}
 
 				.${blockId}.fb-taxonomy-style-1 .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link:hover, 
@@ -2272,6 +2275,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				.${blockId} .fb-taxonomy-list .fb-taxonomy-item .fb-taxonomy-link:hover,
 				.${blockId} .fb-taxonomy-list .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name:hover {
 					color: #399cff;
+				}
+
+								.${blockId}.fb-taxonomy-style-2 .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link:hover, 
+				.${blockId}.fb-taxonomy-style-2 .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name:hover{
+							text-decoration: underline;
 				}
 
 				.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link:hover{
@@ -2294,13 +2302,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						align-items: center;
 						line-height: 24px;
             color: #15171C;
-						background: #D7E9FF;
-						padding: 6px 14px;
 						border-radius: 50px;
             font-size: 16px;
             font-weight: 500;
 						box-sizing: content-box;
         }
+
+				.${blockId} .fb-taxonomy-grid .fb-taxonomy-count {
+						background: #D7E9FF;
+						padding: 6px 14px;
+				}
 
 				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button {
 						width: fit-content;		
@@ -2323,7 +2334,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 
 				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button:hover{
-						background-color: #2b7ccc;
+						background-color: #3991FF;
 						color: white;
 						text-decoration: none;
 				}
@@ -2372,7 +2383,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 				/** list style */
 
-					.${blockId} .fb-taxonomy-list .fb-taxonomy-item[data-parent-id="0"] {
+				.${blockId} .fb-taxonomy-list{
+						margin: 0;
+				}
+
+				.${blockId} .fb-taxonomy-list .fb-taxonomy-item[data-parent-id="0"] {
 						margin-bottom: 10px;
             margin-left: 0;
         }
@@ -2389,6 +2404,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					border-color: #e5e5e5;
 				}
 
+				/* LIST LAYOUT - style-1 specific styles for taxonomy item in list layout */
+				${premadeStyle === "style-1" ? `
+					
+					.${blockId} .fb-taxonomy-list .fb-taxonomy-count{
+							font-size: 24px;
+					}
+
+					` : ''}
+
+				/* LIST LAYOUT - style-2 specific styles for taxonomy item in list layout */
+				${premadeStyle === "style-2" ? `
+
+					.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-list {
+						list-style-type: none;
+						padding: 0;
+					}
+	
+					.${blockId} .fb-taxonomy-list .fb-taxonomy-item[data-parent-id="0"]  { 
+							border-left-style: solid;
+							border-left-width: 3px;
+							border-color: #3991FF;
+							padding-left: 24px;
+					}
+	
+					.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-list .fb-taxonomy-count {
+							background: #D7E9FF;
+							padding: 6px 14px;
+					}
+					
+					` : ''}
+						
 
 			/* style-1 specific styles for taxonomy item in grid */
 			
@@ -2399,12 +2445,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					border-radius: 10px;
 				}
 	
-				.${blockId} .fb_post_category_container  .fb-taxonomy-item .fb-taxonomy-link-count{
+				.${blockId} .fb-taxonomy-grid  .fb-taxonomy-item .fb-taxonomy-link-count{
 						gap: 42px;
 				}
 
 				
-				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
+				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
 					font-size: 24px;
 					font-weight: 500;
 				}
@@ -2445,7 +2491,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					}
 				}
 
-				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
+				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
 					font-size: 32px;
 					font-weight: 600;
 				}
@@ -2519,6 +2565,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name {
 						color: #FFFFFF;
+						font-size: 24px;
+						font-weight: 500;
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-description{
@@ -2539,6 +2587,72 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					: ""
 				}
 
+				${premadeStyle === 'style-4' 
+					? `
+						
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
+						padding: 32px;
+						border-radius: 14px;
+						flex-direction: row !important;
+						padding: 0 !important;
+						overflow: hidden;
+						box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02), 0 0px 6px rgba(0, 0, 0, 0.02);
+					}
+						
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-count{
+						background: #F9F9F9;
+					}
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image-container{
+						position: relative;
+						overflow: hidden;
+						width: 100%;
+					}
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-card-content{
+						width: 100%;
+						padding: 32px 24px;
+						display: flex;
+						flex-direction: column;
+						justify-content: space-between;
+					}
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image-container .fb-taxonomy-image {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						z-index: 0;
+					}
+
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						vertical-align: middle;
+						transition: transform 0.4s cubic-bezier(0.33, 0.04, 0.63, 0.99),
+										filter 0.4s ease; /* Slightly longer duration for smoothness */
+					}
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item:hover .fb-taxonomy-image img{
+						transform: scale(1.08) translateY(-8px);
+						filter: brightness(1.05);
+					}
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
+						margin-top: 32px;
+					}
+
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button:hover{
+							background-color: #F89B2E;
+					}
+
+					`
+					: ''
+				 }
+
 
 
 				/* Main block styles */
@@ -2557,9 +2671,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
         .${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
-						${premadeStyle === 'style-3' 
-							? `background: #3991FF;` 
-							: 'background: #EBF4FF;'}
+				 		${premadeStyle === 'style-4' ?
+							 `background: #FFFFFF;`
+							  : `
+									${premadeStyle === 'style-3' 
+									? `background: #3991FF;` 
+									: 'background: #EBF4FF;'}
+								`}
 						display: flex;
 						flex-direction: column;
 						justify-content: space-between;
@@ -2702,6 +2820,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				: ""
 			}
             }
+
+			${premadeStyle === 'style-4' 
+			? `
+				.${blockId}.fb-taxonomy-style-4 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-card-content{
+					${postCategoryPaddingDesktopWidth && postCategoryPaddingDesktop.top
+						? `padding: ${postCategoryPaddingDesktopWidth};`
+						: ""
+					}
+				}
+			` 
+			: ""}
 
 
 
@@ -3285,16 +3414,28 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 
         /* List Layout Styles - Desktop */
 
-        .${blockId} .fb-taxonomy-list {
-            list-style: ${listStyle === "bullet"
-				? "disc"
-				: listStyle === "number"
-					? "decimal"
-					: "none"
-			};
+				${premadeStyle === 'style-1' ? `
+
+					.${blockId} .fb-taxonomy-list {
+						list-style: ${listStyle === "bullet"
+						? "disc"
+						: listStyle === "number"
+							? "decimal"
+							: "none"
+						};
+
 						${listStyle !== "none" ? `padding-left: 20px;` : "padding-left: 0px;"}
-            margin: 0;
-        }
+
+					}
+
+					` : ""}
+
+
+				${premadeStyle === 'style-2' ? `
+						.${blockId} .fb-taxanomy-list .fb-taxonomy-item[data-parent-id="0"]{
+							${postListTypeColor ? `border-color: ${postListTypeColor};` : ""}
+						}
+					` : ''}
 
 
 				.${blockId} .fb-taxonomy-list .fb-taxonomy-item[data-parent-id="0"] {
@@ -3561,6 +3702,17 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 								}
 							` : ''}						
 
+
+							${premadeStyle === 'style-4' 
+							? `
+								.${blockId}.fb-taxonomy-style-4 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-card-content{
+									${postCategoryPaddingTabletWidth && postCategoryPaddingTablet.top
+										? `padding: ${postCategoryPaddingTabletWidth};`
+										: ""
+									}
+								}
+							` 
+							: ""}
 
 
 						.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name {
@@ -3927,6 +4079,18 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 
 								}
 							` : ''}	
+
+
+						${premadeStyle === 'style-4' 
+							? `
+								.${blockId}.fb-taxonomy-style-4 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-card-content{
+									${postCategoryPaddingMobileWidth && postCategoryPaddingMobile.top
+										? `padding: ${postCategoryPaddingMobileWidth};`
+										: ""
+									}
+								}
+							` 
+							: ""}
 
 
 
@@ -4630,7 +4794,14 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 					>
 						<SelectControl
 							value={premadeStyle}
-							options={POST_CATEGORY_PREMADE_STYLE}
+							// options={POST_CATEGORY_PREMADE_STYLE}
+							options={
+								layoutType === "list"
+									? POST_CATEGORY_PREMADE_STYLE.filter(
+											(opt) => opt.value === "style-1" || opt.value === "style-2"
+										)
+									: POST_CATEGORY_PREMADE_STYLE
+							}
 							onChange={(value) => setAttributes({ premadeStyle: value })}
 						/>
 					</BaseControl>
@@ -4813,12 +4984,14 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 
 					{layoutType === "list" && (
 						<>
-							<SelectControl
-								label={__("List Style", "frontis-blocks")}
-								value={listStyle}
-								options={LIST_STYLE_OPTIONS}
-								onChange={(value) => setAttributes({ listStyle: value })}
-							/>
+							{ premadeStyle !== 'style-2' && 
+								<SelectControl
+									label={__("List Style", "frontis-blocks")}
+									value={listStyle}
+									options={LIST_STYLE_OPTIONS}
+									onChange={(value) => setAttributes({ listStyle: value })}
+								/>
+							}
 
 							{listStyle !== "none" && (
 								<FB_Range
@@ -5202,7 +5375,12 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 			{layoutType === "list" && (
 				<PanelBody title={__("List", "frontis-blocks")} initialOpen={false}>
 					<FB_SwitcherControl
-						label={__("Bullet/Numbers Color", "frontis-blocks")}
+						// label={__("Bullet/Numbers Color", "frontis-blocks")}
+						label={
+							premadeStyle === "style-2"
+								? __("Divider/Border Color", "frontis-blocks")
+								: __("Bullet/Numbers Color", "frontis-blocks")
+						}
 						globalSwitcher={postListTypeColorSwitcher}
 						setGlobalSwitcher={(value) =>
 							setAttributes({ postListTypeColorSwitcher: value })

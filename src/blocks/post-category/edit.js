@@ -48,6 +48,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}
 	}, [clientId]);
 
+	let defaultImageUrl = '';
+	if (typeof FrontisBlocksData !== 'undefined') {
+		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
+	}
+
 	const { useSelect } = wp.data;
 
 	const taxonomies = useSelect(
@@ -153,9 +158,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								<span className="fb-taxonomy-name">{term.name}</span>
 							</a>
 
-							{showCount && (
+							{premadeStyle === "style-1" && showCount ? (
 								<span className="fb-taxonomy-count">({term.count})</span>
+							) : (
+								<span className="fb-taxonomy-count">{term.count}</span>
 							)}
+		
 						</div>
 
 						{showDescription && term.description && (
@@ -183,6 +191,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const renderGridLayout = () => {
 		if (!sortedTaxonomies) return null;
 
+		// const imageSource = taxonomy.fb_taxonomy_image || defaultImageUrl;
+
+
 		return (
 			<div
 				className={`fb_post_category_container fb-taxonomy-grid ${postCategoryGlobalWraperClass ? postCategoryGlobalWraperClass : ""
@@ -190,78 +201,164 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				id={postCategoryGlobalWraperID || undefined}
 			>
 				{sortedTaxonomies.map((taxonomy) => (
+
 					<div key={taxonomy.id} className="fb-taxonomy-item">
 
-						{premadeStyle === "style-3" && taxonomy.fb_taxonomy_image && (
-							<div className="fb-taxonomy-image">
-								<img src={taxonomy.fb_taxonomy_image} alt={taxonomy.name} />
-							</div>
-						)}
 
-						<div className="fb-taxonomy-meta">
-
-							<div className="fb-taxonomy-link-count">
-								{showCount && (
-									<span className="fb-taxonomy-count">{taxonomy.count}</span>
-								)}
-								<a href={taxonomy.link} className="fb-taxonomy-link">
-									{/* visual indicator for child terms in grid */}
-									{/* {taxonomy.parent !== 0 && (
-										<span className="fb-child-indicator">(Child Category)</span>
-									)} */}
-									<h4 className="fb-taxonomy-name">{taxonomy.name}</h4>
-								</a>
+						{premadeStyle === "style-4" ? (
+							<>
+							<div className="fb-taxonomy-image-container">
+									<div className="fb-taxonomy-image">
+										<img src={taxonomy.fb_taxonomy_image || defaultImageUrl} alt={taxonomy.name} />
+									</div>
 							</div>
 
-							{showDescription && taxonomy.description && (
-								<p className="fb-taxonomy-description">
-									{trimWords(
-										taxonomy.description,
-										postDescriptionExcerptLength || 10,
+							<div className="fb-taxonomy-card-content">
+								<div className="fb-taxonomy-meta">
+
+									<div className="fb-taxonomy-link-count">
+										{showCount && (
+											<span className="fb-taxonomy-count">{taxonomy.count}</span>
+										)}
+										<a href={taxonomy.link} className="fb-taxonomy-link">
+											{/* visual indicator for child terms in grid */}
+											{/* {taxonomy.parent !== 0 && (
+												<span className="fb-child-indicator">(Child Category)</span>
+											)} */}
+											<h4 className="fb-taxonomy-name">{taxonomy.name}</h4>
+										</a>
+									</div>
+
+									{showDescription && taxonomy.description && (
+										<p className="fb-taxonomy-description">
+											{trimWords(
+												taxonomy.description,
+												postDescriptionExcerptLength || 10,
+											)}
+										</p>
 									)}
-								</p>
+
+								</div>
+
+								{readMoreSwitcher && (
+											<a
+												href={taxonomy.link}
+												className="fb-taxonomy-read-more-button"
+											>
+												{readMoreIconAlign !== "icon-only" && (
+													<span className="fb-taxonomy-read-more-text">
+														{readMoreText}
+													</span>
+												)}
+
+												{readMoreIconAlign === "icon-text" && (
+													<div className="fb-taxonomy-read-more-icon-wrapper">
+														<div className="fb-taxonomy-read-more-icon">
+															{renderSVG(readMoreIcon)}
+														</div>
+													</div>
+												)}
+
+												{readMoreIconAlign === "image" && readMoreIconImageUrl && (
+													<div className="fb-taxonomy-read-more-icon-wrapper">
+														<div className="fb-taxonomy-read-more-icon-image">
+															<img
+																src={readMoreIconImageUrl}
+																alt={readMoreIconImageAlt}
+															/>
+														</div>
+													</div>
+												)}
+
+												{readMoreIconAlign === "icon-only" && (
+													<div className="fb-taxonomy-read-more-icon-wrapper">
+														<div className="fb-taxonomy-read-more-icon">
+															{renderSVG(readMoreIcon)}
+														</div>
+													</div>
+												)}
+											</a>
+								)}
+							</div>
+							</>
+						) : (
+						
+						<>
+							{premadeStyle === "style-3" && taxonomy.fb_taxonomy_image && (
+								<div className="fb-taxonomy-image">
+									<img src={taxonomy.fb_taxonomy_image} alt={taxonomy.name} />
+								</div>
 							)}
-						</div>
 
-						{readMoreSwitcher && (
-									<a
-										href={taxonomy.link}
-										className="fb-taxonomy-read-more-button"
-									>
-										{readMoreIconAlign !== "icon-only" && (
-											<span className="fb-taxonomy-read-more-text">
-												{readMoreText}
-											</span>
-										)}
+							<div className="fb-taxonomy-meta">
 
-										{readMoreIconAlign === "icon-text" && (
-											<div className="fb-taxonomy-read-more-icon-wrapper">
-												<div className="fb-taxonomy-read-more-icon">
-													{renderSVG(readMoreIcon)}
-												</div>
-											</div>
-										)}
-
-										{readMoreIconAlign === "image" && readMoreIconImageUrl && (
-											<div className="fb-taxonomy-read-more-icon-wrapper">
-												<div className="fb-taxonomy-read-more-icon-image">
-													<img
-														src={readMoreIconImageUrl}
-														alt={readMoreIconImageAlt}
-													/>
-												</div>
-											</div>
-										)}
-
-										{readMoreIconAlign === "icon-only" && (
-											<div className="fb-taxonomy-read-more-icon-wrapper">
-												<div className="fb-taxonomy-read-more-icon">
-													{renderSVG(readMoreIcon)}
-												</div>
-											</div>
-										)}
+								<div className="fb-taxonomy-link-count">
+									{showCount && (
+										<span className="fb-taxonomy-count">{taxonomy.count}</span>
+									)}
+									<a href={taxonomy.link} className="fb-taxonomy-link">
+										{/* visual indicator for child terms in grid */}
+										{/* {taxonomy.parent !== 0 && (
+											<span className="fb-child-indicator">(Child Category)</span>
+										)} */}
+										<h4 className="fb-taxonomy-name">{taxonomy.name}</h4>
 									</a>
+								</div>
+
+								{showDescription && taxonomy.description && (
+									<p className="fb-taxonomy-description">
+										{trimWords(
+											taxonomy.description,
+											postDescriptionExcerptLength || 10,
+										)}
+									</p>
+								)}
+
+							</div>
+
+							{readMoreSwitcher && (
+										<a
+											href={taxonomy.link}
+											className="fb-taxonomy-read-more-button"
+										>
+											{readMoreIconAlign !== "icon-only" && (
+												<span className="fb-taxonomy-read-more-text">
+													{readMoreText}
+												</span>
+											)}
+
+											{readMoreIconAlign === "icon-text" && (
+												<div className="fb-taxonomy-read-more-icon-wrapper">
+													<div className="fb-taxonomy-read-more-icon">
+														{renderSVG(readMoreIcon)}
+													</div>
+												</div>
+											)}
+
+											{readMoreIconAlign === "image" && readMoreIconImageUrl && (
+												<div className="fb-taxonomy-read-more-icon-wrapper">
+													<div className="fb-taxonomy-read-more-icon-image">
+														<img
+															src={readMoreIconImageUrl}
+															alt={readMoreIconImageAlt}
+														/>
+													</div>
+												</div>
+											)}
+
+											{readMoreIconAlign === "icon-only" && (
+												<div className="fb-taxonomy-read-more-icon-wrapper">
+													<div className="fb-taxonomy-read-more-icon">
+														{renderSVG(readMoreIcon)}
+													</div>
+												</div>
+											)}
+										</a>
+							)}
+						</>
+
 						)}
+
 						
 					</div>
 				))}
@@ -293,9 +390,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								<span className="fb-taxonomy-name">{taxonomy.name}</span>
 							</a>
 
-							{showCount && (
+							{premadeStyle === "style-1" && showCount ? (
 								<span className="fb-taxonomy-count">({taxonomy.count})</span>
+							) : (
+								<span className="fb-taxonomy-count">{taxonomy.count}</span>
 							)}
+
 						</div>
 						{showDescription && taxonomy.description && (
 							<p className="fb-taxonomy-description">
