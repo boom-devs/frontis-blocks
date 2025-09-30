@@ -19,7 +19,7 @@ const PatternLibraryButton = () => {
     const [showPatternButton, setShowPatternButton] = useState(true);
     const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [tagLoading, setTagLoading] = useState(false);
+    const [noneFilterLoading, setNoneFilterLoading] = useState(false);
     const [resetCat, setResetCat] = useState(true);
     const [isLogedIn, setIsLogedIn] = useState(false);
     const [cardListType, setCardListType] = useState('list');
@@ -50,8 +50,9 @@ const PatternLibraryButton = () => {
         sites: 1,
         templatelibrary: 1
     });
-    
-    const isProPlugin = false;
+
+    const licenseKey = FB_TLibrary.activationKey.length > 0 ? FB_TLibrary.activationKey : '';
+    const isProPlugin = FB_TLibrary.activationKey.length > 0 ? true : false;
     const [isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen] = useState(false);
 
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -107,7 +108,7 @@ const PatternLibraryButton = () => {
         sites: { name: "Sites", items: [], categories: [], pagination: {}, tags: [] },
         templatelibrary: { name: "Template Library", items: [], categories: [], pagination: {} },
     });
-    const [tagData, setTagData] = useState({
+    const [noneFilterData, setNoneFilterData] = useState({
         patterns: [],
         pages: [],
         sites: [],
@@ -146,7 +147,7 @@ const PatternLibraryButton = () => {
         }
     };
 
-    const getSavedTemplatesData = async (value, email, license_key, page, search, savedTemplate) => {
+    const getSavedTemplatesData = async (value, email, license_key, page, tag, search, category, isPro, savedTemplate) => {
         try {
             const response = await patternsData({
                 endpoint: value,
@@ -238,13 +239,13 @@ const PatternLibraryButton = () => {
         }
     } 
 
-    const fetchData = async (tab = activeTab, page = currentPage[activeTab], tag = activeTagTab[activeTab], search = searchText, category = activeCategory[activeTab], isPro = isProTemplate, savedTemplate = savedTemplateType) => {
+    const fetchData = async (tab = activeTab, page, tag, search, category, isPro, savedTemplate) => {
         setLoading(true);
 
         try {
             let response;
             if (tab === 'patterns') {
-                response = await getTemplatesData("patterns", userData?.email, '', page, tag, search, category, isPro);
+                response = await getTemplatesData("patterns", userData?.email, licenseKey, page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -258,7 +259,7 @@ const PatternLibraryButton = () => {
                     }));
                 }
             } else if (tab === 'pages') {
-                response = await getTemplatesData("pages", userData?.email, '', page, tag, search, category, isPro);
+                response = await getTemplatesData("pages", userData?.email, licenseKey, page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -272,7 +273,7 @@ const PatternLibraryButton = () => {
                     }));
                 }
             } else if (tab === 'sites') {
-                response = await getTemplatesData("sites", userData?.email, '', page, tag, search, category, isPro);
+                response = await getTemplatesData("sites", userData?.email, licenseKey, page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -287,7 +288,7 @@ const PatternLibraryButton = () => {
                 }
             } else if (tab === 'templatelibrary') {
                 if(userData) {
-                    response = await getSavedTemplatesData("clouds", userData?.email, FB_TLibrary?.activationKey, page, tag, search, category, isPro, savedTemplate);
+                    response = await getSavedTemplatesData("clouds", userData?.email, licenseKey, page, tag, search, category, isPro, savedTemplate);
                     if (response) {
                         setData((prev) => ({
                             ...prev,
@@ -308,18 +309,19 @@ const PatternLibraryButton = () => {
         }
     };
 
-    const fetchTagData = async (tab = activeTab, page = currentPage[activeTab], tag = activeTagTab[activeTab], search = searchText, category = activeCategory[activeTab], isPro = isProTemplate, savedTemplate = savedTemplateType) => {
-        setTagLoading(true);
+    const fetchNoneFilterData = async (tab = activeTab, page, tag, search = searchText, category, isPro, savedTemplate) => {
+        setNoneFilterLoading(true);
 
         try {
             let response;
             if (tab === 'patterns') {
                 response = await getTemplatesData("patterns", userData?.email, '', page, '', '', '', '');
                 if (response) {
-                    setTagData((prev) => ({
+                    setNoneFilterData((prev) => ({
                         ...prev,
                         patterns: {
                             ...prev.patterns,
+                            categories: response.categories || [],
                             tags: response.tags || []
                         },
                     }));
@@ -327,10 +329,11 @@ const PatternLibraryButton = () => {
             } else if (tab === 'pages') {
                 response = await getTemplatesData("pages", userData?.email, '', page, '', '', '', '');
                 if (response) {
-                    setTagData((prev) => ({
+                    setNoneFilterData((prev) => ({
                         ...prev,
                         pages: {
                             ...prev.pages,
+                            categories: response.categories || [],
                             tags: response.tags || []
                         },
                     }));
@@ -338,10 +341,11 @@ const PatternLibraryButton = () => {
             } else if (tab === 'sites') {
                 response = await getTemplatesData("sites", userData?.email, '', page, '', '', '', '');
                 if (response) {
-                    setTagData((prev) => ({
+                    setNoneFilterData((prev) => ({
                         ...prev,
                         sites: {
                             ...prev.sites,
+                            categories: response.categories || [],
                             tags: response.tags || []
                         },
                     }));
@@ -350,12 +354,10 @@ const PatternLibraryButton = () => {
         } catch (err) {
             console.error(`Error fetching ${activeTab}:`, err);
         } finally {
-            setTagLoading(false);
+            setNoneFilterLoading(false);
         }
     };
       
-      
-
     useEffect(() => {
         setSearchText('');
         setCurrentPage({ [activeTab]: 1 });
@@ -363,8 +365,8 @@ const PatternLibraryButton = () => {
         setActiveCategory({ [activeTab]: '' });
         setIsProTemplate('');
         setSavedTemplateType('');
-        fetchData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab], isProTemplate);
-        fetchTagData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab], isProTemplate);
+        fetchData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab], '');
+        fetchNoneFilterData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab], '');
     }, [activeTab]);
 
 
@@ -374,7 +376,7 @@ const PatternLibraryButton = () => {
             return;
         }
 
-        if (templateData.is_premium === true && !isProPlugin) {
+        if (!isProPlugin) {
             setIsPluginUpgradeModalOpen(true);
             return;
         }
@@ -385,7 +387,7 @@ const PatternLibraryButton = () => {
 
         setData((prev) => {
             const updatedItems = prev[activeTab].items.map((item) =>
-                item.id === templateData.id ? { ...item, loading: true } : item
+                item.id === templateData.id ? { ...item, saveLoading: true } : item
             );
             return {
                 ...prev,
@@ -401,7 +403,7 @@ const PatternLibraryButton = () => {
             email: userData.email,
             item_id: templateData.id,
             item_type: templateData.type,
-            license_key: FB_TLibrary.activationKey,
+            license_key: licenseKey,
             website: window.location.origin,
         };
 
@@ -426,7 +428,7 @@ const PatternLibraryButton = () => {
 
             setData((prev) => {
                 const updatedItems = prev[activeTab].items.map((item) =>
-                    item.id === templateData.id ? { ...item, saved: true, loading: false } : item
+                    item.id === templateData.id ? { ...item, saved: true, saveLoading: false } : item
                 );
                 return {
                     ...prev,
@@ -442,12 +444,24 @@ const PatternLibraryButton = () => {
                 autoClose: 3000,
             });
 
+            setData((prev) => {
+                const updatedItems = prev[activeTab].items.map((item) =>
+                    item.id === templateData.id ? { ...item, saveLoading: false } : item
+                );
+                return {
+                    ...prev,
+                    [activeTab]: {
+                        ...prev[activeTab],
+                        items: updatedItems,
+                    },
+                };
+            });
         }
     }
 
     const TagTabsOptions = (() => {
         if (!data[activeTab]) return [];
-        const currentItems = tagData[activeTab].tags || [];
+        const currentItems = noneFilterData[activeTab].tags || [];
         const uniqueTags = [...new Set(currentItems)].slice(0, 5);
         return uniqueTags.map(tag => ({
             name: tag.name,
@@ -486,14 +500,15 @@ const PatternLibraryButton = () => {
                                     resetCat={resetCat}
                                     setResetCat={setResetCat}
                                     setLoading={setLoading}
-                                    isLoginModalOpen={isLoginModalOpen}
                                     setIsLoginModalOpen={setIsLoginModalOpen}
+                                    setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
+                                    isProPlugin={isProPlugin}
                                 />
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">
                                 <TemplateSidebar
                                     activeTab={activeTab}
-                                    data={data}
+                                    data={noneFilterData}
                                     activeCategory={activeCategory}
                                     isProTemplate={isProTemplate}
                                     setIsProTemplate={setIsProTemplate}
@@ -503,8 +518,7 @@ const PatternLibraryButton = () => {
                                     setActiveTagTab={setActiveTagTab}
                                     resetCat={resetCat}
                                     setResetCat={setResetCat}
-                                    loading={isLoading}
-                                    setLoading={setLoading}
+                                    loading={noneFilterLoading}
                                 />
 
                                 {activeTab !== 'templatelibrary' && (
@@ -527,7 +541,7 @@ const PatternLibraryButton = () => {
                                         alreadySaved={alreadySaved}
                                         loading={isLoading}
                                         setLoading={loading}
-                                        tagLoading={tagLoading}
+                                        tagLoading={noneFilterLoading}
                                         // setActiveCategory={setActiveCategory}
                                         onSaveLibrary={handleSaveLibrary}
                                         setIsLoginModalOpen={setIsLoginModalOpen}

@@ -24,6 +24,15 @@ class Admin {
         add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets']);
         add_action('init', [$this, 'register_meta_settings']);
         $this->store_google_fonts();
+
+        // Template proxy
+        add_filter('query_vars', function ($vars) {
+            $vars[] = 'template_proxy';
+            $vars[] = 'url';
+            return $vars;
+        });
+
+        add_action('template_redirect', [$this, 'template_proxy']);
     }
 
     /**
@@ -117,6 +126,10 @@ class Admin {
                 'auth_callback' => '__return_true',
             )
         );
+
+        // Init template proxy
+        add_rewrite_rule('^template-proxy/?$', 'index.php?template_proxy=1', 'top');
+        flush_rewrite_rules(false);
     }
 
     public function add_menu_page(){
@@ -454,6 +467,12 @@ class Admin {
             },
         ]);
 
+        register_rest_route('custom/v1', '/proxy-image', [
+            'methods' => 'GET',
+            'callback' => [$this, 'proxy_image'],
+            'permission_callback' => '__return_true', // Adjust permissions as needed
+        ]);
+
         register_rest_route(
             'frontis/v1',
             '/global-settings',
@@ -509,6 +528,26 @@ class Admin {
                 )
             )
         );
+    }
+
+    function proxy_image($request) {
+        $image_url = $request->get_param('url');
+        if (!$image_url || !filter_var($image_url, FILTER_VALIDATE_URL)) {
+            return new WP_Error('invalid_url', 'Invalid or missing URL', ['status' => 400]);
+        }
+    
+        $response = wp_remote_get($image_url);
+        if (is_wp_error($response)) {
+            return new WP_Error('fetch_failed', 'Failed to fetch image', ['status' => 500]);
+        }
+    
+        $body = wp_remote_retrieve_body($response);
+        $content_type = wp_remote_retrieve_header($response, 'content-type');
+    
+        // Set headers and output the image
+        header('Content-Type: ' . $content_type);
+        echo $body;
+        exit;
     }
 
     /**
@@ -770,6 +809,46 @@ class Admin {
         ));
 
         wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.css', array(), '1.0.0');
-
 	}
+
+    public function template_proxy() {
+        global $wp_query;
+
+        $is_proxy   = get_query_var('template_proxy');
+        $remote_url = get_query_var('url');
+    
+        // fallback: check raw $_GET if query_vars fail
+        if (empty($is_proxy) && isset($_GET['template_proxy'])) {
+            $is_proxy = sanitize_text_field($_GET['template_proxy']);
+        }
+        if (empty($remote_url) && isset($_GET['url'])) {
+            $remote_url = sanitize_text_field($_GET['url']);
+        }
+    
+        if ($is_proxy && $remote_url) {
+            $remote_url = urldecode($remote_url);
+    
+            $response = wp_remote_get($remote_url);
+            if (is_wp_error($response)) {
+                wp_die('Proxy request failed: ' . $response->get_error_message());
+            }
+    
+            $body = wp_remote_retrieve_body($response);
+            $content_type = wp_remote_retrieve_header($response, 'content-type');
+            header("Content-Type: " . ($content_type ?: 'text/html; charset=UTF-8'));
+    
+            // Fix relative asset URLs
+            $body = preg_replace_callback(
+                '/(src|href)=["\'](\/[^"\']+)["\']/i',
+                function ($matches) use ($remote_url) {
+                    $base = preg_replace('#/[^/]*$#', '/', $remote_url);
+                    return $matches[1] . '="' . rtrim($base, '/') . $matches[2] . '"';
+                },
+                $body
+            );
+    
+            echo $body;
+            exit;
+        }
+    }
 }

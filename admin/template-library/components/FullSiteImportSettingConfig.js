@@ -7,6 +7,9 @@ import generateCSSVariables from "../global-settings/components/GenerateRootCss"
 import { updateGlobalStyle } from "../global-settings/fetch";
 import { loadGoogleFont } from "../global-settings/helper";
 import generateColorsVariables from "../global-settings/components/GenerateColorRoot";
+import { parse, serialize } from "@wordpress/blocks";
+import { usePostDataMutation } from "../services/laravelapi";
+import { toast } from "react-toastify";
 
 const FullSiteImportSettingConfig = ({
     template, 
@@ -28,7 +31,6 @@ const FullSiteImportSettingConfig = ({
 	const [customTypography, setCustomTypography] = useState(template.customTypographies);
 	const [fontFamilies, setFontFamilies] = useState(template.fontFamilies);
 	const [globalTypography, setGlobalTypography] = useState(template.globalTypographies);
-    const [pages, setPages] = useState(template.pages);
 
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
@@ -218,36 +220,204 @@ const FullSiteImportSettingConfig = ({
       
       
 
-    console.log('globalTypography', globalTypography);
+    // console.log('globalTypography', template);
 
 
-    const handleStorePages = async () => {
-        for (const page of pages) {
-          try {
-            const pageData = new FormData();
-            pageData.append("action", "fb_full_site_import");
-            pageData.append("security", nonce);
-            pageData.append("title", page.title);
-            pageData.append("content", page.content);
+    // const handleStorePages = async () => {
+    //     const site = await getTemplatesData("import/site", "site_id", template.id);
+
+    //     console.log('site', site);
+        
+    //     if (site.data) {
+    //         try {
+    //             const siteData = JSON.parse(site.data);
+    
+    //             // Safe importer call
+    //             await importBlocksFromApi(siteData);
+    
+    //             toast.success("Site imported successfully!", {
+    //                 position: "top-right",
+    //                 autoClose: 3000,
+    //             });
+    
+    //         } catch (err) {
+    //             console.error("Import error:", err);
+    //             toast.error("Failed to import site", {
+    //                 position: "top-right",
+    //                 autoClose: 3000,
+    //             });
+    //         }
+    //     }
+    //     for (const site of page) {
+    //       try {
+    //         const pageData = new FormData();
+    //         pageData.append("action", "fb_full_site_import");
+    //         pageData.append("security", nonce);
+    //         pageData.append("title", page.title);
+    //         pageData.append("content", page.content);
       
-            const response = await fetch(ajaxUrl, {
-              method: "POST",
-              body: pageData,
-              credentials: "same-origin",
-            });
+    //         const response = await fetch(ajaxUrl, {
+    //           method: "POST",
+    //           body: pageData,
+    //           credentials: "same-origin",
+    //         });
       
-            const result = await response.json();
+    //         const result = await response.json();
       
-            if (result.success) {
-              console.log(`${page.title} created successfully`);
-            } else {
-              console.error(`Failed to create ${page.title}`, result.data);
+    //         if (result.success) {
+    //           console.log(`${page.title} created successfully`);
+    //         } else {
+    //           console.error(`Failed to create ${page.title}`, result.data);
+    //         }
+    //       } catch (error) {
+    //         console.error(`Error creating ${page.title}:`, error);
+    //       }
+    //     }
+    // };
+
+    const [patternsData] = usePostDataMutation();
+    const getTemplatesData = async (route, key, id) => {
+        try {
+            const response = await patternsData({
+                endpoint: route,
+                body: {
+                    [key]: id
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).unwrap();
+            console.log(key, response);
+            return response;
+        } catch (err) {
+            console.error('Error:', err);
+            console.error('Status:', err.status);
+            console.error('Data:', err.data);
+            if (err.status === 500) {
+                console.error('Server error. Check the API endpoint and server logs.');
             }
-          } catch (error) {
-            console.error(`Error creating ${page.title}:`, error);
-          }
         }
-      };
+    };
+
+
+  // const handleStorePages = async () => {
+  //     const site = await getTemplatesData("import/site", "site_id", template.id);
+
+  //     if (site.data.length > 0) {
+  //         try {
+  //             const siteData = site.data;
+              
+  //             for (const page of siteData) {
+  //               try {
+  //                 // Parse block content
+  //                     const parsedBlocks = parse(page.page).content;
+
+  //                     console.log('parsedBlocks', parsedBlocks);
+
+  //                     // Serialize blocks → HTML for saving in WP page
+  //                     const serializedContent = serialize(parsedBlocks);
+  //                     console.log('serializedContent', serializedContent);
+
+  //                     // Prepare request
+  //                     const pageData = new FormData();
+  //                     pageData.append("action", "fb_full_site_import");
+  //                     pageData.append("security", nonce);
+  //                     pageData.append("title", page.name);
+  //                     pageData.append("content", serializedContent);
+
+  //                     const response = await fetch(ajaxUrl, {
+  //                         method: "POST",
+  //                         body: pageData,
+  //                         credentials: "same-origin",
+  //                     });
+
+  //                     const result = await response.json();
+
+  //                     if (result.success) {
+  //                         console.log(`${page.name} created successfully`);
+  //                     } else {
+  //                         console.error(`Failed to create ${page.name}`, result.data);
+  //                     }
+  //                 } catch (error) {
+  //                     console.error(`Error creating ${page.name}:`, error);
+  //                 }
+  //             }
+
+  //             toast.success("Site imported successfully!", {
+  //                 position: "top-right",
+  //                 autoClose: 3000,
+  //             });
+  //         } catch (err) {
+  //             console.error("Import error:", err);
+  //             toast.error("Failed to import site", {
+  //                 position: "top-right",
+  //                 autoClose: 3000,
+  //             });
+  //         }
+  //     }
+  // };
+
+
+  const handleStorePages = async () => {
+    const site = await getTemplatesData("import/site", "site_id", template.id);
+
+    if (site.data) {
+        try {
+            const siteData = site.data;
+            
+            for (const page of siteData) {
+                try {
+                  let pageObj = page.page;
+                  if (typeof page.page === "string") {
+                      try {
+                          pageObj = JSON.parse(page.page);
+                      } catch (err) {
+                          console.error("JSON parse failed for page.page:", err);
+                          pageObj = { content: page.page };
+                      }
+                  }
+          
+                  const parsedBlocks = pageObj.content || "";
+
+                  // Directly send JSON as content (no parse/serialize)
+                  const pageData = new FormData();
+                  pageData.append("action", "fb_full_site_import");
+                  pageData.append("security", nonce);
+                  pageData.append("title", page.name);
+                  pageData.append("content", parsedBlocks);
+
+                  const response = await fetch(ajaxUrl, {
+                      method: "POST",
+                      body: pageData,
+                      credentials: "same-origin",
+                  });
+
+                  const result = await response.json();
+
+                  if (result.success) {
+                      console.log(`${page.name} created successfully`);
+                  } else {
+                      console.error(`Failed to create ${page.name}`, result.data);
+                  }
+                } catch (error) {
+                    console.error(`Error creating ${page.name}:`, error);
+                }
+            }
+
+            toast.success("Site imported successfully!", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        } catch (err) {
+            console.error("Import error:", err);
+            toast.error("Failed to import site", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        }
+    }
+};
+
 
     
 	// Utility to extract font families
