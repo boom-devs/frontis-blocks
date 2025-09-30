@@ -27,50 +27,18 @@ const TemplateList = ({
 
     const userData = localStorage.getItem('userData');
 
-    useEffect(() => {
-        setIsAuthenticated(false);
-    }, []);
 
-    const handleFullSiteImport = useCallback(async (id) => {
-        setIsImporting(true);
-
-        if (isProPlugin && is_premium) {
-            const verified = await verifySubscription();            
-
-            if(verified.status) {
-                console.log('Now import the pro pattern.');
-                setIsImporting(false);
-                setIsVisible(false);
-            } else {
-                toast(verified.message, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    newestOnTop: false,
-                    closeOnClick: true,
-                    rtl: false,
-                    pauseOnFocusLoss: true,
-                    draggable: true,
-                    pauseOnHover: true,
-                    theme: "light"
-                });
-
-                setIsModalOpen(true);
-                setIsImporting(false);
-            }
-        } else {
-            setIsModalOpen(true);
-            setIsImporting(false);
-        }
+    const handleFullSiteImport = useCallback(async () => {
+        setIsModalOpen(true);
     }, []);
 
     const handleCloseModal = useCallback(() => {
         setIsModalOpen(false);
     }, []);
 
-    const handleDemo = useCallback(() => {
-        console.log("Demo clicked for:", id);
-    }, [id]);
+    // const handleDemo = useCallback(() => {
+    //     console.log("Demo clicked for:", id);
+    // }, [id]);
 
     const [patternsData] = usePostDataMutation();
     const getTemplatesData = async (route, key, id) => {
@@ -84,7 +52,7 @@ const TemplateList = ({
                     'Content-Type': 'application/json',
                 },
             }).unwrap();
-            console.log(key, response);
+
             return response;
         } catch (err) {
             console.error("Error:", err);
@@ -108,53 +76,14 @@ const TemplateList = ({
 
         const responseData = await response.json();
 
-        console.log(responseData);
-
         return responseData;
     }
     
 
     const importPattern = async (id) => {
-        if (!userData) {
-            setIsLoginModalOpen(true);
-            return;
-        }
-        if (is_premium === true && !isProPlugin) {
-            setIsPluginUpgradeModalOpen(true);
-            return;
-        }
-    
         setIsImporting(true);
     
-        if (is_premium) {
-            const verified = await verifySubscription();
-    
-            if (verified.status) {
-                console.log("Now import the pro pattern.");
-                setIsImporting(false);
-                setIsVisible(false);
-            } else {
-                toast(verified.message, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    newestOnTop: false,
-                    closeOnClick: true,
-                    rtl: false,
-                    pauseOnFocusLoss: true,
-                    draggable: true,
-                    pauseOnHover: true,
-                    theme: "light",
-                });
-    
-                setIsImporting(false);
-                return;
-            }
-        } else {
-            console.log("Free pattern will be imported directly.");
-        }
-    
-        // 🔹 Fetch pattern from API
+        // Fetch pattern from API
         const pattern = await getTemplatesData("import/pattern", "pattern_id", id);
         
         if (pattern.data) {
@@ -184,26 +113,7 @@ const TemplateList = ({
     
 
     const importPage = async (id) => {
-        if (!userData) {
-            setIsLoginModalOpen(true);
-            return;
-        }
-    
-        if (is_premium === true && !isProPlugin) {
-            setIsPluginUpgradeModalOpen(true);
-            return;
-        }
-    
         setIsImporting(true);
-    
-        if (is_premium) {
-            const verified = await verifySubscription();
-            if (!verified.status) {
-                toast(verified.message, { position: "top-right", autoClose: 3000 });
-                setIsImporting(false);
-                return;
-            }
-        }
     
         try {
             const page = await getTemplatesData("import/page", "page_id", id);
@@ -229,8 +139,6 @@ const TemplateList = ({
         <>
             <tr
                 className="fb-template-library-card style-two"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
             >
                 <td className="fb-template-library-card-content">
                     <img
@@ -246,9 +154,9 @@ const TemplateList = ({
                 </td>
                 <td className="fb-template-library-card-actions">
                     <button
-                        className={`fb-template-action-btn import-btn ${isLoading ? "loading" : ""}`}
+                        className={`fb-template-action-btn import-btn ${isImporting ? "loading" : ""}`}
                         onClick={
-                            !isLoading
+                            !isImporting
                                 ? () => {
                                     if (item.type === "patterns") {
                                         importPattern(item.id);
@@ -260,9 +168,9 @@ const TemplateList = ({
                                 }
                                 : null
                         }
-                        disabled={isLoading}
+                        disabled={isImporting}
                     >
-                        {isLoading ? (
+                        {isImporting ? (
                             <>
                                 <span>Importing...</span>
                                 <ClipLoader color="#fff" size={16} />
@@ -273,13 +181,10 @@ const TemplateList = ({
                     </button>
 
                     <button
-                        className={`fb-template-action-btn option-btn ${isLoading ? "loading" : ""}`}
-                        disabled={isLoading}
+                        className={`fb-template-action-btn option-btn ${isImporting ? "loading" : ""}`}
+                        disabled={isImporting}
                         onClick={() => handleRemoveLibraryItem(item.id, type) }
                     >
-                        {/* <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M9.99316 10H10.0007" stroke="#0B0C0E" strokeWidth="2.08333" strokeLinecap="round" strokeLinejoin="round" /><path d="M9.98682 15H9.99432" stroke="#0B0C0E" strokeWidth="2.08333" strokeLinecap="round" strokeLinejoin="round" /><path d="M9.99976 5H10.0073" stroke="#0B0C0E" strokeWidth="2.08333" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg> */}
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 6L6.1398 17.398C6.34428 19.4428 8.06494 21 10.12 21H13.8801C15.9351 21 17.6557 19.4428 17.8602 17.398L19 6M5 6H3M5 6H8M19 6H21M19 6H16M8 6L8.94721 4.10557C9.286 3.428 9.97852 3 10.7361 3L13.2639 3C14.0215 3 14.714 3.428 15.0528 4.10557L16 6M8 6H16M14 10.5V16.5M10 10.5V16.5" stroke="#0B0C0E" stroke-width="1.4" stroke-linecap="round" />
                         </svg>

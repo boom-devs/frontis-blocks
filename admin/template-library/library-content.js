@@ -282,6 +282,8 @@ const LibraryContent = ({
                                             handleRemoveLibraryItem={handleRemoveLibraryItem}
                                             setIsVisible={setIsVisible}
                                             setActiveCategory={setActiveCategory}
+                                            isImporting={isImporting}
+                                            setIsImporting={setIsImporting}
                                         />
                                     ))}
                                 </tbody>
