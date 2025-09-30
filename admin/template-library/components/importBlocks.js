@@ -53,23 +53,32 @@ export const importBlocksFromApi = async (patternData) => {
     try {
         let parsedBlocks = parse(patternData.content);
         const imageUrls = extractImageUrls(parsedBlocks);
-        
-        console.log(imageUrls)
-        // Process image uploads and replace URLs sequentially
+
+        // Process image uploads in parallel
         if (imageUrls.length > 0) {
-            for (const url of imageUrls) {
-                const newUploadedSrcs = await uploadImagesToMedia(url);
-                console.log(newUploadedSrcs.source_url);
-                patternData.content = patternData.content.replaceAll(url, newUploadedSrcs.source_url); // Replace each old URL with new URL
+            // Map URLs to their new media library URLs
+            const uploadPromises = imageUrls.map(url => uploadImagesToMedia(url));
+            const uploadedResults = await Promise.all(uploadPromises);
+
+            // Create a map of old URLs to new URLs for replacement
+            const urlReplacementMap = uploadedResults.reduce((acc, result, index) => {
+                acc[imageUrls[index]] = result.source_url;
+                return acc;
+            }, {});
+
+            // Perform all replacements in a single pass
+            let content = patternData.content;
+            for (const [oldUrl, newUrl] of Object.entries(urlReplacementMap)) {
+                content = content.replaceAll(oldUrl, newUrl);
             }
+            patternData.content = content;
         }
 
-        parsedBlocks = parse(patternData.content);
-        const safeBlocks = cleanBlockAttributes(parsedBlocks);
         const { insertBlocks, replaceBlocks } = dispatch("core/block-editor");
         const { getSelectedBlock, getBlocks, getBlockIndex } = select("core/block-editor");
         const selectedBlock = getSelectedBlock();
-
+        parsedBlocks = parse(patternData.content);
+        
         if (selectedBlock) {
             const hasContent =
                 selectedBlock.innerBlocks?.length > 0 ||
@@ -77,18 +86,16 @@ export const importBlocksFromApi = async (patternData) => {
                     selectedBlock.attributes.content.trim() !== "");
 
             if (!hasContent) {
-                replaceBlocks(selectedBlock.clientId, safeBlocks);
+                replaceBlocks(selectedBlock.clientId, parsedBlocks);
             } else {
                 const selectedBlockIndex = getBlockIndex(selectedBlock.clientId);
-                insertBlocks(safeBlocks, selectedBlockIndex + 1);
+                insertBlocks(parsedBlocks, selectedBlockIndex + 1);
             }
         } else {
             const currentBlocks = getBlocks();
-            insertBlocks(safeBlocks, currentBlocks.length);
+            insertBlocks(parsedBlocks, currentBlocks.length);
         }
-        
-        // dispatch('core/editor').savePost();
-        // autoAttemptRecovery();
+
         return { success: true };
     } catch (error) {
         console.error("Block import failed:", error);
@@ -129,67 +136,13 @@ const extractImageUrls = (blocks) => {
 };
 
 /**
- * Replace old image URLs with new URLs in blocks
- */
-// const replaceImageUrls = (blocks, urlMap) => {
-//     const updatedBlocks = JSON.parse(JSON.stringify(blocks)); // Deep copy to avoid mutating original
-//     const traverseBlocks = (block) => {
-//         const attributes = block.attributes || {};
-//         // Special handling for frontis-blocks/advanced-block
-//         if (block.name === "frontis-blocks/advanced-image" && attributes.advancedImageUrl) {
-//             const originalUrl = attributes.advancedImageUrl;
-
-//             console.log(urlMap[originalUrl])
-//             console.log(urlMap)
-//             console.log(originalUrl)
-//             if (urlMap[originalUrl]) {
-//                 block.attributes.advancedImageUrl = urlMap[originalUrl].source_url;
-//                 block.attributes.advancedImageId = urlMap[originalUrl].id;
-//                 block.attributes.advancedImageAlt = urlMap[originalUrl].slug;
-//             }
-//         } else {
-//             // Existing logic for other blocks
-//             for (const key in attributes) {
-//                 if (
-//                     typeof attributes[key] === "string" &&
-//                     urlMap[attributes[key]]?.source_url
-//                 ) {
-//                     block.attributes[key] = urlMap[attributes[key]].source_url;
-//                 } else if (key === "containerBgNormalBackgroundImageUrl") {
-//                     // Handle Desktop, Tablet, and Mobile URLs
-//                     if (attributes[key]?.Desktop && urlMap[attributes[key].Desktop]?.source_url) {
-//                         block.attributes[key].Desktop = urlMap[attributes[key].Desktop].source_url;
-//                     }
-//                     if (attributes[key]?.Tablet && urlMap[attributes[key].Tablet]?.source_url) {
-//                         block.attributes[key].Tablet = urlMap[attributes[key].Tablet].source_url;
-//                     }
-//                     if (attributes[key]?.Mobile && urlMap[attributes[key].Mobile]?.source_url) {
-//                         block.attributes[key].Mobile = urlMap[attributes[key].Mobile].source_url;
-//                     }
-//                 }
-//             }
-//         }
-
-//         // Recursively update inner blocks
-//         if (block.innerBlocks && block.innerBlocks.length > 0) {
-//             block.innerBlocks.forEach(traverseBlocks);
-//         }
-//     };
-
-//     updatedBlocks.forEach(traverseBlocks);
-//     return updatedBlocks;
-// };
-
-/**
  * Upload images to WordPress media library
  */
 const uploadImagesToMedia = async (url) => {
-    let urlMap = {};
-
     try {
         // Use the proxy endpoint to fetch the image
         const proxyUrl = `/wp-json/custom/v1/proxy-image?url=${encodeURIComponent(url)}`;
-        const response = await fetch(proxyUrl);
+        const response = await fetch(proxyUrl, { method: 'GET' });
         if (!response.ok) throw new Error(`Failed to fetch image via proxy: ${url}`);
         const blob = await response.blob();
 
@@ -201,7 +154,7 @@ const uploadImagesToMedia = async (url) => {
         const uploadResponse = await fetch('/wp-json/wp/v2/media', {
             method: 'POST',
             headers: {
-                'X-WP-Nonce': wpApiSettings.nonce, // Ensure nonce is available
+                'X-WP-Nonce': wpApiSettings.nonce,
             },
             body: formData,
         });
@@ -209,16 +162,13 @@ const uploadImagesToMedia = async (url) => {
         if (!uploadResponse.ok) throw new Error(`Failed to upload image: ${url}`);
         const mediaData = await uploadResponse.json();
 
-        // Map the original URL to an object with source_url, id, and slug
-        urlMap = {
+        return {
             source_url: mediaData.source_url,
             id: mediaData.id,
             slug: mediaData.slug,
         };
     } catch (error) {
         console.error(`Error uploading image ${url}:`, error);
-        urlMap[url] = { source_url: url, id: null, slug: null }; // Fallback to original URL with null id and slug
+        return { source_url: url, id: null, slug: null }; // Fallback to original URL
     }
-
-    return urlMap;
 };
