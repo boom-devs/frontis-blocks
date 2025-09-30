@@ -523,6 +523,7 @@ export const POST_CATEGORY_PREMADE_STYLE  = [
   { label: __('Style 1', 'frontis-blocks'), value: 'style-1' },
   { label: __('Style 2', 'frontis-blocks'), value: 'style-2' },
   { label: __('Style 3', 'frontis-blocks'), value: 'style-3' },
+  { label: __('Style 4', 'frontis-blocks'), value: 'style-4' },
 ];
 
 

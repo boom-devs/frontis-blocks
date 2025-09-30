@@ -90,6 +90,10 @@ $wrapper_attributes = get_block_wrapper_attributes([
     'class' => implode(' ', $wrapper_classes_arr),
 ]);
 
+
+
+
+
 // Get taxonomy terms
 $taxonomy_terms = [];
 if ($taxonomy_type) {
@@ -190,8 +194,16 @@ if (!function_exists('fb_build_taxonomy_hierarchy')) {
             $html .= '<span class="fb-taxonomy-name">' . esc_html($term->name) . '</span>';
             $html .= '</a>';
 
+            // if ($args['show_count']) {
+            //     $html .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
+            // }
+
             if ($args['show_count']) {
-                $html .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
+                if ($args['premadeStyle'] === 'style-1') {
+                    $html .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
+                } else {
+                    $html .= '<span class="fb-taxonomy-count">' . esc_html($term->count) . '</span>';
+                }
             }
 
             $html .= '</div>';
@@ -243,14 +255,50 @@ if (empty($taxonomy_type)) {
     foreach ($taxonomy_terms as $term) {
         $term_link = get_term_link($term);
         $term_image = get_term_meta($term->term_id, 'fb_taxonomy_image', true);
+        $default_image_url = FB_PLUGIN_URL . 'assets/images/preset-bg.jpg';
+        $image_source = !empty($term_image) ? $term_image : $default_image_url;
 
         $output .= '<div class="fb-taxonomy-item">';
 
-                // Show image for style-2
-        if ($premade_style === 'style-3' && $term_image) {
+        // Determine if the image block should be rendered at all
+        $should_render_image = false;
+
+        // For style-3, only render if a custom term image exists
+        if ($premade_style === 'style-3' && !empty($term_image)) {
+            $should_render_image = true;
+        } 
+        // For style-4, render if the default image is set, meaning $image_source will have a value
+        elseif ($premade_style === 'style-4') {
+            $should_render_image = true;
+        }
+
+        // Show image for style-3 & style-4
+        if ($should_render_image) {
+            
+            // Start the output wrapper for style-4 only
+            if ($premade_style === 'style-4') {
+                $output .= '<div class="fb-taxonomy-image-container">';
+            }
+
+            // Output the image container common to both styles
             $output .= '<div class="fb-taxonomy-image">';
-            $output .= '<img src="' . esc_url($term_image) . '" alt="' . esc_attr($term->name) . '" />';
+            
+            // Use $image_source which handles the fallback for style-4, and the term image for style-3
+            $output .= '<img src="' . esc_url($image_source) . '" alt="' . esc_attr($term->name) . '" />';
+            
             $output .= '</div>';
+
+            // Close the output wrapper for style-4 only
+            if ($premade_style === 'style-4') {
+                $output .= '</div>';
+            }
+        }
+
+        
+
+
+        if($premade_style === 'style-4') {
+            $output .= '<div class="fb-taxonomy-card-content">';
         }
 
         $output .= '<div class="fb-taxonomy-meta">';
@@ -302,7 +350,11 @@ if (empty($taxonomy_type)) {
             $output .= '</a>';
         }
 
-        $output .= '</div>';
+        if($premade_style === 'style-4') {
+            $output .= '</div>';
+        }
+
+        $output .= '</div>'; // closed taxonomy item div
     }
 
     $output .= '</div>';
@@ -340,9 +392,19 @@ if (empty($taxonomy_type)) {
             $output .= '<span class="fb-taxonomy-name">' . esc_html($term->name) . '</span>';
             $output .= '</a>';
 
+            // if ($show_count) {
+            //     $output .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
+            // }
+
             if ($show_count) {
-                $output .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
+                if ($premade_style === 'style-1') {
+                    $output .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
+                } else {
+                    $output .= '<span class="fb-taxonomy-count">' . esc_html($term->count) . '</span>';
+                }
             }
+
+
 
             $output .= '</div>';
 
