@@ -1921,35 +1921,25 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	/**
      * Toggle Controls for Dynamic Content
      */
-	const toggleControls = getProToggleControls({
+	const dynamicContentToggleControls = getProToggleControls({
 		hook: 'frontisblocks-advanced-button-dynamic-controls', 
 		attributes,
 		setAttributes,
 		dynamicAttr: 'dynamicTextEnabled',
 		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'advanced-button-dynamic',
-		links: {
-			upgrade: 'https://frontiswp.com/pro',
-			docs: 'https://frontiswp.com/docs',
-			support: 'https://frontiswp.com/contact',
-		},
+		keyPrefix: 'advanced-button-dynamic-content',
 	});
 
 	/**
 	 * Toggle Controls for Dynamic Link
 	 */
-	const toggleControlsLink = getProToggleControls({
+	const dynamicLinkToggleControls = getProToggleControls({
 		hook: 'frontisblocks-advanced-button-link-dynamic-controls', 
 		attributes,
 		setAttributes,
 		dynamicAttr: 'dynamicTextEnableLink',
 		label: __('Dynamic Link', 'frontis-blocks'),
-		keyPrefix: 'advanced-button-dynamic-link',
-		links: {
-			upgrade: 'https://frontiswp.com/pro',
-			docs: 'https://frontiswp.com/docs',
-			support: 'https://frontiswp.com/contact',
-		},
+		keyPrefix: 'advanced-button-dynamic-link-content',
 	});
 
 	/**
@@ -1963,7 +1953,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					initialOpen={true}
 				>
 
-					{toggleControls.map((control, index) => (
+					{dynamicContentToggleControls.map((control, index) => (
                         <div key={control.key || index}>{control.comp}</div>
                     ))}
 
@@ -2195,7 +2185,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						</BaseControl>
 					</div>
 
-					{toggleControlsLink.map((control, index) => (
+					{dynamicLinkToggleControls.map((control, index) => (
                         <div key={control.key || index}>{control.comp}</div>
                     ))}
 
