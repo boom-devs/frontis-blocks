@@ -2241,137 +2241,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const allBlockStyle = useMemo(
 		() => `
 
-			/* style-1 specific styles for taxonomy item in grid */
-			${premadeStyle === "style-1" ? `
-				
-				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
-					padding: 24px;
-					border-radius: 10px;
-				}
-	
-				.${blockId} .fb_post_category_container  .fb-taxonomy-item .fb-taxonomy-link-count{
-						gap: 42px;
-				}
-
-				
-				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
-					font-size: 24px;
-					font-weight: 500;
-				}
-	
-				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
-					margin-top: 42px;
-				}
-
-				` : ''}
-
-			
-
-			/* style-2 specific styles for taxonomy item in grid */
-
-			${premadeStyle === "style-2"
-				? `
-
-				.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item {
-					background: #FFFFFF;
-					${postCategoryBorderRadiusDesktopWidth &&
-						postCategoryBorderRadiusDesktop.top
-						? ""
-						: "border-radius: 20px;"
-					}
-					padding: 10px;
-					padding-bottom: 24px;
-					box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02), 0 0px 6px rgba(0, 0, 0, 0.02);
-				}
-	
-				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta {
-					height: 100%;
-					background: #EBF4FF;
-					padding: 24px;
-						${postCategoryBorderRadiusDesktopWidth &&
-						postCategoryBorderRadiusDesktop.top
-						? ""
-						: "border-radius: 10px;"
-					}
-				}
-
-				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
-					font-size: 32px;
-					font-weight: 600;
-				}
-	
-				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
-					margin-left: 14px;
-					margin-top: 32px;
-				}
-				
-				`
-				: ""
-			}
-
-			
-			/* Style-3 specific styles for image in grid */
-
-				${premadeStyle === "style-3"
-					? `
-
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
-						position: relative;
-						min-height: 300px;
-						overflow: hidden;
-					}
-						
-
-					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-count{
-						background: hsla(0,0%,100%,.3);	
-						padding: 5px;
-						border-radius: 6px;
-					}
-
-					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image {
-						position: absolute;
-						top: 0;
-						left: 0;
-						width: 100%;
-						height: 100%;
-						z-index: 0;
-					}
-
-					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image:before{
-						background: linear-gradient(45deg, rgba(0, 0, 0, .4), transparent);
-						content: "";
-						width: 100%;
-						height: 100%;
-						position: absolute;
-						top: 0;
-						left: 0;
-						z-index: 1;
-					}
-
-					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image img {
-						width: 100%;
-						height: 100%;
-						object-fit: cover;
-						vertical-align: middle;
-						transition: transform 0.4s cubic-bezier(0.33, 0.04, 0.63, 0.99),
-										filter 0.4s ease; /* Slightly longer duration for smoothness */
-					}
-
-					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item:hover .fb-taxonomy-image img{
-						transform: scale(1.08) translateY(-8px);
-						filter: brightness(1.05);
-					}
-
-					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link-count,
-					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta{
-						z-index: 2;
-					}
-
-					`
-					: ""
-				}
-
-        /* Common styles */
+			/* Common styles */
 
 				.${blockId} .fb_post_category_container  .fb-taxonomy-item .fb-taxonomy-link-count{
 						display: flex;
@@ -2432,11 +2302,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						box-sizing: content-box;
         }
 
-				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
+				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button {
 						width: fit-content;		
 						display: inline-flex;
 						align-items: center;
-						justify-content: space-between;
+						justify-content: center;
 						gap: 10px;
 						padding: 14px 18px;
 						background-color: #0B0C0E;
@@ -2452,33 +2322,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						transition: all 0.3s ease;
 				}
 
-				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover{
+				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button:hover{
 						background-color: #2b7ccc;
 						color: white;
 						text-decoration: none;
 				}
 
-				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-wrapper{
+				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-wrapper{
 							display: flex;
 							align-items: center;	
 				}
 
-				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon {
+				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon {
 					display: flex;
 				}
 
-				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon svg{
+				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon svg{
 					width: 16px;
 					height: 16px;
 					fill: currentColor;
 				}
 
-				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image{
+				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image{
 					width: 20px;
 					height: 20px;
 				}
 
-				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image img {
+				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image img {
 					width: 100%;
 					height: 100%;
 					object-fit: cover;
@@ -2520,6 +2390,157 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 
 
+			/* style-1 specific styles for taxonomy item in grid */
+			
+			${premadeStyle === "style-1" ? `
+				
+				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
+					padding: 24px;
+					border-radius: 10px;
+				}
+	
+				.${blockId} .fb_post_category_container  .fb-taxonomy-item .fb-taxonomy-link-count{
+						gap: 42px;
+				}
+
+				
+				.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
+					font-size: 24px;
+					font-weight: 500;
+				}
+	
+				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
+					margin-top: 42px;
+				}
+
+				` : ''}
+
+			
+
+			/* style-2 specific styles for taxonomy item in grid */
+
+			${premadeStyle === "style-2"
+				? `
+
+				.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item {
+					background: #FFFFFF;
+					${postCategoryBorderRadiusDesktopWidth &&
+						postCategoryBorderRadiusDesktop.top
+						? ""
+						: "border-radius: 20px;"
+					}
+					padding: 10px;
+					padding-bottom: 24px;
+					box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02), 0 0px 6px rgba(0, 0, 0, 0.02);
+				}
+	
+				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta {
+					height: 100%;
+					background: #EBF4FF;
+					padding: 24px;
+						${postCategoryBorderRadiusDesktopWidth &&
+						postCategoryBorderRadiusDesktop.top
+						? ""
+						: "border-radius: 10px;"
+					}
+				}
+
+				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
+					font-size: 32px;
+					font-weight: 600;
+				}
+	
+				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
+					margin-left: 14px;
+					margin-top: 32px;
+				}
+				
+				`
+				: ""
+			}
+
+			
+			/* Style-3 specific styles for image in grid */
+
+				${premadeStyle === "style-3"
+					? `
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
+						position: relative;
+						min-height: 300px;
+						overflow: hidden;
+						padding: 20px;
+						border-radius: 8px;
+					}
+						
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-count{
+						background: #FFFFFF;
+					}
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						z-index: 0;
+					}
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image:before{
+						background: linear-gradient(45deg, rgba(0, 0, 0, .2), transparent);
+						content: "";
+						width: 100%;
+						height: 100%;
+						position: absolute;
+						top: 0;
+						left: 0;
+						z-index: 1;
+					}
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						vertical-align: middle;
+						transition: transform 0.4s cubic-bezier(0.33, 0.04, 0.63, 0.99),
+										filter 0.4s ease; /* Slightly longer duration for smoothness */
+					}
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item:hover .fb-taxonomy-image img{
+						transform: scale(1.08) translateY(-8px);
+						filter: brightness(1.05);
+					}
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link-count,
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta{
+						z-index: 2;
+					}
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link, .${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name {
+						color: #FFFFFF;
+					}
+
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-description{
+						color: #F7F7F7;
+					}
+
+					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button{
+						width: 100%;
+						border: solid;
+						border-width: 1px;
+						border-color: #FFFFFF4D;
+						border-radius: 8px;
+						background: transparent;
+						backdrop-filter: blur(10px);
+					}
+
+					`
+					: ""
+				}
+
+
+
 				/* Main block styles */
 
         .${blockId} {
@@ -2536,7 +2557,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
         .${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
-						background: #EBF4FF;
+						${premadeStyle === 'style-3' 
+							? `background: #3991FF;` 
+							: 'background: #EBF4FF;'}
 						display: flex;
 						flex-direction: column;
 						justify-content: space-between;
@@ -3039,7 +3062,7 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 
 
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
+					.${blockId}.fb-post-category-area .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button {
 
 						${buttonWidth.Desktop && buttonWidthUnits.Desktop
 				? `width: ${buttonWidth.Desktop}${buttonWidthUnits.Desktop};`
@@ -3160,7 +3183,7 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 					}
 
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover{
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button:hover{
 						${buttonBgHoverColor ? `background-color: ${buttonBgHoverColor};` : ""}
 						${buttonBorderHoverColor ? `border-color: ${buttonBorderHoverColor};` : ""}
 							${buttonBoxShadowHoverCssValue
@@ -3169,16 +3192,16 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 			}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-text{
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-text{
 							${buttonColor ? `color: ${buttonColor};` : ""}
 							transition: all 0.3s ease;
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-text {
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-text {
 						${buttonHoverColor ? `color: ${buttonHoverColor};` : ""}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon {
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon {
 						${buttonIconBgColor ? `background-color: ${buttonIconBgColor};` : ""}
 						${buttonIconBorder ? `border: ${buttonIconBorder};` : ""}
 						${buttonIconBorderColor ? `border-color: ${buttonIconBorderColor};` : ""}
@@ -3196,7 +3219,7 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 				: ""
 			}
 					}
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon-wrapper {
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon-wrapper {
 						${buttonIconBgHoverColor ? `background-color: ${buttonIconBgHoverColor};` : ""}
 						${buttonIconBorderHoverColor
 				? `border-color: ${buttonIconBorderHoverColor};`
@@ -3204,7 +3227,7 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 			}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon svg{
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon svg{
 						${buttonIconSize.Desktop && buttonIconSizeUnits.Desktop
 				? `width: ${buttonIconSize.Desktop}${buttonIconSizeUnits.Desktop};`
 				: ""
@@ -3221,7 +3244,7 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 						transition: all .3s ease-in-out;
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon svg{
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon svg{
 						${buttonIconHoverColor ? `fill: ${buttonIconHoverColor};` : ""}
 						${buttonIconRotateHover.Desktop
 				? `transform: rotate(${buttonIconRotateHover.Desktop}deg);`
@@ -3231,7 +3254,7 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 
 
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image{
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image{
 							${buttonIconImageWidth
 				? `width: ${buttonIconImageWidth.Desktop}${buttonIconImageWidthUnits.Desktop};`
 				: ""
@@ -3247,14 +3270,14 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 							transition: all .3s ease-in-out;
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon-image {
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon-image {
 							${buttonImageRotateHover.Desktop
 				? `transform: rotate(${buttonImageRotateHover.Desktop}deg);`
 				: ""
 			}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image img{
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image img{
 							${readMoreIconImagedisplay ? `object-fit: ${readMoreIconImagedisplay};` : ""}
 					}
 					
@@ -3624,7 +3647,7 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 					
 
 
-						.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
+						.${blockId}.fb-post-category-area .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button {
 								${buttonWidth.Tablet && buttonWidthUnits.Tablet
 				? `width: ${buttonWidth.Tablet}${buttonWidthUnits.Tablet};`
 				: ""
@@ -3670,7 +3693,7 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 			}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon{
+					.${blockId}.fb-post-category-area .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon{
 							  ${buttonIconBorderTabletWidth !== buttonIconBorderTablet.top
 				? `border-width: ${buttonIconBorderTabletWidth};`
 				: ""
@@ -3687,7 +3710,7 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 			}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon svg{
+					.${blockId}.fb-post-category-area .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon svg{
 							   ${buttonIconSize.Tablet && buttonIconSizeUnits.Tablet
 				? `width: ${buttonIconSize.Tablet}${buttonIconSizeUnits.Tablet};`
 				: ""
@@ -3702,14 +3725,14 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 			}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon svg{
+					.${blockId}.fb-post-category-area .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon svg{
 								${buttonIconRotateHover.Tablet
 				? `transform: rotate(${buttonIconRotateHover.Tablet}deg);`
 				: ""
 			}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image{
+					.${blockId}.fb-post-category-area .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image{
 								  ${buttonIconImageWidth
 				? `width: ${buttonIconImageWidth.Tablet}${buttonIconImageWidthUnits.Tablet};`
 				: ""
@@ -3724,7 +3747,7 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 			}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon-image{
+					.${blockId}.fb-post-category-area .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon-image{
 						${buttonImageRotateHover.Tablet
 				? `transform: rotate(${buttonImageRotateHover.Tablet}deg);`
 				: ""
@@ -3989,7 +4012,7 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 					}
 
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
+					.${blockId}.fb-post-category-area .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button {
 						${buttonWidth.Mobile && buttonWidthUnits.Mobile
 				? `width: ${buttonWidth.Mobile}${buttonWidthUnits.Mobile};`
 				: ""
@@ -4036,7 +4059,7 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 			}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon {
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon {
 						    ${buttonIconBorderMobileWidth !== buttonIconBorderMobile.top
 				? `border-width: ${buttonIconBorderMobileWidth};`
 				: ""
@@ -4053,7 +4076,7 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 			}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon svg{
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon svg{
 						  ${buttonIconSize.Mobile && buttonIconSizeUnits.Mobile
 				? `width: ${buttonIconSize.Mobile}${buttonIconSizeUnits.Mobile};`
 				: ""
@@ -4068,14 +4091,14 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 			}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon svg{
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon svg{
 							${buttonIconRotateHover.Mobile
 				? `transform: rotate(${buttonIconRotateHover.Mobile}deg);`
 				: ""
 			}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image{
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon-image{
 							${buttonIconImageWidth
 				? `width: ${buttonIconImageWidth.Mobile}${buttonIconImageWidthUnits.Mobile};`
 				: ""
@@ -4090,7 +4113,7 @@ ${postDescriptionGlobalTypoSwitcher.lineHeight === false &&
 			}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon-image{
+					.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon-image{
 							${buttonImageRotateHover.Mobile
 				? `transform: rotate(${buttonImageRotateHover.Mobile}deg);`
 				: ""
