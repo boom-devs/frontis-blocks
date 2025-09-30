@@ -1289,6 +1289,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
         }
     }, []);
 
+	/**
+	 * Dynamic Image Button Controls
+	 */
 	const dynamicImageBtnControls = getProDynamicButton({
 		hook: 'frontisblocks-advanced-image-dynamic-controls',
 		attributes,
