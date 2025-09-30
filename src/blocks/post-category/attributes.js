@@ -927,7 +927,7 @@ const attributes = {
 	},
 	buttonBorder: {
 		type: "string",
-		default: "none",
+		default: "",
 	},
 	buttonBorderColorSwitcher: {
 		type: "string",
@@ -935,7 +935,7 @@ const attributes = {
 	},
 	buttonBorderColor: {
 		type: "string",
-		default: "#111111",
+		default: "",
 	},
 	buttonBorderHoverColor: {
 		type: "string",
@@ -1162,7 +1162,7 @@ const attributes = {
 	},
 	buttonIconBorder: {
 		type: "string",
-		default: "none",
+		default: "",
 	},
 	buttonIconBorderColorSwitcher: {
 		type: "string",
