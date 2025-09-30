@@ -65,6 +65,7 @@ const FullSiteImport = ({ template, onClose, onBack, data }) => {
                     setActiveTab={setActiveTab}
                     data={data}
                     onClose={onClose}
+                    disableMenu={true}
                 />
 
                 {/* Content */}
