@@ -74,6 +74,7 @@ import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
+import getProToggleControls from '@Utils/getProToggleControls';
 
 import './editor.scss';
 
@@ -3295,23 +3296,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         setAttributes({ separator: val });
     };
 
-    // apply filters with below hooks
-    let toggleControls = applyFilters('frontisblocks-advanced-heading-toggle-controls',[], { attributes, setAttributes });
-
-    // Add default control if no external controls are provided
-    if (toggleControls.length === 0) {
-        toggleControls = [
-            {
-                comp: (
-                    <ToggleControl
-                        label={__('Enable Dynamic Content', 'frontis-blocks')}
-                        checked={!!dynamicTextEnabled}
-                        onChange={(value) => setAttributes({ dynamicTextEnabled: value })}
-                    />
-                ),
-            },
-        ];
-    }
+    /**
+     * Toggle Controls for Dynamic Content
+     */
+    const dynamicContentToggleControls = getProToggleControls({
+        hook: 'frontisblocks-advanced-heading-toggle-controls',
+        attributes,
+        setAttributes,
+        dynamicAttr: 'dynamicTextEnabled',
+        label: __('Dynamic Content', 'frontis-blocks'),
+        keyPrefix: 'advanced-heading-dynamic-content',
+    });
 
     /**
 	 * Inspector General Controls
@@ -3324,8 +3319,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     initialOpen={true}
                 >
 
-                    {toggleControls.map((control, index) => (
-                        <div key={index}>{control.comp}</div>
+                    {dynamicContentToggleControls.map((control, index) => (
+                        <div key={control.key || index}>{control.comp}</div>
                     ))}
                     
                     {dynamicTextEnabled && (
