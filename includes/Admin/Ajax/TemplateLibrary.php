@@ -75,11 +75,7 @@ class TemplateLibrary extends AjaxBase {
         $this->check_permission();
     
         $title   = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content = isset($_POST['content']) ? wp_unslash($_POST['content']) : ''; // RAW JSON রাখো
-    
-        if (empty($title)) {
-            wp_send_json_error(['message' => 'Title is required']);
-        }
+        $content = isset($_POST['content']) ? wp_unslash($_POST['content']) : '';
     
         // Duplicate title handle
         $original_title = $title;
@@ -91,12 +87,14 @@ class TemplateLibrary extends AjaxBase {
     
         $page_id = wp_insert_post([
             'post_title'   => $title,
-            'post_content' => $content, // Save raw JSON directly
+            'post_content' => $content,
             'post_status'  => 'publish',
             'post_type'    => 'page',
         ]);
     
         if ($page_id) {
+            Helper::insert_job($page_id, $title . $page_id);
+    
             wp_send_json_success([
                 'message' => 'Page created successfully',
                 'page_id' => $page_id,
@@ -106,6 +104,7 @@ class TemplateLibrary extends AjaxBase {
             wp_send_json_error(['message' => 'Failed to create page']);
         }
     }
+    
 
     function update_site_settings() {
         $this->check_permission();

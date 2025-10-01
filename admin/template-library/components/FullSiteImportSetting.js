@@ -33,7 +33,6 @@ const FullSiteImportSetting = ({
         }
     }, []);
 
-    // Now formData will be updated once when logo states are changed
     useEffect(() => {
         setFormData(prev => ({
             ...prev,
