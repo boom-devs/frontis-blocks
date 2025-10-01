@@ -711,6 +711,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     right: '0',
                 }
             },
+            
         };
 
         const selectedPresetConfig = presetConfigurations[selectedPreset];
