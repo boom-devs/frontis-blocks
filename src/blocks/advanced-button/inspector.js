@@ -345,20 +345,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 	const deviceType= useDeviceType();
 
-	let defaultImageUrl = [];
-	if (typeof FrontisBlocksData !== 'undefined') {
-		defaultImageUrl = [
-			FrontisBlocksData.pluginUrl + 'assets/images/search.svg',
-			FrontisBlocksData.pluginUrl + 'assets/images/search-black.svg'
-		];
-	}	
-	// Set default value for buttonIconImageUrl
-	useEffect(() => {
-		if (!buttonIconImageUrl) {
-			setAttributes({ buttonIconImageUrl: defaultImageUrl });
-		}
-	}, []);
-
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -366,6 +352,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             });
         }
     }, [clientId]);
+
+	/**
+     * Generate SVG Icons for Icon
+     */
+	useEffect(() => {
+		setAttributes({
+			buttonIconFrontend: generateSvgIcon(buttonIcon), 
+		})
+	}, [buttonIcon]);
 
 	/** Start Preset Style */
 	const changeAdvancedButtonPreset = (selectedPreset) => {
@@ -473,13 +468,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				buttonBorder: "none",
 				buttonBorderColor: "",
 				buttonColor: "#fff",
-				buttonIcon: "",
+				buttonIcon: "arrow-rotate-right",
 				buttonIconColor: "#fff",
 				buttonIconBgColor: "transparent",
-				buttonIconAlign: "image",
+				buttonIconAlign: "icon-text",
 				buttonIconPosition: "left",
 				buttonIconBorder: "none",
-				buttonIconImageUrl: defaultImageUrl[0],
+				buttonIconImageUrl: "",
 				buttonTextSwitcher: true,
 				buttonText: "Search",
 				buttonIconRotate: {
@@ -819,14 +814,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
 	}
 	/** End Preset Style */
-	/**
-     * Generate SVG Icons for Icon
-     */
-	useEffect(() => {
-		setAttributes({
-			buttonIconFrontend: generateSvgIcon(buttonIcon), 
-		})
-	}, [buttonIcon]);
 
     /** Start Icon border */
     const handlebuttonIconBorderUnitChange = ( event, position ) => {

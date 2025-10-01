@@ -514,3 +514,11 @@ export const IMAGE_MASK_IMAEGS = {
     'wavy-stripes': FrontisBlocksData.pluginUrl + '/assets/images/wavy-stripes.svg',
     'token': FrontisBlocksData.pluginUrl + '/assets/images/token.svg',
 }
+export const ADVANCED_BUTTON_PRESETS = [
+	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
+	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
+	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
+];
