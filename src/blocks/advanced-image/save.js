@@ -86,9 +86,15 @@ export default function save({ attributes }) {
                     id={advancedImageGlobalWraperID}
                     data-smart-lazy-load-switcher={smartLazyLoadSwitcher}
                 >
-                    <div className={`fb-advanced-image ${imageStyle || ''} ${imageSize || ''} ${imageHover || ''} ${autoFitSwitch ? imageFit || '' : ''} ${titlePosition || ''} ${
-							showOverlay ? "overlay-simple" : ""
-						}`}>
+                    <div className={["fb-advanced-image",
+                                        imageStyle,
+                                        imageSize,
+                                        imageHover,
+                                        autoFitSwitch ? imageFit : "",
+                                        titlePosition,
+                                        showOverlay ? "overlay-simple" : "",
+                                    ].filter(Boolean).join(" ")}
+                    >
                         <div className="fb-advanced-image-inner">
                             {advancedImageUrl ? AdvancedImageRender() : null}
                         </div>

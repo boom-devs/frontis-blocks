@@ -1426,6 +1426,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
                 ${accordionPaddingTabletWidth && accordionTabPadding?.top ? `padding: ${accordionPaddingTabletWidth};` : ''}  
                 ${accordionMarginTabletWidth && accordionTabMargin?.top ? `margin: ${accordionMarginTabletWidth};` : ''}
+                ${accordionBorderTabletWidth && accordionTabBorderWidth?.top ? `border-width: ${accordionBorderTabletWidth};` : ''}
                 ${accordionBorderRadiusTabletWidth && accordionTabBorderRadiusWidth?.top ? `border-radius: ${accordionBorderRadiusTabletWidth};` : ''}
             }
 
@@ -1486,6 +1487,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
                 ${accordionPaddingMobileWidth && accordionMobilePadding?.top ? `padding: ${accordionPaddingMobileWidth};` : ''}
                 ${accordionMarginMobileWidth && accordionMobileMargin?.top ? `margin: ${accordionMarginMobileWidth};` : ''}
+                ${accordionBorderMobileWidth && accordionMobileBorderWidth?.top ? `border-width: ${accordionBorderMobileWidth};` : ''}
                 ${accordionBorderRadiusMobileWidth && accordionMobileBorderRadiusWidth?.top ? `border-radius: ${accordionBorderRadiusMobileWidth};` : ''}
             }
 
