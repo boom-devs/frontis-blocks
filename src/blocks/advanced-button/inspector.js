@@ -341,8 +341,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		dynamicTextTermsSeparator,
 		dynamicTextEnableLink,
 		dynamicTextLinkSource,
-    } = attributes;    
-
+    } = attributes;  
+	  
 	const deviceType= useDeviceType();
 
     useEffect(() => {
@@ -393,11 +393,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					left: "0",
 					right: "0",
 				},
-				buttonFontSize: {
-					Desktop: '14',
-					Tablet: '14',
-					Mobile: '14'
-				},
 				buttonDesktopBorderRadiusWidth: {
 					top: "4",
 					bottom: "4",
@@ -432,11 +427,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					bottom: "0",
 					left: "0",
 					right: "0",
-				},
-				buttonFontSize: {
-					Desktop: '14',
-					Tablet: '14',
-					Mobile: '14'
 				},
 				buttonDesktopBorderWidth:{
 					top: "1",
@@ -522,11 +512,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					Tablet: '18',
 					Mobile: '18'
 				},
-				buttonFontSize: {
-					Desktop: '14',
-					Tablet: '14',
-					Mobile: '14'
-				},
 				buttonDesktopBorderRadiusWidth: {
 					top: "4",
 					bottom: "4",
@@ -593,11 +578,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					Desktop: '18',
 					Tablet: '18',
 					Mobile: '18'
-				},
-				buttonFontSize: {
-					Desktop: '14',
-					Tablet: '14',
-					Mobile: '14'
 				},
 				buttonDesktopBorderWidth:{
 					top: "1",
@@ -676,11 +656,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					Desktop: '18',
 					Tablet: '18',
 					Mobile: '18'
-				},
-				buttonFontSize: {
-					Desktop: '14',
-					Tablet: '14',
-					Mobile: '14'
 				},
 				buttonDesktopBorderWidth:{
 					top: "1",
@@ -776,11 +751,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					Desktop: '18',
 					Tablet: '18',
 					Mobile: '18'
-				},
-				buttonFontSize: {
-					Desktop: '14',
-					Tablet: '14',
-					Mobile: '14'
 				},
 				buttonDesktopBorderWidth:{
 					top: "1",
