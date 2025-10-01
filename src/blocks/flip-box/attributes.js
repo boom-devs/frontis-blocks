@@ -339,7 +339,7 @@ const attributes = {
         default: {
             Desktop: '24',
             Tablet: '18',
-            Mobile: '0'
+            Mobile: '16'
         }
     },
     headingFontSizeUnits: {
@@ -714,6 +714,10 @@ const attributes = {
     descSwitcher: {
         type: "boolean",
         default: false,
+    },
+    titleSwitcher: {
+        type: "boolean",
+        default: true,
     },
     Sub_Heading_Position: {
         type: "string",
@@ -2273,9 +2277,9 @@ const attributes = {
     flipBoxFrontHeight: {
         type: 'object',
         default: {
-            Desktop: '366',
-            Tablet: '366',
-            Mobile: '366'
+            Desktop: '310',
+            Tablet: '310',
+            Mobile: '310'
         }
     },
     flipBoxFrontHeightUnits: {
@@ -2653,7 +2657,7 @@ const attributes = {
         default: {
             Desktop: '24',
             Tablet: '18',
-            Mobile: '0'
+            Mobile: '16'
         }
     },
     headingBackFontSizeUnits: {
@@ -2835,8 +2839,8 @@ const attributes = {
         default: {
             top: "24",
             bottom: "0",
-            left: "32",
-            right: "32",
+            left: "0",
+            right: "0",
         },
     },
     headingBack_Tab_padding: {
@@ -2844,8 +2848,8 @@ const attributes = {
         default: {
             top: "24",
             bottom: "0",
-            left: "32",
-            right: "32",
+            left: "0",
+            right: "0",
         },
     },
     headingBack_Mobile_padding: {
@@ -2853,8 +2857,8 @@ const attributes = {
         default: {
             top: "24",
             bottom: "0",
-            left: "32",
-            right: "32",
+            left: "0",
+            right: "0",
         },
     },
     paddingLink: {
@@ -3021,6 +3025,10 @@ const attributes = {
         type: "boolean",
         default: true,
     },
+    titleSwitcherBack: {
+        type: "boolean",
+        default: true,
+    },
     subHeadingBack_Position: {
         type: "string",
         default: "bottom",
@@ -3038,8 +3046,8 @@ const attributes = {
         default: {
             top: '32',
             bottom: '32',
-            left: '32',
-            right: '32',
+            left: '0',
+            right: '0',
         },
     },
     subHeadingBackTabPadding: {
@@ -3047,15 +3055,15 @@ const attributes = {
         default: {
             top: '32',
             bottom: '32',
-            left: '32',
-            right: '32',
+            left: '0',
+            right: '0',
         },
     },
     subHeadingBackMobilePadding: {
         type: "object",
         default: {
-            top: '0',
-            bottom: '0',
+            top: '24',
+            bottom: '24',
             left: '0',
             right: '0',
         },
@@ -3814,7 +3822,7 @@ const attributes = {
     mediaMarginDesktop: {
         type: "object",
         default: {
-            top: '80',
+            top: '0',
             bottom: '24',
             left: '0',
             right: '0',
@@ -3823,7 +3831,7 @@ const attributes = {
     mediaMarginTablet: {
         type: "object",
         default: {
-            top: '60',
+            top: '0',
             bottom: '20',
             left: '0',
             right: '0',
@@ -3832,7 +3840,7 @@ const attributes = {
     mediaMarginMobile: {
         type: "object",
         default: {
-            top: '40',
+            top: '0',
             bottom: '16',
             left: '0',
             right: '0',
