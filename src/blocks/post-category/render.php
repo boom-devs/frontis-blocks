@@ -199,7 +199,7 @@ if (!function_exists('fb_build_taxonomy_hierarchy')) {
             // }
 
             if ($args['show_count']) {
-                if ($args['premadeStyle'] === 'style-1') {
+                if ($args['premade_style'] === 'style-1') {
                     $html .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
                 } else {
                     $html .= '<span class="fb-taxonomy-count">' . esc_html($term->count) . '</span>';
@@ -217,11 +217,10 @@ if (!function_exists('fb_build_taxonomy_hierarchy')) {
             if ($args['separator_style'] !== 'none') {
                 $html .= '<div class="fb-tax-separator"></div>';
             }
-
+            
+            $html .= '</li>';
             // Recursive call for child terms
             $html .= fb_build_taxonomy_hierarchy($terms, $term->term_id, $level + 1, $args);
-
-            $html .= '</li>';
         }
 
         $html .= '</ul>';
@@ -361,6 +360,7 @@ if (empty($taxonomy_type)) {
 } else {
     // List layout
     $args = [
+        'premade_style' => $premade_style,
         'show_count' => $show_count,
         'show_description' => $show_description,
         'excerpt_length' => $post_description_excerpt_length,

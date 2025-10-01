@@ -144,6 +144,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				id={parentId === 0 ? postCategoryGlobalWraperID : undefined}
 			>
 				{children.map((term) => (
+					<>
 					<li
 						key={term.id}
 						className="fb-taxonomy-item"
@@ -179,9 +180,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							<div className="fb-tax-separator"></div>
 						)}
 
-						{showChildCategories &&
-							buildTermHierarchy(terms, term.id, level + 1)}
 					</li>
+
+					{showChildCategories &&	buildTermHierarchy(terms, term.id, level + 1)}
+					
+					</>
+						
 				))}
 			</ul>
 		);
