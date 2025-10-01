@@ -249,9 +249,6 @@ export const ADVANCED_HEADING_PRESETS = [
 	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
 	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
 	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
-	{ label: __("Preset 7", "frontis-blocks"), value: "preset-7" },
-	{ label: __("Preset 8", "frontis-blocks"), value: "preset-8" },
-	{ label: __("Preset 9", "frontis-blocks"), value: "preset-9" },
 ];
 
 export const POST_SWITCHER = [
@@ -485,15 +482,15 @@ export const IMAGE_HOVER_EFFECTS = [
 ];
 
 export const IMAGE_AUTO_FIT = [
-    { label: __("Cover", "frontis-blocks"), value: "cover", },
-    { label: __("Fill", "frontis-blocks"), value: "fill", },
-    { label: __("Contain", "frontis-blocks"), value: "contain", },
+    { label: __("Cover", "frontis-blocks"), value:"cover",},
+    { label: __("Fill", "frontis-blocks"), value:"fill",},
+    { label: __("Contain", "frontis-blocks"), value:"contain",},
 ];
 
 export const IMAGE_MASK_SIZE = [
-    { label: __("Cover", "frontis-blocks"), value: "cover" },
-    { label: __("Contain", "frontis-blocks"), value: "contain" },
-    { label: __("Auto", "frontis-blocks"), value: "auto" },
+    { label: __("Cover", "frontis-blocks"), value: "cover"},
+    { label: __("Contain", "frontis-blocks"), value: "contain"},
+    { label: __("Auto", "frontis-blocks"), value: "auto"},
 ];
 export const IMAGE_MASK_POSITION = [ 
     { label: __("Center", "frontis-blocks"), value: "center" },
@@ -517,3 +514,11 @@ export const IMAGE_MASK_IMAEGS = {
     'wavy-stripes': FrontisBlocksData.pluginUrl + '/assets/images/wavy-stripes.svg',
     'token': FrontisBlocksData.pluginUrl + '/assets/images/token.svg',
 }
+export const ADVANCED_BUTTON_PRESETS = [
+	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
+	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
+	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
+];
