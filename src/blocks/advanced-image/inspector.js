@@ -988,7 +988,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover{
 			${imageBorderHoverColor ? `border-color: ${imageBorderHoverColor};` : ''}
 		}
-		.${blockID} .fb-advanced-image .fb-advanced-image-inner:before{
+		.${blockID} .fb-advanced-image.overlay-simple .fb-advanced-image-inner:before{
 			${overlayBackgroundType === "gradient" ? ` background: ${overlayCustomGradientSwitcher && overlayCustomGradientInputValue ? overlayCustomGradientInputValue : overlayGradientColor};
 			`
 				: overlayBackgroundImageUrl && overlayBackgroundImageUrl !== "null"
@@ -1621,7 +1621,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 								value={titlePosition || "center"}
 								options={TITLE_POSITION}
 								onChange={(value) =>
-									setAttributes({ titlePosition: value })
+									setAttributes({ titlePosition:value })
 								}
 								__nextHasNoMarginBottom
 							/>
