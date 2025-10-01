@@ -1405,7 +1405,7 @@ const attributes = {
 	postListItemSpacing: {
 		type: "object",
 		default: {
-			Desktop: "10",
+			Desktop: "",
 			Tablet: "",
 			Mobile: "",
 		},
