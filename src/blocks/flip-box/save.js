@@ -50,7 +50,7 @@ export default function save({ attributes, clientId }) {
 		<>
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-flip-box-wrapper ${blockID} ${flipBoxGlobalWraperClass}`} id={flipBoxGlobalWraperID}>
-					<div className={`fb-flipper-wrapper ${flipAnimationType}`} data-client-id={clientId}>
+					<div className={`fb-flipper-wrapper ${flipAnimationType}`}>
 						{/* Front Side */}
 						<div className="fb-flipbox-front">
 							<div className="fb-flipbox-content-wrapper">

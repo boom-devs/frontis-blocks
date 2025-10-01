@@ -119,7 +119,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					<div className={`fb-flipper-wrapper fb-editor-mode${isHover || flipSelectedSide === "back"
 						? " fb-show-back"
 						: ""
-						}`} data-client-id={clientId}>
+						}`}>
 						<div className={`fb-flipbox-front ${flipSelectedSide === 'front' ? 'fb-active-side' : 'fb-inactive-side'}`}>
 							<div className="fb-flipbox-content-wrapper">
 
