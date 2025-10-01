@@ -2277,9 +2277,9 @@ const attributes = {
     flipBoxFrontHeight: {
         type: 'object',
         default: {
-            Desktop: '310',
-            Tablet: '310',
-            Mobile: '310'
+            Desktop: '366',
+            Tablet: '366',
+            Mobile: '366'
         }
     },
     flipBoxFrontHeightUnits: {
@@ -2839,8 +2839,8 @@ const attributes = {
         default: {
             top: "24",
             bottom: "0",
-            left: "0",
-            right: "0",
+            left: "32",
+            right: "32",
         },
     },
     headingBack_Tab_padding: {
@@ -2848,8 +2848,8 @@ const attributes = {
         default: {
             top: "24",
             bottom: "0",
-            left: "0",
-            right: "0",
+            left: "32",
+            right: "32",
         },
     },
     headingBack_Mobile_padding: {
@@ -2857,8 +2857,8 @@ const attributes = {
         default: {
             top: "24",
             bottom: "0",
-            left: "0",
-            right: "0",
+            left: "32",
+            right: "32",
         },
     },
     paddingLink: {
@@ -3046,8 +3046,8 @@ const attributes = {
         default: {
             top: '32',
             bottom: '32',
-            left: '0',
-            right: '0',
+            left: '32',
+            right: '32',
         },
     },
     subHeadingBackTabPadding: {
@@ -3055,8 +3055,8 @@ const attributes = {
         default: {
             top: '32',
             bottom: '32',
-            left: '0',
-            right: '0',
+            left: '32',
+            right: '32',
         },
     },
     subHeadingBackMobilePadding: {
