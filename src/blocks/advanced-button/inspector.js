@@ -14,6 +14,7 @@ import {
  * Internal depencencies
  */
 import { 
+	ADVANCED_BUTTON_PRESETS,
 	TEXT_ALIGN_JUSTIFY,
 	ICON_TEXT_ALIGN,
 	BORDER_STYLES,
@@ -71,6 +72,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonWidth,
 		buttonWidthUnits,
 
+		buttonPresetStyle,
 		buttonGlobalTypoSwitcher,
 		buttonGlobalTypographyData,
 		buttonGlobalTypoType,
@@ -90,6 +92,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonColorSwitcher,
 		buttonColor,
 		buttonHoverColor,
+
+		buttonTextColorType,
+		buttonTextCustomGradientColorSwitcher,
+		buttonTextCustomGradientColor,
+		buttonTextGradientColor,
+		buttonTextHoverColorType,
+		buttonTextHoverGradientColor,
+		buttonTextHoverCustomGradientColorSwitcher,
+		buttonTextHoverCustomGradientColor,
 
 		/** Start Background */
 		buttonBgColorSwitcher,
@@ -187,6 +198,14 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonIconPaddingMobile,
 		buttonIconPaddingLink,
 		/** End Icon Padding */
+
+		/** Start Icon margin */
+		buttonIconMarginUnits,
+		buttonIconMarginDesktop,
+		buttonIconMarginTablet,
+		buttonIconMarginMobile,
+		buttonIconMarginLink,
+		/** End Icon Margin */
 
 
         buttonIconGapSize,
@@ -322,10 +341,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		dynamicTextTermsSeparator,
 		dynamicTextEnableLink,
 		dynamicTextLinkSource,
-    } = attributes;    
-    
+    } = attributes;  
+	  
 	const deviceType= useDeviceType();
-	
+
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
@@ -342,6 +361,429 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			buttonIconFrontend: generateSvgIcon(buttonIcon), 
 		})
 	}, [buttonIcon]);
+
+	/** Start Preset Style */
+	const changeAdvancedButtonPreset = (selectedPreset) => {
+        const presetConfigurations = {
+			"preset-1": {
+				buttonBgColor: "#399CFF",
+				buttonBorder: "none",
+				buttonBorderColor: "",
+				buttonColor: "#fff",
+				buttonIconImageUrl: "",
+				buttonIcon: "",
+				buttonIconColor: "#fff",
+				buttonIconBorder: "none",
+				buttonTextSwitcher: true,
+				buttonText: "Add Text",
+				buttonIconRotate: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0'
+				},
+				buttonIconPaddingDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "4",
+					bottom: "4",
+					left: "4",
+					right: "4",
+				},
+            },
+			"preset-2": {
+				buttonBgColor: "#fff",
+				buttonBorder: "",
+				buttonBorderColor: "#C3C8D2",
+				buttonColor: "#399CFF",
+				buttonIconImageUrl: "",
+				buttonIcon: "",
+				buttonIconColor: "#399CFF",
+				buttonIconBorder: "none",
+				buttonTextSwitcher: true,
+				buttonText: "Link Button",
+				buttonIconRotate: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0'
+				},
+				buttonIconPaddingDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonDesktopBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonTabBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonMobileBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "4",
+					bottom: "4",
+					left: "4",
+					right: "4",
+				},
+            },
+			"preset-3": {
+				buttonBgColor: "#399CFF",
+				buttonBorder: "none",
+				buttonBorderColor: "",
+				buttonColor: "#fff",
+				buttonIcon: "arrow-rotate-right",
+				buttonIconColor: "#fff",
+				buttonIconBgColor: "transparent",
+				buttonIconAlign: "icon-text",
+				buttonIconPosition: "left",
+				buttonIconBorder: "none",
+				buttonIconImageUrl: "",
+				buttonTextSwitcher: true,
+				buttonText: "Search",
+				buttonIconRotate: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0'
+				},
+				buttonIconPaddingDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconPaddingDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonDesktopPadding: {
+					top: "14",
+					bottom: "14",
+					left: "20",
+					right: "20",
+				},
+				buttonIconImageWidth: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonIconImageHeight: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "4",
+					bottom: "4",
+					left: "4",
+					right: "4",
+				},
+            },
+			
+			"preset-4": {
+				buttonBgColor: "#399CFF",
+				buttonBorder: "none",
+				buttonBorderColor: "#C3C8D2",
+				buttonColor: "#fff",
+				buttonIconBgColor: "#fff",
+				buttonIconColor: "#399CFF",
+				buttonIcon: "arrow-left-long",
+				buttonIconAlign: "icon-text",
+				buttonIconPosition: "left",
+				buttonIconBorder: "none",
+				buttonIconImageUrl: "",
+				buttonTextSwitcher: true,
+				buttonText: "Style - 1",
+				buttonIconRotate: {
+					Desktop: '180',
+					Tablet: '180',
+					Mobile: '180'
+				},
+				buttonDesktopPadding: {
+					top: "8",
+					bottom: "8",
+					left: "8",
+					right: "16",
+				},
+				buttonIconPaddingDesktop: {
+					top: "8",
+					bottom: "8",
+					left: "8",
+					right: "8",
+				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconImageWidth: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonIconBorderRadiusDesktop: {
+					top: "4",
+					bottom: "4",
+					left: "4",
+					right: "4",
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "8",
+					bottom: "8",
+					left: "8",
+					right: "8",
+				},
+				buttonIconImageHeight: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonDesktopBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonTabBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonMobileBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+            },
+			"preset-5": {
+				buttonBgColor: "#399CFF",
+				buttonBorder: "none",
+				buttonBorderColor: "#C3C8D2",
+				buttonColor: "#fff",
+				buttonIconBgColor: "#fff",
+				buttonIconColor: "#399CFF",
+				buttonIcon: "arrow-left-long",
+				buttonIconAlign: "icon-text",
+				buttonIconPosition: "right",
+				buttonIconBorder: "none",
+				buttonIconImageUrl: "",
+				buttonTextSwitcher: true,
+				buttonText: "Style - 2",
+				buttonIconRotate: {
+					Desktop: '180',
+					Tablet: '180',
+					Mobile: '180'
+				},
+				buttonDesktopPadding: {
+					top: "8",
+					bottom: "8",
+					left: "24",
+					right: "8",
+				},
+				buttonIconPaddingDesktop: {
+					top: "8",
+					bottom: "8",
+					left: "8",
+					right: "8",
+				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonIconImageWidth: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonIconBorderRadiusDesktop: {
+					top: "999",
+					bottom: "999",
+					left: "999",
+					right: "999",
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "8",
+					bottom: "8",
+					left: "8",
+					right: "8",
+				},
+				buttonIconImageHeight: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonDesktopBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonTabBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonMobileBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+            },
+			"preset-6": {
+				buttonBgColor: "#399CFF",
+				buttonBorder: "none",
+				buttonBorderColor: "#C3C8D2",
+				buttonColor: "#fff",
+				buttonIconBgColor: "#399CFF",
+				buttonIconColor: "#fff",
+				buttonIcon: "arrow-left-long",
+				buttonIconAlign: "icon-text",
+				buttonIconPosition: "right",
+				buttonIconBorder: "solid",
+				buttonIconBorderColor: "#fff",
+				buttonIconRotate: {
+					Desktop: '180',
+					Tablet: '180',
+					Mobile: '180'
+				},
+				buttonIconBorderDesktop: {
+					top: "3",
+					bottom: "3",
+					left: "3",
+					right: "3",
+				},
+				buttonIconImageUrl: "",
+				buttonTextSwitcher: true,
+				buttonText: "Style - 3",
+				buttonIconSize: {
+					Desktop: '14',
+					Tablet: '14',
+					Mobile: '14'
+				},
+				buttonDesktopPadding: {
+					top: "8",
+					bottom: "8",
+					left: "24",
+					right: "24",
+				},
+				buttonIconGapSize: {
+					Desktop: '13',
+					Tablet: '13',
+					Mobile: '13'
+				},
+				buttonIconPaddingDesktop: {
+					top: "6",
+					bottom: "6",
+					left: "6",
+					right: "6",
+				},
+				buttonIconMarginDesktop: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "-38",
+				},
+				buttonIconImageWidth: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonIconBorderRadiusDesktop: {
+					top: "999",
+					bottom: "999",
+					left: "999",
+					right: "999",
+				},
+				buttonDesktopBorderRadiusWidth: {
+					top: "8",
+					bottom: "8",
+					left: "8",
+					right: "8",
+				},
+				buttonIconImageHeight: {
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '18'
+				},
+				buttonDesktopBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonTabBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+				buttonMobileBorderWidth:{
+					top: "1",
+					bottom: "1",
+					left: "1",
+					right: "1",
+				},
+            },
+		}
+		const selectedPresetConfig = presetConfigurations[selectedPreset];
+
+        if (selectedPresetConfig) {
+            setAttributes({
+                buttonPresetStyle: selectedPreset,
+                ...selectedPresetConfig,
+            });
+        } else {
+            console.warn(`Advanced Button: Preset "${selectedPreset}" not found.`);
+        }
+	}
+	/** End Preset Style */
 
     /** Start Icon border */
     const handlebuttonIconBorderUnitChange = ( event, position ) => {
@@ -570,6 +1012,82 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const buttonIconPaddingTabletWidth = `${buttonIconPaddingTablet?.top}${buttonIconPaddingUnits?.Tablet} ${buttonIconPaddingTablet?.right}${buttonIconPaddingUnits?.Tablet} ${buttonIconPaddingTablet?.bottom}${buttonIconPaddingUnits?.Tablet} ${buttonIconPaddingTablet?.left}${buttonIconPaddingUnits?.Tablet}`;
 	const buttonIconPaddingMobileWidth = `${buttonIconPaddingMobile?.top}${buttonIconPaddingUnits?.Mobile} ${buttonIconPaddingMobile?.right}${buttonIconPaddingUnits?.Mobile} ${buttonIconPaddingMobile?.bottom}${buttonIconPaddingUnits?.Mobile} ${buttonIconPaddingMobile?.left}${buttonIconPaddingUnits?.Mobile}`;
 	/** End Padding */
+	
+	/** Start Icon Margin*/
+	const handlebuttonIconMarginUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( buttonIconMarginLink ) { 
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						buttonIconMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						buttonIconMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						buttonIconMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {buttonIconMarginDesktop: {...buttonIconMarginDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {buttonIconMarginTablet: {...buttonIconMarginTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {buttonIconMarginMobile: {...buttonIconMarginMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handlebuttonIconMarginCombineBtn = () => {
+		setAttributes( {buttonIconMarginLink: !buttonIconMarginLink} );
+	}
+
+	const handlebuttonIconMarginUnitsHandler = (unit) => {
+		setAttributes( {
+			buttonIconMarginUnits: {
+				...buttonIconMarginUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** end Global Margin */
+
+	/** End Icon Margin */
+	const buttonIconMarginDesktopWidth = `${buttonIconMarginDesktop.top}${buttonIconMarginUnits.Desktop} ${buttonIconMarginDesktop.right}${buttonIconMarginUnits.Desktop} ${buttonIconMarginDesktop.bottom}${buttonIconMarginUnits.Desktop} ${buttonIconMarginDesktop.left}${buttonIconMarginUnits.Desktop}`;
+	const buttonIconMarginTabletWidth = `${buttonIconMarginTablet.top}${buttonIconMarginUnits.Tablet} ${buttonIconMarginTablet.right}${buttonIconMarginUnits.Tablet} ${buttonIconPaddingTablet.bottom}${buttonIconMarginUnits.Tablet} ${buttonIconMarginTablet.left}${buttonIconMarginUnits.Tablet}`;
+	const buttonIconMarginMobileWidth = `${buttonIconMarginMobile.top}${buttonIconMarginUnits.Mobile} ${buttonIconMarginMobile.right}${buttonIconMarginUnits.Mobile} ${buttonIconMarginMobile.bottom}${buttonIconMarginUnits.Mobile} ${buttonIconPaddingMobile.left}${buttonIconMarginUnits.Mobile}`;
+	/** End Margin */
 
 
     /** Start padding */
@@ -1320,10 +1838,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		}
 
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-text {
-			${buttonColor ? `color: ${buttonColor};` : ''}  
+			${buttonTextColorType === 'gradient' ? `
+				background: ${buttonTextCustomGradientColorSwitcher && buttonTextCustomGradientColor ? buttonTextCustomGradientColor : buttonTextGradientColor};
+				${buttonTextCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+				${buttonTextGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+		` : `${buttonColor ? `color: ${buttonColor};` : ''}` }
 		}
+
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
-			${buttonHoverColor ? `color: ${buttonHoverColor};` : ''}
+			${buttonTextHoverColorType === 'gradient' ? `
+                background: ${buttonTextHoverCustomGradientColorSwitcher && buttonTextHoverCustomGradientColor ? buttonTextHoverCustomGradientColor : buttonTextHoverGradientColor};
+                ${buttonTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ${buttonTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+            ` : `${buttonHoverColor ? `color: ${buttonHoverColor};` : ''}`}
 		}
 		
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
@@ -1333,6 +1860,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${buttonIconBgColor ? `background: ${buttonIconBgColor};` : ''}
             `}
 			${buttonIconPaddingDesktopWidth && buttonIconPaddingDesktop?.top ? `padding: ${buttonIconPaddingDesktopWidth};` : ''}
+			${buttonIconMarginDesktopWidth && buttonIconPaddingDesktop?.top ? `margin: ${buttonIconMarginDesktopWidth};` : ''}
 
 			${buttonIconBorder ? `border: ${buttonIconBorder};` : ''}
 			${buttonIconBorderColor ? `border-color: ${buttonIconBorderColor};` : ''}
@@ -1618,6 +2146,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonColor,
 		buttonHoverColor,
 
+		buttonTextColorType,
+		buttonTextCustomGradientColorSwitcher,
+		buttonTextCustomGradientColor,
+		buttonTextGradientColor,
+		buttonTextHoverColorType,
+		buttonTextHoverGradientColor,
+		buttonTextHoverCustomGradientColorSwitcher,
+		buttonTextHoverCustomGradientColor,
+
 		/** Start Background */
 		buttonBgColorSwitcher,
 		buttonNormalBackgroundType,
@@ -1676,6 +2213,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonIconPaddingDesktopWidth,
 		buttonIconPaddingTabletWidth,
 		buttonIconPaddingMobileWidth,
+		/** End Icon Padding */
+
+		/** Start Icon Padding */
+		buttonIconPaddingUnits,
+		buttonIconPaddingDesktop,
+		buttonIconPaddingTablet,
+		buttonIconPaddingMobile,
+		buttonIconPaddingLink,
+		buttonIconMarginDesktopWidth,
+		buttonIconMarginTabletWidth,
+		buttonIconMarginMobileWidth,
 		/** End Icon Padding */
 
 		buttonIconRotateSwitcher,
@@ -1953,6 +2501,13 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					title={__("Button", "frontis-blocks")}
 					initialOpen={true}
 				>
+  					<BaseControl label={__("Preset Style", "frontis-blocks")}>
+						<SelectControl
+							value={buttonPresetStyle}
+							options={ADVANCED_BUTTON_PRESETS}
+							onChange={(selected) => changeAdvancedButtonPreset(selected)}
+						/>
+					</BaseControl>
 
 					{dynamicContentToggleControls.map((control, index) => (
                         <div key={control.key || index}>{control.comp}</div>
@@ -2290,7 +2845,39 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						setAttributes={setAttributes}
 					/>
 
-					<FB_SwitcherControl
+					<FB_BackgroundColorControl
+						label={__("Text Color", "frontis-blocks")}
+						bgColorSwitcher={buttonColorSwitcher}  
+						setBgColorSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
+
+						normalLabel={__("Text Color Type", "frontis-blocks")}
+						normalBackgroundType={buttonTextColorType}
+						setNormalBackgroundType={(value) => setAttributes({ buttonTextColorType: value })}
+						normalClassicColor={buttonColor}
+						setNormalClassicColor={(value) => setAttributes({ buttonColor: value === undefined ? '' : value })}
+						normalGradientColor={buttonTextGradientColor}
+						setNormalGradientColor={(value) => setAttributes({ buttonTextGradientColor: value === undefined ? null : value })}
+						normalCustomGradientSwitcher={buttonTextCustomGradientColorSwitcher}
+						setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonTextCustomGradientColorSwitcher: value })}
+						normalCustomGradientInputValue={buttonTextCustomGradientColor}
+						setNormalCustomGradientInputValue={(value) => setAttributes({ buttonTextCustomGradientColor: value === undefined ? null : value })}
+
+						hoverLabel={__("Text Hover Color", "frontis-blocks")}
+						hoverBackgroundType={buttonTextHoverColorType}
+						setHoverBackgroundType={(value) => setAttributes({ buttonTextHoverColorType: value })}
+						hoverClassicColor={buttonHoverColor}
+						setHoverClassicColor={(value) => setAttributes({ buttonHoverColor: value === undefined ? '' : value })}
+						hoverGradientColor={buttonTextHoverGradientColor}
+						setHoverGradientColor={(value) => setAttributes({ buttonTextHoverGradientColor: value === undefined ? null : value })}
+						hoverCustomGradientSwitcher={buttonTextHoverCustomGradientColorSwitcher}
+						setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonTextHoverCustomGradientColorSwitcher: value })}
+						hoverCustomGradientInputValue={buttonTextHoverCustomGradientColor}
+						setHoverCustomGradientInputValue={(value) => setAttributes({ buttonTextHoverCustomGradientColor: value === undefined ? null : value })}
+	
+						isBackgroundImage={false}
+					/>	
+
+					{/* <FB_SwitcherControl
 						label={__("Color", "frontis-blocks")}
 						globalSwitcher={buttonColorSwitcher}
 						setGlobalSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
@@ -2310,7 +2897,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							globalColor={buttonHoverColor}
 							setGlobalColor={(value) => setAttributes({ buttonHoverColor: value === undefined ? '' : value })}
 						/>
-					)}
+					)} */}
 
 
 					<FB_BackgroundColorControl
@@ -2607,6 +3194,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						handleSpacingUnitHandler={handlebuttonIconPaddingUnitChange}
 						spacingCombineBtn={buttonIconPaddingLink}
 						spacingCombineBtnHandler={handlebuttonIconPaddingCombineBtn}
+						setAttributes={setAttributes}
+					/>
+					<FB_Spacing 
+						label={__("Margin", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handlebuttonIconMarginUnitsHandler}
+						spacingUnits={buttonIconMarginUnits}
+						spacingDesktop={buttonIconMarginDesktop}
+						spacingTablet={buttonIconMarginTablet}
+						spacingMobile={buttonIconMarginMobile}
+						handleSpacingUnitHandler={handlebuttonIconMarginUnitChange}
+						spacingCombineBtn={buttonIconMarginLink}
+						spacingCombineBtnHandler={handlebuttonIconMarginCombineBtn}
 						setAttributes={setAttributes}
 					/>
 					<FB_Range
