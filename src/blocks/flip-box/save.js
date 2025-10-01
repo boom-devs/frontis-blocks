@@ -1,7 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import { useBlockProps, RichText } from "@wordpress/block-editor";
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
-export default function save({ attributes, clientId }) {
+export default function save({ attributes }) {
 	const {
 		blockID,
 		flipBoxGlobalWraperClass,
