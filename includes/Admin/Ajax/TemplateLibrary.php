@@ -71,11 +71,12 @@ class TemplateLibrary extends AjaxBase {
         }
     }
 
+
     public function full_site_import() {
         $this->check_permission();
     
         $title   = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content = isset($_POST['content']) ? wp_unslash($_POST['content']) : '';
+        $content = isset($_POST['content']) ? $_POST['content'] : '';
     
         // Duplicate title handle
         $original_title = $title;
@@ -85,6 +86,7 @@ class TemplateLibrary extends AjaxBase {
             $count++;
         }
     
+        // $content = $this->decode_unicode_escapes($content);
         $page_id = wp_insert_post([
             'post_title'   => $title,
             'post_content' => $content,
