@@ -59,10 +59,10 @@ const TemplateGrid = ({
     // setIsPladmin
 }) => {
 
-    const { siteTitle, primaryColor, enableFeatureX } = useSelector(
-        (state) => state.attributes
-      );
-    const dispatch = useDispatch();
+    // const { siteTitle, primaryColor, enableFeatureX } = useSelector(
+    //     (state) => state.attributes
+    //   );
+    // const dispatch = useDispatch();
 
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isModalOpen, setIsModalOpen] = useState(false);
