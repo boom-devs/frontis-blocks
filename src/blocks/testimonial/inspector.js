@@ -796,9 +796,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     /** Default margin for Testimonial Rating Icon */
-    const testimonialRatingIconDesktopMargin = `${TestimonialRatingIconMarginDesktop.top}${TestimonialRatingIconMarginUnits.Desktop} ${TestimonialRatingIconMarginDesktop.right}${TestimonialRatingIconMarginUnits.Desktop} ${TestimonialRatingIconMarginDesktop.bottom}${TestimonialRatingIconMarginUnits.Desktop} ${TestimonialRatingIconMarginDesktop.left}${TestimonialRatingIconMarginUnits.Desktop}`;
-    const testimonialRatingIconTabletMargin = `${TestimonialRatingIconMarginTablet.top}${TestimonialRatingIconMarginUnits.Tablet} ${TestimonialRatingIconMarginTablet.right}${TestimonialRatingIconMarginUnits.Tablet} ${TestimonialRatingIconMarginTablet.bottom}${TestimonialRatingIconMarginUnits.Tablet} ${TestimonialRatingIconMarginTablet.left}${TestimonialRatingIconMarginUnits.Tablet}`;
-    const testimonialRatingIconMobileMargin = `${TestimonialRatingIconMarginMobile.top}${TestimonialRatingIconMarginUnits.Mobile} ${TestimonialRatingIconMarginMobile.right}${TestimonialRatingIconMarginUnits.Mobile} ${TestimonialRatingIconMarginMobile.bottom}${TestimonialRatingIconMarginUnits.Mobile} ${TestimonialRatingIconMarginMobile.left}${TestimonialRatingIconMarginUnits.Mobile}`;
+    const testimonialRatingIconDesktopMargin = `${TestimonialRatingIconMarginDesktop?.top}${TestimonialRatingIconMarginUnits?.Desktop} ${TestimonialRatingIconMarginDesktop?.right}${TestimonialRatingIconMarginUnits?.Desktop} ${TestimonialRatingIconMarginDesktop?.bottom}${TestimonialRatingIconMarginUnits?.Desktop} ${TestimonialRatingIconMarginDesktop?.left}${TestimonialRatingIconMarginUnits?.Desktop}`;
+    const testimonialRatingIconTabletMargin = `${TestimonialRatingIconMarginTablet?.top}${TestimonialRatingIconMarginUnits?.Tablet} ${TestimonialRatingIconMarginTablet?.right}${TestimonialRatingIconMarginUnits?.Tablet} ${TestimonialRatingIconMarginTablet?.bottom}${TestimonialRatingIconMarginUnits?.Tablet} ${TestimonialRatingIconMarginTablet?.left}${TestimonialRatingIconMarginUnits?.Tablet}`;
+    const testimonialRatingIconMobileMargin = `${TestimonialRatingIconMarginMobile?.top}${TestimonialRatingIconMarginUnits?.Mobile} ${TestimonialRatingIconMarginMobile?.right}${TestimonialRatingIconMarginUnits?.Mobile} ${TestimonialRatingIconMarginMobile?.bottom}${TestimonialRatingIconMarginUnits?.Mobile} ${TestimonialRatingIconMarginMobile?.left}${TestimonialRatingIconMarginUnits?.Mobile}`;
     /** End Testimonial Rating Icon Margin */
 
 
@@ -872,9 +872,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
-    const testimonialTitleDesktopMargin = `${TestimonialTitleMarginDesktop.top}${TestimonialTitleMarginUnits.Desktop} ${TestimonialTitleMarginDesktop.right}${TestimonialTitleMarginUnits.Desktop} ${TestimonialTitleMarginDesktop.bottom}${TestimonialTitleMarginUnits.Desktop} ${TestimonialTitleMarginDesktop.left}${TestimonialTitleMarginUnits.Desktop}`;
-    const testimonialTitleTabletMargin = `${TestimonialTitleMarginTablet.top}${TestimonialTitleMarginUnits.Tablet} ${TestimonialTitleMarginTablet.right}${TestimonialTitleMarginUnits.Tablet} ${TestimonialTitleMarginTablet.bottom}${TestimonialTitleMarginUnits.Tablet} ${TestimonialTitleMarginTablet.left}${TestimonialTitleMarginUnits.Tablet}`;
-    const testimonialTitleMobileMargin = `${TestimonialTitleMarginMobile.top}${TestimonialTitleMarginUnits.Mobile} ${TestimonialTitleMarginMobile.right}${TestimonialTitleMarginUnits.Mobile} ${TestimonialTitleMarginMobile.bottom}${TestimonialTitleMarginUnits.Mobile} ${TestimonialTitleMarginMobile.left}${TestimonialTitleMarginUnits.Mobile}`;
+    const testimonialTitleDesktopMargin = `${TestimonialTitleMarginDesktop?.top}${TestimonialTitleMarginUnits?.Desktop} ${TestimonialTitleMarginDesktop?.right}${TestimonialTitleMarginUnits?.Desktop} ${TestimonialTitleMarginDesktop?.bottom}${TestimonialTitleMarginUnits?.Desktop} ${TestimonialTitleMarginDesktop?.left}${TestimonialTitleMarginUnits?.Desktop}`;
+    const testimonialTitleTabletMargin = `${TestimonialTitleMarginTablet?.top}${TestimonialTitleMarginUnits?.Tablet} ${TestimonialTitleMarginTablet?.right}${TestimonialTitleMarginUnits?.Tablet} ${TestimonialTitleMarginTablet?.bottom}${TestimonialTitleMarginUnits?.Tablet} ${TestimonialTitleMarginTablet?.left}${TestimonialTitleMarginUnits?.Tablet}`;
+    const testimonialTitleMobileMargin = `${TestimonialTitleMarginMobile?.top}${TestimonialTitleMarginUnits?.Mobile} ${TestimonialTitleMarginMobile?.right}${TestimonialTitleMarginUnits?.Mobile} ${TestimonialTitleMarginMobile?.bottom}${TestimonialTitleMarginUnits?.Mobile} ${TestimonialTitleMarginMobile?.left}${TestimonialTitleMarginUnits?.Mobile}`;
     /** End Testimonial Title Margin */
 
 
@@ -948,9 +948,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
-    const testimonialDescDesktopMargin = `${TestimonialDescMarginDesktop.top}${TestimonialDescMarginUnits.Desktop} ${TestimonialDescMarginDesktop.right}${TestimonialDescMarginUnits.Desktop} ${TestimonialDescMarginDesktop.bottom}${TestimonialDescMarginUnits.Desktop} ${TestimonialDescMarginDesktop.left}${TestimonialDescMarginUnits.Desktop}`;
-    const testimonialDescTabletMargin = `${TestimonialDescMarginTablet.top}${TestimonialDescMarginUnits.Tablet} ${TestimonialDescMarginTablet.right}${TestimonialDescMarginUnits.Tablet} ${TestimonialDescMarginTablet.bottom}${TestimonialDescMarginUnits.Tablet} ${TestimonialDescMarginTablet.left}${TestimonialDescMarginUnits.Tablet}`;
-    const testimonialDescMobileMargin = `${TestimonialDescMarginMobile.top}${TestimonialDescMarginUnits.Mobile} ${TestimonialDescMarginMobile.right}${TestimonialDescMarginUnits.Mobile} ${TestimonialDescMarginMobile.bottom}${TestimonialDescMarginUnits.Mobile} ${TestimonialDescMarginMobile.left}${TestimonialDescMarginUnits.Mobile}`;
+    const testimonialDescDesktopMargin = `${TestimonialDescMarginDesktop?.top}${TestimonialDescMarginUnits?.Desktop} ${TestimonialDescMarginDesktop?.right}${TestimonialDescMarginUnits?.Desktop} ${TestimonialDescMarginDesktop?.bottom}${TestimonialDescMarginUnits?.Desktop} ${TestimonialDescMarginDesktop?.left}${TestimonialDescMarginUnits?.Desktop}`;
+    const testimonialDescTabletMargin = `${TestimonialDescMarginTablet?.top}${TestimonialDescMarginUnits?.Tablet} ${TestimonialDescMarginTablet?.right}${TestimonialDescMarginUnits?.Tablet} ${TestimonialDescMarginTablet?.bottom}${TestimonialDescMarginUnits?.Tablet} ${TestimonialDescMarginTablet?.left}${TestimonialDescMarginUnits?.Tablet}`;
+    const testimonialDescMobileMargin = `${TestimonialDescMarginMobile?.top}${TestimonialDescMarginUnits?.Mobile} ${TestimonialDescMarginMobile?.right}${TestimonialDescMarginUnits?.Mobile} ${TestimonialDescMarginMobile?.bottom}${TestimonialDescMarginUnits?.Mobile} ${TestimonialDescMarginMobile?.left}${TestimonialDescMarginUnits?.Mobile}`;
     /** End Testimonial Desc Margin */
 
 
@@ -1024,9 +1024,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
-    const testimonialImageDesktopMargin = `${TestimonialImageMarginDesktop.top}${TestimonialImageMarginUnits.Desktop} ${TestimonialImageMarginDesktop.right}${TestimonialImageMarginUnits.Desktop} ${TestimonialImageMarginDesktop.bottom}${TestimonialImageMarginUnits.Desktop} ${TestimonialImageMarginDesktop.left}${TestimonialImageMarginUnits.Desktop}`;
-    const testimonialImageTabletMargin = `${TestimonialImageMarginTablet.top}${TestimonialImageMarginUnits.Tablet} ${TestimonialImageMarginTablet.right}${TestimonialImageMarginUnits.Tablet} ${TestimonialImageMarginTablet.bottom}${TestimonialImageMarginUnits.Tablet} ${TestimonialImageMarginTablet.left}${TestimonialImageMarginUnits.Tablet}`;
-    const testimonialImageMobileMargin = `${TestimonialImageMarginMobile.top}${TestimonialImageMarginUnits.Mobile} ${TestimonialImageMarginMobile.right}${TestimonialImageMarginUnits.Mobile} ${TestimonialImageMarginMobile.bottom}${TestimonialImageMarginUnits.Mobile} ${TestimonialImageMarginMobile.left}${TestimonialImageMarginUnits.Mobile}`;
+    const testimonialImageDesktopMargin = `${TestimonialImageMarginDesktop?.top}${TestimonialImageMarginUnits?.Desktop} ${TestimonialImageMarginDesktop?.right}${TestimonialImageMarginUnits?.Desktop} ${TestimonialImageMarginDesktop?.bottom}${TestimonialImageMarginUnits?.Desktop} ${TestimonialImageMarginDesktop?.left}${TestimonialImageMarginUnits?.Desktop}`;
+    const testimonialImageTabletMargin = `${TestimonialImageMarginTablet?.top}${TestimonialImageMarginUnits?.Tablet} ${TestimonialImageMarginTablet?.right}${TestimonialImageMarginUnits?.Tablet} ${TestimonialImageMarginTablet?.bottom}${TestimonialImageMarginUnits?.Tablet} ${TestimonialImageMarginTablet?.left}${TestimonialImageMarginUnits?.Tablet}`;
+    const testimonialImageMobileMargin = `${TestimonialImageMarginMobile?.top}${TestimonialImageMarginUnits?.Mobile} ${TestimonialImageMarginMobile?.right}${TestimonialImageMarginUnits?.Mobile} ${TestimonialImageMarginMobile?.bottom}${TestimonialImageMarginUnits?.Mobile} ${TestimonialImageMarginMobile?.left}${TestimonialImageMarginUnits?.Mobile}`;
     /** End Testimonial Image Margin */
 
 
@@ -1100,9 +1100,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
-    const testimonialAuthorDesktopMargin = `${TestimonialAuthorMarginDesktop.top}${TestimonialAuthorMarginUnits.Desktop} ${TestimonialAuthorMarginDesktop.right}${TestimonialAuthorMarginUnits.Desktop} ${TestimonialAuthorMarginDesktop.bottom}${TestimonialAuthorMarginUnits.Desktop} ${TestimonialAuthorMarginDesktop.left}${TestimonialAuthorMarginUnits.Desktop}`;
-    const testimonialAuthorTabletMargin = `${TestimonialAuthorMarginTablet.top}${TestimonialAuthorMarginUnits.Tablet} ${TestimonialAuthorMarginTablet.right}${TestimonialAuthorMarginUnits.Tablet} ${TestimonialAuthorMarginTablet.bottom}${TestimonialAuthorMarginUnits.Tablet} ${TestimonialAuthorMarginTablet.left}${TestimonialAuthorMarginUnits.Tablet}`;
-    const testimonialAuthorMobileMargin = `${TestimonialAuthorMarginMobile.top}${TestimonialAuthorMarginUnits.Mobile} ${TestimonialAuthorMarginMobile.right}${TestimonialAuthorMarginUnits.Mobile} ${TestimonialAuthorMarginMobile.bottom}${TestimonialAuthorMarginUnits.Mobile} ${TestimonialAuthorMarginMobile.left}${TestimonialAuthorMarginUnits.Mobile}`;
+    const testimonialAuthorDesktopMargin = `${TestimonialAuthorMarginDesktop?.top}${TestimonialAuthorMarginUnits?.Desktop} ${TestimonialAuthorMarginDesktop?.right}${TestimonialAuthorMarginUnits?.Desktop} ${TestimonialAuthorMarginDesktop?.bottom}${TestimonialAuthorMarginUnits?.Desktop} ${TestimonialAuthorMarginDesktop?.left}${TestimonialAuthorMarginUnits?.Desktop}`;
+    const testimonialAuthorTabletMargin = `${TestimonialAuthorMarginTablet?.top}${TestimonialAuthorMarginUnits?.Tablet} ${TestimonialAuthorMarginTablet?.right}${TestimonialAuthorMarginUnits?.Tablet} ${TestimonialAuthorMarginTablet?.bottom}${TestimonialAuthorMarginUnits?.Tablet} ${TestimonialAuthorMarginTablet?.left}${TestimonialAuthorMarginUnits?.Tablet}`;
+    const testimonialAuthorMobileMargin = `${TestimonialAuthorMarginMobile?.top}${TestimonialAuthorMarginUnits?.Mobile} ${TestimonialAuthorMarginMobile?.right}${TestimonialAuthorMarginUnits?.Mobile} ${TestimonialAuthorMarginMobile?.bottom}${TestimonialAuthorMarginUnits?.Mobile} ${TestimonialAuthorMarginMobile?.left}${TestimonialAuthorMarginUnits?.Mobile}`;
     /** End Testimonial Author Margin */
 
 
@@ -1176,9 +1176,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
-    const testimonialDesignationDesktopMargin = `${TestimonialDesignationMarginDesktop.top}${TestimonialDesignationMarginUnits.Desktop} ${TestimonialDesignationMarginDesktop.right}${TestimonialDesignationMarginUnits.Desktop} ${TestimonialDesignationMarginDesktop.bottom}${TestimonialDesignationMarginUnits.Desktop} ${TestimonialDesignationMarginDesktop.left}${TestimonialDesignationMarginUnits.Desktop}`;
-    const testimonialDesignationTabletMargin = `${TestimonialDesignationMarginTablet.top}${TestimonialDesignationMarginUnits.Tablet} ${TestimonialDesignationMarginTablet.right}${TestimonialDesignationMarginUnits.Tablet} ${TestimonialDesignationMarginTablet.bottom}${TestimonialDesignationMarginUnits.Tablet} ${TestimonialDesignationMarginTablet.left}${TestimonialDesignationMarginUnits.Tablet}`;
-    const testimonialDesignationMobileMargin = `${TestimonialDesignationMarginMobile.top}${TestimonialDesignationMarginUnits.Mobile} ${TestimonialDesignationMarginMobile.right}${TestimonialDesignationMarginUnits.Mobile} ${TestimonialDesignationMarginMobile.bottom}${TestimonialDesignationMarginUnits.Mobile} ${TestimonialDesignationMarginMobile.left}${TestimonialDesignationMarginUnits.Mobile}`;
+    const testimonialDesignationDesktopMargin = `${TestimonialDesignationMarginDesktop?.top}${TestimonialDesignationMarginUnits?.Desktop} ${TestimonialDesignationMarginDesktop?.right}${TestimonialDesignationMarginUnits?.Desktop} ${TestimonialDesignationMarginDesktop?.bottom}${TestimonialDesignationMarginUnits?.Desktop} ${TestimonialDesignationMarginDesktop?.left}${TestimonialDesignationMarginUnits?.Desktop}`;
+    const testimonialDesignationTabletMargin = `${TestimonialDesignationMarginTablet?.top}${TestimonialDesignationMarginUnits?.Tablet} ${TestimonialDesignationMarginTablet?.right}${TestimonialDesignationMarginUnits?.Tablet} ${TestimonialDesignationMarginTablet?.bottom}${TestimonialDesignationMarginUnits?.Tablet} ${TestimonialDesignationMarginTablet?.left}${TestimonialDesignationMarginUnits?.Tablet}`;
+    const testimonialDesignationMobileMargin = `${TestimonialDesignationMarginMobile?.top}${TestimonialDesignationMarginUnits?.Mobile} ${TestimonialDesignationMarginMobile?.right}${TestimonialDesignationMarginUnits?.Mobile} ${TestimonialDesignationMarginMobile?.bottom}${TestimonialDesignationMarginUnits?.Mobile} ${TestimonialDesignationMarginMobile?.left}${TestimonialDesignationMarginUnits?.Mobile}`;
     /** End Testimonial Designation Margin */
 
 
@@ -1252,9 +1252,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
-    const testimonialQuoteIconDesktopMargin = `${TestimonialQuoteIconMarginDesktop.top}${TestimonialQuoteIconMarginUnits.Desktop} ${TestimonialQuoteIconMarginDesktop.right}${TestimonialQuoteIconMarginUnits.Desktop} ${TestimonialQuoteIconMarginDesktop.bottom}${TestimonialQuoteIconMarginUnits.Desktop} ${TestimonialQuoteIconMarginDesktop.left}${TestimonialQuoteIconMarginUnits.Desktop}`;
-    const testimonialQuoteIconTabletMargin = `${TestimonialQuoteIconMarginTablet.top}${TestimonialQuoteIconMarginUnits.Tablet} ${TestimonialQuoteIconMarginTablet.right}${TestimonialQuoteIconMarginUnits.Tablet} ${TestimonialQuoteIconMarginTablet.bottom}${TestimonialQuoteIconMarginUnits.Tablet} ${TestimonialQuoteIconMarginTablet.left}${TestimonialQuoteIconMarginUnits.Tablet}`;
-    const testimonialQuoteIconMobileMargin = `${TestimonialQuoteIconMarginMobile.top}${TestimonialQuoteIconMarginUnits.Mobile} ${TestimonialQuoteIconMarginMobile.right}${TestimonialQuoteIconMarginUnits.Mobile} ${TestimonialQuoteIconMarginMobile.bottom}${TestimonialQuoteIconMarginUnits.Mobile} ${TestimonialQuoteIconMarginMobile.left}${TestimonialQuoteIconMarginUnits.Mobile}`;
+    const testimonialQuoteIconDesktopMargin = `${TestimonialQuoteIconMarginDesktop?.top}${TestimonialQuoteIconMarginUnits?.Desktop} ${TestimonialQuoteIconMarginDesktop?.right}${TestimonialQuoteIconMarginUnits?.Desktop} ${TestimonialQuoteIconMarginDesktop?.bottom}${TestimonialQuoteIconMarginUnits?.Desktop} ${TestimonialQuoteIconMarginDesktop?.left}${TestimonialQuoteIconMarginUnits?.Desktop}`;
+    const testimonialQuoteIconTabletMargin = `${TestimonialQuoteIconMarginTablet?.top}${TestimonialQuoteIconMarginUnits?.Tablet} ${TestimonialQuoteIconMarginTablet?.right}${TestimonialQuoteIconMarginUnits?.Tablet} ${TestimonialQuoteIconMarginTablet?.bottom}${TestimonialQuoteIconMarginUnits?.Tablet} ${TestimonialQuoteIconMarginTablet?.left}${TestimonialQuoteIconMarginUnits?.Tablet}`;
+    const testimonialQuoteIconMobileMargin = `${TestimonialQuoteIconMarginMobile?.top}${TestimonialQuoteIconMarginUnits?.Mobile} ${TestimonialQuoteIconMarginMobile?.right}${TestimonialQuoteIconMarginUnits?.Mobile} ${TestimonialQuoteIconMarginMobile?.bottom}${TestimonialQuoteIconMarginUnits?.Mobile} ${TestimonialQuoteIconMarginMobile?.left}${TestimonialQuoteIconMarginUnits?.Mobile}`;
     /** End Testimonial Quote Icon Margin */
 
 
@@ -1329,9 +1329,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     /** Default border radius for Testimonial Image */
-    const testimonialImageDesktopBorderRadiusWidth = `${TestimonialImageDesktopRadiusWidth.top}${TestimonialImageRadiusUnits.Desktop} ${TestimonialImageDesktopRadiusWidth.right}${TestimonialImageRadiusUnits.Desktop} ${TestimonialImageDesktopRadiusWidth.bottom}${TestimonialImageRadiusUnits.Desktop} ${TestimonialImageDesktopRadiusWidth.left}${TestimonialImageRadiusUnits.Desktop}`;
-    const testimonialImageTabletBorderRadiusWidth = `${TestimonialImageTabRadiusWidth.top}${TestimonialImageRadiusUnits.Tablet} ${TestimonialImageTabRadiusWidth.right}${TestimonialImageRadiusUnits.Tablet} ${TestimonialImageTabRadiusWidth.bottom}${TestimonialImageRadiusUnits.Tablet} ${TestimonialImageTabRadiusWidth.left}${TestimonialImageRadiusUnits.Tablet}`;
-    const testimonialImageMobileBorderRadiusWidth = `${TestimonialImageMobileRadiusWidth.top}${TestimonialImageRadiusUnits.Mobile} ${TestimonialImageMobileRadiusWidth.right}${TestimonialImageRadiusUnits.Mobile} ${TestimonialImageMobileRadiusWidth.bottom}${TestimonialImageRadiusUnits.Mobile} ${TestimonialImageMobileRadiusWidth.left}${TestimonialImageRadiusUnits.Mobile}`;
+    const testimonialImageDesktopBorderRadiusWidth = `${TestimonialImageDesktopRadiusWidth?.top}${TestimonialImageRadiusUnits?.Desktop} ${TestimonialImageDesktopRadiusWidth?.right}${TestimonialImageRadiusUnits?.Desktop} ${TestimonialImageDesktopRadiusWidth?.bottom}${TestimonialImageRadiusUnits?.Desktop} ${TestimonialImageDesktopRadiusWidth?.left}${TestimonialImageRadiusUnits?.Desktop}`;
+    const testimonialImageTabletBorderRadiusWidth = `${TestimonialImageTabRadiusWidth?.top}${TestimonialImageRadiusUnits?.Tablet} ${TestimonialImageTabRadiusWidth?.right}${TestimonialImageRadiusUnits?.Tablet} ${TestimonialImageTabRadiusWidth?.bottom}${TestimonialImageRadiusUnits?.Tablet} ${TestimonialImageTabRadiusWidth?.left}${TestimonialImageRadiusUnits?.Tablet}`;
+    const testimonialImageMobileBorderRadiusWidth = `${TestimonialImageMobileRadiusWidth?.top}${TestimonialImageRadiusUnits?.Mobile} ${TestimonialImageMobileRadiusWidth?.right}${TestimonialImageRadiusUnits?.Mobile} ${TestimonialImageMobileRadiusWidth?.bottom}${TestimonialImageRadiusUnits?.Mobile} ${TestimonialImageMobileRadiusWidth?.left}${TestimonialImageRadiusUnits?.Mobile}`;
     /** End Testimonial Image Border Radius */
 
 
@@ -1403,9 +1403,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const globalDesktopPadding    = `${TestimonialGlobalPaddingDesktop.top}${TestimonialGlobalPaddingUnits.Desktop} ${TestimonialGlobalPaddingDesktop.right}${TestimonialGlobalPaddingUnits.Desktop} ${TestimonialGlobalPaddingDesktop.bottom}${TestimonialGlobalPaddingUnits.Desktop} ${TestimonialGlobalPaddingDesktop.left}${TestimonialGlobalPaddingUnits.Desktop}`;
-	const globalTabletPadding     = `${TestimonialGlobalPaddingTablet.top}${TestimonialGlobalPaddingUnits.Tablet} ${TestimonialGlobalPaddingTablet.right}${TestimonialGlobalPaddingUnits.Tablet} ${TestimonialGlobalPaddingTablet.bottom}${TestimonialGlobalPaddingUnits.Tablet} ${TestimonialGlobalPaddingTablet.left}${TestimonialGlobalPaddingUnits.Tablet}`;
-	const globalMobilePadding     = `${TestimonialGlobalPaddingMobile.top}${TestimonialGlobalPaddingUnits.Mobile} ${TestimonialGlobalPaddingMobile.right}${TestimonialGlobalPaddingUnits.Mobile} ${TestimonialGlobalPaddingMobile.bottom}${TestimonialGlobalPaddingUnits.Mobile} ${TestimonialGlobalPaddingMobile.left}${TestimonialGlobalPaddingUnits.Mobile}`;
+	const globalDesktopPadding    = `${TestimonialGlobalPaddingDesktop?.top}${TestimonialGlobalPaddingUnits?.Desktop} ${TestimonialGlobalPaddingDesktop?.right}${TestimonialGlobalPaddingUnits?.Desktop} ${TestimonialGlobalPaddingDesktop?.bottom}${TestimonialGlobalPaddingUnits?.Desktop} ${TestimonialGlobalPaddingDesktop?.left}${TestimonialGlobalPaddingUnits?.Desktop}`;
+	const globalTabletPadding     = `${TestimonialGlobalPaddingTablet?.top}${TestimonialGlobalPaddingUnits?.Tablet} ${TestimonialGlobalPaddingTablet?.right}${TestimonialGlobalPaddingUnits?.Tablet} ${TestimonialGlobalPaddingTablet?.bottom}${TestimonialGlobalPaddingUnits?.Tablet} ${TestimonialGlobalPaddingTablet?.left}${TestimonialGlobalPaddingUnits?.Tablet}`;
+	const globalMobilePadding     = `${TestimonialGlobalPaddingMobile?.top}${TestimonialGlobalPaddingUnits?.Mobile} ${TestimonialGlobalPaddingMobile?.right}${TestimonialGlobalPaddingUnits?.Mobile} ${TestimonialGlobalPaddingMobile?.bottom}${TestimonialGlobalPaddingUnits?.Mobile} ${TestimonialGlobalPaddingMobile?.left}${TestimonialGlobalPaddingUnits?.Mobile}`;
 	/** End Global Padding */
 	
 	/** Start Global Margin */
@@ -1477,9 +1477,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		})
 	}
 
-	const globalDesktopMargin = `${TestimonialGlobalMarginDesktop.top}${TestimonialGlobalMarginUnits.Desktop} ${TestimonialGlobalMarginDesktop.right}${TestimonialGlobalMarginUnits.Desktop} ${TestimonialGlobalMarginDesktop.bottom}${TestimonialGlobalMarginUnits.Desktop} ${TestimonialGlobalMarginDesktop.left}${TestimonialGlobalMarginUnits.Desktop}`;
-	const globalTabletMargin = `${TestimonialGlobalMarginTablet.top}${TestimonialGlobalMarginUnits.Tablet} ${TestimonialGlobalMarginTablet.right}${TestimonialGlobalMarginUnits.Tablet} ${TestimonialGlobalMarginTablet.bottom}${TestimonialGlobalMarginUnits.Tablet} ${TestimonialGlobalMarginTablet.left}${TestimonialGlobalMarginUnits.Tablet}`;
-	const globalMobileMargin = `${TestimonialGlobalMarginMobile.top}${TestimonialGlobalMarginUnits.Mobile} ${TestimonialGlobalMarginMobile.right}${TestimonialGlobalMarginUnits.Mobile} ${TestimonialGlobalMarginMobile.bottom}${TestimonialGlobalMarginUnits.Mobile} ${TestimonialGlobalMarginMobile.left}${TestimonialGlobalMarginUnits.Mobile}`;
+	const globalDesktopMargin = `${TestimonialGlobalMarginDesktop?.top}${TestimonialGlobalMarginUnits?.Desktop} ${TestimonialGlobalMarginDesktop?.right}${TestimonialGlobalMarginUnits?.Desktop} ${TestimonialGlobalMarginDesktop?.bottom}${TestimonialGlobalMarginUnits?.Desktop} ${TestimonialGlobalMarginDesktop?.left}${TestimonialGlobalMarginUnits?.Desktop}`;
+	const globalTabletMargin = `${TestimonialGlobalMarginTablet?.top}${TestimonialGlobalMarginUnits?.Tablet} ${TestimonialGlobalMarginTablet?.right}${TestimonialGlobalMarginUnits?.Tablet} ${TestimonialGlobalMarginTablet?.bottom}${TestimonialGlobalMarginUnits?.Tablet} ${TestimonialGlobalMarginTablet?.left}${TestimonialGlobalMarginUnits?.Tablet}`;
+	const globalMobileMargin = `${TestimonialGlobalMarginMobile?.top}${TestimonialGlobalMarginUnits?.Mobile} ${TestimonialGlobalMarginMobile?.right}${TestimonialGlobalMarginUnits?.Mobile} ${TestimonialGlobalMarginMobile?.bottom}${TestimonialGlobalMarginUnits?.Mobile} ${TestimonialGlobalMarginMobile?.left}${TestimonialGlobalMarginUnits?.Mobile}`;
 	/** End Global Margin */
 
 	/** Start Global border */
@@ -1550,9 +1550,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const globalDesktopBorderWidth = `${TestimonialGlobalBorderDesktop.top}${TestimonialGlobalBorderUnits.Desktop} ${TestimonialGlobalBorderDesktop.right}${TestimonialGlobalBorderUnits.Desktop} ${TestimonialGlobalBorderDesktop.bottom}${TestimonialGlobalBorderUnits.Desktop} ${TestimonialGlobalBorderDesktop.left}${TestimonialGlobalBorderUnits.Desktop}`;
-	const globalTabletBorderWidth = `${TestimonialGlobalBorderTablet.top}${TestimonialGlobalBorderUnits.Tablet} ${TestimonialGlobalBorderTablet.right}${TestimonialGlobalBorderUnits.Tablet} ${TestimonialGlobalBorderTablet.bottom}${TestimonialGlobalBorderUnits.Tablet} ${TestimonialGlobalBorderTablet.left}${TestimonialGlobalBorderUnits.Tablet}`;
-	const globalMobileBorderWidth = `${TestimonialGlobalBorderMobile.top}${TestimonialGlobalBorderUnits.Mobile} ${TestimonialGlobalBorderMobile.right}${TestimonialGlobalBorderUnits.Mobile} ${TestimonialGlobalBorderMobile.bottom}${TestimonialGlobalBorderUnits.Mobile} ${TestimonialGlobalBorderMobile.left}${TestimonialGlobalBorderUnits.Mobile}`;
+	const globalDesktopBorderWidth = `${TestimonialGlobalBorderDesktop?.top}${TestimonialGlobalBorderUnits?.Desktop} ${TestimonialGlobalBorderDesktop?.right}${TestimonialGlobalBorderUnits?.Desktop} ${TestimonialGlobalBorderDesktop?.bottom}${TestimonialGlobalBorderUnits?.Desktop} ${TestimonialGlobalBorderDesktop?.left}${TestimonialGlobalBorderUnits?.Desktop}`;
+	const globalTabletBorderWidth = `${TestimonialGlobalBorderTablet?.top}${TestimonialGlobalBorderUnits?.Tablet} ${TestimonialGlobalBorderTablet?.right}${TestimonialGlobalBorderUnits?.Tablet} ${TestimonialGlobalBorderTablet?.bottom}${TestimonialGlobalBorderUnits?.Tablet} ${TestimonialGlobalBorderTablet?.left}${TestimonialGlobalBorderUnits?.Tablet}`;
+	const globalMobileBorderWidth = `${TestimonialGlobalBorderMobile?.top}${TestimonialGlobalBorderUnits?.Mobile} ${TestimonialGlobalBorderMobile?.right}${TestimonialGlobalBorderUnits?.Mobile} ${TestimonialGlobalBorderMobile?.bottom}${TestimonialGlobalBorderUnits?.Mobile} ${TestimonialGlobalBorderMobile?.left}${TestimonialGlobalBorderUnits?.Mobile}`;
 	/** End Border */
 
 
@@ -1627,9 +1627,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** end Global border */
 
 	/** End Global Border Radius */
-	const globalDesktopBorderRadiusWidth = `${TestimonialGlobalBorderRadiusDesktop.top}${TestimonialGlobalBorderRadiusUnits.Desktop} ${TestimonialGlobalBorderRadiusDesktop.right}${TestimonialGlobalBorderRadiusUnits.Desktop} ${TestimonialGlobalBorderRadiusDesktop.bottom}${TestimonialGlobalBorderRadiusUnits.Desktop} ${TestimonialGlobalBorderRadiusDesktop.left}${TestimonialGlobalBorderRadiusUnits.Desktop}`;
-	const globalTabletBorderRadiusWidth = `${TestimonialGlobalBorderRadiusTablet.top}${TestimonialGlobalBorderRadiusUnits.Tablet} ${TestimonialGlobalBorderRadiusTablet.right}${TestimonialGlobalBorderRadiusUnits.Tablet} ${TestimonialGlobalBorderRadiusTablet.bottom}${TestimonialGlobalBorderRadiusUnits.Tablet} ${TestimonialGlobalBorderRadiusTablet.left}${TestimonialGlobalBorderRadiusUnits.Tablet}`;
-	const globalMobileBorderRadiusWidth = `${TestimonialGlobalBorderRadiusMobile.top}${TestimonialGlobalBorderRadiusUnits.Mobile} ${TestimonialGlobalBorderRadiusMobile.right}${TestimonialGlobalBorderRadiusUnits.Mobile} ${TestimonialGlobalBorderRadiusMobile.bottom}${TestimonialGlobalBorderRadiusUnits.Mobile} ${TestimonialGlobalBorderRadiusMobile.left}${TestimonialGlobalBorderRadiusUnits.Mobile}`;
+	const globalDesktopBorderRadiusWidth = `${TestimonialGlobalBorderRadiusDesktop?.top}${TestimonialGlobalBorderRadiusUnits?.Desktop} ${TestimonialGlobalBorderRadiusDesktop?.right}${TestimonialGlobalBorderRadiusUnits?.Desktop} ${TestimonialGlobalBorderRadiusDesktop?.bottom}${TestimonialGlobalBorderRadiusUnits?.Desktop} ${TestimonialGlobalBorderRadiusDesktop?.left}${TestimonialGlobalBorderRadiusUnits?.Desktop}`;
+	const globalTabletBorderRadiusWidth = `${TestimonialGlobalBorderRadiusTablet?.top}${TestimonialGlobalBorderRadiusUnits?.Tablet} ${TestimonialGlobalBorderRadiusTablet?.right}${TestimonialGlobalBorderRadiusUnits?.Tablet} ${TestimonialGlobalBorderRadiusTablet?.bottom}${TestimonialGlobalBorderRadiusUnits?.Tablet} ${TestimonialGlobalBorderRadiusTablet?.left}${TestimonialGlobalBorderRadiusUnits?.Tablet}`;
+	const globalMobileBorderRadiusWidth = `${TestimonialGlobalBorderRadiusMobile?.top}${TestimonialGlobalBorderRadiusUnits?.Mobile} ${TestimonialGlobalBorderRadiusMobile?.right}${TestimonialGlobalBorderRadiusUnits?.Mobile} ${TestimonialGlobalBorderRadiusMobile?.bottom}${TestimonialGlobalBorderRadiusUnits?.Mobile} ${TestimonialGlobalBorderRadiusMobile?.left}${TestimonialGlobalBorderRadiusUnits?.Mobile}`;
 	/** End Border Radius */
 
 
