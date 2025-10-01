@@ -2499,9 +2499,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					}
 	
 					.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-list .fb-taxonomy-count {
-							background: #D7E9FF;
+							background: #FAD6D9;
 							padding: 6px 14px;
 					}
+
+					.${blockId} .fb-taxonomy-list .fb-taxonomy-item .fb-taxonomy-read-more-button {
+							margin-top: 32px;
+					}
+
+					.${blockId}.fb-taxonomy-style-2 .fb_taxonomy_sublist .fb-taxonomy-item .fb-taxonomy-read-more-button{
+							padding: 6px 0px !important;
+							background: transparent !important;
+							border-top: 0 !important;
+							border-left: 0 !important;
+							border-right: 0 !important;
+							border-bottom-width: 1px;
+							border-bottom-style: solid;
+							border-color: #0B0C0E !important;
+							border-radius: inherit !important;
+							transition: all .3s ease;
+					}
+
+					.${blockId}.fb-taxonomy-style-2 .fb_taxonomy_sublist .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-text{
+							color: #0B0C0E !important;
+					}
+
+					.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-list .fb_taxonomy_sublist .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon{
+						border: none !important;
+						background-color: unset !important;
+						padding: inherit !important;
+					}
+
+					.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-list .fb_taxonomy_sublist .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon svg{
+							fill: #0B0C0E !important;
+							transition: all .3s ease;
+					}
+
+					.${blockId}.fb-taxonomy-style-2 .fb_taxonomy_sublist .fb-taxonomy-item .fb-taxonomy-read-more-button:hover {
+						border-color: #3991FF !important;
+					}
+
+					.${blockId}.fb-taxonomy-style-2 .fb_taxonomy_sublist .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-text{
+						color: #3991FF !important;
+					}
+
+					.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-list .fb_taxonomy_sublist .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon svg{
+						fill: #3991FF !important;
+					}
+					
 					
 					`
 						: ""
@@ -3631,7 +3676,7 @@ ${
 
         /* List Layout Styles - Desktop  */
 
-				${
+				${ layoutType === "list" &&
 					premadeStyle === "style-1"
 						? `
 
@@ -3644,6 +3689,8 @@ ${
 								: "none"
 						};
 
+						${listStyle === "none" ? `padding-left: 0px;` : ""}
+
 					}
 
 					`
@@ -3651,12 +3698,41 @@ ${
 				}
 
 
-				${
+				${ layoutType === "list" &&
 					premadeStyle === "style-2"
 						? `
 						.${blockId} .fb-taxonomy-list .fb-taxonomy-item[data-parent-id="0"]{
 							${postListTypeColor ? `border-color: ${postListTypeColor};` : ""}
 						}
+
+
+						${buttonBgColor ? `
+							.${blockId}.fb-taxonomy-style-2 .fb_taxonomy_sublist .fb-taxonomy-item .fb-taxonomy-read-more-button{
+								border-color: ${buttonBgColor} !important;
+							}
+							.${blockId}.fb-taxonomy-style-2 .fb_taxonomy_sublist .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-text{
+									color: ${buttonBgColor} !important;
+							}
+							.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-list .fb_taxonomy_sublist .fb-taxonomy-item .fb-taxonomy-read-more-button .fb-taxonomy-read-more-icon svg{
+									fill: ${buttonBgColor} !important;
+							}
+
+							` : ""}
+
+						${buttonBgHoverColor ? `
+							.${blockId}.fb-taxonomy-style-2 .fb_taxonomy_sublist .fb-taxonomy-item .fb-taxonomy-read-more-button:hover {
+								border-color: ${buttonBgHoverColor} !important;
+							}
+							.${blockId}.fb-taxonomy-style-2 .fb_taxonomy_sublist .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-text{
+								color: ${buttonBgHoverColor} !important;
+							}
+							.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-list .fb_taxonomy_sublist .fb-taxonomy-item .fb-taxonomy-read-more-button:hover .fb-taxonomy-read-more-icon svg{
+								fill: ${buttonBgHoverColor} !important;
+							}
+						
+						` : ""}
+
+
 					`
 						: ""
 				}
@@ -5509,9 +5585,9 @@ ${
 					)}
 				</PanelBody>
 
-				{layoutType === "grid" && readMoreSwitcher && (
+				{ (layoutType === "grid" || ( layoutType === "list" && premadeStyle === "style-2" )) && readMoreSwitcher && (
 					<PanelBody
-						title={__("Read More Button", "frontis-blocks")}
+						title={__("View All Button", "frontis-blocks")}
 						initialOpen={false}
 					>
 						<BaseControl
@@ -5537,10 +5613,6 @@ ${
 
 						{(readMoreIconAlign === "icon-text" ||
 							readMoreIconAlign === "icon-only") && (
-							// <FBIconPicker
-							// 	value={readMoreIcon}
-							// 	setIconHandler={readMoreIconHandler}
-							// />
 							<FBIconPicker
 								value={readMoreIcon}
 								setIconHandler={readMoreIconHandler}
@@ -6694,9 +6766,9 @@ ${
 				</PanelBody>
 			)}
 
-			{layoutType === "grid" && readMoreSwitcher && (
+			{(layoutType === "grid" || ( layoutType === "list" && premadeStyle === "style-2" )) && readMoreSwitcher && (
 				<PanelBody
-					title={__("Read More", "frontis-blocks")}
+					title={__("View All", "frontis-blocks")}
 					initialOpen={false}
 				>
 					<FB_Range
@@ -7071,12 +7143,12 @@ ${
 				</PanelBody>
 			)}
 
-			{layoutType === "grid" &&
+			{(layoutType === "grid" || ( layoutType === "list" && premadeStyle === "style-2" )) &&
 				readMoreSwitcher &&
 				(readMoreIconAlign === "icon-text" ||
 					readMoreIconAlign === "icon-only") && (
 					<PanelBody
-						title={__("Read More Button Icon", "frontis-blocks")}
+						title={__("View All Button Icon", "frontis-blocks")}
 						initialOpen={false}
 					>
 						<FB_Range
@@ -7290,7 +7362,7 @@ ${
 					</PanelBody>
 				)}
 
-			{layoutType === "grid" &&
+			{(layoutType === "grid" || ( layoutType === "list" && premadeStyle === "style-2" )) &&
 				readMoreSwitcher &&
 				readMoreIconAlign === "image" && (
 					<PanelBody

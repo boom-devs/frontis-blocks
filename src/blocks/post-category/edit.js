@@ -176,6 +176,47 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							</p>
 						)}
 
+
+						{ premadeStyle === "style-2" && readMoreSwitcher && (
+								<a
+									href={term.link}
+									className="fb-taxonomy-read-more-button"
+								>
+									{readMoreIconAlign !== "icon-only" && (
+										<span className="fb-taxonomy-read-more-text">
+											{readMoreText}
+										</span>
+									)}
+
+									{readMoreIconAlign === "icon-text" && (
+										<div className="fb-taxonomy-read-more-icon-wrapper">
+											<div className="fb-taxonomy-read-more-icon">
+												{renderSVG(readMoreIcon)}
+											</div>
+										</div>
+									)}
+
+									{readMoreIconAlign === "image" && readMoreIconImageUrl && (
+										<div className="fb-taxonomy-read-more-icon-wrapper">
+											<div className="fb-taxonomy-read-more-icon-image">
+												<img
+													src={readMoreIconImageUrl}
+													alt={readMoreIconImageAlt}
+												/>
+											</div>
+										</div>
+									)}
+
+									{readMoreIconAlign === "icon-only" && (
+										<div className="fb-taxonomy-read-more-icon-wrapper">
+											<div className="fb-taxonomy-read-more-icon">
+												{renderSVG(readMoreIcon)}
+											</div>
+										</div>
+									)}
+								</a>
+					)}
+
 						{separatorStyle !== "none" && (
 							<div className="fb-tax-separator"></div>
 						)}
@@ -401,6 +442,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							)}
 
 						</div>
+
 						{showDescription && taxonomy.description && (
 							<p className="fb-taxonomy-description">
 								{trimWords(
@@ -409,6 +451,46 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								)}
 							</p>
 						)}
+
+								{ premadeStyle === "style-2" && readMoreSwitcher && (
+											<a
+												href={taxonomy.link}
+												className="fb-taxonomy-read-more-button"
+											>
+												{readMoreIconAlign !== "icon-only" && (
+													<span className="fb-taxonomy-read-more-text">
+														{readMoreText}
+													</span>
+												)}
+
+												{readMoreIconAlign === "icon-text" && (
+													<div className="fb-taxonomy-read-more-icon-wrapper">
+														<div className="fb-taxonomy-read-more-icon">
+															{renderSVG(readMoreIcon)}
+														</div>
+													</div>
+												)}
+
+												{readMoreIconAlign === "image" && readMoreIconImageUrl && (
+													<div className="fb-taxonomy-read-more-icon-wrapper">
+														<div className="fb-taxonomy-read-more-icon-image">
+															<img
+																src={readMoreIconImageUrl}
+																alt={readMoreIconImageAlt}
+															/>
+														</div>
+													</div>
+												)}
+
+												{readMoreIconAlign === "icon-only" && (
+													<div className="fb-taxonomy-read-more-icon-wrapper">
+														<div className="fb-taxonomy-read-more-icon">
+															{renderSVG(readMoreIcon)}
+														</div>
+													</div>
+												)}
+											</a>
+								)}
 
 						{separatorStyle !== "none" && (
 							<div className="fb-tax-separator"></div>
