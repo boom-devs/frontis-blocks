@@ -20,9 +20,8 @@ const FullSiteImport = ({
 
     const [formData, setFormData] = useState({
         siteName: (window.frontisBlocksAdmin && window.frontisBlocksAdmin.siteName) || '',
-        siteTagline: '',
-        logo: { id: '', url: '', alt: '' },
-        logoUrl: '',
+        siteTagline: (window.frontisBlocksAdmin && window.frontisBlocksAdmin?.siteTagline) || '',
+        siteLogo: { id: '', url: '', alt: '' },
         importContent: true,
         importCustomizer: true,
         importWidgets: true,
