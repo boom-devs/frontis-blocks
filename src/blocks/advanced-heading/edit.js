@@ -508,17 +508,17 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	}, [dynamicValue]);
 
 	// Loop Builder Check
-	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
-	useEffect(() => {
-		if (isInsideLoopBuilder && !loopAutoApplied) {
-			setAttributes({
-				dynamicTextEnabled: true,
-				dynamicTextEnableLink: true,
-				dynamicTextLinkSource: 'post_permalink',
-				loopAutoApplied: true,
-			});
-		}
-	}, [isInsideLoopBuilder, loopAutoApplied]);
+	// const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
+	// useEffect(() => {
+	// 	if (isInsideLoopBuilder && !loopAutoApplied) {
+	// 		setAttributes({
+	// 			dynamicTextEnabled: true,
+	// 			dynamicTextEnableLink: true,
+	// 			dynamicTextLinkSource: 'post_permalink',
+	// 			loopAutoApplied: true,
+	// 		});
+	// 	}
+	// }, [isInsideLoopBuilder, loopAutoApplied]);
 
 	return (
 		<>

@@ -399,15 +399,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 
 	// Loop Builder Check
-	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
-	useEffect(() => {
-		if (isInsideLoopBuilder && !loopAutoApplied) {
-			setAttributes({ dynamicImageEnabled: true });
-			setAttributes({dynamicImageEnableLink: true});
-			setAttributes({dynamicImageLinkSource: 'post_permalink'});
-			setAttributes({loopAutoApplied: true});
-		}
-	}, [isInsideLoopBuilder, loopAutoApplied]);
+	// const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
+	// useEffect(() => {
+	// 	if (isInsideLoopBuilder && !loopAutoApplied) {
+	// 		setAttributes({ dynamicImageEnabled: true });
+	// 		setAttributes({dynamicImageEnableLink: true});
+	// 		setAttributes({dynamicImageLinkSource: 'post_permalink'});
+	// 		setAttributes({loopAutoApplied: true});
+	// 	}
+	// }, [isInsideLoopBuilder, loopAutoApplied]);
 
 	return (
 		<>
