@@ -333,6 +333,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				buttonIconAlign: 'none',
 				buttonTwoIconAlign: 'none',
 				connectorSwitcher: true,
+				ButtonIcon: '',
+				ButtonTwoIcon: '',
 				buttonsDirection: 'vertical',
 				ButtonDesktopPadding: {
 					top: "12",
@@ -388,8 +390,129 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				},
 			},
 			"preset-2": {
+				buttonIconAlign: 'none',
+				buttonTwoIconAlign: 'none',
+				buttonsDirection: 'vertical',
+				connectorSwitcher: true,
+				ButtonDesktopPadding: {
+					top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+				},
+				ButtonDesktopBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTwoDesktopBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "50",
+					bottom: "50",
+					left: "50",
+					right: "50",
+				},
+				buttonsGap: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+			},
+			"preset-3": {
+				buttonIconAlign: 'none',
+				buttonTwoIconAlign: 'none',
+				ButtonIcon: '',
+				ButtonTwoIcon: '',
+				buttonsDirection: 'vertical',
+				connectorSwitcher: true,
+				ButtonDesktopPadding: {
+					top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+				},
+				ButtonDesktopBorderRadiusWidth: {
+					top: "50",
+					bottom: "0",
+					left: "50",
+					right: "0",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "50",
+					bottom: "0",
+					left: "50",
+					right: "0",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "50",
+					bottom: "0",
+					left: "50",
+					right: "0",
+				},
+				ButtonTwoDesktopBorderRadiusWidth: {
+					top: "0",
+					bottom: "50",
+					left: "0",
+					right: "50",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "0",
+					bottom: "50",
+					left: "0",
+					right: "50",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "0",
+					bottom: "50",
+					left: "0",
+					right: "50",
+				},
+				buttonsGap: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+			},
+			"preset-4": {
+				ButtonIcon: "chevron-left",
 				buttonIconAlign: 'icon-text',
-				buttonTwoIconAlign: 'icon-text',
+				buttonTwoIconAlign: 'none',
+				btnIconPosition: 'left',
+				btnTwoIconPosition: "right",
 				buttonsDirection: 'vertical',
 				connectorSwitcher: true,
 				ButtonDesktopPadding: {
@@ -445,9 +568,73 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: '100'
 				},
 			},
-			"preset-3": {
+			"preset-5": {
+				ButtonIcon: "chevron-left",
+				buttonIconAlign: 'icon-text',
+				buttonTwoIconAlign: 'icon-text',
+				ButtonTwoIcon: "chevron-right",
+				btnIconPosition: 'left',
+				btnTwoIconPosition: "right",
+				buttonsDirection: 'vertical',
+				connectorSwitcher: true,
+				ButtonDesktopPadding: {
+					top: "12",
+					bottom: "12",
+					left: "30",
+					right: "30",
+				},
+				ButtonDesktopBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTabBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonMobileBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoDesktopBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoTabBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				ButtonTwoMobileBorderRadiusWidth: {
+					top: "0",
+					bottom: "0",
+					left: "0",
+					right: "0",
+				},
+				buttonsGap: {
+					Desktop: '0',
+					Tablet: '0',
+					Mobile: '0',
+				},
+				ButtonWidth: {
+					Desktop: '100',
+					Tablet: '100',
+					Mobile: '100'
+				},
+			},
+			"preset-6": {
 				buttonIconAlign: 'none',
 				buttonTwoIconAlign: 'none',
+				ButtonIcon: '',
+				ButtonTwoIcon: '',
 				connectorSwitcher: false,
 				buttonsDirection: 'vertical',
 				ButtonDesktopPadding: {
@@ -503,9 +690,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: '100'
 				},
 			},
-			"preset-4": {
+			"preset-7": {
 				buttonIconAlign: 'none',
 				buttonTwoIconAlign: 'none',
+				ButtonIcon: '',
+				ButtonTwoIcon: '',
 				buttonsDirection: 'horizontal',
 				connectorSwitcher: false,
 				ButtonDesktopPadding: {
@@ -561,65 +750,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					Mobile: ''
 				},
 			},
-			"preset-5": {
-				buttonIconAlign: 'none',
-				buttonTwoIconAlign: 'none',
-				buttonsDirection: 'vertical',
-				connectorSwitcher: true,
-				ButtonDesktopPadding: {
-					top: "12",
-					bottom: "12",
-					left: "30",
-					right: "30",
-				},
-				ButtonDesktopBorderRadiusWidth: {
-					top: "50",
-					bottom: "50",
-					left: "50",
-					right: "50",
-				},
-				ButtonTabBorderRadiusWidth: {
-					top: "50",
-					bottom: "50",
-					left: "50",
-					right: "50",
-				},
-				ButtonMobileBorderRadiusWidth: {
-					top: "50",
-					bottom: "50",
-					left: "50",
-					right: "50",
-				},
-				ButtonTwoDesktopBorderRadiusWidth: {
-					top: "50",
-					bottom: "50",
-					left: "50",
-					right: "50",
-				},
-				ButtonTwoTabBorderRadiusWidth: {
-					top: "50",
-					bottom: "50",
-					left: "50",
-					right: "50",
-				},
-				ButtonTwoMobileBorderRadiusWidth: {
-					top: "50",
-					bottom: "50",
-					left: "50",
-					right: "50",
-				},
-				buttonsGap: {
-					Desktop: '0',
-					Tablet: '0',
-					Mobile: '0',
-				},
-				ButtonWidth: {
-					Desktop: '100',
-					Tablet: '100',
-					Mobile: '100'
-				},
-			},
-
 		};
 
 		const selectedPresetConfig = presetConfigurations[selectedPreset];
@@ -2092,7 +2222,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${ButtonBorderColor ? `border-color: ${ButtonBorderColor};` : ""}
 			${buttonOneBorderDesktopWidth && ButtonDesktopBorderWidth.top ? `border-width: ${buttonOneBorderDesktopWidth};` : ''}
 			${buttonOneBorderRadiusDesktopWidth && ButtonDesktopBorderRadiusWidth.top ? `border-radius: ${buttonOneBorderRadiusDesktopWidth};` : ''}
-			
 		}
 		.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button:hover {
 			${ButtonBgHoverColor ? `background-color: ${ButtonBgHoverColor};` : ""}
@@ -2222,21 +2351,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${ButtonGlobalTypoSwitcher.lineHeight === false && ButtonLineHeight.Tablet && ButtonLineHeightUnits.Tablet ? `line-height: ${ButtonLineHeight.Tablet}${ButtonLineHeightUnits.Tablet};` : ''}
 			}
 			.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button {
-					${buttonTabPadding && ButtonTabPadding.top ? `padding: ${buttonTabPadding};` : ''}
-					${buttonTabMargin && ButtonTabMargin.top ? `margin: ${buttonTabMargin};` : ''}
-					${buttonOneBorderTabletWidth && ButtonTabBorderWidth.top ? `border-width: ${buttonOneBorderTabletWidth};` : ''}
-					${buttonOneBorderRadiusTabletWidth && ButtonTabBorderRadiusWidth.top ? `border-radius: ${buttonOneBorderRadiusTabletWidth};` : ''}
+				${ButtonBgColor ? `background-color: ${ButtonBgColor};` : ""}
+				${buttonTabPadding && ButtonTabPadding.top ? `padding: ${buttonTabPadding};` : ''}
+				${buttonTabMargin && ButtonTabMargin.top ? `margin: ${buttonTabMargin};` : ''}
+				${buttonOneBorderTabletWidth && ButtonTabBorderWidth.top ? `border-width: ${buttonOneBorderTabletWidth};` : ''}
+				${buttonOneBorderRadiusTabletWidth && ButtonTabBorderRadiusWidth.top ? `border-radius: ${buttonOneBorderRadiusTabletWidth};` : ''}
 			}
 			.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button {
+				${buttonTabPadding && ButtonTabPadding.top ? `padding: ${buttonTabPadding};` : ''}
+				${buttonTabMargin && ButtonTabMargin.top ? `margin: ${buttonTabMargin};` : ''}
+				${ButtonTwoBgColor ? `background-color: ${ButtonTwoBgColor} !important;` : ""}
 				${ButtonTwoBorder ? `border: ${ButtonTwoBorder};` : ''}
 				${buttonBorderTabletWidth && ButtonTwoTabBorderWidth.top ? `border-width: ${buttonBorderTabletWidth};` : ''}
 				${buttonBorderRadiusTabletWidth && ButtonTwoTabBorderRadiusWidth.top ? `border-radius: ${buttonBorderRadiusTabletWidth};` : ''}
+				${ButtonTwoBorderColor ? `border-color: ${ButtonTwoBorderColor};` : ""}
 			}
 			.fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
 				${connectorGlobalTypoSwitcher.fontSize === false && connectorFontSize.Tablet && connectorFontSizeUnits.Tablet ? `font-size: ${connectorFontSize.Tablet}${connectorFontSizeUnits.Tablet};` : ''}
 				${connectorGlobalTypoSwitcher.letterSpacing === false && connectorLetterSpacing.Tablet && connectorLetterSpacingUnits.Tablet ? `letter-spacing: ${connectorLetterSpacing.Tablet}${connectorLetterSpacingUnits.Tablet};` : ''}
 				${connectorLineHeight.Tablet && connectorLineHeightUnits.Tablet ? `line-height: ${connectorLineHeight.Tablet}${connectorLineHeightUnits.Tablet};` : ''}
 				${connectorSize.Tablet && connectorSizeUnits.Tablet ? `width: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};` : ''}
+				${connectorSize.Tablet && connectorSizeUnits.Tablet ? `height: ${connectorSize.Tablet}${connectorSizeUnits.Tablet};` : ''}
 				${connectorTabletBorderWidth && connectorBorderTablet.top ? `border-width: ${connectorTabletBorderWidth};` : ''}
 				${connectorTabletBorderRadius && connectorBorderRadiusTablet.top ? `border-radius: ${connectorTabletBorderRadius};` : ''}
 			}
@@ -2274,21 +2409,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${ButtonGlobalTypoSwitcher.lineHeight === false && ButtonLineHeight.Mobile && ButtonLineHeightUnits.Mobile ? `line-height: ${ButtonLineHeight.Mobile}${ButtonLineHeightUnits.Mobile};` : ''}
 			}
 			.fb-dual-button-container.${blockID} .fb-dual-button-one-wrapper .fb-advanced-button {
+				${ButtonBgColor ? `background-color: ${ButtonBgColor};` : ""}
 				${buttonMobilePadding && ButtonMobilePadding.top ? `padding: ${buttonMobilePadding};` : ''}
 				${buttonMobileMargin && ButtonMobileMargin.top ? `margin: ${buttonMobileMargin};` : ''}
 				${buttonOneBorderMobileWidth && ButtonMobileBorderWidth.top ? `border-width: ${buttonOneBorderMobileWidth};` : ''}
 				${buttonOneBorderRadiusMobileWidth && ButtonMobileBorderRadiusWidth.top ? `border-radius: ${buttonOneBorderRadiusMobileWidth};` : ''}
 			}
 			.fb-dual-button-container.${blockID} .fb-dual-button-two-wrapper .fb-advanced-button {
+				${buttonTabPadding && ButtonTabPadding.top ? `padding: ${buttonTabPadding};` : ''}
+				${buttonTabMargin && ButtonTabMargin.top ? `margin: ${buttonTabMargin};` : ''}
+				${ButtonTwoBgColor ? `background-color: ${ButtonTwoBgColor} !important;` : ""}
 				${ButtonTwoBorder ? `border: ${ButtonTwoBorder};` : ''}
 				${buttonBorderMobileWidth && ButtonTwoMobileBorderWidth.top ? `border-width: ${buttonBorderMobileWidth};` : ''}
 				${buttonBorderRadiusMobileWidth && ButtonTwoMobileBorderRadiusWidth.top ? `border-radius: ${buttonBorderRadiusMobileWidth};` : ''}
+				${ButtonTwoBorderColor ? `border-color: ${ButtonTwoBorderColor};` : ""}
 			}
 			.fb-dual-button-container.${blockID} .fb-dual-button-connector .fb-dual-button-connector-text {
 				${connectorGlobalTypoSwitcher.fontSize === false && connectorFontSize.Mobile && connectorFontSizeUnits.Mobile ? `font-size: ${connectorFontSize.Mobile}${connectorFontSizeUnits.Mobile};` : ''}
 				${connectorGlobalTypoSwitcher.letterSpacing === false && connectorLetterSpacing.Mobile && connectorLetterSpacingUnits.Mobile ? `letter-spacing: ${connectorLetterSpacing.Mobile}${connectorLetterSpacingUnits.Mobile};` : ''}
 				${connectorLineHeight.Mobile && connectorLineHeightUnits.Mobile ? `line-height: ${connectorLineHeight.Mobile}${connectorLineHeightUnits.Mobile};` : ''}
 				${connectorSize.Mobile && connectorSizeUnits.Mobile ? `width: ${connectorSize.Mobile}${connectorSizeUnits.Mobile};` : ''}
+				${connectorSize.Mobile && connectorSizeUnits.Mobile ? `height: ${connectorSize.Mobile}${connectorSizeUnits.Mobile};` : ''}
 				${connectorMobileBorderWidth && connectorBorderMobile.top ? `border-width: ${connectorMobileBorderWidth};` : ''}
 				${connectorMobileBorderRadius && connectorBorderRadiusMobile.top ? `border-radius: ${connectorMobileBorderRadius};` : ''}
 			}
@@ -2306,148 +2447,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	`,
 		[
-			blockID,
-			dualButtonGlobalZIndex,
-			dualBtnOverflow,
-			dualButtonGlobalBgColor,
-			globalDesktopPadding,
-			globalDesktopMargin,
-			dualButtonGlobalBorder,
-			globalDesktopBorderWidth,
-			globalDesktopBorderRadiusWidth,
-			dualButtonGlobalBorderColor,
-			dualButtonGlobalBoxShadowCssValue,
-			dualButtonGlobalBgHoverColor,
-			dualButtonGlobalBorderHoverColor,
-			ButtonGlobalTypoSwitcher,
-			ButtonGlobalTypographyData,
-			ButtonGlobalTypoType,
-			ButtonFontFamily,
-			ButtonFontSize,
-			ButtonFontSizeUnits,
-			ButtonFontWeight,
-			ButtonFontStyle,
-			ButtonTextTransform,
-			ButtonTextDecoration,
-			ButtonLetterSpacing,
-			ButtonLetterSpacingUnits,
-			ButtonLineHeight,
-			ButtonLineHeightUnits,
-			buttonDesktopPadding,
-			buttonDesktopMargin,
-			ButtonZIndex,
-			ButtonWidth,
-			ButtonWidthWidthUnits,
-			ButtonColor,
-			ButtonHoverColor,
-			ButtonBgColor,
-			ButtonBorder,
-			ButtonBorderHoverColor,
-			ButtonBorderColor,
-			ButtonBgHoverColor,
-			ButtonTwoBgColor,
-			ButtonTwoBorder,
-			buttonBorderDesktopWidth,
-			buttonBorderRadiusDesktopWidth,
-			buttonBorderRadiusTabletWidth,
-			buttonBorderRadiusMobileWidth,
-			buttonOneBorderDesktopWidth,
-			buttonOneBorderTabletWidth,
-			buttonOneBorderMobileWidth,
-			buttonOneBorderRadiusDesktopWidth,
-			buttonOneBorderRadiusTabletWidth,
-			buttonOneBorderRadiusMobileWidth,
-			ButtonTwoBorderColor,
-			ButtonTwoBorderHoverColor,
-			ButtonTwoBgHoverColor,
-			buttonBorderTabletWidth,
-			buttonBorderMobileWidth,
-			ButtonMobileBorderWidth,
-			ButtonMobileBorderRadiusWidth,
-			ButtonTwoColor,
-			ButtonTwoHoverColor,
-			iconDesktopBorderWidth,
-			iconTabletBorderWidth,
-			iconMobileBorderWidth,
-			iconDesktopBorderRadius,
-			iconTabletBorderRadius,
-			iconMobileBorderRadius,
-			iconTwoDesktopBorderWidth,
-			iconTwoTabletBorderWidth,
-			iconTwoMobileBorderWidth,
-			iconTwoDesktopBorderRadius,
-			iconTwoTabletBorderRadius,
-			iconTwoMobileBorderRadius,
-			btnTwoIconBgColor,
-			btnTwoIconBgHoverColor,
-			iconTwoBorderColor,
-			iconTwoBorderHoverColor,
-			btnTwoIconSize,
-			btnTwoIconSizeUnits,
-
-			connectorBgColor,
-			connectorBgHoverColor,
-			connectorColor,
-			connectorHoverColor,
-			connectorGlobalTypoSwitcher,
-			connectorGlobalTypographyData,
-			connectorGlobalTypoType,
-			connectorFontFamily,
-			connectorFontSize,
-			connectorFontSizeUnits,
-			connectorFontWeight,
-			connectorFontStyle,
-			connectorTextTransform,
-			connectorTextDecoration,
-			connectorLetterSpacing,
-			connectorLetterSpacingUnits,
-			connectorLineHeight,
-			connectorLineHeightUnits,
-			connectorBorder,
-			connectorBorderColor,
-			connectorBorderHoverColor,
-			connectorDesktopBorderWidth,
-			connectorTabletBorderWidth,
-			connectorMobileBorderWidth,
-			connectorDesktopBorderRadius,
-			connectorTabletBorderRadius,
-			connectorMobileBorderRadius,
-			connectorSize,
-			btnIconColor,
-			btnIconBgColor,
-			btnIconSize,
-			btnIconSizeUnits,
-			btnIconHoverColor,
-			btnIconSpacing,
-			btnIconSpacingUnits,
-			buttonsGap,
-			buttonsGapUnits,
-			btnTwoIconSpacing,
-			btnTwoIconSpacingUnits,
-			globalBoxShadowSwitcher,
-			globalBoxShadowValues,
-			globalBoxShadowHoverValues,
-			globalBoxShadowCssValue,
-			globalHoverBoxShadowCssValue,
-
-			// Position
-			dualBtnPositionType,
-			dualBtnHZOrientationType,
-			dualBtnVROrientationType,
-			dualBtnHZLeftOffset,
-			dualBtnHZLeftOffsetUnits,
-			dualBtnHZRightOffset,
-			dualBtnHZRightOffsetUnits,
-			dualBtnVRTopOffset,
-			dualBtnVRTopOffsetUnits,
-			dualBtnVRBottomOffset,
-			dualBtnVRBottomOffsetUnits,
-			buttonIconRotateSwitcher,
-			buttonIconRotate,
-			buttonIconRotateHover,
-			buttonTwoIconRotateSwitcher,
-			buttonTwoIconRotate,
-			buttonTwoIconRotateHover,
+			attributes
 		],
 	);
 
