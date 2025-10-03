@@ -75,7 +75,7 @@ class TemplateLibrary extends AjaxBase {
         $this->check_permission();
     
         $title   = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content = isset($_POST['content']) ? wp_unslash($_POST['content']) : '';
+        $content = isset($_POST['content']) ? $_POST['content'] : '';
     
         if (empty($title)) {
             wp_send_json_error(['message' => 'Title is required']);
@@ -154,6 +154,7 @@ class TemplateLibrary extends AjaxBase {
         ]);
     
         if ($page_id) {
+            Helper::insert_job($page_id, $title . $page_id);
             wp_send_json_success([
                 'message' => 'Page created successfully',
                 'page_id' => $page_id,
