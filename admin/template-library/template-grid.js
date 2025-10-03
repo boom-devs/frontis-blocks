@@ -59,10 +59,10 @@ const TemplateGrid = ({
     // setIsPladmin
 }) => {
 
-    const { siteTitle, primaryColor, enableFeatureX } = useSelector(
-        (state) => state.attributes
-      );
-    const dispatch = useDispatch();
+    // const { siteTitle, primaryColor, enableFeatureX } = useSelector(
+    //     (state) => state.attributes
+    //   );
+    // const dispatch = useDispatch();
 
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,7 +71,7 @@ const TemplateGrid = ({
     const [freeTemplate, setFreeTemplate] = useState(false);
 
     const isAlreadySaved = alreadySaved(savedItems, id, activeTab)
-    const userData = localStorage.getItem('userData');
+    const userData = JSON.parse(localStorage.getItem("userData"));
 
     const currentDay = new Date().toLocaleDateString('en-US', { day: 'numeric' });
     const currentMonth = new Date().toLocaleDateString('en-US', { month: 'long' });
@@ -104,7 +104,7 @@ const TemplateGrid = ({
 
 
     const handleFullSiteImport = useCallback(async (id) => {
-        if (!userData) {
+        if (!userData?.email) {
             setIsLoginModalOpen(true);
             return;
         }
@@ -154,6 +154,13 @@ const TemplateGrid = ({
     const handleCloseModal = useCallback(() => {
         setIsModalOpen(false);
     }, []);
+
+    useEffect(() => {
+        if(!userData?.email) {
+            handleCloseModal();
+        }
+    }, [userData?.email]);
+
 
     const handleDemo = useCallback(() => {
         console.log("Demo clicked for:", id);
@@ -465,13 +472,14 @@ const TemplateGrid = ({
                 />
             )}
 
-            {isModalOpen && (
+            {isModalOpen && userData?.email && (
                 <TemplateImport
                     template={templateData}
                     onClose={handleCloseModal}
                     data={data}
                     setActiveCategory={setActiveCategory}
-
+                    setIsLoginModalOpen={setIsLoginModalOpen}
+                    isLoginModalOpen={isLoginModalOpen}
                 />
             )}
         </>
