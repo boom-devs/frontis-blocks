@@ -65,7 +65,7 @@ const attributes = {
 	gridColumns: {
 		type: "object",
 		default: {
-			Desktop: 3,
+			Desktop: '',
 			Tablet: 2,
 			Mobile: 1,
 		},
