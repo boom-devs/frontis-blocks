@@ -2292,7 +2292,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 
 
-
 				.${blockId} .fb-taxonomy-list .fb-taxonomy-item .fb-taxonomy-link-count {
 					flex-direction: row;
 					align-items: center;
@@ -2558,7 +2557,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${
 				premadeStyle === "style-1"
 					? `
-				
+				.${blockId} .fb-taxonomy-grid {
+					grid-template-columns: repeat(4, 1fr);
+				}
+
 				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
 					padding: 24px;
 					border-radius: 10px;
@@ -2589,6 +2591,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${
 				premadeStyle === "style-2"
 					? `
+
+				.${blockId} .fb-taxonomy-grid {
+					grid-template-columns: repeat(3, 1fr);
+				}
+
 
 				.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item {
 					background: #FFFFFF;
@@ -2635,6 +2642,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${
 					premadeStyle === "style-3"
 						? `
+
+
+					.${blockId} .fb-taxonomy-grid {
+						grid-template-columns: repeat(4, 1fr);
+					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
 						position: relative;
@@ -2716,6 +2728,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					premadeStyle === "style-4"
 						? `
 						
+
+					.${blockId} .fb-taxonomy-grid {
+						grid-template-columns: repeat(2, 1fr);
+					}
+
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
 						padding: 32px;
 						border-radius: 14px;
@@ -2790,9 +2807,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId} .fb-taxonomy-grid {
             display: grid;
-            grid-template-columns: repeat(${gridColumns.Desktop}, 1fr);
-            row-gap: ${gridRowGap.Desktop}${gridGapUnits.Desktop};
-            column-gap: ${gridColumnGap.Desktop}${gridGapUnits.Desktop};
+						${gridColumns.Desktop ? `
+							grid-template-columns: repeat(${gridColumns.Desktop}, 1fr);
+							` : ''}
+							row-gap: ${gridRowGap.Desktop}${gridGapUnits.Desktop};
+							column-gap: ${gridColumnGap.Desktop}${gridGapUnits.Desktop};							
         }
 
 
@@ -5443,7 +5462,7 @@ ${
 								deviceType={deviceType}
 								setAttributes={setAttributes}
 								rangeStep={1}
-								resetFallbackValue={3}
+								resetFallbackValue={''}
 								isRangeUnit={false}
 							/>
 
