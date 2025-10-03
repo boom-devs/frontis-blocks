@@ -45,7 +45,6 @@ $layout_type = fb_norm_str(isset($attributes['layoutType']) ? $attributes['layou
 $grid_columns = isset($attributes['gridColumns']) ? $attributes['gridColumns'] : ['Desktop' => 3, 'Tablet' => 2, 'Mobile' => 1];
 $list_style = fb_norm_str(isset($attributes['listStyle']) ? $attributes['listStyle'] : 'none');
 
-
 // Read More attributes
 $read_more_icon_frontend         = fb_norm_str(isset($attributes['readMoreIconFrontend']) ? $attributes['readMoreIconFrontend'] : '');
 $read_more_switcher = isset($attributes['readMoreSwitcher']) ? (bool) $attributes['readMoreSwitcher'] : true;
@@ -214,6 +213,38 @@ if (!function_exists('fb_build_taxonomy_hierarchy')) {
                 $html .= '</p>';
             }
 
+              if (
+                isset($args['premade_style'], $args['read_more_switcher']) &&
+                $args['premade_style'] === 'style-2' &&
+                $args['read_more_switcher']
+            ) {
+                $html .= '<a href="' . esc_url($term_link) . '" class="fb-taxonomy-read-more-button">';
+
+                if ($args['read_more_icon_align'] !== 'icon-only') {
+                    $html .= '<span class="fb-taxonomy-read-more-text">' . esc_html($args['read_more_text']) . '</span>';
+                }
+
+                if ($args['read_more_icon_align'] === 'icon-text') {
+                    $html .= '<div class="fb-taxonomy-read-more-icon-wrapper"><div class="fb-taxonomy-read-more-icon">'
+                        . $args['read_more_icon_frontend'] .
+                        '</div></div>';
+                }
+
+                if ($args['read_more_icon_align'] === 'image' && !empty($args['read_more_icon_image_url'])) {
+                    $html .= '<div class="fb-taxonomy-read-more-icon-wrapper"><div class="fb-taxonomy-read-more-icon-image">'
+                        . '<img src="' . esc_url($args['read_more_icon_image_url']) . '" alt="' . esc_attr($args['read_more_icon_image_alt']) . '" />'
+                        . '</div></div>';
+                }
+
+                if ($args['read_more_icon_align'] === 'icon-only') {
+                    $html .= '<div class="fb-taxonomy-read-more-icon-wrapper"><div class="fb-taxonomy-read-more-icon">'
+                        . $args['read_more_icon_frontend'] .
+                        '</div></div>';
+                }
+
+                $html .= '</a>';
+            }
+
             if ($args['separator_style'] !== 'none') {
                 $html .= '<div class="fb-tax-separator"></div>';
             }
@@ -360,13 +391,19 @@ if (empty($taxonomy_type)) {
 } else {
     // List layout
     $args = [
-        'premade_style' => $premade_style,
+        'wrapper_id' => $post_category_global_wraper_id,
+        'wrapper_class' => $post_category_global_wraper_class,
         'show_count' => $show_count,
         'show_description' => $show_description,
         'excerpt_length' => $post_description_excerpt_length,
         'separator_style' => $separator_style,
-        'wrapper_id' => $post_category_global_wraper_id,
-        'wrapper_class' => $post_category_global_wraper_class,
+        'premade_style' => $premade_style,
+        'read_more_switcher'      => $read_more_switcher,
+        'read_more_text'          => $read_more_text,
+        'read_more_icon_align'    => $read_more_icon_align,
+        'read_more_icon_frontend' => $read_more_icon_frontend,
+        'read_more_icon_image_url'=> $read_more_icon_image_url,
+        'read_more_icon_image_alt'=> $read_more_icon_image_alt,
     ];
 
     if ($show_child_categories) {
@@ -413,6 +450,37 @@ if (empty($taxonomy_type)) {
                 $output .= esc_html(fb_trim_words($term->description, $post_description_excerpt_length));
                 $output .= '</p>';
             }
+
+
+            // Read More button for list + premadeStyle style-2
+            if ($premade_style === 'style-2' && $read_more_switcher) {
+                $output .= '<a href="' . esc_url($term_link) . '" class="fb-taxonomy-read-more-button">';
+
+                if ($read_more_icon_align !== 'icon-only') {
+                    $output .= '<span class="fb-taxonomy-read-more-text">' . esc_html($read_more_text) . '</span>';
+                }
+
+                if ($read_more_icon_align === 'icon-text') {
+                    $output .= '<div class="fb-taxonomy-read-more-icon-wrapper"><div class="fb-taxonomy-read-more-icon">'
+                            . $read_more_icon_frontend .
+                            '</div></div>';
+                }
+
+                if ($read_more_icon_align === 'image' && $read_more_icon_image_url) {
+                    $output .= '<div class="fb-taxonomy-read-more-icon-wrapper"><div class="fb-taxonomy-read-more-icon-image">'
+                            . '<img src="' . esc_url($read_more_icon_image_url) . '" alt="' . esc_attr($read_more_icon_image_alt) . '" />'
+                            . '</div></div>';
+                }
+
+                if ($read_more_icon_align === 'icon-only') {
+                    $output .= '<div class="fb-taxonomy-read-more-icon-wrapper"><div class="fb-taxonomy-read-more-icon">'
+                            . $read_more_icon_frontend .
+                            '</div></div>';
+                }
+
+                $output .= '</a>';
+            }
+
 
             if ($separator_style !== 'none') {
                 $output .= '<div class="fb-tax-separator"></div>';
