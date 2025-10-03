@@ -33,7 +33,9 @@ const LibraryContent = ({
     onPageChange,
     onSearchTemplates,
     onChangeSavedTemplateType,
-    savedTemplateType
+    savedTemplateType,
+    setIsLoginModalOpen,
+    isLoginModalOpen,
 }) => {
     const FavoriteTabsOptions = [
         { name: 'All', value: '' },
@@ -283,6 +285,8 @@ const LibraryContent = ({
                                             setActiveCategory={setActiveCategory}
                                             isImporting={isImporting}
                                             setIsImporting={setIsImporting}
+                                            setIsLoginModalOpen={setIsLoginModalOpen}
+                                            isLoginModalOpen={isLoginModalOpen}
                                         />
                                     ))}
                                 </tbody>
@@ -316,6 +320,8 @@ const LibraryContent = ({
                                         handleRemoveLibraryItem={handleRemoveLibraryItem}
                                         isImporting={isImporting}
                                         setIsImporting={setIsImporting}
+                                        setIsLoginModalOpen={setIsLoginModalOpen}
+                                        isLoginModalOpen={isLoginModalOpen}
                                     />
                                 ))}
                             </div>

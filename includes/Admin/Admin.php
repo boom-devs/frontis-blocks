@@ -227,6 +227,8 @@ class Admin {
             'home_url' => home_url(),
 			'google_fonts' => $google_fonts,
             'siteName' => get_bloginfo('name'),
+            'siteTagline' => get_bloginfo('description'),
+            'siteLogo' => get_theme_mod('custom_logo'),
 			'all_posts' => Helper::get_all_posts(),
 			'bolck_nonce' => wp_create_nonce('fb_block_nonce'),
             'all_post_ids' => Helper::get_all_post_ids(),

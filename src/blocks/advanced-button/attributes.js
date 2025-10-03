@@ -156,7 +156,38 @@ const attributes = {
     buttonHoverColor: {
         type: 'string',
     },
-
+    buttonTextColorType: {     
+		type: "string",
+		default: "classic",
+	},
+    buttonTextCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    buttonTextCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    buttonTextGradientColor: {
+        type: 'string',
+        default: null
+    },
+    buttonTextHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    buttonTextHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    buttonTextHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    buttonTextHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
     /** Start Background */
     buttonBgColorSwitcher : {
 		type: "string",
@@ -629,7 +660,47 @@ const attributes = {
 	},
 	/** End Icon Padding */
 
-
+    /** Start Icon margin */
+	buttonIconMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	buttonIconMarginDesktop: { 
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconMarginTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconMarginMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Icon Margin */
 
     buttonIconGapSize: {
         type: 'object',
