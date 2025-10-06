@@ -1,17 +1,21 @@
 // attributes.js
 const attributes = {
-    siteTitle: {
+    siteName: {
       type: "string",
-      default: "My Site"
+      default: ""
     },
-    primaryColor: {
+    siteTagline: {
       type: "string",
-      default: "#ff0000"
+      default: ""
     },
-    enableFeatureX: {
-      type: "boolean",
-      default: true
-    }
+    siteLogo: {
+      type: "object",
+      default: {
+        id: "",
+        url: "",
+        alt: ""
+      }
+    },
   };
   
   export default attributes;

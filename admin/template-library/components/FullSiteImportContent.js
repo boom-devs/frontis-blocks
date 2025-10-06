@@ -1,8 +1,8 @@
 import SitePreview from "../sitePreview";
 
 const FullSiteImportContent = ({template}) => {
+    
     const previewUrl = template?.preview_url;
-    console.log(template);
 
   return (
                     <div className="fb-import-preview-panel">
