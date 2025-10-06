@@ -24,6 +24,7 @@ class TemplateLibrary extends AjaxBase {
 			'update_option',
 			'get_option',
             'full_site_import',
+            'update_site_settings',
             'demo_import'
 		];
 
@@ -70,50 +71,34 @@ class TemplateLibrary extends AjaxBase {
         }
     }
 
-    // public function full_site_import() {
-    //     $this->check_permission();
-    
-    //     $title   = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-    //     $content = isset($_POST['content']) ? wp_kses_post($_POST['content']) : '';
-    
-    //     if (empty($title)) {
-    //         wp_send_json_error(['message' => 'Title is required']);
-    //     }
-    
-    //     // Duplicate title handle
-    //     $original_title = $title;
-    //     $count = 1;
-    //     while (get_page_by_title($title, OBJECT, 'page')) {
-    //         $title = $original_title . ' ' . $count;
-    //         $count++;
-    //     }
-    
-    //     $page_id = wp_insert_post([
-    //         'post_title'   => $title,
-    //         'post_content' => $content,
-    //         'post_status'  => 'publish',
-    //         'post_type'    => 'page',
-    //     ]);
-    
-    //     if ($page_id) {
-    //         wp_send_json_success([
-    //             'message' => 'Page created successfully',
-    //             'page_id' => $page_id,
-    //             'title'   => $title
-    //         ]);
-    //     } else {
-    //         wp_send_json_error(['message' => 'Failed to create page']);
-    //     }
-    // }
-
     public function full_site_import() {
         $this->check_permission();
     
         $title   = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content = isset($_POST['content']) ? wp_unslash($_POST['content']) : ''; // RAW JSON রাখো
+        $content = isset($_POST['content']) ? wp_unslash($_POST['content']) : '';
     
         if (empty($title)) {
             wp_send_json_error(['message' => 'Title is required']);
+        }
+
+        $patterns = [
+            'img' => '/<img[^>]+src=[\'"]([^\'"]+)[\'"][^>]*>/i',
+            'bg'  => '/background-image\s*:\s*url\((["\']?)([^"\')]+)\1\)/i'
+        ];
+
+        $all_img_srcs = [];
+
+        foreach ($patterns as $type => $pattern) {
+            preg_match_all($pattern, $content, $matches);
+            $srcs = $matches[1] ?? $matches[2];
+
+            if ($type === 'bg') {
+                $srcs = array_map(function ($src) {
+                    return str_replace('\\u0022', '', $src);
+                }, $srcs);
+            }
+
+            $all_img_srcs = array_merge($all_img_srcs, array_filter($srcs));
         }
     
         // Duplicate title handle
@@ -122,6 +107,43 @@ class TemplateLibrary extends AjaxBase {
         while (get_page_by_title($title, OBJECT, 'page')) {
             $title = $original_title . ' ' . $count;
             $count++;
+        }
+
+        foreach ($all_img_srcs as $img_src) {
+            $response = wp_remote_get($img_src);
+            if (is_wp_error($response)) {
+                continue;
+            }
+
+            $body     = wp_remote_retrieve_body($response);
+            $filename = basename($img_src);
+
+            // Use WordPress functions to handle file uploads
+            $upload = wp_upload_bits($filename, null, $body);
+
+            if ($upload['error'] || !file_exists($upload['file'])) {
+                continue;
+            }
+
+            // Add image to media library
+            $wp_filetype = wp_check_filetype($filename, null);
+            $attachment  = [
+                'post_mime_type' => $wp_filetype['type'],
+                'post_title'     => sanitize_file_name($filename),
+                'post_content'   => '',
+                'post_status'    => 'inherit',
+            ];
+            $attach_id = wp_insert_attachment($attachment, $upload['file']);
+
+            // Require the needed file
+            require_once(ABSPATH . 'wp-admin/includes/image.php');
+            $attached_data = wp_generate_attachment_metadata($attach_id, $upload['file']);
+
+            // Update the attachment metadata
+            wp_update_attachment_metadata($attach_id, $attached_data);
+
+            // Replace the image URL in the content
+            $content = str_replace($img_src, $upload['url'], $content);
         }
     
         $page_id = wp_insert_post([
@@ -221,6 +243,33 @@ class TemplateLibrary extends AjaxBase {
             'content'  => $content,
             'img_srcs' => $img_srcs,
             'bg_srcs'  => $bg_srcs,
+        ]);
+    }
+
+    function update_site_settings() {
+        $this->check_permission();
+    
+        $site_name    = isset($_POST['siteName']) ? sanitize_text_field($_POST['siteName']) : '';
+        $site_tagline = isset($_POST['siteTagline']) ? sanitize_text_field($_POST['siteTagline']) : '';
+        $site_logo    = isset($_POST['siteLogo']) ? intval($_POST['siteLogo']) : 0;
+    
+        if (!empty($site_name)) {
+            update_option('blogname', $site_name);
+        }
+        if (!empty($site_tagline)) {
+            update_option('blogdescription', $site_tagline);
+        }
+        if (!empty($site_logo)) {
+            set_theme_mod('custom_logo', $site_logo);
+        }
+    
+        wp_send_json_success([
+            'message' => 'Site settings updated',
+            'site' => [
+                'name'     => get_option('blogname'),
+                'tagline'  => get_option('blogdescription'),
+                'logo'     => get_theme_mod('custom_logo'),
+            ]
         ]);
     }
 }

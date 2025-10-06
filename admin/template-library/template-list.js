@@ -11,21 +11,52 @@ import { usePostDataMutation } from "./services/laravelapi";
 import TemplateImport from "./template-import";
 import LoginSignupModal from "./login-signup";
 import PluginUpgradeModal from "./plugin-upgrade";
+import { importBlocksFromApi } from "./components/importBlocks";
 
 const TemplateList = ({ 
-    item, 
-    libraryData, 
-    setLibraryData, 
+    item = '',
+    activeTab, 
     data, 
     setIsVisible, 
     handleRemoveLibraryItem, 
-    type, 
     setActiveCategory,
     isImporting,
     setIsImporting,
+
+    libraryData,
+    setLibraryData,
+    isLibrary,
+    setIsLoginModalOpen,
+    isLoginModalOpen,
 }) => {
 
-    const userData = localStorage.getItem('userData');
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const currentDay = new Date().toLocaleDateString('en-US', { day: 'numeric' });
+    const currentMonth = new Date().toLocaleDateString('en-US', { month: 'long' });
+    const currentYear = new Date().toLocaleDateString('en-US', { year: 'numeric' });
+    const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+    const currentDateAndTime = { day: currentDay, month: currentMonth, year: currentYear, time: currentTime };
+
+    const [templateData, setTemplateData] = useState({
+        activeTab,
+        type: item.item_type,
+        id: item.id,
+        title: item.title,
+        image: item.image,
+        is_premium: item.is_premium || false,
+        categories: item.categories || [],
+        preview_url: item.preview_url || '',
+        colors: item.colors || [],
+        customColors: item.custom_colors || [],
+        gradientColors: item.color_gradients || [],
+        customGradientColors: item.custom_gradientColors || [],
+        typographies: item.typographies || [],
+        customTypographies: item.custom_typographies || [],
+        dependencies: item.dependencies || [],
+        dateAndTime: currentDateAndTime,
+    });
 
 
     const handleFullSiteImport = useCallback(async () => {
@@ -36,9 +67,6 @@ const TemplateList = ({
         setIsModalOpen(false);
     }, []);
 
-    // const handleDemo = useCallback(() => {
-    //     console.log("Demo clicked for:", id);
-    // }, [id]);
 
     const [patternsData] = usePostDataMutation();
     const getTemplatesData = async (route, key, id) => {
@@ -158,11 +186,11 @@ const TemplateList = ({
                         onClick={
                             !isImporting
                                 ? () => {
-                                    if (item.type === "patterns") {
+                                    if (item.item_type === "patterns") {
                                         importPattern(item.id);
-                                    } else if (item.type === "pages") {
+                                    } else if (item.item_type === "pages") {
                                         importPage(item.id);
-                                    } else if (item.type === "sites") {
+                                    } else if (item.item_type === "sites") {
                                         handleFullSiteImport();
                                     }
                                 }
@@ -170,20 +198,13 @@ const TemplateList = ({
                         }
                         disabled={isImporting}
                     >
-                        {isImporting ? (
-                            <>
-                                <span>Importing...</span>
-                                <ClipLoader color="#fff" size={16} />
-                            </>
-                        ) : (
-                            <span>Import</span>
-                        )}
+                        <span>Import</span>
                     </button>
 
                     <button
                         className={`fb-template-action-btn option-btn ${isImporting ? "loading" : ""}`}
                         disabled={isImporting}
-                        onClick={() => handleRemoveLibraryItem(item.id, type) }
+                        onClick={() => handleRemoveLibraryItem(item.id, item.item_type) }
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 6L6.1398 17.398C6.34428 19.4428 8.06494 21 10.12 21H13.8801C15.9351 21 17.6557 19.4428 17.8602 17.398L19 6M5 6H3M5 6H8M19 6H21M19 6H16M8 6L8.94721 4.10557C9.286 3.428 9.97852 3 10.7361 3L13.2639 3C14.0215 3 14.714 3.428 15.0528 4.10557L16 6M8 6H16M14 10.5V16.5M10 10.5V16.5" stroke="#0B0C0E" stroke-width="1.4" stroke-linecap="round" />
@@ -191,6 +212,16 @@ const TemplateList = ({
                     </button>
                 </td>
             </tr>
+            {isModalOpen && (
+                <TemplateImport
+                    template={templateData}
+                    onClose={handleCloseModal}
+                    data={data}
+                    setActiveCategory={setActiveCategory}
+                    setIsLoginModalOpen={setIsLoginModalOpen}
+                    isLoginModalOpen={isLoginModalOpen}
+                />
+            )}
         </>
     );
 };
