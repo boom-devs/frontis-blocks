@@ -9,13 +9,19 @@ import FullSiteImportSettingConfig from "./components/FullSiteImportSettingConfi
 import FullSiteImportSetting from "./components/FullSiteImportSetting.js";
 import FullSiteImportContent from "./components/FullSiteImportContent.js";
 
-const FullSiteImport = ({ template, onClose, onBack, data }) => {
+const FullSiteImport = ({ 
+    template,
+    onClose,
+    onBack,
+    data,
+    setIsLoginModalOpen,
+    isLoginModalOpen,
+}) => {
 
     const [formData, setFormData] = useState({
         siteName: (window.frontisBlocksAdmin && window.frontisBlocksAdmin.siteName) || '',
-        siteTagline: '',
-        logo: { id: '', url: '', alt: '' },
-        logoUrl: '',
+        siteTagline: (window.frontisBlocksAdmin && window.frontisBlocksAdmin?.siteTagline) || '',
+        siteLogo: { id: '', url: '', alt: '' },
         importContent: true,
         importCustomizer: true,
         importWidgets: true,
@@ -65,6 +71,8 @@ const FullSiteImport = ({ template, onClose, onBack, data }) => {
                     setActiveTab={setActiveTab}
                     data={data}
                     onClose={onClose}
+                    disableMenu={true}
+                    setIsLoginModalOpen={setIsLoginModalOpen}
                 />
 
                 {/* Content */}

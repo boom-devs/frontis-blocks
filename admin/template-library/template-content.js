@@ -146,7 +146,7 @@ const TemplateContent = ({
     useEffect(() => {
         // Get userData from local storage
         
-        const userData = localStorage.getItem('userData');
+        const userData = JSON.parse(localStorage.getItem("userData"));
         if (userData === 'undefined' || userData === 'null' || userData === '') {
             getUserDataFromDb();
         }
