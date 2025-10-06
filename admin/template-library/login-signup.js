@@ -52,11 +52,12 @@ const LoginSignupModal = ({ onLoginSuccess = () => {}, isLoginModalOpen, setIsLo
 		setActiveTab(tab);
 		clearErrors();
 	};
+	
 
 	const onSubmit = useCallback(
 		async (data) => {
 			clearErrors();
-
+	
 			// Validate terms and privacy for signup
 			if (activeTab === "signup") {
 				if (!agreedToTerms) {
@@ -68,40 +69,40 @@ const LoginSignupModal = ({ onLoginSuccess = () => {}, isLoginModalOpen, setIsLo
 					return;
 				}
 			}
-
+	
 			const validationKey = generateValidationKey();
 			const apiBase = `${FB_TLibrary.wordpressSyncApi}/wp-json`;
 			const deviceName = getDeviceType();
 			setIsLoading(true);
-
+	
 			try {
 				const endpoint = activeTab === "signup" ? "sign-up" : "login";
 				const body =
 					activeTab === "signup"
 						? {
-							email: data.email,
-							first_name: data.first_name,
-							last_name: data.last_name,
-							password: data.password,
-							device_name: deviceName
-						}
+								email: data.email,
+								first_name: data.first_name,
+								last_name: data.last_name,
+								password: data.password,
+								device_name: deviceName
+						  }
 						: {
-							email: data.email,
-							password: data.password,
-							device_name: deviceName
-						};
-
+								email: data.email,
+								password: data.password,
+								device_name: deviceName
+						  };
+	
 				const response = await fetch(`${apiBase}/frontis-sync/v1/${endpoint}`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
-						// "Authorization": `Bearer nbcnrqfyorftyzpiojzfnjbidchpgnawnifdbnhhbxbuedphusbaunvecxtvvjvnrehznbmccyanndwrjloncuhobjtfbkcazfjtbbvtsuvgiokjknvgrwdwfgfsonbw`,
 					},
 					body: JSON.stringify(body),
 				});
-
+	
 				const responseData = await response.json();
-				
+	
+				// Error Case
 				if (!response.ok) {
 					const errorMessage = responseData.message || "Something went wrong";
 					if (responseData.code === "invalid_username") {
@@ -113,23 +114,22 @@ const LoginSignupModal = ({ onLoginSuccess = () => {}, isLoginModalOpen, setIsLo
 					} else {
 						setError("submit", { message: errorMessage });
 					}
-					throw new Error(errorMessage);
+					return; // Stop here, but don't throw
 				}
-
+	
 				// Success case
 				if (responseData.status) {
 					const responseUserData = {
-						'name': responseData?.user?.name,
-						'email': responseData?.user?.email,
-						'access_token': responseData?.access_token,
-						'refresh_token': responseData?.refresh_token,
-					}
-
+						name: responseData?.user?.name,
+						email: responseData?.user?.email,
+						access_token: responseData?.access_token,
+						refresh_token: responseData?.refresh_token,
+					};
+	
 					localStorage.setItem("userData", JSON.stringify(responseUserData));
 					onLoginSuccess(responseData, activeTab);
 				} else {
-					setIsLoading(false);
-					throw new Error("Something went wrong try again letter");
+					setError("submit", { message: "Something went wrong try again later" });
 				}
 			} catch (error) {
 				console.error(`${activeTab} failed:`, error);
@@ -140,6 +140,7 @@ const LoginSignupModal = ({ onLoginSuccess = () => {}, isLoginModalOpen, setIsLo
 		},
 		[activeTab, agreedToTerms, agreedToPrivacy, onLoginSuccess, setError]
 	);
+	
 
 	return (
 		<div className="fb-auth-modal" onClick={() => isLoginModalOpen && setIsLoginModalOpen(false)}>
