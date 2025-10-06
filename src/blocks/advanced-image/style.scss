@@ -41,15 +41,27 @@
 	&.center-left .fb-advanced-image-title {
 		top: 50%;
 		left: 0;
+		transform: translateY(-50%);
 
 		.fb-advanced-image-title-inner {
 			text-align: left;
 		}
 	}
 
+	&.vertical-center .fb-advanced-image-title {
+		transform: translate(-50%, -50%) rotate(-90deg);
+		top: 50%;
+		left: 50%;
+
+		.fb-advanced-image-title-inner {
+			text-align: center;
+		}
+	}
+
 	&.center-right .fb-advanced-image-title {
 		top: 50%;
 		right: 0;
+		transform: translateY(-50%);
 
 		.fb-advanced-image-title-inner {
 			text-align: right;

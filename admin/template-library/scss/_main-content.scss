@@ -447,15 +447,22 @@
                 justify-content: space-between;
                 width: 100%;
 
+                .fb-template-library-card-header-name,
+                .fb-template-library-card-header-date,
+                .fb-template-library-card-header-actions {
+                    font-size: 18px;
+                    font-weight: 400;
+                    line-height: 1.2;
+                    color: $neutral-color;
+                    text-align: left;
+                }
                 .fb-template-library-card-header-name {
                     width: 100%;
-                    text-align: left;
                 }
     
                 .fb-template-library-card-header-date {
                     width: 392px;
                     flex-shrink: 0;
-                    text-align: left;
                 }
     
                 .fb-template-library-card-header-actions {
