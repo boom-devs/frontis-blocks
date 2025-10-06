@@ -1,17 +1,27 @@
 /**
  * WordPress dependencies
  */
-import { useState, useCallback } from "@wordpress/element";
+import { useState, useCallback, useEffect } from "@wordpress/element";
 import { ClipLoader } from "react-spinners";
 import TemplateHeader from "./template-header";
 import FullSiteImport from "./full-site-import";
 import { category } from "@wordpress/icons";
 import { ToastContainer } from "react-toastify";
 
-const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
+const TemplateImport = ({ 
+    template,
+    onClose,
+    data,
+    setActiveCategory,
+    setIsLoginModalOpen,
+    isLoginModalOpen,
+}) => {
     const [isImporting, setIsImporting] = useState(false);
     const [activeTab, setActiveTab] = useState(template.activeTab || 'pattern');
     const [showFullSiteImport, setShowFullSiteImport] = useState(false);
+
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    
 
     const handleFullSiteImport = useCallback(async () => {
         setShowFullSiteImport(true);
@@ -41,7 +51,7 @@ const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
         .filter(name => name)
         .join(', ');
 
-    if (showFullSiteImport) {
+    if (showFullSiteImport && userData?.email) {
         return (
             <>
                 <ToastContainer
@@ -62,6 +72,8 @@ const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
                     template={template}
                     onClose={onClose}
                     onBack={() => setShowFullSiteImport(false)}
+                    setIsLoginModalOpen={setIsLoginModalOpen}
+                    isLoginModalOpen={isLoginModalOpen}
                 />
             </>
         );
@@ -78,6 +90,7 @@ const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
                     data={data}
                     onClose={onClose}
                     setActiveCategory={setActiveCategory}
+                    setIsLoginModalOpen={setIsLoginModalOpen}
                     disableMenu={true}
                 />
 

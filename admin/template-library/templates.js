@@ -367,7 +367,7 @@ const PatternLibraryButton = () => {
         setSavedTemplateType('');
         fetchData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab], '');
         fetchNoneFilterData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab], '');
-    }, [activeTab]);
+    }, [activeTab, userData?.email]);
 
 
     const handleSaveLibrary = async (templateData, isAlreadySaved) => {
@@ -459,6 +459,7 @@ const PatternLibraryButton = () => {
         }
     }
 
+
     const TagTabsOptions = (() => {
         if (!data[activeTab]) return [];
         const currentItems = noneFilterData[activeTab].tags || [];
@@ -468,6 +469,13 @@ const PatternLibraryButton = () => {
             value: tag.name,
         }));
     })();
+
+
+    useEffect(() => {
+        if(activeTab === 'templatelibrary' && !userData?.email) {
+            setActiveTab('patterns');
+        }
+    }, [userData?.email]);
 
 
     return (
@@ -603,6 +611,8 @@ const PatternLibraryButton = () => {
                                         onSearchTemplates={handleSearchTemplates}
                                         onChangeSavedTemplateType={hangleChangeSavedTemplateType}
                                         savedTemplateType={savedTemplateType}
+                                        setIsLoginModalOpen={setIsLoginModalOpen}
+                                        isLoginModalOpen={isLoginModalOpen}
                                     />
                                 )}
 
