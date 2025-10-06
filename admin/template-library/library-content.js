@@ -33,7 +33,9 @@ const LibraryContent = ({
     onPageChange,
     onSearchTemplates,
     onChangeSavedTemplateType,
-    savedTemplateType
+    savedTemplateType,
+    setIsLoginModalOpen,
+    isLoginModalOpen,
 }) => {
     const FavoriteTabsOptions = [
         { name: 'All', value: '' },
@@ -115,6 +117,7 @@ const LibraryContent = ({
 
 
     const handleRemoveLibraryItem = async (id, type) => {
+        setIsImporting(true);
 
         const apiBase = `${FB_TLibrary.wordpressSyncApi}/wp-json`;
         const body = {
@@ -167,11 +170,15 @@ const LibraryContent = ({
             setSavedItems((prev) =>
                 prev.filter((item) => !(item?.id === id && item?.item_type === type))
             );
+
+            setIsImporting(false);
         } else {
             toast.error('Failed to remove template', {
                 position: "top-right",
                 autoClose: 3000,
             });
+
+            setIsImporting(false);
         }
     };
 
@@ -259,12 +266,8 @@ const LibraryContent = ({
                                 <thead className="fb-template-library-card-header">
                                     <tr>
                                         <th className="fb-template-library-card-header-name">Name</th>
-                                        {(activeCategory.templatelibrary === 'my-favourites' || activeCategory.templatelibrary === 'my-cloud') && (
-                                            <>
-                                                <th className="fb-template-library-card-header-date">Last Modified</th>
-                                                <th className="fb-template-library-card-header-actions">Action</th>
-                                            </>
-                                        )}
+                                        <th className="fb-template-library-card-header-date">Last Modified</th>
+                                        <th className="fb-template-library-card-header-actions">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody className="fb-template-library-card-body">
@@ -276,14 +279,14 @@ const LibraryContent = ({
                                             type={item.item_type}
                                             setLibraryData={setLibraryData}
                                             data={data}
-                                            customColors={item.custom_colors || []}
-                                            customGradientColors={item.custom_gradientColors || []}
                                             isLibrary={isLibrary}
                                             handleRemoveLibraryItem={handleRemoveLibraryItem}
                                             setIsVisible={setIsVisible}
                                             setActiveCategory={setActiveCategory}
                                             isImporting={isImporting}
                                             setIsImporting={setIsImporting}
+                                            setIsLoginModalOpen={setIsLoginModalOpen}
+                                            isLoginModalOpen={isLoginModalOpen}
                                         />
                                     ))}
                                 </tbody>
@@ -317,6 +320,8 @@ const LibraryContent = ({
                                         handleRemoveLibraryItem={handleRemoveLibraryItem}
                                         isImporting={isImporting}
                                         setIsImporting={setIsImporting}
+                                        setIsLoginModalOpen={setIsLoginModalOpen}
+                                        isLoginModalOpen={isLoginModalOpen}
                                     />
                                 ))}
                             </div>
