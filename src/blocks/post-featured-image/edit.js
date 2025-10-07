@@ -61,6 +61,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         return match ? match[1] : null;
     };
 
+
     const firstImageFromContent = useFirstImage ? getFirstImageFromContent(postContent) : null;
 
     // Determine which image to display
@@ -72,10 +73,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         const size = imageSize || 'large'; // Default to 'large' if no size selected
         imageUrl = featuredImage.media_details.sizes[size]?.source_url || featuredImage.source_url;
         imageAlt = featuredImage.alt_text || __('Featured Image', 'frontis-blocks');
-    } else if (firstImageFromContent) {
+    }
+     else if (firstImageFromContent) {
         imageUrl = firstImageFromContent;
         imageAlt = __('First image from content', 'frontis-blocks');
-    } else if (placeholderImageUrl) {
+    }
+     else if (placeholderImageUrl) {
         imageUrl = placeholderImageUrl;
         imageAlt = __('Placeholder Image', 'frontis-blocks');
     }
