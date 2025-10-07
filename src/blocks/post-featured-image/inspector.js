@@ -21,8 +21,6 @@ import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_SwitcherControl from "@Components/switcher-control";
 import FB_ColorControl from "@Components/color-control";
 import FB_BoxShadowControl from "@Components/box-shadow";
-import FB_InputControl from "@Components/input-control";
-import FB_VisibilityControl from "@Components/visibility-control";
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
@@ -488,8 +486,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             /* Target the image wrapper */
             .${blockId} .fb-post-featured-image {
-                display: flex;
-                max-width: fit-content;
+                display: flex !important;
                 width: 100%;
                 margin-block-start: 0;
                 margin-block-end: 0;
