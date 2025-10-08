@@ -43,35 +43,54 @@ const attributes = {
     },
     
     /** ============== Style Settings ============== */
-    imageWidth: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
-        },
-    },
-    imageHeight: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
-        },
-    },
-    imageObjectFit: {
-        type: "string",
-        default: "cover",
-    },
-    imageBorderRadius: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
-        },
-    },
-    
+		/** Image Size */
+		mediaSize: {
+			type: 'object',
+			default: {
+				Desktop: '',
+				Tablet: '',
+				Mobile: ''
+			}
+		},
+		mediaHeight: {
+			type: 'object',
+			default: {
+				Desktop: '',
+				Tablet: '',
+				Mobile: ''
+			}
+		},
+		mediaSizeUnits: {
+			type: 'object',
+			default: {
+				Desktop: '%',
+				Tablet: '%',
+				Mobile: '%',
+			}
+		},
+		mediaHeightUnits: {
+			type: 'object',
+			default: {
+				Desktop: 'px',
+				Tablet: 'px',
+				Mobile: 'px',
+			}
+		},
+
+		autoHeightSwitch: {
+			type: 'boolean',
+			default: false,
+		},
+
+		autoFitSwitch: {
+			type: 'boolean',
+			default: false,
+		},
+
+		imageFit: {
+			type: 'string',
+			default: 'cover',
+		},
 
     /** ============== Advanced Settings ============== */
     wrapperId: {

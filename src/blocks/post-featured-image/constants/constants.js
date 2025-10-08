@@ -27,12 +27,10 @@ export const BORDER_STYLES = [
 	{ label: __("Ridge", "frontis-blocks"), value: "ridge" },
 ];
 
-export const IMAGE_OBJECT_FIT = [
-    { label: "Cover", value: "cover" },
-    { label: "Contain", value: "contain" },
-    { label: "Fill", value: "fill" },
-    { label: "None", value: "none" },
-    { label: "Scale Down", value: "scale-down" },
+export const IMAGE_AUTO_FIT = [
+    { label: __("Cover", "frontis-blocks"), value: "cover", },
+    { label: __("Fill", "frontis-blocks"), value: "fill", },
+    { label: __("Contain", "frontis-blocks"), value: "contain", },
 ];
 
 export const IMAGE_SIZES = [
