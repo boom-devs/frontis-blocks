@@ -64,6 +64,7 @@
     "grunt-wp-readme-to-markdown": "^2.1.0",
     "image-webpack-loader": "^8.1.0",
     "load-grunt-tasks": "^5.1.0",
+    "madge": "^8.0.0",
     "mini-css-extract-plugin": "^2.9.2",
     "purgecss-webpack-plugin": "^6.0.0",
     "sass": "^1.80.4",
