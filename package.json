@@ -79,6 +79,7 @@
     "@reduxjs/toolkit": "^2.8.2",
     "@wordpress/core-data": "^7.10.0",
     "@wordpress/dom-ready": "^4.27.0",
+    "@wordpress/edit-site": "^6.32.0",
     "@wordpress/editor": "^14.6.0",
     "@wordpress/icons": "^10.7.0",
     "@wordpress/private-apis": "^1.26.0",

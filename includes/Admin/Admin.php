@@ -176,6 +176,8 @@ class Admin {
         $automatic_block_recovery = trim($automatic_block_recovery, '"');
         $enable_quick_action_bar = trim($enable_quick_action_bar, '"');
 
+        // var_dump($theme_json);
+
 		if ($theme_json && isset($theme_json['color'])) {
 			if(isset($theme_json['color']['palette'])) {
 				if (isset($theme_json['color']['palette']['theme'])) {

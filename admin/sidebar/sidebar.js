@@ -19,6 +19,7 @@ import FrontisThemeSiteEditor from "./theme-settings/site-editor";
 import { addFilter } from '@wordpress/hooks';
 import { InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl } from '@wordpress/components';
+import FontFamiliesUploader from "./components/FontFamiliesUploader";
 import "./sidebar.scss";
 
 // Default color and gradient configurations
@@ -514,6 +515,7 @@ function FrontisBlocksSidebar() {
 					className="fb-global-controls"
 				>
 					<div className="fb-panel-control">
+						<FontFamiliesUploader />
 						<NavigatorProvider initialPath="/">
 							<NavigatorScreen path="/">
 								<div className="fb-blocks-tabs">
