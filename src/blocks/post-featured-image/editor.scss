@@ -3,3 +3,7 @@
   margin: 16px 0;
 }
 
+.is-disabled {
+  opacity: 0.5;
+  pointer-events: none; 
+}

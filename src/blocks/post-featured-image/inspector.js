@@ -6,7 +6,7 @@ import {
     ToggleControl,
     SelectControl,
 } from "@wordpress/components";
-import { IMAGE_OBJECT_FIT, IMAGE_SIZES, OVERFLOW_OP, BORDER_STYLES  } from "./constants/constants";
+import { IMAGE_SIZES, OVERFLOW_OP, BORDER_STYLES, IMAGE_AUTO_FIT  } from "./constants/constants";
 import getCustomCss from "@Utils/getCustomCss";
 import { useDeviceType } from "@Config/displayType";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
@@ -32,6 +32,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         
         imageSize,
         imageAlignment,
+
+        /** Start Style Control */
+        mediaHeight,
+		mediaSize,
+		mediaSizeUnits,
+		mediaHeightUnits,
+        autoHeightSwitch,
+        autoFitSwitch, 
+        imageFit,
+        /** End Style Control */
         
         /** Start Advanced Attributes */
         wrapperId,
@@ -488,6 +498,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockId} .fb-post-featured-image {
                 display: flex !important;
                 width: 100%;
+                max-width: 100%;
                 margin-block-start: 0;
                 margin-block-end: 0;
                 transition: all .3s ease;
@@ -497,7 +508,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockId} .fb-post-featured-image-img {
                 display: block;
                 max-width: 100%;
-                height: auto;
                 transition: all .3s ease;
             }
 
@@ -525,6 +535,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .${blockId} .fb-post-featured-image {
                 ${imageAlignment.Desktop ? `justify-content: ${imageAlignment.Desktop};` : ""}
             }
+
+            .${blockId}.fb-post-featured-image-block .fb-post-featured-image  img.fb-post-featured-image-img{
+                ${mediaSize.Desktop ? `width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};` : ''}
+                ${!autoHeightSwitch && mediaHeight.Desktop ? `height: ${mediaHeight.Desktop}${mediaHeightUnits.Desktop};` : `height: auto;`}
+
+                ${autoFitSwitch ?
+                    `object-fit : ${imageFit};`
+                    : ''
+                }
+
+            }
+
+
 
             /* Advance Control Global Style */
 				.${blockId}.fb-post-featured-image-block {
@@ -687,6 +710,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${imageAlignment.Tablet ? `justify-content: ${imageAlignment.Tablet};` : ""}
                 }
 
+
+                .${blockId}.fb-post-featured-image-block .fb-post-featured-image  img.fb-post-featured-image-img{
+                    ${mediaSize.Tablet ? `width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};` : ''}
+                    ${!autoHeightSwitch && mediaHeight.Tablet ? `height: ${mediaHeight.Tablet}${mediaHeightUnits.Tablet};` : `height: auto;`}
+                }
+
                 /* Advanced Control Global Style - Tablet */
                 .${blockId}.fb-post-featured-image-block {
                     ${
@@ -755,6 +784,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             @media (max-width: 767px) {
                 .${blockId} .fb-post-featured-image {
                     ${imageAlignment.Mobile ? `justify-content: ${imageAlignment.Mobile};` : ""}
+                }
+
+                .${blockId}.fb-post-featured-image-block .fb-post-featured-image  img.fb-post-featured-image-img{
+                    ${mediaSize.Mobile ? `width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};` : ''}
+                    ${!autoHeightSwitch && mediaHeight.Mobile ? `height: ${mediaHeight.Mobile}${mediaHeightUnits.Mobile};` : `height: auto;`}
                 }
 
                 /* Advance Control Global Style - Mobile */
@@ -828,85 +862,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
         `,
-        [
-            blockId,
-            isLink,
-            imageAlignment,
-
-            /** Start Advanced Attributes */
-            wrapperId,
-            wrapperClass,
-
-            featuredImageDesktopSwitcher,
-            featuredImageTabletSwitcher,
-            featuredImageMobileSwitcher,
-
-            featuredImageGlobalCustomCSS,
-
-            postGlobalZIndex,   
-            postGlobalOverflow,
-            postGlobalPositionType,
-            postGlobalHZOrientationType,
-            postGlobalVROrientationType,
-            postGlobalHZLeftOffset,
-            postGlobalHZLeftOffsetUnits,
-            postGlobalHZRightOffset,
-            postGlobalHZRightOffsetUnits,
-            postGlobalVRTopOffset,
-            postGlobalVRTopOffsetUnits,
-            postGlobalVRBottomOffset,
-            postGlobalVRBottomOffsetUnits,
-            
-            postGlobalPaddingUnits,
-            postGlobalPaddingDesktop,
-            postGlobalPaddingTablet,
-            postGlobalPaddingMobile,
-            postGlobalPaddingLink,
-
-            postGlobalMarginUnits,
-            postGlobalMarginDesktop,
-            postGlobalMarginTablet,
-            postGlobalMarginMobile,
-            postGlobalMarginLink,
-
-            postGlobalBgColorSwitcher,
-            postGlobalNormalBackgroundType,
-            postGlobalNormalClassicColor,
-            postGlobalNormalGradientColor,
-            postGlobalNormalCustomGradientSwitcher,
-            postGlobalNormalCustomGradientInputValue,
-
-            postGlobalHoverBackgroundType,
-            postGlobalHoverClassicColor,
-            postGlobalHoverGradientColor,
-            postGlobalHoverCustomGradientSwitcher,
-            postGlobalHoverCustomGradientInputValue,
-
-            postGlobalBorder,
-            postGlobalBorderColorSwitcher,
-            postGlobalBorderColor,
-            postGlobalBorderHoverColor,
-
-            postGlobalBorderUnits,
-            postGlobalBorderDesktop,
-            postGlobalBorderTablet,
-            postGlobalBorderMobile,
-            postGlobalBorderLink,
-
-            postGlobalBorderRadiusUnits,
-            postGlobalBorderRadiusDesktop,
-            postGlobalBorderRadiusTablet,
-            postGlobalBorderRadiusMobile,
-            postGlobalBorderRadiusLink,
-
-            postGlobalBoxShadowSwitcher,
-            postGlobalBoxShadowValues,
-            postGlobalBoxShadowCssValue,
-            postGlobalBoxShadowHoverValues,
-            postGlobalBoxShadowHoverCssValue,
-
-            /** End Advanced Attributes */
-        ],
+        [attributes],
     );
 
     const customCss = getCustomCss(featuredImageGlobalCustomCSS, `.${blockId}`);
@@ -976,7 +932,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             />
 
             <FB_ResponsiveAlignmentControl
-                label={__("Image Alignment", "frontis-blocks")}
+                label={__("Image Alignment", "frontis-blocks")} 
                 globalAlignment={imageAlignment}
                 setGlobalAlignment={(value) => setAttributes({ imageAlignment: value })}
                 deviceType={deviceType}
@@ -987,6 +943,80 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const styleControls = (
         <PanelBody title={__("Image Style", "frontis-blocks")} initialOpen={false}>
+
+                <FB_Range
+                    min={1}
+                    max={mediaSizeUnits[deviceType] === '%' ? 100 : 1400}
+                    label={__("Width", "frontis-blocks")}
+                    rangeValue={mediaSize}
+                    onChangeHandler={(value) => setAttributes({ mediaSize: value })}
+                    rangeUnitHandler={(value) => setAttributes({ mediaSizeUnits: value })}
+                    deviceType={deviceType}
+                    units={mediaSizeUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"100"}
+                />
+                <FB_Range 
+                    min={1}
+                    max={mediaHeightUnits[deviceType] === '%' ? 100 : 1400}
+                    label={__("Height", "frontis-block")}
+                    rangeValue={mediaHeight}
+                    onChangeHandler={(value) => setAttributes({ mediaHeight: value })}
+                    rangeUnitHandler={(value) => setAttributes({ mediaHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={mediaHeightUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                    disabled={autoHeightSwitch}
+                />
+
+                
+                {autoHeightSwitch && (
+                    <p style={{ fontSize: "12px", color: "#888", marginTop: "-14px", marginBottom: "20px" }}>
+                        {__(
+                            "Disabling custom height adjustments while Auto Height is enabled.",
+                            "frontis-blocks",
+                        )}
+                    </p>
+                )}
+
+                {/* Auto Height */}
+                <ToggleControl
+                    __nextHasNoMarginBottom
+                    label={__("Auto Height", "frontis-block")}
+                    checked={autoHeightSwitch}
+                    onChange={(newValue) => {
+                        setAttributes({ autoHeightSwitch: newValue });
+                    }}
+                />
+
+
+
+                {/* Auto Fit Image */}
+                { !autoHeightSwitch && <ToggleControl
+                    __nextHasNoMarginBottom
+                    label={__("Auto Fit Image?", "frontis-block")}
+                    checked={autoFitSwitch}
+                    onChange={(newValue) => {
+                        setAttributes({ autoFitSwitch: newValue });
+                    }}
+                />}
+
+                {/* Image Fit Options */}
+                { !autoHeightSwitch && autoFitSwitch && (
+                    <SelectControl
+                        label={__("Image Fit Options", "frontis-blocks")}
+                        value={imageFit || "cover"}
+                        options={IMAGE_AUTO_FIT}
+                        onChange={(size) =>
+                            setAttributes({ imageFit: size })
+                        }
+                        __nextHasNoMarginBottom
+                    />
+                )}
+
 
         </PanelBody>
     );
