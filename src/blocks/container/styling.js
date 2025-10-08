@@ -1334,53 +1334,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 
 	if ( 'video' === backgroundType ) {
-		// selectors[ ' .frontis-blocks-container__video-wrap' ] = {
-		// 	...videoBackgroundCSS,
-		// 	...borderCSS,
-		// };
-		// tablet_selectors[ ' .frontis-blocks-container__video-wrap' ] = {
-		// 	...borderCSSTablet,
-		// };
-		// mobile_selectors[ ' .frontis-blocks-container__video-wrap' ] = {
-		// 	...borderCSSMobile,
-		// };
-		// selectors[ '.wp-block-frontis-blocks-container' ] = {
-		// 	...desktopContainerPadding,
-		// 	'margin-top': generateCSSUnit( containerDesktopMargin.top, containerMarginUnits['Desktop'], true ),
-		// 	'margin-bottom': generateCSSUnit( containerDesktopMargin.bottom, containerMarginUnits['Desktop'], true ),
-		// 	'margin-left': generateCSSUnit( containerDesktopMargin.left, containerMarginUnits['Desktop'], true ),
-		// 	'margin-right': generateCSSUnit( containerDesktopMargin.right, containerMarginUnits['Desktop'], true ),
-		// 	'box-shadow':
-		// 		generateCSSUnit( boxShadowHOffset, 'px' ) +
-		// 		' ' +
-		// 		generateCSSUnit( boxShadowVOffset, 'px' ) +
-		// 		' ' +
-		// 		generateCSSUnit( boxShadowBlur, 'px' ) +
-		// 		' ' +
-		// 		generateCSSUnit( boxShadowSpread, 'px' ) +
-		// 		' ' +
-		// 		boxShadowColor +
-		// 		' ' +
-		// 		boxShadowPositionCSS,
-		// 	'min-height': generateCSSUnit(  minHeight['Desktop'], minHeightUnits['Desktop']  ),
-		// 	'overflow': overflow,
-		// };
-		// tablet_selectors[ '.wp-block-frontis-blocks-container' ] = {
-		// 	...tabletContainerPadding,
-		// 	'margin-top': generateCSSUnit( containerTabletMargin.top, containerMarginUnits['Tablet'], true ),
-		// 	'margin-bottom': generateCSSUnit( containerTabletMargin.bottom, containerMarginUnits['Tablet'], true ),
-		// 	'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'] ),
-		// };
-		// mobile_selectors[ '.wp-block-frontis-blocks-container' ] = {
-		// 	...mobileContainerPadding,
-		// 	'margin-top': generateCSSUnit( containerMobileMargin.top, containerMarginUnits['Mobile'], true ),
-		// 	'margin-bottom': generateCSSUnit( containerMobileMargin.bottom, containerMarginUnits['Mobile'], true ),
-		// 	'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
-		// };
-		// selectors[ '.wp-block-frontis-blocks-container:hover .frontis-blocks-container__video-wrap' ] = {
-		// 	'border-color': containerBorderHColor,
-		// 	'box-shadow': '',
-		// };
+
 	} else {
 		if(isBlockRootParent) {
 			selectors[ '.wp-block-frontis-blocks-container' ] = getContainerStylesDesktop;
