@@ -1,147 +1,249 @@
 const attributes = {
-    blockId: {
-        type: "string",
-        default: "",
-    },
+	blockId: {
+		type: "string",
+		default: "",
+	},
 
-		// Internal
-    blockStyle: {
-        type: "string",
-        default: "",
-    },
-    
-    /** ============== General Settings ============== */
-    isLink: {
-        type: "boolean",
-        default: false,
-    },
-    rel: {
-        type: "string",
-        default: "",
-    },
-    linkTarget: {
-        type: "string",
-        default: "_self",
-    },
-    useFirstImage: {
-        type: "boolean",
-        default: false,
-    },
-    
-    // Image Settings
-    imageSize: {
-        type: "string",
-        default: "large",
-    },
-    imageAlignment: {
-        type: "object",
-        default: {
-            Desktop: "left",
-            Tablet: "",
-            Mobile: "",
-        },
-    },
-    
-    /** ============== Style Settings ============== */
-		/** Image Size */
-		mediaSize: {
-			type: 'object',
-			default: {
-				Desktop: '',
-				Tablet: '',
-				Mobile: ''
-			}
+	// Internal
+	blockStyle: {
+		type: "string",
+		default: "",
+	},
+
+	/** ============== General Settings ============== */
+	isLink: {
+		type: "boolean",
+		default: false,
+	},
+	rel: {
+		type: "string",
+		default: "",
+	},
+	linkTarget: {
+		type: "string",
+		default: "_self",
+	},
+	useFirstImage: {
+		type: "boolean",
+		default: false,
+	},
+
+	// Image Settings
+	imageSize: {
+		type: "string",
+		default: "large",
+	},
+	imageAlignment: {
+		type: "object",
+		default: {
+			Desktop: "left",
+			Tablet: "",
+			Mobile: "",
 		},
-		mediaHeight: {
-			type: 'object',
-			default: {
-				Desktop: '',
-				Tablet: '',
-				Mobile: ''
-			}
+	},
+
+	/** ============== Style Settings ============== */
+	/** Image Size */
+	mediaSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
 		},
-		mediaSizeUnits: {
-			type: 'object',
-			default: {
-				Desktop: '%',
-				Tablet: '%',
-				Mobile: '%',
-			}
+	},
+	mediaHeight: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
 		},
-		mediaHeightUnits: {
-			type: 'object',
-			default: {
-				Desktop: 'px',
-				Tablet: 'px',
-				Mobile: 'px',
-			}
+	},
+	mediaSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "%",
+			Tablet: "%",
+			Mobile: "%",
 		},
-
-		autoHeightSwitch: {
-			type: 'boolean',
-			default: false,
+	},
+	mediaHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
 		},
+	},
 
-		autoFitSwitch: {
-			type: 'boolean',
-			default: false,
+	autoHeightSwitch: {
+		type: "boolean",
+		default: false,
+	},
+
+	autoFitSwitch: {
+		type: "boolean",
+		default: false,
+	},
+
+	imageFit: {
+		type: "string",
+		default: "cover",
+	},
+
+	/** Image Border **/
+	imageBorder: {
+		type: "string",
+		default: "none",
+	},
+	imageBorderColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	imageBorderColor: {
+		type: "string",
+	},
+	imageBorderHoverColor: {
+		type: "string",
+	},
+	imageBorderUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
 		},
-
-		imageFit: {
-			type: 'string',
-			default: 'cover',
+	},
+	imageBorderDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
-
-    /** ============== Advanced Settings ============== */
-    wrapperId: {
-        type: "string",
-        default: "",
-    },
-    wrapperClass: {
-        type: "string",
-        default: "",
-    },
-    featuredImageGlobalCustomCSS: {
-        type: "string",
-        default: "",
-    },
-
-		// Responsive Control
-    featuredImageDesktopSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-    featuredImageTabletSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-    featuredImageMobileSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-
-
-		// Global
-		postGlobalZIndex: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
-        },
-    },
-    
-		postGlobalOverflow: {
-			type: "string",
-			default: "default",
+	},
+	imageBorderTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
 		},
+	},
+	imageBorderMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageBorderLink: {
+		type: "boolean",
+		default: true,
+	},
+	imageBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	imageBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	imageBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** Image Box Shadow **/
+	imageBoxShadowValues: {
+		type: "array",
+		default: [],
+	},
+	imageBoxShadowCssValue: {
+		type: "string",
+		default: "",
+	},
 
-    /** Start Position */
-    postGlobalPositionType: {
-        type: "string",
-        default: "default",
-    },
-    postGlobalHZOrientationType: {
+	/** ============== Advanced Settings ============== */
+	wrapperId: {
+		type: "string",
+		default: "",
+	},
+	wrapperClass: {
+		type: "string",
+		default: "",
+	},
+	featuredImageGlobalCustomCSS: {
+		type: "string",
+		default: "",
+	},
+
+	// Responsive Control
+	featuredImageDesktopSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	featuredImageTabletSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	featuredImageMobileSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+
+	// Global
+	postGlobalZIndex: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+
+	postGlobalOverflow: {
+		type: "string",
+		default: "default",
+	},
+
+	/** Start Position */
+	postGlobalPositionType: {
+		type: "string",
+		default: "default",
+	},
+	postGlobalHZOrientationType: {
 		type: "string",
 		default: "left",
 	},
@@ -298,7 +400,7 @@ const attributes = {
 	},
 	/** End Margin */
 
-		/** Start Background */
+	/** Start Background */
 	postGlobalBgColorSwitcher: {
 		type: "string",
 		default: "normal",
@@ -346,7 +448,7 @@ const attributes = {
 	},
 	/** End Background */
 
-		/** Start Border */
+	/** Start Border */
 	postGlobalBorder: {
 		type: "string",
 		default: "none",
@@ -466,8 +568,6 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-
-
 };
 
 export default attributes;
