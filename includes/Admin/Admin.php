@@ -175,27 +175,30 @@ class Admin {
 
         // Merge with custom fonts if they exist (e.g., user-installed via Font Library).
         if (isset($theme_json['typography']['fontFamilies']['custom'])) {
-            $font_families = array_merge($font_families, $theme_json['typography']['fontFamilies']['custom']);
+            $custom_fonts['custom'] = $theme_json['typography']['fontFamilies']['custom'];
+            $font_families = array_merge($font_families, $custom_fonts);
         }
 
-        $installed_fonts_families = array(
-            'theme'  => array(),  // Custom fonts with fontFace definitions.
-            'system' => array(),  // System fonts (no fontFace).
-        );
+        // var_dump($font_families);
 
-        // Categorize font families.
-        foreach ($font_families as $font_family) {
-            $type = isset($font_family['fontFace']) && !empty($font_family['fontFace']) ? 'theme' : 'system';
+        // $installed_fonts_families = array(
+        //     'theme'  => array(),  // Custom fonts with fontFace definitions.
+        //     'system' => array(),  // System fonts (no fontFace).
+        // );
+
+        // // Categorize font families.
+        // foreach ($font_families as $font_family) {
+        //     $type = isset($font_family['fontFace']) && !empty($font_family['fontFace']) ? 'theme' : 'system';
             
-            $installed_fonts_families[$type][] = array(
-                'fontFamily' => $font_family['fontFamily'] ?? '',  // CSS font-family stack.
-                'slug'       => $font_family['slug'] ?? '',        // Unique slug for CSS variables.
-                'name'       => $font_family['name'] ?? '',        // Human-readable name.
-                'fontFace'   => $font_family['fontFace'] ?? null,  // Font face definitions (if any).
-            );
-        }
+        //     $installed_fonts_families[$type][] = array(
+        //         'fontFamily' => $font_family['fontFamily'] ?? '',  // CSS font-family stack.
+        //         'slug'       => $font_family['slug'] ?? '',        // Unique slug for CSS variables.
+        //         'name'       => $font_family['name'] ?? '',        // Human-readable name.
+        //         'fontFace'   => $font_family['fontFace'] ?? null,  // Font face definitions (if any).
+        //     );
+        // }
 
-        var_dump($installed_fonts_families);
+        // var_dump($installed_fonts_families);
 
         $automatic_block_recovery = get_option('fb_automatic_block_recovery');
         $enable_quick_action_bar = get_option('fb_enable_quick_action_bar'); 
