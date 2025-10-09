@@ -21,8 +21,6 @@ import {
 	fetchFontCollections,
 	fetchFontCollection,
 } from './resolvers';
-import {unlock, lock } from '@wordpress/private-apis'
-const { useGlobalSetting } = unlock( blockEditorPrivateApis );
 import {
 	setUIValuesNeeded,
 	mergeFontFamilies,
@@ -78,10 +76,7 @@ function FontLibraryProvider( { children } ) {
 			};
 		} ) || [];
 
-	// Global Styles (settings) font families
-	const [ fontFamilies, setFontFamilies ] = useGlobalSetting(
-		'typography.fontFamilies'
-	);
+	const [fontFamilies, setFontFamilies] = useState();
 
 	/*
 	 * Save the font families to the database.

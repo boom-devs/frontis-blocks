@@ -21,7 +21,6 @@ import { useSelect } from '@wordpress/data';
 import { useContext, useEffect, useState } from '@wordpress/element';
 import { __, _x, sprintf, isRTL } from '@wordpress/i18n';
 import { chevronLeft, chevronRight } from '@wordpress/icons';
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
@@ -36,9 +35,6 @@ import {
 	unloadFontFaceInBrowser,
 	getDisplaySrcFromFontFace,
 } from './utils';
-import {unlock, lock } from '@wordpress/private-apis'
-
-const { useGlobalSetting } = unlock( blockEditorPrivateApis );
 
 function InstalledFonts() {
 	const {
@@ -53,16 +49,11 @@ function InstalledFonts() {
 		getFontFacesActivated,
 	} = useContext( FontLibraryContext );
 
-	const [ fontFamilies, setFontFamilies ] = useGlobalSetting(
-		'typography.fontFamilies'
-	);
+	const [ fontFamilies, setFontFamilies ] = useState({});
+	
 	const [ isConfirmDeleteOpen, setIsConfirmDeleteOpen ] = useState( false );
 	const [ notice, setNotice ] = useState( false );
-	const [ baseFontFamilies ] = useGlobalSetting(
-		'typography.fontFamilies',
-		undefined,
-		'base'
-	);
+	const [ baseFontFamilies ] = useState({});
 	const globalStylesId = useSelect( ( select ) => {
 		const { __experimentalGetCurrentGlobalStylesId } = select( coreStore );
 		return __experimentalGetCurrentGlobalStylesId();
@@ -72,8 +63,12 @@ function InstalledFonts() {
 		'globalStyles',
 		globalStylesId
 	);
+
 	const fontFamiliesHasChanges =
 		!! globalStyles?.edits?.settings?.typography?.fontFamilies;
+
+	console.log("fontFamiliesHasChanges")
+	console.log(fontFamiliesHasChanges);
 
 	const themeFonts = fontFamilies?.theme
 		? fontFamilies.theme

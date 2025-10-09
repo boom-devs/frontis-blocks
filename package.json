@@ -84,6 +84,7 @@
     "@wordpress/icons": "^10.7.0",
     "@wordpress/private-apis": "^1.26.0",
     "awesome-icon-picker": "^1.0.25",
+    "change-case": "^5.4.4",
     "classnames": "^2.5.1",
     "clean-webpack-plugin": "^4.0.0",
     "gsap": "^3.12.7",

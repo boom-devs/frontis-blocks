@@ -1,21 +1,15 @@
 /**
- * WordPress dependencies
- */
-import { privateApis as componentsPrivateApis } from '@wordpress/components';
-
-/**
  * Internal dependencies
  */
 import { FONT_WEIGHTS, FONT_STYLES } from './constants';
-// import { unlock } from '../../unlock';
 import { fetchInstallFontFace } from '../resolvers';
 import { formatFontFaceName } from './preview-styles';
-
+import { kebabCase } from 'change-case';
 /**
  * Browser dependencies
  */
 const { File } = window;
-const { kebabCase } = unlock( componentsPrivateApis );
+
 
 export function setUIValuesNeeded( font, extraValues = {} ) {
 	if ( ! font.name && ( font.fontFamily || font.slug ) ) {
@@ -115,10 +109,16 @@ export async function loadFontFaceInBrowser( fontFace, source, addTo = 'all' ) {
 	}
 
 	if ( addTo === 'iframe' || addTo === 'all' ) {
-		const iframeDocument = document.querySelector(
-			'iframe[name="editor-canvas"]'
-		).contentDocument;
-		iframeDocument.fonts.add( loadedFace );
+		// const iframeDocument = document.querySelector(
+		// 	'iframe[name="editor-canvas"]'
+		// ).contentDocument;
+		// iframeDocument.fonts.add( loadedFace );
+
+		const iframe = document.querySelector('iframe[name="editor-canvas"]');
+		if (iframe && iframe.contentDocument) {
+			// unloadFontFace(iframe.contentDocument.fonts);
+			iframe.contentDocument.fonts.add( loadedFace );
+		}
 	}
 }
 
@@ -132,6 +132,8 @@ export async function loadFontFaceInBrowser( fontFace, source, addTo = 'all' ) {
  * @see https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/delete.
  */
 export function unloadFontFaceInBrowser( fontFace, removeFrom = 'all' ) {
+	console.log("fontFace")
+	console.log(fontFace);
 	const unloadFontFace = ( fonts ) => {
 		fonts.forEach( ( f ) => {
 			if (
@@ -144,15 +146,27 @@ export function unloadFontFaceInBrowser( fontFace, removeFrom = 'all' ) {
 		} );
 	};
 
+	console.log("removeFrom")
+	console.log(removeFrom)
+
 	if ( removeFrom === 'document' || removeFrom === 'all' ) {
 		unloadFontFace( document.fonts );
 	}
 
 	if ( removeFrom === 'iframe' || removeFrom === 'all' ) {
-		const iframeDocument = document.querySelector(
-			'iframe[name="editor-canvas"]'
-		).contentDocument;
-		unloadFontFace( iframeDocument.fonts );
+		// const iframeDocument = document.querySelector(
+		// 	'iframe[name="editor-canvas"]'
+		// ).contentDocument;
+		// unloadFontFace( iframeDocument.fonts );
+
+
+		const iframe = document.querySelector('iframe[name="editor-canvas"]');
+		if (iframe && iframe.contentDocument) {
+			unloadFontFace(iframe.contentDocument.fonts);
+		} else {
+			// If iframe is not found or contentDocument is inaccessible, use main document's fonts
+			unloadFontFace(document.fonts);
+		}
 	}
 }
 
