@@ -105,12 +105,6 @@ const Edit = (props) => {
 	// A key to force re-mounting of <Swiper> when critical settings change
 	const [swiperKey, setSwiperKey] = useState(0);
 
-    const hasChildrenClass = hasChildren ? 'fb-slider-has-children' : '';
-	const listViewClass = isListViewOpen ? 'fb-list-view-enabled' : '';
-	const blockProps = useBlockProps( {
-		className: `${ blockId } ${ hasChildrenClass } ${ listViewClass } fb-slider-container fb-slider-editor-wrap ${displayArrows ? sliderArrowPositionType : ''} ${sliderArrowPosition}  fb-editor-preview-mode-${ deviceType.toLowerCase() } ${sliderGlobalWraperClass} ${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}`,
-	} );
-
     const { isListViewOpen, hasChildren } = useSelect( ( select ) => {
 		const getStore = select( 'core/editor' ) || select( 'core/edit-widgets' );
 
@@ -118,7 +112,15 @@ const Edit = (props) => {
 			isListViewOpen: getStore?.isListViewOpened ? getStore.isListViewOpened() : false,
 			hasChildren: 0 !== select( 'core/block-editor' )?.getBlocks( clientId ).length,
 		};
-	}, [] );
+	}, [clientId] );
+
+    const hasChildrenClass = hasChildren ? 'fb-slider-has-children' : '';
+	const listViewClass = isListViewOpen ? 'fb-list-view-enabled' : '';
+	const blockProps = useBlockProps( {
+		className: `${ blockId } ${ hasChildrenClass } ${ listViewClass } fb-slider-container fb-slider-editor-wrap ${displayArrows ? sliderArrowPositionType : ''} ${sliderArrowPosition}  fb-editor-preview-mode-${ deviceType.toLowerCase() } ${sliderGlobalWraperClass} ${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}`,
+	} );
+
+
 
     const getSliderTemplate = useMemo(() => [
         ['frontis-blocks/slider-item'],
