@@ -377,7 +377,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		showAutoplayButton
 	} = attributes;
 
-	console.log(attributes);
 	const deviceType = useDeviceType();
 
 	useEffect(() => {
@@ -2338,7 +2337,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${globalMobileBorderRadiusWidth && newsTickerGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ""}
                 }
                 .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container {
-                    ${labelContainerMobilePadding && labelContainerPaddingMobil?.top ? `padding: ${labelContainerMobilePadding};` : ""}
+                    ${labelContainerMobilePadding && labelContainerPaddingMobile?.top ? `padding: ${labelContainerMobilePadding};` : ""}
                     ${labelContainerMobileMargin && labelContainerMarginMobile?.top ? `margin: ${labelContainerMobileMargin};` : ""}
                     ${labelContainerMobileBorderWidth && labelContainerBorderMobile?.top ? `border-width: ${labelContainerMobileBorderWidth};` : ""}
                     ${labelContainerMobileBorderRadiusWidth && labelContainerBorderRadiusMobile?.top ? `border-radius: ${labelContainerMobileBorderRadiusWidth};` : ""}
