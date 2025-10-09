@@ -9,7 +9,6 @@ import {
 	__experimentalHStack as HStack,
 	Button,
 } from '@wordpress/components';
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
 import { settings } from '@wordpress/icons';
 import { useContext } from '@wordpress/element';
 
@@ -23,8 +22,6 @@ import FontLibraryModal from './font-library-modal';
 import FontFamilyItem from './font-family-item';    
 import Subtitle from './subtitle';
 import { setUIValuesNeeded } from './font-library-modal/utils';
-// import {unlock, lock } from '@wordpress/private-apis'
-// const { useGlobalSetting } = unlock( blockEditorPrivateApis );
 
 /**
  * Maps the fonts with the source, if available.
@@ -42,12 +39,8 @@ function mapFontsWithSource( fonts, source ) {
 function FontFamiliesUploader() {
 	const { baseCustomFonts, modalTabOpen, setModalTabOpen } =
 		useContext( FontLibraryContext );
-	const [ fontFamilies ] = useGlobalSetting( 'typography.fontFamilies' );
-	const [ baseFontFamilies ] = useGlobalSetting(
-		'typography.fontFamilies',
-		undefined,
-		'base'
-	);
+	const fontFamilies = {};
+	const baseFontFamilies = {};
 	const themeFonts = mapFontsWithSource( fontFamilies?.theme, 'theme' );
 	const customFonts = mapFontsWithSource( fontFamilies?.custom, 'custom' );
 	const activeFonts = [ ...themeFonts, ...customFonts ].sort( ( a, b ) =>

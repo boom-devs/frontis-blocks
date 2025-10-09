@@ -48,7 +48,6 @@ class Enqueues {
         // Enqueue assets
         $page_compiling_mode = get_post_meta(get_the_ID(), 'fb_page_assets_generation', true);
 
-        // var_dump($page_compiling_mode);
         if($page_compiling_mode === 'compiling') {
             global $wpdb;
             $upload_directory = WP_CONTENT_DIR . '/uploads/frontis-blocks/';

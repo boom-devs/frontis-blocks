@@ -1,13 +1,4 @@
-/**
- * WordPress dependencies
- */
-import { privateApis as componentsPrivateApis } from '@wordpress/components';
-
-/**
- * Internal dependencies
- */
-import {unlock, lock } from '@wordpress/private-apis'
-const { kebabCase } = unlock( componentsPrivateApis );
+import { kebabCase } from 'change-case';
 
 export default function makeFamiliesFromFaces( fontFaces ) {
 	const fontFamiliesObject = fontFaces.reduce( ( acc, item ) => {
