@@ -51,6 +51,8 @@ const FB_SidebarTypography = ({
 	const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState();
 	const [availableFontWeights, setAvailableFontWeights] = useState([]);
 
+	console.log(fontOptions);
+
 	useEffect(() => {
 		if (fontFamily !== 'Default') {
 			loadGoogleFont(fontFamily);
