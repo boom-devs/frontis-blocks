@@ -37,7 +37,7 @@ const TypographySettings = (props) => {
 
 	// Typography elements
 	const typographyElements = {
-		body: 'Text',
+		body: 'Body',
 		link: 'Link',
 		heading: 'Headings',
 		captions: 'Captions',

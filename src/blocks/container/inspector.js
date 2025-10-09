@@ -265,7 +265,6 @@ const Inspector = (props) => {
 		});
 	}, [formatted_container_padding]);
 
-
 	const CONTAINER_TYPE = [
 		{ label: __('Full Width', 'frontis-blocks'), value: "full-width" },
 		{ label: __('Boxed', 'frontis-blocks'), value: "boxed" },
@@ -558,7 +557,6 @@ const Inspector = (props) => {
 		setAttributes({containerRowsItemList: {...containerRowsItemList,[deviceType]: updatedItems}});
 	};
 
-
 	const isDesktopPaddingEmpty = () => {
 		const directions = ['top', 'bottom', 'left', 'right'];
 		return directions.every(direction => 
@@ -584,30 +582,30 @@ const Inspector = (props) => {
 	let getPaddingDesktop = 
 		isBlockRootParent && isDesktopPaddingEmpty()
 		? {
-			top: containerGlobalPadding.Desktop, 
-			right: containerGlobalPadding.Desktop, 
-			bottom: containerGlobalPadding.Desktop, 
-			left: containerGlobalPadding.Desktop
+			top: containerGlobalPadding?.Desktop, 
+			right: containerGlobalPadding?.Desktop, 
+			bottom: containerGlobalPadding?.Desktop, 
+			left: containerGlobalPadding?.Desktop
 		  }
 		: containerDesktopPadding;
 	
 	let getPaddingTablet = 
 		isBlockRootParent && isTabletPaddingEmpty()
 		? {
-			top: containerGlobalPadding.Tablet, 
-			right: containerGlobalPadding.Tablet, 
-			bottom: containerGlobalPadding.Tablet, 
-			left: containerGlobalPadding.Tablet
+			top: containerGlobalPadding?.Tablet, 
+			right: containerGlobalPadding?.Tablet, 
+			bottom: containerGlobalPadding?.Tablet, 
+			left: containerGlobalPadding?.Tablet
 		  } 
 		: containerTabletPadding;
 	
 	let getPaddingMobile = 
 		isBlockRootParent && isMobilePaddingEmpty()
 		? {
-			top: containerGlobalPadding.Mobile, 
-			right: containerGlobalPadding.Mobile, 
-			bottom: containerGlobalPadding.Mobile, 
-			left: containerGlobalPadding.Mobile
+			top: containerGlobalPadding?.Mobile, 
+			right: containerGlobalPadding?.Mobile, 
+			bottom: containerGlobalPadding?.Mobile, 
+			left: containerGlobalPadding?.Mobile
 		  } 
 		: containerMobilePadding;
 
@@ -1286,8 +1284,8 @@ const Inspector = (props) => {
 											onClick={() =>
 												setAttributes({
 													containerGridAlignItems: {
-														...containerGridAlignItems, // Spread the existing values
-														[deviceType]: item.value, // Update the specific device type
+														...containerGridAlignItems,
+														[deviceType]: item.value,
 													},
 												})
 											}
@@ -1316,8 +1314,8 @@ const Inspector = (props) => {
 											onClick={() =>
 												setAttributes({
 													containerGridJustifyItems: {
-														...containerGridJustifyItems, // Spread the existing values
-														[deviceType]: item.value, // Update the specific device type
+														...containerGridJustifyItems,
+														[deviceType]: item.value,
 													},
 												})
 											}
@@ -1403,8 +1401,8 @@ const Inspector = (props) => {
 										onClick={() =>
 											setAttributes({
 												containerAlignItems: {
-													...containerAlignItems, // Spread the existing values
-													[deviceType]: item.value, // Update the specific device type
+													...containerAlignItems,
+													[deviceType]: item.value,
 												},
 											})
 										}
@@ -1433,8 +1431,8 @@ const Inspector = (props) => {
 										onClick={() =>
 											setAttributes({
 												containerJustify: {
-													...containerJustify, // Spread the existing values
-													[deviceType]: item.value, // Update the specific device type
+													...containerJustify,
+													[deviceType]: item.value,
 												},
 											})
 										}
@@ -1638,19 +1636,6 @@ const Inspector = (props) => {
 							spacingCombineBtnHandler={containerPaddingLinkBtn}
 							setAttributes={setAttributes}
 						/>
-						{/* <FB_Spacing
-							label={__("Padding", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={containerPaddingUnitsHandler}
-							spacingUnits={containerPaddingUnits}
-							spacingDesktop={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Desktop, right: containerGlobalPadding.Desktop, bottom: containerGlobalPadding.Desktop, left: containerGlobalPadding.Desktop} : containerDesktopPadding}
-							spacingTablet={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Tablet, right: containerGlobalPadding.Tablet, bottom: containerGlobalPadding.Tablet, left: containerGlobalPadding.Tablet} : containerTabletPadding}
-							spacingMobile={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Mobile, right: containerGlobalPadding.Mobile, bottom: containerGlobalPadding.Mobile, left: containerGlobalPadding.Mobile} : containerMobilePadding}
-							handleSpacingUnitHandler={containerPaddingUnitsChange}
-							spacingCombineBtn={containerPaddingLink}
-							spacingCombineBtnHandler={containerPaddingLinkBtn}
-							setAttributes={setAttributes}
-						/> */}
 					</PanelBody>
 
 					<PanelBody
