@@ -688,6 +688,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 transition: all .3s ease;
             }
 
+            .${blockId} .fb-post-featured-image .fb-post-featured-image-inner {
+                width: 100%;
+            }
+
             /* Target the image */
             .${blockId}.fb-post-featured-image-block .fb-post-featured-image  img.fb-post-featured-image-img{
                 max-width: 100%;
