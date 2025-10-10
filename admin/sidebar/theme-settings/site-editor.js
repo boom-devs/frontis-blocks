@@ -15,58 +15,88 @@ const FrontisThemeSiteEditor = () => {
 
     const themeColors = useSelect((select) => select('core/editor').getEditorSettings()?.colors || [], []);
     
-    const [settings, setSettings] = useState({
-        disableGlobalHeader: false,
-        disableGlobalFooter: false,
-        stickyGlobalHeader: false,
-        stickyGlobalHeaderOffset: 0,
-        transparentGlobalHeader: false,
-        scrollGlobalToTop: false,
-        smoothGlobalScroll: false,
-        relatedGlobalPosts: false,
-        authorGlobalBox: false,
-        lazyGlobalLoading: false,
-        stickyGlobalHeaderColor: null,
-        transparentGlobalHeaderColor: 'transparent',
+    const [settings, setSettings] = useState({ 
+        disableHeader: false,
+        disableFooter: false,
+        stickyHeader: false,
+        stickyHeaderOffset: 0,
+        transparentHeader: false,
+        scrollToTop: false,
+        smoothScroll: false,
+        relatedPosts: false,
+        authorBox: false,
+        lazyLoading: false,
+        stickyHeaderColor: '',
+        transparentHeaderColor: 'transparent',
     });
 
-    const updateSetting = (settingName, value) => {
-        const newSettings = {
-            ...settings,
-            [settingName]: value
-        };
+    // const updateGlobalSetting = (settingName, value) => {
+    //     const newSettings = {
+    //         ...settings,
+    //         [settingName]: value
+    //     };
 
+    //     setSettings(newSettings);
+    //     setStickyHeaderClass(newSettings);
+
+    //     // Immediately update the setting via API
+    //     apiFetch({
+    //         path: 'frontis/v1/global-settings',
+    //         method: 'POST',
+    //         data: { setting: newSettings }
+    //     }).then((response) => {
+    //         console.log('Settings updated:', response);
+    //         if(response === 'success') {
+    //             console.log('Settings updated:',response);
+    //         }
+    //     }).catch((error) => {
+    //         console.error('Error updating settings:', error);
+    //         // Revert the local state if the API call fails
+    //         setSettings(settings);
+    //     });
+    // };
+
+    // useEffect(() => {
+    //     // Fetch initial settings
+    //     apiFetch({ path: 'frontis/v1/global-settings' }).then((fetchedSettings) => {
+    //         console.log('get global settings',fetchedSettings);
+    //         setSettings(fetchedSettings);
+    //         // setStickyHeaderClass(fetchedSettings);
+    //         setTimeout(() => {
+    //             setStickyHeaderClass(fetchedSettings);
+    //         }, 5000);
+    //     });
+    // }, []);
+
+    useEffect(() => {
+        const unsubscribe = wp.data.subscribe(() => {
+            const isReady = wp.data.select('core/editor').__unstableIsEditorReady 
+                ? wp.data.select('core/editor').__unstableIsEditorReady() 
+                : true;
+    
+            if (isReady) {
+                apiFetch({ path: 'frontis/v1/global-settings' }).then((fetchedSettings) => {
+                    setSettings(fetchedSettings);
+                    setStickyHeaderClass(fetchedSettings);
+                });
+    
+                unsubscribe();
+            }
+        });
+    }, []);
+    
+    const updateGlobalSetting = (settingName, value) => {
+        const newSettings = { ...settings, [settingName]: value };
         setSettings(newSettings);
-        setStickyHeaderClass(newSettings);
-
-        // Immediately update the setting via API
+    
         apiFetch({
             path: 'frontis/v1/global-settings',
             method: 'POST',
-            data: { setting: newSettings }
+            data: { scope: 'global', setting: newSettings }
         }).then((response) => {
-            console.log('Settings updated:', response);
-            if(response === 'success') {
-
-            }
-        }).catch((error) => {
-            console.error('Error updating settings:', error);
-            // Revert the local state if the API call fails
-            setSettings(settings);
+            console.log("Global updated:", response);
         });
     };
-
-    useEffect(() => {
-        // Fetch initial settings
-        apiFetch({ path: 'frontis/v1/global-settings' }).then((fetchedSettings) => {
-            
-            setSettings(fetchedSettings);
-            // setStickyHeaderClass(fetchedSettings);
-            setTimeout(() => {
-                setStickyHeaderClass(fetchedSettings);
-            }, 5000);
-        });
-    }, []);
 
 
     const setStickyHeaderClass = (settings) => {
@@ -142,6 +172,8 @@ const FrontisThemeSiteEditor = () => {
     useEffect(() => {
         wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
     },[settings]);
+
+    console.log(settings);
     
     return (
         <>
@@ -149,8 +181,8 @@ const FrontisThemeSiteEditor = () => {
                 <PanelRow>
                     <ToggleControl
                         label="Enable Sticky Header"
-                        checked={settings.stickyGlobalHeader}
-                        onChange={(value) => updateSetting('stickyGlobalHeader', value)}
+                        checked={settings.stickyHeader}
+                        onChange={(value) => updateGlobalSetting('stickyHeader', value)}
                     />
 
                 </PanelRow>
@@ -158,8 +190,8 @@ const FrontisThemeSiteEditor = () => {
                     <>
                         <RangeControl
                             label="Header Offset (Rem)"
-                            value={settings.stickyGlobalHeaderOffset}
-                            onChange={(value) => updateSetting('stickyGlobalHeaderOffset', value)}
+                            value={settings.stickyHeaderOffset}
+                            onChange={(value) => updateGlobalSetting('stickyHeaderOffset', value)}
                             min={0}
                             max={100}
                         />
@@ -192,12 +224,12 @@ const FrontisThemeSiteEditor = () => {
                                     renderContent={() => (
                                         // <ColorPicker
                                         //     color={settings.stickyHeaderColor || '#000000'}
-                                        //     onChangeComplete={(color) => updateSetting('stickyHeaderColor', color.hex)}
+                                        //     onChangeComplete={(color) => updateGlobalSetting('stickyHeaderColor', color.hex)}
                                         // />
                                         <ColorPalette
                                             colors={themeColors}
-                                            value={settings.stickyGlobalHeaderColor}
-                                            onChange={(value) => updateSetting('stickyGlobalHeaderColor', value)}
+                                            value={settings.stickyHeaderColor}
+                                            onChange={(value) => updateGlobalSetting('stickyHeaderColor', value)}
                                         />
                                     )}
                                 />
@@ -209,8 +241,8 @@ const FrontisThemeSiteEditor = () => {
                 <PanelRow>
                     <ToggleControl
                         label="Enable Transparent Header"
-                        checked={settings.transparentGlobalHeader}
-                        onChange={(value) => updateSetting('transparentGlobalHeader', value)}
+                        checked={settings.transparentHeader}
+                        onChange={(value) => updateGlobalSetting('transparentHeader', value)}
                     />
                 </PanelRow>
                 {settings.transparentGlobalHeader && (
@@ -243,8 +275,8 @@ const FrontisThemeSiteEditor = () => {
                                 renderContent={() => (
                                     <ColorPalette
                                         colors={themeColors}
-                                        value={settings.transparentGlobalHeaderColor}
-                                        onChange={(value) => updateSetting('transparentGlobalHeaderColor', value)}
+                                        value={settings.transparentHeaderColor}
+                                        onChange={(value) => updateGlobalSetting('transparentHeaderColor', value)}
                                     />
                                 )}
                             />
@@ -256,16 +288,16 @@ const FrontisThemeSiteEditor = () => {
             <PanelBody title="Disable Elements">
                 <PanelRow>
                     <ToggleControl
-                        label="Disable Header"
-                        checked={settings.disableGlobalHeader}
-                        onChange={(value) => updateSetting('disableGlobalHeader', value)}
+                        label={settings.disableHeader ? 'Disable Header' : 'Enable Header'}
+                        checked={settings.disableHeader}
+                        onChange={(value) => updateGlobalSetting('disableHeader', value)}
                     />
                 </PanelRow>
                 <PanelRow>
                     <ToggleControl
-                        label="Disable Footer"
-                        checked={settings.disableGlobalFooter}
-                        onChange={(value) => updateSetting('disableGlobalFooter', value)}
+                        label={settings.disableFooter ? 'Disable Footer' : 'Enable Footer'}
+                        checked={settings.disableFooter}
+                        onChange={(value) => updateGlobalSetting('disableFooter', value)}
                     />
                 </PanelRow>
 
@@ -275,22 +307,22 @@ const FrontisThemeSiteEditor = () => {
                     <PanelRow>
                         <ToggleControl
                             label="Scroll To Top"
-                            checked={settings.scrollGlobalToTop}
-                            onChange={(value) => updateSetting('scrollGlobalToTop', value)}
+                            checked={settings.scrollToTop}
+                            onChange={(value) => updateGlobalSetting('scrollToTop', value)}
                         />
                     </PanelRow>
                     <PanelRow>
                         <ToggleControl
                             label="Enable Smooth Scroll"
-                            checked={settings.smoothGlobalScroll}
-                            onChange={(value) => updateSetting('smoothGlobalScroll', value)}
+                            checked={settings.smoothScroll}
+                            onChange={(value) => updateGlobalSetting('smoothScroll', value)}
                         />
                     </PanelRow>
                     <PanelRow>
                         <ToggleControl
                             label="Enable Lazy Loading"
-                            checked={settings.lazyGlobalLoading}
-                            onChange={(value) => updateSetting('lazyGlobalLoading', value)}
+                            checked={settings.lazyLoading}
+                            onChange={(value) => updateGlobalSetting('lazyLoading', value)}
                         />
                     </PanelRow>
                 </PanelBody>
