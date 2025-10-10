@@ -19,13 +19,12 @@ import { loadGoogleFont, useAfterSave } from "../helper";
 import { updateGlobalStyle } from "../fetch";
 import FrontPreview from "./FontPreview";
 import generateCSSVariables from "./GenerateRootCss";
+import FontFamiliesUploader from "./FontFamiliesUploader";
 
 const TypographySettings = (props) => {
 	const [typography, setTypography] = useState(props.typography);
 	const [customTypography, setCustomTypography] = useState(props.customTypography);
 	const [selectedHeading, setSelectedHeading] = useState('all');
-	const [isSaving, setIsSaving] = useState(false);
-	const [generateHeadingCss, setGenerateHeadingCss] = useState();
 	const [isMount, setIsMount] = useState(false);
 	const [fontFamilies, setFontFamilies] = useState([]);
 	const [globalTypography, setGlobalTypography] = useState(typography);
@@ -1043,6 +1042,9 @@ const TypographySettings = (props) => {
 		<>
 			<div className="fb-typography-panel">
 				{/* Typography Elements Section */}
+				{/* <div className="fb-font-families-uploader" style={{marginBottom: '30px'}}>
+					<FontFamiliesUploader />
+				</div> */}
 				<div className="fb-panel-section">
 					<h3 className="fb-panel-heading">Element</h3>
 					<div className={'fb-global-typo-elements'}>

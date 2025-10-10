@@ -186,6 +186,105 @@ class Helper
 		return false;
     }
 
+
+	/**
+	 * Get WooCommerce Template.
+	 *
+	 * @since 2.9.1
+	 * @return bool|string The WooCommerce template if found, or false if not found.
+	 */
+	public static function get_woocommerce_template() {
+		// Check if WooCommerce is active.
+		if ( class_exists( 'WooCommerce' ) ) {
+			$is_order_received_page            = function_exists( 'is_order_received_page' ) && is_order_received_page();
+			$is_checkout                       = function_exists( 'is_checkout' ) && is_checkout();
+			$is_wc_order_received_endpoint_url = function_exists( 'is_wc_endpoint_url' ) && is_wc_endpoint_url( 'order-received' );
+			// Check other WooCommerce pages.
+			switch ( true ) {
+				// Check if the current page is the shop page.
+				case is_cart():
+					return 'page-cart';
+
+				// Check if the current page is the checkout page.
+				case $is_checkout:
+					// Check if the current page is the order received page.
+					if ( $is_order_received_page ) {
+						return 'order-confirmation';
+					}
+					return 'page-checkout';
+
+				// Check if the current page is the order received page.
+				case $is_wc_order_received_endpoint_url:
+					return 'order-confirmation';
+
+				// Check if the current page is a product page.
+				case is_product():
+					// Retrieve the queried object.
+					$object = get_queried_object();
+					// Get all block templates.
+					$template_types = get_block_templates();
+					// Extract the 'slug' column from the block templates array.
+					$template_type_slug = array_column( $template_types, 'slug' );
+
+                    // var_dump($object instanceof WP_Post && in_array( 'single-product-' . $object->post_name, $template_type_slug ));
+					// Check specific single product template exist or not. If not then use default single product template. 
+					return ( in_array( 'single-product-' . $object->post_name, $template_type_slug ) ) ? 'single-product-' . $object->post_name : 'single-product';
+
+				// Check if the current page is an archive page.
+				case is_archive():
+					// Retrieve the queried object.
+					$object = get_queried_object();
+
+					// Get all block templates.
+					$template_types = get_block_templates();
+
+					// Extract the 'slug' column from the block templates array.
+					$template_type_slug = array_column( $template_types, 'slug' );
+
+					// Check if the current request is a search and if the post type archive is for 'product'.
+					$searchCondition = is_search() && is_post_type_archive( 'product' );
+
+					// Switch statement to determine the template based on various conditions.
+					switch ( true ) {
+						// Case when the current page is a product taxonomy and the taxonomy is 'product_tag'.
+						case ( is_product_taxonomy() && is_tax( 'product_tag' ) ) && $object instanceof WP_Term && ! in_array( 'taxonomy-' . $object->taxonomy . '-' . $object->slug, $template_type_slug ):
+							// Return the appropriate template based on the search condition.
+							return $searchCondition ? 'product-search-results' : 'archive-product';
+
+						// Case when the current page is a product taxonomy and the object is a term.
+						case is_product_taxonomy() && $object instanceof WP_Term:
+							// Check if the taxonomy is a product attribute.
+							if ( taxonomy_is_product_attribute( $object->taxonomy ) ) {
+								// Return the 'product-search-results' or 'taxonomy-product_attribute' template based on the search condition.
+								return $searchCondition ? 'product-search-results' : 'taxonomy-product_attribute';
+							} elseif ( ( is_tax( 'product_cat' ) || is_tax( 'product_tag' ) ) && in_array( 'taxonomy-' . $object->taxonomy . '-' . $object->slug, $template_type_slug ) ) {
+								// Return the specific taxonomy template based on the search condition.
+								return $searchCondition ? 'product-search-results' : 'taxonomy-' . $object->taxonomy . '-' . $object->slug;
+							} else {
+								// Return the appropriate template based on the search condition.
+								return $searchCondition ? 'product-search-results' : 'archive-product';
+							}
+							break;
+
+						// Case when the current page is the shop page.
+						case is_shop():
+							// Return the appropriate template based on the search condition.
+							return $searchCondition ? 'product-search-results' : 'archive-product';
+
+						default:
+							// Return the appropriate template based on the search condition and the type of the queried object.
+							return $searchCondition ? 'product-search-results' : ( ( $object instanceof WP_Post || $object instanceof WP_Post_Type || $object instanceof WP_Term || $object instanceof WP_User ) ? self::get_archive_page_template( $object, $template_type_slug ) : 'archive-product' );
+					}
+					break;
+
+				default:
+					// Handle other cases if needed.
+					break;
+			}
+		}
+		return false;
+	}
+
     /**
 	 * Determine template post type function.
 	 *
@@ -194,6 +293,12 @@ class Helper
 	 * @return string The determined post type.
 	 */
 	public static function determine_template_post_type( $post_id ) {
+
+        $get_woocommerce_template = self::get_woocommerce_template(); // Get WooCommerce template.
+
+		if ( is_string( $get_woocommerce_template ) ) { // Check if WooCommerce template is found.
+			return $get_woocommerce_template; // WooCommerce templates to post type.
+		}
 
 		// Check if post id is passed.
 		if ( ! empty( $post_id ) ) {
