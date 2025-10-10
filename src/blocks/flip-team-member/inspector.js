@@ -420,8 +420,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberGlobalWraperClass,
 	} = attributes;
 
-	console.log(teamMemberNameGlobalTypoType);
-
 	const deviceType= useDeviceType();
 
 	// Set blockID if it doesn't exist
