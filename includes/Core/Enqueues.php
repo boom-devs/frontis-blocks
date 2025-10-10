@@ -33,11 +33,14 @@ class Enqueues {
 
     public function get_page_template_name(){
         $template_name = Helper::determine_template_post_type(get_the_ID());
+        // var_dump($template_name);
         $template_id = Helper::get_post_id_by_slug($template_name, 'wp_template');
         $frontis_critical_css_generation_template = get_post_meta($template_id, 'generate_critical_css', true);
         $frontis_critical_css_generation_page = get_post_meta(get_the_ID(), 'generate_critical_css', true);
         $this->critical_css_page = $frontis_critical_css_generation_page;
         $this->critical_css_template = $frontis_critical_css_generation_template;
+
+        // var_dump($template_name);
 
         return $template_name;
     }
@@ -144,7 +147,7 @@ class Enqueues {
          // Enqueue JS in footer with defer
         if (file_exists($file_system_path_page_js)) {
             $version = filemtime($file_system_path_page_js);
-            wp_enqueue_script('frontis-blocks-frontend', $file_url_page_js, [], $version, true);
+            wp_enqueue_script('frontis-blocks-frontend', $file_url_page_js, ['jquery'], $version, true);
             add_filter('script_loader_tag', function($tag, $handle) {
                 if ($handle === 'frontis-blocks-frontend') {
                     return str_replace(' src', ' defer src', $tag);
