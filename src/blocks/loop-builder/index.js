@@ -12,7 +12,11 @@ import metadata from './block.json';
 import FB_Block_Icons from "@Config/fb-blocks-icons";
 
 registerBlockType( metadata.name, {
-	attributes,
+	...metadata,
+	attributes: {
+		...metadata.attributes,
+		...attributes,
+	},
 	edit: Edit,
 	save,
 	icon: FB_Block_Icons.loop_builder
