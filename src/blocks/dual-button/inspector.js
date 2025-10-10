@@ -2050,7 +2050,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	const globalDesktopBorderWidth = `${dualButtonGlobalBorderDesktop?.top}${dualButtonGlobalBorderUnits?.Desktop} ${dualButtonGlobalBorderDesktop?.right}${dualButtonGlobalBorderUnits?.Desktop} ${dualButtonGlobalBorderDesktop?.bottom}${dualButtonGlobalBorderUnits?.Desktop} ${dualButtonGlobalBorderDesktop?.left}${dualButtonGlobalBorderUnits?.Desktop}`;
-	const globalTabletBorderWidth = `${dualButtonGlobalBorderTablet?.top}${dualButtonGlobalBorderUnits?.Tablet} ${dualButtonGlobalBorderTablet?.right}${dualButtonGlobalBorderUnits?.Tablet} ${dualButtonGlobalBorderTablet?.bottom}${dualButtonGlobalBorderUnits?.Tablet} ${dualButtonGlobalBorderTablet?.left}${dualButtonBorderUnits?.Tablet}`;
+	const globalTabletBorderWidth = `${dualButtonGlobalBorderTablet?.top}${dualButtonGlobalBorderUnits?.Tablet} ${dualButtonGlobalBorderTablet?.right}${dualButtonGlobalBorderUnits?.Tablet} ${dualButtonGlobalBorderTablet?.bottom}${dualButtonGlobalBorderUnits?.Tablet} ${dualButtonGlobalBorderTablet?.left}${dualButtonGlobalBorderUnits?.Tablet}`;
 	const globalMobileBorderWidth = `${dualButtonGlobalBorderMobile?.top}${dualButtonGlobalBorderUnits?.Mobile} ${dualButtonGlobalBorderMobile?.right}${dualButtonGlobalBorderUnits?.Mobile} ${dualButtonGlobalBorderMobile?.bottom}${dualButtonGlobalBorderUnits?.Mobile} ${dualButtonGlobalBorderMobile?.left}${dualButtonGlobalBorderUnits?.Mobile}`;
 	/** End Border */
 
