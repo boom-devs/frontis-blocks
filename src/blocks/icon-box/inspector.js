@@ -2413,7 +2413,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${buttonMobileBorderRadiusValue && iconBoxBtnMobileBorderradiusWidth?.top ? `border-radius: ${buttonMobileBorderRadiusValue};` : ''}
 			}
 		}
-		.fb-icon-box-wrapper.${blockID} .fb-icon-media-wrapper {
+		.fb-icon-box-wrapper.${blockID} .fb-icon-media-wrapper,
+		.fb-icon-box-wrapper.${blockID} .fb-icon-media-wrapper img {
 			${mediaBackgroundType === "gradient" ? `
 				background: ${mediaCustomGradientSwitcher && mediaCustomGradientInputValue ? mediaCustomGradientInputValue : mediaGradientColor };
 				`
@@ -2439,7 +2440,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 
-		.fb-icon-box-wrapper.${blockID}:hover .fb-icon-media-wrapper {
+		.fb-icon-box-wrapper.${blockID}:hover .fb-icon-media-wrapper,
+		.fb-icon-box-wrapper.${blockID}:hover .fb-icon-media-wrapper img {
 			${mediaHoverBackgroundType === "gradient" ? ` background: ${ mediaHoverCustomGradientSwitcher && mediaHoverCustomGradientInputValue ? mediaHoverCustomGradientInputValue : mediaHoverGradientColor
 			};
 			`: mediaHoverBackgroundImageUrl &&  mediaHoverBackgroundImageUrl !== "null" ? `
@@ -2454,7 +2456,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 
-		.fb-icon-box-wrapper.${blockID} .fb-icon-media-wrapper{
+		.fb-icon-box-wrapper.${blockID} .fb-icon-media-wrapper,
+		.fb-icon-box-wrapper.${blockID} .fb-icon-media-wrapper img {
 			${iconBoxPresetStyle === "preset-4" ? 
 				`
 				border-radius: 70% 30% 30% 70% / 60% 40% 60% 40%;
@@ -2462,7 +2465,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		}
 		@media only screen and (max-width: 1024px) {
-			.fb-icon-box-wrapper.${blockID} .fb-icon-media-wrapper {
+			.fb-icon-box-wrapper.${blockID} .fb-icon-media-wrapper,
+			.fb-icon-box-wrapper.${blockID} .fb-icon-media-wrapper img {
 				${mediaTabletPadding && mediaPaddingTablet?.top ? `padding: ${mediaTabletPadding};` : ''}
 				${mediaTabletMargin && mediaMarginTablet?.top ? `margin: ${mediaTabletMargin};` : ''}
 				${mediaBorderTabletWidth && mediaBorderTablet?.top ? `border-width: ${mediaBorderTabletWidth};` : ''}
@@ -2473,7 +2477,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		@media only screen and (max-width: 767px) {
-			.fb-icon-box-wrapper.${blockID} .fb-icon-media-wrapper {
+			.fb-icon-box-wrapper.${blockID} .fb-icon-media-wrapper,
+			.fb-icon-box-wrapper.${blockID} .fb-icon-media-wrapper img {
 				${mediaMobilePadding && mediaPaddingMobile?.top ? `padding: ${mediaMobilePadding};` : ''}
 				${mediaMobileMargin && mediaMarginMobile?.top ? `margin: ${mediaMobileMargin};` : ''}
 				${mediaBorderMobileWidth && mediaBorderMobile?.top ? `border-width: ${mediaBorderMobileWidth};` : ''}
