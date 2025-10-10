@@ -225,8 +225,10 @@ class Helper
 					$template_types = get_block_templates();
 					// Extract the 'slug' column from the block templates array.
 					$template_type_slug = array_column( $template_types, 'slug' );
+
+                    // var_dump($object instanceof WP_Post && in_array( 'single-product-' . $object->post_name, $template_type_slug ));
 					// Check specific single product template exist or not. If not then use default single product template. 
-					return ( $object instanceof WP_Post && in_array( 'single-product-' . $object->post_name, $template_type_slug ) ) ? 'single-product-' . $object->post_name : 'single-product';
+					return ( in_array( 'single-product-' . $object->post_name, $template_type_slug ) ) ? 'single-product-' . $object->post_name : 'single-product';
 
 				// Check if the current page is an archive page.
 				case is_archive():
@@ -293,6 +295,7 @@ class Helper
 	public static function determine_template_post_type( $post_id ) {
 
         $get_woocommerce_template = self::get_woocommerce_template(); // Get WooCommerce template.
+
 		if ( is_string( $get_woocommerce_template ) ) { // Check if WooCommerce template is found.
 			return $get_woocommerce_template; // WooCommerce templates to post type.
 		}

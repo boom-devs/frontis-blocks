@@ -33,11 +33,14 @@ class Enqueues {
 
     public function get_page_template_name(){
         $template_name = Helper::determine_template_post_type(get_the_ID());
+        // var_dump($template_name);
         $template_id = Helper::get_post_id_by_slug($template_name, 'wp_template');
         $frontis_critical_css_generation_template = get_post_meta($template_id, 'generate_critical_css', true);
         $frontis_critical_css_generation_page = get_post_meta(get_the_ID(), 'generate_critical_css', true);
         $this->critical_css_page = $frontis_critical_css_generation_page;
         $this->critical_css_template = $frontis_critical_css_generation_template;
+
+        // var_dump($template_name);
 
         return $template_name;
     }
