@@ -37,19 +37,19 @@ function mapFontsWithSource( fonts, source ) {
 }
 
 function FontFamiliesUploader() {
+	const installed_fonts = frontisBlocksAdmin?.installed_fonts;
 	const { baseCustomFonts, modalTabOpen, setModalTabOpen } =
 		useContext( FontLibraryContext );
-	const fontFamilies = {};
-	const baseFontFamilies = {};
-	const themeFonts = mapFontsWithSource( fontFamilies?.theme, 'theme' );
-	const customFonts = mapFontsWithSource( fontFamilies?.custom, 'custom' );
+	const themeFonts = mapFontsWithSource( installed_fonts?.theme, 'theme' );
+	const customFonts = mapFontsWithSource( installed_fonts?.custom, 'custom' );
 	const activeFonts = [ ...themeFonts, ...customFonts ].sort( ( a, b ) =>
 		a.name.localeCompare( b.name )
 	);
+
 	const hasFonts = 0 < activeFonts.length;
 	const hasInstalledFonts =
 		hasFonts ||
-		baseFontFamilies?.theme?.length > 0 ||
+		installed_fonts?.theme?.length > 0 ||
 		baseCustomFonts?.length > 0;
 
 	return (

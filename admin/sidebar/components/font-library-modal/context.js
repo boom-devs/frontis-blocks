@@ -2,7 +2,6 @@
  * WordPress dependencies
  */
 import { createContext, useState, useEffect } from '@wordpress/element';
-import { privateApis as blockEditorPrivateApis } from '@wordpress/block-editor';
 import { useSelect, useDispatch } from '@wordpress/data';
 import {
 	useEntityRecord,
@@ -76,7 +75,7 @@ function FontLibraryProvider( { children } ) {
 			};
 		} ) || [];
 
-	const [fontFamilies, setFontFamilies] = useState();
+	const [fontFamilies, setFontFamilies] = useState(frontisBlocksAdmin?.installed_fonts);
 
 	/*
 	 * Save the font families to the database.
