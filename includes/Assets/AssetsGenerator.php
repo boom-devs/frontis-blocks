@@ -88,6 +88,7 @@ class AssetsGenerator
 			update_post_meta($post_id, 'fb_page_assets_generation', 'compiled');
 		}
 
+		// var_dump(Helper::check_url_has_fse_template() || get_post_type($post_id) === 'wp_template');
 		// Queue only for specific conditions
 		if (Helper::check_url_has_fse_template() || get_post_type($post_id) === 'wp_template') {
 			global $wpdb;
@@ -189,10 +190,10 @@ class AssetsGenerator
 					}
 				}
 			}
-	
+
 			return $template_contents;
 		}
-		
+
 		return $this->post->post_content;
 	}
 
