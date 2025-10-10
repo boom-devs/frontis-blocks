@@ -49,11 +49,10 @@ function InstalledFonts() {
 		getFontFacesActivated,
 	} = useContext( FontLibraryContext );
 
-	const [ fontFamilies, setFontFamilies ] = useState({});
-	
+	const [ fontFamilies, setFontFamilies ] = useState(frontisBlocksAdmin?.installed_fonts);
 	const [ isConfirmDeleteOpen, setIsConfirmDeleteOpen ] = useState( false );
 	const [ notice, setNotice ] = useState( false );
-	const [ baseFontFamilies ] = useState({});
+	const baseFontFamilies = frontisBlocksAdmin?.installed_fonts;
 	const globalStylesId = useSelect( ( select ) => {
 		const { __experimentalGetCurrentGlobalStylesId } = select( coreStore );
 		return __experimentalGetCurrentGlobalStylesId();
@@ -64,11 +63,13 @@ function InstalledFonts() {
 		globalStylesId
 	);
 
+	console.log("globalStyles?.edits")
+	console.log(globalStyles?.edits)
+	console.log("globalStyles?.edits?.settings?.typography?.fontFamilies")
+	console.log(globalStyles?.edits?.settings?.typography?.fontFamilies)
+
 	const fontFamiliesHasChanges =
 		!! globalStyles?.edits?.settings?.typography?.fontFamilies;
-
-	console.log("fontFamiliesHasChanges")
-	console.log(fontFamiliesHasChanges);
 
 	const themeFonts = fontFamilies?.theme
 		? fontFamilies.theme
@@ -193,6 +194,7 @@ function InstalledFonts() {
 			fontFamilies?.[ libraryFontSelected.source ]?.filter(
 				( f ) => f.slug !== libraryFontSelected.slug
 			) ?? [];
+
 		const newFonts = isSelectAllChecked
 			? initialFonts
 			: [ ...initialFonts, libraryFontSelected ];
@@ -216,6 +218,10 @@ function InstalledFonts() {
 			} );
 		}
 	};
+
+	console.log("! fontFamiliesHasChanges")
+	console.log(! fontFamiliesHasChanges)
+	console.log(fontFamiliesHasChanges)
 
 	const hasFonts = baseThemeFonts.length > 0 || baseCustomFonts.length > 0;
 	return (

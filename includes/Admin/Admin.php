@@ -179,27 +179,6 @@ class Admin {
             $font_families = array_merge($font_families, $custom_fonts);
         }
 
-        // var_dump($font_families);
-
-        // $installed_fonts_families = array(
-        //     'theme'  => array(),  // Custom fonts with fontFace definitions.
-        //     'system' => array(),  // System fonts (no fontFace).
-        // );
-
-        // // Categorize font families.
-        // foreach ($font_families as $font_family) {
-        //     $type = isset($font_family['fontFace']) && !empty($font_family['fontFace']) ? 'theme' : 'system';
-            
-        //     $installed_fonts_families[$type][] = array(
-        //         'fontFamily' => $font_family['fontFamily'] ?? '',  // CSS font-family stack.
-        //         'slug'       => $font_family['slug'] ?? '',        // Unique slug for CSS variables.
-        //         'name'       => $font_family['name'] ?? '',        // Human-readable name.
-        //         'fontFace'   => $font_family['fontFace'] ?? null,  // Font face definitions (if any).
-        //     );
-        // }
-
-        // var_dump($installed_fonts_families);
-
         $automatic_block_recovery = get_option('fb_automatic_block_recovery');
         $enable_quick_action_bar = get_option('fb_enable_quick_action_bar'); 
 
@@ -208,8 +187,6 @@ class Admin {
 
         $automatic_block_recovery = trim($automatic_block_recovery, '"');
         $enable_quick_action_bar = trim($enable_quick_action_bar, '"');
-
-        // var_dump($theme_json);
 
 		if ($theme_json && isset($theme_json['color'])) {
 			if(isset($theme_json['color']['palette'])) {
@@ -261,6 +238,7 @@ class Admin {
 			'gradients_colors' => $gradient_colors,
             'home_url' => home_url(),
 			'google_fonts' => $google_fonts,
+            'installed_fonts' => $font_families,
             'siteName' => get_bloginfo('name'),
             'siteTagline' => get_bloginfo('description'),
             'siteLogo' => get_theme_mod('custom_logo'),

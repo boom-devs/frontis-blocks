@@ -19,7 +19,6 @@ import FrontisThemeSiteEditor from "./theme-settings/site-editor";
 import { addFilter } from '@wordpress/hooks';
 import { InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl } from '@wordpress/components';
-import FontFamiliesUploader from "./components/FontFamiliesUploader";
 import "./sidebar.scss";
 
 // Default color and gradient configurations
@@ -501,11 +500,6 @@ function FrontisBlocksSidebar() {
 	decodeURIComponent(pValue) === '/' &&
 	canvas === 'edit';
 
-	// console.log("isSiteEditor isSiteEditor")
-	// console.log(isSiteEditor)
-	// console.log("isPagePost")
-	// console.log(isPagePost)
-
 	return (
 		<>
 			<div className="fb_plugin_sidebar">
@@ -515,7 +509,6 @@ function FrontisBlocksSidebar() {
 					className="fb-global-controls"
 				>
 					<div className="fb-panel-control">
-						<FontFamiliesUploader />
 						<NavigatorProvider initialPath="/">
 							<NavigatorScreen path="/">
 								<div className="fb-blocks-tabs">
@@ -579,6 +572,7 @@ function FrontisBlocksSidebar() {
 											</svg>
 										</span>
 									</NavigatorButton>
+									
 									<div className="fb-global-header-inner">
 										<h3>{__("Typography", "frontis-blocks")}</h3>
 										<p>
@@ -589,6 +583,7 @@ function FrontisBlocksSidebar() {
 										</p>
 									</div>
 								</div>
+								
 								<TypographySettings
 									typography={typography}
 									customTypography={customTypography}
@@ -688,7 +683,7 @@ function FrontisBlocksSidebar() {
 							</NavigatorScreen>
 						</NavigatorProvider>
 
-						<div className="fb-theme-settings-wrapper">
+						{/* <div className="fb-theme-settings-wrapper">
 							{onlyCanvasEditor &&
 								<FrontisThemeSiteEditor />
 							}
@@ -696,7 +691,7 @@ function FrontisBlocksSidebar() {
 							{(isPagePost || isSiteEditor) &&
 								<FrontisMetaBox whichEditor={isPagePost ? 'post' : 'template'} />
 							}
-						</div>
+						</div> */}
 					</div>
 				</PluginSidebar>
 			</div>

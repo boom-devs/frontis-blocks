@@ -5,7 +5,6 @@ import { useState, useCallback, useEffect } from "@wordpress/element";
 import { ClipLoader } from "react-spinners";
 import TemplateHeader from "./template-header";
 import FullSiteImport from "./full-site-import";
-import { category } from "@wordpress/icons";
 import { ToastContainer } from "react-toastify";
 
 const TemplateImport = ({ 
@@ -19,26 +18,19 @@ const TemplateImport = ({
     const [isImporting, setIsImporting] = useState(false);
     const [activeTab, setActiveTab] = useState(template.activeTab || 'pattern');
     const [showFullSiteImport, setShowFullSiteImport] = useState(false);
-
     const userData = JSON.parse(localStorage.getItem("userData"));
     
-
     const handleFullSiteImport = useCallback(async () => {
         setShowFullSiteImport(true);
     }, []);
 
     const handleLiveDemo = useCallback(() => {
-        console.log('Live demo clicked for:', template?.id);
         window.open('#', '_blank');
     }, [template?.id]);
 
     const handleDownload = useCallback(() => {
         console.log('Download clicked for:', template?.id);
     }, [template?.id]);
-
-    // const handleFullSiteImportClose = useCallback(() => {
-    //     setShowFullSiteImport(false);
-    // }, []);
 
     if (!template) {
         return null;
@@ -151,18 +143,19 @@ const TemplateImport = ({
                             </svg>
                             <span><span className="blue-color">Learn more</span> about full site import</span>
                         </div>
-
-                        <div className="fb-template-dependency">
-                            <h5 className="fb-dependency-label">Dependencies</h5>
-                            <ul className="fb-dependency-list">
-                                {template.dependencies?.map((item) => (
-                                    <li className="fb-dependency-item" key={item.name}>
-                                        <span className="fb-dependency-name">{item.name}</span>
-                                        <span className="fb-dependency-version"><span className="fb-dependency-version-label">Version:</span> {item.version}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                        {template.dependencies.length > 0 &&
+                            <div className="fb-template-dependency">
+                                <h5 className="fb-dependency-label">Dependencies</h5>
+                                <ul className="fb-dependency-list">
+                                    {template.dependencies?.map((item) => (
+                                        <li className="fb-dependency-item" key={item.name}>
+                                            <span className="fb-dependency-name">{item.name}</span>
+                                            <span className="fb-dependency-version"><span className="fb-dependency-version-label">Version:</span> {item.version}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

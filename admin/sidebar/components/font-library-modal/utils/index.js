@@ -146,20 +146,11 @@ export function unloadFontFaceInBrowser( fontFace, removeFrom = 'all' ) {
 		} );
 	};
 
-	console.log("removeFrom")
-	console.log(removeFrom)
-
 	if ( removeFrom === 'document' || removeFrom === 'all' ) {
 		unloadFontFace( document.fonts );
 	}
 
 	if ( removeFrom === 'iframe' || removeFrom === 'all' ) {
-		// const iframeDocument = document.querySelector(
-		// 	'iframe[name="editor-canvas"]'
-		// ).contentDocument;
-		// unloadFontFace( iframeDocument.fonts );
-
-
 		const iframe = document.querySelector('iframe[name="editor-canvas"]');
 		if (iframe && iframe.contentDocument) {
 			unloadFontFace(iframe.contentDocument.fonts);

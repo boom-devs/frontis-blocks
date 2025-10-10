@@ -4,8 +4,7 @@
 import { __, _x } from '@wordpress/i18n';
 import {
 	Modal,
-	TabPanel,
-	privateApis as componentsPrivateApis,
+	TabPanel
 } from '@wordpress/components';
 import { store as coreStore } from '@wordpress/core-data';
 import { useSelect } from '@wordpress/data';
