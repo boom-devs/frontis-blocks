@@ -75,7 +75,7 @@ class TemplateLibrary extends AjaxBase {
         $this->check_permission();
     
         $title   = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content = isset($_POST['content']) ? wp_unslash($_POST['content']) : '';
+        $content = isset($_POST['content']) ? $_POST['content'] : '';
     
         if (empty($title)) {
             wp_send_json_error(['message' => 'Title is required']);
@@ -109,42 +109,42 @@ class TemplateLibrary extends AjaxBase {
             $count++;
         }
 
-        foreach ($all_img_srcs as $img_src) {
-            $response = wp_remote_get($img_src);
-            if (is_wp_error($response)) {
-                continue;
-            }
+        // foreach ($all_img_srcs as $img_src) {
+        //     $response = wp_remote_get($img_src);
+        //     if (is_wp_error($response)) {
+        //         continue;
+        //     }
 
-            $body     = wp_remote_retrieve_body($response);
-            $filename = basename($img_src);
+        //     $body     = wp_remote_retrieve_body($response);
+        //     $filename = basename($img_src);
 
-            // Use WordPress functions to handle file uploads
-            $upload = wp_upload_bits($filename, null, $body);
+        //     // Use WordPress functions to handle file uploads
+        //     $upload = wp_upload_bits($filename, null, $body);
 
-            if ($upload['error'] || !file_exists($upload['file'])) {
-                continue;
-            }
+        //     if ($upload['error'] || !file_exists($upload['file'])) {
+        //         continue;
+        //     }
 
-            // Add image to media library
-            $wp_filetype = wp_check_filetype($filename, null);
-            $attachment  = [
-                'post_mime_type' => $wp_filetype['type'],
-                'post_title'     => sanitize_file_name($filename),
-                'post_content'   => '',
-                'post_status'    => 'inherit',
-            ];
-            $attach_id = wp_insert_attachment($attachment, $upload['file']);
+        //     // Add image to media library
+        //     $wp_filetype = wp_check_filetype($filename, null);
+        //     $attachment  = [
+        //         'post_mime_type' => $wp_filetype['type'],
+        //         'post_title'     => sanitize_file_name($filename),
+        //         'post_content'   => '',
+        //         'post_status'    => 'inherit',
+        //     ];
+        //     $attach_id = wp_insert_attachment($attachment, $upload['file']);
 
-            // Require the needed file
-            require_once(ABSPATH . 'wp-admin/includes/image.php');
-            $attached_data = wp_generate_attachment_metadata($attach_id, $upload['file']);
+        //     // Require the needed file
+        //     require_once(ABSPATH . 'wp-admin/includes/image.php');
+        //     $attached_data = wp_generate_attachment_metadata($attach_id, $upload['file']);
 
-            // Update the attachment metadata
-            wp_update_attachment_metadata($attach_id, $attached_data);
+        //     // Update the attachment metadata
+        //     wp_update_attachment_metadata($attach_id, $attached_data);
 
-            // Replace the image URL in the content
-            $content = str_replace($img_src, $upload['url'], $content);
-        }
+        //     // Replace the image URL in the content
+        //     $content = str_replace($img_src, $upload['url'], $content);
+        // }
     
         $page_id = wp_insert_post([
             'post_title'   => $title,
@@ -154,6 +154,9 @@ class TemplateLibrary extends AjaxBase {
         ]);
     
         if ($page_id) {
+            // Insert job using your existing Helper method
+            Helper::insert_job($page_id, $title . $page_id);
+
             wp_send_json_success([
                 'message' => 'Page created successfully',
                 'page_id' => $page_id,

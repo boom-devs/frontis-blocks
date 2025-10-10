@@ -48,7 +48,6 @@ class Enqueues {
         // Enqueue assets
         $page_compiling_mode = get_post_meta(get_the_ID(), 'fb_page_assets_generation', true);
 
-        // var_dump($page_compiling_mode);
         if($page_compiling_mode === 'compiling') {
             global $wpdb;
             $upload_directory = WP_CONTENT_DIR . '/uploads/frontis-blocks/';
@@ -145,7 +144,7 @@ class Enqueues {
          // Enqueue JS in footer with defer
         if (file_exists($file_system_path_page_js)) {
             $version = filemtime($file_system_path_page_js);
-            wp_enqueue_script('frontis-blocks-frontend', $file_url_page_js, array( 'jquery'), $version, true);
+            wp_enqueue_script('frontis-blocks-frontend', $file_url_page_js, [], $version, true);
             add_filter('script_loader_tag', function($tag, $handle) {
                 if ($handle === 'frontis-blocks-frontend') {
                     return str_replace(' src', ' defer src', $tag);
@@ -179,7 +178,7 @@ class Enqueues {
             echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
             echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
             echo '<link rel="preload" as="style" href="' . $google_font_url . '" onload="this.onload=null;this.rel=\'stylesheet\'">';
-            echo '<noscript><link rel="stylesheet" href="' . $google_font_url . '"></noscript>';
+            // echo '<noscript><link rel="stylesheet" href="' . $google_font_url . '"></noscript>';
         }
 	}
 }
