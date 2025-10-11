@@ -1,16 +1,19 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
-import { useRef, useEffect, useState } from '@wordpress/element';
-import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import Inspector from "./inspector";
-import './editor.scss';
+import { useRef, useEffect } from '@wordpress/element';
+import { gsap } from 'gsap';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
-import {useDeviceType} from "@Config/displayType";
+import Inspector from "./inspector";
+import { useDeviceType } from "@Config/displayType";
+import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-    const { 
+    const {
         blockId,
         animationType,
+        startDuration,
+        endDuration,
+        animationTransition,
         animatedHeadingAlignment,
         animatedHeadingItems,
         animatedHeadingMainTag,
@@ -18,10 +21,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         animatedHeadingCursorSwitch,
         animatedHeadingCursor,
         animatedHeadingSuffix,
-
         animatedHeadingGlobalWraperID,
         animatedHeadingGlobalWraperClass,
-
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -30,218 +31,366 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     const deviceType = useDeviceType();
 
-    /**
-     * Manages tab button settings and switches to block settings on click
-     */
     const panelRef = useRef(null);
+    const typedTextRef = useRef(null);
+    const dynamicWrapperRef = useRef(null);
+
     SwitchToBlockSettings(panelRef);
 
-
-    const dynamicWrapperRef = useRef( null );
-
-    // Ref for the dynamic typed text span
-    const typedTextRef = useRef(null);
-
+   // Animation Effect
     useEffect(() => {
-        if (!animatedHeadingItems ||animatedHeadingItems.length === 0) {
-            return;
-        }
+        if (!animatedHeadingItems || animatedHeadingItems.length === 0) return;
 
+        // Cleanup / reset before rerun
+        let ctx = gsap.context(() => {});
+        let currentTimeline = gsap.timeline();
+        let isCancelled = false;
+
+        const texts = animatedHeadingItems.map(item => item.animatedHeadingTitle).filter(Boolean);
+        if (texts.length === 0) return;
+
+        // Utility: Split text into words or letters
+        const splitText = (el, type = "words") => {
+            const text = el.textContent;
+            el.textContent = "";
+            if (type === "words") {
+                text.split(" ").forEach(word => {
+                    const span = document.createElement("span");
+                    span.className = "word";
+                    span.textContent = word + " ";
+                    span.style.display = "inline-block";
+                    el.appendChild(span);
+                });
+            } else if (type === "letters") {
+                text.split("").forEach(char => {
+                    const span = document.createElement("span");
+                    span.className = "char";
+                    span.textContent = char;
+                    span.style.display = "inline-block";
+                    el.appendChild(span);
+                });
+            }
+        };
+
+        // ============================================
+        // Typing Animation
+        // ============================================
         if (animationType === "typing") {
+            const el = typedTextRef.current;
+            if (!el) return;
 
-            let currentItem = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            let timeoutId;
+            let index = 0;
 
-            function typeEffect() {
-                // Get the current text fromanimatedHeadingItems
-                const currentText =animatedHeadingItems[currentItem].animatedHeadingTitle;
-                // Determine the substring to display
-                const displayText = currentText.substring(0, charIndex);
-                if (typedTextRef.current) {
-                    typedTextRef.current.textContent = displayText;
-                }
-                // Typing phase
-                if (!isDeleting) {
-                    if (charIndex < currentText.length) {
-                        charIndex++;
-                        timeoutId = setTimeout(typeEffect, 100);
-                    } else {
-                        isDeleting = true;
-                        timeoutId = setTimeout(typeEffect, 1000); 
-                    }
-                } else {
-                    if (charIndex > 0) {
-                        charIndex--;
-                        timeoutId = setTimeout(typeEffect, 50); 
-                    } else {
-                        isDeleting = false;
-                        currentItem = (currentItem + 1) %animatedHeadingItems.length;
-                        timeoutId = setTimeout(typeEffect, 500);
-                    }
-                }
-            }
+            function typeText() {
+                if (isCancelled) return;
+                const currentText = texts[index];
+                const chars = currentText.split("");
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        // Wait before deleting
+                        gsap.delayedCall(1, () => {
+                            if (isCancelled) return;
 
-            typeEffect();
-            return () => clearTimeout(timeoutId);
-            
-        }else if (animationType === "swirl") {
-            const texts = animatedHeadingItems?.map(item => item.animatedHeadingTitle).filter(Boolean) || [];
-            if (texts.length === 0) return;
-    
-            let currentIndex = 0;
-            const container = document.getElementById('animated-heading-wrapper');
-    
-            // 🧹 Clean up previous children if any
-            if (container) {
-                container.innerHTML = "";
-            }
-    
-            function createWordSpan(text, isActive = false) {
-                const wrapper = document.createElement('span');
-                wrapper.className = 'fb-animated-heading-dynamic-text';
-                if (isActive) wrapper.classList.add('fb-animated-heading-text-active');
-    
-                text.split('').forEach((char) => {
-                    const letter = document.createElement('span');
-                    letter.className = 'fb-animated-heading-dynamic-letter';
-    
-                    if (char === ' ') {
-                        letter.innerHTML = '&nbsp;';
-                        letter.style.display = 'inline-block';
-                        letter.style.width = '0.4em';
-                    } else {
-                        letter.textContent = char;
+                            // Delete animation (RIGHT → LEFT)
+                            const deleteTl = gsap.timeline({
+                                onComplete: () => {
+                                    if (isCancelled) return;
+                                    index = (index + 1) % texts.length;
+                                    typeText();
+                                }
+                            });
+
+                            for (let i = chars.length; i > 0; i--) {
+                                deleteTl.to(el, {
+                                    textContent: currentText.substring(0, i - 1),
+                                    duration: startDuration,
+                                    ease: animationTransition
+                                });
+                            }
+
+                            currentTimeline.add(deleteTl);
+                        });
                     }
-    
-                    wrapper.appendChild(letter);
                 });
-    
-                return wrapper;
-            }
-    
-            function showNextWord() {
-                const oldWord = container.querySelector('.fb-animated-heading-text-active');
-                const newWord = createWordSpan(texts[currentIndex], true);
-                container.appendChild(newWord);
-    
-                const newLetters = newWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
 
-
-                const totalWidthSubPixel = Array.from(newLetters)
-                .reduce((sum, letter) => sum + letter.getBoundingClientRect().width, 0);
-
-                const swirlWrapper = document.querySelector('.fb-animated-heading-swirl-wrapper');
-
-                if (swirlWrapper) {
-                    swirlWrapper.style.width = `${totalWidthSubPixel}px`;
-                }
-
-                newLetters.forEach((l, i) => {
-                    setTimeout(() => {
-                        l.classList.add('fb-animated-heading-animation-in');
-                    }, i * 30);
-                });
-    
-                if (oldWord) {
-                    oldWord.classList.remove('fb-animated-heading-text-active');
-                    const oldLetters = oldWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
-                    oldLetters.forEach((l, i) => {
-                        setTimeout(() => {
-                            l.classList.add('fb-animated-heading-animation-out');
-                        }, i * 30);
+                // Typing (LEFT → RIGHT)
+                chars.forEach((_, i) => {
+                    tl.to(el, {
+                        textContent: currentText.substring(0, i + 1),
+                        duration: startDuration,
+                        ease: animationTransition
                     });
-    
-                    setTimeout(() => {
-                        oldWord.remove();
-                    }, oldLetters.length * 30 + 500);
-                }
-    
-                currentIndex = (currentIndex + 1) % texts.length;
-            }
-    
-            const firstWord = createWordSpan(texts[currentIndex], true);
-            console.log(firstWord);
-            if (container) {
-                container.appendChild(firstWord);
-                const firstLetters = firstWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
-            firstLetters.forEach((l, i) => {
-                setTimeout(() => {
-                    l.classList.add('fb-animated-heading-animation-in');
-                }, i * 30);
-            });
-    
-            currentIndex = (currentIndex + 1) % texts.length;
-            const intervalId = setInterval(showNextWord, 3000);
-    
-            // ✅ Return Cleanup
-            return () => {
-                clearInterval(intervalId);
-                if (container) {
-                    container.innerHTML = '';
-                }
-            };
-            }
-    
-            
+                });
 
+                currentTimeline.add(tl);
+            }
+
+            typeText();
         }
-    }, [animatedHeadingItems, animationType, animatedHeadingMainTag]);
 
-    const Tag =animatedHeadingMainTag ?animatedHeadingMainTag : "div";
+        // ============================================
+        // Swirl Animation
+        // ============================================
+        else if (animationType === "swirl") {
+            const wrapper = dynamicWrapperRef.current;
+            if (!wrapper) return;
+            wrapper.innerHTML = "";
+            let index = 0;
+
+            function createTextSpan(text) {
+                const span = document.createElement("span");
+                span.className = "fb-animated-heading-swirl-text";
+                span.style.display = "inline-block";
+                span.textContent = text;
+                return span;
+            }
+
+            function animateNextText() {
+                if (isCancelled) return;
+
+                const newText = createTextSpan(texts[index]);
+                wrapper.appendChild(newText);
+
+                const letters = newText.textContent.split("");
+                newText.textContent = "";
+                letters.forEach((char) => {
+                    const letter = document.createElement("span");
+                    letter.textContent = char;
+                    letter.style.display = "inline-block";
+                    letter.style.opacity = 0;
+                    newText.appendChild(letter);
+                });
+
+                const letterSpans = newText.querySelectorAll("span");
+
+                // Swirl In Animation
+                gsap.fromTo(letterSpans,
+                    { opacity: 0, y: 20, rotation: -90 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        rotation: 0,
+                        duration: startDuration * 12,
+                        stagger: startDuration,
+                        ease: animationTransition,
+                    }
+                );
+
+                // Swirl Out Animation
+                gsap.delayedCall(2.5, () => {
+                    if (isCancelled) return;
+                    gsap.to(letterSpans, {
+                        opacity: 0,
+                        y: -20,
+                        rotation: 90,
+                        duration: endDuration * 10,
+                        stagger: endDuration,
+                        ease: animationTransition,
+                        onComplete: () => {
+                            newText.remove();
+                            index = (index + 1) % texts.length;
+                            animateNextText();
+                        }
+                    });
+                });
+            }
+
+            animateNextText();
+        }
+
+        // ============================================
+        // Word / Letter Based Animations
+        // ============================================
+        else {
+            const wrapper = dynamicWrapperRef.current;
+            if (!wrapper) return;
+            wrapper.innerHTML = "";
+            let index = 0;
+
+            function animateNext() {
+                if (isCancelled) return;
+                const text = texts[index];
+                const el = document.createElement("span");
+                el.className = "fb-animated-heading-text";
+                el.textContent = text;
+                wrapper.appendChild(el);
+
+                let splitType = animationType.includes("letter") ? "letters" : "words";
+                splitText(el, splitType);
+
+                const words = el.querySelectorAll(".word");
+                const chars = el.querySelectorAll(".char");
+
+                const tl = gsap.timeline({
+                    onComplete: () => {
+                        gsap.delayedCall(1, () => {
+                            gsap.to(el, {
+                                opacity: 0,
+                                y: -30,
+                                duration: endDuration * 4,
+                                ease: animationTransition,
+                                onComplete: () => {
+                                    el.remove();
+                                    index = (index + 1) % texts.length;
+                                    animateNext();
+                                }
+                            });
+                        });
+                    }
+                });
+
+                switch (animationType) {
+                    case "words-slide-up":
+                        tl.from(words, {
+                            opacity: 0,
+                            yPercent: 100,
+                            duration: startDuration * 5,
+                            ease: animationTransition,
+                            stagger: startDuration,
+                        });
+                        break;
+
+                    case "words-rotate-in":
+                        tl.set(words, { transformPerspective: 1000 });
+                        tl.from(words, {
+                            rotationX: -90,
+                            duration: startDuration * 6,
+                            ease: animationTransition,
+                            stagger: startDuration,
+                        });
+                        break;
+
+                    case "words-slide-from-right":
+                        tl.from(words, {
+                            opacity: 0,
+                            x: "1em",
+                            duration: startDuration * 6,
+                            ease: animationTransition,
+                            stagger: startDuration,
+                        });
+                        break;
+
+                    case "letters-slide-up":
+                        tl.from(chars, {
+                            yPercent: 100,
+                            duration: startDuration * 3,
+                            ease: animationTransition,
+                            stagger: startDuration,
+                        });
+                        break;
+
+                    case "letters-slide-down":
+                        tl.from(chars, {
+                            yPercent: -120,
+                            duration: startDuration * 3,
+                            ease: animationTransition,
+                            stagger: startDuration,
+                        });
+                        break;
+
+                    case "letters-fade-in":
+                        tl.from(chars, {
+                            opacity: 0,
+                            duration: startDuration,
+                            ease: animationTransition,
+                            stagger: startDuration,
+                        });
+                        break;
+
+                    case "letters-fade-in-random":
+                        tl.from(chars, {
+                            opacity: 0,
+                            duration: startDuration / 2,
+                            ease: animationTransition,
+                            stagger: { amount: startDuration * 5, from: "random" },
+                        });
+                        break;
+
+                    case "scrub-each-word":
+                        tl.from(words, {
+                            opacity: 0.2,
+                            duration: startDuration,
+                            ease: animationTransition,
+                            stagger: { each: startDuration * 2 },
+                        });
+                        break;
+
+                    default:
+                        break;
+                }
+
+                currentTimeline.add(tl);
+            }
+
+            animateNext();
+        }
+
+        // Cleanup
+        return () => {
+            isCancelled = true;
+            ctx.revert();
+            if (currentTimeline) currentTimeline.kill();
+            gsap.globalTimeline.clear();
+        };
+    }, [
+        animatedHeadingItems.map(i => i.animatedHeadingTitle).join("|"),
+        animationType,
+        startDuration,
+        endDuration,
+        animationTransition
+    ]);
+
+
+    const Tag = animatedHeadingMainTag ? animatedHeadingMainTag : "div";
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
 
             <BlockControls>
                 <AlignmentToolbar
                     value={animatedHeadingAlignment[deviceType]}
-                    onChange={(value) => setAttributes({animatedHeadingAlignment: { ...animatedHeadingAlignment, [deviceType]: value } })}
-                    controls={['left', 'center', 'right']}
+                    onChange={(value) =>
+                        setAttributes({
+                            animatedHeadingAlignment: { ...animatedHeadingAlignment, [deviceType]: value },
+                        })
+                    }
+                    controls={["left", "center", "right"]}
                 />
             </BlockControls>
-            
+
             <div {...blockProps}>
-                <div className={`fb-animated-heading-container ${animatedHeadingGlobalWraperClass}`} id={animatedHeadingGlobalWraperID} ref={panelRef}>
+                <div
+                    className={`fb-animated-heading-container ${animatedHeadingGlobalWraperClass}`}
+                    id={animatedHeadingGlobalWraperID}
+                    ref={panelRef}
+                >
                     <Tag className={`fb-animated-heading-wrapper animated-type-${animationType}`}>
                         {animatedHeadingPrefix && (
                             <RichText
                                 tagName="span"
                                 className="fb-animated-heading-prefix"
                                 value={animatedHeadingPrefix}
-                                onChange={(value) => setAttributes({animatedHeadingPrefix: value })}
+                                onChange={(value) => setAttributes({ animatedHeadingPrefix: value })}
                             />
                         )}
 
                         {animationType === "typing" && (
                             <>
-                                {animatedHeadingItems &&animatedHeadingItems.length > 0 && (
-                                    <span className="fb-animated-headings" ref={typedTextRef}></span>
-                                )}
-                                {animatedHeadingCursorSwitch &&animatedHeadingCursor && (
-                                    <span className="fb-animated-heading-cursor">
-                                        {animatedHeadingCursor}
-                                    </span>
+                                <span className="fb-animated-headings" ref={typedTextRef}></span>
+                                {animatedHeadingCursorSwitch && animatedHeadingCursor && (
+                                    <span className="fb-animated-heading-cursor">{animatedHeadingCursor}</span>
                                 )}
                             </>
                         )}
-                        {animationType === "swirl" && (
+
+                        {animationType !== "typing" && (
                             <>
-                            {'\u00A0'}
-                            <span className="fb-animated-heading-swirl-wrapper">
-                                <span 
-                                    className="fb-animated-heading-dynamic-wrapper" 
-                                    id="animated-heading-wrapper" 
-                                    ref={dynamicWrapperRef}
-                                ></span>
-                            </span>
-                            {'\u00A0'}
+                                {'\u00A0'}
+                                <span className="fb-animated-headings">
+                                    <span className="fb-animated-heading-dynamic-wrapper" ref={dynamicWrapperRef}></span>
+                                </span>
+                                {'\u00A0'}
                             </>
                         )}
 
@@ -250,7 +399,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 tagName="span"
                                 className="fb-animated-heading-suffix"
                                 value={animatedHeadingSuffix}
-                                onChange={(value) => setAttributes({animatedHeadingSuffix: value })}
+                                onChange={(value) => setAttributes({ animatedHeadingSuffix: value })}
                             />
                         )}
                     </Tag>
