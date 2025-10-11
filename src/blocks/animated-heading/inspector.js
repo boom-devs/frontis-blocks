@@ -54,6 +54,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockId,
         blockStyle,
         animationType,
+        startDuration,
+        endDuration,
         animatedHeadingAlignment,
         animatedHeadingMainTag,
         animatedHeadingGap,
@@ -841,6 +843,38 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     options={ANIMATION_TYPE}
                     onChange={(value) => setAttributes({ animationType: value })}
                 />
+
+                <RangeControl
+                    label="Start Duration"
+                    value={startDuration}
+                    onChange={(value) => setAttributes({ startDuration: value })}
+                    min={0.01}
+                    max={5}
+                    step={0.01}
+                    resetFallbackValue={""}
+                />
+
+                <RangeControl
+                    label="End Duration"
+                    value={endDuration}
+                    onChange={(value) => setAttributes({ endDuration: value })}
+                    min={0.01}
+                    max={5}
+                    step={0.01}
+                    resetFallbackValue={""}
+                />
+                {/* <FB_Range
+                    min={0}
+                    max={10}
+                    label={__("End Duration", "frontis-blocks")}
+                    rangeValue={endDuration}
+                    onChangeHandler={(value) => setAttributes({endDuration: value === 0 ? undefined : value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={0.01}
+                    resetFallbackValue={""}
+                    isRangeUnit={false}
+                /> */}
 
                 <FB_ResponsiveAlignmentControl
                     label={__("Alignment", "frontis-blocks")}
