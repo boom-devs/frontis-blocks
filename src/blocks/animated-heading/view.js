@@ -1,153 +1,168 @@
-(function () {
-    function initAnimatedHeading() {
-        const containers = document.querySelectorAll('.fb-animated-heading-container');
+// view.js
+import { gsap } from 'gsap';
 
-        containers.forEach((container) => {
-            const animationType = container.getAttribute('data-animation-type');
+document.addEventListener('DOMContentLoaded', () => {
+  const blocks = document.querySelectorAll('.fb-animated-heading-main-wrapper');
 
-            // Handle Typing Animation
-            if (animationType === 'typing') {
-                const typingContainer = container.querySelector('.fb-animated-headings');
-                if (!typingContainer) return;
+  blocks.forEach((block) => {
+    const container = block.querySelector('.fb-animated-heading-container');
+    if (!container) return;
 
-                const itemElements = container.querySelectorAll('.fb-animated-heading-item');
-                const items = Array.from(itemElements).map(el => el.textContent).filter(Boolean);
+    const animationType = container.dataset.animationType;
+    const startDuration = parseFloat(container.dataset.startDuration) || 0.5;
+    const endDuration = parseFloat(container.dataset.endDuration) || 0.5;
+    const animationTransition = container.dataset.animationTransition || 'power1.out';
+    const cursor = container.dataset.cursor || '';
 
-                if (!items.length) return;
+    // DOM elements
+    const dynamicWrapper =
+      animationType === 'typing'
+        ? container.querySelector('.fb-animated-headings')  // typing uses this
+        : container.querySelector('.fb-animated-heading-dynamic-wrapper'); // others use dynamic wrapper
 
-                itemElements.forEach(el => el.style.display = 'none'); // hide original
+    if (!dynamicWrapper) return;
 
-                let currentItem = 0, charIndex = 0, isDeleting = false;
+    // Get items for animation
+    const items = Array.from(
+      container.querySelectorAll('.fb-animated-heading-item')
+    ).map((el) => el.textContent);
 
-                function typeEffect() {
-                    const currentText = items[currentItem];
-                    const displayText = currentText.substring(0, charIndex);
-                    typingContainer.textContent = displayText;
+    if (!items.length) return;
 
-                    if (!isDeleting) {
-                        if (charIndex < currentText.length) {
-                            charIndex++;
-                            setTimeout(typeEffect, 100);
-                        } else {
-                            isDeleting = true;
-                            setTimeout(typeEffect, 1000);
-                        }
-                    } else {
-                        if (charIndex > 0) {
-                            charIndex--;
-                            setTimeout(typeEffect, 50);
-                        } else {
-                            isDeleting = false;
-                            currentItem = (currentItem + 1) % items.length;
-                            setTimeout(typeEffect, 500);
-                        }
-                    }
-                }
-
-                typeEffect();
-            }
-
-            // Handle Swirl Animation
-            if (animationType === 'swirl') {
-
-                const texts = Array.from(container.querySelectorAll('.fb-animated-heading-item'))
-                    .map(item => item.textContent).filter(Boolean);
-                
-                if (texts.length === 0) return;
-
-                let currentIndex = 0;
-                const containerWrapper = container.querySelector('#animated-heading-wrapper');
-
-                if (!containerWrapper) return;
-                containerWrapper.innerHTML = '';
-
-                function createWordSpan(text, isActive = false) {
-                    const wrapper = document.createElement('span');
-                    wrapper.className = 'fb-animated-heading-dynamic-text';
-                    if (isActive) wrapper.classList.add('fb-animated-heading-text-active');
-
-                    text.split('').forEach((char) => {
-                        const letter = document.createElement('span');
-                        letter.className = 'fb-animated-heading-dynamic-letter';
-                        letter.textContent = char === ' ' ? '\u00A0' : char;
-                        wrapper.appendChild(letter);
-                    });
-
-                    return wrapper;
-                }
-
-                function showNextWord() {
-                    const oldWord = containerWrapper.querySelector('.fb-animated-heading-text-active');
-                    const newWord = createWordSpan(texts[currentIndex], true);
-                    containerWrapper.appendChild(newWord);
-
-                    const newLetters = newWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
-
-                    const totalWidthSubPixel = Array.from(newLetters)
-                    .reduce((sum, letter) => sum + letter.getBoundingClientRect().width, 0);
-
-                    const swirlWrapper = document.querySelector('.fb-animated-heading-swirl-wrapper');
-
-                    if (swirlWrapper) {
-                        swirlWrapper.style.width = `${totalWidthSubPixel}px`;
-                    }
-
-                    newLetters.forEach((l, i) => {
-                        setTimeout(() => {
-                            l.classList.add('fb-animated-heading-animation-in');
-                        }, i * 30);
-                    });
-
-                    if (oldWord) {
-                        oldWord.classList.remove('fb-animated-heading-text-active');
-                        const oldLetters = oldWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
-                        oldLetters.forEach((l, i) => {
-                            setTimeout(() => {
-                                l.classList.add('fb-animated-heading-animation-out');
-                            }, i * 30);
-                        });
-
-                        setTimeout(() => {
-                            oldWord.remove();
-                        }, oldLetters.length * 30 + 500);
-                    }
-
-                    currentIndex = (currentIndex + 1) % texts.length;
-                }
-
-                const firstWord = createWordSpan(texts[currentIndex], true);
-                containerWrapper.appendChild(firstWord);
-
-                const firstLetters = firstWord.querySelectorAll('.fb-animated-heading-dynamic-letter');
-                firstLetters.forEach((l, i) => {
-                    setTimeout(() => {
-                        l.classList.add('fb-animated-heading-animation-in');
-                    }, i * 30);
-                });
-
-                currentIndex = (currentIndex + 1) % texts.length;
-                setInterval(showNextWord, 3000);
-            }
+    const splitText = (el, type = 'words') => {
+      const text = el.textContent;
+      el.textContent = '';
+      if (type === 'words') {
+        text.split(' ').forEach((word) => {
+          const span = document.createElement('span');
+          span.className = 'word';
+          span.textContent = word + ' ';
+          span.style.display = 'inline-block';
+          el.appendChild(span);
         });
+      } else if (type === 'letters') {
+        text.split('').forEach((char) => {
+          const span = document.createElement('span');
+          span.className = 'char';
+          span.textContent = char;
+          span.style.display = 'inline-block';
+          el.appendChild(span);
+        });
+      }
+    };
+
+    // Typing animation
+    if (animationType === 'typing') {
+      dynamicWrapper.textContent = '';
+      let index = 0;
+
+      const cursorEl = cursor
+        ? (() => {
+            const span = document.createElement('span');
+            span.className = 'fb-animated-heading-cursor';
+            span.textContent = cursor;
+            container.appendChild(span);
+            return span;
+          })()
+        : null;
+
+      const typeText = () => {
+        const currentText = items[index];
+        let charIndex = 0;
+
+        const typeChar = () => {
+          if (charIndex < currentText.length) {
+            dynamicWrapper.textContent += currentText[charIndex];
+            charIndex++;
+            requestAnimationFrame(typeChar);
+          } else {
+            setTimeout(deleteChar, 1000);
+          }
+        };
+
+        const deleteChar = () => {
+          if (dynamicWrapper.textContent.length > 0) {
+            dynamicWrapper.textContent = dynamicWrapper.textContent.slice(0, -1);
+            requestAnimationFrame(deleteChar);
+          } else {
+            index = (index + 1) % items.length;
+            typeText();
+          }
+        };
+
+        typeChar();
+      };
+
+      typeText();
     }
 
-    function setupAnimatedHeading() {
-        // Init on load
-        window.addEventListener('load', initAnimatedHeading);
+    // Non-typing animations
+    else {
+      let index = 0;
 
-        // Dynamic reload (in case of AJAX/Gutenberg preview)
-        const observer = new MutationObserver(() => {
-            initAnimatedHeading();
+      const animateNext = () => {
+        dynamicWrapper.innerHTML = '';
+        const text = items[index];
+        const el = document.createElement('span');
+        el.className = 'fb-animated-heading-text';
+        el.textContent = text;
+        dynamicWrapper.appendChild(el);
+
+        const splitType = animationType.includes('letter') ? 'letters' : 'words';
+        splitText(el, splitType);
+
+        const words = el.querySelectorAll('.word');
+        const chars = el.querySelectorAll('.char');
+
+        const tl = gsap.timeline({
+          onComplete: () => {
+            gsap.delayedCall(1, () => {
+              gsap.to(el, {
+                opacity: 0,
+                y: -30,
+                duration: endDuration * 4,
+                ease: animationTransition,
+                onComplete: () => {
+                  index = (index + 1) % items.length;
+                  animateNext();
+                }
+              });
+            });
+          }
         });
 
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
+        switch (animationType) {
+          case 'words-slide-up':
+            tl.from(words, { opacity: 0, yPercent: 100, duration: startDuration * 5, ease: animationTransition, stagger: startDuration });
+            break;
+          case 'words-rotate-in':
+            tl.set(words, { transformPerspective: 1000 });
+            tl.from(words, { rotationX: -90, duration: startDuration * 6, ease: animationTransition, stagger: startDuration });
+            break;
+          case 'words-slide-from-right':
+            tl.from(words, { opacity: 0, x: '1em', duration: startDuration * 6, ease: animationTransition, stagger: startDuration });
+            break;
+          case 'letters-slide-up':
+            tl.from(chars, { yPercent: 100, duration: startDuration * 3, ease: animationTransition, stagger: startDuration });
+            break;
+          case 'letters-slide-down':
+            tl.from(chars, { yPercent: -120, duration: startDuration * 3, ease: animationTransition, stagger: startDuration });
+            break;
+          case 'letters-fade-in':
+            tl.from(chars, { opacity: 0, duration: startDuration, ease: animationTransition, stagger: startDuration });
+            break;
+          case 'letters-fade-in-random':
+            tl.from(chars, { opacity: 0, duration: startDuration / 2, ease: animationTransition, stagger: { amount: startDuration * 5, from: 'random' } });
+            break;
+          case 'scrub-each-word':
+            tl.from(words, { opacity: 0.2, duration: startDuration, ease: animationTransition, stagger: { each: startDuration * 2 } });
+            break;
+          default:
+            break;
+        }
+      animateNext();
+      };
+      animateNext();
     }
-
-    // Expose for external reload
-    window.reinitAnimatedHeading = initAnimatedHeading;
-
-    setupAnimatedHeading();
-})();
+  });
+});
