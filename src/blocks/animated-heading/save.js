@@ -44,16 +44,24 @@ export default function save({ attributes }) {
                         />
                     )}
 
-                    {animationType === "typing" && (
+                    {/* Hidden text items for animation */}
+                    <div className="fb-animated-heading-items" style={{ display: 'none' }}>
+                        {animatedHeadingItems?.map((item, index) => (
+                            <span key={index} className="fb-animated-heading-item">
+                                {item.animatedHeadingTitle}
+                            </span>
+                        ))}
+                    </div>
+
+                    {/* Typing Animation Structure */}
+                    {animationType === "typing" ? (
                         <>
                             <span className="fb-animated-headings"></span>
                             {animatedHeadingCursorSwitch && animatedHeadingCursor && (
                                 <span className="fb-animated-heading-cursor">{animatedHeadingCursor}</span>
                             )}
                         </>
-                    )}
-
-                    {animationType !== "typing" && (
+                    ) : (
                         <>
                             {'\u00A0'}
                             <span className="fb-animated-headings">

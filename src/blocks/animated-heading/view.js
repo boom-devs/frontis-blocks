@@ -14,21 +14,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const animationTransition = container.dataset.animationTransition || 'power1.out';
     const cursor = container.dataset.cursor || '';
 
-    // DOM elements
+    // Determine wrapper
     const dynamicWrapper =
       animationType === 'typing'
-        ? container.querySelector('.fb-animated-headings')  // typing uses this
-        : container.querySelector('.fb-animated-heading-dynamic-wrapper'); // others use dynamic wrapper
+        ? container.querySelector('.fb-animated-headings')
+        : container.querySelector('.fb-animated-heading-dynamic-wrapper');
 
     if (!dynamicWrapper) return;
 
-    // Get items for animation
-    const items = Array.from(
-      container.querySelectorAll('.fb-animated-heading-item')
-    ).map((el) => el.textContent);
+    // Get all text items
+    const items = Array.from(container.querySelectorAll('.fb-animated-heading-item'))
+      .map((el) => el.textContent.trim())
+      .filter(Boolean);
 
     if (!items.length) return;
 
+    // Helper: split text
     const splitText = (el, type = 'words') => {
       const text = el.textContent;
       el.textContent = '';
@@ -51,118 +52,233 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    // Typing animation
+    // ============================================================
+    // Typing Animation
+    // ============================================================
     if (animationType === 'typing') {
-      dynamicWrapper.textContent = '';
-      let index = 0;
-
-      const cursorEl = cursor
-        ? (() => {
-            const span = document.createElement('span');
-            span.className = 'fb-animated-heading-cursor';
-            span.textContent = cursor;
-            container.appendChild(span);
-            return span;
-          })()
-        : null;
-
-      const typeText = () => {
-        const currentText = items[index];
-        let charIndex = 0;
-
-        const typeChar = () => {
-          if (charIndex < currentText.length) {
-            dynamicWrapper.textContent += currentText[charIndex];
-            charIndex++;
-            requestAnimationFrame(typeChar);
-          } else {
-            setTimeout(deleteChar, 1000);
-          }
+        dynamicWrapper.textContent = '';
+        let index = 0;
+      
+        // Use existing DOM cursor (keep it static)
+        const cursorEl = container.querySelector('.fb-animated-heading-cursor');
+      
+        const typeText = () => {
+          const currentText = items[index];
+          let charIndex = 0;
+      
+          // Type characters left → right
+          const typeChar = () => {
+            if (charIndex < currentText.length) {
+              dynamicWrapper.textContent += currentText[charIndex];
+              charIndex++;
+              gsap.delayedCall(startDuration, typeChar);
+            } else {
+              gsap.delayedCall(1, deleteChar);
+            }
+          };
+      
+          // Delete characters right → left
+          const deleteChar = () => {
+            if (dynamicWrapper.textContent.length > 0) {
+              dynamicWrapper.textContent = dynamicWrapper.textContent.slice(0, -1);
+              gsap.delayedCall(endDuration, deleteChar);
+            } else {
+              index = (index + 1) % items.length;
+              typeText();
+            }
+          };
+      
+          typeChar();
         };
-
-        const deleteChar = () => {
-          if (dynamicWrapper.textContent.length > 0) {
-            dynamicWrapper.textContent = dynamicWrapper.textContent.slice(0, -1);
-            requestAnimationFrame(deleteChar);
-          } else {
-            index = (index + 1) % items.length;
-            typeText();
-          }
-        };
-
-        typeChar();
-      };
-
-      typeText();
+      
+        if (cursorEl) {
+          cursorEl.style.opacity = '1';
+          cursorEl.style.display = 'inline';
+          cursorEl.style.visibility = 'visible';
+        }
+      
+        typeText();
+        return;
     }
 
-    // Non-typing animations
-    else {
+    // ============================================================
+    // Swirl Animation
+    // ============================================================
+    if (animationType === 'swirl') {
       let index = 0;
 
-      const animateNext = () => {
+      const animateNextText = () => {
         dynamicWrapper.innerHTML = '';
+
         const text = items[index];
-        const el = document.createElement('span');
-        el.className = 'fb-animated-heading-text';
-        el.textContent = text;
-        dynamicWrapper.appendChild(el);
+        const spanContainer = document.createElement('span');
+        spanContainer.className = 'fb-animated-heading-swirl-text';
+        spanContainer.style.display = 'inline-block';
+        dynamicWrapper.appendChild(spanContainer);
 
-        const splitType = animationType.includes('letter') ? 'letters' : 'words';
-        splitText(el, splitType);
-
-        const words = el.querySelectorAll('.word');
-        const chars = el.querySelectorAll('.char');
-
-        const tl = gsap.timeline({
-          onComplete: () => {
-            gsap.delayedCall(1, () => {
-              gsap.to(el, {
-                opacity: 0,
-                y: -30,
-                duration: endDuration * 4,
-                ease: animationTransition,
-                onComplete: () => {
-                  index = (index + 1) % items.length;
-                  animateNext();
-                }
-              });
-            });
-          }
+        // Create letter spans
+        const letters = text.split('').map((char) => {
+          const letterSpan = document.createElement('span');
+          letterSpan.textContent = char;
+          letterSpan.style.display = 'inline-block';
+          letterSpan.style.opacity = 0;
+          spanContainer.appendChild(letterSpan);
+          return letterSpan;
         });
 
-        switch (animationType) {
-          case 'words-slide-up':
-            tl.from(words, { opacity: 0, yPercent: 100, duration: startDuration * 5, ease: animationTransition, stagger: startDuration });
-            break;
-          case 'words-rotate-in':
-            tl.set(words, { transformPerspective: 1000 });
-            tl.from(words, { rotationX: -90, duration: startDuration * 6, ease: animationTransition, stagger: startDuration });
-            break;
-          case 'words-slide-from-right':
-            tl.from(words, { opacity: 0, x: '1em', duration: startDuration * 6, ease: animationTransition, stagger: startDuration });
-            break;
-          case 'letters-slide-up':
-            tl.from(chars, { yPercent: 100, duration: startDuration * 3, ease: animationTransition, stagger: startDuration });
-            break;
-          case 'letters-slide-down':
-            tl.from(chars, { yPercent: -120, duration: startDuration * 3, ease: animationTransition, stagger: startDuration });
-            break;
-          case 'letters-fade-in':
-            tl.from(chars, { opacity: 0, duration: startDuration, ease: animationTransition, stagger: startDuration });
-            break;
-          case 'letters-fade-in-random':
-            tl.from(chars, { opacity: 0, duration: startDuration / 2, ease: animationTransition, stagger: { amount: startDuration * 5, from: 'random' } });
-            break;
-          case 'scrub-each-word':
-            tl.from(words, { opacity: 0.2, duration: startDuration, ease: animationTransition, stagger: { each: startDuration * 2 } });
-            break;
-          default:
-            break;
-        }
-      animateNext();
+        // Swirl In
+        gsap.fromTo(
+          letters,
+          { opacity: 0, y: 20, rotation: -90 },
+          {
+            opacity: 1,
+            y: 0,
+            rotation: 0,
+            duration: startDuration * 12,
+            stagger: startDuration,
+            ease: animationTransition,
+          }
+        );
+
+        // Swirl Out
+        gsap.delayedCall(2.5, () => {
+          gsap.to(letters, {
+            opacity: 0,
+            y: -20,
+            rotation: 90,
+            duration: endDuration * 10,
+            stagger: endDuration,
+            ease: animationTransition,
+            onComplete: () => {
+              spanContainer.remove();
+              index = (index + 1) % items.length;
+              animateNextText();
+            },
+          });
+        });
       };
-      animateNext();
+
+      animateNextText();
+      return; // Stop here for swirl
     }
+
+    // ============================================================
+    // GSAP Word/Letter Animations
+    // ============================================================
+    let index = 0;
+
+    const animateNext = () => {
+      dynamicWrapper.innerHTML = '';
+      const text = items[index];
+      const el = document.createElement('span');
+      el.className = 'fb-animated-heading-text';
+      el.textContent = text;
+      dynamicWrapper.appendChild(el);
+
+      const splitType = animationType.includes('letter') ? 'letters' : 'words';
+      splitText(el, splitType);
+
+      const words = el.querySelectorAll('.word');
+      const chars = el.querySelectorAll('.char');
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          gsap.delayedCall(1, () => {
+            gsap.to(el, {
+              opacity: 0,
+              y: -30,
+              duration: endDuration * 4,
+              ease: animationTransition,
+              onComplete: () => {
+                index = (index + 1) % items.length;
+                animateNext();
+              },
+            });
+          });
+        },
+      });
+
+      switch (animationType) {
+        case 'words-slide-up':
+          tl.from(words, {
+            opacity: 0,
+            yPercent: 100,
+            duration: startDuration * 5,
+            ease: animationTransition,
+            stagger: startDuration,
+          });
+          break;
+
+        case 'words-rotate-in':
+          tl.set(words, { transformPerspective: 1000 });
+          tl.from(words, {
+            rotationX: -90,
+            duration: startDuration * 6,
+            ease: animationTransition,
+            stagger: startDuration,
+          });
+          break;
+
+        case 'words-slide-from-right':
+          tl.from(words, {
+            opacity: 0,
+            x: '1em',
+            duration: startDuration * 6,
+            ease: animationTransition,
+            stagger: startDuration,
+          });
+          break;
+
+        case 'letters-slide-up':
+          tl.from(chars, {
+            yPercent: 100,
+            duration: startDuration * 3,
+            ease: animationTransition,
+            stagger: startDuration,
+          });
+          break;
+
+        case 'letters-slide-down':
+          tl.from(chars, {
+            yPercent: -120,
+            duration: startDuration * 3,
+            ease: animationTransition,
+            stagger: startDuration,
+          });
+          break;
+
+        case 'letters-fade-in':
+          tl.from(chars, {
+            opacity: 0,
+            duration: startDuration,
+            ease: animationTransition,
+            stagger: startDuration,
+          });
+          break;
+
+        case 'letters-fade-in-random':
+          tl.from(chars, {
+            opacity: 0,
+            duration: startDuration / 2,
+            ease: animationTransition,
+            stagger: { amount: startDuration * 5, from: 'random' },
+          });
+          break;
+
+        case 'scrub-each-word':
+          tl.from(words, {
+            opacity: 0.2,
+            duration: startDuration,
+            ease: animationTransition,
+            stagger: { each: startDuration * 2 },
+          });
+          break;
+
+        default:
+          break;
+      }
+    };
+
+    animateNext();
   });
 });
