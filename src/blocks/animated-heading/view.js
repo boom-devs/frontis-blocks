@@ -1,4 +1,3 @@
-// view.js
 import { gsap } from 'gsap';
 
 document.addEventListener('DOMContentLoaded', () => {
