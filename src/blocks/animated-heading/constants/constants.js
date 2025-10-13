@@ -86,7 +86,11 @@ export const ICON_ALIGN = [
 	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
 ];
 
-export const ANIMATION_TYPE = [
+export const ANIMATION_OPTIONS = [
+	{ label: __("Text Animation", "frontis-blocks"), value: "text-animation" },
+	{ label: __("Highlight Animation", "frontis-blocks"), value: "highlight-animation" },
+];
+export const TEXT_ANIMATION_TYPE = [
 	{ label: __("Typing", "frontis-blocks"), value: "typing" },
 	{ label: __("Swirl", "frontis-blocks"), value: "swirl" },
 	{ label: __("Words Slide Up", "frontis-blocks"), value: "words-slide-up" },
@@ -98,3 +102,11 @@ export const ANIMATION_TYPE = [
 	{ label: __("Letters Fade In Random", "frontis-blocks"), value: "letters-fade-in-random" },
 	{ label: __("Scrub Each Word", "frontis-blocks"), value: "scrub-each-word" },
 ];
+
+export const HIGHLIGHT_ANIMATION_TYPE = [
+	{ label: __("Underline", "frontis-blocks"), value: "underline" },
+	{ label: __("Double", "frontis-blocks"), value: "double" },
+	{ label: __("Curly", "frontis-blocks"), value: "curly" },
+	{ label: __("Zigzag", "frontis-blocks"), value: "zigzag" },
+];
+

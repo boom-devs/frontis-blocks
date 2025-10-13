@@ -62,11 +62,9 @@ export default function save({ attributes }) {
                         </>
                     ) : (
                         <>
-                            {'\u00A0'}
                             <span className="fb-animated-headings">
                                 <span className="fb-animated-heading-dynamic-wrapper"></span>
                             </span>
-                            {'\u00A0'}
                         </>
                     )}
 
