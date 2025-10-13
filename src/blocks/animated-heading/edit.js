@@ -1,18 +1,26 @@
+// Edit.js
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText, BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
+import {
+    useBlockProps,
+    RichText,
+    BlockControls,
+    AlignmentToolbar,
+} from '@wordpress/block-editor';
 import { useRef, useEffect } from '@wordpress/element';
 import { gsap } from 'gsap';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
-import Inspector from "./inspector";
-import { useDeviceType } from "@Config/displayType";
+import Inspector from './inspector';
+import { useDeviceType } from '@Config/displayType';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
+        animationOption,
         animationType,
         startDuration,
         endDuration,
+        delayDuration,
         animationTransition,
         animatedHeadingAlignment,
         animatedHeadingItems,
@@ -23,6 +31,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         animatedHeadingSuffix,
         animatedHeadingGlobalWraperID,
         animatedHeadingGlobalWraperClass,
+        animatedHeadingHighlightText,
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -34,10 +43,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const panelRef = useRef(null);
     const typedTextRef = useRef(null);
     const dynamicWrapperRef = useRef(null);
+    const highlightRef = useRef(null);
 
     SwitchToBlockSettings(panelRef);
 
-    // Animation Effect
+    // Text Animation
     useEffect(() => {
         if (!animatedHeadingItems || animatedHeadingItems.length === 0) return;
     
@@ -48,11 +58,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         const texts = animatedHeadingItems
             .map(item => item.animatedHeadingTitle)
             .filter(Boolean);
-    
         if (texts.length === 0) return;
     
         // ==================================================
-        // Utility: Split Text (Preserve spacing + letter mode fix)
+        // Utility: Split Text (words or letters)
         // ==================================================
         const splitText = (el, type = "words") => {
             const text = el.textContent;
@@ -66,17 +75,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     span.textContent = word;
                     span.style.display = "inline-block";
                     el.appendChild(span);
-    
-                    if (i < words.length - 1) {
-                        el.appendChild(document.createTextNode(" "));
-                    }
+                    if (i < words.length - 1) el.appendChild(document.createTextNode(" "));
                 });
             } else if (type === "letters") {
-                text.split("").forEach((char) => {
-                    if (char === " ") {
-                        // preserve actual spacing
-                        el.appendChild(document.createTextNode(" "));
-                    } else {
+                text.split("").forEach(char => {
+                    if (char === " ") el.appendChild(document.createTextNode(" "));
+                    else {
                         const span = document.createElement("span");
                         span.className = "char";
                         span.textContent = char;
@@ -100,6 +104,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 if (isCancelled) return;
                 const currentText = texts[index];
                 const chars = currentText.split("");
+    
                 const tl = gsap.timeline({
                     onComplete: () => {
                         gsap.delayedCall(1, () => {
@@ -113,7 +118,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 }
                             });
     
-                            // delete from right → left
                             for (let i = chars.length; i > 0; i--) {
                                 deleteTl.to(el, {
                                     textContent: currentText.substring(0, i - 1),
@@ -127,7 +131,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     }
                 });
     
-                // typing left → right
                 chars.forEach((_, i) => {
                     tl.to(el, {
                         textContent: currentText.substring(0, i + 1),
@@ -148,7 +151,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         else if (animationType === "swirl") {
             const wrapper = dynamicWrapperRef.current;
             if (!wrapper) return;
-    
             wrapper.innerHTML = "";
             let index = 0;
     
@@ -162,10 +164,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 wrapper.appendChild(span);
     
                 const letters = text.split("");
-                letters.forEach((char) => {
-                    if (char === " ") {
-                        span.appendChild(document.createTextNode(" "));
-                    } else {
+                letters.forEach(char => {
+                    if (char === " ") span.appendChild(document.createTextNode(" "));
+                    else {
                         const letter = document.createElement("span");
                         letter.textContent = char;
                         letter.style.display = "inline-block";
@@ -213,12 +214,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         }
     
         // ==================================================
-        // Word / Letter Based Animations
+        // Words / Letters Animations
         // ==================================================
         else {
             const wrapper = dynamicWrapperRef.current;
             if (!wrapper) return;
-    
             wrapper.innerHTML = "";
             let index = 0;
     
@@ -265,7 +265,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             stagger: startDuration,
                         });
                         break;
-    
                     case "words-rotate-in":
                         tl.set(words, { transformPerspective: 1000 });
                         tl.from(words, {
@@ -275,7 +274,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             stagger: startDuration,
                         });
                         break;
-    
                     case "words-slide-from-right":
                         tl.from(words, {
                             opacity: 0,
@@ -285,7 +283,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             stagger: startDuration,
                         });
                         break;
-    
                     case "letters-slide-up":
                         tl.from(chars, {
                             yPercent: 100,
@@ -295,7 +292,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             stagger: startDuration,
                         });
                         break;
-    
                     case "letters-slide-down":
                         tl.from(chars, {
                             yPercent: -120,
@@ -305,7 +301,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             stagger: startDuration,
                         });
                         break;
-    
                     case "letters-fade-in":
                         tl.from(chars, {
                             opacity: 0,
@@ -314,7 +309,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             stagger: startDuration,
                         });
                         break;
-    
                     case "letters-fade-in-random":
                         tl.from(chars, {
                             opacity: 0,
@@ -323,7 +317,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             stagger: { amount: startDuration * 5, from: "random" },
                         });
                         break;
-    
                     case "scrub-each-word":
                         tl.from(words, {
                             opacity: 0.2,
@@ -332,7 +325,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             stagger: { each: startDuration * 2 },
                         });
                         break;
-    
                     default:
                         break;
                 }
@@ -359,26 +351,109 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         endDuration,
         animationTransition,
     ]);
+
+    // Highlighted Text Animation
+    useEffect(() => {
+        if (animationOption !== "highlight-animation") return;
+        const highlightEl = highlightRef.current;
+        if (!highlightEl || !animatedHeadingHighlightText) return;
+    
+        highlightEl.textContent = animatedHeadingHighlightText;
+    
+        let ctx = gsap.context(() => {});
+        let tl = gsap.timeline({ repeat: -1, yoyo: true });
+        let isCancelled = false;
+    
+        const highlightType = animationType; // 'underline', 'double', 'curly', 'zigzag'
+    
+        // ================================
+        // Simple underline / double
+        // ================================
+        if (highlightType === "underline" || highlightType === "double") {
+            tl.fromTo(
+                highlightEl,
+                { backgroundSize: "0% 100%" },
+                {
+                    backgroundSize: "100% 100%",
+                    duration: startDuration,
+                    ease: animationTransition,
+                    repeat: -1,
+                    yoyo: true,
+                    repeatDelay: delayDuration,
+                }
+            );
+        } 
+    
+        // ================================
+        // Curly / Zigzag (using CSS variable)
+        // ================================
+        else if (highlightType === "curly" || highlightType === "zigzag") {
+            highlightEl.style.setProperty("--highlight-scale", 0);
+    
+            tl.fromTo(
+                highlightEl,
+                { "--highlight-scale": 0 },
+                {
+                    "--highlight-scale": 1,
+                    duration: startDuration,
+                    ease: animationTransition,
+                    repeat: -1,
+                    yoyo: true,
+                    repeatDelay: delayDuration,
+                    onUpdate() {
+                        highlightEl.style.setProperty(
+                            "--highlight-scale",
+                            this.targets()[0]["--highlight-scale"]
+                        );
+                    },
+                }
+            );
+        }
+    
+        // ================================
+        // Cleanup
+        // ================================
+        return () => {
+            isCancelled = true;
+            tl.kill();
+            ctx.revert();
+            gsap.killTweensOf(highlightEl);
+        };
+    }, [
+        animationOption,
+        animationType,
+        animatedHeadingHighlightText,
+        startDuration,
+        delayDuration,
+        animationTransition,
+    ]);
+    
+    
     
     
 
-
-
-    const Tag = animatedHeadingMainTag ? animatedHeadingMainTag : "div";
+    const Tag = animatedHeadingMainTag || 'div';
 
     return (
         <>
-            <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
 
             <BlockControls>
                 <AlignmentToolbar
                     value={animatedHeadingAlignment[deviceType]}
                     onChange={(value) =>
                         setAttributes({
-                            animatedHeadingAlignment: { ...animatedHeadingAlignment, [deviceType]: value },
+                            animatedHeadingAlignment: {
+                                ...animatedHeadingAlignment,
+                                [deviceType]: value,
+                            },
                         })
                     }
-                    controls={["left", "center", "right"]}
+                    controls={['left', 'center', 'right']}
                 />
             </BlockControls>
 
@@ -388,33 +463,51 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     id={animatedHeadingGlobalWraperID}
                     ref={panelRef}
                 >
-                    <Tag className={`fb-animated-heading-wrapper animated-type-${animationType}`}>
+                    <Tag
+                        className={`fb-animated-heading-wrapper animated-type-${animationType}`}
+                    >
                         {animatedHeadingPrefix && (
                             <RichText
                                 tagName="span"
                                 className="fb-animated-heading-prefix"
                                 value={animatedHeadingPrefix}
-                                onChange={(value) => setAttributes({ animatedHeadingPrefix: value })}
+                                onChange={(value) =>
+                                    setAttributes({
+                                        animatedHeadingPrefix: value,
+                                    })
+                                }
                             />
                         )}
 
-                        {animationType === "typing" && (
-                            <>
-                                <span className="fb-animated-headings" ref={typedTextRef}></span>
-                                {animatedHeadingCursorSwitch && animatedHeadingCursor && (
-                                    <span className="fb-animated-heading-cursor">{animatedHeadingCursor}</span>
-                                )}
-                            </>
-                        )}
+                        {animationOption === 'text-animation' &&
+                            animationType === 'typing' && (
+                                <>
+                                    <span
+                                        className="fb-animated-headings"
+                                        ref={typedTextRef}
+                                    ></span>
+                                    {animatedHeadingCursorSwitch &&
+                                        animatedHeadingCursor && (
+                                            <span className="fb-animated-heading-cursor">
+                                                {animatedHeadingCursor}
+                                            </span>
+                                        )}
+                                </>
+                            )}
 
-                        {animationType !== "typing" && (
-                            <>
-                                {'\u00A0'}
-                                <span className="fb-animated-headings">
-                                    <span className="fb-animated-heading-dynamic-wrapper" ref={dynamicWrapperRef}></span>
-                                </span>
-                                {'\u00A0'}
-                            </>
+                        {animationOption === 'text-animation' &&
+                            animationType !== 'typing' && (
+                                <span
+                                    className="fb-animated-headings fb-dynamic-text"
+                                    ref={dynamicWrapperRef}
+                                ></span>
+                            )}
+
+                        {animationOption === 'highlight-animation' && (
+                            <span
+                                className={`fb-highlight-text fb-highlight-${animationType}`}
+                                ref={highlightRef}
+                            ></span>
                         )}
 
                         {animatedHeadingSuffix && (
@@ -422,7 +515,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 tagName="span"
                                 className="fb-animated-heading-suffix"
                                 value={animatedHeadingSuffix}
-                                onChange={(value) => setAttributes({ animatedHeadingSuffix: value })}
+                                onChange={(value) =>
+                                    setAttributes({
+                                        animatedHeadingSuffix: value,
+                                    })
+                                }
                             />
                         )}
                     </Tag>
