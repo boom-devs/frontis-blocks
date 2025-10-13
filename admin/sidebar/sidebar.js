@@ -500,11 +500,6 @@ function FrontisBlocksSidebar() {
 	decodeURIComponent(pValue) === '/' &&
 	canvas === 'edit';
 
-	// console.log("isSiteEditor isSiteEditor")
-	// console.log(isSiteEditor)
-	// console.log("isPagePost")
-	// console.log(isPagePost)
-
 	return (
 		<>
 			<div className="fb_plugin_sidebar">
@@ -577,6 +572,7 @@ function FrontisBlocksSidebar() {
 											</svg>
 										</span>
 									</NavigatorButton>
+									
 									<div className="fb-global-header-inner">
 										<h3>{__("Typography", "frontis-blocks")}</h3>
 										<p>
@@ -587,6 +583,7 @@ function FrontisBlocksSidebar() {
 										</p>
 									</div>
 								</div>
+								
 								<TypographySettings
 									typography={typography}
 									customTypography={customTypography}
@@ -686,7 +683,7 @@ function FrontisBlocksSidebar() {
 							</NavigatorScreen>
 						</NavigatorProvider>
 
-						<div className="fb-theme-settings-wrapper">
+						{/* <div className="fb-theme-settings-wrapper">
 							{onlyCanvasEditor &&
 								<FrontisThemeSiteEditor />
 							}
@@ -694,7 +691,7 @@ function FrontisBlocksSidebar() {
 							{(isPagePost || isSiteEditor) &&
 								<FrontisMetaBox whichEditor={isPagePost ? 'post' : 'template'} />
 							}
-						</div>
+						</div> */}
 					</div>
 				</PluginSidebar>
 			</div>

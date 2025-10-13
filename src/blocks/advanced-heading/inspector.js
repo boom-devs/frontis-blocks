@@ -2151,31 +2151,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ${headingGlobalBorderHoverColor ? `border-color: ${headingGlobalBorderHoverColor};` : ''}
             ${headingGlobalBoxShadowHoverCssValue ? `box-shadow: ${headingGlobalBoxShadowHoverCssValue};` : ''}
         }
-
-        .${blockId} .fb-advanced-wrapper .fb-advanced-heading-wrapper {
-            ${
-                headingBgColorType === "gradient"
-                  ? `background: ${
-                      headingBgCustomGradientColorSwitcher && headingBgCustomGradientColor
-                        ? headingBgCustomGradientColor
-                        : headingBgGradientColor
-                    };`
-                  : headingBgColor ? `background: ${headingBgColor};` : ''
-            }
-            transition: all .3s ease-in-out;
-        }
-        .${blockId} .fb-advanced-wrapper .fb-advanced-heading-wrapper:hover {
-            ${
-                headingBgHoverColorType === "gradient"
-                  ? `background: ${
-                      headingBgHoverCustomGradientColorSwitcher && headingBgHoverCustomGradientColor
-                        ? headingBgHoverCustomGradientColor
-                        : headingBgHoverGradientColor
-                    };`
-                  : headingBgHoverColor ? `background: ${headingBgHoverColor};` : ''
-            }
-            transition: all .3s ease-in-out;
-        }
         .${blockId} .fb-advanced-wrapper .fb-advanced-heading,
         .${blockId} .fb-advanced-wrapper .fb-advanced-heading .fb-dynamic-link {
             ${headingGlobalTypoSwitcher?.fontFamily === true && headingGlobalTypographyData?.fontFamily ? `font-family: ${headingGlobalTypographyData?.fontFamily};` : ''}
@@ -2225,6 +2200,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 background-position: center;
                 background-size: contain;
             ` : ''}
+
+            ${
+                headingBgColorType === "gradient"
+                  ? `background: ${
+                      headingBgCustomGradientColorSwitcher && headingBgCustomGradientColor
+                        ? headingBgCustomGradientColor
+                        : headingBgGradientColor
+                    };`
+                  : headingBgColor ? `background: ${headingBgColor};` : ''
+            }
             transition: all .3s ease-in-out;
         }
 
@@ -2243,6 +2228,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ` : ''}
 
             ${headingBorderHoverColor ? `border-color: ${headingBorderHoverColor};` : ''}
+
+            ${
+                headingBgHoverColorType === "gradient"
+                  ? `background: ${
+                      headingBgHoverCustomGradientColorSwitcher && headingBgHoverCustomGradientColor
+                        ? headingBgHoverCustomGradientColor
+                        : headingBgHoverGradientColor
+                    };`
+                  : headingBgHoverColor ? `background: ${headingBgHoverColor};` : ''
+            }
             transition: all .3s ease-in-out;
         }
 
@@ -2268,30 +2263,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
         ` : ''}
 
-        .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading-wrapper {
-            ${
-                subHeadingBgColorType === "gradient"
-                  ? `background: ${
-                      subHeadingBgCustomGradientColorSwitcher && subHeadingBgCustomGradientColor
-                        ? subHeadingBgCustomGradientColor
-                        : subHeadingBgGradientColor
-                    };`
-                  : subHeadingBgColor ? `background: ${subHeadingBgColor};` : ''
-            }
-            transition: all .3s ease-in-out;
-        }
-        .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading-wrapper:hover {
-            ${
-                subHeadingBgHoverColorType === "gradient"
-                  ? `background: ${
-                      subHeadingBgHoverCustomGradientColorSwitcher && subHeadingBgHoverCustomGradientColor
-                        ? subHeadingBgHoverCustomGradientColor
-                        : subHeadingBgHoverGradientColor
-                    };`
-                  : subHeadingBgHoverColor ? `background: ${subHeadingBgHoverColor};` : ''
-            }
-            transition: all .3s ease-in-out;
-        }
         .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading {
             ${subHeadingColor ? `color: ${subHeadingColor};` : ''}
             ${subHeadingTextColorType === 'gradient' ? `
@@ -2331,6 +2302,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             ` : ''}
             ${subHeadingBoxShadowCssValue ? `box-shadow: ${subHeadingBoxShadowCssValue};` : ''}
             transition: all .3s ease-in-out;
+            ${
+                subHeadingBgColorType === "gradient"
+                  ? `background: ${
+                      subHeadingBgCustomGradientColorSwitcher && subHeadingBgCustomGradientColor
+                        ? subHeadingBgCustomGradientColor
+                        : subHeadingBgGradientColor
+                    };`
+                  : subHeadingBgColor ? `background: ${subHeadingBgColor};` : ''
+            }
         }
 
         .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
@@ -2345,6 +2325,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ${subHeadingTextStroke?.Desktop ? `-webkit-text-stroke: ${subHeadingTextStroke?.Desktop}px ${subHeadingTextStrokeHoverColor};` : ''}
                 ${subHeadingTextStroke?.Desktop ? `text-stroke: ${subHeadingTextStroke?.Desktop}px ${subHeadingTextStrokeHoverColor};` : ''}
             ` : ''}
+            ${
+                subHeadingBgHoverColorType === "gradient"
+                  ? `background: ${
+                      subHeadingBgHoverCustomGradientColorSwitcher && subHeadingBgHoverCustomGradientColor
+                        ? subHeadingBgHoverCustomGradientColor
+                        : subHeadingBgHoverGradientColor
+                    };`
+                  : subHeadingBgHoverColor ? `background: ${subHeadingBgHoverColor};` : ''
+            }
         }
 
         .${blockId} .fb-advanced-icon-wrapper {
@@ -2754,6 +2743,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     subHeadingBgColorTypeSwitcher,
     subHeadingBgColorType,
     subHeadingBgHoverColorType,
+    subHeadingBgColor,
     subHeadingBgHoverColor,
     subHeadingBgGradientColor,
     subHeadingBgHoverGradientColor,
