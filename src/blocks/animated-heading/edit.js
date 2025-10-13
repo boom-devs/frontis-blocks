@@ -37,61 +37,74 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     SwitchToBlockSettings(panelRef);
 
-   // Animation Effect
+    // Animation Effect
     useEffect(() => {
         if (!animatedHeadingItems || animatedHeadingItems.length === 0) return;
-
-        // Cleanup / reset before rerun
+    
         let ctx = gsap.context(() => {});
         let currentTimeline = gsap.timeline();
         let isCancelled = false;
-
-        const texts = animatedHeadingItems.map(item => item.animatedHeadingTitle).filter(Boolean);
+    
+        const texts = animatedHeadingItems
+            .map(item => item.animatedHeadingTitle)
+            .filter(Boolean);
+    
         if (texts.length === 0) return;
-
-        // Utility: Split text into words or letters
+    
+        // ==================================================
+        // Utility: Split Text (Preserve spacing + letter mode fix)
+        // ==================================================
         const splitText = (el, type = "words") => {
             const text = el.textContent;
             el.textContent = "";
+    
             if (type === "words") {
-                text.split(" ").forEach(word => {
+                const words = text.split(" ");
+                words.forEach((word, i) => {
                     const span = document.createElement("span");
                     span.className = "word";
-                    span.textContent = word + " ";
+                    span.textContent = word;
                     span.style.display = "inline-block";
                     el.appendChild(span);
+    
+                    if (i < words.length - 1) {
+                        el.appendChild(document.createTextNode(" "));
+                    }
                 });
             } else if (type === "letters") {
-                text.split("").forEach(char => {
-                    const span = document.createElement("span");
-                    span.className = "char";
-                    span.textContent = char;
-                    span.style.display = "inline-block";
-                    el.appendChild(span);
+                text.split("").forEach((char) => {
+                    if (char === " ") {
+                        // preserve actual spacing
+                        el.appendChild(document.createTextNode(" "));
+                    } else {
+                        const span = document.createElement("span");
+                        span.className = "char";
+                        span.textContent = char;
+                        span.style.display = "inline-block";
+                        el.appendChild(span);
+                    }
                 });
             }
         };
-
-        // ============================================
+    
+        // ==================================================
         // Typing Animation
-        // ============================================
+        // ==================================================
         if (animationType === "typing") {
             const el = typedTextRef.current;
             if (!el) return;
-
+    
             let index = 0;
-
-            function typeText() {
+    
+            const typeText = () => {
                 if (isCancelled) return;
                 const currentText = texts[index];
                 const chars = currentText.split("");
                 const tl = gsap.timeline({
                     onComplete: () => {
-                        // Wait before deleting
                         gsap.delayedCall(1, () => {
                             if (isCancelled) return;
-
-                            // Delete animation (RIGHT → LEFT)
+    
                             const deleteTl = gsap.timeline({
                                 onComplete: () => {
                                     if (isCancelled) return;
@@ -99,72 +112,73 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     typeText();
                                 }
                             });
-
+    
+                            // delete from right → left
                             for (let i = chars.length; i > 0; i--) {
                                 deleteTl.to(el, {
                                     textContent: currentText.substring(0, i - 1),
-                                    duration: startDuration,
-                                    ease: animationTransition
+                                    duration: endDuration,
+                                    ease: animationTransition,
                                 });
                             }
-
+    
                             currentTimeline.add(deleteTl);
                         });
                     }
                 });
-
-                // Typing (LEFT → RIGHT)
+    
+                // typing left → right
                 chars.forEach((_, i) => {
                     tl.to(el, {
                         textContent: currentText.substring(0, i + 1),
                         duration: startDuration,
-                        ease: animationTransition
+                        ease: animationTransition,
                     });
                 });
-
+    
                 currentTimeline.add(tl);
-            }
-
+            };
+    
             typeText();
         }
-
-        // ============================================
+    
+        // ==================================================
         // Swirl Animation
-        // ============================================
+        // ==================================================
         else if (animationType === "swirl") {
             const wrapper = dynamicWrapperRef.current;
             if (!wrapper) return;
+    
             wrapper.innerHTML = "";
             let index = 0;
-
-            function createTextSpan(text) {
+    
+            const animateNextText = () => {
+                if (isCancelled) return;
+    
+                const text = texts[index];
                 const span = document.createElement("span");
                 span.className = "fb-animated-heading-swirl-text";
                 span.style.display = "inline-block";
-                span.textContent = text;
-                return span;
-            }
-
-            function animateNextText() {
-                if (isCancelled) return;
-
-                const newText = createTextSpan(texts[index]);
-                wrapper.appendChild(newText);
-
-                const letters = newText.textContent.split("");
-                newText.textContent = "";
+                wrapper.appendChild(span);
+    
+                const letters = text.split("");
                 letters.forEach((char) => {
-                    const letter = document.createElement("span");
-                    letter.textContent = char;
-                    letter.style.display = "inline-block";
-                    letter.style.opacity = 0;
-                    newText.appendChild(letter);
+                    if (char === " ") {
+                        span.appendChild(document.createTextNode(" "));
+                    } else {
+                        const letter = document.createElement("span");
+                        letter.textContent = char;
+                        letter.style.display = "inline-block";
+                        letter.style.opacity = 0;
+                        span.appendChild(letter);
+                    }
                 });
-
-                const letterSpans = newText.querySelectorAll("span");
-
-                // Swirl In Animation
-                gsap.fromTo(letterSpans,
+    
+                const letterSpans = span.querySelectorAll("span");
+    
+                // Swirl In
+                gsap.fromTo(
+                    letterSpans,
                     { opacity: 0, y: 20, rotation: -90 },
                     {
                         opacity: 1,
@@ -175,8 +189,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         ease: animationTransition,
                     }
                 );
-
-                // Swirl Out Animation
+    
+                // Swirl Out
                 gsap.delayedCall(2.5, () => {
                     if (isCancelled) return;
                     gsap.to(letterSpans, {
@@ -187,40 +201,42 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                         stagger: endDuration,
                         ease: animationTransition,
                         onComplete: () => {
-                            newText.remove();
+                            span.remove();
                             index = (index + 1) % texts.length;
                             animateNextText();
-                        }
+                        },
                     });
                 });
-            }
-
+            };
+    
             animateNextText();
         }
-
-        // ============================================
+    
+        // ==================================================
         // Word / Letter Based Animations
-        // ============================================
+        // ==================================================
         else {
             const wrapper = dynamicWrapperRef.current;
             if (!wrapper) return;
+    
             wrapper.innerHTML = "";
             let index = 0;
-
-            function animateNext() {
+    
+            const animateNext = () => {
                 if (isCancelled) return;
+    
                 const text = texts[index];
                 const el = document.createElement("span");
                 el.className = "fb-animated-heading-text";
                 el.textContent = text;
                 wrapper.appendChild(el);
-
-                let splitType = animationType.includes("letter") ? "letters" : "words";
+    
+                const splitType = animationType.includes("letter") ? "letters" : "words";
                 splitText(el, splitType);
-
+    
                 const words = el.querySelectorAll(".word");
                 const chars = el.querySelectorAll(".char");
-
+    
                 const tl = gsap.timeline({
                     onComplete: () => {
                         gsap.delayedCall(1, () => {
@@ -233,12 +249,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     el.remove();
                                     index = (index + 1) % texts.length;
                                     animateNext();
-                                }
+                                },
                             });
                         });
-                    }
+                    },
                 });
-
+    
                 switch (animationType) {
                     case "words-slide-up":
                         tl.from(words, {
@@ -249,7 +265,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             stagger: startDuration,
                         });
                         break;
-
+    
                     case "words-rotate-in":
                         tl.set(words, { transformPerspective: 1000 });
                         tl.from(words, {
@@ -259,7 +275,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             stagger: startDuration,
                         });
                         break;
-
+    
                     case "words-slide-from-right":
                         tl.from(words, {
                             opacity: 0,
@@ -269,25 +285,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             stagger: startDuration,
                         });
                         break;
-
+    
                     case "letters-slide-up":
                         tl.from(chars, {
                             yPercent: 100,
+                            opacity: 0,
                             duration: startDuration * 3,
                             ease: animationTransition,
                             stagger: startDuration,
                         });
                         break;
-
+    
                     case "letters-slide-down":
                         tl.from(chars, {
                             yPercent: -120,
+                            opacity: 0,
                             duration: startDuration * 3,
                             ease: animationTransition,
                             stagger: startDuration,
                         });
                         break;
-
+    
                     case "letters-fade-in":
                         tl.from(chars, {
                             opacity: 0,
@@ -296,7 +314,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             stagger: startDuration,
                         });
                         break;
-
+    
                     case "letters-fade-in-random":
                         tl.from(chars, {
                             opacity: 0,
@@ -305,7 +323,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             stagger: { amount: startDuration * 5, from: "random" },
                         });
                         break;
-
+    
                     case "scrub-each-word":
                         tl.from(words, {
                             opacity: 0.2,
@@ -314,18 +332,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             stagger: { each: startDuration * 2 },
                         });
                         break;
-
+    
                     default:
                         break;
                 }
-
+    
                 currentTimeline.add(tl);
-            }
-
+            };
+    
             animateNext();
         }
-
+    
+        // ==================================================
         // Cleanup
+        // ==================================================
         return () => {
             isCancelled = true;
             ctx.revert();
@@ -337,8 +357,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         animationType,
         startDuration,
         endDuration,
-        animationTransition
+        animationTransition,
     ]);
+    
+    
+
 
 
     const Tag = animatedHeadingMainTag ? animatedHeadingMainTag : "div";
