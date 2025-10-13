@@ -465,13 +465,6 @@ const TemplateGrid = ({
                 </div>
             </div>
 
-            {isPluginUpgradeModalOpen && (
-                <PluginUpgradeModal
-                    isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
-                    setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
-                />
-            )}
-
             {isModalOpen && userData?.email && (
                 <TemplateImport
                     template={templateData}

@@ -7,7 +7,10 @@ const attributes = {
         type: 'string',
         default: '',
     },
-
+    animationOption: {
+        type: 'string',
+        default: 'text-animation'
+    },
     animationType: {
         type: 'string',
         default: 'typing'
@@ -19,6 +22,10 @@ const attributes = {
     endDuration: {
         type: 'number',
         default: 0.05
+    },
+    delayDuration: {
+        type: 'number',
+        default: 1
     },
     animationTransition: {
         type: 'string',
@@ -87,7 +94,10 @@ const attributes = {
             },
         ]
     },
-
+    animatedHeadingHighlightText: {
+        type: 'string',
+        default: 'Highlight Text'
+    },
    animatedHeadingCursorSwitch: {
         type: 'boolean',
         default: true
