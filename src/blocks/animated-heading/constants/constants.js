@@ -89,4 +89,12 @@ export const ICON_ALIGN = [
 export const ANIMATION_TYPE = [
 	{ label: __("Typing", "frontis-blocks"), value: "typing" },
 	{ label: __("Swirl", "frontis-blocks"), value: "swirl" },
+	{ label: __("Words Slide Up", "frontis-blocks"), value: "words-slide-up" },
+	{ label: __("Words Rotate In", "frontis-blocks"), value: "words-rotate-in" },
+	{ label: __("Words Slide From Right", "frontis-blocks"), value: "words-slide-from-right" },
+	{ label: __("Letters Slide Up", "frontis-blocks"), value: "letters-slide-up" },
+	{ label: __("Letters Slide Down", "frontis-blocks"), value: "letters-slide-down" },
+	{ label: __("Letters Fade In", "frontis-blocks"), value: "letters-fade-in" },
+	{ label: __("Letters Fade In Random", "frontis-blocks"), value: "letters-fade-in-random" },
+	{ label: __("Scrub Each Word", "frontis-blocks"), value: "scrub-each-word" },
 ];

@@ -12,8 +12,19 @@ const attributes = {
         type: 'string',
         default: 'typing'
     },
-    
-   animatedHeadingAlignment: {
+    startDuration: {
+        type: 'number',
+        default: 0.05
+    },
+    endDuration: {
+        type: 'number',
+        default: 0.05
+    },
+    animationTransition: {
+        type: 'string',
+        default: 'power1.out',
+    },
+    animatedHeadingAlignment: {
         type: 'object',
         default: {
             Desktop: 'left',
@@ -74,20 +85,7 @@ const attributes = {
                 id: 'item-4',
                animatedHeadingTitle: 'Custom Web Solutions',
             },
-        ],
-        items: {
-            type: 'object',
-            properties: {
-                id: {
-                    type: 'string',
-                    default: ''
-                },
-               animatedHeadingTitle: {
-                    type: 'string',
-                    default: 'WordPress Plugins'
-                },
-            }
-        }
+        ]
     },
 
    animatedHeadingCursorSwitch: {
