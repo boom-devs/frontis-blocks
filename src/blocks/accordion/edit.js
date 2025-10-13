@@ -122,7 +122,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
             <div {...blockProps}>
                 <div
-                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook} ${accordionGlobalWraperClass}`} id={accordionGlobalWraperID} ref={panelRef}
+                    className={`fb-parent-wrapper fb-accordion-wrapper fb-parent-${blockID} ${classHook} ${accordionGlobalWraperClass}`} id={accordionGlobalWraperID} ref={panelRef}
                 >
                     <div className={`fb-accordion-container`}>
                         <div className="fb-accordion-inner">
