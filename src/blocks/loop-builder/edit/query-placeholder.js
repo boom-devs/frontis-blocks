@@ -139,7 +139,9 @@ export default function QueryPlaceholder( {
 	clientId,
 	name,
 } ) {
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps({
+		className: 'fb-loop-builder-variation-picker',
+	});
 
 	// Active variation/icon/label resolve
 	const { blockType, activeBlockVariation } = useSelect(
