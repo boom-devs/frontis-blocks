@@ -1,13 +1,12 @@
 <?php
 namespace FrontisBlocks\Assets;
 use FrontisBlocks\Traits\Singleton;
-use FrontisBlocks\Utils\Helper;
 
 class TemplateProcessor {
     use Singleton;
 
     public function process_template($data) {
-        // ---- Minimal: safely get template_content (handles array, WP_Post, string) ----
+
         $template_content = '';
         if (is_array($data) && isset($data[0]) && isset($data[0]->post_content)) {
             $template_content = (string) $data[0]->post_content;
@@ -16,14 +15,15 @@ class TemplateProcessor {
         } elseif (is_string($data)) {
             $template_content = $data;
         }
-        // যদি কিছুই না পাই, graceful exit
+
+        // If nothing is found, graceful exit
         if ($template_content === '') {
             return '';
         }
 
         // Step 1: Detect and replace wp:block with ref content
         preg_match_all('/<!--\s*wp:block\s*{"ref"\s*:\s*(\d+)\}\s*\/-->/', $template_content, $block_matches);
-        $pattern_ids = $block_matches[1] ?? []; // Array of synced pattern IDs
+        $pattern_ids = $block_matches[1] ?? [];
 
         if (!empty($pattern_ids)) {
             foreach ($pattern_ids as $index => $pattern_id) {
@@ -40,7 +40,6 @@ class TemplateProcessor {
         }
 
         // Step 2: Detect wp:template-part and extract slugs
-        // Minimal: add 's' (DOTALL) + \s* so multiline attributes also match
         $pattern = '/<!--\s*wp:template-part\s*{(.*?)}\s*\/-->/s';
         $index_to_slug = [];
 
