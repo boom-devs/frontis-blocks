@@ -87,9 +87,7 @@ class AssetsGenerator
 			$this->reset();
 			update_post_meta($post_id, 'fb_page_assets_generation', 'compiled');
 		}
-
-		// var_dump(Helper::check_url_has_fse_template() || get_post_type($post_id) === 'wp_template');
-		// Queue only for specific conditions
+		
 		if (Helper::check_url_has_fse_template() || get_post_type($post_id) === 'wp_template') {
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'fb_job_schedule';
