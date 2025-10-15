@@ -36,6 +36,7 @@ class AssetsGenerator
 	private $skip_advanced_video_js = false;
 	private $skip_animated_heading_js = false;
 	private $skip_animated_heading_textplugin_js = false;
+	private $blocks_used_in_page = [];
 
 	private function reset() {
 		update_post_meta($this->post_id, 'fb_page_assets_generation', 'compiling');
@@ -59,6 +60,7 @@ class AssetsGenerator
 		$this->skip_advanced_video_js = false;
 		$this->skip_animated_heading_js = false;
 		$this->skip_animated_heading_textplugin_js = false;
+		$this->blocks_used_in_page = [];
 	}
 
 	public function generate_page_assets($post_id, $post, $generate_critical_css = false)
@@ -87,7 +89,7 @@ class AssetsGenerator
 			$this->reset();
 			update_post_meta($post_id, 'fb_page_assets_generation', 'compiled');
 		}
-		
+
 		if (Helper::check_url_has_fse_template() || get_post_type($post_id) === 'wp_template') {
 			global $wpdb;
 			$table_name = $wpdb->prefix . 'fb_job_schedule';
