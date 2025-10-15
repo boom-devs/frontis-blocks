@@ -39,12 +39,14 @@ const TemplateContent = ({
     isPluginUpgradeModalOpen,
     setIsPluginUpgradeModalOpen,
     currentPage,
-    onPageChange
+    onPageChange,
+    isImporting,
+    setIsImporting
 }) => {
 
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
-    const [isImporting, setIsImporting] = useState(false);
+    
 
     useEffect(() => {
         if (activeTab && schema[activeTab]) {
@@ -161,7 +163,7 @@ const TemplateContent = ({
 
     return (
         <>
-            <div className="fb-template-library-store-content">
+            <div className="fb-template-library-store-content" style={isImporting ? { overflow: 'hidden' } : {}}>
                 <div className="fb-template-library-content-header">
                     <div className="fb-template-library-content-header-left">
                         <h2>All {capitalize(activeTab)}</h2>
@@ -375,6 +377,9 @@ const TemplateContent = ({
                         )}
                     </>
                 )}
+                {isImporting && (
+                    <TemplateLoader />
+                )}
             </div>
             {isLoginModalOpen && (
                 <LoginSignupModal
@@ -389,9 +394,6 @@ const TemplateContent = ({
                     isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
                     setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                 />
-            )}
-            {isImporting && (
-                <TemplateLoader />
             )}
         </>
     );
