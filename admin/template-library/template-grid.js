@@ -24,6 +24,7 @@ const TemplateGrid = ({
     tags = [],
     dependencies = [],
     preview_url,
+    uploads,
     colors,
     templateType,
     gradientColors,
@@ -88,6 +89,7 @@ const TemplateGrid = ({
         author: 'Template Author',
         activeTab,
         preview_url,
+        uploads,
         colors,
         customColors,
         gradientColors,
@@ -163,8 +165,12 @@ const TemplateGrid = ({
 
 
     const handleDemo = useCallback(() => {
-        console.log("Demo clicked for:", id);
-    }, [id]);
+        if (preview_url && preview_url.trim() !== '') {
+            window.open(preview_url, '_blank');
+        } else {
+            console.log('No preview URL available');
+        }
+    }, [preview_url]);
 
     const [patternsData] = usePostDataMutation();
     const getTemplatesData = async (route, key, id) => {
