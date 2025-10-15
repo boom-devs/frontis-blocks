@@ -1131,7 +1131,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${accordionZIndex?.Desktop ? `z-index: ${accordionZIndex?.Desktop};` : ''}
             ${accordionOverflow !== 'default' ? `overflow: ${accordionOverflow};` : ''}
           }
-          .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
+          .fb-accordion-main-wrapper.${blockID} .fb-accordion-wrapper {
                 position: relative;
                 ${accordionPaddingDesktopWidth && accordionDesktopPadding?.top ? `padding: ${accordionPaddingDesktopWidth};` : ''}
                 ${accordionMarginDesktopWidth && accordionDesktopMargin?.top ? `margin: ${accordionMarginDesktopWidth};` : ''}
@@ -1161,7 +1161,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 transition: all .3s ease-in-out;
             }
         
-            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper:hover {
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-wrapper:hover {
                 ${
                     accordionBgHoverType === "gradient"
                       ? `background: ${
@@ -1423,7 +1423,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionVROrientationType === 'bottom' && accordionVRBottomOffset?.Tablet ? `bottom: ${accordionVRBottomOffset?.Tablet}${accordionVRBottomOffsetUnits?.Tablet};` : ''}
                 ${accordionZIndex?.Tablet ? `z-index: ${accordionZIndex?.Tablet};` : ''}
             }
-            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-wrapper {
                 ${accordionPaddingTabletWidth && accordionTabPadding?.top ? `padding: ${accordionPaddingTabletWidth};` : ''}  
                 ${accordionMarginTabletWidth && accordionTabMargin?.top ? `margin: ${accordionMarginTabletWidth};` : ''}
                 ${accordionBorderTabletWidth && accordionTabBorderWidth?.top ? `border-width: ${accordionBorderTabletWidth};` : ''}
@@ -1484,7 +1484,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${accordionPositionType !== 'default' && accordionPositionType !== 'relative' && accordionVROrientationType === 'bottom' && accordionVRBottomOffset?.Mobile ? `bottom: ${accordionVRBottomOffset?.Mobile}${accordionVRBottomOffsetUnits?.Mobile};` : ''}
                 ${accordionZIndex?.Mobile ? `z-index: ${accordionZIndex?.Mobile};` : ''}
             }
-            .fb-accordion-main-wrapper.${blockID} .fb-parent-wrapper {
+            .fb-accordion-main-wrapper.${blockID} .fb-accordion-wrapper {
                 ${accordionPaddingMobileWidth && accordionMobilePadding?.top ? `padding: ${accordionPaddingMobileWidth};` : ''}
                 ${accordionMarginMobileWidth && accordionMobileMargin?.top ? `margin: ${accordionMarginMobileWidth};` : ''}
                 ${accordionBorderMobileWidth && accordionMobileBorderWidth?.top ? `border-width: ${accordionBorderMobileWidth};` : ''}
