@@ -9,6 +9,7 @@ import {ToastContainer, toast } from "react-toastify";
 import { TemplateContentLoader, TemplateLoader } from "./template-loader";
 import { usePostDataMutation } from "./services/wpapi";
 import { ClipLoader } from "react-spinners";
+import PluginUpgradeModal from "./plugin-upgrade";
 
 const TemplateContent = ({
     activeTab,
@@ -235,6 +236,7 @@ const TemplateContent = ({
                                         categories={template.categories || []}
                                         templateType={activeTab}
                                         preview_url={template.preview_url || ''}
+                                        uploads={template.uploads || ''}
                                         colors={template.colors || []}
                                         customColors={template.custom_colors || []}
                                         gradientColors={template.color_gradients || []}
@@ -380,6 +382,12 @@ const TemplateContent = ({
                     onRequestClose={handleCloseLoginModal}
                     isLoginModalOpen={isLoginModalOpen}
                     setIsLoginModalOpen={setIsLoginModalOpen}
+                />
+            )}
+            {isPluginUpgradeModalOpen && (
+                <PluginUpgradeModal
+                    isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
+                    setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                 />
             )}
             {isImporting && (

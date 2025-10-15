@@ -24,7 +24,7 @@ export default function save({ attributes }) {
         <>
             <div {...blockProps}>
                 <div
-                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook} ${accordionGlobalWraperClass}`} id={accordionGlobalWraperID}
+                    className={`fb-parent-wrapper fb-accordion-wrapper fb-parent-${blockID} ${classHook} ${accordionGlobalWraperClass}`} id={accordionGlobalWraperID}
                 >
                     <div className={`fb-accordion-container`}>
                         <div className="fb-accordion-inner">

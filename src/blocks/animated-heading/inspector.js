@@ -27,7 +27,9 @@ import {
     BORDER_STYLES,
 	PRESETS,
 	OVERFLOW_OP,
-    ANIMATION_TYPE,
+    ANIMATION_OPTIONS,
+    TEXT_ANIMATION_TYPE,
+    HIGHLIGHT_ANIMATION_TYPE,
 } from "./constants/constants";
 import SortableItem from './sortableItem';
 import FB_Spacing from '@Components/spacing';
@@ -53,13 +55,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         blockStyle,
+        animationOption,
         animationType,
+        startDuration,
+        endDuration,
+        delayDuration,
         animatedHeadingAlignment,
         animatedHeadingMainTag,
         animatedHeadingGap,
         animatedHeadingGapUnits,
         animatedHeadingPrefix,
         animatedHeadingItems,
+        animatedHeadingHighlightText,
         animatedHeadingCursorSwitch,
         animatedHeadingCursor,
         animatedHeadingSuffix,
@@ -542,15 +549,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${animatedHeadingGlobalBorderHoverColor ? `border-color: ${animatedHeadingGlobalBorderHoverColor};` : ''}
         }
 
-        .${blockId} .fb-animated-heading-wrapper.animated-type-typing {
+        .${blockId} .fb-animated-heading-wrapper {
             display: flex;
             align-items: center;
             ${animatedHeadingGap?.Desktop &&animatedHeadingGapUnits?.Desktop ? `gap: ${animatedHeadingGap?.Desktop}${animatedHeadingGapUnits?.Desktop};` : ''}
             ${animatedHeadingAlignment?.Desktop ? `justify-content: ${animatedHeadingAlignment?.Desktop};` : ''}
-        }
-        .${blockId} .fb-animated-heading-wrapper.animated-type-swirl {
-            display: block;
-            ${animatedHeadingAlignment?.Desktop ? `text-align: ${animatedHeadingAlignment?.Desktop};` : ''}
         }
 
         .${blockId} .fb-animated-heading-wrapper .fb-animated-headings:empty {
@@ -638,14 +641,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${animatedHeadingGlobalTabletBorderRadiusWidth && animatedHeadingGlobalTabletBorderRadius?.top ? `border-radius: ${animatedHeadingGlobalTabletBorderRadiusWidth};` : ''}
             }
 
-            .${blockId} .fb-animated-heading-wrapper.animated-type-typing {
-                ${animatedHeadingGap?.Tablet &&animatedHeadingGapUnits?.Tablet ? `gap: ${animatedHeadingGap?.Tablet}${animatedHeadingGapUnits?.Tablet};` : ''}
-                ${animatedHeadingAlignment?.Tablet ? `justify-content: ${animatedHeadingAlignment?.Tablet};` : ''}
-            }
-            .${blockId} .fb-animated-heading-wrapper.animated-type-swirl {
-                ${animatedHeadingAlignment?.Tablet ? `text-align: ${animatedHeadingAlignment?.Tablet};` : ''}
-            }
-
             .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-prefix,
             .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-suffix {
                 ${animatedHeadingNormalTextGlobalTypoSwitcher?.fontSize === false && animatedHeadingNormalTextFontSize?.Tablet && animatedHeadingNormalTextFontSizeUnits?.Tablet ? `font-size: ${animatedHeadingNormalTextFontSize?.Tablet}${animatedHeadingNormalTextFontSizeUnits?.Tablet};` : ''}
@@ -676,15 +671,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${animatedHeadingGlobalMobileMarginWidth && animatedHeadingGlobalMobileMargin?.top ? `margin: ${animatedHeadingGlobalMobileMarginWidth};` : ''}
                 ${animatedHeadingGlobalMobileBorderWidth && animatedHeadingGlobalMobileBorder?.top ? `border-width: ${animatedHeadingGlobalMobileBorderWidth};` : ''}
                 ${animatedHeadingGlobalMobileBorderRadiusWidth && animatedHeadingGlobalMobileBorderRadius?.top ? `border-radius: ${animatedHeadingGlobalMobileBorderRadiusWidth};` : ''}
-            }
-
-            .${blockId} .fb-animated-heading-wrapper.animated-type-typing {
-                ${animatedHeadingGap?.Mobile &&animatedHeadingGapUnits?.Mobile ? `gap: ${animatedHeadingGap?.Mobile}${animatedHeadingGapUnits?.Mobile};` : ''}
-                ${animatedHeadingAlignment?.Mobile ? `justify-content: ${animatedHeadingAlignment?.Mobile};` : ''}
-            }
-
-            .${blockId} .fb-animated-heading-wrapper.animated-type-swirl {
-                ${animatedHeadingAlignment?.Mobile ? `text-align: ${animatedHeadingAlignment?.Mobile};` : ''}
             }
 
             .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-prefix,
@@ -836,11 +822,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             <PanelBody title={__("General Info", "frontis-blocks")} initialOpen={true}>
 
                 <SelectControl
+                    label={__("Animation Category", "frontis-blocks")}
+                    value={animationOption}
+                    options={ANIMATION_OPTIONS}
+                    onChange={(value) => setAttributes({ animationOption: value })}
+                />
+
+                <SelectControl
                     label={__("Animation Type", "frontis-blocks")}
                     value={animationType}
-                    options={ANIMATION_TYPE}
+                    options={animationOption === "text-animation" ? TEXT_ANIMATION_TYPE : HIGHLIGHT_ANIMATION_TYPE}
                     onChange={(value) => setAttributes({ animationType: value })}
                 />
+
+                <RangeControl
+                    label="Start Duration"
+                    value={startDuration}
+                    onChange={(value) => setAttributes({ startDuration: value })}
+                    min={0.01}
+                    max={5}
+                    step={0.01}
+                    resetFallbackValue={""}
+                />
+
+                <RangeControl
+                    label="End Duration"
+                    value={endDuration}
+                    onChange={(value) => setAttributes({ endDuration: value })}
+                    min={0.01}
+                    max={5}
+                    step={0.01}
+                    resetFallbackValue={""}
+                />
+
+                {/* <RangeControl
+                    label={__("Delay Duration (seconds)", "frontis-blocks")}
+                    value={delayDuration}
+                    onChange={(value) =>
+                        setAttributes({ delayDuration: value })
+                    }
+                    min={0}
+                    max={5}
+                    step={0.01}
+                /> */}
 
                 <FB_ResponsiveAlignmentControl
                     label={__("Alignment", "frontis-blocks")}
@@ -864,37 +888,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     help={__("Keep empty to hide.", "frontis-blocks")}
                 />
 
-                <BaseControl
-                    label={__("Text Items", "frontis-blocks")}
-                >
-                    <div className="fb-animated-heading-items-wrapper">
-                        <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                            <SortableContext items={animatedHeadingItems.map(item => item.id)}>
-                                <ul className='dnd-items-wrapper'>
-                                    {animatedHeadingItems.map((item, index) => (
-                                        <SortableItem
-                                            key={item.id}
-                                            id={item.id}
-                                            item={item}
-                                            handleChangeItem={handleChangeItem}
-                                            handleDeleteItem={handleDeleteItem}
-                                            handleDuplicateItem={handleDuplicateItem}
-                                            index={index}
-                                        />
-                                    ))}
-                                </ul>
-                            </SortableContext>
-                        </DndContext>
-                        <Button isPrimary onClick={handleAddItem}>
-                            {__("Add Item", "frontis-blocks")}
-                        </Button>
-                    </div>
-                </BaseControl>
+                {animationOption === "text-animation" && (
+                    <BaseControl
+                        label={__("Text Items", "frontis-blocks")}
+                    >
+                        <div className="fb-animated-heading-items-wrapper">
+                            <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                                <SortableContext items={animatedHeadingItems.map(item => item.id)}>
+                                    <ul className='dnd-items-wrapper'>
+                                        {animatedHeadingItems.map((item, index) => (
+                                            <SortableItem
+                                                key={item.id}
+                                                id={item.id}
+                                                item={item}
+                                                handleChangeItem={handleChangeItem}
+                                                handleDeleteItem={handleDeleteItem}
+                                                handleDuplicateItem={handleDuplicateItem}
+                                                index={index}
+                                            />
+                                        ))}
+                                    </ul>
+                                </SortableContext>
+                            </DndContext>
+                            <Button isPrimary onClick={handleAddItem}>
+                                {__("Add Item", "frontis-blocks")}
+                            </Button>
+                        </div>
+                    </BaseControl>
+                )}
 
                 {animationType === "typing" && (
                     <>
                         <ToggleControl
-                                label={__("Cursor Switch", "frontis-blocks")}
+                            label={__("Cursor Switch", "frontis-blocks")}
                             checked={animatedHeadingCursorSwitch}
                             onChange={(value) => setAttributes({animatedHeadingCursorSwitch: value })}
                         />
@@ -911,6 +937,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     </>
                 )}
 
+                {animationOption === "highlight-animation" && (
+                    <TextControl
+                        label={__("Highlight Text", "frontis-blocks")}
+                        value={animatedHeadingHighlightText}
+                        onChange={(value) => setAttributes({animatedHeadingHighlightText: value })}
+                    />
+                )}
+
                 <TextControl
                     label={__("Suffix Text", "frontis-blocks")}
                     value={animatedHeadingSuffix}
@@ -919,7 +953,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     help={__("Keep empty to hide.", "frontis-blocks")}
                 />
 
-                {animationType === "typing" && (
+                {/* {animationType === "typing" && ( */}
                     <FB_Range
                         min={0}
                         max={100}
@@ -933,7 +967,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         rangeStep={1}
                         resetFallbackValue={"8"}
                     />
-                )}
+                {/* )} */}
             </PanelBody>
 
         </>

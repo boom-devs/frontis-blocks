@@ -399,7 +399,7 @@ class TemplateLibrary extends AjaxBase {
         if ($page_id) {
             // Insert job using your existing Helper method
             Helper::insert_job($page_id, $title . $page_id);
-
+            
             wp_send_json_success([
                 'message' => 'Page created successfully',
                 'page_id' => $page_id,
