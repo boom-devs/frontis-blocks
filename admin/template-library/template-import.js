@@ -25,8 +25,12 @@ const TemplateImport = ({
     }, []);
 
     const handleLiveDemo = useCallback(() => {
-        window.open('#', '_blank');
-    }, [template?.id]);
+        if (template.preview_url && template.preview_url.trim() !== '') {
+            window.open(template.preview_url, '_blank');
+        } else {
+            console.log('No preview URL available');
+        }
+    }, [template.preview_url]);
 
     const handleDownload = useCallback(() => {
         console.log('Download clicked for:', template?.id);
