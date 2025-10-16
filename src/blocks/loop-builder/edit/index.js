@@ -18,7 +18,7 @@ const QueryEdit = ( props ) => {
 
 	if(!loopBuilderAvailable) {
 		return (
-			<p>Please upgrade to the latest version of the plugin to use this block.</p>
+			<p>{__("This block is available on Pro. Upgrade to Pro to use this block.", "frontis-blocks")}</p>
 		)
 	}
 	

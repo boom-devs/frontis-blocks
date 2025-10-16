@@ -16,6 +16,6 @@ registerBlockType( metadata.name, {
 	attributes,
 	edit: Edit,
 	save,
-	icon: FB_Block_Icons.features_list,
+	icon: FB_Block_Icons.news_ticker,
 	deprecated
 } );
