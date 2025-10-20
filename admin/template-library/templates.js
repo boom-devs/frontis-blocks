@@ -512,6 +512,7 @@ const PatternLibraryButton = () => {
                                     setIsLoginModalOpen={setIsLoginModalOpen}
                                     setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                                     isProPlugin={isProPlugin}
+                                    isImporting={isImporting}
                                 />
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">

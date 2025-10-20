@@ -10,6 +10,8 @@ import generateColorsVariables from "../global-settings/components/GenerateColor
 import { parse, serialize } from "@wordpress/blocks";
 import { usePostDataMutation } from "../services/laravelapi";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setAttribute } from "../store/attributesSlice";
 
 const FullSiteImportSettingConfig = ({
     template, 
@@ -32,9 +34,10 @@ const FullSiteImportSettingConfig = ({
 	const [fontFamilies, setFontFamilies] = useState([]);
 	const [globalTypography, setGlobalTypography] = useState({});
 
-    const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
+  const dispatch = useDispatch();
 
-    const deviceType = useDeviceType();
+  const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
+  const deviceType = useDeviceType();
 
 
     // Set global typography
@@ -303,8 +306,9 @@ const FullSiteImportSettingConfig = ({
             }
 
             toast.success("Site imported successfully!", {
-                position: "top-right",
-                autoClose: 3000,
+              position: "top-right",
+              autoClose: 3000,
+              theme: "light",
             });
         } catch (err) {
             console.error("Import error:", err);
@@ -527,16 +531,10 @@ const FullSiteImportSettingConfig = ({
       
           handleUpdateState();
           onClose();
+          dispatch(setAttribute({ importSuccess: true }));
         } catch (error) {
           console.error("Import failed:", error);
-          // toast.error(__('Import failed. Please try again.', 'frontis-blocks'), {
-          //     position: "top-right",
-          //     autoClose: 3000,
-          //     hideProgressBar: false,
-          //     closeOnClick: true,
-          //     pauseOnHover: true,
-          //     draggable: true,
-          // });
+          dispatch(setAttribute({ importSuccess: false }));
         } finally {
           setIsImporting(false);
           setImportProgress(0);
@@ -545,7 +543,7 @@ const FullSiteImportSettingConfig = ({
       }, [
         template?.id,
         formData,
-        onClose,
+        onClose, 
         customColors,
         customGradientColors,
         typography,
