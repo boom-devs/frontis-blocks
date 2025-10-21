@@ -1,7 +1,21 @@
 import { useState, useEffect } from "@wordpress/element";
 import { TemplateCategoryLoader } from "./template-loader";
 
-const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, onChangeTemplates, isProTemplate, setIsProTemplate, setActiveTagTab, setActiveCategoryTab, resetCat, setResetCat, loading , setLoading}) => {
+const TemplateSidebar = ({ activeTab,
+     activeCategory,
+      setActiveCategory,
+       data,
+        onChangeTemplates,
+         isProTemplate,
+          setIsProTemplate,
+           setActiveTagTab,
+            setActiveCategoryTab,
+             resetCat,
+              setResetCat,
+               loading,
+                setLoading,
+                isImporting,
+    }) => {
     const schema = data;
     const categories = schema[activeTab]?.categories || [];
 
@@ -68,7 +82,7 @@ const TemplateSidebar = ({ activeTab, activeCategory, setActiveCategory, data, o
             )}
             <div className="fb-template-library-store-sidebar-tabs">
                
-                {loading ? (
+                {loading || isImporting ? (
                     <TemplateCategoryLoader count={15} />
                 ) : (
                     <>
