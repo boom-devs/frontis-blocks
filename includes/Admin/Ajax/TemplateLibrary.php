@@ -82,10 +82,6 @@ class TemplateLibrary extends AjaxBase {
         }
     }
 
-    function install_active_plugins() {
-        
-    }
-
     // function upload_files() {
     //     $tempZipFile = null;
     //     $uploads_dir = null;
@@ -238,209 +234,230 @@ class TemplateLibrary extends AjaxBase {
     // }
 
     function upload_files() {
-        check_ajax_referer('wp_rest', 'security');
+        $this->check_permission();
     
         $zip_url = isset($_POST['uploads']) ? esc_url_raw($_POST['uploads']) : '';
-    
-        if (empty($zip_url) || !filter_var($zip_url, FILTER_VALIDATE_URL)) {
-            wp_send_json_error(['message' => 'Invalid or missing ZIP URL']);
+
+        if (!$zip_url) {
+            wp_send_json_error(['message' => 'No uploads URL provided'], 400);
         }
     
-        require_once ABSPATH . 'wp-admin/includes/file.php';
-        require_once ABSPATH . 'wp-admin/includes/class-pclzip.php';
+        $uploads_dir = wp_upload_dir();
+        $destination = trailingslashit($uploads_dir['basedir']);
     
-        $upload_dir = wp_upload_dir();
-        $destination = trailingslashit($upload_dir['basedir']);
-    
-        // ensure upload dir
         if (!is_dir($destination)) {
             wp_mkdir_p($destination);
         }
     
-        $tempZipFile = null;
+        $tempZipFile = tempnam(sys_get_temp_dir(), 'downloaded_zip_');
     
         try {
-            // Create temp file
-            $tempZipFile = tempnam(sys_get_temp_dir(), 'downloaded_zip_');
-            if (!$tempZipFile) {
-                wp_send_json_error(['message' => 'Failed to create temporary file']);
-            }
-    
-            // cURL download
+            // Download ZIP
             $ch = curl_init($zip_url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_TIMEOUT, 300);
-    
             $data = curl_exec($ch);
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    
+            if (curl_errno($ch)) throw new Exception('cURL Error: ' . curl_error($ch));
             curl_close($ch);
     
-            if ($httpCode !== 200 || empty($data)) {
-                wp_send_json_error(['message' => 'Download failed or invalid ZIP']);
-            }
+            if ($httpCode !== 200 || !$data) throw new Exception('Failed to download zip file');
     
-            // Save to temp file
             file_put_contents($tempZipFile, $data);
     
-            // unzip using PclZip
+            // Extract ZIP
             $zip = new PclZip($tempZipFile);
             $content = $zip->listContent();
-            if ($content == 0) {
-                wp_send_json_error(['message' => 'Failed to read ZIP content']);
-            }
+            if ($content == 0) throw new Exception('Failed to read zip content');
     
-            $extracted_files_total = 0;
+            $extracted_files = [];
+    
             foreach ($content as $file_info) {
-                if (!empty($file_info['folder'])) continue;
-                $filename = basename($file_info['filename']);
-                if (!$filename) continue;
+                $filePath = $destination . $file_info['filename'];
     
-                $zip->extractByIndex(
+                // Create folder structure too
+                if (!empty($file_info['folder'])) {
+                    if (!is_dir($filePath)) wp_mkdir_p($filePath);
+                    continue;
+                }
+    
+                // Extract file
+                $result = $zip->extractByIndex(
                     $file_info['index'],
-                    PCLZIP_OPT_PATH, $destination,
+                    PCLZIP_OPT_PATH,
+                    $destination,
                     PCLZIP_OPT_REPLACE_NEWER
                 );
     
-                if (file_exists($destination . $filename)) {
-                    $extracted_files_total++;
+                if ($result != 0 && file_exists($filePath)) {
+                    $extracted_files[] = $file_info['filename'];
                 }
             }
     
-        } finally {
-            if ($tempZipFile && file_exists($tempZipFile)) {
-                unlink($tempZipFile);
-            }
+            unlink($tempZipFile);
+    
+            wp_send_json_success([
+                'message' => 'Files extracted successfully',
+                'path'    => $destination,
+                'files'   => $extracted_files,
+                'count'   => count($extracted_files),
+            ]);
+    
+        } catch (Exception $e) {
+            if (file_exists($tempZipFile)) unlink($tempZipFile);
+            wp_send_json_error(['message' => $e->getMessage()], 500);
         }
+    }
     
-        wp_send_json_success([
-            'message' => 'ZIP extracted successfully',
-            'count'   => $extracted_files_total,
-            'path'    => $destination
-        ]);
-    }    
-    
+    /** Activate Theme */
     public function active_theme() {
-        $theme_slug = 'frontis';
-        $theme_information = wp_remote_get("https://api.wordpress.org/themes/info/1.1/?action=query_themes&request[theme]={$theme_slug}");
-        $theme_information_response = json_decode($theme_information['body'], true);       
+        $this->check_permission();
+
+        $theme_slug = !empty($_POST['theme_slug']) ? sanitize_text_field($_POST['theme_slug']) : 'frontis';
+
         $themes = wp_get_themes();
-        $theme_exist = false;
+        $theme_exist = isset($themes[$theme_slug]);
 
-        if($themes) {
-            foreach($themes as $key => $theme) {
-                if($key === $theme_slug) {
-                    $theme_exist = true;
-                }
-                
-                continue;
+        if (!$theme_exist) {
+            // Get theme version
+            $theme_information = wp_remote_get("https://api.wordpress.org/themes/info/1.1/?action=query_themes&request[theme]={$theme_slug}");
+            $theme_information_response = json_decode(wp_remote_retrieve_body($theme_information), true);
+            $theme_version = $theme_information_response['themes'][0]['version'] ?? null;
+
+            if (!$theme_version) {
+                wp_send_json_error(['message' => 'Theme info not found']);
             }
-        }
-        
-        $theme_version = $theme_information_response['themes'][0]['version'];
-        if(!$theme_exist) {
+
+            // Download theme
             $download_url = "https://downloads.wordpress.org/theme/{$theme_slug}.{$theme_version}.zip";
-            $upload = wp_upload_bits('temp-' . $theme_slug . '.zip', null, '');
-            
-            if ($upload['error']) {
-                wp_die('Upload error: ' . $upload['error']);
+            $temp_file = wp_tempnam($download_url);
+            $response = wp_remote_get($download_url, ['timeout' => 300, 'stream' => true, 'filename' => $temp_file]);
+
+            if (is_wp_error($response)) {
+                wp_send_json_error(['message' => 'Theme download failed: ' . $response->get_error_message()]);
             }
-            
-            $temp_zip_path = $upload['file'];
-            
-            // Download using wp_remote_get with stream to file
-            $download_result = wp_remote_get($download_url, array(
-                'timeout' => 300,
-                'stream' => true,
-                'filename' => $temp_zip_path
-            ));
-            
-            if (is_wp_error($download_result)) {
-                wp_die('Download failed: ' . $download_result->get_error_message());
-            }
-            
-            // Verify download
-            if (!file_exists($temp_zip_path) || filesize($temp_zip_path) == 0) {
-                wp_die('Downloaded file is empty or missing');
-            }
-            
+
+            // Extract
+            if (!class_exists('PclZip')) include ABSPATH . 'wp-admin/includes/class-pclzip.php';
+            $archive = new \PclZip($temp_file);
             $themes_dir = WP_CONTENT_DIR . '/themes';
-            $extract_path = $themes_dir . '/' . $theme_slug;
-            
-            // Create themes directory if it doesn't exist
-            if (!file_exists($themes_dir)) {
-                wp_mkdir_p($themes_dir);
+            $result = $archive->extract(PCLZIP_OPT_PATH, $themes_dir);
+
+            if ($result == 0) {
+                wp_send_json_error(['message' => 'PclZip extraction failed: ' . $archive->errorInfo(true)]);
             }
-            
-            // Remove existing directory if it exists (backup first)
-            if (file_exists($extract_path)) {
-                $backup_dir = $extract_path . '_backup_' . time();
-                rename($extract_path, $backup_dir);
-            }
-            
-            // Initialize PclZip
-            $archive = new PclZip($temp_zip_path);
-            
-            // Extract to themes directory
-            $extract_result = $archive->extract(PCLZIP_OPT_PATH, $themes_dir);
-            
-            if ($extract_result == 0) {
-                wp_die('PclZip extraction failed: ' . $archive->errorInfo(true));
-            }
-            
-            // Clean up temp zip file
-            unlink($temp_zip_path);
-            
-            // Verify extraction by checking for style.css
-            $style_css_path = $extract_path . '/style.css';
-            if (!file_exists($style_css_path)) {
-                wp_die('Theme extraction failed - style.css not found at: ' . $style_css_path);
-            }
-            
-            // Remove any parent directories created by extraction (zip often has extra folder)
-            $extracted_dirs = glob($themes_dir . '/' . $theme_slug . '*');
-            if (count($extracted_dirs) > 1 || (count($extracted_dirs) == 1 && basename($extracted_dirs[0]) != $theme_slug)) {
-                // Move contents from subfolder to correct location
-                foreach ($extracted_dirs as $dir) {
-                    if (is_dir($dir) && basename($dir) != $theme_slug) {
-                        $iterator = new RecursiveIteratorIterator(
-                            new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS),
-                            RecursiveIteratorIterator::SELF_FIRST
-                        );
-                        
-                        foreach ($iterator as $item) {
-                            $dest = str_replace($dir, $extract_path, $item->getPathname());
-                            if ($item->isDir()) {
-                                wp_mkdir_p($dest);
-                            } else {
-                                copy($item->getPathname(), $dest);
-                            }
-                        }
-                        // Remove the extra directory
-                        $this->rmdir_recursive($dir);
-                    }
-                }
-            }
-        }
-        
-        // Activate the theme
-        $activate_result = switch_theme($theme_slug);
-        
-        if (is_wp_error($activate_result)) {
-            return false;
+
+            unlink($temp_file);
         }
 
-        return true;
+        // Activate
+        switch_theme($theme_slug);
+
+        wp_send_json_success(['theme' => $theme_slug, 'activated' => true]);
     }
 
+    /** Install & Activate Plugins */
+    public function install_active_plugins() {
+        $this->check_permission();
+        $plugins = json_decode(stripslashes($_POST['plugins'] ?? '[]'), true);
+        if (!is_array($plugins) || empty($plugins)) wp_send_json_error(['message' => 'No plugins provided']);
+
+        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        require_once ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
+
+        $results = [];
+
+        foreach ($plugins as $plugin) {
+            $slug = sanitize_text_field($plugin['slug']);
+            $version = sanitize_text_field($plugin['version'] ?? '');
+            $plugin_file = $slug . '/' . $slug . '.php';
+
+            $is_installed = file_exists(WP_PLUGIN_DIR . '/' . $plugin_file);
+            $installed_version = $is_installed ? get_plugin_data(WP_PLUGIN_DIR . '/' . $plugin_file)['Version'] : null;
+
+            $need_install = !$is_installed || ($version && version_compare($installed_version, $version, '<'));
+            if ($need_install) {
+                $download_url = $version ? "https://downloads.wordpress.org/plugin/{$slug}.{$version}.zip" : "https://downloads.wordpress.org/plugin/{$slug}.zip";
+                $upgrader = new \Plugin_Upgrader();
+                $install_result = $upgrader->install($download_url);
+                if (is_wp_error($install_result) || !$install_result) {
+                    $results[$slug] = 'install_failed';
+                    continue;
+                }
+            }
+
+            if (!is_plugin_active($plugin_file)) {
+                $activate_result = activate_plugin($plugin_file);
+                $results[$slug] = is_wp_error($activate_result) ? 'activation_failed' : 'installed_and_activated';
+            } else {
+                $results[$slug] = $need_install ? 'installed_and_already_active' : 'already_active';
+            }
+        }
+
+        wp_send_json_success(['plugins' => $results]);
+    }
+     
+
+    // public function full_site_import() {
+    //     $this->check_permission();
+    
+    //     $title   = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
+    //     $content = isset($_POST['content']) ? $_POST['content'] : '';
+    
+    //     if (empty($title)) {
+    //         wp_send_json_error(['message' => 'Title is required']);
+    //     }
+
+    //     // if($uploads_updated) {
+    //     //     $my_domain = 'http://boomdevsco.test/';
+    //     //     preg_match_all('/https?:\/\/[^"\'\s>]+?\.(jpg|jpeg|png|gif|webp|svg)/i', $content, $matches);
+    
+    //     //     if (!empty($matches[0])) {
+    //     //         $image_urls = array_unique($matches[0]);
+    
+    //     //         foreach ($image_urls as $url) {
+    
+    //     //             // If URL contains "2025"
+    //     //             if (preg_match('/\/2025\//', $url)) {
+    //     //                 // Replace everything before 2025 with your given URL
+    //     //                 $new_url = preg_replace('/^https?:\/\/[^\/]+\/.*?(?=2025\/)/', $my_domain . 'wp-content/uploads/', $url);
+    //     //             } else {
+    //     //                 // Replace only the domain name
+    //     //                 $new_url = preg_replace('/^https?:\/\/[^\/]+\//', $my_domain, $url);
+    //     //             }
+    
+    //     //             // Replace inside content
+    //     //             $content = str_replace($url, $new_url, $content);
+    //     //         }
+    //     //     }
+    //     // }
+
+    //     $page_id = wp_insert_post([
+    //         'post_title'   => $title,
+    //         'post_content' => $content, // Save raw JSON directly
+    //         'post_status'  => 'publish',
+    //         'post_type'    => 'page',
+    //     ]);
+    
+    //     if ($page_id) {
+    //         // Insert job using your existing Helper method
+    //         Helper::insert_job($page_id, $title . $page_id);
+            
+    //         wp_send_json_success([
+    //             'message' => 'Page created successfully',
+    //             'page_id' => $page_id,
+    //             'title'   => $title
+    //         ]);
+    //     } else {
+    //         wp_send_json_error(['message' => 'Failed to create page']);
+    //     }
+    // }
 
     public function full_site_import() {
         $this->check_permission();
-
-        $this->upload_files();
-        $this->install_active_plugins();
-        $this->active_theme();
     
         $title   = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
         $content = isset($_POST['content']) ? $_POST['content'] : '';
@@ -448,31 +465,16 @@ class TemplateLibrary extends AjaxBase {
         if (empty($title)) {
             wp_send_json_error(['message' => 'Title is required']);
         }
-
-        if($uploads_updated) {
-            $my_domain = 'http://boomdevsco.test/';
-            preg_match_all('/https?:\/\/[^"\'\s>]+?\.(jpg|jpeg|png|gif|webp|svg)/i', $content, $matches);
     
-            if (!empty($matches[0])) {
-                $image_urls = array_unique($matches[0]);
+        // Ensure unique title
+        $original_title = $title;
+        $suffix = 1;
     
-                foreach ($image_urls as $url) {
-    
-                    // If URL contains "2025"
-                    if (preg_match('/\/2025\//', $url)) {
-                        // Replace everything before 2025 with your given URL
-                        $new_url = preg_replace('/^https?:\/\/[^\/]+\/.*?(?=2025\/)/', $my_domain . 'wp-content/uploads/', $url);
-                    } else {
-                        // Replace only the domain name
-                        $new_url = preg_replace('/^https?:\/\/[^\/]+\//', $my_domain, $url);
-                    }
-    
-                    // Replace inside content
-                    $content = str_replace($url, $new_url, $content);
-                }
-            }
+        while (post_exists($title)) {
+            $title = $original_title . ' ' . $suffix;
+            $suffix++;
         }
-
+    
         $page_id = wp_insert_post([
             'post_title'   => $title,
             'post_content' => $content, // Save raw JSON directly
@@ -493,6 +495,7 @@ class TemplateLibrary extends AjaxBase {
             wp_send_json_error(['message' => 'Failed to create page']);
         }
     }
+    
 
     public function demo_import() {
         if (!isset($_POST['json_data'])) {
