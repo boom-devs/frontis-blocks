@@ -245,80 +245,80 @@ const FullSiteImportSettingConfig = ({
   };
 
 
-  const handleStorePages = async () => {
-    const site = await getTemplatesData("import/site", "site_id", template.id);
+  // const handleStorePages = async () => {
+  //   const site = await getTemplatesData("import/site", "site_id", template.id);
 
-    if (site.data) {
-        try {
-            const siteData = site.data.pages;
+  //   if (site.data) {
+  //       try {
+  //           const siteData = site.data.pages;
 
-            // First update site settings (once only)
-            const siteSettings = new FormData();
-            siteSettings.append("action", "fb_update_site_settings");
-            siteSettings.append("security", nonce);
-            siteSettings.append("siteName", formData.siteName || "");
-            siteSettings.append("siteTagline", formData.siteTagline || "");
-            siteSettings.append("siteLogo", formData.siteLogo.id || "");
+  //           // First update site settings (once only)
+  //           const siteSettings = new FormData();
+  //           siteSettings.append("action", "fb_update_site_settings");
+  //           siteSettings.append("security", nonce);
+  //           siteSettings.append("siteName", formData.siteName || "");
+  //           siteSettings.append("siteTagline", formData.siteTagline || "");
+  //           siteSettings.append("siteLogo", formData.siteLogo.id || "");
 
-            await fetch(ajaxUrl, {
-                method: "POST",
-                body: siteSettings,
-                credentials: "same-origin",
-            });
+  //           await fetch(ajaxUrl, {
+  //               method: "POST",
+  //               body: siteSettings,
+  //               credentials: "same-origin",
+  //           });
 
-            // Then import pages one by one
-            for (const page of siteData) {
-                try {
-                    let pageObj = page.page;
-                    if (typeof page.page === "string") {
-                        try {
-                            pageObj = JSON.parse(page.page);
-                        } catch (err) {
-                            console.error("JSON parse failed:", err);
-                            pageObj = { content: page.page };
-                        }
-                    }
+  //           // Then import pages one by one
+  //           for (const page of siteData) {
+  //               try {
+  //                   let pageObj = page.page;
+  //                   if (typeof page.page === "string") {
+  //                       try {
+  //                           pageObj = JSON.parse(page.page);
+  //                       } catch (err) {
+  //                           console.error("JSON parse failed:", err);
+  //                           pageObj = { content: page.page };
+  //                       }
+  //                   }
 
-                    const parsedBlocks = pageObj.content || "";
+  //                   const parsedBlocks = pageObj.content || "";
 
-                    const pageData = new FormData();
-                    pageData.append("action", "fb_full_site_import");
-                    pageData.append("security", nonce);
-                    pageData.append("title", page.name);
-                    pageData.append("content", parsedBlocks);
+  //                   const pageData = new FormData();
+  //                   pageData.append("action", "fb_full_site_import");
+  //                   pageData.append("security", nonce);
+  //                   pageData.append("title", page.name);
+  //                   pageData.append("content", parsedBlocks);
 
-                    const response = await fetch(ajaxUrl, {
-                        method: "POST",
-                        body: pageData,
-                        credentials: "same-origin",
-                    });
+  //                   const response = await fetch(ajaxUrl, {
+  //                       method: "POST",
+  //                       body: pageData,
+  //                       credentials: "same-origin",
+  //                   });
 
-                    const result = await response.json();
+  //                   const result = await response.json();
 
-                    if (result.success) {
-                        console.log(`${page.name} created successfully`);
-                    } else {
-                        console.error(`Failed to create ${page.name}`, result.data);
-                    }
-                } catch (error) {
-                    console.error(`Error creating ${page.name}:`, error);
-                }
-            }
+  //                   if (result.success) {
+  //                       console.log(`${page.name} created successfully`);
+  //                   } else {
+  //                       console.error(`Failed to create ${page.name}`, result.data);
+  //                   }
+  //               } catch (error) {
+  //                   console.error(`Error creating ${page.name}:`, error);
+  //               }
+  //           }
 
-            toast.success("Site imported successfully!", {
-              position: "top-right",
-              autoClose: 3000,
-              theme: "light",
-            });
-        } catch (err) {
-            console.error("Import error:", err);
-            toast.error("Failed to import site", {
-                position: "top-right",
-                autoClose: 3000,
-            });
-        }
-    }
-  };
+  //           toast.success("Site imported successfully!", {
+  //             position: "top-right",
+  //             autoClose: 3000,
+  //             theme: "light",
+  //           });
+  //       } catch (err) {
+  //           console.error("Import error:", err);
+  //           toast.error("Failed to import site", {
+  //               position: "top-right",
+  //               autoClose: 3000,
+  //           });
+  //       }
+  //   }
+  // };
 
     
 	// Utility to extract font families
@@ -504,54 +504,273 @@ const FullSiteImportSettingConfig = ({
     }, [globalTypography, deviceType]);
 
 
-    const handleImport = useCallback(async () => {
-        setIsImporting(true);
-        setImportProgress(0);
+  // const handleImport = useCallback(async () => {
+  //       setIsImporting(true);
+  //       setImportProgress(0);
       
-        const steps = [
-          "Preparing import...",
-          "Importing content...",
-          "Setting up customizer...",
-          "Configuring widgets...",
-          "Creating pages...",
-          "Finalizing setup...",
-        ];
+  //       const steps = [
+  //         "Preparing import...",
+  //         "Importing content...",
+  //         "Setting up customizer...",
+  //         "Configuring widgets...",
+  //         "Creating pages...",
+  //         "Finalizing setup...",
+  //       ];
       
-        try {
-          for (let i = 0; i < steps.length; i++) {
-            setCurrentStep(steps[i]);
-            setImportProgress(((i + 1) / steps.length) * 100);
+  //       try {
+  //         for (let i = 0; i < steps.length; i++) {
+  //           setCurrentStep(steps[i]);
+  //           setImportProgress(((i + 1) / steps.length) * 100);
       
-            if (steps[i] === "Creating pages...") {
-              await handleStorePages();
-            } else {
-              await new Promise((resolve) => setTimeout(resolve, 1500));
-            }
-          }
+  //           if (steps[i] === "Creating pages...") {
+  //             await handleStorePages();
+  //           } else {
+  //             await new Promise((resolve) => setTimeout(resolve, 1500));
+  //           }
+  //         }
       
-          handleUpdateState();
-          onClose();
-          dispatch(setAttribute({ importSuccess: true }));
-        } catch (error) {
-          console.error("Import failed:", error);
-          dispatch(setAttribute({ importSuccess: false }));
-        } finally {
-          setIsImporting(false);
-          setImportProgress(0);
-          setCurrentStep("");
-        }
-      }, [
-        template?.id,
-        formData,
-        onClose, 
-        customColors,
-        customGradientColors,
-        typography,
-        customTypography,
-        fontFamilies,
-        globalTypography,
-    ]);      
+  //         handleUpdateState();
+  //         onClose();
+  //         dispatch(setAttribute({ importSuccess: true }));
+  //       } catch (error) {
+  //         console.error("Import failed:", error);
+  //         dispatch(setAttribute({ importSuccess: false }));
+  //       } finally {
+  //         setIsImporting(false);
+  //         setImportProgress(0);
+  //         setCurrentStep("");
+  //       }
+  //     }, [
+  //       template?.id,
+  //       formData,
+  //       onClose, 
+  //       customColors,
+  //       customGradientColors,
+  //       typography,
+  //       customTypography,
+  //       fontFamilies,
+  //       globalTypography,
+  // ]);      
 
+  // Utility: POST formdata helper
+  const postForm = async (form) => {
+    const resp = await fetch(ajaxUrl, {
+      method: "POST",
+      body: form,
+      credentials: "same-origin",
+    });
+    const json = await resp.json().catch(() => ({}));
+    return { ok: resp.ok, status: resp.status, json };
+  };
+
+  // Upload files
+  const uploadFiles = async (uploads) => {
+    // If no URL, skip
+    if (!uploads) {
+      console.warn("No uploads URL provided — skipping uploads step");
+      return { skipped: true };
+    }
+  
+    let attempts = 0;
+    const maxAttempts = 3;
+  
+    while (attempts < maxAttempts) {
+      try {
+        setCurrentStep(`Uploading & extracting files (attempt ${attempts + 1}/${maxAttempts})...`);
+        setImportProgress((p) => Math.max(p, 5));
+  
+        const form = new FormData();
+        form.append("action", "fb_upload_files");
+        form.append("security", nonce);
+        form.append("uploads", uploads);
+  
+        const { ok, status, json } = await postForm(form);
+  
+        if (ok && json?.success) {
+          return json;
+        }
+  
+        throw new Error(`Upload failed attempt ${attempts + 1}`);
+  
+      } catch (err) {
+        console.error(err);
+        attempts++;
+        if (attempts >= maxAttempts) {
+          console.warn("All retries failed — skipping uploads step");
+          return { skipped: true };
+        }
+        await new Promise((r) => setTimeout(r, 800));
+      }
+    }
+  };
+
+  // 2) Install & activate plugins
+  const installPlugins = async () => {
+    setCurrentStep("Installing & activating plugins...");
+    setImportProgress((p) => Math.max(p, 25));
+
+    const form = new FormData();
+    form.append("action", "fb_install_active_plugins");
+    form.append("security", nonce);
+    // Optionally append plugin list: form.append('plugins', JSON.stringify([...]));
+
+    const { ok, status, json } = await postForm(form);
+
+    if (!ok || (json && json.success === false)) {
+      console.error("installPlugins failed", status, json);
+      throw new Error("Plugin install step failed");
+    }
+
+    return json;
+  };
+
+  // 3) Install / activate theme (calls your active_theme PHP)
+  const activateTheme = async () => {
+    setCurrentStep("Installing & activating theme...");
+    setImportProgress((p) => Math.max(p, 50));
+
+    const form = new FormData();
+    form.append("action", "fb_active_theme");
+    form.append("security", nonce);
+    // Optionally append theme slug/version
+    // form.append('theme_slug', 'frontis');
+
+    const { ok, status, json } = await postForm(form);
+
+    if (!ok || (json && json.success === false)) {
+      console.error("activateTheme failed", status, json);
+      throw new Error("Theme install step failed");
+    }
+
+    return json;
+  };
+
+  // 4) Update database (menus, widgets, customizer) from frontis-portal
+  const updateDatabase = async (portalPayload = {}) => {
+    setCurrentStep("Importing database (menus/widgets/customizer) ...");
+    setImportProgress((p) => Math.max(p, 70));
+
+    const form = new FormData();
+    form.append("action", "fb_update_database"); // maps to update_database PHP method
+    form.append("security", nonce);
+    // If DB import expects some payload from portal, pass it:
+    // form.append('payload', JSON.stringify(portalPayload));
+
+    const { ok, status, json } = await postForm(form);
+
+    if (!ok || (json && json.success === false)) {
+      console.error("updateDatabase failed", status, json);
+      throw new Error("Database import step failed");
+    }
+
+    return json;
+  };
+
+  // Existing function to create pages already in your snippet — I reuse it
+  const handleStorePages = async (sitePages) => {
+    // sitePages is array of pages from portal
+    for (const page of sitePages) {
+      try {
+        let pageObj = page.page;
+        if (typeof page.page === "string") {
+          try {
+            pageObj = JSON.parse(page.page);
+          } catch (err) {
+            pageObj = { content: page.page };
+          }
+        }
+        const parsedBlocks = pageObj.content || "";
+
+        const pageData = new FormData();
+        pageData.append("action", "fb_full_site_import");
+        pageData.append("security", nonce);
+        pageData.append("title", page.name);
+        pageData.append("content", parsedBlocks);
+
+        const res = await fetch(ajaxUrl, { method: "POST", body: pageData, credentials: "same-origin" });
+        const result = await res.json();
+
+        if (result.success) {
+          console.log(`${page.name} created successfully`);
+        } else {
+          console.error(`Failed to create ${page.name}`, result);
+        }
+      } catch (err) {
+        console.error(`Error creating ${page.name}`, err);
+      }
+    }
+  };
+
+  // Full import flow
+  const handleImport = useCallback(async () => {
+    setIsImporting(true);
+    setImportProgress(0);
+    try {
+      // 0) fetch site data from portal
+      setCurrentStep("Fetching site from portal...");
+      setImportProgress(2);
+      const siteResp = await getTemplatesData("import/site", "site_id", template.id);
+      if (!siteResp || !siteResp.data) throw new Error("Failed to fetch site data from portal");
+      const siteData = siteResp.data;
+      const pages = siteData.pages || [];
+      const uploads = siteData.uploads_url || [];
+
+      // Step A: upload files
+      await uploadFiles(uploads);
+      setImportProgress(20);
+
+      // Step B: install plugins
+      await installPlugins();
+      setImportProgress(40);
+
+      // Step C: install & activate theme
+      await activateTheme();
+      setImportProgress(60);
+
+      // Step D: update database (menus/widgets/customizer)
+      // If the portal gives payload for DB import, pass it. Otherwise PHP will fetch from portal internally.
+      await updateDatabase(siteData.database_payload || {});
+      setImportProgress(80);
+
+      // Step E: update site settings (one-time)
+      setCurrentStep("Updating site settings...");
+      const siteSettings = new FormData();
+      siteSettings.append("action", "fb_update_site_settings");
+      siteSettings.append("security", nonce);
+      siteSettings.append("siteName", siteData.siteName || "");
+      siteSettings.append("siteTagline", siteData.siteTagline || "");
+      siteSettings.append("siteLogo", (siteData.siteLogo && siteData.siteLogo.id) || "");
+      await fetch(ajaxUrl, {
+        method: "POST",
+        body: siteSettings,
+        credentials: "same-origin",
+      });
+      setImportProgress(85);
+
+      // Step F: create pages
+      setCurrentStep("Creating pages...");
+      await handleStorePages(pages);
+      setImportProgress(98);
+
+      // finalize
+      setCurrentStep("Finalizing setup...");
+      await new Promise((resolve) => setTimeout(resolve, 600)); // small pause for UX
+
+      handleUpdateState && handleUpdateState();
+      onClose && onClose();
+      dispatch && dispatch(setAttribute({ importSuccess: true }));
+
+      toast.success("Site imported successfully!", { position: "top-right", autoClose: 3000, theme: "light" });
+    } catch (err) {
+      console.error("Import failed:", err);
+      dispatch && dispatch(setAttribute({ importSuccess: false }));
+      toast.error("Import failed. Check console for details", { position: "top-right", autoClose: 5000 });
+    } finally {
+      setIsImporting(false);
+      setImportProgress(0);
+      setCurrentStep("");
+    }
+  }, [template?.id, nonce, ajaxUrl, getTemplatesData]);
 
 
   return (
