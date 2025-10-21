@@ -263,6 +263,8 @@ class Admin {
                 'frontis-template-library',
                 'FB_TLibrary',
                 array(
+                    'ajaxUrl' => admin_url('admin-ajax.php'),
+                    'nonce'   => wp_create_nonce('fb_settings_nonce'),
                     'activationKey' => $activation_key,
                     'portalApi' => PORTAL_API,
                     'wordpressSyncApi' => WORDPRESS_SYNC_API
