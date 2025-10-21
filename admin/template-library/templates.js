@@ -50,6 +50,7 @@ const PatternLibraryButton = () => {
         sites: 1,
         templatelibrary: 1
     });
+    const [isImporting, setIsImporting] = useState(false);
 
     const licenseKey = FB_TLibrary.activationKey.length > 0 ? FB_TLibrary.activationKey : '';
     const isProPlugin = FB_TLibrary.activationKey.length > 0 ? true : false;
@@ -527,6 +528,7 @@ const PatternLibraryButton = () => {
                                     resetCat={resetCat}
                                     setResetCat={setResetCat}
                                     loading={noneFilterLoading}
+                                    isImporting={isImporting}
                                 />
 
                                 {activeTab !== 'templatelibrary' && (
@@ -559,6 +561,8 @@ const PatternLibraryButton = () => {
                                         setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                                         currentPage={currentPage[activeTab]}
                                         onPageChange={handlePageChange}
+                                        isImporting={isImporting}
+                                        setIsImporting={setIsImporting}
                                     />
                                 )}
 

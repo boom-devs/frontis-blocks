@@ -168,7 +168,10 @@ const TemplateGrid = ({
         if (preview_url && preview_url.trim() !== '') {
             window.open(preview_url, '_blank');
         } else {
-            console.log('No preview URL available');
+            toast.warn("No preview URL available", {
+                position: "top-right",
+                autoClose: 3000,
+            });
         }
     }, [preview_url]);
 

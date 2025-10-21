@@ -5,7 +5,7 @@ import { useState, useCallback, useEffect } from "@wordpress/element";
 import { ClipLoader } from "react-spinners";
 import TemplateHeader from "./template-header";
 import FullSiteImport from "./full-site-import";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 const TemplateImport = ({ 
     template,
@@ -28,7 +28,10 @@ const TemplateImport = ({
         if (template.preview_url && template.preview_url.trim() !== '') {
             window.open(template.preview_url, '_blank');
         } else {
-            console.log('No preview URL available');
+            toast.warn("No preview URL available", {
+                position: "top-right",
+                autoClose: 3000,
+            });
         }
     }, [template.preview_url]);
 

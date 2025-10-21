@@ -247,7 +247,7 @@ const FullSiteImportSettingConfig = ({
 
     if (site.data) {
         try {
-            const siteData = site.data;
+            const siteData = site.data.pages;
 
             // First update site settings (once only)
             const siteSettings = new FormData();
