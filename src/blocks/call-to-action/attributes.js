@@ -2322,5 +2322,81 @@ const attributes = {
         default: '',
     },
 
+
+
+	/** Start Dynamic Title Text */
+	dynamicTitleEnabled : {
+		type: 'boolean',
+		default: false
+	},
+	dynamicTitleSource: {
+		type: 'string',
+		default: 'current_post'
+	},
+	dynamicTitlePostId: {
+		type: 'number',
+		default: 0
+	},
+	dynamicTitlePostType: {
+		type: 'string',
+		default: ''
+	},
+	dynamicTitlePostLabel: {
+		type: 'string',
+		default: ''
+	},
+	dynamicTitleField: {
+		type: 'string',
+		default: 'post_title'
+	},
+	dynamicTitleFeaturedImageField:{
+		type: 'string',
+		default: 'title'
+	},
+	dynamicTitleDateType: {
+		type: 'string',
+		default: 'published'
+	},
+	dynamicTitleDateFormat: {
+		type: 'string',
+		default: 'default'
+	},
+	dynamicTitleTimeType: {
+		type: 'string',
+		default: 'published'
+	},
+	dynamicTitleTimeFormat: {
+		type: 'string',
+		default: 'default'
+	},
+	dynamicTitleCommentsZeroText: {
+		type: 'string',
+		default: 'No Response',
+	},
+	dynamicTitleCommentsOneText: {
+		type: 'string',
+		default: 'One Response',
+	},
+	dynamicTitleCommentsManyText: {
+		type: 'string',
+		default: '{num} Response',
+	},   
+	dynamicTitleTermsTaxonomy: {
+		type: 'string',
+		default: 'category',
+	},
+	dynamicTitleTermsSeparator: {
+		type: 'string',
+		default: ', ',
+	},
+	dynamicTitleEnableLink: {
+		type: 'boolean',
+		default: false
+	},
+	dynamicTitleLinkSource: {
+		type: 'string',
+		default: 'post_permalink',
+	},
+	/** Start Dynamic Text */
 }
 export default attributes;
