@@ -13,8 +13,9 @@ import {
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import DynamicTextValue from '@Components/dynamic-text-value';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
 		Heading_Text,
@@ -46,6 +47,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		ctaDesktopSwitcher,
         ctaTabletSwitcher,
         ctaMobileSwitcher,
+
+		dynamicTitleEnabled,
+		dynamicTitleSource,
+		dynamicTitlePostId,
+		dynamicTitlePostType,
+		dynamicTitlePostLabel,
+		dynamicTitleField,
+		dynamicTitleFeaturedImageField,
+
+		dynamicTitleDateType,
+		dynamicTitleDateFormat,
+
+		dynamicTitleTimeType,
+		dynamicTitleTimeFormat,
+
+		dynamicTitleCommentsZeroText,
+		dynamicTitleCommentsOneText,
+		dynamicTitleCommentsManyText,
+
+		dynamicTitleTermsTaxonomy,
+		dynamicTitleTermsSeparator,
+		dynamicTitleEnableLink,
+		dynamicTitleLinkSource,
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -65,6 +89,36 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const handleBtnTwoClick = (e) =>{
 		e.preventDefault();
 	}
+
+	/**
+	 * Dynamic Text Value for Title
+	 */
+	const { dynamicDisplayValue } = DynamicTextValue({
+		textEnabled:            dynamicTitleEnabled,
+		textSource:             dynamicTitleSource,
+		textField:              dynamicTitleField,
+
+		textPostId:             dynamicTitlePostId,
+		textPostType:           dynamicTitlePostType,
+		textPostLabel:          dynamicTitlePostLabel,
+
+		textFeaturedImageField: dynamicTitleFeaturedImageField,
+
+		textDateType:           dynamicTitleDateType,
+		textDateFormat:         dynamicTitleDateFormat,
+		textTimeType:           dynamicTitleTimeType, 
+		textTimeFormat:         dynamicTitleTimeFormat,
+
+		textCommentsZeroText:   dynamicTitleCommentsZeroText,
+		textCommentsOneText:    dynamicTitleCommentsOneText,
+		textCommentsManyText:   dynamicTitleCommentsManyText,
+
+		textTermsTaxonomy:      dynamicTitleTermsTaxonomy,
+		textTermsSeparator:     dynamicTitleTermsSeparator,
+
+		context,
+	});
+
 
 	return (
 		<>
@@ -88,8 +142,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						<div className="fb-cta-content-wrapper">
 							<RichText
 								tagName={headingTag}
-								value={Heading_Text}
-								onChange={(value) => setAttributes({ Heading_Text: value })}
+								value={dynamicTitleEnabled ? dynamicDisplayValue : Heading_Text}
+                                onChange={(value) => {
+                                    if (!dynamicTitleEnabled) setAttributes({ Heading_Text: value });
+                                }}
 								placeholder={__("CTA Title", "frontis-block")}
 								className="fb-heading"
 								style={{ textAlign: Alignment }}
