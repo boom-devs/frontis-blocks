@@ -39,349 +39,348 @@ const FullSiteImportSettingConfig = ({
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
   const deviceType = useDeviceType();
 
-
-    // Set global typography
-    useEffect(() => {
-        const updatedGlobalTypography = {};
-      
-        const processTypographies = (source, target) => {
-          Object.keys(source).forEach((item) => {
-            const typo = source[item];
-            if (!typo) return;
-      
-            if (item === "heading") {
-              Object.keys(typo).forEach((headingKey) => {
-                const headingTypo = typo[headingKey];
-                if (!headingTypo) return;
-      
-                const keyName = headingKey === "all" ? "headingAll" : headingKey;
-      
-                target[keyName] = {
-                  ...(globalTypography[keyName] || {})
-                };
-      
-                if (headingTypo.fontSize) {
-                  target[keyName].fontSize = {
-                    variable: `--fb-global-${keyName}--font-size`,
-                    value: headingTypo.fontSize,
-                    unit: headingTypo.fontSizeUnit || {
-                      Desktop: "px",
-                      Tablet: "px",
-                      Mobile: "px"
-                    }
-                  };
-                }
-      
-                if (headingTypo.fontWeight) {
-                  target[keyName].fontWeight = {
-                    variable: `--fb-global-${keyName}--font-weight`,
-                    value: headingTypo.fontWeight
-                  };
-                }
-      
-                if (headingTypo.lineHeight) {
-                  target[keyName].lineHeight = {
-                    variable: `--fb-global-${keyName}--line-height`,
-                    value: headingTypo.lineHeight,
-                    unit: headingTypo.lineHeightUnits || {
-                      Desktop: "px",
-                      Tablet: "px",
-                      Mobile: "px"
-                    }
-                  };
-                }
-      
-                if (headingTypo.letterSpacing) {
-                  target[keyName].letterSpacing = {
-                    variable: `--fb-global-${keyName}--letter-spacing`,
-                    value: headingTypo.letterSpacing,
-                    unit: headingTypo.letterSpacingUnit || {
-                      Desktop: "px",
-                      Tablet: "px",
-                      Mobile: "px"
-                    }
-                  };
-                }
-      
-                if (headingTypo.fontStyle) {
-                  target[keyName].fontStyle = {
-                    variable: `--fb-global-${keyName}--font-style`,
-                    value: headingTypo.fontStyle
-                  };
-                }
-      
-                if (headingTypo.textTransform) {
-                  target[keyName].textTransform = {
-                    variable: `--fb-global-${keyName}--text-transform`,
-                    value: headingTypo.textTransform
-                  };
-                }
-      
-                if (headingTypo.textDecoration) {
-                  target[keyName].textDecoration = {
-                    variable: `--fb-global-${keyName}--text-decoration`,
-                    value: headingTypo.textDecoration
-                  };
-                }
-      
-                if (headingTypo.fontFamily) {
-                  target[keyName].fontFamily = {
-                    variable: `--fb-global-${keyName}--font-family`,
-                    value: headingTypo.fontFamily
-                  };
-                }
-              });
-            } else {
-              target[item] = {
-                ...(globalTypography[item] || {})
+  // Set global typography
+  useEffect(() => {
+      const updatedGlobalTypography = {};
+    
+      const processTypographies = (source, target) => {
+        Object.keys(source).forEach((item) => {
+          const typo = source[item];
+          if (!typo) return;
+    
+          if (item === "heading") {
+            Object.keys(typo).forEach((headingKey) => {
+              const headingTypo = typo[headingKey];
+              if (!headingTypo) return;
+    
+              const keyName = headingKey === "all" ? "headingAll" : headingKey;
+    
+              target[keyName] = {
+                ...(globalTypography[keyName] || {})
               };
-      
-              if (typo.fontSize) {
-                target[item].fontSize = {
-                  variable: `--fb-global-${item}--font-size`,
-                  value: typo.fontSize,
-                  unit: typo.fontSizeUnit || {
-                    Desktop: "px",
-                    Tablet: "px",
-                    Mobile: "px"
-                  }
-                };
-              }
-      
-              if (typo.fontWeight) {
-                target[item].fontWeight = {
-                  variable: `--fb-global-${item}--font-weight`,
-                  value: typo.fontWeight
-                };
-              }
-      
-              if (typo.lineHeight) {
-                target[item].lineHeight = {
-                  variable: `--fb-global-${item}--line-height`,
-                  value: typo.lineHeight,
-                  unit: typo.lineHeightUnits || {
-                    Desktop: "px",
-                    Tablet: "px",
-                    Mobile: "px"
-                  }
-                };
-              }
-      
-              if (typo.letterSpacing) {
-                target[item].letterSpacing = {
-                  variable: `--fb-global-${item}--letter-spacing`,
-                  value: typo.letterSpacing,
-                  unit: typo.letterSpacingUnit || {
-                    Desktop: "px",
-                    Tablet: "px",
-                    Mobile: "px"
-                  }
-                };
-              }
-      
-              if (typo.fontStyle) {
-                target[item].fontStyle = {
-                  variable: `--fb-global-${item}--font-style`,
-                  value: typo.fontStyle
-                };
-              }
-      
-              if (typo.textTransform) {
-                target[item].textTransform = {
-                  variable: `--fb-global-${item}--text-transform`,
-                  value: typo.textTransform
-                };
-              }
-      
-              if (typo.textDecoration) {
-                target[item].textDecoration = {
-                  variable: `--fb-global-${item}--text-decoration`,
-                  value: typo.textDecoration
-                };
-              }
-      
-              if (typo.fontFamily) {
-                target[item].fontFamily = {
-                  variable: `--fb-global-${item}--font-family`,
-                  value: typo.fontFamily
-                };
-              }
-            }
-          });
-        };
-      
-        // normal typographies
-        processTypographies(typography, updatedGlobalTypography);
-      
-        // custom typographies
-        processTypographies(customTypography, updatedGlobalTypography);
-      
-        setGlobalTypography(updatedGlobalTypography);
-    }, []);
-      
-
-    const [patternsData] = usePostDataMutation();
-    const getTemplatesData = async (route, key, id) => {
-        try {
-            const response = await patternsData({
-                endpoint: route,
-                body: {
-                    [key]: id
-                },
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }).unwrap();
-            console.log(key, response);
-            return response;
-        } catch (err) {
-            console.error('Error:', err);
-            console.error('Status:', err.status);
-            console.error('Data:', err.data);
-            if (err.status === 500) {
-                console.error('Server error. Check the API endpoint and server logs.');
-            }
-        }
-  };
     
-	// Utility to extract font families
-	const getAllFontFamilies = useCallback((fontsObject) => {
-		const fontFamilies = [];
-		const extractFonts = (obj) => {
-			Object.values(obj).forEach((value) => {
-				if (typeof value === "string") fontFamilies.push(value);
-				else if (typeof value === "object") extractFonts(value);
-			});
-		};
-		extractFonts(fontsObject);
-		const fontsString = fontFamilies.join(",");
-		loadGoogleFont(fontsString);
-	}, []);
-
-
-    const handleUpdateState = useCallback(async () => {
-        const settings = [
-            {
-                key: "fb_update_custom_colors", 
-                data: customColors,
-                setter: setCustomColors,
-                storeKey: "fb_custom_colors",
-            },
-            {
-                key: "fb_update_custom_gradient_colors",
-                data: customGradientColors,
-                setter: setCustomGradientColors,
-                storeKey: "fb_custom_gradient_colors",
-            },
-            {
-                key: "fb_update_typography",
-                data: typography,
-                setter: setTypography,
-                storeKey: "fb_typography",
-            },
-            {
-                key: "fb_update_custom_typography",
-                data: customTypography,
-                setter: setCustomTypography,
-                storeKey: "fb_custom_typography",
-            },
-            {
-                key: "fb_update_fontfamilies",
-                data: fontFamilies,
-                setter: setFontFamilies,
-                storeKey: "fb_fontfamilies",
-                postProcess: getAllFontFamilies,
-            },
-            {
-                key: "fb_update_globaltypo",
-                data: globalTypography,
-                setter: setGlobalTypography,
-                storeKey: "fb_globaltypo",
-                postProcess: (data) => generateCSSVariables(data, deviceType, 'import'),
-            },
-        ];
+              if (headingTypo.fontSize) {
+                target[keyName].fontSize = {
+                  variable: `--fb-global-${keyName}--font-size`,
+                  value: headingTypo.fontSize,
+                  unit: headingTypo.fontSizeUnit || {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                  }
+                };
+              }
     
-        try {
-            for (const { key, data, setter, storeKey, postProcess } of settings) {
-                try {
-                    const response = await updateGlobalStyle(data, key);
-                    
-                    if (response.success) {
-                        console.log('updated database successfully');
-                        const updatedData = response.data.data;
-                        
-                        if (setter) {
-                            setter(updatedData);
-                        }
-                        
-                        localStorage.setItem(storeKey, JSON.stringify(updatedData));
-                        
-                        if (postProcess) {
-                            setTimeout(() => postProcess(updatedData), 1000);
-                        }
-                        
-                        console.log(`${storeKey} updated successfully:`, updatedData);
-                    } else {
-                        console.log('failed to update database');
-                        if (setter) {
-                            setter(data);
-                        }
-                        
-                        localStorage.setItem(storeKey, JSON.stringify(data));
-                        
-                        if (postProcess) {
-                            setTimeout(() => postProcess(data), 1000);
-                        }
-                        
-                        console.warn(`${storeKey} update failed, using current data:`, data);
-                    }
-
-                } catch (apiError) {
-                    console.error(`API call failed for ${key}:`, apiError);
-                    
-                    // Fallback to current data
-                    if (setter) {
-                        setter(data);
-                    }
-                    
-                    localStorage.setItem(storeKey, JSON.stringify(data));
-                    
-                    if (postProcess) {
-                        setTimeout(() => postProcess(data), 1000);
-                    }
-                    
-                    console.log(`${storeKey} set to fallback due to error:`, data);
+              if (headingTypo.fontWeight) {
+                target[keyName].fontWeight = {
+                  variable: `--fb-global-${keyName}--font-weight`,
+                  value: headingTypo.fontWeight
+                };
+              }
+    
+              if (headingTypo.lineHeight) {
+                target[keyName].lineHeight = {
+                  variable: `--fb-global-${keyName}--line-height`,
+                  value: headingTypo.lineHeight,
+                  unit: headingTypo.lineHeightUnits || {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                  }
+                };
+              }
+    
+              if (headingTypo.letterSpacing) {
+                target[keyName].letterSpacing = {
+                  variable: `--fb-global-${keyName}--letter-spacing`,
+                  value: headingTypo.letterSpacing,
+                  unit: headingTypo.letterSpacingUnit || {
+                    Desktop: "px",
+                    Tablet: "px",
+                    Mobile: "px"
+                  }
+                };
+              }
+    
+              if (headingTypo.fontStyle) {
+                target[keyName].fontStyle = {
+                  variable: `--fb-global-${keyName}--font-style`,
+                  value: headingTypo.fontStyle
+                };
+              }
+    
+              if (headingTypo.textTransform) {
+                target[keyName].textTransform = {
+                  variable: `--fb-global-${keyName}--text-transform`,
+                  value: headingTypo.textTransform
+                };
+              }
+    
+              if (headingTypo.textDecoration) {
+                target[keyName].textDecoration = {
+                  variable: `--fb-global-${keyName}--text-decoration`,
+                  value: headingTypo.textDecoration
+                };
+              }
+    
+              if (headingTypo.fontFamily) {
+                target[keyName].fontFamily = {
+                  variable: `--fb-global-${keyName}--font-family`,
+                  value: headingTypo.fontFamily
+                };
+              }
+            });
+          } else {
+            target[item] = {
+              ...(globalTypography[item] || {})
+            };
+    
+            if (typo.fontSize) {
+              target[item].fontSize = {
+                variable: `--fb-global-${item}--font-size`,
+                value: typo.fontSize,
+                unit: typo.fontSizeUnit || {
+                  Desktop: "px",
+                  Tablet: "px",
+                  Mobile: "px"
                 }
+              };
             }
+    
+            if (typo.fontWeight) {
+              target[item].fontWeight = {
+                variable: `--fb-global-${item}--font-weight`,
+                value: typo.fontWeight
+              };
+            }
+    
+            if (typo.lineHeight) {
+              target[item].lineHeight = {
+                variable: `--fb-global-${item}--line-height`,
+                value: typo.lineHeight,
+                unit: typo.lineHeightUnits || {
+                  Desktop: "px",
+                  Tablet: "px",
+                  Mobile: "px"
+                }
+              };
+            }
+    
+            if (typo.letterSpacing) {
+              target[item].letterSpacing = {
+                variable: `--fb-global-${item}--letter-spacing`,
+                value: typo.letterSpacing,
+                unit: typo.letterSpacingUnit || {
+                  Desktop: "px",
+                  Tablet: "px",
+                  Mobile: "px"
+                }
+              };
+            }
+    
+            if (typo.fontStyle) {
+              target[item].fontStyle = {
+                variable: `--fb-global-${item}--font-style`,
+                value: typo.fontStyle
+              };
+            }
+    
+            if (typo.textTransform) {
+              target[item].textTransform = {
+                variable: `--fb-global-${item}--text-transform`,
+                value: typo.textTransform
+              };
+            }
+    
+            if (typo.textDecoration) {
+              target[item].textDecoration = {
+                variable: `--fb-global-${item}--text-decoration`,
+                value: typo.textDecoration
+              };
+            }
+    
+            if (typo.fontFamily) {
+              target[item].fontFamily = {
+                variable: `--fb-global-${item}--font-family`,
+                value: typo.fontFamily
+              };
+            }
+          }
+        });
+      };
+    
+      // normal typographies
+      processTypographies(typography, updatedGlobalTypography);
+    
+      // custom typographies
+      processTypographies(customTypography, updatedGlobalTypography);
+    
+      setGlobalTypography(updatedGlobalTypography);
+  }, []);
+    
 
-            console.log('All states updated successfully');
+  const [patternsData] = usePostDataMutation();
+  const getTemplatesData = async (route, key, id) => {
+      try {
+          const response = await patternsData({
+              endpoint: route,
+              body: {
+                  [key]: id
+              },
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+          }).unwrap();
+          console.log(key, response);
+          return response;
+      } catch (err) {
+          console.error('Error:', err);
+          console.error('Status:', err.status);
+          console.error('Data:', err.data);
+          if (err.status === 500) {
+              console.error('Server error. Check the API endpoint and server logs.');
+          }
+      }
+  };
+  
+  // Utility to extract font families
+  const getAllFontFamilies = useCallback((fontsObject) => {
+    const fontFamilies = [];
+    const extractFonts = (obj) => {
+      Object.values(obj).forEach((value) => {
+        if (typeof value === "string") fontFamilies.push(value);
+        else if (typeof value === "object") extractFonts(value);
+      });
+    };
+    extractFonts(fontsObject);
+    const fontsString = fontFamilies.join(",");
+    loadGoogleFont(fontsString);
+  }, []);
 
-            // Generate color variables
-            const mergedColors = [
-                ...(customColors ?? []),
-                ...(customGradientColors ?? []),
-                // ...(gradientColors ?? []),
-                // ...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
-            ];
 
-            const timeoutId = setTimeout(() => {
-                generateColorsVariables(mergedColors, deviceType, "import");
-            }, 1000);
+  const handleUpdateState = useCallback(async () => {
+      const settings = [
+          {
+              key: "fb_update_custom_colors", 
+              data: customColors,
+              setter: setCustomColors,
+              storeKey: "fb_custom_colors",
+          },
+          {
+              key: "fb_update_custom_gradient_colors",
+              data: customGradientColors,
+              setter: setCustomGradientColors,
+              storeKey: "fb_custom_gradient_colors",
+          },
+          {
+              key: "fb_update_typography",
+              data: typography,
+              setter: setTypography,
+              storeKey: "fb_typography",
+          },
+          {
+              key: "fb_update_custom_typography",
+              data: customTypography,
+              setter: setCustomTypography,
+              storeKey: "fb_custom_typography",
+          },
+          {
+              key: "fb_update_fontfamilies",
+              data: fontFamilies,
+              setter: setFontFamilies,
+              storeKey: "fb_fontfamilies",
+              postProcess: getAllFontFamilies,
+          },
+          {
+              key: "fb_update_globaltypo",
+              data: globalTypography,
+              setter: setGlobalTypography,
+              storeKey: "fb_globaltypo",
+              postProcess: (data) => generateCSSVariables(data, deviceType, 'import'),
+          },
+      ];
+  
+      try {
+          for (const { key, data, setter, storeKey, postProcess } of settings) {
+              try {
+                  const response = await updateGlobalStyle(data, key);
+                  
+                  if (response.success) {
+                      console.log('updated database successfully');
+                      const updatedData = response.data.data;
+                      
+                      if (setter) {
+                          setter(updatedData);
+                      }
+                      
+                      localStorage.setItem(storeKey, JSON.stringify(updatedData));
+                      
+                      if (postProcess) {
+                          setTimeout(() => postProcess(updatedData), 1000);
+                      }
+                      
+                      console.log(`${storeKey} updated successfully:`, updatedData);
+                  } else {
+                      console.log('failed to update database');
+                      if (setter) {
+                          setter(data);
+                      }
+                      
+                      localStorage.setItem(storeKey, JSON.stringify(data));
+                      
+                      if (postProcess) {
+                          setTimeout(() => postProcess(data), 1000);
+                      }
+                      
+                      console.warn(`${storeKey} update failed, using current data:`, data);
+                  }
 
-            return () => clearTimeout(timeoutId);
-            
-        } catch (error) {
-            console.error("Error updating global settings:", error);
-        }
-    }, [
-        customColors, 
-        customGradientColors, 
-        typography, 
-        customTypography, 
-        fontFamilies, 
-        globalTypography,
-        deviceType
-    ]);
+              } catch (apiError) {
+                  console.error(`API call failed for ${key}:`, apiError);
+                  
+                  // Fallback to current data
+                  if (setter) {
+                      setter(data);
+                  }
+                  
+                  localStorage.setItem(storeKey, JSON.stringify(data));
+                  
+                  if (postProcess) {
+                      setTimeout(() => postProcess(data), 1000);
+                  }
+                  
+                  console.log(`${storeKey} set to fallback due to error:`, data);
+              }
+          }
+
+          console.log('All states updated successfully');
+
+          // Generate color variables
+          const mergedColors = [
+              ...(customColors ?? []),
+              ...(customGradientColors ?? []),
+              // ...(gradientColors ?? []),
+              // ...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
+          ];
+
+          const timeoutId = setTimeout(() => {
+              generateColorsVariables(mergedColors, deviceType, "import");
+          }, 1000);
+
+          return () => clearTimeout(timeoutId);
+          
+      } catch (error) {
+          console.error("Error updating global settings:", error);
+      }
+  }, [
+      customColors, 
+      customGradientColors, 
+      typography, 
+      customTypography, 
+      fontFamilies, 
+      globalTypography,
+      deviceType
+  ]);
 
 
 	useEffect(() => {
@@ -409,11 +408,85 @@ const FullSiteImportSettingConfig = ({
         return () => clearTimeout(timeoutId);
     
     }, [globalTypography, deviceType]);
-    
 
-  // Helper POST function
+
+  // Import pages
+  const handleStorePages = async (pages) => {
+    const site = await getTemplatesData("import/site", "site_id", template.id);
+
+    if (pages) {
+        try {
+            // First update site settings (once only)
+            const siteSettings = new FormData();
+            siteSettings.append("action", "fb_update_site_settings");
+            siteSettings.append("security", nonce);
+            siteSettings.append("siteName", formData.siteName || "");
+            siteSettings.append("siteTagline", formData.siteTagline || "");
+            siteSettings.append("siteLogo", formData.siteLogo.id || "");
+
+            await fetch(ajaxUrl, {
+                method: "POST",
+                body: siteSettings,
+                credentials: "same-origin",
+            });
+
+            // Then import pages one by one
+            for (const page of pages) {
+                try {
+                    let pageObj = page.page;
+                    if (typeof page.page === "string") {
+                        try {
+                            pageObj = JSON.parse(page.page);
+                        } catch (err) {
+                            console.error("JSON parse failed:", err);
+                            pageObj = { content: page.page };
+                        }
+                    }
+
+                    const parsedBlocks = pageObj.content || "";
+
+                    const pageData = new FormData();
+                    pageData.append("action", "fb_full_site_import");
+                    pageData.append("security", nonce);
+                    pageData.append("title", page.name);
+                    pageData.append("content", parsedBlocks);
+
+                    const response = await fetch(ajaxUrl, {
+                        method: "POST",
+                        body: pageData,
+                        credentials: "same-origin",
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        console.log(`${page.name} created successfully`);
+                    } else {
+                        console.error(`Failed to create ${page.name}`, result.data);
+                    }
+                } catch (error) {
+                    console.error(`Error creating ${page.name}:`, error);
+                }
+            }
+
+            toast.success("Site imported successfully!", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        } catch (err) {
+            console.error("Import error:", err);
+            toast.error("Failed to import site", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        }
+    }
+  };
+  
+
+  // Helper to POST FormData and return { ok, status, json }
   const postForm = async (form) => {
-    const resp = await fetch(FB_TLibrary?.ajaxUrl, {
+    const resp = await fetch(ajaxUrl, {
       method: "POST",
       body: form,
       credentials: "same-origin",
@@ -421,165 +494,146 @@ const FullSiteImportSettingConfig = ({
     const json = await resp.json().catch(() => ({}));
     return { ok: resp.ok, status: resp.status, json };
   };
-  
-  // Upload files
+
+  // Upload files (retry logic)
   const uploadFiles = async (
     uploads = "https://templates.frontiswp.com/melinoe/wp-content/uploads/sites/14/2025.zip"
   ) => {
     console.log("Uploads ZIP URL:", uploads);
-  
+
     if (!uploads) {
       console.warn("No uploads URL provided — skipping uploads step");
       return { skipped: true };
     }
-  
-    const ajaxURL = FB_TLibrary?.ajaxUrl;
-    const _nonce  = FB_TLibrary?.nonce;
-  
-    if (!ajaxURL || !_nonce) {
+
+    if (!ajaxUrl || !nonce) {
       console.error("Missing AJAX URL or nonce");
       return { skipped: true };
     }
-  
+
     let attempts = 0;
     const maxAttempts = 3;
-  
+
     while (attempts < maxAttempts) {
       try {
         console.log(`Uploading & extracting files (attempt ${attempts + 1}/${maxAttempts})...`);
-  
+
         const form = new FormData();
         form.append("action", "fb_upload_files");
-        form.append("security", _nonce);
+        form.append("security", nonce);
         form.append("uploads", uploads);
-  
-        const response = await fetch(ajaxURL, {
+
+        const response = await fetch(ajaxUrl, {
           method: "POST",
           body: form,
           credentials: "same-origin",
         });
-  
+
         const json = await response.json().catch(() => ({}));
-  
+
         if (response.ok && json?.success) {
           console.log("Upload & extraction success:", json.data);
           return json.data;
         }
-  
-        throw new Error(json?.message || "Upload failed");
+
+        throw new Error(json?.data?.message || json?.message || "Upload failed");
       } catch (err) {
         console.error(err);
         attempts++;
         if (attempts >= maxAttempts) {
           console.warn("All retries failed — skipping uploads step");
-          return { skipped: true };
+          return { skipped: true, reason: err.message || 'upload_failed' };
         }
         await new Promise((r) => setTimeout(r, 800));
       }
     }
   };
-  
+
   // Activate theme
   const activateTheme = async (themeSlug = "frontis") => {
     const maxAttempts = 2;
-    const _nonce = FB_TLibrary?.nonce;
   
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
       try {
         const form = new FormData();
         form.append("action", "fb_active_theme");
-        form.append("security", _nonce);
+        form.append("security", nonce);
         form.append("theme_slug", themeSlug);
   
         const { ok, json } = await postForm(form);
   
-        if (ok && json?.success) return json;
-        throw new Error(json?.message || "Theme activation failed");
+        if (ok && json?.success) {
+          console.log(`Theme "${themeSlug}" activated successfully`);
+          return { status: "success", data: json.data || json };
+        }
+  
+        throw new Error(json?.data?.message || json?.message || "Theme activation failed");
       } catch (err) {
+        if (err.message.includes("already") || err.message.includes("activated")) {
+          console.log(`Theme "${themeSlug}" skipped & already activated`);
+          return { status: "skipped", reason: "already activated" };
+        }
+  
         console.warn(`Attempt ${attempt} failed:`, err.message);
-        if (attempt === maxAttempts) return { skipped: true, reason: err.message };
+  
+        if (attempt === maxAttempts) {
+          console.log(`Theme "${themeSlug}" skipped & failed: ${err.message}`);
+          return { status: "failed", reason: err.message };
+        }
+  
         await new Promise((r) => setTimeout(r, 800));
       }
     }
   };
   
+
   // Install & activate plugins
   const installActivatePlugins = async (plugins = []) => {
-    if (!Array.isArray(plugins) || !plugins.length) return { skipped: true };
+    if (!Array.isArray(plugins) || !plugins.length) {
+      console.log("No plugins to install - skipped");
+      return { status: "skipped" };
+    }
   
     const maxAttempts = 2;
-    const _nonce = FB_TLibrary?.nonce;
   
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
       try {
         const form = new FormData();
         form.append("action", "fb_install_active_plugins");
-        form.append("security", _nonce);
+        form.append("security", nonce);
         form.append("plugins", JSON.stringify(plugins));
   
         const { ok, json } = await postForm(form);
   
-        if (ok && json?.success) return json;
-        throw new Error(json?.message || "Plugin install failed");
+        if (ok && json?.success) {
+          console.log(`Plugins installed & activated successfully`);
+          return { status: "success", data: json.data || json };
+        }
+  
+        throw new Error(json?.data?.message || json?.message || "Plugin install failed");
       } catch (err) {
+        if (
+          err.message.includes("already") ||
+          err.message.includes("activated") ||
+          err.message.includes("installed")
+        ) {
+          console.log(`Plugins skipped & already activated`);
+          return { status: "skipped", reason: "already activated" };
+        }
+  
         console.warn(`Attempt ${attempt} failed:`, err.message);
-        if (attempt === maxAttempts) return { skipped: true, reason: err.message };
+  
+        if (attempt === maxAttempts) {
+          console.log(`Plugins skipped & failed: ${err.message}`);
+          return { status: "failed", reason: err.message };
+        }
+  
         await new Promise((r) => setTimeout(r, 800));
       }
     }
   };
   
-  // Import pages
-  const handleStorePages = async (pages = []) => {
-    const ajaxURL = FB_TLibrary?.ajaxUrl;
-    const _nonce  = FB_TLibrary?.nonce;
-  
-    if (!pages.length) return;
-  
-    const totalPages = pages.length;
-  
-    for (let i = 0; i < totalPages; i++) {
-      const page = pages[i];
-  
-      try {
-        console.log(`Creating page (${i + 1}/${totalPages}): ${page.name}`);
-  
-        let pageObj = page.page;
-        if (typeof page.page === "string") {
-          try {
-            pageObj = JSON.parse(page.page);
-          } catch {
-            pageObj = { content: page.page };
-          }
-        }
-  
-        const parsedBlocks = pageObj.content || "";
-  
-        const pageData = new FormData();
-        pageData.append("action", "fb_full_site_import");
-        pageData.append("security", _nonce);
-        pageData.append("title", page.name);
-        pageData.append("content", parsedBlocks);
-  
-        const response = await fetch(ajaxURL, {
-          method: "POST",
-          body: pageData,
-          credentials: "same-origin",
-        });
-  
-        const result = await response.json().catch(() => ({}));
-  
-        if (result.success) {
-          console.log(`Page "${page.name}" created successfully`);
-        } else {
-          console.warn(`Failed to create "${page.name}"`, result.data || result.message);
-        }
-      } catch (error) {
-        console.error(`Error creating "${page.name}":`, error);
-      }
-    }
-  };
-  
+
   // Full import flow
   const handleImport = useCallback(async () => {
     setIsImporting(true);

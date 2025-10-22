@@ -20,6 +20,10 @@ const attributes = {
     type: "boolean",
     default: null,
   },
+  sitePreviewLoading: {
+    type: "boolean",
+    default: true,
+  },
 };
 
 export default attributes;
