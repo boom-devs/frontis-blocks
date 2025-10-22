@@ -4,8 +4,6 @@ import {
 	useBlockProps,
 	InspectorControls,
 } from "@wordpress/block-editor";
-import { DndContext, closestCenter } from '@dnd-kit/core';
-import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
 import {
 	SelectControl,
@@ -25,9 +23,21 @@ import {
 	BORDER_STYLES,
 	ICON_POSITION,
 	OVERFLOW_OP,
-	PRESETS
-} from "./constants/constants";
+
+	DYNAMIC_DATA_SOURCE_OPTIONS,
+    DYNAMIC_DATA_SOURCE_FIELD_OPTIONS,
+    DYNAMIC_FEATURED_IMAGE_OPTIONS,
+    DYNAMIC_DATE_TIME_TYPE_OPTIONS,
+    DYNAMIC_TAXONOMY_OPTIONS,
+    getdynamicTextDateFormatOptions,
+    getdynamicTextTimeFormatOptions,
+    DYNAMIC_LINK_SOURCE_OPTIONS,
+} from '@Constants/fbConstants';
+
+import Select2 from "react-select";
+import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 import { useEffect, useMemo, useState } from "@wordpress/element";
+import { useSelect } from "@wordpress/data";
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
 import FB_BoxShadowControl from "@Components/box-shadow";
@@ -48,7 +58,9 @@ import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
-
+import getProToggleControls from '@Utils/getProToggleControls';
+import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
+import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -382,6 +394,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		ctaVRTopOffsetUnits,
 		ctaVRBottomOffset,
 		ctaVRBottomOffsetUnits,
+
+		/** Start Dynamic Title Text */
+		dynamicTitleEnabled,
+		dynamicTitleSource,
+		dynamicTitlePostId,
+		dynamicTitlePostType,
+		dynamicTitlePostLabel,
+		dynamicTitleField,
+		dynamicTitleFeaturedImageField,
+
+		dynamicTitleDateType,
+		dynamicTitleDateFormat,
+
+		dynamicTitleTimeType,
+		dynamicTitleTimeFormat,
+
+		dynamicTitleCommentsZeroText,
+		dynamicTitleCommentsOneText,
+		dynamicTitleCommentsManyText,
+
+		dynamicTitleTermsTaxonomy,
+		dynamicTitleTermsSeparator,
+		dynamicTitleEnableLink,
+		dynamicTitleLinkSource,
+		/** End Dynamic Title Text */
+
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -402,6 +440,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const buttonTwoIconHandler = (iconName) => {
 		setAttributes({ btnTwoIcon: iconName });
 	};
+
+	/**
+     * Toggle Controls for Dynamic Content
+     */
+	const dynamicContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-call-to-action-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicTitleEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'call-to-action-dynamic-title-content',
+	});
 
 	/** Start Heading padding */
 	const handleHeadingPaddingUnitChange = (event, position) => {
@@ -2457,16 +2507,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						globalHtmlTag={headingTag}
 						setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
 					/>
-				
-					<TextareaControl
-						label={__("Title Text", "frontis-block")}
-						className="fb-setting-text"
-						value={Heading_Text}
-						onChange={(value) =>
-							setAttributes({ Heading_Text: value })
-						}
+
+
+					{dynamicContentToggleControls.map((control, index) => (
+                        <div key={control.key || index}>{control.comp}</div>
+                    ))}
+	
+					<DynamicDataSourceControl
+						enabled={dynamicTitleEnabled}
 						
+						source={dynamicTitleSource}
+						setSource={(value) => setAttributes({ dynamicTitleSource: value })}
+						postId={dynamicTitlePostId}
+						setPostId={(value) => setAttributes({ dynamicTitlePostId: value })}
+						postType={dynamicTitlePostType}
+						setPostType={(value) => setAttributes({ dynamicTitlePostType: value })}
+						postLabel={dynamicTitlePostLabel}
+						setPostLabel={(value) => setAttributes({ dynamicTitlePostLabel: value })}
+
+						field={dynamicTitleField}
+						setField={(value) => setAttributes({ dynamicTitleField: value })}
+						featuredImageField={dynamicTitleFeaturedImageField}
+						setFeaturedImageField={(value) => setAttributes({ dynamicTitleFeaturedImageField: value })}
+
+						dateType={dynamicTitleDateType}
+						setDateType={(value) => setAttributes({ dynamicTitleDateType: value })}
+						dateFormat={dynamicTitleDateFormat}
+						setDateFormat={(value) => setAttributes({ dynamicTitleDateFormat: value })}
+						timeType={dynamicTitleTimeType}
+						setTimeType={(value) => setAttributes({ dynamicTitleTimeType: value })}
+						timeFormat={dynamicTitleTimeFormat}
+						setTimeFormat={(value) => setAttributes({ dynamicTitleTimeFormat: value })}
+
+						commentsZeroText={dynamicTitleCommentsZeroText}
+						setCommentsZeroText={(value) => setAttributes({ dynamicTitleCommentsZeroText: value })}
+						commentsOneText={dynamicTitleCommentsOneText}
+						setCommentsOneText={(value) =>setAttributes({ dynamicTitleCommentsOneText: value })}
+						commentsManyText={dynamicTitleCommentsManyText}
+						setCommentsManyText={(value) =>setAttributes({ dynamicTitleCommentsManyText: value })}
+
+						termsTaxonomy={dynamicTitleTermsTaxonomy}
+						setTermsTaxonomy={(value) => setAttributes({ dynamicTitleTermsTaxonomy: value })}
+						termsSeparator={dynamicTitleTermsSeparator}
+						setTermsSeparator={(value) => setAttributes({ dynamicTitleTermsSeparator: value })}
 					/>
+
+					{dynamicTitleEnabled && (
+						<DynamicDataLinkControl
+							enableLink={dynamicTitleEnableLink}
+							setEnableLink={(value) => setAttributes({ dynamicTitleEnableLink: value })}
+							linkSource={dynamicTitleLinkSource}
+							setLinkSource={(value) => setAttributes({ dynamicTitleLinkSource: value })}
+						/>
+					)}
+
+					{!dynamicTitleEnabled && (
+						<TextareaControl
+							label={__("Title Text", "frontis-block")}
+							className="fb-setting-text"
+							value={Heading_Text}
+							onChange={(value) => setAttributes({ Heading_Text: value })}
+						/>
+					)}
 				</PanelBody>
 			</div>
 
