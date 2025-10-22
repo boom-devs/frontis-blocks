@@ -318,47 +318,48 @@ class TemplateLibrary extends AjaxBase {
      */
     public function active_theme() {
         $this->check_permission();
-
+    
         $theme_slug = !empty($_POST['theme_slug']) ? sanitize_text_field($_POST['theme_slug']) : 'frontis';
-
-        // include required WP files for upgrader and themes
+    
         require_once ABSPATH . 'wp-admin/includes/file.php';
         require_once ABSPATH . 'wp-admin/includes/misc.php';
         require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
         require_once ABSPATH . 'wp-admin/includes/theme.php';
         require_once ABSPATH . 'wp-admin/includes/template.php';
-
+    
         $wp_theme = wp_get_theme($theme_slug);
-
+    
+        // If theme is not installed - download & install
         if (!$wp_theme->exists()) {
-            // query wordpress.org themes api to get latest version and download link
-            $theme_information = wp_remote_get("https://api.wordpress.org/themes/info/1.1/?action=query_themes&request[theme]={$theme_slug}");
+    
+            // Correct API endpoint
+            $theme_information = wp_remote_get("https://api.wordpress.org/themes/info/1.2/?action=theme_information&request[slug]={$theme_slug}");
+    
             if (is_wp_error($theme_information)) {
                 wp_send_json_error(['message' => 'Theme info request failed: ' . $theme_information->get_error_message()]);
             }
-
-            $theme_information_response = json_decode(wp_remote_retrieve_body($theme_information), true);
-            $theme_data = $theme_information_response['themes'][0] ?? null;
+    
+            $theme_data = json_decode(wp_remote_retrieve_body($theme_information), true);
             $download_url = $theme_data['download_link'] ?? null;
-
+    
             if (!$download_url) {
-                wp_send_json_error(['message' => 'Theme download link not found']);
+                wp_send_json_error(['message' => 'Theme download link not found from wordpress.org']);
             }
-
-            // Use Theme_Upgrader
-            $upgrader = new \Theme_Upgrader( new \Automatic_Upgrader_Skin() );
+    
+            $upgrader = new \Theme_Upgrader(new \Automatic_Upgrader_Skin());
             $install_result = $upgrader->install($download_url);
-
+    
             if (!$install_result) {
                 wp_send_json_error(['message' => 'Theme installation failed']);
             }
         }
-
-        // Activate theme (switch to the stylesheet)
+    
+        // Activate this theme
         switch_theme($theme_slug);
-
+    
         wp_send_json_success(['theme' => $theme_slug, 'activated' => true]);
-    }
+    }    
+    
 
     /**
      * Install & Activate Plugins
@@ -548,7 +549,6 @@ class TemplateLibrary extends AjaxBase {
         }
     }
     
-
     public function demo_import() {
         if (!isset($_POST['json_data'])) {
             wp_send_json_error('No JSON data found');

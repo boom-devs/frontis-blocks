@@ -24,6 +24,10 @@ const attributes = {
     type: "boolean",
     default: true,
   },
+  showFullSiteImportModal: {
+    type: "boolean",
+    default: false,
+  },
 };
 
 export default attributes;
