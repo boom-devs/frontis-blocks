@@ -312,86 +312,138 @@ class TemplateLibrary extends AjaxBase {
         }
     }
     
-    /** Activate Theme */
+    /**
+     * Activate Theme (install if missing)
+     * AJAX action: fb_active_theme
+     */
     public function active_theme() {
         $this->check_permission();
 
         $theme_slug = !empty($_POST['theme_slug']) ? sanitize_text_field($_POST['theme_slug']) : 'frontis';
 
-        $themes = wp_get_themes();
-        $theme_exist = isset($themes[$theme_slug]);
+        // include required WP files for upgrader and themes
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+        require_once ABSPATH . 'wp-admin/includes/misc.php';
+        require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+        require_once ABSPATH . 'wp-admin/includes/theme.php';
+        require_once ABSPATH . 'wp-admin/includes/template.php';
 
-        if (!$theme_exist) {
-            // Get theme version
+        $wp_theme = wp_get_theme($theme_slug);
+
+        if (!$wp_theme->exists()) {
+            // query wordpress.org themes api to get latest version and download link
             $theme_information = wp_remote_get("https://api.wordpress.org/themes/info/1.1/?action=query_themes&request[theme]={$theme_slug}");
+            if (is_wp_error($theme_information)) {
+                wp_send_json_error(['message' => 'Theme info request failed: ' . $theme_information->get_error_message()]);
+            }
+
             $theme_information_response = json_decode(wp_remote_retrieve_body($theme_information), true);
-            $theme_version = $theme_information_response['themes'][0]['version'] ?? null;
+            $theme_data = $theme_information_response['themes'][0] ?? null;
+            $download_url = $theme_data['download_link'] ?? null;
 
-            if (!$theme_version) {
-                wp_send_json_error(['message' => 'Theme info not found']);
+            if (!$download_url) {
+                wp_send_json_error(['message' => 'Theme download link not found']);
             }
 
-            // Download theme
-            $download_url = "https://downloads.wordpress.org/theme/{$theme_slug}.{$theme_version}.zip";
-            $temp_file = wp_tempnam($download_url);
-            $response = wp_remote_get($download_url, ['timeout' => 300, 'stream' => true, 'filename' => $temp_file]);
+            // Use Theme_Upgrader
+            $upgrader = new \Theme_Upgrader( new \Automatic_Upgrader_Skin() );
+            $install_result = $upgrader->install($download_url);
 
-            if (is_wp_error($response)) {
-                wp_send_json_error(['message' => 'Theme download failed: ' . $response->get_error_message()]);
+            if (!$install_result) {
+                wp_send_json_error(['message' => 'Theme installation failed']);
             }
-
-            // Extract
-            if (!class_exists('PclZip')) include ABSPATH . 'wp-admin/includes/class-pclzip.php';
-            $archive = new \PclZip($temp_file);
-            $themes_dir = WP_CONTENT_DIR . '/themes';
-            $result = $archive->extract(PCLZIP_OPT_PATH, $themes_dir);
-
-            if ($result == 0) {
-                wp_send_json_error(['message' => 'PclZip extraction failed: ' . $archive->errorInfo(true)]);
-            }
-
-            unlink($temp_file);
         }
 
-        // Activate
+        // Activate theme (switch to the stylesheet)
         switch_theme($theme_slug);
 
         wp_send_json_success(['theme' => $theme_slug, 'activated' => true]);
     }
 
-    /** Install & Activate Plugins */
+    /**
+     * Install & Activate Plugins
+     * AJAX action: fb_install_active_plugins
+     * Expected $_POST['plugins'] = json_encode([ {slug: 'plugin-slug', version: '1.2.3'}, ... ])
+     */
     public function install_active_plugins() {
         $this->check_permission();
-        $plugins = json_decode(stripslashes($_POST['plugins'] ?? '[]'), true);
-        if (!is_array($plugins) || empty($plugins)) wp_send_json_error(['message' => 'No plugins provided']);
 
+        $plugins = json_decode(stripslashes($_POST['plugins'] ?? '[]'), true);
+        if (!is_array($plugins) || empty($plugins)) {
+            wp_send_json_error(['message' => 'No plugins provided']);
+        }
+
+        // include required WP files
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+        require_once ABSPATH . 'wp-admin/includes/misc.php';
+        require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
         require_once ABSPATH . 'wp-admin/includes/plugin.php';
-        require_once ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php';
+        require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+        require_once ABSPATH . 'wp-admin/includes/update.php';
 
         $results = [];
+
+        // get all plugins list for detection
+        $all_plugins = get_plugins();
 
         foreach ($plugins as $plugin) {
             $slug = sanitize_text_field($plugin['slug']);
             $version = sanitize_text_field($plugin['version'] ?? '');
-            $plugin_file = $slug . '/' . $slug . '.php';
+            $plugin_main_file = $slug . '/' . $slug . '.php';
 
-            $is_installed = file_exists(WP_PLUGIN_DIR . '/' . $plugin_file);
-            $installed_version = $is_installed ? get_plugin_data(WP_PLUGIN_DIR . '/' . $plugin_file)['Version'] : null;
+            // detect installed plugin by slug (more robust: search get_plugins by folder)
+            $is_installed = false;
+            $installed_version = null;
+            foreach ($all_plugins as $path => $meta) {
+                // path is like 'plugin-folder/plugin-main.php'
+                if (strpos($path, $slug . '/') === 0) {
+                    $is_installed = true;
+                    $installed_version = $meta['Version'] ?? null;
+                    $plugin_main_file = $path; // actual relative path for activate_plugin
+                    break;
+                }
+            }
 
-            $need_install = !$is_installed || ($version && version_compare($installed_version, $version, '<'));
+            $need_install = !$is_installed || ($version && $installed_version && version_compare($installed_version, $version, '<'));
+
             if ($need_install) {
                 $download_url = $version ? "https://downloads.wordpress.org/plugin/{$slug}.{$version}.zip" : "https://downloads.wordpress.org/plugin/{$slug}.zip";
-                $upgrader = new \Plugin_Upgrader();
+
+                $upgrader = new \Plugin_Upgrader( new \Automatic_Upgrader_Skin() );
                 $install_result = $upgrader->install($download_url);
-                if (is_wp_error($install_result) || !$install_result) {
+
+                if (!$install_result) {
                     $results[$slug] = 'install_failed';
+                    // refresh plugin list (maybe installed under different path)
+                    $all_plugins = get_plugins();
+                    continue;
+                }
+
+                // refresh plugin list and attempt to find plugin file path
+                $all_plugins = get_plugins();
+                $found = false;
+                foreach ($all_plugins as $path => $meta) {
+                    if (strpos($path, $slug . '/') === 0) {
+                        $plugin_main_file = $path;
+                        $found = true;
+                        break;
+                    }
+                }
+                if (!$found) {
+                    $results[$slug] = 'installed_but_entry_not_found';
                     continue;
                 }
             }
 
-            if (!is_plugin_active($plugin_file)) {
-                $activate_result = activate_plugin($plugin_file);
-                $results[$slug] = is_wp_error($activate_result) ? 'activation_failed' : 'installed_and_activated';
+            // Activate plugin if not active
+            if (!is_plugin_active($plugin_main_file)) {
+                $activate_result = activate_plugin($plugin_main_file);
+
+                if (is_wp_error($activate_result)) {
+                    $results[$slug] = 'activation_failed: ' . $activate_result->get_error_message();
+                } else {
+                    $results[$slug] = 'installed_and_activated';
+                }
             } else {
                 $results[$slug] = $need_install ? 'installed_and_already_active' : 'already_active';
             }
