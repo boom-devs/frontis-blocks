@@ -10,8 +10,9 @@ import generateColorsVariables from "../global-settings/components/GenerateColor
 import { parse, serialize } from "@wordpress/blocks";
 import { usePostDataMutation } from "../services/laravelapi";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAttribute } from "../store/attributesSlice";
+import FullSiteImportModal from "./fullSiteImportModal";
 
 const FullSiteImportSettingConfig = ({
     template, 
@@ -21,9 +22,22 @@ const FullSiteImportSettingConfig = ({
     onClose
 }) => {
 
+  const { 
+    showFullSiteImportModal
+  } = useSelector((state) => state.attributes);
+
   const [isImporting, setIsImporting] = useState(false);
   const [importProgress, setImportProgress] = useState(0);
-  const [currentStep, setCurrentStep] = useState('');
+  const [currentStep, setCurrentStep] = useState("");
+  const [stepsOptions, setStepOptions] = useState([]);
+
+  const updateStepStatus = (key, status) => {
+    setStepOptions(prev =>
+      prev.map(step =>
+        step.key === key ? { ...step, status } : step
+      )
+    );
+  };
 
   const [globalColors, setGlobalColors] = useState(template.colors);
 	const [customColors, setCustomColors] = useState(template.colors);
@@ -635,134 +649,236 @@ const FullSiteImportSettingConfig = ({
   
 
   // Full import flow
+  // const handleImport = useCallback(async () => {
+  //   setIsImporting(true);
+  //   dispatch && dispatch(setAttribute({ showFullSiteImportModal: true }));
+  //   setImportProgress(0);
+  
+  //   try {
+  //     // Step 1: Fetch site data
+  //     setCurrentStep("Fetching site from portal...");
+  //     setImportProgress(5);
+  
+  //     const siteResp = await getTemplatesData("import/site", "site_id", template.id);
+  //     if (!siteResp?.data) throw new Error("Failed to fetch site data from portal");
+  
+  //     const siteData = siteResp.data;
+  //     const pages = siteData.pages || [];
+  //     const uploads = siteData.uploads_url || "https://templates.frontiswp.com/melinoe/wp-content/uploads/sites/14/2025.zip";
+  
+  //     // Step 2: Upload files
+  //     setCurrentStep("Uploading and extracting site files...");
+  //     setImportProgress(15);
+  //     const uploadResult = await uploadFiles(uploads);
+  //     if (uploadResult.skipped) console.warn("File upload skipped or failed.");
+  
+  //     // Step 3: Activate theme
+  //     setCurrentStep("Installing & activating theme...");
+  //     setImportProgress(30);
+  //     const themeResult = await activateTheme(template.theme || "frontis");
+  //     if (themeResult.skipped) console.warn("Theme activation skipped:", themeResult.reason);
+  
+  //     // Step 4: Plugins
+  //     setCurrentStep("Installing & activating plugins...");
+  //     setImportProgress(50);
+  //     const pluginsResult = await installActivatePlugins(template.dependencies || []);
+  //     if (pluginsResult.skipped) console.warn("Plugin install/activation skipped:", pluginsResult.reason);
+  
+  //     // Step 5: Pages
+  //     setCurrentStep("Creating pages...");
+  //     setImportProgress(70);
+  //     await handleStorePages(pages);
+  
+  //     // Step 6: Finalize
+  //     setImportProgress(100);
+  //     setCurrentStep("Finalizing setup...");
+  //     await new Promise(r => setTimeout(r, 600));
+  
+  //     handleUpdateState && handleUpdateState();
+      
+  //     dispatch && dispatch(setAttribute({ importSuccess: true }));
+  //     toast.success("Site imported successfully!", { position: "top-right", autoClose: 3000, theme: "light" });
+  
+  //   } catch (err) {
+  //     console.error("Import failed:", err);
+  //     dispatch && dispatch(setAttribute({ importSuccess: false }));
+  //     toast.error("Import failed. Check console for details", { position: "top-right", autoClose: 5000 });
+  
+  //   } finally {
+  //     setIsImporting(false);
+  //     setImportProgress(0);
+  //   }
+  // }, []);
+
   const handleImport = useCallback(async () => {
     setIsImporting(true);
-    setImportProgress(0);
+  
+    // Open modal
+    dispatch(setAttribute({ showFullSiteImportModal: true }));
+  
+    // Define steps once
+    const allSteps = [
+      { key: "fetch_site", label: "Fetching site data...", status: "pending" },
+      { key: "upload_files", label: "Uploading and extracting files...", status: "pending" },
+      { key: "theme", label: "Installing & activating theme...", status: "pending" },
+      { key: "plugins", label: "Installing & activating plugins...", status: "pending" },
+      { key: "pages", label: "Creating pages...", status: "pending" },
+      { key: "finalize", label: "Finalizing setup...", status: "pending" },
+    ];
+  
+    setStepOptions(allSteps);
   
     try {
-      // Step 1: Fetch site data
-      setCurrentStep("Fetching site from portal...");
+      /** STEP 1: FETCH SITE **/
+      setCurrentStep("fetch_site");
+      updateStepStatus("fetch_site", "running");
       setImportProgress(5);
   
       const siteResp = await getTemplatesData("import/site", "site_id", template.id);
-      if (!siteResp?.data) throw new Error("Failed to fetch site data from portal");
+      if (!siteResp?.data) throw new Error("Failed to fetch site data");
+      updateStepStatus("fetch_site", "success");
   
       const siteData = siteResp.data;
       const pages = siteData.pages || [];
       const uploads = siteData.uploads_url || "https://templates.frontiswp.com/melinoe/wp-content/uploads/sites/14/2025.zip";
   
-      // Step 2: Upload files
-      setCurrentStep("Uploading and extracting site files...");
-      setImportProgress(15);
-      const uploadResult = await uploadFiles(uploads);
-      if (uploadResult.skipped) console.warn("File upload skipped or failed.");
+      /** STEP 2: UPLOAD FILES **/
+      setCurrentStep("upload_files");
+      updateStepStatus("upload_files", "running");
+      setImportProgress(20);
   
-      // Step 3: Activate theme
-      setCurrentStep("Installing & activating theme...");
-      setImportProgress(30);
-      const themeResult = await activateTheme(template.theme || "frontis");
-      if (themeResult.skipped) console.warn("Theme activation skipped:", themeResult.reason);
+      const uploadRes = await uploadFiles(uploads);
+      updateStepStatus("upload_files", uploadRes?.skipped ? "skipped" : "success");
   
-      // Step 4: Plugins
-      setCurrentStep("Installing & activating plugins...");
-      setImportProgress(50);
-      const pluginsResult = await installActivatePlugins(template.dependencies || []);
-      if (pluginsResult.skipped) console.warn("Plugin install/activation skipped:", pluginsResult.reason);
+      /** STEP 3: THEME **/
+      setCurrentStep("theme");
+      updateStepStatus("theme", "running");
+      setImportProgress(35);
   
-      // Step 5: Pages
-      setCurrentStep("Creating pages...");
-      setImportProgress(70);
+      const themeRes = await activateTheme(template.theme || "frontis");
+      updateStepStatus("theme", themeRes?.skipped ? "skipped" : "success");
+  
+      /** STEP 4: PLUGINS **/
+      setCurrentStep("plugins");
+      updateStepStatus("plugins", "running");
+      setImportProgress(55);
+  
+      const pluginRes = await installActivatePlugins(template.dependencies || []);
+      updateStepStatus("plugins", pluginRes?.skipped ? "skipped" : "success");
+  
+      /** STEP 5: PAGES **/
+      setCurrentStep("pages");
+      updateStepStatus("pages", "running");
+      setImportProgress(75);
+  
       await handleStorePages(pages);
+      updateStepStatus("pages", "success");
   
-      // Step 6: Finalize
+      /** STEP 6: FINALIZE **/
+      setCurrentStep("finalize");
+      updateStepStatus("finalize", "running");
       setImportProgress(100);
-      setCurrentStep("Finalizing setup...");
+  
       await new Promise(r => setTimeout(r, 600));
+      updateStepStatus("finalize", "success");
   
-      handleUpdateState && handleUpdateState();
-      onClose && onClose();
-      dispatch && dispatch(setAttribute({ importSuccess: true }));
-  
-      toast.success("Site imported successfully!", { position: "top-right", autoClose: 3000, theme: "light" });
+      dispatch(setAttribute({ importSuccess: true }));
+      toast.success("Site imported successfully!", { position: "top-right" });
   
     } catch (err) {
-      console.error("Import failed:", err);
-      dispatch && dispatch(setAttribute({ importSuccess: false }));
-      toast.error("Import failed. Check console for details", { position: "top-right", autoClose: 5000 });
+      console.error("Import Error:", err);
+      dispatch(setAttribute({ importSuccess: false }));
+      toast.error("Import failed. See console for details");
   
     } finally {
       setIsImporting(false);
-      setImportProgress(0);
-      setCurrentStep("");
     }
   }, []);
+  
 
 
   return (
-                  <div className={`fb-import-form-panel ${isSidebarCollapsed ? 'collapsed' : ''}`}>
-                        <div className="fb-form-section">
-                            <span className="fb-template-label">Template Name:</span>
-                            <h6 className="fb-template-title">{template?.title || 'Renovate - Home Decor Website Template'}</h6>
-                            <FsiGbTypography
-                                template={template}
-                                globalColors={globalColors}
-                                setGlobalColors={setGlobalColors}
-                                customColors={customColors}
-                                setCustomColors={setCustomColors}
-                                gradientColors={gradientColors}
-                                setGradientColors={setGradientColors}
-                                customGradientColors={customGradientColors}
-                                setCustomGradientColors={setCustomGradientColors}
-                                typography={typography}
-                                setTypography={setTypography}
-                                customTypography={customTypography}
-                                setCustomTypography={setCustomTypography}
-                                fontFamilies={fontFamilies}
-                                setFontFamilies={setFontFamilies}
-                                globalTypography={globalTypography}
-                                setGlobalTypography={setGlobalTypography}
-                            />
-                        </div>
+    <>
+        <div className={`fb-import-form-panel ${isSidebarCollapsed ? 'collapsed' : ''}`}>
+            <div className="fb-form-section">
+                <span className="fb-template-label">Template Name:</span>
+                <h6 className="fb-template-title">{template?.title || 'Renovate - Home Decor Website Template'}</h6>
+                <FsiGbTypography
+                    template={template}
+                    globalColors={globalColors}
+                    setGlobalColors={setGlobalColors}
+                    customColors={customColors}
+                    setCustomColors={setCustomColors}
+                    gradientColors={gradientColors}
+                    setGradientColors={setGradientColors}
+                    customGradientColors={customGradientColors}
+                    setCustomGradientColors={setCustomGradientColors}
+                    typography={typography}
+                    setTypography={setTypography}
+                    customTypography={customTypography}
+                    setCustomTypography={setCustomTypography}
+                    fontFamilies={fontFamilies}
+                    setFontFamilies={setFontFamilies}
+                    globalTypography={globalTypography}
+                    setGlobalTypography={setGlobalTypography}
+                />
+            </div>
 
-                        <div className="fb-import-actions">
-                            {isImporting ? (
-                                <div className="fb-import-progress">
-                                    <div className="fb-progress-info">
-                                        <ClipLoader color="#3B82F6" size={20} />
-                                        <span className="fb-progress-text">{currentStep}</span>
-                                    </div>
-                                    <div className="fb-progress-bar">
-                                        <div
-                                            className="fb-progress-fill"
-                                            style={{ width: `${importProgress}%` }}
-                                        ></div>
-                                    </div>
-                                    <span className="fb-progress-percentage">{Math.round(importProgress)}%</span>
-                                </div>
-                            ) : (
-                                <div className="fb-import-step-btn-wrapper">
-                                    <button
-                                        className="fb-import-btn next"
-                                        onClick={handleImport}
-                                    >
-                                        Import Now
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </button>
-                                    <button
-                                        className="fb-import-btn back"
-                                        onClick={onBack}
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="#6A758E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                        Back
-                                    </button>
-                                </div>
-                            )}
+            <div className="fb-import-actions">
+                {isImporting ? (
+                    <div className="fb-import-progress">
+                        <div className="fb-progress-info">
+                            <ClipLoader color="#3B82F6" size={20} />
+                            <span className="fb-progress-text">{currentStep}</span>
                         </div>
+                        <div className="fb-progress-bar">
+                            <div
+                                className="fb-progress-fill"
+                                style={{ width: `${importProgress}%` }}
+                            ></div>
+                        </div>
+                        <span className="fb-progress-percentage">{Math.round(importProgress)}%</span>
                     </div>
+                ) : (
+                    <div className="fb-import-step-btn-wrapper">
+                        <button
+                            className="fb-import-btn next"
+                            onClick={handleImport}
+                        >
+                            Import Now
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button
+                            className="fb-import-btn back"
+                            onClick={onBack}
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="#6A758E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            Back
+                        </button>
+                    </div>
+                )}
+            </div>
+        </div>
+        {showFullSiteImportModal && (
+          <FullSiteImportModal
+            steps={stepsOptions}
+            currentStep={currentStep}
+            progress={importProgress}
+            onCloseModal={() => {
+              onClose && onClose();
+              dispatch(setAttribute({ showFullSiteImportModal: false }));
+              setCurrentStep("");
+              setStepOptions([]);
+            }}
+            frontPageUrl="/"
+            isImporting={isImporting}
+          />
+        )}
+    </>
   )
 }
 
