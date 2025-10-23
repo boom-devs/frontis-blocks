@@ -391,6 +391,15 @@ $dynamicSubHeadingTextTermsSeparator 	= fb_norm_str(isset($attributes['dynamicSu
 $dynamicSubHeadingTextEnableLink 		= !empty($attributes['dynamicSubHeadingTextEnableLink']);
 $dynamicSubHeadingTextLinkSource 		= fb_norm_str(isset($attributes['dynamicSubHeadingTextLinkSource']) ? $attributes['dynamicSubHeadingTextLinkSource'] : 'post_permalink');
 
+$pro_active = apply_filters('frontisblocks/is-pro-active', false);
+
+if ( ! $pro_active ) {
+    $dynamicTextEnabled = false;
+    $dynamicSubHeadingTextEnabled = false;
+    $dynamicTextEnableLink = false;
+    $dynamicSubHeadingTextEnableLink = false;
+}
+
 // -------- compute dynamic heading/subheading via reusable function ----------
 $heading_dyn = fb_compute_dynamic_text( [
 	'enabled'             => $dynamicTextEnabled,
