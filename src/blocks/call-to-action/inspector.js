@@ -23,15 +23,6 @@ import {
 	BORDER_STYLES,
 	ICON_POSITION,
 	OVERFLOW_OP,
-
-	DYNAMIC_DATA_SOURCE_OPTIONS,
-    DYNAMIC_DATA_SOURCE_FIELD_OPTIONS,
-    DYNAMIC_FEATURED_IMAGE_OPTIONS,
-    DYNAMIC_DATE_TIME_TYPE_OPTIONS,
-    DYNAMIC_TAXONOMY_OPTIONS,
-    getdynamicTextDateFormatOptions,
-    getdynamicTextTimeFormatOptions,
-    DYNAMIC_LINK_SOURCE_OPTIONS,
 } from '@Constants/fbConstants';
 
 import Select2 from "react-select";
