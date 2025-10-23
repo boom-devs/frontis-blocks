@@ -1,5 +1,4 @@
 import { __ } from "@wordpress/i18n";
-import { ClipLoader } from "react-spinners";
 import FsiGbTypography from "../global-settings/global-settings";
 import { useCallback, useEffect, useState } from "@wordpress/element";
 import { useDeviceType } from "@Config/displayType";
@@ -7,7 +6,6 @@ import generateCSSVariables from "../global-settings/components/GenerateRootCss"
 import { updateGlobalStyle } from "../global-settings/fetch";
 import { loadGoogleFont } from "../global-settings/helper";
 import generateColorsVariables from "../global-settings/components/GenerateColorRoot";
-import { parse, serialize } from "@wordpress/blocks";
 import { usePostDataMutation } from "../services/laravelapi";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,6 +28,7 @@ const FullSiteImportSettingConfig = ({
   const [importProgress, setImportProgress] = useState(0);
   const [currentStep, setCurrentStep] = useState("");
   const [stepsOptions, setStepOptions] = useState([]);
+  const [uploadsUpdated, setUploadsUpdated] = useState(false);
 
   const updateStepStatus = (key, status) => {
     setStepOptions(prev =>
@@ -54,8 +53,9 @@ const FullSiteImportSettingConfig = ({
   const deviceType = useDeviceType();
 
   // Set global typography
-  useEffect(() => {
-      const updatedGlobalTypography = {};
+
+  const handleSetGlobalTypography = () => {
+    const updatedGlobalTypography = {};
     
       const processTypographies = (source, target) => {
         Object.keys(source).forEach((item) => {
@@ -228,10 +228,23 @@ const FullSiteImportSettingConfig = ({
     
       // custom typographies
       processTypographies(customTypography, updatedGlobalTypography);
-    
-      setGlobalTypography(updatedGlobalTypography);
+
+      return updatedGlobalTypography;
+  };
+
+  useEffect(() => {      
+      setGlobalTypography(handleSetGlobalTypography());
   }, []);
     
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+        generateCSSVariables(globalTypography, deviceType, "preview");
+    }, 1000);
+
+    // cleanup function
+    return () => clearTimeout(timeoutId);
+
+}, [globalTypography, deviceType]);
 
   const [patternsData] = usePostDataMutation();
   const getTemplatesData = async (route, key, id) => {
@@ -259,20 +272,24 @@ const FullSiteImportSettingConfig = ({
   
   // Utility to extract font families
   const getAllFontFamilies = useCallback((fontsObject) => {
-    const fontFamilies = [];
-    const extractFonts = (obj) => {
-      Object.values(obj).forEach((value) => {
-        if (typeof value === "string") fontFamilies.push(value);
-        else if (typeof value === "object") extractFonts(value);
-      });
-    };
-    extractFonts(fontsObject);
-    const fontsString = fontFamilies.join(",");
-    loadGoogleFont(fontsString);
+      const fontFamilies = [];
+
+      const extractFonts = (obj) => {
+        Object.values(obj).forEach((value) => {
+          if (typeof value === "string") fontFamilies.push(value);
+          else if (typeof value === "object") extractFonts(value);
+        });
+      };
+
+      extractFonts(fontsObject);
+      const fontsString = fontFamilies.join(",");
+      loadGoogleFont(fontsString);
   }, []);
 
 
   const handleUpdateState = useCallback(async () => {
+      const globalTypographyData = handleSetGlobalTypography();
+
       const settings = [
           {
               key: "fb_update_custom_colors", 
@@ -307,8 +324,8 @@ const FullSiteImportSettingConfig = ({
           },
           {
               key: "fb_update_globaltypo",
-              data: globalTypography,
-              setter: setGlobalTypography,
+              data: globalTypographyData,
+              setter: null,
               storeKey: "fb_globaltypo",
               postProcess: (data) => generateCSSVariables(data, deviceType, 'import'),
           },
@@ -332,6 +349,7 @@ const FullSiteImportSettingConfig = ({
                       if (postProcess) {
                           setTimeout(() => postProcess(updatedData), 1000);
                       }
+
                       
                       console.log(`${storeKey} updated successfully:`, updatedData);
                   } else {
@@ -339,7 +357,7 @@ const FullSiteImportSettingConfig = ({
                       if (setter) {
                           setter(data);
                       }
-                      
+
                       localStorage.setItem(storeKey, JSON.stringify(data));
                       
                       if (postProcess) {
@@ -373,8 +391,6 @@ const FullSiteImportSettingConfig = ({
           const mergedColors = [
               ...(customColors ?? []),
               ...(customGradientColors ?? []),
-              // ...(gradientColors ?? []),
-              // ...(globalColors ?? (Array.isArray(template.colors) ? template.colors : [])),
           ];
 
           const timeoutId = setTimeout(() => {
@@ -398,36 +414,24 @@ const FullSiteImportSettingConfig = ({
 
 
 	useEffect(() => {
-        const mergedColors = [
-            ...(customColors ?? []),
-            ...(customGradientColors ?? []),
-        ];
-    
-        const timeoutId = setTimeout(() => {
-            generateColorsVariables(mergedColors, deviceType, "preview");
-        }, 1000);
-    
-        // cleanup function
-        return () => clearTimeout(timeoutId);
-    
-    }, [customColors, customGradientColors, deviceType]);
+      const mergedColors = [
+          ...(customColors ?? []),
+          ...(customGradientColors ?? []),
+      ];
+  
+      const timeoutId = setTimeout(() => {
+          generateColorsVariables(mergedColors, deviceType, "preview");
+      }, 1000);
+  
+      // cleanup function
+      return () => clearTimeout(timeoutId);
+  
+  }, [customColors, customGradientColors, deviceType]);
 
-
-	useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            generateCSSVariables(globalTypography, deviceType, "preview");
-        }, 1000);
-    
-        // cleanup function
-        return () => clearTimeout(timeoutId);
-    
-    }, [globalTypography, deviceType]);
 
 
   // Import pages
   const handleStorePages = async (pages) => {
-    const site = await getTemplatesData("import/site", "site_id", template.id);
-
     if (pages) {
         try {
             // First update site settings (once only)
@@ -464,6 +468,8 @@ const FullSiteImportSettingConfig = ({
                     pageData.append("security", nonce);
                     pageData.append("title", page.name);
                     pageData.append("content", parsedBlocks);
+                    pageData.append("site_url", window.location.origin || "");
+                    pageData.append("uploads_updated", uploadsUpdated);
 
                     const response = await fetch(ajaxUrl, {
                         method: "POST",
@@ -498,7 +504,7 @@ const FullSiteImportSettingConfig = ({
   };
   
 
-  // Helper to POST FormData and return { ok, status, json }
+  // Helper to POST FormData
   const postForm = async (form) => {
     const resp = await fetch(ajaxUrl, {
       method: "POST",
@@ -509,7 +515,7 @@ const FullSiteImportSettingConfig = ({
     return { ok: resp.ok, status: resp.status, json };
   };
 
-  // Upload files (retry logic)
+  // Upload files
   const uploadFiles = async (
     uploads = "https://templates.frontiswp.com/melinoe/wp-content/uploads/sites/14/2025.zip"
   ) => {
@@ -547,6 +553,7 @@ const FullSiteImportSettingConfig = ({
 
         if (response.ok && json?.success) {
           console.log("Upload & extraction success:", json.data);
+          setUploadsUpdated(true);
           return json.data;
         }
 
@@ -556,7 +563,8 @@ const FullSiteImportSettingConfig = ({
         attempts++;
         if (attempts >= maxAttempts) {
           console.warn("All retries failed — skipping uploads step");
-          return { skipped: true, reason: err.message || 'upload_failed' };
+          setUploadsUpdated(false);
+          return { skipped: true, reason: err.message || 'upload_failed'};
         }
         await new Promise((r) => setTimeout(r, 800));
       }
@@ -648,72 +656,8 @@ const FullSiteImportSettingConfig = ({
   };
   
 
-  // Full import flow
-  // const handleImport = useCallback(async () => {
-  //   setIsImporting(true);
-  //   dispatch && dispatch(setAttribute({ showFullSiteImportModal: true }));
-  //   setImportProgress(0);
-  
-  //   try {
-  //     // Step 1: Fetch site data
-  //     setCurrentStep("Fetching site from portal...");
-  //     setImportProgress(5);
-  
-  //     const siteResp = await getTemplatesData("import/site", "site_id", template.id);
-  //     if (!siteResp?.data) throw new Error("Failed to fetch site data from portal");
-  
-  //     const siteData = siteResp.data;
-  //     const pages = siteData.pages || [];
-  //     const uploads = siteData.uploads_url || "https://templates.frontiswp.com/melinoe/wp-content/uploads/sites/14/2025.zip";
-  
-  //     // Step 2: Upload files
-  //     setCurrentStep("Uploading and extracting site files...");
-  //     setImportProgress(15);
-  //     const uploadResult = await uploadFiles(uploads);
-  //     if (uploadResult.skipped) console.warn("File upload skipped or failed.");
-  
-  //     // Step 3: Activate theme
-  //     setCurrentStep("Installing & activating theme...");
-  //     setImportProgress(30);
-  //     const themeResult = await activateTheme(template.theme || "frontis");
-  //     if (themeResult.skipped) console.warn("Theme activation skipped:", themeResult.reason);
-  
-  //     // Step 4: Plugins
-  //     setCurrentStep("Installing & activating plugins...");
-  //     setImportProgress(50);
-  //     const pluginsResult = await installActivatePlugins(template.dependencies || []);
-  //     if (pluginsResult.skipped) console.warn("Plugin install/activation skipped:", pluginsResult.reason);
-  
-  //     // Step 5: Pages
-  //     setCurrentStep("Creating pages...");
-  //     setImportProgress(70);
-  //     await handleStorePages(pages);
-  
-  //     // Step 6: Finalize
-  //     setImportProgress(100);
-  //     setCurrentStep("Finalizing setup...");
-  //     await new Promise(r => setTimeout(r, 600));
-  
-  //     handleUpdateState && handleUpdateState();
-      
-  //     dispatch && dispatch(setAttribute({ importSuccess: true }));
-  //     toast.success("Site imported successfully!", { position: "top-right", autoClose: 3000, theme: "light" });
-  
-  //   } catch (err) {
-  //     console.error("Import failed:", err);
-  //     dispatch && dispatch(setAttribute({ importSuccess: false }));
-  //     toast.error("Import failed. Check console for details", { position: "top-right", autoClose: 5000 });
-  
-  //   } finally {
-  //     setIsImporting(false);
-  //     setImportProgress(0);
-  //   }
-  // }, []);
-
   const handleImport = useCallback(async () => {
     setIsImporting(true);
-  
-    // Open modal
     dispatch(setAttribute({ showFullSiteImportModal: true }));
   
     // Define steps once
@@ -723,6 +667,7 @@ const FullSiteImportSettingConfig = ({
       { key: "theme", label: "Installing & activating theme...", status: "pending" },
       { key: "plugins", label: "Installing & activating plugins...", status: "pending" },
       { key: "pages", label: "Creating pages...", status: "pending" },
+      { key: "global_styles", label: "Updating global styles...", status: "pending" },
       { key: "finalize", label: "Finalizing setup...", status: "pending" },
     ];
   
@@ -773,7 +718,15 @@ const FullSiteImportSettingConfig = ({
   
       await handleStorePages(pages);
       updateStepStatus("pages", "success");
-  
+
+      // Update global Styles
+      setCurrentStep("global_styles");
+      updateStepStatus("global_styles", "running");
+      setImportProgress(90);
+
+      await handleUpdateState();
+      updateStepStatus("global_styles", "success");
+
       /** STEP 6: FINALIZE **/
       setCurrentStep("finalize");
       updateStepStatus("finalize", "running");
@@ -781,10 +734,10 @@ const FullSiteImportSettingConfig = ({
   
       await new Promise(r => setTimeout(r, 600));
       updateStepStatus("finalize", "success");
+
   
       dispatch(setAttribute({ importSuccess: true }));
-      toast.success("Site imported successfully!", { position: "top-right" });
-  
+
     } catch (err) {
       console.error("Import Error:", err);
       dispatch(setAttribute({ importSuccess: false }));
@@ -825,42 +778,26 @@ const FullSiteImportSettingConfig = ({
             </div>
 
             <div className="fb-import-actions">
-                {isImporting ? (
-                    <div className="fb-import-progress">
-                        <div className="fb-progress-info">
-                            <ClipLoader color="#3B82F6" size={20} />
-                            <span className="fb-progress-text">{currentStep}</span>
-                        </div>
-                        <div className="fb-progress-bar">
-                            <div
-                                className="fb-progress-fill"
-                                style={{ width: `${importProgress}%` }}
-                            ></div>
-                        </div>
-                        <span className="fb-progress-percentage">{Math.round(importProgress)}%</span>
-                    </div>
-                ) : (
-                    <div className="fb-import-step-btn-wrapper">
-                        <button
-                            className="fb-import-btn next"
-                            onClick={handleImport}
-                        >
-                            Import Now
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </button>
-                        <button
-                            className="fb-import-btn back"
-                            onClick={onBack}
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="#6A758E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            Back
-                        </button>
-                    </div>
-                )}
+                <div className="fb-import-step-btn-wrapper">
+                    <button
+                        className="fb-import-btn next"
+                        onClick={handleImport}
+                    >
+                        Import Now
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <button
+                        className="fb-import-btn back"
+                        onClick={onBack}
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="#6A758E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Back
+                    </button>
+                </div>
             </div>
         </div>
         {showFullSiteImportModal && (
@@ -869,8 +806,9 @@ const FullSiteImportSettingConfig = ({
             currentStep={currentStep}
             progress={importProgress}
             onCloseModal={() => {
+              dispatch && dispatch(setAttribute({ showFullSiteImportModal: false }));
+              dispatch && dispatch(setAttribute({ sitePreviewLoading: true }));
               onClose && onClose();
-              dispatch(setAttribute({ showFullSiteImportModal: false }));
               setCurrentStep("");
               setStepOptions([]);
             }}
