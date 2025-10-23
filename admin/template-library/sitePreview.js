@@ -11,8 +11,6 @@ const SitePreview = ({preview_url}) => {
 		sitePreviewLoading 
 	} = useSelector((state) => state.attributes);
 
-	console.log(sitePreviewLoading);
-
 	const dispatch = useDispatch();
 
 	useEffect(() => {

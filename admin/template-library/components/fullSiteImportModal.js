@@ -100,7 +100,7 @@ const FullSiteImportModal = ({
         {!isImporting && (
           <div className="fb-footer-btns">
             <a
-              href="/edit.php?post_type=page"
+              href="/wp-admin/edit.php?post_type=page"
               className="fb-btn fb-btn-secondary"
             >
               View All Pages

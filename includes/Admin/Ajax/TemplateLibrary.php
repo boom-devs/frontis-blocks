@@ -82,157 +82,6 @@ class TemplateLibrary extends AjaxBase {
         }
     }
 
-    // function upload_files() {
-    //     $tempZipFile = null;
-    //     $uploads_dir = null;
-    //     $zip_url = 'https://templates.frontiswp.com/melinoe/wp-content/uploads/sites/14/2025.zip';
-        
-    //     try {
-            
-    //         // Get the WordPress uploads directory
-    //         $uploads_dir = wp_upload_dir();
-    //         $destination = trailingslashit($uploads_dir['basedir']); // This is the uploads folder
-            
-    //         // Ensure the uploads directory exists
-    //         if (!is_dir($destination)) {
-    //             wp_mkdir_p($destination);
-    //         }
-            
-    //         // Create temporary file
-    //         $tempZipFile = tempnam(sys_get_temp_dir(), 'downloaded_zip_');
-            
-    //         if (!$tempZipFile) {
-    //             throw new Exception('Failed to create temporary file');
-    //         }
-            
-    //         // Download the zip file using cURL
-    //         $ch = curl_init($zip_url);
-            
-    //         if (!$ch) {
-    //             throw new Exception('Failed to initialize cURL');
-    //         }
-            
-    //         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    //         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    //         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    //         curl_setopt($ch, CURLOPT_TIMEOUT, 300);
-    //         curl_setopt($ch, CURLOPT_USERAGENT, 'WordPress/' . get_bloginfo('version'));
-            
-    //         $data = curl_exec($ch);
-    //         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            
-    //         if (curl_errno($ch)) {
-    //             $error = curl_error($ch);
-    //             curl_close($ch);
-    //             throw new Exception('cURL Error: ' . $error);
-    //         }
-            
-    //         curl_close($ch);
-            
-    //         if ($data === false || empty($data)) {
-    //             throw new Exception('Failed to download file from URL');
-    //         }
-            
-    //         if ($httpCode !== 200) {
-    //             throw new Exception('HTTP Error: ' . $httpCode);
-    //         }
-            
-    //         if (file_put_contents($tempZipFile, $data) === false) {
-    //             throw new Exception('Failed to save downloaded data to temporary file');
-    //         }
-            
-    //         if (!file_exists($tempZipFile) || filesize($tempZipFile) == 0) {
-    //             throw new Exception('Temporary zip file is empty or missing');
-    //         }
-            
-    //         // Extract using proper PclZip parameters
-    //         $zip = new PclZip($tempZipFile);
-            
-    //         // First, get the zip content to analyze structure
-    //         $content = $zip->listContent();
-    //         if ($content == 0) {
-    //             throw new Exception('Failed to read zip content: ' . $zip->errorInfo(true));
-    //         }
-            
-    //         $extracted_files = [];
-    //         $extracted_count = 0;
-            
-    //         // Extract each file individually to flatten structure
-    //         foreach ($content as $file_info) {
-    //             // Skip directories
-    //             if (isset($file_info['folder']) && $file_info['folder']) {
-    //                 continue;
-    //             }
-                
-    //             $original_filename = $file_info['filename'];
-                
-    //             // Get just the filename (remove directory structure)
-    //             $filename = basename($original_filename);
-                
-    //             // Skip if filename is empty or contains directory separators
-    //             if (empty($filename) || strpos($filename, '/') !== false || strpos($filename, '\\') !== false) {
-    //                 continue;
-    //             }
-                
-    //             // Create full target path in uploads directory
-    //             $target_path = $destination . $filename;
-                
-    //             // Check if file already exists (optional: you can skip or overwrite)
-    //             if (file_exists($target_path)) {
-    //                 // Option 1: Skip existing files
-    //                 // continue;
-                    
-    //                 // Option 2: Overwrite existing files
-    //                 unlink($target_path);
-    //             }
-                
-    //             // Extract single file using its index
-    //             $result = $zip->extractByIndex(
-    //                 $file_info['index'],
-    //                 PCLZIP_OPT_PATH, $destination,
-    //                 PCLZIP_OPT_REPLACE_NEWER
-    //             );
-                
-    //             if ($result == 0) {
-    //                 error_log('Failed to extract ' . $original_filename . ': ' . $zip->errorInfo(true));
-    //             } else {
-    //                 // Verify the file was actually extracted with correct name
-    //                 if (file_exists($target_path)) {
-    //                     $extracted_files[] = $filename;
-    //                     $extracted_count++;
-    //                 }
-    //             }
-    //         }
-            
-    //         // Clean up temp file
-    //         if (file_exists($tempZipFile)) {
-    //             unlink($tempZipFile);
-    //         }
-            
-    //         // Set success headers
-    //         header("Content-type: application/json; charset=utf-8");
-    //         http_response_code(200);
-            
-    //         return [
-    //             'success' => true,
-    //             'message' => 'Files extracted successfully to uploads folder',
-    //             'path' => $destination,
-    //             'extracted_files' => $extracted_count,
-    //             'files' => $extracted_files
-    //         ];
-            
-    //     } catch (Exception $e) {
-    //         if ($tempZipFile && file_exists($tempZipFile)) {
-    //             unlink($tempZipFile);
-    //         }
-            
-    //         header("Content-type: application/json; charset=utf-8");
-    //         http_response_code(500);
-            
-    //         return false;
-    //     }
-    // }
-
     function upload_files() {
         $this->check_permission();
     
@@ -452,77 +301,51 @@ class TemplateLibrary extends AjaxBase {
 
         wp_send_json_success(['plugins' => $results]);
     }
-     
-
-    // public function full_site_import() {
-    //     $this->check_permission();
     
-    //     $title   = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-    //     $content = isset($_POST['content']) ? $_POST['content'] : '';
-    
-    //     if (empty($title)) {
-    //         wp_send_json_error(['message' => 'Title is required']);
-    //     }
-
-    //     // if($uploads_updated) {
-    //     //     $my_domain = 'http://boomdevsco.test/';
-    //     //     preg_match_all('/https?:\/\/[^"\'\s>]+?\.(jpg|jpeg|png|gif|webp|svg)/i', $content, $matches);
-    
-    //     //     if (!empty($matches[0])) {
-    //     //         $image_urls = array_unique($matches[0]);
-    
-    //     //         foreach ($image_urls as $url) {
-    
-    //     //             // If URL contains "2025"
-    //     //             if (preg_match('/\/2025\//', $url)) {
-    //     //                 // Replace everything before 2025 with your given URL
-    //     //                 $new_url = preg_replace('/^https?:\/\/[^\/]+\/.*?(?=2025\/)/', $my_domain . 'wp-content/uploads/', $url);
-    //     //             } else {
-    //     //                 // Replace only the domain name
-    //     //                 $new_url = preg_replace('/^https?:\/\/[^\/]+\//', $my_domain, $url);
-    //     //             }
-    
-    //     //             // Replace inside content
-    //     //             $content = str_replace($url, $new_url, $content);
-    //     //         }
-    //     //     }
-    //     // }
-
-    //     $page_id = wp_insert_post([
-    //         'post_title'   => $title,
-    //         'post_content' => $content, // Save raw JSON directly
-    //         'post_status'  => 'publish',
-    //         'post_type'    => 'page',
-    //     ]);
-    
-    //     if ($page_id) {
-    //         // Insert job using your existing Helper method
-    //         Helper::insert_job($page_id, $title . $page_id);
-            
-    //         wp_send_json_success([
-    //             'message' => 'Page created successfully',
-    //             'page_id' => $page_id,
-    //             'title'   => $title
-    //         ]);
-    //     } else {
-    //         wp_send_json_error(['message' => 'Failed to create page']);
-    //     }
-    // }
 
     public function full_site_import() {
         $this->check_permission();
     
-        $title   = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content = isset($_POST['content']) ? $_POST['content'] : '';
+        $title            = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
+        $content          = isset($_POST['content']) ? $_POST['content'] : '';
+        $site_url         = isset($_POST['site_url']) ? sanitize_text_field($_POST['site_url']) : '';
+        $uploads_updated  = isset($_POST['uploads_updated']) ? sanitize_text_field($_POST['uploads_updated']) : false;
     
         if (empty($title)) {
             wp_send_json_error(['message' => 'Title is required']);
         }
     
+        if ($uploads_updated) {
+            $my_domain = trailingslashit($site_url);
+            preg_match_all('/https?:\/\/[^"\'\s>]+?\.(jpg|jpeg|png|gif|webp|svg)/i', $content, $matches);
+    
+            if (!empty($matches[0])) {
+                $image_urls = array_unique($matches[0]);
+    
+                foreach ($image_urls as $url) {
+    
+                    if (preg_match('/\/2025\//', $url)) {
+                        $new_url = preg_replace(
+                            '/^https?:\/\/[^\/]+\/.*?(?=2025\/)/',
+                            $my_domain . 'wp-content/uploads/',
+                            $url
+                        );
+                    } else {
+                        $new_url = preg_replace(
+                            '/^https?:\/\/[^\/]+\//',
+                            $my_domain,
+                            $url
+                        );
+                    }
+    
+                    $content = str_replace($url, $new_url, $content);
+                }
+            }
+        }
+    
         // Ensure unique title
         $original_title = $title;
         $suffix = 1;
-    
         while (post_exists($title)) {
             $title = $original_title . ' ' . $suffix;
             $suffix++;
@@ -530,15 +353,21 @@ class TemplateLibrary extends AjaxBase {
     
         $page_id = wp_insert_post([
             'post_title'   => $title,
-            'post_content' => $content, // Save raw JSON directly
+            'post_content' => $content,
             'post_status'  => 'publish',
             'post_type'    => 'page',
         ]);
     
         if ($page_id) {
-            // Insert job using your existing Helper method
+    
+            // Make front page if imported title contains "home"
+            if (stripos($title, 'home') !== false) {
+                update_option('page_on_front', $page_id);
+                update_option('show_on_front', 'page');
+            }
+    
             Helper::insert_job($page_id, $title . $page_id);
-            
+    
             wp_send_json_success([
                 'message' => 'Page created successfully',
                 'page_id' => $page_id,
@@ -548,6 +377,7 @@ class TemplateLibrary extends AjaxBase {
             wp_send_json_error(['message' => 'Failed to create page']);
         }
     }
+    
     
     public function demo_import() {
         if (!isset($_POST['json_data'])) {
