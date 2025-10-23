@@ -69,7 +69,25 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicTextTermsSeparator,
 		dynamicTextEnableLink,
 		dynamicTextLinkSource,
-		loopAutoApplied,
+
+		dynamicSubHeadingTextEnabled,
+        dynamicSubHeadingTextSource,
+        dynamicSubHeadingTextPostId,
+        dynamicSubHeadingTextPostType,
+        dynamicSubHeadingTextPostLabel,
+        dynamicSubHeadingTextField,
+        dynamicSubHeadingFeaturedImageField,
+        dynamicSubHeadingTextDateType,
+        dynamicSubHeadingTextDateFormat,
+        dynamicSubHeadingTextTimeType,
+        dynamicSubHeadingTextTimeFormat,
+        dynamicSubHeadingTextCommentsZeroText,
+        dynamicSubHeadingTextCommentsOneText,
+        dynamicSubHeadingTextCommentsManyText,
+        dynamicSubHeadingTextTermsTaxonomy,
+        dynamicSubHeadingTextTermsSeparator,
+        dynamicSubHeadingTextEnableLink,
+        dynamicSubHeadingTextLinkSource,
 
 	} = attributes;
 
@@ -88,7 +106,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	/**
 	 * Dynamic Text Value for Title
 	 */
-	const { dynamicDisplayValue } = DynamicTextValue({
+	const { dynamicDisplayValue: headingDynamicValue } = DynamicTextValue({
 		textEnabled:            dynamicTextEnabled,
 		textSource:             dynamicTextSource, 
 		textField:              dynamicTextField,
@@ -110,6 +128,32 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		textTermsTaxonomy:      dynamicTextTermsTaxonomy,
 		textTermsSeparator:     dynamicTextTermsSeparator,
+
+		context,
+	});
+
+	const { dynamicDisplayValue: subHeadingDynamicValue } = DynamicTextValue({
+		textEnabled:            dynamicSubHeadingTextEnabled,
+		textSource:             dynamicSubHeadingTextSource, 
+		textField:              dynamicSubHeadingTextField,
+
+		textPostId:             dynamicSubHeadingTextPostId,
+		textPostType:           dynamicSubHeadingTextPostType,
+		textPostLabel:          dynamicSubHeadingTextPostLabel,
+
+		textFeaturedImageField: dynamicSubHeadingFeaturedImageField, 
+
+		textDateType:           dynamicSubHeadingTextDateType,
+		textDateFormat:         dynamicSubHeadingTextDateFormat,
+		textTimeType:           dynamicSubHeadingTextTimeType,
+		textTimeFormat:         dynamicSubHeadingTextTimeFormat,
+
+		textCommentsZeroText:   dynamicSubHeadingTextCommentsZeroText,
+		textCommentsOneText:    dynamicSubHeadingTextCommentsOneText,
+		textCommentsManyText:   dynamicSubHeadingTextCommentsManyText,
+
+		textTermsTaxonomy:      dynamicSubHeadingTextTermsTaxonomy,
+		textTermsSeparator:     dynamicSubHeadingTextTermsSeparator,
 
 		context,
 	});
@@ -159,15 +203,36 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                     )}
 
                     {subHeadingSwitcher && subHeadingPosition === 'top' && (
-                        <div className="fb-advanced-sub-heading-wrapper">
-                            <RichText
-                                tagName={subHeadingTag}
-                                value={subHeadingText}
-                                onChange={(value) => setAttributes({ subHeadingText: value })}
-                                placeholder={__('Sub heading...', 'frontis-blocks')}
-                                className="fb-advanced-sub-heading"
-                            />
-                        </div>
+						<div className="fb-advanced-sub-heading-wrapper">
+							{dynamicSubHeadingTextEnabled && dynamicSubHeadingTextEnableLink ? (
+								(() => {
+								const SubHeadingTag = subHeadingTag || 'p';
+								return (
+									<SubHeadingTag className="fb-advanced-sub-heading">
+										<span className="fb-dynamic-link">
+											<RichText
+												value={dynamicSubHeadingTextEnabled ? subHeadingDynamicValue : subHeadingText}
+												onChange={(value) => {
+													if (!dynamicSubHeadingTextEnabled) setAttributes({ subHeadingText: value });
+												}}
+												placeholder={__('Sub Heading...', 'frontis-blocks')}
+											/>
+										</span>
+									</SubHeadingTag>
+								);
+								})()
+							) : (
+								<RichText
+									tagName={subHeadingTag} 
+									value={dynamicSubHeadingTextEnabled ? subHeadingDynamicValue : subHeadingText}
+									onChange={(value) => {
+										if (!dynamicSubHeadingTextEnabled) setAttributes({ subHeadingText: value });
+									}}
+									placeholder={__('Sub Heading...', 'frontis-blocks')}
+									className="fb-advanced-sub-heading"
+								/>
+							)}
+						</div>
                     )}
 
 					<div className="fb-advanced-heading-wrapper">
@@ -176,22 +241,22 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 							const HeadingTag = headingTag || 'h2';
 							return (
 								<HeadingTag className={`fb-advanced-heading ${activeLineSwitcher ? 'active-line' : ''}`}>
-								<span className="fb-dynamic-link">
-									<RichText
-										value={dynamicTextEnabled ? dynamicDisplayValue : headingText}
-										onChange={(value) => {
-											if (!dynamicTextEnabled) setAttributes({ headingText: value });
-										}}
-										placeholder={__('Advanced Heading', 'frontis-blocks')}
-									/>
-								</span>
+									<span className="fb-dynamic-link">
+										<RichText
+											value={dynamicTextEnabled ? headingDynamicValue : headingText}
+											onChange={(value) => {
+												if (!dynamicTextEnabled) setAttributes({ headingText: value });
+											}}
+											placeholder={__('Advanced Heading', 'frontis-blocks')}
+										/>
+									</span>
 								</HeadingTag>
 							);
 							})()
 						) : (
 							<RichText
 								tagName={headingTag}
-								value={dynamicTextEnabled ? dynamicDisplayValue : headingText}
+								value={dynamicTextEnabled ? headingDynamicValue : headingText}
 								onChange={(value) => {
 									if (!dynamicTextEnabled) setAttributes({ headingText: value });
 								}}
@@ -202,15 +267,36 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 					</div>
 
                     {subHeadingSwitcher && subHeadingPosition === 'bottom' && (
-                        <div className="fb-advanced-sub-heading-wrapper">
-                            <RichText
-                                tagName={subHeadingTag}
-                                value={subHeadingText}
-                                onChange={(value) => setAttributes({ subHeadingText: value })}
-                                placeholder={__('Sub heading...', 'frontis-blocks')}
-                                className="fb-advanced-sub-heading"
-                            />
-                        </div>
+						<div className="fb-advanced-sub-heading-wrapper">
+							{dynamicSubHeadingTextEnabled && dynamicSubHeadingTextEnableLink ? (
+								(() => {
+								const SubHeadingTag = subHeadingTag || 'p';
+								return (
+									<SubHeadingTag className="fb-advanced-sub-heading">
+										<span className="fb-dynamic-link">
+											<RichText
+												value={dynamicSubHeadingTextEnabled ? subHeadingDynamicValue : subHeadingText}
+												onChange={(value) => {
+													if (!dynamicSubHeadingTextEnabled) setAttributes({ subHeadingText: value });
+												}}
+												placeholder={__('Sub Heading...', 'frontis-blocks')}
+											/>
+										</span>
+									</SubHeadingTag>
+								);
+								})()
+							) : (
+								<RichText
+									tagName={subHeadingTag}
+									value={dynamicSubHeadingTextEnabled ? subHeadingDynamicValue : subHeadingText}
+									onChange={(value) => {
+										if (!dynamicSubHeadingTextEnabled) setAttributes({ subHeadingText: value });
+									}}
+									placeholder={__('Sub Heading...', 'frontis-blocks')}
+									className="fb-advanced-sub-heading"
+								/>
+							)}
+						</div>
                     )}
 
                     {showSeparatorSwitcher && separatorPosition === "bottom" && (

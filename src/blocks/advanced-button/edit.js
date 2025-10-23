@@ -62,7 +62,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicTextTermsSeparator,
 		dynamicTextEnableLink,
 		dynamicTextLinkSource,
-		loopAutoApplied,
     } = attributes;
 
     const blockProps = useBlockProps({

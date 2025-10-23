@@ -434,6 +434,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         headingBeforeAfterBorderRadiusLink,
         /** End Before After */
 
+        /** Start Dynamic Text */
         dynamicTextEnabled,
         dynamicTextSource,
         dynamicTextPostId,
@@ -445,7 +446,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dynamicTextDateFormat,
         dynamicTextTimeType,
         dynamicTextTimeFormat,
-
         dynamicTextCommentsZeroText,
         dynamicTextCommentsOneText,
         dynamicTextCommentsManyText,
@@ -453,6 +453,28 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dynamicTextTermsSeparator,
         dynamicTextEnableLink,
         dynamicTextLinkSource,
+        /** End Dynamic Text */
+
+        /** Start Dynamic Sub Heading Text */
+        dynamicSubHeadingTextEnabled,
+        dynamicSubHeadingTextSource,
+        dynamicSubHeadingTextPostId,
+        dynamicSubHeadingTextPostType,
+        dynamicSubHeadingTextPostLabel,
+        dynamicSubHeadingTextField,
+        dynamicSubHeadingFeaturedImageField,
+        dynamicSubHeadingTextDateType,
+        dynamicSubHeadingTextDateFormat,
+        dynamicSubHeadingTextTimeType,
+        dynamicSubHeadingTextTimeFormat,
+        dynamicSubHeadingTextCommentsZeroText,
+        dynamicSubHeadingTextCommentsOneText,
+        dynamicSubHeadingTextCommentsManyText,
+        dynamicSubHeadingTextTermsTaxonomy,
+        dynamicSubHeadingTextTermsSeparator,
+        dynamicSubHeadingTextEnableLink,
+        dynamicSubHeadingTextLinkSource,
+        /** End Dynamic Sub Heading Text */
 
 
 
@@ -2265,7 +2287,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         }
         ` : ''}
 
-        .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading, 
+        .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading .fb-dynamic-link {
             ${subHeadingColor ? `color: ${subHeadingColor};` : ''}
             ${subHeadingTextColorType === 'gradient' ? `
                 background: ${subHeadingTextCustomGradientColorSwitcher && subHeadingTextCustomGradientColor ? subHeadingTextCustomGradientColor : subHeadingTextGradientColor};
@@ -2315,7 +2338,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             }
         }
 
-        .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
+        .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover,
+        .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading .fb-dynamic-link:hover {
             ${subHeadingHoverColor ? `color: ${subHeadingHoverColor};` : ''}
             ${subHeadingTextHoverColorType === 'gradient' ? `
                 background: ${subHeadingTextHoverCustomGradientColorSwitcher && subHeadingTextHoverCustomGradientColor ? subHeadingTextHoverCustomGradientColor : subHeadingTextHoverGradientColor};
@@ -2469,7 +2493,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
             }
             ` : ''}
 
-            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading .fb-dynamic-link {
                 ${subHeadingGlobalTypoSwitcher?.fontSize === false && subHeadingFontSize?.Tablet && subHeadingFontSizeUnits?.Tablet ? `font-size: ${subHeadingFontSize?.Tablet}${subHeadingFontSizeUnits?.Tablet};` : ''}
                 ${subHeadingGlobalTypoSwitcher?.letterSpacing === false && subHeadingLetterSpacing?.Tablet && subHeadingLetterSpacingUnits?.Tablet ? `letter-spacing: ${subHeadingLetterSpacing?.Tablet}${subHeadingLetterSpacingUnits?.Tablet};` : ''}
                 ${subHeadingGlobalTypoSwitcher?.lineHeight === false && subHeadingLineHeight?.Tablet && subHeadingLineHeightUnits?.Tablet ? `line-height: ${subHeadingLineHeight?.Tablet}${subHeadingLineHeightUnits?.Tablet};` : ''}
@@ -2483,7 +2508,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ` : ''}
             }
 
-            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading .fb-dynamic-link:hover {
                 ${subHeadingTextStroke ? `
                     ${subHeadingTextStroke?.Tablet ? `-webkit-text-stroke: ${subHeadingTextStroke?.Tablet}px ${subHeadingTextStrokeHoverColor};` : ''}
                     ${subHeadingTextStroke?.Tablet ? `text-stroke: ${subHeadingTextStroke?.Tablet}px ${subHeadingTextStrokeHoverColor};` : ''}
@@ -2556,7 +2582,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                 ` : ''}
             }
 
-            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading,
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading .fb-dynamic-link {
                 ${subHeadingGlobalTypoSwitcher?.fontSize === false && subHeadingFontSize?.Mobile && subHeadingFontSizeUnits?.Mobile ? `font-size: ${subHeadingFontSize?.Mobile}${subHeadingFontSizeUnits?.Mobile};` : ''}
                 ${subHeadingGlobalTypoSwitcher?.letterSpacing === false && subHeadingLetterSpacing?.Mobile && subHeadingLetterSpacingUnits?.Mobile ? `letter-spacing: ${subHeadingLetterSpacing?.Mobile}${subHeadingLetterSpacingUnits?.Mobile};` : ''}
                 ${subHeadingGlobalTypoSwitcher?.lineHeight === false && subHeadingLineHeight?.Mobile && subHeadingLineHeightUnits?.Mobile ? `line-height: ${subHeadingLineHeight?.Mobile}${subHeadingLineHeightUnits?.Mobile};` : ''}
@@ -2569,7 +2596,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                     ${subHeadingTextStroke?.Mobile ? `text-stroke: ${subHeadingTextStroke?.Mobile}px ${subHeadingTextStrokeColor};` : ''}
                 ` : ''}
             }
-            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover {
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading:hover
+            .${blockId} .fb-advanced-wrapper .fb-advanced-sub-heading .fb-dynamic-link:hover {
                 ${subHeadingTextStroke ? `
                     ${subHeadingTextStroke?.Mobile ? `-webkit-text-stroke: ${subHeadingTextStroke?.Mobile}px ${subHeadingTextStrokeHoverColor};` : ''}
                     ${subHeadingTextStroke?.Mobile ? `text-stroke: ${subHeadingTextStroke?.Mobile}px ${subHeadingTextStrokeHoverColor};` : ''}
@@ -2925,26 +2953,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     headingBeforeAfterMobileBorderRadiusWidth,
     /** End Before After */
 
-    dynamicTextEnabled,
-    dynamicTextSource,
-    dynamicTextPostId,
-    dynamicTextPostType,
-    dynamicTextPostLabel,
-    dynamicTextField,
-    dynamicFeaturedImageField,
-    dynamicTextDateType,
-    dynamicTextDateFormat,
-    dynamicTextTimeType,
-    dynamicTextTimeFormat,
-
-    dynamicTextCommentsZeroText,
-    dynamicTextCommentsOneText,
-    dynamicTextCommentsManyText,
-    dynamicTextTermsTaxonomy,
-    dynamicTextTermsSeparator,
-    dynamicTextEnableLink,
-    dynamicTextLinkSource,
-
     ]);
 
     const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
@@ -3027,13 +3035,22 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     /**
      * Toggle Controls for Dynamic Content
      */
-    const dynamicContentToggleControls = getProToggleControls({
+    const dynamicHeadingContentToggleControls = getProToggleControls({
         hook: 'frontisblocks-advanced-heading-toggle-controls',
         attributes,
         setAttributes,
         dynamicAttr: 'dynamicTextEnabled',
         label: __('Dynamic Content', 'frontis-blocks'),
         keyPrefix: 'advanced-heading-dynamic-content',
+    });
+
+    const dynamicSubHeadingContentToggleControls = getProToggleControls({
+        hook: 'frontisblocks-advanced-sub-heading-toggle-controls',
+        attributes,
+        setAttributes,
+        dynamicAttr: 'dynamicSubHeadingTextEnabled',  
+        label: __('Dynamic Content', 'frontis-blocks'),
+        keyPrefix: 'advanced-sub-heading-dynamic-content',
     });
 
     /**
@@ -3096,7 +3113,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                         setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
                     />
 
-                    {dynamicContentToggleControls.map((control, index) => (
+                    {dynamicHeadingContentToggleControls.map((control, index) => (
                         <div key={control.key || index}>{control.comp}</div>
                     ))}
 
@@ -3186,12 +3203,66 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
                             setGlobalHtmlTag={(value) => setAttributes({ subHeadingTag: value })}
                         />
 
-                        <TextareaControl
-                            label={__("Sub Heading Text", "frontis-blocks")}
-                            value={subHeadingText}
-                            onChange={(value) => setAttributes({ subHeadingText: value })}
-                            className="fb-advanced-sub-heading-text"
+                        {dynamicSubHeadingContentToggleControls.map((control, index) => ( 
+                            <div key={control.key || index}>{control.comp}</div>
+                        ))}
+
+                        <DynamicDataSourceControl
+                            enabled={dynamicSubHeadingTextEnabled} 
+                            
+                            source={dynamicSubHeadingTextSource}
+                            setSource={(value) => setAttributes({ dynamicSubHeadingTextSource: value })}
+                            postId={dynamicSubHeadingTextPostId}
+                            setPostId={(value) => setAttributes({ dynamicSubHeadingTextPostId: value })}
+                            postType={dynamicSubHeadingTextPostType}
+                            setPostType={(value) => setAttributes({ dynamicSubHeadingTextPostType: value })}
+                            postLabel={dynamicSubHeadingTextPostLabel}
+                            setPostLabel={(value) => setAttributes({ dynamicSubHeadingTextPostLabel: value })}
+
+                            field={dynamicSubHeadingTextField}  
+                            setField={(value) => setAttributes({ dynamicSubHeadingTextField: value })}
+                            featuredImageField={dynamicSubHeadingFeaturedImageField}
+                            setFeaturedImageField={(value) => setAttributes({ dynamicSubHeadingFeaturedImageField: value })}
+
+                            dateType={dynamicSubHeadingTextDateType}
+                            setDateType={(value) => setAttributes({ dynamicSubHeadingTextDateType: value })}
+                            dateFormat={dynamicSubHeadingTextDateFormat}
+                            setDateFormat={(value) => setAttributes({ dynamicSubHeadingTextDateFormat: value })}
+                            timeType={dynamicSubHeadingTextTimeType}
+                            setTimeType={(value) => setAttributes({ dynamicSubHeadingTextTimeType: value })}
+                            timeFormat={dynamicSubHeadingTextTimeFormat}
+                            setTimeFormat={(value) => setAttributes({ dynamicSubHeadingTextTimeFormat: value })}
+
+                            commentsZeroText={dynamicSubHeadingTextCommentsZeroText}
+                            setCommentsZeroText={(value) => setAttributes({ dynamicSubHeadingTextCommentsZeroText: value })}
+                            commentsOneText={dynamicSubHeadingTextCommentsOneText}
+                            setCommentsOneText={(value) =>setAttributes({ dynamicSubHeadingTextCommentsOneText: value })}
+                            commentsManyText={dynamicSubHeadingTextCommentsManyText}
+                            setCommentsManyText={(value) =>setAttributes({ dynamicSubHeadingTextCommentsManyText: value })}
+
+                            termsTaxonomy={dynamicSubHeadingTextTermsTaxonomy}
+                            setTermsTaxonomy={(value) => setAttributes({ dynamicSubHeadingTextTermsTaxonomy: value })}
+                            termsSeparator={dynamicSubHeadingTextTermsSeparator}
+                            setTermsSeparator={(value) => setAttributes({ dynamicSubHeadingTextTermsSeparator: value })}
                         />
+
+                        {dynamicSubHeadingTextEnabled && (
+                            <DynamicDataLinkControl
+                                enableLink={dynamicSubHeadingTextEnableLink}
+                                setEnableLink={(value) => setAttributes({ dynamicSubHeadingTextEnableLink: value })}
+                                linkSource={dynamicSubHeadingTextLinkSource}
+                                setLinkSource={(value) => setAttributes({ dynamicSubHeadingTextLinkSource: value })}
+                            />
+                        )}
+
+                        {!dynamicSubHeadingTextEnabled && (
+                            <TextareaControl
+                                label={__("Sub Heading Text", "frontis-blocks")}
+                                value={subHeadingText}
+                                onChange={(value) => setAttributes({ subHeadingText: value })}
+                                className="fb-advanced-sub-heading-text"
+                            />
+                        )}
                     </>
 
                 </PanelBody>

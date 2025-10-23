@@ -67,7 +67,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     dynamicImageFallbackId,
     dynamicImageEnableLink,
     dynamicImageLinkSource,
-    loopAutoApplied,
+
   } = attributes;
 
   // block props (unchanged)
