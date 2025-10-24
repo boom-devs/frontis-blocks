@@ -522,3 +522,19 @@ export const ADVANCED_BUTTON_PRESETS = [
 	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
 	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
 ];
+
+
+// You can add any constants needed for the comment form here
+export const DEFAULT_TEXTS = {
+    formTitle: "Leave a Reply",
+    cancelReply: "Cancel reply",
+    loginText: "Logged in as",
+    logoutText: "Log out?",
+    buttonText: "Post Comment",
+};
+
+export const FORM_LAYOUTS = [
+    { label: "Default", value: "default" },
+    { label: "Compact", value: "compact" },
+    { label: "Modern", value: "modern" },
+];
