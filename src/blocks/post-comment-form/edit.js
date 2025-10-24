@@ -7,7 +7,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockId,
         showCommentTitle,
-        showComments,
+        showCommentsCount,
         showCommentForm,
         commentFormWidth,
         commentGap,
@@ -53,11 +53,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 >
                     {/* Comment Count */}
                     {showCommentTitle && (
-                        <h3 className="fb-comment-count-title">2 Comments</h3>
+                        <h3 className="fb-comment-count-title">  {showCommentsCount && <span>2</span> } Comments</h3>
                     )}
 
                     {/* Comments List with Proper Nested Structure */}
-                    {showComments && (
                         <div className="fb-comments-list">
                             {/* Parent Comment 1 */}
                             <div id="comment-1" className="fb-comment fb-comment-parent depth-1">
@@ -93,7 +92,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             {/* Parent Comment 2 with Nested Reply */}
                             <div id="comment-2" className="fb-comment fb-comment-parent depth-1">
                                 <img 
-                                    src={FrontisBlocksData?.pluginUrl + 'assets/images/avatar-placeholder.png'} 
+                                    src={FrontisBlocksData?.pluginUrl + 'assets/images/preset-bg.jpg'} 
                                     alt="" 
                                     className="fb-comment-avatar" 
                                 />
@@ -123,7 +122,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     <div className="fb-comment-children">
                                         <div id="comment-3" className="fb-comment fb-comment-child depth-2">
                                             <img 
-                                                src={FrontisBlocksData?.pluginUrl + 'assets/images/avatar-placeholder.png'} 
+                                                src={FrontisBlocksData?.pluginUrl + 'assets/images/preset-bg.jpg'} 
                                                 alt="" 
                                                 className="fb-comment-avatar" 
                                             />
@@ -154,7 +153,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 </div>
                             </div>
                         </div>
-                    )}
+               
 
                     {/* Comment Form */}
                     {showCommentForm && (
