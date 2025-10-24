@@ -1,7 +1,6 @@
 <?php
 
 namespace FrontisBlocks\Utils;
-use FrontisBlocks\Assets\TemplateProcessor;
 
 class Helper
 {
@@ -943,5 +942,28 @@ class Helper
 		$template_id = $wpdb->get_var($query);
 
         return $template_id;
+    }
+
+    /**
+     * Check if Pro is activated
+     *
+     * @return bool
+     */
+    public static function isProActivated(): bool { 
+
+        if (class_exists('SureCart\Licensing\Client')) {
+            $activation_key = get_option('frontisblockspro_license_options');
+
+            if( $activation_key && count($activation_key) > 0 && isset($activation_key['sc_license_key']) && $activation_key['sc_license_key'] !== '') {
+                return true;
+            }
+        } else {
+            global $frontisblockspro_license;
+            if ($frontisblockspro_license) {
+                return $frontisblockspro_license->is_valid();
+            }
+        }
+
+        return false;
     }
 }

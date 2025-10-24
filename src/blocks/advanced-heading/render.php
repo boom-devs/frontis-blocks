@@ -1,4 +1,7 @@
 <?php
+
+use FrontisBlocks\Utils\Helper;
+
 // ---------- helpers ----------
 if ( ! function_exists('fb_norm_str') ) {
     function fb_norm_str($val, $default = '') {
@@ -391,16 +394,17 @@ $dynamicSubHeadingTextTermsSeparator 	= fb_norm_str(isset($attributes['dynamicSu
 $dynamicSubHeadingTextEnableLink 		= !empty($attributes['dynamicSubHeadingTextEnableLink']);
 $dynamicSubHeadingTextLinkSource 		= fb_norm_str(isset($attributes['dynamicSubHeadingTextLinkSource']) ? $attributes['dynamicSubHeadingTextLinkSource'] : 'post_permalink');
 
-$pro_active = apply_filters('frontisblocks/is-pro-active', false);
-
-if ( ! $pro_active ) {
+/**
+ * Disable dynamic if not pro active
+ */
+if ( !Helper::isProActivated() ) {
     $dynamicTextEnabled = false;
     $dynamicSubHeadingTextEnabled = false;
     $dynamicTextEnableLink = false;
     $dynamicSubHeadingTextEnableLink = false;
 }
 
-// -------- compute dynamic heading/subheading via reusable function ----------
+// compute dynamic heading/subheading via reusable function
 $heading_dyn = fb_compute_dynamic_text( [
 	'enabled'             => $dynamicTextEnabled,
 	'source'              => $dynamicTextSource,
