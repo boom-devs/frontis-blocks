@@ -5,7 +5,8 @@
 
 // Element Visibility
 $show_comment_title = isset($attributes['showCommentTitle']) ? (bool) $attributes['showCommentTitle'] : true;
-$show_comments = isset($attributes['showComments']) ? (bool) $attributes['showComments'] : true;
+$show_comments_count =- isset($attributes['showCommentsCount']) ? (bool) $attributes['showCommentsCount'] : true;
+// $show_comments = isset($attributes['showComments']) ? (bool) $attributes['showComments'] : true;
 $show_comment_form = isset($attributes['showCommentForm']) ? (bool) $attributes['showCommentForm'] : true;
 
 // Style Attributes
@@ -64,7 +65,7 @@ function frontis_is_user_comment($comment) {
         return true;
     }
 
-    // ✅ FIX: Also check URL parameters from unapproved redirect
+    // Also check URL parameters from unapproved redirect
     if (isset($_GET['unapproved']) && (int)$_GET['unapproved'] === (int)$comment->comment_ID) {
         return true;
     }
@@ -125,12 +126,21 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
             $comment_author = $comment->comment_author;
             $comment_date = get_comment_date('F j, Y \a\t g:i a', $comment->comment_ID);
             $comment_content = get_comment_text($comment->comment_ID);
-            $comment_avatar = get_avatar($comment, 64);
+            // $comment_avatar = get_avatar($comment, 64);
+            $comment_avatar = get_avatar(
+                $comment, 
+                64, 
+                '', 
+                '', 
+                array('class' => 'fb-comment-avatar')
+            );
+
             $edit_link = get_edit_comment_link($comment->comment_ID);
 
             ob_start();
             ?>
             <div id="comment-<?php echo $comment->comment_ID; ?>" class="<?php echo esc_attr($comment_class); ?>">
+                
                 <?php echo $comment_avatar; ?>
                 <div class="fb-comment-body">
                     <strong class="fb-comment-author"><?php echo esc_html($comment_author); ?></strong>
@@ -141,7 +151,7 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
                         <?php endif; ?>
                     </span>
 
-                    <?php if ($is_own_pending) : // ✅ FIX: show only for user's own ?>
+                    <?php if ($is_own_pending) : //show only for user's own ?>
                         <div class="fb-comment-moderation-notice">
                             <em><?php _e('Your comment is awaiting moderation. This is a preview; your comment will be visible after it has been approved.', 'frontis-blocks'); ?></em>
                         </div>
@@ -202,14 +212,25 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
     <div class="<?php echo esc_attr(implode(' ', array_filter($wrapper_classes))); ?>"<?php echo $wrapper_id_attr; ?>>
 
         <!-- Comment Count -->
-        <?php if ($show_comment_title && $comments_count > 0) : ?>
+        <!-- <?php if ($show_comment_title && $comments_count > 0) : ?>
             <h3 class="fb-comment-count-title">
                 <?php printf(_n('%d Comment', '%d Comments', $comments_count, 'frontis-blocks'), $comments_count); ?>
+            </h3>
+        <?php endif; ?> -->
+
+        <!-- Comment Count -->
+        <?php if ($show_comment_title && $comments_count > 0) : ?>
+            <h3 class="fb-comment-count-title">
+                <?php if ($show_comments_count) : ?>
+                    <span><?php echo esc_html($comments_count); ?></span>
+                <?php endif; ?>
+                <?php printf(_n('Comment', 'Comments', $comments_count, 'frontis-blocks')); ?>
             </h3>
         <?php endif; ?>
 
         <!-- Comments List -->
-        <?php if ($show_comments) : ?>
+        <!-- <?php if ($show_comments_count) : ?><?php endif; ?> -->
+
             <div class="fb-comments-list">
                 <?php
                 $comments = frontis_get_comments_to_display($post_id);
@@ -220,7 +241,6 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
                 endif;
                 ?>
             </div>
-        <?php endif; ?>
 
         <!-- Comment Form -->
         <?php if ($show_comment_form) : ?>

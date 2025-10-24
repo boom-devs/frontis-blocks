@@ -9,7 +9,7 @@ const attributes = {
         type: "boolean",
         default: true,
     },
-    showComments: {
+    showCommentsCount: {
         type: "boolean",
         default: true,
     },

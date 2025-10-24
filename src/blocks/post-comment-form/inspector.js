@@ -13,11 +13,13 @@ import FB_VisibilityControl from "@Components/visibility-control";
 // import FB_DimensionControl from "@Components/dimension-control";
 import FB_InputControl from "@Components/input-control";
 
+import './editor.scss';
+
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         showCommentTitle,
-        showComments,
+        showCommentsCount,
         showCommentForm,
         commentFormWidth,
         commentGap,
@@ -121,6 +123,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 margin: 0 0 10px 0;
                 color: #444;
                 line-height: 1.6;
+                font-size: 18px;
             }
 
             .${blockId} .fb-comment-reply {
@@ -333,24 +336,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 label={__("Element Visibility", "frontis-blocks")}
                 className="fb-setting-show-hide-elements"
             >
+
+                {showCommentTitle && 
+                        <ToggleControl
+                            label={__("Show Comment Count", "frontis-blocks")}
+                            checked={showCommentsCount}
+                            onChange={ value => setAttributes({showCommentsCount: value}) }
+                            help= {__(
+                                "Comments count is only shown when comment title is visible",
+                                "frontis-blocks",
+                            )}
+                        />
+               
+                }
+
+
                 <ToggleControl
                     label={__("Show Comment Title", "frontis-blocks")}
                     checked={showCommentTitle}
                     onChange={(value) => setAttributes({ showCommentTitle: value })}
                 />
 
-                <ToggleControl
-                    label={__("Show Comments Count", "frontis-blocks")}
-                    checked={showComments}
-                    onChange={(value) => setAttributes({ showComments: value })}
-                />
+
 
                 <ToggleControl
                     label={__("Show Comment Form", "frontis-blocks")}
                     checked={showCommentForm}
                     onChange={(value) => setAttributes({ showCommentForm: value })}
                 />
+
+                <div className="fb-control-divider"></div>
             </BaseControl>
+
+
         </PanelBody>
     );
 

@@ -1,247 +1,247 @@
-.fb-post-comment-form-block {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #333;
+// .fb-post-comment-form-block {
+//     margin: 0;
+//     padding: 0;
+//     width: 100%;
+//     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+//     font-size: 14px;
+//     line-height: 1.6;
+//     color: #333;
     
-    .fb-post-comment-form {
-        margin: 0 auto;
-        padding: 0;
-        max-width: 100%;
-    }
+//     .fb-post-comment-form {
+//         margin: 0 auto;
+//         padding: 0;
+//         max-width: 100%;
+//     }
     
-    // Comment Count Title
-    .fb-comment-count-title {
-        font-size: 20px;
-        font-weight: 600;
-        margin: 0 0 30px 0;
-        color: #1e1e1e;
-        padding-bottom: 15px;
-        border-bottom: 1px solid #e1e1e1;
-    }
+//     // Comment Count Title
+//     .fb-comment-count-title {
+//         font-size: 20px;
+//         font-weight: 600;
+//         margin: 0 0 30px 0;
+//         color: #1e1e1e;
+//         padding-bottom: 15px;
+//         border-bottom: 1px solid #e1e1e1;
+//     }
     
-    // Comments List
-    .fb-comments-list {
-        margin-bottom: 40px;
+//     // Comments List
+//     .fb-comments-list {
+//         margin-bottom: 40px;
         
-        .fb-comment {
-            display: flex;
-            gap: 15px;
-            padding: 20px 0;
-            border-bottom: 1px solid #f0f0f0;
+//         .fb-comment {
+//             display: flex;
+//             gap: 15px;
+//             padding: 20px 0;
+//             border-bottom: 1px solid #f0f0f0;
             
-            &:last-child {
-                border-bottom: none;
-            }
-        }
+//             &:last-child {
+//                 border-bottom: none;
+//             }
+//         }
         
-        .fb-comment-avatar {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
+//         .fb-comment-avatar {
+//             width: 64px;
+//             height: 64px;
+//             border-radius: 50%;
+//             flex-shrink: 0;
+//         }
         
-        .fb-comment-body {
-            flex: 1;
-        }
+//         .fb-comment-body {
+//             flex: 1;
+//         }
         
-        .fb-comment-author {
-            display: block;
-            font-size: 16px;
-            font-weight: 600;
-            color: #1e1e1e;
-            margin-bottom: 5px;
-        }
+//         .fb-comment-author {
+//             display: block;
+//             font-size: 16px;
+//             font-weight: 600;
+//             color: #1e1e1e;
+//             margin-bottom: 5px;
+//         }
         
-        .fb-comment-meta {
-            display: block;
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 10px;
+//         .fb-comment-meta {
+//             display: block;
+//             font-size: 12px;
+//             color: #666;
+//             margin-bottom: 10px;
             
-            a {
-                color: #2271b1;
-                text-decoration: none;
-                margin-left: 10px;
+//             a {
+//                 color: #2271b1;
+//                 text-decoration: none;
+//                 margin-left: 10px;
                 
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
+//                 &:hover {
+//                     text-decoration: underline;
+//                 }
+//             }
+//         }
         
-        .fb-comment-content {
-            margin: 0 0 10px 0;
-            color: #444;
-            line-height: 1.6;
-        }
+//         .fb-comment-content {
+//             margin: 0 0 10px 0;
+//             color: #444;
+//             line-height: 1.6;
+//         }
         
-        .fb-comment-reply {
-            color: #2271b1;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
+//         .fb-comment-reply {
+//             color: #2271b1;
+//             text-decoration: none;
+//             font-size: 13px;
+//             font-weight: 500;
             
-            &:hover {
-                color: #135e96;
-                text-decoration: underline;
-            }
-        }
-    }
+//             &:hover {
+//                 color: #135e96;
+//                 text-decoration: underline;
+//             }
+//         }
+//     }
     
-    // Comment Form
-    .fb-comment-form {
-        background: #f9f9f9;
-        padding: 25px;
-        border-radius: 8px;
-        border: 1px solid #e1e1e1;
+//     // Comment Form
+//     .fb-comment-form {
+//         background: #f9f9f9;
+//         padding: 25px;
+//         border-radius: 8px;
+//         border: 1px solid #e1e1e1;
         
-        .fb-comment-form-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e1e1e1;
-        }
+//         .fb-comment-form-header {
+//             display: flex;
+//             justify-content: space-between;
+//             align-items: center;
+//             margin-bottom: 20px;
+//             padding-bottom: 15px;
+//             border-bottom: 1px solid #e1e1e1;
+//         }
         
-        .fb-reply-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1e1e1e;
-            margin: 0;
-        }
+//         .fb-reply-title {
+//             font-size: 18px;
+//             font-weight: 600;
+//             color: #1e1e1e;
+//             margin: 0;
+//         }
         
-        .fb-cancel-reply {
-            color: #666;
-            text-decoration: none;
-            font-size: 13px;
+//         .fb-cancel-reply {
+//             color: #666;
+//             text-decoration: none;
+//             font-size: 13px;
             
-            &:hover {
-                color: #2271b1;
-                text-decoration: underline;
-            }
-        }
+//             &:hover {
+//                 color: #2271b1;
+//                 text-decoration: underline;
+//             }
+//         }
         
-        .fb-logged-in-as {
-            margin: 0 0 20px 0;
-            padding: 12px 15px;
-            background: #e7f3ff;
-            border-radius: 4px;
-            font-size: 14px;
-            border-left: 4px solid #2271b1;
+//         .fb-logged-in-as {
+//             margin: 0 0 20px 0;
+//             padding: 12px 15px;
+//             background: #e7f3ff;
+//             border-radius: 4px;
+//             font-size: 14px;
+//             border-left: 4px solid #2271b1;
             
-            a {
-                color: #2271b1;
-                text-decoration: none;
-                font-weight: 500;
+//             a {
+//                 color: #2271b1;
+//                 text-decoration: none;
+//                 font-weight: 500;
                 
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-        }
+//                 &:hover {
+//                     text-decoration: underline;
+//                 }
+//             }
+//         }
         
-        .fb-comment-form-element {
-            margin: 0;
-            padding: 0;
-        }
+//         .fb-comment-form-element {
+//             margin: 0;
+//             padding: 0;
+//         }
         
-        .fb-comment-textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: inherit;
-            line-height: 1.4;
-            background: #fff;
-            resize: vertical;
-            min-height: 120px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
+//         .fb-comment-textarea {
+//             width: 100%;
+//             padding: 12px 15px;
+//             border: 1px solid #ddd;
+//             border-radius: 4px;
+//             font-size: 14px;
+//             font-family: inherit;
+//             line-height: 1.4;
+//             background: #fff;
+//             resize: vertical;
+//             min-height: 120px;
+//             margin-bottom: 15px;
+//             box-sizing: border-box;
             
-            &:focus {
-                outline: none;
-                border-color: #2271b1;
-                box-shadow: 0 0 0 1px #2271b1;
-            }
+//             &:focus {
+//                 outline: none;
+//                 border-color: #2271b1;
+//                 box-shadow: 0 0 0 1px #2271b1;
+//             }
             
-            &::placeholder {
-                color: #999;
-            }
-        }
+//             &::placeholder {
+//                 color: #999;
+//             }
+//         }
         
-        .fb-post-comment-btn {
-            background: #2271b1;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
+//         .fb-post-comment-btn {
+//             background: #2271b1;
+//             color: white;
+//             border: none;
+//             padding: 12px 30px;
+//             border-radius: 4px;
+//             font-size: 16px;
+//             font-weight: 600;
+//             cursor: pointer;
+//             transition: all 0.2s ease;
             
-            &:hover {
-                background: #135e96;
-            }
+//             &:hover {
+//                 background: #135e96;
+//             }
             
-            &:focus {
-                outline: none;
-                box-shadow: 0 0 0 2px #fff, 0 0 0 4px #2271b1;
-            }
-        }
+//             &:focus {
+//                 outline: none;
+//                 box-shadow: 0 0 0 2px #fff, 0 0 0 4px #2271b1;
+//             }
+//         }
         
-        // Hide default WordPress form elements we don't need
-        .comment-form-author,
-        .comment-form-email,
-        .comment-form-url,
-        .comment-form-cookies-consent {
-            display: none;
-        }
-    }
+//         // Hide default WordPress form elements we don't need
+//         .comment-form-author,
+//         .comment-form-email,
+//         .comment-form-url,
+//         .comment-form-cookies-consent {
+//             display: none;
+//         }
+//     }
     
-    // Responsive styles
-    @media (max-width: 768px) {
-        .fb-comment {
-            flex-direction: column;
-            gap: 10px;
-        }
+//     // Responsive styles
+//     @media (max-width: 768px) {
+//         .fb-comment {
+//             flex-direction: column;
+//             gap: 10px;
+//         }
         
-        .fb-comment-avatar {
-            width: 48px;
-            height: 48px;
-        }
+//         .fb-comment-avatar {
+//             width: 48px;
+//             height: 48px;
+//         }
         
-        .fb-comment-form-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-        }
+//         .fb-comment-form-header {
+//             flex-direction: column;
+//             align-items: flex-start;
+//             gap: 10px;
+//         }
         
-        .fb-comment-form {
-            padding: 20px;
-        }
-    }
+//         .fb-comment-form {
+//             padding: 20px;
+//         }
+//     }
     
-    // Responsive classes
-    &.fb-desktop-responsive {
-        // Desktop specific styles
-    }
+//     // Responsive classes
+//     &.fb-desktop-responsive {
+//         // Desktop specific styles
+//     }
     
-    &.fb-tablet-responsive {
-        // Tablet specific styles
-    }
+//     &.fb-tablet-responsive {
+//         // Tablet specific styles
+//     }
     
-    &.fb-mobile-responsive {
-        // Mobile specific styles
-    }
-}
+//     &.fb-mobile-responsive {
+//         // Mobile specific styles
+//     }
+// }
 
 
 .fb-post-comment-form-block {
