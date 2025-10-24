@@ -9,6 +9,9 @@ $show_comments_count =- isset($attributes['showCommentsCount']) ? (bool) $attrib
 // $show_comments = isset($attributes['showComments']) ? (bool) $attributes['showComments'] : true;
 $show_comment_form = isset($attributes['showCommentForm']) ? (bool) $attributes['showCommentForm'] : true;
 
+$form_title = isset($attributes['formTitle']) ? sanitize_text_field($attributes['formTitle']) : '';
+$cancel_reply_text = isset($attributes['cancelReplyText']) ? sanitize_text_field($attributes['cancelReplyText']) : '';
+
 // Style Attributes
 $block_style = isset($attributes['blockStyle']) ? $attributes['blockStyle'] : '';
 
@@ -247,16 +250,16 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
             <div id="respond" class="fb-comment-form">
                 <div class="fb-comment-form-header">
                     <strong class="fb-reply-title">
+                        
                         <?php
-                        if (get_option('thread_comments')) {
-                            comment_form_title('Leave a Reply', 'Leave a Reply to %s');
-                        } else {
-                            _e('Leave a Reply', 'frontis-blocks');
-                        }
+                           echo esc_html($form_title ?: __('Leave a Reply', 'frontis-blocks'));
                         ?>
                     </strong>
                     <?php if (get_option('thread_comments')) : ?>
-                        <a href="#respond" id="cancel-comment-reply-link" class="fb-cancel-reply" style="display: none;" rel="nofollow"><?php _e('Cancel reply', 'frontis-blocks'); ?></a>
+                        <a href="#respond" id="cancel-comment-reply-link" class="fb-cancel-reply" style="display: none;" rel="nofollow">
+                              <!-- UPDATED: Use custom cancel reply text or default -->
+                            <?php echo esc_html($cancel_reply_text ?: __('Cancel reply', 'frontis-blocks')); ?>
+                        </a>
                     <?php endif; ?>
                 </div>
 
@@ -286,6 +289,7 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
                 $comment_form_args = [
                     'title_reply' => '',
                     'label_submit' => __('Post Comment', 'frontis-blocks'),
+                    'cancel_reply_link' => $cancel_reply_text ?: __('Cancel reply', 'frontis-blocks'),
                     'comment_field' => '<p class="fb-comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" placeholder="' . __('Comment', 'frontis-blocks') . ' *"></textarea></p>',
                     'fields' => apply_filters('comment_form_default_fields', $fields),
                     'class_form' => 'fb-comment-form-element',

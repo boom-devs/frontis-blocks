@@ -4,6 +4,7 @@ import {
     PanelBody,
     BaseControl,
     ToggleControl,
+    TextareaControl,
 } from "@wordpress/components";
 import getCustomCss from "@Utils/getCustomCss";
 import { useDeviceType } from "@Config/displayType";
@@ -24,6 +25,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         commentFormWidth,
         commentGap,
         avatarSize,
+
+        formTitle,
+        cancelReplyText,
         
         commentFormDesktopSwitcher,
         commentFormTabletSwitcher,
@@ -313,12 +317,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
             }
         `,
-        [
-            blockId,
-            commentFormWidth,
-            commentGap,
-            avatarSize,
-        ]
+        [ attributes ]
     );
 
     const customCss = getCustomCss(commentFormGlobalCustomCSS, `.${blockId}`);
@@ -366,6 +365,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
 
                 <div className="fb-control-divider"></div>
+            </BaseControl>
+
+            {/* ADDED: Form Text Customization controls */}
+            <BaseControl
+                label={__("Form Text Customization", "frontis-blocks")}
+                className="fb-setting-form-texts"
+            >
+                <FB_InputControl
+                    label={__("Form Title", "frontis-blocks")}
+                    value={formTitle}
+                    onChangeValue={(value) => setAttributes({ formTitle: value })}
+                    placeholder={__("Leave a Reply", "frontis-blocks")}
+                />
+
+                <FB_InputControl
+                    label={__("Cancel Reply Text", "frontis-blocks")}
+                    value={cancelReplyText}
+                    onChangeValue={(value) => setAttributes({ cancelReplyText: value })}
+                    placeholder={__("Cancel reply", "frontis-blocks")}
+                /> 
             </BaseControl>
 
 

@@ -16,6 +16,15 @@
             const replyTitle = block.querySelector('.fb-reply-title');
             const commentParent = block.querySelector('#comment_parent');
             
+            // ADDED: Store the original custom form title
+            let originalFormTitle = '';
+            if (replyTitle) {
+                // Store the current title as original (could be custom or default)
+                originalFormTitle = replyTitle.textContent.trim();
+                // Also store it as data attribute for persistence
+                replyTitle.setAttribute('data-original-title', originalFormTitle);
+            }
+            
             // If WordPress comment script is available, use it
             if (typeof addComment !== 'undefined') {
                 console.log('WordPress comment script loaded');
@@ -55,13 +64,18 @@
                         cancelReply.style.display = 'inline';
                     }
                     
-                    // Update form title
+                    // UPDATE: Enhanced form title handling with custom text support
                     if (replyTitle) {
                         const commentAuthor = this.closest('.fb-comment').querySelector('.fb-comment-author');
+                        // Get the original title (custom or default)
+                        const originalTitle = replyTitle.getAttribute('data-original-title') || originalFormTitle || 'Leave a Reply';
+                        
                         if (commentAuthor) {
-                            replyTitle.textContent = 'Leave a Reply to ' + commentAuthor.textContent;
+                            // Use the custom form title + " to [author]" format
+                            replyTitle.textContent = originalTitle + ' to ' + commentAuthor.textContent;
                         } else {
-                            replyTitle.textContent = 'Leave a Reply';
+                            // Fallback to original title
+                            replyTitle.textContent = originalTitle;
                         }
                     }
                     
@@ -93,9 +107,10 @@
                     
                     this.style.display = 'none';
                     
-                    // Reset form title
+                    // UPDATE: Reset to original custom form title
                     if (replyTitle) {
-                        replyTitle.textContent = 'Leave a Reply';
+                        const originalTitle = replyTitle.getAttribute('data-original-title') || originalFormTitle || 'Leave a Reply';
+                        replyTitle.textContent = originalTitle;
                     }
                     
                     // Reset comment parent
@@ -114,6 +129,11 @@
                 // Sync our cancel button with WordPress's
                 wpCancelReply.addEventListener('click', function() {
                     cancelReply.style.display = 'none';
+                    // UPDATE: Also reset form title when WordPress cancel is clicked
+                    if (replyTitle) {
+                        const originalTitle = replyTitle.getAttribute('data-original-title') || originalFormTitle || 'Leave a Reply';
+                        replyTitle.textContent = originalTitle;
+                    }
                 });
             }
             
@@ -126,8 +146,10 @@
                         if (cancelReply) {
                             cancelReply.style.display = 'none';
                         }
+                        // UPDATE: Reset to original custom form title
                         if (replyTitle) {
-                            replyTitle.textContent = 'Leave a Reply';
+                            const originalTitle = replyTitle.getAttribute('data-original-title') || originalFormTitle || 'Leave a Reply';
+                            replyTitle.textContent = originalTitle;
                         }
                         if (commentParent) {
                             commentParent.value = '0';
@@ -135,6 +157,14 @@
                     }, 100);
                 });
             }
+
+            // ADDED: Handle page refresh/reload to maintain custom title
+            window.addEventListener('beforeunload', function() {
+                // Ensure custom title is preserved if needed
+                if (replyTitle && originalFormTitle) {
+                    replyTitle.setAttribute('data-original-title', originalFormTitle);
+                }
+            });
         });
     }
 
