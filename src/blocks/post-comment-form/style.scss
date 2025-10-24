@@ -242,3 +242,29 @@
         // Mobile specific styles
     }
 }
+
+
+.fb-post-comment-form-block {
+    // Pending comment moderation notice
+    .fb-comment-moderation-notice {
+        background: #fff8e5;
+        border: 1px solid #ffd67a;
+        border-radius: 4px;
+        padding: 10px 15px;
+        margin: 10px 0;
+        font-size: 13px;
+        color: #856404;
+        font-style: italic;
+        line-height: 1.4;
+    }
+    
+    // Style pending comments
+    .fb-comment-pending {
+        opacity: 0.8;
+    }
+    
+    // Hide reply links for pending comments
+    .fb-comment-pending .fb-comment-reply {
+        display: none;
+    }
+}

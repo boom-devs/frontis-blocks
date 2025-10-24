@@ -23,26 +23,15 @@ $comment_form_mobile_switcher = isset($attributes['commentFormMobileSwitcher']) 
 
 // Get Responsive Classes
 $responsive_classes = [];
-if ($comment_form_desktop_switcher) {
-    $responsive_classes[] = 'fb-desktop-responsive';
-}
-if ($comment_form_tablet_switcher) {
-    $responsive_classes[] = 'fb-tablet-responsive';
-}
-if ($comment_form_mobile_switcher) {
-    $responsive_classes[] = 'fb-mobile-responsive';
-}
+if ($comment_form_desktop_switcher) $responsive_classes[] = 'fb-desktop-responsive';
+if ($comment_form_tablet_switcher) $responsive_classes[] = 'fb-tablet-responsive';
+if ($comment_form_mobile_switcher) $responsive_classes[] = 'fb-mobile-responsive';
 
 // Build main classes
 $parent_classes = 'fb-post-comment-form-block ' . $block_id . ' ' . implode(' ', $responsive_classes);
 
 // Build wrapper classes
-$wrapper_classes = [
-    'fb-post-comment-form',
-    $wrapper_class,
-];
-
-// Prepare wrapper ID attribute
+$wrapper_classes = ['fb-post-comment-form', $wrapper_class];
 $wrapper_id_attr = $wrapper_id ? ' id="' . esc_attr($wrapper_id) . '"' : '';
 
 // Get post data
@@ -57,148 +46,179 @@ $user_identity = $current_user->exists() ? $current_user->display_name : '';
 $avatar_fallback = FB_PLUGIN_URL . 'assets/images/avatar-placeholder.png';
 
 /**
+ * Improved detection for user's own pending comment
+ */
+function frontis_is_user_comment($comment) {
+    $current_user = wp_get_current_user();
+    $current_user_email = $current_user->exists() ? $current_user->user_email : '';
+    $commenter = wp_get_current_commenter();
+    $cookie_email = isset($commenter['comment_author_email']) ? $commenter['comment_author_email'] : '';
+
+    // Logged-in user matches comment author email
+    if ($current_user_email && strcasecmp($comment->comment_author_email, $current_user_email) === 0) {
+        return true;
+    }
+
+    // Cookie matches for guest users
+    if ($cookie_email && strcasecmp($comment->comment_author_email, $cookie_email) === 0) {
+        return true;
+    }
+
+    // ✅ FIX: Also check URL parameters from unapproved redirect
+    if (isset($_GET['unapproved']) && (int)$_GET['unapproved'] === (int)$comment->comment_ID) {
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * Get comments to display (approved + user's own pending comments)
+ */
+function frontis_get_comments_to_display($post_id) {
+    $approved_comments = get_comments([
+        'post_id' => $post_id,
+        'status' => 'approve',
+        'order'  => 'ASC',
+    ]);
+
+    $pending_comments = get_comments([
+        'post_id' => $post_id,
+        'status'  => 'hold',
+        'order'   => 'ASC',
+    ]);
+
+    $user_pending_comments = [];
+    foreach ($pending_comments as $comment) {
+        if (frontis_is_user_comment($comment)) {
+            $user_pending_comments[] = $comment;
+        }
+    }
+
+    $all_comments = array_merge($approved_comments, $user_pending_comments);
+
+    usort($all_comments, function ($a, $b) {
+        return strtotime($a->comment_date) - strtotime($b->comment_date);
+    });
+
+    return $all_comments;
+}
+
+/**
  * Recursive function to display comments with proper nested structure
  */
 function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $depth = 1) {
     $output = '';
-    
+
     foreach ($comments as $comment) {
-        // Only show comments with the current parent ID
-        if ($comment->comment_parent != $parent_id) {
-            continue;
-        }
+        if ($comment->comment_parent != $parent_id) continue;
 
-        // Determine comment class based on depth
-        $comment_class = $depth > 1 ? 'fb-comment fb-comment-child' : 'fb-comment fb-comment-parent';
-        $comment_class .= ' depth-' . $depth;
+        $is_pending = ($comment->comment_approved == '0');
+        $is_own_pending = $is_pending && frontis_is_user_comment($comment); // ✅ FIX
 
-        $comment_author = $comment->comment_author;
-        $comment_date = get_comment_date('F j, Y \a\t g:i a', $comment->comment_ID);
-        $comment_content = get_comment_text($comment->comment_ID);
-        $comment_avatar = get_avatar($comment, 64);
-        $edit_link = get_edit_comment_link($comment->comment_ID);
+        // Only show approved or user's own pending comments
+        if (!$is_pending || $is_own_pending) {
+            $comment_class = $depth > 1 ? 'fb-comment fb-comment-child' : 'fb-comment fb-comment-parent';
+            $comment_class .= ' depth-' . $depth;
+            if ($is_pending) $comment_class .= ' fb-comment-pending';
 
-        ob_start();
-        ?>
-        
-        <div id="comment-<?php echo $comment->comment_ID; ?>" class="<?php echo esc_attr($comment_class); ?>">
-            <?php echo $comment_avatar; ?>
-            <div class="fb-comment-body">
-                <strong class="fb-comment-author"><?php echo esc_html($comment_author); ?></strong>
-                <span class="fb-comment-meta">
-                    <?php echo esc_html($comment_date); ?>
-                    <?php if ($edit_link && current_user_can('edit_comment', $comment->comment_ID)) : ?>
-                        <a href="<?php echo esc_url($edit_link); ?>">Edit</a>
+            $comment_author = $comment->comment_author;
+            $comment_date = get_comment_date('F j, Y \a\t g:i a', $comment->comment_ID);
+            $comment_content = get_comment_text($comment->comment_ID);
+            $comment_avatar = get_avatar($comment, 64);
+            $edit_link = get_edit_comment_link($comment->comment_ID);
+
+            ob_start();
+            ?>
+            <div id="comment-<?php echo $comment->comment_ID; ?>" class="<?php echo esc_attr($comment_class); ?>">
+                <?php echo $comment_avatar; ?>
+                <div class="fb-comment-body">
+                    <strong class="fb-comment-author"><?php echo esc_html($comment_author); ?></strong>
+                    <span class="fb-comment-meta">
+                        <?php echo esc_html($comment_date); ?>
+                        <?php if ($edit_link && current_user_can('edit_comment', $comment->comment_ID)) : ?>
+                            <a href="<?php echo esc_url($edit_link); ?>">Edit</a>
+                        <?php endif; ?>
+                    </span>
+
+                    <?php if ($is_own_pending) : // ✅ FIX: show only for user's own ?>
+                        <div class="fb-comment-moderation-notice">
+                            <em><?php _e('Your comment is awaiting moderation. This is a preview; your comment will be visible after it has been approved.', 'frontis-blocks'); ?></em>
+                        </div>
                     <?php endif; ?>
-                </span>
-                <div class="fb-comment-content"><?php echo wp_kses_post($comment_content); ?></div>
-                
-                <div class="fb-comment-reply">
-                    <?php 
-                    // FIXED: Generate proper reply link with all required parameters
-                    $reply_link = get_comment_reply_link(array(
-                        'add_below' => 'comment',
-                        'respond_id' => 'respond',
-                        'reply_text' => __('Reply', 'frontis-blocks'),
-                        'login_text' => __('Log in to Reply', 'frontis-blocks'),
-                        'depth' => $depth,
-                        'max_depth' => get_option('thread_comments_depth') ? get_option('thread_comments_depth') : 5,
-                        'before' => '',
-                        'after' => ''
-                    ), $comment->comment_ID, $post_id);
-                    
-                    if ($reply_link) {
-                        echo $reply_link;
-                    } else {
-                        // Fallback manual reply link
-                        ?>
-                        <a href="#respond" 
-                           class="comment-reply-link" 
-                           onclick="return addComment.moveForm('comment-<?php echo $comment->comment_ID; ?>', '<?php echo $comment->comment_ID; ?>', 'respond', '<?php echo $post_id; ?>')">
-                            <?php _e('Reply', 'frontis-blocks'); ?>
-                        </a>
-                        <?php
-                    }
-                    ?>
-                </div>
 
-        <?php
-        $output .= ob_get_clean();
+                    <div class="fb-comment-content"><?php echo wp_kses_post($comment_content); ?></div>
 
-        // Check for child comments
-        $has_children = false;
-        foreach ($comments as $child_comment) {
-            if ($child_comment->comment_parent == $comment->comment_ID) {
-                $has_children = true;
-                break;
+                    <?php if (!$is_pending) : ?>
+                        <div class="fb-comment-reply">
+                            <?php
+                            $reply_link = get_comment_reply_link([
+                                'add_below' => 'comment',
+                                'respond_id' => 'respond',
+                                'reply_text' => __('Reply', 'frontis-blocks'),
+                                'login_text' => __('Log in to Reply', 'frontis-blocks'),
+                                'depth' => $depth,
+                                'max_depth' => get_option('thread_comments_depth') ?: 5,
+                                'before' => '',
+                                'after' => '',
+                            ], $comment->comment_ID, $post_id);
+
+                            if ($reply_link) {
+                                echo $reply_link;
+                            } else {
+                                ?>
+                                <a href="#respond"
+                                   class="comment-reply-link"
+                                   onclick="return addComment.moveForm('comment-<?php echo $comment->comment_ID; ?>', '<?php echo $comment->comment_ID; ?>', 'respond', '<?php echo $post_id; ?>')">
+                                    <?php _e('Reply', 'frontis-blocks'); ?>
+                                </a>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    <?php endif; ?>
+            <?php
+            $output .= ob_get_clean();
+
+            // Children
+            $child_comments = array_filter($comments, fn($c) => $c->comment_parent == $comment->comment_ID);
+            if (!empty($child_comments)) {
+                $output .= '<div class="fb-comment-children">';
+                $output .= frontis_display_comments_manual($comments, $post_id, $comment->comment_ID, $depth + 1);
+                $output .= '</div>';
             }
-        }
 
-        // If has children, start children container and recursively display them
-        if ($has_children) {
-            ob_start();
-            ?>
-            <div class="fb-comment-children">
-            <?php
-            $output .= ob_get_clean();
-            
-            $output .= frontis_display_comments_manual($comments, $post_id, $comment->comment_ID, $depth + 1);
-            
-            ob_start();
-            ?>
-            </div><!-- .fb-comment-children -->
-            <?php
-            $output .= ob_get_clean();
+            $output .= '</div><!-- .fb-comment-body --></div><!-- .fb-comment -->';
         }
-
-        // Close comment body and comment div
-        ob_start();
-        ?>
-            </div><!-- .fb-comment-body -->
-        </div><!-- .fb-comment -->
-        <?php
-        $output .= ob_get_clean();
     }
-    
     return $output;
 }
-
 ?>
 <div class="<?php echo esc_attr($parent_classes); ?>">
     <?php if (!empty($block_style)) : ?>
         <style><?php echo wp_strip_all_tags($block_style); ?></style>
     <?php endif; ?>
-    
+
     <div class="<?php echo esc_attr(implode(' ', array_filter($wrapper_classes))); ?>"<?php echo $wrapper_id_attr; ?>>
-        
+
         <!-- Comment Count -->
         <?php if ($show_comment_title && $comments_count > 0) : ?>
             <h3 class="fb-comment-count-title">
-                <?php 
-                printf(
-                    _n('%d Comment', '%d Comments', $comments_count, 'frontis-blocks'),
-                    $comments_count
-                );
-                ?>
+                <?php printf(_n('%d Comment', '%d Comments', $comments_count, 'frontis-blocks'), $comments_count); ?>
             </h3>
         <?php endif; ?>
 
-        <!-- Comments List with Nested Structure -->
+        <!-- Comments List -->
         <?php if ($show_comments) : ?>
             <div class="fb-comments-list">
                 <?php
-                // Get all approved comments for this post
-                $comments = get_comments(array(
-                    'post_id' => $post_id,
-                    'status' => 'approve',
-                    'order' => 'ASC'
-                ));
-
+                $comments = frontis_get_comments_to_display($post_id);
                 if (!empty($comments)) :
                     echo frontis_display_comments_manual($comments, $post_id);
-                else : ?>
-                    <p class="fb-no-comments"><?php _e('No comments yet.', 'frontis-blocks'); ?></p>
-                <?php endif; ?>
+                else :
+                    ?><p class="fb-no-comments"><?php _e('No comments yet.', 'frontis-blocks'); ?></p><?php
+                endif;
+                ?>
             </div>
         <?php endif; ?>
 
@@ -207,7 +227,7 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
             <div id="respond" class="fb-comment-form">
                 <div class="fb-comment-form-header">
                     <strong class="fb-reply-title">
-                        <?php 
+                        <?php
                         if (get_option('thread_comments')) {
                             comment_form_title('Leave a Reply', 'Leave a Reply to %s');
                         } else {
@@ -215,7 +235,6 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
                         }
                         ?>
                     </strong>
-                    <!-- FIXED: Proper cancel reply link that works with WordPress -->
                     <?php if (get_option('thread_comments')) : ?>
                         <a href="#respond" id="cancel-comment-reply-link" class="fb-cancel-reply" style="display: none;" rel="nofollow"><?php _e('Cancel reply', 'frontis-blocks'); ?></a>
                     <?php endif; ?>
@@ -234,49 +253,32 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
                 <?php endif; ?>
 
                 <?php
-                // Get commenter data for form fields
                 $commenter = wp_get_current_commenter();
                 $req = get_option('require_name_email');
-                $aria_req = ($req ? " aria-required='true'" : '');
-                
-                // Define form fields
-                $fields = array(
-                    'author' => '<p class="fb-comment-form-author">' .
-                        '<input id="author" name="author" type="text" value="' . esc_attr($commenter['comment_author']) . '" size="30"' . $aria_req . ' placeholder="' . __('Name', 'frontis-blocks') . ($req ? ' *' : '') . '" /></p>',
-                    'email' => '<p class="fb-comment-form-email">' .
-                        '<input id="email" name="email" type="email" value="' . esc_attr($commenter['comment_author_email']) . '" size="30"' . $aria_req . ' placeholder="' . __('Email', 'frontis-blocks') . ($req ? ' *' : '') . '" /></p>',
-                    'url' => '<p class="fb-comment-form-url">' .
-                        '<input id="url" name="url" type="url" value="' . esc_attr($commenter['comment_author_url']) . '" size="30" placeholder="' . __('Website', 'frontis-blocks') . '" /></p>',
-                );
-                
-                // Complete comment form arguments
-                $comment_form_args = array(
+                $aria_req = $req ? " aria-required='true'" : '';
+
+                $fields = [
+                    'author' => '<p class="fb-comment-form-author"><input id="author" name="author" type="text" value="' . esc_attr($commenter['comment_author']) . '" size="30"' . $aria_req . ' placeholder="' . __('Name', 'frontis-blocks') . ($req ? ' *' : '') . '" /></p>',
+                    'email' => '<p class="fb-comment-form-email"><input id="email" name="email" type="email" value="' . esc_attr($commenter['comment_author_email']) . '" size="30"' . $aria_req . ' placeholder="' . __('Email', 'frontis-blocks') . ($req ? ' *' : '') . '" /></p>',
+                    'url' => '<p class="fb-comment-form-url"><input id="url" name="url" type="url" value="' . esc_attr($commenter['comment_author_url']) . '" size="30" placeholder="' . __('Website', 'frontis-blocks') . '" /></p>',
+                ];
+
+                $comment_form_args = [
                     'title_reply' => '',
-                    'title_reply_to' => '',
-                    'cancel_reply_before' => '',
-                    'cancel_reply_after' => '',
-                    'cancel_reply_link' => __('Cancel reply', 'frontis-blocks'),
                     'label_submit' => __('Post Comment', 'frontis-blocks'),
-                    'comment_notes_before' => '',
-                    'comment_notes_after' => '',
                     'comment_field' => '<p class="fb-comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" placeholder="' . __('Comment', 'frontis-blocks') . ' *"></textarea></p>',
                     'fields' => apply_filters('comment_form_default_fields', $fields),
                     'class_form' => 'fb-comment-form-element',
                     'class_submit' => 'fb-post-comment-btn',
                     'id_form' => 'commentform',
                     'id_submit' => 'submit',
-                    'must_log_in' => '<p class="must-log-in">' . sprintf(
-                        __('You must be <a href="%s">logged in</a> to post a comment.', 'frontis-blocks'),
-                        wp_login_url(apply_filters('the_permalink', get_permalink($post_id)))
-                    ) . '</p>',
-                    'logged_in_as' => '', // We handle this separately above
-                );
-                
-                // Display the comment form
+                    'must_log_in' => '<p class="must-log-in">' . sprintf(__('You must be <a href="%s">logged in</a> to post a comment.', 'frontis-blocks'), wp_login_url(apply_filters('the_permalink', get_permalink($post_id)))) . '</p>',
+                ];
+
                 comment_form($comment_form_args, $post_id);
                 ?>
             </div>
         <?php endif; ?>
-        
+
     </div>
 </div>
