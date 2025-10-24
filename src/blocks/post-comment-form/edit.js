@@ -9,6 +9,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         showCommentTitle,
         showCommentsCount,
         showCommentForm,
+
+        formTitle,
+        cancelReplyText,
+
         commentFormWidth,
         commentGap,
         avatarSize,
@@ -159,8 +163,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     {showCommentForm && (
                         <div id="respond" className="fb-comment-form">
                             <div className="fb-comment-form-header">
-                                <strong className="fb-reply-title">Leave a Reply</strong>
-                                <a href="#respond" className="fb-cancel-reply" style={{display: 'none'}}>Cancel reply</a>
+                                <strong className="fb-reply-title"> {formTitle || __('Leave a Reply', 'frontis-blocks')} </strong>
+                                <a href="#respond" className="fb-cancel-reply">
+                                    {cancelReplyText || __('Cancel reply', 'frontis-blocks')}
+                                </a>
                             </div>
 
                             <p className="fb-logged-in-as">

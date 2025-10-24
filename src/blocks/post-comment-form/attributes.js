@@ -18,6 +18,17 @@ const attributes = {
         default: true,
     },
     
+
+    // Form Text Customization
+    formTitle: {
+        type: "string",
+        default: "",
+    },
+    cancelReplyText: {
+        type: "string", 
+        default: "",
+    },
+
     // Style Attributes
     commentFormWidth: {
         type: "object",
