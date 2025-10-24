@@ -3032,6 +3032,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         setAttributes({ separator: val });
     };
 
+    // Pro Active Check for Dynamic Content
+    const proActive = applyFilters('frontisblocks/is-pro-active', false);
+
+    // If Pro is not active, set dynamicTextEnabled to false
+    useEffect(() => {
+    if ( (!proActive && dynamicTextEnabled) || (!proActive && dynamicSubHeadingTextEnabled)) {
+        setAttributes({ dynamicTextEnabled: false });
+        setAttributes({ dynamicSubHeadingTextEnabled: false });
+    }
+    }, [proActive]);
+
     /**
      * Toggle Controls for Dynamic Content
      */
