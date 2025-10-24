@@ -21,8 +21,15 @@ const FullSiteImportSettingConfig = ({
 }) => {
 
   const { 
-    showFullSiteImportModal
+    showFullSiteImportModal,
+    pageTemplates,
+    pageTemplatesLoading,
+    pageTemplatesError,
+    templateParts,
+    templatePartsLoading,
+    templatePartsError,
   } = useSelector((state) => state.attributes);
+  const dispatch = useDispatch();
 
   const [isImporting, setIsImporting] = useState(false);
   const [importProgress, setImportProgress] = useState(0);
@@ -46,8 +53,6 @@ const FullSiteImportSettingConfig = ({
 	const [customTypography, setCustomTypography] = useState(template.customTypographies);
 	const [fontFamilies, setFontFamilies] = useState([]);
 	const [globalTypography, setGlobalTypography] = useState({});
-
-  const dispatch = useDispatch();
 
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
   const deviceType = useDeviceType();
@@ -747,10 +752,126 @@ const FullSiteImportSettingConfig = ({
       setIsImporting(false);
     }
   }, []);
+
+  const getTemplates = async (postType = 'page') => {
+    const maxAttempts = 2;
+  
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+        const form = new FormData();
+        form.append('action', 'fb_get_templates');
+        form.append('security', nonce); // Nonce from localized script.
+        form.append('post_type', postType);
+  
+        const response = await fetch(ajaxUrl, {
+          method: 'POST',
+          body: form,
+        });
+  
+        const ok = response.ok;
+        const json = await response.json();
+  
+        if (ok && json?.success) {
+          console.log(`Templates for post type "${postType}" fetched successfully`);
+          return { status: 'success', data: json.data.templates };
+        }
+  
+        throw new Error(json?.data?.message || json?.message || 'Template fetch failed');
+      } catch (err) {
+        console.warn(`Attempt ${attempt} failed:`, err.message);
+  
+        if (attempt === maxAttempts) {
+          console.log(`Failed to fetch templates for "${postType}": ${err.message}`);
+          return { status: 'failed', reason: err.message };
+        }
+  
+        await new Promise((resolve) => setTimeout(resolve, 800));
+      }
+    }
+  };
+
+  useEffect(() => {
+    const fetchTemplates = async () => {
+      dispatch(setAttribute({ pageTemplatesLoading: true }));
+      const result = await getTemplates('page'); // Call for 'page' post type.
+
+      if (result.status === 'success') {
+        dispatch(setAttribute({ pageTemplates: result.data }));
+        dispatch(setAttribute({ pageTemplatesError: null }));
+      } else {
+        dispatch(setAttribute({ pageTemplatesError: result.reason }));
+        dispatch(setAttribute({ pageTemplates: [] }));
+      }
+      dispatch(setAttribute({ pageTemplatesLoading: false }));
+    };
+
+    fetchTemplates();
+  }, []);
+
+  console.log('pageTemplates', pageTemplates);
+
+  const getTemplateParts = async (templateSlug) => {
+    const maxAttempts = 2;
+  
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+        const form = new FormData();
+        form.append('action', 'fb_get_template_parts');
+        form.append('security', nonce);
+        form.append('template_slug', templateSlug);
+  
+        const response = await fetch(ajaxUrl, {
+          method: 'POST',
+          body: form,
+        });
+  
+        const ok = response.ok;
+        const json = await response.json();
+  
+        if (ok && json?.success) {
+          console.log(`Template parts for "${templateSlug}" fetched successfully`);
+          return { status: 'success', data: json.data.template_parts };
+        }
+  
+        throw new Error(json?.data?.message || json?.message || 'Template parts fetch failed');
+      } catch (err) {
+        console.warn(`Attempt ${attempt} failed:`, err.message);
+  
+        if (attempt === maxAttempts) {
+          console.log(`Failed to fetch template parts for "${templateSlug}": ${err.message}`);
+          return { status: 'failed', reason: err.message };
+        }
+  
+        await new Promise((resolve) => setTimeout(resolve, 800));
+      }
+    }
+  };
+
+  useEffect(() => {
+    const fetchTemplateParts = async () => {
+      dispatch(setAttribute({ templatePartsLoading: true }));
+      const templateSlug = 'wp-custom-template-fb-template-home'; // Replace with dynamic slug if needed.
+      const result = await getTemplateParts(templateSlug);
+
+      if (result.status === 'success') {
+        dispatch(setAttribute({ templateParts: result.data }));
+        dispatch(setAttribute({ templatePartsError: null }));
+      } else {
+        dispatch(setAttribute({ templatePartsError: result.reason }));
+        dispatch(setAttribute({ templateParts: [] }));
+      }
+      dispatch(setAttribute({ templatePartsLoading: false }));
+    };
+
+    fetchTemplateParts();
+  }, []);
+
+  console.log('templateParts', templateParts);
   
 
 
   return (
+    
     <>
         <div className={`fb-import-form-panel ${isSidebarCollapsed ? 'collapsed' : ''}`}>
             <div className="fb-form-section">

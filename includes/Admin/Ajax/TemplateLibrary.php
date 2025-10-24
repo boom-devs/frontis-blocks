@@ -37,6 +37,8 @@ class TemplateLibrary extends AjaxBase {
             'install_active_plugins',
             'active_theme',
             'update_database',
+            'get_templates',
+            'get_template_parts'
 		];
 
 		$this->init_ajax_events($ajax_events);
@@ -486,5 +488,169 @@ class TemplateLibrary extends AjaxBase {
                 'logo'     => get_theme_mod('custom_logo'),
             ]
         ]);
+    }
+
+    /**
+     * Get templates by post type and name.
+     *
+     * @param string $post_type Post type to filter templates.
+     * @return WP_Block_Template[] Array of matching templates.
+     */
+    public function get_templates_by_post_type_and_name( $post_type ) {
+        $templates = get_block_templates(
+            array(
+                'post_type'  => array( $post_type ), // Filter by specific post type(s).
+                'slug__like' => 'fb-template',       // Partial match on slug.
+            ),
+            'wp_template' // Specify template type.
+        );
+
+        $matching_templates = array_filter(
+            $templates,
+            function( $template ) use ( $post_type ) {
+                return strpos( $template->slug, 'fb-template' ) !== false &&
+                       ( empty( $template->post_types ) || in_array( $post_type, (array) $template->post_types, true ) );
+            }
+        );
+
+        return array_values( $matching_templates ); // Reindex array.
+    }
+
+    /**
+     * AJAX handler to get templates.
+     */
+    public function get_templates() {
+        $this->check_permission();
+
+        $post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : 'page';
+
+        $templates = $this->get_templates_by_post_type_and_name( $post_type );
+
+        if ( ! empty( $templates ) ) {
+            $output = [];
+            foreach ( $templates as $template ) {
+                $output[] = [
+                    'id'    => $template->id,
+                    'slug'  => $template->slug,
+                    'title' => $template->title,
+                    'content' => $template->content, // Optional: Include content if needed.
+                ];
+            }
+            wp_send_json_success( [ 'templates' => $output ] );
+        } else {
+            wp_send_json_error( [ 'message' => 'No matching templates found' ] );
+        }
+    }
+
+    /**
+     * Get templates by post type and name.
+     *
+     * @param string $post_type Post type to filter templates.
+     * @return WP_Block_Template[] Array of matching templates.
+     */
+    // public function get_templates_by_post_type_and_name($post_type)
+    // {
+    //     $templates = get_block_templates(
+    //         [
+    //             'post_type'  => [$post_type],
+    //             'slug__like' => 'fb-template',
+    //         ],
+    //         'wp_template'
+    //     );
+
+    //     $matching_templates = array_filter(
+    //         $templates,
+    //         function ($template) use ($post_type) {
+    //             return strpos($template->slug, 'fb-template') !== false &&
+    //                 (empty($template->post_types) || in_array($post_type, (array) $template->post_types, true));
+    //         }
+    //     );
+
+    //     return array_values($matching_templates);
+    // }
+
+    /**
+     * Get header and footer template parts for a single template by slug.
+     *
+     * @param string $template_slug The slug of the template (e.g., 'fb-template-page').
+     * @return array Array of header and footer template parts.
+     */
+    public function get_header_footer_by_template_slug($template_slug)
+    {
+        // Fetch the template by slug.
+        $templates = get_block_templates(
+            [
+                'slug' => $template_slug,
+            ],
+            'wp_template'
+        );
+
+        if (empty($templates)) {
+            return [];
+        }
+
+        $template = reset($templates); // Get the first (and only) template.
+        $header_footer_parts = [];
+
+        // Parse template content for wp:template-part blocks.
+        $blocks = parse_blocks($template->content);
+        foreach ($blocks as $block) {
+            if ($block['blockName'] === 'core/template-part' && !empty($block['attrs']['slug'])) {
+                $part_slug = $block['attrs']['slug'];
+
+                // Query wp_template_part by slug and area (header or footer).
+                $args = [
+                    'post_type'      => 'wp_template_part',
+                    'posts_per_page' => 1,
+                    'post_status'    => 'publish',
+                    'name'           => $part_slug,
+                    'meta_query'     => [
+                        [
+                            'key'     => 'area',
+                            'value'   => ['header', 'footer'],
+                            'compare' => 'IN',
+                        ],
+                    ],
+                ];
+
+                $parts = get_posts($args);
+                if (!empty($parts)) {
+                    $part = reset($parts);
+                    $area = get_post_meta($part->ID, 'area', true);
+                    $header_footer_parts[] = [
+                        'id'    => $part->ID,
+                        'slug'  => $part->post_name,
+                        'title' => $part->post_title,
+                        'area'  => $area,
+                        'content' => $part->post_content,
+                    ];
+                }
+            }
+        }
+
+        return $header_footer_parts;
+    }
+
+    /**
+     * AJAX handler to get header/footer template parts for a template.
+     */
+    public function get_template_parts()
+    {
+        $this->check_permission();
+
+        $template_slug = isset($_POST['template_slug']) ? sanitize_text_field(wp_unslash($_POST['template_slug'])) : '';
+
+        if (empty($template_slug)) {
+            wp_send_json_error(['message' => 'Template slug is required'], 400);
+            return;
+        }
+
+        $template_parts = $this->get_header_footer_by_template_slug($template_slug);
+
+        if (!empty($template_parts)) {
+            wp_send_json_success(['template_parts' => $template_parts]);
+        } else {
+            wp_send_json_error(['message' => 'No header/footer template parts found for this template']);
+        }
     }
 }
