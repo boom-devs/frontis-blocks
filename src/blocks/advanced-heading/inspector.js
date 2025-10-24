@@ -77,6 +77,7 @@ import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProToggleControls from '@Utils/getProToggleControls';
 import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
+import getProActive from '@Utils/getProActive';
 
 import './editor.scss';
 
@@ -475,8 +476,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dynamicSubHeadingTextEnableLink,
         dynamicSubHeadingTextLinkSource,
         /** End Dynamic Sub Heading Text */
-
-
 
     } = attributes;
 
@@ -3032,16 +3031,18 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         setAttributes({ separator: val });
     };
 
-    // Pro Active Check for Dynamic Content
-    const proActive = applyFilters('frontisblocks/is-pro-active', false);
-
-    // If Pro is not active, set dynamicTextEnabled to false
+    // Check if Pro is active
+    const getProActiveState = getProActive();
     useEffect(() => {
-    if ( (!proActive && dynamicTextEnabled) || (!proActive && dynamicSubHeadingTextEnabled)) {
-        setAttributes({ dynamicTextEnabled: false });
-        setAttributes({ dynamicSubHeadingTextEnabled: false });
-    }
-    }, [proActive]);
+        if (!getProActiveState) { 
+            setAttributes({
+                dynamicTextEnabled: false,
+                dynamicSubHeadingTextEnabled: false,
+                dynamicTextEnableLink: false,
+                dynamicSubHeadingTextEnableLink: false,
+            });
+        }
+    }, [getProActiveState]);
 
     /**
      * Toggle Controls for Dynamic Content
@@ -3053,6 +3054,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dynamicAttr: 'dynamicTextEnabled',
         label: __('Dynamic Content', 'frontis-blocks'),
         keyPrefix: 'advanced-heading-dynamic-content',
+        isProActive : getProActiveState
     });
 
     const dynamicSubHeadingContentToggleControls = getProToggleControls({
@@ -3062,6 +3064,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         dynamicAttr: 'dynamicSubHeadingTextEnabled',  
         label: __('Dynamic Content', 'frontis-blocks'),
         keyPrefix: 'advanced-sub-heading-dynamic-content',
+        isProActive : getProActiveState
     });
 
     /**

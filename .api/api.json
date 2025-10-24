@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "apis": [
+    {
+      "identifier": "surecart",
+      "source": "@surecart/v1#52h2d2smffxfd40",
+      "integrity": "sha512-v+bXrBD1IsvFGysApgDHryt7X6lxeWzz1+S+awvY5n7Pitu72MdAs2UfmK9RqjPU+inhkqklMaMn7lRat02KDw==",
+      "installerVersion": "6.1.3"
+    }
+  ]
+}

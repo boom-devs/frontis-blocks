@@ -76,6 +76,16 @@ class Blocks
 				$editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
 				$view_script_handle = "{$plugin_slug}-{$slug}-view-script";
 
+
+				// $activation_key = get_option('frontisblockspro_license_options');
+				// if(is_array($activation_key) && $activation_key && count($activation_key) > 0 && isset($activation_key['sc_license_key']) && $activation_key['sc_license_key'] !== '') {
+				// 	$activation_key = $activation_key['sc_license_key'];
+				// }
+
+				$license_options = get_option('frontisblockspro_license_options');
+				$sc_license_id  = is_array($license_options) && !empty($license_options['sc_license_id'])  ? (string) $license_options['sc_license_id']  : '';
+				$sc_license_key = is_array($license_options) && !empty($license_options['sc_license_key']) ? (string) $license_options['sc_license_key'] : '';
+
 				if (is_admin()) {
 					$admin_localize_array = [
 						'admin_nonce' => wp_create_nonce('admin-nonce'),
@@ -91,7 +101,10 @@ class Blocks
 						'desktop_breakpoint' => $desktop_breakpoint,
 						'tablet_breakpoint' => $tablet_breakpoint,
 						'mobile_breakpoint' => $mobile_breakpoint,
-						'global_typography' => get_option('fb_globaltypo')
+						'global_typography' => get_option('fb_globaltypo'),
+						'is_pro_active' => Helper::isProActivated(),
+						'sc_license_id' => $sc_license_id,
+						'sc_license_key' => $sc_license_key,
 					];
 
 					$localize_array = array_merge($localize_array, $admin_localize_array);
