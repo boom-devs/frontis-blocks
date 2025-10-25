@@ -1141,6 +1141,10 @@ const attributes = {
 		type: 'string',
 		default: 'Learn More'
 	},
+	btnTwoIconPosition: {
+		type: 'string',
+		default: 'right'
+	},
 	btnTwoSwitcher: {
 		type: 'boolean',
 		default: true,
