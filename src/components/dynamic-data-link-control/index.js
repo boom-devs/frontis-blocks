@@ -32,7 +32,7 @@ export default function DynamicDataLinkControl({
   return (
     <>
       <ToggleControl
-        label={__("Enable Link", "frontis-blocks")}
+        label={__("Dynamic Link", "frontis-blocks")}
         checked={!!enableLink}
         onChange={(v) => typeof setEnableLink === "function" && setEnableLink(v)}
       />
