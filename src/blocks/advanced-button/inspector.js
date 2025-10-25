@@ -59,6 +59,7 @@ import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProToggleControls from '@Utils/getProToggleControls';
 import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
+import getProActive from '@Utils/getProActive';
 import './editor.scss';
 
 export default function Inspector ({ attributes, setAttributes,  clientId}) {
@@ -2320,6 +2321,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 	const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
+	// Check if Pro is active
+	const getProActiveState = getProActive();
+	useEffect(() => {
+		if (!getProActiveState) { 
+			setAttributes({
+				dynamicTextEnabled: false,
+				dynamicTextEnableLink: false,
+			});
+		}
+	}, [getProActiveState]);
+
 	/**
      * Toggle Controls for Dynamic Content
      */
@@ -2330,18 +2342,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		dynamicAttr: 'dynamicTextEnabled',
 		label: __('Dynamic Content', 'frontis-blocks'),
 		keyPrefix: 'advanced-button-dynamic-content',
-	});
-
-	/**
-	 * Toggle Controls for Dynamic Link
-	 */
-	const dynamicLinkToggleControls = getProToggleControls({
-		hook: 'frontisblocks-advanced-button-link-dynamic-controls', 
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicTextEnableLink',
-		label: __('Dynamic Link', 'frontis-blocks'),
-		keyPrefix: 'advanced-button-dynamic-link-content',
+		isProActive : getProActiveState
 	});
 
 	/**
@@ -2431,6 +2432,15 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						setTermsSeparator={(value) => setAttributes({ dynamicTextTermsSeparator: value })}
 					/>
 
+					{dynamicTextEnabled && (
+						<DynamicDataLinkControl
+							enableLink={dynamicTextEnableLink}
+							setEnableLink={(value) => setAttributes({ dynamicTextEnableLink: value })}
+							linkSource={dynamicTextLinkSource}
+							setLinkSource={(value) => setAttributes({ dynamicTextLinkSource: value })}
+						/>
+					)}
+
 					{buttonTextSwitcher && !dynamicTextEnabled && (
 						<TextControl
 							label={__("Text", "frontis-blocks")}
@@ -2440,18 +2450,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						/>
 					)}
 
-					{dynamicLinkToggleControls.map((control, index) => (
-                        <div key={control.key || index}>{control.comp}</div>
-                    ))}
-
-					{dynamicTextEnableLink && (
-						<DynamicDataLinkControl
-							enableLink={dynamicTextEnableLink}
-							setEnableLink={(value) => setAttributes({ dynamicTextEnableLink: value })}
-							linkSource={dynamicTextLinkSource}
-							setLinkSource={(value) => setAttributes({ dynamicTextLinkSource: value })}
-						/>
-					)}
 					{!dynamicTextEnableLink && (
 						<FB_UrlControl
 							url={buttonUrl}
