@@ -753,120 +753,198 @@ const FullSiteImportSettingConfig = ({
     }
   }, []);
 
-  const getTemplates = async (postType = 'page') => {
-    const maxAttempts = 2;
+  // const getTemplates = async (postType = 'page') => {
+  //   const maxAttempts = 2;
   
-    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-      try {
-        const form = new FormData();
-        form.append('action', 'fb_get_templates');
-        form.append('security', nonce); // Nonce from localized script.
-        form.append('post_type', postType);
+  //   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+  //     try {
+  //       const form = new FormData();
+  //       form.append('action', 'fb_get_templates');
+  //       form.append('security', nonce); // Nonce from localized script.
+  //       form.append('post_type', postType);
   
-        const response = await fetch(ajaxUrl, {
-          method: 'POST',
-          body: form,
-        });
+  //       const response = await fetch(ajaxUrl, {
+  //         method: 'POST',
+  //         body: form,
+  //       });
   
-        const ok = response.ok;
-        const json = await response.json();
+  //       const ok = response.ok;
+  //       const json = await response.json();
   
-        if (ok && json?.success) {
-          console.log(`Templates for post type "${postType}" fetched successfully`);
-          return { status: 'success', data: json.data.templates };
-        }
+  //       if (ok && json?.success) {
+  //         console.log(`Templates for post type "${postType}" fetched successfully`);
+  //         return { status: 'success', data: json.data.templates };
+  //       }
   
-        throw new Error(json?.data?.message || json?.message || 'Template fetch failed');
-      } catch (err) {
-        console.warn(`Attempt ${attempt} failed:`, err.message);
+  //       throw new Error(json?.data?.message || json?.message || 'Template fetch failed');
+  //     } catch (err) {
+  //       console.warn(`Attempt ${attempt} failed:`, err.message);
   
-        if (attempt === maxAttempts) {
-          console.log(`Failed to fetch templates for "${postType}": ${err.message}`);
-          return { status: 'failed', reason: err.message };
-        }
+  //       if (attempt === maxAttempts) {
+  //         console.log(`Failed to fetch templates for "${postType}": ${err.message}`);
+  //         return { status: 'failed', reason: err.message };
+  //       }
   
-        await new Promise((resolve) => setTimeout(resolve, 800));
-      }
-    }
-  };
+  //       await new Promise((resolve) => setTimeout(resolve, 800));
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    const fetchTemplates = async () => {
-      dispatch(setAttribute({ pageTemplatesLoading: true }));
-      const result = await getTemplates('page'); // Call for 'page' post type.
+  // useEffect(() => {
+  //   const fetchTemplates = async () => {
+  //     dispatch(setAttribute({ pageTemplatesLoading: true }));
+  //     const result = await getTemplates('page'); // Call for 'page' post type.
 
-      if (result.status === 'success') {
-        dispatch(setAttribute({ pageTemplates: result.data }));
-        dispatch(setAttribute({ pageTemplatesError: null }));
-      } else {
-        dispatch(setAttribute({ pageTemplatesError: result.reason }));
-        dispatch(setAttribute({ pageTemplates: [] }));
-      }
-      dispatch(setAttribute({ pageTemplatesLoading: false }));
-    };
+  //     if (result.status === 'success') {
+  //       dispatch(setAttribute({ pageTemplates: result.data }));
+  //       dispatch(setAttribute({ pageTemplatesError: null }));
+  //     } else {
+  //       dispatch(setAttribute({ pageTemplatesError: result.reason }));
+  //       dispatch(setAttribute({ pageTemplates: [] }));
+  //     }
+  //     dispatch(setAttribute({ pageTemplatesLoading: false }));
+  //   };
 
-    fetchTemplates();
-  }, []);
+  //   fetchTemplates();
+  // }, []);
 
-  console.log('pageTemplates', pageTemplates);
+  // console.log('pageTemplates', pageTemplates);
 
-  const getTemplateParts = async (templateSlug) => {
-    const maxAttempts = 2;
+  // const getTemplateParts = async (templateSlug) => {
+  //   const maxAttempts = 2;
   
-    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-      try {
-        const form = new FormData();
-        form.append('action', 'fb_get_template_parts');
-        form.append('security', nonce);
-        form.append('template_slug', templateSlug);
+  //   console.log('Fetching template parts for slug:', templateSlug);
   
-        const response = await fetch(ajaxUrl, {
-          method: 'POST',
-          body: form,
-        });
+  //   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+  //     try {
+  //       const form = new FormData();
+  //       form.append('action', 'fb_get_template_parts');
+  //       form.append('security', nonce);
+  //       form.append('template_slug', templateSlug);
   
-        const ok = response.ok;
-        const json = await response.json();
+  //       const response = await fetch(ajaxUrl, {
+  //         method: 'POST',
+  //         body: form,
+  //       });
   
-        if (ok && json?.success) {
-          console.log(`Template parts for "${templateSlug}" fetched successfully`);
-          return { status: 'success', data: json.data.template_parts };
-        }
+  //       const ok = response.ok;
+  //       const json = await response.json();
   
-        throw new Error(json?.data?.message || json?.message || 'Template parts fetch failed');
-      } catch (err) {
-        console.warn(`Attempt ${attempt} failed:`, err.message);
+  //       console.log('Get template parts response:', json);
   
-        if (attempt === maxAttempts) {
-          console.log(`Failed to fetch template parts for "${templateSlug}": ${err.message}`);
-          return { status: 'failed', reason: err.message };
-        }
+  //       if (ok && json?.success) {
+  //         console.log(`Template parts for "${templateSlug}" fetched successfully`, json.data.template_parts);
+  //         return { status: 'success', data: json.data.template_parts };
+  //       }
   
-        await new Promise((resolve) => setTimeout(resolve, 800));
-      }
-    }
-  };
+  //       throw new Error(json?.data?.message || json?.message || 'Template parts fetch failed');
+  //     } catch (err) {
+  //       console.warn(`Attempt ${attempt} failed:`, err.message);
+  
+  //       if (attempt === maxAttempts) {
+  //         console.log(`Failed to fetch template parts for "${templateSlug}": ${err.message}`);
+  //         return { status: 'failed', reason: err.message };
+  //       }
+  
+  //       await new Promise((resolve) => setTimeout(resolve, 800));
+  //     }
+  //   }
+  // };
+  
+  // const pushTemplateParts = async (templateSlug, headerContent, footerContent) => {
+  //   const maxAttempts = 2;
+  
+  //   console.log('Pushing template parts for slug:', templateSlug);
+  
+  //   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+  //     try {
+  //       const form = new FormData();
+  //       form.append('action', 'fb_push_template_parts');
+  //       form.append('security', nonce);
+  //       form.append('template_slug', templateSlug);
+  //       form.append('header_content', headerContent);
+  //       form.append('footer_content', footerContent);
+  
+  //       const response = await fetch(ajaxUrl, {
+  //         method: 'POST',
+  //         body: form,
+  //       });
+  
+  //       const ok = response.ok;
+  //       const json = await response.json();
+  
+  //       console.log('Push template parts response:', json);
+  
+  //       if (ok && json?.success) {
+  //         console.log(`Template parts for "${templateSlug}" pushed successfully`);
+  //         return { status: 'success', data: json.data };
+  //       }
+  
+  //       throw new Error(json?.data?.message || json?.message || 'Template parts push failed');
+  //     } catch (err) {
+  //       console.warn(`Attempt ${attempt} failed:`, err.message);
+  
+  //       if (attempt === maxAttempts) {
+  //         console.log(`Failed to push template parts for "${templateSlug}": ${err.message}`);
+  //         return { status: 'failed', reason: err.message };
+  //       }
+  
+  //       await new Promise((resolve) => setTimeout(resolve, 800));
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    const fetchTemplateParts = async () => {
-      dispatch(setAttribute({ templatePartsLoading: true }));
-      const templateSlug = 'wp-custom-template-fb-template-home'; // Replace with dynamic slug if needed.
-      const result = await getTemplateParts(templateSlug);
+  // useEffect(() => {
+  //   const fetchAndPushTemplateParts = async () => {
+  //     dispatch(setAttribute({ templatePartsLoading: true }));
+  
+  //     // Use first template slug from pageTemplates.
+  //     const templateSlug = pageTemplates.length > 0
+  //       ? pageTemplates[0].slug.split('//').pop()
+  //       : 'wp-custom-template-fb-template-home';
+  
+  //     console.log('Selected template slug:', templateSlug);
+  
+  //     // Fetch existing template parts.
+  //     const result = await getTemplateParts(templateSlug);
 
-      if (result.status === 'success') {
-        dispatch(setAttribute({ templateParts: result.data }));
-        dispatch(setAttribute({ templatePartsError: null }));
-      } else {
-        dispatch(setAttribute({ templatePartsError: result.reason }));
-        dispatch(setAttribute({ templateParts: [] }));
-      }
-      dispatch(setAttribute({ templatePartsLoading: false }));
-    };
+  //     console.log('Template parts result:', result);
+  
+  //     if (result.status === 'success') {
+  //       dispatch(setAttribute({ templateParts: result.data }));
+  //       dispatch(setAttribute({ templatePartsError: null }));
+  //     } else {
+  //       dispatch(setAttribute({ templatePartsError: result.reason }));
+  //       dispatch(setAttribute({ templateParts: [] }));
+  
+  //       // If no template parts found, push custom ones.
+  //       // if (result.reason.includes('No header/footer template parts found')) {
+  //       //   const customHeaderContent = `<!-- wp:site-title /-->\n<!-- wp:navigation /-->`;
+  //       //   const customFooterContent = `<!-- wp:paragraph --><p>Custom Footer Content</p><!-- /wp:paragraph -->`;
+  
+  //       //   const pushResult = await pushTemplateParts(templateSlug, customHeaderContent, customFooterContent);
+  
+  //       //   if (pushResult.status === 'success') {
+  //       //     dispatch(setAttribute({ templateParts: [
+  //       //       { id: pushResult.data.header_id, slug: `header-${templateSlug}`, title: `Header for ${templateSlug}`, area: 'header', content: customHeaderContent },
+  //       //       { id: pushResult.data.footer_id, slug: `footer-${templateSlug}`, title: `Footer for ${templateSlug}`, area: 'footer', content: customFooterContent },
+  //       //     ] }));
+  //       //     dispatch(setAttribute({ templatePartsError: null }));
+  //       //   } else {
+  //       //     dispatch(setAttribute({ templatePartsError: pushResult.reason }));
+  //       //   }
+  //       // }
+  //     }
+  
+  //     dispatch(setAttribute({ templatePartsLoading: false }));
+  //   };
+  
+  //   if (pageTemplates.length > 0 || !pageTemplatesLoading) {
+  //     fetchAndPushTemplateParts();
+  //   }
+  // }, [pageTemplates, pageTemplatesLoading]);
 
-    fetchTemplateParts();
-  }, []);
-
-  console.log('templateParts', templateParts);
+  // console.log('templateParts', templateParts);
   
 
 
