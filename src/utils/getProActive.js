@@ -11,7 +11,6 @@ export default function getProActive({
   token     = SC_SECRET,
 } = {}) {
 
-  console.log(licenseId, localKey, token);
   const [isProActive, setIsProActive] = useState(true);
 
   useEffect(() => {
