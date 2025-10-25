@@ -8,10 +8,11 @@ const SC_SECRET = 'st_7U7moiLnqfUT2c5Zks5eFJzq';
 export default function getProActive({
   licenseId = window?.FrontisBlocksData?.sc_license_id || '',
   localKey  = window?.FrontisBlocksData?.sc_license_key || '',
-  initial   = !!window?.FrontisBlocksData?.is_pro_active,
   token     = SC_SECRET,
 } = {}) {
-  const [isProActive, setIsProActive] = useState(initial);
+
+  console.log(licenseId, localKey, token);
+  const [isProActive, setIsProActive] = useState(true);
 
   useEffect(() => {
     const ac = new AbortController();
