@@ -681,7 +681,7 @@ const attributes = {
     },
     subHeadingTextDecoration: {
         type: 'string',
-        default: ''
+        default: 'none'
     },
     subHeadingLetterSpacing: {
         type: 'object',
