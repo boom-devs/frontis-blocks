@@ -8,6 +8,7 @@ import {
   MenuGroup,
   MenuItem,
 } from '@wordpress/components';
+import getProActive from '@Utils/getProActive';
 
 const getProToggleControls = ({
   hook,
@@ -23,10 +24,11 @@ const getProToggleControls = ({
   },
   isProActive,
 }) => {
+
   // If prop is not passed, use localize/fallback
   const pro = typeof isProActive === 'boolean'
     ? isProActive
-    : !!window?.FrontisBlocksData?.is_pro_active;
+    : getProActive();
 
   const checked = !!attributes?.[dynamicAttr];
 
