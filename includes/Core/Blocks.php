@@ -102,7 +102,6 @@ class Blocks
 						'tablet_breakpoint' => $tablet_breakpoint,
 						'mobile_breakpoint' => $mobile_breakpoint,
 						'global_typography' => get_option('fb_globaltypo'),
-						'is_pro_active' => Helper::isProActivated(),
 						'sc_license_id' => $sc_license_id,
 						'sc_license_key' => $sc_license_key,
 					];

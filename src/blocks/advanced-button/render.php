@@ -1,4 +1,6 @@
 <?php
+use FrontisBlocks\Utils\Helper;
+
 // ---------- helpers ----------
 if ( ! function_exists('fb_norm_str') ) {
     function fb_norm_str($val, $default = '') {
