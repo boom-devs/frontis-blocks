@@ -106,7 +106,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	/**
 	 * Dynamic Text Value for Title
 	 */
-	const { dynamicDisplayValue: headingDynamicValue } = DynamicTextValue({
+	const { dynamicDisplayValue: headingDynamicValue, dynamicDisplayLink: headingDynamicLink } = DynamicTextValue({
 		textEnabled:            dynamicTextEnabled,
 		textSource:             dynamicTextSource, 
 		textField:              dynamicTextField,
@@ -129,10 +129,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		textTermsTaxonomy:      dynamicTextTermsTaxonomy,
 		textTermsSeparator:     dynamicTextTermsSeparator,
 
+		textLinkEnabled:        dynamicTextEnableLink,
+		textLinkSource:         dynamicTextLinkSource,
+
 		context,
 	});
 
-	const { dynamicDisplayValue: subHeadingDynamicValue } = DynamicTextValue({
+	const { dynamicDisplayValue: subHeadingDynamicValue, dynamicDisplayLink: subHeadingDynamicLink } = DynamicTextValue({
 		textEnabled:            dynamicSubHeadingTextEnabled,
 		textSource:             dynamicSubHeadingTextSource, 
 		textField:              dynamicSubHeadingTextField,
@@ -154,6 +157,9 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		textTermsTaxonomy:      dynamicSubHeadingTextTermsTaxonomy,
 		textTermsSeparator:     dynamicSubHeadingTextTermsSeparator,
+
+		textLinkEnabled:        dynamicSubHeadingTextEnableLink,
+		textLinkSource:         dynamicSubHeadingTextLinkSource,
 
 		context,
 	});
