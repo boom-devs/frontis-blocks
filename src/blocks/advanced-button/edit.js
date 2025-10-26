@@ -85,7 +85,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	/**
 	 * Dynamic Text Value for Title
 	 */
-	const { dynamicDisplayValue } = DynamicTextValue({
+	const { dynamicDisplayValue, dynamicDisplayLink } = DynamicTextValue({ 
 		textEnabled:            dynamicTextEnabled,
 		textSource:             dynamicTextSource, 
 		textField:              dynamicTextField,
@@ -107,6 +107,9 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		textTermsTaxonomy:      dynamicTextTermsTaxonomy,
 		textTermsSeparator:     dynamicTextTermsSeparator,
+
+		textLinkEnabled:        dynamicTextEnableLink,
+		textLinkSource:         dynamicTextLinkSource,
 
 		context,
 	});
