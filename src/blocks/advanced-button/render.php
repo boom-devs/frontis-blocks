@@ -2,7 +2,7 @@
 
 use FrontisBlocks\Utils\Helper;
 
-/* ---------- helpers (same as example) ---------- */
+/* ---------- helpers ---------- */
 if ( ! function_exists('fb_norm_str') ) {
     function fb_norm_str($val, $default = '') {
         if (is_array($val)) {
@@ -353,7 +353,7 @@ $advanced_btn_desktop      = ! empty( $attributes['advancedBtnDesktopSwitcher'] 
 $advanced_btn_tablet       = ! empty( $attributes['advancedBtnTabletSwitcher'] );
 $advanced_btn_mobile       = ! empty( $attributes['advancedBtnMobileSwitcher'] );
 
-/* ---------- dynamic attributes (same naming semantics as example) ---------- */
+/* ---------- dynamic attributes ---------- */
 $dynamic_enabled           = ! empty( $attributes['dynamicTextEnabled'] );
 $dynamic_source            = fb_norm_str( isset($attributes['dynamicTextSource']) ? $attributes['dynamicTextSource'] : 'current_post' );
 $dynamic_post_id_attr      = fb_norm_str( isset($attributes['dynamicTextPostId']) ? $attributes['dynamicTextPostId'] : 0 );
@@ -379,7 +379,7 @@ $dynamic_enable_link       = ! empty( $attributes['dynamicTextEnableLink'] );
 $dynamic_link_source       = fb_norm_str( isset($attributes['dynamicTextLinkSource']) ? $attributes['dynamicTextLinkSource'] : 'post_permalink' );
 
 /**
- * Disable dynamic if not pro active (same as example)
+ * Disable dynamic if not pro active
  */
 if ( ! Helper::isProActivated() ) {
     $dynamic_enabled     = false;
@@ -419,7 +419,7 @@ if ( $dynamic_enabled && $dynamic_enable_link && ! empty( $btn_dyn['link_url'] )
 }
 $final_target = $button_target_url ? ' target="_blank" rel="noopener noreferrer"' : '';
 
-/* ---------- classes (match example’s pattern) ---------- */
+/* ---------- classes ---------- */
 $responsive_classes = [];
 if ( $advanced_btn_desktop ) $responsive_classes[] = 'fb-desktop-responsive';
 if ( $advanced_btn_tablet  ) $responsive_classes[] = 'fb-tablet-responsive';

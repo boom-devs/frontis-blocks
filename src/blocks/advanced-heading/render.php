@@ -527,7 +527,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 		<div class="fb-advanced-heading-wrapper">
 			<<?php echo esc_attr( $heading_tag ); ?> class="fb-advanced-heading<?php echo $active_line_switcher ? ' active-line' : ''; ?>">
 				<?php if ( $dynamicTextEnabled && $dynamicTextEnableLink && $heading_link_url ) : ?>
-					<a class="fb-dynamic-link" href="<?php echo esc_url( $heading_link_url ); ?>">
+					<a class="fb-heading-dynamic-link" href="<?php echo esc_url( $heading_link_url ); ?>">
 						<?php echo wp_kses_post( $headingDisplayValue ); ?>
 					</a>
 				<?php else : ?>
@@ -540,7 +540,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 			<div class="fb-advanced-sub-heading-wrapper">
 				<<?php echo esc_attr( $sub_heading_tag ); ?> class="fb-advanced-sub-heading">
 					<?php if ( $dynamicSubHeadingTextEnabled && $dynamicSubHeadingTextEnableLink && $sub_heading_link_url ) : ?>
-						<a class="fb-dynamic-link" href="<?php echo esc_url( $sub_heading_link_url ); ?>">
+						<a class="fb-sub-heading-dynamic-link" href="<?php echo esc_url( $sub_heading_link_url ); ?>">
 							<?php echo wp_kses_post( $subHeadingDisplayValue ); ?>
 						</a>
 					<?php else : ?>
