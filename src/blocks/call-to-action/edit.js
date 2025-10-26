@@ -171,7 +171,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	/**
 	 * Dynamic Text Value for Title
 	 */
-	const { dynamicDisplayValue: dynamicTitleValue } = DynamicTextValue({
+	const { dynamicDisplayValue: dynamicTitleValue, dynamicDisplayLink: dynamicTitleLink } = DynamicTextValue({
 		textEnabled:            dynamicTitleEnabled,
 		textSource:             dynamicTitleSource,
 		textField:              dynamicTitleField,
@@ -194,13 +194,16 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		textTermsTaxonomy:      dynamicTitleTermsTaxonomy,
 		textTermsSeparator:     dynamicTitleTermsSeparator,
 
+		textLinkEnabled:        dynamicTitleEnableLink,
+		textLinkSource:         dynamicTitleLinkSource,
+
 		context,
 	});
 
 	/**
 	 * Dynamic Text Value for Description
 	 */
-	const { dynamicDisplayValue: dynamicDescriptionValue } = DynamicTextValue({
+	const { dynamicDisplayValue: dynamicDescriptionValue, dynamicDisplayLink: dynamicDescriptionLink } = DynamicTextValue({
 		textEnabled:            dynamicDescriptionEnabled,
 		textSource:             dynamicDescriptionSource,
 		textField:              dynamicDescriptionField,
@@ -223,13 +226,16 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		textTermsTaxonomy:      dynamicDescriptionTermsTaxonomy,
 		textTermsSeparator:     dynamicDescriptionTermsSeparator,
 
+		textLinkEnabled:        dynamicDescriptionEnableLink,
+		textLinkSource:         dynamicDescriptionLinkSource,
+
 		context,
 	});
 
 	/**
 	 * Dynamic Text Value for Button One Text
 	 */
-	const { dynamicDisplayValue: dynamicBtnOneValue } = DynamicTextValue({
+	const { dynamicDisplayValue: dynamicBtnOneValue, dynamicDisplayLink: dynamicBtnOneLink } = DynamicTextValue({
 		textEnabled:            dynamicBtnOneEnabled,
 		textSource:             dynamicBtnOneSource,
 		textField:              dynamicBtnOneField,
@@ -252,13 +258,16 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		textTermsTaxonomy:      dynamicBtnOneTermsTaxonomy,
 		textTermsSeparator:     dynamicBtnOneTermsSeparator,
 
+		textLinkEnabled:        dynamicBtnOneEnableLink,
+		textLinkSource:         dynamicBtnOneLinkSource,
+
 		context,
 	});
 
 	/**
 	 * Dynamic Text Value for Button Two Text
 	 */
-	const { dynamicDisplayValue: dynamicBtnTwoValue } = DynamicTextValue({
+	const { dynamicDisplayValue: dynamicBtnTwoValue, dynamicDisplayLink: dynamicBtnTwoLink } = DynamicTextValue({
 		textEnabled:            dynamicBtnTwoEnabled,
 		textSource:             dynamicBtnTwoSource,
 		textField:              dynamicBtnTwoField,
@@ -281,8 +290,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		textTermsTaxonomy:      dynamicBtnTwoTermsTaxonomy,
 		textTermsSeparator:     dynamicBtnTwoTermsSeparator,
 
+		textLinkEnabled:        dynamicBtnTwoEnableLink,
+		textLinkSource:         dynamicBtnTwoLinkSource,
+
 		context,
 	});
+
+	console.log(dynamicTitleLink);
 
 
 	return (
