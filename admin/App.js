@@ -40,25 +40,10 @@ const App = () => {
 
     return (
         <>
-            {/* <div className="fb-header-top">
-                <div className="fb-header-top-left">
-                    <Logo />
-                    <img src={window.frontisBlocksAdmin.logo} alt="Frontis Blocks" />
-                </div>
-                <div className="fb-header-top-right">
-                    {window.frontisBlocksAdmin.isProActive === 'false' && (
-                        <a 
-                            href={window.frontisBlocksAdmin.pro_url} 
-                            className="fb-upgrade-button"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Upgrade to Pro <Crown />
-                        </a>
-                    )}
-                </div>
-            </div> */}
             <div className="frontis-blocks-admin">
+                <div className='frontis-blocks-admin-top-bar'>
+                    <p>Unlock Fontis Block's Full Potential!  <a href='https://wordpress.org/plugins/frontis-blocks/upgrade/'><b>Upgrade Now </b></a> for exclusive features and unbeatable performance.</p>
+                </div>
                 <TabPanel
                     className="frontis-blocks-tab-panel"
                     activeClass="active-tab"
@@ -74,7 +59,7 @@ const App = () => {
                     {(tab) => {
                         // const activeTabData = TabMenus.find(t => t.id === tab.name);
                         return (
-                            <div className="frontis-blocks-tab-content">
+                            <div className={`frontis-blocks-tab-content ${tab.id}`}>
                                  {TabMenus.find(tab => tab.id === activeTab)?.comp}
                             </div>
                         );

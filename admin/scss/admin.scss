@@ -1,302 +1,314 @@
-@import url('https://fonts.googleapis.com/css2?family=Onest:ital,wght@0,200..800;1,200..800&family=Manrope:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Onest:wght@100..900&display=swap');
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 @import "variables";
-@import "blocks";
-@import "settings";
 @import "common";
-@import "integration";
-@import "pricing";
+@import "button";
+@import "topbar";
+@import "tabs";
+
+// Pages
 @import "dashboard";
-@import "setting-panel";
-@import "pro-badge";
+// @import "blocks";
+// @import "settings";
+// @import "common";
+// @import "integration";
+// @import "pricing";
+// @import "dashboard";
+// @import "setting-panel";
+// @import "pro-badge";
 
-#frontis-blocks-admin {
-  background-color: #f5f7fa;
-  background-image: url('../../assets/images/header-bg.svg');
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: 100% auto;
-  padding: 20px 0;
-  margin-left: -20px;
-}
+// #frontis-blocks-admin {
+//   background-color: #f5f7fa;
+//   background-image: url('../../assets/images/header-bg.svg');
+//   background-repeat: no-repeat;
+//   background-position: top center;
+//   background-size: 100% auto;
+//   padding: 20px 0;
+//   margin-left: -20px;
+// }
 
-.frontis-blocks-admin {
-  display: flex;
-  font-family: $body-font-family;
+// .frontis-blocks-admin {
+//   display: flex;
+//   font-family: $body-font-family;
   
-  .frontis-blocks-menu-list {
-    width: $sidebar-width;
-    background-color: $light-gray;
-    padding: $spacing-unit * 2.5;
+//   .frontis-blocks-menu-list {
+//     width: $sidebar-width;
+//     background-color: $light-gray;
+//     padding: $spacing-unit * 2.5;
     
-    .frontis-blocks-logo {
-      display: flex;
-      align-items: center;
-      margin-bottom: $spacing-unit * 2.5;
+//     .frontis-blocks-logo {
+//       display: flex;
+//       align-items: center;
+//       margin-bottom: $spacing-unit * 2.5;
       
-      h1 {
-        margin-left: $spacing-unit;
-        font-size: $base-font-size * 1.3;
-      }
-    }
+//       h1 {
+//         margin-left: $spacing-unit;
+//         font-size: $base-font-size * 1.3;
+//       }
+//     }
     
-    .frontis-blocks-menu-item {
-      display: flex;
-      align-items: center;
-      padding: $spacing-unit;
-      margin-bottom: $spacing-unit / 2;
-      cursor: pointer;
-      border: none;
-      background: none;
-      width: 100%;
-      text-align: left;
+//     .frontis-blocks-menu-item {
+//       display: flex;
+//       align-items: center;
+//       padding: $spacing-unit;
+//       margin-bottom: $spacing-unit / 2;
+//       cursor: pointer;
+//       border: none;
+//       background: none;
+//       width: 100%;
+//       text-align: left;
       
-      &.active {
-        background-color: $tab-active-background;
-        font-weight: bold;
-      }
+//       &.active {
+//         background-color: $tab-active-background;
+//         font-weight: bold;
+//       }
       
-      svg {
-        margin-right: $spacing-unit;
-      }
-    }
-  }
+//       svg {
+//         margin-right: $spacing-unit;
+//       }
+//     }
+//   }
   
-  .frontis-blocks-tab-panel {
-    flex-grow: 1;
-    padding: $spacing-unit * 2.5;
-    padding-top: 10px;
-  }
-}
+//   .frontis-blocks-tab-panel {
+//     flex-grow: 1;
+//     padding: $spacing-unit * 2.5;
+//     padding-top: 10px;
+//   }
+// }
 
-.frontis-tab-panel {
-  display: flex;
-  flex-direction: column;
-}
+// .frontis-tab-panel {
+//   display: flex;
+//   flex-direction: column;
+// }
 
-.frontis-tab-list {
-  display: flex;
-  border-bottom: 1px solid $border-color;
-}
+// .frontis-tab-list {
+//   display: flex;
+//   border-bottom: 1px solid $border-color;
+// }
 
-.frontis-tab-button {
-  display: flex;
-  align-items: center;
-  padding: $spacing-unit ($spacing-unit * 2);
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: background-color $transition-duration;
-}
+// .frontis-tab-button {
+//   display: flex;
+//   align-items: center;
+//   padding: $spacing-unit ($spacing-unit * 2);
+//   background: none;
+//   border: none;
+//   cursor: pointer;
+//   transition: background-color $transition-duration;
+// }
 
 
-.frontis-tab-button.active-tab {
-  background-color: $tab-background;
-  border-bottom: 2px solid $primary-color;
-}
+// .frontis-tab-button.active-tab {
+//   background-color: $tab-background;
+//   border-bottom: 2px solid $primary-color;
+// }
 
-.frontis-tab-button svg {
-  height: $spacing-unit * 2.5;
-  width: $spacing-unit * 2.5;
-  margin-right: $spacing-unit;
-}
+// .frontis-tab-button svg {
+//   height: $spacing-unit * 2.5;
+//   width: $spacing-unit * 2.5;
+//   margin-right: $spacing-unit;
+// }
 
-.frontis-tab-content {
-  background: $tab-active-background;
-  padding: $spacing-unit * 2.5;
-  border-radius: $border-radius;
-  margin-top: $spacing-unit * 3.75;
-}
+// .frontis-tab-content {
+//   background: $tab-active-background;
+//   padding: $spacing-unit * 2.5;
+//   border-radius: $border-radius;
+//   margin-top: $spacing-unit * 3.75;
+// }
 
-.fb-header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: $spacing-unit * 2.5;
-  padding: $spacing-unit ($spacing-unit * 2.5);
-  // margin-top: $spacing-unit * 3.75;
+// .fb-header-top {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   margin-bottom: $spacing-unit * 2.5;
+//   padding: $spacing-unit ($spacing-unit * 2.5);
+//   // margin-top: $spacing-unit * 3.75;
 
-  &-left {
-    svg {
-      height: $spacing-unit * 7.75;
-      width: $spacing-unit * 23;
-    }
-    .fb-title {
-      font-size: $base-font-size * 1.7;
-      font-weight: bold;
-      color: $text-color;
-      margin: 0;
-    }
-  }
-}
+//   &-left {
+//     svg {
+//       height: $spacing-unit * 7.75;
+//       width: $spacing-unit * 23;
+//     }
+//     .fb-title {
+//       font-size: $base-font-size * 1.7;
+//       font-weight: bold;
+//       color: $text-color;
+//       margin: 0;
+//     }
+//   }
+// }
 
-.fb-blocks-tab-panel {
-  display: flex;
-  flex-direction: column;
-  border-radius: 4px;
-  // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
+// .fb-blocks-tab-panel {
+//   display: flex;
+//   flex-direction: column;
+//   border-radius: 4px;
+//   // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+// }
 
-.fb-blocks-tab-panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 24px;
-  border-bottom: 1px solid #e2e4e7;
-  background-color: #fff;
-  margin-bottom: 30px;
-  border-radius: 14px;
+// .fb-blocks-tab-panel-header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 24px;
+//   border-bottom: 1px solid #e2e4e7;
+//   background-color: #fff;
+//   margin-bottom: 30px;
+//   border-radius: 14px;
 
-  .fb-blocks-tab-panel-header-left {
-    display: flex;
-    align-items: center;
-    gap: 72px;
+//   .fb-blocks-tab-panel-header-left {
+//     display: flex;
+//     align-items: center;
+//     gap: 72px;
 
-    .fb-blocks-tab-panel-logo {
-      height: 32px;
+//     .fb-blocks-tab-panel-logo {
+//       height: 32px;
 
-      svg {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
-}
+//       svg {
+//         width: 100%;
+//         height: 100%;
+//       }
+//     }
+//   }
+// }
 
-.fb-blocks-tab-list {
-  display: flex;
-  gap: 16px;
-}
+// .fb-blocks-tab-list {
+//   display: flex;
+//   gap: 16px;
+// }
 
-.fb-blocks-tab-button {
-  display: flex;
-  align-items: center;
-  padding: 12px 16px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: $neutral-color-600;
-  font-family: $body-font-family;
-  font-size: 16px;
-  line-height: 1.5;
-  font-weight: 500;
+// .fb-blocks-tab-button {
+//   display: flex;
+//   align-items: center;
+//   padding: 12px 16px;
+//   background: none;
+//   border: none;
+//   cursor: pointer;
+//   transition: all 0.3s ease;
+//   color: $neutral-color-600;
+//   font-family: $body-font-family;
+//   font-size: 16px;
+//   line-height: 1.5;
+//   font-weight: 500;
 
-  &:hover {
-    color: $primary-color;
-  }
+//   &:hover {
+//     color: $primary-color;
+//   }
 
-  &.fb-blocks-active-tab {
-    color: $primary-color;
-    background-color: $primary-color-50;
-    border-radius: 10px;
-  }
+//   &.fb-blocks-active-tab {
+//     color: $primary-color;
+//     background-color: $primary-color-50;
+//     border-radius: 10px;
+//   }
 
-  svg {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-  }
-}
+//   svg {
+//     width: 20px;
+//     height: 20px;
+//     margin-right: 8px;
+//   }
+// }
 
-.fb-blocks-version {
-  font-size: 14px;
-  color: $text-muted;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+// .fb-blocks-version {
+//   font-size: 14px;
+//   color: $text-muted;
+//   display: flex;
+//   align-items: center;
+//   gap: 8px;
 
-  .fb-version {
-    padding: 2px 8px;
-    border-radius: 6px;
-    background-color: $primary-color-50;
-    color: $primary-color;
-  }
-  .fb-version-icon {
-    width: 20px;
-    height: 20px;
+//   .fb-version {
+//     padding: 2px 8px;
+//     border-radius: 6px;
+//     background-color: $primary-color-50;
+//     color: $primary-color;
+//   }
+//   .fb-version-icon {
+//     width: 20px;
+//     height: 20px;
 
-    svg {
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
+//     svg {
+//       width: 100%;
+//       height: 100%;
+//     }
+//   }
+// }
 
-#wpbody .notice {
-  display: none;
-}
+// #wpbody .notice {
+//   display: none;
+// }
 
-.interface-interface-skeletonbody  {
-  &.interface-interface-skeletoncontent { 
-    overflow-x: hidden;
-  }
-}
+// .interface-interface-skeletonbody  {
+//   &.interface-interface-skeletoncontent { 
+//     overflow-x: hidden;
+//   }
+// }
 
-.interface-navigable-region{
-  &.interface-interface-skeleton__content {
-    overflow-x: hidden;
-  }
-}
+// .interface-navigable-region{
+//   &.interface-interface-skeleton__content {
+//     overflow-x: hidden;
+//   }
+// }
 
-/**
-  Global Headings typography buttons
-*/
-.fb-global-typography-headings-wrap {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  background: #F8F8F8 !important;
-  border-width: 0 !important;
-  border-style: none !important;
-  border-image: initial !important;
-  min-width: 0px !important;
-  position: relative !important;
-  padding: 0 !important;
+// /**
+//   Global Headings typography buttons
+// */
+// .fb-global-typography-headings-wrap {
+//   display: grid !important;
+//   grid-template-columns: repeat(4, 1fr) !important;
+//   background: #F8F8F8 !important;
+//   border-width: 0 !important;
+//   border-style: none !important;
+//   border-image: initial !important;
+//   min-width: 0px !important;
+//   position: relative !important;
+//   padding: 0 !important;
 
-  &:before {
-    background: transparent !important;
-  }
-  &:focus {
-    outline: none !important;
-    box-shadow: none !important;
-  }
-  &:focus-within {
-    outline: none !important;
-    box-shadow: none !important;
-  }
+//   &:before {
+//     background: transparent !important;
+//   }
+//   &:focus {
+//     outline: none !important;
+//     box-shadow: none !important;
+//   }
+//   &:focus-within {
+//     outline: none !important;
+//     box-shadow: none !important;
+//   }
 
-  button {
-    padding: 8px 10px !important;
-    height: 44px !important;
-    color: #050607 !important;
-    background: #F8F8F8 !important;
-    padding: 12px 16px !important;
-    height: 44px !important;
-    font-family: "Manrope", sans-serif;
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    line-height: 16px !important;
-    border: 1px solid #FFFFFF !important;
+//   button {
+//     padding: 8px 10px !important;
+//     height: 44px !important;
+//     color: #050607 !important;
+//     background: #F8F8F8 !important;
+//     padding: 12px 16px !important;
+//     height: 44px !important;
+//     font-family: "Manrope", sans-serif;
+//     font-size: 13px !important;
+//     font-weight: 600 !important;
+//     line-height: 16px !important;
+//     border: 1px solid #FFFFFF !important;
 
-    &:focus {
-      outline: none !important;
-      box-shadow: none !important;
-    }
+//     &:focus {
+//       outline: none !important;
+//       box-shadow: none !important;
+//     }
 
-    &.fb-global-typography-element-heading {
+//     &.fb-global-typography-element-heading {
 
-      &:hover {
-        background-color: #E1E3E8 !important;
-        cursor: pointer !important;
-      }
+//       &:hover {
+//         background-color: #E1E3E8 !important;
+//         cursor: pointer !important;
+//       }
 
-      &[aria-checked="true"] {  
-        background-color: #E1E3E8 !important;
-        color: #050607 !important;
-      }
-    }
-  }
-}
-.highlight-tabs .components-tab-panel__tabs-item.active-tab {
-  border-bottom: 2px solid #399CFF;
-}
+//       &[aria-checked="true"] {  
+//         background-color: #E1E3E8 !important;
+//         color: #050607 !important;
+//       }
+//     }
+//   }
+// }
+// .highlight-tabs .components-tab-panel__tabs-item.active-tab {
+//   border-bottom: 2px solid #399CFF;
+// }
