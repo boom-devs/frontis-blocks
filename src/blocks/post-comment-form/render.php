@@ -11,6 +11,9 @@ $show_comment_form = isset($attributes['showCommentForm']) ? (bool) $attributes[
 
 $form_title = isset($attributes['formTitle']) ? sanitize_text_field($attributes['formTitle']) : '';
 $cancel_reply_text = isset($attributes['cancelReplyText']) ? sanitize_text_field($attributes['cancelReplyText']) : '';
+$login_text = isset($attributes['loginText']) ? sanitize_text_field($attributes['loginText']) : '';
+$logout_text = isset($attributes['logoutText']) ? sanitize_text_field($attributes['logoutText']) : '';
+$button_text = isset($attributes['buttonText']) ? sanitize_text_field($attributes['buttonText']) : '';
 
 // Style Attributes
 $block_style = isset($attributes['blockStyle']) ? $attributes['blockStyle'] : '';
@@ -265,12 +268,14 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
 
                 <?php if ($current_user->exists()) : ?>
                     <p class="fb-logged-in-as">
-                        <?php
-                        printf(
-                            __('Logged in as %s. %s', 'frontis-blocks'),
-                            '<strong>' . esc_html($user_identity) . '</strong>',
-                            '<a href="' . wp_logout_url(apply_filters('the_permalink', get_permalink($post_id))) . '">' . __('Log Out?', 'frontis-blocks') . '</a>'
-                        );
+                         <?php
+                            printf(
+                                __('%s %s. %s', 'frontis-blocks'),
+                                esc_html($login_text ?: __('Logged in as', 'frontis-blocks')),
+                                '<strong>' . esc_html($user_identity) . '</strong>',
+                                '<a href="' . wp_logout_url(apply_filters('the_permalink', get_permalink($post_id))) . '">' . 
+                                esc_html($logout_text ?: __('Log out?', 'frontis-blocks')) . '</a>'
+                            );
                         ?>
                     </p>
                 <?php endif; ?>
@@ -288,7 +293,7 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
 
                 $comment_form_args = [
                     'title_reply' => '',
-                    'label_submit' => __('Post Comment', 'frontis-blocks'),
+                    'label_submit' => $button_text ?: __('Post Comment', 'frontis-blocks'),
                     'cancel_reply_link' => $cancel_reply_text ?: __('Cancel reply', 'frontis-blocks'),
                     'comment_field' => '<p class="fb-comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" placeholder="' . __('Comment', 'frontis-blocks') . ' *"></textarea></p>',
                     'fields' => apply_filters('comment_form_default_fields', $fields),
@@ -297,6 +302,7 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
                     'id_form' => 'commentform',
                     'id_submit' => 'submit',
                     'must_log_in' => '<p class="must-log-in">' . sprintf(__('You must be <a href="%s">logged in</a> to post a comment.', 'frontis-blocks'), wp_login_url(apply_filters('the_permalink', get_permalink($post_id)))) . '</p>',
+                    'logged_in_as' => '',
                 ];
 
                 comment_form($comment_form_args, $post_id);

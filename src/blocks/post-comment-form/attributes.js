@@ -19,6 +19,7 @@ const attributes = {
     },
     
 
+   
     // Form Text Customization
     formTitle: {
         type: "string",
@@ -26,6 +27,18 @@ const attributes = {
     },
     cancelReplyText: {
         type: "string", 
+        default: "",
+    },
+    loginText: {
+        type: "string",
+        default: "",
+    },
+    logoutText: {
+        type: "string",
+        default: "",
+    },
+    buttonText: {
+        type: "string",
         default: "",
     },
 

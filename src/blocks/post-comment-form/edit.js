@@ -12,6 +12,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
         formTitle,
         cancelReplyText,
+        loginText,
+        logoutText,
+        buttonText,
 
         commentFormWidth,
         commentGap,
@@ -169,8 +172,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 </a>
                             </div>
 
-                            <p className="fb-logged-in-as">
+                            {/* <p className="fb-logged-in-as">
                                 Logged in as <strong>Admin</strong>. <a href="#">Log Out?</a>
+                            </p> */}
+
+                            <p className="fb-logged-in-as">
+                                {loginText || __('Logged in as', 'frontis-blocks')} <strong>Admin</strong>.{' '}
+                                <a href="#">{logoutText || __('Log out?', 'frontis-blocks')}</a>
                             </p>
 
                             <form className="fb-comment-form-element" id="commentform">
@@ -214,8 +222,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 
                                 <p className="form-submit">
                                     <button type="submit" className="fb-post-comment-btn" disabled>
-                                        Post Comment
+                                         {buttonText || __('Post Comment', 'frontis-blocks')}
                                     </button>
+                                    
                                 </p>
                             </form>
                         </div>

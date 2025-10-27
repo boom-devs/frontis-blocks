@@ -28,6 +28,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         formTitle,
         cancelReplyText,
+        loginText,
+        logoutText,
+        buttonText,
         
         commentFormDesktopSwitcher,
         commentFormTabletSwitcher,
@@ -385,6 +388,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     onChangeValue={(value) => setAttributes({ cancelReplyText: value })}
                     placeholder={__("Cancel reply", "frontis-blocks")}
                 /> 
+
+                <FB_InputControl
+                    label={__("Login Text", "frontis-blocks")}
+                    value={loginText}
+                    onChangeValue={(value) => setAttributes({ loginText: value })}
+                    placeholder={__("Logged in as", "frontis-blocks")}
+                />
+
+                <FB_InputControl
+                    label={__("Logout Text", "frontis-blocks")}
+                    value={logoutText}
+                    onChangeValue={(value) => setAttributes({ logoutText: value })}
+                    placeholder={__("Log out?", "frontis-blocks")}
+                />
+
+                <FB_InputControl
+                    label={__("Button Text", "frontis-blocks")}
+                    value={buttonText}
+                    onChangeValue={(value) => setAttributes({ buttonText: value })}
+                    placeholder={__("Post Comment", "frontis-blocks")}
+                />
             </BaseControl>
 
 
