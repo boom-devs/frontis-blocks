@@ -246,7 +246,8 @@
 
 .fb-post-comment-form-block {
     // Pending comment moderation notice
-    .fb-comment-moderation-notice {
+    .fb-comment-moderation-notice,
+    .fb-comment-form .comment-notes {
         background: #fff8e5;
         border: 1px solid #ffd67a;
         border-radius: 4px;
@@ -259,7 +260,8 @@
     }
     
     // Style pending comments
-    .fb-comment-pending {
+    .fb-comment-pending,
+    .fb-comment-form .comment-notes .required-field-message {
         opacity: 0.8;
     }
     
@@ -268,3 +270,4 @@
         display: none;
     }
 }
+

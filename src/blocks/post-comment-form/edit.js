@@ -68,7 +68,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             {/* Parent Comment 1 */}
                             <div id="comment-1" className="fb-comment fb-comment-parent depth-1">
                                 <img 
-                                    src={FrontisBlocksData?.pluginUrl + 'assets/images/avatar-placeholder.png'} 
+                                    src={FrontisBlocksData?.pluginUrl + 'assets/images/preset-bg.jpg'} 
                                     alt="" 
                                     className="fb-comment-avatar" 
                                 />
@@ -171,10 +171,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     {cancelReplyText || __('Cancel reply', 'frontis-blocks')}
                                 </a>
                             </div>
-
-                            {/* <p className="fb-logged-in-as">
-                                Logged in as <strong>Admin</strong>. <a href="#">Log Out?</a>
-                            </p> */}
 
                             <p className="fb-logged-in-as">
                                 {loginText || __('Logged in as', 'frontis-blocks')} <strong>Admin</strong>.{' '}
