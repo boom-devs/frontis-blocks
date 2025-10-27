@@ -248,19 +248,23 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
                 ?>
             </div>
 
-        <!-- Comment Form -->
+        <!-- Manual Comment Form -->
         <?php if ($show_comment_form) : ?>
+            <?php
+            $commenter = wp_get_current_commenter();
+            $req = get_option('require_name_email');
+            $aria_req = $req ? " aria-required='true'" : '';
+            $html5 = current_theme_supports('html5', 'comment-form');
+            $consent = empty($commenter['comment_author_email']) ? '' : ' checked="checked"';
+            ?>
+            
             <div id="respond" class="fb-comment-form">
                 <div class="fb-comment-form-header">
                     <strong class="fb-reply-title">
-                        
-                        <?php
-                           echo esc_html($form_title ?: __('Leave a Reply', 'frontis-blocks'));
-                        ?>
+                        <?php echo esc_html($form_title ?: __('Leave a Reply', 'frontis-blocks')); ?>
                     </strong>
                     <?php if (get_option('thread_comments')) : ?>
                         <a href="#respond" id="cancel-comment-reply-link" class="fb-cancel-reply" style="display: none;" rel="nofollow">
-                              <!-- UPDATED: Use custom cancel reply text or default -->
                             <?php echo esc_html($cancel_reply_text ?: __('Cancel reply', 'frontis-blocks')); ?>
                         </a>
                     <?php endif; ?>
@@ -268,7 +272,7 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
 
                 <?php if ($current_user->exists()) : ?>
                     <p class="fb-logged-in-as">
-                         <?php
+                        <?php
                             printf(
                                 __('%s %s. %s', 'frontis-blocks'),
                                 esc_html($login_text ?: __('Logged in as', 'frontis-blocks')),
@@ -278,35 +282,105 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
                             );
                         ?>
                     </p>
+                <?php else : ?>
+                    <p class="fb-logged-in-as">
+                        Your email address will not be published. Required fields are marked *
+                    </p>
                 <?php endif; ?>
 
-                <?php
-                $commenter = wp_get_current_commenter();
-                $req = get_option('require_name_email');
-                $aria_req = $req ? " aria-required='true'" : '';
+                <form action="<?php echo esc_url(site_url('/wp-comments-post.php')); ?>" method="post" class="fb-comment-form-element" id="commentform">
+                    
+                    <?php if (!$current_user->exists()) : ?>
+                        <!-- Name Field -->
+                        <div class="fb-comment-form-author">
+                            <input 
+                                id="author" 
+                                name="author" 
+                                type="text" 
+                                value="<?php echo esc_attr($commenter['comment_author']); ?>" 
+                                size="30" 
+                                <?php echo $aria_req; ?>
+                                placeholder="<?php echo esc_attr(__('Name', 'frontis-blocks') . ($req ? ' *' : '')); ?>" 
+                            />
+                        </div>
+                        
+                        <!-- Email Field -->
+                        <div class="fb-comment-form-email">
+                            <input 
+                                id="email" 
+                                name="email" 
+                                type="email" 
+                                value="<?php echo esc_attr($commenter['comment_author_email']); ?>" 
+                                size="30" 
+                                <?php echo $aria_req; ?>
+                                placeholder="<?php echo esc_attr(__('Email', 'frontis-blocks') . ($req ? ' *' : '')); ?>" 
+                            />
+                        </div>
+                        
+                        <!-- Website Field -->
+                        <div class="fb-comment-form-url">
+                            <input 
+                                id="url" 
+                                name="url" 
+                                type="url" 
+                                value="<?php echo esc_attr($commenter['comment_author_url']); ?>" 
+                                size="30" 
+                                placeholder="<?php echo esc_attr(__('Website', 'frontis-blocks')); ?>" 
+                            />
+                        </div>
+                        
+                        <!-- Cookies Consent -->
+                        <?php if (has_action('set_comment_cookies', 'wp_set_comment_cookies') && get_option('show_comments_cookies_opt_in')) : ?>
+                        <div class="comment-form-cookies-consent">
+                            <input 
+                                id="wp-comment-cookies-consent" 
+                                name="wp-comment-cookies-consent" 
+                                type="checkbox" 
+                                value="yes" 
+                                <?php echo $consent; ?> 
+                            />
+                            <label for="wp-comment-cookies-consent">
+                                <?php _e('Save my name, email, and website in this browser for the next time I comment.', 'frontis-blocks'); ?>
+                            </label>
+                        </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
 
-                $fields = [
-                    'author' => '<p class="fb-comment-form-author"><input id="author" name="author" type="text" value="' . esc_attr($commenter['comment_author']) . '" size="30"' . $aria_req . ' placeholder="' . __('Name', 'frontis-blocks') . ($req ? ' *' : '') . '" /></p>',
-                    'email' => '<p class="fb-comment-form-email"><input id="email" name="email" type="email" value="' . esc_attr($commenter['comment_author_email']) . '" size="30"' . $aria_req . ' placeholder="' . __('Email', 'frontis-blocks') . ($req ? ' *' : '') . '" /></p>',
-                    'url' => '<p class="fb-comment-form-url"><input id="url" name="url" type="url" value="' . esc_attr($commenter['comment_author_url']) . '" size="30" placeholder="' . __('Website', 'frontis-blocks') . '" /></p>',
-                ];
+                    <!-- Comment Field -->
+                    <div class="fb-comment-form-comment">
+                        <textarea 
+                            id="comment" 
+                            class="fb-comment-textarea"
+                            name="comment" 
+                            cols="45" 
+                            rows="8" 
+                            aria-required="true"
+                            placeholder="<?php esc_attr_e('Comment *', 'frontis-blocks'); ?>"
+                        ></textarea>
+                    </div>
 
-                $comment_form_args = [
-                    'title_reply' => '',
-                    'label_submit' => $button_text ?: __('Post Comment', 'frontis-blocks'),
-                    'cancel_reply_link' => $cancel_reply_text ?: __('Cancel reply', 'frontis-blocks'),
-                    'comment_field' => '<p class="fb-comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" placeholder="' . __('Comment', 'frontis-blocks') . ' *"></textarea></p>',
-                    'fields' => apply_filters('comment_form_default_fields', $fields),
-                    'class_form' => 'fb-comment-form-element',
-                    'class_submit' => 'fb-post-comment-btn',
-                    'id_form' => 'commentform',
-                    'id_submit' => 'submit',
-                    'must_log_in' => '<p class="must-log-in">' . sprintf(__('You must be <a href="%s">logged in</a> to post a comment.', 'frontis-blocks'), wp_login_url(apply_filters('the_permalink', get_permalink($post_id)))) . '</p>',
-                    'logged_in_as' => '',
-                ];
+                    <!-- Hidden Fields Required by WordPress -->
+                    <input type="hidden" name="comment_post_ID" value="<?php echo esc_attr($post_id); ?>" id="comment_post_ID" />
+                    <input type="hidden" name="comment_parent" id="comment_parent" value="0" />
+                    
+                    <!-- WordPress Security Nonce - CRITICAL -->
+                    <?php wp_nonce_field('comment_form', '_wp_unfiltered_html_comment'); ?>
+                    
+                    <!-- WordPress Comment Form Action - CRITICAL -->
+                    <?php do_action('comment_form', $post_id); ?>
 
-                comment_form($comment_form_args, $post_id);
-                ?>
+                    <!-- Submit Button -->
+                    <div class="form-submit">
+                        <button 
+                            name="submit" 
+                            type="submit" 
+                            id="submit" 
+                            class="fb-post-comment-btn" 
+                        >
+                            <?php echo esc_attr($button_text ?: __('Post Comment', 'frontis-blocks')); ?>
+                        </button>
+                    </div>
+                </form>
             </div>
         <?php endif; ?>
 

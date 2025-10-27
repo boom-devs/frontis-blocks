@@ -221,7 +221,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 text-decoration: underline;
             }
 
-            .${blockId} .fb-comment-textarea {
+            .${blockId} .fb-comment-form-element .fb-comment-textarea {
                 width: 100%;
                 padding: 12px 15px;
                 border: 1px solid #ddd;
@@ -236,7 +236,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 box-sizing: border-box;
             }
 
+            .${blockId} .fb-comment-form-element div > input{
+                width: 100%;
+                padding: 12px 15px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 14px;
+                font-family: inherit;
+                line-height: 1.4;
+                background: #fff;
+                resize: vertical;
+                margin-bottom: 15px;
+                box-sizing: border-box;
+            }
+
             .${blockId} .fb-comment-textarea:focus {
+                outline: none;
+                border-color: #2271b1;
+                box-shadow: 0 0 0 1px #2271b1;
+            }
+
+            .${blockId} .fb-comment-form-element div > input:focus {
                 outline: none;
                 border-color: #2271b1;
                 box-shadow: 0 0 0 1px #2271b1;

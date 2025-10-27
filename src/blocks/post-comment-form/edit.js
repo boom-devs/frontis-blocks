@@ -65,39 +65,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
                     {/* Comments List with Proper Nested Structure */}
                         <div className="fb-comments-list">
-                            {/* Parent Comment 1 */}
+                            {/* Parent Comment 1 with Nested Reply */}
                             <div id="comment-1" className="fb-comment fb-comment-parent depth-1">
-                                <img 
-                                    src={FrontisBlocksData?.pluginUrl + 'assets/images/preset-bg.jpg'} 
-                                    alt="" 
-                                    className="fb-comment-avatar" 
-                                />
-                                <div className="fb-comment-body">
-                                    <strong className="fb-comment-author">admin</strong>
-                                    <span className="fb-comment-meta">
-                                        October 23, 2025 at 10:53 am
-                                    </span>
-                                    <div className="fb-comment-content">
-                                        <p>another test comment</p>
-                                    </div>
-                                    <div className="fb-comment-reply">
-                                        <a 
-                                            href="#comment-1" 
-                                            className="comment-reply-link"
-                                            data-commentid="1"
-                                            data-postid="1"
-                                            data-belowelement="comment-1"
-                                            data-respondelement="respond"
-                                            aria-label="Reply to admin"
-                                        >
-                                            Reply
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Parent Comment 2 with Nested Reply */}
-                            <div id="comment-2" className="fb-comment fb-comment-parent depth-1">
                                 <img 
                                     src={FrontisBlocksData?.pluginUrl + 'assets/images/preset-bg.jpg'} 
                                     alt="" 
@@ -113,11 +82,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     </div>
                                     <div className="fb-comment-reply">
                                         <a 
-                                            href="#comment-2" 
+                                            href="#comment-1" 
                                             className="comment-reply-link"
-                                            data-commentid="2"
+                                            data-commentid="1"
                                             data-postid="1"
-                                            data-belowelement="comment-2"
+                                            data-belowelement="comment-1"
                                             data-respondelement="respond"
                                             aria-label="Reply to admin"
                                         >
@@ -127,7 +96,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
                                     {/* Nested Reply Comment */}
                                     <div className="fb-comment-children">
-                                        <div id="comment-3" className="fb-comment fb-comment-child depth-2">
+                                        <div id="comment-2" className="fb-comment fb-comment-child depth-2">
                                             <img 
                                                 src={FrontisBlocksData?.pluginUrl + 'assets/images/preset-bg.jpg'} 
                                                 alt="" 
@@ -143,11 +112,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                 </div>
                                                 <div className="fb-comment-reply">
                                                     <a 
-                                                        href="#comment-3" 
+                                                        href="#comment-2" 
                                                         className="comment-reply-link"
-                                                        data-commentid="3"
+                                                        data-commentid="2"
                                                         data-postid="1"
-                                                        data-belowelement="comment-3"
+                                                        data-belowelement="comment-2"
                                                         data-respondelement="respond"
                                                         aria-label="Reply to user"
                                                     >
@@ -178,7 +147,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             </p>
 
                             <form className="fb-comment-form-element" id="commentform">
-                                <p className="fb-comment-form-author">
+                                <div className="fb-comment-form-author">
                                     <input 
                                         type="text" 
                                         id="author" 
@@ -186,8 +155,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         placeholder="Name *" 
                                         disabled 
                                     />
-                                </p>
-                                <p className="fb-comment-form-email">
+                                </div>
+                                <div className="fb-comment-form-email">
                                     <input 
                                         type="email" 
                                         id="email" 
@@ -195,8 +164,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         placeholder="Email *" 
                                         disabled 
                                     />
-                                </p>
-                                <p className="fb-comment-form-url">
+                                </div>
+                                <div className="fb-comment-form-url">
                                     <input 
                                         type="url" 
                                         id="url" 
@@ -204,24 +173,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         placeholder="Website" 
                                         disabled 
                                     />
-                                </p>
-                                <p className="fb-comment-form-comment">
+                                </div>
+                                <div className="fb-comment-form-comment">
                                     <textarea 
                                         id="comment" 
+                                        className='fb-comment-textarea'
                                         name="comment" 
                                         placeholder="Comment *" 
                                         rows="8"
                                         disabled
                                     ></textarea>
-                                </p>
+                                </div>
                                 <input type="hidden" id="comment_parent" name="comment_parent" value="0" />
                                 
-                                <p className="form-submit">
+                                <div className="form-submit">
                                     <button type="submit" className="fb-post-comment-btn" disabled>
                                          {buttonText || __('Post Comment', 'frontis-blocks')}
                                     </button>
                                     
-                                </p>
+                                </div>
                             </form>
                         </div>
                     )}
