@@ -15,6 +15,7 @@ class Admin {
 
     public function __construct() {
         add_action('admin_menu', array( $this, 'add_menu_page' ) );
+        add_action('admin_init', array($this, 'remove_admin_notices'));
         add_action('admin_enqueue_scripts', [$this, 'enqueue_styles']);
         add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
         add_action( 'plugin_action_links', [ $this, 'fb_menu_action_links' ], 10, 2 );
@@ -130,6 +131,13 @@ class Admin {
         // Init template proxy
         add_rewrite_rule('^template-proxy/?$', 'index.php?template_proxy=1', 'top');
         flush_rewrite_rules(false);
+    }
+
+    public function remove_admin_notices() {
+        if(isset($_GET['page']) && $_GET['page'] === 'frontis-blocks') {
+            remove_all_actions('admin_notices');
+            remove_all_actions('all_admin_notices');
+        }
     }
 
     public function add_menu_page(){

@@ -1,0 +1,25 @@
+.toplevel_page_frontis-blocks{
+    #wpcontent {
+        padding-left: 0;
+    }
+}
+
+.frontis-blocks-admin-top-bar {
+    background-color: $primary-color;
+
+    p {
+        margin: 0;
+        padding: 12px;
+        font-family: $body-font-family;
+        font-size: 14px;
+        line-height: 1.3;
+        text-align: center;
+        color: #EBF4FF;
+
+        a {
+            b {
+                color: $white-color;
+            }
+        }
+    }
+}
