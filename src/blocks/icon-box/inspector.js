@@ -2378,7 +2378,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			align-items: ${iconBoxIconVerticalPosition === "v-top" ? "flex-start" : iconBoxIconVerticalPosition === "v-middle" ? "center" : iconBoxIconVerticalPosition === "v-bottom" ? "flex-end" : "flex-start"};
 		  }
 	  
-		  .fb-icon-box-wrapper.${blockID} .fb-heading {
+		  .fb-icon-box-wrapper.${blockID} .fb-heading,
+		  .fb-icon-box-wrapper.${blockID} .fb-heading .fb-title-dynamic-link {
 			  ${Heading_Color ? `color: ${Heading_Color};` : ""}
 			  ${Heading_Background_Color ? `background-color: ${Heading_Background_Color};` : "" }
 
@@ -2410,14 +2411,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  transition: all .3s ease-in-out;
 			}
 	  
-		  .fb-icon-box-wrapper.${blockID}:hover .fb-heading {
+		  .fb-icon-box-wrapper.${blockID}:hover .fb-heading,
+		  .fb-icon-box-wrapper.${blockID}:hover .fb-heading .fb-title-dynamic-link {
 			  ${Heading_Hover_Color ? `color: ${Heading_Hover_Color};` : ""}
 			  ${ Heading_Border_Hover_Color ? `border-color: ${Heading_Border_Hover_Color};` : "" }
 			  transition: all .3s ease-in-out;
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			  .fb-icon-box-wrapper.${blockID} .fb-heading {
+			  .fb-icon-box-wrapper.${blockID} .fb-heading,
+			  .fb-icon-box-wrapper.${blockID} .fb-heading .fb-title-dynamic-link {
 				  ${headingGlobalTypoSwitcher?.fontSize === false && headingFontSize?.Tablet && headingFontSizeUnits?.Tablet ? `font-size: ${headingFontSize?.Tablet}${headingFontSizeUnits?.Tablet};` : ''}
                   ${headingGlobalTypoSwitcher?.letterSpacing === false && headingLetterSpacing?.Tablet && headingLetterSpacingUnits?.Tablet ? `letter-spacing: ${headingLetterSpacing?.Tablet}${headingLetterSpacingUnits?.Tablet};` : ''}
                   ${headingGlobalTypoSwitcher?.lineHeight === false && headingLineHeight?.Tablet && headingLineHeightUnits?.Tablet ? `line-height: ${headingLineHeight?.Tablet}${headingLineHeightUnits?.Tablet};` : ''}
@@ -2428,7 +2431,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  }
 		  }
 		  @media only screen and (max-width: 724px) {
-			  .fb-icon-box-wrapper.${blockID} .fb-heading {
+			  .fb-icon-box-wrapper.${blockID} .fb-heading,
+			  .fb-icon-box-wrapper.${blockID} .fb-heading .fb-title-dynamic-link {
 				  ${headingGlobalTypoSwitcher?.fontSize === false && headingFontSize?.Mobile && headingFontSizeUnits?.Mobile ? `font-size: ${headingFontSize?.Mobile}${headingFontSizeUnits?.Mobile};` : ''}
                   ${headingGlobalTypoSwitcher?.letterSpacing === false && headingLetterSpacing?.Mobile && headingLetterSpacingUnits?.Mobile ? `letter-spacing: ${headingLetterSpacing?.Mobile}${headingLetterSpacingUnits?.Mobile};` : ''}
                   ${headingGlobalTypoSwitcher?.lineHeight === false && headingLineHeight?.Mobile && headingLineHeightUnits?.Mobile ? `line-height: ${headingLineHeight?.Mobile}${headingLineHeightUnits?.Mobile};` : ''}
@@ -2439,7 +2443,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  }
 		  }
 
-		.fb-icon-box-wrapper.${blockID} .fb-description {
+		.fb-icon-box-wrapper.${blockID} .fb-description,
+		.fb-icon-box-wrapper.${blockID} .fb-description .fb-description-dynamic-link {
 			${subHeadingGlobalTypoSwitcher?.fontFamily === true && subHeadingGlobalTypographyData?.fontFamily ? `font-family: ${subHeadingGlobalTypographyData?.fontFamily};` : ''}
 			${subHeadingGlobalTypoSwitcher?.fontSize === true && subHeadingGlobalTypographyData?.fontSize ? `font-size: ${subHeadingGlobalTypographyData?.fontSize};` : ''}
 			${subHeadingGlobalTypoSwitcher?.fontWeight === true && subHeadingGlobalTypographyData?.fontWeight ? `font-weight: ${subHeadingGlobalTypographyData?.fontWeight};` : ''}
@@ -2465,12 +2470,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 
-		.fb-icon-box-wrapper.${blockID}:hover .fb-description {
+		.fb-icon-box-wrapper.${blockID}:hover .fb-description,
+		.fb-icon-box-wrapper.${blockID}:hover .fb-description .fb-description-dynamic-link {
 			${ SubHeadingHoverColor ? `color: ${SubHeadingHoverColor};` : "" }
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.fb-icon-box-wrapper.${blockID} .fb-description {
+			.fb-icon-box-wrapper.${blockID} .fb-description,
+			.fb-icon-box-wrapper.${blockID} .fb-description .fb-description-dynamic-link {
 				${subHeadingTabPaddingValue && SubHeadingTabPadding?.top ? `padding: ${subHeadingTabPaddingValue};` : "" }
 				${descTabMarginValue  && descTabMargin?.top ? `margin: ${descTabMarginValue};` : ""}
 				${subHeadingGlobalTypoSwitcher?.fontSize === false && subHeadingFontSize?.Tablet && subHeadingFontSizeUnits?.Tablet ? `font-size: ${subHeadingFontSize?.Tablet}${subHeadingFontSizeUnits?.Tablet};` : ''}
@@ -2480,7 +2487,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		@media only screen and (max-width: 757px) {
-			.fb-icon-box-wrapper.${blockID} .fb-description {
+			.fb-icon-box-wrapper.${blockID} .fb-description,
+			.fb-icon-box-wrapper.${blockID} .fb-description .fb-description-dynamic-link {
 				${subHeadingMobilePaddingValue && SubHeadingMobilePadding?.top ? `padding: ${subHeadingMobilePaddingValue};` : "" }
 				${descMobileMarginValue  && descMobileMargin?.top ? `margin: ${descMobileMarginValue };` : ""}
 				${subHeadingGlobalTypoSwitcher?.fontSize === false && subHeadingFontSize?.Mobile && subHeadingFontSizeUnits?.Mobile ? `font-size: ${subHeadingFontSize?.Mobile}${subHeadingFontSizeUnits?.Mobile};` : ''}
