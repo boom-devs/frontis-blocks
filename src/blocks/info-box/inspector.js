@@ -522,6 +522,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				dynamicTitleEnableLink: false,
 				dynamicDescriptionEnabled: false,
 				dynamicDescriptionEnableLink: false,
+				dynamicBtnEnabled: false,
+				dynamicBtnEnableLink: false,
 			});
 		}
 	}, [getProActiveState]);
