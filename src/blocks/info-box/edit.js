@@ -13,9 +13,9 @@ import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import { useRef } from "@wordpress/element";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import DynamicTextValue from '@Components/dynamic-text-value';
 
-
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
 		Heading_Text,
@@ -58,7 +58,82 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		infoBoxDesktopSwitcher,
 		infoBoxTabletSwitcher,
 		infoBoxMobileSwitcher,
-		infoBoxPresetStyle
+		infoBoxPresetStyle,
+
+		/** Start Dynamic Title Text */
+		dynamicTitleEnabled,
+		dynamicTitleSource,
+		dynamicTitlePostId,
+		dynamicTitlePostType,
+		dynamicTitlePostLabel,
+		dynamicTitleField,
+		dynamicTitleFeaturedImageField,
+
+		dynamicTitleDateType,
+		dynamicTitleDateFormat,
+
+		dynamicTitleTimeType,
+		dynamicTitleTimeFormat,
+
+		dynamicTitleCommentsZeroText,
+		dynamicTitleCommentsOneText,
+		dynamicTitleCommentsManyText,
+
+		dynamicTitleTermsTaxonomy,
+		dynamicTitleTermsSeparator,
+		dynamicTitleEnableLink,
+		dynamicTitleLinkSource,
+		/** End Dynamic Title Text */
+
+		/** Start Dynamic Description Text */
+		dynamicDescriptionEnabled,
+		dynamicDescriptionSource,
+		dynamicDescriptionPostId,
+		dynamicDescriptionPostType,
+		dynamicDescriptionPostLabel,
+		dynamicDescriptionField,
+		dynamicDescriptionFeaturedImageField,
+
+		dynamicDescriptionDateType,
+		dynamicDescriptionDateFormat,
+
+		dynamicDescriptionTimeType,
+		dynamicDescriptionTimeFormat,
+
+		dynamicDescriptionCommentsZeroText,
+		dynamicDescriptionCommentsOneText,
+		dynamicDescriptionCommentsManyText,
+
+		dynamicDescriptionTermsTaxonomy,
+		dynamicDescriptionTermsSeparator,
+		dynamicDescriptionEnableLink,
+		dynamicDescriptionLinkSource,
+		/** End Dynamic Description Text */
+
+		/** Start Dynamic Btn One Text */
+		dynamicBtnEnabled,
+		dynamicBtnSource,
+		dynamicBtnPostId,
+		dynamicBtnPostType,
+		dynamicBtnPostLabel,
+		dynamicBtnField,
+		dynamicBtnFeaturedImageField,
+
+		dynamicBtnDateType,
+		dynamicBtnDateFormat,
+
+		dynamicBtnTimeType,
+		dynamicBtnTimeFormat,
+
+		dynamicBtnCommentsZeroText,
+		dynamicBtnCommentsOneText,
+		dynamicBtnCommentsManyText,
+
+		dynamicBtnTermsTaxonomy,
+		dynamicBtnTermsSeparator,
+		dynamicBtnEnableLink,	
+		dynamicBtnLinkSource,
+		/** End Dynamic Btn Text */
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -76,6 +151,102 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
+
+	/**
+	 * Dynamic Text Value for Title
+	 */
+	const { dynamicDisplayValue: dynamicTitleValue, dynamicDisplayLink: dynamicTitleLink } = DynamicTextValue({
+		textEnabled:            dynamicTitleEnabled,
+		textSource:             dynamicTitleSource,
+		textField:              dynamicTitleField,
+
+		textPostId:             dynamicTitlePostId,
+		textPostType:           dynamicTitlePostType,
+		textPostLabel:          dynamicTitlePostLabel,
+
+		textFeaturedImageField: dynamicTitleFeaturedImageField,
+
+		textDateType:           dynamicTitleDateType,
+		textDateFormat:         dynamicTitleDateFormat,
+		textTimeType:           dynamicTitleTimeType, 
+		textTimeFormat:         dynamicTitleTimeFormat,
+
+		textCommentsZeroText:   dynamicTitleCommentsZeroText,
+		textCommentsOneText:    dynamicTitleCommentsOneText,
+		textCommentsManyText:   dynamicTitleCommentsManyText,
+
+		textTermsTaxonomy:      dynamicTitleTermsTaxonomy,
+		textTermsSeparator:     dynamicTitleTermsSeparator,
+
+		textLinkEnabled:        dynamicTitleEnableLink,
+		textLinkSource:         dynamicTitleLinkSource,
+
+		context,
+	});
+
+	/**
+	 * Dynamic Text Value for Description
+	 */
+	const { dynamicDisplayValue: dynamicDescriptionValue, dynamicDisplayLink: dynamicDescriptionLink } = DynamicTextValue({
+		textEnabled:            dynamicDescriptionEnabled,
+		textSource:             dynamicDescriptionSource,
+		textField:              dynamicDescriptionField,
+
+		textPostId:             dynamicDescriptionPostId,
+		textPostType:           dynamicDescriptionPostType,
+		textPostLabel:          dynamicDescriptionPostLabel,
+
+		textFeaturedImageField: dynamicDescriptionFeaturedImageField,
+
+		textDateType:           dynamicDescriptionDateType,
+		textDateFormat:         dynamicDescriptionDateFormat,
+		textTimeType:           dynamicDescriptionTimeType, 
+		textTimeFormat:         dynamicDescriptionTimeFormat,
+
+		textCommentsZeroText:   dynamicDescriptionCommentsZeroText,
+		textCommentsOneText:    dynamicDescriptionCommentsOneText,
+		textCommentsManyText:   dynamicDescriptionCommentsManyText,
+
+		textTermsTaxonomy:      dynamicDescriptionTermsTaxonomy,
+		textTermsSeparator:     dynamicDescriptionTermsSeparator,
+
+		textLinkEnabled:        dynamicDescriptionEnableLink,
+		textLinkSource:         dynamicDescriptionLinkSource,
+
+		context,
+	});
+
+	/**
+	 * Dynamic Text Value for Button One Text
+	 */
+	const { dynamicDisplayValue: dynamicBtnValue, dynamicDisplayLink: dynamicBtnLink } = DynamicTextValue({
+		textEnabled:            dynamicBtnEnabled,
+		textSource:             dynamicBtnSource,
+		textField:              dynamicBtnField,
+
+		textPostId:             dynamicBtnPostId,
+		textPostType:           dynamicBtnPostType,
+		textPostLabel:          dynamicBtnPostLabel,
+
+		textFeaturedImageField: dynamicBtnFeaturedImageField,
+
+		textDateType:           dynamicBtnDateType,
+		textDateFormat:         dynamicBtnDateFormat,
+		textTimeType:           dynamicBtnTimeType,
+		textTimeFormat:         dynamicBtnTimeFormat,
+
+		textCommentsZeroText:   dynamicBtnCommentsZeroText,
+		textCommentsOneText:    dynamicBtnCommentsOneText,
+		textCommentsManyText:   dynamicBtnCommentsManyText,
+
+		textTermsTaxonomy:      dynamicBtnTermsTaxonomy,
+		textTermsSeparator:     dynamicBtnTermsSeparator,
+
+		textLinkEnabled:        dynamicBtnEnableLink,
+		textLinkSource:         dynamicBtnLinkSource,
+
+		context,
+	});	
 
 	return (
 		<>
@@ -111,10 +282,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						<div className="fb-info-box-content-wrapper">
 							<RichText
 								tagName={headingTag}
-								value={Heading_Text}
-								onChange={(value) =>
-									setAttributes({ Heading_Text: value })
-								}
+								value={dynamicTitleEnabled ? dynamicTitleValue : Heading_Text}
+								onChange={(value) => {
+									if (!dynamicTitleEnabled) setAttributes({ Heading_Text: value });
+								}}
 								placeholder={__("Info Heading", "frontis-block")}
 								className="fb-heading"
 							/>
@@ -122,10 +293,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							{Sub_Heading_Switcher && (
 								<RichText
 									tagName={Sub_Heading_Tag}
-									value={Sub_Heading_Text}
-									onChange={(value) =>
-										setAttributes({ Sub_Heading_Text: value })
-									}
+									value={dynamicDescriptionEnabled ? dynamicDescriptionValue : Sub_Heading_Text}
+									onChange={(value) => {
+										if (!dynamicDescriptionEnabled) setAttributes({ Sub_Heading_Text: value });
+									}}
 									placeholder={__("Info description", "frontis-block")}
 									className="fb-description"
 								/>
@@ -141,11 +312,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											onClick={handleButtonClick}
 										>
 											<RichText
-												value={info_Button_Text}
+												value={dynamicBtnEnabled ? dynamicBtnValue : info_Button_Text} 
 												tagName={"span"}
-												onChange={(value) =>
-													setAttributes({ info_Button_Text: value })
-												}
+												onChange={(value) => {
+													if (!dynamicBtnEnabled) setAttributes({ info_Button_Text: value });
+												}}
 												placeholder={__("", "frontis-block")}
 
 
