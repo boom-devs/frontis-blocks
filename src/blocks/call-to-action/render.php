@@ -428,10 +428,14 @@ $dynamicBtnTwoLinkSource              = fb_norm_str($attributes['dynamicBtnTwoLi
 
 /* ---------- Pro gate ---------- */
 if ( ! Helper::isProActivated() ) {
-    $dynamicTitleEnabled = $dynamicTitleEnableLink = false;
-    $dynamicDescriptionEnabled = $dynamicDescriptionEnableLink = false;
-    $dynamicBtnOneEnabled = $dynamicBtnOneEnableLink = false;
-    $dynamicBtnTwoEnabled = $dynamicBtnTwoEnableLink = false;
+    $dynamicTitleEnabled = false;
+	$dynamicTitleEnableLink = false;
+    $dynamicDescriptionEnabled = false;
+	$dynamicDescriptionEnableLink = false;
+    $dynamicBtnOneEnabled = false;
+	$dynamicBtnOneEnableLink = false;
+    $dynamicBtnTwoEnabled = false;
+	$dynamicBtnTwoEnableLink = false;
 }
 
 /* ---------- compute dynamics ---------- */
