@@ -4048,6 +4048,11 @@ const attributes = {
 		type: 'string',
 		default: '#e0e0e0',
 	},
+
+	postWrapperLinkSwitcher: {
+		type: 'boolean',
+		default: false
+	},
 	/** End Post Grid Settings */
 };
 

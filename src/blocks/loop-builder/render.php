@@ -20,7 +20,7 @@ function render_loop_builder( $block_content, $block ) {
 		 */
 		$attributes  = isset( $block['attrs'] ) ? $block['attrs'] : [];
 		$blockId     = isset( $attributes['blockId'] ) ? $attributes['blockId'] : '';
-		$align_class = isset( $attributes['align'] ) ? 'align' . $attributes['align'] : '';
+		$align_class = isset( $attributes['align'] ) ? 'align' . $attributes['align'] : 'alignwide';
 
 		$query_args = ( isset( $attributes['query'] ) && is_array( $attributes['query'] ) ) ? $attributes['query'] : [];
 

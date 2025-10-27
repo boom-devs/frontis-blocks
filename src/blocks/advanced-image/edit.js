@@ -1,206 +1,274 @@
 import { __ } from "@wordpress/i18n";
 import {
-	useBlockProps,
-	RichText,
-	BlockControls,
-	MediaPlaceholder,
-	MediaUpload,
-	MediaUploadCheck,
+  useBlockProps,
+  RichText,
+  BlockControls,
+  MediaPlaceholder,
+  MediaUpload,
+  MediaUploadCheck,
 } from "@wordpress/block-editor";
+import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
 import { useEffect } from "@wordpress/element";
-
-//Internal dependencies
+// Internal
 import Inspector from "./inspector";
 import "./editor.scss";
-import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
 import generateSrcSet from "@Utils/generateSrcSet";
+import useDynamicImage from "@Components/use-dynamic-image";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
-	const {
-		blockID,
-		advancedImageUrl,
-		advancedImageId,
-		advancedImageAlt,
-		advancedImageDefaultWidth,
-		advancedImageDefaultHeight,
-		advancedImageSrcSet,
-		imageCaption,
-		imageStyle,
-		displayCaption,
-		imageSize,
-		linkSwitch,
-		linkTargetUrl,
-		linkUrl,
-		imageHover,
-		imageFit,
-		displayTitle,
-		titleText,
-		titleTag,
-		titlePosition,
-		showOverlay,
-		autoFitSwitch,
+export default function Edit({ attributes, setAttributes, clientId, context }) {
+  const {
+    // base
+    blockID,
 
-		advancedImageGlobalWraperID,
-		advancedImageGlobalWraperClass,
+    // manual image
+    advancedImageUrl,
+    advancedImageId,
+    advancedImageAlt,
+    advancedImageDefaultWidth,
+    advancedImageDefaultHeight,
+    advancedImageSrcSet,
 
-		advancedImageDesktopSwitcher,
-        advancedImageTabletSwitcher,
-        advancedImageMobileSwitcher,
-	} = attributes;
+    // display options
+    imageCaption,
+    imageSize,
+    imageStyle,
+    imageHover,
+    imageFit,
+    autoFitSwitch,
+    displayCaption,
+    displayTitle,
+    titleText,
+    titleTag,
+    titlePosition,
+    showOverlay,
 
-	const blockProps = useBlockProps({
-        className: `fb-advanced-image-main-wrapper ${blockID} ${advancedImageDesktopSwitcher && 'fb-desktop-responsive'} ${advancedImageTabletSwitcher && 'fb-tablet-responsive'} ${advancedImageMobileSwitcher && 'fb-mobile-responsive'}`,
+    // linking
+    linkSwitch,
+    linkTargetUrl,
+    linkUrl,
+
+    // wrappers / responsive flags
+    advancedImageGlobalWraperID,
+    advancedImageGlobalWraperClass,
+    advancedImageDesktopSwitcher,
+    advancedImageTabletSwitcher,
+    advancedImageMobileSwitcher,
+
+    // dynamic image attrs
+    dynamicImageEnabled,
+    dynamicImageSource,
+    dynamicImagePostId,
+    dynamicImagePostType,
+    dynamicImagePostLabel,
+    dynamicImageField,
+    dynamicImageSize,
+    dynamicImageFallbackUrl,
+    dynamicImageFallbackAlt,
+    dynamicImageFallbackId,
+    dynamicImageEnableLink,
+    dynamicImageLinkSource,
+
+  } = attributes;
+
+  // block props (unchanged)
+  const blockProps = useBlockProps({
+    className: `fb-advanced-image-main-wrapper ${blockID} ${
+      advancedImageDesktopSwitcher && "fb-desktop-responsive"
+    } ${advancedImageTabletSwitcher && "fb-tablet-responsive"} ${
+      advancedImageMobileSwitcher && "fb-mobile-responsive"
+    }`,
+  });
+
+  // loop context from block.json usesContext (unchanged)
+  const loopPostId   = context?.postId;
+  const loopPostType = context?.postType;
+
+  // dynamic image source
+  const { renderSource: dynamicSource, isLoading } = useDynamicImage({
+    imageEnabled:     dynamicImageEnabled,
+    imageSource:      dynamicImageSource,
+    imagePostId:      dynamicImagePostId,
+    imagePostType:    dynamicImagePostType,
+    imageField:       dynamicImageField,
+    imageSize:        dynamicImageSize,
+    imageFallbackUrl: dynamicImageFallbackUrl,
+    imageFallbackAlt: dynamicImageFallbackAlt,
+    loopPostType: loopPostType,
+    loopPostId: loopPostId,
+  });
+
+  // manual image srcset → width/height
+  useEffect(() => {
+    if (!advancedImageSrcSet) return;
+    const items = advancedImageSrcSet.split(", ");
+    const last = items[items.length - 1] || "";
+    const w = last.match(/(\d+)w/);
+    const h = last.match(/(\d+)h/);
+    if (w && h) {
+      setAttributes({
+        advancedImageDefaultWidth: parseInt(w[1], 10),
+        advancedImageDefaultHeight: parseInt(h[1], 10),
+      });
+    }
+  }, [advancedImageSrcSet]);
+
+  // media select
+  const onSelectImage = (media) => {
+    const newSrcSet = generateSrcSet(media.sizes);
+    setAttributes({
+      advancedImageUrl: media.url,
+      advancedImageId: media.id,
+      advancedImageAlt: media.alt || "",
+      advancedImageSrcSet: newSrcSet,
     });
+  };
 
-	useEffect(() => {
-		// Parse the srcset string to extract dimensions from the last item
-		if (advancedImageSrcSet) {
-		  const srcsetItems = advancedImageSrcSet.split(', ');
-		  const lastItem = srcsetItems[srcsetItems.length - 1];
-		  
-		  // Extract width and height from the last item
-		  const widthMatch = lastItem.match(/(\d+)w/);
-		  const heightMatch = lastItem.match(/(\d+)h/);
-		  
-		  if (widthMatch && heightMatch) {
-			const width = parseInt(widthMatch[1], 10);
-			const height = parseInt(heightMatch[1], 10);
-			
-			// Now you can set these as global variables or use them as needed
-			setAttributes({
-				advancedImageDefaultWidth: width,
-				advancedImageDefaultHeight: height,
-			});
-		  }
-		}
-	}, [advancedImageSrcSet]);
+  const handleAnchorClick = (e) => e.preventDefault();
 
-	//Callback: Media Upload
-		const onSelectImage = (media) => {
-			const newSrcSet = generateSrcSet(media.sizes);
-			setAttributes({
-				advancedImageUrl: media.url,
-				advancedImageId: media.id,
-				advancedImageAlt: media.alt || '',
-				advancedImageSrcSet: newSrcSet,
-			});
-		};
+  // final render source (dynamic first, otherwise manual)
+  const renderSource = dynamicImageEnabled
+    ? (dynamicSource || null)
+    : {
+        url: advancedImageUrl,
+        alt: advancedImageAlt || "",
+        width: advancedImageDefaultWidth,
+        height: advancedImageDefaultHeight,
+        srcSet: advancedImageSrcSet || undefined,
+      };
 
-	const handleImageClick = (e) => {
-		e.preventDefault();
-	};
+  return (
+    <>
+      <Inspector
+        attributes={attributes}
+        setAttributes={setAttributes}
+        clientId={clientId}
+        onSelectImage={onSelectImage}
+      />
 
+      <BlockControls>
+        <ToolbarGroup>
+          {!dynamicImageEnabled && renderSource?.url && (
+            <>
+              <ToolbarButton
+                icon="trash"
+                onClick={() =>
+                  setAttributes({
+                    advancedImageId: "",
+                    advancedImageUrl: "",
+                    advancedImageAlt: "",
+                    advancedImageDefaultWidth: "",
+                    advancedImageDefaultHeight: "",
+                    advancedImageSrcSet: "",
+                  })
+                }
+              />
+              <MediaUploadCheck>
+                <MediaUpload
+                  onSelect={onSelectImage}
+                  allowedTypes={["image"]}
+                  value={advancedImageId}
+                  render={({ open }) => <ToolbarButton onClick={open} icon="edit" />}
+                />
+              </MediaUploadCheck>
+            </>
+          )}
+        </ToolbarGroup>
+      </BlockControls>
 
-	return (
-		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-				onSelectImage={onSelectImage}
-			/>
-			<BlockControls>
-				{advancedImageUrl && (
-					<ToolbarGroup>
-						<ToolbarButton
-							onClick={() =>
-								setAttributes({
-									advancedImageId: "",
-									advancedImageUrl: "",
-									advancedImageAlt: "",
-									advancedImageDefaultWidth: "",
-									advancedImageDefaultHeight: "",
-									advancedImageSrcSet: "",
-								})
-							}
-							icon="trash"
-						/>
-						<MediaUploadCheck>
-							<MediaUpload
-								onSelect={onSelectImage}
-								allowedTypes={["image"]}
-								value={advancedImageId}
-								render={({ open }) => (
-									<ToolbarButton onClick={open} icon="edit" />
-								)}
-							/>
-						</MediaUploadCheck>
-					</ToolbarGroup>
-				)}
-			</BlockControls>
+      <div {...blockProps}>
+        <div
+          className={`fb-parent-wrapper fb-advanced-image-wrapper ${advancedImageGlobalWraperClass}`}
+          id={advancedImageGlobalWraperID}
+        >
+          <div
+            className={[
+              "fb-advanced-image",
+              imageStyle,
+              imageSize,
+              imageHover,
+              autoFitSwitch ? imageFit : "",
+              titlePosition,
+              showOverlay ? "overlay-simple" : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            <div className="fb-advanced-image-inner">
+              {renderSource?.url ? (
+                linkSwitch ? (
+                  <a
+                    href={linkUrl}
+                    target={linkTargetUrl ? "_blank" : undefined}
+                    rel={linkTargetUrl ? "noopener noreferrer" : undefined}
+                    onClick={handleAnchorClick}
+                    aria-label={renderSource.alt}
+                  >
+                    <img
+                      width={renderSource.width}
+                      height={renderSource.height}
+                      src={renderSource.url}
+                      alt={renderSource.alt}
+                      srcSet={renderSource.srcSet}
+                      aria-hidden="true"
+                    />
+                  </a>
+                ) : (
+                  <img
+                    width={renderSource.width}
+                    height={renderSource.height}
+                    src={renderSource.url}
+                    alt={renderSource.alt}
+                    srcSet={renderSource.srcSet}
+                    aria-hidden="true"
+                  />
+                )
+              ) : (
+                <>
+                  {dynamicImageEnabled ? (
+                    <div className="fb-advanced-image-dynamic-empty" style={{ opacity: 0.75 }}>
+                      {isLoading
+                        ? __("Loading dynamic image…", "frontis-blocks")
+                        : __("No image available from the selected dynamic source.", "frontis-blocks")}
+                    </div>
+                  ) : (
+                    <MediaPlaceholder
+                      onSelect={onSelectImage}
+                      allowedTypes={["image"]}
+                      multiple={false}
+                      labels={{ title: __("Add Image", "frontis-blocks") }}
+                    />
+                  )}
+                </>
+              )}
+            </div>
 
-			<div {...blockProps}>
-				<div className={`fb-parent-wrapper fb-advanced-image-wrapper ${advancedImageGlobalWraperClass}`} id={advancedImageGlobalWraperID}>
-					<div
-						className={`fb-advanced-image ${imageStyle || ''} ${imageSize || ''} ${imageHover || ''} ${autoFitSwitch ? imageFit || '' : ''} ${titlePosition || ''} ${
-							showOverlay ? "overlay-simple" : ""
-						}`}
-					>
-						<div className="fb-advanced-image-inner">
-							{advancedImageUrl ? (
-								linkSwitch ? (
-									<a
-										href={linkUrl}
-										target={linkTargetUrl ? "_blank" : undefined}
-										rel={linkTargetUrl ? "noopener noreferrer" : undefined}
-										onClick={handleImageClick}
-										aria-label={advancedImageAlt}
-									>
-										<img
-											width={advancedImageDefaultWidth}
-											height={advancedImageDefaultHeight}
-											src={advancedImageUrl}
-											alt={advancedImageAlt}
-											srcSet={advancedImageSrcSet || undefined}
-											aria-hidden="true"
-										/>
-									</a>
-								) : (
-									<img 
-										width={advancedImageDefaultWidth} 
-										height={advancedImageDefaultHeight} 
-										src={advancedImageUrl} 
-										alt={advancedImageAlt} 
-										srcSet={advancedImageSrcSet || undefined}
-										aria-hidden="true"
-									/>
-								)
-							) : (
-								<MediaPlaceholder
-									onSelect={onSelectImage}
-									allowedTypes={["image"]}
-									multiple={false}
-									labels={{ title: "Add Image" }}
-								/>
-							)}
-						</div>
-						{displayTitle && (
-							<div className="fb-advanced-image-title">
-								<div className="fb-advanced-image-title-inner">
-									<RichText
-										tagName={titleTag}
-										value={titleText}
-										onChange={(value) => setAttributes({ titleText: value })}
-										placeholder="Add your title here..."
-										className="fb-advanced-title"
-									/>
-								</div>
-							</div>
-						)}
-						
-					</div>
-					{displayCaption && (
-							<div className="fb-advanced-image-caption">
-								<RichText
-									tagName="figcaption"
-									value={imageCaption}
-									onChange={(value) => setAttributes({ imageCaption: value })}
-									placeholder="Add your caption here..."
-								/>
-							</div>
-						)}
-				</div>
-			</div>
-		</>
-	);
+            {displayTitle && (
+              <div className="fb-advanced-image-title">
+                <div className="fb-advanced-image-title-inner">
+                  <RichText
+                    tagName={titleTag}
+                    value={titleText}
+                    onChange={(value) => setAttributes({ titleText: value })}
+                    placeholder={__("Add your title here...", "frontis-blocks")}
+                    className="fb-advanced-title"
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
+          {displayCaption && (
+            <div className="fb-advanced-image-caption">
+              <RichText
+                tagName="figcaption"
+                value={imageCaption}
+                onChange={(value) => setAttributes({ imageCaption: value })}
+                placeholder={__("Add your caption here...", "frontis-blocks")}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+    </>
+  );
 }

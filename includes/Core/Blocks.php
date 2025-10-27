@@ -24,7 +24,6 @@ class Blocks
 		add_filter('block_categories_all', [$this, 'register_block_categories'], 10, 1);
 		add_filter('render_block', [$this, 'render_block'], 10, 3);
 		add_action('save_post', [$this, 'get_blocks_on_save'], 10, 3);
-		// add_action('wp_footer', [$this, 'enqueue_google_fonts'], 15);
 	}
 
 	public function register_blocks()
@@ -77,6 +76,16 @@ class Blocks
 				$editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
 				$view_script_handle = "{$plugin_slug}-{$slug}-view-script";
 
+
+				// $activation_key = get_option('frontisblockspro_license_options');
+				// if(is_array($activation_key) && $activation_key && count($activation_key) > 0 && isset($activation_key['sc_license_key']) && $activation_key['sc_license_key'] !== '') {
+				// 	$activation_key = $activation_key['sc_license_key'];
+				// }
+
+				$license_options = get_option('frontisblockspro_license_options');
+				$sc_license_id  = is_array($license_options) && !empty($license_options['sc_license_id'])  ? (string) $license_options['sc_license_id']  : '';
+				$sc_license_key = is_array($license_options) && !empty($license_options['sc_license_key']) ? (string) $license_options['sc_license_key'] : '';
+
 				if (is_admin()) {
 					$admin_localize_array = [
 						'admin_nonce' => wp_create_nonce('admin-nonce'),
@@ -92,7 +101,9 @@ class Blocks
 						'desktop_breakpoint' => $desktop_breakpoint,
 						'tablet_breakpoint' => $tablet_breakpoint,
 						'mobile_breakpoint' => $mobile_breakpoint,
-						'global_typography' => get_option('fb_globaltypo')
+						'global_typography' => get_option('fb_globaltypo'),
+						'sc_license_id' => $sc_license_id,
+						'sc_license_key' => $sc_license_key,
 					];
 
 					$localize_array = array_merge($localize_array, $admin_localize_array);
@@ -183,8 +194,110 @@ class Blocks
 		);
 	}
 
+	public function header_footer_settings($block_content, $block) {
+		$post_id = absint( get_the_ID() );
+
+		// Retrieve global options from the database.
+		// $global_options = get_option( 'frontis_theme_options', [] );
+
+		// echo "<pre>";
+		// var_dump($global_options);
+		// echo "</pre>";
+
+
+		// $theme_options = is_array( $theme_options ) ? $theme_options : maybe_unserialize( $theme_options );
+
+		// // if($block['blockName'] === 'core/template-part'){
+		// // 	var_dump(get_post_meta( $post_id, '_frontis_meta_header_display', true ));
+		// // }
+
+		// // Check if the header should be disabled (global or per post).
+		// $disable_header = ! empty( $theme_options['disableHeader'] ) || get_post_meta( $post_id, '_frontis_meta_header_display', true );
+		// if ( $disable_header && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'header' === $block['attrs']['tagName'] ) {
+		// 	return '';
+		// }
+
+		// // Check if the footer should be disabled (global or per post).
+		// $disable_footer = ! empty( $theme_options['disableFooter'] ) || get_post_meta( $post_id, '_frontis_meta_footer_display', true );
+		// if ( $disable_footer && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'footer' === $block['attrs']['tagName'] ) {
+		// 	return '';
+		// }
+
+		// // Check if the header should have sticky behavior.
+		// $sticky_header = ! empty( $theme_options['stickyHeader'] );
+
+
+		// if ( $sticky_header && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'header' === $block['attrs']['tagName'] ) {
+
+		// 	$sticky_header_color_gb = ! empty( $theme_options['stickyHeaderColor'] ) ? $theme_options['stickyHeaderColor'] : '';
+		
+		// 	// Get the post-specific sticky header color
+		// 	$post_id = get_the_ID();
+		// 	$sticky_header_color_sg = get_post_meta( $post_id, '_frontis_meta_sticky_bg_color', true );
+		
+		// 	$sticky_header_color = ! empty( $sticky_header_color_sg ) ? $sticky_header_color_sg : $sticky_header_color_gb;
+		
+		// 	// Output the CSS custom property dynamically
+		// 	$custom_css = sprintf(
+		// 		'<style>:root { --wp--preset--sticky--bg: %s; }</style>',
+		// 		esc_attr( $sticky_header_color )
+		// 	);
+		
+		// 	// Add the CSS custom property to the <head>
+		// 	echo $custom_css;
+		
+		// 	// Add a custom class to the block
+		// 	$block_content = $this->add_custom_class( $block_content, 'fb-sticky-header' );
+		// }
+		
+
+		// // Check if the header should have a transparent style.
+		// $transparent_header = ! empty( $theme_options['transparentHeader'] );
+
+		// if ( $transparent_header && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'header' === $block['attrs']['tagName'] ) {
+
+		// 	$transparent_header_color_gb = ! empty( $theme_options['transparentHeaderColor'] ) ? $theme_options['transparentHeaderColor'] : 'transparent';
+
+		// 	// Get the post-specific sticky header color
+		// 	$post_id = get_the_ID();
+		// 	$transparent_header_color_sg = get_post_meta( $post_id, '_frontis_meta_transparent_bg_color', true );
+
+		// 	$transparent_header_color = ! empty( $transparent_header_color_sg ) ? $transparent_header_color_sg : $transparent_header_color_gb;
+
+		// 	// Output the CSS custom property dynamically
+		// 	$custom_css = sprintf(
+		// 		'<style>:root { --wp--preset--transparent--bg: %s; }</style>',
+		// 		esc_attr( $transparent_header_color )
+		// 	);
+
+		// 	// Add the CSS custom property to the <head>
+		// 	echo $custom_css;
+
+		// 	// Add a custom class to the block
+		// 	$block_content = $this->add_custom_class( $block_content, 'fb-transparent-header' );
+		// }
+
+		return $block_content;
+	}
+
+	/**
+	 * Add custom class to block content.
+	 *
+	 * @param string $block_content Entire Block Content.
+	 * @param string $class CSS class to add.
+	 * @return string Modified block content with additional class.
+	 */
+	public function add_custom_class( string $block_content, string $class ): string {
+		// Add the custom class to the block's wrapper div.
+		return preg_replace( '/class="([^"]*)"/', 'class="$1 ' . esc_attr( $class ) . '"', $block_content, 1 );
+	}
+
 	public function render_block($block_content, $parsed_block, $block_obj)
 	{
+
+		// echo get_the_ID();
+		$block_content = $this->header_footer_settings($block_content, $parsed_block);
+
 		if (Helper::is_frontis_block($block_content, $parsed_block)) {
 			$block_content = $this->add_wrapper_class($block_content, $parsed_block);
 			$block_content = $this->add_block_id($block_content, $parsed_block);
@@ -195,39 +308,22 @@ class Blocks
 
 	public function get_blocks_on_save($post_id, $post, $update)
 	{
-		$post_content = $post->post_content;
+		// Skip autosaves and revisions
+		if (wp_is_post_autosave($post_id) || wp_is_post_revision($post_id)) {
+			return;
+		}
+
 		AssetsGenerator::generate_global_assets();
 
-		// Get synced pattern contents
-		$pattern_contents = Helper::check_patterns_used($post_content);
-
-		// Append pattern contents to post_content
-		if (!empty($pattern_contents)) {
-			foreach ($pattern_contents as $pattern_content) {
-				$post_content .= "\n" . $pattern_content; // Append each pattern content
-			}
-
-			// Pass modified post object to generate_page_assets
-			$post->post_content = $post_content; // Update post object
-		}
-
 		$pattern = "/frontis-blocks/i";
-		update_post_meta($post_id, 'frontis_blocks_used', false);
-
-		if(preg_match_all($pattern, $post->post_content) > 0) {
-			update_post_meta($post_id, 'frontis_blocks_used', true);
+		if((!preg_match_all($pattern, $post->post_content) > 0 && get_post_type($post_id) !== 'wp_template')) {
+			return;
 		}
 
-
-		if($post->post_name === 'home-2-2') {
-			$myfile = fopen("assetsgeneration.txt", "w") or die("Unable to open file!");
-			$txt = $post->post_content;
-			fwrite($myfile, $txt);
-			fclose($myfile);
-		}
+		$critical_css_used = Helper::post_content_has_blocks_critical($post, $post_id);
 
 		if ($update) {
-			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post);
+			AssetsGenerator::get_instance()->generate_page_assets($post_id, $post, $critical_css_used);
 		}
 	}
 
@@ -263,23 +359,5 @@ class Blocks
 	public function get_registered_blocks()
 	{
 		return $this->registered_blocks;
-	}
-
-	public function enqueue_google_fonts()
-	{
-		$google_fonts = get_option('fb_fontfamilies');
-
-		if (!empty($google_fonts)) {
-			foreach ($google_fonts as $key => $value) {
-				// unique fonts family
-				if (!in_array($value, $this->gfonts)) {
-					$this->gfonts[$value] = $value;
-				}
-			}
-		}
-
-		if (!empty($this->gfonts)) {
-			// Helper::load_google_font( $this->gfonts );
-		}
 	}
 }

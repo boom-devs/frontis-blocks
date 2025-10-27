@@ -23,19 +23,7 @@ export default function save({ attributes }) {
 
     return (
         <div {...blockProps}>
-            <div className={`advanced-navigation-wrapper ${navigationGlobalWraperClass}`} id={navigationGlobalWraperID}>
-                <div
-                    className={`advanced-navigation-inner-wrapper ${navigationLayout} ${
-                        navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign
-                    } ${showDropdownIcon ? "" : "remove-dropdown-icon"} ${
-                        hamburgerMenuIconType === "icon" ? "responsive-icon" : "responsive-text"
-                    }`}
-                >
-                    <div className="advanced-navigation-contents">
-                        <InnerBlocks.Content />
-                    </div>
-                </div>
-            </div>
+            
         </div>
     );
 }

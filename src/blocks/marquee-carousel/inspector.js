@@ -208,9 +208,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const slideDesktopPaddingWidth    = `${slidePaddingDesktop.top}${slidePaddingUnits.Desktop} ${slidePaddingDesktop.right}${slidePaddingUnits.Desktop} ${slidePaddingDesktop.bottom}${slidePaddingUnits.Desktop} ${slidePaddingDesktop.left}${slidePaddingUnits.Desktop}`;
-	const slideTabletPaddingWidth     = `${slidePaddingTablet.top}${slidePaddingUnits.Tablet} ${slidePaddingTablet.right}${slidePaddingUnits.Tablet} ${slidePaddingTablet.bottom}${slidePaddingUnits.Tablet} ${slidePaddingTablet.left}${slidePaddingUnits.Tablet}`;
-	const slideMobilePaddingWidth     = `${slidePaddingMobile.top}${slidePaddingUnits.Mobile} ${slidePaddingMobile.right}${slidePaddingUnits.Mobile} ${slidePaddingMobile.bottom}${slidePaddingUnits.Mobile} ${slidePaddingMobile.left}${slidePaddingUnits.Mobile}`;
+	const slideDesktopPaddingWidth    = `${slidePaddingDesktop?.top}${slidePaddingUnits?.Desktop} ${slidePaddingDesktop?.right}${slidePaddingUnits?.Desktop} ${slidePaddingDesktop?.bottom}${slidePaddingUnits?.Desktop} ${slidePaddingDesktop?.left}${slidePaddingUnits?.Desktop}`;
+	const slideTabletPaddingWidth     = `${slidePaddingTablet?.top}${slidePaddingUnits?.Tablet} ${slidePaddingTablet?.right}${slidePaddingUnits?.Tablet} ${slidePaddingTablet?.bottom}${slidePaddingUnits?.Tablet} ${slidePaddingTablet?.left}${slidePaddingUnits?.Tablet}`;
+	const slideMobilePaddingWidth     = `${slidePaddingMobile?.top}${slidePaddingUnits?.Mobile} ${slidePaddingMobile?.right}${slidePaddingUnits?.Mobile} ${slidePaddingMobile?.bottom}${slidePaddingUnits?.Mobile} ${slidePaddingMobile?.left}${slidePaddingUnits?.Mobile}`;
 	/** End slide Padding */
 
     /** Start Global padding */
@@ -281,9 +281,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const globalDesktopPaddingWidth    = `${sliderGlobalPaddingDesktop.top}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.right}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.bottom}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.left}${sliderGlobalPaddingUnits.Desktop}`;
-	const globalTabletPaddingWidth     = `${sliderGlobalPaddingTablet.top}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.right}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.bottom}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.left}${sliderGlobalPaddingUnits.Tablet}`;
-	const globalMobilePaddingWidth     = `${sliderGlobalPaddingMobile.top}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.right}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.bottom}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.left}${sliderGlobalPaddingUnits.Mobile}`;
+	const globalDesktopPaddingWidth    = `${sliderGlobalPaddingDesktop?.top}${sliderGlobalPaddingUnits?.Desktop} ${sliderGlobalPaddingDesktop?.right}${sliderGlobalPaddingUnits?.Desktop} ${sliderGlobalPaddingDesktop?.bottom}${sliderGlobalPaddingUnits?.Desktop} ${sliderGlobalPaddingDesktop?.left}${sliderGlobalPaddingUnits?.Desktop}`;
+	const globalTabletPaddingWidth     = `${sliderGlobalPaddingTablet?.top}${sliderGlobalPaddingUnits?.Tablet} ${sliderGlobalPaddingTablet?.right}${sliderGlobalPaddingUnits?.Tablet} ${sliderGlobalPaddingTablet?.bottom}${sliderGlobalPaddingUnits?.Tablet} ${sliderGlobalPaddingTablet?.left}${sliderGlobalPaddingUnits?.Tablet}`;
+	const globalMobilePaddingWidth     = `${sliderGlobalPaddingMobile?.top}${sliderGlobalPaddingUnits?.Mobile} ${sliderGlobalPaddingMobile?.right}${sliderGlobalPaddingUnits?.Mobile} ${sliderGlobalPaddingMobile?.bottom}${sliderGlobalPaddingUnits?.Mobile} ${sliderGlobalPaddingMobile?.left}${sliderGlobalPaddingUnits?.Mobile}`;
 	/** End Global Padding */
 
 	/** Start Global Margin */
@@ -355,9 +355,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		})
 	}
 
-	const globalDesktopMarginWidth = `${sliderGlobalMarginDesktop.top}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.right}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.bottom}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.left}${sliderGlobalMarginUnits.Desktop}`;
-	const globalTabletMarginWidth = `${sliderGlobalMarginTablet.top}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.right}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.bottom}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.left}${sliderGlobalMarginUnits.Tablet}`;
-	const globalMobileMarginWidth = `${sliderGlobalMarginMobile.top}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.right}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.bottom}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.left}${sliderGlobalMarginUnits.Mobile}`;
+	const globalDesktopMarginWidth = `${sliderGlobalMarginDesktop?.top}${sliderGlobalMarginUnits?.Desktop} ${sliderGlobalMarginDesktop?.right}${sliderGlobalMarginUnits?.Desktop} ${sliderGlobalMarginDesktop?.bottom}${sliderGlobalMarginUnits?.Desktop} ${sliderGlobalMarginDesktop?.left}${sliderGlobalMarginUnits?.Desktop}`;
+	const globalTabletMarginWidth = `${sliderGlobalMarginTablet?.top}${sliderGlobalMarginUnits?.Tablet} ${sliderGlobalMarginTablet?.right}${sliderGlobalMarginUnits?.Tablet} ${sliderGlobalMarginTablet?.bottom}${sliderGlobalMarginUnits?.Tablet} ${sliderGlobalMarginTablet?.left}${sliderGlobalMarginUnits?.Tablet}`;
+	const globalMobileMarginWidth = `${sliderGlobalMarginMobile?.top}${sliderGlobalMarginUnits?.Mobile} ${sliderGlobalMarginMobile?.right}${sliderGlobalMarginUnits?.Mobile} ${sliderGlobalMarginMobile?.bottom}${sliderGlobalMarginUnits?.Mobile} ${sliderGlobalMarginMobile?.left}${sliderGlobalMarginUnits?.Mobile}`;
 	/** End Global Margin */
 
 	/** Start Global border */
@@ -428,9 +428,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const globalDesktopBorderWidth = `${sliderGlobalBorderDesktop.top}${sliderGlobalBorderUnits.Desktop} ${sliderGlobalBorderDesktop.right}${sliderGlobalBorderUnits.Desktop} ${sliderGlobalBorderDesktop.bottom}${sliderGlobalBorderUnits.Desktop} ${sliderGlobalBorderDesktop.left}${sliderGlobalBorderUnits.Desktop}`;
-	const globalTabletBorderWidth = `${sliderGlobalBorderTablet.top}${sliderGlobalBorderUnits.Tablet} ${sliderGlobalBorderTablet.right}${sliderGlobalBorderUnits.Tablet} ${sliderGlobalBorderTablet.bottom}${sliderGlobalBorderUnits.Tablet} ${sliderGlobalBorderTablet.left}${sliderGlobalBorderUnits.Tablet}`;
-	const globalMobileBorderWidth = `${sliderGlobalBorderMobile.top}${sliderGlobalBorderUnits.Mobile} ${sliderGlobalBorderMobile.right}${sliderGlobalBorderUnits.Mobile} ${sliderGlobalBorderMobile.bottom}${sliderGlobalBorderUnits.Mobile} ${sliderGlobalBorderMobile.left}${sliderGlobalBorderUnits.Mobile}`;
+	const globalDesktopBorderWidth = `${sliderGlobalBorderDesktop?.top}${sliderGlobalBorderUnits?.Desktop} ${sliderGlobalBorderDesktop?.right}${sliderGlobalBorderUnits?.Desktop} ${sliderGlobalBorderDesktop?.bottom}${sliderGlobalBorderUnits?.Desktop} ${sliderGlobalBorderDesktop?.left}${sliderGlobalBorderUnits?.Desktop}`;
+	const globalTabletBorderWidth = `${sliderGlobalBorderTablet?.top}${sliderGlobalBorderUnits?.Tablet} ${sliderGlobalBorderTablet?.right}${sliderGlobalBorderUnits?.Tablet} ${sliderGlobalBorderTablet?.bottom}${sliderGlobalBorderUnits?.Tablet} ${sliderGlobalBorderTablet?.left}${sliderGlobalBorderUnits?.Tablet}`;
+	const globalMobileBorderWidth = `${sliderGlobalBorderMobile?.top}${sliderGlobalBorderUnits?.Mobile} ${sliderGlobalBorderMobile?.right}${sliderGlobalBorderUnits?.Mobile} ${sliderGlobalBorderMobile?.bottom}${sliderGlobalBorderUnits?.Mobile} ${sliderGlobalBorderMobile?.left}${sliderGlobalBorderUnits?.Mobile}`;
 	/** End Border */
 
 	/** Start Global border radius*/
@@ -504,9 +504,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** end Global border radius */
 
 	/** Start Global Border Radius */
-	const globalDesktopBorderRadiusWidth = `${sliderGlobalBorderRadiusDesktop.top}${sliderGlobalBorderRadiusUnits.Desktop} ${sliderGlobalBorderRadiusDesktop.right}${sliderGlobalBorderRadiusUnits.Desktop} ${sliderGlobalBorderRadiusDesktop.bottom}${sliderGlobalBorderRadiusUnits.Desktop} ${sliderGlobalBorderRadiusDesktop.left}${sliderGlobalBorderRadiusUnits.Desktop}`;
-	const globalTabletBorderRadiusWidth = `${sliderGlobalBorderRadiusTablet.top}${sliderGlobalBorderRadiusUnits.Tablet} ${sliderGlobalBorderRadiusTablet.right}${sliderGlobalBorderRadiusUnits.Tablet} ${sliderGlobalBorderRadiusTablet.bottom}${sliderGlobalBorderRadiusUnits.Tablet} ${sliderGlobalBorderRadiusTablet.left}${sliderGlobalBorderRadiusUnits.Tablet}`;
-	const globalMobileBorderRadiusWidth = `${sliderGlobalBorderRadiusMobile.top}${sliderGlobalBorderRadiusUnits.Mobile} ${sliderGlobalBorderRadiusMobile.right}${sliderGlobalBorderRadiusUnits.Mobile} ${sliderGlobalBorderRadiusMobile.bottom}${sliderGlobalBorderRadiusUnits.Mobile} ${sliderGlobalBorderRadiusMobile.left}${sliderGlobalBorderRadiusUnits.Mobile}`;
+	const globalDesktopBorderRadiusWidth = `${sliderGlobalBorderRadiusDesktop?.top}${sliderGlobalBorderRadiusUnits?.Desktop} ${sliderGlobalBorderRadiusDesktop?.right}${sliderGlobalBorderRadiusUnits?.Desktop} ${sliderGlobalBorderRadiusDesktop?.bottom}${sliderGlobalBorderRadiusUnits?.Desktop} ${sliderGlobalBorderRadiusDesktop?.left}${sliderGlobalBorderRadiusUnits?.Desktop}`;
+	const globalTabletBorderRadiusWidth = `${sliderGlobalBorderRadiusTablet?.top}${sliderGlobalBorderRadiusUnits?.Tablet} ${sliderGlobalBorderRadiusTablet?.right}${sliderGlobalBorderRadiusUnits?.Tablet} ${sliderGlobalBorderRadiusTablet?.bottom}${sliderGlobalBorderRadiusUnits?.Tablet} ${sliderGlobalBorderRadiusTablet?.left}${sliderGlobalBorderRadiusUnits?.Tablet}`;
+	const globalMobileBorderRadiusWidth = `${sliderGlobalBorderRadiusMobile?.top}${sliderGlobalBorderRadiusUnits?.Mobile} ${sliderGlobalBorderRadiusMobile?.right}${sliderGlobalBorderRadiusUnits?.Mobile} ${sliderGlobalBorderRadiusMobile?.bottom}${sliderGlobalBorderRadiusUnits?.Mobile} ${sliderGlobalBorderRadiusMobile?.left}${sliderGlobalBorderRadiusUnits?.Mobile}`;
 	/** End Global Border Radius */
 
     /**
@@ -1093,7 +1093,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${globalDesktopBorderRadiusWidth && sliderGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''} 
             ${sliderGlobalBorderColor ? `border-color: ${sliderGlobalBorderColor};` : ''}
             ${sliderGlobalBoxShadowCssValue ? `box-shadow: ${sliderGlobalBoxShadowCssValue};` : ''}
-            ${sliderGlobalZIndex.Desktop ? `z-index: ${sliderGlobalZIndex.Desktop};` : ''}
+            ${sliderGlobalZIndex?.Desktop ? `z-index: ${sliderGlobalZIndex?.Desktop};` : ''}
             transition: all .3s ease-in-out;
             position: relative;
         }
@@ -1104,8 +1104,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockId} .fb-marquee-swiper .swiper-wrapper .swiper-slide{
-          ${slideWidth.Desktop && slideWidthUnits.Desktop ? `width: ${slideWidth.Desktop}${slideWidthUnits.Desktop} !important;` : ''}  
-          ${slideHeight.Desktop && slideHeightUnits.Desktop ? `height: ${slideHeight.Desktop}${slideHeightUnits.Desktop} !important;` : ''}
+          ${slideWidth?.Desktop && slideWidthUnits?.Desktop ? `width: ${slideWidth?.Desktop}${slideWidthUnits?.Desktop} !important;` : ''}  
+          ${slideHeight?.Desktop && slideHeightUnits?.Desktop ? `height: ${slideHeight?.Desktop}${slideHeightUnits?.Desktop} !important;` : ''}
           ${slideDesktopPaddingWidth && slidePaddingDesktop?.top ? `padding: ${slideDesktopPaddingWidth} !important;` : ''}
         }
 
@@ -1113,13 +1113,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockId} .fb-marquee-swiper::before {
             left: 0;
             background: linear-gradient(to right, ${sliderOverlayStartColor} 0%, ${sliderOverlayEndColor} 100%) !important;
-            width: ${sliderOverlayWidth.Desktop}${sliderOverlayWidthUnits.Desktop} !important;
+            width: ${sliderOverlayWidth?.Desktop}${sliderOverlayWidthUnits?.Desktop} !important;
         }
 
         .${blockId} .fb-marquee-swiper::after {
             right: 0;
             background: linear-gradient(to left, ${sliderOverlayStartColor} 0%, ${sliderOverlayEndColor} 100%) !important;
-            width: ${sliderOverlayWidth.Desktop}${sliderOverlayWidthUnits.Desktop} !important;
+            width: ${sliderOverlayWidth?.Desktop}${sliderOverlayWidthUnits?.Desktop} !important;
         }
         ` : ''}
 
@@ -1130,15 +1130,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${globalTabletPaddingWidth && sliderGlobalPaddingTablet?.top ? `padding: ${globalTabletPaddingWidth};` : ''}  
                 ${globalTabletMarginWidth && sliderGlobalMarginTablet?.top ? `margin: ${globalTabletMarginWidth};` : ''} 
                 ${globalTabletBorderWidth && sliderGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''} 
-                ${sliderGlobalZIndex.Tablet ? `z-index: ${sliderGlobalZIndex.Tablet};` : ''}
+                ${sliderGlobalZIndex?.Tablet ? `z-index: ${sliderGlobalZIndex?.Tablet};` : ''}
             }
             .${blockId}.fb-marquee-slider-container:hover { 
                 ${tabletBackgroundHoverStyles}
             }
  
             .${blockId} .swiper-slide { 
-                ${slideWidth.Tablet && slideWidthUnits.Tablet ? `width: ${slideWidth.Tablet}${slideWidthUnits.Tablet} !important;` : ''}  
-                ${slideHeight.Tablet && slideHeightUnits.Tablet ? `height: ${slideHeight.Tablet}${slideHeightUnits.Tablet} !important;` : ''}
+                ${slideWidth?.Tablet && slideWidthUnits?.Tablet ? `width: ${slideWidth?.Tablet}${slideWidthUnits?.Tablet} !important;` : ''}  
+                ${slideHeight?.Tablet && slideHeightUnits?.Tablet ? `height: ${slideHeight?.Tablet}${slideHeightUnits?.Tablet} !important;` : ''}
                 ${slideTabletPaddingWidth && slidePaddingTablet?.top ? `padding: ${slideTabletPaddingWidth} !important;` : ''}
             }
         }
@@ -1148,15 +1148,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${globalMobilePaddingWidth && sliderGlobalPaddingMobile?.top ? `padding: ${globalMobilePaddingWidth};` : ''}  
                 ${globalMobileMarginWidth && sliderGlobalMarginMobile?.top ? `margin: ${globalMobileMarginWidth};` : ''} 
                 ${globalMobileBorderWidth && sliderGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''} 
-                ${sliderGlobalZIndex.Mobile ? `z-index: ${sliderGlobalZIndex.Mobile};` : ''}
+                ${sliderGlobalZIndex?.Mobile ? `z-index: ${sliderGlobalZIndex?.Mobile};` : ''}
             }
             .${blockId}.fb-marquee-slider-container:hover { 
                 ${mobileBackgroundHoverStyles}
             }
 
             .${blockId} .swiper-slide {
-                ${slideWidth.Mobile && slideWidthUnits.Mobile ? `width: ${slideWidth.Mobile}${slideWidthUnits.Mobile} !important;` : ''}  
-                ${slideHeight.Mobile && slideHeightUnits.Mobile ? `height: ${slideHeight.Mobile}${slideHeightUnits.Mobile} !important;` : ''}
+                ${slideWidth?.Mobile && slideWidthUnits?.Mobile ? `width: ${slideWidth?.Mobile}${slideWidthUnits?.Mobile} !important;` : ''}  
+                ${slideHeight?.Mobile && slideHeightUnits?.Mobile ? `height: ${slideHeight?.Mobile}${slideHeightUnits?.Mobile} !important;` : ''}
                 ${slideMobilePaddingWidth && slidePaddingMobile?.top ? `padding: ${slideMobilePaddingWidth} !important;` : ''}
             }
         }
