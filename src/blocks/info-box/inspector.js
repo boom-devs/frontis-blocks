@@ -62,7 +62,11 @@ import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ImageControl from '@Components/image-control';
-
+import getProToggleControls from '@Utils/getProToggleControls';
+import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
+import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
+import generateSvgIcon from '@Utils/generateSvgIcon';
+import getProActive from '@Utils/getProActive';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -212,7 +216,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infoButtonLink,
 		infobtnTargetUrl,
 		icon,
+		frontendIcon,
 		btnIcon,
+		frontendBtnIcon,
 		btnImageUrl,
 		btnImageAlt,
 		btnImageID,
@@ -390,6 +396,81 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		infoBoxVRTopOffsetUnits,
 		infoBoxVRBottomOffset,
 		infoBoxVRBottomOffsetUnits,
+
+		/** Start Dynamic Title Text */
+		dynamicTitleEnabled,
+		dynamicTitleSource,
+		dynamicTitlePostId,
+		dynamicTitlePostType,
+		dynamicTitlePostLabel,
+		dynamicTitleField,
+		dynamicTitleFeaturedImageField,
+
+		dynamicTitleDateType,
+		dynamicTitleDateFormat,
+
+		dynamicTitleTimeType,
+		dynamicTitleTimeFormat,
+
+		dynamicTitleCommentsZeroText,
+		dynamicTitleCommentsOneText,
+		dynamicTitleCommentsManyText,
+
+		dynamicTitleTermsTaxonomy,
+		dynamicTitleTermsSeparator,
+		dynamicTitleEnableLink,
+		dynamicTitleLinkSource,
+		/** End Dynamic Title Text */
+
+		/** Start Dynamic Description Text */
+		dynamicDescriptionEnabled,
+		dynamicDescriptionSource,
+		dynamicDescriptionPostId,
+		dynamicDescriptionPostType,
+		dynamicDescriptionPostLabel,
+		dynamicDescriptionField,
+		dynamicDescriptionFeaturedImageField,
+
+		dynamicDescriptionDateType,
+		dynamicDescriptionDateFormat,
+
+		dynamicDescriptionTimeType,
+		dynamicDescriptionTimeFormat,
+
+		dynamicDescriptionCommentsZeroText,
+		dynamicDescriptionCommentsOneText,
+		dynamicDescriptionCommentsManyText,
+
+		dynamicDescriptionTermsTaxonomy,
+		dynamicDescriptionTermsSeparator,
+		dynamicDescriptionEnableLink,
+		dynamicDescriptionLinkSource,
+		/** End Dynamic Description Text */
+
+		/** Start Dynamic Btn One Text */
+		dynamicBtnEnabled,
+		dynamicBtnSource,
+		dynamicBtnPostId,
+		dynamicBtnPostType,
+		dynamicBtnPostLabel,
+		dynamicBtnField,
+		dynamicBtnFeaturedImageField,
+
+		dynamicBtnDateType,
+		dynamicBtnDateFormat,
+
+		dynamicBtnTimeType,
+		dynamicBtnTimeFormat,
+
+		dynamicBtnCommentsZeroText,
+		dynamicBtnCommentsOneText,
+		dynamicBtnCommentsManyText,
+
+		dynamicBtnTermsTaxonomy,
+		dynamicBtnTermsSeparator,
+		dynamicBtnEnableLink,	
+		dynamicBtnLinkSource,
+		/** End Dynamic Btn Text */
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -421,6 +502,62 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const buttonIconHandler = (iconName) => {
 		setAttributes({ btnIcon: iconName });
 	};
+
+	/**
+     * Generate SVG Icons for Icon
+     */
+	useEffect(() => {
+		setAttributes({
+			frontendIcon: generateSvgIcon(icon),
+			frontendBtnIcon: generateSvgIcon(btnIcon), 
+		})
+	}, [icon, btnIcon]);
+
+	// Check if Pro is active
+	const getProActiveState = getProActive();
+	useEffect(() => {
+		if (!getProActiveState) { 
+			setAttributes({
+				dynamicTitleEnabled: false,
+				dynamicTitleEnableLink: false,
+				dynamicDescriptionEnabled: false,
+				dynamicDescriptionEnableLink: false,
+			});
+		}
+	}, [getProActiveState]);
+
+	/**
+	 * Toggle Controls for Dynamic Content
+	 */
+	const dynamicTitleContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-info-box-dynamic-title-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicTitleEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'info-box-dynamic-title-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicDescriptionContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-info-box-dynamic-description-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicDescriptionEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'info-box-dynamic-description-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicBtnContentToggleControls = getProToggleControls({ 
+		hook: 'frontisblocks-info-box-dynamic-btn-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicBtnEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'info-box-dynamic-btn-content',
+		isProActive : getProActiveState
+	});
 
 	/** Start Preset Style **/
 	const changeInfoBoxPreset = (selectedPreset) => {
@@ -616,57 +753,57 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: "",
 				},
 			},
-			"preset-6": {
-				info_Button_Switcher: true,
-				info_Button_Text: '',
-				mediaClassicColor: '',
-				mediaHoverClassicColor: '',
-				globalBgColor: '#EBF5FF',
-				globalBgHoverColor: '#EBF5FF',
-				mediaIconColor: '#399CFF',
-				mediaIconHoverColor: '#399CFF',
-				Heading_Color: '#15171C',
-				Heading_Hover_Color: '#15171C',
-				SubHeadingColor: '#555E72',
-				SubHeadingHoverColor: '#555E72',
-				buttonTextColor: '#399CFF',
-				buttonTextHoverColor: '#399CFF',
-				buttonBgColor: '#EBF5FF',
-				buttonBgHoverColor: '#EBF5FF',
-				btnIcon: 'arrow-left',
-				btnIconColor: '#399CFF',
-				btnIconHoverColor: '#399CFF',
-				buttonIconRotate: {
-					Desktop: "145",
-					Tablet: "145",
-					Mobile: "145",
-				},
-				btnIconPosition: 'left',
-				infoButtonDesktopMargin: {
-					top: "0",
-					bottom: "0",
-					left: "0",
-					right: "0",
-				},
-				infoButtonDesktopPadding: {
-					top: "19",
-					bottom: "19",
-					left: "19",
-					right: "19",
-				},
-				infoBtnDesktopBorderradiusWidth: {
-					top: "18",
-					bottom: "18",
-					left: "8",
-					right: "18",
-				},
-				globalBorderRadiusDesktop: {
-					top: "18",
-					bottom: "18",
-					left: "18",
-					right: "18",
-				},
-			},
+			// "preset-6": {
+			// 	info_Button_Switcher: true,
+			// 	info_Button_Text: '',
+			// 	mediaClassicColor: '',
+			// 	mediaHoverClassicColor: '',
+			// 	globalBgColor: '#EBF5FF',
+			// 	globalBgHoverColor: '#EBF5FF',
+			// 	mediaIconColor: '#399CFF',
+			// 	mediaIconHoverColor: '#399CFF',
+			// 	Heading_Color: '#15171C',
+			// 	Heading_Hover_Color: '#15171C',
+			// 	SubHeadingColor: '#555E72',
+			// 	SubHeadingHoverColor: '#555E72',
+			// 	buttonTextColor: '#399CFF',
+			// 	buttonTextHoverColor: '#399CFF',
+			// 	buttonBgColor: '#EBF5FF',
+			// 	buttonBgHoverColor: '#EBF5FF',
+			// 	btnIcon: 'arrow-left',
+			// 	btnIconColor: '#399CFF',
+			// 	btnIconHoverColor: '#399CFF',
+			// 	buttonIconRotate: {
+			// 		Desktop: "145",
+			// 		Tablet: "145",
+			// 		Mobile: "145",
+			// 	},
+			// 	btnIconPosition: 'left',
+			// 	infoButtonDesktopMargin: {
+			// 		top: "0",
+			// 		bottom: "0",
+			// 		left: "0",
+			// 		right: "0",
+			// 	},
+			// 	infoButtonDesktopPadding: {
+			// 		top: "19",
+			// 		bottom: "19",
+			// 		left: "19",
+			// 		right: "19",
+			// 	},
+			// 	infoBtnDesktopBorderradiusWidth: {
+			// 		top: "18",
+			// 		bottom: "18",
+			// 		left: "8",
+			// 		right: "18",
+			// 	},
+			// 	globalBorderRadiusDesktop: {
+			// 		top: "18",
+			// 		bottom: "18",
+			// 		left: "18",
+			// 		right: "18",
+			// 	},
+			// },
 		};
 
 		const selectedPresetConfig = presetConfigurations[selectedPreset];
@@ -2293,7 +2430,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			align-items: ${infoIconVerticalPosition === "v-top" ? "flex-start" : infoIconVerticalPosition === "v-middle" ? "center" : infoIconVerticalPosition === "v-bottom" ? "flex-end" : "flex-start"};
 		  }
 	  
-		  .fb-info-box-wrapper.${blockID} .fb-heading {
+		  .fb-info-box-wrapper.${blockID} .fb-heading,
+		  .fb-info-box-wrapper.${blockID} .fb-heading .fb-title-dynamic-link {
 			  ${Heading_Color ? `color: ${Heading_Color};` : ""}
 			  ${Heading_Background_Color ? `background-color: ${Heading_Background_Color};` : ""}
 
@@ -2324,14 +2462,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  transition: all .3s ease-in-out;
 			}
 	  
-		  .fb-info-box-wrapper.${blockID}:hover .fb-heading {
+		  .fb-info-box-wrapper.${blockID}:hover .fb-heading,
+		   .fb-info-box-wrapper.${blockID}:hover .fb-heading .fb-title-dynamic-link {
 			  ${Heading_Hover_Color ? `color: ${Heading_Hover_Color};` : ""}
 			  ${Heading_Border_Hover_Color ? `border-color: ${Heading_Border_Hover_Color};` : ""}
 			  transition: all .3s ease-in-out;
 		  }
 	  
 		  @media only screen and (max-width: 1024px) {
-			  .fb-info-box-wrapper.${blockID} .fb-heading {
+			  .fb-info-box-wrapper.${blockID} .fb-heading,
+			  .fb-info-box-wrapper.${blockID} .fb-heading .fb-title-dynamic-link {
 				  ${headingGlobalTypoSwitcher?.fontSize === false && headingFontSize?.Tablet && headingFontSizeUnits?.Tablet ? `font-size: ${headingFontSize?.Tablet}${headingFontSizeUnits?.Tablet};` : ''}
                   ${headingGlobalTypoSwitcher?.letterSpacing === false && headingLetterSpacing?.Tablet && headingLetterSpacingUnits?.Tablet ? `letter-spacing: ${headingLetterSpacing?.Tablet}${headingLetterSpacingUnits?.Tablet};` : ''}
                   ${headingGlobalTypoSwitcher?.lineHeight === false && headingLineHeight?.Tablet && headingLineHeightUnits?.Tablet ? `line-height: ${headingLineHeight?.Tablet}${headingLineHeightUnits?.Tablet};` : ''}
@@ -2342,7 +2482,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  }
 		  }
 		  @media only screen and (max-width: 724px) {
-			  .fb-info-box-wrapper.${blockID} .fb-heading {
+			  .fb-info-box-wrapper.${blockID} .fb-heading,
+			  .fb-info-box-wrapper.${blockID} .fb-heading .fb-title-dynamic-link {
 				  ${headingGlobalTypoSwitcher?.fontSize === false && headingFontSize?.Mobile && headingFontSizeUnits?.Mobile ? `font-size: ${headingFontSize?.Mobile}${headingFontSizeUnits?.Mobile};` : ''}
                   ${headingGlobalTypoSwitcher?.letterSpacing === false && headingLetterSpacing?.Mobile && headingLetterSpacingUnits?.Mobile ? `letter-spacing: ${headingLetterSpacing?.Mobile}${headingLetterSpacingUnits?.Mobile};` : ''}
                   ${headingGlobalTypoSwitcher?.lineHeight === false && headingLineHeight?.Mobile && headingLineHeightUnits?.Mobile ? `line-height: ${headingLineHeight?.Mobile}${headingLineHeightUnits?.Mobile};` : ''}
@@ -2353,7 +2494,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  }
 		  }
 		
-		.fb-info-box-wrapper.${blockID} .fb-description {
+		.fb-info-box-wrapper.${blockID} .fb-description,
+		.fb-info-box-wrapper.${blockID} .fb-description .fb-description-dynamic-link {
 			${SubHeadingColor ? `color: ${SubHeadingColor};` : ""}
 
 			${subHeadingGlobalTypoSwitcher?.fontFamily === true && subHeadingGlobalTypographyData?.fontFamily ? `font-family: ${subHeadingGlobalTypographyData?.fontFamily};` : ''}
@@ -2379,12 +2521,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 
-		.fb-info-box-wrapper.${blockID}:hover .fb-description {
+		.fb-info-box-wrapper.${blockID}:hover .fb-description,
+		.fb-info-box-wrapper.${blockID}:hover .fb-description .fb-description-dynamic-link {
 			${SubHeadingHoverColor ? `color: ${SubHeadingHoverColor};` : ""}
 		}
 
 		@media only screen and (max-width: 1024px) {
-			.fb-info-box-wrapper.${blockID} .fb-description {
+			.fb-info-box-wrapper.${blockID} .fb-description,
+			.fb-info-box-wrapper.${blockID} .fb-description .fb-description-dynamic-link {
 				${subHeadingTabPaddingValue && SubHeadingTabPadding?.top ? `padding: ${subHeadingTabPaddingValue};` : ""}
 				${descTabMarginValue && descTabMargin?.top ? `margin: ${descTabMarginValue};` : ""}
 				${subHeadingGlobalTypoSwitcher?.fontSize === false && subHeadingFontSize?.Tablet && subHeadingFontSizeUnits?.Tablet ? `font-size: ${subHeadingFontSize?.Tablet}${subHeadingFontSizeUnits?.Tablet};` : ''}
@@ -2394,7 +2538,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		@media only screen and (max-width: 757px) {
-			.fb-info-box-wrapper.${blockID} .fb-description {
+			.fb-info-box-wrapper.${blockID} .fb-description,
+			 .fb-info-box-wrapper.${blockID} .fb-description .fb-description-dynamic-link {
 				${subHeadingMobilePaddingValue && SubHeadingMobilePadding?.top ? `padding: ${subHeadingMobilePaddingValue};` : ""}
 				${descMobileMarginValue && descMobileMargin?.top ? `margin: ${descMobileMarginValue};` : ""}
 				${subHeadingGlobalTypoSwitcher?.fontSize === false && subHeadingFontSize?.Mobile && subHeadingFontSizeUnits?.Mobile ? `font-size: ${subHeadingFontSize?.Mobile}${subHeadingFontSizeUnits?.Mobile};` : ''}
@@ -3000,15 +3145,67 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
 					/>
 
+					{dynamicTitleContentToggleControls.map((control, index) => (
+                        <div key={control.key || index}>{control.comp}</div>
+                    ))}
+	
+					<DynamicDataSourceControl
+						enabled={dynamicTitleEnabled}
+						
+						source={dynamicTitleSource}
+						setSource={(value) => setAttributes({ dynamicTitleSource: value })}
+						postId={dynamicTitlePostId}
+						setPostId={(value) => setAttributes({ dynamicTitlePostId: value })}
+						postType={dynamicTitlePostType}
+						setPostType={(value) => setAttributes({ dynamicTitlePostType: value })}
+						postLabel={dynamicTitlePostLabel}
+						setPostLabel={(value) => setAttributes({ dynamicTitlePostLabel: value })}
 
-					<TextareaControl
-						label={__("Heading Text", "frontis-block")}
-						value={Heading_Text}
-						onChange={(value) =>
-							setAttributes({ Heading_Text: value })
-						}
-						className="fb-setting-text"
+						field={dynamicTitleField}
+						setField={(value) => setAttributes({ dynamicTitleField: value })}
+						featuredImageField={dynamicTitleFeaturedImageField}
+						setFeaturedImageField={(value) => setAttributes({ dynamicTitleFeaturedImageField: value })}
+
+						dateType={dynamicTitleDateType}
+						setDateType={(value) => setAttributes({ dynamicTitleDateType: value })}
+						dateFormat={dynamicTitleDateFormat}
+						setDateFormat={(value) => setAttributes({ dynamicTitleDateFormat: value })}
+						timeType={dynamicTitleTimeType}
+						setTimeType={(value) => setAttributes({ dynamicTitleTimeType: value })}
+						timeFormat={dynamicTitleTimeFormat}
+						setTimeFormat={(value) => setAttributes({ dynamicTitleTimeFormat: value })}
+
+						commentsZeroText={dynamicTitleCommentsZeroText}
+						setCommentsZeroText={(value) => setAttributes({ dynamicTitleCommentsZeroText: value })}
+						commentsOneText={dynamicTitleCommentsOneText}
+						setCommentsOneText={(value) =>setAttributes({ dynamicTitleCommentsOneText: value })}
+						commentsManyText={dynamicTitleCommentsManyText}
+						setCommentsManyText={(value) =>setAttributes({ dynamicTitleCommentsManyText: value })}
+
+						termsTaxonomy={dynamicTitleTermsTaxonomy}
+						setTermsTaxonomy={(value) => setAttributes({ dynamicTitleTermsTaxonomy: value })}
+						termsSeparator={dynamicTitleTermsSeparator}
+						setTermsSeparator={(value) => setAttributes({ dynamicTitleTermsSeparator: value })}
 					/>
+					{dynamicTitleEnabled && (
+						<DynamicDataLinkControl
+							enableLink={dynamicTitleEnableLink}
+							setEnableLink={(value) => setAttributes({ dynamicTitleEnableLink: value })}
+							linkSource={dynamicTitleLinkSource}
+							setLinkSource={(value) => setAttributes({ dynamicTitleLinkSource: value })}
+						/>
+					)}
+
+					{!dynamicTitleEnabled && (
+						<TextareaControl
+							label={__("Heading Text", "frontis-block")}
+							value={Heading_Text}
+							onChange={(value) =>
+								setAttributes({ Heading_Text: value })
+							}
+							className="fb-setting-text"
+						/>
+					)}
 				</PanelBody>
 			</div>
 			<div className="fb-advanced-wrapper">
@@ -3033,14 +3230,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
 							/>
 
-							<TextareaControl
-								label={__("Sub Heading Text", "frontis-block")}
-								value={Sub_Heading_Text}
-								onChange={(value) =>
-									setAttributes({ Sub_Heading_Text: value })
-								}
-								className="fb-sub-heading-text"
+							{dynamicDescriptionContentToggleControls.map((control, index) => (
+								<div key={control.key || index}>{control.comp}</div>
+							))}
+			
+							<DynamicDataSourceControl
+								enabled={dynamicDescriptionEnabled}
+								
+								source={dynamicDescriptionSource}
+								setSource={(value) => setAttributes({ dynamicDescriptionSource: value })}
+								postId={dynamicDescriptionPostId}
+								setPostId={(value) => setAttributes({ dynamicDescriptionPostId: value })}
+								postType={dynamicDescriptionPostType}
+								setPostType={(value) => setAttributes({ dynamicDescriptionPostType: value })}
+								postLabel={dynamicDescriptionPostLabel}
+								setPostLabel={(value) => setAttributes({ dynamicDescriptionPostLabel: value })}
+
+								field={dynamicDescriptionField}
+								setField={(value) => setAttributes({ dynamicDescriptionField: value })}
+								featuredImageField={dynamicDescriptionFeaturedImageField}
+								setFeaturedImageField={(value) => setAttributes({ dynamicDescriptionFeaturedImageField: value })}
+
+								dateType={dynamicDescriptionDateType}
+								setDateType={(value) => setAttributes({ dynamicDescriptionDateType: value })}
+								dateFormat={dynamicDescriptionDateFormat}
+								setDateFormat={(value) => setAttributes({ dynamicDescriptionDateFormat: value })}
+								timeType={dynamicDescriptionTimeType}
+								setTimeType={(value) => setAttributes({ dynamicDescriptionTimeType: value })}
+								timeFormat={dynamicDescriptionTimeFormat}
+								setTimeFormat={(value) => setAttributes({ dynamicDescriptionTimeFormat: value })}
+
+								commentsZeroText={dynamicDescriptionCommentsZeroText}
+								setCommentsZeroText={(value) => setAttributes({ dynamicDescriptionCommentsZeroText: value })}
+								commentsOneText={dynamicDescriptionCommentsOneText}
+								setCommentsOneText={(value) =>setAttributes({ dynamicDescriptionCommentsOneText: value })}
+								commentsManyText={dynamicDescriptionCommentsManyText}
+								setCommentsManyText={(value) =>setAttributes({ dynamicDescriptionCommentsManyText: value })}
+
+								termsTaxonomy={dynamicDescriptionTermsTaxonomy}
+								setTermsTaxonomy={(value) => setAttributes({ dynamicDescriptionTermsTaxonomy: value })}
+								termsSeparator={dynamicDescriptionTermsSeparator}
+								setTermsSeparator={(value) => setAttributes({ dynamicDescriptionTermsSeparator: value })}
 							/>
+
+							{dynamicDescriptionEnabled && ( 
+								<DynamicDataLinkControl
+									enableLink={dynamicDescriptionEnableLink}
+									setEnableLink={(value) => setAttributes({ dynamicDescriptionEnableLink: value })}
+									linkSource={dynamicDescriptionLinkSource}
+									setLinkSource={(value) => setAttributes({ dynamicDescriptionLinkSource: value })}
+								/>
+							)}
+
+							{!dynamicDescriptionEnabled && (
+								<TextareaControl
+									label={__("Description Text", "frontis-block")}
+									value={Sub_Heading_Text}
+									onChange={(value) =>
+										setAttributes({ Sub_Heading_Text: value })
+									}
+									className="fb-sub-heading-text"
+								/>
+							)}
 						</>
 					)}
 				</PanelBody>
@@ -3067,14 +3318,59 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								globalAlignment={buttonAlignment}
 								setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
 							/>
-							<TextareaControl
-								label={__("Button Text", "frontis-block")}
-								value={info_Button_Text}
-								onChange={(value) =>
-									setAttributes({ info_Button_Text: value })
-								}
-								className="fb-info-button-text"
+
+							{dynamicBtnContentToggleControls.map((control, index) => (
+								<div key={control.key || index}>{control.comp}</div>
+							))}
+			
+							<DynamicDataSourceControl
+								enabled={dynamicBtnEnabled}
+								
+								source={dynamicBtnSource}
+								setSource={(value) => setAttributes({ dynamicBtnSource: value })}
+								postId={dynamicBtnPostId}
+								setPostId={(value) => setAttributes({ dynamicBtnPostId: value })}
+								postType={dynamicBtnPostType}
+								setPostType={(value) => setAttributes({ dynamicBtnPostType: value })}
+								postLabel={dynamicBtnPostLabel}
+								setPostLabel={(value) => setAttributes({ dynamicBtnPostLabel: value })}
+
+								field={dynamicBtnField}
+								setField={(value) => setAttributes({ dynamicBtnField: value })}
+								featuredImageField={dynamicBtnFeaturedImageField}
+								setFeaturedImageField={(value) => setAttributes({ dynamicBtnFeaturedImageField: value })}
+
+								dateType={dynamicBtnDateType}
+								setDateType={(value) => setAttributes({ dynamicBtnDateType: value })}
+								dateFormat={dynamicBtnDateFormat}
+								setDateFormat={(value) => setAttributes({ dynamicBtnDateFormat: value })}
+								timeType={dynamicBtnTimeType}
+								setTimeType={(value) => setAttributes({ dynamicBtnTimeType: value })}
+								timeFormat={dynamicBtnTimeFormat}
+								setTimeFormat={(value) => setAttributes({ dynamicBtnTimeFormat: value })}
+
+								commentsZeroText={dynamicBtnCommentsZeroText}
+								setCommentsZeroText={(value) => setAttributes({ dynamicBtnCommentsZeroText: value })}
+								commentsOneText={dynamicBtnCommentsOneText}
+								setCommentsOneText={(value) =>setAttributes({ dynamicBtnCommentsOneText: value })} 
+								commentsManyText={dynamicBtnCommentsManyText}
+								setCommentsManyText={(value) =>setAttributes({ dynamicBtnCommentsManyText: value })}
+
+								termsTaxonomy={dynamicBtnTermsTaxonomy}
+								setTermsTaxonomy={(value) => setAttributes({ dynamicBtnTermsTaxonomy: value })}
+								termsSeparator={dynamicBtnTermsSeparator}
+								setTermsSeparator={(value) => setAttributes({ dynamicBtnTermsSeparator: value })}
 							/>
+							{!dynamicBtnEnabled && (
+								<TextareaControl
+									label={__("Button Text", "frontis-block")}
+									value={info_Button_Text}
+									onChange={(value) =>
+										setAttributes({ info_Button_Text: value })
+									}
+									className="fb-info-button-text"
+								/>
+							)}
 							<ToggleControl
 								label={__("Show Icon", "frontis-block")}
 								checked={buttonIconSwitcher}
@@ -3121,19 +3417,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									/>
 								</>
 							)}
-
-							<BaseControl>
-								<FB_UrlControl
-									url={infoButtonLink}
-									onChangeUrl={(value) =>
-										setAttributes({ infoButtonLink: value })
-									}
-									openInNewTab={infobtnTargetUrl}
-									onChangeOpenInNewTab={(value) =>
-										setAttributes({ infobtnTargetUrl: value })
-									}
+							{dynamicBtnEnabled && ( 
+								<DynamicDataLinkControl
+									enableLink={dynamicBtnEnableLink}
+									setEnableLink={(value) => setAttributes({ dynamicBtnEnableLink: value })}
+									linkSource={dynamicBtnLinkSource}
+									setLinkSource={(value) => setAttributes({ dynamicBtnLinkSource: value })}
 								/>
-							</BaseControl>
+							)}
+							{!dynamicBtnEnableLink && (
+								<BaseControl>
+									<FB_UrlControl
+										url={infoButtonLink}
+										onChangeUrl={(value) =>
+											setAttributes({ infoButtonLink: value })
+										}
+										openInNewTab={infobtnTargetUrl}
+										onChangeOpenInNewTab={(value) =>
+											setAttributes({ infobtnTargetUrl: value })
+										}
+									/>
+								</BaseControl>
+							)}
 						</>
 					)}
 				</PanelBody>

@@ -296,9 +296,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		context,
 	});
 
-	console.log(dynamicTitleLink);
-
-
 	return (
 		<>
 			<Inspector
