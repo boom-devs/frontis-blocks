@@ -753,6 +753,64 @@ const FullSiteImportSettingConfig = ({
     }
   }, []);
 
+  
+  const getTemplates = async (postType = 'page') => {
+    const maxAttempts = 2;
+  
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+        const form = new FormData();
+        form.append('action', 'fb_get_templates');
+        form.append('security', nonce); // Nonce from localized script.
+        form.append('post_type', postType);
+  
+        const response = await fetch(ajaxUrl, {
+          method: 'POST',
+          body: form,
+        });
+  
+        const ok = response.ok;
+        const json = await response.json();
+  
+        if (ok && json?.success) {
+          console.log(`Templates for post type "${postType}" fetched successfully`);
+          return { status: 'success', data: json.data.templates };
+        }
+  
+        throw new Error(json?.data?.message || json?.message || 'Template fetch failed');
+      } catch (err) {
+        console.warn(`Attempt ${attempt} failed:`, err.message);
+  
+        if (attempt === maxAttempts) {
+          console.log(`Failed to fetch templates for "${postType}": ${err.message}`);
+          return { status: 'failed', reason: err.message };
+        }
+  
+        await new Promise((resolve) => setTimeout(resolve, 800));
+      }
+    }
+  };
+
+  useEffect(() => {
+    const fetchTemplates = async () => {
+      dispatch(setAttribute({ pageTemplatesLoading: true }));
+      const result = await getTemplates('page'); // Call for 'page' post type.
+
+      if (result.status === 'success') {
+        dispatch(setAttribute({ pageTemplates: result.data }));
+        dispatch(setAttribute({ pageTemplatesError: null }));
+      } else {
+        dispatch(setAttribute({ pageTemplatesError: result.reason }));
+        dispatch(setAttribute({ pageTemplates: [] }));
+      }
+      dispatch(setAttribute({ pageTemplatesLoading: false }));
+    };
+
+    fetchTemplates();
+  }, []);
+
+  console.log('pageTemplates', pageTemplates);
+  
 
 
   return (
