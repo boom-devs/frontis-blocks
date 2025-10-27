@@ -1,5 +1,3 @@
-import { PluginSidebar, PluginSidebarMoreMenuItem } from '@wordpress/editor';
-import { registerPlugin } from '@wordpress/plugins';
 import { useSelect } from '@wordpress/data';
 import { ToggleControl, PanelBody, PanelRow, ColorPalette, RangeControl, Dropdown, Button } from '@wordpress/components';
 import { useState, useEffect } from '@wordpress/element';
@@ -9,10 +7,7 @@ const FrontisThemeSiteEditor = () => {
 
     // Check if 'site-editor.php' exists in the URL
     const isSiteEditor = window.location.href.includes('site-editor.php');
-
-    console.log("isSiteEditor isSiteEditor")
-    console.log(isSiteEditor);
-
+    
     // Only render in the site editor
     if (!isSiteEditor) {
         return null;
@@ -20,7 +15,7 @@ const FrontisThemeSiteEditor = () => {
 
     const themeColors = useSelect((select) => select('core/editor').getEditorSettings()?.colors || [], []);
     
-    const [settings, setSettings] = useState({
+    const [settings, setSettings] = useState({ 
         disableHeader: false,
         disableFooter: false,
         stickyHeader: false,
@@ -31,116 +26,154 @@ const FrontisThemeSiteEditor = () => {
         relatedPosts: false,
         authorBox: false,
         lazyLoading: false,
-        stickyHeaderColor: null,
+        stickyHeaderColor: '',
         transparentHeaderColor: 'transparent',
     });
 
+    // const updateGlobalSetting = (settingName, value) => {
+    //     const newSettings = {
+    //         ...settings,
+    //         [settingName]: value
+    //     };
 
-    const updateSetting = (settingName, value) => {
-        const newSettings = {
-            ...settings,
-            [settingName]: value
-        };
+    //     setSettings(newSettings);
+    //     setStickyHeaderClass(newSettings);
 
+    //     // Immediately update the setting via API
+    //     apiFetch({
+    //         path: 'frontis/v1/global-settings',
+    //         method: 'POST',
+    //         data: { setting: newSettings }
+    //     }).then((response) => {
+    //         console.log('Settings updated:', response);
+    //         if(response === 'success') {
+    //             console.log('Settings updated:',response);
+    //         }
+    //     }).catch((error) => {
+    //         console.error('Error updating settings:', error);
+    //         // Revert the local state if the API call fails
+    //         setSettings(settings);
+    //     });
+    // };
+
+    // useEffect(() => {
+    //     // Fetch initial settings
+    //     apiFetch({ path: 'frontis/v1/global-settings' }).then((fetchedSettings) => {
+    //         console.log('get global settings',fetchedSettings);
+    //         setSettings(fetchedSettings);
+    //         // setStickyHeaderClass(fetchedSettings);
+    //         setTimeout(() => {
+    //             setStickyHeaderClass(fetchedSettings);
+    //         }, 5000);
+    //     });
+    // }, []);
+
+    useEffect(() => {
+        const unsubscribe = wp.data.subscribe(() => {
+            const isReady = wp.data.select('core/editor').__unstableIsEditorReady 
+                ? wp.data.select('core/editor').__unstableIsEditorReady() 
+                : true;
+    
+            if (isReady) {
+                apiFetch({ path: 'frontis/v1/global-settings' }).then((fetchedSettings) => {
+                    setSettings(fetchedSettings);
+                    setStickyHeaderClass(fetchedSettings);
+                });
+    
+                unsubscribe();
+            }
+        });
+    }, []);
+    
+    const updateGlobalSetting = (settingName, value) => {
+        const newSettings = { ...settings, [settingName]: value };
         setSettings(newSettings);
-        setStickyHeaderClass(newSettings);
-
-        // Immediately update the setting via API
+    
         apiFetch({
             path: 'frontis/v1/global-settings',
             method: 'POST',
-            data: { setting: newSettings }
+            data: { scope: 'global', setting: newSettings }
         }).then((response) => {
-            console.log('Settings updated:', response);
-        }).catch((error) => {
-            console.error('Error updating settings:', error);
-            // Revert the local state if the API call fails
-            setSettings(settings);
+            console.log("Global updated:", response);
         });
     };
 
-    useEffect(() => {
-        // Fetch initial settings
-        apiFetch({ path: 'frontis/v1/global-settings' }).then((fetchedSettings) => {
-            
-            setSettings(fetchedSettings);
-            // setStickyHeaderClass(fetchedSettings);
-            setTimeout(() => {
-                setStickyHeaderClass(fetchedSettings);
-            }, 5000);
-        });
-    }, []);
-
 
     const setStickyHeaderClass = (settings) => {
-        console.log(settings);
-         const iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
-         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-         const headerTag = iframeDoc.querySelector('header');
-         const footerTag = iframeDoc.querySelector('footer');
+        //  const iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
+        //  const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        //  const headerTag = iframeDoc.querySelector('header');
+        //  const footerTag = iframeDoc.querySelector('footer');
 
-         if(settings.disableHeader) {
-            headerTag.style.background = 'repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px)';
-            headerTag.style.opacity = '.4';
-         } else if(headerTag) {
-            headerTag.style.background = '';
-            headerTag.style.opacity = '1';
-         }
+        //  if(settings.disableHeader) {
+        //     headerTag.style.background = 'repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px)';
+        //     headerTag.style.opacity = '.4';
+        //  } else if(headerTag) {
+        //     headerTag.style.background = '';
+        //     headerTag.style.opacity = '1';
+        //  }
 
-         if(settings.disableFooter) {
-            footerTag.style.background = 'repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px)';
-            footerTag.style.opacity = '.4';
-         } else if(footerTag) {
-            footerTag.style.background = '';
-            footerTag.style.opacity = '1';
-         }
+        //  if(settings.disableFooter) {
+        //     footerTag.style.background = 'repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px)';
+        //     footerTag.style.opacity = '.4';
+        //  } else if(footerTag) {
+        //     footerTag.style.background = '';
+        //     footerTag.style.opacity = '1';
+        //  }
          
-         if(settings.stickyHeader) {
-            if (iframe && iframe.contentDocument) {
-                if (headerTag) {
-                    headerTag.classList.add('fb-sticky-header');
-                    headerTag.style.paddingTop = `${settings.stickyHeaderOffset}rem`;
+        //  if(settings.stickyHeader) {
+        //     if (iframe && iframe.contentDocument) {
+        //         if (headerTag) {
+        //             headerTag.classList.add('fb-sticky-header');
+        //             headerTag.style.paddingTop = `${settings.stickyHeaderOffset}rem`;
 
-                    iframe.contentWindow.addEventListener('scroll', function () {
-                        if (iframe.contentWindow.scrollY > 50) {
-                            headerTag.classList.add('scrolled');
+        //             iframe.contentWindow.addEventListener('scroll', function () {
+        //                 if (iframe.contentWindow.scrollY > 50) {
+        //                     headerTag.classList.add('scrolled');
 
-                            const headerScrolled = iframeDoc.querySelector('.scrolled');
+        //                     const headerScrolled = iframeDoc.querySelector('.scrolled');
 
-                            if(headerScrolled && settings.stickyHeaderColor){
-                                headerScrolled.style.setProperty('--wp--preset--sticky--bg', settings.stickyHeaderColor);
-                            }
-                        } else {
-                            headerTag.classList.remove('scrolled');
-                        }
-                    });
-                }
-            }
-        } else {
-            if (iframe && iframe.contentDocument) {
+        //                     if(headerScrolled && settings.stickyHeaderColor){
+        //                         headerScrolled.style.setProperty('--wp--preset--sticky--bg', settings.stickyHeaderColor);
+        //                     }
+        //                 } else {
+        //                     headerTag.classList.remove('scrolled');
+        //                 }
+        //             });
+        //         }
+        //     }
+        // } else {
+        //     if (iframe && iframe.contentDocument) {
 
-                if (headerTag) {
-                    headerTag.classList.remove('fb-sticky-header');
-                    headerTag.style.paddingTop = '';
-                }
-            }
-        }
+        //         if (headerTag) {
+        //             headerTag.classList.remove('fb-sticky-header');
+        //             headerTag.style.paddingTop = '';
+        //         }
+        //     }
+        // }
 
-        if(settings.transparentHeader) {
-            if (iframe && iframe.contentDocument) {
-                if (headerTag) {
-                    headerTag.classList.add('fb-transparent-header');
-                    headerTag.style.setProperty('--wp--preset--transparent--bg', settings.transparentHeaderColor);
-                }
-            }
-        } else {
-            if (iframe && iframe.contentDocument) {
-                if (headerTag) {
-                    headerTag.classList.remove('fb-transparent-header');
-                }
-            }
-        }
+        // if(settings.transparentHeader) {
+        //     if (iframe && iframe.contentDocument) {
+        //         if (headerTag) {
+        //             headerTag.classList.add('fb-transparent-header');
+        //             headerTag.style.setProperty('--wp--preset--transparent--bg', settings.transparentHeaderColor);
+        //         }
+        //     }
+        // } else {
+        //     if (iframe && iframe.contentDocument) {
+        //         if (headerTag) {
+        //             headerTag.classList.remove('fb-transparent-header');
+        //         }
+        //     }
+        // }
     }
+
+    // Enable save button on change any thing
+    useEffect(() => {
+        wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
+    },[settings]);
+
+    console.log(settings);
     
     return (
         <>
@@ -149,16 +182,16 @@ const FrontisThemeSiteEditor = () => {
                     <ToggleControl
                         label="Enable Sticky Header"
                         checked={settings.stickyHeader}
-                        onChange={(value) => updateSetting('stickyHeader', value)}
+                        onChange={(value) => updateGlobalSetting('stickyHeader', value)}
                     />
 
                 </PanelRow>
-                {settings.stickyHeader && (
+                {settings.stickyGlobalHeader && (
                     <>
                         <RangeControl
                             label="Header Offset (Rem)"
                             value={settings.stickyHeaderOffset}
-                            onChange={(value) => updateSetting('stickyHeaderOffset', value)}
+                            onChange={(value) => updateGlobalSetting('stickyHeaderOffset', value)}
                             min={0}
                             max={100}
                         />
@@ -170,7 +203,7 @@ const FrontisThemeSiteEditor = () => {
                                 width: '100%'
                             }}>
                                 <div>
-                                    <span>Background Color</span>
+                                    <span style={{fontWeight: 600}}>Background Color</span>
                                 </div>
                                 <Dropdown
                                     className="fb-sticky-header-bg-dropdown"
@@ -191,12 +224,12 @@ const FrontisThemeSiteEditor = () => {
                                     renderContent={() => (
                                         // <ColorPicker
                                         //     color={settings.stickyHeaderColor || '#000000'}
-                                        //     onChangeComplete={(color) => updateSetting('stickyHeaderColor', color.hex)}
+                                        //     onChangeComplete={(color) => updateGlobalSetting('stickyHeaderColor', color.hex)}
                                         // />
                                         <ColorPalette
                                             colors={themeColors}
                                             value={settings.stickyHeaderColor}
-                                            onChange={(value) => updateSetting('stickyHeaderColor', value)}
+                                            onChange={(value) => updateGlobalSetting('stickyHeaderColor', value)}
                                         />
                                     )}
                                 />
@@ -209,10 +242,10 @@ const FrontisThemeSiteEditor = () => {
                     <ToggleControl
                         label="Enable Transparent Header"
                         checked={settings.transparentHeader}
-                        onChange={(value) => updateSetting('transparentHeader', value)}
+                        onChange={(value) => updateGlobalSetting('transparentHeader', value)}
                     />
                 </PanelRow>
-                {settings.transparentHeader && (
+                {settings.transparentGlobalHeader && (
                     <PanelRow>
                         <div className='sticky-wrapper' style={{
                             display: 'flex',
@@ -221,7 +254,7 @@ const FrontisThemeSiteEditor = () => {
                             width: '100%'
                         }}>
                             <div>
-                                <span>Background Color</span>
+                                <span style={{fontWeight: 600}}>Background Color</span>
                             </div>
                             <Dropdown
                                 className="fb-sticky-header-bg-dropdown"
@@ -243,7 +276,7 @@ const FrontisThemeSiteEditor = () => {
                                     <ColorPalette
                                         colors={themeColors}
                                         value={settings.transparentHeaderColor}
-                                        onChange={(value) => updateSetting('transparentHeaderColor', value)}
+                                        onChange={(value) => updateGlobalSetting('transparentHeaderColor', value)}
                                     />
                                 )}
                             />
@@ -255,43 +288,45 @@ const FrontisThemeSiteEditor = () => {
             <PanelBody title="Disable Elements">
                 <PanelRow>
                     <ToggleControl
-                        label="Disable Header"
+                        label={settings.disableHeader ? 'Disable Header' : 'Enable Header'}
                         checked={settings.disableHeader}
-                        onChange={(value) => updateSetting('disableHeader', value)}
+                        onChange={(value) => updateGlobalSetting('disableHeader', value)}
                     />
                 </PanelRow>
                 <PanelRow>
                     <ToggleControl
-                        label="Disable Footer"
+                        label={settings.disableFooter ? 'Disable Footer' : 'Enable Footer'}
                         checked={settings.disableFooter}
-                        onChange={(value) => updateSetting('disableFooter', value)}
+                        onChange={(value) => updateGlobalSetting('disableFooter', value)}
                     />
                 </PanelRow>
 
             </PanelBody>
-            <PanelBody title='Features'>
-                <PanelRow>
-                    <ToggleControl
-                        label="Scroll To Top"
-                        checked={settings.scrollToTop}
-                        onChange={(value) => updateSetting('scrollToTop', value)}
-                    />
-                </PanelRow>
-                <PanelRow>
-                    <ToggleControl
-                        label="Enable Smooth Scroll"
-                        checked={settings.smoothScroll}
-                        onChange={(value) => updateSetting('smoothScroll', value)}
-                    />
-                </PanelRow>
-                <PanelRow>
-                    <ToggleControl
-                        label="Enable Lazy Loading"
-                        checked={settings.lazyLoading}
-                        onChange={(value) => updateSetting('lazyLoading', value)}
-                    />
-                </PanelRow>
-            </PanelBody>
+            {frontisBlocksAdminSidebar.frontis_theme &&
+                <PanelBody title='Features'>
+                    <PanelRow>
+                        <ToggleControl
+                            label="Scroll To Top"
+                            checked={settings.scrollToTop}
+                            onChange={(value) => updateGlobalSetting('scrollToTop', value)}
+                        />
+                    </PanelRow>
+                    <PanelRow>
+                        <ToggleControl
+                            label="Enable Smooth Scroll"
+                            checked={settings.smoothScroll}
+                            onChange={(value) => updateGlobalSetting('smoothScroll', value)}
+                        />
+                    </PanelRow>
+                    <PanelRow>
+                        <ToggleControl
+                            label="Enable Lazy Loading"
+                            checked={settings.lazyLoading}
+                            onChange={(value) => updateGlobalSetting('lazyLoading', value)}
+                        />
+                    </PanelRow>
+                </PanelBody>
+            }
         </>
     );
 };

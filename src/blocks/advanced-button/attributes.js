@@ -12,7 +12,7 @@ const attributes = {
         default: "left",
     },
     buttonTextSwitcher: {
-        type: "string",
+        type: "boolean",
         default: true,
     },
     buttonText: {
@@ -156,7 +156,38 @@ const attributes = {
     buttonHoverColor: {
         type: 'string',
     },
-
+    buttonTextColorType: {     
+		type: "string",
+		default: "classic",
+	},
+    buttonTextCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    buttonTextCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    buttonTextGradientColor: {
+        type: 'string',
+        default: null
+    },
+    buttonTextHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    buttonTextHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    buttonTextHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    buttonTextHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
     /** Start Background */
     buttonBgColorSwitcher : {
 		type: "string",
@@ -407,6 +438,9 @@ const attributes = {
 		type: 'string',
 		default: 'angle-right',
 	},
+    buttonIconFrontend:{
+        type: 'string',
+    },
     buttonIconPosition: {
         type: "string",
         default: "right",
@@ -626,7 +660,47 @@ const attributes = {
 	},
 	/** End Icon Padding */
 
-
+    /** Start Icon margin */
+	buttonIconMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	buttonIconMarginDesktop: { 
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconMarginTablet: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconMarginMobile: {
+		type: "object", 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	buttonIconMarginLink : {
+		type : "boolean",
+		default: true
+	},
+	/** End Icon Margin */
 
     buttonIconGapSize: {
         type: 'object',
@@ -1175,5 +1249,79 @@ const attributes = {
         }
     },
     
+    /** Start Dynamic Text */
+    dynamicTextEnabled : {
+        type: 'boolean',
+        default: false
+    },
+    dynamicTextSource: {
+        type: 'string',
+        default: 'current_post'
+    },
+    dynamicTextPostId: {
+        type: 'number',
+        default: 0
+    },
+    dynamicTextPostType: {
+        type: 'string',
+        default: ''
+    },
+    dynamicTextPostLabel: {
+        type: 'string',
+        default: ''
+    },
+    dynamicTextField: {
+        type: 'string',
+        default: 'post_title'
+    },
+    dynamicFeaturedImageField:{
+        type: 'string',
+        default: 'title'
+    },
+    dynamicTextDateType: {
+        type: 'string',
+        default: 'published'
+    },
+    dynamicTextDateFormat: {
+        type: 'string',
+        default: 'default'
+    },
+    dynamicTextTimeType: {
+        type: 'string',
+        default: 'published'
+    },
+    dynamicTextTimeFormat: {
+        type: 'string',
+        default: 'default'
+    },
+    dynamicTextCommentsZeroText: {
+        type: 'string',
+        default: 'No Response',
+    },
+    dynamicTextCommentsOneText: {
+        type: 'string',
+        default: 'One Response',
+    },
+    dynamicTextCommentsManyText: {
+        type: 'string',
+        default: '{num} Response',
+    },   
+    dynamicTextTermsTaxonomy: {
+        type: 'string',
+        default: 'category',
+    },
+    dynamicTextTermsSeparator: {
+        type: 'string',
+        default: ', ',
+    },
+    dynamicTextEnableLink: {
+        type: 'boolean',
+        default: false
+    },
+    dynamicTextLinkSource: {
+        type: 'string',
+        default: 'post_permalink',
+    },
+    /** End Dynamic Text */
 }
 export default attributes;

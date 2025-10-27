@@ -24,8 +24,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         tabIconSwitcher,
         tabIcon,
         tabImageUrl,
+        tabImageAlt,
         expandedIcon,
         expandedImageUrl,
+        expandedImageAlt,
         tagName,
         faqSchema,
         accordionChildCount,
@@ -64,9 +66,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             inheritedTabIconSwitcher: tabIconSwitcher,
             inheritedTabIcon: tabIcon,
             inheritedTabImageUrl: tabImageUrl,
+            inheritedTabImageAlt: tabImageAlt,
             inheritedExpandedIconSwitcher: tabIconSwitcher,
             inheritedExpandedIcon: expandedIcon,
             inheritedExpandedImageUrl: expandedImageUrl,
+            inheritedExpandedImageAlt: expandedImageAlt,
             parentBlockID: blockID,
         });
         innerBlocks.splice(innerBlocks.length, 0, newBlock);
@@ -118,7 +122,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
             <div {...blockProps}>
                 <div
-                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook} ${accordionGlobalWraperClass}`} id={accordionGlobalWraperID} ref={panelRef}
+                    className={`fb-parent-wrapper fb-accordion-wrapper fb-parent-${blockID} ${classHook} ${accordionGlobalWraperClass}`} id={accordionGlobalWraperID} ref={panelRef}
                 >
                     <div className={`fb-accordion-container`}>
                         <div className="fb-accordion-inner">

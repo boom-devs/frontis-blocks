@@ -52,6 +52,8 @@
                 border-right: 1px solid $neutral-color-100;
                 overflow-y: auto;
                 scrollbar-width: thin;
+                display: flex;
+                flex-direction: column;
                 transition: transform 0.3s ease, opacity 0.3s ease;
 
                 &.collapsed {
@@ -92,7 +94,7 @@
                         }
 
                         .fb-form-input {
-                            width: 100%;
+                            width: calc(100% - 1px);
                             padding: 14px;
                             margin-top: 10px;
                             border: 1px solid $neutral-color-100;
@@ -176,7 +178,7 @@
                     position: sticky;
                     bottom: 0;
                     left: 0;
-                    margin-top: 32px;
+                    margin-top: auto;
                     padding: 24px 0;
                     background-color: $white-color;
 

@@ -5,8 +5,7 @@ import {
 	BlockControls,
 	AlignmentToolbar,
 } from '@wordpress/block-editor';
-import { useEffect, useRef } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { useRef } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -15,8 +14,7 @@ import Inspector from './inspector';
 import renderSVG from '../../components/icon-picker/components/icon-picker/controls/renderIcon';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import { useDeviceType } from '@Config/displayType';
-import { createBlock, getDefaultBlockName } from '@wordpress/blocks';
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
+import DynamicTextValue from '@Components/dynamic-text-value';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
@@ -48,19 +46,50 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		advancedHeadingDesktopSwitcher,
 		advancedHeadingTabletSwitcher,
 		advancedHeadingMobileSwitcher,
-		isHeadingTextChanged,
 
-		dynamicEnabled,
-		dynamicSource,
-		dynamicField,
-		dynamicEnableLink,
-		dynamicReplaceAll,
+		dynamicTextEnabled,
+		dynamicTextSource,
+		dynamicTextPostId,
+		dynamicTextPostType,
+		dynamicTextPostLabel,
+		dynamicTextField,
+		dynamicFeaturedImageField,
 
+		dynamicTextDateType,
+		dynamicTextDateFormat,
+
+		dynamicTextTimeType,
+		dynamicTextTimeFormat,
+
+		dynamicTextCommentsZeroText,
+		dynamicTextCommentsOneText,
+		dynamicTextCommentsManyText,
+
+		dynamicTextTermsTaxonomy,
+		dynamicTextTermsSeparator,
+		dynamicTextEnableLink,
+		dynamicTextLinkSource,
+
+		dynamicSubHeadingTextEnabled,
+        dynamicSubHeadingTextSource,
+        dynamicSubHeadingTextPostId,
+        dynamicSubHeadingTextPostType,
+        dynamicSubHeadingTextPostLabel,
+        dynamicSubHeadingTextField,
+        dynamicSubHeadingFeaturedImageField,
+        dynamicSubHeadingTextDateType,
+        dynamicSubHeadingTextDateFormat,
+        dynamicSubHeadingTextTimeType,
+        dynamicSubHeadingTextTimeFormat,
+        dynamicSubHeadingTextCommentsZeroText,
+        dynamicSubHeadingTextCommentsOneText,
+        dynamicSubHeadingTextCommentsManyText,
+        dynamicSubHeadingTextTermsTaxonomy,
+        dynamicSubHeadingTextTermsSeparator,
+        dynamicSubHeadingTextEnableLink,
+        dynamicSubHeadingTextLinkSource,
 
 	} = attributes;
-
-	// Dynamic Content Value
-	const {postType, postId} = context;
 
 	const blockProps = useBlockProps({
 		className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'} ${headingBeforeAfterSwitcher && 'fb-advanced-heading-before-after'}`,
@@ -74,150 +103,66 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
+	/**
+	 * Dynamic Text Value for Title
+	 */
+	const { dynamicDisplayValue: headingDynamicValue, dynamicDisplayLink: headingDynamicLink } = DynamicTextValue({
+		textEnabled:            dynamicTextEnabled,
+		textSource:             dynamicTextSource, 
+		textField:              dynamicTextField,
 
-	// কোন কোন ফিল্ড dynamic preview করবে (Current Post)
-	const CURRENT_POST_FIELDS = [
-		'post_title','post_excerpt','post_thumbnail','post_meta',
-		'post_date','post_time','post_terms','post_id','comments_number',
-		'author_name','author_first_name','author_last_name','author_nickname',
-		'author_description','author_email','author_url','author_avatar','author_meta'
-	];
-	
-	const shouldUseDynamic =
-		dynamicEnabled &&
-		dynamicSource === 'current_post' &&
-		CURRENT_POST_FIELDS.includes(dynamicField);
-	
-	// helper
-	const getPlainText = (html) => html?.replace(/<[^>]+>/g, '') ?? '';
-	
-	// pull post record
-	const postRecord = useSelect(
-		(select) =>
-		shouldUseDynamic && postType && postId
-			? select(coreStore).getEntityRecord('postType', postType, postId)
-			: null,
-		[shouldUseDynamic, postType, postId]
-	);
+		textPostId:             dynamicTextPostId,
+		textPostType:           dynamicTextPostType,
+		textPostLabel:          dynamicTextPostLabel,
 
-	// check post type supports excerpt
-	const postTypeObj = useSelect(
-		(select) => postType ? select(coreStore).getPostType(postType) : null,
-		[postType]
-	);
-	
-	// featured image (only when needed)
-	const mediaRecord = useSelect(
-		(select) =>
-		shouldUseDynamic &&
-		dynamicField === 'post_thumbnail' &&
-		postRecord?.featured_media
-			? select(coreStore).getEntityRecord('postType', 'attachment', postRecord.featured_media)
-			: null,
-		[shouldUseDynamic, dynamicField, postRecord?.featured_media]
-	);
-	
-	// author (only when needed)
-	const authorRecord = useSelect(
-		(select) =>
-		shouldUseDynamic &&
-		dynamicField.startsWith('author_') &&
-		postRecord?.author
-			? select(coreStore).getUser(postRecord.author)
-			: null,
-		[shouldUseDynamic, dynamicField, postRecord?.author]
-	);
-	
-	const dynamicValue = (() => {
-		if (!shouldUseDynamic || !postRecord) return '';
-	
-		switch (dynamicField) {
-		// POST
-		case 'post_title':
-			return getPlainText(postRecord.title?.rendered);
-	
-		case 'post_excerpt': {
-			const supportsExcerpt = !!postTypeObj?.supports?.excerpt;
-			if (!supportsExcerpt) {
-				return __('No Content', 'frontis-blocks');
-			}
-			
-			// raw value database থেকে
-			const rawExcerpt = postRecord.excerpt?.raw?.trim();
-			
-			if (rawExcerpt) {
-				return getPlainText(rawExcerpt);
-			}
-			
-			// raw খালি মানে user কিছু লেখেনি → show "No Content"
-			return __('No Content', 'frontis-blocks');
-		}		  
-	
-		case 'post_thumbnail':
-			return mediaRecord?.source_url || __('(no featured image)', 'frontis-blocks');
-	
-		case 'post_meta': {
-			// editor preview only works if meta registered show_in_rest=true
-			const key = attributes?.metaKey;
-			if (key && postRecord.meta && typeof postRecord.meta[key] !== 'undefined') {
-			const val = postRecord.meta[key];
-			return Array.isArray(val) ? val.join(', ') : String(val ?? '');
-			}
-			return __('(post meta will render on frontend)', 'frontis-blocks');
-		}
-	
-		case 'post_date':
-			return postRecord.date ? new Date(postRecord.date).toLocaleDateString() : '';
-	
-		case 'post_time':
-			return postRecord.date ? new Date(postRecord.date).toLocaleTimeString() : '';
-	
-		case 'post_terms':
-			return __('(terms will render on frontend)', 'frontis-blocks');
-	
-		case 'post_id':
-			return String(postRecord.id ?? '');
-	
-		case 'comments_number':
-			return __('(comments count on frontend)', 'frontis-blocks');
-	
-		// AUTHOR
-		case 'author_name':
-			return authorRecord?.name || '';
-	
-		case 'author_first_name':
-			return authorRecord?.first_name || '';
-	
-		case 'author_last_name':
-			return authorRecord?.last_name || '';
-	
-		case 'author_nickname':
-			return authorRecord?.nickname || '';
-	
-		case 'author_description':
-			return authorRecord?.description || '';
-	
-		case 'author_email':
-			return authorRecord?.email || '';
-	
-		case 'author_url':
-			return authorRecord?.url || '';
-	
-		case 'author_avatar':
-			// user object usually has avatar_urls; pick 96px
-			return authorRecord?.avatar_urls?.['96'] || __('(avatar url on frontend)', 'frontis-blocks');
-	
-		case 'author_meta': {
-			const key = attributes?.authorMetaKey;
-			// user meta not in REST by default; show hint
-			return key ? __('(author meta will render on frontend)', 'frontis-blocks') : '';
-		}
-	
-		default:
-			return '';
-		}
-	})();
-	
+		textFeaturedImageField: dynamicFeaturedImageField, 
+
+		textDateType:           dynamicTextDateType,
+		textDateFormat:         dynamicTextDateFormat,
+		textTimeType:           dynamicTextTimeType,
+		textTimeFormat:         dynamicTextTimeFormat,
+
+		textCommentsZeroText:   dynamicTextCommentsZeroText,
+		textCommentsOneText:    dynamicTextCommentsOneText,
+		textCommentsManyText:   dynamicTextCommentsManyText,
+
+		textTermsTaxonomy:      dynamicTextTermsTaxonomy,
+		textTermsSeparator:     dynamicTextTermsSeparator,
+
+		textLinkEnabled:        dynamicTextEnableLink,
+		textLinkSource:         dynamicTextLinkSource,
+
+		context,
+	});
+
+	const { dynamicDisplayValue: subHeadingDynamicValue, dynamicDisplayLink: subHeadingDynamicLink } = DynamicTextValue({
+		textEnabled:            dynamicSubHeadingTextEnabled,
+		textSource:             dynamicSubHeadingTextSource, 
+		textField:              dynamicSubHeadingTextField,
+
+		textPostId:             dynamicSubHeadingTextPostId,
+		textPostType:           dynamicSubHeadingTextPostType,
+		textPostLabel:          dynamicSubHeadingTextPostLabel,
+
+		textFeaturedImageField: dynamicSubHeadingFeaturedImageField, 
+
+		textDateType:           dynamicSubHeadingTextDateType,
+		textDateFormat:         dynamicSubHeadingTextDateFormat,
+		textTimeType:           dynamicSubHeadingTextTimeType,
+		textTimeFormat:         dynamicSubHeadingTextTimeFormat,
+
+		textCommentsZeroText:   dynamicSubHeadingTextCommentsZeroText,
+		textCommentsOneText:    dynamicSubHeadingTextCommentsOneText,
+		textCommentsManyText:   dynamicSubHeadingTextCommentsManyText,
+
+		textTermsTaxonomy:      dynamicSubHeadingTextTermsTaxonomy,
+		textTermsSeparator:     dynamicSubHeadingTextTermsSeparator,
+
+		textLinkEnabled:        dynamicSubHeadingTextEnableLink,
+		textLinkSource:         dynamicSubHeadingTextLinkSource,
+
+		context,
+	});
 
 	return (
 		<>
@@ -264,41 +209,100 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                     )}
 
                     {subHeadingSwitcher && subHeadingPosition === 'top' && (
-                        <div className="fb-advanced-sub-heading-wrapper">
-                            <RichText
-                                tagName={subHeadingTag}
-                                value={subHeadingText}
-                                onChange={(value) => setAttributes({ subHeadingText: value })}
-                                placeholder={__('Sub heading...', 'frontis-blocks')}
-                                className="fb-advanced-sub-heading"
-                            />
-                        </div>
+						<div className="fb-advanced-sub-heading-wrapper">
+							{dynamicSubHeadingTextEnabled && dynamicSubHeadingTextEnableLink ? (
+								(() => {
+								const SubHeadingTag = subHeadingTag || 'p';
+								return (
+									<SubHeadingTag className="fb-advanced-sub-heading">
+										<span className="fb-dynamic-link">
+											<RichText
+												value={dynamicSubHeadingTextEnabled ? subHeadingDynamicValue : subHeadingText}
+												onChange={(value) => {
+													if (!dynamicSubHeadingTextEnabled) setAttributes({ subHeadingText: value });
+												}}
+												placeholder={__('Sub Heading...', 'frontis-blocks')}
+											/>
+										</span>
+									</SubHeadingTag>
+								);
+								})()
+							) : (
+								<RichText
+									tagName={subHeadingTag} 
+									value={dynamicSubHeadingTextEnabled ? subHeadingDynamicValue : subHeadingText}
+									onChange={(value) => {
+										if (!dynamicSubHeadingTextEnabled) setAttributes({ subHeadingText: value });
+									}}
+									placeholder={__('Sub Heading...', 'frontis-blocks')}
+									className="fb-advanced-sub-heading"
+								/>
+							)}
+						</div>
                     )}
 
-                    <div className="fb-advanced-heading-wrapper">
-                        <RichText
-                            tagName={headingTag}
-                            value={shouldUseDynamic ? dynamicValue : headingText} 
-                            onChange={(value) => {
-                                if (!shouldUseDynamic) {
-                                    setAttributes({ headingText: value });
-                                }
-                            }}
-                            placeholder={__('Advanced Heading', 'frontis-blocks')}
-                            className={`fb-advanced-heading ${activeLineSwitcher ? 'active-line' : ''}`}
-                        />
-                    </div>
+					<div className="fb-advanced-heading-wrapper">
+						{dynamicTextEnabled && dynamicTextEnableLink ? (
+							(() => {
+							const HeadingTag = headingTag || 'h2';
+							return (
+								<HeadingTag className={`fb-advanced-heading ${activeLineSwitcher ? 'active-line' : ''}`}>
+									<span className="fb-dynamic-link">
+										<RichText
+											value={dynamicTextEnabled ? headingDynamicValue : headingText}
+											onChange={(value) => {
+												if (!dynamicTextEnabled) setAttributes({ headingText: value });
+											}}
+											placeholder={__('Advanced Heading', 'frontis-blocks')}
+										/>
+									</span>
+								</HeadingTag>
+							);
+							})()
+						) : (
+							<RichText
+								tagName={headingTag}
+								value={dynamicTextEnabled ? headingDynamicValue : headingText}
+								onChange={(value) => {
+									if (!dynamicTextEnabled) setAttributes({ headingText: value });
+								}}
+								placeholder={__('Advanced Heading', 'frontis-blocks')}
+								className={`fb-advanced-heading ${activeLineSwitcher ? 'active-line' : ''}`}
+							/>
+						)}
+					</div>
 
                     {subHeadingSwitcher && subHeadingPosition === 'bottom' && (
-                        <div className="fb-advanced-sub-heading-wrapper">
-                            <RichText
-                                tagName={subHeadingTag}
-                                value={subHeadingText}
-                                onChange={(value) => setAttributes({ subHeadingText: value })}
-                                placeholder={__('Sub heading...', 'frontis-blocks')}
-                                className="fb-advanced-sub-heading"
-                            />
-                        </div>
+						<div className="fb-advanced-sub-heading-wrapper">
+							{dynamicSubHeadingTextEnabled && dynamicSubHeadingTextEnableLink ? (
+								(() => {
+								const SubHeadingTag = subHeadingTag || 'p';
+								return (
+									<SubHeadingTag className="fb-advanced-sub-heading">
+										<span className="fb-dynamic-link">
+											<RichText
+												value={dynamicSubHeadingTextEnabled ? subHeadingDynamicValue : subHeadingText}
+												onChange={(value) => {
+													if (!dynamicSubHeadingTextEnabled) setAttributes({ subHeadingText: value });
+												}}
+												placeholder={__('Sub Heading...', 'frontis-blocks')}
+											/>
+										</span>
+									</SubHeadingTag>
+								);
+								})()
+							) : (
+								<RichText
+									tagName={subHeadingTag}
+									value={dynamicSubHeadingTextEnabled ? subHeadingDynamicValue : subHeadingText}
+									onChange={(value) => {
+										if (!dynamicSubHeadingTextEnabled) setAttributes({ subHeadingText: value });
+									}}
+									placeholder={__('Sub Heading...', 'frontis-blocks')}
+									className="fb-advanced-sub-heading"
+								/>
+							)}
+						</div>
                     )}
 
                     {showSeparatorSwitcher && separatorPosition === "bottom" && (

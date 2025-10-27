@@ -16,6 +16,9 @@ import generateCSSVariables from "./components/GenerateRootCss";
 import generateColorsVariables from "./components/GenerateColorRoot";
 import FrontisMetaBox from "./theme-settings/editor";
 import FrontisThemeSiteEditor from "./theme-settings/site-editor";
+import { addFilter } from '@wordpress/hooks';
+import { InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, ToggleControl } from '@wordpress/components';
 import "./sidebar.scss";
 
 // Default color and gradient configurations
@@ -440,7 +443,62 @@ function FrontisBlocksSidebar() {
 	}, [customColors, globalColors, gradientColors, customGradientColors]);
 
 
-	const isSiteEditor = window.location.href.includes('site-editor.php');
+	function addCustomSettingsToCoreColumns( settings, name ) {
+		if ( name !== 'core/template-part' ) {
+		  return settings;
+		}
+	  
+		return {
+		  ...settings,
+		  attributes: {
+			...settings.attributes,
+			isReverseDirection: {
+			  type: 'boolean',
+			  default: false,
+			},
+		  },
+		  edit( props ) {
+			const { attributes, setAttributes } = props;
+			const { isReverseDirection } = attributes;
+	  
+			return (
+			  <>
+				<InspectorControls>
+				  <PanelBody title="Custom Column Settings">
+					<ToggleControl
+					  label="Reverse Direction on Mobile"
+					  checked={ isReverseDirection }
+					  onChange={ ( value ) =>
+						setAttributes( { isReverseDirection: value } )
+					  }
+					/>
+				  </PanelBody>
+				</InspectorControls>
+				{ /* Rest of the edit function to use the attribute */ }
+			  </>
+			);
+		  },
+		};
+	  }
+	  
+	  addFilter(
+		'blocks.registerBlockType',
+		'my-plugin/add-custom-settings',
+		addCustomSettingsToCoreColumns
+	  );
+
+	const url = new URL(window.location.href);
+	const pValue = url.searchParams.get('p');
+	const canvas = url.searchParams.get('canvas');
+	
+	const isSiteEditor = window.location.href.includes('site-editor.php') && 
+						pValue?.includes('wp_template') && 
+						!pValue?.startsWith('/wp_template_part/');
+	const isPagePost = window.location.href.includes('post.php');
+
+	const onlyCanvasEditor = window.location.pathname.includes('site-editor.php') &&
+	decodeURIComponent(pValue) === '/' &&
+	canvas === 'edit';
 
 	return (
 		<>
@@ -514,6 +572,7 @@ function FrontisBlocksSidebar() {
 											</svg>
 										</span>
 									</NavigatorButton>
+									
 									<div className="fb-global-header-inner">
 										<h3>{__("Typography", "frontis-blocks")}</h3>
 										<p>
@@ -524,6 +583,7 @@ function FrontisBlocksSidebar() {
 										</p>
 									</div>
 								</div>
+								
 								<TypographySettings
 									typography={typography}
 									customTypography={customTypography}
@@ -623,15 +683,15 @@ function FrontisBlocksSidebar() {
 							</NavigatorScreen>
 						</NavigatorProvider>
 
-						{frontisBlocksAdminSidebar.frontis_theme &&
-							<div className="fb-theme-settings-wrapper">
-								{isSiteEditor ? (
-									<FrontisThemeSiteEditor />
-								) : (
-									<FrontisMetaBox />
-								)}
-							</div>
-						}
+						{/* <div className="fb-theme-settings-wrapper">
+							{onlyCanvasEditor &&
+								<FrontisThemeSiteEditor />
+							}
+
+							{(isPagePost || isSiteEditor) &&
+								<FrontisMetaBox whichEditor={isPagePost ? 'post' : 'template'} />
+							}
+						</div> */}
 					</div>
 				</PluginSidebar>
 			</div>

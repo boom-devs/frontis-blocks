@@ -2,6 +2,7 @@
 
 namespace FrontisBlocks\Admin;
 use FrontisBlocks\Admin\Settings;
+use FrontisBlocks\Admin\TemplateLibrary;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Utils\Helper;
@@ -16,14 +17,119 @@ class Admin {
         add_action('admin_menu', array( $this, 'add_menu_page' ) );
         add_action('admin_enqueue_scripts', [$this, 'enqueue_styles']);
         add_action('admin_enqueue_scripts', [$this, 'enqueue_scripts']);
-
         add_action( 'plugin_action_links', [ $this, 'fb_menu_action_links' ], 10, 2 );
 
         // Add the new REST API endpoint
         add_action('rest_api_init', [$this, 'register_rest_routes']);
         add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_assets']);
-        
+        add_action('init', [$this, 'register_meta_settings']);
         $this->store_google_fonts();
+
+        // Template proxy
+        add_filter('query_vars', function ($vars) {
+            $vars[] = 'template_proxy';
+            $vars[] = 'url';
+            return $vars;
+        });
+
+        add_action('template_redirect', [$this, 'template_proxy']);
+    }
+
+    /**
+     * Register Post Meta options for react based fields.
+     *
+     * @since 0.0.1
+     * @return void
+     */
+    function register_meta_settings(): void {
+        register_post_meta(
+            '',
+            '_frontis_meta_header_display',
+            array(
+                'show_in_rest'  => true,
+                'single'        => true,
+                'type'          => 'boolean',
+                'auth_callback' => '__return_true',
+            )
+        );
+
+        register_post_meta(
+            '',
+            '_frontis_meta_footer_display',
+            array(
+                'show_in_rest'  => true,
+                'single'        => true,
+                'type'          => 'boolean',
+                'auth_callback' => '__return_true',
+            )
+        );
+
+        register_post_meta(
+            '',
+            '_frontis_meta_site_title_display',
+            array(
+                'show_in_rest'  => true,
+                'single'        => true,
+                'type'          => 'boolean',
+                'auth_callback' => '__return_true',
+            )
+        );
+
+        register_post_meta(
+            '',
+            '_frontis_meta_sticky_header',
+            array(
+                'show_in_rest'  => true,
+                'single'        => true,
+                'type'          => 'boolean',
+                'auth_callback' => '__return_true',
+            )
+        );
+
+        register_post_meta(
+            '',
+            '_frontis_meta_transparent_header',
+            array(
+                'show_in_rest'  => true,
+                'single'        => true,
+                'type'          => 'boolean',
+                'auth_callback' => '__return_true',
+            )
+        );
+        register_post_meta(
+            '',
+            '_frontis_meta_lazy_load',
+            array(
+                'show_in_rest'  => true,
+                'single'        => true,
+                'type'          => 'boolean',
+                'auth_callback' => '__return_true',
+            )
+        );
+        register_post_meta(
+            '',
+            '_frontis_meta_transparent_bg_color',
+            array(
+                'show_in_rest'  => true,
+                'single'        => true,
+                'type'          => 'string',
+                'auth_callback' => '__return_true',
+            )
+        );
+        register_post_meta(
+            '',
+            '_frontis_meta_sticky_bg_color',
+            array(
+                'show_in_rest'  => true,
+                'single'        => true,
+                'type'          => 'string',
+                'auth_callback' => '__return_true',
+            )
+        );
+
+        // Init template proxy
+        add_rewrite_rule('^template-proxy/?$', 'index.php?template_proxy=1', 'top');
+        flush_rewrite_rules(false);
     }
 
     public function add_menu_page(){
@@ -60,6 +166,18 @@ class Admin {
 		$gradient_colors = [];
 		$theme_json = wp_get_global_settings();
 		$global_colors = get_option('fb_global_colors');
+
+
+        // Font families are at ['typography']['fontFamilies']['theme'] or ['custom'].
+        $font_families['theme'] = isset($theme_json['typography']['fontFamilies']['theme']) 
+        ? $theme_json['typography']['fontFamilies']['theme']
+        : array();
+
+        // Merge with custom fonts if they exist (e.g., user-installed via Font Library).
+        if (isset($theme_json['typography']['fontFamilies']['custom'])) {
+            $custom_fonts['custom'] = $theme_json['typography']['fontFamilies']['custom'];
+            $font_families = array_merge($font_families, $custom_fonts);
+        }
 
         $automatic_block_recovery = get_option('fb_automatic_block_recovery');
         $enable_quick_action_bar = get_option('fb_enable_quick_action_bar'); 
@@ -120,7 +238,10 @@ class Admin {
 			'gradients_colors' => $gradient_colors,
             'home_url' => home_url(),
 			'google_fonts' => $google_fonts,
+            'installed_fonts' => $font_families,
             'siteName' => get_bloginfo('name'),
+            'siteTagline' => get_bloginfo('description'),
+            'siteLogo' => get_theme_mod('custom_logo'),
 			'all_posts' => Helper::get_all_posts(),
 			'bolck_nonce' => wp_create_nonce('fb_block_nonce'),
             'all_post_ids' => Helper::get_all_post_ids(),
@@ -130,8 +251,23 @@ class Admin {
 			$tl_script_asset_path = FB_PLUGIN_PATH . 'assets/admin/index.asset.php';
 			$tl_script_asset = file_exists( $tl_script_asset_path ) ? require( $tl_script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( FB_VERSION ) );
 			$tl_script_asset['dependencies'][] = 'jquery';
+
+            $activation_key = get_option('frontisblockspro_license_options');
+            if(is_array($activation_key) && $activation_key && count($activation_key) > 0 && isset($activation_key['sc_license_key']) && $activation_key['sc_license_key'] !== '') {
+                $activation_key = $activation_key['sc_license_key'];
+            }
+
 			wp_enqueue_style('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/style-tlibrary.css', array(), '1.0.0');
 			wp_enqueue_script('frontis-template-library', FB_PLUGIN_URL . 'assets/admin/tlibrary.js', $tl_script_asset['dependencies'], '1.0.0', true);
+            wp_localize_script(
+                'frontis-template-library',
+                'FB_TLibrary',
+                array(
+                    'activationKey' => $activation_key,
+                    'portalApi' => PORTAL_API,
+                    'wordpressSyncApi' => WORDPRESS_SYNC_API
+                )
+            );
 
             if ($enable_quick_action_bar === "true") { 
                 wp_enqueue_style('frontis-quick-access', FB_PLUGIN_URL . 'assets/admin/quickAccess.css', array(), '1.0.0');
@@ -142,13 +278,13 @@ class Admin {
 			    wp_enqueue_script('frontis-copy-paste', FB_PLUGIN_URL . 'assets/admin/copyPasteStyle.js', $tl_script_asset['dependencies'], '1.0.0', true);
             }
 
-            wp_enqueue_script('frontis-highlight-color', FB_PLUGIN_URL . 'assets/admin/highlightColor.js', $tl_script_asset['dependencies'], '1.0.0', true);
+            // wp_enqueue_script('frontis-highlight-color', FB_PLUGIN_URL . 'assets/admin/highlightColor.js', $tl_script_asset['dependencies'], '1.0.0', true);
             
             if ($automatic_block_recovery === "true") {
                 wp_enqueue_script('frontis-block-recovery', FB_PLUGIN_URL . 'assets/admin/blockRecovery.js', $tl_script_asset['dependencies'], '1.0.0', true);
             }
 
-//			$localizeArray['nonce'] = wp_create_nonce('fb_import_demo_data');
+			// $localizeArray['nonce'] = wp_create_nonce('fb_import_demo_data');
 			wp_localize_script('frontis-template-library', 'frontisBlocksAdmin', $localizeArray);
 		}
 
@@ -345,7 +481,246 @@ class Admin {
                 return true;
             },
         ]);
+
+        register_rest_route('custom/v1', '/proxy-image', [
+            'methods' => 'GET',
+            'callback' => [$this, 'proxy_image'],
+            'permission_callback' => '__return_true', // Adjust permissions as needed
+        ]);
+
+        // register_rest_route(
+        //     'frontis/v1',
+        //     '/global-settings',
+        //     array(
+        //         array(
+        //             'methods'             => \WP_REST_Server::READABLE,
+        //             'callback'            =>  [$this, 'frontis_get_global_settings'],
+        //             'permission_callback' => function () {
+        //                 return true;
+        //             },
+        //         ),
+        //         array(
+        //             'methods'             => \WP_REST_Server::EDITABLE,
+        //             'callback'            => [$this, 'frontis_update_global_settings'],
+        //             'permission_callback' => function () {
+        //                 return current_user_can( 'manage_options' );
+        //             },
+        //         ),
+        //     )
+        // );
+        register_rest_route(
+            'frontis/v1',
+            '/global-settings',
+            array(
+                array(
+                    'methods'             => \WP_REST_Server::READABLE,
+                    'callback'            => [$this, 'frontis_get_global_settings'],
+                    'permission_callback' => function () {
+                        return true;
+                    },
+                ),
+                array(
+                    'methods'             => \WP_REST_Server::EDITABLE,
+                    'callback'            => [$this, 'frontis_update_global_settings'],
+                    'permission_callback' => function () {
+                        return current_user_can('manage_options');
+                    },
+                ),
+            )
+        );
+
+        register_rest_route(
+            'frontis/v1',
+            '/template-settings',
+            array(
+                array(
+                    'methods'             => \WP_REST_Server::READABLE,
+                    'callback'            =>  [$this, 'frontis_get_template_settings'],
+                    'permission_callback' => function () {
+                        return true;
+                    },
+                ),
+                array(
+                    'methods'             => \WP_REST_Server::EDITABLE,
+                    'callback'            => [$this, 'frontis_update_template_settings'],
+                    'permission_callback' => function () {
+                        return current_user_can( 'manage_options' );
+                    },
+                ),
+            )
+        );
+
+        register_rest_route(
+            'frontis/v1',
+            '/template',
+            array(
+                array(
+                    'methods'             => \WP_REST_Server::READABLE,
+                    'callback'            => [$this, 'frontis_get_post_template_data'],
+                    'permission_callback' => function ( \WP_REST_Request $request ) {
+                        return current_user_can( 'manage_options' );
+                    },
+                )
+            )
+        );
     }
+
+    function proxy_image($request) {
+        $image_url = $request->get_param('url');
+        if (!$image_url || !filter_var($image_url, FILTER_VALIDATE_URL)) {
+            return new WP_Error('invalid_url', 'Invalid or missing URL', ['status' => 400]);
+        }
+    
+        $response = wp_remote_get($image_url);
+        if (is_wp_error($response)) {
+            return new WP_Error('fetch_failed', 'Failed to fetch image', ['status' => 500]);
+        }
+    
+        $body = wp_remote_retrieve_body($response);
+        $content_type = wp_remote_retrieve_header($response, 'content-type');
+    
+        // Set headers and output the image
+        header('Content-Type: ' . $content_type);
+        echo $body;
+        exit;
+    }
+
+    /**
+     * Get options
+     *
+     * @since 1.0.0
+     * @param \WP_REST_Request $request Full details about the request.
+     * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
+     */
+    // function frontis_get_global_settings( \WP_REST_Request $request ) {
+    //     $default_settings = array(
+    //         'disableHeader'     => false,
+    //         'disableFooter'     => false,
+    //         'stickyHeader'      => false,
+    //         'stickyHeaderOffset' => 0,
+    //         'transparentHeader' => false,
+    //         'scrollToTop'       => false,
+    //         'smoothScroll'       => false,
+    //         'relatedPosts'       => false,
+    //         'authorBox'       => false,
+    //         'lazyLoading'       => false,
+    //         'stickyHeaderColor'       => null,
+    //         'transparentHeaderColor'       => 'transparent',
+    //     );
+
+    //     $settings = get_option( 'frontis_theme_options' );
+
+    //     return rest_ensure_response( $settings, $default_settings );
+    // }
+    function frontis_get_global_settings( \WP_REST_Request $request ) {
+        $post_id     = $request->get_param('post_id');     // যদি single page/post এ থাকি
+        $template_id = $request->get_param('template_id'); // যদি template এ থাকি
+    
+        // Default Global Settings
+        $default_settings = array(
+            'disableHeader'     => false,
+            'disableFooter'     => false,
+            'stickyHeader'      => false,
+            'stickyHeaderOffset'=> 0,
+            'transparentHeader' => false,
+            'scrollToTop'       => false,
+            'smoothScroll'      => false,
+            'relatedPosts'      => false,
+            'authorBox'         => false,
+            'lazyLoading'       => false,
+            'stickyHeaderColor' => null,
+            'transparentHeaderColor' => 'transparent',
+        );
+    
+        // 1. Global settings
+        $global_settings = get_option('frontis_theme_options', $default_settings);
+    
+        // 2. Template settings (যদি থাকে)
+        $template_settings = $template_id ? get_post_meta($template_id, '_frontis_template_settings', true) : [];
+        if ( ! is_array($template_settings) ) {
+            $template_settings = [];
+        }
+    
+        // 3. Single Page/Post settings (যদি থাকে)
+        $post_settings = $post_id ? get_post_meta($post_id, '_frontis_page_settings', true) : [];
+        if ( ! is_array($post_settings) ) {
+            $post_settings = [];
+        }
+    
+        // Priority Merge: post > template > global > default
+        $final_settings = array_merge(
+            $default_settings,
+            $global_settings,
+            $template_settings,
+            $post_settings
+        );
+    
+        return rest_ensure_response($final_settings);
+    }
+
+    function frontis_get_post_template_data( \WP_REST_Request $request ) {
+        $post_id = $request->get_param( 'id' );
+        $template_id = Helper::get_template_id($post_id);
+        
+        // Validate post_id
+        if ( empty( $post_id ) || ! is_numeric( $post_id ) ) {
+            return new \WP_Error(
+                'invalid_post_id',
+                __( 'Invalid or missing post ID.', 'frontis' ),
+                array( 'status' => 400 )
+            );
+        }
+
+        // Retrieve post meta for the given post_id
+        $settings = get_post_meta( $template_id, 'frontis_template_options', true );
+
+        // Return empty array if no settings found, or the settings themselves
+        return rest_ensure_response( $settings ? $settings : [] );
+    }
+
+    /**
+     * Set options
+     *
+     * @param \WP_REST_Request $request Full details about the request.
+     * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
+     * @since 1.0.2
+     */
+    
+    function frontis_update_global_settings(\WP_REST_Request $request) {
+        $scope   = $request->get_param('scope'); // global|template|post
+        $id      = $request->get_param('id');
+        $fields  = $request->get_param('setting') ?: [];
+    
+        if (empty($scope)) {
+            return new \WP_Error('missing_scope', 'Scope parameter is required');
+        }
+    
+        $valid_fields = array(
+            'disableHeader'     => filter_var($fields['disableHeader'] ?? false, FILTER_VALIDATE_BOOLEAN),
+            'disableFooter'     => filter_var($fields['disableFooter'] ?? false, FILTER_VALIDATE_BOOLEAN),
+            'stickyHeader'      => filter_var($fields['stickyHeader'] ?? false, FILTER_VALIDATE_BOOLEAN),
+            'stickyHeaderOffset'=> filter_var($fields['stickyHeaderOffset'] ?? 0, FILTER_VALIDATE_INT),
+            'transparentHeader' => filter_var($fields['transparentHeader'] ?? false, FILTER_VALIDATE_BOOLEAN),
+            'scrollToTop'       => filter_var($fields['scrollToTop'] ?? false, FILTER_VALIDATE_BOOLEAN),
+            'smoothScroll'      => filter_var($fields['smoothScroll'] ?? false, FILTER_VALIDATE_BOOLEAN),
+            'relatedPosts'      => filter_var($fields['relatedPosts'] ?? false, FILTER_VALIDATE_BOOLEAN),
+            'authorBox'         => filter_var($fields['authorBox'] ?? false, FILTER_VALIDATE_BOOLEAN),
+            'lazyLoading'       => filter_var($fields['lazyLoading'] ?? false, FILTER_VALIDATE_BOOLEAN),
+            'stickyHeaderColor' => sanitize_text_field($fields['stickyHeaderColor'] ?? ''),
+            'transparentHeaderColor' => sanitize_text_field($fields['transparentHeaderColor'] ?? ''),
+        );
+    
+        if ($scope === 'global') {
+            update_option('frontis_theme_options', $valid_fields);
+        } elseif ($scope === 'template' && $id) {
+            update_post_meta((int)$id, '_frontis_template_settings', $valid_fields);
+        } elseif ($scope === 'post' && $id) {
+            update_post_meta((int)$id, '_frontis_page_settings', $valid_fields);
+        }
+    
+        return rest_ensure_response('success');
+    }
+    
 
     public function get_icons() {
         // Assets er vitore fontawesome icon ache icons.php file a oita fetch korbo using rest api
@@ -353,6 +728,57 @@ class Admin {
         return $data;
     }
 
+    /**
+     * Validate color in HEX format.
+     *
+     * @param string $color The color to validate.
+     * @return string|null Returns the validated color or null if invalid.
+     */
+    function validate_color( $color ) {
+        if ( preg_match( '/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/', $color ) ) {
+            return $color;
+        }
+        return null;
+    }
+
+    /**
+     * Get template settings
+     *
+     * @param \WP_REST_Request $request Full details about the request.
+     * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
+     */
+
+    public function frontis_get_template_settings( \WP_REST_Request $request ) {
+        // Get post_id from query parameters
+        $post_id = $request->get_param('post_id');
+
+        // Validate post_id
+        if ( empty( $post_id ) || ! is_numeric( $post_id ) ) {
+            return new \WP_Error(
+                'invalid_post_id',
+                __( 'Invalid or missing post ID.', 'frontis' ),
+                array( 'status' => 400 )
+            );
+        }
+
+        // Retrieve post meta for the given post_id
+        $settings = get_post_meta( $post_id, 'frontis_template_options', true );
+
+        // Return empty array if no settings found, or the settings themselves
+        return rest_ensure_response( $settings ? $settings : [] );
+    }
+
+    /**
+     * Update template settings
+     *
+     * @param \WP_REST_Request $request Full details about the request.
+     * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
+     */
+    public function frontis_update_template_settings( \WP_REST_Request $request ) {
+        $fields = isset( $request['setting'] ) ? $request['setting'] : array();
+        update_post_meta( $request['post_id'], 'frontis_template_options', $fields );
+        return rest_ensure_response( 'success' );
+    }
 
     /**
      * Handle the save option REST API endpoint
@@ -471,6 +897,46 @@ class Admin {
         ));
 
         wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.css', array(), '1.0.0');
-
 	}
+
+    public function template_proxy() {
+        global $wp_query;
+
+        $is_proxy   = get_query_var('template_proxy');
+        $remote_url = get_query_var('url');
+    
+        // fallback: check raw $_GET if query_vars fail
+        if (empty($is_proxy) && isset($_GET['template_proxy'])) {
+            $is_proxy = sanitize_text_field($_GET['template_proxy']);
+        }
+        if (empty($remote_url) && isset($_GET['url'])) {
+            $remote_url = sanitize_text_field($_GET['url']);
+        }
+    
+        if ($is_proxy && $remote_url) {
+            $remote_url = urldecode($remote_url);
+    
+            $response = wp_remote_get($remote_url);
+            if (is_wp_error($response)) {
+                wp_die('Proxy request failed: ' . $response->get_error_message());
+            }
+    
+            $body = wp_remote_retrieve_body($response);
+            $content_type = wp_remote_retrieve_header($response, 'content-type');
+            header("Content-Type: " . ($content_type ?: 'text/html; charset=UTF-8'));
+    
+            // Fix relative asset URLs
+            $body = preg_replace_callback(
+                '/(src|href)=["\'](\/[^"\']+)["\']/i',
+                function ($matches) use ($remote_url) {
+                    $base = preg_replace('#/[^/]*$#', '/', $remote_url);
+                    return $matches[1] . '="' . rtrim($base, '/') . $matches[2] . '"';
+                },
+                $body
+            );
+    
+            echo $body;
+            exit;
+        }
+    }
 }

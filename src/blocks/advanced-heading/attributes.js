@@ -15,11 +15,6 @@ const attributes = {
         },
     },
 
-	isHeadingTextChanged: {
-		type: 'boolean',
-		default: false
-	},
-
     headingText: {
         type : 'string',
         default: 'Advanced Heading'
@@ -32,10 +27,7 @@ const attributes = {
 			sourceField: '',
 		}
 	},
-    dynamicContent: {
-        type: 'string',
-        default: '',
-      },
+
     headingTag: {
         type : 'string',
         default: 'h2'
@@ -49,55 +41,155 @@ const attributes = {
         default: '',
     },
 
-
-    dynamicEnabled : {
+    /** Start Dynamic Text */
+    dynamicTextEnabled : {
         type: 'boolean',
         default: false
     },
-    dynamicSource: {
+    dynamicTextSource: {
         type: 'string',
         default: 'current_post'
     },
-    dynamicField: {
+    dynamicTextPostId: {
+        type: 'number',
+        default: 0
+    },
+    dynamicTextPostType: {
+        type: 'string',
+        default: ''
+    },
+    dynamicTextPostLabel: {
+        type: 'string',
+        default: ''
+    },
+    dynamicTextField: {
         type: 'string',
         default: 'post_title'
     },
-    metaKey: {
+    dynamicFeaturedImageField:{
         type: 'string',
-        default: ''
+        default: 'title'
     },
-    authorMetaKey : {
+    dynamicTextDateType: {
         type: 'string',
-        default: ''
+        default: 'published'
     },
-    termsTaxonomy: {
+    dynamicTextDateFormat: {
         type: 'string',
-        default: ''
+        default: 'default'
     },
-    termsFormat: {
+    dynamicTextTimeType: {
         type: 'string',
-        default: 'names'
+        default: 'published'
     },
-    requestParamKey: {
+    dynamicTextTimeFormat: {
         type: 'string',
-        default: ''
+        default: 'default'
     },
-    shortcode: {
+    dynamicTextCommentsZeroText: {
         type: 'string',
-        default: ''
+        default: 'No Response',
     },
-    userScope: {
+    dynamicTextCommentsOneText: {
         type: 'string',
-        default: 'current'
+        default: 'One Response',
     },
-    dynamicEnableLink: {
+    dynamicTextCommentsManyText: {
+        type: 'string',
+        default: '{num} Response',
+    },   
+    dynamicTextTermsTaxonomy: {
+        type: 'string',
+        default: 'category',
+    },
+    dynamicTextTermsSeparator: {
+        type: 'string',
+        default: ', ',
+    },
+    dynamicTextEnableLink: {
         type: 'boolean',
         default: false
     },
-    dynamicReplaceAll: {
+    dynamicTextLinkSource: {
+        type: 'string',
+        default: 'post_permalink',
+    },
+    /** End Dynamic Text */
+
+    /** Start Dynamic Sub Heading Text */
+    dynamicSubHeadingTextEnabled : {
         type: 'boolean',
         default: false
     },
+    dynamicSubHeadingTextSource: {
+        type: 'string',
+        default: 'current_post'
+    },
+    dynamicSubHeadingTextPostId: {
+        type: 'number',
+        default: 0
+    },
+    dynamicSubHeadingTextPostType: {
+        type: 'string',
+        default: ''
+    },
+    dynamicSubHeadingTextPostLabel: {
+        type: 'string',
+        default: ''
+    },
+    dynamicSubHeadingTextField: {
+        type: 'string',
+        default: 'post_title'
+    },
+    dynamicSubHeadingFeaturedImageField:{
+        type: 'string',
+        default: 'title'
+    },
+    dynamicSubHeadingTextDateType: {
+        type: 'string',
+        default: 'published'
+    },
+    dynamicSubHeadingTextDateFormat: {
+        type: 'string',
+        default: 'default'
+    },
+    dynamicSubHeadingTextTimeType: {
+        type: 'string',
+        default: 'published'
+    },
+    dynamicSubHeadingTextTimeFormat: {
+        type: 'string',
+        default: 'default'
+    },
+    dynamicSubHeadingTextCommentsZeroText: {
+        type: 'string',
+        default: 'No Response',
+    },
+    dynamicSubHeadingTextCommentsOneText: {
+        type: 'string',
+        default: 'One Response',
+    },
+    dynamicSubHeadingTextCommentsManyText: {
+        type: 'string',
+        default: '{num} Response',
+    },   
+    dynamicSubHeadingTextTermsTaxonomy: {
+        type: 'string',
+        default: 'category',
+    },
+    dynamicSubHeadingTextTermsSeparator: {
+        type: 'string',
+        default: ', ',
+    },
+    dynamicSubHeadingTextEnableLink: {
+        type: 'boolean',
+        default: false
+    },
+    dynamicSubHeadingTextLinkSource: {
+        type: 'string',
+        default: 'post_permalink',
+    },
+    /** End Dynamic Sub Heading Text */
 
 
     /** Start Heading Style */
@@ -160,7 +252,7 @@ const attributes = {
     },
     headingTextDecoration : {
         type: 'string',
-        default: ''
+        default: 'none'
     },
     headingLetterSpacing: {
 		type: 'object',
@@ -589,7 +681,7 @@ const attributes = {
     },
     subHeadingTextDecoration: {
         type: 'string',
-        default: ''
+        default: 'none'
     },
     subHeadingLetterSpacing: {
         type: 'object',
@@ -1014,6 +1106,9 @@ const attributes = {
 		type: 'string',
 		default: 'bookmark',
 	},
+    headingIconFrontend:{
+        type: 'string',
+    },
     headingIconSize: {
         type: 'object',
         default: {

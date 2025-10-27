@@ -1,24 +1,33 @@
-import { useState, useEffect } from "@wordpress/element";
+import { useState, useEffect, useRef } from "@wordpress/element";
+import { TemplateContentLoader } from "./template-loader";
 
-const SitePreview = () => {
+const SitePreview = ({preview_url}) => {
 	const [previewUrl, setPreviewUrl] = useState('');
 	const [isLoading, setIsLoading] = useState(true);
+	const iframeRef = useRef(null);
 
 	useEffect(() => {
-		const siteUrl = 'https://yakutansi.boomdevshub.com/?hide_admin_bar=true&preview=true';
+		const currentOrigin = window.location.origin;
+		const remoteUrl = encodeURIComponent(preview_url);
+
+		let siteUrl = `${currentOrigin}/template-proxy/?url=${remoteUrl}`;
+
+		if (window?.wpApiSettings?.permalink_structure === '' || window.location.href.includes('index.php')) {
+			siteUrl = `${currentOrigin}/?template_proxy=1&url=${remoteUrl}`;
+		}
+
 		setPreviewUrl(siteUrl);
 	}, []);
+
 
 	return (
 		<div className="fb-site-preview-container">
 			{isLoading && (
-				<div className="fb-preview-loader">
-					<div className="fb-loader-spinner"></div>
-					<span>Loading preview...</span>
-				</div>
+				<TemplateContentLoader />
 			)}
 			<iframe
-				style={{width: '100%', height: '100vh'}}
+				ref={iframeRef}
+				style={{ width: '100%', height: '100vh' }}
 				src={previewUrl}
 				className="fb-preview-frame"
 				title="Site Preview"

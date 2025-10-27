@@ -60,8 +60,8 @@
         },
         {
             "name": "deliciousbrains/wp-background-processing",
-            "version": "dev-master",
-            "version_normalized": "dev-master",
+            "version": "1.4.0",
+            "version_normalized": "1.4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deliciousbrains/wp-background-processing.git",
@@ -87,7 +87,6 @@
                 "coenjacobs/mozart": "Easily wrap this library with your own prefix, to prevent collisions when multiple plugins use this library"
             },
             "time": "2025-09-19T14:51:35+00:00",
-            "default-branch": true,
             "type": "library",
             "installation-source": "dist",
             "autoload": {

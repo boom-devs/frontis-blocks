@@ -3,6 +3,7 @@ namespace FrontisBlocks\Activator;
 
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Admin\Ajax\Settings;
+use FrontisBlocks\Utils\Helper;
 
 /**
  * Class Activator
@@ -11,7 +12,7 @@ use FrontisBlocks\Admin\Ajax\Settings;
  */
 class Activator {
 
-    const VERSION = '1.0.9';
+    const VERSION = '1.1.0';
     const SLUG = 'frontis-blocks';
 
     use Singleton;
@@ -43,7 +44,52 @@ class Activator {
 	public function fb_on_activate_or_update()
 	{
 		update_option('frontis_blocks_version', self::VERSION);
-		Settings::get_instance()->generate_assets_on_activation_update();
+		$this->generate_job_table();
+		
+		try {
+			$post_ids = Helper::get_all_post_ids();
+			
+			if (!empty($post_ids)) {
+				foreach ($post_ids as $single_post_id) {
+					$single_post = get_post($single_post_id);
+					if (!$single_post) continue;
+					
+					$post_content = $single_post->post_content;
+					$pattern = "/frontis-blocks/i";
+					
+					if (get_post_type($single_post_id) !== 'wp_template' && 
+						preg_match_all($pattern, $post_content) === 0) {
+						continue;
+					}
+					
+					// Insert job using your existing Helper method
+					Helper::insert_job($single_post_id, $single_post->post_name . $single_post_id);
+				}
+			}
+			} catch (Exception $e) {
+			error_log('Failed to schedule assets generation: ' . $e->getMessage());
+		}
+	}
+
+	public function generate_job_table() {
+		global $wpdb;
+		$table_name = $wpdb->prefix . 'fb_job_schedule';
+		$charset_collate = $wpdb->get_charset_collate();
+	
+		$sql = "CREATE TABLE IF NOT EXISTS $table_name (
+			id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+			job_id INT NOT NULL,
+			job_name VARCHAR(255) NOT NULL,
+			job_status BOOLEAN DEFAULT 0,
+			job_created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+			job_completed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+			job_last_attempt DATETIME NULL,
+			job_attempts INT DEFAULT 0,
+			PRIMARY KEY (id)
+		) $charset_collate;";
+	
+		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+		dbDelta($sql);
 	}
 
     /**

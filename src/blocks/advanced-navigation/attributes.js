@@ -1744,19 +1744,6 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
-	selectedTemplate: {
-		type: "string",
-		default: ""
-	},
-	enableMegaMenu: {
-        type: 'boolean',
-        default: false
-    },
-    // Change this to store patterns per navigation item
-    megaMenuPatterns: {
-        type: 'object',
-        default: {}
-    }
 	/** End Class & ID Setting */
     
 };
