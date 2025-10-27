@@ -202,7 +202,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 text-decoration: underline;
             }
 
-            .${blockId} .fb-logged-in-as {
+            .${blockId} .fb-logged-in-as{
                 margin: 0 0 20px 0;
                 padding: 12px 15px;
                 background: #e7f3ff;
@@ -370,47 +370,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <div className="fb-control-divider"></div>
             </BaseControl>
 
-            {/* ADDED: Form Text Customization controls */}
-            <BaseControl
+            { showCommentForm &&
+             <BaseControl
                 label={__("Form Text Customization", "frontis-blocks")}
                 className="fb-setting-form-texts"
             >
+
+                <p style={{ fontSize: "12px", color: "#888" }}>
+                    {__(
+                        "Craft a warm and inviting title to welcome users to share their thoughts, e.g., 'Join the Discussion'.",
+                        "frontis-blocks",
+                    )}
+                </p>
+
                 <FB_InputControl
-                    label={__("Form Title", "frontis-blocks")}
+                    label={__("Comment Invitation", "frontis-blocks")}
                     value={formTitle}
                     onChangeValue={(value) => setAttributes({ formTitle: value })}
                     placeholder={__("Leave a Reply", "frontis-blocks")}
                 />
 
                 <FB_InputControl
-                    label={__("Cancel Reply Text", "frontis-blocks")}
+                    label={__("Dismiss Reply Option", "frontis-blocks")}
                     value={cancelReplyText}
                     onChangeValue={(value) => setAttributes({ cancelReplyText: value })}
                     placeholder={__("Cancel reply", "frontis-blocks")}
                 /> 
 
                 <FB_InputControl
-                    label={__("Login Text", "frontis-blocks")}
+                    label={__("User Login Status", "frontis-blocks")}
                     value={loginText}
                     onChangeValue={(value) => setAttributes({ loginText: value })}
                     placeholder={__("Logged in as", "frontis-blocks")}
                 />
 
                 <FB_InputControl
-                    label={__("Logout Text", "frontis-blocks")}
+                    label={__("User Sign Out Link", "frontis-blocks")}
                     value={logoutText}
                     onChangeValue={(value) => setAttributes({ logoutText: value })}
                     placeholder={__("Log out?", "frontis-blocks")}
                 />
 
                 <FB_InputControl
-                    label={__("Button Text", "frontis-blocks")}
+                    label={__("Submit Comment Action", "frontis-blocks")}
                     value={buttonText}
                     onChangeValue={(value) => setAttributes({ buttonText: value })}
                     placeholder={__("Post Comment", "frontis-blocks")}
                 />
-            </BaseControl>
-
+             </BaseControl>
+            }
 
         </PanelBody>
     );

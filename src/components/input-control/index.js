@@ -6,7 +6,7 @@ import {
 } from '@wordpress/components';
 
 
-const FB_InputControl = ({ label, value, onChangeValue, helpText }) => {
+const FB_InputControl = ({ label, value, onChangeValue, placeholder, helpText }) => {
 
     const handleChange = (newValue) => {
         onChangeValue(newValue);
@@ -22,6 +22,7 @@ const FB_InputControl = ({ label, value, onChangeValue, helpText }) => {
                 <InputControl
                     value={value}
                     onChange={handleChange}
+                    placeholder={placeholder}
                     help={helpText}
                     className="fb-setting-input-control"
                 />
