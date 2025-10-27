@@ -151,7 +151,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
-
 	/**
 	 * Dynamic Text Value for Title
 	 */
