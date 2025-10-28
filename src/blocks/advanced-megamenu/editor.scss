@@ -1,6 +1,128 @@
-.advanced-navigation-wrapper .wp-block-navigation:not(ul.wp-block-navigation) {
-    gap: 0;
+.fb-mega-menu-wrapper {
+    min-height: 60px;
+    border: 1px dashed #ddd;
+    padding: 20px;
+    background: #f9f9f9;
+
+    &.horizontal {
+        .block-editor-block-list__layout {
+            display: flex !important;
+            gap: 15px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+    }
+
+    &.vertical {
+        display: block;
+    }
 }
-.wp-block-navigation__responsive-container-open.components-button {
-    opacity: 1;
+
+.fb-mega-menu-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    position: relative;
+
+    .fb-menu-item-wrapper {
+        position: relative;
+    }
+
+    .fb-menu-item-label-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+    }
+
+    .fb-menu-label {
+        font-weight: 500;
+
+        &:empty:before {
+            content: attr(placeholder);
+            color: #999;
+        }
+    }
+
+    .fb-menu-indicator {
+        color: #666;
+    }
+
+    &.has-submenu,
+    &.has-megamenu {
+        padding-bottom: 40px; // Make room for nested items
+    }
+
+    .fb-submenu-wrapper {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 250px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        margin-top: 10px;
+        z-index: 100;
+
+        .block-editor-inner-blocks {
+            >.block-editor-block-list__layout {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    }
+
+    .fb-megamenu-wrapper {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: 500px;
+        max-width: 800px;
+        background: #fff;
+        border: 2px solid #2271b1;
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        padding: 20px;
+        margin-top: 10px;
+        z-index: 100;
+    }
+
+    .fb-megamenu-placeholder {
+        background: #f0f0f1;
+        border: 2px dashed #ddd;
+        padding: 40px 20px;
+        text-align: center;
+        color: #666;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .fb-megamenu-content {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    .fb-pattern-preview {
+        pointer-events: none; // Prevent interaction in editor
+        opacity: 0.7;
+    }
+}
+
+// Nested menu items styling
+.fb-mega-menu-item .fb-mega-menu-item {
+    margin-left: 0;
+
+    .fb-submenu-wrapper {
+        left: 100%;
+        top: 0;
+        margin-top: 0;
+        margin-left: 10px;
+    }
 }

@@ -1,18 +1,18 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "frontis-blocks/advanced-megamenu",
-	"version": "1.0.0",
-	"title": "Advanced Megamenu",
-	"category": "frontis-blocks",
-	"description": "A customizable megamenu block with various styling options.",
-	"example": {},
+    "apiVersion": 2,
+    "name": "frontis-blocks/advanced-megamenu",
+    "title": "Advanced Mega Menu",
+    "category": "frontis-blocks",
+    "description": "Create advanced navigation menus with submenu and mega menu support",
+    "icon": "menu",
+    "keywords": ["menu", "navigation", "mega menu", "nav"],
     "supports": {
-        "anchor": false,
-		"align": ["wide", "full"],
-        "customClassName": false
+        "html": false,
+        "anchor": true,
+        "align": ["wide", "full"]
     },
-	"textdomain": "frontis-blocks",
-	"editorScript": "file:./index.js",
-    "editorStyle": "file:./index.css"
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.scss",
+    "style": "file:./style.scss",
+    "viewScript": "file:./view.js"
 }
