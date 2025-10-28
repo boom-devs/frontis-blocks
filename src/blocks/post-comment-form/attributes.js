@@ -1,73 +1,201 @@
 const attributes = {
-	 blockId: {
-        type: "string",
-        default: "",
-    },
-    
-    // Element Visibility
-    showCommentTitle: {
-        type: "boolean",
-        default: true,
-    },
-    showCommentsCount: {
-        type: "boolean",
-        default: true,
-    },
-    showCommentForm: {
-        type: "boolean",
-        default: true,
-    },
-    
-    // Form Text Customization
-    formTitle: {
-        type: "string",
-        default: "",
-    },
-    cancelReplyText: {
-        type: "string", 
-        default: "",
-    },
-    loginText: {
-        type: "string",
-        default: "",
-    },
-    logoutText: {
-        type: "string",
-        default: "",
-    },
-    buttonText: {
-        type: "string",
-        default: "",
-    },
+	blockId: {
+		type: "string",
+		default: "",
+	},
 
-    // Style Attributes
-    commentFormWidth: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
-        },
-    },
-    commentGap: {
-        type: "object",
-        default: {
-            Desktop: "20px",
-            Tablet: "",
-            Mobile: "",
-        },
-    },
-    avatarSize: {
-        type: "object",
-        default: {
-            Desktop: "64px",
-            Tablet: "",
-            Mobile: "",
-        },
-    },
-    
-    
-/** ============== Advanced Settings ============== */
+	// Element Visibility
+	showCommentTitle: {
+		type: "boolean",
+		default: true,
+	},
+	showCommentsCount: {
+		type: "boolean",
+		default: true,
+	},
+	showCommentForm: {
+		type: "boolean",
+		default: true,
+	},
+
+	// Form Text Customization
+	formTitle: {
+		type: "string",
+		default: "",
+	},
+	cancelReplyText: {
+		type: "string",
+		default: "",
+	},
+	loginText: {
+		type: "string",
+		default: "",
+	},
+	logoutText: {
+		type: "string",
+		default: "",
+	},
+	buttonText: {
+		type: "string",
+		default: "",
+	},
+
+	// Style Attributes
+	// commentFormWidth: {
+	// 	type: "object",
+	// 	default: {
+	// 		Desktop: "",
+	// 		Tablet: "",
+	// 		Mobile: "",
+	// 	},
+	// },
+	// commentGap: {
+	// 	type: "object",
+	// 	default: {
+	// 		Desktop: "20px",
+	// 		Tablet: "",
+	// 		Mobile: "",
+	// 	},
+	// },
+	// avatarSize: {
+	// 	type: "object",
+	// 	default: {
+	// 		Desktop: "64px",
+	// 		Tablet: "",
+	// 		Mobile: "",
+	// 	},
+	// },
+
+	/** ============== Style Attributes ============== */
+	/** Start Heading */
+	commentCountTitleGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	commentCountTitleGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	commentCountTitleGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	commentCountTitleGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	commentCountTitleFontFamily: {
+		type: "string",
+		default: "",
+	},
+	commentCountTitleFontSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	commentCountTitleFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	commentCountTitleFontWeight: {
+		type: "string",
+		default: "600",
+	},
+	commentCountTitleFontStyle: {
+		type: "string",
+		default: "normal",
+	},
+	commentCountTitleTextTransform: {
+		type: "string",
+		default: "none",
+	},
+	commentCountTitleTextDecoration: {
+		type: "string",
+		default: "none",
+	},
+	commentCountTitleLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	commentCountTitleLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	commentCountTitleLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	commentCountTitleLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	commentCountTitleColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	commentCountTitleColor: {
+		type: "string",
+		default: "",
+	},
+	commentCountTitleHoverColor: {
+		type: "string",
+		default: "",
+	},
+
+	commentCountTitleSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		}
+	},
+
+	commentCountTitleSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		}
+	},
+
+	/** End Heading */
+
+	/** ============== Advanced Attributes ============== */
 	wrapperId: {
 		type: "string",
 		default: "",
@@ -81,19 +209,19 @@ const attributes = {
 		default: "",
 	},
 
-    // Responsive Control
-    commentFormDesktopSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-    commentFormTabletSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-    commentFormMobileSwitcher: {
-        type: "boolean",
-        default: false,
-    },
+	// Responsive Control
+	commentFormDesktopSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	commentFormTabletSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	commentFormMobileSwitcher: {
+		type: "boolean",
+		default: false,
+	},
 
 	// Global
 	postGlobalZIndex: {
@@ -440,13 +568,12 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-    
-    // Internal
-    blockStyle: {
-        type: "string",
-        default: "",
-    },
-    
+
+	// Internal
+	blockStyle: {
+		type: "string",
+		default: "",
+	},
 };
 
 export default attributes;

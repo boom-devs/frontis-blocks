@@ -26,6 +26,7 @@ import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_SwitcherControl from "@Components/switcher-control";
 import FB_ColorControl from "@Components/color-control";
 import FB_BoxShadowControl from "@Components/box-shadow";
+import FB_TypographyControl from "@Components/typography-control";
 
 import "./editor.scss";
 
@@ -35,17 +36,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		showCommentTitle,
 		showCommentsCount,
 		showCommentForm,
-		commentFormWidth,
-		commentGap,
-		avatarSize,
+
+		// commentFormWidth,
+		// commentGap,
+		// avatarSize,
 
 		formTitle,
 		cancelReplyText,
 		loginText,
 		logoutText,
 		buttonText,
-
 		blockStyle,
+
+		/** Style Attributes */
+		/** Heading */
+		commentCountTitleGlobalTypoSwitcher,
+		commentCountTitleGlobalTypographyData,
+		commentCountTitleGlobalTypoType,
+		commentCountTitleGlobalTypoOption,
+		commentCountTitleFontFamily,
+		commentCountTitleFontSize,
+		commentCountTitleFontSizeUnits,
+		commentCountTitleFontWeight,
+		commentCountTitleFontStyle,
+		commentCountTitleTextTransform,
+		commentCountTitleTextDecoration,
+		commentCountTitleLetterSpacing,
+		commentCountTitleLetterSpacingUnits,
+		commentCountTitleLineHeight,
+		commentCountTitleLineHeightUnits,
+
+		commentCountTitleColorSwitcher,
+		commentCountTitleColor,
+		commentCountTitleHoverColor,
+
+		commentCountTitleSpacing,
+		commentCountTitleSpacingUnits,
+		/** End Heading */
 
 		/** Start Advanced Attributes */
 		wrapperId,
@@ -489,22 +516,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	// Generate ALL block styles with blockId targeting
 	const allBlockStyle = useMemo(
 		() => `
-            /* Main block styles */
+            /* Default styles */
             .${blockId} .fb-post-comment-form {
                 margin: 0 auto;
                 padding: 0;
-                ${
-									commentFormWidth.Desktop
-										? `max-width: ${commentFormWidth.Desktop};`
-										: ""
-								}
             }
 
             /* Comment Count Title */
             .${blockId} .fb-comment-count-title {
                 font-size: 20px;
-                font-weight: 600;
-                margin: 0 0 30px 0;
+                margin-bottom: 0 0 30px 0;
                 color: #1e1e1e;
                 padding-bottom: 15px;
                 border-bottom: 1px solid #e1e1e1;
@@ -513,7 +534,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             /* Comments List */
             .${blockId} .fb-comments-list {
                 margin-bottom: 40px;
-                ${commentGap.Desktop ? `gap: ${commentGap.Desktop};` : ""}
             }
 
             /* Comment Items */
@@ -530,8 +550,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             /* Avatar */
             .${blockId} .fb-comment-avatar {
-                width: ${avatarSize.Desktop};
-                height: ${avatarSize.Desktop};
+								width: 64px;
+								height: 64px;
                 border-radius: 50%;
                 flex-shrink: 0;
             }
@@ -610,8 +630,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId} .fb-comment-child .fb-comment-avatar {
-                width: calc(${avatarSize.Desktop} * 0.8);
-                height: calc(${avatarSize.Desktop} * 0.8);
+                width: calc(64px * 0.8);
+                height: calc(64px * 0.8);
             }
 
             /* Comment Form */
@@ -725,80 +745,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 background: #135e96;
             }
 
-						/* Responsive styles for tablet */
-            @media only screen and (max-width: 1024px) {
-                .${blockId} .fb-post-comment-form {
-                    ${
-											commentFormWidth.Tablet
-												? `max-width: ${commentFormWidth.Tablet};`
-												: ""
-										}
-                }
-
-                .${blockId} .fb-comments-list {
-                    ${commentGap.Tablet ? `gap: ${commentGap.Tablet};` : ""}
-                }
-
-                .${blockId} .fb-comment-avatar {
-                    width: ${avatarSize.Tablet || avatarSize.Desktop};
-                    height: ${avatarSize.Tablet || avatarSize.Desktop};
-                }
-
-                .${blockId} .fb-comment-child .fb-comment-avatar {
-                    width: calc(${
-											avatarSize.Tablet || avatarSize.Desktop
-										} * 0.8);
-                    height: calc(${
-											avatarSize.Tablet || avatarSize.Desktop
-										} * 0.8);
-                }
-            }
-
-            /* Responsive styles for mobile */
-            @media (max-width: 767px) {
-                .${blockId} .fb-post-comment-form {
-                    ${
-											commentFormWidth.Mobile
-												? `max-width: ${commentFormWidth.Mobile};`
-												: ""
-										}
-                }
-
-                .${blockId} .fb-comments-list {
-                    ${commentGap.Mobile ? `gap: ${commentGap.Mobile};` : ""}
-                }
-
-                .${blockId} .fb-comment {
-                    flex-direction: column;
-                    gap: 10px;
-                }
-
-                .${blockId} .fb-comment-avatar {
-                    width: ${
-											avatarSize.Mobile ||
-											avatarSize.Tablet ||
-											avatarSize.Desktop
-										};
-                    height: ${
-											avatarSize.Mobile ||
-											avatarSize.Tablet ||
-											avatarSize.Desktop
-										};
-                }
-
-                .${blockId} .fb-comment-child .fb-comment-avatar {
-                    width: calc(${
-											avatarSize.Mobile ||
-											avatarSize.Tablet ||
-											avatarSize.Desktop
-										} * 0.8);
-                    height: calc(${
-											avatarSize.Mobile ||
-											avatarSize.Tablet ||
-											avatarSize.Desktop
-										} * 0.8);
-                }
-
                 .${blockId} .fb-comment-children {
                     margin-left: 15px;
                     padding-left: 15px;
@@ -815,176 +761,455 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 				/*===========================  Desktop Styles ===========================  */
 
+				/** Main Block Style */
+				.${blockId} {
+					width: 100%;
+				}
+
+				.${blockId} .fb-comment-count-title {
+
+			
+            ${commentCountTitleColor ? `color: ${commentCountTitleColor};` : ""}
+
+            ${commentCountTitleGlobalTypoSwitcher.fontFamily === true &&
+				commentCountTitleGlobalTypographyData.fontFamily
+				? `font-family: ${commentCountTitleGlobalTypographyData.fontFamily};`
+				: ""
+			}
+            ${commentCountTitleGlobalTypoSwitcher.fontSize === true &&
+				commentCountTitleGlobalTypographyData.fontSize
+				? `font-size: ${commentCountTitleGlobalTypographyData.fontSize};`
+				: ""
+			}
+            ${commentCountTitleGlobalTypoSwitcher.fontWeight === true &&
+				commentCountTitleGlobalTypographyData.fontWeight
+				? `font-weight: ${commentCountTitleGlobalTypographyData.fontWeight};`
+				: ""
+			}
+            ${commentCountTitleGlobalTypoSwitcher.fontStyle === true &&
+				commentCountTitleGlobalTypographyData.fontStyle
+				? `font-style: ${commentCountTitleGlobalTypographyData.fontStyle};`
+				: ""
+			}
+            ${commentCountTitleGlobalTypoSwitcher.textTransform === true &&
+				commentCountTitleGlobalTypographyData.textTransform
+				? `text-transform: ${commentCountTitleGlobalTypographyData.textTransform};`
+				: ""
+			}
+            ${commentCountTitleGlobalTypoSwitcher.textDecoration === true &&
+				commentCountTitleGlobalTypographyData.textDecoration
+				? `text-decoration: ${commentCountTitleGlobalTypographyData.textDecoration};`
+				: ""
+			}
+            ${commentCountTitleGlobalTypoSwitcher.letterSpacing === true &&
+				commentCountTitleGlobalTypographyData.letterSpacing
+				? `letter-spacing: ${commentCountTitleGlobalTypographyData.letterSpacing};`
+				: ""
+			}
+            ${commentCountTitleGlobalTypoSwitcher.lineHeight === true &&
+				commentCountTitleGlobalTypographyData.lineHeight
+				? `line-height: ${commentCountTitleGlobalTypographyData.lineHeight};`
+				: ""
+			}
+
+						${commentCountTitleGlobalTypoSwitcher.fontFamily === false &&
+				commentCountTitleFontFamily
+				? `font-family: ${commentCountTitleFontFamily};`
+				: ""
+			}
+						${commentCountTitleGlobalTypoSwitcher.fontSize === false &&
+				commentCountTitleFontSize.Desktop
+				? `font-size: ${commentCountTitleFontSize.Desktop}${commentCountTitleFontSizeUnits.Desktop};`
+				: ""
+			}
+						${commentCountTitleGlobalTypoSwitcher.fontWeight === false &&
+				commentCountTitleFontWeight
+				? `font-weight: ${commentCountTitleFontWeight};`
+				: ""
+			}
+						${commentCountTitleGlobalTypoSwitcher.fontStyle === false &&
+				commentCountTitleFontStyle
+				? `font-style: ${commentCountTitleFontStyle};`
+				: ""
+			}
+						${commentCountTitleGlobalTypoSwitcher.textTransform === false &&
+				commentCountTitleTextTransform
+				? `text-transform: ${commentCountTitleTextTransform};`
+				: ""
+			}
+						${commentCountTitleGlobalTypoSwitcher.textDecoration === false &&
+				commentCountTitleTextDecoration
+				? `text-decoration: ${commentCountTitleTextDecoration};`
+				: ""
+			}
+						${commentCountTitleGlobalTypoSwitcher.letterSpacing === false &&
+				commentCountTitleLetterSpacing.Desktop
+				? `letter-spacing: ${commentCountTitleLetterSpacing.Desktop}${commentCountTitleLetterSpacingUnits.Desktop};`
+				: ""
+			}
+						${commentCountTitleGlobalTypoSwitcher.lineHeight === false &&
+				commentCountTitleLineHeight.Desktop
+				? `line-height: ${commentCountTitleLineHeight.Desktop}${commentCountTitleLineHeightUnits.Desktop};`
+				: ""
+			}
+
+						${
+				commentCountTitleSpacing.Desktop
+					? `margin-bottom: ${commentCountTitleSpacing.Desktop}${commentCountTitleSpacingUnits.Desktop};`
+					: ""
+			}
+
+			}
+
+			
+
+				.${blockId} .fb-comment-count-title:hover {
+					${commentCountTitleHoverColor ? `color: ${commentCountTitleHoverColor};` : ""}
+				}
+
+
 				/* Advance Control Global Style */
 				.${blockId}.fb-post-comment-form-block{
 			   ${postGlobalPositionType === "default" ? `position: relative;` : ""}
-            ${
-							postGlobalPositionType !== "default" &&
-							postGlobalPositionType !== "relative"
-								? `width: 100%;`
-								: ""
-						}
-            ${
-							postGlobalPositionType !== "default"
-								? `position: ${postGlobalPositionType};`
-								: ""
-						}
-            ${
-							postGlobalPositionType !== "default" &&
-							postGlobalPositionType !== "relative" &&
-							postGlobalHZOrientationType === "left" &&
-							postGlobalHZLeftOffset.Desktop !== undefined
-								? `left: ${postGlobalHZLeftOffset.Desktop}${postGlobalHZLeftOffsetUnits.Desktop};`
-								: ""
-						}
-            ${
-							postGlobalPositionType !== "default" &&
-							postGlobalPositionType !== "relative" &&
-							postGlobalHZOrientationType === "right" &&
-							postGlobalHZRightOffset.Desktop !== undefined
-								? `right: ${postGlobalHZRightOffset.Desktop}${postGlobalHZRightOffsetUnits.Desktop};`
-								: ""
-						}
-            ${
-							postGlobalPositionType !== "default" &&
-							postGlobalPositionType !== "relative" &&
-							postGlobalVROrientationType === "top" &&
-							postGlobalVRTopOffset.Desktop !== undefined
-								? `top: ${postGlobalVRTopOffset.Desktop}${postGlobalVRTopOffsetUnits.Desktop};`
-								: ""
-						}
-            ${
-							postGlobalPositionType !== "default" &&
-							postGlobalPositionType !== "relative" &&
-							postGlobalVROrientationType === "bottom" &&
-							postGlobalVRBottomOffset.Desktop !== undefined
-								? `bottom: ${postGlobalVRBottomOffset.Desktop}${postGlobalVRBottomOffsetUnits.Desktop};`
-								: ""
-						}
+            ${postGlobalPositionType !== "default" &&
+				postGlobalPositionType !== "relative"
+				? `width: 100%;`
+				: ""
+			}
+            ${postGlobalPositionType !== "default"
+				? `position: ${postGlobalPositionType};`
+				: ""
+			}
+            ${postGlobalPositionType !== "default" &&
+				postGlobalPositionType !== "relative" &&
+				postGlobalHZOrientationType === "left" &&
+				postGlobalHZLeftOffset.Desktop !== undefined
+				? `left: ${postGlobalHZLeftOffset.Desktop}${postGlobalHZLeftOffsetUnits.Desktop};`
+				: ""
+			}
+            ${postGlobalPositionType !== "default" &&
+				postGlobalPositionType !== "relative" &&
+				postGlobalHZOrientationType === "right" &&
+				postGlobalHZRightOffset.Desktop !== undefined
+				? `right: ${postGlobalHZRightOffset.Desktop}${postGlobalHZRightOffsetUnits.Desktop};`
+				: ""
+			}
+            ${postGlobalPositionType !== "default" &&
+				postGlobalPositionType !== "relative" &&
+				postGlobalVROrientationType === "top" &&
+				postGlobalVRTopOffset.Desktop !== undefined
+				? `top: ${postGlobalVRTopOffset.Desktop}${postGlobalVRTopOffsetUnits.Desktop};`
+				: ""
+			}
+            ${postGlobalPositionType !== "default" &&
+				postGlobalPositionType !== "relative" &&
+				postGlobalVROrientationType === "bottom" &&
+				postGlobalVRBottomOffset.Desktop !== undefined
+				? `bottom: ${postGlobalVRBottomOffset.Desktop}${postGlobalVRBottomOffsetUnits.Desktop};`
+				: ""
+			}
 
 
 					${postGlobalZIndex.Desktop ? `z-index: ${postGlobalZIndex.Desktop};` : ""}
-                    ${
-											postGlobalOverflow !== "default"
-												? `overflow: ${postGlobalOverflow};`
-												: ""
-										}
+                    ${postGlobalOverflow !== "default"
+				? `overflow: ${postGlobalOverflow};`
+				: ""
+			}
 										transition: all 0.3s ease-in-out;				
 					}
 
 
 
 				  .${blockId}.fb-post-comment-form-block .fb-post-comment-form{
-                    ${
-											postGlobalDesktopPaddingWidth &&
-											postGlobalPaddingDesktop.top
-												? `padding: ${postGlobalDesktopPaddingWidth};`
-												: ""
-										}
-                                ${
-																	postGlobalDesktopMarginWidth &&
-																	postGlobalMarginDesktop.top
-																		? `margin: ${postGlobalDesktopMarginWidth};`
-																		: ""
-																}
+                    ${postGlobalDesktopPaddingWidth &&
+				postGlobalPaddingDesktop.top
+				? `padding: ${postGlobalDesktopPaddingWidth};`
+				: ""
+			}
+                                ${postGlobalDesktopMarginWidth &&
+				postGlobalMarginDesktop.top
+				? `margin: ${postGlobalDesktopMarginWidth};`
+				: ""
+			}
 
-                    ${
-											postGlobalNormalBackgroundType === "gradient"
-												? `  
-                        ${
-													postGlobalNormalCustomGradientSwitcher &&
-													postGlobalNormalCustomGradientInputValue
-														? `background: ${postGlobalNormalCustomGradientInputValue};`
-														: `background: ${postGlobalNormalGradientColor};`
-												}
+                    ${postGlobalNormalBackgroundType === "gradient"
+				? `  
+                        ${postGlobalNormalCustomGradientSwitcher &&
+					postGlobalNormalCustomGradientInputValue
+					? `background: ${postGlobalNormalCustomGradientInputValue};`
+					: `background: ${postGlobalNormalGradientColor};`
+				}
                     `
-												: `
-                        ${
-													postGlobalNormalClassicColor
-														? `background: ${postGlobalNormalClassicColor};`
-														: ""
-												}
+				: `
+                        ${postGlobalNormalClassicColor
+					? `background: ${postGlobalNormalClassicColor};`
+					: ""
+				}
                     `
-										}
+			}
 
                     ${postGlobalBorder ? `border: ${postGlobalBorder};` : ""} 
 
-                    ${
-											postGlobalDesktopBorderWidth &&
-											postGlobalBorderDesktop.top
-												? `border-width: ${postGlobalDesktopBorderWidth};`
-												: ""
-										}
-                    ${
-											postGlobalDesktopBorderRadiusWidth &&
-											postGlobalBorderRadiusDesktop.top
-												? `border-radius: ${postGlobalDesktopBorderRadiusWidth}!important;`
-												: ""
-										}
-                    ${
-											postGlobalBorderColor
-												? `border-color: ${postGlobalBorderColor};`
-												: ""
-										}
-                    ${
-											postGlobalBoxShadowCssValue
-												? `box-shadow: ${postGlobalBoxShadowCssValue} !important;`
-												: ""
-										}
-                                ${
-																	postGlobalNormalBackgroundType === "gradient"
-																		? `  
-                        ${
-													postGlobalNormalCustomGradientSwitcher &&
-													postGlobalNormalCustomGradientInputValue
-														? `background: ${postGlobalNormalCustomGradientInputValue};`
-														: `background: ${postGlobalNormalGradientColor};`
-												}
+                    ${postGlobalDesktopBorderWidth &&
+				postGlobalBorderDesktop.top
+				? `border-width: ${postGlobalDesktopBorderWidth};`
+				: ""
+			}
+                    ${postGlobalDesktopBorderRadiusWidth &&
+				postGlobalBorderRadiusDesktop.top
+				? `border-radius: ${postGlobalDesktopBorderRadiusWidth}!important;`
+				: ""
+			}
+                    ${postGlobalBorderColor
+				? `border-color: ${postGlobalBorderColor};`
+				: ""
+			}
+                    ${postGlobalBoxShadowCssValue
+				? `box-shadow: ${postGlobalBoxShadowCssValue} !important;`
+				: ""
+			}
+                                ${postGlobalNormalBackgroundType === "gradient"
+				? `  
+                        ${postGlobalNormalCustomGradientSwitcher &&
+					postGlobalNormalCustomGradientInputValue
+					? `background: ${postGlobalNormalCustomGradientInputValue};`
+					: `background: ${postGlobalNormalGradientColor};`
+				}
                     `
-																		: `
-                        ${
-													postGlobalNormalClassicColor
-														? `background: ${postGlobalNormalClassicColor};`
-														: ""
-												}
+				: `
+                        ${postGlobalNormalClassicColor
+					? `background: ${postGlobalNormalClassicColor};`
+					: ""
+				}
                     `
-																}
+			}
 
                 }
 
                 .${blockId}.fb-post-comment-form-block .fb-post-comment-form:hover {
-                     ${
-												postGlobalHoverBackgroundType === "gradient"
-													? `  
-                        ${
-													postGlobalHoverCustomGradientSwitcher &&
-													postGlobalHoverCustomGradientInputValue
-														? `background: ${postGlobalHoverCustomGradientInputValue};`
-														: `background: ${postGlobalHoverGradientColor};`
-												}
+                     ${postGlobalHoverBackgroundType === "gradient"
+				? `  
+                        ${postGlobalHoverCustomGradientSwitcher &&
+					postGlobalHoverCustomGradientInputValue
+					? `background: ${postGlobalHoverCustomGradientInputValue};`
+					: `background: ${postGlobalHoverGradientColor};`
+				}
                     `
-													: `
-                        ${
-													postGlobalHoverClassicColor
-														? `background: ${postGlobalHoverClassicColor};`
-														: ""
-												}
+				: `
+                        ${postGlobalHoverClassicColor
+					? `background: ${postGlobalHoverClassicColor};`
+					: ""
+				}
 
-                         ${
-														postGlobalBorderHoverColor
-															? `border-color: ${postGlobalBorderHoverColor};`
-															: ""
-													}
-                        ${
-													postGlobalBoxShadowHoverCssValue
-														? `box-shadow: ${postGlobalBoxShadowHoverCssValue}!important;`
-														: ""
-												}
+                         ${postGlobalBorderHoverColor
+					? `border-color: ${postGlobalBorderHoverColor};`
+					: ""
+				}
+                        ${postGlobalBoxShadowHoverCssValue
+					? `box-shadow: ${postGlobalBoxShadowHoverCssValue}!important;`
+					: ""
+				}
                     
                     `
-											}
+			}
                 }
 
+
+				/*=======================  Tablet Styles =====================  */
+				@media only screen and (max-width: 1024px ) {
+
+
+							.${blockId} .fb-comment-count-title  {
+							  ${commentCountTitleGlobalTypoSwitcher.fontSize === false &&
+				commentCountTitleFontSize.Tablet
+				? `font-size: ${commentCountTitleFontSize.Tablet}${commentCountTitleFontSizeUnits.Tablet};`
+				: ""
+			}
+                ${commentCountTitleGlobalTypoSwitcher.letterSpacing === false &&
+				commentCountTitleLetterSpacing.Tablet
+				? `letter-spacing: ${commentCountTitleLetterSpacing.Tablet}${commentCountTitleLetterSpacingUnits.Tablet};`
+				: ""
+			}
+                ${commentCountTitleGlobalTypoSwitcher.lineHeight === false &&
+				commentCountTitleLineHeight.Tablet
+				? `line-height: ${commentCountTitleLineHeight.Tablet}${commentCountTitleLineHeightUnits.Tablet};`
+				: ""
+			}
+
+									${
+				commentCountTitleSpacing.Tablet
+					? `margin-bottom: ${commentCountTitleSpacing.Tablet}${commentCountTitleSpacingUnits.Tablet};`
+					: ""
+			}
+
+						}
+
+
+							/* Advanced Control Global Style - Tablet */
+                .${blockId}.fb-post-comment-form-block {
+                    ${postGlobalPositionType !== "default" &&
+				postGlobalPositionType !== "relative" &&
+				postGlobalHZOrientationType === "left" &&
+				postGlobalHZLeftOffset.Tablet !== undefined
+				? `left: ${postGlobalHZLeftOffset.Tablet}${postGlobalHZLeftOffsetUnits.Tablet};`
+				: ""
+			}
+                    ${postGlobalPositionType !== "default" &&
+				postGlobalPositionType !== "relative" &&
+				postGlobalHZOrientationType === "right" &&
+				postGlobalHZRightOffset.Tablet !== undefined
+				? `right: ${postGlobalHZRightOffset.Tablet}${postGlobalHZRightOffsetUnits.Tablet};`
+				: ""
+			}
+                    ${postGlobalPositionType !== "default" &&
+				postGlobalPositionType !== "relative" &&
+				postGlobalVROrientationType === "top" &&
+				postGlobalVRTopOffset.Tablet !== undefined
+				? `top: ${postGlobalVRTopOffset.Tablet}${postGlobalVRTopOffsetUnits.Tablet};`
+				: ""
+			}
+                    ${postGlobalPositionType !== "default" &&
+				postGlobalPositionType !== "relative" &&
+				postGlobalVROrientationType === "bottom" &&
+				postGlobalVRBottomOffset.Tablet !== undefined
+				? `bottom: ${postGlobalVRBottomOffset.Tablet}${postGlobalVRBottomOffsetUnits.Tablet};`
+				: ""
+			}
+                    ${postGlobalZIndex.Tablet
+				? `z-index: ${postGlobalZIndex.Tablet}`
+				: ""
+			}
+
+                }
+
+                .${blockId}.fb-post-comment-form-block .fb-post-comment-form{
+                    ${postGlobalTabletPaddingWidth &&
+				postGlobalPaddingTablet.top
+				? `padding: ${postGlobalTabletPaddingWidth};`
+				: ""
+			}
+                                        ${postGlobalTabletMarginWidth &&
+				postGlobalMarginTablet.top
+				? `margin: ${postGlobalTabletMarginWidth};`
+				: ""
+			}
+
+                    
+                    ${postGlobalTabletBorderWidth && postGlobalBorderTablet.top
+				? `border-width: ${postGlobalTabletBorderWidth};`
+				: ""
+			}
+                        ${postGlobalTabletBorderRadiusWidth &&
+				postGlobalBorderRadiusTablet.top
+				? `border-radius: ${postGlobalTabletBorderRadiusWidth}!important;`
+				: ""
+			}
+                }
+
+
+            }
+				}
+				
+				/*===========================  Mobile Styles ===========================  */
+				@media screen and (max-width: 767px) {
+
+					.${blockId} .fb-comment-count-title  {
+					  ${commentCountTitleGlobalTypoSwitcher.fontSize === false &&
+				commentCountTitleFontSize.Mobile
+				? `font-size: ${commentCountTitleFontSize.Mobile}${commentCountTitleFontSizeUnits.Mobile};`
+				: ""
+			}
+						${commentCountTitleGlobalTypoSwitcher.letterSpacing === false &&
+				commentCountTitleLetterSpacing.Mobile
+				? `letter-spacing: ${commentCountTitleLetterSpacing.Mobile}${commentCountTitleLetterSpacingUnits.Mobile};`
+				: ""
+			}
+						${commentCountTitleGlobalTypoSwitcher.lineHeight === false &&
+				commentCountTitleLineHeight.Mobile
+				? `line-height: ${commentCountTitleLineHeight.Mobile}${commentCountTitleLineHeightUnits.Mobile};`
+				: ""
+			}
+
+									${
+				commentCountTitleSpacing.Mobile
+					? `margin-bottom: ${commentCountTitleSpacing.Mobile}${commentCountTitleSpacingUnits.Mobile};`
+					: ""
+			}
+
+					}
+												
+							 /* Advance Control Global Style - Mobile */
+                .${blockId}.fb-post-comment-form-block {
+                        ${postGlobalPositionType !== "default" &&
+				postGlobalPositionType !== "relative" &&
+				postGlobalHZOrientationType === "left" &&
+				postGlobalHZLeftOffset.Mobile !== undefined
+				? `left: ${postGlobalHZLeftOffset.Mobile}${postGlobalHZLeftOffsetUnits.Mobile};`
+				: ""
+			}
+                        ${postGlobalPositionType !== "default" &&
+				postGlobalPositionType !== "relative" &&
+				postGlobalHZOrientationType === "right" &&
+				postGlobalHZRightOffset.Mobile !== undefined
+				? `right: ${postGlobalHZRightOffset.Mobile}${postGlobalHZRightOffsetUnits.Mobile};`
+				: ""
+			}
+                        ${postGlobalPositionType !== "default" &&
+				postGlobalPositionType !== "relative" &&
+				postGlobalVROrientationType === "top" &&
+				postGlobalVRTopOffset.Mobile !== undefined
+				? `top: ${postGlobalVRTopOffset.Mobile}${postGlobalVRTopOffsetUnits.Mobile};`
+				: ""
+			}
+                        ${postGlobalPositionType !== "default" &&
+				postGlobalPositionType !== "relative" &&
+				postGlobalVROrientationType === "bottom" &&
+				postGlobalVRBottomOffset.Mobile !== undefined
+				? `bottom: ${postGlobalVRBottomOffset.Mobile}${postGlobalVRBottomOffsetUnits.Mobile};`
+				: ""
+			} 
+
+                        ${postGlobalZIndex.Mobile
+				? `z-index: ${postGlobalZIndex.Mobile}`
+				: ""
+			}
+
+                     
+                }
+
+
+                .${blockId}.fb-post-comment-form-block .fb-post-comment-form{
+                
+                       ${postGlobalMobilePaddingWidth &&
+				postGlobalPaddingMobile.top
+				? `padding: ${postGlobalMobilePaddingWidth}`
+				: ""
+			}
+                                        ${postGlobalMobileMarginWidth &&
+				postGlobalMarginMobile.top
+				? `margin: ${postGlobalMobileMarginWidth}`
+				: ""
+			}
+
+                         ${postGlobalMobileBorderWidth &&
+				postGlobalBorderMobile.top
+				? `border-width: ${postGlobalMobileBorderWidth};`
+				: ""
+			}
+                        ${postGlobalMobileBorderRadiusWidth &&
+				postGlobalBorderRadiusMobile.top
+				? `border-radius: ${postGlobalMobileBorderRadiusWidth}!important;`
+				: ""
+			}
+
+                }
+
+
+
+
+            }
+				
+				}
 
 
         `,
@@ -1085,30 +1310,195 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	);
 
 	const styleControls = (
-		<PanelBody title={__("", "frontis-blocks")} initialOpen={false}>
-			{/* <FB_DimensionControl
-                label={__("Form Width", "frontis-blocks")}
-                values={commentFormWidth}
-                onChange={(value) => setAttributes({ commentFormWidth: value })}
-                deviceType={deviceType}
-                units={["px", "%", "em", "rem"]}
-            />
+		<PanelBody title={__("Heading", "frontis-blocks")} initialOpen={true}>
+			<FB_TypographyControl
+				globalTypoControlActive={true}
+				globalTypoSwitcher={commentCountTitleGlobalTypoSwitcher}
+				storeGlobalTypographyData={(value) =>
+					setAttributes({ commentCountTitleGlobalTypographyData: value })
+				}
+				globalTypoType={commentCountTitleGlobalTypoType}
+				onChangeGlobalTypoType={(value) => {
+					setAttributes({
+						commentCountTitleGlobalTypoType: value,
+						commentCountTitleGlobalTypoSwitcher:
+							value === "default"
+								? {
+									...commentCountTitleGlobalTypoSwitcher,
+									fontFamily: false,
+									fontSize: false,
+									fontWeight: false,
+									fontStyle: false,
+									textTransform: false,
+									textDecoration: false,
+									letterSpacing: false,
+									lineHeight: false,
+								}
+								: {
+									...commentCountTitleGlobalTypoSwitcher,
+									fontFamily: true,
+									fontSize: true,
+									fontWeight: true,
+									fontStyle: true,
+									textTransform: true,
+									textDecoration: true,
+									letterSpacing: true,
+									lineHeight: true,
+								},
+					});
+				}}
+				globalTypoOption={commentCountTitleGlobalTypoOption}
+				onChangeGlobalTypoOption={(value) =>
+					setAttributes({ commentCountTitleGlobalTypoOption: value })
+				}
+				fontFamily={commentCountTitleFontFamily}
+				onChangeFontFamily={(value) =>
+					setAttributes({
+						commentCountTitleFontFamily: value,
+						commentCountTitleGlobalTypoSwitcher: {
+							...commentCountTitleGlobalTypoSwitcher,
+							fontFamily: value && false,
+						},
+					})
+				}
+				fontSize={commentCountTitleFontSize}
+				onChangeFontSize={(value) =>
+					setAttributes({
+						commentCountTitleFontSize: value,
+						commentCountTitleGlobalTypoSwitcher: {
+							...commentCountTitleGlobalTypoSwitcher,
+							fontSize: value && false,
+						},
+					})
+				}
+				fontSizeUnits={commentCountTitleFontSizeUnits}
+				onChangeFontSizeUnit={(value) =>
+					setAttributes({ commentCountTitleFontSizeUnits: value })
+				}
+				fontWeight={commentCountTitleFontWeight}
+				onChangeFontWeight={(value) =>
+					setAttributes({
+						commentCountTitleFontWeight: value,
+						commentCountTitleGlobalTypoSwitcher: {
+							...commentCountTitleGlobalTypoSwitcher,
+							fontWeight: value && false,
+						},
+					})
+				}
+				fontStyle={commentCountTitleFontStyle}
+				onChangeFontStyle={(value) =>
+					setAttributes({
+						commentCountTitleFontStyle: value,
+						commentCountTitleGlobalTypoSwitcher: {
+							...commentCountTitleGlobalTypoSwitcher,
+							fontStyle: value && false,
+						},
+					})
+				}
+				textTransform={commentCountTitleTextTransform}
+				onChangeTextTransform={(value) =>
+					setAttributes({
+						commentCountTitleTextTransform: value,
+						commentCountTitleGlobalTypoSwitcher: {
+							...commentCountTitleGlobalTypoSwitcher,
+							textTransform: value && false,
+						},
+					})
+				}
+				textDecoration={commentCountTitleTextDecoration}
+				onChangeTextDecoration={(value) =>
+					setAttributes({
+						commentCountTitleTextDecoration: value,
+						commentCountTitleGlobalTypoSwitcher: {
+							...commentCountTitleGlobalTypoSwitcher,
+							textDecoration: value && false,
+						},
+					})
+				}
+				letterSpacing={commentCountTitleLetterSpacing}
+				onChangeLetterSpacing={(value) =>
+					setAttributes({
+						commentCountTitleLetterSpacing: value,
+						commentCountTitleGlobalTypoSwitcher: {
+							...commentCountTitleGlobalTypoSwitcher,
+							letterSpacing: value && false,
+						},
+					})
+				}
+				letterSpacingUnits={commentCountTitleLetterSpacingUnits}
+				onChangeLetterSpacingUnit={(value) =>
+					setAttributes({ commentCountTitleLetterSpacingUnits: value })
+				}
+				lineHeight={commentCountTitleLineHeight}
+				onChangeLineHeight={(value) =>
+					setAttributes({
+						commentCountTitleLineHeight: value,
+						commentCountTitleGlobalTypoSwitcher: {
+							...commentCountTitleGlobalTypoSwitcher,
+							lineHeight: value && false,
+						},
+					})
+				}
+				lineHeightUnits={commentCountTitleLineHeightUnits}
+				onChangeLineHeightUnit={(value) =>
+					setAttributes({ commentCountTitleLineHeightUnits: value })
+				}
+				deviceType={deviceType}
+				setAttributes={setAttributes}
+			/>
 
-            <FB_DimensionControl
-                label={__("Comment Gap", "frontis-blocks")}
-                values={commentGap}
-                onChange={(value) => setAttributes({ commentGap: value })}
-                deviceType={deviceType}
-                units={["px", "em", "rem"]}
-            />
+			<FB_SwitcherControl
+				label={__("Color", "frontis-blocks")}
+				globalSwitcher={commentCountTitleColorSwitcher}
+				setGlobalSwitcher={(value) =>
+					setAttributes({ commentCountTitleColorSwitcher: value })
+				}
+			/>
 
-            <FB_DimensionControl
-                label={__("Avatar Size", "frontis-blocks")}
-                values={avatarSize}
-                onChange={(value) => setAttributes({ avatarSize: value })}
-                deviceType={deviceType}
-                units={["px", "em", "rem"]}
-            /> */}
+			{commentCountTitleColorSwitcher === "normal" && (
+				<FB_ColorControl
+					label={__("Normal Color", "frontis-blocks")}
+					globalColor={commentCountTitleColor}
+					setGlobalColor={(value) =>
+						setAttributes({
+							commentCountTitleColor: value === undefined ? "" : value,
+						})
+					}
+				/>
+			)}
+
+			{commentCountTitleColorSwitcher === "hover" && (
+				<FB_ColorControl
+					label={__("Hover Color", "frontis-blocks")}
+					globalColor={commentCountTitleHoverColor}
+					setGlobalColor={(value) =>
+						setAttributes({
+							commentCountTitleHoverColor: value === undefined ? "" : value,
+						})
+					}
+				/>
+			)}
+
+			
+			<div className="fb-control-divider"></div>
+
+			<FB_Range
+				// min={}
+				max={100}
+				label={__("Spacing", "frontis-blocks")}
+				rangeValue={commentCountTitleSpacing}
+				onChangeHandler={(value) =>
+					setAttributes({ commentCountTitleSpacing: value })
+				}
+				rangeUnitHandler={(value) =>
+					setAttributes({ commentCountTitleSpacingUnits: value })
+				}
+				deviceType={deviceType}
+				units={commentCountTitleSpacingUnits}
+				setAttributes={setAttributes}
+				rangeStep={1}
+				resetFallbackValue={""}
+			/>
 		</PanelBody>
 	);
 
