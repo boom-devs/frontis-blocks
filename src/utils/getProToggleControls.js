@@ -8,6 +8,7 @@ import {
   MenuGroup,
   MenuItem,
 } from '@wordpress/components';
+import getProActive from '@Utils/getProActive';
 
 const getProToggleControls = ({
   hook,
@@ -21,16 +22,21 @@ const getProToggleControls = ({
     docs: 'https://frontiswp.com/docs',
     support: 'https://frontiswp.com/contact',
   },
+  isProActive,
 }) => {
-  const isProActive = applyFilters('frontisblocks/is-pro-active', false);
 
-  // Pull external controls (e.g., from PRO or other extensions)
-  let controls = applyFilters(hook, [], { attributes, setAttributes, isProActive });
+  // If prop is not passed, use localize/fallback
+  const pro = typeof isProActive === 'boolean'
+    ? isProActive
+    : getProActive();
 
-  // If any control already provided, just use them
-  if (Array.isArray(controls) && controls.length) return controls;
+  const checked = !!attributes?.[dynamicAttr];
 
-  const checked = !!(attributes && attributes[dynamicAttr]);
+  // If Pro is active, return external controls (PRO hook)
+  if (pro) {
+    const external = applyFilters(hook, [], { attributes, setAttributes, isProActive: pro });
+    if (Array.isArray(external) && external.length) return external;
+  }
 
   const ProBadgeDropdown = () => (
     <Dropdown
@@ -68,8 +74,8 @@ const getProToggleControls = ({
 
   return [
     {
-      key: `${keyPrefix}-${isProActive ? 'default' : 'locked'}`,
-      comp: isProActive ? (
+      key: `${keyPrefix}-${pro ? 'default' : 'locked'}`,
+      comp: pro ? (
         <ToggleControl
           label={label}
           checked={checked}

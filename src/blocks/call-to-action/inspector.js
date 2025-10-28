@@ -4,8 +4,6 @@ import {
 	useBlockProps,
 	InspectorControls,
 } from "@wordpress/block-editor";
-import { DndContext, closestCenter } from '@dnd-kit/core';
-import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
 import {
 	SelectControl,
@@ -25,9 +23,12 @@ import {
 	BORDER_STYLES,
 	ICON_POSITION,
 	OVERFLOW_OP,
-	PRESETS
-} from "./constants/constants";
+} from '@Constants/fbConstants';
+
+import Select2 from "react-select";
+import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 import { useEffect, useMemo, useState } from "@wordpress/element";
+import { useSelect } from "@wordpress/data";
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
 import FB_BoxShadowControl from "@Components/box-shadow";
@@ -48,7 +49,11 @@ import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
-
+import getProToggleControls from '@Utils/getProToggleControls';
+import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
+import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
+import generateSvgIcon from '@Utils/generateSvgIcon';
+import getProActive from '@Utils/getProActive';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -185,6 +190,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnOneMarginLink,
 		icon,
 		btnIcon,
+		btnFrontendIcon,
 		btnIconRotate,
 		width,
 		mediaSwitcher,
@@ -259,6 +265,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnTwoTabBorderRadius,
 		btnTwoMobileBorderRadius,
 		btnTwoIcon,
+		btnTwoFrontendIcon,
 		btnTwoIconSize,
 		btnTwoIconSizeUnits,
 		btnTwoIconColorSwitcher,
@@ -382,6 +389,107 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		ctaVRTopOffsetUnits,
 		ctaVRBottomOffset,
 		ctaVRBottomOffsetUnits,
+
+		/** Start Dynamic Title Text */
+		dynamicTitleEnabled,
+		dynamicTitleSource,
+		dynamicTitlePostId,
+		dynamicTitlePostType,
+		dynamicTitlePostLabel,
+		dynamicTitleField,
+		dynamicTitleFeaturedImageField,
+
+		dynamicTitleDateType,
+		dynamicTitleDateFormat,
+
+		dynamicTitleTimeType,
+		dynamicTitleTimeFormat,
+
+		dynamicTitleCommentsZeroText,
+		dynamicTitleCommentsOneText,
+		dynamicTitleCommentsManyText,
+
+		dynamicTitleTermsTaxonomy,
+		dynamicTitleTermsSeparator,
+		dynamicTitleEnableLink,
+		dynamicTitleLinkSource,
+		/** End Dynamic Title Text */
+
+		/** Start Dynamic Description Text */
+		dynamicDescriptionEnabled,
+		dynamicDescriptionSource,
+		dynamicDescriptionPostId,
+		dynamicDescriptionPostType,
+		dynamicDescriptionPostLabel,
+		dynamicDescriptionField,
+		dynamicDescriptionFeaturedImageField,
+
+		dynamicDescriptionDateType,
+		dynamicDescriptionDateFormat,
+
+		dynamicDescriptionTimeType,
+		dynamicDescriptionTimeFormat,
+
+		dynamicDescriptionCommentsZeroText,
+		dynamicDescriptionCommentsOneText,
+		dynamicDescriptionCommentsManyText,
+
+		dynamicDescriptionTermsTaxonomy,
+		dynamicDescriptionTermsSeparator,
+		dynamicDescriptionEnableLink,
+		dynamicDescriptionLinkSource,
+		/** End Dynamic Description Text */
+
+		/** Start Dynamic Btn One Text */
+		dynamicBtnOneEnabled,
+		dynamicBtnOneSource,
+		dynamicBtnOnePostId,
+		dynamicBtnOnePostType,
+		dynamicBtnOnePostLabel,
+		dynamicBtnOneField,
+		dynamicBtnOneFeaturedImageField,
+
+		dynamicBtnOneDateType,
+		dynamicBtnOneDateFormat,
+
+		dynamicBtnOneTimeType,
+		dynamicBtnOneTimeFormat,
+
+		dynamicBtnOneCommentsZeroText,
+		dynamicBtnOneCommentsOneText,
+		dynamicBtnOneCommentsManyText,
+
+		dynamicBtnOneTermsTaxonomy,
+		dynamicBtnOneTermsSeparator,
+		dynamicBtnOneEnableLink,	
+		dynamicBtnOneLinkSource,
+		/** End Dynamic Btn One Text */
+
+		/** Start Dynamic Btn Two Text */
+		dynamicBtnTwoEnabled,
+		dynamicBtnTwoSource,
+		dynamicBtnTwoPostId,
+		dynamicBtnTwoPostType,
+		dynamicBtnTwoPostLabel,
+		dynamicBtnTwoField,
+		dynamicBtnTwoFeaturedImageField,
+
+		dynamicBtnTwoDateType,
+		dynamicBtnTwoDateFormat,
+
+		dynamicBtnTwoTimeType,
+		dynamicBtnTwoTimeFormat,
+
+		dynamicBtnTwoCommentsZeroText,
+		dynamicBtnTwoCommentsOneText,
+		dynamicBtnTwoCommentsManyText,
+
+		dynamicBtnTwoTermsTaxonomy,
+		dynamicBtnTwoTermsSeparator,
+		dynamicBtnTwoEnableLink,
+		dynamicBtnTwoLinkSource,
+		/** End Dynamic Btn Two Text */
+
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -402,6 +510,76 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const buttonTwoIconHandler = (iconName) => {
 		setAttributes({ btnTwoIcon: iconName });
 	};
+
+	/**
+     * Generate SVG Icons for Icon
+     */
+	useEffect(() => {
+		setAttributes({
+			btnFrontendIcon: generateSvgIcon(btnIcon), 
+			btnTwoFrontendIcon: generateSvgIcon(btnTwoIcon), 
+		})
+	}, [btnIcon, btnTwoIcon]);
+
+	// Check if Pro is active
+	const getProActiveState = getProActive();
+	useEffect(() => {
+		if (!getProActiveState) { 
+			setAttributes({
+				dynamicTitleEnabled: false,
+				dynamicTitleEnableLink: false,
+				dynamicDescriptionEnabled: false,
+				dynamicDescriptionEnableLink: false,
+				dynamicBtnOneEnabled: false,
+				dynamicBtnOneEnableLink: false,
+				dynamicBtnTwoEnabled: false,
+				dynamicBtnTwoEnableLink: false,
+			});
+		}
+	}, [getProActiveState]);
+
+	/**
+     * Toggle Controls for Dynamic Content
+     */
+	const dynamicTitleContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-call-to-action-title-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicTitleEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'call-to-action-dynamic-title-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicDescriptionContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-call-to-action-description-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicDescriptionEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'call-to-action-dynamic-description-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicBtnOneContentToggleControls = getProToggleControls({ 
+		hook: 'frontisblocks-call-to-action-btn-one-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicBtnOneEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'call-to-action-dynamic-btn-one-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicBtnTwoContentToggleControls = getProToggleControls({ 
+		hook: 'frontisblocks-call-to-action-btn-two-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicBtnTwoEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'call-to-action-dynamic-btn-two-content',
+		isProActive : getProActiveState
+	});
 
 	/** Start Heading padding */
 	const handleHeadingPaddingUnitChange = (event, position) => {
@@ -1935,7 +2113,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${globalHoverBoxShadowCssValue ? `box-shadow: ${globalHoverBoxShadowCssValue};` : "" }
 				${globalBorderHoverColor ? `border-color: ${globalBorderHoverColor};` : "" }
 			}
-			.fb-cta-content-wrapper.${blockID} .fb-heading {
+			.fb-cta-content-wrapper.${blockID} .fb-heading,
+			.fb-cta-content-wrapper.${blockID} .fb-title-dynamic-link {
 				${headingColor ? `color: ${headingColor};` : ""}
 				${Heading_Background_Color ? `background-color: ${Heading_Background_Color};` : "" }
 
@@ -1965,12 +2144,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${headingDesktopBorderRadiusWidth && headingDesktopBorderRadius?.top ? `border-radius: ${headingDesktopBorderRadiusWidth};` : ""}
 				transition: all .3s ease-in-out;
 			}
-			.fb-cta-content-wrapper.${blockID}:hover .fb-heading {
+			.fb-cta-content-wrapper.${blockID}:hover .fb-heading,
+			.fb-cta-content-wrapper.${blockID}:hover .fb-title-dynamic-link {
 				${headingHoverColor ? `color: ${headingHoverColor};` : ""}
 				${headingBorderHoverColor ? `border-color: ${headingBorderHoverColor};` : "" }
 			}
 			
-			.fb-cta-content-wrapper.${blockID} .fb-description {
+			.fb-cta-content-wrapper.${blockID} .fb-description,
+			.fb-cta-content-wrapper.${blockID} .fb-description-dynamic-link {
 				${SubHeadingColor ? `color: ${SubHeadingColor};` : ""}
 				${descDesktopPaddingWidth && descDesktopPadding?.top ? `padding: ${descDesktopPaddingWidth};` : ""}
 				${descDesktopMarginWidth && descDesktopMargin?.top ? `margin: ${descDesktopMarginWidth};` : ""}
@@ -1993,7 +2174,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${SubHeadingGlobalTypoSwitcher?.letterSpacing === false && SubHeadingLetterSpacing?.Desktop && SubHeadingLetterSpacingUnits?.Desktop ? `letter-spacing: ${SubHeadingLetterSpacing?.Desktop}${SubHeadingLetterSpacingUnits?.Desktop};` : ''}
 				${SubHeadingGlobalTypoSwitcher?.lineHeight === false && SubHeadingLineHeight?.Desktop && SubHeadingLineHeightUnits?.Desktop ? `line-height: ${SubHeadingLineHeight?.Desktop}${SubHeadingLineHeightUnits?.Desktop};` : ''}
 			}
-			.fb-cta-content-wrapper.${blockID}:hover .fb-description {
+			.fb-cta-content-wrapper.${blockID}:hover .fb-description,
+			.fb-cta-content-wrapper.${blockID}:hover .fb-description-dynamic-link {
 				${SubHeadingHoverColor ? `color: ${SubHeadingHoverColor};` : ""}
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
@@ -2104,7 +2286,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${BorderTabletWidth && globalBorderTablet?.top ? `border-width: ${BorderTabletWidth};` : ""}
 					${BorderRadiusTabletWidth && globalBorderRadiusTablet?.top ? `border-radius: ${BorderRadiusTabletWidth} !important;` : "" }
 				}
-				.fb-cta-content-wrapper.${blockID} .fb-heading {
+				.fb-cta-content-wrapper.${blockID} .fb-heading,
+				.fb-cta-content-wrapper.${blockID} .fb-title-dynamic-link {
 					${headingGlobalTypoSwitcher?.fontSize === false && headingFontSize?.Tablet && headingFontSizeUnits?.Tablet ? `font-size: ${headingFontSize?.Tablet}${headingFontSizeUnits?.Tablet};` : ''}
 					${headingGlobalTypoSwitcher?.letterSpacing === false && headingLetterSpacing?.Tablet && headingLetterSpacingUnits?.Tablet ? `letter-spacing: ${headingLetterSpacing?.Tablet}${headingLetterSpacingUnits?.Tablet};` : ''}
 					${headingGlobalTypoSwitcher?.lineHeight === false && headingLineHeight?.Tablet && headingLineHeightUnits?.Tablet ? `line-height: ${headingLineHeight?.Tablet}${headingLineHeightUnits?.Tablet};` : ''}
@@ -2113,7 +2296,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${headingTabletBorderWidth && headingTabBorder?.top ? `border-width: ${headingTabletBorderWidth};` : ""}
 					${headingTabletBorderRadiusWidth && headingTabBorderRadius?.top ? `border-radius: ${headingTabletBorderRadiusWidth};` : ""}
 				}
-				.fb-cta-content-wrapper.${blockID} .fb-description {
+				.fb-cta-content-wrapper.${blockID} .fb-description,
+				.fb-cta-content-wrapper.${blockID} .fb-description-dynamic-link {
 					${descTabletPaddingWidth && descTabPadding?.top ? `padding: ${descTabletPaddingWidth};` : ""}
 					${descTabletMarginWidth && descTabMargin?.top ? `margin: ${descTabletMarginWidth};` : ""}
 					${SubHeadingGlobalTypoSwitcher?.fontSize === false && SubHeadingFontSize?.Tablet && SubHeadingFontSizeUnits?.Tablet ? `font-size: ${SubHeadingFontSize?.Tablet}${SubHeadingFontSizeUnits?.Tablet};` : ''}
@@ -2168,7 +2352,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${BorderMobileWidth && globalBorderMobile?.top ? `border-width: ${BorderMobileWidth};` : ""}
 					${BorderRadiusMobileWidth && globalBorderRadiusMobile?.top ? `border-radius: ${BorderRadiusMobileWidth} !important;` : "" }
 				}
-				.fb-cta-content-wrapper.${blockID} .fb-heading {
+				.fb-cta-content-wrapper.${blockID} .fb-heading,
+				.fb-cta-content-wrapper.${blockID} .fb-title-dynamic-link {
 					${headingGlobalTypoSwitcher?.fontSize === false && headingFontSize?.Mobile && headingFontSizeUnits?.Mobile ? `font-size: ${headingFontSize?.Mobile}${headingFontSizeUnits?.Mobile};` : ''}
 					${headingGlobalTypoSwitcher?.letterSpacing === false && headingLetterSpacing?.Mobile && headingLetterSpacingUnits?.Mobile ? `letter-spacing: ${headingLetterSpacing?.Mobile}${headingLetterSpacingUnits?.Mobile};` : ''}
 					${headingGlobalTypoSwitcher?.lineHeight === false && headingLineHeight?.Mobile && headingLineHeightUnits?.Mobile ? `line-height: ${headingLineHeight?.Mobile}${headingLineHeightUnits?.Mobile};` : ''}
@@ -2177,7 +2362,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${headingMobileBorderWidth && headingMobileBorder?.top ? `border-width: ${headingMobileBorderWidth};` : ""}
 					${headingMobileBorderRadiusWidth && headingMobileBorderRadius?.top ? `border-radius: ${headingMobileBorderRadiusWidth};` : ""}
 				}
-				.fb-cta-content-wrapper.${blockID} .fb-description {
+				.fb-cta-content-wrapper.${blockID} .fb-description,
+				.fb-cta-content-wrapper.${blockID} .fb-description-dynamic-link {
 					${descMobilePaddingWidth && descMobilePadding?.top ? `padding: ${descMobilePaddingWidth};` : ""}
 					${descMobileMarginWidth && descMobileMargin?.top ? `margin: ${descMobileMarginWidth};` : ""}
 					${SubHeadingGlobalTypoSwitcher?.fontSize === false && SubHeadingFontSize?.Mobile && SubHeadingFontSizeUnits?.Mobile ? `font-size: ${SubHeadingFontSize?.Mobile}${SubHeadingFontSizeUnits?.Mobile};` : ''}
@@ -2457,16 +2643,67 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						globalHtmlTag={headingTag}
 						setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
 					/>
-				
-					<TextareaControl
-						label={__("Title Text", "frontis-block")}
-						className="fb-setting-text"
-						value={Heading_Text}
-						onChange={(value) =>
-							setAttributes({ Heading_Text: value })
-						}
+
+					{dynamicTitleContentToggleControls.map((control, index) => (
+                        <div key={control.key || index}>{control.comp}</div>
+                    ))}
+	
+					<DynamicDataSourceControl
+						enabled={dynamicTitleEnabled}
 						
+						source={dynamicTitleSource}
+						setSource={(value) => setAttributes({ dynamicTitleSource: value })}
+						postId={dynamicTitlePostId}
+						setPostId={(value) => setAttributes({ dynamicTitlePostId: value })}
+						postType={dynamicTitlePostType}
+						setPostType={(value) => setAttributes({ dynamicTitlePostType: value })}
+						postLabel={dynamicTitlePostLabel}
+						setPostLabel={(value) => setAttributes({ dynamicTitlePostLabel: value })}
+
+						field={dynamicTitleField}
+						setField={(value) => setAttributes({ dynamicTitleField: value })}
+						featuredImageField={dynamicTitleFeaturedImageField}
+						setFeaturedImageField={(value) => setAttributes({ dynamicTitleFeaturedImageField: value })}
+
+						dateType={dynamicTitleDateType}
+						setDateType={(value) => setAttributes({ dynamicTitleDateType: value })}
+						dateFormat={dynamicTitleDateFormat}
+						setDateFormat={(value) => setAttributes({ dynamicTitleDateFormat: value })}
+						timeType={dynamicTitleTimeType}
+						setTimeType={(value) => setAttributes({ dynamicTitleTimeType: value })}
+						timeFormat={dynamicTitleTimeFormat}
+						setTimeFormat={(value) => setAttributes({ dynamicTitleTimeFormat: value })}
+
+						commentsZeroText={dynamicTitleCommentsZeroText}
+						setCommentsZeroText={(value) => setAttributes({ dynamicTitleCommentsZeroText: value })}
+						commentsOneText={dynamicTitleCommentsOneText}
+						setCommentsOneText={(value) =>setAttributes({ dynamicTitleCommentsOneText: value })}
+						commentsManyText={dynamicTitleCommentsManyText}
+						setCommentsManyText={(value) =>setAttributes({ dynamicTitleCommentsManyText: value })}
+
+						termsTaxonomy={dynamicTitleTermsTaxonomy}
+						setTermsTaxonomy={(value) => setAttributes({ dynamicTitleTermsTaxonomy: value })}
+						termsSeparator={dynamicTitleTermsSeparator}
+						setTermsSeparator={(value) => setAttributes({ dynamicTitleTermsSeparator: value })}
 					/>
+
+					{dynamicTitleEnabled && (
+						<DynamicDataLinkControl
+							enableLink={dynamicTitleEnableLink}
+							setEnableLink={(value) => setAttributes({ dynamicTitleEnableLink: value })}
+							linkSource={dynamicTitleLinkSource}
+							setLinkSource={(value) => setAttributes({ dynamicTitleLinkSource: value })}
+						/>
+					)}
+
+					{!dynamicTitleEnabled && (
+						<TextareaControl
+							label={__("Title Text", "frontis-block")}
+							className="fb-setting-text"
+							value={Heading_Text}
+							onChange={(value) => setAttributes({ Heading_Text: value })}
+						/>
+					)}
 				</PanelBody>
 			</div>
 
@@ -2493,14 +2730,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
 							/>
 
-							<TextareaControl
-								label={__("Sub Heading Text", "frontis-block")}
-								value={Sub_Heading_Text}
-								onChange={(value) =>
-									setAttributes({ Sub_Heading_Text: value })
-								}
-								className="fb-sub-heading-text"
+							{dynamicDescriptionContentToggleControls.map((control, index) => (
+								<div key={control.key || index}>{control.comp}</div>
+							))}
+			
+							<DynamicDataSourceControl
+								enabled={dynamicDescriptionEnabled}
+								
+								source={dynamicDescriptionSource}
+								setSource={(value) => setAttributes({ dynamicDescriptionSource: value })}
+								postId={dynamicDescriptionPostId}
+								setPostId={(value) => setAttributes({ dynamicDescriptionPostId: value })}
+								postType={dynamicDescriptionPostType}
+								setPostType={(value) => setAttributes({ dynamicDescriptionPostType: value })}
+								postLabel={dynamicDescriptionPostLabel}
+								setPostLabel={(value) => setAttributes({ dynamicDescriptionPostLabel: value })}
+
+								field={dynamicDescriptionField}
+								setField={(value) => setAttributes({ dynamicDescriptionField: value })}
+								featuredImageField={dynamicDescriptionFeaturedImageField}
+								setFeaturedImageField={(value) => setAttributes({ dynamicDescriptionFeaturedImageField: value })}
+
+								dateType={dynamicDescriptionDateType}
+								setDateType={(value) => setAttributes({ dynamicDescriptionDateType: value })}
+								dateFormat={dynamicDescriptionDateFormat}
+								setDateFormat={(value) => setAttributes({ dynamicDescriptionDateFormat: value })}
+								timeType={dynamicDescriptionTimeType}
+								setTimeType={(value) => setAttributes({ dynamicDescriptionTimeType: value })}
+								timeFormat={dynamicDescriptionTimeFormat}
+								setTimeFormat={(value) => setAttributes({ dynamicDescriptionTimeFormat: value })}
+
+								commentsZeroText={dynamicDescriptionCommentsZeroText}
+								setCommentsZeroText={(value) => setAttributes({ dynamicDescriptionCommentsZeroText: value })}
+								commentsOneText={dynamicDescriptionCommentsOneText}
+								setCommentsOneText={(value) =>setAttributes({ dynamicDescriptionCommentsOneText: value })}
+								commentsManyText={dynamicDescriptionCommentsManyText}
+								setCommentsManyText={(value) =>setAttributes({ dynamicDescriptionCommentsManyText: value })}
+
+								termsTaxonomy={dynamicDescriptionTermsTaxonomy}
+								setTermsTaxonomy={(value) => setAttributes({ dynamicDescriptionTermsTaxonomy: value })}
+								termsSeparator={dynamicDescriptionTermsSeparator}
+								setTermsSeparator={(value) => setAttributes({ dynamicDescriptionTermsSeparator: value })}
 							/>
+
+							{dynamicDescriptionEnabled && ( 
+								<DynamicDataLinkControl
+									enableLink={dynamicDescriptionEnableLink}
+									setEnableLink={(value) => setAttributes({ dynamicDescriptionEnableLink: value })}
+									linkSource={dynamicDescriptionLinkSource}
+									setLinkSource={(value) => setAttributes({ dynamicDescriptionLinkSource: value })}
+								/>
+							)}
+
+							{!dynamicDescriptionEnabled && ( 
+								<TextareaControl
+									label={__("Description Text", "frontis-block")}
+									value={Sub_Heading_Text}
+									onChange={(value) =>
+										setAttributes({ Sub_Heading_Text: value })
+									}
+									className="fb-sub-heading-text"
+								/>
+							)}
 						</>
 					)}
 				</PanelBody>
@@ -2528,14 +2819,60 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								globalAlignment={buttonAlignment}
 								setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
 							/>
-							<TextareaControl
-								label={__("Button Text", "frontis-block")}
-								value={info_Button_Text}
-								onChange={(value) =>
-									setAttributes({ info_Button_Text: value })
-								}
-								className="fb-cta-button-text"
+
+							{dynamicBtnOneContentToggleControls.map((control, index) => (
+								<div key={control.key || index}>{control.comp}</div>
+							))}
+			
+							<DynamicDataSourceControl
+								enabled={dynamicBtnOneEnabled}
+								
+								source={dynamicBtnOneSource}
+								setSource={(value) => setAttributes({ dynamicBtnOneSource: value })}
+								postId={dynamicBtnOnePostId}
+								setPostId={(value) => setAttributes({ dynamicBtnOnePostId: value })}
+								postType={dynamicBtnOnePostType}
+								setPostType={(value) => setAttributes({ dynamicBtnOnePostType: value })}
+								postLabel={dynamicBtnOnePostLabel}
+								setPostLabel={(value) => setAttributes({ dynamicBtnOnePostLabel: value })}
+
+								field={dynamicBtnOneField}
+								setField={(value) => setAttributes({ dynamicBtnOneField: value })}
+								featuredImageField={dynamicBtnOneFeaturedImageField}
+								setFeaturedImageField={(value) => setAttributes({ dynamicBtnOneFeaturedImageField: value })}
+
+								dateType={dynamicBtnOneDateType}
+								setDateType={(value) => setAttributes({ dynamicBtnOneDateType: value })}
+								dateFormat={dynamicBtnOneDateFormat}
+								setDateFormat={(value) => setAttributes({ dynamicBtnOneDateFormat: value })}
+								timeType={dynamicBtnOneTimeType}
+								setTimeType={(value) => setAttributes({ dynamicBtnOneTimeType: value })}
+								timeFormat={dynamicBtnOneTimeFormat}
+								setTimeFormat={(value) => setAttributes({ dynamicBtnOneTimeFormat: value })}
+
+								commentsZeroText={dynamicBtnOneCommentsZeroText}
+								setCommentsZeroText={(value) => setAttributes({ dynamicBtnOneCommentsZeroText: value })}
+								commentsOneText={dynamicBtnOneCommentsOneText}
+								setCommentsOneText={(value) =>setAttributes({ dynamicBtnOneCommentsOneText: value })}
+								commentsManyText={dynamicBtnOneCommentsManyText}
+								setCommentsManyText={(value) =>setAttributes({ dynamicBtnOneCommentsManyText: value })}
+
+								termsTaxonomy={dynamicBtnOneTermsTaxonomy}
+								setTermsTaxonomy={(value) => setAttributes({ dynamicBtnOneTermsTaxonomy: value })}
+								termsSeparator={dynamicBtnOneTermsSeparator}
+								setTermsSeparator={(value) => setAttributes({ dynamicBtnOneTermsSeparator: value })}
 							/>
+
+							{!dynamicBtnOneEnabled && ( 
+								<TextareaControl
+									label={__("Button Text", "frontis-block")}
+									value={info_Button_Text}
+									onChange={(value) =>
+										setAttributes({ info_Button_Text: value })
+									}
+									className="fb-cta-button-text"
+								/>
+							)}
 							<ToggleControl
 								label={__("Show Icon", "frontis-block")}
 								checked={buttonIconSwitcher}
@@ -2561,19 +2898,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									/>
 								</>
 							)}
-
-							<BaseControl>
-								<FB_UrlControl
-									url={info_Button_Link}
-									onChangeUrl={(value) =>
-										setAttributes({ info_Button_Link: value })
-									}
-									openInNewTab={btnOneTargetUrl}
-									onChangeOpenInNewTab={(value) =>
-										setAttributes({ btnOneTargetUrl: value })
-									}
+							{dynamicBtnOneEnabled && ( 
+								<DynamicDataLinkControl
+									enableLink={dynamicBtnOneEnableLink}
+									setEnableLink={(value) => setAttributes({ dynamicBtnOneEnableLink: value })}
+									linkSource={dynamicBtnOneLinkSource}
+									setLinkSource={(value) => setAttributes({ dynamicBtnOneLinkSource: value })}
 								/>
-							</BaseControl>
+							)}
+							{!dynamicBtnOneEnableLink && (
+								<BaseControl>
+									<FB_UrlControl
+										url={info_Button_Link}
+										onChangeUrl={(value) =>
+											setAttributes({ info_Button_Link: value })
+										}
+										openInNewTab={btnOneTargetUrl}
+										onChangeOpenInNewTab={(value) =>
+											setAttributes({ btnOneTargetUrl: value })
+										}
+									/>
+								</BaseControl>
+							)}
 						</>
 					)}
 				</PanelBody>
@@ -2593,14 +2939,60 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					/>
 					{btnTwoSwitcher && (
 						<>
-							<TextareaControl
-								label={__("Button Text", "frontis-block")}
-								value={btnTwoText}
-								onChange={(value) =>
-									setAttributes({ btnTwoText: value })
-								}
-								className="fb-cta-button-text"
+
+							{dynamicBtnTwoContentToggleControls.map((control, index) => (
+								<div key={control.key || index}>{control.comp}</div>
+							))}
+			
+							<DynamicDataSourceControl
+								enabled={dynamicBtnTwoEnabled}
+								
+								source={dynamicBtnTwoSource}
+								setSource={(value) => setAttributes({ dynamicBtnTwoSource: value })}
+								postId={dynamicBtnTwoPostId}
+								setPostId={(value) => setAttributes({ dynamicBtnTwoPostId: value })}
+								postType={dynamicBtnTwoPostType}
+								setPostType={(value) => setAttributes({ dynamicBtnTwoPostType: value })}
+								postLabel={dynamicBtnTwoPostLabel}
+								setPostLabel={(value) => setAttributes({ dynamicBtnTwoPostLabel: value })}
+
+								field={dynamicBtnTwoField}
+								setField={(value) => setAttributes({ dynamicBtnTwoField: value })}
+								featuredImageField={dynamicBtnTwoFeaturedImageField}
+								setFeaturedImageField={(value) => setAttributes({ dynamicBtnTwoFeaturedImageField: value })}
+
+								dateType={dynamicBtnTwoDateType}
+								setDateType={(value) => setAttributes({ dynamicBtnTwoDateType: value })}
+								dateFormat={dynamicBtnTwoDateFormat}
+								setDateFormat={(value) => setAttributes({ dynamicBtnTwoDateFormat: value })}
+								timeType={dynamicBtnTwoTimeType}
+								setTimeType={(value) => setAttributes({ dynamicBtnTwoTimeType: value })}
+								timeFormat={dynamicBtnTwoTimeFormat}
+								setTimeFormat={(value) => setAttributes({ dynamicBtnTwoTimeFormat: value })}
+
+								commentsZeroText={dynamicBtnTwoCommentsZeroText}
+								setCommentsZeroText={(value) => setAttributes({ dynamicBtnTwoCommentsZeroText: value })}
+								commentsOneText={dynamicBtnTwoCommentsOneText}
+								setCommentsOneText={(value) =>setAttributes({ dynamicBtnTwoCommentsOneText: value })}
+								commentsManyText={dynamicBtnTwoCommentsManyText}
+								setCommentsManyText={(value) =>setAttributes({ dynamicBtnTwoCommentsManyText: value })}
+
+								termsTaxonomy={dynamicBtnTwoTermsTaxonomy}
+								setTermsTaxonomy={(value) => setAttributes({ dynamicBtnTwoTermsTaxonomy: value })}
+								termsSeparator={dynamicBtnTwoTermsSeparator}
+								setTermsSeparator={(value) => setAttributes({ dynamicBtnTwoTermsSeparator: value })}
 							/>
+
+							{!dynamicBtnTwoEnabled && ( 
+								<TextareaControl
+									label={__("Button Text", "frontis-block")}
+									value={btnTwoText}
+									onChange={(value) =>
+										setAttributes({ btnTwoText: value })
+									}
+									className="fb-cta-button-text"
+								/>
+							)}
 							<ToggleControl
 								label={__("Show Icon", "frontis-block")}
 								checked={buttonTwoIconSwitcher}
@@ -2626,19 +3018,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									/>
 								</>
 							)}
-
-							<BaseControl>
-								<FB_UrlControl
-									url={btnTwoLink}
-									onChangeUrl={(value) =>
-										setAttributes({ btnTwoLink: value })
-									}
-									openInNewTab={btnTwoTargetUrl}
-									onChangeOpenInNewTab={(value) =>
-										setAttributes({ btnTwoTargetUrl: value })
-									}
+							{dynamicBtnTwoEnabled && ( 
+								<DynamicDataLinkControl
+									enableLink={dynamicBtnTwoEnableLink}
+									setEnableLink={(value) => setAttributes({ dynamicBtnTwoEnableLink: value })}
+									linkSource={dynamicBtnTwoLinkSource}
+									setLinkSource={(value) => setAttributes({ dynamicBtnTwoLinkSource: value })}
 								/>
-							</BaseControl>
+							)}
+							{!dynamicBtnTwoEnableLink && (
+								<BaseControl>
+									<FB_UrlControl
+										url={btnTwoLink}
+										onChangeUrl={(value) =>
+											setAttributes({ btnTwoLink: value })
+										}
+										openInNewTab={btnTwoTargetUrl}
+										onChangeOpenInNewTab={(value) =>
+											setAttributes({ btnTwoTargetUrl: value })
+										}
+									/>
+								</BaseControl>
+							)}
 						</>
 					)}
 				</PanelBody>
