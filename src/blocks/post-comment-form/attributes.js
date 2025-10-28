@@ -18,8 +18,6 @@ const attributes = {
         default: true,
     },
     
-
-   
     // Form Text Customization
     formTitle: {
         type: "string",

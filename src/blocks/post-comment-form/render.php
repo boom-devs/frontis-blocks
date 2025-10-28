@@ -45,12 +45,17 @@ $wrapper_id_attr = $wrapper_id ? ' id="' . esc_attr($wrapper_id) . '"' : '';
 $post_id = get_the_ID();
 $comments_count = get_comments_number($post_id);
 
+/* ----- Helper: logout URL ------------------------------------------ */
+$logout_url = wp_logout_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) );
+
 // Get current user
 $current_user = wp_get_current_user();
 $user_identity = $current_user->exists() ? $current_user->display_name : '';
+$profile_url = $current_user->exists() ? get_edit_profile_url( $current_user->ID ) : '#';
+
 
 // Avatar fallback
-$avatar_fallback = FB_PLUGIN_URL . 'assets/images/avatar-placeholder.png';
+// $avatar_fallback = FB_PLUGIN_URL . 'assets/images/avatar-placeholder.png';
 
 /**
  * Improved detection for user's own pending comment
@@ -211,9 +216,7 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
 }
 ?>
 <div class="<?php echo esc_attr($parent_classes); ?>">
-    <?php if (!empty($block_style)) : ?>
-        <style><?php echo wp_strip_all_tags($block_style); ?></style>
-    <?php endif; ?>
+
 
     <div class="<?php echo esc_attr(implode(' ', array_filter($wrapper_classes))); ?>"<?php echo $wrapper_id_attr; ?>>
 
@@ -274,11 +277,13 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
                     <p class="fb-logged-in-as">
                         <?php
                             printf(
-                                __('%s %s. %s', 'frontis-blocks'),
-                                esc_html($login_text ?: __('Logged in as', 'frontis-blocks')),
-                                '<strong>' . esc_html($user_identity) . '</strong>',
-                                '<a href="' . wp_logout_url(apply_filters('the_permalink', get_permalink($post_id))) . '">' . 
-                                esc_html($logout_text ?: __('Log out?', 'frontis-blocks')) . '</a>'
+                                __( '%1$s <a href="%2$s">%3$s</a>. %4$s', 'frontis-blocks' ),
+                                esc_html( $login_text ?: __( 'Logged in as', 'frontis-blocks' ) ),
+                                esc_url( $profile_url ),
+                                esc_html( $user_identity ),
+                                '<a href="' . esc_url( $logout_url ) . '">' .
+                                esc_html( $logout_text ?: __( 'Log out?', 'frontis-blocks' ) ) .
+                                '</a>'
                             );
                         ?>
                     </p>
