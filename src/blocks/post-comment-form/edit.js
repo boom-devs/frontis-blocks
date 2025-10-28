@@ -16,9 +16,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         logoutText,
         buttonText,
 
-        commentFormWidth,
-        commentGap,
-        avatarSize,
+        // commentFormWidth,
+        // commentGap,
+        // avatarSize,
         
         commentFormDesktopSwitcher,
         commentFormTabletSwitcher,
