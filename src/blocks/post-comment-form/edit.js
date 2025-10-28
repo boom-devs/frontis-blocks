@@ -105,7 +105,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             <div className="fb-comment-body">
                                                 <strong className="fb-comment-author">user</strong>
                                                 <span className="fb-comment-meta">
-                                                    October 23, 2025 at 11:00 am
+                                                    October 30, 2025 at 11:00 am
                                                 </span>
                                                 <div className="fb-comment-content">
                                                     <p>This is a nested reply comment to show the structure.</p>
@@ -142,12 +142,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             </div>
 
                             <p className="fb-logged-in-as">
-                                {loginText || __('Logged in as', 'frontis-blocks')} <strong>Admin</strong>.{' '}
+                                {loginText || __('Logged in as', 'frontis-blocks')} <a href='#'>Admin</a>.{' '}
                                 <a href="#">{logoutText || __('Log out?', 'frontis-blocks')}</a>
                             </p>
 
                             <form className="fb-comment-form-element" id="commentform">
-                                <div className="fb-comment-form-author">
+                                {/* <div className="fb-comment-form-author">
                                     <input 
                                         type="text" 
                                         id="author" 
@@ -173,7 +173,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         placeholder="Website" 
                                         disabled 
                                     />
-                                </div>
+                                </div> */}
                                 <div className="fb-comment-form-comment">
                                     <textarea 
                                         id="comment" 

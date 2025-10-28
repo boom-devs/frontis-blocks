@@ -140,8 +140,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 font-weight: 500;
             }
 
+            .${blockId} .fb-comment-reply a {
+                text-decoration: none;
+            }
+
             .${blockId} .fb-comment-reply:hover {
                 color: #135e96;
+            }
+
+            .${blockId} .fb-comment-reply a:hover {
                 text-decoration: underline;
             }
 
@@ -330,8 +337,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
 
                 .${blockId} .fb-comment-form-header {
-                    flex-direction: column;
-                    align-items: flex-start;
                     gap: 10px;
                 }
 
@@ -340,7 +345,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 }
             }
         `,
-        [ attributes ]
+        [ attributes, blockId ]
     );
 
     const customCss = getCustomCss(commentFormGlobalCustomCSS, `.${blockId}`);
@@ -525,7 +530,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <style>{editorStyle}</style>
+            {/* <style>editorStyle</style> */}
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
