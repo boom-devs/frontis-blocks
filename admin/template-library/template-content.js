@@ -9,6 +9,7 @@ import {ToastContainer, toast } from "react-toastify";
 import { TemplateContentLoader, TemplateLoader } from "./template-loader";
 import { usePostDataMutation } from "./services/wpapi";
 import { ClipLoader } from "react-spinners";
+import PluginUpgradeModal from "./plugin-upgrade";
 
 const TemplateContent = ({
     activeTab,
@@ -38,12 +39,14 @@ const TemplateContent = ({
     isPluginUpgradeModalOpen,
     setIsPluginUpgradeModalOpen,
     currentPage,
-    onPageChange
+    onPageChange,
+    isImporting,
+    setIsImporting
 }) => {
 
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
-    const [isImporting, setIsImporting] = useState(false);
+    
 
     useEffect(() => {
         if (activeTab && schema[activeTab]) {
@@ -160,7 +163,7 @@ const TemplateContent = ({
 
     return (
         <>
-            <div className="fb-template-library-store-content">
+            <div className="fb-template-library-store-content" style={isImporting ? { overflow: 'hidden' } : {}}>
                 <div className="fb-template-library-content-header">
                     <div className="fb-template-library-content-header-left">
                         <h2>All {capitalize(activeTab)}</h2>
@@ -235,6 +238,7 @@ const TemplateContent = ({
                                         categories={template.categories || []}
                                         templateType={activeTab}
                                         preview_url={template.preview_url || ''}
+                                        uploads={template.uploads || ''}
                                         colors={template.colors || []}
                                         customColors={template.custom_colors || []}
                                         gradientColors={template.color_gradients || []}
@@ -373,6 +377,9 @@ const TemplateContent = ({
                         )}
                     </>
                 )}
+                {isImporting && (
+                    <TemplateLoader />
+                )}
             </div>
             {isLoginModalOpen && (
                 <LoginSignupModal
@@ -382,8 +389,11 @@ const TemplateContent = ({
                     setIsLoginModalOpen={setIsLoginModalOpen}
                 />
             )}
-            {isImporting && (
-                <TemplateLoader />
+            {isPluginUpgradeModalOpen && (
+                <PluginUpgradeModal
+                    isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
+                    setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
+                />
             )}
         </>
     );

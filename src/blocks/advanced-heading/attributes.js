@@ -114,11 +114,82 @@ const attributes = {
         type: 'string',
         default: 'post_permalink',
     },
-    loopAutoApplied: {
+    /** End Dynamic Text */
+
+    /** Start Dynamic Sub Heading Text */
+    dynamicSubHeadingTextEnabled : {
         type: 'boolean',
         default: false
     },
-    /** End Dynamic Text */
+    dynamicSubHeadingTextSource: {
+        type: 'string',
+        default: 'current_post'
+    },
+    dynamicSubHeadingTextPostId: {
+        type: 'number',
+        default: 0
+    },
+    dynamicSubHeadingTextPostType: {
+        type: 'string',
+        default: ''
+    },
+    dynamicSubHeadingTextPostLabel: {
+        type: 'string',
+        default: ''
+    },
+    dynamicSubHeadingTextField: {
+        type: 'string',
+        default: 'post_title'
+    },
+    dynamicSubHeadingFeaturedImageField:{
+        type: 'string',
+        default: 'title'
+    },
+    dynamicSubHeadingTextDateType: {
+        type: 'string',
+        default: 'published'
+    },
+    dynamicSubHeadingTextDateFormat: {
+        type: 'string',
+        default: 'default'
+    },
+    dynamicSubHeadingTextTimeType: {
+        type: 'string',
+        default: 'published'
+    },
+    dynamicSubHeadingTextTimeFormat: {
+        type: 'string',
+        default: 'default'
+    },
+    dynamicSubHeadingTextCommentsZeroText: {
+        type: 'string',
+        default: 'No Response',
+    },
+    dynamicSubHeadingTextCommentsOneText: {
+        type: 'string',
+        default: 'One Response',
+    },
+    dynamicSubHeadingTextCommentsManyText: {
+        type: 'string',
+        default: '{num} Response',
+    },   
+    dynamicSubHeadingTextTermsTaxonomy: {
+        type: 'string',
+        default: 'category',
+    },
+    dynamicSubHeadingTextTermsSeparator: {
+        type: 'string',
+        default: ', ',
+    },
+    dynamicSubHeadingTextEnableLink: {
+        type: 'boolean',
+        default: false
+    },
+    dynamicSubHeadingTextLinkSource: {
+        type: 'string',
+        default: 'post_permalink',
+    },
+    /** End Dynamic Sub Heading Text */
 
 
     /** Start Heading Style */
@@ -610,7 +681,7 @@ const attributes = {
     },
     subHeadingTextDecoration: {
         type: 'string',
-        default: ''
+        default: 'none'
     },
     subHeadingLetterSpacing: {
         type: 'object',
