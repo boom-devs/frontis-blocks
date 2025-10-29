@@ -1835,7 +1835,7 @@ const attributes = {
         }
     },
 
-        /** Start Dynamic Title Text */
+    /** Start Dynamic Title Text */
 	dynamicTitleEnabled : {
 		type: 'boolean',
 		default: false
