@@ -63,7 +63,11 @@ import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
-
+import getProToggleControls from '@Utils/getProToggleControls';
+import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
+import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
+import generateSvgIcon from '@Utils/generateSvgIcon';
+import getProActive from '@Utils/getProActive';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -840,7 +844,157 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnIconGapUnits,
 		btnBackIconGap,
 		btnBackIconGapUnits,
-		flipBoxAlignment
+		flipBoxAlignment,
+
+		/** Start Dynamic Title Text */
+		dynamicTitleEnabled,
+		dynamicTitleSource,
+		dynamicTitlePostId,
+		dynamicTitlePostType,
+		dynamicTitlePostLabel,
+		dynamicTitleField,
+		dynamicTitleFeaturedImageField,
+
+		dynamicTitleDateType,
+		dynamicTitleDateFormat,
+
+		dynamicTitleTimeType,
+		dynamicTitleTimeFormat,
+
+		dynamicTitleCommentsZeroText,
+		dynamicTitleCommentsOneText,
+		dynamicTitleCommentsManyText,
+
+		dynamicTitleTermsTaxonomy,
+		dynamicTitleTermsSeparator,
+		dynamicTitleEnableLink,
+		dynamicTitleLinkSource,
+		/** End Dynamic Title Text */
+
+		/** Start Dynamic Description Text */
+		dynamicDescriptionEnabled,
+		dynamicDescriptionSource,
+		dynamicDescriptionPostId,
+		dynamicDescriptionPostType,
+		dynamicDescriptionPostLabel,
+		dynamicDescriptionField,
+		dynamicDescriptionFeaturedImageField,
+
+		dynamicDescriptionDateType,
+		dynamicDescriptionDateFormat,
+
+		dynamicDescriptionTimeType,
+		dynamicDescriptionTimeFormat,
+
+		dynamicDescriptionCommentsZeroText,
+		dynamicDescriptionCommentsOneText,
+		dynamicDescriptionCommentsManyText,
+
+		dynamicDescriptionTermsTaxonomy,
+		dynamicDescriptionTermsSeparator,
+		dynamicDescriptionEnableLink,
+		dynamicDescriptionLinkSource,
+		/** End Dynamic Description Text */
+
+		/** Start Dynamic Btn One Text */
+		dynamicBtnEnabled,
+		dynamicBtnSource,
+		dynamicBtnPostId,
+		dynamicBtnPostType,
+		dynamicBtnPostLabel,
+		dynamicBtnField,
+		dynamicBtnFeaturedImageField,
+
+		dynamicBtnDateType,
+		dynamicBtnDateFormat,
+
+		dynamicBtnTimeType,
+		dynamicBtnTimeFormat,
+
+		dynamicBtnCommentsZeroText,
+		dynamicBtnCommentsOneText,
+		dynamicBtnCommentsManyText,
+
+		dynamicBtnTermsTaxonomy,
+		dynamicBtnTermsSeparator,
+		dynamicBtnEnableLink,	
+		dynamicBtnLinkSource,
+		/** End Dynamic Btn Text */
+
+		/** Start Dynamic Back Title Text */
+		dynamicBackTitleEnabled,
+		dynamicBackTitleSource,
+		dynamicBackTitlePostId,
+		dynamicBackTitlePostType,
+		dynamicBackTitlePostLabel,
+		dynamicBackTitleField,
+		dynamicBackTitleFeaturedImageField,
+
+		dynamicBackTitleDateType,
+		dynamicBackTitleDateFormat,
+
+		dynamicBackTitleTimeType,
+		dynamicBackTitleTimeFormat,
+
+		dynamicBackTitleCommentsZeroText,
+		dynamicBackTitleCommentsOneText,
+		dynamicBackTitleCommentsManyText,
+
+		dynamicBackTitleTermsTaxonomy,
+		dynamicBackTitleTermsSeparator,
+		dynamicBackTitleEnableLink,
+		dynamicBackTitleLinkSource,
+		/** End Dynamic Back Title Text */
+
+		/** Start Dynamic Back Description Text */
+		dynamicBackDescriptionEnabled,
+		dynamicBackDescriptionSource,
+		dynamicBackDescriptionPostId,
+		dynamicBackDescriptionPostType,
+		dynamicBackDescriptionPostLabel,
+		dynamicBackDescriptionField,
+		dynamicBackDescriptionFeaturedImageField,
+
+		dynamicBackDescriptionDateType,
+		dynamicBackDescriptionDateFormat,
+
+		dynamicBackDescriptionTimeType,
+		dynamicBackDescriptionTimeFormat,
+
+		dynamicBackDescriptionCommentsZeroText,
+		dynamicBackDescriptionCommentsOneText,
+		dynamicBackDescriptionCommentsManyText,
+
+		dynamicBackDescriptionTermsTaxonomy,
+		dynamicBackDescriptionTermsSeparator,
+		dynamicBackDescriptionEnableLink,
+		dynamicBackDescriptionLinkSource,
+		/** End Dynamic Back Description Text */
+
+		/** Start Dynamic Back btn Text */
+		dynamicBackBtnEnabled,
+		dynamicBackBtnSource,
+		dynamicBackBtnPostId,
+		dynamicBackBtnPostType,
+		dynamicBackBtnPostLabel,
+		dynamicBackBtnField,
+		dynamicBackBtnFeaturedImageField,
+
+		dynamicBackBtnDateType,
+		dynamicBackBtnDateFormat,
+
+		dynamicBackBtnTimeType,
+		dynamicBackBtnTimeFormat,
+
+		dynamicBackBtnCommentsZeroText,
+		dynamicBackBtnCommentsOneText,
+		dynamicBackBtnCommentsManyText,
+
+		dynamicBackBtnTermsTaxonomy,
+		dynamicBackBtnTermsSeparator,
+		dynamicBackBtnEnableLink,	
+		dynamicBackBtnLinkSource,
+		/** End Dynamic Back btn Text */
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -5659,6 +5813,102 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}, [fbflipBoxStyle, customCss]);
 
 	const editorStyle = `${fbflipBoxStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+
+		/**
+     * Generate SVG Icons for Icon
+     */
+		useEffect(() => {
+			setAttributes({
+				frontendIcon: generateSvgIcon(icon),
+				frontendBtnIcon: generateSvgIcon(btnIcon), 
+			})
+		}, [icon, btnIcon]);
+	
+	// Check if Pro is active
+	const getProActiveState = getProActive();
+	useEffect(() => {
+		if (!getProActiveState) { 
+			setAttributes({
+				dynamicTitleEnabled: false,
+				dynamicTitleEnableLink: false,
+				dynamicDescriptionEnabled: false,
+				dynamicDescriptionEnableLink: false,
+				dynamicBtnEnabled: false,
+				dynamicBtnEnableLink: false,
+
+				dynamicBackTitleEnabled: false,
+				dynamicBackTitleEnableLink: false,
+				dynamicBackDescriptionEnabled: false,
+				dynamicBackDescriptionEnableLink: false,
+				dynamicBackBtnEnabled: false,
+				dynamicBackBtnEnableLink: false,
+			});
+		}
+	}, [getProActiveState]);
+
+	/**
+	 * Toggle Controls for Dynamic Content
+	 */
+	const dynamicTitleContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-flip-box-dynamic-title-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicTitleEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'flip-box-dynamic-title-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicDescriptionContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-flip-box-dynamic-description-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicDescriptionEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'flip-box-dynamic-description-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicBtnContentToggleControls = getProToggleControls({ 
+		hook: 'frontisblocks-flip-box-dynamic-btn-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicBtnEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'flip-box-dynamic-btn-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicBackTitleContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-flip-box-dynamic-back-title-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicBackTitleEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'flip-box-dynamic-back-title-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicBackDescriptionContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-flip-box-dynamic-back-description-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicBackDescriptionEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'flip-box-dynamic-back-description-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicBackBtnContentToggleControls = getProToggleControls({ 
+		hook: 'frontisblocks-flip-box-dynamic-back-btn-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicBackBtnEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'flip-box-dynamic-back-btn-content',
+		isProActive : getProActiveState
+	});
+
 	return (
 		<>
 			<style>
@@ -5773,17 +6023,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																}
 															/>
 														</BaseControl>
-
-														{/* <BaseControl className="fb-media-position">
-															<SelectControl
-																label={__("Media Position", "frontis-block")}
-																value={flipIconPosition}
-																options={FLIP_ICON_POSITION}
-																onChange={(value) =>
-																	setAttributes({ flipIconPosition: value })
-																}
-															/>
-														</BaseControl> */}
 
 														{(flipIconPosition === 'left' || flipIconPosition === 'right') && (
 															<BaseControl className="fb-media-vertical-position">
@@ -5987,14 +6226,66 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
 																/>
 
-																<TextareaControl
-																	label={__("Heading Text", "frontis-block")}
-																	value={Heading_Text}
-																	onChange={(value) =>
-																		setAttributes({ Heading_Text: value })
-																	}
-																	className="fb-setting-text"
+																{dynamicTitleContentToggleControls.map((control, index) => (
+																	<div key={control.key || index}>{control.comp}</div>
+																))}
+												
+																<DynamicDataSourceControl
+																	enabled={dynamicTitleEnabled}
+																	
+																	source={dynamicTitleSource}
+																	setSource={(value) => setAttributes({ dynamicTitleSource: value })}
+																	postId={dynamicTitlePostId}
+																	setPostId={(value) => setAttributes({ dynamicTitlePostId: value })}
+																	postType={dynamicTitlePostType}
+																	setPostType={(value) => setAttributes({ dynamicTitlePostType: value })}
+																	postLabel={dynamicTitlePostLabel}
+																	setPostLabel={(value) => setAttributes({ dynamicTitlePostLabel: value })}
+
+																	field={dynamicTitleField}
+																	setField={(value) => setAttributes({ dynamicTitleField: value })}
+																	featuredImageField={dynamicTitleFeaturedImageField}
+																	setFeaturedImageField={(value) => setAttributes({ dynamicTitleFeaturedImageField: value })}
+
+																	dateType={dynamicTitleDateType}
+																	setDateType={(value) => setAttributes({ dynamicTitleDateType: value })}
+																	dateFormat={dynamicTitleDateFormat}
+																	setDateFormat={(value) => setAttributes({ dynamicTitleDateFormat: value })}
+																	timeType={dynamicTitleTimeType}
+																	setTimeType={(value) => setAttributes({ dynamicTitleTimeType: value })}
+																	timeFormat={dynamicTitleTimeFormat}
+																	setTimeFormat={(value) => setAttributes({ dynamicTitleTimeFormat: value })}
+
+																	commentsZeroText={dynamicTitleCommentsZeroText}
+																	setCommentsZeroText={(value) => setAttributes({ dynamicTitleCommentsZeroText: value })}
+																	commentsOneText={dynamicTitleCommentsOneText}
+																	setCommentsOneText={(value) =>setAttributes({ dynamicTitleCommentsOneText: value })}
+																	commentsManyText={dynamicTitleCommentsManyText}
+																	setCommentsManyText={(value) =>setAttributes({ dynamicTitleCommentsManyText: value })}
+
+																	termsTaxonomy={dynamicTitleTermsTaxonomy}
+																	setTermsTaxonomy={(value) => setAttributes({ dynamicTitleTermsTaxonomy: value })}
+																	termsSeparator={dynamicTitleTermsSeparator}
+																	setTermsSeparator={(value) => setAttributes({ dynamicTitleTermsSeparator: value })}
 																/>
+																{dynamicTitleEnabled && (
+																	<DynamicDataLinkControl
+																		enableLink={dynamicTitleEnableLink}
+																		setEnableLink={(value) => setAttributes({ dynamicTitleEnableLink: value })}
+																		linkSource={dynamicTitleLinkSource}
+																		setLinkSource={(value) => setAttributes({ dynamicTitleLinkSource: value })}
+																	/>
+																)}
+																{!dynamicTitleEnabled && (
+																	<TextareaControl
+																		label={__("Heading Text", "frontis-block")}
+																		value={Heading_Text}
+																		onChange={(value) =>
+																			setAttributes({ Heading_Text: value })
+																		}
+																		className="fb-setting-text"
+																	/>
+																)}
 															</>
 														)}
 														
@@ -6021,14 +6312,67 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
 																/>
 
-																<TextareaControl
-																	label={__("Description Text", "frontis-block")}
-																	value={Sub_Heading_Text}
-																	onChange={(value) =>
-																		setAttributes({ Sub_Heading_Text: value })
-																	}
-																	className="fb-sub-heading-text"
+																{dynamicDescriptionContentToggleControls.map((control, index) => (
+																	<div key={control.key || index}>{control.comp}</div>
+																))}
+
+																<DynamicDataSourceControl
+																	enabled={dynamicDescriptionEnabled}
+																	
+																	source={dynamicDescriptionSource}
+																	setSource={(value) => setAttributes({ dynamicDescriptionSource: value })}
+																	postId={dynamicDescriptionPostId}
+																	setPostId={(value) => setAttributes({ dynamicDescriptionPostId: value })}
+																	postType={dynamicDescriptionPostType}
+																	setPostType={(value) => setAttributes({ dynamicDescriptionPostType: value })}
+																	postLabel={dynamicDescriptionPostLabel}
+																	setPostLabel={(value) => setAttributes({ dynamicDescriptionPostLabel: value })}
+
+																	field={dynamicDescriptionField}
+																	setField={(value) => setAttributes({ dynamicDescriptionField: value })}
+																	featuredImageField={dynamicDescriptionFeaturedImageField}
+																	setFeaturedImageField={(value) => setAttributes({ dynamicDescriptionFeaturedImageField: value })}
+
+																	dateType={dynamicDescriptionDateType}
+																	setDateType={(value) => setAttributes({ dynamicDescriptionDateType: value })}
+																	dateFormat={dynamicDescriptionDateFormat}
+																	setDateFormat={(value) => setAttributes({ dynamicDescriptionDateFormat: value })}
+																	timeType={dynamicDescriptionTimeType}
+																	setTimeType={(value) => setAttributes({ dynamicDescriptionTimeType: value })}
+																	timeFormat={dynamicDescriptionTimeFormat}
+																	setTimeFormat={(value) => setAttributes({ dynamicDescriptionTimeFormat: value })}
+
+																	commentsZeroText={dynamicDescriptionCommentsZeroText}
+																	setCommentsZeroText={(value) => setAttributes({ dynamicDescriptionCommentsZeroText: value })}
+																	commentsOneText={dynamicDescriptionCommentsOneText}
+																	setCommentsOneText={(value) =>setAttributes({ dynamicDescriptionCommentsOneText: value })}
+																	commentsManyText={dynamicDescriptionCommentsManyText}
+																	setCommentsManyText={(value) =>setAttributes({ dynamicDescriptionCommentsManyText: value })}
+
+																	termsTaxonomy={dynamicDescriptionTermsTaxonomy}
+																	setTermsTaxonomy={(value) => setAttributes({ dynamicDescriptionTermsTaxonomy: value })}
+																	termsSeparator={dynamicDescriptionTermsSeparator}
+																	setTermsSeparator={(value) => setAttributes({ dynamicDescriptionTermsSeparator: value })}
 																/>
+
+																{dynamicDescriptionEnabled && ( 
+																	<DynamicDataLinkControl
+																		enableLink={dynamicDescriptionEnableLink}
+																		setEnableLink={(value) => setAttributes({ dynamicDescriptionEnableLink: value })}
+																		linkSource={dynamicDescriptionLinkSource}
+																		setLinkSource={(value) => setAttributes({ dynamicDescriptionLinkSource: value })}
+																	/>
+																)}
+																{!dynamicDescriptionEnabled && (
+																	<TextareaControl
+																		label={__("Description Text", "frontis-block")}
+																		value={Sub_Heading_Text}
+																		onChange={(value) =>
+																			setAttributes({ Sub_Heading_Text: value })
+																		}
+																		className="fb-sub-heading-text"
+																	/>
+																)}
 															</>
 														)}
 													</PanelBody>
@@ -6056,14 +6400,58 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	globalAlignment={buttonAlignment}
 																	setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
 																/>
-																<TextareaControl
-																	label={__("Button Text", "frontis-block")}
-																	value={flip_Button_Text}
-																	onChange={(value) =>
-																		setAttributes({ flip_Button_Text: value })
-																	}
-																	className="fb-flip-button-text"
+																{dynamicBtnContentToggleControls.map((control, index) => (
+																	<div key={control.key || index}>{control.comp}</div>
+																))}
+												
+																<DynamicDataSourceControl
+																	enabled={dynamicBtnEnabled}
+																	
+																	source={dynamicBtnSource}
+																	setSource={(value) => setAttributes({ dynamicBtnSource: value })}
+																	postId={dynamicBtnPostId}
+																	setPostId={(value) => setAttributes({ dynamicBtnPostId: value })}
+																	postType={dynamicBtnPostType}
+																	setPostType={(value) => setAttributes({ dynamicBtnPostType: value })}
+																	postLabel={dynamicBtnPostLabel}
+																	setPostLabel={(value) => setAttributes({ dynamicBtnPostLabel: value })}
+
+																	field={dynamicBtnField}
+																	setField={(value) => setAttributes({ dynamicBtnField: value })}
+																	featuredImageField={dynamicBtnFeaturedImageField}
+																	setFeaturedImageField={(value) => setAttributes({ dynamicBtnFeaturedImageField: value })}
+
+																	dateType={dynamicBtnDateType}
+																	setDateType={(value) => setAttributes({ dynamicBtnDateType: value })}
+																	dateFormat={dynamicBtnDateFormat}
+																	setDateFormat={(value) => setAttributes({ dynamicBtnDateFormat: value })}
+																	timeType={dynamicBtnTimeType}
+																	setTimeType={(value) => setAttributes({ dynamicBtnTimeType: value })}
+																	timeFormat={dynamicBtnTimeFormat}
+																	setTimeFormat={(value) => setAttributes({ dynamicBtnTimeFormat: value })}
+
+																	commentsZeroText={dynamicBtnCommentsZeroText}
+																	setCommentsZeroText={(value) => setAttributes({ dynamicBtnCommentsZeroText: value })}
+																	commentsOneText={dynamicBtnCommentsOneText}
+																	setCommentsOneText={(value) =>setAttributes({ dynamicBtnCommentsOneText: value })} 
+																	commentsManyText={dynamicBtnCommentsManyText}
+																	setCommentsManyText={(value) =>setAttributes({ dynamicBtnCommentsManyText: value })}
+
+																	termsTaxonomy={dynamicBtnTermsTaxonomy}
+																	setTermsTaxonomy={(value) => setAttributes({ dynamicBtnTermsTaxonomy: value })}
+																	termsSeparator={dynamicBtnTermsSeparator}
+																	setTermsSeparator={(value) => setAttributes({ dynamicBtnTermsSeparator: value })}
 																/>
+																{!dynamicBtnEnabled && (
+																	<TextareaControl
+																		label={__("Button Text", "frontis-block")}
+																		value={flip_Button_Text}
+																		onChange={(value) =>
+																			setAttributes({ flip_Button_Text: value })
+																		}
+																		className="fb-flip-button-text"
+																	/>
+																)}
 																<ToggleControl
 																	label={__("Show Icon", "frontis-block")}
 																	checked={buttonIconSwitcher}
@@ -6090,18 +6478,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	</>
 																)}
 
-																<BaseControl>
-																	<FB_UrlControl
-																		url={flipButtonLink}
-																		onChangeUrl={(value) =>
-																			setAttributes({ flipButtonLink: value })
-																		}
-																		openInNewTab={flipbtnTargetUrl}
-																		onChangeOpenInNewTab={(value) =>
-																			setAttributes({ flipbtnTargetUrl: value })
-																		}
+																{dynamicBtnEnabled && ( 
+																	<DynamicDataLinkControl
+																		enableLink={dynamicBtnEnableLink}
+																		setEnableLink={(value) => setAttributes({ dynamicBtnEnableLink: value })}
+																		linkSource={dynamicBtnLinkSource}
+																		setLinkSource={(value) => setAttributes({ dynamicBtnLinkSource: value })}
 																	/>
-																</BaseControl>
+																)}
+																{!dynamicBtnEnableLink && (
+																	<BaseControl>
+																		<FB_UrlControl
+																			url={flipButtonLink}
+																			onChangeUrl={(value) =>
+																				setAttributes({ flipButtonLink: value })
+																			}
+																			openInNewTab={flipbtnTargetUrl}
+																			onChangeOpenInNewTab={(value) =>
+																				setAttributes({ flipbtnTargetUrl: value })
+																			}
+																		/>
+																	</BaseControl>
+																)}
 															</>
 														)}
 													</PanelBody>
