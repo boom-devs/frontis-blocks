@@ -23,9 +23,11 @@ const SystemRequirements = () => {
         return <div>Loading...</div>;
     }
 
+    console.log(healthInfo)
+
     return (
-        <div className="fb-system-requirements">
-            <h2>{__('System Requirements', 'frontis-blocks')}</h2>
+        <div className="fb-system-requirements card-v1">
+            <h2 className='heading-3'>{__('System Requirements', 'frontis-blocks')}</h2>
             <div className="fb-system-requirements-list">
                 {healthInfo.map((item, index) => (
                     <div key={index} className={`fb-system-requirement-item ${item.status}`}>

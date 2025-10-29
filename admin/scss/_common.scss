@@ -1,119 +1,168 @@
-.fb-button-primary {
-    background-color: $primary-color;
-    color: $light-gray;
-    border-radius: $border-radius;
-    font-weight: bold;
-    transition: background-color $transition-duration;
-    border: none;
-    padding: ($spacing-unit * 2) ($spacing-unit * 2.5);
-    cursor: pointer;
-    &:hover {
-      background-color: darken($primary-color, 10%);
-    }
+.heading-1 {
+  font-family: $heading-font-family;
+  font-size: 42px;
+  line-height: 1.3;
+  font-weight: 700;
+  color: $heading-color;
 }
 
-.fb-button-error {
-    background-color: $error-color;
-    color: $light-gray;
-    border-radius: $border-radius;
-    font-weight: bold;
-    transition: background-color $transition-duration;
-    border: none;
-    padding: ($spacing-unit * 2) ($spacing-unit * 2.5);
-    cursor: pointer;
-    &:hover {
-      background-color: darken($error-color, 10%);
-    }
+.heading-2 {
+    @extend .heading-1;
+    font-size: 32px;
+    font-weight: 600;
 }
 
-.fb-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.fb-modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  max-width: 500px;
-  width: 100%;
-}
-
-.fb-confirmation-modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
-
-.fb-confirmation-modal-actions button {
-  margin-left: 10px;
-}
-
-.fb-upgrade-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 24px;
-  background-color: $warning-color;
-  color: $white-color;
-  text-decoration: none;
-  border-radius: $border-radius * 3;
-  font-family: $body-font-family;
-  font-size: 18px;
+.heading-3 {
+  @extend .heading-1;
+  font-size: 24px;
   font-weight: 600;
-  line-height: 25px;
-  transition: background-color $transition-duration;
-
-  svg {
-    height: $spacing-unit * 3;
-    width: $spacing-unit * 3;
-    margin-left: $spacing-unit;
-  }
-
-  &:hover {
-    background-color: darken($warning-color, 10%);
-    color: $white-color;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba($warning-color, 0.5);
-  }
 }
 
-
-.fb-assets-generation-button-wrapper {
-  position: relative;
-  display: inline-block;
-  pointer-events: none;
-  cursor: not-allowed;
-}
-.fb-assets-generation-button {
-  opacity: 0.5;
-}
-.fb-loading-spinner {
-  position: absolute;
-  top: 50%;
-  right: -45px;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
-  border: 3px solid #15171C;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  animation: fb-loading-spinner 1s linear infinite;
-  z-index: 9999;
+.heading-4 {
+  @extend .heading-1;
+  font-size: 20px;
+  font-weight: 600;
 }
 
-@keyframes fb-loading-spinner {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+.heading-5 {
+  @extend .heading-1;
+  font-size: 14px;
+  font-weight: 600;
 }
+
+.p1 {
+  font-family: $body-font-family;
+  font-size: 16px;
+  line-height: 1.3;
+  font-weight: 500;
+  color: $paragraph-color;
+  margin: 0;
+}
+
+.card-v1 {
+  background: $card-background;
+  box-shadow: 0px 1px 1px 0px #0000000F;
+  box-shadow: 0px 1px 2px 0px #0000001A;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+// .fb-button-primary {
+//     background-color: $primary-color;
+//     color: $light-gray;
+//     border-radius: $border-radius;
+//     font-weight: bold;
+//     transition: background-color $transition-duration;
+//     border: none;
+//     padding: ($spacing-unit * 2) ($spacing-unit * 2.5);
+//     cursor: pointer;
+//     &:hover {
+//       background-color: darken($primary-color, 10%);
+//     }
+// }
+
+// .fb-button-error {
+//     background-color: $error-color;
+//     color: $light-gray;
+//     border-radius: $border-radius;
+//     font-weight: bold;
+//     transition: background-color $transition-duration;
+//     border: none;
+//     padding: ($spacing-unit * 2) ($spacing-unit * 2.5);
+//     cursor: pointer;
+//     &:hover {
+//       background-color: darken($error-color, 10%);
+//     }
+// }
+
+// .fb-modal-overlay {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   background-color: rgba(0, 0, 0, 0.5);
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   z-index: 1000;
+// }
+
+// .fb-modal-content {
+//   background-color: white;
+//   padding: 20px;
+//   border-radius: 5px;
+//   max-width: 500px;
+//   width: 100%;
+// }
+
+// .fb-confirmation-modal-actions {
+//   display: flex;
+//   justify-content: flex-end;
+//   margin-top: 20px;
+// }
+
+// .fb-confirmation-modal-actions button {
+//   margin-left: 10px;
+// }
+
+// .fb-upgrade-button {
+//   display: inline-flex;
+//   align-items: center;
+//   justify-content: center;
+//   padding: 16px 24px;
+//   background-color: $warning-color;
+//   color: $white-color;
+//   text-decoration: none;
+//   border-radius: $border-radius * 3;
+//   font-family: $body-font-family;
+//   font-size: 18px;
+//   font-weight: 600;
+//   line-height: 25px;
+//   transition: background-color $transition-duration;
+
+//   svg {
+//     height: $spacing-unit * 3;
+//     width: $spacing-unit * 3;
+//     margin-left: $spacing-unit;
+//   }
+
+//   &:hover {
+//     background-color: darken($warning-color, 10%);
+//     color: $white-color;
+//   }
+
+//   &:focus {
+//     outline: none;
+//     box-shadow: 0 0 0 2px rgba($warning-color, 0.5);
+//   }
+// }
+
+
+// .fb-assets-generation-button-wrapper {
+//   position: relative;
+//   display: inline-block;
+//   pointer-events: none;
+//   cursor: not-allowed;
+// }
+// .fb-assets-generation-button {
+//   opacity: 0.5;
+// }
+// .fb-loading-spinner {
+//   position: absolute;
+//   top: 50%;
+//   right: -45px;
+//   transform: translate(-50%, -50%);
+//   width: 20px;
+//   height: 20px;
+//   border: 3px solid #15171C;
+//   border-bottom-color: transparent;
+//   border-radius: 50%;
+//   animation: fb-loading-spinner 1s linear infinite;
+//   z-index: 9999;
+// }
+
+// @keyframes fb-loading-spinner {
+//   0% { transform: translate(-50%, -50%) rotate(0deg); }
+//   100% { transform: translate(-50%, -50%) rotate(360deg); }
+// }
