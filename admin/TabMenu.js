@@ -21,7 +21,7 @@ const TabMenus = applyFilters('frontisblocks-admin-tabs', [
     {
         id: 'general',
         icon: <HomeIcon />,
-        label: __("Dashboard", "frontis-blocks"),
+        label: __("Overview", "frontis-blocks"),
         comp: <Dashboard />
     },
     {
@@ -42,12 +42,12 @@ const TabMenus = applyFilters('frontisblocks-admin-tabs', [
         label: __("Integrations", "frontis-blocks"),
         comp: <Integration />
     },
-    {
-      id: 'pricing',
-      icon: <PricingIcon />,
-      label: __("Pricing", "frontis-blocks"),
-      comp: <Pricing />
-    },
+    // {
+    //   id: 'pricing',
+    //   icon: <PricingIcon />,
+    //   label: __("Pricing", "frontis-blocks"),
+    //   comp: <Pricing />
+    // },
 ]);
 // Add pricing tab if not pro
 // if (window.frontisBlocksAdmin.isProActive === 'false') {
