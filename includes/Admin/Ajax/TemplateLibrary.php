@@ -40,7 +40,8 @@ class TemplateLibrary extends AjaxBase {
             'get_templates',
             'get_template_parts',
             'push_template',
-            'get_all_template_parts'
+            'get_all_template_parts',
+            'push_template_parts',
 		];
 
 		$this->init_ajax_events($ajax_events);
@@ -799,6 +800,80 @@ class TemplateLibrary extends AjaxBase {
             'message'     => 'Template created',
             'template_id' => $template_id,
             'post_id'     => $post_id
+        ]);
+    }
+
+    public function push_template_parts() {
+        $this->check_permission();
+    
+        // Fix: parts[0][title], parts[0][slug] → এভাবে আসবে
+        $parts_data = [];
+        if (isset($_POST['parts']) && is_array($_POST['parts'])) {
+            foreach ($_POST['parts'] as $part) {
+                $parts_data[] = [
+                    'title'   => sanitize_text_field($part['title'] ?? ''),
+                    'slug'    => sanitize_title($part['slug'] ?? ''),
+                    'content' => wp_kses_post($part['content'] ?? ''),
+                    'area'    => sanitize_text_field($part['area'] ?? 'uncategorized'),
+                ];
+            }
+        }
+    
+        if (empty($parts_data)) {
+            wp_send_json_error(['message' => 'No template parts data provided']);
+        }
+    
+        $current_theme = get_stylesheet();
+        $created = 0;
+        $skipped = 0;
+        $errors = [];
+    
+        foreach ($parts_data as $part) {
+            $slug    = $part['slug'];
+            $title   = $part['title'];
+            $content = $part['content'];
+            $area    = $part['area'];
+    
+            if (empty($slug) || empty($title) || $content === '') {
+                $errors[] = "$slug: Missing required fields";
+                continue;
+            }
+    
+            $part_id = $current_theme . '//' . $slug;
+    
+            if (get_block_template($part_id, 'wp_template_part')) {
+                $skipped++;
+                continue;
+            }
+    
+            $post_id = wp_insert_post([
+                'post_title'   => $title,
+                'post_name'    => $slug,
+                'post_content' => $content,
+                'post_status'  => 'publish',
+                'post_type'    => 'wp_template_part',
+            ], true);
+    
+            if (is_wp_error($post_id)) {
+                $errors[] = "$slug: " . $post_id->get_error_message();
+                continue;
+            }
+    
+            update_post_meta($post_id, 'wp_template_part_area', $area);
+            $created++;
+        }
+    
+        if (function_exists('wp_clean_block_template_cache')) {
+            wp_clean_block_template_cache();
+        }
+        delete_transient('wp_template_partials');
+        wp_cache_flush();
+    
+        wp_send_json_success([
+            'message'  => 'Template parts pushed',
+            'created'  => $created,
+            'skipped'  => $skipped,
+            'errors'   => $errors
         ]);
     }
 

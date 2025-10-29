@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { setAttribute } from "../store/attributesSlice";
 import templatesData from "../data/templates.json";
+import templatePartsData from "../data/template-parts.json";
 import FullSiteImportModal from "./fullSiteImportModal";
 
 const FullSiteImportSettingConfig = ({
@@ -33,6 +34,7 @@ const FullSiteImportSettingConfig = ({
   const dispatch = useDispatch();
 
   console.log(templatesData);
+  console.log(templatePartsData);
 
 
   const [isImporting, setIsImporting] = useState(false);
@@ -690,6 +692,49 @@ const FullSiteImportSettingConfig = ({
       }
   };
 
+  const handlePushTemplateParts = async (parts) => {
+      if (!parts || parts.length === 0) {
+          console.log("No parts to push");
+          return { success: true, created: 0, skipped: 0, errors: [] };
+      }
+
+      const form = new FormData();
+      form.append('action', 'fb_push_template_parts');
+      form.append('security', nonce);
+
+      parts.forEach((part, index) => {
+          form.append(`parts[${index}][title]`, part.title);
+          form.append(`parts[${index}][slug]`, part.slug);
+          form.append(`parts[${index}][content]`, part.content);
+          form.append(`parts[${index}][area]`, part.area || 'uncategorized');
+      });
+
+      try {
+          const response = await fetch(ajaxUrl, {
+              method: 'POST',
+              body: form,
+          });
+
+          const json = await response.json();
+
+          if (json.success) {
+              console.log(`Parts: ${json.data.created} created, ${json.data.skipped} skipped`);
+              return {
+                  success: true,
+                  created: json.data.created,
+                  skipped: json.data.skipped,
+                  errors: json.data.errors || []
+              };
+          } else {
+              console.error('Push parts failed:', json.data?.message);
+              return { success: false, errors: [json.data?.message] };
+          }
+      } catch (err) {
+          console.error('Push parts error:', err);
+          return { success: false, errors: [err.message] };
+      }
+  };
+
   // Helper to POST FormData
   const postForm = async (form) => {
     const resp = await fetch(ajaxUrl, {
@@ -852,6 +897,7 @@ const FullSiteImportSettingConfig = ({
       { key: "upload_files", label: "Uploading and extracting files...", status: "pending" },
       { key: "theme", label: "Installing & activating theme...", status: "pending" },
       { key: "plugins", label: "Installing & activating plugins...", status: "pending" },
+      { key: "template_parts", label: "Creating template parts...", status: "pending" },
       { key: "templates", label: "Creating templates...", status: "pending" },
       { key: "pages", label: "Creating pages...", status: "pending" },
       { key: "global_styles", label: "Updating global styles...", status: "pending" },
@@ -873,6 +919,7 @@ const FullSiteImportSettingConfig = ({
       const siteData = siteResp.data;
       const pages = siteData.pages || [];
       const templates = siteData.templates || templatesData;
+      const allTemplateParts = siteData.templateParts || templatePartsData;
       const uploads = siteData.uploads_url || "https://templates.frontiswp.com/melinoe/wp-content/uploads/sites/14/2025.zip";
   
       /** STEP 2: UPLOAD FILES **/
@@ -899,7 +946,17 @@ const FullSiteImportSettingConfig = ({
       const pluginRes = await installActivatePlugins(template.dependencies || []);
       updateStepStatus("plugins", pluginRes?.skipped ? "skipped" : "success");
 
-      // STEP 5: TEMPLATES
+      // STEP 5: FETCH & PUSH TEMPLATE PARTS
+      setCurrentStep("template_parts");
+      updateStepStatus("template_parts", "running");
+      setImportProgress(60);
+
+      console.log("Pushing Template Parts:", allTemplateParts);
+
+      const partsResult = await handlePushTemplateParts(allTemplateParts || []);
+      updateStepStatus("template_parts", partsResult.success ? "success" : "warning");
+
+      // STEP 5.5: TEMPLATES
       setCurrentStep("templates");
       updateStepStatus("templates", "running");
       setImportProgress(65);
@@ -910,7 +967,7 @@ const FullSiteImportSettingConfig = ({
       // STEP 6: PAGES
       setCurrentStep("pages");
       updateStepStatus("pages", "running");
-      setImportProgress(75);
+      setImportProgress(80);
 
       const pageResult = await handleStorePages(pages || []);
       updateStepStatus("pages", pageResult.success ? "success" : "warning");
@@ -964,7 +1021,6 @@ const FullSiteImportSettingConfig = ({
         const json = await response.json();
   
         if (ok && json?.success) {
-          console.log(`Templates for post type "${postType}" fetched successfully`);
           return { status: 'success', data: json.data.templates };
         }
   
@@ -982,62 +1038,35 @@ const FullSiteImportSettingConfig = ({
     }
   };
 
-  const getTemplateParts = async (postType = 'page') => {
+
+  const getAllTemplateParts = async () => {
     const form = new FormData();
-    form.append('action', 'fb_get_template_parts');
+    form.append('action', 'fb_get_all_template_parts');
     form.append('security', nonce);
-    form.append('post_type', postType);
 
     try {
-        const response = await fetch(ajaxUrl, {
-            method: 'POST',
-            body: form,
-        });
-
-        const json = await response.json();
+        const res = await fetch(ajaxUrl, { method: 'POST', body: form });
+        const json = await res.json();
 
         if (json.success) {
-            return json.data.template_parts || [];
+            return json.data.template_parts;
         }
 
-        console.warn('Failed to fetch template parts:', json.data?.message);
+        console.warn('No parts found:', json.data?.message);
         return [];
     } catch (err) {
-        console.error('Error fetching template parts:', err);
+        console.error('Error fetching all parts:', err);
         return [];
     }
-};
-
-const getAllTemplateParts = async () => {
-  const form = new FormData();
-  form.append('action', 'fb_get_all_template_parts');
-  form.append('security', nonce);
-
-  try {
-      const res = await fetch(ajaxUrl, { method: 'POST', body: form });
-      const json = await res.json();
-
-      if (json.success) {
-          console.log('All Template Parts:', json.data.template_parts);
-          return json.data.template_parts;
-      }
-
-      console.warn('No parts found:', json.data?.message);
-      return [];
-  } catch (err) {
-      console.error('Error fetching all parts:', err);
-      return [];
-  }
-};
-
-// ব্যবহার
-useEffect(() => {
-  const fetch = async () => {
-      const allParts = await getAllTemplateParts();
-      dispatch(setAttribute({ templateParts: allParts }));
   };
-  fetch();
-}, []);
+
+  useEffect(() => {
+    const fetch = async () => {
+        const allParts = await getAllTemplateParts();
+        dispatch(setAttribute({ templateParts: allParts }));
+    };
+    fetch();
+  }, []);
 
 
   useEffect(() => {
@@ -1057,19 +1086,6 @@ useEffect(() => {
 
     fetchTemplates();
   }, []);
-
-//   useEffect(() => {
-//     const fetchTemplateParts = async () => {
-//         const parts = await getTemplateParts('page');
-//         dispatch(setAttribute({ templateParts: parts }));
-//     };
-
-//     fetchTemplateParts();
-// }, []);
-
-  console.log('pageTemplates', pageTemplates);
-  console.log('templateParts:', templateParts);
-  console.log('allTemplateParts:', templateParts);
 
 
   return (
