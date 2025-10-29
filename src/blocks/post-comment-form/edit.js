@@ -128,6 +128,38 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     </div>
                                 </div>
                             </div>
+
+                            <div id="comment-1" className="fb-comment fb-comment-parent depth-1">
+                                <img 
+                                    src={FrontisBlocksData?.pluginUrl + 'assets/images/preset-bg.jpg'} 
+                                    alt="" 
+                                    className="fb-comment-avatar" 
+                                />
+                                <div className="fb-comment-body">
+                                    <strong className="fb-comment-author">admin</strong>
+                                    <span className="fb-comment-meta">
+                                        October 23, 2025 at 10:53 am
+                                    </span>
+                                    <div className="fb-comment-content">
+                                        <p>test comment</p>
+                                    </div>
+                                    <div className="fb-comment-reply">
+                                        <a 
+                                            href="#comment-1" 
+                                            className="comment-reply-link"
+                                            data-commentid="1"
+                                            data-postid="1"
+                                            data-belowelement="comment-1"
+                                            data-respondelement="respond"
+                                            aria-label="Reply to admin"
+                                        >
+                                            Reply
+                                        </a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
                         </div>
                
 

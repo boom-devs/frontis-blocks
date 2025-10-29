@@ -49,7 +49,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		blockStyle,
 
 		/** Style Attributes */
-		/** Heading */
+		/** Comments Title */
 		commentCountTitleGlobalTypoSwitcher,
 		commentCountTitleGlobalTypographyData,
 		commentCountTitleGlobalTypoType,
@@ -72,7 +72,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		commentCountTitleSpacing,
 		commentCountTitleSpacingUnits,
-		/** End Heading */
+		/** End Comments Title */
+
+		/** Start Comment Item */
+		postCommentPaddingUnits,
+		postCommentPaddingDesktop,
+		postCommentPaddingTablet,
+		postCommentPaddingMobile,
+		postCommentPaddingLink,
+
+		/** End Comment Item */
 
 		/** Start Advanced Attributes */
 		wrapperId,
@@ -160,8 +169,122 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	}, [clientId]);
 
-	/* ======================================================================= */
 
+	/* ===============Helper Function================== */
+
+
+	function scalePaddingWithoutLeft(paddingString, scale = 1) {
+  const parts = paddingString.split(" "); // e.g. ["20px", "20px", "20px", "20px"]
+
+  // Ensure 4 values (top, right, bottom, left)
+  const [top = "0", right = "0", bottom = "0", left = "0"] = parts;
+
+  // Scale top, right, bottom — but skip left
+  const scaleValue = v => {
+    const num = parseFloat(v);
+    const unit = v.replace(num, "");
+    return `${num * scale}${unit}`;
+  };
+
+  return `${scaleValue(top)} ${scaleValue(right)} ${scaleValue(bottom)} 0`;
+}
+
+
+
+	/* ======================================= */
+	/** Start Post Comment Item Padding */
+	const handlePostCommentPaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (postCommentPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						postCommentPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						postCommentPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						postCommentPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						postCommentPaddingDesktop: {
+							...postCommentPaddingDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						postCommentPaddingTablet: {
+							...postCommentPaddingTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						postCommentPaddingMobile: {
+							...postCommentPaddingMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handlePostCommentPaddingCombineBtn = () => {
+		setAttributes({ postCommentPaddingLink: !postCommentPaddingLink });
+	};
+
+	const handlePostCommentPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			postCommentPaddingUnits: {
+				...postCommentPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+	const postCommentPaddingDesktopWidth = `${postCommentPaddingDesktop.top}${postCommentPaddingUnits.Desktop} ${postCommentPaddingDesktop.right}${postCommentPaddingUnits.Desktop} ${postCommentPaddingDesktop.bottom}${postCommentPaddingUnits.Desktop} ${postCommentPaddingDesktop.left}${postCommentPaddingUnits.Desktop}`;
+	const postCommentPaddingTabletWidth = `${postCommentPaddingTablet.top}${postCommentPaddingUnits.Tablet} ${postCommentPaddingTablet.right}${postCommentPaddingUnits.Tablet} ${postCommentPaddingTablet.bottom}${postCommentPaddingUnits.Tablet} ${postCommentPaddingTablet.left}${postCommentPaddingUnits.Tablet}`;
+	const postCommentPaddingMobileWidth = `${postCommentPaddingMobile.top}${postCommentPaddingUnits.Mobile} ${postCommentPaddingMobile.right}${postCommentPaddingUnits.Mobile} ${postCommentPaddingMobile.bottom}${postCommentPaddingUnits.Mobile} ${postCommentPaddingMobile.left}${postCommentPaddingUnits.Mobile}`;
+
+	// Nested Item Dynamic Padding value base of parent Commnet Item 
+	const childCommentPaddingDesktopWidth = scalePaddingWithoutLeft(postCommentPaddingDesktopWidth, 0.75);
+	const childCommentPaddingTabletWidth = scalePaddingWithoutLeft(postCommentPaddingTabletWidth, 0.75);
+	const childCommentPaddingMobileWidth = scalePaddingWithoutLeft(postCommentPaddingMobileWidth, 0.75);
+	/** End Post Comment Item Padding */
+
+	/* ==================================================== */
 	/* Start Global Padding */
 	const handleGlobalPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -525,7 +648,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             /* Comment Count Title */
             .${blockId} .fb-comment-count-title {
                 font-size: 20px;
-                margin-bottom: 0 0 30px 0;
+                margin: 0 0 30px 0;
                 color: #1e1e1e;
                 padding-bottom: 15px;
                 border-bottom: 1px solid #e1e1e1;
@@ -543,6 +666,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 padding: 20px 0;
                 border-bottom: 1px solid #f0f0f0;
             }
+
+						.${blockId} .fb-comment.fb-comment-parent:first-child {
+							padding-top: 0;
+						}
 
             .${blockId} .fb-comment:last-child {
                 border-bottom: none;
@@ -767,97 +894,111 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 
 				.${blockId} .fb-comment-count-title {
-
-			
             ${commentCountTitleColor ? `color: ${commentCountTitleColor};` : ""}
 
-            ${commentCountTitleGlobalTypoSwitcher.fontFamily === true &&
-				commentCountTitleGlobalTypographyData.fontFamily
-				? `font-family: ${commentCountTitleGlobalTypographyData.fontFamily};`
-				: ""
-			}
-            ${commentCountTitleGlobalTypoSwitcher.fontSize === true &&
-				commentCountTitleGlobalTypographyData.fontSize
-				? `font-size: ${commentCountTitleGlobalTypographyData.fontSize};`
-				: ""
-			}
-            ${commentCountTitleGlobalTypoSwitcher.fontWeight === true &&
-				commentCountTitleGlobalTypographyData.fontWeight
-				? `font-weight: ${commentCountTitleGlobalTypographyData.fontWeight};`
-				: ""
-			}
-            ${commentCountTitleGlobalTypoSwitcher.fontStyle === true &&
-				commentCountTitleGlobalTypographyData.fontStyle
-				? `font-style: ${commentCountTitleGlobalTypographyData.fontStyle};`
-				: ""
-			}
-            ${commentCountTitleGlobalTypoSwitcher.textTransform === true &&
-				commentCountTitleGlobalTypographyData.textTransform
-				? `text-transform: ${commentCountTitleGlobalTypographyData.textTransform};`
-				: ""
-			}
-            ${commentCountTitleGlobalTypoSwitcher.textDecoration === true &&
-				commentCountTitleGlobalTypographyData.textDecoration
-				? `text-decoration: ${commentCountTitleGlobalTypographyData.textDecoration};`
-				: ""
-			}
-            ${commentCountTitleGlobalTypoSwitcher.letterSpacing === true &&
-				commentCountTitleGlobalTypographyData.letterSpacing
-				? `letter-spacing: ${commentCountTitleGlobalTypographyData.letterSpacing};`
-				: ""
-			}
-            ${commentCountTitleGlobalTypoSwitcher.lineHeight === true &&
-				commentCountTitleGlobalTypographyData.lineHeight
-				? `line-height: ${commentCountTitleGlobalTypographyData.lineHeight};`
-				: ""
-			}
-
-						${commentCountTitleGlobalTypoSwitcher.fontFamily === false &&
-				commentCountTitleFontFamily
-				? `font-family: ${commentCountTitleFontFamily};`
-				: ""
-			}
-						${commentCountTitleGlobalTypoSwitcher.fontSize === false &&
-				commentCountTitleFontSize.Desktop
-				? `font-size: ${commentCountTitleFontSize.Desktop}${commentCountTitleFontSizeUnits.Desktop};`
-				: ""
-			}
-						${commentCountTitleGlobalTypoSwitcher.fontWeight === false &&
-				commentCountTitleFontWeight
-				? `font-weight: ${commentCountTitleFontWeight};`
-				: ""
-			}
-						${commentCountTitleGlobalTypoSwitcher.fontStyle === false &&
-				commentCountTitleFontStyle
-				? `font-style: ${commentCountTitleFontStyle};`
-				: ""
-			}
-						${commentCountTitleGlobalTypoSwitcher.textTransform === false &&
-				commentCountTitleTextTransform
-				? `text-transform: ${commentCountTitleTextTransform};`
-				: ""
-			}
-						${commentCountTitleGlobalTypoSwitcher.textDecoration === false &&
-				commentCountTitleTextDecoration
-				? `text-decoration: ${commentCountTitleTextDecoration};`
-				: ""
-			}
-						${commentCountTitleGlobalTypoSwitcher.letterSpacing === false &&
-				commentCountTitleLetterSpacing.Desktop
-				? `letter-spacing: ${commentCountTitleLetterSpacing.Desktop}${commentCountTitleLetterSpacingUnits.Desktop};`
-				: ""
-			}
-						${commentCountTitleGlobalTypoSwitcher.lineHeight === false &&
-				commentCountTitleLineHeight.Desktop
-				? `line-height: ${commentCountTitleLineHeight.Desktop}${commentCountTitleLineHeightUnits.Desktop};`
-				: ""
-			}
+            ${
+							commentCountTitleGlobalTypoSwitcher.fontFamily === true &&
+							commentCountTitleGlobalTypographyData.fontFamily
+								? `font-family: ${commentCountTitleGlobalTypographyData.fontFamily};`
+								: ""
+						}
+            ${
+							commentCountTitleGlobalTypoSwitcher.fontSize === true &&
+							commentCountTitleGlobalTypographyData.fontSize
+								? `font-size: ${commentCountTitleGlobalTypographyData.fontSize};`
+								: ""
+						}
+            ${
+							commentCountTitleGlobalTypoSwitcher.fontWeight === true &&
+							commentCountTitleGlobalTypographyData.fontWeight
+								? `font-weight: ${commentCountTitleGlobalTypographyData.fontWeight};`
+								: ""
+						}
+            ${
+							commentCountTitleGlobalTypoSwitcher.fontStyle === true &&
+							commentCountTitleGlobalTypographyData.fontStyle
+								? `font-style: ${commentCountTitleGlobalTypographyData.fontStyle};`
+								: ""
+						}
+            ${
+							commentCountTitleGlobalTypoSwitcher.textTransform === true &&
+							commentCountTitleGlobalTypographyData.textTransform
+								? `text-transform: ${commentCountTitleGlobalTypographyData.textTransform};`
+								: ""
+						}
+            ${
+							commentCountTitleGlobalTypoSwitcher.textDecoration === true &&
+							commentCountTitleGlobalTypographyData.textDecoration
+								? `text-decoration: ${commentCountTitleGlobalTypographyData.textDecoration};`
+								: ""
+						}
+            ${
+							commentCountTitleGlobalTypoSwitcher.letterSpacing === true &&
+							commentCountTitleGlobalTypographyData.letterSpacing
+								? `letter-spacing: ${commentCountTitleGlobalTypographyData.letterSpacing};`
+								: ""
+						}
+            ${
+							commentCountTitleGlobalTypoSwitcher.lineHeight === true &&
+							commentCountTitleGlobalTypographyData.lineHeight
+								? `line-height: ${commentCountTitleGlobalTypographyData.lineHeight};`
+								: ""
+						}
 
 						${
-				commentCountTitleSpacing.Desktop
-					? `margin-bottom: ${commentCountTitleSpacing.Desktop}${commentCountTitleSpacingUnits.Desktop};`
-					: ""
-			}
+							commentCountTitleGlobalTypoSwitcher.fontFamily === false &&
+							commentCountTitleFontFamily
+								? `font-family: ${commentCountTitleFontFamily};`
+								: ""
+						}
+						${
+							commentCountTitleGlobalTypoSwitcher.fontSize === false &&
+							commentCountTitleFontSize.Desktop
+								? `font-size: ${commentCountTitleFontSize.Desktop}${commentCountTitleFontSizeUnits.Desktop};`
+								: ""
+						}
+						${
+							commentCountTitleGlobalTypoSwitcher.fontWeight === false &&
+							commentCountTitleFontWeight
+								? `font-weight: ${commentCountTitleFontWeight};`
+								: ""
+						}
+						${
+							commentCountTitleGlobalTypoSwitcher.fontStyle === false &&
+							commentCountTitleFontStyle
+								? `font-style: ${commentCountTitleFontStyle};`
+								: ""
+						}
+						${
+							commentCountTitleGlobalTypoSwitcher.textTransform === false &&
+							commentCountTitleTextTransform
+								? `text-transform: ${commentCountTitleTextTransform};`
+								: ""
+						}
+						${
+							commentCountTitleGlobalTypoSwitcher.textDecoration === false &&
+							commentCountTitleTextDecoration
+								? `text-decoration: ${commentCountTitleTextDecoration};`
+								: ""
+						}
+						${
+							commentCountTitleGlobalTypoSwitcher.letterSpacing === false &&
+							commentCountTitleLetterSpacing.Desktop
+								? `letter-spacing: ${commentCountTitleLetterSpacing.Desktop}${commentCountTitleLetterSpacingUnits.Desktop};`
+								: ""
+						}
+						${
+							commentCountTitleGlobalTypoSwitcher.lineHeight === false &&
+							commentCountTitleLineHeight.Desktop
+								? `line-height: ${commentCountTitleLineHeight.Desktop}${commentCountTitleLineHeightUnits.Desktop};`
+								: ""
+						}
+
+						${
+							commentCountTitleSpacing.Desktop
+								? `margin-bottom: ${commentCountTitleSpacing.Desktop}${commentCountTitleSpacingUnits.Desktop};`
+								: ""
+						}
 
 			}
 
@@ -867,151 +1008,189 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${commentCountTitleHoverColor ? `color: ${commentCountTitleHoverColor};` : ""}
 				}
 
+				.${blockId} .fb-comments-list .fb-comment.fb-comment-parent{
+						${postCommentPaddingDesktopWidth && postCommentPaddingDesktop.top
+							? `padding: ${postCommentPaddingDesktopWidth};` 
+							: ""
+						}
+				}
+
+				.${blockId} .fb-comments-list .fb-comment.fb-comment-child{
+						${childCommentPaddingDesktopWidth && 
+							postCommentPaddingDesktop.top
+							? `padding: ${childCommentPaddingDesktopWidth};`
+							: ""
+						 }
+				}
 
 				/* Advance Control Global Style */
 				.${blockId}.fb-post-comment-form-block{
 			   ${postGlobalPositionType === "default" ? `position: relative;` : ""}
-            ${postGlobalPositionType !== "default" &&
-				postGlobalPositionType !== "relative"
-				? `width: 100%;`
-				: ""
-			}
-            ${postGlobalPositionType !== "default"
-				? `position: ${postGlobalPositionType};`
-				: ""
-			}
-            ${postGlobalPositionType !== "default" &&
-				postGlobalPositionType !== "relative" &&
-				postGlobalHZOrientationType === "left" &&
-				postGlobalHZLeftOffset.Desktop !== undefined
-				? `left: ${postGlobalHZLeftOffset.Desktop}${postGlobalHZLeftOffsetUnits.Desktop};`
-				: ""
-			}
-            ${postGlobalPositionType !== "default" &&
-				postGlobalPositionType !== "relative" &&
-				postGlobalHZOrientationType === "right" &&
-				postGlobalHZRightOffset.Desktop !== undefined
-				? `right: ${postGlobalHZRightOffset.Desktop}${postGlobalHZRightOffsetUnits.Desktop};`
-				: ""
-			}
-            ${postGlobalPositionType !== "default" &&
-				postGlobalPositionType !== "relative" &&
-				postGlobalVROrientationType === "top" &&
-				postGlobalVRTopOffset.Desktop !== undefined
-				? `top: ${postGlobalVRTopOffset.Desktop}${postGlobalVRTopOffsetUnits.Desktop};`
-				: ""
-			}
-            ${postGlobalPositionType !== "default" &&
-				postGlobalPositionType !== "relative" &&
-				postGlobalVROrientationType === "bottom" &&
-				postGlobalVRBottomOffset.Desktop !== undefined
-				? `bottom: ${postGlobalVRBottomOffset.Desktop}${postGlobalVRBottomOffsetUnits.Desktop};`
-				: ""
-			}
+            ${
+							postGlobalPositionType !== "default" &&
+							postGlobalPositionType !== "relative"
+								? `width: 100%;`
+								: ""
+						}
+            ${
+							postGlobalPositionType !== "default"
+								? `position: ${postGlobalPositionType};`
+								: ""
+						}
+            ${
+							postGlobalPositionType !== "default" &&
+							postGlobalPositionType !== "relative" &&
+							postGlobalHZOrientationType === "left" &&
+							postGlobalHZLeftOffset.Desktop !== undefined
+								? `left: ${postGlobalHZLeftOffset.Desktop}${postGlobalHZLeftOffsetUnits.Desktop};`
+								: ""
+						}
+            ${
+							postGlobalPositionType !== "default" &&
+							postGlobalPositionType !== "relative" &&
+							postGlobalHZOrientationType === "right" &&
+							postGlobalHZRightOffset.Desktop !== undefined
+								? `right: ${postGlobalHZRightOffset.Desktop}${postGlobalHZRightOffsetUnits.Desktop};`
+								: ""
+						}
+            ${
+							postGlobalPositionType !== "default" &&
+							postGlobalPositionType !== "relative" &&
+							postGlobalVROrientationType === "top" &&
+							postGlobalVRTopOffset.Desktop !== undefined
+								? `top: ${postGlobalVRTopOffset.Desktop}${postGlobalVRTopOffsetUnits.Desktop};`
+								: ""
+						}
+            ${
+							postGlobalPositionType !== "default" &&
+							postGlobalPositionType !== "relative" &&
+							postGlobalVROrientationType === "bottom" &&
+							postGlobalVRBottomOffset.Desktop !== undefined
+								? `bottom: ${postGlobalVRBottomOffset.Desktop}${postGlobalVRBottomOffsetUnits.Desktop};`
+								: ""
+						}
 
 
 					${postGlobalZIndex.Desktop ? `z-index: ${postGlobalZIndex.Desktop};` : ""}
-                    ${postGlobalOverflow !== "default"
-				? `overflow: ${postGlobalOverflow};`
-				: ""
-			}
+                    ${
+											postGlobalOverflow !== "default"
+												? `overflow: ${postGlobalOverflow};`
+												: ""
+										}
 										transition: all 0.3s ease-in-out;				
 					}
 
 
 
 				  .${blockId}.fb-post-comment-form-block .fb-post-comment-form{
-                    ${postGlobalDesktopPaddingWidth &&
-				postGlobalPaddingDesktop.top
-				? `padding: ${postGlobalDesktopPaddingWidth};`
-				: ""
-			}
-                                ${postGlobalDesktopMarginWidth &&
-				postGlobalMarginDesktop.top
-				? `margin: ${postGlobalDesktopMarginWidth};`
-				: ""
-			}
+                    ${
+											postGlobalDesktopPaddingWidth &&
+											postGlobalPaddingDesktop.top
+												? `padding: ${postGlobalDesktopPaddingWidth};`
+												: ""
+										}
+                                ${
+																	postGlobalDesktopMarginWidth &&
+																	postGlobalMarginDesktop.top
+																		? `margin: ${postGlobalDesktopMarginWidth};`
+																		: ""
+																}
 
-                    ${postGlobalNormalBackgroundType === "gradient"
-				? `  
-                        ${postGlobalNormalCustomGradientSwitcher &&
-					postGlobalNormalCustomGradientInputValue
-					? `background: ${postGlobalNormalCustomGradientInputValue};`
-					: `background: ${postGlobalNormalGradientColor};`
-				}
+                    ${
+											postGlobalNormalBackgroundType === "gradient"
+												? `  
+                        ${
+													postGlobalNormalCustomGradientSwitcher &&
+													postGlobalNormalCustomGradientInputValue
+														? `background: ${postGlobalNormalCustomGradientInputValue};`
+														: `background: ${postGlobalNormalGradientColor};`
+												}
                     `
-				: `
-                        ${postGlobalNormalClassicColor
-					? `background: ${postGlobalNormalClassicColor};`
-					: ""
-				}
+												: `
+                        ${
+													postGlobalNormalClassicColor
+														? `background: ${postGlobalNormalClassicColor};`
+														: ""
+												}
                     `
-			}
+										}
 
                     ${postGlobalBorder ? `border: ${postGlobalBorder};` : ""} 
 
-                    ${postGlobalDesktopBorderWidth &&
-				postGlobalBorderDesktop.top
-				? `border-width: ${postGlobalDesktopBorderWidth};`
-				: ""
-			}
-                    ${postGlobalDesktopBorderRadiusWidth &&
-				postGlobalBorderRadiusDesktop.top
-				? `border-radius: ${postGlobalDesktopBorderRadiusWidth}!important;`
-				: ""
-			}
-                    ${postGlobalBorderColor
-				? `border-color: ${postGlobalBorderColor};`
-				: ""
-			}
-                    ${postGlobalBoxShadowCssValue
-				? `box-shadow: ${postGlobalBoxShadowCssValue} !important;`
-				: ""
-			}
-                                ${postGlobalNormalBackgroundType === "gradient"
-				? `  
-                        ${postGlobalNormalCustomGradientSwitcher &&
-					postGlobalNormalCustomGradientInputValue
-					? `background: ${postGlobalNormalCustomGradientInputValue};`
-					: `background: ${postGlobalNormalGradientColor};`
-				}
+                    ${
+											postGlobalDesktopBorderWidth &&
+											postGlobalBorderDesktop.top
+												? `border-width: ${postGlobalDesktopBorderWidth};`
+												: ""
+										}
+                    ${
+											postGlobalDesktopBorderRadiusWidth &&
+											postGlobalBorderRadiusDesktop.top
+												? `border-radius: ${postGlobalDesktopBorderRadiusWidth}!important;`
+												: ""
+										}
+                    ${
+											postGlobalBorderColor
+												? `border-color: ${postGlobalBorderColor};`
+												: ""
+										}
+                    ${
+											postGlobalBoxShadowCssValue
+												? `box-shadow: ${postGlobalBoxShadowCssValue} !important;`
+												: ""
+										}
+                                ${
+																	postGlobalNormalBackgroundType === "gradient"
+																		? `  
+                        ${
+													postGlobalNormalCustomGradientSwitcher &&
+													postGlobalNormalCustomGradientInputValue
+														? `background: ${postGlobalNormalCustomGradientInputValue};`
+														: `background: ${postGlobalNormalGradientColor};`
+												}
                     `
-				: `
-                        ${postGlobalNormalClassicColor
-					? `background: ${postGlobalNormalClassicColor};`
-					: ""
-				}
+																		: `
+                        ${
+													postGlobalNormalClassicColor
+														? `background: ${postGlobalNormalClassicColor};`
+														: ""
+												}
                     `
-			}
+																}
 
                 }
 
                 .${blockId}.fb-post-comment-form-block .fb-post-comment-form:hover {
-                     ${postGlobalHoverBackgroundType === "gradient"
-				? `  
-                        ${postGlobalHoverCustomGradientSwitcher &&
-					postGlobalHoverCustomGradientInputValue
-					? `background: ${postGlobalHoverCustomGradientInputValue};`
-					: `background: ${postGlobalHoverGradientColor};`
-				}
+                     ${
+												postGlobalHoverBackgroundType === "gradient"
+													? `  
+                        ${
+													postGlobalHoverCustomGradientSwitcher &&
+													postGlobalHoverCustomGradientInputValue
+														? `background: ${postGlobalHoverCustomGradientInputValue};`
+														: `background: ${postGlobalHoverGradientColor};`
+												}
                     `
-				: `
-                        ${postGlobalHoverClassicColor
-					? `background: ${postGlobalHoverClassicColor};`
-					: ""
-				}
+													: `
+                        ${
+													postGlobalHoverClassicColor
+														? `background: ${postGlobalHoverClassicColor};`
+														: ""
+												}
 
-                         ${postGlobalBorderHoverColor
-					? `border-color: ${postGlobalBorderHoverColor};`
-					: ""
-				}
-                        ${postGlobalBoxShadowHoverCssValue
-					? `box-shadow: ${postGlobalBoxShadowHoverCssValue}!important;`
-					: ""
-				}
+                         ${
+														postGlobalBorderHoverColor
+															? `border-color: ${postGlobalBorderHoverColor};`
+															: ""
+													}
+                        ${
+													postGlobalBoxShadowHoverCssValue
+														? `box-shadow: ${postGlobalBoxShadowHoverCssValue}!important;`
+														: ""
+												}
                     
                     `
-			}
+											}
                 }
 
 
@@ -1020,90 +1199,117 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 							.${blockId} .fb-comment-count-title  {
-							  ${commentCountTitleGlobalTypoSwitcher.fontSize === false &&
-				commentCountTitleFontSize.Tablet
-				? `font-size: ${commentCountTitleFontSize.Tablet}${commentCountTitleFontSizeUnits.Tablet};`
-				: ""
-			}
-                ${commentCountTitleGlobalTypoSwitcher.letterSpacing === false &&
-				commentCountTitleLetterSpacing.Tablet
-				? `letter-spacing: ${commentCountTitleLetterSpacing.Tablet}${commentCountTitleLetterSpacingUnits.Tablet};`
-				: ""
-			}
-                ${commentCountTitleGlobalTypoSwitcher.lineHeight === false &&
-				commentCountTitleLineHeight.Tablet
-				? `line-height: ${commentCountTitleLineHeight.Tablet}${commentCountTitleLineHeightUnits.Tablet};`
-				: ""
-			}
+							  ${
+									commentCountTitleGlobalTypoSwitcher.fontSize === false &&
+									commentCountTitleFontSize.Tablet
+										? `font-size: ${commentCountTitleFontSize.Tablet}${commentCountTitleFontSizeUnits.Tablet};`
+										: ""
+								}
+                ${
+									commentCountTitleGlobalTypoSwitcher.letterSpacing === false &&
+									commentCountTitleLetterSpacing.Tablet
+										? `letter-spacing: ${commentCountTitleLetterSpacing.Tablet}${commentCountTitleLetterSpacingUnits.Tablet};`
+										: ""
+								}
+                ${
+									commentCountTitleGlobalTypoSwitcher.lineHeight === false &&
+									commentCountTitleLineHeight.Tablet
+										? `line-height: ${commentCountTitleLineHeight.Tablet}${commentCountTitleLineHeightUnits.Tablet};`
+										: ""
+								}
 
 									${
-				commentCountTitleSpacing.Tablet
-					? `margin-bottom: ${commentCountTitleSpacing.Tablet}${commentCountTitleSpacingUnits.Tablet};`
-					: ""
-			}
+										commentCountTitleSpacing.Tablet
+											? `margin-bottom: ${commentCountTitleSpacing.Tablet}${commentCountTitleSpacingUnits.Tablet};`
+											: ""
+									}
 
 						}
+
+						.${blockId} .fb-comments-list .fb-comment{
+								${postCommentPaddingTabletWidth && postCommentPaddingTabletWidth.top ?
+									`padding : ${postCommentPaddingTabletWidth};`
+									: ""
+								}
+						}
+
+						.${blockId} .fb-comments-list .fb-comment.fb-comment-child{
+								${childCommentPaddingTabletWidth && 
+									postCommentPaddingTabletWidth.top ?
+									`padding : ${childCommentPaddingTabletWidth};`
+									: ""
+								}
+						}	
 
 
 							/* Advanced Control Global Style - Tablet */
                 .${blockId}.fb-post-comment-form-block {
-                    ${postGlobalPositionType !== "default" &&
-				postGlobalPositionType !== "relative" &&
-				postGlobalHZOrientationType === "left" &&
-				postGlobalHZLeftOffset.Tablet !== undefined
-				? `left: ${postGlobalHZLeftOffset.Tablet}${postGlobalHZLeftOffsetUnits.Tablet};`
-				: ""
-			}
-                    ${postGlobalPositionType !== "default" &&
-				postGlobalPositionType !== "relative" &&
-				postGlobalHZOrientationType === "right" &&
-				postGlobalHZRightOffset.Tablet !== undefined
-				? `right: ${postGlobalHZRightOffset.Tablet}${postGlobalHZRightOffsetUnits.Tablet};`
-				: ""
-			}
-                    ${postGlobalPositionType !== "default" &&
-				postGlobalPositionType !== "relative" &&
-				postGlobalVROrientationType === "top" &&
-				postGlobalVRTopOffset.Tablet !== undefined
-				? `top: ${postGlobalVRTopOffset.Tablet}${postGlobalVRTopOffsetUnits.Tablet};`
-				: ""
-			}
-                    ${postGlobalPositionType !== "default" &&
-				postGlobalPositionType !== "relative" &&
-				postGlobalVROrientationType === "bottom" &&
-				postGlobalVRBottomOffset.Tablet !== undefined
-				? `bottom: ${postGlobalVRBottomOffset.Tablet}${postGlobalVRBottomOffsetUnits.Tablet};`
-				: ""
-			}
-                    ${postGlobalZIndex.Tablet
-				? `z-index: ${postGlobalZIndex.Tablet}`
-				: ""
-			}
+                    ${
+											postGlobalPositionType !== "default" &&
+											postGlobalPositionType !== "relative" &&
+											postGlobalHZOrientationType === "left" &&
+											postGlobalHZLeftOffset.Tablet !== undefined
+												? `left: ${postGlobalHZLeftOffset.Tablet}${postGlobalHZLeftOffsetUnits.Tablet};`
+												: ""
+										}
+                    ${
+											postGlobalPositionType !== "default" &&
+											postGlobalPositionType !== "relative" &&
+											postGlobalHZOrientationType === "right" &&
+											postGlobalHZRightOffset.Tablet !== undefined
+												? `right: ${postGlobalHZRightOffset.Tablet}${postGlobalHZRightOffsetUnits.Tablet};`
+												: ""
+										}
+                    ${
+											postGlobalPositionType !== "default" &&
+											postGlobalPositionType !== "relative" &&
+											postGlobalVROrientationType === "top" &&
+											postGlobalVRTopOffset.Tablet !== undefined
+												? `top: ${postGlobalVRTopOffset.Tablet}${postGlobalVRTopOffsetUnits.Tablet};`
+												: ""
+										}
+                    ${
+											postGlobalPositionType !== "default" &&
+											postGlobalPositionType !== "relative" &&
+											postGlobalVROrientationType === "bottom" &&
+											postGlobalVRBottomOffset.Tablet !== undefined
+												? `bottom: ${postGlobalVRBottomOffset.Tablet}${postGlobalVRBottomOffsetUnits.Tablet};`
+												: ""
+										}
+                    ${
+											postGlobalZIndex.Tablet
+												? `z-index: ${postGlobalZIndex.Tablet}`
+												: ""
+										}
 
                 }
 
                 .${blockId}.fb-post-comment-form-block .fb-post-comment-form{
-                    ${postGlobalTabletPaddingWidth &&
-				postGlobalPaddingTablet.top
-				? `padding: ${postGlobalTabletPaddingWidth};`
-				: ""
-			}
-                                        ${postGlobalTabletMarginWidth &&
-				postGlobalMarginTablet.top
-				? `margin: ${postGlobalTabletMarginWidth};`
-				: ""
-			}
+                    ${
+											postGlobalTabletPaddingWidth &&
+											postGlobalPaddingTablet.top
+												? `padding: ${postGlobalTabletPaddingWidth};`
+												: ""
+										}
+                                        ${
+																					postGlobalTabletMarginWidth &&
+																					postGlobalMarginTablet.top
+																						? `margin: ${postGlobalTabletMarginWidth};`
+																						: ""
+																				}
 
                     
-                    ${postGlobalTabletBorderWidth && postGlobalBorderTablet.top
-				? `border-width: ${postGlobalTabletBorderWidth};`
-				: ""
-			}
-                        ${postGlobalTabletBorderRadiusWidth &&
-				postGlobalBorderRadiusTablet.top
-				? `border-radius: ${postGlobalTabletBorderRadiusWidth}!important;`
-				: ""
-			}
+                    ${
+											postGlobalTabletBorderWidth && postGlobalBorderTablet.top
+												? `border-width: ${postGlobalTabletBorderWidth};`
+												: ""
+										}
+                        ${
+													postGlobalTabletBorderRadiusWidth &&
+													postGlobalBorderRadiusTablet.top
+														? `border-radius: ${postGlobalTabletBorderRadiusWidth}!important;`
+														: ""
+												}
                 }
 
 
@@ -1114,65 +1320,90 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				@media screen and (max-width: 767px) {
 
 					.${blockId} .fb-comment-count-title  {
-					  ${commentCountTitleGlobalTypoSwitcher.fontSize === false &&
-				commentCountTitleFontSize.Mobile
-				? `font-size: ${commentCountTitleFontSize.Mobile}${commentCountTitleFontSizeUnits.Mobile};`
-				: ""
-			}
-						${commentCountTitleGlobalTypoSwitcher.letterSpacing === false &&
-				commentCountTitleLetterSpacing.Mobile
-				? `letter-spacing: ${commentCountTitleLetterSpacing.Mobile}${commentCountTitleLetterSpacingUnits.Mobile};`
-				: ""
-			}
-						${commentCountTitleGlobalTypoSwitcher.lineHeight === false &&
-				commentCountTitleLineHeight.Mobile
-				? `line-height: ${commentCountTitleLineHeight.Mobile}${commentCountTitleLineHeightUnits.Mobile};`
-				: ""
-			}
+					  ${
+							commentCountTitleGlobalTypoSwitcher.fontSize === false &&
+							commentCountTitleFontSize.Mobile
+								? `font-size: ${commentCountTitleFontSize.Mobile}${commentCountTitleFontSizeUnits.Mobile};`
+								: ""
+						}
+						${
+							commentCountTitleGlobalTypoSwitcher.letterSpacing === false &&
+							commentCountTitleLetterSpacing.Mobile
+								? `letter-spacing: ${commentCountTitleLetterSpacing.Mobile}${commentCountTitleLetterSpacingUnits.Mobile};`
+								: ""
+						}
+						${
+							commentCountTitleGlobalTypoSwitcher.lineHeight === false &&
+							commentCountTitleLineHeight.Mobile
+								? `line-height: ${commentCountTitleLineHeight.Mobile}${commentCountTitleLineHeightUnits.Mobile};`
+								: ""
+						}
 
 									${
-				commentCountTitleSpacing.Mobile
-					? `margin-bottom: ${commentCountTitleSpacing.Mobile}${commentCountTitleSpacingUnits.Mobile};`
-					: ""
-			}
+										commentCountTitleSpacing.Mobile
+											? `margin-bottom: ${commentCountTitleSpacing.Mobile}${commentCountTitleSpacingUnits.Mobile};`
+											: ""
+									}
+
+					}
+
+					.${blockId} .fb-comments-list .fb-comment{
+							${postCommentPaddingMobileWidth && postCommentPaddingMobile.top 
+								? `padding: ${postCommentMobileWidth};`
+								: ""
+							}
+					}
+
+					.${blockId} .fb-comments-list .fb-comment.fb-comment-child{
+							
+							${childCommentPaddingMobileWidth && 
+								postCommentPaddingMobile.top 
+								? `padding: ${childCommentPaddingMobileWidth}`	
+								: ""
+							}
 
 					}
 												
 							 /* Advance Control Global Style - Mobile */
                 .${blockId}.fb-post-comment-form-block {
-                        ${postGlobalPositionType !== "default" &&
-				postGlobalPositionType !== "relative" &&
-				postGlobalHZOrientationType === "left" &&
-				postGlobalHZLeftOffset.Mobile !== undefined
-				? `left: ${postGlobalHZLeftOffset.Mobile}${postGlobalHZLeftOffsetUnits.Mobile};`
-				: ""
-			}
-                        ${postGlobalPositionType !== "default" &&
-				postGlobalPositionType !== "relative" &&
-				postGlobalHZOrientationType === "right" &&
-				postGlobalHZRightOffset.Mobile !== undefined
-				? `right: ${postGlobalHZRightOffset.Mobile}${postGlobalHZRightOffsetUnits.Mobile};`
-				: ""
-			}
-                        ${postGlobalPositionType !== "default" &&
-				postGlobalPositionType !== "relative" &&
-				postGlobalVROrientationType === "top" &&
-				postGlobalVRTopOffset.Mobile !== undefined
-				? `top: ${postGlobalVRTopOffset.Mobile}${postGlobalVRTopOffsetUnits.Mobile};`
-				: ""
-			}
-                        ${postGlobalPositionType !== "default" &&
-				postGlobalPositionType !== "relative" &&
-				postGlobalVROrientationType === "bottom" &&
-				postGlobalVRBottomOffset.Mobile !== undefined
-				? `bottom: ${postGlobalVRBottomOffset.Mobile}${postGlobalVRBottomOffsetUnits.Mobile};`
-				: ""
-			} 
+                        ${
+													postGlobalPositionType !== "default" &&
+													postGlobalPositionType !== "relative" &&
+													postGlobalHZOrientationType === "left" &&
+													postGlobalHZLeftOffset.Mobile !== undefined
+														? `left: ${postGlobalHZLeftOffset.Mobile}${postGlobalHZLeftOffsetUnits.Mobile};`
+														: ""
+												}
+                        ${
+													postGlobalPositionType !== "default" &&
+													postGlobalPositionType !== "relative" &&
+													postGlobalHZOrientationType === "right" &&
+													postGlobalHZRightOffset.Mobile !== undefined
+														? `right: ${postGlobalHZRightOffset.Mobile}${postGlobalHZRightOffsetUnits.Mobile};`
+														: ""
+												}
+                        ${
+													postGlobalPositionType !== "default" &&
+													postGlobalPositionType !== "relative" &&
+													postGlobalVROrientationType === "top" &&
+													postGlobalVRTopOffset.Mobile !== undefined
+														? `top: ${postGlobalVRTopOffset.Mobile}${postGlobalVRTopOffsetUnits.Mobile};`
+														: ""
+												}
+                        ${
+													postGlobalPositionType !== "default" &&
+													postGlobalPositionType !== "relative" &&
+													postGlobalVROrientationType === "bottom" &&
+													postGlobalVRBottomOffset.Mobile !== undefined
+														? `bottom: ${postGlobalVRBottomOffset.Mobile}${postGlobalVRBottomOffsetUnits.Mobile};`
+														: ""
+												} 
 
-                        ${postGlobalZIndex.Mobile
-				? `z-index: ${postGlobalZIndex.Mobile}`
-				: ""
-			}
+                        ${
+													postGlobalZIndex.Mobile
+														? `z-index: ${postGlobalZIndex.Mobile}`
+														: ""
+												}
 
                      
                 }
@@ -1180,27 +1411,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                 .${blockId}.fb-post-comment-form-block .fb-post-comment-form{
                 
-                       ${postGlobalMobilePaddingWidth &&
-				postGlobalPaddingMobile.top
-				? `padding: ${postGlobalMobilePaddingWidth}`
-				: ""
-			}
-                                        ${postGlobalMobileMarginWidth &&
-				postGlobalMarginMobile.top
-				? `margin: ${postGlobalMobileMarginWidth}`
-				: ""
-			}
+                       ${
+													postGlobalMobilePaddingWidth &&
+													postGlobalPaddingMobile.top
+														? `padding: ${postGlobalMobilePaddingWidth}`
+														: ""
+												}
+                                        ${
+																					postGlobalMobileMarginWidth &&
+																					postGlobalMarginMobile.top
+																						? `margin: ${postGlobalMobileMarginWidth}`
+																						: ""
+																				}
 
-                         ${postGlobalMobileBorderWidth &&
-				postGlobalBorderMobile.top
-				? `border-width: ${postGlobalMobileBorderWidth};`
-				: ""
-			}
-                        ${postGlobalMobileBorderRadiusWidth &&
-				postGlobalBorderRadiusMobile.top
-				? `border-radius: ${postGlobalMobileBorderRadiusWidth}!important;`
-				: ""
-			}
+                         ${
+														postGlobalMobileBorderWidth &&
+														postGlobalBorderMobile.top
+															? `border-width: ${postGlobalMobileBorderWidth};`
+															: ""
+													}
+                        ${
+													postGlobalMobileBorderRadiusWidth &&
+													postGlobalBorderRadiusMobile.top
+														? `border-radius: ${postGlobalMobileBorderRadiusWidth}!important;`
+														: ""
+												}
 
                 }
 
@@ -1310,196 +1545,235 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	);
 
 	const styleControls = (
-		<PanelBody title={__("Heading", "frontis-blocks")} initialOpen={true}>
-			<FB_TypographyControl
-				globalTypoControlActive={true}
-				globalTypoSwitcher={commentCountTitleGlobalTypoSwitcher}
-				storeGlobalTypographyData={(value) =>
-					setAttributes({ commentCountTitleGlobalTypographyData: value })
-				}
-				globalTypoType={commentCountTitleGlobalTypoType}
-				onChangeGlobalTypoType={(value) => {
-					setAttributes({
-						commentCountTitleGlobalTypoType: value,
-						commentCountTitleGlobalTypoSwitcher:
-							value === "default"
-								? {
-									...commentCountTitleGlobalTypoSwitcher,
-									fontFamily: false,
-									fontSize: false,
-									fontWeight: false,
-									fontStyle: false,
-									textTransform: false,
-									textDecoration: false,
-									letterSpacing: false,
-									lineHeight: false,
-								}
-								: {
-									...commentCountTitleGlobalTypoSwitcher,
-									fontFamily: true,
-									fontSize: true,
-									fontWeight: true,
-									fontStyle: true,
-									textTransform: true,
-									textDecoration: true,
-									letterSpacing: true,
-									lineHeight: true,
-								},
-					});
-				}}
-				globalTypoOption={commentCountTitleGlobalTypoOption}
-				onChangeGlobalTypoOption={(value) =>
-					setAttributes({ commentCountTitleGlobalTypoOption: value })
-				}
-				fontFamily={commentCountTitleFontFamily}
-				onChangeFontFamily={(value) =>
-					setAttributes({
-						commentCountTitleFontFamily: value,
-						commentCountTitleGlobalTypoSwitcher: {
-							...commentCountTitleGlobalTypoSwitcher,
-							fontFamily: value && false,
-						},
-					})
-				}
-				fontSize={commentCountTitleFontSize}
-				onChangeFontSize={(value) =>
-					setAttributes({
-						commentCountTitleFontSize: value,
-						commentCountTitleGlobalTypoSwitcher: {
-							...commentCountTitleGlobalTypoSwitcher,
-							fontSize: value && false,
-						},
-					})
-				}
-				fontSizeUnits={commentCountTitleFontSizeUnits}
-				onChangeFontSizeUnit={(value) =>
-					setAttributes({ commentCountTitleFontSizeUnits: value })
-				}
-				fontWeight={commentCountTitleFontWeight}
-				onChangeFontWeight={(value) =>
-					setAttributes({
-						commentCountTitleFontWeight: value,
-						commentCountTitleGlobalTypoSwitcher: {
-							...commentCountTitleGlobalTypoSwitcher,
-							fontWeight: value && false,
-						},
-					})
-				}
-				fontStyle={commentCountTitleFontStyle}
-				onChangeFontStyle={(value) =>
-					setAttributes({
-						commentCountTitleFontStyle: value,
-						commentCountTitleGlobalTypoSwitcher: {
-							...commentCountTitleGlobalTypoSwitcher,
-							fontStyle: value && false,
-						},
-					})
-				}
-				textTransform={commentCountTitleTextTransform}
-				onChangeTextTransform={(value) =>
-					setAttributes({
-						commentCountTitleTextTransform: value,
-						commentCountTitleGlobalTypoSwitcher: {
-							...commentCountTitleGlobalTypoSwitcher,
-							textTransform: value && false,
-						},
-					})
-				}
-				textDecoration={commentCountTitleTextDecoration}
-				onChangeTextDecoration={(value) =>
-					setAttributes({
-						commentCountTitleTextDecoration: value,
-						commentCountTitleGlobalTypoSwitcher: {
-							...commentCountTitleGlobalTypoSwitcher,
-							textDecoration: value && false,
-						},
-					})
-				}
-				letterSpacing={commentCountTitleLetterSpacing}
-				onChangeLetterSpacing={(value) =>
-					setAttributes({
-						commentCountTitleLetterSpacing: value,
-						commentCountTitleGlobalTypoSwitcher: {
-							...commentCountTitleGlobalTypoSwitcher,
-							letterSpacing: value && false,
-						},
-					})
-				}
-				letterSpacingUnits={commentCountTitleLetterSpacingUnits}
-				onChangeLetterSpacingUnit={(value) =>
-					setAttributes({ commentCountTitleLetterSpacingUnits: value })
-				}
-				lineHeight={commentCountTitleLineHeight}
-				onChangeLineHeight={(value) =>
-					setAttributes({
-						commentCountTitleLineHeight: value,
-						commentCountTitleGlobalTypoSwitcher: {
-							...commentCountTitleGlobalTypoSwitcher,
-							lineHeight: value && false,
-						},
-					})
-				}
-				lineHeightUnits={commentCountTitleLineHeightUnits}
-				onChangeLineHeightUnit={(value) =>
-					setAttributes({ commentCountTitleLineHeightUnits: value })
-				}
-				deviceType={deviceType}
-				setAttributes={setAttributes}
-			/>
+		<>
 
-			<FB_SwitcherControl
-				label={__("Color", "frontis-blocks")}
-				globalSwitcher={commentCountTitleColorSwitcher}
-				setGlobalSwitcher={(value) =>
-					setAttributes({ commentCountTitleColorSwitcher: value })
-				}
-			/>
+						<PanelBody
+				title={__("Comment Item", "frontis-blocks")}
+				initialOpen={true}
+			>
+				<BaseControl
+					label={__("Spacing", "frontis-blocks")}
+					className="fb-setting-form-texts"
+				>
 
-			{commentCountTitleColorSwitcher === "normal" && (
-				<FB_ColorControl
-					label={__("Normal Color", "frontis-blocks")}
-					globalColor={commentCountTitleColor}
-					setGlobalColor={(value) =>
+					<p style={{ fontSize: "12px", color: "#888" }}>
+						{__("Precisely manage the spatial rhythm of your comment layout — control padding, gaps, and nested indentation with intelligent scaling that adapts automatically to threaded replies.", "frontis-blocks")}
+					</p>
+
+					<div className="fb-control-divider"></div>
+
+					<FB_Spacing
+						label={__("Padding", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handlePostCommentPaddingUnitsHandler}
+						spacingUnits={postCommentPaddingUnits}
+						spacingDesktop={postCommentPaddingDesktop}
+						spacingTablet={postCommentPaddingTablet}
+						spacingMobile={postCommentPaddingMobile}
+						handleSpacingUnitHandler={handlePostCommentPaddingUnitChange}
+						spacingCombineBtn={postCommentPaddingLink}
+						spacingCombineBtnHandler={handlePostCommentPaddingCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+
+
+				</BaseControl>
+			</PanelBody>
+
+			<PanelBody
+				title={__("Comments Title", "frontis-blocks")}
+				initialOpen={false}
+			>
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={commentCountTitleGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) =>
+						setAttributes({ commentCountTitleGlobalTypographyData: value })
+					}
+					globalTypoType={commentCountTitleGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
 						setAttributes({
-							commentCountTitleColor: value === undefined ? "" : value,
+							commentCountTitleGlobalTypoType: value,
+							commentCountTitleGlobalTypoSwitcher:
+								value === "default"
+									? {
+											...commentCountTitleGlobalTypoSwitcher,
+											fontFamily: false,
+											fontSize: false,
+											fontWeight: false,
+											fontStyle: false,
+											textTransform: false,
+											textDecoration: false,
+											letterSpacing: false,
+											lineHeight: false,
+									  }
+									: {
+											...commentCountTitleGlobalTypoSwitcher,
+											fontFamily: true,
+											fontSize: true,
+											fontWeight: true,
+											fontStyle: true,
+											textTransform: true,
+											textDecoration: true,
+											letterSpacing: true,
+											lineHeight: true,
+									  },
+						});
+					}}
+					globalTypoOption={commentCountTitleGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({ commentCountTitleGlobalTypoOption: value })
+					}
+					fontFamily={commentCountTitleFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({
+							commentCountTitleFontFamily: value,
+							commentCountTitleGlobalTypoSwitcher: {
+								...commentCountTitleGlobalTypoSwitcher,
+								fontFamily: value && false,
+							},
 						})
 					}
-				/>
-			)}
-
-			{commentCountTitleColorSwitcher === "hover" && (
-				<FB_ColorControl
-					label={__("Hover Color", "frontis-blocks")}
-					globalColor={commentCountTitleHoverColor}
-					setGlobalColor={(value) =>
+					fontSize={commentCountTitleFontSize}
+					onChangeFontSize={(value) =>
 						setAttributes({
-							commentCountTitleHoverColor: value === undefined ? "" : value,
+							commentCountTitleFontSize: value,
+							commentCountTitleGlobalTypoSwitcher: {
+								...commentCountTitleGlobalTypoSwitcher,
+								fontSize: value && false,
+							},
 						})
 					}
+					fontSizeUnits={commentCountTitleFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
+						setAttributes({ commentCountTitleFontSizeUnits: value })
+					}
+					fontWeight={commentCountTitleFontWeight}
+					onChangeFontWeight={(value) =>
+						setAttributes({
+							commentCountTitleFontWeight: value,
+							commentCountTitleGlobalTypoSwitcher: {
+								...commentCountTitleGlobalTypoSwitcher,
+								fontWeight: value && false,
+							},
+						})
+					}
+					fontStyle={commentCountTitleFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({
+							commentCountTitleFontStyle: value,
+							commentCountTitleGlobalTypoSwitcher: {
+								...commentCountTitleGlobalTypoSwitcher,
+								fontStyle: value && false,
+							},
+						})
+					}
+					textTransform={commentCountTitleTextTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({
+							commentCountTitleTextTransform: value,
+							commentCountTitleGlobalTypoSwitcher: {
+								...commentCountTitleGlobalTypoSwitcher,
+								textTransform: value && false,
+							},
+						})
+					}
+					textDecoration={commentCountTitleTextDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({
+							commentCountTitleTextDecoration: value,
+							commentCountTitleGlobalTypoSwitcher: {
+								...commentCountTitleGlobalTypoSwitcher,
+								textDecoration: value && false,
+							},
+						})
+					}
+					letterSpacing={commentCountTitleLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({
+							commentCountTitleLetterSpacing: value,
+							commentCountTitleGlobalTypoSwitcher: {
+								...commentCountTitleGlobalTypoSwitcher,
+								letterSpacing: value && false,
+							},
+						})
+					}
+					letterSpacingUnits={commentCountTitleLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({ commentCountTitleLetterSpacingUnits: value })
+					}
+					lineHeight={commentCountTitleLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({
+							commentCountTitleLineHeight: value,
+							commentCountTitleGlobalTypoSwitcher: {
+								...commentCountTitleGlobalTypoSwitcher,
+								lineHeight: value && false,
+							},
+						})
+					}
+					lineHeightUnits={commentCountTitleLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({ commentCountTitleLineHeightUnits: value })
+					}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
 				/>
-			)}
 
-			
-			<div className="fb-control-divider"></div>
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={commentCountTitleColorSwitcher}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ commentCountTitleColorSwitcher: value })
+					}
+				/>
 
-			<FB_Range
-				// min={}
-				max={100}
-				label={__("Spacing", "frontis-blocks")}
-				rangeValue={commentCountTitleSpacing}
-				onChangeHandler={(value) =>
-					setAttributes({ commentCountTitleSpacing: value })
-				}
-				rangeUnitHandler={(value) =>
-					setAttributes({ commentCountTitleSpacingUnits: value })
-				}
-				deviceType={deviceType}
-				units={commentCountTitleSpacingUnits}
-				setAttributes={setAttributes}
-				rangeStep={1}
-				resetFallbackValue={""}
-			/>
-		</PanelBody>
+				{commentCountTitleColorSwitcher === "normal" && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={commentCountTitleColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								commentCountTitleColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+
+				{commentCountTitleColorSwitcher === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={commentCountTitleHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								commentCountTitleHoverColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+
+				<div className="fb-control-divider"></div>
+
+				<FB_Range
+					// min={}
+					max={100}
+					label={__("Spacing", "frontis-blocks")}
+					rangeValue={commentCountTitleSpacing}
+					onChangeHandler={(value) =>
+						setAttributes({ commentCountTitleSpacing: value })
+					}
+					rangeUnitHandler={(value) =>
+						setAttributes({ commentCountTitleSpacingUnits: value })
+					}
+					deviceType={deviceType}
+					units={commentCountTitleSpacingUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+			</PanelBody>
+		</>
 	);
 
 	const advancedControls = (
