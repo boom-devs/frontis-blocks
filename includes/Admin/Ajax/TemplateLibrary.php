@@ -38,7 +38,9 @@ class TemplateLibrary extends AjaxBase {
             'active_theme',
             'update_database',
             'get_templates',
-            'get_template_parts'
+            'get_template_parts',
+            'push_template',
+            'get_all_template_parts'
 		];
 
 		$this->init_ajax_events($ajax_events);
@@ -305,79 +307,214 @@ class TemplateLibrary extends AjaxBase {
     }
     
 
+    // public function full_site_import() {
+    //     $this->check_permission();
+    
+    //     $title            = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
+    //     $content          = isset($_POST['content']) ? $_POST['content'] : '';
+    //     $site_url         = isset($_POST['site_url']) ? sanitize_text_field($_POST['site_url']) : '';
+    //     $uploads_updated  = isset($_POST['uploads_updated']) ? sanitize_text_field($_POST['uploads_updated']) : false;
+    
+    //     if (empty($title)) {
+    //         wp_send_json_error(['message' => 'Title is required']);
+    //     }
+    
+    //     if ($uploads_updated) {
+    //         $my_domain = trailingslashit($site_url);
+    //         preg_match_all('/https?:\/\/[^"\'\s>]+?\.(jpg|jpeg|png|gif|webp|svg)/i', $content, $matches);
+    
+    //         if (!empty($matches[0])) {
+    //             $image_urls = array_unique($matches[0]);
+    
+    //             foreach ($image_urls as $url) {
+    
+    //                 if (preg_match('/\/2025\//', $url)) {
+    //                     $new_url = preg_replace(
+    //                         '/^https?:\/\/[^\/]+\/.*?(?=2025\/)/',
+    //                         $my_domain . 'wp-content/uploads/',
+    //                         $url
+    //                     );
+    //                 } else {
+    //                     $new_url = preg_replace(
+    //                         '/^https?:\/\/[^\/]+\//',
+    //                         $my_domain,
+    //                         $url
+    //                     );
+    //                 }
+    
+    //                 $content = str_replace($url, $new_url, $content);
+    //             }
+    //         }
+    //     }
+    
+    //     // Ensure unique title
+    //     $original_title = $title;
+    //     $suffix = 1;
+    //     while (post_exists($title)) {
+    //         $title = $original_title . ' ' . $suffix;
+    //         $suffix++;
+    //     }
+    
+    //     $page_id = wp_insert_post([
+    //         'post_title'   => $title,
+    //         'post_content' => $content,
+    //         'post_status'  => 'publish',
+    //         'post_type'    => 'page',
+    //     ]);
+    
+    //     if ($page_id) {
+    
+    //         // Make front page if imported title contains "home"
+    //         if (stripos($title, 'home') !== false) {
+    //             update_option('page_on_front', $page_id);
+    //             update_option('show_on_front', 'page');
+    //         }
+    
+    //         Helper::insert_job($page_id, $title . $page_id);
+    
+    //         wp_send_json_success([
+    //             'message' => 'Page created successfully',
+    //             'page_id' => $page_id,
+    //             'title'   => $title
+    //         ]);
+    //     } else {
+    //         wp_send_json_error(['message' => 'Failed to create page']);
+    //     }
+    // }
+
     public function full_site_import() {
         $this->check_permission();
     
-        $title            = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
+        // Input data
+        $title           = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
         $content          = isset($_POST['content']) ? $_POST['content'] : '';
-        $site_url         = isset($_POST['site_url']) ? sanitize_text_field($_POST['site_url']) : '';
-        $uploads_updated  = isset($_POST['uploads_updated']) ? sanitize_text_field($_POST['uploads_updated']) : false;
+        $slug            = isset($_POST['slug']) ? sanitize_title($_POST['slug']) : '';
+        $template        = isset($_POST['template']) ? sanitize_text_field($_POST['template']) : '';
+        $badge           = isset($_POST['badge']) ? sanitize_text_field($_POST['badge']) : '';
+        $site_url        = isset($_POST['site_url']) ? esc_url_raw($_POST['site_url']) : '';
+        $uploads_updated = isset($_POST['uploads_updated']) ? filter_var($_POST['uploads_updated'], FILTER_VALIDATE_BOOLEAN) : false;
     
         if (empty($title)) {
             wp_send_json_error(['message' => 'Title is required']);
         }
     
-        if ($uploads_updated) {
-            $my_domain = trailingslashit($site_url);
-            preg_match_all('/https?:\/\/[^"\'\s>]+?\.(jpg|jpeg|png|gif|webp|svg)/i', $content, $matches);
-    
-            if (!empty($matches[0])) {
-                $image_urls = array_unique($matches[0]);
-    
-                foreach ($image_urls as $url) {
-    
-                    if (preg_match('/\/2025\//', $url)) {
-                        $new_url = preg_replace(
-                            '/^https?:\/\/[^\/]+\/.*?(?=2025\/)/',
-                            $my_domain . 'wp-content/uploads/',
-                            $url
-                        );
-                    } else {
-                        $new_url = preg_replace(
-                            '/^https?:\/\/[^\/]+\//',
-                            $my_domain,
-                            $url
-                        );
-                    }
-    
-                    $content = str_replace($url, $new_url, $content);
-                }
-            }
+        // Step 1: Update image URLs (if uploads_updated)
+        if ($uploads_updated && !empty($site_url)) {
+            $content = $this->replace_image_urls($content, $my_domain = trailingslashit($site_url));
         }
     
-        // Ensure unique title
-        $original_title = $title;
+        // Step 2: Generate unique slug if not provided or duplicate
+        if (empty($slug)) {
+            $slug = sanitize_title($title);
+        }
+    
+        $original_slug = $slug;
         $suffix = 1;
-        while (post_exists($title)) {
-            $title = $original_title . ' ' . $suffix;
+        while (get_page_by_path($slug)) {
+            $slug = $original_slug . '-' . $suffix;
             $suffix++;
         }
     
+        // Step 3: Check if page with same title exists → unique title
+        $original_title = $title;
+        $title_suffix = 1;
+        while ($this->post_exists_by_title($title, 'page')) {
+            $title = $original_title . ' ' . $title_suffix;
+            $title_suffix++;
+        }
+    
+        // Step 4: Create page
         $page_id = wp_insert_post([
             'post_title'   => $title,
+            'post_name'    => $slug,
             'post_content' => $content,
             'post_status'  => 'publish',
             'post_type'    => 'page',
-        ]);
+        ], true);
     
-        if ($page_id) {
-    
-            // Make front page if imported title contains "home"
-            if (stripos($title, 'home') !== false) {
-                update_option('page_on_front', $page_id);
-                update_option('show_on_front', 'page');
-            }
-    
-            Helper::insert_job($page_id, $title . $page_id);
-    
-            wp_send_json_success([
-                'message' => 'Page created successfully',
-                'page_id' => $page_id,
-                'title'   => $title
-            ]);
-        } else {
-            wp_send_json_error(['message' => 'Failed to create page']);
+        if (is_wp_error($page_id)) {
+            wp_send_json_error(['message' => 'Failed to create page: ' . $page_id->get_error_message()]);
         }
+    
+        // Step 5: Assign template
+        if (!empty($template)) {
+            update_post_meta($page_id, '_wp_page_template', $template);
+        }
+    
+        // Step 6: Handle badge
+        if ($badge === 'front-page' || stripos($title, 'home') !== false || $slug === 'home') {
+            update_option('page_on_front', $page_id);
+            update_option('show_on_front', 'page');
+        }
+        // Future: Add logic for 'blog', 'privacy', etc.
+        // Example: if ($badge === 'blog') { update_option('page_for_posts', $page_id); }
+    
+        // Step 7: Save badge as meta (optional, for future use)
+        if (!empty($badge)) {
+            update_post_meta($page_id, '_fb_page_badge', $badge);
+        }
+    
+        // Step 8: Insert job (your helper)
+        if (class_exists('FrontisBlocks\Utils\Helper')) {
+            Helper::insert_job($page_id, $title . '-' . $page_id);
+        }
+    
+        wp_send_json_success([
+            'message'     => 'Page created successfully',
+            'page_id'     => $page_id,
+            'title'       => $title,
+            'slug'        => $slug,
+            'template'    => $template,
+            'badge'       => $badge
+        ]);
+    }
+
+    /**
+     * Replace image URLs from external to local uploads
+     */
+    private function replace_image_urls($content, $my_domain) {
+        preg_match_all('/https?:\/\/[^"\'\s>]+?\.(jpg|jpeg|png|gif|webp|svg|avif)/i', $content, $matches);
+
+        if (empty($matches[0])) return $content;
+
+        $image_urls = array_unique($matches[0]);
+
+        foreach ($image_urls as $url) {
+            $parsed = parse_url($url);
+            $path = isset($parsed['path']) ? $parsed['path'] : '';
+
+            if (preg_match('/\/2025\//', $path)) {
+                $new_url = preg_replace(
+                    '/^https?:\/\/[^\/]+\/.*?(?=2025\/)/',
+                    $my_domain . 'wp-content/uploads/',
+                    $url
+                );
+            } elseif (preg_match('/wp-content\/uploads/', $path)) {
+                $new_url = preg_replace(
+                    '/^https?:\/\/[^\/]+\//',
+                    $my_domain,
+                    $url
+                );
+            } else {
+                $new_url = $my_domain . ltrim($path, '/');
+            }
+
+            $content = str_replace($url, $new_url, $content);
+        }
+
+        return $content;
+    }
+
+    /**
+     * Check if post exists by title and post type
+     */
+    private function post_exists_by_title($title, $post_type = 'page') {
+        global $wpdb;
+        $exists = $wpdb->get_var($wpdb->prepare(
+            "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type = %s AND post_status IN ('publish', 'draft', 'private') LIMIT 1",
+            $title, $post_type
+        ));
+        return !empty($exists);
     }
     
     
@@ -499,279 +636,170 @@ class TemplateLibrary extends AjaxBase {
      * @param string $post_type Post type to filter templates.
      * @return WP_Block_Template[] Array of matching templates.
      */
-    public function get_templates_by_post_type_and_name( $post_type ) {
-        $templates = get_block_templates(
-            array(
-                'post_type'  => array( $post_type ), // Filter by specific post type(s).
-                'slug__like' => 'fb-template',       // Partial match on slug.
-            ),
-            'wp_template' // Specify template type.
-        );
-
-        $matching_templates = array_filter(
-            $templates,
-            function( $template ) use ( $post_type ) {
-                return strpos( $template->slug, 'fb-template' ) !== false &&
-                       ( empty( $template->post_types ) || in_array( $post_type, (array) $template->post_types, true ) );
-            }
-        );
-
-        return array_values( $matching_templates ); // Reindex array.
-    }
-
-    /**
-     * AJAX handler to get templates.
-     */
     public function get_templates() {
         $this->check_permission();
-
-        $post_type = isset( $_POST['post_type'] ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : 'page';
-
-        $templates = $this->get_templates_by_post_type_and_name( $post_type );
-
-        if ( ! empty( $templates ) ) {
+    
+        $post_type = isset($_POST['post_type']) ? sanitize_text_field(wp_unslash($_POST['post_type'])) : 'page';
+    
+        // Step 1: Get templates ONLY from CURRENT active theme
+        $current_theme = get_stylesheet(); // e.g., 'frontisblocks'
+        $all_templates = get_block_templates(['theme' => $current_theme], 'wp_template');
+    
+        // Step 2: Filter: slug contains 'fb-template' + post_type match
+        $matching_templates = array_filter($all_templates, function ($template) use ($post_type) {
+            // 1. Must have 'fb-template' in slug
+            if (strpos($template->slug, 'fb-template') === false) {
+                return false;
+            }
+    
+            // 2. Get assigned post_types from meta
+            $assigned_post_types = get_post_meta($template->wp_id, '_wp_post_types', true);
+            $assigned_post_types = is_array($assigned_post_types) ? $assigned_post_types : [];
+    
+            // If no post_types assigned → include as fallback
+            if (empty($assigned_post_types)) {
+                return true;
+            }
+    
+            // Match requested post_type
+            return in_array($post_type, $assigned_post_types, true);
+        });
+    
+        if (!empty($matching_templates)) {
             $output = [];
-            foreach ( $templates as $template ) {
+            foreach ($matching_templates as $template) {
+                $assigned_post_types = get_post_meta($template->wp_id, '_wp_post_types', true);
+                $assigned_post_types = is_array($assigned_post_types) ? $assigned_post_types : [];
+    
                 $output[] = [
-                    'id'    => $template->id,
-                    'slug'  => $template->slug,
-                    'title' => $template->title,
-                    'content' => $template->content, // Optional: Include content if needed.
+                    'title'        => $template->title,
+                    'slug'         => $template->slug,
+                    'content'      => $template->content,
+                    'post_types'   => $assigned_post_types,
                 ];
             }
-            wp_send_json_success( [ 'templates' => $output ] );
+    
+            wp_send_json_success(['templates' => $output]);
         } else {
-            wp_send_json_error( [ 'message' => 'No matching templates found' ] );
+            wp_send_json_error(['message' => 'No fb-template found in current theme']);
         }
     }
 
-    // /**
-    //  * Get header and footer template parts for a single template by slug.
-    //  *
-    //  * @param string $template_slug The slug or full ID of the template.
-    //  * @return array Array of header and footer template parts.
-    //  */
-    // public function get_header_footer_by_template_slug($template_slug)
-    // {
-    //     // Normalize slug (remove theme prefix if present).
-    //     $slug_parts = explode('//', $template_slug);
-    //     $template_slug = end($slug_parts);
-    //     error_log('get_header_footer_by_template_slug called with slug: ' . $template_slug);
+    public function get_all_template_parts() {
+        $this->check_permission();
+    
+        $current_theme = get_stylesheet();
+    
+        // Step 1: Get ALL fb-template from current theme
+        $all_templates = get_block_templates(['theme' => $current_theme], 'wp_template');
+        $fb_templates = array_filter($all_templates, function ($t) {
+            return strpos($t->slug, 'fb-template') !== false;
+        });
+    
+        if (empty($fb_templates)) {
+            wp_send_json_success(['template_parts' => []]);
+        }
+    
+        $all_parts = [];
+    
+        foreach ($fb_templates as $template) {
+            $parsed = parse_blocks($template->content);
+            $slugs = [];
+            $this->extract_template_part_slugs($parsed, $slugs);
+    
+            foreach ($slugs as $slug) {
+                $part_id = $current_theme . '//' . $slug;
+                $part = get_block_template($part_id, 'wp_template_part');
+    
+                if ($part) {
+                    $key = $part->slug; // unique by slug
+                    if (!isset($all_parts[$key])) {
+                        $all_parts[$key] = [
+                            'title'   => $part->title,
+                            'slug'    => $part->slug,
+                            'content' => $part->content,
+                            'area'    => get_post_meta($part->wp_id, 'wp_template_part_area', true),
+                            'used_in' => []
+                        ];
+                    }
+                    $all_parts[$key]['used_in'][] = $template->slug;
+                }
+            }
+        }
+    
+        wp_send_json_success(['template_parts' => array_values($all_parts)]);
+    }
+    private function extract_template_part_slugs($blocks, &$slugs) {
+        foreach ($blocks as $block) {
+            if ($block['blockName'] === 'core/template-part' && !empty($block['attrs']['slug'])) {
+                $slugs[] = $block['attrs']['slug'];
+            }
+            if (!empty($block['innerBlocks'])) {
+                $this->extract_template_part_slugs($block['innerBlocks'], $slugs);
+            }
+        }
+    }
 
-    //     // Fetch the template.
-    //     $templates = get_block_templates(
-    //         [
-    //             'slug' => $template_slug,
-    //         ],
-    //         'wp_template'
-    //     );
-
-    //     if (empty($templates)) {
-    //         error_log('No template found for slug: ' . $template_slug);
-    //         return [];
-    //     }
-
-    //     $template = reset($templates);
-    //     error_log('Template found: ' . print_r([
-    //         'id' => $template->id,
-    //         'slug' => $template->slug,
-    //         'title' => $template->title,
-    //     ], true));
-
-    //     $header_footer_parts = [];
-
-    //     // Parse template content for wp:template-part blocks.
-    //     $blocks = parse_blocks($template->content);
-    //     error_log('Parsed blocks: ' . count($blocks));
-
-    //     foreach ($blocks as $block) {
-    //         if ($block['blockName'] === 'core/template-part' && !empty($block['attrs']['slug'])) {
-    //             $part_slug = $block['attrs']['slug'];
-    //             error_log('Found template-part block with slug: ' . $part_slug);
-
-    //             // Query wp_template_part by slug.
-    //             $args = [
-    //                 'post_type'      => 'wp_template_part',
-    //                 'posts_per_page' => 1,
-    //                 'post_status'    => 'publish',
-    //                 'name'           => $part_slug,
-    //                 'meta_query'     => [
-    //                     [
-    //                         'key'     => 'area',
-    //                         'value'   => ['header', 'footer'],
-    //                         'compare' => 'IN',
-    //                     ],
-    //                 ],
-    //             ];
-
-    //             $parts = get_posts($args);
-    //             if (!empty($parts)) {
-    //                 $part = reset($parts);
-    //                 $area = get_post_meta($part->ID, 'area', true);
-    //                 error_log('Found template part: ' . print_r([
-    //                     'id' => $part->ID,
-    //                     'slug' => $part->post_name,
-    //                     'title' => $part->post_title,
-    //                     'area' => $area,
-    //                 ], true));
-
-    //                 $header_footer_parts[] = [
-    //                     'id'    => $part->ID,
-    //                     'slug'  => $part->post_name,
-    //                     'title' => $part->post_title,
-    //                     'area'  => $area,
-    //                     'content' => $part->post_content,
-    //                 ];
-    //             } else {
-    //                 error_log('No template part found for slug: ' . $part_slug);
-    //             }
-    //         }
-    //     }
-
-    //     return $header_footer_parts;
-    // }
-
-    // /**
-    //  * AJAX handler to get header/footer template parts for a template.
-    //  */
-    // public function get_template_parts()
-    // {
-    //     $this->check_permission();
-
-    //     $template_slug = isset($_POST['template_slug']) ? sanitize_text_field(wp_unslash($_POST['template_slug'])) : '';
-
-    //     if (empty($template_slug)) {
-    //         wp_send_json_error(['message' => 'Template slug is required'], 400);
-    //         return;
-    //     }
-
-    //     $template_parts = $this->get_header_footer_by_template_slug($template_slug);
-
-
-    //     if (!empty($template_parts)) {
-    //         wp_send_json_success(['template_parts' => $template_parts]);
-    //     } else {
-    //         wp_send_json_error([
-    //             'message' => 'No header/footer template parts found for template: ' . $template_slug,
-    //             'slug' => $template_slug,
-    //         ]);
-    //     }
-    // }
-
-    // /**
-    //  * AJAX handler to push custom header/footer content.
-    //  */
-    // public function push_template_parts()
-    // {
-    //     $this->check_permission();
-
-    //     $template_slug = isset($_POST['template_slug']) ? sanitize_text_field(wp_unslash($_POST['template_slug'])) : '';
-    //     $header_content = isset($_POST['header_content']) ? wp_kses_post(wp_unslash($_POST['header_content'])) : '';
-    //     $footer_content = isset($_POST['footer_content']) ? wp_kses_post(wp_unslash($_POST['footer_content'])) : '';
-
-    //     if (empty($template_slug)) {
-    //         wp_send_json_error(['message' => 'Template slug is required'], 400);
-    //         return;
-    //     }
-
-    //     // Normalize slug.
-    //     $slug_parts = explode('//', $template_slug);
-    //     $template_slug = end($slug_parts);
-
-    //     // Get existing template parts.
-    //     $template_parts = $this->get_header_footer_by_template_slug($template_slug);
-    //     $header_id = null;
-    //     $footer_id = null;
-
-    //     foreach ($template_parts as $part) {
-    //         if ($part['area'] === 'header') {
-    //             $header_id = $part['id'];
-    //         } elseif ($part['area'] === 'footer') {
-    //             $footer_id = $part['id'];
-    //         }
-    //     }
-
-    //     // Create or update header.
-    //     if ($header_content) {
-    //         $header_args = [
-    //             'post_type'    => 'wp_template_part',
-    //             'post_status'  => 'publish',
-    //             'post_name'    => 'header-' . $template_slug, // Unique slug.
-    //             'post_title'   => 'Header for ' . $template_slug,
-    //             'post_content' => $header_content,
-    //             'meta_input'   => [
-    //                 'area' => 'header',
-    //                 'theme' => 'frontis', // Match theme from template.
-    //             ],
-    //         ];
-
-    //         if ($header_id) {
-    //             $header_args['ID'] = $header_id;
-    //             wp_update_post($header_args);
-    //             error_log('Updated header for template: ' . $template_slug);
-    //         } else {
-    //             $header_id = wp_insert_post($header_args);
-    //             error_log('Created header for template: ' . $template_slug . ', ID: ' . $header_id);
-    //         }
-    //     }
-
-    //     // Create or update footer.
-    //     if ($footer_content) {
-    //         $footer_args = [
-    //             'post_type'    => 'wp_template_part',
-    //             'post_status'  => 'publish',
-    //             'post_name'    => 'footer-' . $template_slug, // Unique slug.
-    //             'post_title'   => 'Footer for ' . $template_slug,
-    //             'post_content' => $footer_content,
-    //             'meta_input'   => [
-    //                 'area' => 'footer',
-    //                 'theme' => 'frontis',
-    //             ],
-    //         ];
-
-    //         if ($footer_id) {
-    //             $footer_args['ID'] = $footer_id;
-    //             wp_update_post($footer_args);
-    //             error_log('Updated footer for template: ' . $template_slug);
-    //         } else {
-    //             $footer_id = wp_insert_post($footer_args);
-    //             error_log('Created footer for template: ' . $template_slug . ', ID: ' . $footer_id);
-    //         }
-    //     }
-
-    //     // Update template content to reference new template parts.
-    //     if ($header_id || $footer_id) {
-    //         $templates = get_block_templates(['slug' => $template_slug], 'wp_template');
-    //         if (!empty($templates)) {
-    //             $template = reset($templates);
-    //             $content = $template->content;
-    //             if ($header_id) {
-    //                 $content = preg_replace(
-    //                     '/<!-- wp:template-part {"slug":"header".*?} \/-->/',
-    //                     '<!-- wp:template-part {"slug":"header-' . $template_slug . '","theme":"frontis","tagName":"header"} /-->',
-    //                     $content
-    //                 );
-    //             }
-    //             if ($footer_id) {
-    //                 $content = preg_replace(
-    //                     '/<!-- wp:template-part {"slug":"footer".*?} \/-->/',
-    //                     '<!-- wp:template-part {"slug":"footer-' . $template_slug . '","theme":"frontis","tagName":"footer"} /-->',
-    //                     $content
-    //                 );
-    //             }
-    //             wp_update_post([
-    //                 'ID' => $template->wp_id,
-    //                 'post_content' => $content,
-    //             ]);
-    //             error_log('Updated template content for: ' . $template_slug);
-    //         }
-    //     }
-
-    //     wp_send_json_success([
-    //         'message' => 'Header/footer pushed successfully',
-    //         'header_id' => $header_id,
-    //         'footer_id' => $footer_id,
-    //     ]);
-    // }
+    /**
+     * AJAX: Push a single template to wp_template
+     */
+    public function push_template() {
+        $this->check_permission();
+    
+        $slug       = sanitize_title($_POST['slug'] ?? '');
+        $title      = sanitize_text_field($_POST['title'] ?? '');
+        $content    = wp_kses_post($_POST['content'] ?? '');
+        $post_types = array_map('sanitize_text_field', (array)($_POST['post_types'] ?? []));
+    
+        if (empty($slug) || empty($title) || empty($content)) {
+            wp_send_json_error(['message' => 'Required fields missing']);
+        }
+    
+        $current_theme = get_stylesheet();
+        $template_id = $current_theme . '//' . $slug;
+    
+        if (get_block_template($template_id)) {
+            wp_send_json_success([
+                'message'     => 'Template already exists',
+                'template_id' => $template_id,
+                'skipped'     => true
+            ]);
+        }
+    
+        $post_id = wp_insert_post([
+            'post_title'   => $title,
+            'post_name'    => $slug,
+            'post_content' => $content,
+            'post_status'  => 'publish',
+            'post_type'    => 'wp_template',
+        ], true);
+    
+        if (is_wp_error($post_id)) {
+            wp_send_json_error(['message' => $post_id->get_error_message()]);
+        }
+    
+        if (!empty($post_types)) {
+            update_post_meta($post_id, '_wp_post_types', $post_types);
+        }
+    
+        // CRITICAL: Clear ALL FSE caches
+        if (function_exists('wp_clean_block_template_cache')) {
+            wp_clean_block_template_cache();
+        }
+    
+        // Extra: Force clear transients
+        delete_transient('wp_template_partials');
+        delete_transient('_wp_template_partials');
+        delete_transient('block_template_partials');
+    
+        // Clear object cache
+        wp_cache_flush();
+    
+        wp_send_json_success([
+            'message'     => 'Template created',
+            'template_id' => $template_id,
+            'post_id'     => $post_id
+        ]);
+    }
 
 }
