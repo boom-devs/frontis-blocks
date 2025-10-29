@@ -67,7 +67,7 @@ const attributes = {
 	// },
 
 	/** ============== Style Attributes ============== */
-	/** Start Heading */
+	/** Comments Count Title */
 	commentCountTitleGlobalTypographyData: {
 		type: "object",
 		default: {},
@@ -193,7 +193,49 @@ const attributes = {
 		}
 	},
 
-	/** End Heading */
+	/** End Comments Count Title **/
+
+	/** Start Comment Item Padding **/ 
+		postCommentPaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	postCommentPaddingDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	postCommentPaddingTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	postCommentPaddingMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	postCommentPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Comment Item Padding **/ 
 
 	/** ============== Advanced Attributes ============== */
 	wrapperId: {
