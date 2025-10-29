@@ -195,7 +195,7 @@ const attributes = {
 
 	/** End Comments Count Title **/
 
-	/** Start Comment Item Padding **/ 
+	/** Start Comment Item **/ 
 		postCommentPaddingUnits: {
 		type: "object",
 		default: {
@@ -235,7 +235,221 @@ const attributes = {
 		type: "boolean",
 		default: true,
 	},
-	/** End Comment Item Padding **/ 
+	/** Nested Item Indentation **/
+	nestedIndentation: {
+		type: 'object',
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
+	},
+
+	nestedIndentationUnits: {
+		type: 'object',
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		}
+	},
+	/** Nested Item Indentation **/
+
+	
+	/** Comment List Bottom Spacing **/
+	commentListBottomSpacing: {
+		type: 'object',
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		}
+	},
+	commentListBottomSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		}
+	},
+	/** Comment List Bottom Spacing **/
+
+	/** Avatar */
+	/** Start Padding */
+	avatarPaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	avatarPaddingDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	avatarPaddingTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	avatarPaddingMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	avatarPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Padding */
+
+	/** Start Border */
+	avatarBorder: {
+		type: "string",
+		default: "none",
+	},
+	// avatarBorderColorSwitcher: {
+	// 	type: "string",
+	// 	default: "normal",
+	// },
+	avatarBorderColor: {
+		type: "string",
+		default: "",
+	},
+	// avatarBorderHoverColor: {
+	// 	type: "string",
+	// },
+	avatarBorderUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	avatarBorderDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	avatarBorderTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	avatarBorderMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	avatarBorderLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	avatarBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	avatarBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	avatarBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	avatarBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	avatarBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Border Radius */
+
+	/** Start Box Shadow */
+	// avatarBoxShadowSwitcher: {
+	// 	type: "string",
+	// 	default: "normal",
+	// },
+	avatarBoxShadowValues: {
+		type: "array",
+		default: [],
+	},
+	avatarBoxShadowCssValue: {
+		type: "string",
+		default: "",
+	},
+	// avatarBoxShadowHoverValues: {
+	// 	type: "array",
+	// 	default: "",
+	// },
+	avatarBoxShadowHoverCssValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Box Shadow */
+	/** End Avatar */
+
+
+
+
+	/** End Comment Item **/
+
+
+
+	
+	
 
 	/** ============== Advanced Attributes ============== */
 	wrapperId: {
