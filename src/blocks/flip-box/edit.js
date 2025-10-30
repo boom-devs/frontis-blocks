@@ -160,6 +160,81 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicBtnEnableLink,	
 		dynamicBtnLinkSource,
 		/** End Dynamic Btn Text */
+
+		/** Start Dynamic Back Title Text */
+		dynamicBackTitleEnabled,
+		dynamicBackTitleSource,
+		dynamicBackTitlePostId,
+		dynamicBackTitlePostType,
+		dynamicBackTitlePostLabel,
+		dynamicBackTitleField,
+		dynamicBackTitleFeaturedImageField,
+
+		dynamicBackTitleDateType,
+		dynamicBackTitleDateFormat,
+
+		dynamicBackTitleTimeType,
+		dynamicBackTitleTimeFormat,
+
+		dynamicBackTitleCommentsZeroText,
+		dynamicBackTitleCommentsOneText,
+		dynamicBackTitleCommentsManyText,
+
+		dynamicBackTitleTermsTaxonomy,
+		dynamicBackTitleTermsSeparator,
+		dynamicBackTitleEnableLink,
+		dynamicBackTitleLinkSource,
+		/** End Dynamic Back Title Text */
+
+		/** Start Dynamic Back Description Text */
+		dynamicBackDescriptionEnabled,
+		dynamicBackDescriptionSource,
+		dynamicBackDescriptionPostId,
+		dynamicBackDescriptionPostType,
+		dynamicBackDescriptionPostLabel,
+		dynamicBackDescriptionField,
+		dynamicBackDescriptionFeaturedImageField,
+
+		dynamicBackDescriptionDateType,
+		dynamicBackDescriptionDateFormat,
+
+		dynamicBackDescriptionTimeType,
+		dynamicBackDescriptionTimeFormat,
+
+		dynamicBackDescriptionCommentsZeroText,
+		dynamicBackDescriptionCommentsOneText,
+		dynamicBackDescriptionCommentsManyText,
+
+		dynamicBackDescriptionTermsTaxonomy,
+		dynamicBackDescriptionTermsSeparator,
+		dynamicBackDescriptionEnableLink,
+		dynamicBackDescriptionLinkSource,
+		/** End Dynamic Back Description Text */
+
+		/** Start Dynamic Back btn Text */
+		dynamicBackBtnEnabled,
+		dynamicBackBtnSource,
+		dynamicBackBtnPostId,
+		dynamicBackBtnPostType,
+		dynamicBackBtnPostLabel,
+		dynamicBackBtnField,
+		dynamicBackBtnFeaturedImageField,
+
+		dynamicBackBtnDateType,
+		dynamicBackBtnDateFormat,
+
+		dynamicBackBtnTimeType,
+		dynamicBackBtnTimeFormat,
+
+		dynamicBackBtnCommentsZeroText,
+		dynamicBackBtnCommentsOneText,
+		dynamicBackBtnCommentsManyText,
+
+		dynamicBackBtnTermsTaxonomy,
+		dynamicBackBtnTermsSeparator,
+		dynamicBackBtnEnableLink,	
+		dynamicBackBtnLinkSource,
+		/** End Dynamic Back btn Text */
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -240,7 +315,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	});
 
 	/**
-	 * Dynamic Text Value for Button One Text
+	 * Dynamic Text Value for Button Text
 	 */
 	const { dynamicDisplayValue: dynamicBtnValue, dynamicDisplayLink: dynamicBtnLink } = DynamicTextValue({
 		textEnabled:            dynamicBtnEnabled,
@@ -267,6 +342,103 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		textLinkEnabled:        dynamicBtnEnableLink,
 		textLinkSource:         dynamicBtnLinkSource,
+
+		context,
+	});	
+
+
+	/**
+	 * Dynamic Text Value for Back Title Text
+	 */
+	const { dynamicDisplayValue: dynamicBackTitleValue, dynamicDisplayLink: dynamicBackTitleLink } = DynamicTextValue({  
+		textEnabled:            dynamicBackTitleEnabled,
+		textSource:             dynamicBackTitleSource,
+		textField:              dynamicBackTitleField,
+
+		textPostId:             dynamicBackTitlePostId,
+		textPostType:           dynamicBackTitlePostType,
+		textPostLabel:          dynamicBackTitlePostLabel,
+
+		textFeaturedImageField: dynamicBackTitleFeaturedImageField,
+
+		textDateType:           dynamicBackTitleDateType,
+		textDateFormat:         dynamicBackTitleDateFormat,
+		textTimeType:           dynamicBackTitleTimeType, 
+		textTimeFormat:         dynamicBackTitleTimeFormat,
+
+		textCommentsZeroText:   dynamicBackTitleCommentsZeroText,
+		textCommentsOneText:    dynamicBackTitleCommentsOneText,
+		textCommentsManyText:   dynamicBackTitleCommentsManyText,
+
+		textTermsTaxonomy:      dynamicBackTitleTermsTaxonomy,
+		textTermsSeparator:     dynamicBackTitleTermsSeparator,
+
+		textLinkEnabled:        dynamicBackTitleEnableLink,
+		textLinkSource:         dynamicBackTitleLinkSource,
+
+		context,
+	});
+
+	/**
+	 * Dynamic Text Value for Back Description Text
+	 */
+	const { dynamicDisplayValue: dynamicBackDescriptionValue, dynamicDisplayLink: dynamicBackDescriptionLink } = DynamicTextValue({
+		textEnabled:            dynamicBackDescriptionEnabled,
+		textSource:             dynamicBackDescriptionSource,
+		textField:              dynamicBackDescriptionField,
+
+		textPostId:             dynamicBackDescriptionPostId,
+		textPostType:           dynamicBackDescriptionPostType,
+		textPostLabel:          dynamicBackDescriptionPostLabel,
+
+		textFeaturedImageField: dynamicBackDescriptionFeaturedImageField,
+
+		textDateType:           dynamicBackDescriptionDateType,
+		textDateFormat:         dynamicBackDescriptionDateFormat,
+		textTimeType:           dynamicBackDescriptionTimeType, 
+		textTimeFormat:         dynamicBackDescriptionTimeFormat,
+
+		textCommentsZeroText:   dynamicBackDescriptionCommentsZeroText,
+		textCommentsOneText:    dynamicBackDescriptionCommentsOneText,
+		textCommentsManyText:   dynamicBackDescriptionCommentsManyText,
+
+		textTermsTaxonomy:      dynamicBackDescriptionTermsTaxonomy,
+		textTermsSeparator:     dynamicBackDescriptionTermsSeparator,
+
+		textLinkEnabled:        dynamicBackDescriptionEnableLink,
+		textLinkSource:         dynamicBackDescriptionLinkSource,
+
+		context,
+	});
+
+	/**
+	 * Dynamic Text Value for Back Button Text
+	 */
+	const { dynamicDisplayValue: dynamicBackBtnValue, dynamicDisplayLink: dynamicBackBtnLink } = DynamicTextValue({
+		textEnabled:            dynamicBackBtnEnabled,
+		textSource:             dynamicBackBtnSource,
+		textField:              dynamicBackBtnField,
+
+		textPostId:             dynamicBackBtnPostId,
+		textPostType:           dynamicBackBtnPostType, 
+		textPostLabel:          dynamicBackBtnPostLabel,
+
+		textFeaturedImageField: dynamicBackBtnFeaturedImageField,
+
+		textDateType:           dynamicBackBtnDateType,
+		textDateFormat:         dynamicBackBtnDateFormat,
+		textTimeType:           dynamicBackBtnTimeType,
+		textTimeFormat:         dynamicBackBtnTimeFormat,
+
+		textCommentsZeroText:   dynamicBackBtnCommentsZeroText,
+		textCommentsOneText:    dynamicBackBtnCommentsOneText,
+		textCommentsManyText:   dynamicBackBtnCommentsManyText,
+
+		textTermsTaxonomy:      dynamicBackBtnTermsTaxonomy,
+		textTermsSeparator:     dynamicBackBtnTermsSeparator,
+
+		textLinkEnabled:        dynamicBackBtnEnableLink,
+		textLinkSource:         dynamicBackBtnLinkSource,
 
 		context,
 	});	
@@ -387,10 +559,10 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 										{titleSwitcherBack && (
 											<RichText
 												tagName={headingTagBack}
-												value={headingTextBack}
-												onChange={(value) =>
-													setAttributes({ headingTextBack: value })
-												}
+												value={dynamicBackTitleEnabled ? dynamicBackTitleValue : headingTextBack}
+												onChange={(value) => {
+													if (!dynamicBackTitleEnabled) setAttributes({ headingTextBack: value });
+												}}
 												placeholder={__("Back Title", "frontis-block")}
 												className="fb-heading"
 											/>
@@ -399,10 +571,10 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 										{descSwitcherBack && (
 											<RichText
 												tagName={flipBackContentTag}
-												value={flipBackContent}
-												onChange={(value) =>
-													setAttributes({ flipBackContent: value })
-												}
+												value={dynamicBackDescriptionEnabled ? dynamicBackDescriptionValue : flipBackContent}
+												onChange={(value) => {
+													if (!dynamicBackDescriptionEnabled) setAttributes({ flipBackContent: value });
+												}}
 												placeholder={__("Back description", "frontis-block")}
 												className="fb-description"
 											/>
@@ -418,11 +590,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 														onClick={handleButtonClick}
 													>
 														<RichText
-															value={flipBack_Button_Text}
 															tagName={"span"}
-															onChange={(value) =>
-																setAttributes({ flipBack_Button_Text: value })
-															}
+															value={dynamicBackBtnEnabled ? dynamicBackBtnValue : flipBack_Button_Text} 
+															onChange={(value) => {
+																if (!dynamicBackBtnEnabled) setAttributes({ flipBack_Button_Text: value });
+															}}
 															placeholder={__("Flip Back Button", "frontis-block")}
 														/>
 														{buttonIconSwitcherBack && (
