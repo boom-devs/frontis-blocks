@@ -235,6 +235,7 @@ const attributes = {
 		type: "boolean",
 		default: true,
 	},
+
 	/** Nested Item Indentation **/
 	nestedIndentation: {
 		type: 'object',
@@ -276,6 +277,23 @@ const attributes = {
 	/** Comment List Bottom Spacing **/
 
 	/** Avatar */
+		/** Avatar Size */
+	avatarSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: ""
+		}
+	},
+	avatarSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		}
+	},
 	/** Start Padding */
 	avatarPaddingUnits: {
 		type: "object",

@@ -88,6 +88,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		commentListBottomSpacingUnits,
 
 		/** Avatar */
+		avatarSize,
+		avatarSizeUnits,
+
 		avatarPaddingUnits,
 		avatarPaddingDesktop,
 		avatarPaddingTablet,
@@ -95,9 +98,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		avatarPaddingLink,
 
 		avatarBorder,
-		avatarBorderColorSwitcher,
 		avatarBorderColor,
-		avatarBorderHoverColor,
 		avatarBorderUnits,
 		avatarBorderDesktop,
 		avatarBorderTablet,
@@ -110,11 +111,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		avatarBorderRadiusMobile,
 		avatarBorderRadiusLink,
 
-		avatarBoxShadowSwitcher,
 		avatarBoxShadowValues,
 		avatarBoxShadowCssValue,
-		avatarBoxShadowHoverValues,
-		avatarBoxShadowHoverCssValue,
 
 		/** End Comment Item */
 
@@ -207,7 +205,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	/* ===============Helper Function================== */
 
-
+	// nested comment item 
 	function scalePaddingWithoutLeft(paddingString, scale = 1) {
   const parts = paddingString.split(" "); // e.g. ["20px", "20px", "20px", "20px"]
 
@@ -984,6 +982,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								height: 64px;
                 border-radius: 50%;
                 flex-shrink: 0;
+								object-fit: cover;
             }
 
             /* Comment Body */
@@ -1365,6 +1364,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						
 				}
 
+				.${blockId} .fb-comments-list .fb-comment-parent .fb-comment-avatar{
+						${avatarSize.Desktop 
+							? `width: ${avatarSize.Desktop}${avatarSizeUnits.Desktop};
+							height: ${avatarSize.Desktop}${avatarSizeUnits.Desktop};
+							`
+							: ""
+						}
+				}
+
+				.${blockId} .fb-comments-list .fb-comment-child .fb-comment-avatar{
+						${avatarSize.Desktop
+							? `
+								width: calc(${avatarSize.Desktop}${avatarSizeUnits.Desktop} * 0.8);
+								height: calc(${avatarSize.Desktop}${avatarSizeUnits.Desktop} * 0.8);
+							`
+							: ""
+						}
+				}
+
 
 				/* Advance Control Global Style */
 				.${blockId}.fb-post-comment-form-block{
@@ -1622,6 +1640,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								}
 				}
 
+				
+				.${blockId} .fb-comments-list .fb-comment-parent .fb-comment-avatar{
+						${avatarSize.Tablet 
+							? `width: ${avatarSize.Tablet}${avatarSizeUnits.Tablet};
+							height: ${avatarSize.Tablet}${avatarSizeUnits.Tablet};
+							`
+							: ""
+						}
+				}
+
+				.${blockId} .fb-comments-list .fb-comment-child .fb-comment-avatar{
+						${avatarSize.Tablet
+							? `
+								width: calc(${avatarSize.Tablet}${avatarSizeUnits.Tablet} * 0.8);
+								height: calc(${avatarSize.Tablet}${avatarSizeUnits.Tablet} * 0.8);
+							`
+							: ""
+						}
+				}
+
 
 							/* Advanced Control Global Style - Tablet */
                 .${blockId}.fb-post-comment-form-block {
@@ -1781,6 +1819,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										? `border-radius: ${avatarBorderRadiusMobileWidth};`
 										: ""
 								}
+				}
+
+				
+				.${blockId} .fb-comments-list .fb-comment-parent .fb-comment-avatar{
+						${avatarSize.Mobile 
+							? `width: ${avatarSize.Mobile}${avatarSizeUnits.Mobile};
+							height: ${avatarSize.Mobile}${avatarSizeUnits.Mobile};
+							`
+							: ""
+						}
+				}
+
+				.${blockId} .fb-comments-list .fb-comment-child .fb-comment-avatar{
+						${avatarSize.Mobile
+							? `
+								width: calc(${avatarSize.Mobile}${avatarSizeUnits.Mobile} * 0.8);
+								height: calc(${avatarSize.Mobile}${avatarSizeUnits.Mobile} * 0.8);
+							`
+							: ""
+						}
 				}
 												
 							 /* Advance Control Global Style - Mobile */
@@ -2051,6 +2109,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					</p>
 
 					<div className="fb-control-divider"></div>
+
+					<FB_Range
+						min={0}
+						max={100}
+						label={__("Size", "frontis-blocks")}
+						rangeValue={avatarSize}
+						onChangeHandler={(value) =>
+							setAttributes({ avatarSize: value })
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({ avatarSizeUnits: value })
+						}
+						deviceType={deviceType}
+						units={avatarSizeUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
+					/>
+
 
 						<FB_Spacing
 						label={__("Padding", "frontis-blocks")}
