@@ -220,7 +220,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		flipButtonLink,
 		flipbtnTargetUrl,
 		icon,
+		frontendIcon,
 		btnIcon,
+		frontendBtnIcon,
 		width,
 		mediaSwitcher,
 		flipModeSwitcher,
@@ -515,6 +517,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		descAlignmentBack,
 		mediaSwitcherBack,
 		iconBack,
+		frontendIconBack,
 		flipAnimationType,
 		titleAlignmentBack,
 		headingBackColorSwitcher,
@@ -765,6 +768,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		flipBoxBackHoverBackgroundImageSize,
 		flipBoxBackHoverBackgroundImageRepeat,
 		btnIconBack,
+		frontendBtnIconBack,
 		// Padding
 		flipBoxFrontPaddingUnits,
 		flipBoxFrontPaddingDesktop,
@@ -5819,10 +5823,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
      */
 		useEffect(() => {
 			setAttributes({
-				frontendIcon: generateSvgIcon(icon),
+				frontendIcon: generateSvgIcon(icon), 
 				frontendBtnIcon: generateSvgIcon(btnIcon), 
+				frontendIconBack: generateSvgIcon(iconBack),
+				frontendBtnIconBack: generateSvgIcon(btnIconBack),
 			})
-		}, [icon, btnIcon]);
+		}, [icon, btnIcon, iconBack, btnIconBack]);
 	
 	// Check if Pro is active
 	const getProActiveState = getProActive();

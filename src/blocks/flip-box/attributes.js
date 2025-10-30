@@ -233,9 +233,17 @@ const attributes = {
         type: 'string',
         default: 'swatchbook',
     },
+    frontendIconBack: {
+        type: 'string',
+        default: '',
+    },
     btnIcon: {
         type: 'string',
         default: 'arrow-right',
+    },
+    frontendBtnIcon:{
+        type: 'string',
+        default: '',
     },
     boxBgColor: {
         type: 'string',
@@ -2563,9 +2571,17 @@ const attributes = {
         type: 'string',
         default: 'bolt',
     },
+    frontendIcon: {
+        type: 'string',
+        default: '',
+    },
     btnIconBack: {
         type: 'string',
         default: 'arrow-up',
+    },
+    frontendBtnIconBack: {
+        type: 'string',
+        default: '',
     },
     boxBgColor: {
         type: 'string',
