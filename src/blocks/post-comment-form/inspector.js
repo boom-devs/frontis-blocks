@@ -48,8 +48,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		buttonText,
 		blockStyle,
 
-		/** Style Attributes */
-		/** Comments Title */
+		/** ================== Style Attributes =============== */
+		/** ================== Comments Title */
 		commentCountTitleGlobalTypoSwitcher,
 		commentCountTitleGlobalTypographyData,
 		commentCountTitleGlobalTypoType,
@@ -72,9 +72,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		commentCountTitleSpacing,
 		commentCountTitleSpacingUnits,
-		/** End Comments Title */
+		/** =============== End Comments Title */
 
-		/** Start Comment Item */
+		/** ================ Start Comment Item */
 		postCommentPaddingUnits,
 		postCommentPaddingDesktop,
 		postCommentPaddingTablet,
@@ -114,9 +114,73 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		avatarBoxShadowValues,
 		avatarBoxShadowCssValue,
 
-		/** End Comment Item */
+		/** Author */
+		authorGlobalTypoSwitcher,
+		authorGlobalTypographyData,
+		authorGlobalTypoType,
+		authorGlobalTypoOption,
+		authorFontFamily,
+		authorFontSize,
+		authorFontSizeUnits,
+		authorFontWeight,
+		authorFontStyle,
+		authorTextTransform,
+		authorTextDecoration,
+		authorLetterSpacing,
+		authorLetterSpacingUnits,
+		authorLineHeight,
+		authorLineHeightUnits,
 
-		/** Start Advanced Attributes */
+		authorColorSwitcher,
+		authorColor,
+		authorHoverColor,
+		
+		/** Meta  */
+		commentMetaGlobalTypoSwitcher,
+		commentMetaGlobalTypographyData,
+		commentMetaGlobalTypoType,
+		commentMetaGlobalTypoOption,
+		commentMetaFontFamily,
+		commentMetaFontSize,
+		commentMetaFontSizeUnits,
+		commentMetaFontWeight,
+		commentMetaFontStyle,
+		commentMetaTextTransform,
+		commentMetaTextDecoration,
+		commentMetaLetterSpacing,
+		commentMetaLetterSpacingUnits,
+		commentMetaLineHeight,
+		commentMetaLineHeightUnits,
+
+		commentMetaColorSwitcher,
+		commentMetaColor,
+		commentMetaHoverColor,
+
+		/** Message     */
+		messageGlobalTypoSwitcher,
+		messageGlobalTypographyData,
+		messageGlobalTypoType,
+		messageGlobalTypoOption,
+		messageFontFamily,
+		messageFontSize,
+		messageFontSizeUnits,
+		messageFontWeight,
+		messageFontStyle,
+		messageTextTransform,
+		messageTextDecoration,
+		messageLetterSpacing,
+		messageLetterSpacingUnits,
+		messageLineHeight,
+		messageLineHeightUnits,
+
+		messageColorSwitcher,
+		messageColor,
+		messageHoverColor,
+
+		/** ============ End Comment Item */
+		/** ============ End Style Attributes ================= */
+		
+		/** ============ Start Advanced Attributes ================= */
 		wrapperId,
 		wrapperClass,
 
@@ -187,9 +251,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		postGlobalBoxShadowCssValue,
 		postGlobalBoxShadowHoverValues,
 		postGlobalBoxShadowHoverCssValue,
-		/** End Global Setting */
-
-		/** End Advanced Attributes */
+		/** ============ End Advanced Attributes ================= */
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -1383,6 +1445,329 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						}
 				}
 
+							.${blockId} .fb-comments-list .fb-comment-body .fb-comment-author{
+
+			
+            ${authorColor ? `color: ${authorColor};` : ""}
+
+            ${
+							authorGlobalTypoSwitcher.fontFamily === true &&
+							authorGlobalTypographyData.fontFamily
+								? `font-family: ${authorGlobalTypographyData.fontFamily};`
+								: ""
+						}
+            ${
+							authorGlobalTypoSwitcher.fontSize === true &&
+							authorGlobalTypographyData.fontSize
+								? `font-size: ${authorGlobalTypographyData.fontSize};`
+								: ""
+						}
+            ${
+							authorGlobalTypoSwitcher.fontWeight === true &&
+							authorGlobalTypographyData.fontWeight
+								? `font-weight: ${authorGlobalTypographyData.fontWeight};`
+								: ""
+						}
+            ${
+							authorGlobalTypoSwitcher.fontStyle === true &&
+							authorGlobalTypographyData.fontStyle
+								? `font-style: ${authorGlobalTypographyData.fontStyle};`
+								: ""
+						}
+            ${
+							authorGlobalTypoSwitcher.textTransform === true &&
+							authorGlobalTypographyData.textTransform
+								? `text-transform: ${authorGlobalTypographyData.textTransform};`
+								: ""
+						}
+            ${
+							authorGlobalTypoSwitcher.textDecoration === true &&
+							authorGlobalTypographyData.textDecoration
+								? `text-decoration: ${authorGlobalTypographyData.textDecoration};`
+								: ""
+						}
+            ${
+							authorGlobalTypoSwitcher.letterSpacing === true &&
+							authorGlobalTypographyData.letterSpacing
+								? `letter-spacing: ${authorGlobalTypographyData.letterSpacing};`
+								: ""
+						}
+            ${
+							authorGlobalTypoSwitcher.lineHeight === true &&
+							authorGlobalTypographyData.lineHeight
+								? `line-height: ${authorGlobalTypographyData.lineHeight};`
+								: ""
+						}
+
+						${
+							authorGlobalTypoSwitcher.fontFamily === false &&
+							authorFontFamily
+								? `font-family: ${authorFontFamily};`
+								: ""
+						}
+						${
+							authorGlobalTypoSwitcher.fontSize === false &&
+							authorFontSize.Desktop
+								? `font-size: ${authorFontSize.Desktop}${authorFontSizeUnits.Desktop};`
+								: ""
+						}
+						${
+							authorGlobalTypoSwitcher.fontWeight === false &&
+							authorFontWeight
+								? `font-weight: ${authorFontWeight};`
+								: ""
+						}
+						${
+							authorGlobalTypoSwitcher.fontStyle === false &&
+							authorFontStyle
+								? `font-style: ${authorFontStyle};`
+								: ""
+						}
+						${
+							authorGlobalTypoSwitcher.textTransform === false &&
+							authorTextTransform
+								? `text-transform: ${authorTextTransform};`
+								: ""
+						}
+						${
+							authorGlobalTypoSwitcher.textDecoration === false &&
+							authorTextDecoration
+								? `text-decoration: ${authorTextDecoration};`
+								: ""
+						}
+						${
+							authorGlobalTypoSwitcher.letterSpacing === false &&
+							authorLetterSpacing.Desktop
+								? `letter-spacing: ${authorLetterSpacing.Desktop}${authorLetterSpacingUnits.Desktop};`
+								: ""
+						}
+						${
+							authorGlobalTypoSwitcher.lineHeight === false &&
+							authorLineHeight.Desktop
+								? `line-height: ${authorLineHeight.Desktop}${authorLineHeightUnits.Desktop};`
+								: ""
+						}
+			}
+
+			
+
+				.${blockId} .fb-comments-list .fb-comment-body .fb-comment-author:hover {
+					${authorHoverColor ? `color: ${authorHoverColor};` : ""}
+				}
+
+
+					.${blockId} .fb-comments-list .fb-comment-body .fb-comment-meta {
+
+			
+            ${commentMetaColor ? `color: ${commentMetaColor};` : ""}
+
+            ${
+							commentMetaGlobalTypoSwitcher.fontFamily === true &&
+							commentMetaGlobalTypographyData.fontFamily
+								? `font-family: ${commentMetaGlobalTypographyData.fontFamily};`
+								: ""
+						}
+            ${
+							commentMetaGlobalTypoSwitcher.fontSize === true &&
+							commentMetaGlobalTypographyData.fontSize
+								? `font-size: ${commentMetaGlobalTypographyData.fontSize};`
+								: ""
+						}
+            ${
+							commentMetaGlobalTypoSwitcher.fontWeight === true &&
+							commentMetaGlobalTypographyData.fontWeight
+								? `font-weight: ${commentMetaGlobalTypographyData.fontWeight};`
+								: ""
+						}
+            ${
+							commentMetaGlobalTypoSwitcher.fontStyle === true &&
+							commentMetaGlobalTypographyData.fontStyle
+								? `font-style: ${commentMetaGlobalTypographyData.fontStyle};`
+								: ""
+						}
+            ${
+							commentMetaGlobalTypoSwitcher.textTransform === true &&
+							commentMetaGlobalTypographyData.textTransform
+								? `text-transform: ${commentMetaGlobalTypographyData.textTransform};`
+								: ""
+						}
+            ${
+							commentMetaGlobalTypoSwitcher.textDecoration === true &&
+							commentMetaGlobalTypographyData.textDecoration
+								? `text-decoration: ${commentMetaGlobalTypographyData.textDecoration};`
+								: ""
+						}
+            ${
+							commentMetaGlobalTypoSwitcher.letterSpacing === true &&
+							commentMetaGlobalTypographyData.letterSpacing
+								? `letter-spacing: ${commentMetaGlobalTypographyData.letterSpacing};`
+								: ""
+						}
+            ${
+							commentMetaGlobalTypoSwitcher.lineHeight === true &&
+							commentMetaGlobalTypographyData.lineHeight
+								? `line-height: ${commentMetaGlobalTypographyData.lineHeight};`
+								: ""
+						}
+
+						${
+							commentMetaGlobalTypoSwitcher.fontFamily === false &&
+							commentMetaFontFamily
+								? `font-family: ${commentMetaFontFamily};`
+								: ""
+						}
+						${
+							commentMetaGlobalTypoSwitcher.fontSize === false &&
+							commentMetaFontSize.Desktop
+								? `font-size: ${commentMetaFontSize.Desktop}${commentMetaFontSizeUnits.Desktop};`
+								: ""
+						}
+						${
+							commentMetaGlobalTypoSwitcher.fontWeight === false &&
+							commentMetaFontWeight
+								? `font-weight: ${commentMetaFontWeight};`
+								: ""
+						}
+						${
+							commentMetaGlobalTypoSwitcher.fontStyle === false &&
+							commentMetaFontStyle
+								? `font-style: ${commentMetaFontStyle};`
+								: ""
+						}
+						${
+							commentMetaGlobalTypoSwitcher.textTransform === false &&
+							commentMetaTextTransform
+								? `text-transform: ${commentMetaTextTransform};`
+								: ""
+						}
+						${
+							commentMetaGlobalTypoSwitcher.textDecoration === false &&
+							commentMetaTextDecoration
+								? `text-decoration: ${commentMetaTextDecoration};`
+								: ""
+						}
+						${
+							commentMetaGlobalTypoSwitcher.letterSpacing === false &&
+							commentMetaLetterSpacing.Desktop
+								? `letter-spacing: ${commentMetaLetterSpacing.Desktop}${commentMetaLetterSpacingUnits.Desktop};`
+								: ""
+						}
+						${
+							commentMetaGlobalTypoSwitcher.lineHeight === false &&
+							commentMetaLineHeight.Desktop
+								? `line-height: ${commentMetaLineHeight.Desktop}${commentMetaLineHeightUnits.Desktop};`
+								: ""
+						}
+			}
+
+			
+
+				.${blockId} .fb-comments-list .fb-comment-body .fb-comment-meta:hover {
+					${commentMetaHoverColor ? `color: ${commentMetaHoverColor};` : ""}
+				}
+
+					.${blockId} .fb-comments-list .fb-comment-body .fb-comment-content {
+		
+            ${messageColor ? `color: ${messageColor};` : ""}
+
+            ${
+							messageGlobalTypoSwitcher.fontFamily === true &&
+							messageGlobalTypographyData.fontFamily
+								? `font-family: ${messageGlobalTypographyData.fontFamily};`
+								: ""
+						}
+            ${
+							messageGlobalTypoSwitcher.fontSize === true &&
+							messageGlobalTypographyData.fontSize
+								? `font-size: ${messageGlobalTypographyData.fontSize};`
+								: ""
+						}
+            ${
+							messageGlobalTypoSwitcher.fontWeight === true &&
+							messageGlobalTypographyData.fontWeight
+								? `font-weight: ${messageGlobalTypographyData.fontWeight};`
+								: ""
+						}
+            ${
+							messageGlobalTypoSwitcher.fontStyle === true &&
+							messageGlobalTypographyData.fontStyle
+								? `font-style: ${messageGlobalTypographyData.fontStyle};`
+								: ""
+						}
+            ${
+							messageGlobalTypoSwitcher.textTransform === true &&
+							messageGlobalTypographyData.textTransform
+								? `text-transform: ${messageGlobalTypographyData.textTransform};`
+								: ""
+						}
+            ${
+							messageGlobalTypoSwitcher.textDecoration === true &&
+							messageGlobalTypographyData.textDecoration
+								? `text-decoration: ${messageGlobalTypographyData.textDecoration};`
+								: ""
+						}
+            ${
+							messageGlobalTypoSwitcher.letterSpacing === true &&
+							messageGlobalTypographyData.letterSpacing
+								? `letter-spacing: ${messageGlobalTypographyData.letterSpacing};`
+								: ""
+						}
+            ${
+							messageGlobalTypoSwitcher.lineHeight === true &&
+							messageGlobalTypographyData.lineHeight
+								? `line-height: ${messageGlobalTypographyData.lineHeight};`
+								: ""
+						}
+
+						${
+							messageGlobalTypoSwitcher.fontFamily === false &&
+							messageFontFamily
+								? `font-family: ${messageFontFamily};`
+								: ""
+						}
+						${
+							messageGlobalTypoSwitcher.fontSize === false &&
+							messageFontSize.Desktop
+								? `font-size: ${messageFontSize.Desktop}${messageFontSizeUnits.Desktop};`
+								: ""
+						}
+						${
+							messageGlobalTypoSwitcher.fontWeight === false &&
+							messageFontWeight
+								? `font-weight: ${messageFontWeight};`
+								: ""
+						}
+						${
+							messageGlobalTypoSwitcher.fontStyle === false &&
+							messageFontStyle
+								? `font-style: ${messageFontStyle};`
+								: ""
+						}
+						${
+							messageGlobalTypoSwitcher.textTransform === false &&
+							messageTextTransform
+								? `text-transform: ${messageTextTransform};`
+								: ""
+						}
+						${
+							messageGlobalTypoSwitcher.textDecoration === false &&
+							messageTextDecoration
+								? `text-decoration: ${messageTextDecoration};`
+								: ""
+						}
+						${
+							messageGlobalTypoSwitcher.letterSpacing === false &&
+							messageLetterSpacing.Desktop
+								? `letter-spacing: ${messageLetterSpacing.Desktop}${messageLetterSpacingUnits.Desktop};`
+								: ""
+						}
+						${
+							messageGlobalTypoSwitcher.lineHeight === false &&
+							messageLineHeight.Desktop
+								? `line-height: ${messageLineHeight.Desktop}${messageLineHeightUnits.Desktop};`
+								: ""
+						}
+			}
 
 				/* Advance Control Global Style */
 				.${blockId}.fb-post-comment-form-block{
@@ -1660,6 +2045,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						}
 				}
 
+				${blockId} .fb-comments-list .fb-comment-body .fb-comment-author {
+							  ${
+									authorGlobalTypoSwitcher.fontSize === false &&
+									authorFontSize.Tablet
+										? `font-size: ${authorFontSize.Tablet}${authorFontSizeUnits.Tablet};`
+										: ""
+								}
+                ${
+									authorGlobalTypoSwitcher.letterSpacing === false &&
+									authorLetterSpacing.Tablet
+										? `letter-spacing: ${authorLetterSpacing.Tablet}${authorLetterSpacingUnits.Tablet};`
+										: ""
+								}
+                ${
+									authorGlobalTypoSwitcher.lineHeight === false &&
+									authorLineHeight.Tablet
+										? `line-height: ${authorLineHeight.Tablet}${authorLineHeightUnits.Tablet};`
+										: ""
+								}
+						}
+
+						${blockId} .fb-comments-list .fb-comment-body .fb-comment-meta {
+						  ${
+									commentMetaGlobalTypoSwitcher.fontSize === false &&
+									commentMetaFontSize.Tablet
+										? `font-size: ${commentMetaFontSize.Tablet}${commentMetaFontSizeUnits.Tablet};`
+										: ""
+								}
+                ${
+									commentMetaGlobalTypoSwitcher.letterSpacing === false &&
+									commentMetaLetterSpacing.Tablet
+										? `letter-spacing: ${commentMetaLetterSpacing.Tablet}${commentMetaLetterSpacingUnits.Tablet};`
+										: ""
+								}
+                ${
+									commentMetaGlobalTypoSwitcher.lineHeight === false &&
+									commentMetaLineHeight.Tablet
+										? `line-height: ${commentMetaLineHeight.Tablet}${commentMetaLineHeightUnits.Tablet};`
+										: ""
+								}
+						}
+
+							.${blockId} .fb-comments-list .fb-comment-body .fb-comment-content {
+							  ${
+									messageGlobalTypoSwitcher.fontSize === false &&
+									messageFontSize.Tablet
+										? `font-size: ${messageFontSize.Tablet}${messageFontSizeUnits.Tablet};`
+										: ""
+								}
+                ${
+									messageGlobalTypoSwitcher.letterSpacing === false &&
+									messageLetterSpacing.Tablet
+										? `letter-spacing: ${messageLetterSpacing.Tablet}${messageLetterSpacingUnits.Tablet};`
+										: ""
+								}
+                ${
+									messageGlobalTypoSwitcher.lineHeight === false &&
+									messageLineHeight.Tablet
+										? `line-height: ${messageLineHeight.Tablet}${messageLineHeightUnits.Tablet};`
+										: ""
+								}
+						}
 
 							/* Advanced Control Global Style - Tablet */
                 .${blockId}.fb-post-comment-form-block {
@@ -1840,6 +2287,69 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							: ""
 						}
 				}
+
+					${blockId} .fb-comments-list .fb-comment-body .fb-comment-author {
+					 ${
+							authorGlobalTypoSwitcher.fontSize === false &&
+							authorFontSize.Mobile
+								? `font-size: ${authorFontSize.Mobile}${authorFontSizeUnits.Mobile};`
+								: ""
+						}
+						${
+							authorGlobalTypoSwitcher.letterSpacing === false &&
+							authorLetterSpacing.Mobile
+								? `letter-spacing: ${authorLetterSpacing.Mobile}${authorLetterSpacingUnits.Mobile};`
+								: ""
+						}
+						${
+							authorGlobalTypoSwitcher.lineHeight === false &&
+							authorLineHeight.Mobile
+								? `line-height: ${authorLineHeight.Mobile}${authorLineHeightUnits.Mobile};`
+								: ""
+						}
+					}
+
+					${blockId} .fb-comments-list .fb-comment-body .fb-comment-meta {
+						${
+							commentMetaGlobalTypoSwitcher.fontSize === false &&
+							commentMetaFontSize.Mobile
+								? `font-size: ${commentMetaFontSize.Mobile}${commentMetaFontSizeUnits.Mobile};`
+								: ""
+						}
+						${
+							commentMetaGlobalTypoSwitcher.letterSpacing === false &&
+							commentMetaLetterSpacing.Mobile
+								? `letter-spacing: ${commentMetaLetterSpacing.Mobile}${commentMetaLetterSpacingUnits.Mobile};`
+								: ""
+						}
+						${
+							commentMetaGlobalTypoSwitcher.lineHeight === false &&
+							commentMetaLineHeight.Mobile
+								? `line-height: ${commentMetaLineHeight.Mobile}${commentMetaLineHeightUnits.Mobile};`
+								: ""
+						}
+					}
+
+					.${blockId} .fb-comments-list .fb-comment-body .fb-comment-content  {
+					  ${
+							messageGlobalTypoSwitcher.fontSize === false &&
+							messageFontSize.Mobile
+								? `font-size: ${messageFontSize.Mobile}${messageFontSizeUnits.Mobile};`
+								: ""
+						}
+						${
+							messageGlobalTypoSwitcher.letterSpacing === false &&
+							messageLetterSpacing.Mobile
+								? `letter-spacing: ${messageLetterSpacing.Mobile}${messageLetterSpacingUnits.Mobile};`
+								: ""
+						}
+						${
+							messageGlobalTypoSwitcher.lineHeight === false &&
+							messageLineHeight.Mobile
+								? `line-height: ${messageLineHeight.Mobile}${messageLineHeightUnits.Mobile};`
+								: ""
+						}
+					}
 												
 							 /* Advance Control Global Style - Mobile */
                 .${blockId}.fb-post-comment-form-block {
@@ -2251,6 +2761,530 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						/>
 					)} */}
 
+
+				</BaseControl>
+
+				<div className="fb-control-divider"></div>
+
+				<BaseControl
+					label={__("Author", "frontis-blocks")}
+					className="fb-setting-form-texts"
+				>
+					<p style={{ fontSize: "12px", color: "#888" }}>
+						{__("Define the visual identity of the comment author with refined color and typography controls for a distinctive, readable name style.", "frontis-blocks")}
+					</p>
+
+					<div className="fb-control-divider"></div>
+
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={authorGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) =>
+						setAttributes({ authorGlobalTypographyData: value })
+					}
+					globalTypoType={authorGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({
+							authorGlobalTypoType: value,
+							authorGlobalTypoSwitcher:
+								value === "default"
+									? {
+											...authorGlobalTypoSwitcher,
+											fontFamily: false,
+											fontSize: false,
+											fontWeight: false,
+											fontStyle: false,
+											textTransform: false,
+											textDecoration: false,
+											letterSpacing: false,
+											lineHeight: false,
+									  }
+									: {
+											...authorGlobalTypoSwitcher,
+											fontFamily: true,
+											fontSize: true,
+											fontWeight: true,
+											fontStyle: true,
+											textTransform: true,
+											textDecoration: true,
+											letterSpacing: true,
+											lineHeight: true,
+									  },
+						});
+					}}
+					globalTypoOption={authorGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({ authorGlobalTypoOption: value })
+					}
+					fontFamily={authorFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({
+							authorFontFamily: value,
+							authorGlobalTypoSwitcher: {
+								...authorGlobalTypoSwitcher,
+								fontFamily: value && false,
+							},
+						})
+					}
+					fontSize={authorFontSize}
+					onChangeFontSize={(value) =>
+						setAttributes({
+							authorFontSize: value,
+							authorGlobalTypoSwitcher: {
+								...authorGlobalTypoSwitcher,
+								fontSize: value && false,
+							},
+						})
+					}
+					fontSizeUnits={authorFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
+						setAttributes({ authorFontSizeUnits: value })
+					}
+					fontWeight={authorFontWeight}
+					onChangeFontWeight={(value) =>
+						setAttributes({
+							authorFontWeight: value,
+							authorGlobalTypoSwitcher: {
+								...authorGlobalTypoSwitcher,
+								fontWeight: value && false,
+							},
+						})
+					}
+					fontStyle={authorFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({
+							authorFontStyle: value,
+							authorGlobalTypoSwitcher: {
+								...authorGlobalTypoSwitcher,
+								fontStyle: value && false,
+							},
+						})
+					}
+					textTransform={authorTextTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({
+							authorTextTransform: value,
+							authorGlobalTypoSwitcher: {
+								...authorGlobalTypoSwitcher,
+								textTransform: value && false,
+							},
+						})
+					}
+					textDecoration={authorTextDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({
+							authorTextDecoration: value,
+							authorGlobalTypoSwitcher: {
+								...authorGlobalTypoSwitcher,
+								textDecoration: value && false,
+							},
+						})
+					}
+					letterSpacing={authorLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({
+							authorLetterSpacing: value,
+							authorGlobalTypoSwitcher: {
+								...authorGlobalTypoSwitcher,
+								letterSpacing: value && false,
+							},
+						})
+					}
+					letterSpacingUnits={authorLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({ authorLetterSpacingUnits: value })
+					}
+					lineHeight={authorLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({
+							authorLineHeight: value,
+							authorGlobalTypoSwitcher: {
+								...authorGlobalTypoSwitcher,
+								lineHeight: value && false,
+							},
+						})
+					}
+					lineHeightUnits={authorLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({ authorLineHeightUnits: value })
+					}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={authorColorSwitcher}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ authorColorSwitcher: value })
+					}
+				/>
+
+				{authorColorSwitcher === "normal" && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={authorColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								authorColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+
+				{authorColorSwitcher === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={authorHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								authorHoverColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+
+
+				</BaseControl>
+
+				<div className="fb-control-divider"></div>
+				
+				<BaseControl
+					label={__("Meta", "frontis-blocks")}
+					className="fb-setting-form-texts"
+				>
+					<p style={{ fontSize: "12px", color: "#888" }}>
+						{__("Style the comment metadata—such as date and time—with harmonious color and typography for subtle emphasis and readability.", "frontis-blocks")}
+					</p>
+
+					<div className="fb-control-divider"></div>
+
+						<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={commentMetaGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) =>
+						setAttributes({ commentMetaGlobalTypographyData: value })
+					}
+					globalTypoType={commentMetaGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({
+							commentMetaGlobalTypoType: value,
+							commentMetaGlobalTypoSwitcher:
+								value === "default"
+									? {
+											...commentMetaGlobalTypoSwitcher,
+											fontFamily: false,
+											fontSize: false,
+											fontWeight: false,
+											fontStyle: false,
+											textTransform: false,
+											textDecoration: false,
+											letterSpacing: false,
+											lineHeight: false,
+									  }
+									: {
+											...commentMetaGlobalTypoSwitcher,
+											fontFamily: true,
+											fontSize: true,
+											fontWeight: true,
+											fontStyle: true,
+											textTransform: true,
+											textDecoration: true,
+											letterSpacing: true,
+											lineHeight: true,
+									  },
+						});
+					}}
+					globalTypoOption={commentMetaGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({ commentMetaGlobalTypoOption: value })
+					}
+					fontFamily={commentMetaFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({
+							commentMetaFontFamily: value,
+							commentMetaGlobalTypoSwitcher: {
+								...commentMetaGlobalTypoSwitcher,
+								fontFamily: value && false,
+							},
+						})
+					}
+					fontSize={commentMetaFontSize}
+					onChangeFontSize={(value) =>
+						setAttributes({
+							commentMetaFontSize: value,
+							commentMetaGlobalTypoSwitcher: {
+								...commentMetaGlobalTypoSwitcher,
+								fontSize: value && false,
+							},
+						})
+					}
+					fontSizeUnits={commentMetaFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
+						setAttributes({ commentMetaFontSizeUnits: value })
+					}
+					fontWeight={commentMetaFontWeight}
+					onChangeFontWeight={(value) =>
+						setAttributes({
+							commentMetaFontWeight: value,
+							commentMetaGlobalTypoSwitcher: {
+								...commentMetaGlobalTypoSwitcher,
+								fontWeight: value && false,
+							},
+						})
+					}
+					fontStyle={commentMetaFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({
+							commentMetaFontStyle: value,
+							commentMetaGlobalTypoSwitcher: {
+								...commentMetaGlobalTypoSwitcher,
+								fontStyle: value && false,
+							},
+						})
+					}
+					textTransform={commentMetaTextTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({
+							commentMetaTextTransform: value,
+							commentMetaGlobalTypoSwitcher: {
+								...commentMetaGlobalTypoSwitcher,
+								textTransform: value && false,
+							},
+						})
+					}
+					textDecoration={commentMetaTextDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({
+							commentMetaTextDecoration: value,
+							commentMetaGlobalTypoSwitcher: {
+								...commentMetaGlobalTypoSwitcher,
+								textDecoration: value && false,
+							},
+						})
+					}
+					letterSpacing={commentMetaLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({
+							commentMetaLetterSpacing: value,
+							commentMetaGlobalTypoSwitcher: {
+								...commentMetaGlobalTypoSwitcher,
+								letterSpacing: value && false,
+							},
+						})
+					}
+					letterSpacingUnits={commentMetaLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({ commentMetaLetterSpacingUnits: value })
+					}
+					lineHeight={commentMetaLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({
+							commentMetaLineHeight: value,
+							commentMetaGlobalTypoSwitcher: {
+								...commentMetaGlobalTypoSwitcher,
+								lineHeight: value && false,
+							},
+						})
+					}
+					lineHeightUnits={commentMetaLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({ commentMetaLineHeightUnits: value })
+					}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={commentMetaColorSwitcher}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ commentMetaColorSwitcher: value })
+					}
+				/>
+
+				{commentMetaColorSwitcher === "normal" && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={commentMetaColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								commentMetaColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+
+				{commentMetaColorSwitcher === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={commentMetaHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								commentMetaHoverColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+				</BaseControl>
+
+								<div className="fb-control-divider"></div>
+				
+				<BaseControl
+					label={__("Message", "frontis-blocks")}
+					className="fb-setting-form-texts"
+				>
+					<p style={{ fontSize: "12px", color: "#888" }}>
+						{__("Control the visual tone of comment content with precise color and typography adjustments for a clear, polished reading experience.", "frontis-blocks")}
+					</p>
+
+					<div className="fb-control-divider"></div>
+
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={messageGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) =>
+						setAttributes({ messageGlobalTypographyData: value })
+					}
+					globalTypoType={messageGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({
+							messageGlobalTypoType: value,
+							messageGlobalTypoSwitcher:
+								value === "default"
+									? {
+											...messageGlobalTypoSwitcher,
+											fontFamily: false,
+											fontSize: false,
+											fontWeight: false,
+											fontStyle: false,
+											textTransform: false,
+											textDecoration: false,
+											letterSpacing: false,
+											lineHeight: false,
+									  }
+									: {
+											...messageGlobalTypoSwitcher,
+											fontFamily: true,
+											fontSize: true,
+											fontWeight: true,
+											fontStyle: true,
+											textTransform: true,
+											textDecoration: true,
+											letterSpacing: true,
+											lineHeight: true,
+									  },
+						});
+					}}
+					globalTypoOption={messageGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({ messageGlobalTypoOption: value })
+					}
+					fontFamily={messageFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({
+							messageFontFamily: value,
+							messageGlobalTypoSwitcher: {
+								...messageGlobalTypoSwitcher,
+								fontFamily: value && false,
+							},
+						})
+					}
+					fontSize={messageFontSize}
+					onChangeFontSize={(value) =>
+						setAttributes({
+							messageFontSize: value,
+							messageGlobalTypoSwitcher: {
+								...messageGlobalTypoSwitcher,
+								fontSize: value && false,
+							},
+						})
+					}
+					fontSizeUnits={messageFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
+						setAttributes({ messageFontSizeUnits: value })
+					}
+					fontWeight={messageFontWeight}
+					onChangeFontWeight={(value) =>
+						setAttributes({
+							messageFontWeight: value,
+							messageGlobalTypoSwitcher: {
+								...messageGlobalTypoSwitcher,
+								fontWeight: value && false,
+							},
+						})
+					}
+					fontStyle={messageFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({
+							messageFontStyle: value,
+							messageGlobalTypoSwitcher: {
+								...messageGlobalTypoSwitcher,
+								fontStyle: value && false,
+							},
+						})
+					}
+					textTransform={messageTextTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({
+							messageTextTransform: value,
+							messageGlobalTypoSwitcher: {
+								...messageGlobalTypoSwitcher,
+								textTransform: value && false,
+							},
+						})
+					}
+					textDecoration={messageTextDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({
+							messageTextDecoration: value,
+							messageGlobalTypoSwitcher: {
+								...messageGlobalTypoSwitcher,
+								textDecoration: value && false,
+							},
+						})
+					}
+					letterSpacing={messageLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({
+							messageLetterSpacing: value,
+							messageGlobalTypoSwitcher: {
+								...messageGlobalTypoSwitcher,
+								letterSpacing: value && false,
+							},
+						})
+					}
+					letterSpacingUnits={messageLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({ messageLetterSpacingUnits: value })
+					}
+					lineHeight={messageLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({
+							messageLineHeight: value,
+							messageGlobalTypoSwitcher: {
+								...messageGlobalTypoSwitcher,
+								lineHeight: value && false,
+							},
+						})
+					}
+					lineHeightUnits={messageLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({ messageLineHeightUnits: value })
+					}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+
+					<FB_ColorControl
+						label={__("Color", "frontis-blocks")}
+						globalColor={messageColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								messageColor: value === undefined ? "" : value,
+							})
+						}
+					/>
 
 				</BaseControl>
 
