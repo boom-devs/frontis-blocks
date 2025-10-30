@@ -459,8 +459,332 @@ const attributes = {
 	/** End Box Shadow */
 	/** End Avatar */
 
+	/** Start Author */
+	authorGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	authorGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	authorGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	authorGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	authorFontFamily: {
+		type: "string",
+		default: "",
+	},
+	authorFontSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	authorFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	authorFontWeight: {
+		type: "string",
+		default: "",
+	},
+	authorFontStyle: {
+		type: "string",
+		default: "normal",
+	},
+	authorTextTransform: {
+		type: "string",
+		default: "none",
+	},
+	authorTextDecoration: {
+		type: "string",
+		default: "none",
+	},
+	authorLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	authorLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	authorLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "30",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	authorLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
 
+	authorColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	authorColor: {
+		type: "string",
+		default: "",
+	},
+	authorHoverColor: {
+		type: "string",
+		default: "",
+	},
+	/** End Author */
 
+	/** Start Meta */
+	commentMetaGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	commentMetaGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	commentMetaGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	commentMetaGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	commentMetaFontFamily: {
+		type: "string",
+		default: "",
+	},
+	commentMetaFontSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	commentMetaFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	commentMetaFontWeight: {
+		type: "string",
+		default: "",
+	},
+	commentMetaFontStyle: {
+		type: "string",
+		default: "normal",
+	},
+	commentMetaTextTransform: {
+		type: "string",
+		default: "none",
+	},
+	commentMetaTextDecoration: {
+		type: "string",
+		default: "none",
+	},
+	commentMetaLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	commentMetaLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	commentMetaLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "30",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	commentMetaLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	commentMetaColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	commentMetaColor: {
+		type: "string",
+		default: "",
+	},
+	commentMetaHoverColor: {
+		type: "string",
+		default: "",
+	},
+	/** End Meta */
+
+	/** Message */
+	messageGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	messageGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	messageGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	messageGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	messageFontFamily: {
+		type: "string",
+		default: "",
+	},
+	messageFontSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	messageFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	messageFontWeight: {
+		type: "string",
+		default: "300",
+	},
+	messageFontStyle: {
+		type: "string",
+		default: "normal",
+	},
+	messageTextTransform: {
+		type: "string",
+		default: "none",
+	},
+	messageTextDecoration: {
+		type: "string",
+		default: "none",
+	},
+	messageLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	messageLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	messageLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "29",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	messageLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	messageColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	messageColor: {
+		type: "string",
+		default: "",
+	},
+	messageHoverColor: {
+		type: "string",
+		default: "",
+	},
+	/** End Message */
 
 	/** End Comment Item **/
 
