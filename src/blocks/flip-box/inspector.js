@@ -5830,11 +5830,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		if (!getProActiveState) { 
 			setAttributes({
 				dynamicTitleEnabled: false,
-				dynamicTitleEnableLink: false,
 				dynamicDescriptionEnabled: false,
-				dynamicDescriptionEnableLink: false,
 				dynamicBtnEnabled: false,
-				dynamicBtnEnableLink: false,
 
 				dynamicBackTitleEnabled: false,
 				dynamicBackTitleEnableLink: false,
@@ -6268,14 +6265,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	termsSeparator={dynamicTitleTermsSeparator}
 																	setTermsSeparator={(value) => setAttributes({ dynamicTitleTermsSeparator: value })}
 																/>
-																{dynamicTitleEnabled && (
-																	<DynamicDataLinkControl
-																		enableLink={dynamicTitleEnableLink}
-																		setEnableLink={(value) => setAttributes({ dynamicTitleEnableLink: value })}
-																		linkSource={dynamicTitleLinkSource}
-																		setLinkSource={(value) => setAttributes({ dynamicTitleLinkSource: value })}
-																	/>
-																)}
 																{!dynamicTitleEnabled && (
 																	<TextareaControl
 																		label={__("Heading Text", "frontis-block")}
@@ -6354,15 +6343,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	termsSeparator={dynamicDescriptionTermsSeparator}
 																	setTermsSeparator={(value) => setAttributes({ dynamicDescriptionTermsSeparator: value })}
 																/>
-
-																{dynamicDescriptionEnabled && ( 
-																	<DynamicDataLinkControl
-																		enableLink={dynamicDescriptionEnableLink}
-																		setEnableLink={(value) => setAttributes({ dynamicDescriptionEnableLink: value })}
-																		linkSource={dynamicDescriptionLinkSource}
-																		setLinkSource={(value) => setAttributes({ dynamicDescriptionLinkSource: value })}
-																	/>
-																)}
 																{!dynamicDescriptionEnabled && (
 																	<TextareaControl
 																		label={__("Description Text", "frontis-block")}
@@ -6477,29 +6457,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		/>
 																	</>
 																)}
-
-																{dynamicBtnEnabled && ( 
-																	<DynamicDataLinkControl
-																		enableLink={dynamicBtnEnableLink}
-																		setEnableLink={(value) => setAttributes({ dynamicBtnEnableLink: value })}
-																		linkSource={dynamicBtnLinkSource}
-																		setLinkSource={(value) => setAttributes({ dynamicBtnLinkSource: value })}
+																<BaseControl>
+																	<FB_UrlControl
+																		url={flipButtonLink}
+																		onChangeUrl={(value) =>
+																			setAttributes({ flipButtonLink: value })
+																		}
+																		openInNewTab={flipbtnTargetUrl}
+																		onChangeOpenInNewTab={(value) =>
+																			setAttributes({ flipbtnTargetUrl: value })
+																		}
 																	/>
-																)}
-																{!dynamicBtnEnableLink && (
-																	<BaseControl>
-																		<FB_UrlControl
-																			url={flipButtonLink}
-																			onChangeUrl={(value) =>
-																				setAttributes({ flipButtonLink: value })
-																			}
-																			openInNewTab={flipbtnTargetUrl}
-																			onChangeOpenInNewTab={(value) =>
-																				setAttributes({ flipbtnTargetUrl: value })
-																			}
-																		/>
-																	</BaseControl>
-																)}
+																</BaseControl>
 															</>
 														)}
 													</PanelBody>
