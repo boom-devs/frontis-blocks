@@ -6531,17 +6531,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 															/>
 														</BaseControl>
 
-														{/* <BaseControl className="fb-media-position">
-															<SelectControl
-																label={__("Media Position", "frontis-block")}
-																value={flipBackIconPosition}
-																options={FLIP_ICON_POSITION}
-																onChange={(value) =>
-																	setAttributes({ flipBackIconPosition: value })
-																}
-															/>
-														</BaseControl> */}
-
 														{(flipBackIconPosition === 'left' || flipBackIconPosition === 'right') && (
 															<BaseControl className="fb-media-vertical-position">
 																<SelectControl
@@ -6743,14 +6732,66 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	setGlobalHtmlTag={(value) => setAttributes({ headingTagBack: value })}
 																/>
 
-																<TextareaControl
-																	label={__("Heading Text", "frontis-block")}
-																	value={headingTextBack}
-																	onChange={(value) =>
-																		setAttributes({ headingTextBack: value })
-																	}
-																	className="fb-setting-text"
+																{dynamicBackTitleContentToggleControls.map((control, index) => (
+																	<div key={control.key || index}>{control.comp}</div>
+																))}
+												
+																<DynamicDataSourceControl
+																	enabled={dynamicBackTitleEnabled}
+																	
+																	source={dynamicBackTitleSource}
+																	setSource={(value) => setAttributes({ dynamicBackTitleSource: value })}
+																	postId={dynamicBackTitlePostId}
+																	setPostId={(value) => setAttributes({ dynamicBackTitlePostId: value })}
+																	postType={dynamicBackTitlePostType}
+																	setPostType={(value) => setAttributes({ dynamicBackTitlePostType: value })}
+																	postLabel={dynamicBackTitlePostLabel}
+																	setPostLabel={(value) => setAttributes({ dynamicBackTitlePostLabel: value })}
+
+																	field={dynamicBackTitleField}
+																	setField={(value) => setAttributes({ dynamicBackTitleField: value })}
+																	featuredImageField={dynamicBackTitleFeaturedImageField}
+																	setFeaturedImageField={(value) => setAttributes({ dynamicBackTitleFeaturedImageField: value })}
+
+																	dateType={dynamicBackTitleDateType}
+																	setDateType={(value) => setAttributes({ dynamicBackTitleDateType: value })}
+																	dateFormat={dynamicBackTitleDateFormat}
+																	setDateFormat={(value) => setAttributes({ dynamicBackTitleDateFormat: value })}
+																	timeType={dynamicBackTitleTimeType}
+																	setTimeType={(value) => setAttributes({ dynamicBackTitleTimeType: value })}
+																	timeFormat={dynamicBackTitleTimeFormat}
+																	setTimeFormat={(value) => setAttributes({ dynamicBackTitleTimeFormat: value })}
+
+																	commentsZeroText={dynamicBackTitleCommentsZeroText}
+																	setCommentsZeroText={(value) => setAttributes({ dynamicBackTitleCommentsZeroText: value })}
+																	commentsOneText={dynamicBackTitleCommentsOneText}
+																	setCommentsOneText={(value) =>setAttributes({ dynamicBackTitleCommentsOneText: value })}
+																	commentsManyText={dynamicBackTitleCommentsManyText}
+																	setCommentsManyText={(value) =>setAttributes({ dynamicBackTitleCommentsManyText: value })}
+
+																	termsTaxonomy={dynamicBackTitleTermsTaxonomy}
+																	setTermsTaxonomy={(value) => setAttributes({ dynamicBackTitleTermsTaxonomy: value })}
+																	termsSeparator={dynamicBackTitleTermsSeparator}
+																	setTermsSeparator={(value) => setAttributes({ dynamicBackTitleTermsSeparator: value })}
 																/>
+																{dynamicBackTitleEnabled && (
+																	<DynamicDataLinkControl
+																		enableLink={dynamicBackTitleEnableLink}
+																		setEnableLink={(value) => setAttributes({ dynamicBackTitleEnableLink: value })}
+																		linkSource={dynamicBackTitleLinkSource}
+																		setLinkSource={(value) => setAttributes({ dynamicBackTitleLinkSource: value })}
+																	/>
+																)}
+																{!dynamicBackTitleEnabled && (
+																	<TextareaControl
+																		label={__("Heading Text", "frontis-block")}
+																		value={headingTextBack}
+																		onChange={(value) =>
+																			setAttributes({ headingTextBack: value })
+																		}
+																		className="fb-setting-text"
+																	/>
+																)}
 															</>
 														)}
 														
@@ -6778,14 +6819,67 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	setGlobalAlignment={(value) => setAttributes({ descAlignmentBack: value })}
 																/>
 
-																<TextareaControl
-																	label={__("Description Text", "frontis-block")}
-																	value={flipBackContent}
-																	onChange={(value) =>
-																		setAttributes({ flipBackContent: value })
-																	}
-																	className="fb-sub-heading-text"
+																{dynamicBackDescriptionContentToggleControls.map((control, index) => (
+																	<div key={control.key || index}>{control.comp}</div>
+																))}
+
+																<DynamicDataSourceControl
+																	enabled={dynamicBackDescriptionEnabled}
+																	
+																	source={dynamicBackDescriptionSource}
+																	setSource={(value) => setAttributes({ dynamicBackDescriptionSource: value })}
+																	postId={dynamicBackDescriptionPostId}
+																	setPostId={(value) => setAttributes({ dynamicBackDescriptionPostId: value })}
+																	postType={dynamicBackDescriptionPostType}
+																	setPostType={(value) => setAttributes({ dynamicBackDescriptionPostType: value })}
+																	postLabel={dynamicBackDescriptionPostLabel}
+																	setPostLabel={(value) => setAttributes({ dynamicBackDescriptionPostLabel: value })}
+
+																	field={dynamicBackDescriptionField}
+																	setField={(value) => setAttributes({ dynamicBackDescriptionField: value })}
+																	featuredImageField={dynamicBackDescriptionFeaturedImageField}
+																	setFeaturedImageField={(value) => setAttributes({ dynamicBackDescriptionFeaturedImageField: value })}
+
+																	dateType={dynamicBackDescriptionDateType}
+																	setDateType={(value) => setAttributes({ dynamicBackDescriptionDateType: value })}
+																	dateFormat={dynamicBackDescriptionDateFormat}
+																	setDateFormat={(value) => setAttributes({ dynamicBackDescriptionDateFormat: value })}
+																	timeType={dynamicBackDescriptionTimeType}
+																	setTimeType={(value) => setAttributes({ dynamicBackDescriptionTimeType: value })}
+																	timeFormat={dynamicBackDescriptionTimeFormat}
+																	setTimeFormat={(value) => setAttributes({ dynamicBackDescriptionTimeFormat: value })}
+
+																	commentsZeroText={dynamicBackDescriptionCommentsZeroText}	
+																	setCommentsZeroText={(value) => setAttributes({ dynamicBackDescriptionCommentsZeroText: value })}
+																	commentsOneText={dynamicBackDescriptionCommentsOneText}
+																	setCommentsOneText={(value) =>setAttributes({ dynamicBackDescriptionCommentsOneText: value })}
+																	commentsManyText={dynamicBackDescriptionCommentsManyText}
+																	setCommentsManyText={(value) =>setAttributes({ dynamicBackDescriptionCommentsManyText: value })}
+
+																	termsTaxonomy={dynamicBackDescriptionTermsTaxonomy}
+																	setTermsTaxonomy={(value) => setAttributes({ dynamicBackDescriptionTermsTaxonomy: value })}
+																	termsSeparator={dynamicBackDescriptionTermsSeparator}
+																	setTermsSeparator={(value) => setAttributes({ dynamicBackDescriptionTermsSeparator: value })}
 																/>
+
+																{dynamicBackDescriptionEnabled && ( 
+																	<DynamicDataLinkControl
+																		enableLink={dynamicBackDescriptionEnableLink}
+																		setEnableLink={(value) => setAttributes({ dynamicBackDescriptionEnableLink: value })}
+																		linkSource={dynamicBackDescriptionLinkSource}
+																		setLinkSource={(value) => setAttributes({ dynamicBackDescriptionLinkSource: value })}
+																	/>
+																)}
+																{!dynamicBackDescriptionEnabled && (
+																	<TextareaControl
+																		label={__("Description Text", "frontis-block")}
+																		value={flipBackContent}
+																		onChange={(value) =>
+																			setAttributes({ flipBackContent: value })
+																		}
+																		className="fb-sub-heading-text"
+																	/>
+																)}
 															</>
 														)}
 													</PanelBody>
@@ -6813,14 +6907,59 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	globalAlignment={buttonAlignmentBack}
 																	setGlobalAlignment={(value) => setAttributes({ buttonAlignmentBack: value })}
 																/>
-																<TextareaControl
-																	label={__("Button Text", "frontis-block")}
-																	value={flipBack_Button_Text}
-																	onChange={(value) =>
-																		setAttributes({ flipBack_Button_Text: value })
-																	}
-																	className="fb-flipBack-button-text"
+
+																{dynamicBackBtnContentToggleControls.map((control, index) => (
+																	<div key={control.key || index}>{control.comp}</div>
+																))}
+												
+																<DynamicDataSourceControl
+																	enabled={dynamicBackBtnEnabled}
+																	
+																	source={dynamicBackBtnSource}
+																	setSource={(value) => setAttributes({ dynamicBackBtnSource: value })}
+																	postId={dynamicBackBtnPostId}
+																	setPostId={(value) => setAttributes({ dynamicBackBtnPostId: value })}
+																	postType={dynamicBackBtnPostType}
+																	setPostType={(value) => setAttributes({ dynamicBackBtnPostType: value })}
+																	postLabel={dynamicBackBtnPostLabel}
+																	setPostLabel={(value) => setAttributes({ dynamicBackBtnPostLabel: value })}
+
+																	field={dynamicBackBtnField}
+																	setField={(value) => setAttributes({ dynamicBackBtnField: value })}
+																	featuredImageField={dynamicBackBtnFeaturedImageField}
+																	setFeaturedImageField={(value) => setAttributes({ dynamicBackBtnFeaturedImageField: value })}
+
+																	dateType={dynamicBackBtnDateType}
+																	setDateType={(value) => setAttributes({ dynamicBackBtnDateType: value })}
+																	dateFormat={dynamicBackBtnDateFormat}
+																	setDateFormat={(value) => setAttributes({ dynamicBackBtnDateFormat: value })}
+																	timeType={dynamicBackBtnTimeType}
+																	setTimeType={(value) => setAttributes({ dynamicBackBtnTimeType: value })}
+																	timeFormat={dynamicBackBtnTimeFormat}
+																	setTimeFormat={(value) => setAttributes({ dynamicBackBtnTimeFormat: value })}
+
+																	commentsZeroText={dynamicBackBtnCommentsZeroText}
+																	setCommentsZeroText={(value) => setAttributes({ dynamicBackBtnCommentsZeroText: value })}
+																	commentsOneText={dynamicBackBtnCommentsOneText}
+																	setCommentsOneText={(value) =>setAttributes({ dynamicBackBtnCommentsOneText: value })} 
+																	commentsManyText={dynamicBackBtnCommentsManyText}
+																	setCommentsManyText={(value) =>setAttributes({ dynamicBackBtnCommentsManyText: value })}
+
+																	termsTaxonomy={dynamicBackBtnTermsTaxonomy}
+																	setTermsTaxonomy={(value) => setAttributes({ dynamicBackBtnTermsTaxonomy: value })}
+																	termsSeparator={dynamicBackBtnTermsSeparator}
+																	setTermsSeparator={(value) => setAttributes({ dynamicBackBtnTermsSeparator: value })}
 																/>
+																{!dynamicBackBtnEnabled && (
+																	<TextareaControl
+																		label={__("Button Text", "frontis-block")}
+																		value={flipBack_Button_Text}
+																		onChange={(value) =>
+																			setAttributes({ flipBack_Button_Text: value })
+																		}
+																		className="fb-flipBack-button-text"
+																	/>
+																)}
 																<ToggleControl
 																	label={__("Show Icon", "frontis-block")}
 																	checked={buttonIconSwitcherBack}
@@ -6846,19 +6985,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		/>
 																	</>
 																)}
-
-																<BaseControl>
-																	<FB_UrlControl
-																		url={flipBackButtonLink}
-																		onChangeUrl={(value) =>
-																			setAttributes({ flipBackButtonLink: value })
-																		}
-																		openInNewTab={flipBackbtnTargetUrl}
-																		onChangeOpenInNewTab={(value) =>
-																			setAttributes({ flipBackbtnTargetUrl: value })
-																		}
+																{dynamicBackBtnEnabled && ( 
+																	<DynamicDataLinkControl
+																		enableLink={dynamicBackBtnEnableLink}
+																		setEnableLink={(value) => setAttributes({ dynamicBackBtnEnableLink: value })}
+																		linkSource={dynamicBackBtnLinkSource}
+																		setLinkSource={(value) => setAttributes({ dynamicBackBtnLinkSource: value })}
 																	/>
-																</BaseControl>
+																)}
+																{!dynamicBackBtnEnableLink && (
+																	<BaseControl>
+																		<FB_UrlControl
+																			url={flipBackButtonLink}
+																			onChangeUrl={(value) =>
+																				setAttributes({ flipBackButtonLink: value })
+																			}
+																			openInNewTab={flipBackbtnTargetUrl}
+																			onChangeOpenInNewTab={(value) =>
+																				setAttributes({ flipBackbtnTargetUrl: value })
+																			}
+																		/>
+																	</BaseControl>
+																)}
 															</>
 														)}
 													</PanelBody>
